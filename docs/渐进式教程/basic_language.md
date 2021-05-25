@@ -346,6 +346,17 @@ cap(ch1):  4
 <-ch1 执行第三次:  undefined
 ```
 
+:::tip chan 使用小贴士
+需要注意的是，在 chan 被关闭后，<-ch 取得 undefined 值。所以在 yak 中应该这样：
+
+```go
+v = <-ch1
+if v != undefined { // 判断chan没有被关闭的逻辑
+	...
+}
+```
+:::
+
 ## 使用函数/闭包：`def` `func` `fn` 均等效
 
 ### 函数和闭包的定义
