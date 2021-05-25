@@ -14,6 +14,8 @@ Golang 的一些令人惊叹的特性我们在 Yak 中也可以找到实现，�
 
 我们希望 Yak 对与安全从业人员是相当友好的，10 分钟即可上手！如果你熟悉 Golang 和 Python，我相信 Yak 一定也是你将会非常喜爱的胶水语言。
 
+> yak 每行结尾不需要加分号，当然加了也没关系
+
 ## 运算符支持
 
 ### 基础运算符
@@ -410,6 +412,8 @@ sleep(1)
 
 ## Go 关键字与 Goroutine
 
+### 基础用法
+
 Goroutine 是 Golang 最强大的特性之一，Yak 完美继承了这一特性。
 
 Yak 脚本与 Golang 的 Go 的作用都是相同的，但是需要注意一点的是，`go` 关键字可以用来启动 yak 的闭包函数
@@ -435,4 +439,150 @@ go func{/*do sth*/}
 go def{/*do sth*/}
 ```
 
+### 并发控制用例
+
+一个比较复杂的例子：
+
+```go
+wg = sync.NewWaitGroup()
+wg.Add(2)
+
+go func {
+	defer wg.Done()
+	println("in goroutine1")
+}
+
+go func {
+	defer wg.Done()
+	println("in goroutine2")
+}
+
+wg.Wait()
+```
+
+我们执行上述代码，程序将会等待直到两个 Goroutine 都执行完才会退出，这属于比较经典的并发案例。
+
 ## Defer 机制与 Golang 的 Defer
+
+基本和 Golang 的 defer 用法类似
+
+但是，由于匿名函数存在，所以 yak defer 常见有两种写法：
+
+```go
+defer fn() {} ()
+defer fn{}
+```
+
+值得注意的是：
+
+在一个细节上 yak 的 defer 和 Golang 处理并不一致，那就是 defer 表达式中的变量值。
+
+在 Golang 中，所有 defer 引用的变量均在 defer 语句时刻固定下来后面任何修改均不影响 defer 语句的行为，但 yak 是会受到影响的，我们可以观察如下案例：
+
+```go
+f = {"ccc": 1}
+dump(f.ccc)
+defer func{
+    println("准备开始执行 defer func")
+    println(f.ccc)    // 等到执行这里的时候，就会报错
+}       
+println("设置 f 变量为空")
+f = nil               // 在这里设置 f 为空
+```
+
+例如，假设你在 defer 之后，调用 f = nil 把 f 变量改为 nil，那么后面执行 f.Close() 时就会发生错误。
+
+上述代码段执行结果为：
+
+```
+设置 f 变量为空
+准备开始执行 defer func
+[ERRO] 2021-05-26 00:27:59 +0800 [default:yak.go:100] reflect: call of reflect.Value.MethodByName on zero Value
+```
+
+```
+defer fn {
+	dump(11111)
+}
+
+defer fn(){
+	dump(111)
+}()
+
+// 输出结果为
+// (int) 111
+// (int) 11111
+```
+
+## 流程控制
+
+### `if/elif/else` 条件分支
+
+```go
+if expr {
+
+} elif expr2 {
+
+} else {
+
+}
+```
+
+### `switch/case` 语句
+
+yak switch 语句和 Golang 的有共同点也有不同点；
+
+1. yak 的 swtich 没有 break / fallthrough 的特性支持
+2. yak switch 后的表达式只能是表达式，不能像 Golang 一样承载`赋值语句; 表达式`
+
+```go
+// switch expr1 {case: expr2; default}
+a = 5
+switch a - 3 {
+case 2:
+  println("case first")
+case 3:
+  println("case second")
+}
+
+switch {
+case true:
+  println("true case ")
+case false:
+  println("false case")
+}
+```
+
+:::danger 注意差异
+yak 的 `switch/case/default` 只能算简易版的 `if/elif/else`，并不支持 `fallthrough` 和 `break`
+:::
+
+### `for` 语句 与 `for range` 语句
+
+
+#### 无限循环
+```go
+for { // 无限循环，需要在中间 break 或 return 结束
+	...
+}
+
+for booleanExpr { // 类似很多语言的 while 循环
+	...
+}
+
+for initExpr; conditionExpr; stepExpr {
+	...
+}
+
+for range collectionExpr { // 其中 collectionExpr 可以是 slice, map 或 chan
+	...
+}
+
+for index = range collectionExpr {
+	...
+}
+
+for index, value = range collectionExpr {
+	...
+}
+```
