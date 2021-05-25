@@ -110,6 +110,8 @@ f = var // f 为一个 兼容类型
 
 ### 如何使用 Slice / List
 
+#### 声明一个 Slice
+
 ```go
 b = [1, 2.3, 5]         // 创建一个 []float
 c = ["a", "b", "c"]     // 创建一个 []string
@@ -120,9 +122,233 @@ g = []byte{1, 2, 3}     // 创建一个 byte slice，并初始化为 [1, 2, 3]
 h = []byte(nil)         // 创建一个空 byte slice
 ```
 
+#### Slice / List 的各种操作
+
+1. 含义与 Golang 相同的 append 用法
+```go
+a = append(a, 1, ,2, 3)
+```
+
+2. 通过 `len` 获取 Slice 的元素个数，通过 `cap` 获得 slice 的容量，同 Golang 用法
+
+```go
+a = append([1,2,3], 5,6,7)
+length = len(a)
+println("len(a): ", length)
+
+capValue = cap(a)
+println("cap(a): ", capValue)
+
+// OUTPUT:
+//   len(a):  6
+//   cap(a):  6
+```
+
+3. `copy(sliceA, sliceB)` 把 sliceB 的元素复制到 sliceA 中，如果复制的元素个数为 `min(len(sliceA), len(sliceB))` 
+
+```go
+a = [1,2,3]
+b = [4,5,6,7,8]
+copiedCount = copy(a, b)
+println("copy(a, b) returns ", copiedCount)
+println("slice a now: ", a)
+
+// OUTPUT:
+//   copy(a, b) returns  3
+//   slice a now:  [4 5 6]
+```
+
+4. 按索引取数组元素，支持拆包，具体案例如下
+
+```go
+a = [1,2,3,4,5,6,7,8]
+b = a[4:6]
+c = a[:5]
+d = a[3:]
+index1 = a[1]
+index2, index3 = a[2], a[3]
+
+println("b: ", b)
+println("c: ", c)
+println("d: ", d)
+println("a[1]: ", index1)
+println("a[2]: ", index2)
+println("a[3]: ", index3)
+```
+
+上述脚本输出的结果为
+
+```text
+b:  [5 6]
+c:  [1 2 3 4 5]
+d:  [4 5 6 7 8]
+a[1]:  2
+a[2]:  3
+a[3]:  4
+```
+
+5. 拆包都是基本操作
+
+下面是一个 slice 拆包的基本案例
+
+```go
+a, b, c = [1, 2.3, "stringValue"]
+println("a: ", a)
+println("b: ", b)
+println("c: ", c)
+
+/*
+OUTPUT:
+
+a:  1
+b:  2.3
+c:  stringValue
+*/ 
+```
+
+当然，拆包+赋值的另一个案例读者可以尝试
+
+```go
+a = []
+a[1], a[2], a[3] = 1, "asdfasdf", false
+
+println("slice a: ", a)
+
+/*
+OUTPUT:
+
+slice a: []interface {}{interface {}(nil), 1, "asdfasdf", false}
+*/
+```
+
+
 ### 如何使用 Map / Dict
 
-### 使用函数/闭包：`def` `func` `fn` 均等效
+#### 赋值与创建一个 Map / Dict
+
+```go
+a = {"a": 1, "b": 2, "c": 3}             // 得到 map[string]int 类型的对象
+b = {"a":1,"b":2.3,"c": 3}               // 得到 map[string]float64 类型的对象
+c = {1: "a", 2: "b", 3: "c"}             // 得到 map[int]string 类型的对象
+d = {"a": "hello", "b": 2.0, "c": true}  // 得到 map[string]interface{} 类型的对象
+e = make(map[string]int)                 // 创建一个空的 map[string]int 类型的对象
+f = make(map[string]map[string]int)      // 创建一个 map[string]map[string]int 类型的对象
+g = map[string]int16{"a": 1, "b": 2}     // 创建一个 map[string]int16 类型的对象
+x = {}                                   // 创建一个 map[string]interface{}
+x = make(map[var]var)                    // 创建一个 map[interface{}]interface{}
+```
+
+上述方法均可创建一个 map，我们发现：
+
+1. 直接使用 `{key: value ... }` 方式创建的 map 会自动选择最兼容的类型
+2. 使用 `make(map[T1]T2)` 可以创建指定类型的 map
+
+    :::tip 小贴士
+    通过 `{"key": "value", ... }` 方式创建的 map，key 必须是 `string`
+    :::
+
+#### map / dict 的基本操作
+
+```go
+a = {"a": 234, "b": "sasdfasdf", "ccc": "13"}      // 我们创建一个 map[var]var
+n = len(a)                                         // 取 a 的元素个数
+println("len(a): ", n)
+// OUTPUT: len(a):  3
+
+x = a["b"]                                         // 取 a map 中 key 为 "b" 的元素
+println(`a["b"]: `, x)
+// OUTPUT: a["b"]:  sasdfasdf
+
+a.noSuchKey                                        // 如果取一个不存在的 key，直接通过 .keyName 调用则会报错，退出程序
+// OUTPUT: 
+//     [ERRO] 2021-05-25 20:38:04 +0800 [default:yak.go:100] line 58: member `noSuchKey` not found
+
+// 当然，我们也可以把拆包解包用在 map 中
+a["e"], a["f"], a["g"] = 4, 5, 6                   // 同 Go 语言
+a.e, a.f, a.g = 4, 5, 6                            // 含义同 a["e"], a["f"], a["g"] = 4, 5, 6
+
+// 如果你想要删掉 map 中的某个元素
+a = {"a": 123, "b": 1345, "c": 999}
+println("a.b: ", a.b)
+delete(a, "b")
+println("NOW map a: ")
+dump(a)
+/*
+a.b:  1345
+NOW map a:
+(map[string]int) (len=2) {
+ (string) (len=1) "a": (int) 123,
+ (string) (len=1) "c": (int) 999
+}
+*/ 
+```
+
+如何判断元素是否存在？    
+
+:::tip 注意
+**注意：在判断元素是存在的时候，Yak 和 Golang 有区别**
+
+```go
+x = {"a": 1, "b": 2}
+a = x["a"] // 结果：a = 1
+if a != undefined {             // 判断a存在的逻辑
+    
+}
+c = x["c"]                      // 结果：c = undefined，注意不是0，也不是nil
+d = x["d"]                      // 结果：d = undefined，注意不是0，也不是nil
+```
+:::
+
+
+### chan 操作
+
+#### chan 的创建只能通过 `make(chan T, [capBuffer: int])`
+
+创建 chan 与 Golang 保持相同的方法
+
+```go
+ch1 = make(chan bool, 2)        // 得到 buffer = 2 的 chan bool
+ch2 = make(chan int)            // 得到 buffer = 0 的 chan int
+ch3 = make(chan map[string]int) // 得到 buffer = 0 的 chan map[string]int
+```
+
+#### chan 的基础操作
+
+```go
+/*创建一个 chan var*/
+ch1 = make(chan var, 4)
+ch1 <- 1
+ch1 <- 2
+
+// 一通操作
+n = len(ch1)               // 取得chan当前的元素个数
+m = cap(ch1)               // 取得chan的容量
+v = <-ch1                  // 从chan取出一个值
+close(ch1)                 // 关闭chan，被关闭的chan是不能写，但是还可以读(直到已经写入的值全部被取完为止)
+v1 = <- ch1
+v2 = <- ch1
+
+// 查看操作的结果和特性
+println("len(ch1): ", n)
+println("cap(ch1): ", m)
+println("<-ch1 执行第一次: ", v)
+println("<-ch1 执行第二次: ", v1)
+println("<-ch1 执行第三次: ", v2)
+```
+
+上述脚本执行结果为：
+
+```text
+len(ch1):  2
+cap(ch1):  4
+<-ch1 执行第一次:  1
+<-ch1 执行第二次:  2
+<-ch1 执行第三次:  undefined
+```
+
+## 使用函数/闭包：`def` `func` `fn` 均等效
+
+### 函数和闭包的定义
 
 函数和闭包定义关键字为 `def` / `func` / `fn`, 这三个关键字完全等效！
 
@@ -170,3 +396,32 @@ sleep(1)
 具名函数 aaa 函数赋值给了 bbb，被调用了
 在 Gorouting 中执行了闭包函数喔
 ```
+
+## Go 关键字与 Goroutine
+
+Goroutine 是 Golang 最强大的特性之一，Yak 完美继承了这一特性。
+
+Yak 脚本与 Golang 的 Go 的作用都是相同的，但是需要注意一点的是，`go` 关键字可以用来启动 yak 的闭包函数
+
+在 Golang 中，我们启动一个 Goroutine 通过以下操作启动
+```go
+go func(){
+    // ...do some codes
+}()
+```
+
+在 yak 中，我们不仅兼容了上述写法，我们执行如下命令，都是等效的
+
+```go
+//  goroutine 启动来函数异步调用
+go fn(){}()
+go func(){}() // 兼容 Go 的写法
+go def(){}()  // 兼容 Python 定义方法的关键字
+
+// 定义闭包，执行 Goroutine
+go fn{/*do sth*/}
+go func{/*do sth*/}
+go def{/*do sth*/}
+```
+
+## Defer 机制与 Golang 的 Defer
