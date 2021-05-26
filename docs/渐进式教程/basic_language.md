@@ -559,8 +559,10 @@ yak 的 `switch/case/default` 只能算简易版的 `if/elif/else`，并不支�
 
 ### `for` 语句 与 `for range` 语句
 
+`for` 类似 Golang 的 for 语句，同时支持 continue break 这些常规操作。
 
 #### 无限循环
+
 ```go
 for { // 无限循环，需要在中间 break 或 return 结束
 	...
@@ -569,20 +571,114 @@ for { // 无限循环，需要在中间 break 或 return 结束
 for booleanExpr { // 类似很多语言的 while 循环
 	...
 }
+```
 
+#### 基础使用
+
+```go
+/*
 for initExpr; conditionExpr; stepExpr {
 	...
 }
+*/
 
-for range collectionExpr { // 其中 collectionExpr 可以是 slice, map 或 chan
-	...
+for i = 0; i < 10; i ++ {
+    println("element: ", i)
 }
 
-for index = range collectionExpr {
-	...
+/*
+OUTPUT:
+
+element:  0
+element:  1
+element:  2
+element:  3
+element:  4
+element:  5
+element:  6
+element:  7
+element:  8
+element:  9
+*/
+```
+
+这种用法我想大家都很熟悉了，我们不需要过多叙述。
+
+#### `for range` 来遍历一个 slice / list
+
+`for range` 是 Golang 特有的形式，yak 对这种形式进行了保留
+
+```go
+// 声明一个最基础的 slice / list
+a = [1,2,3,4]
+
+// 遍历这个 slice / list，第一个参数为 index，第二个参数为具体的 slice 中的元素
+for index, element = range a {
+    println(str.f("a[%v]: %v", index, element))
+}
+println("-----------------")
+
+// 可以只去 index，continue 是
+for index = range a {
+    println(str.f("a[%v]", index))
+    continue
+}
+println("-----------------")
+for _, element = range a {
+    println(str.f("first element: %v", element))
+    break
+}
+```
+
+#### `for range` 来遍历一个 map / dict
+
+```go
+b = {"abc": "123", "bcd": "bcd", "cde", 512}
+for key, value = range {
+    println(str.f("b[%v]: %v", key, value))
 }
 
-for index, value = range collectionExpr {
-	...
+/**
+OUTPUT:
+
+b[abc]: 123
+b[bcd]: bcd
+b[cde]: 512
+*/
+```
+
+上述脚本很容易猜到，结果如下
+
+```go
+a[0]: 1
+a[1]: 2
+a[2]: 3
+a[3]: 4
+-----------------
+a[0]
+a[1]
+a[2]
+a[3]
+-----------------
+current element: 1
+```
+
+#### `for range` 同样可以操作 chan
+
+```go
+ch := make(chan var, 2)
+ch <- 1
+ch <- 2
+close(ch)
+
+for result = range ch {
+    println("fetch chan var [ch] element: ", result)
 }
+
+/*
+OUTPUT:
+
+fetch chan var [ch] element:  1
+fetch chan var [ch] element:  2
+*/
 ```
