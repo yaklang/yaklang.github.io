@@ -381,7 +381,7 @@ aaa()
 bbb()
 ccc()
 
-// 生命一个闭包
+// 声明一个闭包
 def{
     println("这是一个闭包，声明的时候，将立即会被调用")
 }
@@ -409,6 +409,94 @@ sleep(1)
 具名函数 aaa 函数赋值给了 bbb，被调用了
 在 Gorouting 中执行了闭包函数喔
 ```
+
+### Yak 函数的定义：定义参数与可变参数
+
+本质上 yak 函数的定义本质上都是 `func(params ...interface{}) interface{}` 因此可以对常见任何形态的函数定义做兼容。
+
+```go
+// 我们定义一个带参数的函数
+func x(a) {
+    println("exec in x func, recv: ", a)
+}
+println(x("aaa"))
+
+/*
+OUTPUT:
+
+exec in x func, recv:  aaa
+*/
+```
+
+```go
+func argsTest1(vars...) {
+    println("argsTest1 recv: ", vars)
+}
+
+func argsTest(var1, vars...) {
+    println("var1: ", var1)
+    println("vars: ", vars)
+}
+
+argsTest1(123, 1, 2, 3, 4, 5)
+println("---------------------")
+argsTest(123, 1, 2, 3, 4, 5)
+
+/*
+argsTest1 recv:  [123 1 2 3 4 5]
+---------------------
+var1:  123
+vars:  [1 2 3 4 5]
+*/
+```
+
+### 函数的返回值：可以支持多个返回值，拆包
+
+当我们定义的 yak 函数有多个返回值是，我们默认返回的是一个列表 `[]interface{}`，所以在函数返回的时候，可以支持自动拆包，这样做间接支持了 Golang 的多返回值语法。
+
+```go
+// 我们看如下案例
+func testFunc(arg1, args...) {
+    return 1, 2, arg1
+}
+
+rets = testFunc("test")
+println("rets = testFunc(`test`) -> rets: ", rets)
+println("---------------")
+ret1, ret2, ret3 = testFunc("aaa", "bbb", "ccc")
+println(`ret1, ret2, ret3 = testFunc("aaa", "bbb", "ccc")`)
+println("ret1: ", ret1)
+println("ret2: ", ret2)
+println("ret3: ", ret3)
+
+/*
+rets = testFunc(`test`) -> rets:  [1 2 test]
+---------------
+ret1, ret2, ret3 = testFunc("aaa", "bbb", "ccc")
+ret1:  1
+ret2:  2
+ret3:  aaa
+*/
+```
+
+在 `rets = testFunc("test")` 的情况下， 我们发现 `rets` 的值为 `[1 2 test]` 直接印证了我们的说法。
+
+当然在不完全拆包的情况下，会报错，我们看如下情况
+
+```go
+func testFunc(arg1, args...) {
+    return 1, 2, arg1
+}
+ret1, ret2 = testFunc("aaa", "bbb", "ccc")
+
+/*
+OUTPUT:
+
+[ERRO] 2021-05-26 23:32:19 +0800 [default:yak.go:100] line 4: multi assignment error: require 3 variables, but we got 2
+*/
+```
+
+
 
 ## Go 关键字与 Goroutine
 

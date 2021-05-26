@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# 语法扩展：全局 / 内置函数与操作
+# 语法扩展：全局函数表
 
 ## 基础内置函数列表
 
@@ -44,6 +44,10 @@ sidebar_position: 2
 |uint64|类型转换函数||||
 |string|类型转换函数||||
 |bool|类型转换函数||||
+|parseInt|||||
+|parseStr/parseString|任意对象转换成 string 类型的值，相当于 `fmt.Sprintf("%v", param)`| 输入任意对象 | 输出这个对象的 string 样子| `println(parseStr(01235))` 输出 `669`|
+|parseBool/parseBoolean|字符串转换成 bool 的值，相当于 `strconv.ParseBool(param)`如果解析失败，会返回 `false`| 输入一个字符串(`t/true/T/True/F/False/1/0`均能合理解析)|解析结果为 bool| `println(parseBool("T"));`|
+|parseFloat|字符串转换为 float||||
 |var|类型转换函数，转换为 Golang 中的 `interface{}`||||
 |type|获取一个实例实际的类型|想要查看类型的|返回具体的类型信息，可以直接println查看|`println(type(make(map[string]int, 4)))`|
 |max|取所有参数的最大值|输入数字即可，int float 都行|所有参数的最大值|`max(1,23,4,666.1)`|
@@ -54,15 +58,19 @@ sidebar_position: 2
 |loglevel|设置系统执行日志的级别，默认为 warning | 参数为字符串 `"info" | "warning" | "error" | "debug"` 等 |-|`loglevel("info)`|
 |timestamp|获取当前时间戳，同 `time.Now().Unix()`|-|int64 当前时间戳（秒）， |`ts = timestamp()`|
 |nanotimestamp|获取当前时间戳，同 `time.Now().UnixNano()`|-|int64 当前时间戳（纳秒）|`nanots = nanotimestamp()`|
-|datetime|获取当前日期到秒的字符串|-|`2006-01-02 15:04:05` 格式的字符串||
+|timestampToTime|把当前时间戳转换成 time.Time 对象|参数只有一个，时间戳（int64）|time.Time对象|`dump(timestampToTime(timestamp()))`|
+|timestampToDatetime|时间戳转换成可读的时间字符串|参数只有一个，时间戳（int64）|`2006-01-02 15:04:05` 格式的字符串|`print(timestampToDatetime(timestamp()))`|
+|datetime|获取当前日期到秒的字符串|-|`2006-01-02 15:04:05` 格式的字符串|`println(datetime())`|
+|datetimeToTimestamp|可读时间字符串转换成时间戳(int64)|`2006-01-02 15:04:05` 格式的字符串|返回一个 int64 unix 时间戳|`println(datetimeToTimestamp(datetime()))`|
 |date|获取当前日期到天的字符串|-|`2006-01-02` 格式字符串||
 |dump|展示实例的详细信息，相当于 println 的强化版，可以展示非常详细的成员信息|无限制输入参数，多个参数均可执行|-|`a = {"abc": 123}; dump(a)`|
 |sdump|实例的详细信息输出到字符串，相当于 sprintln 的强化版，可以展示非常详细的成员信息|无限制输入参数，多个参数均可执行|-|`a = {"abc": 123}; println(sdump(a))`|
-|assert|确保 `assert(expr, reasons...)` expr 是正确的，否则报错，原因是 reasons 的内容|expr 是一个表达式，reasons 可以任意填内容|-|`expr=1>2;assert(expr, "ERROR")`|
+|assert/assertTrue|确保 `assert(expr, reasons...)` expr 是正确的，否则报错，原因是 reasons 的内容|expr 是一个表达式，reasons 可以任意填内容|-|`expr=1>2;assert(expr, "ERROR")`|
 |assertf|`assert` 功能一致，但是可以接收格式化字符串输入|||`expr=1>2; assertf(expr, "ERROR: %v", "1>2")`|
 |isEmpty|判断实例是 nil 或者 undefined | 输入想要判断的实例|如果是 nil 或 undefined，返回 true，否则 false| `a,b,c=isEmpty(nil),isEmpty(undefined),isEmpty(111);println(a,b,c)` |
-|assertEmpty| 确保实例是 nil 或者 undefined，如果不是，抛出错误||||
-|randn|||||
+|assertEmpty| 确保实例是 nil 或者 undefined，如果不是，抛出错误|只有一个参数，参数为一个实例，会判断是不是 nil 或者 undefined||`rsp, err = http.Get("http://baidu.com"); assertEmpty(err)`|
+|randn|随机生成一个 int|两个参数 randn(min, max) 最小值和最大值均为 int|返回 min 和 max 之间的一个随机整形|`println(randn(1,99))`|
+|randstr|随机生成一个字符串|只有一个参数，参数为随机字符串的长度|返回随机生成的字符串|`println(randstr(10))` 输出 `hhisgUZdlN`|
 |now|同 time.Now ||||
 |mkmap|已废弃||||
 |mapFrom|已废弃||||
