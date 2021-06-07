@@ -652,12 +652,507 @@ for _, origin := range [
 
 ### 如何构筑可以用于 Fuzz 的请求？
 
+一般来说，我们构筑了一个 Fuzz HTTP Request，将会允许用户针对 HTTP 请求进行各种变形，支持对 Header 的替换，Method 的替换，Path，以及参数的替换。
+
+那么，我们如何构建一个 HTTP Request 呢？
+
+`fuzz` 目前提供了两种构建方法：
+
+#### 通过一个原请求构建测试方案
+
+我们通过 `fuzz.HTTPRequest` 这个接口可以创建一个 HTTP 请求，这个请求可以支持 Fuzz 相关操作。
+
+
+```go
+func fuzz.HTTPRequest(params: *http.Request|[]byte|string) (*FuzzHTTPRequest, error)
+```
+
+我们看到 `fuzz.HTTPRequest` 定义如上，可以支持 `*http.Request` 的数据包，也可以支持 `[]byte` 或者 `string` 格式的数据包。
+
+:::info 支持数据包的自动修复
+当你手动复制一个数据包的时候，有时候会造成数据包错误，导致无法解析或者解析失败。
+
+yak `fuzz.HTTPRequest` 在解析的时候，支持一定程度上的容错，这点非常的好，大家可以自己感受一下
+:::
+
+```go
+/*
+构筑 FuzzHTTPRequest
+*/
+
+
+// 我们构建一个基础数据包，这个数据包是标准 http 请求构建的
+req, err := http.NewRequest("GET", "http://127.0.0.1:8080")
+die(err)
+
+// 我们自定义个数据包的具体内容，虽然他不标准，但是仍然可以被解析和使用，这点非常棒
+reqBody := `GET / HTTP/1.1
+Host: 127.0.0.1:8082`
+
+for _, params := range [
+    []byte(reqBody),            // 测试 []byte / []uint8 类型的数据包是否能被使用
+    reqBody,                    // 测试 string 数据包是否能被使用
+    req,                        // 测试 *http.Request 是否能被正常解析
+] {
+    req, err := fuzz.HTTPRequest(params)
+    if err != nil {
+        /* 如果解析失败，将会直接在这里打印出失败的原因和原来参数 */
+        println("参数错误: ")
+        dump(params)
+        die(err)
+    } else {
+        println(str.f("接收 %v 数据包成功", type(params)))
+    }
+}
+```
+
+当我们执行上述代码，分别构建不同参数的 `fuzz.HTTPRequest` 之后，我们把结果展示在下面。
+
+```go
+接收 []uint8 数据包成功
+接收 string 数据包成功
+接收 *http.Request 数据包成功
+```
+
+#### 根据一堆 URL 批量构建数据包
+
+有一些时候，我们需要针对一大批 URL 进行批量测试，我们如何操作呢？
+
+这时候，我们需要认识 `fuzz` 中的另一个强大的函数 `fuzz.UrlsToHTTPRequests`。
+
+表面上看，我们可以根据 url 自动构造出一批需要批量发起请求的 `*HTTPRequest`，但是实际上，这个函数远超出我们的想象。
+
+我们把上一大节中的 fuzz 字符串功能增加进了这个构建过程中。
+
+##### 0x01 我们构建一个最简单的 `*FuzzHTTPRequest`
+
+我们展示一下最中规中矩的用法
+
+```go
+// fuzz.UrlsToHTTPRequests 案例1
+reqGroup, err = fuzz.UrlsToHTTPRequests("http://127.0.0.1:8082")
+die(err)
+
+// 获取 Fuzz 的结果
+reqs, err := reqGroup.Results()
+die(err)
+
+// 展示构造后的数据包
+for _, req := range reqs {
+    http.show(req)
+}
+
+/*
+OUTPUT
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8082
+Content-Length: 0
+
+*/
+```
+
+##### 0x02 如果我们有很多 url...?
+
+```go
+println("----------")
+// fuzz.UrlsToHTTPRequests 案例
+urls = `http://127.0.0.1:8082
+http://127.0.0.1:8083
+http://127.0.0.1:8084
+http://127.0.0.1:8085
+`
+reqGroup, err = fuzz.UrlsToHTTPRequests(str.ParseStringToLines(urls)...)
+die(err)
+reqs, err := reqGroup.Results()
+die(err)
+
+for _, req := range reqs {
+    http.show(req)
+}
+```
+
+我们输出的结果为？
+
+```http
+----------
+GET / HTTP/1.1
+Host: 127.0.0.1:8082
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8083
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8084
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8085
+Content-Length: 0
+```
+
+
+
+
+##### 0x03 我们可以简化上面的这种情况(0x02优化版本)！
+
+在这个函数中，每一行的字符串，我们是支持 `fuzz.Strings()` 更令人激动人心的是，我们不需要你手动去调用它，她被集成在了这个函数中，所以我们看如下的例子
+
+```go
+println("----------")
+// fuzz.UrlsToHTTPRequests 案例
+urls = `http://127.0.0.1:808{{int(5-8)}}
+http://127.0.0.1:8082`
+
+reqGroup, err = fuzz.UrlsToHTTPRequests(str.ParseStringToLines(urls)...)
+die(err)
+reqs, err := reqGroup.Results()
+die(err)
+
+for _, req := range reqs {
+    http.show(req)
+}
+```
+
+上述脚本输出为
+
+```http
+----------
+GET / HTTP/1.1
+Host: 127.0.0.1:8085
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8086
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8087
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8088
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8082
+Content-Length: 0
+
+```
+
+我们发现，我们想要的内容，里面都具备了。
+
+##### 0x04 仅仅就结束了？远不止如此
+
+当我们输入的目标是一个 IP，或者 `IP:PORT` 或者一个域名的时候，他可以自动补出我们可能需要测试的 URL。
+
+
+当然，如果你要手动完成这一步，请使用 `str.ParseStringToUrlsWith3W` [点此查看该函数用法](./字符串处理#parsestringtourlswith3w)
+
+看如下内容
+
+```go
+println("----------")
+// fuzz.UrlsToHTTPRequests 案例
+urls = `127.0.0.1:808{{int(2-3)}}
+example.com
+example.com:8083
+192.168.1.1`
+
+reqGroup, err = fuzz.UrlsToHTTPRequests(str.ParseStringToLines(urls)...)
+die(err)
+reqs, err := reqGroup.Results()
+die(err)
+
+for _, req := range reqs {
+    http.show(req)
+}
+```
+
+输出结果应该为
+
+```go
+GET / HTTP/1.1
+Host: 127.0.0.1:8085
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8086
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8087
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8088
+Content-Length: 0
+...
+...
+...
+
+GET / HTTP/1.1
+Host: 127.0.0.1:8083
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: www.example.com:443
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: example.com
+Content-Length: 0
+
+
+...
+...
+...
+
+GET / HTTP/1.1
+Host: www.example.com:8083
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 192.168.1.1:443
+Content-Length: 0
+
+
+GET / HTTP/1.1
+Host: 192.168.1.1
+Content-Length: 0
+```
+
 ### 我们可以 Fuzz HTTP 请求的哪些部分？
 
-### 超好用的链式 API
+当我们学习了前几小节的内容，我们可以创建一个需要测试的请求了，但是我们如何测试我们想要测试的参数呢？我们提供了如下方法
 
-### Fuzz 方法支持字符串的模糊测试与生成
+1. `FuzzMethod(methods ...string)` 测试 HTTP 请求的方法 （不支持 Fuzz）
+1. `FuzzPath(paths ...string)` 测试 HTTP 请求的路径（支持 Fuzz 模版）
+1. `FuzzHTTPHeader(key: any, value: any)` 测试 HTTP 请求的头，可用于 User-Agent，Host，X-FORWARD 等测试 （支持 Fuzz 模版）
+1. `FuzzGetParams(key: any, value: any)` 测试 Get 请求中的字段，例如 `https://example.com?a=123&b=24` 中的 `a` 或 `b` 参数
+1. `FuzzGetParamsRaw(values ...any)` 测试 Get 请求中原始 query 字段 (`?`后`#`号前的字段)
+1. `FuzzPostParams(key: any, value: any)` 测试 Post 内容的 `a=123&b=24` 中特定参数
+1. `FuzzPostRaw(values ...string)` 测试 Post Body
+1. `FuzzPostJsonParams(key: any, value: any)` 测试 Post Body 是 Json Object 的情况
+
+在我们 `FuzzXXX` 函数调用结束的时候，我们可以使用 `Results() ([]*http.Request, error)` 来获取 Fuzz 之后的结果；除此之外，也可以使用 `Show()` 函数来展示结果，方便确认数据包，确认自己的程序是否正确。
+
+1. `.Results() ([]*http.Request, error)` 输出 Results 的结果，供下一步发包或其他处理
+1. `.Show()` 展示 Fuzz 之后的结果
+
+### 链式调用：如何 Fuzz 一个 HTTPRequest？
+
+当我们了解了上面我们可用的函数，接下来我们以实际的例子来学习如何进行 Fuzz。
+
+`yak.FuzzHTTPRequest` 核心对象调用的方式非常简单，使用链式调用来进行 Fuzz
+
+#### 模糊测试 HTTP Method
+
+最基础的，当我们想要改变一个 HTTP 请求的 Method，我们可以采用如下操作。
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST", "HEAD", "XXX").Show()
+```
+
+执行结果为
+
+```go
+POST /path-target HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+HEAD /path-target HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+XXX /path-target HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+```
+
+:::info `Show` 函数可以方便的帮我们调试
+
+`Show` 直接展示我们生成的包，如上图所示，我们生成了三个包，Method 分别为 Post / Head / XXX
+:::
+
+#### 测试 HTTP Path
+
+继承上一个测试，如果我们想要测试 Path 应该怎么做？我们构造了下面一个例子，如果我们要测试 `/path-` 这个 path 开头的一些随机字符串？应该如何做？
+
+大家看下面的例子，我们 `req.FuzzMethod("POST").FuzzPath("/path-{{randstr(5,5,3)}}", "/extra-path")` 的调用，不仅设置了 Post，还设置了 Path 的模糊测试以及参数 `{{randstr(5,5,3)}}` 表示生成一个长度是 5 的随机字符串，生成三次，除此之外，我们还额外测试了一个路径 `/extra-path`。
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr(5,5,3)}}", "/extra-path").Show()
+```
+
+执行上面小脚本，我们测试结果为
+
+```go
+POST /path-exMyL HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+POST /path-YcPpE HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+POST /path-cbksO HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+POST /extra-path HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+
+
+```
+
+我们发现，HTTP Method 被替换了，并且，随机测试了 3 个 Path，并增加了一个额外的 Path。
+
+#### 模糊测试 HTTP Header
+
+同样的，我们可以使用 FuzzHTTPHeader 这个函数，针对 Header 进行测试
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}", "/extra-path").FuzzHTTPHeader("Cookie", "test={{randstr(20,50,2)}}").Show()
+```
+
+执行结果为
+
+```go
+POST /path-UTkaQTIv HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=QLAAnMMWFNMXXmIHpqJEjqmXzBDEOOjWwmCNgIvdrow
+
+
+POST /path-UTkaQTIv HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=vsBENrFtNnzBwLlpTECvcgKmLlONNSPkbqXgqPtNhrDwqJmvE
+
+
+POST /extra-path HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=RrgDJljbTjxhJDPMOmxCyVsetlFtgxUZIFe
+
+
+POST /extra-path HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=BsFejNlJoLSRxbjjJMKgoBDsMriMRLBaviUZNemEA
+
+
+```
+
+#### 测试 Get 参数
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzHTTPHeader("Cookie", "test={{randstr}}").
+    FuzzHTTPHeader("X-COSSSSS", ["AAAA", "BBBB"],).FuzzGetParams("aabc", "{{randint}}'").Show()
+```
+
+有了前面的经验，我们很容易猜到，我们 Fuzz 了两个 HTTP 头，分别为 Cookie / X-COSSSSS，使用了一个随机值和 `AAAA BBBB`，同时，我们针对 Get 参数 `aabc` 进行了测试，给了随机值加了一个反引号 `{{randint}}'` 
+
+所以，执行的结果如下，我们心里早有预期
+
+```go
+POST /path-XszXevUe?aabc=1%27 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=vjqWCVBa
+X-Cosssss: AAAA
+
+
+POST /path-XszXevUe?aabc=6%27 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=vjqWCVBa
+X-Cosssss: BBBB
+
+```
 
 ### 如何批量发起 Fuzz 过的请求？
 
 ### 案例：如何自动化寻找网站输入点？
+
+
+## 附录：我们如何实现链式调用？
+
+
+当我们构造的对象有如下接口的时候，我们可以通过实现接口的形式来完成链式调用。
+
+```go
+type FuzzHTTPRequestIf interface {
+	// 模糊测试 http.Request 的 method 字段
+	FuzzMethod(method ...string) FuzzHTTPRequestIf
+
+	// 模糊测试 Path 字段
+	FuzzPath(...string) FuzzHTTPRequestIf
+
+	// 模糊测试 HTTPHeader 字段
+	FuzzHTTPHeader(interface{}, interface{}) FuzzHTTPRequestIf
+
+	// 模糊测试 Query
+	FuzzGetParamsRaw(queryRaw ...string) FuzzHTTPRequestIf
+
+	// 模糊测试 Query 中的字段
+	FuzzGetParams(interface{}, interface{}) FuzzHTTPRequestIf
+
+	// 模糊测试 Post
+	FuzzPostRaw(...string) FuzzHTTPRequestIf
+
+	// 模糊测试 PostParam
+	FuzzPostParams(k, v interface{}) FuzzHTTPRequestIf
+
+	// 测试 PostJson 中的数据
+	FuzzPostJsonParams(k, v interface{}) FuzzHTTPRequestIf
+
+	Results() ([]*http.Request, error)
+
+	Show()
+}
+```
