@@ -1115,9 +1115,243 @@ X-Cosssss: BBBB
 
 ```
 
+### 模糊测试 Get 的参数（不解析）`FuzzGetParamsRaw`
+
+当我们有一些从别的地方赋值过来的参数需要使用/解析的时候，我们可以使用 `.FuzzGetParamsRaw` 这个函数，这个函数可以设置原始的参数。
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzHTTPHeader("Cookie", "test={{randstr}}").
+    FuzzGetParamsRaw("a=123&b=12313hjklasdf").FuzzGetParams("c", "123").Show()
+```
+
+执行的结果，应该是设置 path，Cookie，然后设置了 `a` 和 `b` 的参数，通过 `FuzzGetParams` 设置了 `c` 这个参数。最终的结果，我们可以看下面
+
+```go
+POST /path-QFcTPscV?a=123&b=12313hjklasdf&c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: test=WVCJdrPE
+
+```
+
+#### 模糊测试 Post Body 的参数 `FuzzPostParams`
+
+这个函数类似 `FuzzGetParams` 会设置 Post Params 相关的内容。
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzGetParams("c", "123").FuzzPostParams("postParams", "{{randint(10,44,2)}}").Show()
+```
+
+这个脚本执行的结果为
+
+```go
+POST /path-jCELJPPN?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 13
+
+postParams=41
+POST /path-jCELJPPN?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 13
+
+postParams=33
+```
+
+#### 模糊测试任意 Post Body `FuzzPostRaw`
+
+类似 `FuzzGetParamsRaw` 这个 `FuzzPostRaw` 可以模糊测试任何 Post Body
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzGetParams("c", "123").FuzzPostRaw("this is body with randstr {{randstr(10,10,3)}}").Show()
+```
+
+有了前面的经验，我们可以很容易知道这个数据包将会生成三个，带上三个长度为10的字符串
+
+```go
+POST /path-pLFHESlG?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 36
+
+this is body with randstr YhfICqUzyx
+POST /path-pLFHESlG?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 36
+
+this is body with randstr KzAqYQLpiF
+POST /path-pLFHESlG?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 36
+
+this is body with randstr unMcGrhYLG
+```
+
+#### 模糊测试 Post Json 数据 `FuzzPostJsonParams`
+
+看函数名我们也非常容易理解这个函数是做什么，直接看下面代码吧！
+
+我们设置了参数的方法，Path 的值，设置了一个 Get 参数，最后设置了 Post Json 的对象，设置了一个 key 为 `jsonKey1` 值为随机字符串带上 `':)` 
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzGetParams("c", "123").FuzzPostJsonParams("jsonKey1", "{{randstr(10,10,3)}}';)").Show()
+```
+
+直接的结果为
+
+```go
+POST /path-vLgWiwIs?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 28
+
+{"jsonKey1":"zVoZypFoEp';)"}
+POST /path-vLgWiwIs?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 28
+
+{"jsonKey1":"LLGrYZWbxz';)"}
+POST /path-vLgWiwIs?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 28
+
+{"jsonKey1":"IkLcOrxhvi';)"}
+```
+
 ### 如何批量发起 Fuzz 过的请求？
 
-### 案例：如何自动化寻找网站输入点？
+既然 `fuzz` 中的 `*FuzzHTTPRequest` 是我们内置的对象，我们很容易想到，其实 `yak` 中也应该具备批量发起这些请求包的能力。
+
+我们需要学习的函数是 `httpool.Pool(i *FuzzHTTPRequest|[]*http.Request, opts...) (chan map[string]interface{}, error)`
+
+这个函数，我们之前也都见过，我们可以用它批量发起请求。其实配合我们上一节提到的模糊测试变形过的请求组，我们的 `httpool.Pool()` 可以非常好用
+
+```go
+// 批量发起请求
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1:8082`)
+die(err)
+
+fReq := req.FuzzPath("/admin/admin{{int(1-4)}}.php")
+ch, err := httpool.Pool(fReq)
+die(err)
+
+for result := range ch {
+    dump(result)
+    println("-------------------------------------")
+}
+```
+
+我们直接把 Fuzz 函数的结果交给 `httpool.Pool()` 就可以批量对 HTTPRequest 进行执行。获取到的结果为
+
+```go
+(map[string]interface {}) (len=4) {
+ (string) (len=5) "error": (interface {}) <nil>,
+ (string) (len=8) "response": ([]uint8) (len=200 cap=512) {
+  00000000  48 54 54 50 2f 31 2e 31  20 34 30 31 20 55 6e 61  |HTTP/1.1 401 Una|
+  00000010  75 74 68 6f 72 69 7a 65  64 0d 0a 57 77 77 2d 41  |uthorized..Www-A|
+  00000020  75 74 68 65...
+  ...
+  000000b0  20 63 6c 6f 73 65 0d 0a  0d 0a 55 6e 61 75 74 68  | close....Unauth|
+  000000c0  6f 72 69 73 65 64 2e 0a                           |orised..|
+ },
+ (string) (len=7) "request": (*http.Request)(0xc0000b8c00)({
+  Method: (string) (len=3) "GET",
+  URL: (*url.URL)(0xc001000510)(http:///admin/admin1.php),
+  Proto: (string) (len=8) "HTTP/1.1",
+  ProtoMajor: (int) 1,
+  ...
+  ...
+  ctx: (context.Context) <nil>
+ }),
+ (string) (len=3) "url": (string) (len=38) "http://127.0.0.1:8082/admin/admin1.php"
+}
+```
+
+当然，我们会在另外的章节中详细介绍这个函数。
+
+## 更复杂的 HTTP Fuzz：如何知道有哪些可测参数？
+
+这个操作其实是非常有用的，我们通过 `fuzz.HTTPRequest` 可以创造出一个 `*mutate.FuzzHTTPRequest` 对象，这个对象有几个有用的方法，我们可以调用来达成目的。
+
+### 如何获取可测参数？
+
+我们有三种方法可以获取一个 HTTP 请求可以测试的参数，参数位置一般在
+
+1. Get 中的参数，例如 `a=bcder&b=asdfasdfasdf` 中的 `a` 和 `b`
+1. Post 中的参数，支持 JSON 和普通参数两种格式
+
+我们可以使用的函数为:
+
+1. `.GetGetQueryParams() []*FuzzHTTPRequestParam` 获取可用的 GET Query 中的参数
+1. `.GetPostParams() []*FuzzHTTPRequestParam` 获取 Post 参数 `a=bcder&b=asdfasdfasdf` 支持这种参数格式。
+1. `.GetPostJsonParams() []*FuzzHTTPRequestParam` 支持 `{"key": "value"}` 这种 Json Object 的格式
+1. `.GetCommonParams() []*FuzzHTTPRequestParam` 获取所有的 Get Query 的参数，同时如果有 Post Json 参数，优先获取 Post Json 的参数，如果没有 Post Json 参数，则获取 `GetPostParams` 的参数。
+
+当我们执行上述代码，将会获得到 `[]*FuzzHTTPRequestParam`
+
+那么 `*FuzzHTTPRequestParam` 这个参数应该怎么使用呢？
+
+```go
+type FuzzHTTPRequestParam interface {
+    Name()     string                                       // 当前所处参数的名称
+    Position() string                                       // 当前可测参数所属的位置
+    Value()    string                                       // 当前可测试参数的 Value
+
+    Fuzz(values ...interface{})     FuzzHTTPRequestIf       // 这个函数是核心 Fuzz 的函数，想要把当前这个参数 Fuzz 成什么样的值
+}
+```
+
+这个返回的对象其实很简单，我们看下面的小例子
+
+### 小案例：我们获取请求的参数都有什么呢？
+
+```go
+rawPacket := `GET /target-path?a=value1&b=value2&c=value3 HTTP/1.1
+Host: 127.0.0.1:8082
+
+{"theJsonKey1": 123, "theJsonKey2": "asdfasdf"}`
+req, err := fuzz.HTTPRequest(rawPacket)
+die(err)
+
+params := req.GetCommonParams()
+for _, param := range params {
+    println("获取参数：", str.f("Position: %v ParamName: %v OriginValue: %v", param.Position(), param.Name(), param.Value()))
+    param.Fuzz("{{randstr}}").Show()
+}
+```
+
+我们获取上述参数，预计会获取到 `a/b/c` 作为 Get 参数的可变形对象，也会获得 Post Json Body 中的两个参数：`theJsonKey1 / theJsonKey2` 
+
+我们执行上述脚本之后，获取到的结果为
+
+![参数列表](../../static/img/lib_fuzz_1.jpg)
+
+我们使用图片表示，我们圈住了通过 `Fuzz("{{randstr}}")` 生成的点
+
+### 如何针对已知参数进行测试？
+
+我们通过上面的小例子，知道了基本参数的获取和用法；我们接下来应该怎么和之前学到的东西进行结合呢？
+
+### 实战：找到一个 Web 页面的所有输出点？
+
 
 
 ## 附录：我们如何实现链式调用？

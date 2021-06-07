@@ -203,7 +203,7 @@ rsps, err := httpool.Pool(reqs, httpool.size(10))
 die(err)
 
 // 简单展示一下请求的结果
-for _, rspDict := range rsps {
+for rspDict := range rsps {
     println("-----------------------")
     if rspDict.error != nil {
         printf("request error: %v for\n%v\n", rspDict.error, rspDict.request)
@@ -308,7 +308,7 @@ loglevel("info")
 rsps, err := httpool.Pool(requests)
 die(err)
 
-for _, rspDict := range rsps {
+for rspDict := range rsps {
     if rspDict.response != nil {
         printf("%v\n", string(rspDict.response))
     }
