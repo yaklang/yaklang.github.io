@@ -949,6 +949,8 @@ Content-Length: 0
 1. `FuzzPostParams(key: any, value: any)` 测试 Post 内容的 `a=123&b=24` 中特定参数
 1. `FuzzPostRaw(values ...string)` 测试 Post Body
 1. `FuzzPostJsonParams(key: any, value: any)` 测试 Post Body 是 Json Object 的情况
+1. `FuzzCookieRaw(values ...any)` 测试 Cookie 原始值，你可以把整个 Cookie 丢进去测试
+1. `FuzzCookie(key: any, value: any)` 测试 Cookie 中的，可以覆盖 Cookie 中特定参数，依次测试 Cookie 中可能存在的问题
 
 在我们 `FuzzXXX` 函数调用结束的时候，我们可以使用 `Results() ([]*http.Request, error)` 来获取 Fuzz 之后的结果；除此之外，也可以使用 `Show()` 函数来展示结果，方便确认数据包，确认自己的程序是否正确。
 
@@ -1235,6 +1237,43 @@ Content-Length: 28
 {"jsonKey1":"IkLcOrxhvi';)"}
 ```
 
+#### 测试 Cookie
+
+1. 最简单也是最容易理解的 Cookie 测试方法其实是 `FuzzCookieRaw([your-value])` 其本质上相当于调用了 `FuzzHTTPHeader("Cookie", [your-value])` 在此，我们就不赘述了
+2. 值得一看的是 `FuzzCookie(key, value)` 这个函数，用法和 `FuzzPostJsonParams` 函数一样，只不过测试的未知会换成 Cookie 中的值
+
+```go
+// 链式调用
+req, err := fuzz.HTTPRequest(`GET /path-target HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+
+req.FuzzMethod("POST").FuzzPath("/path-{{randstr}}").FuzzGetParams("c", "123").FuzzCookie("cookieKey1", "{{randstr(10,10,3)}}')").Show()
+```
+
+我们发现测试的结果应该为三个包：
+
+```go
+POST /path-INfYfYOY?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: cookieKey1=lvODSxijLw')
+
+
+POST /path-INfYfYOY?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: cookieKey1=vWyXSebItC')
+
+
+POST /path-INfYfYOY?c=123 HTTP/1.1
+Host: 127.0.0.1
+Content-Length: 0
+Cookie: cookieKey1=wyRmwqVyZR')
+
+```
+
+
 ### 如何批量发起 Fuzz 过的请求？
 
 既然 `fuzz` 中的 `*FuzzHTTPRequest` 是我们内置的对象，我们很容易想到，其实 `yak` 中也应该具备批量发起这些请求包的能力。
@@ -1303,7 +1342,9 @@ for result := range ch {
 1. `.GetGetQueryParams() []*FuzzHTTPRequestParam` 获取可用的 GET Query 中的参数
 1. `.GetPostParams() []*FuzzHTTPRequestParam` 获取 Post 参数 `a=bcder&b=asdfasdfasdf` 支持这种参数格式。
 1. `.GetPostJsonParams() []*FuzzHTTPRequestParam` 支持 `{"key": "value"}` 这种 Json Object 的格式
-1. `.GetCommonParams() []*FuzzHTTPRequestParam` 获取所有的 Get Query 的参数，同时如果有 Post Json 参数，优先获取 Post Json 的参数，如果没有 Post Json 参数，则获取 `GetPostParams` 的参数。
+1. `.GetCookieParams() []*FuzzHTTPRequestParam` 支持 Cookie 中提取参数，把 Cookie 的参数提出来用于后续的 Fuzz 测试
+1. `.GetCommonParams() []*FuzzHTTPRequestParam` 获取所有的 Get Query 的参数，同时如果有 Post Json 参数，优先获取 Post Json 的参数，如果没有 Post Json 参数，则获取 `GetPostParams` 的参数，最后会把 Cookie 中的参数也加入。
+1. `.ParamsHash() (string, error)` 获取所有参数的 Hash 值
 
 当我们执行上述代码，将会获得到 `[]*FuzzHTTPRequestParam`
 
@@ -1344,13 +1385,19 @@ for _, param := range params {
 
 ![参数列表](../../static/img/lib_fuzz_1.jpg)
 
+:::info 注意，我们上面的例子并没有 Cookie 参与
+
+Cookie 参数的效果和上面是一致的，如果读者有兴趣，可以自行测试
+
+:::
+
 我们使用图片表示，我们圈住了通过 `Fuzz("{{randstr}}")` 生成的点
 
 ### 如何针对已知参数进行测试？
 
 我们通过上面的小例子，知道了基本参数的获取和用法；我们接下来应该怎么和之前学到的东西进行结合呢？
 
-### 实战：找到一个 Web 页面的所有输出点？
+### 实战案例：仿制 `xray` 被动扫描入口！找到一个 Web 页面的所有输入点加以去重？
 
 
 
