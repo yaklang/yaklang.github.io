@@ -71,6 +71,7 @@ sidebar_position: 2
 |assertEmpty| 确保实例是 nil 或者 undefined，如果不是，抛出错误|只有一个参数，参数为一个实例，会判断是不是 nil 或者 undefined||`rsp, err = http.Get("http://baidu.com"); assertEmpty(err)`|
 |randn|随机生成一个 int|两个参数 randn(min, max) 最小值和最大值均为 int|返回 min 和 max 之间的一个随机整形|`println(randn(1,99))`|
 |randstr|随机生成一个字符串|只有一个参数，参数为随机字符串的长度|返回随机生成的字符串|`println(randstr(10))` 输出 `hhisgUZdlN`|
+|desc|描述一个对象的结构|参数为想要描述的对象|-|`desc(yourParam)`|
 |now|同 time.Now ||||
 |mkmap|已废弃||||
 |mapFrom|已废弃||||

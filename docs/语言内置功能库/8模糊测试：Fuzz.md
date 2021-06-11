@@ -714,6 +714,85 @@ for _, params := range [
 接收 *http.Request 数据包成功
 ```
 
+:::info 当我们 `req, err := fuzz.HTTPRequest(params)` 执行之后，`req` 是什么？
+```go
+type palm/common/mutate.(FuzzHTTPRequest) struct {
+  Fields(可用字段):
+      // 在构建 FuzzHTTPRequest 时传入的参数
+      Opts: []mutate.BuildFuzzHTTPRequestOption
+  PtrStructMethods(指针结构方法/函数):
+      // 模糊测试 Cookie，按值
+      func FuzzCookie(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 按照原始 Cookie 进行测试
+      func FuzzCookieRaw(v1: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 Get 参数
+      func FuzzGetParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试原始 Get 值
+      func FuzzGetParamsRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 HTTPHeader
+      func FuzzHTTPHeader(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 HTTP Method
+      func FuzzMethod(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 HTTP Path
+      func FuzzPath(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 Post Json 的值
+      func FuzzPostJsonParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试 Post Urlencoded 参数
+      func FuzzPostParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+      // 模糊测试原始 Post 的值
+      func FuzzPostRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+      // 获取所有参数
+      func GetCommonParams() return([]*mutate.FuzzHTTPRequestParam)
+
+      // 获取 Cookie 参数
+      func GetCookieParams() return([]*mutate.FuzzHTTPRequestParam)
+
+      // 获取 GET Query 的参数
+      func GetGetQueryParams() return([]*mutate.FuzzHTTPRequestParam)
+
+      // 获取原始 *http.Request 对象
+      func GetOriginHTTPRequest() return(*http.Request, error)
+
+      // 获取 Post Json 的参数
+      func GetPostJsonParams() return([]*mutate.FuzzHTTPRequestParam)
+
+      // 获取 Post Params 的参数
+      func GetPostParams() return([]*mutate.FuzzHTTPRequestParam)
+
+      // 判断是不是 Body Form Encoded 的格式，用于网站上传
+      func IsBodyFormEncoded() return(bool)
+
+      // 判断 Body 是不是 Json
+      func IsBodyJsonEncoded() return(bool)
+
+      // 判断 Body 是不是 URL 编码的参数（类似 Get Query）
+      func IsBodyUrlEncoded() return(bool)
+
+      // 是不是没有 Body
+      func IsEmptyBody() return(bool)
+
+      // 把所有可用参数组合成 Hash，一般用于扫描器区分这个请求扫描过没有
+      func ParamsHash() return(string, error)
+
+      // 把 Fuzz 结果变成一个个的 *http.Request
+      func Results() return([]*http.Request, error)
+
+      // 展示所有的可用请求
+      func Show()
+}
+```
+:::
+
 #### 根据一堆 URL 批量构建数据包
 
 有一些时候，我们需要针对一大批 URL 进行批量测试，我们如何操作呢？
