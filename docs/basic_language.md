@@ -67,7 +67,7 @@ println("first:    ", firstIn)
 println("seconds:  ", secondIn)
 ```
 
-我们很容易才到，上面代码的执行结果为
+我们很容易猜到，上面代码的执行结果为
 
 ```
 first:     123
@@ -146,7 +146,7 @@ println("cap(a): ", capValue)
 //   cap(a):  6
 ```
 
-3. `copy(sliceA, sliceB)` 把 sliceB 的元素复制到 sliceA 中，如果复制的元素个数为 `min(len(sliceA), len(sliceB))` 
+3. `copy(sliceA, sliceB)` 把 sliceB 的元素复制到 sliceA 中，返回复制元素的个数。复制的元素个数为 `min(len(sliceA), len(sliceB))` 
 
 ```go
 a = [1,2,3]
@@ -155,9 +155,19 @@ copiedCount = copy(a, b)
 println("copy(a, b) returns ", copiedCount)
 println("slice a now: ", a)
 
+a = [4,5,6,7,8]
+b = [1,2,3]
+copiedCount = copy(a, b)
+println("copy(a, b) returns ", copiedCount)
+println("slice a now: ", a)
+
+
 // OUTPUT:
 //   copy(a, b) returns  3
 //   slice a now:  [4 5 6]
+//   copy(a, b) returns  3
+//   slice a now:  [1 2 3 7 8]
+
 ```
 
 4. 按索引取数组元素，支持拆包，具体案例如下
@@ -326,7 +336,7 @@ ch1 <- 2
 n = len(ch1)               // 取得chan当前的元素个数
 m = cap(ch1)               // 取得chan的容量
 v = <-ch1                  // 从chan取出一个值
-close(ch1)                 // 关闭chan，被关闭的chan是不能写，但是还可以读(直到已经写入的值全部被取完为止)
+close(ch1)                 // 关闭chan，被关闭的chan不能写(再次写入会报错，退出程序)，但是还可以读(直到已经写入的值全部被取完为止)
 v1 = <- ch1
 v2 = <- ch1
 
@@ -639,6 +649,10 @@ case true:
 case false:
   println("false case")
 }
+
+// OUTPUT:
+//   case first
+//   true case
 ```
 
 :::danger 注意差异
@@ -704,18 +718,35 @@ a = [1,2,3,4]
 for index, element = range a {
     println(str.f("a[%v]: %v", index, element))
 }
-println("-----------------")
 
-// 可以只去 index，continue 是
+// 可以只取 index；continue 用于跳过本次循环
+println("-----------------")
 for index = range a {
+    if index % 2 ==0{
+        continue
+    }
     println(str.f("a[%v]", index))
-    continue
 }
+
+// 只取元素
 println("-----------------")
 for _, element = range a {
-    println(str.f("first element: %v", element))
+    println(str.f("current element: %v", element))
     break
 }
+
+/*
+OUTPUT:
+a[0]: 1
+a[1]: 2
+a[2]: 3
+a[3]: 4
+-----------------
+a[1]
+a[3]
+-----------------
+current element: 1
+*/
 ```
 
 #### `for range` 来遍历一个 map / dict
@@ -726,29 +757,13 @@ for key, value = range {
     println(str.f("b[%v]: %v", key, value))
 }
 
-/**
+/*
 OUTPUT:
 
 b[abc]: 123
 b[bcd]: bcd
 b[cde]: 512
 */
-```
-
-上述脚本很容易猜到，结果如下
-
-```go
-a[0]: 1
-a[1]: 2
-a[2]: 3
-a[3]: 4
------------------
-a[0]
-a[1]
-a[2]
-a[3]
------------------
-current element: 1
 ```
 
 #### `for range` 同样可以操作 chan
