@@ -560,7 +560,7 @@ for _, origin := range [
 
 ### 【编码标签】`{{base64}} {{hex}} {{url}} {{durl}} {{html}} {{htmlhex}}`
 
-这几个编码标签对应 `codec` \([点击这里查看具体函数](./编码解码)\) 这个包中的各个函数
+这几个编码标签对应 `codec` \([点击这里查看具体函数](./lib_codec)\) 这个包中的各个函数
 
 #### 定义说明
 
@@ -935,7 +935,7 @@ Content-Length: 0
 当我们输入的目标是一个 IP，或者 `IP:PORT` 或者一个域名的时候，他可以自动补出我们可能需要测试的 URL。
 
 
-当然，如果你要手动完成这一步，请使用 `str.ParseStringToUrlsWith3W` [点此查看该函数用法](./字符串处理#parsestringtourlswith3w)
+当然，如果你要手动完成这一步，请使用 `str.ParseStringToUrlsWith3W` [点此查看该函数用法](./lib_str#parsestringtourlswith3w)
 
 看如下内容
 

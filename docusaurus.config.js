@@ -3,12 +3,12 @@ module.exports = {
     title: 'Yak Official Website',
     tagline: 'Yak 是一门 Web 安全研发领域垂直语言',
     url: 'https://yaklang.io',
-    baseUrl: '/',
+    baseUrl: '/yak-project-main-page/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
-    organizationName: 'v1ll4n', // Usually your GitHub org/user name.
-    projectName: 'yak', // Usually your repo name.
+    organizationName: 'yaklang', // Usually your GitHub org/user name.
+    projectName: 'yak-project-main-page', // Usually your repo name.
     themeConfig: {
         navbar: {
             title: 'Yak',
