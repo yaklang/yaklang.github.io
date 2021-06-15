@@ -47,7 +47,7 @@ const FeatureList = [
                 如果说前面的功能让你提不起兴趣，那么我相信 yak 独一无二的针对 Web 安全领域的 <code>fuzz</code> 模块一定能让你感受出他的与众不同
                 <br/>
                 <br/>
-                <a href="/docs/语言内置功能库/8模糊测试：Fuzz#fuzz-http-请求">可能是北半球最好用的 web 安全 fuzz 模块</a>
+                <a href="/docs/语言内置功能库/lib_fuzz">可能是北半球最好用的 web 安全 fuzz 模块</a>
             </>
         ),
     },
