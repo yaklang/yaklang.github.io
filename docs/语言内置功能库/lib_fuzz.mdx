@@ -8,6 +8,10 @@ sidebar_position: 8
 
 很多时候，本扩展包的内容不仅仅可以用于生成模糊测试的 Payload，也可以用于生成批量渲染的 HTTP 请求。
 
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
 ## 为什么会有这个包？fuzz 应该用在哪里？
 
 本身模糊测试并不是一个高深的话题，其实使用场景也非常非常多：
@@ -16,7 +20,7 @@ sidebar_position: 8
 
 另一个场景，我们在进行爆破的时候，需要生成字典，例如
 
-```txt
+```txt title='字典样例'
 admin1
 admin2
 admin3
