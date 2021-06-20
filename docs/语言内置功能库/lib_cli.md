@@ -4,48 +4,100 @@ sidebar_position: 11
 
 # [cli] 从命令行读参数
 
-> 测试命令 yak data/yak-scripts/cli_quickstart.yak --url https://baidu.com --allow-do-sth --number1 123 --floatvar 1.23 --target "192.168.1.1/24,10.1.3.2/28" --target-port "22,3306,80,8080-8082" --urls "leavesongs.com,10.1.3.2" --urls2 "https://www.baidu.com"
+`cli` 这个包是 yak 处理命令行参数的工具包，用法非常简单，我们根据实例简单看一下这个包如何使用
 
+## 获取所有参数
+
+```go
+go 测试命令 yak 26_cliutil.yak --url https://baidu.com --allow-do-sth --number1 123 --floatvar 1.23 --target "192.168.1.1/24,10.1.3.2/28" --target-port "22,3306,80,8080-8082" --urls "leavesongs.com,10.1.3.2" --urls2 "https://www.baidu.com"
+```
+
+```go title="26_cliutil.yak"
 args = cli.Args()  // 获取所有命令行参数内容
 dump(args)         // 展示参数结果
+```
 
-println("-----------------------------------------")
+上述代码执行之后，会展示所有输入的参数：
 
-## cli 处理基础数据类型
+```go
+([]string) (len=17 cap=32) {
+ (string) (len=3) "yak",
+ (string) (len=14) "26_cliutil.yak",
+ (string) (len=5) "--url",
+ (string) (len=17) "https://baidu.com",
+ (string) (len=14) "--allow-do-sth",
+ (string) (len=9) "--number1",
+ (string) (len=3) "123",
+ (string) (len=10) "--floatvar",
+ (string) (len=4) "1.23",
+ (string) (len=8) "--target",
+ (string) (len=26) "192.168.1.1/24,10.1.3.2/28",
+ (string) (len=13) "--target-port",
+ (string) (len=20) "22,3306,80,8080-8082",
+ (string) (len=6) "--urls",
+ (string) (len=23) "leavesongs.com,10.1.3.2",
+ (string) (len=7) "--urls2",
+ (string) (len=21) "https://www.baidu.com"
+}
+```
 
-// 可以获取到 --url 的参数内容
+## cli 处理不同类型的参数值
+
+### `cli.String`： 处理字符串类型参数
+
+```go
 // >  yakc clitest.yak --url https://baidu.com
 strParam = cli.String("url")  
-
-// 通过执行 dump(strParam) 可以看到参数类型与值
-//   (string) (len=17) "https://baidu.com"
 dump(strParam)
+```
 
-println("-----------------------------------------")
+通过执行 `dump(strParam)` 可以看到参数类型与值
 
-// 看看参数内有没有 allow-do-sth 的参数
+```go
+(string) (len=17) "https://baidu.com"
+```
+
+
+### `cli.Bool`：处理 Bool 类型参数
+
+```go
 boolParam = cli.Bool("allow-do-sth")
 dump(boolParam)
+```
 
-println("-----------------------------------------")
+:::caution 注意 
 
-// 解析一个数字
+`cli.Bool(paramName)` 不会获取参数的值，只会检测命令行中有没有当前参数，如果有的话，返回值为 `true` 否则为 `false`;
+
+:::
+
+### `cli.Int`：处理整数参数
+
+```go
 intParam = cli.Int("number1")
 dump(intParam)
+```
 
-println("-----------------------------------------")
+### `cli.Float`：处理浮点参数
 
+```go
 floatParam = cli.Float("floatvar")
 dump(floatParam)
+```
 
 ## cli 处理扩展数据类型
 
-### 处理扫描目标
+### `cli.Hosts`：处理参数是网段的情况
+
+```go
 // --target "192.168.1.1/24,10.1.3.2/28"
-println("-----------------------------------------")
 netParam = cli.Hosts("target")
 dump(netParam)
+```
 
+上述脚本执行结果为
+
+```go
 /*
 展示结果
 ([]string) (len=272 cap=512) {
@@ -62,15 +114,19 @@ dump(netParam)
  (string) (len=9) "10.1.3.15"
 }
 */
+```
 
-### 处理扫描端口
+### `cli.Ports`：处理扫描端口组参数
+
+```go
 // --target-port "22,3306,80,8080-8082"
-println("-----------------------------------------")
 portParam = cli.Ports("target-port")
 dump(portParam)
+```
 
-/*
-// 执行结果
+上述脚本执行结果为
+
+```go
 ([]int) (len=6 cap=8) {
  (int) 22,
  (int) 80,
@@ -79,16 +135,27 @@ dump(portParam)
  (int) 8081,
  (int) 8082
 }
-*/
+```
 
-### 处理目标是 url 的情况
+:::note
+
+本质上执行了 `str.ParseStringToPorts`
+
+:::
+
+### `cli.Urls`：处理目标是 url 的情况
+
+#### 案例一
+
+```go
 // --urls "leavesongs.com,10.1.3.2,https://www.baidu.com"
-println("-----------------------------------------")
 urlParam = cli.Urls("urls")
 dump(urlParam)
+```
 
-/*
-// 执行结果为
+解析结果为 urls
+
+```go
 ([]string) (len=6 cap=8) {
  (string) (len=22) "https://leavesongs.com",
  (string) (len=26) "https://www.leavesongs.com",
@@ -97,8 +164,11 @@ dump(urlParam)
  (string) (len=16) "https://10.1.3.2",
  (string) (len=15) "http://10.1.3.2"
 }
-*/
+```
 
+### 案例二
+
+```
 // --urls2 "https://www.baidu.com"
 println("-----------------------------------------")
 urlParam = cli.Urls("urls2")
@@ -108,4 +178,4 @@ dump(urlParam)
  (string) (len=21) "https://www.baidu.com"
 }
 */
-
+```

@@ -72,3 +72,38 @@ type palm/server/dbm/falcons/spacengine.(NetSpaceEngineResult) struct {
 
 1. `fn spacengine.maxPage(var_1: int): yaklib._spaceEngineConfigOpt` 最多获取多少页的数据？
 1. `fn spacengine.maxRecord(var_1: int): yaklib._spaceEngineConfigOpt` 最多获取多少条？（按页获取，实际返回数量等于 `maxRecord % perPageRecord > 0 ? perPageRecord * (page+1) : perPageRecord * page` ）
+
+## 实战案例：
+
+### 基础使用案例
+
+```go title="yak 25_spacengine.yak --token vO5Z*********************aHgdTeEM"
+apiKey := cli.String("token")
+
+res, err := spacengine.ShodanQuery(apiKey, "jenkins", spacengine.maxRecord(100))
+die(err)
+
+for r := range res {
+    println(r.Addr)
+}
+```
+
+当我们执行上述代码之后，我们可以得到按行获取的扫描目标
+
+### 配合 `servicescan` 使用
+
+```go {6-7}
+apiKey := cli.String("token")
+
+res, err := spacengine.ShodanQuery(apiKey, "jenkins", spacengine.maxRecord(100))
+die(err)
+
+fpRes, err := servicescan.ScanFromSpaceEngine(res)
+die(err)
+
+for result := range fpRes {
+    println(result)
+}
+```
+
+通过高亮行代码，我们可以把 `spacengine` 模块的扫描结果直接给服务扫描进行执行。 
