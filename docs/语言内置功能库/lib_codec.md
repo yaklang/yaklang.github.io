@@ -175,13 +175,13 @@ Double Url编码为： %2561%2562%2563%2564%2565%2566%2567%2568%2569%256a%253c%2
 
 十六进制编码，转成十六进制字符串
 
-1. `fn codec.DecodeToHex(var_1: string): ([]uint8, error)`
+1. `fn codec.DecodeHex(var_1: string): ([]uint8, error)`
 1. `fn codec.EncodeToHex(var_1: interface {}): string`
 
 ```go
 ret := codec.EncodeToHex("abcdefghij<>:;{]{]|\\$^&^&#@klmn\xA0")
 println("Url编码为：", ret)
-res, err := codec.DecodeToHex(ret)
+res, err := codec.DecodeHex(ret)
 die(err)
 println("解码后为: ")
 dump([]byte(res))
