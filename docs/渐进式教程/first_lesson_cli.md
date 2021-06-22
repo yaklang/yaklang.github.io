@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # 第一课：Hello World 与你的第一个服务扫描程序
