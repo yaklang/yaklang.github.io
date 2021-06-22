@@ -26,16 +26,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractEmail(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -45,23 +49,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractHostPort
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractHostPort(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -71,23 +80,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractIP
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractIP(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -97,23 +111,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractIPv4
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractIPv4(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -123,23 +142,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractIPv6
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractIPv6(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -149,23 +173,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractMac
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractMac(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -175,23 +204,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractPath
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractPath(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -201,23 +235,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractTTY
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractTTY(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -227,23 +266,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### grok.ExtractURL
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func grok.ExtractURL(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -253,9 +297,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
-
+ 
 
 

@@ -21,17 +21,21 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2 ...func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) ) return(*mutate.FuzzHTTPRequest, error) `
+`func fuzz.HTTPRequest(v1: interface {}, v2 ...[]mutate.BuildFuzzHTTPRequestOption) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | []mutate.BuildFuzzHTTPRequestOption |   |
+| v1 | `interface {}` |   |
+| v2 | `[]mutate.BuildFuzzHTTPRequestOption /*可变参数*/` |   |
 
 
 
@@ -41,24 +45,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *mutate.FuzzHTTPRequest |   |
-| r1 | error |   |
+| r0 | `*mutate.FuzzHTTPRequest` |   |
+| r1 | `error` |   |
 
 
+ 
 ### fuzz.Strings
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func fuzz.Strings(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -68,23 +77,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### fuzz.UrlsToHTTPRequests
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...interface {}) return(*mutate.FuzzHTTPRequestBatch, error) `
+`func fuzz.UrlsToHTTPRequests(v1 ...[]interface {}) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []interface {} |   |
+| v1 | `[]interface {} /*可变参数*/` |   |
 
 
 
@@ -94,24 +108,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *mutate.FuzzHTTPRequestBatch |   |
-| r1 | error |   |
+| r0 | `*mutate.FuzzHTTPRequestBatch` |   |
+| r1 | `error` |   |
 
 
+ 
 ### fuzz.https
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: bool) return(func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) ) `
+`func fuzz.https(v1: bool) return (r0: func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | bool |   |
+| v1 | `bool` |   |
 
 
 
@@ -121,9 +140,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig)  |   |
+| r0 | `func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) ` |   |
 
 
-
+ 
 
 

@@ -39,17 +39,21 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Writer, v2: io.Reader) return(int64, error) `
+`func io.Copy(v1: io.Writer, v2: io.Reader) return (r0: int64, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Writer |   |
-| v2 | io.Reader |   |
+| v1 | `io.Writer` |   |
+| v2 | `io.Reader` |   |
 
 
 
@@ -59,26 +63,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int64 |   |
-| r1 | error |   |
+| r0 | `int64` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.CopyBuffer
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Writer, v2: io.Reader, v3: []uint8) return(int64, error) `
+`func io.CopyBuffer(v1: io.Writer, v2: io.Reader, v3: bytes) return (r0: int64, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Writer |   |
-| v2 | io.Reader |   |
-| v3 | []uint8 |   |
+| v1 | `io.Writer` |   |
+| v2 | `io.Reader` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -88,26 +97,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int64 |   |
-| r1 | error |   |
+| r0 | `int64` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.CopyN
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Writer, v2: io.Reader, v3: int64) return(int64, error) `
+`func io.CopyN(v1: io.Writer, v2: io.Reader, v3: int64) return (r0: int64, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Writer |   |
-| v2 | io.Reader |   |
-| v3 | int64 |   |
+| v1 | `io.Writer` |   |
+| v2 | `io.Reader` |   |
+| v3 | `int64` |   |
 
 
 
@@ -117,25 +131,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int64 |   |
-| r1 | error |   |
+| r0 | `int64` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.LimitReader
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader, v2: int64) return(io.Reader) `
+`func io.LimitReader(v1: io.Reader, v2: int64) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
-| v2 | int64 |   |
+| v1 | `io.Reader` |   |
+| v2 | `int64` |   |
 
 
 
@@ -145,23 +164,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | io.Reader |   |
+| r0 | `io.Reader` |   |
 
 
+ 
 ### io.MultiReader
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...io.Reader) return(io.Reader) `
+`func io.MultiReader(v1 ...[]io.Reader) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []io.Reader |   |
+| v1 | `[]io.Reader /*可变参数*/` |   |
 
 
 
@@ -171,25 +195,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | io.Reader |   |
+| r0 | `io.Reader` |   |
 
 
+ 
 ### io.NewSectionReader
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.ReaderAt, v2: int64, v3: int64) return(*io.SectionReader) `
+`func io.NewSectionReader(v1: io.ReaderAt, v2: int64, v3: int64) return (r0: *io.SectionReader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.ReaderAt |   |
-| v2 | int64 |   |
-| v3 | int64 |   |
+| v1 | `io.ReaderAt` |   |
+| v2 | `int64` |   |
+| v3 | `int64` |   |
 
 
 
@@ -199,23 +228,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *io.SectionReader |   |
+| r0 | `*io.SectionReader` |   |
 
 
+ 
 ### io.NopCloser
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader) return(io.ReadCloser) `
+`func io.NopCloser(v1: io.Reader) return (r0: io.ReadCloser)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
+| v1 | `io.Reader` |   |
 
 
 
@@ -225,16 +259,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | io.ReadCloser |   |
+| r0 | `io.ReadCloser` |   |
 
 
+ 
 ### io.Pipe
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*io.PipeReader, *io.PipeWriter) `
+`func io.Pipe() return (r0: *io.PipeReader, r1: *io.PipeWriter)`
 
  
 
@@ -243,24 +282,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *io.PipeReader |   |
-| r1 | *io.PipeWriter |   |
+| r0 | `*io.PipeReader` |   |
+| r1 | `*io.PipeWriter` |   |
 
 
+ 
 ### io.ReadAll
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader) return([]uint8, error) `
+`func io.ReadAll(v1: io.Reader) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
+| v1 | `io.Reader` |   |
 
 
 
@@ -270,26 +314,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.ReadAtLeast
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader, v2: []uint8, v3: int) return(int, error) `
+`func io.ReadAtLeast(v1: io.Reader, v2: bytes, v3: int) return (r0: int, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
-| v2 | []uint8 |   |
-| v3 | int |   |
+| v1 | `io.Reader` |   |
+| v2 | `bytes` |   |
+| v3 | `int` |   |
 
 
 
@@ -299,46 +348,56 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int |   |
-| r1 | error |   |
+| r0 | `int` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.ReadEvery1s
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: context.Context, v2: io.Reader, v3: func (v1: []uint8) return(bool) ) `
+``func io.ReadEvery1s(v1: context.Context, v2: io.Reader, v3: func (v1: bytes) return(bool) )``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | io.Reader |   |
-| v3 | func (v1: []uint8) return(bool)  |   |
+| v1 | `context.Context` |   |
+| v2 | `io.Reader` |   |
+| v3 | `func (v1: bytes) return(bool) ` |   |
 
 
 
 
  
 
+ 
 ### io.ReadFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]uint8, error) `
+`func io.ReadFile(v1: string) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -348,25 +407,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.ReadFull
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader, v2: []uint8) return(int, error) `
+`func io.ReadFull(v1: io.Reader, v2: bytes) return (r0: int, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
-| v2 | []uint8 |   |
+| v1 | `io.Reader` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -376,25 +440,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int |   |
-| r1 | error |   |
+| r0 | `int` |   |
+| r1 | `error` |   |
 
 
+ 
 ### io.TeeReader
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader, v2: io.Writer) return(io.Reader) `
+`func io.TeeReader(v1: io.Reader, v2: io.Writer) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
-| v2 | io.Writer |   |
+| v1 | `io.Reader` |   |
+| v2 | `io.Writer` |   |
 
 
 
@@ -404,24 +473,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | io.Reader |   |
+| r0 | `io.Reader` |   |
 
 
+ 
 ### io.WriteString
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Writer, v2: string) return(int, error) `
+`func io.WriteString(v1: io.Writer, v2: string) return (r0: int, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Writer |   |
-| v2 | string |   |
+| v1 | `io.Writer` |   |
+| v2 | `string` |   |
 
 
 
@@ -431,10 +505,10 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int |   |
-| r1 | error |   |
+| r0 | `int` |   |
+| r1 | `error` |   |
 
 
-
+ 
 
 

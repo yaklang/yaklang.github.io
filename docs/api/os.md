@@ -46,21 +46,30 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () `
+``func os.Clearenv()``
 
  
 
  
 
+ 
 ### os.Environ
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return([]string) `
+`func os.Environ() return (r0: []string)`
 
  
 
@@ -69,16 +78,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### os.Executable
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(string, error) `
+`func os.Executable() return (r0: string, r1: error)`
 
  
 
@@ -87,44 +101,54 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
-| r1 | error |   |
+| r0 | `string` |   |
+| r1 | `error` |   |
 
 
+ 
 ### os.Exit
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) `
+``func os.Exit(v1: int)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
 
  
 
+ 
 ### os.ExpandEnv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(string) `
+`func os.ExpandEnv(v1: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -134,16 +158,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
+| r0 | `string` |   |
 
 
+ 
 ### os.GetRandomAvailableTCPPort
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(int) `
+`func os.GetRandomAvailableTCPPort() return (r0: int)`
 
  
 
@@ -152,16 +181,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int |   |
+| r0 | `int` |   |
 
 
+ 
 ### os.GetRandomAvailableUDPPort
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(int) `
+`func os.GetRandomAvailableUDPPort() return (r0: int)`
 
  
 
@@ -170,23 +204,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | int |   |
+| r0 | `int` |   |
 
 
+ 
 ### os.Getenv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(string) `
+`func os.Getenv(v1: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -196,24 +235,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
+| r0 | `string` |   |
 
 
+ 
 ### os.IsRemoteTCPPortOpen
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: int) return(bool) `
+`func os.IsRemoteTCPPortOpen(v1: string, v2: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | int |   |
+| v1 | `string` |   |
+| v2 | `int` |   |
 
 
 
@@ -223,23 +267,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### os.IsTCPPortAvailable
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(bool) `
+`func os.IsTCPPortAvailable(v1: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -249,23 +298,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### os.IsTCPPortOpen
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(bool) `
+`func os.IsTCPPortOpen(v1: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -275,23 +329,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### os.IsUDPPortAvailable
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(bool) `
+`func os.IsUDPPortAvailable(v1: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -301,23 +360,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### os.IsUDPPortOpen
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(bool) `
+`func os.IsUDPPortOpen(v1: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -327,23 +391,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### os.LookupEnv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(string, bool) `
+`func os.LookupEnv(v1: string) return (r0: string, r1: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -353,17 +422,22 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
-| r1 | bool |   |
+| r0 | `string` |   |
+| r1 | `bool` |   |
 
 
+ 
 ### os.Pipe
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func () return(*os.File, *os.File, error) `
+`func os.Pipe() return (r0: *os.File, r1: *os.File, r2: error)`
 
  
 
@@ -372,25 +446,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *os.File |   |
-| r1 | *os.File |   |
-| r2 | error |   |
+| r0 | `*os.File` |   |
+| r1 | `*os.File` |   |
+| r2 | `error` |   |
 
 
+ 
 ### os.Remove
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func os.Remove(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -400,23 +479,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### os.RemoveAll
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func os.RemoveAll(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -426,24 +510,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### os.Rename
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(error) `
+`func os.Rename(v1: string, v2: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -453,24 +542,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### os.Setenv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(error) `
+`func os.Setenv(v1: string, v2: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -480,23 +574,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### os.Unsetenv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func os.Unsetenv(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -506,9 +605,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
-
+ 
 
 

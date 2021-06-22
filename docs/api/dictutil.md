@@ -18,16 +18,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...interface {}) return(chan []string, error) `
+`func dictutil.Mix(v1 ...[]interface {}) return (r0: chan []string, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []interface {} |   |
+| v1 | `[]interface {} /*可变参数*/` |   |
 
 
 
@@ -37,10 +41,10 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan []string |   |
-| r1 | error |   |
+| r0 | `chan []string` |   |
+| r1 | `error` |   |
 
 
-
+ 
 
 

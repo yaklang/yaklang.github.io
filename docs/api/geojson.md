@@ -23,16 +23,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...*geojson.Feature) return(*geojson.FeatureCollection) `
+`func geojson.FeaturesToCollection(v1 ...[]*geojson.Feature) return (r0: *geojson.FeatureCollection)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []*geojson.Feature |   |
+| v1 | `[]*geojson.Feature /*可变参数*/` |   |
 
 
 
@@ -42,16 +46,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.FeatureCollection |   |
+| r0 | `*geojson.FeatureCollection` |   |
 
 
+ 
 ### geojson.NewFeatureCollection
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func () return(*geojson.FeatureCollection) `
+`func geojson.NewFeatureCollection() return (r0: *geojson.FeatureCollection)`
 
  
 
@@ -60,24 +69,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.FeatureCollection |   |
+| r0 | `*geojson.FeatureCollection` |   |
 
 
+ 
 ### geojson.WithName
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: *geojson.Feature, v2: string) return(*geojson.Feature) `
+`func geojson.WithName(v1: *geojson.Feature, v2: string) return (r0: *geojson.Feature)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | *geojson.Feature |   |
-| v2 | string |   |
+| v1 | `*geojson.Feature` |   |
+| v2 | `string` |   |
 
 
 
@@ -87,25 +101,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.Feature |   |
+| r0 | `*geojson.Feature` |   |
 
 
+ 
 ### geojson.WithNameValue
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: *geojson.Feature, v2: string, v3: float64) return(*geojson.Feature) `
+`func geojson.WithNameValue(v1: *geojson.Feature, v2: string, v3: float64) return (r0: *geojson.Feature)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | *geojson.Feature |   |
-| v2 | string |   |
-| v3 | float64 |   |
+| v1 | `*geojson.Feature` |   |
+| v2 | `string` |   |
+| v3 | `float64` |   |
 
 
 
@@ -115,25 +134,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.Feature |   |
+| r0 | `*geojson.Feature` |   |
 
 
+ 
 ### geojson.WithProperty
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: *geojson.Feature, v2: string, v3: float64) return(*geojson.Feature) `
+`func geojson.WithProperty(v1: *geojson.Feature, v2: string, v3: float64) return (r0: *geojson.Feature)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | *geojson.Feature |   |
-| v2 | string |   |
-| v3 | float64 |   |
+| v1 | `*geojson.Feature` |   |
+| v2 | `string` |   |
+| v3 | `float64` |   |
 
 
 
@@ -143,24 +167,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.Feature |   |
+| r0 | `*geojson.Feature` |   |
 
 
+ 
 ### geojson.WithValue
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: *geojson.Feature, v2: float64) return(*geojson.Feature) `
+`func geojson.WithValue(v1: *geojson.Feature, v2: float64) return (r0: *geojson.Feature)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | *geojson.Feature |   |
-| v2 | float64 |   |
+| v1 | `*geojson.Feature` |   |
+| v2 | `float64` |   |
 
 
 
@@ -170,9 +199,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *geojson.Feature |   |
+| r0 | `*geojson.Feature` |   |
 
 
-
+ 
 
 

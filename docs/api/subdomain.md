@@ -29,17 +29,21 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2 ...func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) return(chan *subdomain.SubdomainResult, error) `
+`func subdomain.Scan(v1: interface {}, v2 ...[]subdomain.ConfigOption) return (r0: chan *subdomain.SubdomainResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | []subdomain.ConfigOption |   |
+| v1 | `interface {}` |   |
+| v2 | `[]subdomain.ConfigOption /*可变参数*/` |   |
 
 
 
@@ -49,24 +53,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *subdomain.SubdomainResult |   |
-| r1 | error |   |
+| r0 | `chan *subdomain.SubdomainResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### subdomain.dnsServer
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []string) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.dnsServer(v1: []string) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []string |   |
+| v1 | `[]string` |   |
 
 
 
@@ -76,23 +85,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.eachQueryTimeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.eachQueryTimeout(v1: float64) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -102,23 +116,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.eachSearchTimeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.eachSearchTimeout(v1: float64) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -128,23 +147,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.mainDict
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.mainDict(v1: interface {}) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -154,23 +178,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.maxDepth
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.maxDepth(v1: int) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -180,23 +209,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.recursive
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: bool) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.recursive(v1: bool) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | bool |   |
+| v1 | `bool` |   |
 
 
 
@@ -206,23 +240,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.recursiveDict
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.recursiveDict(v1: interface {}) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -232,23 +271,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.targetConcurrent
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.targetConcurrent(v1: int) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -258,23 +302,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.targetTimeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.targetTimeout(v1: float64) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -284,23 +333,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.wildcardToStop
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: bool) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.wildcardToStop(v1: bool) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | bool |   |
+| v1 | `bool` |   |
 
 
 
@@ -310,23 +364,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
+ 
 ### subdomain.workerConcurrent
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ) `
+`func subdomain.workerConcurrent(v1: int) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -336,9 +395,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *subdomain.SubdomainScannerConfig)  |   |
+| r0 | `func ConfigOption(v1: *subdomain.SubdomainScannerConfig) ` |   |
 
 
-
+ 
 
 

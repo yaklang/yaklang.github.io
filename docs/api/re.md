@@ -33,16 +33,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*regexp.Regexp, error) `
+`func re.Compile(v1: string) return (r0: *regexp.Regexp, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -52,24 +56,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *regexp.Regexp |   |
-| r1 | error |   |
+| r0 | `*regexp.Regexp` |   |
+| r1 | `error` |   |
 
 
+ 
 ### re.CompilePOSIX
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*regexp.Regexp, error) `
+`func re.CompilePOSIX(v1: string) return (r0: *regexp.Regexp, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -79,24 +88,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *regexp.Regexp |   |
-| r1 | error |   |
+| r0 | `*regexp.Regexp` |   |
+| r1 | `error` |   |
 
 
+ 
 ### re.ExtractEmail
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractEmail(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -106,23 +120,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractHostPort
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractHostPort(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -132,23 +151,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractIP
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractIP(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -158,23 +182,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractIPv4
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractIPv4(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -184,23 +213,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractIPv6
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractIPv6(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -210,23 +244,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractMac
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractMac(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -236,23 +275,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractPath
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractPath(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -262,23 +306,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractTTY
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractTTY(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -288,23 +337,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.ExtractURL
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return([]string) `
+`func re.ExtractURL(v1: interface {}) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -314,24 +368,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []string |   |
+| r0 | `[]string` |   |
 
 
+ 
 ### re.Grok
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(yaklib.GrokResult) `
+`func re.Grok(v1: string, v2: string) return (r0: yaklib.GrokResult)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -341,24 +400,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | yaklib.GrokResult |   |
+| r0 | `yaklib.GrokResult` |   |
 
 
+ 
 ### re.Match
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: interface {}) return(bool) `
+`func re.Match(v1: string, v2: interface {}) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | interface {} |   |
+| v1 | `string` |   |
+| v2 | `interface {}` |   |
 
 
 
@@ -368,23 +432,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### re.MustCompile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*regexp.Regexp) `
+`func re.MustCompile(v1: string) return (r0: *regexp.Regexp)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -394,23 +463,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *regexp.Regexp |   |
+| r0 | `*regexp.Regexp` |   |
 
 
+ 
 ### re.MustCompilePOSIX
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*regexp.Regexp) `
+`func re.MustCompilePOSIX(v1: string) return (r0: *regexp.Regexp)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -420,23 +494,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *regexp.Regexp |   |
+| r0 | `*regexp.Regexp` |   |
 
 
+ 
 ### re.QuoteMeta
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(string) `
+`func re.QuoteMeta(v1: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -446,9 +525,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
+| r0 | `string` |   |
 
 
-
+ 
 
 

@@ -26,9 +26,13 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Cond) `
+`func sync.NewCond() return (r0: *sync.Cond)`
 
  
 
@@ -37,16 +41,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Cond |   |
+| r0 | `*sync.Cond` |   |
 
 
+ 
 ### sync.NewLock
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Mutex) `
+`func sync.NewLock() return (r0: *sync.Mutex)`
 
  
 
@@ -55,16 +64,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Mutex |   |
+| r0 | `*sync.Mutex` |   |
 
 
+ 
 ### sync.NewMap
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Map) `
+`func sync.NewMap() return (r0: *sync.Map)`
 
  
 
@@ -73,16 +87,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Map |   |
+| r0 | `*sync.Map` |   |
 
 
+ 
 ### sync.NewMutex
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Mutex) `
+`func sync.NewMutex() return (r0: *sync.Mutex)`
 
  
 
@@ -91,16 +110,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Mutex |   |
+| r0 | `*sync.Mutex` |   |
 
 
+ 
 ### sync.NewOnce
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Once) `
+`func sync.NewOnce() return (r0: *sync.Once)`
 
  
 
@@ -109,16 +133,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Once |   |
+| r0 | `*sync.Once` |   |
 
 
+ 
 ### sync.NewPool
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.Pool) `
+`func sync.NewPool() return (r0: *sync.Pool)`
 
  
 
@@ -127,16 +156,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.Pool |   |
+| r0 | `*sync.Pool` |   |
 
 
+ 
 ### sync.NewRWMutex
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(*sync.RWMutex) `
+`func sync.NewRWMutex() return (r0: *sync.RWMutex)`
 
  
 
@@ -145,23 +179,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.RWMutex |   |
+| r0 | `*sync.RWMutex` |   |
 
 
+ 
 ### sync.NewSizedWaitGroup
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: int) return(*utils.SizedWaitGroup) `
+`func sync.NewSizedWaitGroup(v1: int) return (r0: *utils.SizedWaitGroup)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -171,16 +210,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *utils.SizedWaitGroup |   |
+| r0 | `*utils.SizedWaitGroup` |   |
 
 
+ 
 ### sync.NewWaitGroup
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func () return(*sync.WaitGroup) `
+`func sync.NewWaitGroup() return (r0: *sync.WaitGroup)`
 
  
 
@@ -189,9 +233,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *sync.WaitGroup |   |
+| r0 | `*sync.WaitGroup` |   |
 
 
-
+ 
 
 

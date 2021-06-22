@@ -28,16 +28,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*exec.Cmd, error) `
+`func exec.Command(v1: string) return (r0: *exec.Cmd, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -47,25 +51,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *exec.Cmd |   |
-| r1 | error |   |
+| r0 | `*exec.Cmd` |   |
+| r1 | `error` |   |
 
 
+ 
 ### exec.CommandContext
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context, v2: string) return(*exec.Cmd, error) `
+`func exec.CommandContext(v1: context.Context, v2: string) return (r0: *exec.Cmd, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | string |   |
+| v1 | `context.Context` |   |
+| v2 | `string` |   |
 
 
 
@@ -75,24 +84,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *exec.Cmd |   |
-| r1 | error |   |
+| r0 | `*exec.Cmd` |   |
+| r1 | `error` |   |
 
 
+ 
 ### exec.System
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]uint8, error) `
+`func exec.System(v1: string) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -102,46 +116,56 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### exec.SystemBatch
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: string, v2 ...func poolOpt(v1: *yaklib._execPoolConfig) ) `
+``func exec.SystemBatch(v1: string, v2 ...[]yaklib.poolOpt)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | []yaklib.poolOpt |   |
+| v1 | `string` |   |
+| v2 | `[]yaklib.poolOpt /*可变参数*/` |   |
 
 
 
 
  
 
+ 
 ### exec.SystemContext
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context, v2: string) return([]uint8, error) `
+`func exec.SystemContext(v1: context.Context, v2: string) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | string |   |
+| v1 | `context.Context` |   |
+| v2 | `string` |   |
 
 
 
@@ -151,26 +175,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### exec.WatchOutput
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: float64, v3: func (v1: []uint8) return(bool) ) return(error) `
+`func exec.WatchOutput(v1: string, v2: float64, v3: func (v1: bytes) return(bool) ) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | float64 |   |
-| v3 | func (v1: []uint8) return(bool)  |   |
+| v1 | `string` |   |
+| v2 | `float64` |   |
+| v3 | `func (v1: bytes) return(bool) ` |   |
 
 
 
@@ -180,25 +209,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### exec.WatchStderr
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: float64, v3: func (v1: []uint8) return(bool) ) return(error) `
+`func exec.WatchStderr(v1: string, v2: float64, v3: func (v1: bytes) return(bool) ) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | float64 |   |
-| v3 | func (v1: []uint8) return(bool)  |   |
+| v1 | `string` |   |
+| v2 | `float64` |   |
+| v3 | `func (v1: bytes) return(bool) ` |   |
 
 
 
@@ -208,25 +242,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### exec.WatchStdout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: float64, v3: func (v1: []uint8) return(bool) ) return(error) `
+`func exec.WatchStdout(v1: string, v2: float64, v3: func (v1: bytes) return(bool) ) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | float64 |   |
-| v3 | func (v1: []uint8) return(bool)  |   |
+| v1 | `string` |   |
+| v2 | `float64` |   |
+| v3 | `func (v1: bytes) return(bool) ` |   |
 
 
 
@@ -236,23 +275,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### exec.callback
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: func (v1: string, v2: []uint8) ) return(func poolOpt(v1: *yaklib._execPoolConfig) ) `
+`func exec.callback(v1: func (v1: string, v2: bytes) ) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | func (v1: string, v2: []uint8)  |   |
+| v1 | `func (v1: string, v2: bytes) ` |   |
 
 
 
@@ -262,23 +306,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func poolOpt(v1: *yaklib._execPoolConfig)  |   |
+| r0 | `func poolOpt(v1: *yaklib._execPoolConfig) ` |   |
 
 
+ 
 ### exec.concurrent
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func poolOpt(v1: *yaklib._execPoolConfig) ) `
+`func exec.concurrent(v1: int) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -288,23 +337,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func poolOpt(v1: *yaklib._execPoolConfig)  |   |
+| r0 | `func poolOpt(v1: *yaklib._execPoolConfig) ` |   |
 
 
+ 
 ### exec.timeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func poolOpt(v1: *yaklib._execPoolConfig) ) `
+`func exec.timeout(v1: float64) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -314,9 +368,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func poolOpt(v1: *yaklib._execPoolConfig)  |   |
+| r0 | `func poolOpt(v1: *yaklib._execPoolConfig) ` |   |
 
 
-
+ 
 
 

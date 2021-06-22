@@ -32,18 +32,22 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3 ...func ConfigOption(v1: *fp.Config) ) return(chan *fp.MatchResult, error) `
+`func servicescan.Scan(v1: string, v2: string, v3 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | []fp.ConfigOption |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `[]fp.ConfigOption /*可变参数*/` |   |
 
 
 
@@ -53,25 +57,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *fp.MatchResult |   |
-| r1 | error |   |
+| r0 | `chan *fp.MatchResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### servicescan.ScanFromSpaceEngine
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2 ...func ConfigOption(v1: *fp.Config) ) return(chan *fp.MatchResult, error) `
+`func servicescan.ScanFromSpaceEngine(v1: interface {}, v2 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | []fp.ConfigOption |   |
+| v1 | `interface {}` |   |
+| v2 | `[]fp.ConfigOption /*可变参数*/` |   |
 
 
 
@@ -81,25 +90,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *fp.MatchResult |   |
-| r1 | error |   |
+| r0 | `chan *fp.MatchResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### servicescan.ScanFromSynResult
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2 ...func ConfigOption(v1: *fp.Config) ) return(chan *fp.MatchResult, error) `
+`func servicescan.ScanFromSynResult(v1: interface {}, v2 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | []fp.ConfigOption |   |
+| v1 | `interface {}` |   |
+| v2 | `[]fp.ConfigOption /*可变参数*/` |   |
 
 
 
@@ -109,26 +123,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *fp.MatchResult |   |
-| r1 | error |   |
+| r0 | `chan *fp.MatchResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### servicescan.ScanOne
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: int, v3 ...func ConfigOption(v1: *fp.Config) ) return(*fp.MatchResult, error) `
+`func servicescan.ScanOne(v1: string, v2: int, v3 ...[]fp.ConfigOption) return (r0: *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | int |   |
-| v3 | []fp.ConfigOption |   |
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `[]fp.ConfigOption /*可变参数*/` |   |
 
 
 
@@ -138,24 +157,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *fp.MatchResult |   |
-| r1 | error |   |
+| r0 | `*fp.MatchResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### servicescan.active
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: bool) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.active(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | bool |   |
+| v1 | `bool` |   |
 
 
 
@@ -165,16 +189,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.all
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.all() return (r0: func ConfigOption(v1: *fp.Config) )`
 
  
 
@@ -183,23 +212,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.concurrent
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.concurrent(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -209,23 +243,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.maxProbes
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.maxProbes(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -235,23 +274,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.maxProbesConcurrent
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.maxProbesConcurrent(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -261,23 +305,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.nmapRarityMax
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.nmapRarityMax(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -287,23 +336,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.nmapRule
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.nmapRule(v1: interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -313,23 +367,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.proto
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...interface {}) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.proto(v1 ...[]interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []interface {} |   |
+| v1 | `[]interface {} /*可变参数*/` |   |
 
 
 
@@ -339,16 +398,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.service
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.service() return (r0: func ConfigOption(v1: *fp.Config) )`
 
  
 
@@ -357,16 +421,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.web
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.web() return (r0: func ConfigOption(v1: *fp.Config) )`
 
  
 
@@ -375,23 +444,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
+ 
 ### servicescan.webRule
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: interface {}) return(func ConfigOption(v1: *fp.Config) ) `
+`func servicescan.webRule(v1: interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -401,9 +475,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func ConfigOption(v1: *fp.Config)  |   |
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
-
+ 
 
 

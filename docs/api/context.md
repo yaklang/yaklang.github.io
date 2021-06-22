@@ -33,9 +33,13 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(context.Context) `
+`func context.Background() return (r0: context.Context)`
 
  
 
@@ -44,16 +48,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
+ 
 ### context.New
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(context.Context) `
+`func context.New() return (r0: context.Context)`
 
  
 
@@ -62,23 +71,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
+ 
 ### context.Seconds
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(context.Context) `
+`func context.Seconds(v1: int) return (r0: context.Context)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -88,16 +102,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
+ 
 ### context.TODO
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func () return(context.Context) `
+`func context.TODO() return (r0: context.Context)`
 
  
 
@@ -106,23 +125,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
+ 
 ### context.TimeoutContextSecond
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(context.Context) `
+`func context.TimeoutContextSecond(v1: int) return (r0: context.Context)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -132,23 +156,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
+ 
 ### context.WithCancel
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context) return(context.Context, func CancelFunc() ) `
+`func context.WithCancel(v1: context.Context) return (r0: context.Context, r1: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
+| v1 | `context.Context` |   |
 
 
 
@@ -158,25 +187,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
-| r1 | func CancelFunc()  |   |
+| r0 | `context.Context` |   |
+| r1 | `func CancelFunc() ` |   |
 
 
+ 
 ### context.WithDeadline
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context, v2: time.Time) return(context.Context, func CancelFunc() ) `
+`func context.WithDeadline(v1: context.Context, v2: time.Time) return (r0: context.Context, r1: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | time.Time |   |
+| v1 | `context.Context` |   |
+| v2 | `time.Time` |   |
 
 
 
@@ -186,25 +220,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
-| r1 | func CancelFunc()  |   |
+| r0 | `context.Context` |   |
+| r1 | `func CancelFunc() ` |   |
 
 
+ 
 ### context.WithTimeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context, v2: time.Duration) return(context.Context, func CancelFunc() ) `
+`func context.WithTimeout(v1: context.Context, v2: time.Duration) return (r0: context.Context, r1: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | time.Duration |   |
+| v1 | `context.Context` |   |
+| v2 | `time.Duration` |   |
 
 
 
@@ -214,26 +253,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
-| r1 | func CancelFunc()  |   |
+| r0 | `context.Context` |   |
+| r1 | `func CancelFunc() ` |   |
 
 
+ 
 ### context.WithValue
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context, v2: interface {}, v3: interface {}) return(context.Context) `
+`func context.WithValue(v1: context.Context, v2: interface {}, v3: interface {}) return (r0: context.Context)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
-| v2 | interface {} |   |
-| v3 | interface {} |   |
+| v1 | `context.Context` |   |
+| v2 | `interface {}` |   |
+| v3 | `interface {}` |   |
 
 
 
@@ -243,9 +287,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | context.Context |   |
+| r0 | `context.Context` |   |
 
 
-
+ 
 
 

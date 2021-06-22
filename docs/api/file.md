@@ -58,16 +58,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(string) `
+`func file.Abs(v1: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -77,44 +81,54 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
+| r0 | `string` |   |
 
 
+ 
 ### file.Cat
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: string) `
+``func file.Cat(v1: string)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
 
  
 
+ 
 ### file.Cp
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(error) `
+`func file.Cp(v1: string, v2: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -124,23 +138,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Create
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*yaklib._yakFile, error) `
+`func file.Create(v1: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -150,24 +169,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *yaklib._yakFile |   |
-| r1 | error |   |
+| r0 | `*yaklib._yakFile` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.DeepLs
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]*utils.FileInfo) `
+`func file.DeepLs(v1: string) return (r0: []*utils.FileInfo)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -177,23 +201,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []*utils.FileInfo |   |
+| r0 | `[]*utils.FileInfo` |   |
 
 
+ 
 ### file.Dir
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]*utils.FileInfo) `
+`func file.Dir(v1: string) return (r0: []*utils.FileInfo)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -203,23 +232,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []*utils.FileInfo |   |
+| r0 | `[]*utils.FileInfo` |   |
 
 
+ 
 ### file.IsAbs
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(bool) `
+`func file.IsAbs(v1: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -229,23 +263,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### file.IsDir
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(bool) `
+`func file.IsDir(v1: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -255,23 +294,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### file.IsExisted
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(bool) `
+`func file.IsExisted(v1: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -281,23 +325,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### file.IsFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(bool) `
+`func file.IsFile(v1: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -307,23 +356,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### file.IsLink
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(bool) `
+`func file.IsLink(v1: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -333,23 +387,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### file.Join
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1 ...string) return(string) `
+`func file.Join(v1 ...[]string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []string |   |
+| v1 | `[]string /*可变参数*/` |   |
 
 
 
@@ -359,23 +418,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | string |   |
+| r0 | `string` |   |
 
 
+ 
 ### file.Ls
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]*utils.FileInfo) `
+`func file.Ls(v1: string) return (r0: []*utils.FileInfo)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -385,23 +449,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []*utils.FileInfo |   |
+| r0 | `[]*utils.FileInfo` |   |
 
 
+ 
 ### file.Lstat
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(fs.FileInfo, error) `
+`func file.Lstat(v1: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -411,24 +480,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | fs.FileInfo |   |
-| r1 | error |   |
+| r0 | `fs.FileInfo` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.Mkdir
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func file.Mkdir(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -438,23 +512,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.MkdirAll
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func file.MkdirAll(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -464,24 +543,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Mv
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(error) `
+`func file.Mv(v1: string, v2: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -491,23 +575,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Open
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*yaklib._yakFile, error) `
+`func file.Open(v1: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -517,26 +606,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *yaklib._yakFile |   |
-| r1 | error |   |
+| r0 | `*yaklib._yakFile` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.OpenFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: int, v3: fs.FileMode) return(*yaklib._yakFile, error) `
+`func file.OpenFile(v1: string, v2: int, v3: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | int |   |
-| v3 | fs.FileMode |   |
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `fs.FileMode` |   |
 
 
 
@@ -546,24 +640,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *yaklib._yakFile |   |
-| r1 | error |   |
+| r0 | `*yaklib._yakFile` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.ReadAll
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: io.Reader) return([]uint8, error) `
+`func file.ReadAll(v1: io.Reader) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | io.Reader |   |
+| v1 | `io.Reader` |   |
 
 
 
@@ -573,24 +672,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.ReadFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]uint8, error) `
+`func file.ReadFile(v1: string) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -600,24 +704,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | error |   |
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.Remove
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func file.Remove(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -627,24 +736,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Rename
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(error) `
+`func file.Rename(v1: string, v2: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -654,23 +768,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Rm
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(error) `
+`func file.Rm(v1: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -680,24 +799,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Save
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: interface {}) return(error) `
+`func file.Save(v1: string, v2: interface {}) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | interface {} |   |
+| v1 | `string` |   |
+| v2 | `interface {}` |   |
 
 
 
@@ -707,24 +831,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.SaveJson
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: interface {}) return(error) `
+`func file.SaveJson(v1: string, v2: interface {}) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | interface {} |   |
+| v1 | `string` |   |
+| v2 | `interface {}` |   |
 
 
 
@@ -734,23 +863,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### file.Stat
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(fs.FileInfo, error) `
+`func file.Stat(v1: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -760,24 +894,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | fs.FileInfo |   |
-| r1 | error |   |
+| r0 | `fs.FileInfo` |   |
+| r1 | `error` |   |
 
 
+ 
 ### file.TempFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(*yaklib._yakFile, error) `
+`func file.TempFile(v1: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -787,10 +926,10 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *yaklib._yakFile |   |
-| r1 | error |   |
+| r0 | `*yaklib._yakFile` |   |
+| r1 | `error` |   |
 
 
-
+ 
 
 

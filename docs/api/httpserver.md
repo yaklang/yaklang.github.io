@@ -21,18 +21,22 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: int, v3 ...func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ) return(error) `
+`func httpserver.Serve(v1: string, v2: int, v3 ...[]yaklib._httpServerConfigOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | int |   |
-| v3 | []yaklib._httpServerConfigOpt |   |
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `[]yaklib._httpServerConfigOpt /*可变参数*/` |   |
 
 
 
@@ -42,23 +46,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### httpserver.context
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context) return(func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ) `
+`func httpserver.context(v1: context.Context) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
+| v1 | `context.Context` |   |
 
 
 
@@ -68,23 +77,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func _httpServerConfigOpt(v1: *yaklib._httpServerConfig)  |   |
+| r0 | `func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ` |   |
 
 
+ 
 ### httpserver.handler
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: func (v1: http.ResponseWriter, v2: *http.Request) ) return(func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ) `
+`func httpserver.handler(v1: func (v1: http.ResponseWriter, v2: *http.Request) ) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | func (v1: http.ResponseWriter, v2: *http.Request)  |   |
+| v1 | `func (v1: http.ResponseWriter, v2: *http.Request) ` |   |
 
 
 
@@ -94,25 +108,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func _httpServerConfigOpt(v1: *yaklib._httpServerConfig)  |   |
+| r0 | `func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ` |   |
 
 
+ 
 ### httpserver.tlsCertAndKey
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2: interface {}, v3 ...interface {}) return(func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ) `
+`func httpserver.tlsCertAndKey(v1: interface {}, v2: interface {}, v3 ...[]interface {}) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | interface {} |   |
-| v3 | []interface {} |   |
+| v1 | `interface {}` |   |
+| v2 | `interface {}` |   |
+| v3 | `[]interface {} /*可变参数*/` |   |
 
 
 
@@ -122,9 +141,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func _httpServerConfigOpt(v1: *yaklib._httpServerConfig)  |   |
+| r0 | `func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ` |   |
 
 
-
+ 
 
 

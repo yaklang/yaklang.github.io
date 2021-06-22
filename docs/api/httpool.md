@@ -23,17 +23,21 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(chan *mutate._httpResult, error) `
+`func httpool.Pool(v1: interface {}, v2 ...[]mutate.httpPoolConfigOption) return (r0: chan *mutate._httpResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | []mutate.httpPoolConfigOption |   |
+| v1 | `interface {}` |   |
+| v2 | `[]mutate.httpPoolConfigOption /*可变参数*/` |   |
 
 
 
@@ -43,24 +47,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *mutate._httpResult |   |
-| r1 | error |   |
+| r0 | `chan *mutate._httpResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### httpool.host
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) `
+`func httpool.host(v1: string) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -70,23 +79,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func httpPoolConfigOption(v1: *mutate.httpPoolConfig)  |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
+ 
 ### httpool.https
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: bool) return(func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) `
+`func httpool.https(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | bool |   |
+| v1 | `bool` |   |
 
 
 
@@ -96,23 +110,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func httpPoolConfigOption(v1: *mutate.httpPoolConfig)  |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
+ 
 ### httpool.perRequestTimeout
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) `
+`func httpool.perRequestTimeout(v1: float64) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -122,23 +141,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func httpPoolConfigOption(v1: *mutate.httpPoolConfig)  |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
+ 
 ### httpool.port
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) `
+`func httpool.port(v1: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -148,23 +172,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func httpPoolConfigOption(v1: *mutate.httpPoolConfig)  |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
+ 
 ### httpool.size
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) `
+`func httpool.size(v1: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -174,9 +203,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func httpPoolConfigOption(v1: *mutate.httpPoolConfig)  |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
-
+ 
 
 

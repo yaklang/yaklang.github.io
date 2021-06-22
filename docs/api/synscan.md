@@ -21,18 +21,22 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3 ...func scanOpt(v1: *tools._yakPortScanConfig) ) return(chan *tools.SynScanResult, error) `
+`func synscan.Scan(v1: string, v2: string, v3 ...[]tools.scanOpt) return (r0: chan *tools.SynScanResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | []tools.scanOpt |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `[]tools.scanOpt /*可变参数*/` |   |
 
 
 
@@ -42,24 +46,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *tools.SynScanResult |   |
-| r1 | error |   |
+| r0 | `chan *tools.SynScanResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### synscan.outputFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(func scanOpt(v1: *tools._yakPortScanConfig) ) `
+`func synscan.outputFile(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -69,23 +78,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func scanOpt(v1: *tools._yakPortScanConfig)  |   |
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
 
 
+ 
 ### synscan.outputPrefix
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(func scanOpt(v1: *tools._yakPortScanConfig) ) `
+`func synscan.outputPrefix(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -95,23 +109,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func scanOpt(v1: *tools._yakPortScanConfig)  |   |
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
 
 
+ 
 ### synscan.wait
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(func scanOpt(v1: *tools._yakPortScanConfig) ) `
+`func synscan.wait(v1: float64) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -121,9 +140,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func scanOpt(v1: *tools._yakPortScanConfig)  |   |
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
 
 
-
+ 
 
 

@@ -22,19 +22,23 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3: string, v4 ...func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ) return(chan *spacengine.NetSpaceEngineResult, error) `
+`func spacengine.FofaQuery(v1: string, v2: string, v3: string, v4 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | string |   |
-| v4 | []yaklib._spaceEngineConfigOpt |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `string` |   |
+| v4 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
 
 
 
@@ -44,26 +48,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *spacengine.NetSpaceEngineResult |   |
-| r1 | error |   |
+| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### spacengine.QuakeQuery
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3 ...func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ) return(chan *spacengine.NetSpaceEngineResult, error) `
+`func spacengine.QuakeQuery(v1: string, v2: string, v3 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | []yaklib._spaceEngineConfigOpt |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
 
 
 
@@ -73,26 +82,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *spacengine.NetSpaceEngineResult |   |
-| r1 | error |   |
+| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### spacengine.ShodanQuery
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3 ...func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ) return(chan *spacengine.NetSpaceEngineResult, error) `
+`func spacengine.ShodanQuery(v1: string, v2: string, v3 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | []yaklib._spaceEngineConfigOpt |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
 
 
 
@@ -102,24 +116,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | chan *spacengine.NetSpaceEngineResult |   |
-| r1 | error |   |
+| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
+| r1 | `error` |   |
 
 
+ 
 ### spacengine.maxPage
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ) `
+`func spacengine.maxPage(v1: int) return (r0: func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -129,23 +148,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig)  |   |
+| r0 | `func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ` |   |
 
 
+ 
 ### spacengine.maxRecord
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int) return(func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ) `
+`func spacengine.maxRecord(v1: int) return (r0: func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
+| v1 | `int` |   |
 
 
 
@@ -155,9 +179,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig)  |   |
+| r0 | `func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ` |   |
 
 
-
+ 
 
 

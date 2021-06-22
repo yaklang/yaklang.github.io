@@ -32,16 +32,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(&lt;-chan time.Time) `
+`func time.After(v1: float64) return (r0: &lt;-chan time.Time)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -51,24 +55,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | &lt;-chan time.Time |   |
+| r0 | `&lt;-chan time.Time` |   |
 
 
+ 
 ### time.AfterFunc
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: time.Duration, v2: func () ) return(*time.Timer) `
+`func time.AfterFunc(v1: time.Duration, v2: func () ) return (r0: *time.Timer)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | time.Duration |   |
-| v2 | func ()  |   |
+| v1 | `time.Duration` |   |
+| v2 | `func () ` |   |
 
 
 
@@ -78,16 +87,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *time.Timer |   |
+| r0 | `*time.Timer` |   |
 
 
+ 
 ### time.GetCurrentDate
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(time.Time, error) `
+`func time.GetCurrentDate() return (r0: time.Time, r1: error)`
 
  
 
@@ -96,17 +110,22 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
-| r1 | error |   |
+| r0 | `time.Time` |   |
+| r1 | `error` |   |
 
 
+ 
 ### time.GetCurrentMonday
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(time.Time, error) `
+`func time.GetCurrentMonday() return (r0: time.Time, r1: error)`
 
  
 
@@ -115,24 +134,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
-| r1 | error |   |
+| r0 | `time.Time` |   |
+| r1 | `error` |   |
 
 
+ 
 ### time.NewTicker
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(*time.Ticker) `
+`func time.NewTicker(v1: float64) return (r0: *time.Ticker)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -142,23 +166,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *time.Ticker |   |
+| r0 | `*time.Ticker` |   |
 
 
+ 
 ### time.NewTimer
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) return(*time.Timer) `
+`func time.NewTimer(v1: float64) return (r0: *time.Timer)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
@@ -168,16 +197,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | *time.Timer |   |
+| r0 | `*time.Timer` |   |
 
 
+ 
 ### time.Now
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(time.Time) `
+`func time.Now() return (r0: time.Time)`
 
  
 
@@ -186,24 +220,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
+| r0 | `time.Time` |   |
 
 
+ 
 ### time.Parse
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string) return(time.Time, error) `
+`func time.Parse(v1: string, v2: string) return (r0: time.Time, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -213,24 +252,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
-| r1 | error |   |
+| r0 | `time.Time` |   |
+| r1 | `error` |   |
 
 
+ 
 ### time.ParseDuration
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(time.Duration, error) `
+`func time.ParseDuration(v1: string) return (r0: time.Duration, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -240,24 +284,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Duration |   |
-| r1 | error |   |
+| r0 | `time.Duration` |   |
+| r1 | `error` |   |
 
 
+ 
 ### time.Since
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: time.Time) return(time.Duration) `
+`func time.Since(v1: time.Time) return (r0: time.Duration)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | time.Time |   |
+| v1 | `time.Time` |   |
 
 
 
@@ -267,44 +316,54 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Duration |   |
+| r0 | `time.Duration` |   |
 
 
+ 
 ### time.Sleep
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: float64) `
+``func time.Sleep(v1: float64)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
 
  
 
+ 
 ### time.Unix
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int64, v2: int64) return(time.Time) `
+`func time.Unix(v1: int64, v2: int64) return (r0: time.Time)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int64 |   |
-| v2 | int64 |   |
+| v1 | `int64` |   |
+| v2 | `int64` |   |
 
 
 
@@ -314,23 +373,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
+| r0 | `time.Time` |   |
 
 
+ 
 ### time.Until
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: time.Time) return(time.Duration) `
+`func time.Until(v1: time.Time) return (r0: time.Duration)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | time.Time |   |
+| v1 | `time.Time` |   |
 
 
 
@@ -340,16 +404,21 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Duration |   |
+| r0 | `time.Duration` |   |
 
 
+ 
 ### time.now
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func () return(time.Time) `
+`func time.now() return (r0: time.Time)`
 
  
 
@@ -358,29 +427,34 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | time.Time |   |
+| r0 | `time.Time` |   |
 
 
+ 
 ### time.sleep
+
+
+
+#### 详细描述
 
 
 
 #### 定义：
 
-`func (v1: float64) `
+``func time.sleep(v1: float64)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | float64 |   |
+| v1 | `float64` |   |
 
 
 
 
  
 
-
+ 
 
 

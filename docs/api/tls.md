@@ -22,16 +22,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return([]uint8, []uint8, error) `
+`func tls.GenerateRootCA(v1: string) return (r0: bytes, r1: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -41,26 +45,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | []uint8 |   |
-| r2 | error |   |
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
 
 
+ 
 ### tls.SignClientCertAndKey
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []uint8, v2: []uint8) return([]uint8, []uint8, error) `
+`func tls.SignClientCertAndKey(v1: bytes, v2: bytes) return (r0: bytes, r1: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []uint8 |   |
-| v2 | []uint8 |   |
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -70,26 +79,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | []uint8 |   |
-| r2 | error |   |
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
 
 
+ 
 ### tls.SignServerCertAndKey
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []uint8, v2: []uint8) return([]uint8, []uint8, error) `
+`func tls.SignServerCertAndKey(v1: bytes, v2: bytes) return (r0: bytes, r1: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []uint8 |   |
-| v2 | []uint8 |   |
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -99,26 +113,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | []uint8 |   |
-| r2 | error |   |
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
 
 
+ 
 ### tls.SignX509ClientCertAndKey
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []uint8, v2: []uint8) return([]uint8, []uint8, error) `
+`func tls.SignX509ClientCertAndKey(v1: bytes, v2: bytes) return (r0: bytes, r1: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []uint8 |   |
-| v2 | []uint8 |   |
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -128,26 +147,31 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | []uint8 |   |
-| r2 | error |   |
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
 
 
+ 
 ### tls.SignX509ServerCertAndKey
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []uint8, v2: []uint8) return([]uint8, []uint8, error) `
+`func tls.SignX509ServerCertAndKey(v1: bytes, v2: bytes) return (r0: bytes, r1: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []uint8 |   |
-| v2 | []uint8 |   |
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -157,11 +181,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []uint8 |   |
-| r1 | []uint8 |   |
-| r2 | error |   |
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
 
 
-
+ 
 
 

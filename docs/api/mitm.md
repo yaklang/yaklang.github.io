@@ -23,18 +23,22 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}, v2: string, v3 ...func mitmConfigOpt(v1: *yaklib.mitmConfig) ) return(error) `
+`func mitm.Bridge(v1: interface {}, v2: string, v3 ...[]yaklib.mitmConfigOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
-| v2 | string |   |
-| v3 | []yaklib.mitmConfigOpt |   |
+| v1 | `interface {}` |   |
+| v2 | `string` |   |
+| v3 | `[]yaklib.mitmConfigOpt /*可变参数*/` |   |
 
 
 
@@ -44,24 +48,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### mitm.Start
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: int, v2 ...func mitmConfigOpt(v1: *yaklib.mitmConfig) ) return(error) `
+`func mitm.Start(v1: int, v2 ...[]yaklib.mitmConfigOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | int |   |
-| v2 | []yaklib.mitmConfigOpt |   |
+| v1 | `int` |   |
+| v2 | `[]yaklib.mitmConfigOpt /*可变参数*/` |   |
 
 
 
@@ -71,23 +80,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### mitm.callback
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: func (v1: bool, v2: *http.Request, v3: *http.Response) ) return(func mitmConfigOpt(v1: *yaklib.mitmConfig) ) `
+`func mitm.callback(v1: func (v1: bool, v2: *http.Request, v3: *http.Response) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | func (v1: bool, v2: *http.Request, v3: *http.Response)  |   |
+| v1 | `func (v1: bool, v2: *http.Request, v3: *http.Response) ` |   |
 
 
 
@@ -97,23 +111,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func mitmConfigOpt(v1: *yaklib.mitmConfig)  |   |
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
 
 
+ 
 ### mitm.context
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: context.Context) return(func mitmConfigOpt(v1: *yaklib.mitmConfig) ) `
+`func mitm.context(v1: context.Context) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | context.Context |   |
+| v1 | `context.Context` |   |
 
 
 
@@ -123,23 +142,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func mitmConfigOpt(v1: *yaklib.mitmConfig)  |   |
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
 
 
+ 
 ### mitm.host
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string) return(func mitmConfigOpt(v1: *yaklib.mitmConfig) ) `
+`func mitm.host(v1: string) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
+| v1 | `string` |   |
 
 
 
@@ -149,24 +173,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func mitmConfigOpt(v1: *yaklib.mitmConfig)  |   |
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
 
 
+ 
 ### mitm.rootCA
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: []uint8, v2: []uint8) return(func mitmConfigOpt(v1: *yaklib.mitmConfig) ) `
+`func mitm.rootCA(v1: bytes, v2: bytes) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | []uint8 |   |
-| v2 | []uint8 |   |
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -176,9 +205,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func mitmConfigOpt(v1: *yaklib.mitmConfig)  |   |
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
 
 
-
+ 
 
 

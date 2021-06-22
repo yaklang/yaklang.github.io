@@ -21,16 +21,20 @@
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return(error) `
+`func dyn.Eval(v1: interface {}) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -40,23 +44,28 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | error |   |
+| r0 | `error` |   |
 
 
+ 
 ### dyn.IsYakFunc
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: interface {}) return(bool) `
+`func dyn.IsYakFunc(v1: interface {}) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | interface {} |   |
+| v1 | `interface {}` |   |
 
 
 
@@ -66,25 +75,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | bool |   |
+| r0 | `bool` |   |
 
 
+ 
 ### dyn.LoadVarFromFile
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: string, v2: string, v3 ...func yakEvalConfigOpt(v1: *yak.yakEvalConfig) ) return([]*yak.yakVariable, error) `
+`func dyn.LoadVarFromFile(v1: string, v2: string, v3 ...[]yak.yakEvalConfigOpt) return (r0: []*yak.yakVariable, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | string |   |
-| v2 | string |   |
-| v3 | []yak.yakEvalConfigOpt |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `[]yak.yakEvalConfigOpt /*可变参数*/` |   |
 
 
 
@@ -94,24 +108,29 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | []*yak.yakVariable |   |
-| r1 | error |   |
+| r0 | `[]*yak.yakVariable` |   |
+| r1 | `error` |   |
 
 
+ 
 ### dyn.params
 
 
 
+#### 详细描述
+
+
+
 #### 定义：
 
-`func (v1: map[string]interface {}) return(func yakEvalConfigOpt(v1: *yak.yakEvalConfig) ) `
+`func dyn.params(v1: map[string]interface {}) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | map[string]interface {} |   |
+| v1 | `map[string]interface {}` |   |
 
 
 
@@ -121,9 +140,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | func yakEvalConfigOpt(v1: *yak.yakEvalConfig)  |   |
+| r0 | `func yakEvalConfigOpt(v1: *yak.yakEvalConfig) ` |   |
 
 
-
+ 
 
 
