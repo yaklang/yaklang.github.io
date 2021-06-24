@@ -3,7 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [dictutil.Mix](#dictutilmix) |  |
+ | [dictutil.Mix](#dictutilmix) | 混合多个 list，进行笛卡尔乘（直积）一般用于字典的混合 |
 
 
 
@@ -16,22 +16,57 @@
 
 ### dictutil.Mix
 
-
+混合多个 list，进行笛卡尔乘（直积）一般用于字典的混合
 
 #### 详细描述
 
+一般用于混合 []string
+
+如下案例:
+
+```go
+res, err := dictutil.Mix([`123`, `15`, `abc`], [`12`,`14`], [`-`, `=`,`.`])
+die(err)
+
+for r := range res {
+  println(r)
+}
+```
+
+返回的结果将会把上面三个集合进行笛卡尔乘积，结果如下：
+
+```go
+[123 12 -]
+[123 12 =]
+[123 12 .]
+[123 14 -]
+[123 14 =]
+[123 14 .]
+[15 12 -]
+[15 12 =]
+[15 12 .]
+[15 14 -]
+[15 14 =]
+[15 14 .]
+[abc 12 -]
+[abc 12 =]
+[abc 12 .]
+[abc 14 -]
+[abc 14 =]
+[abc 14 .]
+```
 
 
 #### 定义：
 
-`func dictutil.Mix(v1 ...[]interface {}) return (r0: chan []string, r1: error)`
+`func dictutil.Mix(lists ...[]interface {}) return (r0: chan []string, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]interface {} /*可变参数*/` |   |
+| lists | `[]interface {} /*可变参数*/` |  是一个可变参数，接收多个字符串构成的数组 |
 
 
 

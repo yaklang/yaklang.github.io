@@ -41,11 +41,21 @@
 
 #### 详细描述
 
+爬虫的核心函数，通过 Start 来启动，urls 参数可以是逗号分割的多个 url。
+
+```go
+res, err = crawler.Start(`https://test1.example.com,https://test12.example.com`)
+die(err)
+
+for result := range res {
+  /* do sth u like */
+}
+```
 
 
 #### 定义：
 
-`func crawler.Start(urls: string, v2 ...[]crawler.configOpt) return (r0: chan crawler.RequestIf, r1: error)`
+`func crawler.Start(urls: string, params ...[]crawler.configOpt) return (r0: chan crawler.RequestIf, r1: error)`
 
 
 #### 参数
@@ -53,7 +63,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urls | `string` |  想要爬取的网站，以 `,` 作为分割，进行会把每一个部分都尝试解析为 url |
-| v2 | `[]crawler.configOpt /*可变参数*/` |  爬虫的各种参数，例如通过 `crawler.basicAuth(&#34;basicUserName&#34;, &#34;secretPassword&#34;)` 来设置基础认证 |
+| params | `[]crawler.configOpt /*可变参数*/` |  爬虫的各种参数，例如通过 `crawler.basicAuth(&#34;basicUserName&#34;, &#34;secretPassword&#34;)` 来设置基础认证 |
 
 
 
@@ -74,19 +84,25 @@
 
 #### 详细描述
 
+使用案例非常简单，直接 `crawler.basicAuth(user, pass)` 返回的结果直接可以作为 Start 函数的可变参数
+
+```go
+res, err := crawler.Start(`https://example.com`, crawler.basicAuth(`username`, `secret-password`))
+die(err)
+```
 
 
 #### 定义：
 
-`func crawler.basicAuth(v1: string, v2: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.basicAuth(username: string, password: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  基础认证用户名 |
-| v2 | `string` |  基础认证密码 |
+| username | `string` |  基础认证用户名 |
+| password | `string` |  基础认证密码 |
 
 
 
@@ -106,18 +122,23 @@
 
 #### 详细描述
 
+使用案例，类似 `crawler.basicAuth`，可以设置获取 body 的字节量，一般用于防止 body 太大撑爆内存。
+
+```go
+res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 10))
+```
 
 
 #### 定义：
 
-`func crawler.bodySize(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.bodySize(size: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  设置 body 最大值 |
+| size | `int` |  设置 body 最大值 |
 
 
 
@@ -141,14 +162,14 @@
 
 #### 定义：
 
-`func crawler.concurrent(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.concurrent(maxConcurrent: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  并发量，可以理解为同时最多多少个 http 请求被发出去 |
+| maxConcurrent | `int` |  并发量，可以理解为同时最多多少个 http 请求被发出去 |
 
 
 
@@ -172,14 +193,14 @@
 
 #### 定义：
 
-`func crawler.connectTimeout(v1: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.connectTimeout(seconds: float64) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |  超时时间，以秒为单位 |
+| seconds | `float64` |  超时时间，以秒为单位 |
 
 
 
@@ -203,15 +224,15 @@
 
 #### 定义：
 
-`func crawler.cookie(v1: string, v2: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.cookie(key: string, value: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  Cookie 值的 key |
-| v2 | `string` |  Cookie 值的 value |
+| key | `string` |  Cookie 值的 key |
+| value | `string` |  Cookie 值的 value |
 
 
 
@@ -231,18 +252,21 @@
 
 #### 详细描述
 
+支持 glob 语法，比如
+1. `*.example.com` 可以匹配 `test1.example.com` 等
+1. `*example.com` 可以匹配 `1testexample.com`，也可以匹配 `test1.example.com`
 
 
 #### 定义：
 
-`func crawler.domainExclude(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.domainExclude(excludedDomain: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  想要排除的域名 |
+| excludedDomain | `string` |  想要排除的域名 |
 
 
 
@@ -266,14 +290,14 @@
 
 #### 定义：
 
-`func crawler.domainInclude(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.domainInclude(includedDomain: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  想要扫描的域名 |
+| includedDomain | `string` |  想要扫描的域名 |
 
 
 
@@ -293,18 +317,18 @@
 
 #### 详细描述
 
-
+禁止扫描父路径
 
 #### 定义：
 
-`func crawler.forbiddenFromParent(v1: bool) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.forbiddenFromParent(allow: bool) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |  true or false 是否扫描父路径 |
+| allow | `bool` |  true or false 是否扫描父路径 |
 
 
 
@@ -328,15 +352,15 @@
 
 #### 定义：
 
-`func crawler.header(v1: string, v2: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.header(key: string, value: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  设置 Header 的 Key |
-| v2 | `string` |  设置 Header 的值 |
+| key | `string` |  设置 Header 的 Key |
+| value | `string` |  设置 Header 的值 |
 
 
 
@@ -360,14 +384,14 @@
 
 #### 定义：
 
-`func crawler.maxDepth(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxDepth(depth: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  设置最大深度（int） |
+| depth | `int` |  设置最大深度（int） |
 
 
 
@@ -391,14 +415,14 @@
 
 #### 定义：
 
-`func crawler.maxRedirect(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRedirect(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| limit | `int` |   |
 
 
 
@@ -422,14 +446,14 @@
 
 #### 定义：
 
-`func crawler.maxRequest(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRequest(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  设置爬虫最多发出的请求数 |
+| limit | `int` |  设置爬虫最多发出的请求数 |
 
 
 
@@ -453,14 +477,14 @@
 
 #### 定义：
 
-`func crawler.maxRetry(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRetry(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  最大重试次数 |
+| limit | `int` |  最大重试次数 |
 
 
 
@@ -484,14 +508,14 @@
 
 #### 定义：
 
-`func crawler.maxUrls(v1: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxUrls(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |  最大获取 URL 的树木 |
+| limit | `int` |  最大获取 URL 的树木 |
 
 
 
@@ -515,14 +539,14 @@
 
 #### 定义：
 
-`func crawler.proxy(v1 ...[]string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.proxy(proxyUrl ...[]string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |  爬虫代理，例如 `http://196.168.1.1:8080` |
+| proxyUrl | `[]string /*可变参数*/` |  爬虫代理，例如 `http://196.168.1.1:8080` |
 
 
 
@@ -546,14 +570,14 @@
 
 #### 定义：
 
-`func crawler.responseTimeout(v1: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.responseTimeout(seconds: float64) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |  超时时间，float 为秒 |
+| seconds | `float64` |  超时时间，float 为秒 |
 
 
 
@@ -577,14 +601,14 @@
 
 #### 定义：
 
-`func crawler.timeout(v1: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.timeout(timeout: float64) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |  超时时间，float 为秒 |
+| timeout | `float64` |  超时时间，float 为秒 |
 
 
 
@@ -608,14 +632,14 @@
 
 #### 定义：
 
-`func crawler.ua(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.ua(userAgent: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  想要设置的 ua |
+| userAgent | `string` |  想要设置的 ua |
 
 
 
@@ -639,14 +663,14 @@
 
 #### 定义：
 
-`func crawler.urlRegexpExclude(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.urlRegexpExclude(urlRegexp: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  正则字符串 |
+| urlRegexp | `string` |  正则字符串 |
 
 
 
@@ -670,14 +694,14 @@
 
 #### 定义：
 
-`func crawler.urlRegexpInclude(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.urlRegexpInclude(urlRegexp: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  正则字符串 |
+| urlRegexp | `string` |  正则字符串 |
 
 
 
@@ -701,14 +725,14 @@
 
 #### 定义：
 
-`func crawler.userAgent(v1: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.userAgent(userAgent: string) return (r0: func configOpt(v1: *crawler.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  想要设置的 ua |
+| userAgent | `string` |  想要设置的 ua |
 
 
 
