@@ -22,9 +22,6 @@ function HomepageHeader() {
                         <TypeIt>
                             Yak 立志成为<del style={{color: "red"}}> 北半球最 </del>
                             优秀的 Web 安全研发脚本语言
-
-                            <br/>
-                            欢迎来到 Yak
                         </TypeIt>
                     </Link>
                     <br/>
