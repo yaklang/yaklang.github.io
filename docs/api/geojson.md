@@ -29,14 +29,14 @@
 
 #### 定义：
 
-`func geojson.FeaturesToCollection(v1 ...[]*geojson.Feature) return (r0: *geojson.FeatureCollection)`
+`func geojson.FeaturesToCollection(v1 ...*geojson.Feature) return (r0: *geojson.FeatureCollection)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]*geojson.Feature /*可变参数*/` |   |
+| v1 | `...*geojson.Feature` |   |
 
 
 

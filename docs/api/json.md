@@ -25,14 +25,14 @@
 
 #### 定义：
 
-`func json.Marshal(v1: interface {}) return (r0: bytes, r1: error)`
+`func json.Marshal(v1: any) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -57,14 +57,14 @@
 
 #### 定义：
 
-`func json.New(v1: interface {}) return (r0: *yaklib.yakJson, r1: error)`
+`func json.New(v1: any) return (r0: *yaklib.yakJson, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 

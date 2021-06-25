@@ -27,7 +27,7 @@
 
 #### 定义：
 
-`func synscan.Scan(v1: string, v2: string, v3 ...[]tools.scanOpt) return (r0: chan *tools.SynScanResult, r1: error)`
+`func synscan.Scan(v1: string, v2: string, v3 ...tools.scanOpt) return (r0: chan *tools.SynScanResult, r1: error)`
 
 
 #### 参数
@@ -36,7 +36,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]tools.scanOpt /*可变参数*/` |   |
+| v3 | `...tools.scanOpt` |   |
 
 
 

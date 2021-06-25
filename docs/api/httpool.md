@@ -29,15 +29,15 @@
 
 #### 定义：
 
-`func httpool.Pool(v1: interface {}, v2 ...[]mutate.httpPoolConfigOption) return (r0: chan *mutate._httpResult, r1: error)`
+`func httpool.Pool(v1: any, v2 ...mutate.httpPoolConfigOption) return (r0: chan *mutate._httpResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `[]mutate.httpPoolConfigOption /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `...mutate.httpPoolConfigOption` |   |
 
 
 

@@ -55,7 +55,7 @@ for result := range res {
 
 #### 定义：
 
-`func crawler.Start(urls: string, params ...[]crawler.configOpt) return (r0: chan crawler.RequestIf, r1: error)`
+`func crawler.Start(urls: string, params ...crawler.param) return (r0: chan crawler.RequestIf, r1: error)`
 
 
 #### 参数
@@ -63,7 +63,7 @@ for result := range res {
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urls | `string` |  想要爬取的网站，以 `,` 作为分割，进行会把每一个部分都尝试解析为 url |
-| params | `[]crawler.configOpt /*可变参数*/` |  爬虫的各种参数，例如通过 `crawler.basicAuth(&#34;basicUserName&#34;, &#34;secretPassword&#34;)` 来设置基础认证 |
+| params | `...crawler.param` |  爬虫的各种参数，例如通过 `crawler.basicAuth(&#34;basicUserName&#34;, &#34;secretPassword&#34;)` 来设置基础认证 |
 
 
 
@@ -94,7 +94,7 @@ die(err)
 
 #### 定义：
 
-`func crawler.basicAuth(username: string, password: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.basicAuth(username: string, password: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -112,7 +112,7 @@ die(err)
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |  作为 `crawler.Start` 后不定参数的选项 |
+| r0 | `crawler.param` |  作为 `crawler.Start` 后不定参数的选项 |
 
 
  
@@ -131,7 +131,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.bodySize(size: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.bodySize(size: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -148,7 +148,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -162,7 +162,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.concurrent(maxConcurrent: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.concurrent(maxConcurrent: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -179,7 +179,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -193,7 +193,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.connectTimeout(seconds: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.connectTimeout(seconds: float64) return (r0: crawler.param)`
 
 
 #### 参数
@@ -210,7 +210,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -224,7 +224,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.cookie(key: string, value: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.cookie(key: string, value: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -242,7 +242,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -259,7 +259,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.domainExclude(excludedDomain: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.domainExclude(excludedDomain: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -276,7 +276,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -290,7 +290,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.domainInclude(includedDomain: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.domainInclude(includedDomain: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -307,7 +307,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -321,7 +321,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.forbiddenFromParent(allow: bool) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.forbiddenFromParent(allow: bool) return (r0: crawler.param)`
 
 
 #### 参数
@@ -338,7 +338,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -352,7 +352,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.header(key: string, value: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.header(key: string, value: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -370,7 +370,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -384,7 +384,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxDepth(depth: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxDepth(depth: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -401,7 +401,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -415,7 +415,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRedirect(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRedirect(limit: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -432,7 +432,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -446,7 +446,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRequest(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRequest(limit: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -463,7 +463,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -477,7 +477,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRetry(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxRetry(limit: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -494,7 +494,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -508,7 +508,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxUrls(limit: int) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.maxUrls(limit: int) return (r0: crawler.param)`
 
 
 #### 参数
@@ -525,7 +525,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -539,14 +539,14 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.proxy(proxyUrl ...[]string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.proxy(proxyUrl ...string) return (r0: crawler.param)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxyUrl | `[]string /*可变参数*/` |  爬虫代理，例如 `http://196.168.1.1:8080` |
+| proxyUrl | `...string` |  爬虫代理，例如 `http://196.168.1.1:8080` |
 
 
 
@@ -556,7 +556,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -570,7 +570,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.responseTimeout(seconds: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.responseTimeout(seconds: float64) return (r0: crawler.param)`
 
 
 #### 参数
@@ -587,7 +587,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -601,7 +601,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.timeout(timeout: float64) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.timeout(timeout: float64) return (r0: crawler.param)`
 
 
 #### 参数
@@ -618,7 +618,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -632,7 +632,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.ua(userAgent: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.ua(userAgent: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -649,7 +649,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -663,7 +663,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.urlRegexpExclude(urlRegexp: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.urlRegexpExclude(urlRegexp: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -680,7 +680,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -694,7 +694,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.urlRegexpInclude(urlRegexp: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.urlRegexpInclude(urlRegexp: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -711,7 +711,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  
@@ -725,7 +725,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.userAgent(userAgent: string) return (r0: func configOpt(v1: *crawler.Config) )`
+`func crawler.userAgent(userAgent: string) return (r0: crawler.param)`
 
 
 #### 参数
@@ -742,7 +742,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func configOpt(v1: *crawler.Config) ` |   |
+| r0 | `crawler.param` |   |
 
 
  

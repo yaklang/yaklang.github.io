@@ -410,7 +410,7 @@
 
 #### 定义：
 
-`func str.HostPort(v1: string, v2: interface {}) return (r0: string)`
+`func str.HostPort(v1: string, v2: any) return (r0: string)`
 
 
 #### 参数
@@ -418,7 +418,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
+| v2 | `any` |   |
 
 
 
@@ -695,7 +695,7 @@
 
 #### 定义：
 
-`func str.JsonStreamToMapList(v1: io.Reader) return (r0: []map[string]interface {})`
+`func str.JsonStreamToMapList(v1: io.Reader) return (r0: []map[string]any)`
 
 
 #### 参数
@@ -712,7 +712,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]map[string]interface {}` |   |
+| r0 | `[]map[string]any` |   |
 
 
  
@@ -1128,14 +1128,14 @@
 
 #### 定义：
 
-`func str.ParseStringToUrls(v1 ...[]string) return (r0: []string)`
+`func str.ParseStringToUrls(v1 ...string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |   |
+| v1 | `...string` |   |
 
 
 
@@ -1159,14 +1159,14 @@
 
 #### 定义：
 
-`func str.ParseStringToUrlsWith3W(v1 ...[]string) return (r0: []string)`
+`func str.ParseStringToUrlsWith3W(v1 ...string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |   |
+| v1 | `...string` |   |
 
 
 
@@ -1190,14 +1190,14 @@
 
 #### 定义：
 
-`func str.PathJoin(v1 ...[]string) return (r0: string)`
+`func str.PathJoin(v1 ...string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |   |
+| v1 | `...string` |   |
 
 
 
@@ -1283,7 +1283,7 @@
 
 #### 定义：
 
-`func str.RegexpMatch(v1: string, v2: interface {}) return (r0: bool)`
+`func str.RegexpMatch(v1: string, v2: any) return (r0: bool)`
 
 
 #### 参数
@@ -1291,7 +1291,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
+| v2 | `any` |   |
 
 
 
@@ -1703,7 +1703,7 @@
 
 #### 定义：
 
-`func str.StringSliceContainsAll(v1: []string, v2 ...[]string) return (r0: bool)`
+`func str.StringSliceContainsAll(v1: []string, v2 ...string) return (r0: bool)`
 
 
 #### 参数
@@ -1711,7 +1711,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `[]string` |   |
-| v2 | `[]string /*可变参数*/` |   |
+| v2 | `...string` |   |
 
 
 
@@ -1766,14 +1766,14 @@
 
 #### 定义：
 
-`func str.ToJsonIndentStr(v1: interface {}) return (r0: string)`
+`func str.ToJsonIndentStr(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -2209,7 +2209,7 @@
 
 #### 定义：
 
-`func str.f(v1: string, v2 ...[]interface {}) return (r0: string)`
+`func str.f(v1: string, v2 ...any) return (r0: string)`
 
 
 #### 参数
@@ -2217,7 +2217,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `[]interface {} /*可变参数*/` |   |
+| v2 | `...any` |   |
 
 
 

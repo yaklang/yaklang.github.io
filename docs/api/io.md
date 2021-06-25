@@ -178,14 +178,14 @@
 
 #### 定义：
 
-`func io.MultiReader(v1 ...[]io.Reader) return (r0: io.Reader)`
+`func io.MultiReader(v1 ...io.Reader) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]io.Reader /*可变参数*/` |   |
+| v1 | `...io.Reader` |   |
 
 
 

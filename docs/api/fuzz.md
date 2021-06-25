@@ -27,15 +27,15 @@
 
 #### 定义：
 
-`func fuzz.HTTPRequest(v1: interface {}, v2 ...[]mutate.BuildFuzzHTTPRequestOption) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
+`func fuzz.HTTPRequest(v1: any, v2 ...mutate.BuildFuzzHTTPRequestOption) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `[]mutate.BuildFuzzHTTPRequestOption /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `...mutate.BuildFuzzHTTPRequestOption` |   |
 
 
 
@@ -60,14 +60,14 @@
 
 #### 定义：
 
-`func fuzz.Strings(v1: interface {}) return (r0: []string)`
+`func fuzz.Strings(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -91,14 +91,14 @@
 
 #### 定义：
 
-`func fuzz.UrlsToHTTPRequests(v1 ...[]interface {}) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
+`func fuzz.UrlsToHTTPRequests(v1 ...any) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]interface {} /*可变参数*/` |   |
+| v1 | `...any` |   |
 
 
 

@@ -32,7 +32,7 @@
 
 #### 定义：
 
-`func tcp.Connect(v1: string, v2: interface {}, v3 ...[]yaklib.dialerOpt) return (r0: *yaklib.tcpConnection, r1: error)`
+`func tcp.Connect(v1: string, v2: any, v3 ...yaklib.dialerOpt) return (r0: *yaklib.tcpConnection, r1: error)`
 
 
 #### 参数
@@ -40,8 +40,8 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
-| v3 | `[]yaklib.dialerOpt /*可变参数*/` |   |
+| v2 | `any` |   |
+| v3 | `...yaklib.dialerOpt` |   |
 
 
 
@@ -99,16 +99,16 @@
 
 #### 定义：
 
-`func tcp.Serve(v1: interface {}, v2: int, v3 ...[]yaklib.tcpServerConfigOpt) return (r0: error)`
+`func tcp.Serve(v1: any, v2: int, v3 ...yaklib.tcpServerConfigOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 | v2 | `int` |   |
-| v3 | `[]yaklib.tcpServerConfigOpt /*可变参数*/` |   |
+| v3 | `...yaklib.tcpServerConfigOpt` |   |
 
 
 
@@ -132,14 +132,14 @@
 
 #### 定义：
 
-`func tcp.clientLocal(v1: interface {}) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`func tcp.clientLocal(v1: any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -194,16 +194,16 @@
 
 #### 定义：
 
-`func tcp.clientTls(v1: interface {}, v2: interface {}, v3 ...[]interface {}) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`func tcp.clientTls(v1: any, v2: any, v3 ...any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `interface {}` |   |
-| v3 | `[]interface {} /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `any` |   |
+| v3 | `...any` |   |
 
 
 
@@ -289,16 +289,16 @@
 
 #### 定义：
 
-`func tcp.serverTls(v1: interface {}, v2: interface {}, v3 ...[]interface {}) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`func tcp.serverTls(v1: any, v2: any, v3 ...any) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `interface {}` |   |
-| v3 | `[]interface {} /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `any` |   |
+| v3 | `...any` |   |
 
 
 

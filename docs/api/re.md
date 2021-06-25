@@ -103,14 +103,14 @@
 
 #### 定义：
 
-`func re.ExtractEmail(v1: interface {}) return (r0: []string)`
+`func re.ExtractEmail(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -134,14 +134,14 @@
 
 #### 定义：
 
-`func re.ExtractHostPort(v1: interface {}) return (r0: []string)`
+`func re.ExtractHostPort(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -165,14 +165,14 @@
 
 #### 定义：
 
-`func re.ExtractIP(v1: interface {}) return (r0: []string)`
+`func re.ExtractIP(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -196,14 +196,14 @@
 
 #### 定义：
 
-`func re.ExtractIPv4(v1: interface {}) return (r0: []string)`
+`func re.ExtractIPv4(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -227,14 +227,14 @@
 
 #### 定义：
 
-`func re.ExtractIPv6(v1: interface {}) return (r0: []string)`
+`func re.ExtractIPv6(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -258,14 +258,14 @@
 
 #### 定义：
 
-`func re.ExtractMac(v1: interface {}) return (r0: []string)`
+`func re.ExtractMac(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -289,14 +289,14 @@
 
 #### 定义：
 
-`func re.ExtractPath(v1: interface {}) return (r0: []string)`
+`func re.ExtractPath(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -320,14 +320,14 @@
 
 #### 定义：
 
-`func re.ExtractTTY(v1: interface {}) return (r0: []string)`
+`func re.ExtractTTY(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -351,14 +351,14 @@
 
 #### 定义：
 
-`func re.ExtractURL(v1: interface {}) return (r0: []string)`
+`func re.ExtractURL(v1: any) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -414,7 +414,7 @@
 
 #### 定义：
 
-`func re.Match(v1: string, v2: interface {}) return (r0: bool)`
+`func re.Match(v1: string, v2: any) return (r0: bool)`
 
 
 #### 参数
@@ -422,7 +422,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
+| v2 | `any` |   |
 
 
 

@@ -8,7 +8,7 @@
  | [dyn.IsYakFunc](#dynisyakfunc) | 判断一个对象是不是可供 yak 调用的函数，类似 python 的 `callable` |
  | [dyn.LoadVarFromFile](#dynloadvarfromfile) | 从一个文件/文件夹/模块中，批量导入一个对象，通常用于 exp/poc 编写的时候，需要批量导入一些模块的函数 |
  | [dyn.params](#dynparams) | 给导入的脚本额外增加一些变量 |
- | [dyn.recursive](#dynrecursive) |  |
+ | [dyn.recursive](#dynrecursive) | 用于 `dyn.LoadVarFromFile` 函数的额外参数，递归加载文件夹内容，会解析文件夹以及自文件下面所有的内容。 |
 
 
 
@@ -36,14 +36,14 @@ die(dyn.Eval(`println(123); 1&#43;1`))
 
 #### 定义：
 
-`func dyn.Eval(code: interface {}) return (err: error)`
+`func dyn.Eval(code: any) return (err: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| code | `interface {}` |   |
+| code | `any` |   |
 
 
 
@@ -124,14 +124,14 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.IsYakFunc(obj: interface {}) return (result: bool)`
+`func dyn.IsYakFunc(obj: any) return (result: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| obj | `interface {}` |  想要判断的 yak 对象 |
+| obj | `any` |  想要判断的 yak 对象 |
 
 
 
@@ -155,7 +155,7 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.LoadVarFromFile(fromModules: string, varName: string, params ...[]yak.yakEvalConfigOpt) return (r0: []*yak.yakVariable, r1: error)`
+`func dyn.LoadVarFromFile(fromModules: string, varName: string, params ...yak.yakEvalConfigOpt) return (r0: []*yak.yakVariable, r1: error)`
 
 
 #### 参数
@@ -164,7 +164,7 @@ abc from function is called by b.yak
 |:-----------|:---------- |:-----------|
 | fromModules | `string` |  可以是文件夹，可以是文件，如果是文件夹，将会把这个文件夹下所有的模块进行导入，如果是文件，将会只导入一个具体的文件 |
 | varName | `string` |  想要导入的变量的名称 |
-| params | `[]yak.yakEvalConfigOpt /*可变参数*/` |  可变参数：导入的特性，常见的有 params, recursive 两个 |
+| params | `...yak.yakEvalConfigOpt` |  可变参数：导入的特性，常见的有 params, recursive 两个 |
 
 
 
@@ -189,14 +189,14 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.params(v1: map[string]interface {}) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
+`func dyn.params(v1: map[string]any) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]interface {}` |   |
+| v1 | `map[string]any` |   |
 
 
 
@@ -212,22 +212,25 @@ abc from function is called by b.yak
  
 ### dyn.recursive
 
-
+用于 `dyn.LoadVarFromFile` 函数的额外参数，递归加载文件夹内容，会解析文件夹以及自文件下面所有的内容。
 
 #### 详细描述
 
+```go
+dyn.LoadVarFromFile(`dir`, varName, dyn.recursive(true))
+```
 
 
 #### 定义：
 
-`func dyn.recursive(v1: map[string]interface {}) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
+`func dyn.recursive(v1: map[string]any) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]interface {}` |   |
+| v1 | `map[string]any` |   |
 
 
 

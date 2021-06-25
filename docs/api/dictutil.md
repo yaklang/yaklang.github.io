@@ -59,14 +59,14 @@ for r := range res {
 
 #### 定义：
 
-`func dictutil.Mix(lists ...[]interface {}) return (r0: chan []string, r1: error)`
+`func dictutil.Mix(lists ...[]string) return (r0: chan []string, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| lists | `[]interface {} /*可变参数*/` |  是一个可变参数，接收多个字符串构成的数组 |
+| lists | `...[]string` |  是一个可变参数，接收多个字符串构成的数组 |
 
 
 

@@ -3,7 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [cli.Args](#cliargs) | 获取全部的命令行参数，返回结果等同于 `os.Args` |
+ | [cli.Args](#cliargs) | 获取全部的命令行参数，返回结果等同于 `os.Args`&#34; |
  | [cli.Bool](#clibool) | 判断命令行参数是否存在 v1 参数对应的选项？如果 v1 是 `option`，则会检测 `--option` 或者 `-option` 是否存在。要注意，不同于 `cli.String` 等接口，`cli.Bool` 不会判断参数的值，只会检测参数标记是不是存在。 |
  | [cli.Double](#clidouble) | 把函数解析成 `float64` 等价于 `cli.Float64` |
  | [cli.File](#clifile) | 把输入的参数当成文件名来解析 |
@@ -17,11 +17,13 @@
  | [cli.LineDict](#clilinedict) | 把一个字典按行解析 |
  | [cli.Net](#clinet) | 同 `cli.Host` |
  | [cli.Network](#clinetwork) | 同 `cli.Host` |
- | [cli.Port](#cliport) | 把 v1 对应的命令行参数值解析成端口组，或者整数范围 |
+ | [cli.Port](#cliport) | 把 ports 对应的命令行参数值解析成端口组，或者整数范围 |
  | [cli.Ports](#cliports) | 同 `cli.Port` |
  | [cli.String](#clistring) | 最基础的命令行获取接口，把参数的值解析成字符串 |
  | [cli.Url](#cliurl) | 把参数对应的值解析成 url，如果无法精确对应一个 url，将会自动补充 `https://`, `http://`, `www` 等，如果本身参数就是个 url，则会保留原样 |
- | [cli.Urls](#cliurls) | 同 `cli.Url` |
+ | [cli.Urls](#cliurls) |  |
+ | [cli.setDefault](#clisetdefault) | 为命令行设置默认值，默认值会被强行类型断言为目标类型，不要传错类型就可以！ |
+ | [cli.setHelp](#clisethelp) | 使用方法同 `cli.setDefault` 使用，如果某个参数的值为空的话，并且没有默认值，将会展示缺少的参数。 |
 
 
 
@@ -34,7 +36,7 @@
 
 ### cli.Args
 
-获取全部的命令行参数，返回结果等同于 `os.Args`
+获取全部的命令行参数，返回结果等同于 `os.Args`&#34;
 
 #### 详细描述
 
@@ -42,7 +44,7 @@
 
 #### 定义：
 
-`func cli.Args() return (r0: []string)`
+`func cli.Args() return (args: []string)`
 
  
 
@@ -51,7 +53,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  获取全部命令行参数 |
+| args | `[]string` |  全部命令行参数 |
 
 
  
@@ -65,14 +67,15 @@
 
 #### 定义：
 
-`func cli.Bool(v1: string) return (r0: bool)`
+`func cli.Bool(paramName: string, extraParams ...cli.setHelp|cli.setDefault) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名：会在会自动检测输入值的参数名，自动带上 `-` 或者 `--` 前缀来检测 |
+| paramName | `string` |  参数名：会在会自动检测输入值的参数名，自动带上 `-` 或者 `--` 前缀来检测 |
+| extraParams | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -96,14 +99,15 @@
 
 #### 定义：
 
-`func cli.Double(v1: string) return (r0: float64)`
+`func cli.Double(param: string, extraParams ...cli.setHelp|cli.setDefault) return (r0: float64)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名，自动带上 `--` 或者 `-` 来检测 |
+| param | `string` |  参数名，自动带上 `--` 或者 `-` 来检测 |
+| extraParams | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -127,7 +131,7 @@
 
 #### 定义：
 
-`func cli.File(v1: string) return (r0: bytes)`
+`func cli.File(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: bytes)`
 
 
 #### 参数
@@ -135,6 +139,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  文件名 |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -158,14 +163,15 @@
 
 #### 定义：
 
-`func cli.FileOrContent(v1: string) return (r0: bytes)`
+`func cli.FileOrContent(param: string, v2 ...cli.setHelp|cli.setDefault) return (resultRaw: bytes)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  文件名或文件内容 |
+| param | `string` |  文件名或文件内容 |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -175,7 +181,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |  文件内容 |
+| resultRaw | `bytes` |   |
 
 
  
@@ -189,14 +195,15 @@
 
 #### 定义：
 
-`func cli.Float(v1: string) return (r0: float64)`
+`func cli.Float(param: string, v2 ...cli.setHelp|cli.setDefault) return (r0: float64)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| param | `string` |  参数名 |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -220,14 +227,15 @@
 
 #### 定义：
 
-`func cli.Have(v1: string) return (r0: bool)`
+`func cli.Have(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| v1 | `string` |   |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -237,7 +245,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |  参数存在的状态 |
+| r0 | `bool` |   |
 
 
  
@@ -251,14 +259,15 @@
 
 #### 定义：
 
-`func cli.Host(v1: string) return (r0: []string)`
+`func cli.Host(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| v1 | `string` |   |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -282,7 +291,7 @@
 
 #### 定义：
 
-`func cli.Hosts(v1: string) return (r0: []string)`
+`func cli.Hosts(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
@@ -290,6 +299,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  同 `cli.Host` |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -313,7 +323,7 @@
 
 #### 定义：
 
-`func cli.Int(v1: string) return (r0: int)`
+`func cli.Int(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: int)`
 
 
 #### 参数
@@ -321,6 +331,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  参数名称 |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -344,7 +355,7 @@
 
 #### 定义：
 
-`func cli.Integer(v1: string) return (r0: int)`
+`func cli.Integer(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: int)`
 
 
 #### 参数
@@ -352,6 +363,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  同 `cli.Int` |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -375,7 +387,7 @@
 
 #### 定义：
 
-`func cli.LineDict(v1: string) return (r0: []string)`
+`func cli.LineDict(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
@@ -383,6 +395,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  参数名，字典的文件名 |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -406,7 +419,7 @@
 
 #### 定义：
 
-`func cli.Net(v1: string) return (r0: []string)`
+`func cli.Net(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
@@ -414,6 +427,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  同 `cli.Host` |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -437,7 +451,7 @@
 
 #### 定义：
 
-`func cli.Network(v1: string) return (r0: []string)`
+`func cli.Network(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
@@ -445,6 +459,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  同 `cli.Host` |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -460,7 +475,7 @@
  
 ### cli.Port
 
-把 v1 对应的命令行参数值解析成端口组，或者整数范围
+把 ports 对应的命令行参数值解析成端口组，或者整数范围
 
 #### 详细描述
 
@@ -468,14 +483,15 @@
 
 #### 定义：
 
-`func cli.Port(v1: string) return (r0: []int)`
+`func cli.Port(ports: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| ports | `string` |   |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -499,7 +515,7 @@
 
 #### 定义：
 
-`func cli.Ports(v1: string) return (r0: []int)`
+`func cli.Ports(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []int)`
 
 
 #### 参数
@@ -507,6 +523,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |  同 `cli.Port` |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -530,14 +547,15 @@
 
 #### 定义：
 
-`func cli.String(v1: string) return (r0: string)`
+`func cli.String(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| v1 | `string` |   |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -561,14 +579,15 @@
 
 #### 定义：
 
-`func cli.Url(v1: string) return (r0: []string)`
+`func cli.Url(param: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名 |
+| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力全的补充 url |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -578,13 +597,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  自动补全的 URL |
+| r0 | `[]string` |   |
 
 
  
 ### cli.Urls
 
-同 `cli.Url`
+
 
 #### 详细描述
 
@@ -592,14 +611,15 @@
 
 #### 定义：
 
-`func cli.Urls(v1: string) return (r0: []string)`
+`func cli.Urls(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Url` |
+| v1 | `string` |   |
+| v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
 
@@ -609,7 +629,80 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  同 `cli.Url` |
+| r0 | `[]string` |   |
+
+
+ 
+### cli.setDefault
+
+为命令行设置默认值，默认值会被强行类型断言为目标类型，不要传错类型就可以！
+
+#### 详细描述
+
+使用案例如下：
+
+```go
+cli.String(&#34;url&#34;, cli.setDefault(&#34;https://example.com&#34;))
+```
+
+执行上述代码的时候，如果没有 `--url` 或者 `-url` 参数的话，将会使用默认的 `https://example.com` 作为函数的返回值。
+
+:::caution
+注意，如果传入的默认值类型和应该返回的类型不匹配，将会报错！错误提示约为类型断言错误，通过 `defaultValue.(type)` 来实现的。
+:::
+
+
+#### 定义：
+
+`func cli.setDefault(default: any) return (r0: cli.setDefault)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| default | `any` |  命令行默认值 |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `cli.setDefault` |   |
+
+
+ 
+### cli.setHelp
+
+使用方法同 `cli.setDefault` 使用，如果某个参数的值为空的话，并且没有默认值，将会展示缺少的参数。
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func cli.setHelp(helpText: str) return (r0: cli.setHelp)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| helpText | `str` |  想要默认展示的帮助信息 |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `cli.setHelp` |   |
 
 
  

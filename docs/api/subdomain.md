@@ -35,15 +35,15 @@
 
 #### 定义：
 
-`func subdomain.Scan(v1: interface {}, v2 ...[]subdomain.ConfigOption) return (r0: chan *subdomain.SubdomainResult, r1: error)`
+`func subdomain.Scan(v1: any, v2 ...subdomain.ConfigOption) return (r0: chan *subdomain.SubdomainResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `[]subdomain.ConfigOption /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `...subdomain.ConfigOption` |   |
 
 
 
@@ -161,14 +161,14 @@
 
 #### 定义：
 
-`func subdomain.mainDict(v1: interface {}) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
+`func subdomain.mainDict(v1: any) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -254,14 +254,14 @@
 
 #### 定义：
 
-`func subdomain.recursiveDict(v1: interface {}) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
+`func subdomain.recursiveDict(v1: any) return (r0: func ConfigOption(v1: *subdomain.SubdomainScannerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 

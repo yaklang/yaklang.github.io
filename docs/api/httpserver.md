@@ -27,7 +27,7 @@
 
 #### 定义：
 
-`func httpserver.Serve(v1: string, v2: int, v3 ...[]yaklib._httpServerConfigOpt) return (r0: error)`
+`func httpserver.Serve(v1: string, v2: int, v3 ...yaklib._httpServerConfigOpt) return (r0: error)`
 
 
 #### 参数
@@ -36,7 +36,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `int` |   |
-| v3 | `[]yaklib._httpServerConfigOpt /*可变参数*/` |   |
+| v3 | `...yaklib._httpServerConfigOpt` |   |
 
 
 
@@ -122,16 +122,16 @@
 
 #### 定义：
 
-`func httpserver.tlsCertAndKey(v1: interface {}, v2: interface {}, v3 ...[]interface {}) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
+`func httpserver.tlsCertAndKey(v1: any, v2: any, v3 ...any) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `interface {}` |   |
-| v3 | `[]interface {} /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `any` |   |
+| v3 | `...any` |   |
 
 
 

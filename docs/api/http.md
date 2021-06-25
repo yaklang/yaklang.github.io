@@ -74,7 +74,7 @@
 
 #### 定义：
 
-`func http.Get(v1: string, v2 ...[]yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Get(v1: string, v2 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
@@ -82,7 +82,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `[]yaklib.httpOption /*可变参数*/` |   |
+| v2 | `...yaklib.httpOption` |   |
 
 
 
@@ -138,7 +138,7 @@
 
 #### 定义：
 
-`func http.NewRequest(v1: string, v2: string, v3 ...[]yaklib.httpOption) return (r0: *yaklib.yakHttpRequest, r1: error)`
+`func http.NewRequest(v1: string, v2: string, v3 ...yaklib.httpOption) return (r0: *yaklib.yakHttpRequest, r1: error)`
 
 
 #### 参数
@@ -147,7 +147,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]yaklib.httpOption /*可变参数*/` |   |
+| v3 | `...yaklib.httpOption` |   |
 
 
 
@@ -172,7 +172,7 @@
 
 #### 定义：
 
-`func http.Post(v1: string, v2 ...[]yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Post(v1: string, v2 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
@@ -180,7 +180,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `[]yaklib.httpOption /*可变参数*/` |   |
+| v2 | `...yaklib.httpOption` |   |
 
 
 
@@ -205,14 +205,14 @@
 
 #### 定义：
 
-`func http.Raw(v1: interface {}) return (r0: *http.Request, r1: error)`
+`func http.Raw(v1: any) return (r0: *http.Request, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -237,7 +237,7 @@
 
 #### 定义：
 
-`func http.Request(v1: string, v2: string, v3 ...[]yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Request(v1: string, v2: string, v3 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
@@ -246,7 +246,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]yaklib.httpOption /*可变参数*/` |   |
+| v3 | `...yaklib.httpOption` |   |
 
 
 
@@ -271,14 +271,14 @@
 
 #### 定义：
 
-`func http.body(v1: interface {}) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.body(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -302,14 +302,14 @@
 
 #### 定义：
 
-`func http.cookie(v1: interface {}) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.cookie(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -333,14 +333,14 @@
 
 #### 定义：
 
-`func http.dump(v1: interface {}) return (r0: bytes, r1: error)`
+`func http.dump(v1: any) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -365,14 +365,14 @@
 
 #### 定义：
 
-`func http.dumphead(v1: interface {}) return (r0: bytes, r1: error)`
+`func http.dumphead(v1: any) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -397,15 +397,15 @@
 
 #### 定义：
 
-`func http.header(v1: interface {}, v2: interface {}) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.header(v1: any, v2: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `interface {}` |   |
+| v1 | `any` |   |
+| v2 | `any` |   |
 
 
 
@@ -429,14 +429,14 @@
 
 #### 定义：
 
-`func http.proxy(v1 ...[]string) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.proxy(v1 ...string) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |   |
+| v1 | `...string` |   |
 
 
 
@@ -460,14 +460,14 @@
 
 #### 定义：
 
-``func http.show(v1: interface {})``
+``func http.show(v1: any)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -485,14 +485,14 @@
 
 #### 定义：
 
-``func http.showhead(v1: interface {})``
+``func http.showhead(v1: any)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -541,14 +541,14 @@
 
 #### 定义：
 
-`func http.ua(v1: interface {}) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.ua(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -595,14 +595,14 @@
 
 #### 定义：
 
-`func http.useragent(v1: interface {}) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.useragent(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 

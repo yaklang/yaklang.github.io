@@ -38,7 +38,7 @@
 
 #### 定义：
 
-`func servicescan.Scan(v1: string, v2: string, v3 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.Scan(v1: string, v2: string, v3 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
@@ -47,7 +47,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]fp.ConfigOption /*可变参数*/` |   |
+| v3 | `...fp.ConfigOption` |   |
 
 
 
@@ -72,15 +72,15 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSpaceEngine(v1: interface {}, v2 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.ScanFromSpaceEngine(v1: any, v2 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `[]fp.ConfigOption /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `...fp.ConfigOption` |   |
 
 
 
@@ -105,15 +105,15 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSynResult(v1: interface {}, v2 ...[]fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.ScanFromSynResult(v1: any, v2 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
-| v2 | `[]fp.ConfigOption /*可变参数*/` |   |
+| v1 | `any` |   |
+| v2 | `...fp.ConfigOption` |   |
 
 
 
@@ -138,7 +138,7 @@
 
 #### 定义：
 
-`func servicescan.ScanOne(v1: string, v2: int, v3 ...[]fp.ConfigOption) return (r0: *fp.MatchResult, r1: error)`
+`func servicescan.ScanOne(v1: string, v2: int, v3 ...fp.ConfigOption) return (r0: *fp.MatchResult, r1: error)`
 
 
 #### 参数
@@ -147,7 +147,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `int` |   |
-| v3 | `[]fp.ConfigOption /*可变参数*/` |   |
+| v3 | `...fp.ConfigOption` |   |
 
 
 
@@ -350,14 +350,14 @@
 
 #### 定义：
 
-`func servicescan.nmapRule(v1: interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.nmapRule(v1: any) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -381,14 +381,14 @@
 
 #### 定义：
 
-`func servicescan.proto(v1 ...[]interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.proto(v1 ...any) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]interface {} /*可变参数*/` |   |
+| v1 | `...any` |   |
 
 
 
@@ -458,14 +458,14 @@
 
 #### 定义：
 
-`func servicescan.webRule(v1: interface {}) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.webRule(v1: any) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 

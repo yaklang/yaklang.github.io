@@ -401,14 +401,14 @@
 
 #### 定义：
 
-`func file.Join(v1 ...[]string) return (r0: string)`
+`func file.Join(v1 ...string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string /*可变参数*/` |   |
+| v1 | `...string` |   |
 
 
 
@@ -813,7 +813,7 @@
 
 #### 定义：
 
-`func file.Save(v1: string, v2: interface {}) return (r0: error)`
+`func file.Save(v1: string, v2: any) return (r0: error)`
 
 
 #### 参数
@@ -821,7 +821,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
+| v2 | `any` |   |
 
 
 
@@ -845,7 +845,7 @@
 
 #### 定义：
 
-`func file.SaveJson(v1: string, v2: interface {}) return (r0: error)`
+`func file.SaveJson(v1: string, v2: any) return (r0: error)`
 
 
 #### 参数
@@ -853,7 +853,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `interface {}` |   |
+| v2 | `any` |   |
 
 
 

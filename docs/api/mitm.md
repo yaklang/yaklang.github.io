@@ -29,16 +29,16 @@
 
 #### 定义：
 
-`func mitm.Bridge(v1: interface {}, v2: string, v3 ...[]yaklib.mitmConfigOpt) return (r0: error)`
+`func mitm.Bridge(v1: any, v2: string, v3 ...yaklib.mitmConfigOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 | v2 | `string` |   |
-| v3 | `[]yaklib.mitmConfigOpt /*可变参数*/` |   |
+| v3 | `...yaklib.mitmConfigOpt` |   |
 
 
 
@@ -62,7 +62,7 @@
 
 #### 定义：
 
-`func mitm.Start(v1: int, v2 ...[]yaklib.mitmConfigOpt) return (r0: error)`
+`func mitm.Start(v1: int, v2 ...yaklib.mitmConfigOpt) return (r0: error)`
 
 
 #### 参数
@@ -70,7 +70,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `int` |   |
-| v2 | `[]yaklib.mitmConfigOpt /*可变参数*/` |   |
+| v2 | `...yaklib.mitmConfigOpt` |   |
 
 
 

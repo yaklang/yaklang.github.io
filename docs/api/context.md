@@ -3,27 +3,18 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [context.Background](#contextbackground) |  |
- | [context.New](#contextnew) |  |
- | [context.Seconds](#contextseconds) |  |
- | [context.TODO](#contexttodo) |  |
- | [context.TimeoutContextSecond](#contexttimeoutcontextsecond) |  |
- | [context.WithCancel](#contextwithcancel) |  |
- | [context.WithDeadline](#contextwithdeadline) |  |
- | [context.WithTimeout](#contextwithtimeout) |  |
- | [context.WithValue](#contextwithvalue) |  |
+ | [context.Background](#contextbackground) | 创建一个基础的 `context.Context` |
+ | [context.New](#contextnew) | 同 `context.Background()` |
+ | [context.Seconds](#contextseconds) | 生成一个几秒结束的 context |
+ | [context.WithCancel](#contextwithcancel) | 给 context 增加一个 cancel 手动按钮 |
+ | [context.WithDeadline](#contextwithdeadline) | 给上下文增加一个 ddl |
+ | [context.WithTimeout](#contextwithtimeout) | 给 context 带一个超时间隔，如果超时就自动取消 |
+ | [context.WithValue](#contextwithvalue) | 为上下文绑定一个 kv 对 |
 
 
 
 
-## 变量定义
-
-|变量调用名|变量类型|变量解释/帮助信息|
-|:-----------|:---------- |:-----------|
-|`context.Canceled`|`*errors.errorString`| //|
-|`context.DeadlineExceeded`|`context.deadlineExceededError`| //|
-
-
+ 
 
 
 
@@ -31,7 +22,7 @@
 
 ### context.Background
 
-
+创建一个基础的 `context.Context`
 
 #### 详细描述
 
@@ -39,7 +30,7 @@
 
 #### 定义：
 
-`func context.Background() return (r0: context.Context)`
+`func context.Background() return (ctx: context.Context)`
 
  
 
@@ -48,13 +39,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
  
 ### context.New
 
-
+同 `context.Background()`
 
 #### 详细描述
 
@@ -62,7 +53,7 @@
 
 #### 定义：
 
-`func context.New() return (r0: context.Context)`
+`func context.New() return (ctx: context.Context)`
 
  
 
@@ -71,13 +62,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
  
 ### context.Seconds
 
-
+生成一个几秒结束的 context
 
 #### 详细描述
 
@@ -85,14 +76,14 @@
 
 #### 定义：
 
-`func context.Seconds(v1: int) return (r0: context.Context)`
+`func context.Seconds(seconds: float) return (ctx: context.Context)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| seconds | `float` |   |
 
 
 
@@ -102,67 +93,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
-
-
- 
-### context.TODO
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func context.TODO() return (r0: context.Context)`
-
- 
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
-
-
- 
-### context.TimeoutContextSecond
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func context.TimeoutContextSecond(v1: int) return (r0: context.Context)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
  
 ### context.WithCancel
 
-
+给 context 增加一个 cancel 手动按钮
 
 #### 详细描述
 
@@ -170,14 +107,14 @@
 
 #### 定义：
 
-`func context.WithCancel(v1: context.Context) return (r0: context.Context, r1: func CancelFunc() )`
+`func context.WithCancel(originCtx: context.Context) return (r0: context.Context, r1: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
+| originCtx | `context.Context` |  想要增加 cancel 的上下文实例 |
 
 
 
@@ -194,7 +131,7 @@
  
 ### context.WithDeadline
 
-
+给上下文增加一个 ddl
 
 #### 详细描述
 
@@ -202,15 +139,15 @@
 
 #### 定义：
 
-`func context.WithDeadline(v1: context.Context, v2: time.Time) return (r0: context.Context, r1: func CancelFunc() )`
+`func context.WithDeadline(ctx: context.Context, ddl: time.Time) return (r0: context.Context, r1: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-| v2 | `time.Time` |   |
+| ctx | `context.Context` |   |
+| ddl | `time.Time` |  想要设置的 context 的过期时间，使用 time.Time，可以直接用 time 模块创建 |
 
 
 
@@ -227,7 +164,7 @@
  
 ### context.WithTimeout
 
-
+给 context 带一个超时间隔，如果超时就自动取消
 
 #### 详细描述
 
@@ -235,15 +172,15 @@
 
 #### 定义：
 
-`func context.WithTimeout(v1: context.Context, v2: time.Duration) return (r0: context.Context, r1: func CancelFunc() )`
+`func context.WithTimeout(ctx: context.Context, timeout: time.Duration) return (ctx: context.Context, cancel: func CancelFunc() )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-| v2 | `time.Duration` |   |
+| ctx | `context.Context` |   |
+| timeout | `time.Duration` |   |
 
 
 
@@ -253,14 +190,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
-| r1 | `func CancelFunc() ` |   |
+| ctx | `context.Context` |   |
+| cancel | `func CancelFunc() ` |   |
 
 
  
 ### context.WithValue
 
-
+为上下文绑定一个 kv 对
 
 #### 详细描述
 
@@ -268,16 +205,16 @@
 
 #### 定义：
 
-`func context.WithValue(v1: context.Context, v2: interface {}, v3: interface {}) return (r0: context.Context)`
+`func context.WithValue(ctx: context.Context, key: any, value: any) return (ctx: context.Context)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-| v2 | `interface {}` |   |
-| v3 | `interface {}` |   |
+| ctx | `context.Context` |   |
+| key | `any` |   |
+| value | `any` |   |
 
 
 
@@ -287,7 +224,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
  

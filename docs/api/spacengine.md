@@ -28,7 +28,7 @@
 
 #### 定义：
 
-`func spacengine.FofaQuery(v1: string, v2: string, v3: string, v4 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`func spacengine.FofaQuery(v1: string, v2: string, v3: string, v4 ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
@@ -38,7 +38,7 @@
 | v1 | `string` |   |
 | v2 | `string` |   |
 | v3 | `string` |   |
-| v4 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
+| v4 | `...yaklib._spaceEngineConfigOpt` |   |
 
 
 
@@ -63,7 +63,7 @@
 
 #### 定义：
 
-`func spacengine.QuakeQuery(v1: string, v2: string, v3 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`func spacengine.QuakeQuery(v1: string, v2: string, v3 ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
@@ -72,7 +72,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
+| v3 | `...yaklib._spaceEngineConfigOpt` |   |
 
 
 
@@ -97,7 +97,7 @@
 
 #### 定义：
 
-`func spacengine.ShodanQuery(v1: string, v2: string, v3 ...[]yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`func spacengine.ShodanQuery(v1: string, v2: string, v3 ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
 
 
 #### 参数
@@ -106,7 +106,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `[]yaklib._spaceEngineConfigOpt /*可变参数*/` |   |
+| v3 | `...yaklib._spaceEngineConfigOpt` |   |
 
 
 

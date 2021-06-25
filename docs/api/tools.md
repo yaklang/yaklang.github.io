@@ -107,7 +107,7 @@
 
 #### 定义：
 
-`func tools.ScanSubDomain(v1: context.Context, v2 ...[]string) return (r0: chan *subdomain.SubdomainResult, r1: error)`
+`func tools.ScanSubDomain(v1: context.Context, v2 ...string) return (r0: chan *subdomain.SubdomainResult, r1: error)`
 
 
 #### 参数
@@ -115,7 +115,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `context.Context` |   |
-| v2 | `[]string /*可变参数*/` |   |
+| v2 | `...string` |   |
 
 
 

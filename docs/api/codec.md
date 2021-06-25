@@ -148,14 +148,14 @@
 
 #### 定义：
 
-`func codec.DecodeBase64(v1: string) return (r0: bytes, r1: error)`
+`func codec.DecodeBase64(base64Str: str) return (result: bytes, err: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| base64Str | `str` |   |
 
 
 
@@ -165,8 +165,8 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
-| r1 | `error` |   |
+| result | `bytes` |   |
+| err | `error` |   |
 
 
  
@@ -307,14 +307,14 @@
 
 #### 定义：
 
-`func codec.DoubleEncodeUrl(v1: interface {}) return (r0: string)`
+`func codec.DoubleEncodeUrl(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -369,14 +369,14 @@
 
 #### 定义：
 
-`func codec.EncodeBase64(v1: interface {}) return (r0: string)`
+`func codec.EncodeBase64(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要编码的对象，如果是 string 或者 []byte 会正常编码，如果是一个其他对象，会尝试把 `json.Marshal` 之后的 bytes 进行编码 |
+| v1 | `any` |  想要编码的对象，如果是 string 或者 []byte 会正常编码，如果是一个其他对象，会尝试把 `json.Marshal` 之后的 bytes 进行编码 |
 
 
 
@@ -400,14 +400,14 @@
 
 #### 定义：
 
-`func codec.EncodeHtml(v1: interface {}) return (r0: string)`
+`func codec.EncodeHtml(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要编码的对象 |
+| v1 | `any` |  想要编码的对象 |
 
 
 
@@ -431,14 +431,14 @@
 
 #### 定义：
 
-`func codec.EncodeHtmlHex(v1: interface {}) return (r0: string)`
+`func codec.EncodeHtmlHex(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要编码的对象 |
+| v1 | `any` |  想要编码的对象 |
 
 
 
@@ -462,14 +462,14 @@
 
 #### 定义：
 
-`func codec.EncodeToHex(v1: interface {}) return (r0: string)`
+`func codec.EncodeToHex(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要编码的内容 |
+| v1 | `any` |  想要编码的内容 |
 
 
 
@@ -524,14 +524,14 @@
 
 #### 定义：
 
-`func codec.EncodeUrl(v1: interface {}) return (r0: string)`
+`func codec.EncodeUrl(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要编码的参数 |
+| v1 | `any` |  想要编码的参数 |
 
 
 
@@ -648,14 +648,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Md5(v1: interface {}) return (r0: string)`
+`func codec.Md5(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要计算 md5 的值，如果是一个对象，会先尝试序列化 json |
+| v1 | `any` |  想要计算 md5 的值，如果是一个对象，会先尝试序列化 json |
 
 
 
@@ -679,14 +679,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Sha1(v1: interface {}) return (r0: string)`
+`func codec.Sha1(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |  想要计算 sha1 的参数 |
+| v1 | `any` |  想要计算 sha1 的参数 |
 
 
 
@@ -710,14 +710,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Sha224(v1: interface {}) return (r0: string)`
+`func codec.Sha224(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -741,14 +741,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Sha256(v1: interface {}) return (r0: string)`
+`func codec.Sha256(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -772,14 +772,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Sha384(v1: interface {}) return (r0: string)`
+`func codec.Sha384(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
@@ -803,14 +803,14 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Sha512(v1: interface {}) return (r0: string)`
+`func codec.Sha512(v1: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `interface {}` |   |
+| v1 | `any` |   |
 
 
 
