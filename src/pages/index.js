@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -7,15 +7,21 @@ import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import TypeIt from 'typeit-react'
 import Tilt from 'react-parallax-tilt';
-import ParticlesBg from 'particles-bg'
 
 function HomepageHeader() {
     const {siteConfig} = useDocusaurusContext();
+    // 设置 BG
+    const [bg, setBg] = useState();
+
+    useEffect(() => {
+        var m = require("../particles-bg")
+        setBg(m)
+    }, [])
 
     return (
         <Tilt tiltEnable={true} tiltReverse={false} tiltMaxAngleX={10} tiltMaxAngleY={10}>
             <header className={clsx('hero hero--primary', styles.heroBanner)}>
-                <ParticlesBg bg={true} type={"circle"}/>
+                {bg && (new bg.default({type: "circle", bg: true})).render()}
                 <div className="container" style={{}}>
                     <h1 className="hero__title">{siteConfig.title}</h1>
                     <p className="hero__subtitle">{siteConfig.tagline}</p>
