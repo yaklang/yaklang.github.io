@@ -3,7 +3,7 @@ module.exports = {
     title: 'Yak Official Website',
     tagline: 'Yak 是一门 Web 安全研发领域垂直语言',
     url: 'https://yaklang.io',
-    baseUrl: '/yak-project-main-page/',
+    baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon.ico',
