@@ -6,41 +6,50 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import TypeIt from 'typeit-react'
+import Tilt from 'react-parallax-tilt';
+import ParticlesBg from 'particles-bg'
 
 function HomepageHeader() {
     const {siteConfig} = useDocusaurusContext();
 
     return (
-        <header className={clsx('hero hero--primary', styles.heroBanner)}>
-            <div className="container">
-                <h1 className="hero__title">{siteConfig.title}</h1>
-                <p className="hero__subtitle">{siteConfig.tagline}</p>
-                <div className={styles.buttons}>
-                    <Link
-                        className="button button--secondary button--lg"
-                        to="/docs/intro">
-                        <TypeIt>
-                            Yak 立志成为<del style={{color: "red"}}> 北半球最 </del>
-                            优秀的 Web 安全研发脚本语言
-                        </TypeIt>
-                    </Link>
-                    <br/>
+        <Tilt tiltEnable={true} tiltReverse={false} tiltMaxAngleX={10} tiltMaxAngleY={10}>
+            <header className={clsx('hero hero--primary', styles.heroBanner)}>
+                <ParticlesBg bg={true} type={"circle"}/>
+                <div className="container" style={{}}>
+                    <h1 className="hero__title">{siteConfig.title}</h1>
+                    <p className="hero__subtitle">{siteConfig.tagline}</p>
+                    <div className={styles.buttons}>
+                        <Link
+                            className="button button--secondary button--lg"
+                            to="/docs/intro">
+                            <TypeIt>
+                                Yak 立志成为
+                                <del style={{color: "red"}}> 北半球最</del>
+                                优秀的 Web 安全研发脚本语言
+                            </TypeIt>
+                        </Link>
+                        <br/>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        </Tilt>
     );
 }
 
 export default function Home() {
     const {siteConfig} = useDocusaurusContext();
     return (
-        <Layout
-            title={`Yak Language ${siteConfig.title}`}
-            description="立志成为Web安全能力研发最强语言">
-            <HomepageHeader/>
-            <main>
-                <HomepageFeatures/>
-            </main>
-        </Layout>
+        <>
+            <Layout
+                title={`Yak Language ${siteConfig.title}`}
+                description="立志成为Web安全能力研发最强语言">
+                <HomepageHeader/>
+                <main>
+                    <HomepageFeatures/>
+                </main>
+            </Layout>
+        </>
+
     );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
-import TypeIt from "typeit-react";
 
 const FeatureList = [
     {
@@ -56,18 +55,34 @@ const FeatureList = [
         Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
         description: (
             <>
-                Extend or customize your website layout by reusing React. Docusaurus can
-                be extended while reusing the same header and footer.
+                源于企业内部项目 <br/>
+                作者同时具有安全行业甲方乙方从业经验 <br/>
+                丰富的甲方自研安全产品落地经验 <br/>
+                丰富的乙方商业安全产品研发经验
             </>
         ),
     },
     {
-        title: 'AAA',
+        title: '高质量代码与强健生态',
         Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
         description: (
             <>
-                Extend or customize your website layout by reusing React. Docusaurus can
-                be extended while reusing the same header and footer.
+                Golang 作为语言基石 <br/>
+                性能强于 Python 不止一星半点 <br/>
+                主动集成网络空间搜索引擎 <br/>
+                主动集成优秀的安全工具调用 <br/>
+            </>
+        ),
+    },
+    {
+        title: '极速编写 PoC 与漏洞验证',
+        Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+        description: (
+            <>
+                强大易用的内置基础库让编写 PoC/Exp 的成本 <br/>
+                <h3>一降再降</h3>
+                独一无二的 Fuzz 功能库，让漏洞自动化检测变得 <br/>
+                <h3>非常简单</h3>
             </>
         ),
     },
