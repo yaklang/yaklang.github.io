@@ -57,10 +57,14 @@ module.exports = {
                     position: 'left',
                     label: '教程/文档',
                 },
-                {to: '/blog', label: 'Blog', position: 'left'},
+                // {to: '/blog', label: 'Blog', position: 'left'},
                 {
-                    href: 'https://github.com/facebook/docusaurus',
-                    label: 'GitHub',
+                    type: 'docsVersionDropdown',
+                    position: "right",
+                },
+                {
+                    href: 'https://github.com/yaklang',
+                    label: 'GITHUB',
                     position: 'right',
                 },
             ],
