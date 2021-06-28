@@ -30,7 +30,7 @@ function HomepageHeader() {
                             className="button button--secondary button--lg"
                             to="/docs/intro">
                             <TypeIt>
-                                Yak 立志成为
+                                Yak 会成为
                                 <del style={{color: "red"}}> 北半球最</del>
                                 优秀的 Web 安全研发脚本语言
                             </TypeIt>

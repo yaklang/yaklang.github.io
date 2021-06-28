@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# [codec]：编码解码库
+# [codec] 编码解码库
 
 ## 可逆编码解码
 
