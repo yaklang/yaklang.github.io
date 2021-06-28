@@ -11,9 +11,9 @@
  | [exec.WatchOutput](#execwatchoutput) | 监控一个命令执行的中间结果，一般用于检测这个命令是否得到了想要的结果，或者获取一个命令的中间结果。该函数监控命令执行的标准输出流&#43;标准错误流结果 |
  | [exec.WatchStderr](#execwatchstderr) | 使用方法同 `exec.WatchOutput` 只是监控的输出是标准错误流 |
  | [exec.WatchStdout](#execwatchstdout) |  |
- | [exec.callback](#execcallback) |  |
- | [exec.concurrent](#execconcurrent) |  |
- | [exec.timeout](#exectimeout) |  |
+ | [exec.callback](#execcallback) | 设置 SystemBatch 批量执行的回调函数，命令执行结束后会执行的函数 |
+ | [exec.concurrent](#execconcurrent) | 设置 SystemBatch 批量执行的并发量 |
+ | [exec.timeout](#exectimeout) | 设置 SystemBatch 批量执行的 timeout |
 
 
 
@@ -360,7 +360,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
  
 ### exec.callback
 
-
+设置 SystemBatch 批量执行的回调函数，命令执行结束后会执行的函数
 
 #### 详细描述
 
@@ -368,14 +368,14 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.callback(v1: func (v1: string, v2: bytes) ) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`func exec.callback(callbackFunc: func (v1: string, v2: bytes) ) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: string, v2: bytes) ` |   |
+| callbackFunc | `func (v1: string, v2: bytes) ` |   |
 
 
 
@@ -391,7 +391,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
  
 ### exec.concurrent
 
-
+设置 SystemBatch 批量执行的并发量
 
 #### 详细描述
 
@@ -399,14 +399,14 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.concurrent(v1: int) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`func exec.concurrent(poolSize: int) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| poolSize | `int` |   |
 
 
 
@@ -422,7 +422,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
  
 ### exec.timeout
 
-
+设置 SystemBatch 批量执行的 timeout
 
 #### 详细描述
 
@@ -430,14 +430,14 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.timeout(v1: float64) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`func exec.timeout(timeout: float64) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| timeout | `float64` |   |
 
 
 
