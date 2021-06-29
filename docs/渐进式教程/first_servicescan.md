@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# 第一课：Hello World 与你的第一个服务扫描程序
+# 你的第一个服务扫描程序
 
 当我们执行 `yak -c 'println("Hello World")'` 的时候，我们屏幕上出现 `Hello World`，我们 Hello World 程序就已经完成了。
 

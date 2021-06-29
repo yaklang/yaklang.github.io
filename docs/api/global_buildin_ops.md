@@ -13,7 +13,7 @@ sidebar_position: 1
 |delete|根据 key 删除 map 的某个键值对|第一个参数为需要删除键值对的 map，第二个参数想要删除的 key|-|`a={"abc": 1};delete(a, "abc")`|
 |len|用来统计一个对象的长度(chan/slice/map)|需要统计长度的对象|int: 元素的长度|`a=[1,2,3];len(a)`|
 |cap|用来统计一个对象的容量(chan/slice/map)：与 len 具体区别请查看 Golang 相关文档|需要统计容量的对象|int: 元素的长度|`a=[1,2,3];cap(a)`|
-|make|同Golang的 make，可以用来创建 map / slice / chan|参数一为想要创建的实例的类型，剩余可变参数为容量，大小，长度等|返回值为创建成功的对象|`make([]int);  make([]int, 1);   make(map[string]string);  make(chan var, 1)`|
+|make|同Golang的 make，可以用来创建 map / slice / chan|参数一为想要创建的实例的类型，剩余可变参数为容量，大小，长度等|返回值为创建成功的对象|`make([]int); make([]int, 1); make(map[string]string); make(chan var, 1)`|
 |close|关闭 chan|参数为想要关闭的 chan 实例|-|`ch=make(chan int, 2); ch<-1; close(ch);`|
 |panic|同 Golang `panic`，程序出现大的异常，需要退出脚本|||`panic("Unexpected ERROR!!!")`|
 |recover|同 Golang `recover`，配合 defer 使用可以恢复 panic|||`defer fn{err = recover();println(err)}; panic("111")`|
@@ -72,6 +72,7 @@ sidebar_position: 1
 |randn|随机生成一个 int|两个参数 randn(min, max) 最小值和最大值均为 int|返回 min 和 max 之间的一个随机整形|`println(randn(1,99))`|
 |randstr|随机生成一个字符串|只有一个参数，参数为随机字符串的长度|返回随机生成的字符串|`println(randstr(10))` 输出 `hhisgUZdlN`|
 |desc|描述一个对象的结构|参数为想要描述的对象|-|`desc(yourParam)`|
+|import|导入一个模块中的某个变量|[`详细定义在这里`](/docs/api/dyn#dynimport)|-|`import('file.yak', "abcFunc")`|
 |now|同 time.Now ||||
 |mkmap|已废弃||||
 |mapFrom|已废弃||||
