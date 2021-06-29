@@ -243,22 +243,22 @@ exec.WatchOutput(&#34;ping 8.8.8.8&#34; , 10, def callback(result) {
 执行结果如下
 
 ```go
-2021-06-25 14:28:47.516709 &#43;0800 CST m=&#43;1.035775209
+2021-06-25 14:28:47.516709 +0800 CST m=+1.035775209
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
 64 bytes from 8.8.8.8: icmp_seq=0 ttl=113 time=75.586 ms
 
-2021-06-25 14:28:48.515702 &#43;0800 CST m=&#43;2.034775042
+2021-06-25 14:28:48.515702 +0800 CST m=+2.034775042
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
 64 bytes from 8.8.8.8: icmp_seq=0 ttl=113 time=75.586 ms
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=124.303 ms
 
-2021-06-25 14:28:49.516388 &#43;0800 CST m=&#43;3.035467376
+2021-06-25 14:28:49.516388 +0800 CST m=+3.035467376
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
 64 bytes from 8.8.8.8: icmp_seq=0 ttl=113 time=75.586 ms
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=124.303 ms
 64 bytes from 8.8.8.8: icmp_seq=2 ttl=113 time=90.452 ms
 
-2021-06-25 14:28:50.514747 &#43;0800 CST m=&#43;4.033832667
+2021-06-25 14:28:50.514747 +0800 CST m=+4.033832667
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
 64 bytes from 8.8.8.8: icmp_seq=0 ttl=113 time=75.586 ms
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=124.303 ms
