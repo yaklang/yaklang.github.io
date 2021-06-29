@@ -8,11 +8,11 @@ sidebar_position: 2
 
 当然，我们第一课不会只介绍 Hello World。
 
-通常来说，我们想要写一个命令行工具，经常需要用户输入参数我们来接收，处理参数，我们渐进式教程的第一课就来介绍如何接收并处理用户的输入
+通常来说，我们想要写一个命令行工具，经常需要用户输入参数我们来接收，处理参数，我们渐进式教程的第一课就来介绍如何接收并处理用户的输入，并使用用户输入作为端口扫描的参数。
 
 ## 处理命令行参数从未这么简单
 
-我们 yak 语言中，内置了很多功能库，这些功能库并不需要用户手动来导入，直接 `package_name.methodName` 即可调用，例如我们本节教程将会遇见的案例：`cli.String` 这些案例
+我们 yak 语言中，内置了很多功能库，这些功能库并不需要用户手动来导入，直接 `package_name.methodName` 即可调用，例如我们本节教程将会遇见的案例：[`cli.String`](/docs/api/cli#clistring) 这些案例
 
 一般来说，我们接收命令行参数，需要通过预先定义参数类型和描述来操作，但是在 yak 中，我们处理参数其实可以非常简单
 
@@ -24,9 +24,9 @@ cli.String("your-param")
 cli.Int("int-param")
 ```
 
-我们写一个最简单的脚本，我们命名叫 `1_handleCliParam.yak`
+我们写一个最简单的脚本
 
-```go
+```go title="1_handleCliParam.yak"
 target = cli.String("target")
 intParam = cli.Int("int-param")
 
@@ -59,6 +59,16 @@ yak data/yak-basic/1_handleCliParam.yak --target targetParamValue --int-param 12
 当我们可以学会了接收命令行参数之后，我们可以使用参数做一些事情。
 
 最简单的例子，我们的 yak 既然是一门安全从业人员的语言，我们会努力把一些基本的扫描功能集成在语言内置的库中。
+
+:::info 简单易用的服务扫描库
+
+YAK 自带了服务扫描功能
+
+1. 大家可以打开 [servicescan 的 API手册](/docs/api/servicescan#servicescanscan) 自行查看相关接口 
+1. 也可以查看这个模块的详细文档：[](/)
+
+:::
+
 
 ```go
 // 使用命令行参数
