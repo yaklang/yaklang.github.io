@@ -73,7 +73,7 @@ YAK 自带了服务扫描功能
 ```go
 // 使用命令行参数
 targets := cli.String("target")
-ports := cli.String("ports")
+ports := cli.String("ports", cli.setDefault("80,22,8080-8082"))
 
 if targets == "" {
     die("empty target")
@@ -153,10 +153,6 @@ println("Scan Finished")
 ```
 
 在我们修改了新的脚本之后，执行如下代码试试？
-
-```bash
-
-```
 
 ## 小总结
 
