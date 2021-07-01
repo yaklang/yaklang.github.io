@@ -4,9 +4,11 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
-import HomepageFeatures from '../components/HomepageFeatures';
 import TypeIt from 'typeit-react'
 import Tilt from 'react-parallax-tilt';
+import "antd/dist/antd.min.css";
+import {Image, Space} from "antd";
+import {MainPageContent} from "../components/MainPageContent";
 
 function HomepageHeader() {
     const {siteConfig} = useDocusaurusContext();
@@ -20,23 +22,30 @@ function HomepageHeader() {
 
     return (
         <Tilt tiltEnable={true} tiltReverse={false} tiltMaxAngleX={10} tiltMaxAngleY={10}>
-            <header className={clsx('hero hero--primary', styles.heroBanner)}>
+            <header className={clsx('hero hero--primary', styles.heroBanner)} style={{paddingTop: 8, paddingBottom: 8}}>
                 {bg && (new bg.default({type: "circle", bg: true})).render()}
                 <div className="container" style={{}}>
-                    <h1 className="hero__title">{siteConfig.title}</h1>
-                    <p className="hero__subtitle">{siteConfig.tagline}</p>
-                    <div className={styles.buttons}>
-                        <Link
-                            className="button button--secondary button--lg"
-                            to="/docs/intro">
-                            <TypeIt>
-                                Yak 会成为
-                                <del style={{color: "red"}}> 北半球最</del>
-                                优秀的 Web 安全研发脚本语言
-                            </TypeIt>
-                        </Link>
-                        <br/>
-                    </div>
+                    <Space>
+                        <Image preview={false} height={300} width={300} src={"/img/yaklogo.png"}/>
+                        <div style={{marginRight: 60}}>
+                            <h1 style={{fontSize: 40, color: "#fff"}}>{siteConfig.title}</h1>
+                            <p className="hero__subtitle">{siteConfig.tagline}</p>
+                            <div className={styles.buttons}>
+                                <Link
+                                    className="button button--secondary button--lg"
+                                    to="/docs/intro"
+                                >
+                                    <TypeIt>
+                                        Yak
+                                        <del style={{color: "red"}}> 北半球 </del>
+                                        最强 Web 安全研发脚本语言
+                                    </TypeIt>
+                                </Link>
+                                <br/>
+                            </div>
+                        </div>
+                    </Space>
+
                 </div>
             </header>
         </Tilt>
@@ -49,10 +58,11 @@ export default function Home() {
         <>
             <Layout
                 title={`Yak Language ${siteConfig.title}`}
-                description="立志成为Web安全能力研发最强语言">
+                description="Web安全能力研发最强语言">
                 <HomepageHeader/>
                 <main>
-                    <HomepageFeatures/>
+                    <MainPageContent/>
+                    {/*<HomepageFeatures/>*/}
                 </main>
             </Layout>
         </>
