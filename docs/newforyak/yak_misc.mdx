@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# X计划: 扫端口/子域名+指纹识别
+# 实战1: 扫端口/子域名+指纹识别
 
 本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。
 
@@ -92,7 +92,7 @@ yak yakmisc.yak --target 192.168.1.23/29,example.com
 
 所以我们编写这个部分其实是非常简单，我们以只使用 servicescan 为例：
 
-```
+```go
 log.setLevel("info")
 
 targets := cli.String("target", cli.setHelp("扫描目标"))
@@ -426,7 +426,7 @@ wg.Wait()
 
 ### Show Me the Code!
 
-```
+```go
 // 从命令行获取文件名，如果用户没有输入，我们自定义一个随机文件名
 domainFileName = cli.String("domain-result", cli.setDefault(sprintf("yakmisc-domain-result-%v.txt", randstr(15))))
 
