@@ -26,9 +26,10 @@ function HomepageHeader() {
                 {bg && (new bg.default({type: "circle", bg: true})).render()}
                 <div className="container" style={{}}>
                     <Space>
-                        <Image preview={false} height={300} width={300} src={"/img/yaklogo.png"}/>
                         <div style={{marginRight: 60}}>
-                            <h1 style={{fontSize: 40, color: "#fff"}}>{siteConfig.title}</h1>
+                            <h1 style={{fontSize: 40, color: "#fff"}}>
+                                {siteConfig.title}
+                            </h1>
                             <p className="hero__subtitle">{siteConfig.tagline}</p>
                             <div className={styles.buttons}>
                                 <Link
@@ -44,6 +45,7 @@ function HomepageHeader() {
                                 <br/>
                             </div>
                         </div>
+                        <Image preview={false} height={330} width={330} src={"/img/yaklogo.png"}/>
                     </Space>
 
                 </div>
