@@ -102,7 +102,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 </Row>
             </div>
             <Divider/>
-            <Typography.Title level={1}>代码样例：TALK IS CHEEP, SHOW ME THE CODE</Typography.Title>
+            <Typography.Title level={1}>代码样例：TALK IS CHEEP, SHOW ME THE <Text strong={true} mark={true}>CODE</Text></Typography.Title>
         </Layout>
     </div>
 };
