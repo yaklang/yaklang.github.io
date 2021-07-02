@@ -3,10 +3,10 @@ import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import "antd/dist/antd.min.css";
 import styles from './index.module.css';
 import TypeIt from 'typeit-react'
 import Tilt from 'react-parallax-tilt';
-import "antd/dist/antd.min.css";
 import {Image, Space} from "antd";
 import {MainPageContent} from "../components/MainPageContent";
 
