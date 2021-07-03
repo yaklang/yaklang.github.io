@@ -3,16 +3,6 @@ import React from "react";
 import {Col, Layout, Row, Image, Card, Space, Typography, Tag, Button, Divider, Carousel, Tabs} from "antd";
 import {CodeDemos} from "./data";
 
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/zenburn.css'
-import 'codemirror/theme/solarized.css'
-import 'codemirror/theme/darcula.css'
-import 'codemirror/addon/display/fullscreen.css'
-import "./CodeMirror.css"
-
-require("codemirror/mode/go/go");
-
-
 const {Text, Paragraph} = Typography;
 const {TabPane} = Tabs;
 
