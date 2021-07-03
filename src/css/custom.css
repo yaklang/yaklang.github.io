@@ -34,3 +34,7 @@
 .admonition h5 {
   color: white;
 }
+
+.admonition-note h5 {
+  color: #000000;
+}
