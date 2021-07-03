@@ -7,8 +7,11 @@ import "antd/dist/antd.min.css";
 import styles from './index.module.css';
 import TypeIt from 'typeit-react'
 import Tilt from 'react-parallax-tilt';
-import {Image, Space} from "antd";
+import {Typography, Image, Space, Button} from "antd";
+import {DoubleRightOutlined, FireFilled} from "@ant-design/icons";
 import {MainPageContent} from "../components/MainPageContent";
+
+const {Paragraph, Text} = Typography;
 
 function HomepageHeader() {
     const {siteConfig} = useDocusaurusContext();
@@ -35,15 +38,50 @@ function HomepageHeader() {
                                 <Link
                                     className="button button--secondary button--lg"
                                     to="/docs/intro"
+                                    style={{width: 400}}
                                 >
-                                    <TypeIt>
-                                        Yak
-                                        <del style={{color: "red"}}> 北半球 </del>
-                                        最强 Web 安全研发脚本语言
-                                    </TypeIt>
+                                    <Paragraph style={{marginBottom: 0}}>
+                                        <Text delete={true} style={{color: "red"}}>北半球</Text> <Text
+                                        mark={true}>最强</Text> Web 安全研发脚本语言
+                                    </Paragraph>
                                 </Link>
                                 <br/>
                             </div>
+                            <Space style={{marginTop: 18}}>
+                                <div className={styles.buttons}>
+                                    <Button type={"primary"} size={"large"}>
+                                        <Link to={"/docs/intro"}>
+                                            <strong>快速开始 <FireFilled/></strong>
+                                        </Link>
+                                    </Button>
+                                </div>
+                                <div>
+                                    <Button type={"link"} size={"large"} ghost={true} style={{color: "white"}}
+                                            className={styles.quickStart}
+                                    >
+                                        <Link to={"/docs/newforyak/first_servicescan"}>
+                                            <strong>基础教程 <DoubleRightOutlined/></strong>
+                                        </Link>
+                                    </Button>
+                                </div>
+                            </Space>
+                            <br/>
+                            <Space style={{marginTop: 8}}>
+                                for
+                                <div style={{minWidth: 110, fontWight: 400}}>
+                                    <TypeIt
+                                        options={{loop: true, loopDelay: 0}}
+                                        getBeforeInit={ins => {
+                                            ins.type("黑客").pause(1200).delete(2)
+                                                .type("白帽子").pause(1200).delete(3)
+                                                .type("安全工程师").pause(1200).delete(5)
+                                                .type("安全运营人员").pause(1200).delete(6)
+                                                .type("渗透测试工程师").pause(1200).delete(7)
+                                                .type("安全服务提供商").pause(1200).delete(7)
+                                            return ins
+                                        }}/>
+                                </div>
+                            </Space>
                         </div>
                         <Image preview={false} height={330} width={330} src={"/img/yaklogo.png"}/>
                     </Space>

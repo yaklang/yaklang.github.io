@@ -29,3 +29,8 @@
 .admonition-head h5 {
     color: white;
 }
+
+.quick-start:hover {
+    background-color: #ffffff;
+    color: black;
+}
