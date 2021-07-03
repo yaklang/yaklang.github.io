@@ -1,8 +1,20 @@
 // @ts-ignore
 import React from "react";
-import {Col, Layout, Row, Image, Card, Space, Typography, Tag, Button, Divider} from "antd";
+import {Col, Layout, Row, Image, Card, Space, Typography, Tag, Button, Divider, Carousel, Tabs} from "antd";
+import {CodeDemos} from "./data";
+
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/zenburn.css'
+import 'codemirror/theme/solarized.css'
+import 'codemirror/theme/darcula.css'
+import 'codemirror/addon/display/fullscreen.css'
+import "./CodeMirror.css"
+
+require("codemirror/mode/go/go");
+
 
 const {Text, Paragraph} = Typography;
+const {TabPane} = Tabs;
 
 export interface MainPageContentProp {
 
@@ -102,7 +114,34 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 </Row>
             </div>
             <Divider/>
-            <Typography.Title level={1}>代码样例：TALK IS CHEEP, SHOW ME THE <Text strong={true} mark={true}>CODE</Text></Typography.Title>
+            <Typography.Title level={1}>代码样例：TALK IS CHEEP, SHOW ME THE <Text
+                strong={true}
+                mark={true}>CODE
+            </Text></Typography.Title>
+            <br/>
+            <Tabs centered={true} style={{marginBottom: 80}}>
+                {CodeDemos.map((i, index) => {
+                    return <TabPane tab={i.title} key={index} style={{height: 550}}>
+                        {/*<Row gutter={24}>*/}
+                            {/*<Col md={24} sm={24} lg={8}>*/}
+                            {/*    <Card*/}
+                            {/*        bordered={false}*/}
+                            {/*    >*/}
+                            {/*        {i.desc}*/}
+                            {/*    </Card>*/}
+                            {/*</Col>*/}
+                            {/*<Col md={24} lg={16}>*/}
+                                <Image
+                                    style={{maxWidth: 1400}}
+                                    src={i.code}
+                                    preview={false}
+                                    // width={900}
+                                />
+                            {/*</Col>*/}
+                        {/*</Row>*/}
+                    </TabPane>
+                })}
+            </Tabs>
         </Layout>
     </div>
 };
