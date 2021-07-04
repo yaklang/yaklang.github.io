@@ -3,21 +3,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [io.Copy](#iocopy) |  |
- | [io.CopyBuffer](#iocopybuffer) |  |
- | [io.CopyN](#iocopyn) |  |
- | [io.LimitReader](#iolimitreader) |  |
- | [io.MultiReader](#iomultireader) |  |
- | [io.NewSectionReader](#ionewsectionreader) |  |
- | [io.NopCloser](#ionopcloser) |  |
- | [io.Pipe](#iopipe) |  |
- | [io.ReadAll](#ioreadall) |  |
- | [io.ReadAtLeast](#ioreadatleast) |  |
- | [io.ReadEvery1s](#ioreadevery1s) |  |
- | [io.ReadFile](#ioreadfile) |  |
- | [io.ReadFull](#ioreadfull) |  |
- | [io.TeeReader](#ioteereader) |  |
- | [io.WriteString](#iowritestring) |  |
+ | [io.Copy](#iocopy) | 把一个 `io.Reader` 中的内容对接到 `io.Writer` 中 |
+ | [io.CopyN](#iocopyn) | 从 srcReader 中复制固定长度的字节到 dstWriter |
+ | [io.LimitReader](#iolimitreader) | 创建一个新的 `io.Reader` 这个 Reader 只读固定长度 |
+ | [io.MultiReader](#iomultireader) | 把多个 Reader 合并成一个 |
+ | [io.NopCloser](#ionopcloser) | 把一个 io.Reader 包装成 io.ReadCloser，遇到 Nop/EOF 即关闭 |
+ | [io.Pipe](#iopipe) | 创建一个 io 管道 |
+ | [io.ReadAll](#ioreadall) | 把一个 reader 中的内容全部读出来 |
+ | [io.ReadEvery1s](#ioreadevery1s) | 使用一个 ctx 控制生命周期，每隔一秒钟读一次 Reader，每隔一秒钟执行一次回调函数，回调函数如果返回 false，则立即停止读取 |
+ | [io.ReadFile](#ioreadfile) | 把一个文件中的内容全部读出来 |
+ | [io.TeeReader](#ioteereader) | reader 分流，把 srcReader 读出来的内容会同步写到 teeWriter，通过返回值的 reader 来驱动 |
+ | [io.WriteString](#iowritestring) | 把一个 string 写到 writer 中 |
 
 
 
@@ -26,8 +22,8 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
-|`io.Discard`|`io.discard`| //|
-|`io.EOF`|`*errors.errorString`| //|
+|`io.Discard`|`io.discard`| 等同于 `/dev/null` 一个 writer，写入数据等同于丢弃|
+|`io.EOF`|`*errors.errorString`| 结束符|
 
 
 
@@ -37,40 +33,7 @@
 
 ### io.Copy
 
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func io.Copy(v1: io.Writer, v2: io.Reader) return (r0: int64, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `io.Writer` |   |
-| v2 | `io.Reader` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `int64` |   |
-| r1 | `error` |   |
-
-
- 
-### io.CopyBuffer
-
-
+把一个 `io.Reader` 中的内容对接到 `io.Writer` 中
 
 #### 详细描述
 
@@ -78,16 +41,15 @@
 
 #### 定义：
 
-`func io.CopyBuffer(v1: io.Writer, v2: io.Reader, v3: bytes) return (r0: int64, r1: error)`
+`func io.Copy(dstWriter: io.Writer, srcReader: io.Reader) return (r0: int64, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Writer` |   |
-| v2 | `io.Reader` |   |
-| v3 | `bytes` |   |
+| dstWriter | `io.Writer` |   |
+| srcReader | `io.Reader` |   |
 
 
 
@@ -104,7 +66,7 @@
  
 ### io.CopyN
 
-
+从 srcReader 中复制固定长度的字节到 dstWriter
 
 #### 详细描述
 
@@ -112,16 +74,16 @@
 
 #### 定义：
 
-`func io.CopyN(v1: io.Writer, v2: io.Reader, v3: int64) return (r0: int64, r1: error)`
+`func io.CopyN(dstWriter: io.Writer, srcReader: io.Reader, copyLen: int64) return (r0: int64, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Writer` |   |
-| v2 | `io.Reader` |   |
-| v3 | `int64` |   |
+| dstWriter | `io.Writer` |   |
+| srcReader | `io.Reader` |   |
+| copyLen | `int64` |   |
 
 
 
@@ -138,7 +100,7 @@
  
 ### io.LimitReader
 
-
+创建一个新的 `io.Reader` 这个 Reader 只读固定长度
 
 #### 详细描述
 
@@ -146,15 +108,15 @@
 
 #### 定义：
 
-`func io.LimitReader(v1: io.Reader, v2: int64) return (r0: io.Reader)`
+`func io.LimitReader(srcReader: io.Reader, length: int64) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
-| v2 | `int64` |   |
+| srcReader | `io.Reader` |   |
+| length | `int64` |   |
 
 
 
@@ -170,7 +132,7 @@
  
 ### io.MultiReader
 
-
+把多个 Reader 合并成一个
 
 #### 详细描述
 
@@ -178,14 +140,14 @@
 
 #### 定义：
 
-`func io.MultiReader(v1 ...io.Reader) return (r0: io.Reader)`
+`func io.MultiReader(readers ...io.Reader) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...io.Reader` |   |
+| readers | `...io.Reader` |   |
 
 
 
@@ -199,42 +161,9 @@
 
 
  
-### io.NewSectionReader
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func io.NewSectionReader(v1: io.ReaderAt, v2: int64, v3: int64) return (r0: *io.SectionReader)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `io.ReaderAt` |   |
-| v2 | `int64` |   |
-| v3 | `int64` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*io.SectionReader` |   |
-
-
- 
 ### io.NopCloser
 
-
+把一个 io.Reader 包装成 io.ReadCloser，遇到 Nop/EOF 即关闭
 
 #### 详细描述
 
@@ -242,14 +171,14 @@
 
 #### 定义：
 
-`func io.NopCloser(v1: io.Reader) return (r0: io.ReadCloser)`
+`func io.NopCloser(reader: io.Reader) return (r0: io.ReadCloser)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
+| reader | `io.Reader` |   |
 
 
 
@@ -265,7 +194,7 @@
  
 ### io.Pipe
 
-
+创建一个 io 管道
 
 #### 详细描述
 
@@ -273,7 +202,7 @@
 
 #### 定义：
 
-`func io.Pipe() return (r0: *io.PipeReader, r1: *io.PipeWriter)`
+`func io.Pipe() return (reader: *io.PipeReader, writer: *io.PipeWriter)`
 
  
 
@@ -282,14 +211,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*io.PipeReader` |   |
-| r1 | `*io.PipeWriter` |   |
+| reader | `*io.PipeReader` |   |
+| writer | `*io.PipeWriter` |   |
 
 
  
 ### io.ReadAll
 
-
+把一个 reader 中的内容全部读出来
 
 #### 详细描述
 
@@ -297,14 +226,14 @@
 
 #### 定义：
 
-`func io.ReadAll(v1: io.Reader) return (r0: bytes, r1: error)`
+`func io.ReadAll(reader: io.Reader) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
+| reader | `io.Reader` |   |
 
 
 
@@ -319,43 +248,9 @@
 
 
  
-### io.ReadAtLeast
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func io.ReadAtLeast(v1: io.Reader, v2: bytes, v3: int) return (r0: int, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
-| v2 | `bytes` |   |
-| v3 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `int` |   |
-| r1 | `error` |   |
-
-
- 
 ### io.ReadEvery1s
 
-
+使用一个 ctx 控制生命周期，每隔一秒钟读一次 Reader，每隔一秒钟执行一次回调函数，回调函数如果返回 false，则立即停止读取
 
 #### 详细描述
 
@@ -363,16 +258,16 @@
 
 #### 定义：
 
-``func io.ReadEvery1s(v1: context.Context, v2: io.Reader, v3: func (v1: bytes) return(bool) )``
+``func io.ReadEvery1s(ctx: context.Context, reader: io.Reader, callback: func (v1: bytes) return(bool) )``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-| v2 | `io.Reader` |   |
-| v3 | `func (v1: bytes) return(bool) ` |   |
+| ctx | `context.Context` |   |
+| reader | `io.Reader` |   |
+| callback | `func (v1: bytes) return(bool) ` |  回调函数，如果回调函数返回 false，立即停止，如果想继续执行则需要返回 true |
 
 
 
@@ -382,7 +277,7 @@
  
 ### io.ReadFile
 
-
+把一个文件中的内容全部读出来
 
 #### 详细描述
 
@@ -390,14 +285,14 @@
 
 #### 定义：
 
-`func io.ReadFile(v1: string) return (r0: bytes, r1: error)`
+`func io.ReadFile(fileName: string) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -412,42 +307,9 @@
 
 
  
-### io.ReadFull
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func io.ReadFull(v1: io.Reader, v2: bytes) return (r0: int, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
-| v2 | `bytes` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `int` |   |
-| r1 | `error` |   |
-
-
- 
 ### io.TeeReader
 
-
+reader 分流，把 srcReader 读出来的内容会同步写到 teeWriter，通过返回值的 reader 来驱动
 
 #### 详细描述
 
@@ -455,15 +317,15 @@
 
 #### 定义：
 
-`func io.TeeReader(v1: io.Reader, v2: io.Writer) return (r0: io.Reader)`
+`func io.TeeReader(srcReader: io.Reader, teeWriter: io.Writer) return (r0: io.Reader)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
-| v2 | `io.Writer` |   |
+| srcReader | `io.Reader` |   |
+| teeWriter | `io.Writer` |   |
 
 
 
@@ -479,7 +341,7 @@
  
 ### io.WriteString
 
-
+把一个 string 写到 writer 中
 
 #### 详细描述
 
@@ -487,15 +349,15 @@
 
 #### 定义：
 
-`func io.WriteString(v1: io.Writer, v2: string) return (r0: int, r1: error)`
+`func io.WriteString(writer: io.Writer, content: string) return (r0: int, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Writer` |   |
-| v2 | `string` |   |
+| writer | `io.Writer` |   |
+| content | `string` |   |
 
 
 

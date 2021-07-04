@@ -3,12 +3,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [mitm.Bridge](#mitmbridge) |  |
- | [mitm.Start](#mitmstart) |  |
- | [mitm.callback](#mitmcallback) |  |
- | [mitm.context](#mitmcontext) |  |
- | [mitm.host](#mitmhost) |  |
- | [mitm.rootCA](#mitmrootca) |  |
+ | [mitm.Bridge](#mitmbridge) | 桥接模式中间人 |
+ | [mitm.Start](#mitmstart) | 启动一个中间人代理 |
+ | [mitm.callback](#mitmcallback) | 【参数】设置中间人代理的处理函数 |
+ | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
+ | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
+ | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
 
 
 
@@ -21,7 +21,7 @@
 
 ### mitm.Bridge
 
-
+桥接模式中间人
 
 #### 详细描述
 
@@ -29,16 +29,16 @@
 
 #### 定义：
 
-`func mitm.Bridge(v1: any, v2: string, v3 ...yaklib.mitmConfigOpt) return (r0: error)`
+`func mitm.Bridge(listenedPort: any, nextProxy: string, params ...opt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-| v3 | `...yaklib.mitmConfigOpt` |   |
+| listenedPort | `any` |  想要监听的本地端口 |
+| nextProxy | `string` |  想要中转的下游代理 |
+| params | `...opt` |  额外参数，用于设置证书/上下文等 |
 
 
 
@@ -54,7 +54,7 @@
  
 ### mitm.Start
 
-
+启动一个中间人代理
 
 #### 详细描述
 
@@ -62,15 +62,15 @@
 
 #### 定义：
 
-`func mitm.Start(v1: int, v2 ...yaklib.mitmConfigOpt) return (r0: error)`
+`func mitm.Start(port: int, params ...opt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-| v2 | `...yaklib.mitmConfigOpt` |   |
+| port | `int` |  中间人想要监听的代理 |
+| params | `...opt` |   |
 
 
 
@@ -86,7 +86,7 @@
  
 ### mitm.callback
 
-
+【参数】设置中间人代理的处理函数
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
  
 ### mitm.context
 
-
+【参数】设置中间人的 context，用来控制生命周期
 
 #### 详细描述
 
@@ -148,7 +148,7 @@
  
 ### mitm.host
 
-
+【参数】设置中间人代理/服务器的监听主机端口
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
  
 ### mitm.rootCA
 
-
+设置中间人根 CA 证书（可以用 `tls` 工具包生成）
 
 #### 详细描述
 
@@ -187,15 +187,15 @@
 
 #### 定义：
 
-`func mitm.rootCA(v1: bytes, v2: bytes) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`func mitm.rootCA(caCert: bytes, key: bytes) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bytes` |   |
-| v2 | `bytes` |   |
+| caCert | `bytes` |  设置 CA 根证书 |
+| key | `bytes` |  设置 CA 对应的私钥 |
 
 
 

@@ -3,74 +3,74 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [str.Compare](#strcompare) |  |
- | [str.Contains](#strcontains) |  |
- | [str.ContainsAny](#strcontainsany) |  |
- | [str.Count](#strcount) |  |
- | [str.EndsWith](#strendswith) |  |
- | [str.EqualFold](#strequalfold) |  |
- | [str.Fields](#strfields) |  |
- | [str.Grok](#strgrok) |  |
- | [str.HasPrefix](#strhasprefix) |  |
- | [str.HasSuffix](#strhassuffix) |  |
- | [str.HostPort](#strhostport) |  |
- | [str.IPv4ToCClassNetwork](#stripv4tocclassnetwork) |  |
- | [str.Index](#strindex) |  |
- | [str.IndexAny](#strindexany) |  |
- | [str.IndexByte](#strindexbyte) |  |
- | [str.IsIPv4](#strisipv4) |  |
- | [str.IsIPv6](#strisipv6) |  |
- | [str.IsStrongPassword](#strisstrongpassword) |  |
- | [str.Join](#strjoin) |  |
- | [str.JsonStreamToMapList](#strjsonstreamtomaplist) |  |
- | [str.JsonToMap](#strjsontomap) |  |
+ | [str.Compare](#strcompare) | 比较字符串 |
+ | [str.Contains](#strcontains) | 字符串中是否包含一个子串 |
+ | [str.ContainsAny](#strcontainsany) | 字符串中包含字串的任何一个字符 |
+ | [str.Count](#strcount) | 字符串中包含多少个字串？ |
+ | [str.EndsWith](#strendswith) | 判断字符串是否以子串为结尾 |
+ | [str.EqualFold](#strequalfold) | 判断忽略大小写字符串是否相等？ |
+ | [str.Fields](#strfields) | 按空格把字符串分割开 |
+ | [str.Grok](#strgrok) | 同 `re.Grok` |
+ | [str.HasPrefix](#strhasprefix) | 判断字符串是不是以子串为前缀 |
+ | [str.HasSuffix](#strhassuffix) | 判断字符串是否以子字符串为后缀 |
+ | [str.HostPort](#strhostport) | 把字符串Host和Port拼接起来 |
+ | [str.IPv4ToCClassNetwork](#stripv4tocclassnetwork) | 把一个 IPv4 变成对应的 C段网络 |
+ | [str.Index](#strindex) | 判断子字符串在字符串中的位置 |
+ | [str.IndexAny](#strindexany) | 判断子字符串中任意一个字符在主串中的位置 |
+ | [str.IndexByte](#strindexbyte) | 判断一个 byte 的位置 |
+ | [str.IsIPv4](#strisipv4) | 判断一个字符串是不是 IPv4 |
+ | [str.IsIPv6](#strisipv6) | 判断一个字符串是不是 IPv6 |
+ | [str.IsStrongPassword](#strisstrongpassword) | 判断一个密码是不是强密码 |
+ | [str.Join](#strjoin) | Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分隔符 |
+ | [str.JsonStreamToMapList](#strjsonstreamtomaplist) | 把 json 流解析成多个 `map[string]interface{}` |
+ | [str.JsonToMap](#strjsontomap) | 把 Json 解析成 `map[string]string` |
  | [str.JsonToMapList](#strjsontomaplist) |  |
- | [str.LastIndex](#strlastindex) |  |
- | [str.LastIndexAny](#strlastindexany) |  |
- | [str.LastIndexByte](#strlastindexbyte) |  |
- | [str.LowerAndTrimSpace](#strlowerandtrimspace) |  |
- | [str.NewFilter](#strnewfilter) |  |
- | [str.NewReader](#strnewreader) |  |
- | [str.ParamsGetOr](#strparamsgetor) |  |
- | [str.ParseStringToHostPort](#strparsestringtohostport) |  |
- | [str.ParseStringToHosts](#strparsestringtohosts) |  |
- | [str.ParseStringToLines](#strparsestringtolines) |  |
- | [str.ParseStringToPorts](#strparsestringtoports) |  |
- | [str.ParseStringToUrls](#strparsestringtourls) |  |
- | [str.ParseStringToUrlsWith3W](#strparsestringtourlswith3w) |  |
- | [str.PathJoin](#strpathjoin) |  |
- | [str.RandSecret](#strrandsecret) |  |
- | [str.RandStr](#strrandstr) |  |
- | [str.RegexpMatch](#strregexpmatch) |  |
- | [str.RemoveRepeat](#strremoverepeat) |  |
- | [str.Repeat](#strrepeat) |  |
- | [str.Replace](#strreplace) |  |
- | [str.ReplaceAll](#strreplaceall) |  |
- | [str.Split](#strsplit) |  |
- | [str.SplitAfter](#strsplitafter) |  |
- | [str.SplitAfterN](#strsplitaftern) |  |
- | [str.SplitAndTrim](#strsplitandtrim) |  |
- | [str.SplitN](#strsplitn) |  |
- | [str.StartsWith](#strstartswith) |  |
- | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) |  |
- | [str.StringSliceContains](#strstringslicecontains) |  |
- | [str.StringSliceContainsAll](#strstringslicecontainsall) |  |
- | [str.Title](#strtitle) |  |
- | [str.ToJsonIndentStr](#strtojsonindentstr) |  |
- | [str.ToLower](#strtolower) |  |
- | [str.ToLowerSpecial](#strtolowerspecial) |  |
- | [str.ToTitle](#strtotitle) |  |
- | [str.ToTitleSpecial](#strtotitlespecial) |  |
- | [str.ToUpper](#strtoupper) |  |
- | [str.ToUpperSpecial](#strtoupperspecial) |  |
- | [str.ToValidUTF8](#strtovalidutf8) |  |
- | [str.Trim](#strtrim) |  |
- | [str.TrimLeft](#strtrimleft) |  |
- | [str.TrimPrefix](#strtrimprefix) |  |
- | [str.TrimRight](#strtrimright) |  |
- | [str.TrimSpace](#strtrimspace) |  |
- | [str.TrimSuffix](#strtrimsuffix) |  |
- | [str.f](#strf) |  |
+ | [str.LastIndex](#strlastindex) | 从后往前匹配最后一个子字符串位置 |
+ | [str.LastIndexAny](#strlastindexany) | 子字符串中任何一个字符在主字符串中最后出现的位置 |
+ | [str.LastIndexByte](#strlastindexbyte) | 最后一个目标 byte 的位置 |
+ | [str.LowerAndTrimSpace](#strlowerandtrimspace) | 把字符串前后空白移除，并变成小写 |
+ | [str.NewFilter](#strnewfilter) | 创建一个字符串过滤器 |
+ | [str.NewReader](#strnewreader) | 创建一个 Reader |
+ | [str.ParamsGetOr](#strparamsgetor) | 从 `map[string]string` 中获取参数 |
+ | [str.ParseStringToHostPort](#strparsestringtohostport) | 把字符串解析成 host 和 port |
+ | [str.ParseStringToHosts](#strparsestringtohosts) | 把字符串解析成 hosts，字符串可以是逗号分割的网段/域名/ip地址 |
+ | [str.ParseStringToLines](#strparsestringtolines) | 把一个字符串按行解析 |
+ | [str.ParseStringToPorts](#strparsestringtoports) | 把字符串解析成多个端口，逗号分隔 |
+ | [str.ParseStringToUrls](#strparsestringtourls) | 把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，不自动补充 WWW 前缀） |
+ | [str.ParseStringToUrlsWith3W](#strparsestringtourlswith3w) | 把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，自动补充 WWW 前缀） |
+ | [str.PathJoin](#strpathjoin) | 把 path 进行拼接 |
+ | [str.RandSecret](#strrandsecret) | 生成一个随机密码 |
+ | [str.RandStr](#strrandstr) | 生成一个随机字符串 |
+ | [str.RegexpMatch](#strregexpmatch) | 使用正则匹配 |
+ | [str.RemoveRepeat](#strremoverepeat) | 移除 slice 中重复元素 |
+ | [str.Repeat](#strrepeat) | 重复字符串 |
+ | [str.Replace](#strreplace) | 字符串替换（次数） |
+ | [str.ReplaceAll](#strreplaceall) | 字符串替换，全部 |
+ | [str.Split](#strsplit) | 分割字符串 |
+ | [str.SplitAfter](#strsplitafter) | 分割字符串，不移除分隔符 |
+ | [str.SplitAfterN](#strsplitaftern) | 分割字符串，不移除分隔符，最多分割成N个块 |
+ | [str.SplitAndTrim](#strsplitandtrim) | 分割，并清除每一个部分的前后空白 |
+ | [str.SplitN](#strsplitn) | 分割字符串，分割成N块 |
+ | [str.StartsWith](#strstartswith) | 判断主字符串是否是子串开头？ |
+ | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) | 判断字符串是否包含任意一个后续 Slice 中的元素？ |
+ | [str.StringSliceContains](#strstringslicecontains) | 判断一个 Slice 中是否包含一个子字符串？ |
+ | [str.StringSliceContainsAll](#strstringslicecontainsall) | 判断一个 Slice 中是否包含后续所有子串？ |
+ | [str.Title](#strtitle) | 把字符串每个单词首字母大写，变成 Title |
+ | [str.ToJsonIndentStr](#strtojsonindentstr) | 把一个对象解析成 Json，并保证 indent 合理 |
+ | [str.ToLower](#strtolower) | 把字符串变成小写 |
+ | [str.ToLowerSpecial](#strtolowerspecial) | 同 Golang `strings.ToLowerSpecial` |
+ | [str.ToTitle](#strtotitle) | 同 Golang `strings.ToTitle` |
+ | [str.ToTitleSpecial](#strtotitlespecial) | 同 Golang `strings.ToTitleSpecial` |
+ | [str.ToUpper](#strtoupper) | 把字符串变成全大写 |
+ | [str.ToUpperSpecial](#strtoupperspecial) | 同 Golang `strings.ToUpperSpecial` |
+ | [str.ToValidUTF8](#strtovalidutf8) | 把字符串中不安全的UTF8字符替换掉，避免 panic |
+ | [str.Trim](#strtrim) | 把字符串前后任何包含子字符串中字符移除 |
+ | [str.TrimLeft](#strtrimleft) | 移除左边的某些字符 |
+ | [str.TrimPrefix](#strtrimprefix) | 移除某个前缀 |
+ | [str.TrimRight](#strtrimright) | 移除右边的某些字符 |
+ | [str.TrimSpace](#strtrimspace) | 移除前后空白字符 |
+ | [str.TrimSuffix](#strtrimsuffix) | 移除后缀 |
+ | [str.f](#strf) | 相当于 `fmt.Sprintf` |
 
 
 
@@ -83,7 +83,7 @@
 
 ### str.Compare
 
-
+比较字符串
 
 #### 详细描述
 
@@ -115,7 +115,7 @@
  
 ### str.Contains
 
-
+字符串中是否包含一个子串
 
 #### 详细描述
 
@@ -123,15 +123,15 @@
 
 #### 定义：
 
-`func str.Contains(v1: string, v2: string) return (r0: bool)`
+`func str.Contains(all: string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -147,7 +147,7 @@
  
 ### str.ContainsAny
 
-
+字符串中包含字串的任何一个字符
 
 #### 详细描述
 
@@ -155,15 +155,15 @@
 
 #### 定义：
 
-`func str.ContainsAny(v1: string, v2: string) return (r0: bool)`
+`func str.ContainsAny(all: string, chars: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| chars | `string` |   |
 
 
 
@@ -179,7 +179,7 @@
  
 ### str.Count
 
-
+字符串中包含多少个字串？
 
 #### 详细描述
 
@@ -187,15 +187,15 @@
 
 #### 定义：
 
-`func str.Count(v1: string, v2: string) return (r0: int)`
+`func str.Count(all: string, sub: string) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -211,7 +211,7 @@
  
 ### str.EndsWith
 
-
+判断字符串是否以子串为结尾
 
 #### 详细描述
 
@@ -219,15 +219,15 @@
 
 #### 定义：
 
-`func str.EndsWith(v1: string, v2: string) return (r0: bool)`
+`func str.EndsWith(all: string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -243,7 +243,7 @@
  
 ### str.EqualFold
 
-
+判断忽略大小写字符串是否相等？
 
 #### 详细描述
 
@@ -275,7 +275,7 @@
  
 ### str.Fields
 
-
+按空格把字符串分割开
 
 #### 详细描述
 
@@ -306,7 +306,7 @@
  
 ### str.Grok
 
-
+同 `re.Grok`
 
 #### 详细描述
 
@@ -314,15 +314,15 @@
 
 #### 定义：
 
-`func str.Grok(v1: string, v2: string) return (r0: yaklib.GrokResult)`
+`func str.Grok(content: string, grokRule: string) return (r0: yaklib.GrokResult)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| content | `string` |   |
+| grokRule | `string` |   |
 
 
 
@@ -338,7 +338,7 @@
  
 ### str.HasPrefix
 
-
+判断字符串是不是以子串为前缀
 
 #### 详细描述
 
@@ -346,15 +346,15 @@
 
 #### 定义：
 
-`func str.HasPrefix(v1: string, v2: string) return (r0: bool)`
+`func str.HasPrefix(all: string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -370,7 +370,7 @@
  
 ### str.HasSuffix
 
-
+判断字符串是否以子字符串为后缀
 
 #### 详细描述
 
@@ -378,15 +378,15 @@
 
 #### 定义：
 
-`func str.HasSuffix(v1: string, v2: string) return (r0: bool)`
+`func str.HasSuffix(all: string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -402,7 +402,7 @@
  
 ### str.HostPort
 
-
+把字符串Host和Port拼接起来
 
 #### 详细描述
 
@@ -410,15 +410,15 @@
 
 #### 定义：
 
-`func str.HostPort(v1: string, v2: any) return (r0: string)`
+`func str.HostPort(host: string, port: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
+| host | `string` |   |
+| port | `any` |   |
 
 
 
@@ -434,7 +434,7 @@
  
 ### str.IPv4ToCClassNetwork
 
-
+把一个 IPv4 变成对应的 C段网络
 
 #### 详细描述
 
@@ -442,14 +442,14 @@
 
 #### 定义：
 
-`func str.IPv4ToCClassNetwork(v1: string) return (r0: string, r1: error)`
+`func str.IPv4ToCClassNetwork(ip: string) return (network: string, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| ip | `string` |   |
 
 
 
@@ -459,14 +459,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| network | `string` |   |
 | r1 | `error` |   |
 
 
  
 ### str.Index
 
-
+判断子字符串在字符串中的位置
 
 #### 详细描述
 
@@ -474,15 +474,15 @@
 
 #### 定义：
 
-`func str.Index(v1: string, v2: string) return (r0: int)`
+`func str.Index(all: string, sub: string) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -498,7 +498,7 @@
  
 ### str.IndexAny
 
-
+判断子字符串中任意一个字符在主串中的位置
 
 #### 详细描述
 
@@ -506,15 +506,15 @@
 
 #### 定义：
 
-`func str.IndexAny(v1: string, v2: string) return (r0: int)`
+`func str.IndexAny(all: string, sub: string) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -530,7 +530,7 @@
  
 ### str.IndexByte
 
-
+判断一个 byte 的位置
 
 #### 详细描述
 
@@ -538,15 +538,15 @@
 
 #### 定义：
 
-`func str.IndexByte(v1: string, v2: byte) return (r0: int)`
+`func str.IndexByte(all: string, byte: byte) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `byte` |   |
+| all | `string` |   |
+| byte | `byte` |   |
 
 
 
@@ -562,7 +562,7 @@
  
 ### str.IsIPv4
 
-
+判断一个字符串是不是 IPv4
 
 #### 详细描述
 
@@ -593,7 +593,7 @@
  
 ### str.IsIPv6
 
-
+判断一个字符串是不是 IPv6
 
 #### 详细描述
 
@@ -624,7 +624,7 @@
  
 ### str.IsStrongPassword
 
-
+判断一个密码是不是强密码
 
 #### 详细描述
 
@@ -655,7 +655,7 @@
  
 ### str.Join
 
-
+Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分隔符
 
 #### 详细描述
 
@@ -663,15 +663,15 @@
 
 #### 定义：
 
-`func str.Join(v1: []string, v2: string) return (r0: string)`
+`func str.Join(strSlice: []string, seperator: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-| v2 | `string` |   |
+| strSlice | `[]string` |   |
+| seperator | `string` |   |
 
 
 
@@ -687,7 +687,7 @@
  
 ### str.JsonStreamToMapList
 
-
+把 json 流解析成多个 `map[string]interface{}`
 
 #### 详细描述
 
@@ -718,7 +718,7 @@
  
 ### str.JsonToMap
 
-
+把 Json 解析成 `map[string]string`
 
 #### 详细描述
 
@@ -780,7 +780,7 @@
  
 ### str.LastIndex
 
-
+从后往前匹配最后一个子字符串位置
 
 #### 详细描述
 
@@ -788,15 +788,15 @@
 
 #### 定义：
 
-`func str.LastIndex(v1: string, v2: string) return (r0: int)`
+`func str.LastIndex(all: string, sub: string) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -812,7 +812,7 @@
  
 ### str.LastIndexAny
 
-
+子字符串中任何一个字符在主字符串中最后出现的位置
 
 #### 详细描述
 
@@ -820,15 +820,15 @@
 
 #### 定义：
 
-`func str.LastIndexAny(v1: string, v2: string) return (r0: int)`
+`func str.LastIndexAny(all: string, sub: string) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -844,7 +844,7 @@
  
 ### str.LastIndexByte
 
-
+最后一个目标 byte 的位置
 
 #### 详细描述
 
@@ -852,15 +852,15 @@
 
 #### 定义：
 
-`func str.LastIndexByte(v1: string, v2: byte) return (r0: int)`
+`func str.LastIndexByte(all: string, byte: byte) return (r0: int)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `byte` |   |
+| all | `string` |   |
+| byte | `byte` |   |
 
 
 
@@ -876,7 +876,7 @@
  
 ### str.LowerAndTrimSpace
 
-
+把字符串前后空白移除，并变成小写
 
 #### 详细描述
 
@@ -907,7 +907,7 @@
  
 ### str.NewFilter
 
-
+创建一个字符串过滤器
 
 #### 详细描述
 
@@ -930,7 +930,7 @@
  
 ### str.NewReader
 
-
+创建一个 Reader
 
 #### 详细描述
 
@@ -961,7 +961,7 @@
  
 ### str.ParamsGetOr
 
-
+从 `map[string]string` 中获取参数
 
 #### 详细描述
 
@@ -969,16 +969,16 @@
 
 #### 定义：
 
-`func str.ParamsGetOr(v1: map[string]string, v2: string, v3: string) return (r0: string)`
+`func str.ParamsGetOr(params: map[string]string, key: string, defaulValue: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
+| params | `map[string]string` |   |
+| key | `string` |   |
+| defaulValue | `string` |   |
 
 
 
@@ -994,7 +994,7 @@
  
 ### str.ParseStringToHostPort
 
-
+把字符串解析成 host 和 port
 
 #### 详细描述
 
@@ -1002,7 +1002,7 @@
 
 #### 定义：
 
-`func str.ParseStringToHostPort(v1: string) return (r0: string, r1: int, r2: error)`
+`func str.ParseStringToHostPort(v1: string) return (host: string, port: int, r2: error)`
 
 
 #### 参数
@@ -1019,15 +1019,15 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `int` |   |
+| host | `string` |   |
+| port | `int` |   |
 | r2 | `error` |   |
 
 
  
 ### str.ParseStringToHosts
 
-
+把字符串解析成 hosts，字符串可以是逗号分割的网段/域名/ip地址
 
 #### 详细描述
 
@@ -1058,7 +1058,7 @@
  
 ### str.ParseStringToLines
 
-
+把一个字符串按行解析
 
 #### 详细描述
 
@@ -1089,7 +1089,7 @@
  
 ### str.ParseStringToPorts
 
-
+把字符串解析成多个端口，逗号分隔
 
 #### 详细描述
 
@@ -1120,7 +1120,7 @@
  
 ### str.ParseStringToUrls
 
-
+把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，不自动补充 WWW 前缀）
 
 #### 详细描述
 
@@ -1151,7 +1151,7 @@
  
 ### str.ParseStringToUrlsWith3W
 
-
+把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，自动补充 WWW 前缀）
 
 #### 详细描述
 
@@ -1182,7 +1182,7 @@
  
 ### str.PathJoin
 
-
+把 path 进行拼接
 
 #### 详细描述
 
@@ -1213,7 +1213,7 @@
  
 ### str.RandSecret
 
-
+生成一个随机密码
 
 #### 详细描述
 
@@ -1221,14 +1221,14 @@
 
 #### 定义：
 
-`func str.RandSecret(v1: int) return (r0: string)`
+`func str.RandSecret(length: int) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| length | `int` |  随机密码长度 |
 
 
 
@@ -1244,7 +1244,7 @@
  
 ### str.RandStr
 
-
+生成一个随机字符串
 
 #### 详细描述
 
@@ -1252,14 +1252,14 @@
 
 #### 定义：
 
-`func str.RandStr(v1: int) return (r0: string)`
+`func str.RandStr(length: int) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| length | `int` |  随机字符串长度 |
 
 
 
@@ -1275,7 +1275,7 @@
  
 ### str.RegexpMatch
 
-
+使用正则匹配
 
 #### 详细描述
 
@@ -1283,15 +1283,15 @@
 
 #### 定义：
 
-`func str.RegexpMatch(v1: string, v2: any) return (r0: bool)`
+`func str.RegexpMatch(regexpPattern: string, content: any) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
+| regexpPattern | `string` |   |
+| content | `any` |   |
 
 
 
@@ -1307,7 +1307,7 @@
  
 ### str.RemoveRepeat
 
-
+移除 slice 中重复元素
 
 #### 详细描述
 
@@ -1338,7 +1338,7 @@
  
 ### str.Repeat
 
-
+重复字符串
 
 #### 详细描述
 
@@ -1346,15 +1346,15 @@
 
 #### 定义：
 
-`func str.Repeat(v1: string, v2: int) return (r0: string)`
+`func str.Repeat(strContent: string, count: int) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
+| strContent | `string` |  想要重复的字符串 |
+| count | `int` |  重复次数 |
 
 
 
@@ -1370,7 +1370,7 @@
  
 ### str.Replace
 
-
+字符串替换（次数）
 
 #### 详细描述
 
@@ -1378,17 +1378,17 @@
 
 #### 定义：
 
-`func str.Replace(v1: string, v2: string, v3: string, v4: int) return (r0: string)`
+`func str.Replace(raw: string, old: string, new: string, matchTimes: int) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
-| v4 | `int` |   |
+| raw | `string` |  原始字符串 |
+| old | `string` |  想要匹配的旧字符串 |
+| new | `string` |  想要替换的新字符串 |
+| matchTimes | `int` |  匹配次数 |
 
 
 
@@ -1404,7 +1404,7 @@
  
 ### str.ReplaceAll
 
-
+字符串替换，全部
 
 #### 详细描述
 
@@ -1412,16 +1412,16 @@
 
 #### 定义：
 
-`func str.ReplaceAll(v1: string, v2: string, v3: string) return (r0: string)`
+`func str.ReplaceAll(raw: string, old: string, new: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
+| raw | `string` |  全部字符串 |
+| old | `string` |   |
+| new | `string` |   |
 
 
 
@@ -1437,7 +1437,7 @@
  
 ### str.Split
 
-
+分割字符串
 
 #### 详细描述
 
@@ -1445,15 +1445,15 @@
 
 #### 定义：
 
-`func str.Split(v1: string, v2: string) return (r0: []string)`
+`func str.Split(all: string, sep: string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sep | `string` |   |
 
 
 
@@ -1469,7 +1469,7 @@
  
 ### str.SplitAfter
 
-
+分割字符串，不移除分隔符
 
 #### 详细描述
 
@@ -1477,15 +1477,15 @@
 
 #### 定义：
 
-`func str.SplitAfter(v1: string, v2: string) return (r0: []string)`
+`func str.SplitAfter(all: string, sep: string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sep | `string` |   |
 
 
 
@@ -1501,7 +1501,7 @@
  
 ### str.SplitAfterN
 
-
+分割字符串，不移除分隔符，最多分割成N个块
 
 #### 详细描述
 
@@ -1509,16 +1509,16 @@
 
 #### 定义：
 
-`func str.SplitAfterN(v1: string, v2: string, v3: int) return (r0: []string)`
+`func str.SplitAfterN(all: string, sep: string, n: int) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `int` |   |
+| all | `string` |   |
+| sep | `string` |   |
+| n | `int` |   |
 
 
 
@@ -1534,7 +1534,7 @@
  
 ### str.SplitAndTrim
 
-
+分割，并清除每一个部分的前后空白
 
 #### 详细描述
 
@@ -1542,15 +1542,15 @@
 
 #### 定义：
 
-`func str.SplitAndTrim(v1: string, v2: string) return (r0: []string)`
+`func str.SplitAndTrim(all: string, sep: string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sep | `string` |   |
 
 
 
@@ -1566,7 +1566,7 @@
  
 ### str.SplitN
 
-
+分割字符串，分割成N块
 
 #### 详细描述
 
@@ -1574,16 +1574,16 @@
 
 #### 定义：
 
-`func str.SplitN(v1: string, v2: string, v3: int) return (r0: []string)`
+`func str.SplitN(all: string, sep: string, n: int) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `int` |   |
+| all | `string` |   |
+| sep | `string` |   |
+| n | `int` |   |
 
 
 
@@ -1599,7 +1599,7 @@
  
 ### str.StartsWith
 
-
+判断主字符串是否是子串开头？
 
 #### 详细描述
 
@@ -1607,15 +1607,15 @@
 
 #### 定义：
 
-`func str.StartsWith(v1: string, v2: string) return (r0: bool)`
+`func str.StartsWith(all: string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| all | `string` |   |
+| sub | `string` |   |
 
 
 
@@ -1631,7 +1631,7 @@
  
 ### str.StringContainsAnyOfSubString
 
-
+判断字符串是否包含任意一个后续 Slice 中的元素？
 
 #### 详细描述
 
@@ -1639,15 +1639,15 @@
 
 #### 定义：
 
-`func str.StringContainsAnyOfSubString(v1: string, v2: []string) return (r0: bool)`
+`func str.StringContainsAnyOfSubString(all: string, subStrs: []string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `[]string` |   |
+| all | `string` |   |
+| subStrs | `[]string` |   |
 
 
 
@@ -1663,7 +1663,7 @@
  
 ### str.StringSliceContains
 
-
+判断一个 Slice 中是否包含一个子字符串？
 
 #### 详细描述
 
@@ -1671,15 +1671,15 @@
 
 #### 定义：
 
-`func str.StringSliceContains(v1: []string, v2: string) return (r0: bool)`
+`func str.StringSliceContains(slice: []string, sub: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-| v2 | `string` |   |
+| slice | `[]string` |   |
+| sub | `string` |   |
 
 
 
@@ -1695,7 +1695,7 @@
  
 ### str.StringSliceContainsAll
 
-
+判断一个 Slice 中是否包含后续所有子串？
 
 #### 详细描述
 
@@ -1703,15 +1703,15 @@
 
 #### 定义：
 
-`func str.StringSliceContainsAll(v1: []string, v2 ...string) return (r0: bool)`
+`func str.StringSliceContainsAll(slice: []string, subStrs ...string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-| v2 | `...string` |   |
+| slice | `[]string` |   |
+| subStrs | `...string` |   |
 
 
 
@@ -1727,7 +1727,7 @@
  
 ### str.Title
 
-
+把字符串每个单词首字母大写，变成 Title
 
 #### 详细描述
 
@@ -1758,7 +1758,7 @@
  
 ### str.ToJsonIndentStr
 
-
+把一个对象解析成 Json，并保证 indent 合理
 
 #### 详细描述
 
@@ -1789,7 +1789,7 @@
  
 ### str.ToLower
 
-
+把字符串变成小写
 
 #### 详细描述
 
@@ -1820,7 +1820,7 @@
  
 ### str.ToLowerSpecial
 
-
+同 Golang `strings.ToLowerSpecial`
 
 #### 详细描述
 
@@ -1852,7 +1852,7 @@
  
 ### str.ToTitle
 
-
+同 Golang `strings.ToTitle`
 
 #### 详细描述
 
@@ -1883,7 +1883,7 @@
  
 ### str.ToTitleSpecial
 
-
+同 Golang `strings.ToTitleSpecial`
 
 #### 详细描述
 
@@ -1915,7 +1915,7 @@
  
 ### str.ToUpper
 
-
+把字符串变成全大写
 
 #### 详细描述
 
@@ -1946,7 +1946,7 @@
  
 ### str.ToUpperSpecial
 
-
+同 Golang `strings.ToUpperSpecial`
 
 #### 详细描述
 
@@ -1978,7 +1978,7 @@
  
 ### str.ToValidUTF8
 
-
+把字符串中不安全的UTF8字符替换掉，避免 panic
 
 #### 详细描述
 
@@ -1986,15 +1986,15 @@
 
 #### 定义：
 
-`func str.ToValidUTF8(v1: string, v2: string) return (r0: string)`
+`func str.ToValidUTF8(originStr: string, replaced: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| originStr | `string` |  原字符串 |
+| replaced | `string` |  想要替换成的字符串 |
 
 
 
@@ -2010,7 +2010,7 @@
  
 ### str.Trim
 
-
+把字符串前后任何包含子字符串中字符移除
 
 #### 详细描述
 
@@ -2018,15 +2018,15 @@
 
 #### 定义：
 
-`func str.Trim(v1: string, v2: string) return (r0: string)`
+`func str.Trim(origin: string, subs: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| origin | `string` |   |
+| subs | `string` |  想要移除的子字符集合 |
 
 
 
@@ -2042,7 +2042,7 @@
  
 ### str.TrimLeft
 
-
+移除左边的某些字符
 
 #### 详细描述
 
@@ -2050,15 +2050,15 @@
 
 #### 定义：
 
-`func str.TrimLeft(v1: string, v2: string) return (r0: string)`
+`func str.TrimLeft(origin: string, subs: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| origin | `string` |   |
+| subs | `string` |   |
 
 
 
@@ -2074,7 +2074,7 @@
  
 ### str.TrimPrefix
 
-
+移除某个前缀
 
 #### 详细描述
 
@@ -2082,15 +2082,15 @@
 
 #### 定义：
 
-`func str.TrimPrefix(v1: string, v2: string) return (r0: string)`
+`func str.TrimPrefix(origin: string, prefix: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| origin | `string` |   |
+| prefix | `string` |   |
 
 
 
@@ -2106,7 +2106,7 @@
  
 ### str.TrimRight
 
-
+移除右边的某些字符
 
 #### 详细描述
 
@@ -2114,15 +2114,15 @@
 
 #### 定义：
 
-`func str.TrimRight(v1: string, v2: string) return (r0: string)`
+`func str.TrimRight(origin: string, subs: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| origin | `string` |   |
+| subs | `string` |   |
 
 
 
@@ -2138,7 +2138,7 @@
  
 ### str.TrimSpace
 
-
+移除前后空白字符
 
 #### 详细描述
 
@@ -2169,7 +2169,7 @@
  
 ### str.TrimSuffix
 
-
+移除后缀
 
 #### 详细描述
 
@@ -2177,15 +2177,15 @@
 
 #### 定义：
 
-`func str.TrimSuffix(v1: string, v2: string) return (r0: string)`
+`func str.TrimSuffix(origin: string, suffix: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| origin | `string` |   |
+| suffix | `string` |   |
 
 
 
@@ -2201,7 +2201,7 @@
  
 ### str.f
 
-
+相当于 `fmt.Sprintf`
 
 #### 详细描述
 
@@ -2209,15 +2209,15 @@
 
 #### 定义：
 
-`func str.f(v1: string, v2 ...any) return (r0: string)`
+`func str.f(strFmt: string, items ...any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...any` |   |
+| strFmt | `string` |   |
+| items | `...any` |   |
 
 
 

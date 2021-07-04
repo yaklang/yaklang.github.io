@@ -5,8 +5,6 @@
 |:------|:--------|
  | [tools.NewBruteUtil](#toolsnewbruteutil) |  |
  | [tools.NewPocInvoker](#toolsnewpocinvoker) |  |
- | [tools.NewSubFinder](#toolsnewsubfinder) |  |
- | [tools.ScanSubDomain](#toolsscansubdomain) |  |
 
 
 
@@ -69,63 +67,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `*tools.PocInvoker` |   |
-| r1 | `error` |   |
-
-
- 
-### tools.NewSubFinder
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func tools.NewSubFinder() return (r0: *tools.SubFinderInstance, r1: error)`
-
- 
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*tools.SubFinderInstance` |   |
-| r1 | `error` |   |
-
-
- 
-### tools.ScanSubDomain
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func tools.ScanSubDomain(v1: context.Context, v2 ...string) return (r0: chan *subdomain.SubdomainResult, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-| v2 | `...string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `chan *subdomain.SubdomainResult` |   |
 | r1 | `error` |   |
 
 

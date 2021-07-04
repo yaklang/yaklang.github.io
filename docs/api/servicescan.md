@@ -3,21 +3,21 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [servicescan.Scan](#servicescanscan) |  |
- | [servicescan.ScanFromSpaceEngine](#servicescanscanfromspaceengine) |  |
- | [servicescan.ScanFromSynResult](#servicescanscanfromsynresult) |  |
- | [servicescan.ScanOne](#servicescanscanone) |  |
- | [servicescan.active](#servicescanactive) |  |
- | [servicescan.all](#servicescanall) |  |
+ | [servicescan.Scan](#servicescanscan) | 扫描服务指纹的核心函数 |
+ | [servicescan.ScanFromSpaceEngine](#servicescanscanfromspaceengine) | 从网络空间搜索引擎的结果中扫描指纹信息 |
+ | [servicescan.ScanFromSynResult](#servicescanscanfromsynresult) | 从 synscan 中返回的结果直接进入 servicescan 扫描的通道 |
+ | [servicescan.ScanOne](#servicescanscanone) | 同步扫描单个目标 |
+ | [servicescan.active](#servicescanactive) | 【参数】主动扫描模式 |
+ | [servicescan.all](#servicescanall) | 【参数】扫描全部指纹 |
  | [servicescan.concurrent](#servicescanconcurrent) |  |
- | [servicescan.maxProbes](#servicescanmaxprobes) |  |
- | [servicescan.maxProbesConcurrent](#servicescanmaxprobesconcurrent) |  |
- | [servicescan.nmapRarityMax](#servicescannmapraritymax) |  |
- | [servicescan.nmapRule](#servicescannmaprule) |  |
- | [servicescan.proto](#servicescanproto) |  |
- | [servicescan.service](#servicescanservice) |  |
- | [servicescan.web](#servicescanweb) |  |
- | [servicescan.webRule](#servicescanwebrule) |  |
+ | [servicescan.maxProbes](#servicescanmaxprobes) | 【参数】设置每个指纹扫描过程最多主动发送多少个数据包 |
+ | [servicescan.maxProbesConcurrent](#servicescanmaxprobesconcurrent) | 【参数】每个指纹扫描目标允许的并发量 |
+ | [servicescan.nmapRarityMax](#servicescannmapraritymax) | 【参数】设置nmap规则的最大稀有度 |
+ | [servicescan.nmapRule](#servicescannmaprule) | 【参数】设置 nmap 规则文件（可以自己写） |
+ | [servicescan.proto](#servicescanproto) | 设置扫描的协议 |
+ | [servicescan.service](#servicescanservice) | 启动服务扫描（nmap 规则库） |
+ | [servicescan.web](#servicescanweb) | 强制启用 web 扫描 |
+ | [servicescan.webRule](#servicescanwebrule) | 启用用户自定义 web 规则 |
 
 
 
@@ -30,7 +30,7 @@
 
 ### servicescan.Scan
 
-
+扫描服务指纹的核心函数
 
 #### 详细描述
 
@@ -38,16 +38,16 @@
 
 #### 定义：
 
-`func servicescan.Scan(v1: string, v2: string, v3 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.Scan(hosts: string, ports: string, params ...opt) return (resultChannel: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...fp.ConfigOption` |   |
+| hosts | `string` |  想要扫描的主机，支持 `,` 分割的网段，IP地址，域名等 |
+| ports | `string` |  想要扫描的端口 |
+| params | `...opt` |  额外扫描参数 |
 
 
 
@@ -57,14 +57,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *fp.MatchResult` |   |
+| resultChannel | `chan *fp.MatchResult` |  扫描结果的返回点 |
 | r1 | `error` |   |
 
 
  
 ### servicescan.ScanFromSpaceEngine
 
-
+从网络空间搜索引擎的结果中扫描指纹信息
 
 #### 详细描述
 
@@ -72,15 +72,15 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSpaceEngine(v1: any, v2 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.ScanFromSpaceEngine(chanFromSpacengine: any, params ...opt) return (resultChan: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...fp.ConfigOption` |   |
+| chanFromSpacengine | `any` |  从 spacengine 模块中返回的扫描结果 chan |
+| params | `...opt` |  额外参数 |
 
 
 
@@ -90,14 +90,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *fp.MatchResult` |   |
+| resultChan | `chan *fp.MatchResult` |   |
 | r1 | `error` |   |
 
 
  
 ### servicescan.ScanFromSynResult
 
-
+从 synscan 中返回的结果直接进入 servicescan 扫描的通道
 
 #### 详细描述
 
@@ -105,15 +105,15 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSynResult(v1: any, v2 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`func servicescan.ScanFromSynResult(chanForSynScan: any, params ...opt) return (resultChan: chan *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...fp.ConfigOption` |   |
+| chanForSynScan | `any` |   |
+| params | `...opt` |  额外参数 |
 
 
 
@@ -123,14 +123,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *fp.MatchResult` |   |
+| resultChan | `chan *fp.MatchResult` |   |
 | r1 | `error` |   |
 
 
  
 ### servicescan.ScanOne
 
-
+同步扫描单个目标
 
 #### 详细描述
 
@@ -138,16 +138,16 @@
 
 #### 定义：
 
-`func servicescan.ScanOne(v1: string, v2: int, v3 ...fp.ConfigOption) return (r0: *fp.MatchResult, r1: error)`
+`func servicescan.ScanOne(host: string, port: int, params ...opt) return (resultChan: *fp.MatchResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `...fp.ConfigOption` |   |
+| host | `string` |   |
+| port | `int` |   |
+| params | `...opt` |   |
 
 
 
@@ -157,14 +157,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*fp.MatchResult` |   |
+| resultChan | `*fp.MatchResult` |   |
 | r1 | `error` |   |
 
 
  
 ### servicescan.active
 
-
+【参数】主动扫描模式
 
 #### 详细描述
 
@@ -172,14 +172,14 @@
 
 #### 定义：
 
-`func servicescan.active(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.active(isActive: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
+| isActive | `bool` |   |
 
 
 
@@ -195,7 +195,7 @@
  
 ### servicescan.all
 
-
+【参数】扫描全部指纹
 
 #### 详细描述
 
@@ -203,7 +203,7 @@
 
 #### 定义：
 
-`func servicescan.all() return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.all() return (scanAll: func ConfigOption(v1: *fp.Config) )`
 
  
 
@@ -212,7 +212,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
+| scanAll | `func ConfigOption(v1: *fp.Config) ` |   |
 
 
  
@@ -226,14 +226,14 @@
 
 #### 定义：
 
-`func servicescan.concurrent(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.concurrent(concurrentSize: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| concurrentSize | `int` |  【参数】设置扫描并发量 |
 
 
 
@@ -249,7 +249,7 @@
  
 ### servicescan.maxProbes
 
-
+【参数】设置每个指纹扫描过程最多主动发送多少个数据包
 
 #### 详细描述
 
@@ -257,14 +257,14 @@
 
 #### 定义：
 
-`func servicescan.maxProbes(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.maxProbes(count: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| count | `int` |   |
 
 
 
@@ -280,7 +280,7 @@
  
 ### servicescan.maxProbesConcurrent
 
-
+【参数】每个指纹扫描目标允许的并发量
 
 #### 详细描述
 
@@ -288,14 +288,14 @@
 
 #### 定义：
 
-`func servicescan.maxProbesConcurrent(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.maxProbesConcurrent(size: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| size | `int` |   |
 
 
 
@@ -311,7 +311,7 @@
  
 ### servicescan.nmapRarityMax
 
-
+【参数】设置nmap规则的最大稀有度
 
 #### 详细描述
 
@@ -319,14 +319,14 @@
 
 #### 定义：
 
-`func servicescan.nmapRarityMax(v1: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.nmapRarityMax(max: int) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| max | `int` |   |
 
 
 
@@ -342,7 +342,7 @@
  
 ### servicescan.nmapRule
 
-
+【参数】设置 nmap 规则文件（可以自己写）
 
 #### 详细描述
 
@@ -373,7 +373,7 @@
  
 ### servicescan.proto
 
-
+设置扫描的协议
 
 #### 详细描述
 
@@ -381,14 +381,14 @@
 
 #### 定义：
 
-`func servicescan.proto(v1 ...any) return (r0: func ConfigOption(v1: *fp.Config) )`
+`func servicescan.proto(protos ...any) return (r0: func ConfigOption(v1: *fp.Config) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
+| protos | `...any` |   |
 
 
 
@@ -404,7 +404,7 @@
  
 ### servicescan.service
 
-
+启动服务扫描（nmap 规则库）
 
 #### 详细描述
 
@@ -427,7 +427,7 @@
  
 ### servicescan.web
 
-
+强制启用 web 扫描
 
 #### 详细描述
 
@@ -450,7 +450,7 @@
  
 ### servicescan.webRule
 
-
+启用用户自定义 web 规则
 
 #### 详细描述
 

@@ -3,34 +3,33 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [file.Abs](#fileabs) |  |
- | [file.Cat](#filecat) |  |
- | [file.Cp](#filecp) |  |
- | [file.Create](#filecreate) |  |
- | [file.DeepLs](#filedeepls) |  |
- | [file.Dir](#filedir) |  |
- | [file.IsAbs](#fileisabs) |  |
- | [file.IsDir](#fileisdir) |  |
- | [file.IsExisted](#fileisexisted) |  |
- | [file.IsFile](#fileisfile) |  |
- | [file.IsLink](#fileislink) |  |
- | [file.Join](#filejoin) |  |
- | [file.Ls](#filels) |  |
- | [file.Lstat](#filelstat) |  |
- | [file.Mkdir](#filemkdir) |  |
- | [file.MkdirAll](#filemkdirall) |  |
- | [file.Mv](#filemv) |  |
- | [file.Open](#fileopen) |  |
- | [file.OpenFile](#fileopenfile) |  |
- | [file.ReadAll](#filereadall) |  |
- | [file.ReadFile](#filereadfile) |  |
- | [file.Remove](#fileremove) |  |
- | [file.Rename](#filerename) |  |
- | [file.Rm](#filerm) |  |
- | [file.Save](#filesave) |  |
+ | [file.Abs](#fileabs) | 把相对路径变为绝对路径，如果出错，原样返回 |
+ | [file.Cat](#filecat) | 把文件内容 `cat`到显示屏 |
+ | [file.Cp](#filecp) | 复制文件 |
+ | [file.Create](#filecreate) | 创建一个文件，当前用户下读写执行权限均打开 |
+ | [file.Dir](#filedir) | 同 `file.Ls` |
+ | [file.IsAbs](#fileisabs) | 判断路径是否是绝对路径名 |
+ | [file.IsDir](#fileisdir) | 判断路径是否是一个文件夹 |
+ | [file.IsExisted](#fileisexisted) | 判断路径文件是否存在 |
+ | [file.IsFile](#fileisfile) | 判断文件是否存在 |
+ | [file.IsLink](#fileislink) | 判断一个路径是否是一个文件链接/快捷方式 |
+ | [file.Join](#filejoin) | 拼接路径 |
+ | [file.Ls](#filels) | 查看当前路径下是否有其他文件 |
+ | [file.Lstat](#filelstat) | 同 Golang `os.Lstat`，查看一个文件信息（如果是链接，则会返回这个链接的描述） |
+ | [file.Mkdir](#filemkdir) | 创建一个文件夹，如果无法创建，基本等同于 `mkdir [path]`，则会失败 |
+ | [file.MkdirAll](#filemkdirall) | 强制创建个文件夹，如果没有父路径，则会强制创建，相当于执行 `mkdir -p [path]` |
+ | [file.Mv](#filemv) | 把一个文件 move 到另一个地方，本质上执行 `os.Rename` |
+ | [file.Open](#fileopen) | 打开一个文件，如果没有就创建，使用最多权限 |
+ | [file.OpenFile](#fileopenfile) | 使用 Golang 原生的 `os.OpenFile` |
+ | [file.ReadAll](#filereadall) | 把一个 reader 的内容全部读出来 |
+ | [file.ReadFile](#filereadfile) | 把一个文件内容读出来 |
+ | [file.Remove](#fileremove) | 把一个文件移除，相当于 `os.RemoveAll` |
+ | [file.Rename](#filerename) | 把一个路径重命名 |
+ | [file.Rm](#filerm) | 同 `file.Remove` / Golang `os.RemoveAll` |
+ | [file.Save](#filesave) | 把 content 中的内容写入文件名为 fileName 中的文件，支持 bytes/string/[]string |
  | [file.SaveJson](#filesavejson) |  |
- | [file.Stat](#filestat) |  |
- | [file.TempFile](#filetempfile) |  |
+ | [file.Stat](#filestat) | 查看一个路径的基础信息，不读取文件。包含是否是目录，文件名，文件权限以及时间等 |
+ | [file.TempFile](#filetempfile) | 打开一个临时文件 |
 
 
 
@@ -56,7 +55,7 @@
 
 ### file.Abs
 
-
+把相对路径变为绝对路径，如果出错，原样返回
 
 #### 详细描述
 
@@ -64,14 +63,14 @@
 
 #### 定义：
 
-`func file.Abs(v1: string) return (r0: string)`
+`func file.Abs(path: string) return (absPath: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -81,13 +80,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| absPath | `string` |   |
 
 
  
 ### file.Cat
 
-
+把文件内容 `cat`到显示屏
 
 #### 详细描述
 
@@ -95,14 +94,14 @@
 
 #### 定义：
 
-``func file.Cat(v1: string)``
+``func file.Cat(fileName: string)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |  想要查看内容的文件名 |
 
 
 
@@ -112,7 +111,7 @@
  
 ### file.Cp
 
-
+复制文件
 
 #### 详细描述
 
@@ -120,15 +119,15 @@
 
 #### 定义：
 
-`func file.Cp(v1: string, v2: string) return (r0: error)`
+`func file.Cp(originFile: string, targetFile: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| originFile | `string` |  想要复制的文件 |
+| targetFile | `string` |  目标文件 |
 
 
 
@@ -144,7 +143,7 @@
  
 ### file.Create
 
-
+创建一个文件，当前用户下读写执行权限均打开
 
 #### 详细描述
 
@@ -152,14 +151,14 @@
 
 #### 定义：
 
-`func file.Create(v1: string) return (r0: *yaklib._yakFile, r1: error)`
+`func file.Create(fileName: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -174,40 +173,9 @@
 
 
  
-### file.DeepLs
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func file.DeepLs(v1: string) return (r0: []*utils.FileInfo)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `[]*utils.FileInfo` |   |
-
-
- 
 ### file.Dir
 
-
+同 `file.Ls`
 
 #### 详细描述
 
@@ -215,14 +183,14 @@
 
 #### 定义：
 
-`func file.Dir(v1: string) return (r0: []*utils.FileInfo)`
+`func file.Dir(dirName: string) return (fileInfos: []*utils.FileInfo)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| dirName | `string` |   |
 
 
 
@@ -232,13 +200,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*utils.FileInfo` |   |
+| fileInfos | `[]*utils.FileInfo` |   |
 
 
  
 ### file.IsAbs
 
-
+判断路径是否是绝对路径名
 
 #### 详细描述
 
@@ -246,14 +214,14 @@
 
 #### 定义：
 
-`func file.IsAbs(v1: string) return (r0: bool)`
+`func file.IsAbs(absPath: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| absPath | `string` |   |
 
 
 
@@ -269,7 +237,7 @@
  
 ### file.IsDir
 
-
+判断路径是否是一个文件夹
 
 #### 详细描述
 
@@ -277,14 +245,14 @@
 
 #### 定义：
 
-`func file.IsDir(v1: string) return (r0: bool)`
+`func file.IsDir(path: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -300,7 +268,7 @@
  
 ### file.IsExisted
 
-
+判断路径文件是否存在
 
 #### 详细描述
 
@@ -308,14 +276,14 @@
 
 #### 定义：
 
-`func file.IsExisted(v1: string) return (r0: bool)`
+`func file.IsExisted(path: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -331,7 +299,7 @@
  
 ### file.IsFile
 
-
+判断文件是否存在
 
 #### 详细描述
 
@@ -339,14 +307,14 @@
 
 #### 定义：
 
-`func file.IsFile(v1: string) return (r0: bool)`
+`func file.IsFile(path: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -362,7 +330,7 @@
  
 ### file.IsLink
 
-
+判断一个路径是否是一个文件链接/快捷方式
 
 #### 详细描述
 
@@ -370,14 +338,14 @@
 
 #### 定义：
 
-`func file.IsLink(v1: string) return (r0: bool)`
+`func file.IsLink(path: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -393,7 +361,7 @@
  
 ### file.Join
 
-
+拼接路径
 
 #### 详细描述
 
@@ -401,14 +369,14 @@
 
 #### 定义：
 
-`func file.Join(v1 ...string) return (r0: string)`
+`func file.Join(paths ...string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
+| paths | `...string` |   |
 
 
 
@@ -424,7 +392,7 @@
  
 ### file.Ls
 
-
+查看当前路径下是否有其他文件
 
 #### 详细描述
 
@@ -432,14 +400,14 @@
 
 #### 定义：
 
-`func file.Ls(v1: string) return (r0: []*utils.FileInfo)`
+`func file.Ls(dirPath: string) return (r0: []*utils.FileInfo)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| dirPath | `string` |   |
 
 
 
@@ -455,7 +423,7 @@
  
 ### file.Lstat
 
-
+同 Golang `os.Lstat`，查看一个文件信息（如果是链接，则会返回这个链接的描述）
 
 #### 详细描述
 
@@ -463,14 +431,14 @@
 
 #### 定义：
 
-`func file.Lstat(v1: string) return (r0: fs.FileInfo, r1: error)`
+`func file.Lstat(filePath: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| filePath | `string` |   |
 
 
 
@@ -487,7 +455,7 @@
  
 ### file.Mkdir
 
-
+创建一个文件夹，如果无法创建，基本等同于 `mkdir [path]`，则会失败
 
 #### 详细描述
 
@@ -495,14 +463,14 @@
 
 #### 定义：
 
-`func file.Mkdir(v1: string) return (r0: error)`
+`func file.Mkdir(path: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -518,7 +486,7 @@
  
 ### file.MkdirAll
 
-
+强制创建个文件夹，如果没有父路径，则会强制创建，相当于执行 `mkdir -p [path]`
 
 #### 详细描述
 
@@ -526,14 +494,14 @@
 
 #### 定义：
 
-`func file.MkdirAll(v1: string) return (r0: error)`
+`func file.MkdirAll(path: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| path | `string` |   |
 
 
 
@@ -549,7 +517,7 @@
  
 ### file.Mv
 
-
+把一个文件 move 到另一个地方，本质上执行 `os.Rename`
 
 #### 详细描述
 
@@ -557,15 +525,15 @@
 
 #### 定义：
 
-`func file.Mv(v1: string, v2: string) return (r0: error)`
+`func file.Mv(oldPath: string, newPath: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| oldPath | `string` |   |
+| newPath | `string` |   |
 
 
 
@@ -581,7 +549,7 @@
  
 ### file.Open
 
-
+打开一个文件，如果没有就创建，使用最多权限
 
 #### 详细描述
 
@@ -589,14 +557,14 @@
 
 #### 定义：
 
-`func file.Open(v1: string) return (r0: *yaklib._yakFile, r1: error)`
+`func file.Open(fileName: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -613,7 +581,7 @@
  
 ### file.OpenFile
 
-
+使用 Golang 原生的 `os.OpenFile`
 
 #### 详细描述
 
@@ -621,16 +589,16 @@
 
 #### 定义：
 
-`func file.OpenFile(v1: string, v2: int, v3: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
+`func file.OpenFile(fileName: string, modeFlag: int, permission: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `fs.FileMode` |   |
+| fileName | `string` |   |
+| modeFlag | `int` |   |
+| permission | `fs.FileMode` |   |
 
 
 
@@ -647,7 +615,7 @@
  
 ### file.ReadAll
 
-
+把一个 reader 的内容全部读出来
 
 #### 详细描述
 
@@ -655,14 +623,14 @@
 
 #### 定义：
 
-`func file.ReadAll(v1: io.Reader) return (r0: bytes, r1: error)`
+`func file.ReadAll(ioReader: io.Reader) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `io.Reader` |   |
+| ioReader | `io.Reader` |   |
 
 
 
@@ -679,7 +647,7 @@
  
 ### file.ReadFile
 
-
+把一个文件内容读出来
 
 #### 详细描述
 
@@ -687,14 +655,14 @@
 
 #### 定义：
 
-`func file.ReadFile(v1: string) return (r0: bytes, r1: error)`
+`func file.ReadFile(fileName: string) return (fileContent: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -704,14 +672,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| fileContent | `bytes` |   |
 | r1 | `error` |   |
 
 
  
 ### file.Remove
 
-
+把一个文件移除，相当于 `os.RemoveAll`
 
 #### 详细描述
 
@@ -719,14 +687,14 @@
 
 #### 定义：
 
-`func file.Remove(v1: string) return (r0: error)`
+`func file.Remove(fileName: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -742,7 +710,7 @@
  
 ### file.Rename
 
-
+把一个路径重命名
 
 #### 详细描述
 
@@ -750,15 +718,15 @@
 
 #### 定义：
 
-`func file.Rename(v1: string, v2: string) return (r0: error)`
+`func file.Rename(oldPath: string, newPath: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| oldPath | `string` |   |
+| newPath | `string` |   |
 
 
 
@@ -774,7 +742,7 @@
  
 ### file.Rm
 
-
+同 `file.Remove` / Golang `os.RemoveAll`
 
 #### 详细描述
 
@@ -782,14 +750,14 @@
 
 #### 定义：
 
-`func file.Rm(v1: string) return (r0: error)`
+`func file.Rm(fileName: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -805,7 +773,7 @@
  
 ### file.Save
 
-
+把 content 中的内容写入文件名为 fileName 中的文件，支持 bytes/string/[]string
 
 #### 详细描述
 
@@ -813,15 +781,15 @@
 
 #### 定义：
 
-`func file.Save(v1: string, v2: any) return (r0: error)`
+`func file.Save(fileName: string, content: []byte|string|[]string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
+| fileName | `string` |   |
+| content | `[]byte|string|[]string` |   |
 
 
 
@@ -845,14 +813,14 @@
 
 #### 定义：
 
-`func file.SaveJson(v1: string, v2: any) return (r0: error)`
+`func file.SaveJson(filePath: string, v2: any) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| filePath | `string` |   |
 | v2 | `any` |   |
 
 
@@ -869,7 +837,7 @@
  
 ### file.Stat
 
-
+查看一个路径的基础信息，不读取文件。包含是否是目录，文件名，文件权限以及时间等
 
 #### 详细描述
 
@@ -877,14 +845,14 @@
 
 #### 定义：
 
-`func file.Stat(v1: string) return (r0: fs.FileInfo, r1: error)`
+`func file.Stat(pathName: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| pathName | `string` |   |
 
 
 
@@ -901,7 +869,7 @@
  
 ### file.TempFile
 
-
+打开一个临时文件
 
 #### 详细描述
 
@@ -909,14 +877,14 @@
 
 #### 定义：
 
-`func file.TempFile(v1: string) return (r0: *yaklib._yakFile, r1: error)`
+`func file.TempFile(dirName: string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| dirName | `string` |  临时文件的文件夹 |
 
 
 

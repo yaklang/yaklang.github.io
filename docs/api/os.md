@@ -3,26 +3,26 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [os.Clearenv](#osclearenv) |  |
- | [os.Environ](#osenviron) |  |
- | [os.Executable](#osexecutable) |  |
- | [os.Exit](#osexit) |  |
- | [os.ExpandEnv](#osexpandenv) |  |
- | [os.GetRandomAvailableTCPPort](#osgetrandomavailabletcpport) |  |
- | [os.GetRandomAvailableUDPPort](#osgetrandomavailableudpport) |  |
- | [os.Getenv](#osgetenv) |  |
- | [os.IsRemoteTCPPortOpen](#osisremotetcpportopen) |  |
- | [os.IsTCPPortAvailable](#osistcpportavailable) |  |
- | [os.IsTCPPortOpen](#osistcpportopen) |  |
- | [os.IsUDPPortAvailable](#osisudpportavailable) |  |
- | [os.IsUDPPortOpen](#osisudpportopen) |  |
- | [os.LookupEnv](#oslookupenv) |  |
- | [os.Pipe](#ospipe) |  |
- | [os.Remove](#osremove) |  |
- | [os.RemoveAll](#osremoveall) |  |
- | [os.Rename](#osrename) |  |
- | [os.Setenv](#ossetenv) |  |
- | [os.Unsetenv](#osunsetenv) |  |
+ | [os.Clearenv](#osclearenv) | 清除环境变量，与原生 Golang `go.Clearenv` 相同 |
+ | [os.Environ](#osenviron) | 获取当前所有的环境变量内容 |
+ | [os.Executable](#osexecutable) | 获取当前正在执行的二进制程序的路径 |
+ | [os.Exit](#osexit) | 退出主程序，手动结束当前进程 |
+ | [os.ExpandEnv](#osexpandenv) | 同 Golang 的 `os.ExpandEnv`：根据当前环境变量的值来替换字符串中的${var}或者$var |
+ | [os.GetRandomAvailableTCPPort](#osgetrandomavailabletcpport) | 随机获得一个可用的 TCP 端口 |
+ | [os.GetRandomAvailableUDPPort](#osgetrandomavailableudpport) | 随机获得一个可用的 UDP 端口 |
+ | [os.Getenv](#osgetenv) | 获得一个环境变量的值 |
+ | [os.IsRemoteTCPPortOpen](#osisremotetcpportopen) | 判断一个远程 TCP 端口是否开放 |
+ | [os.IsTCPPortAvailable](#osistcpportavailable) | 判断一个本地 TCP 端口是否可用（监听可用） |
+ | [os.IsTCPPortOpen](#osistcpportopen) | 判断一个本地端口是否开放 |
+ | [os.IsUDPPortAvailable](#osisudpportavailable) | 判断一个本地 UDP 端口是否可用 |
+ | [os.IsUDPPortOpen](#osisudpportopen) | 判断一个本地 UDP 端口是否开放 |
+ | [os.LookupEnv](#oslookupenv) | 判断这个环境变量是否存在，如果存在，返回环境变量的值，不存在设置 ok 为 false |
+ | [os.Pipe](#ospipe) | 返回文件管道，两个结果互通，均可互相读写 |
+ | [os.Remove](#osremove) | 移除一个文件 |
+ | [os.RemoveAll](#osremoveall) | 移除一个文件（强制） |
+ | [os.Rename](#osrename) | 重命名一个文件：同 Golang `os.Rename` |
+ | [os.Setenv](#ossetenv) | 设置环境变量 |
+ | [os.Unsetenv](#osunsetenv) | 清除环境变量 |
 
 
 
@@ -31,10 +31,10 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
-|`os.Args`|`[]string`| //|
-|`os.Stderr`|`*os.File`| //|
-|`os.Stdin`|`*os.File`| //|
-|`os.Stdout`|`*os.File`| //|
+|`os.Args`|`[]string`| 获取当前命令行参数|
+|`os.Stderr`|`*os.File`| 标准错误流|
+|`os.Stdin`|`*os.File`| 标准输入流|
+|`os.Stdout`|`*os.File`| 标准输出流|
 
 
 
@@ -44,7 +44,7 @@
 
 ### os.Clearenv
 
-
+清除环境变量，与原生 Golang `go.Clearenv` 相同
 
 #### 详细描述
 
@@ -61,7 +61,7 @@
  
 ### os.Environ
 
-
+获取当前所有的环境变量内容
 
 #### 详细描述
 
@@ -84,7 +84,7 @@
  
 ### os.Executable
 
-
+获取当前正在执行的二进制程序的路径
 
 #### 详细描述
 
@@ -92,7 +92,7 @@
 
 #### 定义：
 
-`func os.Executable() return (r0: string, r1: error)`
+`func os.Executable() return (path: string, r1: error)`
 
  
 
@@ -101,14 +101,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| path | `string` |   |
 | r1 | `error` |   |
 
 
  
 ### os.Exit
 
-
+退出主程序，手动结束当前进程
 
 #### 详细描述
 
@@ -116,14 +116,14 @@
 
 #### 定义：
 
-``func os.Exit(v1: int)``
+``func os.Exit(exitCode: int)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| exitCode | `int` |   |
 
 
 
@@ -133,7 +133,7 @@
  
 ### os.ExpandEnv
 
-
+同 Golang 的 `os.ExpandEnv`：根据当前环境变量的值来替换字符串中的${var}或者$var
 
 #### 详细描述
 
@@ -141,14 +141,14 @@
 
 #### 定义：
 
-`func os.ExpandEnv(v1: string) return (r0: string)`
+`func os.ExpandEnv(targetWithEnv: string) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| targetWithEnv | `string` |  替换前的字符串 |
 
 
 
@@ -158,13 +158,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r0 | `string` |  替换后的字符串 |
 
 
  
 ### os.GetRandomAvailableTCPPort
 
-
+随机获得一个可用的 TCP 端口
 
 #### 详细描述
 
@@ -172,7 +172,7 @@
 
 #### 定义：
 
-`func os.GetRandomAvailableTCPPort() return (r0: int)`
+`func os.GetRandomAvailableTCPPort() return (port: int)`
 
  
 
@@ -181,13 +181,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `int` |   |
+| port | `int` |   |
 
 
  
 ### os.GetRandomAvailableUDPPort
 
-
+随机获得一个可用的 UDP 端口
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 
 #### 定义：
 
-`func os.GetRandomAvailableUDPPort() return (r0: int)`
+`func os.GetRandomAvailableUDPPort() return (port: int)`
 
  
 
@@ -204,13 +204,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `int` |   |
+| port | `int` |   |
 
 
  
 ### os.Getenv
 
-
+获得一个环境变量的值
 
 #### 详细描述
 
@@ -218,14 +218,14 @@
 
 #### 定义：
 
-`func os.Getenv(v1: string) return (r0: string)`
+`func os.Getenv(envName: string) return (value: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| envName | `string` |   |
 
 
 
@@ -235,13 +235,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| value | `string` |   |
 
 
  
 ### os.IsRemoteTCPPortOpen
 
-
+判断一个远程 TCP 端口是否开放
 
 #### 详细描述
 
@@ -249,15 +249,15 @@
 
 #### 定义：
 
-`func os.IsRemoteTCPPortOpen(v1: string, v2: int) return (r0: bool)`
+`func os.IsRemoteTCPPortOpen(host: string, port: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
+| host | `string` |   |
+| port | `int` |   |
 
 
 
@@ -273,7 +273,7 @@
  
 ### os.IsTCPPortAvailable
 
-
+判断一个本地 TCP 端口是否可用（监听可用）
 
 #### 详细描述
 
@@ -281,14 +281,14 @@
 
 #### 定义：
 
-`func os.IsTCPPortAvailable(v1: int) return (r0: bool)`
+`func os.IsTCPPortAvailable(port: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| port | `int` |   |
 
 
 
@@ -304,7 +304,7 @@
  
 ### os.IsTCPPortOpen
 
-
+判断一个本地端口是否开放
 
 #### 详细描述
 
@@ -312,14 +312,14 @@
 
 #### 定义：
 
-`func os.IsTCPPortOpen(v1: int) return (r0: bool)`
+`func os.IsTCPPortOpen(port: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| port | `int` |   |
 
 
 
@@ -335,7 +335,7 @@
  
 ### os.IsUDPPortAvailable
 
-
+判断一个本地 UDP 端口是否可用
 
 #### 详细描述
 
@@ -343,14 +343,14 @@
 
 #### 定义：
 
-`func os.IsUDPPortAvailable(v1: int) return (r0: bool)`
+`func os.IsUDPPortAvailable(port: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| port | `int` |   |
 
 
 
@@ -366,7 +366,7 @@
  
 ### os.IsUDPPortOpen
 
-
+判断一个本地 UDP 端口是否开放
 
 #### 详细描述
 
@@ -374,14 +374,14 @@
 
 #### 定义：
 
-`func os.IsUDPPortOpen(v1: int) return (r0: bool)`
+`func os.IsUDPPortOpen(port: int) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
+| port | `int` |   |
 
 
 
@@ -397,7 +397,7 @@
  
 ### os.LookupEnv
 
-
+判断这个环境变量是否存在，如果存在，返回环境变量的值，不存在设置 ok 为 false
 
 #### 详细描述
 
@@ -405,14 +405,14 @@
 
 #### 定义：
 
-`func os.LookupEnv(v1: string) return (r0: string, r1: bool)`
+`func os.LookupEnv(envName: string) return (value: string, ok: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| envName | `string` |   |
 
 
 
@@ -422,14 +422,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `bool` |   |
+| value | `string` |   |
+| ok | `bool` |   |
 
 
  
 ### os.Pipe
 
-
+返回文件管道，两个结果互通，均可互相读写
 
 #### 详细描述
 
@@ -437,7 +437,7 @@
 
 #### 定义：
 
-`func os.Pipe() return (r0: *os.File, r1: *os.File, r2: error)`
+`func os.Pipe() return (file1: *os.File, file2: *os.File, r2: error)`
 
  
 
@@ -446,15 +446,15 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*os.File` |   |
-| r1 | `*os.File` |   |
+| file1 | `*os.File` |   |
+| file2 | `*os.File` |   |
 | r2 | `error` |   |
 
 
  
 ### os.Remove
 
-
+移除一个文件
 
 #### 详细描述
 
@@ -462,14 +462,14 @@
 
 #### 定义：
 
-`func os.Remove(v1: string) return (r0: error)`
+`func os.Remove(fileName: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -485,7 +485,7 @@
  
 ### os.RemoveAll
 
-
+移除一个文件（强制）
 
 #### 详细描述
 
@@ -493,14 +493,14 @@
 
 #### 定义：
 
-`func os.RemoveAll(v1: string) return (r0: error)`
+`func os.RemoveAll(fileName: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| fileName | `string` |   |
 
 
 
@@ -516,7 +516,7 @@
  
 ### os.Rename
 
-
+重命名一个文件：同 Golang `os.Rename`
 
 #### 详细描述
 
@@ -524,15 +524,15 @@
 
 #### 定义：
 
-`func os.Rename(v1: string, v2: string) return (r0: error)`
+`func os.Rename(oldFile: string, newFile: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| oldFile | `string` |   |
+| newFile | `string` |   |
 
 
 
@@ -548,7 +548,7 @@
  
 ### os.Setenv
 
-
+设置环境变量
 
 #### 详细描述
 
@@ -556,15 +556,15 @@
 
 #### 定义：
 
-`func os.Setenv(v1: string, v2: string) return (r0: error)`
+`func os.Setenv(key: string, value: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| key | `string` |   |
+| value | `string` |   |
 
 
 
@@ -580,7 +580,7 @@
  
 ### os.Unsetenv
 
-
+清除环境变量
 
 #### 详细描述
 
@@ -588,14 +588,14 @@
 
 #### 定义：
 
-`func os.Unsetenv(v1: string) return (r0: error)`
+`func os.Unsetenv(key: string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| key | `string` |   |
 
 
 

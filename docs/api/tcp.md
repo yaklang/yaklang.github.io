@@ -4,14 +4,14 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [tcp.Connect](#tcpconnect) |  |
- | [tcp.Forward](#tcpforward) |  |
- | [tcp.Serve](#tcpserve) |  |
- | [tcp.clientLocal](#tcpclientlocal) |  |
- | [tcp.clientTimeout](#tcpclienttimeout) |  |
- | [tcp.clientTls](#tcpclienttls) |  |
- | [tcp.serverCallback](#tcpservercallback) |  |
- | [tcp.serverContext](#tcpservercontext) |  |
- | [tcp.serverTls](#tcpservertls) |  |
+ | [tcp.Forward](#tcpforward) | 转发 TCP 链接，在本地开一个 TCP 服务器，把到这个服务器的链接转发到远程端口上 |
+ | [tcp.Serve](#tcpserve) | 启动一个 tcp 服务器 |
+ | [tcp.clientLocal](#tcpclientlocal) | 【客户端参数】设置客户端本地地址 |
+ | [tcp.clientTimeout](#tcpclienttimeout) | 【客户端参数】设置超时时间 |
+ | [tcp.clientTls](#tcpclienttls) | 【客户端参数】设置 TLS/SSL |
+ | [tcp.serverCallback](#tcpservercallback) | 【服务端参数】设置服务端连接处理回调函数 |
+ | [tcp.serverContext](#tcpservercontext) | 【服务端参数】设置服务端上下文，用于控制服务器生命周期 |
+ | [tcp.serverTls](#tcpservertls) | 【服务端参数】设置 SSL/TLS 服务器 |
 
 
 
@@ -32,16 +32,16 @@
 
 #### 定义：
 
-`func tcp.Connect(v1: string, v2: any, v3 ...yaklib.dialerOpt) return (r0: *yaklib.tcpConnection, r1: error)`
+`func tcp.Connect(host: string, port: any, params ...clientOpt) return (conn: *yaklib.tcpConnection, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
-| v3 | `...yaklib.dialerOpt` |   |
+| host | `string` |  要连接的 host |
+| port | `any` |  要连接的端口 |
+| params | `...clientOpt` |   |
 
 
 
@@ -51,14 +51,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.tcpConnection` |   |
+| conn | `*yaklib.tcpConnection` |   |
 | r1 | `error` |   |
 
 
  
 ### tcp.Forward
 
-
+转发 TCP 链接，在本地开一个 TCP 服务器，把到这个服务器的链接转发到远程端口上
 
 #### 详细描述
 
@@ -66,16 +66,16 @@
 
 #### 定义：
 
-`func tcp.Forward(v1: int, v2: string, v3: int) return (r0: error)`
+`func tcp.Forward(localPort: int, remoteHost: string, remotePort: int) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-| v2 | `string` |   |
-| v3 | `int` |   |
+| localPort | `int` |   |
+| remoteHost | `string` |   |
+| remotePort | `int` |   |
 
 
 
@@ -91,7 +91,7 @@
  
 ### tcp.Serve
 
-
+启动一个 tcp 服务器
 
 #### 详细描述
 
@@ -99,16 +99,16 @@
 
 #### 定义：
 
-`func tcp.Serve(v1: any, v2: int, v3 ...yaklib.tcpServerConfigOpt) return (r0: error)`
+`func tcp.Serve(host: any, port: int, params ...serverOpt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `int` |   |
-| v3 | `...yaklib.tcpServerConfigOpt` |   |
+| host | `any` |   |
+| port | `int` |   |
+| params | `...serverOpt` |   |
 
 
 
@@ -124,7 +124,7 @@
  
 ### tcp.clientLocal
 
-
+【客户端参数】设置客户端本地地址
 
 #### 详细描述
 
@@ -132,14 +132,14 @@
 
 #### 定义：
 
-`func tcp.clientLocal(v1: any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`func tcp.clientLocal(host: any) return (r0: clientOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| host | `any` |   |
 
 
 
@@ -149,13 +149,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func dialerOpt(v1: *yaklib._tcpDialer) ` |   |
+| r0 | `clientOpt` |   |
 
 
  
 ### tcp.clientTimeout
 
-
+【客户端参数】设置超时时间
 
 #### 详细描述
 
@@ -163,14 +163,14 @@
 
 #### 定义：
 
-`func tcp.clientTimeout(v1: float64) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`func tcp.clientTimeout(seconds: float64) return (r0: clientOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |   |
 
 
 
@@ -180,13 +180,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func dialerOpt(v1: *yaklib._tcpDialer) ` |   |
+| r0 | `clientOpt` |   |
 
 
  
 ### tcp.clientTls
 
-
+【客户端参数】设置 TLS/SSL
 
 #### 详细描述
 
@@ -194,16 +194,16 @@
 
 #### 定义：
 
-`func tcp.clientTls(v1: any, v2: any, v3 ...any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`func tcp.clientTls(cert: any, key: any, caCerts ...any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-| v3 | `...any` |   |
+| cert | `any` |   |
+| key | `any` |   |
+| caCerts | `...any` |   |
 
 
 
@@ -219,7 +219,7 @@
  
 ### tcp.serverCallback
 
-
+【服务端参数】设置服务端连接处理回调函数
 
 #### 详细描述
 
@@ -250,7 +250,7 @@
  
 ### tcp.serverContext
 
-
+【服务端参数】设置服务端上下文，用于控制服务器生命周期
 
 #### 详细描述
 
@@ -258,14 +258,14 @@
 
 #### 定义：
 
-`func tcp.serverContext(v1: context.Context) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`func tcp.serverContext(ctx: context.Context) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
 
@@ -281,7 +281,7 @@
  
 ### tcp.serverTls
 
-
+【服务端参数】设置 SSL/TLS 服务器
 
 #### 详细描述
 
@@ -289,16 +289,16 @@
 
 #### 定义：
 
-`func tcp.serverTls(v1: any, v2: any, v3 ...any) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`func tcp.serverTls(cert: any, key: any, caCerts ...any) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-| v3 | `...any` |   |
+| cert | `any` |   |
+| key | `any` |   |
+| caCerts | `...any` |   |
 
 
 

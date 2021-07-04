@@ -3,10 +3,10 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [httpserver.Serve](#httpserverserve) |  |
- | [httpserver.context](#httpservercontext) |  |
+ | [httpserver.Serve](#httpserverserve) | 启动一个 HTTP 服务器 |
+ | [httpserver.context](#httpservercontext) | 【参数】为 HTTP Server 增加上下文控制生命周期 |
  | [httpserver.handler](#httpserverhandler) |  |
- | [httpserver.tlsCertAndKey](#httpservertlscertandkey) |  |
+ | [httpserver.tlsCertAndKey](#httpservertlscertandkey) | 【参数】设置 TLS/SSL，启动一个 HTTPS 服务器 |
 
 
 
@@ -19,7 +19,7 @@
 
 ### httpserver.Serve
 
-
+启动一个 HTTP 服务器
 
 #### 详细描述
 
@@ -27,16 +27,16 @@
 
 #### 定义：
 
-`func httpserver.Serve(v1: string, v2: int, v3 ...yaklib._httpServerConfigOpt) return (r0: error)`
+`func httpserver.Serve(host: string, port: int, params ...opt) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `...yaklib._httpServerConfigOpt` |   |
+| host | `string` |  服务器的本地地址 |
+| port | `int` |  服务器的端口 |
+| params | `...opt` |   |
 
 
 
@@ -52,7 +52,7 @@
  
 ### httpserver.context
 
-
+【参数】为 HTTP Server 增加上下文控制生命周期
 
 #### 详细描述
 
@@ -60,14 +60,14 @@
 
 #### 定义：
 
-`func httpserver.context(v1: context.Context) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
+`func httpserver.context(ctx: context.Context) return (r0: opt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
+| ctx | `context.Context` |   |
 
 
 
@@ -77,7 +77,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ` |   |
+| r0 | `opt` |   |
 
 
  
@@ -91,14 +91,14 @@
 
 #### 定义：
 
-`func httpserver.handler(v1: func (v1: http.ResponseWriter, v2: *http.Request) ) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
+`func httpserver.handler(handler: func (v1: http.ResponseWriter, v2: *http.Request) ) return (r0: opt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: http.ResponseWriter, v2: *http.Request) ` |   |
+| handler | `func (v1: http.ResponseWriter, v2: *http.Request) ` |  【参数】设置 HTTP 请求的处理回调函数 |
 
 
 
@@ -108,13 +108,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) ` |   |
+| r0 | `opt` |   |
 
 
  
 ### httpserver.tlsCertAndKey
 
-
+【参数】设置 TLS/SSL，启动一个 HTTPS 服务器
 
 #### 详细描述
 
@@ -122,16 +122,16 @@
 
 #### 定义：
 
-`func httpserver.tlsCertAndKey(v1: any, v2: any, v3 ...any) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
+`func httpserver.tlsCertAndKey(cert: any, key: any, caCerts ...any) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-| v3 | `...any` |   |
+| cert | `any` |   |
+| key | `any` |   |
+| caCerts | `...any` |   |
 
 
 

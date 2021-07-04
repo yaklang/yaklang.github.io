@@ -3,10 +3,10 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [fuzz.HTTPRequest](#fuzzhttprequest) |  |
- | [fuzz.Strings](#fuzzstrings) |  |
- | [fuzz.UrlsToHTTPRequests](#fuzzurlstohttprequests) |  |
- | [fuzz.https](#fuzzhttps) |  |
+ | [fuzz.HTTPRequest](#fuzzhttprequest) | HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求 |
+ | [fuzz.Strings](#fuzzstrings) | 执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz) |
+ | [fuzz.UrlsToHTTPRequests](#fuzzurlstohttprequests) | 把多个 URL 变成可以批量 Fuzz 的请求组(Batch) |
+ | [fuzz.https](#fuzzhttps) | `http.HTTPRequest` 的 extraParams 中的额外选项之一 |
 
 
 
@@ -19,7 +19,7 @@
 
 ### fuzz.HTTPRequest
 
-
+HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 详细描述
 
@@ -27,15 +27,15 @@
 
 #### 定义：
 
-`func fuzz.HTTPRequest(v1: any, v2 ...mutate.BuildFuzzHTTPRequestOption) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
+`func fuzz.HTTPRequest(originRequest: []byte|string|http.Request|*http.Request, extraParams ...fuzzHTTPRequestOpt) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...mutate.BuildFuzzHTTPRequestOption` |   |
+| originRequest | `[]byte|string|http.Request|*http.Request` |  可以构建一个新的 HTTP Fuzz 请求的原材料。支持以上多种类型 |
+| extraParams | `...fuzzHTTPRequestOpt` |  额外参数， |
 
 
 
@@ -52,7 +52,7 @@
  
 ### fuzz.Strings
 
-
+执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz)
 
 #### 详细描述
 
@@ -60,14 +60,14 @@
 
 #### 定义：
 
-`func fuzz.Strings(v1: any) return (r0: []string)`
+`func fuzz.Strings(fuzzTemplate: []byte|string|[]string) return (r0: []string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| fuzzTemplate | `[]byte|string|[]string` |   |
 
 
 
@@ -83,7 +83,7 @@
  
 ### fuzz.UrlsToHTTPRequests
 
-
+把多个 URL 变成可以批量 Fuzz 的请求组(Batch)
 
 #### 详细描述
 
@@ -91,14 +91,14 @@
 
 #### 定义：
 
-`func fuzz.UrlsToHTTPRequests(v1 ...any) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
+`func fuzz.UrlsToHTTPRequests(urlTemplate []byte|string|[]string) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
+| urlTemplate | `[]byte|string|[]string` |  支持 URL/域名/IP 输入，使用 `str.ParseStringToUrlsWith3W` |
 
 
 
@@ -115,7 +115,7 @@
  
 ### fuzz.https
 
-
+`http.HTTPRequest` 的 extraParams 中的额外选项之一
 
 #### 详细描述
 
@@ -123,14 +123,14 @@
 
 #### 定义：
 
-`func fuzz.https(v1: bool) return (r0: func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) )`
+`func fuzz.https(isHttps: bool) return (r0: fuzzHTTPRequestOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
+| isHttps | `bool` |   |
 
 
 
@@ -140,7 +140,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func BuildFuzzHTTPRequestOption(v1: *mutate.buildFuzzHTTPRequestConfig) ` |   |
+| r0 | `fuzzHTTPRequestOpt` |   |
 
 
  

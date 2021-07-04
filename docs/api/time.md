@@ -4,20 +4,20 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [time.After](#timeafter) |  |
- | [time.AfterFunc](#timeafterfunc) |  |
- | [time.GetCurrentDate](#timegetcurrentdate) |  |
- | [time.GetCurrentMonday](#timegetcurrentmonday) |  |
- | [time.NewTicker](#timenewticker) |  |
- | [time.NewTimer](#timenewtimer) |  |
- | [time.Now](#timenow) |  |
- | [time.Parse](#timeparse) |  |
- | [time.ParseDuration](#timeparseduration) |  |
- | [time.Since](#timesince) |  |
- | [time.Sleep](#timesleep) |  |
- | [time.Unix](#timeunix) |  |
- | [time.Until](#timeuntil) |  |
- | [time.now](#timenow) |  |
- | [time.sleep](#timesleep) |  |
+ | [time.AfterFunc](#timeafterfunc) | 一段时间之后执行一个函数 |
+ | [time.GetCurrentDate](#timegetcurrentdate) | 获得当前今天的日期 |
+ | [time.GetCurrentMonday](#timegetcurrentmonday) | 或者当前周的周一日期 |
+ | [time.NewTicker](#timenewticker) | 获取一个 seconds 的 ticker，每隔 seconds 秒触发一次 |
+ | [time.NewTimer](#timenewtimer) | 设置一个新的定时器，seconds 秒之后触发 |
+ | [time.Now](#timenow) | 获取当前时间 |
+ | [time.Parse](#timeparse) | 把时间按照一定规则进行解析（遵循 Golang 的规则） |
+ | [time.ParseDuration](#timeparseduration) | 把一个字符串时间解析成 `time.Duration` |
+ | [time.Since](#timesince) | 计算一个时间到现在的时间差 |
+ | [time.Sleep](#timesleep) | sleep 一段时间 |
+ | [time.Unix](#timeunix) | 使用 Unix 时间戳构建一个时间 |
+ | [time.Until](#timeuntil) | 计算当前时间到目标时间的时间间隔 |
+ | [time.now](#timenow) | 当前时间 |
+ | [time.sleep](#timesleep) | sleep 一段时间 |
 
 
 
@@ -61,7 +61,7 @@
  
 ### time.AfterFunc
 
-
+一段时间之后执行一个函数
 
 #### 详细描述
 
@@ -93,7 +93,7 @@
  
 ### time.GetCurrentDate
 
-
+获得当前今天的日期
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
  
 ### time.GetCurrentMonday
 
-
+或者当前周的周一日期
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
  
 ### time.NewTicker
 
-
+获取一个 seconds 的 ticker，每隔 seconds 秒触发一次
 
 #### 详细描述
 
@@ -149,14 +149,14 @@
 
 #### 定义：
 
-`func time.NewTicker(v1: float64) return (r0: *time.Ticker)`
+`func time.NewTicker(seconds: float64) return (r0: *time.Ticker)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |   |
 
 
 
@@ -172,7 +172,7 @@
  
 ### time.NewTimer
 
-
+设置一个新的定时器，seconds 秒之后触发
 
 #### 详细描述
 
@@ -180,14 +180,14 @@
 
 #### 定义：
 
-`func time.NewTimer(v1: float64) return (r0: *time.Timer)`
+`func time.NewTimer(seconds: float64) return (r0: *time.Timer)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |   |
 
 
 
@@ -203,7 +203,7 @@
  
 ### time.Now
 
-
+获取当前时间
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
  
 ### time.Parse
 
-
+把时间按照一定规则进行解析（遵循 Golang 的规则）
 
 #### 详细描述
 
@@ -234,15 +234,15 @@
 
 #### 定义：
 
-`func time.Parse(v1: string, v2: string) return (r0: time.Time, r1: error)`
+`func time.Parse(timeStr: string, format: string) return (r0: time.Time, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| timeStr | `string` |   |
+| format | `string` |   |
 
 
 
@@ -259,7 +259,7 @@
  
 ### time.ParseDuration
 
-
+把一个字符串时间解析成 `time.Duration`
 
 #### 详细描述
 
@@ -291,7 +291,7 @@
  
 ### time.Since
 
-
+计算一个时间到现在的时间差
 
 #### 详细描述
 
@@ -299,14 +299,14 @@
 
 #### 定义：
 
-`func time.Since(v1: time.Time) return (r0: time.Duration)`
+`func time.Since(start: time.Time) return (r0: time.Duration)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `time.Time` |   |
+| start | `time.Time` |   |
 
 
 
@@ -322,7 +322,7 @@
  
 ### time.Sleep
 
-
+sleep 一段时间
 
 #### 详细描述
 
@@ -330,14 +330,14 @@
 
 #### 定义：
 
-``func time.Sleep(v1: float64)``
+``func time.Sleep(seconds: float64)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |   |
 
 
 
@@ -347,7 +347,7 @@
  
 ### time.Unix
 
-
+使用 Unix 时间戳构建一个时间
 
 #### 详细描述
 
@@ -355,15 +355,15 @@
 
 #### 定义：
 
-`func time.Unix(v1: int64, v2: int64) return (r0: time.Time)`
+`func time.Unix(timestampSeconds: int64, nano: int64) return (r0: time.Time)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-| v2 | `int64` |   |
+| timestampSeconds | `int64` |   |
+| nano | `int64` |   |
 
 
 
@@ -379,7 +379,7 @@
  
 ### time.Until
 
-
+计算当前时间到目标时间的时间间隔
 
 #### 详细描述
 
@@ -387,14 +387,14 @@
 
 #### 定义：
 
-`func time.Until(v1: time.Time) return (r0: time.Duration)`
+`func time.Until(end: time.Time) return (r0: time.Duration)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `time.Time` |   |
+| end | `time.Time` |   |
 
 
 
@@ -410,7 +410,7 @@
  
 ### time.now
 
-
+当前时间
 
 #### 详细描述
 
@@ -433,7 +433,7 @@
  
 ### time.sleep
 
-
+sleep 一段时间
 
 #### 详细描述
 
@@ -441,14 +441,14 @@
 
 #### 定义：
 
-``func time.sleep(v1: float64)``
+``func time.sleep(seconds: float64)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |   |
 
 
 

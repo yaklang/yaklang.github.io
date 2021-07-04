@@ -3,25 +3,25 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [http.Do](#httpdo) |  |
- | [http.Get](#httpget) |  |
+ | [http.Do](#httpdo) | 执行一个 http 请求，这个请求是 `http.NewRequest` 创建的 |
+ | [http.Get](#httpget) | 发送一个 http 请求 |
  | [http.GetAllBody](#httpgetallbody) |  |
- | [http.NewRequest](#httpnewrequest) |  |
+ | [http.NewRequest](#httpnewrequest) | 创建一个新的 Request，创建之后，需要通过 `http.Do` 来发送 |
  | [http.Post](#httppost) |  |
- | [http.Raw](#httpraw) |  |
- | [http.Request](#httprequest) |  |
- | [http.body](#httpbody) |  |
- | [http.cookie](#httpcookie) |  |
- | [http.dump](#httpdump) |  |
- | [http.dumphead](#httpdumphead) |  |
- | [http.header](#httpheader) |  |
- | [http.proxy](#httpproxy) |  |
- | [http.show](#httpshow) |  |
- | [http.showhead](#httpshowhead) |  |
- | [http.timeout](#httptimeout) |  |
- | [http.ua](#httpua) |  |
- | [http.uarand](#httpuarand) |  |
- | [http.useragent](#httpuseragent) |  |
+ | [http.Raw](#httpraw) | 创建一个 Golang 原生的 `*http.Request` |
+ | [http.Request](#httprequest) | 立即发起一个 http 请求，不需要 `http.Do` 来执行 |
+ | [http.body](#httpbody) | 【参数】设置请求的 body |
+ | [http.cookie](#httpcookie) | 【参数】设置请求的 Cookie |
+ | [http.dump](#httpdump) | 工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte` |
+ | [http.dumphead](#httpdumphead) | 工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte` |
+ | [http.header](#httpheader) | 【参数】为请求设置 http header |
+ | [http.proxy](#httpproxy) | 【参数】为请求设置 http 代理 |
+ | [http.show](#httpshow) | 调试函数，展示原始数据包内容 |
+ | [http.showhead](#httpshowhead) | 调试函数，展示原始数据包内容，不包含 body |
+ | [http.timeout](#httptimeout) | 【参数】设置超时时间 |
+ | [http.ua](#httpua) | 【参数】设置 UserAgent |
+ | [http.uarand](#httpuarand) | 【参数】设置随机 UserAgent |
+ | [http.useragent](#httpuseragent) | 【参数】设置 UserAgent |
 
 
 
@@ -34,7 +34,7 @@
 
 ### http.Do
 
-
+执行一个 http 请求，这个请求是 `http.NewRequest` 创建的
 
 #### 详细描述
 
@@ -42,14 +42,14 @@
 
 #### 定义：
 
-`func http.Do(v1: *yaklib.yakHttpRequest) return (r0: *http.Response, r1: error)`
+`func http.Do(request: *yaklib.yakHttpRequest) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*yaklib.yakHttpRequest` |   |
+| request | `*yaklib.yakHttpRequest` |   |
 
 
 
@@ -66,7 +66,7 @@
  
 ### http.Get
 
-
+发送一个 http 请求
 
 #### 详细描述
 
@@ -74,15 +74,15 @@
 
 #### 定义：
 
-`func http.Get(v1: string, v2 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Get(url: opt, params ...httpOpt) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yaklib.httpOption` |   |
+| url | `opt` |  想要请求的 url |
+| params | `...httpOpt` |   |
 
 
 
@@ -107,14 +107,14 @@
 
 #### 定义：
 
-`func http.GetAllBody(v1: *http.Response) return (r0: bytes)`
+`func http.GetAllBody(response: *http.Response) return (r0: []byte)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*http.Response` |   |
+| response | `*http.Response` |  想要读取 body 的 `*http.Response` |
 
 
 
@@ -124,13 +124,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| r0 | `[]byte` |   |
 
 
  
 ### http.NewRequest
 
-
+创建一个新的 Request，创建之后，需要通过 `http.Do` 来发送
 
 #### 详细描述
 
@@ -138,16 +138,16 @@
 
 #### 定义：
 
-`func http.NewRequest(v1: string, v2: string, v3 ...yaklib.httpOption) return (r0: *yaklib.yakHttpRequest, r1: error)`
+`func http.NewRequest(method: string, url: string, params ...httpOpt) return (r0: *yaklib.yakHttpRequest, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yaklib.httpOption` |   |
+| method | `string` |  HTTP 请求的方法 |
+| url | `string` |  想要发送请求的 URL |
+| params | `...httpOpt` |   |
 
 
 
@@ -172,15 +172,15 @@
 
 #### 定义：
 
-`func http.Post(v1: string, v2 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Post(url: string, params ...httpOpt) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yaklib.httpOption` |   |
+| url | `string` |  想要请求的 url |
+| params | `...httpOpt` |   |
 
 
 
@@ -197,7 +197,7 @@
  
 ### http.Raw
 
-
+创建一个 Golang 原生的 `*http.Request`
 
 #### 详细描述
 
@@ -205,14 +205,14 @@
 
 #### 定义：
 
-`func http.Raw(v1: any) return (r0: *http.Request, r1: error)`
+`func http.Raw(req: []byte|string|*http.Request|http.Request) return (r0: *http.Request, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| req | `[]byte|string|*http.Request|http.Request` |   |
 
 
 
@@ -229,7 +229,7 @@
  
 ### http.Request
 
-
+立即发起一个 http 请求，不需要 `http.Do` 来执行
 
 #### 详细描述
 
@@ -237,16 +237,16 @@
 
 #### 定义：
 
-`func http.Request(v1: string, v2: string, v3 ...yaklib.httpOption) return (r0: *http.Response, r1: error)`
+`func http.Request(method: string, url: string, params ...httpOpt) return (r0: *http.Response, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yaklib.httpOption` |   |
+| method | `string` |  HTTP 方法 |
+| url | `string` |  想要请求的 URL 链接 |
+| params | `...httpOpt` |   |
 
 
 
@@ -263,7 +263,7 @@
  
 ### http.body
 
-
+【参数】设置请求的 body
 
 #### 详细描述
 
@@ -271,14 +271,14 @@
 
 #### 定义：
 
-`func http.body(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.body(body: string|[]byte|io.Reader|any(fmt.Sprint)) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| body | `string|[]byte|io.Reader|any(fmt.Sprint)` |   |
 
 
 
@@ -288,13 +288,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.cookie
 
-
+【参数】设置请求的 Cookie
 
 #### 详细描述
 
@@ -302,14 +302,14 @@
 
 #### 定义：
 
-`func http.cookie(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.cookie(cookieRaw: string) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| cookieRaw | `string` |   |
 
 
 
@@ -319,13 +319,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.dump
 
-
+工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte`
 
 #### 详细描述
 
@@ -333,14 +333,14 @@
 
 #### 定义：
 
-`func http.dump(v1: any) return (r0: bytes, r1: error)`
+`func http.dump(reqOrRsp: http.Response/Request) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| reqOrRsp | `http.Response/Request` |   |
 
 
 
@@ -357,7 +357,7 @@
  
 ### http.dumphead
 
-
+工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte`
 
 #### 详细描述
 
@@ -365,14 +365,14 @@
 
 #### 定义：
 
-`func http.dumphead(v1: any) return (r0: bytes, r1: error)`
+`func http.dumphead(reqOrRsp: http.Response/Request) return (r0: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| reqOrRsp | `http.Response/Request` |   |
 
 
 
@@ -389,7 +389,7 @@
  
 ### http.header
 
-
+【参数】为请求设置 http header
 
 #### 详细描述
 
@@ -397,15 +397,15 @@
 
 #### 定义：
 
-`func http.header(v1: any, v2: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.header(headerName: string, headerValue: string) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
+| headerName | `string` |   |
+| headerValue | `string` |   |
 
 
 
@@ -415,13 +415,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.proxy
 
-
+【参数】为请求设置 http 代理
 
 #### 详细描述
 
@@ -429,14 +429,14 @@
 
 #### 定义：
 
-`func http.proxy(v1 ...string) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.proxy(proxyUrls ...string) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
+| proxyUrls | `...string` |   |
 
 
 
@@ -446,13 +446,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.show
 
-
+调试函数，展示原始数据包内容
 
 #### 详细描述
 
@@ -460,14 +460,14 @@
 
 #### 定义：
 
-``func http.show(v1: any)``
+``func http.show(reqOrRsp: http.Request/Response)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| reqOrRsp | `http.Request/Response` |   |
 
 
 
@@ -477,7 +477,7 @@
  
 ### http.showhead
 
-
+调试函数，展示原始数据包内容，不包含 body
 
 #### 详细描述
 
@@ -485,14 +485,14 @@
 
 #### 定义：
 
-``func http.showhead(v1: any)``
+``func http.showhead(reqOrRsp: http.Request/Response)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| reqOrRsp | `http.Request/Response` |   |
 
 
 
@@ -502,7 +502,7 @@
  
 ### http.timeout
 
-
+【参数】设置超时时间
 
 #### 详细描述
 
@@ -510,14 +510,14 @@
 
 #### 定义：
 
-`func http.timeout(v1: float64) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.timeout(seconds: float64) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
+| seconds | `float64` |  超时时间 |
 
 
 
@@ -527,13 +527,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.ua
 
-
+【参数】设置 UserAgent
 
 #### 详细描述
 
@@ -541,14 +541,14 @@
 
 #### 定义：
 
-`func http.ua(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.ua(userAgent: any) return (r0: httpOpt)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| userAgent | `any` |   |
 
 
 
@@ -558,13 +558,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
+| r0 | `httpOpt` |   |
 
 
  
 ### http.uarand
 
-
+【参数】设置随机 UserAgent
 
 #### 详细描述
 
@@ -587,7 +587,7 @@
  
 ### http.useragent
 
-
+【参数】设置 UserAgent
 
 #### 详细描述
 
@@ -595,14 +595,14 @@
 
 #### 定义：
 
-`func http.useragent(v1: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+`func http.useragent(userAgent: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| userAgent | `any` |   |
 
 
 
