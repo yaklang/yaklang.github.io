@@ -1,5 +1,9 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
+    i18n: {
+        defaultLocale: 'zh-CN',
+        locales: ['zh-CN', 'en'],
+    },
     title: 'Yak Official Website',
     tagline: 'Yak 是一门 Web 安全研发领域垂直语言',
     url: 'https://yaklang.io',
