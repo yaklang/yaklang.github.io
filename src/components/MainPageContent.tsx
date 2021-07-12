@@ -67,11 +67,20 @@ const profiles: Profile[] = [
         </>
     },
     {
-        svg: "/img/main/networking.svg", content: <>
-            研发团队来源于 <Text mark={true} strong={true} style={{fontSize: 16}}>业内顶尖企业</Text> <br/>
-            企业内部孵化，高效且稳定，提供<Text mark={true}>企业落地解决方案</Text>，是你可以信任的好伙伴<br/>
-            <br/>
-            欢迎企业咨询 / 友情赞助
+        svg: "/img/main/hacker-spy.svg", content: <>
+            <Paragraph>
+                原生兼容 <Text
+                mark={true}
+                strong={true}
+                style={{fontSize: 16}}
+            >nuclei yaml poc/exp</Text>
+                <br/>
+                <Text mark={true}>
+                    无需额外下载
+                </Text> Nuclei 即可享受所有其所有漏洞检测能力。
+                <br/>
+                社区提供 <Text mark={true} strong={true} style={{fontSize: 16}}>上千种</Text> 漏洞检测 PoC
+            </Paragraph>
         </>
     },
 ]
@@ -113,21 +122,21 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 {CodeDemos.map((i, index) => {
                     return <TabPane tab={i.title} key={index} style={{height: 550}}>
                         {/*<Row gutter={24}>*/}
-                            {/*<Col md={24} sm={24} lg={8}>*/}
-                            {/*    <Card*/}
-                            {/*        bordered={false}*/}
-                            {/*    >*/}
-                            {/*        {i.desc}*/}
-                            {/*    </Card>*/}
-                            {/*</Col>*/}
-                            {/*<Col md={24} lg={16}>*/}
-                                <Image
-                                    style={{maxWidth: 1400}}
-                                    src={i.code}
-                                    preview={false}
-                                    // width={900}
-                                />
-                            {/*</Col>*/}
+                        {/*<Col md={24} sm={24} lg={8}>*/}
+                        {/*    <Card*/}
+                        {/*        bordered={false}*/}
+                        {/*    >*/}
+                        {/*        {i.desc}*/}
+                        {/*    </Card>*/}
+                        {/*</Col>*/}
+                        {/*<Col md={24} lg={16}>*/}
+                        <Image
+                            style={{maxWidth: 1400}}
+                            src={i.code}
+                            preview={false}
+                            // width={900}
+                        />
+                        {/*</Col>*/}
                         {/*</Row>*/}
                     </TabPane>
                 })}
