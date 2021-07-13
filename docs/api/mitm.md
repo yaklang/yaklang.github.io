@@ -5,7 +5,7 @@
 |:------|:--------|
  | [mitm.Bridge](#mitmbridge) | 桥接模式中间人 |
  | [mitm.Start](#mitmstart) | 启动一个中间人代理 |
- | [mitm.callback](#mitmcallback) | 【参数】设置中间人代理的处理函数 |
+ | [mitm.callback](#mitmcallback) |  |
  | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
  | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
  | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
@@ -86,7 +86,7 @@
  
 ### mitm.callback
 
-【参数】设置中间人代理的处理函数
+
 
 #### 详细描述
 
@@ -94,14 +94,14 @@
 
 #### 定义：
 
-`func mitm.callback(v1: func (v1: bool, v2: *http.Request, v3: *http.Response) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`func mitm.callback(v1: func (v1: bool, v2: string, v3: *http.Request, v4: *http.Response) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bool, v2: *http.Request, v3: *http.Response) ` |   |
+| v1 | `func (v1: bool, v2: string, v3: *http.Request, v4: *http.Response) ` |   |
 
 
 
