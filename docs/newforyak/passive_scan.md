@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 11
 ---
 
 # 初探被动扫描
@@ -24,8 +24,100 @@ sidebar_position: 8
 
 ## 业内最方便的中间人劫持
 
-被动扫描能力底座也是 Yak 目前 "独一份" 提供的。
+被动扫描能力底座也是 Yak 目前 "独一份" 提供的。简单来说，Yak 提供了一个方便的中间人的接口，仅需 `mitm.Start` 即可启动一个中间人代理。
 
 ```go
-mitm.
+err = mitm.Start(8082, mitm.callback(func(isHttps, url, req, rsp) {
+    if req.Method == "CONNECT" {
+        return
+    }
+    
+
+    printf("[%5s] url: %v \n", req.Method, url)
+    println()
+}), mitm.useDefaultCA(true))
+die(err)
 ```
+
+:::caution 证书问题
+
+当你默认不配置证书的时候，Yak 将在你当前工作目录创建一套证书，名为 `yak-mitm-ca.crt` 和 `yak-mitm-ca.key`，将会使用这套证书进行中间人劫持
+
+当你 `mitm.useDefaultCA(false)` 选项被使用的时候，将不会使用默认的证书名，这个时候，需要用户强制使用自己的证书。
+
+详情参考 [`mitm` 使用文档](/docs/buildinlibs/lib_mitm)
+
+:::
+
+## 精密外科手术：`mitm` 配合 `fuzz`
+
+在前面的教程中，我们学习了如何使用 `fuzz` 模块，那同时我们本节也学习了如何进行中间人劫持。
+
+顺理成章的，我们可以编写自己的被动扫描器了，我们通过 `fuzz` 模块，可以很容易做到针对 `http.Request` 的变形，不管是分析内部参数还是对特定参数进行扫描，这些操作手到擒来！
+
+```go
+wg = sync.NewWaitGroup()
+defer wg.Wait()
+
+// 设置 Fuzz 函数
+submitTask = func(fReq){
+    wg.Add(1)
+    go func{
+        defer wg.Done()
+        for _, p := range fReq.GetCommonParams() {
+            reqs, err := p.Fuzz("PAYLOAD_TOKEN").Exec()
+            if err != nil {
+                log.error("FUZZ ERROR: %s", err)
+                return
+            }
+
+            for result := range reqs {
+                println("-----------------------FUZZED REQUEST-------------------------")
+                println(result.Url)
+                println("    Rsp Length: ", len(result.ResponseRaw))
+            }
+        }
+    }
+}
+
+// 启动一个中间人劫持服务器
+go def{
+    err = mitm.Start(8082, mitm.callback(func(isHttps, url, req, rsp) {
+        if req.Method == "CONNECT" {
+            return
+        }
+
+        fReq, err := fuzz.HTTPRequest(req, fuzz.https(isHttps/*type: bool*/))
+        if err != nil {
+            log.error("build fuzz http request failed: %s", err)
+            return
+        }
+
+        submitTask(fReq)
+        
+    }), mitm.useDefaultCA(true))
+    die(err)
+}
+
+time.sleep(1)
+
+// 发送一个请求，以中间人开放代理为代理
+rsp, err := http.Get("https://www.baidu.com/?a=test", http.proxy("http://127.0.0.1:8082"))
+if err != nil {
+    die(err)
+}
+```
+
+通过上面的代码，我们可以说已经完成了一个最简易的被动扫描器入口
+
+:::note
+
+当然，本节提供的案例仅供用户学习，一般来说，编写被动扫描器的关键在于对于 `fuzz` 编写优秀的扫描模块，当然我们也可以不使用自己编写的 `fuzz` 漏洞挖掘模块。 
+
+:::
+
+:::info mitm 入口有无数种玩法
+
+当然如果想要记录流量，或者说仅仅作为调试使用，或者把流量抽出来作为 nuclei 的扫描，Yak 都是很容易可以做到的！
+
+:::
