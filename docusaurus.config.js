@@ -59,7 +59,14 @@ module.exports = {
                     type: 'doc',
                     docId: 'intro',
                     position: 'left',
-                    label: '教程/文档',
+                    label: '教程与文档',
+                },
+                {
+                    position: "left",
+                    type: "doc",
+                    docId: "intro",
+                    docsPluginId: 'team',
+                    label: '社区与团队',
                 },
                 // {to: '/blog', label: 'Blog', position: 'left'},
                 {
@@ -119,6 +126,18 @@ module.exports = {
             copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Built with v1ll4n.`,
         },
     },
+    plugins: [
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'team',
+                path: 'team',
+                routeBasePath: 'team',
+                sidebarPath: require.resolve('./sidebarsTeam.js'),
+                // ... other options
+            },
+        ],
+    ],
     presets: [
         [
             '@docusaurus/preset-classic',
@@ -129,12 +148,12 @@ module.exports = {
                     editUrl:
                         'https://github.com/yaklang/',
                 },
-                blog: {
-                    showReadingTime: true,
-                    // Please change this to your repo.
-                    editUrl:
-                        'https://github.com/yaklang/',
-                },
+                // blog: {
+                //     showReadingTime: true,
+                //     // Please change this to your repo.
+                //     editUrl:
+                //         'https://github.com/yaklang/',
+                // },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
