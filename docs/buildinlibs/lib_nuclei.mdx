@@ -2,9 +2,21 @@
 sidebar_position: 21
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # [nuclei] 赋予 Yak 漏扫能力
 
 本身 Yak 并不具备漏洞扫描能力，但是作为一门希望一站式解决安全研发需求的语言，如果能在语言/语言库层面集成某一些具有成熟生态的漏洞扫描能力其实是非常令人激动的。
+
+```go
+res, err := nuclei.Scan(cli.String("target"))
+die(err)
+
+for result := range res {
+    dump(result)
+}
+```
 
 ## Yaml PoC 解决方案
 
@@ -68,3 +80,205 @@ sidebar_position: 21
 ### 开源与 MIT 协议
 
 ![开源协议一图简介](/img/tutorial/source-license.png)
+
+## 在 Yak 中使用 Nuclei
+
+我们的集成方式并非使用 Yak 去调用二进制发行版的 Nuclei，而是使用在 Yak 编译的过程中把 Nuclei 编译成 Yak 的一个内置模块。
+
+众所周知，我们的 Yak 在使用内置库的时候，直接调用库即可，所以...
+
+### Quick Start
+
+```go
+nuclei.Scan("example.com")
+```
+
+在 Yak 脚本中，任何时候，你想进行漏洞扫描，仅需执行 `nuclei.Scan` 函数即可
+
+### 如何使用 nuclei 参数？
+
+和 `synscan` 与 `servicescan` 使用参数的风格一致，我们可以使用
+
+```go
+nuclei.Scan(targets, nuclei.verbose(true), nuclei.tags("thinkphp"))
+```
+
+通过 `nuclei.verbose` 设置输出更多的调试信息，同时扫描所有 nuclei 带 `thinkphp` Tag 的 templates。
+
+## 实战案例
+
+我们在本地搭建一个 `thinkphp` 漏洞环境
+
+### 使用 Vulhub 搭建 Thinkphp 靶场
+
+为了验证 nuclei 的漏扫能力，我们需要实际扫描一些具体的漏洞。
+
+```bash
+git clone https://github.com/vulhub/vulhub --depth 1
+cd vulhub/thinkphp/5.0.23-rce
+docker-compose up -d
+```
+
+### 安装 nuclei 的 poc
+
+在 Yak 中，我们可以使用 nuclei 的引擎，但是往往 PoC 的更新频率比较高，如果我们需要使用最新的 PoC，则需要更新一下 PoC 库。
+
+更新 PoC 库有两个方式
+
+<Tabs
+  defaultValue="auto-update"
+  values={[
+    {label: '自动更新 nuclei PoC', value: 'auto-update'},
+    {label: '手动更新 nuclei PoC', value: 'manual-update'},
+  ]}>
+  <TabItem value="auto-update">
+
+```bash
+yak update-nuclei-poc
+```
+
+  </TabItem>
+  <TabItem value="manual-update">
+
+```bash
+cd ~ && git clone https://github.com/projectdicovery/nuclei-templates --depth 1
+```
+
+  </TabItem>
+</Tabs>
+
+当我们执行完 `yak update-nuclei-poc` 之后，我们将会看到如下内容
+
+```
+
+                       __     _
+     ____  __  _______/ /__  (_)
+    / __ \/ / / / ___/ / _ \/ /
+   / / / / /_/ / /__/ /  __/ /
+  /_/ /_/\__,_/\___/_/\___/_/   v2.3.8
+
+                projectdiscovery.io
+
+
+Newly added templates:
+
+CONTRIBUTING.md
+PULL_REQUEST_TEMPLATE.md
+cnvd/CNVD-2019-01348.yaml
+cnvd/CNVD-2020-23735.yaml
+cnvd/CNVD-2020-56167.yaml
+cnvd/CNVD-2020-62422.yaml
+cnvd/CNVD-2020-68596.yaml
+cnvd/CNVD-2021-10543.yaml
+cnvd/CNVD-2021-15822.yaml
+cnvd/CNVD-2021-17369.yaml
+cnvd/CNVD-2021-30167.yaml
+cves/2009/CVE-2009-0545.yaml
+cves/2009/CVE-2009-1151.yaml
+cves/2009/CVE-2009-4223.yaml
+cves/2011/CVE-2011-0049.yaml
+...
+...
+file/android/debug-enabled.yaml
+file/android/dynamic-broadcast-receiver.yaml
+file/android/file-scheme.yaml
+...
+...
+file/android/webview-universal-access.yaml
+file/keys/amazon-mws-auth-token.yaml
+file/keys/aws-access-id.yaml
+file/keys/aws-cognito.yaml
+file/keys/cloudinary.yaml
+file/keys/credentials.yaml
+
+workflows/lucee-workflow.yaml
+workflows/magento-workflow.yaml
+workflows/ruijie-workflow.yaml
+
+Nuclei Templates v8.4.0 Changelog
++-------+-------+---------+
+| TOTAL | ADDED | REMOVED |
++-------+-------+---------+
+|  1472 |   634 |      43 |
++-------+-------+---------+
+[INF] Successfully updated nuclei-templates (v8.4.0). Enjoy!
+```
+
+看到这些内容的时候，我们的 nuclei 的 poc 已经更新到最新版本了。
+
+### 使用 yak nuclei 检测 thinkphp 漏洞
+
+当我们执行
+
+```go title="thinkphp.yak"
+res, err := nuclei.Scan("127.0.0.1:8083", nuclei.tags("thinkphp"))
+die(err)
+
+for result = range res {
+    dump(result)
+}
+```
+
+这个脚本的是哈，我们得到了如下结果
+
+:::note
+
+127.0.0.1:8083 是本机靶场地址
+
+:::
+
+```bash
+
+                       __     _
+     ____  __  _______/ /__  (_)
+    / __ \/ / / / ___/ / _ \/ /
+   / / / / /_/ / /__/ /  __/ /
+  /_/ /_/\__,_/\___/_/\___/_/   v2.3.8
+
+                projectdiscovery.io
+
+[ERR] Could not find template 'exposed-tokens': no templates found in path
+[ERR] Could not find template 'helpers': no templates found in path
+[INF] Loading templates...
+[INF] [thinkphp-2-rce] ThinkPHP 2 / 3 's' Parameter RCE (@dr_set) [critical]
+[INF] [thinkphp-5023-rce] ThinkPHP 5.0.23 RCE (@dr_set) [critical]
+[INF] [thinkphp-5022-rce] ThinkPHP 5.0.22 RCE (@dr_set) [critical]
+[INF] [thinkphp-509-information-disclosure] ThinkPHP 5.0.9 Information Disclosure (@dr_set) [critical]
+[INF] Loading workflows...
+[INF] Using 4 rules (4 templates, 0 workflows)
+{"templateID":"thinkphp-5023-rce","info":{"tags":"thinkphp,rce","name":"ThinkPHP 5.0.23 RCE","author":"dr_set","severity":"critical","description":"Thinkphp5 5.0(\u003c5.0.24) Remote Code Execution.","reference":"https://github.com/vulhub/vulhub/tree/0a0bc719f9a9ad5b27854e92bc4dfa17deea25b4/thinkphp/5.0.23-rce"},"type":"http","host":"http://127.0.0.1:8083","matched":"http://127.0.0.1:8083/index.php?s=captcha","ip":"127.0.0.1","timestamp":"2021-07-16T00:05:13.895207+08:00"}
+(*tools.PocVul)(0xc001ca8000)({
+ Source: (string) (len=6) "nuclei",
+ PocName: (string) (len=17) "thinkphp-5023-rce",
+ Target: (string) (len=21) "http://127.0.0.1:8083",
+ IP: (string) (len=9) "127.0.0.1",
+ Port: (int) 8083,
+ Timestamp: (int64) 1626365113,
+ Severity: (string) (len=8) "critical",
+ RawJson: (string) (len=477) "{\"host\":\"http://127.0.0.1:8083\",\"info\":{\"author\":\"dr_set\",\"description\":\"Thinkphp5 5.0(\\u003c5.0.24) Remote Code Execution.\",\"name\":\"ThinkPHP 5.0.23 RCE\",\"reference\":\"https://github.com/vulhub/vulhub/tree/0a0bc719f9a9ad5b27854e92bc4dfa17deea25b4/thinkphp/5.0.23-rce\",\"severity\":\"critical\",\"tags\":\"thinkphp,rce\"},\"ip\":\"127.0.0.1\",\"matched\":\"http://127.0.0.1:8083/index.php?s=captcha\",\"templateID\":\"thinkphp-5023-rce\",\"timestamp\":\"2021-07-16T00:05:13.895207+08:00\",\"type\":\"http\"}"
+})
+```
+
+我们观察结果，发现 nuclei 的日志被打印到了 stdout 中，扫描的结果是一个 `*tools.PocVul` 对象，返回在了结果中。
+
+:::note
+
+`*tools.VulPoc` 的结构描述
+
+```go
+type palm/common/yak/yaklib/tools.(PocVul) struct {
+  Fields(可用字段):
+      Source: string
+      PocName: string
+      Target: string
+      IP: string
+      Port: int
+      Timestamp: int64
+      Severity: string
+      RawJson: string
+  StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+}
+```
+
+:::
