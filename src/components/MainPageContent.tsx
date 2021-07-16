@@ -1,9 +1,8 @@
 // @ts-ignore
 import React from "react";
-import {Card, Col, Divider, Image, Layout, Row, Space, Tabs, Tag, Typography} from "antd";
-import ReactPlayer from 'react-player'
+import {Card, Col, Divider, Image, Layout, Row, Space, Tag, Typography} from "antd";
+
 const {Text, Paragraph} = Typography;
-const {TabPane} = Tabs;
 
 export interface MainPageContentProp {
 
@@ -123,7 +122,11 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 mark={true}>CODE
             </Text></Typography.Title>
             <br/>
-            <ReactPlayer url={"http://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"} loop={true} muted={true}/>
+            <video
+                src="http://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"
+                loop={true} autoPlay={true}
+                style={{minWidth: 400, maxWidth: 1000}}
+            />
             <br/>
             <br/>
             {/*<Tabs centered={true} style={{marginBottom: 80}}>*/}
