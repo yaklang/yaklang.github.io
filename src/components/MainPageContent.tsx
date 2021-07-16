@@ -1,8 +1,7 @@
 // @ts-ignore
 import React from "react";
-import {Col, Layout, Row, Image, Card, Space, Typography, Tag, Button, Divider, Carousel, Tabs} from "antd";
-import {CodeDemos} from "./data";
-
+import {Card, Col, Divider, Image, Layout, Row, Space, Tabs, Tag, Typography} from "antd";
+import ReactPlayer from 'react-player'
 const {Text, Paragraph} = Typography;
 const {TabPane} = Tabs;
 
@@ -112,35 +111,44 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                     })}
                 </Row>
             </div>
+            <Divider>
+                Yak 全景 / Yak Panoramic View
+            </Divider>
+            <Image src={"/img/docs/yak_core/yak-modules.jpg"} preview={false}>
+
+            </Image>
             <Divider/>
             <Typography.Title level={1}>代码样例：TALK IS CHEEP, SHOW ME THE <Text
                 strong={true}
                 mark={true}>CODE
             </Text></Typography.Title>
             <br/>
-            <Tabs centered={true} style={{marginBottom: 80}}>
-                {CodeDemos.map((i, index) => {
-                    return <TabPane tab={i.title} key={index} style={{height: 550}}>
-                        {/*<Row gutter={24}>*/}
-                        {/*<Col md={24} sm={24} lg={8}>*/}
-                        {/*    <Card*/}
-                        {/*        bordered={false}*/}
-                        {/*    >*/}
-                        {/*        {i.desc}*/}
-                        {/*    </Card>*/}
-                        {/*</Col>*/}
-                        {/*<Col md={24} lg={16}>*/}
-                        <Image
-                            style={{maxWidth: 1400}}
-                            src={i.code}
-                            preview={false}
-                            // width={900}
-                        />
-                        {/*</Col>*/}
-                        {/*</Row>*/}
-                    </TabPane>
-                })}
-            </Tabs>
+            <ReactPlayer url={"http://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"} loop={true} muted={true}/>
+            <br/>
+            <br/>
+            {/*<Tabs centered={true} style={{marginBottom: 80}}>*/}
+            {/*    {CodeDemos.map((i, index) => {*/}
+            {/*        return <TabPane tab={i.title} key={index} style={{height: 550}}>*/}
+            {/*            /!*<Row gutter={24}>*!/*/}
+            {/*            /!*<Col md={24} sm={24} lg={8}>*!/*/}
+            {/*            /!*    <Card*!/*/}
+            {/*            /!*        bordered={false}*!/*/}
+            {/*            /!*    >*!/*/}
+            {/*            /!*        {i.desc}*!/*/}
+            {/*            /!*    </Card>*!/*/}
+            {/*            /!*</Col>*!/*/}
+            {/*            /!*<Col md={24} lg={16}>*!/*/}
+            {/*            <Image*/}
+            {/*                style={{maxWidth: 1400}}*/}
+            {/*                src={i.code}*/}
+            {/*                preview={false}*/}
+            {/*                // width={900}*/}
+            {/*            />*/}
+            {/*            /!*</Col>*!/*/}
+            {/*            /!*</Row>*!/*/}
+            {/*        </TabPane>*/}
+            {/*    })}*/}
+            {/*</Tabs>*/}
         </Layout>
     </div>
 };
