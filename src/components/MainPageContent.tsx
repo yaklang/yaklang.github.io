@@ -123,7 +123,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
             </Text></Typography.Title>
             <br/>
             <video
-                src="http://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"
+                src="https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"
                 loop={true} autoPlay={true}
                 style={{minWidth: 400, maxWidth: 1000}}
             />
