@@ -124,7 +124,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
             <br/>
             <video
                 src="https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"
-                loop={true} autoPlay={true}
+                loop={true} autoPlay={true} playsInline={true} controls={true}
                 style={{minWidth: 400, maxWidth: 1000}}
             />
             <br/>
