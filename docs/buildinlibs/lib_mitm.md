@@ -10,7 +10,7 @@ sidebar_position: 16
 
 1. `fn mitm.Bridge(var_1: interface {}, var_2: string, vars: ...yaklib.mitmConfigOpt): error` 设置一个桥接模式的中间人
 1. `fn mitm.Start(var_1: int, vars: ...yaklib.mitmConfigOpt): error` 启动一个代理模式中间人
-1. `fn mitm.callback(var_1: func(isHttps bool, request *http.Request, response *http.Response)): yaklib.mitmConfigOpt`【参数】：设置进入中间人的请求的入口（只劫持不修改）
+1. `fn mitm.callback(var_1: func(isHttps bool, url string, request *http.Request, response *http.Response)): yaklib.mitmConfigOpt`【参数】：设置进入中间人的请求的入口（只劫持不修改）
 1. `fn mitm.hijack(var_1: func(bool, *http.Request, *http.Response)): yaklib.mitmConfigOpt`【暂不开放：参数】：设置进入中间人的请求的入口（劫持）
 1. `fn mitm.context(var_1: context.Context): yaklib.mitmConfigOpt`【参数】：控制中间人生命周期的上下文
 1. `fn mitm.host(var_1: string): yaklib.mitmConfigOpt`【参数】：想要监听到本地的地址
@@ -36,7 +36,7 @@ sidebar_position: 16
 
 ```go
 // 启动一个 mitm 劫持服务器
-go mitm.Start(8084, mitm.callback(fn(isHttps, request, response){
+go mitm.Start(8084, mitm.callback(fn(isHttps, url, request, response){
     if isHttps {
         println("厉害了：我们劫持到一个 HTTPS！")    
     }
@@ -118,12 +118,12 @@ X-Ua-Compatible: IE=Edge,chrome=1
 
 ```go
 // 启动一个 mitm 劫持服务器
-go mitm.Start(8084, mitm.callback(fn(isHttps, request, response){
+go mitm.Start(8084, mitm.callback(fn(isHttps, url, request, response){
     println("请求经过了代理服务器")
 }))
 
 go mitm.Bridge(8086, "http://127.0.0.1:8084", mitm.callback(fn(
-    isHttps, request, response,
+    isHttps, url, request, response,
 ){
     if (!isHttps) {
         return

@@ -145,7 +145,7 @@ dump(portParam)
 
 ### `cli.Urls`：处理目标是 url 的情况
 
-#### 案例一
+#### 案例：解析 urls，自由解析
 
 ```go
 // --urls "leavesongs.com,10.1.3.2,https://www.baidu.com"
@@ -166,7 +166,7 @@ dump(urlParam)
 }
 ```
 
-### 案例二
+### 案例：解析 urls，直接解析 URL
 
 ```
 // --urls2 "https://www.baidu.com"
@@ -179,3 +179,42 @@ dump(urlParam)
 }
 */
 ```
+
+## 默认值/帮助/参数检查
+
+目前可设置的命令行参数属性为：
+
+1. `cli.setDefault(defaultValue: any)` 设置默认值
+1. `cli.setRequired(required: bool)` 设置是否为必需参数，如果必须参数缺失，则可以通过 `cli.check()` 来检查合理性，帮助截断执行过程。
+1. `cli.setHelp(helpInfo: string)` 设置帮助信息
+
+但是设置了属性，如果需要检查参数是否合理，我们需要通过 `cli.check()` 函数来操作，如果这个参数检查不合理，则会立即退出程序。
+
+### 实战案例，生成帮助信息
+
+Yak cli 模块中，我们经常需要为我们的脚本设置参数，同为我们脚本设置帮助信息，方便别人来使用。
+
+```go
+testValue = cli.String("target", cli.setRequired(true), cli.setHelp("这是一个扫描目标，不能缺失，在帮助说明里。。。了～！"))
+boolParams = cli.Bool("bool-params", cli.setHelp("这是一个bool值"))
+strValue = cli.String("testOrdinaryParam")
+cli.check()
+
+println("param parsed")
+```
+
+我们编写了上述代码，将会从命令行取出一些参数来执行，如果我们不输入参数，直接执行，将会出现如下效果
+
+```go
+参数缺乏(Miss Params) [-target / --target]:
+    Help: 这是一个扫描目标，不能缺失，在帮助说明里。。。了～！
+
+可用相关参数(Available Params):
+    参数名[ParamName]: -target, --target 
+        帮助(Help): 这是一个扫描目标，不能缺失，在帮助说明里。。。了～！ 
+    参数名[ParamName]: -bool-params, --bool-params 
+        帮助(Help): 这是一个bool值 
+    参数名[ParamName]: -testOrdinaryParam, --testOrdinaryParam 
+```
+
+注意，帮助信息是 `cli.check()` 来输出的，如果需要 Yak cli 帮助你检查用户输入是否有空的参数，这是一个非常好的办法！

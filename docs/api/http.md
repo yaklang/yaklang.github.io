@@ -15,6 +15,7 @@
  | [http.dump](#httpdump) | 工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte` |
  | [http.dumphead](#httpdumphead) | 工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte` |
  | [http.header](#httpheader) | 【参数】为请求设置 http header |
+ | [http.json](#httpjson) | 设置发送模式为 JSON，传入的参数会被 JSON 序列化，把结果设置为 Body，然后设置 application/json 为 Content-Type |
  | [http.proxy](#httpproxy) | 【参数】为请求设置 http 代理 |
  | [http.show](#httpshow) | 调试函数，展示原始数据包内容 |
  | [http.showhead](#httpshowhead) | 调试函数，展示原始数据包内容，不包含 body |
@@ -416,6 +417,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `httpOpt` |   |
+
+
+ 
+### http.json
+
+设置发送模式为 JSON，传入的参数会被 JSON 序列化，把结果设置为 Body，然后设置 application/json 为 Content-Type
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.json(obj: any) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| obj | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
 
 
  

@@ -5,6 +5,8 @@
 |:------|:--------|
  | [json.Marshal](#jsonmarshal) |  |
  | [json.New](#jsonnew) |  |
+ | [json.dumps](#jsondumps) | 把一个任何Yak/Golang对象解析为 string |
+ | [json.loads](#jsonloads) | 把一个JSON字符串解析成Yak对象，要注意参数支持 string 或 bytes |
 
 
 
@@ -76,6 +78,68 @@
 |:-----------|:---------- |:-----------|
 | r0 | `*yaklib.yakJson` |   |
 | r1 | `error` |   |
+
+
+ 
+### json.dumps
+
+把一个任何Yak/Golang对象解析为 string
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func json.dumps(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### json.loads
+
+把一个JSON字符串解析成Yak对象，要注意参数支持 string 或 bytes
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func json.loads(v1: string|[]byte) return (r0: any)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string|[]byte` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `any` |   |
 
 
  

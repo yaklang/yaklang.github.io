@@ -9,6 +9,7 @@
  | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
  | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
  | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
+ | [mitm.useDefaultCA](#mitmusedefaultca) | 设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key |
 
 
 
@@ -94,14 +95,14 @@
 
 #### 定义：
 
-`func mitm.callback(v1: func (v1: bool, v2: string, v3: *http.Request, v4: *http.Response) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`func mitm.callback(v1: func(isHttps, url, req: *http.Request, rsp: *http.Resposne)) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bool, v2: string, v3: *http.Request, v4: *http.Response) ` |   |
+| v1 | `func(isHttps, url, req: *http.Request, rsp: *http.Resposne)` |   |
 
 
 
@@ -196,6 +197,37 @@
 |:-----------|:---------- |:-----------|
 | caCert | `bytes` |  设置 CA 根证书 |
 | key | `bytes` |  设置 CA 对应的私钥 |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.useDefaultCA
+
+设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func mitm.useDefaultCA(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 

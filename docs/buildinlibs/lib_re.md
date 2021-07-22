@@ -8,8 +8,8 @@ sidebar_position: 5
 
 yak 的正则工具包非常简单易用，核心只有两个函数
 
-1. `fn re.Grok(var_1: string, var_2: string): yaklib.GrokResult`: 符合 Grok 标准的正则捕获模块
 1. `fn re.Match(var_1: string, var_2: string|[]byte): bool`: 使用正则检查目的字符串是否符合正则，返回 `true/false`
+1. `fn re.Grok(var_1: string, var_2: string): yaklib.GrokResult`: 符合 Grok 标准的正则捕获模块
 
 同时继承了 Golang `regexp` 标准库中的几个标准接口
 
@@ -71,16 +71,88 @@ pattern: matchThis(.*?)txt 匹配成功
 */
 ```
 
-## [grok]：正则捕获库
+## [re.Grok]：Logstash Grok 风格的正则捕获
 
-大家如果有接触过 Logstash （ELK）的话，会对 Grok 非常熟悉，当我们需要对日志进行处理，提取关键日志中的信息，我们将会编写对应的 Grok 表达式，提取出关键信息。
+> 资料介绍来源 [https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html](https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html)
 
-Grok 是一种采用组合多个预定义的正则表达式。用来匹配分割文本，并且映射到关键字的工具。主要用来对日志数据进行预处理。Logstash 的 filter 模块中  grok 插件就是其应用。其实主要思想就是用正则的方式匹配出字段，然后映射成某个字段。
+Grok 是 Logstash 最重要的插件。你可以在 grok 里预定义好命名正则表达式，在稍后(grok参数或者其他正则表达式里)引用它。 正则表达式语法。大家如果有接触过 Logstash （ELK）的话，会对 Grok
+非常熟悉，当我们需要对日志进行处理， 提取关键日志中的信息，我们将会编写对应的 Grok 表达式，提取出关键信息。
+
+Grok 是一种采用组合多个预定义的正则表达式。用来匹配分割文本，并且映射到关键字的工具。主要用来对日志数据进行预处理。Logstash 的 filter 模块中 grok
+插件就是其应用。其实主要思想就是用正则的方式匹配出字段，然后映射成某个字段。
+
+### `re.Grok` 定义
+
+```go
+func re.Grok(content: string, grokPattern: string) return (map[string][]string)
+```
+
+### 正则表达式语法
+
+运维工程师多多少少都会一点正则。你可以在 grok 里写标准的正则，像下面这样：
+
+```go
+\s+(?<request_time>\d+(?:\.\d+)?)\s+
+```
+
+:::tip 小贴士： 
+这个正则表达式写法对于 Perl 或者 Ruby 程序员应该很熟悉了，Python 程序员可能更习惯写 `(?P<name>pattern)`，没办法，适应一下吧
+:::
+
+下面是从官方文件中摘抄的最简单但是足够说明用法的示例：
+
+```
+USERNAME [a-zA-Z0-9._-]+
+USER %{USERNAME}
+```
+
+第一行，用普通的正则表达式来定义一个 grok 表达式；第二行，通过打印赋值格式，用前面定义好的 grok 表达式来定义另一个 grok 表达式。
+
+grok 表达式的打印复制格式的完整语法是下面这样的：
+
+```
+%{PATTERN_NAME:capture_name}
+```
+
+### 实践案例：使用 grok 提取 Yak 版本
+
+我们经常需要用 Grok 来提取一些数据，同时我们可以用 `Regexp.FindAll*` 相关接口来提取数据，这两者的核心远离其实并没有太大区别，但是 Grok 的优势就是
+
+1. 更可读，更好维护
+1. 规则通用，在 Logstash 平台中可以使用，同时 Golang 的 Grok 实现在本节内容也可以使用
+
+我们以 Yak 本身版本信息来作为原材料，使用 Grok 规则来提取规则。
+
+```bash title="yak version"
+Yak Language Build Info:
+    Version: v0.9.7a2-ff28a9389f7bd7538de20468b4a096258dfe3ce6
+    GoVersion: go version go1.15.13 darwin/amd64
+    GitHash: ff28a9389f7bd7538de20468b4a096258dfe3ce6
+    BuildTime: Mon Jul 19 17:45:48 2021 +0800
+
+```
+
+我们通过 `yak version` 来获取上述内容。编写以下脚本案例：
+
+```go
+version = re.Grok(`Yak Language Build Info:
+    Version: v0.9.7a2-ff28a9389f7bd7538de20468b4a096258dfe3ce6
+    GoVersion: go version go1.15.13 darwin/amd64
+    GitHash: ff28a9389f7bd7538de20468b4a096258dfe3ce6
+    BuildTime: Mon Jul 19 17:45:48 2021 +0800
+`, "Version: v%{COMMONVERSION:version}")["version"]
+println(version)
+```
+
+当我们执行完成的时候，我们将提取到 `version` 的值，为一个 `[]string`，结果为 `[0.9.7]`
 
 ### yak 的 `re.Grok` 支持内置的规则
 
 ```go
 var patterns = map[string]string{
+    // 匹配 Version
+	"COMMONVERSION": `(%{INT}\.?)+[a-zA-Z]*?`,
+
     // 匹配一个用户名
 	"USERNAME":           `[a-zA-Z0-9._-]+`,
 	"USER":               `%{USERNAME}`,

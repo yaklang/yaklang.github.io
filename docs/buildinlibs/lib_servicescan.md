@@ -6,7 +6,7 @@ sidebar_position: 13
 
 :::danger 实战案例的具体 IP 地址将会被隐藏
 
-本文会出现很多世纪互联网扫描公开资产的案例，但是关键的 IP 将会被打码。
+本文会出现很多实际互联网扫描公开资产的案例，但是关键的 IP 将会被打码。
 
 :::
 
@@ -21,17 +21,27 @@ sidebar_position: 13
 
 甚至于，我们在进行指纹扫描结果的时候，也并没有贸然使用不规范/不统一的格式，我们鼓励输出结果中使用 `CPE` 来表示扫描结果。
 
+## 理论扫描效果对比
+
+1. 单独比较：`yak servicescan > nmap > wapplayzer`
+1. 综合 `yak servicescan` 约等于 `nmap + wapplayzer`
+
+
 ## 友好且简单的 API
 
-### 核心扫描函数
+### 常用核心扫描函数
 
-1. `fn servicescan.Scan(var_1: string, var_2: string, vars: ...fp.ConfigOption): (chan *fp.MatchResult, error)` 主扫描函数，用于批量扫描特定目标
-1. `fn servicescan.ScanOne(var_1: string, var_2: int, vars: ...fp.ConfigOption): (*fp.MatchResult, error)` 单体扫描，同步扫描一个目标，主机+端口
-1. `fn servicescan.ScanFromSynScan(var_1: []*tools.SynScanResult|chan *SynScanResult|interface{}, vars: ...fp.ConfigOption): (chan *fp.MatchResult, error)` 与 `synscan` 联动的函数，用于接收一组 `*tools.SynScanResult` 进行扫描
+1. `fn servicescan.Scan(var_1: string, var_2: string, vars: ...fp.ConfigOption): (chan *fp.MatchResult, error)`
+   主扫描函数，用于批量扫描特定目标
+1. `fn servicescan.ScanOne(var_1: string, var_2: int, vars: ...fp.ConfigOption): (*fp.MatchResult, error)`
+   单体扫描，同步扫描一个目标，主机+端口
+1. `fn servicescan.ScanFromSynScan(var_1: []*tools.SynScanResult|chan *SynScanResult|interface{}, vars: ...fp.ConfigOption): (chan *fp.MatchResult, error)`
+   与 `synscan` 联动的函数，用于接收一组 `*tools.SynScanResult` 进行扫描
 
 ### 扫描参数「常用」
 
-1. `fn servicescan.proto(vars: ...interface {}): fp.ConfigOption` 【参数】：使用什么协议进行扫描，填 `TCP` 或者 `UDP`，或者 `servicescan.proto("TCP", "UDP")` 都启用。
+1. `fn servicescan.proto(vars: ...interface {}): fp.ConfigOption` 【参数】：使用什么协议进行扫描，填 `TCP` 或者 `UDP`
+   ，或者 `servicescan.proto("TCP", "UDP")` 都启用。
 1. `fn servicescan.concurrent(var_1: int): fp.ConfigOption` 【参数】：设置扫描并发
 1. `fn servicescan.active(var_1: bool): fp.ConfigOption` 【参数】：是否开启主动扫描模式（主动发包模式）
 1. `fn servicescan.all(): fp.ConfigOption` 【参数】：启用全部指纹匹配（有可能会没那么快）
@@ -247,12 +257,12 @@ tcp://47.**.***.218:8080	 open	jquery[*]/jquery[2.1.4]
 
 ### 与 `synscan` 是好搭档：`servicescan.ScanFromSynResult`
 
-在很多案例中，大家经常会使用 `masscan + nmap` 的大规模端口扫描的组合，在 yak 中，当然你可以使用命令行调用 `masscan` 来进行扫描任务，当然也可以直接使用 yak 提供的 `synscan` 来完成端口开放扫描。我们在本节中，将会介绍这种模式：
+在很多案例中，大家经常会使用 `masscan + nmap` 的大规模端口扫描的组合，在 yak 中，当然你可以使用命令行调用 `masscan` 来进行扫描任务，当然也可以直接使用 yak 提供的 `synscan`
+来完成端口开放扫描。我们在本节中，将会介绍这种模式：
 
 我们实际在使用过程中，`synscan` 扫描一个网段的一些端口，因为是 SYN 扫描，扫描这个网段速度将会特别快，所以我们获取到所有开放结果之后，才进行端口指纹扫描：扫描效果如下
 
-:::danger 我们隐去了扫描 IP 的具体信息
-我们隐藏了扫描的具体 IP，同时对大量结果进行了删减和省略，具体怎么使用，需要读者自行尝试
+:::danger 我们隐去了扫描 IP 的具体信息 我们隐藏了扫描的具体 IP，同时对大量结果进行了删减和省略，具体怎么使用，需要读者自行尝试
 :::
 
 ```go

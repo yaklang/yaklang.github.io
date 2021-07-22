@@ -12,27 +12,33 @@ HTTP 库包含三个可用的 http 子库，分别是
 2. `httpserver` 简易 HTTP 服务器，一般用于本地测试或者本地接收 HTTP 请求
 3. `httpool` 批量 HTTP 请求的工具，一般和 `fuzz` 模块配合使用
 
-## 所有 API 
+## 所有 API
 
 ### `http`
 
 #### 核心 API
 
 1. `fn http.Do(var_1: *http.Request): (*http.Response, error)` 执行一个 `*http.Request`
-1. `fn http.Get(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 Get 请求，vars 表示其他参数，可以通过 `http.body / http.cookie / http.header / http.ua / http.useragent` 这些参数设置
+1. `fn http.Get(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 Get 请求，vars
+   表示其他参数，可以通过 `http.body / http.cookie / http.header / http.ua / http.useragent` 这些参数设置
 1. `fn http.Post(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 Get 请求 vars 支持其他参数，参数同上
-1. `fn http.NewRequest(method: string, url: string, vars: ...yaklib.httpOption): (*http.Request, error)` 构筑一个 `*http.Request`，这个方法类似标准库中的 `NewRequest` 但是增加了和前面几个参数一样的
+1. `fn http.NewRequest(method: string, url: string, vars: ...yaklib.httpOption): (*http.Request, error)`
+   构筑一个 `*http.Request`，这个方法类似标准库中的 `NewRequest` 但是增加了和前面几个参数一样的
 1. `fn http.Raw(var_1: interface {}): (*http.Request, error)` 把请求解析成 `*http.Rquest` 支持 `string/bytes` 等
 1. `fn http.Request(method: string, url: string, vars: ...yaklib.httpOption): (*http.Response, error)`
 1. `fn http.GetAllBody(var_1: *http.Response): []uint8` 获取 `*http.Response` 的 Body 的 bytes
 
 #### 可用于发起请求的参数
 
-1. `fn http.body(var_1: interface {}): yaklib.httpOption`   用于在请求时设置 body 的内容 `http.Get("http://example.com", http.body("your body... here"))` 在 vars 可以增加不定参数
+1. `fn http.body(var_1: interface {}): yaklib.httpOption`   用于在请求时设置 body
+   的内容 `http.Get("http://example.com", http.body("your body... here"))` 在 vars 可以增加不定参数
 1. `fn http.cookie(var_1: interface {}): yaklib.httpOption` 设置 Cookie （Raw）
 1. `fn http.header(var_1: interface {}, var_2: interface {}): yaklib.httpOption` 设置一个 Header
 1. `fn http.ua(var_1: interface {}): yaklib.httpOption` 设置 User-Agent
 1. `fn http.useragent(var_1: interface {}): yaklib.httpOption` 设置 User-Agents
+1. `fn http.json(i: any): mutate.httpPoolConfigOption`  发送 JSON 请求
+1. `fn http.proxy(proxy: string): mutate.httpPoolConfigOption`  设置代理 
+1. ...
 
 #### 调试/DEBUG工具
 
@@ -43,16 +49,21 @@ HTTP 库包含三个可用的 http 子库，分别是
 
 ### `httpserver`
 
-1. `fn httpserver.Serve(host: string, port: int, vars: ...yaklib._httpServerConfigOpt): error` 启动 HTTP Server。host 是主机，port 是启动在哪个端口，vars 表示 httpserver 支持的选项，目前支持设置上下文（Golang原生），handler：处理 请求，tlsCertAndKey 设置 HTTPS
+1. `fn httpserver.Serve(host: string, port: int, vars: ...yaklib._httpServerConfigOpt): error` 启动 HTTP Server。host
+   是主机，port 是启动在哪个端口，vars 表示 httpserver 支持的选项，目前支持设置上下文（Golang原生），handler：处理 请求，tlsCertAndKey 设置 HTTPS
 1. `fn httpserver.context(var_1: context.Context): yaklib._httpServerConfigOpt` 启动 HTTP Server，生命周期由一个 context 来控制
-1. `fn httpserver.handler(var_1: func(http.ResponseWriter, *http.Request)): yaklib._httpServerConfigOpt` 设置一个 HTTP Handler 用来处理 Request 和返回响应结果
-1. `fn httpserver.tlsCertAndKey(var_1: interface {}, var_2: interface {}, vars: ...interface {}): yaklib._httpServerConfigOpt`设置 HTTPS 整数
+1. `fn httpserver.handler(var_1: func(http.ResponseWriter, *http.Request)): yaklib._httpServerConfigOpt` 设置一个 HTTP
+   Handler 用来处理 Request 和返回响应结果
+1. `fn httpserver.tlsCertAndKey(var_1: interface {}, var_2: interface {}, vars: ...interface {}): yaklib._httpServerConfigOpt`
+   设置 HTTPS 整数
 
 ### 配合 `fuzz` 使用的 `httpool`
 
-1. `fn httpool.Pool(var_1: interface {}, vars: ...mutate.httpPoolConfigOption): (chan *mutate._httpResult, error)` 执行批量执行 `[]*http.Request` 或者 `fuzz.HTTPRequestIf` 等，执行的结果为 `*_httpResult` 通过一个 chan 对外传出，执行的结果包含：
+1. `fn httpool.Pool(var_1: interface {}, vars: ...mutate.httpPoolConfigOption): (chan *mutate._httpResult, error)`
+   执行批量执行 `[]*http.Request` 或者 `fuzz.HTTPRequestIf` 等，执行的结果为 `*_httpResult` 通过一个 chan 对外传出，执行的结果包含：
 
 :::info
+
 ```go
 type palm/common/mutate.(_httpResult) struct {
   Fields(可用字段):
@@ -72,6 +83,7 @@ type palm/common/mutate.(_httpResult) struct {
       Response: *http.Response
 }
 ```
+
 :::
 
 #### 参数
@@ -84,7 +96,6 @@ type palm/common/mutate.(_httpResult) struct {
 
 ## http 库用法
 
-
 ### 使用 `httpserver` 启动一个服务器
 
 为了方便测试，我们启动一个 HTTP Server，用于接收我们客户端发的请求，顺便使用 `http.show(req)` 把接收到的请求展示出来
@@ -96,7 +107,7 @@ go die(httpserver.Serve("127.0.0.1", 8084, httpserver.handler(fn(rsp, req) {
 })))
 sleep(1)
 ```
-    
+
 ### 使用 http get 默认
 
 ```go
@@ -148,6 +159,29 @@ rsp, err = http.Post(
     http.body("qerjkasdf"),                   # 添加 body
 )
 die(err)
+```
+
+### JSON Body 支持 `http.json(i: any)`
+
+我们执行如下代码
+
+```go
+rsp, err = http.Post("http://baidu.com", http.json({
+    "test": 123,
+}))
+die(err)
+```
+
+我们通过上述操作可以使用 `http.json` 参数发送一个 JSON 请求， 这个请求会把传入的任何参数序列化为 JSON 字符串，并设置 Content-Type 为 `application/json`
+
+```
+POST http://baidu.com/ HTTP/1.1
+Connection: close
+Content-Length: 12
+Content-Type: application/json
+User-Agent: Go-http-client/1.1
+
+{"test":123}
 ```
 
 ### 你可以定义任何 Request 分步请求
@@ -220,6 +254,7 @@ die(err)
 ## http 库族相关结构 API
 
 ### `*http.Request` 标准 http 请求
+
 ```go
 type net/http.(Request) struct {
   Fields(可用字段):
@@ -267,6 +302,7 @@ type net/http.(Request) struct {
       func WriteProxy(v1: io.Writer) return(error)
 }
 ```
+
 ### `*http.Response` 标准 http 响应
 
 ```go
