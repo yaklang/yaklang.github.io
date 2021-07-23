@@ -24,5 +24,5 @@ jobs:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
           bucket: "yaklang-io"
-          endpoint: "oss-cn-hongkong.aliyuncs.com"
+          endpoint: "oss-accelerate-overseas.aliyuncs.com"
           folder: "./build"
