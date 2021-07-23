@@ -23,6 +23,6 @@ jobs:
         with:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ACCESS_KEY_SECRET }}
-          bucket: "yaklang-installer"
+          bucket: "yaklang-io"
           endpoint: "oss-cn-hongkong.aliyuncs.com"
           folder: "./build"
