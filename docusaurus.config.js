@@ -81,13 +81,13 @@ module.exports = {
             ],
         },
         footer: {
-            style: 'dark',
+            style: 'light',
             links: [
                 {
                     title: 'Docs',
                     items: [
                         {
-                            label: 'Tutorial',
+                            label: '教程与文档',
                             to: '/docs/intro',
                         },
                     ],
@@ -96,26 +96,26 @@ module.exports = {
                     title: 'Community',
                     items: [
                         {
-                            label: 'Stack Overflow',
-                            href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                            label: '研发团队',
+                            href: '/team/intro',
                         },
                         {
-                            label: 'Discord',
-                            href: 'https://discordapp.com/invite/docusaurus',
+                            label: '联系我们',
+                            href: '/team/contact',
                         },
-                        {
-                            label: 'Twitter',
-                            href: 'https://twitter.com/docusaurus',
-                        },
+                        // {
+                        //     label: 'Discord',
+                        //     href: 'https://discordapp.com/invite/docusaurus',
+                        // },
                     ],
                 },
                 {
                     title: 'More',
                     items: [
-                        {
-                            label: 'Blog',
-                            to: '/blog',
-                        },
+                        // {
+                        //     label: 'Blog',
+                        //     to: '/blog',
+                        // },
                         {
                             label: 'GitHub',
                             href: 'https://github.com/yaklang',
@@ -123,7 +123,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Built with v1ll4n.`,
+            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Own by v1ll4n. Powered by docusaurus`,
         },
     },
     plugins: [
