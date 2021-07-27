@@ -65,6 +65,13 @@ module.exports = {
                     position: "left",
                     type: "doc",
                     docId: "intro",
+                    docsPluginId: 'products',
+                    label: "解决方案与产品",
+                },
+                {
+                    position: "left",
+                    type: "doc",
+                    docId: "intro",
                     docsPluginId: 'team',
                     label: '社区与团队',
                 },
@@ -123,7 +130,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Own by v1ll4n. Powered by docusaurus`,
+            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Own by v1ll4n. Powered by Docusaurus`,
         },
     },
     plugins: [
@@ -134,6 +141,16 @@ module.exports = {
                 path: 'team',
                 routeBasePath: 'team',
                 sidebarPath: require.resolve('./sidebarsTeam.js'),
+                // ... other options
+            },
+        ],
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                id: 'products',
+                path: 'products',
+                routeBasePath: 'products',
+                sidebarPath: require.resolve('./sidebarsProducts.js'),
                 // ... other options
             },
         ],

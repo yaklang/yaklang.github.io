@@ -1,6 +1,7 @@
 // @ts-ignore
 import React, {useEffect} from "react";
 import {Card, Col, Divider, Image, Layout, Row, Space, Tag, Typography} from "antd";
+import ReactPlayer from "react-player";
 
 const {Text, Paragraph} = Typography;
 
@@ -84,15 +85,15 @@ const profiles: Profile[] = [
 ]
 
 export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
-    useEffect(() => {
-        setTimeout(() => {
-            try {
-                (document.getElementById("video-for-yaklang") as any).play()
-            } catch (e) {
-
-            }
-        }, 1000)
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         try {
+    //             (document.getElementById("video-for-yaklang") as any).play()
+    //         } catch (e) {
+    //
+    //         }
+    //     }, 1000)
+    // }, [])
 
     return <div>
         <Layout style={{backgroundColor: "#fff", margin: 24, textAlign: "center", alignItems: "center"}}>
@@ -132,12 +133,23 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 mark={true}>CODE
             </Text></Typography.Title>
             <br/>
-            <video
-                id={"video-for-yaklang"}
-                src="https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"
-                loop={true} playsInline={true} controls={true} autoPlay={true} 
-                width={1000}
+            <ReactPlayer
+                url={[
+                    "https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view_1.5.mp4"
+                ]}
+                loop={true}
+                playsinline={true}
+                controls={true}
+                playing={true}
+                width={"75%"}
+                height={"75%"}
             />
+            {/*<video*/}
+            {/*    id={"video-for-yaklang"}*/}
+            {/*    src="https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"*/}
+            {/*    loop={true} playsInline={true} controls={true} autoPlay={true} */}
+            {/*    width={1000}*/}
+            {/*/>*/}
             <br/>
             <br/>
             {/*<Tabs centered={true} style={{marginBottom: 80}}>*/}
