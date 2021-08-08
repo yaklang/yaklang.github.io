@@ -106,6 +106,32 @@ bash <(curl -s http://oss.yaklang.io/install-latest-yak.sh)
 
 :::
 
+1. 以管理员权限打开 `cmd`
+
+![](/img/tutorial/win_how2open_cmd.jpg)
+
+2. **安装 Yak 二进制程序** 在打开 cmd 之后，输入如下代码并执行
+
+```powershell
+powershell (new-object System.Net.WebClient).DownloadFile('https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe
+```
+
+:::info 安装说明
+
+上述代码其实只有三个步骤（管理员权限下）:
+
+1. 下载最新版本的 `windows x64` 的 yak 发行版
+1. 以管理员执行 `yak_windows_amd64.exe install` 安装 yak 到本地可执行目录下
+1. 删除刚刚下载的文件
+
+:::
+
+3. 在安装完成之后，可以在随意一个命令行中执行 `yak version` 来验证
+
+简易的安装事例如下：
+
+![](/img/tutorial/win_install_yak.jpg)
+
   </TabItem>
 </Tabs>
 
@@ -178,3 +204,59 @@ Yak Language Build Info:
 
 1. 不同平台的解决方式不一样，但是 `*unix` 操作系统下，一般来说 `brew/apt/yum install libpcap` 即可解决。
 1. windows 平台下，大家可以通过下载并安装 [`npcap for Common Windows Version`](https://nmap.org/npcap/dist/npcap-1.50.exe) 来解决。
+
+## 手动下载 / 安装
+
+:::danger
+
+如果遇到 pcap 依赖问题，请遵循上面的步骤解决。
+
+:::
+
+<Tabs
+  defaultValue="darwin"
+  values={[
+    {label: 'MacOs(Intel/M1) x64 下载', value: 'darwin'},
+    {label: 'Linux x64 下载', value: 'linux'},
+    {label: 'Windows x64 下载', value: 'windows'},
+  ]}>
+  <TabItem value="darwin">
+
+点击这里下载 [yak_darwin_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_darwin_amd64)
+
+在下载完成之后，执行
+
+```
+chmod +x yak_darwin_amd64 && ./yak_darwin_amd64 install
+```
+
+即可安装；
+
+在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `./yak_darwin_amd64`
+
+  </TabItem>
+
+  <TabItem value="linux">
+
+点击这里下载 [yak_linux_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_linux_amd64)
+
+在下载完成之后，执行
+
+```
+chmod +x yak_linux_amd64 && ./yak_linux_amd64 install
+```
+
+即可安装；
+
+在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `rm ./yak_linux_amd64`
+
+
+  </TabItem>
+  <TabItem value="windows">
+
+点击这里下载 [yak_windows_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe)
+
+可以手动把 `yak_windows_amd64` 放入执行目录中。
+
+  </TabItem>
+</Tabs>
