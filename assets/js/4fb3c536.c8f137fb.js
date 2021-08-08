@@ -1,0 +1,1 @@
+(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[6022],{1549:function(e){"use strict";e.exports=JSON.parse('{"pluginId":"products","version":"current","label":"Next","banner":"none","isLast":true,"docsSidebars":{"teamSidebar":[{"type":"link","label":"Waiting ... for more","href":"/products/intro"}]},"permalinkToSidebar":{"/products/intro":"teamSidebar"}}')}}]);
