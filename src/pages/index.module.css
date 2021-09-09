@@ -26,9 +26,9 @@
     justify-content: center;
 }
 
-.admonition-head h5 {
-    color: white;
-}
+/*.admonition-head h5 {*/
+/*    color: white;*/
+/*}*/
 
 .quick-start:hover {
     background-color: #ffffff;
