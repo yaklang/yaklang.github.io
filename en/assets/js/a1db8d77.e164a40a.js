@@ -1,1 +1,0 @@
-(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[6269],{9086:function(l){"use strict";l.exports=JSON.parse('{"allTagsPath":"/en/blog/tags","slug":"hello","name":"hello","count":2,"permalink":"/en/blog/tags/hello"}')}}]);
