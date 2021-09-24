@@ -27,11 +27,21 @@ export const Owner = () => {
                     <a href="/" target={"_blank"}>@Yak</a> 项目作者
                 </div></Space>, avatar: "/img/who/v1ll4n.jpg", description: <div>
                     安全研发从业人员<br/>
-                    现供职于 <a href="https://www.antgroup.com/" target={"_blank"}>@蚂蚁集团</a><br/>
+                    碰巧会写点代码
                     <EnvironmentOutlined/> 成都，四川
                 </div>,
                 githubLink: "https://github.com/VillanCh",
                 span: 24, border: false,
+            },
+            {
+                name: <Space>f1ys0ar <div style={{fontSize: 12}}>
+                    <a href="/" target={"_blank"}>@Yak.pwn</a> 模块 owner
+                </div></Space>, avatar: "/img/who/f1ys0ar.jpeg", description: <div>
+                    在读博士 <a href="https://www.ucas.ac.cn/" target={"_blank"}>@中国科学院大学</a><br/>
+                    <EnvironmentOutlined/> 北京
+                </div>,
+                githubLink: "https://github.com/flysoar",
+                span: 12, border: false,
             },
         ]}
     />
@@ -41,7 +51,7 @@ export const Contributors = () => {
     return <Who
         who={[
             {
-                name: <Space>linksucre <div style={{fontSize: 12}}>
+                name: <Space>sucre <div style={{fontSize: 12}}>
                     <a href="http://www.sec-redclub.com/" target={"_blank"}>@红日安全</a>
                 </div></Space>, avatar: "/img/who/sucre.jpg", description: <div>
                     乙方红队负责人<br/>
@@ -104,6 +114,20 @@ export const ThanksFor = () => {
                 </div>,
                 mainPage: "https://vulhub.org/",
                 githubLink: "https://github.com/vulhub/",
+                span: 12, border: false,
+            },
+            {
+                name: <Space>CNSS.io
+                    <div style={{fontSize: 12}}>
+                        <Tag color={"green"}>idea inspired</Tag>
+                    </div>
+                </Space>, avatar: "/img/who/cnss.png", description: <div>
+                    优秀的 CTF 战队 <br/>
+                    为 Yak 安全能力构建提供灵感 <br/>
+                    <EnvironmentOutlined/> 成都，四川
+                </div>,
+                mainPage: "https://cnss.io/",
+                githubLink: "https://github.com/cnss/",
                 span: 12, border: false,
             },
         ]}
