@@ -3,7 +3,9 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有可用 PoC |
  | [nuclei.Scan](#nucleiscan) | nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.） |
+ | [nuclei.UpdatePoC](#nucleiupdatepoc) | 更新 PoC |
  | [nuclei.bulkSize](#nucleibulksize) | 【参数】同 nuclei 每个模板最大并行的主机数(默认25) |
  | [nuclei.debug](#nucleidebug) | 【参数】调试模式，打印更多的调试信息 |
  | [nuclei.debugRequest](#nucleidebugrequest) | 【参数】打印所有发出的请求，调试 |
@@ -53,6 +55,30 @@
 
 ## 函数定义
 
+### nuclei.AllPoC
+
+获取当前所有可用 PoC
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.AllPoC() return (r0: []*tools.templateDesc, error: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*tools.templateDesc` |   |
+| error | `error` |   |
+
+
+ 
 ### nuclei.Scan
 
 nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.）
@@ -83,6 +109,29 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 |:-----------|:---------- |:-----------|
 | pocChannel | `chan *tools.PocVul` |  扫描漏洞结果 |
 | r1 | `error` |   |
+
+
+ 
+### nuclei.UpdatePoC
+
+更新 PoC
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.UpdatePoC() return (r0: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
 
 
  

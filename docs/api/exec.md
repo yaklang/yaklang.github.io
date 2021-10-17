@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [exec.CheckCrash](#execcheckcrash) | 检查这个进程是否崩溃 |
  | [exec.Command](#execcommand) | 最基础的，创建一个 `*exec.Cmd` 对象，可以执行，这个功能就是 Golang 原生的 `exec.Command` |
  | [exec.CommandContext](#execcommandcontext) | 同 `exec.Command` 函数，但是增加了 context 的配置，可以使用 context.Context 来解决生命周期管理的问题 |
  | [exec.System](#execsystem) | 直接执行一条系统命令，把结果标准输出和标准错误流一起输出出来，bytes 数据流作为结果 |
@@ -24,6 +25,38 @@
 
 ## 函数定义
 
+### exec.CheckCrash
+
+检查这个进程是否崩溃
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func exec.CheckCrash(v1: *exec.Cmd) return (r0: bool, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `*exec.Cmd` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+| r1 | `error` |   |
+
+
+ 
 ### exec.Command
 
 最基础的，创建一个 `*exec.Cmd` 对象，可以执行，这个功能就是 Golang 原生的 `exec.Command`
