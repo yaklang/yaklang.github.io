@@ -3,12 +3,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [yakit.NewBarGraph](#yakitnewbargraph) |  |
- | [yakit.NewClient](#yakitnewclient) |  |
- | [yakit.NewLineGraph](#yakitnewlinegraph) |  |
- | [yakit.NewPieGraph](#yakitnewpiegraph) |  |
- | [yakit.NewTable](#yakitnewtable) |  |
- | [yakit.NewWordCloud](#yakitnewwordcloud) |  |
+ | [yakit.NewBarGraph](#yakitnewbargraph) | yakit 平台绘制一个图 |
+ | [yakit.NewClient](#yakitnewclient) | 创建一个与 yakit 通信的通道（webhook） |
+ | [yakit.NewLineGraph](#yakitnewlinegraph) | 创建一个折线图 |
+ | [yakit.NewPieGraph](#yakitnewpiegraph) | 创建一个饼图 |
+ | [yakit.NewTable](#yakitnewtable) | 创建一个表格 |
+ | [yakit.NewWordCloud](#yakitnewwordcloud) | 创建一个词云图（yakit） |
 
 
 
@@ -21,7 +21,7 @@
 
 ### yakit.NewBarGraph
 
-
+yakit 平台绘制一个图
 
 #### 详细描述
 
@@ -44,7 +44,7 @@
  
 ### yakit.NewClient
 
-
+创建一个与 yakit 通信的通道（webhook）
 
 #### 详细描述
 
@@ -52,14 +52,14 @@
 
 #### 定义：
 
-`func yakit.NewClient(v1: string) return (r0: *yaklib.YakitClient)`
+`func yakit.NewClient(yakitWebhook: string) return (r0: *yaklib.YakitClient)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| yakitWebhook | `string` |   |
 
 
 
@@ -75,7 +75,7 @@
  
 ### yakit.NewLineGraph
 
-
+创建一个折线图
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
  
 ### yakit.NewPieGraph
 
-
+创建一个饼图
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
  
 ### yakit.NewTable
 
-
+创建一个表格
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
  
 ### yakit.NewWordCloud
 
-
+创建一个词云图（yakit）
 
 #### 详细描述
 

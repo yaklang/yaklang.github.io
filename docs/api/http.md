@@ -17,6 +17,7 @@
  | [http.header](#httpheader) | 【参数】为请求设置 http header |
  | [http.json](#httpjson) | 设置发送模式为 JSON，传入的参数会被 JSON 序列化，把结果设置为 Body，然后设置 application/json 为 Content-Type |
  | [http.proxy](#httpproxy) | 【参数】为请求设置 http 代理 |
+ | [http.redirect](#httpredirect) | 设置重定向 |
  | [http.show](#httpshow) | 调试函数，展示原始数据包内容 |
  | [http.showhead](#httpshowhead) | 调试函数，展示原始数据包内容，不包含 body |
  | [http.timeout](#httptimeout) | 【参数】设置超时时间 |
@@ -479,6 +480,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `httpOpt` |   |
+
+
+ 
+### http.redirect
+
+设置重定向
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.redirect(v1: func (v1: *http.Request, v2: []*http.Request) return(bool) ) return (r0: func httpOption(v1: *yaklib.yakHttpRequest) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: *http.Request, v2: []*http.Request) return(bool) ` |  回调函数，第一个参数为当前请求，第二个函数为已经重定向的请求，返回值为是否继续重定向？ |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpOption(v1: *yaklib.yakHttpRequest) ` |   |
 
 
  

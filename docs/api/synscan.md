@@ -3,7 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [synscan.Scan](#synscanscan) | SYN 扫描的核心功能函数 |
+ | [synscan.Scan](#synscanscan) |  |
  | [synscan.outputFile](#synscanoutputfile) | 【参数】synscan 对外输出的文件 |
  | [synscan.outputPrefix](#synscanoutputprefix) | 【参数】输出的文件每一行的前缀（用于增加 `https://` 这样的协议名等） |
  | [synscan.wait](#synscanwait) | 【参数】当所有数据包发出之后，等待多少秒？ |
@@ -19,7 +19,7 @@
 
 ### synscan.Scan
 
-SYN 扫描的核心功能函数
+
 
 #### 详细描述
 
@@ -27,16 +27,16 @@ SYN 扫描的核心功能函数
 
 #### 定义：
 
-`func synscan.Scan(hosts: string, ports: string, params ...opt) return (resultChan: chan *tools.SynScanResult, r1: error)`
+`func synscan.Scan(hosts: string, ports: string, v3 ...tools.scanOpt) return (r0: chan *synscan.SynScanResult, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| hosts | `string` |  想要扫描的主机 |
-| ports | `string` |  想要扫描的端口 |
-| params | `...opt` |   |
+| hosts | `string` |   |
+| ports | `string` |   |
+| v3 | `...tools.scanOpt` |   |
 
 
 
@@ -46,7 +46,7 @@ SYN 扫描的核心功能函数
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultChan | `chan *tools.SynScanResult` |   |
+| r0 | `chan *synscan.SynScanResult` |   |
 | r1 | `error` |   |
 
 
