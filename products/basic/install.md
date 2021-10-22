@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Yakit 下载与安装
+# Yakit 下载与安装（简）
 
 Yakit 全线托管在 aliyun OSS 上。
 

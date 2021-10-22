@@ -1,7 +1,9 @@
 // @ts-ignore
 import React from "react";
-import {Layout, Card, Col, Row, Avatar, Button, Space, Tag} from "antd";
+import {Layout, Card, Col, Row, Avatar, Button, Space, Tag, Typography} from "antd";
 import {GithubOutlined, EnvironmentOutlined, HomeOutlined} from "@ant-design/icons";
+
+const {Text} = Typography;
 
 export interface Person {
     name: string
@@ -27,29 +29,12 @@ export const Owner = () => {
                     <a href="/" target={"_blank"}>@Yak</a> 项目作者
                 </div></Space>, avatar: "/img/who/v1ll4n.jpg", description: <div>
                     安全研发从业人员<br/>
-                    碰巧会写点代码
+                    碰巧会写点代码 <br/>
                     <EnvironmentOutlined/> 成都，四川
                 </div>,
                 githubLink: "https://github.com/VillanCh",
                 span: 24, border: false,
             },
-            {
-                name: <Space>f1ys0ar <div style={{fontSize: 12}}>
-                    <a href="/" target={"_blank"}>@Yak.pwn</a> 模块 owner
-                </div></Space>, avatar: "/img/who/f1ys0ar.jpeg", description: <div>
-                    在读博士 <a href="https://www.ucas.ac.cn/" target={"_blank"}>@中国科学院大学</a><br/>
-                    <EnvironmentOutlined/> 北京
-                </div>,
-                githubLink: "https://github.com/flysoar",
-                span: 12, border: false,
-            },
-        ]}
-    />
-}
-
-export const Contributors = () => {
-    return <Who
-        who={[
             {
                 name: <Space>sucre <div style={{fontSize: 12}}>
                     <a href="http://www.sec-redclub.com/" target={"_blank"}>@红日安全</a>
@@ -62,6 +47,55 @@ export const Contributors = () => {
                 span: 12, border: false,
             },
             {
+                name: <Space>f1ys0ar <div style={{fontSize: 12}}>
+                    <a href="/" target={"_blank"}>@Yak.pwn</a> 模块 owner
+                </div></Space>, avatar: "/img/who/f1ys0ar.jpeg", description: <div>
+                    在读博士 <a href="https://www.ucas.ac.cn/" target={"_blank"}>@中国科学院大学</a><br/>
+                    <EnvironmentOutlined/> 北京
+                </div>,
+                githubLink: "https://github.com/flysoar",
+                span: 12, border: false,
+            },
+            {
+                name: <Space>yuqi <div style={{fontSize: 12}}>
+                    <a href="/" target={"_blank"}>@yaklang.io</a>
+                </div></Space>, avatar: "/img/who/yuqi.jpg", description: <div>
+                    web安全 <Text mark={true}>守门员</Text>
+                    <br/>
+                    <EnvironmentOutlined/> 成都
+                </div>,
+                // githubLink: "https://github.com/flysoar",
+                span: 12, border: false,
+            },
+            {
+                name: <Space>small_j <div style={{fontSize: 12}}>
+                    <a href="/" target={"_blank"}>@yaklang.io</a>
+                </div></Space>, avatar: "/img/who/small_j.jpg", description: <div>
+                    多学习，多喝水，早睡早起 <br/>
+                    <EnvironmentOutlined/> 成都
+                </div>,
+                // githubLink: "https://github.com/flysoar",
+                span: 12, border: false,
+            },
+        ]}
+    />
+}
+
+export const Contributors = () => {
+    return <Who
+        who={[
+            {
+                name: <Space>TimWhite <div style={{fontSize: 12}}>
+                    <a href="https://xray.cool/team/" target={"_blank"}>@xrayteam</a>
+                </div></Space>, avatar: "/img/who/timwhite.png", description: <div>
+                    红队攻防技术研究员 <br/>
+                    免杀/对抗 爱好者 <br/>
+                    <EnvironmentOutlined/> 上海
+                </div>,
+                githubLink: "https://github.com/timwhitez",
+                span: 12, border: false,
+            },
+            {
                 name: <Space>ykc <div style={{fontSize: 12}}>
                     <a href="https://xray.cool/" target={"_blank"}>@xray @rad</a> 团队
                 </div></Space>, avatar: "/img/who/ykc.jpg", description: <div>
@@ -69,6 +103,31 @@ export const Contributors = () => {
                     <EnvironmentOutlined/> 杭州，浙江
                 </div>,
                 githubLink: "https://github.com/chinaykc",
+                span: 12, border: false,
+            },
+        ]}
+    />
+}
+
+export const Consultant = () => {
+    return <Who
+        who={[
+            {
+                name: <Space>cnrstar <div style={{fontSize: 12}}>
+                    <a href="http://www.4dogs.cn/" target={"_blank"}>@4dogs.cn</a>
+                </div></Space>, avatar: "/img/who/rstar.jpg", description: <div>
+                    知识图谱的安全领域实践者<br/>
+                    <EnvironmentOutlined/> 北京
+                </div>,
+                span: 12, border: false,
+            },
+            {
+                name: <Space>翠花哥哥 <div style={{fontSize: 12}}>
+                    <a href="https://www.qingteng.cn/" target={"_blank"}>@青藤 云安全</a>
+                </div></Space>, avatar: "/img/who/cuihuagege.jpg", description: <div>
+                    安全产品 / 安全架构专家 <br/>
+                    <EnvironmentOutlined/> 北京
+                </div>,
                 span: 12, border: false,
             },
         ]}
