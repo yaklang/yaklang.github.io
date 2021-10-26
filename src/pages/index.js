@@ -10,6 +10,7 @@ import Tilt from 'react-parallax-tilt';
 import {Typography, Image, Space, Button} from "antd";
 import {DoubleRightOutlined, FireFilled} from "@ant-design/icons";
 import {MainPageContent} from "../components/MainPageContent";
+import Translate from '@docusaurus/Translate';
 
 const {Paragraph, Text} = Typography;
 

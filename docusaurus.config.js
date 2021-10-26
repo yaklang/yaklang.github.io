@@ -85,6 +85,10 @@ module.exports = {
                     label: 'GITHUB',
                     position: 'right',
                 },
+                {
+                    type: 'localeDropdown',
+                    position: 'left',
+                },
             ],
         },
         footer: {

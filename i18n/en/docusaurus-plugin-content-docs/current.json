@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.渐进式安全研发教程": {
+    "message": "Progressive Security R&D Tutorial",
+    "description": "The label for category Progressive Security R&D Tutorial in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Yak 中的常见库使用教程": {
+    "message": "Tutorials for using common libraries in Yak",
+    "description": "The label for category Tutorials for using common libraries in Yak in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.API 接口完全手册": {
+    "message": "API Interface Handbook",
+    "description": "The label for category API Interface Handbook in sidebar tutorialSidebar"
+  }
+}

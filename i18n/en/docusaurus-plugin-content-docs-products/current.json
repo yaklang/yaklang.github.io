@@ -1,0 +1,18 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.teamSidebar.category.Yakit 基础篇: 安装与基础使用": {
+    "message": "Yakit 基础篇: 安装与基础使用",
+    "description": "The label for category Yakit 基础篇: 安装与基础使用 in sidebar teamSidebar"
+  },
+  "sidebar.teamSidebar.category.Yakit 高级篇：深入插件与交互": {
+    "message": "Yakit 高级篇：深入插件与交互",
+    "description": "The label for category Yakit 高级篇：深入插件与交互 in sidebar teamSidebar"
+  },
+  "sidebar.teamSidebar.category.研发技术漫谈: 技术解析": {
+    "message": "研发技术漫谈: 技术解析",
+    "description": "The label for category 研发技术漫谈: 技术解析 in sidebar teamSidebar"
+  }
+}

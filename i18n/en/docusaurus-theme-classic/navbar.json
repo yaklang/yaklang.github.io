@@ -1,0 +1,22 @@
+{
+  "title": {
+    "message": "Yak",
+    "description": "The title in the navbar"
+  },
+  "item.label.教程与文档": {
+    "message": "教程与文档",
+    "description": "Navbar item with label 教程与文档"
+  },
+  "item.label.解决方案与产品": {
+    "message": "解决方案与产品",
+    "description": "Navbar item with label 解决方案与产品"
+  },
+  "item.label.社区与团队": {
+    "message": "社区与团队",
+    "description": "Navbar item with label 社区与团队"
+  },
+  "item.label.GITHUB": {
+    "message": "GITHUB",
+    "description": "Navbar item with label GITHUB"
+  }
+}
