@@ -59,14 +59,14 @@ module.exports = {
                     type: 'doc',
                     docId: 'intro',
                     position: 'left',
-                    label: '教程与文档',
+                    label: '编程与文档',
                 },
                 {
                     position: "left",
                     type: "doc",
                     docId: "intro",
                     docsPluginId: 'products',
-                    label: "解决方案与产品",
+                    label: "Yakit 单兵平台",
                 },
                 {
                     position: "left",
