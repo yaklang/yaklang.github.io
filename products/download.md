@@ -8,7 +8,10 @@ sidebar_position: 3
 
 当然如果你愿意从 Github 下载，请浏览 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases)
 
-## Yakit - v1.0.9-beta8
+## Yakit - v1.0.9-beta8-patch1
+
+1. [Yakit-1.0.9-beta8-patch1_for_MacOS/darwin_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/1.0.9-beta8-patch1/Yakit-1.0.9-beta8-patch1-darwin-amd64.dmg)
+1. [Yakit-1.0.9-beta8-patch1 for Windows](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/1.0.9-beta8-patch1/Yakit-1.0.9-beta8-patch1-windows-amd64.exe)
 
 ### Features
 

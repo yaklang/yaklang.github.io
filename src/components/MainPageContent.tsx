@@ -1,7 +1,8 @@
 // @ts-ignore
 import React, {useEffect} from "react";
-import {Card, Col, Divider, Image, Layout, Row, Space, Tag, Typography} from "antd";
+import {Button, Card, Col, Divider, Image, Layout, Row, Space, Tabs, Tag, Typography} from "antd";
 import ReactPlayer from "react-player";
+import {GithubOutlined} from "@ant-design/icons";
 
 const {Text, Paragraph} = Typography;
 
@@ -13,6 +14,26 @@ interface Profile {
     svg: string
     content?: any
 }
+
+export interface ViewPlayerProp {
+    url: string
+}
+
+export const ViewPlayer: React.FC<ViewPlayerProp> = (props) => {
+    return <>
+        <ReactPlayer
+            url={[
+                props.url,
+            ]}
+            loop={true}
+            playsinline={true}
+            controls={true}
+            playing={true}
+            width={"75%"}
+            height={"75%"}
+        />
+    </>
+};
 
 const profiles: Profile[] = [
     {
@@ -84,6 +105,8 @@ const profiles: Profile[] = [
     },
 ]
 
+const latestYakitVersion = "1.0.9-beta8-patch1"
+
 export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
     // useEffect(() => {
     //     setTimeout(() => {
@@ -97,7 +120,74 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
 
     return <div>
         <Layout style={{backgroundColor: "#fff", margin: 24, textAlign: "center", alignItems: "center"}}>
-            <div style={{maxWidth: 1000}}>
+            <div style={{maxWidth: 1000, width: "100%"}}>
+                <Row style={{width: "100%"}}>
+                    <Tabs style={{width: "100%"}} centered={true}>
+                        <Tabs.TabPane tab={"安装 Yak 最新版"} key={"yak"}>
+                            <Tabs tabPosition={"left"} style={{marginLeft: 50, marginRight: 50, textAlign: "left"}}
+                                  centered={false}>
+                                <Tabs.TabPane key={"install-general"} tab={"在 MacOS 与 Linux 上安装 Yak"}>
+                                    <div style={{marginTop: 30}}>
+                                        MacOS/Linux: <Text
+                                        code={true}
+                                        copyable={true}>{`bash <(curl -s http://oss.yaklang.io/install-latest-yak.sh)`}</Text>
+                                    </div>
+                                </Tabs.TabPane>
+                                <Tabs.TabPane key={"windows-install-yak"} tab={"Windows 上安装 Yak"}>
+                                    <div style={{marginTop: 30}}>
+                                        <Button type={"link"} target={"_blank"} href={"./docs/startup"}>在 Windows 上安装
+                                            Yak</Button>
+                                    </div>
+                                </Tabs.TabPane>
+                            </Tabs>
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab={"Yakit: 单兵平台与 Yak GUI"} key={"yakit"}>
+                            <Space direction={"vertical"} style={{marginBottom: 15}}>
+                                <>基于 Electron 打造的图形化操作界面的端口扫描，爬虫，漏洞扫描等能力的插件化平台</>
+                                <Space>
+                                    <Tag color={"green"}>完全开源</Tag>
+                                    <Tag color={"geekblue"}>完全免费</Tag>
+                                </Space>
+                            </Space>
+                            <Tabs tabPosition={"left"} style={{marginLeft: 50, marginRight: 50, textAlign: "left"}}
+                                  centered={false}>
+                                <Tabs.TabPane key={"windows-install-yak"} tab={"Aliyun OSS 下载最新 Yakit"}>
+                                    <div style={{marginTop: 30}}>
+                                        <Space>
+                                            {[
+                                                {
+                                                    name: `MacOS Yakit-${latestYakitVersion}`,
+                                                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-darwin-amd64.dmg`,
+                                                },
+                                                {
+                                                    name: `Windows Yakit-${latestYakitVersion}`,
+                                                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-windows-amd64.exe`,
+                                                }
+                                            ].map(i => {
+                                                return <Button target={"_blank"} type={"primary"}
+                                                               href={i.url}>{i.name}</Button>
+                                            })}
+                                        </Space>
+                                    </div>
+                                </Tabs.TabPane>
+                                <Tabs.TabPane key={"install-yakit-from-aliyun"} tab={"Github 上下载最新的 Yakit"}>
+                                    <div style={{marginTop: 30}}>
+                                        <Space>
+                                            <Button type={"primary"} href={"https://github.com/yaklang/yakit/releases"}
+                                                    target={"_blank"}>Yakit 全版本的 Github 托管</Button>
+                                            <Button type={"link"} target={"_target"}
+                                                // @ts-ignore
+                                                    icon={<GithubOutlined/>} href={"https://github.com/yaklang/yakit"}
+                                            >
+                                                Yakit 源码
+                                            </Button>
+                                        </Space>
+                                    </div>
+                                </Tabs.TabPane>
+                            </Tabs>
+                        </Tabs.TabPane>
+                    </Tabs>
+                </Row>
                 <Row gutter={24} style={{marginTop: 20, marginBottom: 40}}>
                     {(profiles || []).map(i => {
                         return <Col span={24} lg={12} style={{marginTop: 40}}>
