@@ -22,6 +22,9 @@
  | [codec.EscapeHtml](#codecescapehtml) | 同 `codec.DecodeHtml` |
  | [codec.EscapePathUrl](#codecescapepathurl) | URL 编码：（作为 url.Path 进行编码） |
  | [codec.EscapeQueryUrl](#codecescapequeryurl) | URL 编码：作为 url.Query 进行编码 |
+ | [codec.MMH3Hash128](#codecmmh3hash128) | 计算一个对象的 mmh3 hash128 |
+ | [codec.MMH3Hash128x64](#codecmmh3hash128x64) | 计算一个对象的 mmh3 hash128x64 |
+ | [codec.MMH3Hash32](#codecmmh3hash32) | 计算 mmh3 的 hash32 |
  | [codec.Md5](#codecmd5) | 计算 md5 hash |
  | [codec.Sha1](#codecsha1) | 计算 sha1 hash |
  | [codec.Sha224](#codecsha224) |  |
@@ -50,15 +53,15 @@
 
 #### 定义：
 
-`func codec.AesDecrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`func codec.AesDecrypt(content: bytes, key: bytes) return (result: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bytes` |   |
-| v2 | `bytes` |   |
+| content | `bytes` |   |
+| key | `bytes` |   |
 
 
 
@@ -68,7 +71,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| result | `bytes` |   |
 | r1 | `error` |   |
 
 
@@ -83,15 +86,15 @@
 
 #### 定义：
 
-`func codec.AesEncrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`func codec.AesEncrypt(data: bytes, key: bytes) return (encrypted: bytes, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bytes` |   |
-| v2 | `bytes` |   |
+| data | `bytes` |   |
+| key | `bytes` |   |
 
 
 
@@ -101,7 +104,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| encrypted | `bytes` |   |
 | r1 | `error` |   |
 
 
@@ -635,6 +638,99 @@ URL 编码：作为 url.Query 进行编码
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  编码结果 |
+
+
+ 
+### codec.MMH3Hash128
+
+计算一个对象的 mmh3 hash128
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.MMH3Hash128(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### codec.MMH3Hash128x64
+
+计算一个对象的 mmh3 hash128x64
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.MMH3Hash128x64(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### codec.MMH3Hash32
+
+计算 mmh3 的 hash32
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.MMH3Hash32(v1: any) return (r0: uint32)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `uint32` |   |
 
 
  

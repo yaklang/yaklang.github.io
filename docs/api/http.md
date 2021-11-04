@@ -10,6 +10,11 @@
  | [http.Post](#httppost) |  |
  | [http.Raw](#httpraw) | 创建一个 Golang 原生的 `*http.Request` |
  | [http.Request](#httprequest) | 立即发起一个 http 请求，不需要 `http.Do` 来执行 |
+ | [http.RequestToMD5](#httprequesttomd5) | 把对 url 的 GET 请求的内容直接编码成 md5 |
+ | [http.RequestToMMH3Hash128](#httprequesttommh3hash128) | 把 GET url 的 body 变成 mmh3 的 hash128 |
+ | [http.RequestToMMH3Hash128x64](#httprequesttommh3hash128x64) | 把 GET url 的 body 变成 mmh3 的 hash128x64 |
+ | [http.RequestToSha1](#httprequesttosha1) | 把 GET url 的 body 变成 mmh3 的 sha1 |
+ | [http.RequestToSha256](#httprequesttosha256) | 把 GET url 的 body 变成 mmh3 的 sha256 |
  | [http.body](#httpbody) | 【参数】设置请求的 body |
  | [http.cookie](#httpcookie) | 【参数】设置请求的 Cookie |
  | [http.dump](#httpdump) | 工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte` |
@@ -259,6 +264,166 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `*http.Response` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestToMD5
+
+把对 url 的 GET 请求的内容直接编码成 md5
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestToMD5(url: string) return (md5Str: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| md5Str | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestToMMH3Hash128
+
+把 GET url 的 body 变成 mmh3 的 hash128
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestToMMH3Hash128(url: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestToMMH3Hash128x64
+
+把 GET url 的 body 变成 mmh3 的 hash128x64
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestToMMH3Hash128x64(url: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestToSha1
+
+把 GET url 的 body 变成 mmh3 的 sha1
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestToSha1(url: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestToSha256
+
+把 GET url 的 body 变成 mmh3 的 sha256
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestToSha256(url: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 | r1 | `error` |   |
 
 

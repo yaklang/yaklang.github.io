@@ -3,7 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [synscan.Scan](#synscanscan) |  |
+ | [synscan.Scan](#synscanscan) | 扫描核心函数 |
  | [synscan.outputFile](#synscanoutputfile) | 【参数】synscan 对外输出的文件 |
  | [synscan.outputPrefix](#synscanoutputprefix) | 【参数】输出的文件每一行的前缀（用于增加 `https://` 这样的协议名等） |
  | [synscan.wait](#synscanwait) | 【参数】当所有数据包发出之后，等待多少秒？ |
@@ -19,7 +19,7 @@
 
 ### synscan.Scan
 
-
+扫描核心函数
 
 #### 详细描述
 

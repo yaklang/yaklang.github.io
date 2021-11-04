@@ -4,7 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [httpool.Pool](#httpoolpool) | 批量执行 http 请求 |
- | [httpool.host](#httpoolhost) | 【参数】设置批量请求发送的真正 host（兼容 Host 头与设计发送请求不一致的情况） |
+ | [httpool.host](#httpoolhost) |  |
  | [httpool.https](#httpoolhttps) | 为请求设置 HTTPS |
  | [httpool.perRequestTimeout](#httpoolperrequesttimeout) | 【参数】为每个请求设置超时时间 |
  | [httpool.port](#httpoolport) | 【参数】设置请求发送到的真正 Port |
@@ -55,7 +55,7 @@
  
 ### httpool.host
 
-【参数】设置批量请求发送的真正 host（兼容 Host 头与设计发送请求不一致的情况）
+
 
 #### 详细描述
 
@@ -63,14 +63,15 @@
 
 #### 定义：
 
-`func httpool.host(host: string) return (r0: opt)`
+`func httpool.host(v1: string, v2: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| host | `string` |  设置发送请求的真正 Host |
+| v1 | `string` |   |
+| v2 | `bool` |   |
 
 
 
@@ -80,7 +81,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
