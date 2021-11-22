@@ -38,7 +38,7 @@ powershell (new-object System.Net.WebClient).DownloadFile('https://yaklang.oss-c
 **大多数用户可以直接一条命令 Linux x64 版本的 Yak 发行版**
 
 ```
-bash <(curl -s http://oss.yaklang.io/install-latest-yak.sh)
+bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)
 
 ```
 
