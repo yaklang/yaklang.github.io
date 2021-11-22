@@ -15,12 +15,12 @@
  | [file.IsLink](#fileislink) | 判断一个路径是否是一个文件链接/快捷方式 |
  | [file.Join](#filejoin) | 拼接路径 |
  | [file.Ls](#filels) | 查看当前路径下是否有其他文件 |
- | [file.Lstat](#filelstat) | 同 Golang `os.Lstat`，查看一个文件信息（如果是链接，则会返回这个链接的描述） |
+ | [file.Lstat](#filelstat) |  |
  | [file.Mkdir](#filemkdir) | 创建一个文件夹，如果无法创建，基本等同于 `mkdir [path]`，则会失败 |
  | [file.MkdirAll](#filemkdirall) | 强制创建个文件夹，如果没有父路径，则会强制创建，相当于执行 `mkdir -p [path]` |
  | [file.Mv](#filemv) | 把一个文件 move 到另一个地方，本质上执行 `os.Rename` |
  | [file.Open](#fileopen) | 打开一个文件，如果没有就创建，使用最多权限 |
- | [file.OpenFile](#fileopenfile) | 使用 Golang 原生的 `os.OpenFile` |
+ | [file.OpenFile](#fileopenfile) |  |
  | [file.ReadAll](#filereadall) | 把一个 reader 的内容全部读出来 |
  | [file.ReadFile](#filereadfile) | 把一个文件内容读出来 |
  | [file.Remove](#fileremove) | 把一个文件移除，相当于 `os.RemoveAll` |
@@ -28,7 +28,7 @@
  | [file.Rm](#filerm) | 同 `file.Remove` / Golang `os.RemoveAll` |
  | [file.Save](#filesave) | 把 content 中的内容写入文件名为 fileName 中的文件，支持 bytes/string/[]string |
  | [file.SaveJson](#filesavejson) |  |
- | [file.Stat](#filestat) | 查看一个路径的基础信息，不读取文件。包含是否是目录，文件名，文件权限以及时间等 |
+ | [file.Stat](#filestat) |  |
  | [file.TempFile](#filetempfile) | 打开一个临时文件 |
 
 
@@ -423,7 +423,7 @@
  
 ### file.Lstat
 
-同 Golang `os.Lstat`，查看一个文件信息（如果是链接，则会返回这个链接的描述）
+
 
 #### 详细描述
 
@@ -431,14 +431,14 @@
 
 #### 定义：
 
-`func file.Lstat(filePath: string) return (r0: fs.FileInfo, r1: error)`
+`func file.Lstat(v1: string) return (r0: os.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| filePath | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -448,7 +448,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `fs.FileInfo` |   |
+| r0 | `os.FileInfo` |   |
 | r1 | `error` |   |
 
 
@@ -581,7 +581,7 @@
  
 ### file.OpenFile
 
-使用 Golang 原生的 `os.OpenFile`
+
 
 #### 详细描述
 
@@ -589,16 +589,16 @@
 
 #### 定义：
 
-`func file.OpenFile(fileName: string, modeFlag: int, permission: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
+`func file.OpenFile(v1: string, v2: int, v3: os.FileMode) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fileName | `string` |   |
-| modeFlag | `int` |   |
-| permission | `fs.FileMode` |   |
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `os.FileMode` |   |
 
 
 
@@ -837,7 +837,7 @@
  
 ### file.Stat
 
-查看一个路径的基础信息，不读取文件。包含是否是目录，文件名，文件权限以及时间等
+
 
 #### 详细描述
 
@@ -845,14 +845,14 @@
 
 #### 定义：
 
-`func file.Stat(pathName: string) return (r0: fs.FileInfo, r1: error)`
+`func file.Stat(v1: string) return (r0: os.FileInfo, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pathName | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -862,7 +862,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `fs.FileInfo` |   |
+| r0 | `os.FileInfo` |   |
 | r1 | `error` |   |
 
 

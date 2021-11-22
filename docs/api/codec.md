@@ -7,6 +7,7 @@
  | [codec.AesEncrypt](#codecaesencrypt) |  |
  | [codec.DecodeASCII](#codecdecodeascii) | 等价于 `strconv.Unquote`，把一个被 `&#34;` 包裹的字符串解析成字符串内容，同时解析 `&#34;\x0a&#34;` 解析成对应的字符串。 |
  | [codec.DecodeBase64](#codecdecodebase64) | 把 base64 解析成 bytes |
+ | [codec.DecodeChunked](#codecdecodechunked) | http chunked 解码 |
  | [codec.DecodeHex](#codecdecodehex) | 把 Hex 字符串解析成 bytes |
  | [codec.DecodeHtml](#codecdecodehtml) | 把 HTML 实体编码后的文字进行解析，例如 `&amp;#x0a;` 或 `&amp;#amp;` 等，如果包含正常字符串，则会保留原字符串 |
  | [codec.DecodeUrl](#codecdecodeurl) | 把 `%21%63%57asdf` 这类的字符串中的 URL 编码解析成正常字符 |
@@ -14,6 +15,7 @@
  | [codec.DoubleEncodeUrl](#codecdoubleencodeurl) |  |
  | [codec.EncodeASCII](#codecencodeascii) | 通常用于把不可见字符串变成可见字符串，把一个字符串变成双引号`&#34;`包裹的字符串，字符串中的不可见字符会变成 `\xAA\x0A` 这类被转义的内容 |
  | [codec.EncodeBase64](#codecencodebase64) | 把一个对象编码成 base64 字符串 |
+ | [codec.EncodeChunked](#codecencodechunked) | 增加 chunked 编码 |
  | [codec.EncodeHtml](#codecencodehtml) | 把一个字符串编码成 HTML 实体编码，如果输入了一个对象，会 json 序列化后再编码，注意这个函数会把所有内容都进行编码 |
  | [codec.EncodeHtmlHex](#codecencodehtmlhex) | 把一个字符串编码成 HTML 实体编码，如果输入了一个对象，会序列化后再对 bytes 进行编码，注意这个函数会把参数所有内容都进行编码，编码成 `&amp;#xNN;` 这种形式 |
  | [codec.EncodeToHex](#codecencodetohex) | 把一个对象编码成 hex 字符串，注意：不以 `0x` 开头 |
@@ -170,6 +172,38 @@
 |:-----------|:---------- |:-----------|
 | result | `bytes` |   |
 | err | `error` |   |
+
+
+ 
+### codec.DecodeChunked
+
+http chunked 解码
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DecodeChunked(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
  
@@ -390,6 +424,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  编码后的 base64 字符串 |
+
+
+ 
+### codec.EncodeChunked
+
+增加 chunked 编码
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.EncodeChunked(v1: bytes) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  

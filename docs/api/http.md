@@ -10,6 +10,7 @@
  | [http.Post](#httppost) |  |
  | [http.Raw](#httpraw) | 创建一个 Golang 原生的 `*http.Request` |
  | [http.Request](#httprequest) | 立即发起一个 http 请求，不需要 `http.Do` 来执行 |
+ | [http.RequestFaviconHash](#httprequestfaviconhash) | 生成 favicon 的 hash(mmh3 32) |
  | [http.RequestToMD5](#httprequesttomd5) | 把对 url 的 GET 请求的内容直接编码成 md5 |
  | [http.RequestToMMH3Hash128](#httprequesttommh3hash128) | 把 GET url 的 body 变成 mmh3 的 hash128 |
  | [http.RequestToMMH3Hash128x64](#httprequesttommh3hash128x64) | 把 GET url 的 body 变成 mmh3 的 hash128x64 |
@@ -264,6 +265,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `*http.Response` |   |
+| r1 | `error` |   |
+
+
+ 
+### http.RequestFaviconHash
+
+生成 favicon 的 hash(mmh3 32)
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func http.RequestFaviconHash(v1: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 | r1 | `error` |   |
 
 

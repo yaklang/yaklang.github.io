@@ -8,6 +8,40 @@ sidebar_position: 3
 
 当然如果你愿意从 Github 下载，请浏览 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases)
 
+## Yakit - v1.0.10-beta5
+
+从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本 
+
+### Features
+
+#### 用户便捷
+
+我们新增了用户可以在欢迎页面中查看最新的 Yak 与 Yakit 版本了，不再需要每次都在网站下载了。
+
+:::info
+
+对于 macOS 用户，最推荐用户通过 Yakit 欢迎页面的升级来安装，因为这样可以避免每一次安装都手动 "信任" 应用和开发者。
+
+:::
+
+
+#### 核心功能：MITM
+
+1. 我们重做了 mitm HTTP History 的整体界面，增加了更智能的高亮，修改了暗色主题，并且为数据包增加了 hex editor。
+    1. 在 History 中，我们可以右键发送到 Web Fuzzer 
+1. 同时我们拥有了更简洁的 web fuzzer 界面，数据包增加了右键编辑器的更多操作，比如 "编码"，一键修改 Method，一键修改为 Chunked 编码。
+
+#### 插件体系：
+
+1. 我们实现了一套 MITM 的插件体系，意味着我们可以更随意地使用 yak 编写 MITM 插件了，甚至可以用 yak 很容易的编写一个 "被动扫描" 功能。
+
+当然，这个功能使用门槛相对比较高，我们会通过其他的手段让他的使用成本降低，类似 `Cookie模糊测试`, `黑盒污点检测` 等插件后续将完善，官方提供一些经典案例，同时探究这些用法真正好用的 "编排"。
+
+#### Yak 版本
+
+1. 我们新增了 dns，ping 等新的 yak 内置包，在官网自动生成的文档中可以找到。
+1. str, http 新增了各种新成员，大家可以在自动补全（Yakit编辑器）中自由探索。
+
 ## Yakit - v1.0.9-beta8-patch1
 
 1. [Yakit-1.0.9-beta8-patch1_for_MacOS/darwin_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/1.0.9-beta8-patch1/Yakit-1.0.9-beta8-patch1-darwin-amd64.dmg)

@@ -3,13 +3,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [str.CalcSSDeep](#strcalcssdeep) | 计算 SSDeep 的 Hash 值 |
+ | [str.CalcSSDeepStability](#strcalcssdeepstability) | 计算多个文本的 SSDeep 平均相似度，0-1.0，越大越稳定（相似） |
+ | [str.CalcSimHash](#strcalcsimhash) | 计算 SimHash 的值 |
+ | [str.CalcSimHashStability](#strcalcsimhashstability) | 计算多个值 SimHash 的相似度 |
+ | [str.CalcSimilarity](#strcalcsimilarity) | 计算多个文本的相似度（综合） |
+ | [str.CalcTextMaxSubStrStability](#strcalctextmaxsubstrstability) | 计算文本相似度（SQLMap 文本相似度算法） |
  | [str.Compare](#strcompare) | 比较字符串 |
  | [str.Contains](#strcontains) | 字符串中是否包含一个子串 |
  | [str.ContainsAny](#strcontainsany) | 字符串中包含字串的任何一个字符 |
  | [str.Count](#strcount) | 字符串中包含多少个字串？ |
  | [str.EndsWith](#strendswith) | 判断字符串是否以子串为结尾 |
  | [str.EqualFold](#strequalfold) | 判断忽略大小写字符串是否相等？ |
+ | [str.ExtractBodyFromHTTPResponseRaw](#strextractbodyfromhttpresponseraw) | 从 response bytes 中提取 body |
+ | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
  | [str.Fields](#strfields) | 按空格把字符串分割开 |
+ | [str.FixHTTPResponse](#strfixhttpresponse) | 修复 HTTPResponse 的 bytes |
  | [str.Grok](#strgrok) | 同 `re.Grok` |
  | [str.HasPrefix](#strhasprefix) | 判断字符串是不是以子串为前缀 |
  | [str.HasSuffix](#strhassuffix) | 判断字符串是否以子字符串为后缀 |
@@ -32,12 +41,19 @@
  | [str.NewFilter](#strnewfilter) | 创建一个字符串过滤器 |
  | [str.NewReader](#strnewreader) | 创建一个 Reader |
  | [str.ParamsGetOr](#strparamsgetor) | 从 `map[string]string` 中获取参数 |
+ | [str.ParseBytesToHTTPRequest](#strparsebytestohttprequest) | 把 bytes 解析成 *http.Request |
+ | [str.ParseBytesToHTTPResponse](#strparsebytestohttpresponse) | 把 bytes 解析成 *http.Response |
+ | [str.ParseStringToCClassHosts](#strparsestringtocclasshosts) | 把网络段的字符串变为整理后的 C 段主机 |
+ | [str.ParseStringToHTTPRequest](#strparsestringtohttprequest) | 把字符串解析为 *http.Request |
+ | [str.ParseStringToHTTPResponse](#strparsestringtohttpresponse) |  |
  | [str.ParseStringToHostPort](#strparsestringtohostport) | 把字符串解析成 host 和 port |
  | [str.ParseStringToHosts](#strparsestringtohosts) | 把字符串解析成 hosts，字符串可以是逗号分割的网段/域名/ip地址 |
  | [str.ParseStringToLines](#strparsestringtolines) | 把一个字符串按行解析 |
  | [str.ParseStringToPorts](#strparsestringtoports) | 把字符串解析成多个端口，逗号分隔 |
  | [str.ParseStringToUrls](#strparsestringtourls) | 把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，不自动补充 WWW 前缀） |
  | [str.ParseStringToUrlsWith3W](#strparsestringtourlswith3w) | 把字符串（域名/IP/URL）解析成可能的 URL（如果是域名，自动补充 WWW 前缀） |
+ | [str.ParseStringUrlToUrlInstance](#strparsestringurltourlinstance) | 把 URL 解析成 *url.URL |
+ | [str.ParseStringUrlToWebsiteRootPath](#strparsestringurltowebsiterootpath) |  |
  | [str.PathJoin](#strpathjoin) | 把 path 进行拼接 |
  | [str.RandSecret](#strrandsecret) | 生成一个随机密码 |
  | [str.RandStr](#strrandstr) | 生成一个随机字符串 |
@@ -70,6 +86,7 @@
  | [str.TrimRight](#strtrimright) | 移除右边的某些字符 |
  | [str.TrimSpace](#strtrimspace) | 移除前后空白字符 |
  | [str.TrimSuffix](#strtrimsuffix) | 移除后缀 |
+ | [str.UrlJoin](#strurljoin) | URL Join，可以拼接 URL Path |
  | [str.f](#strf) | 相当于 `fmt.Sprintf` |
 
 
@@ -81,6 +98,195 @@
 
 ## 函数定义
 
+### str.CalcSSDeep
+
+计算 SSDeep 的 Hash 值
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcSSDeep(v1: bytes) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### str.CalcSSDeepStability
+
+计算多个文本的 SSDeep 平均相似度，0-1.0，越大越稳定（相似）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcSSDeepStability(v1 ...bytes) return (r0: float64, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `float64` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.CalcSimHash
+
+计算 SimHash 的值
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcSimHash(v1: bytes) return (r0: uint64)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `uint64` |   |
+
+
+ 
+### str.CalcSimHashStability
+
+计算多个值 SimHash 的相似度
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcSimHashStability(v1 ...bytes) return (r0: float64, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `float64` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.CalcSimilarity
+
+计算多个文本的相似度（综合）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcSimilarity(v1 ...bytes) return (r0: float64)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `float64` |   |
+
+
+ 
+### str.CalcTextMaxSubStrStability
+
+计算文本相似度（SQLMap 文本相似度算法）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.CalcTextMaxSubStrStability(v1 ...bytes) return (r0: float64, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `float64` |   |
+| r1 | `error` |   |
+
+
+ 
 ### str.Compare
 
 比较字符串
@@ -273,6 +479,70 @@
 
 
  
+### str.ExtractBodyFromHTTPResponseRaw
+
+从 response bytes 中提取 body
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractBodyFromHTTPResponseRaw(rsp: bytes) return (body: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| rsp | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| body | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ExtractStrContext
+
+提取 str 的上下文，（前后字符串）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractStrContext(v1: bytes, keywords: []string) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| keywords | `[]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
 ### str.Fields
 
 按空格把字符串分割开
@@ -301,6 +571,40 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.FixHTTPResponse
+
+修复 HTTPResponse 的 bytes
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.FixHTTPResponse(response: bytes, noGzip: bool) return (rsp: bytes, body: bytes, r2: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| response | `bytes` |   |
+| noGzip | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| rsp | `bytes` |   |
+| body | `bytes` |   |
+| r2 | `error` |   |
 
 
  
@@ -992,6 +1296,165 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 
 
  
+### str.ParseBytesToHTTPRequest
+
+把 bytes 解析成 *http.Request
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseBytesToHTTPRequest(v1: bytes) return (r0: *http.Request, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*http.Request` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ParseBytesToHTTPResponse
+
+把 bytes 解析成 *http.Response
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseBytesToHTTPResponse(v1: bytes) return (r0: *http.Response, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*http.Response` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ParseStringToCClassHosts
+
+把网络段的字符串变为整理后的 C 段主机
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseStringToCClassHosts(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### str.ParseStringToHTTPRequest
+
+把字符串解析为 *http.Request
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseStringToHTTPRequest(v1: string) return (r0: *http.Request, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*http.Request` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ParseStringToHTTPResponse
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseStringToHTTPResponse(v1: string) return (r0: *http.Response, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*http.Response` |   |
+| r1 | `error` |   |
+
+
+ 
 ### str.ParseStringToHostPort
 
 把字符串解析成 host 和 port
@@ -1177,6 +1640,69 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.ParseStringUrlToUrlInstance
+
+把 URL 解析成 *url.URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseStringUrlToUrlInstance(v1: string) return (r0: *url.URL, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*url.URL` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ParseStringUrlToWebsiteRootPath
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ParseStringUrlToWebsiteRootPath(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  
@@ -2196,6 +2722,39 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
+
+
+ 
+### str.UrlJoin
+
+URL Join，可以拼接 URL Path
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.UrlJoin(v1: string, v2 ...string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
 
 
  

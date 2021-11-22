@@ -22,7 +22,7 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
-|`io.Discard`|`io.discard`| 等同于 `/dev/null` 一个 writer，写入数据等同于丢弃|
+|`io.Discard`|`ioutil.devNull`| //|
 |`io.EOF`|`*errors.errorString`| 结束符|
 
 

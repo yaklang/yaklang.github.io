@@ -22,7 +22,7 @@ Yakit 并不会把用户数据上传到服务器，如大家所见，Yakit 也�
 
 Yakit 的官方插件库地址为 `https://github.com/yaklang/yakit-store`
 
-在每次这个插件库更新的时候，将会自动通过 githbu actions 打包整个插件发布到 aliyun OSS 中。
+在每次这个插件库更新的时候，将会自动通过 github actions 打包整个插件发布到 aliyun OSS 中。
 
 ### Yakit 中的操作
 

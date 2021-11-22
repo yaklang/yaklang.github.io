@@ -123,24 +123,24 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
             <div style={{maxWidth: 1000, width: "100%"}}>
                 <Row style={{width: "100%"}}>
                     <Tabs style={{width: "100%"}} centered={true}>
-                        <Tabs.TabPane tab={"安装 Yak 最新版"} key={"yak"}>
-                            <Tabs tabPosition={"left"} style={{marginLeft: 50, marginRight: 50, textAlign: "left"}}
-                                  centered={false}>
-                                <Tabs.TabPane key={"install-general"} tab={"在 MacOS 与 Linux 上安装 Yak"}>
-                                    <div style={{marginTop: 30}}>
-                                        MacOS/Linux: <Text
-                                        code={true}
-                                        copyable={true}>{`bash <(curl -s http://oss.yaklang.io/install-latest-yak.sh)`}</Text>
-                                    </div>
-                                </Tabs.TabPane>
-                                <Tabs.TabPane key={"windows-install-yak"} tab={"Windows 上安装 Yak"}>
-                                    <div style={{marginTop: 30}}>
-                                        <Button type={"link"} target={"_blank"} href={"./docs/startup"}>在 Windows 上安装
-                                            Yak</Button>
-                                    </div>
-                                </Tabs.TabPane>
-                            </Tabs>
-                        </Tabs.TabPane>
+                        {/*<Tabs.TabPane tab={"安装 Yak 最新版"} key={"yak"}>*/}
+                        {/*    <Tabs tabPosition={"left"} style={{marginLeft: 50, marginRight: 50, textAlign: "left"}}*/}
+                        {/*          centered={false}>*/}
+                        {/*        <Tabs.TabPane key={"install-general"} tab={"在 MacOS 与 Linux 上安装 Yak"}>*/}
+                        {/*            <div style={{marginTop: 30}}>*/}
+                        {/*                MacOS/Linux: <Text*/}
+                        {/*                code={true}*/}
+                        {/*                copyable={true}>{`bash <(curl -s http://oss.yaklang.io/install-latest-yak.sh)`}</Text>*/}
+                        {/*            </div>*/}
+                        {/*        </Tabs.TabPane>*/}
+                        {/*        <Tabs.TabPane key={"windows-install-yak"} tab={"Windows 上安装 Yak"}>*/}
+                        {/*            <div style={{marginTop: 30}}>*/}
+                        {/*                <Button type={"link"} target={"_blank"} href={"./docs/startup"}>在 Windows 上安装*/}
+                        {/*                    Yak</Button>*/}
+                        {/*            </div>*/}
+                        {/*        </Tabs.TabPane>*/}
+                        {/*    </Tabs>*/}
+                        {/*</Tabs.TabPane>*/}
                         <Tabs.TabPane tab={"Yakit: 单兵平台与 Yak GUI"} key={"yakit"}>
                             <Space direction={"vertical"} style={{marginBottom: 15}}>
                                 <>基于 Electron 打造的图形化操作界面的端口扫描，爬虫，漏洞扫描等能力的插件化平台</>
@@ -148,42 +148,52 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                                     <Tag color={"green"}>完全开源</Tag>
                                     <Tag color={"geekblue"}>完全免费</Tag>
                                 </Space>
+                                <Space>
+                                    <Button type={"primary"} href={"https://github.com/yaklang/yakit/releases"}
+                                            target={"_blank"}>Yakit 全版本的 Github 托管</Button>
+                                    <Button type={"link"} target={"_target"}
+                                        // @ts-ignore
+                                            icon={<GithubOutlined/>} href={"https://github.com/yaklang/yakit"}
+                                    >
+                                        Yakit 源码
+                                    </Button>
+                                </Space>
                             </Space>
                             <Tabs tabPosition={"left"} style={{marginLeft: 50, marginRight: 50, textAlign: "left"}}
                                   centered={false}>
-                                <Tabs.TabPane key={"windows-install-yak"} tab={"Aliyun OSS 下载最新 Yakit"}>
-                                    <div style={{marginTop: 30}}>
-                                        <Space>
-                                            {[
-                                                {
-                                                    name: `MacOS Yakit-${latestYakitVersion}`,
-                                                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-darwin-amd64.dmg`,
-                                                },
-                                                {
-                                                    name: `Windows Yakit-${latestYakitVersion}`,
-                                                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-windows-amd64.exe`,
-                                                }
-                                            ].map(i => {
-                                                return <Button target={"_blank"} type={"primary"}
-                                                               href={i.url}>{i.name}</Button>
-                                            })}
-                                        </Space>
-                                    </div>
-                                </Tabs.TabPane>
-                                <Tabs.TabPane key={"install-yakit-from-aliyun"} tab={"Github 上下载最新的 Yakit"}>
-                                    <div style={{marginTop: 30}}>
-                                        <Space>
-                                            <Button type={"primary"} href={"https://github.com/yaklang/yakit/releases"}
-                                                    target={"_blank"}>Yakit 全版本的 Github 托管</Button>
-                                            <Button type={"link"} target={"_target"}
-                                                // @ts-ignore
-                                                    icon={<GithubOutlined/>} href={"https://github.com/yaklang/yakit"}
-                                            >
-                                                Yakit 源码
-                                            </Button>
-                                        </Space>
-                                    </div>
-                                </Tabs.TabPane>
+                                {/*<Tabs.TabPane key={"windows-install-yak"} tab={"Aliyun OSS 下载最新 Yakit"}>*/}
+                                {/*    <div style={{marginTop: 30}}>*/}
+                                {/*        <Space>*/}
+                                {/*            {[*/}
+                                {/*                {*/}
+                                {/*                    name: `MacOS Yakit-${latestYakitVersion}`,*/}
+                                {/*                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-darwin-amd64.dmg`,*/}
+                                {/*                },*/}
+                                {/*                {*/}
+                                {/*                    name: `Windows Yakit-${latestYakitVersion}`,*/}
+                                {/*                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-windows-amd64.exe`,*/}
+                                {/*                }*/}
+                                {/*            ].map(i => {*/}
+                                {/*                return <Button target={"_blank"} type={"primary"}*/}
+                                {/*                               href={i.url}>{i.name}</Button>*/}
+                                {/*            })}*/}
+                                {/*        </Space>*/}
+                                {/*    </div>*/}
+                                {/*</Tabs.TabPane>*/}
+                                {/*<Tabs.TabPane key={"install-yakit-from-aliyun"} tab={"Github 上下载最新的 Yakit"}>*/}
+                                {/*    <div style={{marginTop: 30}}>*/}
+                                {/*        <Space>*/}
+                                {/*            <Button type={"primary"} href={"https://github.com/yaklang/yakit/releases"}*/}
+                                {/*                    target={"_blank"}>Yakit 全版本的 Github 托管</Button>*/}
+                                {/*            <Button type={"link"} target={"_target"}*/}
+                                {/*                // @ts-ignore*/}
+                                {/*                    icon={<GithubOutlined/>} href={"https://github.com/yaklang/yakit"}*/}
+                                {/*            >*/}
+                                {/*                Yakit 源码*/}
+                                {/*            </Button>*/}
+                                {/*        </Space>*/}
+                                {/*    </div>*/}
+                                {/*</Tabs.TabPane>*/}
                             </Tabs>
                         </Tabs.TabPane>
                     </Tabs>

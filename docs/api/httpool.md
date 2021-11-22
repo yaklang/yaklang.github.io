@@ -9,6 +9,7 @@
  | [httpool.perRequestTimeout](#httpoolperrequesttimeout) | 【参数】为每个请求设置超时时间 |
  | [httpool.port](#httpoolport) | 【参数】设置请求发送到的真正 Port |
  | [httpool.proxy](#httpoolproxy) | 【参数】设置整个请求池的代理 |
+ | [httpool.rawMode](#httpoolrawmode) | rawMode 模式意味着直接发送包，尽量少的去改动数据包内容 |
  | [httpool.size](#httpoolsize) | 【参数】设置每个请求的 body 的最大大小 |
 
 
@@ -206,6 +207,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `opt` |   |
+
+
+ 
+### httpool.rawMode
+
+rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func httpool.rawMode(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
