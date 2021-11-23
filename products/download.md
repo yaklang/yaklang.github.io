@@ -8,6 +8,16 @@ sidebar_position: 3
 
 当然如果你愿意从 Github 下载，请浏览 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases)
 
+## Yakit - v1.0.10-beta6
+
+从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本
+
+### BugFix
+
+1. 增加了全新 Apple macOS 12 系统缺失 Rosetta2 与 /usr/local/bin 导致安装失败的问题。
+2. Yakit 安装页增加了 macOS 12 arm64 的安装与环境配置提示
+3. 普通用户增加了更有好的启动失败原因的提示，如果未安装引擎，将会更直观地提示
+
 ## Yakit - v1.0.10-beta5
 
 从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本 
