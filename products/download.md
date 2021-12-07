@@ -8,6 +8,26 @@ sidebar_position: 3
 
 当然如果你愿意从 Github 下载，请浏览 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases)
 
+## Yakit - v1.0.10-beta10
+
+如果您之前是 Yakit 用户，可以直接在应用内升级
+
+如果您从未使用过 Yakit，可以通过 Github 下载安装
+
+从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本
+
+BugFix:
+
+1. mitm 修复若干劫持中编码不正确的问题
+1. 从 Content-Type 识别并过滤 Response 中各种静态文件
+
+Feature:
+
+1. 交互布局重新设计，易用性得到了比较大的提升
+1. 支持在劫持过程中一键劫持全部响应信息
+1. 编辑器右键菜单中增加各种操作快捷方式
+1. HTTP History 重新设计后，可以更好地实现与之前各种模块之间的联动
+
 ## Yakit - v1.0.10-beta6
 
 从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本
