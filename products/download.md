@@ -8,6 +8,19 @@ sidebar_position: 3
 
 当然如果你愿意从 Github 下载，请浏览 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases)
 
+## Yakit - v1.0.11-sp6
+
+如果您之前是 Yakit 用户，可以直接在应用内升级
+
+如果您从未使用过 Yakit，可以通过 Github 下载安装
+
+从 [Yakit 的 Github 托管](https://github.com/yaklang/yakit/releases) 中下载最新版本
+
+1. 全新的爆破模块
+1. CodeC 完全重构：
+    1. 增加了 JWT 弱密码测试
+    1. 增加了 Java 相关的接口
+
 ## Yakit - v1.0.10-beta10
 
 如果您之前是 Yakit 用户，可以直接在应用内升级
