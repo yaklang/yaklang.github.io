@@ -88,14 +88,14 @@
 
 #### 定义：
 
-`func codec.AesEncrypt(data: bytes, key: bytes) return (encrypted: bytes, r1: error)`
+`func codec.AesEncrypt(originData: bytes, key: bytes) return (encrypedData: bytes, iv: bytes, r2: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `bytes` |   |
+| originData | `bytes` |   |
 | key | `bytes` |   |
 
 
@@ -106,8 +106,9 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| encrypted | `bytes` |   |
-| r1 | `error` |   |
+| encrypedData | `bytes` |   |
+| iv | `bytes` |   |
+| r2 | `error` |   |
 
 
  

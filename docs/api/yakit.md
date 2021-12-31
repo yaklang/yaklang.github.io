@@ -37,6 +37,7 @@
  | [yakit.SavePortFromResult](#yakitsaveportfromresult) | 把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。 |
  | [yakit.SetProgress](#yakitsetprogress) |  |
  | [yakit.SetProgressEx](#yakitsetprogressex) | 设置额外进度条的进度信息（默认进度条id为 `main`） |
+ | [yakit.StatusCard](#yakitstatuscard) |  |
  | [yakit.TableData](#yakittabledata) | 为启动的 table 生成数据 |
  | [yakit.UpdateYakitStore](#yakitupdateyakitstore) | 使用 yakit 来直接更新 yakit-store 中的插件 |
  | [yakit.Warn](#yakitwarn) | 让 Yakit UI 输出告警信息 |
@@ -991,15 +992,42 @@
 
 #### 定义：
 
-``func yakit.SetProgressEx(v1: string, v2: float64)``
+``func yakit.SetProgressEx(progressName: string, percent: float64)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `float64` |   |
+| progressName | `string` |   |
+| percent | `float64` |   |
+
+
+
+
+ 
+
+ 
+### yakit.StatusCard
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.StatusCard(statusName: string, statusValue: any, tags ...string)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| statusName | `string` |   |
+| statusValue | `any` |   |
+| tags | `...string` |   |
 
 
 

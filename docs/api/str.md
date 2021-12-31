@@ -584,7 +584,7 @@
 
 #### 定义：
 
-`func str.FixHTTPResponse(response: bytes, noGzip: bool) return (rsp: bytes, body: bytes, r2: error)`
+`func str.FixHTTPResponse(response: bytes) return (rsp: bytes, body: bytes, r2: error)`
 
 
 #### 参数
@@ -592,7 +592,6 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | response | `bytes` |   |
-| noGzip | `bool` |   |
 
 
 
