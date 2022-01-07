@@ -16,6 +16,7 @@
  | [str.EndsWith](#strendswith) | 判断字符串是否以子串为结尾 |
  | [str.EqualFold](#strequalfold) | 判断忽略大小写字符串是否相等？ |
  | [str.ExtractBodyFromHTTPResponseRaw](#strextractbodyfromhttpresponseraw) | 从 response bytes 中提取 body |
+ | [str.ExtractChineseIDCards](#strextractchineseidcards) | 提取内容中的身份证号 |
  | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
  | [str.Fields](#strfields) | 按空格把字符串分割开 |
  | [str.FixHTTPResponse](#strfixhttpresponse) | 修复 HTTPResponse 的 bytes |
@@ -27,9 +28,31 @@
  | [str.Index](#strindex) | 判断子字符串在字符串中的位置 |
  | [str.IndexAny](#strindexany) | 判断子字符串中任意一个字符在主串中的位置 |
  | [str.IndexByte](#strindexbyte) | 判断一个 byte 的位置 |
+ | [str.IsBase64Value](#strisbase64value) | 判断一个值是不是 base64 |
+ | [str.IsCaptchaField](#striscaptchafield) | 判断一个参数是不是验证码 |
+ | [str.IsHtmlResponse](#strishtmlresponse) | 判断一个 Response 是不是 HTML |
+ | [str.IsHttpURL](#strishttpurl) | 判断 URL 是不是 http(s)://  |
  | [str.IsIPv4](#strisipv4) | 判断一个字符串是不是 IPv4 |
  | [str.IsIPv6](#strisipv6) | 判断一个字符串是不是 IPv6 |
+ | [str.IsJSONPParam](#strisjsonpparam) | 判断 JSONP 参数 |
+ | [str.IsJsonResponse](#strisjsonresponse) | 判断请求是不是 JSON 请求 |
+ | [str.IsMD5Value](#strismd5value) | 判断有没有参数是 MD5 值的 |
+ | [str.IsPasswordField](#strispasswordfield) | 判断是否是密码字段 |
+ | [str.IsPlainBase64Value](#strisplainbase64value) | 判断Base64的结果是不是都是可见字符 |
+ | [str.IsRedirectParam](#strisredirectparam) | 判断参数是不是可能是 Redirect 参数 |
+ | [str.IsSQLColumnField](#strissqlcolumnfield) | 判断字段名是不是 SQL 列名 |
+ | [str.IsSensitiveJson](#strissensitivejson) | 判断是否是敏感 JSON（Key:Value） |
+ | [str.IsSensitiveTokenField](#strissensitivetokenfield) | 判断是不是敏感 Token/AC/SecretKey |
+ | [str.IsServerError](#strisservererror) | 判断是否有服务器常见错误 |
+ | [str.IsSha256Value](#strissha256value) | 判断是否是一个可能的 SHA256 值 |
  | [str.IsStrongPassword](#strisstrongpassword) | 判断一个密码是不是强密码 |
+ | [str.IsTLSServer](#stristlsserver) | 判断一个地址是不是 TLS |
+ | [str.IsUrlParam](#strisurlparam) | 判断一个参数是不是 URL |
+ | [str.IsUrlPath](#strisurlpath) | 判断一个参数是不是路径？ |
+ | [str.IsUsernameField](#strisusernamefield) | 判断一个字段名是不是可能是用户名？ |
+ | [str.IsXmlParam](#strisxmlparam) | 判断一个参数是否是 XML 参数 |
+ | [str.IsXmlRequest](#strisxmlrequest) | 判断一个请求是不是 XML 请求 |
+ | [str.IsXmlValue](#strisxmlvalue) | 判断一个值是不是 XML |
  | [str.Join](#strjoin) | Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分隔符 |
  | [str.JsonStreamToMapList](#strjsonstreamtomaplist) | 把 json 流解析成多个 `map[string]interface{}` |
  | [str.JsonToMap](#strjsontomap) | 把 Json 解析成 `map[string]string` |
@@ -511,6 +534,37 @@
 
 
  
+### str.ExtractChineseIDCards
+
+提取内容中的身份证号
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractChineseIDCards(v1: any) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
 ### str.ExtractStrContext
 
 提取 str 的上下文，（前后字符串）
@@ -863,6 +917,130 @@
 
 
  
+### str.IsBase64Value
+
+判断一个值是不是 base64
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsBase64Value(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsCaptchaField
+
+判断一个参数是不是验证码
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsCaptchaField(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsHtmlResponse
+
+判断一个 Response 是不是 HTML
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsHtmlResponse(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsHttpURL
+
+判断 URL 是不是 http(s):// 
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsHttpURL(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
 ### str.IsIPv4
 
 判断一个字符串是不是 IPv4
@@ -925,6 +1103,349 @@
 
 
  
+### str.IsJSONPParam
+
+判断 JSONP 参数
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsJSONPParam(v1: string, v2: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsJsonResponse
+
+判断请求是不是 JSON 请求
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsJsonResponse(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsMD5Value
+
+判断有没有参数是 MD5 值的
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsMD5Value(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsPasswordField
+
+判断是否是密码字段
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsPasswordField(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsPlainBase64Value
+
+判断Base64的结果是不是都是可见字符
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsPlainBase64Value(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsRedirectParam
+
+判断参数是不是可能是 Redirect 参数
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsRedirectParam(v1: string, v2: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsSQLColumnField
+
+判断字段名是不是 SQL 列名
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsSQLColumnField(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsSensitiveJson
+
+判断是否是敏感 JSON（Key:Value）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsSensitiveJson(v1: bytes) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsSensitiveTokenField
+
+判断是不是敏感 Token/AC/SecretKey
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsSensitiveTokenField(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsServerError
+
+判断是否有服务器常见错误
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsServerError(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsSha256Value
+
+判断是否是一个可能的 SHA256 值
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsSha256Value(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
 ### str.IsStrongPassword
 
 判断一个密码是不是强密码
@@ -943,6 +1464,225 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsTLSServer
+
+判断一个地址是不是 TLS
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsTLSServer(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsUrlParam
+
+判断一个参数是不是 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsUrlParam(v1: string, v2: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsUrlPath
+
+判断一个参数是不是路径？
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsUrlPath(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsUsernameField
+
+判断一个字段名是不是可能是用户名？
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsUsernameField(v1: string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsXmlParam
+
+判断一个参数是否是 XML 参数
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsXmlParam(v1: string, v2: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsXmlRequest
+
+判断一个请求是不是 XML 请求
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsXmlRequest(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsXmlValue
+
+判断一个值是不是 XML
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsXmlValue(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
