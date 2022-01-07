@@ -12,6 +12,16 @@ Yakit 全线托管在 aliyun OSS 上。
 https://yaklang.oss-cn-beijing.aliyuncs.com/yak/{{ version }}/Yakit-{{ version }}-darwin-amd64.dmg
 ```
 
+:::dangerous
+
+如果安装后 MacOS 提示 
+
+![](/img/products/yakit/yakit-install-error-macos-m1-quarantine.png) 
+
+`sudo xattr -r -d com.apple.quarantine /Applications/Yakit.app`
+
+:::
+
 ## Windows Yakit 通用下载地址
 
 ```

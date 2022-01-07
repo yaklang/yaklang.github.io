@@ -3,7 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否处罚 |
+ | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
  | [risk.NewLocalReverseHTTPSUrl](#risknewlocalreversehttpsurl) | 创建一个本地服务器的 HTTPS(TLS&#43;HTTP)URL（仅 yakit 内生效） |
  | [risk.NewLocalReverseHTTPUrl](#risknewlocalreversehttpurl) | 创建一个本地服务器的 HTTP URL（仅 yakit 内生效） |
  | [risk.NewLocalReverseRMIUrl](#risknewlocalreversermiurl) | 创建一个本地服务器的 RMI URL（仅 yakit 内生效） |
@@ -33,7 +33,7 @@
 
 ### risk.HaveReverseRisk
 
-判断一个 Token 的反连是否处罚
+判断一个 Token 的反连是否触发
 
 #### 详细描述
 
