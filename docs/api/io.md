@@ -22,7 +22,7 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
-|`io.Discard`|`ioutil.devNull`| //|
+|`io.Discard`|`io.discard`| //|
 |`io.EOF`|`*errors.errorString`| 结束符|
 
 

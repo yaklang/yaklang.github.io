@@ -15,7 +15,7 @@
  | [file.IsLink](#fileislink) | 判断一个路径是否是一个文件链接/快捷方式 |
  | [file.Join](#filejoin) | 拼接路径 |
  | [file.Ls](#filels) | 查看当前路径下是否有其他文件 |
- | [file.Lstat](#filelstat) | 读取链接的信息 |
+ | [file.Lstat](#filelstat) |  |
  | [file.Mkdir](#filemkdir) | 创建一个文件夹，如果无法创建，基本等同于 `mkdir [path]`，则会失败 |
  | [file.MkdirAll](#filemkdirall) | 强制创建个文件夹，如果没有父路径，则会强制创建，相当于执行 `mkdir -p [path]` |
  | [file.Mv](#filemv) | 把一个文件 move 到另一个地方，本质上执行 `os.Rename` |
@@ -423,7 +423,7 @@
  
 ### file.Lstat
 
-读取链接的信息
+
 
 #### 详细描述
 
@@ -431,7 +431,7 @@
 
 #### 定义：
 
-`func file.Lstat(v1: string) return (r0: os.FileInfo, r1: error)`
+`func file.Lstat(v1: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
@@ -448,7 +448,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `os.FileInfo` |   |
+| r0 | `fs.FileInfo` |   |
 | r1 | `error` |   |
 
 
@@ -589,7 +589,7 @@
 
 #### 定义：
 
-`func file.OpenFile(v1: string, v2: int, v3: os.FileMode) return (r0: *yaklib._yakFile, r1: error)`
+`func file.OpenFile(v1: string, v2: int, v3: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
@@ -598,7 +598,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `int` |   |
-| v3 | `os.FileMode` |   |
+| v3 | `fs.FileMode` |   |
 
 
 
@@ -845,7 +845,7 @@
 
 #### 定义：
 
-`func file.Stat(v1: string) return (r0: os.FileInfo, r1: error)`
+`func file.Stat(v1: string) return (r0: fs.FileInfo, r1: error)`
 
 
 #### 参数
@@ -862,7 +862,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `os.FileInfo` |   |
+| r0 | `fs.FileInfo` |   |
 | r1 | `error` |   |
 
 

@@ -3,6 +3,8 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [risk.CheckRandomTriggerByToken](#riskcheckrandomtriggerbytoken) | 通过 Token 来查询随机触发器 |
+ | [risk.ExtractTokenFromUrl](#riskextracttokenfromurl) | 从 URL 中提取 token |
  | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
  | [risk.NewLocalReverseHTTPSUrl](#risknewlocalreversehttpsurl) | 创建一个本地服务器的 HTTPS(TLS&#43;HTTP)URL（仅 yakit 内生效） |
  | [risk.NewLocalReverseHTTPUrl](#risknewlocalreversehttpurl) | 创建一个本地服务器的 HTTP URL（仅 yakit 内生效） |
@@ -10,6 +12,7 @@
  | [risk.NewPublicReverseHTTPSUrl](#risknewpublicreversehttpsurl) | 创建一个远程服务器的 HTTPS URL（仅 yakit 内生效，并且需要配置 yak bridge） |
  | [risk.NewPublicReverseHTTPUrl](#risknewpublicreversehttpurl) | 创建一个远程服务器的 HTTP URL（仅 yakit 内生效，并且需要配置 yak bridge） |
  | [risk.NewPublicReverseRMIUrl](#risknewpublicreversermiurl) | 创建一个远程服务器的 RMI URL（仅 yakit 内生效，并且需要配置 yak bridge） |
+ | [risk.NewRandomPortTrigger](#risknewrandomporttrigger) | 创建个新的随机端口检测记录 |
  | [risk.NewRisk](#risknewrisk) | 创建一个 Risk 记录（可理解为漏洞） |
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) | 创建一个 Risk 记录（可理解为漏洞），并标记为没有验证的漏洞 |
  | [risk.Save](#risksave) | 保存一个 Risk 记录（可理解为漏洞） |
@@ -31,9 +34,9 @@
 
 ## 函数定义
 
-### risk.HaveReverseRisk
+### risk.CheckRandomTriggerByToken
 
-判断一个 Token 的反连是否触发
+通过 Token 来查询随机触发器
 
 #### 详细描述
 
@@ -41,7 +44,7 @@
 
 #### 定义：
 
-`func risk.HaveReverseRisk(token: string) return (r0: bool)`
+`func risk.CheckRandomTriggerByToken(token: string) return (event: *tpb.RandomPortTriggerEvent, err: error)`
 
 
 #### 参数
@@ -58,7 +61,70 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
+| event | `*tpb.RandomPortTriggerEvent` |   |
+| err | `error` |   |
+
+
+ 
+### risk.ExtractTokenFromUrl
+
+从 URL 中提取 token
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.ExtractTokenFromUrl(url: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### risk.HaveReverseRisk
+
+判断一个 Token 的反连是否触发
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.HaveReverseRisk(token: string) return (r0: boolvendor/github.com/projectdiscovery/fileutil/file.go)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| token | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `boolvendor/github.com/projectdiscovery/fileutil/file.go` |   |
 
 
  
@@ -245,6 +311,39 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
+
+
+ 
+### risk.NewRandomPortTrigger
+
+创建个新的随机端口检测记录
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.NewRandomPortTrigger(riskOpt ...yakit.riskParamsOpt) return (token: string, hostPort: string, err: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| riskOpt | `...yakit.riskParamsOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| token | `string` |   |
+| hostPort | `string` |   |
+| err | `error` |   |
 
 
  

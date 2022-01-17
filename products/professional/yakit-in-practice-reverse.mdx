@@ -26,7 +26,7 @@ import TOCInline from '@theme/TOCInline';
 1. `dnslog / http-reverse / tcp / tls / rmi` 等服务外连检测。
 
 > 严格来说，我并不觉得 `sleep / benchmark` 不算回显，耗时操作本来也算是可直接观测到的指标。除此之外，`sleep / benchmark` 将会引起服务器端各种各样的小问题：
-> 1. 如果服务器时单线程，sleep 将会造成阻塞，
+> 1. 如果服务器是单线程，sleep 将会造成阻塞，
 > 1. 如果服务器 CPU 不太行，benchmark 将会消耗资源
 > 1. 如果发生在数据库中，很多生产环境中的数据库会针对 SQL 语句执行做各种限制，例如:
 >     1. 认为超时的 SQL 语句为 badsql，直接切断当前查询进程

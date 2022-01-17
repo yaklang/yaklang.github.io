@@ -5,6 +5,7 @@
 |:------|:--------|
  | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有可用 PoC |
  | [nuclei.Scan](#nucleiscan) | nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.） |
+ | [nuclei.ScanWithContext](#nucleiscanwithcontext) | 带上下文进行扫描，通过上下文控制通断 |
  | [nuclei.UpdatePoC](#nucleiupdatepoc) | 更新 PoC |
  | [nuclei.bulkSize](#nucleibulksize) | 【参数】同 nuclei 每个模板最大并行的主机数(默认25) |
  | [nuclei.debug](#nucleidebug) | 【参数】调试模式，打印更多的调试信息 |
@@ -24,11 +25,12 @@
  | [nuclei.output](#nucleioutput) | 【参数】设置最终结果输出到的文件 |
  | [nuclei.pageTimeout](#nucleipagetimeout) | 【参数】页超时时间 |
  | [nuclei.project](#nucleiproject) | 【参数】避免发送相同请求，声明当前是同一个项目 |
- | [nuclei.proxy](#nucleiproxy) | 【参数】设置代理，代理可以是 HTTP 代理，也可以是 SOCKS |
+ | [nuclei.proxy](#nucleiproxy) | 为 nuclei 设置代理 |
  | [nuclei.rateLimit](#nucleiratelimit) | 【参数】限制每秒最大请求（150默认） |
  | [nuclei.reportingConfig](#nucleireportingconfig) | 【参数】配置报告 |
  | [nuclei.reportingDB](#nucleireportingdb) | 【参数】报告数据库 |
  | [nuclei.retry](#nucleiretry) | 【参数】设置重试次数 |
+ | [nuclei.reverseUrl](#nucleireverseurl) | 反连 URL |
  | [nuclei.severity](#nucleiseverity) | 【参数】设置扫描级别（middle/high/critical/low），筛选 nuclei templates |
  | [nuclei.showBrowser](#nucleishowbrowser) | 【参数】展示浏览器 |
  | [nuclei.silent](#nucleisilent) | 【参数】尽量少的输出结果，只展示成功的结果 |
@@ -108,6 +110,40 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | pocChannel | `chan *tools.PocVul` |  扫描漏洞结果 |
+| r1 | `error` |   |
+
+
+ 
+### nuclei.ScanWithContext
+
+带上下文进行扫描，通过上下文控制通断
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.ScanWithContext(ctx: context.Context, targets: string, opts ...tools.nucleiOpt) return (r0: chan *tools.PocVul, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| targets | `string` |   |
+| opts | `...tools.nucleiOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *tools.PocVul` |   |
 | r1 | `error` |   |
 
 
@@ -695,7 +731,7 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
  
 ### nuclei.proxy
 
-【参数】设置代理，代理可以是 HTTP 代理，也可以是 SOCKS
+为 nuclei 设置代理
 
 #### 详细描述
 
@@ -703,14 +739,14 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 
 #### 定义：
 
-`func nuclei.proxy(proxy: string) return (r0: func nucleiOpt(v1: *types.Options) )`
+`func nuclei.proxy(proxies ...string) return (r0: func nucleiOpt(v1: *types.Options) )`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxy | `string` |   |
+| proxies | `...string` |   |
 
 
 
@@ -835,6 +871,37 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func nucleiOpt(v1: *types.Options) ` |   |
+
+
+ 
+### nuclei.reverseUrl
+
+反连 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.reverseUrl(v1: string) return (r0: func nucleiOpt(v1: *types.Options) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 
 
 

@@ -18,7 +18,10 @@
  | [str.ExtractBodyFromHTTPResponseRaw](#strextractbodyfromhttpresponseraw) | 从 response bytes 中提取 body |
  | [str.ExtractChineseIDCards](#strextractchineseidcards) | 提取内容中的身份证号 |
  | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
+ | [str.ExtractURLFromHTTPRequest](#strextracturlfromhttprequest) | 从一个请求对象提取 URL |
+ | [str.ExtractURLFromHTTPRequestRaw](#strextracturlfromhttprequestraw) | 从一个原始数据包中提取 URL |
  | [str.Fields](#strfields) | 按空格把字符串分割开 |
+ | [str.FixHTTPRequest](#strfixhttprequest) |  |
  | [str.FixHTTPResponse](#strfixhttpresponse) | 修复 HTTPResponse 的 bytes |
  | [str.Grok](#strgrok) | 同 `re.Grok` |
  | [str.HasPrefix](#strhasprefix) | 判断字符串是不是以子串为前缀 |
@@ -61,6 +64,13 @@
  | [str.LastIndexAny](#strlastindexany) | 子字符串中任何一个字符在主字符串中最后出现的位置 |
  | [str.LastIndexByte](#strlastindexbyte) | 最后一个目标 byte 的位置 |
  | [str.LowerAndTrimSpace](#strlowerandtrimspace) | 把字符串前后空白移除，并变成小写 |
+ | [str.MatchAllOfGlob](#strmatchallofglob) | 所有的 glob 规则都被匹配到 |
+ | [str.MatchAllOfRegexp](#strmatchallofregexp) | 所有的正则都被匹配到 |
+ | [str.MatchAllOfSubString](#strmatchallofsubstring) | 所有的子字符串都被匹配到 |
+ | [str.MatchAnyOfGlob](#strmatchanyofglob) | 只要有一条规则被匹配到规则即可 |
+ | [str.MatchAnyOfRegexp](#strmatchanyofregexp) | 匹配任何一条正则语句 |
+ | [str.MatchAnyOfSubString](#strmatchanyofsubstring) | 包含任何一个子字符串 |
+ | [str.MergeUrlFromHTTPRequest](#strmergeurlfromhttprequest) | 根据原始数据包拼接一个新的 URL |
  | [str.NewFilter](#strnewfilter) | 创建一个字符串过滤器 |
  | [str.NewReader](#strnewreader) | 创建一个 Reader |
  | [str.ParamsGetOr](#strparamsgetor) | 从 `map[string]string` 中获取参数 |
@@ -85,10 +95,12 @@
  | [str.Repeat](#strrepeat) | 重复字符串 |
  | [str.Replace](#strreplace) | 字符串替换（次数） |
  | [str.ReplaceAll](#strreplaceall) | 字符串替换，全部 |
+ | [str.ReplaceHTTPPacketBody](#strreplacehttppacketbody) | 整体替代一个数据包的 body |
  | [str.Split](#strsplit) | 分割字符串 |
  | [str.SplitAfter](#strsplitafter) | 分割字符串，不移除分隔符 |
  | [str.SplitAfterN](#strsplitaftern) | 分割字符串，不移除分隔符，最多分割成N个块 |
  | [str.SplitAndTrim](#strsplitandtrim) | 分割，并清除每一个部分的前后空白 |
+ | [str.SplitHTTPHeadersAndBodyFromPacket](#strsplithttpheadersandbodyfrompacket) | 把数据包的 headers 和 body 进行分离 |
  | [str.SplitN](#strsplitn) | 分割字符串，分割成N块 |
  | [str.StartsWith](#strstartswith) | 判断主字符串是否是子串开头？ |
  | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) | 判断字符串是否包含任意一个后续 Slice 中的元素？ |
@@ -597,6 +609,72 @@
 
 
  
+### str.ExtractURLFromHTTPRequest
+
+从一个请求对象提取 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractURLFromHTTPRequest(req: *http.Request, isHttps: bool) return (r0: *url.URL, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| req | `*http.Request` |   |
+| isHttps | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*url.URL` |   |
+| r1 | `error` |   |
+
+
+ 
+### str.ExtractURLFromHTTPRequestRaw
+
+从一个原始数据包中提取 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractURLFromHTTPRequestRaw(reqRaw: bytes, isHttps: bool) return (r0: *url.URL, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| reqRaw | `bytes` |   |
+| isHttps | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*url.URL` |   |
+| r1 | `error` |   |
+
+
+ 
 ### str.Fields
 
 按空格把字符串分割开
@@ -625,6 +703,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.FixHTTPRequest
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.FixHTTPRequest(v1: bytes) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  
@@ -1948,6 +2057,231 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 
 
  
+### str.MatchAllOfGlob
+
+所有的 glob 规则都被匹配到
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAllOfGlob(data: any, globRules ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| globRules | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MatchAllOfRegexp
+
+所有的正则都被匹配到
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAllOfRegexp(data: any, regexps ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexps | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MatchAllOfSubString
+
+所有的子字符串都被匹配到
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAllOfSubString(data: any, subStrs ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| subStrs | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MatchAnyOfGlob
+
+只要有一条规则被匹配到规则即可
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAnyOfGlob(data: any, globRules ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| globRules | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MatchAnyOfRegexp
+
+匹配任何一条正则语句
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAnyOfRegexp(data: any, regexps ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexps | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MatchAnyOfSubString
+
+包含任何一个子字符串
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MatchAnyOfSubString(data: any, subStrs ...string) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| subStrs | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.MergeUrlFromHTTPRequest
+
+根据原始数据包拼接一个新的 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.MergeUrlFromHTTPRequest(reqRaw: bytes, newUrl: string, isHttps: bool) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| reqRaw | `bytes` |   |
+| newUrl | `string` |   |
+| isHttps | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
 ### str.NewFilter
 
 创建一个字符串过滤器
@@ -2700,6 +3034,39 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 
 
  
+### str.ReplaceHTTPPacketBody
+
+整体替代一个数据包的 body
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ReplaceHTTPPacketBody(packetRaw: bytes, newBody: bytes, isHttps: bool) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packetRaw | `bytes` |   |
+| newBody | `bytes` |   |
+| isHttps | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
 ### str.Split
 
 分割字符串
@@ -2826,6 +3193,39 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.SplitHTTPHeadersAndBodyFromPacket
+
+把数据包的 headers 和 body 进行分离
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.SplitHTTPHeadersAndBodyFromPacket(packet: bytes, v2 ...func(string)) return (r0: string, r1: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `bytes` |   |
+| v2 | `...func(string)` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `bytes` |   |
 
 
  
