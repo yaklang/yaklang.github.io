@@ -1,0 +1,152 @@
+---
+sidebar_position: 3
+---
+
+import TOCInline from '@theme/TOCInline';
+
+# 插件编写指南：插件交互式输出
+
+当我们可以创建一个插件，并执行代码之后，面对一个很现实的问题是
+
+我们如何为用户输出好看的，利于理解，利于后续操作的插件执行结果？本文我们就来讲解如何实现插件的输出
+
+<TOCInline toc={toc} />
+
+## Yak 原生模块输出
+
+了解 Yakit 插件技术背景的同学可能非常清楚，Yak 原生插件依赖 webhook 与服务器进行通信。
+
+为此我们在 yak 语言内部内置了一个 `yakit` 的库，在这个库中，我们可以便捷操作与用户的操作界面通信。
+
+### 准备工作 `yakit.AutoInitYakit()`
+
+如果用户需要启用与 yakit 通信的模块，则需要在脚本开头或者输出之前执行
+
+`yakit.AutoInitYakit()`。
+
+这行代码会从环境变量中提取 Webhook 的实际端口，并且针对实际端口进行通信。在进行初始化之后，我们使用 `yakit`
+中的一些接口，就可以实现把插件的执行结果返回到 yakit 中从而实现与用户的交互了！
+
+### 输出日志 `Info/Warn/Error/Output`
+
+最基础的输出，也就是我们最一开始实现 Hello World 插件的输出，就是使用这种形式。
+
+```golang
+yakit.AutoInitYakit()
+yakit.Info("Hello This is a info message")
+yakit.Warn("Warning!!! Warning: %v", now())
+yakit.Error("Error!? Impossible")
+```
+
+当我们把这段代码在插件中执行时，得到如下内容
+
+![](/img/products/yakit/yakit-output-logs-native.png)
+
+#### Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-output-logs-native.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+### 输出状态与统计数据
+
+我们在使用的过程中，经常需要告诉用户 "输出结果" 的状态或者某个指标的数据，例如：
+
+1. 我们发现了多少漏洞
+1. 我们发出了多少请求
+1. 关键步骤运行了多长时间
+1. ...
+
+这些状态其实往往应该被单独展示，而不应该放在日志中，为了支持这种常见的情况，我们可以使用 `yakit.StatusCard(title: string, value: any)` 支持。
+
+[函数的详情介绍可以看这里](/docs/api/yakit#yakitstatuscard)
+
+#### Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yak-native-status-card.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+### 输出进度条
+
+同上，我们在调用 `yakit.AutoInitYakit()` 之后，将可以使用进度条功能，为你的插件增加一个 "进度"。
+
+#### 单进度条(TODO)
+
+作为最简单的情况，进度条的输入只应该是一个 "百分比"，为了支持这种情况，我们实现了一个
+
+`yakit.SetProgress(percent: float)` 函数
+
+```go
+yakit.AutoInitYakit()
+
+yakit.SetProgress(0.1)
+sleep(1)
+yakit.SetProgress(0.4)
+sleep(1)
+yakit.SetProgress(0.8)
+```
+
+将会在界面生成一个进度条，实现进度条的展示！
+
+##### Preview
+
+TBD
+
+#### 多进度条
+
+TBD
+
+### 输出表格
+
+TBD
+
+### 输出图
+
+TBD
+
+## MITM 插件的输出
+
+MITM 插件的输出接口其实并不多，同时接口相对更容易一些
+
+### 输出到 MITM 插件操作台
+
+1. `yakit_output(data: any)`：仅输出到操作台
+1. `yakit_save(data: any)`：输出到操作台，同时保存一份到插件输入，可以在数据库中找保存的数据
+
+以上接口非常容易理解，我们可以创建一个插件，分别输出两个内容试试看～
+
+#### Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-output-and-save-demo.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+### 输出状态卡片
+
+在原生 yak 模块中，状态卡片是一个非常受欢迎的小组件；
+
+我们同样的也在 MITM 中实现了该组件的功能。
+
+`yakit_status(title: string, value: any)`
+
+直接调用这个函数，将会自动生成一个状态卡片，用于展示各种动态的指标。
+
+#### Preview：编写一个建议的流量记述插件！
+
+我们使用一个更贴近场景的案例来告诉大家这个功能的用法：流量统计。
+
+我们可以做一个简单的计数器，在 MITM 的 Hook 函数内实现统计方法，每一个数据包都会被记数，从而实现一个指标来记录流经我们劫持平台的数据包到底有多少。
+
+![](/img/products/yakit/packet-counter-for-mitm.png)
+
+实际生效的代码仅仅三行，我们为插件创建一个计数器，具体如何使用呢？我们可以查看如下下内容
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/mitm-status-card.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+

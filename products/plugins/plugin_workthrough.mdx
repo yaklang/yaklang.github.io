@@ -1,10 +1,14 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
-# 如何编写 Yakit 插件
+import TOCInline from '@theme/TOCInline';
+
+# Yak 原生插件编写：十分钟教程
 
 > 把大象装冰箱，需要分几步？
+
+<TOCInline toc={toc} />
 
 其实编写一个插件步骤非常简单
 
@@ -188,19 +192,3 @@ yakit.Output(graph)
 [`yakit` 全部交互接口与定义](/docs/api/yakit)
 
 大家需要以及可能用到的接口在里面都可以找到了。
-
-## 分享你的插件 (PR to github.com/yaklang/yakit-store)
-
-如果你编写了一个你觉得非常棒的插件和实现，其实可以很容易分享给其他用户。
-
-如果点击插件主界面的 "导出插件"，将会生成三个文件，分别是 `meta.json`, `***.yak`, `document.md`
-
-用户配置的参数信息，编写的脚本内容，以及用户编写的 markdown 格式的文档将会直接导出。
-
-### 如何提交 PR 到 yakit-store？
-
-TBD
-
-### 私密分享：我只想分享给我的朋友
-
-稍后我们 Yakit 将支持私密分享的功能，非常好用！就在鹿上！
