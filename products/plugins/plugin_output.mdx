@@ -73,7 +73,7 @@ yakit.Error("Error!? Impossible")
 
 同上，我们在调用 `yakit.AutoInitYakit()` 之后，将可以使用进度条功能，为你的插件增加一个 "进度"。
 
-#### 单进度条(TODO)
+#### 单进度条
 
 作为最简单的情况，进度条的输入只应该是一个 "百分比"，为了支持这种情况，我们实现了一个
 
@@ -93,19 +93,112 @@ yakit.SetProgress(0.8)
 
 ##### Preview
 
-TBD
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-native-progress.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
 
 #### 多进度条
 
-TBD
+当然如果上述的内容中，单个进度条无法满足用户需求，你希望我们可以展示多个进度条，进度条之间可以互相关联。
+
+那么我们可以使用 `yakit.SetProgressEx(id: string, percent: float)`
+
+来按照 ID 创建多个进度条
+
+我们使用如下案例来展示
+
+```go
+yakit.AutoInitYakit()
+
+go func{
+    percent = 0.1
+    for {
+        yakit.SetProgressEx("test1", percent)
+        time.sleep(0.3)
+        percent+=0.1
+    }
+
+}
+
+yakit.SetProgress(0.1)
+sleep(1)
+yakit.SetProgress(0.4)
+sleep(1)
+yakit.SetProgress(0.8)
+sleep(1)
+yakit.SetProgress(0.9)
+```
+
+我们在原来代码的基础上，增加了 goroutine，来创建另一个进度条，给新的进度条命名为 `test1`。
+
+观察代码，我们预期两个进度条可以同步进行
+
+##### Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-multi-progressbar.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
 
 ### 输出表格
 
-TBD
+虽然上面输出了一些内容，但是实际上并不够，如果我们需要不断输出一些结果
+
+例如批量扫描的结果，或者猜测某一个 KEY 的结果，我们经常需要一个表格作为输出。
+
+这个时候，我们应该如何编写几个表格呢？
+
+```go
+yakit.AutoInitYakit()
+
+yakit.EnableTable("tablename", ["key", "key2"])
+
+data = make(map[string]var)
+data["key"] = 123
+data["key2"] = 2222
+yakit.Output(yakit.TableData("tablename", data))
+
+data = make(map[string]var)
+data["key"] = "测试KEY1"
+data["key2"] = "测试KEY2"
+yakit.Output(yakit.TableData("tablename", data))
+```
+
+同样的，我们通过 `AutoInitYakit()` 来初始化，成功之后我们启用 `yakit.EnableTable(tableName: string, fields: string[])` 在界面上创建一个新的表格。
+
+创建了表格则可以通过 `yakit.Output(yakit.TableData(tableName: string, data: map[string]var))` 来输出表格具体内容了。
+
+我们可以通过 `make(map[string]var)` 来创建一个表格需要输出的数据。更简单的，我们可以通过一些小重构，让这个 API 变得更好用！
+
+```go
+yakit.EnableTable("tablename", ["key", "key2"])
+
+outputData = def(key, key2){
+    data = make(map[string]var)
+    data["key"] = key
+    data["key2"] = key2
+    yakit.Output(yakit.TableData("tablename", data))
+}
+
+outputData("测试数据1", "jkoasdkoasdf")
+outputData("测试数据2", "jkoasdkoasasdfaadf")
+outputData("测试数据3", "jkrewgiogq423421oasdkoasdf")
+outputData("测试数据4", "jkoasdfasdgaasdkoasdf")
+outputData("测试数据5", "jkoasdkoasdasdfhadfhsdrff")
+outputData("测试数据1", "j132562345235dcf*&TY^koasdkoasdf")
+```
+
+#### Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-output-table.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
 
 ### 输出图
 
-TBD
+详情可参考 [Yakit API](/docs/api/yakit)
 
 ## MITM 插件的输出
 
