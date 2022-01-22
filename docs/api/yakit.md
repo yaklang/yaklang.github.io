@@ -40,6 +40,8 @@
  | [yakit.StatusCard](#yakitstatuscard) |  |
  | [yakit.TableData](#yakittabledata) | 为启动的 table 生成数据 |
  | [yakit.UpdateYakitStore](#yakitupdateyakitstore) | 使用 yakit 来直接更新 yakit-store 中的插件 |
+ | [yakit.UpdateYakitStoreFromGit](#yakitupdateyakitstorefromgit) | 从 Git 中更新 Yakit 商店内容 |
+ | [yakit.UpdateYakitStoreLocal](#yakitupdateyakitstorelocal) | 从本地更新 Yakit 商店 |
  | [yakit.Warn](#yakitwarn) | 让 Yakit UI 输出告警信息 |
 
 
@@ -1087,6 +1089,72 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `error` |   |
+
+
+ 
+### yakit.UpdateYakitStoreFromGit
+
+从 Git 中更新 Yakit 商店内容
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.UpdateYakitStoreFromGit(ctx: context.Context, url: string, proxy ...string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| url | `string` |   |
+| proxy | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### yakit.UpdateYakitStoreLocal
+
+从本地更新 Yakit 商店
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.UpdateYakitStoreLocal(v1: string) return (r0: []*yakit.YakScript, r1: []*yakit.MarkdownDoc, r2: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*yakit.YakScript` |   |
+| r1 | `[]*yakit.MarkdownDoc` |   |
+| r2 | `error` |   |
 
 
  

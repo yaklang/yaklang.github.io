@@ -12,6 +12,7 @@
  | [httpool.port](#httpoolport) | 【参数】设置请求发送到的真正 Port |
  | [httpool.proxy](#httpoolproxy) | 【参数】设置整个请求池的代理 |
  | [httpool.rawMode](#httpoolrawmode) | rawMode 模式意味着直接发送包，尽量少的去改动数据包内容 |
+ | [httpool.redirectTimes](#httpoolredirecttimes) | 限制重定向次数 |
  | [httpool.size](#httpoolsize) | 【参数】设置每个请求的 body 的最大大小 |
 
 
@@ -292,6 +293,37 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+
+
+ 
+### httpool.redirectTimes
+
+限制重定向次数
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func httpool.redirectTimes(count: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| count | `int` |   |
 
 
 

