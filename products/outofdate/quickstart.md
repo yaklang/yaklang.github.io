@@ -74,7 +74,7 @@ Yak内核引擎目前更新到v1.0.8 以后更新可以直接使用命令`yak up
 
 ## Yakit第二篇Yakit安装即使用
 
-可以进入官网下载页 [下载 Yakit](/products/download)
+可以进入官网下载页 [下载 Yakit](/products/download_and_install)
 
 Yakit全线托管在aliyun OSS上
 
