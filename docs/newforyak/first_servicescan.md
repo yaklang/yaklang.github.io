@@ -4,7 +4,15 @@ sidebar_position: 2
 
 # 你的第一个服务扫描程序
 
-当我们执行 `yak -c 'println("Hello World")'` 的时候，我们屏幕上出现 `Hello World`，我们 Hello World 程序就已经完成了。
+MacOS/Linux 下当我们执行 `yak -c 'println("Hello World")'` 的时候，我们屏幕上出现 `Hello World`，我们 Hello World 程序就已经完成了。
+
+Windows 同学可以直接打开文件编写脚本，然后通过 `yak [your-file].yak` 即可。
+
+:::tip 推荐使用 Yak Runner
+
+Yakit 的 Yak Runner 是一个很好的执行代码，调试脚本的地方。
+
+:::
 
 当然，我们第一课不会只介绍 Hello World。
 
