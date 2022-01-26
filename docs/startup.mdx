@@ -2,14 +2,73 @@
 sidebar_position: 2
 ---
 
-# 旅程伊始：Yak 安装与搭建环境
-
-
-
-## 安装最新的 Yak 发行版
+# 旅程伊始：Yak 语言环境安装与搭建环境
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+Yak 语言环境有两种使用方法：
+
+1. 【推荐】[使用 Yakit 内置的 Yak 引擎](/products/intro) 使用 Yak 语言环境
+1. 直接使用 Yak 引擎，使用命令行调用 `yak [your-script].yak` 执行代码
+
+## 【推荐】在 Yakit 中使用内置的 Yak 引擎
+
+Yakit 是 Yak 的衍生项目，Yak 语言核心提供了非常强大的安全能力，但是限于使用形式，用户必须学习 Yak 语言并同时具备对安全的一定理解。
+
+为了让 Yak 本身的安全能力更容易贴近大家的实际使用，我们在为 Yak 编写了 gRPC 服务器， 并使用这个服务器实现 / 构建了一个客户端：Yakit。
+
+[Yakit 是一个高度集成化的 Yak 语言安全能力的输出平台。](/products/intro)
+
+### 下载 Yakit 客户端
+
+import {YakitVersionTag} from "../src/components/VersionTag.tsx"
+
+<YakitVersionTag versionWithoutV="1.0.12-sp7"/>
+
+### 安装 Yakit 客户端
+
+:::danger 针对 MacOS 12 版本或高版本 Silicon-Chip 系列的 "Yakit 已损坏" 的处理办法
+
+在新版本的 MacOS 或 M1 芯片的系统下，安装会提示问题：
+
+![](/img/products/yakit/yakit-install-error-macos-m1-quarantine.png)
+
+当遇到这个问题的时候，在 Terminal 中执行
+
+`sudo xattr -r -d com.apple.quarantine /Applications/Yakit.app`
+
+即可
+
+:::
+
+### 使用 Yakit 下载核心 Yak 引擎
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-install-engine.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+### 使用 Yakit 中 `Runner` 来执行 Yak 代码
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-yak-runner-hello-world.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+:::success 推荐使用 Yak Runner 来编写代码
+
+Yak 代码的自动补全已在 Yak Runner 中内置，通过直接和引擎通信来调度代码和产生补全，能保证在多平台下统一的 Yak 编程体验。
+
+:::
+
+## 【专家】在系统中使用 Yak 引擎
+
+:::caution 以下步骤是把核心引擎安装在系统中，可通过系统命令执行 Yak 脚本
+:::
 
 <Tabs
   defaultValue="darwin"
@@ -135,9 +194,12 @@ powershell (new-object System.Net.WebClient).DownloadFile('https://yaklang.oss-c
   </TabItem>
 </Tabs>
 
-## 安装 VSCODE 并使用 Yak 插件
+### 安装 VSCODE 并使用 Yak 插件
 
-### 确保 Yak 安装完毕
+:::caution VSCode 插件维护程度和维护的频度不高
+:::
+
+#### 确保 Yak 安装完毕
 
 当我们 Yak 引擎安装完毕之后，通过在命令行执行 `yak version`
 
@@ -150,7 +212,7 @@ Yak Language Build Info:
 
 ```
 
-### 安装 VSCODE 并使用 Yaklang VSCODE 插件
+#### 安装 VSCODE 并使用 Yaklang VSCODE 插件
 
 虽然我们努力让编写 Yak 脚本是一件简单的事情，但是我们仍然需要一些辅助工具来帮助大家更快的编写脚本。
 
@@ -180,7 +242,7 @@ Yak Language Build Info:
 
 :::
 
-## 安装失败？常见安装问题 Q&A：
+### 安装失败？常见安装问题 Q&A：
 
 #### Yak 安装的原理是啥？
 
@@ -205,7 +267,7 @@ Yak Language Build Info:
 1. 不同平台的解决方式不一样，但是 `*unix` 操作系统下，一般来说 `brew/apt/yum install libpcap` 即可解决。
 1. windows 平台下，大家可以通过下载并安装 [`npcap for Common Windows Version`](https://nmap.org/npcap/dist/npcap-1.50.exe) 来解决。
 
-## 手动下载 / 安装
+### 手动下载 / 安装
 
 :::danger
 
