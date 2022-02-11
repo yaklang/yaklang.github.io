@@ -67,7 +67,7 @@ println("first:    ", firstIn)
 println("seconds:  ", secondIn)
 ```
 
-我们很容易才到，上面代码的执行结果为
+我们很容易猜到，上面代码的执行结果为
 
 ```
 first:     123
