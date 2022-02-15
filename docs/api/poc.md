@@ -11,6 +11,7 @@
  | [poc.Split](#pocsplit) | 把一个数据包的 Header 部分和 Body 分开，Header 是 string，body 部分是 bytes |
  | [poc.host](#pochost) | 强制指定连接 Host（一般用于 host） |
  | [poc.https](#pochttps) | forceHttps |
+ | [poc.noRedirect](#pocnoredirect) |  |
  | [poc.params](#pocparams) | 构造数据包时的参数，需要一个 map[string]any |
  | [poc.port](#pocport) | 强行设置远端连接的端口（默认可以自动设置） |
  | [poc.proxy](#pocproxy) | 设置代理 |
@@ -268,6 +269,37 @@ forceHttps
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.noRedirect
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.noRedirect(v1: bool) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 

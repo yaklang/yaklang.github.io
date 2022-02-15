@@ -3,9 +3,11 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [risk.CheckDNSLogByToken](#riskcheckdnslogbytoken) |  |
  | [risk.CheckRandomTriggerByToken](#riskcheckrandomtriggerbytoken) | 通过 Token 来查询随机触发器 |
  | [risk.ExtractTokenFromUrl](#riskextracttokenfromurl) | 从 URL 中提取 token |
  | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
+ | [risk.NewDNSLogDomain](#risknewdnslogdomain) |  |
  | [risk.NewLocalReverseHTTPSUrl](#risknewlocalreversehttpsurl) | 创建一个本地服务器的 HTTPS(TLS&#43;HTTP)URL（仅 yakit 内生效） |
  | [risk.NewLocalReverseHTTPUrl](#risknewlocalreversehttpurl) | 创建一个本地服务器的 HTTP URL（仅 yakit 内生效） |
  | [risk.NewLocalReverseRMIUrl](#risknewlocalreversermiurl) | 创建一个本地服务器的 RMI URL（仅 yakit 内生效） |
@@ -34,6 +36,38 @@
 
 ## 函数定义
 
+### risk.CheckDNSLogByToken
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.CheckDNSLogByToken(v1: string) return (r0: []*tpb.DNSLogEvent, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*tpb.DNSLogEvent` |   |
+| r1 | `error` |   |
+
+
+ 
 ### risk.CheckRandomTriggerByToken
 
 通过 Token 来查询随机触发器
@@ -125,6 +159,31 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `boolvendor/github.com/projectdiscovery/fileutil/file.go` |   |
+
+
+ 
+### risk.NewDNSLogDomain
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.NewDNSLogDomain() return (r0: string, r1: string, r2: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
  

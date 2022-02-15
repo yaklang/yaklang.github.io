@@ -4,12 +4,14 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [yakit.AutoInitYakit](#yakitautoinityakit) | 自动初始化与 Yakit 的链接 |
+ | [yakit.DeletePayloadByGroup](#yakitdeletepayloadbygroup) |  |
  | [yakit.EnableTable](#yakitenabletable) | 启动一个实时刷新的表格，一般用这个表格来收集结果 |
  | [yakit.EnableWebsiteTrees](#yakitenablewebsitetrees) | 启动在结果中启动网站树视图（案例：基础爬虫） |
  | [yakit.Error](#yakiterror) | 在 Yakit 的 UI 中输出输出 Error 级别的信息 |
  | [yakit.GenerateYakitMITMHooksParams](#yakitgenerateyakitmitmhooksparams) | 用于生成 MITM 插件的参数 |
  | [yakit.Info](#yakitinfo) | 在 Yakit UI 中输出 Info 级别的信息 |
  | [yakit.InitYakit](#yakitinityakit) | 手动初始化 Yakit 客户端，用于自定义 |
+ | [yakit.Markdown](#yakitmarkdown) |  |
  | [yakit.NewBarGraph](#yakitnewbargraph) | 创建一个柱形图 |
  | [yakit.NewClient](#yakitnewclient) | 创建一个与 yakit 通信的通道（webhook） |
  | [yakit.NewHTTPFlowRisk](#yakitnewhttpflowrisk) | 生成一个 HTTPFlow 的风险项 |
@@ -34,14 +36,17 @@
  | [yakit.QueryUrlsByKeyword](#yakitqueryurlsbykeyword) | 查询所有带一定关键字的 URL |
  | [yakit.SaveDomain](#yakitsavedomain) | 保存域名资产 |
  | [yakit.SaveHTTPFlow](#yakitsavehttpflow) | 保存 HTTP Flow 到数据库 |
+ | [yakit.SavePayload](#yakitsavepayload) |  |
+ | [yakit.SavePayloadByFile](#yakitsavepayloadbyfile) |  |
  | [yakit.SavePortFromResult](#yakitsaveportfromresult) | 把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。 |
  | [yakit.SetProgress](#yakitsetprogress) |  |
  | [yakit.SetProgressEx](#yakitsetprogressex) | 设置额外进度条的进度信息（默认进度条id为 `main`） |
  | [yakit.StatusCard](#yakitstatuscard) |  |
  | [yakit.TableData](#yakittabledata) | 为启动的 table 生成数据 |
+ | [yakit.Text](#yakittext) |  |
  | [yakit.UpdateYakitStore](#yakitupdateyakitstore) | 使用 yakit 来直接更新 yakit-store 中的插件 |
  | [yakit.UpdateYakitStoreFromGit](#yakitupdateyakitstorefromgit) | 从 Git 中更新 Yakit 商店内容 |
- | [yakit.UpdateYakitStoreLocal](#yakitupdateyakitstorelocal) | 从本地更新 Yakit 商店 |
+ | [yakit.UpdateYakitStoreLocal](#yakitupdateyakitstorelocal) |  |
  | [yakit.Warn](#yakitwarn) | 让 Yakit UI 输出告警信息 |
 
 
@@ -68,6 +73,37 @@
  
 
  
+
+ 
+### yakit.DeletePayloadByGroup
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.DeletePayloadByGroup(v1: string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
 
  
 ### yakit.EnableTable
@@ -225,6 +261,31 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | yakitClient | `*yaklib.YakitClient` |   |
+
+
+
+
+ 
+
+ 
+### yakit.Markdown
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.Markdown(v1: any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -928,6 +989,70 @@
 
 
  
+### yakit.SavePayload
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.SavePayload(v1: string, v2: []string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `[]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### yakit.SavePayloadByFile
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.SavePayloadByFile(v1: string, v2: string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### yakit.SavePortFromResult
 
 把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。
@@ -1069,6 +1194,31 @@
 
 
  
+### yakit.Text
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.Text(v1: any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+ 
+
+ 
 ### yakit.UpdateYakitStore
 
 使用 yakit 来直接更新 yakit-store 中的插件
@@ -1127,7 +1277,7 @@
  
 ### yakit.UpdateYakitStoreLocal
 
-从本地更新 Yakit 商店
+
 
 #### 详细描述
 
@@ -1135,7 +1285,7 @@
 
 #### 定义：
 
-`func yakit.UpdateYakitStoreLocal(v1: string) return (r0: []*yakit.YakScript, r1: []*yakit.MarkdownDoc, r2: error)`
+`func yakit.UpdateYakitStoreLocal(v1: string) return (r0: error)`
 
 
 #### 参数
@@ -1152,9 +1302,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*yakit.YakScript` |   |
-| r1 | `[]*yakit.MarkdownDoc` |   |
-| r2 | `error` |   |
+| r0 | `error` |   |
 
 
  

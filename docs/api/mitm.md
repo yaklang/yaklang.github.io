@@ -9,6 +9,7 @@
  | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
  | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
  | [mitm.isTransparent](#mitmistransparent) | 设置启动一个透明 mitm 劫持接口！ |
+ | [mitm.maxContentLength](#mitmmaxcontentlength) |  |
  | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
  | [mitm.useDefaultCA](#mitmusedefaultca) | 设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key |
 
@@ -197,6 +198,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.maxContentLength
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func mitm.maxContentLength(v1: int) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
 
 
 

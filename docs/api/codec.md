@@ -28,6 +28,13 @@
  | [codec.EscapeHtml](#codecescapehtml) | 同 `codec.DecodeHtml` |
  | [codec.EscapePathUrl](#codecescapepathurl) | URL 编码：（作为 url.Path 进行编码） |
  | [codec.EscapeQueryUrl](#codecescapequeryurl) | URL 编码：作为 url.Query 进行编码 |
+ | [codec.FixUTF8](#codecfixutf8) | 修复 Bytes 到 UTF8，会把不合理的 UTF8 字符转义 |
+ | [codec.GB18030ToUTF8](#codecgb18030toutf8) |  |
+ | [codec.GBKSafe](#codecgbksafe) | 尝试修复 GBK |
+ | [codec.GBKToUTF8](#codecgbktoutf8) |  |
+ | [codec.HTMLChardet](#codechtmlchardet) | 检测 HTML 的字符集 |
+ | [codec.HTMLChardetBest](#codechtmlchardetbest) | 检测 HTML 的字符集，只展示最有可能的结果 |
+ | [codec.HZGB2312ToUTF8](#codechzgb2312toutf8) |  |
  | [codec.MMH3Hash128](#codecmmh3hash128) | 计算一个对象的 mmh3 hash128 |
  | [codec.MMH3Hash128x64](#codecmmh3hash128x64) | 计算一个对象的 mmh3 hash128x64 |
  | [codec.MMH3Hash32](#codecmmh3hash32) | 计算 mmh3 的 hash32 |
@@ -52,6 +59,11 @@
  | [codec.Sm4GCMEncrypt](#codecsm4gcmencrypt) | SM4 GCM 加密 |
  | [codec.Sm4OFBDecrypt](#codecsm4ofbdecrypt) | SM4 OFB 解密 |
  | [codec.Sm4OFBEncrypt](#codecsm4ofbencrypt) | SM4 OBF 加密 |
+ | [codec.StrconvQuote](#codecstrconvquote) |  |
+ | [codec.StrconvUnquote](#codecstrconvunquote) |  |
+ | [codec.UTF8ToGB18030](#codecutf8togb18030) |  |
+ | [codec.UTF8ToGBK](#codecutf8togbk) |  |
+ | [codec.UTF8ToHZGB2312](#codecutf8tohzgb2312) |  |
  | [codec.UnescapePathUrl](#codecunescapepathurl) | 作为 url.Path 进行 URL 解码 |
  | [codec.UnescapeQueryUrl](#codecunescapequeryurl) | 作为 url.Query 进行 URL 解码 |
 
@@ -863,6 +875,229 @@ URL 编码：作为 url.Query 进行编码
 
 
  
+### codec.FixUTF8
+
+修复 Bytes 到 UTF8，会把不合理的 UTF8 字符转义
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.FixUTF8(v1: bytes) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### codec.GB18030ToUTF8
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.GB18030ToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.GBKSafe
+
+尝试修复 GBK
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.GBKSafe(v1: bytes) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.GBKToUTF8
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.GBKToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.HTMLChardet
+
+检测 HTML 的字符集
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HTMLChardet(v1: any) return (r0: []chardet.Result, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]chardet.Result` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.HTMLChardetBest
+
+检测 HTML 的字符集，只展示最有可能的结果
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HTMLChardetBest(v1: any) return (r0: *chardet.Result, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*chardet.Result` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.HZGB2312ToUTF8
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HZGB2312ToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### codec.MMH3Hash128
 
 计算一个对象的 mmh3 hash128
@@ -1624,6 +1859,165 @@ SM4 OBF 加密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.StrconvQuote
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.StrconvQuote(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### codec.StrconvUnquote
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.StrconvUnquote(v1: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.UTF8ToGB18030
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.UTF8ToGB18030(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.UTF8ToGBK
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.UTF8ToGBK(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.UTF8ToHZGB2312
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.UTF8ToHZGB2312(v1: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
 
 
 

@@ -3,9 +3,11 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [dns.QuertAxfr](#dnsquertaxfr) |  |
  | [dns.QueryIP](#dnsqueryip) | 新增查询域名 IP 的接口 |
  | [dns.QueryIPAll](#dnsqueryipall) | 查询一个域名的所有 IP |
  | [dns.QueryNS](#dnsqueryns) | 查询 NameServers |
+ | [dns.QueryTXT](#dnsquerytxt) |  |
  | [dns.dnsServers](#dnsdnsservers) |  |
  | [dns.timeout](#dnstimeout) | 设置 timeout |
 
@@ -18,6 +20,38 @@
 
 ## 函数定义
 
+### dns.QuertAxfr
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func dns.QuertAxfr(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yaklib._dnsConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
 ### dns.QueryIP
 
 新增查询域名 IP 的接口
@@ -93,6 +127,38 @@
 #### 定义：
 
 `func dns.QueryNS(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yaklib._dnsConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
+### dns.QueryTXT
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func dns.QueryTXT(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
 
 
 #### 参数
