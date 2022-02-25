@@ -1,0 +1,49 @@
+---
+sidebar_position: 2
+---
+
+# 发送一个 HTTP 请求
+
+## 使用 http 基础库
+
+```go
+rsp, err = http.Get("http://baidu.com")
+die(err)
+
+# 获取 StatusCode
+printf("StatusCode: %v\n", rsp.StatusCode)
+
+# 获取一个 Header
+printf("Content-Length: %v\n", rsp.Header["Content-Length"])
+
+# 生成完整数据包
+rspRaw, err = http.dump(rsp)
+die(err)
+
+println(string(rspRaw))
+
+```
+
+执行上述代码运行结果为
+
+```text
+StatusCode: 200
+Content-Length: [81]
+HTTP/1.1 200 OK
+Connection: close
+Content-Length: 81
+Accept-Ranges: bytes
+Cache-Control: max-age=86400
+Content-Type: text/html
+Date: Fri, 25 Feb 2022 09:01:08 GMT
+Etag: "51-47cf7e6ee8400"
+Expires: Sat, 26 Feb 2022 09:01:08 GMT
+Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
+Server: Apache
+
+<html>
+<meta http-equiv="refresh" content="0;url=http://www.baidu.com/">
+</html>
+
+```
+

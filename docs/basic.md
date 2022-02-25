@@ -718,8 +718,8 @@ for _, element = range a {
 #### `for range` 来遍历一个 map / dict
 
 ```go
-b = {"abc": "123", "bcd": "bcd", "cde", 512}
-for key, value = range {
+b = {"abc": "123", "bcd": "bcd", "cde": 512}
+for key, value = range b {
     println(str.f("b[%v]: %v", key, value))
 }
 
