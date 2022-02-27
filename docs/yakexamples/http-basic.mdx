@@ -22,6 +22,7 @@ die(err)
 
 println(string(rspRaw))
 
+http.show(rsp.Request)
 ```
 
 执行上述代码运行结果为
@@ -35,9 +36,9 @@ Content-Length: 81
 Accept-Ranges: bytes
 Cache-Control: max-age=86400
 Content-Type: text/html
-Date: Fri, 25 Feb 2022 09:01:08 GMT
+Date: Sun, 27 Feb 2022 04:26:32 GMT
 Etag: "51-47cf7e6ee8400"
-Expires: Sat, 26 Feb 2022 09:01:08 GMT
+Expires: Mon, 28 Feb 2022 04:26:32 GMT
 Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
 Server: Apache
 
@@ -45,5 +46,45 @@ Server: Apache
 <meta http-equiv="refresh" content="0;url=http://www.baidu.com/">
 </html>
 
+GET / HTTP/1.1
+Host: baidu.com
+```
+
+
+
+### dump 流量
+
+```
+rsp, err = http.Get("http://127.0.0.1:3000/",
+					http.proxy("http://127.0.0.1:8083"),    	//http.proxy 设置代理
+					http.ua(http.uarand()),						//http.ua 设置user-agent、http.uarand获取一个随机的user-agent
+					http.header("x-forward-for","127.0.0.1"),	//http.header设置一个header
+					http.cookie("phpsession=abcdqwertyy"))		//http.cookie设置cookie
+die(err)
+http.showhead(rsp) //http.showhead 打印出http的头部信息
+http.showhead(rsp.Request)
+```
+
+执行上述代码运行结果为
+
+```
+HTTP/1.1 200 OK
+Connection: close
+Transfer-Encoding: chunked
+Accept-Ranges: bytes
+Access-Control-Allow-Origin: *
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Sun, 27 Feb 2022 04:48:52 GMT
+Etag: W/"63e-qSYRygpIfzO8dOVWWZ44nQMmFqA"
+Vary: Accept-Encoding
+X-Powered-By: Express
+
+
+GET / HTTP/1.1
+Host: 127.0.0.1:3000
+Cookie: phpsession=abcdqwertyy
+User-Agent: Mozilla/5.0 (X11; Linux i686; rv:49.0) Gecko/20100101 Firefox/49.0
+X-Forward-For: 127.0.0.1
 ```
 
