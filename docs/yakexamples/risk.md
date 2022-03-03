@@ -2,7 +2,9 @@
 sidebar_position: 3
 ---
 
-#新建一个dnslog
+# 反连server example
+
+## 新建一个dnslog
 ```azure
 server,token,err = risk.NewDNSLogDomain()
 
@@ -15,7 +17,7 @@ println("dns server check token:", token)
 dns server addr:  kdxpxbvuzf.dnstunnel.run
 dns server check token: kdxpxbvuzf
 ```
-#查询dnslog接收
+## 查询dnslog接收
 ```azure
 //这里我使用上面的dnstoken  kdxpxbvuzf
 dump(risk.CheckDNSLogByToken("kdxpxbvuzf"))
@@ -38,4 +40,60 @@ dump(risk.CheckDNSLogByToken("kdxpxbvuzf"))
  (interface {}) <nil>
 }
 所以可以通过判断CheckDNSLogByToken返回来的DNSLogEvent数量来进行判断dns是否触发
+```
+
+## 如何编写反连服务器脚本
+```azure
+1、vps使用 yak bridge --secret [your-pass] 来进行启动 bridge
+```
+![img.png](../../static/img/yakexample/risk_start_bridge.png)
+
+```azure
+//通过环境变量来进行配置yak脚本链接bridge
+YAK_BRIDGE_ADDR                = "YAK_BRIDGE_ADDR"
+YAK_BRIDGE_SECRET              = "YAK_BRIDGE_SECRET"
+
+//yak bridge --secret od686 
+os.Setenv(YAK_BRIDGE_SECRET/*type: string*/,"od686" /*type: string*/)
+os.Setenv(YAK_BRIDGE_ADDR, "123.57.24.217:64333"/*type: string*/)
+
+通过risk获取到token 和ip端口
+log.setLevel("info")
+token, hostPort, err := risk.NewRandomPortTrigger(risk.type("reverse-http"), risk.typeVerbose("RMI反连"), risk.title("test"))
+if err != nil {
+    log.info(err.Error())
+}
+    if token == "" {
+    log.info("未配置 Yak Bridge 作为公网映射，无法获取随机端口")
+}
+
+log.info("host: %s", hostPort/*type ...any*/)
+log.info("token: %s",token/*type ...any*/)
+```
+运行结果如下
+```azure
+[INFO] 2022-03-03 16:32:19 +0800 [yaki-code-3541846741] host: 123.57.24.217:56579
+[INFO] 2022-03-03 16:32:19 +0800 [yaki-code-3541846741] token: qOeZvvgr
+```
+
+```azure
+//通过risk.CheckRandomTriggerByToken 函数进行查询是否有反连
+dump(risk.CheckRandomTriggerByToken("YcEhgllg"))
+```
+运行结果
+```azure
+([]interface {}) (len=2 cap=2) {
+ (*tpb.RandomPortTriggerEvent)(<nil>),
+ (*status.Error)(0xc0005ba0e8)(rpc error: code = Unknown desc = empty token port mapped)
+}
+```
+手动访问http://123.57.24.217:56579/
+![img.png](../../static/img/yakexample/risk_access_http.png)
+```azure
+//再次执行dump(risk.CheckRandomTriggerByToken("YcEhgllg"))
+结果如下
+([]interface {}) (len=2 cap=2) {
+ (*tpb.RandomPortTriggerEvent)(0xc0001b0380)(RemoteAddr:"111.198.29.182:57262" RemoteIP:"111.198.29.182" RemotePort:57262 LocalPort:56579 LocalPortCachedHistoryConnectionCount:5 TriggerTimestamp:1646297435 Timestamp:1646297464),
+ (interface {}) <nil>
+}
 ```
