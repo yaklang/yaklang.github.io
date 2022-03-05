@@ -1,0 +1,171 @@
+---
+sidebar_position: 4
+---
+
+# 编程技巧：函数式补充语法
+
+`>= 13.0.1-sp13`
+
+> 函数式编程是种编程方式，它将电脑运算视为函数的计算。 函数编程语言最重要的基础是λ演算（lambda calculus），而且λ演算的函数可以接受函数当作输入（参数）和输出（返回值）。 和指令式编程相比，函数式编程强调函数的计算比指令的执行重要。 和过程化编程相比，函数式编程里函数的计算可随时调用。
+
+yak 支持一定程度的函数式编程语法。例如 `Map/Filter/Reducer` 等操作。
+
+但是这些操作的支持并不是集成在全局函数中，而是由一个特殊的包来引入的。
+
+## `x.Map` 基础函数式编程：映射
+
+如果我们需要对一个集合进行变换，在 Python 中，我们可以使用 `for` 的 inline 语句，但是在 yak 中，我们通过 `x` 模块应用函数式中常用的 "Map" 功能。
+
+例如我们要对一个整数列表全体 +1 可执行如下代码
+
+```go
+dump(x.Map([1,2,3,4,5], func(i){return i+1}))
+```
+
+执行结果为
+
+```go
+([]interface {}) (len=5 cap=8) {
+ (int) 2,
+ (int) 3,
+ (int) 4,
+ (int) 5,
+ (int) 6
+}
+```
+
+## 使用 `x.Map` 代替普通的 for 循环批处理
+
+我们阅读一段代码，他的意思是，把一个数组集合中的内容经过 MD5 计算，获得一个新的数组
+
+传统的写法为
+
+```go
+origin = [
+    "127.0.0.1:123",
+    "127.0.0.1:1231",
+    "127.0.0.1:1233",
+    "127.0.0.1:1234",
+    "127.0.0.1:1235",
+]
+
+after = []
+for _, i = range origin {
+    after = append(after, codec.Md5(i))
+}
+dump(after)
+```
+
+如果使用函数式，就会非常简单
+
+```go
+origin = [
+    "127.0.0.1:123",
+    "127.0.0.1:1231",
+    "127.0.0.1:1233",
+    "127.0.0.1:1234",
+    "127.0.0.1:1235",
+]
+
+after2 = x.Map(origin, func(i){return codec.Md5(i)})  // 函数式调用
+dump(after2)
+```
+
+当然，这两段代码的执行结果完全一致：
+
+```go
+([]interface {}) (len=5 cap=8) {
+ (string) (len=32) "9c6cd8a653b32a49024e548ee9d333c2",
+ (string) (len=32) "57e14469d056f261d1e29e25187ad3c1",
+ (string) (len=32) "8f72b71f93052f9b8659d3c4b5aecec3",
+ (string) (len=32) "93454abf54cf365c703f8e3c695562bf",
+ (string) (len=32) "9373bd92a6686d67baed2873188e7e68"
+}
+```
+
+## 使用 `x.Filter` 代替 for 循环筛选
+
+还是上面的代码，我们稍微对其进行一点变种，我们过滤出以 `:1233` 或者 `:1234` 结尾的字符串
+
+```go
+origin = [
+    "127.0.0.1:123",
+    "127.0.0.1:1231",
+    "127.0.0.1:1233",
+    "127.0.0.1:1234",
+    "127.0.0.1:1235",
+]
+
+after = []
+for _, line = range origin {
+    if str.MatchAnyOfGlob(line, "*:1233", "*:1234") {
+        after = append(after, line)
+    }
+}
+dump(after)
+```
+
+在这种情况下，`x.Filter` 可以起到很好的作用。
+
+```go
+after = x.Filter(origin, func(i){return str.MatchAnyOfGlob(i, "*:1233", "*:1234")})
+dump(after)
+```
+
+:::note
+
+当然 x.Map 与 x.Filter 是完全可以混用的！
+
+我们可以先过滤，再联合进行额外处理例如
+
+```go
+x.Map(x.Filter([1,2,3,4,5], func(i){return i > 3}), func(i){return i + 10})
+```
+
+计算结果应该为 `[14, 15]`
+:::
+
+## 使用 `x.Find` 代替 for 循环寻找关键元素
+
+我们修改上面的代码，让它变成 "遇到符合要求的值就返回" 以找到我们想要的值
+
+```go
+origin = [
+    "127.0.0.1:123",
+    "127.0.0.1:1231",
+    "127.0.0.1:1233",
+    "127.0.0.1:1234",
+    "127.0.0.1:1235",
+]
+
+findResult = func() {
+    for _, line = range origin {
+        if str.MatchAnyOfGlob(line, "*:1233", "*:1234") {
+            return line
+        }
+    }
+    return ""
+}
+dump(findResult())
+```
+
+同样的，我们在 `x.Find` 中可以很轻易实现这个操作
+
+```go
+dump(x.Find(origin, func(i){return str.MatchAnyOfGlob(i, "*:1233", "*:1234")}))
+```
+
+上面两段代码的执行结果都为
+
+```go
+(string) (len=14) "127.0.0.1:1233"
+```
+
+## 经典案例：`x.Reducer` 求列表和
+
+```go
+result = x.Reduce([1,2,3,4,5,6,7,8], func(a,b){return a+b}, 0)
+println(result)  // 36
+```
+
+

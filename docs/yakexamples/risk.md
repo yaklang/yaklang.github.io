@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
+sidebar_position: 30
 ---
 
-# 反连server example
+# 漏洞检测：DNSLog
 
 ## 新建一个dnslog
 ```go

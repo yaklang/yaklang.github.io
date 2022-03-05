@@ -1,8 +1,14 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# 发送一个 HTTP 请求
+# 从 URL 发起 HTTP 请求
+
+:::success 基础说明
+
+yak 原生的 http 是 Golang Native http 的高度封装，两者的内部对象并无大的差别。
+
+:::
 
 ## 使用 http 基础库
 
@@ -50,6 +56,13 @@ GET / HTTP/1.1
 Host: baidu.com
 ```
 
+:::info 补充说明
+
+Yak 中的 http 模块本质上是对 Golang 原生 http 模块的高度封装。
+
+返回的对象 `*http.Response` 和 Golang 的对象并无差别。用户随时都可以使用 `desc(rsp)` 查看详细对象成员
+
+:::
 
 
 ###  参数设置
@@ -87,4 +100,3 @@ Cookie: phpsession=abcdqwertyy
 User-Agent: Mozilla/5.0 (X11; Linux i686; rv:49.0) Gecko/20100101 Firefox/49.0
 X-Forward-For: 127.0.0.1
 ```
-

@@ -1,0 +1,39 @@
+---
+sidebar_position: 6
+---
+
+# 处理扫描目标：C段（自动生成）
+
+这是非常强大的一个功能，在别的语言中，快速编写这样一个函数并不是一件容易的事情。
+
+C段探测是一个非常有用的操作：我们可以轻易的通过这种方式支持扫描目标主机的 "附近" 是否有相关目标。
+
+```go
+hostStr = str.ParseStringToCClassHosts("127.0.0.1,127.0.0.2,127.0.0.4,47.53.11.1/23,baidu.com")
+println(hostStr)
+
+/*
+OUTPUT:
+    127.0.0.0/24,47.53.10.0/24,47.53.11.0/24,220.181.38.0/24
+*/
+```
+
+:::note
+
+1. 解析可能的 DNS
+2. 超出 C 段大小的网段也将会被拆成 C 段
+3. 普通 IP 如果在同一个 C 段中，将会自动合并
+4. 输出的内容可以自动作为 `str.ParseStringToHosts` 的输入
+
+:::
+
+## 自动扫描 C 段的实现
+
+在我们有上面的基础之后，我们可以轻易实现一个 "扫描 C 段的功能"。
+
+```go
+hostStr = str.ParseStringToCClassHosts("127.0.0.1,127.0.0.2,127.0.0.4,47.53.11.1/23,baidu.com")
+for _, i = range str.ParseStringToHosts(hostStr) {
+    // doSth
+}
+```

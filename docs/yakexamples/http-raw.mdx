@@ -1,0 +1,145 @@
+---
+sidebar_position: 2
+---
+
+# 发送 HTTP 原始数据包
+
+在 Yak 中除了可以使用 Golang 原生封装的 `http` 模块之外，提供了一种专门为安全优化的 "直接发送原始数据包" 的办法。
+
+```go
+rsp, req, err := poc.HTTP(`
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`)
+die(err)
+
+println(string(rsp))
+```
+
+:::success 自动修复数据包但是不会自动问题
+
+一般来说，您并不需要重新计算 `Content-Length`，yak 会替你完成这一步。
+
+在重新计算 Content-Length 的时候，并不会伤害其他的部分编码。
+
+也就是说，用户需要对自己的编码行为负责。发出去的数据包一般就是原始数据包（除了 Content-Length 部分）。
+
+:::
+
+上述脚本输出内容为：
+
+```html
+HTTP/1.1 200 OK
+Age: 341744
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=UTF-8
+Date: Sat, 05 Mar 2022 14:01:06 GMT
+Etag: "3147526947+ident"
+Expires: Sat, 12 Mar 2022 14:01:06 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (dcb/7F83)
+Vary: Accept-Encoding
+X-Cache: HIT
+Connection: close
+Content-Length: 1256
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+    body {
+   ...
+    ...}
+    </style>
+</head>
+
+<body>
+<div>
+    <h1>Example Domain</h1>
+    <p>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.</p>
+    <p><a href="https://www.iana.org/domains/example">More information...</a></p>
+</div>
+</body>
+</html>
+
+```
+
+
+:::info 解释
+
+`poc.HTTP` 是最基础的函数功能，核心定义为：
+
+`func poc.HTTP(req, ...params) returns (rsp []byte, req []byte, err error)`
+
+一般处理 err 使用 `die(err)` 即可实现。
+
+:::
+
+## `poc` 模块其他常见操作
+
+### 为 `poc.HTTP` 增加高级参数
+
+Yak 大多数功能包中 "小写字母" 的导出一般意味着他是一个 "参数"。
+
+我们需要制定一些高级参数，来控制 poc 中 "细微" 的操作步骤。例如，我们需要增加 "代理" 功能，同时强制开启 HTTPS 可以执行如下代码
+
+```go
+rsp, req, err := poc.HTTP(`
+GET / HTTP/1.1
+Host: www.google.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`, poc.proxy("http://127.0.0.1:7890"), poc.https(true))
+die(err)
+```
+
+### `poc.Split`: 分割数据包 Header 和 Body
+
+一般来说，我们在 `poc.HTTP` 中获得的数据包是 `[]byte` 类型的，实际上在进行数据处理过程中，我们有时并不希望整体进行处理，需要单独进行处理 header 与 body。
+
+```go
+rsp, req, err := poc.HTTP(`
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`)
+die(err)
+
+// 分割响应数据包的 Header 和 Body 部分
+header, body = poc.Split(rsp)
+println(header)                             // 打印数据包 Header
+printf("Body MD5: %v\n", codec.Md5(body))   // 计算数据包响应的 md5
+```
+
+### `poc.HTTP` 动态修改数据包
+
+一般来说，我们的数据包通常不会是固定的，为了更自由的发送一些 "内容"。我们需要 "标注" 那些地方需要被动态替换，然后使用 `poc.params` 高级参数来动态替换。
+
+```go
+// 构建一个想要动态渲染的参数值
+targetHost = "www.baidu.com"
+port = 80
+target = str.HostPort(targetHost, port)
+
+// 构建请求模版，通过 {{params(*)}} 动态渲染参数
+rsp, req, err := poc.HTTP(`
+GET /admin/ HTTP/1.1
+Host: {{params(target)}}
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`, poc.params({
+    "target": target, // 设置参数
+}))
+die(err)
+
+printf("http.Response' s MD5: %v", codec.Md5(rsp))
+```
