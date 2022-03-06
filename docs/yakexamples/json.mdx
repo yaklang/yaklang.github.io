@@ -4,3 +4,86 @@ sidebar_position: 10
 
 # JSON 处理：loads / dumps
 
+yak 提供了一个类似 Python 的 `json.loads/dumps` 的处理方式
+
+## `json.loads` 把 JSON 字符串转换为 yak map
+
+```go
+jsonRaw1 = `{"abc":123, "cde":"efg", "foo": "bar-123123", "azz": {"key1": "result2", "key2": 123, "e": ["abc", 111]}, "d": [1,2,3,"123"]}`
+jsonRaw2 = `[1,23,4,"abc",true,false, {"abc": 123123, "dddd":"123"}]`
+jsonRaw3 = `"123123123"`
+jsonRaw4 = `123123`
+jsonRaw5 = `false`
+jsonRaw6 = `null`
+dump(json.loads(jsonRaw1))
+dump(json.loads(jsonRaw2))
+dump(json.loads(jsonRaw3))
+dump(json.loads(jsonRaw4))
+dump(json.loads(jsonRaw5))
+dump(json.loads(jsonRaw6))
+
+/*
+OUTPUT:
+
+(map[string]interface {}) (len=5) {
+ (string) (len=3) "abc": (float64) 123,
+ (string) (len=3) "cde": (string) (len=3) "efg",
+ (string) (len=3) "foo": (string) (len=10) "bar-123123",
+ (string) (len=3) "azz": (map[string]interface {}) (len=3) {
+  (string) (len=4) "key1": (string) (len=7) "result2",
+  (string) (len=4) "key2": (float64) 123,
+  (string) (len=1) "e": ([]interface {}) (len=2 cap=2) {
+   (string) (len=3) "abc",
+   (float64) 111
+  }
+ },
+ (string) (len=1) "d": ([]interface {}) (len=4 cap=4) {
+  (float64) 1,
+  (float64) 2,
+  (float64) 3,
+  (string) (len=3) "123"
+ }
+}
+([]interface {}) (len=7 cap=8) {
+ (float64) 1,
+ (float64) 23,
+ (float64) 4,
+ (string) (len=3) "abc",
+ (bool) true,
+ (bool) false,
+ (map[string]interface {}) (len=2) {
+  (string) (len=3) "abc": (float64) 123123,
+  (string) (len=4) "dddd": (string) (len=3) "123"
+ }
+}
+(string) (len=9) "123123123"
+(float64) 123123
+(bool) false
+(interface {}) <nil>
+*/
+```
+
+## `json.dumps` 把 Yak 对象转为 JSON 字符串
+
+```go
+a = ["123", true, false, "123123", 123, {"abc": 123},nil]
+println(json.dumps(a))
+// OUTPUT: ["123",true,false,"123123",123,{"abc":123},null]
+
+a = {"abcccc": 123, "12": ["aaa", "123", {"a": 12, "arr": [123, true]}]}
+println(json.dumps(a))
+// OUTPUT: {"12":["aaa","123",{"a":12,"arr":[123,true]}],"abcccc":123}
+
+a = false
+println(json.dumps(a))
+// OUTPUT: false
+
+a = "asdfasdfasdf\x00\x0a你好"
+println(json.dumps(a))
+// OUTPUT: "asdfasdfasdf\u0000\n你好"
+
+a = nil
+println(json.dumps(a))
+// OUTPUT: null
+```
+
