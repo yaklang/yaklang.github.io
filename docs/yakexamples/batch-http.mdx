@@ -1,0 +1,269 @@
+---
+sidebar_position: 12
+---
+
+# 批量发包: 模糊测试批量发包
+
+在 yak 中，批量发包的方式主要有两种
+
+1. 第一种是通过 `fuzz` 模块的 `fuzz.HTTPRequest` 函数构建模糊测试请求。
+2. 第二种是通过 `httpool` 模块的 `httpool.Pool` 函数进行请求批量渲染与发包。
+
+这两种方式适用的场景有一些细微差别。
+
+1. `httpool.Pool` 本质上核心发包函数和 `poc.HTTP` 是一致的，我们可以认为是 `poc.HTTP` 的批量进阶版。
+2. `fuzz.HTTPRequest` 虽然最后是调用 `httpool.Pool` 实现发包的，但是会对数据包做一些预处理，例如：
+    1. 链式 API 调用可编程地处理数据包细节
+    2. 可以自动替换参数的内容。生成可以测试的参数模版请求。
+
+:::note 对比总结
+
+1. `fuzz.HTTPRequest` 适合细节操作数据包，尤其是有逻辑的动态调整参数进行模糊测试或者漏洞检测。
+2. `httpool.Pool` 适合大批量的发包，进行模版渲染后，修复数据包 `Content-Length` 再发送
+
+与此同时，他们的返回值都是 `chan *palm/common/mutate.(_httpResult)` 对象。
+
+其定义为：
+
+```go
+type palm/common/mutate.(_httpResult) struct {
+  Fields(可用字段):
+      Url: string
+      Request: *http.Request
+      Error: error
+      RequestRaw: []uint8
+      ResponseRaw: []uint8
+      Response: *http.Response
+      DurationMs: int64
+      Timestamp: int64
+      Payloads: []string
+  StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+}
+```
+
+:::
+
+## 0x01 使用 `httpool` 进行模糊测试模版发包
+
+我们尝试对一个网站的 `/target1 /target2 /target3 ... /target10` 进行批量发包，如何实现呢？
+
+```go
+res, err = httpool.Pool(`GET /target{{int(1-10)}} HTTP/1.1
+Host: www.baidu.com
+`)
+die(err)
+
+loglevel("info")
+for result = range res {
+    header, body = poc.Split(result.ResponseRaw)
+    log.info("URL: %v", result.Url)
+}
+
+/*
+OUTPUT:
+    ...
+    ...
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target5
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target10
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target8
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target1
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target2
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target6
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target7
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target9
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target3
+    [INFO] 2022-03-08 14:28:21 +0800 [yaki-code-383898351] URL: http://www.baidu.com/target4
+*/
+```
+
+### 带参数渲染的批量发包模版
+
+```go
+res, err = httpool.Pool(`GET /target{{params(suffix)}} HTTP/1.1
+Host: www.baidu.com
+
+{{params(body)}}
+`, httpool.fuzzParams({"suffix": ["1", "2", "3", "4"], "body": 123}))
+die(err)
+
+loglevel("info")
+for result = range res {
+    header, body = poc.Split(result.ResponseRaw)
+    log.info("URL: %v", result.Url)
+    println(string(poc.Split(result.RequestRaw)[1]))
+}
+
+/*
+OUTPUT:
+    ...
+    [INFO] 2022-03-08 14:32:03 +0800 [default:log.go:178] start to send to http://www.baidu.com/target1(:0) (packet mode)
+    [INFO] 2022-03-08 14:32:03 +0800 [default:log.go:178] start to send to http://www.baidu.com/target2(:0) (packet mode)
+    [INFO] 2022-03-08 14:32:03 +0800 [default:log.go:178] start to send to http://www.baidu.com/target3(:0) (packet mode)
+    [INFO] 2022-03-08 14:32:03 +0800 [default:log.go:178] start to send to http://www.baidu.com/target4(:0) (packet mode)
+    [INFO] 2022-03-08 14:32:03 +0800 [yaki-code-283417700] URL: http://www.baidu.com/target1
+    123
+
+    [INFO] 2022-03-08 14:32:03 +0800 [yaki-code-283417700] URL: http://www.baidu.com/target2
+    123
+
+    [INFO] 2022-03-08 14:32:03 +0800 [yaki-code-283417700] URL: http://www.baidu.com/target4
+    123
+
+    [INFO] 2022-03-08 14:32:03 +0800 [yaki-code-283417700] URL: http://www.baidu.com/target3
+    123
+
+*/
+```
+
+### 使用 HTTPS 协议
+
+我们对上面的内容进行一点点修改，增加一些其他参数
+
+```go
+res, err = httpool.Pool(`GET /target{{params(suffix)}} HTTP/1.1
+Host: www.baidu.com
+
+{{params(body)}}
+`, httpool.fuzzParams({"suffix": ["1", "2", "3", "4"], "body": 123}), httpool.https(true))
+die(err)
+```
+
+### 发送到指定主机端口
+
+这里我们以 `Host` 碰撞作为一个典型例子。
+
+对于 Yak 来说，这并不是一个困难的事情，通过 `httpool` 的参数可以指定 host 实现针对 IP 的特定连接，再去查询绑定关系，从而碰撞出可以访问的内部资产。
+
+```go
+domains = [
+    "m1.test.example.com",
+    "oa.example.com",
+    "oa2.example.com",
+    "oa3.example.com",
+    "ns1.test.example.com",
+    "ns2.test.example.com",
+    "test1.stage.example.com",
+    "test2.stage.example.com",
+    "test3.stage.example.com",
+    "crm.test.example.com",
+    "test1.dev.example.com",
+]
+
+res, err = httpool.Pool(`GET /admin/ HTTP/1.1
+Host: {{params(domains)}}
+Uesr-Agent: test111
+
+`, httpool.fuzzParams({"domains":domains}), httpool.https(true), httpool.host("cybertunnel.run", true/*type: isHttps*/))
+die(err)
+
+loglevel("info")
+for result = range res {
+    header, body = poc.Split(result.ResponseRaw)
+    log.info("URL: %v", result.Url)
+    // 处理结果
+    if result.Response != nil {
+        if result.Response.StatusCode >= 200 && result.Response.StatusCode < 400 {
+            // 处理结果
+        }
+    }
+}
+```
+
+
+:::caution Golang 标准库并不适合完成这项工作
+
+对于 Golang 来说，会通过 `(*http.Request).Host` 等来决定真正访问的 IP。
+
+我们需要指定 IP 并不能使用标准库。
+
+:::
+
+## 0x02 使用 `fuzz.HTTPRequest` 来完成批量发包
+
+`fuzz.HTTPRequest` 更像是一个 "外科手术" 的库，虽然不能像 `httpool` 一样大开大合，但是更擅长操作数据包的细节与参数。
+
+关于这个库，文档中已经有很多描述了。
+
+可以参考如下链接
+
+1. [WEB 模糊测试入门：概念与基础使用](/docs/newforyak/fuzz_tutorial)
+1. [WEB 模糊测试进阶：参数细节处理](/docs/newforyak/fuzz_for_more)
+1. [WEB 模糊测试手册：从 fuzz 标签到链式请求](/docs/buildinlibs/lib_fuzz)
+
+我们以一个简单例子快速预览一下这个库的核心功能
+
+```go
+freq, err = fuzz.HTTPRequest(`GET / HTTP/1.1
+Host: www.example.com
+`)
+desc(freq)
+
+freq = freq.FuzzPath("/specific-path1").FuzzMethod("POST").FuzzPostRaw(`{"a": 123}`).FuzzPostJsonParams("KEY", "123")
+freq.Show() // Display
+
+/*
+OUTPUT:
+
+    POST /specific-path1 HTTP/1.1
+    Host: www.example.com
+    Content-Length: 21
+
+    {"KEY":"123","a":123}
+*/
+
+res, err = freq.Exec()
+die(err)
+for result = range res {
+    // handle `palm/common/mutate.(_httpResult)`
+}
+
+result, err = freq.ExecFirst()
+die(err)
+// handle `palm/common/mutate.(_httpResult)`
+```
+
+:::note freq 定义
+
+我们在使用 `*mutate.FuzzHTTPRequest` 的的时候，如果不知道他的定义是啥，有哪些可用方法，可以通过 `desc(freq)` 直接查看
+
+```go
+type palm/common/mutate.(FuzzHTTPRequest) struct {
+  Fields(可用字段):
+      Opts: []mutate.BuildFuzzHTTPRequestOption
+  StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+      func Exec(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(chan *mutate._httpResult, error)
+      func ExecFirst(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(*mutate._httpResult, error)
+      func FuzzCookie(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzCookieRaw(v1: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzFormEncoded(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzGetParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzGetParamsRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+      func FuzzHTTPHeader(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzMethod(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+      func FuzzPath(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+      func FuzzPostJsonParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzPostParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzPostRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+      func FuzzUploadFile(v1: interface {}, v2: interface {}, v3: []uint8) return(mutate.FuzzHTTPRequestIf)
+      func FuzzUploadFileName(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func FuzzUploadKVPair(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+      func GetCommonParams() return([]*mutate.FuzzHTTPRequestParam)
+      func GetCookieParams() return([]*mutate.FuzzHTTPRequestParam)
+      func GetGetQueryParams() return([]*mutate.FuzzHTTPRequestParam)
+      func GetOriginHTTPRequest() return(*http.Request, error)
+      func GetPostJsonParams() return([]*mutate.FuzzHTTPRequestParam)
+      func GetPostParams() return([]*mutate.FuzzHTTPRequestParam)
+      func IsBodyFormEncoded() return(bool)
+      func IsBodyJsonEncoded() return(bool)
+      func IsBodyUrlEncoded() return(bool)
+      func IsEmptyBody() return(bool)
+      func ParamsHash() return(string, error)
+      func Repeat(v1: int) return(mutate.FuzzHTTPRequestIf)
+      func Results() return([]*http.Request, error)
+      func Show()
+}
+```
+
+:::

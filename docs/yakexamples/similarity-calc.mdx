@@ -1,0 +1,272 @@
+---
+sidebar_position: 11
+---
+
+# 文本相似度算法：SQLMAP, SimHash 与 SSDeep
+
+文本相似度是很多时候是判断一个 "页面是否相同/相似" 非常有效的办法。
+
+在 Yak 中，这为我们编写通用的漏洞检测提供极大便利。
+
+我们提供了三种文本相似度检测算法，并且统一了接口。
+
+1. 一般来说，SSDeep 适合处理大量海量本文，SimHash 和 SQLMap 最大子串算法对文本长度大小没有要求
+2. SQLMap 的相似度算法可以认为是相似度线性增长的，SimHash 和 SSDeep 是 "Hash 距离" 转化为百分比，并不一定能保证是 "线性" 的。
+
+:::info
+
+一般来说 SimHash 和 SQLMap 算法的易用性相对要更高
+
+SSDeep 是专门针对大文本准备的算法。
+
+:::
+
+## 0x01 SQLMap 相似度计算
+
+这个算法来源于 SQLMap 的页面相似度算法，由 @TimWhite 师傅提供 Golang 的实现版本。
+
+相似度算法原理是，两段文本的相同文本内容长度/总长度
+
+```go
+packet1 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+`
+packet2 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.911111
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+
+`
+packet1, packet2 = []byte(packet1), []byte(packet2)
+stability, err = str.CalcTextMaxSubStrStability(packet1, packet2)
+die(err)
+printf("stability: %v\n", stability)
+
+/*
+OUTPUT:
+
+stability: 0.995774647887324
+*/
+```
+
+## 0x02 SimHash: 快速文本去重与相似度计算（距离映射）
+
+> In computer science, SimHash is a technique for quickly estimating how similar two sets are. The algorithm is used by the Google Crawler to find near duplicate pages. It was created by Moses Charikar. In 2021 Google announced its intent to also use the algorithm in their newly created FLoC (Federated Learning of Cohorts) system.
+
+在 Yak 中，我们在 `str.*SimHash*` 相关接口可以计算相关内容，下面大家可以看案例：同上，我们只需要修改函数调用即可
+
+```go
+packet1 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+`
+packet2 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.911111
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+
+`
+packet1, packet2 = []byte(packet1), []byte(packet2)
+stability, err = str.CalcSimHashStability(packet1, packet2)
+die(err)
+printf("stability: %v\n", stability)
+
+
+/*
+OUTPUT:
+
+stability: 0.9921875
+*/
+```
+
+## 0x03 SSDeep: 模糊 hash 算法
+
+:::danger 注意，SSDEEP 对文本大小有要求
+
+注意，SSDeep 对文本长度有要求，如果要生成有意义的结果，最好文本长度不小于 `4096`
+
+:::
+
+> ssdeep is a program for computing context triggered piecewise hashes (CTPH). Also called fuzzy hashes, CTPH can match inputs that have homologies. Such inputs have sequences of identical bytes in the same order, although bytes in between these sequences may be different in both content and length.
+
+```go
+packet1 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+Cookie: _ga=GA1.2.33717236ogged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+`
+packet2 := `GET /_sockets/u/13946521/ws?session=eyJ2IjoiVjMiLCJ1IjoxMzk0NjUyMSwicyI6Njk3MjI4MDcxLCJjIjoxMjQ2NzQ1MzA0LCJ0IjoxNjQ2Mzg3NTU0fQ%3D%3D--6f75e12befb81db097c8c8082e77eaad6b68bc422115c03e3a02a6a467a305f3&shared=true&p=1743245261_1645685603.14085 HTTP/1.1
+Host: alive.github.com
+Accept-Encoding: deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cache-Control: no-cache
+Connection: close
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+Content-Length: 0
+Cookie: _ga=GA1.2.33717236.1582554889; logged_in=yes; dotcom_user=VillanCh; color_mode=%7B%22color_mode%22%3A%22light%22%2C%22light_theme%22%3A%7B%22name%22%3A%22light%22%2C%22color_mode%22%3A%22light%22%7D%2C%22dark_theme%22%3A%7B%22name%22%3A%22dark%22%2C%22color_mode%22%3A%22dark%22%7D%7D; tz=Asia%2FShanghai; _octo=GH1.1.973492617.1646016558
+Origin: https://github.com
+Pragma: no-cache
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Sec-Websocket-Key: mn3CV26zb24N5uhErmDaKw==
+Sec-Websocket-Version: 13
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+
+`
+packet1, packet2 = []byte(packet1), []byte(packet2)
+hash1 = str.CalcSSDeep(packet1)
+hash2 = str.CalcSSDeep(packet2)
+stability = str.CalcSSDeepStability(packet1, packet2)
+printf("hash1: %v\n", hash1)
+printf("hash2: %v\n", hash2)
+printf("stability: %v\n", stability)
+```
