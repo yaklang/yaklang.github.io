@@ -31,6 +31,7 @@
  | [str.Index](#strindex) | 判断子字符串在字符串中的位置 |
  | [str.IndexAny](#strindexany) | 判断子字符串中任意一个字符在主串中的位置 |
  | [str.IndexByte](#strindexbyte) | 判断一个 byte 的位置 |
+ | [str.IntersectString](#strintersectstring) | 取两个集合的交集 |
  | [str.IsBase64Value](#strisbase64value) | 判断一个值是不是 base64 |
  | [str.IsCaptchaField](#striscaptchafield) | 判断一个参数是不是验证码 |
  | [str.IsHtmlResponse](#strishtmlresponse) | 判断一个 Response 是不是 HTML |
@@ -106,6 +107,7 @@
  | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) | 判断字符串是否包含任意一个后续 Slice 中的元素？ |
  | [str.StringSliceContains](#strstringslicecontains) | 判断一个 Slice 中是否包含一个子字符串？ |
  | [str.StringSliceContainsAll](#strstringslicecontainsall) | 判断一个 Slice 中是否包含后续所有子串？ |
+ | [str.Subtract](#strsubtract) | 列表相减 |
  | [str.Title](#strtitle) | 把字符串每个单词首字母大写，变成 Title |
  | [str.ToJsonIndentStr](#strtojsonindentstr) | 把一个对象解析成 Json，并保证 indent 合理 |
  | [str.ToLower](#strtolower) | 把字符串变成小写 |
@@ -1023,6 +1025,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `int` |   |
+
+
+ 
+### str.IntersectString
+
+取两个集合的交集
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IntersectString(v1: []string, v2: []string) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `[]string` |   |
+| v2 | `[]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
 
 
  
@@ -3387,6 +3421,38 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `bool` |   |
+
+
+ 
+### str.Subtract
+
+列表相减
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.Subtract(v1: []string, v2: []string) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `[]string` |   |
+| v2 | `[]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
 
 
  

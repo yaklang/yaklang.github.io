@@ -9,6 +9,10 @@
  | [codec.AESEncrypt](#codecaesencrypt) | aes cbc 加密 |
  | [codec.AESGCMDecrypt](#codecaesgcmdecrypt) | aes gcm 解密 |
  | [codec.AESGCMEncrypt](#codecaesgcmencrypt) | aes gcm 加密 |
+ | [codec.DESCBCDecrypt](#codecdescbcdecrypt) |  |
+ | [codec.DESCBCEncrypt](#codecdescbcencrypt) |  |
+ | [codec.DESDecrypt](#codecdesdecrypt) | DES 解密（默认CBC） |
+ | [codec.DESEncrypt](#codecdesencrypt) | DES 加密，默认 CBC 模式 |
  | [codec.DecodeASCII](#codecdecodeascii) | 等价于 `strconv.Unquote`，把一个被 `&#34;` 包裹的字符串解析成字符串内容，同时解析 `&#34;\x0a&#34;` 解析成对应的字符串。 |
  | [codec.DecodeBase64](#codecdecodebase64) | 把 base64 解析成 bytes |
  | [codec.DecodeChunked](#codecdecodechunked) | http chunked 解码 |
@@ -66,6 +70,8 @@
  | [codec.UTF8ToHZGB2312](#codecutf8tohzgb2312) |  |
  | [codec.UnescapePathUrl](#codecunescapepathurl) | 作为 url.Path 进行 URL 解码 |
  | [codec.UnescapeQueryUrl](#codecunescapequeryurl) | 作为 url.Query 进行 URL 解码 |
+ | [codec.ZeroPadding](#codeczeropadding) | 零填充 |
+ | [codec.ZeroUnPadding](#codeczerounpadding) | 移除 0 填充的末尾 |
 
 
 
@@ -265,6 +271,142 @@ aes gcm 加密
 |:-----------|:---------- |:-----------|
 | key | `bytes` |   |
 | data | `any` |   |
+| iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESCBCDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESCBCDecrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESCBCEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESCBCEncrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESDecrypt
+
+DES 解密（默认CBC）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESDecrypt(key: bytes, encryptedData: bytes, iv: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `bytes` |   |
+| encryptedData | `bytes` |   |
+| iv | `bytes` |  初始化块，可以为空(nil) |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESEncrypt
+
+DES 加密，默认 CBC 模式
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESEncrypt(key: bytes, originData: bytes, iv: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `bytes` |   |
+| originData | `bytes` |   |
 | iv | `bytes` |   |
 
 
@@ -2093,6 +2235,69 @@ SM4 OBF 加密
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  解码结果 |
 | r1 | `error` |   |
+
+
+ 
+### codec.ZeroPadding
+
+零填充
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.ZeroPadding(originData: bytes, blockSize: int) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| originData | `bytes` |   |
+| blockSize | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### codec.ZeroUnPadding
+
+移除 0 填充的末尾
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.ZeroUnPadding(v1: bytes) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  

@@ -8,7 +8,9 @@
  | [yakit.EnableTable](#yakitenabletable) | 启动一个实时刷新的表格，一般用这个表格来收集结果 |
  | [yakit.EnableWebsiteTrees](#yakitenablewebsitetrees) | 启动在结果中启动网站树视图（案例：基础爬虫） |
  | [yakit.Error](#yakiterror) | 在 Yakit 的 UI 中输出输出 Error 级别的信息 |
+ | [yakit.File](#yakitfile) |  |
  | [yakit.GenerateYakitMITMHooksParams](#yakitgenerateyakitmitmhooksparams) | 用于生成 MITM 插件的参数 |
+ | [yakit.GetHomeDir](#yakitgethomedir) |  |
  | [yakit.Info](#yakitinfo) | 在 Yakit UI 中输出 Info 级别的信息 |
  | [yakit.InitYakit](#yakitinityakit) | 手动初始化 Yakit 客户端，用于自定义 |
  | [yakit.Markdown](#yakitmarkdown) |  |
@@ -183,6 +185,32 @@
  
 
  
+### yakit.File
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.File(v1: string, v2 ...any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...any` |   |
+
+
+
+
+ 
+
+ 
 ### yakit.GenerateYakitMITMHooksParams
 
 用于生成 MITM 插件的参数
@@ -214,6 +242,29 @@
 |:-----------|:---------- |:-----------|
 | paramLists | `[]any` |   |
 | err | `error` |   |
+
+
+ 
+### yakit.GetHomeDir
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.GetHomeDir() return (r0: string)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  

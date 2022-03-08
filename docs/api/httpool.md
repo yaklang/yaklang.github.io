@@ -6,6 +6,7 @@
  | [httpool.Pool](#httpoolpool) | 批量执行 http 请求 |
  | [httpool.context](#httpoolcontext) | 为 pool 增加上下文 |
  | [httpool.fuzz](#httpoolfuzz) |  |
+ | [httpool.fuzzParams](#httpoolfuzzparams) |  |
  | [httpool.host](#httpoolhost) |  |
  | [httpool.https](#httpoolhttps) | 为请求设置 HTTPS |
  | [httpool.perRequestTimeout](#httpoolperrequesttimeout) | 【参数】为每个请求设置超时时间 |
@@ -106,6 +107,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+
+
+ 
+### httpool.fuzzParams
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func httpool.fuzzParams(v1: any) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 

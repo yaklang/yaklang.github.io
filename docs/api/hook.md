@@ -3,10 +3,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [hook.CallYakitPluginFunc](#hookcallyakitpluginfunc) |  |
- | [hook.LoadYakitPlugin](#hookloadyakitplugin) |  |
+ | [hook.CallYakitPluginFunc](#hookcallyakitpluginfunc) | 导出插件特定函数 |
+ | [hook.LoadYakitPlugin](#hookloadyakitplugin) | 为 Manager 加载特定类型的 Yakit 插件 |
+ | [hook.LoadYakitPluginByName](#hookloadyakitpluginbyname) | 通过插件名加载特定插件 |
  | [hook.LoadYakitPluginContext](#hookloadyakitplugincontext) |  |
  | [hook.NewManager](#hooknewmanager) |  |
+ | [hook.RemoveYakitPluginByName](#hookremoveyakitpluginbyname) | 移除已经加载的插件（通过插件名） |
 
 
 
@@ -19,7 +21,7 @@
 
 ### hook.CallYakitPluginFunc
 
-
+导出插件特定函数
 
 #### 详细描述
 
@@ -27,15 +29,15 @@
 
 #### 定义：
 
-`func hook.CallYakitPluginFunc(v1: string, v2: string) return (r0: any, r1: error)`
+`func hook.CallYakitPluginFunc(pluginName: string, funcName: string) return (caller: any, err: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
+| pluginName | `string` |   |
+| funcName | `string` |   |
 
 
 
@@ -45,14 +47,14 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-| r1 | `error` |   |
+| caller | `any` |   |
+| err | `error` |   |
 
 
  
 ### hook.LoadYakitPlugin
 
-
+为 Manager 加载特定类型的 Yakit 插件
 
 #### 详细描述
 
@@ -60,16 +62,49 @@
 
 #### 定义：
 
-`func hook.LoadYakitPlugin(v1: *yak.YakToCallerManager, v2: string, v3 ...string) return (r0: error)`
+`func hook.LoadYakitPlugin(manager: *yak.YakToCallerManager, pluginType: string, funcNames ...string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*yak.YakToCallerManager` |   |
-| v2 | `string` |   |
-| v3 | `...string` |   |
+| manager | `*yak.YakToCallerManager` |   |
+| pluginType | `string` |   |
+| funcNames | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### hook.LoadYakitPluginByName
+
+通过插件名加载特定插件
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func hook.LoadYakitPluginByName(manager: *yak.YakToCallerManager, pluginName: string, exportFuncs ...string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| manager | `*yak.YakToCallerManager` |   |
+| pluginName | `string` |   |
+| exportFuncs | `...string` |   |
 
 
 
@@ -138,6 +173,32 @@
 |:-----------|:---------- |:-----------|
 | r0 | `*yak.YakToCallerManager` |   |
 
+
+ 
+### hook.RemoveYakitPluginByName
+
+移除已经加载的插件（通过插件名）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func hook.RemoveYakitPluginByName(manager: *yak.YakToCallerManager, pluginNames ...string)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| manager | `*yak.YakToCallerManager` |   |
+| pluginNames | `...string` |   |
+
+
+
+
+ 
 
  
 

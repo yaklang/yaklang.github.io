@@ -14,11 +14,21 @@
  | [re.ExtractPath](#reextractpath) | 从内容中提取路径 |
  | [re.ExtractTTY](#reextracttty) | 从内容中提取 TTY 内容 |
  | [re.ExtractURL](#reextracturl) | 从内容中提取 URL |
+ | [re.Find](#refind) | 匹配并提取数据中符合正则的数据 |
+ | [re.FindAll](#refindall) | 提取所有正则匹配到的数据 |
+ | [re.FindAllIndex](#refindallindex) | 提取匹配到的数据的索引（起止位置） |
+ | [re.FindIndex](#refindindex) | 提取匹配到的数据索引位置（起止位置） |
+ | [re.FindSubmatch](#refindsubmatch) | 正则匹配提取带分组的数据（只匹配一个） |
+ | [re.FindSubmatchAll](#refindsubmatchall) | 正则匹配提取带分组的数据（匹配全部） |
+ | [re.FindSubmatchAllIndex](#refindsubmatchallindex) | 匹配并提取分组带索引（起止位置） |
+ | [re.FindSubmatchIndex](#refindsubmatchindex) | 只匹配并提取第一组的分组带索引（起止位置） |
  | [re.Grok](#regrok) | 从内容中按照 Grok 规则提取数据 |
  | [re.Match](#rematch) |  |
  | [re.MustCompile](#remustcompile) | 编译正则，如果编译失败则 Panic |
  | [re.MustCompilePOSIX](#remustcompileposix) | 编译正则 POSIX 模式，编译失败则 Panic |
  | [re.QuoteMeta](#requotemeta) | 把正则保留字符进行转义 |
+ | [re.ReplaceAll](#rereplaceall) | 整体批量替换 |
+ | [re.ReplaceAllWithFunc](#rereplaceallwithfunc) | 正则批量替换数据（使用函数处理匹配结果） |
 
 
 
@@ -372,6 +382,262 @@
 
 
  
+### re.Find
+
+匹配并提取数据中符合正则的数据
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.Find(data: any, regexp: string) return (result: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| result | `string` |   |
+
+
+ 
+### re.FindAll
+
+提取所有正则匹配到的数据
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindAll(data: any, regexp: string) return (results: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| results | `[]string` |   |
+
+
+ 
+### re.FindAllIndex
+
+提取匹配到的数据的索引（起止位置）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindAllIndex(data: any, regexp: string) return (indexes: [][start: int, end: int])`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| indexes | `[][start: int, end: int]` |   |
+
+
+ 
+### re.FindIndex
+
+提取匹配到的数据索引位置（起止位置）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindIndex(data: any, regexp: string) return (index: [start:int, end:int])`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| index | `[start:int, end:int]` |   |
+
+
+ 
+### re.FindSubmatch
+
+正则匹配提取带分组的数据（只匹配一个）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindSubmatch(data: any, regexp: string) return (results: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| results | `[]string` |   |
+
+
+ 
+### re.FindSubmatchAll
+
+正则匹配提取带分组的数据（匹配全部）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindSubmatchAll(data: any, regexp: string) return (r0: [][]string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[][]string` |   |
+
+
+ 
+### re.FindSubmatchAllIndex
+
+匹配并提取分组带索引（起止位置）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindSubmatchAllIndex(data: any, regexp: string) return (indexes: [][matchStart, matchEnd, group1Start, group1End, ...])`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| indexes | `[][matchStart, matchEnd, group1Start, group1End, ...]` |   |
+
+
+ 
+### re.FindSubmatchIndex
+
+只匹配并提取第一组的分组带索引（起止位置）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.FindSubmatchIndex(data: any, regexp: string) return (r0: []int)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]int` |   |
+
+
+ 
 ### re.Grok
 
 从内容中按照 Grok 规则提取数据
@@ -516,6 +782,72 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### re.ReplaceAll
+
+整体批量替换
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.ReplaceAll(data: any, regexp: string, newStr: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+| newStr | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### re.ReplaceAllWithFunc
+
+正则批量替换数据（使用函数处理匹配结果）
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func re.ReplaceAllWithFunc(data: any, regexp: string, replaceFunc: func (v1: string) return(string) ) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `any` |   |
+| regexp | `string` |   |
+| replaceFunc | `func (v1: string) return(string) ` |   |
 
 
 

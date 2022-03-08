@@ -4,6 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [java.FromJson](#javafromjson) | 把 JSON 转变为 Java 对象 |
+ | [java.MarshalJavaObjects](#javamarshaljavaobjects) | 序列化 Java 对象 |
  | [java.NewJavaArray](#javanewjavaarray) | 创建一个 JAVA TC_ARRAY |
  | [java.NewJavaBlockDataBytes](#javanewjavablockdatabytes) | 创建一个 Java TC_BLOCKDATA (bytes) |
  | [java.NewJavaClass](#javanewjavaclass) | 创建一个 JavaClass TC_CLASS |
@@ -72,6 +73,37 @@
 |:-----------|:---------- |:-----------|
 | tcObjects | `[]yserx.JavaSerializable` |   |
 | r1 | `error` |   |
+
+
+ 
+### java.MarshalJavaObjects
+
+序列化 Java 对象
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func java.MarshalJavaObjects(v1 ...yserx.JavaSerializable) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yserx.JavaSerializable` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  
