@@ -1,0 +1,47 @@
+---
+sidebar_position: 4
+---
+
+# 类比 Python 中的 dir 函数
+
+在编程过程中，我们经常遇到不知道一个对象中有哪些成员可使用。
+
+在 Python 中，大家经常食用 `dir` 来查看可操作的字段。
+
+在 Yak 中，也有类似的内置函数。
+
+我们学习 / 测试一个 "未知的" 对象
+
+```go
+manager = hook.NewManager()
+desc(manager)
+```
+
+返回的结果为
+
+```go
+type palm/common/yak.(YakToCallerManager) struct {
+  Fields(可用字段):
+  StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+      func Add(v1: context.Context, v2: string, v3: []*ypb.ExecParamItem, v4: string, v5: func (v1: *yaklang.YakEngine) return(error) , v6 ...string) return(error)
+      func AddForYakit(v1: context.Context, v2: string, v3: []*ypb.ExecParamItem, v4: string, v5: interface { Send(*ypb.ExecResult) error }, v6 ...string) return(error)
+      func CallByName(v1: string, v2 ...interface {})
+      func CallPluginKeyByName(v1: string, v2: string, v3 ...interface {})
+      func GetCurrentHooks() return([]*yak.CallerHooks)
+      func GetCurrentHooksGRPCModel() return([]*ypb.YakScriptHooks)
+      func LoadPlugin(v1: string, v2 ...string) return(error)
+      func LoadPluginContext(v1: context.Context, v2: string, v3 ...string) return(error)
+      func Remove(v1: *ypb.RemoveHookParams)
+      func Set(v1: context.Context, v2: string, v3: func (v1: *yaklang.YakEngine) return(error) , v4 ...string) return(error)
+      func SetForYakit(v1: context.Context, v2: string, v3: interface { Send(*ypb.ExecResult) error }, v4 ...string) return(error)
+}
+```
+
+大家可以看到，我们通过 `desc` 函数，可以将一个对象的所有可调用的公开接口展示出来。
+
+:::note hook 是一个高阶模块
+
+`hook` 是一个高阶模块，主要用于加载 Yakit 插件与跨脚本调用 Yakit 插件，是 Yakit 插件系统的核心支持模块。
+
+:::

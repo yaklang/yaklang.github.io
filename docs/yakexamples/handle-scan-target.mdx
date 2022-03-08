@@ -1,0 +1,148 @@
+---
+sidebar_position: 5
+---
+
+# 处理扫描目标与网段（批量/分组）
+
+编写扫描脚本是 yak 最适合的场景，yak 提供了很多中方便处理网段/域名/端口/甚至混合内容的方案。
+
+## 解析混合网段+域名+IP 的用户输入
+
+```go
+hosts = str.ParseStringToHosts("192.168.1.1/24,baidu.com,172.168.12.1/26")
+for _, host = range hosts {
+    println(host)
+}
+
+/*
+可以解析网段，遇到域名将会原样输入，一般来说都是以逗号分割
+Output:
+    192.168.1.0
+    192.168.1.1
+    ...
+    ...
+    ...
+    192.168.1.254
+    192.168.1.255
+    baidu.com
+    172.168.12.0
+    ...
+    ...
+    172.168.12.62
+    172.168.12.63
+*/
+```
+
+:::info
+
+1. 按逗号分隔
+2. 遇到解析不了的将会原样输出
+3. CIDR 标准支持
+
+:::
+
+## 解析复杂端口输入
+
+yak 提供了兼容性相当高的端口解析能力
+
+```go
+ports = str.ParseStringToPorts("a,22,80,8000-8002,443,8888,abc,af")
+for _, port = range ports {
+    println(port)
+}
+
+/*
+OUTPUT:
+    22
+    80
+    443
+    8000
+    8001
+    8002
+    8888
+*/
+```
+
+:::info
+
+1. 一般来说都是以逗号分割
+2. 遇到无法解析成端口段/端口的将会自动退出
+
+:::
+
+## 把 Host 和 Port 组合起来 `str.HostPort`
+
+最常见的一个需求是说，我们需要把端口和主机通过 `:` 组合起来。我们可以使用 `str.HostPort`
+
+```go
+println(str.HostPort("baidu.com", 80))
+println(str.HostPort("baidu.com", "80"))
+println(str.HostPort("127.0.0.1", 80))
+println(str.HostPort("127.0.0.1", "80"))
+
+/*
+OUTPUT:
+    baidu.com:80
+    baidu.com:80
+    127.0.0.1:80
+    127.0.0.1:80
+*/
+```
+
+## `主机:端口` 组合
+
+一般来说，作为扫描场景，用户经常会输入一堆扫描目标，这些扫描目标同时又对应多个端口。
+
+如何组合？
+
+笛卡尔积是一个有效的方案，谁都能想到的最基础实现方案是：
+
+```go
+hosts = str.ParseStringToHosts("192.168.1.1/24")
+ports = str.ParseStringToPorts("a,22,80,8000-8002,443,8888,abc,af")
+for _, host = range hosts {
+    for _, port = range ports {
+        println(str.HostPort(host, port))
+    }
+}
+```
+
+## `x.Chunk` 为扫描进行分组
+
+分组扫描是一个很有用的操作，例如 `[1,2,3,4,5,6,7,8,10]` 我们可以把他 4 个元素为一组，分成三组，如何操作呢？
+
+```go
+dump(x.Chunk([1,2,3,4,5,6,7,8,9,10], 4))
+
+/*
+OUTPUT
+    ([][]int) (len=3 cap=4) {
+     ([]int) (len=4 cap=4) {
+      (int) 1,
+      (int) 2,
+      (int) 3,
+      (int) 4
+     },
+     ([]int) (len=4 cap=4) {
+      (int) 5,
+      (int) 6,
+      (int) 7,
+      (int) 8
+     },
+     ([]int) (len=2 cap=2) {
+      (int) 9,
+      (int) 10
+     }
+    }
+*/
+```
+
+:::info 分组在某些时候非常有用，我们可以参考如下案例
+
+```go
+dump(x.Chunk(str.ParseStringToHosts("192.168.1.1/24"), 4))
+```
+
+当我们对大任务进行拆分或网段进行拆分的时候，这个就非常有用了！
+
+:::

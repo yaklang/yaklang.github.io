@@ -1,0 +1,283 @@
+---
+sidebar_position: 8
+---
+
+# 正则表达式：提取与替换数据
+
+:::info 原生正则库
+
+yak 完全兼容原生 Golang 正则库，原始的 Golang 正则的用法在 Yak 中均可使用。
+
+与此同时，Yak 实现了基于原正则库的一些封装，让基本操作变得更容易让人使用。
+
+:::
+
+## 快速使用正则提取数据
+
+如下几个接口在 `>= 1.0.13-sp14` 引擎中使用：
+
+```go
+// 匹配符合正则要求的结果（只返回一个结果）
+func re.Find(data, regexp/*string*/) return string
+
+// 匹配符合正则要求的结果（返回多个结果）
+func re.FindAll(data, regexp/*string*/) return []string
+
+// 匹配符合正则要求的匹配结果的位置，返回结果为数组，数组两个元素，第一个元素为起始位置，另一个为结束位置
+func re.FindIndex(data, regexp/*string*/) return []int
+
+// 匹配符合正则的所有结果，包含分组
+func re.FindSubmatch(data, regexp/*string*/) return string
+
+// 匹配符合正则的所有结果（起止位置），包含分组
+func re.FindSubmatchIndex(data, regexp/*string*/) return string
+
+// 匹配所有符合正则的所有结果，包含分组
+func re.FindAllSubmatch(data, regexp/*string*/) return string
+
+// 匹配所有符合正则的所有结果（起止位置），包含分组
+func re.FindAllSubmatchIndex(data, regexp/*string*/) return
+```
+
+:::note 共性
+
+这几个函数本质上是对 `Golang regexp` 标准库的封装，在使用的过程中要注意，不支持 `re2` 的回溯语法等高级语法。
+
+这些函数第一个参数为原始数据，`[]byte` 与 `string` 都可以被接受，第二个参数为正则字符串。
+
+如果正则编译错误，不出意外，用户将会看到 warning 日志。
+
+:::
+
+可以查看如下案例使用该内容
+
+## 匹配并提取单个结果
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+
+// 匹配提取单个结果
+dump(re.Find(data, `CoreText\s[^:]+`))
+dump(re.FindIndex(data, `CoreText\s[^:]+`))
+
+/*
+OUTPUT:
+    (string) (len=13) "CoreText note"
+    ([]int) (len=2 cap=2) {
+        (int) 44,
+        (int) 57
+    }
+*/
+```
+
+## 匹配并提取所有结果
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+
+// 匹配提取所有结果
+dump(re.FindAll(data, `CoreText\s[^:]+`))
+dump(re.FindAllIndex(data, `CoreText\s[^:]+`))
+/*
+OUTPUT:
+    ([]string) (len=2 cap=10) {
+        (string) (len=13) "CoreText note",
+        (string) (len=13) "CoreText aaaa"
+    }
+    ([][]int) (len=2 cap=10) {
+        ([]int) (len=2 cap=2) {
+            (int) 44,
+            (int) 57
+        },
+        ([]int) (len=2 cap=2) {
+            (int) 164,
+            (int) 177
+        }
+    }
+*/
+```
+
+## 匹配并提取包含分组的结果
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+
+// 匹配提取分组结果(单个)
+dump(re.FindSubmatch(data, `CoreText\s([^:]+)`))
+dump(re.FindSubmatchIndex(data, `CoreText\s([^:]+)`))
+/*
+OUTPUT:
+([]string) (len=2 cap=2) {
+    (string) (len=13) "CoreText note",
+    (string) (len=4) "note"
+}
+([]int) (len=4 cap=4) {
+    (int) 44,
+    (int) 57,
+    (int) 53,
+    (int) 57
+}
+*/
+```
+
+## 匹配并提取全部分组结果
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+
+// 匹配提取分组结果（多个）
+dump(re.FindSubmatchAll(data, `CoreText\s([^:]+)`))
+dump(re.FindSubmatchAllIndex(data, `CoreText\s([^:]+)`))
+
+/*
+OUTPUT:
+
+([][]string) (len=2 cap=10) {
+ ([]string) (len=2 cap=2) {
+  (string) (len=13) "CoreText note",
+  (string) (len=4) "note"
+ },
+ ([]string) (len=2 cap=2) {
+  (string) (len=13) "CoreText aaaa",
+  (string) (len=4) "aaaa"
+ }
+}
+([][]int) (len=2 cap=10) {
+ ([]int) (len=4 cap=4) {
+  (int) 44,
+  (int) 57,
+  (int) 53,
+  (int) 57
+ },
+ ([]int) (len=4 cap=4) {
+  (int) 164,
+  (int) 177,
+  (int) 173,
+  (int) 177
+ }
+}
+*/
+```
+
+## 根据正则替换数据
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+pattern := `CoreText\s([^:]+)`
+
+// 替换正则匹配结果（全部）
+dump(re.ReplaceAll(data, pattern, "__abcabcabc__"))
+
+// ReplaceAllWithFunc 的替换函数可以接受一个字符串作为输入，输出一个替换后的字符串
+dump(re.ReplaceAllWithFunc(data, pattern, func(i){return codec.Md5(i)}))
+
+/*
+OUTPUT:
+
+(string) (len=193) ".796 Electron Helper (Renderer)[7878:58760] __abcabcabc__: Client requested name \".NewYork-Regular\", it will get Times-Roman rather than the intended font. All syst__abcabcabc__:em UI font acce"
+(string) (len=231) ".796 Electron Helper (Renderer)[7878:58760] 85f5a5815371ce7378545da6415a4a00: Client requested name \".NewYork-Regular\", it will get Times-Roman rather than the intended font. All systc4a9957ab07eca49d3691ce4bbf92a57:em UI font acce"
+
+*/
+```
+
+## 原汁原味的 Golang `regexp`
+
+```go
+data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
+
+// 匹配提取分组结果（多个）
+r, err = re.Compile(`CoreText\s([^:]+)`)
+die(err)
+
+dump(r.FindAllStringSubmatch(data, -1))
+dump(r.FindAllStringSubmatchIndex(data, -1))
+
+/*
+OUTPUT:
+
+([]string) (len=2 cap=2) {
+ (string) (len=13) "CoreText note",
+ (string) (len=4) "note"
+}
+([]int) (len=4 cap=4) {
+ (int) 44,
+ (int) 57,
+ (int) 53,
+ (int) 57
+}
+([][]string) (len=2 cap=10) {
+ ([]string) (len=2 cap=2) {
+  (string) (len=13) "CoreText note",
+  (string) (len=4) "note"
+ },
+ ([]string) (len=2 cap=2) {
+  (string) (len=13) "CoreText aaaa",
+  (string) (len=4) "aaaa"
+ }
+}
+([][]int) (len=2 cap=10) {
+ ([]int) (len=4 cap=4) {
+  (int) 44,
+  (int) 57,
+  (int) 53,
+  (int) 57
+ },
+ ([]int) (len=4 cap=4) {
+  (int) 164,
+  (int) 177,
+  (int) 173,
+  (int) 177
+ }
+}
+*/
+```
+
+:::info Golang regexp 模块的所有功能均可兼容
+
+使用 re 模块可以编译/执行 Golang 的 `Compile/MustCompile` 对象：
+
+```go
+type regexp.(Regexp) struct {
+  Fields(可用字段):   StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+      func Copy() return(*regexp.Regexp)
+      func Expand(v1: []uint8, v2: []uint8, v3: []uint8, v4: []int) return([]uint8)
+      func ExpandString(v1: []uint8, v2: string, v3: string, v4: []int) return([]uint8)
+      func Find(v1: []uint8) return([]uint8)
+      func FindAll(v1: []uint8, v2: int) return([][]uint8)
+      func FindAllIndex(v1: []uint8, v2: int) return([][]int)
+      func FindAllString(v1: string, v2: int) return([]string)
+      func FindAllStringIndex(v1: string, v2: int) return([][]int)
+      func FindAllStringSubmatch(v1: string, v2: int) return([][]string)
+      func FindAllStringSubmatchIndex(v1: string, v2: int) return([][]int)
+      func FindAllSubmatch(v1: []uint8, v2: int) return([][][]uint8)
+      func FindAllSubmatchIndex(v1: []uint8, v2: int) return([][]int)
+      func FindIndex(v1: []uint8) return([]int)
+      func FindReaderIndex(v1: io.RuneReader) return([]int)
+      func FindReaderSubmatchIndex(v1: io.RuneReader) return([]int)
+      func FindString(v1: string) return(string)
+      func FindStringIndex(v1: string) return([]int)
+      func FindStringSubmatch(v1: string) return([]string)
+      func FindStringSubmatchIndex(v1: string) return([]int)
+      func FindSubmatch(v1: []uint8) return([][]uint8)
+      func FindSubmatchIndex(v1: []uint8) return([]int)
+      func LiteralPrefix() return(string, bool)
+      func Longest()
+      func Match(v1: []uint8) return(bool)
+      func MatchReader(v1: io.RuneReader) return(bool)
+      func MatchString(v1: string) return(bool)
+      func NumSubexp() return(int)
+      func ReplaceAll(v1: []uint8, v2: []uint8) return([]uint8)
+      func ReplaceAllFunc(v1: []uint8, v2: func (v1: []uint8) return([]uint8) ) return([]uint8)
+      func ReplaceAllLiteral(v1: []uint8, v2: []uint8) return([]uint8)
+      func ReplaceAllLiteralString(v1: string, v2: string) return(string)
+      func ReplaceAllString(v1: string, v2: string) return(string)
+      func ReplaceAllStringFunc(v1: string, v2: func (v1: string) return(string) ) return(string)
+      func Split(v1: string, v2: int) return([]string)
+      func String() return(string)
+      func SubexpIndex(v1: string) return(int)
+      func SubexpNames() return([]string)
+}
+```
+
+:::
