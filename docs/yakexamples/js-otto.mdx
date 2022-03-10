@@ -1,0 +1,210 @@
+---
+sidebar_position: 14
+---
+
+# 执行 JavaScript 代码 (otto styled)
+
+:::success
+
+本功能对引擎版本 >= yak-1.0.13-sp19 有效
+
+:::
+
+实际在进行工作中，很多 Web 在浏览器端会执行签名函数或者国密加解密函数。
+
+有时候，我们希望我们可以动态执行一段 JS 来实现这些能力，并且希望能与现有别的语言的内容无缝进行整合。
+
+Yaklang 集成了 otto 作为 JS 引擎。
+
+> https://github.com/robertkrimen/otto
+
+## 简便调用案例：调用 JS 代码中的函数
+
+我们以一个简单案例来说明最基础的也是最常用的用途：
+
+1. 加载一段代码
+2. 调用这段代码中的某些函数
+
+```go
+value, err = js.CallFunctionFromCode(`// Sample xyzzy example
+    function test(){
+        if (3.14159 > 0) {
+            console.log("Call By Function!!!!!!!!!!!!.");
+            return "CallByFunc";
+        }
+
+        var xyzzy = NaN;
+        console.log("Nothing happens.");
+        return xyzzy;
+    }`, "test")
+die(err)
+dump(value)
+
+
+/*
+OUTPUT:
+
+Call By Function!!!!!!!!!!!!.
+(otto.Value) CallByFunc
+*/
+```
+
+## 案例2：调用 JS 代码中的函数，并传入参数
+
+```go
+value, err = js.CallFunctionFromCode(`// Sample xyzzy example
+    function test(a){
+        if (a > 0) {
+            console.log("Call By Function!!!!!!!!!!!!.");
+            return "CallByFunc";
+        }
+
+        var xyzzy = NaN;
+        console.log("Nothing happens.");
+        return xyzzy;
+    }`, "test", -1)
+die(err)
+dump(value)
+
+/*
+OUTPUT:
+
+Nothing happens.
+(otto.Value) NaN
+*/
+```
+
+## 更多复杂案例：
+
+`js.CallFunctionFromCode` 是经过场景化处理的可能是最常见场景的实现。
+
+但是如果需要更复杂处理方案，Yaklang 是完全支持和 otto 风格一致的引擎细节操作的。
+
+详细案例可以参考 [otto github README](https://github.com/robertkrimen/otto)
+
+```go
+vm = js.New()
+value, err = vm.Run(`(function(){
+    return 1+2
+})()`)
+die(err)
+
+dump(value)
+
+/*
+OUTPUT:
+
+(otto.Value) 3
+*/
+
+value, err = value.Export()
+die(err)
+
+dump(value)
+
+/*
+OUTPUT:
+
+(float64) 3
+*/
+```
+
+## 结构定义速查
+
+引擎定义来源于 `desc(obj)`
+
+:::info
+
+如果你不知道一个对象内都有哪些成员方法，变量，字段。
+
+可以尝试调用一下 `desc()` 函数，他会描述出这个对象的大致结构和公开内容。
+
+:::
+
+### JS OTTO Value 定义：
+
+```go
+type github.com/robertkrimen/otto.(Value) struct {
+  Fields(可用字段):
+  StructMethods(结构方法/函数):
+      func Call(v1: otto.Value, v2 ...interface {}) return(otto.Value, error)
+      func Class() return(string)
+      func Export() return(interface {}, error)
+      func IsBoolean() return(bool)
+      func IsDefined() return(bool)
+      func IsFunction() return(bool)
+      func IsNaN() return(bool)
+      func IsNull() return(bool)
+      func IsNumber() return(bool)
+      func IsObject() return(bool)
+      func IsPrimitive() return(bool)
+      func IsString() return(bool)
+      func IsUndefined() return(bool)
+      func Object() return(*otto.Object)
+      func String() return(string)
+      func ToBoolean() return(bool, error)
+      func ToFloat() return(float64, error)
+      func ToInteger() return(int64, error)
+      func ToString() return(string, error)
+  PtrStructMethods(指针结构方法/函数):
+}
+```
+
+### JS 引擎定义：`otto.Otto`
+
+```go
+type github.com/robertkrimen/otto.(Otto) struct {
+  Fields(可用字段):
+      Interrupt: chan func()
+  StructMethods(结构方法/函数):
+      func Call(v1: string, v2: interface {}, v3 ...interface {}) return(otto.Value, error)
+      func Context() return(otto.Context)
+      func ContextLimit(v1: int) return(otto.Context)
+      func ContextSkip(v1: int, v2: bool) return(otto.Context)
+      func Eval(v1: interface {}) return(otto.Value, error)
+      func Get(v1: string) return(otto.Value, error)
+      func MakeCustomError(v1: string, v2: string) return(otto.Value)
+      func MakeRangeError(v1: string) return(otto.Value)
+      func MakeSyntaxError(v1: string) return(otto.Value)
+      func MakeTypeError(v1: string) return(otto.Value)
+      func Object(v1: string) return(*otto.Object, error)
+      func Run(v1: interface {}) return(otto.Value, error)
+      func Set(v1: string, v2: interface {}) return(error)
+      func SetDebuggerHandler(v1: func (v1: *otto.Otto) )
+      func SetRandomSource(v1: func () return(float64) )
+      func SetStackDepthLimit(v1: int)
+      func SetStackTraceLimit(v1: int)
+      func ToValue(v1: interface {}) return(otto.Value, error)
+  PtrStructMethods(指针结构方法/函数):
+      func Call(v1: string, v2: interface {}, v3 ...interface {}) return(otto.Value, error)
+      func Compile(v1: string, v2: interface {}) return(*otto.Script, error)
+      func CompileWithSourceMap(v1: string, v2: interface {}, v3: interface {}) return(*otto.Script, error)
+      func Context() return(otto.Context)
+      func ContextLimit(v1: int) return(otto.Context)
+      func ContextSkip(v1: int, v2: bool) return(otto.Context)
+      func Copy() return(*otto.Otto)
+      func Eval(v1: interface {}) return(otto.Value, error)
+      func Get(v1: string) return(otto.Value, error)
+      func MakeCustomError(v1: string, v2: string) return(otto.Value)
+      func MakeRangeError(v1: string) return(otto.Value)
+      func MakeSyntaxError(v1: string) return(otto.Value)
+      func MakeTypeError(v1: string) return(otto.Value)
+      func Object(v1: string) return(*otto.Object, error)
+      func Run(v1: interface {}) return(otto.Value, error)
+      func Set(v1: string, v2: interface {}) return(error)
+      func SetDebuggerHandler(v1: func (v1: *otto.Otto) )
+      func SetRandomSource(v1: func () return(float64) )
+      func SetStackDepthLimit(v1: int)
+      func SetStackTraceLimit(v1: int)
+      func ToValue(v1: interface {}) return(otto.Value, error)
+}
+```
+
+## 注意：
+
+
+:::caution 独立 JS 引擎并不适合适合所有场景
+
+一些 nodejs 库和浏览器复杂上下文无法通过单独 otto 来实现。
+
+:::

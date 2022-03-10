@@ -17,10 +17,12 @@
  | [risk.NewRandomPortTrigger](#risknewrandomporttrigger) | 创建个新的随机端口检测记录 |
  | [risk.NewRisk](#risknewrisk) | 创建一个 Risk 记录（可理解为漏洞） |
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) | 创建一个 Risk 记录（可理解为漏洞），并标记为没有验证的漏洞 |
- | [risk.Save](#risksave) | 保存一个 Risk 记录（可理解为漏洞） |
+ | [risk.Save](#risksave) |  |
  | [risk.details](#riskdetails) | 【参数】：为漏洞设置参数内容，一般传入一个 map[string]interface{} 即可 |
+ | [risk.level](#risklevel) | 设置漏洞级别 |
  | [risk.parameter](#riskparameter) | 【参数】：设置漏洞/Risk的出问题的参数名 |
  | [risk.payload](#riskpayload) | 【参数】：设置 Payload |
+ | [risk.severity](#riskseverity) | 设置漏洞级别 |
  | [risk.title](#risktitle) | 【参数】：设置漏洞标题（必须） |
  | [risk.titleVerbose](#risktitleverbose) | 【参数】：展示标题 |
  | [risk.token](#risktoken) | 【参数】：设置 reverse_token |
@@ -475,7 +477,7 @@
  
 ### risk.Save
 
-保存一个 Risk 记录（可理解为漏洞）
+
 
 #### 详细描述
 
@@ -483,7 +485,7 @@
 
 #### 定义：
 
-``func risk.Save(v1: *yakit.Risk)``
+`func risk.Save(v1: *yakit.Risk) return (r0: error)`
 
 
 #### 参数
@@ -495,7 +497,13 @@
 
 
 
- 
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
 
  
 ### risk.details
@@ -516,6 +524,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func riskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.level
+
+设置漏洞级别
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.level(v1: string) return (r0: func riskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 
 
 
@@ -571,6 +610,37 @@
 #### 定义：
 
 `func risk.payload(v1: string) return (r0: func riskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func riskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.severity
+
+设置漏洞级别
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.severity(v1: string) return (r0: func riskParamsOpt(v1: *yakit.Risk) )`
 
 
 #### 参数
