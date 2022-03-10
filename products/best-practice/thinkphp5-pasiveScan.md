@@ -68,7 +68,7 @@ println(string(body))
 
 输出如图
 
-![img](https://feishu-4dogs.feishu.cn/space/api/box/stream/download/asynccode/?code=YzUzOTY1NmMzZGVkMTUyYjc5MDJhZGU2ZGYxNTVlODhfcGxxR3VtRXhmdVMwcnBVT0lheFk3YktYWUoxUlhsVkNfVG9rZW46Ym94Y244dmdUZlVxU0duRnBITVdhaXlPek9mXzE2NDY4OTMyODU6MTY0Njg5Njg4NV9WNA)
+![](/img/products/yakit/thinkphp5-passiveScan.png)
 
 从这里提取出两个指纹"IHDR"和"PNG"，如下
 
@@ -272,8 +272,8 @@ mirrorNewWebsitePath = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rs
 
 ## 插件效果
 
-![img](https://feishu-4dogs.feishu.cn/space/api/box/stream/download/asynccode/?code=YmU4ZTkwY2VlNTVkMjE4NjAwZDk2M2U3YWZmMGQxMDhfZzZNSUpWeEthR05LUWU2cW1jVFR5M2dTbkE0MEgycVFfVG9rZW46Ym94Y25keFFzWU5DeXR2M0hBSDBzQTNtQlNmXzE2NDY4OTMyODU6MTY0Njg5Njg4NV9WNA)
+![](/img/products/yakit/thinkphp-passiveScan1.png)
 
-![img](https://feishu-4dogs.feishu.cn/space/api/box/stream/download/asynccode/?code=Njk0MDExN2E2YjY3M2M5OTg0ZmQxOTAwYzBhMDdkZTRfTlpQbkdMTDNLNW1UQ2dTTWpJaU0wSEV3OGRKZWVKMFJfVG9rZW46Ym94Y251RjFaT3FqbXRvRTl0SlhwTFRXQlRoXzE2NDY4OTMyODU6MTY0Njg5Njg4NV9WNA)
+![](/img/products/yakit/thinkphp-passiveScan2.png)
 
-![img](https://feishu-4dogs.feishu.cn/space/api/box/stream/download/asynccode/?code=OGRhNjA0YmJlMTA3OWE1Y2FmYTAwMDFiN2FmYjhmODBfRExTVmNibXVhenlselJLenE1UVpZOThvY3FZRWM3a3pfVG9rZW46Ym94Y24wZGVPc0toUlJLb3ZvMnk2T28yRFRlXzE2NDY4OTMyODU6MTY0Njg5Njg4NV9WNA)
+![](/img/products/yakit/thinkphp-passiveScan3.png)
