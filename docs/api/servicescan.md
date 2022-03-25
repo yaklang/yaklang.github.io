@@ -14,7 +14,9 @@
  | [servicescan.maxProbesConcurrent](#servicescanmaxprobesconcurrent) | 【参数】每个指纹扫描目标允许的并发量 |
  | [servicescan.nmapRarityMax](#servicescannmapraritymax) | 【参数】设置nmap规则的最大稀有度 |
  | [servicescan.nmapRule](#servicescannmaprule) | 【参数】设置 nmap 规则文件（可以自己写） |
+ | [servicescan.probeTimeout](#servicescanprobetimeout) |  |
  | [servicescan.proto](#servicescanproto) | 设置扫描的协议 |
+ | [servicescan.proxy](#servicescanproxy) | 设置代理！ |
  | [servicescan.service](#servicescanservice) | 启动服务扫描（nmap 规则库） |
  | [servicescan.web](#servicescanweb) | 强制启用 web 扫描 |
  | [servicescan.webRule](#servicescanwebrule) | 启用用户自定义 web 规则 |
@@ -371,6 +373,37 @@
 
 
  
+### servicescan.probeTimeout
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func servicescan.probeTimeout(请求超时时间: float64) return (r0: func ConfigOption(v1: *fp.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| 请求超时时间 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
+
+
+ 
 ### servicescan.proto
 
 设置扫描的协议
@@ -389,6 +422,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | protos | `...any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
+
+
+ 
+### servicescan.proxy
+
+设置代理！
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func servicescan.proxy(v1 ...string) return (r0: func ConfigOption(v1: *fp.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
 
 
 

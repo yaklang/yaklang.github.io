@@ -9,6 +9,7 @@
  | [httpool.fuzzParams](#httpoolfuzzparams) |  |
  | [httpool.host](#httpoolhost) |  |
  | [httpool.https](#httpoolhttps) | 为请求设置 HTTPS |
+ | [httpool.noFixContentLength](#httpoolnofixcontentlength) | 新增不修复 Content-Length 的可能性 |
  | [httpool.perRequestTimeout](#httpoolperrequesttimeout) | 【参数】为每个请求设置超时时间 |
  | [httpool.port](#httpoolport) | 【参数】设置请求发送到的真正 Port |
  | [httpool.proxy](#httpoolproxy) | 【参数】设置整个请求池的代理 |
@@ -211,6 +212,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `opt` |   |
+
+
+ 
+### httpool.noFixContentLength
+
+新增不修复 Content-Length 的可能性
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func httpool.noFixContentLength(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  

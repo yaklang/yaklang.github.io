@@ -13,10 +13,13 @@
  | [poc.Split](#pocsplit) | 把一个数据包的 Header 部分和 Body 分开，Header 是 string，body 部分是 bytes |
  | [poc.host](#pochost) | 强制指定连接 Host（一般用于 host） |
  | [poc.https](#pochttps) | forceHttps |
+ | [poc.jsRedirect](#pocjsredirect) | 控制 js 跳转是否启用 |
+ | [poc.noFixContentLength](#pocnofixcontentlength) | 不修复 ContentLength 控制开关 |
  | [poc.noRedirect](#pocnoredirect) |  |
  | [poc.params](#pocparams) | 构造数据包时的参数，需要一个 map[string]any |
  | [poc.port](#pocport) | 强行设置远端连接的端口（默认可以自动设置） |
  | [poc.proxy](#pocproxy) | 设置代理 |
+ | [poc.redirectHandler](#pocredirecthandler) | 设置重定向处理函数 |
  | [poc.redirectTimes](#pocredirecttimes) | 设置重定向的次数 |
  | [poc.timeout](#poctimeout) | 设置 PoC Timeout |
 
@@ -347,6 +350,68 @@ forceHttps
 
 
  
+### poc.jsRedirect
+
+控制 js 跳转是否启用
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.jsRedirect(enable: bool) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.noFixContentLength
+
+不修复 ContentLength 控制开关
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.noFixContentLength(v1: bool) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
 ### poc.noRedirect
 
 
@@ -458,6 +523,37 @@ forceHttps
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | proxyUrl | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.redirectHandler
+
+设置重定向处理函数
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.redirectHandler(v1: func (v1: bool, v2: bytes, v3: bytes) return(bool) ) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bool, v2: bytes, v3: bytes) return(bool) ` |   |
 
 
 

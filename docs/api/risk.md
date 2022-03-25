@@ -4,6 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [risk.CheckDNSLogByToken](#riskcheckdnslogbytoken) |  |
+ | [risk.CheckICMPTriggerByLength](#riskcheckicmptriggerbylength) | 检查 ICMP 触发器 |
  | [risk.CheckRandomTriggerByToken](#riskcheckrandomtriggerbytoken) | 通过 Token 来查询随机触发器 |
  | [risk.ExtractTokenFromUrl](#riskextracttokenfromurl) | 从 URL 中提取 token |
  | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
@@ -66,6 +67,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]*tpb.DNSLogEvent` |   |
+| r1 | `error` |   |
+
+
+ 
+### risk.CheckICMPTriggerByLength
+
+检查 ICMP 触发器
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.CheckICMPTriggerByLength(v1: int) return (r0: *tpb.ICMPTriggerNotification, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*tpb.ICMPTriggerNotification` |   |
 | r1 | `error` |   |
 
 

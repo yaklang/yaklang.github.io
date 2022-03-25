@@ -7,6 +7,7 @@
  | [x.Any](#xany) | 元素中至少有一个为 true |
  | [x.Chunk](#xchunk) | 把集合按数量分组 |
  | [x.Contains](#xcontains) | 集合中是否包含某一个元素 |
+ | [x.ConvertToMap](#xconverttomap) | 把一个对象尽可能转换为 map[string][]string |
  | [x.Difference](#xdifference) | 计算两个元素的差分 |
  | [x.Drop](#xdrop) | 丢弃数组 |
  | [x.Equal](#xequal) | 判断两个元素是否相等 |
@@ -172,6 +173,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `bool` |   |
+
+
+ 
+### x.ConvertToMap
+
+把一个对象尽可能转换为 map[string][]string
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func x.ConvertToMap(v1: any) return (r0: map[string][]string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `map[string][]string` |   |
 
 
  

@@ -36,7 +36,7 @@
  | [yakit.QueryPortAssetByNetwork](#yakitqueryportassetbynetwork) | 查询端口资产 |
  | [yakit.QueryUrlsAll](#yakitqueryurlsall) | 搜索数据库中所有可用的 URL (httpflows 表) |
  | [yakit.QueryUrlsByKeyword](#yakitqueryurlsbykeyword) | 查询所有带一定关键字的 URL |
- | [yakit.SaveDomain](#yakitsavedomain) | 保存域名资产 |
+ | [yakit.SaveDomain](#yakitsavedomain) |  |
  | [yakit.SaveHTTPFlow](#yakitsavehttpflow) | 保存 HTTP Flow 到数据库 |
  | [yakit.SavePayload](#yakitsavepayload) |  |
  | [yakit.SavePayloadByFile](#yakitsavepayloadbyfile) |  |
@@ -977,7 +977,7 @@
  
 ### yakit.SaveDomain
 
-保存域名资产
+
 
 #### 详细描述
 
@@ -985,15 +985,15 @@
 
 #### 定义：
 
-`func yakit.SaveDomain(domain: string, ip: string) return (r0: error)`
+`func yakit.SaveDomain(v1: string, v2 ...string) return (r0: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| domain | `string` |   |
-| ip | `string` |   |
+| v1 | `string` |   |
+| v2 | `...string` |   |
 
 
 

@@ -4,8 +4,10 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有可用 PoC |
+ | [nuclei.RemoveDatabase](#nucleiremovedatabase) | 移除 nuclei 数据库 |
  | [nuclei.Scan](#nucleiscan) | nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.） |
  | [nuclei.ScanWithContext](#nucleiscanwithcontext) | 带上下文进行扫描，通过上下文控制通断 |
+ | [nuclei.UpdateDatabase](#nucleiupdatedatabase) | 自动更新 nuclei 数据库 |
  | [nuclei.UpdatePoC](#nucleiupdatepoc) | 更新 PoC |
  | [nuclei.bulkSize](#nucleibulksize) | 【参数】同 nuclei 每个模板最大并行的主机数(默认25) |
  | [nuclei.debug](#nucleidebug) | 【参数】调试模式，打印更多的调试信息 |
@@ -81,6 +83,29 @@
 
 
  
+### nuclei.RemoveDatabase
+
+移除 nuclei 数据库
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.RemoveDatabase() return (r0: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### nuclei.Scan
 
 nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.）
@@ -145,6 +170,29 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 |:-----------|:---------- |:-----------|
 | r0 | `chan *tools.PocVul` |   |
 | r1 | `error` |   |
+
+
+ 
+### nuclei.UpdateDatabase
+
+自动更新 nuclei 数据库
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.UpdateDatabase() return (r0: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
 
 
  
