@@ -66,7 +66,7 @@
 该命令就是最基础的命令执行，但是是 Golang 风格的，使用案例如下
 
 ```go
-cmd, err := exec.Command(&#34;ls -lh&#34; )
+cmd, err := exec.Command("ls -lh" )
 die(err)
 
 cmd.Stdout = os.Stdout
@@ -140,7 +140,7 @@ die(cmd.Run())
 使用案例如下
 
 ```go
-res, err := exec.System(&#34;ls -lh&#34; )
+res, err := exec.System("ls -lh" )
 die(err)
 
 println(string(res))
@@ -180,25 +180,25 @@ println(string(res))
 直接执行一条系统命令，该命令支持 fuzz 字符串，具体案例如下:
 
 ```go
-exec.SystemBatch(&#34;echo {{net:(192.168.1.1/24,example.com)}}&#34; , exec.callback(func(cmd, results){
-    println(&#34;exec: &#34;, &#34;results: &#34;, codec.EncodeASCII(string(results)))
+exec.SystemBatch("echo {{net:(192.168.1.1/24,example.com)}}" , exec.callback(func(cmd, results){
+    println("exec: ", "results: ", codec.EncodeASCII(string(results)))
 }))
 ```
 
 执行结果如下
 
 ```
-exec:  results:  &#34;192.168.1.15\n&#34;
-exec:  results:  &#34;192.168.1.16\n&#34;
-exec:  results:  &#34;192.168.1.0\n&#34;
-exec:  results:  &#34;192.168.1.7\n&#34;
-exec:  results:  &#34;192.168.1.13\n&#34;
+exec:  results:  "192.168.1.15\n"
+exec:  results:  "192.168.1.16\n"
+exec:  results:  "192.168.1.0\n"
+exec:  results:  "192.168.1.7\n"
+exec:  results:  "192.168.1.13\n"
 ...
 ...
 ...
-exec:  results:  &#34;192.168.1.251\n&#34;
-exec:  results:  &#34;192.168.1.255\n&#34;
-exec:  results:  &#34;example.com\n&#34;
+exec:  results:  "192.168.1.251\n"
+exec:  results:  "192.168.1.255\n"
+exec:  results:  "example.com\n"
 ```
 
 不熟悉 `{{net:(xxx)}}` 的朋友可以详细学习一下 fuzz 这个包。
@@ -266,7 +266,7 @@ exec:  results:  &#34;example.com\n&#34;
 案例如下：
 
 ```go
-exec.WatchOutput(&#34;ping 8.8.8.8&#34; , 10, def callback(result) {
+exec.WatchOutput("ping 8.8.8.8" , 10, def callback(result) {
     println(now())
     println(string(result))
     return true
