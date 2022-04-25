@@ -47,6 +47,20 @@ export const Owner = () => {
                 span: 12, border: false,
             },
             {
+                name: <Space>奶权 <div style={{fontSize: 12}}>
+                    <a href="https://www.acmesec.cn/" target={"_blank"}>@米斯特安全</a>
+                </div></Space>,
+                avatar: "/img/who/naiquan.jpeg", span: 12, border: false,
+                description: (
+                    <div>
+                        Web 安全 / 代码审计 爱好者 <br/>
+                        <a style={{fontSize: 12}}>yak.随机端口反连触发 Owner</a> <br/>
+                        <a style={{fontSize: 12}}>yak.ICMP 长度触发器 Owner</a> <br/>
+                        <EnvironmentOutlined/> 深圳
+                    </div>
+                )
+            },
+            {
                 name: <Space>f1ys0ar <div style={{fontSize: 12}}>
                     <a href="/" target={"_blank"}>@Yak.pwn</a> 模块 owner
                 </div></Space>, avatar: "/img/who/f1ys0ar.jpeg", description: <div>
@@ -94,21 +108,6 @@ export const Contributors = () => {
                 </div>,
                 githubLink: "https://github.com/timwhitez",
                 span: 12, border: false,
-            },
-            {
-                name: <Space>奶权 <div style={{fontSize: 12}}>
-                    <a href="https://www.acmesec.cn/" target={"_blank"}>@米斯特安全</a>
-                </div></Space>,
-                avatar: "/img/who/naiquan.jpeg", span: 12, border: false,
-                description: (
-                    <div>
-                        Web 安全 / 代码审计 爱好者 <br/>
-                        <a style={{fontSize: 12}}>yak.随机端口反连触发 Owner</a> <br/>
-                        <a style={{fontSize: 12}}>yak.ICMP 长度触发器 Owner</a> <br/>
-                        <EnvironmentOutlined/> 深圳
-                    </div>
-                )
-
             },
             {
                 name: <Space>ykc <div style={{fontSize: 12}}>
