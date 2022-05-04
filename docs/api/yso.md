@@ -21,6 +21,10 @@
  | [yso.GetJDK8u20](#ysogetjdk8u20) |  |
  | [yso.GetSpring1](#ysogetspring1) |  |
  | [yso.GetSpring2](#ysogetspring2) |  |
+ | [yso.GetTomcatEcho](#ysogettomcatecho) | 新增 TomcatEcho Java 对象 |
+ | [yso.NewFacadeServer](#ysonewfacadeserver) | 新增 Facade 反连服务器 |
+ | [yso.NewLdapServer](#ysonewldapserver) | 新增 LDAP 服务器 |
+ | [yso.NewLdapServerWithPort](#ysonewldapserverwithport) | 新增 LDAP 服务器，并设置端口 |
 
 
 
@@ -604,6 +608,124 @@
 |:-----------|:---------- |:-----------|
 | r0 | `yserx.JavaSerializable` |   |
 | r1 | `error` |   |
+
+
+ 
+### yso.GetTomcatEcho
+
+新增 TomcatEcho Java 对象
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetTomcatEcho(v1: string) return (r0: func (v1: string) return(bytes) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func (v1: string) return(bytes) ` |   |
+
+
+ 
+### yso.NewFacadeServer
+
+新增 Facade 反连服务器
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.NewFacadeServer(v1: string, v2: int) return (r0: *facades.FacadeServer)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*facades.FacadeServer` |   |
+
+
+ 
+### yso.NewLdapServer
+
+新增 LDAP 服务器
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.NewLdapServer() return (r0: *ldapserver.LdapServer)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*ldapserver.LdapServer` |   |
+
+
+ 
+### yso.NewLdapServerWithPort
+
+新增 LDAP 服务器，并设置端口
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.NewLdapServerWithPort(v1: int, v2: int) return (r0: ldapserver.LdapServer)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+| v2 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `ldapserver.LdapServer` |   |
 
 
  

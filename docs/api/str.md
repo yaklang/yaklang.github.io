@@ -18,6 +18,7 @@
  | [str.ExtractBodyFromHTTPResponseRaw](#strextractbodyfromhttpresponseraw) | 从 response bytes 中提取 body |
  | [str.ExtractChineseIDCards](#strextractchineseidcards) | 提取内容中的身份证号 |
  | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
+ | [str.ExtractTitle](#strextracttitle) | 从 HTML 中提取标题 |
  | [str.ExtractURLFromHTTPRequest](#strextracturlfromhttprequest) | 从一个请求对象提取 URL |
  | [str.ExtractURLFromHTTPRequestRaw](#strextracturlfromhttprequestraw) | 从一个原始数据包中提取 URL |
  | [str.Fields](#strfields) | 按空格把字符串分割开 |
@@ -608,6 +609,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.ExtractTitle
+
+从 HTML 中提取标题
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractTitle(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  

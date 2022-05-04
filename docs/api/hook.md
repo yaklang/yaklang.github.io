@@ -8,6 +8,7 @@
  | [hook.LoadYakitPluginByName](#hookloadyakitpluginbyname) | 通过插件名加载特定插件 |
  | [hook.LoadYakitPluginContext](#hookloadyakitplugincontext) |  |
  | [hook.NewManager](#hooknewmanager) |  |
+ | [hook.NewMixPluginCaller](#hooknewmixplugincaller) | 新增用于配合插件资深联动的主程序 |
  | [hook.RemoveYakitPluginByName](#hookremoveyakitpluginbyname) | 移除已经加载的插件（通过插件名） |
 
 
@@ -172,6 +173,30 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `*yak.YakToCallerManager` |   |
+
+
+ 
+### hook.NewMixPluginCaller
+
+新增用于配合插件资深联动的主程序
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func hook.NewMixPluginCaller() return (r0: *yak.MixPluginCaller, r1: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yak.MixPluginCaller` |   |
+| r1 | `error` |   |
 
 
  

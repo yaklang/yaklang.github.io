@@ -39,6 +39,7 @@
  | [x.ToFloat64](#xtofloat64) | 解析成数字（double/float64） |
  | [x.ToMap](#xtomap) | 数字根据某一个字段生成 Map |
  | [x.Values](#xvalues) | 取 Map 中的 Value |
+ | [x.WaitConnect](#xwaitconnect) | 等待一个链接具体多少秒钟 |
  | [x.Zip](#xzip) |  |
 
 
@@ -1169,6 +1170,38 @@ For 循环的函数式编程支持
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `any` |   |
+
+
+ 
+### x.WaitConnect
+
+等待一个链接具体多少秒钟
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func x.WaitConnect(addr: string, timeoutSeconds: float64) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| addr | `string` |   |
+| timeoutSeconds | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
 
 
  

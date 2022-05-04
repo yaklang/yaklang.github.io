@@ -4,6 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [spacengine.FofaQuery](#spacenginefofaquery) | 查询 Fofa 中的数据 |
+ | [spacengine.HunterQuery](#spacenginehunterquery) | 新增 Hunter 空间引擎接口 |
  | [spacengine.QuakeQuery](#spacenginequakequery) |  |
  | [spacengine.ShodanQuery](#spacengineshodanquery) |  |
  | [spacengine.maxPage](#spacenginemaxpage) | 【参数】最多筛选多少页？ |
@@ -49,6 +50,41 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | resultChan | `chan *spacengine.NetSpaceEngineResult` |   |
+| r1 | `error` |   |
+
+
+ 
+### spacengine.HunterQuery
+
+新增 Hunter 空间引擎接口
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func spacengine.HunterQuery(username: string, apikey: string, query: string, opts ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| username | `string` |   |
+| apikey | `string` |   |
+| query | `string` |   |
+| opts | `...yaklib._spaceEngineConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
 | r1 | `error` |   |
 
 

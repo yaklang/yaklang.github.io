@@ -12,6 +12,7 @@
  | [io.ReadAll](#ioreadall) | 把一个 reader 中的内容全部读出来 |
  | [io.ReadEvery1s](#ioreadevery1s) | 使用一个 ctx 控制生命周期，每隔一秒钟读一次 Reader，每隔一秒钟执行一次回调函数，回调函数如果返回 false，则立即停止读取 |
  | [io.ReadFile](#ioreadfile) | 把一个文件中的内容全部读出来 |
+ | [io.ReadStable](#ioreadstable) | 增加一个【稳定即可】的 Reader |
  | [io.TeeReader](#ioteereader) | reader 分流，把 srcReader 读出来的内容会同步写到 teeWriter，通过返回值的 reader 来驱动 |
  | [io.WriteString](#iowritestring) | 把一个 string 写到 writer 中 |
 
@@ -304,6 +305,38 @@
 |:-----------|:---------- |:-----------|
 | r0 | `bytes` |   |
 | r1 | `error` |   |
+
+
+ 
+### io.ReadStable
+
+增加一个【稳定即可】的 Reader
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func io.ReadStable(v1: net.Conn, v2: float64) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `net.Conn` |   |
+| v2 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  

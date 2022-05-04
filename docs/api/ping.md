@@ -8,7 +8,10 @@
  | [ping.concurrent](#pingconcurrent) | 设置 Ping 扫的并发 |
  | [ping.dnsServers](#pingdnsservers) | 设置 DNS 服务器 |
  | [ping.dnsTimeout](#pingdnstimeout) | 设置 DNS 超时时间 |
+ | [ping.proxy](#pingproxy) | 为 TCP Ping 增加代理 |
  | [ping.scanCClass](#pingscancclass) | 直接 ping 整个 C 段 |
+ | [ping.skip](#pingskip) | 跳过存活检查，默认均为存活 |
+ | [ping.tcpPingPorts](#pingtcppingports) |  |
  | [ping.timeout](#pingtimeout) | 设置 ping 超时 |
 
 
@@ -177,6 +180,37 @@ ping 扫描
 
 
  
+### ping.proxy
+
+为 TCP Ping 增加代理
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func ping.proxy(v1 ...string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+
+
+ 
 ### ping.scanCClass
 
 直接 ping 整个 C 段
@@ -195,6 +229,68 @@ ping 扫描
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+
+
+ 
+### ping.skip
+
+跳过存活检查，默认均为存活
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func ping.skip(v1: bool) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+
+
+ 
+### ping.tcpPingPorts
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func ping.tcpPingPorts(v1: string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 
 
 

@@ -6,6 +6,7 @@
  | [fuzz.HTTPRequest](#fuzzhttprequest) | HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求 |
  | [fuzz.Strings](#fuzzstrings) | 执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz) |
  | [fuzz.StringsFunc](#fuzzstringsfunc) |  |
+ | [fuzz.StringsWithParam](#fuzzstringswithparam) | 新增带参数的 fuzz |
  | [fuzz.UrlsToHTTPRequests](#fuzzurlstohttprequests) | 把多个 URL 变成可以批量 Fuzz 的请求组(Batch) |
  | [fuzz.https](#fuzzhttps) | `http.HTTPRequest` 的 extraParams 中的额外选项之一 |
 
@@ -112,6 +113,38 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `error` |   |
+
+
+ 
+### fuzz.StringsWithParam
+
+新增带参数的 fuzz
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.StringsWithParam(v1: any, v2: any) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
 
 
  

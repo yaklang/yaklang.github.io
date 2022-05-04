@@ -3,11 +3,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有可用 PoC |
+ | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有 PoC 对象 |
+ | [nuclei.PullDatabase](#nucleipulldatabase) | 拉去数据库 |
  | [nuclei.RemoveDatabase](#nucleiremovedatabase) | 移除 nuclei 数据库 |
  | [nuclei.Scan](#nucleiscan) | nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.） |
  | [nuclei.ScanWithContext](#nucleiscanwithcontext) | 带上下文进行扫描，通过上下文控制通断 |
- | [nuclei.UpdateDatabase](#nucleiupdatedatabase) | 自动更新 nuclei 数据库 |
+ | [nuclei.UpdateDatabase](#nucleiupdatedatabase) |  |
  | [nuclei.UpdatePoC](#nucleiupdatepoc) | 更新 PoC |
  | [nuclei.bulkSize](#nucleibulksize) | 【参数】同 nuclei 每个模板最大并行的主机数(默认25) |
  | [nuclei.debug](#nucleidebug) | 【参数】调试模式，打印更多的调试信息 |
@@ -61,7 +62,7 @@
 
 ### nuclei.AllPoC
 
-获取当前所有可用 PoC
+获取当前所有 PoC 对象
 
 #### 详细描述
 
@@ -69,9 +70,17 @@
 
 #### 定义：
 
-`func nuclei.AllPoC() return (r0: []*tools.templateDesc, error: error)`
+`func nuclei.AllPoC(v1 ...string) return (r0: []*tools.templateDesc, r1: error)`
 
- 
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
 
 
 #### 返回值
@@ -79,7 +88,40 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]*tools.templateDesc` |   |
-| error | `error` |   |
+| r1 | `error` |   |
+
+
+ 
+### nuclei.PullDatabase
+
+拉去数据库
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.PullDatabase(gitUrl: string, proxies ...string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| gitUrl | `string` |   |
+| proxies | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
 
 
  
@@ -175,7 +217,7 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
  
 ### nuclei.UpdateDatabase
 
-自动更新 nuclei 数据库
+
 
 #### 详细描述
 
@@ -183,9 +225,17 @@ nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以�
 
 #### 定义：
 
-`func nuclei.UpdateDatabase() return (r0: error)`
+`func nuclei.UpdateDatabase(localPath ...string) return (r0: error)`
 
- 
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| localPath | `...string` |   |
+
+
+
 
 
 #### 返回值

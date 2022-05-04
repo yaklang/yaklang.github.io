@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [crawler.RequestsFromFlow](#crawlerrequestsfromflow) | 从一个请求中提取可能可以用于扫描的额外请求 |
  | [crawler.Start](#crawlerstart) | 核心函数，进行爬虫的入口，输入想要爬的网站，然后设置参数，在一个 chan 中接受爬虫的结果 |
  | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登陆功能 |
  | [crawler.basicAuth](#crawlerbasicauth) | 设置爬虫的基础认证 |
@@ -36,6 +37,40 @@
 
 ## 函数定义
 
+### crawler.RequestsFromFlow
+
+从一个请求中提取可能可以用于扫描的额外请求
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func crawler.RequestsFromFlow(https: bool, req: bytes, rsp: bytes) return (reqs: []bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| https | `bool` |   |
+| req | `bytes` |   |
+| rsp | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| reqs | `[]bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### crawler.Start
 
 核心函数，进行爬虫的入口，输入想要爬的网站，然后设置参数，在一个 chan 中接受爬虫的结果

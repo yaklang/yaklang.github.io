@@ -20,6 +20,7 @@
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) | 创建一个 Risk 记录（可理解为漏洞），并标记为没有验证的漏洞 |
  | [risk.Save](#risksave) |  |
  | [risk.details](#riskdetails) | 【参数】：为漏洞设置参数内容，一般传入一个 map[string]interface{} 即可 |
+ | [risk.fromYakScript](#riskfromyakscript) | 为漏洞设置来源脚本 |
  | [risk.level](#risklevel) | 设置漏洞级别 |
  | [risk.parameter](#riskparameter) | 【参数】：设置漏洞/Risk的出问题的参数名 |
  | [risk.payload](#riskpayload) | 【参数】：设置 Payload |
@@ -557,6 +558,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func riskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.fromYakScript
+
+为漏洞设置来源脚本
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.fromYakScript(v1: string) return (r0: func riskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 
 
 

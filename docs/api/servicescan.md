@@ -4,6 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [servicescan.Scan](#servicescanscan) | 扫描服务指纹的核心函数 |
+ | [servicescan.ScanFromPing](#servicescanscanfromping) | 从 Ping 中扫描 |
  | [servicescan.ScanFromSpaceEngine](#servicescanscanfromspaceengine) | 从网络空间搜索引擎的结果中扫描指纹信息 |
  | [servicescan.ScanFromSynResult](#servicescanscanfromsynresult) | 从 synscan 中返回的结果直接进入 servicescan 扫描的通道 |
  | [servicescan.ScanOne](#servicescanscanone) | 同步扫描单个目标 |
@@ -60,6 +61,40 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | resultChannel | `chan *fp.MatchResult` |  扫描结果的返回点 |
+| r1 | `error` |   |
+
+
+ 
+### servicescan.ScanFromPing
+
+从 Ping 中扫描
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func servicescan.ScanFromPing(v1: chan *pingutil.PingResult, v2: string, v3 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `chan *pingutil.PingResult` |   |
+| v2 | `string` |   |
+| v3 | `...fp.ConfigOption` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *fp.MatchResult` |   |
 | r1 | `error` |   |
 
 
