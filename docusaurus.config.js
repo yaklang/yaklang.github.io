@@ -95,25 +95,6 @@ module.exports = {
                 //     docsPluginId: "team",
                 //     label: "社区与团队",
                 // },
-                {
-                    position: "left",
-                    to: "/team",
-                    activeBasePath: "pages",
-                    label: "团队&致谢",
-                },
-                // {
-                //     position: "left",
-                //     to: "/team",
-                //     activeBasePath: "pages",
-                //     label: "Yak 社区",
-                // },
-                // {
-                //     position: "left",
-                //     type: "doc",
-                //     docId: "intro",
-                //     docsPluginId: "team",
-                //     label: "社区与团队",
-                // },
                 // {to: 'blog', label: 'Blog', position: 'left'},
                 // {
                 //     type: "docsVersionDropdown",
