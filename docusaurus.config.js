@@ -1,22 +1,22 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
     i18n: {
-        defaultLocale: 'zh-CN',
-        locales: ['zh-CN', 'en'],
+        defaultLocale: "zh-CN",
+        locales: ["zh-CN", "en"],
     },
-    title: 'Yak Official Website',
-    tagline: 'Yak 是一门 Web 安全研发领域垂直语言',
-    url: 'https://yaklang.io',
-    baseUrl: '/',
-    onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
-    favicon: 'img/favicon.ico',
-    organizationName: 'yaklang', // Usually your GitHub org/user name.
-    projectName: 'yak-project-main-page', // Usually your repo name.
+    title: "Yak Official Website",
+    tagline: "Yak 是一门 Web 安全研发领域垂直语言",
+    url: "https://yaklang.io",
+    baseUrl: "/",
+    onBrokenLinks: "throw",
+    onBrokenMarkdownLinks: "warn",
+    favicon: "img/favicon.ico",
+    organizationName: "yaklang", // Usually your GitHub org/user name.
+    projectName: "yak-project-main-page", // Usually your repo name.
     themeConfig: {
         colorMode: {
             // "light" | "dark"
-            defaultMode: 'light',
+            defaultMode: "light",
 
             // Hides the switch in the navbar
             // Useful if you want to support a single color mode
@@ -29,103 +29,99 @@ module.exports = {
             // Dark/light switch icon options
             switchConfig: {
                 // Icon for the switch while in dark mode
-                darkIcon: '🌙',
+                darkIcon: "🌙",
 
                 // CSS to apply to dark icon,
                 // React inline style object
                 // see https://reactjs.org/docs/dom-elements.html#style
                 darkIconStyle: {
-                    marginLeft: '2px',
+                    marginLeft: "2px",
                 },
 
                 // Unicode icons such as '\u2600' will work
                 // Unicode with 5 chars require brackets: '\u{1F602}'
-                lightIcon: '🌞',
+                lightIcon: "🌞",
 
                 lightIconStyle: {
-                    marginLeft: '1px',
+                    marginLeft: "1px",
                 },
             },
         },
 
         navbar: {
-            title: 'Yak',
+            title: "Yak",
             logo: {
-                alt: 'My Site Logo',
-                src: 'img/logo.svg',
+                alt: "My Site Logo",
+                src: "img/logo.svg",
             },
             items: [
                 {
-                    type: 'doc',
-                    docId: 'intro',
-                    position: 'left',
-                    label: '编程与文档',
+                    type: "doc",
+                    docId: "intro",
+                    position: "left",
+                    label: "编程与文档",
                 },
                 {
                     position: "left",
                     type: "doc",
                     docId: "intro",
-                    docsPluginId: 'products',
+                    docsPluginId: "products",
                     label: "Yakit 单兵平台",
                 },
                 {
                     position: "left",
                     type: "doc",
                     docId: "intro",
-                    docsPluginId: 'team',
-                    label: '社区与团队',
+                    docsPluginId: "team",
+                    label: "社区与团队",
                 },
-                // {to: '/blog', label: 'Blog', position: 'left'},
                 {
-                    type: 'docsVersionDropdown',
+                    position: "left",
+                    to: "/home",
+                    activeBasePath: "pages",
+                    label: "Home",
+                },
+                {
+                    position: "left",
+                    to: "/team",
+                    activeBasePath: "pages",
+                    label: "团队&致谢",
+                },
+                // {to: 'blog', label: 'Blog', position: 'left'},
+                {
+                    type: "docsVersionDropdown",
                     position: "right",
                 },
                 {
-                    href: 'https://github.com/yaklang',
-                    label: 'GITHUB',
-                    position: 'right',
+                    href: "https://github.com/yaklang",
+                    label: "GITHUB",
+                    position: "right",
                 },
             ],
         },
         footer: {
-            style: 'light',
+            style: "light",
+            logo: {
+                alt: "My Site Logo",
+                src: "img/footerLogo.svg",
+                href: "/",
+            },
             links: [
                 {
-                    title: 'Docs',
+                    title: "Docs",
                     items: [
                         {
-                            label: '教程与文档',
-                            to: '/docs/intro',
+                            label: "官方文档",
+                            to: "/docs/intro",
                         },
                     ],
                 },
                 {
-                    title: 'Community',
+                    title: "Community",
                     items: [
                         {
-                            label: '研发团队',
-                            href: '/team/intro',
-                        },
-                        {
-                            label: '联系我们',
-                            href: '/team/contact',
-                        },
-                        // {
-                        //     label: 'Discord',
-                        //     href: 'https://discordapp.com/invite/docusaurus',
-                        // },
-                    ],
-                },
-                {
-                    title: 'More',
-                    items: [
-                        // {
-                        //     label: 'Blog',
-                        //     to: '/blog',
-                        // },
-                        {
-                            label: 'GitHub',
-                            href: 'https://github.com/yaklang',
+                            label: "研发团队",
+                            href: "/team",
                         },
                     ],
                 },
@@ -134,36 +130,36 @@ module.exports = {
         },
     },
     plugins: [
+        "docusaurus-plugin-sass",
         [
-            '@docusaurus/plugin-content-docs',
+            "@docusaurus/plugin-content-docs",
             {
-                id: 'team',
-                path: 'team',
-                routeBasePath: 'team',
-                sidebarPath: require.resolve('./sidebarsTeam.js'),
+                id: "team",
+                path: "team",
+                routeBasePath: "team",
+                sidebarPath: require.resolve("./sidebarsTeam.js"),
                 // ... other options
             },
         ],
         [
-            '@docusaurus/plugin-content-docs',
+            "@docusaurus/plugin-content-docs",
             {
-                id: 'products',
-                path: 'products',
-                routeBasePath: 'products',
-                sidebarPath: require.resolve('./sidebarsProducts.js'),
+                id: "products",
+                path: "products",
+                routeBasePath: "products",
+                sidebarPath: require.resolve("./sidebarsProducts.js"),
                 // ... other options
             },
         ],
     ],
     presets: [
         [
-            '@docusaurus/preset-classic',
+            "@docusaurus/preset-classic",
             {
                 docs: {
-                    sidebarPath: require.resolve('./sidebars.js'),
+                    sidebarPath: require.resolve("./sidebars.js"),
                     // Please change this to your repo.
-                    editUrl:
-                        'https://github.com/yaklang/',
+                    editUrl: "https://github.com/yaklang/",
                 },
                 // blog: {
                 //     showReadingTime: true,
@@ -172,11 +168,11 @@ module.exports = {
                 //         'https://github.com/yaklang/',
                 // },
                 theme: {
-                    customCss: require.resolve('./src/css/custom.css'),
+                    customCss: require.resolve("./src/css/custom.scss"),
                 },
                 themeConfig: {
                     prism: {
-                        theme: require('prism-react-renderer/themes/dracula'),
+                        theme: require("prism-react-renderer/themes/dracula"),
                     },
                 },
             },

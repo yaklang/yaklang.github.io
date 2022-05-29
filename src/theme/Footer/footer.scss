@@ -1,0 +1,89 @@
+.footer {
+    height: 72px;
+    background: #f6f7f9;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    .div--flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 24px;
+
+        .footer-logo-copyright-navigation {
+            display: flex;
+            .margin-bottom--sm {
+                margin: 0 !important;
+                .footer-link {
+                    display: flex;
+                    opacity: 1;
+                    transition: opacity var(--ifm-transition-fast)
+                        var(--ifm-transition-timing-default);
+
+                    .footer__logo {
+                        margin: 0;
+                        height: 20px;
+                    }
+                    .footer__logo__title {
+                        margin-left: 10px;
+                        color: #1c1e21;
+                        font-weight: 900;
+                    }
+                }
+            }
+            .copyright-style {
+                margin-left: 16px;
+                color: #999ea8;
+            }
+            .link-body {
+                margin-left: 40px;
+                .footer__link-item {
+                    line-height: normal; 
+                    color: #686c78;
+                }
+                .footer__link-item + .footer__link-item {
+                    margin-left: 30px;
+                }
+            }
+        }
+
+        .footer-contact-me {
+            width: 70px;
+            display: flex;
+            .contact-icon-body {
+                width: 24px;
+                height: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .icon-style {
+                    font-size: 20px;
+                }
+                .github-icon {
+                    color: #999ea8;
+                }
+                .wechat-icon {
+                    color: #50cb70;
+                }
+            }
+            .contact-icon-body + .contact-icon-body {
+                margin-left: 22px;
+            }
+        }
+    }
+}
+
+.wechat-code-popover {
+    padding: 16px 16px 14px 16px;
+    border-radius: 4px;
+    .wechat-code-img {
+        width: 108px;
+        height: 108px;
+    }
+    .wechat-code-title {
+        margin-top: 8px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #999ea8;
+    }
+}
