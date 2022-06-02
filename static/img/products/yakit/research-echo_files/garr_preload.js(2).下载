@@ -1,0 +1,5 @@
+(function (moduleName) {
+    window.garrPreloadConfig = window.garrPreloadConfig || {};
+    window.garrPreloadConfig[moduleName] = {};
+    window.garrPreloadConfig[moduleName].jsList = ["/eesz/bear/sheet/module/sheet_components.d273625c.chunk.js","/eesz/bear/sheet/module/sheet_index.6c4af020.chunk.js"];
+  })('sheet')

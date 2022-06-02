@@ -1,0 +1,5 @@
+(function (moduleName) {
+    window.garrPreloadConfig = window.garrPreloadConfig || {};
+    window.garrPreloadConfig[moduleName] = {};
+    window.garrPreloadConfig[moduleName].jsList = ["/eesz/bear/smartable/module/vendors-vb_BitableDefaultAction-vb_BitableEntry-vb_BitableSdk-vb_BitableTemplatePreview-vb_EmbeddedB-4cace0b7.43f833438d.chunk.js"];
+})('bitable')
