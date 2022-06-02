@@ -1,0 +1,7 @@
+
+(function (moduleName) {
+  window.garrPreloadConfig = window.garrPreloadConfig || {};
+  window.garrPreloadConfig[moduleName] = {};
+  window.garrPreloadConfig[moduleName].jsList = ["/eesz/bear/docx/module/vendors-docx_entry_stable.17d1a715.chunk.js","/eesz/bear/docx/module/vendors-docx_entry_biz.459e989a.chunk.js","/eesz/bear/docx/module/vendors-docx_entry.17dd82d9.chunk.js","/eesz/bear/docx/module/docx_entry.d41d3d10.chunk.js"];
+  window.garrPreloadConfig[moduleName].cssList = ["/eesz/bear/docx/module/css/vendors-docx_entry.e8ceb041.chunk.css","/eesz/bear/docx/module/css/docx_entry.e5c5c4d5.chunk.css"];
+})('docx')
