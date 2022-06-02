@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# 使用Yakit打破Java
+# 使用 Yakit 打破 Java 序列化协议语言隔离
 
 ## 最后几块拼图（一）：使用 Yakit 打破 Java 序列化协议语言隔离
 
@@ -33,7 +33,7 @@ sidebar_position: 8
 
 众所周知，针对一些 Groovy 链和常见的 CC1 链都是可以直接找到对应的命令的位置，直接替换即可。实际在第二种实现中，有着非常大的限制：TemplatesImpl 
 
->[com.sun.org](com.sun.org).apache.xalan.internal.xsltc.trax.TemplatesImpl 模版是很多链执行命令的关键。
+>[com.sun.org](http://com.sun.org).apache.xalan.internal.xsltc.trax.TemplatesImpl 模版是很多链执行命令的关键。
 
 尝试过进行一些分析的读者其实非常清楚，我们在有 TemplatesImpl 的链（例如 CC2[CommonCollections2] / CC3 / CC4）中，无法直接 “搜到” 执行的命令的关键字。其实本质上是因为，有一些命令和代码被编译成了 “Java 字节码”，然后又被序列化成了 “TC_BLOCKDATA”，表象就是，每个字节都加了 Padding，我们发现无法 “搜” 到对应 string 了。当然，我们也可以人为去做 “Padding”，然后把 Payload 自己去 Padding 后塞入链中特定位置，也可以构造出一个 “可用” 的 Payload。
 
