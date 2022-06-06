@@ -1,3 +1,8 @@
+$REM: 16;
+@function REM($n) {
+    @return calc($n / $REM) * 1rem;
+}
+
 .navbar {
     width: 100%;
     height: REM(63);
