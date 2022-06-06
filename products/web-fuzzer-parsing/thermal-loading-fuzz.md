@@ -4,7 +4,6 @@ sidebar_position: 2
 
 # 热加载Fuzz
 
-## Yakit Web Fuzzer 终极能力强化：热加载 Fuzz
 
 ## Background
 在 HTB：BountyHunter 中，我们发现 Web Fuzzer 在使用中可以 “更强”，我们需要编写 Yak 脚本的事情，如果可以经过某些 Web Fuzzer 的优化，可以达到同样的效果。
