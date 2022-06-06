@@ -13,8 +13,8 @@ import isInternalUrl from "@docusaurus/isInternalUrl";
 import ThemedImage from "@theme/ThemedImage";
 import IconExternalLink from "@theme/IconExternalLink";
 
-import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
 import { Popover } from "antd";
+import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
 
 function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
     const toUrl = useBaseUrl(to);
@@ -60,6 +60,37 @@ function Footer() {
     if (!footer) {
         return null;
     }
+
+    const DesignW = 1920;
+    const FontRate = 15.875;
+
+    document.getElementsByTagName("html")[0].style.fontSize =
+        (document.body.offsetWidth / DesignW) * FontRate + "px";
+    document.getElementsByTagName("body")[0].style.fontSize =
+        (document.body.offsetWidth / DesignW) * FontRate + "px";
+
+    window.addEventListener(
+        "onorientationchange" in window ? "orientationchange" : "resize",
+        () => {
+            document.getElementsByTagName("html")[0].style.fontSize =
+                (document.body.offsetWidth / DesignW) * FontRate + "px";
+            document.getElementsByTagName("body")[0].style.fontSize =
+                (document.body.offsetWidth / DesignW) * FontRate + "px";
+        }
+    );
+
+    document.onscroll = (e) => {
+        if (
+            e.target &&
+            e.target.scrollingElement &&
+            e.target.scrollingElement.scrollTop
+        ) {
+            const navbar = document.getElementsByClassName("navbar")[0];
+            const flag =
+                e.target.scrollingElement.scrollTop > navbar.offsetHeight;
+            navbar.style.backgroundColor = flag ? "#ffffff" : "rgba(0,0,0,0)";
+        }
+    };
 
     return (
         <footer

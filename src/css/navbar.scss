@@ -1,6 +1,11 @@
+$REM: 16;
+@function REM($n) {
+    @return ($n/$REM) * 1rem;
+}
+
 .navbar {
     width: 100%;
-    height: 63px;
+    height: REM(63);
     background-color: rgba(255, 255, 255, 0);
     position: fixed;
     top: 0;
