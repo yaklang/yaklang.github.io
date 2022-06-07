@@ -1597,8 +1597,9 @@ const AppraiseInfoBody = React.memo(() => {
                     url={["../../static/img/home/video.mp4"]}
                     loop={true}
                     playsinline={true}
-                    controls={true}
+                    controls={false}
                     playing={true}
+                    volume={0}
                     width={"100%"}
                     height={"100%"}
                 />
