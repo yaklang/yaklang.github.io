@@ -56,31 +56,30 @@ module.exports = {
             },
             items: [
                 {
-                    type: "doc",
-                    docId: "intro",
+                    type: "dropdown",
                     position: "left",
-                    label: "编程与文档",
+                    label: "官方文档",
+                    items: [
+                        {
+                            type: "doc",
+                            docId: "intro",
+                            label: "Yak 语言",
+                        },
+                        {
+                            type: "doc",
+                            docId: "intro",
+                            docsPluginId: "products",
+                            label: "Yakit 平台",
+                        },
+                    ],
                 },
-                {
-                    position: "left",
-                    type: "doc",
-                    docId: "intro",
-                    docsPluginId: "products",
-                    label: "Yakit 单兵平台",
-                },
-                {
-                    position: "left",
-                    type: "doc",
-                    docId: "intro",
-                    docsPluginId: "team",
-                    label: "社区与团队",
-                },
-                {
-                    position: "left",
-                    to: "/home",
-                    activeBasePath: "pages",
-                    label: "Home",
-                },
+                // {
+                //     position: "left",
+                //     type: "doc",
+                //     docId: "intro",
+                //     docsPluginId: "team",
+                //     label: "社区与团队",
+                // },
                 {
                     position: "left",
                     to: "/team",
@@ -88,13 +87,13 @@ module.exports = {
                     label: "团队&致谢",
                 },
                 // {to: 'blog', label: 'Blog', position: 'left'},
-                {
-                    type: "docsVersionDropdown",
-                    position: "right",
-                },
+                // {
+                //     type: "docsVersionDropdown",
+                //     position: "right",
+                // },
                 {
                     href: "https://github.com/yaklang",
-                    label: "GITHUB",
+                    label: "Github",
                     position: "right",
                 },
             ],

@@ -344,6 +344,7 @@ export const Team: React.FC<TeamProps> = (props) => {
                                             left: x,
                                             top: y,
                                         }}
+                                        key={item.info.name}
                                     >
                                         <Popover
                                             content={<Owner info={info} />}
@@ -440,27 +441,23 @@ const Owner: React.FC<OwnerProps> = React.memo((props) => {
                                 {info.links.map((item, index) => {
                                     if (item.href) {
                                         return (
-                                            <>
-                                                <a
-                                                    className="link-jump"
-                                                    key={item.name}
-                                                    href={item.href}
-                                                    target={"_blank"}
-                                                >
-                                                    {item.name}
-                                                </a>
-                                            </>
+                                            <a
+                                                className="link-jump"
+                                                key={item.name}
+                                                href={item.href}
+                                                target={"_blank"}
+                                            >
+                                                {item.name}
+                                            </a>
                                         );
                                     }
                                     return (
-                                        <>
-                                            <div
-                                                className="link-no-jump"
-                                                key={item.name}
-                                            >
-                                                {item.name}
-                                            </div>
-                                        </>
+                                        <div
+                                            className="link-no-jump"
+                                            key={item.name}
+                                        >
+                                            {item.name}
+                                        </div>
                                     );
                                 })}
                             </div>
@@ -469,6 +466,7 @@ const Owner: React.FC<OwnerProps> = React.memo((props) => {
                             {info.tags.map((item) => {
                                 return (
                                     <div
+                                        key={item.name}
                                         className={`tag-div-style ${item.color}-tag-div`}
                                     >
                                         {item.name}
@@ -533,10 +531,14 @@ const Contributors: React.FC<ContributorsProps> = React.memo((props) => {
                                     {info.links.map((item, index) => {
                                         if (item.href) {
                                             return (
-                                                <>
+                                                <div
+                                                    style={{
+                                                        display: "inline-block",
+                                                    }}
+                                                    key={item.name}
+                                                >
                                                     <a
                                                         className="link-jump"
-                                                        key={item.name}
                                                         href={item.href}
                                                         target={"_blank"}
                                                     >
@@ -547,22 +549,24 @@ const Contributors: React.FC<ContributorsProps> = React.memo((props) => {
                                                             1 && (
                                                         <Divider type="vertical" />
                                                     )}
-                                                </>
+                                                </div>
                                             );
                                         }
                                         return (
-                                            <>
-                                                <div
-                                                    className="link-no-jump"
-                                                    key={item.name}
-                                                >
+                                            <div
+                                                style={{
+                                                    display: "inline-block",
+                                                }}
+                                                key={item.name}
+                                            >
+                                                <div className="link-no-jump">
                                                     {item.name}
                                                 </div>
                                                 {index !==
                                                     info.links.length - 1 && (
                                                     <Divider type="vertical" />
                                                 )}
-                                            </>
+                                            </div>
                                         );
                                     })}
                                 </div>
@@ -624,10 +628,12 @@ const Consultant: React.FC<ConsultantProps> = React.memo((props) => {
                     {info.links.map((item, index) => {
                         if (item.href) {
                             return (
-                                <>
+                                <div
+                                    style={{ display: "inline-block" }}
+                                    key={item.name}
+                                >
                                     <a
                                         className="link-jump"
-                                        key={item.name}
                                         href={item.href}
                                         target={"_blank"}
                                     >
@@ -636,18 +642,19 @@ const Consultant: React.FC<ConsultantProps> = React.memo((props) => {
                                     {index !== info.links.length - 1 && (
                                         <Divider type="vertical" />
                                     )}
-                                </>
+                                </div>
                             );
                         }
                         return (
-                            <>
-                                <div className="link-no-jump" key={item.name}>
-                                    {item.name}
-                                </div>
+                            <div
+                                style={{ display: "inline-block" }}
+                                key={item.name}
+                            >
+                                <div className="link-no-jump">{item.name}</div>
                                 {index !== info.links.length - 1 && (
                                     <Divider type="vertical" />
                                 )}
-                            </>
+                            </div>
                         );
                     })}
                 </div>

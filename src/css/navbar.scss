@@ -10,4 +10,8 @@ $REM: 16;
     position: fixed;
     top: 0;
     left: 0;
+    padding: REM(8) REM(32);
+    .dropdown > .navbar__link:after {
+        display: none;
+    }
 }

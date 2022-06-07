@@ -256,8 +256,6 @@ $REM: 16;
         display: flex;
         cursor: pointer;
         .btn-title {
-            width: REM(148);
-            min-width: 105px;
             padding: REM(12) REM(24);
             background: #ff7d23;
             border-radius: 4px 0px 0px 4px;
@@ -281,8 +279,6 @@ $REM: 16;
         }
     }
     .course-doc-btn {
-        width: REM(172);
-        min-width: 115px;
         height: REM(48);
         padding: REM(12) REM(24);
         background: #ffffff;
@@ -755,6 +751,16 @@ $REM: 16;
     .propagate-video {
         padding: 0 20%;
         height: REM(472);
+        video {
+            background: rgba(57, 61, 72, 0.9);
+            border-radius: 16px 16px 0px 0px;
+            border-image: linear-gradient(
+                    158deg,
+                    rgba(219, 227, 243, 1),
+                    rgba(123, 129, 144, 0)
+                )
+                1 1;
+        }
     }
 }
 .popover-appraise-comments {

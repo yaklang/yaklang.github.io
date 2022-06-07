@@ -62,7 +62,7 @@ function Footer() {
     }
 
     const DesignW = 1920;
-    const FontRate = 15.875;
+    const FontRate = 16; //15.875;
 
     document.getElementsByTagName("html")[0].style.fontSize =
         (document.body.offsetWidth / DesignW) * FontRate + "px";

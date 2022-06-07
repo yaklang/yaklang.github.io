@@ -36,6 +36,19 @@
 html,
 body {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+$REM: 16;
+@function REM($n) {
+    @return ($n/$REM) * 1rem;
+}
+
+// 解决doc文档呗navbar遮挡问题
+.main-wrapper.docs-wrapper.docs-doc-page {
+    .container {
+        margin-top: REM(63);
+    }
 }
 
 // layout style file

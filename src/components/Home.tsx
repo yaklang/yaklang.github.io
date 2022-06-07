@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "animate.css";
 
-export interface HomeProps {}
+export interface HomePageProps {}
 
 interface FunctionListInfoProps {
     name: string;
@@ -32,9 +32,15 @@ const FunctionData: FunctionDataProps[] = [
             "../../static/img/home/third/mitm-3.png",
         ],
         list: [
-            { name: "难以复制的 MITM 被动扫描 GUI", link: "/" },
-            { name: "可视化可选择插件执行端口扫描", link: "/" },
-            { name: "常见安全工具右键联动", link: "/" },
+            {
+                name: "难以复制的 MITM 被动扫描 GUI",
+                link: "/products/best-practice/passive-scanning",
+            },
+            {
+                name: "可视化可选择插件执行端口扫描",
+                link: "/products/basic/modular-fingerprint-scanning",
+            },
+            { name: "常见安全工具右键联动", link: "/products/intro" },
         ],
     },
     {
@@ -43,7 +49,7 @@ const FunctionData: FunctionDataProps[] = [
         list: [
             {
                 name: "通过嵌入 Yaklang 脚本来实现 MITM 动态调试流量，随时动态执行代码",
-                link: "/",
+                link: "/products/professional/yakit-in-practice",
             },
         ],
     },
@@ -54,8 +60,14 @@ const FunctionData: FunctionDataProps[] = [
             "../../static/img/home/third/permeate-2.png",
         ],
         list: [
-            { name: "劫持 => History => Repeater / Intruder", link: "/" },
-            { name: "经典渗透测试操作流", link: "/" },
+            {
+                name: "劫持 => History => Repeater / Intruder",
+                link: "/products/yak-actual-combat-cases/traffic-hijacking",
+            },
+            {
+                name: "经典渗透测试操作流",
+                link: "/products/yak-actual-combat-cases/traffic-hijacking",
+            },
         ],
     },
     {
@@ -64,7 +76,7 @@ const FunctionData: FunctionDataProps[] = [
         list: [
             {
                 name: "使用 fuzz 语法可整合并同时代替 Repeater 与 Intruder ",
-                link: "/",
+                link: "/products/web-fuzzer-parsing/more-than-repeater-Intruder",
             },
         ],
     },
@@ -77,9 +89,12 @@ const FunctionData: FunctionDataProps[] = [
         list: [
             {
                 name: "用户可以在任何适合渗透测试最需要的步骤内执行自定义的 Yaklang 脚本或插件",
-                link: "/",
+                link: "/products/best-practice/mitm-plug",
             },
-            { name: "插件仓库与插件商店机制为 “社区化” 助力", link: "/" },
+            {
+                name: "插件仓库与插件商店机制为 “社区化” 助力",
+                link: "/products/plugins/plugin_type",
+            },
         ],
     },
 ];
@@ -98,7 +113,7 @@ const IntroduceKinds: IntroduceKindProps[] = [
     { name: "高阶工具", icon: "../../static/img/home/second/tool-head.png" },
 ];
 
-export const Home: React.FC<HomeProps> = (props) => {
+export const HomePage: React.FC<HomePageProps> = (props) => {
     const [kind, setKind] = useState<IntroduceKindProps>({
         name: "高效",
         icon: "../../static/img/home/second/efficent-head.png",
@@ -1579,12 +1594,10 @@ const AppraiseInfoBody = React.memo(() => {
             <div className="propagate-video">
                 {/* @ts-ignore */}
                 <ReactPlayer
-                    url={[
-                        "https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view_1.5.mp4",
-                    ]}
+                    url={["../../static/img/home/video.mp4"]}
                     loop={true}
                     playsinline={true}
-                    controls={false}
+                    controls={true}
                     playing={true}
                     width={"100%"}
                     height={"100%"}
