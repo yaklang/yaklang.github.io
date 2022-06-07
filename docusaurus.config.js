@@ -76,6 +76,13 @@ module.exports = {
                         },
                     ],
                 },
+                // {
+                //     position: "left",
+                //     type: "doc",
+                //     docId: "intro",
+                //     docsPluginId: "team",
+                //     label: "社区与团队",
+                // },
                 {
                     position: "left",
                     to: "/team",
