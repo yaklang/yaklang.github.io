@@ -1,6 +1,6 @@
 $REM: 16;
 @function REM($n) {
-    @return ($n/$REM) * 1rem;
+    @return calc($n / $REM) * 1rem;
 }
 
 .home-container {

@@ -73,6 +73,18 @@ module.exports = {
                         },
                     ],
                 },
+                {
+                    position: "left",
+                    to: "/team",
+                    activeBasePath: "pages",
+                    label: "团队&致谢",
+                },
+                // {
+                //     position: "left",
+                //     to: "/team",
+                //     activeBasePath: "pages",
+                //     label: "Yak 社区",
+                // },
                 // {
                 //     position: "left",
                 //     type: "doc",
@@ -80,12 +92,6 @@ module.exports = {
                 //     docsPluginId: "team",
                 //     label: "社区与团队",
                 // },
-                {
-                    position: "left",
-                    to: "/team",
-                    activeBasePath: "pages",
-                    label: "团队&致谢",
-                },
                 // {to: 'blog', label: 'Blog', position: 'left'},
                 // {
                 //     type: "docsVersionDropdown",
@@ -130,16 +136,16 @@ module.exports = {
     },
     plugins: [
         "docusaurus-plugin-sass",
-        [
-            "@docusaurus/plugin-content-docs",
-            {
-                id: "team",
-                path: "team",
-                routeBasePath: "team",
-                sidebarPath: require.resolve("./sidebarsTeam.js"),
-                // ... other options
-            },
-        ],
+        // [
+        //     "@docusaurus/plugin-content-docs",
+        //     {
+        //         id: "team",
+        //         path: "team",
+        //         routeBasePath: "team",
+        //         sidebarPath: require.resolve("./sidebarsTeam.js"),
+        //         // ... other options
+        //     },
+        // ],
         [
             "@docusaurus/plugin-content-docs",
             {
