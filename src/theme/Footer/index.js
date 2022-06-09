@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import { useThemeConfig } from "@docusaurus/theme-common";
@@ -61,36 +61,40 @@ function Footer() {
         return null;
     }
 
-    const DesignW = 1920;
-    const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
+    useEffect(() => {
+        const DesignW = 1920;
+        const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
 
-    document.getElementsByTagName("html")[0].style.fontSize =
-        (document.body.offsetWidth / DesignW) * FontRate + "px";
-    document.getElementsByTagName("body")[0].style.fontSize =
-        (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("html")[0].style.fontSize =
+            (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize =
+            (document.body.offsetWidth / DesignW) * FontRate + "px";
 
-    window.addEventListener(
-        "onorientationchange" in window ? "orientationchange" : "resize",
-        () => {
-            document.getElementsByTagName("html")[0].style.fontSize =
-                (document.body.offsetWidth / DesignW) * FontRate + "px";
-            document.getElementsByTagName("body")[0].style.fontSize =
-                (document.body.offsetWidth / DesignW) * FontRate + "px";
-        }
-    );
+        window.addEventListener(
+            "onorientationchange" in window ? "orientationchange" : "resize",
+            () => {
+                document.getElementsByTagName("html")[0].style.fontSize =
+                    (document.body.offsetWidth / DesignW) * FontRate + "px";
+                document.getElementsByTagName("body")[0].style.fontSize =
+                    (document.body.offsetWidth / DesignW) * FontRate + "px";
+            }
+        );
 
-    document.onscroll = (e) => {
-        if (
-            e.target &&
-            e.target.scrollingElement &&
-            e.target.scrollingElement.scrollTop
-        ) {
-            const navbar = document.getElementsByClassName("navbar")[0];
-            const flag =
-                e.target.scrollingElement.scrollTop > navbar.offsetHeight;
-            navbar.style.backgroundColor = flag ? "#ffffff" : "rgba(0,0,0,0)";
-        }
-    };
+        document.onscroll = (e) => {
+            if (
+                e.target &&
+                e.target.scrollingElement &&
+                e.target.scrollingElement.scrollTop
+            ) {
+                const navbar = document.getElementsByClassName("navbar")[0];
+                const flag =
+                    e.target.scrollingElement.scrollTop > navbar.offsetHeight;
+                navbar.style.backgroundColor = flag
+                    ? "#ffffff"
+                    : "rgba(0,0,0,0)";
+            }
+        };
+    }, []);
 
     return (
         <footer
