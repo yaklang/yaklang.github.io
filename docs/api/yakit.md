@@ -11,6 +11,7 @@
  | [yakit.File](#yakitfile) |  |
  | [yakit.GenerateYakitMITMHooksParams](#yakitgenerateyakitmitmhooksparams) | 用于生成 MITM 插件的参数 |
  | [yakit.GetHomeDir](#yakitgethomedir) |  |
+ | [yakit.GetHomeTempDir](#yakitgethometempdir) |  |
  | [yakit.Info](#yakitinfo) | 在 Yakit UI 中输出 Info 级别的信息 |
  | [yakit.InitYakit](#yakitinityakit) | 手动初始化 Yakit 客户端，用于自定义 |
  | [yakit.Markdown](#yakitmarkdown) |  |
@@ -256,6 +257,29 @@
 #### 定义：
 
 `func yakit.GetHomeDir() return (r0: string)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### yakit.GetHomeTempDir
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.GetHomeTempDir() return (r0: string)`
 
  
 

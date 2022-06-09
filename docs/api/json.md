@@ -3,6 +3,8 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [json.Find](#jsonfind) |  |
+ | [json.FindPath](#jsonfindpath) |  |
  | [json.Marshal](#jsonmarshal) |  |
  | [json.New](#jsonnew) |  |
  | [json.dumps](#jsondumps) | 把一个任何Yak/Golang对象解析为 string |
@@ -17,6 +19,70 @@
 
 ## 函数定义
 
+### json.Find
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func json.Find(v1: any, v2: string) return (r0: any)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `any` |   |
+
+
+ 
+### json.FindPath
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func json.FindPath(v1: any, v2: string) return (r0: any)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `any` |   |
+
+
+ 
 ### json.Marshal
 
 

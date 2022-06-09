@@ -9,6 +9,7 @@
  | [tls.GenerateRSAKeyPair](#tlsgeneratersakeypair) |  |
  | [tls.GenerateRootCA](#tlsgeneraterootca) | 签发一个 CA 证书 |
  | [tls.GenerateSM2KeyPair](#tlsgeneratesm2keypair) |  |
+ | [tls.Inspect](#tlsinspect) | 审计一个地址的 TLS 信息 |
  | [tls.SignClientCertAndKey](#tlssignclientcertandkey) | 签发一个客户端证书，不带x509认证 |
  | [tls.SignServerCertAndKey](#tlssignservercertandkey) | 签发一个服务端证书，不带 x509 认证 |
  | [tls.SignX509ClientCertAndKey](#tlssignx509clientcertandkey) | 签发一个带 x509 认证的客户端证书 |
@@ -186,6 +187,38 @@
 | r0 | `bytes` |   |
 | r1 | `bytes` |   |
 | r2 | `error` |   |
+
+
+ 
+### tls.Inspect
+
+审计一个地址的 TLS 信息
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func tls.Inspect(v1: string) return (r0: []*tlsutils.TLSInspectResult, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*tlsutils.TLSInspectResult` |   |
+| r1 | `error` |   |
 
 
  

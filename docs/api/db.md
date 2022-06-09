@@ -5,8 +5,10 @@
 |:------|:--------|
  | [db.DelKey](#dbdelkey) | 删除 Key 对应的值(数据库中) |
  | [db.DeletePayloadByGroup](#dbdeletepayloadbygroup) | 删除 Payload |
+ | [db.DeleteYakitMenuItemAll](#dbdeleteyakitmenuitemall) |  |
  | [db.DownloadGeoIP](#dbdownloadgeoip) | 下载并自动解压 GeoIP |
  | [db.GetKey](#dbgetkey) | 获取持久化 Key |
+ | [db.GetYakitPluginByName](#dbgetyakitpluginbyname) |  |
  | [db.QueryDomainsByDomainKeyword](#dbquerydomainsbydomainkeyword) | 根据关键字查询域名资产 |
  | [db.QueryDomainsByNetwork](#dbquerydomainsbynetwork) | 根据解析到的网段查询域名资产 |
  | [db.QueryDomainsByTitle](#dbquerydomainsbytitle) | 根据网站名查询域名 |
@@ -24,6 +26,7 @@
  | [db.SavePayload](#dbsavepayload) | 保存 Payload 到一个组 |
  | [db.SavePayloadByFile](#dbsavepayloadbyfile) | 保存 Payload 到文件 |
  | [db.SavePortFromResult](#dbsaveportfromresult) | 从某个结果中保存端口 |
+ | [db.SaveYakitMenuItemByBatchExecuteConfig](#dbsaveyakitmenuitembybatchexecuteconfig) |  |
  | [db.SetKey](#dbsetkey) | 设置持久化 Key |
 
 
@@ -91,6 +94,29 @@
 
 
  
+### db.DeleteYakitMenuItemAll
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.DeleteYakitMenuItemAll() return (r0: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### db.DownloadGeoIP
 
 下载并自动解压 GeoIP
@@ -142,6 +168,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
+
+
+ 
+### db.GetYakitPluginByName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.GetYakitPluginByName(v1: string) return (r0: *yakit.YakScript, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yakit.YakScript` |   |
+| r1 | `error` |   |
 
 
  
@@ -655,6 +713,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | result | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### db.SaveYakitMenuItemByBatchExecuteConfig
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.SaveYakitMenuItemByBatchExecuteConfig(v1: any) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 

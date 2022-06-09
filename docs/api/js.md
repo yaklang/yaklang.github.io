@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [js.ASTWalk](#jsastwalk) | 遍历一个 JS 中的所有符号，字面量以及数据解析错误的地方 |
  | [js.CallFunctionFromCode](#jscallfunctionfromcode) | 从一段代码中调用某个函数 |
  | [js.FalseValue](#jsfalsevalue) | 返回 JS 的 False 对象 |
  | [js.NaNValue](#jsnanvalue) |  |
@@ -28,6 +29,38 @@
 
 ## 函数定义
 
+### js.ASTWalk
+
+遍历一个 JS 中的所有符号，字面量以及数据解析错误的地方
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func js.ASTWalk(v1: string) return (r0: *javascript.ASTWalkerResult, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javascript.ASTWalkerResult` |   |
+| r1 | `error` |   |
+
+
+ 
 ### js.CallFunctionFromCode
 
 从一段代码中调用某个函数

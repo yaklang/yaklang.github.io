@@ -22,6 +22,7 @@
  | [cli.String](#clistring) | 最基础的命令行获取接口，把参数的值解析成字符串 |
  | [cli.Url](#cliurl) | 把参数对应的值解析成 url，如果无法精确对应一个 url，将会自动补充 `https://`, `http://`, `www` 等，如果本身参数就是个 url，则会保留原样 |
  | [cli.Urls](#cliurls) |  |
+ | [cli.YakitPlugin](#cliyakitplugin) |  |
  | [cli.check](#clicheck) | 检查当前设置的所有参数，如果有不合理的参数（无法确定值），则停止执行，打印出帮助信息 |
  | [cli.setDefault](#clisetdefault) | 为命令行设置默认值，默认值会被强行类型断言为目标类型，不要传错类型就可以！ |
  | [cli.setHelp](#clisethelp) | 使用方法同 `cli.setDefault` 使用，如果某个参数的值为空的话，并且没有默认值，将会展示缺少的参数。 |
@@ -625,6 +626,29 @@
 
 
 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
+### cli.YakitPlugin
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func cli.YakitPlugin() return (r0: []string)`
+
+ 
 
 
 #### 返回值

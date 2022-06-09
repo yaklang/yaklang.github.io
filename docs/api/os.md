@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [os.Chdir](#oschdir) |  |
  | [os.Clearenv](#osclearenv) | 清除环境变量，与原生 Golang `go.Clearenv` 相同 |
  | [os.Environ](#osenviron) | 获取当前所有的环境变量内容 |
  | [os.Executable](#osexecutable) | 获取当前正在执行的二进制程序的路径 |
@@ -42,6 +43,37 @@
 
 ## 函数定义
 
+### os.Chdir
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func os.Chdir(v1: string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### os.Clearenv
 
 清除环境变量，与原生 Golang `go.Clearenv` 相同

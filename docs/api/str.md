@@ -58,7 +58,7 @@
  | [str.IsXmlParam](#strisxmlparam) | 判断一个参数是否是 XML 参数 |
  | [str.IsXmlRequest](#strisxmlrequest) | 判断一个请求是不是 XML 请求 |
  | [str.IsXmlValue](#strisxmlvalue) | 判断一个值是不是 XML |
- | [str.Join](#strjoin) | Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分隔符 |
+ | [str.Join](#strjoin) |  |
  | [str.JsonStreamToMapList](#strjsonstreamtomaplist) | 把 json 流解析成多个 `map[string]interface{}` |
  | [str.JsonToMap](#strjsontomap) | 把 Json 解析成 `map[string]string` |
  | [str.JsonToMapList](#strjsontomaplist) |  |
@@ -106,13 +106,14 @@
  | [str.SplitN](#strsplitn) | 分割字符串，分割成N块 |
  | [str.StartsWith](#strstartswith) | 判断主字符串是否是子串开头？ |
  | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) | 判断字符串是否包含任意一个后续 Slice 中的元素？ |
- | [str.StringSliceContains](#strstringslicecontains) | 判断一个 Slice 中是否包含一个子字符串？ |
+ | [str.StringSliceContains](#strstringslicecontains) |  |
  | [str.StringSliceContainsAll](#strstringslicecontainsall) | 判断一个 Slice 中是否包含后续所有子串？ |
  | [str.Subtract](#strsubtract) | 列表相减 |
  | [str.Title](#strtitle) | 把字符串每个单词首字母大写，变成 Title |
  | [str.ToJsonIndentStr](#strtojsonindentstr) | 把一个对象解析成 Json，并保证 indent 合理 |
  | [str.ToLower](#strtolower) | 把字符串变成小写 |
  | [str.ToLowerSpecial](#strtolowerspecial) | 同 Golang `strings.ToLowerSpecial` |
+ | [str.ToStringSlice](#strtostringslice) | 把任意一个数据结构转换成数组 |
  | [str.ToTitle](#strtotitle) | 同 Golang `strings.ToTitle` |
  | [str.ToTitleSpecial](#strtotitlespecial) | 同 Golang `strings.ToTitleSpecial` |
  | [str.ToUpper](#strtoupper) | 把字符串变成全大写 |
@@ -1873,7 +1874,7 @@
  
 ### str.Join
 
-Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分隔符
+
 
 #### 详细描述
 
@@ -1881,15 +1882,15 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 
 #### 定义：
 
-`func str.Join(strSlice: []string, seperator: string) return (r0: string)`
+`func str.Join(v1: any, v2: any) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| strSlice | `[]string` |   |
-| seperator | `string` |   |
+| v1 | `any` |   |
+| v2 | `any` |   |
 
 
 
@@ -3394,7 +3395,7 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
  
 ### str.StringSliceContains
 
-判断一个 Slice 中是否包含一个子字符串？
+
 
 #### 详细描述
 
@@ -3402,15 +3403,15 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 
 #### 定义：
 
-`func str.StringSliceContains(slice: []string, sub: string) return (r0: bool)`
+`func str.StringSliceContains(v1: any, v2: string) return (r0: bool)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| slice | `[]string` |   |
-| sub | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -3610,6 +3611,37 @@ Join 一个字符串，把 slice 中拼成字符串，使用 seperator 作为分
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
+
+
+ 
+### str.ToStringSlice
+
+把任意一个数据结构转换成数组
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ToStringSlice(v1: any) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
 
 
  

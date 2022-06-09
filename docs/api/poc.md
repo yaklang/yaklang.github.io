@@ -10,6 +10,8 @@
  | [poc.HTTPPacketForceChunked](#pochttppacketforcechunked) |  |
  | [poc.ParseBytesToHTTPRequest](#pocparsebytestohttprequest) | 把一个原始数据包 bytes 转变成 HTTP 请求 |
  | [poc.ParseBytesToHTTPResponse](#pocparsebytestohttpresponse) | 把一个数据包转变成可用的 HTTP Response 对象 |
+ | [poc.ParseUrlToHTTPRequestRaw](#pocparseurltohttprequestraw) | 把 URL 解析成原始数据包 |
+ | [poc.ReplaceBody](#pocreplacebody) |  |
  | [poc.Split](#pocsplit) | 把一个数据包的 Header 部分和 Body 分开，Header 是 string，body 部分是 bytes |
  | [poc.host](#pochost) | 强制指定连接 Host（一般用于 host） |
  | [poc.https](#pochttps) | forceHttps |
@@ -252,6 +254,73 @@
 |:-----------|:---------- |:-----------|
 | rsp | `*http.Response` |   |
 | r1 | `error` |   |
+
+
+ 
+### poc.ParseUrlToHTTPRequestRaw
+
+把 URL 解析成原始数据包
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.ParseUrlToHTTPRequestRaw(method: string, url: any) return (https: bool, packet: bytes, err: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| method | `string` |   |
+| url | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| https | `bool` |   |
+| packet | `bytes` |   |
+| err | `error` |   |
+
+
+ 
+### poc.ReplaceBody
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.ReplaceBody(v1: bytes, v2: bytes, v3: bool) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  

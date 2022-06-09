@@ -4,6 +4,8 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有 PoC 对象 |
+ | [nuclei.GetPoCDir](#nucleigetpocdir) |  |
+ | [nuclei.PocVulToRisk](#nucleipocvultorisk) |  |
  | [nuclei.PullDatabase](#nucleipulldatabase) | 拉去数据库 |
  | [nuclei.RemoveDatabase](#nucleiremovedatabase) | 移除 nuclei 数据库 |
  | [nuclei.Scan](#nucleiscan) | nuclei 核心函数，v1 为扫描目标，输入网段/IP/域名/URL 都可以，会被自动解析为 URL（可能会自动补充 www.） |
@@ -89,6 +91,60 @@
 |:-----------|:---------- |:-----------|
 | r0 | `[]*tools.templateDesc` |   |
 | r1 | `error` |   |
+
+
+ 
+### nuclei.GetPoCDir
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.GetPoCDir() return (r0: string)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### nuclei.PocVulToRisk
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.PocVulToRisk(v1: *tools.PocVul) return (r0: *yakit.Risk)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `*tools.PocVul` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yakit.Risk` |   |
 
 
  

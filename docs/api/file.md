@@ -8,6 +8,7 @@
  | [file.Cp](#filecp) | 复制文件 |
  | [file.Create](#filecreate) | 创建一个文件，当前用户下读写执行权限均打开 |
  | [file.Dir](#filedir) | 同 `file.Ls` |
+ | [file.GetDirPath](#filegetdirpath) |  |
  | [file.IsAbs](#fileisabs) | 判断路径是否是绝对路径名 |
  | [file.IsDir](#fileisdir) | 判断路径是否是一个文件夹 |
  | [file.IsExisted](#fileisexisted) | 判断路径文件是否存在 |
@@ -22,14 +23,18 @@
  | [file.Open](#fileopen) | 打开一个文件，如果没有就创建，使用最多权限 |
  | [file.OpenFile](#fileopenfile) |  |
  | [file.ReadAll](#filereadall) | 把一个 reader 的内容全部读出来 |
+ | [file.ReadDirInfoInDirectory](#filereaddirinfoindirectory) |  |
  | [file.ReadFile](#filereadfile) | 把一个文件内容读出来 |
+ | [file.ReadFileInfoInDirectory](#filereadfileinfoindirectory) |  |
  | [file.Remove](#fileremove) | 把一个文件移除，相当于 `os.RemoveAll` |
  | [file.Rename](#filerename) | 把一个路径重命名 |
  | [file.Rm](#filerm) | 同 `file.Remove` / Golang `os.RemoveAll` |
  | [file.Save](#filesave) | 把 content 中的内容写入文件名为 fileName 中的文件，支持 bytes/string/[]string |
  | [file.SaveJson](#filesavejson) |  |
+ | [file.Split](#filesplit) |  |
  | [file.Stat](#filestat) |  |
- | [file.TempFile](#filetempfile) | 打开一个临时文件 |
+ | [file.TempFile](#filetempfile) |  |
+ | [file.TempFileName](#filetempfilename) |  |
 
 
 
@@ -201,6 +206,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | fileInfos | `[]*utils.FileInfo` |   |
+
+
+ 
+### file.GetDirPath
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.GetDirPath(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  
@@ -645,6 +681,38 @@
 
 
  
+### file.ReadDirInfoInDirectory
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.ReadDirInfoInDirectory(v1: string) return (r0: []*utils.FileInfo, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*utils.FileInfo` |   |
+| r1 | `error` |   |
+
+
+ 
 ### file.ReadFile
 
 把一个文件内容读出来
@@ -673,6 +741,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | fileContent | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### file.ReadFileInfoInDirectory
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.ReadFileInfoInDirectory(v1: string) return (r0: []*utils.FileInfo, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*utils.FileInfo` |   |
 | r1 | `error` |   |
 
 
@@ -835,6 +935,38 @@
 
 
  
+### file.Split
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.Split(v1: string) return (r0: string, r1: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `string` |   |
+
+
+ 
 ### file.Stat
 
 
@@ -869,7 +1001,7 @@
  
 ### file.TempFile
 
-打开一个临时文件
+
 
 #### 详细描述
 
@@ -877,14 +1009,14 @@
 
 #### 定义：
 
-`func file.TempFile(dirName: string) return (r0: *yaklib._yakFile, r1: error)`
+`func file.TempFile(v1 ...string) return (r0: *yaklib._yakFile, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| dirName | `string` |  临时文件的文件夹 |
+| v1 | `...string` |   |
 
 
 
@@ -895,6 +1027,30 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `*yaklib._yakFile` |   |
+| r1 | `error` |   |
+
+
+ 
+### file.TempFileName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.TempFileName() return (r0: string, r1: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 | r1 | `error` |   |
 
 

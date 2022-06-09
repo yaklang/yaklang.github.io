@@ -9,6 +9,7 @@
  | [codec.AESEncrypt](#codecaesencrypt) | aes cbc 加密 |
  | [codec.AESGCMDecrypt](#codecaesgcmdecrypt) | aes gcm 解密 |
  | [codec.AESGCMEncrypt](#codecaesgcmencrypt) | aes gcm 加密 |
+ | [codec.AutoDecode](#codecautodecode) |  |
  | [codec.DESCBCDecrypt](#codecdescbcdecrypt) |  |
  | [codec.DESCBCEncrypt](#codecdescbcencrypt) |  |
  | [codec.DESDecrypt](#codecdesdecrypt) | DES 解密（默认CBC） |
@@ -283,6 +284,37 @@ aes gcm 加密
 |:-----------|:---------- |:-----------|
 | r0 | `bytes` |   |
 | r1 | `error` |   |
+
+
+ 
+### codec.AutoDecode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AutoDecode(v1: any) return (r0: []*codec.AutoDecodeResult)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*codec.AutoDecodeResult` |   |
 
 
  
