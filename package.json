@@ -23,6 +23,7 @@
     "clsx": "^1.1.1",
     "codemirror": "^5.62.0",
     "file-loader": "^6.2.0",
+    "http-server": "^14.1.1",
     "proton-engine": "^4.2.1",
     "raf-manager": "^0.3.0",
     "react": "^17.0.1",

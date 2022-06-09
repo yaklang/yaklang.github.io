@@ -1,0 +1,121 @@
+---
+sidebar_position: 5
+---
+
+# ICMP Size Logger & TCP Port Logger
+
+## 除了各种 DNSLog 之外还有得选吗？
+
+## 背景与前情提要
+
+在 “抽象的黑盒漏洞扫描与风险技术评估方法论” 中，我们提出了反连的各种姿势，简单总结一下：
+1. <span style={{background:"#fff67acc"}}>通过实现通信协议来进行反连检测</span>：DNSLog / RMI / LDAP / HTTP 等
+2. <span style={{background:"#fff67acc"}}>TCP 随机端口反连检测</span>
+3. ICMP 反连：<span style={{background:"#fff67acc"}}>以特定长度 ICMP 包作为依据实现反连检测</span>
+
+我们在 Yakit v1.0.14-sp6 版本中实现了上述描述的所有细节的 GUI 版本
+
+## 现状
+绝大多数的现有方案（例如：`dnslog.cn` / `ceye.io` / `xray`等）使用 DNSLog / HTTP / RMI 来检测特定协议携带 token 的域名 / URI。当然这些确实是久经验证且非常有效的方式。
+
+这些方式通常对应了我们说的 “第一种方案”：通过实现通信协议来进行反连检测。
+
+然而，通过其他“信道”的观测，我们可以用其他指标来确定 “是否还有其他办法” 检测反连，就是我们今天要介绍的比较少见且有效的 TCP / ICMP Size Log。
+
+## 我们做了什么？
+### ICMP Size Logger：
+#### 原理解释
+
+众所周知，ICMP 最简单的触发应该是 ping 命令：如果我们在受害主机上 ping 我们自己控制的公网服务器，那么如果 Ping 通了，我们就马上会尝试测试 TCP 反连之类的各种操作。
+
+那这中间可能会有其他的问题：
+
+1. 如果 ICMP 通，但是 <span style={{background:"#fff67acc"}}>TCP 禁止出网外连怎么办</span>？能想办法缩短检测路径吗？
+2. 如果 ICMP 通了，但是<span style={{background:"#fff67acc"}}>没有回显</span>，不知道到底通了没有，怎么办？
+
+经过思考后，我们发现如果我们自己控制的公网服务器能告诉我们 <span style={{background:"#fff67acc"}}>“有人 Ping 了我” </span>就再好不过。
+
+<div align="center">
+    <img src="/img/products/yakit/icmp-tcp-ping.png" />
+</div>
+
+基于这种朴素的想法，我们觉得思路完全 Ok，所以只要知道 <span style={{background:"#fff67acc"}}>“谁” ping 了我</span>。这个问题就已经解决了。于是我们使用 ping 命令的 `ping -s [len] yakbridge` 可以 ping 到我们的目标主机。
+
+为此，我们在 Yakit 中的 “反连管理” 中新增了一个 “ICMP Size Log” 的新页面，在这个页面中，实现了我们上面描述的操作内容：
+
+1. 我们生成一个可用的 ICMP 长度
+2. 使用这个长度渲染 ping 命令，可供用户使用
+3. 在用户 ping 命令执行后，可以自动观测到 “谁 ping 了我”。
+
+![](/img/products/yakit/icmp-tcp-automatic-observation.png)
+
+#### ICMP Size Log 实机演示如下
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-icmp-size-log.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+### TCP Random Port Logger:
+#### 原理解释
+
+实际上对于除了 DNS 之外的大多数场景来说，绝大多数反连的 “检测” 都是以 TCP 作为基础协议的，我们可以通过对基于 TCP 协议进行实现从而实现多种应用写的复杂兼容：
+
+1. 常见的 HTTP 反连检测，我们一般使用 Path 作为 Token 的标注位置，来区分 “到底是哪个漏洞触发”：`http://example.com/[token]`
+2. 常见的 RMI 类似 `jndi:rmi://example.com/[token]`
+3. ...
+
+但是实际上，上面的各种用例都是需要用户具体监听某个端口来实现的，在于 @奶权 师傅的交流中，我们实现了一种更 “通用的” 检测手段，并成功把它进行了工程化实现：
+
+![](/img/products/yakit/icmp-tcp-engineering.png)
+
+为此，我们同样也实现了一个 GUI 版本，大家可以在 Yakit - “反连管理” 中直接使用
+
+![](/img/products/yakit/icmp-tcp-anti-connection.png)
+
+#### TCP Port Log 实机演示如下
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-tcp-prot-log.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+## 关于公网服务器：
+### 配置公共 Yak Bridge
+
+目前 Yakit 内置了一个公网服务器供大家在 Yakit 中使用上述功能。当然，这个服务器的搭建十分简单：
+
+通过一个 “docker-compose” 即可实现该服务器的搭建。
+
+```http
+version: "2"
+
+services:
+  bridge:
+    image: v1ll4n/yak-bridge:latest
+    network_mode: host
+    restart: always
+    command: yak bridge --dnslog --domain [your-root-domain] --log-level error
+```
+
+搭建之后，可以直接连接默认的 64333 端口 (grpc)。
+
+如果用户要在 Yakit 中使用自己的服务器连接：使用 `YAK_DNSLOG_BRIDGE_ADDR=[your-bridge]:[port] yak grpc `然后使用 Yakit 连接自己的 Yak 引擎即可
+
+### 配置加密的私有 Yak Bridge？
+
+目前引擎虽然支持配置私有加密 Yak Bridge，但是这个功能应该在 Yakit 上进行 GUI 输入并本地记住用户的配置选项。
+
+不过当前可以通过右上角 “配置” 选择 “全局配置” 来配置 “公网反连服务器（Yak Bridge）”。
+
+<span style={{background:"#fff67acc"}}>需要注意的是</span>，这个 Yak Bridge 目前并不会在 ICMP Log / TCP Port / DNSLog 中生效，这个配置目前只针对 yaklang 在自动进行漏洞扫描的时候生效。
+
+在进行一些配置转换和调整之后，这个配置将可以在 GUI 服务中生效，同时也会把这部分配置更简单明确的放出。
+
+![](/img/products/yakit/icmp-tcp-yak-bridge.png)
+
+## 小总结：
+1. 这两种方式并不一定完全代替 DNSLog，例如 FastJSON 检测的场景。
+2. 这种方式某种角度上来说，比 DNSLog 更快：因为 DNSLog 需要额外进行一次 dns 查询（查询 NS 记录），然后再去连接 NS 记录对应的主机发送 DNS 请求（UDP/TCP 53）
+3. TCP / ICMP Log 可以迅速判断受害主机到攻击机 TCP / ICMP 是否通畅，这是非常好的一个技术补充。
+4. 不止用在 “漏洞检测” 方面，可以用这个方式来判断用户的 “网络隔离” 配置是否生效。
