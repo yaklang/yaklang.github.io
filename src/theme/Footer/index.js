@@ -206,7 +206,7 @@ function Footer() {
                                 content={
                                     <div>
                                         <img
-                                            src="../../../static/img/wechat.png"
+                                            src="/img/wechat.png"
                                             className="wechat-code-img"
                                         />
                                         <div className="wechat-code-title">

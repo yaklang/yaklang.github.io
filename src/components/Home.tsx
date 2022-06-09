@@ -27,9 +27,9 @@ const FunctionData: FunctionDataProps[] = [
     {
         title: "常见安全工具的最佳实践 GUI",
         img: [
-            "../../static/img/home/third/mitm-1.png",
-            "../../static/img/home/third/mitm-2.png",
-            "../../static/img/home/third/mitm-3.png",
+            require("../../static/img/home/third/mitm-1.png").default,
+            require("../../static/img/home/third/mitm-2.png").default,
+            require("../../static/img/home/third/mitm-3.png").default,
         ],
         list: [
             {
@@ -45,7 +45,7 @@ const FunctionData: FunctionDataProps[] = [
     },
     {
         title: "可嵌入式执行并随时热加载",
-        img: ["../../static/img/home/third/hot-loading.png"],
+        img: [require("../../static/img/home/third/hot-loading.png").default],
         list: [
             {
                 name: "通过嵌入 Yaklang 脚本来实现 MITM 动态调试流量，随时动态执行代码",
@@ -56,8 +56,8 @@ const FunctionData: FunctionDataProps[] = [
     {
         title: "复刻 BurpS**te 操作流",
         img: [
-            "../../static/img/home/third/permeate-1.png",
-            "../../static/img/home/third/permeate-2.png",
+            require("../../static/img/home/third/permeate-1.png").default,
+            require("../../static/img/home/third/permeate-2.png").default,
         ],
         list: [
             {
@@ -72,7 +72,7 @@ const FunctionData: FunctionDataProps[] = [
     },
     {
         title: "独一无二的 Web Fuzzer 与 Fuzz 语法",
-        img: ["../../static/img/home/third/fuzzer.png"],
+        img: [require("../../static/img/home/third/fuzzer.png").default],
         list: [
             {
                 name: "使用 fuzz 语法可整合并同时代替 Repeater 与 Intruder ",
@@ -83,8 +83,8 @@ const FunctionData: FunctionDataProps[] = [
     {
         title: "基于社区的高度插件化 ",
         img: [
-            "../../static/img/home/third/plugin-1.png",
-            "../../static/img/home/third/plugin-2.png",
+            require("../../static/img/home/third/plugin-1.png").default,
+            require("../../static/img/home/third/plugin-2.png").default,
         ],
         list: [
             {
@@ -104,19 +104,28 @@ interface IntroduceKindProps {
     icon: string;
 }
 const IntroduceKinds: IntroduceKindProps[] = [
-    { name: "高效", icon: "../../static/img/home/second/efficent-head.png" },
+    {
+        name: "高效",
+        icon: require("../../static/img/home/second/efficent-head.png").default,
+    },
     {
         name: "函数级调用",
-        icon: "../../static/img/home/second/function-head.png",
+        icon: require("../../static/img/home/second/function-head.png").default,
     },
-    { name: "自动补全", icon: "../../static/img/home/second/doc-head.png" },
-    { name: "高阶工具", icon: "../../static/img/home/second/tool-head.png" },
+    {
+        name: "自动补全",
+        icon: require("../../static/img/home/second/doc-head.png").default,
+    },
+    {
+        name: "高阶工具",
+        icon: require("../../static/img/home/second/tool-head.png").default,
+    },
 ];
 
 export const HomePage: React.FC<HomePageProps> = (props) => {
     const [kind, setKind] = useState<IntroduceKindProps>({
         name: "高效",
-        icon: "../../static/img/home/second/efficent-head.png",
+        icon: require("../../static/img/home/second/efficent-head.png").default,
     });
     // 滚动区域变化标识
     const [kindRate, setKindRate] = useState<number>(0);
@@ -173,18 +182,18 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         <div className="home-container">
             <div className="guide-body">
                 <img
-                    src="../../static/img/home/homeHeadBg.png"
+                    src={require("../../static/img/home/homeHeadBg.png").default}
                     className="guide-background-img"
                 />
                 <div className="guide-words-body">
                     <div className="guide-words-body-header">
                         网络安全领域的 DSL 最佳实践
                         <img
-                            src="../../static/img/home/homeHeadCircular.png"
+                            src={require("../../static/img/home/homeHeadCircular.png").default}
                             className="header-circle"
                         />
                         <img
-                            src="../../static/img/home/homeHeadTitle.png"
+                            src={require("../../static/img/home/homeHeadTitle.png").default}
                             className="header-title"
                         />
                     </div>
@@ -255,7 +264,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                             isScrollUp={isScrollUp}
                         />
                         <img
-                            src="../../static/img/home/second/kind-icon.png"
+                            src={require("../../static/img/home/second/kind-icon.png").default}
                             className="imgs-icon"
                         />
                     </div>
@@ -289,11 +298,11 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                         );
                     })}
                     <img
-                        src="../../static/img/home/third/bg-console.png"
+                        src={require("../../static/img/home/third/bg-console.png").default}
                         className="function-body-module-console"
                     />
                     <img
-                        src="../../static/img/home/third/bg-setting.png"
+                        src={require("../../static/img/home/third/bg-setting.png").default}
                         className="function-body-module-setting"
                     />
                 </div>
@@ -760,7 +769,7 @@ const KindModules = (props: KindModulesProps) => {
                                 Language)
                             </div>
                             <img
-                                src="../../static/img/home/second/efficent-1-2.png"
+                                src={require("../../static/img/home/second/efficent-1-2.png").default}
                                 className="efficent-1-2"
                             />
                         </div>
@@ -775,7 +784,7 @@ const KindModules = (props: KindModulesProps) => {
                                 Language)
                             </div>
                             <img
-                                src="../../static/img/home/second/efficent-2-3.png"
+                                src={require("../../static/img/home/second/efficent-2-3.png").default}
                                 className="efficent-2-3"
                             />
                         </div>
@@ -789,7 +798,7 @@ const KindModules = (props: KindModulesProps) => {
                                 Life is short, use Python.
                             </div>
                             <img
-                                src="../../static/img/home/second/efficent-3-4.png"
+                                src={require("../../static/img/home/second/efficent-3-4.png").default}
                                 className="efficent-3-4"
                             />
                         </div>
@@ -816,32 +825,32 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="function-img">
                     <img
                         ref={function_img}
-                        src="../../static/img/home/second/function.png"
+                        src={require("../../static/img/home/second/function.png").default}
                         className="function-img-function opacity-0"
                     />
                     <img
                         ref={function_blue}
-                        src="../../static/img/home/second/function-blue.png"
+                        src={require("../../static/img/home/second/function-blue.png").default}
                         className="function-img-blue opacity-0"
                     />
                     <img
                         ref={function_green}
-                        src="../../static/img/home/second/function-green.png"
+                        src={require("../../static/img/home/second/function-green.png").default}
                         className="function-img-green opacity-0"
                     />
                     <img
                         ref={function_yellow}
-                        src="../../static/img/home/second/function-yellow.png"
+                        src={require("../../static/img/home/second/function-yellow.png").default}
                         className="function-img-yellow opacity-0"
                     />
                     <img
                         ref={function_icon}
-                        src="../../static/img/home/second/function-icon.png"
+                        src={require("../../static/img/home/second/function-icon.png").default}
                         className="function-img-icon opacity-0"
                     />
                     <img
                         ref={function_path}
-                        src="../../static/img/home/second/function-path.png"
+                        src={require("../../static/img/home/second/function-path.png").default}
                         className="function-img-path opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
@@ -865,27 +874,27 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="doc-img">
                     <img
                         ref={doc_img}
-                        src="../../static/img/home/second/doc.png"
+                        src={require("../../static/img/home/second/doc.png").default}
                         className="doc-img-doc opacity-0"
                     />
                     <img
                         ref={doc_blue}
-                        src="../../static/img/home/second/doc-blue.png"
+                        src={require("../../static/img/home/second/doc-blue.png").default}
                         className="doc-img-blue opacity-0"
                     />
                     <img
                         ref={doc_green}
-                        src="../../static/img/home/second/doc-green.png"
+                        src={require("../../static/img/home/second/doc-green.png").default}
                         className="doc-img-green opacity-0"
                     />
                     <img
                         ref={doc_yellow}
-                        src="../../static/img/home/second/doc-yellow.png"
+                        src={require("../../static/img/home/second/doc-yellow.png").default}
                         className="doc-img-yellow opacity-0"
                     />
                     <img
                         ref={doc_path}
-                        src="../../static/img/home/second/doc-path.png"
+                        src={require("../../static/img/home/second/doc-path.png").default}
                         className="doc-img-path opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
@@ -919,12 +928,12 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="tool-img">
                     <img
                         ref={tool_img}
-                        src="../../static/img/home/second/tool.png"
+                        src={require("../../static/img/home/second/tool.png").default}
                         className="tool-img-tool opacity-0"
                     />
                     <img
                         ref={tool_green}
-                        src="../../static/img/home/second/tool-green.png"
+                        src={require("../../static/img/home/second/tool-green.png").default}
                         className="tool-img-green opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
@@ -1080,7 +1089,7 @@ interface AppraiseInfoProps {
 const AppraiseInfoList: AppraiseInfoProps[] = [
     {
         name: "ykc",
-        img: "../../static/img/team/ykc.jpg",
+        img: require("../../static/img/team/ykc.jpg").default,
         appraise: (
             <>
                 安全问题没有绝对的解决范式，但
@@ -1097,7 +1106,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "kio",
-        img: "../../static/img/home/kio.jpeg",
+        img: require("../../static/img/home/kio.jpeg").default,
         appraise: (
             <>
                 Yakit在我心中是一款能够自己改造的安全测试框架，非常适合有一定动手能力的安全从业者利用它去
@@ -1110,7 +1119,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "和你",
-        img: "../../static/img/home/和你.jpeg",
+        img: require("../../static/img/home/和你.jpeg").default,
         appraise: (
             <>
                 Yak这个构思能大量
@@ -1123,7 +1132,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "P0m32Kun",
-        img: "../../static/img/home/P0m32Kun.jpeg",
+        img: require("../../static/img/home/P0m32Kun.jpeg").default,
         appraise: (
             <>
                 初次接触Yak是在2021年低，那时群里还没有多少人，伴随着开发者们的努力，不断的收集、整理、添加、修改用户提出的各种问题与需求，官网中各种文档逐步完善，Yakit用起来也越来越顺手，渐渐感受到了这是个
@@ -1143,7 +1152,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "18 Xtreme",
-        img: "../../static/img/home/18Xtreme.jpeg",
+        img: require("../../static/img/home/18Xtreme.jpeg").default,
         appraise: (
             <>
                 首先不得不提一句，Yakit的作者们是
@@ -1160,7 +1169,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "国产大熊猫",
-        img: "../../static/img/team/国产大熊猫.jpeg",
+        img: require("../../static/img/team/国产大熊猫.jpeg").default,
         appraise: (
             <>
                 Yakit是一款优秀的
@@ -1179,7 +1188,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "CF_HB",
-        img: "../../static/img/home/CF_HB.jpeg",
+        img: require("../../static/img/home/CF_HB.jpeg").default,
         appraise: (
             <>
                 2022了给大家强烈安利一个
@@ -1196,7 +1205,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "wooluo",
-        img: "../../static/img/home/wooluo.jpeg",
+        img: require("../../static/img/home/wooluo.jpeg").default,
         appraise: (
             <>
                 产品设计初衷非常好，作为
@@ -1213,7 +1222,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "Vanilla",
-        img: "../../static/img/team/Vanilla.jpeg",
+        img: require("../../static/img/team/Vanilla.jpeg").default,
         appraise: (
             <>
                 和V1ll4n表哥相识是因为他早期开发的SIEM，将各种安全能力进行融合，作为一名甲方安全从业者，但是对于他提出的高位安全和低位安全的概念很赞同，后来Yakit横空出世，让我看到了之前SIEM概念的延伸，看到了
@@ -1232,7 +1241,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "ttStorm",
-        img: "../../static/img/home/ttStorm.jpeg",
+        img: require("../../static/img/home/ttStorm.jpeg").default,
         appraise: (
             <>
                 选择Yakit的3个理由
@@ -1256,7 +1265,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "酒零",
-        img: "../../static/img/home/酒零.jpeg",
+        img: require("../../static/img/home/酒零.jpeg").default,
         appraise: (
             <>
                 渗透工具的底层数据融合是安全工具发展的必然趋势，测试工具
@@ -1286,7 +1295,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "key@OverSpace",
-        img: "../../static/img/home/key@OverSpace.jpeg",
+        img: require("../../static/img/home/key@OverSpace.jpeg").default,
         appraise: (
             <>
                 对于我来说，Yak是一门优秀的融合型语言，它具备极强的安全开发属性，你可以使用它进行高效的安全类脚本、平台、工具的开发；Yak项目方不仅开发了Yak这一门优秀的语言，还很贴心的基于Yak开发了Yakit单兵作战平台提供给安全从业人员使用；Yakit的诞生实际上是
@@ -1306,7 +1315,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "奶权",
-        img: "../../static/img/team/naiquan.jpeg",
+        img: require("../../static/img/team/naiquan.jpeg").default,
         appraise: (
             <>
                 Yakit是一款非常好用的网络单兵作战工具，其包含了burpsuite使用最频繁的功能，并在此之上做了自己的创新。其中Web
@@ -1324,7 +1333,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "sharecast",
-        img: "../../static/img/home/sharecast.jpeg",
+        img: require("../../static/img/home/sharecast.jpeg").default,
         appraise: (
             <>
                 Yakit是一款年轻的综合的且具有
@@ -1337,7 +1346,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "影舞者",
-        img: "../../static/img/home/影舞者.jpeg",
+        img: require("../../static/img/home/影舞者.jpeg").default,
         appraise: (
             <>
                 扫描接口很
@@ -1351,7 +1360,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "TimWhite",
-        img: "../../static/img/team/timwhite.png",
+        img: require("../../static/img/team/timwhite.png").default,
         appraise: (
             <>
                 对于Yakit/Yak这个项目，早期我更多的是好奇Yak这个安全脚本语言的具体实现方式，
@@ -1368,7 +1377,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "Alex-null",
-        img: "../../static/img/team/Alex-null.jpeg",
+        img: require("../../static/img/team/Alex-null.jpeg").default,
         appraise: (
             <>
                 Yak是目前看到的
@@ -1385,7 +1394,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "六月初七",
-        img: "../../static/img/home/六月初七.jpeg",
+        img: require("../../static/img/home/六月初七.jpeg").default,
         appraise: (
             <>
                 总体来说，很喜欢这款工具，可扫描端口，可探测漏洞，还能爆破口令，
@@ -1408,7 +1417,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "小米粥",
-        img: "../../static/img/home/小米粥.jpeg",
+        img: require("../../static/img/home/小米粥.jpeg").default,
         appraise: (
             <>
                 在我眼里Yak的意义是远远大于Yakit的，Yakit只不过是Yak对于
@@ -1433,7 +1442,7 @@ const AppraiseInfoList: AppraiseInfoProps[] = [
     },
     {
         name: "李大壮'",
-        img: "../../static/img/home/李大壮.jpeg",
+        img: require("../../static/img/home/李大壮.jpeg").default,
         appraise: (
             <>
                 初次接触Yak就被Yak团队的愿景打动了。作为一门安全领域的脚本语言。Yak
@@ -1482,7 +1491,7 @@ const AppraiseCard = React.memo((props: AppraiseCardProps) => {
 const AppraiseInfoBody = React.memo(() => {
     const [info, setInfo] = useState<AppraiseInfoProps>({
         name: "ykc",
-        img: "../../static/img/team/ykc.jpg",
+        img: require("../../static/img/team/ykc.jpg").default,
         appraise:
             "安全问题没有绝对的解决范式，但yak创造了足够的可能性，让我们可以在巨人的肩膀上发挥想象力。其构思的视野和高度值得我们学习与思考。",
     });
@@ -1580,11 +1589,11 @@ const AppraiseInfoBody = React.memo(() => {
                             )}
                         </div>
                         <img
-                            src="../../static/img/home/comma-1.png"
+                            src={require("../../static/img/home/comma-1.png").default}
                             className="comments-up-style"
                         />
                         <img
-                            src="../../static/img/home/comma-2.png"
+                            src={require("../../static/img/home/comma-2.png").default}
                             className="comments-down-style"
                         />
                     </div>
@@ -1594,7 +1603,7 @@ const AppraiseInfoBody = React.memo(() => {
             <div className="propagate-video">
                 {/* @ts-ignore */}
                 <ReactPlayer
-                    url={["../../static/img/home/video.mp4"]}
+                    url={["/img/home/video.mp4"]}
                     loop={true}
                     playsinline={true}
                     controls={false}
