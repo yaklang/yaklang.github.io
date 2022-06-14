@@ -301,6 +301,7 @@
 .function-module-body {
     display: flex;
     height: REM(443);
+    overflow-x: hidden;
     .module-img {
         width: REM(564);
         height: 100%;

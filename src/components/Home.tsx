@@ -425,7 +425,7 @@ interface downloadInfoProps {
     name: string;
     link: string;
 }
-const DownLoadBtn = React.memo((props) => {
+const DownLoadBtn = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [varsion, setVersion] = useState<string>("");
 
@@ -483,7 +483,7 @@ const DownLoadBtn = React.memo((props) => {
             </div>
         </Dropdown>
     );
-});
+};
 const CourseDocBtn = React.memo((props) => {
     return (
         <a className="course-doc-btn" href="/docs/intro">
