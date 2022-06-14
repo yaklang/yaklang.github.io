@@ -36,6 +36,7 @@
 html,
 body {
     scroll-behavior: smooth;
+    // min-width: 768px;
 }
 
 $REM: 16;
@@ -48,6 +49,17 @@ $REM: 16;
     .container {
         margin-top: REM(63);
     }
+    aside {
+        border-right: 0px;
+    }
+    aside > :first-child {
+        padding-top: 0;
+        top: REM(63);
+        border-right: 1px solid var(--ifm-toc-border-color);
+    }
+}
+.theme-doc-sidebar-menu.menu__list {
+    font-size: 14px;
 }
 
 // layout style file

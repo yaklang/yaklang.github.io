@@ -16,11 +16,43 @@ import IconExternalLink from "@theme/IconExternalLink";
 import { Popover } from "antd";
 import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
 
-function FooterLink({ to, href, label, prependBaseUrlToHref, ...props }) {
+function FooterLink({
+    to,
+    href,
+    label,
+    prependBaseUrlToHref,
+    isBlank,
+    ...props
+}) {
     const toUrl = useBaseUrl(to);
     const normalizedHref = useBaseUrl(href, {
         forcePrependBaseUrl: true,
     });
+    if (isBlank) {
+        return (
+            <a
+                className="footer__link-item"
+                {...(href
+                    ? {
+                          href: prependBaseUrlToHref ? normalizedHref : href,
+                      }
+                    : {
+                          to: toUrl,
+                      })}
+                {...props}
+                target="_blank"
+            >
+                {href && !isInternalUrl(href) ? (
+                    <span>
+                        {label}
+                        <IconExternalLink />
+                    </span>
+                ) : (
+                    label
+                )}
+            </a>
+        );
+    }
     return (
         <Link
             className="footer__link-item"
@@ -183,6 +215,7 @@ function Footer() {
                                     return (
                                         <FooterLink
                                             key={index}
+                                            isBlank={index === 0}
                                             {...item.items[0]}
                                         />
                                     );

@@ -128,9 +128,14 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         icon: require("../../static/img/home/second/efficent-head.png").default,
     });
     // 滚动区域变化标识
-    const [kindRate, setKindRate] = useState<number>(0);
-    const [isRange, setIsRange] = useState<boolean>(false);
     const [isScrollUp, setIsScrollUp] = useState<boolean>(false);
+
+    const [kindRate, setKindRate] = useState<number>(0);
+    const [isKindRange, setIsKindRange] = useState<boolean>(false);
+
+    const [functionKind, setFunctionKind] = useState<number>(0);
+    const [functionRate, isFunctionRate] = useState<number>(0);
+    const [isFunctionRange, setIsFunctionRange] = useState<boolean>(false);
 
     const oldScrollTop = useRef<number>(0);
 
@@ -154,26 +159,86 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             const secondPaddingTop = (54 / 16) * FontSize;
             const secondBlock = ((950 - 54 - 200) / 16) * FontSize;
             // 第二区域总高度
-            const second = (3734 / 16) * FontSize;
-
-            const secondLevel = Math.trunc(
-                (scrollTop - first - secondPaddingTop) / secondBlock
-            );
+            const second = (3143 / 16) * FontSize;
+            // 第三区域paddingTop、block、gap
+            const thirdPaddingTop = (249 / 16) * FontSize;
+            const thirdBlock = (443 / 16) * FontSize;
+            const thirdBlockGap = (90 / 16) * FontSize;
+            // 第三区域总高度
+            const third = (2824 / 16) * FontSize;
+            //第二与第三区域可视点高度
+            const secondToThird = (480 / 16) * FontSize;
 
             if (scrollTop <= first) {
-                setIsRange(false);
+                setIsKindRange(false);
+                setIsFunctionRange(false);
             }
-            if (scrollTop >= first + second) {
-                setIsRange(false);
-            }
-            if (secondLevel > 3) return;
-            if (scrollTop > first + secondPaddingTop) {
-                setKindRate(
-                    ((scrollTop - first - secondPaddingTop) % secondBlock) /
-                        secondBlock
+            if (scrollTop > first && scrollTop < first + second) {
+                setIsFunctionRange(scrollTop >= first + second - secondToThird);
+
+                const secondLevel = Math.trunc(
+                    (scrollTop - first - secondPaddingTop) / secondBlock
                 );
-                setKind(IntroduceKinds[secondLevel]);
-                setIsRange(true);
+                if (secondLevel > 3 || secondLevel < 0) {
+                    // 超出界限中断，不能使用return，因为后面的if可能会同时触发
+                } else {
+                    if (scrollTop > first + secondPaddingTop) {
+                        setKindRate(
+                            ((scrollTop - first - secondPaddingTop) %
+                                secondBlock) /
+                                secondBlock
+                        );
+                        setKind(IntroduceKinds[secondLevel]);
+                        setIsKindRange(true);
+                    }
+                }
+            }
+            if (
+                scrollTop >= first + second - secondToThird &&
+                scrollTop < first + second + third
+            ) {
+                setIsKindRange(scrollTop < first + second);
+
+                const thirdLevel = Math.trunc(
+                    (scrollTop -
+                        first -
+                        second +
+                        secondToThird -
+                        thirdPaddingTop +
+                        thirdBlockGap) /
+                        (thirdBlock + thirdBlockGap)
+                );
+                if (thirdLevel > 4 || thirdLevel < 0) {
+                    // 超出界限中断，不能使用return，因为后面的if可能会同时触发
+                } else {
+                    if (
+                        scrollTop >
+                        first +
+                            second -
+                            secondToThird +
+                            thirdPaddingTop -
+                            thirdBlockGap
+                    ) {
+                        // 这里减法的情况是，总滚动长度减去(第一和第二区域高度、第三区域标题高度)加上(第二区域内第三区域可视高度、一个第三区域块高度里的marginTop)
+                        isFunctionRate(
+                            (((scrollTop -
+                                first -
+                                second +
+                                secondToThird -
+                                thirdPaddingTop +
+                                thirdBlockGap) %
+                                (thirdBlock + thirdBlockGap)) -
+                                thirdBlockGap) /
+                                thirdBlock
+                        );
+                        setFunctionKind(thirdLevel);
+                        setIsFunctionRange(true);
+                    }
+                }
+            }
+            if (scrollTop >= first + second + third) {
+                setIsKindRange(false);
+                setIsFunctionRange(false);
             }
         });
     }, []);
@@ -182,18 +247,26 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         <div className="home-container">
             <div className="guide-body">
                 <img
-                    src={require("../../static/img/home/homeHeadBg.png").default}
+                    src={
+                        require("../../static/img/home/homeHeadBg.png").default
+                    }
                     className="guide-background-img"
                 />
                 <div className="guide-words-body">
                     <div className="guide-words-body-header">
                         网络安全领域的 DSL 最佳实践
                         <img
-                            src={require("../../static/img/home/homeHeadCircular.png").default}
+                            src={
+                                require("../../static/img/home/homeHeadCircular.png")
+                                    .default
+                            }
                             className="header-circle"
                         />
                         <img
-                            src={require("../../static/img/home/homeHeadTitle.png").default}
+                            src={
+                                require("../../static/img/home/homeHeadTitle.png")
+                                    .default
+                            }
                             className="header-title"
                         />
                     </div>
@@ -260,11 +333,14 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                         <KindModules
                             name={kind.name}
                             rate={kindRate}
-                            isRange={isRange}
+                            isRange={isKindRange}
                             isScrollUp={isScrollUp}
                         />
                         <img
-                            src={require("../../static/img/home/second/kind-icon.png").default}
+                            src={
+                                require("../../static/img/home/second/kind-icon.png")
+                                    .default
+                            }
                             className="imgs-icon"
                         />
                     </div>
@@ -294,15 +370,26 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                                 key={item.title}
                                 info={item}
                                 isReversal={!!(index % 2)}
+                                index={index}
+                                kind={functionKind}
+                                rate={functionRate}
+                                isRange={isFunctionRange}
+                                isScrollUp={isScrollUp}
                             />
                         );
                     })}
                     <img
-                        src={require("../../static/img/home/third/bg-console.png").default}
+                        src={
+                            require("../../static/img/home/third/bg-console.png")
+                                .default
+                        }
                         className="function-body-module-console"
                     />
                     <img
-                        src={require("../../static/img/home/third/bg-setting.png").default}
+                        src={
+                            require("../../static/img/home/third/bg-setting.png")
+                                .default
+                        }
                         className="function-body-module-setting"
                     />
                 </div>
@@ -339,6 +426,7 @@ interface downloadInfoProps {
     link: string;
 }
 const DownLoadBtn = React.memo((props) => {
+    const [visible, setVisible] = useState<boolean>(false);
     const [varsion, setVersion] = useState<string>("");
 
     const downloadList: downloadInfoProps[] = [
@@ -378,7 +466,12 @@ const DownLoadBtn = React.memo((props) => {
     );
 
     return (
-        <Dropdown overlay={menu} trigger={["click"]}>
+        <Dropdown
+            visible={visible}
+            overlay={menu}
+            trigger={["click"]}
+            onVisibleChange={(visible) => setVisible(visible)}
+        >
             <div className="download-yakit-btn">
                 <div className="btn-title">
                     <DownloadOutlined className="icon-style" />
@@ -414,6 +507,7 @@ const KindModules = (props: KindModulesProps) => {
     const efficent_2 = useRef(null);
     const efficent_3 = useRef(null);
     const efficent_4 = useRef(null);
+    const efficent_title = useRef(null);
 
     const function_count = useRef<number>(0);
     const function_img = useRef(null);
@@ -422,6 +516,7 @@ const KindModules = (props: KindModulesProps) => {
     const function_yellow = useRef(null);
     const function_icon = useRef(null);
     const function_path = useRef(null);
+    const function_title = useRef(null);
 
     const doc_count = useRef<number>(0);
     const doc_img = useRef(null);
@@ -429,10 +524,12 @@ const KindModules = (props: KindModulesProps) => {
     const doc_green = useRef(null);
     const doc_yellow = useRef(null);
     const doc_path = useRef(null);
+    const doc_title = useRef(null);
 
     const tool_count = useRef<number>(0);
     const tool_img = useRef(null);
     const tool_green = useRef(null);
+    const tool_title = useRef(null);
 
     const showAnimation = (
         div: HTMLDivElement,
@@ -450,9 +547,23 @@ const KindModules = (props: KindModulesProps) => {
         div.className =
             className + " opacity-0 animate__animated animate__fadeOut";
     };
+    const hideTitleAnimation = (div: HTMLDivElement, className: string) => {
+        if (div.className.indexOf(`animate__animated animate__fadeOut`) > -1)
+            return;
+        div.className =
+            className + " opacity-0 animate__animated animate__fadeOutDown";
+    };
 
     const efficentShow = () => {
         setTimeout(() => {
+            if (!efficent_title || !efficent_title.current) return;
+            const div_title =
+                efficent_title.current as unknown as HTMLDivElement;
+            showAnimation(
+                div_title,
+                "kind-opt-body-title",
+                "animate__fadeInDown"
+            );
             if (!efficent_1 || !efficent_1.current) return;
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
@@ -490,9 +601,21 @@ const KindModules = (props: KindModulesProps) => {
         if (!efficent_4 || !efficent_4.current) return;
         const div_4 = efficent_4.current as unknown as HTMLDivElement;
         hideAnimation(div_4, "efficent-img-4");
+
+        if (!efficent_title || !efficent_title.current) return;
+        const div_title = efficent_title.current as unknown as HTMLDivElement;
+        hideTitleAnimation(div_title, "kind-opt-body-title");
     };
     const functionShow = () => {
         setTimeout(() => {
+            if (!function_title || !function_title.current) return;
+            const div_title =
+                function_title.current as unknown as HTMLDivElement;
+            showAnimation(
+                div_title,
+                "kind-opt-body-title",
+                "animate__fadeInDown"
+            );
             if (!function_img || !function_img.current) return;
             const div = function_img.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-function", "animate__zoomIn");
@@ -547,9 +670,20 @@ const KindModules = (props: KindModulesProps) => {
         if (!function_path || !function_path.current) return;
         const div_path = function_path.current as unknown as HTMLDivElement;
         hideAnimation(div_path, "function-img-path");
+
+        if (!function_title || !function_title.current) return;
+        const div_title = function_title.current as unknown as HTMLDivElement;
+        hideTitleAnimation(div_title, "kind-opt-body-title");
     };
     const docShow = () => {
         setTimeout(() => {
+            if (!doc_title || !doc_title.current) return;
+            const div_title = doc_title.current as unknown as HTMLDivElement;
+            showAnimation(
+                div_title,
+                "kind-opt-body-title",
+                "animate__fadeInDown"
+            );
             if (!doc_img || !doc_img.current) return;
             const div = doc_img.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-doc", "animate__zoomIn");
@@ -595,9 +729,20 @@ const KindModules = (props: KindModulesProps) => {
         if (!doc_path || !doc_path.current) return;
         const div_path = doc_path.current as unknown as HTMLDivElement;
         hideAnimation(div_path, "doc-img-path");
+
+        if (!doc_title || !doc_title.current) return;
+        const div_title = doc_title.current as unknown as HTMLDivElement;
+        hideTitleAnimation(div_title, "kind-opt-body-title");
     };
     const toolShow = () => {
         setTimeout(() => {
+            if (!tool_title || !tool_title.current) return;
+            const div_title = tool_title.current as unknown as HTMLDivElement;
+            showAnimation(
+                div_title,
+                "kind-opt-body-title",
+                "animate__fadeInDown"
+            );
             if (!tool_img || !tool_img.current) return;
             const div = tool_img.current as unknown as HTMLDivElement;
             showAnimation(div, "tool-img-tool", "animate__zoomIn");
@@ -616,6 +761,10 @@ const KindModules = (props: KindModulesProps) => {
         if (!tool_green || !tool_green.current) return;
         const div_green = tool_green.current as unknown as HTMLDivElement;
         hideAnimation(div_green, "tool-img-green");
+
+        if (!tool_title || !tool_title.current) return;
+        const div_title = tool_title.current as unknown as HTMLDivElement;
+        hideTitleAnimation(div_title, "kind-opt-body-title");
     };
 
     useEffect(() => {
@@ -769,7 +918,10 @@ const KindModules = (props: KindModulesProps) => {
                                 Language)
                             </div>
                             <img
-                                src={require("../../static/img/home/second/efficent-1-2.png").default}
+                                src={
+                                    require("../../static/img/home/second/efficent-1-2.png")
+                                        .default
+                                }
                                 className="efficent-1-2"
                             />
                         </div>
@@ -784,7 +936,10 @@ const KindModules = (props: KindModulesProps) => {
                                 Language)
                             </div>
                             <img
-                                src={require("../../static/img/home/second/efficent-2-3.png").default}
+                                src={
+                                    require("../../static/img/home/second/efficent-2-3.png")
+                                        .default
+                                }
                                 className="efficent-2-3"
                             />
                         </div>
@@ -798,7 +953,10 @@ const KindModules = (props: KindModulesProps) => {
                                 Life is short, use Python.
                             </div>
                             <img
-                                src={require("../../static/img/home/second/efficent-3-4.png").default}
+                                src={
+                                    require("../../static/img/home/second/efficent-3-4.png")
+                                        .default
+                                }
                                 className="efficent-3-4"
                             />
                         </div>
@@ -807,7 +965,10 @@ const KindModules = (props: KindModulesProps) => {
                     <div className="img-body-filter-bg-green"></div>
                 </div>
 
-                <div className="kind-opt-body-title">
+                <div
+                    className="kind-opt-body-title opacity-0"
+                    ref={efficent_title}
+                >
                     <div className="kind-opt-body-title-content">
                         <span>运行时效率极高</span>
                         <br />
@@ -825,44 +986,65 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="function-img">
                     <img
                         ref={function_img}
-                        src={require("../../static/img/home/second/function.png").default}
+                        src={
+                            require("../../static/img/home/second/function.png")
+                                .default
+                        }
                         className="function-img-function opacity-0"
                     />
                     <img
                         ref={function_blue}
-                        src={require("../../static/img/home/second/function-blue.png").default}
+                        src={
+                            require("../../static/img/home/second/function-blue.png")
+                                .default
+                        }
                         className="function-img-blue opacity-0"
                     />
                     <img
                         ref={function_green}
-                        src={require("../../static/img/home/second/function-green.png").default}
+                        src={
+                            require("../../static/img/home/second/function-green.png")
+                                .default
+                        }
                         className="function-img-green opacity-0"
                     />
                     <img
                         ref={function_yellow}
-                        src={require("../../static/img/home/second/function-yellow.png").default}
+                        src={
+                            require("../../static/img/home/second/function-yellow.png")
+                                .default
+                        }
                         className="function-img-yellow opacity-0"
                     />
                     <img
                         ref={function_icon}
-                        src={require("../../static/img/home/second/function-icon.png").default}
+                        src={
+                            require("../../static/img/home/second/function-icon.png")
+                                .default
+                        }
                         className="function-img-icon opacity-0"
                     />
                     <img
                         ref={function_path}
-                        src={require("../../static/img/home/second/function-path.png").default}
+                        src={
+                            require("../../static/img/home/second/function-path.png")
+                                .default
+                        }
                         className="function-img-path opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
                     <div className="img-body-filter-bg-green"></div>
                 </div>
 
-                <div className="kind-opt-body-title">
+                <div
+                    className="kind-opt-body-title opacity-0"
+                    ref={function_title}
+                >
                     <div className="kind-opt-body-title-content">
                         <span>安全工具的语言级集成与</span>
                         <span className="content-orange">函数级调用</span>
                     </div>
-                    <div className="kind-opt-body-title-subtitle">{`请补充`}</div>
+                    <div className="kind-opt-body-title-subtitle">{`使用函数级别的安全能力实现满足特定场景的定制化安全算法`}</div>
                 </div>
             </div>
         );
@@ -874,34 +1056,49 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="doc-img">
                     <img
                         ref={doc_img}
-                        src={require("../../static/img/home/second/doc.png").default}
+                        src={
+                            require("../../static/img/home/second/doc.png")
+                                .default
+                        }
                         className="doc-img-doc opacity-0"
                     />
                     <img
                         ref={doc_blue}
-                        src={require("../../static/img/home/second/doc-blue.png").default}
+                        src={
+                            require("../../static/img/home/second/doc-blue.png")
+                                .default
+                        }
                         className="doc-img-blue opacity-0"
                     />
                     <img
                         ref={doc_green}
-                        src={require("../../static/img/home/second/doc-green.png").default}
+                        src={
+                            require("../../static/img/home/second/doc-green.png")
+                                .default
+                        }
                         className="doc-img-green opacity-0"
                     />
                     <img
                         ref={doc_yellow}
-                        src={require("../../static/img/home/second/doc-yellow.png").default}
+                        src={
+                            require("../../static/img/home/second/doc-yellow.png")
+                                .default
+                        }
                         className="doc-img-yellow opacity-0"
                     />
                     <img
                         ref={doc_path}
-                        src={require("../../static/img/home/second/doc-path.png").default}
+                        src={
+                            require("../../static/img/home/second/doc-path.png")
+                                .default
+                        }
                         className="doc-img-path opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
                     <div className="img-body-filter-bg-green"></div>
                 </div>
 
-                <div className="kind-opt-body-title">
+                <div className="kind-opt-body-title opacity-0" ref={doc_title}>
                     <div className="kind-opt-body-title-content">
                         <span className="content-orange">自动补全</span>
                         与完善的官方文档为编写助力
@@ -928,19 +1125,25 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="tool-img">
                     <img
                         ref={tool_img}
-                        src={require("../../static/img/home/second/tool.png").default}
+                        src={
+                            require("../../static/img/home/second/tool.png")
+                                .default
+                        }
                         className="tool-img-tool opacity-0"
                     />
                     <img
                         ref={tool_green}
-                        src={require("../../static/img/home/second/tool-green.png").default}
+                        src={
+                            require("../../static/img/home/second/tool-green.png")
+                                .default
+                        }
                         className="tool-img-green opacity-0"
                     />
                     <div className="img-body-filter-bg-blue"></div>
                     <div className="img-body-filter-bg-green"></div>
                 </div>
 
-                <div className="kind-opt-body-title">
+                <div className="kind-opt-body-title opacity-0" ref={tool_title}>
                     <div className="kind-opt-body-title-content">
                         <span>函数级</span>
                         <br />
@@ -977,23 +1180,114 @@ const KindModules = (props: KindModulesProps) => {
 interface functionModuleProps {
     info: FunctionDataProps;
     isReversal: boolean;
+    index: number;
+    kind: number;
+    rate: number;
+    isRange: boolean;
+    isScrollUp: boolean;
 }
 const FunctionModule = React.memo((props: functionModuleProps) => {
     const {
         info: { title, img, list },
         isReversal,
+        index: moduleIndex,
+        kind,
+        rate,
+        isRange,
+        isScrollUp,
     } = props;
 
     const [index, setIndex] = useState<number>(0);
 
+    const imgRef = useRef(null);
+    const listRef = useRef(null);
+    const img_count = useRef<number>(0);
+
+    const showAnimation = () => {
+        if (!imgRef || !imgRef.current) return;
+        const div_img = imgRef.current as unknown as HTMLDivElement;
+        if (!listRef || !listRef.current) return;
+        const div_list = listRef.current as unknown as HTMLDivElement;
+
+        const imgStr = `animate__animated ${
+            isReversal ? "animate__fadeInRight" : "animate__fadeInLeft"
+        }`;
+        const listStr = `animate__animated ${
+            isReversal ? "animate__fadeInLeft" : "animate__fadeInRight"
+        }`;
+
+        if (
+            div_img.className.indexOf(imgStr) > -1 ||
+            div_list.className.indexOf(listStr) > -1
+        )
+            return;
+        div_img.className = `module-img opacity-1 ${imgStr}`;
+        div_list.className = `module-list opacity-1 ${listStr}`;
+    };
+
+    const hideAnimation = () => {
+        if (!imgRef || !imgRef.current) return;
+        const div_img = imgRef.current as unknown as HTMLDivElement;
+        if (!listRef || !listRef.current) return;
+        const div_list = listRef.current as unknown as HTMLDivElement;
+
+        const imgStr = `animate__animated ${
+            isReversal ? "animate__fadeOutRight" : "animate__fadeOutLeft"
+        }`;
+        const listStr = `animate__animated ${
+            isReversal ? "animate__fadeOutLeft" : "animate__fadeOutRight"
+        }`;
+
+        if (
+            div_img.className.indexOf(imgStr) > -1 ||
+            div_list.className.indexOf(listStr) > -1
+        )
+            return;
+        div_img.className = `module-img opacity-0 ${imgStr}`;
+        div_list.className = `module-list opacity-0 ${listStr}`;
+    };
+
+    useEffect(() => {
+        if (kind !== moduleIndex) return;
+        if (isScrollUp) {
+            if (
+                rate <= 0.85 &&
+                rate > 0.1 &&
+                isRange &&
+                img_count.current === 0
+            ) {
+                img_count.current = 1;
+                showAnimation();
+            }
+            if ((rate <= 0.1 && isRange) || !isRange) {
+                img_count.current = 0;
+                hideAnimation();
+            }
+        } else {
+            if (
+                rate >= 0.1 &&
+                rate < 0.85 &&
+                isRange &&
+                img_count.current === 0
+            ) {
+                img_count.current = 1;
+                showAnimation();
+            }
+            if ((rate >= 0.85 && isRange) || !isRange) {
+                img_count.current = 0;
+                hideAnimation();
+            }
+        }
+    }, [kind, rate, isRange, isScrollUp]);
+
     return (
         <div className="function-module-body">
             {!isReversal ? (
-                <div className="module-img">
+                <div className="module-img opacity-0" ref={imgRef}>
                     <img src={img[index]} className="module-img-style" />
                 </div>
             ) : (
-                <div className="module-list">
+                <div className="module-list opacity-0" ref={listRef}>
                     <div className="module-list-header">{title}</div>
 
                     <div className="module-list-body">
@@ -1034,11 +1328,11 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
             )}
 
             {isReversal ? (
-                <div className="module-img">
+                <div className="module-img opacity-0" ref={imgRef}>
                     <img src={img[index]} className="module-img-style" />
                 </div>
             ) : (
-                <div className="module-list">
+                <div className="module-list opacity-0" ref={listRef}>
                     <div className="module-list-header">{title}</div>
 
                     <div className="module-list-body">
@@ -1589,11 +1883,17 @@ const AppraiseInfoBody = React.memo(() => {
                             )}
                         </div>
                         <img
-                            src={require("../../static/img/home/comma-1.png").default}
+                            src={
+                                require("../../static/img/home/comma-1.png")
+                                    .default
+                            }
                             className="comments-up-style"
                         />
                         <img
-                            src={require("../../static/img/home/comma-2.png").default}
+                            src={
+                                require("../../static/img/home/comma-2.png")
+                                    .default
+                            }
                             className="comments-down-style"
                         />
                     </div>

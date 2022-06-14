@@ -61,15 +61,18 @@ module.exports = {
                     label: "官方文档",
                     items: [
                         {
-                            type: "doc",
-                            docId: "intro",
+                            // type: "doc",
+                            // docId: "intro",
                             label: "Yak 语言",
+                            href: "/docs/intro",
                         },
                         {
-                            type: "doc",
-                            docId: "intro",
-                            docsPluginId: "products",
+                            // {
+                            //     type: "doc",
+                            //     docId: "intro",
+                            //     docsPluginId: "products",
                             label: "Yakit 平台",
+                            href: "/products/intro",
                         },
                     ],
                 },
@@ -117,7 +120,7 @@ module.exports = {
                     items: [
                         {
                             label: "官方文档",
-                            to: "/docs/intro",
+                            href: "/docs/intro",
                         },
                     ],
                 },

@@ -1,6 +1,8 @@
-$REM: 16;
-@function REM($n) {
-    @return calc($n / $REM) * 1rem;
+.opacity-0 {
+    opacity: 0;
+}
+.opacity-1 {
+    opacity: 1;
 }
 
 .home-container {
@@ -372,14 +374,6 @@ $REM: 16;
 .kind-opt-body {
     height: REM(496);
     display: flex;
-
-    .opacity-0 {
-        opacity: 0;
-    }
-    .opacity-1 {
-        opacity: 1;
-    }
-
     .efficent-img {
         height: 100%;
         width: REM(1144);

@@ -367,26 +367,31 @@ export const Team: React.FC<TeamProps> = (props) => {
                 <div className="contributors-header-title">
                     社区杰出贡献成员
                 </div>
-                <div className="contributors-member-introduce">
-                    {ContributorsInfo.map((item) => {
-                        return (
-                            <Contributors
-                                key={item.name}
-                                info={item}
-                                hoverable={false}
-                            />
-                        );
-                    })}
+                <div className="contributors-member-wrapper">
+                    <div className="contributors-member-grid-wrapper">
+                        {ContributorsInfo.map((item) => {
+                            return (
+                                <Contributors
+                                    className="grid-thumbnail"
+                                    key={item.name}
+                                    info={item}
+                                    hoverable={false}
+                                />
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 
             <div className="consultant-body">
                 <div className="consultant-header-title">特别顾问</div>
 
-                <div className="consultant-member-info">
-                    {ConsultantInfo.map((item) => {
-                        return <Consultant key={item.name} info={item} />;
-                    })}
+                <div className="consultant-member-wrapper">
+                    <div className="consultant-member-grid-wrapper">
+                        {ConsultantInfo.map((item) => {
+                            return <Consultant key={item.name} info={item} />;
+                        })}
+                    </div>
                 </div>
 
                 <img
@@ -412,10 +417,12 @@ export const Team: React.FC<TeamProps> = (props) => {
             <div className="thanksfor-body">
                 <div className="thanksfor-header-title">特别致谢</div>
 
-                <div className="thanksfor-member-info">
-                    {ThanksForInfo.map((item) => {
-                        return <ThanksFor key={item.name} info={item} />;
-                    })}
+                <div className="thanksfor-member-wrapper">
+                    <div className="thanksfor-member-grid-wrapper">
+                        {ThanksForInfo.map((item) => {
+                            return <ThanksFor key={item.name} info={item} />;
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
@@ -509,12 +516,13 @@ const Owner: React.FC<OwnerProps> = React.memo((props) => {
 interface ContributorsProps {
     info: ContributorsInfoProps;
     hoverable?: boolean;
+    className?: string;
 }
 const Contributors: React.FC<ContributorsProps> = React.memo((props) => {
-    const { info, hoverable = true } = props;
+    const { info, hoverable = true, className } = props;
     return (
         <Card
-            className="contributors-member-opt"
+            className={`contributors-member-opt ${className || ""}`}
             bodyStyle={{ padding: "24px 16px 16px 24px" }}
             hoverable={hoverable}
         >
