@@ -37,14 +37,14 @@ const FunctionData: FunctionDataProps[] = [
                 link: "/products/best-practice/passive-scanning",
             },
             {
-                name: "可视化可选择插件执行端口扫描",
+                name: "可选择插件执行端口扫描",
                 link: "/products/basic/modular-fingerprint-scanning",
             },
             { name: "常见安全工具右键联动", link: "/products/intro" },
         ],
     },
     {
-        title: "可嵌入式执行并随时热加载",
+        title: "嵌入式执行并随时热加载",
         img: [require("../../static/img/home/third/hot-loading.png").default],
         list: [
             {
@@ -54,7 +54,7 @@ const FunctionData: FunctionDataProps[] = [
         ],
     },
     {
-        title: "复刻 BurpS**te 操作流",
+        title: "与BurpS**te 一致的操作流",
         img: [
             require("../../static/img/home/third/permeate-1.png").default,
             require("../../static/img/home/third/permeate-2.png").default,
@@ -65,7 +65,7 @@ const FunctionData: FunctionDataProps[] = [
                 link: "/products/yak-actual-combat-cases/traffic-hijacking",
             },
             {
-                name: "经典渗透测试操作流",
+                name: "与经典渗透测试操作流一致的国研产品",
                 link: "/products/yak-actual-combat-cases/traffic-hijacking",
             },
         ],
@@ -75,20 +75,20 @@ const FunctionData: FunctionDataProps[] = [
         img: [require("../../static/img/home/third/fuzzer.png").default],
         list: [
             {
-                name: "使用 fuzz 语法可整合并同时代替 Repeater 与 Intruder ",
+                name: "使用 fuzz 语法整合并代替 Repeater 与 Intruder",
                 link: "/products/web-fuzzer-parsing/more-than-repeater-Intruder",
             },
         ],
     },
     {
-        title: "基于社区的高度插件化 ",
+        title: "社区的高度插件化",
         img: [
             require("../../static/img/home/third/plugin-1.png").default,
             require("../../static/img/home/third/plugin-2.png").default,
         ],
         list: [
             {
-                name: "用户可以在任何适合渗透测试最需要的步骤内执行自定义的 Yaklang 脚本或插件",
+                name: "用户可以在渗透测试的任何步骤内执行自定义的 Yaklang 脚本或插件",
                 link: "/products/best-practice/mitm-plug",
             },
             {
@@ -254,7 +254,27 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                 />
                 <div className="guide-words-body">
                     <div className="guide-words-body-header">
-                        网络安全领域的 DSL 最佳实践
+                        网络安全<span className="text-style">生态语言</span>
+                    </div>
+                    <div className="guide-words-body-description">
+                        不管您是行业用户，还是高校学生，Yak 永远是您的好伙伴
+                    </div>
+                    <div className="guide-words-body-btn">
+                        <DownLoadBtn />
+                        <CourseDocBtn />
+                    </div>
+                </div>
+            </div>
+
+            <div className="introduce-body">
+                <div className="sticky-content">
+                    <div className="introduce-body-header">
+                        首个
+                        <span className="introduce-body-header-line">基于</span>
+                        网络安全领域的
+                        <span className="introduce-body-header-orange">
+                            DSL
+                        </span>
                         <img
                             src={
                                 require("../../static/img/home/homeHeadCircular.png")
@@ -269,28 +289,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                             }
                             className="header-title"
                         />
-                    </div>
-                    <div className="guide-words-body-description">
-                        不管你是企业用户，还是白帽子，还是普通的安全从业人员，我们希望，Yak
-                        会是你工作的好伙伴
-                    </div>
-                    <div className="guide-words-body-btn">
-                        <DownLoadBtn />
-                        <CourseDocBtn />
-                    </div>
-                </div>
-            </div>
-
-            <div className="introduce-body">
-                <div className="sticky-content">
-                    <div className="introduce-body-header">
-                        <span className="introduce-body-header-orange">
-                            北半球
-                        </span>
-                        <span className="introduce-body-header-line">
-                            最强{" "}
-                        </span>
-                        Web 安全研发脚本语言
                     </div>
 
                     <div className="introduce-body-kinds">
@@ -350,9 +348,8 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             <div className="function-body">
                 <div className="function-body-header">
                     基于安全领域
-                    <span className="function-body-header-line">最</span>
-                    先进的
                     <span className="function-body-header-orange"> DSL</span>
+                    的最佳实践
                 </div>
 
                 <div className="function-body-description">
@@ -396,16 +393,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             </div>
 
             <div className="appraise-body">
-                <div className="appraise-body-header">
-                    立即开始
-                    <span className="appraise-body-header-orange">
-                        免费使用
-                    </span>
-                </div>
+                <div className="appraise-body-header">立即体验</div>
 
                 <div className="appraise-body-description">
-                    不管你是企业用户，还是白帽子，还是普通的安全从业人员，我们希望，Yak
-                    会是你工作的好伙伴
+                    不管您是行业用户，还是高校学生，Yak 永远是您的好伙伴
                 </div>
 
                 <div className="appraise-body-btn">
@@ -970,7 +961,7 @@ const KindModules = (props: KindModulesProps) => {
                     ref={efficent_title}
                 >
                     <div className="kind-opt-body-title-content">
-                        <span>运行时效率极高</span>
+                        <span>运行效率极高 Runtime Efficent</span>
                         <br />
                         <span className="content-orange">Runtime Efficent</span>
                     </div>
@@ -1041,7 +1032,7 @@ const KindModules = (props: KindModulesProps) => {
                     ref={function_title}
                 >
                     <div className="kind-opt-body-title-content">
-                        <span>安全工具的语言级集成与</span>
+                        <span>安全领域的语言级集成与</span>
                         <span className="content-orange">函数级调用</span>
                     </div>
                     <div className="kind-opt-body-title-subtitle">{`使用函数级别的安全能力实现满足特定场景的定制化安全算法`}</div>
@@ -1101,7 +1092,7 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="kind-opt-body-title opacity-0" ref={doc_title}>
                     <div className="kind-opt-body-title-content">
                         <span className="content-orange">自动补全</span>
-                        与完善的官方文档为编写助力
+                        与完善的文档为编写助力
                     </div>
                     <div className="kind-opt-body-title-subtitle">
                         <span>
@@ -1111,7 +1102,7 @@ const KindModules = (props: KindModulesProps) => {
                         <br />
                         <span>
                             <span className="subtitle-doc">/</span>{" "}
-                            完善的官网文档提供对所有“可用武器”的指导
+                            完善的教程文档提供提供全面指导
                         </span>
                     </div>
                 </div>
@@ -1145,14 +1136,13 @@ const KindModules = (props: KindModulesProps) => {
 
                 <div className="kind-opt-body-title opacity-0" ref={tool_title}>
                     <div className="kind-opt-body-title-content">
-                        <span>函数级</span>
-                        <br />
-                        <span className="content-orange">高阶安全工具</span>集成
+                        高阶
+                        <span className="content-orange">函数级</span>集成
                     </div>
                     <div className="kind-opt-body-title-subtitle">
                         <span>
                             <span className="subtitle-doc">/ </span>
-                            多种协议反连平台集成：
+                            多协议反连平台集成：
                         </span>
                         <br />
                         <span className="subtitle-tool">

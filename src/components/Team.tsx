@@ -280,17 +280,17 @@ interface ThanksForInfoProps {
     github?: string;
 }
 const ThanksForInfo: ThanksForInfoProps[] = [
-    {
-        img: "/img/team/4dogs.jpg",
-        name: "四维创智",
-        tag: { name: "特别赞助商", color: "red" },
-        description: [
-            "为推动 Yak 项目生态做出杰出贡献",
-            "同时感谢对 Yak 的慷慨捐赠",
-        ],
-        address: "北京",
-        home: "http://www.4dogs.cn/",
-    },
+    // {
+    //     img: "/img/team/4dogs.jpg",
+    //     name: "四维创智",
+    //     tag: { name: "特别赞助商", color: "red" },
+    //     description: [
+    //         "为推动 Yak 项目生态做出杰出贡献",
+    //         "同时感谢对 Yak 的慷慨捐赠",
+    //     ],
+    //     address: "北京",
+    //     home: "http://www.4dogs.cn/",
+    // },
     {
         img: "/img/team/projectdiscovery.png",
         name: "ProjectDiscovery",
@@ -324,7 +324,7 @@ export const Team: React.FC<TeamProps> = (props) => {
     return (
         <div className="team-and-thank-container">
             <div className="owner-body">
-                <div className="owner-header-title">研发团队/致谢</div>
+                <div className="owner-header-title">Yaklang.io 团队</div>
                 <div className="owner-member-introduce-body">
                     <div className="owner-member-introduce-img">
                         <div className="owner-member-introduce-img-body">
@@ -358,14 +358,14 @@ export const Team: React.FC<TeamProps> = (props) => {
                         </div>
                     </div>
                     <div className="owner-member-introduce-title">
-                        如果你喜欢Yak，可以认识一下我们的研发团队
+                        做难且正确的事！
                     </div>
                 </div>
             </div>
 
             <div className="contributors-body">
                 <div className="contributors-header-title">
-                    社区杰出贡献成员
+                    Yak 生态共建杰出贡献成员
                 </div>
                 <div className="contributors-member-wrapper">
                     <div className="contributors-member-grid-wrapper">

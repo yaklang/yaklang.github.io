@@ -80,7 +80,7 @@ module.exports = {
                     position: "left",
                     to: "/team",
                     activeBasePath: "pages",
-                    label: "团队&致谢",
+                    label: "关于我们",
                 },
                 // {
                 //     position: "left",

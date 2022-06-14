@@ -17,29 +17,17 @@
         }
         .guide-words-body {
             position: absolute;
-            top: REM(150);
+            top: REM(166);
             left: REM(384);
             width: REM(466);
             &-header {
-                height: REM(144);
+                height: REM(72);
                 line-height: REM(72);
-                font-size: 3rem;
+                font-size: REM(48);
                 font-weight: 600;
                 color: var(--base-font-color);
-                position: relative;
-                .header-circle {
-                    position: absolute;
-                    top: REM(-13);
-                    left: REM(332);
-                    width: REM(144);
-                    height: REM(93);
-                }
-                .header-title {
-                    position: absolute;
-                    top: REM(95);
-                    left: REM(274);
-                    width: REM(228);
-                    height: REM(25);
+                .text-style {
+                    color: #ff7d23;
                 }
             }
             &-description {
@@ -75,11 +63,26 @@
             font-weight: 600;
             color: var(--base-font-color);
             line-height: REM(56);
+            position: relative;
             &-line {
                 text-decoration: line-through;
             }
             &-orange {
                 color: #ff7d23;
+            }
+            .header-circle {
+                position: absolute;
+                top: REM(-24);
+                right: REM(662.8);
+                width: REM(144);
+                height: REM(93);
+            }
+            .header-title {
+                position: absolute;
+                top: REM(56);
+                right: REM(450);
+                width: REM(228);
+                height: REM(25);
             }
         }
         &-kinds {
