@@ -439,8 +439,8 @@ const DownLoadBtn = (props) => {
         },
     ];
 
-    const menu = (
-        <Menu>
+    const menu = (visible: boolean) => (
+        <Menu style={visible ? {} : { visibility: "hidden" }}>
             {downloadList.map((item) => {
                 return (
                     <Menu.Item key={item.name}>
@@ -459,11 +459,17 @@ const DownLoadBtn = (props) => {
     return (
         <Dropdown
             visible={visible}
-            overlay={menu}
+            overlay={menu(visible)}
             trigger={["click"]}
-            onVisibleChange={(visible) => setVisible(visible)}
+            onVisibleChange={(visible) => {
+                console.log(visible);
+                setVisible(visible);
+            }}
         >
-            <div className="download-yakit-btn">
+            <a
+                className="download-yakit-btn"
+                onClick={(e) => e.preventDefault()}
+            >
                 <div className="btn-title">
                     <DownloadOutlined className="icon-style" />
                     <span className="title-style">下载桌面端</span>
@@ -471,7 +477,7 @@ const DownLoadBtn = (props) => {
                 <div className="btn-cion">
                     <DownOutlined className="icon-style" />
                 </div>
-            </div>
+            </a>
         </Dropdown>
     );
 };
