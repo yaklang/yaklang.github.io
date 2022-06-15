@@ -23,11 +23,6 @@
                         margin: 0;
                         height: 20px;
                     }
-                    .footer__logo__title {
-                        margin-left: 10px;
-                        color: #1c1e21;
-                        font-weight: 900;
-                    }
                 }
             }
             .copyright-style {
@@ -63,7 +58,13 @@
                 .github-icon {
                     color: #999ea8;
                 }
+                .github-icon:hover {
+                    color: #000000;
+                }
                 .wechat-icon {
+                    color: #999ea8;
+                }
+                .wechat-icon:hover {
                     color: #50cb70;
                 }
             }

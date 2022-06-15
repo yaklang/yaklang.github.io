@@ -24,6 +24,7 @@
     --ifm-code-font-size: 95%;
 
     --base-font-color: #1e1f23;
+    --base-theme-color: #ff7d23;
 }
 
 .docusaurus-highlight-code-line {
@@ -63,6 +64,9 @@ $REM: 16;
 }
 
 img {
+    -webkit-user-drag: none;
+}
+video {
     -webkit-user-drag: none;
 }
 

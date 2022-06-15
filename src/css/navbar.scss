@@ -12,4 +12,11 @@
     .navbar__items {
         font-size: 14px;
     }
+    .navbar__logo {
+        width: REM(133);
+        height: REM(32);
+    }
+    .diy-link-item:hover {
+        color: var(--base-theme-color);
+    }
 }

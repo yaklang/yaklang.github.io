@@ -49,10 +49,10 @@ module.exports = {
         },
 
         navbar: {
-            title: "Yak",
+            title: "",
             logo: {
                 alt: "My Site Logo",
-                src: "img/logo.svg",
+                src: "img/logo.png",
             },
             items: [
                 {
@@ -111,7 +111,7 @@ module.exports = {
             style: "light",
             logo: {
                 alt: "My Site Logo",
-                src: "img/footerLogo.svg",
+                src: "img/logo.png",
                 href: "/",
             },
             links: [

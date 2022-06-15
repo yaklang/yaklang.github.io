@@ -81,7 +81,7 @@ const FunctionData: FunctionDataProps[] = [
         ],
     },
     {
-        title: "社区的高度插件化",
+        title: "高度插件化",
         img: [
             require("../../static/img/home/third/plugin-1.png").default,
             require("../../static/img/home/third/plugin-2.png").default,
@@ -162,10 +162,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             const second = (3143 / 16) * FontSize;
             // 第三区域paddingTop、block、gap
             const thirdPaddingTop = (249 / 16) * FontSize;
-            const thirdBlock = (443 / 16) * FontSize;
+            const thirdBlock = (432 / 16) * FontSize;
             const thirdBlockGap = (90 / 16) * FontSize;
             // 第三区域总高度
-            const third = (2824 / 16) * FontSize;
+            const third = (2769 / 16) * FontSize;
             //第二与第三区域可视点高度
             const secondToThird = (480 / 16) * FontSize;
 
@@ -269,9 +269,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             <div className="introduce-body">
                 <div className="sticky-content">
                     <div className="introduce-body-header">
-                        首个
-                        <span className="introduce-body-header-line">基于</span>
-                        网络安全领域的
+                        首个网络安全领域的
                         <span className="introduce-body-header-orange">
                             DSL
                         </span>
@@ -347,7 +345,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
             <div className="function-body">
                 <div className="function-body-header">
-                    基于安全领域
+                    Yakit-安全领域
                     <span className="function-body-header-orange"> DSL</span>
                     的最佳实践
                 </div>
@@ -497,14 +495,16 @@ interface KindModulesProps {
 const KindModules = (props: KindModulesProps) => {
     const { name, rate, isRange, isScrollUp } = props;
 
-    const efficent_count = useRef<number>(0);
     const efficent_1 = useRef(null);
     const efficent_2 = useRef(null);
     const efficent_3 = useRef(null);
     const efficent_4 = useRef(null);
+    const efficent_1_time = useRef<any>(null);
+    const efficent_2_time = useRef<any>(null);
+    const efficent_3_time = useRef<any>(null);
+    const efficent_4_time = useRef<any>(null);
     const efficent_title = useRef(null);
 
-    const function_count = useRef<number>(0);
     const function_img = useRef(null);
     const function_blue = useRef(null);
     const function_green = useRef(null);
@@ -513,7 +513,6 @@ const KindModules = (props: KindModulesProps) => {
     const function_path = useRef(null);
     const function_title = useRef(null);
 
-    const doc_count = useRef<number>(0);
     const doc_img = useRef(null);
     const doc_blue = useRef(null);
     const doc_green = useRef(null);
@@ -521,7 +520,6 @@ const KindModules = (props: KindModulesProps) => {
     const doc_path = useRef(null);
     const doc_title = useRef(null);
 
-    const tool_count = useRef<number>(0);
     const tool_img = useRef(null);
     const tool_green = useRef(null);
     const tool_title = useRef(null);
@@ -550,7 +548,7 @@ const KindModules = (props: KindModulesProps) => {
     };
 
     const efficentShow = () => {
-        setTimeout(() => {
+        efficent_1_time.current = setTimeout(() => {
             if (!efficent_title || !efficent_title.current) return;
             const div_title =
                 efficent_title.current as unknown as HTMLDivElement;
@@ -562,25 +560,28 @@ const KindModules = (props: KindModulesProps) => {
             if (!efficent_1 || !efficent_1.current) return;
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
-        }, 0);
-        setTimeout(() => {
+        }, 50);
+        efficent_2_time.current = setTimeout(() => {
             if (!efficent_2 || !efficent_2.current) return;
             const div = efficent_2.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-2", "animate__backInDown");
         }, 100);
-
-        setTimeout(() => {
+        efficent_3_time.current = setTimeout(() => {
             if (!efficent_3 || !efficent_3.current) return;
             const div = efficent_3.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-3", "animate__backInUp");
         }, 200);
-        setTimeout(() => {
+        efficent_4_time.current = setTimeout(() => {
             if (!efficent_4 || !efficent_4.current) return;
             const div = efficent_4.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-4", "animate__backInRight");
         }, 300);
     };
     const efficentHide = () => {
+        clearTimeout(efficent_1_time.current);
+        clearTimeout(efficent_2_time.current);
+        clearTimeout(efficent_3_time.current);
+        clearTimeout(efficent_4_time.current);
         if (!efficent_1 || !efficent_1.current) return;
         const div_1 = efficent_1.current as unknown as HTMLDivElement;
         hideAnimation(div_1, "efficent-img-1");
@@ -614,7 +615,7 @@ const KindModules = (props: KindModulesProps) => {
             if (!function_img || !function_img.current) return;
             const div = function_img.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-function", "animate__zoomIn");
-        }, 0);
+        }, 50);
         setTimeout(() => {
             if (!function_blue || !function_blue.current) return;
             const div = function_blue.current as unknown as HTMLDivElement;
@@ -765,126 +766,38 @@ const KindModules = (props: KindModulesProps) => {
     useEffect(() => {
         if (name === "高效") {
             if (isScrollUp) {
-                if (
-                    rate <= 0.8 &&
-                    rate > 0.05 &&
-                    isRange &&
-                    efficent_count.current === 0
-                ) {
-                    efficent_count.current = 1;
-                    efficentShow();
-                }
-                if (rate <= 0.05 || !isRange) {
-                    efficent_count.current = 0;
-                    efficentHide();
-                }
+                if (rate <= 0.85 && rate >= 0.05 && isRange) efficentShow();
+                if ((rate < 0.05 && isRange) || !isRange) efficentHide();
             } else {
-                if (
-                    rate >= 0.2 &&
-                    rate < 0.85 &&
-                    isRange &&
-                    efficent_count.current === 0
-                ) {
-                    efficent_count.current = 1;
-                    efficentShow();
-                }
-                if (rate >= 0.85 && isRange) {
-                    efficent_count.current = 0;
-                    efficentHide();
-                }
+                if (rate >= 0.05 && rate <= 0.85 && isRange) efficentShow();
+                if (rate > 0.85 && isRange) efficentHide();
             }
         }
         if (name === "函数级调用") {
             if (isScrollUp) {
-                if (
-                    rate <= 0.8 &&
-                    rate > 0.05 &&
-                    isRange &&
-                    function_count.current === 0
-                ) {
-                    function_count.current = 1;
-                    functionShow();
-                }
-                if (rate <= 0.05 && isRange) {
-                    function_count.current = 0;
-                    functionHide();
-                }
+                if (rate <= 0.85 && rate >= 0.05 && isRange) functionShow();
+                if (rate < 0.05 && isRange) functionHide();
             } else {
-                if (
-                    rate >= 0.2 &&
-                    rate < 0.85 &&
-                    isRange &&
-                    function_count.current === 0
-                ) {
-                    function_count.current = 1;
-                    functionShow();
-                }
-                if (rate >= 0.85 && isRange) {
-                    function_count.current = 0;
-                    functionHide();
-                }
+                if (rate >= 0.05 && rate <= 0.85 && isRange) functionShow();
+                if (rate > 0.85 && isRange) functionHide();
             }
         }
         if (name === "自动补全") {
             if (isScrollUp) {
-                if (
-                    rate <= 0.8 &&
-                    rate > 0.05 &&
-                    isRange &&
-                    doc_count.current === 0
-                ) {
-                    doc_count.current = 1;
-                    docShow();
-                }
-                if (rate <= 0.05 && isRange) {
-                    doc_count.current = 0;
-                    docHide();
-                }
+                if (rate <= 0.85 && rate >= 0.05 && isRange) docShow();
+                if (rate < 0.05 && isRange) docHide();
             } else {
-                if (
-                    rate >= 0.2 &&
-                    rate < 0.85 &&
-                    isRange &&
-                    doc_count.current === 0
-                ) {
-                    doc_count.current = 1;
-                    docShow();
-                }
-                if (rate >= 0.85 && isRange) {
-                    doc_count.current = 0;
-                    docHide();
-                }
+                if (rate >= 0.05 && rate <= 0.85 && isRange) docShow();
+                if (rate > 0.85 && isRange) docHide();
             }
         }
         if (name === "高阶工具") {
             if (isScrollUp) {
-                if (
-                    rate <= 0.8 &&
-                    rate > 0.05 &&
-                    isRange &&
-                    tool_count.current === 0
-                ) {
-                    tool_count.current = 1;
-                    toolShow();
-                }
-                if (rate <= 0.05 && isRange) {
-                    tool_count.current = 0;
-                    toolHide();
-                }
+                if (rate <= 0.85 && rate >= 0.05 && isRange) toolShow();
+                if (rate < 0.05 && isRange) toolHide();
             } else {
-                if (
-                    rate >= 0.1 &&
-                    rate < 0.85 &&
-                    isRange &&
-                    tool_count.current === 0
-                ) {
-                    tool_count.current = 1;
-                    toolShow();
-                }
-                if (rate >= 0.85 || !isRange) {
-                    tool_count.current = 0;
-                    toolHide();
-                }
+                if (rate >= 0.05 && rate <= 0.85 && isRange) toolShow();
+                if ((rate > 0.85 && isRange) || !isRange) toolHide();
             }
         }
     }, [name, rate, isRange, isScrollUp]);
@@ -1036,7 +949,7 @@ const KindModules = (props: KindModulesProps) => {
                     ref={function_title}
                 >
                     <div className="kind-opt-body-title-content">
-                        <span>安全领域的语言级集成与</span>
+                        <span>安全领域的语言集成与</span>
                         <span className="content-orange">函数级调用</span>
                     </div>
                     <div className="kind-opt-body-title-subtitle">{`使用函数级别的安全能力实现满足特定场景的定制化安全算法`}</div>

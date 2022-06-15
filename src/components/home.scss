@@ -27,7 +27,7 @@
                 font-weight: 600;
                 color: var(--base-font-color);
                 .text-style {
-                    color: #ff7d23;
+                    color: var(--base-theme-color);
                 }
             }
             &-description {
@@ -68,7 +68,7 @@
                 text-decoration: line-through;
             }
             &-orange {
-                color: #ff7d23;
+                color: var(--base-theme-color);
             }
             .header-circle {
                 position: absolute;
@@ -139,7 +139,7 @@
                 text-decoration: line-through;
             }
             &-orange {
-                color: #ff7d23;
+                color: var(--base-theme-color);
             }
         }
         &-description {
@@ -208,7 +208,7 @@
             &-setting {
                 position: absolute;
                 bottom: REM(303);
-                left: REM(679);
+                left: REM(140);
                 width: REM(300);
                 height: REM(299);
                 z-index: 99;
@@ -235,7 +235,7 @@
             color: var(--base-font-color);
             line-height: REM(56);
             &-orange {
-                color: #ff7d23;
+                color: var(--base-theme-color);
             }
         }
         &-description {
@@ -262,7 +262,7 @@
         cursor: pointer;
         .btn-title {
             padding: REM(12) REM(24);
-            background: #ff7d23;
+            background: var(--base-theme-color);
             border-radius: 4px 0px 0px 4px;
             .icno-style {
                 font-size: REM(24);
@@ -303,7 +303,7 @@
 
 .function-module-body {
     display: flex;
-    height: REM(443);
+    height: REM(432);
     overflow-x: hidden;
     .module-img {
         width: REM(564);
@@ -346,7 +346,7 @@
                 .selected-doc-icon {
                     display: block;
                     margin-top: REM(8);
-                    color: #ff7d23;
+                    color: var(--base-theme-color);
                     height: REM(20);
                     line-height: REM(20);
                     .icon-style {
@@ -610,7 +610,7 @@
             color: var(--base-font-color);
             line-height: REM(56);
             .content-orange {
-                color: #ff7d23;
+                color: var(--base-theme-color);
             }
         }
         &-subtitle {

@@ -64,6 +64,7 @@ export function NavLink({
                 })}
           {...props}
           target="_blank"
+          className={`${props.className} diy-link-item`}
       >
           {isExternalLink ? (
               <span>
@@ -103,7 +104,9 @@ export function NavLink({
                 }
               : null),
           })}
-      {...props}>
+      {...props}
+      className={`${props.className} diy-link-item`}
+    >
       {isExternalLink ? (
         <span>
           {label}

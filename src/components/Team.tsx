@@ -26,7 +26,7 @@ interface OwnerInfoOptProps {
 const OwnerInfoOpt: OwnerInfoOptProps[] = [
     {
         x: "25.3%",
-        y: "28.8%",
+        y: "26%",
         width: "6%",
         height: "12%",
         placement: "leftBottom",
@@ -42,23 +42,23 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "36.7%",
-        y: "56.9%",
+        y: "50.5%",
         width: "4.8%",
         height: "10.3%",
         placement: "left",
         info: {
             img: "/img/team/sucre.jpg",
             name: "sucre",
-            links: [{ name: "@红日安全", href: "http://www.sec-redclub.com/" }],
+            links: [{ name: "@四维创智", href: "https://www.4dogs.cn/" }],
             tags: [{ name: "能力研发", color: "green" }],
-            description: "乙方红队负责人，现供职于四维创智",
+            description: "乙方红队负责人",
             address: "北京",
             github: "https://github.com/linksucre",
         },
     },
     {
         x: "43.75%",
-        y: "62.8%",
+        y: "55.5%",
         width: "6%",
         height: "12%",
         placement: "bottom",
@@ -76,7 +76,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "45.6%",
-        y: "25.5%",
+        y: "22.5%",
         width: "6%",
         height: "5.2%",
         placement: "top",
@@ -94,7 +94,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "56.9%",
-        y: "72.2%",
+        y: "63.5%",
         width: "4.8%",
         height: "10.3%",
         placement: "rightTop",
@@ -109,7 +109,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "66.5%",
-        y: "53.8%",
+        y: "46%",
         width: "4.3%",
         height: "10.3%",
         placement: "right",
@@ -124,7 +124,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "50.3%",
-        y: "45%",
+        y: "39.5%",
         width: "5.6%",
         height: "12.1%",
         placement: "topLeft",
@@ -140,7 +140,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     },
     {
         x: "26.8%",
-        y: "70.9%",
+        y: "62.9%",
         width: "4.8%",
         height: "10.3%",
         placement: "leftTop",
@@ -255,11 +255,11 @@ interface ConsultantInfoProps {
 }
 const ConsultantInfo: ConsultantInfoProps[] = [
     {
-        img: "/img/team/cnrstar.jpg",
-        name: "cnrstar",
-        links: [{ name: "@4dogs.cn", href: "http://www.4dogs.cn/" }],
-        description: "知识图谱的安全领域实践者",
-        address: "北京",
+        img: "/img/team/phith0n.jpg",
+        name: "phith0n",
+        links: [{ name: "@govuln.com", href: "https://govuln.com/" }],
+        description: "Vulhub创始人/代码审计社区创始人",
+        address: "新加坡",
     },
     {
         img: "/img/team/cuihuagege.jpg",
@@ -267,6 +267,18 @@ const ConsultantInfo: ConsultantInfoProps[] = [
         links: [{ name: "@青藤 云安全", href: "https://www.qingteng.cn/" }],
         description: "安全产品 / 安全架构专家",
         address: "北京",
+    },
+    {
+        img: "/img/team/LuoyinFeng.jpg",
+        name: "Luoyin Feng",
+        links: [
+            {
+                name: "@Roblox China Security",
+                href: "https://www.linkedin.com/in/fengluoyin/",
+            },
+        ],
+        description: "Security Lead",
+        address: "America",
     },
 ];
 
@@ -302,10 +314,10 @@ const ThanksForInfo: ThanksForInfoProps[] = [
     },
     {
         img: "/img/team/vulhub.png",
-        name: "vulhub",
+        name: "Vulhub",
         tag: { name: "漏洞靶场基础设施", color: "blue" },
         description: ["无私的漏洞靶场基础设施提供者"],
-        address: "北京",
+        address: "新加坡",
         home: "https://vulhub.org/",
         github: "https://github.com/vulhub/",
     },
@@ -396,21 +408,11 @@ export const Team: React.FC<TeamProps> = (props) => {
 
                 <img
                     src="/img/team/topLeft.png"
-                    style={{
-                        position: "absolute",
-                        width: "20%",
-                        top: 0,
-                        left: 0,
-                    }}
+                    className="consultant-wrapper-top-left"
                 />
                 <img
                     src="/img/team/rightBottom.png"
-                    style={{
-                        position: "absolute",
-                        width: "20%",
-                        bottom: 0,
-                        right: 0,
-                    }}
+                    className="consultant-wrapper-right-bottom"
                 />
             </div>
 

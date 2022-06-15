@@ -135,7 +135,7 @@
             .consultant-member-grid-wrapper {
                 display: grid;
                 grid-gap: 24px;
-                grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
             }
         }
 
@@ -143,15 +143,30 @@
             .consultant-member-wrapper {
                 padding-left: 196px;
                 padding-right: 196px;
-                max-width: 1152px;
+                max-width: 1256px;
             }
         }
         @media (min-width: 768px) {
             .consultant-member-wrapper {
                 padding-left: 64px;
                 padding-right: 64px;
-                max-width: 888px;
+                max-width: 992px;
             }
+        }
+
+        .consultant-wrapper-top-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: REM(374);
+            height: REM(268);
+        }
+        .consultant-wrapper-right-bottom {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: REM(367);
+            height: REM(372);
         }
     }
 
@@ -241,7 +256,7 @@
                         height: 20px;
                         line-height: 20px;
                         .link-jump {
-                            color: #ff7d23;
+                            color: var(--base-theme-color);
                         }
                         .link-no-jump {
                             color: #000000;
@@ -337,7 +352,7 @@
                         height: 20px;
                         line-height: 20px;
                         .link-jump {
-                            color: #ff7d23;
+                            color: var(--base-theme-color);
                         }
                         .link-no-jump {
                             color: #000000;
@@ -442,7 +457,7 @@
             line-height: 20px;
             text-align: center;
             .link-jump {
-                color: #ff7d23;
+                color: var(--base-theme-color);
             }
             .link-no-jump {
                 color: #000000;

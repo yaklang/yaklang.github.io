@@ -182,9 +182,6 @@ function Footer() {
                                             alt={logo.alt}
                                             sources={sources}
                                         />
-                                        <div className="footer__logo__title">
-                                            Yak
-                                        </div>
                                     </Link>
                                 ) : (
                                     <div className="footer-link">
