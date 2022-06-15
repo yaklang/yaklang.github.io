@@ -461,10 +461,7 @@ const DownLoadBtn = (props) => {
             visible={visible}
             overlay={menu(visible)}
             trigger={["click"]}
-            onVisibleChange={(visible) => {
-                console.log(visible);
-                setVisible(visible);
-            }}
+            onVisibleChange={(visible) => setVisible(visible)}
         >
             <a
                 className="download-yakit-btn"
