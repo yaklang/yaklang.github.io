@@ -447,6 +447,7 @@ const DownLoadBtn = (props) => {
                         <a
                             target="_blank"
                             href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${varsion}/Yakit-${varsion}-${item.link}`}
+                            onClick={() => setVisible(false)}
                         >
                             {item.name}
                         </a>
