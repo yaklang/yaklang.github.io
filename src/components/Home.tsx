@@ -88,7 +88,7 @@ const FunctionData: FunctionDataProps[] = [
         ],
         list: [
             {
-                name: "用户可以在渗透测试的任何步骤内执行自定义的 Yaklang 脚本或插件",
+                name: "用户可以在渗透测试任何步骤内执行自定义的 Yaklang 脚本或插件",
                 link: "/products/best-practice/mitm-plug",
             },
             {
@@ -354,7 +354,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
                 <div className="function-body-description">
                     <div className="function-body-description-body">
-                        专注于安全领域，使用 DSL(Domain-Specific Language)
+                        专注于安全领域，使用 DSL
                         模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持...
                         一应俱全
                     </div>
@@ -961,7 +961,7 @@ const KindModules = (props: KindModulesProps) => {
                     ref={efficent_title}
                 >
                     <div className="kind-opt-body-title-content">
-                        <span>运行效率极高 Runtime Efficent</span>
+                        <span>运行效率极高</span>
                         <br />
                         <span className="content-orange">Runtime Efficent</span>
                     </div>
@@ -1092,17 +1092,17 @@ const KindModules = (props: KindModulesProps) => {
                 <div className="kind-opt-body-title opacity-0" ref={doc_title}>
                     <div className="kind-opt-body-title-content">
                         <span className="content-orange">自动补全</span>
-                        与完善的文档为编写助力
+                        与完善的教程文档为编写助力
                     </div>
                     <div className="kind-opt-body-title-subtitle">
                         <span>
                             <span className="subtitle-doc">/</span> 与 vscode
-                            兼容的自动补全插件辅助用户快速上手
+                            兼容的自动补全插件，辅助用户快速上手
                         </span>
                         <br />
                         <span>
                             <span className="subtitle-doc">/</span>{" "}
-                            完善的教程文档提供提供全面指导
+                            完善的教程文档提供全面指导
                         </span>
                     </div>
                 </div>
@@ -1142,7 +1142,7 @@ const KindModules = (props: KindModulesProps) => {
                     <div className="kind-opt-body-title-subtitle">
                         <span>
                             <span className="subtitle-doc">/ </span>
-                            多协议反连平台集成：
+                            多协议、反连平台集成：
                         </span>
                         <br />
                         <span className="subtitle-tool">
