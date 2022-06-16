@@ -418,7 +418,7 @@ interface downloadInfoProps {
 }
 const DownLoadBtn = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
-    const [varsion, setVersion] = useState<string>("");
+    const [version, setVersion] = useState<string>("");
     const [disabled, setDisabled] = useState<boolean>(false);
 
     const downloadList: downloadInfoProps[] = [
@@ -463,22 +463,27 @@ const DownLoadBtn = (props) => {
             });
     }, []);
 
-    const menu = (visible: boolean) => (
-        <Menu style={visible ? {} : { visibility: "hidden" }}>
-            {downloadList.map((item) => {
-                return (
-                    <Menu.Item key={item.name} disabled={disabled}>
-                        <a
-                            target="_blank"
-                            href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${varsion}/Yakit-${varsion}-${item.link}`}
-                            onClick={() => setVisible(false)}
-                        >
-                            {item.name}
-                        </a>
-                    </Menu.Item>
-                );
-            })}
-        </Menu>
+    const menu = useCallback(
+        (visible: boolean) => {
+            return (
+                <Menu style={visible ? {} : { visibility: "hidden" }}>
+                    {downloadList.map((item) => {
+                        return (
+                            <Menu.Item key={item.name} disabled={disabled}>
+                                <a
+                                    target="_blank"
+                                    href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-${item.link}`}
+                                    onClick={() => setVisible(false)}
+                                >
+                                    {`${item.name}(${version})`}
+                                </a>
+                            </Menu.Item>
+                        );
+                    })}
+                </Menu>
+            );
+        },
+        [version]
     );
 
     return (
