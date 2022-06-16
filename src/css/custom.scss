@@ -54,6 +54,7 @@ $REM: 16;
         border-right: 0px;
     }
     aside > :first-child {
+        position: fixed;
         padding-top: 0;
         top: REM(63);
         border-right: 1px solid var(--ifm-toc-border-color);
