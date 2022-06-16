@@ -504,6 +504,7 @@ const KindModules = (props: KindModulesProps) => {
     const efficent_3_time = useRef<any>(null);
     const efficent_4_time = useRef<any>(null);
     const efficent_title = useRef(null);
+    const efficent_show = useRef<boolean>(false);
 
     const function_img = useRef(null);
     const function_blue = useRef(null);
@@ -541,7 +542,9 @@ const KindModules = (props: KindModulesProps) => {
             className + " opacity-0 animate__animated animate__fadeOut";
     };
     const hideTitleAnimation = (div: HTMLDivElement, className: string) => {
-        if (div.className.indexOf(`animate__animated animate__fadeOut`) > -1)
+        if (
+            div.className.indexOf(`animate__animated animate__fadeOutDown`) > -1
+        )
             return;
         div.className =
             className + " opacity-0 animate__animated animate__fadeOutDown";
@@ -560,6 +563,7 @@ const KindModules = (props: KindModulesProps) => {
             if (!efficent_1 || !efficent_1.current) return;
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
+            efficent_show.current = true;
         }, 50);
         efficent_2_time.current = setTimeout(() => {
             if (!efficent_2 || !efficent_2.current) return;
@@ -601,6 +605,8 @@ const KindModules = (props: KindModulesProps) => {
         if (!efficent_title || !efficent_title.current) return;
         const div_title = efficent_title.current as unknown as HTMLDivElement;
         hideTitleAnimation(div_title, "kind-opt-body-title");
+
+        efficent_show.current = false;
     };
     const functionShow = () => {
         setTimeout(() => {
@@ -766,10 +772,22 @@ const KindModules = (props: KindModulesProps) => {
     useEffect(() => {
         if (name === "高效") {
             if (isScrollUp) {
-                if (rate <= 0.85 && rate >= 0.05 && isRange) efficentShow();
+                if (
+                    rate <= 0.85 &&
+                    rate >= 0.05 &&
+                    isRange &&
+                    !efficent_show.current
+                )
+                    efficentShow();
                 if ((rate < 0.05 && isRange) || !isRange) efficentHide();
             } else {
-                if (rate >= 0.05 && rate <= 0.85 && isRange) efficentShow();
+                if (
+                    rate >= 0.05 &&
+                    rate <= 0.85 &&
+                    isRange &&
+                    !efficent_show.current
+                )
+                    efficentShow();
                 if (rate > 0.85 && isRange) efficentHide();
             }
         }

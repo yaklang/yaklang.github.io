@@ -378,6 +378,7 @@
 .kind-opt-body {
     height: REM(496);
     display: flex;
+    overflow: hidden;
     .efficent-img {
         height: 100%;
         width: REM(1144);
