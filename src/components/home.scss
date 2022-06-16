@@ -301,6 +301,11 @@
     }
 }
 
+.ant-dropdown-menu-item:hover {
+    background-color: rgba(255, 125, 35, 0.08) !important;
+    color: var(--base-theme-color);
+}
+
 .function-module-body {
     display: flex;
     height: REM(432);

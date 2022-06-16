@@ -21,6 +21,7 @@
     "@svgr/webpack": "^5.5.0",
     "animate.css": "^4.1.1",
     "antd": "4.17.2",
+    "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "codemirror": "^5.62.0",
     "docusaurus-plugin-sass": "^0.2.2",

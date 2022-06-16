@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Dropdown, Menu, Popover } from "antd";
+import { Dropdown, Menu, message, Popover } from "antd";
 import {
     DownloadOutlined,
     DownOutlined,
@@ -11,6 +11,8 @@ import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "animate.css";
+
+const axios = require("axios");
 
 export interface HomePageProps {}
 
@@ -417,6 +419,7 @@ interface downloadInfoProps {
 const DownLoadBtn = (props) => {
     const [visible, setVisible] = useState<boolean>(false);
     const [varsion, setVersion] = useState<string>("");
+    const [disabled, setDisabled] = useState<boolean>(false);
 
     const downloadList: downloadInfoProps[] = [
         {
@@ -437,11 +440,34 @@ const DownLoadBtn = (props) => {
         },
     ];
 
+    useEffect(() => {
+        axios
+            .get(
+                "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yakit-version.txt"
+            )
+            .then(function (response) {
+                if (
+                    response &&
+                    response.data &&
+                    typeof response.data === "string"
+                ) {
+                    const yakVersion = (response.data as string).split("\n")[0];
+                    setVersion(yakVersion);
+                } else {
+                    setDisabled(true);
+                    message.error("获取yakit版本错误，请刷新页面后重试");
+                }
+            })
+            .catch(function (error) {
+                console.info(error);
+            });
+    }, []);
+
     const menu = (visible: boolean) => (
         <Menu style={visible ? {} : { visibility: "hidden" }}>
             {downloadList.map((item) => {
                 return (
-                    <Menu.Item key={item.name}>
+                    <Menu.Item key={item.name} disabled={disabled}>
                         <a
                             target="_blank"
                             href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${varsion}/Yakit-${varsion}-${item.link}`}
@@ -1229,6 +1255,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
                                         <a
                                             className="selected-doc-icon"
                                             href={item.link}
+                                            target="_blank"
                                         >
                                             <ArrowRightOutlined className="icon-style" />
                                             <div className="icon-title">
@@ -1274,6 +1301,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
                                         <a
                                             className="selected-doc-icon"
                                             href={item.link}
+                                            target="_blank"
                                         >
                                             <ArrowRightOutlined className="icon-style" />
                                             <div className="icon-title">
