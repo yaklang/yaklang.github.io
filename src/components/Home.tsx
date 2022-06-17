@@ -543,18 +543,34 @@ const KindModules = (props: KindModulesProps) => {
     const function_yellow = useRef(null);
     const function_icon = useRef(null);
     const function_path = useRef(null);
+    const function_img_time = useRef<any>(null);
+    const function_blue_time = useRef<any>(null);
+    const function_green_time = useRef<any>(null);
+    const function_yellow_time = useRef<any>(null);
+    const function_icon_time = useRef<any>(null);
+    const function_path_time = useRef<any>(null);
     const function_title = useRef(null);
+    const function_show = useRef<boolean>(false);
 
     const doc_img = useRef(null);
     const doc_blue = useRef(null);
     const doc_green = useRef(null);
     const doc_yellow = useRef(null);
     const doc_path = useRef(null);
+    const doc_img_time = useRef<any>(null);
+    const doc_blue_time = useRef<any>(null);
+    const doc_green_time = useRef<any>(null);
+    const doc_yellow_time = useRef<any>(null);
+    const doc_path_time = useRef<any>(null);
     const doc_title = useRef(null);
+    const doc_show = useRef<boolean>(false);
 
     const tool_img = useRef(null);
     const tool_green = useRef(null);
+    const tool_img_time = useRef<any>(null);
+    const tool_green_time = useRef<any>(null);
     const tool_title = useRef(null);
+    const tool_show = useRef<boolean>(false);
 
     const showAnimation = (
         div: HTMLDivElement,
@@ -582,6 +598,9 @@ const KindModules = (props: KindModulesProps) => {
     };
 
     const efficentShow = () => {
+        if (!efficent_title || !efficent_title.current) return;
+        if (!efficent_1 || !efficent_1.current) return;
+
         efficent_1_time.current = setTimeout(() => {
             if (!efficent_title || !efficent_title.current) return;
             const div_title =
@@ -595,7 +614,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
             efficent_show.current = true;
-        }, 50);
+        }, 0);
         efficent_2_time.current = setTimeout(() => {
             if (!efficent_2 || !efficent_2.current) return;
             const div = efficent_2.current as unknown as HTMLDivElement;
@@ -617,6 +636,7 @@ const KindModules = (props: KindModulesProps) => {
         clearTimeout(efficent_2_time.current);
         clearTimeout(efficent_3_time.current);
         clearTimeout(efficent_4_time.current);
+
         if (!efficent_1 || !efficent_1.current) return;
         const div_1 = efficent_1.current as unknown as HTMLDivElement;
         hideAnimation(div_1, "efficent-img-1");
@@ -640,7 +660,10 @@ const KindModules = (props: KindModulesProps) => {
         efficent_show.current = false;
     };
     const functionShow = () => {
-        setTimeout(() => {
+        if (!function_title || !function_title.current) return;
+        if (!function_img || !function_img.current) return;
+
+        function_img_time.current = setTimeout(() => {
             if (!function_title || !function_title.current) return;
             const div_title =
                 function_title.current as unknown as HTMLDivElement;
@@ -652,34 +675,42 @@ const KindModules = (props: KindModulesProps) => {
             if (!function_img || !function_img.current) return;
             const div = function_img.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-function", "animate__zoomIn");
-        }, 50);
-        setTimeout(() => {
+            function_show.current = true;
+        }, 0);
+        function_blue_time.current = setTimeout(() => {
             if (!function_blue || !function_blue.current) return;
             const div = function_blue.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-blue", "animate__zoomIn");
         }, 200);
-        setTimeout(() => {
+        function_green_time.current = setTimeout(() => {
             if (!function_green || !function_green.current) return;
             const div = function_green.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-green", "animate__zoomIn");
         }, 300);
-        setTimeout(() => {
+        function_yellow_time.current = setTimeout(() => {
             if (!function_yellow || !function_yellow.current) return;
             const div = function_yellow.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-yellow", "animate__zoomIn");
         }, 400);
-        setTimeout(() => {
+        function_icon_time.current = setTimeout(() => {
             if (!function_icon || !function_icon.current) return;
             const div = function_icon.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-icon", "animate__zoomIn");
         }, 500);
-        setTimeout(() => {
+        function_path_time.current = setTimeout(() => {
             if (!function_path || !function_path.current) return;
             const div = function_path.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-path", "animate__zoomIn");
         }, 700);
     };
     const functionHide = () => {
+        clearTimeout(function_img_time.current);
+        clearTimeout(function_blue_time.current);
+        clearTimeout(function_green_time.current);
+        clearTimeout(function_yellow_time.current);
+        clearTimeout(function_icon_time.current);
+        clearTimeout(function_path_time.current);
+
         if (!function_img || !function_img.current) return;
         const div_img = function_img.current as unknown as HTMLDivElement;
         hideAnimation(div_img, "function-img-function");
@@ -707,9 +738,14 @@ const KindModules = (props: KindModulesProps) => {
         if (!function_title || !function_title.current) return;
         const div_title = function_title.current as unknown as HTMLDivElement;
         hideTitleAnimation(div_title, "kind-opt-body-title");
+
+        function_show.current = false;
     };
     const docShow = () => {
-        setTimeout(() => {
+        if (!doc_title || !doc_title.current) return;
+        if (!doc_img || !doc_img.current) return;
+
+        doc_img_time.current = setTimeout(() => {
             if (!doc_title || !doc_title.current) return;
             const div_title = doc_title.current as unknown as HTMLDivElement;
             showAnimation(
@@ -720,29 +756,36 @@ const KindModules = (props: KindModulesProps) => {
             if (!doc_img || !doc_img.current) return;
             const div = doc_img.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-doc", "animate__zoomIn");
+            doc_show.current = true;
         }, 0);
-        setTimeout(() => {
+        doc_blue_time.current = setTimeout(() => {
             if (!doc_blue || !doc_blue.current) return;
             const div = doc_blue.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-blue", "animate__zoomIn");
         }, 200);
-        setTimeout(() => {
+        doc_green_time.current = setTimeout(() => {
             if (!doc_green || !doc_green.current) return;
             const div = doc_green.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-green", "animate__zoomIn");
         }, 350);
-        setTimeout(() => {
+        doc_yellow_time.current = setTimeout(() => {
             if (!doc_yellow || !doc_yellow.current) return;
             const div = doc_yellow.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-yellow", "animate__zoomIn");
         }, 500);
-        setTimeout(() => {
+        doc_path_time.current = setTimeout(() => {
             if (!doc_path || !doc_path.current) return;
             const div = doc_path.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-path", "animate__zoomIn");
         }, 700);
     };
     const docHide = () => {
+        clearTimeout(doc_img_time.current);
+        clearTimeout(doc_blue_time.current);
+        clearTimeout(doc_green_time.current);
+        clearTimeout(doc_yellow_time.current);
+        clearTimeout(doc_path_time.current);
+
         if (!doc_img || !doc_img.current) return;
         const div_img = doc_img.current as unknown as HTMLDivElement;
         hideAnimation(div_img, "doc-img-doc");
@@ -766,9 +809,14 @@ const KindModules = (props: KindModulesProps) => {
         if (!doc_title || !doc_title.current) return;
         const div_title = doc_title.current as unknown as HTMLDivElement;
         hideTitleAnimation(div_title, "kind-opt-body-title");
+
+        doc_show.current = false;
     };
     const toolShow = () => {
-        setTimeout(() => {
+        if (!tool_title || !tool_title.current) return;
+        if (!tool_img || !tool_img.current) return;
+
+        tool_img_time.current = setTimeout(() => {
             if (!tool_title || !tool_title.current) return;
             const div_title = tool_title.current as unknown as HTMLDivElement;
             showAnimation(
@@ -779,14 +827,18 @@ const KindModules = (props: KindModulesProps) => {
             if (!tool_img || !tool_img.current) return;
             const div = tool_img.current as unknown as HTMLDivElement;
             showAnimation(div, "tool-img-tool", "animate__zoomIn");
+            tool_show.current = true;
         }, 0);
-        setTimeout(() => {
+        tool_green_time.current = setTimeout(() => {
             if (!tool_green || !tool_green.current) return;
             const div = tool_green.current as unknown as HTMLDivElement;
             showAnimation(div, "tool-img-green", "animate__zoomIn");
         }, 200);
     };
     const toolHide = () => {
+        clearTimeout(tool_img_time.current);
+        clearTimeout(tool_green_time.current);
+
         if (!tool_img || !tool_img.current) return;
         const div_img = tool_img.current as unknown as HTMLDivElement;
         hideAnimation(div_img, "tool-img-tool");
@@ -798,6 +850,8 @@ const KindModules = (props: KindModulesProps) => {
         if (!tool_title || !tool_title.current) return;
         const div_title = tool_title.current as unknown as HTMLDivElement;
         hideTitleAnimation(div_title, "kind-opt-body-title");
+
+        tool_show.current = false;
     };
 
     useEffect(() => {
@@ -824,28 +878,64 @@ const KindModules = (props: KindModulesProps) => {
         }
         if (name === "函数级调用") {
             if (isScrollUp) {
-                if (rate <= 0.85 && rate >= 0.05 && isRange) functionShow();
+                if (
+                    rate <= 0.85 &&
+                    rate >= 0.05 &&
+                    isRange &&
+                    !function_show.current
+                )
+                    functionShow();
                 if (rate < 0.05 && isRange) functionHide();
             } else {
-                if (rate >= 0.05 && rate <= 0.85 && isRange) functionShow();
+                if (
+                    rate >= 0.05 &&
+                    rate <= 0.85 &&
+                    isRange &&
+                    !function_show.current
+                )
+                    functionShow();
                 if (rate > 0.85 && isRange) functionHide();
             }
         }
         if (name === "自动补全") {
             if (isScrollUp) {
-                if (rate <= 0.85 && rate >= 0.05 && isRange) docShow();
+                if (
+                    rate <= 0.85 &&
+                    rate >= 0.05 &&
+                    isRange &&
+                    !doc_show.current
+                )
+                    docShow();
                 if (rate < 0.05 && isRange) docHide();
             } else {
-                if (rate >= 0.05 && rate <= 0.85 && isRange) docShow();
+                if (
+                    rate >= 0.05 &&
+                    rate <= 0.85 &&
+                    isRange &&
+                    !doc_show.current
+                )
+                    docShow();
                 if (rate > 0.85 && isRange) docHide();
             }
         }
         if (name === "高阶工具") {
             if (isScrollUp) {
-                if (rate <= 0.85 && rate >= 0.05 && isRange) toolShow();
+                if (
+                    rate <= 0.85 &&
+                    rate >= 0.05 &&
+                    isRange &&
+                    !tool_show.current
+                )
+                    toolShow();
                 if (rate < 0.05 && isRange) toolHide();
             } else {
-                if (rate >= 0.05 && rate <= 0.85 && isRange) toolShow();
+                if (
+                    rate >= 0.05 &&
+                    rate <= 0.85 &&
+                    isRange &&
+                    !tool_show.current
+                )
+                    toolShow();
                 if ((rate > 0.85 && isRange) || !isRange) toolHide();
             }
         }
