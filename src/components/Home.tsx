@@ -614,7 +614,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
             efficent_show.current = true;
-        }, 0);
+        },50);
         efficent_2_time.current = setTimeout(() => {
             if (!efficent_2 || !efficent_2.current) return;
             const div = efficent_2.current as unknown as HTMLDivElement;
@@ -676,7 +676,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = function_img.current as unknown as HTMLDivElement;
             showAnimation(div, "function-img-function", "animate__zoomIn");
             function_show.current = true;
-        }, 0);
+        }, 50);
         function_blue_time.current = setTimeout(() => {
             if (!function_blue || !function_blue.current) return;
             const div = function_blue.current as unknown as HTMLDivElement;
@@ -757,7 +757,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = doc_img.current as unknown as HTMLDivElement;
             showAnimation(div, "doc-img-doc", "animate__zoomIn");
             doc_show.current = true;
-        }, 0);
+        }, 50);
         doc_blue_time.current = setTimeout(() => {
             if (!doc_blue || !doc_blue.current) return;
             const div = doc_blue.current as unknown as HTMLDivElement;
@@ -828,7 +828,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = tool_img.current as unknown as HTMLDivElement;
             showAnimation(div, "tool-img-tool", "animate__zoomIn");
             tool_show.current = true;
-        }, 0);
+        }, 50);
         tool_green_time.current = setTimeout(() => {
             if (!tool_green || !tool_green.current) return;
             const div = tool_green.current as unknown as HTMLDivElement;
