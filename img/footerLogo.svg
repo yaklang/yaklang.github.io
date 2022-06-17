@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="24px" viewBox="0 0 50 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 2</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#EF4900" offset="0%"></stop>
+            <stop stop-color="#FF781D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Yak-官网" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="官网首页设计" transform="translate(-385.000000, -5736.000000)">
+            <g id="基础通用组件/footer" transform="translate(0.000000, 5712.000000)">
+                <g id="编组-2" transform="translate(385.000000, 24.000000)">
+                    <polygon id="Fill-3" fill="#FF781D" points="45.3910592 9.28412924 4.02197548 9.28412924 4.02197548 5.29858816 24.7000913 1.68605765 45.3910592 5.29858816"></polygon>
+                    <polygon id="Fill-5" fill="#FF781D" points="4.0219556 5.2985619 0 5.2985619 4.0219556 0"></polygon>
+                    <polygon id="Fill-7" fill="#EF4900" points="4.0219556 9.28412924 0 5.29858816 4.0219556 5.29858816"></polygon>
+                    <polygon id="Fill-9" fill="#EF4900" points="45.3910592 9.28412924 49.4130148 5.29858816 45.3910592 5.29858816"></polygon>
+                    <polygon id="Fill-11" fill="#FF781D" points="45.3910592 5.2985619 49.4130148 5.2985619 45.3910592 0"></polygon>
+                    <polygon id="Fill-13" fill="url(#linearGradient-1)" points="14.9423094 9.28413581 18.7192152 24 30.6937929 24 34.4706325 9.28413581"></polygon>
+                    <polygon id="Fill-15" fill="#EF4900" points="24.7065041 18.2782398 30.6937598 23.9999672 18.7192484 23.9999672"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
