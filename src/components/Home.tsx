@@ -614,7 +614,7 @@ const KindModules = (props: KindModulesProps) => {
             const div = efficent_1.current as unknown as HTMLDivElement;
             showAnimation(div, "efficent-img-1", "animate__backInLeft");
             efficent_show.current = true;
-        },50);
+        }, 50);
         efficent_2_time.current = setTimeout(() => {
             if (!efficent_2 || !efficent_2.current) return;
             const div = efficent_2.current as unknown as HTMLDivElement;
@@ -979,8 +979,7 @@ const KindModules = (props: KindModulesProps) => {
                                 JVM Based Lang
                             </div>
                             <div className="efficent-img-content-text">
-                                可能是安全领域最先进的 DSL (Domain-Specific
-                                Language)
+                                一个高质量的Java 生态教学网站
                             </div>
                             <img
                                 src={
