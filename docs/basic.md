@@ -212,7 +212,7 @@ c:  stringValue
 当然，拆包+赋值的另一个案例读者可以尝试
 
 ```go
-a = []
+a = make([]var, 4)
 a[1], a[2], a[3] = 1, "asdfasdf", false
 
 println("slice a: ", a)
@@ -220,7 +220,7 @@ println("slice a: ", a)
 /*
 OUTPUT:
 
-slice a: []interface {}{interface {}(nil), 1, "asdfasdf", false}
+slice a:  [<nil> 1 asdfasdf false]
 */
 ```
 
