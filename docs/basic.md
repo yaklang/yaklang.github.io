@@ -212,7 +212,7 @@ c:  stringValue
 当然，拆包+赋值的另一个案例读者可以尝试
 
 ```go
-a = []
+a = make([]var, 4)
 a[1], a[2], a[3] = 1, "asdfasdf", false
 
 println("slice a: ", a)
@@ -220,7 +220,7 @@ println("slice a: ", a)
 /*
 OUTPUT:
 
-slice a: []interface {}{interface {}(nil), 1, "asdfasdf", false}
+slice a:  [<nil> 1 asdfasdf false]
 */
 ```
 
@@ -770,6 +770,13 @@ fetch chan var [ch] element:  2
 
 ## 模块化/多文件编程
 
+在模块化与多文件编程中，我们通常需要根据相对位置定位文件或者资源目录
+
+为此我们准备有三个常见全局变量方便用户操作
+
+1. `YAK_MAIN`: boolean 类型，如果为 false 说明这个文件是主文件，通过动态引入的文件将会为 false
+2. `YAK_FILENAME`: 当前执行的脚本文件的具体文件名
+3. `YAK_DIR`: 当前脚本文件所在的路径位置
 
 ### 使用 `YAK_MAIN`：等价于 Python 中的 `__main__`
 

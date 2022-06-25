@@ -4,8 +4,6 @@ sidebar_position: 2
 
 # Log4j JDNI fuzz与被动扫描
 
-## “化学反应”：log4j JNDI fuzz 与被动扫描
-
 ## Log4j JNDI Lookup 潜在威胁
 log4j 的黑盒漏洞检测其实是一个老大难的问题，不像 “正常” 的漏洞有明确的输入点，以及利用方式。
 

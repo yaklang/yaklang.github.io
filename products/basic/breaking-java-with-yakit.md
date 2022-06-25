@@ -4,7 +4,6 @@ sidebar_position: 8
 
 # 使用 Yakit 打破 Java 序列化协议语言隔离
 
-## 最后几块拼图（一）：使用 Yakit 打破 Java 序列化协议语言隔离
 
 ## 一句话背景知识
 

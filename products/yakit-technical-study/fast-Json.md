@@ -4,7 +4,6 @@ sidebar_position: 5
 
 # FastJson 启发式检测
 
-## FastJson 启发式检测
 Fastjson payload有很多版本，有些检测工具简单粗暴的将所有payload打了一遍，效率很低，本篇文章意在找出适用范围最广的payload，高效的完成漏洞检测
 
 下面是两个最通用的payload

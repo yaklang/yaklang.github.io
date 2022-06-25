@@ -1,0 +1,79 @@
+/* stylelint-disable docusaurus/copyright-header */
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+    /*--ifm-color-primary: #25c2a0;*/
+    /*--ifm-color-primary-dark: rgb(33, 175, 144);*/
+    /*--ifm-color-primary-darker: rgb(31, 165, 136);*/
+    /*--ifm-color-primary-darkest: rgb(26, 136, 112);*/
+    /*--ifm-color-primary-light: rgb(70, 203, 174);*/
+    /*--ifm-color-primary-lighter: rgb(102, 212, 189);*/
+    /*--ifm-color-primary-lightest: rgb(146, 224, 208);*/
+    --ifm-color-primary: #3399dd;
+    --ifm-color-primary-dark: #238cd2;
+    --ifm-color-primary-darker: #2184c6;
+    --ifm-color-primary-darkest: #1b6da3;
+    --ifm-color-primary-light: #4aa5e1;
+    --ifm-color-primary-lighter: #56aae3;
+    --ifm-color-primary-lightest: #79bce9;
+    --ifm-code-font-size: 95%;
+
+    --base-font-color: #1e1f23;
+    --base-theme-color: #ff7d23;
+}
+
+.docusaurus-highlight-code-line {
+    background-color: rgb(141, 132, 113);
+    display: block;
+    margin: 0 calc(-1 * var(--ifm-pre-padding));
+    padding: 0 var(--ifm-pre-padding);
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+    // min-width: 768px;
+}
+
+$REM: 16;
+@function REM($n) {
+    @return calc($n / $REM) * 1rem;
+}
+
+// 解决doc文档呗navbar遮挡问题
+.main-wrapper.docs-wrapper.docs-doc-page {
+    .container {
+        margin-top: REM(63);
+    }
+    aside {
+        border-right: 0px;
+    }
+    aside > :first-child {
+        position: fixed;
+        padding-top: 0;
+        top: REM(63);
+        border-right: 1px solid var(--ifm-toc-border-color);
+    }
+}
+.theme-doc-sidebar-menu.menu__list {
+    font-size: 14px;
+}
+
+img {
+    -webkit-user-drag: none;
+}
+video {
+    -webkit-user-drag: none;
+}
+
+// layout style file
+@import "../css/navbar.scss";
+@import "../theme/Footer/footer.scss";
+// page style file
+@import "../components/home.scss";
+@import "../components/team.scss";
