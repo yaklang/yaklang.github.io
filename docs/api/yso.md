@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [yso.GenExecClass](#ysogenexecclass) |  |
  | [yso.GetClojure](#ysogetclojure) |  |
  | [yso.GetCommonsBeanutils1](#ysogetcommonsbeanutils1) |  |
  | [yso.GetCommonsBeanutils2](#ysogetcommonsbeanutils2) |  |
@@ -22,9 +23,14 @@
  | [yso.GetSpring1](#ysogetspring1) |  |
  | [yso.GetSpring2](#ysogetspring2) |  |
  | [yso.GetTomcatEcho](#ysogettomcatecho) | 新增 TomcatEcho Java 对象 |
- | [yso.NewFacadeServer](#ysonewfacadeserver) | 新增 Facade 反连服务器 |
+ | [yso.NewFacadeServer](#ysonewfacadeserver) |  |
  | [yso.NewLdapServer](#ysonewldapserver) | 新增 LDAP 服务器 |
  | [yso.NewLdapServerWithPort](#ysonewldapserverwithport) | 新增 LDAP 服务器，并设置端口 |
+ | [yso.SetHttpResource](#ysosethttpresource) |  |
+ | [yso.SetJavaClassName](#ysosetjavaclassname) |  |
+ | [yso.SetJavaCodeBase](#ysosetjavacodebase) |  |
+ | [yso.SetObjectClass](#ysosetobjectclass) |  |
+ | [yso.SetjavaFactory](#ysosetjavafactory) |  |
 
 
 
@@ -35,6 +41,38 @@
 
 ## 函数定义
 
+### yso.GenExecClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenExecClass(v1: string, v2: string) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
 ### yso.GetClojure
 
 
@@ -644,7 +682,7 @@
  
 ### yso.NewFacadeServer
 
-新增 Facade 反连服务器
+
 
 #### 详细描述
 
@@ -652,7 +690,7 @@
 
 #### 定义：
 
-`func yso.NewFacadeServer(v1: string, v2: int) return (r0: *facades.FacadeServer)`
+`func yso.NewFacadeServer(v1: string, v2: int, v3 ...facades.FacadeServerConfig) return (r0: *facades.FacadeServer)`
 
 
 #### 参数
@@ -661,6 +699,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `int` |   |
+| v3 | `...facades.FacadeServerConfig` |   |
 
 
 
@@ -726,6 +765,162 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `ldapserver.LdapServer` |   |
+
+
+ 
+### yso.SetHttpResource
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetHttpResource(v1: string, v2: bytes) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
+### yso.SetJavaClassName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetJavaClassName(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
+### yso.SetJavaCodeBase
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetJavaCodeBase(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
+### yso.SetObjectClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetObjectClass(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
+### yso.SetjavaFactory
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetjavaFactory(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
 
 
  

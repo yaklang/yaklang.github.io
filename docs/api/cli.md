@@ -20,6 +20,7 @@
  | [cli.Port](#cliport) | 把 ports 对应的命令行参数值解析成端口组，或者整数范围 |
  | [cli.Ports](#cliports) | 同 `cli.Port` |
  | [cli.String](#clistring) | 最基础的命令行获取接口，把参数的值解析成字符串 |
+ | [cli.StringSlice](#clistringslice) |  |
  | [cli.Url](#cliurl) | 把参数对应的值解析成 url，如果无法精确对应一个 url，将会自动补充 `https://`, `http://`, `www` 等，如果本身参数就是个 url，则会保留原样 |
  | [cli.Urls](#cliurls) |  |
  | [cli.YakitPlugin](#cliyakitplugin) |  |
@@ -569,6 +570,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  参数的值 `string` |
+
+
+ 
+### cli.StringSlice
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func cli.StringSlice(v1: string) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
 
 
  

@@ -10,7 +10,9 @@
  | [servicescan.ScanOne](#servicescanscanone) | 同步扫描单个目标 |
  | [servicescan.active](#servicescanactive) | 【参数】主动扫描模式 |
  | [servicescan.all](#servicescanall) | 【参数】扫描全部指纹 |
+ | [servicescan.cache](#servicescancache) |  |
  | [servicescan.concurrent](#servicescanconcurrent) |  |
+ | [servicescan.databaseCache](#servicescandatabasecache) |  |
  | [servicescan.maxProbes](#servicescanmaxprobes) | 【参数】设置每个指纹扫描过程最多主动发送多少个数据包 |
  | [servicescan.maxProbesConcurrent](#servicescanmaxprobesconcurrent) | 【参数】每个指纹扫描目标允许的并发量 |
  | [servicescan.nmapRarityMax](#servicescannmapraritymax) | 【参数】设置nmap规则的最大稀有度 |
@@ -253,6 +255,37 @@
 
 
  
+### servicescan.cache
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func servicescan.cache(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
+
+
+ 
 ### servicescan.concurrent
 
 
@@ -271,6 +304,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | concurrentSize | `int` |  【参数】设置扫描并发量 |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *fp.Config) ` |   |
+
+
+ 
+### servicescan.databaseCache
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func servicescan.databaseCache(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 

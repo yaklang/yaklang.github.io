@@ -25,6 +25,9 @@
  | [risk.level](#risklevel) |  |
  | [risk.parameter](#riskparameter) |  |
  | [risk.payload](#riskpayload) |  |
+ | [risk.request](#riskrequest) |  |
+ | [risk.response](#riskresponse) |  |
+ | [risk.runtimeId](#riskruntimeid) |  |
  | [risk.severity](#riskseverity) |  |
  | [risk.title](#risktitle) |  |
  | [risk.titleVerbose](#risktitleverbose) |  |
@@ -701,6 +704,99 @@
 #### 定义：
 
 `func risk.payload(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.request
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.request(v1: any) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.response
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.response(v1: any) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.runtimeId
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.runtimeId(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
 
 
 #### 参数

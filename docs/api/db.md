@@ -27,12 +27,24 @@
  | [db.SavePayloadByFile](#dbsavepayloadbyfile) | 保存 Payload 到文件 |
  | [db.SavePortFromResult](#dbsaveportfromresult) | 从某个结果中保存端口 |
  | [db.SaveYakitMenuItemByBatchExecuteConfig](#dbsaveyakitmenuitembybatchexecuteconfig) |  |
+ | [db.SaveYakitPlugin](#dbsaveyakitplugin) |  |
  | [db.SetKey](#dbsetkey) | 设置持久化 Key |
 
 
 
 
- 
+## 变量定义
+
+|变量调用名|变量类型|变量解释/帮助信息|
+|:-----------|:---------- |:-----------|
+|`db.YAKIT_PLUGIN_TYPE_CODEC`|`string`| //|
+|`db.YAKIT_PLUGIN_TYPE_MITM`|`string`| //|
+|`db.YAKIT_PLUGIN_TYPE_NUCLEI`|`string`| //|
+|`db.YAKIT_PLUGIN_TYPE_PACKET_HACK`|`string`| //|
+|`db.YAKIT_PLUGIN_TYPE_PORTSCAN`|`string`| //|
+|`db.YAKIT_PLUGIN_TYPE_YAK`|`string`| //|
+
+
 
 
 
@@ -744,6 +756,39 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### db.SaveYakitPlugin
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.SaveYakitPlugin(v1: string, v2: string, v3: any) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `any` |   |
 
 
 
