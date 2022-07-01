@@ -280,6 +280,18 @@ const ConsultantInfo: ConsultantInfoProps[] = [
         description: "Security Lead",
         address: "America",
     },
+    {
+        img: "/img/team/chenghao.jpg",
+        name: "程昊",
+        links: [
+            {
+                name: "@博和汉商",
+                href: "http://www.bhslaw.cn/",
+            },
+        ],
+        description: "首席法律顾问",
+        address: "常州",
+    },
 ];
 
 interface ThanksForInfoProps {
