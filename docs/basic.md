@@ -388,10 +388,10 @@ def{
 // 让 Goroutine 执行一个闭包函数
 go def{
     sleep(0.5)
-    println("在 Gorouting 中执行了闭包函数喔")
+    println("在 Goroutine 中执行了闭包函数喔")
 }
 
-// aaa() 放在 Gourinte 中执行
+// aaa() 放在 Goroutine 中执行
 go aaa()
 
 // sleep 1 秒等待 Goroutine 执行完成
