@@ -3,7 +3,9 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [yso.GenConstructExec](#ysogenconstructexec) |  |
  | [yso.GenExecClass](#ysogenexecclass) |  |
+ | [yso.GenTomcatEchoFilterMemTarjon](#ysogentomcatechofiltermemtarjon) |  |
  | [yso.GetClojure](#ysogetclojure) |  |
  | [yso.GetCommonsBeanutils1](#ysogetcommonsbeanutils1) |  |
  | [yso.GetCommonsBeanutils2](#ysogetcommonsbeanutils2) |  |
@@ -29,7 +31,9 @@
  | [yso.SetHttpResource](#ysosethttpresource) |  |
  | [yso.SetJavaClassName](#ysosetjavaclassname) |  |
  | [yso.SetJavaCodeBase](#ysosetjavacodebase) |  |
+ | [yso.SetLdapResourceAddr](#ysosetldapresourceaddr) |  |
  | [yso.SetObjectClass](#ysosetobjectclass) |  |
+ | [yso.SetRmiResourceAddr](#ysosetrmiresourceaddr) |  |
  | [yso.SetjavaFactory](#ysosetjavafactory) |  |
 
 
@@ -41,6 +45,38 @@
 
 ## 函数定义
 
+### yso.GenConstructExec
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenConstructExec(v1: string, v2 ...yso.ClassOptionFun) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.ClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
 ### yso.GenExecClass
 
 
@@ -60,6 +96,38 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### yso.GenTomcatEchoFilterMemTarjon
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenTomcatEchoFilterMemTarjon(v1: string, v2 ...yso.ClassOptionFun) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.ClassOptionFun` |   |
 
 
 
@@ -862,6 +930,38 @@
 
 
  
+### yso.SetLdapResourceAddr
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetLdapResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
 ### yso.SetObjectClass
 
 
@@ -880,6 +980,38 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+
+
+ 
+### yso.SetRmiResourceAddr
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.SetRmiResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 

@@ -129,7 +129,7 @@ h = []byte(nil)         // 创建一个空 byte slice
 1. 含义与 Golang 相同的 append 用法
 
 ```go
-a = append(a, 1, ,2, 3)
+a = append(a, 1, 2, 3)
 ```
 
 2. 通过 `len` 获取 Slice 的元素个数，通过 `cap` 获得 slice 的容量，同 Golang 用法

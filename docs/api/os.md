@@ -32,7 +32,9 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
+|`os.ARCH`|`string`| //|
 |`os.Args`|`[]string`| 获取当前命令行参数|
+|`os.OS`|`string`| //|
 |`os.Stderr`|`*os.File`| 标准错误流|
 |`os.Stdin`|`*os.File`| 标准输入流|
 |`os.Stdout`|`*os.File`| 标准输出流|

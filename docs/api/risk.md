@@ -20,11 +20,15 @@
  | [risk.NewRisk](#risknewrisk) |  |
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) |  |
  | [risk.Save](#risksave) |  |
+ | [risk.YieldRiskByRuntimeId](#riskyieldriskbyruntimeid) |  |
+ | [risk.YieldRiskByTarget](#riskyieldriskbytarget) |  |
+ | [risk.cve](#riskcve) |  |
  | [risk.details](#riskdetails) |  |
  | [risk.fromYakScript](#riskfromyakscript) |  |
  | [risk.level](#risklevel) |  |
  | [risk.parameter](#riskparameter) |  |
  | [risk.payload](#riskpayload) |  |
+ | [risk.potential](#riskpotential) |  |
  | [risk.request](#riskrequest) |  |
  | [risk.response](#riskresponse) |  |
  | [risk.runtimeId](#riskruntimeid) |  |
@@ -569,6 +573,99 @@
 
 
  
+### risk.YieldRiskByRuntimeId
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.YieldRiskByRuntimeId(v1: string) return (r0: chan *yakit.Risk)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.Risk` |   |
+
+
+ 
+### risk.YieldRiskByTarget
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.YieldRiskByTarget(v1: string) return (r0: chan *yakit.Risk)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.Risk` |   |
+
+
+ 
+### risk.cve
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.cve(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
 ### risk.details
 
 
@@ -711,6 +808,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.potential
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.potential(v1: bool) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 

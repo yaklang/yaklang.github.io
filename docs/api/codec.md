@@ -6,6 +6,8 @@
  | [codec.AESCBCDecrypt](#codecaescbcdecrypt) | aes cbc 解密 |
  | [codec.AESCBCEncrypt](#codecaescbcencrypt) | aes cbc 加密 |
  | [codec.AESDecrypt](#codecaesdecrypt) | aes 解密 |
+ | [codec.AESECBDecrypt](#codecaesecbdecrypt) |  |
+ | [codec.AESECBEncrypt](#codecaesecbencrypt) |  |
  | [codec.AESEncrypt](#codecaesencrypt) | aes cbc 加密 |
  | [codec.AESGCMDecrypt](#codecaesgcmdecrypt) | aes gcm 解密 |
  | [codec.AESGCMEncrypt](#codecaesgcmencrypt) | aes gcm 加密 |
@@ -171,6 +173,74 @@ aes 解密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBDecrypt(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBEncrypt(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 

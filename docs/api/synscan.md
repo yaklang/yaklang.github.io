@@ -5,6 +5,8 @@
 |:------|:--------|
  | [synscan.Scan](#synscanscan) | 扫描核心函数 |
  | [synscan.ScanFromPing](#synscanscanfromping) | 新增从 Ping 中的扫描 |
+ | [synscan.excludeHosts](#synscanexcludehosts) | 可设置排除的 Host |
+ | [synscan.excludePorts](#synscanexcludeports) | 设置排除端口 |
  | [synscan.initHostFilter](#synscaninithostfilter) |  |
  | [synscan.initPortFilter](#synscaninitportfilter) |  |
  | [synscan.outputFile](#synscanoutputfile) | 【参数】synscan 对外输出的文件 |
@@ -86,6 +88,68 @@
 |:-----------|:---------- |:-----------|
 | r0 | `chan *synscan.SynScanResult` |   |
 | r1 | `error` |   |
+
+
+ 
+### synscan.excludeHosts
+
+可设置排除的 Host
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func synscan.excludeHosts(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+
+
+ 
+### synscan.excludePorts
+
+设置排除端口
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func synscan.excludePorts(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
 
 
  

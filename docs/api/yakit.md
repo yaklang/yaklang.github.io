@@ -9,9 +9,10 @@
  | [yakit.EnableWebsiteTrees](#yakitenablewebsitetrees) | 启动在结果中启动网站树视图（案例：基础爬虫） |
  | [yakit.Error](#yakiterror) | 在 Yakit 的 UI 中输出输出 Error 级别的信息 |
  | [yakit.File](#yakitfile) |  |
- | [yakit.GenerateYakitMITMHooksParams](#yakitgenerateyakitmitmhooksparams) | 用于生成 MITM 插件的参数 |
+ | [yakit.GenerateYakitMITMHooksParams](#yakitgenerateyakitmitmhooksparams) |  |
  | [yakit.GetHomeDir](#yakitgethomedir) |  |
  | [yakit.GetHomeTempDir](#yakitgethometempdir) |  |
+ | [yakit.GetOnlineBaseUrl](#yakitgetonlinebaseurl) |  |
  | [yakit.Info](#yakitinfo) | 在 Yakit UI 中输出 Info 级别的信息 |
  | [yakit.InitYakit](#yakitinityakit) | 手动初始化 Yakit 客户端，用于自定义 |
  | [yakit.Markdown](#yakitmarkdown) |  |
@@ -37,16 +38,19 @@
  | [yakit.QueryPortAssetByNetwork](#yakitqueryportassetbynetwork) | 查询端口资产 |
  | [yakit.QueryUrlsAll](#yakitqueryurlsall) | 搜索数据库中所有可用的 URL (httpflows 表) |
  | [yakit.QueryUrlsByKeyword](#yakitqueryurlsbykeyword) | 查询所有带一定关键字的 URL |
+ | [yakit.Report](#yakitreport) | 返回报告的内容给 Yakit |
  | [yakit.SaveDomain](#yakitsavedomain) |  |
  | [yakit.SaveHTTPFlow](#yakitsavehttpflow) | 保存 HTTP Flow 到数据库 |
  | [yakit.SavePayload](#yakitsavepayload) |  |
  | [yakit.SavePayloadByFile](#yakitsavepayloadbyfile) |  |
  | [yakit.SavePortFromResult](#yakitsaveportfromresult) | 把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。 |
+ | [yakit.SetOnlineBaseUrl](#yakitsetonlinebaseurl) | 设置 Yakit Online 的基础 URL |
  | [yakit.SetProgress](#yakitsetprogress) |  |
  | [yakit.SetProgressEx](#yakitsetprogressex) | 设置额外进度条的进度信息（默认进度条id为 `main`） |
  | [yakit.StatusCard](#yakitstatuscard) |  |
  | [yakit.TableData](#yakittabledata) | 为启动的 table 生成数据 |
  | [yakit.Text](#yakittext) |  |
+ | [yakit.UpdateOnlineYakitStore](#yakitupdateonlineyakitstore) | 更新所有线上商店的内容 |
  | [yakit.UpdateYakitStore](#yakitupdateyakitstore) | 使用 yakit 来直接更新 yakit-store 中的插件 |
  | [yakit.UpdateYakitStoreFromGit](#yakitupdateyakitstorefromgit) | 从 Git 中更新 Yakit 商店内容 |
  | [yakit.UpdateYakitStoreLocal](#yakitupdateyakitstorelocal) |  |
@@ -214,7 +218,7 @@
  
 ### yakit.GenerateYakitMITMHooksParams
 
-用于生成 MITM 插件的参数
+
 
 #### 详细描述
 
@@ -222,16 +226,16 @@
 
 #### 定义：
 
-`func yakit.GenerateYakitMITMHooksParams(method: string, url: string, httpOpts http.Opts) return (paramLists: []any, err: error)`
+`func yakit.GenerateYakitMITMHooksParams(v1: string, v2: string, v3 ...yakhttp.HttpOption) return (r0: []any, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
-| url | `string` |   |
-| httpOpts | `http.Opts` |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `...yakhttp.HttpOption` |   |
 
 
 
@@ -241,8 +245,8 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| paramLists | `[]any` |   |
-| err | `error` |   |
+| r0 | `[]any` |   |
+| r1 | `error` |   |
 
 
  
@@ -280,6 +284,29 @@
 #### 定义：
 
 `func yakit.GetHomeTempDir() return (r0: string)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### yakit.GetOnlineBaseUrl
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.GetOnlineBaseUrl() return (r0: string)`
 
  
 
@@ -999,6 +1026,31 @@
 
 
  
+### yakit.Report
+
+返回报告的内容给 Yakit
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.Report(生成的报告的 ID: int)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| 生成的报告的 ID | `int` |   |
+
+
+
+
+ 
+
+ 
 ### yakit.SaveDomain
 
 
@@ -1159,6 +1211,31 @@
 
 
  
+### yakit.SetOnlineBaseUrl
+
+设置 Yakit Online 的基础 URL
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit.SetOnlineBaseUrl(v1: string)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+ 
+
+ 
 ### yakit.SetProgress
 
 
@@ -1292,6 +1369,29 @@
 
 
  
+
+ 
+### yakit.UpdateOnlineYakitStore
+
+更新所有线上商店的内容
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakit.UpdateOnlineYakitStore() return (r0: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
 
  
 ### yakit.UpdateYakitStore

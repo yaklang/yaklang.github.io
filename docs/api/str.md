@@ -51,7 +51,7 @@
  | [str.IsServerError](#strisservererror) | 判断是否有服务器常见错误 |
  | [str.IsSha256Value](#strissha256value) | 判断是否是一个可能的 SHA256 值 |
  | [str.IsStrongPassword](#strisstrongpassword) | 判断一个密码是不是强密码 |
- | [str.IsTLSServer](#stristlsserver) | 判断一个地址是不是 TLS |
+ | [str.IsTLSServer](#stristlsserver) | 判断地址对应是不是 TLS |
  | [str.IsUrlParam](#strisurlparam) | 判断一个参数是不是 URL |
  | [str.IsUrlPath](#strisurlpath) | 判断一个参数是不是路径？ |
  | [str.IsUsernameField](#strisusernamefield) | 判断一个字段名是不是可能是用户名？ |
@@ -1655,7 +1655,7 @@
  
 ### str.IsTLSServer
 
-判断一个地址是不是 TLS
+判断地址对应是不是 TLS
 
 #### 详细描述
 
@@ -1663,7 +1663,7 @@
 
 #### 定义：
 
-`func str.IsTLSServer(v1: string) return (r0: bool)`
+`func str.IsTLSServer(v1: string, v2 ...string) return (r0: bool)`
 
 
 #### 参数
@@ -1671,6 +1671,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+| v2 | `...string` |   |
 
 
 

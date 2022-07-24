@@ -23,12 +23,14 @@
  | [db.QueryUrlsByKeyword](#dbqueryurlsbykeyword) | 根据关键字查询 URL |
  | [db.SaveDomain](#dbsavedomain) | 保存域名 |
  | [db.SaveHTTPFlowFromNative](#dbsavehttpflowfromnative) | 从原始对象中保存 HTTP 资产 |
+ | [db.SaveHTTPFlowFromNativeWithType](#dbsavehttpflowfromnativewithtype) |  |
  | [db.SavePayload](#dbsavepayload) | 保存 Payload 到一个组 |
  | [db.SavePayloadByFile](#dbsavepayloadbyfile) | 保存 Payload 到文件 |
  | [db.SavePortFromResult](#dbsaveportfromresult) | 从某个结果中保存端口 |
  | [db.SaveYakitMenuItemByBatchExecuteConfig](#dbsaveyakitmenuitembybatchexecuteconfig) |  |
  | [db.SaveYakitPlugin](#dbsaveyakitplugin) |  |
  | [db.SetKey](#dbsetkey) | 设置持久化 Key |
+ | [db.YieldYakScriptAll](#dbyieldyakscriptall) |  |
 
 
 
@@ -643,6 +645,40 @@
 
 
  
+### db.SaveHTTPFlowFromNativeWithType
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.SaveHTTPFlowFromNativeWithType(v1: string, v2: *http.Request, v3: *http.Response, v4: string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `*http.Request` |   |
+| v3 | `*http.Response` |   |
+| v4 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### db.SavePayload
 
 保存 Payload 到一个组
@@ -831,6 +867,29 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `error` |   |
+
+
+ 
+### db.YieldYakScriptAll
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.YieldYakScriptAll() return (r0: chan *yakit.YakScript)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.YakScript` |   |
 
 
  
