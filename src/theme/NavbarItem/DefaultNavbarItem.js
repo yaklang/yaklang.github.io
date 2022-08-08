@@ -110,12 +110,12 @@ export function NavLink({
       {isExternalLink ? (
         <span>
           {label}
-          <IconExternalLink
+          {/* <IconExternalLink
             {...(isDropdownLink && {
               width: 12,
               height: 12,
             })}
-          />
+          /> */}
         </span>
       ) : (
         label
