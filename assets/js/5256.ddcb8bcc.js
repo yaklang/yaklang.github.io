@@ -1,0 +1,1 @@
+(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[5256],{95256:function(a,k,n){"use strict";n.r(k)}}]);
