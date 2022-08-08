@@ -82,6 +82,11 @@ module.exports = {
                     activeBasePath: "pages",
                     label: "关于我们",
                 },
+                {
+                    position: "left",
+                    href: "https://www.yaklang.com",
+                    label: "Ya! 一刻",
+                },
                 // {
                 //     position: "left",
                 //     to: "/team",
@@ -135,6 +140,33 @@ module.exports = {
                 },
             ],
             copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Own by v1ll4n. Powered by Docusaurus`,
+        },
+        algolia: {
+            // The application ID provided by Algolia
+            appId: "KU1F47O3Q6",
+
+            // Public API key: it is safe to commit it
+            apiKey: "84508cc662df9bef2f7e8bab1a3508bb",
+
+            indexName: "yaklang",
+
+            // Optional: see doc section below
+            contextualSearch: false,
+
+            // Optional: Algolia search parameters
+            // searchParameters: {},
+
+            transformItems(items) {
+                return items.map((item) => {
+                    return {
+                        ...item,
+                        url:
+                            item.url.indexOf("/en/") > -1
+                                ? item.url.replace("/en/", "/")
+                                : item.url,
+                    };
+                });
+            },
         },
     },
     plugins: [
