@@ -358,6 +358,22 @@ if v != undefined { // 判断chan没有被关闭的逻辑
 
 :::
 
+### 格式化字符串
+我们可以使用sprintf实现简单地实现格式化字符串:
+
+```go
+println(sprintf("here is string: %s and int: %d", "something", 0))
+```
+
+当然一个更简单的方法是类似于python的语法糖`%`:
+
+```go
+s = "here is string: %s" % "something"
+s2 = "here is int: %d and %d" % [1, 2]
+println(s) // here is string: something
+println(s2) // here is int: 1 and 2
+```
+
 ## 使用函数/闭包：`def` `func` `fn` 均等效
 
 ### 函数和闭包的定义
