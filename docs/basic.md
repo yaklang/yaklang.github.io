@@ -365,7 +365,7 @@ if v != undefined { // 判断chan没有被关闭的逻辑
 println(sprintf("here is string: %s and int: %d", "something", 0))
 ```
 
-当然一个更简单的方法是类似于python的语法糖`%`:
+当然一个更简单的方法是类似于python的语法糖`%` （v1.0.17-sp3 开始支持）:
 
 ```go
 s = "here is string: %s" % "something"
