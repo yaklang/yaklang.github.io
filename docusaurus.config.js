@@ -133,7 +133,7 @@ module.exports = {
                     title: "Community",
                     items: [
                         {
-                            label: "研发团队",
+                            label: "关于我们",
                             href: "/team",
                         },
                     ],
