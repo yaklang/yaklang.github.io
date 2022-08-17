@@ -9,7 +9,7 @@ sidebar_position: 11
 ## 获取所有参数
 
 ```go
-go 测试命令 yak 26_cliutil.yak --url https://baidu.com --allow-do-sth --number1 123 --floatvar 1.23 --target "192.168.1.1/24,10.1.3.2/28" --target-port "22,3306,80,8080-8082" --urls "leavesongs.com,10.1.3.2" --urls2 "https://www.baidu.com"
+yak 26_cliutil.yak --url https://baidu.com --allow-do-sth --number1 123 --floatvar 1.23 --target "192.168.1.1/24,10.1.3.2/28" --target-port "22,3306,80,8080-8082" --urls "leavesongs.com,10.1.3.2" --urls2 "https://www.baidu.com"
 ```
 
 ```go title="26_cliutil.yak"
@@ -83,6 +83,18 @@ dump(intParam)
 ```go
 floatParam = cli.Float("floatvar")
 dump(floatParam)
+```
+
+
+
+### 设置短参数别名
+
+如以下代码, 通过在第一个参数中传入`短参数名 长参数名`来设置短参数别名:
+
+```go
+// -t example.com 或 --target example.com
+target = cli.String("t target")  
+print(target)
 ```
 
 ## cli 处理扩展数据类型
@@ -180,41 +192,57 @@ dump(urlParam)
 */
 ```
 
-## 默认值/帮助/参数检查
+## 默认值/帮助/文档/参数检查
+
+可用的函数有:
+1. `cli.SetDoc(doc: string)` 设置文档信息，注意S是大写
+1. `cli.help(w...: io.Writer)` 显示帮助信息, w是可选参数，为`io.Writer`,默认是`os.Stdout`
+
+
 
 目前可设置的命令行参数属性为：
-
 1. `cli.setDefault(defaultValue: any)` 设置默认值
-1. `cli.setRequired(required: bool)` 设置是否为必需参数，如果必须参数缺失，则可以通过 `cli.check()` 来检查合理性，帮助截断执行过程。
-1. `cli.setHelp(helpInfo: string)` 设置帮助信息
+2. `cli.setRequired(required: bool)` 设置是否为必需参数，如果必须参数缺失，则可以通过 `cli.check()` 来检查合理性，帮助截断执行过程
+3. `cli.setHelp(helpInfo: string)` 设置帮助信息
 
-但是设置了属性，如果需要检查参数是否合理，我们需要通过 `cli.check()` 函数来操作，如果这个参数检查不合理，则会立即退出程序。
+
+:::caution 注意 
+
+如果需要检查参数是否合理，我们需要通过 `cli.check()` 函数来操作，如果这个参数检查不合理，则会立即退出程序。
+如果不调用`cli.check()`函数，那么即使参数不合理也不会有显示或结束进程。
+
+另外，如果不调用`cli.check()`函数，那么也不会解析`-h, --help` 来输出帮助信息。
+
+:::
 
 ### 实战案例，生成帮助信息
 
 Yak cli 模块中，我们经常需要为我们的脚本设置参数，同为我们脚本设置帮助信息，方便别人来使用。
 
 ```go
-testValue = cli.String("target", cli.setRequired(true), cli.setHelp("这是一个扫描目标，不能缺失，在帮助说明里。。。了～！"))
-boolParams = cli.Bool("bool-params", cli.setHelp("这是一个bool值"))
+cli.SetDoc(`这是一个程序文档信息`)
+testValue = cli.String("t target", cli.setRequired(true), cli.setHelp("这是一个扫描目标，是必要参数"))
+boolParams = cli.Bool("b bool-params", cli.setHelp("这是一个bool值"))
 strValue = cli.String("testOrdinaryParam")
 cli.check()
 
 println("param parsed")
 ```
 
-我们编写了上述代码，将会从命令行取出一些参数来执行，如果我们不输入参数，直接执行，将会出现如下效果
+我们编写了上述代码，将会从命令行取出一些参数来执行，如果我们不输入参数，直接执行，将会出现如下效果:
 
 ```go
-参数缺乏(Miss Params) [-target / --target]:
-    Help: 这是一个扫描目标，不能缺失，在帮助说明里。。。了～！
+Error:
+  Parameter [target] error: miss parameter
 
-可用相关参数(Available Params):
-    参数名[ParamName]: -target, --target 
-        帮助(Help): 这是一个扫描目标，不能缺失，在帮助说明里。。。了～！ 
-    参数名[ParamName]: -bool-params, --bool-params 
-        帮助(Help): 这是一个bool值 
-    参数名[ParamName]: -testOrdinaryParam, --testOrdinaryParam 
+Usage: 
+  test [OPTIONS]
+
+这是一个程序文档信息
+
+Flags:
+  -h, --help                  Show help information
+  -t, --target string         这是一个扫描目标，是必要参数
+  -b, --bool-params           这是一个bool值
+  --testOrdinaryParam string
 ```
-
-注意，帮助信息是 `cli.check()` 来输出的，如果需要 Yak cli 帮助你检查用户输入是否有空的参数，这是一个非常好的办法！

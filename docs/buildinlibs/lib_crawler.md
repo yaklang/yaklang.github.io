@@ -22,7 +22,7 @@ for result := range ch {
 }
 ```
 
-:::success `*crawler.req` 结构体描述
+:::success 上面快速入门中result对应的结构体: `*crawler.req` 结构体描述
 ```go
 type palm/common/crawler.(req) struct {
   PtrStructMethods(指针结构方法/函数):
@@ -102,7 +102,7 @@ ch, err := crawler.Start(
     crawler.maxRequest(200),
 )
 
-// 如果启动爬虫失败，则推出程序，抛出错误
+// 如果启动爬虫失败，则退出程序，抛出错误
 die(err)
 
 params = []
@@ -119,6 +119,6 @@ for result := range ch {
     params = append(params, reqParams...)
 }
 
-// 展示一下生成的
+// 展示生成的params
 dump(params)
 ```
