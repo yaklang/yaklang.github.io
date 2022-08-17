@@ -336,11 +336,15 @@ type net/http.(Response) struct {
 ```go
 type palm/common/mutate.(_httpResult) struct {
   Fields(可用字段):
-      Url: string
-      Request: *http.Request
-      Error: error
-      ResponseRaw: []uint8
-      Response: *http.Response
+    Url         string
+	Request     *http.Request
+	Error       error
+	RequestRaw  []byte
+	ResponseRaw []byte
+	Response    *http.Response
+	DurationMs  int64
+	Timestamp   int64
+	Payloads    []string
   StructMethods(结构方法/函数):
   PtrStructMethods(指针结构方法/函数):
 }
