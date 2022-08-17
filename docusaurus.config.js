@@ -154,18 +154,8 @@ module.exports = {
             contextualSearch: false,
 
             // Optional: Algolia search parameters
-            // searchParameters: {},
-
-            transformItems(items) {
-                return items.map((item) => {
-                    return {
-                        ...item,
-                        url:
-                            item.url.indexOf("/en/") > -1
-                                ? item.url.replace("/en/", "/")
-                                : item.url,
-                    };
-                });
+            searchParameters: {
+                facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
             },
         },
     },
