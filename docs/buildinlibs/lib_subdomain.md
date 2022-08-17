@@ -112,7 +112,7 @@ type palm/common/subdomain.(SubdomainResult) struct {
 `Scan` 的第二个参数为可变参数，具体如果想设置一些扫描的参数，可以通过 `subdomaqin.[your-option](paramValue)` 来设置，具体案例如下
 
 ```go
-res, err := subdomain.Scan("yunshanmeicai.com" , 
+res, err := subdomain.Scan("y************i.com" , 
     subdomain.recursive(true), // 设置允许递归
     subdomain.maxDepth(5),     // 设置递归最大深度
     subdomain.workerConcurrent(100),  // 设置 DNS 并发请求量
