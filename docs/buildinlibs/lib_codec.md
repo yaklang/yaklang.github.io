@@ -202,6 +202,22 @@ Hex 编码为： 6162636465666768696a3c3e3a3b7b5d7b5d7c5c245e265e2623406b6c6d6ea
 要注意，如果这个十六进制字符串需要在 mysql 中展示，记得加 `0x` 前缀喔
 :::
 
+### AES 加密编码
+1. `fn codec.AESCBCEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+2. `fn codec.AESCBCDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+3. `fn codec.AESCBCEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+4. `fn codec.AESCBCDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+5. `fn codec.AESECBEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+6. `fn codec.AESECBDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+
+### DES 加密编码
+1. `fn codec.DESCBCEnc(key []byte, data []byte, iv []byte): ([]byte, error)`
+2. `fn codec.DESCBCDec(key []byte, data []byte, iv []byte): ([]byte, error)`
+3. `fn codec.DESCBCEnc(key []byte, data []byte, iv []byte): ([]byte, error)`
+4. `fn codec.DESCBCDec(key []byte, data []byte, iv []byte): ([]byte, error)`
+
+## 不可逆编码解码
+
 ### Hash 计算与编码
 
 1. `fn codec.Md5(var_1: interface {}): string`
