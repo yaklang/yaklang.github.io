@@ -9,12 +9,12 @@ sidebar_position: 16
 1. `fofa`
 1. `shodan`
 1. `quake`(From 360)
+1. `Hunter`
 
-可以支持编写脚本从上述三个引擎中搜索数据
+可以支持编写脚本从上述四个引擎中搜索数据
 
 :::success 当然，Secret 和 AccessKey 需要用户自行购买
 
-你要问我为什么没有 zoomeye，因为作者没有 zoomeye 的 key，弄不到，如果有朋友愿意捐赠，那再好不过。
 
 :::
 
@@ -28,6 +28,7 @@ sidebar_position: 16
    360 Quake 空间搜索引擎
 1. `fn spacengine.ShodanQuery(apiKey: string, searchFilter: string, vars: ...yaklib._spaceEngineConfigOpt): (chan *spacengine.NetSpaceEngineResult, error)`
    Shodan 老牌搜索引擎
+1. `fn spacengine.HunterQuery(name: string, apiKey: string, searchFilter: string, vars: ...yaklib._spaceEngineConfigOpt): (chan *spacengine.NetSpaceEngineResult, error)`
 
 :::note `*spacengine.NetSpaceEngineResult` 结构可用字段
 
@@ -63,6 +64,11 @@ type palm/server/dbm/falcons/spacengine.(NetSpaceEngineResult) struct {
       
       // 可能的服务运营商
       ServiceProvider: string
+
+      // 指纹
+      Fingerprints: string
+
+      Banner: string
 }
 ```
 
