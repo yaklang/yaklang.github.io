@@ -9,9 +9,10 @@ sidebar_position: 16
 1. `fofa`
 1. `shodan`
 1. `quake`(From 360)
-1. `Hunter`
+1. `hunter`
+1. `zoomeye`
 
-可以支持编写脚本从上述四个引擎中搜索数据
+可以支持编写脚本从上述五个引擎中搜索数据
 
 :::success 当然，Secret 和 AccessKey 需要用户自行购买
 
@@ -29,6 +30,9 @@ sidebar_position: 16
 1. `fn spacengine.ShodanQuery(apiKey: string, searchFilter: string, vars: ...yaklib._spaceEngineConfigOpt): (chan *spacengine.NetSpaceEngineResult, error)`
    Shodan 老牌搜索引擎
 1. `fn spacengine.HunterQuery(name: string, apiKey: string, searchFilter: string, vars: ...yaklib._spaceEngineConfigOpt): (chan *spacengine.NetSpaceEngineResult, error)`
+   Hunter 空间搜索引擎
+2. `fn spacengine.ZoomeyeQuery(apiKey: string, searchFilter: string, vars: ...yaklib._spaceEngineConfigOpt): (chan *spacengine.NetSpaceEngineResult, error)`
+   Zoomeye 空间搜索引擎
 
 :::note `*spacengine.NetSpaceEngineResult` 结构可用字段
 
