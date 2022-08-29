@@ -87,6 +87,12 @@ module.exports = {
                     href: "https://www.yaklang.com",
                     label: "Ya! 一刻",
                 },
+                {
+                    position: "left",
+                    to: "/enterpriseCollaboration",
+                    activeBasePath: "pages",
+                    label: "企业合作",
+                },
                 // {
                 //     position: "left",
                 //     to: "/team",
