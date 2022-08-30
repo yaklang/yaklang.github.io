@@ -479,14 +479,14 @@
                 .cooperation-module-layout {
                     width: 100%;
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: column-reverse;
                     align-items: center;
                 }
 
                 .cooperation-module-layout-reverse {
                     width: 100%;
                     display: flex;
-                    flex-direction: column-reverse;
+                    flex-direction: column;
                     align-items: center;
                 }
 
@@ -719,6 +719,7 @@
             padding: 12px 24px;
             background: var(--base-theme-color);
             border-radius: 4px;
+            display: flex;
             .icon-style {
                 font-size: 24px;
             }
@@ -740,6 +741,7 @@
                 padding: 6px 12px;
                 background: var(--base-theme-color);
                 border-radius: 4px;
+                display: flex;
                 .icon-style {
                     font-size: 12px;
                 }

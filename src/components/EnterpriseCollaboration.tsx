@@ -422,7 +422,7 @@ const DownLoadBtn = (props: DownLoadBtnProps) => {
         >
             <div className="btn-title">
                 <DownloadOutlined className="icon-style" />
-                <span className="title-style">下载白皮书</span>
+                <div className="title-style">下载白皮书</div>
             </div>
         </a>
     );
