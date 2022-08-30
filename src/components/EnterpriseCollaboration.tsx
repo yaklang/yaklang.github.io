@@ -115,7 +115,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                     <div className="guide-words-body-header">
                         Yakit<span className="text-style">企业版</span>
                     </div>
-                    <div className="guide-words-body-description">让企业安全测试高效和可管理</div>
+                    <div className="guide-words-body-description">让企业安全测试高效可控</div>
                     <div className="guide-words-body-btn">
                         <DownLoadBtn />
                     </div>
