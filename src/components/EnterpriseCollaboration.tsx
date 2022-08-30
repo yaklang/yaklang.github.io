@@ -392,7 +392,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                                                     overlayClassName="qrcode-code-popover"
                                                     content={
                                                         <div>
-                                                            <img src="/img/wechat.jpg" className="qrcode-code-img" />
+                                                            <img src="/img/cooperation/qrcode.png" className="qrcode-code-img" />
                                                             <div className="qrcode-code-title">扫一扫，咨询企业版</div>
                                                         </div>
                                                     }
