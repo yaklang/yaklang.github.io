@@ -100,7 +100,7 @@ interface ContactModuleProps {
 const ContactModule: ContactModuleProps[] = [
     { addr: "北京", phone: "010-5945 0966", isWechat: false },
     { addr: "成都", phone: "028-8522 5545", isWechat: false },
-    { addr: "微信", phone: "13371748722", isWechat: true },
+    { addr: "微信", phone: "Yakit-ee", isWechat: true },
 ];
 
 export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPageProps> = (props) => {
@@ -392,7 +392,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                                                     overlayClassName="qrcode-code-popover"
                                                     content={
                                                         <div>
-                                                            <img src="/img/wechat.jpg" className="qrcode-code-img" />
+                                                            <img src="/img/cooperation/qrcode.png" className="qrcode-code-img" />
                                                             <div className="qrcode-code-title">扫一扫，咨询企业版</div>
                                                         </div>
                                                     }
