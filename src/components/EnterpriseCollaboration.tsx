@@ -1,15 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Popover } from "antd";
 import { PhoneSvgIcon, WechatSvgIcon } from "./icons";
 import { QrcodeOutlined, DownloadOutlined } from "@ant-design/icons";
 import { CriticalBugSvgIcon, HighBugSvgIcon, LowBugSvgIcon, SelectedSvgIcon } from "./cooperateIcon";
 
 export interface EnterpriseCollaborationPageProps {}
-
-interface IntroduceKindProps {
-    name: string;
-    icon: string;
-}
 
 interface DeclareModuleProps {
     img: string;
@@ -109,99 +104,6 @@ const ContactModule: ContactModuleProps[] = [
 ];
 
 export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPageProps> = (props) => {
-    const [kind, setKind] = useState<IntroduceKindProps>({
-        name: "高效",
-        icon: require("../../static/img/home/second/efficent-head.png").default,
-    });
-    // 滚动区域变化标识
-    const [isScrollUp, setIsScrollUp] = useState<boolean>(false);
-
-    const [kindRate, setKindRate] = useState<number>(0);
-    const [isKindRange, setIsKindRange] = useState<boolean>(false);
-
-    const [functionKind, setFunctionKind] = useState<number>(0);
-    const [functionRate, isFunctionRate] = useState<number>(0);
-    const [isFunctionRange, setIsFunctionRange] = useState<boolean>(false);
-
-    const oldScrollTop = useRef<number>(0);
-
-    useEffect(() => {
-        document.addEventListener("scroll", (e) => {
-            if (!e.target) return;
-            const target = e.target as Document;
-            if (!target.scrollingElement) return;
-
-            const html = target.scrollingElement as HTMLHtmlElement;
-            const FontSize = +html.style.fontSize.split("px")[0];
-            const scrollTop = html.scrollTop;
-
-            // 判断滚动方向
-            setIsScrollUp(oldScrollTop.current >= scrollTop);
-            oldScrollTop.current = scrollTop;
-
-            // 第一区域的高度+第二区域的padding-top高度(设计稿高度 )
-            const first = (762 / 16) * FontSize;
-            // 第二区域paddigTop、paddingBottom、每块区域高度
-            const secondPaddingTop = (54 / 16) * FontSize;
-            const secondBlock = ((950 - 54 - 200) / 16) * FontSize;
-            // 第二区域总高度
-            const second = (3143 / 16) * FontSize;
-            // 第三区域paddingTop、block、gap
-            const thirdPaddingTop = (249 / 16) * FontSize;
-            const thirdBlock = (432 / 16) * FontSize;
-            const thirdBlockGap = (90 / 16) * FontSize;
-            // 第三区域总高度
-            const third = (2769 / 16) * FontSize;
-            //第二与第三区域可视点高度
-            const secondToThird = (480 / 16) * FontSize;
-
-            if (scrollTop <= first) {
-                setIsKindRange(false);
-                setIsFunctionRange(false);
-            }
-            if (scrollTop > first && scrollTop < first + second) {
-                setIsFunctionRange(scrollTop >= first + second - secondToThird);
-
-                const secondLevel = Math.trunc((scrollTop - first - secondPaddingTop) / secondBlock);
-                if (secondLevel > 3 || secondLevel < 0) {
-                    // 超出界限中断，不能使用return，因为后面的if可能会同时触发
-                } else {
-                    if (scrollTop > first + secondPaddingTop) {
-                        setKindRate(((scrollTop - first - secondPaddingTop) % secondBlock) / secondBlock);
-                        setIsKindRange(true);
-                    }
-                }
-            }
-            if (scrollTop >= first + second - secondToThird && scrollTop < first + second + third) {
-                setIsKindRange(scrollTop < first + second);
-
-                const thirdLevel = Math.trunc(
-                    (scrollTop - first - second + secondToThird - thirdPaddingTop + thirdBlockGap) /
-                        (thirdBlock + thirdBlockGap)
-                );
-                if (thirdLevel > 4 || thirdLevel < 0) {
-                    // 超出界限中断，不能使用return，因为后面的if可能会同时触发
-                } else {
-                    if (scrollTop > first + second - secondToThird + thirdPaddingTop - thirdBlockGap) {
-                        // 这里减法的情况是，总滚动长度减去(第一和第二区域高度、第三区域标题高度)加上(第二区域内第三区域可视高度、一个第三区域块高度里的marginTop)
-                        isFunctionRate(
-                            (((scrollTop - first - second + secondToThird - thirdPaddingTop + thirdBlockGap) %
-                                (thirdBlock + thirdBlockGap)) -
-                                thirdBlockGap) /
-                                thirdBlock
-                        );
-                        setFunctionKind(thirdLevel);
-                        setIsFunctionRange(true);
-                    }
-                }
-            }
-            if (scrollTop >= first + second + third) {
-                setIsKindRange(false);
-                setIsFunctionRange(false);
-            }
-        });
-    }, []);
-
     return (
         <div className="enterprise-collaboration-wrapper">
             <div className="guide-body">
@@ -249,7 +151,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                 </div>
             </div>
 
-            <div className="cooperation-wrapper"> 
+            <div className="cooperation-wrapper">
                 <div className="cooperation-body">
                     <div className="cooperation-title">
                         企业版合作<span className="theme-style">专享</span>
@@ -297,7 +199,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                         </div>
                     </div>
 
-                    <div className="cooperation-module-b cooperation-module-layout">
+                    <div className="cooperation-module-b cooperation-module-layout-reverse">
                         <div className="module-b-content module-content-style">
                             <div className="content-title">企业安全团队管理与任务协作</div>
                             <div className="b-style content-style">
@@ -359,7 +261,7 @@ export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPagePr
                         </div>
                     </div>
 
-                    <div className="cooperation-module-d cooperation-module-layout">
+                    <div className="cooperation-module-d cooperation-module-layout-reverse">
                         <div className="module-d-content module-content-style">
                             <div className="content-title">Yakit 产品部署方案</div>
                             <div className="d-style content-style">
