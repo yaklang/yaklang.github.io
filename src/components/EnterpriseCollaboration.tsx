@@ -100,7 +100,7 @@ interface ContactModuleProps {
 const ContactModule: ContactModuleProps[] = [
     { addr: "北京", phone: "010-5945 0966", isWechat: false },
     { addr: "成都", phone: "028-8522 5545", isWechat: false },
-    { addr: "微信", phone: "13371748722", isWechat: true },
+    { addr: "微信", phone: "yakit-ee", isWechat: true },
 ];
 
 export const EnterpriseCollaborationPage: React.FC<EnterpriseCollaborationPageProps> = (props) => {
