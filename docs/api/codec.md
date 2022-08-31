@@ -15,6 +15,8 @@
  | [codec.DESCBCDecrypt](#codecdescbcdecrypt) |  |
  | [codec.DESCBCEncrypt](#codecdescbcencrypt) |  |
  | [codec.DESDecrypt](#codecdesdecrypt) | DES 解密（默认CBC） |
+ | [codec.DESECBDecrypt](#codecdesecbdecrypt) |  |
+ | [codec.DESECBEncrypt](#codecdesecbencrypt) |  |
  | [codec.DESEncrypt](#codecdesencrypt) | DES 加密，默认 CBC 模式 |
  | [codec.DecodeASCII](#codecdecodeascii) | 等价于 `strconv.Unquote`，把一个被 `&#34;` 包裹的字符串解析成字符串内容，同时解析 `&#34;\x0a&#34;` 解析成对应的字符串。 |
  | [codec.DecodeBase64](#codecdecodebase64) | 把 base64 解析成 bytes |
@@ -42,6 +44,11 @@
  | [codec.HTMLChardet](#codechtmlchardet) | 检测 HTML 的字符集 |
  | [codec.HTMLChardetBest](#codechtmlchardetbest) | 检测 HTML 的字符集，只展示最有可能的结果 |
  | [codec.HZGB2312ToUTF8](#codechzgb2312toutf8) |  |
+ | [codec.HmacMD5](#codechmacmd5) |  |
+ | [codec.HmacSM3](#codechmacsm3) |  |
+ | [codec.HmacSha1](#codechmacsha1) |  |
+ | [codec.HmacSha256](#codechmacsha256) |  |
+ | [codec.HmacSha512](#codechmacsha512) |  |
  | [codec.MMH3Hash128](#codecmmh3hash128) | 计算一个对象的 mmh3 hash128 |
  | [codec.MMH3Hash128x64](#codecmmh3hash128x64) | 计算一个对象的 mmh3 hash128x64 |
  | [codec.MMH3Hash32](#codecmmh3hash32) | 计算 mmh3 的 hash32 |
@@ -73,6 +80,8 @@
  | [codec.UTF8ToHZGB2312](#codecutf8tohzgb2312) |  |
  | [codec.UnescapePathUrl](#codecunescapepathurl) | 作为 url.Path 进行 URL 解码 |
  | [codec.UnescapeQueryUrl](#codecunescapequeryurl) | 作为 url.Query 进行 URL 解码 |
+ | [codec.UnicodeDecode](#codecunicodedecode) |  |
+ | [codec.UnicodeEncode](#codecunicodeencode) |  |
  | [codec.ZeroPadding](#codeczeropadding) | 零填充 |
  | [codec.ZeroUnPadding](#codeczerounpadding) | 移除 0 填充的末尾 |
 
@@ -476,6 +485,72 @@ DES 解密（默认CBC）
 | key | `bytes` |   |
 | encryptedData | `bytes` |   |
 | iv | `bytes` |  初始化块，可以为空(nil) |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESECBDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESECBDecrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.DESECBEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DESECBEncrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
 
 
 
@@ -1339,6 +1414,166 @@ URL 编码：作为 url.Query 进行编码
 |:-----------|:---------- |:-----------|
 | r0 | `bytes` |   |
 | r1 | `error` |   |
+
+
+ 
+### codec.HmacMD5
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HmacMD5(v1: any, v2: any) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### codec.HmacSM3
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HmacSM3(v1: any, v2: any) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### codec.HmacSha1
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HmacSha1(v1: any, v2: any) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### codec.HmacSha256
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HmacSha256(v1: any, v2: any) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+
+
+ 
+### codec.HmacSha512
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.HmacSha512(v1: any, v2: any) return (r0: bytes)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 
 
  
@@ -2337,6 +2572,68 @@ SM4 OBF 加密
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  解码结果 |
 | r1 | `error` |   |
+
+
+ 
+### codec.UnicodeDecode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.UnicodeDecode(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### codec.UnicodeEncode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.UnicodeEncode(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  

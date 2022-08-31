@@ -5,6 +5,8 @@
 |:------|:--------|
  | [synscan.Scan](#synscanscan) | 扫描核心函数 |
  | [synscan.ScanFromPing](#synscanscanfromping) | 新增从 Ping 中的扫描 |
+ | [synscan.callback](#synscancallback) |  |
+ | [synscan.concurrent](#synscanconcurrent) |  |
  | [synscan.excludeHosts](#synscanexcludehosts) | 可设置排除的 Host |
  | [synscan.excludePorts](#synscanexcludeports) | 设置排除端口 |
  | [synscan.initHostFilter](#synscaninithostfilter) |  |
@@ -12,6 +14,7 @@
  | [synscan.outputFile](#synscanoutputfile) | 【参数】synscan 对外输出的文件 |
  | [synscan.outputPrefix](#synscanoutputprefix) | 【参数】输出的文件每一行的前缀（用于增加 `https://` 这样的协议名等） |
  | [synscan.rateLimit](#synscanratelimit) |  |
+ | [synscan.submitTaskCallback](#synscansubmittaskcallback) |  |
  | [synscan.wait](#synscanwait) | 【参数】当所有数据包发出之后，等待多少秒？ |
 
 
@@ -88,6 +91,68 @@
 |:-----------|:---------- |:-----------|
 | r0 | `chan *synscan.SynScanResult` |   |
 | r1 | `error` |   |
+
+
+ 
+### synscan.callback
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func synscan.callback(v1: func (v1: *synscan.SynScanResult) ) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: *synscan.SynScanResult) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+
+
+ 
+### synscan.concurrent
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func synscan.concurrent(v1: int) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
 
 
  
@@ -296,6 +361,37 @@
 |:-----------|:---------- |:-----------|
 | v1 | `int` |   |
 | v2 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+
+
+ 
+### synscan.submitTaskCallback
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func synscan.submitTaskCallback(v1: func (v1: string) ) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: string) ` |   |
 
 
 

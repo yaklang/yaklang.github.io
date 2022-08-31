@@ -17,6 +17,8 @@
  | [str.EqualFold](#strequalfold) | 判断忽略大小写字符串是否相等？ |
  | [str.ExtractBodyFromHTTPResponseRaw](#strextractbodyfromhttpresponseraw) | 从 response bytes 中提取 body |
  | [str.ExtractChineseIDCards](#strextractchineseidcards) | 提取内容中的身份证号 |
+ | [str.ExtractDomain](#strextractdomain) |  |
+ | [str.ExtractHost](#strextracthost) |  |
  | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
  | [str.ExtractTitle](#strextracttitle) | 从 HTML 中提取标题 |
  | [str.ExtractURLFromHTTPRequest](#strextracturlfromhttprequest) | 从一个请求对象提取 URL |
@@ -33,8 +35,12 @@
  | [str.IndexAny](#strindexany) | 判断子字符串中任意一个字符在主串中的位置 |
  | [str.IndexByte](#strindexbyte) | 判断一个 byte 的位置 |
  | [str.IntersectString](#strintersectstring) | 取两个集合的交集 |
+ | [str.IsAlNum](#strisalnum) |  |
+ | [str.IsAlpha](#strisalpha) |  |
+ | [str.IsAlphaNum](#strisalphanum) |  |
  | [str.IsBase64Value](#strisbase64value) | 判断一个值是不是 base64 |
  | [str.IsCaptchaField](#striscaptchafield) | 判断一个参数是不是验证码 |
+ | [str.IsDigit](#strisdigit) |  |
  | [str.IsHtmlResponse](#strishtmlresponse) | 判断一个 Response 是不是 HTML |
  | [str.IsHttpURL](#strishttpurl) | 判断 URL 是不是 http(s)://  |
  | [str.IsIPv4](#strisipv4) | 判断一个字符串是不是 IPv4 |
@@ -103,6 +109,7 @@
  | [str.SplitAfterN](#strsplitaftern) | 分割字符串，不移除分隔符，最多分割成N个块 |
  | [str.SplitAndTrim](#strsplitandtrim) | 分割，并清除每一个部分的前后空白 |
  | [str.SplitHTTPHeadersAndBodyFromPacket](#strsplithttpheadersandbodyfrompacket) | 把数据包的 headers 和 body 进行分离 |
+ | [str.SplitHostsToPrivateAndPublic](#strsplithoststoprivateandpublic) |  |
  | [str.SplitN](#strsplitn) | 分割字符串，分割成N块 |
  | [str.StartsWith](#strstartswith) | 判断主字符串是否是子串开头？ |
  | [str.StringContainsAnyOfSubString](#strstringcontainsanyofsubstring) | 判断字符串是否包含任意一个后续 Slice 中的元素？ |
@@ -578,6 +585,68 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `[]string` |   |
+
+
+ 
+### str.ExtractDomain
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractDomain(v1: any) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
+### str.ExtractHost
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.ExtractHost(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  
@@ -1093,6 +1162,99 @@
 
 
  
+### str.IsAlNum
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsAlNum(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsAlpha
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsAlpha(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsAlphaNum
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsAlphaNum(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
 ### str.IsBase64Value
 
 判断一个值是不是 base64
@@ -1142,6 +1304,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.IsDigit
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.IsDigit(v1: any) return (r0: bool)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -3294,6 +3487,38 @@
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
 | r1 | `bytes` |   |
+
+
+ 
+### str.SplitHostsToPrivateAndPublic
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func str.SplitHostsToPrivateAndPublic(v1 ...string) return (r0: []string, r1: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
  

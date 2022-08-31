@@ -34,6 +34,7 @@
 |:-----------|:---------- |:-----------|
 |`os.ARCH`|`string`| //|
 |`os.Args`|`[]string`| 获取当前命令行参数|
+|`os.IsPrivileged`|`bool`| //|
 |`os.OS`|`string`| //|
 |`os.Stderr`|`*os.File`| 标准错误流|
 |`os.Stdin`|`*os.File`| 标准输入流|

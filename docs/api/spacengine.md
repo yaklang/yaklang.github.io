@@ -7,6 +7,7 @@
  | [spacengine.HunterQuery](#spacenginehunterquery) | 新增 Hunter 空间引擎接口 |
  | [spacengine.QuakeQuery](#spacenginequakequery) |  |
  | [spacengine.ShodanQuery](#spacengineshodanquery) |  |
+ | [spacengine.ZoomeyeQuery](#spacenginezoomeyequery) |  |
  | [spacengine.maxPage](#spacenginemaxpage) | 【参数】最多筛选多少页？ |
  | [spacengine.maxRecord](#spacenginemaxrecord) | 【参数】最多获取多少条数据？但是由于 limit 的限制，这个数据往往比 maxRecord 多，直到补满当前页 |
 
@@ -153,6 +154,40 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | resultChan | `chan *spacengine.NetSpaceEngineResult` |   |
+| r1 | `error` |   |
+
+
+ 
+### spacengine.ZoomeyeQuery
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func spacengine.ZoomeyeQuery(v1: string, v2: string, v3 ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+| v3 | `...yaklib._spaceEngineConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
 | r1 | `error` |   |
 
 

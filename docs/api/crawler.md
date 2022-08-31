@@ -4,7 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [crawler.RequestsFromFlow](#crawlerrequestsfromflow) | 从一个请求中提取可能可以用于扫描的额外请求 |
- | [crawler.Start](#crawlerstart) | 核心函数，进行爬虫的入口，输入想要爬的网站，然后设置参数，在一个 chan 中接受爬虫的结果 |
+ | [crawler.Start](#crawlerstart) |  |
  | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登陆功能 |
  | [crawler.basicAuth](#crawlerbasicauth) | 设置爬虫的基础认证 |
  | [crawler.bodySize](#crawlerbodysize) | 想要设置每一个 body 最大获取多少页面大小，bytes 的大小，默认为 1024 * 1024 * 10 |
@@ -73,33 +73,23 @@
  
 ### crawler.Start
 
-核心函数，进行爬虫的入口，输入想要爬的网站，然后设置参数，在一个 chan 中接受爬虫的结果
+
 
 #### 详细描述
 
-爬虫的核心函数，通过 Start 来启动，urls 参数可以是逗号分割的多个 url。
-
-```go
-res, err = crawler.Start(`https://test1.example.com,https://test12.example.com`)
-die(err)
-
-for result := range res {
-  /* do sth u like */
-}
-```
 
 
 #### 定义：
 
-`func crawler.Start(urls: string, params ...crawler.param) return (r0: chan crawler.RequestIf, r1: error)`
+`func crawler.Start(v1: string, v2 ...crawler.configOpt) return (r0: chan *crawler.Req, r1: error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| urls | `string` |  想要爬取的网站，以 `,` 作为分割，进行会把每一个部分都尝试解析为 url |
-| params | `...crawler.param` |  爬虫的各种参数，例如通过 `crawler.basicAuth(&#34;basicUserName&#34;, &#34;secretPassword&#34;)` 来设置基础认证 |
+| v1 | `string` |   |
+| v2 | `...crawler.configOpt` |   |
 
 
 
@@ -109,7 +99,7 @@ for result := range res {
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan crawler.RequestIf` |  返回的爬虫的结果 |
+| r0 | `chan *crawler.Req` |   |
 | r1 | `error` |   |
 
 

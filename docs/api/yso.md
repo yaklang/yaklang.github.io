@@ -3,38 +3,74 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [yso.GenConstructExec](#ysogenconstructexec) |  |
- | [yso.GenExecClass](#ysogenexecclass) |  |
- | [yso.GenTomcatEchoFilterMemTarjon](#ysogentomcatechofiltermemtarjon) |  |
- | [yso.GetClojure](#ysogetclojure) |  |
- | [yso.GetCommonsBeanutils1](#ysogetcommonsbeanutils1) |  |
- | [yso.GetCommonsBeanutils2](#ysogetcommonsbeanutils2) |  |
- | [yso.GetCommonsCollections1](#ysogetcommonscollections1) |  |
- | [yso.GetCommonsCollections2](#ysogetcommonscollections2) |  |
- | [yso.GetCommonsCollections3](#ysogetcommonscollections3) |  |
- | [yso.GetCommonsCollections4](#ysogetcommonscollections4) |  |
- | [yso.GetCommonsCollections5](#ysogetcommonscollections5) |  |
- | [yso.GetCommonsCollections6](#ysogetcommonscollections6) |  |
- | [yso.GetCommonsCollections7](#ysogetcommonscollections7) |  |
- | [yso.GetCommonsCollectionsK1](#ysogetcommonscollectionsk1) |  |
- | [yso.GetCommonsCollectionsK2](#ysogetcommonscollectionsk2) |  |
- | [yso.GetCommonsCollectionsK3](#ysogetcommonscollectionsk3) |  |
- | [yso.GetCommonsCollectionsK4](#ysogetcommonscollectionsk4) |  |
- | [yso.GetJDK7u21](#ysogetjdk7u21) |  |
- | [yso.GetJDK8u20](#ysogetjdk8u20) |  |
- | [yso.GetSpring1](#ysogetspring1) |  |
- | [yso.GetSpring2](#ysogetspring2) |  |
- | [yso.GetTomcatEcho](#ysogettomcatecho) | 新增 TomcatEcho Java 对象 |
- | [yso.NewFacadeServer](#ysonewfacadeserver) |  |
- | [yso.NewLdapServer](#ysonewldapserver) | 新增 LDAP 服务器 |
- | [yso.NewLdapServerWithPort](#ysonewldapserverwithport) | 新增 LDAP 服务器，并设置端口 |
- | [yso.SetHttpResource](#ysosethttpresource) |  |
- | [yso.SetJavaClassName](#ysosetjavaclassname) |  |
- | [yso.SetJavaCodeBase](#ysosetjavacodebase) |  |
- | [yso.SetLdapResourceAddr](#ysosetldapresourceaddr) |  |
- | [yso.SetObjectClass](#ysosetobjectclass) |  |
- | [yso.SetRmiResourceAddr](#ysosetrmiresourceaddr) |  |
- | [yso.SetjavaFactory](#ysosetjavafactory) |  |
+ | [yso.GenerateClassObjectFromBytes](#ysogenerateclassobjectfrombytes) |  |
+ | [yso.GenerateDNSlogEvilClassObject](#ysogeneratednslogevilclassobject) |  |
+ | [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#ysogeneratemodifytomcatmaxheadersizeevilclassobject) |  |
+ | [yso.GenerateProcessBuilderExecEvilClassObject](#ysogenerateprocessbuilderexecevilclassobject) |  |
+ | [yso.GenerateProcessImplExecEvilClassObject](#ysogenerateprocessimplexecevilclassobject) |  |
+ | [yso.GenerateRuntimeExecEvilClassObject](#ysogenerateruntimeexecevilclassobject) |  |
+ | [yso.GenerateSpringEchoEvilClassObject](#ysogeneratespringechoevilclassobject) |  |
+ | [yso.GenerateTcpReverseEvilClassObject](#ysogeneratetcpreverseevilclassobject) |  |
+ | [yso.GenerateTcpReverseShellEvilClassObject](#ysogeneratetcpreverseshellevilclassobject) |  |
+ | [yso.GetAllGadget](#ysogetallgadget) |  |
+ | [yso.GetAllRuntimeExecGadget](#ysogetallruntimeexecgadget) |  |
+ | [yso.GetAllTemplatesGadget](#ysogetalltemplatesgadget) |  |
+ | [yso.GetBeanShell1JavaObject](#ysogetbeanshell1javaobject) |  |
+ | [yso.GetClick1JavaObject](#ysogetclick1javaobject) |  |
+ | [yso.GetCommonsBeanutils183NOCCJavaObject](#ysogetcommonsbeanutils183noccjavaobject) |  |
+ | [yso.GetCommonsBeanutils192NOCCJavaObject](#ysogetcommonsbeanutils192noccjavaobject) |  |
+ | [yso.GetCommonsBeanutils1JavaObject](#ysogetcommonsbeanutils1javaobject) |  |
+ | [yso.GetCommonsCollections1JavaObject](#ysogetcommonscollections1javaobject) |  |
+ | [yso.GetCommonsCollections2JavaObject](#ysogetcommonscollections2javaobject) |  |
+ | [yso.GetCommonsCollections3JavaObject](#ysogetcommonscollections3javaobject) |  |
+ | [yso.GetCommonsCollections4JavaObject](#ysogetcommonscollections4javaobject) |  |
+ | [yso.GetCommonsCollections5JavaObject](#ysogetcommonscollections5javaobject) |  |
+ | [yso.GetCommonsCollections6JavaObject](#ysogetcommonscollections6javaobject) |  |
+ | [yso.GetCommonsCollections7JavaObject](#ysogetcommonscollections7javaobject) |  |
+ | [yso.GetCommonsCollections8JavaObject](#ysogetcommonscollections8javaobject) |  |
+ | [yso.GetCommonsCollectionsK1JavaObject](#ysogetcommonscollectionsk1javaobject) |  |
+ | [yso.GetCommonsCollectionsK2JavaObject](#ysogetcommonscollectionsk2javaobject) |  |
+ | [yso.GetCommonsCollectionsK3JavaObject](#ysogetcommonscollectionsk3javaobject) |  |
+ | [yso.GetCommonsCollectionsK4JavaObject](#ysogetcommonscollectionsk4javaobject) |  |
+ | [yso.GetGadgetNameByFun](#ysogetgadgetnamebyfun) |  |
+ | [yso.GetGroovy1JavaObject](#ysogetgroovy1javaobject) |  |
+ | [yso.GetJBossInterceptors1JavaObject](#ysogetjbossinterceptors1javaobject) |  |
+ | [yso.GetJSON1JavaObject](#ysogetjson1javaobject) |  |
+ | [yso.GetJavassistWeld1JavaObject](#ysogetjavassistweld1javaobject) |  |
+ | [yso.GetJdk7u21JavaObject](#ysogetjdk7u21javaobject) |  |
+ | [yso.GetJdk8u20JavaObject](#ysogetjdk8u20javaobject) |  |
+ | [yso.GetSimplePrincipalCollectionJavaObject](#ysogetsimpleprincipalcollectionjavaobject) |  |
+ | [yso.ToBcel](#ysotobcel) |  |
+ | [yso.ToBytes](#ysotobytes) |  |
+ | [yso.command](#ysocommand) |  |
+ | [yso.dnslogDomain](#ysodnslogdomain) |  |
+ | [yso.evilClassName](#ysoevilclassname) |  |
+ | [yso.obfuscationClassConstantPool](#ysoobfuscationclassconstantpool) |  |
+ | [yso.springEchoBody](#ysospringechobody) |  |
+ | [yso.springHeader](#ysospringheader) |  |
+ | [yso.springParam](#ysospringparam) |  |
+ | [yso.springRuntimeExecAction](#ysospringruntimeexecaction) |  |
+ | [yso.tcpReverseHost](#ysotcpreversehost) |  |
+ | [yso.tcpReversePort](#ysotcpreverseport) |  |
+ | [yso.tcpReverseToken](#ysotcpreversetoken) |  |
+ | [yso.useBase64BytesClass](#ysousebase64bytesclass) |  |
+ | [yso.useBytesClass](#ysousebytesclass) |  |
+ | [yso.useBytesEvilClass](#ysousebytesevilclass) |  |
+ | [yso.useConstructorExecutor](#ysouseconstructorexecutor) |  |
+ | [yso.useDNSLogEvilClass](#ysousednslogevilclass) |  |
+ | [yso.useDNSlogTemplate](#ysousednslogtemplate) |  |
+ | [yso.useModifyTomcatMaxHeaderSizeTemplate](#ysousemodifytomcatmaxheadersizetemplate) |  |
+ | [yso.useProcessBuilderExecEvilClass](#ysouseprocessbuilderexecevilclass) |  |
+ | [yso.useProcessBuilderExecTemplate](#ysouseprocessbuilderexectemplate) |  |
+ | [yso.useProcessImplExecEvilClass](#ysouseprocessimplexecevilclass) |  |
+ | [yso.useProcessImplExecTemplate](#ysouseprocessimplexectemplate) |  |
+ | [yso.useRuntimeExecEvilClass](#ysouseruntimeexecevilclass) |  |
+ | [yso.useRuntimeExecTemplate](#ysouseruntimeexectemplate) |  |
+ | [yso.useSpringEchoTemplate](#ysousespringechotemplate) |  |
+ | [yso.useTcpReverseEvilClass](#ysousetcpreverseevilclass) |  |
+ | [yso.useTcpReverseShellEvilClass](#ysousetcpreverseshellevilclass) |  |
+ | [yso.useTcpReverseShellTemplate](#ysousetcpreverseshelltemplate) |  |
+ | [yso.useTcpReverseTemplate](#ysousetcpreversetemplate) |  |
 
 
 
@@ -45,7 +81,7 @@
 
 ## 函数定义
 
-### yso.GenConstructExec
+### yso.GenerateClassObjectFromBytes
 
 
 
@@ -55,7 +91,40 @@
 
 #### 定义：
 
-`func yso.GenConstructExec(v1: string, v2 ...yso.ClassOptionFun) return (r0: bytes)`
+`func yso.GenerateClassObjectFromBytes(v1: bytes, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateDNSlogEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateDNSlogEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
 
 
 #### 参数
@@ -63,7 +132,1163 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `...yso.ClassOptionFun` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateProcessBuilderExecEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateProcessBuilderExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateProcessImplExecEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateProcessImplExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateRuntimeExecEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateRuntimeExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateSpringEchoEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateSpringEchoEvilClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateTcpReverseEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateTcpReverseEvilClassObject(v1: string, v2: int, v3 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateTcpReverseShellEvilClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateTcpReverseShellEvilClassObject(v1: string, v2: int, v3 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetAllGadget
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetAllGadget() return (r0: []any)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]any` |   |
+
+
+ 
+### yso.GetAllRuntimeExecGadget
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetAllRuntimeExecGadget() return (r0: []yso.RuntimeExecGadget)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]yso.RuntimeExecGadget` |   |
+
+
+ 
+### yso.GetAllTemplatesGadget
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetAllTemplatesGadget() return (r0: []yso.TemplatesGadget)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]yso.TemplatesGadget` |   |
+
+
+ 
+### yso.GetBeanShell1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetBeanShell1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetClick1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetClick1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsBeanutils183NOCCJavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsBeanutils183NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsBeanutils192NOCCJavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsBeanutils192NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsBeanutils1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsBeanutils1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections2JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections3JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections3JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections4JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections4JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections5JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections5JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections6JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections6JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections7JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections7JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollections8JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollections8JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollectionsK1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollectionsK1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollectionsK2JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollectionsK2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollectionsK3JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollectionsK3JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetCommonsCollectionsK4JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetCommonsCollectionsK4JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetGadgetNameByFun
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetGadgetNameByFun(v1: any) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetGroovy1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetGroovy1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJBossInterceptors1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJBossInterceptors1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJSON1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJSON1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJavassistWeld1JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJavassistWeld1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJdk7u21JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJdk7u21JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJdk8u20JavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJdk8u20JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetSimplePrincipalCollectionJavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetSimplePrincipalCollectionJavaObject() return (r0: yserx.JavaSerializable, r1: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `yserx.JavaSerializable` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.ToBcel
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.ToBcel(v1: any) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.ToBytes
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.ToBytes(v1: any) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -74,10 +1299,11 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `bytes` |   |
+| r1 | `error` |   |
 
 
  
-### yso.GenExecClass
+### yso.command
 
 
 
@@ -87,7 +1313,146 @@
 
 #### 定义：
 
-`func yso.GenExecClass(v1: string, v2: string) return (r0: bytes)`
+`func yso.command(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.dnslogDomain
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.dnslogDomain(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.evilClassName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.evilClassName(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.obfuscationClassConstantPool
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.obfuscationClassConstantPool() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.springEchoBody
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.springEchoBody() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.springHeader
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.springHeader(v1: string, v2: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
 
 #### 参数
@@ -105,11 +1470,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.GenTomcatEchoFilterMemTarjon
+### yso.springParam
 
 
 
@@ -119,39 +1484,7 @@
 
 #### 定义：
 
-`func yso.GenTomcatEchoFilterMemTarjon(v1: string, v2 ...yso.ClassOptionFun) return (r0: bytes)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yso.ClassOptionFun` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
-
-
- 
-### yso.GetClojure
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetClojure(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.springParam(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
 
 #### 参数
@@ -168,12 +1501,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.GetCommonsBeanutils1
+### yso.springRuntimeExecAction
 
 
 
@@ -183,7 +1515,30 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils1(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.springRuntimeExecAction() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.tcpReverseHost
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.tcpReverseHost(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
 
 #### 参数
@@ -200,12 +1555,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.GetCommonsBeanutils2
+### yso.tcpReversePort
 
 
 
@@ -215,606 +1569,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils2(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections1
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections1(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections2
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections2(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections3
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections3(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections4
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections4(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections5
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections5(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections6
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections6(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollections7
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollections7(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollectionsK1
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollectionsK1(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollectionsK2
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollectionsK2(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollectionsK3
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollectionsK3(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetCommonsCollectionsK4
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetCommonsCollectionsK4(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetJDK7u21
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetJDK7u21(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetJDK8u20
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetJDK8u20(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetSpring1
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetSpring1(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetSpring2
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetSpring2(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
-| r1 | `error` |   |
-
-
- 
-### yso.GetTomcatEcho
-
-新增 TomcatEcho Java 对象
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.GetTomcatEcho(v1: string) return (r0: func (v1: string) return(bytes) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func (v1: string) return(bytes) ` |   |
-
-
- 
-### yso.NewFacadeServer
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.NewFacadeServer(v1: string, v2: int, v3 ...facades.FacadeServerConfig) return (r0: *facades.FacadeServer)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `...facades.FacadeServerConfig` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*facades.FacadeServer` |   |
-
-
- 
-### yso.NewLdapServer
-
-新增 LDAP 服务器
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.NewLdapServer() return (r0: *ldapserver.LdapServer)`
-
- 
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*ldapserver.LdapServer` |   |
-
-
- 
-### yso.NewLdapServerWithPort
-
-新增 LDAP 服务器，并设置端口
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.NewLdapServerWithPort(v1: int, v2: int) return (r0: ldapserver.LdapServer)`
+`func yso.tcpReversePort(v1: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
 
 #### 参数
@@ -822,6 +1577,446 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.tcpReverseToken
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.tcpReverseToken(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useBase64BytesClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useBase64BytesClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useBytesClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useBytesClass(v1: bytes) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useBytesEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useBytesEvilClass(v1: bytes) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useConstructorExecutor
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useConstructorExecutor() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useDNSLogEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useDNSLogEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useDNSlogTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useDNSlogTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useModifyTomcatMaxHeaderSizeTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useModifyTomcatMaxHeaderSizeTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useProcessBuilderExecEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useProcessBuilderExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useProcessBuilderExecTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useProcessBuilderExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useProcessImplExecEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useProcessImplExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useProcessImplExecTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useProcessImplExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useRuntimeExecEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useRuntimeExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useRuntimeExecTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useRuntimeExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useSpringEchoTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useSpringEchoTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useTcpReverseEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useTcpReverseEvilClass(v1: string, v2: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 | v2 | `int` |   |
 
 
@@ -832,11 +2027,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `ldapserver.LdapServer` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.SetHttpResource
+### yso.useTcpReverseShellEvilClass
 
 
 
@@ -846,7 +2041,7 @@
 
 #### 定义：
 
-`func yso.SetHttpResource(v1: string, v2: bytes) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`func yso.useTcpReverseShellEvilClass(v1: string, v2: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
 
 #### 参数
@@ -854,7 +2049,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `bytes` |   |
+| v2 | `int` |   |
 
 
 
@@ -864,11 +2059,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.SetJavaClassName
+### yso.useTcpReverseShellTemplate
 
 
 
@@ -878,28 +2073,20 @@
 
 #### 定义：
 
-`func yso.SetJavaClassName(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`func yso.useTcpReverseShellTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
+ 
 
 
 #### 返回值
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  
-### yso.SetJavaCodeBase
+### yso.useTcpReverseTemplate
 
 
 
@@ -909,150 +2096,16 @@
 
 #### 定义：
 
-`func yso.SetJavaCodeBase(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
-
+`func yso.useTcpReverseTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
 
  
-### yso.SetLdapResourceAddr
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.SetLdapResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
 
 
 #### 返回值
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
-
-
- 
-### yso.SetObjectClass
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.SetObjectClass(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
-
-
- 
-### yso.SetRmiResourceAddr
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.SetRmiResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
-
-
- 
-### yso.SetjavaFactory
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func yso.SetjavaFactory(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
 
 
  

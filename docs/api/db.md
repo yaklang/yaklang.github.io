@@ -13,6 +13,7 @@
  | [db.QueryDomainsByNetwork](#dbquerydomainsbynetwork) | 根据解析到的网段查询域名资产 |
  | [db.QueryDomainsByTitle](#dbquerydomainsbytitle) | 根据网站名查询域名 |
  | [db.QueryHTTPFlowsAll](#dbqueryhttpflowsall) | 查询所有的 HTTP 流 |
+ | [db.QueryHTTPFlowsByID](#dbqueryhttpflowsbyid) |  |
  | [db.QueryHTTPFlowsByKeyword](#dbqueryhttpflowsbykeyword) | 根据关键字插件 HTTP 流对象 |
  | [db.QueryHostPortByKeyword](#dbqueryhostportbykeyword) | 通过关键字查询 HostPort |
  | [db.QueryHostPortByNetwork](#dbqueryhostportbynetwork) | 根据网络查询 Host:Port |
@@ -326,6 +327,37 @@
 `func db.QueryHTTPFlowsAll() return (r0: chan *yakit.HTTPFlow)`
 
  
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.HTTPFlow` |   |
+
+
+ 
+### db.QueryHTTPFlowsByID
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.QueryHTTPFlowsByID(v1 ...int64) return (r0: chan *yakit.HTTPFlow)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...int64` |   |
+
+
+
 
 
 #### 返回值

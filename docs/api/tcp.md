@@ -6,6 +6,7 @@
  | [tcp.Connect](#tcpconnect) |  |
  | [tcp.Forward](#tcpforward) | 转发 TCP 链接，在本地开一个 TCP 服务器，把到这个服务器的链接转发到远程端口上 |
  | [tcp.Serve](#tcpserve) | 启动一个 tcp 服务器 |
+ | [tcp.cliengProxy](#tcpcliengproxy) |  |
  | [tcp.clientLocal](#tcpclientlocal) | 【客户端参数】设置客户端本地地址 |
  | [tcp.clientTimeout](#tcpclienttimeout) | 【客户端参数】设置超时时间 |
  | [tcp.clientTls](#tcpclienttls) | 【客户端参数】设置 TLS/SSL |
@@ -119,6 +120,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `error` |   |
+
+
+ 
+### tcp.cliengProxy
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func tcp.cliengProxy(v1: string) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func dialerOpt(v1: *yaklib._tcpDialer) ` |   |
 
 
  
