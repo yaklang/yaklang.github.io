@@ -11,6 +11,8 @@ sidebar_position: 16
 1. `fn mitm.Bridge(var_1: interface {}, var_2: string, vars: ...yaklib.mitmConfigOpt): error` 设置一个桥接模式的中间人
 1. `fn mitm.Start(var_1: int, vars: ...yaklib.mitmConfigOpt): error` 启动一个代理模式中间人
 1. `fn mitm.callback(var_1: func(isHttps bool, url string, request *http.Request, response *http.Response)): yaklib.mitmConfigOpt`【参数】：设置进入中间人的请求的入口（只劫持不修改）
+1. `fn mitm.wscallback(var_1: func(data []byte, isRequest bool): var): yaklib.mitmConfigOpt`【参数】：设置进入中间人的websocket请求的入口（**通过返回值修改内容**）
+1. `fn wsforcetext(var_1: bool): yaklib.mitmConfigOpt`【参数】：设置wscallback中的返回值内容是否强制为文本类型(后文会细讲)
 1. `fn mitm.hijack(var_1: func(bool, *http.Request, *http.Response)): yaklib.mitmConfigOpt`【暂不开放：参数】：设置进入中间人的请求的入口（劫持）
 1. `fn mitm.context(var_1: context.Context): yaklib.mitmConfigOpt`【参数】：控制中间人生命周期的上下文
 1. `fn mitm.host(var_1: string): yaklib.mitmConfigOpt`【参数】：想要监听到本地的地址
@@ -103,7 +105,7 @@ X-Ua-Compatible: IE=Edge,chrome=1
 1. 回调函数中 `isHttps` 如果为 true，说明当前劫持到的请求是一个 HTTPS 请求
 1. `http.show()` 对 request 和 response 仍然有效
 
-## 进阶！中间人劫持桥接模式： `mitm.Bridge` 
+## 中间人劫持桥接模式： `mitm.Bridge` 
 
 在 HTTP 代理协议中，我们可以设置下游代理。设置了下游代理，这个代理就成为了 HTTP/HTTPS 的一个中转站，可以劫持到里面 HTTP 和 HTTPS 的内容，作为代理服务器。
 
@@ -182,3 +184,189 @@ X-Ua-Compatible: IE=Edge,chrome=1
 ```
 
 令人高兴的是，我们看到了 `劫持到了 HTTPS！`这句话，这句话意味着我们劫持成功了。
+
+ 
+
+## websocket的中间人劫持: `mitm.wscallback`
+
+随着时代的发展，越来越多的网站开始使用websocket技术，为此，yak也推出了对websocket劫持的支持。我们只需要简单地添加一个`mitm.wscallback`参数即可。
+
+### 如何使用 `mitm.wscallback`？
+
+我们使用一个新的例子来测试，首先编写一个yak脚本来启动一个能劫持websocket的server:
+
+```go
+wg = sync.NewWaitGroup()
+wg.Add(1)
+go fn{
+    defer wg.Done()
+    mitm.Start(8084, mitm.wscallback(
+    fn(data, isRequest){
+        if isRequest {
+            data = "Hijack request"
+        } else {
+            data = "Hijack Response"
+        }
+        return data
+    }))
+}
+wg.Wait()
+```
+
+这里有2点需要注意:
+
+1. wscallback接受一个新的函数作为参数，该函数有两个参数:`data`和`isRequests`，其中`data`是[]byte类型(代表劫持到的websocket 请求/响应原始内容)，而`isRequest`则是bool类型(代表劫持到的是请求还是响应，true代表劫持的是请求，false代表劫持的是响应)
+2. 函数返回值将会被用于修改请求/响应内容，如果无需修改也需要将原`data`返回。(**无论如何都要return**)
+
+
+
+接下来我们使用go来启动一个websocket的测试服务器，这里需要安装依赖:**"github.com/gorilla/websocket"**:
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"os"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
+func main() {
+	var upgrader = websocket.Upgrader{}
+
+	f, err := os.CreateTemp("", "test-*.html")
+	if err != nil {
+		panic(err)
+	}
+	f.Write([]byte(`<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sample of websocket with golang</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var ws = new WebSocket('ws://' + window.location.host + '/ws');
+            ws.onmessage = function(e) {
+                $('<li>').text(event.data).appendTo($ul);
+            ws.send('{"message":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}');
+            };
+            var $ul = $('#msg-list');
+        });
+    </script>
+</head>
+<body>
+<ul id="msg-list"></ul>
+</body>
+</html>`))
+	index := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, f.Name())
+	})
+	http.Handle("/", index)
+	http.Handle("/index.html", index)
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		// msg := &RecvMessage{}
+
+		ws, err := upgrader.Upgrade(w, r, nil)
+		if err != nil {
+			panic(err)
+			return
+		}
+		defer ws.Close()
+
+		go func() {
+			for {
+				_, msg, err := ws.ReadMessage()
+				if err != nil {
+					panic(err)
+					return
+				}
+				fmt.Printf("server recv from client: %s\n", msg)
+			}
+		}()
+
+		for {
+			time.Sleep(time.Second)
+			ws.WriteJSON(map[string]interface{}{
+				"message": fmt.Sprintf("Golang Websocket Message: %v", time.Now()),
+			})
+		}
+	})
+
+	err = http.ListenAndServe(":8884", nil)
+	if err != nil {
+		panic(err)
+	}
+}
+```
+
+
+
+现在，我们访问http://127.0.0.1:8884，会发现屏幕会每秒输出一条json内容，例如:
+
+```
+{"message":"Golang Websocket Message: 2022-09-05 15:17:22.497926 +0800 CST m=+7.689153001"}
+```
+
+同时，在终端中会每秒输出一条以下内容:
+```
+server recv from client: {"message":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+```
+
+
+
+这时候我们挂上代理http://127.0.0.1:8084/再进行访问，如果顺利的话，你会发现上述的内容都会发生改变，屏幕输出的内容变为:
+
+```
+Hijack Response
+```
+
+同时，终端输出的内容变为:
+
+```
+server recv from client: Hijack request
+```
+
+这说明我们成功对websocket的请求与响应进行了劫持!
+
+
+
+### 如何使用 `mitm.wsforcetext`？
+
+`mitm.wsforcetext`的使用非常简单，我们只需要对上述的例子进行稍微的修改即可:
+
+```go
+wg = sync.NewWaitGroup()
+wg.Add(1)
+go fn{
+    defer wg.Done()
+    mitm.Start(8084, mitm.wsforcetext(true),mitm.wscallback(
+    fn(data, isRequest){
+        if isRequest {
+            data = "Hijack request"
+        } else {
+            data = "Hijack Response"
+        }
+        return data
+    }))
+}
+wg.Wait()
+```
+
+在说明如何使用`mitm.wsforcetext`之后，我们来说说为什么需要这个函数，这涉及到了websocket协议。
+
+websocket协议头中有4 bit(opcode)来决定了操作代码，Opcode的值决定了应该如何解析后续的data。如果操作代码是不认识的，那么接收端应该断开连接。可选的操作代码如下：
+
+- %x0：表示一个延续帧。当Opcode为0时，表示本次数据传输采用了数据分片，当前收到的数据帧为其中一个数据分片。
+- %x1：表示这是一个文本帧（frame）
+- %x2：表示这是一个二进制帧（frame）
+- %x3-7：保留的操作代码，用于后续定义的非控制帧。
+- %x8：表示连接断开。
+- %x9：表示这是一个ping操作。
+- %xA：表示这是一个pong操作。
+- %xB-F：保留的操作代码，用于后续定义的控制帧。
+
+在默认情况下，yak启动的mitm server是不会对websocket的opcode进行修改的，而在某些情况下，我们需要强制让修改后的内容变为文本帧(%x1)，这也是为什么会有`mitm.wsforcetext`函数。
