@@ -579,7 +579,7 @@ defer fn{}
 
 值得注意的是：
 
-在一个细节上 yak 的 defer 和 Golang 处理并不一致，那就是 defer 表达式中的变量值。
+在细节上 yak 的 defer 和 Golang 处理并不一致，那就是 defer 表达式中的变量值。
 
 在 Golang 中，当 defer 被声明的时候，如果直接使用函数传参的形式(非指针引用)，此时的参数就会使用参数当前值，在整个生命周期内不会变化。
 golang 示例
@@ -595,7 +595,7 @@ func dfp1() {
 }
 ```
 
-如果直接使用了参数。则修改会改变 defer 使用的值。
+如果直接使用了变量。则修改会改变 defer 使用的值。
 
 golang 示例
 
@@ -624,7 +624,18 @@ println("设置 f 变量为空")
 f = nil               // 在这里设置 f 为空
 ```
 
-defer 中修改返回值，如果是直接引用了参数，golang 会改变返回值。yak 不会受到影响
+例如，假设你在 defer 之后，调用 f = nil 把 f 变量改为 nil，那么后面执行 f.Close() 时就会发生错误。
+
+上述代码段执行结果为：
+
+```
+设置 f 变量为空
+准备开始执行 defer func
+[ERRO] 2021-05-26 00:27:59 +0800 [default:yak.go:100] reflect: call of reflect.Value.MethodByName on zero Value在 defer 中修改函数返回值，如果是使用了变量，golang 会改变返回值。yak 不会受到影响
+golang 示例
+```
+
+在 defer 中修改返回值，如果是直接修改了返回值的值，golang 会改变返回的值。yak 不会受到影响
 golang 示例
 
 ```go
@@ -653,9 +664,9 @@ yak 示例
 ```go
 fn test(){
    a := 2
-   defer fn(){
+   defer fn{
        a++
-   }()
+   }
    a = 3
    return a //3
 }
@@ -671,15 +682,7 @@ fn test(){
 print(test())
 ```
 
-例如，假设你在 defer 之后，调用 f = nil 把 f 变量改为 nil，那么后面执行 f.Close() 时就会发生错误。
-
-上述代码段执行结果为：
-
-```
-设置 f 变量为空
-准备开始执行 defer func
-[ERRO] 2021-05-26 00:27:59 +0800 [default:yak.go:100] reflect: call of reflect.Value.MethodByName on zero Value
-```
+defer 的执行顺序跟 Golang 中的一致
 
 ```
 defer fn {
