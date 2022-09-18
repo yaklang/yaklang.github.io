@@ -243,8 +243,9 @@ x = make(map[var]var)                    // 创建一个 map[interface{}]interfa
 上述方法均可创建一个 map，我们发现：
 
 1. 直接使用 `{key: value ... }` 方式创建的 map 会自动选择最兼容的类型
-2. 使用 `make(map[T1]T2)` 可以创建指定类型的 map
 
+2. 使用 `make(map[T1]T2)` 可以创建指定类型的 map
+   
    :::tip 小贴士 通过 `{"key": "value", ... }` 方式创建的 map，key 必须是 `string`
    :::
 
@@ -293,7 +294,7 @@ NOW map a:
 x = {"a": 1, "b": 2}
 a = x["a"] // 结果：a = 1
 if a != undefined {             // 判断a存在的逻辑
-    
+
 }
 c = x["c"]                      // 结果：c = undefined，注意不是0，也不是nil
 d = x["d"]                      // 结果：d = undefined，注意不是0，也不是nil
@@ -352,13 +353,14 @@ cap(ch1):  4
 ```go
 v = <-ch1
 if v != undefined { // 判断chan没有被关闭的逻辑
-	...
+    ...
 }
 ```
 
 :::
 
 ### 格式化字符串
+
 我们可以使用sprintf实现简单地实现格式化字符串:
 
 ```go
@@ -550,13 +552,13 @@ wg = sync.NewWaitGroup()
 wg.Add(2)
 
 go func {
-	defer wg.Done()
-	println("in goroutine1")
+    defer wg.Done()
+    println("in goroutine1")
 }
 
 go func {
-	defer wg.Done()
-	println("in goroutine2")
+    defer wg.Done()
+    println("in goroutine2")
 }
 
 wg.Wait()
@@ -577,9 +579,39 @@ defer fn{}
 
 值得注意的是：
 
-在一个细节上 yak 的 defer 和 Golang 处理并不一致，那就是 defer 表达式中的变量值。
+在细节上 yak 的 defer 和 Golang 处理并不一致，那就是 defer 表达式中的变量值。
 
-在 Golang 中，所有 defer 引用的变量均在 defer 语句时刻固定下来后面任何修改均不影响 defer 语句的行为，但 yak 是会受到影响的，我们可以观察如下案例：
+在 Golang 中，当 defer 被声明的时候，如果直接使用函数传参的形式(非指针引用)，此时的参数就会使用参数当前值，在整个生命周期内不会变化。
+golang 示例
+
+```go
+func dfp1() {
+   var a = 1
+   defer func(t int) {
+        fmt.Println(t) //result 1
+   }(a)
+   a = 2
+   return
+}
+```
+
+如果直接使用了变量。则修改会改变 defer 使用的值。
+
+golang 示例
+
+```go
+func dfp2() {
+   var a = 1
+   defer func() {
+        fmt.Println(a) //result 2
+   }()
+   a = 2
+    return
+}
+```
+
+但 yak 不论何种方式都是会受到影响。
+yak 示例
 
 ```go
 f = {"ccc": 1}
@@ -599,16 +631,66 @@ f = nil               // 在这里设置 f 为空
 ```
 设置 f 变量为空
 准备开始执行 defer func
-[ERRO] 2021-05-26 00:27:59 +0800 [default:yak.go:100] reflect: call of reflect.Value.MethodByName on zero Value
+[ERRO] 2021-05-26 00:27:59 +0800 [default:yak.go:100] reflect: call of reflect.Value.MethodByName on zero Value在 defer 中修改函数返回值，如果是使用了变量，golang 会改变返回值。yak 不会受到影响
+golang 示例
 ```
+
+在 defer 中修改返回值，如果是直接修改了返回值的值，golang 会改变返回的值。yak 不会受到影响
+golang 示例
+
+```go
+func dfr1() (r int) {
+   r = 5
+   defer func() {
+      r++
+      fmt.Println("dfr1@", r) // 3
+   }()
+   return 2 //3
+}
+
+func dfr2() (r int) {
+   r = 5
+   defer func(r int) {
+      r++
+      fmt.Println("dfr2@", r) // 6
+   }(r) //3
+
+   return 2 //2
+}
+```
+
+yak 示例
+
+```go
+fn test(){
+   a := 2
+   defer fn{
+       a++
+   }
+   a = 3
+   return a //3
+}
+fn test(){
+   a := 2
+   defer fn(a){
+       a++
+   }(a)
+   a = 3
+   return a //3
+}
+
+print(test())
+```
+
+defer 的执行顺序跟 Golang 中的一致
 
 ```
 defer fn {
-	dump(11111)
+    dump(11111)
 }
 
 defer fn(){
-	dump(111)
+    dump(111)
 }()
 
 // 输出结果为
@@ -666,11 +748,11 @@ case false:
 
 ```go
 for { // 无限循环，需要在中间 break 或 return 结束
-	...
+    ...
 }
 
 for booleanExpr { // 类似很多语言的 while 循环
-	...
+    ...
 }
 ```
 
@@ -679,7 +761,7 @@ for booleanExpr { // 类似很多语言的 while 循环
 ```go
 /*
 for initExpr; conditionExpr; stepExpr {
-	...
+    ...
 }
 */
 
@@ -802,7 +884,7 @@ fetch chan var [ch] element:  2
 
 所以我们在看下面代码：
 
-```go {5} title="main.yak"
+```go
 func aaa(caller) {
    println("aaa is called by", caller)
 }
@@ -824,7 +906,7 @@ aaa is called by main
 
 作为对比，我们在同一个目录下，编写一个 `foo.yak`，内容如下
 
-```go title="foo.yak"
+```go
 res, err := dyn.LoadVarFromFile("main.yak", "aaa")
 die(err)
 
@@ -882,7 +964,7 @@ type palm/common/yak.(yakVariable) struct {
 
 我们先创建一个 `a1.yak` 脚本
 
-```go title="a1.yak"
+```go
 func poc() {
    println("I am in `poc` function....")
 }
@@ -891,12 +973,11 @@ if YAK_MAIN {
    println("poc function is called by a1")
    poc()
 }
-
 ```
 
 然后我们创建一个 `main.yak` 脚本
 
-```go title="main.yak"
+```go
 pocVar, err = import("a1", "poc")
 if err != nil {
     die(err)
@@ -910,14 +991,14 @@ if YAK_MAIN {
 
 如果我们单独执行 `main.yak` 我们发现输出为
 
-```go title="yak main.yak"
+```go
 poc function is called by main
 I am in `poc` function....
 ```
 
 如果我们单独执行 `a1.yak` 我们发现输出为：
 
-```go title="yak a1.yak"
+```go
 poc function is called by a1
 I am in `poc` function....
 ```
@@ -930,7 +1011,7 @@ I am in `poc` function....
 
 作为对比，我们继续使用上一节的 `main.yak` 函数。通过 `include` 来执行。
 
-```go title="foo2.yak"
+```go
 include "main.yak"
 
 if YAK_MAIN {
