@@ -510,9 +510,9 @@ const DownLoadBtn = (props) => {
 };
 const CourseDocBtn = React.memo((props) => {
     return (
-        <a className="course-doc-btn" href="/docs/intro">
+        <a className="course-doc-btn" href="/products/download_and_install">
             <EyeOutlined className="icon-style" />
-            <span className="title-style">查看基础教程</span>
+            <span className="title-style">查看安装教程</span>
         </a>
     );
 });
