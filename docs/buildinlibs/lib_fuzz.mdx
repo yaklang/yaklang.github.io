@@ -1635,7 +1635,123 @@ Cookie 参数的效果和上面是一致的，如果读者有兴趣，可以自�
 
 
 
-## 附录：我们如何实现链式调用？
+## 模糊测试Protobuf
+
+模糊测试protobuf协议的核心是`fn fuzz.ProtobufHex(origin: string) *ProtobufRecords`，它会将传入的参数(hex字符串，形如"10c803107b")转换为yak独有的结构体，之后再进行一系列的操作。
+
+### 将Protobuf转成易阅读的字符串
+
+```go
+r = fuzz.ProtobufHex("10c803107b")
+die(r.Error())
+println(r)
+/*
+2: varint: 456
+2: varint: 123
+*/
+```
+
+### 将Protobuf转成JSON/YAML
+
+```go
+r = fuzz.ProtobufHex("10c803107b")
+die(r.Error())
+println(r.ToJSON())
+println("-------------------")
+println(r.ToYAML())
+/*
+[
+  {
+    "index": 2,
+    "type": "varint",
+    "value": 456
+  },
+  {
+    "index": 2,
+    "type": "varint",
+    "value": 123
+  }
+]
+-------------------
+- index: 2
+  type: varint
+  value: 456
+- {index: 2, type: varint, value: 123}
+*/
+```
+
+### 将JSON/YAMl转回Protobuf
+
+```go
+r = fuzz.ProtobufJSON(`[
+  {
+    "index": 2,
+    "type": "varint",
+    "value": 456
+  },
+  {
+    "index": 2,
+    "type": "varint",
+    "value": 123
+  }
+]`)
+die(r.Error())
+println(r)
+println("--------------------")
+r = fuzz.ProtobufYAML(`- index: 2
+  type: varint
+  value: 456
+- {index: 2, type: varint, value: 123}`)
+die(r.Error())
+println(r)
+/*
+2: varint: 456
+2: varint: 123
+--------------------
+2: varint: 456
+2: varint: 123
+*/
+```
+
+### 对Protobuf进行fuzz
+
+```go
+records, err = fuzz.ProtobufHex("10c803107b").FuzzEveryIndex(fn(index, typ, data) {
+    printf("index: %d type: %s data: %s\n", index, typ, data)
+    if typ == "varint" {
+        return 666
+    }
+    return // 这里的return代表不对该field进行fuzz
+})
+/*
+还有一个fuzz方法: FuzzIndex，其第一个参数对应的是需要fuzz的field id
+records, err = fuzz.ProtobufHex("10c803107b").FuzzIndex(2, fn(index, typ, data) {
+    printf("index: %d type: %s data: %s\n", index, typ, data)
+    if typ == "varint" {
+        return 666
+    }
+    return // 这里return 空即代表不对该field进行fuzz
+})
+*/
+println("------------------")
+for _, r := range records {
+    println(fuzz.ProtobufBytes(r))
+    println("------------------")
+}
+/*
+index: 2 type: varint 456
+index: 2 type: varint 123
+------------------
+2: varint: 666
+2: varint: 123
+------------------
+2: varint: 456
+2: varint: 666
+------------------
+*/
+```
+
+## 附录1：我们如何实现链式调用？
 
 
 当我们构造的对象有如下接口的时候，我们可以通过实现接口的形式来完成链式调用。
@@ -1671,3 +1787,22 @@ type FuzzHTTPRequestIf interface {
 	Show()
 }
 ```
+
+## 附录2: protobuf fuzz相关的函数
+
+```
+func ProtobufHex(var_1: any) *ProtobufRecords 
+func ProtobufBytes(var_1: any) *ProtobufRecords
+func ProtobufJSON(var_1: any) *ProtobufRecords
+func ProtobufYAML(var_1: any) *ProtobufRecords 
+
+
+func (r *ProtobufRecords) String() string
+func (r *ProtobufRecords) ToJSON() string
+func (r *ProtobufRecords) ToYAML() string 
+func (r *ProtobufRecords) ToBytes() []byte
+func (r *ProtobufRecords) ToHex() string
+func (r *ProtobufRecords) FuzzIndex(index int, callback func(index int, typ string, data interface{}) interface{}) ([][]byte, error)
+func (r *ProtobufRecords) FuzzEveryIndex(callback func(index int, typ string, data interface{}) interface{}) ([][]byte, error)
+```
+
