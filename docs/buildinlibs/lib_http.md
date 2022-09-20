@@ -19,9 +19,8 @@ HTTP 库包含三个可用的 http 子库，分别是
 #### 核心 API
 
 1. `fn http.Do(var_1: *http.Request): (*http.Response, error)` 执行一个 `*http.Request`
-1. `fn http.Get(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 Get 请求，vars
-   表示其他参数，可以通过 `http.body / http.cookie / http.header / http.ua / http.useragent` 这些参数设置
-1. `fn http.Post(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 Get 请求 vars 支持其他参数，参数同上
+1. `fn http.Get(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 GET 请求，vars 表示其他参数，可以通过 `http.body / http.cookie / http.header / http.ua / http.useragent` 这些参数设置
+1. `fn http.Post(var_1: string, vars: ...yaklib.httpOption): (*http.Response, error)` 进行 POST 请求，vars 表示其他参数，参数同上
 1. `fn http.NewRequest(method: string, url: string, vars: ...yaklib.httpOption): (*http.Request, error)`
    构筑一个 `*http.Request`，这个方法类似标准库中的 `NewRequest` 但是增加了和前面几个参数一样的
 1. `fn http.Raw(var_1: interface {}): (*http.Request, error)` 把请求解析成 `*http.Rquest` 支持 `string/bytes` 等
