@@ -64,7 +64,7 @@ module.exports = {
                             // type: "doc",
                             // docId: "intro",
                             label: "Yak 语言",
-                            href: "/docs/intro",
+                            to: "/docs/intro",
                         },
                         {
                             // {
@@ -72,7 +72,7 @@ module.exports = {
                             //     docId: "intro",
                             //     docsPluginId: "products",
                             label: "Yakit 平台",
-                            href: "/products/intro",
+                            to: "/products/intro",
                         },
                     ],
                 },

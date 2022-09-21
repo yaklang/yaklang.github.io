@@ -1,7 +1,7 @@
 version: '3'
 services:
     web:
-        image: yaklang-io-fe
+        image: v1ll4n/yaklang-io-frontend:latest
         volumes:
             - "./nginx-config/ssl:/etc/ssl"
         ports:
