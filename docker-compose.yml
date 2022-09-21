@@ -1,0 +1,29 @@
+version: '3'
+services:
+    web:
+        image: yaklang-io-fe
+        volumes:
+            - "./nginx-config/ssl:/etc/ssl"
+        ports:
+            - "8992:80"
+        # 设置为 HOST 模式会省很多事儿，也可以无缝监听本地任何地方开启的端口
+        #    1. MacOS 下，Host 模式不能用
+        #    2. Linux 下，Host 模式好用 (如果要代理本地 127.0.0.1 的后端内容的话，这个还是要处理的，很关键)
+        # network_mode: "host"
+        environment:
+            # 设置 server name
+            - SERVER_NAME=localhost
+            - LISTEN_HTTP_PORT=80
+            - LISTEN_HTTPS_PORT=443
+
+            # 设置 HTTPS 是否开启
+            #   1. true 开始监听 LISTEN_HTTPS_PORT, 并且配置证书
+            #   2. 其他值均不可开启
+            - DISABLE_HTTPS=true
+            - SSL_CERTIFICATE_PATH=/etc/ssl/crt.pem
+            - SSL_CERTIFICATE_KEY_PATH=/etc/ssl/key.pem
+
+            # 设置 /api 开头的反代设置
+            - REVERSE_PROXY_HOST=127.0.0.1
+            - REVERSE_PROXY_PORT=8080
+        restart: always
