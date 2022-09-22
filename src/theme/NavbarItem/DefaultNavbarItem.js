@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
@@ -33,13 +33,19 @@ export function NavLink({
   const isExternalLink = label && href && !isInternalUrl(href);
   const isDropdownLink = activeClassName === dropdownLinkActiveClass;
 
+  const [origin, setOrigin] = useState("")
+
+  useEffect(()=>{
+    setOrigin(window.location.origin)
+  },[])
+
   // 下拉菜单为新开窗口跳转链接
   if(isDropdownItem){
     return (
       <a
           {...(href
               ? {
-                    href: prependBaseUrlToHref ? normalizedHref : `${window.location.origin}${href}`,
+                    href: prependBaseUrlToHref ? normalizedHref : `${origin}${href}`,
                 }
               : {
                     isNavLink: true,
@@ -48,7 +54,7 @@ export function NavLink({
                     )
                         ? activeClassName
                         : "",
-                    href: `${window.location.origin}${toUrl}`,
+                    href: `${origin}${toUrl}`,
                     to: toUrl,
                     ...(activeBasePath || activeBaseRegex
                         ? {
