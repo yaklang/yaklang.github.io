@@ -56,6 +56,7 @@ module.exports = {
             },
             items: [
                 {
+                    // dropdown类型现在只能跳转网站内的页面，不能跳转外链，需要跳转外链的请修改[src/theme/NavbarItem/DefaultNavbarItem.js]文件内的dropdown逻辑
                     type: "dropdown",
                     position: "left",
                     label: "官方文档",
@@ -90,7 +91,7 @@ module.exports = {
                 },
                 {
                     position: "left",
-                    href: "https://www.yaklang.com",
+                    href: "https://chat.yaklang.com",
                     label: "Ya! 一刻",
                 },
                 // {
