@@ -39,7 +39,7 @@ export function NavLink({
       <a
           {...(href
               ? {
-                    href: prependBaseUrlToHref ? normalizedHref : href,
+                    href: prependBaseUrlToHref ? normalizedHref : `${window.location.origin}${href}`,
                 }
               : {
                     isNavLink: true,
@@ -48,6 +48,7 @@ export function NavLink({
                     )
                         ? activeClassName
                         : "",
+                    href: `${window.location.origin}${toUrl}`,
                     to: toUrl,
                     ...(activeBasePath || activeBaseRegex
                         ? {
