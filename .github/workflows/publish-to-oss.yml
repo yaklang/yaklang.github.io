@@ -32,10 +32,10 @@ name: Yarn Build CI
 
 on:
   push:
-    # branches:
-    #   - "main"
-    tags:
-      - "v*"
+    branches:
+      - "feature*"
+    # tags:
+    #   - "v*"
 
 jobs:
   build:
