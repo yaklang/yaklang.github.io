@@ -122,6 +122,30 @@ dump("Now" in time)
 dump("Add" in time.Now())
 ```
 
+
+
+### 基础运算符的扩展，合并Slice/Array: `+`
+
+与python类似，yak可以使用+号合并Slice/Array:
+
+```go
+println([1, 2, 3]  + [4, 5, 6]) // [1 2 3 4 5 6]
+println([1, 2, 3]  + ["aaa", "bbb"]) // [1 2 3 aaa bbb]
+```
+
+
+
+### 基础运算符的扩展，重复字符串: `*`
+
+与python类似，yak可以使用*号来生成重复的字符串，注意，这里`*`号只能用于生成重复的字符串，不能像python一样生成重复元素组成数组等:
+
+```go
+println("a" * 3) // aaa
+println([]byte{104} * 3) // [104 104 104]
+```
+
+
+
 ## 类型与数据结构使用
 
 ### 基础数据类型
