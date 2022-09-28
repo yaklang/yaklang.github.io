@@ -1,0 +1,50 @@
+.login-middle-body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+.login-middle-body .middle-loading-body {
+    margin-top: 10vh;
+    min-width: 400px;
+    min-height: 350px;
+    width: 50%;
+    height: 35%;
+}
+.login-middle-body .middle-loading-body .multi-spinner-container {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: 30px auto;
+    overflow: hidden;
+}
+.login-middle-body
+    .middle-loading-body
+    .multi-spinner-container
+    .multi-spinner {
+    position: absolute;
+    width: calc(100% - 9.9px);
+    height: calc(100% - 9.9px);
+    border: 5px solid transparent;
+    border-top-color: #ff5722;
+    border-radius: 50%;
+    -webkit-animation: spin 5s cubic-bezier(0.17, 0.49, 0.96, 0.76) infinite;
+    animation: spin 5s cubic-bezier(0.17, 0.49, 0.96, 0.76) infinite;
+}
+.login-middle-body .middle-loading-body .loading-body-title {
+    padding-top: 40px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+@keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
