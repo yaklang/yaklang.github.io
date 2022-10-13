@@ -29,6 +29,12 @@
                 margin-left: 16px;
                 color: #999ea8;
                 font-size: 14px;
+                .footer-a{
+                    color: #686c78;
+                }
+                .footer-a:hover{
+                    color:#ff7d23;
+                }
             }
             .link-body {
                 margin-left: 40px;
@@ -36,6 +42,9 @@
                 .footer__link-item {
                     line-height: normal;
                     color: #686c78;
+                }
+                .footer__link-item:hover{
+                    color: #ff7d23;
                 }
                 .footer__link-item + .footer__link-item {
                     margin-left: 30px;
