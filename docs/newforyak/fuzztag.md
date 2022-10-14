@@ -57,3 +57,1013 @@ sidebar_position: 10
 |`repeatstr`|`repeat:str`|重复字符串，<code>{{repeatstr(abc&#124;3)}}</code> => abcabcabc|
 |`randomupper`|`random:upper, random:lower`|随机大小写，{{randomupper(abc)}} => aBc|
 
+### 【基础标签】``{{repeatstr(str|num)}} ``重复一个字符串
+
+`repeatstr`的意思是，指定一个字符或者字符串，通过指定`num`的大小来控制字符重复的次数：
+
+1.`{{repeatstr(str|num)}}`例如：{{repeatstr(abc|3)}}意思是，abc字符串重复三次，结果为abcabcabc
+
+#### 使用案例
+
+```go
+origin := "randomStr: {{repeatstr(abc|3)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res) 
+```
+
+执行的结果为
+
+```go
+需要模糊随机渲染的字符串为： randomStr: {{repeatstr(abc|3)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=20) "randomStr: abcabcabc"
+}
+```
+
+### 【基础标签】``{{payload(str)}}`` 从数据库中加载paylaod
+
+yakit中内置payload管理功能，我们不仅可以使用yakit中内置的payload，还可以通过自己添加payload去生成自己专有的payload。
+
+`payload`的意思是，从数据库中去调用用户的payload，`str`代表的是用户添加的payload的名称。yaikit中内置`pass_top25`和`user_top10`两个payload。
+
+#### 用途
+
+可以通过payload去加载自己的字典，方便我们使用自己的字典对用户名密码等参数进行爆破或FUZZ。
+
+#### 使用案例
+
+ ```go
+origin := "randomStr: {{payload(pass_top25)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{payload(user_top10)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+ ```
+
+输出的结果就是我们payload中的内容，执行的结果为
+
+```go
+需要模糊随机渲染的字符串为： randomStr: {{payload(pass_top25)}}
+渲染结果为：
+([]string) (len=25 cap=32) {
+ (string) (len=17) "randomStr: 123456",
+ (string) (len=19) "randomStr: 12345679",
+ (string) (len=17) "randomStr: qwerty",
+ (string) (len=19) "randomStr: 12345678",
+ (string) (len=17) "randomStr: 111111",
+ (string) (len=21) "randomStr: 1234567890",
+ (string) (len=18) "randomStr: 1234567",
+ (string) (len=19) "randomStr: password",
+ (string) (len=17) "randomStr: 123123",
+ (string) (len=20) "randomStr: 987654321",
+ (string) (len=21) "randomStr: qwertyuiop",
+ (string) (len=17) "randomStr: mynoob",
+ (string) (len=17) "randomStr: 123321",
+ (string) (len=17) "randomStr: 666666",
+ (string) (len=21) "randomStr: 18atcskd2w",
+ (string) (len=18) "randomStr: 7777777",
+ (string) (len=19) "randomStr: 1q2w3e4r",
+ (string) (len=17) "randomStr: 654321",
+ (string) (len=17) "randomStr: 555555",
+ (string) (len=21) "randomStr: 3rjs1la7qe",
+ (string) (len=17) "randomStr: google",
+ (string) (len=21) "randomStr: 1q2w3e4r5t",
+ (string) (len=17) "randomStr: 123qwe",
+ (string) (len=18) "randomStr: zxcvbnm",
+ (string) (len=17) "randomStr: 1q2w3e"
+}
+需要模糊随机渲染的字符串为： randomStr: {{payload(user_top10)}}
+渲染结果为：
+([]string) (len=10 cap=16) {
+ (string) (len=15) "randomStr: root",
+ (string) (len=16) "randomStr: admin",
+ (string) (len=15) "randomStr: test",
+ (string) (len=16) "randomStr: guest",
+ (string) (len=15) "randomStr: info",
+ (string) (len=16) "randomStr: mysql",
+ (string) (len=15) "randomStr: user",
+ (string) (len=24) "randomStr: administrator",
+ (string) (len=14) "randomStr: ftp",
+ (string) (len=14) "randomStr: www"
+}
+```
+
+### 【基础标签】``{{array(str|str)}}``设置一个数组
+
+`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
+
+#### 使用案例
+
+```go
+origin := "randomStr: {{array(1|2|3)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+输出的结果为
+
+```go
+需要模糊随机渲染的字符串为： randomStr: {{array(1|2|3)}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=12) "randomStr: 1",
+ (string) (len=12) "randomStr: 2",
+ (string) (len=12) "randomStr: 3"
+}
+```
+
+### 【文件头标签】`{{ico}}` `{{tiff}}` ``{{gif}}`` ``{{png}}`` ``{{jpeg}}``
+
+yak内置了很强大的功能，我们可以通过指定文件头标签直接去生成我们需要的文件头来使用。
+
+我们可以使用`{{ico}}`来直接生成一个ico的文件头；可以使用``{{tiff}}``来生成gif文件头；使用``{{gif}}``来生成gif文件头；使用``{{png}}``来生成PNG文件头；使用``{{jpeg}}``来 生成jpeg/jpg文件头。
+
+#### 使用案例
+
+```go
+origin := "randomStr: {{ico}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{tiff}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{gif}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{png}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{jpeg}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+输出的结果为：
+
+```go
+需要模糊随机渲染的字符串为： randomStr: {{ico}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=19) "randomStr: \x00\x00\x01\x00\x01\x00  "
+}
+需要模糊随机渲染的字符串为： randomStr: {{tiff}}
+渲染结果为：
+([]string) (len=2 cap=2) {
+ (string) (len=13) "randomStr: MM",
+ (string) (len=13) "randomStr: II"
+}
+需要模糊随机渲染的字符串为： randomStr: {{gif}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=17) "randomStr: GIF89a"
+}
+需要模糊随机渲染的字符串为： randomStr: {{png}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=44) "randomStr: \x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\xce\x00\x00\x00\xce\b\x02\x00\x00\x00\xf9}\xaa\x93"
+}
+需要模糊随机渲染的字符串为： randomStr: {{jpeg}}
+渲染结果为：
+([]string) (len=2 cap=2) {
+ (string) (len=23) "randomStr: \xff\xd8\xff\xe0\x00\x10JFIF\xff\xd9",
+ (string) (len=23) "randomStr: \xff\xd8\xff\xe1\x00\x1cExif\xff\xd9"
+}
+```
+
+### 【基础标签】`{{punctuation}} / {{punc}}` Fuzz 所有可见标点符号
+
+这也是一个非常常见的 Fuzz 标签，这个标签本身并没有参数，使用它，将会在标签位置用键盘上所有可见标点符号来替换。
+
+当前标签 `{{punctuation}}` 或者 `{{punc}}` 将会被替换成的符号如下：
+
+```go
+[< > ? , . / : " ; ' { } [ ] | \ _ + - = ) ( * & ^ % $ # @ ! `]
+```
+
+#### `{{punctuation}}` 用法：生成 Payload
+
+```go
+for _, r := range fuzz.Strings("1'='1'and(true){{punctuation}}") {
+    println(r)
+}
+```
+
+当我们执行上述代码之后，我们将会生成一批带标点符号的 Payload，结果如下：
+
+```go
+1'='1'and(true)<
+1'='1'and(true)>
+1'='1'and(true)?
+1'='1'and(true),
+1'='1'and(true).
+1'='1'and(true)/
+1'='1'and(true):
+1'='1'and(true)"
+1'='1'and(true);
+1'='1'and(true)'
+1'='1'and(true){
+1'='1'and(true)}
+1'='1'and(true)[
+1'='1'and(true)]
+1'='1'and(true)|
+1'='1'and(true)\
+1'='1'and(true)_
+1'='1'and(true)+
+1'='1'and(true)-
+1'='1'and(true)=
+1'='1'and(true))
+1'='1'and(true)(
+1'='1'and(true)*
+1'='1'and(true)&
+1'='1'and(true)^
+1'='1'and(true)%
+1'='1'and(true)$
+1'='1'and(true)#
+1'='1'and(true)@
+1'='1'and(true)!
+1'='1'and(true)`
+```
+
+### 【基础标签】`{{rangechar}}` 制定生成任意字符
+
+通常来说，我们除了在使用特殊标点符号的时候，经常还需要生成一些不可见字符，我们在 Yak 中如何生成不可见字符呢？
+
+#### 可用定义：
+
+1. `{{rangechar(charMax)}}`: 输入生成字符范围（使用16进制），默认最小为0，charMax 为最大的字符值（UTF8 编码）
+1. `{{rangechar(min,max)}}`: 输入生成字符的范围（使用16进制），最小为 `min`，最大为 `max`。
+
+#### 案例：使用 `{{rangechar}}` 生成 `0x00-0x20` 的字符
+
+```go
+for _, r := range fuzz.Strings("0x{{hex({{rangechar(0,20)}})}}") {
+    println(r)
+}
+```
+
+生成结果为（当然为了方便观察，我们使用了 `{{hex}}`，来把字符串变成我们习惯的 16 进制来验证。）
+
+```go
+0x00
+0x01
+0x02
+0x03
+0x04
+0x05
+0x06
+...
+...
+...
+0x17
+0x18
+0x19
+0x1a
+0x1b
+0x1c
+0x1d
+0x1e
+0x1f
+0x20
+```
+
+### 【基础标签】`{{net}} / {{host}}` 渲染扫描目标
+
+这个标签本质上和 `str.ParseStringToHosts` 一样，会造成相同的效果，我们会把目标拆分成多个主机，支持网段，域名，IP 等。解析结果都是以 `,` 为分割的。
+
+例如
+当我们执行如下代码
+
+```go
+origin := "{{net(192.168.1.1/28,example.com,10.3.1.2)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+执行结果为
+
+```go
+需要模糊渲染的字符串为： {{net(192.168.1.1/28,example.com,10.3.1.2)}}
+渲染结果为：
+([]string) (len=18 cap=18) {
+ (string) (len=11) "192.168.1.0",
+ (string) (len=11) "192.168.1.1",
+ (string) (len=11) "192.168.1.2",
+ (string) (len=11) "192.168.1.3",
+ (string) (len=11) "192.168.1.4",
+ (string) (len=11) "192.168.1.5",
+ (string) (len=11) "192.168.1.6",
+ (string) (len=11) "192.168.1.7",
+ (string) (len=11) "192.168.1.8",
+ (string) (len=11) "192.168.1.9",
+ (string) (len=12) "192.168.1.10",
+ (string) (len=12) "192.168.1.11",
+ (string) (len=12) "192.168.1.12",
+ (string) (len=12) "192.168.1.13",
+ (string) (len=12) "192.168.1.14",
+ (string) (len=12) "192.168.1.15",
+ (string) (len=11) "example.com",
+ (string) (len=8) "10.3.1.2"
+}
+```
+
+#### 别名
+
+别名类似 `{{int(1-10)}}` 的各种别名，`{{net}}` 本身也支持各种别名，他们彼此之间等效，我们以 `{{net(10.3.0.1/24)}}` 为例，如下标签全部等效。
+
+1. `{{host(10.3.0.1/24)}}`
+1. `{{hosts(10.3.0.1/24)}}`
+1. `{{cidr(10.3.0.1/24)}}`
+1. `{{ip(10.3.0.1/24)}}`
+1. `{{net(10.3.0.1/24)}}`
+1. `{{network(10.3.0.1/24)}}`
+
+#### 经典案例：配合 `{{int}}` 来使用
+
+当我们需要批量生成一批 URL，我们应该如何做？可以参考如下案例
+
+```go
+origin := "http://{{net(176.1.0.1/28,example.com)}}:{{port(8080)}}/admin.php"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+输出结果为
+
+```txt
+需要模糊渲染的字符串为： http://{{net(176.1.0.1/28,example.com)}}:{{port(8080)}}/admin.php
+渲染结果为：
+([]string) (len=17 cap=18) {
+ (string) (len=31) "http://176.1.0.0:8080/admin.php",
+ (string) (len=31) "http://176.1.0.1:8080/admin.php",
+ (string) (len=31) "http://176.1.0.2:8080/admin.php",
+ (string) (len=31) "http://176.1.0.3:8080/admin.php",
+ (string) (len=31) "http://176.1.0.4:8080/admin.php",
+ (string) (len=31) "http://176.1.0.5:8080/admin.php",
+ (string) (len=31) "http://176.1.0.6:8080/admin.php",
+ (string) (len=31) "http://176.1.0.7:8080/admin.php",
+ (string) (len=31) "http://176.1.0.8:8080/admin.php",
+ (string) (len=31) "http://176.1.0.9:8080/admin.php",
+ (string) (len=32) "http://176.1.0.10:8080/admin.php",
+ (string) (len=32) "http://176.1.0.11:8080/admin.php",
+ (string) (len=32) "http://176.1.0.12:8080/admin.php",
+ (string) (len=32) "http://176.1.0.13:8080/admin.php",
+ (string) (len=32) "http://176.1.0.14:8080/admin.php",
+ (string) (len=32) "http://176.1.0.15:8080/admin.php",
+ (string) (len=33) "http://example.com:8080/admin.php"
+}
+```
+
+### 【基础标签】`{{int}}` 渲染整数/端口
+
+这是我们目前接触过的第一个标签，可以把 `1-10,44,80-800` 这种数字范围的端口转变成分别的数字。
+
+1. 例如 `1-10` 变成 `[1 2 3 4 5 6 ... 9 10]`
+2. `1-4,7-9` 变成 `[1 2 3 4 7 8 9]`
+
+#### 用途
+
+最常用的用户其实是渲染一个端口，端口组；
+
+当然，如果我们想要爆破密码的时候，生成密码也可以使用这个标签。
+
+#### 用法用例，疑难杂症
+
+##### 案例一：最简单的用法
+
+我们接触过这个例子，其实非常容易理解
+
+```go
+origin := "{{int(1,3,4,80-88)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+/*
+OUTPUT:
+
+需要模糊渲染的字符串为： {{int(1,3,4,80-88)}}
+渲染结果为：
+([]string) (len=12 cap=12) {
+ (string) (len=1) "1",
+ (string) (len=1) "3",
+ (string) (len=1) "4",
+ (string) (len=2) "80",
+ (string) (len=2) "81",
+ (string) (len=2) "82",
+ (string) (len=2) "83",
+ (string) (len=2) "84",
+ (string) (len=2) "85",
+ (string) (len=2) "86",
+ (string) (len=2) "87",
+ (string) (len=2) "88"
+}
+*/
+```
+
+##### 案例二：重复渲染与独立渲染
+
+基本上所有的标签都支持这个特性，我们作为对比，举下面两个例子，来说明重复渲染和独立渲染究竟是怎么一回事
+
+```go
+origin := "{{int(1-5)}}{{int(1-5)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+当我们执行上面的脚本，应该渲染出的内容我们可能会认为是
+
+```txt
+11
+12
+13
+14
+...
+31
+32
+33
+...
+53
+54
+55
+```
+
+但是实际上是这样吗？我们执行之后发现
+
+```go
+需要模糊渲染的字符串为： {{int(1-5)}}{{int(1-5)}}
+渲染结果为：
+([]string) (len=5 cap=5) {
+ (string) (len=2) "11",
+ (string) (len=2) "22",
+ (string) (len=2) "33",
+ (string) (len=2) "44",
+ (string) (len=2) "55"
+}
+```
+
+这是由于，本质上这个技术是采用字符串替换来操作的，完全相同的标签会被替换成同一个目标，这非常关键。
+
+但是我们如果想，分别渲染，获得我们一开始预期的结果，应该如何操作？
+
+我们可以把渲染的目标修改为其他等效标签，例如 `{{int1(1-5)}}` `{{i(1-5)}}` 等，这样替换就可以独立渲染标签了，这个特性不止本标签适用，其他的标签均可使用。
+
+```go
+需要模糊渲染的字符串为： {{int1(1-5)}}{{int(1-5)}}
+渲染结果为：
+([]string) (len=25 cap=26) {
+ (string) (len=2) "11",
+ (string) (len=2) "12",
+ (string) (len=2) "13",
+ (string) (len=2) "14",
+ (string) (len=2) "15",
+ (string) (len=2) "21",
+ (string) (len=2) "22",
+ (string) (len=2) "23",
+ (string) (len=2) "24",
+ (string) (len=2) "25",
+ (string) (len=2) "31",
+ (string) (len=2) "32",
+ (string) (len=2) "33",
+ (string) (len=2) "34",
+ (string) (len=2) "35",
+ (string) (len=2) "41",
+ (string) (len=2) "42",
+ (string) (len=2) "43",
+ (string) (len=2) "44",
+ (string) (len=2) "45",
+ (string) (len=2) "51",
+ (string) (len=2) "52",
+ (string) (len=2) "53",
+ (string) (len=2) "54",
+ (string) (len=2) "55"
+}
+```
+
+##### 案例三：生成随机数爆破
+
+如果我们想用yaki进行爆破四位或者六位数的验证码，也是很容易可以实现的。``{{int(1-5|4)}}`` 前面``1-5``生成1-5的整数，后边的4则是规定每个数字必须为四位数。这里演示一下四位验证码的生成方式。
+
+```go
+origin := "{{int(1-20|4)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+这样我们可以获取到20个4位的随机数，如果想要获取更多数字只需要给20的值拉大即可。
+
+```go
+需要模糊渲染的字符串为： {{int(1-20|4)}}
+渲染结果为：
+([]string) (len=20 cap=32) {
+ (string) (len=4) "0001",
+ (string) (len=4) "0002",
+ (string) (len=4) "0003",
+ (string) (len=4) "0004",
+ (string) (len=4) "0005",
+ (string) (len=4) "0006",
+ (string) (len=4) "0007",
+ (string) (len=4) "0008",
+ (string) (len=4) "0009",
+ (string) (len=4) "0010",
+ (string) (len=4) "0011",
+ (string) (len=4) "0012",
+ (string) (len=4) "0013",
+ (string) (len=4) "0014",
+ (string) (len=4) "0015",
+ (string) (len=4) "0016",
+ (string) (len=4) "0017",
+ (string) (len=4) "0018",
+ (string) (len=4) "0019",
+ (string) (len=4) "0020"
+}
+```
+
+### 【基础标签】`{{randint}}` 生成一个随机数字
+
+这个标签和 randstr 用途基本一样，用于生成随机一个整数。
+
+同样的，这个标签分为四种情况
+
+1. `{{randint(max)}}` 生成一个最大值不超过 max 的随机整数
+1. `{{randint(min,max)}}` 生成一个最大最小值在 min 和 max 之间的整数
+1. `{{randint(min,max,repeat)}}` 生成 `repeat` 个值在 `min` 和 `max`
+1. `{{randint}}` 等价于 `{{randint(10)}}`
+
+#### 别名
+
+#### 使用案例
+
+```go
+origin := "randomInt: {{randint}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{randint(10)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+
+origin := "randomStr: {{randint(4,20)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+
+origin := "randomStr: {{randint(100,233,5)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+执行的结果为
+
+```go
+需要模糊随机渲染的字符串为： randomInt: {{randint}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=12) "randomInt: 7"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randint(10)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=12) "randomStr: 2"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randint(4,20)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=12) "randomStr: 5"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randint(100,233,5)}}
+渲染结果为：
+([]string) (len=4 cap=4) {
+ (string) (len=14) "randomStr: 132",
+ (string) (len=14) "randomStr: 202",
+ (string) (len=14) "randomStr: 106",
+ (string) (len=14) "randomStr: 147"
+}
+```
+
+### 【基础标签】`{{randstr}}` 生成随机字符串
+
+`randstr` 是一个非常常见的渲染模版，这个模版的意思是，生成一个随机字符串，只包含二十六个英文字母大小写，值得注意的是，`{{randstr}}` 的参数有四种不同类型分别如下：
+
+1. `{{randstr(length)}}` 例如：`{{randstr(8)}}` 意思是，生成一个长度是 8 的随机字符串
+1. `{{randstr(min,max)}}` 生成一个长度在 `min` 和 `max` 之间的随机字符串，例如 `{{randstr(4,8)}}`
+1. `{{randstr(min,max,repeat)}}` 重复 `repeat` 次生成一个 `min` 和 `max` 之间长度的字符串组
+1. `{{randstr}}` 例如：`{{randstr}}` 就可以直接被渲染，等效为 `{{randstr(8,8)}}`
+
+#### 别名
+
+我们以 `{{randstr}}` 为例，他的各种别名如下
+
+1. `{{randstr}}`
+1. `{{rands}}`
+1. `{{rs}}`
+
+#### 使用案例
+
+```go
+origin := "randomStr: {{randstr}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "randomStr: {{randstr(8)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+
+origin := "randomStr: {{randstr(4,8)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+
+origin := "randomStr: {{randstr(5,7,5)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+上述的内容，执行的结果为
+
+```go
+需要模糊随机渲染的字符串为： randomStr: {{randstr}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=19) "randomStr: AWHESDJX"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randstr(8)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=19) "randomStr: ybLgYLTx"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randstr(4,8)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=17) "randomStr: GUeSOz"
+}
+需要模糊随机渲染的字符串为： randomStr: {{randstr(5,7,5)}}
+渲染结果为：
+([]string) (len=5 cap=5) {
+ (string) (len=16) "randomStr: EddRe",
+ (string) (len=17) "randomStr: ozAPsC",
+ (string) (len=17) "randomStr: VvnVWO",
+ (string) (len=16) "randomStr: hXnGv",
+ (string) (len=17) "randomStr: RnzgkC"
+}
+```
+
+### 【基础标签】`{{file:line(dir)}}` 解析文件内容以数组输出
+
+``{{file:line(dir)}}``可以从本地读取我们的文件，并以数组的形式返回。如果我们需要读取多个文件，可以用`|`来进行分割。
+
+#### 使用案例
+
+```go
+origin := "{{file:line(/private/tmp/1.txt)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "{{file:line(/private/tmp/1.txt|/private/tmp/2.txt)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+第一个读取1.txt的文件，第二个读取1.txt和2.txt的文件，输出结果如下：
+
+```go
+需要模糊渲染的字符串为： {{file:line(/private/tmp/1.txt)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=5) "Yakit"
+}
+需要模糊渲染的字符串为： {{file:line(/private/tmp/1.txt|/private/tmp/2.txt)}}
+渲染结果为：
+([]string) (len=2 cap=2) {
+ (string) (len=5) "Yakit",
+ (string) (len=6) "Yakit1"
+}
+```
+
+### 【基础标签】``{{file()}}``读取文件内容
+
+``{{file()}}``使用方式和``{{file:line()}}``基本相同。可以读取文件内容，并且可以支持多个文件，用``|``分割。
+
+#### 使用案例
+
+```go
+origin := "{{file(/private/tmp/1.txt)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+
+origin := "{{file(/private/tmp/1.txt|/private/tmp/2.txt)}}"
+res := fuzz.Strings(origin)
+println("需要模糊渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+```
+
+读取多个文件的时候用``|``分割即可，输出结果如下：
+
+```go
+需要模糊渲染的字符串为： {{file(/private/tmp/1.txt)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=6) "Yakit\n"
+}
+需要模糊渲染的字符串为： {{file(/private/tmp/1.txt|/private/tmp/2.txt)}}
+渲染结果为：
+([]string) (len=2 cap=2) {
+ (string) (len=6) "Yakit\n",
+ (string) (len=7) "Yakit2\n"
+}
+```
+
+
+
+### 【编码标签】`{{base64}} {{md5}} {{hex}} {{sha1}} {{sha256}} {{sha512}} {{urlenc}}  {{doubleurlenc}} {{htmlenc}} {htmlhexenc}`
+
+这几个编码标签对应 `codec` \([点击这里查看具体函数](./lib_codec)\) 这个包中的各个函数
+
+#### 定义说明
+
+1. `{{base64(txt)}}` 把 txt 进行 base64 编码，等价于 `codec.EncodeBase64`
+1. `{{md5(txt)}}` 把 txt 编码成 md5，等价于 `codec.Md5`
+1. `{{hex(txt)}}` 把 txt 进行 HEX 编码，等价于 `codec.EncodeToHex`
+1. `{{sha1(txt)}}` 把 txt 进行双 sha1 编码，等价于 `codec.Sha1`
+1. `{{sha256(txt)}}` 把 txt 进行 sha256 编码，等价于 `codec.Sha256`
+1. `{{sha512(txt)}}` 把 txt 进行 sha521编码，等价于 `codec.Sha512`
+1. `{{urlenc(txt)}}` 把 txt 进行 url 编码，等价于 `codec.EncodeUrl`
+1. `{{doubleurlenc(txt)}}` 把 txt 进行 双重url 编码，等价于 `codec.DoubleEncodeUrl`
+1. `{{htmlenc(txt)}}` 把 txt 进行 html 实体编码，等价于 `codec.EncodeHtml`
+1. `{{htmlhexenc(txt)}}` 把 txt 进行 html 十六进制实体编码，等价于 `codec.EncodeHtmlHex`
+
+
+#### 使用案例
+
+```go
+for _, origin := range [
+    "{{base64({{int(1000-1002)}})}}",
+    "{{md5({{int(1000-1002)}})}}",
+    "{{hex({{int(1000-1002)}})}}",
+    "{{sha1({{int(1000-1002)}})}}",
+    "{{sha256({{int(1000-1002)}})}}",
+    "{{sha512({{int(1000-1002)}})}}",
+    "{{urlenc({{int(1000-1002)}})}}",
+    "{{doubleurlenc({{int(1000-1002)}})}}",
+    "{{htmlenc({{int(1000-1002)}})}}",
+    "{{htmlhexenc({{int(1000-1002)}})}}",
+] {
+    res := fuzz.Strings(origin)
+    println("需要模糊随机渲染的字符串为：", origin)
+    println("渲染结果为：")
+    dump(res)
+    println("---------------------")
+}
+```
+
+为了展示嵌套的效果，我们针对 `[1000 1001 1002]` 这三个数字分别进行编码。
+
+```go
+&#49;&#48;&#48;&#48;
+%31%30%30%30
+line 1: call func codec.EscapeQueryUrl(v1) failed
+ your code: `codec.EscapeQueryUrl(1000)` may be error:
+    invalid argument type: require `string`, but we got `int`
+需要模糊随机渲染的字符串为： {{base64({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=8) "MTAwMA==",
+ (string) (len=8) "MTAwMQ==",
+ (string) (len=8) "MTAwMg=="
+}
+---------------------
+需要模糊随机渲染的字符串为： {{md5({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=32) "a9b7ba70783b617e9998dc4dd82eb3c5",
+ (string) (len=32) "b8c37e33defde51cf91e1e03e51657da",
+ (string) (len=32) "fba9d88164f3e2d9109ee770223212a0"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{hex({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=8) "31303030",
+ (string) (len=8) "31303031",
+ (string) (len=8) "31303032"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{sha1({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=40) "e3cbba8883fe746c6e35783c9404b4bc0c7ee9eb",
+ (string) (len=40) "dd01903921ea24941c26a48f2cec24e0bb0e8cc7",
+ (string) (len=40) "a5b1d7e217aa227d5b2b8a84920780cf637960e2"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{sha256({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=64) "40510175845988f13f6162ed8526f0b09f73384467fa855e1e79b44a56562a58",
+ (string) (len=64) "fe675fe7aaee830b6fed09b64e034f84dcbdaeb429d9cccd4ebb90e15af8dd71",
+ (string) (len=64) "b281bc2c616cb3c3a097215fdc9397ae87e6e06b156cc34e656be7a1a9ce8839"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{sha512({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=128) "1227de669e122a546edf39f0ded50cd2b6332793dc55d835b21be05bd529511655877292748c25f8fc2b5f1d5c987d9aaed2fc92c7e59a448e51cdf1dc5351a3",
+ (string) (len=128) "e3d0e2ef3cab0dab2c12f297e3bc618f6b976aced29b3a301828c6f9f1e1aabbe6dab06e1f899c9c2ae2ca86caa330115218817f4ce36d333733cb2b4c7afde7",
+ (string) (len=128) "59963bfd1fef9ea453959517c8755d00cfa0d7c57f112404f3ca9def63986c149d9aabb28ccb225b5a3470e42a170141558d6d6b87ff104931c754fad0d5c933"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{urlenc({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=12) "%31%30%30%30",
+ (string) (len=12) "%31%30%30%31",
+ (string) (len=12) "%31%30%30%32"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{doubleurlenc({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=20) "%2531%2530%2530%2530",
+ (string) (len=20) "%2531%2530%2530%2531",
+ (string) (len=20) "%2531%2530%2530%2532"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{htmlenc({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=20) "&#49;&#48;&#48;&#48;",
+ (string) (len=20) "&#49;&#48;&#48;&#49;",
+ (string) (len=20) "&#49;&#48;&#48;&#50;"
+}
+---------------------
+需要模糊随机渲染的字符串为： {{htmlhexenc({{int(1000-1002)}})}}
+渲染结果为：
+([]string) (len=3 cap=4) {
+ (string) (len=24) "&#x31;&#x30;&#x30;&#x30;",
+ (string) (len=24) "&#x31;&#x30;&#x30;&#x31;",
+ (string) (len=24) "&#x31;&#x30;&#x30;&#x32;"
+}
+---------------------
+```
+
+### 【插件标签】{{yak}}{{params}}{{codec}}
+
+这几个标签会调用用户定义的函数
+
+#### 定义说明
+
+1. `{{yak(handle|params)}}` 此标签只能在webfuzzer 里面配置了热加载 函数之后使用params为传入的参数
+1. `{{params}}` 此标签能方便用户动态获取不同的参数
+1. `{{codec()}}` 次标签能直接调用Codec模块的插件
+
+#### 使用案例
+
+```go
+{{yak(handle|{{x(pass_top25)}})}}
+
+其中handle的定义如下
+handle = func(param) {
+    // 在这里可以直接返回一个字符串
+    return codec.EncodeBase64("base64-prefix" + param) + sprintf("_origin(%v)", param)
+}
+
+/*
+YmFzZTY0LXByZWZpeDEyMzQ1Ng==_origin(123456)
+YmFzZTY0LXByZWZpeDEyMzQ1Njc5_origin(12345679)
+YmFzZTY0LXByZWZpeHF3ZXJ0eQ==_origin(qwerty)
+YmFzZTY0LXByZWZpeDEyMzQ1Njc4_origin(12345678)
+YmFzZTY0LXByZWZpeDExMTExMQ==_origin(111111)
+YmFzZTY0LXByZWZpeDEyMzQ1Njc4OTA=_origin(1234567890)
+YmFzZTY0LXByZWZpeDEyMzQ1Njc=_origin(1234567)
+YmFzZTY0LXByZWZpeHBhc3N3b3Jk_origin(password)
+YmFzZTY0LXByZWZpeDEyMzEyMw==_origin(123123)
+YmFzZTY0LXByZWZpeDk4NzY1NDMyMQ==_origin(987654321)
+YmFzZTY0LXByZWZpeHF3ZXJ0eXVpb3A=_origin(qwertyuiop)
+YmFzZTY0LXByZWZpeG15bm9vYg==_origin(mynoob)
+YmFzZTY0LXByZWZpeDEyMzMyMQ==_origin(123321)
+YmFzZTY0LXByZWZpeDY2NjY2Ng==_origin(666666)
+YmFzZTY0LXByZWZpeDE4YXRjc2tkMnc=_origin(18atcskd2w)
+YmFzZTY0LXByZWZpeDc3Nzc3Nzc=_origin(7777777)
+YmFzZTY0LXByZWZpeDFxMnczZTRy_origin(1q2w3e4r)
+YmFzZTY0LXByZWZpeDY1NDMyMQ==_origin(654321)
+YmFzZTY0LXByZWZpeDU1NTU1NQ==_origin(555555)
+YmFzZTY0LXByZWZpeDNyanMxbGE3cWU=_origin(3rjs1la7qe)
+YmFzZTY0LXByZWZpeGdvb2dsZQ==_origin(google)
+YmFzZTY0LXByZWZpeDFxMnczZTRyNXQ=_origin(1q2w3e4r5t)
+YmFzZTY0LXByZWZpeDEyM3F3ZQ==_origin(123qwe)
+YmFzZTY0LXByZWZpeHp4Y3Zibm0=_origin(zxcvbnm)
+YmFzZTY0LXByZWZpeDFxMnczZQ==_origin(1q2w3e)
+*/
+
+```
+
+```go
+
+{"key":"{{params(test)}}","key2":"{{params(test2)}}"}
+
+其中参数定义如下
+
+__getParams__ = func() {
+    /*
+        __getParams__ 是一个用户可控生成复杂数据初始数据的参数：
+        可以在这个函数中同时处理所有数据：
+        
+        1. CSRF Bypass
+        2. 获取额外信息，进行强关联的信息变形
+    */
+
+    return {
+        "test":"aaa",
+        "test2":["aaa","2222"],
+    }
+}
+
+输出
+/*
+{"key":"aaa","key2":"aaa"}
+{"key":"aaa","key2":"2222"}
+*/
+```
+
+```go
+先编写Codec模块插件 代码如下 命名为test
+handle = func(origin /*string*/) {
+    # handle your origin str
+    return str.Join(["12312312", "abc", "def"], "\n")
+}
+
+之后
+origin = "{{codec(test)}}"
+res := fuzz.Strings(origin)
+println("需要模糊随机渲染的字符串为：", origin)
+println("渲染结果为：")
+dump(res)
+println("---------------------")
+
+需要模糊随机渲染的字符串为： {{codec(test)}}
+渲染结果为：
+([]string) (len=1 cap=1) {
+ (string) (len=16) "12312312\nabc\ndef"
+}
+---------------------
+
+```
+
