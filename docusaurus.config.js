@@ -151,7 +151,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. Own by v1ll4n. Powered by Docusaurus`,
+            copyright: `<a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">Copyright © ${new Date().getFullYear()} for Yak Project. 京ICP备17047700号-3</a>`,
         },
         algolia: {
             // The application ID provided by Algolia
