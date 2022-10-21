@@ -292,6 +292,17 @@ const ConsultantInfo: ConsultantInfoProps[] = [
         description: "首席法律顾问",
         address: "常州",
     },
+    {
+        img: "/img/team/HTZhang.jpg",
+        name: "HT.Zhang",
+        links: [
+            {
+                name: "@郑州大学",
+            },
+        ],
+        description: "网络安全践行者/教育者",
+        address: "郑州",
+    },
 ];
 
 interface ThanksForInfoProps {
