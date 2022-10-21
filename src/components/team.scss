@@ -133,6 +133,7 @@
             padding-right: 20px;
             padding-left: 20px;
             .consultant-member-grid-wrapper {
+                max-width: 1152px;
                 display: grid;
                 grid-gap: 24px;
                 grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));

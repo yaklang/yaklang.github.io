@@ -94,6 +94,12 @@ module.exports = {
                     href: "https://chat.yaklang.com",
                     label: "Ya! 一刻",
                 },
+                {
+                    position: "left",
+                    to: "/cooperativePartner",
+                    activeBasePath: "pages",
+                    label: "合作伙伴",
+                },
                 // {
                 //     position: "left",
                 //     to: "/team",
