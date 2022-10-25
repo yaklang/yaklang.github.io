@@ -50,9 +50,10 @@ export const CooperativePartnerPage: React.FC<
       links: "https://hacking.club",
     },
     {
-      img: "/img/partner/logo.svg",
+      img: "/img/partner/sec-in.png",
       name: "云众可信",
-      links: "https://www.cloudcrowd.com.cn/",
+      links: "https://sec-in.com",
+      scale:"0.8"
     },
     {
       img: "/img/partner/security58.png",
@@ -63,7 +64,7 @@ export const CooperativePartnerPage: React.FC<
       img: "/img/partner/CTstack.png",
       name: "CTstack",
       links: "https://stack.chaitin.com/tool/detail?id=1",
-      scale:"0.75"
+      scale:"0.7"
     },
     {
       img: "/img/partner/acmesec.png",
@@ -108,6 +109,11 @@ export const CooperativePartnerPage: React.FC<
       name: "度小满",
       links: "https://security.duxiaoman.com",
       scale:"1.1"
+    },
+    {
+      img: "/img/partner/logo.png",
+      name: "",
+      links: "https://hunter.qianxin.com",
     },
   ];
 
