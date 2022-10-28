@@ -45,9 +45,20 @@ export const CooperativePartnerPage: React.FC<
 > = () => {
   const CooperativePartnerInfo: CooperativePartnerInfoProps[] = [
     {
+      img: "/img/partner/logo.png",
+      name: "奇安信",
+      links: "https://hunter.qianxin.com",
+    },
+    {
       img: "/img/partner/hacking.png",
       name: "HackingClub",
       links: "https://hacking.club",
+    },
+    {
+      img: "/img/partner/acmesec.png",
+      name: "米斯特安全",
+      links: "http://www.acmesec.cn/",
+      scale:"0.9"
     },
     {
       img: "/img/partner/sec-in.png",
@@ -66,12 +77,7 @@ export const CooperativePartnerPage: React.FC<
       links: "https://stack.chaitin.com/tool/detail?id=1",
       scale:"0.7"
     },
-    {
-      img: "/img/partner/acmesec.png",
-      name: "米斯特安全",
-      links: "http://www.acmesec.cn/",
-      scale:"0.9"
-    },
+  
     {
       img: "/img/partner/E安全.png",
       name: "E安全",
@@ -110,10 +116,38 @@ export const CooperativePartnerPage: React.FC<
       links: "https://security.duxiaoman.com",
       scale:"1.1"
     },
+
     {
-      img: "/img/partner/logo.png",
-      name: "",
-      links: "https://hunter.qianxin.com",
+      img: "/img/partner/beike.png",
+      name: "贝壳",
+      links: "https://security.ke.com",
+    },
+    {
+      img: "/img/partner/kuaishou.png",
+      name: "快手",
+      links: "https://security.kuaishou.com/",
+    },
+    // {
+    //   img: "/img/partner/butian.png",
+    //   name: "补天",
+    //   links: "https://www.butian.net/",
+    // },
+    {
+      img: "/img/partner/xiaomi.png",
+      name: "小米",
+      links: "https://sec.xiaomi.com",
+    },
+    
+    {
+      img: "/img/partner/wutang.png",
+      name: "无糖信息",
+      links: "https://www.nosugartech.com/#/",
+      scale:"0.85"
+    },
+    {
+      img: "/img/partner/sycsec.png",
+      name: "三叶草",
+      links: "https://www.sycsec.com/",
     },
   ];
 
