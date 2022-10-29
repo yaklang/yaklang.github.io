@@ -9,7 +9,7 @@ sidebar_position: 10
 |标签名|标签别名|标签描述|
 |:-------|:-------|:-------|
 |`char`|`c, ch`|生成一个字符，例如：`{{char(a-z)}}`, 结果为 [a b c ... x y z]|
-|`repeat`|  |重复一个字符串，例如：<code>{{repeat(abc&#124;3)}}</code>，结果为：abcabcabc|
+|`repeat`|  |重复产生空字符串，例如：<code>{{repeat(3)}}</code>，结果为：["", "", ""] 一般用来重复发包，或重复生成数据|
 |`payload`|`x`|从数据库加载 Payload, `{{payload(pass_top25)}}`|
 |`array`|`list`|设置一个数组，使用 `&#124;` 分割，例如：<code>{{array(1&#124;2&#124;3)}}</code>，结果为：[1,2,3]，|
 |`ico`|  |生成一个 ico 文件头，例如 `{{ico}}`|
