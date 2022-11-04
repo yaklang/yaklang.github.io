@@ -13,7 +13,9 @@
  | [poc.ParseUrlToHTTPRequestRaw](#pocparseurltohttprequestraw) | 把 URL 解析成原始数据包 |
  | [poc.ReplaceBody](#pocreplacebody) |  |
  | [poc.Split](#pocsplit) | 把一个数据包的 Header 部分和 Body 分开，Header 是 string，body 部分是 bytes |
+ | [poc.Websocket](#pocwebsocket) |  |
  | [poc.host](#pochost) | 强制指定连接 Host（一般用于 host） |
+ | [poc.http2](#pochttp2) |  |
  | [poc.https](#pochttps) | forceHttps |
  | [poc.jsRedirect](#pocjsredirect) | 控制 js 跳转是否启用 |
  | [poc.noFixContentLength](#pocnofixcontentlength) | 不修复 ContentLength 控制开关 |
@@ -23,7 +25,13 @@
  | [poc.proxy](#pocproxy) | 设置代理 |
  | [poc.redirectHandler](#pocredirecthandler) | 设置重定向处理函数 |
  | [poc.redirectTimes](#pocredirecttimes) | 设置重定向的次数 |
+ | [poc.retryInStatusCode](#pocretryinstatuscode) |  |
+ | [poc.retryNotInStatusCode](#pocretrynotinstatuscode) |  |
+ | [poc.retryTimes](#pocretrytimes) |  |
  | [poc.timeout](#poctimeout) | 设置 PoC Timeout |
+ | [poc.websocket](#pocwebsocket) |  |
+ | [poc.websocketFromServer](#pocwebsocketfromserver) |  |
+ | [poc.websocketOnClient](#pocwebsocketonclient) |  |
 
 
 
@@ -357,6 +365,40 @@
 
 
  
+### poc.Websocket
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.Websocket(v1: any, v2 ...yaklib.pocConfig) return (r0: bytes, r1: bytes, r2: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `...yaklib.pocConfig` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `bytes` |   |
+| r2 | `error` |   |
+
+
+ 
 ### poc.host
 
 强制指定连接 Host（一般用于 host）
@@ -375,6 +417,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | host | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.http2
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.http2(v1: bool) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 
@@ -667,6 +740,99 @@ forceHttps
 
 
  
+### poc.retryInStatusCode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.retryInStatusCode(v1 ...int) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.retryNotInStatusCode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.retryNotInStatusCode(v1 ...int) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.retryTimes
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.retryTimes(v1: int) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
 ### poc.timeout
 
 设置 PoC Timeout
@@ -685,6 +851,99 @@ forceHttps
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | seconds | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.websocket
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.websocket(v1: bool) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.websocketFromServer
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.websocketFromServer(v1: func (v1: bytes, v2: func () ) ) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bytes, v2: func () ) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func pocConfig(v1: *yaklib._pocConfig) ` |   |
+
+
+ 
+### poc.websocketOnClient
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func poc.websocketOnClient(v1: func (v1: *lowhttp.WebsocketClient) ) return (r0: func pocConfig(v1: *yaklib._pocConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: *lowhttp.WebsocketClient) ` |   |
 
 
 

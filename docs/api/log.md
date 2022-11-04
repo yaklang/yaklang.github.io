@@ -6,8 +6,6 @@
  | [log.debug](#logdebug) | 打印日志调试信息 |
  | [log.error](#logerror) | 打印日志错误信息 |
  | [log.info](#loginfo) | 打印日志【信息】 |
- | [log.quiet](#logquiet) |  |
- | [log.recover](#logrecover) |  |
  | [log.setLevel](#logsetlevel) | 设置当前脚本的日志级别 |
  | [log.warn](#logwarn) | 打印日志信息【警告级别】 |
 
@@ -94,40 +92,6 @@
 
 
 
-
- 
-
- 
-### log.quiet
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-``func log.quiet()``
-
- 
-
- 
-
- 
-### log.recover
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-``func log.recover()``
-
- 
 
  
 

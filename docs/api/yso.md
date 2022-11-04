@@ -36,14 +36,17 @@
  | [yso.GetGroovy1JavaObject](#ysogetgroovy1javaobject) |  |
  | [yso.GetJBossInterceptors1JavaObject](#ysogetjbossinterceptors1javaobject) |  |
  | [yso.GetJSON1JavaObject](#ysogetjson1javaobject) |  |
+ | [yso.GetJavaObjectFromBytes](#ysogetjavaobjectfrombytes) |  |
  | [yso.GetJavassistWeld1JavaObject](#ysogetjavassistweld1javaobject) |  |
  | [yso.GetJdk7u21JavaObject](#ysogetjdk7u21javaobject) |  |
  | [yso.GetJdk8u20JavaObject](#ysogetjdk8u20javaobject) |  |
  | [yso.GetSimplePrincipalCollectionJavaObject](#ysogetsimpleprincipalcollectionjavaobject) |  |
  | [yso.ToBcel](#ysotobcel) |  |
  | [yso.ToBytes](#ysotobytes) |  |
+ | [yso.ToJson](#ysotojson) |  |
  | [yso.command](#ysocommand) |  |
  | [yso.dnslogDomain](#ysodnslogdomain) |  |
+ | [yso.dump](#ysodump) |  |
  | [yso.evilClassName](#ysoevilclassname) |  |
  | [yso.obfuscationClassConstantPool](#ysoobfuscationclassconstantpool) |  |
  | [yso.springEchoBody](#ysospringechobody) |  |
@@ -457,7 +460,7 @@
 
 #### 定义：
 
-`func yso.GetBeanShell1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetBeanShell1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -474,7 +477,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -489,7 +492,7 @@
 
 #### 定义：
 
-`func yso.GetClick1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetClick1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -506,7 +509,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -521,7 +524,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils183NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsBeanutils183NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -538,7 +541,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -553,7 +556,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils192NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsBeanutils192NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -570,7 +573,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -585,7 +588,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsBeanutils1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -602,7 +605,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -617,7 +620,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -634,7 +637,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -649,7 +652,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -666,7 +669,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -681,7 +684,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections3JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections3JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -698,7 +701,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -713,7 +716,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections4JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections4JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -730,7 +733,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -745,7 +748,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections5JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections5JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -762,7 +765,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -777,7 +780,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections6JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections6JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -794,7 +797,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -809,7 +812,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections7JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections7JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -826,7 +829,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -841,7 +844,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections8JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollections8JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -858,7 +861,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -873,7 +876,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollectionsK1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -890,7 +893,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -905,7 +908,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollectionsK2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -922,7 +925,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -937,7 +940,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK3JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollectionsK3JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -954,7 +957,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -969,7 +972,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK4JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetCommonsCollectionsK4JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -986,7 +989,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1033,7 +1036,7 @@
 
 #### 定义：
 
-`func yso.GetGroovy1JavaObject(v1: string) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetGroovy1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1050,7 +1053,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1065,7 +1068,7 @@
 
 #### 定义：
 
-`func yso.GetJBossInterceptors1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetJBossInterceptors1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1082,7 +1085,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1097,7 +1100,7 @@
 
 #### 定义：
 
-`func yso.GetJSON1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetJSON1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1114,7 +1117,39 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetJavaObjectFromBytes
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GetJavaObjectFromBytes(v1: bytes) return (r0: *yso.JavaObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1129,7 +1164,7 @@
 
 #### 定义：
 
-`func yso.GetJavassistWeld1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetJavassistWeld1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1146,7 +1181,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1161,7 +1196,7 @@
 
 #### 定义：
 
-`func yso.GetJdk7u21JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetJdk7u21JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1178,7 +1213,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1193,7 +1228,7 @@
 
 #### 定义：
 
-`func yso.GetJdk8u20JavaObject(v1 ...yso.GenClassOptionFun) return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetJdk8u20JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
 
 
 #### 参数
@@ -1210,7 +1245,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1225,7 +1260,7 @@
 
 #### 定义：
 
-`func yso.GetSimplePrincipalCollectionJavaObject() return (r0: yserx.JavaSerializable, r1: error)`
+`func yso.GetSimplePrincipalCollectionJavaObject() return (r0: *yso.JavaObject, r1: error)`
 
  
 
@@ -1234,7 +1269,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yserx.JavaSerializable` |   |
+| r0 | `*yso.JavaObject` |   |
 | r1 | `error` |   |
 
 
@@ -1303,6 +1338,38 @@
 
 
  
+### yso.ToJson
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.ToJson(v1: any) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
 ### yso.command
 
 
@@ -1362,6 +1429,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.dump
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.dump(v1: any) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
 
 
  

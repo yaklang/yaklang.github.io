@@ -3,6 +3,8 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [tls.DecryptWithPkcs1v15](#tlsdecryptwithpkcs1v15) |  |
+ | [tls.EncryptWithPkcs1v15](#tlsencryptwithpkcs1v15) |  |
  | [tls.GenerateRSA1024KeyPair](#tlsgeneratersa1024keypair) |  |
  | [tls.GenerateRSA2048KeyPair](#tlsgeneratersa2048keypair) |  |
  | [tls.GenerateRSA4096KeyPair](#tlsgeneratersa4096keypair) |  |
@@ -24,6 +26,72 @@
 
 ## 函数定义
 
+### tls.DecryptWithPkcs1v15
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func tls.DecryptWithPkcs1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### tls.EncryptWithPkcs1v15
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func tls.EncryptWithPkcs1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### tls.GenerateRSA1024KeyPair
 
 

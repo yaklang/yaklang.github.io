@@ -11,6 +11,7 @@
  | [crawler.concurrent](#crawlerconcurrent) | 设置爬虫并发请求数 |
  | [crawler.connectTimeout](#crawlerconnecttimeout) | 每一次进行 HTTP 连接的超时时间 |
  | [crawler.cookie](#crawlercookie) | 设置 Cookie |
+ | [crawler.disallowSuffix](#crawlerdisallowsuffix) |  |
  | [crawler.domainExclude](#crawlerdomainexclude) | 不扫描的域名，使用 glob 语法 |
  | [crawler.domainInclude](#crawlerdomaininclude) | 想要扫描的域名，域名白名单，支持 glob 语法 |
  | [crawler.forbiddenFromParent](#crawlerforbiddenfromparent) | 禁止扫描 url 的父路径 |
@@ -24,6 +25,7 @@
  | [crawler.responseTimeout](#crawlerresponsetimeout) | 响应超时时间 |
  | [crawler.timeout](#crawlertimeout) | 等效于 `crawler.connectTimeout` |
  | [crawler.ua](#crawlerua) | 设置 useragent |
+ | [crawler.urlExtractor](#crawlerurlextractor) |  |
  | [crawler.urlRegexpExclude](#crawlerurlregexpexclude) | 禁止爬取的 url 正则，用于排除一些 login delete 等状况 |
  | [crawler.urlRegexpInclude](#crawlerurlregexpinclude) | 想要爬 url 的白名单，用于定向爬虫 |
  | [crawler.userAgent](#crawleruseragent) | 设置 useragent |
@@ -302,6 +304,37 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `crawler.param` |   |
+
+
+ 
+### crawler.disallowSuffix
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func crawler.disallowSuffix(v1: []string) return (r0: func configOpt(v1: *crawler.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `[]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func configOpt(v1: *crawler.Config) ` |   |
 
 
  
@@ -709,6 +742,37 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `crawler.param` |   |
+
+
+ 
+### crawler.urlExtractor
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func crawler.urlExtractor(v1: func (v1: *crawler.Req) return([]any) ) return (r0: func configOpt(v1: *crawler.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: *crawler.Req) return([]any) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func configOpt(v1: *crawler.Config) ` |   |
 
 
  

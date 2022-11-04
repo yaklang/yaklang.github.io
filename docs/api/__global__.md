@@ -28,7 +28,10 @@
  | [import](#import) |  |
  | [isEmpty](#isempty) |  |
  | [len](#len) |  |
+ | [logdiscard](#logdiscard) |  |
  | [loglevel](#loglevel) |  |
+ | [logquiet](#logquiet) |  |
+ | [logrecover](#logrecover) |  |
  | [make](#make) |  |
  | [mapFrom](#mapfrom) |  |
  | [mapOf](#mapof) |  |
@@ -701,7 +704,7 @@
 
 #### 定义：
 
-`func get(v1: any, v2: any) return (r0: any)`
+`func get(v1: any, v2: any, v3 ...any) return (r0: any)`
 
 
 #### 参数
@@ -710,6 +713,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `any` |   |
 | v2 | `any` |   |
+| v3 | `...any` |   |
 
 
 
@@ -818,6 +822,23 @@
 
 
  
+### logdiscard
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func logdiscard()``
+
+ 
+
+ 
+
+ 
 ### loglevel
 
 
@@ -839,6 +860,40 @@
 
 
 
+
+ 
+
+ 
+### logquiet
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func logquiet()``
+
+ 
+
+ 
+
+ 
+### logrecover
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func logrecover()``
+
+ 
 
  
 

@@ -5,6 +5,7 @@
 |:------|:--------|
  | [db.DelKey](#dbdelkey) | 删除 Key 对应的值(数据库中) |
  | [db.DeletePayloadByGroup](#dbdeletepayloadbygroup) | 删除 Payload |
+ | [db.DeleteYakScriptByName](#dbdeleteyakscriptbyname) |  |
  | [db.DeleteYakitMenuItemAll](#dbdeleteyakitmenuitemall) |  |
  | [db.DownloadGeoIP](#dbdownloadgeoip) | 下载并自动解压 GeoIP |
  | [db.GetKey](#dbgetkey) | 获取持久化 Key |
@@ -96,6 +97,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | group | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### db.DeleteYakScriptByName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.DeleteYakScriptByName(v1: string) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
 
 
 

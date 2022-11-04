@@ -9,6 +9,7 @@
  | [os.Executable](#osexecutable) | 获取当前正在执行的二进制程序的路径 |
  | [os.Exit](#osexit) | 退出主程序，手动结束当前进程 |
  | [os.ExpandEnv](#osexpandenv) | 同 Golang 的 `os.ExpandEnv`：根据当前环境变量的值来替换字符串中的${var}或者$var |
+ | [os.GetMachineID](#osgetmachineid) |  |
  | [os.GetRandomAvailableTCPPort](#osgetrandomavailabletcpport) | 随机获得一个可用的 TCP 端口 |
  | [os.GetRandomAvailableUDPPort](#osgetrandomavailableudpport) | 随机获得一个可用的 UDP 端口 |
  | [os.Getenv](#osgetenv) | 获得一个环境变量的值 |
@@ -194,6 +195,29 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  替换后的字符串 |
+
+
+ 
+### os.GetMachineID
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func os.GetMachineID() return (r0: string)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  

@@ -12,6 +12,8 @@
  | [mitm.maxContentLength](#mitmmaxcontentlength) |  |
  | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
  | [mitm.useDefaultCA](#mitmusedefaultca) | 设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key |
+ | [mitm.wscallback](#mitmwscallback) |  |
+ | [mitm.wsforcetext](#mitmwsforcetext) |  |
 
 
 
@@ -285,6 +287,68 @@
 #### 定义：
 
 `func mitm.useDefaultCA(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.wscallback
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func mitm.wscallback(v1: func (v1: bytes, v2: bool) return(any) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bytes, v2: bool) return(any) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.wsforcetext
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func mitm.wsforcetext(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
 
 
 #### 参数

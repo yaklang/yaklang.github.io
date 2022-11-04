@@ -26,6 +26,7 @@
  | [file.ReadDirInfoInDirectory](#filereaddirinfoindirectory) |  |
  | [file.ReadFile](#filereadfile) | 把一个文件内容读出来 |
  | [file.ReadFileInfoInDirectory](#filereadfileinfoindirectory) |  |
+ | [file.ReadLines](#filereadlines) |  |
  | [file.Remove](#fileremove) | 把一个文件移除，相当于 `os.RemoveAll` |
  | [file.Rename](#filerename) | 把一个路径重命名 |
  | [file.Rm](#filerm) | 同 `file.Remove` / Golang `os.RemoveAll` |
@@ -33,6 +34,7 @@
  | [file.SaveJson](#filesavejson) |  |
  | [file.Split](#filesplit) |  |
  | [file.Stat](#filestat) |  |
+ | [file.TailF](#filetailf) |  |
  | [file.TempFile](#filetempfile) |  |
  | [file.TempFileName](#filetempfilename) |  |
 
@@ -777,6 +779,37 @@
 
 
  
+### file.ReadLines
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func file.ReadLines(v1: any) return (r0: []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
 ### file.Remove
 
 把一个文件移除，相当于 `os.RemoveAll`
@@ -997,6 +1030,32 @@
 | r0 | `fs.FileInfo` |   |
 | r1 | `error` |   |
 
+
+ 
+### file.TailF
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func file.TailF(v1: string, v2: func (v1: string) )``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `func (v1: string) ` |   |
+
+
+
+
+ 
 
  
 ### file.TempFile

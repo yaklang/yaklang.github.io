@@ -4,11 +4,18 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [fuzz.HTTPRequest](#fuzzhttprequest) | HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求 |
+ | [fuzz.ProtobufBytes](#fuzzprotobufbytes) |  |
+ | [fuzz.ProtobufHex](#fuzzprotobufhex) |  |
+ | [fuzz.ProtobufJSON](#fuzzprotobufjson) |  |
+ | [fuzz.ProtobufYAML](#fuzzprotobufyaml) |  |
  | [fuzz.Strings](#fuzzstrings) | 执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz) |
  | [fuzz.StringsFunc](#fuzzstringsfunc) |  |
  | [fuzz.StringsWithParam](#fuzzstringswithparam) | 新增带参数的 fuzz |
  | [fuzz.UrlToHTTPRequest](#fuzzurltohttprequest) | 使用 URL 构造一个 Fuzz 请求包 |
  | [fuzz.UrlsToHTTPRequests](#fuzzurlstohttprequests) | 把多个 URL 变成可以批量 Fuzz 的请求组(Batch) |
+ | [fuzz.WithConcurrentLimit](#fuzzwithconcurrentlimit) |  |
+ | [fuzz.WithDelay](#fuzzwithdelay) |  |
+ | [fuzz.WithNamingContext](#fuzzwithnamingcontext) |  |
  | [fuzz.https](#fuzzhttps) | `http.HTTPRequest` 的 extraParams 中的额外选项之一 |
 
 
@@ -50,6 +57,130 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 |:-----------|:---------- |:-----------|
 | r0 | `*mutate.FuzzHTTPRequest` |   |
 | r1 | `error` |   |
+
+
+ 
+### fuzz.ProtobufBytes
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.ProtobufBytes(v1: any) return (r0: *yaklib.ProtobufRecords)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yaklib.ProtobufRecords` |   |
+
+
+ 
+### fuzz.ProtobufHex
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.ProtobufHex(v1: any) return (r0: *yaklib.ProtobufRecords)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yaklib.ProtobufRecords` |   |
+
+
+ 
+### fuzz.ProtobufJSON
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.ProtobufJSON(v1: any) return (r0: *yaklib.ProtobufRecords)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yaklib.ProtobufRecords` |   |
+
+
+ 
+### fuzz.ProtobufYAML
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.ProtobufYAML(v1: any) return (r0: *yaklib.ProtobufRecords)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yaklib.ProtobufRecords` |   |
 
 
  
@@ -211,6 +342,99 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 |:-----------|:---------- |:-----------|
 | r0 | `*mutate.FuzzHTTPRequestBatch` |   |
 | r1 | `error` |   |
+
+
+ 
+### fuzz.WithConcurrentLimit
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.WithConcurrentLimit(v1: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+
+
+ 
+### fuzz.WithDelay
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.WithDelay(v1: float64) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+
+
+ 
+### fuzz.WithNamingContext
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.WithNamingContext(v1: string) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
