@@ -1207,8 +1207,8 @@ assert len({}.Entries()) == 0
 assert len(a.Entries()) == 2
 assert len(a.Items()) == 2
 assert len(a.Keys()) == 2
-assert a.Keys()[0] == "a"
-assert a.Values()[0] == 1
+assert a.Keys()[0] in ["a", "b"]
+assert a.Values()[0] in [1,2]
 a.ForEach(func(k,v){	
 	assert k in ["a","b"]
 	assert v in [1,2]
@@ -1359,6 +1359,7 @@ yak 示例
 
 ```go
 f = {"ccc": 1}
+
 dump(f.ccc)
 defer func{
     println("准备开始执行 defer func")
