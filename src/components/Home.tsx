@@ -273,7 +273,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="introduce-body-header">
                         首个网络安全领域的
                         <span className="introduce-body-header-orange">
-                            DSL
+                            CDSL
                         </span>
                         <img
                             src={
@@ -348,7 +348,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             <div className="function-body">
                 <div className="function-body-header">
                     Yakit-安全领域
-                    <span className="function-body-header-orange"> DSL</span>
+                    <span className="function-body-header-orange"> DSL </span>
                     的最佳实践
                 </div>
 
