@@ -10,14 +10,16 @@ sidebar_position: 6
 
 实际上，Yak 中对这种语法的支持全面：大家可以像下面的内容一样使用 string 的定义：
 
-    println("Hello %v" % "World")
-    /* Hello World */
-    
-    println("Hello %v + %v" % ["World", "Yaklang"])
-    /* Hello World + Yaklang */
-    
-    println("Hello %v" % "World")
-    /* Hello World */
-    
-    println("Hello %v + %05d" % ["World", 4])
-    /* Hello World + 00004 */
+```go
+println("Hello %v" % "World")
+/* Hello World */
+
+println("Hello %v + %v" % ["World", "Yaklang"])
+/* Hello World + Yaklang */
+
+println("Hello %v" % "World")
+/* Hello World */
+
+println("Hello %v + %05d" % ["World", 4])
+/* Hello World + 00004 */
+```

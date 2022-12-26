@@ -8,15 +8,19 @@ sidebar_position: 9
 
 与大多数语言类似，我们使用+号来连接字符串，例如：
 
-    a = "Hello, "
-    b = "Yak"
-    println(a + b) // Hello, Yak
+```go
+a = "Hello, "
+b = "Yak"
+println(a + b) // Hello, Yak
+```
 
 我们吸取了python的语法糖，可以使用*号来重复字符串n次，例如：
 
-    a = "powerful "
-    println(a * 5 + "yak") // powerful powerful powerful powerful powerful yak
-    
+```go
+a = "powerful "
+println(a * 5 + "yak") // powerful powerful powerful powerful powerful yak 
+```
+
 ## 索引/截取：取子串或子元素
 
 在索引/截取方面，我们同样吸取了python的语法糖，完美继承了python中的索引方式，即：
@@ -27,93 +31,99 @@ sidebar_position: 9
 
 一个简单的例子如下：
 
-    a = "Hello, Yak"
-    println(a[0])      // H
-    println(a[1:5])    // ello
-    println(a[3:0:-1]) // lle
-    
+```go
+a = "Hello, Yak"
+println(a[0])      // H
+println(a[1:5])    // ello
+println(a[3:0:-1]) // lle
+```
+
 ## 内置方法：快速运算字符串
 
 当然了，我们一样支持类似于python的字符串内置方法，下面这个例子展示了字符串类型的所有内置方法：
-    // 取字符串倒序等价于 [::-1]
-    assert "abcdefg".Reverse() == "gfedcba"
-    
-    // 取字符串是否包含子字符串
-    assert "abcabc".Contains("abc") == true
-    assert "abcabc".Contains("qwe") == false
-    
-    // 基础替代字符串字串方法
-    assert "abcabc".ReplaceN("abc", "123", 1) == "123abc"
-    assert "abcabc".ReplaceN("abc", "123", 2) == "123123"
-    assert "abcabc".Replace("abc", "123") == "123123"
-    assert "abcabc".ReplaceAll("abc", "123") == "123123"
-    
-    // 分割字符串为数组
-    assert "abc1abc".Split("1") == ["abc", "abc"]
-    assert "abc1abc1abc".SplitN("1", 2) == ["abc", "abc1abc"]
-    
-    // 拼接字符串
-    assert "1".Join(["abc", "abc"]) == "abc1abc"
-    
-    // 移除前后 Trim
-    assert "pabcp".Trim("p") == "abc"
-    assert "pabc".TrimLeft("p") == "abc"
-    assert "abcp".TrimRight("p") == "abc"
-    
-    // 前后缀
-    assert "abcdefg".HasPrefix("abc") == true
-    assert "abcdefg".HasSuffix("efg") == true
-    
-    // 左右填充 0 或者 ' '
-    assert "abc".Zfill(5) == "00abc"
-    assert "abc".Zfill(2) == "abc"
-    assert "abc".Rzfill(5) == "abc00"
-    assert "abc".Rzfill(2) == "abc"
-    assert "abc".Ljust(5) == "abc  "
-    assert "abc".Ljust(2) == "abc"
-    assert "abc".Rjust(5) == "  abc"
-    assert "abc".Rjust(2) == "abc"
-    
-    // 计算重复字串次数
-    assert "abcabc".Count("abc") == 2
-    assert "abcabc".Count("qwe") == 0
-    
-    // 寻找字串索引
-    assert "abcabc".Find("abc") == 0
-    assert "abcabc".Find("qwe") == -1
-    assert "abcabc".Rfind("abc") == 3
-    assert "abcabc".Rfind("qwe") == -1
-    
-    // 大小写切换
-    assert "ABC".Lower() == "abc"
-    assert "abc".Upper() == "ABC"
-    assert "abc".Title() == "Abc"
-    
-    // 判断函数
-    assert "ABC".IsLower() == false
-    assert "abc".IsLower() == true
-    assert "ABC".IsUpper() == true
-    assert "abc".IsUpper() == false
-    assert "abc".IsTitle() == false
-    assert "Abc".IsTitle() == true
-    
-    // 判断字符串中是否是数字
-    assert "abc".IsAlpha() == true
-    assert "abc1".IsAlpha() == false
-    assert "abc".IsDigit() == false
-    assert "123".IsDigit() == true
-    
-    // 判断字母和数字
-    assert "abc".IsAlnum() == true
-    assert "abc1".IsAlnum() == true
-    assert "abc1 ".IsAlnum() == false
-    
-    // 判断字符串中是否都是可打印字符
-    assert "abc".IsPrintable() == true
-    assert "abc1 ".IsPrintable() == true
-    assert "abc1 \xff".IsPrintable() == false
-    
+
+```go
+// 取字符串倒序等价于 [::-1]
+assert "abcdefg".Reverse() == "gfedcba"
+
+// 取字符串是否包含子字符串
+assert "abcabc".Contains("abc") == true
+assert "abcabc".Contains("qwe") == false
+
+// 基础替代字符串字串方法
+assert "abcabc".ReplaceN("abc", "123", 1) == "123abc"
+assert "abcabc".ReplaceN("abc", "123", 2) == "123123"
+assert "abcabc".Replace("abc", "123") == "123123"
+assert "abcabc".ReplaceAll("abc", "123") == "123123"
+
+// 分割字符串为数组
+assert "abc1abc".Split("1") == ["abc", "abc"]
+assert "abc1abc1abc".SplitN("1", 2) == ["abc", "abc1abc"]
+
+// 拼接字符串
+assert "1".Join(["abc", "abc"]) == "abc1abc"
+
+// 移除前后 Trim
+assert "pabcp".Trim("p") == "abc"
+assert "pabc".TrimLeft("p") == "abc"
+assert "abcp".TrimRight("p") == "abc"
+
+// 前后缀
+assert "abcdefg".HasPrefix("abc") == true
+assert "abcdefg".HasSuffix("efg") == true
+
+// 左右填充 0 或者 ' '
+assert "abc".Zfill(5) == "00abc"
+assert "abc".Zfill(2) == "abc"
+assert "abc".Rzfill(5) == "abc00"
+assert "abc".Rzfill(2) == "abc"
+assert "abc".Ljust(5) == "abc  "
+assert "abc".Ljust(2) == "abc"
+assert "abc".Rjust(5) == "  abc"
+assert "abc".Rjust(2) == "abc"
+
+// 计算重复字串次数
+assert "abcabc".Count("abc") == 2
+assert "abcabc".Count("qwe") == 0
+
+// 寻找字串索引
+assert "abcabc".Find("abc") == 0
+assert "abcabc".Find("qwe") == -1
+assert "abcabc".Rfind("abc") == 3
+assert "abcabc".Rfind("qwe") == -1
+
+// 大小写切换
+assert "ABC".Lower() == "abc"
+assert "abc".Upper() == "ABC"
+assert "abc".Title() == "Abc"
+
+// 判断函数
+assert "ABC".IsLower() == false
+assert "abc".IsLower() == true
+assert "ABC".IsUpper() == true
+assert "abc".IsUpper() == false
+assert "abc".IsTitle() == false
+assert "Abc".IsTitle() == true
+
+// 判断字符串中是否是数字
+assert "abc".IsAlpha() == true
+assert "abc1".IsAlpha() == false
+assert "abc".IsDigit() == false
+assert "123".IsDigit() == true
+
+// 判断字母和数字
+assert "abc".IsAlnum() == true
+assert "abc1".IsAlnum() == true
+assert "abc1 ".IsAlnum() == false
+
+// 判断字符串中是否都是可打印字符
+assert "abc".IsPrintable() == true
+assert "abc1 ".IsPrintable() == true
+assert "abc1 \xff".IsPrintable() == false
+```
+
 ## 附录：字符串内置方法
+
 |方法名|描述|
 |:---:|:----|
 |Reverse()|翻转字符串|

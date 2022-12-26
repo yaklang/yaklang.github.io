@@ -6,7 +6,7 @@ sidebar_position: 16
 
 yaklang保留了golang独有的数据类型：channel。channel是一个管道，通过它可以很方便地在多个协程之间进行收发与调度。一个简单的例子如下：
 
-```golang
+```go
 ch := make(chan int)     // 声明一个int类型的channel，没有缓存区
 ch2 := make(chan var, 2) // 声明一个var类型的channel，缓存区为2
 

@@ -37,10 +37,11 @@ Yaklang 的类型其实非常简单，我们仅需要记住如下类型即可
 
 在yaklang中定义/声明一个变量十分简单：
 
-    var a            // 声明变量a
-    var b, c         // 声明变量b,c
-    var d, e = 1, 2  // 声明变量d,e并分别赋值为1,2
-
+```go
+var a            // 声明变量a
+var b, c         // 声明变量b,c
+var d, e = 1, 2  // 声明变量d,e并分别赋值为1,2
+```
 
 同时，我们可以直接对一个变量进行赋值，省略定义/声明的步骤:
 
@@ -48,23 +49,27 @@ Yaklang 的类型其实非常简单，我们仅需要记住如下类型即可
 
 当然，变量的使用依然很简单而符合直觉:
 
-    a, b = 1, 2
-    dump(a, b)
-    /*
-        (int) 1
-        (int) 2
-    */
+```go
+a, b = 1, 2
+dump(a, b)
+/*
+    (int) 1
+    (int) 2
+*/
+```
 
 ## 附录：字面量构建语法 eBNF 范式（字面量节选）
 
-    literal
-        : templateStringLiteral
-        | stringLiteral
-        | numericLiteral
-        | charaterLiteral
-        | UndefinedLiteral
-        | NilLiteral
-        | boolLiteral
-        | mapLiteral
-        | sliceLiteral
-        ;
+```go
+literal
+    : templateStringLiteral
+    | stringLiteral
+    | numericLiteral
+    | charaterLiteral
+    | UndefinedLiteral
+    | NilLiteral
+    | boolLiteral
+    | mapLiteral
+    | sliceLiteral
+    ;
+```
