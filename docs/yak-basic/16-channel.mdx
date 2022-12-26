@@ -1,0 +1,45 @@
+---
+sidebar_position: 16
+---
+
+# 16. 通道类型：chan 类型
+
+yaklang保留了golang独有的数据类型：channel。channel是一个管道，通过它可以很方便地在多个协程之间进行收发与调度。一个简单的例子如下：
+
+```golang
+ch := make(chan int)     // 声明一个int类型的channel，没有缓存区
+ch2 := make(chan var, 2) // 声明一个var类型的channel，缓存区为2
+
+// 起一个新的协程，从ch中读取整数并输出，此时会阻塞直到从管道中读取内容
+go func{
+    i = <- ch
+    println("get from ch:", i) // get from ch: 1
+
+    /* 实际上我们可以用chan中取出两个值,例如:
+    i, ok = <-ch
+    此时第一个值为管道拿到的值，第二个值为布尔值，表示是否成功从管道中拿到值
+    */
+}
+// 往ch中写入整数1，由于没有缓存区，此时会阻塞，直到另外一个地方从管道中读
+ch <- 1
+
+// 往ch2中写入字符串a，由于缓存区为2>0，此时会直接写入缓存区，不会阻塞
+ch2 <- "a"
+// 往ch2中写入整数0，由于缓存区为2>1，此时会直接写入缓存区，不会阻塞
+ch2 <- 0
+// 取得channel当前的元素个数
+println(len(ch2)) // 2
+// 取得channel当前的容量
+println(cap(ch2)) // 2
+// 当写入完后要关闭channel，否则下面的for循环会陷入死循环
+close(ch2)
+
+// yaklang同样可以使用for循环来从channel中读取数据
+for v = range ch2 {
+    println("get from ch2:", v)
+    /* OUTPUT:
+    get from ch2: a
+    get from ch2: 0
+    */
+}
+```

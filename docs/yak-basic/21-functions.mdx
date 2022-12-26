@@ -1,0 +1,76 @@
+---
+sidebar_position: 21
+---
+
+# 21. 函数：定义与创建
+
+在 Yaklang 中的函数其实本质上是一种 “值”，我们以这种方式，可以很容易理解 Yaklang 中最推荐的函数声明模式：
+
+```go
+abc = func() {
+    println("function is called")
+}
+```
+
+同时为了照顾不同人的不同习惯，我们 func 关键字和 fn, def 都是完全一致的，也就是说上述代码与下面的代码完全等价：
+
+```go
+abc = fn() {
+    println("function is called")
+}
+```
+
+## 函数定义：具名函数
+
+在我们理解上述函数之后，其实很多同学会很奇怪，为什么要使用一个变量名来接收函数本身？其实从语法设计上来说，接受函数作为值与“声明”一个函数，本质上是一样的；所以我们设计了如下 “糖”，来降低大家的使用和理解成本
+
+```go
+func abc() {
+    println("Hello World Named-Function!")
+}
+abc()
+
+/*
+    Hello World Named-Function!
+*/
+```
+
+## 箭头函数：Arrow-Function
+
+在 ECMAScript 和 TypeScript 中，我们广泛使用 arrow-function（箭头函数）来参与编程，配合函数式编程的手段，达到非常好的效果，非常优雅。因此我们在 Yaklang 中设计支持了这种方法，虽然它本质上也是一种匿名函数
+
+```js
+arrowFunction = a => a + 1
+/*
+等价于
+func arrowFunction(a) {return a + 1}
+*/
+assert arrowFunction(3) == 4
+
+arrowFunction2 = (a, b) => a + 1 + b
+/*
+等价于
+func arrowFunction2(a, b) {return a + 1 + b}
+*/
+assert arrowFunction2(3, 5) == 9
+
+arrowFunction3 = (a, b) => {return a + 1 + b}
+/*
+等价于
+func arrowFunction3(a, b) {return a + 1 + b}
+*/
+assert arrowFunction3(3, 5) == 9
+
+arrowFunction4 = a => {return a + 2}
+/*
+等价于
+func arrowFunction4(a) {return a + 2}
+*/
+assert arrowFunction4(3) == 5
+```
+
+在我们知道如何基本定义一个箭头函数后，配合一些函数式编程，也可以起到非常优雅的编程模式，例如：
+
+```js
+result = ["a", 1, 2, 3].Filter(i => typeof(i) == int)
+```

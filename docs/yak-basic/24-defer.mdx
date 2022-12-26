@@ -1,0 +1,130 @@
+---
+sidebar_position: 24
+---
+
+# 24. 执行顺序控制：Defer 延迟
+
+yaklang支持defer关键字，和常见的defer关键字相同，能够实现在退出代码块的时候执行指定代码的能力。
+
+yaklang支持匿名函数，所以一个很常见的写法是
+
+```go
+defer fn(){
+
+}()
+
+defer fn{
+
+}
+```
+
+如果读者有go语言的使用经历，那么就很容易上手，不过yaklang的defer和go的defer还是有一定的区别。
+
+## 变量参数
+
+在go里defer里要使用指定变量，可以使用两种方式：
+
+1. 传入参数，这种方式defer内部的变量不会随外部的变量变化而变化
+
+```go
+//go 函数传参模式
+func dfp1() {
+   var a = 1
+   defer func(t int) {
+        fmt.Println(t)
+   }(a)
+   a = 2
+   return
+}
+
+func main() {
+    dfp1()
+}
+
+/*OUTPUT
+1
+*/
+```
+
+2. 直接使用代码块内部的参数，这种方式defer内部的变量会随外部的变量变化而变化
+
+```go
+//go 直接使用作用域内的变量
+func dfp2() {
+   var a = 1
+    defer func(){
+        fmt.Println(a)
+    }()
+   a = 2
+   return
+}
+
+func main() {
+    dfp2()
+}
+
+/*OUTPUT
+2
+*/
+```
+
+而对于yaklang来说，无论使用哪一种方法，defer内变量都会随着外部变量的变化而变化
+
+```go
+f = 1
+defer func{
+    println("准备开始执行 defer func")
+    println(1) // 等到执行这里的时候，就会报错
+}
+println("设置 f 变量为空")
+f = nil // 在这里设置 f 为空
+
+
+/*OUTPUT
+设置 f 变量为空
+准备开始执行 defer func
+<nil>
+*/
+```
+
+## defer与返回值
+
+在go语言中，当返回值在函数定义里就声明了的情况下，defer是可以修改返回值的。
+
+```go
+func test() (i int) {
+   i = 1
+   defer func() {
+      i++
+   }()
+   return i
+}
+
+func main() {
+   fmt.Println("return:", test())
+}
+/*OUTPUT
+return: 2
+*/
+```
+
+而在yaklang中，无论采用何种方式，defer都不会影响到返回值。
+
+## defer的执行顺序
+
+yaklang的defer的执行顺序和go的一致，采用的是"先进后出"的栈结构
+
+```go
+defer fn {
+    dump(2)
+}
+
+defer fn(){
+    dump(1)
+}()
+
+/* OUTPUT:
+(int) 1
+(int) 2
+*/
+```

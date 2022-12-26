@@ -1,0 +1,42 @@
+---
+sidebar_position: 26
+---
+
+# 26. 作用域描述与声明
+
+作用域为已声明标识符所表示的常量、类型、变量、函数或闭包在源代码中的作用范围。yaklang的作用域与golang几乎保持一致，例如：
+
+```go
+// 全局变量
+var GLOBAL_VAR = 6666
+func scope_test(c) { // c: 形式参数
+    // 局部变量
+    var a, b
+    a, b = 1, 2
+    assert a == 1
+    assert b == 2
+    assert c == 3
+    assert GLOBAL_VAR == 6666
+}
+
+scope_test(3)
+assert a == nil
+assert b == nil
+assert c == nil
+assert GLOBAL_VAR == 6666
+```
+
+值得注意的是，新版yaklang引擎与旧版yaklang引擎在:=行为表现不一致。在旧版yaklang中，:=与=完全相同，而在新版yaklang中:=会强制创建一个新的局部变量，一个简单的例子如下：
+
+```go
+var VAR = 1
+func scope_test() {
+    assert VAR == 1
+    VAR := 2 // 定义了一个新的局部变量VAR，与全局变量同名，之后使用的都是该局部变量
+    assert VAR == 2
+    VAR = 3 // 修改局部变量，不会影响到全局变量
+}
+
+scope_test()
+assert VAR == 1
+```

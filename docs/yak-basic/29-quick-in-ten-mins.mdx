@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
+sidebar_position: 100
 ---
 
-# 基础语法：目标10分钟上手
+# 快速入门：十分钟教程
 
 Yak 是一门纯 Golang 的嵌入式语言，是一门纯 Golang 实现的基于反射特性的语言，语法在一定程度上保留了 Golang 的风格，甚至可以实现 Golang 语言的对象无缝开放给 Yak 使用的功能。
 
@@ -22,13 +22,13 @@ Golang 的一些令人惊叹的特性我们在 Yak 中也可以找到实现，�
 
 ```go
 // 加减乘除:  1 + 4 * 5
-'+' '-' '*' '/' 
+'+' '-' '*' '/'
 
 // 取余数或格式化字符串
 '%'
 
 // 赋值运算符：为保持 Golang 用户使用习惯，我们保留了 := 赋值模式，a := 1; 或者 a = 1 是等效的
-'=' ':=' 
+'=' ':='
 
 // 位运算
 '^' '&' '&^' '|' '<<' '>>'
@@ -156,7 +156,7 @@ println([]byte{104} * 3) // [104 104 104]
 3. string
 4. byte
 5. bool
-6. var       // 等效于 Golang 的 interface{}          
+6. var       // 等效于 Golang 的 interface{}
 ```
 
 这些类型其实都是最基础的数据类型：
@@ -278,7 +278,7 @@ OUTPUT:
 a:  1
 b:  2.3
 c:  stringValue
-*/ 
+*/
 ```
 
 当然，拆包+赋值的另一个案例读者可以尝试
@@ -317,7 +317,7 @@ x = make(map[var]var)                    // 创建一个 map[interface{}]interfa
 1. 直接使用 `{key: value ... }` 方式创建的 map 会自动选择最兼容的类型
 
 2. 使用 `make(map[T1]T2)` 可以创建指定类型的 map
-   
+
    :::tip 小贴士 通过 `{"key": "value", ... }` 方式创建的 map，key 必须是 `string`
    :::
 
@@ -334,7 +334,7 @@ println(`a["b"]: `, x)
 // OUTPUT: a["b"]:  sasdfasdf
 
 a.noSuchKey                                        // 如果取一个不存在的 key，直接通过 .keyName 调用则会报错，退出程序
-// OUTPUT: 
+// OUTPUT:
 //     [ERRO] 2021-05-25 20:38:04 +0800 [default:yak.go:100] line 58: member `noSuchKey` not found
 
 // 当然，我们也可以把拆包解包用在 map 中
@@ -354,7 +354,7 @@ NOW map a:
  (string) (len=1) "a": (int) 123,
  (string) (len=1) "c": (int) 999
 }
-*/ 
+*/
 ```
 
 如何判断元素是否存在或在元素不存在时取默认值？
@@ -688,7 +688,7 @@ dump(f.ccc)
 defer func{
     println("准备开始执行 defer func")
     println(f.ccc)    // 等到执行这里的时候，就会报错
-}       
+}
 println("设置 f 变量为空")
 f = nil               // 在这里设置 f 为空
 ```
@@ -1003,7 +1003,7 @@ if YAK_MAIN {
 
 #### 定义
 
-` 
+`
 func import(modName: string, varName: string) (*yak.yakVariable, error)
 `
 
@@ -1013,13 +1013,13 @@ func import(modName: string, varName: string) (*yak.yakVariable, error)
 
 ```go
 type palm/common/yak.(yakVariable) struct {
-  Fields(可用字段): 
-      FilePath: string  
-      YakMod: string  
-      Value: interface {}  
-  StructMethods(结构方法/函数): 
-  PtrStructMethods(指针结构方法/函数): 
-      func Callable() return(bool) 
+  Fields(可用字段):
+      FilePath: string
+      YakMod: string
+      Value: interface {}
+  StructMethods(结构方法/函数):
+  PtrStructMethods(指针结构方法/函数):
+      func Callable() return(bool)
 }
 ```
 

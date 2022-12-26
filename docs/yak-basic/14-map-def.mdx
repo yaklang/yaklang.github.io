@@ -1,0 +1,49 @@
+---
+sidebar_position: 14
+---
+
+# 14. 字典(map)类型：声明与创建
+
+在yaklang中，使用 `{key1: value1, key2: value2...}` 来创建一个map，同时我们也兼容golang的语法，使用make语句来创建slice
+
+:::danger
+
+注意：在yaklang中，map是无序的
+
+:::
+
+## 字面量声明：推断类型
+
+在yaklang中，如果使用 `{key1: value1, key2: value2...}` 来创建一个map，yak vm会根据map中的key与value元素类型来自动推断最契合的map类型，一个简单的例子如下：
+
+    m = {"a": 1, "b": 2}
+    println(typeof(m)) // map[string]int
+    m2 = {"a":"b", "c":"d"}
+    println(typeof(m2)) // map[string]string
+    m3 = {"a": 1, "b": 1.5, "c": "d"}
+    println(typeof(m3)) // map[string]interface{}
+    m4 = {1: 2, "3":"4", "5": 6.0}
+    println(typeof(m4)) // map[interface{}]interface{}
+
+## 按类型构建（make）
+
+yaklang也兼容golang语法，使用make语句显示创建一个对应类型的map，一个简单的例子如下：
+
+    // 创建一个不带初始容量的 map[string]int
+    a = make(map[string]int)
+    a["a"] = 1
+    println(typeof(a)) // map[string]int
+    println(a) // {"a": 1}
+
+    // 创建一个带初始容量的map[string]var
+    a = make(map[string]var, 2)
+    a["a"] = true
+    a["b"] = 1
+    println(typeof(a)) // map[string]interface {}
+    println(a) // map[a:true b:1]
+    // 创建一个不带长度的 map[string]int
+    a = make(map[string]int)
+    a["a"] = 1
+    println(typeof(a)) // map[string]int
+    println(a) // map[a:1]
+

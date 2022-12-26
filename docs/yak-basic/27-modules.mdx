@@ -1,0 +1,141 @@
+---
+sidebar_position: 27
+---
+
+# 27. 模块化与多文件编程
+
+在模块化与多文件编程中，我们通常需要根据相对位置定位文件或者资源目录
+
+为此我们准备有三个常见全局变量方便用户操作
+
+1. YAK_MAIN: boolean 类型，如果为 false 说明这个文件是主文件，通过动态引入的文件将会为 false
+2. YAK_FILENAME: 当前执行的脚本文件的具体文件名
+3. YAK_DIR: 当前脚本文件所在的路径位置
+
+## 使用 `YAK_MAIN`：等价于 Python 中的 `__main__`
+
+如果你调用一个 yak 脚本，通过 `yak [your-yak-script].yak` 来调用，那么脚本中的 YAK_MAIN 将会设置为 true。
+
+相反，如果是通过 [dyn](api/dyn) 中的包来调用，那么，YAK_MAIN 的结果则会是 false。
+
+所以我们在看下面代码：
+
+```go
+// main.yak
+func callee(caller) {
+   println("callee is called by", caller)
+}
+
+if YAK_MAIN {
+   println("i am in main block")
+   callee("main")
+}
+```
+
+当我们调用 yak main.yak 的时候，界面展示
+
+    i am in main block
+    callee is called by main
+
+我们发现，我们定义的函数执行了，YAK_MAIN 的值为 true。
+
+作为对比，我们在同一个目录下，编写一个 foo.yak，内容如下
+
+```go
+// foo.yak
+res, err := dyn.LoadVarFromFile("main.yak", "callee")
+die(err)
+
+res[0].Value("foo.yak")
+```
+
+我们执行 yak foo.yak 之后，发现屏幕打印出：
+
+    callee is called by foo.yak
+
+我们发现:
+
+```go
+if YAK_MAIN {
+   println("i am in main block")
+   callee("main")
+}
+```
+
+这段代码并没有被执行，这是因为 main.yak 第二次执行的时候，并不是主函数。所以 YAK_MAIN 为 false。
+
+## 内置函数 `import`：加载另外的脚本中的变量
+
+定义
+
+    func import(file, exportsName) (var, error)
+
+我们执行完上述函数之后，将会把一个本地 file 单独加载到我们新的脚本中，并把变量名为 exportsName 的变量导出。
+
+如果执行失败，返回值将会为 nil, err。
+
+一个简单的例子如下：
+
+我们先创建一个 a1.yak 脚本
+
+```go
+// a1.yak
+func callee() {
+   println("I am in `callee` function....")
+}
+
+if YAK_MAIN {
+   println("callee function is called by a1")
+   callee()
+}
+```
+
+然后我们创建一个 main.yak 脚本
+
+```go
+// main.yak
+calleeVar, err = import("a1", "callee")
+if err != nil {
+    die(err)
+}
+
+if YAK_MAIN {
+   println("callee function is called by main")
+   calleeVar()
+}
+```
+
+如果我们单独执行 main.yak 我们发现输出为
+
+    callee function is called by main
+    I am in `callee` function....
+
+如果我们单独执行 a1.yak 我们发现输出为：
+
+    callee function is called by a1
+    I am in `callee` function....
+
+显然的我们从 main.yak 调用到了 a1.yak 中的函数（实际上是变量）。非常简单实用！
+
+## `include` 像 PHP include 另一个脚本
+
+include 只有在脚本执行之前进行执行，本质相当于把一个新的文件 "复制" 一个当前脚本中执行了。
+
+作为对比，我们继续使用上一节的 main.yak 函数。通过 include 来执行。
+
+```go
+// foo2.yak
+include "main.yak"
+
+if YAK_MAIN {
+    calleeVar()
+}
+```
+
+我们执行上述代码之后，发现结果如下
+
+    callee function is called by main
+    I am in `callee` function....
+    I am in `callee` function....
+
+main.yak 中的 `if YAK_MAIN{}` 分支下的内容被执行了。

@@ -1,0 +1,100 @@
+---
+sidebar_position: 15
+---
+
+# 15. 字典(map)类型：使用与内置函数
+
+一个简单的例子如下，这些操作和我们使用 Golang 非常类似：
+
+```python
+// 创建map
+a = {"a": 234, "b": "sasdfasdf", "ccc": "13"}
+
+// 获取长度
+println("len(a): ", len(a)) // len(a):  3
+
+// 获取键值方法1
+println(`a["b"]: `, a["b"]) // OUTPUT: a["b"]:  sasdfasdf
+
+// 获取键值方法2
+println(`a["b"]: `, a.b) // OUTPUT: a["b"]:  sasdfasdf
+
+// 获取键值方法3 $ 间接访问
+v = "b"
+println(`a.$v: `, a.$v) // OUTPUT: a.$v:  sasdfasdf
+
+// 获取键值方法3(不存在时获取默认值)
+f = "f" in a ? a["f"] : "fffff" // f = "fffff"
+
+// 获取键值方法4(不存在时获取默认值)
+// get函数 第一个参数为map，第二个参数为键，第三个参数为取不到键值时的默认值
+g = get(a, "g", "ggggg") // g = "ggggg"
+
+// 拆包，解包
+a["e"], a["f"], a["g"] = 4, 5, 6
+a.e, a.f, a.g = 4, 5, 6
+
+// 删除键值
+// delete函数 第一个参数为map，第二个参数是要删除的键
+delete(a, "b")
+println(`a: `, a) // map[a:234 ccc:13 e:4 f:5 g:6]
+
+// 判断元素是否存在方法1
+if a["b"] != nil { // 注意，这里不能使用a.b，因为如果不存在该键则会直接panic
+       println("key b in a")
+}
+
+// 判断元素是否存在方法2
+if "b" in a {
+    println("key b in a")
+}
+
+// 内置方法
+a = {"a":1,"b":2}
+
+// Keys：返回一个包含所有键的列表，注意其每次调用返回的顺序可能是不相同的
+v = a.Keys()
+v.Sort()
+assert v == ["a", "b"], v
+
+// Values：返回一个包含所有键值的列表，注意其每次调用返回的顺序可能是不相同的
+v = a.Values()
+v.Sort()
+assert v == [1, 2], v
+
+// Entries / Items：返回一个包含所有键值对的二维数组，其中每个元素是一个长度为2的数组
+// 其第一个元素为键，第二个元素为键值
+for k, v in a.Items() {
+    assert k in ["a","b"]
+    assert v in [1,2]
+}
+
+// Foreach：使用一个函数来遍历map中所有的键值
+a.ForEach(func(k,v){
+    assert k in ["a","b"]
+    assert v in [1,2]
+})
+
+// Set：设置键值, 如果key不存在则添加
+a.Set("c",3)
+assert a["c"] == 3
+
+// Remove / Delete：删除对应键值
+a.Remove("a")
+
+// Has：判断对应键是否存在于字典中
+assert a.Has("a") == false
+assert a.Has("c") == true
+```
+
+## 附录：字典内置方法
+
+|方法名|描述|
+|:--------|:--------|
+|Keys()|返回一个包含所有键的列表，注意其每次调用返回的顺序可能是不相同的|
+|Values()|返回一个包含所有键值的列表，注意其每次调用返回的顺序可能是不相同的|
+|Entries() / Items()|返回一个包含所有键值对的二维数组，其中每个元素是一个长度为2的数组,其第一个元素为键，第二个元素为键值|
+|ForEach(func(key, value))|会根据提供的函数对字典中的每一个键值做映射，注意其每次映射的顺序可能是不相同的|
+|Set(key, value)|设置键值，如果key不存在则添加|
+|Remove(key)|删除对应键值|
+|Has(key)|判断对应键是否存在于字典中|

@@ -1,0 +1,39 @@
+---
+sidebar_position: 18
+---
+
+# 18. 控制流：IF 语句
+
+if 语句的处理方式和大多数的编程语言一致，不过yaklang同时支持 `else if` 和 `elif`
+
+```python
+a = 5
+if a > 2 {
+    println("a > 2")
+} else {
+    println("a <= 2")
+}
+
+b = 10
+if b > 15 {
+    println("b > 15")
+} elif b > 8 {
+    println("b > 8")
+} else {
+    println("b <= 8")
+}
+
+c = -1
+if c > 0 {
+    println("c > 0")
+} else if c < 0 {
+    println("c < 0")
+} else {
+    println("c == 0")
+}
+/* OUTPUT:
+a > 2
+b > 8
+c < 0
+*/
+```

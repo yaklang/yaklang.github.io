@@ -1,0 +1,105 @@
+---
+sidebar_position: 22
+---
+
+# 22. 函数：函数调用与返回值
+
+在 Yaklang 中，最普通的函数定义参数其实非常简单，与其他语言的固定形参没有区别；无需声明类型即可使用；
+
+```go
+func abc(a, b, c) {
+    return b+1, c-1
+}
+bPlusOne, cMinusOne = abc(123, 12, 2) // bPlusOne: 13 cMinusOne: 1
+assert bPlusOne == 13, cMinusOne == 1
+```
+
+## 可变参数
+
+有时候我们在定义的时候，并不知道参数的数量应该有多少个，或者我们希望我们的函数接受多个参数，这就需要支持“可变数量”的参数了；在 Yaklang 定义下，可变数量参数定义其实非常简单，我们使用 func(a...) 中的 ... 来定义。
+
+```go
+func sum(a...) {
+    // typeof(a) == []var
+    result = 0
+    for i in a {
+        result += i
+    }
+    return result
+}
+
+// 计算 1，2，3 的和
+assert sum(1,2,3) == 6
+
+// 可变参数支持 0 到 n 个参数输入
+assert sum() == 0
+```
+
+同样我们也可以支持固定参数与可变参数混合的模式：
+
+```go
+func sum(a, b...) {
+    result = a
+    for i in b {
+        result += i
+    }
+    return result
+}
+
+assert sum(12) == 12
+assert sum(12,3,5,6) == 12 + 3 + 5 + 6
+
+/*
+  由于我们定义中包含固定形参 a
+  所以我们需要 1 到 n 个参数，无参数将会报错
+*/
+sum() /*这是不合理的，会报错*/
+/*
+--> 17 sum()
+
+YakVM Panic: "runtime error: function sum need at least 1 params, got 0 params"
+*/
+```
+
+## 返回值：直接返回与拆包解包
+
+与其他语言一样，我们在使用函数的时候，也会经常需要注意函数的返回值；在静态强类型语言中，函数返回值一般来说是固定的数量；但是在 Yaklang 中，函数的返回值如果不指定也是可以被接受的；实际值为 nil / undefined
+
+### 可以没有返回值
+
+```go
+assert nil == undefined
+
+abc = func() {}
+assert abc() == nil
+assert abc() == undefined
+dump(abc())
+```
+
+### 返回值数量可以不一定
+
+```go
+abc = func(n) {
+    if n == 1 {
+        return 1
+    } else {
+        return 2,3,4
+    }
+}
+
+/*  abc(1) 的时候只有一个返回值 */
+n1 = abc(1)
+assert n1 == 1
+
+/* abc(2) 有多个返回值，并且可以支持解包返回值 */
+r1 = abc(2)
+n2, n3, n4 = abc(2)
+println(f`abc(2) -> r1: ${r1}
+    n2: ${n2}, n3: ${n3}, n4: ${n4}
+`)
+
+/*
+abc(2) -> r1: [2 3 4]
+    n2: 2, n3: 3, n4: 4
+*/
+```
