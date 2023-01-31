@@ -1,6 +1,8 @@
 ---
 sidebar_position: 5
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # 下载与安装
 
@@ -93,53 +95,50 @@ https://yaklang.oss-cn-beijing.aliyuncs.com/yak/1.1.3/Yakit-1.1.3-windows-amd64.
 如果遇到 pcap 依赖问题，请遵循上面的步骤解决。
 
 :::
-
 <Tabs
-    defaultValue="darwin"
-    values={[
-        {label: 'MacOs(Intel/M1) x64 下载', value: 'darwin'},
-        {label: 'Linux x64 下载', value: 'linux'},
-        {label: 'Windows x64 下载', value: 'windows'},
-    ]}>
-    <TabItem value="darwin">
+defaultValue="darwin"
+values={[
+    {label: 'MacOs(Intel/M1) x64 下载', value: 'darwin'},
+    {label: 'Linux x64 下载', value: 'linux'},
+    {label: 'Windows x64 下载', value: 'windows'},
+]}>
+<TabItem value="darwin">
 
-        点击这里下载 [yak_darwin_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_darwin_amd64)
+    点击这里下载 [yak_darwin_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_darwin_amd64)
 
-        在下载完成之后，执行
+    在下载完成之后，执行
 
-        ```
-        chmod +x yak_darwin_amd64 && ./yak_darwin_amd64 install
-        ```
+    ```
+    chmod +x yak_darwin_amd64 && ./yak_darwin_amd64 install
+    ```
 
-        即可安装；
+    即可安装；
 
-        在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `./yak_darwin_amd64`
+    在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `./yak_darwin_amd64`
 
-    </TabItem>
+</TabItem>
 
-    <TabItem value="linux">
+<TabItem value="linux">
 
-        点击这里下载 [yak_linux_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_linux_amd64)
+    点击这里下载 [yak_linux_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_linux_amd64)
 
-        在下载完成之后，执行
+    在下载完成之后，执行
 
-        ```
-        chmod +x yak_linux_amd64 && ./yak_linux_amd64 install
-        ```
+    ```
+    chmod +x yak_linux_amd64 && ./yak_linux_amd64 install
+    ```
 
-        即可安装；
+    即可安装；
 
-        在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `rm ./yak_linux_amd64`
+    在确认 `yak version` 命令执行成功之后，一般来说即可删除下载的文件 `rm ./yak_linux_amd64`
 
+</TabItem>
 
-    </TabItem>
-    <TabItem value="windows">
+<TabItem value="windows">
 
-        点击这里下载 [yak_windows_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe)
+    点击这里下载 [yak_windows_amd64](https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe)
 
-        可以手动把 `yak_windows_amd64` 放入执行目录中。
+    可以手动把 `yak_windows_amd64` 放入执行目录中。
 
-    </TabItem>
+</TabItem>
 </Tabs>
-
-
