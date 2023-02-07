@@ -72,7 +72,7 @@ module.exports = {
                             //     type: "doc",
                             //     docId: "intro",
                             //     docsPluginId: "products",
-                            label: "Yak IDE",
+                            label: "YAK IDE",
                             href: "/products/intro",
                         },
                     ],
