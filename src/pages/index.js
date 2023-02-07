@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 // import clsx from "clsx";
 import Layout from "@theme/Layout";
 // import Link from "@docusaurus/Link";
@@ -139,19 +139,42 @@ import { HomePage } from "../components/Home";
 // }
 
 export default function Home() {
-    const { siteConfig } = useDocusaurusContext();
-    return (
-        <>
-            <Layout
-                title={`Yak Language ${siteConfig.title}`}
-                description="Web安全能力研发最强语言"
-            >
-                {/* <HomepageHeader/> */}
-                {/* <main> */}
-                <HomePage />
-                {/*<HomepageFeatures/>*/}
-                {/* </main> */}
-            </Layout>
-        </>
+  const { siteConfig } = useDocusaurusContext();
+  const [isShow, setIsShow] = useState(false);
+  useEffect(() => {
+    const DesignW = 1920;
+    const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
+
+    document.getElementsByTagName("html")[0].style.fontSize =
+      (document.body.offsetWidth / DesignW) * FontRate + "px";
+    document.getElementsByTagName("body")[0].style.fontSize =
+      (document.body.offsetWidth / DesignW) * FontRate + "px";
+    setIsShow(true);
+    window.addEventListener(
+      "onorientationchange" in window ? "orientationchange" : "resize",
+      () => {
+        document.getElementsByTagName("html")[0].style.fontSize =
+          (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize =
+          (document.body.offsetWidth / DesignW) * FontRate + "px";
+      }
     );
+  }, []);
+
+  return (
+    <>
+      {isShow && (
+        <Layout
+          title={`Yak Language ${siteConfig.title}`}
+          description="Web安全能力研发最强语言"
+        >
+          {/* <HomepageHeader/> */}
+          {/* <main> */}
+          <HomePage />
+          {/*<HomepageFeatures/>*/}
+          {/* </main> */}
+        </Layout>
+      )}
+    </>
+  );
 }

@@ -32,7 +32,7 @@
       }
     }
     .safety-body-show {
-      padding-top: calc(70px + 40px);
+      padding-top: calc(70px + 16px);
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
@@ -48,6 +48,8 @@
         height: 140px;
         text-align: center;
         background-color: #42D7AD;
+        border: 1px solid #42d7ad;
+        border-radius: 4px;
         .left-img-style{
             position: absolute;
             top: 0;
@@ -95,7 +97,7 @@
     }
     @media (min-width: 1200px) {
       .safety-body-show {
-        padding-top: calc(100px + 40px);
+        padding-top: calc(100px + 16px);
         padding-left: 196px;
         padding-right: 196px;
         max-width: 1552px;

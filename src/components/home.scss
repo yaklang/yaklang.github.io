@@ -8,7 +8,7 @@
 .home-container {
   .guide-body {
     position: relative;
-    width: REM(1920);
+    width: 100%;
     height: REM(762);
     display: inline-block;
     .guide-background-img {
@@ -73,7 +73,7 @@
   }
 
   .introduce-body {
-    width: REM(1920);
+    width: 100%;
     height: REM(3143);
     padding: REM(54) 0 REM(200) 0;
     .sticky-content {
@@ -234,7 +234,7 @@
 
   .appraise-body {
     margin-top: REM(120);
-    width: REM(1920);
+    width: 100%;
     height: REM(1080);
     background-image: url("../../static/img/home/appraise-bg.png");
     background-size: contain;

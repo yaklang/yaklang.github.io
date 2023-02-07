@@ -249,8 +249,8 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         />
         <div className="guide-words-body">
           <div className="guide-words-body-header">
-            <span className="guide-words-body-header-orange">CDSL-</span>
-            <span className="uide-words-body-header-text">YAK</span>
+            <span className="guide-words-body-header-orange">CDSL</span>
+            <span className="uide-words-body-header-text">-YAK</span>
             <img
               src={
                 require("../../static/img/home/homeHeadCircular.png").default
