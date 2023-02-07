@@ -72,7 +72,7 @@ module.exports = {
                             //     type: "doc",
                             //     docId: "intro",
                             //     docsPluginId: "products",
-                            label: "Yakit 平台",
+                            label: "Yak IDE",
                             href: "/products/intro",
                         },
                     ],
