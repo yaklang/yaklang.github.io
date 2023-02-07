@@ -161,6 +161,15 @@ export default function Home() {
     );
   }, []);
 
+  useEffect(()=>{
+    document.getElementsByTagName("html")[0].style.scrollBehavior = "smooth"
+    document.getElementsByTagName("body")[0].style.scrollBehavior = "smooth"
+    return()=>{
+      document.getElementsByTagName("html")[0].style.scrollBehavior = "auto"
+    document.getElementsByTagName("body")[0].style.scrollBehavior = "auto"
+    }
+  },[])
+
   return (
     <>
       {isShow && (
