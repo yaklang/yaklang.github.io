@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Divider, Popover } from "antd";
 import { GithubOutlined, HomeFilled } from "@ant-design/icons";
 import { LocationSvgIcon } from "./icons";
@@ -7,759 +7,780 @@ import { TooltipPlacement } from "antd/lib/tooltip";
 export interface TeamProps {}
 
 interface OwnerInfoProps {
-    img: string;
-    name: string;
-    links: { name: string; href?: string }[];
-    tags: { name: string; color: string }[];
-    description: string;
-    address: string;
-    github?: string;
+  img: string;
+  name: string;
+  links: { name: string; href?: string }[];
+  tags: { name: string; color: string }[];
+  description: string;
+  address: string;
+  github?: string;
 }
 interface OwnerInfoOptProps {
-    x: string;
-    y: string;
-    width: string;
-    height: string;
-    placement: TooltipPlacement;
-    info: OwnerInfoProps;
+  x: string;
+  y: string;
+  width: string;
+  height: string;
+  placement: TooltipPlacement;
+  info: OwnerInfoProps;
 }
 const OwnerInfoOpt: OwnerInfoOptProps[] = [
-    {
-        x: "25.3%",
-        y: "26%",
-        width: "6%",
-        height: "12%",
-        placement: "leftBottom",
-        info: {
-            img: "/img/team/v1ll4n.jpg",
-            name: "v1ll4n",
-            links: [{ name: "@Yak", href: "/" }],
-            tags: [{ name: "项目作者", color: "orange" }],
-            description: "安全研发从业人员、碰巧会写点代码",
-            address: "四川 - 成都",
-            github: "https://github.com/VillanCh",
-        },
+  {
+    x: "25.3%",
+    y: "26%",
+    width: "6%",
+    height: "12%",
+    placement: "leftBottom",
+    info: {
+      img: "/img/team/v1ll4n.jpg",
+      name: "v1ll4n",
+      links: [{ name: "@Yak", href: "/" }],
+      tags: [{ name: "项目作者", color: "orange" }],
+      description: "安全研发从业人员、碰巧会写点代码",
+      address: "四川 - 成都",
+      github: "https://github.com/VillanCh",
     },
-    {
-        x: "36.7%",
-        y: "50.5%",
-        width: "4.8%",
-        height: "10.3%",
-        placement: "left",
-        info: {
-            img: "/img/team/sucre.jpg",
-            name: "sucre",
-            links: [{ name: "@四维创智", href: "https://www.4dogs.cn/" }],
-            tags: [{ name: "能力研发", color: "green" }],
-            description: "乙方红队负责人",
-            address: "北京",
-            github: "https://github.com/linksucre",
-        },
+  },
+  {
+    x: "36.7%",
+    y: "50.5%",
+    width: "4.8%",
+    height: "10.3%",
+    placement: "left",
+    info: {
+      img: "/img/team/sucre.jpg",
+      name: "sucre",
+      links: [{ name: "@四维创智", href: "https://www.4dogs.cn/" }],
+      tags: [{ name: "能力研发", color: "green" }],
+      description: "乙方红队负责人",
+      address: "北京",
+      github: "https://github.com/linksucre",
     },
-    {
-        x: "43.75%",
-        y: "55.5%",
-        width: "6%",
-        height: "12%",
-        placement: "bottom",
-        info: {
-            img: "/img/team/naiquan.jpeg",
-            name: "奶权",
-            links: [{ name: "@米斯特安全", href: "https://www.acmesec.cn/" }],
-            tags: [
-                { name: "yak . 随机端口反连触发 Owner", color: "purple" },
-                { name: "yak . ICMP 长度触发器 Owner", color: "green" },
-            ],
-            description: "Web 安全 / 代码审计 爱好者",
-            address: "深圳",
-        },
+  },
+  {
+    x: "43.75%",
+    y: "55.5%",
+    width: "6%",
+    height: "12%",
+    placement: "bottom",
+    info: {
+      img: "/img/team/naiquan.jpeg",
+      name: "奶权",
+      links: [{ name: "@米斯特安全", href: "https://www.acmesec.cn/" }],
+      tags: [
+        { name: "yak . 随机端口反连触发 Owner", color: "purple" },
+        { name: "yak . ICMP 长度触发器 Owner", color: "green" },
+      ],
+      description: "Web 安全 / 代码审计 爱好者",
+      address: "深圳",
     },
-    {
-        x: "45.6%",
-        y: "22.5%",
-        width: "6%",
-        height: "5.2%",
-        placement: "top",
-        info: {
-            img: "/img/team/f1ys0ar.jpeg",
-            name: "f1ys0ar",
-            links: [
-                { name: "@中国科学院大学", href: "https://www.ucas.ac.cn/" },
-            ],
-            tags: [{ name: "Yak.pwn 模块 owner", color: "blue" }],
-            description: "在读博士（中国科学院大学）",
-            address: "北京",
-            github: "https://github.com/flysoar",
-        },
+  },
+  {
+    x: "45.6%",
+    y: "22.5%",
+    width: "6%",
+    height: "5.2%",
+    placement: "top",
+    info: {
+      img: "/img/team/f1ys0ar.jpeg",
+      name: "f1ys0ar",
+      links: [{ name: "@中国科学院大学", href: "https://www.ucas.ac.cn/" }],
+      tags: [{ name: "Yak.pwn 模块 owner", color: "blue" }],
+      description: "在读博士（中国科学院大学）",
+      address: "北京",
+      github: "https://github.com/flysoar",
     },
-    {
-        x: "56.9%",
-        y: "63.5%",
-        width: "4.8%",
-        height: "10.3%",
-        placement: "rightTop",
-        info: {
-            img: "/img/team/yuqi.jpg",
-            name: "yuqi",
-            links: [{ name: "@yaklang.io", href: "/" }],
-            tags: [{ name: "能力研发", color: "blue" }],
-            description: "web安全 守门员",
-            address: "四川 - 成都",
-        },
+  },
+  {
+    x: "56.9%",
+    y: "63.5%",
+    width: "4.8%",
+    height: "10.3%",
+    placement: "rightTop",
+    info: {
+      img: "/img/team/yuqi.jpg",
+      name: "yuqi",
+      links: [{ name: "@yaklang.io", href: "/" }],
+      tags: [{ name: "能力研发", color: "blue" }],
+      description: "web安全 守门员",
+      address: "四川 - 成都",
     },
-    {
-        x: "66.5%",
-        y: "46%",
-        width: "4.3%",
-        height: "10.3%",
-        placement: "right",
-        info: {
-            img: "/img/team/small_j.jpg",
-            name: "small_j",
-            links: [{ name: "@yaklang.io", href: "/" }],
-            tags: [{ name: "能力研发", color: "purple" }],
-            description: "多学习，多喝水，早睡早起",
-            address: "四川 - 成都",
-        },
+  },
+  {
+    x: "66.5%",
+    y: "46%",
+    width: "4.3%",
+    height: "10.3%",
+    placement: "right",
+    info: {
+      img: "/img/team/small_j.jpg",
+      name: "small_j",
+      links: [{ name: "@yaklang.io", href: "/" }],
+      tags: [{ name: "能力研发", color: "purple" }],
+      description: "多学习，多喝水，早睡早起",
+      address: "四川 - 成都",
     },
-    {
-        x: "50.3%",
-        y: "39.5%",
-        width: "5.6%",
-        height: "12.1%",
-        placement: "topLeft",
-        info: {
-            img: "/img/team/z3r0ne.jpg",
-            name: "z3r0ne",
-            links: [{ name: "@yaklang.io", href: "/" }],
-            tags: [{ name: "能力研发", color: "blue" }],
-            description: "红队攻防爱好者/安全开发",
-            address: "四川 - 成都",
-            github: "https://github.com/OrangeWatermelon",
-        },
+  },
+  {
+    x: "50.3%",
+    y: "39.5%",
+    width: "5.6%",
+    height: "12.1%",
+    placement: "topLeft",
+    info: {
+      img: "/img/team/z3r0ne.jpg",
+      name: "z3r0ne",
+      links: [{ name: "@yaklang.io", href: "/" }],
+      tags: [{ name: "能力研发", color: "blue" }],
+      description: "红队攻防爱好者/安全开发",
+      address: "四川 - 成都",
+      github: "https://github.com/OrangeWatermelon",
     },
-    {
-        x: "26.8%",
-        y: "62.9%",
-        width: "4.8%",
-        height: "10.3%",
-        placement: "leftTop",
-        info: {
-            img: "/img/team/nonight.jpg",
-            name: "nonight",
-            links: [{ name: "@yaklang.io", href: "/" }],
-            tags: [{ name: "前端负责人", color: "blue" }],
-            description: "早睡早起身体好",
-            address: "四川 - 成都",
-        },
+  },
+  {
+    x: "26.8%",
+    y: "62.9%",
+    width: "4.8%",
+    height: "10.3%",
+    placement: "leftTop",
+    info: {
+      img: "/img/team/nonight.jpg",
+      name: "nonight",
+      links: [{ name: "@yaklang.io", href: "/" }],
+      tags: [{ name: "前端负责人", color: "blue" }],
+      description: "早睡早起身体好",
+      address: "四川 - 成都",
     },
+  },
 ];
 
 interface ContributorsInfoProps {
-    img: string;
-    name: string;
-    links: { name: string; href?: string }[];
-    description: string;
-    address: string;
-    icon?: { icon?: React.ReactNode; href: string };
+  img: string;
+  name: string;
+  links: { name: string; href?: string }[];
+  description: string;
+  address: string;
+  icon?: { icon?: React.ReactNode; href: string };
 }
 const ContributorsInfo: ContributorsInfoProps[] = [
-    {
-        img: "/img/team/timwhite.png",
-        name: "TimWhite",
-        links: [{ name: "@xrayteam", href: "https://xray.cool/team/" }],
-        description: "红队攻防技术研究员、免杀/对抗 爱好者",
-        address: "上海",
-        icon: { href: "https://github.com/timwhitez" },
+  {
+    img: "/img/team/timwhite.png",
+    name: "TimWhite",
+    links: [{ name: "@xrayteam", href: "https://xray.cool/team/" }],
+    description: "红队攻防技术研究员、免杀/对抗 爱好者",
+    address: "上海",
+    icon: { href: "https://github.com/timwhitez" },
+  },
+  {
+    img: "/img/team/ykc.jpg",
+    name: "ykc",
+    links: [
+      { name: "@xray @rad", href: "https://xray.cool/" },
+      { name: "@长亭科技", href: "https://www.chaitin.cn/zh/" },
+    ],
+    description: "现供职于长亭科技",
+    address: "浙江 - 杭州",
+    icon: { href: "https://github.com/chinaykc" },
+  },
+  {
+    img: "/img/team/Alex-null.jpeg",
+    name: "Alex-null",
+    links: [{ name: "@青藤 云安全", href: "https://www.qingteng.cn/" }],
+    description: "技术爱好者，供职于青藤云安全",
+    address: "上海",
+    icon: { href: "https://github.com/Alex-null" },
+  },
+  {
+    img: "/img/team/国产大熊猫.jpeg",
+    name: "国产大熊猫",
+    links: [],
+    description: "研发安全工程师",
+    address: "浙江 - 杭州",
+    icon: {
+      icon: <img src="/img/team/oschina.png" className="link-img" />,
+      href: "https://my.oschina.net/9199771",
     },
-    {
-        img: "/img/team/ykc.jpg",
-        name: "ykc",
-        links: [
-            { name: "@xray @rad", href: "https://xray.cool/" },
-            { name: "@长亭科技", href: "https://www.chaitin.cn/zh/" },
-        ],
-        description: "现供职于长亭科技",
-        address: "浙江 - 杭州",
-        icon: { href: "https://github.com/chinaykc" },
+  },
+  {
+    img: "/img/team/jiansiting.jpeg",
+    name: "剑思庭",
+    links: [{ name: "@jiansiting" }],
+    description: "工业安全红队IRTeam联合创始人，打造工业安全杀伤链建设。",
+    address: "",
+    icon: { href: "https://github.com/jiansiting" },
+  },
+  {
+    img: "/img/team/HoAd.jpeg",
+    name: "HoAd",
+    links: [{ name: "@虚拟尽头" }],
+    description: "红蓝攻防爱好者",
+    address: "甘肃 - 庆阳",
+  },
+  {
+    img: "/img/team/斑马.jpeg",
+    name: "斑马",
+    links: [],
+    description: "Web狗，缝合怪",
+    address: "上海",
+    icon: { href: "https://github.com/givemefivw" },
+  },
+  {
+    img: "/img/team/shangzeng.jpeg",
+    name: "shangzeng",
+    links: [{ name: "@shangzeng.club", href: "http://shangzeng.club/" }],
+    description: "金融安全工作者",
+    address: "长春",
+    icon: { href: "https://github.com/shangzeng/" },
+  },
+  {
+    img: "/img/team/cat.jpg",
+    name: "李大壮",
+    links: [{ name: "@Xiecat团队", href: "https://github.com/becivells" }],
+    description: "安全研发，xiecat 成员",
+    address: "浙江杭州",
+    icon: {
+      href: "https://github.com/becivells",
     },
-    {
-        img: "/img/team/Alex-null.jpeg",
-        name: "Alex-null",
-        links: [{ name: "@青藤 云安全", href: "https://www.qingteng.cn/" }],
-        description: "技术爱好者，供职于青藤云安全",
-        address: "上海",
-        icon: { href: "https://github.com/Alex-null" },
-    },
-    {
-        img: "/img/team/国产大熊猫.jpeg",
-        name: "国产大熊猫",
-        links: [],
-        description: "研发安全工程师",
-        address: "浙江 - 杭州",
-        icon: {
-            icon: <img src="/img/team/oschina.png" className="link-img" />,
-            href: "https://my.oschina.net/9199771",
-        },
-    },
-    {
-        img: "/img/team/jiansiting.jpeg",
-        name: "剑思庭",
-        links: [{ name: "@jiansiting" }],
-        description: "工业安全红队IRTeam联合创始人，打造工业安全杀伤链建设。",
-        address: "",
-        icon: { href: "https://github.com/jiansiting" },
-    },
-    {
-        img: "/img/team/HoAd.jpeg",
-        name: "HoAd",
-        links: [{ name: "@虚拟尽头" }],
-        description: "红蓝攻防爱好者",
-        address: "甘肃 - 庆阳",
-    },
-    {
-        img: "/img/team/斑马.jpeg",
-        name: "斑马",
-        links: [],
-        description: "Web狗，缝合怪",
-        address: "上海",
-        icon: { href: "https://github.com/givemefivw" },
-    },
-    {
-        img: "/img/team/shangzeng.jpeg",
-        name: "shangzeng",
-        links: [{ name: "@shangzeng.club", href: "http://shangzeng.club/" }],
-        description: "金融安全工作者",
-        address: "长春",
-        icon: { href: "https://github.com/shangzeng/" },
-    },
-    {
-        img: "/img/team/Vanilla.jpeg",
-        name: "Vanilla",
-        links: [{ name: "@Xiecat团队", href: "http://www.xiecat.fun/" }],
-        description: "甲方安全建设/应用安全",
-        address: "",
-        icon: {
-            icon: <img src="/img/team/xiecat.png" className="link-img" />,
-            href: "http://www.xiecat.fun/",
-        },
-    },
+  },
 ];
 
 interface ConsultantInfoProps {
-    img: string;
-    name: string;
-    links: { name: string; href?: string }[];
-    description: string;
-    address: string;
+  img: string;
+  name: string;
+  links: { name: string; href?: string }[];
+  description: string;
+  address: string;
 }
 const ConsultantInfo: ConsultantInfoProps[] = [
-    {
-        img: "/img/team/phith0n.jpg",
-        name: "phith0n",
-        links: [{ name: "@govuln.com", href: "https://govuln.com/" }],
-        description: "Vulhub创始人/代码审计社区创始人",
-        address: "新加坡",
-    },
-    {
-        img: "/img/team/cuihuagege.jpg",
-        name: "翠花哥哥",
-        links: [{ name: "@青藤 云安全", href: "https://www.qingteng.cn/" }],
-        description: "安全产品 / 安全架构专家",
-        address: "北京",
-    },
-    {
-        img: "/img/team/LuoyinFeng.jpg",
-        name: "Luoyin Feng",
-        links: [
-            {
-                name: "@Roblox China Security",
-                href: "https://www.linkedin.com/in/fengluoyin/",
-            },
-        ],
-        description: "Security Lead",
-        address: "America",
-    },
-    {
-        img: "/img/team/chenghao.jpg",
-        name: "程昊",
-        links: [
-            {
-                name: "@博和汉商",
-                href: "http://www.bhslaw.cn/",
-            },
-        ],
-        description: "首席法律顾问",
-        address: "常州",
-    },
-    {
-        img: "/img/team/HTZhang.jpg",
-        name: "HT.Zhang",
-        links: [
-            {
-                name: "@郑州大学",
-            },
-        ],
-        description: "网络安全践行者/教育者",
-        address: "郑州",
-    },
+  {
+    img: "/img/team/safetyDean.png",
+    name: "张小松",
+    links: [
+      {
+        name: "@电子科技大学网络空间安全研究院",
+        href: "https://www.scse.uestc.edu.cn/",
+      },
+    ],
+    description: "电子科技大学网络空间安全研究院长",
+    address: "成都",
+  },
+  {
+    img: "/img/team/phith0n.jpg",
+    name: "phith0n",
+    links: [{ name: "@govuln.com", href: "https://govuln.com/" }],
+    description: "Vulhub创始人/代码审计社区创始人",
+    address: "新加坡",
+  },
+  {
+    img: "/img/team/cuihuagege.jpg",
+    name: "翠花哥哥",
+    links: [{ name: "@青藤 云安全", href: "https://www.qingteng.cn/" }],
+    description: "安全产品 / 安全架构专家",
+    address: "北京",
+  },
+  {
+    img: "/img/team/LuoyinFeng.jpg",
+    name: "Luoyin Feng",
+    links: [
+      {
+        name: "@Roblox China Security",
+        href: "https://www.linkedin.com/in/fengluoyin/",
+      },
+    ],
+    description: "Security Lead",
+    address: "America",
+  },
+  {
+    img: "/img/team/HTZhang.jpg",
+    name: "HT.Zhang",
+    links: [
+      {
+        name: "@郑州大学",
+      },
+    ],
+    description: "网络安全践行者/教育者",
+    address: "郑州",
+  },
+  {
+    img: "/img/team/chenghao.jpg",
+    name: "程昊",
+    links: [
+      {
+        name: "@博和汉商",
+        href: "http://www.bhslaw.cn/",
+      },
+    ],
+    description: "首席法律顾问",
+    address: "常州",
+  },
 ];
 
 interface ThanksForInfoProps {
-    img: string;
-    name: string;
-    tag: { name: string; color: string };
-    description: string[];
-    address: string;
-    home?: string;
-    github?: string;
+  img: string;
+  name: string;
+  tag: { name: string; color: string,fontSize?:number };
+  description: string[];
+  address: string;
+  home?: string;
+  github?: string;
 }
 const ThanksForInfo: ThanksForInfoProps[] = [
-    // {
-    //     img: "/img/team/4dogs.jpg",
-    //     name: "四维创智",
-    //     tag: { name: "特别赞助商", color: "red" },
-    //     description: [
-    //         "为推动 Yak 项目生态做出杰出贡献",
-    //         "同时感谢对 Yak 的慷慨捐赠",
-    //     ],
-    //     address: "北京",
-    //     home: "http://www.4dogs.cn/",
-    // },
-    {
-        img: "/img/team/projectdiscovery.png",
-        name: "ProjectDiscovery",
-        tag: { name: "nuclei 集成", color: "purple" },
-        description: ["无私的 MIT 开源精神", "为 Yak 提供 nuclei 漏洞检测能力"],
-        address: "",
-        home: "https://projectdiscovery.io/#/",
-        github: "https://github.com/projectdiscovery/",
-    },
-    {
-        img: "/img/team/vulhub.png",
-        name: "Vulhub",
-        tag: { name: "漏洞靶场基础设施", color: "blue" },
-        description: ["无私的漏洞靶场基础设施提供者"],
-        address: "新加坡",
-        home: "https://vulhub.org/",
-        github: "https://github.com/vulhub/",
-    },
-    {
-        img: "/img/team/cnss.png",
-        name: "CNSS",
-        tag: { name: "idea inspired", color: "orange" },
-        description: ["优秀的 CTF 战队", "为 Yak 安全能力构建提供灵感"],
-        address: "四川 - 成都",
-        home: "https://cnss.io/",
-        github: "https://github.com/cnss/",
-    },
+  {
+      img: "/img/team/safety.jpg",
+      name: "电子科技大学网络空间安全研究院",
+      tag: { name: "长期系统开展网络安全研究和人才培养", color: "red",fontSize:12 },
+      description: [
+          "YAK 架构和思想的策源地，核心团队和人员的成长培养"
+      ],
+      address: "四川成都",
+      home: "http://www.uestc.edu.cn",
+  },
+  {
+    img: "/img/team/projectdiscovery.png",
+    name: "ProjectDiscovery",
+    tag: { name: "nuclei 集成", color: "purple" },
+    description: ["无私的 MIT 开源精神", "为 Yak 提供 nuclei 漏洞检测能力"],
+    address: "",
+    home: "https://projectdiscovery.io/#/",
+    github: "https://github.com/projectdiscovery/",
+  },
+  {
+    img: "/img/team/vulhub.png",
+    name: "Vulhub",
+    tag: { name: "漏洞靶场基础设施", color: "blue" },
+    description: ["无私的漏洞靶场基础设施提供者"],
+    address: "新加坡",
+    home: "https://vulhub.org/",
+    github: "https://github.com/vulhub/",
+  },
+  {
+    img: "/img/team/cnss.png",
+    name: "CNSS",
+    tag: { name: "idea inspired", color: "orange" },
+    description: ["优秀的 CTF 战队", "为 Yak 安全能力构建提供灵感"],
+    address: "四川 - 成都",
+    home: "https://cnss.io/",
+    github: "https://github.com/cnss/",
+  },
 ];
 
 export const Team: React.FC<TeamProps> = (props) => {
-    return (
-        <div className="team-and-thank-container">
-            <div className="owner-body">
-                <div className="owner-header-title">Yaklang.io 团队</div>
-                <div className="owner-member-introduce-body">
-                    <div className="owner-member-introduce-img">
-                        <div className="owner-member-introduce-img-body">
-                            <img
-                                src="/img/team/owner.png"
-                                className="img-style"
-                            ></img>
-                            {OwnerInfoOpt.map((item) => {
-                                const { x, y, width, height, placement, info } =
-                                    item;
-                                return (
-                                    <div
-                                        className="img-info-popover"
-                                        style={{
-                                            width: width,
-                                            height: height,
-                                            left: x,
-                                            top: y,
-                                        }}
-                                        key={item.info.name}
-                                    >
-                                        <Popover
-                                            content={<Owner info={info} />}
-                                            placement={placement}
-                                        >
-                                            <div className="img-info-popover-div"></div>
-                                        </Popover>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                    <div className="owner-member-introduce-title">
-                        做难且正确的事！
-                    </div>
-                </div>
-            </div>
 
-            <div className="contributors-body">
-                <div className="contributors-header-title">
-                    Yak 生态共建杰出贡献成员
-                </div>
-                <div className="contributors-member-wrapper">
-                    <div className="contributors-member-grid-wrapper">
-                        {ContributorsInfo.map((item) => {
-                            return (
-                                <Contributors
-                                    className="grid-thumbnail"
-                                    key={item.name}
-                                    info={item}
-                                    hoverable={false}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
-
-            <div className="consultant-body">
-                <div className="consultant-header-title">特别顾问</div>
-
-                <div className="consultant-member-wrapper">
-                    <div className="consultant-member-grid-wrapper">
-                        {ConsultantInfo.map((item) => {
-                            return <Consultant key={item.name} info={item} />;
-                        })}
-                    </div>
-                </div>
-
-                <img
-                    src="/img/team/topLeft.png"
-                    className="consultant-wrapper-top-left"
-                />
-                <img
-                    src="/img/team/rightBottom.png"
-                    className="consultant-wrapper-right-bottom"
-                />
-            </div>
-
-            <div className="thanksfor-body">
-                <div className="thanksfor-header-title">特别致谢</div>
-
-                <div className="thanksfor-member-wrapper">
-                    <div className="thanksfor-member-grid-wrapper">
-                        {ThanksForInfo.map((item) => {
-                            return <ThanksFor key={item.name} info={item} />;
-                        })}
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="team-and-thank-container">
+      <div className="safety-body">
+        <div className="safety-body-logo">
+          <img src="/img/team/safety-title.png" className="img-style" />
         </div>
-    );
+        <div className="safety-body-content">
+          <span className="safety-body-content-color">
+            电子科技大学网络空间安全研究院
+          </span>
+          是国内最早系统开展计算机系统与网络安全研究的单位之一，创新提出以
+          <span className="safety-body-content-color">
+            “智感”、“透析”、“活现”
+          </span>
+          为核心要素的主动网络安全模型并在该领域持续开展基础性、开拓性的探索和实践，曾牵头获得
+          2019 国家科技进步一等奖，2012 国家科技进步二等奖，3
+          次省部科技进步一等奖，2
+          次省部技术发明一等奖，入选“十三五”国家自然科学基金资助项目优秀成果，发表高水平学术论文
+          400 余篇，出版著作多部。
+          <span className="safety-body-content-color">CDSL-YAK</span>{" "}
+          正是由网络空间安全研究院创建的
+          <span className="safety-body-content-color">“凝聚工作室”</span>
+          核心成员牵头发起，持续多年研发出的
+          <span className="safety-body-content-color">
+            国内首款开源网络安全领域专用编程语言。
+          </span>
+        </div>
+        <div className="safety-body-show">
+          <div className="safety-body-box">
+
+            <div className="safety-body-box-show">
+                <img src="/img/team/safety-bg-left.png" className="left-img-style" />
+                <img src="/img/team/safety-bg-right.png" className="right-img-style" />
+                <div className="item-box">
+                    <div className="item-box-title">2项</div>
+                    <div className="item-box-content">国家级奖项</div>
+                </div>
+                <div className="item-box">
+                    <div className="item-box-title">5项</div>
+                    <div className="item-box-content">省级奖项</div>
+                </div>
+                <div className="item-box">
+                    <div className="item-box-title">400+</div>
+                    <div className="item-box-content">学术论文</div>
+                </div>
+                <div className="item-box">
+                    <div className="item-box-title">多部</div>
+                    <div className="item-box-content">学术著作</div>
+                </div>
+            </div>
+            
+          </div>
+
+          <img src="/img/team/bigHouse.png" className="img-style" />
+        </div>
+      </div>
+      <div className="owner-body">
+        <div className="owner-header-title">Yaklang.io 团队</div>
+        <div className="owner-member-introduce-body">
+          <div className="owner-member-introduce-img">
+            <div className="owner-member-introduce-img-body">
+              <img src="/img/team/owner.png" className="img-style"></img>
+              {OwnerInfoOpt.map((item) => {
+                const { x, y, width, height, placement, info } = item;
+                return (
+                  <div
+                    className="img-info-popover"
+                    style={{
+                      width: width,
+                      height: height,
+                      left: x,
+                      top: y,
+                    }}
+                    key={item.info.name}
+                  >
+                    <Popover
+                      content={<Owner info={info} />}
+                      placement={placement}
+                    >
+                      <div className="img-info-popover-div"></div>
+                    </Popover>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="owner-member-introduce-title">做难且正确的事！</div>
+        </div>
+      </div>
+
+      <div className="contributors-body">
+        <div className="contributors-header-title">
+          Yak 生态共建杰出贡献成员
+        </div>
+        <div className="contributors-member-wrapper">
+          <div className="contributors-member-grid-wrapper">
+            {ContributorsInfo.map((item) => {
+              return (
+                <Contributors
+                  className="grid-thumbnail"
+                  key={item.name}
+                  info={item}
+                  hoverable={false}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="consultant-body">
+        <div className="consultant-header-title">特别顾问</div>
+
+        <div className="consultant-member-wrapper">
+          <div className="consultant-member-grid-wrapper">
+            {ConsultantInfo.map((item) => {
+              return <Consultant key={item.name} info={item} />;
+            })}
+          </div>
+        </div>
+
+        <img
+          src="/img/team/topLeft.png"
+          className="consultant-wrapper-top-left"
+        />
+        <img
+          src="/img/team/rightBottom.png"
+          className="consultant-wrapper-right-bottom"
+        />
+      </div>
+
+      <div className="thanksfor-body">
+        <div className="thanksfor-header-title">特别致谢</div>
+
+        <div className="thanksfor-member-wrapper">
+          <div className="thanksfor-member-grid-wrapper">
+            {ThanksForInfo.map((item) => {
+              return <ThanksFor key={item.name} info={item} />;
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 interface OwnerProps {
-    info: OwnerInfoProps;
+  info: OwnerInfoProps;
 }
 const Owner: React.FC<OwnerProps> = React.memo((props) => {
-    const { info } = props;
-    return (
-        <div className="owner-member-opt">
-            <div className="owner-member-opt-author">
-                <div className="author-info">
-                    <div className="author-info-img">
-                        <img src={info.img} className="img-style" />
-                    </div>
-                    <div className="author-info-body">
-                        <div className="author-info-body-name-link">
-                            <div className="name-style">{info.name}</div>
-                            <div className="link-body">
-                                {info.links.map((item, index) => {
-                                    if (item.href) {
-                                        return (
-                                            <a
-                                                className="link-jump"
-                                                key={item.name}
-                                                href={item.href}
-                                                target={"_blank"}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        );
-                                    }
-                                    return (
-                                        <div
-                                            className="link-no-jump"
-                                            key={item.name}
-                                        >
-                                            {item.name}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <div className="author-info-body-tag">
-                            {info.tags.map((item) => {
-                                return (
-                                    <div
-                                        key={item.name}
-                                        className={`tag-div-style ${item.color}-tag-div`}
-                                    >
-                                        {item.name}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
-                </div>
-                {info.github && (
-                    <a
-                        className="author-github"
-                        href={info.github}
+  const { info } = props;
+  return (
+    <div className="owner-member-opt">
+      <div className="owner-member-opt-author">
+        <div className="author-info">
+          <div className="author-info-img">
+            <img src={info.img} className="img-style" />
+          </div>
+          <div className="author-info-body">
+            <div className="author-info-body-name-link">
+              <div className="name-style">{info.name}</div>
+              <div className="link-body">
+                {info.links.map((item, index) => {
+                  if (item.href) {
+                    return (
+                      <a
+                        className="link-jump"
+                        key={item.name}
+                        href={item.href}
                         target={"_blank"}
-                        title="点击跳转"
-                    >
-                        <div className="github-img">
-                            <GithubOutlined className="github-icon" />
-                        </div>
-                    </a>
-                )}
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  }
+                  return (
+                    <div className="link-no-jump" key={item.name}>
+                      {item.name}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-
-            <div
-                className="owner-member-opt-description"
-                title={info.description}
-            >
-                {info.description}
+            <div className="author-info-body-tag">
+              {info.tags.map((item) => {
+                return (
+                  <div
+                    key={item.name}
+                    className={`tag-div-style ${item.color}-tag-div`}
+                  >
+                    {item.name}
+                  </div>
+                );
+              })}
             </div>
-
-            <div className="owner-member-opt-address">
-                {/* @ts-ignore */}
-                <LocationSvgIcon className="address-icon" />
-                <span className="address-style">{info.address || "- -"}</span>
-            </div>
+          </div>
         </div>
-    );
+        {info.github && (
+          <a
+            className="author-github"
+            href={info.github}
+            target={"_blank"}
+            title="点击跳转"
+          >
+            <div className="github-img">
+              <GithubOutlined className="github-icon" />
+            </div>
+          </a>
+        )}
+      </div>
+
+      <div className="owner-member-opt-description" title={info.description}>
+        {info.description}
+      </div>
+
+      <div className="owner-member-opt-address">
+        {/* @ts-ignore */}
+        <LocationSvgIcon className="address-icon" />
+        <span className="address-style">{info.address || "- -"}</span>
+      </div>
+    </div>
+  );
 });
 
 interface ContributorsProps {
-    info: ContributorsInfoProps;
-    hoverable?: boolean;
-    className?: string;
+  info: ContributorsInfoProps;
+  hoverable?: boolean;
+  className?: string;
 }
 const Contributors: React.FC<ContributorsProps> = React.memo((props) => {
-    const { info, hoverable = true, className } = props;
-    return (
-        <Card
-            className={`contributors-member-opt ${className || ""}`}
-            bodyStyle={{ padding: "24px 16px 16px 24px" }}
-            hoverable={hoverable}
-        >
-            <div className="member-info-body">
-                <div className="member-author-link">
-                    <div className="author-info">
-                        <div className="author-info-img">
-                            <img src={info.img} className="img-style" />
-                        </div>
-                        <div className="author-info-name-link">
-                            <div className="name-style">{info.name}</div>
-                            {!!info.links.length && (
-                                <div className="link-out">
-                                    {info.links.map((item, index) => {
-                                        if (item.href) {
-                                            return (
-                                                <div
-                                                    style={{
-                                                        display: "inline-block",
-                                                    }}
-                                                    key={item.name}
-                                                >
-                                                    <a
-                                                        className="link-jump"
-                                                        href={item.href}
-                                                        target={"_blank"}
-                                                    >
-                                                        {item.name}
-                                                    </a>
-                                                    {index !==
-                                                        info.links.length -
-                                                            1 && (
-                                                        <Divider type="vertical" />
-                                                    )}
-                                                </div>
-                                            );
-                                        }
-                                        return (
-                                            <div
-                                                style={{
-                                                    display: "inline-block",
-                                                }}
-                                                key={item.name}
-                                            >
-                                                <div className="link-no-jump">
-                                                    {item.name}
-                                                </div>
-                                                {index !==
-                                                    info.links.length - 1 && (
-                                                    <Divider type="vertical" />
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-
-                    {info.icon && (
-                        <a
-                            className="link-info"
-                            href={info.icon.href}
-                            target={"_blank"}
-                            title="点击跳转"
-                        >
-                            {info.icon.icon ? (
-                                info.icon.icon
-                            ) : (
-                                <div className="link-img">
-                                    <GithubOutlined className="link-icon" />
-                                </div>
-                            )}
-                        </a>
-                    )}
-                </div>
-
-                <div className="member-description" title={info.description}>
-                    {info.description}
-                </div>
-
-                <div className="member-address-body">
-                    {/* @ts-ignore */}
-                    <LocationSvgIcon className="address-icon" />
-                    <span className="address-style">
-                        {info.address || "- -"}
-                    </span>
-                </div>
+  const { info, hoverable = true, className } = props;
+  return (
+    <Card
+      className={`contributors-member-opt ${className || ""}`}
+      bodyStyle={{ padding: "24px 16px 16px 24px" }}
+      hoverable={hoverable}
+    >
+      <div className="member-info-body">
+        <div className="member-author-link">
+          <div className="author-info">
+            <div className="author-info-img">
+              <img src={info.img} className="img-style" />
             </div>
-        </Card>
-    );
+            <div className="author-info-name-link">
+              <div className="name-style">{info.name}</div>
+              {!!info.links.length && (
+                <div className="link-out">
+                  {info.links.map((item, index) => {
+                    if (item.href) {
+                      return (
+                        <div
+                          style={{
+                            display: "inline-block",
+                          }}
+                          key={item.name}
+                        >
+                          <a
+                            className="link-jump"
+                            href={item.href}
+                            target={"_blank"}
+                          >
+                            {item.name}
+                          </a>
+                          {index !== info.links.length - 1 && (
+                            <Divider type="vertical" />
+                          )}
+                        </div>
+                      );
+                    }
+                    return (
+                      <div
+                        style={{
+                          display: "inline-block",
+                        }}
+                        key={item.name}
+                      >
+                        <div className="link-no-jump">{item.name}</div>
+                        {index !== info.links.length - 1 && (
+                          <Divider type="vertical" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {info.icon && (
+            <a
+              className="link-info"
+              href={info.icon.href}
+              target={"_blank"}
+              title="点击跳转"
+            >
+              {info.icon.icon ? (
+                info.icon.icon
+              ) : (
+                <div className="link-img">
+                  <GithubOutlined className="link-icon" />
+                </div>
+              )}
+            </a>
+          )}
+        </div>
+
+        <div className="member-description" title={info.description}>
+          {info.description}
+        </div>
+
+        <div className="member-address-body">
+          {/* @ts-ignore */}
+          <LocationSvgIcon className="address-icon" />
+          <span className="address-style">{info.address || "- -"}</span>
+        </div>
+      </div>
+    </Card>
+  );
 });
 
 interface ConsultantProps {
-    info: ConsultantInfoProps;
+  info: ConsultantInfoProps;
 }
 const Consultant: React.FC<ConsultantProps> = React.memo((props) => {
-    const { info } = props;
-    return (
-        <div className="consultant-member-opt">
-            <div className="member-info-img">
-                <div className="img-body">
-                    <img src={info.img} className="img-style" />
-                    <img src={info.img} className="img-mask" />
-                </div>
-            </div>
-
-            <div className="member-author-info">
-                <div className="member-author-info-title">{info.name}</div>
-                <div className="member-author-info-link">
-                    {info.links.map((item, index) => {
-                        if (item.href) {
-                            return (
-                                <div
-                                    style={{ display: "inline-block" }}
-                                    key={item.name}
-                                >
-                                    <a
-                                        className="link-jump"
-                                        href={item.href}
-                                        target={"_blank"}
-                                    >
-                                        {item.name}
-                                    </a>
-                                    {index !== info.links.length - 1 && (
-                                        <Divider type="vertical" />
-                                    )}
-                                </div>
-                            );
-                        }
-                        return (
-                            <div
-                                style={{ display: "inline-block" }}
-                                key={item.name}
-                            >
-                                <div className="link-no-jump">{item.name}</div>
-                                {index !== info.links.length - 1 && (
-                                    <Divider type="vertical" />
-                                )}
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className="member-author-info-description">
-                    {info.description}
-                </div>
-                <div className="member-author-info-address">
-                    {/* @ts-ignore */}
-                    <LocationSvgIcon className="address-icon" />
-                    <span className="address-style">
-                        {info.address || "- -"}
-                    </span>
-                </div>
-            </div>
+  const { info } = props;
+  return (
+    <div className="consultant-member-opt">
+      <div className="member-info-img">
+        <div className="img-body">
+          <img src={info.img} className="img-style" />
+          <img src={info.img} className="img-mask" />
         </div>
-    );
+      </div>
+
+      <div className="member-author-info">
+        <div className="member-author-info-title">{info.name}</div>
+        <div className="member-author-info-link">
+          {info.links.map((item, index) => {
+            if (item.href) {
+              return (
+                <div style={{ display: "inline-block" }} key={item.name}>
+                  <a className="link-jump" href={item.href} target={"_blank"}>
+                    {item.name}
+                  </a>
+                  {index !== info.links.length - 1 && (
+                    <Divider type="vertical" />
+                  )}
+                </div>
+              );
+            }
+            return (
+              <div style={{ display: "inline-block" }} key={item.name}>
+                <div className="link-no-jump">{item.name}</div>
+                {index !== info.links.length - 1 && <Divider type="vertical" />}
+              </div>
+            );
+          })}
+        </div>
+        <div className="member-author-info-description">{info.description}</div>
+        <div className="member-author-info-address">
+          {/* @ts-ignore */}
+          <LocationSvgIcon className="address-icon" />
+          <span className="address-style">{info.address || "- -"}</span>
+        </div>
+      </div>
+    </div>
+  );
 });
 
 interface ThanksForProps {
-    info: ThanksForInfoProps;
+  info: ThanksForInfoProps;
 }
 const ThanksFor: React.FC<ThanksForProps> = React.memo((props) => {
-    const { info } = props;
-    return (
-        <div className="thanksfor-member-opt">
-            <div className="member-info">
-                <div className="member-info-img">
-                    <img src={info.img} className="img-style" />
-                </div>
-                <div className="member-info-name-tag">
-                    <div className="name-style">{info.name}</div>
-                    <div className={`tag-div-style ${info.tag.color}-tag-div`}>
-                        <div className="tag-styl">{info.tag.name}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="member-description">
-                {info.description.map((item) => {
-                    return (
-                        <div key={item} className="description-style">
-                            {item}
-                        </div>
-                    );
-                })}
-            </div>
-
-            <div className="member-address-link">
-                <div className="address-body">
-                    {/* @ts-ignore */}
-                    <LocationSvgIcon className="address-icon" />
-                    <span className="address-style">
-                        {info.address || "- -"}
-                    </span>
-                </div>
-                <div className="link-body">
-                    {!!info.home && (
-                        <a
-                            className="link-jump"
-                            href={info.home}
-                            target={"_blank"}
-                        >
-                            <HomeFilled className="icon-style icon-home-style" />
-                        </a>
-                    )}
-                    {!!info.github && (
-                        <a href={info.github} target={"_blank"}>
-                            <GithubOutlined className="icon-style icon-github-style" />
-                        </a>
-                    )}
-                </div>
-            </div>
+  const { info } = props;
+  return (
+    <div className="thanksfor-member-opt">
+      <div className="member-info">
+        <div className="member-info-img">
+          <img src={info.img} className="img-style" />
         </div>
-    );
+        <div className="member-info-name-tag">
+          <div className="name-style">{info.name}</div>
+        </div>
+      </div>
+      <div className={`tag-div-style ${info.tag.color}-tag-div`} style={info.tag.fontSize?{fontSize:info.tag.fontSize}:{}}>
+            <div className="tag-styl">{info.tag.name}</div>
+          </div>
+      <div className="member-description">
+        {info.description.map((item) => {
+          return (
+            <div key={item} className="description-style">
+              {item}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="member-address-link">
+        <div className="address-body">
+          {/* @ts-ignore */}
+          <LocationSvgIcon className="address-icon" />
+          <span className="address-style">{info.address || "- -"}</span>
+        </div>
+        <div className="link-body">
+          {!!info.home && (
+            <a className="link-jump" href={info.home} target={"_blank"}>
+              <HomeFilled className="icon-style icon-home-style" />
+            </a>
+          )}
+          {!!info.github && (
+            <a href={info.github} target={"_blank"}>
+              <GithubOutlined className="icon-style icon-github-style" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 });
