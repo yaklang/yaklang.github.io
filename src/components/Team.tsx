@@ -317,24 +317,23 @@ const ConsultantInfo: ConsultantInfoProps[] = [
 interface ThanksForInfoProps {
   img: string;
   name: string;
-  tag: { name: string; color: string };
+  tag: { name: string; color: string,fontSize?:number };
   description: string[];
   address: string;
   home?: string;
   github?: string;
 }
 const ThanksForInfo: ThanksForInfoProps[] = [
-  // {
-  //     img: "/img/team/4dogs.jpg",
-  //     name: "四维创智",
-  //     tag: { name: "特别赞助商", color: "red" },
-  //     description: [
-  //         "为推动 Yak 项目生态做出杰出贡献",
-  //         "同时感谢对 Yak 的慷慨捐赠",
-  //     ],
-  //     address: "北京",
-  //     home: "http://www.4dogs.cn/",
-  // },
+  {
+      img: "/img/team/safety.jpg",
+      name: "电子科技大学网络空间安全研究院",
+      tag: { name: "长期系统开展网络安全研究和人才培养", color: "red",fontSize:12 },
+      description: [
+          "YAK 架构和思想的策源地，核心团队和人员的成长培养"
+      ],
+      address: "四川成都",
+      home: "http://www.uestc.edu.cn",
+  },
   {
     img: "/img/team/projectdiscovery.png",
     name: "ProjectDiscovery",
@@ -748,12 +747,11 @@ const ThanksFor: React.FC<ThanksForProps> = React.memo((props) => {
         </div>
         <div className="member-info-name-tag">
           <div className="name-style">{info.name}</div>
-          <div className={`tag-div-style ${info.tag.color}-tag-div`}>
-            <div className="tag-styl">{info.tag.name}</div>
-          </div>
         </div>
       </div>
-
+      <div className={`tag-div-style ${info.tag.color}-tag-div`} style={info.tag.fontSize?{fontSize:info.tag.fontSize}:{}}>
+            <div className="tag-styl">{info.tag.name}</div>
+          </div>
       <div className="member-description">
         {info.description.map((item) => {
           return (
