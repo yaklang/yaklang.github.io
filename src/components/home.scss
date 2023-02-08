@@ -50,17 +50,17 @@
         }
         .header-title {
           position: absolute;
-          top: 3.5rem;
+          top: 3.8rem;
           right: 5.125rem;
           width: 16.25rem;
         }
       }
       &-description {
-        margin-top: REM(16);
-        margin-bottom: REM(56);
+        margin-top: REM(32);
+        margin-bottom: REM(48);
         height: REM(48);
         line-height: REM(24);
-        font-size: 1rem;
+        font-size: 24px;
         color: #686c78;
       }
       &-btn {
