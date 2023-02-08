@@ -78,11 +78,9 @@ log.info("all tasks finished")
 ```
 
 我们创建了一个 `*sync.WaitGroup` 对象，这个对象作用是控制一组异步任务的执行，每一个任务执行之前应该 `.Add(1)` 去 `WaitGroup` 增加一个调用任务的计数， 当任务结束后，应该 `.Done()`
-减去一个任务计数。最后 `WaitGroup` 通过 `.Wait()` 函数
+减去一个任务计数。最后 `WaitGroup` 通过 `.Wait()` 函数。
 
-:::danger 注意！这里有一个易错点
-
-上述代码很容易做错的一个点是在 for 循环中直接使用 Go 关键字启动 Goroutine。例如可能有同学会把上述代码简化成
+但是，我们发现上述的代码还不够精简，他还有很大的提升空间，如果我们把逻辑放在 for 方法体中，并发的编写将会更加精炼；
 
 ```go
 loglevel(`info`)
@@ -90,13 +88,14 @@ loglevel(`info`)
 wg := sync.NewWaitGroup()
 
 for index, element := range ["cha1", "a2", "d3"] {
+    element := element  // 这行代码是必须的，把 element 变量绑定到当前定义域
     wg.Add(1)
-    value = element;
-    go fn{
+    go func{
         defer wg.Done()
-        log.info("caller: %v", value)
+
+        log.info("caller: %v", element)
         sleep(1)
-        log.info("task is finished... caller: %v", value)
+        log.info("task is finished... caller: %s", element)
     }
 }
 
@@ -105,45 +104,7 @@ wg.Wait()
 log.info("all tasks finished")
 ```
 
-这种代码是非常具有迷惑性的，上述代码执行结果大概率是：
-
-```go
-[INFO] 2021-06-30 10:59:05 +0800 [a] start to wait all tasks finishing...
-[INFO] 2021-06-30 10:59:05 +0800 [a] caller: d3
-[INFO] 2021-06-30 10:59:05 +0800 [a] caller: d3
-[INFO] 2021-06-30 10:59:05 +0800 [a] caller: d3
-[INFO] 2021-06-30 10:59:06 +0800 [a] task is finished... caller: d3
-[INFO] 2021-06-30 10:59:06 +0800 [a] task is finished... caller: d3
-[INFO] 2021-06-30 10:59:06 +0800 [a] task is finished... caller: d3
-[INFO] 2021-06-30 10:59:06 +0800 [a] all tasks finished
-```
-
-我们发现 d3 变成了唯一的 caller 并且被调用了 3 次，这和我们一开始的结果差别很大，这是为啥？
-
-> go 关键字启动并不会同步绑定当前上下文的变量，而是真正执行的一瞬间才会绑定，然而执行 Goroutine 函数的时候，并不一定可以和 for 当前循环绑定到。可能获取启动值的时候，参数值已经不一样了
-
-所以，为了解决这个问题，我们不推荐在 for 中直接启动 Goroutine，而应该给 Goroutine 新创建一个冲突域容器，最简单的处理方案其实就是 for 中可以同步执行一个函数，
-在函数同步执行的时候，将会创建一个新的冲突域，在这个域中启动 Goroutine 是安全的！
-
-具体做法如下：
-
-```go
-func submitTask(param) {
-    go func{
-        println("save goroutine")
-    }
-}
-
-for _, value := range [1, 2, 3] {
-    submitTask(value)
-}
-```
-
-观察上面代码，我们很容易就能解决上面提到的 BUG。
-
-:::
-
-:::caution 作为对比，在 Golang 中的处理方式
+:::caution 作为对比，观察在 Golang 中的处理方式
 
 众所周知，在 Golang 中，我们在 for 循环中启动 goroutine 需要万分小心
 
@@ -170,7 +131,7 @@ for _, value := range []string{"a1", "a2", "a3"} {
 
 :::
 
-### 并发范式：带最大并发量限制的多任务
+### "线程池"：如何限制最大并发量
 
 在常用场景下，我们经常会遇到限制：
 
