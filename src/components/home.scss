@@ -1,3 +1,7 @@
+$max-width: REM(1152);
+$mix-width: REM(1152);
+$whole-max-width: 6000px; // 要7800，暂时测试 6000
+
 .opacity-0 {
   opacity: 0;
 }
@@ -6,29 +10,38 @@
 }
 
 .home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $whole-max-width;
+  .guide-background-img {
+    width: 100vw;
+    max-width: $whole-max-width;
+    // height: 100%;
+    height: REM(762);
+    object-fit: cover;
+    object-position: bottom;
+    position: absolute;
+
+    background-image: url(../../static/img/home/homeHeadBg.png);
+    background-size: cover;
+    background-position-y: bottom;
+    background-position-x: center;
+  }
   .guide-body {
     position: relative;
     width: 100%;
     height: REM(762);
-    display: inline-block;
-    .guide-background-img {
-      width: 100%;
-      height: 100%;
-    }
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
     .guide-words-body {
-      position: absolute;
-      top: REM(166);
-      left: REM(384);
-      width: REM(466);
+      width: 100%;
+      max-width: $max-width;
+      padding: 0 REM(40);
+      padding-top: REM(166);
       &-header {
-        // height: REM(72);
-        // line-height: REM(72);
-        // font-size: REM(48);
-        // font-weight: 600;
-        // color: var(--base-font-color);
-        // .text-style {
-        //     color: var(--base-theme-color);
-        // }
         height: REM(72);
         line-height: REM(72);
         font-size: REM(48);
@@ -38,21 +51,21 @@
         &-orange {
           color: var(--base-theme-color);
         }
-        &-text{
-            color: var(--base-font-color);
+        &-text {
+          color: var(--base-font-color);
         }
         .header-circle {
-            position: absolute;
-            top: -0.8rem;
-            right: 20.8rem;
-            width: 9.375rem;
-            height: 5.8125rem;
+          position: absolute;
+          top: REM(-14);
+          left: REM(-18);
+          width: REM(150);
+          height: REM(93);
         }
         .header-title {
           position: absolute;
-          top: 3.8rem;
-          right: 5.125rem;
-          width: 16.25rem;
+          top: REM(60);
+          left: REM(120);
+          width: REM(260);
         }
       }
       &-description {
@@ -76,6 +89,8 @@
     width: 100%;
     height: REM(3143);
     padding: REM(54) 0 REM(200) 0;
+    max-width: $max-width;
+    min-width: $mix-width;
     .sticky-content {
       position: sticky;
       height: REM(696);
@@ -146,6 +161,8 @@
   }
 
   .function-body {
+    max-width: $max-width;
+    min-width: $mix-width;
     &-header {
       height: REM(56);
       font-size: REM(40);
@@ -240,6 +257,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
+    max-width: $max-width;
+    min-width: $mix-width;
     &-header {
       display: inline-block;
       margin: REM(80) 0 REM(16) 0;

@@ -145,18 +145,18 @@ export default function Home() {
     const DesignW = 1920;
     const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
 
-    document.getElementsByTagName("html")[0].style.fontSize =
-      (document.body.offsetWidth / DesignW) * FontRate + "px";
-    document.getElementsByTagName("body")[0].style.fontSize =
-      (document.body.offsetWidth / DesignW) * FontRate + "px";
+    document.getElementsByTagName("html")[0].style.fontSize = "16px";
+    // (document.body.offsetWidth / DesignW) * FontRate + "px";
+    document.getElementsByTagName("body")[0].style.fontSize = "16px";
+    // (document.body.offsetWidth / DesignW) * FontRate + "px";
     setIsShow(true);
     window.addEventListener(
       "onorientationchange" in window ? "orientationchange" : "resize",
       () => {
-        document.getElementsByTagName("html")[0].style.fontSize =
-          (document.body.offsetWidth / DesignW) * FontRate + "px";
-        document.getElementsByTagName("body")[0].style.fontSize =
-          (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("html")[0].style.fontSize = "16px";
+        // (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize = "16px";
+        // (document.body.offsetWidth / DesignW) * FontRate + "px";
       }
     );
   }, []);

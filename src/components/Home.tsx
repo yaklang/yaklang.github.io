@@ -242,11 +242,12 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
   return (
     <div className="home-container">
+      {/* <img
+        src={require("../../static/img/home/homeHeadBg.png").default}
+        className="guide-background-img"
+      /> */}
+      <div className="guide-background-img"></div>
       <div className="guide-body">
-        <img
-          src={require("../../static/img/home/homeHeadBg.png").default}
-          className="guide-background-img"
-        />
         <div className="guide-words-body">
           <div className="guide-words-body-header">
             <span className="guide-words-body-header-orange">CDSL</span>
