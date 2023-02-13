@@ -45,10 +45,11 @@ $REM: 16;
     @return calc($n / $REM) * 1rem;
 }
 
-$whole-max-width: 6000px; // 要7800，暂时测试 6000
+$whole-max-width: 8000px; // 要8000，暂时测试 6000
 .main-wrapper {
   max-width: $whole-max-width;
   margin: 0 auto;
+  width: 100%;
 }
 
 // 解决doc文档呗navbar遮挡问题

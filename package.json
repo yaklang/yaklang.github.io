@@ -19,6 +19,7 @@
     "@docusaurus/preset-classic": "2.0.0-beta.6",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^6.5.1",
+    "ahooks": "^3.7.4",
     "animate.css": "^4.1.1",
     "antd": "4.17.2",
     "axios": "^0.27.2",

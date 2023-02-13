@@ -1,6 +1,6 @@
-$max-width: REM(1152);
+$max-width: REM(8000);
 $mix-width: REM(1152);
-$whole-max-width: 6000px; // 要7800，暂时测试 6000
+$whole-max-width: 8000px; // 要7800，暂时测试 6000
 
 .opacity-0 {
   opacity: 0;
@@ -15,12 +15,10 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
   align-items: center;
   max-width: $whole-max-width;
   .guide-background-img {
-    width: 100vw;
+    width: 100%;
     max-width: $whole-max-width;
     // height: 100%;
-    height: REM(762);
-    object-fit: cover;
-    object-position: bottom;
+    height: REM(786);
     position: absolute;
 
     background-image: url(../../static/img/home/homeHeadBg.png);
@@ -31,14 +29,15 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
   .guide-body {
     position: relative;
     width: 100%;
-    height: REM(762);
+    height: REM(786);
     display: flex;
     justify-content: center;
     margin: 0 auto;
 
     .guide-words-body {
       width: 100%;
-      max-width: $max-width;
+      max-width: REM(1152);
+      min-width: $mix-width;
       padding: 0 REM(40);
       padding-top: REM(166);
       &-header {
@@ -89,12 +88,14 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
     width: 100%;
     height: REM(3143);
     padding: REM(54) 0 REM(200) 0;
-    max-width: $max-width;
+    // max-width: $max-width;
     min-width: $mix-width;
     .sticky-content {
       position: sticky;
       height: REM(696);
       top: REM(117);
+      max-width: REM(2048);
+      margin: 0 auto;
     }
     &-header {
       text-align: center;
@@ -160,9 +161,14 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
     }
   }
 
+  .introduce-body-height-auto {
+    height: auto;
+    // max-width: $max-width;
+  }
+
   .function-body {
-    max-width: $max-width;
-    min-width: $mix-width;
+    // max-width: $max-width;
+    // min-width: $mix-width;
     &-header {
       height: REM(56);
       font-size: REM(40);
@@ -248,82 +254,61 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
       }
     }
   }
+}
 
-  .appraise-body {
-    margin-top: REM(120);
+.appraise-body {
+  margin-top: REM(120);
+  width: 100%;
+  height: auto;
+  background-image: url("../../static/img/home/appraise-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  max-width: 2048px;
+  min-width: REM(1152);
+  margin: 0 auto;
+  &-header {
+    display: inline-block;
+    margin: REM(80) 0 REM(16) 0;
+    text-align: center;
     width: 100%;
-    height: REM(1080);
-    background-image: url("../../static/img/home/appraise-bg.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    max-width: $max-width;
-    min-width: $mix-width;
-    &-header {
-      display: inline-block;
-      margin: REM(80) 0 REM(16) 0;
-      text-align: center;
-      width: 100%;
-      height: REM(56);
-      font-size: REM(40);
-      font-weight: 600;
-      color: var(--base-font-color);
-      line-height: REM(56);
-      &-orange {
-        color: var(--base-theme-color);
-      }
-    }
-    &-description {
-      text-align: center;
-      height: REM(24);
-      font-size: REM(16);
-      color: #686c78;
-      line-height: REM(24);
-    }
-    &-btn {
-      margin-top: REM(32);
-      display: flex;
-      justify-content: center;
-      .download-yakit-btn + .course-doc-btn {
-        margin-left: REM(24);
-      }
-    }
-  }
-
-  .download-yakit-btn {
-    height: REM(48);
-    color: #ffffff;
-    display: flex;
-    cursor: pointer;
-    .btn-title {
-      padding: REM(12) REM(24);
-      background: var(--base-theme-color);
-      border-radius: 4px 0px 0px 4px;
-      .icno-style {
-        font-size: REM(24);
-      }
-      .title-style {
-        margin-left: 4px;
-        line-height: REM(24);
-        font-size: 1rem;
-        font-weight: 600;
-      }
-    }
-    .btn-cion {
-      width: REM(24);
-      background: #f36f13;
-      border-radius: 0px 4px 4px 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-  .course-doc-btn {
-    height: REM(48);
-    padding: REM(12) REM(24);
-    background: #ffffff;
-    border-radius: 4px;
+    height: REM(56);
+    font-size: REM(40);
+    font-weight: 600;
     color: var(--base-font-color);
+    line-height: REM(56);
+    &-orange {
+      color: var(--base-theme-color);
+    }
+  }
+  &-description {
+    text-align: center;
+    height: REM(24);
+    font-size: REM(16);
+    color: #686c78;
+    line-height: REM(24);
+  }
+  &-btn {
+    margin-top: REM(32);
+    display: flex;
+    justify-content: center;
+    .download-yakit-btn + .course-doc-btn {
+      margin-left: REM(24);
+    }
+  }
+}
+.download-yakit-btn {
+  height: REM(48);
+  color: #ffffff;
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    color: #fff;
+  }
+  .btn-title {
+    padding: REM(12) REM(24);
+    background: var(--base-theme-color);
+    border-radius: 4px 0px 0px 4px;
     .icno-style {
       font-size: REM(24);
     }
@@ -333,6 +318,34 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
       font-size: 1rem;
       font-weight: 600;
     }
+  }
+  .btn-cion {
+    width: REM(24);
+    background: #f36f13;
+    border-radius: 0px 4px 4px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.course-doc-btn {
+  height: REM(48);
+  padding: REM(12) REM(24);
+  background: #ffffff;
+  border-radius: 4px;
+  color: var(--base-font-color);
+  &:hover {
+    color: var(--base-font-color);
+  }
+  .icno-style {
+    font-size: REM(24);
+  }
+  .title-style {
+    margin-left: 4px;
+    line-height: REM(24);
+    font-size: 1rem;
+    font-weight: 600;
   }
 }
 
@@ -789,7 +802,7 @@ $whole-max-width: 6000px; // 要7800，暂时测试 6000
 
   .propagate-video {
     padding: 0 20%;
-    height: REM(472);
+    // height: REM(472);
     video {
       background: rgba(57, 61, 72, 0.9);
       border-radius: 16px 16px 0px 0px;
