@@ -223,7 +223,7 @@ function Navbar() {
       document.body.scrollIntoView()
     });
   },[])
-  
+  console.log('mobileSidebar',mobileSidebar);
   return (
     <nav
       ref={navbarRef}

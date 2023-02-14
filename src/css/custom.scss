@@ -7,24 +7,24 @@
 
 /* You can override the default Infima variables here. */
 :root {
-    /*--ifm-color-primary: #25c2a0;*/
-    /*--ifm-color-primary-dark: rgb(33, 175, 144);*/
-    /*--ifm-color-primary-darker: rgb(31, 165, 136);*/
-    /*--ifm-color-primary-darkest: rgb(26, 136, 112);*/
-    /*--ifm-color-primary-light: rgb(70, 203, 174);*/
-    /*--ifm-color-primary-lighter: rgb(102, 212, 189);*/
-    /*--ifm-color-primary-lightest: rgb(146, 224, 208);*/
-    --ifm-color-primary: #3399dd;
-    --ifm-color-primary-dark: #238cd2;
-    --ifm-color-primary-darker: #2184c6;
-    --ifm-color-primary-darkest: #1b6da3;
-    --ifm-color-primary-light: #4aa5e1;
-    --ifm-color-primary-lighter: #56aae3;
-    --ifm-color-primary-lightest: #79bce9;
-    --ifm-code-font-size: 95%;
+  /*--ifm-color-primary: #25c2a0;*/
+  /*--ifm-color-primary-dark: rgb(33, 175, 144);*/
+  /*--ifm-color-primary-darker: rgb(31, 165, 136);*/
+  /*--ifm-color-primary-darkest: rgb(26, 136, 112);*/
+  /*--ifm-color-primary-light: rgb(70, 203, 174);*/
+  /*--ifm-color-primary-lighter: rgb(102, 212, 189);*/
+  /*--ifm-color-primary-lightest: rgb(146, 224, 208);*/
+  --ifm-color-primary: #3399dd;
+  --ifm-color-primary-dark: #238cd2;
+  --ifm-color-primary-darker: #2184c6;
+  --ifm-color-primary-darkest: #1b6da3;
+  --ifm-color-primary-light: #4aa5e1;
+  --ifm-color-primary-lighter: #56aae3;
+  --ifm-color-primary-lightest: #79bce9;
+  --ifm-code-font-size: 95%;
 
-    --base-font-color: #1e1f23;
-    --base-theme-color: #ff7d23;
+  --base-font-color: #1e1f23;
+  --base-theme-color: #ff7d23;
 }
 
 .docusaurus-highlight-code-line {
@@ -41,13 +41,13 @@
 
 html,
 body {
-    scroll-behavior: auto;
-    // min-width: 768px;
+  scroll-behavior: auto;
+  // min-width: 768px;
 }
 
 $REM: 16;
 @function REM($n) {
-    @return calc($n / $REM) * 1rem;
+  @return calc($n / $REM) * 1rem;
 }
 
 $max-width: REM(8000);
@@ -65,31 +65,37 @@ $min-width: REM(1152);
   .container {
     margin-top: REM(63);
     width: 100%;
-    }
-    aside {
-        border-right: 0px;
-    }
-    aside > :first-child {
-        position: fixed;
-        padding-top: 0;
-        top: REM(63);
-        border-right: 1px solid var(--ifm-toc-border-color);
-        height: 94vh;
-    }
+  }
+  aside {
+    border-right: 0px;
+  }
+  aside > :first-child {
+    position: fixed;
+    padding-top: 0;
+    top: REM(63);
+    border-right: 1px solid var(--ifm-toc-border-color);
+    height: 94vh;
+  }
 }
 .theme-doc-sidebar-menu.menu__list {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 img {
-    -webkit-user-drag: none;
+  -webkit-user-drag: none;
 }
 video {
-    -webkit-user-drag: none;
+  -webkit-user-drag: none;
 }
 
 .DocSearch-HitsFooter {
-    display: none !important;
+  display: none !important;
+}
+
+.DocSearch-Button:active,
+.DocSearch-Button:focus,
+.DocSearch-Button:hover {
+  box-shadow: inset 0 0 0 2px#F69C5D !important;
 }
 
 // layout style file
@@ -99,4 +105,4 @@ video {
 @import "../components/home.scss";
 @import "../components/team.scss";
 @import "../components/enterpriseCollaboration.scss";
-@import "../pages/middle.scss"
+@import "../pages/middle.scss";
