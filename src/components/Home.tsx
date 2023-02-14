@@ -1856,6 +1856,7 @@ const AppraiseInfoBody = React.memo(() => {
           volume={0}
           width={"100%"}
           height={"100%"}
+          style={{display:'flex'}}
         />
       </div>
     </div>

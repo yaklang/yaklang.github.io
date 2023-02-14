@@ -1,6 +1,6 @@
 $max-width: REM(8000);
-$mix-width: REM(1152);
-$whole-max-width: 8000px; // 要7800，暂时测试 6000
+// $min-width: REM(1840);
+$min-width: REM(1152);
 
 .opacity-0 {
   opacity: 0;
@@ -13,10 +13,13 @@ $whole-max-width: 8000px; // 要7800，暂时测试 6000
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: $whole-max-width;
+  max-width: $max-width;
+  width: 100%;
+  min-width: $min-width;
   .guide-background-img {
     width: 100%;
-    max-width: $whole-max-width;
+    max-width: $max-width;
+    min-width: REM(2048);
     // height: 100%;
     height: REM(786);
     position: absolute;
@@ -37,7 +40,7 @@ $whole-max-width: 8000px; // 要7800，暂时测试 6000
     .guide-words-body {
       width: 100%;
       max-width: REM(1152);
-      min-width: $mix-width;
+      // min-width: $min-width;
       padding: 0 REM(40);
       padding-top: REM(166);
       &-header {
@@ -89,7 +92,7 @@ $whole-max-width: 8000px; // 要7800，暂时测试 6000
     height: REM(3143);
     padding: REM(54) 0 REM(200) 0;
     // max-width: $max-width;
-    min-width: $mix-width;
+    min-width: $min-width;
     .sticky-content {
       position: sticky;
       height: REM(696);
@@ -168,7 +171,7 @@ $whole-max-width: 8000px; // 要7800，暂时测试 6000
 
   .function-body {
     // max-width: $max-width;
-    // min-width: $mix-width;
+    // min-width: $min-width;
     &-header {
       height: REM(56);
       font-size: REM(40);
@@ -803,6 +806,7 @@ $whole-max-width: 8000px; // 要7800，暂时测试 6000
   .propagate-video {
     padding: 0 20%;
     // height: REM(472);
+    display: flex;
     video {
       background: rgba(57, 61, 72, 0.9);
       border-radius: 16px 16px 0px 0px;

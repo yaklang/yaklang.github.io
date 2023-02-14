@@ -3,6 +3,7 @@
     background: #f6f7f9;
     padding-top: 24px;
     padding-bottom: 24px;
+    width: 100%;
     .div--flex {
         display: flex;
         justify-content: space-between;
@@ -42,6 +43,7 @@
                 .footer__link-item {
                     line-height: normal;
                     color: #686c78;
+                    display: inline-block;
                 }
                 .footer__link-item:hover{
                     color: #ff7d23;
