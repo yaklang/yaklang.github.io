@@ -149,7 +149,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
 
   const oldScrollTop = useRef<number>(0);
-
+  const defDevicePixelRatio = useRef<number>();// 浏览器默认的比例，系统设置中的缩放比例
   useEffect(() => {
     detectZoom();
     window.addEventListener("resize", detectZoom);
@@ -164,9 +164,17 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         let ratio = 0,
           screen = window.screen,
           ua = navigator.userAgent.toLowerCase();
-
         if (window.devicePixelRatio !== undefined) {
-          ratio = window.devicePixelRatio;
+          if (!defDevicePixelRatio.current) {
+            defDevicePixelRatio.current = window.devicePixelRatio;
+          }
+          if(window.devicePixelRatio === defDevicePixelRatio.current){
+            ratio=1 //此时浏览器中的缩放比例为100%
+          }else if(defDevicePixelRatio.current/window.devicePixelRatio===defDevicePixelRatio.current){
+            ratio=0.5// 假如系统设置为2，浏览器缩放为1,此时不应该给ratio=11，应该为其他值，不然动画会显示，展示会有问题
+          }else{
+            ratio=window.devicePixelRatio
+          }
         } else if (~ua.indexOf("msie")) {
           // 兼容ie11以下
           // @ts-ignore
@@ -180,7 +188,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         ) {
           ratio = window.outerWidth / window.innerWidth;
         }
-
         if (ratio) {
           ratio = Math.round(ratio * 100);
         }
@@ -1856,7 +1863,7 @@ const AppraiseInfoBody = React.memo(() => {
           volume={0}
           width={"100%"}
           height={"100%"}
-          style={{display:'flex'}}
+          style={{ display: "flex" }}
         />
       </div>
     </div>

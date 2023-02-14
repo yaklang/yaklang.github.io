@@ -19,7 +19,7 @@ $min-width: REM(1152);
   .guide-background-img {
     width: 100%;
     max-width: $max-width;
-    min-width: REM(2048);
+    min-width: $min-width;
     // height: 100%;
     height: REM(786);
     position: absolute;
@@ -171,7 +171,7 @@ $min-width: REM(1152);
 
   .function-body {
     // max-width: $max-width;
-    // min-width: $min-width;
+    min-width: $min-width;
     &-header {
       height: REM(56);
       font-size: REM(40);
@@ -267,8 +267,8 @@ $min-width: REM(1152);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  max-width: 2048px;
-  min-width: REM(1152);
+  max-width: REM(2048);
+  min-width: $min-width;
   margin: 0 auto;
   &-header {
     display: inline-block;
