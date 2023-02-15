@@ -944,12 +944,7 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="efficent-img">
-          <div
-            className="efficent-img-body"
-            // style={{
-            //   background: "antiquewhite",
-            // }}
-          >
+          <div className="efficent-img-body">
             <div ref={efficent_1} className="efficent-img-1 opacity-0">
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">Golang</div>
