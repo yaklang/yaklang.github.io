@@ -1,0 +1,173 @@
+---
+sidebar_position: 2
+---
+
+
+import TOCInline from '@theme/TOCInline';
+
+# 插件编写指南：创建插件与设置参数
+
+Yakit 的插件并不完全依赖于一门 "开发语言"，并不需要用户自行寻找依赖或者寻找 UI 界面的编写方法。
+
+所有的 UI，依赖甚至编写插件的代码提示都会自动在 Yakit 中完成，作为插件的编写者，只需要把经历专注到 "想要解决哪些问题" 上来。
+
+<TOCInline toc={toc} />
+
+## Hello World!
+
+> 万丈高楼平地起
+
+我们使用 Yakit 来创建用户第一个插件，最简单的当然是从 Hello World 开始了！
+
+插件的创建步骤非常简单，我们使用
+
+1. 打开 Yakit => 点击 '插件仓库' => 点击 '新插件'
+2. 填入基础资料
+3. 保存插件
+4. 执行插件
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/hello-world-yakit.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+## 插件操作台介绍
+
+当我们明白 Hello World 插件的具体操作流程之后，我们可以为大家介绍整体 Yakit 插件系统的操作台
+
+![](/img/products/yakit/yakit-plugin-operator.png)
+
+当我们知道插件操作台如何使用之后，将会很容易创建一个属于自己的插件，接下来我们将会对插件的基础能力做更详细的描述和介绍。
+
+## 如何为插件设置参数？
+
+插件的用户操作核心其实是输入与输出。
+
+我们如何使用 Yakit 提供的 API 来完成插件参数的交互与制定？
+
+### "Yak 原生模块" 的参数制定
+
+如果你正在编写一个 "Yak 原生模块"，在插件编辑页面增加的参数，可以直接使用 yak 语言 cli 模块进行操作。
+
+操作案例如下
+
+#### 快速操作预览 Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-yak-native-params-basic.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+:::danger 需要注意的是
+
+设置的参数类型仅仅针对 Yakit 生成插件输入表单生效，`yak.cli` 库仍然需要用户按照自身需求把接收到的参数值转换为需要类型。
+
+例如
+
+```
+cli.String("target") // 会把参数解析为 string 类型
+cli.Bool("target") // 会把参数解析为 bool 类型
+cli.Int("target") // 会把参数解析为 int 类型
+...
+...
+```
+
+当然具体的 API 大家可以见 [yak.cli 文档](/docs/buildinlibs/lib_cli);
+
+:::
+
+### MITM 插件的参数制定
+
+如果你正在为 "MITM 插件" 编写输入参数，当然插件的定义不会有任何差别，插件的使用会有一些不一样。
+
+我们无法通过 yak 的 cli 模块来完成对插件的使用，即 `cli.String` 等函数不可以再被使用。
+
+取而代之的是 `MITM_PARAMS` 全局变量。
+
+#### MITM 创建与参数设置 Preview
+
+<video
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-mitm-plugin-basic-param.mp4"
+    loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
+/>
+
+换句话说，如果我们想要使用通过 Yakit 为插件设置的参数，我们可以在 MITM 插件中使用 `MITM_PARAMS` 全局变量。
+
+例如视频中的案例，我们创建了一个 `key` 作为参数值，我们使用 `MITM_PARAMS["key"]` 可以获取到用户填入表单的值。
+
+:::caution 参数类型限制
+
+值得注意的是，这个参数类型仍然只针对表单生成的内容有效，但是对于 MITM 插件本身来说，插件的参数暂时统一设置为 `string`
+
+如果需要把参数解析为其他类型可以使用如下手段
+
+```
+parseInt
+parseFloat
+parseBool
+...
+...
+```
+
+具体应该使用那些参数，大家可以参考 [yak 内置全局函数表](/docs/api/global_buildin_ops)，当然 [`yak.str`](/docs/api/str) 也可以完成这些操作
+
+:::
+
+## 参数表单生成的规则
+
+在明白了基础参数的创建与使用后，我们将会着重介绍几个参数表单生成的机制，能帮助用户创建更好用的表单
+
+
+### 必要参数与校验
+
+![](/img/products/yakit/yakit-params-required.png)
+
+如果必要参数设置为 `true` 时，生成的表单将会对用户的输入做严格的限制，如果用户不输入必要参数，插件将不会被执行
+
+:::caution
+
+拦截插件执行的并不是 yak 引擎，而是 Yakit
+
+:::
+
+设置为必要参数之后，生成的表单将会标注必要参数为必填，如果不填，将会出现如下错误
+
+![](/img/products/yakit/params-required-error.png)
+
+### 非必要参数与参数组
+
+非必要参数将会被自动隐藏，除非用户打开 "展示" 按钮来设置
+
+:::note
+
+同时，我们强烈建议用户设置非必要参数时顺手给非必要参数一个默认值，这样就能保证模块在处理参数时少一点不友好的事情发生。
+
+:::
+
+与此同时，如果用户设置非必要参数的时候，需要把一些参数归类
+
+例如 "并发控制类"，"规则限制类"，可以通过下面这个按钮人为设置 "参数组"，这样就可以告诉 Yakit 把那些参数归纳在一起展示给用户。
+
+![](/img/products/yakit/params-not-required.png)
+
+### 复杂案例：多种参数与多参数组并存！
+
+![](/img/products/yakit/complex-params.png)
+
+当我们设置了多个参数，并且参数组与参数的必要与否都不相同时，Yakit 可以为我们生成两种界面
+
+#### 1. 调试界面
+
+![](/img/products/yakit/complex-params-for-debug.png)
+
+#### 2. 插件填写表单
+
+![](/img/products/yakit/complex-params-for-user.png)
+
+这两种表单本质上操作都是一样的，最后传递到实际插件的结果是一致的。
+
+## 结语
+
+我们本文讲解了插件是如何被创建的，与插件的编写者如何与插件内部进行交互，把参数传递到插件中。
+
+在接下来的文章中，我们会更深入介绍插件与用户的交互，并给予大家更多好用的实践案例分析。

@@ -93,25 +93,7 @@ function Footer() {
         return null;
     }
 
-    useEffect(() => {
-        const DesignW = 1920;
-        const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
-
-        document.getElementsByTagName("html")[0].style.fontSize =
-            (document.body.offsetWidth / DesignW) * FontRate + "px";
-        document.getElementsByTagName("body")[0].style.fontSize =
-            (document.body.offsetWidth / DesignW) * FontRate + "px";
-
-        window.addEventListener(
-            "onorientationchange" in window ? "orientationchange" : "resize",
-            () => {
-                document.getElementsByTagName("html")[0].style.fontSize =
-                    (document.body.offsetWidth / DesignW) * FontRate + "px";
-                document.getElementsByTagName("body")[0].style.fontSize =
-                    (document.body.offsetWidth / DesignW) * FontRate + "px";
-            }
-        );
-
+    useEffect(()=>{
         document.onscroll = (e) => {
             if (
                 e.target &&
@@ -126,7 +108,7 @@ function Footer() {
                     : "rgba(0,0,0,0)";
             }
         };
-    }, []);
+    },[])
 
     return (
         <footer

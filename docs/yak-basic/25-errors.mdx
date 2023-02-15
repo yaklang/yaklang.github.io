@@ -1,0 +1,105 @@
+---
+sidebar_position: 25
+---
+
+# 25. 错误与崩溃处理
+
+## 错误处理
+
+:::info
+
+在 Yak 中，很多函数来源于 Golang 中的函数；众所周知，Golang 很多函数的最后一个返回值的类型为 `error`。
+
+因此在 YakVM 的 Golang 后端中，我们经常的处理错误的方案是
+
+```go
+c, err = servicescan.Scan("127.0.0.1", "80,8080-8088")
+
+// 如果有错误，就马上退出当前程序
+die(err)
+```
+
+当然，除了上述内容，我们还经常这样处理 err，
+
+```go
+c, err = servicescan.Scan("127.0.0.1", "80,443")
+
+// 这个分支等价于 die(err)
+if err != nil {
+    panic(err)
+}
+```
+
+:::
+
+## 捕获错误：Try 与 Catch
+
+yaklang 原生支持 try 和 catch 的模式(>=1.1.7)。在这个模式下，用户可以使用 try 包裹自己的代码，使用 catch 去捕获错误；
+
+```go
+try{
+    println("We are in Trying")
+    die("panic in try!")
+}catch err {
+    println("Fetch Error" + f": ${err}")
+}
+
+/*
+We are in Trying
+Fetch Error: panic in try!
+*/
+```
+
+当然 try-catch-finally 也被完整的支持了，`catch err` 的 err 可以随时省略；
+
+```go
+try{
+    println("We are in Trying")
+    die("panic in try!")
+} catch {
+    println("Fetch Error" + ": Unknown Error")
+} finally {
+    println("Working in Finally")
+}
+
+/*
+We are in Trying
+Fetch Error: Unknown Error
+Working in Finally
+*/
+```
+
+## Golang 模式：Panic 与 Recover
+
+yaklang同样保留了golang的panic/recover机制，其实际上是一个特殊语句，用法与golang保持一致：
+
+```go
+func main() {
+    defer fn(){
+        println("Start RECOVER")
+        assert recover()+1 == 2
+        println("END RECOVER")
+    }()
+    println("START PANIC")
+    panic(1)
+    println("END PANIC")
+}
+
+main()
+/* OUTPUT:
+START PANIC
+START RECOVER
+END RECOVER
+*/
+```
+
+值得注意的是，在yaklang中panic和recover可以在最外层中使用，例如：
+
+```go
+defer fn{
+    err := recover()
+    assert err == "panic test"
+}
+
+panic("panic test")
+```

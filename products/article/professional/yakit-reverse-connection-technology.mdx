@@ -1,0 +1,137 @@
+---
+sidebar_position: 4
+---
+# 北半球_强的出网反连技术
+
+## 前情提要
+
+在上一篇推文中，我们向大家介绍了 yaklang.io 出网监测技术的三板斧
+
+1. 多协议端口复用端口
+2. 反连服务
+3. 内网穿透
+
+并且在人畜无害的 SSRF 漏洞检测中，实现了一些个监测基础出网的案例。
+
+## 传统方案
+在传统的反连/出网技术检测中，不管是 dnslog 还是 RMI / LDAP Fake 服务器，或者是最基础的 HTTP 服务器，如果我们需要自动化监测与报告漏洞，则需要把 Token 与发出的 Payload 检测漏洞需要对应。
+
+很多时候我们的 <span style={{background:"#fff67acc"}}>Token 机制</span> 思想已经根深蒂固了，以至于我们会认为这是最优解或者标准答案。
+
+<div align="center">
+    <img src="/img/products/yakit/reverse-joke.png" />
+</div>
+
+## 新方案：不用 Token 也能检测？
+
+很多同学仍然觉得这是一个 “Impossible Mission”。实际上并没有那么玄。
+
+这是一种 “抓内鬼” 的思路，我们告诉 “内鬼” 一个假端口，如果这个假端口被人访问了，那么就说明有 “内鬼” 暴露了。
+
+当然，这个过程的一个关键点在于：<span style={{background:"#fff67acc"}}>“不监听端口，只分析流量”。</span>
+
+大家具备基础 TCP 协议知识的话，将会马上意识到，我们这个方案的关键记录点其实在 SYN 三次握手的第一个 SYN 握手包：
+
+![](/img/products/yakit/reverse-handshake-bag.png)
+
+当我们 SYN 握手一个不开放的端口时，端口将会直接被操作系统 RST 或者没有任何回复，但是 SYN 数据包实际将会被收到，我们就知道了 <span style={{background:"#fff67acc"}}>“谁尝试连接了‘内鬼端口’”</span>
+
+<div align="center">
+    <img src="/img/products/yakit/reverse-flow-chart.svg" />
+</div>
+
+## 优势
+
+看起来流程和使用 Token 大体一样，本质上随机端口触发来代替 Token 触发，但是却出现了细思极恐的优势：
+
+1. TCP 的连接失败与否并不影响探测结果
+2. 理论上任何传输层是 TCP 协议的反连，均可以用此方案检测
+    1. RMI / LDAP / HTTP 均不再需要单独协议数据，变成了时代的眼泪（检测漏洞方面）
+3. 当然，同理！我们甚至可以实现 UDP 的反连检测，甚至 UDP 要更简单。
+
+## 疑问
+
+1. 被全端口扫描了怎么办？
+2. 数据包流量过大如何准确过滤数据？
+3. 随机可用的端口就那么多，如何保证数据不重复？端口被人用了记录还会存留吗？
+
+大家仔细想想，发现这个简单的技术方案有很多细节可以扣，yak bridge 做了完整的技术实现，并在漏洞验证时充分证明了效果，同时也解决了上述大家提到的问题：
+
+1. 使用 TTL 缓存每一个连接反连服务器的 SYN 数据包。TTL 缓存的维度需要以完整的对端服务器的 IP 地址来存，新的数据包都会刷新 TTL 缓存。同时记录对端 IP 访问的具体端口，端口过多，我们就可以判定为 “扫描行为”
+2. 数据包流量过大，可以使用 BPF 规则过滤，只接受 `(tcp[tcpflags] & (tcp-syn)) != 0`，与此同时，我们还需要过滤掉出网流量，即反连主机主动发出的 SYN 包。
+3. 与此同时，用户使用不应该直接获取端口，而应该用一个带 TTL 的 Token 来对应端口。时间过去很久的话，Token 将会被回收，无法再获取到之前端口的连接信息。避免用户直接把端口当作 Token 是一个很好的保护端口资源的办法。
+
+## 最佳实现：
+
+这个功能的关键点在于，端口具有很强的时效性，我们随机五位数端口，经常会被随机分配到外连等任务，将会造成比较大的干扰，所以我们每次获取，都将需要获取一个新端口用于对应 “漏洞”。
+所以，这个操作最适合使用在 “全自动化” 的漏洞探测中，并且需要配合一个额外的服务器来进行使用。
+
+### Show me the code！
+
+#### 前置条件：
+1. 使用 Yakit 点击右上角 “全局配置 => 配置全局反连”，打开 Yak Bridge（下文用 Yak 网桥来代称）。
+2. 在公网服务器按引导启动 / 配置好 Yak Bridge，保证端口开放（记得设置 VPS/ECS 相关安全策略组）
+
+当然用户也可以通过 https://github.com/yaklang/yak-bridge-docker 中的引导来配置
+
+![](/img/products/yakit/reverse-configure.png)
+
+当我们配置好后，可以在 Yak Runner 中执行如下代码
+
+#### 代码
+
+![](/img/products/yakit/reverse-code.png)
+
+我们使用十几行代码，来展示随机端口反连的接口是如何生效的：
+
+1. 使用 `risk.NewRandomPortTrigger()` 来向 yak bridge 申请一个端口
+2. 使用 `http.Get()` 访问
+3. 使用 `risk.CheckRandomTriggerByToken(token)`来从服务端获取信息：这个端口访问情况？
+
+#### 结论
+
+当我们执行上述代码之后，在输出台中，我们看到如下内容
+
+![](/img/products/yakit/reverse-result.png)
+
+当我们打开 Yakit “风险与漏洞” 页，我们看到如下内容
+
+<div align="center">
+    <img src="/img/products/yakit/reverse-result-content.png" />
+</div>
+
+我们发现，我们的反连检测其实已经可以实现了，并且实际上这个不依赖任何应用层协议。
+
+## 实战案例（log4shell 全自动检测-non-exploit）：
+
+<div align="center">
+    <img src="/img/products/yakit/reverse-exploit.png" />
+</div>
+
+在 Yakit 插件仓库中，我们更新了一个来源于社区同学的 Log4j2 的漏洞检测模组：
+
+### 插件使用
+
+![](/img/products/yakit/reverse-plug-in-usage.png)
+
+我们配置好 Brigde 服务之后，访问
+
+<div align="center">
+    <img src="/img/products/yakit/reverse-visit.png" />
+</div>
+
+Vulfocus 任意靶场，将会发现，MITM 被动扫描页面输出了内容。
+
+![](/img/products/yakit/reverse-mitm-content.png)
+
+### 关键步骤 1：获取随机端口触发器
+
+![](/img/products/yakit/reverse-get-trigger.png)
+
+### 关键步骤 2: 使用 yak.fuzz 链式 API
+
+![](/img/products/yakit/reverse-yak-api.png)
+
+### 关键步骤 3：检查漏洞输出内容
+
+![](/img/products/yakit/reverse-check-content.png)
