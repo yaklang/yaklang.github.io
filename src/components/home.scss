@@ -445,7 +445,7 @@ $min-width: REM(1152);
     &-1 {
       position: absolute;
       top: REM(46);
-      left: REM(384);
+      left: 0;
       width: REM(169);
       height: REM(312);
       background-image: url("../../static/img/home/second/efficent-1.png");
@@ -454,7 +454,7 @@ $min-width: REM(1152);
     &-2 {
       position: absolute;
       top: REM(46);
-      left: REM(561);
+      left: REM(180);
       width: REM(239);
       height: REM(217);
       background-image: url("../../static/img/home/second/efficent-2.png");
@@ -463,7 +463,7 @@ $min-width: REM(1152);
     &-3 {
       position: absolute;
       top: REM(271);
-      left: REM(561);
+      left: REM(180);
       width: REM(239);
       height: REM(172);
       background-image: url("../../static/img/home/second/efficent-3.png");
@@ -472,7 +472,8 @@ $min-width: REM(1152);
     &-4 {
       position: absolute;
       top: REM(178);
-      left: REM(808);
+      left: REM(430);
+      // left: 67%;
       width: REM(140);
       height: REM(265);
       background-image: url("../../static/img/home/second/efficent-4.png");
@@ -520,6 +521,14 @@ $min-width: REM(1152);
         height: REM(42);
       }
     }
+  }
+
+  .efficent-img-body {
+    height: 100%;
+    margin-left: 30%;
+    margin-right: 15%;
+    position: relative;
+    width: REM(570);
   }
 
   .function-img {
@@ -656,7 +665,7 @@ $min-width: REM(1152);
 
   .kind-opt-body-title {
     height: 100%;
-    margin-left: REM(-74);
+    margin-left: -6%;
     padding: REM(172) 0;
     z-index: 99;
     width: REM(466);
@@ -706,6 +715,19 @@ $min-width: REM(1152);
     opacity: 0.12;
     filter: blur(50px);
     z-index: 80;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .kind-opt-body .efficent-img-body {
+    margin-left: 12%;
+    margin-right: 20%;
+  }
+  .home-container .introduce-body-imgs .imgs-icon {
+    right: 0;
+  }
+  .kind-opt-body .efficent-img {
+    width: REM(800);
   }
 }
 

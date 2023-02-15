@@ -149,7 +149,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
 
   const oldScrollTop = useRef<number>(0);
-  const defDevicePixelRatio = useRef<number>();// 浏览器默认的比例，系统设置中的缩放比例
+  const defDevicePixelRatio = useRef<number>(); // 浏览器默认的比例，系统设置中的缩放比例
   useEffect(() => {
     detectZoom();
     window.addEventListener("resize", detectZoom);
@@ -168,12 +168,15 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           if (!defDevicePixelRatio.current) {
             defDevicePixelRatio.current = window.devicePixelRatio;
           }
-          if(window.devicePixelRatio === defDevicePixelRatio.current){
-            ratio=1 //此时浏览器中的缩放比例为100%
-          }else if(defDevicePixelRatio.current/window.devicePixelRatio===defDevicePixelRatio.current){
-            ratio=0.5// 假如系统设置为2，浏览器缩放为1,此时不应该给ratio=11，应该为其他值，不然动画会显示，展示会有问题
-          }else{
-            ratio=window.devicePixelRatio
+          if (window.devicePixelRatio === defDevicePixelRatio.current) {
+            ratio = 1; //此时浏览器中的缩放比例为100%
+          } else if (
+            defDevicePixelRatio.current / window.devicePixelRatio ===
+            defDevicePixelRatio.current
+          ) {
+            ratio = 0.5; // 假如系统设置为2，浏览器缩放为1,此时不应该给ratio=11，应该为其他值，不然动画会显示，展示会有问题
+          } else {
+            ratio = window.devicePixelRatio;
           }
         } else if (~ua.indexOf("msie")) {
           // 兼容ie11以下
@@ -941,57 +944,65 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="efficent-img">
-          <div ref={efficent_1} className="efficent-img-1 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Golang</div>
-              <div className="efficent-img-content-text">
-                Go 是谷歌支持的开源编程语言
+          <div
+            className="efficent-img-body"
+            // style={{
+            //   background: "antiquewhite",
+            // }}
+          >
+            <div ref={efficent_1} className="efficent-img-1 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Golang</div>
+                <div className="efficent-img-content-text">
+                  Go 是谷歌支持的开源编程语言{currentRatio}
+                </div>
               </div>
             </div>
-          </div>
-          <div ref={efficent_2} className="efficent-img-2 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Yaklang</div>
-              <div className="efficent-img-content-text">
-                可能是安全领域最先进的 DSL (Domain-Specific Language)
+
+            <div ref={efficent_2} className="efficent-img-2 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Yaklang</div>
+                <div className="efficent-img-content-text">
+                  可能是安全领域最先进的 DSL (Domain-Specific Language)
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-1-2.png")
+                      .default
+                  }
+                  className="efficent-1-2"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-1-2.png")
-                    .default
-                }
-                className="efficent-1-2"
-              />
             </div>
-          </div>
-          <div ref={efficent_3} className="efficent-img-3 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">JVM Based Lang</div>
-              <div className="efficent-img-content-text">
-                一个高质量的Java 生态教学网站
+            <div ref={efficent_3} className="efficent-img-3 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">JVM Based Lang</div>
+                <div className="efficent-img-content-text">
+                  一个高质量的Java 生态教学网站
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-2-3.png")
+                      .default
+                  }
+                  className="efficent-2-3"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-2-3.png")
-                    .default
-                }
-                className="efficent-2-3"
-              />
             </div>
-          </div>
-          <div ref={efficent_4} className="efficent-img-4 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Python</div>
-              <div className="efficent-img-content-text">
-                Life is short, use Python.
+            <div ref={efficent_4} className="efficent-img-4 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Python</div>
+                <div className="efficent-img-content-text">
+                  Life is short, use Python.
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-3-4.png")
+                      .default
+                  }
+                  className="efficent-3-4"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-3-4.png")
-                    .default
-                }
-                className="efficent-3-4"
-              />
             </div>
           </div>
           <div className="img-body-filter-bg-blue"></div>
