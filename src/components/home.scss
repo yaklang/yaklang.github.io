@@ -1,6 +1,6 @@
 $max-width: REM(8000);
 // $min-width: REM(1840);
-$min-width: REM(1152);
+$min-width: REM(1232);
 
 .opacity-0 {
   opacity: 0;
@@ -541,7 +541,7 @@ $min-width: REM(1152);
     &-function {
       position: absolute;
       top: REM(75);
-      left: REM(408);
+      left: 0;
       width: REM(587);
       height: REM(386);
       z-index: 95;
@@ -549,7 +549,7 @@ $min-width: REM(1152);
     &-blue {
       position: absolute;
       top: REM(59);
-      left: REM(384);
+      left: REM(-24);
       width: REM(148);
       height: REM(148);
       z-index: 94;
@@ -557,7 +557,7 @@ $min-width: REM(1152);
     &-green {
       position: absolute;
       top: REM(365);
-      left: REM(522);
+      left: REM(114);
       width: REM(96);
       height: REM(70);
       z-index: 96;
@@ -565,7 +565,7 @@ $min-width: REM(1152);
     &-yellow {
       position: absolute;
       top: REM(157);
-      right: REM(205);
+      left: REM(499);
       width: REM(32);
       height: REM(32);
       z-index: 96;
@@ -573,7 +573,7 @@ $min-width: REM(1152);
     &-icon {
       position: absolute;
       top: REM(345);
-      right: REM(246);
+      left: REM(416);
       width: REM(74);
       height: REM(80);
       z-index: 96;
@@ -581,11 +581,19 @@ $min-width: REM(1152);
     &-path {
       position: absolute;
       top: REM(157);
-      right: REM(80);
+      left: REM(545);
       width: REM(111);
       height: REM(58);
       z-index: 95;
     }
+  }
+
+  .function-img-body {
+    height: 100%;
+    margin-left: 30%;
+    margin-right: 15%;
+    position: relative;
+    width: REM(650);
   }
 
   .doc-img {
@@ -598,7 +606,7 @@ $min-width: REM(1152);
     &-doc {
       position: absolute;
       top: REM(84);
-      left: REM(416);
+      left: 0;
       width: REM(521);
       height: REM(412);
       z-index: 95;
@@ -606,7 +614,7 @@ $min-width: REM(1152);
     &-blue {
       position: absolute;
       top: REM(327);
-      left: REM(364);
+      left: REM(-52);
       width: REM(165);
       height: REM(181);
       z-index: 96;
@@ -614,7 +622,7 @@ $min-width: REM(1152);
     &-green {
       position: absolute;
       top: REM(171);
-      right: REM(196);
+      left: REM(449);
       width: REM(83);
       height: REM(131);
       z-index: 96;
@@ -622,7 +630,7 @@ $min-width: REM(1152);
     &-yellow {
       position: absolute;
       top: REM(23);
-      right: REM(332);
+      left: REM(290);
       width: REM(106);
       height: REM(106);
       z-index: 94;
@@ -630,11 +638,19 @@ $min-width: REM(1152);
     &-path {
       position: absolute;
       top: REM(210);
-      right: REM(84);
+      left: REM(469);
       width: REM(175);
       height: REM(207);
       z-index: 95;
     }
+  }
+
+  .doc-img-body {
+    height: 100%;
+    margin-left: 30%;
+    margin-right: 15%;
+    position: relative;
+    width: REM(650);
   }
 
   .tool-img {
@@ -647,7 +663,7 @@ $min-width: REM(1152);
     &-tool {
       position: absolute;
       top: REM(30);
-      left: REM(372);
+      left: 0;
       width: REM(593);
       height: REM(427);
       z-index: 95;
@@ -656,11 +672,19 @@ $min-width: REM(1152);
     &-green {
       position: absolute;
       bottom: REM(78);
-      right: REM(241);
+      left: REM(416);
       width: REM(115);
       height: REM(89);
       z-index: 96;
     }
+  }
+
+  .tool-img-body {
+    height: 100%;
+    margin-left: 30%;
+    margin-right: 15%;
+    position: relative;
+    width: REM(593);
   }
 
   .kind-opt-body-title {
@@ -718,16 +742,42 @@ $min-width: REM(1152);
   }
 }
 
-@media screen and (max-width: 1350px) {
-  .kind-opt-body .efficent-img-body {
-    margin-left: 12%;
-    margin-right: 20%;
+@media screen and (max-width: 1400px) {
+  .kind-opt-body {
+    .efficent-img-body {
+      margin-left: 12%;
+      margin-right: 20%;
+    }
+    .function-img-body {
+      margin-left: 12%;
+      margin-right: 20%;
+    }
+    .doc-img-body {
+      margin-left: 12%;
+      margin-right: 20%;
+    }
+    .tool-img-body {
+      margin-left: 12%;
+      margin-right: 20%;
+    }
+    .efficent-img {
+      width: REM(800);
+    }
+    .function-img {
+      width: REM(800);
+    }
+    .doc-img {
+      width: REM(800);
+    }
+    .tool-img {
+      width: REM(800);
+    }
+    .kind-opt-body-title {
+      margin-left: -3%;
+    }
   }
   .home-container .introduce-body-imgs .imgs-icon {
     right: 0;
-  }
-  .kind-opt-body .efficent-img {
-    width: REM(800);
   }
 }
 

@@ -1020,47 +1020,53 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="function-img">
-          <img
-            ref={function_img}
-            src={require("../../static/img/home/second/function.png").default}
-            className="function-img-function opacity-0"
-          />
-          <img
-            ref={function_blue}
-            src={
-              require("../../static/img/home/second/function-blue.png").default
-            }
-            className="function-img-blue opacity-0"
-          />
-          <img
-            ref={function_green}
-            src={
-              require("../../static/img/home/second/function-green.png").default
-            }
-            className="function-img-green opacity-0"
-          />
-          <img
-            ref={function_yellow}
-            src={
-              require("../../static/img/home/second/function-yellow.png")
-                .default
-            }
-            className="function-img-yellow opacity-0"
-          />
-          <img
-            ref={function_icon}
-            src={
-              require("../../static/img/home/second/function-icon.png").default
-            }
-            className="function-img-icon opacity-0"
-          />
-          <img
-            ref={function_path}
-            src={
-              require("../../static/img/home/second/function-path.png").default
-            }
-            className="function-img-path opacity-0"
-          />
+          <div className="function-img-body">
+            <img
+              ref={function_img}
+              src={require("../../static/img/home/second/function.png").default}
+              className="function-img-function opacity-0"
+            />
+            <img
+              ref={function_blue}
+              src={
+                require("../../static/img/home/second/function-blue.png")
+                  .default
+              }
+              className="function-img-blue opacity-0"
+            />
+            <img
+              ref={function_green}
+              src={
+                require("../../static/img/home/second/function-green.png")
+                  .default
+              }
+              className="function-img-green opacity-0"
+            />
+            <img
+              ref={function_yellow}
+              src={
+                require("../../static/img/home/second/function-yellow.png")
+                  .default
+              }
+              className="function-img-yellow opacity-0"
+            />
+            <img
+              ref={function_icon}
+              src={
+                require("../../static/img/home/second/function-icon.png")
+                  .default
+              }
+              className="function-img-icon opacity-0"
+            />
+            <img
+              ref={function_path}
+              src={
+                require("../../static/img/home/second/function-path.png")
+                  .default
+              }
+              className="function-img-path opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
@@ -1080,31 +1086,37 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="doc-img">
-          <img
-            ref={doc_img}
-            src={require("../../static/img/home/second/doc.png").default}
-            className="doc-img-doc opacity-0"
-          />
-          <img
-            ref={doc_blue}
-            src={require("../../static/img/home/second/doc-blue.png").default}
-            className="doc-img-blue opacity-0"
-          />
-          <img
-            ref={doc_green}
-            src={require("../../static/img/home/second/doc-green.png").default}
-            className="doc-img-green opacity-0"
-          />
-          <img
-            ref={doc_yellow}
-            src={require("../../static/img/home/second/doc-yellow.png").default}
-            className="doc-img-yellow opacity-0"
-          />
-          <img
-            ref={doc_path}
-            src={require("../../static/img/home/second/doc-path.png").default}
-            className="doc-img-path opacity-0"
-          />
+          <div className="doc-img-body">
+            <img
+              ref={doc_img}
+              src={require("../../static/img/home/second/doc.png").default}
+              className="doc-img-doc opacity-0"
+            />
+            <img
+              ref={doc_blue}
+              src={require("../../static/img/home/second/doc-blue.png").default}
+              className="doc-img-blue opacity-0"
+            />
+            <img
+              ref={doc_green}
+              src={
+                require("../../static/img/home/second/doc-green.png").default
+              }
+              className="doc-img-green opacity-0"
+            />
+            <img
+              ref={doc_yellow}
+              src={
+                require("../../static/img/home/second/doc-yellow.png").default
+              }
+              className="doc-img-yellow opacity-0"
+            />
+            <img
+              ref={doc_path}
+              src={require("../../static/img/home/second/doc-path.png").default}
+              className="doc-img-path opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
@@ -1133,16 +1145,20 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="tool-img">
-          <img
-            ref={tool_img}
-            src={require("../../static/img/home/second/tool.png").default}
-            className="tool-img-tool opacity-0"
-          />
-          <img
-            ref={tool_green}
-            src={require("../../static/img/home/second/tool-green.png").default}
-            className="tool-img-green opacity-0"
-          />
+          <div className="tool-img-body">
+            <img
+              ref={tool_img}
+              src={require("../../static/img/home/second/tool.png").default}
+              className="tool-img-tool opacity-0"
+            />
+            <img
+              ref={tool_green}
+              src={
+                require("../../static/img/home/second/tool-green.png").default
+              }
+              className="tool-img-green opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
