@@ -1,22 +1,25 @@
 .navbar {
-    width: 100%;
-    height: REM(63);
-    background-color: rgba(255, 255, 255, 0);
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: REM(8) REM(32);
-    .dropdown > .navbar__link:after {
-        display: none;
-    }
-    .navbar__items {
-        font-size: 14px;
-    }
-    .navbar__logo {
-        width: REM(133);
-        height: REM(32);
-    }
-    .diy-link-item:hover {
-        color: var(--base-theme-color);
-    }
+  width: 100%;
+  height: REM(63);
+  background-color: rgba(255, 255, 255, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: REM(8) REM(32);
+  right: 0;
+  margin: 0 auto;
+  max-width: $max-width;
+  .dropdown > .navbar__link:after {
+    display: none;
+  }
+  .navbar__items {
+    font-size: 14px;
+  }
+  .navbar__logo {
+    width: REM(133);
+    height: REM(32);
+  }
+  .diy-link-item:hover {
+    color: var(--base-theme-color);
+  }
 }

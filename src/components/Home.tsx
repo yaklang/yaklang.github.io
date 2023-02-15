@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Dropdown, Menu, message, Popover } from "antd";
 import {
   DownloadOutlined,
@@ -11,6 +17,7 @@ import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "animate.css";
+import { useDebounceFn } from "ahooks";
 
 const axios = require("axios");
 
@@ -139,8 +146,59 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [functionRate, isFunctionRate] = useState<number>(0);
   const [isFunctionRange, setIsFunctionRange] = useState<boolean>(false);
 
-  const oldScrollTop = useRef<number>(0);
+  const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
 
+  const oldScrollTop = useRef<number>(0);
+  const defDevicePixelRatio = useRef<number>(); // 浏览器默认的比例，系统设置中的缩放比例
+  useEffect(() => {
+    detectZoom();
+    window.addEventListener("resize", detectZoom);
+    return () => {
+      window.removeEventListener("resize", detectZoom);
+    };
+  }, []);
+
+  const detectZoom = useDebounceFn(
+    () => {
+      {
+        let ratio = 0,
+          screen = window.screen,
+          ua = navigator.userAgent.toLowerCase();
+        if (window.devicePixelRatio !== undefined) {
+          if (!defDevicePixelRatio.current) {
+            defDevicePixelRatio.current = window.devicePixelRatio;
+          }
+          if (window.devicePixelRatio === defDevicePixelRatio.current) {
+            ratio = 1; //此时浏览器中的缩放比例为100%
+          } else if (
+            defDevicePixelRatio.current / window.devicePixelRatio ===
+            defDevicePixelRatio.current
+          ) {
+            ratio = 0.5; // 假如系统设置为2，浏览器缩放为1,此时不应该给ratio=11，应该为其他值，不然动画会显示，展示会有问题
+          } else {
+            ratio = window.devicePixelRatio;
+          }
+        } else if (~ua.indexOf("msie")) {
+          // 兼容ie11以下
+          // @ts-ignore
+          if (screen.deviceXDPI && screen.logicalXDPI) {
+            // @ts-ignore
+            ratio = screen.deviceXDPI / screen.logicalXDPI;
+          }
+        } else if (
+          window.outerWidth !== undefined &&
+          window.innerWidth !== undefined
+        ) {
+          ratio = window.outerWidth / window.innerWidth;
+        }
+        if (ratio) {
+          ratio = Math.round(ratio * 100);
+        }
+        setCurrentRatio(ratio);
+      }
+    },
+    { wait: 200, leading: true }
+  ).run;
   useEffect(() => {
     document.addEventListener("scroll", (e) => {
       if (!e.target) return;
@@ -241,135 +299,150 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   }, []);
 
   return (
-    <div className="home-container">
-      <div className="guide-body">
-        <img
-          src={require("../../static/img/home/homeHeadBg.png").default}
-          className="guide-background-img"
-        />
-        <div className="guide-words-body">
-          <div className="guide-words-body-header">
-            <span className="guide-words-body-header-orange">CDSL</span>
-            <span className="uide-words-body-header-text">-YAK:</span>
-            <img
-              src={
-                require("../../static/img/home/homeHeadCircular.png").default
-              }
-              className="header-circle"
-            />
-            <img
-              src={require("../../static/img/home/homeHeadTitle.png").default}
-              className="header-title"
-            />
-          </div>
-          <div className="guide-words-body-description">
-            为网络安全而生的专属编程语言
-          </div>
-          <div className="guide-words-body-btn">
-            <DownLoadBtn />
-            <CourseDocBtn />
+    <>
+      <div className="home-container">
+        {/* <img
+        src={require("../../static/img/home/homeHeadBg.png").default}
+        className="guide-background-img"
+      /> */}
+        <div className="guide-background-img"></div>
+        <div className="guide-body">
+          <div className="guide-words-body">
+            <div className="guide-words-body-header">
+              <span className="guide-words-body-header-orange">CDSL</span>
+              <span className="uide-words-body-header-text">-YAK:</span>
+              <img
+                src={
+                  require("../../static/img/home/homeHeadCircular.png").default
+                }
+                className="header-circle"
+              />
+              <img
+                src={require("../../static/img/home/homeHeadTitle.png").default}
+                className="header-title"
+              />
+            </div>
+            <div className="guide-words-body-description">
+              为网络安全而生的专属编程语言
+            </div>
+            <div className="guide-words-body-btn">
+              <DownLoadBtn />
+              <CourseDocBtn />
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="introduce-body">
-        <div className="sticky-content">
-          <div className="introduce-body-header">
-            网络安全领域的首个
-            <span className="introduce-body-header-orange">DSL</span>
-            {/* <img
+        <div
+          className={`introduce-body  ${
+            (currentRatio !== 100 && "introduce-body-height-auto") || ""
+          }`}
+        >
+          <div className="sticky-content">
+            <div className="introduce-body-header">
+              网络安全领域的首个
+              <span className="introduce-body-header-orange">DSL</span>
+              {/* <img
               src={
                 require("../../static/img/home/homeHeadCircular.png").default
               }
               className="header-circle"
             /> */}
+            </div>
+
+            <div className="introduce-body-kinds">
+              {IntroduceKinds.map((item, index) => {
+                return (
+                  <div
+                    key={item.name}
+                    className={`${
+                      kind.name === item.name
+                        ? "introduce-body-kinds-opt-selected"
+                        : ""
+                    } introduce-body-kinds-opt`}
+                    onClick={() => {
+                      setKind(item);
+                      if (currentRatio === 100) {
+                        const FontSize: number =
+                          +document.documentElement.style.fontSize.split(
+                            "px"
+                          )[0];
+                        window.scrollTo(
+                          0,
+                          ((762 + 54 + 696 * index + 140) / 16) * FontSize
+                        );
+                      }
+                    }}
+                  >
+                    <img src={item.icon} className="kinds-opt-icon" />
+                    <div className="kinds-opt-name">{item.name}</div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="introduce-body-imgs">
+              <KindModules
+                name={kind.name}
+                rate={kindRate}
+                isRange={isKindRange}
+                isScrollUp={isScrollUp}
+                currentRatio={currentRatio}
+              />
+              <img
+                src={
+                  require("../../static/img/home/second/kind-icon.png").default
+                }
+                className="imgs-icon"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="function-body">
+          <div className="function-body-header">
+            Yakit-
+            <span className="function-body-header-orange"> CDSL </span>
+            的最佳实践
           </div>
 
-          <div className="introduce-body-kinds">
-            {IntroduceKinds.map((item, index) => {
+          <div className="function-body-description">
+            <div className="function-body-description-body">
+              专注于安全领域，使用 DSL
+              模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持...
+              一应俱全
+            </div>
+          </div>
+
+          <div className="function-body-module">
+            {FunctionData.map((item, index) => {
               return (
-                <div
-                  key={item.name}
-                  className={`${
-                    kind.name === item.name
-                      ? "introduce-body-kinds-opt-selected"
-                      : ""
-                  } introduce-body-kinds-opt`}
-                  onClick={() => {
-                    setKind(item);
-                    const FontSize: number =
-                      +document.documentElement.style.fontSize.split("px")[0];
-                    window.scrollTo(
-                      0,
-                      ((762 + 54 + 696 * index + 140) / 16) * FontSize
-                    );
-                  }}
-                >
-                  <img src={item.icon} className="kinds-opt-icon" />
-                  <div className="kinds-opt-name">{item.name}</div>
-                </div>
+                <FunctionModule
+                  key={item.title}
+                  info={item}
+                  isReversal={!!(index % 2)}
+                  index={index}
+                  kind={functionKind}
+                  rate={functionRate}
+                  isRange={isFunctionRange}
+                  isScrollUp={isScrollUp}
+                  currentRatio={currentRatio}
+                />
               );
             })}
-          </div>
-
-          <div className="introduce-body-imgs">
-            <KindModules
-              name={kind.name}
-              rate={kindRate}
-              isRange={isKindRange}
-              isScrollUp={isScrollUp}
+            <img
+              src={
+                require("../../static/img/home/third/bg-console.png").default
+              }
+              className="function-body-module-console"
             />
             <img
               src={
-                require("../../static/img/home/second/kind-icon.png").default
+                require("../../static/img/home/third/bg-setting.png").default
               }
-              className="imgs-icon"
+              className="function-body-module-setting"
             />
           </div>
         </div>
       </div>
-
-      <div className="function-body">
-        <div className="function-body-header">
-          Yakit-
-          <span className="function-body-header-orange"> CDSL </span>
-          的最佳实践
-        </div>
-
-        <div className="function-body-description">
-          <div className="function-body-description-body">
-            专注于安全领域，使用 DSL
-            模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持...
-            一应俱全
-          </div>
-        </div>
-
-        <div className="function-body-module">
-          {FunctionData.map((item, index) => {
-            return (
-              <FunctionModule
-                key={item.title}
-                info={item}
-                isReversal={!!(index % 2)}
-                index={index}
-                kind={functionKind}
-                rate={functionRate}
-                isRange={isFunctionRange}
-                isScrollUp={isScrollUp}
-              />
-            );
-          })}
-          <img
-            src={require("../../static/img/home/third/bg-console.png").default}
-            className="function-body-module-console"
-          />
-          <img
-            src={require("../../static/img/home/third/bg-setting.png").default}
-            className="function-body-module-setting"
-          />
-        </div>
-      </div>
-
       <div className="appraise-body">
         <div className="appraise-body-header">立即体验</div>
 
@@ -386,7 +459,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           <AppraiseInfoBody />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -493,9 +566,10 @@ interface KindModulesProps {
   rate: number;
   isRange: boolean;
   isScrollUp: boolean;
+  currentRatio: number;
 }
 const KindModules = (props: KindModulesProps) => {
-  const { name, rate, isRange, isScrollUp } = props;
+  const { name, rate, isRange, isScrollUp, currentRatio } = props;
 
   const efficent_1 = useRef(null);
   const efficent_2 = useRef(null);
@@ -804,107 +878,126 @@ const KindModules = (props: KindModulesProps) => {
   };
 
   useEffect(() => {
-    if (name === "高效") {
-      if (isScrollUp) {
-        if (rate <= 0.85 && rate >= 0.05 && isRange && !efficent_show.current)
-          efficentShow();
-        if ((rate < 0.05 && isRange) || !isRange) efficentHide();
-      } else {
-        if (rate >= 0.05 && rate <= 0.85 && isRange && !efficent_show.current)
-          efficentShow();
-        if (rate > 0.85 && isRange) efficentHide();
+    if (currentRatio !== 100) {
+      // 网页比例被缩放
+      switch (name) {
+        case "高效":
+          return efficentShow();
+        case "函数级调用":
+          return functionShow();
+        case "自动补全":
+          return docShow();
+        case "高阶工具":
+          return toolShow();
+        default:
+          break;
+      }
+    } else {
+      if (name === "高效") {
+        if (isScrollUp) {
+          if (rate <= 0.85 && rate >= 0.05 && isRange && !efficent_show.current)
+            efficentShow();
+          if ((rate < 0.05 && isRange) || !isRange) efficentHide();
+        } else {
+          if (rate >= 0.05 && rate <= 0.85 && isRange && !efficent_show.current)
+            efficentShow();
+          if (rate > 0.85 && isRange) efficentHide();
+        }
+      }
+      if (name === "函数级调用") {
+        if (isScrollUp) {
+          if (rate <= 0.85 && rate >= 0.05 && isRange && !function_show.current)
+            functionShow();
+          if (rate < 0.05 && isRange) functionHide();
+        } else {
+          if (rate >= 0.05 && rate <= 0.85 && isRange && !function_show.current)
+            functionShow();
+          if (rate > 0.85 && isRange) functionHide();
+        }
+      }
+      if (name === "自动补全") {
+        if (isScrollUp) {
+          if (rate <= 0.85 && rate >= 0.05 && isRange && !doc_show.current)
+            docShow();
+          if (rate < 0.05 && isRange) docHide();
+        } else {
+          if (rate >= 0.05 && rate <= 0.85 && isRange && !doc_show.current)
+            docShow();
+          if (rate > 0.85 && isRange) docHide();
+        }
+      }
+      if (name === "高阶工具") {
+        if (isScrollUp) {
+          if (rate <= 0.85 && rate >= 0.05 && isRange && !tool_show.current)
+            toolShow();
+          if (rate < 0.05 && isRange) toolHide();
+        } else {
+          if (rate >= 0.05 && rate <= 0.85 && isRange && !tool_show.current)
+            toolShow();
+          if ((rate > 0.85 && isRange) || !isRange) toolHide();
+        }
       }
     }
-    if (name === "函数级调用") {
-      if (isScrollUp) {
-        if (rate <= 0.85 && rate >= 0.05 && isRange && !function_show.current)
-          functionShow();
-        if (rate < 0.05 && isRange) functionHide();
-      } else {
-        if (rate >= 0.05 && rate <= 0.85 && isRange && !function_show.current)
-          functionShow();
-        if (rate > 0.85 && isRange) functionHide();
-      }
-    }
-    if (name === "自动补全") {
-      if (isScrollUp) {
-        if (rate <= 0.85 && rate >= 0.05 && isRange && !doc_show.current)
-          docShow();
-        if (rate < 0.05 && isRange) docHide();
-      } else {
-        if (rate >= 0.05 && rate <= 0.85 && isRange && !doc_show.current)
-          docShow();
-        if (rate > 0.85 && isRange) docHide();
-      }
-    }
-    if (name === "高阶工具") {
-      if (isScrollUp) {
-        if (rate <= 0.85 && rate >= 0.05 && isRange && !tool_show.current)
-          toolShow();
-        if (rate < 0.05 && isRange) toolHide();
-      } else {
-        if (rate >= 0.05 && rate <= 0.85 && isRange && !tool_show.current)
-          toolShow();
-        if ((rate > 0.85 && isRange) || !isRange) toolHide();
-      }
-    }
-  }, [name, rate, isRange, isScrollUp]);
+  }, [name, rate, isRange, isScrollUp, currentRatio]);
 
   if (name === "高效") {
     return (
       <div className="kind-opt-body">
         <div className="efficent-img">
-          <div ref={efficent_1} className="efficent-img-1 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Golang</div>
-              <div className="efficent-img-content-text">
-                Go 是谷歌支持的开源编程语言
+          <div className="efficent-img-body">
+            <div ref={efficent_1} className="efficent-img-1 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Golang</div>
+                <div className="efficent-img-content-text">
+                  Go 是谷歌支持的开源编程语言{currentRatio}
+                </div>
               </div>
             </div>
-          </div>
-          <div ref={efficent_2} className="efficent-img-2 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Yaklang</div>
-              <div className="efficent-img-content-text">
-                可能是安全领域最先进的 DSL (Domain-Specific Language)
+
+            <div ref={efficent_2} className="efficent-img-2 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Yaklang</div>
+                <div className="efficent-img-content-text">
+                  可能是安全领域最先进的 DSL (Domain-Specific Language)
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-1-2.png")
+                      .default
+                  }
+                  className="efficent-1-2"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-1-2.png")
-                    .default
-                }
-                className="efficent-1-2"
-              />
             </div>
-          </div>
-          <div ref={efficent_3} className="efficent-img-3 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">JVM Based Lang</div>
-              <div className="efficent-img-content-text">
-                一个高质量的Java 生态教学网站
+            <div ref={efficent_3} className="efficent-img-3 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">JVM Based Lang</div>
+                <div className="efficent-img-content-text">
+                  一个高质量的Java 生态教学网站
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-2-3.png")
+                      .default
+                  }
+                  className="efficent-2-3"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-2-3.png")
-                    .default
-                }
-                className="efficent-2-3"
-              />
             </div>
-          </div>
-          <div ref={efficent_4} className="efficent-img-4 opacity-0">
-            <div className="efficent-img-content">
-              <div className="efficent-img-content-title">Python</div>
-              <div className="efficent-img-content-text">
-                Life is short, use Python.
+            <div ref={efficent_4} className="efficent-img-4 opacity-0">
+              <div className="efficent-img-content">
+                <div className="efficent-img-content-title">Python</div>
+                <div className="efficent-img-content-text">
+                  Life is short, use Python.
+                </div>
+                <img
+                  src={
+                    require("../../static/img/home/second/efficent-3-4.png")
+                      .default
+                  }
+                  className="efficent-3-4"
+                />
               </div>
-              <img
-                src={
-                  require("../../static/img/home/second/efficent-3-4.png")
-                    .default
-                }
-                className="efficent-3-4"
-              />
             </div>
           </div>
           <div className="img-body-filter-bg-blue"></div>
@@ -927,47 +1020,53 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="function-img">
-          <img
-            ref={function_img}
-            src={require("../../static/img/home/second/function.png").default}
-            className="function-img-function opacity-0"
-          />
-          <img
-            ref={function_blue}
-            src={
-              require("../../static/img/home/second/function-blue.png").default
-            }
-            className="function-img-blue opacity-0"
-          />
-          <img
-            ref={function_green}
-            src={
-              require("../../static/img/home/second/function-green.png").default
-            }
-            className="function-img-green opacity-0"
-          />
-          <img
-            ref={function_yellow}
-            src={
-              require("../../static/img/home/second/function-yellow.png")
-                .default
-            }
-            className="function-img-yellow opacity-0"
-          />
-          <img
-            ref={function_icon}
-            src={
-              require("../../static/img/home/second/function-icon.png").default
-            }
-            className="function-img-icon opacity-0"
-          />
-          <img
-            ref={function_path}
-            src={
-              require("../../static/img/home/second/function-path.png").default
-            }
-            className="function-img-path opacity-0"
-          />
+          <div className="function-img-body">
+            <img
+              ref={function_img}
+              src={require("../../static/img/home/second/function.png").default}
+              className="function-img-function opacity-0"
+            />
+            <img
+              ref={function_blue}
+              src={
+                require("../../static/img/home/second/function-blue.png")
+                  .default
+              }
+              className="function-img-blue opacity-0"
+            />
+            <img
+              ref={function_green}
+              src={
+                require("../../static/img/home/second/function-green.png")
+                  .default
+              }
+              className="function-img-green opacity-0"
+            />
+            <img
+              ref={function_yellow}
+              src={
+                require("../../static/img/home/second/function-yellow.png")
+                  .default
+              }
+              className="function-img-yellow opacity-0"
+            />
+            <img
+              ref={function_icon}
+              src={
+                require("../../static/img/home/second/function-icon.png")
+                  .default
+              }
+              className="function-img-icon opacity-0"
+            />
+            <img
+              ref={function_path}
+              src={
+                require("../../static/img/home/second/function-path.png")
+                  .default
+              }
+              className="function-img-path opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
@@ -987,31 +1086,37 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="doc-img">
-          <img
-            ref={doc_img}
-            src={require("../../static/img/home/second/doc.png").default}
-            className="doc-img-doc opacity-0"
-          />
-          <img
-            ref={doc_blue}
-            src={require("../../static/img/home/second/doc-blue.png").default}
-            className="doc-img-blue opacity-0"
-          />
-          <img
-            ref={doc_green}
-            src={require("../../static/img/home/second/doc-green.png").default}
-            className="doc-img-green opacity-0"
-          />
-          <img
-            ref={doc_yellow}
-            src={require("../../static/img/home/second/doc-yellow.png").default}
-            className="doc-img-yellow opacity-0"
-          />
-          <img
-            ref={doc_path}
-            src={require("../../static/img/home/second/doc-path.png").default}
-            className="doc-img-path opacity-0"
-          />
+          <div className="doc-img-body">
+            <img
+              ref={doc_img}
+              src={require("../../static/img/home/second/doc.png").default}
+              className="doc-img-doc opacity-0"
+            />
+            <img
+              ref={doc_blue}
+              src={require("../../static/img/home/second/doc-blue.png").default}
+              className="doc-img-blue opacity-0"
+            />
+            <img
+              ref={doc_green}
+              src={
+                require("../../static/img/home/second/doc-green.png").default
+              }
+              className="doc-img-green opacity-0"
+            />
+            <img
+              ref={doc_yellow}
+              src={
+                require("../../static/img/home/second/doc-yellow.png").default
+              }
+              className="doc-img-yellow opacity-0"
+            />
+            <img
+              ref={doc_path}
+              src={require("../../static/img/home/second/doc-path.png").default}
+              className="doc-img-path opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
@@ -1040,16 +1145,20 @@ const KindModules = (props: KindModulesProps) => {
     return (
       <div className="kind-opt-body">
         <div className="tool-img">
-          <img
-            ref={tool_img}
-            src={require("../../static/img/home/second/tool.png").default}
-            className="tool-img-tool opacity-0"
-          />
-          <img
-            ref={tool_green}
-            src={require("../../static/img/home/second/tool-green.png").default}
-            className="tool-img-green opacity-0"
-          />
+          <div className="tool-img-body">
+            <img
+              ref={tool_img}
+              src={require("../../static/img/home/second/tool.png").default}
+              className="tool-img-tool opacity-0"
+            />
+            <img
+              ref={tool_green}
+              src={
+                require("../../static/img/home/second/tool-green.png").default
+              }
+              className="tool-img-green opacity-0"
+            />
+          </div>
           <div className="img-body-filter-bg-blue"></div>
           <div className="img-body-filter-bg-green"></div>
         </div>
@@ -1094,6 +1203,7 @@ interface functionModuleProps {
   rate: number;
   isRange: boolean;
   isScrollUp: boolean;
+  currentRatio: number;
 }
 const FunctionModule = React.memo((props: functionModuleProps) => {
   const {
@@ -1104,6 +1214,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
     rate,
     isRange,
     isScrollUp,
+    currentRatio,
   } = props;
 
   const [index, setIndex] = useState<number>(0);
@@ -1112,26 +1223,30 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
   const listRef = useRef(null);
   const img_count = useRef<number>(0);
 
+  const imgStrShow = useMemo<string>(() => {
+    return `module-img opacity-1 animate__animated ${
+      isReversal ? "animate__fadeInRight" : "animate__fadeInLeft"
+    }`;
+  }, [isReversal]);
+  const listStrShow = useMemo<string>(() => {
+    return `module-list opacity-1 animate__animated ${
+      isReversal ? "animate__fadeInLeft" : "animate__fadeInRight"
+    }`;
+  }, [isReversal]);
+
   const showAnimation = () => {
     if (!imgRef || !imgRef.current) return;
     const div_img = imgRef.current as unknown as HTMLDivElement;
     if (!listRef || !listRef.current) return;
     const div_list = listRef.current as unknown as HTMLDivElement;
 
-    const imgStr = `animate__animated ${
-      isReversal ? "animate__fadeInRight" : "animate__fadeInLeft"
-    }`;
-    const listStr = `animate__animated ${
-      isReversal ? "animate__fadeInLeft" : "animate__fadeInRight"
-    }`;
-
     if (
-      div_img.className.indexOf(imgStr) > -1 ||
-      div_list.className.indexOf(listStr) > -1
+      div_img.className.indexOf(imgStrShow) > -1 ||
+      div_list.className.indexOf(listStrShow) > -1
     )
       return;
-    div_img.className = `module-img opacity-1 ${imgStr}`;
-    div_list.className = `module-list opacity-1 ${listStr}`;
+    div_img.className = imgStrShow;
+    div_list.className = listStrShow;
   };
 
   const hideAnimation = () => {
@@ -1158,35 +1273,48 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
 
   useEffect(() => {
     if (kind !== moduleIndex) return;
-    if (isScrollUp) {
-      if (rate <= 0.85 && rate > 0.1 && isRange && img_count.current === 0) {
-        img_count.current = 1;
-        showAnimation();
-      }
-    //   if ((rate <= 0.1 && isRange) || !isRange) {
-    //     img_count.current = 0;
-    //     hideAnimation();
-    //   }
+    if (currentRatio !== 100) {
+      showAnimation();
     } else {
-      if (rate >= 0.1 && rate < 0.85 && isRange && img_count.current === 0) {
-        img_count.current = 1;
-        showAnimation();
+      if (isScrollUp) {
+        if (rate <= 0.85 && rate > 0.1 && isRange && img_count.current === 0) {
+          img_count.current = 1;
+          showAnimation();
+        }
+        //   if ((rate <= 0.1 && isRange) || !isRange) {
+        //     img_count.current = 0;
+        //     hideAnimation();
+        //   }
+      } else {
+        if (rate >= 0.1 && rate < 0.85 && isRange && img_count.current === 0) {
+          img_count.current = 1;
+          showAnimation();
+        }
+        //   if ((rate >= 0.85 && isRange) || !isRange) {
+        //     img_count.current = 0;
+        //     hideAnimation();
+        //   }
       }
-    //   if ((rate >= 0.85 && isRange) || !isRange) {
-    //     img_count.current = 0;
-    //     hideAnimation();
-    //   }
     }
-  }, [kind, rate, isRange, isScrollUp]);
-
+  }, [kind, rate, isRange, isScrollUp, currentRatio]);
   return (
     <div className="function-module-body">
       {!isReversal ? (
-        <div className="module-img opacity-0" ref={imgRef}>
+        <div
+          className={`module-img ${
+            (currentRatio === 100 && "opacity-0") || imgStrShow
+          }`}
+          ref={imgRef}
+        >
           <img src={img[index]} className="module-img-style" />
         </div>
       ) : (
-        <div className="module-list opacity-0" ref={listRef}>
+        <div
+          className={`module-list ${
+            (currentRatio === 100 && "opacity-0") || listStrShow
+          }`}
+          ref={listRef}
+        >
           <div className="module-list-header">{title}</div>
 
           <div className="module-list-body">
@@ -1221,11 +1349,21 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
       )}
 
       {isReversal ? (
-        <div className="module-img opacity-0" ref={imgRef}>
+        <div
+          className={`module-img ${
+            (currentRatio === 100 && "opacity-0") || imgStrShow
+          }`}
+          ref={imgRef}
+        >
           <img src={img[index]} className="module-img-style" />
         </div>
       ) : (
-        <div className="module-list opacity-0" ref={listRef}>
+        <div
+          className={`module-list ${
+            (currentRatio === 100 && "opacity-0") || listStrShow
+          }`}
+          ref={listRef}
+        >
           <div className="module-list-header">{title}</div>
 
           <div className="module-list-body">
@@ -1747,6 +1885,7 @@ const AppraiseInfoBody = React.memo(() => {
           volume={0}
           width={"100%"}
           height={"100%"}
+          style={{ display: "flex" }}
         />
       </div>
     </div>

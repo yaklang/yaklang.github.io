@@ -223,7 +223,6 @@ function Navbar() {
       document.body.scrollIntoView()
     });
   },[])
-  
   return (
     <nav
       ref={navbarRef}

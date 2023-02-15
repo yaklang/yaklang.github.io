@@ -142,33 +142,28 @@ export default function Home() {
   const { siteConfig } = useDocusaurusContext();
   const [isShow, setIsShow] = useState(false);
   useEffect(() => {
-    const DesignW = 1920;
-    const FontRate = document.body.offsetWidth === 1920 ? 15.875 : 16;
-
-    document.getElementsByTagName("html")[0].style.fontSize =
-      (document.body.offsetWidth / DesignW) * FontRate + "px";
-    document.getElementsByTagName("body")[0].style.fontSize =
-      (document.body.offsetWidth / DesignW) * FontRate + "px";
+    document.getElementsByTagName("html")[0].style.fontSize = "16px";
+    document.getElementsByTagName("body")[0].style.fontSize = "16px";
     setIsShow(true);
     window.addEventListener(
       "onorientationchange" in window ? "orientationchange" : "resize",
       () => {
-        document.getElementsByTagName("html")[0].style.fontSize =
-          (document.body.offsetWidth / DesignW) * FontRate + "px";
-        document.getElementsByTagName("body")[0].style.fontSize =
-          (document.body.offsetWidth / DesignW) * FontRate + "px";
+        document.getElementsByTagName("html")[0].style.fontSize = "16px";
+        document.getElementsByTagName("body")[0].style.fontSize = "16px";
       }
     );
   }, []);
 
-  useEffect(()=>{
-    document.getElementsByTagName("html")[0].style.scrollBehavior = "smooth"
-    document.getElementsByTagName("body")[0].style.scrollBehavior = "smooth"
-    return()=>{
-      document.getElementsByTagName("html")[0].style.scrollBehavior = "auto"
-    document.getElementsByTagName("body")[0].style.scrollBehavior = "auto"
-    }
-  },[])
+  useEffect(() => {
+    document.getElementsByTagName("html")[0].style.scrollBehavior = "smooth";
+    document.getElementsByTagName("body")[0].style.scrollBehavior = "smooth";
+  }, []);
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      document.getElementsByTagName("html")[0].style.scrollBehavior = "auto";
+      document.getElementsByTagName("body")[0].style.scrollBehavior = "auto";
+    };
+  }, []);
 
   return (
     <>
