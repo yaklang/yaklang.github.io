@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# 特色：本地模式与远程模式
+# 本地模式与远程模式
 
 由于 Yak 核心引擎与 Yakit 的分离式安装，Yakit 仅仅作为一个客户端而存在，Yakit 的使用理所当然就应该存在两种模式
 
@@ -45,6 +45,12 @@ yak grpc --host 0.0.0.0 --port 8087 --secret youR-aw0some-PA5s --tls
 ```
 启动GRPC服务器后，在本地用yakit客户端进行连接
 
+![](/img/products/yakit/connection-1.png)
+
+![](/img/products/yakit/connection-2.png)
+
+![](/img/products/yakit/connection-3.png)
+
 但是，我们仍然有一些解释的点需要告诉大家
 
 :::danger 公网使用记得使用 TLS：保障通信不被窃听
@@ -65,6 +71,6 @@ yak grpc --host 0.0.0.0 --port 8087 --secret youR-aw0some-PA5s --tls
 > 这个验证在 Yakit 和 Yak 中是配套的，用户并不需要额外设置即可使用。
 
 :::
+权限切换：在使用某些功能时，如果不是以root或者管理员权限启动会出现报错的情况，权限的切换如下图所示
 
-
-
+![](/img/products/yakit/connection-4.png)
