@@ -21,6 +21,8 @@ import { useCreation, useDebounceFn, useGetState, useMemoizedFn } from "ahooks";
 import {
   AppleHoverIcon,
   AppleIcon,
+  CopyIcon,
+  LinuxHoverIcon,
   LinuxIcon,
   LoadingIcon,
   SureIcon,
@@ -336,7 +338,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       setSureCopy(true);
       setTimeout(() => {
         setSureCopy(false);
-      }, 2000);
+      }, 1000);
     }, 1000);
   });
   const getColourCode = useMemoizedFn((code: string) => {
@@ -370,13 +372,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     Linux: {
       url: "linux-amd64.AppImage",
       icon: LinuxIcon,
-      iconHover: (
-        <img
-          alt="Linux"
-          style={{ width: 32, height: 32 }}
-          src={require("../../static/img/home/icon/LinuxHoverIcon.png").default}
-        />
-      ),
+      iconHover: LinuxHoverIcon,
       size: 0,
     },
     Windows: {
@@ -525,17 +521,16 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                       (sureCopy && (
                         <span style={{ display: "flex" }}>{SureIcon}</span>
                       )) || (
-                        <img
-                          src={
-                            require("../../static/img/home/copy.png").default
-                          }
-                          alt="copy"
+                        <span
+                          className="guide-body-yak-type-code-copy-icon"
                           onClick={() =>
                             onCopyCode(
                               yakEnvironmentConfigureList[currentSelectYak].code
                             )
                           }
-                        />
+                        >
+                          {CopyIcon}
+                        </span>
                       )}
                   </div>
                 </span>

@@ -143,6 +143,11 @@ $min-width: REM(1232);
           font-size: REM(14);
           word-break: break-all;
           position: relative;
+          &:hover {
+            svg {
+              color: #ffffff;
+            }
+          }
           &-ellipsis {
             line-height: REM(24);
             overflow: hidden;
@@ -158,9 +163,12 @@ $min-width: REM(1232);
             bottom: REM(6);
             cursor: pointer;
             display: flex;
-            img {
+            &-icon {
+              color: rgba(255, 255, 255, 0.5);
+              height: REM(16);
               &:hover {
-                filter: brightness(2);
+                // filter: brightness(2);
+                color: #ffffff;
               }
             }
           }
