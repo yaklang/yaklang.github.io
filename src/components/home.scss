@@ -72,16 +72,149 @@ $min-width: REM(1232);
       }
       &-description {
         margin-top: REM(32);
-        margin-bottom: REM(48);
+        margin-bottom: REM(40);
         height: REM(48);
         line-height: REM(24);
         font-size: 24px;
         color: #686c78;
+        margin-left: REM(32);
       }
       &-btn {
         display: flex;
         .download-yakit-btn + .course-doc-btn {
           margin-left: REM(24);
+        }
+      }
+    }
+    .guide-body-yak {
+      &-heard {
+        display: flex;
+        align-items: center;
+
+        &-text {
+          font-weight: 600;
+          color: #1e1f23;
+          line-height: REM(24);
+          margin-right: REM(16);
+          height: REM(24);
+          font-size: REM(16);
+          font-family: PingFangSC-Semibold, PingFang SC;
+        }
+        &-tip {
+          font-weight: 400;
+          color: #999ea8;
+          line-height: REM(20);
+          height: REM(20);
+          font-size: REM(12);
+          text-decoration: underline;
+          cursor: pointer;
+          font-family: PingFangSC-Regular, PingFang SC;
+          &:hover {
+            color: #ff7d23;
+          }
+        }
+      }
+      &-type {
+        margin-top: REM(16);
+        &-text {
+          display: flex;
+          margin-bottom: REM(8);
+          &-item {
+            margin-right: REM(24);
+            height: REM(20);
+            font-size: REM(14);
+            font-weight: 400;
+            color: #686c78;
+            line-height: REM(20);
+            cursor: pointer;
+          }
+          &-item-select {
+            color: #ff7d23;
+          }
+        }
+        &-code {
+          display: inline-block;
+          width: REM(369);
+          height: REM(72);
+          background: #292d3e;
+          border-radius: REM(4);
+          color: rgb(191, 199, 213);
+          padding: REM(12) REM(8);
+          font-size: REM(14);
+          word-break: break-all;
+          position: relative;
+          &-ellipsis {
+            line-height: REM(24);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            width: 95%;
+          }
+          &-copy {
+            position: absolute;
+            right: REM(6);
+            bottom: REM(6);
+            cursor: pointer;
+            display: flex;
+            img {
+              &:hover {
+                filter: brightness(2);
+              }
+            }
+          }
+        }
+      }
+    }
+    .guide-body-yakit {
+      margin-top: REM(64);
+      &-type {
+        margin-top: REM(16);
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-rows: REM(82);
+      }
+      &-item {
+        font-size: REM(16);
+        font-weight: 600;
+        color: #2a2b31;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 REM(8) REM(24) 0 rgba(210, 214, 223, 0.3);
+        border-radius: REM(4);
+        padding: REM(16);
+        display: flex;
+        align-items: flex-start;
+        cursor: pointer;
+        margin-right: REM(24);
+
+        &-left {
+          &-icon {
+            display: inline-flex;
+          }
+          &-icon-hover {
+            display: none;
+          }
+        }
+
+        &-right {
+          margin-left: REM(8);
+          &-size {
+            font-size: REM(12);
+            font-weight: 400;
+            color: #999ea8;
+          }
+        }
+
+        &:hover {
+          .guide-body-yakit-item-left {
+            .guide-body-yakit-item-left-icon {
+              display: none;
+            }
+            .guide-body-yakit-item-left-icon-hover {
+              display: inline-flex;
+            }
+          }
         }
       }
     }
@@ -922,5 +1055,16 @@ $min-width: REM(1232);
       color: #686c78;
       font-size: REM(14);
     }
+  }
+}
+
+.icon-animation {
+  display: inline-flex;
+  animation: loadingCircle 1s infinite linear;
+}
+
+@keyframes loadingCircle {
+  100% {
+    transform: rotate(360deg);
   }
 }
