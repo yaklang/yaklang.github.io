@@ -216,6 +216,13 @@ function Navbar() {
   const items = useNavbarItems();
   const hasSearchNavbarItem = items.some((item) => item.type === 'search');
   const {leftItems, rightItems} = splitNavItemsByPosition(items);
+
+
+  useEffect(()=>{
+    window.addEventListener("beforeunload", (e) => {
+      document.body.scrollIntoView()
+    });
+  },[])
   return (
     <nav
       ref={navbarRef}
