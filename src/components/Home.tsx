@@ -17,7 +17,18 @@ import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "animate.css";
-import { useDebounceFn } from "ahooks";
+import { useCreation, useDebounceFn, useGetState, useMemoizedFn } from "ahooks";
+import {
+  AppleHoverIcon,
+  AppleIcon,
+  CopyIcon,
+  LinuxHoverIcon,
+  LinuxIcon,
+  LoadingIcon,
+  SureIcon,
+  WindowsHoverIcon,
+  WindowsIcon,
+} from "./HomeIcon";
 
 const axios = require("axios");
 
@@ -131,6 +142,18 @@ const IntroduceKinds: IntroduceKindProps[] = [
   },
 ];
 
+const yakEnvironmentConfigureList = {
+  "MacOs(Intel/M1)": {
+    code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
+  },
+  Linux: {
+    code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
+  },
+  Windows: {
+    code: "powershell (new-object System.Net.WebClient).DownloadFile('https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe",
+  },
+};
+
 export const HomePage: React.FC<HomePageProps> = (props) => {
   const [kind, setKind] = useState<IntroduceKindProps>({
     name: "高效",
@@ -147,6 +170,11 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [isFunctionRange, setIsFunctionRange] = useState<boolean>(false);
 
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
+  const [currentSelectYak, setCurrentSelectYak] =
+    useState<string>("MacOs(Intel/M1)");
+
+  const [sureCopy, setSureCopy] = useState<boolean>(false);
+  const [loadingCopy, setLoadingCopy] = useState<boolean>(false);
 
   const oldScrollTop = useRef<number>(0);
   const defDevicePixelRatio = useRef<number>(); // 浏览器默认的比例，系统设置中的缩放比例
@@ -214,7 +242,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       oldScrollTop.current = scrollTop;
 
       // 第一区域的高度+第二区域的padding-top高度(设计稿高度 )
-      const first = (762 / 16) * FontSize;
+      const first = (786 / 16) * FontSize;
       // 第二区域paddigTop、paddingBottom、每块区域高度
       const secondPaddingTop = (54 / 16) * FontSize;
       const secondBlock = ((950 - 54 - 200) / 16) * FontSize;
@@ -228,7 +256,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       const third = (2769 / 16) * FontSize;
       //第二与第三区域可视点高度
       const secondToThird = (480 / 16) * FontSize;
-
       if (scrollTop <= first) {
         setIsKindRange(false);
         setIsFunctionRange(false);
@@ -298,13 +325,128 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     });
   }, []);
 
+  const onCopyCode = useMemoizedFn((code: string) => {
+    setLoadingCopy(true);
+    let oInput = document.createElement("input");
+    oInput.value = code;
+    document.body.appendChild(oInput);
+    oInput.select(); // 选择对象;
+    document.execCommand("Copy"); // 执行浏览器复制命令
+    oInput.remove();
+    setTimeout(() => {
+      setLoadingCopy(false);
+      setSureCopy(true);
+      setTimeout(() => {
+        setSureCopy(false);
+      }, 1000);
+    }, 1000);
+  });
+  const getColourCode = useMemoizedFn((code: string) => {
+    let text = "",
+      codeArr = code.split("");
+    codeArr.forEach((item) => {
+      if (item === "<" || item === "/" || item === "-") {
+        text += `<span style='color:rgb(137, 221, 255)'>${item}</span>`;
+      } else if (item === "(" || item === ")" || item === ":" || item === ".") {
+        text += `<span style='color: rgb(199, 146, 234);'>${item}</span>`;
+      } else {
+        text += item;
+      }
+    });
+    return text;
+  });
+  const [version, setVersion] = useState<string>("");
+  const [exeList, setExeList] = useState({
+    "macOS (Inter)": {
+      url: "darwin-x64.dmg",
+      icon: AppleIcon,
+      iconHover: AppleHoverIcon,
+      size: 0,
+    },
+    "macOS (M1)": {
+      url: "darwin-arm64.dmg",
+      icon: AppleIcon,
+      iconHover: AppleHoverIcon,
+      size: 0,
+    },
+    Linux: {
+      url: "linux-amd64.AppImage",
+      icon: LinuxIcon,
+      iconHover: LinuxHoverIcon,
+      size: 0,
+    },
+    Windows: {
+      url: "windows-amd64.exe",
+      icon: WindowsIcon,
+      iconHover: WindowsHoverIcon,
+      size: 0,
+    },
+  });
+  useEffect(() => {
+    init();
+  }, []);
+  const init = useMemoizedFn(() => {
+    axios
+      .get(
+        "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yakit-version.txt"
+      )
+      .then(async (response) => {
+        if (response && response.data && typeof response.data === "string") {
+          const yakVersion = (response.data as string).split("\n")[0];
+          setVersion(yakVersion);
+          for (const key in exeList) {
+            if (Object.prototype.hasOwnProperty.call(exeList, key)) {
+              const item = exeList[key];
+              await getSize(item.url, key);
+            }
+          }
+          setExeList({ ...exeList });
+        } else {
+          message.error("获取yakit版本错误，请刷新页面后重试");
+        }
+      })
+      .catch((error) => {
+        message.error("获取yakit版本错误，请刷新页面后重试");
+      });
+  });
+  const getUrl = useMemoizedFn((url: string) => {
+    return `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-${url}`;
+  });
+  const getSize = useMemoizedFn(async (url: string, type: string) => {
+    await axios
+      .head(getUrl(url))
+      .then((response) => {
+        if (
+          response &&
+          response.headers &&
+          response.headers["content-length"]
+        ) {
+          const size =
+            Math.ceil(
+              (response.headers["content-length"] / 1024 / 1024) * 100
+            ) / 100;
+          exeList[type].size = size;
+        } else {
+          message.error(`获取yakit-${url}版本大小错误`);
+        }
+      })
+      .catch((error) => {
+        message.error(`获取yakit-${url}版本大小错误`);
+      });
+  });
+
+  const onDownload = useMemoizedFn((url: string) => {
+    if (!version) {
+      message.error("获取yakit版本错误，请刷新页面后重试");
+      return;
+    }
+    const link = getUrl(url);
+    window.location.href = link;
+  });
+
   return (
     <>
       <div className="home-container">
-        {/* <img
-        src={require("../../static/img/home/homeHeadBg.png").default}
-        className="guide-background-img"
-      /> */}
         <div className="guide-background-img"></div>
         <div className="guide-body">
           <div className="guide-words-body">
@@ -325,9 +467,110 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             <div className="guide-words-body-description">
               为网络安全而生的专属编程语言
             </div>
-            <div className="guide-words-body-btn">
-              <DownLoadBtn />
-              <CourseDocBtn />
+            <div className="guide-body-yak">
+              <div className="guide-body-yak-heard">
+                <span className="guide-body-yak-heard-text">
+                  YAK 语言环境配置
+                </span>
+                <a
+                  target="_blank"
+                  href="/docs/startup"
+                  className="guide-body-yak-heard-tip"
+                >
+                  搭建教程
+                </a>
+              </div>
+              <div className="guide-body-yak-type">
+                <div className="guide-body-yak-type-text">
+                  {Object.keys(yakEnvironmentConfigureList).map((k) => (
+                    <div
+                      className={`guide-body-yak-type-text-item ${
+                        (k === currentSelectYak &&
+                          "guide-body-yak-type-text-item-select") ||
+                        ""
+                      }`}
+                      key={"yakEnvironmentConfigureList" + k}
+                      onClick={() => {
+                        setCurrentSelectYak(k);
+                        getColourCode(
+                          yakEnvironmentConfigureList[currentSelectYak].code
+                        );
+                      }}
+                    >
+                      {k}
+                    </div>
+                  ))}
+                </div>
+                <span className="guide-body-yak-type-code">
+                  <span
+                    className="guide-body-yak-type-code-ellipsis"
+                    dangerouslySetInnerHTML={{
+                      __html: `${
+                        (currentSelectYak === "Windows" &&
+                          yakEnvironmentConfigureList[currentSelectYak].code) ||
+                        getColourCode(
+                          yakEnvironmentConfigureList[currentSelectYak].code
+                        )
+                      }`,
+                    }}
+                  ></span>
+                  <div className="guide-body-yak-type-code-copy">
+                    {(loadingCopy && (
+                      <span className="icon-animation">{LoadingIcon}</span>
+                    )) ||
+                      (sureCopy && (
+                        <span style={{ display: "flex" }}>{SureIcon}</span>
+                      )) || (
+                        <span
+                          className="guide-body-yak-type-code-copy-icon"
+                          onClick={() =>
+                            onCopyCode(
+                              yakEnvironmentConfigureList[currentSelectYak].code
+                            )
+                          }
+                        >
+                          {CopyIcon}
+                        </span>
+                      )}
+                  </div>
+                </span>
+              </div>
+              <div className="guide-body-yakit guide-body-yak-heard">
+                <span className="guide-body-yak-heard-text">
+                  下载YAK IDE (Yakit)
+                </span>
+                <a
+                  target="_blank"
+                  href="/products/manual/download_and_install"
+                  className="guide-body-yak-heard-tip"
+                >
+                  安装教程
+                </a>
+              </div>
+              <div className="guide-body-yakit-type">
+                {Object.keys(exeList).map((exeKey) => (
+                  <div
+                    className="guide-body-yakit-item"
+                    key={"exeList" + exeKey}
+                    onClick={() => onDownload(exeList[exeKey].url)}
+                  >
+                    <div className="guide-body-yakit-item-left">
+                      <span className="guide-body-yakit-item-left-icon">
+                        {exeList[exeKey].icon}
+                      </span>
+                      <span className="guide-body-yakit-item-left-icon-hover">
+                        {exeList[exeKey].iconHover}
+                      </span>
+                    </div>
+                    <div className="guide-body-yakit-item-right">
+                      <div>{exeKey}</div>
+                      <div className="guide-body-yakit-item-right-size">
+                        {exeList[exeKey].size || "-"}&nbsp;MB
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -365,10 +608,13 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                           +document.documentElement.style.fontSize.split(
                             "px"
                           )[0];
-                        window.scrollTo(
-                          0,
-                          ((762 + 54 + 696 * index + 140) / 16) * FontSize
-                        );
+                        let height =
+                          ((786 + 54 + 696 * index + 140) / 16) * FontSize;
+                        if (index === 3) {
+                          height =
+                            ((786 + 54 + 696 * index + 50) / 16) * FontSize;
+                        }
+                        window.scrollTo(0, height);
                       }
                     }}
                   >
