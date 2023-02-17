@@ -240,7 +240,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       oldScrollTop.current = scrollTop;
 
       // 第一区域的高度+第二区域的padding-top高度(设计稿高度 )
-      const first = (762 / 16) * FontSize;
+      const first = (786 / 16) * FontSize;
       // 第二区域paddigTop、paddingBottom、每块区域高度
       const secondPaddingTop = (54 / 16) * FontSize;
       const secondBlock = ((950 - 54 - 200) / 16) * FontSize;
@@ -254,7 +254,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       const third = (2769 / 16) * FontSize;
       //第二与第三区域可视点高度
       const secondToThird = (480 / 16) * FontSize;
-
       if (scrollTop <= first) {
         setIsKindRange(false);
         setIsFunctionRange(false);
@@ -446,7 +445,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       return;
     }
     const link = getUrl(url);
-    // window.open(link);
     window.location.href = link;
   });
 
@@ -473,10 +471,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
             <div className="guide-words-body-description">
               为网络安全而生的专属编程语言
             </div>
-            {/* <div className="guide-words-body-btn">
-              <DownLoadBtn />
-              <CourseDocBtn />
-            </div> */}
             <div className="guide-body-yak">
               <div className="guide-body-yak-heard">
                 <span className="guide-body-yak-heard-text">
@@ -619,10 +613,13 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                           +document.documentElement.style.fontSize.split(
                             "px"
                           )[0];
-                        window.scrollTo(
-                          0,
-                          ((762 + 54 + 696 * index + 140) / 16) * FontSize
-                        );
+                        let height =
+                          ((786 + 54 + 696 * index + 140) / 16) * FontSize;
+                        if (index === 3) {
+                          height =
+                            ((786 + 54 + 696 * index + 50) / 16) * FontSize;
+                        }
+                        window.scrollTo(0, height);
                       }
                     }}
                   >
