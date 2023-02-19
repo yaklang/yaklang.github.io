@@ -357,7 +357,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   });
   const [version, setVersion] = useState<string>("");
   const [exeList, setExeList] = useState({
-    "macOS (Inter)": {
+    "macOS (Intel)": {
       url: "darwin-x64.dmg",
       icon: AppleIcon,
       iconHover: AppleHoverIcon,
