@@ -4,7 +4,7 @@ module.exports = {
         defaultLocale: "zh-CN",
         locales: ["zh-CN", "en"],
     },
-    title: "Yak Official Website",
+    title: "Yak Program Language",
     tagline: "Yak 是一门 Web 安全研发领域垂直语言",
     url: "https://yaklang.io",
     baseUrl: "/",
