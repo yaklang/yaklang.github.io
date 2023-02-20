@@ -176,6 +176,9 @@ module.exports = {
                 facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
             },
         },
+        prism: {
+            theme: require("prism-react-renderer/themes/github"),
+        },
     },
     plugins: [
         "docusaurus-plugin-sass",
@@ -217,11 +220,6 @@ module.exports = {
                 // },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),
-                },
-                themeConfig: {
-                    prism: {
-                        theme: require("prism-react-renderer/themes/dracula"),
-                    },
                 },
             },
         ],
