@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title>Yak Official Website Blog</title>
+        <title>Yak Program Language Blog</title>
         <link>https://yaklang.io/en/blog</link>
-        <description>Yak Official Website Blog</description>
+        <description>Yak Program Language Blog</description>
         <lastBuildDate>Thu, 30 May 2019 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
