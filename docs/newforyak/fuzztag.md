@@ -835,7 +835,7 @@ dump(res)
 
 ### 【编码标签】`{{base64}} {{md5}} {{hex}} {{sha1}} {{sha256}} {{sha512}} {{urlenc}}  {{doubleurlenc}} {{htmlenc}} {htmlhexenc}`
 
-这几个编码标签对应 `codec` \([点击这里查看具体函数](/docs/buildinlibs/lib_codec)\) 这个包中的各个函数
+这几个编码标签对应 `codec` \([点击这里查看具体函数](/docs/yakexamples/codec)\) 这个包中的各个函数
 
 #### 定义说明
 
