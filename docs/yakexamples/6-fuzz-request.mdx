@@ -1,0 +1,83 @@
+---
+sidebar_position: 6
+---
+
+# 函数库：fuzz - 模糊测试 HTTP
+
+HTTP 模糊测试（HTTP Fuzzing）是一种测试技术，用于发现 HTTP 应用程序中的漏洞和安全问题。它通过在 HTTP 请求中注入随机、无效或非预期的数据，来测试应用程序的容错性和安全性。
+
+具体来说，HTTP 模糊测试会针对 HTTP 应用程序的各种输入，如 URL、请求方法、请求头、请求体等，随机生成数据，注入到请求中，以测试应用程序在处理异常数据时的容错性和安全性。这些数据可能是无效的、不合法的、包含恶意代码的，以及具有其他非预期的特征的数据，这样可以模拟真实世界中攻击者的行为。
+
+通过对 HTTP 应用程序进行模糊测试，可以发现应用程序中存在的漏洞和安全问题，如缓冲区溢出、SQL 注入、跨站脚本攻击（XSS）、跨站请求伪造（CSRF）等。这有助于提高应用程序的安全性，并帮助开发人员更好地了解应用程序中存在的漏洞和安全问题。
+
+在 Yak 中，`fuzz` 模块可以很容易帮助你做到这些关键操作，也可以辅助用户快速编写漏洞检测算法。我们接下来会在这篇文章中给大家介绍如何使用 `fuzz` 模块进行安全测试。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 基础 API
+
+`fuzz.HTTPRequest` 是 `fuzz` 模块的核心 API，使用这个 API，我们可以非常快速地进行数据变形，数据包调试，以及数据包发送。
+
+和其他 API 使用类似，我们在 `fuzz.HTTPRequest` 中是这么定义的
+
+```go title="fuzz.HTTPRequest 定义"
+fuzz.HTTPRequest(packet []byte, opt...) (*FuzzHTTPRequest, error)
+```
+
+其中 opt 的可以使用 `fuzz.https(bool)` 去指定是否是 HTTPS。就像这样
+
+```go title="使用带参数的 FuzzRequest"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+freq, err = fuzz.HTTPRequest(raw, fuzz.https(true))
+die(err)
+
+/* 展示数据包 */
+freq.Show()
+```
+
+:::info 可简化上述代码写法
+
+带有 `~` 结尾的函数调用将会自动忽略错误，如果错误不为空，将会造成当前程序抛出错误
+
+详情我们可以参考如下两个章节：
+
+1. [函数简化调用：WavyCall](/docs/yak-basic/function-calling#简化调用：wavycalling)
+2. [异常处理：try-catch](/docs/yak-basic/errors#捕获错误：try-与-catch)
+
+因此，上述代码可以简化为
+
+```go title="使用 WavyCall 简化 fuzz.HTTPRequest"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
+freq.Show()
+```
+
+:::
+
+### 111
+
+### API 风格：链式调用
+
+### 发送一个 HTTP 请求
+
+### 基础数据包变形
+
+### 发送所有变形后的 HTTP 请求
+
+## 数据包变型详解
+
+### 模糊测试 HTTP 方法
+
+### 模糊测试 HTTP 路径
+
+### 模糊测试 HTTP 参数与数据
+
+###
