@@ -3,3 +3,245 @@ sidebar_position: 3
 ---
 
 # 函数库：codec - 加密与编码
+
+在计算机中，编码和解码是将数据从一种形式转换为另一种形式的过程，通常用于将数据在不同的系统之间传输或存储。编码和解码的意义在于，它们使不同的系统之间可以传输和处理数据，而不会因为编码格式不同而出现问题。例如，在 Web 开发中，浏览器和服务器之间使用 HTTP 协议进行通信，通常使用 UTF-8 编码格式传输数据，以便于在不同的浏览器和服务器之间传输数据。在这种情况下，编码和解码是非常重要的，因为它们确保了数据能够被正确地传输和处理。
+
+与编码解码的主要目的不同，加密与解密是保护敏感数据和信息安全的重要手段，其意义包括以下几个方面：
+
+1. 保护隐私和机密性：通过对敏感数据进行加密，只有授权人员才能访问这些数据，确保隐私和机密性的保护。这在金融、医疗等领域的信息管理中非常重要。
+2. 防止数据被篡改：通过数字签名和加密技术，可以确保数据在传输和存储过程中不被篡改，从而保护数据的完整性。这在电子商务、网络银行等领域的数据传输和处理中非常重要。
+3. 防止数据被窃听：通过加密技术，可以在数据传输过程中防止数据被未经授权的人窃听，保护数据的机密性和安全性。这在网络安全领域和军事通讯中非常重要。
+4. 认证和授权：通过数字证书和数字签名技术，可以验证数据的来源和真实性，确保数据的认证和授权，防止非法访问和恶意攻击。
+
+在 codec 模块中，我们可以获得编解码和加解密的常见方案的各类支持。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 编码解码
+
+### Base64 编码解码
+
+1. `fn codec.DecodeBase64(var_1: string): ([]byte, error)`    **值得注意的是，解码base64的结果为 []byte 即为 bytes**
+1. `fn codec.EncodeBase64(var_1: interface {}): string`
+
+```go
+ret := codec.EncodeBase64("abcdefghijklmn\x99\xFf")
+println("编码为：", ret)
+res, err := codec.DecodeBase64(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+编码为： YWJjZGVmZ2hpamtsbW6Z/w==
+解码后为:
+([]uint8) (len=16 cap=18) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 99 ff  |abcdefghijklmn..|
+}
+*/
+```
+
+### HTML 实体编码 `#&xxx;`
+
+HTML 实体编码一般用于绕过 XSS
+
+1. `fn codec.DecodeHtml(var_1: string): string`  编码成 `&#123;` 的形式
+1. `fn codec.DecodeHtmlHex(var_1: string): string`  编码成 `&#xFF;` 的形式
+1. `fn codec.EscapeHtml(var_1: string): string`  只编码特殊字符，`<&>` 等等
+1. `fn codec.EncodeHtml(var_1: string): string`  解码
+
+```go
+ret := codec.EncodeHtml("abcdefghijklmn\xA0")
+println("Html编码为：", ret)
+res := codec.DecodeHtml(ret)
+println("解码后为: ")
+dump([]byte(res))
+
+ret := codec.EncodeHtmlHex("abcdefghijklmn\xA0")
+println("Html Hex编码为：", ret)
+res := codec.DecodeHtml(ret)
+println("解码后为: ")
+dump([]byte(res))
+
+ret := codec.EscapeHtml("abcdefghij<>:;{]{]|\\$^&^&#@klmn\xA0")
+println("Escape编码为：", ret)
+res := codec.DecodeHtml(ret)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+Html编码为： &#97;&#98;&#99;&#100;&#101;&#102;&#103;&#104;&#105;&#106;&#107;&#108;&#109;&#110;&#160;
+解码后为:
+([]uint8) (len=16 cap=16) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e c2 a0  |abcdefghijklmn..|
+}
+Html Hex编码为： &#x61;&#x62;&#x63;&#x64;&#x65;&#x66;&#x67;&#x68;&#x69;&#x6a;&#x6b;&#x6c;&#x6d;&#x6e;&#xa0;
+解码后为:
+([]uint8) (len=16 cap=16) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e c2 a0  |abcdefghijklmn..|
+}
+Escape编码为： abcdefghij&lt;&gt;:;{]{]|\$^&amp;^&amp;#@klmn�
+解码后为:
+([]uint8) (len=32 cap=32) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 3c 3e 3a 3b 7b 5d  |abcdefghij<>:;{]|
+ 00000010  7b 5d 7c 5c 24 5e 26 5e  26 23 40 6b 6c 6d 6e a0  |{]|\$^&^&#@klmn.|
+}
+*/
+```
+
+### Url 编码
+
+
+1. `fn codec.EncodeUrl(var_1: string): string`
+2. `fn codec.DecodeUrl(var_1: string) (string, error)`
+
+```go
+ret := codec.EncodeUrl("abcdefghij<>:;{]{]|\\$^&^&#@klmn\xA0")
+println("Url编码为：", ret)
+res, err := codec.DecodeUrl(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+Url编码为： %61%62%63%64%65%66%67%68%69%6a%3c%3e%3a%3b%7b%5d%7b%5d%7c%5c%24%5e%26%5e%26%23%40%6b%6c%6d%6e%a0
+解码后为:
+([]uint8) (len=32 cap=32) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 3c 3e 3a 3b 7b 5d  |abcdefghij<>:;{]|
+ 00000010  7b 5d 7c 5c 24 5e 26 5e  26 23 40 6b 6c 6d 6e a0  |{]|\$^&^&#@klmn.|
+}
+*/
+```
+
+#### 只编码需要编码的字符/字符串？
+
+1. `fn codec.EscapePathUrl(var_1: string): string`
+1. `fn codec.EscapeQueryUrl(var_1: string): string`
+1. `fn codec.UnescapePathUrl(var_1: string): (string, error)`
+1. `fn codec.UnescapeQueryUrl(var_1: string): (string, error)`
+
+### 双 URL 编码，常用于 XSS
+
+1. `fn codec.DoubleDecodeUrl(var_1: string): (string, error)`
+1. `fn codec.DoubleEncodeUrl(var_1: string): string`
+
+```go
+
+ret := codec.DoubleEncodeUrl("abcdefghij<>:;{]{]|\\$^&^&#@klmn\xA0")
+println("Url编码为：", ret)
+res, err := codec.DoubleDecodeUrl(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+Double Url编码为： %2561%2562%2563%2564%2565%2566%2567%2568%2569%256a%253c%253e%253a%253b%257b%255d%257b%255d%257c%255c%2524%255e%2526%255e%2526%2523%2540%256b%256c%256d%256e%25a0
+解码后为:
+([]uint8) (len=32 cap=32) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 3c 3e 3a 3b 7b 5d  |abcdefghij<>:;{]|
+ 00000010  7b 5d 7c 5c 24 5e 26 5e  26 23 40 6b 6c 6d 6e a0  |{]|\$^&^&#@klmn.|
+}
+*/
+```
+
+
+### 十六进制编码
+
+十六进制编码，转成十六进制字符串
+
+1. `fn codec.DecodeHex(var_1: string): ([]uint8, error)`
+1. `fn codec.EncodeToHex(var_1: interface {}): string`
+
+```go
+ret := codec.EncodeToHex("abcdefghij<>:;{]{]|\\$^&^&#@klmn\xA0")
+println("Url编码为：", ret)
+res, err := codec.DecodeHex(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+Hex 编码为： 6162636465666768696a3c3e3a3b7b5d7b5d7c5c245e265e2623406b6c6d6ea0
+解码后为:
+([]uint8) (len=32 cap=64) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 3c 3e 3a 3b 7b 5d  |abcdefghij<>:;{]|
+ 00000010  7b 5d 7c 5c 24 5e 26 5e  26 23 40 6b 6c 6d 6e a0  |{]|\$^&^&#@klmn.|
+}
+*/
+```
+
+:::info
+要注意，如果这个十六进制字符串需要在 mysql 中展示，记得加 `0x` 前缀喔
+:::
+
+
+### 不可见字符打印编码（ASCII）
+
+1. 编码 ASCII，不可见字符编码成 `\xNN`, 带双引号 `fn codec.EncodeASCII(var_1: string): string`
+1. 解码操作，`\xNN` 变成具体字符 `fn codec.DecodeASCII(var_1: string): (string, error)`
+1. 基本同 `codec.EncodeASCII` 的函数 `fn codec.EncodeToPrintable(var_1: string): string` ，但是只打印可见内容
+
+```go
+ret := codec.EncodeASCII("abcdefghijklmn\x99\xFf")
+println("编码为：", ret)
+res, err := codec.DecodeASCII(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+编码为： "abcdefghijklmn\x99\xff"
+解码后为:
+([]uint8) (len=16 cap=16) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 99 ff  |abcdefghijklmn..|
+}
+*/
+```
+
+:::danger
+注意，`EncodeASCII / DecodeASCII` 通常用于处理不可见字符，经过编码的字符串保证都是可见字符，并且带上了两边的引号！
+
+相同的，解码的时候，也需要带上引号
+:::
+
+## 加密与解密
+
+### AES 加密编码
+1. `fn codec.AESCBCEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+2. `fn codec.AESCBCDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+3. `fn codec.AESCBCEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+4. `fn codec.AESCBCDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+5. `fn codec.AESECBEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+6. `fn codec.AESECBDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
+
+### DES 加密编码
+1. `fn codec.DESCBCEnc(key []byte, data []byte, iv []byte): ([]byte, error)`
+2. `fn codec.DESCBCDec(key []byte, data []byte, iv []byte): ([]byte, error)`
+3. `fn codec.DESCBCEnc(key []byte, data []byte, iv []byte): ([]byte, error)`
+4. `fn codec.DESCBCDec(key []byte, data []byte, iv []byte): ([]byte, error)`
+
+## 不可逆 Hash 计算
+
+### Hash 计算与编码
+
+1. `fn codec.Md5(var_1: interface {}): string`
+1. `fn codec.Sha1(var_1: interface {}): string`
+1. `fn codec.Sha224(var_1: interface {}): string`
+1. `fn codec.Sha256(var_1: interface {}): string`
+1. `fn codec.Sha384(var_1: interface {}): string`
+1. `fn codec.Sha512(var_1: interface {}): string`
+
