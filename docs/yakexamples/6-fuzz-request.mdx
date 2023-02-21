@@ -59,20 +59,142 @@ abc=1`
 freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
 freq.Show()
 ```
-
 :::
 
-### 111
+至此，我们实现了最基础的 `fuzz.HTTPRequest` 的使用：**构建了一个用于变形的基础请求模版**，接下来我们需要看一下一些更强大的 API 应该怎么用。
 
 ### API 风格：链式调用
 
+在继续后面的内容之前，我们需要大致学习一下 `fuzz` 这个模块在 API 设计上的有趣特性。
+
+> 方法链式调用，也称为命名参数惯用法。每个方法都返回一个对象，允许在单个语句中将调用链接在一起，而无需变量来存储中间结果。
+>
+> 方法链式调用是一种语法糖。 类似的语法是方法级联调用，即调用一个对象的多个方法的语法糖
+
+:::tip
+
+链式调用可以减轻用户编写代码的负担。
+
+:::
+
+在 fuzz 模块的使用中，我们可以观察如下例子，很好的体现了链式调用的优势
+
+```go title="WavyCall 创建对象，然后链式调用"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+fuzz.HTTPRequest(raw, fuzz.https(true))~.Show().ExecFirst()~
+```
+
+相信我们不需要做过多解释用户也可以很容易理解上述代码的内容：创建一个可供模糊测试的 HTTPRequest, 然后我们展示一下他的内容，然后执行这个 HTTPRequest 请求。
+
+链式调用的优势是，我们可以把想做的事儿一次性用一个连贯的逻辑表达出来，不需要用任何中间变量存储。
+
+## 发送 HTTP 请求
+
+我们在 `fuzz.HTTPRequest` 中这一个系列接口中，一般有两个发送数据包的接口:
+
+1. 执行所有的请求 `Exec(opts...) (channel *_httpResult, error)`
+1. 仅执行第一个所请求 `ExecFirst(opts...) (channel *_httpResult, error)`
+
+这两个接口虽然底层是一样的，但是因为模糊测试变形的结果**可能是一个结果或者多个结果**，执行一个请求或者执行N个请求实际上是不一样的。我们需要为大家分别介绍这两个 API 是如何使用的。
+
 ### 发送一个 HTTP 请求
 
-### 基础数据包变形
+我们继续借用上一个例子稍作修改来完成这部分内容：
+
+```go title="ExecFirst() (*_httpResult, error)"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+result = fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD").ExecFirst()~
+
+/*
+result: *_httpResult.RequestRaw
+
+HEAD / HTTP/1.1
+Host: www.example.com
+Content-Length: 5
+
+abc=1
+*/
+```
+
+:::tip
+
+WavyCall 可以在 ExecFirst() 使用来简化代码
+
+:::
+
+上述代码实现了一个非常简单的场景，我们直接执行了构造好的请求，然后把这个请求通过 `FuzzMethod(...)` 方法变形成 HEAD 方法，然后把这个请求发送到服务端，并把结果返回回来。
+
+在拿到结果之后，我们可以操作 `result` 来实现我们想做的事情。
+
+当然这就需要我们了解 result 的对象信息：`_httpResult`，这个结构的描述并不复杂：
+
+```go title="_httpResult 结构描述"
+type _httpResult struct {
+  Fields(可用字段):
+      Url: string
+      Request: *http.Request
+      Error: error
+      RequestRaw: []byte
+      ResponseRaw: []byte
+      Response: *http.Response
+      Payloads: []string
+      DurationMs: int64
+      ServerDurationMs: int64
+      Timestamp: int64
+}
+```
+
+:::tip
+
+如果你在编程中遇到不懂的 struct，可以通过 `desc` 来获取其定义信息，如果遇到不知道的中间结果，可以通过 `dump(...)` 来实现。
+
+如果不知道你的变量的内容，可以通过 `typeof` 来探索。
+
+:::
 
 ### 发送所有变形后的 HTTP 请求
 
-## 数据包变型详解
+在实现针对一个请求发送之后，我们很自然的会想到另一个需求，如果我想要一次发送两个请求，这两个请求测试的 Method 都不通怎么办？例如，我需要同时测试 GET，POST，DELETE，OPTIONS 这几个方法，那么如何编写代码呢？
+
+这里我们就需要了解我们用的 API：`Exec() (chan *_httpResult, error)`。观察如下代码即可快速了解：
+
+```go title="模糊测试 Method，同时发送多个请求"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+resultChan = fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD", "GET", "POST", "DELETE").Exec()~
+for result in resultChan {
+    // handle ...
+}
+```
+
+这个代码和上一个代码块儿相比，我们很快可以发现仅仅在 `FuzzMethod(...)` 和 `Exec()` 略有不同：我们同一时间传入了更多的方法名称，当然我们希望 "同时构建多个请求"。
+
+所以我们也希望同时执行上述所有请求。在这种情况下，我们需要使用 `Exec()` 返回一个 `chan *_httpResult`，然后通过 for 来接收结果处理结果
+
+:::caution 结果通道的处理要小心
+
+`chan *_httpResult` 的结果其实很想 Python 中的 `yield`，可以理解为按需产生结果。
+
+用户需要保证接收到所有的请求才能保证请求都被正常发送，不然 fuzz 模块会认为，用户无法处理后续的请求，会进行阻塞。
+
+如果你不想处理后续请求的话，可以直接放行
+
+```go title="更简化的写法，不处理任何结果"
+for result in fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD", "GET", "POST", "DELETE").Exec()~ {}
+```
+
+:::
+
+
+## 数据包变型
 
 ### 模糊测试 HTTP 方法
 
@@ -80,4 +202,134 @@ freq.Show()
 
 ### 模糊测试 HTTP 参数与数据
 
-###
+## 动态参数模糊测试
+
+### 可用 API 一览表 {#apitable}
+
+```go title="FuzzHTTPRequest 功能一览表"
+type *FuzzHTTPRequest {
+    /* 发送单个数据包 */
+    func ExecFirst(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(*mutate._httpResult, error)
+
+    /* 发送批量数据包 */
+    func Exec(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(chan *mutate._httpResult, error)
+
+    /* 获取第一个 Fuzz 后的请求 */
+    func FirstFuzzHTTPRequest() return(*mutate.FuzzHTTPRequest)
+
+    /* 获取第一个请求的原始报文信息 */
+    func FirstHTTPRequestBytes() return([]byte)
+
+    /* 模糊测试 FuzzCookie 按 Key-Value 的形式 */
+    func FuzzCookie(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 Cookie 按整体报文的形式 */
+    func FuzzCookieRaw(v1: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 Content-Type 为 multipart/form-data */
+    func FuzzFormEncoded(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 GET 请求 */
+    func FuzzGetParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 GET 请求（整体测试，无 KV 值区分）*/
+    func FuzzGetParamsRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 HTTP Header */
+    func FuzzHTTPHeader(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 HTTP Method */
+    func FuzzMethod(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试路径 */
+    func FuzzPath(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试路径（追加） */
+    func FuzzPathAppend(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 Post 数据（JSON Object） */
+    func FuzzPostJsonParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 Post 参数（Key-Value） */
+    func FuzzPostParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 Post 整体参数 */
+    func FuzzPostRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试上传文件接口 */
+    func FuzzUploadFile(field: interface {}, name: interface {}, content: []byte) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试上传文件的文件名部分（Key-Value）*/
+    func FuzzUploadFileName(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 模糊测试 KV 值的 （Content-Type 为 `multipart/form-data` 的情况） */
+    func FuzzUploadKVPair(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+
+    /* 获取 Body 的内容 */
+    func GetBody() return([]byte)
+
+    /* 获取数据包的原文信息 */
+    func GetBytes() return([]byte)
+
+    /* 获取现在所有的可以供测试的参数 */
+    func GetCommonParams() return([]*mutate.FuzzHTTPRequestParam)
+
+    /* 获取当前请求包的 Content-Type */
+    func GetContentType() return(string)
+
+    /* 获取 Cookie 的可供测试参数 */
+    func GetCookieParams() return([]*mutate.FuzzHTTPRequestParam)
+
+    /* 获取第一个可供测试的 FuzzHTTPRequest */
+    func GetFirstFuzzHTTPRequest() return(*mutate.FuzzHTTPRequest, error)
+
+    /* 获取所有 Get 参数以供测试 */
+    func GetGetQueryParams() return([]*mutate.FuzzHTTPRequestParam)
+
+    /* 获取 Header */
+    func GetHeader(v1: string) return(string)
+
+    /* 获取所有 Header 的 Key */
+    func GetHeaderKeys() return([]string)
+
+    /* 通过 Name 获取可供测试的参数 */
+    func GetHeaderParamByName(v1: string) return(*mutate.FuzzHTTPRequestParam)
+
+    /* 获取所有可供测试的 Header 参数 */
+    func GetHeaderParams() return([]*mutate.FuzzHTTPRequestParam)
+
+    /* 获取所有 Header 的 Values */
+    func GetHeaderValues() return([]string)
+
+    /* 获取 Request 的 Method */
+    func GetMethod() return(string)
+    func GetOriginHTTPRequest() return(*http.Request, error)
+    func GetPath() return(string)
+    func GetPathAppendParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathBlockParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathRawParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathWithQuery() return(string)
+    func GetPostJsonParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPostParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPostQuery() return(string)
+    func GetPostQueryKeys() return([]string)
+    func GetPostQueryValue(v1: string) return(string)
+    func GetPostQueryValues() return([]string)
+    func GetQueryKeys() return([]string)
+    func GetQueryRaw() return(string)
+    func GetQueryValue(v1: string) return(string)
+    func GetQueryValues() return([]string)
+    func GetRequestURI() return(string)
+    func GetUrl() return(string)
+    func IsBodyFormEncoded() return(bool)
+    func IsBodyJsonEncoded() return(bool)
+    func IsBodyUrlEncoded() return(bool)
+    func IsEmptyBody() return(bool)
+    func ParamsHash() return(string, error)
+    func Repeat(v1: int) return(mutate.FuzzHTTPRequestIf)
+    func Results() return([]*http.Request, error)
+    func Show() return(mutate.FuzzHTTPRequestIf)
+}
+```
+
