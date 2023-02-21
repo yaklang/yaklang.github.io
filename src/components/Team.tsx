@@ -379,7 +379,7 @@ export const Team: React.FC<TeamProps> = (props) => {
           <span className="safety-body-content-color">
             “智感”、“透析”、“活现”
           </span>
-          为核心要素的主动网络安全模型并在该领域持续开展基础性、开拓性的探索和实践，曾牵头获得
+          为核心要素的主动网络安全模型（Active Cybersecurity Model）并在该领域持续开展基础性、开拓性的探索和实践，曾牵头获得
           2019 国家科技进步一等奖，2012 国家科技进步二等奖，3
           次省部科技进步一等奖，2
           次省部技术发明一等奖，入选“十三五”国家自然科学基金资助项目优秀成果，发表高水平学术论文
