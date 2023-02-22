@@ -455,26 +455,6 @@ export const Team: React.FC<TeamProps> = (props) => {
         </div>
       </div>
 
-      <div className="contributors-body">
-        <div className="contributors-header-title">
-          Yak 生态共建杰出贡献成员
-        </div>
-        <div className="contributors-member-wrapper">
-          <div className="contributors-member-grid-wrapper">
-            {ContributorsInfo.map((item) => {
-              return (
-                <Contributors
-                  className="grid-thumbnail"
-                  key={item.name}
-                  info={item}
-                  hoverable={false}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
       <div className="consultant-body">
         <div className="consultant-header-title">特别顾问</div>
 
@@ -494,6 +474,26 @@ export const Team: React.FC<TeamProps> = (props) => {
           src="/img/team/rightBottom.png"
           className="consultant-wrapper-right-bottom"
         />
+      </div>
+
+      <div className="contributors-body">
+        <div className="contributors-header-title">
+          YAK 生态共建杰出贡献成员
+        </div>
+        <div className="contributors-member-wrapper">
+          <div className="contributors-member-grid-wrapper">
+            {ContributorsInfo.map((item) => {
+              return (
+                <Contributors
+                  className="grid-thumbnail"
+                  key={item.name}
+                  info={item}
+                  hoverable={false}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       <div className="thanksfor-body">
