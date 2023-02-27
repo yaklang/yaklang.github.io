@@ -1,12 +1,20 @@
 ---
-sidebar_position: 104
+sidebar_position: 9
 ---
 
-# JSON 处理：loads / dumps
+# 函数库：json
+
+JSON是一种轻量级的数据交换格式。它使用文本格式来传输结构化数据，包括数组、对象、字符串、数字、布尔值和null。JSON格式被广泛用于Web应用程序和API中，作为一种数据格式，以实现不同应用程序之间的数据交换。JSON是一种平台无关的格式，可以使用许多编程语言进行解析和生成，包括JavaScript、Python、Java等。JSON的语法简单、易于理解和阅读，与XML和HTML相比，它更轻量级和灵活，因此在数据传输和存储方面更加高效。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## json 编码解码
 
 yak 提供了一个类似 Python 的 `json.loads/dumps` 的处理方式
 
-## `json.loads` 把 JSON 字符串转换为 yak map
+### `json.loads` 把 JSON 字符串转换为 map
 
 ```go
 jsonRaw1 = `{"abc":123, "cde":"efg", "foo": "bar-123123", "azz": {"key1": "result2", "key2": 123, "e": ["abc", 111]}, "d": [1,2,3,"123"]}`
@@ -63,7 +71,7 @@ OUTPUT:
 */
 ```
 
-## `json.dumps` 把 Yak 对象转为 JSON 字符串
+### `json.dumps` 把任意数据转为 JSON
 
 ```go
 a = ["123", true, false, "123123", 123, {"abc": 123},nil]
@@ -86,4 +94,23 @@ a = nil
 println(json.dumps(a))
 // OUTPUT: null
 ```
+
+## Json Path 技术
+
+JSON Path是一种用于从JSON格式的数据结构中提取特定数据的查询语言，类似于XPath。它提供了一种通用的方式来访问和操作JSON数据，可以用于编程语言或命令行中，以实现复杂的JSON数据处理和分析。
+
+JSON Path使用一种类似于XPath的表达式语法，以匹配JSON对象的特定元素。例如，以下是一些简单的JSON Path表达式示例：
+
+1. `$`：表示JSON对象的根元素
+2. `$.name`：表示根元素下的“name”属性值
+3. `$.people[*].name`：表示根元素下的“people”数组中所有对象的“name”属性值
+4. `$.people[?(@.age > 18)].name`：表示根元素下的“people”数组中年龄大于18岁的所有对象的“name”属性值
+
+通过JSON Path表达式，可以轻松地从JSON数据结构中提取特定的数据，这在数据分析和数据处理方面非常有用。
+
+### 提取数据
+
+### 替换数据
+
+## `json.New` 创建可操作 JSON 对象
 
