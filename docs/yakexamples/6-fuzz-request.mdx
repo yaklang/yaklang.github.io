@@ -850,3 +850,71 @@ type FuzzHTTPRequestParam struct {
     Value func() interface{}
 }
 ```
+
+### HTTPResult 响应结果处理
+
+<table>
+  <thead>
+    <tr>
+      <th>字段名</th>
+      <th>类型</th>
+      <th>描述</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Url</td>
+      <td>string</td>
+      <td>请求的URL地址</td></tr>
+    <tr>
+      <td>Request</td>
+      <td>*http.Request</td>
+      <td>发送的HTTP请求对象</td></tr>
+    <tr>
+      <td>Error</td>
+      <td>error</td>
+      <td>发生的错误</td></tr>
+    <tr>
+      <td>RequestRaw</td>
+      <td>[]byte</td>
+      <td>发送的HTTP请求的原始字节数据</td></tr>
+    <tr>
+      <td>ResponseRaw</td>
+      <td>[]byte</td>
+      <td>接收的HTTP响应的原始字节数据</td></tr>
+    <tr>
+      <td>Response</td>
+      <td>*http.Response</td>
+      <td>接收到的HTTP响应对象</td></tr>
+    <tr>
+      <td>Payloads</td>
+      <td>[]string</td>
+      <td>请求的负载信息</td></tr>
+    <tr>
+      <td>DurationMs</td>
+      <td>int64</td>
+      <td>完成HTTP请求所花费的总时间（以毫秒为单位）</td></tr>
+    <tr>
+      <td>ServerDurationMs</td>
+      <td>int64</td>
+      <td>服务端处理请求所花费的时间（以毫秒为单位）</td></tr>
+    <tr>
+      <td>Timestamp</td>
+      <td>int64</td>
+      <td>请求的时间戳（UNIX时间戳，以秒为单位）</td></tr>
+  </tbody>
+</table>
+
+```
+type httpResult struct {
+    Url             string        // 请求的URL地址
+    Request         *http.Request // 发送的HTTP请求对象
+    Error           error         // 发生的错误
+    RequestRaw      []byte        // 发送的HTTP请求的原始字节数据
+    ResponseRaw     []byte        // 接收的HTTP响应的原始字节数据
+    Response        *http.Response // 接收到的HTTP响应对象
+    Payloads        []string      // 请求的负载信息，即请求的Body部分
+    DurationMs      int64         // 完成HTTP请求所花费的总时间（以毫秒为单位）
+    ServerDurationMs int64        // 服务端处理请求所花费的时间（以毫秒为单位）
+    Timestamp       int64         // 请求的时间戳（UNIX时间戳，以秒为单位）
+}
+```
