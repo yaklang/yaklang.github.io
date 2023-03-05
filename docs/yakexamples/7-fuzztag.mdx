@@ -1,10 +1,85 @@
 ---
-sidebar_position: 10
+sidebar_position: 7
 ---
 
-# Fuzz Tag Playbook
+# 功能集：fuzztag - 模糊测试标签
 
-## 单体可用 Fuzztag 速览
+Fuzztag 是一个用于数据生成和转换的工具，它可以帮助用户生成各种类型的数据，如字符串、数字、网络地址、文件内容等。它还支持许多常见的编码转换，如 Base64 编码、URL 编码、HTML 实体编码等。
+
+1. `char`：生成一个字符集合。
+2. `repeat`：重复产生空字符串，用于重复发包或重复生成数据。
+3. `payload`：从数据库加载 Payload。
+4. `array`：设置一个数组，用 | 分割。
+5. `network`：生成一个网络地址。
+6. `int`：生成一个整数以及范围。
+7. `randint`：随机生成整数。
+8. `randstr`：随机生成字符串。
+9. `file:line`：解析文件名，把文件中的内容按行返回成数组。
+10. `file:dir`：解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回。
+11. `file`：读取文件内容，支持多个文件，用 | 分割。
+12. `codec`：调用 Yakit Codec 插件。
+13. `unquote`：把内容进行 strconv.Unquote 转化。
+14. ...
+
+当然，Fuzztag 可用的标签非常多，我们在 [这里](#tagtable) 可以快速查阅。
+
+## 快速开始
+
+当我们大概了解了 Fuzztag 能做什么之后，结合下面的案例，将会更快帮助我们了解这个功能
+
+```go title="编写一个模版"
+POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
+```
+
+在这个模版中，我们使用了 `randstr` 标签生成了一个长度为 8 的随机字符串作为用户名，并使用 `urlenc` 标签对其进行 URL 编码。同样，我们使用 `randstr` 生成了一个长度为 10 的随机字符串作为密码，并使用 `urlenc` 对其进行 URL 编码。最终，我们将这些数据作为表单数据发送到 `/login` 接口。这是一个简单的案例，演示了如何使用 Fuzztag 生成随机数据并对其进行编码，以便进行 Web 应用程序的安全测试。
+
+那么我们完成上述数据包之后，如何得到他真实的渲染结果呢？熟悉 Yaklang 的小伙伴很容易回答这个问题，可以在 [x-string fuzztag 快速渲染](/docs/yak-basic/string-fuzztag-x) 中找到答案。
+
+```go title="获取 fuzztag 的渲染结果"
+// raw: []string
+raw = x`POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
+`
+firstResult = raw[0]
+
+/*
+firstResult:
+
+POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=%61%6c%72%49%70%65%77%77&password=%61%57%6d%70%70%78%51%76%64%71
+*/
+```
+
+:::tip 等效 API
+
+当然与上述代码等效的是：
+
+```go title="使用 fuzz.Strings 更新"
+// raw: []string
+raw = `POST /login HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
+`
+firstResult = fuzz.Strings(raw)[0]
+```
+
+上面的代码将 Fuzztag 应用于一个简单的 HTTP 请求。`raw` 变量包含 HTTP 请求字符串，它包含两个标签 `randstr` 和 `urlenc`，它们分别用于生成随机字符串和对字符串进行 URL 编码。这个请求将被传递给 fuzz.Strings 函数，该函数将返回一个字符串数组，每个字符串都是通过应用 Fuzztag 标签来生成的。我们可以简单地使用 [0] 操作符从数组中获取第一个字符串，并将其赋值给 firstResult 变量。最终的结果将是一个包含随机字符串的 HTTP 请求。
+
+:::
+
+## 单体可用 Fuzztag 速览 {#tagtable}
 
 |标签名|标签别名|标签描述|
 |:-------|:-------|:-------|
@@ -70,7 +145,7 @@ origin := "randomStr: {{repeatstr(abc|3)}}"
 res := fuzz.Strings(origin)
 println("需要模糊随机渲染的字符串为：", origin)
 println("渲染结果为：")
-dump(res) 
+dump(res)
 ```
 
 执行的结果为
@@ -1025,7 +1100,7 @@ __getParams__ = func() {
     /*
         __getParams__ 是一个用户可控生成复杂数据初始数据的参数：
         可以在这个函数中同时处理所有数据：
-        
+
         1. CSRF Bypass
         2. 获取额外信息，进行强关联的信息变形
     */
@@ -1066,4 +1141,5 @@ println("---------------------")
 ---------------------
 
 ```
+
 

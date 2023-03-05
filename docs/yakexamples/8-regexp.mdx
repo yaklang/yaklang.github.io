@@ -2,7 +2,39 @@
 sidebar_position: 8
 ---
 
-# 正则表达式：提取与替换数据
+# 函数库：re - 正则表达式
+
+<p>正则表达式（Regular Expression），也被称为“Regex”或“RegExp”，是一种用于描述字符串模式的文本模式。正则表达式通常由一系列字符和特殊字符组成，用于匹配或查找其他字符串中的模式。</p>
+
+<p>正则表达式常用于文本处理和搜索操作中，例如在搜索引擎中，用户可以使用正则表达式搜索特定的网页；在编程中，开发人员可以使用正则表达式来验证、提取和转换文本数据。</p>
+
+<p>正则表达式语法包含以下元素：</p>
+
+<ol>
+    <li>
+        <p>字面量字符：这些是单个字符，如字母、数字、标点符号等，它们直接匹配文本字符串中的相应字符。</p>
+    </li>
+    <li>
+        <p>特殊字符：这些是在正则表达式中具有特殊含义的字符，如元字符、字符类、分组等，它们用于匹配特定的文本模式。</p>
+    </li>
+    <li>
+        <p>量词：这些用于指定匹配特定字符或字符类的次数。例如，*表示匹配前面的字符零次或多次，+表示匹配一次或多次，?表示匹配零次或一次。</p>
+    </li>
+</ol>
+
+<p>正则表达式可以在多种编程语言和工具中使用。在使用正则表达式时，需要仔细考虑模式的要求，以确保正则表达式可以准确匹配所需的模式。</p>
+
+在 Yaklang 中，`re` 是基础正则表达式的模块，提供了各种各样的正则表达式函数方便用户完成如下功能
+
+1. 基础的编译型正则使用接口，可匹配，提取数据；
+1. Grok 风格的正则处理
+1. 预设正则：提取 IP，Email，Path，URL 等
+1. 快捷提取数据于定位特征字符串，支持分组提取
+1. 快速根据正则替代特征字符串
+
+:::tip
+Grok 方式常用于 Nginx/Apache 等日志中关键信息提取。
+:::
 
 :::info 原生正则库
 
@@ -12,7 +44,78 @@ yak 完全兼容原生 Golang 正则库，原始的 Golang 正则的用法在 Ya
 
 :::
 
-## 快速使用正则提取数据
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 快速正则匹配数据
+
+yak 支持的正则表达式写法很多，有忠诚于标准库的写法，同时有高度封装的更易用的写法
+
+我们这篇文章讲介绍作者最推荐的几种文本匹配的写法
+
+```go
+func str.MatchAllOfGlob(origin, globPattern1, globPattern2) return bool
+func str.MatchAnyOfGlob(origin, globPattern1, globPattern2) return bool
+
+func str.MatchAllOfRegexp(origin, rePattern1, rePattern2) return bool
+func str.MatchAnyOfRegexp(origin, rePattern1, rePattern2) return bool
+
+func str.MatchAllOfSubString(origin, sub1, sub2) return bool
+func str.MatchAnyOfSubString(origin, sub1, sub2) return bool
+```
+
+这六个函数可以极大方便大家进行规则的编写，可以分别支持对 glob 语法 regexp 语法，以及子字符串匹配。
+
+`All` 的逻辑是说，所有的规则都应该被匹配，才会返回 `true`，否则返回 `false`
+
+`Any` 的逻辑是说，至少一条规则被匹配，将会返回 `true`，否则返回 `false`，如果没有规则，则返回 false
+
+### 单个正则匹配文本
+
+```go
+result = str.MatchAllOfRegexp(`GET / HTTP/1.1
+Host: www.baidu.com
+
+`, `Host: [w]{3}\.baidu\.com`)
+if result {
+    println("matched")
+}
+```
+
+在这个场景下，上述规则可以等同于 `re.Match`
+
+### 多正则同时用于匹配文档
+
+多个正则同时用于匹配一个文档时，通常会有 `AND / OR` 两种情况。 为此，我们稍微改一下上面的代码，让它变成匹配两个正则，都匹配才可以返回 true
+
+#### 多正则匹配：AND 场景
+
+```go
+data = `GET / HTTP/1.1
+Host: www.baidu.com
+
+`
+result = str.MatchAllOfRegexp(data, `Host: [w]{3}\.baidu\.com`, `HTTP\/1\.1`)
+if result {
+    println("matched")
+}
+```
+
+#### 多正则匹配：OR 场景
+
+```go
+data = `GET / HTTP/1.1
+Host: www.baidu.com
+
+`
+result = str.MatchAnyOfRegexp(data, `Host: [w]{3}\.baidu\.com`, `HTTP\/1\.1`)
+if result {
+    println("matched")
+}
+```
+
+## 使用正则提取数据
 
 如下几个接口在 `>= 1.0.13-sp14` 引擎中使用：
 
@@ -51,7 +154,7 @@ func re.FindAllSubmatchIndex(data, regexp/*string*/) return
 
 可以查看如下案例使用该内容
 
-## 匹配并提取单个结果
+### 提取单个结果
 
 ```go
 data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
@@ -70,7 +173,7 @@ OUTPUT:
 */
 ```
 
-## 匹配并提取所有结果
+### 提取所有结果
 
 ```go
 data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
@@ -97,7 +200,7 @@ OUTPUT:
 */
 ```
 
-## 匹配并提取包含分组的结果
+### 提取包含分组的结果
 
 ```go
 data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
@@ -120,7 +223,7 @@ OUTPUT:
 */
 ```
 
-## 匹配并提取全部分组结果
+### 提取全部分组结果
 
 ```go
 data = `.796 Electron Helper (Renderer)[7878:58760] CoreText note: Client requested name ".NewYork-Regular", it will get Times-Roman rather than the intended font. All systCoreText aaaa:em UI font acce`
@@ -279,5 +382,3 @@ type regexp.(Regexp) struct {
       func SubexpNames() return([]string)
 }
 ```
-
-:::

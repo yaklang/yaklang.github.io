@@ -1,0 +1,920 @@
+---
+sidebar_position: 6
+---
+
+# 函数库：fuzz - 模糊测试 HTTP
+
+HTTP 模糊测试（HTTP Fuzzing）是一种测试技术，用于发现 HTTP 应用程序中的漏洞和安全问题。它通过在 HTTP 请求中注入随机、无效或非预期的数据，来测试应用程序的容错性和安全性。
+
+具体来说，HTTP 模糊测试会针对 HTTP 应用程序的各种输入，如 URL、请求方法、请求头、请求体等，随机生成数据，注入到请求中，以测试应用程序在处理异常数据时的容错性和安全性。这些数据可能是无效的、不合法的、包含恶意代码的，以及具有其他非预期的特征的数据，这样可以模拟真实世界中攻击者的行为。
+
+通过对 HTTP 应用程序进行模糊测试，可以发现应用程序中存在的漏洞和安全问题，如缓冲区溢出、SQL 注入、跨站脚本攻击（XSS）、跨站请求伪造（CSRF）等。这有助于提高应用程序的安全性，并帮助开发人员更好地了解应用程序中存在的漏洞和安全问题。
+
+在 Yak 中，`fuzz` 模块可以很容易帮助你做到这些关键操作，也可以辅助用户快速编写漏洞检测算法。我们接下来会在这篇文章中给大家介绍如何使用 `fuzz` 模块进行安全测试。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 基础 API
+
+`fuzz.HTTPRequest` 是 `fuzz` 模块的核心 API，使用这个 API，我们可以非常快速地进行数据变形，数据包调试，以及数据包发送。
+
+和其他 API 使用类似，我们在 `fuzz.HTTPRequest` 中是这么定义的
+
+```go title="fuzz.HTTPRequest 定义"
+fuzz.HTTPRequest(packet []byte, opt...) (*FuzzHTTPRequest, error)
+```
+
+其中 opt 的可以使用 `fuzz.https(bool)` 去指定是否是 HTTPS。就像这样
+
+```go title="使用带参数的 FuzzRequest"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+freq, err = fuzz.HTTPRequest(raw, fuzz.https(true))
+die(err)
+
+/* 展示数据包 */
+freq.Show()
+```
+
+:::info 可简化上述代码写法
+
+带有 `~` 结尾的函数调用将会自动忽略错误，如果错误不为空，将会造成当前程序抛出错误
+
+详情我们可以参考如下两个章节：
+
+1. [函数简化调用：WavyCall](/docs/yak-basic/function-calling#简化调用：wavycalling)
+2. [异常处理：try-catch](/docs/yak-basic/errors#捕获错误：try-与-catch)
+
+因此，上述代码可以简化为
+
+```go title="使用 WavyCall 简化 fuzz.HTTPRequest"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
+freq.Show()
+```
+:::
+
+至此，我们实现了最基础的 `fuzz.HTTPRequest` 的使用：**构建了一个用于变形的基础请求模版**，接下来我们需要看一下一些更强大的 API 应该怎么用。
+
+### API 风格：链式调用
+
+在继续后面的内容之前，我们需要大致学习一下 `fuzz` 这个模块在 API 设计上的有趣特性。
+
+> 方法链式调用，也称为命名参数惯用法。每个方法都返回一个对象，允许在单个语句中将调用链接在一起，而无需变量来存储中间结果。
+>
+> 方法链式调用是一种语法糖。 类似的语法是方法级联调用，即调用一个对象的多个方法的语法糖
+
+:::tip
+
+链式调用可以减轻用户编写代码的负担。
+
+:::
+
+在 fuzz 模块的使用中，我们可以观察如下例子，很好的体现了链式调用的优势
+
+```go title="WavyCall 创建对象，然后链式调用"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+fuzz.HTTPRequest(raw, fuzz.https(true))~.Show().ExecFirst()~
+```
+
+相信我们不需要做过多解释用户也可以很容易理解上述代码的内容：创建一个可供模糊测试的 HTTPRequest, 然后我们展示一下他的内容，然后执行这个 HTTPRequest 请求。
+
+链式调用的优势是，我们可以把想做的事儿一次性用一个连贯的逻辑表达出来，不需要用任何中间变量存储。
+
+## 发送 HTTP 请求
+
+我们在 `fuzz.HTTPRequest` 中这一个系列接口中，一般有两个发送数据包的接口:
+
+1. 执行所有的请求 `Exec(opts...) (channel *_httpResult, error)`
+1. 仅执行第一个所请求 `ExecFirst(opts...) (channel *_httpResult, error)`
+
+这两个接口虽然底层是一样的，但是因为模糊测试变形的结果**可能是一个结果或者多个结果**，执行一个请求或者执行N个请求实际上是不一样的。我们需要为大家分别介绍这两个 API 是如何使用的。
+
+### 发送一个 HTTP 请求
+
+我们继续借用上一个例子稍作修改来完成这部分内容：
+
+```go title="ExecFirst() (*_httpResult, error)"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+result = fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD").ExecFirst()~
+
+/*
+result: *_httpResult.RequestRaw
+
+HEAD / HTTP/1.1
+Host: www.example.com
+Content-Length: 5
+
+abc=1
+*/
+```
+
+:::tip
+
+WavyCall 可以在 ExecFirst() 使用来简化代码
+
+:::
+
+上述代码实现了一个非常简单的场景，我们直接执行了构造好的请求，然后把这个请求通过 `FuzzMethod(...)` 方法变形成 HEAD 方法，然后把这个请求发送到服务端，并把结果返回回来。
+
+在拿到结果之后，我们可以操作 `result` 来实现我们想做的事情。
+
+当然这就需要我们了解 result 的对象信息：`_httpResult`，这个结构的描述并不复杂：
+
+```go title="_httpResult 结构描述"
+type _httpResult struct {
+  Fields(可用字段):
+      Url: string
+      Request: *http.Request
+      Error: error
+      RequestRaw: []byte
+      ResponseRaw: []byte
+      Response: *http.Response
+      Payloads: []string
+      DurationMs: int64
+      ServerDurationMs: int64
+      Timestamp: int64
+}
+```
+
+:::tip
+
+如果你在编程中遇到不懂的 struct，可以通过 `desc` 来获取其定义信息，如果遇到不知道的中间结果，可以通过 `dump(...)` 来实现。
+
+如果不知道你的变量的内容，可以通过 `typeof` 来探索。
+
+:::
+
+### 发送所有变形后的 HTTP 请求
+
+在实现针对一个请求发送之后，我们很自然的会想到另一个需求，如果我想要一次发送两个请求，这两个请求测试的 Method 都不通怎么办？例如，我需要同时测试 GET，POST，DELETE，OPTIONS 这几个方法，那么如何编写代码呢？
+
+这里我们就需要了解我们用的 API：`Exec() (chan *_httpResult, error)`。观察如下代码即可快速了解：
+
+```go title="模糊测试 Method，同时发送多个请求"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+resultChan = fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD", "GET", "POST", "DELETE").Exec()~
+for result in resultChan {
+    // handle ...
+}
+```
+
+这个代码和上一个代码块儿相比，我们很快可以发现仅仅在 `FuzzMethod(...)` 和 `Exec()` 略有不同：我们同一时间传入了更多的方法名称，当然我们希望 "同时构建多个请求"。
+
+所以我们也希望同时执行上述所有请求。在这种情况下，我们需要使用 `Exec()` 返回一个 `chan *_httpResult`，然后通过 for 来接收结果处理结果
+
+:::caution 结果通道的处理要小心
+
+`chan *_httpResult` 的结果其实很想 Python 中的 `yield`，可以理解为按需产生结果。
+
+用户需要保证接收到所有的请求才能保证请求都被正常发送，不然 fuzz 模块会认为，用户无法处理后续的请求，会进行阻塞。
+
+如果你不想处理后续请求的话，可以直接放行
+
+```go title="更简化的写法，不处理任何结果"
+for result in fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD", "GET", "POST", "DELETE").Exec()~ {}
+```
+
+:::
+
+
+## 数据包变形
+
+我们使用 `fuzz` 这个函数库可以使用各种技术来修改HTTP数据包，如修改HTTP头、插入恶意内容、更改请求方法等等。攻击者可能会试图修改HTTP数据包中的一些参数，例如：
+
+1. 请求方法：攻击者可能会更改HTTP请求方法，使其绕过一些安全限制或使目标系统执行非预期的操作。
+2. 请求目标：攻击者可以更改HTTP请求目标，例如更改请求的URL或主机头，以欺骗目标服务器或中间设备。
+3. 请求参数：攻击者可能会更改HTTP请求中的参数，以试图利用目标系统中的漏洞或执行攻击。
+
+HTTP数据包变形可以使攻击者能够通过绕过安全措施来攻击目标系统。为了防止HTTP数据包变形攻击，建议采取一些安全措施，例如使用HTTPS加密通信、使用防火墙和IDS/IPS等设备来检测和阻止恶意流量，并对Web应用程序进行安全测试和漏洞扫描。
+
+接下来我们将会介绍具体的数据包变形方法
+
+### 模糊测试 HTTP 方法
+
+针对 HTTP 方法的变形发包（下称模糊测试），我们在上一个案例中已经描述，我们稍作修改，获取模糊测试的数据包内容。
+
+```go title="模糊测试 HTTP 方法"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+for index, result = range fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod("HEAD", "GET", "POST", "DELETE").Results()~ {
+    println(f"${index}. method:${result.Method}")
+}
+
+/*
+OUTPUT:
+
+0. method:HEAD
+1. method:GET
+2. method:POST
+3. method:DELETE
+*/
+```
+
+我们使用上述操作可以很快速地获取变形以后的结果，通过 `result: (*http.Request)` 可以直接检查变形结果是否符合预期。
+
+当然，结合最上面的案例，我们直接发送所有的结果 `.Exec()` 也是可以的！
+
+### 模糊测试 HTTP 路径
+
+类似的，我们可以快速对上述例子进行改造，构造出一个模糊测试 HTTP 路径的案例：
+
+```go title="同时测试 Method 和 Path"
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+for index, result = range fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod(
+    "HEAD", "GET", "POST", "DELETE",
+).FuzzPath("/abc", "/target").Results()~ {
+    println(f"${index}. method:${result.Method} path: ${result.RequestURI}")
+}
+
+/*
+OUTPUT:
+
+0. method:HEAD path: /abc
+1. method:HEAD path: /target
+2. method:GET path: /abc
+3. method:GET path: /target
+4. method:POST path: /abc
+5. method:POST path: /target
+6. method:DELETE path: /abc
+7. method:DELETE path: /target
+*/
+```
+
+具体来说，这段代码首先定义了一个HTTP请求报文字符串raw，包含了一个GET请求，请求目标为 `www.example.com`，请求路径为空，请求参数为abc=1。然后使用Fuzzing模块的HTTPRequest方法来解析HTTP请求报文，使用https(true)参数指定使用HTTPS协议。
+
+接下来使用FuzzMethod方法来对HTTP请求方法进行模糊测试，将"HEAD"、"GET"、"POST"、"DELETE"四种方法作为参数传入，这些方法将被用于构造HTTP请求的方法字段。
+
+然后使用FuzzPath方法对HTTP请求路径进行模糊测试，将"/abc"和"/target"两个路径作为参数传入，这些路径将被用于构造HTTP请求的路径字段。
+
+最后调用Results方法来获取所有模糊测试的结果，使用for-range循环遍历所有结果，输出每个结果的方法和路径信息。
+
+总的来说，这段代码可以用来测试Web应用程序在不同HTTP请求方法和路径下的行为，有助于发现可能存在的安全漏洞和错误。
+
+#### 路径追加模糊测试
+
+其实 HTTP 路径测试我们还可以有另一个 API 可用，我们使用一个新的 API `FuzzPathAppend(...)`，可以在原路径的基础上追加一些新的内容，大家看如下案例。
+
+```go
+raw = `GET / HTTP/1.1
+Host: www.example.com
+
+abc=1`
+for index, result = range fuzz.HTTPRequest(raw, fuzz.https(true))~.FuzzMethod(
+    "HEAD", "GET", "POST", "DELETE",
+).FuzzPath("/abc/").FuzzPathAppend("prefix-1", "prefix-2", "prefix-3").Results()~ {
+    println(f"${index}. method:${result.Method} path: ${result.RequestURI}")
+}
+
+/*
+OUTPUT:
+
+0. method:HEAD path: /abc/prefix-1
+1. method:HEAD path: /abc/prefix-2
+2. method:HEAD path: /abc/prefix-3
+3. method:GET path: /abc/prefix-1
+4. method:GET path: /abc/prefix-2
+5. method:GET path: /abc/prefix-3
+6. method:POST path: /abc/prefix-1
+7. method:POST path: /abc/prefix-2
+8. method:POST path: /abc/prefix-3
+9. method:DELETE path: /abc/prefix-1
+10. method:DELETE path: /abc/prefix-2
+11. method:DELETE path: /abc/prefix-3
+*/
+```
+
+这段代码和前一个代码类似，但是不同之处在于，这段代码使用了 `FuzzPathAppend` 方法，对HTTP请求路径进行了更加复杂的模糊测试。
+
+具体来说，这段代码首先定义了一个HTTP请求报文字符串raw，包含了一个GET请求，请求目标为默认值，请求路径为空，请求参数为默认值。然后使用Fuzzing模块的HTTPRequest方法来解析HTTP请求报文，使用https(true)参数指定使用HTTPS协议。
+
+接下来使用FuzzMethod方法来对HTTP请求方法进行模糊测试，将"HEAD"、"GET"、"POST"、"DELETE"四种方法作为参数传入，这些方法将被用于构造HTTP请求的方法字段。
+
+然后使用FuzzPath方法对HTTP请求路径进行模糊测试，将"/abc/"作为参数传入，这个路径将被用于构造HTTP请求的路径字段。
+
+然后使用FuzzPathAppend方法对HTTP请求路径进行进一步的模糊测试，将"prefix-1"、"prefix-2"、"prefix-3"三个字符串作为参数传入，这些字符串将被追加到HTTP请求路径的末尾。这意味着，在对每个HTTP请求方法进行模糊测试时，将生成多个请求路径，例如/abc/prefix-1、/abc/prefix-2、/abc/prefix-3等等。
+
+最后调用Results方法来获取所有模糊测试的结果，使用for-range循环遍历所有结果，输出每个结果的方法和路径信息。
+
+总的来说，这段代码可以用来测试Web应用程序在不同HTTP请求方法和路径下的行为，尤其是对于一些需要动态生成请求路径的Web应用程序，这种方式可以更全面地测试不同的路径组合。
+
+### 更多 API
+
+当然，fuzz 模块所支持的 API 远不止如此，您可以在 [文档后面](#apitable) 查看所有可用 API。
+
+## 动态参数模糊测试
+
+传统的模糊测试方法通常针对静态参数进行测试，如URL、请求头和查询参数等。然而，现代Web应用程序越来越复杂，包含了许多动态参数，例如POST参数、Cookie和表单参数等，这些参数可能包含隐式的安全漏洞。动态参数模糊测试通过在这些参数上应用各种不同类型的攻击向量来检测这些漏洞，例如SQL注入、跨站脚本攻击（XSS）和文件包含等漏洞。动态参数模糊测试可以使用专门的安全测试工具来完成，也可以手动进行测试。
+
+在 `fuzz` 模块中，最直接的是：如果学会了这个特性，fuzz 将会自动识别数据包中的参数，不需要用户定义需要测试的参数，只需要用户定义 Payload 即可。
+
+例如，我们以下面案例来说明这个功能的意义：
+
+```bash title="需要测试的数据包模版"
+GET /target-path?abc=123 HTTP/1.1
+Host: www.example.com
+User-Agent: Ur-Awesome-UA/1.0001
+
+```
+
+这是一个 HTTP 请求的示例，请求方法为 GET，请求的路径为 /target-path，查询参数为 abc=123。请求使用 HTTP/1.1 协议，请求的目标主机为 `www.example.com`。请求的 User-Agent 头部字段值为 Ur-Awesome-UA/1.0001。
+
+我们想针对这个数据包的 `abc` 参数进行测试，如果使用 `FuzzGetParam("abc", ... )` 这种方式，勉强符合要求，但是我们还是使用了 `"abc"` 这个数据包内的信息，**很多时候，我们并不知道我们需要测试的参数是什么**。
+
+所以，有动态获取数据包参数的办法吗？如果要实现这个需求，我们分为两种方法：
+
+1. 手动获取 Get 参数进行测试
+1. 自动识别 Get 参数
+
+### 手动获取 Get 参数名模糊测试
+
+这种方式我们需要使用到诸如
+
+<table>
+   <thead>
+      <tr>
+         <th>方法名</th>
+         <th>方法说明</th>
+      </tr>
+   </thead>
+   <tbody>
+         <tr>
+            <td><code>GetQueryKeys</code></td>
+            <td>获取查询参数的所有 Key</td>
+         </tr>
+         <tr>
+            <td><code>GetQueryRaw</code></td>
+            <td>获取查询参数的原始字符串</td>
+         </tr>
+         <tr>
+            <td><code>GetQueryValue</code></td>
+            <td>获取查询参数的指定 Key 对应的 Value</td>
+         </tr>
+         <tr>
+            <td><code>GetQueryValues</code></td>
+            <td>获取查询参数的所有 Value</td>
+         </tr>
+         <tr>
+             <td><code>...</code></td>
+             <td>...</td>
+          </tr>
+     </tbody>
+</table>
+
+这些表格的完整版和定义在[这里](#apitable)可以找到。
+
+根据具体定义：我们可以编写代码
+
+```go title="手动获取参数"
+raw = `GET /target-path?abc=123 HTTP/1.1
+Host: www.example.com
+User-Agent: Ur-Awesome-UA/1.0001
+
+`
+
+freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
+
+for paramName in freq.GetQueryKeys() {
+    token = str.RandStr(10)
+    println(f`Current ParamName: ${paramName}, modified to ${token}\n`)
+    freq.FuzzGetParams(paramName, token).Show()
+}
+
+/*
+OUTPUT:
+
+Current ParamName: abc, modified to eSUAYPUXLK
+
+GET /target-path?abc=eSUAYPUXLK HTTP/1.1
+Host: www.example.com
+User-Agent: Ur-Awesome-UA/1.0001
+
+*/
+```
+
+<p>这段代码的作用是对给定的 HTTP 请求进行动态参数模糊测试。具体来说，它首先创建了一个 <code>fuzz.HTTPRequest</code> 对象 <code>freq</code>，使用给定的原始 HTTP 请求报文和协议类型（在这里是 HTTPS）进行初始化。然后，对请求中的每个查询参数，都生成一个随机字符串作为新的参数值，并将请求中的该参数值修改为生成的随机字符串，然后打印出修改后的请求报文。</p>
+
+<p>具体实现过程中，<code>GetQueryKeys()</code> 方法用于获取请求中所有查询参数的参数名，<code>str.RandStr(10)</code> 用于生成一个长度为 10 的随机字符串，<code>freq.FuzzGetParams(paramName, token)</code> 用于将请求中指定的查询参数的值修改为随机字符串 <code>token</code>，并返回一个新的 HTTP 请求对象，最后调用 <code>Show()</code> 方法将修改后的请求报文输出到控制台。</p>
+
+:::tip 真实的漏洞检测算法要更复杂
+
+在真实场景中，我们往往需要精心设计 Payload 和漏洞检测的算法来实现漏洞检测。
+
+:::
+
+### 自动识别 Get 参数模糊测试
+
+我们可以对上述代码利用新的系列 API 进行简化：
+
+<table>
+   <thead>
+      <tr>
+         <th>方法名</th>
+         <th>方法说明</th>
+      </tr>
+   </thead>
+   <tbody>
+        <tr>
+         <td><code>GetGetQueryParams</code></td>
+         <td>获取所有 Get 参数以供测试</td>
+        </tr>
+         <tr>
+             <td><code>...</code></td>
+             <td>...</td>
+          </tr>
+     </tbody>
+</table>
+
+简化后的代码为：
+
+```go title="GetGetQueryParams 简化"
+raw = `GET /target-path?abc=123 HTTP/1.1
+Host: www.example.com
+User-Agent: Ur-Awesome-UA/1.0001
+
+`
+
+freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
+
+for param in freq.GetGetQueryParams() {
+    token = str.RandStr(10)
+    param.Fuzz(token).Show()
+}
+
+/*
+OUTPUT:
+
+GET /target-path?abc=jvNKFnbtRo HTTP/1.1
+Host: www.example.com
+User-Agent: Ur-Awesome-UA/1.0001
+
+*/
+```
+
+<p>这段代码和前一个代码片段实现的功能类似，都是对 URL 中的参数进行模糊测试。不过这里使用了 <code>GetGetQueryParams()</code> 方法来获取所有的查询参数，并直接对每个参数对象调用 <code>Fuzz()</code> 方法进行模糊测试，然后调用 <code>Show()</code> 方法打印出结果。这样可以省略掉获取参数名的步骤，简化代码。</p>
+
+:::tip 注意：模糊测试参数是一个新的结构体，他有新的 API
+
+我们在这个案例中使用了 `freq.GetGetQueryParams()` 来获取所有可供模糊测试的 Get 参数，这些参数对象区别于原来的 `*FuzzHTTPRequest` 结构体：
+
+```go title="FuzzHTTPRequestParam 的成员方法描述"
+type FuzzHTTPRequestParam struct {
+    // Fuzz 用于将参数的值进行模糊测试
+    Fuzz func(v1 ...any) mutate.FuzzHTTPRequestIf
+    // IsCookieParams 返回参数是否为 Cookie 类型
+    IsCookieParams func() bool
+    // IsGetParams 返回参数是否为 GET 类型
+    IsGetParams func() bool
+    // IsPostParams 返回参数是否为 POST 类型
+    IsPostParams func() bool
+    // Name 返回参数的名称
+    Name func() string
+    // Position 返回参数的位置（Get 或 Post）
+    Position func() string
+    // PositionVerbose 返回参数的位置（Get 或 Post），更详细的说明
+    PositionVerbose func() string
+    // Repeat 用于重复模糊测试
+    Repeat func(v1 int) mutate.FuzzHTTPRequestIf
+    // Value 返回参数的值
+    Value func() interface{}
+}
+
+```
+:::
+
+## 可用 API 一览表 {#apitable}
+
+这是 fuzz 模块基本 API 方法列表，包含了一个模糊测试工具的方法说明。这些方法都是用于模糊测试网络请求的，包括获取请求参数、模糊测试请求的不同部分等等。
+
+### `FuzzHTTPRequest` API 定义
+
+<table>
+   <thead>
+      <tr>
+         <th>方法名</th>
+         <th>方法说明</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td><code>ExecFirst</code></td>
+         <td>发送单个数据包</td>
+      </tr>
+      <tr>
+         <td><code>Exec</code></td>
+         <td>发送批量数据包</td>
+      </tr>
+      <tr>
+         <td><code>FirstFuzzHTTPRequest</code></td>
+         <td>获取第一个 Fuzz 后的请求</td>
+      </tr>
+      <tr>
+         <td><code>FirstHTTPRequestBytes</code></td>
+         <td>获取第一个请求的原始报文信息</td>
+      </tr>
+      <tr>
+         <td><code>FuzzCookie</code></td>
+         <td>模糊测试 FuzzCookie 按 Key-Value 的形式</td>
+      </tr>
+      <tr>
+         <td><code>FuzzCookieRaw</code></td>
+         <td>模糊测试 Cookie 按整体报文的形式</td>
+      </tr>
+      <tr>
+         <td><code>FuzzFormEncoded</code></td>
+         <td>模糊测试 Content-Type 为 multipart/form-data</td>
+      </tr>
+      <tr>
+         <td><code>FuzzGetParams</code></td>
+         <td>模糊测试 GET 请求</td>
+      </tr>
+      <tr>
+         <td><code>FuzzGetParamsRaw</code></td>
+         <td>模糊测试 GET 请求（整体测试，无 KV 值区分）</td>
+      </tr>
+      <tr>
+         <td><code>FuzzHTTPHeader</code></td>
+         <td>模糊测试 HTTP Header</td>
+      </tr>
+      <tr>
+         <td><code>FuzzMethod</code></td>
+         <td>模糊测试 HTTP Method</td>
+      </tr>
+      <tr>
+         <td><code>FuzzPath</code></td>
+         <td>模糊测试路径</td>
+      </tr>
+      <tr>
+         <td><code>FuzzPathAppend</code></td>
+         <td>模糊测试路径（追加）</td>
+      </tr>
+      <tr>
+         <td><code>FuzzPostJsonParams</code></td>
+         <td>模糊测试 Post 数据（JSON Object）</td>
+      </tr>
+      <tr>
+         <td><code>FuzzPostParams</code></td>
+         <td>模糊测试 Post 参数（Key-Value）</td>
+      </tr>
+      <tr>
+         <td><code>FuzzPostRaw</code></td>
+         <td>模糊测试 Post 整体参数</td>
+      </tr>
+      <tr>
+         <td><code>FuzzUploadFile</code></td>
+         <td>模糊测试上传文件接口</td>
+      </tr>
+      <tr>
+         <td><code>FuzzUploadFileName</code></td>
+         <td>模糊测试上传文件的文件名部分（Key-Value）</td>
+      </tr>
+      <tr>
+         <td><code>FuzzUploadKVPair</code></td>
+         <td>模糊测试 KV 值的（Content-Type 为 <code>multipart/form-data</code> 的情况）</td>
+      </tr>
+      <tr>
+         <td><code>GetBody</code></td>
+         <td>获取 Body 的内容</td>
+      </tr>
+      <tr>
+         <td><code>GetBytes</code></td>
+         <td>获取数据包的原文信息</td>
+      </tr>
+      <tr>
+         <td><code>GetCommonParams</code></td>
+         <td>获取现在所有的可以供测试的参数</td>
+      </tr>
+      <tr>
+         <td><code>GetContentType</code></td>
+         <td>获取当前请求包的 Content-Type</td>
+      </tr>
+      <tr>
+         <td><code>GetCookieParams</code></td>
+         <td>获取 Cookie 的可供测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetFirstFuzzHTTPRequest</code></td>
+         <td>获取第一个可供测试的 FuzzHTTPRequest</td>
+      </tr>
+      <tr>
+         <td><code>GetGetQueryParams</code></td>
+         <td>获取所有 Get 参数以供测试</td>
+      </tr>
+      <tr>
+         <td><code>GetHeader</code></td>
+         <td>获取 Header</td>
+      </tr>
+      <tr>
+         <td><code>GetHeaderKeys</code></td>
+         <td>获取所有 Header 的 Key</td>
+      </tr>
+      <tr>
+         <td><code>GetHeaderParamByName</code></td>
+         <td>通过 Name 获取可供测试的参数</td>
+      </tr>
+      <tr>
+         <td><code>GetHeaderParams</code></td>
+         <td>获取所有可供测试的 Header 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetHeaderValues</code></td>
+         <td>获取所有 Header 的 Values</td>
+      </tr>
+      <tr>
+         <td><code>GetMethod</code></td>
+         <td>获取 Request 的 Method</td>
+      </tr>
+      <tr>
+         <td><code>GetOriginHTTPRequest</code></td>
+         <td>获取原始 HTTP 请求对象</td>
+      </tr>
+      <tr>
+         <td><code>GetPath</code></td>
+         <td>获取请求的路径</td>
+      </tr>
+      <tr>
+         <td><code>GetPathAppendParams</code></td>
+         <td>获取 Path 追加模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPathBlockParams</code></td>
+         <td>获取 Path 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPathParams</code></td>
+         <td>获取 Path 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPathRawParams</code></td>
+         <td>获取 Path 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPathWithQuery</code></td>
+         <td>获取包含查询参数的请求路径</td>
+      </tr>
+      <tr>
+         <td><code>GetPostJsonParams</code></td>
+         <td>获取 Post Json 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPostParams</code></td>
+         <td>获取 Post 模糊测试参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPostQuery</code></td>
+         <td>获取 Post 查询参数</td>
+      </tr>
+      <tr>
+         <td><code>GetPostQueryKeys</code></td>
+         <td>获取 Post 查询参数的所有 Key</td>
+      </tr>
+      <tr>
+         <td><code>GetPostQueryValue</code></td>
+         <td>获取 Post 查询参数的指定 Key 对应的 Value</td>
+      </tr>
+      <tr>
+         <td><code>GetPostQueryValues</code></td>
+         <td>获取 Post 查询参数的所有 Value</td>
+      </tr>
+      <tr>
+         <td><code>GetQueryKeys</code></td>
+         <td>获取查询参数的所有 Key</td>
+      </tr>
+      <tr>
+         <td><code>GetQueryRaw</code></td>
+         <td>获取查询参数的原始字符串</td>
+      </tr>
+      <tr>
+         <td><code>GetQueryValue</code></td>
+         <td>获取查询参数的指定 Key 对应的 Value</td>
+      </tr>
+      <tr>
+         <td><code>GetQueryValues</code></td>
+         <td>获取查询参数的所有 Value</td>
+      </tr>
+      <tr>
+         <td><code>GetRequestURI</code></td>
+         <td>获取请求的 URI</td>
+      </tr>
+      <tr>
+         <td><code>GetUrl</code></td>
+         <td>获取请求的 URL</td>
+      </tr>
+      <tr>
+         <td><code>IsBodyFormEncoded</code></td>
+         <td>判断请求 Body 是否为 form-encoded 格式</td>
+      </tr>
+      <tr>
+         <td><code>IsBodyJsonEncoded</code></td>
+         <td>判断请求 Body 是否为 json-encoded 格式</td>
+      </tr>
+      <tr>
+         <td><code>IsBodyUrlEncoded</code></td>
+         <td>判断请求 Body 是否为 url-encoded 格式</td>
+      </tr>
+      <tr>
+         <td><code>IsEmptyBody</code></td>
+         <td>判断请求 Body 是否为空</td>
+      </tr>
+      <tr>
+         <td><code>ParamsHash</code></td>
+         <td>获取请求参数的哈希值</td>
+      </tr>
+      <tr>
+         <td><code>Repeat</code></td>
+         <td>重复进行请求的模糊测试</td>
+      </tr>
+      <tr>
+         <td><code>Results</code></td>
+         <td>获取所有请求的结果</td>
+      </tr>
+      <tr>
+         <td><code>Show</code></td>
+         <td>显示请求的信息</td>
+      </tr>
+   </tbody>
+</table>
+
+#### FuzzHTTPRequest 结构描述
+
+```go title="FuzzHTTPRequest 功能一览表"
+type *FuzzHTTPRequest {
+    func ExecFirst(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(*mutate._httpResult, error)
+    func Exec(v1 ...func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ) return(chan *mutate._httpResult, error)
+    func FirstFuzzHTTPRequest() return(*mutate.FuzzHTTPRequest)
+    func FirstHTTPRequestBytes() return([]byte)
+    func FuzzCookie(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzCookieRaw(v1: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzFormEncoded(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzGetParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzGetParamsRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+    func FuzzHTTPHeader(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzMethod(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+    func FuzzPath(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+    func FuzzPathAppend(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+    func FuzzPostJsonParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzPostParams(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzPostRaw(v1 ...string) return(mutate.FuzzHTTPRequestIf)
+    func FuzzUploadFile(field: interface {}, name: interface {}, content: []byte) return(mutate.FuzzHTTPRequestIf)
+    func FuzzUploadFileName(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func FuzzUploadKVPair(v1: interface {}, v2: interface {}) return(mutate.FuzzHTTPRequestIf)
+    func GetBody() return([]byte)
+    func GetBytes() return([]byte)
+    func GetCommonParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetContentType() return(string)
+    func GetCookieParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetFirstFuzzHTTPRequest() return(*mutate.FuzzHTTPRequest, error)
+    func GetGetQueryParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetHeader(v1: string) return(string)
+    func GetHeaderKeys() return([]string)
+    func GetHeaderParamByName(v1: string) return(*mutate.FuzzHTTPRequestParam)
+    func GetHeaderParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetHeaderValues() return([]string)
+    func GetMethod() return(string)
+    func GetOriginHTTPRequest() return(*http.Request, error)
+    func GetPath() return(string)
+    func GetPathAppendParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathBlockParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathRawParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPathWithQuery() return(string)
+    func GetPostJsonParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPostParams() return([]*mutate.FuzzHTTPRequestParam)
+    func GetPostQuery() return(string)
+    func GetPostQueryKeys() return([]string)
+    func GetPostQueryValue(v1: string) return(string)
+    func GetPostQueryValues() return([]string)
+    func GetQueryKeys() return([]string)
+    func GetQueryRaw() return(string)
+    func GetQueryValue(v1: string) return(string)
+    func GetQueryValues() return([]string)
+    func GetRequestURI() return(string)
+    func GetUrl() return(string)
+    func IsBodyFormEncoded() return(bool)
+    func IsBodyJsonEncoded() return(bool)
+    func IsBodyUrlEncoded() return(bool)
+    func IsEmptyBody() return(bool)
+    func ParamsHash() return(string, error)
+    func Repeat(v1: int) return(mutate.FuzzHTTPRequestIf)
+    func Results() return([]*http.Request, error)
+    func Show() return(mutate.FuzzHTTPRequestIf)
+}
+```
+
+### `FuzzHTTPRequestParam` API 定义
+
+<table><thead><tr><th>方法名</th><th>方法说明</th></tr></thead><tbody><tr><td>Fuzz</td><td>对请求参数进行模糊测试，并返回 <code>mutate.FuzzHTTPRequestIf</code> 实例</td></tr><tr><td>IsCookieParams</td><td>判断是否为 Cookie 参数</td></tr><tr><td>IsGetParams</td><td>判断是否为 GET 请求参数</td></tr><tr><td>IsPostParams</td><td>判断是否为 POST 请求参数</td></tr><tr><td>Name</td><td>获取请求参数的名称</td></tr><tr><td>Position</td><td>获取请求参数的位置信息</td></tr><tr><td>PositionVerbose</td><td>获取请求参数的位置信息（详细）</td></tr><tr><td>Repeat</td><td>重复进行请求的模糊测试，并返回 <code>mutate.FuzzHTTPRequestIf</code> 实例</td></tr><tr><td>Value</td><td>获取请求参数的值</td></tr></tbody></table>
+
+#### FuzzHTTPRequestParam 结构描述
+
+```go
+type FuzzHTTPRequestParam struct {
+    // Fuzz 用于将参数的值进行模糊测试
+    Fuzz func(v1 ...any) mutate.FuzzHTTPRequestIf
+    // IsCookieParams 返回参数是否为 Cookie 类型
+    IsCookieParams func() bool
+    // IsGetParams 返回参数是否为 GET 类型
+    IsGetParams func() bool
+    // IsPostParams 返回参数是否为 POST 类型
+    IsPostParams func() bool
+    // Name 返回参数的名称
+    Name func() string
+    // Position 返回参数的位置（Get 或 Post）
+    Position func() string
+    // PositionVerbose 返回参数的位置（Get 或 Post），更详细的说明
+    PositionVerbose func() string
+    // Repeat 用于重复模糊测试
+    Repeat func(v1 int) mutate.FuzzHTTPRequestIf
+    // Value 返回参数的值
+    Value func() interface{}
+}
+```
+
+### HTTPResult 响应结果处理
+
+<table>
+  <thead>
+    <tr>
+      <th>字段名</th>
+      <th>类型</th>
+      <th>描述</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Url</td>
+      <td>string</td>
+      <td>请求的URL地址</td></tr>
+    <tr>
+      <td>Request</td>
+      <td>*http.Request</td>
+      <td>发送的HTTP请求对象</td></tr>
+    <tr>
+      <td>Error</td>
+      <td>error</td>
+      <td>发生的错误</td></tr>
+    <tr>
+      <td>RequestRaw</td>
+      <td>[]byte</td>
+      <td>发送的HTTP请求的原始字节数据</td></tr>
+    <tr>
+      <td>ResponseRaw</td>
+      <td>[]byte</td>
+      <td>接收的HTTP响应的原始字节数据</td></tr>
+    <tr>
+      <td>Response</td>
+      <td>*http.Response</td>
+      <td>接收到的HTTP响应对象</td></tr>
+    <tr>
+      <td>Payloads</td>
+      <td>[]string</td>
+      <td>请求的负载信息</td></tr>
+    <tr>
+      <td>DurationMs</td>
+      <td>int64</td>
+      <td>完成HTTP请求所花费的总时间（以毫秒为单位）</td></tr>
+    <tr>
+      <td>ServerDurationMs</td>
+      <td>int64</td>
+      <td>服务端处理请求所花费的时间（以毫秒为单位）</td></tr>
+    <tr>
+      <td>Timestamp</td>
+      <td>int64</td>
+      <td>请求的时间戳（UNIX时间戳，以秒为单位）</td></tr>
+  </tbody>
+</table>
+
+```
+type httpResult struct {
+    Url             string        // 请求的URL地址
+    Request         *http.Request // 发送的HTTP请求对象
+    Error           error         // 发生的错误
+    RequestRaw      []byte        // 发送的HTTP请求的原始字节数据
+    ResponseRaw     []byte        // 接收的HTTP响应的原始字节数据
+    Response        *http.Response // 接收到的HTTP响应对象
+    Payloads        []string      // 请求的负载信息，即请求的Body部分
+    DurationMs      int64         // 完成HTTP请求所花费的总时间（以毫秒为单位）
+    ServerDurationMs int64        // 服务端处理请求所花费的时间（以毫秒为单位）
+    Timestamp       int64         // 请求的时间戳（UNIX时间戳，以秒为单位）
+}
+```

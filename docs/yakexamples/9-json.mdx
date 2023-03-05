@@ -1,0 +1,271 @@
+---
+sidebar_position: 9
+---
+
+# 函数库：json - 优雅地处理JSON
+
+JSON是一种轻量级的数据交换格式。它使用文本格式来传输结构化数据，包括数组、对象、字符串、数字、布尔值和null。JSON格式被广泛用于Web应用程序和API中，作为一种数据格式，以实现不同应用程序之间的数据交换。JSON是一种平台无关的格式，可以使用许多编程语言进行解析和生成，包括JavaScript、Python、Java等。JSON的语法简单、易于理解和阅读，与XML和HTML相比，它更轻量级和灵活，因此在数据传输和存储方面更加高效。
+
+在 Yaklang 中我们不仅支持基础的 JSON 处理接口，同时还支持更加优雅的 JsonPath 机制。
+
+:::tip JSON PATH 是什么？
+
+JSON Path是一种用于从JSON格式的数据结构中提取特定数据的查询语言，类似于XPath。它提供了一种通用的方式来访问和操作JSON数据，可以用于编程语言或命令行中，以实现复杂的JSON数据处理和分析。
+
+:::
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## json 编码解码
+
+yak 提供了一个类似 Python 的 `json.loads/dumps` 的处理方式
+
+### `json.loads` 把 JSON 字符串转换为 map
+
+```go
+jsonRaw1 = `{"abc":123, "cde":"efg", "foo": "bar-123123", "azz": {"key1": "result2", "key2": 123, "e": ["abc", 111]}, "d": [1,2,3,"123"]}`
+jsonRaw2 = `[1,23,4,"abc",true,false, {"abc": 123123, "dddd":"123"}]`
+jsonRaw3 = `"123123123"`
+jsonRaw4 = `123123`
+jsonRaw5 = `false`
+jsonRaw6 = `null`
+dump(json.loads(jsonRaw1))
+dump(json.loads(jsonRaw2))
+dump(json.loads(jsonRaw3))
+dump(json.loads(jsonRaw4))
+dump(json.loads(jsonRaw5))
+dump(json.loads(jsonRaw6))
+
+/*
+OUTPUT:
+
+(map[string]interface {}) (len=5) {
+ (string) (len=3) "abc": (float64) 123,
+ (string) (len=3) "cde": (string) (len=3) "efg",
+ (string) (len=3) "foo": (string) (len=10) "bar-123123",
+ (string) (len=3) "azz": (map[string]interface {}) (len=3) {
+  (string) (len=4) "key1": (string) (len=7) "result2",
+  (string) (len=4) "key2": (float64) 123,
+  (string) (len=1) "e": ([]interface {}) (len=2 cap=2) {
+   (string) (len=3) "abc",
+   (float64) 111
+  }
+ },
+ (string) (len=1) "d": ([]interface {}) (len=4 cap=4) {
+  (float64) 1,
+  (float64) 2,
+  (float64) 3,
+  (string) (len=3) "123"
+ }
+}
+([]interface {}) (len=7 cap=8) {
+ (float64) 1,
+ (float64) 23,
+ (float64) 4,
+ (string) (len=3) "abc",
+ (bool) true,
+ (bool) false,
+ (map[string]interface {}) (len=2) {
+  (string) (len=3) "abc": (float64) 123123,
+  (string) (len=4) "dddd": (string) (len=3) "123"
+ }
+}
+(string) (len=9) "123123123"
+(float64) 123123
+(bool) false
+(interface {}) <nil>
+*/
+```
+
+### `json.dumps` 把任意数据转为 JSON
+
+```go
+a = ["123", true, false, "123123", 123, {"abc": 123},nil]
+println(json.dumps(a))
+// OUTPUT: ["123",true,false,"123123",123,{"abc":123},null]
+
+a = {"abcccc": 123, "12": ["aaa", "123", {"a": 12, "arr": [123, true]}]}
+println(json.dumps(a))
+// OUTPUT: {"12":["aaa","123",{"a":12,"arr":[123,true]}],"abcccc":123}
+
+a = false
+println(json.dumps(a))
+// OUTPUT: false
+
+a = "asdfasdfasdf\x00\x0a你好"
+println(json.dumps(a))
+// OUTPUT: "asdfasdfasdf\u0000\n你好"
+
+a = nil
+println(json.dumps(a))
+// OUTPUT: null
+```
+
+## Json Path 技术
+
+JSON Path是一种用于从JSON格式的数据结构中提取特定数据的查询语言，类似于XPath。它提供了一种通用的方式来访问和操作JSON数据，可以用于编程语言或命令行中，以实现复杂的JSON数据处理和分析。
+
+JSON Path使用一种类似于XPath的表达式语法，以匹配JSON对象的特定元素。例如，以下是一些简单的JSON Path表达式示例：
+
+1. `$`：表示JSON对象的根元素
+1. `$.name`：表示根元素下的“name”属性值
+1. `$..name`：表示所有对象中的“name”属性值
+1. `$.people[*].name`：表示根元素下的“people”数组中所有对象的“name”属性值
+1. `$.people[?(@.age > 18)].name`：表示根元素下的“people”数组中年龄大于18岁的所有对象的“name”属性值
+
+通过JSON Path表达式，可以轻松地从JSON数据结构中提取特定的数据，这在数据分析和数据处理方面非常有用。
+
+### 提取数据
+
+提取数据是 Json Path 的典型用途之一，我们在进行后续的技术描述之前，应该大致对 Json Path 有一些深入的了解，下面是一份常见的 JSONPath支持的功能列表：
+
+1. 属性（property）操作符: `$` 用于表示根节点，`@` 用于表示当前节点。
+1. 属性访问操作符: `.` 用于访问属性，`[ ]` 用于访问数组或者属性。
+1. 筛选器（Filter）操作符: `?()` 用于在表达式中进行筛选。
+1. Wildcard操作符: `*` 用于匹配任意字符，`[*]` 用于匹配任意数组元素。
+1. 支持通过下标访问数组元素，以及支持切片操作。
+1. 支持使用逻辑运算符 `&&` 和 `||` 进行条件筛选。
+1. 支持比较运算符 `==, !=, <, <=, >, >=` 以及正则表达式运算符 `=~` 和 `!~`。
+1. 支持聚合操作符 `min`, `max`, `sum`, `avg`, `size` 以及 `reverse` 等。
+
+需要注意的是，不同的 JSONPath实现可能会略有差异，不完全一致。因此，在使用JSONPath时，需要查看具体实现的文档，以确保所使用的功能能够正确地实现。
+
+#### 1. 提取 JSON 对象中某一个字段的值
+
+例如，我们要提取一个 JSON 数据中的 `name` 字段，如下
+
+```json title="待处理的 JSON"
+{
+    "name": "YaklangUser",
+    "criticalList": [
+        {"key": "a1", "name": "b1"},
+        {"key": "a1-3", "name": "b4"},
+        {"key": "a2", "value": "c3"},
+        {"key": "a2-3", "value": "c6", "age": 12},
+        {"key": "a5", "anothorList": [
+            {"key": "in", "age": 30},
+            {"key": "in3", "age": 88}
+        ], "age": 14},
+        {"key": "a6", "age": 19}
+    ]
+}
+```
+
+我们使用 `json.Find()` 函数来进行处理，代码为：
+
+```go title="Yaklang 中的 JSONPath 接口：json.Find"
+jsonRaw = `{
+    "name": "YaklangUser",
+    "criticalList": [
+        {"key": "a1", "name": "b1"},
+        {"key": "a1-3", "name": "b4"},
+        {"key": "a2", "value": "c3"},
+        {"key": "a2-3", "value": "c6", "age": 12},
+        {"key": "a5", "anothorList": [
+            {"key": "in", "age": 30},
+            {"key": "in3", "age": 88}
+        ], "age": 14},
+        {"key": "a6", "age": 19}
+    ]
+}`
+
+
+rootName = json.Find(jsonRaw, "$.name")
+printf("Fetch `name` in root node: %v\n", rootName)
+
+/*
+OUTPUT:
+    Fetch `name` in root node: YaklangUser
+*/
+```
+
+#### 2. 提取 JSON 中所有对象中 `name` 字段
+
+上述代码我们仅需要把 `json.Find` 中的规则修改为 `$..name`，即可完成
+
+```go title="提取所有 name 字段"
+
+results = json.Find(jsonRaw, "$..name")
+dump(results)
+/*
+Output:
+
+([]interface {}) (len=3 cap=4) {
+ (string) (len=11) "YaklangUser",
+ (string) (len=2) "b1",
+ (string) (len=2) "b4"
+}
+*/
+```
+
+#### 3. 操作 JSON 中的数组
+
+我们通过上述的操作，可以实现操作一个或者递归查找所有 JSON 中的对象，这个技能非常实用，能帮助我们快速提取数据。同时，我们还可以使用 Json Path 操作 JSON 中的数组。
+
+我们仍然针对案例中的 JSON，如果要提取数组中的 `name` 或者直接操作节点，应该怎么操作呢？直观来说，我们使用 `[ ]` 来操作数组。
+
+```go title="提取 criticalList 中第二个元素"
+jsonRaw = `{
+    "name": "YaklangUser",
+    "criticalList": [
+        {"key": "a1", "name": "b1"},
+        {"key": "a1-3", "name": "b4"},
+        {"key": "a2", "value": "c3"},
+        {"key": "a2-3", "value": "c6", "age": 12},
+        {"key": "a5", "anothorList": [
+            {"key": "in", "age": 30},
+            {"key": "in3", "age": 88}
+        ], "age": 14},
+        {"key": "a6", "age": 19}
+    ]
+}`
+
+results = json.Find(jsonRaw, "$.criticalList[1]")
+dump(results)
+/*
+Output:
+
+(map[string]interface {}) (len=2) {
+ (string) (len=3) "key": (string) (len=4) "a1-3",
+ (string) (len=4) "name": (string) (len=2) "b4"
+}
+*/
+```
+
+它调用 `json.Find()` 函数，该函数使用 `$` 和 `.criticalList[1]` 作为参数来指定 `JSON Path` 查询语法中要查找的位置。
+
+在这个例子中，`$` 表示从根开始查找，`.criticalList[1]` 表示找到 `criticalList` 中的第二个元素（数组下标从0开始）。最后，它将结果打印出来。
+
+我们可以通过 `results["key"]` 和 `results["name"]` 来分别获取字典中的 `key` 和 `name` 值，其值分别为 "a1-3" 和 "b4"。
+
+我们把上述代码稍作修改，这次将 `$.criticalList[*].name` 作为参数来查询 JSON Path。
+
+```go title="提取 criticalList 中的 name"
+results = json.Find(jsonRaw, "$.criticalList[*].name")
+dump(results)
+/*
+Output:
+
+([]interface {}) (len=2 cap=2) {
+ (string) (len=2) "b1",
+ (string) (len=2) "b4"
+}
+*/
+```
+
+在这个例子中，JSON Path 表达式 `$.criticalList[*].name` 表示查询 JSON 数据中 `criticalList` 列表中每个元素的 `name` 属性。 `[*]` 表示匹配 `criticalList` 列表中的所有元素，而 `name` 表示查询每个元素中的 `name` 属性。
+
+`json.Find()` 函数返回一个包含查询结果的 `[]interface{}` 类型的切片，其中每个元素都是一个字符串类型。在这个例子中，它返回了包含两个元素的切片，即 `["b1", "b4"]`，这是 JSON 数据中 `criticalList` 列表中的两个元素的 `name` 属性的值。最后，这个代码使用 `dump()` 函数将结果打印到控制台上。
+
+#### 4. 使用带条件的筛选器
+
+在本节中，将会学习到更高级的 Json Path 用法，我们可以通过 `[ ]` 与 `?()` 配合实现对象的快速筛选。
+
+
+
+### 替换数据
+
+## `json.New` 创建可操作 JSON 对象
+

@@ -1,0 +1,476 @@
+---
+sidebar_position: 5
+---
+
+# 函数库：poc - 专家 HTTP 库
+
+"专家级" 的 HTTP 库指的是用户可以通过当前这个函数库获得如下一般 HTTP 库无法支持的场景：
+
+1. 直接使用原始 HTTP Request 报文发送数据包
+2. 构造畸形数据包
+3. 修复不符合 HTTP 协议的 HTTP Request 报文，让他能被合理接受
+4. 手动控制 chunk 等过程
+5. 自动处理 HTTP Response 的响应信息
+
+...
+
+在这些需求中，我们的视角将发生变化，在 [基础 HTTP 通信](/docs/yakexamples/http-basic) 中，我们需要以遵循 HTTP 协议的角度思考问题；但是在本文中，我们视角将变为对 "HTTP 数据包"。
+
+这个视角变化对安全领域非常重要。
+
+除此之外，我们还要知道：
+
+> HTTP 的传输层协议是 TCP（Transmission Control Protocol）协议。
+>
+> HTTP 协议通常使用 TCP 协议作为传输层协议，因为 HTTP 协议需要可靠的数据传输服务。当客户端发送 HTTP 请求时，它会使用 TCP 协议在客户端和服务器之间建立一个连接，并传输请求数据。服务器在收到请求后，使用相同的 TCP 连接向客户端发送 HTTP 响应数据。在传输数据时，TCP 协议会确保数据的完整性和顺序性，以及在网络拥塞和流量控制方面提供帮助，从而确保 HTTP 数据的可靠传输。
+>
+> HTTP2 协议的传输层也是 TCP。HTTP2 数据传输基本单位是 Frame，而不是大家熟悉的 HTTP 报文，但是 HTTP2 在表现力上是完全兼容 HTTP 的，所以我们可以实现两种协议的互相转换。
+
+通过了解当前文档，我们将会学习如下内容：
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 使用原始 HTTP Request 报文发送数据包
+
+使用 `poc.HTTP` 可以直接做到以一个数据包发送报文：
+
+```go
+rsp, req = poc.HTTP(`GET / HTTP/1.1
+Host: www.baidu.com
+
+`)~
+
+/*
+rsp:
+([]uint8) (len=10511 cap=13076) {
+ 00000000  48 54 54 50 2f 31 2e 31  20 32 30 30 20 4f 4b 0d  |HTTP/1.1 200 OK.|
+ 00000010  0a 41 63 63 65 70 74 2d  52 61 6e 67 65 73 3a 20  |.Accept-Ranges: |
+ 00000020  62 79 74 65 73 0d 0a 43  61 63 68 65 2d 43 6f 6e  |bytes..Cache-Con|
+...
+...
+ 000028f0  20 42 61 69 64 75 20 22  3c 2f 73 63 72 69 70 74  | Baidu "</script|
+ 00002900  3e 3c 2f 62 6f 64 79 3e  3c 2f 68 74 6d 6c 3e     |></body></html>|
+}
+
+req:
+([]uint8) (len=39 cap=48) {
+ 00000000  47 45 54 20 2f 20 48 54  54 50 2f 31 2e 31 0d 0a  |GET / HTTP/1.1..|
+ 00000010  48 6f 73 74 3a 20 77 77  77 2e 62 61 69 64 75 2e  |Host: www.baidu.|
+ 00000020  63 6f 6d 0d 0a 0d 0a                              |com....|
+}
+*/
+```
+
+:::tip 注意 `~` 是 Yaklang 的特殊语法
+
+带有 `~` 结尾的函数调用将会自动忽略错误，如果错误不为空，将会造成当前程序抛出错误
+
+详情我们可以参考如下两个章节：
+
+1. [函数简化调用：WavyCall](/docs/yak-basic/function-calling#简化调用：wavycalling)
+2. [异常处理：try-catch](/docs/yak-basic/errors#捕获错误：try-与-catch)
+
+:::
+
+在我们了解上述基本方式之后，可以很直观的了解到，使用这种方式我们发送出去的数据包非常容易被用户控制。
+
+在任何地方加入任何数据都会被可能保留原义发送。
+
+:::info 不符合规范的数据包将会被尽力修复
+
+修复数据包是一个极其复杂的过程，我们要考虑包括但不限于如下内容：
+
+1. 数据包的 CRLF 是否被正确设置？
+2. 数据包是否是合理的 chunk？
+3. 针对 `multipart/form-data` 的数据，boundary 是否合理？如果不合理应该怎么修复？
+4. Content-Length 和 Content-Encoding 之间的关系是什么？
+5. 如果用户规定了 Content-Length 不被修复应该怎么处理？
+6. 不规整的请求往往对应不规整的响应，这种情况应该如何处理？
+
+:::
+
+### 动态改变数据包参数
+
+动态参数的改变在 Yaklang 中非常常见，不论是在扫描还是在安全测试中，当然参数的改变包括但不限于如下部分：
+
+1. 数据包的发送目标发生变化（针对多个数据包进行扫描）
+2. 数据包的参数发生动态变化，并且这个变化是有上下文或者编码要求的
+3. ...
+
+我们看第一个例子：
+
+```go title="动态改变数据包的发送目标"
+func sendPacket(target) {
+    packet = f`
+GET / HTTP/1.1
+Host: ${target}
+
+`
+/*
+var packet:
+
+GET / HTTP/1.1
+Host: www.example.com:8080
+*/
+
+    rsp, req = poc.HTTP(
+        packet,
+        poc.https(true),
+    )~
+}
+
+sendPacket("www.baidu.com:8080")
+```
+
+如上图内容，我们把数据包中的 Host 部分作为一个变量，通过函数参数传入，可以动态的改变发送的目标。
+
+:::tip 另一种写法
+
+上个案例中，我们使用的是 `f-string` 的渲染方案。
+
+当然用户还可以使用 `fuzztag` 中的 `{{params(target)}}` 来实现
+
+上述代码和这边这段代码完全等效
+
+```go title="使用 fuzztag 参数"
+func sendPacket(target) {
+    packet = `
+GET / HTTP/1.1
+Host: {{params(target)}}
+
+`
+    rsp, req = poc.HTTP(
+        packet,
+        poc.https(true),
+        poc.params({"target": target}),
+    )~
+}
+
+sendPacket("www.baidu.com:8080")
+```
+
+这两种方式基本完全等效，用户可以根据需求自行选择，但是从代码的易用性角度出发，笔者更推荐 `f-string` 的编程方案。
+
+:::
+
+除此之外，我们还可以提供另一个比较有趣的例子，可供大家参考
+
+```go title="动态渲染扫描目标和特定位置的参数(Base64编码)"
+func sendPacket(target, payload) {
+    packet = f`
+GET /?enc_cmd=${payload} HTTP/1.1
+Host: ${target}
+
+`
+
+/*
+println(packet)
+
+GET /?enc_cmd=d2hvYW1p HTTP/1.1
+Host: www.baidu.com:8080
+*/
+
+    rsp, req = poc.HTTP(
+        packet,
+        poc.https(true),
+    )~
+}
+
+payload = "whoami"
+sendPacket("www.baidu.com:8080", codec.EncodeBase64(payload))
+```
+
+### 额外参数：是否使用 TLS(HTTPS)
+
+当我们使用上述内容之后，很自然地会有疑问: **通过 URL 传递的目标，会在 schema 部分写明 `https://` 还是 `http://`，那么 `poc` 这个库如何指定访问目标是否是 HTTPS 呢？**。
+
+操作方式很类似 `http` 库中的参数输入方式。
+
+```go title="使用 poc.https 设置 TLS 加密通信"
+packet = `GET / HTTP/1.1
+Host: www.baidu.com
+
+`
+rsp, req = poc.HTTP(packet, poc.https(true))~
+```
+
+:::note 大多数参数都可以这么设置
+
+这种可变参数的设置方法在 Yak 中非常常用，它允许用户拥有有好的代码提示，并且能在动态类型中很好地配合强类型限制去限制参数内容。
+
+```go title="同时使用多个参数"
+rsp, req = poc.HTTP(
+    packet,
+    poc.https(true),
+    poc.http2(true),
+    poc.proxy("https://127.0.0.1:7890"),
+)~
+
+我们可以同时限制若干参数，这些都可以稳定同时生效。
+
+```
+
+### 额外参数：其他参数
+
+|参数名|说明|使用案例|
+|:---------|:---------|:---------|
+|poc.https(bool)|指定 HTTPS|`poc.HTTP(packet, poc.https(true))`|
+|poc.http2(bool)|指定使用 HTTP2 访问（一般 HTTPS 也需要同时开启）|`poc.HTTP(packet, poc.https(true), poc.http2(true))`|
+|poc.host(string)|发起 HTTP 请求之前，TCP 连接连接的 Host|`poc.HTTP(packet, poc.host("192.168.1.1"))`|
+|poc.port(int)|发起 HTTP 请求之前，TCP 连接连接的 Port, 一般配合 poc.host 一起使用|`poc.HTTP(packet, poc.host("192.168.1.1"), poc.port(80))`|
+|poc.retryTimes(int)|如果访问失败，重试的次数，这个访问失败指的是网络原因导致错误（超时等）|`poc.HTTP(packet, poc.retryTimes(3))`|
+|poc.retryInStatusCode(...int)|如果访问符合用户定义的状态码，则重试该请求|`poc.HTTP(packet, poc.retryInStatusCode(200,300), poc.retryTimes(3))`|
+|poc.retryNotInStatusCode(...int)|如果访问不符合用户定义的状态码，则重试该请求|`poc.HTTP(packet, poc.retryNotInStatusCode(404), poc.retryTimes(3))`|
+|poc.redirectTimes(int)|允许网站进行重定向的次数|`poc.HTTP(packet, poc.redirectTimes(3))`|
+|poc.noRedirect()|禁用重定向（等价于 poc.redirectTimes(0)）|`poc.HTTP(packet, poc.noRedirect())`|
+|poc.jsRedirect(bool)|启用 JS 重定向，启动从 meta 或者 js 中提取重定向执行。|`poc.HTTP(packet, poc.jsRedirect(true))`|
+|poc.proxy(...string)|使用代理访问，支持: Socks5,Socks4a,HTTP,HTTPS |`poc.HTTP(packet, poc.proxy("http://127.0.0.1:7890"))`|
+|poc.timeout(float)|为请求增加超时限制|`poc.HTTP(packet, poc.timeout(5))`|
+|poc.noFixContentLength(bool)|不修复 Content-Length 长度，一般用来测试请求走私的情况或其他畸形数据|`poc.HTTP(packet, poc.noFixContentLength(true))`|
+|poc.save(bool)|自动保存当前流量到数据库(默认为 True)|`poc.HTTP(packet, poc.save(bool))`|
+|poc.session(any)|自动保留当前 session (根据 session 缓存 Cookie 等认证信息) |`poc.HTTP(packet, poc.session("abc"))`|
+|poc.params(map)|自动渲染数据包中 fuzz 参数标签|`poc.HTTP(packet, poc.params({"target": "baidu.com:80"}))`|
+
+:::
+
+
+### 自动识别 Host
+
+在 `poc.HTTP` 一般情况下，我们并不需要手动设置 Host:Port，`yak.poc` 会自动识别 Host 进行数据包发送。这个操作遵循如下准则：
+
+1. Host 头中的数据可以分离初端口，我们认为这个端口不论是不是 HTTPS，都是我们分离出的端口
+1. 当 https 没有被指定时，且 Host 头中的数据无法分离端口，我们认为这个端口是 `80`
+1. 当 https 被指定时，且 Host 头中的数据无法分离端口，我们认为这个端口是 `443`
+
+我们以下面的例子来说明：
+
+```go title="不指定 HTTPS 且不指定端口的情况"
+packet = `GET / HTTP/1.1
+Host: www.baidu.com
+
+`
+rsp, req = poc.HTTP(
+    packet,
+)~
+```
+
+分离出的目标为 `www.baidu.com:80`
+
+```go title="指定 HTTPS 不指定端口，分离出的端口为 www.baidu.com:443"
+packet = `GET / HTTP/1.1
+Host: www.baidu.com
+
+`
+rsp, req = poc.HTTP(
+    packet,
+    poc.https(true)
+)~
+```
+
+#### 当 Host 明确指定了端口
+
+```go title="明确指定端口"
+packet = `GET / HTTP/1.1
+Host: www.baidu.com:8080
+
+`
+rsp, req = poc.HTTP(
+    packet,
+    poc.https(true)
+)~
+```
+
+这个请求无论如何，端口都会被自动设置为 `8080`
+
+### 手动指定 Host (常用于 Host 碰撞)
+
+当我们了解自动识别规则之后，可以使用 `poc.host(string) 和 poc.port(int)` 绕过自动识别规则，直接指定 TCP 的主机和端口。
+
+:::tip
+
+这个功能在安全实践中非常有用，一般用于进行 Mock 或者 Host 碰撞。
+
+:::
+
+```go title="指定 Host 和 Port 来发送数据包"
+packet = `GET / HTTP/1.1
+Host: www.baidu.com:8080
+
+`
+rsp, req = poc.HTTP(
+    packet,
+    poc.https(true),
+    poc.host("127.0.0.1"),
+    poc.port(8081),
+)~
+```
+
+除此之外，我们可以提供一个更贴近实际案例的例子帮助大家快速理解这个功能
+
+## 数据包修复和处理
+
+### 修复数据包 `FixHTTPRequest` 和 `FixHTTPResponse`
+
+除了正常发送数据包之外，我们如果觉得自己构造的数据包有问题，可以通过修复数据包的方式格式化自己的数据包，修复的方便如下：
+
+1. 移除数据包前无谓的空格
+1. 修复数据包的 `Content-Length` 保证 Body 被正确读取。
+1. 如果数据包是 `multipart/form-data` 形式的，自动校验并修复 Boundary
+1. 自动修复 CRLF
+
+```go title="修复 Content-Length"
+packet = `
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+abc123123`
+
+req = poc.FixHTTPRequest(packet)
+/*
+println(string(req)):
+
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+Content-Length: 9
+
+abc123123
+*/
+```
+
+除了修复 Content-Length 的基础情况，我们也可以修复复杂的 Boundary，我们观察如下数据包，大致存在的问题有:
+
+1. 数据包前有无用空格空行
+1. 数据包中 Content-Type 包含 `boundary` 和实际 Body 中对应不上
+1. 数据包 Content-Length 无法对应
+1. 数据包中结尾缺失 CRLF*2
+
+```go title="修复上传文件数据包，同时也能修复 Content-Length"
+packet = `
+POST / HTTP/1.1
+Host: localhost:8000
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:29.0) Gecko/20100101 Firefox/29.0
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=---------------------------9051914041544843365972754266
+Content-Length: 554
+
+-----------------------------abc
+Content-Disposition: form-data; name="text"
+
+abc
+-----------------------------abc
+Content-Disposition: form-data; name="file1"; filename="a.txt"
+Content-Type: text/plain
+
+Content of a.txt.
+-----------------------------abc--`
+
+req = poc.FixHTTPRequest(packet)
+```
+
+修复后数据包的中内容如下
+
+```bash title="修复后的数据包"
+POST / HTTP/1.1
+Host: localhost:8000
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:29.0) Gecko/20100101 Firefox/29.0
+Connection: keep-alive
+Content-Type: multipart/form-data; boundary=---------------------------abc
+Content-Length: 267
+
+-----------------------------abc
+Content-Disposition: form-data; name="text"
+
+abc
+-----------------------------abc
+Content-Disposition: form-data; name="file1"; filename="a.txt"
+Content-Type: text/plain
+
+Content of a.txt.
+-----------------------------abc--
+
+```
+
+### 分割数据包 Header 和 Body
+
+一般来说，我们在 `poc.HTTP` 中获得的数据包是 `[]byte` 类型的，实际上在进行数据处理过程中，我们有时并不希望整体进行处理，需要单独进行处理 header 与 body。
+
+```go
+rsp, req, err := poc.HTTP(`
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`)
+die(err)
+
+// 分割响应数据包的 Header 和 Body 部分
+header, body = poc.Split(rsp)
+println(header)                             // 打印数据包 Header
+printf("Body MD5: %v\n", codec.Md5(body))   // 计算数据包响应的 md5
+```
+
+:::tip 简化上述代码
+
+我们在上述代码中，使用 `err` 去尝试接收 `poc.HTTP` （这是 Golang 的错误处理风格）。
+
+这种处理方式没有任何问题，可以很好的让 "错误" 变成代码逻辑，那么如果不想处理错误的话，我们可以使用
+
+```go title="简化错误处理"
+rsp, req := poc.HTTP(`
+GET / HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
+
+`)~
+
+// 分割响应数据包的 Header 和 Body 部分
+header, body = poc.Split(rsp)
+println(header)                             // 打印数据包 Header
+printf("Body MD5: %v\n", codec.Md5(body))   // 计算数据包响应的 md5
+
+/*
+[INFO] 2023-02-21 12:28:32 +0800 [exec.go:489] should save url: http://www.example.com/
+HTTP/1.1 200 OK
+Age: 345812
+Cache-Control: max-age=604800
+Content-Type: text/html; charset=utf-8
+Date: Tue, 21 Feb 2023 04:28:36 GMT
+Etag: "3147526947+ident"
+Expires: Tue, 28 Feb 2023 04:28:36 GMT
+Last-Modified: Thu, 17 Oct 2019 07:18:26 GMT
+Server: ECS (sab/5799)
+Vary: Accept-Encoding
+X-Cache: HIT
+Content-Length: 1256
+
+
+Body MD5: 84238dfc8092e5d9c0dac8ef93371a07
+*/
+```
+
+:::
+
+
+
+## 如何批量发送请求？
+
+### 如何编程实现？
+
+手动实现并发编程和批量发送请求，需要有前置的一些知识，您可以查看如下文档
+
+1. [yak 中的并发编程](/docs/yakexamples/concurrent)
+
+### 学习使用 `fuzz` - 模糊测试工具包
+
+当然，您可以继续学习更强大的[模糊测试技术 `fuzz` 模块](/docs/yakexamples/fuzz-request)来掌握如何测试多个数据包。
+
+## 高级话题
+
+TBD
+
+1. [HTTP2 支持](/)
+1. [Websocket 支持](/)

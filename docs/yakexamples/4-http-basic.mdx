@@ -1,0 +1,454 @@
+---
+sidebar_position: 4
+---
+
+# 函数库：http - 基本 HTTP 通信
+
+> HTTP（Hypertext Transfer Protocol）协议是一种用于在计算机网络中传输超文本文档的应用层协议。HTTP 是 Web 浏览器和 Web 服务器之间通信的基础，它定义了客户端如何向服务器请求数据，以及服务器如何响应这些请求。
+
+> HTTP 协议基于客户端/服务器模型，客户端发出请求并等待服务器响应。在请求和响应之间，HTTP 使用一组标准化的请求方法（例如 GET、POST、PUT 和 DELETE）和响应状态码（例如 200 OK、404 Not Found）来交换信息。
+>
+> HTTP 协议通常使用 TCP/IP 协议作为传输层协议，但也可以使用其他协议，如 UDP 和 SCTP。HTTP 协议通常使用 TCP 端口号 80，但也可以使用其他端口号，如安全 HTTP（HTTPS）协议使用 TCP 端口号 443。
+>
+> HTTP 协议是 Web 应用程序的基础，许多应用程序、框架和库都使用 HTTP 协议进行通信。
+
+本篇将会介绍 http 的基础库的操作：主要会从如下方面介绍该协议的编程内容：
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 使用 URL 发起 HTTP 请求
+
+### 基础：快速发送一个 GET / POST 请求
+
+```go
+rsp = http.Get("http://example.com")~
+http.show(rsp)
+```
+
+我们使用上述代码可以直接发送一个 GET 请求。
+
+:::info 注意 `~` 是 Yaklang 的特殊语法
+
+带有 `~` 结尾的函数调用将会自动忽略错误，如果错误不为空，将会造成当前程序抛出错误
+
+详情我们可以参考如下两个章节：
+
+1. [函数简化调用：WavyCall](/docs/yak-basic/function-calling#简化调用：wavycalling)
+2. [异常处理：try-catch](/docs/yak-basic/errors#捕获错误：try-与-catch)
+:::
+
+上述代码执行之后，`http.show(rsp)` 会直接把数据包的内容打印到屏幕上，因此我们在控制台中，将会看到如下输出
+
+```html
+HTTP/1.1 200 OK
+Connection: close
+Accept-Ranges: bytes
+...
+X-Cache: HIT
+Content-Length: 1256
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+    ...
+    ...
+<body>
+<div>
+    <h1>Example Domain</h1>
+    <p>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.</p>
+    <p><a href="https://www.iana.org/domains/example">More information...</a></p>
+</div>
+</body>
+</html>
+
+```
+
+### 进阶：使用一个客户端发送请求
+
+实际在使用过程中，我们可能会有一些其他的诉求：
+
+1. 使用除了 Get / Post 之外的方法发送请求
+2. 需要先创建请求，暂时不发送，等时机成熟后再发送
+
+实际上，我们也支持这种形式：
+
+```go
+req = http.NewRequest("HEAD", "http://baidu.com")~
+http.show(req) // show packet
+
+rsp = http.Do(req)~
+http.show(rsp) // show packet
+
+/*
+HEAD / HTTP/1.1
+Host: baidu.com
+
+
+HTTP/1.1 200 OK
+Connection: close
+Accept-Ranges: bytes
+Cache-Control: max-age=86400
+Content-Type: text/html
+Date: Mon, 20 Feb 2023 09:24:18 GMT
+Etag: "51-47cf7e6ee8400"
+Expires: Tue, 21 Feb 2023 09:24:18 GMT
+Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
+Server: Apache
+Content-Length: 0
+
+*/
+```
+
+一般来说，`http.NewRequest` 和 `http.Do` 是配套使用的:
+
+1. `http.NewRequest(method, url, opts...) (*YakHttpRequest, error)` 是创建一个请求，参数是可变参数，可以任意设置。
+2. `http.Do(*YakHttpRequest) (*YakHttpResponse, error)` 可以发送这个请求，只接受 `http.NewRequest` 中的内容。
+
+## 处理参数和 HTTP 头
+
+### 带参数的 HTTP 请求
+
+一般来说，我们可以通过 URL 本身携带参数信息来发起请求，但是并不代表这是唯一选项。
+
+在 `>= 1.1.8-sp8` 的引擎版本中，我们可以通过 `http.params({"key": "value"})` 或者 `http.postparams({"key": "value"})` 来为 GET 请求设置参数。
+
+```go
+req = http.NewRequest("GET", "https://www.baidu.com", http.params({"key": "value"}))~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET /?key=value HTTP/1.1
+Host: www.baidu.com
+
+*/
+```
+
+我们了解了上述案例之后，我们大概对 Yak HTTP 有了基础理解，实际上控制参数的方法有如下两个。
+
+1. `http.params` 的作用范围是参数（Query）在 URL 中的情况
+1. `http.postparams` 的作用范围是 PostData，且他的编码规范是 `urlencoded`
+
+因此，我们把这两个参数放在一起，将会明白他是如何工作的
+
+```go
+req = http.NewRequest("GET", "https://www.baidu.com", http.params({"key": "value"}), http.postparams({"key2": "value2"}))~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET /?key=value HTTP/1.1
+Host: www.baidu.com
+Content-Length: 11
+
+key2=value2
+*/
+```
+
+### 使用 JSON 通信
+
+通过使用 `http.json(...)` 可以让 yak 的 http 库自动把对象转变成 JSON 格式的内容，并为他设置好合理的 `Content-Type`
+
+```go
+req = http.NewRequest("GET", "https://www.baidu.com", http.json({"key": "value"}))~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET / HTTP/1.1
+Host: www.baidu.com
+Content-Type: application/json
+Content-Length: 15
+
+{"key":"value"}
+*/
+```
+
+这个例子非常直观的解释了参数是如何工作的。
+
+:::note
+
+一般不建议 `http.postparams` 和 `http.json` 进行混用，会造成无法预料的后果，属于未定义的行为。
+
+:::
+
+### 为 HTTP 请求设置 User-Agent
+
+一般来说，设置 User-Agent 是一个非常常见的操作，在 Yak 中，我们也可以很好支持这个操作：`http.useragent` 或 `http.ua` 都可以完成操作。
+
+```go
+req = http.NewRequest("GET", "https://www.baidu.com", http.useragent("Yaklang-User-Agent/1.1"))~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET / HTTP/1.1
+Host: www.baidu.com
+User-Agent: Yaklang-User-Agent/1.1
+
+*/
+```
+
+当然，我们在一些特殊场景中经常会使用一个虚假的或者随机的 `User-Agent`，通过 `http.fakeua()` 我们可以随机生成一个 User-Agent 来发送数据包。
+
+```go
+req = http.NewRequest("GET", "https://www.baidu.com", http.fakeua())~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET / HTTP/1.1
+Host: www.baidu.com
+User-Agent: ELinks/0.12~pre5-4 ...
+
+
+-------------------------
+W3C_Validator/1.305.2.12 libwww-perl/5.64
+ELinks/0.12~pre5-4
+BlackBerry9700/5.0.0.351 Profile/MIDP-2.1 Configuration/CLDC-1.1 VendorID/123
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36
+...
+*/
+
+```
+
+### 为 HTTP 请求设置任意 Header
+
+User-Agent 当然只是一种特殊情况，一般来说，我们还可以设置更多复杂的情况，通过 `http.header` 可以快速设置。
+
+```go
+req = http.NewRequest(
+    "GET", "https://www.baidu.com",
+    http.header("User-Spec-Header", "AwesomeYaklang!")
+)~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET / HTTP/1.1
+Host: www.baidu.com
+User-Spec-Header: AwesomeYaklang!
+
+*/
+```
+
+### 设置 Cookie
+
+当然，和上面接口高度类似地，我们可以设置通过类似的操作去设置 Cookie：`http.cookie(any)`
+
+```go
+req = http.NewRequest(
+    "GET", "https://www.baidu.com",
+    http.header("User-Spec-Header", "AwesomeYaklang!"),
+    http.cookie("abc=123")
+)~
+http.show(req)
+
+/*
+OUTPUT:
+
+GET / HTTP/1.1
+Host: www.baidu.com
+Cookie: abc=123
+User-Spec-Header: AwesomeYaklang!
+
+*/
+```
+
+## HTTP 网络控制
+
+### 控制 HTTP 超时限制
+
+HTTP 超时限制是指客户端在向服务器发送 HTTP 请求时，如果在规定时间内没有收到服务器的响应，就会认为该请求已超时。这个时间限制称为超时时间。
+
+HTTP 超时限制的目的是防止客户端无限期地等待服务器响应，从而浪费客户端的资源。如果客户端等待时间过长，可能会导致用户体验不佳，甚至影响到整个应用程序的性能。因此，设置适当的超时时间非常重要。
+
+在 `http` 这个库中，默认的超时时间为：`15 seconds`。这个默认时间和一般的客户端不太一样，一般客户端的默认超时是 30s。我们通过 `http.timeout(float)` 直接设置一个超时参数。
+
+我们可以用一个例子来观察这个参数的作用：
+
+```go
+rsp = http.Get("http://www.example.com", http.timeout(0.3))~
+
+/*
+OUTPUT:
+
+Panic Stack:
+File "/var/folders/0f/ypm71yhs1jdg_nrgs_8_j3180000gn/T/yaki-code-1991723086.yak", in global code
+--> 1 rsp = http.Get("http://www.example.com", http.timeout(0.3))~
+
+YakVM Panic: native func `http.Get` call error: Get "http://www.example.com": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+*/
+```
+
+在这个案例中，我们设置了一个 0.3 秒的超时，当这个超时限制生效的时候，就会触发错误。
+
+当然，我们可以编写一个不用 `wavycalling` 的版本：
+
+```go
+rsp, err = http.Get("http://www.example.com", http.timeout(0.3))
+if err != nil {
+    log.error(`Get http://www.example.com: %v`, err)
+    return
+}
+
+/*
+OUTPUT:
+
+[ERRO] 2023-02-20 17:13:52 +0800 [yaki-code-1149036560] Get http://www.example.com: Get "http://www.example.com": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+*/
+```
+
+### 为 HTTP 请求设置代理
+
+除了控制超时之外，yak http 也支持用户单独设置一个代理，我们可以使用著名的 `ifconfig.me` 来验证我们的代理设置成功没有。
+
+```go
+rsp = http.Get("http://ifconfig.me", http.timeout(5), http.proxy("http://127.0.0.1:7890"))~
+http.show(rsp)
+
+/*
+OUTPUT:
+
+HTTP/1.1 200 OK
+Connection: close
+Access-Control-Allow-Origin: *
+Content-Type: text/plain; charset=utf-8
+Date: Mon, 20 Feb 2023 09:15:57 GMT
+Server: istio-envoy
+Strict-Transport-Security: max-age=2592000; includeSubDomains
+Via: 1.1 google
+X-Envoy-Upstream-Service-Time: 1
+Content-Length: 12
+
+45.**.***.217
+*/
+```
+
+### 重定向设置支持
+
+在 http 包中，我们默认开启了重定向，但是有时候我们往往需要禁用重定向控制。
+
+```go
+rsp = http.Get("https://baidu.com/", http.timeout(5), http.noredirect())~
+```
+
+使用 `http.noredirect()` 可以直接控制 HTTP 请求是否被重定向。
+
+## 处理 HTTP 响应信息
+
+### 获取 HTTP 响应状态码
+
+```go
+url = "https://www.example.com"
+rsp = http.Get(url)~
+
+statusCode = rsp.StatusCode  // 200
+printf(f`
+Request to ${url}
+Response StatusCode: ${statusCode}
+
+`)
+
+/*
+OUTPUT:
+
+Request to https://www.example.com
+Response StatusCode: 200
+
+*/
+```
+
+我们通过 `rsp.StatusCode` 可以直接获取到这个请求的状态码。这个字段源自于 Golang 的对象：`*http.Request`。
+
+:::tip 字符串模版
+
+在上面的例子中，我们用到了 Yaklang 的字符串的 `f-string` 字符串模版特性。
+
+大家可以在 [字符串：模版语法 f-string](/docs/yak-basic/string-template) 这里复习这个特性。熟练应用这个特性，它会让你的编程更加流畅。
+
+:::
+
+### 获取 HTTP 响应数据（Body）
+
+和上述内容差不多，我们可以通过直接操作 `rsp` （*YakHttpResponse） 来获取响应的信息
+
+```go
+```
+
+### 获取数据包的响应数据
+
+这个功能和绝大多数 HTTP 库都有不同，我们可以允许用户获取一个请求的具体报文信息：
+
+```go
+url = "https://www.example.com"
+rsp = http.Get(url)~
+dump([]byte(rsp.Data()))
+
+/*
+([]uint8) (len=1256 cap=1280) {
+ 00000000  3c 21 64 6f 63 74 79 70  65 20 68 74 6d 6c 3e 0a  |<!doctype html>.|
+ 00000010  3c 68 74 6d 6c 3e 0a 3c  68 65 61 64 3e 0a 20 20  |<html>.<head>.  |
+ 00000020  20 20 3c 74 69 74 6c 65  3e 45 78 61 6d 70 6c 65  |  <title>Example|
+ ...
+ ...
+ ...
+ 000004a0  6f 72 67 2f 64 6f 6d 61  69 6e 73 2f 65 78 61 6d  |org/domains/exam|
+ 000004b0  70 6c 65 22 3e 4d 6f 72  65 20 69 6e 66 6f 72 6d  |ple">More inform|
+ 000004c0  61 74 69 6f 6e 2e 2e 2e  3c 2f 61 3e 3c 2f 70 3e  |ation...</a></p>|
+ 000004d0  0a 3c 2f 64 69 76 3e 0a  3c 2f 62 6f 64 79 3e 0a  |.</div>.</body>.|
+ 000004e0  3c 2f 68 74 6d 6c 3e 0a                           |</html>.|
+}
+*/
+```
+
+:::tip 输出内容展示的步骤
+
+1. `dump(...)` 可以尽力保留变量或者值的类型和数据进行美化展示，能帮助用户快速了解变量类型和数据
+2. `dump()` 函数对 `[]byte` 的展示自带了 `hexdump` 的格式，方便用户观察不可见或不可打印字符
+3. `[]byte(...)` 是类型转换，我们通过把 string 转换为 bytes，从而让 dump 函数更好展示 hexdump 形式
+
+:::
+
+### 获取数据包的原始数据
+
+这个功能和绝大多数 HTTP 库都有不同，我们可以允许用户获取一个请求的具体报文信息：
+
+```go
+url = "https://www.example.com"
+rsp = http.Get(url)~
+dump([]byte(rsp.Raw()))
+
+/*
+([]uint8) (len=1626 cap=1792) {
+ 00000000  48 54 54 50 2f 31 2e 31  20 32 30 30 20 4f 4b 0d  |HTTP/1.1 200 OK.|
+ 00000010  0a 43 6f 6e 6e 65 63 74  69 6f 6e 3a 20 63 6c 6f  |.Connection: clo|
+ 00000020  73 65 0d 0a 41 63 63 65  70 74 2d 52 61 6e 67 65  |se..Accept-Range|
+ 00000030  73 3a 20 62 79 74 65 73  0d 0a 41 67 65 3a 20 32  |s: bytes..Age: 2|
+ 00000040  34 33 30 36 32 0d 0a 43  61 63 68 65 2d 43 6f 6e  |43062..Cache-Con|
+ 00000050  74 72 6f 6c 3a 20 6d 61  78 2d 61 67 65 3d 36 30  |trol: max-age=60|
+ 00000060  34 38 30 30 0d 0a 43 6f  6e 74 65 6e 74 2d 54 79  |4800..Content-Ty|
+ 00000070  70 6...
+ ...
+ 00000610  61 2e 6f 72 67 2f 64 6f  6d 61 69 6e 73 2f 65 78  |a.org/domains/ex|
+ 00000620  61 6d 70 6c 65 22 3e 4d  6f 72 65 20 69 6e 66 6f  |ample">More info|
+ 00000630  72 6d 61 74 69 6f 6e 2e  2e 2e 3c 2f 61 3e 3c 2f  |rmation...</a></|
+ 00000640  70 3e 0a 3c 2f 64 69 76  3e 0a 3c 2f 62 6f 64 79  |p>.</div>.</body|
+ 00000650  3e 0a 3c 2f 68 74 6d 6c  3e 0a                    |>.</html>.|
+}
+*/
+```
+
+## 发送畸形数据包
+
+如果想要发送任意的畸形数据包，我们依赖 `http` 这个库无法做到，用户需要学习 [`poc` 与 `fuzz` 模糊测试函数库支持](/docs/yakexamples/http-advanced)。

@@ -1,6 +1,6 @@
 {
   "name": "yaklang",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -27,11 +27,13 @@
     "codemirror": "^5.62.0",
     "docusaurus-plugin-sass": "^0.2.2",
     "file-loader": "^6.2.0",
+    "prism-react-renderer": "^1.3.5",
     "proton-engine": "^4.2.1",
     "raf-manager": "^0.3.0",
     "react": "^17.0.1",
     "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.1",
+    "react-lazyload": "^3.2.0",
     "react-parallax-tilt": "^1.5.36",
     "react-player": "^2.9.0",
     "sass": "^1.52.0",

@@ -4,7 +4,7 @@ module.exports = {
         defaultLocale: "zh-CN",
         locales: ["zh-CN", "en"],
     },
-    title: "Yak Official Website",
+    title: "Yak Program Language",
     tagline: "Yak 是一门 Web 安全研发领域垂直语言",
     url: "https://yaklang.io",
     baseUrl: "/",
@@ -176,6 +176,9 @@ module.exports = {
                 facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
             },
         },
+        prism: {
+            theme: require("prism-react-renderer/themes/github"),
+        },
     },
     plugins: [
         "docusaurus-plugin-sass",
@@ -217,11 +220,6 @@ module.exports = {
                 // },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),
-                },
-                themeConfig: {
-                    prism: {
-                        theme: require("prism-react-renderer/themes/dracula"),
-                    },
                 },
             },
         ],

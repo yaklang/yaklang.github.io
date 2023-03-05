@@ -1,0 +1,285 @@
+---
+sidebar_position: 10
+---
+
+# 函数库：synscan - SYN 扫描
+
+SYN 扫描（SYN scan）是一种常见的网络扫描技术，用于确定一个主机上是否存在打开的网络端口。SYN 扫描利用了 TCP/IP 协议中的一些特性，可以在不建立完整的 TCP 连接的情况下发送 SYN 数据包来测试目标主机上的端口是否开放。
+
+SYN 扫描的基本原理是向目标主机的每个端口发送一个 SYN 数据包，如果目标主机的该端口是开放的，它将发送一个 SYN/ACK 数据包响应请求。如果目标主机的该端口是关闭的，它将发送一个 RST 数据包响应请求。通过分析目标主机对请求的响应，SYN 扫描程序可以确定哪些端口是开放的，哪些端口是关闭的。
+
+SYN 扫描有一些优点，它可以快速扫描目标主机的端口，并且在网络中产生较少的噪声，因为它不会完全建立 TCP 连接。但是，SYN 扫描也有一些缺点，例如它可以被一些防火墙和入侵检测系统检测到，并且它不能够检测到 UDP 端口和某些特殊的 TCP 端口。
+
+因此，SYN 扫描通常是用于端口扫描中的一种技术，而不是唯一的技术。在实际应用中，需要根据具体的情况来选择适当的扫描技术，并采取一些防范措施来防止网络攻击。
+
+import TOCInline from '@theme/TOCInline';
+
+<TOCInline toc={toc} />
+
+## 为什么 SYN 扫端口比 TCP 连接扫描更快速？
+
+直接调用系统接口进行 TCP 连接，系统需要帮忙维护一个 TCP 连接状态。众所周知
+
+1. 系统可打开的 TCP 连接是有限制的，可配置开放这个限制。
+1. 系统可同时打开的文件描述符也是有限制的，`ulimit` 可配（Linux 与 Unix 均可配置）。
+
+### 优势
+
+1. 不需要进行完整 TCP 连接，系统对 TCP 连接无感知
+1. 资源消耗极低，发包速率取决于系统性能以及网络 IO
+
+### 弊端
+
+1. 频率过高的数据包容易被中间路由丢包，损失准确率
+1. 网络状况越差，丢包概率越大，扫描效果越差
+
+## 如何进行 SYN 扫描？
+
+本文我们将描述如何进行 SYN 扫描，还是以代码案例为准：
+
+```go title="SYN 扫描的基础案例"
+res, err = synscan.Scan("**.**.*00.1/24", "80,443")
+die(err)
+
+for result in res {
+    println(result.String())
+}
+```
+
+:::tip 代码简化
+
+合理使用 `WavyCall` 可以让上述代码写起来更加流畅：
+
+```go title="WavyCall 简化"
+for result in synscan.Scan("**.**.*00.1/24", "80,443")~ {
+    println(result.String())
+}
+```
+
+:::
+
+:::caution 我们隐去了扫描目标
+
+在上述代码中，复制粘贴无法直接运行，是因为我们隐去了扫描目标，用户需要
+
+:::
+
+这段代码执行结果（日志如下）：
+
+```js title="日志（缩减后）"
+[INFO] 2023-02-27 21:14:13 [route:91] start to call nativeCall netroute for darwin
+[INFO] 2023-02-27 21:14:13 [route:94] start to find route for **.**.*00.0 in darwin
+[INFO] 2023-02-27 21:14:13 [route:106] finished for finding gateway: 192.168.3.1
+[INFO] 2023-02-27 21:14:13 [synscan:276] start create hyper scan center...
+[INFO] 2023-02-27 21:14:13 [app:205] fetch loopback by addr: lo0
+[INFO] 2023-02-27 21:14:13 [app:238] fetch local loopback pcapDev:[lo0]
+[INFO] 2023-02-27 21:14:13 [synscan:292] preparing for result collectors
+[INFO] 2023-02-27 21:14:13 [synscan:308] start submit task and scan...
+[INFO] 2023-02-27 21:14:13 [app:102] use arp proto to fetch gateway\'s hw address: f4:63:1f:ed:05:cf
+[INFO] 2023-02-27 21:14:13 [scan:245] start to wait all packets are sent
+OPEN: **.**.*00.30:80      from synscan
+OPEN: **.**.*00.30:443     from synscan
+OPEN: **.**.*00.44:80      from synscan
+...
+...
+OPEN: **.**.*00.248:443    from synscan
+OPEN: **.**.*00.243:80     from synscan
+[INFO] 2023-02-27 21:14:14 [synscan:421] finished submitting.
+[INFO] 2023-02-27 21:14:14 [synscan:437] waiting last packet (SYN) for 5s seconds
+
+```
+
+这段代码示例使用 `synscan` 库进行 SYN 扫描，并打印出扫描结果。这段代码的主要逻辑如下：
+
+1. 调用 `synscan.Scan()` 函数进行 SYN 扫描，函数的第一个参数是目标主机的 IP 地址和 CIDR 子网掩码，第二个参数是要扫描的端口号。函数返回两个值，一个是扫描结果的列表，一个是可能发生的错误。
+
+1. 如果发生错误，调用 `die()` 函数退出程序。
+
+1. 遍历扫描结果列表，对于每个扫描结果，调用 `result.String()` 方法打印出结果字符串。
+
+:::info 说明
+
+`synscan.Scan` 有两个必选参数和一个可变参数，定义为 `synscan.Scan(hosts: string, ports: string, opts...) (chan *SynScanResult, error)`。
+
+1. `hosts` 参数表示想要扫描的主机地址，他支持多种格式：包括但不限于 `CIDR，IP，域名等`，其行为主要和 [`str.ParseStringToHosts`](/docs/yakexamples/strutils#解析扫描目标主机) 保持一直；
+1. `ports` 参数表示想要扫描的端口，行为和 [`str.ParseStringToPorts`](/docs/yakexamples/strutils#解析扫描端口) 保持一致；
+1. `opts` 可变参数来传递可以控制 synscan 的额外参数；
+
+他的返回值为 `chan *SynScanResult` 这是一个 channel 复合类型，他的核心结构定义为：
+
+```go title="SynScanResult 定义"
+type SynScanResult struct {
+  Fields(可用字段):
+      Host: string
+      Port: int
+  PtrStructMethods(指针结构方法/函数):
+      func Show()
+      func String() return(string)
+}
+```
+
+:::
+
+### 额外参数：排除目标 - `synscan.excludeHosts/excludePorts`
+
+我们通常使用这些参数来实现 "排除不想要的主机或者端口" 等操作。
+
+具体案例如下：
+
+```go title="excludeHosts and excludePorts"
+for result in synscan.Scan(
+    "**.**.100.1/24", "80,443",
+    synscan.excludeHosts("**.**.100.44-100"),
+    synscan.excludePorts("443"),
+)~ {
+    println(result.String())
+}
+```
+
+我们对之前的案例稍作修改，把这两个参数加入扫描列表中，就可以实现在扫描过程中排除这些撒秒内容。
+
+### 额外参数：限制速率 - `synscan.concurrent/rateLimit`
+
+我们通常使用 `concurrent` 和 `rateLimit` 这两个额外参数来进行频率限制，但是一定要注意，不建议这两个参数同时设置。
+
+:::tip
+
+1. `synscan.concurrent(i: int)` 的速率限制主要在于 "每秒并发 i 个请求"。
+2. `synscan.rateLimit(ms: int, gap: int)` 中的 `ms` 类型是整型意思是 "每两个数据包间隔多少毫秒"，`gap` 类型是正经，代表的是"每隔多少个数据包，等待一次缓冲区清空"。
+
+这两个参数底层都是对 `rateLimitDelayMs` 和 `rateLimitDelayGap` 进行设置的，
+
+:::
+
+案例如下:
+
+```go title="带频率限制的 SYN 扫描"
+for result in synscan.Scan(
+    "127.0.0.1", "1-65535",
+    synscan.concurrent(500),
+)~ {
+    println(result.String())
+}
+```
+
+这段代码和之前的基本意思相同，但是增加了频率限制，我们可以发现他限制在 `500` packet/s 的频率上。
+
+:::note
+
+推荐的参数配置如下:
+
+1. `synscan.concurrent(1000)`：如果你的网络状况比较优秀，可以使用这个配置
+2. `synscan.concurrent(500)`：速度适中，准确率和速度获得一个比较好的平衡
+
+:::
+
+:::danger 速率不宜设置过快
+
+网卡过度使用会导致本地局域网或当前主机网卡无法响应，影响系统使用。
+
+:::
+
+## 网卡权限问题
+
+`synscan.FixPermission` 这个函数可以 "尽力" 修复网课权限问题。其核心与案例如下：
+
+1. 在 `macOS` 系统中
+1. 在 `linux` 系统中
+1. 在 `windows` 系统中
+
+## API 定义
+
+<table>
+  <thead>
+    <tr>
+      <th>接口名</th>
+      <th>类型</th>
+      <th>描述</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <code>FixPermission</code></td>
+      <td>
+        <code>func() error</code></td>
+      <td>修复网卡的权限，以便它可以被非管理员用户读取</td></tr>
+    <tr>
+      <td>
+        <code>Scan</code></td>
+      <td>
+        <code>func(hosts: string, ports: string, opts...) (chan *synscan.SynScanResult, error)</code></td>
+      <td>运行SYN端口扫描</td></tr>
+    <tr>
+      <td>
+        <code>ScanFromPing</code></td>
+      <td>
+        <code>func(chan *ICMPResult) (*synscan.SynScanResult, error)</code></td>
+      <td>根据ICMP回显响应运行SYN端口扫描</td></tr>
+    <tr>
+      <td>
+        <code>callback</code></td>
+      <td>
+        <code>callback(func(*SynScanResult))</code></td>
+      <td>设置端口扫描结果回调函数</td></tr>
+    <tr>
+      <td>
+        <code>submitTaskCallback</code></td>
+      <td>
+        <code>submitTaskCallback(func(task))</code></td>
+      <td>设置提交扫描任务的回调函数</td></tr>
+    <tr>
+      <td>
+        <code>excludePorts</code></td>
+      <td>
+        <code>excludePorts(ports: string)</code></td>
+      <td>设置要排除的端口列表</td></tr>
+    <tr>
+      <td>
+        <code>excludeHosts</code></td>
+      <td>
+        <code>excludeHosts(hosts: string)</code></td>
+      <td>设置要排除的主机列表</td></tr>
+    <tr>
+      <td>
+        <code>wait</code></td>
+      <td>
+        <code>wait(f: float)</code></td>
+      <td>设置SYN扫描等待时间</td></tr>
+    <tr>
+      <td>
+        <code>outputFile</code></td>
+      <td>
+        <code>outputFile(file: string)</code></td>
+      <td>将结果写入指定的文件中</td></tr>
+    <tr>
+      <td>
+        <code>outputPrefix</code></td>
+      <td>
+        <code>outputPrefix(prefix: string)</code></td>
+      <td>设置写入文件的前缀</td></tr>
+    <tr>
+      <td>
+        <code>initHostFilter</code></td>
+      <td>
+        <code>initHostFilter(f: string)</code></td>
+      <td>初始化主机过滤器</td></tr>
+    <tr>
+      <td>
+        <code>initPortFilter</code></td>
+      <td>
+        <code>initPortFilter(f: string)</code></td>
+      <td>初始化端口过滤器</td></tr>
+    <tr>
+      <td>
+        <code>rateLimit</code></td>
+      <td>
+        <code>rateLimit(ms: int, gap: int)</code></td>
+      <td>设置SYN扫描速率限制</td></tr>
+    <tr>
+      <td>
+        <code>concurrent</code></td>
+      <td>
+        <code>concurrent(int)</code></td>
+      <td>设置SYN扫描的并发数限制</td></tr>
+  </tbody>
+</table>

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 42
 ---
 
 # 发送 HTTP 原始数据包
@@ -99,25 +99,6 @@ User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Tride
 
 `, poc.proxy("http://127.0.0.1:7890"), poc.https(true))
 die(err)
-```
-
-### `poc.Split`: 分割数据包 Header 和 Body
-
-一般来说，我们在 `poc.HTTP` 中获得的数据包是 `[]byte` 类型的，实际上在进行数据处理过程中，我们有时并不希望整体进行处理，需要单独进行处理 header 与 body。
-
-```go
-rsp, req, err := poc.HTTP(`
-GET / HTTP/1.1
-Host: www.example.com
-User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)
-
-`)
-die(err)
-
-// 分割响应数据包的 Header 和 Body 部分
-header, body = poc.Split(rsp)
-println(header)                             // 打印数据包 Header
-printf("Body MD5: %v\n", codec.Md5(body))   // 计算数据包响应的 md5
 ```
 
 ### `poc.HTTP` 动态修改数据包

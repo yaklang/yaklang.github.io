@@ -1,41 +1,25 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# [codec] 编码解码库
+# 函数库：codec - 加密与编码
 
-## 可逆编码解码
+在计算机中，编码和解码是将数据从一种形式转换为另一种形式的过程，通常用于将数据在不同的系统之间传输或存储。编码和解码的意义在于，它们使不同的系统之间可以传输和处理数据，而不会因为编码格式不同而出现问题。例如，在 Web 开发中，浏览器和服务器之间使用 HTTP 协议进行通信，通常使用 UTF-8 编码格式传输数据，以便于在不同的浏览器和服务器之间传输数据。在这种情况下，编码和解码是非常重要的，因为它们确保了数据能够被正确地传输和处理。
 
-### 不可见字符打印编码（ASCII）
-1. 编码 ASCII，不可见字符编码成 `\xNN`, 带双引号 `fn codec.EncodeASCII(var_1: string): string`
-1. 解码操作，`\xNN` 变成具体字符 `fn codec.DecodeASCII(var_1: string): (string, error)`
-1. 基本同 `codec.EncodeASCII` 的函数 `fn codec.EncodeToPrintable(var_1: string): string` ，但是只打印可见内容
+与编码解码的主要目的不同，加密与解密是保护敏感数据和信息安全的重要手段，其意义包括以下几个方面：
 
+1. 保护隐私和机密性：通过对敏感数据进行加密，只有授权人员才能访问这些数据，确保隐私和机密性的保护。这在金融、医疗等领域的信息管理中非常重要。
+2. 防止数据被篡改：通过数字签名和加密技术，可以确保数据在传输和存储过程中不被篡改，从而保护数据的完整性。这在电子商务、网络银行等领域的数据传输和处理中非常重要。
+3. 防止数据被窃听：通过加密技术，可以在数据传输过程中防止数据被未经授权的人窃听，保护数据的机密性和安全性。这在网络安全领域和军事通讯中非常重要。
+4. 认证和授权：通过数字证书和数字签名技术，可以验证数据的来源和真实性，确保数据的认证和授权，防止非法访问和恶意攻击。
 
-```go
-ret := codec.EncodeASCII("abcdefghijklmn\x99\xFf")
-println("编码为：", ret)
-res, err := codec.DecodeASCII(ret)
-die(err)
-println("解码后为: ")
-dump([]byte(res))
+在 codec 模块中，我们可以获得编解码和加解密的常见方案的各类支持。
 
-/*
-OUTPUT:
+import TOCInline from '@theme/TOCInline';
 
-编码为： "abcdefghijklmn\x99\xff"
-解码后为:
-([]uint8) (len=16 cap=16) {
- 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 99 ff  |abcdefghijklmn..|
-}
-*/
-```
+<TOCInline toc={toc} />
 
-:::danger
-注意，`EncodeASCII / DecodeASCII` 通常用于处理不可见字符，经过编码的字符串保证都是可见字符，并且带上了两边的引号！
-
-相同的，解码的时候，也需要带上引号
-:::
+## 编码解码
 
 ### Base64 编码解码
 
@@ -202,6 +186,40 @@ Hex 编码为： 6162636465666768696a3c3e3a3b7b5d7b5d7c5c245e265e2623406b6c6d6ea
 要注意，如果这个十六进制字符串需要在 mysql 中展示，记得加 `0x` 前缀喔
 :::
 
+
+### 不可见字符打印编码（ASCII）
+
+1. 编码 ASCII，不可见字符编码成 `\xNN`, 带双引号 `fn codec.EncodeASCII(var_1: string): string`
+1. 解码操作，`\xNN` 变成具体字符 `fn codec.DecodeASCII(var_1: string): (string, error)`
+1. 基本同 `codec.EncodeASCII` 的函数 `fn codec.EncodeToPrintable(var_1: string): string` ，但是只打印可见内容
+
+```go
+ret := codec.EncodeASCII("abcdefghijklmn\x99\xFf")
+println("编码为：", ret)
+res, err := codec.DecodeASCII(ret)
+die(err)
+println("解码后为: ")
+dump([]byte(res))
+
+/*
+OUTPUT:
+
+编码为： "abcdefghijklmn\x99\xff"
+解码后为:
+([]uint8) (len=16 cap=16) {
+ 00000000  61 62 63 64 65 66 67 68  69 6a 6b 6c 6d 6e 99 ff  |abcdefghijklmn..|
+}
+*/
+```
+
+:::danger
+注意，`EncodeASCII / DecodeASCII` 通常用于处理不可见字符，经过编码的字符串保证都是可见字符，并且带上了两边的引号！
+
+相同的，解码的时候，也需要带上引号
+:::
+
+## 加密与解密
+
 ### AES 加密编码
 1. `fn codec.AESCBCEncrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
 2. `fn codec.AESCBCDecrypt(key []byte, i interface{}, iv []byte): ([]byte, error)`
@@ -216,7 +234,7 @@ Hex 编码为： 6162636465666768696a3c3e3a3b7b5d7b5d7c5c245e265e2623406b6c6d6ea
 3. `fn codec.DESCBCEnc(key []byte, data []byte, iv []byte): ([]byte, error)`
 4. `fn codec.DESCBCDec(key []byte, data []byte, iv []byte): ([]byte, error)`
 
-## 不可逆编码解码
+## 不可逆 Hash 计算
 
 ### Hash 计算与编码
 
