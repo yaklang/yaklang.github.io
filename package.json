@@ -31,7 +31,7 @@
     "proton-engine": "^4.2.1",
     "raf-manager": "^0.3.0",
     "react": "^17.0.1",
-    "react-codemirror2": "^7.2.1",
+    "react-codemirror2": "^7.0.0",
     "react-dom": "^17.0.1",
     "react-lazyload": "^3.2.0",
     "react-parallax-tilt": "^1.5.36",
