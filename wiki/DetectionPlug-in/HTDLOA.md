@@ -15,7 +15,7 @@ Yakit正在努力编写~
 
 ```go
 POST /OAapp/bfapp/buffalo/workFlowService HTTP/1.1
-Host: 59.110.226.118
+Host: xx.xx.xx.xx
 Accept-Encoding: identity
 Content-Length: 103
 Accept-Language: zh-CN,zh;q=0.8

