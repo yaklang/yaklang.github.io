@@ -94,6 +94,11 @@ module.exports = {
                     href: "https://chat.yaklang.com",
                     label: "Ya! 一刻",
                 },
+		{
+                    href: "/wiki/enumeration/pass-enumration",
+                    label: "渗透测试 WIKI",
+                    position: "left",
+                },
                 {
                     position: "left",
                     to: "/cooperativePartner",
@@ -198,6 +203,16 @@ module.exports = {
                 id: "products",
                 path: "products",
                 routeBasePath: "products",
+                sidebarPath: require.resolve("./sidebarsProducts.js"),
+                // ... other options
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "wiki",
+                path: "wiki",
+                routeBasePath: "wiki",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
                 // ... other options
             },
