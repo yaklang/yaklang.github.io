@@ -1,3 +1,8 @@
+.node-version
+.go-version
+.python-version
+.py-version
+
 # Dependencies
 /node_modules
 
