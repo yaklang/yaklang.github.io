@@ -3,8 +3,19 @@
   <component name="dataSourceStorageLocal" created-in="IU-223.8214.52">
     <data-source name="default-yakit(1)" uuid="52116c15-b5a3-43bb-b7db-9defe7199b7c">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="SQLITE" exact-version="0" />
-      <auth-provider>no-auth</auth-provider>
       <schema-mapping />
+    </data-source>
+    <data-source name="yakit-profile-plugin" uuid="eccc6437-e08b-4c6d-b5aa-4e127cab1f8e">
+      <database-info product="SQLite" version="3.40.1" jdbc-version="4.2" driver-name="SQLite JDBC" driver-version="3.40.1.0" dbms="SQLITE" exact-version="3.40.1" exact-driver-version="3.40">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-provider>no-auth</auth-provider>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
     </data-source>
   </component>
 </project>
