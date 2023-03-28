@@ -19,11 +19,11 @@ vulhub靶场访问测试网站，上传一个php文件，被拦截
 
 ![](/img/products/yakit/apache-1.png)
 
-在1.php后面插入一个\x0A，成功上传
+在test.php后面插入一个\x0A，成功上传
 
 ![](/img/products/yakit/apache-2.png)
 
-访问刚才上传的/1.php%0a，发现能够成功解析
+访问刚才上传的/test.php%0A，发现能够成功解析
 
 ![](/img/products/yakit/apache-3.png)
 

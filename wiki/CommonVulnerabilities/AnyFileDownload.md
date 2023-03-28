@@ -13,7 +13,7 @@ sidebar_position: 11
 
 ![](/img/products/yakit/AnyFileDownload-1.png)
 
-拼接想要访问的文件路径，例如../../etc/passwd文件，成功读取到改文件内容
+拼接想要访问的文件路径，例如../../etc/passwd文件，成功读取到该文件内容
 
 ![](/img/products/yakit/AnyFileDownload-2.png)
 
