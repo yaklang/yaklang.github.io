@@ -6,6 +6,8 @@
 # Dependencies
 /node_modules
 
+.idea/
+
 # Production
 /build
 
