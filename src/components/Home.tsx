@@ -565,7 +565,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="guide-body-yakit-item-right">
                       <div>{exeKey}</div>
                       <div className="guide-body-yakit-item-right-size">
-                        {exeList[exeKey].size || "-"}&nbsp;MB
+                        版本:&nbsp;{version||"-"}&nbsp;({exeList[exeKey].size || "-"}&nbsp;MB)
                       </div>
                     </div>
                   </div>
