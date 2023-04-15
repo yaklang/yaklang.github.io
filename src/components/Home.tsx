@@ -541,7 +541,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                 </span>
                 <a
                   target="_blank"
-                  href="/products/manual/download_and_install"
+                  href="/products/download_and_install"
                   className="guide-body-yak-heard-tip"
                 >
                   安装教程
