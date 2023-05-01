@@ -465,7 +465,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
               />
             </div>
             <div className="guide-words-body-description">
-              为网络安全而生的专属编程语言
+              为网络安全而生的领域编程语言
             </div>
             <div className="guide-body-yak">
               <div className="guide-body-yak-heard">
