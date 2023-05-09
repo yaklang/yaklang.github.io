@@ -23,7 +23,7 @@ sidebar_position: 12
 
 漏洞修复方案
 
-禁止在用户成功登陆系统后将SessionID，token等会话标识字段返回在URL中
+禁止在用户成功登录系统后将SessionID，token等会话标识字段返回在URL中
 
 :::
 

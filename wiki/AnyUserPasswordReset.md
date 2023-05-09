@@ -100,7 +100,7 @@ sidebar_position: 6
 
 ![](/img/products/yakit/AnyUserPasswordReset-4.png)
 
-使用新密码成功登陆系统
+使用新密码成功登录系统
 
 ![](/img/products/yakit/AnyUserPasswordReset-5.png)
 

@@ -11,11 +11,11 @@ sidebar_position: 11
 **漏洞案例：**
 
 访问测试网站
-选择验证码登陆，输入一个存在的手机号15555555555，点击获取验证码
+选择验证码登录，输入一个存在的手机号15555555555，点击获取验证码
 
 ![](/img/products/yakit/Verification-code-explosion-1.png)
 
-然后随意输入验证码1111，点击登陆时开启抓包
+然后随意输入验证码1111，点击登录时开启抓包
 
 ![](/img/products/yakit/Verification-code-explosion-2.png)
 

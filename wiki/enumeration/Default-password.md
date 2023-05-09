@@ -15,8 +15,8 @@ sidebar_position: 14
 
 ![](/img/products/yakit/Default-password-1.png)
 
-成功登陆
+成功登录
 
 ![](/img/products/yakit/Default-password-2.png)
 
-若使用默认密码登陆失败后可尝试进行爆破
+若使用默认密码登录失败后可尝试进行爆破
