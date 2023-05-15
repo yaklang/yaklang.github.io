@@ -24,7 +24,7 @@ sidebar_position: 10
 |`doubleurlenc`|`doubleurlencode, durlenc, durl`|双重URL编码，{{doubleurlenc(abc)}} => %2561%2562%2563|
 |`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 `{{file(/tmp/1.txt&#124;/tmp/test.txt)}}`|
 |`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 `{{file:dir(/tmp/test&#124;/tmp/1)}}`|
-|`file:line`|`fileline, file:lines`|解析文件名（可以用 `&#124;` 分割），把文件中的内容按行反回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 `{{file:line(/tmp/test.txt&#124;/tmp/1.txt)}}`|
+|`file:line`|`fileline, file:lines`|解析文件名（可以用 `&#124;` 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 `{{file:line(/tmp/test.txt&#124;/tmp/1.txt)}}`|
 |`fuzz:password`|`fuzz:pass`|根据所输入的操作随机生成可能的密码（默认为 root/admin 生成）|
 |`fuzz:username`|`fuzz:user`|根据所输入的操作随机生成可能的用户名（默认为 root/admin 生成）|
 |`gif`|  |生成 gif 文件头|
@@ -182,7 +182,7 @@ dump(res)
 
 ### 【基础标签】``{{array(str|str)}}``设置一个数组
 
-`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
+`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符号对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
 
 #### 使用案例
 

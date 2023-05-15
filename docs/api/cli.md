@@ -674,7 +674,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力全的补充 url |
+| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力的补充 url |
 | v2 | `...cli.setHelp|cli.setDefault` |   |
 
 

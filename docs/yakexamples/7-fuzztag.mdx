@@ -99,7 +99,7 @@ firstResult = fuzz.Strings(raw)[0]
 |`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 <code>{{int(1-5&#124;4)}}</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
 |`randint`|`ri, rand:int, randi`|随机生成整数，定义为 {{randint(10)}} 生成0-10中任意一个随机数，{{randint(1,50)}} 生成 1-50 任意一个随机数，{{randint(1,50,10)}} 生成 1-50 任意一个随机数，重复 10 次|
 |`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 {{randstr(10)}} 生成长度为 10 的随机字符串，{{randstr(1,30)}} 生成长度为 1-30 为随机字符串，{{randstr(1,30,10)}} 生成 10 个随机字符串，长度为 1-30|
-|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code>&#124;</code> 分割），把文件中的内容按行反回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>{{file:line(/tmp/test.txt&#124;/tmp/1.txt)}}</code>|
+|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code>&#124;</code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>{{file:line(/tmp/test.txt&#124;/tmp/1.txt)}}</code>|
 |`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>{{file:dir(/tmp/test&#124;/tmp/1)}}</code>|
 |`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>{{file(/tmp/1.txt&#124;/tmp/test.txt)}}</code>|
 |`codec`|  |调用 Yakit Codec 插件|
@@ -234,7 +234,7 @@ dump(res)
 
 ### 【基础标签】``{{array(str|str)}}``设置一个数组
 
-`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
+`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符号对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
 
 #### 使用案例
 

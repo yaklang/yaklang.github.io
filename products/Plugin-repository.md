@@ -59,7 +59,7 @@ Yakit提供了一整套插件的使用页面，无需用户思考如何编写“
 
 ![](/img/products/yakit/Plugin-repository-3.png)
 
-登陆之后然后点击`本地`-`新建`即可创建插件
+登录之后然后点击`本地`-`新建`即可创建插件
 
 ![](/img/products/yakit/Plugin-repository-4.png)
 

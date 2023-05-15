@@ -10,7 +10,7 @@ sidebar_position: 9
 
 **漏洞案例：**
 
-访问测试网站，页面为用友NC控制台，用友NC控制台存在一个可通过修改返回包来绕过验证，登陆administrator用户的漏洞。随意输入密码，点击OK时开启抓包
+访问测试网站，页面为用友NC控制台，用友NC控制台存在一个可通过修改返回包来绕过验证，登录administrator用户的漏洞。随意输入密码，点击OK时开启抓包
 
 ![](/img/products/yakit/Client-Authentication-Bypass-1.png)
 
@@ -20,6 +20,6 @@ sidebar_position: 9
 ![](/img/products/yakit/Client-Authentication-Bypass-3.png)
 ![](/img/products/yakit/Client-Authentication-Bypass-4.png)
 
-即可绕过验证，成功登陆administrator用户。
+即可绕过验证，成功登录administrator用户。
 
 ![](/img/products/yakit/Client-Authentication-Bypass-5.png)

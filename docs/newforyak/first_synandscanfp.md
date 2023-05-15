@@ -127,7 +127,7 @@ for fp := range fpResults {
 ```
 
 我们使用 [`servicescan.ScanFromSynResult`](/docs/api/servicescan#servicescanscanfromsynresult) 只修改了非常少量的代码，就可以把 `synscan`
-和 `servicescan` 串起来了。执行的结果，由大家自己取操作吧！
+和 `servicescan` 串起来了。执行的结果，由大家自己去操作吧！
 
 ## 并非银弹
 

@@ -39,7 +39,7 @@ base64基本格式  base64(payload)
 
 **漏洞案例：**
 
-访问测试网站，输入账号和密码点击登陆开启抓包
+访问测试网站，输入账号和密码点击登录开启抓包
 
 ![](/img/products/yakit/Encryption-5.png)
 

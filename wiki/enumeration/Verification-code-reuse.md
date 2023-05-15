@@ -11,11 +11,11 @@ sidebar_position: 11
 **漏洞案例：**
 
 访问测试网站
-登陆框存在验证码
+登录框存在验证码
 
 ![](/img/products/yakit/Verification-code-reuse-1.png)
 
-输入账号，密码和验证码后点击登陆开启抓包，开启手动劫持，不丢弃当前请求
+输入账号，密码和验证码后点击登录开启抓包，开启手动劫持，不丢弃当前请求
 
 ![](/img/products/yakit/Verification-code-reuse-2.png)
 

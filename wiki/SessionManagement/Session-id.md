@@ -14,15 +14,15 @@ sidebar_position: 9
 
 ![](/img/products/yakit/session-id-1.png)
 
-登陆前抓包查看当前Cookie字段信息：Cookie: JSESSIONID=E13805470813731028B67D2741B941A2
+登录前抓包查看当前Cookie字段信息：Cookie: JSESSIONID=E13805470813731028B67D2741B941A2
 
 ![](/img/products/yakit/session-id-2.png)
 
-输入测试账号进行登陆
+输入测试账号进行登录
 
 ![](/img/products/yakit/session-id-3.png)
 
-登陆后抓包查看当前Cookie字段信息通过对比与之前保存的cookie一致
+登录后抓包查看当前Cookie字段信息通过对比与之前保存的cookie一致
 
 ![](/img/products/yakit/session-id-4.png)
 

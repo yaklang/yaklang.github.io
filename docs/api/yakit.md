@@ -166,7 +166,7 @@
  
 ### yakit.Error
 
-在 Yakit 的 UI 中输出输出 Error 级别的信息
+在 Yakit 的 UI 中输出 Error 级别的信息
 
 #### 详细描述
 
