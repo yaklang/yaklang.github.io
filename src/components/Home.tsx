@@ -465,7 +465,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
               />
             </div>
             <div className="guide-words-body-description">
-              为网络安全而生的专属编程语言
+              为网络安全而生的领域编程语言
             </div>
             <div className="guide-body-yak">
               <div className="guide-body-yak-heard">
@@ -541,7 +541,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                 </span>
                 <a
                   target="_blank"
-                  href="/products/manual/download_and_install"
+                  href="/products/download_and_install"
                   className="guide-body-yak-heard-tip"
                 >
                   安装教程
@@ -565,7 +565,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="guide-body-yakit-item-right">
                       <div>{exeKey}</div>
                       <div className="guide-body-yakit-item-right-size">
-                        {exeList[exeKey].size || "-"}&nbsp;MB
+                        版本:&nbsp;{version||"-"}&nbsp;({exeList[exeKey].size || "-"}&nbsp;MB)
                       </div>
                     </div>
                   </div>
