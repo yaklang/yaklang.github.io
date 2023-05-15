@@ -5,7 +5,7 @@
 |:------|:--------|
  | [crawler.RequestsFromFlow](#crawlerrequestsfromflow) | 从一个请求中提取可能可以用于扫描的额外请求 |
  | [crawler.Start](#crawlerstart) |  |
- | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登陆功能 |
+ | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登录功能 |
  | [crawler.basicAuth](#crawlerbasicauth) | 设置爬虫的基础认证 |
  | [crawler.bodySize](#crawlerbodysize) | 想要设置每一个 body 最大获取多少页面大小，bytes 的大小，默认为 1024 * 1024 * 10 |
  | [crawler.concurrent](#crawlerconcurrent) | 设置爬虫并发请求数 |
@@ -108,7 +108,7 @@
  
 ### crawler.autoLogin
 
-自动登录功能，支持 DVWA 的标准登陆功能
+自动登录功能，支持 DVWA 的标准登录功能
 
 #### 详细描述
 

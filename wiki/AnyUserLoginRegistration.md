@@ -66,7 +66,7 @@ sidebar_position: 5
 
 ![](/img/products/yakit/AnyUserLoginRegistration-4.png)
 
-使用新密码成功登陆系统
+使用新密码成功登录系统
 
 ![](/img/products/yakit/AnyUserLoginRegistration-5.png)
 

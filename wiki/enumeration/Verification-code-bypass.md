@@ -14,11 +14,11 @@ sidebar_position: 10
 
 下面通过某src实战经历介绍一个验证码绕过
 访问测试网站
-发现登陆页面存在验证码
+发现登录页面存在验证码
 
 ![](/img/products/yakit/Verification-code-bypass-1.png)
 
-随意输入用户名和密码，然后输入验证码点击登陆进行抓包
+随意输入用户名和密码，然后输入验证码点击登录进行抓包
 发现该网站第一步首先验证验证码是否正确
 
 ![](/img/products/yakit/Verification-code-bypass-2.png)

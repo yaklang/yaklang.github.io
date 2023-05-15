@@ -298,7 +298,7 @@ DBMS_ERRORS = {
 2. P2: `class.module.classLoader.DefaultAssertionStatus=False`
 3. A: `class.module.classLoader.DefaultAssertionStatus=123`
 
-P1 / P2 都是不应该有错误的请求，A 是应该报错的请求。那么如果有漏洞的话，应该符合我们我们实验的流程。
+P1 / P2 都是不应该有错误的请求，A 是应该报错的请求。那么如果有漏洞的话，应该符合我们实验的流程。
 P1 和 P2 极其相似，A 与 P1 和 P2 都不相似。
 
 当然，P1 / P2 如果可以还能增加另一个对照组，原请求啥也不做的 “结果”（P3）以更好区分。

@@ -143,7 +143,7 @@ assert "abc1 \xff".IsPrintable() == false
 |Ljust(width)|返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串|
 |Rjust(width)|返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串|
 |Count(n)|返回 str 在 string 里面出现的次数|
-|Find(substr) / IndexOf(substr)|检测 str 是否包含在字符串中，并返回返回开始的索引值，如没找到则返回-1|
+|Find(substr) / IndexOf(substr)|检测 str 是否包含在字符串中，并返回开始的索引值，如没找到则返回-1|
 |Rfind(substr) / LastIndexOf(substr)|类似于 find()函数，不过是从右边开始查找|
 |Lower()|转换字符串中所有大写字符为小写|
 |Upper()|转换字符串中的小写字母为大写|

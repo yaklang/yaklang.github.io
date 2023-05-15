@@ -14,7 +14,7 @@ Session 是应用系统对浏览器客户端身份认证的属性标识，在用
 
 ![](/img/products/yakit/LogoffFunction-1.png)
 
-登陆后点击我的账号，开启抓包，把返回当前账号信息的数据包放到Web Fuzzer中
+登录后点击我的账号，开启抓包，把返回当前账号信息的数据包放到Web Fuzzer中
 
 ![](/img/products/yakit/LogoffFunction-2.png)
 ![](/img/products/yakit/LogoffFunction-3.png)

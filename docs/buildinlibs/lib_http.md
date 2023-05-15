@@ -54,7 +54,7 @@ HTTP 库包含三个可用的 http 子库，分别是
 1. `fn httpserver.handler(var_1: func(http.ResponseWriter, *http.Request)): yaklib._httpServerConfigOpt` 设置一个 HTTP
    Handler 用来处理 Request 和返回响应结果
 1. `fn httpserver.tlsCertAndKey(var_1: interface {}, var_2: interface {}, vars: ...interface {}): yaklib._httpServerConfigOpt`
-   设置 HTTPS 整数
+   设置 HTTPS 证书
 
 ### 配合 `fuzz` 使用的 `httpool`
 
