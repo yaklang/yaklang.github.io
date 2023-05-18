@@ -69,7 +69,7 @@ YAK_BRIDGE_SECRET              = "YAK_BRIDGE_SECRET"
 
 #yak bridge --secret od686 
 os.Setenv(YAK_BRIDGE_SECRET/*type: string*/,"od686" /*type: string*/)
-os.Setenv(YAK_BRIDGE_ADDR, "123.57.24.217:64333"/*type: string*/)
+os.Setenv(YAK_BRIDGE_ADDR, "***.**.**.***:64333"/*type: string*/)
 
 #通过 risk 获取到 token 和ip端口
 log.setLevel("info")
@@ -88,7 +88,7 @@ log.info("token: %s",token/*type ...any*/)
 运行结果如下
 
 ```text
-[INFO] 2022-03-03 16:32:19 +0800 [yaki-code-3541846741] host: 123.57.24.217:56579
+[INFO] 2022-03-03 16:32:19 +0800 [yaki-code-3541846741] host: **.**.**.**:56579
 [INFO] 2022-03-03 16:32:19 +0800 [yaki-code-3541846741] token: qOeZvvgr
 ```
 
@@ -106,14 +106,14 @@ dump(risk.CheckRandomTriggerByToken("YcEhgllg"))
 }
 ```
 
-手动访问 http://123.57.24.217:56579/
+手动访问 http://**.**.**.**:56579/
 ![img.png](../../static/img/yakexample/risk_access_http.png)
 
 ```text
 //再次执行 dump(risk.CheckRandomTriggerByToken("YcEhgllg"))
 结果如下
 ([]interface {}) (len=2 cap=2) {
- (*tpb.RandomPortTriggerEvent)(0xc0001b0380)(RemoteAddr:"111.198.29.182:57262" RemoteIP:"111.198.29.182" RemotePort:57262 LocalPort:56579 LocalPortCachedHistoryConnectionCount:5 TriggerTimestamp:1646297435 Timestamp:1646297464),
+ (*tpb.RandomPortTriggerEvent)(0xc0001b0380)(RemoteAddr:"**.**.**.**:57262" RemoteIP:"**.**.**.**" RemotePort:57262 LocalPort:56579 LocalPortCachedHistoryConnectionCount:5 TriggerTimestamp:1646297435 Timestamp:1646297464),
  (interface {}) <nil>
 }
 ```
