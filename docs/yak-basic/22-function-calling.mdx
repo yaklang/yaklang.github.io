@@ -116,7 +116,7 @@ abc(2) -> r1: [2 3 4]
 // 处理 error，但是 error 不重要，打印到屏幕即可
 res, err = servicescan.Scan("127.0.0.1", "443,80")
 if err != nil {
-    log.error(err)
+    die(err)
 }
 
 // 简化上述代码后
