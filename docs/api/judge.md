@@ -26,7 +26,7 @@
 
 #### 定义：
 
-`func judge.CompareHTTPResponse(v1: *http.Response, v2: *http.Response) return (r0: float64)`
+`CompareHTTPResponse(rsp1 *http.Response, rsp2 *http.Response) float64`
 
 
 #### 参数
@@ -58,7 +58,7 @@
 
 #### 定义：
 
-`func judge.CompareRaw(v1: bytes, v2: bytes) return (r0: float64)`
+`CompareRaw(rsp1 []byte, rsp2 []byte) float64`
 
 
 #### 参数
@@ -90,7 +90,7 @@
 
 #### 定义：
 
-`func judge.NewDiscriminator(v1: bytes) return (r0: *comparer.Discriminator)`
+`NewDiscriminator([]uint8) *comparer.Discriminator`
 
 
 #### 参数

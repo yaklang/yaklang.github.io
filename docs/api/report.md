@@ -24,7 +24,7 @@
 
 #### 定义：
 
-`func report.New() return (r0: *yakit.Report)`
+`New() *yakit.Report`
 
  
 

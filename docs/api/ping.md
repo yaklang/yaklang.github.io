@@ -35,7 +35,7 @@
 
 #### 定义：
 
-`func ping.Ping(target: string, opts ...yaklib._pingConfigOpt) return (r0: *pingutil.PingResult)`
+`Ping(target string, opts ..._pingConfigOpt) *pingutil.PingResult`
 
 
 #### 参数
@@ -67,7 +67,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.Scan(v1: string, v2 ...yaklib._pingConfigOpt) return (r0: chan *pingutil.PingResult)`
+`Scan(target string, opts ..._pingConfigOpt) chan *pingutil.PingResult`
 
 
 #### 参数
@@ -99,7 +99,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.concurrent(v1: int) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`concurrent(int) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -130,7 +130,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.dnsServers(v1 ...string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`dnsServers(...string) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -161,7 +161,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.dnsTimeout(v1: float64) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`dnsTimeout(float64) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -192,7 +192,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.excludeHosts(v1: string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`excludeHosts(string) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -223,7 +223,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.onResult(v1: func (v1: *pingutil.PingResult) ) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`onResult(func(*pingutil.PingResult)) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -254,7 +254,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.proxy(v1 ...string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`proxy(...string) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -285,7 +285,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.scanCClass(v1: bool) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`scanCClass(bool) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -316,7 +316,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.skip(v1: bool) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`skip(bool) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -347,7 +347,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.tcpPingPorts(v1: string) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`tcpPingPorts(string) yaklib._pingConfigOpt`
 
 
 #### 参数
@@ -378,7 +378,7 @@ ping 扫描
 
 #### 定义：
 
-`func ping.timeout(seconds: float64) return (r0: func _pingConfigOpt(v1: *yaklib._pingConfig) )`
+`timeout(float64) yaklib._pingConfigOpt`
 
 
 #### 参数

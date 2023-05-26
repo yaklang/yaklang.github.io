@@ -3,12 +3,16 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [crawlerx.PageScreenShot](#crawlerxpagescreenshot) |  |
  | [crawlerx.StartCrawler](#crawlerxstartcrawler) |  |
+ | [crawlerx.StartCrawlerV2](#crawlerxstartcrawlerv2) |  |
  | [crawlerx.blackList](#crawlerxblacklist) |  |
  | [crawlerx.checkDanger](#crawlerxcheckdanger) |  |
+ | [crawlerx.chromeWS](#crawlerxchromews) |  |
  | [crawlerx.concurrent](#crawlerxconcurrent) |  |
  | [crawlerx.cookie](#crawlerxcookie) |  |
  | [crawlerx.cookies](#crawlerxcookies) |  |
+ | [crawlerx.extraHeaders](#crawlerxextraheaders) |  |
  | [crawlerx.formFill](#crawlerxformfill) |  |
  | [crawlerx.fullTimeout](#crawlerxfulltimeout) |  |
  | [crawlerx.header](#crawlerxheader) |  |
@@ -16,6 +20,7 @@
  | [crawlerx.maxDepth](#crawlerxmaxdepth) |  |
  | [crawlerx.maxUrl](#crawlerxmaxurl) |  |
  | [crawlerx.proxy](#crawlerxproxy) |  |
+ | [crawlerx.remote](#crawlerxremote) |  |
  | [crawlerx.scanRange](#crawlerxscanrange) |  |
  | [crawlerx.scanRepeat](#crawlerxscanrepeat) |  |
  | [crawlerx.tags](#crawlerxtags) |  |
@@ -43,6 +48,39 @@
 
 ## 函数定义
 
+### crawlerx.PageScreenShot
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func crawlerx.PageScreenShot(v1: string, v2 ...core.ConfigOpt) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...core.ConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
 ### crawlerx.StartCrawler
 
 
@@ -53,7 +91,7 @@
 
 #### 定义：
 
-`func crawlerx.StartCrawler(v1: string, v2 ...core.ConfigOpt) return (r0: chan core.ReqInfo, r1: error)`
+`StartCrawler(url string, opts ...core.ConfigOpt) (chan core.ReqInfo, error)`
 
 
 #### 参数
@@ -76,6 +114,38 @@
 
 
  
+### crawlerx.StartCrawlerV2
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`StartCrawlerV2(url string, opts ...core.ConfigOpt) error`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...core.ConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### crawlerx.blackList
 
 
@@ -86,7 +156,7 @@
 
 #### 定义：
 
-`func crawlerx.blackList(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`blackList(string) core.ConfigOpt`
 
 
 #### 参数
@@ -117,9 +187,40 @@
 
 #### 定义：
 
-`func crawlerx.checkDanger() return (r0: func ConfigOpt(v1: *core.Config) )`
+`checkDanger() core.ConfigOpt`
 
  
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+
+
+ 
+### crawlerx.chromeWS
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`chromeWS(string) core.ConfigOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
 
 
 #### 返回值
@@ -140,7 +241,7 @@
 
 #### 定义：
 
-`func crawlerx.concurrent(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`concurrent(int) core.ConfigOpt`
 
 
 #### 参数
@@ -171,7 +272,7 @@
 
 #### 定义：
 
-`func crawlerx.cookie(v1: string, v2: string, v3: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`cookie(string, string, string) core.ConfigOpt`
 
 
 #### 参数
@@ -204,7 +305,7 @@
 
 #### 定义：
 
-`func crawlerx.cookies(v1: string, v2: map[string]string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`cookies(string, map[string]string) core.ConfigOpt`
 
 
 #### 参数
@@ -213,6 +314,37 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `map[string]string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+
+
+ 
+### crawlerx.extraHeaders
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`extraHeaders(...string) core.ConfigOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
 
 
 
@@ -236,7 +368,7 @@
 
 #### 定义：
 
-`func crawlerx.formFill(v1: string, v2: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`formFill(string, string) core.ConfigOpt`
 
 
 #### 参数
@@ -268,7 +400,7 @@
 
 #### 定义：
 
-`func crawlerx.fullTimeout(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`fullTimeout(int) core.ConfigOpt`
 
 
 #### 参数
@@ -299,7 +431,7 @@
 
 #### 定义：
 
-`func crawlerx.header(v1: string, v2: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`header(string, string) core.ConfigOpt`
 
 
 #### 参数
@@ -331,7 +463,7 @@
 
 #### 定义：
 
-`func crawlerx.headers(v1: map[string]string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`headers(map[string]string) core.ConfigOpt`
 
 
 #### 参数
@@ -362,7 +494,7 @@
 
 #### 定义：
 
-`func crawlerx.maxDepth(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`maxDepth(int) core.ConfigOpt`
 
 
 #### 参数
@@ -393,7 +525,7 @@
 
 #### 定义：
 
-`func crawlerx.maxUrl(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`maxUrl(int) core.ConfigOpt`
 
 
 #### 参数
@@ -424,7 +556,7 @@
 
 #### 定义：
 
-`func crawlerx.proxy(v1: string, v2 ...string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`proxy(string, ...string) core.ConfigOpt`
 
 
 #### 参数
@@ -433,6 +565,37 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+
+
+ 
+### crawlerx.remote
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`remote(bool) core.ConfigOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 
@@ -456,7 +619,7 @@
 
 #### 定义：
 
-`func crawlerx.scanRange(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`scanRange(int) core.ConfigOpt`
 
 
 #### 参数
@@ -487,7 +650,7 @@
 
 #### 定义：
 
-`func crawlerx.scanRepeat(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`scanRepeat(int) core.ConfigOpt`
 
 
 #### 参数
@@ -518,7 +681,7 @@
 
 #### 定义：
 
-`func crawlerx.tags(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`tags(string) core.ConfigOpt`
 
 
 #### 参数
@@ -549,7 +712,7 @@
 
 #### 定义：
 
-`func crawlerx.timeout(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`timeout(int) core.ConfigOpt`
 
 
 #### 参数
@@ -580,7 +743,7 @@
 
 #### 定义：
 
-`func crawlerx.whiteList(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`whiteList(string) core.ConfigOpt`
 
 
 #### 参数

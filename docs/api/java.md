@@ -54,7 +54,7 @@
 
 #### 定义：
 
-`func java.FromJson(bytes: bytes) return (tcObjects: []yserx.JavaSerializable, r1: error)`
+`FromJson([]uint8) ([]yserx.JavaSerializable, error)`
 
 
 #### 参数
@@ -86,7 +86,7 @@
 
 #### 定义：
 
-`func java.MarshalJavaObjects(v1 ...yserx.JavaSerializable) return (r0: bytes)`
+`MarshalJavaObjects(res ...JavaSerializable) []byte`
 
 
 #### 参数
@@ -117,7 +117,7 @@
 
 #### 定义：
 
-`func java.NewJavaArray(classDesc: *yserx.JavaClassDesc, fields ...*yserx.JavaFieldValue) return (TC_ARRAY: *yserx.JavaArray)`
+`NewJavaArray(*yserx.JavaClassDesc, ...*yserx.JavaFieldValue) *yserx.JavaArray`
 
 
 #### 参数
@@ -149,7 +149,7 @@
 
 #### 定义：
 
-`func java.NewJavaBlockDataBytes(data: bytes) return (TC_BLOCKDATA: *yserx.JavaBlockData)`
+`NewJavaBlockDataBytes([]uint8) *yserx.JavaBlockData`
 
 
 #### 参数
@@ -180,7 +180,7 @@
 
 #### 定义：
 
-`func java.NewJavaClass(tcClassDesc: *yserx.JavaClassDesc) return (TC_CLASS: *yserx.JavaClass)`
+`NewJavaClass(*yserx.JavaClassDesc) *yserx.JavaClass`
 
 
 #### 参数
@@ -211,7 +211,7 @@
 
 #### 定义：
 
-`func java.NewJavaClassData(fields: []yserx.JavaSerializable, blockdatas: []yserx.JavaSerializable) return (X_CLASSDATA: *yserx.JavaClassData)`
+`NewJavaClassData([]yserx.JavaSerializable, []yserx.JavaSerializable) *yserx.JavaClassData`
 
 
 #### 参数
@@ -243,7 +243,7 @@
 
 #### 定义：
 
-`func java.NewJavaClassDesc(className: string, serialId: bytes, flag: byte, X_FIELDS: *yserx.JavaClassFields, annotations: []yserx.JavaSerializable, superClass: *yserx.JavaClassDetails) return (TC_CLASSDESC: *yserx.JavaClassDesc)`
+`NewJavaClassDesc(string, []uint8, uint8, *yserx.JavaClassFields, []yserx.JavaSerializable, *yserx.JavaClassDetails) *yserx.JavaClassDesc`
 
 
 #### 参数
@@ -279,7 +279,7 @@
 
 #### 定义：
 
-`func java.NewJavaClassDetails(className: string, serialId: bytes, flag: byte, fields: *yserx.JavaClassFields, annotations: []yserx.JavaSerializable, superClass: *yserx.JavaClassDetails) return (X_CLASSDETAILS: *yserx.JavaClassDetails)`
+`NewJavaClassDetails(string, []uint8, uint8, *yserx.JavaClassFields, []yserx.JavaSerializable, *yserx.JavaClassDetails) *yserx.JavaClassDetails`
 
 
 #### 参数
@@ -315,7 +315,7 @@
 
 #### 定义：
 
-`func java.NewJavaClassField(fieldName: string, fieldType: byte, fieldObject: yserx.JavaSerializable) return (r0: *yserx.JavaClassField)`
+`NewJavaClassField(string, uint8, yserx.JavaSerializable) *yserx.JavaClassField`
 
 
 #### 参数
@@ -348,7 +348,7 @@
 
 #### 定义：
 
-`func java.NewJavaClassFields(fields ...*yserx.JavaClassField) return (r0: *yserx.JavaClassFields)`
+`NewJavaClassFields(...*yserx.JavaClassField) *yserx.JavaClassFields`
 
 
 #### 参数
@@ -379,7 +379,7 @@
 
 #### 定义：
 
-`func java.NewJavaEndBlockData() return (r0: *yserx.JavaEndBlockData)`
+`NewJavaEndBlockData() *yserx.JavaEndBlockData`
 
  
 
@@ -402,7 +402,7 @@
 
 #### 定义：
 
-`func java.NewJavaEnum(desc: *yserx.JavaClassDesc, constantName: *yserx.JavaString) return (TC_ENUM: *yserx.JavaEnumDesc)`
+`NewJavaEnum(*yserx.JavaClassDesc, *yserx.JavaString) *yserx.JavaEnumDesc`
 
 
 #### 参数
@@ -434,7 +434,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldArrayValue(element: yserx.JavaSerializable) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldArrayValue(yserx.JavaSerializable) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -465,7 +465,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldBoolValue(result: bool) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldBoolValue(bool) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -496,7 +496,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldByteValue(data: byte) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldByteValue(uint8) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -527,7 +527,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldCharValue(data: int) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldCharValue(int) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -558,7 +558,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldDoubleValue(data: float64) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldDoubleValue(float64) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -589,7 +589,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldFloatValue(data: float32) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldFloatValue(float32) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -620,7 +620,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldIntValue(data: uint64) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldIntValue(uint64) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -651,7 +651,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldLongValue(data: uint64) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldLongValue(uint64) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -682,7 +682,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldObjectValue(obj: yserx.JavaSerializable) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldObjectValue(yserx.JavaSerializable) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -713,7 +713,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldShortValue(data: int) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldShortValue(int) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -744,7 +744,7 @@
 
 #### 定义：
 
-`func java.NewJavaFieldValue(typeFlag: byte, raw: bytes) return (r0: *yserx.JavaFieldValue)`
+`NewJavaFieldValue(uint8, []uint8) *yserx.JavaFieldValue`
 
 
 #### 参数
@@ -776,7 +776,7 @@
 
 #### 定义：
 
-`func java.NewJavaLongString(data: string) return (r0: *yserx.JavaString)`
+`NewJavaLongString(string) *yserx.JavaString`
 
 
 #### 参数
@@ -807,7 +807,7 @@
 
 #### 定义：
 
-`func java.NewJavaNull() return (r0: *yserx.JavaNull)`
+`NewJavaNull() *yserx.JavaNull`
 
  
 
@@ -830,7 +830,7 @@
 
 #### 定义：
 
-`func java.NewJavaObject(desc: *yserx.JavaClassDesc, classDataArr ...*yserx.JavaClassData) return (TC_OBJECT: *yserx.JavaObject)`
+`NewJavaObject(*yserx.JavaClassDesc, ...*yserx.JavaClassData) *yserx.JavaObject`
 
 
 #### 参数
@@ -862,7 +862,7 @@
 
 #### 定义：
 
-`func java.NewJavaReference(handle: uint64) return (r0: *yserx.JavaReference)`
+`NewJavaReference(uint64) *yserx.JavaReference`
 
 
 #### 参数
@@ -893,7 +893,7 @@
 
 #### 定义：
 
-`func java.NewJavaString(data: string) return (r0: *yserx.JavaString)`
+`NewJavaString(string) *yserx.JavaString`
 
 
 #### 参数
@@ -924,7 +924,7 @@
 
 #### 定义：
 
-`func java.ParseHexJavaObjectStream(hexStream: string) return (objs: []yserx.JavaSerializable, r1: error)`
+`ParseHexJavaObjectStream(string) ([]yserx.JavaSerializable, error)`
 
 
 #### 参数
@@ -956,7 +956,7 @@
 
 #### 定义：
 
-`func java.ParseJavaObjectStream(raw: bytes) return (obj: []yserx.JavaSerializable, r1: error)`
+`ParseJavaObjectStream([]uint8) ([]yserx.JavaSerializable, error)`
 
 
 #### 参数
@@ -988,7 +988,7 @@
 
 #### 定义：
 
-`func java.ToJson(v1: any) return (r0: bytes, r1: error)`
+`ToJson(i any) ([]byte, error)`
 
 
 #### 参数

@@ -36,7 +36,7 @@
 
 #### 定义：
 
-`func tls.DecryptWithPkcs1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+`DecryptWithPkcs1v15(pemPriBytes []byte, data any) ([]byte, error)`
 
 
 #### 参数
@@ -69,7 +69,7 @@
 
 #### 定义：
 
-`func tls.EncryptWithPkcs1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+`EncryptWithPkcs1v15(pemBytes []byte, data any) ([]byte, error)`
 
 
 #### 参数
@@ -102,7 +102,7 @@
 
 #### 定义：
 
-`func tls.GenerateRSA1024KeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`GenerateRSA1024KeyPair() ([]uint8, []uint8, error)`
 
  
 
@@ -127,7 +127,7 @@
 
 #### 定义：
 
-`func tls.GenerateRSA2048KeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`GenerateRSA2048KeyPair() ([]uint8, []uint8, error)`
 
  
 
@@ -152,7 +152,7 @@
 
 #### 定义：
 
-`func tls.GenerateRSA4096KeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`GenerateRSA4096KeyPair() ([]uint8, []uint8, error)`
 
  
 
@@ -177,7 +177,7 @@
 
 #### 定义：
 
-`func tls.GenerateRSAKeyPair(v1: int) return (r0: bytes, r1: bytes, r2: error)`
+`GenerateRSAKeyPair(bitSize int) ([]byte, []byte, error)`
 
 
 #### 参数
@@ -210,7 +210,7 @@
 
 #### 定义：
 
-`func tls.GenerateRootCA(commonName: string) return (cert: bytes, privateKey: bytes, r2: error)`
+`GenerateRootCA(string) ([]uint8, []uint8, error)`
 
 
 #### 参数
@@ -243,7 +243,7 @@
 
 #### 定义：
 
-`func tls.GenerateSM2KeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`GenerateSM2KeyPair() ([]byte, []byte, error)`
 
  
 
@@ -268,7 +268,7 @@
 
 #### 定义：
 
-`func tls.Inspect(v1: string) return (r0: []*tlsutils.TLSInspectResult, r1: error)`
+`Inspect(string) ([]*tlsutils.TLSInspectResult, error)`
 
 
 #### 参数
@@ -300,7 +300,7 @@
 
 #### 定义：
 
-`func tls.SignClientCertAndKey(caCert: bytes, pKey: bytes) return (clientCert: bytes, clientKey: bytes, r2: error)`
+`SignClientCertAndKey([]uint8, []uint8) ([]uint8, []uint8, error)`
 
 
 #### 参数
@@ -334,7 +334,7 @@
 
 #### 定义：
 
-`func tls.SignServerCertAndKey(caCert: bytes, caKey: bytes) return (serverCert: bytes, serverKey: bytes, r2: error)`
+`SignServerCertAndKey([]uint8, []uint8) ([]uint8, []uint8, error)`
 
 
 #### 参数
@@ -368,7 +368,7 @@
 
 #### 定义：
 
-`func tls.SignX509ClientCertAndKey(caCert: bytes, caKey: bytes) return (clientCert: bytes, clientKey: bytes, r2: error)`
+`SignX509ClientCertAndKey(ca, key []byte) ([]byte, []byte, error)`
 
 
 #### 参数
@@ -402,7 +402,7 @@
 
 #### 定义：
 
-`func tls.SignX509ServerCertAndKey(caCert: bytes, caKey: bytes) return (cert: bytes, key: bytes, r2: error)`
+`SignX509ServerCertAndKey(ca []byte, key []byte) (cert []byte, sKey []byte, _ error)`
 
 
 #### 参数

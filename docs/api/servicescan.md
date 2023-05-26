@@ -45,7 +45,7 @@
 
 #### 定义：
 
-`func servicescan.Scan(hosts: string, ports: string, params ...opt) return (resultChannel: chan *fp.MatchResult, r1: error)`
+`Scan(target string, port string, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)`
 
 
 #### 参数
@@ -79,7 +79,7 @@
 
 #### 定义：
 
-`func servicescan.ScanFromPing(v1: chan *pingutil.PingResult, v2: string, v3 ...fp.ConfigOption) return (r0: chan *fp.MatchResult, r1: error)`
+`ScanFromPing(res chan *pingutil.PingResult, ports string, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)`
 
 
 #### 参数
@@ -113,7 +113,7 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSpaceEngine(chanFromSpacengine: any, params ...opt) return (resultChan: chan *fp.MatchResult, r1: error)`
+`ScanFromSpaceEngine(res any, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)`
 
 
 #### 参数
@@ -146,7 +146,7 @@
 
 #### 定义：
 
-`func servicescan.ScanFromSynResult(chanForSynScan: any, params ...opt) return (resultChan: chan *fp.MatchResult, r1: error)`
+`ScanFromSynResult(res any, opts ...fp.ConfigOption) (chan *fp.MatchResult, error)`
 
 
 #### 参数
@@ -179,7 +179,7 @@
 
 #### 定义：
 
-`func servicescan.ScanOne(host: string, port: int, params ...opt) return (resultChan: *fp.MatchResult, r1: error)`
+`ScanOne(target string, port int, opts ...fp.ConfigOption) (*fp.MatchResult, error)`
 
 
 #### 参数
@@ -213,7 +213,7 @@
 
 #### 定义：
 
-`func servicescan.active(isActive: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+`active(bool) fp.ConfigOption`
 
 
 #### 参数
@@ -244,7 +244,7 @@
 
 #### 定义：
 
-`func servicescan.all() return (scanAll: func ConfigOption(v1: *fp.Config) )`
+`all() fp.ConfigOption`
 
  
 
@@ -267,7 +267,7 @@
 
 #### 定义：
 
-`func servicescan.cache(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+`cache(bool) fp.ConfigOption`
 
 
 #### 参数
@@ -298,7 +298,7 @@
 
 #### 定义：
 
-`func servicescan.concurrent(concurrentSize: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`concurrent(int) fp.ConfigOption`
 
 
 #### 参数
@@ -329,7 +329,7 @@
 
 #### 定义：
 
-`func servicescan.databaseCache(v1: bool) return (r0: func ConfigOption(v1: *fp.Config) )`
+`databaseCache(bool) fp.ConfigOption`
 
 
 #### 参数
@@ -360,7 +360,7 @@
 
 #### 定义：
 
-`func servicescan.excludeHosts(v1: string) return (r0: func ConfigOption(v1: *fp.Config) )`
+`excludeHosts(string) fp.ConfigOption`
 
 
 #### 参数
@@ -391,7 +391,7 @@
 
 #### 定义：
 
-`func servicescan.excludePorts(v1: string) return (r0: func ConfigOption(v1: *fp.Config) )`
+`excludePorts(string) fp.ConfigOption`
 
 
 #### 参数
@@ -422,7 +422,7 @@
 
 #### 定义：
 
-`func servicescan.maxProbes(count: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`maxProbes(int) fp.ConfigOption`
 
 
 #### 参数
@@ -453,7 +453,7 @@
 
 #### 定义：
 
-`func servicescan.maxProbesConcurrent(size: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`maxProbesConcurrent(int) fp.ConfigOption`
 
 
 #### 参数
@@ -484,7 +484,7 @@
 
 #### 定义：
 
-`func servicescan.nmapRarityMax(max: int) return (r0: func ConfigOption(v1: *fp.Config) )`
+`nmapRarityMax(int) fp.ConfigOption`
 
 
 #### 参数
@@ -515,7 +515,7 @@
 
 #### 定义：
 
-`func servicescan.nmapRule(v1: any) return (r0: func ConfigOption(v1: *fp.Config) )`
+`nmapRule(any) fp.ConfigOption`
 
 
 #### 参数
@@ -546,7 +546,7 @@
 
 #### 定义：
 
-`func servicescan.probeTimeout(请求超时时间: float64) return (r0: func ConfigOption(v1: *fp.Config) )`
+`probeTimeout(float64) fp.ConfigOption`
 
 
 #### 参数
@@ -577,7 +577,7 @@
 
 #### 定义：
 
-`func servicescan.proto(protos ...any) return (r0: func ConfigOption(v1: *fp.Config) )`
+`proto(...any) fp.ConfigOption`
 
 
 #### 参数
@@ -608,7 +608,7 @@
 
 #### 定义：
 
-`func servicescan.proxy(v1 ...string) return (r0: func ConfigOption(v1: *fp.Config) )`
+`proxy(...string) fp.ConfigOption`
 
 
 #### 参数
@@ -639,7 +639,7 @@
 
 #### 定义：
 
-`func servicescan.service() return (r0: func ConfigOption(v1: *fp.Config) )`
+`service() fp.ConfigOption`
 
  
 
@@ -662,7 +662,7 @@
 
 #### 定义：
 
-`func servicescan.web() return (r0: func ConfigOption(v1: *fp.Config) )`
+`web() fp.ConfigOption`
 
  
 
@@ -685,7 +685,7 @@
 
 #### 定义：
 
-`func servicescan.webRule(v1: any) return (r0: func ConfigOption(v1: *fp.Config) )`
+`webRule(any) fp.ConfigOption`
 
 
 #### 参数

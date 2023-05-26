@@ -34,7 +34,7 @@
 
 #### 定义：
 
-`func xpath.CreateXPathNavigator(v1: *html.Node) return (r0: *htmlquery.NodeNavigator)`
+`CreateXPathNavigator(*html.Node) *htmlquery.NodeNavigator`
 
 
 #### 参数
@@ -65,7 +65,7 @@
 
 #### 定义：
 
-`func xpath.ExistedAttr(v1: *html.Node, v2: string) return (r0: bool)`
+`ExistedAttr(n *html.Node, name string) bool  doc:ExistsAttr returns whether attribute with specified name exists.`
 
 
 #### 参数
@@ -97,7 +97,7 @@
 
 #### 定义：
 
-`func xpath.Find(v1: *html.Node, v2: string) return (r0: []*html.Node)`
+`Find(top *html.Node, expr string) []*html.Node  doc:Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.See `QueryAll()` function.`
 
 
 #### 参数
@@ -129,7 +129,7 @@
 
 #### 定义：
 
-`func xpath.FindOne(v1: *html.Node, v2: string) return (r0: *html.Node)`
+`FindOne(top *html.Node, expr string) *html.Node  doc:FindOne is like Query but will panics if the expression `expr` cannot be parsed.See `Query()` function.`
 
 
 #### 参数
@@ -161,7 +161,7 @@
 
 #### 定义：
 
-`func xpath.InnerText(v1: *html.Node) return (r0: string)`
+`InnerText(n *html.Node) string  doc:InnerText returns the text between the start and end tags of the object.`
 
 
 #### 参数
@@ -192,7 +192,7 @@
 
 #### 定义：
 
-`func xpath.LoadHTMLDocument(v1: any) return (r0: *html.Node, r1: error)`
+`LoadHTMLDocument(any) (*html.Node, error)`
 
 
 #### 参数
@@ -224,7 +224,7 @@
 
 #### 定义：
 
-`func xpath.OutputHTML(v1: *html.Node) return (r0: string)`
+`OutputHTML(*html.Node) string`
 
 
 #### 参数
@@ -255,7 +255,7 @@
 
 #### 定义：
 
-`func xpath.OutputHTMLSelf(v1: *html.Node) return (r0: string)`
+`OutputHTMLSelf(*html.Node) string`
 
 
 #### 参数
@@ -286,7 +286,7 @@
 
 #### 定义：
 
-`func xpath.Query(v1: *html.Node, v2: string) return (r0: *html.Node, r1: error)`
+`Query(top *html.Node, expr string) (*html.Node, error)  doc:Query runs the given XPath expression against the given html.Node andreturns the first matching html.Node, or nil if no matches are found.Returns an error if the expression `expr` cannot be parsed.`
 
 
 #### 参数
@@ -319,7 +319,7 @@
 
 #### 定义：
 
-`func xpath.QueryAll(v1: *html.Node, v2: string) return (r0: []*html.Node, r1: error)`
+`QueryAll(top *html.Node, expr string) ([]*html.Node, error)  doc:QueryAll searches the html.Node that matches by the specified XPath expr.Return an error if the expression `expr` cannot be parsed.`
 
 
 #### 参数
@@ -352,7 +352,7 @@
 
 #### 定义：
 
-`func xpath.SelectAttr(v1: *html.Node, v2: string) return (r0: string)`
+`SelectAttr(n *html.Node, name string) (val string)  doc:SelectAttr returns the attribute value with the specified name.`
 
 
 #### 参数

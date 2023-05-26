@@ -59,7 +59,7 @@ for r := range res {
 
 #### 定义：
 
-`func dictutil.Mix(lists ...[]string) return (r0: chan []string, r1: error)`
+`Mix(raw ...any) (chan []string, error)`
 
 
 #### 参数

@@ -20,9 +20,11 @@
  | [risk.NewRisk](#risknewrisk) |  |
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) |  |
  | [risk.Save](#risksave) |  |
+ | [risk.YieldRiskByCreateAt](#riskyieldriskbycreateat) |  |
  | [risk.YieldRiskByRuntimeId](#riskyieldriskbyruntimeid) |  |
  | [risk.YieldRiskByTarget](#riskyieldriskbytarget) |  |
  | [risk.cve](#riskcve) |  |
+ | [risk.description](#riskdescription) |  |
  | [risk.details](#riskdetails) |  |
  | [risk.fromYakScript](#riskfromyakscript) |  |
  | [risk.level](#risklevel) |  |
@@ -33,6 +35,7 @@
  | [risk.response](#riskresponse) |  |
  | [risk.runtimeId](#riskruntimeid) |  |
  | [risk.severity](#riskseverity) |  |
+ | [risk.solution](#risksolution) |  |
  | [risk.title](#risktitle) |  |
  | [risk.titleVerbose](#risktitleverbose) |  |
  | [risk.token](#risktoken) |  |
@@ -58,7 +61,7 @@
 
 #### 定义：
 
-`func risk.CheckDNSLogByToken(v1: string) return (r0: []*tpb.DNSLogEvent, r1: error)`
+`CheckDNSLogByToken(token string) ([]*tpb.DNSLogEvent, error)`
 
 
 #### 参数
@@ -90,7 +93,7 @@
 
 #### 定义：
 
-`func risk.CheckICMPTriggerByLength(v1: int) return (r0: *tpb.ICMPTriggerNotification, r1: error)`
+`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification, error)`
 
 
 #### 参数
@@ -122,7 +125,7 @@
 
 #### 定义：
 
-`func risk.CheckRandomTriggerByToken(token: string) return (event: *tpb.RandomPortTriggerEvent, err: error)`
+`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent, error)`
 
 
 #### 参数
@@ -154,7 +157,7 @@
 
 #### 定义：
 
-`func risk.CreateRisk(v1: string, v2 ...yakit.RiskParamsOpt) return (r0: *yakit.Risk)`
+`CreateRisk(string, ...yakit.RiskParamsOpt) *yakit.Risk`
 
 
 #### 参数
@@ -186,7 +189,7 @@
 
 #### 定义：
 
-`func risk.ExtractTokenFromUrl(url: string) return (r0: string)`
+`ExtractTokenFromUrl(tokenUrl string) string`
 
 
 #### 参数
@@ -217,7 +220,7 @@
 
 #### 定义：
 
-`func risk.HaveReverseRisk(token: string) return (r0: boolvendor/github.com/projectdiscovery/fileutil/file.go)`
+`HaveReverseRisk(token string) bool`
 
 
 #### 参数
@@ -248,7 +251,7 @@
 
 #### 定义：
 
-`func risk.NewDNSLogDomain() return (r0: string, r1: string, r2: error)`
+`NewDNSLogDomain() (domain string, token string, _ error)`
 
  
 
@@ -273,7 +276,7 @@
 
 #### 定义：
 
-`func risk.NewLocalReverseHTTPSUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewLocalReverseHTTPSUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -304,7 +307,7 @@
 
 #### 定义：
 
-`func risk.NewLocalReverseHTTPUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewLocalReverseHTTPUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -335,7 +338,7 @@
 
 #### 定义：
 
-`func risk.NewLocalReverseRMIUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewLocalReverseRMIUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -366,7 +369,7 @@
 
 #### 定义：
 
-`func risk.NewPublicReverseHTTPSUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewPublicReverseHTTPSUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -397,7 +400,7 @@
 
 #### 定义：
 
-`func risk.NewPublicReverseHTTPUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewPublicReverseHTTPUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -428,7 +431,7 @@
 
 #### 定义：
 
-`func risk.NewPublicReverseRMIUrl(v1 ...yakit.RiskParamsOpt) return (r0: string)`
+`NewPublicReverseRMIUrl(...yakit.RiskParamsOpt) string`
 
 
 #### 参数
@@ -459,7 +462,7 @@
 
 #### 定义：
 
-`func risk.NewRandomPortTrigger(v1 ...yakit.RiskParamsOpt) return (r0: string, r1: string, r2: error)`
+`NewRandomPortTrigger(opt ...RiskParamsOpt) (token string, addr string, _ error)`
 
 
 #### 参数
@@ -492,7 +495,7 @@
 
 #### 定义：
 
-``func risk.NewRisk(v1: string, v2 ...yakit.RiskParamsOpt)``
+`NewRisk(target string, opts ...yakit.RiskParamsOpt)`
 
 
 #### 参数
@@ -518,7 +521,7 @@
 
 #### 定义：
 
-`func risk.NewUnverifiedRisk(v1: string, v2: string, v3 ...yakit.RiskParamsOpt) return (r0: *yakit.Risk, r1: error)`
+`NewUnverifiedRisk(string, string, ...yakit.RiskParamsOpt) (*yakit.Risk, error)`
 
 
 #### 参数
@@ -552,7 +555,7 @@
 
 #### 定义：
 
-`func risk.Save(v1: *yakit.Risk) return (r0: error)`
+`Save(r *Risk) error`
 
 
 #### 参数
@@ -573,6 +576,37 @@
 
 
  
+### risk.YieldRiskByCreateAt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.YieldRiskByCreateAt(v1: int64) return (r0: chan *yakit.Risk)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.Risk` |   |
+
+
+ 
 ### risk.YieldRiskByRuntimeId
 
 
@@ -583,7 +617,7 @@
 
 #### 定义：
 
-`func risk.YieldRiskByRuntimeId(v1: string) return (r0: chan *yakit.Risk)`
+`YieldRiskByRuntimeId(string) chan *yakit.Risk`
 
 
 #### 参数
@@ -614,7 +648,7 @@
 
 #### 定义：
 
-`func risk.YieldRiskByTarget(v1: string) return (r0: chan *yakit.Risk)`
+`YieldRiskByTarget(string) chan *yakit.Risk`
 
 
 #### 参数
@@ -645,7 +679,38 @@
 
 #### 定义：
 
-`func risk.cve(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`cve(string) yakit.RiskParamsOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.description
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.description(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
 
 
 #### 参数
@@ -676,7 +741,7 @@
 
 #### 定义：
 
-`func risk.details(v1: any) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`details(any) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -707,7 +772,7 @@
 
 #### 定义：
 
-`func risk.fromYakScript(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`fromYakScript(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -738,7 +803,7 @@
 
 #### 定义：
 
-`func risk.level(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`level(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -769,7 +834,7 @@
 
 #### 定义：
 
-`func risk.parameter(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`parameter(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -800,7 +865,7 @@
 
 #### 定义：
 
-`func risk.payload(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`payload(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -831,7 +896,7 @@
 
 #### 定义：
 
-`func risk.potential(v1: bool) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`potential(bool) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -862,7 +927,7 @@
 
 #### 定义：
 
-`func risk.request(v1: any) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`request(any) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -893,7 +958,7 @@
 
 #### 定义：
 
-`func risk.response(v1: any) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`response(any) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -924,7 +989,7 @@
 
 #### 定义：
 
-`func risk.runtimeId(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`runtimeId(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -955,7 +1020,38 @@
 
 #### 定义：
 
-`func risk.severity(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`severity(string) yakit.RiskParamsOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.solution
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.solution(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
 
 
 #### 参数
@@ -986,7 +1082,7 @@
 
 #### 定义：
 
-`func risk.title(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`title(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -1017,7 +1113,7 @@
 
 #### 定义：
 
-`func risk.titleVerbose(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`titleVerbose(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -1048,7 +1144,7 @@
 
 #### 定义：
 
-`func risk.token(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`token(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -1079,7 +1175,7 @@
 
 #### 定义：
 
-`func risk.type(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`type(string) yakit.RiskParamsOpt`
 
 
 #### 参数
@@ -1110,7 +1206,7 @@
 
 #### 定义：
 
-`func risk.typeVerbose(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+`typeVerbose(string) yakit.RiskParamsOpt`
 
 
 #### 参数

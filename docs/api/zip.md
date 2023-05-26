@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func zip.Compress(v1: string, v2 ...string) return (r0: error)`
+`Compress(string, ...string) error`
 
 
 #### 参数
@@ -57,7 +57,7 @@
 
 #### 定义：
 
-`func zip.Decompress(v1: string, v2: string) return (r0: error)`
+`Decompress(zipFile, dest string) error  doc:解压`
 
 
 #### 参数

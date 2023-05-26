@@ -30,7 +30,7 @@
 
 #### 定义：
 
-`func dns.QuertAxfr(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+`QuertAxfr(target string, opts ..._dnsConfigOpt) []string`
 
 
 #### 参数
@@ -62,7 +62,7 @@
 
 #### 定义：
 
-`func dns.QueryIP(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: string)`
+`QueryIP(target string, opts ..._dnsConfigOpt) string`
 
 
 #### 参数
@@ -94,7 +94,7 @@
 
 #### 定义：
 
-`func dns.QueryIPAll(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+`QueryIPAll(target string, opts ..._dnsConfigOpt) []string`
 
 
 #### 参数
@@ -126,7 +126,7 @@
 
 #### 定义：
 
-`func dns.QueryNS(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+`QueryNS(target string, opts ..._dnsConfigOpt) []string`
 
 
 #### 参数
@@ -158,7 +158,7 @@
 
 #### 定义：
 
-`func dns.QueryTXT(v1: string, v2 ...yaklib._dnsConfigOpt) return (r0: []string)`
+`QueryTXT(target string, opts ..._dnsConfigOpt) []string`
 
 
 #### 参数
@@ -190,7 +190,7 @@
 
 #### 定义：
 
-`func dns.dnsServers(v1 ...string) return (r0: func _dnsConfigOpt(v1: *yaklib._dnsConfig) )`
+`dnsServers(...string) yaklib._dnsConfigOpt`
 
 
 #### 参数
@@ -221,7 +221,7 @@
 
 #### 定义：
 
-`func dns.timeout(v1: float64) return (r0: func _dnsConfigOpt(v1: *yaklib._dnsConfig) )`
+`timeout(float64) yaklib._dnsConfigOpt`
 
 
 #### 参数

@@ -43,7 +43,7 @@
  | [yakit.SaveHTTPFlow](#yakitsavehttpflow) | 保存 HTTP Flow 到数据库 |
  | [yakit.SavePayload](#yakitsavepayload) |  |
  | [yakit.SavePayloadByFile](#yakitsavepayloadbyfile) |  |
- | [yakit.SavePortFromResult](#yakitsaveportfromresult) | 把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。 |
+ | [yakit.SavePortFromResult](#yakitsaveportfromresult) |  |
  | [yakit.SetOnlineBaseUrl](#yakitsetonlinebaseurl) | 设置 Yakit Online 的基础 URL |
  | [yakit.SetProgress](#yakitsetprogress) |  |
  | [yakit.SetProgressEx](#yakitsetprogressex) | 设置额外进度条的进度信息（默认进度条id为 `main`） |
@@ -75,7 +75,7 @@
 
 #### 定义：
 
-``func yakit.AutoInitYakit()``
+`AutoInitYakit()`
 
  
 
@@ -92,7 +92,7 @@
 
 #### 定义：
 
-`func yakit.DeletePayloadByGroup(v1: string) return (r0: error)`
+`DeletePayloadByGroup(group string) error`
 
 
 #### 参数
@@ -123,7 +123,7 @@
 
 #### 定义：
 
-``func yakit.EnableTable(tableName: string, columns: []string)``
+`EnableTable(tableName string, columns []string)`
 
 
 #### 参数
@@ -149,7 +149,7 @@
 
 #### 定义：
 
-``func yakit.EnableWebsiteTrees(websiteKeyword: string)``
+`EnableWebsiteTrees(targets string)`
 
 
 #### 参数
@@ -166,7 +166,7 @@
  
 ### yakit.Error
 
-在 Yakit 的 UI 中输出 Error 级别的信息
+在 Yakit 的 UI 中输出输出 Error 级别的信息
 
 #### 详细描述
 
@@ -174,7 +174,7 @@
 
 #### 定义：
 
-``func yakit.Error(fmt: string, items ...any)``
+`Error(tmp string, items ...any)`
 
 
 #### 参数
@@ -200,7 +200,7 @@
 
 #### 定义：
 
-``func yakit.File(v1: string, v2 ...any)``
+`File(fileName string, desc ...any)`
 
 
 #### 参数
@@ -226,7 +226,7 @@
 
 #### 定义：
 
-`func yakit.GenerateYakitMITMHooksParams(v1: string, v2: string, v3 ...yakhttp.HttpOption) return (r0: []any, r1: error)`
+`GenerateYakitMITMHooksParams(method string, url string, opts ...yakhttp.HttpOption) ([]any, error)`
 
 
 #### 参数
@@ -260,7 +260,7 @@
 
 #### 定义：
 
-`func yakit.GetHomeDir() return (r0: string)`
+`GetHomeDir() string`
 
  
 
@@ -283,7 +283,7 @@
 
 #### 定义：
 
-`func yakit.GetHomeTempDir() return (r0: string)`
+`GetHomeTempDir() string`
 
  
 
@@ -306,7 +306,7 @@
 
 #### 定义：
 
-`func yakit.GetOnlineBaseUrl() return (r0: string)`
+`GetOnlineBaseUrl() string`
 
  
 
@@ -329,7 +329,7 @@
 
 #### 定义：
 
-``func yakit.Info(fmt: string, items ...any)``
+`Info(tmp string, items ...any)`
 
 
 #### 参数
@@ -355,7 +355,7 @@
 
 #### 定义：
 
-``func yakit.InitYakit(yakitClient: *yaklib.YakitClient)``
+`InitYakit(y *YakitClient)`
 
 
 #### 参数
@@ -380,7 +380,7 @@
 
 #### 定义：
 
-``func yakit.Markdown(v1: any)``
+`Markdown(tmp any)`
 
 
 #### 参数
@@ -405,7 +405,7 @@
 
 #### 定义：
 
-`func yakit.NewBarGraph() return (r0: *yaklib.YakitGraph)`
+`NewBarGraph() *yaklib.YakitGraph`
 
  
 
@@ -428,7 +428,7 @@
 
 #### 定义：
 
-`func yakit.NewClient(yakitWebhook: string) return (r0: *yaklib.YakitClient)`
+`NewClient(string) *yaklib.YakitClient`
 
 
 #### 参数
@@ -459,7 +459,7 @@
 
 #### 定义：
 
-`func yakit.NewHTTPFlowRisk(riskName: string, isHttps: bool, url: string, req: bytes, rsp: bytes) return (r0: *yaklib.YakitHTTPFlowRisk)`
+`NewHTTPFlowRisk(string, bool, string, []uint8, []uint8) *yaklib.YakitHTTPFlowRisk`
 
 
 #### 参数
@@ -494,7 +494,7 @@
 
 #### 定义：
 
-`func yakit.NewLineGraph() return (r0: *yaklib.YakitGraph)`
+`NewLineGraph() *yaklib.YakitGraph`
 
  
 
@@ -517,7 +517,7 @@
 
 #### 定义：
 
-`func yakit.NewPieGraph() return (r0: *yaklib.YakitGraph)`
+`NewPieGraph() *yaklib.YakitGraph`
 
  
 
@@ -540,7 +540,7 @@
 
 #### 定义：
 
-`func yakit.NewTable(v1 ...string) return (r0: *yaklib.YakitTable)`
+`NewTable(...string) *yaklib.YakitTable`
 
 
 #### 参数
@@ -571,7 +571,7 @@
 
 #### 定义：
 
-`func yakit.NewWordCloud() return (r0: *yaklib.YakitGraph)`
+`NewWordCloud() *yaklib.YakitGraph`
 
  
 
@@ -594,7 +594,7 @@
 
 #### 定义：
 
-``func yakit.Output(v1: any)``
+`Output(i any)`
 
 
 #### 参数
@@ -619,7 +619,7 @@
 
 #### 定义：
 
-`func yakit.QueryDomainsByDomainKeyword(keyword: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByDomainKeyword(keyword string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -651,7 +651,7 @@
 
 #### 定义：
 
-`func yakit.QueryDomainsByNetwork(network: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByNetwork(network string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -683,7 +683,7 @@
 
 #### 定义：
 
-`func yakit.QueryDomainsByTitle(title: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByTitle(title string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -715,7 +715,7 @@
 
 #### 定义：
 
-`func yakit.QueryHTTPFlowsAll() return (r0: chan *yakit.HTTPFlow)`
+`QueryHTTPFlowsAll() chan *yakit.HTTPFlow`
 
  
 
@@ -738,7 +738,7 @@
 
 #### 定义：
 
-`func yakit.QueryHTTPFlowsByKeyword(v1: string) return (r0: chan *yakit.HTTPFlow)`
+`QueryHTTPFlowsByKeyword(k string) chan *yakit.HTTPFlow`
 
 
 #### 参数
@@ -769,7 +769,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostPortAll() return (r0: chan string)`
+`QueryHostPortAll() chan string`
 
  
 
@@ -792,7 +792,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostPortByKeyword(keyword: string) return (r0: chan string)`
+`QueryHostPortByKeyword(target string) chan string`
 
 
 #### 参数
@@ -823,7 +823,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostPortByNetwork(network: string) return (r0: chan string)`
+`QueryHostPortByNetwork(network string) chan string`
 
 
 #### 参数
@@ -854,7 +854,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostPortByNetworkAndPort(network: string, ports: string) return (r0: chan string)`
+`QueryHostPortByNetworkAndPort(network, port string) chan string`
 
 
 #### 参数
@@ -886,7 +886,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostsByDomain(domain: string) return (r0: chan *yakit.Host, r1: error)`
+`QueryHostsByDomain(keyword string) (chan *yakit.Host, error)`
 
 
 #### 参数
@@ -918,7 +918,7 @@
 
 #### 定义：
 
-`func yakit.QueryHostsByNetwork(network: string) return (r0: chan *yakit.Host, r1: error)`
+`QueryHostsByNetwork(network string) (chan *yakit.Host, error)`
 
 
 #### 参数
@@ -950,7 +950,7 @@
 
 #### 定义：
 
-`func yakit.QueryPortAssetByNetwork(network: string) return (channel: chan *yakit.Port, r1: error)`
+`QueryPortAssetByNetwork(network string) (chan *yakit.Port, error)`
 
 
 #### 参数
@@ -982,7 +982,7 @@
 
 #### 定义：
 
-`func yakit.QueryUrlsAll() return (r0: chan string)`
+`QueryUrlsAll() chan string`
 
  
 
@@ -1005,7 +1005,7 @@
 
 #### 定义：
 
-`func yakit.QueryUrlsByKeyword(keyword: string) return (r0: chan string)`
+`QueryUrlsByKeyword(k string) chan string`
 
 
 #### 参数
@@ -1036,7 +1036,7 @@
 
 #### 定义：
 
-``func yakit.Report(生成的报告的 ID: int)``
+`Report(i int)`
 
 
 #### 参数
@@ -1061,7 +1061,7 @@
 
 #### 定义：
 
-`func yakit.SaveDomain(v1: string, v2 ...string) return (r0: error)`
+`SaveDomain(domain string, ip ...string) error`
 
 
 #### 参数
@@ -1093,7 +1093,7 @@
 
 #### 定义：
 
-`func yakit.SaveHTTPFlow(isHttps: string, request: *http.Request, response: *http.Response) return (r0: error)`
+`SaveHTTPFlow(url string, req *http.Request, rsp *http.Response) error`
 
 
 #### 参数
@@ -1126,7 +1126,7 @@
 
 #### 定义：
 
-`func yakit.SavePayload(v1: string, v2: []string) return (r0: error)`
+`SavePayload(group string, payloads []string) error`
 
 
 #### 参数
@@ -1158,7 +1158,7 @@
 
 #### 定义：
 
-`func yakit.SavePayloadByFile(v1: string, v2: string) return (r0: error)`
+`SavePayloadByFile(group string, fileName string) error`
 
 
 #### 参数
@@ -1182,7 +1182,7 @@
  
 ### yakit.SavePortFromResult
 
-把端口信息保存到数据库中，支持 synscan 和 servicescan 的扫描结果直接保存。
+
 
 #### 详细描述
 
@@ -1190,14 +1190,15 @@
 
 #### 定义：
 
-`func yakit.SavePortFromResult(result: any) return (r0: error)`
+`SavePortFromResult(t any) error`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `any` |   |
+| v1 | `any` |   |
+| v2 | `...string` |   |
 
 
 
@@ -1221,7 +1222,7 @@
 
 #### 定义：
 
-``func yakit.SetOnlineBaseUrl(v1: string)``
+`SetOnlineBaseUrl(u string)`
 
 
 #### 参数
@@ -1246,7 +1247,7 @@
 
 #### 定义：
 
-``func yakit.SetProgress(progress: float64)``
+`SetProgress(f float64)`
 
 
 #### 参数
@@ -1271,7 +1272,7 @@
 
 #### 定义：
 
-``func yakit.SetProgressEx(progressName: string, percent: float64)``
+`SetProgressEx(id string, f float64)`
 
 
 #### 参数
@@ -1297,7 +1298,7 @@
 
 #### 定义：
 
-``func yakit.StatusCard(statusName: string, statusValue: any, tags ...string)``
+`StatusCard(id string, data any, tags ...string)`
 
 
 #### 参数
@@ -1324,7 +1325,7 @@
 
 #### 定义：
 
-`func yakit.TableData(tableName: string, data: map[string]any) return (r0: *yaklib.YakitFixedTableData)`
+`TableData(string, map[string]any) *yaklib.YakitFixedTableData`
 
 
 #### 参数
@@ -1356,7 +1357,7 @@
 
 #### 定义：
 
-``func yakit.Text(v1: any)``
+`Text(tmp any)`
 
 
 #### 参数
@@ -1381,7 +1382,7 @@
 
 #### 定义：
 
-`func yakit.UpdateOnlineYakitStore() return (r0: error)`
+`UpdateOnlineYakitStore() error`
 
  
 
@@ -1404,7 +1405,7 @@
 
 #### 定义：
 
-`func yakit.UpdateYakitStore() return (r0: error)`
+`UpdateYakitStore() error`
 
  
 
@@ -1427,7 +1428,10 @@
 
 #### 定义：
 
-`func yakit.UpdateYakitStoreFromGit(ctx: context.Context, url: string, proxy ...string) return (r0: error)`
+`UpdateYakitStoreFromGit(
+	ctx context.Context, ghUrl string,
+	proxy ...string,
+) error`
 
 
 #### 参数
@@ -1460,7 +1464,7 @@
 
 #### 定义：
 
-`func yakit.UpdateYakitStoreLocal(v1: string) return (r0: error)`
+`UpdateYakitStoreLocal(f string) error`
 
 
 #### 参数
@@ -1491,7 +1495,7 @@
 
 #### 定义：
 
-``func yakit.Warn(v1: string, v2 ...any)``
+`Warn(tmp string, items ...any)`
 
 
 #### 参数

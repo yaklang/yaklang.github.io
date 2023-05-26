@@ -29,7 +29,7 @@
 
 #### 定义：
 
-`func bufio.NewReadWriter(v1: any, v2: any) return (r0: *bufio.ReadWriter, r1: error)`
+`NewReadWriter(i, i2 any) (*bufio.ReadWriter, error)`
 
 
 #### 参数
@@ -62,7 +62,7 @@
 
 #### 定义：
 
-`func bufio.NewReader(v1: any) return (r0: *bufio.Reader, r1: error)`
+`NewReader(i any) (*bufio.Reader, error)`
 
 
 #### 参数
@@ -94,7 +94,7 @@
 
 #### 定义：
 
-`func bufio.NewReaderSize(v1: any, v2: int) return (r0: *bufio.Reader, r1: error)`
+`NewReaderSize(i any, size int) (*bufio.Reader, error)`
 
 
 #### 参数
@@ -127,7 +127,7 @@
 
 #### 定义：
 
-`func bufio.NewScanner(v1: any) return (r0: *bufio.Scanner, r1: error)`
+`NewScanner(i any) (*bufio.Scanner, error)`
 
 
 #### 参数
@@ -159,7 +159,7 @@
 
 #### 定义：
 
-`func bufio.NewWriter(v1: any) return (r0: *bufio.Writer, r1: error)`
+`NewWriter(i any) (*bufio.Writer, error)`
 
 
 #### 参数
@@ -191,7 +191,7 @@
 
 #### 定义：
 
-`func bufio.NewWriterSize(v1: any, v2: int) return (r0: *bufio.Writer, r1: error)`
+`NewWriterSize(i any, size int) (*bufio.Writer, error)`
 
 
 #### 参数

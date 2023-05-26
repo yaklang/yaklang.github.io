@@ -33,7 +33,7 @@
 
 #### 定义：
 
-`func facades.NewFacadeServer(v1: string, v2: int, v3 ...facades.FacadeServerConfig) return (r0: *facades.FacadeServer)`
+`NewFacadeServer(string, int, ...facades.FacadeServerConfig) *facades.FacadeServer`
 
 
 #### 参数
@@ -66,7 +66,7 @@
 
 #### 定义：
 
-`func facades.Serve(v1: string, v2: int, v3 ...facades.FacadeServerConfig) return (r0: error)`
+`Serve(host string, port int, configs ...FacadeServerConfig) error`
 
 
 #### 参数
@@ -99,7 +99,7 @@
 
 #### 定义：
 
-`func facades.evilClassResource(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`evilClassResource(string, string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -131,7 +131,7 @@
 
 #### 定义：
 
-`func facades.httpResource(v1: string, v2: bytes) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`httpResource(string, []uint8) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -163,7 +163,7 @@
 
 #### 定义：
 
-`func facades.javaClassName(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`javaClassName(string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -194,7 +194,7 @@
 
 #### 定义：
 
-`func facades.javaCodeBase(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`javaCodeBase(string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -225,7 +225,7 @@
 
 #### 定义：
 
-`func facades.javaFactory(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`javaFactory(string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -256,7 +256,7 @@
 
 #### 定义：
 
-`func facades.ldapResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`ldapResourceAddr(string, string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -288,7 +288,7 @@
 
 #### 定义：
 
-`func facades.objectClass(v1: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`objectClass(string) facades.FacadeServerConfig`
 
 
 #### 参数
@@ -319,7 +319,7 @@
 
 #### 定义：
 
-`func facades.rmiResourceAddr(v1: string, v2: string) return (r0: func FacadeServerConfig(v1: *facades.FacadeServer) )`
+`rmiResourceAddr(string, string) facades.FacadeServerConfig`
 
 
 #### 参数

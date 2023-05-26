@@ -32,7 +32,7 @@
 
 #### 定义：
 
-`func sync.NewCond() return (r0: *sync.Cond)`
+`NewCond() *sync.Cond`
 
  
 
@@ -55,7 +55,7 @@
 
 #### 定义：
 
-`func sync.NewLock() return (r0: *sync.Mutex)`
+`NewLock() *sync.Mutex`
 
  
 
@@ -78,7 +78,7 @@
 
 #### 定义：
 
-`func sync.NewMap() return (r0: *sync.Map)`
+`NewMap() *sync.Map`
 
  
 
@@ -101,7 +101,7 @@
 
 #### 定义：
 
-`func sync.NewMutex() return (r0: *sync.Mutex)`
+`NewMutex() *sync.Mutex`
 
  
 
@@ -124,7 +124,7 @@
 
 #### 定义：
 
-`func sync.NewOnce() return (r0: *sync.Once)`
+`NewOnce() *sync.Once`
 
  
 
@@ -147,7 +147,7 @@
 
 #### 定义：
 
-`func sync.NewPool() return (r0: *sync.Pool)`
+`NewPool() *sync.Pool`
 
  
 
@@ -170,7 +170,7 @@
 
 #### 定义：
 
-`func sync.NewRWMutex() return (r0: *sync.RWMutex)`
+`NewRWMutex() *sync.RWMutex`
 
  
 
@@ -193,7 +193,7 @@
 
 #### 定义：
 
-`func sync.NewSizedWaitGroup(v1: int) return (r0: *utils.SizedWaitGroup)`
+`NewSizedWaitGroup(int) *utils.SizedWaitGroup`
 
 
 #### 参数
@@ -224,7 +224,7 @@
 
 #### 定义：
 
-`func sync.NewWaitGroup() return (r0: *sync.WaitGroup)`
+`NewWaitGroup() *sync.WaitGroup`
 
  
 

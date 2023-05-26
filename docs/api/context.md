@@ -30,7 +30,7 @@
 
 #### 定义：
 
-`func context.Background() return (ctx: context.Context)`
+`Background() context.Context`
 
  
 
@@ -53,7 +53,7 @@
 
 #### 定义：
 
-`func context.New() return (ctx: context.Context)`
+`New() context.Context`
 
  
 
@@ -76,7 +76,7 @@
 
 #### 定义：
 
-`func context.Seconds(seconds: float) return (ctx: context.Context)`
+`Seconds(d float64) context.Context`
 
 
 #### 参数
@@ -107,7 +107,7 @@
 
 #### 定义：
 
-`func context.WithCancel(originCtx: context.Context) return (r0: context.Context, r1: func CancelFunc() )`
+`WithCancel(parent Context) (ctx Context, cancel CancelFunc)  doc:WithCancel returns a copy of parent with a new Done channel. The returnedcontext&#39;s Done channel is closed when the returned cancel function is calledor when the parent context&#39;s Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.`
 
 
 #### 参数
@@ -139,7 +139,7 @@
 
 #### 定义：
 
-`func context.WithDeadline(ctx: context.Context, ddl: time.Time) return (r0: context.Context, r1: func CancelFunc() )`
+`WithDeadline(parent Context, d time.Time) (Context, CancelFunc)  doc:WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent&#39;s deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext&#39;s Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context&#39;s Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.`
 
 
 #### 参数
@@ -172,7 +172,7 @@
 
 #### 定义：
 
-`func context.WithTimeout(ctx: context.Context, timeout: time.Duration) return (ctx: context.Context, cancel: func CancelFunc() )`
+`WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)  doc:WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}`
 
 
 #### 参数
@@ -205,7 +205,7 @@
 
 #### 定义：
 
-`func context.WithValue(ctx: context.Context, key: any, value: any) return (ctx: context.Context)`
+`WithValue(context.Context, any, any) context.Context`
 
 
 #### 参数

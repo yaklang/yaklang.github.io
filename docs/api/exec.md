@@ -35,7 +35,7 @@
 
 #### 定义：
 
-`func exec.CheckCrash(v1: *exec.Cmd) return (r0: bool, r1: error)`
+`CheckCrash(c *exec.Cmd) (bool, error)`
 
 
 #### 参数
@@ -76,7 +76,7 @@ die(cmd.Run())
 
 #### 定义：
 
-`func exec.Command(cmd: string) return (cmdInstance: *exec.Cmd, r1: error)`
+`Command(string) (*exec.Cmd, error)`
 
 
 #### 参数
@@ -108,7 +108,7 @@ die(cmd.Run())
 
 #### 定义：
 
-`func exec.CommandContext(ctx: context.Context, cmd: string) return (cmdInstance: *exec.Cmd, r1: error)`
+`CommandContext(ctx context.Context, s string) (*exec.Cmd, error)`
 
 
 #### 参数
@@ -149,7 +149,7 @@ println(string(res))
 
 #### 定义：
 
-`func exec.System(cmd: string) return (results: bytes, r1: error)`
+`System(string) ([]uint8, error)`
 
 
 #### 参数
@@ -206,7 +206,7 @@ exec:  results:  &#34;example.com\n&#34;
 
 #### 定义：
 
-``func exec.SystemBatch(cmd: string, params ...yaklib.poolOpt)``
+`SystemBatch(i string, opts ...poolOpt)`
 
 
 #### 参数
@@ -232,7 +232,7 @@ exec:  results:  &#34;example.com\n&#34;
 
 #### 定义：
 
-`func exec.SystemContext(ctx: context.Context, cmd: string) return (results: bytes, err: error)`
+`SystemContext(ctx context.Context, i string) ([]byte, error)  doc:执行系统命令`
 
 
 #### 参数
@@ -302,7 +302,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.WatchOutput(cmd: string, timeout: float64, callback: func (v1: bytes) return(bool) ) return (Err: error)`
+`WatchOutput(i string, timeout float64, f func(raw []byte) bool) error`
 
 
 #### 参数
@@ -335,7 +335,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.WatchStderr(cmd: string, timeout: float64, callback: func (v1: bytes) return(bool) ) return (err: error)`
+`WatchStderr(i string, timeout float64, f func(raw []byte) bool) error`
 
 
 #### 参数
@@ -368,7 +368,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.WatchStdout(v1: string, v2: float64, v3: func (v1: bytes) return(bool) ) return (r0: error)`
+`WatchStdout(i string, timeout float64, f func(raw []byte) bool) error`
 
 
 #### 参数
@@ -401,7 +401,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.callback(callbackFunc: func (v1: string, v2: bytes) ) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`callback(func(string, []uint8)) yaklib.poolOpt`
 
 
 #### 参数
@@ -432,7 +432,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.concurrent(poolSize: int) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`concurrent(int) yaklib.poolOpt`
 
 
 #### 参数
@@ -463,7 +463,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 
 #### 定义：
 
-`func exec.timeout(timeout: float64) return (r0: func poolOpt(v1: *yaklib._execPoolConfig) )`
+`timeout(float64) yaklib.poolOpt`
 
 
 #### 参数

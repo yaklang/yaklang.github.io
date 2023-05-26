@@ -21,6 +21,9 @@
  | [db.QueryHostsByDomain](#dbqueryhostsbydomain) | 根据域名查询 Hosts 资产 |
  | [db.QueryIPCity](#dbqueryipcity) | 查询 IP 对应的城市位置 |
  | [db.QueryIPForIPS](#dbqueryipforips) | 根据 IP 查询运营商 |
+ | [db.QueryPayloadGroups](#dbquerypayloadgroups) |  |
+ | [db.QueryPortsByTaskName](#dbqueryportsbytaskname) |  |
+ | [db.QueryPortsByUpdatedAt](#dbqueryportsbyupdatedat) |  |
  | [db.QueryUrlsAll](#dbqueryurlsall) | 查询所有可用 URL |
  | [db.QueryUrlsByKeyword](#dbqueryurlsbykeyword) | 根据关键字查询 URL |
  | [db.SaveDomain](#dbsavedomain) | 保存域名 |
@@ -28,7 +31,7 @@
  | [db.SaveHTTPFlowFromNativeWithType](#dbsavehttpflowfromnativewithtype) |  |
  | [db.SavePayload](#dbsavepayload) | 保存 Payload 到一个组 |
  | [db.SavePayloadByFile](#dbsavepayloadbyfile) | 保存 Payload 到文件 |
- | [db.SavePortFromResult](#dbsaveportfromresult) | 从某个结果中保存端口 |
+ | [db.SavePortFromResult](#dbsaveportfromresult) |  |
  | [db.SaveYakitMenuItemByBatchExecuteConfig](#dbsaveyakitmenuitembybatchexecuteconfig) |  |
  | [db.SaveYakitPlugin](#dbsaveyakitplugin) |  |
  | [db.SetKey](#dbsetkey) | 设置持久化 Key |
@@ -64,7 +67,7 @@
 
 #### 定义：
 
-``func db.DelKey(v1: any)``
+`DelKey(any)`
 
 
 #### 参数
@@ -89,7 +92,7 @@
 
 #### 定义：
 
-`func db.DeletePayloadByGroup(group: string) return (r0: error)`
+`DeletePayloadByGroup(group string) error`
 
 
 #### 参数
@@ -120,7 +123,7 @@
 
 #### 定义：
 
-`func db.DeleteYakScriptByName(v1: string) return (r0: error)`
+`DeleteYakScriptByName(i string) error`
 
 
 #### 参数
@@ -151,7 +154,7 @@
 
 #### 定义：
 
-`func db.DeleteYakitMenuItemAll() return (r0: error)`
+`DeleteYakitMenuItemAll() error`
 
  
 
@@ -174,7 +177,7 @@
 
 #### 定义：
 
-`func db.DownloadGeoIP() return (r0: error)`
+`DownloadGeoIP() error`
 
  
 
@@ -197,7 +200,7 @@
 
 #### 定义：
 
-`func db.GetKey(key: any) return (r0: string)`
+`GetKey(any) string`
 
 
 #### 参数
@@ -228,7 +231,7 @@
 
 #### 定义：
 
-`func db.GetYakitPluginByName(v1: string) return (r0: *yakit.YakScript, r1: error)`
+`GetYakitPluginByName(name string) (*yakit.YakScript, error)`
 
 
 #### 参数
@@ -260,7 +263,7 @@
 
 #### 定义：
 
-`func db.QueryDomainsByDomainKeyword(keyword: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByDomainKeyword(keyword string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -292,7 +295,7 @@
 
 #### 定义：
 
-`func db.QueryDomainsByNetwork(cidrNetwork: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByNetwork(network string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -324,7 +327,7 @@
 
 #### 定义：
 
-`func db.QueryDomainsByTitle(title: string) return (r0: chan *yakit.Domain, r1: error)`
+`QueryDomainsByTitle(title string) (chan *yakit.Domain, error)`
 
 
 #### 参数
@@ -356,7 +359,7 @@
 
 #### 定义：
 
-`func db.QueryHTTPFlowsAll() return (r0: chan *yakit.HTTPFlow)`
+`QueryHTTPFlowsAll() chan *yakit.HTTPFlow`
 
  
 
@@ -379,7 +382,7 @@
 
 #### 定义：
 
-`func db.QueryHTTPFlowsByID(v1 ...int64) return (r0: chan *yakit.HTTPFlow)`
+`QueryHTTPFlowsByID(id ...int64) chan *yakit.HTTPFlow`
 
 
 #### 参数
@@ -410,7 +413,7 @@
 
 #### 定义：
 
-`func db.QueryHTTPFlowsByKeyword(v1: string) return (r0: chan *yakit.HTTPFlow)`
+`QueryHTTPFlowsByKeyword(k string) chan *yakit.HTTPFlow`
 
 
 #### 参数
@@ -441,7 +444,7 @@
 
 #### 定义：
 
-`func db.QueryHostPortByKeyword(keyword: string) return (r0: chan *yakit.Host, r1: error)`
+`QueryHostPortByKeyword(network string) (chan *yakit.Host, error)`
 
 
 #### 参数
@@ -473,7 +476,7 @@
 
 #### 定义：
 
-`func db.QueryHostPortByNetwork(network: string) return (r0: chan string)`
+`QueryHostPortByNetwork(network string) chan string`
 
 
 #### 参数
@@ -504,7 +507,7 @@
 
 #### 定义：
 
-`func db.QueryHostsByDomain(v1: string) return (r0: chan *yakit.Host, r1: error)`
+`QueryHostsByDomain(keyword string) (chan *yakit.Host, error)`
 
 
 #### 参数
@@ -536,7 +539,7 @@
 
 #### 定义：
 
-`func db.QueryIPCity(v1: string) return (r0: *geo.City, r1: error)`
+`QueryIPCity(ip string) (*geo.City, error)`
 
 
 #### 参数
@@ -568,7 +571,7 @@
 
 #### 定义：
 
-`func db.QueryIPForIPS(v1: string) return (r0: *geo.ISP, r1: error)`
+`QueryIPForIPS(ip string) (*geo.ISP, error)`
 
 
 #### 参数
@@ -590,6 +593,101 @@
 
 
  
+### db.QueryPayloadGroups
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`QueryPayloadGroups(group string) []string`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
+### db.QueryPortsByTaskName
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.QueryPortsByTaskName(v1: string) return (r0: chan *yakit.Port, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.Port` |   |
+| r1 | `error` |   |
+
+
+ 
+### db.QueryPortsByUpdatedAt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.QueryPortsByUpdatedAt(v1: int64) return (r0: chan *yakit.Port, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `chan *yakit.Port` |   |
+| r1 | `error` |   |
+
+
+ 
 ### db.QueryUrlsAll
 
 查询所有可用 URL
@@ -600,7 +698,7 @@
 
 #### 定义：
 
-`func db.QueryUrlsAll() return (r0: chan string)`
+`QueryUrlsAll() chan string`
 
  
 
@@ -623,7 +721,7 @@
 
 #### 定义：
 
-`func db.QueryUrlsByKeyword(v1: string) return (r0: chan string)`
+`QueryUrlsByKeyword(k string) chan string`
 
 
 #### 参数
@@ -654,7 +752,7 @@
 
 #### 定义：
 
-`func db.SaveDomain(domain: string, ipaddress ...string) return (r0: error)`
+`SaveDomain(domain string, ip ...string) error`
 
 
 #### 参数
@@ -686,7 +784,7 @@
 
 #### 定义：
 
-`func db.SaveHTTPFlowFromNative(url: string, req: *http.Request, rsp: *http.Response) return (r0: error)`
+`SaveHTTPFlowFromNative(url string, req *http.Request, rsp *http.Response) error`
 
 
 #### 参数
@@ -719,7 +817,7 @@
 
 #### 定义：
 
-`func db.SaveHTTPFlowFromNativeWithType(v1: string, v2: *http.Request, v3: *http.Response, v4: string) return (r0: error)`
+`SaveHTTPFlowFromNativeWithType(url string, req *http.Request, rsp *http.Response, typeStr string) error`
 
 
 #### 参数
@@ -753,7 +851,7 @@
 
 #### 定义：
 
-`func db.SavePayload(group: string, payload: []string) return (r0: error)`
+`SavePayload(group string, payloads []string) error`
 
 
 #### 参数
@@ -785,7 +883,7 @@
 
 #### 定义：
 
-`func db.SavePayloadByFile(group: string, fileName: string) return (r0: error)`
+`SavePayloadByFile(group string, fileName string) error`
 
 
 #### 参数
@@ -809,7 +907,7 @@
  
 ### db.SavePortFromResult
 
-从某个结果中保存端口
+
 
 #### 详细描述
 
@@ -817,14 +915,15 @@
 
 #### 定义：
 
-`func db.SavePortFromResult(result: any) return (r0: error)`
+`SavePortFromResult(t any) error`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `any` |   |
+| v1 | `any` |   |
+| v2 | `...string` |   |
 
 
 
@@ -848,7 +947,7 @@
 
 #### 定义：
 
-`func db.SaveYakitMenuItemByBatchExecuteConfig(v1: any) return (r0: error)`
+`SaveYakitMenuItemByBatchExecuteConfig(raw any) error`
 
 
 #### 参数
@@ -879,7 +978,7 @@
 
 #### 定义：
 
-`func db.SaveYakitPlugin(v1: string, v2: string, v3: any) return (r0: error)`
+`SaveYakitPlugin(scriptName string, typeStr string, content any) error`
 
 
 #### 参数
@@ -912,7 +1011,7 @@
 
 #### 定义：
 
-`func db.SetKey(key: any, value: any) return (r0: error)`
+`SetKey(any, any) error`
 
 
 #### 参数
@@ -944,7 +1043,7 @@
 
 #### 定义：
 
-`func db.YieldYakScriptAll() return (r0: chan *yakit.YakScript)`
+`YieldYakScriptAll() chan *yakit.YakScript`
 
  
 

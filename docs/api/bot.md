@@ -29,7 +29,7 @@
 
 #### 定义：
 
-`func bot.FromEnv() return (r0: *bot.Client)`
+`FromEnv() *bot.Client`
 
  
 
@@ -52,7 +52,7 @@
 
 #### 定义：
 
-`func bot.New(v1 ...bot.ConfigOpt) return (r0: *bot.Client)`
+`New(...bot.ConfigOpt) *bot.Client`
 
 
 #### 参数
@@ -83,7 +83,7 @@
 
 #### 定义：
 
-`func bot.ding(v1: string, v2: string) return (r0: func ConfigOpt(v1: *bot.Client) )`
+`ding(string, string) bot.ConfigOpt`
 
 
 #### 参数
@@ -115,7 +115,7 @@
 
 #### 定义：
 
-`func bot.webhook(v1: string) return (r0: func ConfigOpt(v1: *bot.Client) )`
+`webhook(string) bot.ConfigOpt`
 
 
 #### 参数
@@ -146,7 +146,7 @@
 
 #### 定义：
 
-`func bot.webhookWithSecret(v1: string, v2: string) return (r0: func ConfigOpt(v1: *bot.Client) )`
+`webhookWithSecret(string, string) bot.ConfigOpt`
 
 
 #### 参数
@@ -178,7 +178,7 @@
 
 #### 定义：
 
-`func bot.workwx(v1: string) return (r0: func ConfigOpt(v1: *bot.Client) )`
+`workwx(string) bot.ConfigOpt`
 
 
 #### 参数

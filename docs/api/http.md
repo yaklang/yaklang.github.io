@@ -20,11 +20,15 @@
  | [http.cookie](#httpcookie) |  |
  | [http.dump](#httpdump) | 工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte` |
  | [http.dumphead](#httpdumphead) | 工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte` |
+ | [http.fakeua](#httpfakeua) |  |
  | [http.header](#httpheader) |  |
  | [http.json](#httpjson) |  |
  | [http.noredirect](#httpnoredirect) |  |
+ | [http.params](#httpparams) |  |
+ | [http.postparams](#httppostparams) |  |
  | [http.proxy](#httpproxy) |  |
  | [http.redirect](#httpredirect) |  |
+ | [http.session](#httpsession) |  |
  | [http.show](#httpshow) | 调试函数，展示原始数据包内容 |
  | [http.showhead](#httpshowhead) | 调试函数，展示原始数据包内容，不包含 body |
  | [http.timeout](#httptimeout) |  |
@@ -51,7 +55,7 @@
 
 #### 定义：
 
-`func http.Do(v1: *yakhttp.YakHttpRequest) return (r0: *http.Response, r1: error)`
+`Do(req *YakHttpRequest) (*http.Response, error)`
 
 
 #### 参数
@@ -83,7 +87,7 @@
 
 #### 定义：
 
-`func http.Get(v1: string, v2 ...yakhttp.HttpOption) return (r0: *http.Response, r1: error)`
+`Get(string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
 
 
 #### 参数
@@ -101,7 +105,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Response` |   |
+| r0 | `*yakhttp.YakHttpResponse` |   |
 | r1 | `error` |   |
 
 
@@ -116,14 +120,14 @@
 
 #### 定义：
 
-`func http.GetAllBody(response: *http.Response) return (r0: []byte)`
+`GetAllBody(raw any) []byte`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| response | `*http.Response` |  想要读取 body 的 `*http.Response` |
+| v1 | `any` |   |
 
 
 
@@ -133,7 +137,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]byte` |   |
+| r0 | `bytes` |   |
 
 
  
@@ -147,7 +151,7 @@
 
 #### 定义：
 
-`func http.NewRequest(v1: string, v2: string, v3 ...yakhttp.HttpOption) return (r0: *yakhttp.YakHttpRequest, r1: error)`
+`NewRequest(string, string, ...yakhttp.HttpOption) (*yakhttp.YakHttpRequest, error)`
 
 
 #### 参数
@@ -181,7 +185,7 @@
 
 #### 定义：
 
-`func http.Post(v1: string, v2 ...yakhttp.HttpOption) return (r0: *http.Response, r1: error)`
+`Post(string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
 
 
 #### 参数
@@ -199,7 +203,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Response` |   |
+| r0 | `*yakhttp.YakHttpResponse` |   |
 | r1 | `error` |   |
 
 
@@ -214,7 +218,7 @@
 
 #### 定义：
 
-`func http.Raw(req: []byte|string|*http.Request|http.Request) return (r0: *http.Request, r1: error)`
+`Raw(any) (*http.Request, error)`
 
 
 #### 参数
@@ -246,7 +250,7 @@
 
 #### 定义：
 
-`func http.Request(v1: string, v2: string, v3 ...yakhttp.HttpOption) return (r0: *http.Response, r1: error)`
+`Request(string, string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
 
 
 #### 参数
@@ -265,7 +269,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Response` |   |
+| r0 | `*yakhttp.YakHttpResponse` |   |
 | r1 | `error` |   |
 
 
@@ -280,7 +284,7 @@
 
 #### 定义：
 
-`func http.RequestFaviconHash(v1: string) return (r0: string, r1: error)`
+`RequestFaviconHash(urlRaw string) (string, error)`
 
 
 #### 参数
@@ -312,7 +316,7 @@
 
 #### 定义：
 
-`func http.RequestToMD5(url: string) return (md5Str: string, r1: error)`
+`RequestToMD5(url string) (string, error)`
 
 
 #### 参数
@@ -344,7 +348,7 @@
 
 #### 定义：
 
-`func http.RequestToMMH3Hash128(url: string) return (r0: string, r1: error)`
+`RequestToMMH3Hash128(url string) (string, error)`
 
 
 #### 参数
@@ -376,7 +380,7 @@
 
 #### 定义：
 
-`func http.RequestToMMH3Hash128x64(url: string) return (r0: string, r1: error)`
+`RequestToMMH3Hash128x64(url string) (string, error)`
 
 
 #### 参数
@@ -408,7 +412,7 @@
 
 #### 定义：
 
-`func http.RequestToSha1(url: string) return (r0: string, r1: error)`
+`RequestToSha1(url string) (string, error)`
 
 
 #### 参数
@@ -440,7 +444,7 @@
 
 #### 定义：
 
-`func http.RequestToSha256(url: string) return (r0: string, r1: error)`
+`RequestToSha256(url string) (string, error)`
 
 
 #### 参数
@@ -472,7 +476,7 @@
 
 #### 定义：
 
-`func http.body(v1: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`body(any) yakhttp.HttpOption`
 
 
 #### 参数
@@ -503,7 +507,7 @@
 
 #### 定义：
 
-`func http.cookie(v1: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`cookie(any) yakhttp.HttpOption`
 
 
 #### 参数
@@ -534,7 +538,7 @@
 
 #### 定义：
 
-`func http.dump(reqOrRsp: http.Response/Request) return (r0: bytes, r1: error)`
+`dump(i any) ([]byte, error)`
 
 
 #### 参数
@@ -566,7 +570,7 @@
 
 #### 定义：
 
-`func http.dumphead(reqOrRsp: http.Response/Request) return (r0: bytes, r1: error)`
+`dumphead(i any) ([]byte, error)`
 
 
 #### 参数
@@ -588,6 +592,29 @@
 
 
  
+### http.fakeua
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`fakeua() yakhttp.HttpOption`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+
+
+ 
 ### http.header
 
 
@@ -598,7 +625,7 @@
 
 #### 定义：
 
-`func http.header(v1: any, v2: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`header(any, any) yakhttp.HttpOption`
 
 
 #### 参数
@@ -630,7 +657,7 @@
 
 #### 定义：
 
-`func http.json(v1: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`json(any) yakhttp.HttpOption`
 
 
 #### 参数
@@ -661,14 +688,68 @@
 
 #### 定义：
 
-`func http.noredirect(v1: func (v1: *http.Request, v2: []*http.Request) return(bool) ) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`noredirect() yakhttp.HttpOption`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+
+
+ 
+### http.params
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`params(any) yakhttp.HttpOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *http.Request, v2: []*http.Request) return(bool) ` |   |
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+
+
+ 
+### http.postparams
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`postparams(any) yakhttp.HttpOption`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -692,7 +773,7 @@
 
 #### 定义：
 
-`func http.proxy(v1 ...string) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`proxy(...string) yakhttp.HttpOption`
 
 
 #### 参数
@@ -723,7 +804,7 @@
 
 #### 定义：
 
-`func http.redirect(v1: func (v1: *http.Request, v2: []*http.Request) return(bool) ) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`redirect(func(*http.Request, []*http.Request) bool) yakhttp.HttpOption`
 
 
 #### 参数
@@ -731,6 +812,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `func (v1: *http.Request, v2: []*http.Request) return(bool) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+
+
+ 
+### http.session
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`session(any) yakhttp.HttpOption`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -754,7 +866,7 @@
 
 #### 定义：
 
-``func http.show(reqOrRsp: http.Request/Response)``
+`show(i any)`
 
 
 #### 参数
@@ -779,7 +891,7 @@
 
 #### 定义：
 
-``func http.showhead(reqOrRsp: http.Request/Response)``
+`showhead(any)`
 
 
 #### 参数
@@ -804,7 +916,7 @@
 
 #### 定义：
 
-`func http.timeout(v1: float64) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`timeout(float64) yakhttp.HttpOption`
 
 
 #### 参数
@@ -835,7 +947,7 @@
 
 #### 定义：
 
-`func http.ua(v1: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`ua(any) yakhttp.HttpOption`
 
 
 #### 参数
@@ -866,7 +978,7 @@
 
 #### 定义：
 
-`func http.uarand() return (r0: string)`
+`uarand() string`
 
  
 
@@ -889,7 +1001,7 @@
 
 #### 定义：
 
-`func http.useragent(v1: any) return (r0: func HttpOption(v1: *yakhttp.YakHttpRequest) )`
+`useragent(any) yakhttp.HttpOption`
 
 
 #### 参数

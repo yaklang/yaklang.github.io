@@ -25,6 +25,7 @@
  | [fail](#fail) |  |
  | [fprintln](#fprintln) |  |
  | [get](#get) |  |
+ | [getScopeInspects](#getscopeinspects) |  |
  | [import](#import) |  |
  | [isEmpty](#isempty) |  |
  | [len](#len) |  |
@@ -69,8 +70,14 @@
  | [timestamp](#timestamp) |  |
  | [timestampToDatetime](#timestamptodatetime) |  |
  | [timestampToTime](#timestamptotime) |  |
+ | [typeof](#typeof) |  |
  | [uuid](#uuid) |  |
  | [wait](#wait) |  |
+ | [yakfmt](#yakfmt) |  |
+ | [yakfmtWithError](#yakfmtwitherror) |  |
+ | [yakit_output](#yakit_output) |  |
+ | [yakit_save](#yakit_save) |  |
+ | [yakit_status](#yakit_status) |  |
 
 
 
@@ -118,7 +125,7 @@
 
 #### 定义：
 
-`func append(v1: any, v2 ...any) return (r0: any)`
+`append(a any, vals ...any) (ret any)  doc:Append does append(a, vals...)`
 
 
 #### 参数
@@ -150,7 +157,7 @@
 
 #### 定义：
 
-``func assert(v1: bool, v2 ...any)``
+`assert(b bool, reason ...any)`
 
 
 #### 参数
@@ -176,7 +183,7 @@
 
 #### 定义：
 
-``func assertEmpty(v1: any)``
+`assertEmpty(any)`
 
 
 #### 参数
@@ -201,7 +208,7 @@
 
 #### 定义：
 
-``func assertTrue(v1: bool, v2 ...any)``
+`assertTrue(b bool, reason ...any)`
 
 
 #### 参数
@@ -227,7 +234,7 @@
 
 #### 定义：
 
-``func assertf(v1: bool, v2: string, v3 ...any)``
+`assertf(bool, string, ...any)`
 
 
 #### 参数
@@ -254,7 +261,7 @@
 
 #### 定义：
 
-`func atoi(v1: string) return (r0: int, r1: error)`
+`atoi(s string) (int, error)  doc:Atoi is equivalent to ParseInt(s, 10, 0), converted to type int.`
 
 
 #### 参数
@@ -286,7 +293,7 @@
 
 #### 定义：
 
-`func cap(v1: any) return (r0: int)`
+`cap(a any) int  doc:Cap returns capacity of a collection object. object can be a slice, an array or a chan.`
 
 
 #### 参数
@@ -317,7 +324,7 @@
 
 #### 定义：
 
-`func chr(v1: any) return (r0: string)`
+`chr(any) string`
 
 
 #### 参数
@@ -348,7 +355,7 @@
 
 #### 定义：
 
-``func close(v1: any)``
+`close(v any)  doc:close channel`
 
 
 #### 参数
@@ -373,7 +380,7 @@
 
 #### 定义：
 
-`func copy(v1: any, v2: any) return (r0: int)`
+`copy(a, b any) int  doc:Copy does copy(a, b).`
 
 
 #### 参数
@@ -405,7 +412,7 @@
 
 #### 定义：
 
-`func date() return (r0: string)`
+`date() string`
 
  
 
@@ -428,7 +435,7 @@
 
 #### 定义：
 
-`func datetime() return (r0: string)`
+`datetime() string`
 
  
 
@@ -451,7 +458,7 @@
 
 #### 定义：
 
-`func datetimeToTimestamp(v1: string) return (r0: int64, r1: error)`
+`datetimeToTimestamp(string) (int64, error)`
 
 
 #### 参数
@@ -483,7 +490,7 @@
 
 #### 定义：
 
-``func delete(v1: any, v2: any)``
+`delete(m any, key any)  doc:Delete deletes a key from map object.`
 
 
 #### 参数
@@ -509,7 +516,7 @@
 
 #### 定义：
 
-``func desc(v1: any)``
+`desc(i any)`
 
 
 #### 参数
@@ -534,7 +541,7 @@
 
 #### 定义：
 
-`func descStr(v1: any) return (r0: string)`
+`descStr(i any) string`
 
 
 #### 参数
@@ -565,7 +572,7 @@
 
 #### 定义：
 
-``func die(v1: any)``
+`die(err any)`
 
 
 #### 参数
@@ -590,7 +597,7 @@
 
 #### 定义：
 
-``func dump(v1 ...any)``
+`dump(...any)`
 
 
 #### 参数
@@ -615,25 +622,20 @@
 
 #### 定义：
 
-`func eval(v1: any) return (r0: error)`
+``func eval(v1: context.Context, v2: string)``
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| v1 | `context.Context` |   |
+| v2 | `string` |   |
 
 
 
 
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
+ 
 
  
 ### fail
@@ -646,7 +648,7 @@
 
 #### 定义：
 
-``func fail(v1 ...any)``
+`fail(msg ...any)`
 
 
 #### 参数
@@ -671,7 +673,7 @@
 
 #### 定义：
 
-`func fprintln(v1: io.Writer, v2 ...any) return (r0: int, r1: error)`
+`fprintln(w io.Writer, a ...any) (n int, err error)  doc:Fprintln formats using the default formats for its operands and writes to w.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.`
 
 
 #### 参数
@@ -704,7 +706,7 @@
 
 #### 定义：
 
-`func get(v1: any, v2: any, v3 ...any) return (r0: any)`
+`get(m any, key any, defaultValues ...any) (result any)  doc:Get gets a value from an object. object can be a slice, an array, a map or a user-defined class.`
 
 
 #### 参数
@@ -727,6 +729,30 @@
 
 
  
+### getScopeInspects
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func getScopeInspects() return (r0: []*antlr4yak.ScopeValue, r1: error)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]*antlr4yak.ScopeValue` |   |
+| r1 | `error` |   |
+
+
+ 
 ### import
 
 
@@ -737,7 +763,7 @@
 
 #### 定义：
 
-`func import(v1: string, v2: string) return (r0: *yak.yakVariable, r1: error)`
+`import(file string, exportsName string) (any, error)`
 
 
 #### 参数
@@ -755,7 +781,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yak.yakVariable` |   |
+| r0 | `any` |   |
 | r1 | `error` |   |
 
 
@@ -770,7 +796,7 @@
 
 #### 定义：
 
-`func isEmpty(v1: any) return (r0: bool)`
+`isEmpty(any) bool`
 
 
 #### 参数
@@ -801,7 +827,7 @@
 
 #### 定义：
 
-`func len(v1: any) return (r0: int)`
+`len(a any) int  doc:Len returns length of a collection object. object can be a slice, an array, a map, a string or a chan.`
 
 
 #### 参数
@@ -832,7 +858,7 @@
 
 #### 定义：
 
-``func logdiscard()``
+`logdiscard()`
 
  
 
@@ -849,7 +875,7 @@
 
 #### 定义：
 
-``func loglevel(v1: any)``
+`loglevel(i any)`
 
 
 #### 参数
@@ -874,7 +900,7 @@
 
 #### 定义：
 
-``func logquiet()``
+`logquiet()`
 
  
 
@@ -891,7 +917,7 @@
 
 #### 定义：
 
-``func logrecover()``
+`logrecover()`
 
  
 
@@ -908,7 +934,7 @@
 
 #### 定义：
 
-`func make(v1: spec.GoTyper, v2 ...int) return (r0: any)`
+`make(typ yaksepc.GoTyper, args ...int) any  doc:Make creates a instance of yaksepc builtin type (slice, map and chan)`
 
 
 #### 参数
@@ -940,7 +966,7 @@
 
 #### 定义：
 
-`func mapFrom(v1 ...any) return (r0: any)`
+`mapFrom(args ...any) any  doc:MapFrom creates a map from args.`
 
 
 #### 参数
@@ -971,7 +997,7 @@
 
 #### 定义：
 
-`func mapOf(v1: any, v2: any) return (r0: any)`
+`mapOf(key, val any) any  doc:MapOf makes a map type.`
 
 
 #### 参数
@@ -1003,7 +1029,7 @@
 
 #### 定义：
 
-`func max(v1 ...any) return (r0: any)`
+`max(args ...any) (max any)  doc:Max returns max(a1, a2, ...)`
 
 
 #### 参数
@@ -1034,7 +1060,7 @@
 
 #### 定义：
 
-`func min(v1 ...any) return (r0: any)`
+`min(args ...any) (min any)  doc:Min returns min(a1, a2, ...)`
 
 
 #### 参数
@@ -1065,7 +1091,7 @@
 
 #### 定义：
 
-`func mkmap(v1: any, v2 ...int) return (r0: any)`
+`mkmap(typ any, n ...int) any  doc:Mkmap makes a new map object.`
 
 
 #### 参数
@@ -1097,7 +1123,7 @@
 
 #### 定义：
 
-`func mkslice(v1: any, v2 ...any) return (r0: any)`
+`mkslice(typ any, args ...any) any  doc:Mkslice returns a new slice.`
 
 
 #### 参数
@@ -1129,7 +1155,7 @@
 
 #### 定义：
 
-`func nanotimestamp() return (r0: int64)`
+`nanotimestamp() int64`
 
  
 
@@ -1152,7 +1178,7 @@
 
 #### 定义：
 
-`func now() return (r0: time.Time)`
+`now() time.Time`
 
  
 
@@ -1175,7 +1201,7 @@
 
 #### 定义：
 
-`func ord(v1: any) return (r0: int)`
+`ord(any) int`
 
 
 #### 参数
@@ -1206,7 +1232,7 @@
 
 #### 定义：
 
-``func panic(v1: any)``
+`panic(v any)  doc:Panic panics with v.`
 
 
 #### 参数
@@ -1231,7 +1257,7 @@
 
 #### 定义：
 
-``func panicf(v1: string, v2 ...any)``
+`panicf(format string, args ...any)  doc:Panicf panics with sprintf(format, args...).`
 
 
 #### 参数
@@ -1257,7 +1283,7 @@
 
 #### 定义：
 
-`func parseBool(v1: any) return (r0: bool)`
+`parseBool(i any) bool`
 
 
 #### 参数
@@ -1288,7 +1314,7 @@
 
 #### 定义：
 
-`func parseBoolean(v1: any) return (r0: bool)`
+`parseBoolean(i any) bool`
 
 
 #### 参数
@@ -1319,7 +1345,7 @@
 
 #### 定义：
 
-`func parseFloat(v1: string) return (r0: float64)`
+`parseFloat(s string) float64`
 
 
 #### 参数
@@ -1350,7 +1376,7 @@
 
 #### 定义：
 
-`func parseInt(v1: string) return (r0: int)`
+`parseInt(s string) int`
 
 
 #### 参数
@@ -1381,7 +1407,7 @@
 
 #### 定义：
 
-`func parseStr(v1: any) return (r0: string)`
+`parseStr(i any) string`
 
 
 #### 参数
@@ -1412,7 +1438,7 @@
 
 #### 定义：
 
-`func parseString(v1: any) return (r0: string)`
+`parseString(i any) string`
 
 
 #### 参数
@@ -1443,7 +1469,7 @@
 
 #### 定义：
 
-`func parseTime(v1: string, v2: string) return (r0: time.Time, r1: error)`
+`parseTime(string, string) (time.Time, error)`
 
 
 #### 参数
@@ -1476,7 +1502,7 @@
 
 #### 定义：
 
-`func print(v1 ...any) return (r0: int, r1: error)`
+`print(a ...any) (n int, err error)  doc:Print formats using the default formats for its operands and writes to standard output.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.`
 
 
 #### 参数
@@ -1508,7 +1534,7 @@
 
 #### 定义：
 
-`func printf(v1: string, v2 ...any) return (r0: int, r1: error)`
+`printf(format string, a ...any) (n int, err error)  doc:Printf formats according to a format specifier and writes to standard output.It returns the number of bytes written and any write error encountered.`
 
 
 #### 参数
@@ -1541,7 +1567,7 @@
 
 #### 定义：
 
-`func println(v1 ...any) return (r0: int, r1: error)`
+`println(a ...any) (n int, err error)  doc:Println formats using the default formats for its operands and writes to standard output.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.`
 
 
 #### 参数
@@ -1573,7 +1599,7 @@
 
 #### 定义：
 
-`func randn(v1: int, v2: int) return (r0: int)`
+`randn(int, int) int`
 
 
 #### 参数
@@ -1605,7 +1631,7 @@
 
 #### 定义：
 
-`func randstr(v1: int) return (r0: string)`
+`randstr(int) string`
 
 
 #### 参数
@@ -1636,7 +1662,7 @@
 
 #### 定义：
 
-`func sdump(v1 ...any) return (r0: string)`
+`sdump(...any) string`
 
 
 #### 参数
@@ -1667,7 +1693,7 @@
 
 #### 定义：
 
-``func set(v1: any, v2 ...any)``
+`set(m any, args ...any)  doc:Set sets (index, value) pairs to an object. object can be a slice, an array, a map or a user-defined class.`
 
 
 #### 参数
@@ -1693,7 +1719,7 @@
 
 #### 定义：
 
-``func sleep(v1: float64)``
+`sleep(i float64)`
 
 
 #### 参数
@@ -1718,7 +1744,7 @@
 
 #### 定义：
 
-`func slice(v1: any, v2 ...any) return (r0: any)`
+`slice(typ any, args ...any) any  doc:Mkslice returns a new slice.`
 
 
 #### 参数
@@ -1750,7 +1776,7 @@
 
 #### 定义：
 
-`func sliceOf(v1: any) return (r0: any)`
+`sliceOf(typ any) any  doc:SliceOf makes a slice type.`
 
 
 #### 参数
@@ -1781,7 +1807,7 @@
 
 #### 定义：
 
-`func sprint(v1 ...any) return (r0: string)`
+`sprint(a ...any) string  doc:Sprint formats using the default formats for its operands and returns the resulting string.Spaces are added between operands when neither is a string.`
 
 
 #### 参数
@@ -1812,7 +1838,7 @@
 
 #### 定义：
 
-`func sprintf(v1: string, v2 ...any) return (r0: string)`
+`sprintf(format string, a ...any) string  doc:Sprintf formats according to a format specifier and returns the resulting string.`
 
 
 #### 参数
@@ -1844,7 +1870,7 @@
 
 #### 定义：
 
-`func sprintln(v1 ...any) return (r0: string)`
+`sprintln(a ...any) string  doc:Sprintln formats using the default formats for its operands and returns the resulting string.Spaces are always added between operands and a newline is appended.`
 
 
 #### 参数
@@ -1875,7 +1901,7 @@
 
 #### 定义：
 
-`func sub(v1: any, v2: any, v3: any) return (r0: any)`
+`sub(a, i, j any) any  doc:SubSlice returns a[i:j]. if i == nil it returns a[:j]. if j == nil it returns a[i:].`
 
 
 #### 参数
@@ -1908,7 +1934,7 @@
 
 #### 定义：
 
-``func tick1s(v1: func () return(bool) )``
+`tick1s(f func() bool)`
 
 
 #### 参数
@@ -1933,7 +1959,7 @@
 
 #### 定义：
 
-`func timestamp() return (r0: int64)`
+`timestamp() int64`
 
  
 
@@ -1956,7 +1982,7 @@
 
 #### 定义：
 
-`func timestampToDatetime(v1: int64) return (r0: string)`
+`timestampToDatetime(int64) string`
 
 
 #### 参数
@@ -1987,7 +2013,7 @@
 
 #### 定义：
 
-`func timestampToTime(v1: int64) return (r0: time.Time)`
+`timestampToTime(int64) time.Time`
 
 
 #### 参数
@@ -2008,6 +2034,37 @@
 
 
  
+### typeof
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`typeof(any) reflect.Type`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `reflect.Type` |   |
+
+
+ 
 ### uuid
 
 
@@ -2018,7 +2075,7 @@
 
 #### 定义：
 
-`func uuid() return (r0: string)`
+`uuid() string`
 
  
 
@@ -2041,7 +2098,7 @@
 
 #### 定义：
 
-``func wait(v1: any)``
+`wait(any)`
 
 
 #### 参数
@@ -2049,6 +2106,144 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `any` |   |
+
+
+
+
+ 
+
+ 
+### yakfmt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakfmt(v1: string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### yakfmtWithError
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yakfmtWithError(v1: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### yakit_output
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit_output(v1 ...any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...any` |   |
+
+
+
+
+ 
+
+ 
+### yakit_save
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit_save(v1 ...any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...any` |   |
+
+
+
+
+ 
+
+ 
+### yakit_status
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func yakit_status(v1 ...any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...any` |   |
 
 
 

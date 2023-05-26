@@ -30,7 +30,7 @@
 
 #### 定义：
 
-`func smb.Connect(v1: string, v2 ...yaklib._smbConfigHandler) return (r0: *smb.Session, r1: error)`
+`Connect(addr string, opts ..._smbConfigHandler) (*smb.Session, error)`
 
 
 #### 参数
@@ -63,7 +63,7 @@
 
 #### 定义：
 
-`func smb.debug(v1: bool) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`debug(bool) yaklib._smbConfigHandler`
 
 
 #### 参数
@@ -94,7 +94,7 @@
 
 #### 定义：
 
-`func smb.domain(v1: string) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`domain(string) yaklib._smbConfigHandler`
 
 
 #### 参数
@@ -125,7 +125,7 @@
 
 #### 定义：
 
-`func smb.hash(v1: string) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`hash(string) yaklib._smbConfigHandler`
 
 
 #### 参数
@@ -156,7 +156,7 @@
 
 #### 定义：
 
-`func smb.password(v1: string) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`password(string) yaklib._smbConfigHandler`
 
 
 #### 参数
@@ -187,7 +187,7 @@
 
 #### 定义：
 
-`func smb.username(v1: string) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`username(string) yaklib._smbConfigHandler`
 
 
 #### 参数
@@ -218,7 +218,7 @@
 
 #### 定义：
 
-`func smb.workstation(v1: string) return (r0: func _smbConfigHandler(v1: *yaklib._smbConfig) )`
+`workstation(string) yaklib._smbConfigHandler`
 
 
 #### 参数

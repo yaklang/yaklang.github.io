@@ -4,7 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [dyn.Eval](#dyneval) | 独立上下文执行一段新的 yak 代码 |
- | [dyn.Import](#dynimport) | 加载一个 yak 文件，并把代码中的某些变量提取出来 |
+ | [dyn.Import](#dynimport) |  |
  | [dyn.IsYakFunc](#dynisyakfunc) | 判断一个对象是不是可供 yak 调用的函数，类似 python 的 `callable` |
  | [dyn.LoadVarFromFile](#dynloadvarfromfile) | 从一个文件/文件夹/模块中，批量导入一个对象，通常用于 exp/poc 编写的时候，需要批量导入一些模块的函数 |
  | [dyn.params](#dynparams) | 给导入的脚本额外增加一些变量 |
@@ -36,7 +36,7 @@ die(dyn.Eval(`println(123); 1+1`))
 
 #### 定义：
 
-`func dyn.Eval(code: any) return (err: error)`
+`Eval(i any) error`
 
 
 #### 参数
@@ -59,47 +59,23 @@ die(dyn.Eval(`println(123); 1+1`))
  
 ### dyn.Import
 
-加载一个 yak 文件，并把代码中的某些变量提取出来
+
 
 #### 详细描述
 
-要注意的是，执行的新的代码 `YAK_MAIN` 会设置为 false，如果想要编写渗透测试工具，进行模块化编程，测试代码可以放在 `if YAK_MAIN {}` 中；
-
-一般来说，这个函数经常会用作导入别的脚本的函数，我们创建如下两个文件
-
-```go title=&#39;a.yak&#39;
-def abc(caller) {
-  println(`abc from function is called by`, caller)
-}
-```
-
-```go title=&#39;b.yak&#39;
-v, err := dyn.Import(`a`, `abc`)
-die(err)
-
-v.Value(&#34;b.yak&#34;)
-```
-
-然后通过 `yak b.yak` 来执行 `b.yak`
-
-得到的结果如下：
-
-```
-abc from function is called by b.yak
-```
 
 
 #### 定义：
 
-`func dyn.Import(fileOrModel: string, varName: string) return (yakVariable: *yak.yakVariable, err: error)`
+`Import(file string, exportsName string) (any, error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fileOrModel | `string` |  可以是一个文件名（加不加 `.yak` 后缀均可）如果是一个文件夹的话，会自动寻找这个文件夹下的 `main.yak` 文件 |
-| varName | `string` |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -109,8 +85,8 @@ abc from function is called by b.yak
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| yakVariable | `*yak.yakVariable` |  yak 的变量对象 |
-| err | `error` |   |
+| r0 | `any` |   |
+| r1 | `error` |   |
 
 
  
@@ -124,7 +100,7 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.IsYakFunc(obj: any) return (result: bool)`
+`IsYakFunc(i any) bool`
 
 
 #### 参数
@@ -155,7 +131,7 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.LoadVarFromFile(fromModules: string, varName: string, params dyn.param) return (r0: []*yak.yakVariable, r1: error)`
+`LoadVarFromFile(string, string, ...yak.yakEvalConfigOpt) ([]*yak.yakVariable, error)`
 
 
 #### 参数
@@ -189,7 +165,7 @@ abc from function is called by b.yak
 
 #### 定义：
 
-`func dyn.params(v1: map[string]any) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
+`params(map[string]any) yak.yakEvalConfigOpt`
 
 
 #### 参数
@@ -223,7 +199,7 @@ dyn.LoadVarFromFile(`dir`, varName, dyn.recursive(true))
 
 #### 定义：
 
-`func dyn.recursive(v1: bool) return (r0: func yakEvalConfigOpt(v1: *yak.yakEvalConfig) )`
+`recursive(bool) yak.yakEvalConfigOpt`
 
 
 #### 参数

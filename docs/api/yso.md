@@ -3,23 +3,25 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [yso.GenerateClassObjectFromBytes](#ysogenerateclassobjectfrombytes) |  |
- | [yso.GenerateDNSlogEvilClassObject](#ysogeneratednslogevilclassobject) |  |
- | [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#ysogeneratemodifytomcatmaxheadersizeevilclassobject) |  |
- | [yso.GenerateProcessBuilderExecEvilClassObject](#ysogenerateprocessbuilderexecevilclassobject) |  |
- | [yso.GenerateProcessImplExecEvilClassObject](#ysogenerateprocessimplexecevilclassobject) |  |
- | [yso.GenerateRuntimeExecEvilClassObject](#ysogenerateruntimeexecevilclassobject) |  |
- | [yso.GenerateSpringEchoEvilClassObject](#ysogeneratespringechoevilclassobject) |  |
- | [yso.GenerateTcpReverseEvilClassObject](#ysogeneratetcpreverseevilclassobject) |  |
- | [yso.GenerateTcpReverseShellEvilClassObject](#ysogeneratetcpreverseshellevilclassobject) |  |
- | [yso.GetAllGadget](#ysogetallgadget) |  |
- | [yso.GetAllRuntimeExecGadget](#ysogetallruntimeexecgadget) |  |
- | [yso.GetAllTemplatesGadget](#ysogetalltemplatesgadget) |  |
- | [yso.GetBeanShell1JavaObject](#ysogetbeanshell1javaobject) |  |
- | [yso.GetClick1JavaObject](#ysogetclick1javaobject) |  |
- | [yso.GetCommonsBeanutils183NOCCJavaObject](#ysogetcommonsbeanutils183noccjavaobject) |  |
- | [yso.GetCommonsBeanutils192NOCCJavaObject](#ysogetcommonsbeanutils192noccjavaobject) |  |
- | [yso.GetCommonsBeanutils1JavaObject](#ysogetcommonsbeanutils1javaobject) |  |
+ | [yso.GenerateClassObjectFromBytes](#ysogenerateclassobjectfrombytes) | 从Bytes中加载Class |
+ | [yso.GenerateDNSlogEvilClassObject](#ysogeneratednslogevilclassobject) | 生成一个制定域名的DNSLog恶意类 |
+ | [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#ysogeneratemodifytomcatmaxheadersizeevilclassobject) | 生成一个修改Tomcat最大头长度的恶意类 |
+ | [yso.GenerateMultiEchoClassObject](#ysogeneratemultiechoclassobject) | 生成一个兼容性Echo回显恶意对象 |
+ | [yso.GenerateProcessBuilderExecEvilClassObject](#ysogenerateprocessbuilderexecevilclassobject) | 生成一个ProcessBuilderExec方式的恶意类对象 |
+ | [yso.GenerateProcessImplExecEvilClassObject](#ysogenerateprocessimplexecevilclassobject) | 生成一个ProcessImpl执行的恶意类对象 |
+ | [yso.GenerateRuntimeExecEvilClassObject](#ysogenerateruntimeexecevilclassobject) | 生成一个RuntimeExec的恶意类 |
+ | [yso.GenerateSpringEchoEvilClassObject](#ysogeneratespringechoevilclassobject) | 生成一个SpringEcho恶意类对象&#34;&#34; |
+ | [yso.GenerateTcpReverseEvilClassObject](#ysogeneratetcpreverseevilclassobject) | 生成一个TCP反连的恶意类对象 |
+ | [yso.GenerateTcpReverseShellEvilClassObject](#ysogeneratetcpreverseshellevilclassobject) | 生成一个TCP反弹Shell的恶意类对象 |
+ | [yso.GenerateTomcatEchoClassObject](#ysogeneratetomcatechoclassobject) | 生成一个Tomcat回显恶意类 |
+ | [yso.GetAllGadget](#ysogetallgadget) | 获取所有可以生成的工具 Gadget |
+ | [yso.GetAllRuntimeExecGadget](#ysogetallruntimeexecgadget) | 获取所有命令执行的 Gadget |
+ | [yso.GetAllTemplatesGadget](#ysogetalltemplatesgadget) | 获取所有模版执行的 Gadget |
+ | [yso.GetBeanShell1JavaObject](#ysogetbeanshell1javaobject) | 生成 BeanShell1 Java反序列化对象 |
+ | [yso.GetClick1JavaObject](#ysogetclick1javaobject) | 生成 Click1 恶意对象 |
+ | [yso.GetCommonsBeanutils183NOCCJavaObject](#ysogetcommonsbeanutils183noccjavaobject) | CB183NoCC依赖的Java恶意对象 |
+ | [yso.GetCommonsBeanutils192NOCCJavaObject](#ysogetcommonsbeanutils192noccjavaobject) | CB192NOCC的Java恶意对象 |
+ | [yso.GetCommonsBeanutils1JavaObject](#ysogetcommonsbeanutils1javaobject) | CB1 |
  | [yso.GetCommonsCollections1JavaObject](#ysogetcommonscollections1javaobject) |  |
  | [yso.GetCommonsCollections2JavaObject](#ysogetcommonscollections2javaobject) |  |
  | [yso.GetCommonsCollections3JavaObject](#ysogetcommonscollections3javaobject) |  |
@@ -32,6 +34,7 @@
  | [yso.GetCommonsCollectionsK2JavaObject](#ysogetcommonscollectionsk2javaobject) |  |
  | [yso.GetCommonsCollectionsK3JavaObject](#ysogetcommonscollectionsk3javaobject) |  |
  | [yso.GetCommonsCollectionsK4JavaObject](#ysogetcommonscollectionsk4javaobject) |  |
+ | [yso.GetFindGadgetByDNSJavaObject](#ysogetfindgadgetbydnsjavaobject) |  |
  | [yso.GetGadgetNameByFun](#ysogetgadgetnamebyfun) |  |
  | [yso.GetGroovy1JavaObject](#ysogetgroovy1javaobject) |  |
  | [yso.GetJBossInterceptors1JavaObject](#ysogetjbossinterceptors1javaobject) |  |
@@ -41,6 +44,7 @@
  | [yso.GetJdk7u21JavaObject](#ysogetjdk7u21javaobject) |  |
  | [yso.GetJdk8u20JavaObject](#ysogetjdk8u20javaobject) |  |
  | [yso.GetSimplePrincipalCollectionJavaObject](#ysogetsimpleprincipalcollectionjavaobject) |  |
+ | [yso.GetURLDNSJavaObject](#ysogeturldnsjavaobject) |  |
  | [yso.ToBcel](#ysotobcel) |  |
  | [yso.ToBytes](#ysotobytes) |  |
  | [yso.ToJson](#ysotojson) |  |
@@ -59,10 +63,12 @@
  | [yso.useBase64BytesClass](#ysousebase64bytesclass) |  |
  | [yso.useBytesClass](#ysousebytesclass) |  |
  | [yso.useBytesEvilClass](#ysousebytesevilclass) |  |
+ | [yso.useClassMultiEchoTemplate](#ysouseclassmultiechotemplate) |  |
  | [yso.useConstructorExecutor](#ysouseconstructorexecutor) |  |
  | [yso.useDNSLogEvilClass](#ysousednslogevilclass) |  |
  | [yso.useDNSlogTemplate](#ysousednslogtemplate) |  |
  | [yso.useModifyTomcatMaxHeaderSizeTemplate](#ysousemodifytomcatmaxheadersizetemplate) |  |
+ | [yso.useMultiEchoEvilClass](#ysousemultiechoevilclass) |  |
  | [yso.useProcessBuilderExecEvilClass](#ysouseprocessbuilderexecevilclass) |  |
  | [yso.useProcessBuilderExecTemplate](#ysouseprocessbuilderexectemplate) |  |
  | [yso.useProcessImplExecEvilClass](#ysouseprocessimplexecevilclass) |  |
@@ -74,6 +80,8 @@
  | [yso.useTcpReverseShellEvilClass](#ysousetcpreverseshellevilclass) |  |
  | [yso.useTcpReverseShellTemplate](#ysousetcpreverseshelltemplate) |  |
  | [yso.useTcpReverseTemplate](#ysousetcpreversetemplate) |  |
+ | [yso.useTomcatEchoEvilClass](#ysousetomcatechoevilclass) |  |
+ | [yso.useTomcatEchoTemplate](#ysousetomcatechotemplate) |  |
 
 
 
@@ -86,7 +94,7 @@
 
 ### yso.GenerateClassObjectFromBytes
 
-
+从Bytes中加载Class
 
 #### 详细描述
 
@@ -94,7 +102,7 @@
 
 #### 定义：
 
-`func yso.GenerateClassObjectFromBytes(v1: bytes, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateClassObjectFromBytes(bytes []byte, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -119,7 +127,7 @@
  
 ### yso.GenerateDNSlogEvilClassObject
 
-
+生成一个制定域名的DNSLog恶意类
 
 #### 详细描述
 
@@ -127,7 +135,7 @@
 
 #### 定义：
 
-`func yso.GenerateDNSlogEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateDNSlogEvilClassObject(domain string, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)  doc:dnslog生成`
 
 
 #### 参数
@@ -152,7 +160,7 @@
  
 ### yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject
 
-
+生成一个修改Tomcat最大头长度的恶意类
 
 #### 详细描述
 
@@ -160,7 +168,39 @@
 
 #### 定义：
 
-`func yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateModifyTomcatMaxHeaderSizeEvilClassObject(options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateMultiEchoClassObject
+
+生成一个兼容性Echo回显恶意对象
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`GenerateMultiEchoClassObject(options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -184,7 +224,7 @@
  
 ### yso.GenerateProcessBuilderExecEvilClassObject
 
-
+生成一个ProcessBuilderExec方式的恶意类对象
 
 #### 详细描述
 
@@ -192,7 +232,7 @@
 
 #### 定义：
 
-`func yso.GenerateProcessBuilderExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateProcessBuilderExecEvilClassObject(cmd string, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -217,7 +257,7 @@
  
 ### yso.GenerateProcessImplExecEvilClassObject
 
-
+生成一个ProcessImpl执行的恶意类对象
 
 #### 详细描述
 
@@ -225,7 +265,7 @@
 
 #### 定义：
 
-`func yso.GenerateProcessImplExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateProcessImplExecEvilClassObject(cmd string, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -250,7 +290,7 @@
  
 ### yso.GenerateRuntimeExecEvilClassObject
 
-
+生成一个RuntimeExec的恶意类
 
 #### 详细描述
 
@@ -258,7 +298,7 @@
 
 #### 定义：
 
-`func yso.GenerateRuntimeExecEvilClassObject(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateRuntimeExecEvilClassObject(cmd string, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -283,7 +323,7 @@
  
 ### yso.GenerateSpringEchoEvilClassObject
 
-
+生成一个SpringEcho恶意类对象&#34;&#34;
 
 #### 详细描述
 
@@ -291,7 +331,7 @@
 
 #### 定义：
 
-`func yso.GenerateSpringEchoEvilClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateSpringEchoEvilClassObject(options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)  doc:spring生成`
 
 
 #### 参数
@@ -315,7 +355,7 @@
  
 ### yso.GenerateTcpReverseEvilClassObject
 
-
+生成一个TCP反连的恶意类对象
 
 #### 详细描述
 
@@ -323,7 +363,7 @@
 
 #### 定义：
 
-`func yso.GenerateTcpReverseEvilClassObject(v1: string, v2: int, v3 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateTcpReverseEvilClassObject(host string, port int, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -349,7 +389,7 @@
  
 ### yso.GenerateTcpReverseShellEvilClassObject
 
-
+生成一个TCP反弹Shell的恶意类对象
 
 #### 详细描述
 
@@ -357,7 +397,7 @@
 
 #### 定义：
 
-`func yso.GenerateTcpReverseShellEvilClassObject(v1: string, v2: int, v3 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+`GenerateTcpReverseShellEvilClassObject(host string, port int, options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
 
 
 #### 参数
@@ -381,9 +421,9 @@
 
 
  
-### yso.GetAllGadget
+### yso.GenerateTomcatEchoClassObject
 
-
+生成一个Tomcat回显恶意类
 
 #### 详细描述
 
@@ -391,7 +431,39 @@
 
 #### 定义：
 
-`func yso.GetAllGadget() return (r0: []any)`
+`GenerateTomcatEchoClassObject(options ...GenClassOptionFun) (*javaclassparser.ClassObject, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetAllGadget
+
+获取所有可以生成的工具 Gadget
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`GetAllGadget() []any`
 
  
 
@@ -406,7 +478,7 @@
  
 ### yso.GetAllRuntimeExecGadget
 
-
+获取所有命令执行的 Gadget
 
 #### 详细描述
 
@@ -414,7 +486,7 @@
 
 #### 定义：
 
-`func yso.GetAllRuntimeExecGadget() return (r0: []yso.RuntimeExecGadget)`
+`GetAllRuntimeExecGadget() []yso.RuntimeExecGadget`
 
  
 
@@ -429,7 +501,7 @@
  
 ### yso.GetAllTemplatesGadget
 
-
+获取所有模版执行的 Gadget
 
 #### 详细描述
 
@@ -437,7 +509,7 @@
 
 #### 定义：
 
-`func yso.GetAllTemplatesGadget() return (r0: []yso.TemplatesGadget)`
+`GetAllTemplatesGadget() []yso.TemplatesGadget`
 
  
 
@@ -452,7 +524,7 @@
  
 ### yso.GetBeanShell1JavaObject
 
-
+生成 BeanShell1 Java反序列化对象
 
 #### 详细描述
 
@@ -460,7 +532,7 @@
 
 #### 定义：
 
-`func yso.GetBeanShell1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetBeanShell1JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -484,7 +556,7 @@
  
 ### yso.GetClick1JavaObject
 
-
+生成 Click1 恶意对象
 
 #### 详细描述
 
@@ -492,7 +564,7 @@
 
 #### 定义：
 
-`func yso.GetClick1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetClick1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -516,7 +588,7 @@
  
 ### yso.GetCommonsBeanutils183NOCCJavaObject
 
-
+CB183NoCC依赖的Java恶意对象
 
 #### 详细描述
 
@@ -524,7 +596,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils183NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsBeanutils183NOCCJavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -548,7 +620,7 @@
  
 ### yso.GetCommonsBeanutils192NOCCJavaObject
 
-
+CB192NOCC的Java恶意对象
 
 #### 详细描述
 
@@ -556,7 +628,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils192NOCCJavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsBeanutils192NOCCJavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -580,7 +652,7 @@
  
 ### yso.GetCommonsBeanutils1JavaObject
 
-
+CB1
 
 #### 详细描述
 
@@ -588,7 +660,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsBeanutils1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsBeanutils1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -620,7 +692,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections1JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -652,7 +724,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections2JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -684,7 +756,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections3JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections3JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -716,7 +788,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections4JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections4JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -748,7 +820,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections5JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections5JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -780,7 +852,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections6JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections6JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -812,7 +884,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections7JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections7JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -844,7 +916,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollections8JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollections8JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -876,7 +948,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollectionsK1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -908,7 +980,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK2JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollectionsK2JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -940,7 +1012,7 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK3JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollectionsK3JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -972,7 +1044,39 @@
 
 #### 定义：
 
-`func yso.GetCommonsCollectionsK4JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetCommonsCollectionsK4JavaObject(string) (*yso.JavaObject, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yso.JavaObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetFindGadgetByDNSJavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`GetFindGadgetByDNSJavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1004,7 +1108,7 @@
 
 #### 定义：
 
-`func yso.GetGadgetNameByFun(v1: any) return (r0: string, r1: error)`
+`GetGadgetNameByFun(i any) (string, error)`
 
 
 #### 参数
@@ -1036,7 +1140,7 @@
 
 #### 定义：
 
-`func yso.GetGroovy1JavaObject(v1: string) return (r0: *yso.JavaObject, r1: error)`
+`GetGroovy1JavaObject(string) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1068,7 +1172,7 @@
 
 #### 定义：
 
-`func yso.GetJBossInterceptors1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetJBossInterceptors1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1100,7 +1204,7 @@
 
 #### 定义：
 
-`func yso.GetJSON1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetJSON1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1132,7 +1236,7 @@
 
 #### 定义：
 
-`func yso.GetJavaObjectFromBytes(v1: bytes) return (r0: *yso.JavaObject, r1: error)`
+`GetJavaObjectFromBytes([]uint8) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1164,7 +1268,7 @@
 
 #### 定义：
 
-`func yso.GetJavassistWeld1JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetJavassistWeld1JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1196,7 +1300,7 @@
 
 #### 定义：
 
-`func yso.GetJdk7u21JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetJdk7u21JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1228,7 +1332,7 @@
 
 #### 定义：
 
-`func yso.GetJdk8u20JavaObject(v1 ...yso.GenClassOptionFun) return (r0: *yso.JavaObject, r1: error)`
+`GetJdk8u20JavaObject(...yso.GenClassOptionFun) (*yso.JavaObject, error)`
 
 
 #### 参数
@@ -1260,9 +1364,41 @@
 
 #### 定义：
 
-`func yso.GetSimplePrincipalCollectionJavaObject() return (r0: *yso.JavaObject, r1: error)`
+`GetSimplePrincipalCollectionJavaObject() (*yso.JavaObject, error)`
 
  
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*yso.JavaObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GetURLDNSJavaObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`GetURLDNSJavaObject(string) (*yso.JavaObject, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
 
 
 #### 返回值
@@ -1284,7 +1420,7 @@
 
 #### 定义：
 
-`func yso.ToBcel(v1: any) return (r0: string, r1: error)`
+`ToBcel(i any) (string, error)`
 
 
 #### 参数
@@ -1316,7 +1452,7 @@
 
 #### 定义：
 
-`func yso.ToBytes(v1: any) return (r0: bytes, r1: error)`
+`ToBytes(i any) ([]byte, error)`
 
 
 #### 参数
@@ -1348,7 +1484,7 @@
 
 #### 定义：
 
-`func yso.ToJson(v1: any) return (r0: string, r1: error)`
+`ToJson(i any) (string, error)`
 
 
 #### 参数
@@ -1380,7 +1516,7 @@
 
 #### 定义：
 
-`func yso.command(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`command(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1411,7 +1547,7 @@
 
 #### 定义：
 
-`func yso.dnslogDomain(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`dnslogDomain(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1442,7 +1578,7 @@
 
 #### 定义：
 
-`func yso.dump(v1: any) return (r0: string, r1: error)`
+`dump(i any) (string, error)`
 
 
 #### 参数
@@ -1474,7 +1610,7 @@
 
 #### 定义：
 
-`func yso.evilClassName(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`evilClassName(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1505,7 +1641,7 @@
 
 #### 定义：
 
-`func yso.obfuscationClassConstantPool() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`obfuscationClassConstantPool() yso.GenClassOptionFun`
 
  
 
@@ -1528,7 +1664,7 @@
 
 #### 定义：
 
-`func yso.springEchoBody() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`springEchoBody() yso.GenClassOptionFun`
 
  
 
@@ -1551,7 +1687,7 @@
 
 #### 定义：
 
-`func yso.springHeader(v1: string, v2: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`springHeader(string, string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1583,7 +1719,7 @@
 
 #### 定义：
 
-`func yso.springParam(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`springParam(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1614,7 +1750,7 @@
 
 #### 定义：
 
-`func yso.springRuntimeExecAction() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`springRuntimeExecAction() yso.GenClassOptionFun`
 
  
 
@@ -1637,7 +1773,7 @@
 
 #### 定义：
 
-`func yso.tcpReverseHost(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`tcpReverseHost(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1668,7 +1804,7 @@
 
 #### 定义：
 
-`func yso.tcpReversePort(v1: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`tcpReversePort(int) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1699,7 +1835,7 @@
 
 #### 定义：
 
-`func yso.tcpReverseToken(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`tcpReverseToken(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1730,7 +1866,7 @@
 
 #### 定义：
 
-`func yso.useBase64BytesClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useBase64BytesClass(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1761,7 +1897,7 @@
 
 #### 定义：
 
-`func yso.useBytesClass(v1: bytes) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useBytesClass([]uint8) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1792,7 +1928,7 @@
 
 #### 定义：
 
-`func yso.useBytesEvilClass(v1: bytes) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useBytesEvilClass([]uint8) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1813,6 +1949,29 @@
 
 
  
+### yso.useClassMultiEchoTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`useClassMultiEchoTemplate() yso.GenClassOptionFun`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
 ### yso.useConstructorExecutor
 
 
@@ -1823,7 +1982,7 @@
 
 #### 定义：
 
-`func yso.useConstructorExecutor() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useConstructorExecutor() yso.GenClassOptionFun`
 
  
 
@@ -1846,7 +2005,7 @@
 
 #### 定义：
 
-`func yso.useDNSLogEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useDNSLogEvilClass(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1877,7 +2036,7 @@
 
 #### 定义：
 
-`func yso.useDNSlogTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useDNSlogTemplate() yso.GenClassOptionFun`
 
  
 
@@ -1900,7 +2059,30 @@
 
 #### 定义：
 
-`func yso.useModifyTomcatMaxHeaderSizeTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useModifyTomcatMaxHeaderSizeTemplate() yso.GenClassOptionFun`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useMultiEchoEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`useMultiEchoEvilClass() yso.GenClassOptionFun`
 
  
 
@@ -1923,7 +2105,7 @@
 
 #### 定义：
 
-`func yso.useProcessBuilderExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useProcessBuilderExecEvilClass(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -1954,7 +2136,7 @@
 
 #### 定义：
 
-`func yso.useProcessBuilderExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useProcessBuilderExecTemplate() yso.GenClassOptionFun`
 
  
 
@@ -1977,7 +2159,7 @@
 
 #### 定义：
 
-`func yso.useProcessImplExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useProcessImplExecEvilClass(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -2008,7 +2190,7 @@
 
 #### 定义：
 
-`func yso.useProcessImplExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useProcessImplExecTemplate() yso.GenClassOptionFun`
 
  
 
@@ -2031,7 +2213,7 @@
 
 #### 定义：
 
-`func yso.useRuntimeExecEvilClass(v1: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useRuntimeExecEvilClass(string) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -2062,7 +2244,7 @@
 
 #### 定义：
 
-`func yso.useRuntimeExecTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useRuntimeExecTemplate() yso.GenClassOptionFun`
 
  
 
@@ -2085,7 +2267,7 @@
 
 #### 定义：
 
-`func yso.useSpringEchoTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useSpringEchoTemplate() yso.GenClassOptionFun`
 
  
 
@@ -2108,7 +2290,7 @@
 
 #### 定义：
 
-`func yso.useTcpReverseEvilClass(v1: string, v2: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useTcpReverseEvilClass(string, int) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -2140,7 +2322,7 @@
 
 #### 定义：
 
-`func yso.useTcpReverseShellEvilClass(v1: string, v2: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useTcpReverseShellEvilClass(string, int) yso.GenClassOptionFun`
 
 
 #### 参数
@@ -2172,7 +2354,7 @@
 
 #### 定义：
 
-`func yso.useTcpReverseShellTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useTcpReverseShellTemplate() yso.GenClassOptionFun`
 
  
 
@@ -2195,7 +2377,53 @@
 
 #### 定义：
 
-`func yso.useTcpReverseTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+`useTcpReverseTemplate() yso.GenClassOptionFun`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useTomcatEchoEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`useTomcatEchoEvilClass() yso.GenClassOptionFun`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useTomcatEchoTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`useTomcatEchoTemplate() yso.GenClassOptionFun`
 
  
 

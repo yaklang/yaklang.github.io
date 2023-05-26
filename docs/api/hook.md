@@ -30,7 +30,7 @@
 
 #### 定义：
 
-`func hook.CallYakitPluginFunc(pluginName: string, funcName: string) return (caller: any, err: error)`
+`CallYakitPluginFunc(scriptName string, hookName string) (any, error)`
 
 
 #### 参数
@@ -63,7 +63,7 @@
 
 #### 定义：
 
-`func hook.LoadYakitPlugin(manager: *yak.YakToCallerManager, pluginType: string, funcNames ...string) return (r0: error)`
+`LoadYakitPlugin(mng *YakToCallerManager, scriptType string, hookNames ...string) error`
 
 
 #### 参数
@@ -96,7 +96,7 @@
 
 #### 定义：
 
-`func hook.LoadYakitPluginByName(manager: *yak.YakToCallerManager, pluginName: string, exportFuncs ...string) return (r0: error)`
+`LoadYakitPluginByName(mng *YakToCallerManager, scriptName string, hookNames ...string) error`
 
 
 #### 参数
@@ -129,7 +129,7 @@
 
 #### 定义：
 
-`func hook.LoadYakitPluginContext(v1: *yak.YakToCallerManager, v2: context.Context, v3: string, v4 ...string) return (r0: error)`
+`LoadYakitPluginContext(mng *YakToCallerManager, ctx context.Context, scriptType string, hookNames ...string) error`
 
 
 #### 参数
@@ -163,7 +163,7 @@
 
 #### 定义：
 
-`func hook.NewManager() return (r0: *yak.YakToCallerManager)`
+`NewManager() *yak.YakToCallerManager`
 
  
 
@@ -186,7 +186,7 @@
 
 #### 定义：
 
-`func hook.NewMixPluginCaller() return (r0: *yak.MixPluginCaller, r1: error)`
+`NewMixPluginCaller() (*yak.MixPluginCaller, error)`
 
  
 
@@ -210,7 +210,7 @@
 
 #### 定义：
 
-``func hook.RemoveYakitPluginByName(manager: *yak.YakToCallerManager, pluginNames ...string)``
+`RemoveYakitPluginByName(mng *YakToCallerManager, scriptNames ...string)`
 
 
 #### 参数

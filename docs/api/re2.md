@@ -1,36 +1,36 @@
-# re
+# re2
 
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [re.Compile](#recompile) | 编译正则 |
- | [re.CompilePOSIX](#recompileposix) |  |
- | [re.ExtractEmail](#reextractemail) | 从字符串中提取 email |
- | [re.ExtractHostPort](#reextracthostport) | 从结果中提取 `host:port` |
- | [re.ExtractIP](#reextractip) | 从内容中提取 IP 地址 |
- | [re.ExtractIPv4](#reextractipv4) | 从内容中提取 IPv4 地址 |
- | [re.ExtractIPv6](#reextractipv6) | 从内容中提取 IPv6 地址 |
- | [re.ExtractMac](#reextractmac) | 从字符串中提取可用的 Mac 地址 |
- | [re.ExtractPath](#reextractpath) | 从内容中提取路径 |
- | [re.ExtractTTY](#reextracttty) | 从内容中提取 TTY 内容 |
- | [re.ExtractURL](#reextracturl) | 从内容中提取 URL |
- | [re.Find](#refind) | 匹配并提取数据中符合正则的数据 |
- | [re.FindAll](#refindall) | 提取所有正则匹配到的数据 |
- | [re.FindAllIndex](#refindallindex) | 提取匹配到的数据的索引（起止位置） |
- | [re.FindGroup](#refindgroup) |  |
- | [re.FindGroupAll](#refindgroupall) |  |
- | [re.FindIndex](#refindindex) | 提取匹配到的数据索引位置（起止位置） |
- | [re.FindSubmatch](#refindsubmatch) | 正则匹配提取带分组的数据（只匹配一个） |
- | [re.FindSubmatchAll](#refindsubmatchall) | 正则匹配提取带分组的数据（匹配全部） |
- | [re.FindSubmatchAllIndex](#refindsubmatchallindex) | 匹配并提取分组带索引（起止位置） |
- | [re.FindSubmatchIndex](#refindsubmatchindex) | 只匹配并提取第一组的分组带索引（起止位置） |
- | [re.Grok](#regrok) | 从内容中按照 Grok 规则提取数据 |
- | [re.Match](#rematch) |  |
- | [re.MustCompile](#remustcompile) | 编译正则，如果编译失败则 Panic |
- | [re.MustCompilePOSIX](#remustcompileposix) | 编译正则 POSIX 模式，编译失败则 Panic |
- | [re.QuoteMeta](#requotemeta) | 把正则保留字符进行转义 |
- | [re.ReplaceAll](#rereplaceall) | 整体批量替换 |
- | [re.ReplaceAllWithFunc](#rereplaceallwithfunc) | 正则批量替换数据（使用函数处理匹配结果） |
+ | [re2.Compile](#re2compile) |  |
+ | [re2.CompilePOSIX](#re2compileposix) |  |
+ | [re2.ExtractEmail](#re2extractemail) |  |
+ | [re2.ExtractHostPort](#re2extracthostport) |  |
+ | [re2.ExtractIP](#re2extractip) |  |
+ | [re2.ExtractIPv4](#re2extractipv4) |  |
+ | [re2.ExtractIPv6](#re2extractipv6) |  |
+ | [re2.ExtractMac](#re2extractmac) |  |
+ | [re2.ExtractPath](#re2extractpath) |  |
+ | [re2.ExtractTTY](#re2extracttty) |  |
+ | [re2.ExtractURL](#re2extracturl) |  |
+ | [re2.Find](#re2find) |  |
+ | [re2.FindAll](#re2findall) |  |
+ | [re2.FindAllIndex](#re2findallindex) |  |
+ | [re2.FindGroup](#re2findgroup) |  |
+ | [re2.FindGroupAll](#re2findgroupall) |  |
+ | [re2.FindIndex](#re2findindex) |  |
+ | [re2.FindSubmatch](#re2findsubmatch) |  |
+ | [re2.FindSubmatchAll](#re2findsubmatchall) |  |
+ | [re2.FindSubmatchAllIndex](#re2findsubmatchallindex) |  |
+ | [re2.FindSubmatchIndex](#re2findsubmatchindex) |  |
+ | [re2.Grok](#re2grok) |  |
+ | [re2.Match](#re2match) |  |
+ | [re2.MustCompile](#re2mustcompile) |  |
+ | [re2.MustCompilePOSIX](#re2mustcompileposix) |  |
+ | [re2.QuoteMeta](#re2quotemeta) |  |
+ | [re2.ReplaceAll](#re2replaceall) |  |
+ | [re2.ReplaceAllWithFunc](#re2replaceallwithfunc) |  |
 
 
 
@@ -41,9 +41,9 @@
 
 ## 函数定义
 
-### re.Compile
+### re2.Compile
 
-编译正则
+
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| regexpStr | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -73,13 +73,13 @@
 
 
  
-### re.CompilePOSIX
+### re2.CompilePOSIX
 
 
 
 #### 详细描述
 
-编译正则（同 Golang `regexp.CompilePOSIX`）
+
 
 #### 定义：
 
@@ -90,7 +90,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| regexpStr | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -105,9 +105,9 @@
 
 
  
-### re.ExtractEmail
+### re2.ExtractEmail
 
-从字符串中提取 email
+
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -132,13 +132,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| emails | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractHostPort
+### re2.ExtractHostPort
 
-从结果中提取 `host:port`
+
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -163,13 +163,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| hostPorts | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractIP
+### re2.ExtractIP
 
-从内容中提取 IP 地址
+
 
 #### 详细描述
 
@@ -184,7 +184,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -194,13 +194,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ipAddrs | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractIPv4
+### re2.ExtractIPv4
 
-从内容中提取 IPv4 地址
+
 
 #### 详细描述
 
@@ -215,7 +215,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -225,13 +225,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ipAddrs | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractIPv6
+### re2.ExtractIPv6
 
-从内容中提取 IPv6 地址
+
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -256,13 +256,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ipAddrs | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractMac
+### re2.ExtractMac
 
-从字符串中提取可用的 Mac 地址
+
 
 #### 详细描述
 
@@ -277,7 +277,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -287,13 +287,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| macAddrs | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractPath
+### re2.ExtractPath
 
-从内容中提取路径
+
 
 #### 详细描述
 
@@ -308,7 +308,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -318,13 +318,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| paths | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractTTY
+### re2.ExtractTTY
 
-从内容中提取 TTY 内容
+
 
 #### 详细描述
 
@@ -339,7 +339,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -349,13 +349,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ttys | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.ExtractURL
+### re2.ExtractURL
 
-从内容中提取 URL
+
 
 #### 详细描述
 
@@ -370,7 +370,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `[]byte|string|io.Reader|any` |   |
+| v1 | `any` |   |
 
 
 
@@ -380,13 +380,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| urls | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.Find
+### re2.Find
 
-匹配并提取数据中符合正则的数据
+
 
 #### 详细描述
 
@@ -401,8 +401,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -412,13 +412,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| result | `string` |   |
+| r0 | `string` |   |
 
 
  
-### re.FindAll
+### re2.FindAll
 
-提取所有正则匹配到的数据
+
 
 #### 详细描述
 
@@ -433,8 +433,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -444,13 +444,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| results | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.FindAllIndex
+### re2.FindAllIndex
 
-提取匹配到的数据的索引（起止位置）
+
 
 #### 详细描述
 
@@ -465,8 +465,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -476,11 +476,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| indexes | `[][start: int, end: int]` |   |
+| r0 | `[][]int` |   |
 
 
  
-### re.FindGroup
+### re2.FindGroup
 
 
 
@@ -512,7 +512,7 @@
 
 
  
-### re.FindGroupAll
+### re2.FindGroupAll
 
 
 
@@ -544,9 +544,9 @@
 
 
  
-### re.FindIndex
+### re2.FindIndex
 
-提取匹配到的数据索引位置（起止位置）
+
 
 #### 详细描述
 
@@ -561,8 +561,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -572,13 +572,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| index | `[start:int, end:int]` |   |
+| r0 | `[]int` |   |
 
 
  
-### re.FindSubmatch
+### re2.FindSubmatch
 
-正则匹配提取带分组的数据（只匹配一个）
+
 
 #### 详细描述
 
@@ -593,8 +593,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -604,13 +604,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| results | `[]string` |   |
+| r0 | `[]string` |   |
 
 
  
-### re.FindSubmatchAll
+### re2.FindSubmatchAll
 
-正则匹配提取带分组的数据（匹配全部）
+
 
 #### 详细描述
 
@@ -625,8 +625,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -640,9 +640,9 @@
 
 
  
-### re.FindSubmatchAllIndex
+### re2.FindSubmatchAllIndex
 
-匹配并提取分组带索引（起止位置）
+
 
 #### 详细描述
 
@@ -657,8 +657,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -668,13 +668,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| indexes | `[][matchStart, matchEnd, group1Start, group1End, ...]` |   |
+| r0 | `[][]int` |   |
 
 
  
-### re.FindSubmatchIndex
+### re2.FindSubmatchIndex
 
-只匹配并提取第一组的分组带索引（起止位置）
+
 
 #### 详细描述
 
@@ -689,8 +689,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
 
 
 
@@ -704,9 +704,9 @@
 
 
  
-### re.Grok
+### re2.Grok
 
-从内容中按照 Grok 规则提取数据
+
 
 #### 详细描述
 
@@ -721,8 +721,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| content | `string` |   |
-| grokRule | `string` |   |
+| v1 | `string` |   |
+| v2 | `string` |   |
 
 
 
@@ -732,11 +732,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| data | `yaklib.GrokResult` |   |
+| r0 | `yaklib.GrokResult` |   |
 
 
  
-### re.Match
+### re2.Match
 
 
 
@@ -753,8 +753,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| regexpPattern | `string` |  想要匹配的规则 |
-| content | `any` |  想要通过正则匹配的数据 |
+| v1 | `string` |   |
+| v2 | `any` |   |
 
 
 
@@ -768,9 +768,9 @@
 
 
  
-### re.MustCompile
+### re2.MustCompile
 
-编译正则，如果编译失败则 Panic
+
 
 #### 详细描述
 
@@ -785,7 +785,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| regexpStr | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -799,9 +799,9 @@
 
 
  
-### re.MustCompilePOSIX
+### re2.MustCompilePOSIX
 
-编译正则 POSIX 模式，编译失败则 Panic
+
 
 #### 详细描述
 
@@ -816,7 +816,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| regexpStr | `string` |   |
+| v1 | `string` |   |
 
 
 
@@ -830,9 +830,9 @@
 
 
  
-### re.QuoteMeta
+### re2.QuoteMeta
 
-把正则保留字符进行转义
+
 
 #### 详细描述
 
@@ -861,9 +861,9 @@
 
 
  
-### re.ReplaceAll
+### re2.ReplaceAll
 
-整体批量替换
+
 
 #### 详细描述
 
@@ -878,9 +878,9 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
-| newStr | `any` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
+| v3 | `any` |   |
 
 
 
@@ -894,9 +894,9 @@
 
 
  
-### re.ReplaceAllWithFunc
+### re2.ReplaceAllWithFunc
 
-正则批量替换数据（使用函数处理匹配结果）
+
 
 #### 详细描述
 
@@ -911,9 +911,9 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |   |
-| regexp | `string` |   |
-| replaceFunc | `func (v1: string) return(string) ` |   |
+| v1 | `any` |   |
+| v2 | `string` |   |
+| v3 | `func (v1: string) return(string) ` |   |
 
 
 

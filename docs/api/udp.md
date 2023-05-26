@@ -30,7 +30,7 @@
 
 #### 定义：
 
-`func udp.Connect(target: string, extraParams ...yaklib.udpClientOption) return (conn: *yaklib.udpConn, r1: error)`
+`Connect(string, ...yaklib.udpClientOption) (*yaklib.udpConn, error)`
 
 
 #### 参数
@@ -63,7 +63,7 @@
 
 #### 定义：
 
-`func udp.Serve(host: string, port: any, params ...yaklib.udpServerOpt) return (r0: error)`
+`Serve(host string, port any, opts ...udpServerOpt) error`
 
 
 #### 参数
@@ -96,7 +96,7 @@
 
 #### 定义：
 
-`func udp.clientLocalAddr(localaddr: string) return (r0: func udpClientOption(v1: *yaklib.udpClientConfig) )`
+`clientLocalAddr(string) yaklib.udpClientOption`
 
 
 #### 参数
@@ -127,7 +127,7 @@
 
 #### 定义：
 
-`func udp.clientTimeout(v1: float64) return (r0: func udpClientOption(v1: *yaklib.udpClientConfig) )`
+`clientTimeout(float64) yaklib.udpClientOption`
 
 
 #### 参数
@@ -158,7 +158,7 @@
 
 #### 定义：
 
-`func udp.serverCallback(v1: func (v1: *yaklib.udpConn, v2: bytes, v3: net.Addr) ) return (r0: func udpServerOpt(v1: *yaklib.udpServerConfig) )`
+`serverCallback(func(*yaklib.udpConn, []uint8, net.Addr)) yaklib.udpServerOpt`
 
 
 #### 参数
@@ -189,7 +189,7 @@
 
 #### 定义：
 
-`func udp.serverContext(v1: context.Context) return (r0: func udpServerOpt(v1: *yaklib.udpServerConfig) )`
+`serverContext(context.Context) yaklib.udpServerOpt`
 
 
 #### 参数
@@ -220,7 +220,7 @@
 
 #### 定义：
 
-`func udp.serverTimeout(v1: float64) return (r0: func udpServerOpt(v1: *yaklib.udpServerConfig) )`
+`serverTimeout(float64) yaklib.udpServerOpt`
 
 
 #### 参数

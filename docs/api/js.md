@@ -39,7 +39,7 @@
 
 #### 定义：
 
-`func js.ASTWalk(v1: string) return (r0: *javascript.ASTWalkerResult, r1: error)`
+`ASTWalk(string) (*javascript.ASTWalkerResult, error)`
 
 
 #### 参数
@@ -71,7 +71,7 @@
 
 #### 定义：
 
-`func js.CallFunctionFromCode(code: any, funcName: string, params ...any) return (ottoValue: otto.Value, r1: error)`
+`CallFunctionFromCode(i any, funcName string, params ...any) (otto.Value, error)`
 
 
 #### 参数
@@ -105,7 +105,7 @@
 
 #### 定义：
 
-`func js.FalseValue() return (r0: otto.Value)`
+`FalseValue() otto.Value`
 
  
 
@@ -128,7 +128,7 @@
 
 #### 定义：
 
-`func js.NaNValue() return (r0: otto.Value)`
+`NaNValue() otto.Value`
 
  
 
@@ -151,7 +151,7 @@
 
 #### 定义：
 
-`func js.New() return (r0: *otto.Otto)`
+`New() *otto.Otto  doc:create vm`
 
  
 
@@ -174,7 +174,7 @@
 
 #### 定义：
 
-`func js.NullValue() return (r0: otto.Value)`
+`NullValue() otto.Value`
 
  
 
@@ -197,7 +197,7 @@
 
 #### 定义：
 
-`func js.Run(v1: any) return (r0: *otto.Otto, r1: otto.Value, r2: error)`
+`Run(src any) (*Otto, Value, error)  doc:Run will allocate a new JavaScript runtime, run the given sourceon the allocated runtime, and return the runtime, resulting value, anderror (if any).src may be a string, a byte slice, a bytes.Buffer, or an io.Reader, but it MUST always be in UTF-8.src may also be a Script.src may also be a Program, but if the AST has been modified, then runtime behavior is undefined.`
 
 
 #### 参数
@@ -230,7 +230,7 @@
 
 #### 定义：
 
-`func js.ToValue(v1: any) return (r0: otto.Value, r1: error)`
+`ToValue(any) (otto.Value, error)`
 
 
 #### 参数
@@ -262,7 +262,7 @@
 
 #### 定义：
 
-`func js.TrueValue() return (r0: otto.Value)`
+`TrueValue() otto.Value`
 
  
 
@@ -285,7 +285,7 @@
 
 #### 定义：
 
-`func js.UndefinedValue() return (r0: otto.Value)`
+`UndefinedValue() otto.Value`
 
  
 

@@ -29,7 +29,7 @@
 
 #### 定义：
 
-`func xhtml.CompareHtml(v1: any, v2: any) return (r0: []*xhtml.DiffInfo, r1: error)`
+`CompareHtml(any, any) ([]*xhtml.DiffInfo, error)`
 
 
 #### 参数
@@ -62,7 +62,7 @@
 
 #### 定义：
 
-`func xhtml.Find(html: any, keyword: string) return (r0: []*xhtml.MatchNodeInfo)`
+`Find(any, string) []*xhtml.MatchNodeInfo`
 
 
 #### 参数
@@ -94,7 +94,7 @@
 
 #### 定义：
 
-`func xhtml.GenerateXPath(v1: *html.Node) return (r0: string)`
+`GenerateXPath(node *html.Node) string`
 
 
 #### 参数
@@ -125,7 +125,7 @@
 
 #### 定义：
 
-`func xhtml.MatchBetween(v1: any, v2: string, v3: string, v4: int) return (r0: int, r1: string)`
+`MatchBetween(srcBody any, start string, end string, max int) (int, string)`
 
 
 #### 参数
@@ -160,7 +160,7 @@
 
 #### 定义：
 
-`func xhtml.RandomUpperAndLower(v1: string) return (r0: string)`
+`RandomUpperAndLower(s string) string`
 
 
 #### 参数
@@ -191,7 +191,7 @@
 
 #### 定义：
 
-`func xhtml.Walker(html: any, v2: func (v1: *html.Node) ) return (r0: error)`
+`Walker(h any, handler func(node *html.Node)) error`
 
 
 #### 参数

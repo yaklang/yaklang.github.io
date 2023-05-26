@@ -61,7 +61,7 @@
 
 #### 定义：
 
-`func x.All(v1 ...any) return (r0: bool)`
+`All(objs ...any) bool  doc:All returns true if all elements of the iterable are not empty (or if the iterable is empty)`
 
 
 #### 参数
@@ -92,7 +92,7 @@
 
 #### 定义：
 
-`func x.Any(v1 ...any) return (r0: bool)`
+`Any(objs ...any) bool  doc:Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.`
 
 
 #### 参数
@@ -123,7 +123,7 @@
 
 #### 定义：
 
-`func x.Chunk(sliceOrigin: any, groupSize: int) return (r0: any)`
+`Chunk(arr any, size int) any  doc:Chunk creates an array of elements split into groups with the length of size.If array can&#39;t be split evenly, the final chunk will bethe remaining element.`
 
 
 #### 参数
@@ -155,7 +155,7 @@
 
 #### 定义：
 
-`func x.Contains(slice: any, element: any) return (r0: bool)`
+`Contains(in any, elem any) bool  doc:Contains returns true if an element is present in a iteratee.`
 
 
 #### 参数
@@ -187,7 +187,7 @@
 
 #### 定义：
 
-`func x.ConvertToMap(v1: any) return (r0: map[string][]string)`
+`ConvertToMap(any) map[string][]string`
 
 
 #### 参数
@@ -218,7 +218,7 @@
 
 #### 定义：
 
-`func x.Difference(v1: any, v2: any) return (r0: any, r1: any)`
+`Difference(x any, y any) (any, any)  doc:Difference returns the difference between two collections.`
 
 
 #### 参数
@@ -251,7 +251,7 @@
 
 #### 定义：
 
-`func x.Drop(slice: any, size: int) return (r0: any)`
+`Drop(in any, n int) any  doc:Drop creates an array/slice with `n` elements dropped from the beginning.`
 
 
 #### 参数
@@ -283,7 +283,7 @@
 
 #### 定义：
 
-`func x.Equal(v1: any, v2: any) return (r0: bool)`
+`Equal(expected any, actual any) bool  doc:IsEqual returns if the two objects are equal`
 
 
 #### 参数
@@ -315,7 +315,7 @@
 
 #### 定义：
 
-`func x.Every(v1: any, v2 ...any) return (r0: bool)`
+`Every(in any, elements ...any) bool  doc:Every returns true if every element is present in a iteratee.`
 
 
 #### 参数
@@ -347,7 +347,7 @@
 
 #### 定义：
 
-`func x.Filter(slice: any, v2: func (v1: any) return(bool) ) return (r0: any)`
+`Filter(any, func(any) bool) any`
 
 
 #### 参数
@@ -379,7 +379,7 @@
 
 #### 定义：
 
-`func x.Find(v1: any, v2: func (v1: any) return(bool) ) return (r0: any)`
+`Find(any, func(any) bool) any`
 
 
 #### 参数
@@ -411,7 +411,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-``func x.Foreach(v1: any, v2: func (v1: any) )``
+`Foreach(any, func(any))`
 
 
 #### 参数
@@ -437,7 +437,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-``func x.ForeachRight(v1: any, v2: func (v1: any) )``
+`ForeachRight(any, func(any))`
 
 
 #### 参数
@@ -463,7 +463,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Head(v1: any) return (r0: any)`
+`Head(arr any) any  doc:Head gets the first element of array.`
 
 
 #### 参数
@@ -494,7 +494,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.If(condition: bool, obj1: any, obj2: any) return (r0: any)`
+`If(bool, any, any) any`
 
 
 #### 参数
@@ -527,7 +527,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.IndexOf(v1: any, v2: any) return (r0: int)`
+`IndexOf(in any, elem any) int  doc:IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found`
 
 
 #### 参数
@@ -559,7 +559,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Intersect(v1: any, v2: any) return (r0: any)`
+`Intersect(x any, y any) any`
 
 
 #### 参数
@@ -591,7 +591,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.IsSubset(v1: any, v2: any) return (r0: bool)`
+`IsSubset(x any, y any) bool  doc:Subset returns true if collection x is a subset of y.`
 
 
 #### 参数
@@ -623,7 +623,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Keys(v1: any) return (r0: any)`
+`Keys(out any) any  doc:Keys creates an array of the own enumerable map keys or struct field names.`
 
 
 #### 参数
@@ -654,7 +654,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Map(v1: any, v2: func funkGeneralFuncType(v1: any) return(any) ) return (r0: any)`
+`Map(any, yaklib.funkGeneralFuncType) any`
 
 
 #### 参数
@@ -686,7 +686,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Max(v1: any) return (r0: any)`
+`Max(i any) any`
 
 
 #### 参数
@@ -717,7 +717,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Min(v1: any) return (r0: any)`
+`Min(i any) any`
 
 
 #### 参数
@@ -748,7 +748,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Range(v1: int) return (r0: []any)`
+`Range(int) []any`
 
 
 #### 参数
@@ -779,7 +779,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Reduce(v1: any, v2: func funkGeneralReduceFuncType(v1: any, v2: any) return(any) , initValue: any) return (r0: any)`
+`Reduce(any, yaklib.funkGeneralReduceFuncType, any) any`
 
 
 #### 参数
@@ -812,7 +812,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.RemoveRepeat(v1: any) return (r0: any)`
+`RemoveRepeat(in any) any  doc:Uniq creates an array with unique values.`
 
 
 #### 参数
@@ -843,7 +843,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Reverse(v1: any) return (r0: any)`
+`Reverse(in any) any  doc:Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.`
 
 
 #### 参数
@@ -874,7 +874,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Shift(v1: any) return (r0: any)`
+`Shift(any) any`
 
 
 #### 参数
@@ -905,7 +905,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Shuffle(v1: any) return (r0: any)`
+`Shuffle(in any) any  doc:Shuffle creates an array of shuffled values`
 
 
 #### 参数
@@ -936,7 +936,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Some(v1: any, v2 ...any) return (r0: bool)`
+`Some(in any, elements ...any) bool  doc:Some returns true if atleast one element is present in an iteratee.`
 
 
 #### 参数
@@ -968,7 +968,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-``func x.Sort(v1: any, v2: func (v1: int, v2: int) return(bool) )``
+`Sort(x any, less func(i, j int) bool)  doc:SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type&#39;s Less method.`
 
 
 #### 参数
@@ -994,7 +994,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Subtract(v1: any, v2: any) return (r0: any)`
+`Subtract(x any, y any) any  doc:Subtract returns the subtraction between two collections.`
 
 
 #### 参数
@@ -1026,7 +1026,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Sum(v1: any) return (r0: float64)`
+`Sum(arr any) float64  doc:Sum computes the sum of the values in array.`
 
 
 #### 参数
@@ -1057,7 +1057,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Tail(v1: any) return (r0: any)`
+`Tail(arr any) any  doc:Tail gets all but the first element of array.`
 
 
 #### 参数
@@ -1088,7 +1088,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.ToFloat64(v1: any) return (r0: float64, r1: bool)`
+`ToFloat64(x any) (float64, bool)  doc:ToFloat64 converts any numeric value to float64.`
 
 
 #### 参数
@@ -1120,7 +1120,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.ToMap(slice: any, fieldName: string) return (r0: any)`
+`ToMap(in any, pivot string) any  doc:ToMap transforms a slice of instances to a Map.[]*Foo =&gt; Map&lt;int, *Foo&gt;`
 
 
 #### 参数
@@ -1152,7 +1152,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Values(v1: any) return (r0: any)`
+`Values(out any) any  doc:Values creates an array of the own enumerable map values or struct field values.`
 
 
 #### 参数
@@ -1183,7 +1183,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.WaitConnect(addr: string, timeoutSeconds: float64) return (r0: error)`
+`WaitConnect(addr string, timeout float64) error`
 
 
 #### 参数
@@ -1215,7 +1215,7 @@ For 循环的函数式编程支持
 
 #### 定义：
 
-`func x.Zip(v1: any, v2: any) return (r0: []funk.Tuple)`
+`Zip(any, any) []funk.Tuple`
 
 
 #### 参数

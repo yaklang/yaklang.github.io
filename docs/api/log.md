@@ -28,7 +28,7 @@
 
 #### 定义：
 
-``func log.debug(fmt: string, items ...any)``
+`debug(format string, args ...any)  doc:Debugf will print when logger&#39;s Level is debug.`
 
 
 #### 参数
@@ -54,7 +54,7 @@
 
 #### 定义：
 
-``func log.error(fmt: string, items ...any)``
+`error(format string, args ...any)  doc:Errorf will print only when logger&#39;s Level is error, warn, info or debug.`
 
 
 #### 参数
@@ -80,7 +80,7 @@
 
 #### 定义：
 
-``func log.info(fmt: string, items ...any)``
+`info(format string, args ...any)  doc:Infof will print when logger&#39;s Level is info or debug.`
 
 
 #### 参数
@@ -106,7 +106,7 @@
 
 #### 定义：
 
-``func log.setLevel(level: any)``
+`setLevel(i any)`
 
 
 #### 参数
@@ -131,7 +131,7 @@
 
 #### 定义：
 
-``func log.warn(fmt: string, items ...any)``
+`warn(raw string, args ...any)`
 
 
 #### 参数

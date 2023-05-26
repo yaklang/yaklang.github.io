@@ -43,7 +43,7 @@
 
 #### 定义：
 
-`func rpa.Bruteforce(v1: string, v2 ...bruteforce.ConfigOpt) return (r0: string, r1: string)`
+`Bruteforce(url string, opts ...ConfigOpt) (string, string)`
 
 
 #### 参数
@@ -76,7 +76,7 @@
 
 #### 定义：
 
-`func rpa.Start(v1: string, v2 ...core.ConfigOpt) return (r0: chan core.RequestIf, r1: error)`
+`Start(url string, opt ...core.ConfigOpt) (chan core.RequestIf, error)`
 
 
 #### 参数
@@ -109,7 +109,7 @@
 
 #### 定义：
 
-`func rpa.blackDomain(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`blackDomain(string) core.ConfigOpt`
 
 
 #### 参数
@@ -140,7 +140,7 @@
 
 #### 定义：
 
-`func rpa.bruteButtonElement(v1: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`bruteButtonElement(string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -171,7 +171,7 @@
 
 #### 定义：
 
-`func rpa.bruteCaptchaElement(v1: string, v2: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`bruteCaptchaElement(string, string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -203,7 +203,7 @@
 
 #### 定义：
 
-`func rpa.brutePassElement(v1: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`brutePassElement(string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -234,7 +234,7 @@
 
 #### 定义：
 
-`func rpa.brutePassword(v1 ...string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`brutePassword(...string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -265,7 +265,7 @@
 
 #### 定义：
 
-`func rpa.bruteUserElement(v1: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`bruteUserElement(string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -296,7 +296,7 @@
 
 #### 定义：
 
-`func rpa.bruteUserPassPath(v1 ...string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`bruteUserPassPath(...string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -327,7 +327,7 @@
 
 #### 定义：
 
-`func rpa.bruteUsername(v1 ...string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`bruteUsername(...string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -358,7 +358,7 @@
 
 #### 定义：
 
-`func rpa.click(v1: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`click(string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -389,7 +389,7 @@
 
 #### 定义：
 
-`func rpa.depth(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`depth(int) core.ConfigOpt`
 
 
 #### 参数
@@ -420,7 +420,7 @@
 
 #### 定义：
 
-`func rpa.headers(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`headers(string) core.ConfigOpt`
 
 
 #### 参数
@@ -451,7 +451,7 @@
 
 #### 定义：
 
-`func rpa.input(v1: string, v2: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`input(string, string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -483,7 +483,7 @@
 
 #### 定义：
 
-`func rpa.maxUrl(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`maxUrl(int) core.ConfigOpt`
 
 
 #### 参数
@@ -514,7 +514,7 @@
 
 #### 定义：
 
-`func rpa.proxy(v1: string, v2 ...string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`proxy(string, ...string) core.ConfigOpt`
 
 
 #### 参数
@@ -546,7 +546,7 @@
 
 #### 定义：
 
-`func rpa.select(v1: string, v2: string) return (r0: func ConfigOpt(v1: *bruteforce.Config) )`
+`select(string, string) bruteforce.ConfigOpt`
 
 
 #### 参数
@@ -578,7 +578,7 @@
 
 #### 定义：
 
-`func rpa.strictUrl(v1: bool) return (r0: func ConfigOpt(v1: *core.Config) )`
+`strictUrl(bool) core.ConfigOpt`
 
 
 #### 参数
@@ -609,7 +609,7 @@
 
 #### 定义：
 
-`func rpa.timeout(v1: int) return (r0: func ConfigOpt(v1: *core.Config) )`
+`timeout(int) core.ConfigOpt`
 
 
 #### 参数
@@ -640,7 +640,7 @@
 
 #### 定义：
 
-`func rpa.whiteDomain(v1: string) return (r0: func ConfigOpt(v1: *core.Config) )`
+`whiteDomain(string) core.ConfigOpt`
 
 
 #### 参数

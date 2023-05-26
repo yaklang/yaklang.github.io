@@ -1,16 +1,16 @@
-# redis
+# openai
 
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [redis.New](#redisnew) | 启动一个 Redis 客户端 |
- | [redis.addr](#redisaddr) | 设置 Redis 地址 |
- | [redis.host](#redishost) |  |
- | [redis.password](#redispassword) | 设置 Redis 密码 |
- | [redis.port](#redisport) |  |
- | [redis.retry](#redisretry) |  |
- | [redis.timeoutSeconds](#redistimeoutseconds) |  |
- | [redis.username](#redisusername) |  |
+ | [openai.Chat](#openaichat) |  |
+ | [openai.TranslateToChinese](#openaitranslatetochinese) |  |
+ | [openai.apiKey](#openaiapikey) |  |
+ | [openai.domain](#openaidomain) |  |
+ | [openai.localAPIKey](#openailocalapikey) |  |
+ | [openai.model](#openaimodel) |  |
+ | [openai.proxy](#openaiproxy) |  |
+ | [openai.yakDomain](#openaiyakdomain) |  |
 
 
 
@@ -21,9 +21,9 @@
 
 ## 函数定义
 
-### redis.New
+### openai.Chat
 
-启动一个 Redis 客户端
+
 
 #### 详细描述
 
@@ -31,14 +31,15 @@
 
 #### 定义：
 
-`New(...yaklib.redisConfigOpt) *yaklib.redisClient`
+`func openai.Chat(v1: string, v2 ...openai.ConfigOption) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yaklib.redisConfigOpt` |   |
+| v1 | `string` |   |
+| v2 | `...openai.ConfigOption` |   |
 
 
 
@@ -48,13 +49,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.redisClient` |   |
+| r0 | `string` |   |
 
 
  
-### redis.addr
+### openai.TranslateToChinese
 
-设置 Redis 地址
+
 
 #### 详细描述
 
@@ -62,7 +63,39 @@
 
 #### 定义：
 
-`addr(string) yaklib.redisConfigOpt`
+`func openai.TranslateToChinese(v1: string, v2 ...openai.ConfigOption) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...openai.ConfigOption` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### openai.apiKey
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func openai.apiKey(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
 
 
 #### 参数
@@ -79,11 +112,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
 
 
  
-### redis.host
+### openai.domain
 
 
 
@@ -93,7 +126,7 @@
 
 #### 定义：
 
-`host(string) yaklib.redisConfigOpt`
+`func openai.domain(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
 
 
 #### 参数
@@ -110,13 +143,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
 
 
  
-### redis.password
+### openai.localAPIKey
 
-设置 Redis 密码
+
 
 #### 详细描述
 
@@ -124,7 +157,30 @@
 
 #### 定义：
 
-`password(string) yaklib.redisConfigOpt`
+`func openai.localAPIKey() return (r0: func ConfigOption(v1: *openai.Client) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+
+
+ 
+### openai.model
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func openai.model(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
 
 
 #### 参数
@@ -141,11 +197,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
 
 
  
-### redis.port
+### openai.proxy
 
 
 
@@ -155,100 +211,7 @@
 
 #### 定义：
 
-`port(int) yaklib.redisConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
-
-
- 
-### redis.retry
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`retry(int) yaklib.redisConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
-
-
- 
-### redis.timeoutSeconds
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`timeoutSeconds(int) yaklib.redisConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
-
-
- 
-### redis.username
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`username(string) yaklib.redisConfigOpt`
+`func openai.proxy(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
 
 
 #### 参数
@@ -265,7 +228,30 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+
+
+ 
+### openai.yakDomain
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func openai.yakDomain() return (r0: func ConfigOption(v1: *openai.Client) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
 
 
  

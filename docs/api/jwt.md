@@ -28,7 +28,7 @@
 
 #### 定义：
 
-`func jwt.AllAlgs() return (r0: []string)`
+`AllAlgs() []string`
 
  
 
@@ -51,7 +51,7 @@
 
 #### 定义：
 
-`func jwt.JWSGenerate(algName: string, params: any, secretKey: bytes) return (r0: string, r1: error)`
+`JWSGenerate(string, any, []uint8) (string, error)`
 
 
 #### 参数
@@ -85,7 +85,7 @@
 
 #### 定义：
 
-`func jwt.JWTGenerate(alg: string, params: any, secretKey: bytes) return (token: string, err: error)`
+`JWTGenerate(string, any, []uint8) (string, error)`
 
 
 #### 参数
@@ -119,7 +119,7 @@
 
 #### 定义：
 
-`func jwt.Parse(token: string, secretKeys ...string) return (params: *jwt.Token, secretKey: bytes, err: error)`
+`Parse(tokenStr string, keys ...string) (*jwt.Token, []byte, error)`
 
 
 #### 参数
@@ -153,7 +153,7 @@
 
 #### 定义：
 
-`func jwt.RemoveAlg(token: string) return (newToken: string, err: error)`
+`RemoveAlg(token string) (string, error)`
 
 
 #### 参数

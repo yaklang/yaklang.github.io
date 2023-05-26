@@ -4,13 +4,25 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [codec.AESCBCDecrypt](#codecaescbcdecrypt) | aes cbc 解密 |
+ | [codec.AESCBCDecryptWithPKCS7Padding](#codecaescbcdecryptwithpkcs7padding) |  |
+ | [codec.AESCBCDecryptWithZeroPadding](#codecaescbcdecryptwithzeropadding) |  |
  | [codec.AESCBCEncrypt](#codecaescbcencrypt) | aes cbc 加密 |
+ | [codec.AESCBCEncryptWithPKCS7Padding](#codecaescbcencryptwithpkcs7padding) |  |
+ | [codec.AESCBCEncryptWithZeroPadding](#codecaescbcencryptwithzeropadding) |  |
  | [codec.AESDecrypt](#codecaesdecrypt) | aes 解密 |
  | [codec.AESECBDecrypt](#codecaesecbdecrypt) |  |
+ | [codec.AESECBDecryptWithPKCS7Padding](#codecaesecbdecryptwithpkcs7padding) |  |
+ | [codec.AESECBDecryptWithZeroPadding](#codecaesecbdecryptwithzeropadding) |  |
  | [codec.AESECBEncrypt](#codecaesecbencrypt) |  |
+ | [codec.AESECBEncryptWithPKCS7Padding](#codecaesecbencryptwithpkcs7padding) |  |
+ | [codec.AESECBEncryptWithZeroPadding](#codecaesecbencryptwithzeropadding) |  |
  | [codec.AESEncrypt](#codecaesencrypt) | aes cbc 加密 |
  | [codec.AESGCMDecrypt](#codecaesgcmdecrypt) | aes gcm 解密 |
+ | [codec.AESGCMDecryptWithNonceSize12](#codecaesgcmdecryptwithnoncesize12) |  |
+ | [codec.AESGCMDecryptWithNonceSize16](#codecaesgcmdecryptwithnoncesize16) |  |
  | [codec.AESGCMEncrypt](#codecaesgcmencrypt) | aes gcm 加密 |
+ | [codec.AESGCMEncryptWithNonceSize12](#codecaesgcmencryptwithnoncesize12) |  |
+ | [codec.AESGCMEncryptWithNonceSize16](#codecaesgcmencryptwithnoncesize16) |  |
  | [codec.AutoDecode](#codecautodecode) |  |
  | [codec.DESCBCDecrypt](#codecdescbcdecrypt) |  |
  | [codec.DESCBCEncrypt](#codecdescbcencrypt) |  |
@@ -53,12 +65,14 @@
  | [codec.HmacSha512](#codechmacsha512) |  |
  | [codec.MMH3Hash128](#codecmmh3hash128) | 计算一个对象的 mmh3 hash128 |
  | [codec.MMH3Hash128x64](#codecmmh3hash128x64) | 计算一个对象的 mmh3 hash128x64 |
- | [codec.MMH3Hash32](#codecmmh3hash32) | 计算 mmh3 的 hash32 |
+ | [codec.MMH3Hash32](#codecmmh3hash32) |  |
  | [codec.Md5](#codecmd5) | 计算 md5 hash |
  | [codec.PKCS5Padding](#codecpkcs5padding) | pkcs5 填充 |
  | [codec.PKCS5UnPadding](#codecpkcs5unpadding) | pkcs5 解码 |
  | [codec.PKCS7Padding](#codecpkcs7padding) | pkcs7 编码 |
  | [codec.PKCS7UnPadding](#codecpkcs7unpadding) | pkcs7 解码 |
+ | [codec.RC4Decrypt](#codecrc4decrypt) |  |
+ | [codec.RC4Encrypt](#codecrc4encrypt) |  |
  | [codec.RSADecryptWithPKCS1v15](#codecrsadecryptwithpkcs1v15) |  |
  | [codec.RSAEncryptWithPKCS1v15](#codecrsaencryptwithpkcs1v15) |  |
  | [codec.Sha1](#codecsha1) | 计算 sha1 hash |
@@ -84,6 +98,8 @@
  | [codec.Sm4CFBEncrypt](#codecsm4cfbencrypt) | 国密4 cfb 加密 |
  | [codec.Sm4EBCDecrypt](#codecsm4ebcdecrypt) | 国密4 EBC 解密 |
  | [codec.Sm4EBCEncrypt](#codecsm4ebcencrypt) | 国密4 EBC 加密 |
+ | [codec.Sm4ECBDecrypt](#codecsm4ecbdecrypt) |  |
+ | [codec.Sm4ECBEncrypt](#codecsm4ecbencrypt) |  |
  | [codec.Sm4GCMDecrypt](#codecsm4gcmdecrypt) | 国密4 gcm 解密 |
  | [codec.Sm4GCMEncrypt](#codecsm4gcmencrypt) | SM4 GCM 加密 |
  | [codec.Sm4OFBDecrypt](#codecsm4ofbdecrypt) | SM4 OFB 解密 |
@@ -119,7 +135,7 @@ aes cbc 解密
 
 #### 定义：
 
-`func codec.AESCBCDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`AESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -129,6 +145,74 @@ aes cbc 解密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESCBCDecryptWithPKCS7Padding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESCBCDecryptWithPKCS7Padding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESCBCDecryptWithZeroPadding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESCBCDecryptWithZeroPadding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -153,7 +237,7 @@ aes cbc 加密
 
 #### 定义：
 
-`func codec.AESCBCEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`AESCBCEncrypt(key []byte, i any, iv []byte) (data []byte, _ error)`
 
 
 #### 参数
@@ -163,6 +247,74 @@ aes cbc 加密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESCBCEncryptWithPKCS7Padding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESCBCEncryptWithPKCS7Padding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESCBCEncryptWithZeroPadding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESCBCEncryptWithZeroPadding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -187,7 +339,7 @@ aes 解密
 
 #### 定义：
 
-`func codec.AESDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`AESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -221,7 +373,75 @@ aes 解密
 
 #### 定义：
 
-`func codec.AESECBDecrypt(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+`AESECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBDecryptWithPKCS7Padding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBDecryptWithPKCS7Padding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBDecryptWithZeroPadding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBDecryptWithZeroPadding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
 
 
 #### 参数
@@ -255,7 +475,75 @@ aes 解密
 
 #### 定义：
 
-`func codec.AESECBEncrypt(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+`AESECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBEncryptWithPKCS7Padding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBEncryptWithPKCS7Padding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESECBEncryptWithZeroPadding
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESECBEncryptWithZeroPadding(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
 
 
 #### 参数
@@ -289,7 +577,7 @@ aes cbc 加密
 
 #### 定义：
 
-`func codec.AESEncrypt(key: bytes, data: any, v3: bytes) return (r0: bytes, r1: error)`
+`AESEncrypt(key []byte, i any, iv []byte) (data []byte, _ error)`
 
 
 #### 参数
@@ -323,7 +611,7 @@ aes gcm 解密
 
 #### 定义：
 
-`func codec.AESGCMDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`AESGCMDecrypt(key []byte, data any, _ []byte) ([]byte, error)`
 
 
 #### 参数
@@ -333,6 +621,74 @@ aes gcm 解密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESGCMDecryptWithNonceSize12
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESGCMDecryptWithNonceSize12(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESGCMDecryptWithNonceSize16
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESGCMDecryptWithNonceSize16(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -357,7 +713,7 @@ aes gcm 加密
 
 #### 定义：
 
-`func codec.AESGCMEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`AESGCMEncrypt(key []byte, data any, _ []byte) ([]byte, error)  doc://AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式func AES_GCM_Encrypt(key []byte, Content []byte) string {	block, _ := aes.NewCipher(key)	nonce := make([]byte, 16)	io.ReadFull(rand.Reader, nonce)	aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)	ciphertext := aesgcm.Seal(nil, nonce, Content, nil)	return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))}`
 
 
 #### 参数
@@ -367,6 +723,74 @@ aes gcm 加密
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESGCMEncryptWithNonceSize12
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESGCMEncryptWithNonceSize12(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.AESGCMEncryptWithNonceSize16
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.AESGCMEncryptWithNonceSize16(v1: bytes, v2: any, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -391,7 +815,7 @@ aes gcm 加密
 
 #### 定义：
 
-`func codec.AutoDecode(v1: any) return (r0: []*codec.AutoDecodeResult)`
+`AutoDecode(any) []*codec.AutoDecodeResult`
 
 
 #### 参数
@@ -422,7 +846,7 @@ aes gcm 加密
 
 #### 定义：
 
-`func codec.DESCBCDecrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+`DESCBCDecrypt(key, data, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -456,7 +880,7 @@ aes gcm 加密
 
 #### 定义：
 
-`func codec.DESCBCEncrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+`DESCBCEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -490,7 +914,7 @@ DES 解密（默认CBC）
 
 #### 定义：
 
-`func codec.DESDecrypt(key: bytes, encryptedData: bytes, iv: bytes) return (r0: bytes, r1: error)`
+`DESDecrypt(key, data, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -524,7 +948,7 @@ DES 解密（默认CBC）
 
 #### 定义：
 
-`func codec.DESECBDecrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`DESECBDecrypt(key []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -557,7 +981,7 @@ DES 解密（默认CBC）
 
 #### 定义：
 
-`func codec.DESECBEncrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`DESECBEncrypt(key []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -590,7 +1014,7 @@ DES 加密，默认 CBC 模式
 
 #### 定义：
 
-`func codec.DESEncrypt(key: bytes, originData: bytes, iv: bytes) return (r0: bytes, r1: error)`
+`DESEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -624,7 +1048,7 @@ DES 加密，默认 CBC 模式
 
 #### 定义：
 
-`func codec.DecodeASCII(v1: string) return (r0: string, r1: error)`
+`DecodeASCII(s string) (string, error)  doc:Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)`
 
 
 #### 参数
@@ -656,7 +1080,7 @@ DES 加密，默认 CBC 模式
 
 #### 定义：
 
-`func codec.DecodeBase64(base64Str: str) return (result: bytes, err: error)`
+`DecodeBase64(i string) ([]byte, error)`
 
 
 #### 参数
@@ -688,7 +1112,7 @@ DES 加密，默认 CBC 模式
 
 #### 定义：
 
-`func codec.DecodeBase64Url(v1: any) return (r0: bytes, r1: error)`
+`DecodeBase64Url(i any) ([]byte, error)`
 
 
 #### 参数
@@ -720,7 +1144,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DecodeChunked(v1: bytes) return (r0: bytes, r1: error)`
+`DecodeChunked(raw []byte) ([]byte, error)`
 
 
 #### 参数
@@ -752,7 +1176,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DecodeHex(v1: string) return (r0: bytes, r1: error)`
+`DecodeHex(i string) ([]byte, error)`
 
 
 #### 参数
@@ -784,7 +1208,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DecodeHtml(v1: string) return (r0: string)`
+`DecodeHtml(s string) string  doc:UnescapeString unescapes entities like &#34;&amp;lt;&#34; to become &#34;&lt;&#34;. It unescapes alarger range of entities than EscapeString escapes. For example, &#34;&amp;aacute;&#34;unescapes to &#34;á&#34;, as does &#34;&amp;#225;&#34; and &#34;&amp;#xE1;&#34;.UnescapeString(EscapeString(s)) == s always holds, but the converse isn&#39;talways true.`
 
 
 #### 参数
@@ -815,7 +1239,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DecodeUrl(v1: string) return (r0: string, r1: error)`
+`DecodeUrl(s string) (string, error)  doc:QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form &#34;%AB&#34; into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.`
 
 
 #### 参数
@@ -847,7 +1271,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DoubleDecodeUrl(v1: string) return (r0: string, r1: error)`
+`DoubleDecodeUrl(string) (string, error)`
 
 
 #### 参数
@@ -879,7 +1303,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.DoubleEncodeUrl(v1: any) return (r0: string)`
+`DoubleEncodeUrl(any) string`
 
 
 #### 参数
@@ -910,7 +1334,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeASCII(v1: string) return (r0: string)`
+`EncodeASCII(string) string`
 
 
 #### 参数
@@ -941,7 +1365,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeBase64(v1: any) return (r0: string)`
+`EncodeBase64(i any) string`
 
 
 #### 参数
@@ -972,7 +1396,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeBase64Url(v1: any) return (r0: string)`
+`EncodeBase64Url(i any) string`
 
 
 #### 参数
@@ -1003,7 +1427,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeChunked(v1: bytes) return (r0: bytes)`
+`EncodeChunked(raw []byte) []byte`
 
 
 #### 参数
@@ -1034,7 +1458,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeHtml(v1: any) return (r0: string)`
+`EncodeHtml(i any) string`
 
 
 #### 参数
@@ -1065,7 +1489,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeHtmlHex(v1: any) return (r0: string)`
+`EncodeHtmlHex(i any) string`
 
 
 #### 参数
@@ -1096,7 +1520,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeToHex(v1: any) return (r0: string)`
+`EncodeToHex(i any) string`
 
 
 #### 参数
@@ -1127,7 +1551,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeToPrintable(v1: string) return (r0: string)`
+`EncodeToPrintable(string) string`
 
 
 #### 参数
@@ -1158,7 +1582,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EncodeUrl(v1: any) return (r0: string)`
+`EncodeUrl(i any) string`
 
 
 #### 参数
@@ -1189,7 +1613,7 @@ http chunked 解码
 
 #### 定义：
 
-`func codec.EscapeHtml(v1: string) return (r0: string)`
+`EscapeHtml(s string) string  doc:EscapeString escapes special characters like &#34;&lt;&#34; to become &#34;&amp;lt;&#34;. Itescapes only five such characters: &lt;, &gt;, &amp;, &#39; and &#34;.UnescapeString(EscapeString(s)) == s always holds, but the converse isn&#39;talways true.`
 
 
 #### 参数
@@ -1220,7 +1644,7 @@ URL 编码：（作为 url.Path 进行编码）
 
 #### 定义：
 
-`func codec.EscapePathUrl(v1: string) return (r0: string)`
+`EscapePathUrl(s string) string  doc:PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as needed.`
 
 
 #### 参数
@@ -1251,7 +1675,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.EscapeQueryUrl(v1: string) return (r0: string)`
+`EscapeQueryUrl(s string) string  doc:QueryEscape escapes the string so it can be safely placedinside a URL query.`
 
 
 #### 参数
@@ -1282,7 +1706,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.FixUTF8(v1: bytes) return (r0: string)`
+`FixUTF8(s []byte) string`
 
 
 #### 参数
@@ -1313,7 +1737,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.GB18030ToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+`GB18030ToUTF8(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -1345,7 +1769,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.GBKSafe(v1: bytes) return (r0: string, r1: error)`
+`GBKSafe(s []byte) (string, error)`
 
 
 #### 参数
@@ -1377,7 +1801,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.GBKToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+`GBKToUTF8(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -1409,7 +1833,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HTMLChardet(v1: any) return (r0: []chardet.Result, r1: error)`
+`HTMLChardet(raw any) ([]chardet.Result, error)`
 
 
 #### 参数
@@ -1441,7 +1865,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HTMLChardetBest(v1: any) return (r0: *chardet.Result, r1: error)`
+`HTMLChardetBest(raw any) (*chardet.Result, error)`
 
 
 #### 参数
@@ -1473,7 +1897,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HZGB2312ToUTF8(v1: bytes) return (r0: bytes, r1: error)`
+`HZGB2312ToUTF8(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -1505,7 +1929,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HmacMD5(v1: any, v2: any) return (r0: bytes)`
+`HmacMD5(key, data any) []byte`
 
 
 #### 参数
@@ -1537,7 +1961,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HmacSM3(v1: any, v2: any) return (r0: bytes)`
+`HmacSM3(key, data any) []byte`
 
 
 #### 参数
@@ -1569,7 +1993,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HmacSha1(v1: any, v2: any) return (r0: bytes)`
+`HmacSha1(key, data any) []byte`
 
 
 #### 参数
@@ -1601,7 +2025,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HmacSha256(v1: any, v2: any) return (r0: bytes)`
+`HmacSha256(key, data any) []byte`
 
 
 #### 参数
@@ -1633,7 +2057,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.HmacSha512(v1: any, v2: any) return (r0: bytes)`
+`HmacSha512(key, data any) []byte`
 
 
 #### 参数
@@ -1665,7 +2089,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.MMH3Hash128(v1: any) return (r0: string)`
+`MMH3Hash128(i any) string`
 
 
 #### 参数
@@ -1696,7 +2120,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.MMH3Hash128x64(v1: any) return (r0: string)`
+`MMH3Hash128x64(i any) string`
 
 
 #### 参数
@@ -1719,7 +2143,7 @@ URL 编码：作为 url.Query 进行编码
  
 ### codec.MMH3Hash32
 
-计算 mmh3 的 hash32
+
 
 #### 详细描述
 
@@ -1727,7 +2151,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.MMH3Hash32(v1: any) return (r0: uint32)`
+`MMH3Hash32(i any) int64`
 
 
 #### 参数
@@ -1744,7 +2168,7 @@ URL 编码：作为 url.Query 进行编码
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `uint32` |   |
+| r0 | `int64` |   |
 
 
  
@@ -1758,7 +2182,7 @@ URL 编码：作为 url.Query 进行编码
 
 #### 定义：
 
-`func codec.Md5(v1: any) return (r0: string)`
+`Md5(i any) string`
 
 
 #### 参数
@@ -1789,7 +2213,7 @@ pkcs5 填充
 
 #### 定义：
 
-`func codec.PKCS5Padding(data: bytes, blockSize: int) return (r0: bytes)`
+`PKCS5Padding(ciphertext []byte, blockSize ...int) []byte`
 
 
 #### 参数
@@ -1821,7 +2245,7 @@ pkcs5 解码
 
 #### 定义：
 
-`func codec.PKCS5UnPadding(data: bytes) return (r0: bytes)`
+`PKCS5UnPadding(origData []byte) (result []byte)`
 
 
 #### 参数
@@ -1852,7 +2276,7 @@ pkcs7 编码
 
 #### 定义：
 
-`func codec.PKCS7Padding(data: bytes) return (r0: bytes)`
+`PKCS7Padding(src []byte) []byte`
 
 
 #### 参数
@@ -1883,7 +2307,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.PKCS7UnPadding(data: bytes) return (r0: bytes)`
+`PKCS7UnPadding(src []byte) []byte`
 
 
 #### 参数
@@ -1904,6 +2328,72 @@ pkcs7 解码
 
 
  
+### codec.RC4Decrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`RC4Decrypt(cipherKey []byte, cipherText []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.RC4Encrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`RC4Encrypt(cipherKey []byte, plainText []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### codec.RSADecryptWithPKCS1v15
 
 
@@ -1914,7 +2404,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.RSADecryptWithPKCS1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+`RSADecryptWithPKCS1v15(pemPriBytes []byte, data any) ([]byte, error)`
 
 
 #### 参数
@@ -1947,7 +2437,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.RSAEncryptWithPKCS1v15(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+`RSAEncryptWithPKCS1v15(pemBytes []byte, data any) ([]byte, error)`
 
 
 #### 参数
@@ -1980,7 +2470,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sha1(v1: any) return (r0: string)`
+`Sha1(i any) string`
 
 
 #### 参数
@@ -2011,7 +2501,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sha224(v1: any) return (r0: string)`
+`Sha224(i any) string`
 
 
 #### 参数
@@ -2042,7 +2532,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sha256(v1: any) return (r0: string)`
+`Sha256(i any) string`
 
 
 #### 参数
@@ -2073,7 +2563,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sha384(v1: any) return (r0: string)`
+`Sha384(i any) string`
 
 
 #### 参数
@@ -2104,7 +2594,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sha512(v1: any) return (r0: string)`
+`Sha512(i any) string`
 
 
 #### 参数
@@ -2135,7 +2625,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptAsn1(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptAsn1(priKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2168,7 +2658,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptAsn1WithPassword(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptAsn1WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2202,7 +2692,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptC1C2C3(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptC1C2C3(priKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2235,7 +2725,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptC1C2C3WithPassword(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptC1C2C3WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2269,7 +2759,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptC1C3C2(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptC1C3C2(priKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2302,7 +2792,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2DecryptC1C3C2WithPassword(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+`Sm2DecryptC1C3C2WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2336,7 +2826,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2EncryptAsn1(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2EncryptAsn1(pubKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2369,7 +2859,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2EncryptC1C2C3(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2EncryptC1C2C3(pubKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2402,7 +2892,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2EncryptC1C3C2(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+`Sm2EncryptC1C3C2(pubKey []byte, data []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2435,7 +2925,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2GenerateHexKeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`Sm2GenerateHexKeyPair() ([]byte, []byte, error)`
 
  
 
@@ -2460,7 +2950,7 @@ pkcs7 解码
 
 #### 定义：
 
-`func codec.Sm2GeneratePemKeyPair() return (r0: bytes, r1: bytes, r2: error)`
+`Sm2GeneratePemKeyPair() ([]byte, []byte, error)`
 
  
 
@@ -2485,7 +2975,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm3(v1: any) return (r0: bytes)`
+`Sm3(raw any) []byte`
 
 
 #### 参数
@@ -2516,7 +3006,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4CBCDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4CBCDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2550,7 +3040,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4CBCEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4CBCEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2584,7 +3074,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4CFBDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4CFBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2618,7 +3108,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4CFBEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4CFBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2652,7 +3142,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4EBCDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4EBCDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2686,7 +3176,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4EBCEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4EBCEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2696,6 +3186,74 @@ SM3 计算 Hash
 | key | `bytes` |   |
 | data | `any` |   |
 | iv | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.Sm4ECBDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`Sm4ECBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.Sm4ECBEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`Sm4ECBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+| v3 | `bytes` |   |
 
 
 
@@ -2720,7 +3278,7 @@ SM3 计算 Hash
 
 #### 定义：
 
-`func codec.Sm4GCMDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4GCMDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2754,7 +3312,7 @@ SM4 GCM 加密
 
 #### 定义：
 
-`func codec.Sm4GCMEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4GCMEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2788,7 +3346,7 @@ SM4 OFB 解密
 
 #### 定义：
 
-`func codec.Sm4OFBDecrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4OFBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2822,7 +3380,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.Sm4OFBEncrypt(key: bytes, data: any, iv: bytes) return (r0: bytes, r1: error)`
+`Sm4OFBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2856,7 +3414,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.StrconvQuote(v1: string) return (r0: string)`
+`StrconvQuote(string) string`
 
 
 #### 参数
@@ -2887,7 +3445,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.StrconvUnquote(v1: string) return (r0: string, r1: error)`
+`StrconvUnquote(s string) (string, error)  doc:Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)`
 
 
 #### 参数
@@ -2919,7 +3477,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UTF8ToGB18030(v1: bytes) return (r0: bytes, r1: error)`
+`UTF8ToGB18030(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2951,7 +3509,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UTF8ToGBK(v1: bytes) return (r0: bytes, r1: error)`
+`UTF8ToGBK(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -2983,7 +3541,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UTF8ToHZGB2312(v1: bytes) return (r0: bytes, r1: error)`
+`UTF8ToHZGB2312(s []byte) ([]byte, error)`
 
 
 #### 参数
@@ -3015,7 +3573,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UnescapePathUrl(v1: string) return (r0: string, r1: error)`
+`UnescapePathUrl(s string) (string, error)  doc:PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form &#34;%AB&#34; into thehex-decoded byte 0xAB. It returns an error if any % is not followedby two hexadecimal digits.PathUnescape is identical to QueryUnescape except that it does notunescape &#39;&#43;&#39; to &#39; &#39; (space).`
 
 
 #### 参数
@@ -3047,7 +3605,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UnescapeQueryUrl(v1: string) return (r0: string, r1: error)`
+`UnescapeQueryUrl(s string) (string, error)  doc:QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form &#34;%AB&#34; into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.`
 
 
 #### 参数
@@ -3079,7 +3637,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UnicodeDecode(v1: string) return (r0: string)`
+`UnicodeDecode(i string) string`
 
 
 #### 参数
@@ -3110,7 +3668,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.UnicodeEncode(v1: string) return (r0: string)`
+`UnicodeEncode(i string) string`
 
 
 #### 参数
@@ -3141,7 +3699,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.ZeroPadding(originData: bytes, blockSize: int) return (r0: bytes)`
+`ZeroPadding(origin []byte, blockSize int) []byte`
 
 
 #### 参数
@@ -3173,7 +3731,7 @@ SM4 OBF 加密
 
 #### 定义：
 
-`func codec.ZeroUnPadding(v1: bytes) return (r0: bytes)`
+`ZeroUnPadding(originData []byte) []byte`
 
 
 #### 参数

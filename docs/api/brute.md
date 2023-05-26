@@ -37,7 +37,7 @@
 
 #### 定义：
 
-`func brute.GetAvailableBruteTypes() return (r0: []string)`
+`GetAvailableBruteTypes() []string`
 
  
 
@@ -60,7 +60,7 @@
 
 #### 定义：
 
-`func brute.GetPasswordListFromBruteType(bruteType: string) return (list: []string)`
+`GetPasswordListFromBruteType(t string) []string`
 
 
 #### 参数
@@ -91,7 +91,7 @@
 
 #### 定义：
 
-`func brute.GetUsernameListFromBruteType(bruteType: string) return (list: []string)`
+`GetUsernameListFromBruteType(t string) []string`
 
 
 #### 参数
@@ -122,7 +122,7 @@
 
 #### 定义：
 
-`func brute.New(bruteType: string, bruteParams ...yakBruteOpt) return (r0: *tools.yakBruter, r1: error)`
+`New(string, ...tools.yakBruteOpt) (*tools.yakBruter, error)`
 
 
 #### 参数
@@ -155,7 +155,7 @@
 
 #### 定义：
 
-`func brute.bruteHandler(v1: func (v1: *bruteutils.BruteItem) return(*bruteutils.BruteItemResult) ) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`bruteHandler(func(*bruteutils.BruteItem) *bruteutils.BruteItemResult) tools.yakBruteOpt`
 
 
 #### 参数
@@ -186,7 +186,7 @@
 
 #### 定义：
 
-`func brute.concurrent(v1: int) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`concurrent(int) tools.yakBruteOpt`
 
 
 #### 参数
@@ -217,7 +217,7 @@
 
 #### 定义：
 
-`func brute.concurrentTarget(v1: int) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`concurrentTarget(int) tools.yakBruteOpt`
 
 
 #### 参数
@@ -248,7 +248,7 @@
 
 #### 定义：
 
-`func brute.debug(v1: bool) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`debug(bool) tools.yakBruteOpt`
 
 
 #### 参数
@@ -279,7 +279,7 @@
 
 #### 定义：
 
-`func brute.finishingThreshold(v1: int) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`finishingThreshold(int) tools.yakBruteOpt`
 
 
 #### 参数
@@ -310,7 +310,7 @@
 
 #### 定义：
 
-`func brute.maxDelay(v1: int) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`maxDelay(int) tools.yakBruteOpt`
 
 
 #### 参数
@@ -341,7 +341,7 @@
 
 #### 定义：
 
-`func brute.minDelay(v1: int) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`minDelay(int) tools.yakBruteOpt`
 
 
 #### 参数
@@ -372,7 +372,7 @@
 
 #### 定义：
 
-`func brute.okToStop(v1: bool) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`okToStop(bool) tools.yakBruteOpt`
 
 
 #### 参数
@@ -403,7 +403,7 @@
 
 #### 定义：
 
-`func brute.passList(v1 ...string) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`passList(...string) tools.yakBruteOpt`
 
 
 #### 参数
@@ -434,7 +434,7 @@
 
 #### 定义：
 
-`func brute.userList(v1 ...string) return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+`userList(...string) tools.yakBruteOpt`
 
 
 #### 参数

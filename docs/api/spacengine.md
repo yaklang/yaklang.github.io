@@ -10,6 +10,7 @@
  | [spacengine.ZoomeyeQuery](#spacenginezoomeyequery) |  |
  | [spacengine.maxPage](#spacenginemaxpage) | 【参数】最多筛选多少页？ |
  | [spacengine.maxRecord](#spacenginemaxrecord) | 【参数】最多获取多少条数据？但是由于 limit 的限制，这个数据往往比 maxRecord 多，直到补满当前页 |
+ | [spacengine.pageSize](#spacenginepagesize) |  |
 
 
 
@@ -30,7 +31,7 @@
 
 #### 定义：
 
-`func spacengine.FofaQuery(email: string, key: string, filter: string, params ...opt) return (resultChan: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`FofaQuery(email, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
 
 
 #### 参数
@@ -65,7 +66,7 @@
 
 #### 定义：
 
-`func spacengine.HunterQuery(username: string, apikey: string, query: string, opts ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`HunterQuery(name, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
 
 
 #### 参数
@@ -100,7 +101,7 @@
 
 #### 定义：
 
-`func spacengine.QuakeQuery(apiKey: string, filter: string, params ...opt) return (resultChan: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`QuakeQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
 
 
 #### 参数
@@ -134,7 +135,7 @@
 
 #### 定义：
 
-`func spacengine.ShodanQuery(apiKey: string, filter: string, params ...yaklib._spaceEngineConfigOpt) return (resultChan: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`ShodanQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
 
 
 #### 参数
@@ -168,7 +169,7 @@
 
 #### 定义：
 
-`func spacengine.ZoomeyeQuery(v1: string, v2: string, v3 ...yaklib._spaceEngineConfigOpt) return (r0: chan *spacengine.NetSpaceEngineResult, r1: error)`
+`ZoomeyeQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
 
 
 #### 参数
@@ -202,7 +203,7 @@
 
 #### 定义：
 
-`func spacengine.maxPage(maxPage: int) return (r0: opt)`
+`maxPage(int) yaklib._spaceEngineConfigOpt`
 
 
 #### 参数
@@ -233,7 +234,7 @@
 
 #### 定义：
 
-`func spacengine.maxRecord(maxRecord: int) return (r0: opt)`
+`maxRecord(int) yaklib._spaceEngineConfigOpt`
 
 
 #### 参数
@@ -251,6 +252,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `opt` |   |
+
+
+ 
+### spacengine.pageSize
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func spacengine.pageSize(v1: int) return (r0: func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ` |   |
 
 
  

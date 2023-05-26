@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [httpserver.LocalFileSystemServe](#httpserverlocalfilesystemserve) |  |
  | [httpserver.Serve](#httpserverserve) | 启动一个 HTTP 服务器 |
  | [httpserver.context](#httpservercontext) | 【参数】为 HTTP Server 增加上下文控制生命周期 |
  | [httpserver.handler](#httpserverhandler) |  |
@@ -17,6 +18,41 @@
 
 ## 函数定义
 
+### httpserver.LocalFileSystemServe
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`LocalFileSystemServe(host string, port int, prefix, localPath string, opts ..._httpServerConfigOpt) error`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `int` |   |
+| v3 | `string` |   |
+| v4 | `string` |   |
+| v5 | `...yaklib._httpServerConfigOpt` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### httpserver.Serve
 
 启动一个 HTTP 服务器
@@ -27,7 +63,7 @@
 
 #### 定义：
 
-`func httpserver.Serve(host: string, port: int, params ...opt) return (r0: error)`
+`Serve(host string, port int, opts ..._httpServerConfigOpt) error`
 
 
 #### 参数
@@ -60,7 +96,7 @@
 
 #### 定义：
 
-`func httpserver.context(ctx: context.Context) return (r0: opt)`
+`context(context.Context) yaklib._httpServerConfigOpt`
 
 
 #### 参数
@@ -91,7 +127,7 @@
 
 #### 定义：
 
-`func httpserver.handler(handler: func (v1: http.ResponseWriter, v2: *http.Request) ) return (r0: opt)`
+`handler(func(http.ResponseWriter, *http.Request)) yaklib._httpServerConfigOpt`
 
 
 #### 参数
@@ -122,7 +158,7 @@
 
 #### 定义：
 
-`func httpserver.tlsCertAndKey(cert: any, key: any, caCerts ...any) return (r0: func _httpServerConfigOpt(v1: *yaklib._httpServerConfig) )`
+`tlsCertAndKey(any, any, ...any) yaklib._httpServerConfigOpt`
 
 
 #### 参数

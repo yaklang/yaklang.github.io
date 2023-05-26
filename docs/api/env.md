@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func env.Get(v1: string) return (r0: string)`
+`Get(string) string`
 
 
 #### 参数
@@ -56,7 +56,7 @@
 
 #### 定义：
 
-``func env.Set(v1: string, v2: string)``
+`Set(string, string)`
 
 
 #### 参数

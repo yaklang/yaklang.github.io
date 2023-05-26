@@ -7,6 +7,8 @@
  | [mitm.Start](#mitmstart) | 启动一个中间人代理 |
  | [mitm.callback](#mitmcallback) |  |
  | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
+ | [mitm.hijackHTTPRequest](#mitmhijackhttprequest) |  |
+ | [mitm.hijackHTTPResponse](#mitmhijackhttpresponse) |  |
  | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
  | [mitm.isTransparent](#mitmistransparent) | 设置启动一个透明 mitm 劫持接口！ |
  | [mitm.maxContentLength](#mitmmaxcontentlength) |  |
@@ -34,7 +36,11 @@
 
 #### 定义：
 
-`func mitm.Bridge(listenedPort: any, nextProxy: string, params ...opt) return (r0: error)`
+`Bridge(
+	port any,
+	downstreamProxy string,
+	opts ...mitmConfigOpt,
+) error`
 
 
 #### 参数
@@ -67,7 +73,10 @@
 
 #### 定义：
 
-`func mitm.Start(port: int, params ...opt) return (r0: error)`
+`Start(
+	port int,
+	opts ...mitmConfigOpt,
+) error`
 
 
 #### 参数
@@ -99,7 +108,7 @@
 
 #### 定义：
 
-`func mitm.callback(v1: func(isHttps, url, req: *http.Request, rsp: *http.Resposne)) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`callback(func(bool, string, *http.Request, *http.Response)) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -130,7 +139,7 @@
 
 #### 定义：
 
-`func mitm.context(v1: context.Context) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`context(context.Context) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -138,6 +147,68 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `context.Context` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.hijackHTTPRequest
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`hijackHTTPRequest(func(bool, string, []uint8, func([]uint8), func())) yaklib.mitmConfigOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bool, v2: string, v3: bytes, v4: func (v1: bytes) , v5: func () ) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.hijackHTTPResponse
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`hijackHTTPResponse(func(bool, string, []uint8, func([]uint8), func())) yaklib.mitmConfigOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bool, v2: string, v3: bytes, v4: func (v1: bytes) , v5: func () ) ` |   |
 
 
 
@@ -161,7 +232,7 @@
 
 #### 定义：
 
-`func mitm.host(v1: string) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`host(string) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -192,7 +263,7 @@
 
 #### 定义：
 
-`func mitm.isTransparent(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`isTransparent(bool) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -223,7 +294,7 @@
 
 #### 定义：
 
-`func mitm.maxContentLength(v1: int) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`maxContentLength(int) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -254,7 +325,7 @@
 
 #### 定义：
 
-`func mitm.rootCA(caCert: bytes, key: bytes) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`rootCA([]uint8, []uint8) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -286,7 +357,7 @@
 
 #### 定义：
 
-`func mitm.useDefaultCA(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`useDefaultCA(bool) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -317,7 +388,7 @@
 
 #### 定义：
 
-`func mitm.wscallback(v1: func (v1: bytes, v2: bool) return(any) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`wscallback(func([]uint8, bool) any) yaklib.mitmConfigOpt`
 
 
 #### 参数
@@ -348,7 +419,7 @@
 
 #### 定义：
 
-`func mitm.wsforcetext(v1: bool) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+`wsforcetext(bool) yaklib.mitmConfigOpt`
 
 
 #### 参数

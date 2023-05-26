@@ -51,7 +51,7 @@
 
 #### 定义：
 
-`func cli.Args() return (args: []string)`
+`Args() []string`
 
  
 
@@ -74,7 +74,7 @@
 
 #### 定义：
 
-`func cli.Bool(paramName: string, extraParams ...cli.setHelp|cli.setDefault) return (r0: bool)`
+`Bool(name string, opts ...setCliExtraParam) bool`
 
 
 #### 参数
@@ -106,7 +106,7 @@
 
 #### 定义：
 
-`func cli.Double(param: string, extraParams ...cli.setHelp|cli.setDefault) return (r0: float64)`
+`Double(name string, opts ...setCliExtraParam) float64`
 
 
 #### 参数
@@ -138,7 +138,7 @@
 
 #### 定义：
 
-`func cli.File(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: bytes)`
+`File(name string, opts ...setCliExtraParam) []byte`
 
 
 #### 参数
@@ -170,7 +170,7 @@
 
 #### 定义：
 
-`func cli.FileOrContent(param: string, v2 ...cli.setHelp|cli.setDefault) return (resultRaw: bytes)`
+`FileOrContent(name string, opts ...setCliExtraParam) []byte`
 
 
 #### 参数
@@ -202,7 +202,7 @@
 
 #### 定义：
 
-`func cli.Float(param: string, v2 ...cli.setHelp|cli.setDefault) return (r0: float64)`
+`Float(name string, opts ...setCliExtraParam) float64`
 
 
 #### 参数
@@ -234,7 +234,7 @@
 
 #### 定义：
 
-`func cli.Have(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: bool)`
+`Have(name string, opts ...setCliExtraParam) bool`
 
 
 #### 参数
@@ -266,7 +266,7 @@
 
 #### 定义：
 
-`func cli.Host(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Host(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -298,7 +298,7 @@
 
 #### 定义：
 
-`func cli.Hosts(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Hosts(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -330,7 +330,7 @@
 
 #### 定义：
 
-`func cli.Int(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: int)`
+`Int(name string, opts ...setCliExtraParam) int`
 
 
 #### 参数
@@ -362,7 +362,7 @@
 
 #### 定义：
 
-`func cli.Integer(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: int)`
+`Integer(name string, opts ...setCliExtraParam) int`
 
 
 #### 参数
@@ -394,7 +394,7 @@
 
 #### 定义：
 
-`func cli.LineDict(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`LineDict(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -426,7 +426,7 @@
 
 #### 定义：
 
-`func cli.Net(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Net(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -458,7 +458,7 @@
 
 #### 定义：
 
-`func cli.Network(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Network(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -490,7 +490,7 @@
 
 #### 定义：
 
-`func cli.Port(ports: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []int)`
+`Port(name string, opts ...setCliExtraParam) []int`
 
 
 #### 参数
@@ -522,7 +522,7 @@
 
 #### 定义：
 
-`func cli.Ports(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []int)`
+`Ports(name string, opts ...setCliExtraParam) []int`
 
 
 #### 参数
@@ -554,7 +554,7 @@
 
 #### 定义：
 
-``func cli.SetCliName(v1: string)``
+`SetCliName(name string)`
 
 
 #### 参数
@@ -579,7 +579,7 @@
 
 #### 定义：
 
-``func cli.SetDoc(v1: string)``
+`SetDoc(document string)`
 
 
 #### 参数
@@ -604,7 +604,7 @@
 
 #### 定义：
 
-`func cli.String(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: string)`
+`String(name string, opts ...setCliExtraParam) string`
 
 
 #### 参数
@@ -636,7 +636,7 @@
 
 #### 定义：
 
-`func cli.StringSlice(v1: string) return (r0: []string)`
+`StringSlice(name string) []string`
 
 
 #### 参数
@@ -667,14 +667,14 @@
 
 #### 定义：
 
-`func cli.Url(param: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Url(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力的补充 url |
+| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力全的补充 url |
 | v2 | `...cli.setHelp|cli.setDefault` |   |
 
 
@@ -699,7 +699,7 @@
 
 #### 定义：
 
-`func cli.Urls(v1: string, v2 ...cli.setHelp|cli.setDefault) return (r0: []string)`
+`Urls(name string, opts ...setCliExtraParam) []string`
 
 
 #### 参数
@@ -731,7 +731,7 @@
 
 #### 定义：
 
-`func cli.YakitPlugin() return (r0: []string)`
+`YakitPlugin() []string`
 
  
 
@@ -754,7 +754,7 @@
 
 #### 定义：
 
-``func cli.check()``
+`check()`
 
  
 
@@ -771,7 +771,7 @@
 
 #### 定义：
 
-``func cli.help(v1 ...io.Writer)``
+`help(w ...io.Writer)`
 
 
 #### 参数
@@ -807,7 +807,7 @@ cli.String(&#34;url&#34;, cli.setDefault(&#34;https://example.com&#34;))
 
 #### 定义：
 
-`func cli.setDefault(default: any) return (r0: cli.setDefault)`
+`setDefault(any) yaklib.setCliExtraParam`
 
 
 #### 参数
@@ -838,7 +838,7 @@ cli.String(&#34;url&#34;, cli.setDefault(&#34;https://example.com&#34;))
 
 #### 定义：
 
-`func cli.setHelp(helpText: str) return (r0: cli.setHelp)`
+`setHelp(string) yaklib.setCliExtraParam`
 
 
 #### 参数
@@ -869,7 +869,7 @@ cli.String(&#34;url&#34;, cli.setDefault(&#34;https://example.com&#34;))
 
 #### 定义：
 
-`func cli.setRequired(required: bool) return (r0: func setCliExtraParam(v1: *yaklib.cliExtraParams) )`
+`setRequired(bool) yaklib.setCliExtraParam`
 
 
 #### 参数

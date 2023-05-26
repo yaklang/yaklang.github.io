@@ -5,7 +5,7 @@
 |:------|:--------|
  | [crawler.RequestsFromFlow](#crawlerrequestsfromflow) | 从一个请求中提取可能可以用于扫描的额外请求 |
  | [crawler.Start](#crawlerstart) |  |
- | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登录功能 |
+ | [crawler.autoLogin](#crawlerautologin) | 自动登录功能，支持 DVWA 的标准登陆功能 |
  | [crawler.basicAuth](#crawlerbasicauth) | 设置爬虫的基础认证 |
  | [crawler.bodySize](#crawlerbodysize) | 想要设置每一个 body 最大获取多少页面大小，bytes 的大小，默认为 1024 * 1024 * 10 |
  | [crawler.concurrent](#crawlerconcurrent) | 设置爬虫并发请求数 |
@@ -49,7 +49,7 @@
 
 #### 定义：
 
-`func crawler.RequestsFromFlow(https: bool, req: bytes, rsp: bytes) return (reqs: []bytes, r1: error)`
+`RequestsFromFlow(isHttps bool, reqBytes, rspBytes []byte) ([][]byte, error)`
 
 
 #### 参数
@@ -83,7 +83,7 @@
 
 #### 定义：
 
-`func crawler.Start(v1: string, v2 ...crawler.configOpt) return (r0: chan *crawler.Req, r1: error)`
+`Start(string, ...crawler.configOpt) (chan *crawler.Req, error)`
 
 
 #### 参数
@@ -108,7 +108,7 @@
  
 ### crawler.autoLogin
 
-自动登录功能，支持 DVWA 的标准登录功能
+自动登录功能，支持 DVWA 的标准登陆功能
 
 #### 详细描述
 
@@ -116,7 +116,7 @@
 
 #### 定义：
 
-`func crawler.autoLogin(username: string, password: string, v3 ...string) return (r0: func configOpt(v1: *crawler.Config) )`
+`autoLogin(string, string, ...string) crawler.configOpt`
 
 
 #### 参数
@@ -155,7 +155,7 @@ die(err)
 
 #### 定义：
 
-`func crawler.basicAuth(username: string, password: string) return (r0: crawler.param)`
+`basicAuth(string, string) crawler.configOpt`
 
 
 #### 参数
@@ -192,7 +192,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.bodySize(size: int) return (r0: crawler.param)`
+`bodySize(int) crawler.configOpt`
 
 
 #### 参数
@@ -223,7 +223,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.concurrent(maxConcurrent: int) return (r0: crawler.param)`
+`concurrent(int) crawler.configOpt`
 
 
 #### 参数
@@ -254,7 +254,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.connectTimeout(seconds: float64) return (r0: crawler.param)`
+`connectTimeout(float64) crawler.configOpt`
 
 
 #### 参数
@@ -285,7 +285,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.cookie(key: string, value: string) return (r0: crawler.param)`
+`cookie(string, string) crawler.configOpt`
 
 
 #### 参数
@@ -317,7 +317,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.disallowSuffix(v1: []string) return (r0: func configOpt(v1: *crawler.Config) )`
+`disallowSuffix([]string) crawler.configOpt`
 
 
 #### 参数
@@ -351,7 +351,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.domainExclude(excludedDomain: string) return (r0: crawler.param)`
+`domainExclude(string) crawler.configOpt`
 
 
 #### 参数
@@ -382,7 +382,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.domainInclude(includedDomain: string) return (r0: crawler.param)`
+`domainInclude(string) crawler.configOpt`
 
 
 #### 参数
@@ -413,7 +413,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.forbiddenFromParent(allow: bool) return (r0: crawler.param)`
+`forbiddenFromParent(bool) crawler.configOpt`
 
 
 #### 参数
@@ -444,7 +444,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.header(key: string, value: string) return (r0: crawler.param)`
+`header(string, string) crawler.configOpt`
 
 
 #### 参数
@@ -476,7 +476,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxDepth(depth: int) return (r0: crawler.param)`
+`maxDepth(int) crawler.configOpt`
 
 
 #### 参数
@@ -507,7 +507,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRedirect(limit: int) return (r0: crawler.param)`
+`maxRedirect(int) crawler.configOpt`
 
 
 #### 参数
@@ -538,7 +538,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRequest(limit: int) return (r0: crawler.param)`
+`maxRequest(int) crawler.configOpt`
 
 
 #### 参数
@@ -569,7 +569,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxRetry(limit: int) return (r0: crawler.param)`
+`maxRetry(int) crawler.configOpt`
 
 
 #### 参数
@@ -600,7 +600,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.maxUrls(limit: int) return (r0: crawler.param)`
+`maxUrls(int) crawler.configOpt`
 
 
 #### 参数
@@ -631,7 +631,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.proxy(proxyUrl ...string) return (r0: crawler.param)`
+`proxy(...string) crawler.configOpt`
 
 
 #### 参数
@@ -662,7 +662,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.responseTimeout(seconds: float64) return (r0: crawler.param)`
+`responseTimeout(float64) crawler.configOpt`
 
 
 #### 参数
@@ -693,7 +693,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.timeout(timeout: float64) return (r0: crawler.param)`
+`timeout(float64) crawler.configOpt`
 
 
 #### 参数
@@ -724,7 +724,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.ua(userAgent: string) return (r0: crawler.param)`
+`ua(string) crawler.configOpt`
 
 
 #### 参数
@@ -755,7 +755,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.urlExtractor(v1: func (v1: *crawler.Req) return([]any) ) return (r0: func configOpt(v1: *crawler.Config) )`
+`urlExtractor(func(*crawler.Req) []any) crawler.configOpt`
 
 
 #### 参数
@@ -786,7 +786,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.urlRegexpExclude(urlRegexp: string) return (r0: crawler.param)`
+`urlRegexpExclude(string) crawler.configOpt`
 
 
 #### 参数
@@ -817,7 +817,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.urlRegexpInclude(urlRegexp: string) return (r0: crawler.param)`
+`urlRegexpInclude(string) crawler.configOpt`
 
 
 #### 参数
@@ -848,7 +848,7 @@ res, err := crawler.Start(`http://example.com`, crawler.bodySize(1024 * 1024 * 1
 
 #### 定义：
 
-`func crawler.userAgent(userAgent: string) return (r0: crawler.param)`
+`userAgent(string) crawler.configOpt`
 
 
 #### 参数

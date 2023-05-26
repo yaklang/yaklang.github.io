@@ -26,7 +26,7 @@
 
 #### 定义：
 
-`func gzip.Compress(v1: any) return (r0: bytes, r1: error)`
+`Compress(i any) ([]byte, error)`
 
 
 #### 参数
@@ -58,7 +58,7 @@
 
 #### 定义：
 
-`func gzip.Decompress(v1: bytes) return (r0: bytes, r1: error)`
+`Decompress(ret []byte) ([]byte, error)`
 
 
 #### 参数
@@ -90,7 +90,7 @@
 
 #### 定义：
 
-`func gzip.IsGzip(v1: bytes) return (r0: bool)`
+`IsGzip(raw []byte) bool`
 
 
 #### 参数

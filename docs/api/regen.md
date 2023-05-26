@@ -1,10 +1,10 @@
-# timezone
+# regen
 
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [timezone.Get](#timezoneget) |  |
- | [timezone.Now](#timezonenow) |  |
+ | [regen.Generate](#regengenerate) |  |
+ | [regen.MustGenerate](#regenmustgenerate) |  |
 
 
 
@@ -15,7 +15,7 @@
 
 ## 函数定义
 
-### timezone.Get
+### regen.Generate
 
 
 
@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`Get(string) (*time.Location, error)`
+`Generate(pattern string) ([]string, error)`
 
 
 #### 参数
@@ -42,12 +42,12 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*time.Location` |   |
+| r0 | `[]string` |   |
 | r1 | `error` |   |
 
 
  
-### timezone.Now
+### regen.MustGenerate
 
 
 
@@ -57,7 +57,7 @@
 
 #### 定义：
 
-`Now(string) time.Time`
+`MustGenerate(pattern string) []string`
 
 
 #### 参数
@@ -74,7 +74,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `time.Time` |   |
+| r0 | `[]string` |   |
 
 
  

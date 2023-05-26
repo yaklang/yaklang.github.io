@@ -3,6 +3,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [synscan.FixPermission](#synscanfixpermission) |  |
  | [synscan.Scan](#synscanscan) | 扫描核心函数 |
  | [synscan.ScanFromPing](#synscanscanfromping) | 新增从 Ping 中的扫描 |
  | [synscan.callback](#synscancallback) |  |
@@ -26,6 +27,29 @@
 
 ## 函数定义
 
+### synscan.FixPermission
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`FixPermission() error`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
 ### synscan.Scan
 
 扫描核心函数
@@ -36,7 +60,7 @@
 
 #### 定义：
 
-`func synscan.Scan(hosts: string, ports: string, v3 ...tools.scanOpt) return (r0: chan *synscan.SynScanResult, r1: error)`
+`Scan(string, string, ...tools.scanOpt) (chan *synscan.SynScanResult, error)`
 
 
 #### 参数
@@ -70,7 +94,7 @@
 
 #### 定义：
 
-`func synscan.ScanFromPing(v1: chan *pingutil.PingResult, v2: string, v3 ...tools.scanOpt) return (r0: chan *synscan.SynScanResult, r1: error)`
+`ScanFromPing(res chan *pingutil.PingResult, ports string, opts ...scanOpt) (chan *synscan.SynScanResult, error)`
 
 
 #### 参数
@@ -104,7 +128,7 @@
 
 #### 定义：
 
-`func synscan.callback(v1: func (v1: *synscan.SynScanResult) ) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`callback(func(*synscan.SynScanResult)) tools.scanOpt`
 
 
 #### 参数
@@ -135,7 +159,7 @@
 
 #### 定义：
 
-`func synscan.concurrent(v1: int) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`concurrent(int) tools.scanOpt`
 
 
 #### 参数
@@ -166,7 +190,7 @@
 
 #### 定义：
 
-`func synscan.excludeHosts(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`excludeHosts(string) tools.scanOpt`
 
 
 #### 参数
@@ -197,7 +221,7 @@
 
 #### 定义：
 
-`func synscan.excludePorts(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`excludePorts(string) tools.scanOpt`
 
 
 #### 参数
@@ -228,7 +252,7 @@
 
 #### 定义：
 
-`func synscan.initHostFilter(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`initHostFilter(string) tools.scanOpt`
 
 
 #### 参数
@@ -259,7 +283,7 @@
 
 #### 定义：
 
-`func synscan.initPortFilter(v1: string) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`initPortFilter(string) tools.scanOpt`
 
 
 #### 参数
@@ -290,7 +314,7 @@
 
 #### 定义：
 
-`func synscan.outputFile(v1: string) return (r0: opt)`
+`outputFile(string) tools.scanOpt`
 
 
 #### 参数
@@ -321,7 +345,7 @@
 
 #### 定义：
 
-`func synscan.outputPrefix(prefix: string) return (r0: opt)`
+`outputPrefix(string) tools.scanOpt`
 
 
 #### 参数
@@ -352,7 +376,7 @@
 
 #### 定义：
 
-`func synscan.rateLimit(v1: int, v2: int) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`rateLimit(int, int) tools.scanOpt`
 
 
 #### 参数
@@ -384,7 +408,7 @@
 
 #### 定义：
 
-`func synscan.submitTaskCallback(v1: func (v1: string) ) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`submitTaskCallback(func(string)) tools.scanOpt`
 
 
 #### 参数
@@ -415,7 +439,7 @@
 
 #### 定义：
 
-`func synscan.wait(v1: float64) return (r0: func scanOpt(v1: *tools._yakPortScanConfig) )`
+`wait(float64) tools.scanOpt`
 
 
 #### 参数

@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func tools.NewBruteUtil(v1: string) return (r0: *bruteutils.BruteUtil, r1: error)`
+`NewBruteUtil(string) (*bruteutils.BruteUtil, error)`
 
 
 #### 参数
@@ -57,7 +57,7 @@
 
 #### 定义：
 
-`func tools.NewPocInvoker() return (r0: *tools.PocInvoker, r1: error)`
+`NewPocInvoker() (*tools.PocInvoker, error)`
 
  
 

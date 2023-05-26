@@ -3,7 +3,9 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [fuzz.FuzzCalcExpr](#fuzzfuzzcalcexpr) |  |
  | [fuzz.HTTPRequest](#fuzzhttprequest) | HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求 |
+ | [fuzz.MustHTTPRequest](#fuzzmusthttprequest) |  |
  | [fuzz.ProtobufBytes](#fuzzprotobufbytes) |  |
  | [fuzz.ProtobufHex](#fuzzprotobufhex) |  |
  | [fuzz.ProtobufJSON](#fuzzprotobufjson) |  |
@@ -16,6 +18,7 @@
  | [fuzz.WithConcurrentLimit](#fuzzwithconcurrentlimit) |  |
  | [fuzz.WithDelay](#fuzzwithdelay) |  |
  | [fuzz.WithNamingContext](#fuzzwithnamingcontext) |  |
+ | [fuzz.WithTimeOut](#fuzzwithtimeout) |  |
  | [fuzz.https](#fuzzhttps) | `http.HTTPRequest` 的 extraParams 中的额外选项之一 |
 
 
@@ -27,6 +30,29 @@
 
 ## 函数定义
 
+### fuzz.FuzzCalcExpr
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func fuzz.FuzzCalcExpr() return (r0: map[string]any)`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `map[string]any` |   |
+
+
+ 
 ### fuzz.HTTPRequest
 
 HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
@@ -37,7 +63,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.HTTPRequest(originRequest: []byte|string|http.Request|*http.Request, extraParams ...fuzzHTTPRequestOpt) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
+`HTTPRequest(any, ...mutate.BuildFuzzHTTPRequestOption) (*mutate.FuzzHTTPRequest, error)`
 
 
 #### 参数
@@ -60,6 +86,38 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 
  
+### fuzz.MustHTTPRequest
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`MustHTTPRequest(any, ...mutate.BuildFuzzHTTPRequestOption) *mutate.FuzzHTTPRequest`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `...mutate.BuildFuzzHTTPRequestOption` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*mutate.FuzzHTTPRequest` |   |
+
+
+ 
 ### fuzz.ProtobufBytes
 
 
@@ -70,7 +128,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.ProtobufBytes(v1: any) return (r0: *yaklib.ProtobufRecords)`
+`ProtobufBytes(any) *yaklib.ProtobufRecords`
 
 
 #### 参数
@@ -101,7 +159,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.ProtobufHex(v1: any) return (r0: *yaklib.ProtobufRecords)`
+`ProtobufHex(any) *yaklib.ProtobufRecords`
 
 
 #### 参数
@@ -132,7 +190,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.ProtobufJSON(v1: any) return (r0: *yaklib.ProtobufRecords)`
+`ProtobufJSON(any) *yaklib.ProtobufRecords`
 
 
 #### 参数
@@ -163,7 +221,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.ProtobufYAML(v1: any) return (r0: *yaklib.ProtobufRecords)`
+`ProtobufYAML(any) *yaklib.ProtobufRecords`
 
 
 #### 参数
@@ -194,7 +252,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.Strings(fuzzTemplate: []byte|string|[]string) return (r0: []string)`
+`Strings(i any) []string  doc:fuzz`
 
 
 #### 参数
@@ -225,7 +283,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.StringsFunc(v1: any, v2: func (v1: *mutate.MutateResult) , v3 ...any) return (r0: error)`
+`StringsFunc(i any, cb func(i *mutate.MutateResult), params ...any) error`
 
 
 #### 参数
@@ -258,7 +316,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.StringsWithParam(v1: any, v2: any) return (r0: []string)`
+`StringsWithParam(i any, i2 any) []string`
 
 
 #### 参数
@@ -290,7 +348,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.UrlToHTTPRequest(v1: string, v2: any) return (r0: *mutate.FuzzHTTPRequest, r1: error)`
+`UrlToHTTPRequest(method string, i any) (*mutate.FuzzHTTPRequest, error)`
 
 
 #### 参数
@@ -323,7 +381,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.UrlsToHTTPRequests(urlTemplate []byte|string|[]string) return (r0: *mutate.FuzzHTTPRequestBatch, r1: error)`
+`UrlsToHTTPRequests(...any) (*mutate.FuzzHTTPRequestBatch, error)`
 
 
 #### 参数
@@ -355,7 +413,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.WithConcurrentLimit(v1: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`WithConcurrentLimit(int) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -372,7 +430,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -386,7 +444,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.WithDelay(v1: float64) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`WithDelay(float64) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -403,7 +461,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -417,7 +475,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.WithNamingContext(v1: string) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`WithNamingContext(string) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -434,7 +492,38 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+
+
+ 
+### fuzz.WithTimeOut
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`WithTimeOut(float64) mutate.httpPoolConfigOption`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -448,7 +537,7 @@ HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
 
 #### 定义：
 
-`func fuzz.https(isHttps: bool) return (r0: fuzzHTTPRequestOpt)`
+`https(bool) mutate.BuildFuzzHTTPRequestOption`
 
 
 #### 参数

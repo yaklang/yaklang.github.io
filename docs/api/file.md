@@ -20,6 +20,7 @@
  | [file.Mkdir](#filemkdir) | 创建一个文件夹，如果无法创建，基本等同于 `mkdir [path]`，则会失败 |
  | [file.MkdirAll](#filemkdirall) | 强制创建个文件夹，如果没有父路径，则会强制创建，相当于执行 `mkdir -p [path]` |
  | [file.Mv](#filemv) | 把一个文件 move 到另一个地方，本质上执行 `os.Rename` |
+ | [file.NewMultiFileLineReader](#filenewmultifilelinereader) |  |
  | [file.Open](#fileopen) | 打开一个文件，如果没有就创建，使用最多权限 |
  | [file.OpenFile](#fileopenfile) |  |
  | [file.ReadAll](#filereadall) | 把一个 reader 的内容全部读出来 |
@@ -70,7 +71,7 @@
 
 #### 定义：
 
-`func file.Abs(path: string) return (absPath: string)`
+`Abs(string) string`
 
 
 #### 参数
@@ -101,7 +102,7 @@
 
 #### 定义：
 
-``func file.Cat(fileName: string)``
+`Cat(string)`
 
 
 #### 参数
@@ -126,7 +127,7 @@
 
 #### 定义：
 
-`func file.Cp(originFile: string, targetFile: string) return (r0: error)`
+`Cp(src, dst string) error  doc:Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.`
 
 
 #### 参数
@@ -158,7 +159,7 @@
 
 #### 定义：
 
-`func file.Create(fileName: string) return (r0: *yaklib._yakFile, r1: error)`
+`Create(string) (*yaklib._yakFile, error)`
 
 
 #### 参数
@@ -190,7 +191,7 @@
 
 #### 定义：
 
-`func file.Dir(dirName: string) return (fileInfos: []*utils.FileInfo)`
+`Dir(i string) []*utils.FileInfo`
 
 
 #### 参数
@@ -221,7 +222,7 @@
 
 #### 定义：
 
-`func file.GetDirPath(v1: string) return (r0: string)`
+`GetDirPath(path string) string  doc:Dir returns all but the last element of path, typically the path&#39;s directory.After dropping the final element, Dir calls Clean on the path and trailingslashes are removed.If the path is empty, Dir returns &#34;.&#34;.If the path consists entirely of separators, Dir returns a single separator.The returned path does not end in a separator unless it is the root directory.`
 
 
 #### 参数
@@ -252,7 +253,7 @@
 
 #### 定义：
 
-`func file.IsAbs(absPath: string) return (r0: bool)`
+`IsAbs(path string) bool  doc:IsAbs reports whether the path is absolute.`
 
 
 #### 参数
@@ -283,7 +284,7 @@
 
 #### 定义：
 
-`func file.IsDir(path: string) return (r0: bool)`
+`IsDir(file string) bool`
 
 
 #### 参数
@@ -314,7 +315,7 @@
 
 #### 定义：
 
-`func file.IsExisted(path: string) return (r0: bool)`
+`IsExisted(string) bool`
 
 
 #### 参数
@@ -345,7 +346,7 @@
 
 #### 定义：
 
-`func file.IsFile(path: string) return (r0: bool)`
+`IsFile(string) bool`
 
 
 #### 参数
@@ -376,7 +377,7 @@
 
 #### 定义：
 
-`func file.IsLink(path: string) return (r0: bool)`
+`IsLink(file string) bool`
 
 
 #### 参数
@@ -407,7 +408,7 @@
 
 #### 定义：
 
-`func file.Join(paths ...string) return (r0: string)`
+`Join(elem ...string) string  doc:Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.`
 
 
 #### 参数
@@ -438,7 +439,7 @@
 
 #### 定义：
 
-`func file.Ls(dirPath: string) return (r0: []*utils.FileInfo)`
+`Ls(i string) []*utils.FileInfo`
 
 
 #### 参数
@@ -469,7 +470,7 @@
 
 #### 定义：
 
-`func file.Lstat(v1: string) return (r0: fs.FileInfo, r1: error)`
+`Lstat(string) (fs.FileInfo, error)`
 
 
 #### 参数
@@ -501,7 +502,7 @@
 
 #### 定义：
 
-`func file.Mkdir(path: string) return (r0: error)`
+`Mkdir(string) error`
 
 
 #### 参数
@@ -532,7 +533,7 @@
 
 #### 定义：
 
-`func file.MkdirAll(path: string) return (r0: error)`
+`MkdirAll(string) error`
 
 
 #### 参数
@@ -563,7 +564,7 @@
 
 #### 定义：
 
-`func file.Mv(oldPath: string, newPath: string) return (r0: error)`
+`Mv(oldpath, newpath string) error  doc:Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.If there is an error, it will be of type *LinkError.`
 
 
 #### 参数
@@ -585,6 +586,38 @@
 
 
  
+### file.NewMultiFileLineReader
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`NewMultiFileLineReader(...string) (*mfreader.MultiFileLineReader, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*mfreader.MultiFileLineReader` |   |
+| r1 | `error` |   |
+
+
+ 
 ### file.Open
 
 打开一个文件，如果没有就创建，使用最多权限
@@ -595,7 +628,7 @@
 
 #### 定义：
 
-`func file.Open(fileName: string) return (r0: *yaklib._yakFile, r1: error)`
+`Open(string) (*yaklib._yakFile, error)`
 
 
 #### 参数
@@ -627,7 +660,7 @@
 
 #### 定义：
 
-`func file.OpenFile(v1: string, v2: int, v3: fs.FileMode) return (r0: *yaklib._yakFile, r1: error)`
+`OpenFile(string, int, fs.FileMode) (*yaklib._yakFile, error)`
 
 
 #### 参数
@@ -661,7 +694,7 @@
 
 #### 定义：
 
-`func file.ReadAll(ioReader: io.Reader) return (r0: bytes, r1: error)`
+`ReadAll(r io.Reader) ([]byte, error)  doc:ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefined to read from src until EOF, it does not treat an EOF from Readas an error to be reported.As of Go 1.16, this function simply calls io.ReadAll.`
 
 
 #### 参数
@@ -693,7 +726,7 @@
 
 #### 定义：
 
-`func file.ReadDirInfoInDirectory(v1: string) return (r0: []*utils.FileInfo, r1: error)`
+`ReadDirInfoInDirectory(string) ([]*utils.FileInfo, error)`
 
 
 #### 参数
@@ -725,7 +758,7 @@
 
 #### 定义：
 
-`func file.ReadFile(fileName: string) return (fileContent: bytes, r1: error)`
+`ReadFile(filename string) ([]byte, error)  doc:ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the whole file, it does not treat an EOF from Read as an errorto be reported.As of Go 1.16, this function simply calls os.ReadFile.`
 
 
 #### 参数
@@ -757,7 +790,7 @@
 
 #### 定义：
 
-`func file.ReadFileInfoInDirectory(v1: string) return (r0: []*utils.FileInfo, r1: error)`
+`ReadFileInfoInDirectory(string) ([]*utils.FileInfo, error)`
 
 
 #### 参数
@@ -789,7 +822,7 @@
 
 #### 定义：
 
-`func file.ReadLines(v1: any) return (r0: []string)`
+`ReadLines(i any) []string`
 
 
 #### 参数
@@ -820,7 +853,7 @@
 
 #### 定义：
 
-`func file.Remove(fileName: string) return (r0: error)`
+`Remove(path string) error  doc:RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.`
 
 
 #### 参数
@@ -851,7 +884,7 @@
 
 #### 定义：
 
-`func file.Rename(oldPath: string, newPath: string) return (r0: error)`
+`Rename(oldpath, newpath string) error  doc:Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.If there is an error, it will be of type *LinkError.`
 
 
 #### 参数
@@ -883,7 +916,7 @@
 
 #### 定义：
 
-`func file.Rm(fileName: string) return (r0: error)`
+`Rm(path string) error  doc:RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.`
 
 
 #### 参数
@@ -914,7 +947,7 @@
 
 #### 定义：
 
-`func file.Save(fileName: string, content: []byte|string|[]string) return (r0: error)`
+`Save(fileName string, i any) error`
 
 
 #### 参数
@@ -946,7 +979,7 @@
 
 #### 定义：
 
-`func file.SaveJson(filePath: string, v2: any) return (r0: error)`
+`SaveJson(string, any) error`
 
 
 #### 参数
@@ -978,7 +1011,7 @@
 
 #### 定义：
 
-`func file.Split(v1: string) return (r0: string, r1: string)`
+`Split(path string) (dir, file string)  doc:Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, Split returns an empty dirand file set to path.The returned values have the property that path = dir&#43;file.`
 
 
 #### 参数
@@ -1010,7 +1043,7 @@
 
 #### 定义：
 
-`func file.Stat(v1: string) return (r0: fs.FileInfo, r1: error)`
+`Stat(string) (fs.FileInfo, error)`
 
 
 #### 参数
@@ -1042,7 +1075,7 @@
 
 #### 定义：
 
-``func file.TailF(v1: string, v2: func (v1: string) )``
+`TailF(string, func(string))`
 
 
 #### 参数
@@ -1068,7 +1101,7 @@
 
 #### 定义：
 
-`func file.TempFile(v1 ...string) return (r0: *yaklib._yakFile, r1: error)`
+`TempFile(...string) (*yaklib._yakFile, error)`
 
 
 #### 参数
@@ -1100,7 +1133,7 @@
 
 #### 定义：
 
-`func file.TempFileName() return (r0: string, r1: error)`
+`TempFileName() (string, error)`
 
  
 

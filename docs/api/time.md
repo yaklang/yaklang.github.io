@@ -38,7 +38,7 @@
 
 #### 定义：
 
-`func time.After(v1: float64) return (r0: &lt;-chan time.Time)`
+`After(float64) &lt;-chan time.Time`
 
 
 #### 参数
@@ -69,7 +69,7 @@
 
 #### 定义：
 
-`func time.AfterFunc(v1: time.Duration, v2: func () ) return (r0: *time.Timer)`
+`AfterFunc(time.Duration, func()) *time.Timer`
 
 
 #### 参数
@@ -101,7 +101,7 @@
 
 #### 定义：
 
-`func time.GetCurrentDate() return (r0: time.Time, r1: error)`
+`GetCurrentDate() (time.Time, error)`
 
  
 
@@ -125,7 +125,7 @@
 
 #### 定义：
 
-`func time.GetCurrentMonday() return (r0: time.Time, r1: error)`
+`GetCurrentMonday() (time.Time, error)`
 
  
 
@@ -149,7 +149,7 @@
 
 #### 定义：
 
-`func time.NewTicker(seconds: float64) return (r0: *time.Ticker)`
+`NewTicker(float64) *time.Ticker`
 
 
 #### 参数
@@ -180,7 +180,7 @@
 
 #### 定义：
 
-`func time.NewTimer(seconds: float64) return (r0: *time.Timer)`
+`NewTimer(float64) *time.Timer`
 
 
 #### 参数
@@ -211,7 +211,7 @@
 
 #### 定义：
 
-`func time.Now() return (r0: time.Time)`
+`Now() time.Time`
 
  
 
@@ -234,7 +234,7 @@
 
 #### 定义：
 
-`func time.Parse(timeStr: string, format: string) return (r0: time.Time, r1: error)`
+`Parse(string, string) (time.Time, error)`
 
 
 #### 参数
@@ -267,7 +267,7 @@
 
 #### 定义：
 
-`func time.ParseDuration(v1: string) return (r0: time.Duration, r1: error)`
+`ParseDuration(string) (time.Duration, error)`
 
 
 #### 参数
@@ -299,7 +299,7 @@
 
 #### 定义：
 
-`func time.Since(start: time.Time) return (r0: time.Duration)`
+`Since(time.Time) time.Duration`
 
 
 #### 参数
@@ -330,7 +330,7 @@ sleep 一段时间
 
 #### 定义：
 
-``func time.Sleep(seconds: float64)``
+`Sleep(i float64)`
 
 
 #### 参数
@@ -355,7 +355,7 @@ sleep 一段时间
 
 #### 定义：
 
-`func time.Unix(timestampSeconds: int64, nano: int64) return (r0: time.Time)`
+`Unix(int64, int64) time.Time`
 
 
 #### 参数
@@ -387,7 +387,7 @@ sleep 一段时间
 
 #### 定义：
 
-`func time.Until(end: time.Time) return (r0: time.Duration)`
+`Until(time.Time) time.Duration`
 
 
 #### 参数
@@ -418,7 +418,7 @@ sleep 一段时间
 
 #### 定义：
 
-`func time.now() return (r0: time.Time)`
+`now() time.Time`
 
  
 
@@ -441,7 +441,7 @@ sleep 一段时间
 
 #### 定义：
 
-``func time.sleep(seconds: float64)``
+`sleep(i float64)`
 
 
 #### 参数

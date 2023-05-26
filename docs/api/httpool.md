@@ -3,19 +3,19 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [httpool.Pool](#httpoolpool) | 批量执行 http 请求 |
- | [httpool.context](#httpoolcontext) | 为 pool 增加上下文 |
+ | [httpool.Pool](#httpoolpool) |  |
+ | [httpool.context](#httpoolcontext) |  |
  | [httpool.fuzz](#httpoolfuzz) |  |
  | [httpool.fuzzParams](#httpoolfuzzparams) |  |
  | [httpool.host](#httpoolhost) |  |
- | [httpool.https](#httpoolhttps) | 为请求设置 HTTPS |
- | [httpool.noFixContentLength](#httpoolnofixcontentlength) | 新增不修复 Content-Length 的可能性 |
- | [httpool.perRequestTimeout](#httpoolperrequesttimeout) | 【参数】为每个请求设置超时时间 |
- | [httpool.port](#httpoolport) | 【参数】设置请求发送到的真正 Port |
- | [httpool.proxy](#httpoolproxy) | 【参数】设置整个请求池的代理 |
- | [httpool.rawMode](#httpoolrawmode) | rawMode 模式意味着直接发送包，尽量少的去改动数据包内容 |
- | [httpool.redirectTimes](#httpoolredirecttimes) | 限制重定向次数 |
- | [httpool.size](#httpoolsize) | 【参数】设置每个请求的 body 的最大大小 |
+ | [httpool.https](#httpoolhttps) |  |
+ | [httpool.noFixContentLength](#httpoolnofixcontentlength) |  |
+ | [httpool.perRequestTimeout](#httpoolperrequesttimeout) |  |
+ | [httpool.port](#httpoolport) |  |
+ | [httpool.proxy](#httpoolproxy) |  |
+ | [httpool.rawMode](#httpoolrawmode) |  |
+ | [httpool.redirectTimes](#httpoolredirecttimes) |  |
+ | [httpool.size](#httpoolsize) |  |
 
 
 
@@ -28,7 +28,7 @@
 
 ### httpool.Pool
 
-批量执行 http 请求
+
 
 #### 详细描述
 
@@ -36,15 +36,15 @@
 
 #### 定义：
 
-`func httpool.Pool(requests: []*http.Request|FuzzHTTPRequest|FuzzHTTPRequestBatch|FuzzHTTPRequestIf|*http.Request, params ...opt) return (r0: chan *mutate._httpResult, r1: error)`
+`Pool(i any, opts ...httpPoolConfigOption) (chan *_httpResult, error)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| requests | `[]*http.Request|FuzzHTTPRequest|FuzzHTTPRequestBatch|FuzzHTTPRequestIf|*http.Request` |  想要批量执行的请求 |
-| params | `...opt` |  额外选项 |
+| v1 | `any` |   |
+| v2 | `...mutate.HttpPoolConfigOption` |   |
 
 
 
@@ -61,7 +61,7 @@
  
 ### httpool.context
 
-为 pool 增加上下文
+
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 
 #### 定义：
 
-`func httpool.context(v1: context.Context) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`context(context.Context) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -86,7 +86,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -100,7 +100,7 @@
 
 #### 定义：
 
-`func httpool.fuzz(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`fuzz(bool) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -117,7 +117,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -131,7 +131,7 @@
 
 #### 定义：
 
-`func httpool.fuzzParams(v1: any) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`fuzzParams(any) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -148,7 +148,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
@@ -162,7 +162,7 @@
 
 #### 定义：
 
-`func httpool.host(v1: string, v2: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`host(string, bool) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -180,13 +180,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.https
 
-为请求设置 HTTPS
+
 
 #### 详细描述
 
@@ -194,14 +194,14 @@
 
 #### 定义：
 
-`func httpool.https(isHttps: bool) return (r0: opt)`
+`https(bool) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| isHttps | `bool` |   |
+| v1 | `bool` |   |
 
 
 
@@ -211,13 +211,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.noFixContentLength
 
-新增不修复 Content-Length 的可能性
+
 
 #### 详细描述
 
@@ -225,7 +225,7 @@
 
 #### 定义：
 
-`func httpool.noFixContentLength(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`noFixContentLength(bool) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -242,13 +242,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.perRequestTimeout
 
-【参数】为每个请求设置超时时间
+
 
 #### 详细描述
 
@@ -256,14 +256,14 @@
 
 #### 定义：
 
-`func httpool.perRequestTimeout(seconds: float64) return (r0: opt)`
+`perRequestTimeout(float64) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float64` |   |
+| v1 | `float64` |   |
 
 
 
@@ -273,13 +273,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.port
 
-【参数】设置请求发送到的真正 Port
+
 
 #### 详细描述
 
@@ -287,14 +287,14 @@
 
 #### 定义：
 
-`func httpool.port(port: int) return (r0: opt)`
+`port(int) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| port | `int` |   |
+| v1 | `int` |   |
 
 
 
@@ -304,13 +304,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.proxy
 
-【参数】设置整个请求池的代理
+
 
 #### 详细描述
 
@@ -318,14 +318,14 @@
 
 #### 定义：
 
-`func httpool.proxy(proxyUrls ...string) return (r0: opt)`
+`proxy(...string) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxyUrls | `...string` |   |
+| v1 | `...string` |   |
 
 
 
@@ -335,13 +335,13 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.rawMode
 
-rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
+
 
 #### 详细描述
 
@@ -349,7 +349,7 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 #### 定义：
 
-`func httpool.rawMode(v1: bool) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`rawMode(bool) mutate.httpPoolConfigOption`
 
 
 #### 参数
@@ -366,13 +366,13 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.redirectTimes
 
-限制重定向次数
+
 
 #### 详细描述
 
@@ -380,14 +380,14 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 #### 定义：
 
-`func httpool.redirectTimes(count: int) return (r0: func httpPoolConfigOption(v1: *mutate.httpPoolConfig) )`
+`redirectTimes(int) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| count | `int` |   |
+| v1 | `int` |   |
 
 
 
@@ -397,13 +397,13 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func httpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  
 ### httpool.size
 
-【参数】设置每个请求的 body 的最大大小
+
 
 #### 详细描述
 
@@ -411,14 +411,14 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 #### 定义：
 
-`func httpool.size(bodySize: int) return (r0: opt)`
+`size(int) mutate.httpPoolConfigOption`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| bodySize | `int` |   |
+| v1 | `int` |   |
 
 
 
@@ -428,7 +428,7 @@ rawMode 模式意味着直接发送包，尽量少的去改动数据包内容
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
 
 
  

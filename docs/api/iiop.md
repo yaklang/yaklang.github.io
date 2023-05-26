@@ -27,7 +27,7 @@
 
 #### 定义：
 
-`func iiop.BindPayload(v1: string) return (r0: func PayloadGeneraterFun(v1: net.Conn, v2: bytes) return(error) )`
+`BindPayload(string) iiop.PayloadGeneraterFun`
 
 
 #### 参数
@@ -58,7 +58,7 @@
 
 #### 定义：
 
-`func iiop.InvokePayload(v1: string, v2: string) return (r0: func PayloadGeneraterFun(v1: net.Conn, v2: bytes) return(error) )`
+`InvokePayload(string, string) iiop.PayloadGeneraterFun`
 
 
 #### 参数
@@ -90,7 +90,7 @@
 
 #### 定义：
 
-`func iiop.RebindPayload(v1: string) return (r0: func PayloadGeneraterFun(v1: net.Conn, v2: bytes) return(error) )`
+`RebindPayload(string) iiop.PayloadGeneraterFun`
 
 
 #### 参数
@@ -121,7 +121,7 @@
 
 #### 定义：
 
-`func iiop.SendPayload(v1: string, v2: func PayloadGeneraterFun(v1: net.Conn, v2: bytes) return(error) ) return (r0: error)`
+`SendPayload(addr string, sendPayload PayloadGeneraterFun) error`
 
 
 #### 参数

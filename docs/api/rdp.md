@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func rdp.Login(v1: string, v2: string, v3: string, v4: string, v5: int) return (r0: bool, r1: error)`
+`Login(ip, domain, user, password string, port int) (_ bool, err error)`
 
 
 #### 参数
@@ -61,7 +61,7 @@
 
 #### 定义：
 
-`func rdp.Version(v1: string, v2: time.Duration) return (r0: string, r1: []string, r2: error)`
+`Version(addr string, timeout time.Duration) (_ string, _ []string, finalResult error)`
 
 
 #### 参数

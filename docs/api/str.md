@@ -19,6 +19,9 @@
  | [str.ExtractChineseIDCards](#strextractchineseidcards) | 提取内容中的身份证号 |
  | [str.ExtractDomain](#strextractdomain) |  |
  | [str.ExtractHost](#strextracthost) |  |
+ | [str.ExtractJson](#strextractjson) |  |
+ | [str.ExtractJsonWithRaw](#strextractjsonwithraw) |  |
+ | [str.ExtractRootDomain](#strextractrootdomain) |  |
  | [str.ExtractStrContext](#strextractstrcontext) | 提取 str 的上下文，（前后字符串） |
  | [str.ExtractTitle](#strextracttitle) | 从 HTML 中提取标题 |
  | [str.ExtractURLFromHTTPRequest](#strextracturlfromhttprequest) | 从一个请求对象提取 URL |
@@ -133,6 +136,11 @@
  | [str.TrimSpace](#strtrimspace) | 移除前后空白字符 |
  | [str.TrimSuffix](#strtrimsuffix) | 移除后缀 |
  | [str.UrlJoin](#strurljoin) | URL Join，可以拼接 URL Path |
+ | [str.VersionEqual](#strversionequal) |  |
+ | [str.VersionGreater](#strversiongreater) |  |
+ | [str.VersionGreaterEqual](#strversiongreaterequal) |  |
+ | [str.VersionLess](#strversionless) |  |
+ | [str.VersionLessEqual](#strversionlessequal) |  |
  | [str.f](#strf) | 相当于 `fmt.Sprintf` |
 
 
@@ -154,7 +162,7 @@
 
 #### 定义：
 
-`func str.CalcSSDeep(v1: bytes) return (r0: string)`
+`CalcSSDeep(raw []byte) string`
 
 
 #### 参数
@@ -185,7 +193,7 @@
 
 #### 定义：
 
-`func str.CalcSSDeepStability(v1 ...bytes) return (r0: float64, r1: error)`
+`CalcSSDeepStability(req ...[]byte) (float64, error)  doc:稳定性定义为最远距离 / 最低分数`
 
 
 #### 参数
@@ -217,7 +225,7 @@
 
 #### 定义：
 
-`func str.CalcSimHash(v1: bytes) return (r0: uint64)`
+`CalcSimHash(raw []byte) uint64`
 
 
 #### 参数
@@ -248,7 +256,7 @@
 
 #### 定义：
 
-`func str.CalcSimHashStability(v1 ...bytes) return (r0: float64, r1: error)`
+`CalcSimHashStability(req ...[]byte) (float64, error)  doc:计算 simhash 稳定性`
 
 
 #### 参数
@@ -280,7 +288,7 @@
 
 #### 定义：
 
-`func str.CalcSimilarity(v1 ...bytes) return (r0: float64)`
+`CalcSimilarity(raw ...[]byte) float64`
 
 
 #### 参数
@@ -311,7 +319,7 @@
 
 #### 定义：
 
-`func str.CalcTextMaxSubStrStability(v1 ...bytes) return (r0: float64, r1: error)`
+`CalcTextMaxSubStrStability(raw ...[]byte) (float64, error)`
 
 
 #### 参数
@@ -343,7 +351,7 @@
 
 #### 定义：
 
-`func str.Compare(v1: string, v2: string) return (r0: int)`
+`Compare(a, b string) int  doc:Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a &lt; b, and &#43;1 if a &gt; b.Compare is included only for symmetry with package bytes.It is usually clearer and always faster to use the built-instring comparison operators ==, &lt;, &gt;, and so on.`
 
 
 #### 参数
@@ -375,7 +383,7 @@
 
 #### 定义：
 
-`func str.Contains(all: string, sub: string) return (r0: bool)`
+`Contains(s, substr string) bool  doc:Contains reports whether substr is within s.`
 
 
 #### 参数
@@ -407,7 +415,7 @@
 
 #### 定义：
 
-`func str.ContainsAny(all: string, chars: string) return (r0: bool)`
+`ContainsAny(s, chars string) bool  doc:ContainsAny reports whether any Unicode code points in chars are within s.`
 
 
 #### 参数
@@ -439,7 +447,7 @@
 
 #### 定义：
 
-`func str.Count(all: string, sub: string) return (r0: int)`
+`Count(s, substr string) int  doc:Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 &#43; the number of Unicode code points in s.`
 
 
 #### 参数
@@ -471,7 +479,7 @@
 
 #### 定义：
 
-`func str.EndsWith(all: string, sub: string) return (r0: bool)`
+`EndsWith(s, suffix string) bool  doc:HasSuffix tests whether the string s ends with suffix.`
 
 
 #### 参数
@@ -503,7 +511,7 @@
 
 #### 定义：
 
-`func str.EqualFold(v1: string, v2: string) return (r0: bool)`
+`EqualFold(s, t string) bool  doc:EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under Unicode case-folding, which is a more generalform of case-insensitivity.`
 
 
 #### 参数
@@ -535,7 +543,7 @@
 
 #### 定义：
 
-`func str.ExtractBodyFromHTTPResponseRaw(rsp: bytes) return (body: bytes, r1: error)`
+`ExtractBodyFromHTTPResponseRaw(res []byte) ([]byte, error)`
 
 
 #### 参数
@@ -567,7 +575,7 @@
 
 #### 定义：
 
-`func str.ExtractChineseIDCards(v1: any) return (r0: []string)`
+`ExtractChineseIDCards(any) []string`
 
 
 #### 参数
@@ -598,7 +606,7 @@
 
 #### 定义：
 
-`func str.ExtractDomain(v1: any) return (r0: []string)`
+`ExtractDomain(i any) []string`
 
 
 #### 参数
@@ -629,7 +637,7 @@
 
 #### 定义：
 
-`func str.ExtractHost(v1: string) return (r0: string)`
+`ExtractHost(raw string) string`
 
 
 #### 参数
@@ -650,6 +658,100 @@
 
 
  
+### str.ExtractJson
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`ExtractJson(i any) []string`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
+### str.ExtractJsonWithRaw
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`ExtractJsonWithRaw(i any) ([]string, []string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+| r1 | `[]string` |   |
+
+
+ 
+### str.ExtractRootDomain
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`ExtractRootDomain(i any) []string`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `[]string` |   |
+
+
+ 
 ### str.ExtractStrContext
 
 提取 str 的上下文，（前后字符串）
@@ -660,7 +762,7 @@
 
 #### 定义：
 
-`func str.ExtractStrContext(v1: bytes, keywords: []string) return (r0: []string)`
+`ExtractStrContext(raw []byte, res []string) []string`
 
 
 #### 参数
@@ -692,7 +794,7 @@
 
 #### 定义：
 
-`func str.ExtractTitle(v1: any) return (r0: string)`
+`ExtractTitle(any) string`
 
 
 #### 参数
@@ -723,7 +825,7 @@
 
 #### 定义：
 
-`func str.ExtractURLFromHTTPRequest(req: *http.Request, isHttps: bool) return (r0: *url.URL, r1: error)`
+`ExtractURLFromHTTPRequest(r *http.Request, https bool) (*url.URL, error)`
 
 
 #### 参数
@@ -756,7 +858,7 @@
 
 #### 定义：
 
-`func str.ExtractURLFromHTTPRequestRaw(reqRaw: bytes, isHttps: bool) return (r0: *url.URL, r1: error)`
+`ExtractURLFromHTTPRequestRaw(req []byte, isHttps bool) (*url.URL, error)`
 
 
 #### 参数
@@ -789,7 +891,7 @@
 
 #### 定义：
 
-`func str.Fields(v1: string) return (r0: []string)`
+`Fields(s string) []string  doc:Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of substrings of s or anempty slice if s contains only white space.`
 
 
 #### 参数
@@ -820,7 +922,7 @@
 
 #### 定义：
 
-`func str.FixHTTPRequest(v1: bytes) return (r0: bytes)`
+`FixHTTPRequest(raw []byte) []byte`
 
 
 #### 参数
@@ -851,7 +953,7 @@
 
 #### 定义：
 
-`func str.FixHTTPResponse(response: bytes) return (rsp: bytes, body: bytes, r2: error)`
+`FixHTTPResponse(raw []byte) (rsp []byte, body []byte, _ error)  doc:FixHTTPResponse try its best to fix and present human-readable response`
 
 
 #### 参数
@@ -884,7 +986,7 @@
 
 #### 定义：
 
-`func str.Grok(content: string, grokRule: string) return (r0: yaklib.GrokResult)`
+`Grok(string, string) yaklib.GrokResult`
 
 
 #### 参数
@@ -916,7 +1018,7 @@
 
 #### 定义：
 
-`func str.HasPrefix(all: string, sub: string) return (r0: bool)`
+`HasPrefix(s, prefix string) bool  doc:HasPrefix tests whether the string s begins with prefix.`
 
 
 #### 参数
@@ -948,7 +1050,7 @@
 
 #### 定义：
 
-`func str.HasSuffix(all: string, sub: string) return (r0: bool)`
+`HasSuffix(s, suffix string) bool  doc:HasSuffix tests whether the string s ends with suffix.`
 
 
 #### 参数
@@ -980,7 +1082,7 @@
 
 #### 定义：
 
-`func str.HostPort(host: string, port: any) return (r0: string)`
+`HostPort(host string, port any) string`
 
 
 #### 参数
@@ -1012,7 +1114,7 @@
 
 #### 定义：
 
-`func str.IPv4ToCClassNetwork(ip: string) return (network: string, r1: error)`
+`IPv4ToCClassNetwork(s string) (string, error)`
 
 
 #### 参数
@@ -1044,7 +1146,7 @@
 
 #### 定义：
 
-`func str.Index(all: string, sub: string) return (r0: int)`
+`Index(s, substr string) int  doc:Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.`
 
 
 #### 参数
@@ -1076,7 +1178,7 @@
 
 #### 定义：
 
-`func str.IndexAny(all: string, sub: string) return (r0: int)`
+`IndexAny(s, chars string) int  doc:IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.`
 
 
 #### 参数
@@ -1108,7 +1210,7 @@
 
 #### 定义：
 
-`func str.IndexByte(all: string, byte: byte) return (r0: int)`
+`IndexByte(s string, c byte) int  doc:IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.`
 
 
 #### 参数
@@ -1140,7 +1242,7 @@
 
 #### 定义：
 
-`func str.IntersectString(v1: []string, v2: []string) return (r0: []string)`
+`IntersectString(x []string, y []string) []string  doc:IntersectString returns the intersection between two collections of string.`
 
 
 #### 参数
@@ -1172,7 +1274,7 @@
 
 #### 定义：
 
-`func str.IsAlNum(v1: any) return (r0: bool)`
+`IsAlNum(any) bool`
 
 
 #### 参数
@@ -1203,7 +1305,7 @@
 
 #### 定义：
 
-`func str.IsAlpha(v1: any) return (r0: bool)`
+`IsAlpha(any) bool`
 
 
 #### 参数
@@ -1234,7 +1336,7 @@
 
 #### 定义：
 
-`func str.IsAlphaNum(v1: any) return (r0: bool)`
+`IsAlphaNum(any) bool`
 
 
 #### 参数
@@ -1265,7 +1367,7 @@
 
 #### 定义：
 
-`func str.IsBase64Value(v1: string) return (r0: bool)`
+`IsBase64Value(s string) bool`
 
 
 #### 参数
@@ -1296,7 +1398,7 @@
 
 #### 定义：
 
-`func str.IsCaptchaField(v1: string) return (r0: bool)`
+`IsCaptchaField(key string) bool`
 
 
 #### 参数
@@ -1327,7 +1429,7 @@
 
 #### 定义：
 
-`func str.IsDigit(v1: any) return (r0: bool)`
+`IsDigit(any) bool`
 
 
 #### 参数
@@ -1358,7 +1460,7 @@
 
 #### 定义：
 
-`func str.IsHtmlResponse(v1: any) return (r0: bool)`
+`IsHtmlResponse(any) bool`
 
 
 #### 参数
@@ -1389,7 +1491,7 @@
 
 #### 定义：
 
-`func str.IsHttpURL(v1: any) return (r0: bool)`
+`IsHttpURL(v any) bool  doc:IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https`
 
 
 #### 参数
@@ -1420,7 +1522,7 @@
 
 #### 定义：
 
-`func str.IsIPv4(v1: string) return (r0: bool)`
+`IsIPv4(raw string) bool`
 
 
 #### 参数
@@ -1451,7 +1553,7 @@
 
 #### 定义：
 
-`func str.IsIPv6(v1: string) return (r0: bool)`
+`IsIPv6(raw string) bool`
 
 
 #### 参数
@@ -1482,7 +1584,7 @@
 
 #### 定义：
 
-`func str.IsJSONPParam(v1: string, v2: any) return (r0: bool)`
+`IsJSONPParam(key string, value any) bool`
 
 
 #### 参数
@@ -1514,7 +1616,7 @@
 
 #### 定义：
 
-`func str.IsJsonResponse(v1: any) return (r0: bool)`
+`IsJsonResponse(any) bool`
 
 
 #### 参数
@@ -1545,7 +1647,7 @@
 
 #### 定义：
 
-`func str.IsMD5Value(v1: string) return (r0: bool)`
+`IsMD5Value(s string) bool`
 
 
 #### 参数
@@ -1576,7 +1678,7 @@
 
 #### 定义：
 
-`func str.IsPasswordField(v1: string) return (r0: bool)`
+`IsPasswordField(key string) bool`
 
 
 #### 参数
@@ -1607,7 +1709,7 @@
 
 #### 定义：
 
-`func str.IsPlainBase64Value(v1: string) return (r0: bool)`
+`IsPlainBase64Value(s string) bool`
 
 
 #### 参数
@@ -1638,7 +1740,7 @@
 
 #### 定义：
 
-`func str.IsRedirectParam(v1: string, v2: any) return (r0: bool)`
+`IsRedirectParam(key string, value any) bool  doc:根据 key 的名字猜测是否是用于重定向的参数`
 
 
 #### 参数
@@ -1670,7 +1772,7 @@
 
 #### 定义：
 
-`func str.IsSQLColumnField(v1: string) return (r0: bool)`
+`IsSQLColumnField(s string) bool`
 
 
 #### 参数
@@ -1701,7 +1803,7 @@
 
 #### 定义：
 
-`func str.IsSensitiveJson(v1: bytes) return (r0: bool)`
+`IsSensitiveJson(data []byte) bool`
 
 
 #### 参数
@@ -1732,7 +1834,7 @@
 
 #### 定义：
 
-`func str.IsSensitiveTokenField(v1: string) return (r0: bool)`
+`IsSensitiveTokenField(key string) bool`
 
 
 #### 参数
@@ -1763,7 +1865,7 @@
 
 #### 定义：
 
-`func str.IsServerError(v1: any) return (r0: bool)`
+`IsServerError(any) bool`
 
 
 #### 参数
@@ -1794,7 +1896,7 @@
 
 #### 定义：
 
-`func str.IsSha256Value(v1: string) return (r0: bool)`
+`IsSha256Value(s string) bool`
 
 
 #### 参数
@@ -1825,7 +1927,7 @@
 
 #### 定义：
 
-`func str.IsStrongPassword(v1: string) return (r0: bool)`
+`IsStrongPassword(s string) bool`
 
 
 #### 参数
@@ -1856,7 +1958,7 @@
 
 #### 定义：
 
-`func str.IsTLSServer(v1: string, v2 ...string) return (r0: bool)`
+`IsTLSServer(addr string, proxies ...string) bool`
 
 
 #### 参数
@@ -1888,7 +1990,7 @@
 
 #### 定义：
 
-`func str.IsUrlParam(v1: string, v2: any) return (r0: bool)`
+`IsUrlParam(key string, value any) bool`
 
 
 #### 参数
@@ -1920,7 +2022,7 @@
 
 #### 定义：
 
-`func str.IsUrlPath(v1: any) return (r0: bool)`
+`IsUrlPath(v any) bool  doc:根据 value 猜测是否是一个 url path`
 
 
 #### 参数
@@ -1951,7 +2053,7 @@
 
 #### 定义：
 
-`func str.IsUsernameField(v1: string) return (r0: bool)`
+`IsUsernameField(key string) bool`
 
 
 #### 参数
@@ -1982,7 +2084,7 @@
 
 #### 定义：
 
-`func str.IsXmlParam(v1: string, v2: any) return (r0: bool)`
+`IsXmlParam(key string, value any) bool`
 
 
 #### 参数
@@ -2014,7 +2116,7 @@
 
 #### 定义：
 
-`func str.IsXmlRequest(v1: any) return (r0: bool)`
+`IsXmlRequest(any) bool`
 
 
 #### 参数
@@ -2045,7 +2147,7 @@
 
 #### 定义：
 
-`func str.IsXmlValue(v1: any) return (r0: bool)`
+`IsXmlValue(any) bool`
 
 
 #### 参数
@@ -2076,7 +2178,7 @@
 
 #### 定义：
 
-`func str.Join(v1: any, v2: any) return (r0: string)`
+`Join(i any, d any) (defaultResult string)`
 
 
 #### 参数
@@ -2108,7 +2210,7 @@
 
 #### 定义：
 
-`func str.JsonStreamToMapList(v1: io.Reader) return (r0: []map[string]any)`
+`JsonStreamToMapList(reader io.Reader) []map[string]any`
 
 
 #### 参数
@@ -2139,7 +2241,7 @@
 
 #### 定义：
 
-`func str.JsonToMap(v1: string) return (r0: map[string]string)`
+`JsonToMap(line string) map[string]string`
 
 
 #### 参数
@@ -2170,7 +2272,7 @@
 
 #### 定义：
 
-`func str.JsonToMapList(v1: string) return (r0: []map[string]string)`
+`JsonToMapList(line string) []map[string]string`
 
 
 #### 参数
@@ -2201,7 +2303,7 @@
 
 #### 定义：
 
-`func str.LastIndex(all: string, sub: string) return (r0: int)`
+`LastIndex(s, substr string) int  doc:LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.`
 
 
 #### 参数
@@ -2233,7 +2335,7 @@
 
 #### 定义：
 
-`func str.LastIndexAny(all: string, sub: string) return (r0: int)`
+`LastIndexAny(s, chars string) int  doc:LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s.`
 
 
 #### 参数
@@ -2265,7 +2367,7 @@
 
 #### 定义：
 
-`func str.LastIndexByte(all: string, byte: byte) return (r0: int)`
+`LastIndexByte(s string, c byte) int  doc:LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.`
 
 
 #### 参数
@@ -2297,7 +2399,7 @@
 
 #### 定义：
 
-`func str.LowerAndTrimSpace(v1: string) return (r0: string)`
+`LowerAndTrimSpace(raw string) string`
 
 
 #### 参数
@@ -2328,7 +2430,8 @@
 
 #### 定义：
 
-`func str.MatchAllOfGlob(data: any, globRules ...string) return (r0: bool)`
+`MatchAllOfGlob(
+	i any, re ...string) bool`
 
 
 #### 参数
@@ -2360,7 +2463,9 @@
 
 #### 定义：
 
-`func str.MatchAllOfRegexp(data: any, regexps ...string) return (r0: bool)`
+`MatchAllOfRegexp(
+	i any,
+	re ...string) bool`
 
 
 #### 参数
@@ -2392,7 +2497,7 @@
 
 #### 定义：
 
-`func str.MatchAllOfSubString(data: any, subStrs ...string) return (r0: bool)`
+`MatchAllOfSubString(i any, re ...string) bool`
 
 
 #### 参数
@@ -2424,7 +2529,8 @@
 
 #### 定义：
 
-`func str.MatchAnyOfGlob(data: any, globRules ...string) return (r0: bool)`
+`MatchAnyOfGlob(
+	i any, re ...string) bool`
 
 
 #### 参数
@@ -2456,7 +2562,9 @@
 
 #### 定义：
 
-`func str.MatchAnyOfRegexp(data: any, regexps ...string) return (r0: bool)`
+`MatchAnyOfRegexp(
+	i any,
+	re ...string) bool`
 
 
 #### 参数
@@ -2488,7 +2596,7 @@
 
 #### 定义：
 
-`func str.MatchAnyOfSubString(data: any, subStrs ...string) return (r0: bool)`
+`MatchAnyOfSubString(i any, re ...string) bool`
 
 
 #### 参数
@@ -2520,7 +2628,7 @@
 
 #### 定义：
 
-`func str.MergeUrlFromHTTPRequest(reqRaw: bytes, newUrl: string, isHttps: bool) return (r0: string)`
+`MergeUrlFromHTTPRequest(rawRequest []byte, target string, isHttps bool) string`
 
 
 #### 参数
@@ -2553,7 +2661,7 @@
 
 #### 定义：
 
-`func str.NewFilter() return (r0: *filter.StringFilter)`
+`NewFilter() *filter.StringFilter`
 
  
 
@@ -2576,7 +2684,7 @@
 
 #### 定义：
 
-`func str.NewReader(v1: string) return (r0: *strings.Reader)`
+`NewReader(string) *strings.Reader`
 
 
 #### 参数
@@ -2607,7 +2715,7 @@
 
 #### 定义：
 
-`func str.ParamsGetOr(params: map[string]string, key: string, defaulValue: string) return (r0: string)`
+`ParamsGetOr(i map[string]string, keyValue, defaultValue string) string`
 
 
 #### 参数
@@ -2640,7 +2748,7 @@
 
 #### 定义：
 
-`func str.ParseBytesToHTTPRequest(v1: bytes) return (r0: *http.Request, r1: error)`
+`ParseBytesToHTTPRequest(raw []byte) (*http.Request, error)`
 
 
 #### 参数
@@ -2672,7 +2780,7 @@
 
 #### 定义：
 
-`func str.ParseBytesToHTTPResponse(v1: bytes) return (r0: *http.Response, r1: error)`
+`ParseBytesToHTTPResponse(res []byte) (*http.Response, error)`
 
 
 #### 参数
@@ -2704,7 +2812,7 @@
 
 #### 定义：
 
-`func str.ParseStringToCClassHosts(v1: string) return (r0: string)`
+`ParseStringToCClassHosts(targets string) string`
 
 
 #### 参数
@@ -2735,7 +2843,7 @@
 
 #### 定义：
 
-`func str.ParseStringToHTTPRequest(v1: string) return (r0: *http.Request, r1: error)`
+`ParseStringToHTTPRequest(raw string) (*http.Request, error)`
 
 
 #### 参数
@@ -2767,7 +2875,7 @@
 
 #### 定义：
 
-`func str.ParseStringToHTTPResponse(v1: string) return (r0: *http.Response, r1: error)`
+`ParseStringToHTTPResponse(res string) (*http.Response, error)`
 
 
 #### 参数
@@ -2799,7 +2907,7 @@
 
 #### 定义：
 
-`func str.ParseStringToHostPort(v1: string) return (host: string, port: int, r2: error)`
+`ParseStringToHostPort(raw string) (host string, port int, err error)`
 
 
 #### 参数
@@ -2832,7 +2940,7 @@
 
 #### 定义：
 
-`func str.ParseStringToHosts(v1: string) return (r0: []string)`
+`ParseStringToHosts(raw string) []string`
 
 
 #### 参数
@@ -2863,7 +2971,7 @@
 
 #### 定义：
 
-`func str.ParseStringToLines(v1: string) return (r0: []string)`
+`ParseStringToLines(raw string) []string`
 
 
 #### 参数
@@ -2894,7 +3002,7 @@
 
 #### 定义：
 
-`func str.ParseStringToPorts(v1: string) return (r0: []int)`
+`ParseStringToPorts(ports string) []int`
 
 
 #### 参数
@@ -2925,7 +3033,7 @@
 
 #### 定义：
 
-`func str.ParseStringToUrls(v1 ...string) return (r0: []string)`
+`ParseStringToUrls(targets ...string) []string`
 
 
 #### 参数
@@ -2956,7 +3064,7 @@
 
 #### 定义：
 
-`func str.ParseStringToUrlsWith3W(v1 ...string) return (r0: []string)`
+`ParseStringToUrlsWith3W(sub ...string) []string`
 
 
 #### 参数
@@ -2987,7 +3095,7 @@
 
 #### 定义：
 
-`func str.ParseStringUrlToUrlInstance(v1: string) return (r0: *url.URL, r1: error)`
+`ParseStringUrlToUrlInstance(s string) (*url.URL, error)`
 
 
 #### 参数
@@ -3019,7 +3127,7 @@
 
 #### 定义：
 
-`func str.ParseStringUrlToWebsiteRootPath(v1: string) return (r0: string)`
+`ParseStringUrlToWebsiteRootPath(s string) string`
 
 
 #### 参数
@@ -3050,7 +3158,7 @@
 
 #### 定义：
 
-`func str.PathJoin(v1 ...string) return (r0: string)`
+`PathJoin(elem ...string) string  doc:Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.`
 
 
 #### 参数
@@ -3081,7 +3189,7 @@
 
 #### 定义：
 
-`func str.RandSecret(length: int) return (r0: string)`
+`RandSecret(n int) string`
 
 
 #### 参数
@@ -3112,7 +3220,7 @@
 
 #### 定义：
 
-`func str.RandStr(length: int) return (r0: string)`
+`RandStr(n int) string`
 
 
 #### 参数
@@ -3143,7 +3251,7 @@
 
 #### 定义：
 
-`func str.RegexpMatch(regexpPattern: string, content: any) return (r0: bool)`
+`RegexpMatch(string, any) bool`
 
 
 #### 参数
@@ -3175,7 +3283,7 @@
 
 #### 定义：
 
-`func str.RemoveRepeat(v1: []string) return (r0: []string)`
+`RemoveRepeat(slc []string) []string  doc:元素去重`
 
 
 #### 参数
@@ -3206,7 +3314,7 @@
 
 #### 定义：
 
-`func str.Repeat(strContent: string, count: int) return (r0: string)`
+`Repeat(s string, count int) string  doc:Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or ifthe result of (len(s) * count) overflows.`
 
 
 #### 参数
@@ -3238,7 +3346,7 @@
 
 #### 定义：
 
-`func str.Replace(raw: string, old: string, new: string, matchTimes: int) return (r0: string)`
+`Replace(s, old, new string, n int) string  doc:Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k&#43;1 replacementsfor a k-rune string.If n &lt; 0, there is no limit on the number of replacements.`
 
 
 #### 参数
@@ -3272,7 +3380,7 @@
 
 #### 定义：
 
-`func str.ReplaceAll(raw: string, old: string, new: string) return (r0: string)`
+`ReplaceAll(s, old, new string) string  doc:ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k&#43;1 replacementsfor a k-rune string.`
 
 
 #### 参数
@@ -3305,7 +3413,7 @@
 
 #### 定义：
 
-`func str.ReplaceHTTPPacketBody(packetRaw: bytes, newBody: bytes, isHttps: bool) return (r0: bytes)`
+`ReplaceHTTPPacketBody(raw []byte, body []byte, chunk bool) []byte`
 
 
 #### 参数
@@ -3338,7 +3446,7 @@
 
 #### 定义：
 
-`func str.Split(all: string, sep: string) return (r0: []string)`
+`Split(s, sep string) []string  doc:Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is not empty, Split returns aslice of length 1 whose only element is s.If sep is empty, Split splits after each UTF-8 sequence. If both sand sep are empty, Split returns an empty slice.It is equivalent to SplitN with a count of -1.To split around the first instance of a separator, see Cut.`
 
 
 #### 参数
@@ -3370,7 +3478,7 @@
 
 #### 定义：
 
-`func str.SplitAfter(all: string, sep: string) return (r0: []string)`
+`SplitAfter(s, sep string) []string  doc:SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not empty, SplitAfter returnsa slice of length 1 whose only element is s.If sep is empty, SplitAfter splits after each UTF-8 sequence. Ifboth s and sep are empty, SplitAfter returns an empty slice.It is equivalent to SplitAfterN with a count of -1.`
 
 
 #### 参数
@@ -3402,7 +3510,7 @@
 
 #### 定义：
 
-`func str.SplitAfterN(all: string, sep: string, n: int) return (r0: []string)`
+`SplitAfterN(s, sep string, n int) []string  doc:SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings to return:  n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.  n == 0: the result is nil (zero substrings)  n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for SplitAfter.`
 
 
 #### 参数
@@ -3435,7 +3543,7 @@
 
 #### 定义：
 
-`func str.SplitAndTrim(all: string, sep: string) return (r0: []string)`
+`SplitAndTrim(Raw string, sep string) (targets []string)`
 
 
 #### 参数
@@ -3467,7 +3575,7 @@
 
 #### 定义：
 
-`func str.SplitHTTPHeadersAndBodyFromPacket(packet: bytes, v2 ...func(string)) return (r0: string, r1: bytes)`
+`SplitHTTPHeadersAndBodyFromPacket(raw []byte, hook ...func(line string)) (string, []byte)`
 
 
 #### 参数
@@ -3500,7 +3608,7 @@
 
 #### 定义：
 
-`func str.SplitHostsToPrivateAndPublic(v1 ...string) return (r0: []string, r1: []string)`
+`SplitHostsToPrivateAndPublic(hosts ...string) (privs, pub []string)`
 
 
 #### 参数
@@ -3532,7 +3640,7 @@
 
 #### 定义：
 
-`func str.SplitN(all: string, sep: string, n: int) return (r0: []string)`
+`SplitN(s, sep string, n int) []string  doc:SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of substrings to return:  n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.  n == 0: the result is nil (zero substrings)  n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for Split.To split around the first instance of a separator, see Cut.`
 
 
 #### 参数
@@ -3565,7 +3673,7 @@
 
 #### 定义：
 
-`func str.StartsWith(all: string, sub: string) return (r0: bool)`
+`StartsWith(s, prefix string) bool  doc:HasPrefix tests whether the string s begins with prefix.`
 
 
 #### 参数
@@ -3597,7 +3705,7 @@
 
 #### 定义：
 
-`func str.StringContainsAnyOfSubString(all: string, subStrs: []string) return (r0: bool)`
+`StringContainsAnyOfSubString(s string, subs []string) bool`
 
 
 #### 参数
@@ -3629,7 +3737,7 @@
 
 #### 定义：
 
-`func str.StringSliceContains(v1: any, v2: string) return (r0: bool)`
+`StringSliceContains(s any, raw string) (result bool)`
 
 
 #### 参数
@@ -3661,7 +3769,7 @@
 
 #### 定义：
 
-`func str.StringSliceContainsAll(slice: []string, subStrs ...string) return (r0: bool)`
+`StringSliceContainsAll(o []string, elements ...string) bool  doc:SliceContainsSlick`
 
 
 #### 参数
@@ -3693,7 +3801,7 @@
 
 #### 定义：
 
-`func str.Subtract(v1: []string, v2: []string) return (r0: []string)`
+`Subtract(x []string, y []string) []string  doc:SubtractString returns the subtraction between two collections of string`
 
 
 #### 参数
@@ -3725,7 +3833,7 @@
 
 #### 定义：
 
-`func str.Title(v1: string) return (r0: string)`
+`Title(s string) string  doc:Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for word boundaries does not handle Unicodepunctuation properly. Use golang.org/x/text/cases instead.`
 
 
 #### 参数
@@ -3756,7 +3864,7 @@
 
 #### 定义：
 
-`func str.ToJsonIndentStr(v1: any) return (r0: string)`
+`ToJsonIndentStr(any) string`
 
 
 #### 参数
@@ -3787,7 +3895,7 @@
 
 #### 定义：
 
-`func str.ToLower(v1: string) return (r0: string)`
+`ToLower(s string) string  doc:ToLower returns s with all Unicode letters mapped to their lower case.`
 
 
 #### 参数
@@ -3818,7 +3926,7 @@
 
 #### 定义：
 
-`func str.ToLowerSpecial(v1: unicode.SpecialCase, v2: string) return (r0: string)`
+`ToLowerSpecial(c unicode.SpecialCase, s string) string  doc:ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.`
 
 
 #### 参数
@@ -3850,7 +3958,7 @@
 
 #### 定义：
 
-`func str.ToStringSlice(v1: any) return (r0: []string)`
+`ToStringSlice(i any) []string`
 
 
 #### 参数
@@ -3881,7 +3989,7 @@
 
 #### 定义：
 
-`func str.ToTitle(v1: string) return (r0: string)`
+`ToTitle(s string) string  doc:ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.`
 
 
 #### 参数
@@ -3912,7 +4020,7 @@
 
 #### 定义：
 
-`func str.ToTitleSpecial(v1: unicode.SpecialCase, v2: string) return (r0: string)`
+`ToTitleSpecial(c unicode.SpecialCase, s string) string  doc:ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.`
 
 
 #### 参数
@@ -3944,7 +4052,7 @@
 
 #### 定义：
 
-`func str.ToUpper(v1: string) return (r0: string)`
+`ToUpper(s string) string  doc:ToUpper returns s with all Unicode letters mapped to their upper case.`
 
 
 #### 参数
@@ -3975,7 +4083,7 @@
 
 #### 定义：
 
-`func str.ToUpperSpecial(v1: unicode.SpecialCase, v2: string) return (r0: string)`
+`ToUpperSpecial(c unicode.SpecialCase, s string) string  doc:ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.`
 
 
 #### 参数
@@ -4007,7 +4115,7 @@
 
 #### 定义：
 
-`func str.ToValidUTF8(originStr: string, replaced: string) return (r0: string)`
+`ToValidUTF8(s, replacement string) string  doc:ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.`
 
 
 #### 参数
@@ -4039,7 +4147,7 @@
 
 #### 定义：
 
-`func str.Trim(origin: string, subs: string) return (r0: string)`
+`Trim(s, cutset string) string  doc:Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.`
 
 
 #### 参数
@@ -4071,7 +4179,7 @@
 
 #### 定义：
 
-`func str.TrimLeft(origin: string, subs: string) return (r0: string)`
+`TrimLeft(s, cutset string) string  doc:TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.`
 
 
 #### 参数
@@ -4103,7 +4211,7 @@
 
 #### 定义：
 
-`func str.TrimPrefix(origin: string, prefix: string) return (r0: string)`
+`TrimPrefix(s, prefix string) string  doc:TrimPrefix returns s without the provided leading prefix string.If s doesn&#39;t start with prefix, s is returned unchanged.`
 
 
 #### 参数
@@ -4135,7 +4243,7 @@
 
 #### 定义：
 
-`func str.TrimRight(origin: string, subs: string) return (r0: string)`
+`TrimRight(s, cutset string) string  doc:TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead.`
 
 
 #### 参数
@@ -4167,7 +4275,7 @@
 
 #### 定义：
 
-`func str.TrimSpace(v1: string) return (r0: string)`
+`TrimSpace(s string) string  doc:TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.`
 
 
 #### 参数
@@ -4198,7 +4306,7 @@
 
 #### 定义：
 
-`func str.TrimSuffix(origin: string, suffix: string) return (r0: string)`
+`TrimSuffix(s, suffix string) string  doc:TrimSuffix returns s without the provided trailing suffix string.If s doesn&#39;t end with suffix, s is returned unchanged.`
 
 
 #### 参数
@@ -4230,7 +4338,7 @@ URL Join，可以拼接 URL Path
 
 #### 定义：
 
-`func str.UrlJoin(v1: string, v2 ...string) return (r0: string, r1: error)`
+`UrlJoin(origin string, paths ...string) (string, error)  doc:https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value`
 
 
 #### 参数
@@ -4253,6 +4361,166 @@ URL Join，可以拼接 URL Path
 
 
  
+### str.VersionEqual
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`VersionEqual(v1, v2 string) bool  doc:VersionEqual v1 等于 v2 返回 true`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.VersionGreater
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`VersionGreater(v1, v2 string) bool  doc:VersionGreater v1 大于 v2 返回 true`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.VersionGreaterEqual
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`VersionGreaterEqual(v1, v2 string) bool  doc:VersionGreaterEqual v1 大于等于 v2 返回 true`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.VersionLess
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`VersionLess(v1, v2 string) bool  doc:VersionLess v1 小于 v2 返回true`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
+### str.VersionLessEqual
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`VersionLessEqual(v1, v2 string) bool  doc:VersionLessEqual v1 小于等于 v2 返回true`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bool` |   |
+
+
+ 
 ### str.f
 
 相当于 `fmt.Sprintf`
@@ -4263,7 +4531,7 @@ URL Join，可以拼接 URL Path
 
 #### 定义：
 
-`func str.f(strFmt: string, items ...any) return (r0: string)`
+`f(f string, items ...any) string`
 
 
 #### 参数

@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func csrf.Generate(v1: any, v2 ...yaklib.csrfConfig) return (r0: string, r1: error)`
+`Generate(raw any, opts ...csrfConfig) (string, error)`
 
 
 #### 参数
@@ -58,7 +58,7 @@
 
 #### 定义：
 
-`func csrf.multipartDefaultValue(v1: bool) return (r0: func csrfConfig(v1: *yaklib._csrfConfig) )`
+`multipartDefaultValue(bool) yaklib.csrfConfig`
 
 
 #### 参数

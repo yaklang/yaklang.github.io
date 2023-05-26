@@ -35,7 +35,7 @@
 
 #### 定义：
 
-`func subdomain.Scan(domains: []string|string|bytes, params subdomain.param) return (resultsChannel: chan *subdomain.SubdomainResult, err: error)`
+`Scan(target any, opts ...subdomain.ConfigOption) (chan *subdomain.SubdomainResult, error)`
 
 
 #### 参数
@@ -68,7 +68,7 @@
 
 #### 定义：
 
-`func subdomain.dnsServer(servers: []string) return (r0: subdomain.param)`
+`dnsServer([]string) subdomain.ConfigOption`
 
 
 #### 参数
@@ -99,7 +99,7 @@
 
 #### 定义：
 
-`func subdomain.eachQueryTimeout(seconds: float64) return (r0: subdomain.param)`
+`eachQueryTimeout(float64) subdomain.ConfigOption`
 
 
 #### 参数
@@ -130,7 +130,7 @@
 
 #### 定义：
 
-`func subdomain.eachSearchTimeout(seconds: float64) return (r0: subdomain.param)`
+`eachSearchTimeout(float64) subdomain.ConfigOption`
 
 
 #### 参数
@@ -161,7 +161,7 @@
 
 #### 定义：
 
-`func subdomain.mainDict(dict: string|[]string|fileName|bytes|reader) return (r0: subdomain.param)`
+`mainDict(any) subdomain.ConfigOption`
 
 
 #### 参数
@@ -192,7 +192,7 @@
 
 #### 定义：
 
-`func subdomain.maxDepth(depth: int) return (r0: subdomain.param)`
+`maxDepth(int) subdomain.ConfigOption`
 
 
 #### 参数
@@ -223,7 +223,7 @@
 
 #### 定义：
 
-`func subdomain.recursive(v1: bool) return (r0: subdomain.param)`
+`recursive(bool) subdomain.ConfigOption`
 
 
 #### 参数
@@ -254,7 +254,7 @@
 
 #### 定义：
 
-`func subdomain.recursiveDict(dict: string|fileName|[]string|bytes|reader) return (r0: subdomain.param)`
+`recursiveDict(any) subdomain.ConfigOption`
 
 
 #### 参数
@@ -285,7 +285,7 @@
 
 #### 定义：
 
-`func subdomain.targetConcurrent(concurrent: int) return (r0: subdomain.param)`
+`targetConcurrent(int) subdomain.ConfigOption`
 
 
 #### 参数
@@ -316,7 +316,7 @@
 
 #### 定义：
 
-`func subdomain.targetTimeout(seconds: float64) return (r0: subdomain.param)`
+`targetTimeout(float64) subdomain.ConfigOption`
 
 
 #### 参数
@@ -347,7 +347,7 @@
 
 #### 定义：
 
-`func subdomain.wildcardToStop(v1: bool) return (r0: subdomain.param)`
+`wildcardToStop(bool) subdomain.ConfigOption`
 
 
 #### 参数
@@ -378,7 +378,7 @@
 
 #### 定义：
 
-`func subdomain.workerConcurrent(concurrent: int) return (r0: subdomain.param)`
+`workerConcurrent(int) subdomain.ConfigOption`
 
 
 #### 参数

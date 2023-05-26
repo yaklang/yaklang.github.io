@@ -45,7 +45,7 @@
 
 #### 定义：
 
-`func math.Abs(v1: float64) return (r0: float64)`
+`Abs(x float64) float64  doc:Abs returns the absolute value of x.Special cases are:	Abs(±Inf) = &#43;Inf	Abs(NaN) = NaN`
 
 
 #### 参数
@@ -76,7 +76,7 @@
 
 #### 定义：
 
-`func math.Ceil(v1: float64) return (r0: float64)`
+`Ceil(x float64) float64  doc:Ceil returns the least integer value greater than or equal to x.Special cases are:	Ceil(±0) = ±0	Ceil(±Inf) = ±Inf	Ceil(NaN) = NaN`
 
 
 #### 参数
@@ -107,7 +107,7 @@
 
 #### 定义：
 
-`func math.Floor(v1: float64) return (r0: float64)`
+`Floor(x float64) float64  doc:Floor returns the greatest integer value less than or equal to x.Special cases are:	Floor(±0) = ±0	Floor(±Inf) = ±Inf	Floor(NaN) = NaN`
 
 
 #### 参数
@@ -138,7 +138,7 @@
 
 #### 定义：
 
-`func math.IsNaN(v1: float64) return (r0: bool)`
+`IsNaN(f float64) (is bool)  doc:IsNaN reports whether f is an IEEE 754 ``not-a-number&#39;&#39; value.`
 
 
 #### 参数
@@ -169,7 +169,7 @@
 
 #### 定义：
 
-`func math.NaN() return (r0: float64)`
+`NaN() float64  doc:NaN returns an IEEE 754 ``not-a-number&#39;&#39; value.`
 
  
 
@@ -192,7 +192,7 @@
 
 #### 定义：
 
-`func math.Pow(v1: float64, v2: float64) return (r0: float64)`
+`Pow(x, y float64) float64  doc:Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(x, ±0) = 1 for any x	Pow(1, y) = 1 for any y	Pow(x, 1) = x for any x	Pow(NaN, y) = NaN	Pow(x, NaN) = NaN	Pow(±0, y) = ±Inf for y an odd integer &lt; 0	Pow(±0, -Inf) = &#43;Inf	Pow(±0, &#43;Inf) = &#43;0	Pow(±0, y) = &#43;Inf for finite y &lt; 0 and not an odd integer	Pow(±0, y) = ±0 for y an odd integer &gt; 0	Pow(±0, y) = &#43;0 for finite y &gt; 0 and not an odd integer	Pow(-1, ±Inf) = 1	Pow(x, &#43;Inf) = &#43;Inf for |x| &gt; 1	Pow(x, -Inf) = &#43;0 for |x| &gt; 1	Pow(x, &#43;Inf) = &#43;0 for |x| &lt; 1	Pow(x, -Inf) = &#43;Inf for |x| &lt; 1	Pow(&#43;Inf, y) = &#43;Inf for y &gt; 0	Pow(&#43;Inf, y) = &#43;0 for y &lt; 0	Pow(-Inf, y) = Pow(-0, -y)	Pow(x, y) = NaN for finite x &lt; 0 and finite non-integer y`
 
 
 #### 参数
@@ -224,7 +224,7 @@
 
 #### 定义：
 
-`func math.Pow10(v1: int) return (r0: float64)`
+`Pow10(n int) float64  doc:Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) =    0 for n &lt; -323	Pow10(n) = &#43;Inf for n &gt; 308`
 
 
 #### 参数
@@ -255,7 +255,7 @@
 
 #### 定义：
 
-`func math.Round(v1: float64) return (r0: float64)`
+`Round(x float64) float64  doc:Round returns the nearest integer, rounding half away from zero.Special cases are:	Round(±0) = ±0	Round(±Inf) = ±Inf	Round(NaN) = NaN`
 
 
 #### 参数
@@ -286,7 +286,7 @@
 
 #### 定义：
 
-`func math.RoundToEven(v1: float64) return (r0: float64)`
+`RoundToEven(x float64) float64  doc:RoundToEven returns the nearest integer, rounding ties to even.Special cases are:	RoundToEven(±0) = ±0	RoundToEven(±Inf) = ±Inf	RoundToEven(NaN) = NaN`
 
 
 #### 参数
@@ -317,7 +317,7 @@
 
 #### 定义：
 
-`func math.Sqrt(v1: float64) return (r0: float64)`
+`Sqrt(x float64) float64  doc:Sqrt returns the square root of x.Special cases are:	Sqrt(&#43;Inf) = &#43;Inf	Sqrt(±0) = ±0	Sqrt(x &lt; 0) = NaN	Sqrt(NaN) = NaN`
 
 
 #### 参数

@@ -5,6 +5,7 @@
 |:------|:--------|
  | [tcp.Connect](#tcpconnect) |  |
  | [tcp.Forward](#tcpforward) | 转发 TCP 链接，在本地开一个 TCP 服务器，把到这个服务器的链接转发到远程端口上 |
+ | [tcp.MockServe](#tcpmockserve) |  |
  | [tcp.Serve](#tcpserve) | 启动一个 tcp 服务器 |
  | [tcp.cliengProxy](#tcpcliengproxy) |  |
  | [tcp.clientLocal](#tcpclientlocal) | 【客户端参数】设置客户端本地地址 |
@@ -33,7 +34,7 @@
 
 #### 定义：
 
-`func tcp.Connect(host: string, port: any, params ...clientOpt) return (conn: *yaklib.tcpConnection, r1: error)`
+`Connect(string, any, ...yaklib.dialerOpt) (*yaklib.tcpConnection, error)`
 
 
 #### 参数
@@ -67,7 +68,7 @@
 
 #### 定义：
 
-`func tcp.Forward(localPort: int, remoteHost: string, remotePort: int) return (r0: error)`
+`Forward(localPort int, remoteHost string, remotePort int) error`
 
 
 #### 参数
@@ -90,6 +91,38 @@
 
 
  
+### tcp.MockServe
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func tcp.MockServe(v1: bytes) return (r0: string, r1: int)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `int` |   |
+
+
+ 
 ### tcp.Serve
 
 启动一个 tcp 服务器
@@ -100,7 +133,7 @@
 
 #### 定义：
 
-`func tcp.Serve(host: any, port: int, params ...serverOpt) return (r0: error)`
+`Serve(host any, port int, opts ...tcpServerConfigOpt) error`
 
 
 #### 参数
@@ -133,7 +166,7 @@
 
 #### 定义：
 
-`func tcp.cliengProxy(v1: string) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`cliengProxy(string) yaklib.dialerOpt`
 
 
 #### 参数
@@ -164,7 +197,7 @@
 
 #### 定义：
 
-`func tcp.clientLocal(host: any) return (r0: clientOpt)`
+`clientLocal(any) yaklib.dialerOpt`
 
 
 #### 参数
@@ -195,7 +228,7 @@
 
 #### 定义：
 
-`func tcp.clientTimeout(seconds: float64) return (r0: clientOpt)`
+`clientTimeout(float64) yaklib.dialerOpt`
 
 
 #### 参数
@@ -226,7 +259,7 @@
 
 #### 定义：
 
-`func tcp.clientTls(cert: any, key: any, caCerts ...any) return (r0: func dialerOpt(v1: *yaklib._tcpDialer) )`
+`clientTls(any, any, ...any) yaklib.dialerOpt`
 
 
 #### 参数
@@ -259,7 +292,7 @@
 
 #### 定义：
 
-`func tcp.serverCallback(v1: func (v1: *yaklib.tcpConnection) ) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`serverCallback(func(*yaklib.tcpConnection)) yaklib.tcpServerConfigOpt`
 
 
 #### 参数
@@ -290,7 +323,7 @@
 
 #### 定义：
 
-`func tcp.serverContext(ctx: context.Context) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`serverContext(context.Context) yaklib.tcpServerConfigOpt`
 
 
 #### 参数
@@ -321,7 +354,7 @@
 
 #### 定义：
 
-`func tcp.serverTls(cert: any, key: any, caCerts ...any) return (r0: func tcpServerConfigOpt(v1: *yaklib.tcpServerConfig) )`
+`serverTls(any, any, ...any) yaklib.tcpServerConfigOpt`
 
 
 #### 参数

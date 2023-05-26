@@ -25,7 +25,7 @@
 
 #### 定义：
 
-`func mmdb.Open(v1: string) return (r0: *maxminddb.Reader, r1: error)`
+`Open(string) (*maxminddb.Reader, error)`
 
 
 #### 参数
@@ -57,7 +57,7 @@
 
 #### 定义：
 
-`func mmdb.QueryIPCity(v1: *maxminddb.Reader, v2: string) return (r0: *geo.City, r1: error)`
+`QueryIPCity(*maxminddb.Reader, string) (*geo.City, error)`
 
 
 #### 参数

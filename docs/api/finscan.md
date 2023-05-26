@@ -1,35 +1,29 @@
-# simulator
+# finscan
 
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [simulator.Captcha](#simulatorcaptcha) |  |
- | [simulator.Page](#simulatorpage) |  |
- | [simulator.captchaMode](#simulatorcaptchamode) |  |
- | [simulator.captchaUrl](#simulatorcaptchaurl) |  |
- | [simulator.defaultBrute](#simulatordefaultbrute) |  |
- | [simulator.passwordList](#simulatorpasswordlist) |  |
- | [simulator.proxy](#simulatorproxy) |  |
- | [simulator.proxyDetails](#simulatorproxydetails) |  |
- | [simulator.usernameList](#simulatorusernamelist) |  |
- | [simulator.wsAddress](#simulatorwsaddress) |  |
+ | [finscan.Scan](#finscanscan) |  |
+ | [finscan.concurrent](#finscanconcurrent) |  |
+ | [finscan.excludeHosts](#finscanexcludehosts) |  |
+ | [finscan.excludePorts](#finscanexcludeports) |  |
+ | [finscan.initHostFilter](#finscaninithostfilter) |  |
+ | [finscan.initPortFilter](#finscaninitportfilter) |  |
+ | [finscan.outputFile](#finscanoutputfile) |  |
+ | [finscan.outputPrefix](#finscanoutputprefix) |  |
+ | [finscan.rateLimit](#finscanratelimit) |  |
+ | [finscan.wait](#finscanwait) |  |
 
 
 
 
-## 变量定义
-
-|变量调用名|变量类型|变量解释/帮助信息|
-|:-----------|:---------- |:-----------|
-|`simulator.simple`|`map[string]interface {}`| //|
-
-
+ 
 
 
 
 ## 函数定义
 
-### simulator.Captcha
+### finscan.Scan
 
 
 
@@ -39,210 +33,7 @@
 
 #### 定义：
 
-`Captcha() *extend.CaptchaIdentifier`
-
- 
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*extend.CaptchaIdentifier` |   |
-
-
- 
-### simulator.Page
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Page() *core.StartMode`
-
- 
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*core.StartMode` |   |
-
-
- 
-### simulator.captchaMode
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`captchaMode(string) examples.ConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
-
-
- 
-### simulator.captchaUrl
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`captchaUrl(string) examples.ConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
-
-
- 
-### simulator.defaultBrute
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`defaultBrute(string, ...examples.ConfigOpt) (*examples.BruteForceResult, error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...examples.ConfigOpt` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `*examples.BruteForceResult` |   |
-| r1 | `error` |   |
-
-
- 
-### simulator.passwordList
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`passwordList([]string) examples.ConfigOpt`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
-
-
- 
-### simulator.proxy
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func simulator.proxy(v1: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
-
-
- 
-### simulator.proxyDetails
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func simulator.proxyDetails(v1: string, v2: string, v3: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
+`Scan(string, string, ...tools.finScanOpt) (chan *finscan.FinScanResult, error)`
 
 
 #### 参数
@@ -251,7 +42,7 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `string` |   |
-| v3 | `string` |   |
+| v3 | `...tools.finScanOpt` |   |
 
 
 
@@ -261,11 +52,12 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `chan *finscan.FinScanResult` |   |
+| r1 | `error` |   |
 
 
  
-### simulator.usernameList
+### finscan.concurrent
 
 
 
@@ -275,14 +67,14 @@
 
 #### 定义：
 
-`usernameList([]string) examples.ConfigOpt`
+`concurrent(int) tools.finScanOpt`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
+| v1 | `int` |   |
 
 
 
@@ -292,11 +84,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
 
 
  
-### simulator.wsAddress
+### finscan.excludeHosts
 
 
 
@@ -306,7 +98,7 @@
 
 #### 定义：
 
-`func simulator.wsAddress(v1: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
+`excludeHosts(string) tools.finScanOpt`
 
 
 #### 参数
@@ -323,7 +115,225 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.excludePorts
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`excludePorts(string) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.initHostFilter
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`initHostFilter(string) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.initPortFilter
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`initPortFilter(string) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.outputFile
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`outputFile(string) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.outputPrefix
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`outputPrefix(string) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.rateLimit
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`rateLimit(int, int) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+| v2 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
+
+
+ 
+### finscan.wait
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`wait(float64) tools.finScanOpt`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func finScanOpt(v1: *tools._yakFinPortScanConfig) ` |   |
 
 
  
