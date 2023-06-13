@@ -2123,7 +2123,7 @@ const AppraiseInfoBody = React.memo(() => {
       <div className="propagate-video">
         {/* @ts-ignore */}
         <ReactPlayer
-          url={["/img/home/video.mp4"]}
+          url={require("../../static/img/home/video.mp4").default}
           loop={true}
           playsinline={true}
           controls={false}
