@@ -49,18 +49,33 @@ Add 添加一条规则，填写如下:
 
 ![](/img/products/yakit/WeChatAppEx-4.png)
 
-
 **4 Mac 下 Proxifier 添加 Proxification Rules:**
 
-Add 添加一条规则,通过按钮点击:
+Add 添加一条规则,通过`+`按钮点击:
+
+![](/img/products/yakit/WeChatAppEx-5.png)
+
+通过 command+shift+G 打开 `/Applications/WeChat.app/Contents/MacOS` 路径, 
 
 ![](/img/products/yakit/WeChatAppEx-6.png)
 
-通过 command+shift+G 打开 `/Applications/WeChat.app/Contents/MacOS` 路径, 选择 `Mini Program.app` , Proxifier 会自动添加完毕。
+选择 `Mini Program.app` 
+
+![](/img/products/yakit/WeChatAppEx-7.png)
+
+Proxifier 会自动添加完毕。
+
+![](/img/products/yakit/WeChatAppEx-8.png)
+
+或者直接复制 `"Mini Program.app"; "Mini Program"; com.tencent.xinWeChat.MiniProgram` 到 Applications 中。
+
+![](/img/products/yakit/WeChatAppEx-8.png)
+
+Action 选择上一步中添加的 proxy server, 点击 OK 保存。
 
 **5 开始抓包:**
 
 使用 PC 端微信打开需要的小程序，然后在 Yakit 中查看抓包数据。
 
-![](/img/products/yakit/WeChatAppEx-6.png)
+![](/img/products/yakit/WeChatAppEx-9.png)
 
