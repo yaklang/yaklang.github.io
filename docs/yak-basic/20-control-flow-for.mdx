@@ -2,11 +2,9 @@
 sidebar_position: 20
 ---
 
-# 20. 控制流：For 循环
+# 20. 控制流：循环
 
-yaklang的整合了go与python的for语句的精华，并进行了进一步的扩展。
-
-支持各种语言风格的for循环
+yaklang整合了go与python的for循环的精华，并进行了进一步的扩展。
 
 ## C 风格三语句循环
 ```c
@@ -29,7 +27,7 @@ for i=0;i<10;i++ {
 */
 ```
 
-## Golang 风格 `for-range`
+## Golang 风格 `for-range` 循环
 
 ```go
 // golang的for-range循环遍历slice,map,channel
@@ -80,7 +78,23 @@ e f
 */
 ```
 
-## Python 风格 `for-in`
+## Golang 风格 `while` 循环
+
+在yaklang中`while`循环即 `for` 循环
+```go
+i = 0
+sum = 0
+for i < 10 {
+    i++
+    sum += i
+}
+println(sum)
+/* OUTPUT:
+55
+*/
+```
+
+## Python 风格 `for-in` 循环
 
 ```python
 // python的for-in循环遍历slice,map,channel
@@ -179,9 +193,7 @@ for i in 4 {
 3
 */
 ```
-
-当然yaklang也支持break与continue
-
+## break 与 continue
 ```go
 for range 4 {
     println("1")
