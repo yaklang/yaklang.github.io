@@ -307,7 +307,35 @@ rsp, req = poc.HTTP(
 )~
 ```
 
-除此之外，我们可以提供一个更贴近实际案例的例子帮助大家快速理解这个功能
+## 获取更多请求与响应数据
+
+当我们使用`poc.HTTP`时返回三个值：`responseRaw, requestRaw, error`，也就是原始响应报文，原始请求报文和错误，这在某些情况下是不够用的，我们可能还需要更多的信息，比如：服务器响应时间，服务器的URL...
+
+发现了这个缺陷之后，我们为poc标准库添加了一个新的函数：`poc.HTTPEx`，这个函数的参数与原有的`poc.HTTP`一样，但是返回值不一样：`*Response, *Request, error`，也即是响应结构体，请求结构体和错误，通过返回结构体，我们可以获取到这次请求的更多信息。
+
+举一个简单的例子，响应结构体的结构如下：
+
+```
+type LowhttpResponse struct {
+	RawPacket          []byte
+	RedirectRawPackets [][]byte
+	PortIsOpen         bool
+	TraceInfo          *LowhttpTraceInfo
+	Url                string
+	RemoteAddr         string
+	Proxy              string
+	Https              bool
+	Http2              bool
+	RawRequest         []byte
+	Source             string
+	RuntimeId          string
+	FromPlugin         string
+}
+```
+
+想要拿到原始响应报文，我们只需要访问`response.RawPacket`即可，同时，我们也可以通过访问`response.RedirectRawPackets`追踪重定向期间的所有响应报文，访问`response.TraceInfo.GetServerDurationMS()`获得服务器响应时间（连接建立到客户端收到第一个字节的时间间隔）。
+
+更多的结构体信息可以通过查看yaklang源码或者使用`desc(response)`来获得。
 
 ## 数据包修复和处理
 
@@ -393,6 +421,130 @@ Content of a.txt.
 -----------------------------abc--
 
 ```
+
+### 修改数据包 packet helper
+packet helper辅助我们对原始报文进行处理，以下是提供的接口：
+```go
+// 新提供的Packet Helper
+poc.ReplaceHTTPPacketMethod
+poc.ReplaceHTTPPacketFirstLine
+poc.ReplaceHTTPPacketHeader
+poc.ReplaceHTTPPacketBody
+poc.ReplaceHTTPPacketCookie
+poc.ReplaceHTTPPacketHost
+poc.ReplaceHTTPPacketBasicAuth
+poc.ReplaceAllHTTPPacketQueryParams
+poc.ReplaceAllHTTPPacketPostParams
+poc.ReplaceHTTPPacketQueryParam
+poc.ReplaceHTTPPacketPostParam
+poc.ReplaceHTTPPacketPath
+poc.AppendHTTPPacketHeader
+poc.AppendHTTPPacketCookie
+poc.AppendHTTPPacketQueryParam
+poc.AppendHTTPPacketPostParam
+poc.AppendHTTPPacketPath
+poc.AppendHTTPPacketFormEncoded
+poc.AppendHTTPPacketUploadFile
+poc.DeleteHTTPPacketHeader
+poc.DeleteHTTPPacketCookie
+poc.DeleteHTTPPacketQueryParam
+poc.DeleteHTTPPacketPostParam
+poc.DeleteHTTPPacketForm
+
+// 可用于poc options的Packet Helper
+poc.replaceFirstLine
+poc.replaceMethod
+poc.replaceHeader
+poc.replaceHost
+poc.replaceBasicAuth
+poc.replaceCookie
+poc.replaceBody
+poc.replaceAllQueryParams
+poc.replaceAllPostParams
+poc.replaceQueryParam
+poc.replacePostParam
+poc.replacePath
+poc.appendHeader
+poc.appendCookie
+poc.appendQueryParam
+poc.appendPostParam
+poc.appendPath
+poc.appendFormEncoded
+poc.appendUploadFile
+poc.deleteHeader
+poc.deleteCookie
+poc.deleteQueryParam
+poc.deletePostParam
+poc.deleteForm
+```
+
+一些简单的例子如下：
+#### 修改请求方法
+
+```go
+// 将请求方法改为POST，并增加body
+rsp, req = poc.HTTP(`GET /post HTTP/1.1
+Host: pie.dev
+`, poc.replaceMethod("POST"), poc.replaceBody('a=1&b=2', false))~
+printf("%s", rsp)
+```
+
+#### 修改path
+
+```go
+// 将path改为get
+rsp, req = poc.HTTP(`GET /post HTTP/1.1
+Host: pie.dev
+`, poc.replacePath("/get"))~
+printf("%s", rsp)
+```
+
+#### 修改Host
+
+```go
+// 将Host改为pie.dev
+rsp, req = poc.HTTP(`GET /get HTTP/1.1
+Host: baidu.com
+`, poc.replaceHost("pie.dev"))~
+printf("%s", rsp)
+```
+
+#### 修改所有GET参数
+
+```go
+rsp, req = poc.HTTP(`GET /get?a=1&b=2 HTTP/1.1
+Host: pie.dev
+`, poc.replaceAllQueryParams({"a":"3", "b":"4"}))~
+printf("%s", rsp)
+```
+
+#### 增加一个form表单，上传文件
+
+```go
+// 新增一个form，上传文件，poc.appendUploadFile 第一个参数为fieldName，第二个参数为fileName，第三个参数为文件内容，第四个参数为contentType
+rsp, req = poc.HTTP(`POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="submit"
+
+true
+------WebKitFormBoundary7MA4YWxkTrZu0gW--`, poc.appendUploadFile("file", "upload.php", "<?php phpinfo();?>", "image/png"))~
+printf("%s", rsp)
+```
+
+### 构造请求包 BuildRequest
+这是poc标准库最近新增的一个工具函数，经常在构建请求时使用，一个简单的例子如下：
+
+```go
+packet = `GET /post HTTP/1.1
+Host: pie.dev
+`
+// 修改请求方法为POST，并添加body
+packet = poc.BuildRequest(packet, poc.replaceMethod("POST"), poc.replaceBody('a=1&b=2', false))
+```
+
 
 ### 分割数据包 Header 和 Body
 
