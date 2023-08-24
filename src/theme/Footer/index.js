@@ -12,6 +12,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import ThemedImage from "@theme/ThemedImage";
 import IconExternalLink from "@theme/IconExternalLink";
+import { useTranslation } from "react-i18next";
 
 import { Popover } from "antd";
 import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
@@ -24,6 +25,7 @@ function FooterLink({
     isBlank,
     ...props
 }) {
+    const { t } = useTranslation();
     const toUrl = useBaseUrl(to);
     const normalizedHref = useBaseUrl(href, {
         forcePrependBaseUrl: true,
@@ -44,11 +46,11 @@ function FooterLink({
             >
                 {href && !isInternalUrl(href) ? (
                     <span>
-                        {label}
+                        {t(label)}
                         <IconExternalLink />
                     </span>
                 ) : (
-                    label
+                    t(label)
                 )}
             </a>
         );
@@ -67,11 +69,11 @@ function FooterLink({
         >
             {href && !isInternalUrl(href) ? (
                 <span>
-                    {label}
+                    {t(label)}
                     <IconExternalLink />
                 </span>
             ) : (
-                label
+                t(label)
             )}
         </Link>
     );

@@ -1,0 +1,25 @@
+.languageSwitcher {
+  margin-top: 10px;
+  padding: 4px 12px;
+  color: var(--ifm-navbar-link-color);
+  font-size: 14px;
+
+  &:hover {
+    color: var(--base-theme-color);
+  }
+}
+
+.languageSwitcherMenu {
+  &>ul {
+    min-width: 10rem;
+    max-height: calc(100vh - var(--ifm-navbar-height));
+    padding: .5rem;
+    border-radius: var(--ifm-global-radius);
+    background-color: var(--ifm-dropdown-background-color);
+    box-shadow: var(--ifm-global-shadow-md);
+
+    li:hover {
+      background-color: var(--ifm-dropdown-hover-background-color) !important;
+    }
+  }
+}

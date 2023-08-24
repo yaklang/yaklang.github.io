@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import "./cooperativePartnerPage.scss";
 
@@ -43,6 +44,7 @@ export interface CooperativePartnerPageProps {}
 export const CooperativePartnerPage: React.FC<
   CooperativePartnerPageProps
 > = () => {
+  const { t } = useTranslation();
   const CooperativePartnerInfo: CooperativePartnerInfoProps[] = [
     {
       img: "/img/partner/logo.png",
@@ -153,8 +155,8 @@ export const CooperativePartnerPage: React.FC<
 
   return (
     <div className="cooperative-partner-page">
-      <div className="cooperative-partner-page-header-title">合作伙伴</div>
-      <div className="cooperative-partner-page-header-second-title">感谢各位合作伙伴的支持，以下合作伙伴排序不分先后</div>
+      <div className="cooperative-partner-page-header-title">{t("合作伙伴")}</div>
+      <div className="cooperative-partner-page-header-second-title">{t("感谢各位合作伙伴的支持，以下合作伙伴排序不分先后")}</div>
       <div className="cooperative-partner-page-wrapper">
         <div className="cooperative-partner-flex-wrapper">
           {CooperativePartnerInfo.map((item) => (

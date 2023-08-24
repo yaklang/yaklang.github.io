@@ -11,6 +11,7 @@ import "antd/dist/antd.min.css";
 // import { DoubleRightOutlined, FireFilled } from "@ant-design/icons";
 // import { MainPageContent } from "../components/MainPageContent";
 import { HomePage } from "../components/Home";
+import '../i18n.js';
 
 // const { Paragraph, Text } = Typography;
 

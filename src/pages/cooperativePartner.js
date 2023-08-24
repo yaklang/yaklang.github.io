@@ -3,6 +3,7 @@ import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import "antd/dist/antd.min.css";
 import {CooperativePartnerPage} from "../components/CooperativePartner"
+import '../i18n.js';
 
 export default function CooperativePartner() {
     const { siteConfig } = useDocusaurusContext();

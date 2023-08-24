@@ -1,5 +1,6 @@
 import { notification } from "antd";
 import React, { useEffect, useRef } from "react";
+import '../i18n.js';
 
 const queryURLParams = (url) => {
     var urls = url.split("?")[1];

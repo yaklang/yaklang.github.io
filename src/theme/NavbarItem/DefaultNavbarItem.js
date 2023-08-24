@@ -12,6 +12,7 @@ import IconExternalLink from '@theme/IconExternalLink';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 import {getInfimaActiveClassName} from './index';
 const dropdownLinkActiveClass = 'dropdown__link--active';
+import { useTranslation } from "react-i18next";
 export function NavLink({
   activeBasePath,
   activeBaseRegex,
@@ -23,6 +24,7 @@ export function NavLink({
   isDropdownItem,
   ...props
 }) {
+  const { t } = useTranslation();
   // TODO all this seems hacky
   // {to: 'version'} should probably be forbidden, in favor of {to: '/version'}
   const toUrl = useBaseUrl(to);
@@ -75,7 +77,7 @@ export function NavLink({
       >
           {isExternalLink ? (
               <span>
-                  {label}
+                  {t(label)}
                   <IconExternalLink
                       {...(isDropdownLink && {
                           width: 12,
@@ -84,7 +86,7 @@ export function NavLink({
                   />
               </span>
           ) : (
-              label
+              t(label)
           )}
       </a>
   );
@@ -116,7 +118,7 @@ export function NavLink({
     >
       {isExternalLink ? (
         <span>
-          {label}
+          {t(label)}
           {/* <IconExternalLink
             {...(isDropdownLink && {
               width: 12,
@@ -125,7 +127,7 @@ export function NavLink({
           /> */}
         </span>
       ) : (
-        label
+        t(label)
       )}
     </Link>
   );
