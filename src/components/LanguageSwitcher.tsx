@@ -10,7 +10,7 @@ const LanguageSwitcher: React.FC = () => {
 
   // 初始化记住原来所选语言
   useEffect(() => {
-    const lng:string = localStorage.getItem('i18nextLng') || "";
+    const lng:string = localStorage.getItem('i18nextLng') || "zh";
     i18n.changeLanguage(lng, (err, t) => {
       if (err) {
         console.error('Error changing language:', err);
