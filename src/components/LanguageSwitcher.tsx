@@ -32,7 +32,7 @@ const LanguageSwitcher: React.FC = () => {
   );
 
   return (
-    <Dropdown overlay={menu} placement="bottomRight" className="languageSwitcher" overlayClassName="languageSwitcherMenu">
+    <Dropdown overlay={menu} destroyPopupOnHide={true} placement="bottomRight" className="languageSwitcher" overlayClassName="languageSwitcherMenu">
       <a onClick={e => e.preventDefault()}>
         <Space>
           {LanguageIcon}
