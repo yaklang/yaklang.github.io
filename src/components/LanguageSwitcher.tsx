@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown, Menu, Space } from 'antd';
 import { useMemoizedFn } from "ahooks";
 import { LanguageIcon } from "./HomeIcon";
-import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
+import "../i18n";
 import './LanguageSwitcher.scss';
 
 const LanguageSwitcher: React.FC = () => {
-  const { i18n } = useTranslation();
+
+  // 初始化记住原来所选语言
+  useEffect(() => {
+    const lng:string = localStorage.getItem('i18nextLng') || "";
+    i18n.changeLanguage(lng, (err, t) => {
+      if (err) {
+        console.error('Error changing language:', err);
+        return;
+      }
+    });
+  }, []);
 
   const changeLanguage = useMemoizedFn((lng: string) => {
-    if (i18n.changeLanguage) {
-      i18n.changeLanguage(lng);
-    }
+    i18n.changeLanguage(lng);
     localStorage.setItem('i18nextLng', lng);
   });
 
