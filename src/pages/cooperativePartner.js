@@ -2,8 +2,9 @@ import React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import "antd/dist/antd.min.css";
-import {CooperativePartnerPage} from "../components/CooperativePartner"
-import '../i18n.js';
+import {CooperativePartnerPage} from "../components/CooperativePartner";
+import { initializeI18n } from "../utils";
+initializeI18n();
 
 export default function CooperativePartner() {
     const { siteConfig } = useDocusaurusContext();

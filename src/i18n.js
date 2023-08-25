@@ -11,7 +11,6 @@ i18n
       zh: { translation: zh },
     },
     fallbackLng: 'zh-CN',
-    lng: localStorage.getItem('i18nextLng'),
     debug: true,
     interpolation: {
       escapeValue: false,
