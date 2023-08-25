@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown, Menu, Space } from 'antd';
+import { useMemoizedFn } from "ahooks";
 import { LanguageIcon } from "./HomeIcon";
 import { useTranslation } from 'react-i18next';
 import './LanguageSwitcher.scss';
@@ -7,12 +8,12 @@ import './LanguageSwitcher.scss';
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
-  const changeLanguage = (lng: string) => {
+  const changeLanguage = useMemoizedFn((lng: string) => {
     if (i18n.changeLanguage) {
       i18n.changeLanguage(lng);
     }
     localStorage.setItem('i18nextLng', lng);
-  };
+  });
 
   const menu = (
     <Menu>

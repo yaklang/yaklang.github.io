@@ -1,7 +1,7 @@
 import { notification } from "antd";
 import React, { useEffect, useRef } from "react";
-import { initializeI18n } from "../utils";
-initializeI18n();
+import "../i18n";
+import i18n from 'i18next';
 
 const queryURLParams = (url) => {
     var urls = url.split("?")[1];
@@ -35,6 +35,18 @@ export default function Middle() {
             window.parent.postMessage({ source, code }, "*");
         }
     });
+
+    useEffect(() => {
+        const lng = localStorage.getItem('i18nextLng');
+        i18n.changeLanguage(lng, (err, t) => {
+            if (err) {
+                console.error('Error changing language:', err);
+                return;
+            }
+            // 在语言设置成功后，你可以执行其他操作
+            console.log('Language changed to:', lng);
+        });
+    }, []);
 
     return (
         <main>

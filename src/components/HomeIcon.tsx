@@ -56,9 +56,9 @@ export const AppleIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-174.000000, -68.000000)">
         <g id="编组-77" transform="translate(158.000000, 52.000000)">
@@ -98,9 +98,9 @@ export const AppleHoverIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-174.000000, -177.000000)">
         <g id="编组-77备份" transform="translate(158.000000, 161.000000)">
@@ -140,9 +140,9 @@ export const LinuxIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-762.000000, -68.000000)">
         <g id="编组-77" transform="translate(158.000000, 52.000000)">
@@ -184,9 +184,9 @@ export const LinuxHoverIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-762.000000, -177.000000)">
         <g id="编组-77备份" transform="translate(158.000000, 161.000000)">
@@ -246,9 +246,9 @@ export const WindowsIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-1056.000000, -68.000000)">
         <g id="编组-77" transform="translate(158.000000, 52.000000)">
@@ -308,9 +308,9 @@ export const WindowsHoverIcon = (
     <g
       id="Yak-官网"
       stroke="none"
-      stroke-width="1"
+      strokeWidth="1"
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
     >
       <g id="官网首页配图" transform="translate(-1056.000000, -177.000000)">
         <g id="编组-77备份" transform="translate(158.000000, 161.000000)">
