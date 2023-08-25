@@ -3,15 +3,15 @@ import { Dropdown, Menu, Space } from 'antd';
 import { LanguageIcon } from "./HomeIcon";
 import { useTranslation } from 'react-i18next';
 import './LanguageSwitcher.scss';
-import { setI18nextLng } from '../utils';
 
 const LanguageSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+    if (i18n.changeLanguage) {
+      i18n.changeLanguage(lng);
+    }
     localStorage.setItem('i18nextLng', lng);
-    setI18nextLng(lng);
   };
 
   const menu = (
