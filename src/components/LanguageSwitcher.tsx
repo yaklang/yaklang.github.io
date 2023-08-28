@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
-import { Dropdown, Menu, Space } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { useMemoizedFn } from "ahooks";
-import { LanguageIcon } from "./HomeIcon";
+import { EnglishIcon, ChineseIcon } from "./HomeIcon";
 import i18n from 'i18next';
 import "../i18n";
 import './LanguageSwitcher.scss';
 
 const LanguageSwitcher: React.FC = () => {
-
+  const [currentLng, setCurrentLng] = useState<string>("zh");
+  
   // 初始化记住原来所选语言
   useEffect(() => {
     const lng:string = localStorage.getItem('i18nextLng') || "zh";
+    setCurrentLng(lng);
     i18n.changeLanguage(lng, (err, t) => {
       if (err) {
         console.error('Error changing language:', err);
@@ -21,24 +22,16 @@ const LanguageSwitcher: React.FC = () => {
 
   const changeLanguage = useMemoizedFn((lng: string) => {
     i18n.changeLanguage(lng);
+    setCurrentLng(lng);
     localStorage.setItem('i18nextLng', lng);
   });
 
-  const menu = (
-    <Menu>
-      <Menu.Item onClick={() => changeLanguage('zh')}>简体中文</Menu.Item>
-      <Menu.Item onClick={() => changeLanguage('en')}>English</Menu.Item>
-    </Menu>
-  );
-
   return (
-    <Dropdown overlay={menu} destroyPopupOnHide={true} placement="bottomRight" className="languageSwitcher" overlayClassName="languageSwitcherMenu">
-      <a onClick={e => e.preventDefault()}>
-        <Space>
-          {LanguageIcon}
-        </Space>
-      </a>
-    </Dropdown>
+    <div className="languageSwitcher" onClick={() => changeLanguage(currentLng === 'en' ? 'zh' : 'en')}>
+      {
+        currentLng === 'en' ? EnglishIcon : ChineseIcon
+      }
+    </div>
   )
 };
 
