@@ -16,6 +16,8 @@ import { useTranslation } from "react-i18next";
 
 import { Popover } from "antd";
 import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
+import i18n from 'i18next';
+import "../../i18n";
 
 function FooterLink({
     to,
@@ -111,6 +113,17 @@ function Footer() {
             }
         };
     },[])
+
+    // 初始化记住原来所选语言
+    useEffect(() => {
+        const lng = localStorage.getItem('i18nextLng') || "zh";
+        i18n.changeLanguage(lng, (err, t) => {
+            if (err) {
+                console.error('Error changing language:', err);
+                return;
+            }
+        });
+    }, []);
 
     return (
         <footer
