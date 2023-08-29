@@ -1184,7 +1184,7 @@ const KindModules = (props: KindModulesProps) => {
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">Golang</div>
                 <div className="efficent-img-content-text">
-                  Go {t("是谷歌支持的开源编程语言")}{currentRatio}
+                  Go {t("是谷歌支持的开源编程语言")}
                 </div>
               </div>
             </div>

@@ -257,10 +257,10 @@ function Navbar() {
           ))}
         </div>
         <div className="navbar__items navbar__items--right">
-          <LanguageSwitcher />
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
+          <LanguageSwitcher />
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
