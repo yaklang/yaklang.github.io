@@ -7,6 +7,8 @@
  | [risk.CheckICMPTriggerByLength](#riskcheckicmptriggerbylength) | 检查 ICMP 触发器 |
  | [risk.CheckRandomTriggerByToken](#riskcheckrandomtriggerbytoken) | 通过 Token 来查询随机触发器 |
  | [risk.CreateRisk](#riskcreaterisk) |  |
+ | [risk.DeleteRiskByID](#riskdeleteriskbyid) |  |
+ | [risk.DeleteRiskByTarget](#riskdeleteriskbytarget) |  |
  | [risk.ExtractTokenFromUrl](#riskextracttokenfromurl) | 从 URL 中提取 token |
  | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
  | [risk.NewDNSLogDomain](#risknewdnslogdomain) |  |
@@ -19,6 +21,7 @@
  | [risk.NewRandomPortTrigger](#risknewrandomporttrigger) |  |
  | [risk.NewRisk](#risknewrisk) |  |
  | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) |  |
+ | [risk.RegisterBeforeRiskSave](#riskregisterbeforerisksave) |  |
  | [risk.Save](#risksave) |  |
  | [risk.YieldRiskByCreateAt](#riskyieldriskbycreateat) |  |
  | [risk.YieldRiskByRuntimeId](#riskyieldriskbyruntimeid) |  |
@@ -27,6 +30,7 @@
  | [risk.description](#riskdescription) |  |
  | [risk.details](#riskdetails) |  |
  | [risk.fromYakScript](#riskfromyakscript) |  |
+ | [risk.ignore](#riskignore) |  |
  | [risk.level](#risklevel) |  |
  | [risk.parameter](#riskparameter) |  |
  | [risk.payload](#riskpayload) |  |
@@ -69,6 +73,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+| v2 | `...float64` |   |
 
 
 
@@ -177,6 +182,56 @@
 |:-----------|:---------- |:-----------|
 | r0 | `*yakit.Risk` |   |
 
+
+ 
+### risk.DeleteRiskByID
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func risk.DeleteRiskByID(v1: any)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+ 
+
+ 
+### risk.DeleteRiskByTarget
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func risk.DeleteRiskByTarget(v1: string)``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+ 
 
  
 ### risk.ExtractTokenFromUrl
@@ -545,6 +600,31 @@
 
 
  
+### risk.RegisterBeforeRiskSave
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+``func risk.RegisterBeforeRiskSave(v1: func (v1: *yakit.Risk) )``
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: *yakit.Risk) ` |   |
+
+
+
+
+ 
+
+ 
 ### risk.Save
 
 
@@ -780,6 +860,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+
+
+ 
+### risk.ignore
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func risk.ignore(v1: bool) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bool` |   |
 
 
 

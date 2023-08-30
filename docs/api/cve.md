@@ -6,7 +6,6 @@
  | [cve.Download](#cvedownload) |  |
  | [cve.GetCVE](#cvegetcve) |  |
  | [cve.LoadCVE](#cveloadcve) |  |
- | [cve.MakeCtScript](#cvemakectscript) |  |
  | [cve.NewStatistics](#cvenewstatistics) |  |
  | [cve.Query](#cvequery) |  |
  | [cve.QueryEx](#cvequeryex) |  |
@@ -119,34 +118,6 @@
  
 
  
-### cve.MakeCtScript
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`MakeCtScript(product, dbName, serverName, scriptPath string)  doc:MakeCtScript 生成合规插件脚本，要求输入产品名，数据库路径，服务名(扫描获取的服务名)，脚本输出路径`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
-| v4 | `string` |   |
-
-
-
-
- 
-
- 
 ### cve.NewStatistics
 
 
@@ -195,7 +166,7 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| v1 | `*gorm.DB` |   |
 | v2 | `...cvequeryops.CVEOption` |   |
 
 
@@ -206,8 +177,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]cveresources.CVERes` |   |
-| r1 | `int` |   |
+| r0 | `chan *cveresources.CVE` |   |
 
 
  

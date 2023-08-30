@@ -31,6 +31,7 @@
  | [codec.DESECBEncrypt](#codecdesecbencrypt) |  |
  | [codec.DESEncrypt](#codecdesencrypt) | DES 加密，默认 CBC 模式 |
  | [codec.DecodeASCII](#codecdecodeascii) | 等价于 `strconv.Unquote`，把一个被 `&#34;` 包裹的字符串解析成字符串内容，同时解析 `&#34;\x0a&#34;` 解析成对应的字符串。 |
+ | [codec.DecodeBase32](#codecdecodebase32) |  |
  | [codec.DecodeBase64](#codecdecodebase64) | 把 base64 解析成 bytes |
  | [codec.DecodeBase64Url](#codecdecodebase64url) |  |
  | [codec.DecodeChunked](#codecdecodechunked) | http chunked 解码 |
@@ -40,6 +41,7 @@
  | [codec.DoubleDecodeUrl](#codecdoubledecodeurl) | 双重 URL 解码，例如 `%2564%2567` 会解析成 `dg` |
  | [codec.DoubleEncodeUrl](#codecdoubleencodeurl) |  |
  | [codec.EncodeASCII](#codecencodeascii) | 通常用于把不可见字符串变成可见字符串，把一个字符串变成双引号`&#34;`包裹的字符串，字符串中的不可见字符会变成 `\xAA\x0A` 这类被转义的内容 |
+ | [codec.EncodeBase32](#codecencodebase32) |  |
  | [codec.EncodeBase64](#codecencodebase64) | 把一个对象编码成 base64 字符串 |
  | [codec.EncodeBase64Url](#codecencodebase64url) |  |
  | [codec.EncodeChunked](#codecencodechunked) | 增加 chunked 编码 |
@@ -73,7 +75,9 @@
  | [codec.PKCS7UnPadding](#codecpkcs7unpadding) | pkcs7 解码 |
  | [codec.RC4Decrypt](#codecrc4decrypt) |  |
  | [codec.RC4Encrypt](#codecrc4encrypt) |  |
+ | [codec.RSADecryptWithOAEP](#codecrsadecryptwithoaep) |  |
  | [codec.RSADecryptWithPKCS1v15](#codecrsadecryptwithpkcs1v15) |  |
+ | [codec.RSAEncryptWithOAEP](#codecrsaencryptwithoaep) |  |
  | [codec.RSAEncryptWithPKCS1v15](#codecrsaencryptwithpkcs1v15) |  |
  | [codec.Sha1](#codecsha1) | 计算 sha1 hash |
  | [codec.Sha224](#codecsha224) |  |
@@ -106,6 +110,12 @@
  | [codec.Sm4OFBEncrypt](#codecsm4ofbencrypt) | SM4 OBF 加密 |
  | [codec.StrconvQuote](#codecstrconvquote) |  |
  | [codec.StrconvUnquote](#codecstrconvunquote) |  |
+ | [codec.TripleDESCBCDecrypt](#codectripledescbcdecrypt) |  |
+ | [codec.TripleDESCBCEncrypt](#codectripledescbcencrypt) |  |
+ | [codec.TripleDESDecrypt](#codectripledesdecrypt) |  |
+ | [codec.TripleDESECBDecrypt](#codectripledesecbdecrypt) |  |
+ | [codec.TripleDESECBEncrypt](#codectripledesecbencrypt) |  |
+ | [codec.TripleDESEncrypt](#codectripledesencrypt) |  |
  | [codec.UTF8ToGB18030](#codecutf8togb18030) |  |
  | [codec.UTF8ToGBK](#codecutf8togbk) |  |
  | [codec.UTF8ToHZGB2312](#codecutf8tohzgb2312) |  |
@@ -1070,6 +1080,38 @@ DES 加密，默认 CBC 模式
 
 
  
+### codec.DecodeBase32
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.DecodeBase32(v1: string) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### codec.DecodeBase64
 
 把 base64 解析成 bytes
@@ -1352,6 +1394,37 @@ http chunked 解码
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |  编码结果 |
+
+
+ 
+### codec.EncodeBase32
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.EncodeBase32(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  
@@ -2394,6 +2467,39 @@ pkcs7 解码
 
 
  
+### codec.RSADecryptWithOAEP
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.RSADecryptWithOAEP(v1: bytes, v2: any) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
 ### codec.RSADecryptWithPKCS1v15
 
 
@@ -2405,6 +2511,39 @@ pkcs7 解码
 #### 定义：
 
 `RSADecryptWithPKCS1v15(pemPriBytes []byte, data any) ([]byte, error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.RSAEncryptWithOAEP
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.RSAEncryptWithOAEP(v1: bytes, v2: any) return (r0: bytes, r1: error)`
 
 
 #### 参数
@@ -3463,6 +3602,208 @@ SM4 OBF 加密
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESCBCDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESCBCDecrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESCBCEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESCBCEncrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESDecrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESECBDecrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESECBDecrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESECBEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESECBEncrypt(v1: bytes, v2: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
+| r1 | `error` |   |
+
+
+ 
+### codec.TripleDESEncrypt
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func codec.TripleDESEncrypt(v1: bytes, v2: bytes, v3: bytes) return (r0: bytes, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `bytes` |   |
+| v3 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `bytes` |   |
 | r1 | `error` |   |
 
 

@@ -48,7 +48,7 @@
  | [yakit.SetProgress](#yakitsetprogress) |  |
  | [yakit.SetProgressEx](#yakitsetprogressex) | 设置额外进度条的进度信息（默认进度条id为 `main`） |
  | [yakit.StatusCard](#yakitstatuscard) |  |
- | [yakit.TableData](#yakittabledata) | 为启动的 table 生成数据 |
+ | [yakit.TableData](#yakittabledata) |  |
  | [yakit.Text](#yakittext) |  |
  | [yakit.UpdateOnlineYakitStore](#yakitupdateonlineyakitstore) | 更新所有线上商店的内容 |
  | [yakit.UpdateYakitStore](#yakitupdateyakitstore) | 使用 yakit 来直接更新 yakit-store 中的插件 |
@@ -1317,7 +1317,7 @@
  
 ### yakit.TableData
 
-为启动的 table 生成数据
+
 
 #### 详细描述
 
@@ -1332,8 +1332,8 @@
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| tableName | `string` |   |
-| data | `map[string]any` |   |
+| v1 | `string` |   |
+| v2 | `any` |   |
 
 
 

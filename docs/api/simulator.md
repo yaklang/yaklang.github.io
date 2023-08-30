@@ -3,15 +3,23 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [simulator.Captcha](#simulatorcaptcha) |  |
- | [simulator.Page](#simulatorpage) |  |
+ | [simulator.HttpBruteForce](#simulatorhttpbruteforce) |  |
+ | [simulator.captchaImgSelector](#simulatorcaptchaimgselector) |  |
+ | [simulator.captchaInputSelector](#simulatorcaptchainputselector) |  |
  | [simulator.captchaMode](#simulatorcaptchamode) |  |
  | [simulator.captchaUrl](#simulatorcaptchaurl) |  |
- | [simulator.defaultBrute](#simulatordefaultbrute) |  |
+ | [simulator.exePath](#simulatorexepath) |  |
+ | [simulator.extraWaitLoadTime](#simulatorextrawaitloadtime) |  |
+ | [simulator.leaklessStatus](#simulatorleaklessstatus) |  |
+ | [simulator.loginDetectMode](#simulatorlogindetectmode) |  |
+ | [simulator.password](#simulatorpassword) |  |
  | [simulator.passwordList](#simulatorpasswordlist) |  |
+ | [simulator.passwordSelector](#simulatorpasswordselector) |  |
  | [simulator.proxy](#simulatorproxy) |  |
- | [simulator.proxyDetails](#simulatorproxydetails) |  |
+ | [simulator.submitButtonSelector](#simulatorsubmitbuttonselector) |  |
+ | [simulator.username](#simulatorusername) |  |
  | [simulator.usernameList](#simulatorusernamelist) |  |
+ | [simulator.usernameSelector](#simulatorusernameselector) |  |
  | [simulator.wsAddress](#simulatorwsaddress) |  |
 
 
@@ -21,7 +29,13 @@
 
 |变量调用名|变量类型|变量解释/帮助信息|
 |:-----------|:---------- |:-----------|
+|`simulator.defaultChangeMode`|`httpbrute.loginDetectMode`| //|
+|`simulator.htmlChangeMode`|`httpbrute.loginDetectMode`| //|
+|`simulator.leaklessDefault`|`config.LeaklessMode`| //|
+|`simulator.leaklessOff`|`config.LeaklessMode`| //|
+|`simulator.leaklessOn`|`config.LeaklessMode`| //|
 |`simulator.simple`|`map[string]interface {}`| //|
+|`simulator.urlChangeMode`|`httpbrute.loginDetectMode`| //|
 
 
 
@@ -29,7 +43,7 @@
 
 ## 函数定义
 
-### simulator.Captcha
+### simulator.HttpBruteForce
 
 
 
@@ -39,20 +53,30 @@
 
 #### 定义：
 
-`Captcha() *extend.CaptchaIdentifier`
+`func simulator.HttpBruteForce(v1: string, v2 ...httpbrute.BruteConfigOpt) return (r0: chan httpbrute.Result, r1: error)`
 
- 
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...httpbrute.BruteConfigOpt` |   |
+
+
+
 
 
 #### 返回值
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*extend.CaptchaIdentifier` |   |
+| r0 | `chan httpbrute.Result` |   |
+| r1 | `error` |   |
 
 
  
-### simulator.Page
+### simulator.captchaImgSelector
 
 
 
@@ -62,16 +86,55 @@
 
 #### 定义：
 
-`Page() *core.StartMode`
+`func simulator.captchaImgSelector(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
 
- 
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
 
 
 #### 返回值
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*core.StartMode` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.captchaInputSelector
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.captchaInputSelector(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
@@ -102,7 +165,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
@@ -133,11 +196,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
-### simulator.defaultBrute
+### simulator.exePath
 
 
 
@@ -147,7 +210,7 @@
 
 #### 定义：
 
-`defaultBrute(string, ...examples.ConfigOpt) (*examples.BruteForceResult, error)`
+`func simulator.exePath(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
 
 
 #### 参数
@@ -155,7 +218,6 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `...examples.ConfigOpt` |   |
 
 
 
@@ -165,8 +227,132 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*examples.BruteForceResult` |   |
-| r1 | `error` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.extraWaitLoadTime
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.extraWaitLoadTime(v1: int) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.leaklessStatus
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.leaklessStatus(v1: config.LeaklessMode) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `config.LeaklessMode` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.loginDetectMode
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.loginDetectMode(v1: httpbrute.loginDetectMode, v2 ...float64) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `httpbrute.loginDetectMode` |   |
+| v2 | `...float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.password
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.password(v1 ...string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
@@ -197,7 +383,38 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.passwordSelector
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.passwordSelector(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
@@ -211,7 +428,7 @@
 
 #### 定义：
 
-`func simulator.proxy(v1: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
+`func simulator.proxy(v1: string, v2 ...string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
 
 
 #### 参数
@@ -219,6 +436,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+| v2 | `...string` |   |
 
 
 
@@ -228,11 +446,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
-### simulator.proxyDetails
+### simulator.submitButtonSelector
 
 
 
@@ -242,7 +460,7 @@
 
 #### 定义：
 
-`func simulator.proxyDetails(v1: string, v2: string, v3: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
+`func simulator.submitButtonSelector(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
 
 
 #### 参数
@@ -250,8 +468,6 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
 
 
 
@@ -261,7 +477,38 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.username
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.username(v1 ...string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
@@ -292,11 +539,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  
-### simulator.wsAddress
+### simulator.usernameSelector
 
 
 
@@ -306,7 +553,7 @@
 
 #### 定义：
 
-`func simulator.wsAddress(v1: string) return (r0: func ConfigOpt(v1: *examples.Config) )`
+`func simulator.usernameSelector(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
 
 
 #### 参数
@@ -323,7 +570,38 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *examples.Config) ` |   |
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
+
+
+ 
+### simulator.wsAddress
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func simulator.wsAddress(v1: string) return (r0: func BruteConfigOpt(v1: *httpbrute.BruteConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func BruteConfigOpt(v1: *httpbrute.BruteConfig) ` |   |
 
 
  

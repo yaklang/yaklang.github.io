@@ -6,9 +6,11 @@
  | [js.ASTWalk](#jsastwalk) | 遍历一个 JS 中的所有符号，字面量以及数据解析错误的地方 |
  | [js.CallFunctionFromCode](#jscallfunctionfromcode) | 从一段代码中调用某个函数 |
  | [js.FalseValue](#jsfalsevalue) | 返回 JS 的 False 对象 |
+ | [js.GetSTType](#jsgetsttype) |  |
  | [js.NaNValue](#jsnanvalue) |  |
  | [js.New](#jsnew) | 新创建一个 JS 执行上下文 |
  | [js.NullValue](#jsnullvalue) | 返回 JS 的 NULL 对象 |
+ | [js.Parse](#jsparse) |  |
  | [js.Run](#jsrun) | 执行一段 JS 代码，返回上下文以及代码的执行结果 |
  | [js.ToValue](#jstovalue) | 把 Golang/Yak 对象转变为 otto.Value 对象 |
  | [js.TrueValue](#jstruevalue) |  |
@@ -118,6 +120,37 @@
 
 
  
+### js.GetSTType
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func js.GetSTType(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
 ### js.NaNValue
 
 
@@ -184,6 +217,38 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `otto.Value` |   |
+
+
+ 
+### js.Parse
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func js.Parse(v1: string) return (r0: *ast.Program, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*ast.Program` |   |
+| r1 | `error` |   |
 
 
  

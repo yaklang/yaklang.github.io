@@ -27,6 +27,7 @@
  | [get](#get) |  |
  | [getScopeInspects](#getscopeinspects) |  |
  | [import](#import) |  |
+ | [input](#input) |  |
  | [isEmpty](#isempty) |  |
  | [len](#len) |  |
  | [logdiscard](#logdiscard) |  |
@@ -783,6 +784,37 @@
 |:-----------|:---------- |:-----------|
 | r0 | `any` |   |
 | r1 | `error` |   |
+
+
+ 
+### input
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func input(v1 ...string) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
 
 
  

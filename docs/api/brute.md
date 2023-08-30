@@ -7,6 +7,7 @@
  | [brute.GetPasswordListFromBruteType](#brutegetpasswordlistfrombrutetype) | 根据服务获取服务对应的密码列表 |
  | [brute.GetUsernameListFromBruteType](#brutegetusernamelistfrombrutetype) | 根据服务获取服务对应的用户列表 |
  | [brute.New](#brutenew) | 新建一个爆破执行期 |
+ | [brute.autoDict](#bruteautodict) |  |
  | [brute.bruteHandler](#brutebrutehandler) |  |
  | [brute.concurrent](#bruteconcurrent) |  |
  | [brute.concurrentTarget](#bruteconcurrenttarget) |  |
@@ -142,6 +143,29 @@
 |:-----------|:---------- |:-----------|
 | r0 | `*tools.yakBruter` |   |
 | r1 | `error` |   |
+
+
+ 
+### brute.autoDict
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func brute.autoDict() return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
 
 
  

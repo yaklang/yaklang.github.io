@@ -5,14 +5,34 @@
 |:------|:--------|
  | [jwt.AllAlgs](#jwtallalgs) | 返回所有当前支持的 JWT 签名算法 |
  | [jwt.JWSGenerate](#jwtjwsgenerate) | 生成一个 JWS 的 Token |
+ | [jwt.JWSGenerateEx](#jwtjwsgenerateex) |  |
  | [jwt.JWTGenerate](#jwtjwtgenerate) | 生成 JWT Token |
+ | [jwt.JWTGenerateEx](#jwtjwtgenerateex) |  |
  | [jwt.Parse](#jwtparse) | 解析 JWT 的 Token，使用默认弱口令，如果需要自定义 secretKey，可以在 v2 不定长参数中设置 |
  | [jwt.RemoveAlg](#jwtremovealg) | 把一个 JWT 的 Token 移除加密算法部分 |
 
 
 
 
- 
+## 变量定义
+
+|变量调用名|变量类型|变量解释/帮助信息|
+|:-----------|:---------- |:-----------|
+|`jwt.ALG_ES256`|`string`| //|
+|`jwt.ALG_ES384`|`string`| //|
+|`jwt.ALG_ES512`|`string`| //|
+|`jwt.ALG_HS256`|`string`| //|
+|`jwt.ALG_HS384`|`string`| //|
+|`jwt.ALG_HS512`|`string`| //|
+|`jwt.ALG_NONE`|`string`| //|
+|`jwt.ALG_PS256`|`string`| //|
+|`jwt.ALG_PS384`|`string`| //|
+|`jwt.ALG_PS512`|`string`| //|
+|`jwt.ALG_RS256`|`string`| //|
+|`jwt.ALG_RS384`|`string`| //|
+|`jwt.ALG_RS512`|`string`| //|
+
+
 
 
 
@@ -75,6 +95,41 @@
 
 
  
+### jwt.JWSGenerateEx
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func jwt.JWSGenerateEx(v1: string, v2: any, v3: any, v4: bytes) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+| v3 | `any` |   |
+| v4 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
 ### jwt.JWTGenerate
 
 生成 JWT Token
@@ -106,6 +161,41 @@
 |:-----------|:---------- |:-----------|
 | token | `string` |   |
 | err | `error` |   |
+
+
+ 
+### jwt.JWTGenerateEx
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func jwt.JWTGenerateEx(v1: string, v2: any, v3: any, v4: bytes) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `any` |   |
+| v3 | `any` |   |
+| v4 | `bytes` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
 
 
  

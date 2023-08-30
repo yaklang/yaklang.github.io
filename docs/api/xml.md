@@ -1,11 +1,11 @@
-# csrf
+# xml
 
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [csrf.Generate](#csrfgenerate) |  |
- | [csrf.https](#csrfhttps) |  |
- | [csrf.multipartDefaultValue](#csrfmultipartdefaultvalue) |  |
+ | [xml.Escape](#xmlescape) |  |
+ | [xml.dumps](#xmldumps) |  |
+ | [xml.loads](#xmlloads) |  |
 
 
 
@@ -16,7 +16,7 @@
 
 ## 函数定义
 
-### csrf.Generate
+### xml.Escape
 
 
 
@@ -26,15 +26,14 @@
 
 #### 定义：
 
-`Generate(raw any, opts ...csrfConfig) (string, error)`
+`func xml.Escape(v1: bytes) return (r0: string)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...yaklib.csrfConfig` |   |
+| v1 | `bytes` |   |
 
 
 
@@ -45,11 +44,10 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `string` |   |
-| r1 | `error` |   |
 
 
  
-### csrf.https
+### xml.dumps
 
 
 
@@ -59,14 +57,14 @@
 
 #### 定义：
 
-`func csrf.https(v1: bool) return (r0: func csrfConfig(v1: *yaklib._csrfConfig) )`
+`func xml.dumps(v1: any) return (r0: bytes)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
+| v1 | `any` |   |
 
 
 
@@ -76,11 +74,11 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func csrfConfig(v1: *yaklib._csrfConfig) ` |   |
+| r0 | `bytes` |   |
 
 
  
-### csrf.multipartDefaultValue
+### xml.loads
 
 
 
@@ -90,14 +88,14 @@
 
 #### 定义：
 
-`multipartDefaultValue(bool) yaklib.csrfConfig`
+`func xml.loads(v1: any) return (r0: yaklib.StringMap)`
 
 
 #### 参数
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
+| v1 | `any` |   |
 
 
 
@@ -107,7 +105,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func csrfConfig(v1: *yaklib._csrfConfig) ` |   |
+| r0 | `yaklib.StringMap` |   |
 
 
  
