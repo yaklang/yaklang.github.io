@@ -1308,7 +1308,7 @@ const KindModules = (props: KindModulesProps) => {
 
         <div className="kind-opt-body-title opacity-0" ref={function_title}>
           <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("安全领域的语言集成与函数级调用", { interpolation: { escapeValue: false } }) }}></div>
-          <div className="kind-opt-body-title-subtitle">{`使用函数级别的安全能力实现满足特定场景的定制化安全算法`}</div>
+          <div className="kind-opt-body-title-subtitle">{t("使用函数级别的安全能力实现满足特定场景的定制化安全算法")}</div>
         </div>
       </div>
     );
