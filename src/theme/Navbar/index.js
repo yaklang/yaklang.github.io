@@ -25,6 +25,7 @@ import Logo from '@theme/Logo';
 import IconMenu from '@theme/IconMenu';
 import IconCloseThin from '@theme/IconCloseThin';
 import styles from './styles.module.css'; // retrocompatible with v1
+import LanguageSwitcher from '../../components/LanguageSwitcher';
 
 const DefaultNavItemPosition = 'right';
 
@@ -259,6 +260,7 @@ function Navbar() {
           {rightItems.map((item, i) => (
             <NavbarItem {...item} key={i} />
           ))}
+          <LanguageSwitcher />
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}

@@ -6,6 +6,7 @@ import { Team } from "../components/Team";
 
 export default function Home() {
     const { siteConfig } = useDocusaurusContext();
+    
     return (
         <Layout
             title={`Yak Language ${siteConfig.title}`}

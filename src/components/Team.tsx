@@ -4,6 +4,7 @@ import { GithubOutlined, HomeFilled } from "@ant-design/icons";
 import { LocationSvgIcon } from "./icons";
 import { TooltipPlacement } from "antd/lib/tooltip";
 import LazyLoad from "react-lazyload";
+import { useTranslation } from "react-i18next";
 
 export interface TeamProps {}
 
@@ -261,9 +262,7 @@ const specialConsultantInfo: ConsultantInfoProps = {
       href: "https://www.scse.uestc.edu.cn/",
     },
   ],
-  description: `“电子科技大学，长江学者特聘教授，博士生导师。 2020
-    第二届全国创新争先奖和 2017
-    国家网络安全优秀人才奖获得者，国家重点研发计划网络空间安全专项首席科学家。”`,
+  description: `“电子科技大学，长江学者特聘教授，博士生导师。 2020 第二届全国创新争先奖和 2017 国家网络安全优秀人才奖获得者，国家重点研发计划网络空间安全专项首席科学家。”`,
   address: "成都",
 };
 
@@ -383,33 +382,14 @@ const ThanksForInfo: ThanksForInfoProps[] = [
 ];
 
 export const Team: React.FC<TeamProps> = (props) => {
+  const { t } = useTranslation();
   return (
     <div className="team-and-thank-container">
       <div className="safety-body">
         <div className="safety-body-logo">
           <img src="/img/team/safety-title.png" className="img-style" />
         </div>
-        <div className="safety-body-content">
-          <span className="safety-body-content-color">
-            电子科技大学网络空间安全研究院
-          </span>
-          是国内最早系统开展计算机系统与网络安全研究的单位之一，创新提出以
-          <span className="safety-body-content-color">
-            “智感”、“透析”、“活现”
-          </span>
-          为核心要素的主动网络安全模型（Active Cybersecurity
-          Model）并在该领域持续开展基础性、开拓性的探索和实践，曾牵头获得 2019
-          国家科技进步一等奖，2012 国家科技进步二等奖，3 次省部科技进步一等奖，2
-          次省部技术发明一等奖，入选“十三五”国家自然科学基金资助项目优秀成果，发表高水平学术论文
-          400 余篇，出版著作多部。
-          <span className="safety-body-content-color">CDSL-YAK</span>{" "}
-          正是由网络空间安全研究院创建的
-          <span className="safety-body-content-color">“凝聚工作室”</span>
-          核心成员牵头发起，持续多年研发出的
-          <span className="safety-body-content-color">
-            国内首款开源网络安全领域专用编程语言。
-          </span>
-        </div>
+        <div className="safety-body-content" dangerouslySetInnerHTML={{ __html: t("电子科技大学网络空间安全研究院描述", { interpolation: { escapeValue: false } }) }}></div>
         <div className="safety-body-show">
           <div className="safety-body-box">
             <div className="safety-body-box-show">
@@ -422,20 +402,20 @@ export const Team: React.FC<TeamProps> = (props) => {
                 className="right-img-style"
               />
               <div className="item-box">
-                <div className="item-box-title">2项</div>
-                <div className="item-box-content">国家级奖项</div>
+                <div className="item-box-title">{t("2项")}</div>
+                <div className="item-box-content">{t("国家级奖项")}</div>
               </div>
               <div className="item-box">
-                <div className="item-box-title">5项</div>
-                <div className="item-box-content">省级奖项</div>
+                <div className="item-box-title">{t("5项")}</div>
+                <div className="item-box-content">{t("省级奖项")}</div>
               </div>
               <div className="item-box">
                 <div className="item-box-title">400+</div>
-                <div className="item-box-content">学术论文</div>
+                <div className="item-box-content">{t("学术论文")}</div>
               </div>
               <div className="item-box">
-                <div className="item-box-title">多部</div>
-                <div className="item-box-content">学术著作</div>
+                <div className="item-box-title">{t("多部")}</div>
+                <div className="item-box-content">{t("学术著作")}</div>
               </div>
             </div>
           </div>
@@ -444,7 +424,7 @@ export const Team: React.FC<TeamProps> = (props) => {
         </div>
       </div>
       <div className="owner-body">
-        <div className="owner-header-title">Yaklang.io 团队</div>
+        <div className="owner-header-title">Yaklang.io {t("团队")}</div>
         <div className="owner-member-introduce-body">
           <div className="owner-member-introduce-img">
             <div className="owner-member-introduce-img-body">
@@ -473,12 +453,12 @@ export const Team: React.FC<TeamProps> = (props) => {
               })}
             </div>
           </div>
-          <div className="owner-member-introduce-title">做难且正确的事！</div>
+          <div className="owner-member-introduce-title">{t("做难且正确的事")}！</div>
         </div>
       </div>
 
       <div className="consultant-header-body">
-        <div className="consultant-header-title">特别顾问</div>
+        <div className="consultant-header-title">{t("特别顾问")}</div>
       </div>
       <div className="consultant-body">
         <div className="fill-background"></div>
@@ -487,7 +467,7 @@ export const Team: React.FC<TeamProps> = (props) => {
             <div className="consultant-header-box">
               <div className="consultant-header-info">
                 <div className="consultant-header-info-title">
-                  {specialConsultantInfo.description}
+                  {t(specialConsultantInfo.description)}
                 </div>
                 <div className="consultant-header-info-name">
                   {specialConsultantInfo.name}
@@ -496,7 +476,7 @@ export const Team: React.FC<TeamProps> = (props) => {
                   className="link-jump"
                   href={specialConsultantInfo.links[0].href}
                 >
-                  {specialConsultantInfo.links[0].name}
+                  {t(specialConsultantInfo.links[0].name)}
                 </a>
               </div>
               <div className="consultant-header-image-box">
@@ -535,7 +515,7 @@ export const Team: React.FC<TeamProps> = (props) => {
 
       <div className="contributors-body">
         <div className="contributors-header-title">
-          YAK 生态共建杰出贡献成员
+          {t("YAK 生态共建杰出贡献成员")}
         </div>
         <div className="contributors-member-wrapper">
           <div className="contributors-member-grid-wrapper">
@@ -554,7 +534,7 @@ export const Team: React.FC<TeamProps> = (props) => {
       </div>
 
       <div className="thanksfor-body">
-        <div className="thanksfor-header-title">特别致谢</div>
+        <div className="thanksfor-header-title">{t("特别致谢")}</div>
 
         <div className="thanksfor-member-wrapper">
           <div className="thanksfor-member-grid-wrapper">

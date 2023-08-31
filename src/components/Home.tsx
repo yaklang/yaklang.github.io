@@ -29,6 +29,7 @@ import {
   WindowsHoverIcon,
   WindowsIcon,
 } from "./HomeIcon";
+import { useTranslation } from "react-i18next";
 
 const axios = require("axios");
 
@@ -143,7 +144,7 @@ const IntroduceKinds: IntroduceKindProps[] = [
 ];
 
 const yakEnvironmentConfigureList = {
-  "MacOs(Intel/M1)": {
+  "MacOs(Intel/Apple Sillion)": {
     code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
   },
   Linux: {
@@ -155,6 +156,8 @@ const yakEnvironmentConfigureList = {
 };
 
 export const HomePage: React.FC<HomePageProps> = (props) => {
+  const { t } = useTranslation();
+
   const [kind, setKind] = useState<IntroduceKindProps>({
     name: "高效",
     icon: require("../../static/img/home/second/efficent-head.png").default,
@@ -171,7 +174,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
   const [currentSelectYak, setCurrentSelectYak] =
-    useState<string>("MacOs(Intel/M1)");
+    useState<string>("MacOs(Intel/Apple Sillion)");
 
   const [sureCopy, setSureCopy] = useState<boolean>(false);
   const [loadingCopy, setLoadingCopy] = useState<boolean>(false);
@@ -363,7 +366,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       iconHover: AppleHoverIcon,
       size: 0,
     },
-    "macOS (M1)": {
+    "macOS (Apple Sillion)": {
       url: "darwin-arm64.dmg",
       icon: AppleIcon,
       iconHover: AppleHoverIcon,
@@ -465,19 +468,19 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
               />
             </div>
             <div className="guide-words-body-description">
-              为网络安全而生的领域编程语言
+              {t("为网络安全而生的领域编程语言")}
             </div>
             <div className="guide-body-yak">
               <div className="guide-body-yak-heard">
                 <span className="guide-body-yak-heard-text">
-                  YAK 语言环境配置
+                  {t("YAK 语言环境配置")}
                 </span>
                 <a
                   target="_blank"
                   href="/docs/startup"
                   className="guide-body-yak-heard-tip"
                 >
-                  搭建教程
+                  {t("搭建教程")}
                 </a>
               </div>
               <div className="guide-body-yak-type">
@@ -537,14 +540,14 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
               </div>
               <div className="guide-body-yakit guide-body-yak-heard">
                 <span className="guide-body-yak-heard-text">
-                  下载YAK IDE (Yakit)
+                  {t("下载YAK IDE (Yakit)")}
                 </span>
                 <a
                   target="_blank"
                   href="/products/download_and_install"
                   className="guide-body-yak-heard-tip"
                 >
-                  安装教程
+                  {t("安装说明")}
                 </a>
               </div>
               <div className="guide-body-yakit-type">
@@ -565,7 +568,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="guide-body-yakit-item-right">
                       <div>{exeKey}</div>
                       <div className="guide-body-yakit-item-right-size">
-                        版本:&nbsp;{version||"-"}&nbsp;({exeList[exeKey].size || "-"}&nbsp;MB)
+                        {t("版本")}:&nbsp;{version||"-"}&nbsp;({exeList[exeKey].size || "-"}&nbsp;MB)
                       </div>
                     </div>
                   </div>
@@ -580,17 +583,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           }`}
         >
           <div className="sticky-content">
-            <div className="introduce-body-header">
-              网络安全领域的首个
-              <span className="introduce-body-header-orange">DSL</span>
-              {/* <img
-              src={
-                require("../../static/img/home/homeHeadCircular.png").default
-              }
-              className="header-circle"
-            /> */}
-            </div>
-
+            <div className="introduce-body-header" dangerouslySetInnerHTML={{ __html: t("网络安全领域的首个DSL", { interpolation: { escapeValue: false } }) }}></div>
             <div className="introduce-body-kinds">
               {IntroduceKinds.map((item, index) => {
                 return (
@@ -619,7 +612,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     }}
                   >
                     <img src={item.icon} className="kinds-opt-icon" />
-                    <div className="kinds-opt-name">{item.name}</div>
+                    <div className="kinds-opt-name">{t(item.name)}</div>
                   </div>
                 );
               })}
@@ -644,17 +637,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         </div>
 
         <div className="function-body">
-          <div className="function-body-header">
-            Yakit-
-            <span className="function-body-header-orange"> CDSL </span>
-            的最佳实践
-          </div>
-
+          <div className="function-body-header" dangerouslySetInnerHTML={{ __html: t("Yakit-CDSL的最佳实践", { interpolation: { escapeValue: false } }) }}></div>
           <div className="function-body-description">
             <div className="function-body-description-body">
-              专注于安全领域，使用 DSL
-              模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持...
-              一应俱全
+              {t("专注于安全领域，使用 DSL 模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持，一应俱全")}
             </div>
           </div>
 
@@ -690,10 +676,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         </div>
       </div>
       <div className="appraise-body">
-        <div className="appraise-body-header">立即体验</div>
+        <div className="appraise-body-header">{t("立即体验")}</div>
 
         <div className="appraise-body-description">
-          不管您是行业用户，还是高校学生，Yak 永远是您的好伙伴
+          {t("不管您是行业用户，还是高校学生，Yak 永远是您的好伙伴")}
         </div>
 
         <div className="appraise-body-btn">
@@ -714,6 +700,7 @@ interface downloadInfoProps {
   link: string;
 }
 const DownLoadBtn = (props) => {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState<boolean>(false);
   const [version, setVersion] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -724,7 +711,7 @@ const DownLoadBtn = (props) => {
       link: "darwin-x64.dmg",
     },
     {
-      name: "macOS(M1)",
+      name: "macOS(Apple Sillion)",
       link: "darwin-arm64.dmg",
     },
     {
@@ -789,7 +776,7 @@ const DownLoadBtn = (props) => {
       <a className="download-yakit-btn" onClick={(e) => e.preventDefault()}>
         <div className="btn-title">
           <DownloadOutlined className="icon-style" />
-          <span className="title-style">下载桌面端</span>
+          <span className="title-style">{t("下载桌面端")}</span>
         </div>
         <div className="btn-cion">
           <DownOutlined className="icon-style" />
@@ -799,10 +786,11 @@ const DownLoadBtn = (props) => {
   );
 };
 const CourseDocBtn = React.memo((props) => {
+  const { t } = useTranslation();
   return (
     <a className="course-doc-btn" href="/products/download_and_install">
       <EyeOutlined className="icon-style" />
-      <span className="title-style">查看安装教程</span>
+      <span className="title-style">{t("查看安装教程")}</span>
     </a>
   );
 });
@@ -815,6 +803,7 @@ interface KindModulesProps {
   currentRatio: number;
 }
 const KindModules = (props: KindModulesProps) => {
+  const { t } = useTranslation();
   const { name, rate, isRange, isScrollUp, currentRatio } = props;
 
   const efficent_1 = useRef(null);
@@ -1195,7 +1184,7 @@ const KindModules = (props: KindModulesProps) => {
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">Golang</div>
                 <div className="efficent-img-content-text">
-                  Go 是谷歌支持的开源编程语言{currentRatio}
+                  Go {t("是谷歌支持的开源编程语言")}
                 </div>
               </div>
             </div>
@@ -1204,7 +1193,7 @@ const KindModules = (props: KindModulesProps) => {
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">Yaklang</div>
                 <div className="efficent-img-content-text">
-                  可能是安全领域最先进的 DSL (Domain-Specific Language)
+                {t("可能是安全领域最先进的 DSL")} (Domain-Specific Language)
                 </div>
                 <img
                   src={
@@ -1219,7 +1208,7 @@ const KindModules = (props: KindModulesProps) => {
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">JVM Based Lang</div>
                 <div className="efficent-img-content-text">
-                  一个高质量的Java 生态教学网站
+                  {t("一个高质量的Java 生态教学网站")}
                 </div>
                 <img
                   src={
@@ -1252,7 +1241,7 @@ const KindModules = (props: KindModulesProps) => {
 
         <div className="kind-opt-body-title opacity-0" ref={efficent_title}>
           <div className="kind-opt-body-title-content">
-            <span>运行效率极高</span>
+            <span>{t("运行效率极高")}</span>
             <br />
             <span className="content-orange">Runtime Efficent</span>
           </div>
@@ -1318,11 +1307,8 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={function_title}>
-          <div className="kind-opt-body-title-content">
-            <span>安全领域的语言集成与</span>
-            <span className="content-orange">函数级调用</span>
-          </div>
-          <div className="kind-opt-body-title-subtitle">{`使用函数级别的安全能力实现满足特定场景的定制化安全算法`}</div>
+          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("安全领域的语言集成与函数级调用", { interpolation: { escapeValue: false } }) }}></div>
+          <div className="kind-opt-body-title-subtitle">{t("使用函数级别的安全能力实现满足特定场景的定制化安全算法")}</div>
         </div>
       </div>
     );
@@ -1368,18 +1354,14 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={doc_title}>
-          <div className="kind-opt-body-title-content">
-            <span className="content-orange">自动补全</span>
-            与完善的教程文档为编写助力
-          </div>
+          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("自动补全与完善的教程文档为编写助力", { interpolation: { escapeValue: false } }) }}></div>
           <div className="kind-opt-body-title-subtitle">
             <span>
-              <span className="subtitle-doc">/</span> 与 vscode
-              兼容的自动补全插件，辅助用户快速上手
+              <span className="subtitle-doc">/</span> {t("与 vscode 兼容的自动补全插件，辅助用户快速上手")}
             </span>
             <br />
             <span>
-              <span className="subtitle-doc">/</span> 完善的教程文档提供全面指导
+              <span className="subtitle-doc">/</span> {t("完善的教程文档提供全面指导")}
             </span>
           </div>
         </div>
@@ -1410,27 +1392,24 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={tool_title}>
-          <div className="kind-opt-body-title-content">
-            高阶
-            <span className="content-orange">函数级</span>集成
-          </div>
+          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("高阶函数级集成", { interpolation: { escapeValue: false } }) }}></div>
           <div className="kind-opt-body-title-subtitle">
             <span>
               <span className="subtitle-doc">/ </span>
-              多协议、反连平台集成：
+              {t("多协议、反连平台集成")}：
             </span>
             <br />
             <span className="subtitle-tool">
-              &nbsp;&nbsp;HTTP / RMI / LDAP 多协议复用
+              &nbsp;&nbsp;{t("HTTP / RMI / LDAP 多协议复用")}
             </span>
             <br />
             <span className="subtitle-tool">
-              &nbsp;&nbsp;TCP 随机端口(专利技术) / ICMP 反连 / 内置 DNSLog API
+              &nbsp;&nbsp;{t("TCP 随机端口(专利技术) / ICMP 反连 / 内置 DNSLog API")}
             </span>
             <br />
             <span>
               <span className="subtitle-doc">/ </span>
-              MITM 劫持平台集成与热加载结合(专利技术)
+              {t("MITM 劫持平台集成与热加载结合(专利技术)")}
             </span>
           </div>
         </div>
@@ -1452,6 +1431,7 @@ interface functionModuleProps {
   currentRatio: number;
 }
 const FunctionModule = React.memo((props: functionModuleProps) => {
+  const { t } = useTranslation();
   const {
     info: { title, img, list },
     isReversal,
@@ -1561,21 +1541,21 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
           }`}
           ref={listRef}
         >
-          <div className="module-list-header">{title}</div>
+          <div className="module-list-header">{t(title)}</div>
 
           <div className="module-list-body">
             {list.map((item, i) => {
               if (i === index) {
                 return (
                   <div key={i} className="module-list-body-opt-selected">
-                    <div className="selected-title">{item.name}</div>
+                    <div className="selected-title">{t(item.name)}</div>
                     <a
                       className="selected-doc-icon"
                       href={item.link}
                       target="_blank"
                     >
                       <ArrowRightOutlined className="icon-style" />
-                      <div className="icon-title">查看文档</div>
+                      <div className="icon-title">{t("查看文档")}</div>
                     </a>
                   </div>
                 );
@@ -1586,7 +1566,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
                   className="module-list-body-opt"
                   onMouseEnter={() => setIndex(i)}
                 >
-                  {item.name}
+                  {t(item.name)}
                 </div>
               );
             })}
@@ -1610,21 +1590,21 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
           }`}
           ref={listRef}
         >
-          <div className="module-list-header">{title}</div>
+          <div className="module-list-header">{t(title)}</div>
 
           <div className="module-list-body">
             {list.map((item, i) => {
               if (i === index) {
                 return (
                   <div key={i} className="module-list-body-opt-selected">
-                    <div className="selected-title">{item.name}</div>
+                    <div className="selected-title">{t(item.name)}</div>
                     <a
                       className="selected-doc-icon"
                       href={item.link}
                       target="_blank"
                     >
                       <ArrowRightOutlined className="icon-style" />
-                      <div className="icon-title">查看文档</div>
+                      <div className="icon-title">{t("查看文档")}</div>
                     </a>
                   </div>
                 );
@@ -1635,7 +1615,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
                   className="module-list-body-opt"
                   onMouseEnter={() => setIndex(i)}
                 >
-                  {item.name}
+                  {t(item.name)}
                 </div>
               );
             })}

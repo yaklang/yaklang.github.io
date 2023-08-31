@@ -94,9 +94,9 @@ module.exports = {
                     href: "https://chat.yaklang.com",
                     label: "Ya! 一刻",
                 },
-		{
+		        {
                     href: "/wiki/enumeration/pass-enumration",
-                    label: "渗透测试 WIKI",
+                    label: "渗透测试",
                     position: "left",
                 },
                 {

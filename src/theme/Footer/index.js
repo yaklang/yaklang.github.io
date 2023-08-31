@@ -12,9 +12,12 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import ThemedImage from "@theme/ThemedImage";
 import IconExternalLink from "@theme/IconExternalLink";
+import { useTranslation } from "react-i18next";
 
 import { Popover } from "antd";
 import { GithubOutlined, WechatOutlined } from "@ant-design/icons";
+import i18n from 'i18next';
+import "../../i18n";
 
 function FooterLink({
     to,
@@ -24,6 +27,7 @@ function FooterLink({
     isBlank,
     ...props
 }) {
+    const { t } = useTranslation();
     const toUrl = useBaseUrl(to);
     const normalizedHref = useBaseUrl(href, {
         forcePrependBaseUrl: true,
@@ -44,11 +48,11 @@ function FooterLink({
             >
                 {href && !isInternalUrl(href) ? (
                     <span>
-                        {label}
+                        {t(label)}
                         <IconExternalLink />
                     </span>
                 ) : (
-                    label
+                    t(label)
                 )}
             </a>
         );
@@ -67,11 +71,11 @@ function FooterLink({
         >
             {href && !isInternalUrl(href) ? (
                 <span>
-                    {label}
+                    {t(label)}
                     <IconExternalLink />
                 </span>
             ) : (
-                label
+                t(label)
             )}
         </Link>
     );
@@ -109,6 +113,17 @@ function Footer() {
             }
         };
     },[])
+
+    // 初始化记住原来所选语言
+    useEffect(() => {
+        const lng = localStorage.getItem('i18nextLng') || "zh";
+        i18n.changeLanguage(lng, (err, t) => {
+            if (err) {
+                console.error('Error changing language:', err);
+                return;
+            }
+        });
+    }, []);
 
     return (
         <footer
