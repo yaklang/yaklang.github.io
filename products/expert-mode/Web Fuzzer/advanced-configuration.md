@@ -7,12 +7,12 @@ sidebar_position: 12
 需要对Web Fuzzer进行一些高级配置了。
 
 首先我们需要打开高级配置，如图所示：
-![](/img/products/yakit/Fuzzer-config1/1.png)
+![](/img/products/yakit/Fuzz-config1/1.png)
 
 点击右边的高级配置按钮（旧版本）或者点击左边的Fuzzer配置按钮（新版本），我们可以打开高级配置菜单，我们接下来逐一讲解。
 
 ## 高级配置
-![](/img/products/yakit/Fuzzer-config1/2.png)
+![](/img/products/yakit/Fuzz-config1/2.png)
 
 ### 强制HTTPS
 开启**强制HTTPS**选项，可以使得这次请求强制使用HTTPS协议而非HTTP协议进行通信，这在某些网站要求强制使用HTTPS时非常有用。
@@ -30,10 +30,10 @@ sidebar_position: 12
 默认情况下，Web Fuzzer会走系统代理来进行发包。但是有时候我们不想使用系统代理，或者说这次发包不应该走系统代理，这时候我们就可以开启**禁用系统代理**选项。
 
 ## 请求包配置
-![](/img/products/yakit/Fuzzer-config1/3.png)
+![](/img/products/yakit/Fuzz-config1/3.png)
 
 ### Fuzztag 辅助
-![](/img/products/yakit/Fuzzer-config1/4.png)
+![](/img/products/yakit/Fuzz-config1/4.png)
 
 这也是一个用于辅助我们构造Fuzztag的工具。我们可以选择一些基础fuzztag，然后对他进行修改，查看生成后的payload，并且还可以将其添加到**插入标签**悬浮框的常用标签中。
 
@@ -44,7 +44,7 @@ sidebar_position: 12
 默认情况下，Web Fuzzer会对请求包进行一些修复，其中也会对`Content-Length`请求头进行修复。我们知道，在数据包完全正确的情况下，`Content-Length`请求头的值应该等于请求体的长度，但是一般情况下我们修改了请求体之后不可能手动去计算`Content-Length`的值，这时候Web Fuzzer就会自动修复`Content-Length`的值。但是有时候我们可能遇到HTTP走私的情况或者不希望Web Fuzzer修复长度，这时候我们就可以开启**不修复长度**选项。
 
 ## 并发配置
-![](/img/products/yakit/Fuzzer-config1/5.png)
+![](/img/products/yakit/Fuzz-config1/5.png)
 
 ### 重复发包
 重复发包一般用于测试条件竞争或者大并发的情况。填写**重复发包**的值（后续称之为n）后，Web Fuzzer会重复发包n次。这实际上也是通过添加了fuzztag标签实现的，其等价于在请求包的任意位置添加`{{repeat(n)}}`。
@@ -56,7 +56,7 @@ sidebar_position: 12
 在我们并发请求网站的场景下，请求网站的防火墙可能会对访问速度有限制，此时我们可以通过设置**随机延迟**的Min和Max值，这样可以在每次请求之前延迟随机的时间（Min-Max秒），这可以在一定程度上通过请求网站的防火墙。
 
 ## 重试配置
-![](/img/products/yakit/Fuzzer-config1/6.png)
+![](/img/products/yakit/Fuzz-config1/6.png)
 
 ### 重试次数
 在网络请求中，我们不可避免会遇到许多网络连通性的问题，比如服务器负载过高导致服务端错误（502状态码）或者网络波动导致请求失败，此时我们可以通过设置**重试次数**的值来控制Web Fuzzer重试的次数，这可以在一定程度上提高请求的稳定性。
@@ -68,7 +68,7 @@ sidebar_position: 12
 **不重试条件**配合重试次数使用。我们可以通过填写**不重试条件**中状态码的值，设置其在响应什么状态码时不进行重试。例如我们填写了`200,302`，则当响应状态码为200或者302时，Web Fuzzer不会进行重试。无论如何，Web Fuzzer不会对30x的响应状态码进行重试。
 
 ## 重定向配置
-![](/img/products/yakit/Fuzzer-config1/7.png)
+![](/img/products/yakit/Fuzz-config1/7.png)
 
 ### 禁用重定向
 开启**禁用重定向**选项可以禁用请求时的自动重定向。这在我们需要测试重定向漏洞时非常有用。
@@ -80,7 +80,7 @@ sidebar_position: 12
 我们知道js一般通过调用`window.location.href`或者`window.location.replace`来进行页面的重定向。一般情况下这种重定向是无法跟踪的，这时候我们就需要开启**JS重定向**选项，来跟踪这种重定向。
 
 ## DNS配置
-![](/img/products/yakit/Fuzzer-config1/8.png)
+![](/img/products/yakit/Fuzz-config1/8.png)
 
 ### DNS服务器
 **DNS服务器**用于指定本次请求使用的DNS服务器。在默认情况下，Web Fuzzer会使用系统的DNS服务器，但是有时候我们需要手动指定DNS服务器，这时候我们就可以填写**DNS服务器**的值，这在访问一些内网服务时非常有用。
