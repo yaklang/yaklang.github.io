@@ -9,6 +9,7 @@
  | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
  | [mitm.hijackHTTPRequest](#mitmhijackhttprequest) |  |
  | [mitm.hijackHTTPResponse](#mitmhijackhttpresponse) |  |
+ | [mitm.hijackHTTPResponseEx](#mitmhijackhttpresponseex) |  |
  | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
  | [mitm.isTransparent](#mitmistransparent) | 设置启动一个透明 mitm 劫持接口！ |
  | [mitm.maxContentLength](#mitmmaxcontentlength) |  |
@@ -209,6 +210,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `func (v1: bool, v2: string, v3: bytes, v4: func (v1: bytes) , v5: func () ) ` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+
+
+ 
+### mitm.hijackHTTPResponseEx
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func mitm.hijackHTTPResponseEx(v1: func (v1: bool, v2: string, v3: bytes, v4: bytes, v5: func (v1: bytes) , v6: func () ) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `func (v1: bool, v2: string, v3: bytes, v4: bytes, v5: func (v1: bytes) , v6: func () ) ` |   |
 
 
 

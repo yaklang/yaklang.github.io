@@ -3,12 +3,14 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+ | [db.CreateTemporaryYakScript](#dbcreatetemporaryyakscript) |  |
  | [db.DelKey](#dbdelkey) | 删除 Key 对应的值(数据库中) |
  | [db.DeletePayloadByGroup](#dbdeletepayloadbygroup) | 删除 Payload |
  | [db.DeleteYakScriptByName](#dbdeleteyakscriptbyname) |  |
  | [db.DeleteYakitMenuItemAll](#dbdeleteyakitmenuitemall) |  |
  | [db.DownloadGeoIP](#dbdownloadgeoip) | 下载并自动解压 GeoIP |
  | [db.GetKey](#dbgetkey) | 获取持久化 Key |
+ | [db.GetProjectKey](#dbgetprojectkey) |  |
  | [db.GetYakitPluginByName](#dbgetyakitpluginbyname) |  |
  | [db.QueryDomainsByDomainKeyword](#dbquerydomainsbydomainkeyword) | 根据关键字查询域名资产 |
  | [db.QueryDomainsByNetwork](#dbquerydomainsbynetwork) | 根据解析到的网段查询域名资产 |
@@ -35,6 +37,7 @@
  | [db.SaveYakitMenuItemByBatchExecuteConfig](#dbsaveyakitmenuitembybatchexecuteconfig) |  |
  | [db.SaveYakitPlugin](#dbsaveyakitplugin) |  |
  | [db.SetKey](#dbsetkey) | 设置持久化 Key |
+ | [db.SetProjectKey](#dbsetprojectkey) |  |
  | [db.YieldYakScriptAll](#dbyieldyakscriptall) |  |
 
 
@@ -57,6 +60,39 @@
 
 ## 函数定义
 
+### db.CreateTemporaryYakScript
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.CreateTemporaryYakScript(v1: string, v2: string) return (r0: string, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `error` |   |
+
+
+ 
 ### db.DelKey
 
 删除 Key 对应的值(数据库中)
@@ -208,6 +244,37 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+
+
+ 
+### db.GetProjectKey
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.GetProjectKey(v1: any) return (r0: string)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
 
 
 
@@ -1020,6 +1087,38 @@
 |:-----------|:---------- |:-----------|
 | key | `any` |   |
 | value | `any` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### db.SetProjectKey
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func db.SetProjectKey(v1: any, v2: any) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `any` |   |
+| v2 | `any` |   |
 
 
 

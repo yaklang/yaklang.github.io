@@ -5,11 +5,13 @@
 |:------|:--------|
  | [yso.GenerateClassObjectFromBytes](#ysogenerateclassobjectfrombytes) | 从Bytes中加载Class |
  | [yso.GenerateDNSlogEvilClassObject](#ysogeneratednslogevilclassobject) | 生成一个制定域名的DNSLog恶意类 |
+ | [yso.GenerateHeaderEchoClassObject](#ysogenerateheaderechoclassobject) |  |
  | [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#ysogeneratemodifytomcatmaxheadersizeevilclassobject) | 生成一个修改Tomcat最大头长度的恶意类 |
  | [yso.GenerateMultiEchoClassObject](#ysogeneratemultiechoclassobject) | 生成一个兼容性Echo回显恶意对象 |
  | [yso.GenerateProcessBuilderExecEvilClassObject](#ysogenerateprocessbuilderexecevilclassobject) | 生成一个ProcessBuilderExec方式的恶意类对象 |
  | [yso.GenerateProcessImplExecEvilClassObject](#ysogenerateprocessimplexecevilclassobject) | 生成一个ProcessImpl执行的恶意类对象 |
  | [yso.GenerateRuntimeExecEvilClassObject](#ysogenerateruntimeexecevilclassobject) | 生成一个RuntimeExec的恶意类 |
+ | [yso.GenerateSleepClassObject](#ysogeneratesleepclassobject) |  |
  | [yso.GenerateSpringEchoEvilClassObject](#ysogeneratespringechoevilclassobject) | 生成一个SpringEcho恶意类对象&#34;&#34; |
  | [yso.GenerateTcpReverseEvilClassObject](#ysogeneratetcpreverseevilclassobject) | 生成一个TCP反连的恶意类对象 |
  | [yso.GenerateTcpReverseShellEvilClassObject](#ysogeneratetcpreverseshellevilclassobject) | 生成一个TCP反弹Shell的恶意类对象 |
@@ -45,6 +47,9 @@
  | [yso.GetJdk8u20JavaObject](#ysogetjdk8u20javaobject) |  |
  | [yso.GetSimplePrincipalCollectionJavaObject](#ysogetsimpleprincipalcollectionjavaobject) |  |
  | [yso.GetURLDNSJavaObject](#ysogeturldnsjavaobject) |  |
+ | [yso.LoadClassFromBCEL](#ysoloadclassfrombcel) |  |
+ | [yso.LoadClassFromBase64](#ysoloadclassfrombase64) |  |
+ | [yso.LoadClassFromBytes](#ysoloadclassfrombytes) |  |
  | [yso.ToBcel](#ysotobcel) |  |
  | [yso.ToBytes](#ysotobytes) |  |
  | [yso.ToJson](#ysotojson) |  |
@@ -67,6 +72,9 @@
  | [yso.useConstructorExecutor](#ysouseconstructorexecutor) |  |
  | [yso.useDNSLogEvilClass](#ysousednslogevilclass) |  |
  | [yso.useDNSlogTemplate](#ysousednslogtemplate) |  |
+ | [yso.useHeaderEchoEvilClass](#ysouseheaderechoevilclass) |  |
+ | [yso.useHeaderEchoTemplate](#ysouseheaderechotemplate) |  |
+ | [yso.useHeaderParam](#ysouseheaderparam) |  |
  | [yso.useModifyTomcatMaxHeaderSizeTemplate](#ysousemodifytomcatmaxheadersizetemplate) |  |
  | [yso.useMultiEchoEvilClass](#ysousemultiechoevilclass) |  |
  | [yso.useProcessBuilderExecEvilClass](#ysouseprocessbuilderexecevilclass) |  |
@@ -75,6 +83,9 @@
  | [yso.useProcessImplExecTemplate](#ysouseprocessimplexectemplate) |  |
  | [yso.useRuntimeExecEvilClass](#ysouseruntimeexecevilclass) |  |
  | [yso.useRuntimeExecTemplate](#ysouseruntimeexectemplate) |  |
+ | [yso.useSleepEvilClass](#ysousesleepevilclass) |  |
+ | [yso.useSleepTemplate](#ysousesleeptemplate) |  |
+ | [yso.useSleepTime](#ysousesleeptime) |  |
  | [yso.useSpringEchoTemplate](#ysousespringechotemplate) |  |
  | [yso.useTcpReverseEvilClass](#ysousetcpreverseevilclass) |  |
  | [yso.useTcpReverseShellEvilClass](#ysousetcpreverseshellevilclass) |  |
@@ -144,6 +155,38 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateHeaderEchoClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateHeaderEchoClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
 
 
 
@@ -307,6 +350,38 @@
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
 | v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.GenerateSleepClassObject
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.GenerateSleepClassObject(v1 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `...yso.GenClassOptionFun` |   |
 
 
 
@@ -1410,6 +1485,105 @@ CB1
 
 
  
+### yso.LoadClassFromBCEL
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.LoadClassFromBCEL(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.LoadClassFromBase64
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.LoadClassFromBase64(v1: string, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
+### yso.LoadClassFromBytes
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.LoadClassFromBytes(v1: bytes, v2 ...yso.GenClassOptionFun) return (r0: *javaclassparser.ClassObject, r1: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `bytes` |   |
+| v2 | `...yso.GenClassOptionFun` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*javaclassparser.ClassObject` |   |
+| r1 | `error` |   |
+
+
+ 
 ### yso.ToBcel
 
 
@@ -2049,6 +2223,84 @@ CB1
 
 
  
+### yso.useHeaderEchoEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useHeaderEchoEvilClass() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useHeaderEchoTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useHeaderEchoTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useHeaderParam
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useHeaderParam(v1: string, v2: string) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
 ### yso.useModifyTomcatMaxHeaderSizeTemplate
 
 
@@ -2247,6 +2499,83 @@ CB1
 `useRuntimeExecTemplate() yso.GenClassOptionFun`
 
  
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useSleepEvilClass
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useSleepEvilClass() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useSleepTemplate
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useSleepTemplate() return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+ 
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func GenClassOptionFun(v1: *yso.ClassConfig) ` |   |
+
+
+ 
+### yso.useSleepTime
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func yso.useSleepTime(v1: int) return (r0: func GenClassOptionFun(v1: *yso.ClassConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `int` |   |
+
+
+
 
 
 #### 返回值

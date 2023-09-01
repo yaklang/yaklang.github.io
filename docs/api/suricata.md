@@ -5,6 +5,7 @@
 |:------|:--------|
  | [suricata.LoadSuricataToDatabase](#suricataloadsuricatatodatabase) |  |
  | [suricata.ParseSuricata](#suricataparsesuricata) |  |
+ | [suricata.SuricataMatcher](#suricatasuricatamatcher) |  |
  | [suricata.TrafficGenerator](#suricatatrafficgenerator) |  |
  | [suricata.YieldRules](#suricatayieldrules) |  |
  | [suricata.YieldRulesByKeyword](#suricatayieldrulesbykeyword) |  |
@@ -59,7 +60,7 @@
 
 #### 定义：
 
-`func suricata.ParseSuricata(v1: string) return (r0: []*suricata.Rule, r1: error)`
+`func suricata.ParseSuricata(v1: string, v2 ...string) return (r0: []*rule.Rule, r1: error)`
 
 
 #### 参数
@@ -67,6 +68,7 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v1 | `string` |   |
+| v2 | `...string` |   |
 
 
 
@@ -76,8 +78,39 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*suricata.Rule` |   |
+| r0 | `[]*rule.Rule` |   |
 | r1 | `error` |   |
+
+
+ 
+### suricata.SuricataMatcher
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func suricata.SuricataMatcher(v1: *rule.Rule) return (r0: *match.Matcher)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `*rule.Rule` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `*match.Matcher` |   |
 
 
  
@@ -114,7 +147,7 @@
 
 #### 定义：
 
-`func suricata.YieldRules() return (r0: chan *chaosmaker.ChaosMakerRule)`
+`func suricata.YieldRules() return (r0: chan *rule.Storage)`
 
  
 
@@ -123,7 +156,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *chaosmaker.ChaosMakerRule` |   |
+| r0 | `chan *rule.Storage` |   |
 
 
  
@@ -137,7 +170,7 @@
 
 #### 定义：
 
-`func suricata.YieldRulesByKeyword(v1: string, v2 ...string) return (r0: chan *chaosmaker.ChaosMakerRule)`
+`func suricata.YieldRulesByKeyword(v1: string, v2 ...string) return (r0: chan *rule.Storage)`
 
 
 #### 参数
@@ -155,7 +188,7 @@
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *chaosmaker.ChaosMakerRule` |   |
+| r0 | `chan *rule.Storage` |   |
 
 
  

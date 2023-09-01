@@ -19,11 +19,13 @@
  | [nuclei.enableReverseConnection](#nucleienablereverseconnection) |  |
  | [nuclei.excludeTags](#nucleiexcludetags) |  |
  | [nuclei.excludeTemplates](#nucleiexcludetemplates) |  |
+ | [nuclei.fromPlugin](#nucleifromplugin) |  |
  | [nuclei.fuzzQueryTemplate](#nucleifuzzquerytemplate) |  |
  | [nuclei.headers](#nucleiheaders) |  |
  | [nuclei.headless](#nucleiheadless) |  |
  | [nuclei.http2](#nucleihttp2) |  |
  | [nuclei.https](#nucleihttps) |  |
+ | [nuclei.interactshTimeout](#nucleiinteractshtimeout) |  |
  | [nuclei.logFile](#nucleilogfile) |  |
  | [nuclei.metrics](#nucleimetrics) |  |
  | [nuclei.mode](#nucleimode) |  |
@@ -41,6 +43,7 @@
  | [nuclei.resultCallback](#nucleiresultcallback) |  |
  | [nuclei.retry](#nucleiretry) |  |
  | [nuclei.reverseUrl](#nucleireverseurl) |  |
+ | [nuclei.runtimeId](#nucleiruntimeid) |  |
  | [nuclei.severity](#nucleiseverity) |  |
  | [nuclei.showBrowser](#nucleishowbrowser) |  |
  | [nuclei.silent](#nucleisilent) |  |
@@ -549,6 +552,37 @@
 
 
  
+### nuclei.fromPlugin
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.fromPlugin(v1: string) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+
+
+ 
 ### nuclei.fuzzQueryTemplate
 
 
@@ -701,6 +735,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+
+
+ 
+### nuclei.interactshTimeout
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.interactshTimeout(v1: float64) return (r0: func ConfigOption(v1: *httptpl.Config) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `float64` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
 
 
  
@@ -1228,6 +1293,37 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r0 | `any` |   |
+
+
+ 
+### nuclei.runtimeId
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func nuclei.runtimeId(v1: string) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
 
 
  

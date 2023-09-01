@@ -4,6 +4,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
  | [udp.Connect](#udpconnect) | 创建一个 UDP 连接 |
+ | [udp.MockUDPProtocol](#udpmockudpprotocol) |  |
  | [udp.Serve](#udpserve) | 启动一个 UDP 服务器 |
  | [udp.clientLocalAddr](#udpclientlocaladdr) | 【可选】设置客户端的本地监听地址 |
  | [udp.clientTimeout](#udpclienttimeout) | 【可选】设置默认的客户端超时时间 |
@@ -50,6 +51,38 @@
 |:-----------|:---------- |:-----------|
 | conn | `*yaklib.udpConn` |   |
 | r1 | `error` |   |
+
+
+ 
+### udp.MockUDPProtocol
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func udp.MockUDPProtocol(v1: string) return (r0: string, r1: int)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `string` |   |
+| r1 | `int` |   |
 
 
  

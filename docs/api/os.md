@@ -39,6 +39,7 @@
  | [os.Setenv](#ossetenv) | 设置环境变量 |
  | [os.TempDir](#ostempdir) |  |
  | [os.Unsetenv](#osunsetenv) | 清除环境变量 |
+ | [os.WaitConnect](#oswaitconnect) |  |
 
 
 
@@ -1028,6 +1029,38 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `string` |   |
+
+
+
+
+
+#### 返回值
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r0 | `error` |   |
+
+
+ 
+### os.WaitConnect
+
+
+
+#### 详细描述
+
+
+
+#### 定义：
+
+`func os.WaitConnect(v1: string, v2: float64) return (r0: error)`
+
+
+#### 参数
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `float64` |   |
 
 
 
