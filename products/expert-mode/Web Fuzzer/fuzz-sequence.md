@@ -2,7 +2,7 @@
 sidebar_position: 14
 ---
 
-# 四、Web Fuzzer序列基础
+# 五、Web Fuzzer序列基础
 在经过上述教程的铺垫后，我们终于开始介绍Web Fuzzer序列功能了。 Web Fuzzer 序列就是将多个 Web Fuzzer 节点串联起来，实现更复杂的逻辑与功能。例如我们需要先进行登录，然后再进行其他操作，这时候我们就可以使用 Web Fuzzer 序列功能。
 
 Web Fuzzer序列如图所示，在最左侧有一个**Fuzzer 序列**按钮：
