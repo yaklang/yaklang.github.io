@@ -85,6 +85,6 @@ Content-Length: 154
 在上图中，我们可以设置变量名和变量值，变量可以在**后续变量**，**Web Fuzzer序列**和**当前Web Fuzzer**中使用。我们可以通过使用fuzztag：`{{params(变量名)}}`或`{{p(变量名)}}`来使用变量。
 
 变量同样存在三种模式：**nuclei**，**fuzztag**，**raw**。
-1. nuclei：nuclei模式下，其变量值实际上是nuclei的表达式，可以调用绝大部分nuclei-dsl中包含的函数。需要注意的是，当你引用其他变量时，其的值都是string类型，所以可能需要手动进行类型转换。一个简单的例子如下：`int(a)+3`。
+1. nuclei：nuclei模式下，其变量值实际上是nuclei的表达式，可以调用绝大部分nuclei-dsl中包含的函数。需要注意的是，当你引用其他变量时，其的值都是string类型，所以可能需要手动进行类型转换。一个简单的例子如下：`{{int(a)+3}}`。
 2. fuzztag：fuzzta模式下，其变量值实际上就是fuzztag，在值中使用fuzztag也会使得Web Fuzzer发送多个请求包。一个简单的例子如下：`{{int(1-2)}}`。
 3. raw：raw模式下，变量值相当于你输入的字符串，不会被解析。
