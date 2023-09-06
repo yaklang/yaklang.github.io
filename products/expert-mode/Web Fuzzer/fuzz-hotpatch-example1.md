@@ -14,7 +14,7 @@ sidebar_position: 18
 首先我们应该来看看token是从哪里获取的，我们继续使用 yakit 的 MITM 模块拦截请求，这次我们拦截的是直接访问该页面的GET请求，当我们将其发送到 Web FUzzer 发送请求后，可以看到其响应中存在token：
 ![](/img/products/yakit/Fuzz-hotpatch-example1/3.png)
 
-接下来就是使用热加载出手了。我们很容易想到热加载中的"魔术"方法：`beforeRequest`。我们可以在请求发送前，再次发送一个GET请求来获取token值，再用这个值进行爆破，就可以绕过csrf token的保护了。
+接下来就是让热加载出手了。我们很容易想到热加载中的"魔术"方法：`beforeRequest`。我们可以在请求发送前，再次发送一个GET请求来获取token值，再用这个值进行爆破，就可以绕过csrf token的保护了。
 
 我们来看看如何实现，首先我们需要在热加载页面中编写热加载内容，代码如下：
 ```go
