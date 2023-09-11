@@ -6,24 +6,31 @@ sidebar_position: 19
 这篇文章我们将会介绍另一个热加载的实际应用案例：爆破aes cbc加密。我们以 yakit 官方的 Vulinbox靶场为例。
 
 首先我们需要安全并启动 Vulinbox 靶场，打开 yakit ，点击**试验性功能 - (靶场)Vulinbox**：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/1.png)
 
 打开**Vulinbox 管理器**页面后，点击右上角的安装靶场：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/2.png)
 
 安装成功后，我们关闭**Vulinbox 管理器**页面后重新打开，看到已经提示安装成功的提示，我们点击启动靶场：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/3.png)
 
 在启动靶场中设置参数，我们默认即可，点击**启动靶场**按钮：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/4.png)
 
 等待下方页面输出`VULINBOX RUNNING IN：`的提示，说明靶场启动成功：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/5.png)
 
 接着我们手动访问该URL，打开靶场页面，找到`CryptoJS.AES(CBC) 前端加密登陆表单`：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/6.png)
 
 靶场页面如下所示：
+
 ![](/img/products/yakit/Fuzz-hotpatch-example2/7.png)
 
 首先我们需要了解这个靶场，这个靶场的目的是要对用户和密码进行爆破，直到找到正确的用户名和密码。而用户名和密码是经过json序列化之后AES CBC的方式进行加密的，所以我们需要先对加密的过程进行分析。
