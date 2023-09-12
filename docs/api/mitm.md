@@ -1,476 +1,305 @@
 # mitm
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [mitm.Bridge](#mitmbridge) | 桥接模式中间人 |
- | [mitm.Start](#mitmstart) | 启动一个中间人代理 |
- | [mitm.callback](#mitmcallback) |  |
- | [mitm.context](#mitmcontext) | 【参数】设置中间人的 context，用来控制生命周期 |
- | [mitm.hijackHTTPRequest](#mitmhijackhttprequest) |  |
- | [mitm.hijackHTTPResponse](#mitmhijackhttpresponse) |  |
- | [mitm.hijackHTTPResponseEx](#mitmhijackhttpresponseex) |  |
- | [mitm.host](#mitmhost) | 【参数】设置中间人代理/服务器的监听主机端口 |
- | [mitm.isTransparent](#mitmistransparent) | 设置启动一个透明 mitm 劫持接口！ |
- | [mitm.maxContentLength](#mitmmaxcontentlength) |  |
- | [mitm.rootCA](#mitmrootca) | 设置中间人根 CA 证书（可以用 `tls` 工具包生成） |
- | [mitm.useDefaultCA](#mitmusedefaultca) | 设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key |
- | [mitm.wscallback](#mitmwscallback) |  |
- | [mitm.wsforcetext](#mitmwsforcetext) |  |
-
-
-
-
- 
-
+| [mitm.Bridge](#Bridge) ||
+| [mitm.Start](#Start) ||
+| [mitm.callback](#callback) ||
+| [mitm.context](#context) ||
+| [mitm.hijackHTTPRequest](#hijackHTTPRequest) ||
+| [mitm.hijackHTTPResponse](#hijackHTTPResponse) ||
+| [mitm.hijackHTTPResponseEx](#hijackHTTPResponseEx) ||
+| [mitm.host](#host) ||
+| [mitm.isTransparent](#isTransparent) ||
+| [mitm.maxContentLength](#maxContentLength) ||
+| [mitm.rootCA](#rootCA) ||
+| [mitm.useDefaultCA](#useDefaultCA) ||
+| [mitm.wscallback](#wscallback) ||
+| [mitm.wsforcetext](#wsforcetext) ||
 
 
 ## 函数定义
-
 ### mitm.Bridge
 
-桥接模式中间人
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Bridge(
-	port any,
-	downstreamProxy string,
-	opts ...mitmConfigOpt,
-) error`
-
+`Bridge(port any, downstreamProxy string, opts ...mitmConfigOpt) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| listenedPort | `any` |  想要监听的本地端口 |
-| nextProxy | `string` |  想要中转的下游代理 |
-| params | `...opt` |  额外参数，用于设置证书/上下文等 |
-
-
-
-
+| port | `any` |   |
+| downstreamProxy | `string` |   |
+| opts | `...mitmConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### mitm.Start
 
-启动一个中间人代理
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Start(
-	port int,
-	opts ...mitmConfigOpt,
-) error`
-
+`Start(port int, opts ...mitmConfigOpt) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| port | `int` |  中间人想要监听的代理 |
-| params | `...opt` |   |
-
-
-
-
+| port | `int` |   |
+| opts | `...mitmConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### mitm.callback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`callback(func(bool, string, *http.Request, *http.Response)) yaklib.mitmConfigOpt`
-
+`callback(f func(bool, string, *http.Request, *http.Response)) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func(isHttps, url, req: *http.Request, rsp: *http.Resposne)` |   |
-
-
-
-
+| f | `func(bool, string, *http.Request, *http.Response)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.context
 
-【参数】设置中间人的 context，用来控制生命周期
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`context(context.Context) yaklib.mitmConfigOpt`
-
+`context(ctx context.Context) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-
-
-
-
+| ctx | `context.Context` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.hijackHTTPRequest
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`hijackHTTPRequest(func(bool, string, []uint8, func([]uint8), func())) yaklib.mitmConfigOpt`
-
+`hijackHTTPRequest(h func(isHttps bool, u string, req []byte, modified func([]byte), dropped func())) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bool, v2: string, v3: bytes, v4: func (v1: bytes) , v5: func () ) ` |   |
-
-
-
-
+| h | `func(isHttps bool, u string, req []byte, modified func([]byte), dropped func())` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.hijackHTTPResponse
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`hijackHTTPResponse(func(bool, string, []uint8, func([]uint8), func())) yaklib.mitmConfigOpt`
-
+`hijackHTTPResponse(h func(isHttps bool, u string, rsp []byte, modified func([]byte), dropped func())) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bool, v2: string, v3: bytes, v4: func (v1: bytes) , v5: func () ) ` |   |
-
-
-
-
+| h | `func(isHttps bool, u string, rsp []byte, modified func([]byte), dropped func())` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.hijackHTTPResponseEx
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func mitm.hijackHTTPResponseEx(v1: func (v1: bool, v2: string, v3: bytes, v4: bytes, v5: func (v1: bytes) , v6: func () ) ) return (r0: func mitmConfigOpt(v1: *yaklib.mitmConfig) )`
-
+`hijackHTTPResponseEx(h func(bool, string, []byte, []byte, func([]byte), func())) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bool, v2: string, v3: bytes, v4: bytes, v5: func (v1: bytes) , v6: func () ) ` |   |
-
-
-
-
+| h | `func(bool, string, []byte, []byte, func([]byte), func())` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.host
 
-【参数】设置中间人代理/服务器的监听主机端口
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`host(string) yaklib.mitmConfigOpt`
-
+`host(host string) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| host | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.isTransparent
 
-设置启动一个透明 mitm 劫持接口！
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`isTransparent(bool) yaklib.mitmConfigOpt`
-
+`isTransparent(b bool) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.maxContentLength
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxContentLength(int) yaklib.mitmConfigOpt`
-
+`maxContentLength(i int) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.rootCA
 
-设置中间人根 CA 证书（可以用 `tls` 工具包生成）
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`rootCA([]uint8, []uint8) yaklib.mitmConfigOpt`
-
+`rootCA(cert []byte, key []byte) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| caCert | `bytes` |  设置 CA 根证书 |
-| key | `bytes` |  设置 CA 对应的私钥 |
-
-
-
-
+| cert | `[]byte` |   |
+| key | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.useDefaultCA
 
-设置是否使用默认CA，如果使用了默认CA会在当前目录自动生成一套CA证书和Key
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`useDefaultCA(bool) yaklib.mitmConfigOpt`
-
+`useDefaultCA(t bool) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| t | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.wscallback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`wscallback(func([]uint8, bool) any) yaklib.mitmConfigOpt`
-
+`wscallback(f func([]byte, bool) any) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: bytes, v2: bool) return(any) ` |   |
-
-
-
-
+| f | `func([]byte, bool) any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
+| r1 | `mitmConfigOpt` |   |
 
 
- 
 ### mitm.wsforcetext
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`wsforcetext(bool) yaklib.mitmConfigOpt`
-
+`wsforcetext(b bool) mitmConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func mitmConfigOpt(v1: *yaklib.mitmConfig) ` |   |
-
-
- 
+| r1 | `mitmConfigOpt` |   |
 
 

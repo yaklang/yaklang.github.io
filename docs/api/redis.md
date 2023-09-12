@@ -1,273 +1,175 @@
 # redis
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [redis.New](#redisnew) | 启动一个 Redis 客户端 |
- | [redis.addr](#redisaddr) | 设置 Redis 地址 |
- | [redis.host](#redishost) |  |
- | [redis.password](#redispassword) | 设置 Redis 密码 |
- | [redis.port](#redisport) |  |
- | [redis.retry](#redisretry) |  |
- | [redis.timeoutSeconds](#redistimeoutseconds) |  |
- | [redis.username](#redisusername) |  |
-
-
-
-
- 
-
+| [redis.New](#New) ||
+| [redis.addr](#addr) ||
+| [redis.host](#host) ||
+| [redis.password](#password) ||
+| [redis.port](#port) ||
+| [redis.retry](#retry) ||
+| [redis.timeoutSeconds](#timeoutSeconds) ||
+| [redis.username](#username) ||
 
 
 ## 函数定义
-
 ### redis.New
 
-启动一个 Redis 客户端
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`New(...yaklib.redisConfigOpt) *yaklib.redisClient`
-
+`New(r ...redisConfigOpt) *redisClient`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yaklib.redisConfigOpt` |   |
-
-
-
-
+| r | `...redisConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.redisClient` |   |
+| r1 | `*redisClient` |   |
 
 
- 
 ### redis.addr
 
-设置 Redis 地址
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`addr(string) yaklib.redisConfigOpt`
-
+`addr(a string) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| a | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.host
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`host(string) yaklib.redisConfigOpt`
-
+`host(h string) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| h | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.password
 
-设置 Redis 密码
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`password(string) yaklib.redisConfigOpt`
-
+`password(a string) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| a | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.port
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`port(int) yaklib.redisConfigOpt`
-
+`port(h int) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| h | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.retry
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`retry(int) yaklib.redisConfigOpt`
-
+`retry(a int) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| a | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.timeoutSeconds
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`timeoutSeconds(int) yaklib.redisConfigOpt`
-
+`timeoutSeconds(d int) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| d | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
+| r1 | `redisConfigOpt` |   |
 
 
- 
 ### redis.username
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`username(string) yaklib.redisConfigOpt`
-
+`username(a string) redisConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| a | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func redisConfigOpt(v1: *yaklib.redisConfig) ` |   |
-
-
- 
+| r1 | `redisConfigOpt` |   |
 
 

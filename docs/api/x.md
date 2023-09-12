@@ -1,1241 +1,816 @@
 # x
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [x.All](#xall) | 所有元素都存在且为 true |
- | [x.Any](#xany) | 元素中至少有一个为 true |
- | [x.Chunk](#xchunk) | 把集合按数量分组 |
- | [x.Contains](#xcontains) | 集合中是否包含某一个元素 |
- | [x.ConvertToMap](#xconverttomap) | 把一个对象尽可能转换为 map[string][]string |
- | [x.Difference](#xdifference) | 计算两个元素的差分 |
- | [x.Drop](#xdrop) | 丢弃数组 |
- | [x.Equal](#xequal) | 判断两个元素是否相等 |
- | [x.Every](#xevery) |  |
- | [x.Filter](#xfilter) | 使用一个函数 func(i): bool 过滤某数组 |
- | [x.Find](#xfind) | 寻找符合要求的某个元素 |
- | [x.Foreach](#xforeach) | For 循环的函数式编程支持 |
- | [x.ForeachRight](#xforeachright) | 反向 For 循环 |
- | [x.Head](#xhead) | 取第一个元素 |
- | [x.If](#xif) | 类似 SQL 中的 IF 函数 |
- | [x.IndexOf](#xindexof) | 判断元素在数组中的位置 |
- | [x.Intersect](#xintersect) | 计算交集 |
- | [x.IsSubset](#xissubset) | 判断子集关系 |
- | [x.Keys](#xkeys) | 取 Map 的所有 Key |
- | [x.Map](#xmap) | 批处理 |
- | [x.Max](#xmax) | 取最大值 |
- | [x.Min](#xmin) | 取最小值 |
- | [x.Range](#xrange) | 生成一个范围数组/Slice |
- | [x.Reduce](#xreduce) | 函数式编程 Reducer 支持 |
- | [x.RemoveRepeat](#xremoverepeat) | 移除数组/Slice中重复元素 |
- | [x.Reverse](#xreverse) | 数组反向 |
- | [x.Shift](#xshift) | 取出第一个数组元素 |
- | [x.Shuffle](#xshuffle) | 打乱集合顺序 |
- | [x.Some](#xsome) |  |
- | [x.Sort](#xsort) |  |
- | [x.Subtract](#xsubtract) | 集合相减 |
- | [x.Sum](#xsum) | 取和 |
- | [x.Tail](#xtail) | 出去第一个元素之外的所有数组 |
- | [x.ToFloat64](#xtofloat64) | 解析成数字（double/float64） |
- | [x.ToMap](#xtomap) | 数字根据某一个字段生成 Map |
- | [x.Values](#xvalues) | 取 Map 中的 Value |
- | [x.WaitConnect](#xwaitconnect) | 等待一个链接具体多少秒钟 |
- | [x.Zip](#xzip) |  |
-
-
-
-
- 
-
+| [x.All](#All) |All returns true if all elements of the iterable are not empty (or if the iterable is empty)|
+| [x.Any](#Any) |Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.|
+| [x.Chunk](#Chunk) |Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining element.|
+| [x.Contains](#Contains) |Contains returns true if an element is present in a iteratee.|
+| [x.ConvertToMap](#ConvertToMap) ||
+| [x.Difference](#Difference) |Difference returns the difference between two collections.|
+| [x.Drop](#Drop) |Drop creates an array/slice with `n` elements dropped from the beginning.|
+| [x.Equal](#Equal) |IsEqual returns if the two objects are equal|
+| [x.Every](#Every) |Every returns true if every element is present in a iteratee.|
+| [x.Filter](#Filter) ||
+| [x.Find](#Find) ||
+| [x.Foreach](#Foreach) ||
+| [x.ForeachRight](#ForeachRight) ||
+| [x.Head](#Head) |Head gets the first element of array.|
+| [x.If](#If) ||
+| [x.IndexOf](#IndexOf) |IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found|
+| [x.Intersect](#Intersect) ||
+| [x.IsSubset](#IsSubset) |Subset returns true if collection x is a subset of y.|
+| [x.Keys](#Keys) |Keys creates an array of the own enumerable map keys or struct field names.|
+| [x.Map](#Map) ||
+| [x.Max](#Max) ||
+| [x.Min](#Min) ||
+| [x.Range](#Range) ||
+| [x.Reduce](#Reduce) ||
+| [x.RemoveRepeat](#RemoveRepeat) |Uniq creates an array with unique values.|
+| [x.Reverse](#Reverse) |Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.|
+| [x.Shift](#Shift) ||
+| [x.Shuffle](#Shuffle) |Shuffle creates an array of shuffled values|
+| [x.Some](#Some) |Some returns true if atleast one element is present in an iteratee.|
+| [x.Sort](#Sort) |SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type's Less method.|
+| [x.Subtract](#Subtract) |Subtract returns the subtraction between two collections.|
+| [x.Sum](#Sum) |Sum computes the sum of the values in array.|
+| [x.Tail](#Tail) |Tail gets all but the first element of array.|
+| [x.ToFloat64](#ToFloat64) |ToFloat64 converts any numeric value to float64.|
+| [x.ToMap](#ToMap) |ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>|
+| [x.Values](#Values) |Values creates an array of the own enumerable map values or struct field values.|
+| [x.WaitConnect](#WaitConnect) ||
+| [x.Zip](#Zip) |Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in lengthto the length of the shortest input iterable.|
 
 
 ## 函数定义
-
 ### x.All
 
-所有元素都存在且为 true
-
 #### 详细描述
+All returns true if all elements of the iterable are not empty (or if the iterable is empty)
 
+#### 定义
 
-
-#### 定义：
-
-`All(objs ...any) bool  doc:All returns true if all elements of the iterable are not empty (or if the iterable is empty)`
-
+`All(objs ...any) bool`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| objs | `...any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Any
-
-元素中至少有一个为 true
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Any(objs ...any) bool  doc:Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Chunk
-
-把集合按数量分组
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Chunk(arr any, size int) any  doc:Chunk creates an array of elements split into groups with the length of size.If array can&#39;t be split evenly, the final chunk will bethe remaining element.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| sliceOrigin | `any` |   |
-| groupSize | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Contains
-
-集合中是否包含某一个元素
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Contains(in any, elem any) bool  doc:Contains returns true if an element is present in a iteratee.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| slice | `any` |   |
-| element | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.ConvertToMap
-
-把一个对象尽可能转换为 map[string][]string
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`ConvertToMap(any) map[string][]string`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `map[string][]string` |   |
-
-
- 
-### x.Difference
-
-计算两个元素的差分
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Difference(x any, y any) (any, any)  doc:Difference returns the difference between two collections.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-| r1 | `any` |   |
-
-
- 
-### x.Drop
-
-丢弃数组
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Drop(in any, n int) any  doc:Drop creates an array/slice with `n` elements dropped from the beginning.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| slice | `any` |   |
-| size | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Equal
-
-判断两个元素是否相等
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Equal(expected any, actual any) bool  doc:IsEqual returns if the two objects are equal`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Every
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Every(in any, elements ...any) bool  doc:Every returns true if every element is present in a iteratee.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Filter
-
-使用一个函数 func(i): bool 过滤某数组
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Filter(any, func(any) bool) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| slice | `any` |   |
-| v2 | `func (v1: any) return(bool) ` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Find
-
-寻找符合要求的某个元素
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Find(any, func(any) bool) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func (v1: any) return(bool) ` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Foreach
-
-For 循环的函数式编程支持
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Foreach(any, func(any))`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func (v1: any) ` |   |
-
-
-
-
- 
-
- 
-### x.ForeachRight
-
-反向 For 循环
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`ForeachRight(any, func(any))`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func (v1: any) ` |   |
-
-
-
-
- 
-
- 
-### x.Head
-
-取第一个元素
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Head(arr any) any  doc:Head gets the first element of array.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.If
-
-类似 SQL 中的 IF 函数
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`If(bool, any, any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| condition | `bool` |   |
-| obj1 | `any` |   |
-| obj2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.IndexOf
-
-判断元素在数组中的位置
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`IndexOf(in any, elem any) int  doc:IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `int` |   |
-
-
- 
-### x.Intersect
-
-计算交集
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Intersect(x any, y any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.IsSubset
-
-判断子集关系
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`IsSubset(x any, y any) bool  doc:Subset returns true if collection x is a subset of y.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Keys
-
-取 Map 的所有 Key
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Keys(out any) any  doc:Keys creates an array of the own enumerable map keys or struct field names.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Map
-
-批处理
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Map(any, yaklib.funkGeneralFuncType) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func funkGeneralFuncType(v1: any) return(any) ` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Max
-
-取最大值
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Max(i any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Min
-
-取最小值
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Min(i any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Range
-
-生成一个范围数组/Slice
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Range(int) []any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `[]any` |   |
-
-
- 
-### x.Reduce
-
-函数式编程 Reducer 支持
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Reduce(any, yaklib.funkGeneralReduceFuncType, any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func funkGeneralReduceFuncType(v1: any, v2: any) return(any) ` |   |
-| initValue | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.RemoveRepeat
-
-移除数组/Slice中重复元素
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`RemoveRepeat(in any) any  doc:Uniq creates an array with unique values.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Reverse
-
-数组反向
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Reverse(in any) any  doc:Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Shift
-
-取出第一个数组元素
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Shift(any) any`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Shuffle
-
-打乱集合顺序
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Shuffle(in any) any  doc:Shuffle creates an array of shuffled values`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Some
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Some(in any, elements ...any) bool  doc:Some returns true if atleast one element is present in an iteratee.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
-
-
- 
-### x.Sort
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Sort(x any, less func(i, j int) bool)  doc:SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type&#39;s Less method.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func (v1: int, v2: int) return(bool) ` |   |
-
-
-
-
- 
-
- 
-### x.Subtract
-
-集合相减
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Subtract(x any, y any) any  doc:Subtract returns the subtraction between two collections.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.Sum
-
-取和
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Sum(arr any) float64  doc:Sum computes the sum of the values in array.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `float64` |   |
-
-
- 
-### x.Tail
-
-出去第一个元素之外的所有数组
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Tail(arr any) any  doc:Tail gets all but the first element of array.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
-### x.ToFloat64
-
-解析成数字（double/float64）
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`ToFloat64(x any) (float64, bool)  doc:ToFloat64 converts any numeric value to float64.`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `float64` |   |
 | r1 | `bool` |   |
 
 
- 
+### x.Any
+
+#### 详细描述
+Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.
+
+#### 定义
+
+`Any(objs ...any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| objs | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.Chunk
+
+#### 详细描述
+Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining element.
+
+#### 定义
+
+`Chunk(arr any, size int) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| arr | `any` |   |
+| size | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Contains
+
+#### 详细描述
+Contains returns true if an element is present in a iteratee.
+
+#### 定义
+
+`Contains(in any, elem any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+| elem | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.ConvertToMap
+
+#### 详细描述
+
+
+#### 定义
+
+`ConvertToMap(i any) map[string][]string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string][]string` |   |
+
+
+### x.Difference
+
+#### 详细描述
+Difference returns the difference between two collections.
+
+#### 定义
+
+`Difference(x any, y any) (any, any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+| y | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+| r2 | `any` |   |
+
+
+### x.Drop
+
+#### 详细描述
+Drop creates an array/slice with `n` elements dropped from the beginning.
+
+#### 定义
+
+`Drop(in any, n int) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Equal
+
+#### 详细描述
+IsEqual returns if the two objects are equal
+
+#### 定义
+
+`Equal(expected any, actual any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| expected | `any` |   |
+| actual | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.Every
+
+#### 详细描述
+Every returns true if every element is present in a iteratee.
+
+#### 定义
+
+`Every(in any, elements ...any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+| elements | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.Filter
+
+#### 详细描述
+
+
+#### 定义
+
+`Filter(i any, fc func(any) bool) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `func(any) bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Find
+
+#### 详细描述
+
+
+#### 定义
+
+`Find(i any, fc func(any) bool) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `func(any) bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Foreach
+
+#### 详细描述
+
+
+#### 定义
+
+`Foreach(i any, fc func(any))`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `func(any)` |   |
+
+
+### x.ForeachRight
+
+#### 详细描述
+
+
+#### 定义
+
+`ForeachRight(i any, fc func(any))`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `func(any)` |   |
+
+
+### x.Head
+
+#### 详细描述
+Head gets the first element of array.
+
+#### 定义
+
+`Head(arr any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| arr | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.If
+
+#### 详细描述
+
+
+#### 定义
+
+`If(i bool, a any, b any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `bool` |   |
+| a | `any` |   |
+| b | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.IndexOf
+
+#### 详细描述
+IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found
+
+#### 定义
+
+`IndexOf(in any, elem any) int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+| elem | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+
+
+### x.Intersect
+
+#### 详细描述
+
+
+#### 定义
+
+`Intersect(x any, y any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+| y | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.IsSubset
+
+#### 详细描述
+Subset returns true if collection x is a subset of y.
+
+#### 定义
+
+`IsSubset(x any, y any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+| y | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.Keys
+
+#### 详细描述
+Keys creates an array of the own enumerable map keys or struct field names.
+
+#### 定义
+
+`Keys(out any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| out | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Map
+
+#### 详细描述
+
+
+#### 定义
+
+`Map(i any, fc funkGeneralFuncType) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `funkGeneralFuncType` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Max
+
+#### 详细描述
+
+
+#### 定义
+
+`Max(i any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Min
+
+#### 详细描述
+
+
+#### 定义
+
+`Min(i any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Range
+
+#### 详细描述
+
+
+#### 定义
+
+`Range(i int) []any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]any` |   |
+
+
+### x.Reduce
+
+#### 详细描述
+
+
+#### 定义
+
+`Reduce(i any, fc funkGeneralReduceFuncType, acc any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| fc | `funkGeneralReduceFuncType` |   |
+| acc | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.RemoveRepeat
+
+#### 详细描述
+Uniq creates an array with unique values.
+
+#### 定义
+
+`RemoveRepeat(in any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Reverse
+
+#### 详细描述
+Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.
+
+#### 定义
+
+`Reverse(in any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Shift
+
+#### 详细描述
+
+
+#### 定义
+
+`Shift(i any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Shuffle
+
+#### 详细描述
+Shuffle creates an array of shuffled values
+
+#### 定义
+
+`Shuffle(in any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Some
+
+#### 详细描述
+Some returns true if atleast one element is present in an iteratee.
+
+#### 定义
+
+`Some(in any, elements ...any) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| in | `any` |   |
+| elements | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### x.Sort
+
+#### 详细描述
+SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type's Less method.
+
+#### 定义
+
+`Sort(x any, less func(i, j int) bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+| less | `func(i, j int) bool` |   |
+
+
+### x.Subtract
+
+#### 详细描述
+Subtract returns the subtraction between two collections.
+
+#### 定义
+
+`Subtract(x any, y any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+| y | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.Sum
+
+#### 详细描述
+Sum computes the sum of the values in array.
+
+#### 定义
+
+`Sum(arr any) float64`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| arr | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `float64` |   |
+
+
+### x.Tail
+
+#### 详细描述
+Tail gets all but the first element of array.
+
+#### 定义
+
+`Tail(arr any) any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| arr | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `any` |   |
+
+
+### x.ToFloat64
+
+#### 详细描述
+ToFloat64 converts any numeric value to float64.
+
+#### 定义
+
+`ToFloat64(x any) (float64, bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `float64` |   |
+| r2 | `bool` |   |
+
+
 ### x.ToMap
 
-数字根据某一个字段生成 Map
-
 #### 详细描述
+ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>
 
+#### 定义
 
-
-#### 定义：
-
-`ToMap(in any, pivot string) any  doc:ToMap transforms a slice of instances to a Map.[]*Foo =&gt; Map&lt;int, *Foo&gt;`
-
+`ToMap(in any, pivot string) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| slice | `any` |   |
-| fieldName | `string` |   |
-
-
-
-
+| in | `any` |   |
+| pivot | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `any` |   |
 
 
- 
 ### x.Values
 
-取 Map 中的 Value
-
 #### 详细描述
+Values creates an array of the own enumerable map values or struct field values.
 
+#### 定义
 
-
-#### 定义：
-
-`Values(out any) any  doc:Values creates an array of the own enumerable map values or struct field values.`
-
+`Values(out any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| out | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `any` |   |
 
 
- 
 ### x.WaitConnect
-
-等待一个链接具体多少秒钟
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `WaitConnect(addr string, timeout float64) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | addr | `string` |   |
-| timeoutSeconds | `float64` |   |
-
-
-
-
+| timeout | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### x.Zip
 
-
-
 #### 详细描述
+Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in lengthto the length of the shortest input iterable.
 
+#### 定义
 
-
-#### 定义：
-
-`Zip(any, any) []funk.Tuple`
-
+`Zip(slice1 any, slice2 any) []Tuple`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
+| slice1 | `any` |   |
+| slice2 | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]funk.Tuple` |   |
-
-
- 
+| r1 | `[]Tuple` |   |
 
 

@@ -1,562 +1,367 @@
 # fuzz
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [fuzz.FuzzCalcExpr](#fuzzfuzzcalcexpr) |  |
- | [fuzz.HTTPRequest](#fuzzhttprequest) | HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求 |
- | [fuzz.MustHTTPRequest](#fuzzmusthttprequest) |  |
- | [fuzz.ProtobufBytes](#fuzzprotobufbytes) |  |
- | [fuzz.ProtobufHex](#fuzzprotobufhex) |  |
- | [fuzz.ProtobufJSON](#fuzzprotobufjson) |  |
- | [fuzz.ProtobufYAML](#fuzzprotobufyaml) |  |
- | [fuzz.Strings](#fuzzstrings) | 执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz) |
- | [fuzz.StringsFunc](#fuzzstringsfunc) |  |
- | [fuzz.StringsWithParam](#fuzzstringswithparam) | 新增带参数的 fuzz |
- | [fuzz.UrlToHTTPRequest](#fuzzurltohttprequest) | 使用 URL 构造一个 Fuzz 请求包 |
- | [fuzz.UrlsToHTTPRequests](#fuzzurlstohttprequests) | 把多个 URL 变成可以批量 Fuzz 的请求组(Batch) |
- | [fuzz.WithConcurrentLimit](#fuzzwithconcurrentlimit) |  |
- | [fuzz.WithDelay](#fuzzwithdelay) |  |
- | [fuzz.WithNamingContext](#fuzzwithnamingcontext) |  |
- | [fuzz.WithTimeOut](#fuzzwithtimeout) |  |
- | [fuzz.https](#fuzzhttps) | `http.HTTPRequest` 的 extraParams 中的额外选项之一 |
-
-
-
-
- 
-
+| [fuzz.FuzzCalcExpr](#FuzzCalcExpr) ||
+| [fuzz.HTTPRequest](#HTTPRequest) ||
+| [fuzz.MustHTTPRequest](#MustHTTPRequest) ||
+| [fuzz.ProtobufBytes](#ProtobufBytes) ||
+| [fuzz.ProtobufHex](#ProtobufHex) ||
+| [fuzz.ProtobufJSON](#ProtobufJSON) ||
+| [fuzz.ProtobufYAML](#ProtobufYAML) ||
+| [fuzz.Strings](#Strings) |fuzz|
+| [fuzz.StringsFunc](#StringsFunc) ||
+| [fuzz.StringsWithParam](#StringsWithParam) ||
+| [fuzz.UrlToHTTPRequest](#UrlToHTTPRequest) ||
+| [fuzz.UrlsToHTTPRequests](#UrlsToHTTPRequests) ||
+| [fuzz.WithConcurrentLimit](#WithConcurrentLimit) ||
+| [fuzz.WithDelay](#WithDelay) ||
+| [fuzz.WithNamingContext](#WithNamingContext) ||
+| [fuzz.WithTimeOut](#WithTimeOut) ||
+| [fuzz.https](#https) ||
 
 
 ## 函数定义
-
 ### fuzz.FuzzCalcExpr
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func fuzz.FuzzCalcExpr() return (r0: map[string]any)`
-
- 
-
+`FuzzCalcExpr() map[string]any`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `map[string]any` |   |
+| r1 | `map[string]any` |   |
 
 
- 
 ### fuzz.HTTPRequest
 
-HTTP模糊测试核心函数，构建一个模糊测试 HTTP 请求
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`HTTPRequest(any, ...mutate.BuildFuzzHTTPRequestOption) (*mutate.FuzzHTTPRequest, error)`
-
+`HTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) (*FuzzHTTPRequest, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| originRequest | `[]byte|string|http.Request|*http.Request` |  可以构建一个新的 HTTP Fuzz 请求的原材料。支持以上多种类型 |
-| extraParams | `...fuzzHTTPRequestOpt` |  额外参数， |
-
-
-
-
+| i | `any` |   |
+| opts | `...BuildFuzzHTTPRequestOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*mutate.FuzzHTTPRequest` |   |
-| r1 | `error` |   |
+| r1 | `*FuzzHTTPRequest` |   |
+| r2 | `error` |   |
 
 
- 
 ### fuzz.MustHTTPRequest
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`MustHTTPRequest(any, ...mutate.BuildFuzzHTTPRequestOption) *mutate.FuzzHTTPRequest`
-
+`MustHTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) *FuzzHTTPRequest`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...mutate.BuildFuzzHTTPRequestOption` |   |
-
-
-
-
+| i | `any` |   |
+| opts | `...BuildFuzzHTTPRequestOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*mutate.FuzzHTTPRequest` |   |
+| r1 | `*FuzzHTTPRequest` |   |
 
 
- 
 ### fuzz.ProtobufBytes
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ProtobufBytes(any) *yaklib.ProtobufRecords`
-
+`ProtobufBytes(i any) *ProtobufRecords`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.ProtobufRecords` |   |
+| r1 | `*ProtobufRecords` |   |
 
 
- 
 ### fuzz.ProtobufHex
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ProtobufHex(any) *yaklib.ProtobufRecords`
-
+`ProtobufHex(i any) *ProtobufRecords`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.ProtobufRecords` |   |
+| r1 | `*ProtobufRecords` |   |
 
 
- 
 ### fuzz.ProtobufJSON
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ProtobufJSON(any) *yaklib.ProtobufRecords`
-
+`ProtobufJSON(i any) *ProtobufRecords`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.ProtobufRecords` |   |
+| r1 | `*ProtobufRecords` |   |
 
 
- 
 ### fuzz.ProtobufYAML
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ProtobufYAML(any) *yaklib.ProtobufRecords`
-
+`ProtobufYAML(i any) *ProtobufRecords`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.ProtobufRecords` |   |
+| r1 | `*ProtobufRecords` |   |
 
 
- 
 ### fuzz.Strings
 
-执行 Fuzz 模版，可以支持把一个模版字符串渲染多个字符串，参考 [web/http fuzz教程](/docs/buildinlibs/lib_fuzz)
-
 #### 详细描述
+fuzz
 
+#### 定义
 
-
-#### 定义：
-
-`Strings(i any) []string  doc:fuzz`
-
+`Strings(i any) []string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fuzzTemplate | `[]byte|string|[]string` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### fuzz.StringsFunc
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `StringsFunc(i any, cb func(i *mutate.MutateResult), params ...any) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `func (v1: *mutate.MutateResult) ` |   |
-| v3 | `...any` |   |
-
-
-
-
+| i | `any` |   |
+| cb | `func(i *mutate.MutateResult)` |   |
+| params | `...any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### fuzz.StringsWithParam
-
-新增带参数的 fuzz
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `StringsWithParam(i any, i2 any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
+| i | `any` |   |
+| i2 | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### fuzz.UrlToHTTPRequest
-
-使用 URL 构造一个 Fuzz 请求包
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `UrlToHTTPRequest(method string, i any) (*mutate.FuzzHTTPRequest, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
-
-
-
-
+| method | `string` |   |
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*mutate.FuzzHTTPRequest` |   |
-| r1 | `error` |   |
+| r1 | `*mutate.FuzzHTTPRequest` |   |
+| r2 | `error` |   |
 
 
- 
 ### fuzz.UrlsToHTTPRequests
 
-把多个 URL 变成可以批量 Fuzz 的请求组(Batch)
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`UrlsToHTTPRequests(...any) (*mutate.FuzzHTTPRequestBatch, error)`
-
+`UrlsToHTTPRequests(target ...interface) (target ...interface)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| urlTemplate | `[]byte|string|[]string` |  支持 URL/域名/IP 输入，使用 `str.ParseStringToUrlsWith3W` |
-
-
-
-
+| target | `...interface` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*mutate.FuzzHTTPRequestBatch` |   |
-| r1 | `error` |   |
+| target | `...interface` |   |
 
 
- 
 ### fuzz.WithConcurrentLimit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`WithConcurrentLimit(int) mutate.httpPoolConfigOption`
-
+`WithConcurrentLimit(i int) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### fuzz.WithDelay
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`WithDelay(float64) mutate.httpPoolConfigOption`
-
+`WithDelay(b float64) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| b | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### fuzz.WithNamingContext
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`WithNamingContext(string) mutate.httpPoolConfigOption`
-
+`WithNamingContext(invokerName string) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| invokerName | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### fuzz.WithTimeOut
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`WithTimeOut(float64) mutate.httpPoolConfigOption`
-
+`WithTimeOut(f float64) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| f | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### fuzz.https
 
-`http.HTTPRequest` 的 extraParams 中的额外选项之一
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`https(bool) mutate.BuildFuzzHTTPRequestOption`
-
+`https(i bool) BuildFuzzHTTPRequestOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| isHttps | `bool` |   |
-
-
-
-
+| i | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `fuzzHTTPRequestOpt` |   |
-
-
- 
+| r1 | `BuildFuzzHTTPRequestOption` |   |
 
 

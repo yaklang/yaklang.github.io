@@ -1,931 +1,613 @@
 # re2
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [re2.Compile](#re2compile) |  |
- | [re2.CompilePOSIX](#re2compileposix) |  |
- | [re2.ExtractEmail](#re2extractemail) |  |
- | [re2.ExtractHostPort](#re2extracthostport) |  |
- | [re2.ExtractIP](#re2extractip) |  |
- | [re2.ExtractIPv4](#re2extractipv4) |  |
- | [re2.ExtractIPv6](#re2extractipv6) |  |
- | [re2.ExtractMac](#re2extractmac) |  |
- | [re2.ExtractPath](#re2extractpath) |  |
- | [re2.ExtractTTY](#re2extracttty) |  |
- | [re2.ExtractURL](#re2extracturl) |  |
- | [re2.Find](#re2find) |  |
- | [re2.FindAll](#re2findall) |  |
- | [re2.FindAllIndex](#re2findallindex) |  |
- | [re2.FindGroup](#re2findgroup) |  |
- | [re2.FindGroupAll](#re2findgroupall) |  |
- | [re2.FindIndex](#re2findindex) |  |
- | [re2.FindSubmatch](#re2findsubmatch) |  |
- | [re2.FindSubmatchAll](#re2findsubmatchall) |  |
- | [re2.FindSubmatchAllIndex](#re2findsubmatchallindex) |  |
- | [re2.FindSubmatchIndex](#re2findsubmatchindex) |  |
- | [re2.Grok](#re2grok) |  |
- | [re2.Match](#re2match) |  |
- | [re2.MustCompile](#re2mustcompile) |  |
- | [re2.MustCompilePOSIX](#re2mustcompileposix) |  |
- | [re2.QuoteMeta](#re2quotemeta) |  |
- | [re2.ReplaceAll](#re2replaceall) |  |
- | [re2.ReplaceAllWithFunc](#re2replaceallwithfunc) |  |
-
-
-
-
- 
-
+| [re2.Compile](#Compile) |Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.|
+| [re2.CompilePOSIX](#CompilePOSIX) |CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.|
+| [re2.ExtractEmail](#ExtractEmail) ||
+| [re2.ExtractHostPort](#ExtractHostPort) |HOSTPORT|
+| [re2.ExtractIP](#ExtractIP) ||
+| [re2.ExtractIPv4](#ExtractIPv4) ||
+| [re2.ExtractIPv6](#ExtractIPv6) ||
+| [re2.ExtractMac](#ExtractMac) ||
+| [re2.ExtractPath](#ExtractPath) |PATHPARAM|
+| [re2.ExtractTTY](#ExtractTTY) |TTY|
+| [re2.ExtractURL](#ExtractURL) |URL|
+| [re2.Find](#Find) ||
+| [re2.FindAll](#FindAll) ||
+| [re2.FindAllIndex](#FindAllIndex) ||
+| [re2.FindGroup](#FindGroup) ||
+| [re2.FindGroupAll](#FindGroupAll) ||
+| [re2.FindIndex](#FindIndex) ||
+| [re2.FindSubmatch](#FindSubmatch) ||
+| [re2.FindSubmatchAll](#FindSubmatchAll) ||
+| [re2.FindSubmatchAllIndex](#FindSubmatchAllIndex) ||
+| [re2.FindSubmatchIndex](#FindSubmatchIndex) ||
+| [re2.Grok](#Grok) ||
+| [re2.Match](#Match) ||
+| [re2.MustCompile](#MustCompile) |MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.|
+| [re2.MustCompilePOSIX](#MustCompilePOSIX) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.|
+| [re2.QuoteMeta](#QuoteMeta) |QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.|
+| [re2.ReplaceAll](#ReplaceAll) ||
+| [re2.ReplaceAllWithFunc](#ReplaceAllWithFunc) ||
 
 
 ## 函数定义
-
 ### re2.Compile
 
-
-
 #### 详细描述
+Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.
 
+#### 定义
 
-
-#### 定义：
-
-`Compile(string) (*regexp.Regexp, error)`
-
+`Compile(expr string) (*Regexp, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| expr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*regexp.Regexp` |   |
-| r1 | `error` |   |
+| r1 | `*Regexp` |   |
+| r2 | `error` |   |
 
 
- 
 ### re2.CompilePOSIX
 
-
-
 #### 详细描述
+CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
 
+#### 定义
 
-
-#### 定义：
-
-`CompilePOSIX(string) (*regexp.Regexp, error)`
-
+`CompilePOSIX(expr string) (*Regexp, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| expr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*regexp.Regexp` |   |
-| r1 | `error` |   |
+| r1 | `*Regexp` |   |
+| r2 | `error` |   |
 
 
- 
 ### re2.ExtractEmail
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractEmail(i any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractHostPort
 
-
-
 #### 详细描述
+HOSTPORT
 
+#### 定义
 
-
-#### 定义：
-
-`ExtractHostPort(i any) []string  doc:HOSTPORT`
-
+`ExtractHostPort(i any) []string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractIP
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractIP(i any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractIPv4
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractIPv4(i any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractIPv6
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractIPv6(i any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractMac
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractMac(i any) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractPath
 
-
-
 #### 详细描述
+PATHPARAM
 
+#### 定义
 
-
-#### 定义：
-
-`ExtractPath(i any) []string  doc:PATHPARAM`
-
+`ExtractPath(i any) []string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractTTY
 
-
-
 #### 详细描述
+TTY
 
+#### 定义
 
-
-#### 定义：
-
-`ExtractTTY(i any) []string  doc:TTY`
-
+`ExtractTTY(i any) []string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.ExtractURL
 
-
-
 #### 详细描述
+URL
 
+#### 定义
 
-
-#### 定义：
-
-`ExtractURL(i any) []string  doc:URL`
-
+`ExtractURL(i any) []string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.Find
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Find(origin any, re string) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### re2.FindAll
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindAll(origin any, re string) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.FindAllIndex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindAllIndex(origin any, re string) [][]int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[][]int` |   |
+| r1 | `[][]int` |   |
 
 
- 
 ### re2.FindGroup
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindGroup(i any, raw string) map[string]string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| i | `any` |   |
+| raw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `map[string]string` |   |
+| r1 | `map[string]string` |   |
 
 
- 
 ### re2.FindGroupAll
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindGroupAll(i any, raw string) []map[string]string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| i | `any` |   |
+| raw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]map[string]string` |   |
+| r1 | `[]map[string]string` |   |
 
 
- 
 ### re2.FindIndex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindIndex(origin any, re string) []int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]int` |   |
+| r1 | `[]int` |   |
 
 
- 
 ### re2.FindSubmatch
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindSubmatch(origin any, re string) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### re2.FindSubmatchAll
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindSubmatchAll(origin any, re string) [][]string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[][]string` |   |
+| r1 | `[][]string` |   |
 
 
- 
 ### re2.FindSubmatchAllIndex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindSubmatchAllIndex(origin any, re string) [][]int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[][]int` |   |
+| r1 | `[][]int` |   |
 
 
- 
 ### re2.FindSubmatchIndex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FindSubmatchIndex(origin any, re string) []int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]int` |   |
+| r1 | `[]int` |   |
 
 
- 
 ### re2.Grok
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Grok(string, string) yaklib.GrokResult`
-
+`Grok(line string, rule string) GrokResult`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| line | `string` |   |
+| rule | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yaklib.GrokResult` |   |
+| r1 | `GrokResult` |   |
 
 
- 
 ### re2.Match
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Match(string, any) bool`
-
+`Match(pattern string, i any) bool`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
-
-
-
-
+| pattern | `string` |   |
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
+| r1 | `bool` |   |
 
 
- 
 ### re2.MustCompile
 
-
-
 #### 详细描述
+MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
 
+#### 定义
 
-
-#### 定义：
-
-`MustCompile(string) *regexp.Regexp`
-
+`MustCompile(str string) *Regexp`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| str | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*regexp.Regexp` |   |
+| r1 | `*Regexp` |   |
 
 
- 
 ### re2.MustCompilePOSIX
 
-
-
 #### 详细描述
+MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
 
+#### 定义
 
-
-#### 定义：
-
-`MustCompilePOSIX(string) *regexp.Regexp`
-
+`MustCompilePOSIX(str string) *Regexp`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| str | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*regexp.Regexp` |   |
+| r1 | `*Regexp` |   |
 
 
- 
 ### re2.QuoteMeta
 
-
-
 #### 详细描述
+QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.
 
+#### 定义
 
-
-#### 定义：
-
-`QuoteMeta(s string) string  doc:QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.`
-
+`QuoteMeta(s string) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| s | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### re2.ReplaceAll
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ReplaceAll(origin any, re string, newStr any) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-| v3 | `any` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
+| newStr | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### re2.ReplaceAllWithFunc
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ReplaceAllWithFunc(origin any, re string, newStr func(string) string) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-| v3 | `func (v1: string) return(string) ` |   |
-
-
-
-
+| origin | `any` |   |
+| re | `string` |   |
+| newStr | `func(string) string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-
-
- 
+| r1 | `string` |   |
 
 

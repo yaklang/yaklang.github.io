@@ -1,269 +1,167 @@
 # jwt
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [jwt.AllAlgs](#jwtallalgs) | 返回所有当前支持的 JWT 签名算法 |
- | [jwt.JWSGenerate](#jwtjwsgenerate) | 生成一个 JWS 的 Token |
- | [jwt.JWSGenerateEx](#jwtjwsgenerateex) |  |
- | [jwt.JWTGenerate](#jwtjwtgenerate) | 生成 JWT Token |
- | [jwt.JWTGenerateEx](#jwtjwtgenerateex) |  |
- | [jwt.Parse](#jwtparse) | 解析 JWT 的 Token，使用默认弱口令，如果需要自定义 secretKey，可以在 v2 不定长参数中设置 |
- | [jwt.RemoveAlg](#jwtremovealg) | 把一个 JWT 的 Token 移除加密算法部分 |
-
-
-
-
-## 变量定义
-
-|变量调用名|变量类型|变量解释/帮助信息|
-|:-----------|:---------- |:-----------|
-|`jwt.ALG_ES256`|`string`| //|
-|`jwt.ALG_ES384`|`string`| //|
-|`jwt.ALG_ES512`|`string`| //|
-|`jwt.ALG_HS256`|`string`| //|
-|`jwt.ALG_HS384`|`string`| //|
-|`jwt.ALG_HS512`|`string`| //|
-|`jwt.ALG_NONE`|`string`| //|
-|`jwt.ALG_PS256`|`string`| //|
-|`jwt.ALG_PS384`|`string`| //|
-|`jwt.ALG_PS512`|`string`| //|
-|`jwt.ALG_RS256`|`string`| //|
-|`jwt.ALG_RS384`|`string`| //|
-|`jwt.ALG_RS512`|`string`| //|
-
-
-
+| [jwt.AllAlgs](#AllAlgs) ||
+| [jwt.JWSGenerate](#JWSGenerate) ||
+| [jwt.JWSGenerateEx](#JWSGenerateEx) ||
+| [jwt.JWTGenerate](#JWTGenerate) ||
+| [jwt.JWTGenerateEx](#JWTGenerateEx) ||
+| [jwt.Parse](#Parse) ||
+| [jwt.RemoveAlg](#RemoveAlg) ||
 
 
 ## 函数定义
-
 ### jwt.AllAlgs
-
-返回所有当前支持的 JWT 签名算法
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `AllAlgs() []string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### jwt.JWSGenerate
 
-生成一个 JWS 的 Token
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`JWSGenerate(string, any, []uint8) (string, error)`
-
+`JWSGenerate(alg string, i any, key []byte) (string, error)`
 
 #### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| algName | `string` |   |
-| params | `any` |   |
-| secretKey | `bytes` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
-
-
- 
-### jwt.JWSGenerateEx
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func jwt.JWSGenerateEx(v1: string, v2: any, v3: any, v4: bytes) return (r0: string, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
-| v3 | `any` |   |
-| v4 | `bytes` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
-
-
- 
-### jwt.JWTGenerate
-
-生成 JWT Token
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`JWTGenerate(string, any, []uint8) (string, error)`
-
-
-#### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| params | `any` |   |
-| secretKey | `bytes` |   |
-
-
-
-
+| i | `any` |   |
+| key | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| token | `string` |   |
-| err | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
-### jwt.JWTGenerateEx
-
-
+### jwt.JWSGenerateEx
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func jwt.JWTGenerateEx(v1: string, v2: any, v3: any, v4: bytes) return (r0: string, r1: error)`
-
+`JWSGenerateEx(alg string, extraHeader any, i any, key []byte) (string, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `any` |   |
-| v3 | `any` |   |
-| v4 | `bytes` |   |
-
-
-
-
+| alg | `string` |   |
+| extraHeader | `any` |   |
+| i | `any` |   |
+| key | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
-### jwt.Parse
-
-解析 JWT 的 Token，使用默认弱口令，如果需要自定义 secretKey，可以在 v2 不定长参数中设置
+### jwt.JWTGenerate
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
+`JWTGenerate(alg string, i any, key []byte) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| alg | `string` |   |
+| i | `any` |   |
+| key | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### jwt.JWTGenerateEx
+
+#### 详细描述
+
+
+#### 定义
+
+`JWTGenerateEx(alg string, extraHeader any, i any, key []byte) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| alg | `string` |   |
+| extraHeader | `any` |   |
+| i | `any` |   |
+| key | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### jwt.Parse
+
+#### 详细描述
+
+
+#### 定义
 
 `Parse(tokenStr string, keys ...string) (*jwt.Token, []byte, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| token | `string` |   |
-| secretKeys | `...string` |   |
-
-
-
-
+| tokenStr | `string` |   |
+| keys | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| params | `*jwt.Token` |   |
-| secretKey | `bytes` |   |
-| err | `error` |   |
+| r1 | `*jwt.Token` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
 
 
- 
 ### jwt.RemoveAlg
-
-把一个 JWT 的 Token 移除加密算法部分
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RemoveAlg(token string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | token | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| newToken | `string` |   |
-| err | `error` |   |
-
-
- 
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 

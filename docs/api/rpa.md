@@ -1,665 +1,435 @@
 # rpa
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [rpa.Bruteforce](#rpabruteforce) |  |
- | [rpa.Start](#rpastart) |  |
- | [rpa.blackDomain](#rpablackdomain) |  |
- | [rpa.bruteButtonElement](#rpabrutebuttonelement) |  |
- | [rpa.bruteCaptchaElement](#rpabrutecaptchaelement) |  |
- | [rpa.brutePassElement](#rpabrutepasselement) |  |
- | [rpa.brutePassword](#rpabrutepassword) |  |
- | [rpa.bruteUserElement](#rpabruteuserelement) |  |
- | [rpa.bruteUserPassPath](#rpabruteuserpasspath) |  |
- | [rpa.bruteUsername](#rpabruteusername) |  |
- | [rpa.click](#rpaclick) |  |
- | [rpa.depth](#rpadepth) |  |
- | [rpa.headers](#rpaheaders) |  |
- | [rpa.input](#rpainput) |  |
- | [rpa.maxUrl](#rpamaxurl) |  |
- | [rpa.proxy](#rpaproxy) |  |
- | [rpa.select](#rpaselect) |  |
- | [rpa.strictUrl](#rpastricturl) |  |
- | [rpa.timeout](#rpatimeout) |  |
- | [rpa.whiteDomain](#rpawhitedomain) |  |
-
-
-
-
- 
-
+| [rpa.Bruteforce](#Bruteforce) ||
+| [rpa.Start](#Start) ||
+| [rpa.blackDomain](#blackDomain) ||
+| [rpa.bruteButtonElement](#bruteButtonElement) ||
+| [rpa.bruteCaptchaElement](#bruteCaptchaElement) ||
+| [rpa.brutePassElement](#brutePassElement) ||
+| [rpa.brutePassword](#brutePassword) ||
+| [rpa.bruteUserElement](#bruteUserElement) ||
+| [rpa.bruteUserPassPath](#bruteUserPassPath) ||
+| [rpa.bruteUsername](#bruteUsername) ||
+| [rpa.click](#click) ||
+| [rpa.depth](#depth) ||
+| [rpa.headers](#headers) ||
+| [rpa.input](#input) ||
+| [rpa.maxUrl](#maxUrl) ||
+| [rpa.proxy](#proxy) ||
+| [rpa.select](#select) ||
+| [rpa.strictUrl](#strictUrl) ||
+| [rpa.timeout](#timeout) ||
+| [rpa.whiteDomain](#whiteDomain) ||
 
 
 ## 函数定义
-
 ### rpa.Bruteforce
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Bruteforce(url string, opts ...ConfigOpt) (string, string)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...bruteforce.ConfigOpt` |   |
-
-
-
-
+| url | `string` |   |
+| opts | `...ConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
 | r1 | `string` |   |
+| r2 | `string` |   |
 
 
- 
 ### rpa.Start
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Start(url string, opt ...core.ConfigOpt) (chan core.RequestIf, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...core.ConfigOpt` |   |
-
-
-
-
+| url | `string` |   |
+| opt | `...core.ConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan core.RequestIf` |   |
-| r1 | `error` |   |
+| r1 | `chan core.RequestIf` |   |
+| r2 | `error` |   |
 
 
- 
 ### rpa.blackDomain
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`blackDomain(string) core.ConfigOpt`
-
+`blackDomain(matchStr string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| matchStr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.bruteButtonElement
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteButtonElement(string) bruteforce.ConfigOpt`
-
+`bruteButtonElement(element string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| element | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.bruteCaptchaElement
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteCaptchaElement(string, string) bruteforce.ConfigOpt`
-
+`bruteCaptchaElement(element string, pic string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| element | `string` |   |
+| pic | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.brutePassElement
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`brutePassElement(string) bruteforce.ConfigOpt`
-
+`brutePassElement(element string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| element | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.brutePassword
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`brutePassword(...string) bruteforce.ConfigOpt`
-
+`brutePassword(password ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| password | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.bruteUserElement
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteUserElement(string) bruteforce.ConfigOpt`
-
+`bruteUserElement(element string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| element | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.bruteUserPassPath
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteUserPassPath(...string) bruteforce.ConfigOpt`
-
+`bruteUserPassPath(filepath ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| filepath | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.bruteUsername
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteUsername(...string) bruteforce.ConfigOpt`
-
+`bruteUsername(username ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| username | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.click
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`click(string) bruteforce.ConfigOpt`
-
+`click(selector string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| selector | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.depth
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`depth(int) core.ConfigOpt`
-
+`depth(depth int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| depth | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.headers
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`headers(string) core.ConfigOpt`
-
+`headers(s string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| s | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.input
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`input(string, string) bruteforce.ConfigOpt`
-
+`input(selector string, inputStr string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| selector | `string` |   |
+| inputStr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.maxUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxUrl(int) core.ConfigOpt`
-
+`maxUrl(count int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| count | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.proxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`proxy(string, ...string) core.ConfigOpt`
-
+`proxy(url string, userinfo ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...string` |   |
-
-
-
-
+| url | `string` |   |
+| userinfo | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.select
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`select(string, string) bruteforce.ConfigOpt`
-
+`select(selector string, item string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| selector | `string` |   |
+| item | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *bruteforce.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.strictUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`strictUrl(bool) core.ConfigOpt`
-
+`strictUrl(status bool) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| status | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.timeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`timeout(int) core.ConfigOpt`
-
+`timeout(timeout int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| timeout | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### rpa.whiteDomain
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`whiteDomain(string) core.ConfigOpt`
-
+`whiteDomain(matchStr string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| matchStr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *core.Config) ` |   |
-
-
- 
+| r1 | `ConfigOpt` |   |
 
 

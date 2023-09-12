@@ -1,894 +1,578 @@
 # cli
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [cli.Args](#cliargs) | 获取全部的命令行参数，返回结果等同于 `os.Args`&#34; |
- | [cli.Bool](#clibool) | 判断命令行参数是否存在 v1 参数对应的选项？如果 v1 是 `option`，则会检测 `--option` 或者 `-option` 是否存在。要注意，不同于 `cli.String` 等接口，`cli.Bool` 不会判断参数的值，只会检测参数标记是不是存在。 |
- | [cli.Double](#clidouble) | 把函数解析成 `float64` 等价于 `cli.Float64` |
- | [cli.File](#clifile) | 把输入的参数当成文件名来解析 |
- | [cli.FileOrContent](#clifileorcontent) | 把 v1 作为文件名来解析，如果解析失败，则把输入的内容直接变成内容返回 |
- | [cli.Float](#clifloat) | 同 `cli.Double`，把参数内容解析成 float64 |
- | [cli.Have](#clihave) | 同 `cli.Bool`，检测参数是否存在在命令行中 |
- | [cli.Host](#clihost) | 把 v1 对应的命令行参数解析成扫描目标，支持 `192.168.1.1/24,8.8.8.8,baidu.com` 等 IP，IP 段，域名等多种格式 |
- | [cli.Hosts](#clihosts) | 同 `cli.Host` |
- | [cli.Int](#cliint) | 把命令行参数值解析成整数 |
- | [cli.Integer](#cliinteger) | 同 `cli.Int` |
- | [cli.LineDict](#clilinedict) | 把一个字典按行解析 |
- | [cli.Net](#clinet) | 同 `cli.Host` |
- | [cli.Network](#clinetwork) | 同 `cli.Host` |
- | [cli.Port](#cliport) | 把 ports 对应的命令行参数值解析成端口组，或者整数范围 |
- | [cli.Ports](#cliports) | 同 `cli.Port` |
- | [cli.SetCliName](#clisetcliname) |  |
- | [cli.SetDoc](#clisetdoc) |  |
- | [cli.String](#clistring) | 最基础的命令行获取接口，把参数的值解析成字符串 |
- | [cli.StringSlice](#clistringslice) |  |
- | [cli.Url](#cliurl) | 把参数对应的值解析成 url，如果无法精确对应一个 url，将会自动补充 `https://`, `http://`, `www` 等，如果本身参数就是个 url，则会保留原样 |
- | [cli.Urls](#cliurls) |  |
- | [cli.YakitPlugin](#cliyakitplugin) |  |
- | [cli.check](#clicheck) | 检查当前设置的所有参数，如果有不合理的参数（无法确定值），则停止执行，打印出帮助信息 |
- | [cli.help](#clihelp) |  |
- | [cli.setDefault](#clisetdefault) | 为命令行设置默认值，默认值会被强行类型断言为目标类型，不要传错类型就可以！ |
- | [cli.setHelp](#clisethelp) | 使用方法同 `cli.setDefault` 使用，如果某个参数的值为空的话，并且没有默认值，将会展示缺少的参数。 |
- | [cli.setRequired](#clisetrequired) | 设置参数是必须的，如果设置了，参数在没有设置默认值的情况下，并且找不到用户输入，会影响 cli.check 的判断结果 |
-
-
-
-
- 
-
+| [cli.Args](#Args) ||
+| [cli.Bool](#Bool) ||
+| [cli.Double](#Double) ||
+| [cli.File](#File) ||
+| [cli.FileOrContent](#FileOrContent) ||
+| [cli.Float](#Float) ||
+| [cli.Have](#Have) ||
+| [cli.Host](#Host) ||
+| [cli.Hosts](#Hosts) ||
+| [cli.Int](#Int) ||
+| [cli.Integer](#Integer) ||
+| [cli.LineDict](#LineDict) ||
+| [cli.Net](#Net) ||
+| [cli.Network](#Network) ||
+| [cli.Port](#Port) ||
+| [cli.Ports](#Ports) ||
+| [cli.SetCliName](#SetCliName) ||
+| [cli.SetDoc](#SetDoc) ||
+| [cli.String](#String) ||
+| [cli.StringSlice](#StringSlice) ||
+| [cli.Url](#Url) ||
+| [cli.Urls](#Urls) ||
+| [cli.YakitPlugin](#YakitPlugin) ||
+| [cli.check](#check) ||
+| [cli.help](#help) ||
+| [cli.setDefault](#setDefault) ||
+| [cli.setHelp](#setHelp) ||
+| [cli.setRequired](#setRequired) ||
 
 
 ## 函数定义
-
 ### cli.Args
-
-获取全部的命令行参数，返回结果等同于 `os.Args`&#34;
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Args() []string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| args | `[]string` |  全部命令行参数 |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Bool
-
-判断命令行参数是否存在 v1 参数对应的选项？如果 v1 是 `option`，则会检测 `--option` 或者 `-option` 是否存在。要注意，不同于 `cli.String` 等接口，`cli.Bool` 不会判断参数的值，只会检测参数标记是不是存在。
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Bool(name string, opts ...setCliExtraParam) bool`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| paramName | `string` |  参数名：会在会自动检测输入值的参数名，自动带上 `-` 或者 `--` 前缀来检测 |
-| extraParams | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |  这个参数是否存在在命令行中 |
+| r1 | `bool` |   |
 
 
- 
 ### cli.Double
-
-把函数解析成 `float64` 等价于 `cli.Float64`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Double(name string, opts ...setCliExtraParam) float64`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  参数名，自动带上 `--` 或者 `-` 来检测 |
-| extraParams | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `float64` |  解析成的浮点型值 |
+| r1 | `float64` |   |
 
 
- 
 ### cli.File
-
-把输入的参数当成文件名来解析
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `File(name string, opts ...setCliExtraParam) []byte`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  文件名 |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |  文件内容 |
+| r1 | `[]byte` |   |
 
 
- 
 ### cli.FileOrContent
-
-把 v1 作为文件名来解析，如果解析失败，则把输入的内容直接变成内容返回
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FileOrContent(name string, opts ...setCliExtraParam) []byte`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  文件名或文件内容 |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultRaw | `bytes` |   |
+| r1 | `[]byte` |   |
 
 
- 
 ### cli.Float
-
-同 `cli.Double`，把参数内容解析成 float64
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Float(name string, opts ...setCliExtraParam) float64`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  参数名 |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `float64` |  参数内容解析的 float64 值 |
+| r1 | `float64` |   |
 
 
- 
 ### cli.Have
-
-同 `cli.Bool`，检测参数是否存在在命令行中
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Have(name string, opts ...setCliExtraParam) bool`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bool` |   |
+| r1 | `bool` |   |
 
 
- 
 ### cli.Host
-
-把 v1 对应的命令行参数解析成扫描目标，支持 `192.168.1.1/24,8.8.8.8,baidu.com` 等 IP，IP 段，域名等多种格式
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Host(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  解析成的扫描目标的值，会自动把网段拆开 |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Hosts
-
-同 `cli.Host`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Hosts(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Host` |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  同 `cli.Host` |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Int
-
-把命令行参数值解析成整数
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Int(name string, opts ...setCliExtraParam) int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名称 |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `int` |  解析成的参数值，整数 |
+| r1 | `int` |   |
 
 
- 
 ### cli.Integer
-
-同 `cli.Int`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Integer(name string, opts ...setCliExtraParam) int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Int` |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `int` |  同 `cli.Int` |
+| r1 | `int` |   |
 
 
- 
 ### cli.LineDict
-
-把一个字典按行解析
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `LineDict(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  参数名，字典的文件名 |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  解析结果，按行解析成 `[]string` |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Net
-
-同 `cli.Host`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Net(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Host` |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  同 `cli.Host` |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Network
-
-同 `cli.Host`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Network(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Host` |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |  同 `cli.Host` |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Port
-
-把 ports 对应的命令行参数值解析成端口组，或者整数范围
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Port(name string, opts ...setCliExtraParam) []int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ports | `string` |   |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]int` |  解析成的端口组 |
+| r1 | `[]int` |   |
 
 
- 
 ### cli.Ports
-
-同 `cli.Port`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Ports(name string, opts ...setCliExtraParam) []int`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |  同 `cli.Port` |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]int` |  同 `cli.Port` |
+| r1 | `[]int` |   |
 
 
- 
 ### cli.SetCliName
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `SetCliName(name string)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| name | `string` |   |
 
 
-
-
- 
-
- 
 ### cli.SetDoc
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `SetDoc(document string)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| document | `string` |   |
 
 
-
-
- 
-
- 
 ### cli.String
-
-最基础的命令行获取接口，把参数的值解析成字符串
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `String(name string, opts ...setCliExtraParam) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |  参数的值 `string` |
+| r1 | `string` |   |
 
 
- 
 ### cli.StringSlice
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `StringSlice(name string) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| name | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Url
-
-把参数对应的值解析成 url，如果无法精确对应一个 url，将会自动补充 `https://`, `http://`, `www` 等，如果本身参数就是个 url，则会保留原样
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Url(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| param | `string` |  需要解析的参数名，支持针对域名，ip:port, ip, url 各种格式的解析，yak 会尽力全的补充 url |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.Urls
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Urls(name string, opts ...setCliExtraParam) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...cli.setHelp|cli.setDefault` |   |
-
-
-
-
+| name | `string` |   |
+| opts | `...setCliExtraParam` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.YakitPlugin
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `YakitPlugin() []string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### cli.check
-
-检查当前设置的所有参数，如果有不合理的参数（无法确定值），则停止执行，打印出帮助信息
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `check()`
 
- 
 
- 
-
- 
 ### cli.help
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `help(w ...io.Writer)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...io.Writer` |   |
+| w | `...io.Writer` |   |
 
 
-
-
- 
-
- 
 ### cli.setDefault
 
-为命令行设置默认值，默认值会被强行类型断言为目标类型，不要传错类型就可以！
-
 #### 详细描述
 
-使用案例如下：
 
-```go
-cli.String(&#34;url&#34;, cli.setDefault(&#34;https://example.com&#34;))
-```
+#### 定义
 
-执行上述代码的时候，如果没有 `--url` 或者 `-url` 参数的话，将会使用默认的 `https://example.com` 作为函数的返回值。
-
-:::caution
-注意，如果传入的默认值类型和应该返回的类型不匹配，将会报错！错误提示约为类型断言错误，通过 `defaultValue.(type)` 来实现的。
-:::
-
-
-#### 定义：
-
-`setDefault(any) yaklib.setCliExtraParam`
-
+`setDefault(i any) setCliExtraParam`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| default | `any` |  命令行默认值 |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `cli.setDefault` |   |
+| r1 | `setCliExtraParam` |   |
 
 
- 
 ### cli.setHelp
 
-使用方法同 `cli.setDefault` 使用，如果某个参数的值为空的话，并且没有默认值，将会展示缺少的参数。
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`setHelp(string) yaklib.setCliExtraParam`
-
+`setHelp(i string) setCliExtraParam`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| helpText | `str` |  想要默认展示的帮助信息 |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `cli.setHelp` |   |
+| r1 | `setCliExtraParam` |   |
 
 
- 
 ### cli.setRequired
 
-设置参数是必须的，如果设置了，参数在没有设置默认值的情况下，并且找不到用户输入，会影响 cli.check 的判断结果
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`setRequired(bool) yaklib.setCliExtraParam`
-
+`setRequired(t bool) setCliExtraParam`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| required | `bool` |   |
-
-
-
-
+| t | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func setCliExtraParam(v1: *yaklib.cliExtraParams) ` |   |
-
-
- 
+| r1 | `setCliExtraParam` |   |
 
 

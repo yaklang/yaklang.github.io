@@ -1,241 +1,156 @@
 # sync
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [sync.NewCond](#syncnewcond) |  |
- | [sync.NewLock](#syncnewlock) |  |
- | [sync.NewMap](#syncnewmap) |  |
- | [sync.NewMutex](#syncnewmutex) |  |
- | [sync.NewOnce](#syncnewonce) |  |
- | [sync.NewPool](#syncnewpool) |  |
- | [sync.NewRWMutex](#syncnewrwmutex) |  |
- | [sync.NewSizedWaitGroup](#syncnewsizedwaitgroup) |  |
- | [sync.NewWaitGroup](#syncnewwaitgroup) |  |
-
-
-
-
- 
-
+| [sync.NewCond](#NewCond) ||
+| [sync.NewLock](#NewLock) ||
+| [sync.NewMap](#NewMap) ||
+| [sync.NewMutex](#NewMutex) ||
+| [sync.NewOnce](#NewOnce) ||
+| [sync.NewPool](#NewPool) ||
+| [sync.NewRWMutex](#NewRWMutex) ||
+| [sync.NewSizedWaitGroup](#NewSizedWaitGroup) ||
+| [sync.NewWaitGroup](#NewWaitGroup) ||
 
 
 ## 函数定义
-
 ### sync.NewCond
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewCond() *sync.Cond`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Cond` |   |
+| r1 | `*sync.Cond` |   |
 
 
- 
 ### sync.NewLock
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewLock() *sync.Mutex`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Mutex` |   |
+| r1 | `*sync.Mutex` |   |
 
 
- 
 ### sync.NewMap
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewMap() *sync.Map`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Map` |   |
+| r1 | `*sync.Map` |   |
 
 
- 
 ### sync.NewMutex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewMutex() *sync.Mutex`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Mutex` |   |
+| r1 | `*sync.Mutex` |   |
 
 
- 
 ### sync.NewOnce
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewOnce() *sync.Once`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Once` |   |
+| r1 | `*sync.Once` |   |
 
 
- 
 ### sync.NewPool
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewPool() *sync.Pool`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.Pool` |   |
+| r1 | `*sync.Pool` |   |
 
 
- 
 ### sync.NewRWMutex
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewRWMutex() *sync.RWMutex`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*sync.RWMutex` |   |
+| r1 | `*sync.RWMutex` |   |
 
 
- 
 ### sync.NewSizedWaitGroup
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewSizedWaitGroup(int) *utils.SizedWaitGroup`
-
+`NewSizedWaitGroup(size int) *utils.SizedWaitGroup`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| size | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*utils.SizedWaitGroup` |   |
+| r1 | `*utils.SizedWaitGroup` |   |
 
 
- 
 ### sync.NewWaitGroup
-
-
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewWaitGroup() *sync.WaitGroup`
-
- 
-
+`NewWaitGroup() *WaitGroupProxy`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yaklib.WaitGroupProxy` |   |
-
-
- 
+| r1 | `*WaitGroupProxy` |   |
 
 

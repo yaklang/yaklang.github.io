@@ -1,278 +1,180 @@
 # udp
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [udp.Connect](#udpconnect) | 创建一个 UDP 连接 |
- | [udp.MockUDPProtocol](#udpmockudpprotocol) |  |
- | [udp.Serve](#udpserve) | 启动一个 UDP 服务器 |
- | [udp.clientLocalAddr](#udpclientlocaladdr) | 【可选】设置客户端的本地监听地址 |
- | [udp.clientTimeout](#udpclienttimeout) | 【可选】设置默认的客户端超时时间 |
- | [udp.serverCallback](#udpservercallback) | 【重要参数】设置服务器的处理函数 |
- | [udp.serverContext](#udpservercontext) | 【可选】设置服务器上下文 |
- | [udp.serverTimeout](#udpservertimeout) | 【可选】设置服务器默认超时时间 |
-
-
-
-
- 
-
+| [udp.Connect](#Connect) ||
+| [udp.MockUDPProtocol](#MockUDPProtocol) ||
+| [udp.Serve](#Serve) ||
+| [udp.clientLocalAddr](#clientLocalAddr) ||
+| [udp.clientTimeout](#clientTimeout) ||
+| [udp.serverCallback](#serverCallback) ||
+| [udp.serverContext](#serverContext) ||
+| [udp.serverTimeout](#serverTimeout) ||
 
 
 ## 函数定义
-
 ### udp.Connect
 
-创建一个 UDP 连接
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Connect(string, ...yaklib.udpClientOption) (*yaklib.udpConn, error)`
-
+`Connect(target string, opts ...udpClientOption) (*udpConn, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| target | `string` |  连接目标：IP:Port 的格式即可 |
-| extraParams | `...yaklib.udpClientOption` |   |
-
-
-
-
+| target | `string` |   |
+| opts | `...udpClientOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| conn | `*yaklib.udpConn` |   |
-| r1 | `error` |   |
+| r1 | `*udpConn` |   |
+| r2 | `error` |   |
 
 
- 
 ### udp.MockUDPProtocol
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func udp.MockUDPProtocol(v1: string) return (r0: string, r1: int)`
-
+`MockUDPProtocol(name string) (string, int)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| name | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `int` |   |
+| r1 | `string` |   |
+| r2 | `int` |   |
 
 
- 
 ### udp.Serve
-
-启动一个 UDP 服务器
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Serve(host string, port any, opts ...udpServerOpt) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| host | `string` |  IP地址 |
+| host | `string` |   |
 | port | `any` |   |
-| params | `...yaklib.udpServerOpt` |   |
-
-
-
-
+| opts | `...udpServerOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### udp.clientLocalAddr
 
-【可选】设置客户端的本地监听地址
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`clientLocalAddr(string) yaklib.udpClientOption`
-
+`clientLocalAddr(target string) udpClientOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| localaddr | `string` |  IP:Port, 例如 127.0.0.0:53 |
-
-
-
-
+| target | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func udpClientOption(v1: *yaklib.udpClientConfig) ` |   |
+| r1 | `udpClientOption` |   |
 
 
- 
 ### udp.clientTimeout
 
-【可选】设置默认的客户端超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`clientTimeout(float64) yaklib.udpClientOption`
-
+`clientTimeout(target float64) udpClientOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| target | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func udpClientOption(v1: *yaklib.udpClientConfig) ` |   |
+| r1 | `udpClientOption` |   |
 
 
- 
 ### udp.serverCallback
 
-【重要参数】设置服务器的处理函数
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`serverCallback(func(*yaklib.udpConn, []uint8, net.Addr)) yaklib.udpServerOpt`
-
+`serverCallback(cb func(*udpConn, []byte, net.Addr)) udpServerOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *yaklib.udpConn, v2: bytes, v3: net.Addr) ` |   |
-
-
-
-
+| cb | `func(*udpConn, []byte, net.Addr)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func udpServerOpt(v1: *yaklib.udpServerConfig) ` |   |
+| r1 | `udpServerOpt` |   |
 
 
- 
 ### udp.serverContext
 
-【可选】设置服务器上下文
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`serverContext(context.Context) yaklib.udpServerOpt`
-
+`serverContext(ctx context.Context) udpServerOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-
-
-
-
+| ctx | `context.Context` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func udpServerOpt(v1: *yaklib.udpServerConfig) ` |   |
+| r1 | `udpServerOpt` |   |
 
 
- 
 ### udp.serverTimeout
 
-【可选】设置服务器默认超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`serverTimeout(float64) yaklib.udpServerOpt`
-
+`serverTimeout(f float64) udpServerOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| f | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func udpServerOpt(v1: *yaklib.udpServerConfig) ` |   |
-
-
- 
+| r1 | `udpServerOpt` |   |
 
 

@@ -1,83 +1,51 @@
 # zip
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [zip.Compress](#zipcompress) |  |
- | [zip.Decompress](#zipdecompress) |  |
-
-
-
-
- 
-
+| [zip.Compress](#Compress) ||
+| [zip.Decompress](#Decompress) |解压|
 
 
 ## 函数定义
-
 ### zip.Compress
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Compress(string, ...string) error`
-
+`Compress(zipName string, filenames ...string) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...string` |   |
-
-
-
-
+| zipName | `string` |   |
+| filenames | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### zip.Decompress
 
-
-
 #### 详细描述
+解压
 
+#### 定义
 
-
-#### 定义：
-
-`Decompress(zipFile, dest string) error  doc:解压`
-
+`Decompress(zipFile string, dest string) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| zipFile | `string` |   |
+| dest | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
-
- 
+| r1 | `error` |   |
 
 

@@ -1,259 +1,167 @@
 # openai
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [openai.Chat](#openaichat) |  |
- | [openai.TranslateToChinese](#openaitranslatetochinese) |  |
- | [openai.apiKey](#openaiapikey) |  |
- | [openai.domain](#openaidomain) |  |
- | [openai.localAPIKey](#openailocalapikey) |  |
- | [openai.model](#openaimodel) |  |
- | [openai.proxy](#openaiproxy) |  |
- | [openai.yakDomain](#openaiyakdomain) |  |
-
-
-
-
- 
-
+| [openai.Chat](#Chat) ||
+| [openai.TranslateToChinese](#TranslateToChinese) ||
+| [openai.apiKey](#apiKey) ||
+| [openai.domain](#domain) ||
+| [openai.localAPIKey](#localAPIKey) ||
+| [openai.model](#model) ||
+| [openai.proxy](#proxy) ||
+| [openai.yakDomain](#yakDomain) ||
 
 
 ## 函数定义
-
 ### openai.Chat
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.Chat(v1: string, v2 ...openai.ConfigOption) return (r0: string)`
-
+`Chat(data string, opts ...ConfigOption) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...openai.ConfigOption` |   |
-
-
-
-
+| data | `string` |   |
+| opts | `...ConfigOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### openai.TranslateToChinese
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.TranslateToChinese(v1: string, v2 ...openai.ConfigOption) return (r0: string)`
-
+`TranslateToChinese(data string, opts ...ConfigOption) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...openai.ConfigOption` |   |
-
-
-
-
+| data | `string` |   |
+| opts | `...ConfigOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### openai.apiKey
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.apiKey(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
-
+`apiKey(i string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### openai.domain
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.domain(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
-
+`domain(i string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### openai.localAPIKey
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.localAPIKey() return (r0: func ConfigOption(v1: *openai.Client) )`
-
- 
-
+`localAPIKey() ConfigOption`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### openai.model
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.model(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
-
+`model(i string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### openai.proxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.proxy(v1: string) return (r0: func ConfigOption(v1: *openai.Client) )`
-
+`proxy(i string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### openai.yakDomain
-
-
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func openai.yakDomain() return (r0: func ConfigOption(v1: *openai.Client) )`
-
- 
-
+`yakDomain() ConfigOption`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *openai.Client) ` |   |
-
-
- 
+| r1 | `ConfigOption` |   |
 
 

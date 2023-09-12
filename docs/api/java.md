@@ -1,1014 +1,669 @@
 # java
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [java.FromJson](#javafromjson) | 把 JSON 转变为 Java 对象 |
- | [java.MarshalJavaObjects](#javamarshaljavaobjects) | 序列化 Java 对象 |
- | [java.NewJavaArray](#javanewjavaarray) | 创建一个 JAVA TC_ARRAY |
- | [java.NewJavaBlockDataBytes](#javanewjavablockdatabytes) | 创建一个 Java TC_BLOCKDATA (bytes) |
- | [java.NewJavaClass](#javanewjavaclass) | 创建一个 JavaClass TC_CLASS |
- | [java.NewJavaClassData](#javanewjavaclassdata) | 创建一个 CLASSDATA 块 |
- | [java.NewJavaClassDesc](#javanewjavaclassdesc) | 创建一个 TC_CLASSDESC |
- | [java.NewJavaClassDetails](#javanewjavaclassdetails) | 创建一个 X_CLASSDETAILS |
- | [java.NewJavaClassField](#javanewjavaclassfield) | 创建一个类参数结构 X_CLASSFIELD |
- | [java.NewJavaClassFields](#javanewjavaclassfields) | 创建参数组 X_CLASSFIELDS |
- | [java.NewJavaEndBlockData](#javanewjavaendblockdata) | 创建一个块数据结束符（TC_ENDBLOCKDATA） |
- | [java.NewJavaEnum](#javanewjavaenum) | 创建一个 TC_ENUM |
- | [java.NewJavaFieldArrayValue](#javanewjavafieldarrayvalue) | 创建一个 X_FIELDVALUE |
- | [java.NewJavaFieldBoolValue](#javanewjavafieldboolvalue) | 创建一个布尔值作为 Java 字段值 |
- | [java.NewJavaFieldByteValue](#javanewjavafieldbytevalue) | 创建一个 Byte 的字段值 |
- | [java.NewJavaFieldCharValue](#javanewjavafieldcharvalue) | 创建一个 Char 作为字段值 |
- | [java.NewJavaFieldDoubleValue](#javanewjavafielddoublevalue) | 创建一个 float64 作为字段值 |
- | [java.NewJavaFieldFloatValue](#javanewjavafieldfloatvalue) | 创建一个 float32 作为字段值 |
- | [java.NewJavaFieldIntValue](#javanewjavafieldintvalue) | 创建一个整数作为字段值 |
- | [java.NewJavaFieldLongValue](#javanewjavafieldlongvalue) | 创建一个 Long 作为字段值(uint64) |
- | [java.NewJavaFieldObjectValue](#javanewjavafieldobjectvalue) | 创建一个 TC_OBJECT 作为字段值 |
- | [java.NewJavaFieldShortValue](#javanewjavafieldshortvalue) | 创建一个 short 作为字段值 |
- | [java.NewJavaFieldValue](#javanewjavafieldvalue) | 根据类型，和 bytes 创建一个字段值 |
- | [java.NewJavaLongString](#javanewjavalongstring) | 创建一个 Long String(8byte length) |
- | [java.NewJavaNull](#javanewjavanull) | 创建一个 TC_NULL |
- | [java.NewJavaObject](#javanewjavaobject) | 创建一个 Java TC_OBJECT |
- | [java.NewJavaReference](#javanewjavareference) | 根据 Handle 创建一个 TC_REFERENCE |
- | [java.NewJavaString](#javanewjavastring) | 创建一个 TC_STRING (4byte length) |
- | [java.ParseHexJavaObjectStream](#javaparsehexjavaobjectstream) | 把 HEX 流(aced0005...)转变为对象 |
- | [java.ParseJavaObjectStream](#javaparsejavaobjectstream) | 把 bytes 转变为 Java 对象 |
- | [java.ToJson](#javatojson) | 把 Java 对象转变为 JSON |
-
-
-
-
- 
-
+| [java.FromJson](#FromJson) ||
+| [java.MarshalJavaObjects](#MarshalJavaObjects) ||
+| [java.NewJavaArray](#NewJavaArray) ||
+| [java.NewJavaBlockDataBytes](#NewJavaBlockDataBytes) ||
+| [java.NewJavaClass](#NewJavaClass) ||
+| [java.NewJavaClassData](#NewJavaClassData) ||
+| [java.NewJavaClassDesc](#NewJavaClassDesc) ||
+| [java.NewJavaClassDetails](#NewJavaClassDetails) ||
+| [java.NewJavaClassField](#NewJavaClassField) ||
+| [java.NewJavaClassFields](#NewJavaClassFields) ||
+| [java.NewJavaEndBlockData](#NewJavaEndBlockData) ||
+| [java.NewJavaEnum](#NewJavaEnum) ||
+| [java.NewJavaFieldArrayValue](#NewJavaFieldArrayValue) ||
+| [java.NewJavaFieldBoolValue](#NewJavaFieldBoolValue) ||
+| [java.NewJavaFieldByteValue](#NewJavaFieldByteValue) ||
+| [java.NewJavaFieldCharValue](#NewJavaFieldCharValue) ||
+| [java.NewJavaFieldDoubleValue](#NewJavaFieldDoubleValue) ||
+| [java.NewJavaFieldFloatValue](#NewJavaFieldFloatValue) ||
+| [java.NewJavaFieldIntValue](#NewJavaFieldIntValue) ||
+| [java.NewJavaFieldLongValue](#NewJavaFieldLongValue) ||
+| [java.NewJavaFieldObjectValue](#NewJavaFieldObjectValue) ||
+| [java.NewJavaFieldShortValue](#NewJavaFieldShortValue) ||
+| [java.NewJavaFieldValue](#NewJavaFieldValue) ||
+| [java.NewJavaLongString](#NewJavaLongString) ||
+| [java.NewJavaNull](#NewJavaNull) ||
+| [java.NewJavaObject](#NewJavaObject) ||
+| [java.NewJavaReference](#NewJavaReference) ||
+| [java.NewJavaString](#NewJavaString) ||
+| [java.ParseHexJavaObjectStream](#ParseHexJavaObjectStream) ||
+| [java.ParseJavaObjectStream](#ParseJavaObjectStream) ||
+| [java.ToJson](#ToJson) ||
 
 
 ## 函数定义
-
 ### java.FromJson
 
-把 JSON 转变为 Java 对象
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`FromJson([]uint8) ([]yserx.JavaSerializable, error)`
-
+`FromJson(raw []byte) ([]JavaSerializable, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| bytes | `bytes` |   |
-
-
-
-
+| raw | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| tcObjects | `[]yserx.JavaSerializable` |   |
-| r1 | `error` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
- 
 ### java.MarshalJavaObjects
-
-序列化 Java 对象
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `MarshalJavaObjects(res ...JavaSerializable) []byte`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yserx.JavaSerializable` |   |
-
-
-
-
+| res | `...JavaSerializable` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| r1 | `[]byte` |   |
 
 
- 
 ### java.NewJavaArray
 
-创建一个 JAVA TC_ARRAY
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaArray(*yserx.JavaClassDesc, ...*yserx.JavaFieldValue) *yserx.JavaArray`
-
+`NewJavaArray(j *JavaClassDesc, values ...*JavaFieldValue) *JavaArray`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| classDesc | `*yserx.JavaClassDesc` |   |
-| fields | `...*yserx.JavaFieldValue` |   |
-
-
-
-
+| j | `*JavaClassDesc` |   |
+| values | `...*JavaFieldValue` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_ARRAY | `*yserx.JavaArray` |   |
+| r1 | `*JavaArray` |   |
 
 
- 
 ### java.NewJavaBlockDataBytes
 
-创建一个 Java TC_BLOCKDATA (bytes)
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaBlockDataBytes([]uint8) *yserx.JavaBlockData`
-
+`NewJavaBlockDataBytes(raw []byte) *JavaBlockData`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `bytes` |   |
-
-
-
-
+| raw | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_BLOCKDATA | `*yserx.JavaBlockData` |   |
+| r1 | `*JavaBlockData` |   |
 
 
- 
 ### java.NewJavaClass
 
-创建一个 JavaClass TC_CLASS
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClass(*yserx.JavaClassDesc) *yserx.JavaClass`
-
+`NewJavaClass(j *JavaClassDesc) *JavaClass`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| tcClassDesc | `*yserx.JavaClassDesc` |   |
-
-
-
-
+| j | `*JavaClassDesc` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_CLASS | `*yserx.JavaClass` |   |
+| r1 | `*JavaClass` |   |
 
 
- 
 ### java.NewJavaClassData
 
-创建一个 CLASSDATA 块
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClassData([]yserx.JavaSerializable, []yserx.JavaSerializable) *yserx.JavaClassData`
-
+`NewJavaClassData(fields []JavaSerializable, blockData []JavaSerializable) *JavaClassData`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fields | `[]yserx.JavaSerializable` |   |
-| blockdatas | `[]yserx.JavaSerializable` |   |
-
-
-
-
+| fields | `[]JavaSerializable` |   |
+| blockData | `[]JavaSerializable` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| X_CLASSDATA | `*yserx.JavaClassData` |   |
+| r1 | `*JavaClassData` |   |
 
 
- 
 ### java.NewJavaClassDesc
 
-创建一个 TC_CLASSDESC
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClassDesc(string, []uint8, uint8, *yserx.JavaClassFields, []yserx.JavaSerializable, *yserx.JavaClassDetails) *yserx.JavaClassDesc`
-
+`NewJavaClassDesc(className string, serialVersionUID []byte, flag byte, fields *JavaClassFields, annotations []JavaSerializable, superClass *JavaClassDetails) *JavaClassDesc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | className | `string` |   |
-| serialId | `bytes` |   |
+| serialVersionUID | `[]byte` |   |
 | flag | `byte` |   |
-| X_FIELDS | `*yserx.JavaClassFields` |   |
-| annotations | `[]yserx.JavaSerializable` |   |
-| superClass | `*yserx.JavaClassDetails` |   |
-
-
-
-
+| fields | `*JavaClassFields` |   |
+| annotations | `[]JavaSerializable` |   |
+| superClass | `*JavaClassDetails` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_CLASSDESC | `*yserx.JavaClassDesc` |   |
+| r1 | `*JavaClassDesc` |   |
 
 
- 
 ### java.NewJavaClassDetails
 
-创建一个 X_CLASSDETAILS
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClassDetails(string, []uint8, uint8, *yserx.JavaClassFields, []yserx.JavaSerializable, *yserx.JavaClassDetails) *yserx.JavaClassDetails`
-
+`NewJavaClassDetails(className string, serialVersionUID []byte, Flag byte, Fields *JavaClassFields, Annotations []JavaSerializable, SuperClass *JavaClassDetails) *JavaClassDetails`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | className | `string` |   |
-| serialId | `bytes` |   |
-| flag | `byte` |   |
-| fields | `*yserx.JavaClassFields` |   |
-| annotations | `[]yserx.JavaSerializable` |   |
-| superClass | `*yserx.JavaClassDetails` |   |
-
-
-
-
+| serialVersionUID | `[]byte` |   |
+| Flag | `byte` |   |
+| Fields | `*JavaClassFields` |   |
+| Annotations | `[]JavaSerializable` |   |
+| SuperClass | `*JavaClassDetails` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| X_CLASSDETAILS | `*yserx.JavaClassDetails` |   |
+| r1 | `*JavaClassDetails` |   |
 
 
- 
 ### java.NewJavaClassField
 
-创建一个类参数结构 X_CLASSFIELD
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClassField(string, uint8, yserx.JavaSerializable) *yserx.JavaClassField`
-
+`NewJavaClassField(name string, jType byte, className JavaSerializable) *JavaClassField`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fieldName | `string` |   |
-| fieldType | `byte` |   |
-| fieldObject | `yserx.JavaSerializable` |   |
-
-
-
-
+| name | `string` |   |
+| jType | `byte` |   |
+| className | `JavaSerializable` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaClassField` |   |
+| r1 | `*JavaClassField` |   |
 
 
- 
 ### java.NewJavaClassFields
 
-创建参数组 X_CLASSFIELDS
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaClassFields(...*yserx.JavaClassField) *yserx.JavaClassFields`
-
+`NewJavaClassFields(fields ...*JavaClassField) *JavaClassFields`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fields | `...*yserx.JavaClassField` |   |
-
-
-
-
+| fields | `...*JavaClassField` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaClassFields` |   |
+| r1 | `*JavaClassFields` |   |
 
 
- 
 ### java.NewJavaEndBlockData
 
-创建一个块数据结束符（TC_ENDBLOCKDATA）
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaEndBlockData() *yserx.JavaEndBlockData`
-
- 
-
+`NewJavaEndBlockData() *JavaEndBlockData`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaEndBlockData` |   |
+| r1 | `*JavaEndBlockData` |   |
 
 
- 
 ### java.NewJavaEnum
 
-创建一个 TC_ENUM
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaEnum(*yserx.JavaClassDesc, *yserx.JavaString) *yserx.JavaEnumDesc`
-
+`NewJavaEnum(i *JavaClassDesc, constantName *JavaString) *JavaEnumDesc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| desc | `*yserx.JavaClassDesc` |   |
-| constantName | `*yserx.JavaString` |   |
-
-
-
-
+| i | `*JavaClassDesc` |   |
+| constantName | `*JavaString` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_ENUM | `*yserx.JavaEnumDesc` |   |
+| r1 | `*JavaEnumDesc` |   |
 
 
- 
 ### java.NewJavaFieldArrayValue
 
-创建一个 X_FIELDVALUE
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldArrayValue(yserx.JavaSerializable) *yserx.JavaFieldValue`
-
+`NewJavaFieldArrayValue(i JavaSerializable) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| element | `yserx.JavaSerializable` |   |
-
-
-
-
+| i | `JavaSerializable` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldBoolValue
 
-创建一个布尔值作为 Java 字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldBoolValue(bool) *yserx.JavaFieldValue`
-
+`NewJavaFieldBoolValue(b bool) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldByteValue
 
-创建一个 Byte 的字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldByteValue(uint8) *yserx.JavaFieldValue`
-
+`NewJavaFieldByteValue(b byte) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `byte` |   |
-
-
-
-
+| b | `byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldCharValue
 
-创建一个 Char 作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldCharValue(int) *yserx.JavaFieldValue`
-
+`NewJavaFieldCharValue(i int) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldDoubleValue
 
-创建一个 float64 作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldDoubleValue(float64) *yserx.JavaFieldValue`
-
+`NewJavaFieldDoubleValue(i float64) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldFloatValue
 
-创建一个 float32 作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldFloatValue(float32) *yserx.JavaFieldValue`
-
+`NewJavaFieldFloatValue(i float32) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `float32` |   |
-
-
-
-
+| i | `float32` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldIntValue
 
-创建一个整数作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldIntValue(uint64) *yserx.JavaFieldValue`
-
+`NewJavaFieldIntValue(i uint64) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `uint64` |   |
-
-
-
-
+| i | `uint64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldLongValue
 
-创建一个 Long 作为字段值(uint64)
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldLongValue(uint64) *yserx.JavaFieldValue`
-
+`NewJavaFieldLongValue(i uint64) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `uint64` |   |
-
-
-
-
+| i | `uint64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldObjectValue
 
-创建一个 TC_OBJECT 作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldObjectValue(yserx.JavaSerializable) *yserx.JavaFieldValue`
-
+`NewJavaFieldObjectValue(i JavaSerializable) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| obj | `yserx.JavaSerializable` |   |
-
-
-
-
+| i | `JavaSerializable` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldShortValue
 
-创建一个 short 作为字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldShortValue(int) *yserx.JavaFieldValue`
-
+`NewJavaFieldShortValue(i int) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaFieldValue
 
-根据类型，和 bytes 创建一个字段值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaFieldValue(uint8, []uint8) *yserx.JavaFieldValue`
-
+`NewJavaFieldValue(t byte, raw []byte) *JavaFieldValue`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| typeFlag | `byte` |   |
-| raw | `bytes` |   |
-
-
-
-
+| t | `byte` |   |
+| raw | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaFieldValue` |   |
+| r1 | `*JavaFieldValue` |   |
 
 
- 
 ### java.NewJavaLongString
 
-创建一个 Long String(8byte length)
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaLongString(string) *yserx.JavaString`
-
+`NewJavaLongString(raw string) *JavaString`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `string` |   |
-
-
-
-
+| raw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaString` |   |
+| r1 | `*JavaString` |   |
 
 
- 
 ### java.NewJavaNull
 
-创建一个 TC_NULL
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaNull() *yserx.JavaNull`
-
- 
-
+`NewJavaNull() *JavaNull`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaNull` |   |
+| r1 | `*JavaNull` |   |
 
 
- 
 ### java.NewJavaObject
 
-创建一个 Java TC_OBJECT
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaObject(*yserx.JavaClassDesc, ...*yserx.JavaClassData) *yserx.JavaObject`
-
+`NewJavaObject(class *JavaClassDesc, classData ...*JavaClassData) *JavaObject`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| desc | `*yserx.JavaClassDesc` |   |
-| classDataArr | `...*yserx.JavaClassData` |   |
-
-
-
-
+| class | `*JavaClassDesc` |   |
+| classData | `...*JavaClassData` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| TC_OBJECT | `*yserx.JavaObject` |   |
+| r1 | `*JavaObject` |   |
 
 
- 
 ### java.NewJavaReference
-
-根据 Handle 创建一个 TC_REFERENCE
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaReference(uint64) *yserx.JavaReference`
-
+`NewJavaReference(handle uint64) *JavaReference`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | handle | `uint64` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaReference` |   |
+| r1 | `*JavaReference` |   |
 
 
- 
 ### java.NewJavaString
 
-创建一个 TC_STRING (4byte length)
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewJavaString(string) *yserx.JavaString`
-
+`NewJavaString(raw string) *JavaString`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `string` |   |
-
-
-
-
+| raw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yserx.JavaString` |   |
+| r1 | `*JavaString` |   |
 
 
- 
 ### java.ParseHexJavaObjectStream
 
-把 HEX 流(aced0005...)转变为对象
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ParseHexJavaObjectStream(string) ([]yserx.JavaSerializable, error)`
-
+`ParseHexJavaObjectStream(raw string) ([]JavaSerializable, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| hexStream | `string` |   |
-
-
-
-
+| raw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| objs | `[]yserx.JavaSerializable` |   |
-| r1 | `error` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
- 
 ### java.ParseJavaObjectStream
 
-把 bytes 转变为 Java 对象
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ParseJavaObjectStream([]uint8) ([]yserx.JavaSerializable, error)`
-
+`ParseJavaObjectStream(raw []byte) ([]JavaSerializable, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `bytes` |   |
-
-
-
-
+| raw | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| obj | `[]yserx.JavaSerializable` |   |
-| r1 | `error` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
- 
 ### java.ToJson
-
-把 Java 对象转变为 JSON
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ToJson(i any) ([]byte, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
-| r1 | `error` |   |
-
-
- 
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
 
 

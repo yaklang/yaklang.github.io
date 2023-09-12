@@ -1,403 +1,261 @@
 # ping
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [ping.Ping](#pingping) | 原生 ICMP ping |
- | [ping.Scan](#pingscan) | ping 扫描 |
- | [ping.concurrent](#pingconcurrent) | 设置 Ping 扫的并发 |
- | [ping.dnsServers](#pingdnsservers) | 设置 DNS 服务器 |
- | [ping.dnsTimeout](#pingdnstimeout) | 设置 DNS 超时时间 |
- | [ping.excludeHosts](#pingexcludehosts) |  |
- | [ping.onResult](#pingonresult) |  |
- | [ping.proxy](#pingproxy) | 为 TCP Ping 增加代理 |
- | [ping.scanCClass](#pingscancclass) | 直接 ping 整个 C 段 |
- | [ping.skip](#pingskip) | 跳过存活检查，默认均为存活 |
- | [ping.tcpPingPorts](#pingtcppingports) |  |
- | [ping.timeout](#pingtimeout) | 设置 ping 超时 |
-
-
-
-
- 
-
+| [ping.Ping](#Ping) ||
+| [ping.Scan](#Scan) ||
+| [ping.concurrent](#concurrent) ||
+| [ping.dnsServers](#dnsServers) ||
+| [ping.dnsTimeout](#dnsTimeout) ||
+| [ping.excludeHosts](#excludeHosts) ||
+| [ping.onResult](#onResult) ||
+| [ping.proxy](#proxy) ||
+| [ping.scanCClass](#scanCClass) ||
+| [ping.skip](#skip) ||
+| [ping.tcpPingPorts](#tcpPingPorts) ||
+| [ping.timeout](#timeout) ||
 
 
 ## 函数定义
-
 ### ping.Ping
-
-原生 ICMP ping
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Ping(target string, opts ..._pingConfigOpt) *pingutil.PingResult`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
-| opts | `...yaklib._pingConfigOpt` |   |
-
-
-
-
+| opts | `..._pingConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*pingutil.PingResult` |   |
+| r1 | `*pingutil.PingResult` |   |
 
 
- 
 ### ping.Scan
-
-ping 扫描
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Scan(target string, opts ..._pingConfigOpt) chan *pingutil.PingResult`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yaklib._pingConfigOpt` |   |
-
-
-
-
+| target | `string` |   |
+| opts | `..._pingConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *pingutil.PingResult` |   |
+| r1 | `chan *pingutil.PingResult` |   |
 
 
- 
 ### ping.concurrent
 
-设置 Ping 扫的并发
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`concurrent(int) yaklib._pingConfigOpt`
-
+`concurrent(i int) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.dnsServers
 
-设置 DNS 服务器
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`dnsServers(...string) yaklib._pingConfigOpt`
-
+`dnsServers(i ...string) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| i | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.dnsTimeout
 
-设置 DNS 超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`dnsTimeout(float64) yaklib._pingConfigOpt`
-
+`dnsTimeout(i float64) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.excludeHosts
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`excludeHosts(string) yaklib._pingConfigOpt`
-
+`excludeHosts(host string) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| host | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.onResult
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`onResult(func(*pingutil.PingResult)) yaklib._pingConfigOpt`
-
+`onResult(i func(result *pingutil.PingResult)) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *pingutil.PingResult) ` |   |
-
-
-
-
+| i | `func(result *pingutil.PingResult)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.proxy
 
-为 TCP Ping 增加代理
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`proxy(...string) yaklib._pingConfigOpt`
-
+`proxy(i ...string) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| i | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.scanCClass
 
-直接 ping 整个 C 段
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`scanCClass(bool) yaklib._pingConfigOpt`
-
+`scanCClass(i bool) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| i | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.skip
 
-跳过存活检查，默认均为存活
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`skip(bool) yaklib._pingConfigOpt`
-
+`skip(i bool) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| i | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.tcpPingPorts
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`tcpPingPorts(string) yaklib._pingConfigOpt`
-
+`tcpPingPorts(i string) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
+| r1 | `_pingConfigOpt` |   |
 
 
- 
 ### ping.timeout
 
-设置 ping 超时
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`timeout(float64) yaklib._pingConfigOpt`
-
+`timeout(i float64) _pingConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _pingConfigOpt(v1: *yaklib._pingConfig) ` |   |
-
-
- 
+| r1 | `_pingConfigOpt` |   |
 
 

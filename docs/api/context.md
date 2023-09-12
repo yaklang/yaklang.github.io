@@ -1,232 +1,151 @@
 # context
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [context.Background](#contextbackground) | 创建一个基础的 `context.Context` |
- | [context.New](#contextnew) | 同 `context.Background()` |
- | [context.Seconds](#contextseconds) | 生成一个几秒结束的 context |
- | [context.WithCancel](#contextwithcancel) | 给 context 增加一个 cancel 手动按钮 |
- | [context.WithDeadline](#contextwithdeadline) | 给上下文增加一个 ddl |
- | [context.WithTimeout](#contextwithtimeout) | 给 context 带一个超时间隔，如果超时就自动取消 |
- | [context.WithValue](#contextwithvalue) | 为上下文绑定一个 kv 对 |
-
-
-
-
- 
-
+| [context.Background](#Background) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.|
+| [context.New](#New) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.|
+| [context.Seconds](#Seconds) ||
+| [context.WithCancel](#WithCancel) |WithCancel returns a copy of parent with a new Done channel. The returnedcontext's Done channel is closed when the returned cancel function is calledor when the parent context's Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.|
+| [context.WithDeadline](#WithDeadline) |WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent's deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext's Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context's Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.|
+| [context.WithTimeout](#WithTimeout) |WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}|
+| [context.WithValue](#WithValue) |WithValue returns a copy of parent in which the value associated with key isval.Use context Values only for request-scoped data that transits processes andAPIs, not for passing optional parameters to functions.The provided key must be comparable and should not be of typestring or any other built-in type to avoid collisions betweenpackages using context. Users of WithValue should define their owntypes for keys. To avoid allocating when assigning to aninterface{}, context keys often have concrete typestruct{}. Alternatively, exported context key variables' statictype should be a pointer or interface.|
 
 
 ## 函数定义
-
 ### context.Background
 
-创建一个基础的 `context.Context`
-
 #### 详细描述
+Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.
 
+#### 定义
 
-
-#### 定义：
-
-`Background() context.Context`
-
- 
-
+`Background() Context`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
+| r1 | `Context` |   |
 
 
- 
 ### context.New
 
-同 `context.Background()`
-
 #### 详细描述
+Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.
 
+#### 定义
 
-
-#### 定义：
-
-`New() context.Context`
-
- 
-
+`New() Context`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
+| r1 | `Context` |   |
 
 
- 
 ### context.Seconds
-
-生成一个几秒结束的 context
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Seconds(d float64) context.Context`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float` |   |
-
-
-
-
+| d | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
+| r1 | `context.Context` |   |
 
 
- 
 ### context.WithCancel
 
-给 context 增加一个 cancel 手动按钮
-
 #### 详细描述
+WithCancel returns a copy of parent with a new Done channel. The returnedcontext's Done channel is closed when the returned cancel function is calledor when the parent context's Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.
 
+#### 定义
 
-
-#### 定义：
-
-`WithCancel(parent Context) (ctx Context, cancel CancelFunc)  doc:WithCancel returns a copy of parent with a new Done channel. The returnedcontext&#39;s Done channel is closed when the returned cancel function is calledor when the parent context&#39;s Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.`
-
+`WithCancel(parent Context) (ctx Context, cancel CancelFunc)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| originCtx | `context.Context` |  想要增加 cancel 的上下文实例 |
-
-
-
-
+| parent | `Context` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
-| r1 | `func CancelFunc() ` |   |
+| ctx | `Context` |   |
+| cancel | `CancelFunc` |   |
 
 
- 
 ### context.WithDeadline
 
-给上下文增加一个 ddl
-
 #### 详细描述
+WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent's deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext's Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context's Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.
 
+#### 定义
 
-
-#### 定义：
-
-`WithDeadline(parent Context, d time.Time) (Context, CancelFunc)  doc:WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent&#39;s deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext&#39;s Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context&#39;s Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.`
-
+`WithDeadline(parent Context, d time.Time) (Context, CancelFunc)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-| ddl | `time.Time` |  想要设置的 context 的过期时间，使用 time.Time，可以直接用 time 模块创建 |
-
-
-
-
+| parent | `Context` |   |
+| d | `time.Time` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `context.Context` |   |
-| r1 | `func CancelFunc() ` |   |
+| r1 | `Context` |   |
+| r2 | `CancelFunc` |   |
 
 
- 
 ### context.WithTimeout
 
-给 context 带一个超时间隔，如果超时就自动取消
-
 #### 详细描述
+WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}
 
+#### 定义
 
-
-#### 定义：
-
-`WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)  doc:WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}`
-
+`WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
+| parent | `Context` |   |
 | timeout | `time.Duration` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-| cancel | `func CancelFunc() ` |   |
+| r1 | `Context` |   |
+| r2 | `CancelFunc` |   |
 
 
- 
 ### context.WithValue
 
-为上下文绑定一个 kv 对
-
 #### 详细描述
+WithValue returns a copy of parent in which the value associated with key isval.Use context Values only for request-scoped data that transits processes andAPIs, not for passing optional parameters to functions.The provided key must be comparable and should not be of typestring or any other built-in type to avoid collisions betweenpackages using context. Users of WithValue should define their owntypes for keys. To avoid allocating when assigning to aninterface{}, context keys often have concrete typestruct{}. Alternatively, exported context key variables' statictype should be a pointer or interface.
 
+#### 定义
 
-
-#### 定义：
-
-`WithValue(context.Context, any, any) context.Context`
-
+`WithValue(parent Context, key any, val any) Context`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
+| parent | `Context` |   |
 | key | `any` |   |
-| value | `any` |   |
-
-
-
-
+| val | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-
-
- 
+| r1 | `Context` |   |
 
 

@@ -1,120 +1,140 @@
-# httpserver
+# dnslog
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [httpserver.LocalFileSystemServe](#LocalFileSystemServe) ||
-| [httpserver.Serve](#Serve) ||
-| [httpserver.context](#context) ||
-| [httpserver.handler](#handler) ||
-| [httpserver.tlsCertAndKey](#tlsCertAndKey) ||
+| [dnslog.LookupFirst](#LookupFirst) ||
+| [dnslog.NewCustomDNSLog](#NewCustomDNSLog) ||
+| [dnslog.QueryCustomScript](#QueryCustomScript) ||
+| [dnslog.local](#local) ||
+| [dnslog.mode](#mode) ||
+| [dnslog.random](#random) ||
+| [dnslog.script](#script) ||
 
 
 ## 函数定义
-### httpserver.LocalFileSystemServe
+### dnslog.LookupFirst
 
 #### 详细描述
 
 
 #### 定义
 
-`LocalFileSystemServe(host string, port int, prefix string, localPath string, opts ..._httpServerConfigOpt) error`
+`LookupFirst(host string, opt ...DNSOption) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | host | `string` |   |
-| port | `int` |   |
-| prefix | `string` |   |
-| localPath | `string` |   |
-| opts | `..._httpServerConfigOpt` |   |
+| opt | `...DNSOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `string` |   |
 
 
-### httpserver.Serve
+### dnslog.NewCustomDNSLog
 
 #### 详细描述
 
 
 #### 定义
 
-`Serve(host string, port int, opts ..._httpServerConfigOpt) error`
+`NewCustomDNSLog(opts ..._dnslogConfigOpt) *CustomDNSLog`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| host | `string` |   |
-| port | `int` |   |
-| opts | `..._httpServerConfigOpt` |   |
+| opts | `..._dnslogConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `*CustomDNSLog` |   |
 
 
-### httpserver.context
+### dnslog.QueryCustomScript
 
 #### 详细描述
 
 
 #### 定义
 
-`context(ctx context.Context) _httpServerConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+`QueryCustomScript()`
 
 
-### httpserver.handler
+### dnslog.local
 
 #### 详细描述
 
 
 #### 定义
 
-`handler(cb func(rsp http.ResponseWriter, req *http.Request)) _httpServerConfigOpt`
+`local(isLocal bool) _dnslogConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(rsp http.ResponseWriter, req *http.Request)` |   |
+| isLocal | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+| r1 | `_dnslogConfigOpt` |   |
 
 
-### httpserver.tlsCertAndKey
+### dnslog.mode
 
 #### 详细描述
 
 
 #### 定义
 
-`tlsCertAndKey(crt any, key any, cas ...any) _httpServerConfigOpt`
+`mode(mode string) _dnslogConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| crt | `any` |   |
-| key | `any` |   |
-| cas | `...any` |   |
+| mode | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+| r1 | `_dnslogConfigOpt` |   |
+
+
+### dnslog.random
+
+#### 详细描述
+
+
+#### 定义
+
+`random() _dnslogConfigOpt`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_dnslogConfigOpt` |   |
+
+
+### dnslog.script
+
+#### 详细描述
+
+
+#### 定义
+
+`script(name string) _dnslogConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_dnslogConfigOpt` |   |
 
 

@@ -1,1342 +1,877 @@
 # risk
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [risk.CheckDNSLogByToken](#riskcheckdnslogbytoken) |  |
- | [risk.CheckICMPTriggerByLength](#riskcheckicmptriggerbylength) | 检查 ICMP 触发器 |
- | [risk.CheckRandomTriggerByToken](#riskcheckrandomtriggerbytoken) | 通过 Token 来查询随机触发器 |
- | [risk.CreateRisk](#riskcreaterisk) |  |
- | [risk.DeleteRiskByID](#riskdeleteriskbyid) |  |
- | [risk.DeleteRiskByTarget](#riskdeleteriskbytarget) |  |
- | [risk.ExtractTokenFromUrl](#riskextracttokenfromurl) | 从 URL 中提取 token |
- | [risk.HaveReverseRisk](#riskhavereverserisk) | 判断一个 Token 的反连是否触发 |
- | [risk.NewDNSLogDomain](#risknewdnslogdomain) |  |
- | [risk.NewLocalReverseHTTPSUrl](#risknewlocalreversehttpsurl) |  |
- | [risk.NewLocalReverseHTTPUrl](#risknewlocalreversehttpurl) |  |
- | [risk.NewLocalReverseRMIUrl](#risknewlocalreversermiurl) |  |
- | [risk.NewPublicReverseHTTPSUrl](#risknewpublicreversehttpsurl) |  |
- | [risk.NewPublicReverseHTTPUrl](#risknewpublicreversehttpurl) |  |
- | [risk.NewPublicReverseRMIUrl](#risknewpublicreversermiurl) |  |
- | [risk.NewRandomPortTrigger](#risknewrandomporttrigger) |  |
- | [risk.NewRisk](#risknewrisk) |  |
- | [risk.NewUnverifiedRisk](#risknewunverifiedrisk) |  |
- | [risk.RegisterBeforeRiskSave](#riskregisterbeforerisksave) |  |
- | [risk.Save](#risksave) |  |
- | [risk.YieldRiskByCreateAt](#riskyieldriskbycreateat) |  |
- | [risk.YieldRiskByRuntimeId](#riskyieldriskbyruntimeid) |  |
- | [risk.YieldRiskByTarget](#riskyieldriskbytarget) |  |
- | [risk.cve](#riskcve) |  |
- | [risk.description](#riskdescription) |  |
- | [risk.details](#riskdetails) |  |
- | [risk.fromYakScript](#riskfromyakscript) |  |
- | [risk.ignore](#riskignore) |  |
- | [risk.level](#risklevel) |  |
- | [risk.parameter](#riskparameter) |  |
- | [risk.payload](#riskpayload) |  |
- | [risk.potential](#riskpotential) |  |
- | [risk.request](#riskrequest) |  |
- | [risk.response](#riskresponse) |  |
- | [risk.runtimeId](#riskruntimeid) |  |
- | [risk.severity](#riskseverity) |  |
- | [risk.solution](#risksolution) |  |
- | [risk.title](#risktitle) |  |
- | [risk.titleVerbose](#risktitleverbose) |  |
- | [risk.token](#risktoken) |  |
- | [risk.type](#risktype) |  |
- | [risk.typeVerbose](#risktypeverbose) |  |
-
-
-
-
- 
-
+| [risk.CheckDNSLogByToken](#CheckDNSLogByToken) ||
+| [risk.CheckICMPTriggerByLength](#CheckICMPTriggerByLength) ||
+| [risk.CheckRandomTriggerByToken](#CheckRandomTriggerByToken) ||
+| [risk.CreateRisk](#CreateRisk) ||
+| [risk.DeleteRiskByID](#DeleteRiskByID) ||
+| [risk.DeleteRiskByTarget](#DeleteRiskByTarget) ||
+| [risk.ExtractTokenFromUrl](#ExtractTokenFromUrl) ||
+| [risk.HaveReverseRisk](#HaveReverseRisk) ||
+| [risk.NewDNSLogDomain](#NewDNSLogDomain) ||
+| [risk.NewLocalReverseHTTPSUrl](#NewLocalReverseHTTPSUrl) ||
+| [risk.NewLocalReverseHTTPUrl](#NewLocalReverseHTTPUrl) ||
+| [risk.NewLocalReverseRMIUrl](#NewLocalReverseRMIUrl) ||
+| [risk.NewPublicReverseHTTPSUrl](#NewPublicReverseHTTPSUrl) ||
+| [risk.NewPublicReverseHTTPUrl](#NewPublicReverseHTTPUrl) ||
+| [risk.NewPublicReverseRMIUrl](#NewPublicReverseRMIUrl) ||
+| [risk.NewRandomPortTrigger](#NewRandomPortTrigger) ||
+| [risk.NewRisk](#NewRisk) ||
+| [risk.NewUnverifiedRisk](#NewUnverifiedRisk) ||
+| [risk.RegisterBeforeRiskSave](#RegisterBeforeRiskSave) ||
+| [risk.Save](#Save) ||
+| [risk.YieldRiskByCreateAt](#YieldRiskByCreateAt) ||
+| [risk.YieldRiskByRuntimeId](#YieldRiskByRuntimeId) ||
+| [risk.YieldRiskByTarget](#YieldRiskByTarget) ||
+| [risk.cve](#cve) ||
+| [risk.description](#description) ||
+| [risk.details](#details) ||
+| [risk.fromYakScript](#fromYakScript) ||
+| [risk.ignore](#ignore) ||
+| [risk.level](#level) ||
+| [risk.parameter](#parameter) ||
+| [risk.payload](#payload) ||
+| [risk.potential](#potential) ||
+| [risk.request](#request) ||
+| [risk.response](#response) ||
+| [risk.runtimeId](#runtimeId) ||
+| [risk.severity](#severity) ||
+| [risk.solution](#solution) ||
+| [risk.title](#title) ||
+| [risk.titleVerbose](#titleVerbose) ||
+| [risk.token](#token) ||
+| [risk.type](#type) ||
+| [risk.typeVerbose](#typeVerbose) ||
 
 
 ## 函数定义
-
 ### risk.CheckDNSLogByToken
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`CheckDNSLogByToken(token string) ([]*tpb.DNSLogEvent, error)`
-
+`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...float64` |   |
-
-
-
-
+| token | `string` |   |
+| timeout | `...float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*tpb.DNSLogEvent` |   |
-| r1 | `error` |   |
+| r1 | `[]*tpb.DNSLogEvent` |   |
+| r2 | `error` |   |
 
 
- 
 ### risk.CheckICMPTriggerByLength
-
-检查 ICMP 触发器
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*tpb.ICMPTriggerNotification` |   |
-| r1 | `error` |   |
+| r1 | `*tpb.ICMPTriggerNotification` |   |
+| r2 | `error` |   |
 
 
- 
 ### risk.CheckRandomTriggerByToken
-
-通过 Token 来查询随机触发器
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| token | `string` |   |
-
-
-
-
+| t | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| event | `*tpb.RandomPortTriggerEvent` |   |
-| err | `error` |   |
+| r1 | `*tpb.RandomPortTriggerEvent` |   |
+| r2 | `error` |   |
 
 
- 
 ### risk.CreateRisk
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`CreateRisk(string, ...yakit.RiskParamsOpt) *yakit.Risk`
-
+`CreateRisk(u string, opts ...RiskParamsOpt) *Risk`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| u | `string` |   |
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakit.Risk` |   |
+| r1 | `*Risk` |   |
 
 
- 
 ### risk.DeleteRiskByID
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func risk.DeleteRiskByID(v1: any)``
-
+`DeleteRiskByID(id any)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
+| id | `any` |   |
 
 
-
-
- 
-
- 
 ### risk.DeleteRiskByTarget
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func risk.DeleteRiskByTarget(v1: string)``
-
+`DeleteRiskByTarget(addr string)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| addr | `string` |   |
 
 
-
-
- 
-
- 
 ### risk.ExtractTokenFromUrl
-
-从 URL 中提取 token
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `ExtractTokenFromUrl(tokenUrl string) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
-
-
-
-
+| tokenUrl | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.HaveReverseRisk
-
-判断一个 Token 的反连是否触发
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `HaveReverseRisk(token string) bool`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | token | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `boolvendor/github.com/projectdiscovery/fileutil/file.go` |   |
+| r1 | `bool` |   |
 
 
- 
 ### risk.NewDNSLogDomain
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewDNSLogDomain() (domain string, token string, _ error)`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `string` |   |
-| r2 | `error` |   |
+| domain | `string` |   |
+| token | `string` |   |
+| _ | `error` |   |
 
 
- 
 ### risk.NewLocalReverseHTTPSUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewLocalReverseHTTPSUrl(...yakit.RiskParamsOpt) string`
-
+`NewLocalReverseHTTPSUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewLocalReverseHTTPUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewLocalReverseHTTPUrl(...yakit.RiskParamsOpt) string`
-
+`NewLocalReverseHTTPUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewLocalReverseRMIUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewLocalReverseRMIUrl(...yakit.RiskParamsOpt) string`
-
+`NewLocalReverseRMIUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewPublicReverseHTTPSUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewPublicReverseHTTPSUrl(...yakit.RiskParamsOpt) string`
-
+`NewPublicReverseHTTPSUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewPublicReverseHTTPUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewPublicReverseHTTPUrl(...yakit.RiskParamsOpt) string`
-
+`NewPublicReverseHTTPUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewPublicReverseRMIUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewPublicReverseRMIUrl(...yakit.RiskParamsOpt) string`
-
+`NewPublicReverseRMIUrl(opts ...RiskParamsOpt) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### risk.NewRandomPortTrigger
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewRandomPortTrigger(opt ...RiskParamsOpt) (token string, addr string, _ error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| opt | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `string` |   |
-| r2 | `error` |   |
+| token | `string` |   |
+| addr | `string` |   |
+| _ | `error` |   |
 
 
- 
 ### risk.NewRisk
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `NewRisk(target string, opts ...yakit.RiskParamsOpt)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakit.RiskParamsOpt` |   |
+| target | `string` |   |
+| opts | `...yakit.RiskParamsOpt` |   |
 
 
-
-
- 
-
- 
 ### risk.NewUnverifiedRisk
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewUnverifiedRisk(string, string, ...yakit.RiskParamsOpt) (*yakit.Risk, error)`
-
+`NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*Risk, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yakit.RiskParamsOpt` |   |
-
-
-
-
+| u | `string` |   |
+| token | `string` |   |
+| opts | `...RiskParamsOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakit.Risk` |   |
-| r1 | `error` |   |
+| r1 | `*Risk` |   |
+| r2 | `error` |   |
 
 
- 
 ### risk.RegisterBeforeRiskSave
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func risk.RegisterBeforeRiskSave(v1: func (v1: *yakit.Risk) )``
-
+`RegisterBeforeRiskSave(f func(*Risk))`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *yakit.Risk) ` |   |
+| f | `func(*Risk)` |   |
 
 
-
-
- 
-
- 
 ### risk.Save
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Save(r *Risk) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*yakit.Risk` |   |
-
-
-
-
+| r | `*Risk` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### risk.YieldRiskByCreateAt
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func risk.YieldRiskByCreateAt(v1: int64) return (r0: chan *yakit.Risk)`
-
+`YieldRiskByCreateAt(timestamp int64) chan *yakit.Risk`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| timestamp | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *yakit.Risk` |   |
+| r1 | `chan *yakit.Risk` |   |
 
 
- 
 ### risk.YieldRiskByRuntimeId
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`YieldRiskByRuntimeId(string) chan *yakit.Risk`
-
+`YieldRiskByRuntimeId(runtimeId string) chan *yakit.Risk`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| runtimeId | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *yakit.Risk` |   |
+| r1 | `chan *yakit.Risk` |   |
 
 
- 
 ### risk.YieldRiskByTarget
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`YieldRiskByTarget(string) chan *yakit.Risk`
-
+`YieldRiskByTarget(target string) chan *yakit.Risk`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| target | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *yakit.Risk` |   |
+| r1 | `chan *yakit.Risk` |   |
 
 
- 
 ### risk.cve
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`cve(string) yakit.RiskParamsOpt`
-
+`cve(s string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| s | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.description
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func risk.description(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
-
+`description(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.details
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`details(any) yakit.RiskParamsOpt`
-
+`details(i any) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.fromYakScript
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`fromYakScript(string) yakit.RiskParamsOpt`
-
+`fromYakScript(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.ignore
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func risk.ignore(v1: bool) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
-
+`ignore(i bool) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| i | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.level
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`level(string) yakit.RiskParamsOpt`
-
+`level(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.parameter
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`parameter(string) yakit.RiskParamsOpt`
-
+`parameter(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.payload
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`payload(string) yakit.RiskParamsOpt`
-
+`payload(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.potential
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`potential(bool) yakit.RiskParamsOpt`
-
+`potential(i bool) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| i | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.request
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`request(any) yakit.RiskParamsOpt`
-
+`request(i any) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.response
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`response(any) yakit.RiskParamsOpt`
-
+`response(i any) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.runtimeId
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`runtimeId(string) yakit.RiskParamsOpt`
-
+`runtimeId(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.severity
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`severity(string) yakit.RiskParamsOpt`
-
+`severity(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.solution
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func risk.solution(v1: string) return (r0: func RiskParamsOpt(v1: *yakit.Risk) )`
-
+`solution(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.title
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`title(string) yakit.RiskParamsOpt`
-
+`title(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.titleVerbose
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`titleVerbose(string) yakit.RiskParamsOpt`
-
+`titleVerbose(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.token
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`token(string) yakit.RiskParamsOpt`
-
+`token(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.type
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`type(string) yakit.RiskParamsOpt`
-
+`type(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
+| r1 | `RiskParamsOpt` |   |
 
 
- 
 ### risk.typeVerbose
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`typeVerbose(string) yakit.RiskParamsOpt`
-
+`typeVerbose(i string) RiskParamsOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func RiskParamsOpt(v1: *yakit.Risk) ` |   |
-
-
- 
+| r1 | `RiskParamsOpt` |   |
 
 

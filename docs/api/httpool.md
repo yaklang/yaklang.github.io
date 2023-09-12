@@ -1,436 +1,283 @@
 # httpool
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [httpool.Pool](#httpoolpool) |  |
- | [httpool.context](#httpoolcontext) |  |
- | [httpool.fuzz](#httpoolfuzz) |  |
- | [httpool.fuzzParams](#httpoolfuzzparams) |  |
- | [httpool.host](#httpoolhost) |  |
- | [httpool.https](#httpoolhttps) |  |
- | [httpool.noFixContentLength](#httpoolnofixcontentlength) |  |
- | [httpool.perRequestTimeout](#httpoolperrequesttimeout) |  |
- | [httpool.port](#httpoolport) |  |
- | [httpool.proxy](#httpoolproxy) |  |
- | [httpool.rawMode](#httpoolrawmode) |  |
- | [httpool.redirectTimes](#httpoolredirecttimes) |  |
- | [httpool.size](#httpoolsize) |  |
-
-
-
-
- 
-
+| [httpool.Pool](#Pool) ||
+| [httpool.context](#context) ||
+| [httpool.fuzz](#fuzz) ||
+| [httpool.fuzzParams](#fuzzParams) ||
+| [httpool.host](#host) ||
+| [httpool.https](#https) ||
+| [httpool.noFixContentLength](#noFixContentLength) ||
+| [httpool.perRequestTimeout](#perRequestTimeout) ||
+| [httpool.port](#port) ||
+| [httpool.proxy](#proxy) ||
+| [httpool.rawMode](#rawMode) ||
+| [httpool.redirectTimes](#redirectTimes) ||
+| [httpool.size](#size) ||
 
 
 ## 函数定义
-
 ### httpool.Pool
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Pool(i any, opts ...httpPoolConfigOption) (chan *_httpResult, error)`
-
+`Pool(i any, opts ...HttpPoolConfigOption) (chan *_httpResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...mutate.HttpPoolConfigOption` |   |
-
-
-
-
+| i | `any` |   |
+| opts | `...HttpPoolConfigOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *mutate._httpResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *_httpResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### httpool.context
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`context(context.Context) mutate.httpPoolConfigOption`
-
+`context(ctx context.Context) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-
-
-
-
+| ctx | `context.Context` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.fuzz
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`fuzz(bool) mutate.httpPoolConfigOption`
-
+`fuzz(b bool) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.fuzzParams
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`fuzzParams(any) mutate.httpPoolConfigOption`
-
+`fuzzParams(i any) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.host
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`host(string, bool) mutate.httpPoolConfigOption`
-
+`host(h string, isHttps bool) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `bool` |   |
-
-
-
-
+| h | `string` |   |
+| isHttps | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.https
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`https(bool) mutate.httpPoolConfigOption`
-
+`https(f bool) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| f | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.noFixContentLength
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`noFixContentLength(bool) mutate.httpPoolConfigOption`
-
+`noFixContentLength(f bool) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| f | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.perRequestTimeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`perRequestTimeout(float64) mutate.httpPoolConfigOption`
-
+`perRequestTimeout(f float64) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| f | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.port
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`port(int) mutate.httpPoolConfigOption`
-
+`port(port int) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| port | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.proxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`proxy(...string) mutate.httpPoolConfigOption`
-
+`proxy(proxies ...string) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| proxies | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.rawMode
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`rawMode(bool) mutate.httpPoolConfigOption`
-
+`rawMode(b bool) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.redirectTimes
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`redirectTimes(int) mutate.httpPoolConfigOption`
-
+`redirectTimes(f int) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| f | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
+| r1 | `HttpPoolConfigOption` |   |
 
 
- 
 ### httpool.size
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`size(int) mutate.httpPoolConfigOption`
-
+`size(i int) HttpPoolConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpPoolConfigOption(v1: *mutate.httpPoolConfig) ` |   |
-
-
- 
+| r1 | `HttpPoolConfigOption` |   |
 
 

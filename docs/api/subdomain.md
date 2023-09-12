@@ -1,403 +1,261 @@
 # subdomain
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [subdomain.Scan](#subdomainscan) | 扫描子域名的核心函数，通过和这个函数，输入想要扫描的子域名和相关参数 |
- | [subdomain.dnsServer](#subdomaindnsserver) | 为扫描过程设置自定义 dnsServer |
- | [subdomain.eachQueryTimeout](#subdomaineachquerytimeout) | 每一次 DNS 请求发送的超时时间 |
- | [subdomain.eachSearchTimeout](#subdomaineachsearchtimeout) | 每次调用第三方接口进行子域名搜索的时候，HTTP 请求的超时时间 |
- | [subdomain.mainDict](#subdomainmaindict) | 子域名爆破使用的主字典（字典名/字典内容[]string/bytes/reader）均支持 |
- | [subdomain.maxDepth](#subdomainmaxdepth) | 设置递归爆破的最大深度 |
- | [subdomain.recursive](#subdomainrecursive) | 是否开启递归爆破 |
- | [subdomain.recursiveDict](#subdomainrecursivedict) | 如果开启了递归，则可以设置递归字典（默认自带一个小字典） |
- | [subdomain.targetConcurrent](#subdomaintargetconcurrent) | 针对多个目标进行并发爆破的时候，通过这个选项设置并发 |
- | [subdomain.targetTimeout](#subdomaintargettimeout) | 每一个目标应该最多爆破多久？单个目标的超时时间 |
- | [subdomain.wildcardToStop](#subdomainwildcardtostop) | 遇到泛解析就停止 |
- | [subdomain.workerConcurrent](#subdomainworkerconcurrent) | 发送 DNS 请求的最大并发（同时允许多少个 DNS 请求同时发出？）主要用于控制速率 |
-
-
-
-
- 
-
+| [subdomain.Scan](#Scan) ||
+| [subdomain.dnsServer](#dnsServer) ||
+| [subdomain.eachQueryTimeout](#eachQueryTimeout) ||
+| [subdomain.eachSearchTimeout](#eachSearchTimeout) ||
+| [subdomain.mainDict](#mainDict) ||
+| [subdomain.maxDepth](#maxDepth) ||
+| [subdomain.recursive](#recursive) ||
+| [subdomain.recursiveDict](#recursiveDict) ||
+| [subdomain.targetConcurrent](#targetConcurrent) ||
+| [subdomain.targetTimeout](#targetTimeout) ||
+| [subdomain.wildcardToStop](#wildcardToStop) ||
+| [subdomain.workerConcurrent](#workerConcurrent) ||
 
 
 ## 函数定义
-
 ### subdomain.Scan
-
-扫描子域名的核心函数，通过和这个函数，输入想要扫描的子域名和相关参数
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Scan(target any, opts ...subdomain.ConfigOption) (chan *subdomain.SubdomainResult, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| domains | `[]string|string|bytes` |  想要扫描的子域名，支持 []string，也支持 string/bytes，可以支持逗号分隔 |
-| params | `subdomain.param` |  可变参数，扫描时需要增加的参数 |
-
-
-
-
+| target | `any` |   |
+| opts | `...subdomain.ConfigOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultsChannel | `chan *subdomain.SubdomainResult` |  扫描的结果将会放入返回的这个 channel 中 |
-| err | `error` |   |
+| r1 | `chan *subdomain.SubdomainResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### subdomain.dnsServer
-
-为扫描过程设置自定义 dnsServer
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`dnsServer([]string) subdomain.ConfigOption`
-
+`dnsServer(servers []string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | servers | `[]string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### subdomain.eachQueryTimeout
 
-每一次 DNS 请求发送的超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`eachQueryTimeout(float64) subdomain.ConfigOption`
-
+`eachQueryTimeout(i float64) subdomain.ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `subdomain.ConfigOption` |   |
 
 
- 
 ### subdomain.eachSearchTimeout
 
-每次调用第三方接口进行子域名搜索的时候，HTTP 请求的超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`eachSearchTimeout(float64) subdomain.ConfigOption`
-
+`eachSearchTimeout(i float64) subdomain.ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `subdomain.ConfigOption` |   |
 
 
- 
 ### subdomain.mainDict
 
-子域名爆破使用的主字典（字典名/字典内容[]string/bytes/reader）均支持
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`mainDict(any) subdomain.ConfigOption`
-
+`mainDict(i any) subdomain.ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| dict | `string|[]string|fileName|bytes|reader` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `subdomain.ConfigOption` |   |
 
 
- 
 ### subdomain.maxDepth
 
-设置递归爆破的最大深度
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxDepth(int) subdomain.ConfigOption`
-
+`maxDepth(d int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| depth | `int` |   |
-
-
-
-
+| d | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### subdomain.recursive
 
-是否开启递归爆破
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`recursive(bool) subdomain.ConfigOption`
-
+`recursive(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### subdomain.recursiveDict
 
-如果开启了递归，则可以设置递归字典（默认自带一个小字典）
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`recursiveDict(any) subdomain.ConfigOption`
-
+`recursiveDict(i any) subdomain.ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| dict | `string|fileName|[]string|bytes|reader` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `subdomain.ConfigOption` |   |
 
 
- 
 ### subdomain.targetConcurrent
 
-针对多个目标进行并发爆破的时候，通过这个选项设置并发
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`targetConcurrent(int) subdomain.ConfigOption`
-
+`targetConcurrent(c int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| concurrent | `int` |   |
-
-
-
-
+| c | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### subdomain.targetTimeout
 
-每一个目标应该最多爆破多久？单个目标的超时时间
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`targetTimeout(float64) subdomain.ConfigOption`
-
+`targetTimeout(i float64) subdomain.ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| seconds | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `subdomain.ConfigOption` |   |
 
 
- 
 ### subdomain.wildcardToStop
 
-遇到泛解析就停止
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`wildcardToStop(bool) subdomain.ConfigOption`
-
+`wildcardToStop(t bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| t | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### subdomain.workerConcurrent
 
-发送 DNS 请求的最大并发（同时允许多少个 DNS 请求同时发出？）主要用于控制速率
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`workerConcurrent(int) subdomain.ConfigOption`
-
+`workerConcurrent(c int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| concurrent | `int` |   |
-
-
-
-
+| c | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `subdomain.param` |   |
-
-
- 
+| r1 | `ConfigOption` |   |
 
 

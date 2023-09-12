@@ -1,113 +1,70 @@
 # xml
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [xml.Escape](#xmlescape) |  |
- | [xml.dumps](#xmldumps) |  |
- | [xml.loads](#xmlloads) |  |
-
-
-
-
- 
-
+| [xml.Escape](#Escape) ||
+| [xml.dumps](#dumps) ||
+| [xml.loads](#loads) ||
 
 
 ## 函数定义
-
 ### xml.Escape
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func xml.Escape(v1: bytes) return (r0: string)`
-
+`Escape(s []byte) string`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bytes` |   |
-
-
-
-
+| s | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### xml.dumps
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func xml.dumps(v1: any) return (r0: bytes)`
-
+`dumps(v any) []byte`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| v | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| r1 | `[]byte` |   |
 
 
- 
 ### xml.loads
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func xml.loads(v1: any) return (r0: yaklib.StringMap)`
-
+`loads(v any) StringMap`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| v | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `yaklib.StringMap` |   |
-
-
- 
+| r1 | `StringMap` |   |
 
 

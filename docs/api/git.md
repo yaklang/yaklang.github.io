@@ -1,723 +1,472 @@
 # git
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [git.Checkout](#gitcheckout) |  |
- | [git.Clone](#gitclone) |  |
- | [git.Fetch](#gitfetch) |  |
- | [git.IterateCommit](#gititeratecommit) |  |
- | [git.Pull](#gitpull) |  |
- | [git.SetProxy](#gitsetproxy) |  |
- | [git.auth](#gitauth) |  |
- | [git.checkoutCreate](#gitcheckoutcreate) |  |
- | [git.checkoutForce](#gitcheckoutforce) |  |
- | [git.checkoutKeep](#gitcheckoutkeep) |  |
- | [git.context](#gitcontext) |  |
- | [git.depth](#gitdepth) |  |
- | [git.fetchAllTags](#gitfetchalltags) |  |
- | [git.filterCommit](#gitfiltercommit) |  |
- | [git.filterReference](#gitfilterreference) |  |
- | [git.force](#gitforce) |  |
- | [git.handleCommit](#githandlecommit) |  |
- | [git.handleReference](#githandlereference) |  |
- | [git.noFetchTags](#gitnofetchtags) |  |
- | [git.recursive](#gitrecursive) |  |
- | [git.remote](#gitremote) |  |
- | [git.verify](#gitverify) |  |
-
-
-
-
- 
-
+| [git.Checkout](#Checkout) ||
+| [git.Clone](#Clone) ||
+| [git.Fetch](#Fetch) ||
+| [git.IterateCommit](#IterateCommit) ||
+| [git.Pull](#Pull) ||
+| [git.SetProxy](#SetProxy) ||
+| [git.auth](#auth) ||
+| [git.checkoutCreate](#checkoutCreate) ||
+| [git.checkoutForce](#checkoutForce) ||
+| [git.checkoutKeep](#checkoutKeep) ||
+| [git.context](#context) ||
+| [git.depth](#depth) ||
+| [git.fetchAllTags](#fetchAllTags) ||
+| [git.filterCommit](#filterCommit) ||
+| [git.filterReference](#filterReference) ||
+| [git.force](#force) ||
+| [git.handleCommit](#handleCommit) ||
+| [git.handleReference](#handleReference) ||
+| [git.noFetchTags](#noFetchTags) ||
+| [git.recursive](#recursive) ||
+| [git.remote](#remote) ||
+| [git.verify](#verify) ||
 
 
 ## 函数定义
-
 ### git.Checkout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.Checkout(v1: string, v2: string, v3 ...yakgit.Option) return (r0: error)`
-
+`Checkout(localPath string, ref string, opts ...Option) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yakgit.Option` |   |
-
-
-
-
+| localPath | `string` |   |
+| ref | `string` |   |
+| opts | `...Option` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### git.Clone
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.Clone(v1: string, v2: string, v3 ...yakgit.Option) return (r0: error)`
-
+`Clone(u string, localPath string, opt ...Option) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yakgit.Option` |   |
-
-
-
-
+| u | `string` |   |
+| localPath | `string` |   |
+| opt | `...Option` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### git.Fetch
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.Fetch(v1: string, v2 ...yakgit.Option) return (r0: error)`
-
+`Fetch(localPath string, opts ...Option) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakgit.Option` |   |
-
-
-
-
+| localPath | `string` |   |
+| opts | `...Option` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### git.IterateCommit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.IterateCommit(v1: string, v2 ...yakgit.Option) return (r0: error)`
-
+`IterateCommit(localRepos string, opt ...Option) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakgit.Option` |   |
-
-
-
-
+| localRepos | `string` |   |
+| opt | `...Option` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### git.Pull
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.Pull(v1: string, v2 ...yakgit.Option) return (r0: error)`
-
+`Pull(localPath string, opts ...Option) error`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakgit.Option` |   |
-
-
-
-
+| localPath | `string` |   |
+| opts | `...Option` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### git.SetProxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func git.SetProxy(v1 ...string)``
-
+`SetProxy(proxies ...string)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
+| proxies | `...string` |   |
 
 
-
-
- 
-
- 
 ### git.auth
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.auth(v1: string, v2: string) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`auth(username string, password string) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| username | `string` |   |
+| password | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.checkoutCreate
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.checkoutCreate(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`checkoutCreate(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.checkoutForce
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.checkoutForce(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`checkoutForce(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.checkoutKeep
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.checkoutKeep(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`checkoutKeep(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.context
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.context(v1: context.Context) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`context(ctx context.Context) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `context.Context` |   |
-
-
-
-
+| ctx | `context.Context` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.depth
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.depth(v1: int) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`depth(depth int) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| depth | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.fetchAllTags
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.fetchAllTags(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`fetchAllTags(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.filterCommit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.filterCommit(v1: func (v1: *object.Commit) return(bool) ) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`filterCommit(f func(r *object.Commit) bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *object.Commit) return(bool) ` |   |
-
-
-
-
+| f | `func(r *object.Commit) bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.filterReference
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.filterReference(v1: func (v1: *plumbing.Reference) return(bool) ) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`filterReference(f func(r *plumbing.Reference) bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *plumbing.Reference) return(bool) ` |   |
-
-
-
-
+| f | `func(r *plumbing.Reference) bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.force
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.force(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`force(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.handleCommit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.handleCommit(v1: func (v1: *object.Commit) return(error) ) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`handleCommit(f func(r *object.Commit) error) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *object.Commit) return(error) ` |   |
-
-
-
-
+| f | `func(r *object.Commit) error` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.handleReference
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.handleReference(v1: func (v1: *plumbing.Reference) return(error) ) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`handleReference(f func(r *plumbing.Reference) error) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *plumbing.Reference) return(error) ` |   |
-
-
-
-
+| f | `func(r *plumbing.Reference) error` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.noFetchTags
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.noFetchTags(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`noFetchTags(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.recursive
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.recursive(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`recursive(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.remote
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.remote(v1: string) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`remote(remote string) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| remote | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
+| r1 | `Option` |   |
 
 
- 
 ### git.verify
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func git.verify(v1: bool) return (r0: func Option(v1: *yakgit.config) return(error) )`
-
+`verify(b bool) Option`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func Option(v1: *yakgit.config) return(error) ` |   |
-
-
- 
+| r1 | `Option` |   |
 
 

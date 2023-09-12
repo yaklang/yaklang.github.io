@@ -1,151 +1,91 @@
 # log
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [log.debug](#logdebug) | 打印日志调试信息 |
- | [log.error](#logerror) | 打印日志错误信息 |
- | [log.info](#loginfo) | 打印日志【信息】 |
- | [log.setLevel](#logsetlevel) | 设置当前脚本的日志级别 |
- | [log.warn](#logwarn) | 打印日志信息【警告级别】 |
-
-
-
-
- 
-
+| [log.debug](#debug) |Debugf will print when logger's Level is debug.|
+| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.|
+| [log.info](#info) |Infof will print when logger's Level is info or debug.|
+| [log.setLevel](#setLevel) ||
+| [log.warn](#warn) ||
 
 
 ## 函数定义
-
 ### log.debug
 
-打印日志调试信息
-
 #### 详细描述
+Debugf will print when logger's Level is debug.
 
+#### 定义
 
-
-#### 定义：
-
-`debug(format string, args ...any)  doc:Debugf will print when logger&#39;s Level is debug.`
-
+`debug(format string, args ...any)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fmt | `string` |   |
-| items | `...any` |   |
+| format | `string` |   |
+| args | `...any` |   |
 
 
-
-
- 
-
- 
 ### log.error
 
-打印日志错误信息
-
 #### 详细描述
+Errorf will print only when logger's Level is error, warn, info or debug.
 
+#### 定义
 
-
-#### 定义：
-
-`error(format string, args ...any)  doc:Errorf will print only when logger&#39;s Level is error, warn, info or debug.`
-
+`error(format string, args ...any)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fmt | `string` |   |
-| items | `...any` |   |
+| format | `string` |   |
+| args | `...any` |   |
 
 
-
-
- 
-
- 
 ### log.info
 
-打印日志【信息】
-
 #### 详细描述
+Infof will print when logger's Level is info or debug.
 
+#### 定义
 
-
-#### 定义：
-
-`info(format string, args ...any)  doc:Infof will print when logger&#39;s Level is info or debug.`
-
+`info(format string, args ...any)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fmt | `string` |   |
-| items | `...any` |   |
+| format | `string` |   |
+| args | `...any` |   |
 
 
-
-
- 
-
- 
 ### log.setLevel
-
-设置当前脚本的日志级别
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `setLevel(i any)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| level | `any` |   |
+| i | `any` |   |
 
 
-
-
- 
-
- 
 ### log.warn
-
-打印日志信息【警告级别】
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `warn(raw string, args ...any)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| fmt | `string` |   |
-| items | `...any` |   |
-
-
-
-
- 
-
- 
+| raw | `string` |   |
+| args | `...any` |   |
 
 
