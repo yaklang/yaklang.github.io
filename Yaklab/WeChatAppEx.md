@@ -27,7 +27,7 @@ Proxifier 具有以下一些主要特点和功能：
 
 **1 启动 Yakit MITM:**
 
-使用前请先安装证书，参考 [Yakit 证书安装](/products/expert-mode/mitm/hijack-configuration#ca证书的安装)。
+使用前请先安装证书，参考 [Yakit 证书安装](/products/mitm/hijack-configuration#ca证书的安装)。
 
 ![](/img/products/yakit/WeChatAppEx-1.png)
 
