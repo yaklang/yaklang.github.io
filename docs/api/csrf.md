@@ -1,115 +1,72 @@
 # csrf
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [csrf.Generate](#csrfgenerate) |  |
- | [csrf.https](#csrfhttps) |  |
- | [csrf.multipartDefaultValue](#csrfmultipartdefaultvalue) |  |
-
-
-
-
- 
-
+| [csrf.Generate](#Generate) ||
+| [csrf.https](#https) ||
+| [csrf.multipartDefaultValue](#multipartDefaultValue) ||
 
 
 ## 函数定义
-
 ### csrf.Generate
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Generate(raw any, opts ...csrfConfig) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...yaklib.csrfConfig` |   |
-
-
-
-
+| raw | `any` |   |
+| opts | `...csrfConfig` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### csrf.https
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func csrf.https(v1: bool) return (r0: func csrfConfig(v1: *yaklib._csrfConfig) )`
-
+`https(b bool) csrfConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func csrfConfig(v1: *yaklib._csrfConfig) ` |   |
+| r1 | `csrfConfig` |   |
 
 
- 
 ### csrf.multipartDefaultValue
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`multipartDefaultValue(bool) yaklib.csrfConfig`
-
+`multipartDefaultValue(b bool) csrfConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func csrfConfig(v1: *yaklib._csrfConfig) ` |   |
-
-
- 
+| r1 | `csrfConfig` |   |
 
 

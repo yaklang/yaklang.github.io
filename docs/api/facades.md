@@ -1,345 +1,225 @@
 # facades
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [facades.NewFacadeServer](#facadesnewfacadeserver) |  |
- | [facades.Serve](#facadesserve) |  |
- | [facades.evilClassResource](#facadesevilclassresource) |  |
- | [facades.httpResource](#facadeshttpresource) |  |
- | [facades.javaClassName](#facadesjavaclassname) |  |
- | [facades.javaCodeBase](#facadesjavacodebase) |  |
- | [facades.javaFactory](#facadesjavafactory) |  |
- | [facades.ldapResourceAddr](#facadesldapresourceaddr) |  |
- | [facades.objectClass](#facadesobjectclass) |  |
- | [facades.rmiResourceAddr](#facadesrmiresourceaddr) |  |
-
-
-
-
- 
-
+| [facades.NewFacadeServer](#NewFacadeServer) ||
+| [facades.Serve](#Serve) ||
+| [facades.evilClassResource](#evilClassResource) ||
+| [facades.httpResource](#httpResource) ||
+| [facades.javaClassName](#javaClassName) ||
+| [facades.javaCodeBase](#javaCodeBase) ||
+| [facades.javaFactory](#javaFactory) ||
+| [facades.ldapResourceAddr](#ldapResourceAddr) ||
+| [facades.objectClass](#objectClass) ||
+| [facades.rmiResourceAddr](#rmiResourceAddr) ||
 
 
 ## 函数定义
-
 ### facades.NewFacadeServer
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewFacadeServer(string, int, ...facades.FacadeServerConfig) *facades.FacadeServer`
-
+`NewFacadeServer(host string, port int, configs ...FacadeServerConfig) *FacadeServer`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `...facades.FacadeServerConfig` |   |
-
-
-
-
+| host | `string` |   |
+| port | `int` |   |
+| configs | `...FacadeServerConfig` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*facades.FacadeServer` |   |
+| r1 | `*FacadeServer` |   |
 
 
- 
 ### facades.Serve
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Serve(host string, port int, configs ...FacadeServerConfig) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `int` |   |
-| v3 | `...facades.FacadeServerConfig` |   |
-
-
-
-
+| host | `string` |   |
+| port | `int` |   |
+| configs | `...FacadeServerConfig` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### facades.evilClassResource
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`evilClassResource(string, string) facades.FacadeServerConfig`
-
+`evilClassResource(name string, rmiResourceAddr string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| name | `string` |   |
+| rmiResourceAddr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.httpResource
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`httpResource(string, []uint8) facades.FacadeServerConfig`
-
+`httpResource(name string, resource []byte) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `bytes` |   |
-
-
-
-
+| name | `string` |   |
+| resource | `[]byte` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.javaClassName
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`javaClassName(string) facades.FacadeServerConfig`
-
+`javaClassName(name string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| name | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.javaCodeBase
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`javaCodeBase(string) facades.FacadeServerConfig`
-
+`javaCodeBase(codeBase string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| codeBase | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.javaFactory
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`javaFactory(string) facades.FacadeServerConfig`
-
+`javaFactory(factory string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| factory | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.ldapResourceAddr
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ldapResourceAddr(string, string) facades.FacadeServerConfig`
-
+`ldapResourceAddr(name string, addr string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| name | `string` |   |
+| addr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.objectClass
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`objectClass(string) facades.FacadeServerConfig`
-
+`objectClass(obj string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| obj | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
+| r1 | `FacadeServerConfig` |   |
 
 
- 
 ### facades.rmiResourceAddr
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`rmiResourceAddr(string, string) facades.FacadeServerConfig`
-
+`rmiResourceAddr(name string, rmiResourceAddr string) FacadeServerConfig`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-
-
-
-
+| name | `string` |   |
+| rmiResourceAddr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func FacadeServerConfig(v1: *facades.FacadeServer) ` |   |
-
-
- 
+| r1 | `FacadeServerConfig` |   |
 
 

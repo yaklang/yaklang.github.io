@@ -1,483 +1,314 @@
 # brute
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [brute.GetAvailableBruteTypes](#brutegetavailablebrutetypes) | 获取当前模块支持的所有的爆破类型 |
- | [brute.GetPasswordListFromBruteType](#brutegetpasswordlistfrombrutetype) | 根据服务获取服务对应的密码列表 |
- | [brute.GetUsernameListFromBruteType](#brutegetusernamelistfrombrutetype) | 根据服务获取服务对应的用户列表 |
- | [brute.New](#brutenew) | 新建一个爆破执行期 |
- | [brute.autoDict](#bruteautodict) |  |
- | [brute.bruteHandler](#brutebrutehandler) |  |
- | [brute.concurrent](#bruteconcurrent) |  |
- | [brute.concurrentTarget](#bruteconcurrenttarget) |  |
- | [brute.debug](#brutedebug) |  |
- | [brute.finishingThreshold](#brutefinishingthreshold) | 停止爆破的阈值 |
- | [brute.maxDelay](#brutemaxdelay) |  |
- | [brute.minDelay](#brutemindelay) |  |
- | [brute.okToStop](#bruteoktostop) | 如果爆破出结果就停止 |
- | [brute.passList](#brutepasslist) | 设置密码列表 |
- | [brute.userList](#bruteuserlist) |  |
-
-
-
-
- 
-
+| [brute.GetAvailableBruteTypes](#GetAvailableBruteTypes) ||
+| [brute.GetPasswordListFromBruteType](#GetPasswordListFromBruteType) ||
+| [brute.GetUsernameListFromBruteType](#GetUsernameListFromBruteType) ||
+| [brute.New](#New) ||
+| [brute.autoDict](#autoDict) ||
+| [brute.bruteHandler](#bruteHandler) ||
+| [brute.concurrent](#concurrent) ||
+| [brute.concurrentTarget](#concurrentTarget) ||
+| [brute.debug](#debug) ||
+| [brute.finishingThreshold](#finishingThreshold) ||
+| [brute.maxDelay](#maxDelay) ||
+| [brute.minDelay](#minDelay) ||
+| [brute.okToStop](#okToStop) ||
+| [brute.passList](#passList) ||
+| [brute.userList](#userList) ||
 
 
 ## 函数定义
-
 ### brute.GetAvailableBruteTypes
-
-获取当前模块支持的所有的爆破类型
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GetAvailableBruteTypes() []string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### brute.GetPasswordListFromBruteType
-
-根据服务获取服务对应的密码列表
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GetPasswordListFromBruteType(t string) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| bruteType | `string` |   |
-
-
-
-
+| t | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| list | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### brute.GetUsernameListFromBruteType
-
-根据服务获取服务对应的用户列表
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GetUsernameListFromBruteType(t string) []string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| bruteType | `string` |   |
-
-
-
-
+| t | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| list | `[]string` |   |
+| r1 | `[]string` |   |
 
 
- 
 ### brute.New
 
-新建一个爆破执行期
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`New(string, ...tools.yakBruteOpt) (*tools.yakBruter, error)`
-
+`New(typeStr string, opts ...yakBruteOpt) (*yakBruter, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| bruteType | `string` |   |
-| bruteParams | `...yakBruteOpt` |   |
-
-
-
-
+| typeStr | `string` |   |
+| opts | `...yakBruteOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*tools.yakBruter` |   |
-| r1 | `error` |   |
+| r1 | `*yakBruter` |   |
+| r2 | `error` |   |
 
 
- 
 ### brute.autoDict
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func brute.autoDict() return (r0: func yakBruteOpt(v1: *tools.yakBruter) )`
-
- 
-
+`autoDict() yakBruteOpt`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.bruteHandler
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bruteHandler(func(*bruteutils.BruteItem) *bruteutils.BruteItemResult) tools.yakBruteOpt`
-
+`bruteHandler(cb func(item *bruteutils.BruteItem) *bruteutils.BruteItemResult) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *bruteutils.BruteItem) return(*bruteutils.BruteItemResult) ` |   |
-
-
-
-
+| cb | `func(item *bruteutils.BruteItem) *bruteutils.BruteItemResult` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.concurrent
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`concurrent(int) tools.yakBruteOpt`
-
+`concurrent(c int) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| c | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.concurrentTarget
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`concurrentTarget(int) tools.yakBruteOpt`
-
+`concurrentTarget(c int) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| c | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.debug
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`debug(bool) tools.yakBruteOpt`
-
+`debug(b bool) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.finishingThreshold
 
-停止爆破的阈值
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`finishingThreshold(int) tools.yakBruteOpt`
-
+`finishingThreshold(i int) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.maxDelay
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxDelay(int) tools.yakBruteOpt`
-
+`maxDelay(max int) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| max | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.minDelay
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`minDelay(int) tools.yakBruteOpt`
-
+`minDelay(min int) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| min | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.okToStop
 
-如果爆破出结果就停止
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`okToStop(bool) tools.yakBruteOpt`
-
+`okToStop(b bool) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.passList
 
-设置密码列表
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`passList(...string) tools.yakBruteOpt`
-
+`passList(passes ...string) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| passes | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
+| r1 | `yakBruteOpt` |   |
 
 
- 
 ### brute.userList
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`userList(...string) tools.yakBruteOpt`
-
+`userList(users ...string) yakBruteOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| users | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func yakBruteOpt(v1: *tools.yakBruter) ` |   |
-
-
- 
+| r1 | `yakBruteOpt` |   |
 
 

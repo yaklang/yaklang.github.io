@@ -1,147 +1,93 @@
 # ldap
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [ldap.Login](#ldaplogin) |  |
- | [ldap.password](#ldappassword) |  |
- | [ldap.port](#ldapport) |  |
- | [ldap.username](#ldapusername) |  |
-
-
-
-
- 
-
+| [ldap.Login](#Login) ||
+| [ldap.password](#password) ||
+| [ldap.port](#port) ||
+| [ldap.username](#username) ||
 
 
 ## 函数定义
-
 ### ldap.Login
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Login(addr string, opts ...func(config *ldapClientConfig)) (*ldap.Conn, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...func(*yaklib.ldapClientConfig)` |   |
-
-
-
-
+| addr | `string` |   |
+| opts | `...func(config *ldapClientConfig)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*ldap.Conn` |   |
-| r1 | `error` |   |
+| r1 | `*ldap.Conn` |   |
+| r2 | `error` |   |
 
 
- 
 ### ldap.password
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `password(i string) func(config *ldapClientConfig)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func (v1: *yaklib.ldapClientConfig) ` |   |
+| r1 | `func(config *ldapClientConfig)` |   |
 
 
- 
 ### ldap.port
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `port(i int) func(config *ldapClientConfig)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func (v1: *yaklib.ldapClientConfig) ` |   |
+| r1 | `func(config *ldapClientConfig)` |   |
 
 
- 
 ### ldap.username
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `username(i string) func(config *ldapClientConfig)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func (v1: *yaklib.ldapClientConfig) ` |   |
-
-
- 
+| r1 | `func(config *ldapClientConfig)` |   |
 
 

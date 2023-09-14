@@ -1,148 +1,94 @@
 # ja3
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [ja3.GetTransportByClientHelloSpec](#ja3gettransportbyclienthellospec) |  |
- | [ja3.ParseJA3](#ja3parseja3) |  |
- | [ja3.ParseJA3S](#ja3parseja3s) |  |
- | [ja3.ParseJA3ToClientHelloSpec](#ja3parseja3toclienthellospec) |  |
-
-
-
-
- 
-
+| [ja3.GetTransportByClientHelloSpec](#GetTransportByClientHelloSpec) ||
+| [ja3.ParseJA3](#ParseJA3) ||
+| [ja3.ParseJA3S](#ParseJA3S) ||
+| [ja3.ParseJA3ToClientHelloSpec](#ParseJA3ToClientHelloSpec) ||
 
 
 ## 函数定义
-
 ### ja3.GetTransportByClientHelloSpec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func ja3.GetTransportByClientHelloSpec(v1: *tls.ClientHelloSpec) return (r0: *http.Transport)`
-
+`GetTransportByClientHelloSpec(spec *tls.ClientHelloSpec) *http.Transport`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*tls.ClientHelloSpec` |   |
-
-
-
-
+| spec | `*tls.ClientHelloSpec` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Transport` |   |
+| r1 | `*http.Transport` |   |
 
 
- 
 ### ja3.ParseJA3
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func ja3.ParseJA3(v1: string) return (r0: *ja3.JA3, r1: error)`
-
+`ParseJA3(ja3FullString string) (*JA3, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| ja3FullString | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*ja3.JA3` |   |
-| r1 | `error` |   |
+| r1 | `*JA3` |   |
+| r2 | `error` |   |
 
 
- 
 ### ja3.ParseJA3S
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func ja3.ParseJA3S(v1: string) return (r0: *ja3.JA3S, r1: error)`
-
+`ParseJA3S(ja3sFullString string) (*JA3S, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| ja3sFullString | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*ja3.JA3S` |   |
-| r1 | `error` |   |
+| r1 | `*JA3S` |   |
+| r2 | `error` |   |
 
 
- 
 ### ja3.ParseJA3ToClientHelloSpec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func ja3.ParseJA3ToClientHelloSpec(v1: string) return (r0: *tls.ClientHelloSpec, r1: error)`
-
+`ParseJA3ToClientHelloSpec(str string) (*tls.ClientHelloSpec, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| str | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*tls.ClientHelloSpec` |   |
-| r1 | `error` |   |
-
-
- 
+| r1 | `*tls.ClientHelloSpec` |   |
+| r2 | `error` |   |
 
 

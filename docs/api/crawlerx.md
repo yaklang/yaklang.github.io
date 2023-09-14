@@ -1,799 +1,621 @@
 # crawlerx
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [crawlerx.StartCrawler](#crawlerxstartcrawler) |  |
- | [crawlerx.blacklist](#crawlerxblacklist) |  |
- | [crawlerx.browserInfo](#crawlerxbrowserinfo) |  |
- | [crawlerx.concurrent](#crawlerxconcurrent) |  |
- | [crawlerx.cookies](#crawlerxcookies) |  |
- | [crawlerx.extraWaitLoadTime](#crawlerxextrawaitloadtime) |  |
- | [crawlerx.fileInput](#crawlerxfileinput) |  |
- | [crawlerx.formFill](#crawlerxformfill) |  |
- | [crawlerx.fullTimeout](#crawlerxfulltimeout) |  |
- | [crawlerx.headers](#crawlerxheaders) |  |
- | [crawlerx.ignoreQueryName](#crawlerxignorequeryname) |  |
- | [crawlerx.invalidSuffix](#crawlerxinvalidsuffix) |  |
- | [crawlerx.leakless](#crawlerxleakless) |  |
- | [crawlerx.localStorage](#crawlerxlocalstorage) |  |
- | [crawlerx.maxDepth](#crawlerxmaxdepth) |  |
- | [crawlerx.maxUrl](#crawlerxmaxurl) |  |
- | [crawlerx.pageTimeout](#crawlerxpagetimeout) |  |
- | [crawlerx.rawCookie](#crawlerxrawcookie) |  |
- | [crawlerx.rawHeaders](#crawlerxrawheaders) |  |
- | [crawlerx.scanRangeLevel](#crawlerxscanrangelevel) |  |
- | [crawlerx.scanRepeatLevel](#crawlerxscanrepeatlevel) |  |
- | [crawlerx.sensitiveWords](#crawlerxsensitivewords) |  |
- | [crawlerx.stealth](#crawlerxstealth) |  |
- | [crawlerx.whitelist](#crawlerxwhitelist) |  |
-
-
-
-
-## 变量定义
-
-|变量调用名|变量类型|变量解释/帮助信息|
-|:-----------|:---------- |:-----------|
-|`crawlerx.AllDomainScan`|`crawlerx.scanRangeLevel`| //|
-|`crawlerx.ExtremeRepeatLevel`|`crawlerx.repeatLevel`| //|
-|`crawlerx.HighRepeatLevel`|`crawlerx.repeatLevel`| //|
-|`crawlerx.LowRepeatLevel`|`crawlerx.repeatLevel`| //|
-|`crawlerx.MediumRepeatLevel`|`crawlerx.repeatLevel`| //|
-|`crawlerx.SubMenuScan`|`crawlerx.scanRangeLevel`| //|
-|`crawlerx.UnLimitRepeat`|`crawlerx.repeatLevel`| //|
-
-
-
+| [crawlerx.StartCrawler](#StartCrawler) ||
+| [crawlerx.blacklist](#blacklist) ||
+| [crawlerx.browserInfo](#browserInfo) ||
+| [crawlerx.concurrent](#concurrent) ||
+| [crawlerx.cookies](#cookies) ||
+| [crawlerx.evalJs](#evalJs) ||
+| [crawlerx.extraWaitLoadTime](#extraWaitLoadTime) ||
+| [crawlerx.fileInput](#fileInput) ||
+| [crawlerx.formFill](#formFill) ||
+| [crawlerx.fullTimeout](#fullTimeout) ||
+| [crawlerx.headers](#headers) ||
+| [crawlerx.ignoreQueryName](#ignoreQueryName) ||
+| [crawlerx.invalidSuffix](#invalidSuffix) ||
+| [crawlerx.jsResultSend](#jsResultSend) ||
+| [crawlerx.leakless](#leakless) ||
+| [crawlerx.localStorage](#localStorage) ||
+| [crawlerx.maxDepth](#maxDepth) ||
+| [crawlerx.maxUrl](#maxUrl) ||
+| [crawlerx.pageTimeout](#pageTimeout) ||
+| [crawlerx.rawCookie](#rawCookie) ||
+| [crawlerx.rawHeaders](#rawHeaders) ||
+| [crawlerx.runtimeID](#runtimeID) ||
+| [crawlerx.runtimeId](#runtimeId) ||
+| [crawlerx.saveToDB](#saveToDB) ||
+| [crawlerx.scanRangeLevel](#scanRangeLevel) ||
+| [crawlerx.scanRepeatLevel](#scanRepeatLevel) ||
+| [crawlerx.sensitiveWords](#sensitiveWords) ||
+| [crawlerx.stealth](#stealth) ||
+| [crawlerx.whitelist](#whitelist) ||
 
 
 ## 函数定义
-
 ### crawlerx.StartCrawler
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`StartCrawler(url string, opts ...core.ConfigOpt) (chan core.ReqInfo, error)`
-
+`StartCrawler(url string, opts ...ConfigOpt) (chan ReqInfo, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...crawlerx.ConfigOpt` |   |
-
-
-
-
+| url | `string` |   |
+| opts | `...ConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan crawlerx.ReqInfo` |   |
-| r1 | `error` |   |
+| r1 | `chan ReqInfo` |   |
+| r2 | `error` |   |
 
 
- 
 ### crawlerx.blacklist
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.blacklist(v1 ...string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`blacklist(keywords ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| keywords | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.browserInfo
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.browserInfo(v1: string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`browserInfo(data string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| data | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.concurrent
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`concurrent(int) core.ConfigOpt`
-
+`concurrent(concurrent int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| concurrent | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.cookies
 
+#### 详细描述
 
+
+#### 定义
+
+`cookies(domain string, cookiesInfo map[string]string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| domain | `string` |   |
+| cookiesInfo | `map[string]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### crawlerx.evalJs
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`cookies(string, map[string]string) core.ConfigOpt`
-
+`evalJs(target string, evalJs string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-
-
-
-
+| target | `string` |   |
+| evalJs | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.extraWaitLoadTime
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.extraWaitLoadTime(v1: int) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`extraWaitLoadTime(extraWaitLoadTime int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| extraWaitLoadTime | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.fileInput
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.fileInput(v1: map[string]string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`fileInput(fileInput map[string]string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-
-
-
-
+| fileInput | `map[string]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.formFill
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`formFill(string, string) core.ConfigOpt`
-
+`formFill(formFills map[string]string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-
-
-
-
+| formFills | `map[string]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.fullTimeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`fullTimeout(int) core.ConfigOpt`
-
+`fullTimeout(timeout int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| timeout | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.headers
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`headers(map[string]string) core.ConfigOpt`
-
+`headers(headersInfo map[string]string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-
-
-
-
+| headersInfo | `map[string]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.ignoreQueryName
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.ignoreQueryName(v1 ...string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`ignoreQueryName(names ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| names | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.invalidSuffix
 
+#### 详细描述
 
+
+#### 定义
+
+`invalidSuffix(suffix []string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| suffix | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### crawlerx.jsResultSend
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.invalidSuffix(v1: []string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`jsResultSend(storage func(s string)) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-
-
-
-
+| storage | `func(s string)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.leakless
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.leakless(v1: string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`leakless(leakless string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| leakless | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.localStorage
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.localStorage(v1: map[string]string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`localStorage(storage map[string]string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `map[string]string` |   |
-
-
-
-
+| storage | `map[string]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.maxDepth
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxDepth(int) core.ConfigOpt`
-
+`maxDepth(depth int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| depth | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.maxUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxUrl(int) core.ConfigOpt`
-
+`maxUrl(maxUrl int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| maxUrl | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.pageTimeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.pageTimeout(v1: int) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`pageTimeout(timeout int) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| timeout | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.rawCookie
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.rawCookie(v1: string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`rawCookie(domain string, cookieInfo string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| domain | `string` |   |
+| cookieInfo | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.rawHeaders
 
+#### 详细描述
 
+
+#### 定义
+
+`rawHeaders(headerInfo string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| headerInfo | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### crawlerx.runtimeID
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.rawHeaders(v1: string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`runtimeID(id string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| id | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
+### crawlerx.runtimeId
+
+#### 详细描述
+
+
+#### 定义
+
+`runtimeId(id string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### crawlerx.saveToDB
+
+#### 详细描述
+
+
+#### 定义
+
+`saveToDB(b bool) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
 ### crawlerx.scanRangeLevel
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.scanRangeLevel(v1: crawlerx.scanRangeLevel) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`scanRangeLevel(scanRange scanRangeLevel) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `crawlerx.scanRangeLevel` |   |
-
-
-
-
+| scanRange | `scanRangeLevel` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.scanRepeatLevel
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.scanRepeatLevel(v1: crawlerx.repeatLevel) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`scanRepeatLevel(scanRepeat repeatLevel) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `crawlerx.repeatLevel` |   |
-
-
-
-
+| scanRepeat | `repeatLevel` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.sensitiveWords
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.sensitiveWords(v1: []string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`sensitiveWords(words []string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-
-
-
-
+| words | `[]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.stealth
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.stealth(v1: bool) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`stealth(stealth bool) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| stealth | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
+| r1 | `ConfigOpt` |   |
 
 
- 
 ### crawlerx.whitelist
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func crawlerx.whitelist(v1 ...string) return (r0: func ConfigOpt(v1: *crawlerx.Config) )`
-
+`whitelist(keywords ...string) ConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| keywords | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOpt(v1: *crawlerx.Config) ` |   |
-
-
- 
+| r1 | `ConfigOpt` |   |
 
 

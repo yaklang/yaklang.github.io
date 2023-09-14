@@ -1,1026 +1,675 @@
 # http
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [http.Do](#httpdo) |  |
- | [http.Get](#httpget) |  |
- | [http.GetAllBody](#httpgetallbody) |  |
- | [http.NewRequest](#httpnewrequest) |  |
- | [http.Post](#httppost) |  |
- | [http.Raw](#httpraw) | 创建一个 Golang 原生的 `*http.Request` |
- | [http.Request](#httprequest) |  |
- | [http.RequestFaviconHash](#httprequestfaviconhash) | 生成 favicon 的 hash(mmh3 32) |
- | [http.RequestToMD5](#httprequesttomd5) | 把对 url 的 GET 请求的内容直接编码成 md5 |
- | [http.RequestToMMH3Hash128](#httprequesttommh3hash128) | 把 GET url 的 body 变成 mmh3 的 hash128 |
- | [http.RequestToMMH3Hash128x64](#httprequesttommh3hash128x64) | 把 GET url 的 body 变成 mmh3 的 hash128x64 |
- | [http.RequestToSha1](#httprequesttosha1) | 把 GET url 的 body 变成 mmh3 的 sha1 |
- | [http.RequestToSha256](#httprequesttosha256) | 把 GET url 的 body 变成 mmh3 的 sha256 |
- | [http.body](#httpbody) |  |
- | [http.cookie](#httpcookie) |  |
- | [http.dump](#httpdump) | 工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte` |
- | [http.dumphead](#httpdumphead) | 工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte` |
- | [http.fakeua](#httpfakeua) |  |
- | [http.header](#httpheader) |  |
- | [http.json](#httpjson) |  |
- | [http.noredirect](#httpnoredirect) |  |
- | [http.params](#httpparams) |  |
- | [http.postparams](#httppostparams) |  |
- | [http.proxy](#httpproxy) |  |
- | [http.redirect](#httpredirect) |  |
- | [http.session](#httpsession) |  |
- | [http.show](#httpshow) | 调试函数，展示原始数据包内容 |
- | [http.showhead](#httpshowhead) | 调试函数，展示原始数据包内容，不包含 body |
- | [http.timeout](#httptimeout) |  |
- | [http.ua](#httpua) |  |
- | [http.uarand](#httpuarand) | 【参数】设置随机 UserAgent |
- | [http.useragent](#httpuseragent) |  |
-
-
-
-
- 
-
+| [http.Do](#Do) ||
+| [http.Get](#Get) ||
+| [http.GetAllBody](#GetAllBody) ||
+| [http.NewRequest](#NewRequest) ||
+| [http.Post](#Post) ||
+| [http.Raw](#Raw) ||
+| [http.Request](#Request) ||
+| [http.RequestFaviconHash](#RequestFaviconHash) ||
+| [http.RequestToMD5](#RequestToMD5) ||
+| [http.RequestToMMH3Hash128](#RequestToMMH3Hash128) ||
+| [http.RequestToMMH3Hash128x64](#RequestToMMH3Hash128x64) ||
+| [http.RequestToSha1](#RequestToSha1) ||
+| [http.RequestToSha256](#RequestToSha256) ||
+| [http.body](#body) ||
+| [http.cookie](#cookie) ||
+| [http.dump](#dump) ||
+| [http.dumphead](#dumphead) ||
+| [http.fakeua](#fakeua) ||
+| [http.header](#header) ||
+| [http.json](#json) ||
+| [http.noredirect](#noredirect) ||
+| [http.params](#params) |GetParams set query params|
+| [http.postparams](#postparams) |PostParams set post params|
+| [http.proxy](#proxy) ||
+| [http.redirect](#redirect) ||
+| [http.session](#session) ||
+| [http.show](#show) ||
+| [http.showhead](#showhead) ||
+| [http.timeout](#timeout) ||
+| [http.ua](#ua) ||
+| [http.uarand](#uarand) ||
+| [http.useragent](#useragent) ||
 
 
 ## 函数定义
-
 ### http.Do
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Do(req *YakHttpRequest) (*http.Response, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*yakhttp.YakHttpRequest` |   |
-
-
-
-
+| req | `*YakHttpRequest` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Response` |   |
-| r1 | `error` |   |
+| r1 | `*http.Response` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.Get
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Get(string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
-
+`Get(url string, opts ...HttpOption) (*YakHttpResponse, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakhttp.HttpOption` |   |
-
-
-
-
+| url | `string` |   |
+| opts | `...HttpOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakhttp.YakHttpResponse` |   |
-| r1 | `error` |   |
+| r1 | `*YakHttpResponse` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.GetAllBody
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GetAllBody(raw any) []byte`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| raw | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
+| r1 | `[]byte` |   |
 
 
- 
 ### http.NewRequest
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`NewRequest(string, string, ...yakhttp.HttpOption) (*yakhttp.YakHttpRequest, error)`
-
+`NewRequest(method string, url string, opts ...HttpOption) (*YakHttpRequest, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yakhttp.HttpOption` |   |
-
-
-
-
+| method | `string` |   |
+| url | `string` |   |
+| opts | `...HttpOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakhttp.YakHttpRequest` |   |
-| r1 | `error` |   |
+| r1 | `*YakHttpRequest` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.Post
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Post(string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
-
+`Post(url string, opts ...HttpOption) (*YakHttpResponse, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yakhttp.HttpOption` |   |
-
-
-
-
+| url | `string` |   |
+| opts | `...HttpOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakhttp.YakHttpResponse` |   |
-| r1 | `error` |   |
+| r1 | `*YakHttpResponse` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.Raw
 
-创建一个 Golang 原生的 `*http.Request`
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Raw(any) (*http.Request, error)`
-
+`Raw(i any) (*http.Request, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| req | `[]byte|string|*http.Request|http.Request` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*http.Request` |   |
-| r1 | `error` |   |
+| r1 | `*http.Request` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.Request
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Request(string, string, ...yakhttp.HttpOption) (*yakhttp.YakHttpResponse, error)`
-
+`Request(method string, url string, options ...HttpOption) (*YakHttpResponse, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yakhttp.HttpOption` |   |
-
-
-
-
+| method | `string` |   |
+| url | `string` |   |
+| options | `...HttpOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakhttp.YakHttpResponse` |   |
-| r1 | `error` |   |
+| r1 | `*YakHttpResponse` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestFaviconHash
-
-生成 favicon 的 hash(mmh3 32)
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestFaviconHash(urlRaw string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| urlRaw | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestToMD5
-
-把对 url 的 GET 请求的内容直接编码成 md5
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestToMD5(url string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| md5Str | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestToMMH3Hash128
-
-把 GET url 的 body 变成 mmh3 的 hash128
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestToMMH3Hash128(url string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestToMMH3Hash128x64
-
-把 GET url 的 body 变成 mmh3 的 hash128x64
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestToMMH3Hash128x64(url string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestToSha1
-
-把 GET url 的 body 变成 mmh3 的 sha1
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestToSha1(url string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.RequestToSha256
-
-把 GET url 的 body 变成 mmh3 的 sha256
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RequestToSha256(url string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.body
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`body(any) yakhttp.HttpOption`
-
+`body(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.cookie
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`cookie(any) yakhttp.HttpOption`
-
+`cookie(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.dump
-
-工具函数，把 `http.Request/http.Response` 变成完整的数据包 `[]byte`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `dump(i any) ([]byte, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| reqOrRsp | `http.Response/Request` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
-| r1 | `error` |   |
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.dumphead
-
-工具函数，把 `http.Request/http.Response` 的数据包的头序列化程 `[]byte`
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `dumphead(i any) ([]byte, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| reqOrRsp | `http.Response/Request` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `bytes` |   |
-| r1 | `error` |   |
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
 
 
- 
 ### http.fakeua
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`fakeua() yakhttp.HttpOption`
-
- 
-
+`fakeua() HttpOption`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.header
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`header(any, any) yakhttp.HttpOption`
-
+`header(key any, value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
+| key | `any` |   |
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.json
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`json(any) yakhttp.HttpOption`
-
+`json(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.noredirect
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`noredirect() yakhttp.HttpOption`
-
- 
-
+`noredirect() HttpOption`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.params
 
-
-
 #### 详细描述
+GetParams set query params
 
+#### 定义
 
-
-#### 定义：
-
-`params(any) yakhttp.HttpOption`
-
+`params(i any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.postparams
 
-
-
 #### 详细描述
+PostParams set post params
 
+#### 定义
 
-
-#### 定义：
-
-`postparams(any) yakhttp.HttpOption`
-
+`postparams(i any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| i | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.proxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`proxy(...string) yakhttp.HttpOption`
-
+`proxy(values ...string) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| values | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.redirect
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`redirect(func(*http.Request, []*http.Request) bool) yakhttp.HttpOption`
-
+`redirect(c func(r *http.Request, vias []*http.Request) bool) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *http.Request, v2: []*http.Request) return(bool) ` |   |
-
-
-
-
+| c | `func(r *http.Request, vias []*http.Request) bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.session
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`session(any) yakhttp.HttpOption`
-
+`session(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.show
-
-调试函数，展示原始数据包内容
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `show(i any)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| reqOrRsp | `http.Request/Response` |   |
+| i | `any` |   |
 
 
-
-
- 
-
- 
 ### http.showhead
 
-调试函数，展示原始数据包内容，不包含 body
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`showhead(any)`
-
+`showhead(i any)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| reqOrRsp | `http.Request/Response` |   |
+| i | `any` |   |
 
 
-
-
- 
-
- 
 ### http.timeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`timeout(float64) yakhttp.HttpOption`
-
+`timeout(f float64) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| f | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.ua
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ua(any) yakhttp.HttpOption`
-
+`ua(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
+| r1 | `HttpOption` |   |
 
 
- 
 ### http.uarand
-
-【参数】设置随机 UserAgent
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `uarand() string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### http.useragent
-
-
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`useragent(any) yakhttp.HttpOption`
-
+`useragent(value any) HttpOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| value | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func HttpOption(v1: *yakhttp.YakHttpRequest) ` |   |
-
-
- 
+| r1 | `HttpOption` |   |
 
 

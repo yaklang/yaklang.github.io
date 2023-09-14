@@ -1,290 +1,192 @@
 # spacengine
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [spacengine.FofaQuery](#spacenginefofaquery) | 查询 Fofa 中的数据 |
- | [spacengine.HunterQuery](#spacenginehunterquery) | 新增 Hunter 空间引擎接口 |
- | [spacengine.QuakeQuery](#spacenginequakequery) |  |
- | [spacengine.ShodanQuery](#spacengineshodanquery) |  |
- | [spacengine.ZoomeyeQuery](#spacenginezoomeyequery) |  |
- | [spacengine.maxPage](#spacenginemaxpage) | 【参数】最多筛选多少页？ |
- | [spacengine.maxRecord](#spacenginemaxrecord) | 【参数】最多获取多少条数据？但是由于 limit 的限制，这个数据往往比 maxRecord 多，直到补满当前页 |
- | [spacengine.pageSize](#spacenginepagesize) |  |
-
-
-
-
- 
-
+| [spacengine.FofaQuery](#FofaQuery) ||
+| [spacengine.HunterQuery](#HunterQuery) ||
+| [spacengine.QuakeQuery](#QuakeQuery) ||
+| [spacengine.ShodanQuery](#ShodanQuery) ||
+| [spacengine.ZoomeyeQuery](#ZoomeyeQuery) ||
+| [spacengine.maxPage](#maxPage) ||
+| [spacengine.maxRecord](#maxRecord) ||
+| [spacengine.pageSize](#pageSize) ||
 
 
 ## 函数定义
-
 ### spacengine.FofaQuery
 
-查询 Fofa 中的数据
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`FofaQuery(email, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
-
+`FofaQuery(email string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| email | `string` |  认证Email |
+| email | `string` |   |
 | key | `string` |   |
-| filter | `string` |  想要筛选的条件 |
-| params | `...opt` |   |
-
-
-
-
+| filter | `string` |   |
+| opts | `..._spaceEngineConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultChan | `chan *spacengine.NetSpaceEngineResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### spacengine.HunterQuery
 
-新增 Hunter 空间引擎接口
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`HunterQuery(name, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
-
+`HunterQuery(name string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| username | `string` |   |
-| apikey | `string` |   |
-| query | `string` |   |
-| opts | `...yaklib._spaceEngineConfigOpt` |   |
-
-
-
-
+| name | `string` |   |
+| key | `string` |   |
+| filter | `string` |   |
+| opts | `..._spaceEngineConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### spacengine.QuakeQuery
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`QuakeQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
-
+`QuakeQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| apiKey | `string` |   |
+| token | `string` |   |
 | filter | `string` |   |
-| params | `...opt` |   |
-
-
-
-
+| opts | `..._spaceEngineConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultChan | `chan *spacengine.NetSpaceEngineResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### spacengine.ShodanQuery
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ShodanQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
-
+`ShodanQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| apiKey | `string` |   |
+| token | `string` |   |
 | filter | `string` |   |
-| params | `...yaklib._spaceEngineConfigOpt` |   |
-
-
-
-
+| opts | `..._spaceEngineConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| resultChan | `chan *spacengine.NetSpaceEngineResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### spacengine.ZoomeyeQuery
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`ZoomeyeQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine.NetSpaceEngineResult, error)`
-
+`ZoomeyeQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...yaklib._spaceEngineConfigOpt` |   |
-
-
-
-
+| key | `string` |   |
+| filter | `string` |   |
+| opts | `..._spaceEngineConfigOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *spacengine.NetSpaceEngineResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### spacengine.maxPage
 
-【参数】最多筛选多少页？
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxPage(int) yaklib._spaceEngineConfigOpt`
-
+`maxPage(i int) _spaceEngineConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| maxPage | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r1 | `_spaceEngineConfigOpt` |   |
 
 
- 
 ### spacengine.maxRecord
 
-【参数】最多获取多少条数据？但是由于 limit 的限制，这个数据往往比 maxRecord 多，直到补满当前页
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`maxRecord(int) yaklib._spaceEngineConfigOpt`
-
+`maxRecord(i int) _spaceEngineConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| maxRecord | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r1 | `_spaceEngineConfigOpt` |   |
 
 
- 
 ### spacengine.pageSize
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func spacengine.pageSize(v1: int) return (r0: func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) )`
-
+`pageSize(i int) _spaceEngineConfigOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _spaceEngineConfigOpt(v1: *yaklib._spaceEngineConfig) ` |   |
-
-
- 
+| r1 | `_spaceEngineConfigOpt` |   |
 
 

@@ -1,217 +1,141 @@
 # xhtml
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [xhtml.CompareHtml](#xhtmlcomparehtml) |  |
- | [xhtml.Find](#xhtmlfind) | 寻找一个关键字在 HTML 中的位置 |
- | [xhtml.GenerateXPath](#xhtmlgeneratexpath) | 生成 xpath |
- | [xhtml.MatchBetween](#xhtmlmatchbetween) |  |
- | [xhtml.RandomUpperAndLower](#xhtmlrandomupperandlower) | 随机大小写变换 |
- | [xhtml.Walker](#xhtmlwalker) | 遍历 HTML |
-
-
-
-
- 
-
+| [xhtml.CompareHtml](#CompareHtml) ||
+| [xhtml.Find](#Find) ||
+| [xhtml.GenerateXPath](#GenerateXPath) ||
+| [xhtml.MatchBetween](#MatchBetween) ||
+| [xhtml.RandomUpperAndLower](#RandomUpperAndLower) ||
+| [xhtml.Walker](#Walker) ||
 
 
 ## 函数定义
-
 ### xhtml.CompareHtml
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`CompareHtml(any, any) ([]*xhtml.DiffInfo, error)`
-
+`CompareHtml(htmlRaw1 any, htmlRaw2 any) ([]*DiffInfo, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `any` |   |
-
-
-
-
+| htmlRaw1 | `any` |   |
+| htmlRaw2 | `any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*xhtml.DiffInfo` |   |
-| r1 | `error` |   |
+| r1 | `[]*DiffInfo` |   |
+| r2 | `error` |   |
 
 
- 
 ### xhtml.Find
 
-寻找一个关键字在 HTML 中的位置
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Find(any, string) []*xhtml.MatchNodeInfo`
-
+`Find(htmlRaw any, matchStr string) []*MatchNodeInfo`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| html | `any` |   |
-| keyword | `string` |   |
-
-
-
-
+| htmlRaw | `any` |   |
+| matchStr | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*xhtml.MatchNodeInfo` |   |
+| r1 | `[]*MatchNodeInfo` |   |
 
 
- 
 ### xhtml.GenerateXPath
-
-生成 xpath
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GenerateXPath(node *html.Node) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*html.Node` |   |
-
-
-
-
+| node | `*html.Node` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-
-
- 
-### xhtml.MatchBetween
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`MatchBetween(srcBody any, start string, end string, max int) (int, string)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `string` |   |
-| v3 | `string` |   |
-| v4 | `int` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `int` |   |
 | r1 | `string` |   |
 
 
- 
-### xhtml.RandomUpperAndLower
-
-随机大小写变换
+### xhtml.MatchBetween
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
+`MatchBetween(srcBody any, start string, end string, max int) (int, string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| srcBody | `any` |   |
+| start | `string` |   |
+| end | `string` |   |
+| max | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+| r2 | `string` |   |
+
+
+### xhtml.RandomUpperAndLower
+
+#### 详细描述
+
+
+#### 定义
 
 `RandomUpperAndLower(s string) string`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| s | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### xhtml.Walker
-
-遍历 HTML
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Walker(h any, handler func(node *html.Node)) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| html | `any` |   |
-| v2 | `func (v1: *html.Node) ` |   |
-
-
-
-
+| h | `any` |   |
+| handler | `func(node *html.Node)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
-
- 
+| r1 | `error` |   |
 
 

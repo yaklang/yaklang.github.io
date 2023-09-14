@@ -1,464 +1,303 @@
 # synscan
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [synscan.FixPermission](#synscanfixpermission) |  |
- | [synscan.Scan](#synscanscan) | 扫描核心函数 |
- | [synscan.ScanFromPing](#synscanscanfromping) | 新增从 Ping 中的扫描 |
- | [synscan.callback](#synscancallback) |  |
- | [synscan.concurrent](#synscanconcurrent) |  |
- | [synscan.excludeHosts](#synscanexcludehosts) | 可设置排除的 Host |
- | [synscan.excludePorts](#synscanexcludeports) | 设置排除端口 |
- | [synscan.initHostFilter](#synscaninithostfilter) |  |
- | [synscan.initPortFilter](#synscaninitportfilter) |  |
- | [synscan.outputFile](#synscanoutputfile) | 【参数】synscan 对外输出的文件 |
- | [synscan.outputPrefix](#synscanoutputprefix) | 【参数】输出的文件每一行的前缀（用于增加 `https://` 这样的协议名等） |
- | [synscan.rateLimit](#synscanratelimit) |  |
- | [synscan.submitTaskCallback](#synscansubmittaskcallback) |  |
- | [synscan.wait](#synscanwait) | 【参数】当所有数据包发出之后，等待多少秒？ |
-
-
-
-
- 
-
+| [synscan.FixPermission](#FixPermission) ||
+| [synscan.Scan](#Scan) ||
+| [synscan.ScanFromPing](#ScanFromPing) ||
+| [synscan.callback](#callback) ||
+| [synscan.concurrent](#concurrent) |设置 SYN 扫描的并发可以有效控制精准度|
+| [synscan.excludeHosts](#excludeHosts) ||
+| [synscan.excludePorts](#excludePorts) ||
+| [synscan.initHostFilter](#initHostFilter) ||
+| [synscan.initPortFilter](#initPortFilter) ||
+| [synscan.outputFile](#outputFile) |端口开放的结果保存到文件|
+| [synscan.outputPrefix](#outputPrefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等|
+| [synscan.rateLimit](#rateLimit) ||
+| [synscan.submitTaskCallback](#submitTaskCallback) ||
+| [synscan.wait](#wait) |synscan 发出 SYN 包后等待多久？|
 
 
 ## 函数定义
-
 ### synscan.FixPermission
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `FixPermission() error`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
-
- 
-### synscan.Scan
-
-扫描核心函数
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Scan(string, string, ...tools.scanOpt) (chan *synscan.SynScanResult, error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| hosts | `string` |   |
-| ports | `string` |   |
-| v3 | `...tools.scanOpt` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `chan *synscan.SynScanResult` |   |
 | r1 | `error` |   |
 
 
- 
-### synscan.ScanFromPing
-
-新增从 Ping 中的扫描
+### synscan.Scan
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
+`Scan(target string, port string, opts ...scanOpt) (chan *synscan.SynScanResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| target | `string` |   |
+| port | `string` |   |
+| opts | `...scanOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *synscan.SynScanResult` |   |
+| r2 | `error` |   |
+
+
+### synscan.ScanFromPing
+
+#### 详细描述
+
+
+#### 定义
 
 `ScanFromPing(res chan *pingutil.PingResult, ports string, opts ...scanOpt) (chan *synscan.SynScanResult, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `chan *pingutil.PingResult` |   |
-| v2 | `string` |   |
-| v3 | `...tools.scanOpt` |   |
-
-
-
-
+| res | `chan *pingutil.PingResult` |   |
+| ports | `string` |   |
+| opts | `...scanOpt` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `chan *synscan.SynScanResult` |   |
-| r1 | `error` |   |
+| r1 | `chan *synscan.SynScanResult` |   |
+| r2 | `error` |   |
 
 
- 
 ### synscan.callback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`callback(func(*synscan.SynScanResult)) tools.scanOpt`
-
+`callback(i func(i *synscan.SynScanResult)) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: *synscan.SynScanResult) ` |   |
-
-
-
-
+| i | `func(i *synscan.SynScanResult)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.concurrent
 
-
-
 #### 详细描述
+设置 SYN 扫描的并发可以有效控制精准度
 
+#### 定义
 
-
-#### 定义：
-
-`concurrent(int) tools.scanOpt`
-
+`concurrent(count int) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| count | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.excludeHosts
 
-可设置排除的 Host
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`excludeHosts(string) tools.scanOpt`
-
+`excludeHosts(hosts string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| hosts | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.excludePorts
 
-设置排除端口
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`excludePorts(string) tools.scanOpt`
-
+`excludePorts(ports string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| ports | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.initHostFilter
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`initHostFilter(string) tools.scanOpt`
-
+`initHostFilter(f string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| f | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.initPortFilter
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`initPortFilter(string) tools.scanOpt`
-
+`initPortFilter(f string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| f | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.outputFile
 
-【参数】synscan 对外输出的文件
-
 #### 详细描述
+端口开放的结果保存到文件
 
+#### 定义
 
-
-#### 定义：
-
-`outputFile(string) tools.scanOpt`
-
+`outputFile(file string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| file | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.outputPrefix
 
-【参数】输出的文件每一行的前缀（用于增加 `https://` 这样的协议名等）
-
 #### 详细描述
+端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
 
+#### 定义
 
-
-#### 定义：
-
-`outputPrefix(string) tools.scanOpt`
-
+`outputPrefix(prefix string) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | prefix | `string` |   |
 
-
-
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `opt` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.rateLimit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`rateLimit(int, int) tools.scanOpt`
-
+`rateLimit(ms int, count int) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-| v2 | `int` |   |
-
-
-
-
+| ms | `int` |   |
+| count | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.submitTaskCallback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`submitTaskCallback(func(string)) tools.scanOpt`
-
+`submitTaskCallback(i func(string)) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: string) ` |   |
-
-
-
-
+| i | `func(string)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
+| r1 | `scanOpt` |   |
 
 
- 
 ### synscan.wait
 
-【参数】当所有数据包发出之后，等待多少秒？
-
 #### 详细描述
+synscan 发出 SYN 包后等待多久？
 
+#### 定义
 
-
-#### 定义：
-
-`wait(float64) tools.scanOpt`
-
+`wait(sec float64) scanOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| sec | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func scanOpt(v1: *tools._yakPortScanConfig) ` |   |
-
-
- 
+| r1 | `scanOpt` |   |
 
 

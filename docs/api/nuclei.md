@@ -1,1889 +1,1237 @@
 # nuclei
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [nuclei.AllPoC](#nucleiallpoc) | 获取当前所有 PoC 对象 |
- | [nuclei.GetPoCDir](#nucleigetpocdir) |  |
- | [nuclei.PocVulToRisk](#nucleipocvultorisk) |  |
- | [nuclei.PullDatabase](#nucleipulldatabase) | 拉去数据库 |
- | [nuclei.RemoveDatabase](#nucleiremovedatabase) | 移除 nuclei 数据库 |
- | [nuclei.Scan](#nucleiscan) |  |
- | [nuclei.ScanAuto](#nucleiscanauto) |  |
- | [nuclei.UpdateDatabase](#nucleiupdatedatabase) |  |
- | [nuclei.bulkSize](#nucleibulksize) |  |
- | [nuclei.debug](#nucleidebug) |  |
- | [nuclei.debugRequest](#nucleidebugrequest) |  |
- | [nuclei.debugResponse](#nucleidebugresponse) |  |
- | [nuclei.dnsResolver](#nucleidnsresolver) |  |
- | [nuclei.enableReverseConnection](#nucleienablereverseconnection) |  |
- | [nuclei.excludeTags](#nucleiexcludetags) |  |
- | [nuclei.excludeTemplates](#nucleiexcludetemplates) |  |
- | [nuclei.fromPlugin](#nucleifromplugin) |  |
- | [nuclei.fuzzQueryTemplate](#nucleifuzzquerytemplate) |  |
- | [nuclei.headers](#nucleiheaders) |  |
- | [nuclei.headless](#nucleiheadless) |  |
- | [nuclei.http2](#nucleihttp2) |  |
- | [nuclei.https](#nucleihttps) |  |
- | [nuclei.interactshTimeout](#nucleiinteractshtimeout) |  |
- | [nuclei.logFile](#nucleilogfile) |  |
- | [nuclei.metrics](#nucleimetrics) |  |
- | [nuclei.mode](#nucleimode) |  |
- | [nuclei.newTemplates](#nucleinewtemplates) |  |
- | [nuclei.noColor](#nucleinocolor) |  |
- | [nuclei.noInteractsh](#nucleinointeractsh) |  |
- | [nuclei.noMeta](#nucleinometa) |  |
- | [nuclei.output](#nucleioutput) |  |
- | [nuclei.pageTimeout](#nucleipagetimeout) |  |
- | [nuclei.proxy](#nucleiproxy) |  |
- | [nuclei.rateLimit](#nucleiratelimit) |  |
- | [nuclei.rawTemplate](#nucleirawtemplate) |  |
- | [nuclei.reportingConfig](#nucleireportingconfig) |  |
- | [nuclei.reportingDB](#nucleireportingdb) |  |
- | [nuclei.resultCallback](#nucleiresultcallback) |  |
- | [nuclei.retry](#nucleiretry) |  |
- | [nuclei.reverseUrl](#nucleireverseurl) |  |
- | [nuclei.runtimeId](#nucleiruntimeid) |  |
- | [nuclei.severity](#nucleiseverity) |  |
- | [nuclei.showBrowser](#nucleishowbrowser) |  |
- | [nuclei.silent](#nucleisilent) |  |
- | [nuclei.stopAtFirstMatch](#nucleistopatfirstmatch) |  |
- | [nuclei.systemDnsResolver](#nucleisystemdnsresolver) |  |
- | [nuclei.tags](#nucleitags) |  |
- | [nuclei.targetConcurrent](#nucleitargetconcurrent) |  |
- | [nuclei.tcpResultCallback](#nucleitcpresultcallback) |  |
- | [nuclei.templateList](#nucleitemplatelist) |  |
- | [nuclei.templates](#nucleitemplates) |  |
- | [nuclei.templatesDir](#nucleitemplatesdir) |  |
- | [nuclei.templatesThreads](#nucleitemplatesthreads) |  |
- | [nuclei.templatesVersion](#nucleitemplatesversion) |  |
- | [nuclei.timeout](#nucleitimeout) |  |
- | [nuclei.updateTemplates](#nucleiupdatetemplates) |  |
- | [nuclei.verbose](#nucleiverbose) |  |
- | [nuclei.version](#nucleiversion) |  |
- | [nuclei.workflows](#nucleiworkflows) |  |
-
-
-
-
- 
-
+| [nuclei.AllPoC](#AllPoC) ||
+| [nuclei.GetPoCDir](#GetPoCDir) ||
+| [nuclei.PocVulToRisk](#PocVulToRisk) ||
+| [nuclei.PullDatabase](#PullDatabase) ||
+| [nuclei.RemoveDatabase](#RemoveDatabase) ||
+| [nuclei.Scan](#Scan) ||
+| [nuclei.ScanAuto](#ScanAuto) ||
+| [nuclei.UpdateDatabase](#UpdateDatabase) ||
+| [nuclei.bulkSize](#bulkSize) ||
+| [nuclei.debug](#debug) ||
+| [nuclei.debugRequest](#debugRequest) ||
+| [nuclei.debugResponse](#debugResponse) ||
+| [nuclei.dnsResolver](#dnsResolver) ||
+| [nuclei.enableReverseConnection](#enableReverseConnection) ||
+| [nuclei.excludeTags](#excludeTags) ||
+| [nuclei.excludeTemplates](#excludeTemplates) ||
+| [nuclei.fromPlugin](#fromPlugin) ||
+| [nuclei.fuzzQueryTemplate](#fuzzQueryTemplate) ||
+| [nuclei.headers](#headers) ||
+| [nuclei.headless](#headless) ||
+| [nuclei.http2](#http2) ||
+| [nuclei.https](#https) ||
+| [nuclei.interactshTimeout](#interactshTimeout) ||
+| [nuclei.logFile](#logFile) ||
+| [nuclei.metrics](#metrics) ||
+| [nuclei.mode](#mode) ||
+| [nuclei.newTemplates](#newTemplates) ||
+| [nuclei.noColor](#noColor) ||
+| [nuclei.noInteractsh](#noInteractsh) ||
+| [nuclei.noMeta](#noMeta) ||
+| [nuclei.output](#output) ||
+| [nuclei.pageTimeout](#pageTimeout) ||
+| [nuclei.proxy](#proxy) ||
+| [nuclei.rateLimit](#rateLimit) ||
+| [nuclei.rawTemplate](#rawTemplate) ||
+| [nuclei.reportingConfig](#reportingConfig) ||
+| [nuclei.reportingDB](#reportingDB) ||
+| [nuclei.resultCallback](#resultCallback) ||
+| [nuclei.retry](#retry) ||
+| [nuclei.reverseUrl](#reverseUrl) ||
+| [nuclei.runtimeId](#runtimeId) ||
+| [nuclei.severity](#severity) ||
+| [nuclei.showBrowser](#showBrowser) ||
+| [nuclei.silent](#silent) ||
+| [nuclei.stopAtFirstMatch](#stopAtFirstMatch) ||
+| [nuclei.systemDnsResolver](#systemDnsResolver) ||
+| [nuclei.tags](#tags) ||
+| [nuclei.targetConcurrent](#targetConcurrent) ||
+| [nuclei.tcpResultCallback](#tcpResultCallback) ||
+| [nuclei.templateList](#templateList) ||
+| [nuclei.templates](#templates) ||
+| [nuclei.templatesDir](#templatesDir) ||
+| [nuclei.templatesThreads](#templatesThreads) ||
+| [nuclei.templatesVersion](#templatesVersion) ||
+| [nuclei.timeout](#timeout) ||
+| [nuclei.updateTemplates](#updateTemplates) ||
+| [nuclei.verbose](#verbose) ||
+| [nuclei.version](#version) ||
+| [nuclei.workflows](#workflows) ||
 
 
 ## 函数定义
-
 ### nuclei.AllPoC
 
-获取当前所有 PoC 对象
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`AllPoC(...string) ([]*tools.templateDesc, error)`
-
+`AllPoC(defaultDirs ...string) ([]*templateDesc, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| defaultDirs | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*tools.templateDesc` |   |
-| r1 | `error` |   |
+| r1 | `[]*templateDesc` |   |
+| r2 | `error` |   |
 
 
- 
 ### nuclei.GetPoCDir
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `GetPoCDir() string`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
+| r1 | `string` |   |
 
 
- 
 ### nuclei.PocVulToRisk
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `PocVulToRisk(p *PocVul) *yakit.Risk`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*tools.PocVul` |   |
-
-
-
-
+| p | `*PocVul` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*yakit.Risk` |   |
+| r1 | `*yakit.Risk` |   |
 
 
- 
 ### nuclei.PullDatabase
-
-拉去数据库
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `PullDatabase(giturl string, proxy ...string) (string, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| gitUrl | `string` |   |
-| proxies | `...string` |   |
-
-
-
-
+| giturl | `string` |   |
+| proxy | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
-| r1 | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
- 
 ### nuclei.RemoveDatabase
-
-移除 nuclei 数据库
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `RemoveDatabase() error`
 
- 
-
-
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
-
- 
-### nuclei.Scan
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`Scan(string, ...tools.nucleiOpt) (chan *tools.PocVul, error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...any` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `chan *tools.PocVul` |   |
 | r1 | `error` |   |
 
 
- 
-### nuclei.ScanAuto
-
-
+### nuclei.Scan
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func nuclei.ScanAuto(v1: any, v2 ...any)``
-
+`Scan(target any, opt ...any) (chan *tools.PocVul, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-| v2 | `...any` |   |
+| target | `any` |   |
+| opt | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *tools.PocVul` |   |
+| r2 | `error` |   |
 
 
-
-
- 
-
- 
-### nuclei.UpdateDatabase
-
-
+### nuclei.ScanAuto
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
+`ScanAuto(items any, opt ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| items | `any` |   |
+| opt | `...any` |   |
+
+
+### nuclei.UpdateDatabase
+
+#### 详细描述
+
+
+#### 定义
 
 `UpdateDatabase(nucleiDir ...string) error`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| localPath | `...string` |   |
-
-
-
-
+| nucleiDir | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
+| r1 | `error` |   |
 
 
- 
 ### nuclei.bulkSize
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`bulkSize(int) tools.nucleiOpt`
-
+`bulkSize(i int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.debug
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`debug(bool) tools.nucleiOpt`
-
+`debug(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.debugRequest
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`debugRequest(bool) tools.nucleiOpt`
-
+`debugRequest(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.debugResponse
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`debugResponse(bool) tools.nucleiOpt`
-
+`debugResponse(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.dnsResolver
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`dnsResolver(...string) tools.nucleiOpt`
-
+`dnsResolver(servers []string) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `[]string` |   |
-
-
-
-
+| servers | `[]string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.enableReverseConnection
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.enableReverseConnection(v1: bool) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`enableReverseConnection(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.excludeTags
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`excludeTags(...string) tools.nucleiOpt`
-
+`excludeTags(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.excludeTemplates
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`excludeTemplates(...string) tools.nucleiOpt`
-
+`excludeTemplates(s ...string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| s | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.fromPlugin
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.fromPlugin(v1: string) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
-
+`fromPlugin(fromPlugin string) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| fromPlugin | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.fuzzQueryTemplate
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.fuzzQueryTemplate(v1 ...string) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`fuzzQueryTemplate(s ...string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| s | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.headers
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`headers(...string) tools.nucleiOpt`
-
+`headers(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.headless
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`headless(bool) tools.nucleiOpt`
-
+`headless(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.http2
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.http2(v1: bool) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
-
+`http2(Http2 bool) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| Http2 | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.https
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.https(v1: bool) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
-
+`https(https bool) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| https | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.interactshTimeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.interactshTimeout(v1: float64) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`interactshTimeout(f float64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| f | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.logFile
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`logFile(string) tools.nucleiOpt`
-
+`logFile(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.metrics
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`metrics(bool) tools.nucleiOpt`
-
+`metrics(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.mode
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.mode(v1: string) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`mode(s string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| s | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.newTemplates
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`newTemplates(bool) tools.nucleiOpt`
-
+`newTemplates(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.noColor
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`noColor(bool) tools.nucleiOpt`
-
+`noColor(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.noInteractsh
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`noInteractsh(bool) tools.nucleiOpt`
-
+`noInteractsh(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.noMeta
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`noMeta(bool) tools.nucleiOpt`
-
+`noMeta(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.output
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`output(string) tools.nucleiOpt`
-
+`output(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.pageTimeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`pageTimeout(int) tools.nucleiOpt`
-
+`pageTimeout(i float64) lowhttp.LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `lowhttp.LowhttpOpt` |   |
 
 
- 
 ### nuclei.proxy
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`proxy(...string) tools.nucleiOpt`
-
+`proxy(proxy ...string) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| proxy | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.rateLimit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`rateLimit(int) tools.nucleiOpt`
-
+`rateLimit(i float64) lowhttp.LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `lowhttp.LowhttpOpt` |   |
 
 
- 
 ### nuclei.rawTemplate
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.rawTemplate(v1: string) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`rawTemplate(b string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| b | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.reportingConfig
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`reportingConfig(string) tools.nucleiOpt`
-
+`reportingConfig(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.reportingDB
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`reportingDB(string) tools.nucleiOpt`
-
+`reportingDB(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.resultCallback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.resultCallback(v1: func (v1: map[string]any) ) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`resultCallback(handler func(i map[string]any)) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: map[string]any) ` |   |
-
-
-
-
+| handler | `func(i map[string]any)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.retry
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`retry(int) tools.nucleiOpt`
-
+`retry(retryTimes int) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| retryTimes | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.reverseUrl
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`reverseUrl(string) tools.nucleiOpt`
-
+`reverseUrl(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.runtimeId
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.runtimeId(v1: string) return (r0: func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) )`
-
+`runtimeId(runtimeId string) LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| runtimeId | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `LowhttpOpt` |   |
 
 
- 
 ### nuclei.severity
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`severity(...string) tools.nucleiOpt`
-
+`severity(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.showBrowser
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`showBrowser(bool) tools.nucleiOpt`
-
+`showBrowser(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.silent
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`silent(bool) tools.nucleiOpt`
-
+`silent(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.stopAtFirstMatch
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`stopAtFirstMatch(bool) tools.nucleiOpt`
-
+`stopAtFirstMatch(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.systemDnsResolver
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`systemDnsResolver(bool) tools.nucleiOpt`
-
+`systemDnsResolver(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.tags
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`tags(...string) tools.nucleiOpt`
-
+`tags(f ...string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| f | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.targetConcurrent
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.targetConcurrent(v1: int) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`targetConcurrent(i int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.tcpResultCallback
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nuclei.tcpResultCallback(v1: func (v1: map[string]any) ) return (r0: func ConfigOption(v1: *httptpl.Config) )`
-
+`tcpResultCallback(handler func(i map[string]any)) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: map[string]any) ` |   |
-
-
-
-
+| handler | `func(i map[string]any)` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.templateList
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`templateList(bool) tools.nucleiOpt`
-
+`templateList(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.templates
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`templates(...string) tools.nucleiOpt`
-
+`templates(s ...string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| s | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.templatesDir
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`templatesDir(string) tools.nucleiOpt`
-
+`templatesDir(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.templatesThreads
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`templatesThreads(int) tools.nucleiOpt`
-
+`templatesThreads(i int) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int` |   |
-
-
-
-
+| i | `int` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.templatesVersion
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`templatesVersion(bool) tools.nucleiOpt`
-
+`templatesVersion(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.timeout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`timeout(int) tools.nucleiOpt`
-
+`timeout(i float64) lowhttp.LowhttpOpt`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| i | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func LowhttpOpt(v1: *lowhttp.LowhttpExecConfig) ` |   |
+| r1 | `lowhttp.LowhttpOpt` |   |
 
 
- 
 ### nuclei.updateTemplates
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`updateTemplates(bool) tools.nucleiOpt`
-
+`updateTemplates(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.verbose
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`verbose(bool) tools.nucleiOpt`
-
+`verbose(b bool) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| b | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *httptpl.Config) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### nuclei.version
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`version(bool) tools.nucleiOpt`
-
+`version(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
+| r1 | `func(i ...any) any` |   |
 
 
- 
 ### nuclei.workflows
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`workflows(...string) tools.nucleiOpt`
-
+`workflows(n string) func(i ...any) any`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| n | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `any` |   |
-
-
- 
+| r1 | `func(i ...any) any` |   |
 
 

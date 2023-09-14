@@ -1,243 +1,156 @@
 # smb
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [smb.Connect](#smbconnect) |  |
- | [smb.debug](#smbdebug) |  |
- | [smb.domain](#smbdomain) |  |
- | [smb.hash](#smbhash) |  |
- | [smb.password](#smbpassword) |  |
- | [smb.username](#smbusername) |  |
- | [smb.workstation](#smbworkstation) |  |
-
-
-
-
- 
-
+| [smb.Connect](#Connect) ||
+| [smb.debug](#debug) ||
+| [smb.domain](#domain) ||
+| [smb.hash](#hash) ||
+| [smb.password](#password) ||
+| [smb.username](#username) ||
+| [smb.workstation](#workstation) ||
 
 
 ## 函数定义
-
 ### smb.Connect
-
-
 
 #### 详细描述
 
 
-
-#### 定义：
+#### 定义
 
 `Connect(addr string, opts ..._smbConfigHandler) (*smb.Session, error)`
 
-
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...yaklib._smbConfigHandler` |   |
-
-
-
-
+| addr | `string` |   |
+| opts | `..._smbConfigHandler` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*smb.Session` |   |
-| r1 | `error` |   |
+| r1 | `*smb.Session` |   |
+| r2 | `error` |   |
 
 
- 
 ### smb.debug
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`debug(bool) yaklib._smbConfigHandler`
-
+`debug(w bool) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `bool` |   |
-
-
-
-
+| w | `bool` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
+| r1 | `_smbConfigHandler` |   |
 
 
- 
 ### smb.domain
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`domain(string) yaklib._smbConfigHandler`
-
+`domain(w string) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| w | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
+| r1 | `_smbConfigHandler` |   |
 
 
- 
 ### smb.hash
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`hash(string) yaklib._smbConfigHandler`
-
+`hash(w string) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| w | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
+| r1 | `_smbConfigHandler` |   |
 
 
- 
 ### smb.password
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`password(string) yaklib._smbConfigHandler`
-
+`password(pass string) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| pass | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
+| r1 | `_smbConfigHandler` |   |
 
 
- 
 ### smb.username
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`username(string) yaklib._smbConfigHandler`
-
+`username(user string) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| user | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
+| r1 | `_smbConfigHandler` |   |
 
 
- 
 ### smb.workstation
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`workstation(string) yaklib._smbConfigHandler`
-
+`workstation(w string) _smbConfigHandler`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| w | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func _smbConfigHandler(v1: *yaklib._smbConfig) ` |   |
-
-
- 
+| r1 | `_smbConfigHandler` |   |
 
 

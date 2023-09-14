@@ -1,1291 +1,844 @@
 # systemd
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [systemd.Create](#systemdcreate) |  |
- | [systemd.extra_raw](#systemdextra_raw) |  |
- | [systemd.install_wanted_by](#systemdinstall_wanted_by) |  |
- | [systemd.service_environment](#systemdservice_environment) |  |
- | [systemd.service_environment_file](#systemdservice_environment_file) |  |
- | [systemd.service_exec_start](#systemdservice_exec_start) |  |
- | [systemd.service_exec_start_post](#systemdservice_exec_start_post) |  |
- | [systemd.service_exec_start_pre](#systemdservice_exec_start_pre) |  |
- | [systemd.service_exec_stop](#systemdservice_exec_stop) |  |
- | [systemd.service_exec_stop_post](#systemdservice_exec_stop_post) |  |
- | [systemd.service_group](#systemdservice_group) |  |
- | [systemd.service_kill9](#systemdservice_kill9) |  |
- | [systemd.service_kill_mode](#systemdservice_kill_mode) |  |
- | [systemd.service_kill_signal](#systemdservice_kill_signal) |  |
- | [systemd.service_raw](#systemdservice_raw) |  |
- | [systemd.service_restart](#systemdservice_restart) |  |
- | [systemd.service_restart_sec](#systemdservice_restart_sec) |  |
- | [systemd.service_stderr](#systemdservice_stderr) |  |
- | [systemd.service_stdin](#systemdservice_stdin) |  |
- | [systemd.service_stdout](#systemdservice_stdout) |  |
- | [systemd.service_timeout_start_sec](#systemdservice_timeout_start_sec) |  |
- | [systemd.service_type](#systemdservice_type) |  |
- | [systemd.service_umask](#systemdservice_umask) |  |
- | [systemd.service_user](#systemdservice_user) |  |
- | [systemd.timer_active_sec](#systemdtimer_active_sec) |  |
- | [systemd.timer_boot_sec](#systemdtimer_boot_sec) |  |
- | [systemd.timer_calendar](#systemdtimer_calendar) |  |
- | [systemd.timer_raw](#systemdtimer_raw) |  |
- | [systemd.timer_startup_sec](#systemdtimer_startup_sec) |  |
- | [systemd.timer_unit](#systemdtimer_unit) |  |
- | [systemd.timer_unit_active_sec](#systemdtimer_unit_active_sec) |  |
- | [systemd.timer_unit_inactive_sec](#systemdtimer_unit_inactive_sec) |  |
- | [systemd.unit_after](#systemdunit_after) |  |
- | [systemd.unit_before](#systemdunit_before) |  |
- | [systemd.unit_binds_to](#systemdunit_binds_to) |  |
- | [systemd.unit_description](#systemdunit_description) |  |
- | [systemd.unit_documentation](#systemdunit_documentation) |  |
- | [systemd.unit_extra_line](#systemdunit_extra_line) |  |
- | [systemd.unit_requires](#systemdunit_requires) |  |
- | [systemd.unit_wants](#systemdunit_wants) |  |
-
-
-
-
- 
-
+| [systemd.Create](#Create) ||
+| [systemd.extra_raw](#extra_raw) ||
+| [systemd.install_wanted_by](#install_wanted_by) ||
+| [systemd.service_environment](#service_environment) ||
+| [systemd.service_environment_file](#service_environment_file) ||
+| [systemd.service_exec_start](#service_exec_start) ||
+| [systemd.service_exec_start_post](#service_exec_start_post) ||
+| [systemd.service_exec_start_pre](#service_exec_start_pre) ||
+| [systemd.service_exec_stop](#service_exec_stop) ||
+| [systemd.service_exec_stop_post](#service_exec_stop_post) ||
+| [systemd.service_group](#service_group) ||
+| [systemd.service_kill9](#service_kill9) ||
+| [systemd.service_kill_mode](#service_kill_mode) ||
+| [systemd.service_kill_signal](#service_kill_signal) ||
+| [systemd.service_raw](#service_raw) ||
+| [systemd.service_restart](#service_restart) ||
+| [systemd.service_restart_sec](#service_restart_sec) ||
+| [systemd.service_stderr](#service_stderr) ||
+| [systemd.service_stdin](#service_stdin) ||
+| [systemd.service_stdout](#service_stdout) ||
+| [systemd.service_timeout_start_sec](#service_timeout_start_sec) ||
+| [systemd.service_type](#service_type) ||
+| [systemd.service_umask](#service_umask) ||
+| [systemd.service_user](#service_user) ||
+| [systemd.timer_active_sec](#timer_active_sec) ||
+| [systemd.timer_boot_sec](#timer_boot_sec) ||
+| [systemd.timer_calendar](#timer_calendar) ||
+| [systemd.timer_raw](#timer_raw) ||
+| [systemd.timer_startup_sec](#timer_startup_sec) ||
+| [systemd.timer_unit](#timer_unit) ||
+| [systemd.timer_unit_active_sec](#timer_unit_active_sec) ||
+| [systemd.timer_unit_inactive_sec](#timer_unit_inactive_sec) ||
+| [systemd.unit_after](#unit_after) ||
+| [systemd.unit_before](#unit_before) ||
+| [systemd.unit_binds_to](#unit_binds_to) ||
+| [systemd.unit_description](#unit_description) ||
+| [systemd.unit_documentation](#unit_documentation) ||
+| [systemd.unit_extra_line](#unit_extra_line) ||
+| [systemd.unit_requires](#unit_requires) ||
+| [systemd.unit_wants](#unit_wants) ||
 
 
 ## 函数定义
-
 ### systemd.Create
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.Create(v1: string, v2 ...systemd.ConfigOption) return (r0: string, r1: string)`
-
+`Create(name string, opt ...ConfigOption) (string, string)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...systemd.ConfigOption` |   |
-
-
-
-
+| name | `string` |   |
+| opt | `...ConfigOption` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `string` |   |
 | r1 | `string` |   |
+| r2 | `string` |   |
 
 
- 
 ### systemd.extra_raw
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.extra_raw(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`extra_raw(i string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| i | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.install_wanted_by
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.install_wanted_by(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`install_wanted_by(wantedBy string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| wantedBy | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_environment
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_environment(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_environment(environment string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| environment | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_environment_file
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_environment_file(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_environment_file(environmentFile string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| environmentFile | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_exec_start
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_exec_start(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_exec_start(execStart string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| execStart | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_exec_start_post
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_exec_start_post(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_exec_start_post(execStartPost string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| execStartPost | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_exec_start_pre
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_exec_start_pre(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_exec_start_pre(execStartPre string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| execStartPre | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_exec_stop
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_exec_stop(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_exec_stop(execStop string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| execStop | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_exec_stop_post
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_exec_stop_post(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_exec_stop_post(execStopPost string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| execStopPost | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_group
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_group(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_group(group string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| group | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_kill9
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_kill9() return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
- 
-
+`service_kill9() ConfigOption`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_kill_mode
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_kill_mode(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_kill_mode(killMode string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| killMode | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_kill_signal
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_kill_signal(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_kill_signal(killSignal string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| killSignal | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_raw
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_raw(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_raw(extraLine string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| extraLine | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_restart
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_restart(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_restart(restart string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| restart | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_restart_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_restart_sec(v1: float64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_restart_sec(restartSec float64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| restartSec | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_stderr
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_stderr(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_stderr(standardError string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| standardError | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_stdin
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_stdin(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_stdin(standardInput string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| standardInput | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_stdout
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_stdout(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_stdout(standardOutput string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| standardOutput | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_timeout_start_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_timeout_start_sec(v1: float64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_timeout_start_sec(timeoutStartSec float64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `float64` |   |
-
-
-
-
+| timeoutStartSec | `float64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_type
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_type(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_type(serviceType string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| serviceType | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_umask
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_umask(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_umask(umask string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| umask | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.service_user
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.service_user(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`service_user(user string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| user | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_active_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_active_sec(v1: int64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_active_sec(onActiveSec int64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| onActiveSec | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_boot_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_boot_sec(v1: int64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_boot_sec(onBootSec int64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| onBootSec | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_calendar
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_calendar(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_calendar(onCalendar string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| onCalendar | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_raw
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_raw(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_raw(extraLine string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| extraLine | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_startup_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_startup_sec(v1: int64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_startup_sec(onStartupSec int64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| onStartupSec | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_unit
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_unit(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_unit(unit string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| unit | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_unit_active_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_unit_active_sec(v1: int64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_unit_active_sec(onUnitActiveSec int64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| onUnitActiveSec | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.timer_unit_inactive_sec
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.timer_unit_inactive_sec(v1: int64) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`timer_unit_inactive_sec(s int64) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `int64` |   |
-
-
-
-
+| s | `int64` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_after
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_after(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_after(after string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| after | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_before
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_before(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_before(before string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| before | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_binds_to
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_binds_to(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_binds_to(bindsTo string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| bindsTo | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_description
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_description(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_description(description string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| description | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_documentation
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_documentation(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_documentation(documentation string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| documentation | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_extra_line
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_extra_line(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_extra_line(extraLine string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| extraLine | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_requires
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_requires(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_requires(requires string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| requires | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
+| r1 | `ConfigOption` |   |
 
 
- 
 ### systemd.unit_wants
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func systemd.unit_wants(v1: string) return (r0: func ConfigOption(v1: *systemd.SystemdServiceConfig) )`
-
+`unit_wants(wants string) ConfigOption`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| wants | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func ConfigOption(v1: *systemd.SystemdServiceConfig) ` |   |
-
-
- 
+| r1 | `ConfigOption` |   |
 
 

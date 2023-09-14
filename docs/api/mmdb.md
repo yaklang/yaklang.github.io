@@ -1,84 +1,52 @@
 # mmdb
 
-
 |成员函数|函数描述/介绍|
 |:------|:--------|
- | [mmdb.Open](#mmdbopen) |  |
- | [mmdb.QueryIPCity](#mmdbqueryipcity) |  |
-
-
-
-
- 
-
+| [mmdb.Open](#Open) ||
+| [mmdb.QueryIPCity](#QueryIPCity) ||
 
 
 ## 函数定义
-
 ### mmdb.Open
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`Open(string) (*maxminddb.Reader, error)`
-
+`Open(file string) (*Reader, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
+| file | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*maxminddb.Reader` |   |
-| r1 | `error` |   |
+| r1 | `*Reader` |   |
+| r2 | `error` |   |
 
 
- 
 ### mmdb.QueryIPCity
 
-
-
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`QueryIPCity(*maxminddb.Reader, string) (*geo.City, error)`
-
+`QueryIPCity(r *maxminddb.Reader, ip string) (*geo.City, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `*maxminddb.Reader` |   |
-| v2 | `string` |   |
-
-
-
-
+| r | `*maxminddb.Reader` |   |
+| ip | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `*geo.City` |   |
-| r1 | `error` |   |
-
-
- 
+| r1 | `*geo.City` |   |
+| r2 | `error` |   |
 
 
