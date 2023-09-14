@@ -5,6 +5,7 @@
 | [tcp.Connect](#Connect) ||
 | [tcp.Forward](#Forward) ||
 | [tcp.MockServe](#MockServe) ||
+| [tcp.MockTCPProtocol](#MockTCPProtocol) ||
 | [tcp.Serve](#Serve) ||
 | [tcp.cliengProxy](#cliengProxy) ||
 | [tcp.clientLocal](#clientLocal) ||
@@ -74,6 +75,27 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | rsp | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `int` |   |
+
+
+### tcp.MockTCPProtocol
+
+#### 详细描述
+
+
+#### 定义
+
+`MockTCPProtocol(name string) (string, int)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

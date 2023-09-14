@@ -10,6 +10,7 @@
 | [nuclei.Scan](#Scan) ||
 | [nuclei.ScanAuto](#ScanAuto) ||
 | [nuclei.UpdateDatabase](#UpdateDatabase) ||
+| [nuclei.all](#all) ||
 | [nuclei.bulkSize](#bulkSize) ||
 | [nuclei.debug](#debug) ||
 | [nuclei.debugRequest](#debugRequest) ||
@@ -213,6 +214,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### nuclei.all
+
+#### 详细描述
+
+
+#### 定义
+
+`all(b bool) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
 
 
 ### nuclei.bulkSize

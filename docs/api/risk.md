@@ -368,13 +368,17 @@
 
 #### 定义
 
-`NewRisk(target string, opts ...yakit.RiskParamsOpt)`
+`NewRisk(client *YakitClient) func(target string, opts ...yakit.RiskParamsOpt)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| target | `string` |   |
-| opts | `...yakit.RiskParamsOpt` |   |
+| client | `*YakitClient` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `func(target string, opts ...yakit.RiskParamsOpt)` |   |
 
 
 ### risk.NewUnverifiedRisk

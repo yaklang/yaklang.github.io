@@ -107,6 +107,11 @@
 | tableName | `string` |   |
 | columns | `[]string` |   |
 
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `` |   |
+
 
 ### yakit.EnableWebsiteTrees
 
@@ -121,6 +126,11 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | targets | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `` |   |
 
 
 ### yakit.Error
@@ -417,7 +427,7 @@
 
 #### 定义
 
-`Output(c *YakitClient) func(i any)`
+`Output(c *YakitClient) func(i any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -427,7 +437,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(i any)` |   |
+| r1 | `func(i any) error` |   |
 
 
 ### yakit.QueryDomainsByDomainKeyword
@@ -890,14 +900,19 @@
 
 #### 定义
 
-`StatusCard(id string, data any, tags ...string)`
+`StatusCard(id string, data interface) (id string, data interface)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | id | `string` |   |
-| data | `any` |   |
-| tags | `...string` |   |
+| data | `interface` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| id | `string` |   |
+| data | `interface` |   |
 
 
 ### yakit.TableData
