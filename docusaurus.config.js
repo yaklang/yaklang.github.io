@@ -95,8 +95,8 @@ module.exports = {
                     label: "Ya! 一刻",
                 },
 		        {
-                    href: "/wiki/enumeration/pass-enumration",
-                    label: "渗透测试",
+                    href: "/Yaklab/yaklab",
+                    label: "YakLab",
                     position: "left",
                 },
                 {
@@ -210,9 +210,9 @@ module.exports = {
         [
             "@docusaurus/plugin-content-docs",
             {
-                id: "wiki",
-                path: "wiki",
-                routeBasePath: "wiki",
+                id: "Yaklab",
+                path: "Yaklab",
+                routeBasePath: "Yaklab",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
                 // ... other options
             },
