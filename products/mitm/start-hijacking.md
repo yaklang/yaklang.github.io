@@ -38,5 +38,5 @@ sidebar_position: 11
 
 ![](/img/products/yakit/mitm-14.png)
 
-5. 劫持到的所有的数据包都会存入到`history`中，劫持后可以在`history`查看感兴趣的数据包。关于History功能的详情请移步 [History](../products/expert-mode/mitm/History.md)进行查看。
+5. 劫持到的所有的数据包都会存入到`history`中，劫持后可以在`history`查看感兴趣的数据包。关于History功能的详情请移步 [History](../products/mitm/History.md)进行查看。
 
