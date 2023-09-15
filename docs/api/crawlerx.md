@@ -34,7 +34,7 @@
 
 
 ## 函数定义
-### crawlerx.StartCrawler
+### StartCrawler
 
 #### 详细描述
 
@@ -56,7 +56,7 @@
 | r2 | `error` |   |
 
 
-### crawlerx.blacklist
+### blacklist
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.browserInfo
+### browserInfo
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -116,7 +116,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.cookies
+### cookies
 
 #### 详细描述
 
@@ -137,7 +137,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.evalJs
+### evalJs
 
 #### 详细描述
 
@@ -158,7 +158,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.extraWaitLoadTime
+### extraWaitLoadTime
 
 #### 详细描述
 
@@ -178,7 +178,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.fileInput
+### fileInput
 
 #### 详细描述
 
@@ -198,7 +198,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.formFill
+### formFill
 
 #### 详细描述
 
@@ -218,7 +218,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.fullTimeout
+### fullTimeout
 
 #### 详细描述
 
@@ -238,7 +238,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.headers
+### headers
 
 #### 详细描述
 
@@ -258,7 +258,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.ignoreQueryName
+### ignoreQueryName
 
 #### 详细描述
 
@@ -278,7 +278,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.invalidSuffix
+### invalidSuffix
 
 #### 详细描述
 
@@ -298,7 +298,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.jsResultSend
+### jsResultSend
 
 #### 详细描述
 
@@ -318,7 +318,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.leakless
+### leakless
 
 #### 详细描述
 
@@ -338,7 +338,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.localStorage
+### localStorage
 
 #### 详细描述
 
@@ -358,7 +358,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.maxDepth
+### maxDepth
 
 #### 详细描述
 
@@ -378,7 +378,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.maxUrl
+### maxUrl
 
 #### 详细描述
 
@@ -398,7 +398,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.pageTimeout
+### pageTimeout
 
 #### 详细描述
 
@@ -418,7 +418,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.rawCookie
+### rawCookie
 
 #### 详细描述
 
@@ -439,7 +439,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.rawHeaders
+### rawHeaders
 
 #### 详细描述
 
@@ -459,7 +459,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.runtimeID
+### runtimeID
 
 #### 详细描述
 
@@ -479,7 +479,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.runtimeId
+### runtimeId
 
 #### 详细描述
 
@@ -499,7 +499,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.saveToDB
+### saveToDB
 
 #### 详细描述
 
@@ -519,7 +519,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.scanRangeLevel
+### scanRangeLevel
 
 #### 详细描述
 
@@ -539,7 +539,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.scanRepeatLevel
+### scanRepeatLevel
 
 #### 详细描述
 
@@ -559,7 +559,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.sensitiveWords
+### sensitiveWords
 
 #### 详细描述
 
@@ -579,7 +579,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.stealth
+### stealth
 
 #### 详细描述
 
@@ -599,7 +599,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### crawlerx.whitelist
+### whitelist
 
 #### 详细描述
 

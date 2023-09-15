@@ -47,7 +47,7 @@
 
 
 ## 函数定义
-### risk.CheckDNSLogByToken
+### CheckDNSLogByToken
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### risk.CheckICMPTriggerByLength
+### CheckICMPTriggerByLength
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r2 | `error` |   |
 
 
-### risk.CheckRandomTriggerByToken
+### CheckRandomTriggerByToken
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r2 | `error` |   |
 
 
-### risk.CreateRisk
+### CreateRisk
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `*Risk` |   |
 
 
-### risk.DeleteRiskByID
+### DeleteRiskByID
 
 #### 详细描述
 
@@ -147,7 +147,7 @@
 | id | `any` |   |
 
 
-### risk.DeleteRiskByTarget
+### DeleteRiskByTarget
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | addr | `string` |   |
 
 
-### risk.ExtractTokenFromUrl
+### ExtractTokenFromUrl
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `string` |   |
 
 
-### risk.HaveReverseRisk
+### HaveReverseRisk
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `bool` |   |
 
 
-### risk.NewDNSLogDomain
+### NewDNSLogDomain
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | _ | `error` |   |
 
 
-### risk.NewLocalReverseHTTPSUrl
+### NewLocalReverseHTTPSUrl
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewLocalReverseHTTPUrl
+### NewLocalReverseHTTPUrl
 
 #### 详细描述
 
@@ -259,7 +259,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewLocalReverseRMIUrl
+### NewLocalReverseRMIUrl
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewPublicReverseHTTPSUrl
+### NewPublicReverseHTTPSUrl
 
 #### 详细描述
 
@@ -299,7 +299,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewPublicReverseHTTPUrl
+### NewPublicReverseHTTPUrl
 
 #### 详细描述
 
@@ -319,7 +319,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewPublicReverseRMIUrl
+### NewPublicReverseRMIUrl
 
 #### 详细描述
 
@@ -339,7 +339,7 @@
 | r1 | `string` |   |
 
 
-### risk.NewRandomPortTrigger
+### NewRandomPortTrigger
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | _ | `error` |   |
 
 
-### risk.NewRisk
+### NewRisk
 
 #### 详细描述
 
@@ -381,7 +381,7 @@
 | r1 | `func(target string, opts ...yakit.RiskParamsOpt)` |   |
 
 
-### risk.NewUnverifiedRisk
+### NewUnverifiedRisk
 
 #### 详细描述
 
@@ -404,7 +404,7 @@
 | r2 | `error` |   |
 
 
-### risk.RegisterBeforeRiskSave
+### RegisterBeforeRiskSave
 
 #### 详细描述
 
@@ -419,7 +419,7 @@
 | f | `func(*Risk)` |   |
 
 
-### risk.Save
+### Save
 
 #### 详细描述
 
@@ -439,7 +439,7 @@
 | r1 | `error` |   |
 
 
-### risk.YieldRiskByCreateAt
+### YieldRiskByCreateAt
 
 #### 详细描述
 
@@ -459,7 +459,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### risk.YieldRiskByRuntimeId
+### YieldRiskByRuntimeId
 
 #### 详细描述
 
@@ -479,7 +479,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### risk.YieldRiskByTarget
+### YieldRiskByTarget
 
 #### 详细描述
 
@@ -499,7 +499,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### risk.cve
+### cve
 
 #### 详细描述
 
@@ -519,7 +519,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.description
+### description
 
 #### 详细描述
 
@@ -539,7 +539,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.details
+### details
 
 #### 详细描述
 
@@ -559,7 +559,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.fromYakScript
+### fromYakScript
 
 #### 详细描述
 
@@ -579,7 +579,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.ignore
+### ignore
 
 #### 详细描述
 
@@ -599,7 +599,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.level
+### level
 
 #### 详细描述
 
@@ -619,7 +619,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.parameter
+### parameter
 
 #### 详细描述
 
@@ -639,7 +639,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.payload
+### payload
 
 #### 详细描述
 
@@ -659,7 +659,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.potential
+### potential
 
 #### 详细描述
 
@@ -679,7 +679,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.request
+### request
 
 #### 详细描述
 
@@ -699,7 +699,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.response
+### response
 
 #### 详细描述
 
@@ -719,7 +719,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.runtimeId
+### runtimeId
 
 #### 详细描述
 
@@ -739,7 +739,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.severity
+### severity
 
 #### 详细描述
 
@@ -759,7 +759,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.solution
+### solution
 
 #### 详细描述
 
@@ -779,7 +779,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.title
+### title
 
 #### 详细描述
 
@@ -799,7 +799,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.titleVerbose
+### titleVerbose
 
 #### 详细描述
 
@@ -819,7 +819,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.token
+### token
 
 #### 详细描述
 
@@ -839,7 +839,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.type
+### type
 
 #### 详细描述
 
@@ -859,7 +859,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### risk.typeVerbose
+### typeVerbose
 
 #### 详细描述
 

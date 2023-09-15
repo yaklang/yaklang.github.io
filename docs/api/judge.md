@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### judge.CompareHTTPResponse
+### CompareHTTPResponse
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `float64` |   |
 
 
-### judge.CompareRaw
+### CompareRaw
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `float64` |   |
 
 
-### judge.NewDiscriminator
+### NewDiscriminator
 
 #### 详细描述
 

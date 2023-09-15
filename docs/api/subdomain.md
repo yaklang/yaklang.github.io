@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### subdomain.Scan
+### Scan
 
 #### 详细描述
 
@@ -39,7 +39,7 @@
 | r2 | `error` |   |
 
 
-### subdomain.dnsServer
+### dnsServer
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### subdomain.eachQueryTimeout
+### eachQueryTimeout
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### subdomain.eachSearchTimeout
+### eachSearchTimeout
 
 #### 详细描述
 
@@ -99,7 +99,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### subdomain.mainDict
+### mainDict
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### subdomain.maxDepth
+### maxDepth
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### subdomain.recursive
+### recursive
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### subdomain.recursiveDict
+### recursiveDict
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### subdomain.targetConcurrent
+### targetConcurrent
 
 #### 详细描述
 
@@ -199,7 +199,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### subdomain.targetTimeout
+### targetTimeout
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### subdomain.wildcardToStop
+### wildcardToStop
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### subdomain.workerConcurrent
+### workerConcurrent
 
 #### 详细描述
 

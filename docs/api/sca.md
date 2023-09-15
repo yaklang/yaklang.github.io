@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### sca.ScanContainerFromContext
+### ScanContainerFromContext
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | err | `error` |   |
 
 
-### sca.ScanFilesystem
+### ScanFilesystem
 
 #### 详细描述
 
@@ -57,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### sca.ScanImageFromContext
+### ScanImageFromContext
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r2 | `error` |   |
 
 
-### sca.ScanImageFromFile
+### ScanImageFromFile
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r2 | `error` |   |
 
 
-### sca.analyzers
+### analyzers
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `ScanOption` |   |
 
 
-### sca.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `ScanOption` |   |
 
 
-### sca.endpoint
+### endpoint
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `ScanOption` |   |
 
 
-### sca.scanMode
+### scanMode
 
 #### 详细描述
 

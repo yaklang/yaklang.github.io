@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### csrf.Generate
+### Generate
 
 #### 详细描述
 
@@ -30,7 +30,7 @@
 | r2 | `error` |   |
 
 
-### csrf.https
+### https
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `csrfConfig` |   |
 
 
-### csrf.multipartDefaultValue
+### multipartDefaultValue
 
 #### 详细描述
 

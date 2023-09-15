@@ -33,7 +33,7 @@
 
 
 ## 函数定义
-### cli.Args
+### Args
 
 #### 详细描述
 
@@ -48,7 +48,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Bool
+### Bool
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r1 | `bool` |   |
 
 
-### cli.Double
+### Double
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r1 | `float64` |   |
 
 
-### cli.File
+### File
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r1 | `[]byte` |   |
 
 
-### cli.FileOrContent
+### FileOrContent
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `[]byte` |   |
 
 
-### cli.Float
+### Float
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 | r1 | `float64` |   |
 
 
-### cli.Have
+### Have
 
 #### 详细描述
 
@@ -174,7 +174,7 @@
 | r1 | `bool` |   |
 
 
-### cli.Host
+### Host
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Hosts
+### Hosts
 
 #### 详细描述
 
@@ -216,7 +216,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Int
+### Int
 
 #### 详细描述
 
@@ -237,7 +237,7 @@
 | r1 | `int` |   |
 
 
-### cli.Integer
+### Integer
 
 #### 详细描述
 
@@ -258,7 +258,7 @@
 | r1 | `int` |   |
 
 
-### cli.LineDict
+### LineDict
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Net
+### Net
 
 #### 详细描述
 
@@ -300,7 +300,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Network
+### Network
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Port
+### Port
 
 #### 详细描述
 
@@ -342,7 +342,7 @@
 | r1 | `[]int` |   |
 
 
-### cli.Ports
+### Ports
 
 #### 详细描述
 
@@ -363,7 +363,7 @@
 | r1 | `[]int` |   |
 
 
-### cli.SetCliName
+### SetCliName
 
 #### 详细描述
 
@@ -378,7 +378,7 @@
 | name | `string` |   |
 
 
-### cli.SetDoc
+### SetDoc
 
 #### 详细描述
 
@@ -393,7 +393,7 @@
 | document | `string` |   |
 
 
-### cli.String
+### String
 
 #### 详细描述
 
@@ -414,7 +414,7 @@
 | r1 | `string` |   |
 
 
-### cli.StringSlice
+### StringSlice
 
 #### 详细描述
 
@@ -434,7 +434,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Url
+### Url
 
 #### 详细描述
 
@@ -455,7 +455,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.Urls
+### Urls
 
 #### 详细描述
 
@@ -476,7 +476,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.YakitPlugin
+### YakitPlugin
 
 #### 详细描述
 
@@ -491,7 +491,7 @@
 | r1 | `[]string` |   |
 
 
-### cli.check
+### check
 
 #### 详细描述
 
@@ -501,7 +501,7 @@
 `check()`
 
 
-### cli.help
+### help
 
 #### 详细描述
 
@@ -516,7 +516,7 @@
 | w | `...io.Writer` |   |
 
 
-### cli.setDefault
+### setDefault
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### cli.setHelp
+### setHelp
 
 #### 详细描述
 
@@ -556,7 +556,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### cli.setRequired
+### setRequired
 
 #### 详细描述
 

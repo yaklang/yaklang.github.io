@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### openai.Chat
+### Chat
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `string` |   |
 
 
-### openai.TranslateToChinese
+### TranslateToChinese
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `string` |   |
 
 
-### openai.apiKey
+### apiKey
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### openai.domain
+### domain
 
 #### 详细描述
 
@@ -95,7 +95,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### openai.localAPIKey
+### localAPIKey
 
 #### 详细描述
 
@@ -110,7 +110,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### openai.model
+### model
 
 #### 详细描述
 
@@ -130,7 +130,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### openai.proxy
+### proxy
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### openai.yakDomain
+### yakDomain
 
 #### 详细描述
 

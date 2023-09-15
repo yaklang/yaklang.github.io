@@ -45,7 +45,7 @@
 
 
 ## 函数定义
-### systemd.Create
+### Create
 
 #### 详细描述
 
@@ -67,7 +67,7 @@
 | r2 | `string` |   |
 
 
-### systemd.extra_raw
+### extra_raw
 
 #### 详细描述
 
@@ -87,7 +87,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.install_wanted_by
+### install_wanted_by
 
 #### 详细描述
 
@@ -107,7 +107,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_environment
+### service_environment
 
 #### 详细描述
 
@@ -127,7 +127,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_environment_file
+### service_environment_file
 
 #### 详细描述
 
@@ -147,7 +147,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_exec_start
+### service_exec_start
 
 #### 详细描述
 
@@ -167,7 +167,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_exec_start_post
+### service_exec_start_post
 
 #### 详细描述
 
@@ -187,7 +187,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_exec_start_pre
+### service_exec_start_pre
 
 #### 详细描述
 
@@ -207,7 +207,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_exec_stop
+### service_exec_stop
 
 #### 详细描述
 
@@ -227,7 +227,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_exec_stop_post
+### service_exec_stop_post
 
 #### 详细描述
 
@@ -247,7 +247,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_group
+### service_group
 
 #### 详细描述
 
@@ -267,7 +267,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_kill9
+### service_kill9
 
 #### 详细描述
 
@@ -282,7 +282,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_kill_mode
+### service_kill_mode
 
 #### 详细描述
 
@@ -302,7 +302,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_kill_signal
+### service_kill_signal
 
 #### 详细描述
 
@@ -322,7 +322,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_raw
+### service_raw
 
 #### 详细描述
 
@@ -342,7 +342,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_restart
+### service_restart
 
 #### 详细描述
 
@@ -362,7 +362,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_restart_sec
+### service_restart_sec
 
 #### 详细描述
 
@@ -382,7 +382,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_stderr
+### service_stderr
 
 #### 详细描述
 
@@ -402,7 +402,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_stdin
+### service_stdin
 
 #### 详细描述
 
@@ -422,7 +422,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_stdout
+### service_stdout
 
 #### 详细描述
 
@@ -442,7 +442,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_timeout_start_sec
+### service_timeout_start_sec
 
 #### 详细描述
 
@@ -462,7 +462,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_type
+### service_type
 
 #### 详细描述
 
@@ -482,7 +482,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_umask
+### service_umask
 
 #### 详细描述
 
@@ -502,7 +502,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.service_user
+### service_user
 
 #### 详细描述
 
@@ -522,7 +522,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_active_sec
+### timer_active_sec
 
 #### 详细描述
 
@@ -542,7 +542,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_boot_sec
+### timer_boot_sec
 
 #### 详细描述
 
@@ -562,7 +562,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_calendar
+### timer_calendar
 
 #### 详细描述
 
@@ -582,7 +582,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_raw
+### timer_raw
 
 #### 详细描述
 
@@ -602,7 +602,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_startup_sec
+### timer_startup_sec
 
 #### 详细描述
 
@@ -622,7 +622,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_unit
+### timer_unit
 
 #### 详细描述
 
@@ -642,7 +642,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_unit_active_sec
+### timer_unit_active_sec
 
 #### 详细描述
 
@@ -662,7 +662,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.timer_unit_inactive_sec
+### timer_unit_inactive_sec
 
 #### 详细描述
 
@@ -682,7 +682,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_after
+### unit_after
 
 #### 详细描述
 
@@ -702,7 +702,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_before
+### unit_before
 
 #### 详细描述
 
@@ -722,7 +722,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_binds_to
+### unit_binds_to
 
 #### 详细描述
 
@@ -742,7 +742,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_description
+### unit_description
 
 #### 详细描述
 
@@ -762,7 +762,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_documentation
+### unit_documentation
 
 #### 详细描述
 
@@ -782,7 +782,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_extra_line
+### unit_extra_line
 
 #### 详细描述
 
@@ -802,7 +802,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_requires
+### unit_requires
 
 #### 详细描述
 
@@ -822,7 +822,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### systemd.unit_wants
+### unit_wants
 
 #### 详细描述
 

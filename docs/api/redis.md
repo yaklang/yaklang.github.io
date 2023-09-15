@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### redis.New
+### New
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `*redisClient` |   |
 
 
-### redis.addr
+### addr
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.host
+### host
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.password
+### password
 
 #### 详细描述
 
@@ -93,7 +93,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.port
+### port
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.retry
+### retry
 
 #### 详细描述
 
@@ -133,7 +133,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.timeoutSeconds
+### timeoutSeconds
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### redis.username
+### username
 
 #### 详细描述
 

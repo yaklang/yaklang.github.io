@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### tools.NewBruteUtil
+### NewBruteUtil
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### tools.NewPocInvoker
+### NewPocInvoker
 
 #### 详细描述
 

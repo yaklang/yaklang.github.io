@@ -45,7 +45,7 @@
 
 
 ## 函数定义
-### db.CreateTemporaryYakScript
+### CreateTemporaryYakScript
 
 #### 详细描述
 
@@ -67,7 +67,7 @@
 | r2 | `error` |   |
 
 
-### db.DelKey
+### DelKey
 
 #### 详细描述
 
@@ -82,7 +82,7 @@
 | k | `any` |   |
 
 
-### db.DeletePayloadByGroup
+### DeletePayloadByGroup
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `error` |   |
 
 
-### db.DeleteYakScriptByName
+### DeleteYakScriptByName
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `error` |   |
 
 
-### db.DeleteYakitMenuItemAll
+### DeleteYakitMenuItemAll
 
 #### 详细描述
 
@@ -137,7 +137,7 @@
 | r1 | `error` |   |
 
 
-### db.DownloadGeoIP
+### DownloadGeoIP
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
 | r1 | `error` |   |
 
 
-### db.GetKey
+### GetKey
 
 #### 详细描述
 
@@ -172,7 +172,7 @@
 | r1 | `string` |   |
 
 
-### db.GetProjectKey
+### GetProjectKey
 
 #### 详细描述
 
@@ -192,7 +192,7 @@
 | r1 | `string` |   |
 
 
-### db.GetYakitPluginByName
+### GetYakitPluginByName
 
 #### 详细描述
 
@@ -213,7 +213,7 @@
 | r2 | `error` |   |
 
 
-### db.NewAliveHost
+### NewAliveHost
 
 #### 详细描述
 
@@ -229,7 +229,7 @@
 | opts | `...yakit.AliveHostParamsOpt` |   |
 
 
-### db.QueryAliveHost
+### QueryAliveHost
 
 #### 详细描述
 
@@ -249,7 +249,7 @@
 | r1 | `chan *yakit.AliveHost` |   |
 
 
-### db.QueryDomainsByDomainKeyword
+### QueryDomainsByDomainKeyword
 
 #### 详细描述
 
@@ -270,7 +270,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryDomainsByNetwork
+### QueryDomainsByNetwork
 
 #### 详细描述
 
@@ -291,7 +291,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryDomainsByTitle
+### QueryDomainsByTitle
 
 #### 详细描述
 
@@ -312,7 +312,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryHTTPFlowsAll
+### QueryHTTPFlowsAll
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### db.QueryHTTPFlowsByID
+### QueryHTTPFlowsByID
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### db.QueryHTTPFlowsByKeyword
+### QueryHTTPFlowsByKeyword
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### db.QueryHostPortByKeyword
+### QueryHostPortByKeyword
 
 #### 详细描述
 
@@ -388,7 +388,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryHostPortByNetwork
+### QueryHostPortByNetwork
 
 #### 详细描述
 
@@ -408,7 +408,7 @@
 | r1 | `chan string` |   |
 
 
-### db.QueryHostsByDomain
+### QueryHostsByDomain
 
 #### 详细描述
 
@@ -429,7 +429,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryIPCity
+### QueryIPCity
 
 #### 详细描述
 
@@ -450,7 +450,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryIPForIPS
+### QueryIPForIPS
 
 #### 详细描述
 
@@ -471,7 +471,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryPayloadGroups
+### QueryPayloadGroups
 
 #### 详细描述
 
@@ -491,7 +491,7 @@
 | r1 | `[]string` |   |
 
 
-### db.QueryPortsByTaskName
+### QueryPortsByTaskName
 
 #### 详细描述
 
@@ -512,7 +512,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryPortsByUpdatedAt
+### QueryPortsByUpdatedAt
 
 #### 详细描述
 
@@ -533,7 +533,7 @@
 | r2 | `error` |   |
 
 
-### db.QueryUrlsAll
+### QueryUrlsAll
 
 #### 详细描述
 
@@ -548,7 +548,7 @@
 | r1 | `chan string` |   |
 
 
-### db.QueryUrlsByKeyword
+### QueryUrlsByKeyword
 
 #### 详细描述
 
@@ -568,7 +568,7 @@
 | r1 | `chan string` |   |
 
 
-### db.SaveDomain
+### SaveDomain
 
 #### 详细描述
 
@@ -589,7 +589,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveHTTPFlowFromNative
+### SaveHTTPFlowFromNative
 
 #### 详细描述
 
@@ -611,7 +611,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveHTTPFlowFromNativeWithType
+### SaveHTTPFlowFromNativeWithType
 
 #### 详细描述
 
@@ -634,7 +634,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveHTTPFlowFromRaw
+### SaveHTTPFlowFromRaw
 
 #### 详细描述
 
@@ -657,7 +657,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveHTTPFlowFromRawWithType
+### SaveHTTPFlowFromRawWithType
 
 #### 详细描述
 
@@ -680,7 +680,7 @@
 | r1 | `error` |   |
 
 
-### db.SavePayload
+### SavePayload
 
 #### 详细描述
 
@@ -701,7 +701,7 @@
 | r1 | `error` |   |
 
 
-### db.SavePayloadByFile
+### SavePayloadByFile
 
 #### 详细描述
 
@@ -722,7 +722,7 @@
 | r1 | `error` |   |
 
 
-### db.SavePortFromResult
+### SavePortFromResult
 
 #### 详细描述
 
@@ -743,7 +743,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveYakitMenuItemByBatchExecuteConfig
+### SaveYakitMenuItemByBatchExecuteConfig
 
 #### 详细描述
 
@@ -763,7 +763,7 @@
 | r1 | `error` |   |
 
 
-### db.SaveYakitPlugin
+### SaveYakitPlugin
 
 #### 详细描述
 
@@ -785,7 +785,7 @@
 | r1 | `error` |   |
 
 
-### db.SetKey
+### SetKey
 
 #### 详细描述
 
@@ -806,7 +806,7 @@
 | r1 | `error` |   |
 
 
-### db.SetProjectKey
+### SetProjectKey
 
 #### 详细描述
 
@@ -827,7 +827,7 @@
 | r1 | `error` |   |
 
 
-### db.YieldYakScriptAll
+### YieldYakScriptAll
 
 #### 详细描述
 

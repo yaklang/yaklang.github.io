@@ -19,7 +19,7 @@
 
 
 ## 函数定义
-### mitm.Bridge
+### Bridge
 
 #### 详细描述
 
@@ -41,7 +41,7 @@
 | r1 | `error` |   |
 
 
-### mitm.Start
+### Start
 
 #### 详细描述
 
@@ -62,7 +62,7 @@
 | r1 | `error` |   |
 
 
-### mitm.callback
+### callback
 
 #### 详细描述
 
@@ -82,7 +82,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.context
+### context
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.hijackHTTPRequest
+### hijackHTTPRequest
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.hijackHTTPResponse
+### hijackHTTPResponse
 
 #### 详细描述
 
@@ -142,7 +142,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.hijackHTTPResponseEx
+### hijackHTTPResponseEx
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.host
+### host
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.isTransparent
+### isTransparent
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.maxContentLength
+### maxContentLength
 
 #### 详细描述
 
@@ -222,7 +222,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.rootCA
+### rootCA
 
 #### 详细描述
 
@@ -243,7 +243,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.useDefaultCA
+### useDefaultCA
 
 #### 详细描述
 
@@ -263,7 +263,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.wscallback
+### wscallback
 
 #### 详细描述
 
@@ -283,7 +283,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### mitm.wsforcetext
+### wsforcetext
 
 #### 详细描述
 

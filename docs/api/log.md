@@ -10,7 +10,7 @@
 
 
 ## 函数定义
-### log.debug
+### debug
 
 #### 详细描述
 Debugf will print when logger's Level is debug.
@@ -26,7 +26,7 @@ Debugf will print when logger's Level is debug.
 | args | `...any` |   |
 
 
-### log.error
+### error
 
 #### 详细描述
 Errorf will print only when logger's Level is error, warn, info or debug.
@@ -42,7 +42,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 | args | `...any` |   |
 
 
-### log.info
+### info
 
 #### 详细描述
 Infof will print when logger's Level is info or debug.
@@ -58,7 +58,7 @@ Infof will print when logger's Level is info or debug.
 | args | `...any` |   |
 
 
-### log.setLevel
+### setLevel
 
 #### 详细描述
 
@@ -73,7 +73,7 @@ Infof will print when logger's Level is info or debug.
 | i | `any` |   |
 
 
-### log.warn
+### warn
 
 #### 详细描述
 

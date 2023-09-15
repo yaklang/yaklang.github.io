@@ -43,7 +43,7 @@
 
 
 ## 函数定义
-### x.All
+### All
 
 #### 详细描述
 All returns true if all elements of the iterable are not empty (or if the iterable is empty)
@@ -63,7 +63,7 @@ All returns true if all elements of the iterable are not empty (or if the iterab
 | r1 | `bool` |   |
 
 
-### x.Any
+### Any
 
 #### 详细描述
 Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.
@@ -83,7 +83,7 @@ Any returns true if any element of the iterable is not empty. If the iterable is
 | r1 | `bool` |   |
 
 
-### x.Chunk
+### Chunk
 
 #### 详细描述
 Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining element.
@@ -104,7 +104,7 @@ Chunk creates an array of elements split into groups with the length of size.If 
 | r1 | `any` |   |
 
 
-### x.Contains
+### Contains
 
 #### 详细描述
 Contains returns true if an element is present in a iteratee.
@@ -125,7 +125,7 @@ Contains returns true if an element is present in a iteratee.
 | r1 | `bool` |   |
 
 
-### x.ConvertToMap
+### ConvertToMap
 
 #### 详细描述
 
@@ -145,7 +145,7 @@ Contains returns true if an element is present in a iteratee.
 | r1 | `map[string][]string` |   |
 
 
-### x.Difference
+### Difference
 
 #### 详细描述
 Difference returns the difference between two collections.
@@ -167,7 +167,7 @@ Difference returns the difference between two collections.
 | r2 | `any` |   |
 
 
-### x.Drop
+### Drop
 
 #### 详细描述
 Drop creates an array/slice with `n` elements dropped from the beginning.
@@ -188,7 +188,7 @@ Drop creates an array/slice with `n` elements dropped from the beginning.
 | r1 | `any` |   |
 
 
-### x.Equal
+### Equal
 
 #### 详细描述
 IsEqual returns if the two objects are equal
@@ -209,7 +209,7 @@ IsEqual returns if the two objects are equal
 | r1 | `bool` |   |
 
 
-### x.Every
+### Every
 
 #### 详细描述
 Every returns true if every element is present in a iteratee.
@@ -230,7 +230,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `bool` |   |
 
 
-### x.Filter
+### Filter
 
 #### 详细描述
 
@@ -251,7 +251,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `any` |   |
 
 
-### x.Find
+### Find
 
 #### 详细描述
 
@@ -272,7 +272,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `any` |   |
 
 
-### x.Foreach
+### Foreach
 
 #### 详细描述
 
@@ -288,7 +288,7 @@ Every returns true if every element is present in a iteratee.
 | fc | `func(any)` |   |
 
 
-### x.ForeachRight
+### ForeachRight
 
 #### 详细描述
 
@@ -304,7 +304,7 @@ Every returns true if every element is present in a iteratee.
 | fc | `func(any)` |   |
 
 
-### x.Head
+### Head
 
 #### 详细描述
 Head gets the first element of array.
@@ -324,7 +324,7 @@ Head gets the first element of array.
 | r1 | `any` |   |
 
 
-### x.If
+### If
 
 #### 详细描述
 
@@ -346,7 +346,7 @@ Head gets the first element of array.
 | r1 | `any` |   |
 
 
-### x.IndexOf
+### IndexOf
 
 #### 详细描述
 IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found
@@ -367,7 +367,7 @@ IndexOf gets the index at which the first occurrence of value is found in array 
 | r1 | `int` |   |
 
 
-### x.Intersect
+### Intersect
 
 #### 详细描述
 
@@ -388,7 +388,7 @@ IndexOf gets the index at which the first occurrence of value is found in array 
 | r1 | `any` |   |
 
 
-### x.IsSubset
+### IsSubset
 
 #### 详细描述
 Subset returns true if collection x is a subset of y.
@@ -409,7 +409,7 @@ Subset returns true if collection x is a subset of y.
 | r1 | `bool` |   |
 
 
-### x.Keys
+### Keys
 
 #### 详细描述
 Keys creates an array of the own enumerable map keys or struct field names.
@@ -429,7 +429,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### x.Map
+### Map
 
 #### 详细描述
 
@@ -450,7 +450,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### x.Max
+### Max
 
 #### 详细描述
 
@@ -470,7 +470,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### x.Min
+### Min
 
 #### 详细描述
 
@@ -490,7 +490,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### x.Range
+### Range
 
 #### 详细描述
 
@@ -510,7 +510,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `[]any` |   |
 
 
-### x.Reduce
+### Reduce
 
 #### 详细描述
 
@@ -532,7 +532,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### x.RemoveRepeat
+### RemoveRepeat
 
 #### 详细描述
 Uniq creates an array with unique values.
@@ -552,7 +552,7 @@ Uniq creates an array with unique values.
 | r1 | `any` |   |
 
 
-### x.Reverse
+### Reverse
 
 #### 详细描述
 Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.
@@ -572,7 +572,7 @@ Reverse transforms an array the first element will become the last,the second el
 | r1 | `any` |   |
 
 
-### x.Shift
+### Shift
 
 #### 详细描述
 
@@ -592,7 +592,7 @@ Reverse transforms an array the first element will become the last,the second el
 | r1 | `any` |   |
 
 
-### x.Shuffle
+### Shuffle
 
 #### 详细描述
 Shuffle creates an array of shuffled values
@@ -612,7 +612,7 @@ Shuffle creates an array of shuffled values
 | r1 | `any` |   |
 
 
-### x.Some
+### Some
 
 #### 详细描述
 Some returns true if atleast one element is present in an iteratee.
@@ -633,7 +633,7 @@ Some returns true if atleast one element is present in an iteratee.
 | r1 | `bool` |   |
 
 
-### x.Sort
+### Sort
 
 #### 详细描述
 SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type's Less method.
@@ -649,7 +649,7 @@ SliceStable sorts the slice x using the provided lessfunction, keeping equal ele
 | less | `func(i, j int) bool` |   |
 
 
-### x.Subtract
+### Subtract
 
 #### 详细描述
 Subtract returns the subtraction between two collections.
@@ -670,7 +670,7 @@ Subtract returns the subtraction between two collections.
 | r1 | `any` |   |
 
 
-### x.Sum
+### Sum
 
 #### 详细描述
 Sum computes the sum of the values in array.
@@ -690,7 +690,7 @@ Sum computes the sum of the values in array.
 | r1 | `float64` |   |
 
 
-### x.Tail
+### Tail
 
 #### 详细描述
 Tail gets all but the first element of array.
@@ -710,7 +710,7 @@ Tail gets all but the first element of array.
 | r1 | `any` |   |
 
 
-### x.ToFloat64
+### ToFloat64
 
 #### 详细描述
 ToFloat64 converts any numeric value to float64.
@@ -731,7 +731,7 @@ ToFloat64 converts any numeric value to float64.
 | r2 | `bool` |   |
 
 
-### x.ToMap
+### ToMap
 
 #### 详细描述
 ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>
@@ -752,7 +752,7 @@ ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>
 | r1 | `any` |   |
 
 
-### x.Values
+### Values
 
 #### 详细描述
 Values creates an array of the own enumerable map values or struct field values.
@@ -772,7 +772,7 @@ Values creates an array of the own enumerable map values or struct field values.
 | r1 | `any` |   |
 
 
-### x.WaitConnect
+### WaitConnect
 
 #### 详细描述
 
@@ -793,7 +793,7 @@ Values creates an array of the own enumerable map values or struct field values.
 | r1 | `error` |   |
 
 
-### x.Zip
+### Zip
 
 #### 详细描述
 Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in lengthto the length of the shortest input iterable.

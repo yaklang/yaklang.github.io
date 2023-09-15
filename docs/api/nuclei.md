@@ -65,7 +65,7 @@
 
 
 ## 函数定义
-### nuclei.AllPoC
+### AllPoC
 
 #### 详细描述
 
@@ -86,7 +86,7 @@
 | r2 | `error` |   |
 
 
-### nuclei.GetPoCDir
+### GetPoCDir
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `string` |   |
 
 
-### nuclei.PocVulToRisk
+### PocVulToRisk
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `*yakit.Risk` |   |
 
 
-### nuclei.PullDatabase
+### PullDatabase
 
 #### 详细描述
 
@@ -143,7 +143,7 @@
 | r2 | `error` |   |
 
 
-### nuclei.RemoveDatabase
+### RemoveDatabase
 
 #### 详细描述
 
@@ -158,7 +158,7 @@
 | r1 | `error` |   |
 
 
-### nuclei.Scan
+### Scan
 
 #### 详细描述
 
@@ -180,7 +180,7 @@
 | r2 | `error` |   |
 
 
-### nuclei.ScanAuto
+### ScanAuto
 
 #### 详细描述
 
@@ -196,7 +196,7 @@
 | opt | `...any` |   |
 
 
-### nuclei.UpdateDatabase
+### UpdateDatabase
 
 #### 详细描述
 
@@ -216,7 +216,7 @@
 | r1 | `error` |   |
 
 
-### nuclei.all
+### all
 
 #### 详细描述
 
@@ -236,7 +236,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.bulkSize
+### bulkSize
 
 #### 详细描述
 
@@ -256,7 +256,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.debug
+### debug
 
 #### 详细描述
 
@@ -276,7 +276,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.debugRequest
+### debugRequest
 
 #### 详细描述
 
@@ -296,7 +296,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.debugResponse
+### debugResponse
 
 #### 详细描述
 
@@ -316,7 +316,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.dnsResolver
+### dnsResolver
 
 #### 详细描述
 
@@ -336,7 +336,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.enableReverseConnection
+### enableReverseConnection
 
 #### 详细描述
 
@@ -356,7 +356,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.excludeTags
+### excludeTags
 
 #### 详细描述
 
@@ -376,7 +376,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.excludeTemplates
+### excludeTemplates
 
 #### 详细描述
 
@@ -396,7 +396,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.fromPlugin
+### fromPlugin
 
 #### 详细描述
 
@@ -416,7 +416,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.fuzzQueryTemplate
+### fuzzQueryTemplate
 
 #### 详细描述
 
@@ -436,7 +436,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.headers
+### headers
 
 #### 详细描述
 
@@ -456,7 +456,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.headless
+### headless
 
 #### 详细描述
 
@@ -476,7 +476,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.http2
+### http2
 
 #### 详细描述
 
@@ -496,7 +496,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.https
+### https
 
 #### 详细描述
 
@@ -516,7 +516,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.interactshTimeout
+### interactshTimeout
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.logFile
+### logFile
 
 #### 详细描述
 
@@ -556,7 +556,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.metrics
+### metrics
 
 #### 详细描述
 
@@ -576,7 +576,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.mode
+### mode
 
 #### 详细描述
 
@@ -596,7 +596,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.newTemplates
+### newTemplates
 
 #### 详细描述
 
@@ -616,7 +616,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.noColor
+### noColor
 
 #### 详细描述
 
@@ -636,7 +636,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.noInteractsh
+### noInteractsh
 
 #### 详细描述
 
@@ -656,7 +656,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.noMeta
+### noMeta
 
 #### 详细描述
 
@@ -676,7 +676,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.output
+### output
 
 #### 详细描述
 
@@ -696,7 +696,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.pageTimeout
+### pageTimeout
 
 #### 详细描述
 
@@ -716,7 +716,7 @@
 | r1 | `lowhttp.LowhttpOpt` |   |
 
 
-### nuclei.proxy
+### proxy
 
 #### 详细描述
 
@@ -736,7 +736,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.rateLimit
+### rateLimit
 
 #### 详细描述
 
@@ -756,7 +756,7 @@
 | r1 | `lowhttp.LowhttpOpt` |   |
 
 
-### nuclei.rawTemplate
+### rawTemplate
 
 #### 详细描述
 
@@ -776,7 +776,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.reportingConfig
+### reportingConfig
 
 #### 详细描述
 
@@ -796,7 +796,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.reportingDB
+### reportingDB
 
 #### 详细描述
 
@@ -816,7 +816,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.resultCallback
+### resultCallback
 
 #### 详细描述
 
@@ -836,7 +836,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.retry
+### retry
 
 #### 详细描述
 
@@ -856,7 +856,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.reverseUrl
+### reverseUrl
 
 #### 详细描述
 
@@ -876,7 +876,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.runtimeId
+### runtimeId
 
 #### 详细描述
 
@@ -896,7 +896,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### nuclei.severity
+### severity
 
 #### 详细描述
 
@@ -916,7 +916,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.showBrowser
+### showBrowser
 
 #### 详细描述
 
@@ -936,7 +936,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.silent
+### silent
 
 #### 详细描述
 
@@ -956,7 +956,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.stopAtFirstMatch
+### stopAtFirstMatch
 
 #### 详细描述
 
@@ -976,7 +976,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.systemDnsResolver
+### systemDnsResolver
 
 #### 详细描述
 
@@ -996,7 +996,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.tags
+### tags
 
 #### 详细描述
 
@@ -1016,7 +1016,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.targetConcurrent
+### targetConcurrent
 
 #### 详细描述
 
@@ -1036,7 +1036,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.tcpResultCallback
+### tcpResultCallback
 
 #### 详细描述
 
@@ -1056,7 +1056,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.templateList
+### templateList
 
 #### 详细描述
 
@@ -1076,7 +1076,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.templates
+### templates
 
 #### 详细描述
 
@@ -1096,7 +1096,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.templatesDir
+### templatesDir
 
 #### 详细描述
 
@@ -1116,7 +1116,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.templatesThreads
+### templatesThreads
 
 #### 详细描述
 
@@ -1136,7 +1136,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.templatesVersion
+### templatesVersion
 
 #### 详细描述
 
@@ -1156,7 +1156,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.timeout
+### timeout
 
 #### 详细描述
 
@@ -1176,7 +1176,7 @@
 | r1 | `lowhttp.LowhttpOpt` |   |
 
 
-### nuclei.updateTemplates
+### updateTemplates
 
 #### 详细描述
 
@@ -1196,7 +1196,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.verbose
+### verbose
 
 #### 详细描述
 
@@ -1216,7 +1216,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nuclei.version
+### version
 
 #### 详细描述
 
@@ -1236,7 +1236,7 @@
 | r1 | `func(i ...any) any` |   |
 
 
-### nuclei.workflows
+### workflows
 
 #### 详细描述
 

@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### hook.CallYakitPluginFunc
+### CallYakitPluginFunc
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r2 | `error` |   |
 
 
-### hook.LoadYakitPlugin
+### LoadYakitPlugin
 
 #### 详细描述
 
@@ -56,7 +56,7 @@
 | r1 | `error` |   |
 
 
-### hook.LoadYakitPluginByName
+### LoadYakitPluginByName
 
 #### 详细描述
 
@@ -78,7 +78,7 @@
 | r1 | `error` |   |
 
 
-### hook.LoadYakitPluginContext
+### LoadYakitPluginContext
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `error` |   |
 
 
-### hook.NewManager
+### NewManager
 
 #### 详细描述
 
@@ -116,7 +116,7 @@
 | r1 | `*YakToCallerManager` |   |
 
 
-### hook.NewMixPluginCaller
+### NewMixPluginCaller
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r2 | `error` |   |
 
 
-### hook.RemoveYakitPluginByName
+### RemoveYakitPluginByName
 
 #### 详细描述
 

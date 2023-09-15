@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### smb.Connect
+### Connect
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r2 | `error` |   |
 
 
-### smb.debug
+### debug
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `_smbConfigHandler` |   |
 
 
-### smb.domain
+### domain
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `_smbConfigHandler` |   |
 
 
-### smb.hash
+### hash
 
 #### 详细描述
 
@@ -94,7 +94,7 @@
 | r1 | `_smbConfigHandler` |   |
 
 
-### smb.password
+### password
 
 #### 详细描述
 
@@ -114,7 +114,7 @@
 | r1 | `_smbConfigHandler` |   |
 
 
-### smb.username
+### username
 
 #### 详细描述
 
@@ -134,7 +134,7 @@
 | r1 | `_smbConfigHandler` |   |
 
 
-### smb.workstation
+### workstation
 
 #### 详细描述
 

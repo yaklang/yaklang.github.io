@@ -10,7 +10,7 @@
 
 
 ## 函数定义
-### httpserver.LocalFileSystemServe
+### LocalFileSystemServe
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `error` |   |
 
 
-### httpserver.Serve
+### Serve
 
 #### 详细描述
 
@@ -56,7 +56,7 @@
 | r1 | `error` |   |
 
 
-### httpserver.context
+### context
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r1 | `_httpServerConfigOpt` |   |
 
 
-### httpserver.handler
+### handler
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r1 | `_httpServerConfigOpt` |   |
 
 
-### httpserver.tlsCertAndKey
+### tlsCertAndKey
 
 #### 详细描述
 

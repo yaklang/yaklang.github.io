@@ -9,7 +9,7 @@
 
 
 ## 函数定义
-### iiop.BindPayload
+### BindPayload
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### iiop.InvokePayload
+### InvokePayload
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### iiop.RebindPayload
+### RebindPayload
 
 #### 详细描述
 
@@ -70,7 +70,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### iiop.SendPayload
+### SendPayload
 
 #### 详细描述
 

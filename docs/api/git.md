@@ -27,7 +27,7 @@
 
 
 ## 函数定义
-### git.Checkout
+### Checkout
 
 #### 详细描述
 
@@ -49,7 +49,7 @@
 | r1 | `error` |   |
 
 
-### git.Clone
+### Clone
 
 #### 详细描述
 
@@ -71,7 +71,7 @@
 | r1 | `error` |   |
 
 
-### git.Fetch
+### Fetch
 
 #### 详细描述
 
@@ -92,7 +92,7 @@
 | r1 | `error` |   |
 
 
-### git.IterateCommit
+### IterateCommit
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r1 | `error` |   |
 
 
-### git.Pull
+### Pull
 
 #### 详细描述
 
@@ -134,7 +134,7 @@
 | r1 | `error` |   |
 
 
-### git.SetProxy
+### SetProxy
 
 #### 详细描述
 
@@ -149,7 +149,7 @@
 | proxies | `...string` |   |
 
 
-### git.auth
+### auth
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `Option` |   |
 
 
-### git.checkoutCreate
+### checkoutCreate
 
 #### 详细描述
 
@@ -190,7 +190,7 @@
 | r1 | `Option` |   |
 
 
-### git.checkoutForce
+### checkoutForce
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r1 | `Option` |   |
 
 
-### git.checkoutKeep
+### checkoutKeep
 
 #### 详细描述
 
@@ -230,7 +230,7 @@
 | r1 | `Option` |   |
 
 
-### git.context
+### context
 
 #### 详细描述
 
@@ -250,7 +250,7 @@
 | r1 | `Option` |   |
 
 
-### git.depth
+### depth
 
 #### 详细描述
 
@@ -270,7 +270,7 @@
 | r1 | `Option` |   |
 
 
-### git.fetchAllTags
+### fetchAllTags
 
 #### 详细描述
 
@@ -290,7 +290,7 @@
 | r1 | `Option` |   |
 
 
-### git.filterCommit
+### filterCommit
 
 #### 详细描述
 
@@ -310,7 +310,7 @@
 | r1 | `Option` |   |
 
 
-### git.filterReference
+### filterReference
 
 #### 详细描述
 
@@ -330,7 +330,7 @@
 | r1 | `Option` |   |
 
 
-### git.force
+### force
 
 #### 详细描述
 
@@ -350,7 +350,7 @@
 | r1 | `Option` |   |
 
 
-### git.handleCommit
+### handleCommit
 
 #### 详细描述
 
@@ -370,7 +370,7 @@
 | r1 | `Option` |   |
 
 
-### git.handleReference
+### handleReference
 
 #### 详细描述
 
@@ -390,7 +390,7 @@
 | r1 | `Option` |   |
 
 
-### git.noFetchTags
+### noFetchTags
 
 #### 详细描述
 
@@ -410,7 +410,7 @@
 | r1 | `Option` |   |
 
 
-### git.recursive
+### recursive
 
 #### 详细描述
 
@@ -430,7 +430,7 @@
 | r1 | `Option` |   |
 
 
-### git.remote
+### remote
 
 #### 详细描述
 
@@ -450,7 +450,7 @@
 | r1 | `Option` |   |
 
 
-### git.verify
+### verify
 
 #### 详细描述
 

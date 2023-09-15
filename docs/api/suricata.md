@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### suricata.LoadSuricataToDatabase
+### LoadSuricataToDatabase
 
 #### 详细描述
 
@@ -31,7 +31,7 @@
 | r1 | `error` |   |
 
 
-### suricata.ParseSuricata
+### ParseSuricata
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r2 | `error` |   |
 
 
-### suricata.SuricataMatcher
+### SuricataMatcher
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r1 | `*Matcher` |   |
 
 
-### suricata.TrafficGenerator
+### TrafficGenerator
 
 #### 详细描述
 
@@ -88,7 +88,7 @@
 | r1 | `*ChaosMaker` |   |
 
 
-### suricata.YieldRules
+### YieldRules
 
 #### 详细描述
 
@@ -103,7 +103,7 @@
 | r1 | `chan *rule.Storage` |   |
 
 
-### suricata.YieldRulesByKeyword
+### YieldRulesByKeyword
 
 #### 详细描述
 

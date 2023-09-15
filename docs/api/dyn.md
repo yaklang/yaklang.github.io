@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### dyn.Eval
+### Eval
 
 #### 详细描述
 
@@ -31,7 +31,7 @@
 | r1 | `error` |   |
 
 
-### dyn.Import
+### Import
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r2 | `error` |   |
 
 
-### dyn.IsYakFunc
+### IsYakFunc
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r1 | `bool` |   |
 
 
-### dyn.LoadVarFromFile
+### LoadVarFromFile
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r2 | `error` |   |
 
 
-### dyn.params
+### params
 
 #### 详细描述
 
@@ -116,7 +116,7 @@
 | r1 | `yakEvalConfigOpt` |   |
 
 
-### dyn.recursive
+### recursive
 
 #### 详细描述
 

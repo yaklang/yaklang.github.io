@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### gzip.Compress
+### Compress
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r2 | `error` |   |
 
 
-### gzip.Decompress
+### Decompress
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### gzip.IsGzip
+### IsGzip
 
 #### 详细描述
 

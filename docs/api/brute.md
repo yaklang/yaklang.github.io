@@ -20,7 +20,7 @@
 
 
 ## 函数定义
-### brute.GetAvailableBruteTypes
+### GetAvailableBruteTypes
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | r1 | `[]string` |   |
 
 
-### brute.GetPasswordListFromBruteType
+### GetPasswordListFromBruteType
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `[]string` |   |
 
 
-### brute.GetUsernameListFromBruteType
+### GetUsernameListFromBruteType
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### brute.New
+### New
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### brute.autoDict
+### autoDict
 
 #### 详细描述
 
@@ -112,7 +112,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.bruteHandler
+### bruteHandler
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.concurrentTarget
+### concurrentTarget
 
 #### 详细描述
 
@@ -172,7 +172,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.debug
+### debug
 
 #### 详细描述
 
@@ -192,7 +192,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.finishingThreshold
+### finishingThreshold
 
 #### 详细描述
 
@@ -212,7 +212,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.maxDelay
+### maxDelay
 
 #### 详细描述
 
@@ -232,7 +232,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.minDelay
+### minDelay
 
 #### 详细描述
 
@@ -252,7 +252,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.okToStop
+### okToStop
 
 #### 详细描述
 
@@ -272,7 +272,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.passList
+### passList
 
 #### 详细描述
 
@@ -292,7 +292,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brute.userList
+### userList
 
 #### 详细描述
 

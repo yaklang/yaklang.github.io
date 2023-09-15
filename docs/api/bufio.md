@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### bufio.NewReadWriter
+### NewReadWriter
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### bufio.NewReader
+### NewReader
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### bufio.NewReaderSize
+### NewReaderSize
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### bufio.NewScanner
+### NewScanner
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### bufio.NewWriter
+### NewWriter
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r2 | `error` |   |
 
 
-### bufio.NewWriterSize
+### NewWriterSize
 
 #### 详细描述
 

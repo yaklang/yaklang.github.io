@@ -23,7 +23,7 @@
 
 
 ## 函数定义
-### simulator.HttpBruteForce
+### HttpBruteForce
 
 #### 详细描述
 
@@ -45,7 +45,7 @@
 | r2 | `error` |   |
 
 
-### simulator.captchaImgSelector
+### captchaImgSelector
 
 #### 详细描述
 
@@ -65,7 +65,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.captchaInputSelector
+### captchaInputSelector
 
 #### 详细描述
 
@@ -85,7 +85,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.captchaMode
+### captchaMode
 
 #### 详细描述
 
@@ -105,7 +105,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.captchaUrl
+### captchaUrl
 
 #### 详细描述
 
@@ -125,7 +125,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.exePath
+### exePath
 
 #### 详细描述
 
@@ -145,7 +145,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.extraWaitLoadTime
+### extraWaitLoadTime
 
 #### 详细描述
 
@@ -165,7 +165,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.leaklessStatus
+### leaklessStatus
 
 #### 详细描述
 
@@ -185,7 +185,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.loginDetectMode
+### loginDetectMode
 
 #### 详细描述
 
@@ -206,7 +206,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.password
+### password
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.passwordList
+### passwordList
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.passwordSelector
+### passwordSelector
 
 #### 详细描述
 
@@ -266,7 +266,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.proxy
+### proxy
 
 #### 详细描述
 
@@ -287,7 +287,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.submitButtonSelector
+### submitButtonSelector
 
 #### 详细描述
 
@@ -307,7 +307,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.username
+### username
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.usernameList
+### usernameList
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.usernameSelector
+### usernameSelector
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### simulator.wsAddress
+### wsAddress
 
 #### 详细描述
 

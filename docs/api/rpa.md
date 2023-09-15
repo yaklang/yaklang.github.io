@@ -25,7 +25,7 @@
 
 
 ## 函数定义
-### rpa.Bruteforce
+### Bruteforce
 
 #### 详细描述
 
@@ -47,7 +47,7 @@
 | r2 | `string` |   |
 
 
-### rpa.Start
+### Start
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### rpa.blackDomain
+### blackDomain
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.bruteButtonElement
+### bruteButtonElement
 
 #### 详细描述
 
@@ -109,7 +109,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.bruteCaptchaElement
+### bruteCaptchaElement
 
 #### 详细描述
 
@@ -130,7 +130,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.brutePassElement
+### brutePassElement
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.brutePassword
+### brutePassword
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.bruteUserElement
+### bruteUserElement
 
 #### 详细描述
 
@@ -190,7 +190,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.bruteUserPassPath
+### bruteUserPassPath
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.bruteUsername
+### bruteUsername
 
 #### 详细描述
 
@@ -230,7 +230,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.click
+### click
 
 #### 详细描述
 
@@ -250,7 +250,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.depth
+### depth
 
 #### 详细描述
 
@@ -270,7 +270,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.headers
+### headers
 
 #### 详细描述
 
@@ -290,7 +290,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.input
+### input
 
 #### 详细描述
 
@@ -311,7 +311,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.maxUrl
+### maxUrl
 
 #### 详细描述
 
@@ -331,7 +331,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.proxy
+### proxy
 
 #### 详细描述
 
@@ -352,7 +352,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.select
+### select
 
 #### 详细描述
 
@@ -373,7 +373,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.strictUrl
+### strictUrl
 
 #### 详细描述
 
@@ -393,7 +393,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.timeout
+### timeout
 
 #### 详细描述
 
@@ -413,7 +413,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rpa.whiteDomain
+### whiteDomain
 
 #### 详细描述
 

@@ -15,7 +15,7 @@
 
 
 ## 函数定义
-### facades.NewFacadeServer
+### NewFacadeServer
 
 #### 详细描述
 
@@ -37,7 +37,7 @@
 | r1 | `*FacadeServer` |   |
 
 
-### facades.Serve
+### Serve
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `error` |   |
 
 
-### facades.evilClassResource
+### evilClassResource
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.httpResource
+### httpResource
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.javaClassName
+### javaClassName
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.javaCodeBase
+### javaCodeBase
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.javaFactory
+### javaFactory
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.ldapResourceAddr
+### ldapResourceAddr
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.objectClass
+### objectClass
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### facades.rmiResourceAddr
+### rmiResourceAddr
 
 #### 详细描述
 

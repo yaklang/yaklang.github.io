@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### exec.CheckCrash
+### CheckCrash
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r2 | `error` |   |
 
 
-### exec.Command
+### Command
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r2 | `error` |   |
 
 
-### exec.CommandContext
+### CommandContext
 
 #### 详细描述
 
@@ -81,7 +81,7 @@
 | r2 | `error` |   |
 
 
-### exec.System
+### System
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r2 | `error` |   |
 
 
-### exec.SystemBatch
+### SystemBatch
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | opts | `...poolOpt` |   |
 
 
-### exec.SystemContext
+### SystemContext
 
 #### 详细描述
 执行系统命令
@@ -140,7 +140,7 @@
 | r2 | `error` |   |
 
 
-### exec.WatchOutput
+### WatchOutput
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | r1 | `error` |   |
 
 
-### exec.WatchStderr
+### WatchStderr
 
 #### 详细描述
 
@@ -184,7 +184,7 @@
 | r1 | `error` |   |
 
 
-### exec.WatchStdout
+### WatchStdout
 
 #### 详细描述
 
@@ -206,7 +206,7 @@
 | r1 | `error` |   |
 
 
-### exec.callback
+### callback
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
 | r1 | `poolOpt` |   |
 
 
-### exec.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 | r1 | `poolOpt` |   |
 
 
-### exec.timeout
+### timeout
 
 #### 详细描述
 

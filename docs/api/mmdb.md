@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### mmdb.Open
+### Open
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### mmdb.QueryIPCity
+### QueryIPCity
 
 #### 详细描述
 

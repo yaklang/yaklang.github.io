@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### xhtml.CompareHtml
+### CompareHtml
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### xhtml.Find
+### Find
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `[]*MatchNodeInfo` |   |
 
 
-### xhtml.GenerateXPath
+### GenerateXPath
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `string` |   |
 
 
-### xhtml.MatchBetween
+### MatchBetween
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r2 | `string` |   |
 
 
-### xhtml.RandomUpperAndLower
+### RandomUpperAndLower
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `string` |   |
 
 
-### xhtml.Walker
+### Walker
 
 #### 详细描述
 

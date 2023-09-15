@@ -57,7 +57,7 @@
 
 
 ## 函数定义
-### yakit.AutoInitYakit
+### AutoInitYakit
 
 #### 详细描述
 
@@ -72,7 +72,7 @@
 | r1 | `` |   |
 
 
-### yakit.DeletePayloadByGroup
+### DeletePayloadByGroup
 
 #### 详细描述
 
@@ -92,7 +92,7 @@
 | r1 | `error` |   |
 
 
-### yakit.EnableTable
+### EnableTable
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r1 | `` |   |
 
 
-### yakit.EnableWebsiteTrees
+### EnableWebsiteTrees
 
 #### 详细描述
 
@@ -133,7 +133,7 @@
 | r1 | `` |   |
 
 
-### yakit.Error
+### Error
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 | r1 | `func(tmp string, items ...any)` |   |
 
 
-### yakit.File
+### File
 
 #### 详细描述
 
@@ -173,7 +173,7 @@
 | r1 | `func(fileName string, desc ...any)` |   |
 
 
-### yakit.GenerateYakitMITMHooksParams
+### GenerateYakitMITMHooksParams
 
 #### 详细描述
 
@@ -196,7 +196,7 @@
 | r2 | `error` |   |
 
 
-### yakit.GetHomeDir
+### GetHomeDir
 
 #### 详细描述
 
@@ -211,7 +211,7 @@
 | r1 | `string` |   |
 
 
-### yakit.GetHomeTempDir
+### GetHomeTempDir
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
 | r1 | `string` |   |
 
 
-### yakit.GetOnlineBaseUrl
+### GetOnlineBaseUrl
 
 #### 详细描述
 
@@ -241,7 +241,7 @@
 | r1 | `string` |   |
 
 
-### yakit.Info
+### Info
 
 #### 详细描述
 
@@ -261,7 +261,7 @@
 | r1 | `func(tmp string, items ...any)` |   |
 
 
-### yakit.InitYakit
+### InitYakit
 
 #### 详细描述
 
@@ -276,7 +276,7 @@
 | y | `*YakitClient` |   |
 
 
-### yakit.Markdown
+### Markdown
 
 #### 详细描述
 
@@ -296,7 +296,7 @@
 | r1 | `func(tmp any)` |   |
 
 
-### yakit.NewBarGraph
+### NewBarGraph
 
 #### 详细描述
 
@@ -311,7 +311,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### yakit.NewClient
+### NewClient
 
 #### 详细描述
 
@@ -331,7 +331,7 @@
 | r1 | `*YakitClient` |   |
 
 
-### yakit.NewHTTPFlowRisk
+### NewHTTPFlowRisk
 
 #### 详细描述
 
@@ -355,7 +355,7 @@
 | r1 | `*YakitHTTPFlowRisk` |   |
 
 
-### yakit.NewLineGraph
+### NewLineGraph
 
 #### 详细描述
 
@@ -370,7 +370,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### yakit.NewPieGraph
+### NewPieGraph
 
 #### 详细描述
 
@@ -385,7 +385,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### yakit.NewTable
+### NewTable
 
 #### 详细描述
 
@@ -405,7 +405,7 @@
 | r1 | `*YakitTable` |   |
 
 
-### yakit.NewWordCloud
+### NewWordCloud
 
 #### 详细描述
 
@@ -420,7 +420,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### yakit.Output
+### Output
 
 #### 详细描述
 
@@ -440,7 +440,7 @@
 | r1 | `func(i any) error` |   |
 
 
-### yakit.QueryDomainsByDomainKeyword
+### QueryDomainsByDomainKeyword
 
 #### 详细描述
 
@@ -461,7 +461,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryDomainsByNetwork
+### QueryDomainsByNetwork
 
 #### 详细描述
 
@@ -482,7 +482,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryDomainsByTitle
+### QueryDomainsByTitle
 
 #### 详细描述
 
@@ -503,7 +503,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryHTTPFlowsAll
+### QueryHTTPFlowsAll
 
 #### 详细描述
 
@@ -518,7 +518,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### yakit.QueryHTTPFlowsByKeyword
+### QueryHTTPFlowsByKeyword
 
 #### 详细描述
 
@@ -538,7 +538,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### yakit.QueryHostPortAll
+### QueryHostPortAll
 
 #### 详细描述
 
@@ -553,7 +553,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.QueryHostPortByKeyword
+### QueryHostPortByKeyword
 
 #### 详细描述
 
@@ -573,7 +573,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.QueryHostPortByNetwork
+### QueryHostPortByNetwork
 
 #### 详细描述
 
@@ -593,7 +593,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.QueryHostPortByNetworkAndPort
+### QueryHostPortByNetworkAndPort
 
 #### 详细描述
 
@@ -614,7 +614,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.QueryHostsByDomain
+### QueryHostsByDomain
 
 #### 详细描述
 
@@ -635,7 +635,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryHostsByNetwork
+### QueryHostsByNetwork
 
 #### 详细描述
 
@@ -656,7 +656,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryPortAssetByNetwork
+### QueryPortAssetByNetwork
 
 #### 详细描述
 
@@ -677,7 +677,7 @@
 | r2 | `error` |   |
 
 
-### yakit.QueryUrlsAll
+### QueryUrlsAll
 
 #### 详细描述
 
@@ -692,7 +692,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.QueryUrlsByKeyword
+### QueryUrlsByKeyword
 
 #### 详细描述
 
@@ -712,7 +712,7 @@
 | r1 | `chan string` |   |
 
 
-### yakit.Report
+### Report
 
 #### 详细描述
 
@@ -732,7 +732,7 @@
 | r1 | `func(i int)` |   |
 
 
-### yakit.SaveDomain
+### SaveDomain
 
 #### 详细描述
 
@@ -753,7 +753,7 @@
 | r1 | `error` |   |
 
 
-### yakit.SaveHTTPFlow
+### SaveHTTPFlow
 
 #### 详细描述
 
@@ -775,7 +775,7 @@
 | r1 | `error` |   |
 
 
-### yakit.SavePayload
+### SavePayload
 
 #### 详细描述
 
@@ -796,7 +796,7 @@
 | r1 | `error` |   |
 
 
-### yakit.SavePayloadByFile
+### SavePayloadByFile
 
 #### 详细描述
 
@@ -817,7 +817,7 @@
 | r1 | `error` |   |
 
 
-### yakit.SavePortFromResult
+### SavePortFromResult
 
 #### 详细描述
 
@@ -838,7 +838,7 @@
 | r1 | `error` |   |
 
 
-### yakit.SetOnlineBaseUrl
+### SetOnlineBaseUrl
 
 #### 详细描述
 
@@ -853,7 +853,7 @@
 | u | `string` |   |
 
 
-### yakit.SetProgress
+### SetProgress
 
 #### 详细描述
 
@@ -873,7 +873,7 @@
 | r1 | `func(f float64)` |   |
 
 
-### yakit.SetProgressEx
+### SetProgressEx
 
 #### 详细描述
 
@@ -893,7 +893,7 @@
 | r1 | `func(id string, f float64)` |   |
 
 
-### yakit.StatusCard
+### StatusCard
 
 #### 详细描述
 
@@ -915,7 +915,7 @@
 | data | `interface` |   |
 
 
-### yakit.TableData
+### TableData
 
 #### 详细描述
 
@@ -936,7 +936,7 @@
 | r1 | `*YakitFixedTableData` |   |
 
 
-### yakit.Text
+### Text
 
 #### 详细描述
 
@@ -956,7 +956,7 @@
 | r1 | `func(tmp string, items ...any)` |   |
 
 
-### yakit.UpdateOnlineYakitStore
+### UpdateOnlineYakitStore
 
 #### 详细描述
 
@@ -971,7 +971,7 @@
 | r1 | `error` |   |
 
 
-### yakit.UpdateYakitStore
+### UpdateYakitStore
 
 #### 详细描述
 
@@ -986,7 +986,7 @@
 | r1 | `error` |   |
 
 
-### yakit.UpdateYakitStoreFromGit
+### UpdateYakitStoreFromGit
 
 #### 详细描述
 
@@ -1008,7 +1008,7 @@
 | r1 | `error` |   |
 
 
-### yakit.UpdateYakitStoreLocal
+### UpdateYakitStoreLocal
 
 #### 详细描述
 
@@ -1028,7 +1028,7 @@
 | r1 | `error` |   |
 
 
-### yakit.Warn
+### Warn
 
 #### 详细描述
 

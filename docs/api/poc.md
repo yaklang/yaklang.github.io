@@ -2,22 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [poc.AppendHTTPPacketCookie](#AppendHTTPPacketCookie) ||
-| [poc.AppendHTTPPacketFormEncoded](#AppendHTTPPacketFormEncoded) ||
+| [poc.AppendHTTPPacketCookie](#AppendHTTPPacketCookie) |AppendHTTPPacketCookie append cookie to http packetif packet is request, it will append to Cookie headerif packet is response, it will append to Set-Cookie header	packet = AppendHTTPPacketCookie(packet, "key", "value")|
+| [poc.AppendHTTPPacketFormEncoded](#AppendHTTPPacketFormEncoded) |AppendHTTPPacketFormEncoded replace form data in http packetenable for request, it will replace form data in body	 packet = AppendHTTPPacketFormEncoded(packet, "key", "value")		--BOUNDARY---		Content-Disposition: form-data; name="key"		value		...|
 | [poc.AppendHTTPPacketHeader](#AppendHTTPPacketHeader) ||
 | [poc.AppendHTTPPacketPath](#AppendHTTPPacketPath) ||
 | [poc.AppendHTTPPacketPostParam](#AppendHTTPPacketPostParam) ||
 | [poc.AppendHTTPPacketQueryParam](#AppendHTTPPacketQueryParam) ||
-| [poc.AppendHTTPPacketUploadFile](#AppendHTTPPacketUploadFile) ||
-| [poc.BuildRequest](#BuildRequest) ||
+| [poc.AppendHTTPPacketUploadFile](#AppendHTTPPacketUploadFile) |AppendHTTPPacketUploadFile replace form file in http packetenable for request, it will replace form file in bodyif fileContent is string, it will be treated as file pathvariadic is content-type, if not set, it will be detected auto.|
+| [poc.BuildRequest](#BuildRequest) |BuildRequest will build a bytes request, you can use it to send request by yourself.|
 | [poc.CurlToHTTPRequest](#CurlToHTTPRequest) ||
 | [poc.Delete](#Delete) ||
-| [poc.DeleteHTTPPacketCookie](#DeleteHTTPPacketCookie) ||
+| [poc.DeleteHTTPPacketCookie](#DeleteHTTPPacketCookie) |DeleteHTTPPacketCookie delete cookie from http packetif packet is request, it will delete from Cookie headerif packet is response, it will delete from Set-Cookie headerpacket = DeleteHTTPPacketCookie(packet, "key")|
 | [poc.DeleteHTTPPacketForm](#DeleteHTTPPacketForm) ||
 | [poc.DeleteHTTPPacketHeader](#DeleteHTTPPacketHeader) ||
 | [poc.DeleteHTTPPacketPostParam](#DeleteHTTPPacketPostParam) ||
 | [poc.DeleteHTTPPacketQueryParam](#DeleteHTTPPacketQueryParam) ||
-| [poc.Do](#Do) ||
+| [poc.Do](#Do) |poc.Do is something like poc.HTTPEx, but the params is (method string, url string, opt...)use it like `poc.Do("GET", "https://www.example.com", poc.proxy(proxy))`|
 | [poc.FixHTTPPacketCRLF](#FixHTTPPacketCRLF) ||
 | [poc.FixHTTPRequest](#FixHTTPRequest) ||
 | [poc.FixHTTPResponse](#FixHTTPResponse) ||
@@ -38,8 +38,8 @@
 | [poc.GetHTTPPacketPostParam](#GetHTTPPacketPostParam) ||
 | [poc.GetHTTPPacketQueryParam](#GetHTTPPacketQueryParam) ||
 | [poc.GetStatusCodeFromResponse](#GetStatusCodeFromResponse) ||
-| [poc.HTTP](#HTTP) ||
-| [poc.HTTPEx](#HTTPEx) ||
+| [poc.HTTP](#HTTP) |poc.HTTP means send http request and return (response, request, error)it support many option, use it via: `poc.HTTP(packet, poc.https(true), poc.proxy(proxy))`|
+| [poc.HTTPEx](#HTTPEx) |poc.HTTPEx means send http request and return (*LowhttpResponse, *http.Request, error)it support many option, use it via: `poc.HTTPEx(packet, poc.https(true), poc.proxy(proxy))`.you will handle *lowhttp.LowhttpResponse with your own code. LowhttpResponse include many details.|
 | [poc.HTTPPacketForceChunked](#HTTPPacketForceChunked) ||
 | [poc.HTTPRequestToCurl](#HTTPRequestToCurl) ||
 | [poc.Head](#Head) ||
@@ -55,7 +55,7 @@
 | [poc.ReplaceHTTPPacketBasicAuth](#ReplaceHTTPPacketBasicAuth) ||
 | [poc.ReplaceHTTPPacketBody](#ReplaceHTTPPacketBody) ||
 | [poc.ReplaceHTTPPacketCookie](#ReplaceHTTPPacketCookie) ||
-| [poc.ReplaceHTTPPacketFirstLine](#ReplaceHTTPPacketFirstLine) ||
+| [poc.ReplaceHTTPPacketFirstLine](#ReplaceHTTPPacketFirstLine) |ReplaceHTTPPacketFirstLine replace http packet first lineenable for request and response all|
 | [poc.ReplaceHTTPPacketHeader](#ReplaceHTTPPacketHeader) ||
 | [poc.ReplaceHTTPPacketHost](#ReplaceHTTPPacketHost) ||
 | [poc.ReplaceHTTPPacketMethod](#ReplaceHTTPPacketMethod) ||
@@ -63,7 +63,7 @@
 | [poc.ReplaceHTTPPacketPostParam](#ReplaceHTTPPacketPostParam) ||
 | [poc.ReplaceHTTPPacketQueryParam](#ReplaceHTTPPacketQueryParam) ||
 | [poc.Split](#Split) ||
-| [poc.Websocket](#Websocket) ||
+| [poc.Websocket](#Websocket) |poc.Websocket is shortcut for `poc.HTTP(..., poc.websocket(true))`|
 | [poc.appendCookie](#appendCookie) ||
 | [poc.appendFormEncoded](#appendFormEncoded) ||
 | [poc.appendHeader](#appendHeader) ||
@@ -76,46 +76,47 @@
 | [poc.deleteHeader](#deleteHeader) ||
 | [poc.deletePostParam](#deletePostParam) ||
 | [poc.deleteQueryParam](#deleteQueryParam) ||
-| [poc.host](#host) ||
-| [poc.http2](#http2) ||
-| [poc.https](#https) ||
-| [poc.jsRedirect](#jsRedirect) ||
-| [poc.noFixContentLength](#noFixContentLength) ||
-| [poc.noRedirect](#noRedirect) ||
+| [poc.host](#host) |params: poc packet builder and sender params, use it like: `poc.HTTP(..., poc.host("127.0.0.1"))`|
+| [poc.http2](#http2) |params: use it `poc.HTTP(packet, poc.http2(true))` control http2 schema|
+| [poc.https](#https) |params: use it `poc.HTTP(packet, poc.https(true))` control tls schema|
+| [poc.jsRedirect](#jsRedirect) |params, use it as `poc.HTTP(packet, poc.jsRedirect(true))` to recognize js href(regexp)|
+| [poc.noFixContentLength](#noFixContentLength) |params: use it like: `poc.HTTP(..., poc.noFixContentLength(true))` control fix content length.use it in pipeline or smuggle case.|
+| [poc.noRedirect](#noRedirect) |params: use it like: `poc.HTTP(..., poc.noRedirect(true))` control redirect.|
 | [poc.params](#params) ||
-| [poc.port](#port) ||
-| [poc.proxy](#proxy) ||
+| [poc.port](#port) |params: poc packet builder and sender params, use it like: `poc.HTTP(..., poc.port(8080))`|
+| [poc.proxy](#proxy) |params: use it: `poc.HTTP(..., poc.proxy(15))` control proxy.|
 | [poc.redirectHandler](#redirectHandler) ||
-| [poc.redirectTimes](#redirectTimes) ||
+| [poc.redirectTimes](#redirectTimes) |params: use it `poc.HTTP(..., poc.redirectTimes(3))` control redirect times.|
 | [poc.replaceAllPostParams](#replaceAllPostParams) ||
 | [poc.replaceAllQueryParams](#replaceAllQueryParams) ||
 | [poc.replaceBasicAuth](#replaceBasicAuth) ||
 | [poc.replaceBody](#replaceBody) ||
 | [poc.replaceCookie](#replaceCookie) ||
-| [poc.replaceFirstLine](#replaceFirstLine) ||
-| [poc.replaceHeader](#replaceHeader) ||
+| [poc.replaceFirstLine](#replaceFirstLine) |params, replace request first line, it's hacky!modified request bytes before request sent out|
+| [poc.replaceHeader](#replaceHeader) |params, replace request header before sending.|
 | [poc.replaceHost](#replaceHost) ||
-| [poc.replaceMethod](#replaceMethod) ||
+| [poc.replaceMethod](#replaceMethod) |params, replace request method before sending.|
 | [poc.replacePath](#replacePath) ||
 | [poc.replacePostParam](#replacePostParam) ||
 | [poc.replaceQueryParam](#replaceQueryParam) ||
-| [poc.retryInStatusCode](#retryInStatusCode) ||
-| [poc.retryNotInStatusCode](#retryNotInStatusCode) ||
-| [poc.retryTimes](#retryTimes) ||
-| [poc.save](#save) ||
-| [poc.session](#session) ||
-| [poc.source](#source) ||
-| [poc.timeout](#timeout) ||
+| [poc.retryInStatusCode](#retryInStatusCode) |params: use it like: `poc.HTTP(..., poc.retryInStatusCode(200, 404))` control retry in(matched) status code.|
+| [poc.retryNotInStatusCode](#retryNotInStatusCode) |params: use it like: `poc.HTTP(..., poc.retryNotInStatusCode(200, 404))` control retry not in(matched) status code.|
+| [poc.retryTimes](#retryTimes) |params: use it like: `poc.HTTP(..., poc.retryTimes(3))` control retry times.|
+| [poc.retryWaitTime](#retryWaitTime) |params: use it like: `poc.HTTP(..., poc.retryWaitTime(1))` control retry wait time(seconds).|
+| [poc.save](#save) |params, save the current request and response to databasefind it in `yakit.QueryHTTPFlow`|
+| [poc.session](#session) |params, inherit cookie via the same session key,use it as `poc.HTTP(packet, poc.session("key"))`it's useful for login case|
+| [poc.source](#source) |params, set request source field, for saving to database|
+| [poc.timeout](#timeout) |params: use it like: `poc.HTTP(..., poc.timeout(15))` control network timeout|
 | [poc.websocket](#websocket) ||
 | [poc.websocketFromServer](#websocketFromServer) ||
 | [poc.websocketOnClient](#websocketOnClient) ||
 
 
 ## 函数定义
-### poc.AppendHTTPPacketCookie
+### AppendHTTPPacketCookie
 
 #### 详细描述
-
+AppendHTTPPacketCookie append cookie to http packetif packet is request, it will append to Cookie headerif packet is response, it will append to Set-Cookie header	packet = AppendHTTPPacketCookie(packet, "key", "value")
 
 #### 定义
 
@@ -134,10 +135,10 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketFormEncoded
+### AppendHTTPPacketFormEncoded
 
 #### 详细描述
-
+AppendHTTPPacketFormEncoded replace form data in http packetenable for request, it will replace form data in body	 packet = AppendHTTPPacketFormEncoded(packet, "key", "value")		--BOUNDARY---		Content-Disposition: form-data; name="key"		value		...
 
 #### 定义
 
@@ -156,7 +157,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketHeader
+### AppendHTTPPacketHeader
 
 #### 详细描述
 
@@ -178,7 +179,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketPath
+### AppendHTTPPacketPath
 
 #### 详细描述
 
@@ -199,7 +200,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketPostParam
+### AppendHTTPPacketPostParam
 
 #### 详细描述
 
@@ -221,7 +222,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketQueryParam
+### AppendHTTPPacketQueryParam
 
 #### 详细描述
 
@@ -243,10 +244,10 @@
 | r1 | `[]byte` |   |
 
 
-### poc.AppendHTTPPacketUploadFile
+### AppendHTTPPacketUploadFile
 
 #### 详细描述
-
+AppendHTTPPacketUploadFile replace form file in http packetenable for request, it will replace form file in bodyif fileContent is string, it will be treated as file pathvariadic is content-type, if not set, it will be detected auto.
 
 #### 定义
 
@@ -267,10 +268,10 @@
 | r1 | `[]byte` |   |
 
 
-### poc.BuildRequest
+### BuildRequest
 
 #### 详细描述
-
+BuildRequest will build a bytes request, you can use it to send request by yourself.
 
 #### 定义
 
@@ -288,7 +289,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.CurlToHTTPRequest
+### CurlToHTTPRequest
 
 #### 详细描述
 
@@ -308,7 +309,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.Delete
+### Delete
 
 #### 详细描述
 
@@ -328,10 +329,10 @@
 | r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
 
 
-### poc.DeleteHTTPPacketCookie
+### DeleteHTTPPacketCookie
 
 #### 详细描述
-
+DeleteHTTPPacketCookie delete cookie from http packetif packet is request, it will delete from Cookie headerif packet is response, it will delete from Set-Cookie headerpacket = DeleteHTTPPacketCookie(packet, "key")
 
 #### 定义
 
@@ -349,7 +350,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.DeleteHTTPPacketForm
+### DeleteHTTPPacketForm
 
 #### 详细描述
 
@@ -370,7 +371,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.DeleteHTTPPacketHeader
+### DeleteHTTPPacketHeader
 
 #### 详细描述
 
@@ -391,7 +392,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.DeleteHTTPPacketPostParam
+### DeleteHTTPPacketPostParam
 
 #### 详细描述
 
@@ -412,7 +413,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.DeleteHTTPPacketQueryParam
+### DeleteHTTPPacketQueryParam
 
 #### 详细描述
 
@@ -433,10 +434,10 @@
 | r1 | `[]byte` |   |
 
 
-### poc.Do
+### Do
 
 #### 详细描述
-
+poc.Do is something like poc.HTTPEx, but the params is (method string, url string, opt...)use it like `poc.Do("GET", "https://www.example.com", poc.proxy(proxy))`
 
 #### 定义
 
@@ -457,7 +458,7 @@
 | r3 | `error` |   |
 
 
-### poc.FixHTTPPacketCRLF
+### FixHTTPPacketCRLF
 
 #### 详细描述
 
@@ -478,7 +479,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.FixHTTPRequest
+### FixHTTPRequest
 
 #### 详细描述
 
@@ -498,7 +499,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.FixHTTPResponse
+### FixHTTPResponse
 
 #### 详细描述
 
@@ -518,7 +519,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.Get
+### Get
 
 #### 详细描述
 
@@ -538,7 +539,7 @@
 | r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
 
 
-### poc.GetAllHTTPPacketPostParams
+### GetAllHTTPPacketPostParams
 
 #### 详细描述
 
@@ -558,7 +559,7 @@
 | r1 | `map[string]string` |   |
 
 
-### poc.GetAllHTTPPacketQueryParams
+### GetAllHTTPPacketQueryParams
 
 #### 详细描述
 
@@ -578,7 +579,7 @@
 | r1 | `map[string]string` |   |
 
 
-### poc.GetHTTPPacketBody
+### GetHTTPPacketBody
 
 #### 详细描述
 
@@ -598,7 +599,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.GetHTTPPacketContentType
+### GetHTTPPacketContentType
 
 #### 详细描述
 
@@ -618,7 +619,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetHTTPPacketCookie
+### GetHTTPPacketCookie
 
 #### 详细描述
 
@@ -639,7 +640,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetHTTPPacketCookieFirst
+### GetHTTPPacketCookieFirst
 
 #### 详细描述
 
@@ -660,7 +661,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetHTTPPacketCookieValues
+### GetHTTPPacketCookieValues
 
 #### 详细描述
 
@@ -681,7 +682,7 @@
 | r1 | `[]string` |   |
 
 
-### poc.GetHTTPPacketCookies
+### GetHTTPPacketCookies
 
 #### 详细描述
 
@@ -701,7 +702,7 @@
 | r1 | `map[string]string` |   |
 
 
-### poc.GetHTTPPacketCookiesFull
+### GetHTTPPacketCookiesFull
 
 #### 详细描述
 
@@ -721,7 +722,7 @@
 | r1 | `map[string][]string` |   |
 
 
-### poc.GetHTTPPacketFirstLine
+### GetHTTPPacketFirstLine
 
 #### 详细描述
 
@@ -743,7 +744,7 @@
 | r3 | `string` |   |
 
 
-### poc.GetHTTPPacketHeader
+### GetHTTPPacketHeader
 
 #### 详细描述
 
@@ -764,7 +765,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetHTTPPacketHeaders
+### GetHTTPPacketHeaders
 
 #### 详细描述
 
@@ -784,7 +785,7 @@
 | r1 | `map[string]string` |   |
 
 
-### poc.GetHTTPPacketHeadersFull
+### GetHTTPPacketHeadersFull
 
 #### 详细描述
 
@@ -804,7 +805,7 @@
 | r1 | `map[string][]string` |   |
 
 
-### poc.GetHTTPPacketPostParam
+### GetHTTPPacketPostParam
 
 #### 详细描述
 
@@ -825,7 +826,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetHTTPPacketQueryParam
+### GetHTTPPacketQueryParam
 
 #### 详细描述
 
@@ -846,7 +847,7 @@
 | r1 | `string` |   |
 
 
-### poc.GetStatusCodeFromResponse
+### GetStatusCodeFromResponse
 
 #### 详细描述
 
@@ -866,10 +867,10 @@
 | r1 | `int` |   |
 
 
-### poc.HTTP
+### HTTP
 
 #### 详细描述
-
+poc.HTTP means send http request and return (response, request, error)it support many option, use it via: `poc.HTTP(packet, poc.https(true), poc.proxy(proxy))`
 
 #### 定义
 
@@ -889,10 +890,10 @@
 | r3 | `error` |   |
 
 
-### poc.HTTPEx
+### HTTPEx
 
 #### 详细描述
-
+poc.HTTPEx means send http request and return (*LowhttpResponse, *http.Request, error)it support many option, use it via: `poc.HTTPEx(packet, poc.https(true), poc.proxy(proxy))`.you will handle *lowhttp.LowhttpResponse with your own code. LowhttpResponse include many details.
 
 #### 定义
 
@@ -912,7 +913,7 @@
 | r3 | `error` |   |
 
 
-### poc.HTTPPacketForceChunked
+### HTTPPacketForceChunked
 
 #### 详细描述
 
@@ -932,7 +933,7 @@
 | r1 | `[]byte` |   |
 
 
-### poc.HTTPRequestToCurl
+### HTTPRequestToCurl
 
 #### 详细描述
 
@@ -953,7 +954,7 @@
 | r1 | `string` |   |
 
 
-### poc.Head
+### Head
 
 #### 详细描述
 
@@ -973,7 +974,7 @@
 | r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
 
 
-### poc.IsResponse
+### IsResponse
 
 #### 详细描述
 IsResp test if bytesstream is http response
@@ -993,7 +994,7 @@ IsResp test if bytesstream is http response
 | r1 | `bool` |   |
 
 
-### poc.Options
+### Options
 
 #### 详细描述
 
@@ -1013,7 +1014,7 @@ IsResp test if bytesstream is http response
 | r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
 
 
-### poc.ParseBytesToHTTPRequest
+### ParseBytesToHTTPRequest
 
 #### 详细描述
 
@@ -1034,7 +1035,7 @@ IsResp test if bytesstream is http response
 | r2 | `error` |   |
 
 
-### poc.ParseBytesToHTTPResponse
+### ParseBytesToHTTPResponse
 
 #### 详细描述
 
@@ -1055,7 +1056,7 @@ IsResp test if bytesstream is http response
 | r2 | `error` |   |
 
 
-### poc.ParseUrlToHTTPRequestRaw
+### ParseUrlToHTTPRequestRaw
 
 #### 详细描述
 
@@ -1078,7 +1079,7 @@ IsResp test if bytesstream is http response
 | r3 | `error` |   |
 
 
-### poc.Post
+### Post
 
 #### 详细描述
 
@@ -1098,7 +1099,7 @@ IsResp test if bytesstream is http response
 | r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
 
 
-### poc.ReplaceAllHTTPPacketPostParams
+### ReplaceAllHTTPPacketPostParams
 
 #### 详细描述
 
@@ -1119,7 +1120,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceAllHTTPPacketQueryParams
+### ReplaceAllHTTPPacketQueryParams
 
 #### 详细描述
 
@@ -1140,7 +1141,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceBody
+### ReplaceBody
 
 #### 详细描述
 
@@ -1162,7 +1163,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketBasicAuth
+### ReplaceHTTPPacketBasicAuth
 
 #### 详细描述
 
@@ -1184,7 +1185,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketBody
+### ReplaceHTTPPacketBody
 
 #### 详细描述
 
@@ -1205,7 +1206,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketCookie
+### ReplaceHTTPPacketCookie
 
 #### 详细描述
 
@@ -1227,10 +1228,10 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketFirstLine
+### ReplaceHTTPPacketFirstLine
 
 #### 详细描述
-
+ReplaceHTTPPacketFirstLine replace http packet first lineenable for request and response all
 
 #### 定义
 
@@ -1248,7 +1249,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketHeader
+### ReplaceHTTPPacketHeader
 
 #### 详细描述
 
@@ -1270,7 +1271,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketHost
+### ReplaceHTTPPacketHost
 
 #### 详细描述
 
@@ -1291,7 +1292,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketMethod
+### ReplaceHTTPPacketMethod
 
 #### 详细描述
 
@@ -1312,7 +1313,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketPath
+### ReplaceHTTPPacketPath
 
 #### 详细描述
 
@@ -1333,7 +1334,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketPostParam
+### ReplaceHTTPPacketPostParam
 
 #### 详细描述
 
@@ -1355,7 +1356,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.ReplaceHTTPPacketQueryParam
+### ReplaceHTTPPacketQueryParam
 
 #### 详细描述
 
@@ -1377,7 +1378,7 @@ IsResp test if bytesstream is http response
 | r1 | `[]byte` |   |
 
 
-### poc.Split
+### Split
 
 #### 详细描述
 
@@ -1399,10 +1400,10 @@ IsResp test if bytesstream is http response
 | r2 | `[]byte` |   |
 
 
-### poc.Websocket
+### Websocket
 
 #### 详细描述
-
+poc.Websocket is shortcut for `poc.HTTP(..., poc.websocket(true))`
 
 #### 定义
 
@@ -1422,7 +1423,7 @@ IsResp test if bytesstream is http response
 | r3 | `error` |   |
 
 
-### poc.appendCookie
+### appendCookie
 
 #### 详细描述
 
@@ -1443,7 +1444,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendFormEncoded
+### appendFormEncoded
 
 #### 详细描述
 
@@ -1464,7 +1465,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendHeader
+### appendHeader
 
 #### 详细描述
 
@@ -1485,7 +1486,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendPath
+### appendPath
 
 #### 详细描述
 
@@ -1505,7 +1506,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendPostParam
+### appendPostParam
 
 #### 详细描述
 
@@ -1526,7 +1527,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendQueryParam
+### appendQueryParam
 
 #### 详细描述
 
@@ -1547,7 +1548,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.appendUploadFile
+### appendUploadFile
 
 #### 详细描述
 
@@ -1570,7 +1571,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.deleteCookie
+### deleteCookie
 
 #### 详细描述
 
@@ -1590,7 +1591,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.deleteForm
+### deleteForm
 
 #### 详细描述
 
@@ -1610,7 +1611,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.deleteHeader
+### deleteHeader
 
 #### 详细描述
 
@@ -1630,7 +1631,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.deletePostParam
+### deletePostParam
 
 #### 详细描述
 
@@ -1650,7 +1651,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.deleteQueryParam
+### deleteQueryParam
 
 #### 详细描述
 
@@ -1670,10 +1671,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.host
+### host
 
 #### 详细描述
-
+params: poc packet builder and sender params, use it like: `poc.HTTP(..., poc.host("127.0.0.1"))`
 
 #### 定义
 
@@ -1690,10 +1691,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.http2
+### http2
 
 #### 详细描述
-
+params: use it `poc.HTTP(packet, poc.http2(true))` control http2 schema
 
 #### 定义
 
@@ -1710,10 +1711,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.https
+### https
 
 #### 详细描述
-
+params: use it `poc.HTTP(packet, poc.https(true))` control tls schema
 
 #### 定义
 
@@ -1730,10 +1731,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.jsRedirect
+### jsRedirect
 
 #### 详细描述
-
+params, use it as `poc.HTTP(packet, poc.jsRedirect(true))` to recognize js href(regexp)
 
 #### 定义
 
@@ -1750,10 +1751,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.noFixContentLength
+### noFixContentLength
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.noFixContentLength(true))` control fix content length.use it in pipeline or smuggle case.
 
 #### 定义
 
@@ -1770,10 +1771,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.noRedirect
+### noRedirect
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.noRedirect(true))` control redirect.
 
 #### 定义
 
@@ -1790,7 +1791,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.params
+### params
 
 #### 详细描述
 
@@ -1810,10 +1811,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.port
+### port
 
 #### 详细描述
-
+params: poc packet builder and sender params, use it like: `poc.HTTP(..., poc.port(8080))`
 
 #### 定义
 
@@ -1830,10 +1831,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.proxy
+### proxy
 
 #### 详细描述
-
+params: use it: `poc.HTTP(..., poc.proxy(15))` control proxy.
 
 #### 定义
 
@@ -1850,7 +1851,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.redirectHandler
+### redirectHandler
 
 #### 详细描述
 
@@ -1870,10 +1871,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.redirectTimes
+### redirectTimes
 
 #### 详细描述
-
+params: use it `poc.HTTP(..., poc.redirectTimes(3))` control redirect times.
 
 #### 定义
 
@@ -1890,7 +1891,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceAllPostParams
+### replaceAllPostParams
 
 #### 详细描述
 
@@ -1910,7 +1911,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceAllQueryParams
+### replaceAllQueryParams
 
 #### 详细描述
 
@@ -1930,7 +1931,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceBasicAuth
+### replaceBasicAuth
 
 #### 详细描述
 
@@ -1951,7 +1952,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceBody
+### replaceBody
 
 #### 详细描述
 
@@ -1972,7 +1973,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceCookie
+### replaceCookie
 
 #### 详细描述
 
@@ -1993,10 +1994,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceFirstLine
+### replaceFirstLine
 
 #### 详细描述
-
+params, replace request first line, it's hacky!modified request bytes before request sent out
 
 #### 定义
 
@@ -2013,10 +2014,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceHeader
+### replaceHeader
 
 #### 详细描述
-
+params, replace request header before sending.
 
 #### 定义
 
@@ -2034,7 +2035,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceHost
+### replaceHost
 
 #### 详细描述
 
@@ -2054,10 +2055,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceMethod
+### replaceMethod
 
 #### 详细描述
-
+params, replace request method before sending.
 
 #### 定义
 
@@ -2074,7 +2075,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replacePath
+### replacePath
 
 #### 详细描述
 
@@ -2094,7 +2095,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replacePostParam
+### replacePostParam
 
 #### 详细描述
 
@@ -2115,7 +2116,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.replaceQueryParam
+### replaceQueryParam
 
 #### 详细描述
 
@@ -2136,10 +2137,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.retryInStatusCode
+### retryInStatusCode
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.retryInStatusCode(200, 404))` control retry in(matched) status code.
 
 #### 定义
 
@@ -2156,10 +2157,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.retryNotInStatusCode
+### retryNotInStatusCode
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.retryNotInStatusCode(200, 404))` control retry not in(matched) status code.
 
 #### 定义
 
@@ -2176,10 +2177,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.retryTimes
+### retryTimes
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.retryTimes(3))` control retry times.
 
 #### 定义
 
@@ -2196,10 +2197,30 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.save
+### retryWaitTime
 
 #### 详细描述
+params: use it like: `poc.HTTP(..., poc.retryWaitTime(1))` control retry wait time(seconds).
 
+#### 定义
+
+`retryWaitTime(t int) PocConfig`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfig` |   |
+
+
+### save
+
+#### 详细描述
+params, save the current request and response to databasefind it in `yakit.QueryHTTPFlow`
 
 #### 定义
 
@@ -2216,10 +2237,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.session
+### session
 
 #### 详细描述
-
+params, inherit cookie via the same session key,use it as `poc.HTTP(packet, poc.session("key"))`it's useful for login case
 
 #### 定义
 
@@ -2236,10 +2257,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.source
+### source
 
 #### 详细描述
-
+params, set request source field, for saving to database
 
 #### 定义
 
@@ -2256,10 +2277,10 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.timeout
+### timeout
 
 #### 详细描述
-
+params: use it like: `poc.HTTP(..., poc.timeout(15))` control network timeout
 
 #### 定义
 
@@ -2276,7 +2297,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.websocket
+### websocket
 
 #### 详细描述
 
@@ -2296,7 +2317,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.websocketFromServer
+### websocketFromServer
 
 #### 详细描述
 
@@ -2316,7 +2337,7 @@ IsResp test if bytesstream is http response
 | r1 | `PocConfig` |   |
 
 
-### poc.websocketOnClient
+### websocketOnClient
 
 #### 详细描述
 

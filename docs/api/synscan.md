@@ -19,7 +19,7 @@
 
 
 ## 函数定义
-### synscan.FixPermission
+### FixPermission
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `error` |   |
 
 
-### synscan.Scan
+### Scan
 
 #### 详细描述
 
@@ -57,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### synscan.ScanFromPing
+### ScanFromPing
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r2 | `error` |   |
 
 
-### synscan.callback
+### callback
 
 #### 详细描述
 
@@ -100,7 +100,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.concurrent
+### concurrent
 
 #### 详细描述
 设置 SYN 扫描的并发可以有效控制精准度
@@ -120,7 +120,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.excludeHosts
+### excludeHosts
 
 #### 详细描述
 
@@ -140,7 +140,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.excludePorts
+### excludePorts
 
 #### 详细描述
 
@@ -160,7 +160,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.initHostFilter
+### initHostFilter
 
 #### 详细描述
 
@@ -180,7 +180,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.initPortFilter
+### initPortFilter
 
 #### 详细描述
 
@@ -200,7 +200,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.outputFile
+### outputFile
 
 #### 详细描述
 端口开放的结果保存到文件
@@ -220,7 +220,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.outputPrefix
+### outputPrefix
 
 #### 详细描述
 端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
@@ -240,7 +240,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.rateLimit
+### rateLimit
 
 #### 详细描述
 
@@ -261,7 +261,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.submitTaskCallback
+### submitTaskCallback
 
 #### 详细描述
 
@@ -281,7 +281,7 @@
 | r1 | `scanOpt` |   |
 
 
-### synscan.wait
+### wait
 
 #### 详细描述
 synscan 发出 SYN 包后等待多久？

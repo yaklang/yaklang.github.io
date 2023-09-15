@@ -33,7 +33,7 @@
 
 
 ## 函数定义
-### re.Compile
+### Compile
 
 #### 详细描述
 Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.
@@ -54,7 +54,7 @@ Compile parses a regular expression and returns, if successful,a Regexp object t
 | r2 | `error` |   |
 
 
-### re.CompilePOSIX
+### CompilePOSIX
 
 #### 详细描述
 CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
@@ -75,7 +75,7 @@ CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (e
 | r2 | `error` |   |
 
 
-### re.ExtractEmail
+### ExtractEmail
 
 #### 详细描述
 
@@ -95,7 +95,7 @@ CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (e
 | r1 | `[]string` |   |
 
 
-### re.ExtractHostPort
+### ExtractHostPort
 
 #### 详细描述
 HOSTPORT
@@ -115,7 +115,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### re.ExtractIP
+### ExtractIP
 
 #### 详细描述
 
@@ -135,7 +135,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### re.ExtractIPv4
+### ExtractIPv4
 
 #### 详细描述
 
@@ -155,7 +155,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### re.ExtractIPv6
+### ExtractIPv6
 
 #### 详细描述
 
@@ -175,7 +175,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### re.ExtractMac
+### ExtractMac
 
 #### 详细描述
 
@@ -195,7 +195,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### re.ExtractPath
+### ExtractPath
 
 #### 详细描述
 PATHPARAM
@@ -215,7 +215,7 @@ PATHPARAM
 | r1 | `[]string` |   |
 
 
-### re.ExtractTTY
+### ExtractTTY
 
 #### 详细描述
 TTY
@@ -235,7 +235,7 @@ TTY
 | r1 | `[]string` |   |
 
 
-### re.ExtractURL
+### ExtractURL
 
 #### 详细描述
 URL
@@ -255,7 +255,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### re.Find
+### Find
 
 #### 详细描述
 
@@ -276,7 +276,7 @@ URL
 | r1 | `string` |   |
 
 
-### re.FindAll
+### FindAll
 
 #### 详细描述
 
@@ -297,7 +297,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### re.FindAllIndex
+### FindAllIndex
 
 #### 详细描述
 
@@ -318,7 +318,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### re.FindGroup
+### FindGroup
 
 #### 详细描述
 
@@ -339,7 +339,7 @@ URL
 | r1 | `map[string]string` |   |
 
 
-### re.FindGroupAll
+### FindGroupAll
 
 #### 详细描述
 
@@ -360,7 +360,7 @@ URL
 | r1 | `[]map[string]string` |   |
 
 
-### re.FindIndex
+### FindIndex
 
 #### 详细描述
 
@@ -381,7 +381,7 @@ URL
 | r1 | `[]int` |   |
 
 
-### re.FindSubmatch
+### FindSubmatch
 
 #### 详细描述
 
@@ -402,7 +402,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### re.FindSubmatchAll
+### FindSubmatchAll
 
 #### 详细描述
 
@@ -423,7 +423,7 @@ URL
 | r1 | `[][]string` |   |
 
 
-### re.FindSubmatchAllIndex
+### FindSubmatchAllIndex
 
 #### 详细描述
 
@@ -444,7 +444,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### re.FindSubmatchIndex
+### FindSubmatchIndex
 
 #### 详细描述
 
@@ -465,7 +465,7 @@ URL
 | r1 | `[]int` |   |
 
 
-### re.Grok
+### Grok
 
 #### 详细描述
 
@@ -486,7 +486,7 @@ URL
 | r1 | `GrokResult` |   |
 
 
-### re.Match
+### Match
 
 #### 详细描述
 
@@ -507,7 +507,7 @@ URL
 | r1 | `bool` |   |
 
 
-### re.MustCompile
+### MustCompile
 
 #### 详细描述
 MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
@@ -527,7 +527,7 @@ MustCompile is like Compile but panics if the expression cannot be parsed.It sim
 | r1 | `*Regexp` |   |
 
 
-### re.MustCompilePOSIX
+### MustCompilePOSIX
 
 #### 详细描述
 MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
@@ -547,7 +547,7 @@ MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be par
 | r1 | `*Regexp` |   |
 
 
-### re.QuoteMeta
+### QuoteMeta
 
 #### 详细描述
 QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.
@@ -567,7 +567,7 @@ QuoteMeta returns a string that escapes all regular expression metacharactersins
 | r1 | `string` |   |
 
 
-### re.ReplaceAll
+### ReplaceAll
 
 #### 详细描述
 
@@ -589,7 +589,7 @@ QuoteMeta returns a string that escapes all regular expression metacharactersins
 | r1 | `string` |   |
 
 
-### re.ReplaceAllWithFunc
+### ReplaceAllWithFunc
 
 #### 详细描述
 

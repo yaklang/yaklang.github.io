@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### regen.Generate
+### Generate
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### regen.MustGenerate
+### MustGenerate
 
 #### 详细描述
 

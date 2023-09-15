@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### hids.CPUAverageCallback
+### CPUAverageCallback
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | callback | `func(i float64)` |   |
 
 
-### hids.CPUPercent
+### CPUPercent
 
 #### 详细描述
 
@@ -43,7 +43,7 @@
 | r1 | `float64` |   |
 
 
-### hids.CPUPercentCallback
+### CPUPercentCallback
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 | callback | `func(i float64)` |   |
 
 
-### hids.Init
+### Init
 
 #### 详细描述
 
@@ -68,7 +68,7 @@
 `Init()`
 
 
-### hids.MemoryPercent
+### MemoryPercent
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r1 | `float64` |   |
 
 
-### hids.MemoryPercentCallback
+### MemoryPercentCallback
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | callback | `func(i float64)` |   |
 
 
-### hids.SetMonitorInterval
+### SetMonitorInterval
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | i | `float64` |   |
 
 
-### hids.ShowMonitorInterval
+### ShowMonitorInterval
 
 #### 详细描述
 

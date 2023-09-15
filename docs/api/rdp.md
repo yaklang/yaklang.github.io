@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### rdp.Login
+### Login
 
 #### 详细描述
 
@@ -32,7 +32,7 @@
 | err | `error` |   |
 
 
-### rdp.Version
+### Version
 
 #### 详细描述
 

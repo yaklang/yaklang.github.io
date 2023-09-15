@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### spacengine.FofaQuery
+### FofaQuery
 
 #### 详细描述
 
@@ -37,7 +37,7 @@
 | r2 | `error` |   |
 
 
-### spacengine.HunterQuery
+### HunterQuery
 
 #### 详细描述
 
@@ -61,7 +61,7 @@
 | r2 | `error` |   |
 
 
-### spacengine.QuakeQuery
+### QuakeQuery
 
 #### 详细描述
 
@@ -84,7 +84,7 @@
 | r2 | `error` |   |
 
 
-### spacengine.ShodanQuery
+### ShodanQuery
 
 #### 详细描述
 
@@ -107,7 +107,7 @@
 | r2 | `error` |   |
 
 
-### spacengine.ZoomeyeQuery
+### ZoomeyeQuery
 
 #### 详细描述
 
@@ -130,7 +130,7 @@
 | r2 | `error` |   |
 
 
-### spacengine.maxPage
+### maxPage
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `_spaceEngineConfigOpt` |   |
 
 
-### spacengine.maxRecord
+### maxRecord
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `_spaceEngineConfigOpt` |   |
 
 
-### spacengine.pageSize
+### pageSize
 
 #### 详细描述
 

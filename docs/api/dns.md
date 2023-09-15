@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### dns.QuertAxfr
+### QuertAxfr
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `[]string` |   |
 
 
-### dns.QueryIP
+### QueryIP
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `string` |   |
 
 
-### dns.QueryIPAll
+### QueryIPAll
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### dns.QueryNS
+### QueryNS
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r1 | `[]string` |   |
 
 
-### dns.QueryTXT
+### QueryTXT
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r1 | `[]string` |   |
 
 
-### dns.dnsServers
+### dnsServers
 
 #### 详细描述
 
@@ -137,7 +137,7 @@
 | r1 | `_dnsConfigOpt` |   |
 
 
-### dns.timeout
+### timeout
 
 #### 详细描述
 

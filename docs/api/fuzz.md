@@ -22,7 +22,7 @@
 
 
 ## 函数定义
-### fuzz.FuzzCalcExpr
+### FuzzCalcExpr
 
 #### 详细描述
 
@@ -37,7 +37,7 @@
 | r1 | `map[string]any` |   |
 
 
-### fuzz.HTTPRequest
+### HTTPRequest
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r2 | `error` |   |
 
 
-### fuzz.MustHTTPRequest
+### MustHTTPRequest
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r1 | `*FuzzHTTPRequest` |   |
 
 
-### fuzz.ProtobufBytes
+### ProtobufBytes
 
 #### 详细描述
 
@@ -100,7 +100,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### fuzz.ProtobufHex
+### ProtobufHex
 
 #### 详细描述
 
@@ -120,7 +120,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### fuzz.ProtobufJSON
+### ProtobufJSON
 
 #### 详细描述
 
@@ -140,7 +140,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### fuzz.ProtobufYAML
+### ProtobufYAML
 
 #### 详细描述
 
@@ -160,7 +160,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### fuzz.Strings
+### Strings
 
 #### 详细描述
 fuzz
@@ -180,7 +180,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### fuzz.StringsFunc
+### StringsFunc
 
 #### 详细描述
 
@@ -202,7 +202,7 @@ fuzz
 | r1 | `error` |   |
 
 
-### fuzz.StringsWithParam
+### StringsWithParam
 
 #### 详细描述
 
@@ -223,7 +223,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### fuzz.UrlToHTTPRequest
+### UrlToHTTPRequest
 
 #### 详细描述
 
@@ -245,7 +245,7 @@ fuzz
 | r2 | `error` |   |
 
 
-### fuzz.UrlsToHTTPRequests
+### UrlsToHTTPRequests
 
 #### 详细描述
 
@@ -265,7 +265,7 @@ fuzz
 | target | `...interface` |   |
 
 
-### fuzz.WithConcurrentLimit
+### WithConcurrentLimit
 
 #### 详细描述
 
@@ -285,7 +285,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzz.WithDelay
+### WithDelay
 
 #### 详细描述
 
@@ -305,7 +305,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzz.WithNamingContext
+### WithNamingContext
 
 #### 详细描述
 
@@ -325,7 +325,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzz.WithTimeOut
+### WithTimeOut
 
 #### 详细描述
 
@@ -345,7 +345,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzz.https
+### https
 
 #### 详细描述
 

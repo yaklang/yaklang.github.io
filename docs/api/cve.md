@@ -21,7 +21,7 @@
 
 
 ## 函数定义
-### cve.Download
+### Download
 
 #### 详细描述
 DownLoad 从NVD下载CVE json数据到本地
@@ -41,7 +41,7 @@ DownLoad 从NVD下载CVE json数据到本地
 | r1 | `error` |   |
 
 
-### cve.GetCVE
+### GetCVE
 
 #### 详细描述
 
@@ -61,7 +61,7 @@ DownLoad 从NVD下载CVE json数据到本地
 | r1 | `*cveresources.CVE` |   |
 
 
-### cve.LoadCVE
+### LoadCVE
 
 #### 详细描述
 LoadCVE 从本地的CVE json数据加载构造数据库
@@ -78,7 +78,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | years | `...int` |   |
 
 
-### cve.NewStatistics
+### NewStatistics
 
 #### 详细描述
 
@@ -98,7 +98,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `*Statistics` |   |
 
 
-### cve.Query
+### Query
 
 #### 详细描述
 
@@ -119,7 +119,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `chan *cveresources.CVE` |   |
 
 
-### cve.QueryEx
+### QueryEx
 
 #### 详细描述
 
@@ -139,7 +139,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `chan *cveresources.CVE` |   |
 
 
-### cve.after
+### after
 
 #### 详细描述
 
@@ -160,7 +160,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.before
+### before
 
 #### 详细描述
 
@@ -181,7 +181,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.cpe
+### cpe
 
 #### 详细描述
 
@@ -201,7 +201,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.cve
+### cve
 
 #### 详细描述
 
@@ -221,7 +221,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.cwe
+### cwe
 
 #### 详细描述
 
@@ -241,7 +241,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.parseToCpe
+### parseToCpe
 
 #### 详细描述
 
@@ -262,7 +262,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r2 | `error` |   |
 
 
-### cve.product
+### product
 
 #### 详细描述
 
@@ -283,7 +283,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.score
+### score
 
 #### 详细描述
 
@@ -303,7 +303,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.severity
+### severity
 
 #### 详细描述
 
@@ -323,7 +323,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### cve.vendor
+### vendor
 
 #### 详细描述
 

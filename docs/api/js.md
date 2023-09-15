@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### js.ASTWalk
+### ASTWalk
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r2 | `error` |   |
 
 
-### js.CallFunctionFromCode
+### CallFunctionFromCode
 
 #### 详细描述
 
@@ -61,7 +61,7 @@
 | r2 | `error` |   |
 
 
-### js.FalseValue
+### FalseValue
 
 #### 详细描述
 FalseValue will return a value representing false.It is equivalent to:	ToValue(false)
@@ -76,7 +76,7 @@ FalseValue will return a value representing false.It is equivalent to:	ToValue(f
 | r1 | `Value` |   |
 
 
-### js.GetSTType
+### GetSTType
 
 #### 详细描述
 
@@ -96,7 +96,7 @@ FalseValue will return a value representing false.It is equivalent to:	ToValue(f
 | r1 | `string` |   |
 
 
-### js.NaNValue
+### NaNValue
 
 #### 详细描述
 NaNValue will return a value representing NaN.It is equivalent to:	ToValue(math.NaN())
@@ -111,7 +111,7 @@ NaNValue will return a value representing NaN.It is equivalent to:	ToValue(math.
 | r1 | `Value` |   |
 
 
-### js.New
+### New
 
 #### 详细描述
 create vm
@@ -126,7 +126,7 @@ create vm
 | r1 | `*otto.Otto` |   |
 
 
-### js.NullValue
+### NullValue
 
 #### 详细描述
 NullValue will return a Value representing null.
@@ -141,7 +141,7 @@ NullValue will return a Value representing null.
 | r1 | `Value` |   |
 
 
-### js.Parse
+### Parse
 
 #### 详细描述
 
@@ -162,7 +162,7 @@ NullValue will return a Value representing null.
 | r2 | `error` |   |
 
 
-### js.Run
+### Run
 
 #### 详细描述
 Run will allocate a new JavaScript runtime, run the given sourceon the allocated runtime, and return the runtime, resulting value, anderror (if any).src may be a string, a byte slice, a bytes.Buffer, or an io.Reader, but it MUST always be in UTF-8.src may also be a Script.src may also be a Program, but if the AST has been modified, then runtime behavior is undefined.
@@ -184,7 +184,7 @@ Run will allocate a new JavaScript runtime, run the given sourceon the allocated
 | r3 | `error` |   |
 
 
-### js.ToValue
+### ToValue
 
 #### 详细描述
 ToValue will convert an interface{} value to a value digestible by otto/JavaScriptThis function will not work for advanced types (struct, map, slice/array, etc.) andyou should use Otto.ToValue instead.
@@ -205,7 +205,7 @@ ToValue will convert an interface{} value to a value digestible by otto/JavaScri
 | r2 | `error` |   |
 
 
-### js.TrueValue
+### TrueValue
 
 #### 详细描述
 TrueValue will return a value representing true.It is equivalent to:	ToValue(true)
@@ -220,7 +220,7 @@ TrueValue will return a value representing true.It is equivalent to:	ToValue(tru
 | r1 | `Value` |   |
 
 
-### js.UndefinedValue
+### UndefinedValue
 
 #### 详细描述
 UndefinedValue will return a Value representing undefined.

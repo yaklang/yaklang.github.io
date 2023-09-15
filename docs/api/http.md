@@ -37,7 +37,7 @@
 
 
 ## 函数定义
-### http.Do
+### Do
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 | r2 | `error` |   |
 
 
-### http.Get
+### Get
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r2 | `error` |   |
 
 
-### http.GetAllBody
+### GetAllBody
 
 #### 详细描述
 
@@ -100,7 +100,7 @@
 | r1 | `[]byte` |   |
 
 
-### http.NewRequest
+### NewRequest
 
 #### 详细描述
 
@@ -123,7 +123,7 @@
 | r2 | `error` |   |
 
 
-### http.Post
+### Post
 
 #### 详细描述
 
@@ -145,7 +145,7 @@
 | r2 | `error` |   |
 
 
-### http.Raw
+### Raw
 
 #### 详细描述
 
@@ -166,7 +166,7 @@
 | r2 | `error` |   |
 
 
-### http.Request
+### Request
 
 #### 详细描述
 
@@ -189,7 +189,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestFaviconHash
+### RequestFaviconHash
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestToMD5
+### RequestToMD5
 
 #### 详细描述
 
@@ -231,7 +231,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestToMMH3Hash128
+### RequestToMMH3Hash128
 
 #### 详细描述
 
@@ -252,7 +252,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestToMMH3Hash128x64
+### RequestToMMH3Hash128x64
 
 #### 详细描述
 
@@ -273,7 +273,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestToSha1
+### RequestToSha1
 
 #### 详细描述
 
@@ -294,7 +294,7 @@
 | r2 | `error` |   |
 
 
-### http.RequestToSha256
+### RequestToSha256
 
 #### 详细描述
 
@@ -315,7 +315,7 @@
 | r2 | `error` |   |
 
 
-### http.body
+### body
 
 #### 详细描述
 
@@ -335,7 +335,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.cookie
+### cookie
 
 #### 详细描述
 
@@ -355,7 +355,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.dump
+### dump
 
 #### 详细描述
 
@@ -376,7 +376,7 @@
 | r2 | `error` |   |
 
 
-### http.dumphead
+### dumphead
 
 #### 详细描述
 
@@ -397,7 +397,7 @@
 | r2 | `error` |   |
 
 
-### http.fakeua
+### fakeua
 
 #### 详细描述
 
@@ -412,7 +412,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.header
+### header
 
 #### 详细描述
 
@@ -433,7 +433,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.json
+### json
 
 #### 详细描述
 
@@ -453,7 +453,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.noredirect
+### noredirect
 
 #### 详细描述
 
@@ -468,7 +468,7 @@
 | r1 | `HttpOption` |   |
 
 
-### http.params
+### params
 
 #### 详细描述
 GetParams set query params
@@ -488,7 +488,7 @@ GetParams set query params
 | r1 | `HttpOption` |   |
 
 
-### http.postparams
+### postparams
 
 #### 详细描述
 PostParams set post params
@@ -508,7 +508,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.proxy
+### proxy
 
 #### 详细描述
 
@@ -528,7 +528,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.redirect
+### redirect
 
 #### 详细描述
 
@@ -548,7 +548,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.session
+### session
 
 #### 详细描述
 
@@ -568,7 +568,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.show
+### show
 
 #### 详细描述
 
@@ -583,7 +583,7 @@ PostParams set post params
 | i | `any` |   |
 
 
-### http.showhead
+### showhead
 
 #### 详细描述
 
@@ -598,7 +598,7 @@ PostParams set post params
 | i | `any` |   |
 
 
-### http.timeout
+### timeout
 
 #### 详细描述
 
@@ -618,7 +618,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.ua
+### ua
 
 #### 详细描述
 
@@ -638,7 +638,7 @@ PostParams set post params
 | r1 | `HttpOption` |   |
 
 
-### http.uarand
+### uarand
 
 #### 详细描述
 
@@ -653,7 +653,7 @@ PostParams set post params
 | r1 | `string` |   |
 
 
-### http.useragent
+### useragent
 
 #### 详细描述
 

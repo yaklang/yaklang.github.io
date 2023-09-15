@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### bot.FromEnv
+### FromEnv
 
 #### 详细描述
 
@@ -26,7 +26,7 @@
 | r1 | `*Client` |   |
 
 
-### bot.New
+### New
 
 #### 详细描述
 
@@ -46,7 +46,7 @@
 | r1 | `*Client` |   |
 
 
-### bot.ding
+### ding
 
 #### 详细描述
 
@@ -67,7 +67,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bot.webhook
+### webhook
 
 #### 详细描述
 
@@ -87,7 +87,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bot.webhookWithSecret
+### webhookWithSecret
 
 #### 详细描述
 
@@ -108,7 +108,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bot.workwx
+### workwx
 
 #### 详细描述
 

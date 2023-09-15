@@ -9,7 +9,7 @@
 
 
 ## 函数定义
-### ldap.Login
+### Login
 
 #### 详细描述
 
@@ -31,7 +31,7 @@
 | r2 | `error` |   |
 
 
-### ldap.password
+### password
 
 #### 详细描述
 
@@ -51,7 +51,7 @@
 | r1 | `func(config *ldapClientConfig)` |   |
 
 
-### ldap.port
+### port
 
 #### 详细描述
 
@@ -71,7 +71,7 @@
 | r1 | `func(config *ldapClientConfig)` |   |
 
 
-### ldap.username
+### username
 
 #### 详细描述
 

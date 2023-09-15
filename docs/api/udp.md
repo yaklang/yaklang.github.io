@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### udp.Connect
+### Connect
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | r2 | `error` |   |
 
 
-### udp.MockUDPProtocol
+### MockUDPProtocol
 
 #### 详细描述
 
@@ -56,7 +56,7 @@
 | r2 | `int` |   |
 
 
-### udp.Serve
+### Serve
 
 #### 详细描述
 
@@ -78,7 +78,7 @@
 | r1 | `error` |   |
 
 
-### udp.clientLocalAddr
+### clientLocalAddr
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r1 | `udpClientOption` |   |
 
 
-### udp.clientTimeout
+### clientTimeout
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `udpClientOption` |   |
 
 
-### udp.serverCallback
+### serverCallback
 
 #### 详细描述
 
@@ -138,7 +138,7 @@
 | r1 | `udpServerOpt` |   |
 
 
-### udp.serverContext
+### serverContext
 
 #### 详细描述
 
@@ -158,7 +158,7 @@
 | r1 | `udpServerOpt` |   |
 
 
-### udp.serverTimeout
+### serverTimeout
 
 #### 详细描述
 

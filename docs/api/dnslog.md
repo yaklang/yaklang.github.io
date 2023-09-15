@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### dnslog.LookupFirst
+### LookupFirst
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `string` |   |
 
 
-### dnslog.NewCustomDNSLog
+### NewCustomDNSLog
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r1 | `*CustomDNSLog` |   |
 
 
-### dnslog.QueryCustomScript
+### QueryCustomScript
 
 #### 详细描述
 
@@ -63,7 +63,7 @@
 `QueryCustomScript()`
 
 
-### dnslog.local
+### local
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r1 | `_dnslogConfigOpt` |   |
 
 
-### dnslog.mode
+### mode
 
 #### 详细描述
 
@@ -103,7 +103,7 @@
 | r1 | `_dnslogConfigOpt` |   |
 
 
-### dnslog.random
+### random
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `_dnslogConfigOpt` |   |
 
 
-### dnslog.script
+### script
 
 #### 详细描述
 

@@ -18,7 +18,7 @@
 
 
 ## 函数定义
-### tls.DecryptWithPkcs1v15
+### DecryptWithPkcs1v15
 
 #### 详细描述
 
@@ -40,7 +40,7 @@
 | r2 | `error` |   |
 
 
-### tls.EncryptWithPkcs1v15
+### EncryptWithPkcs1v15
 
 #### 详细描述
 
@@ -62,7 +62,7 @@
 | r2 | `error` |   |
 
 
-### tls.GenerateRSA1024KeyPair
+### GenerateRSA1024KeyPair
 
 #### 详细描述
 
@@ -82,7 +82,7 @@
 | r1 | `func() ([]byte, []byte, error)` |   |
 
 
-### tls.GenerateRSA2048KeyPair
+### GenerateRSA2048KeyPair
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `func() ([]byte, []byte, error)` |   |
 
 
-### tls.GenerateRSA4096KeyPair
+### GenerateRSA4096KeyPair
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `func() ([]byte, []byte, error)` |   |
 
 
-### tls.GenerateRSAKeyPair
+### GenerateRSAKeyPair
 
 #### 详细描述
 
@@ -144,7 +144,7 @@
 | r3 | `error` |   |
 
 
-### tls.GenerateRootCA
+### GenerateRootCA
 
 #### 详细描述
 
@@ -166,7 +166,7 @@
 | _ | `error` |   |
 
 
-### tls.GenerateSM2KeyPair
+### GenerateSM2KeyPair
 
 #### 详细描述
 
@@ -183,7 +183,7 @@
 | r3 | `error` |   |
 
 
-### tls.Inspect
+### Inspect
 
 #### 详细描述
 
@@ -204,7 +204,7 @@
 | r2 | `error` |   |
 
 
-### tls.SignClientCertAndKey
+### SignClientCertAndKey
 
 #### 详细描述
 
@@ -227,7 +227,7 @@
 | _ | `error` |   |
 
 
-### tls.SignServerCertAndKey
+### SignServerCertAndKey
 
 #### 详细描述
 
@@ -250,7 +250,7 @@
 | _ | `error` |   |
 
 
-### tls.SignX509ClientCertAndKey
+### SignX509ClientCertAndKey
 
 #### 详细描述
 
@@ -273,7 +273,7 @@
 | r3 | `error` |   |
 
 
-### tls.SignX509ServerCertAndKey
+### SignX509ServerCertAndKey
 
 #### 详细描述
 

@@ -95,7 +95,7 @@
 
 
 ## 函数定义
-### yso.GenerateClassObjectFromBytes
+### GenerateClassObjectFromBytes
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r2 | `error` |   |
 
 
-### yso.GenerateDNSlogEvilClassObject
+### GenerateDNSlogEvilClassObject
 
 #### 详细描述
 dnslog生成
@@ -139,7 +139,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateHeaderEchoClassObject
+### GenerateHeaderEchoClassObject
 
 #### 详细描述
 
@@ -160,7 +160,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject
+### GenerateModifyTomcatMaxHeaderSizeEvilClassObject
 
 #### 详细描述
 
@@ -181,7 +181,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateMultiEchoClassObject
+### GenerateMultiEchoClassObject
 
 #### 详细描述
 
@@ -202,7 +202,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateProcessBuilderExecEvilClassObject
+### GenerateProcessBuilderExecEvilClassObject
 
 #### 详细描述
 
@@ -224,7 +224,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateProcessImplExecEvilClassObject
+### GenerateProcessImplExecEvilClassObject
 
 #### 详细描述
 
@@ -246,7 +246,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateRuntimeExecEvilClassObject
+### GenerateRuntimeExecEvilClassObject
 
 #### 详细描述
 
@@ -268,7 +268,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateSleepClassObject
+### GenerateSleepClassObject
 
 #### 详细描述
 
@@ -289,7 +289,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### yso.GenerateSpringEchoEvilClassObject
+### GenerateSpringEchoEvilClassObject
 
 #### 详细描述
 spring生成
@@ -310,7 +310,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GenerateTcpReverseEvilClassObject
+### GenerateTcpReverseEvilClassObject
 
 #### 详细描述
 
@@ -333,7 +333,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GenerateTcpReverseShellEvilClassObject
+### GenerateTcpReverseShellEvilClassObject
 
 #### 详细描述
 
@@ -356,7 +356,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GenerateTomcatEchoClassObject
+### GenerateTomcatEchoClassObject
 
 #### 详细描述
 
@@ -377,7 +377,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetAllGadget
+### GetAllGadget
 
 #### 详细描述
 
@@ -392,7 +392,7 @@ spring生成
 | r1 | `[]any` |   |
 
 
-### yso.GetAllRuntimeExecGadget
+### GetAllRuntimeExecGadget
 
 #### 详细描述
 
@@ -407,7 +407,7 @@ spring生成
 | r1 | `[]RuntimeExecGadget` |   |
 
 
-### yso.GetAllTemplatesGadget
+### GetAllTemplatesGadget
 
 #### 详细描述
 
@@ -422,7 +422,7 @@ spring生成
 | r1 | `[]TemplatesGadget` |   |
 
 
-### yso.GetBeanShell1JavaObject
+### GetBeanShell1JavaObject
 
 #### 详细描述
 
@@ -443,7 +443,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetClick1JavaObject
+### GetClick1JavaObject
 
 #### 详细描述
 
@@ -464,7 +464,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsBeanutils183NOCCJavaObject
+### GetCommonsBeanutils183NOCCJavaObject
 
 #### 详细描述
 
@@ -485,7 +485,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsBeanutils192NOCCJavaObject
+### GetCommonsBeanutils192NOCCJavaObject
 
 #### 详细描述
 
@@ -506,7 +506,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsBeanutils1JavaObject
+### GetCommonsBeanutils1JavaObject
 
 #### 详细描述
 
@@ -527,7 +527,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections1JavaObject
+### GetCommonsCollections1JavaObject
 
 #### 详细描述
 
@@ -548,7 +548,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections2JavaObject
+### GetCommonsCollections2JavaObject
 
 #### 详细描述
 
@@ -569,7 +569,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections3JavaObject
+### GetCommonsCollections3JavaObject
 
 #### 详细描述
 
@@ -590,7 +590,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections4JavaObject
+### GetCommonsCollections4JavaObject
 
 #### 详细描述
 
@@ -611,7 +611,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections5JavaObject
+### GetCommonsCollections5JavaObject
 
 #### 详细描述
 
@@ -632,7 +632,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections6JavaObject
+### GetCommonsCollections6JavaObject
 
 #### 详细描述
 
@@ -653,7 +653,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections7JavaObject
+### GetCommonsCollections7JavaObject
 
 #### 详细描述
 
@@ -674,7 +674,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollections8JavaObject
+### GetCommonsCollections8JavaObject
 
 #### 详细描述
 
@@ -695,7 +695,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollectionsK1JavaObject
+### GetCommonsCollectionsK1JavaObject
 
 #### 详细描述
 
@@ -716,7 +716,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollectionsK2JavaObject
+### GetCommonsCollectionsK2JavaObject
 
 #### 详细描述
 
@@ -737,7 +737,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollectionsK3JavaObject
+### GetCommonsCollectionsK3JavaObject
 
 #### 详细描述
 
@@ -758,7 +758,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetCommonsCollectionsK4JavaObject
+### GetCommonsCollectionsK4JavaObject
 
 #### 详细描述
 
@@ -779,7 +779,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetFindGadgetByDNSJavaObject
+### GetFindGadgetByDNSJavaObject
 
 #### 详细描述
 
@@ -800,7 +800,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetGadgetNameByFun
+### GetGadgetNameByFun
 
 #### 详细描述
 
@@ -821,7 +821,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetGroovy1JavaObject
+### GetGroovy1JavaObject
 
 #### 详细描述
 
@@ -842,7 +842,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJBossInterceptors1JavaObject
+### GetJBossInterceptors1JavaObject
 
 #### 详细描述
 
@@ -863,7 +863,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJSON1JavaObject
+### GetJSON1JavaObject
 
 #### 详细描述
 
@@ -884,7 +884,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJavaObjectFromBytes
+### GetJavaObjectFromBytes
 
 #### 详细描述
 
@@ -905,7 +905,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJavassistWeld1JavaObject
+### GetJavassistWeld1JavaObject
 
 #### 详细描述
 
@@ -926,7 +926,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJdk7u21JavaObject
+### GetJdk7u21JavaObject
 
 #### 详细描述
 
@@ -947,7 +947,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetJdk8u20JavaObject
+### GetJdk8u20JavaObject
 
 #### 详细描述
 
@@ -968,7 +968,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetSimplePrincipalCollectionJavaObject
+### GetSimplePrincipalCollectionJavaObject
 
 #### 详细描述
 
@@ -984,7 +984,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.GetURLDNSJavaObject
+### GetURLDNSJavaObject
 
 #### 详细描述
 
@@ -1005,7 +1005,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.LoadClassFromBCEL
+### LoadClassFromBCEL
 
 #### 详细描述
 
@@ -1027,7 +1027,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.LoadClassFromBase64
+### LoadClassFromBase64
 
 #### 详细描述
 
@@ -1049,7 +1049,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.LoadClassFromBytes
+### LoadClassFromBytes
 
 #### 详细描述
 
@@ -1071,7 +1071,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.ToBcel
+### ToBcel
 
 #### 详细描述
 
@@ -1092,7 +1092,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.ToBytes
+### ToBytes
 
 #### 详细描述
 
@@ -1113,7 +1113,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.ToJson
+### ToJson
 
 #### 详细描述
 
@@ -1134,7 +1134,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.command
+### command
 
 #### 详细描述
 
@@ -1154,7 +1154,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.dnslogDomain
+### dnslogDomain
 
 #### 详细描述
 
@@ -1174,7 +1174,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.dump
+### dump
 
 #### 详细描述
 
@@ -1195,7 +1195,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### yso.evilClassName
+### evilClassName
 
 #### 详细描述
 公共参数
@@ -1215,7 +1215,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.obfuscationClassConstantPool
+### obfuscationClassConstantPool
 
 #### 详细描述
 
@@ -1230,7 +1230,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.springEchoBody
+### springEchoBody
 
 #### 详细描述
 
@@ -1245,7 +1245,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.springHeader
+### springHeader
 
 #### 详细描述
 
@@ -1266,7 +1266,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.springParam
+### springParam
 
 #### 详细描述
 
@@ -1286,7 +1286,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.springRuntimeExecAction
+### springRuntimeExecAction
 
 #### 详细描述
 
@@ -1301,7 +1301,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.tcpReverseHost
+### tcpReverseHost
 
 #### 详细描述
 
@@ -1321,7 +1321,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.tcpReversePort
+### tcpReversePort
 
 #### 详细描述
 
@@ -1341,7 +1341,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.tcpReverseToken
+### tcpReverseToken
 
 #### 详细描述
 
@@ -1361,7 +1361,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useBase64BytesClass
+### useBase64BytesClass
 
 #### 详细描述
 
@@ -1381,7 +1381,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useBytesClass
+### useBytesClass
 
 #### 详细描述
 
@@ -1401,7 +1401,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useBytesEvilClass
+### useBytesEvilClass
 
 #### 详细描述
 生成自定义Class
@@ -1421,7 +1421,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useClassMultiEchoTemplate
+### useClassMultiEchoTemplate
 
 #### 详细描述
 MultiEcho
@@ -1436,7 +1436,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useConstructorExecutor
+### useConstructorExecutor
 
 #### 详细描述
 
@@ -1451,7 +1451,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useDNSLogEvilClass
+### useDNSLogEvilClass
 
 #### 详细描述
 
@@ -1471,7 +1471,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useDNSlogTemplate
+### useDNSlogTemplate
 
 #### 详细描述
 dnslog参数
@@ -1486,7 +1486,7 @@ dnslog参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useHeaderEchoEvilClass
+### useHeaderEchoEvilClass
 
 #### 详细描述
 
@@ -1501,7 +1501,7 @@ dnslog参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useHeaderEchoTemplate
+### useHeaderEchoTemplate
 
 #### 详细描述
 HeaderEchoClass
@@ -1516,7 +1516,7 @@ HeaderEchoClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useHeaderParam
+### useHeaderParam
 
 #### 详细描述
 
@@ -1537,7 +1537,7 @@ HeaderEchoClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useModifyTomcatMaxHeaderSizeTemplate
+### useModifyTomcatMaxHeaderSizeTemplate
 
 #### 详细描述
 ModifyTomcatMaxHeaderSize
@@ -1552,7 +1552,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useMultiEchoEvilClass
+### useMultiEchoEvilClass
 
 #### 详细描述
 
@@ -1567,7 +1567,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useProcessBuilderExecEvilClass
+### useProcessBuilderExecEvilClass
 
 #### 详细描述
 
@@ -1587,7 +1587,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useProcessBuilderExecTemplate
+### useProcessBuilderExecTemplate
 
 #### 详细描述
 ProcessBuilderExec 参数
@@ -1602,7 +1602,7 @@ ProcessBuilderExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useProcessImplExecEvilClass
+### useProcessImplExecEvilClass
 
 #### 详细描述
 
@@ -1622,7 +1622,7 @@ ProcessBuilderExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useProcessImplExecTemplate
+### useProcessImplExecTemplate
 
 #### 详细描述
 ProcessImplExec 参数
@@ -1637,7 +1637,7 @@ ProcessImplExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useRuntimeExecEvilClass
+### useRuntimeExecEvilClass
 
 #### 详细描述
 
@@ -1657,7 +1657,7 @@ ProcessImplExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useRuntimeExecTemplate
+### useRuntimeExecTemplate
 
 #### 详细描述
 RuntimeExec 参数
@@ -1672,7 +1672,7 @@ RuntimeExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useSleepEvilClass
+### useSleepEvilClass
 
 #### 详细描述
 
@@ -1687,7 +1687,7 @@ RuntimeExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useSleepTemplate
+### useSleepTemplate
 
 #### 详细描述
 SleepClass
@@ -1702,7 +1702,7 @@ SleepClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useSleepTime
+### useSleepTime
 
 #### 详细描述
 
@@ -1722,7 +1722,7 @@ SleepClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useSpringEchoTemplate
+### useSpringEchoTemplate
 
 #### 详细描述
 spring参数
@@ -1737,7 +1737,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTcpReverseEvilClass
+### useTcpReverseEvilClass
 
 #### 详细描述
 
@@ -1758,7 +1758,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTcpReverseShellEvilClass
+### useTcpReverseShellEvilClass
 
 #### 详细描述
 
@@ -1779,7 +1779,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTcpReverseShellTemplate
+### useTcpReverseShellTemplate
 
 #### 详细描述
 生成tcp反弹shell
@@ -1794,7 +1794,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTcpReverseTemplate
+### useTcpReverseTemplate
 
 #### 详细描述
 生成tcp反连
@@ -1809,7 +1809,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTomcatEchoEvilClass
+### useTomcatEchoEvilClass
 
 #### 详细描述
 
@@ -1824,7 +1824,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### yso.useTomcatEchoTemplate
+### useTomcatEchoTemplate
 
 #### 详细描述
 Tomcat回显

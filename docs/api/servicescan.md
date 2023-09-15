@@ -27,7 +27,7 @@
 
 
 ## 函数定义
-### servicescan.Scan
+### Scan
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### servicescan.ScanFromPing
+### ScanFromPing
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r2 | `error` |   |
 
 
-### servicescan.ScanFromSpaceEngine
+### ScanFromSpaceEngine
 
 #### 详细描述
 
@@ -95,7 +95,7 @@
 | r2 | `error` |   |
 
 
-### servicescan.ScanFromSynResult
+### ScanFromSynResult
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r2 | `error` |   |
 
 
-### servicescan.ScanOne
+### ScanOne
 
 #### 详细描述
 
@@ -140,7 +140,7 @@
 | r2 | `error` |   |
 
 
-### servicescan.active
+### active
 
 #### 详细描述
 
@@ -160,7 +160,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.all
+### all
 
 #### 详细描述
 
@@ -175,7 +175,7 @@
 | r1 | `fp.ConfigOption` |   |
 
 
-### servicescan.cache
+### cache
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -215,7 +215,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.databaseCache
+### databaseCache
 
 #### 详细描述
 
@@ -235,7 +235,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.excludeHosts
+### excludeHosts
 
 #### 详细描述
 
@@ -255,7 +255,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.excludePorts
+### excludePorts
 
 #### 详细描述
 
@@ -275,7 +275,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.maxProbes
+### maxProbes
 
 #### 详细描述
 
@@ -295,7 +295,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.maxProbesConcurrent
+### maxProbesConcurrent
 
 #### 详细描述
 
@@ -315,7 +315,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.nmapRarityMax
+### nmapRarityMax
 
 #### 详细描述
 
@@ -335,7 +335,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.nmapRule
+### nmapRule
 
 #### 详细描述
 
@@ -355,7 +355,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.probeTimeout
+### probeTimeout
 
 #### 详细描述
 
@@ -375,7 +375,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.proto
+### proto
 
 #### 详细描述
 
@@ -395,7 +395,7 @@
 | r1 | `fp.ConfigOption` |   |
 
 
-### servicescan.proxy
+### proxy
 
 #### 详细描述
 
@@ -415,7 +415,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### servicescan.service
+### service
 
 #### 详细描述
 
@@ -430,7 +430,7 @@
 | r1 | `fp.ConfigOption` |   |
 
 
-### servicescan.web
+### web
 
 #### 详细描述
 
@@ -445,7 +445,7 @@
 | r1 | `fp.ConfigOption` |   |
 
 
-### servicescan.webRule
+### webRule
 
 #### 详细描述
 

@@ -31,7 +31,7 @@
 
 
 ## 函数定义
-### crawler.RequestsFromFlow
+### RequestsFromFlow
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### crawler.Start
+### Start
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### crawler.autoLogin
+### autoLogin
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.basicAuth
+### basicAuth
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.bodySize
+### bodySize
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.concurrent
+### concurrent
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.connectTimeout
+### connectTimeout
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.cookie
+### cookie
 
 #### 详细描述
 
@@ -200,7 +200,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.disallowSuffix
+### disallowSuffix
 
 #### 详细描述
 
@@ -220,7 +220,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.domainExclude
+### domainExclude
 
 #### 详细描述
 
@@ -240,7 +240,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.domainInclude
+### domainInclude
 
 #### 详细描述
 
@@ -260,7 +260,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.forbiddenFromParent
+### forbiddenFromParent
 
 #### 详细描述
 
@@ -280,7 +280,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.header
+### header
 
 #### 详细描述
 
@@ -301,7 +301,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.maxDepth
+### maxDepth
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.maxRedirect
+### maxRedirect
 
 #### 详细描述
 
@@ -341,7 +341,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.maxRequest
+### maxRequest
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.maxRetry
+### maxRetry
 
 #### 详细描述
 
@@ -381,7 +381,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.maxUrls
+### maxUrls
 
 #### 详细描述
 
@@ -401,7 +401,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.proxy
+### proxy
 
 #### 详细描述
 
@@ -421,7 +421,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.responseTimeout
+### responseTimeout
 
 #### 详细描述
 
@@ -441,7 +441,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.timeout
+### timeout
 
 #### 详细描述
 
@@ -461,7 +461,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.ua
+### ua
 
 #### 详细描述
 
@@ -481,7 +481,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.urlExtractor
+### urlExtractor
 
 #### 详细描述
 
@@ -501,7 +501,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.urlRegexpExclude
+### urlRegexpExclude
 
 #### 详细描述
 
@@ -521,7 +521,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.urlRegexpInclude
+### urlRegexpInclude
 
 #### 详细描述
 
@@ -541,7 +541,7 @@
 | r1 | `configOpt` |   |
 
 
-### crawler.userAgent
+### userAgent
 
 #### 详细描述
 

@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### zip.Compress
+### Compress
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r1 | `error` |   |
 
 
-### zip.Decompress
+### Decompress
 
 #### 详细描述
 解压

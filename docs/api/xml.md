@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### xml.Escape
+### Escape
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r1 | `string` |   |
 
 
-### xml.dumps
+### dumps
 
 #### 详细描述
 
@@ -48,7 +48,7 @@
 | r1 | `[]byte` |   |
 
 
-### xml.loads
+### loads
 
 #### 详细描述
 
