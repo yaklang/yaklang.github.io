@@ -1,0 +1,58 @@
+---
+sidebar_position: 6
+---
+
+# 06.Cookie-ID SQL 注入
+
+Cookie-ID SQL 注入是一种特定类型的 SQL 注入漏洞，它涉及到在处理包含在 Cookie 中的 ID 时，未对输入进行适当的验证和处理，从而导致攻击者能够注入恶意的 SQL 代码，执行非授权的数据库操作。
+
+当应用程序使用 Cookie 来存储用户会话信息，并在后续的请求中使用 Cookie 中的 ID 来执行数据库查询时，如果对 Cookie 中的 ID 参数没有进行充分的验证和过滤，攻击者可以构造恶意的 Cookie，注入 SQL 代码，并在查询中执行恶意操作。
+
+### 示例代码：
+
+```Bash
+GET /user/cookie-id HTTP/1.1
+Host: 127.0.0.1:8787
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Cookie: ID=1
+#后端查询
+select * from vulin_users where id = 1
+```
+
+此案例的注入点存在于 Cookie 中，后端查询利用 cookie 传输的值进行拼接查询。
+
+### 攻击示例：
+
+```Bash
+GET /user/cookie-id HTTP/1.1
+Host: 127.0.0.1:8787
+Accept: */*
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Cookie: ID=1 OR 1=1
+#后端查询
+select * from vulin_users where id = 1 OR 1=1
+```
+
+### 防御措施：
+
+为了防止 Cookie-ID SQL 注入，以下是一些建议的预防措施：
+
+- 参数化查询： 无论从 Cookie 还是其他来源获取 ID 参数，都应使用参数化查询（Prepared Statements）来执行数据库查询。确保不直接将 Cookie 值拼接到 SQL 查询语句中，而是通过绑定参数的方式传递给数据库引擎。
+- 验证和过滤 Cookie 数据： 在应用程序接收 Cookie 数据之前，进行验证和过滤，确保它是预期的格式和类型。例如，如果 ID 是一个整数，验证其是否为合法的整数值。
+- 限制 Cookie 访问范围： 在设置 Cookie 时，将其限制在仅在必要的路径和域名下可见。避免在敏感操作之外的路径或域名下访问敏感的 Cookie 信息。
+- 不要在 Cookie 中存储敏感信息： 尽量避免在 Cookie 中存储敏感信息，特别是与用户身份认证相关的敏感数据。可以将敏感信息存储在服务器端的会话中，而在 Cookie 中只存储会话标识符。
+- 加密 Cookie 数据： 对于敏感的 Cookie 信息，可以进行加密处理，以增加攻击者解析 Cookie 的难度。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/06unsafe-cookie-id.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

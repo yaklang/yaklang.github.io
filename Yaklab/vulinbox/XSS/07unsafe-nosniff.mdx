@@ -1,0 +1,48 @@
+---
+sidebar_position: 7
+---
+
+# 07.输出存在于 HTML 节点 on...属性中
+
+这是一个关于跨站脚本攻击（XSS）的漏洞案例，涉及到在 HTML 节点的`onclick`属性中插入恶意脚本。
+
+### 示例代码：
+
+在这个示例中，一个图片显示了一个`onclick`属性，其值从用户提供的输入中获取。攻击者可以构造恶意的代码，使其在用户点击图片时执行。
+
+```HTML
+<div>
+    Hello Visitor!
+    <br>
+    Here are photo for U! <br>
+    <img style='width: 100px' src="/static/logo.png" onclick='{{ .code }}'/>
+</div>
+```
+
+### 攻击示例：
+
+假设攻击者想要在受害者的浏览器上执行一个弹窗来显示“XSS Attack!”。攻击者可以构造如下的 payload：
+
+```HTML
+?code=alert("Hello Yakit")
+```
+
+当用户点击图片时，浏览器会执行`onclick`属性中的 JavaScript 代码，导致弹窗显示“XSS Attack!”。
+
+**防御措施：**
+
+- 输入验证和过滤： 在处理用户输入时，对输入进行严格验证和过滤，只允许预期的内容通过。可以使用白名单验证，只允许特定类型的输入通过，例如只允许数字或特定字符。
+- 输出编码： 在将用户输入输出到 HTML 页面时，对其进行 HTML 编码，以防止其中的 HTML 和 JavaScript 代码被解释执行。可以使用安全的输出方法，如使用`textContent`而不是`innerHTML`。
+- 移除不必要的事件处理程序： 避免在 HTML 节点的`onclick`属性中直接插入用户输入。相反，尽量避免使用内联事件处理程序，可以在外部的 JavaScript 脚本中添加事件监听器。
+- 使用模板引擎： 如果你必须在 HTML 属性中包含动态内容，建议使用模板引擎，它们通常会自动对输出进行适当的编码，以防止 XSS 攻击。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/07unsafe-nosniff.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

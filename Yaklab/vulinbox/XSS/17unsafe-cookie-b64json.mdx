@@ -1,0 +1,54 @@
+---
+sidebar_position: 17
+---
+
+# 17.Cookie 中的 XSS（Base64-JSON）
+
+通过未经处理的 Cookie 值中的 Base64 编码的 JSON 数据来触发的 XSS 漏洞，首先从 Cookie 中获取 "xCnameB64J" 的值，并尝试对其进行 Base64 解码，并将解码后的 JSON 数据反序列化。作为待渲染到页面的名称。
+
+### 示例代码：
+
+```HTML
+#原标签
+<div>Here are photo for U! <br>
+<img style='width: 100px' src="/static/logo.png" onclick='xCnameB64J-OrdinaryUser'/>
+<script>const name = "Admin";
+console.info("Hello" + `xCnameB64J-OrdinaryUser: ${name}`);</script>
+</div>
+```
+
+### 攻击示例：
+
+通过在 cookie 中提交 xss 代码，实现攻击。
+
+```HTML
+#构造xss（修改Cookie）
+eyJuYW1lIjoiYWxlcnQoMTIzKSJ9
+
+#修改后标签(Cookie)
+<div>
+Here are photo for U! <br>
+<img style='width: 100px' src="/static/logo.png" onclick='alert(123)'/>
+<script>const name = "Admin";
+console.info("Hello" + `alert(123): ${name}`);</script>
+</div>
+```
+
+### 防御措施：
+
+针对 Cookie 中的 XSS 攻击（Base64-JSON），以下是一些防御措施，可以帮助减少这种类型的攻击风险：
+
+- 输入验证和过滤：在将数据存储到 Cookie 中之前，对用户输入进行严格验证和过滤。仅允许预期的输入内容，并且对输入内容进行适当的编码，以防止注入恶意数据。
+- 限制 Cookie 的范围：将 Cookie 的作用范围限制在必要的路径或域名下，避免将敏感信息暴露在不必要的地方。
+- 解析和验证 Cookie 数据：在使用 Cookie 数据之前，先解析和验证其内容。确保数据的格式正确且没有被篡改。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/17unsafe-cookie-b64json.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

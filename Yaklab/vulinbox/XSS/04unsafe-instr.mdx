@@ -1,0 +1,53 @@
+---
+sidebar_position: 4
+---
+
+# 04.XSS: 存在于 JS 代码中(字符串中)
+
+XSS（跨站脚本攻击）可以存在于 JavaScript 代码中，特别是在字符串中，如果这些字符串未经适当的处理，直接嵌入到网页中。攻击者可以通过注入恶意的 JavaScript 代码，将恶意脚本注入到页面中，从而在用户的浏览器中执行。
+
+### 示例代码：
+
+此案例中从 URL 中获取 name 的传参到 script 标签中
+
+```HTML
+<div>
+Here are photo for U! <br>
+<script>console.info("Hello" + '')</script>
+</div>
+```
+
+### 攻击示例：
+
+当用户利用拼接方式，可以将恶意代码传递到页面中执行
+
+```HTML
+http://127.0.0.1:8787/xss/js/in-str?name=')</script><script>alert('Hello Yakit
+
+<!--拼接后带代码如下 -->
+<div>
+    Here are photo for U! <br>
+    <script>console.info("Hello" + '')</script>
+    <script>alert('Hello Yakit')</script>
+</div>
+```
+
+未经处理的恶意代码就会被嵌入到 JavaScript 代码中，导致在用户的浏览器中执行恶意的弹窗脚本。
+
+**防御措施：**
+
+对于此类漏洞防御，具体措施如下：
+
+- 输入验证： 对用户输入进行验证，只接受符合特定格式和类型的数据。拒绝包含特殊字符或 HTML 标签的输入。
+- 输出编码： 在将用户输入显示在网页上之前，进行适当的输出编码，将特殊字符转换为对应的 HTML 实体，以防止恶意脚本的执行。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/04unsafe-instr.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

@@ -1,0 +1,63 @@
+---
+sidebar_position: 10
+---
+
+# 10.进阶 2：输出存在于 HTML 节点属性中，但是不再 on 属性中(IMG ALT)
+
+这个案例是 XSS（跨站脚本攻击）的进阶形式，展示了一种输出存在于 HTML 节点属性中，但不再 on 属性中的漏洞类型。
+
+### 示例代码：
+
+```Go
+{
+        DefaultQuery: "b64json=eyJ2YWx1ZSI6InZhbHVlPXZpc2l0b3ItbmFtZSJ9",
+        Path:         "/attr/alt/b64/json",
+        Title:        "进阶2：输出存在于HTML节点属性中，但是不再on属性中(IMG ALT)",
+        Handler: func(writer http.ResponseWriter, request *http.Request) {
+        unsafeTemplateRender(writer, request, `<!doctype html>
+<html>
+<head>
+    <title>Example DEMO</title>
+    <!-- ... 省略其他标签 ... -->
+</head>
+<body>
+<div>
+    Hello Visitor!
+    <br>
+    Here are photo for U! <br>
+    <img style='width: 100px' alt='{{.value}}' src="/static/logo.png" onclick='javascript:alert("Welcome CLICK ME!")'/>
+</div>
+</body>
+</html>`, map[string]any{
+            "value": LoadFromGetJSONParam(request, "json", "value"),
+        })
+        writer.Header().Set("Content-Type", "text/html")
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造以下恶意 URL 来利用漏洞：
+
+```SQL
+http://127.0.0.1:8787/xss/attr/alt/b64/json?b64json=eyJ2YWx1ZSI6Iidvbm1vdXNlb3Zlcj0nYWxlcnQoMTIzKSJ9
+```
+
+攻击者通过在`b64json`参数中注入 Base64 编码的恶意代码，将恶意代码嵌入到 ALT 属性中。当用户浏览到包含这个 IMG 标签的页面时，浏览器会执行嵌入的 JavaScript 代码，弹出一个弹窗，显示"alert(123)"。
+
+**防御措施：**
+
+要防止这种类型的漏洞，开发者需要对用户输入的数据进行适当的过滤和转义，确保用户提供的内容不会被解释为 HTML 或 JavaScript 代码。在这种情况下，开发者可以使用安全的 HTML 编码函数，以及对 Base64 解码后再进行处理，从而有效地防止 XSS 攻击。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/10unsafe-b64-json.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

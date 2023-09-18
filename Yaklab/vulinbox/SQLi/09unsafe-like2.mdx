@@ -1,0 +1,44 @@
+---
+sidebar_position: 9
+---
+
+# 09.字符串注入点模糊查询(括号边界)
+
+在此案例中，仍使用了`LIKE`语句进行模糊查询，但增加了查询条件并且使用了括号包裹，考验攻击者能否正常闭合括号，该 SQL 语句没有对用户输入进行任何过滤或转义，这就为注入攻击提供了机会。
+
+### 示例代码：
+
+```Plain
+ http://127.0.0.1:8787/user/name/like/2?name=a&debug=1
+ #查询名称为a并且年龄大于20的用户
+ select * from vulin_users where (username LIKE '%a%') AND (age > 20);
+```
+
+### 攻击示例：
+
+```Plain
+ http://127.0.0.1:8787/user/name/like/2?name=' OR 1=1) --&debug=1
+ #如果应用程序未进行适当的处理，最终的查询语句会变成：
+ select * from vulin_users where (username LIKE '%' OR 1=1) --%') AND (age > 20);
+ #实际语句同下
+ select * from vulin_users where (username LIKE '%' OR 1=1);
+```
+
+在这个示例中，攻击者将`$a`设置为`' OR 1=1)--`，这将导致 SQL 查询中的`WHERE`条件永远为真，因为`1=1`始终为真。并且`--`表示 SQL 中的单行注释，会使后续的查询语句被忽略掉。这样，攻击者就可以绕过原本的查询条件，获取`vulin_users`表中所有用户记录。
+
+### 防御措施：
+
+- 使用参数化查询或预处理语句： 不要将用户输入直接拼接到 SQL 查询中。使用参数化查询或预处理语句，将用户输入作为参数绑定到查询中，数据库引擎会自动处理输入的转义，避免注入攻击。
+- 使用 ORM（对象关系映射）： 使用 ORM 框架，例如 Hibernate、Sequelize 等，可以避免直接使用原始 SQL 查询，ORM 框架会自动进行查询参数的处理。
+- 输入验证和过滤： 对于所有从用户获取的输入，进行合法性验证和适当的过滤，确保输入符合预期的格式和范围。拒绝非法的输入，防止恶意输入进入数据库查询。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/09unsafe-like2.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

@@ -1,0 +1,46 @@
+---
+sidebar_position: 6
+---
+
+# 06.XSS: 存在于 JS 代码中(字符串模版中)
+
+在 JS 代码中的字符串模版中，XSS 漏洞发生在使用字符串模版（``符号）来动态构造 HTML 或 JS 代码时，而未对用户输入进行充分转义或过滤。这使得恶意用户可以通过注入恶意代码来执行任意 JS 代码，从而实施 XSS 攻击
+
+### 示例代码：
+
+在示例代码中，字符串模版中的`{{ .name }}`代表需要动态替换的用户输入。如果该输入未经适当的转义和验证，攻击者可以构造特制的输入，使之包含恶意的 JavaScript 代码。
+
+```HTML
+<div>
+    Here are photo for U! <br>
+    <script>const name = "Admin";
+    console.info("Hello" + `+"`{{ .name }}: ${name}`"+`);
+    </script>
+</div>
+```
+
+### 攻击示例：
+
+通过在 URL 中构造特定的参数，攻击者可以注入恶意脚本代码，从而实现 XSS 攻击。例如，使用以下参数：
+
+```HTML
+?name=`%2balert('XSS Attack!')%2b`
+```
+
+上述 payload 将在浏览器打开时，出现弹窗
+
+### 防御措施：
+
+- 禁止直接插入用户输入： 不要将用户输入直接插入到 JavaScript 代码中，尤其是字符串模版中。
+- 安全编码实践： 采用安全编码实践，避免将用户输入和动态内容插入到不受信任的上下文中。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/06unsafe-instr-temp.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
