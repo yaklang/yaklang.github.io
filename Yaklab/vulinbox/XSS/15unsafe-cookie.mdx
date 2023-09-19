@@ -1,0 +1,87 @@
+---
+sidebar_position: 15
+---
+
+# 15.Cookie 中的 XSS
+
+这个案例展示了一种称为 "Cookie 中的 XSS" 的漏洞类型。攻击者可以通过在 Cookie 中注入恶意代码，从而在用户的浏览器上下文中执行攻击。
+
+### 示例代码：
+
+该漏洞的出现是因为应用程序在设置 Cookie 时没有对用户输入进行正确的过滤和验证，导致恶意用户可以注入恶意代码到 Cookie 中。
+
+```Go
+{
+    DefaultQuery: "",
+    Path:         "/cookie/name",
+    Title:        "Cookie 中的 XSS",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        raw, _ := utils.HttpDumpWithBody(request, true)
+        xCname := lowhttp.GetHTTPPacketCookieFirst(raw, "xCname")
+        if xCname == "" && lowhttp.GetHTTPRequestQueryParam(raw, "skip") != "1" {
+            http.SetCookie(writer, &http.Cookie{
+                Name:  "xCname",
+                Value: "UserAdmin",
+            })
+            writer.Header().Set("Location", "/xss/cookie/name?skip=1")
+            writer.WriteHeader(302)
+            return
+        }
+        unsafeTemplateRender(writer, request, `<!doctype html>
+<html>
+<head>
+    <title>Example DEMO</title>
+    <!-- ... 省略其他标签 ... -->
+</head>
+<body>
+<div>
+        Here are photo for U! <br>
+        <img style='width: 100px' src="/static/logo.png" onclick='{{ .code }}'/>
+        <script>const name = "Admin";
+console.info("Hello" + `+"`{{ .name }}: ${name}`"+`);
+        </script>
+</div>
+</body>
+</html>`, map[string]any{
+            "name": xCname,
+        })
+        writer.Header().Set("Content-Type", "text/html")
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+通过在 Cookie 中构造特定的参数，攻击者可以注入恶意脚本代码，从而实现 XSS 攻击。
+
+```Go
+Cookie: xCname=`%2balert('XSS Attack!')%2b`
+```
+
+在上述攻击示例中，攻击者将 `xCname` Cookie 值设置为 `%2balert('XSS Attack!')%2b`，这是一个经过 URL 编码的恶意代码。当用户访问带有恶意 Cookie 的页面时，恶意代码会在用户的浏览器上下文中执行，弹出一个弹窗，显示 "XSS Attack!"。
+
+```HTML
+#修改后标签(Cookie)
+<div>
+Here are photo for U! <br>
+<img style='width: 100px' src="/static/logo.png" onclick='<no value>'/>
+<script>const name = "Admin";
+console.info("Hello" + ``+alert('XSS Attack!')+`: ${name}`);</script>
+</div>
+```
+
+### 防御措施：
+
+开发者应当在设置 Cookie 时对用户输入进行适当的过滤和验证，以防止恶意代码的注入和执行。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/15unsafe-cookie.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

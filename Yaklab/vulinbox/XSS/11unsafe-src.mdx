@@ -1,0 +1,49 @@
+---
+sidebar_position: 11
+---
+
+# 11.输出存在于 HTML 节点属性中，但是不再 on 属性中(IMG SRC)
+
+输出存在于 HTML 节点属性中，特别是在 `<img>` 标签的 `src` 属性中，是一种常见的 XSS 漏洞。攻击者可以通过在这些属性中注入恶意代码，从而在用户浏览网页时执行恶意脚本。
+
+### 示例代码：
+
+下列代码会导致恶意代码在用户浏览器中执行，因为 `src` 属性被注入了可执行的 JavaScript 代码。
+
+```HTML
+<div>
+  Hello Visitor!<br>
+  Here are photo for U! <br> <br>
+  <img style='width: 100px' alt='value' src="{{ .value }}" onclick='javascript:alert("Welcome CLICK ME!")'/>
+</div>
+```
+
+### 攻击示例：
+
+当浏览器尝试加载 `src` 属性的内容时，由于发生了错误，就会触发 `onerror` 事件，从而弹出一个警示框，显示 "Hello Yakit"。
+
+```HTML
+<!--构造xss-->
+?src=" onerror="alert('Hello Yakit')
+
+<!--修改后的标签-->
+<img style='width: 100px' alt='value' src="" onerror="alert('Hello Yakit')" ...../>
+```
+
+这种情况下，攻击者成功地在用户浏览器中执行了恶意代码，实现了 XSS 攻击。
+
+### 防御措施：
+
+- 转义输出：在将用户输入嵌入到 HTML 属性中之前，务必进行适当的字符转义。这可以防止恶意代码在属性中执行。
+- 限制属性值：尽量限制属性值的内容，只允许特定类型的内容，例如只允许 URL。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/11unsafe-src.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

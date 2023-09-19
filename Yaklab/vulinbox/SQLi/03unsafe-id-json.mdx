@@ -1,0 +1,51 @@
+---
+sidebar_position: 3
+---
+
+# 03.GET 参数是 JSON，JSON 中字段存在 SQL 注入
+
+​ 有时，开发人员可能会使用 JSON 格式作为 GET 参数来传递更复杂的数据结构。JSON（JavaScript Object Notation）是一种轻量级的数据交换格式，易于阅读和编写，因此在 Web 开发中广泛使用。JSON 由键值对组成，使用花括号`{}`表示，例如：` http://example.com/api?data=``{``"name":"John","age":30} `。
+
+​ 然而，如果在处理 GET 参数时，应用程序没有正确地验证和过滤输入的 JSON 数据，就可能导致 JSON 中的字段存在 SQL 注入漏洞。
+
+### 示例代码：
+
+```sql
+/*URL地址*/
+http://127.0.0.1:8787/user/id-json?id={"uid":1,"id":"1"}
+/*原SQL语句*/
+select * from vulin_users where id = 1;
+```
+
+### 攻击示例：
+
+```sql
+id={"uid":1,"id":"1 OR 1=1"}
+```
+
+这样 SQL 语句就变成如下
+
+```sql
+/*构造后的SQL语句*/
+SELECT * FROM users WHERE id = 1 OR 1=1
+```
+
+此时`1=1` 总是为真，将返回所有的用户信息。
+
+### 防御措施：
+
+- 应该检查 JSON 对象中的每个字段和值，确保它们符合预期的数据类型和格式。
+- 不应该直接将 JSON 数据作为 SQL 查询的一部分，而应该使用参数化查询或预编译语句，以确保输入数据不会被误解为可执行的 SQL 代码。
+
+只有这样，才能有效地防止 JSON 中字段存在 SQL 注入的风险。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/unsafe-id-json.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

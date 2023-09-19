@@ -1,0 +1,49 @@
+---
+sidebar_position: 4
+---
+
+# 04.GET 参数是被编码的 JSON，JSON 中字段存在 SQL 注入
+
+ 这种漏洞是由于在处理 GET 参数时，服务器端接收到经过 Base64 编码的 JSON 数据，但在解码 JSON 数据后未对其中的字段进行适当的输入验证和处理，直接将其用于构建 SQL 查询语句，导致 SQL 注入漏洞的产生。
+
+ 攻击者可以通过恶意构造经过 Base64 编码的 JSON 数据，利用 JSON 中存在的 SQL 注入漏洞来修改查询语句，执行恶意的数据库操作，甚至获取、修改或删除数据库中的数据。这种漏洞可能导致严重的安全问题，泄露用户隐私信息、破坏数据完整性等。
+
+### 示例代码：
+
+```SQL
+http://127.0.0.1:8787/user/id-b64-json?id=eyJ1aWQiOjEsImlkIjoiMSJ9 (解码为{"uid":1,"id":"1"})
+/*后端的查询如下*/
+select * from vulin_users where id = 1;
+```
+
+该 SQL 语句为查询 id 值为 1 的用户。
+
+### 攻击示例：
+
+```SQL
+http://127.0.0.1:8787/user/id-b64-json?id=eyJ1aWQiOjEsImlkIjoiMSBPUiAxPTEifQ==
+/*解码为*/
+{"uid":1,"id":"1 OR 1=1"}
+/*构造后的查询如下*/
+select * from vulin_users where id = 1 OR 1=1
+```
+
+构造简单的测试用例，并经过 base64 编码后发送，这将返回所有用户的数据，而不仅仅是匹配到的特定 ID 的用户数据。
+
+### 防御措施：
+
+- 避免直接拼接 SQL 查询： 绝不要直接将用户提供的数据直接拼接到 SQL 查询中，无论数据是否经过 Base64 编码。直接拼接会导致 SQL 注入漏洞，攻击者可以通过恶意构造的数据修改查询语句，从而访问、修改或删除数据库中的数据。
+- 解码 Base64 数据： 首先，在服务器端接收到 GET 参数后，先进行 Base64 解码得到原始的 JSON 数据。
+- 使用参数化查询或 ORM： 使用参数化查询或对象关系映射（ORM）库来与数据库进行交互。参数化查询将参数与查询语句分开，从而防止 SQL 注入攻击。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/04unsafe-id-b64-json.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
+

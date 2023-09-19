@@ -1,0 +1,68 @@
+---
+sidebar_position: 10
+---
+
+# 10.参数编码字符串注入点模糊查询(括号边界)
+
+参数编码字符串注入点模糊查询是一种安全漏洞，通常发生在应用程序接受用户输入，并将其作为模糊查询条件用于 SQL 语句中。在这种情况下，如果应用程序未对用户输入进行适当的处理和过滤，攻击者可能通过注入特殊字符来改变查询条件，绕过预期的过滤，导致数据泄露或非预期的查询结果。
+
+### 示例代码：
+
+假设应用程序使用以下后端查询语句来执行模糊查询：
+
+```SQL
+SELECT * FROM vulin_users WHERE (username LIKE '%a%') AND (age > 20);
+```
+
+在该查询中，`username`字段进行了模糊查询，查找包含字母`a`的用户，同时筛选出`age`大于 20 岁的用户。
+
+### 攻击示例：
+
+假设攻击者在输入中注入以下内容：
+
+```Plain
+/*payload-1*/
+') OR 1=1 --
+
+/*payload-2*/
+' OR 1=1) --
+```
+
+构建的查询将变成：
+
+```SQL
+/*payload-1的SQL语句*/
+select * from vulin_users where (username LIKE '%a') OR 1=1 --%') AND (age > 20);
+/*payload-2的SQL语句*/
+select * from vulin_users where (username LIKE '%a' OR 1=1) --%') AND (age > 20);
+```
+
+在这个恶意输入中，攻击者成功地在查询条件中添加了额外的条件 `1=1`，并用注释符号`--`来注释掉后面的部分。这将导致查询忽略原本的条件 `(age > 20)`，并返回所有用户数据，因为 `1=1` 总是为真。
+
+### 防御措施：
+
+为了防止参数编码字符串注入点模糊查询漏洞，应该始终使用参数化查询或预处理语句，不要直接拼接用户输入到 SQL 查询中，并对输入进行严格的过滤和验证。在示例中，可以使用预处理语句来避免漏洞，例如：
+
+```Python
+# 假设username和age是从用户输入获取的值
+username = request.form['username']
+age = request.form['age']
+
+# 使用预处理语句构建查询
+sql = "SELECT * FROM vulin_users WHERE (username LIKE ?) AND (age > ?)"
+cursor.execute(sql, ('%' + username + '%', age))
+result = cursor.fetchall()
+```
+
+通过采取这些安全措施，可以有效地防止参数编码字符串注入点模糊查询漏洞，并保护应用程序和数据库的安全。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/10unsafe-likeb64.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

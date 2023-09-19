@@ -1,0 +1,49 @@
+---
+sidebar_position: 8
+---
+
+# 08.字符串注入点模糊查询
+
+在此案例中，使用了`LIKE`语句进行模糊查询，查询`vulin_users`表中`username`字段包含字母`a`的所有记录。然而，该 SQL 语句没有对用户输入进行任何过滤或转义，这就为注入攻击提供了机会。
+
+### 示例代码：
+
+```SQL
+http://127.0.0.1:8787/user/name/like?name=a&debug=1
+/*查询名称为a的用户*/
+select * from vulin_users where username LIKE '%a%';
+```
+
+在该查询中，`username`字段进行了模糊查询，查找包含字母`a`的用户。
+
+### 攻击示例：
+
+假设攻击者在输入中注入以下内容
+
+```Plain
+a' OR '1'='1' --
+
+/*更改后的sql语句变成如下*/
+select * from vulin_users where username LIKE '%a' OR '1'='1' -- %';
+/*等同于*/
+select * from vulin_users where username LIKE '%a' OR '1'='1';
+```
+
+在这个示例中，`--`表示 SQL 中的单行注释，它会导致数据库忽略后续的查询语句，从而绕过了原本的查询过滤条件，获取了所有用户的数据。
+
+攻击者还可以执行其他恶意操作，比如删除数据、修改数据等，具体取决于应用程序的权限和数据库的配置。
+
+### 防御措施：
+
+- 参数化查询： 使用参数化查询（Prepared Statements）来执行 SQL 语句。参数化查询会将用户输入与查询逻辑分开，有效地防止 SQL 注入攻击。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/08unsafe-like.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

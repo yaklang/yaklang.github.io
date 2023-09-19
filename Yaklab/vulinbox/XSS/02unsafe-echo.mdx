@@ -1,0 +1,46 @@
+---
+sidebar_position: 2
+---
+
+# 02.直接拼接导致 XSS 注入
+
+如果直接拼接用户输入而没有进行适当的处理，将导致 XSS（跨站脚本攻击）注入的风险。XSS 攻击是一种利用网页应用程序对用户输入数据的不当处理，从而在用户浏览器上执行恶意脚本的攻击。
+
+**示例代码：**
+
+```SQL
+http://127.0.0.1:8787/xss/echo?name=admin
+/*拼接后*/
+<div>Hello admin</div>
+```
+
+此处的案例中后端代码直接将用户输入拼接后返回给浏览器，当插入 html 标签或 javascript 代码时浏览器将会执行。
+
+### 攻击示例：
+
+```SQL
+http://127.0.0.1:8787/xss/echo?name=<script>alert("Hello Yakit")</script>
+/*构造拼接后*/
+<div>Hello <script>alert("Hello Yakit")</script></div>
+```
+
+当攻击者提交此 javascript 代码时，浏览器将会执行代码，造成弹窗。
+
+### 防御措施：
+
+- 输入验证：对用户输入进行验证，只接受符合特定格式的数据。例如，如果需要一个整数，确保输入是整数类型，而不是字符串或其他类型的数据。
+- 输出编码：在将用户输入输出到网页上之前，对其进行适当的编码，以确保所有特殊字符都被转义。这样可以防止恶意脚本的执行。
+- 使用 HTTP Only 标志：对于 cookie 中的敏感信息，使用`HttpOnly`标志，确保它们不会被 JavaScript 访问，从而减少 XSS 攻击的可能性。
+- 内容安全策略（CSP）：使用 CSP 头来限制网页中加载的资源，只允许从指定源加载内容，这有助于减少 XSS 攻击的成功率。
+- 使用安全框架：使用安全框架和库来处理用户输入和输出，这些框架通常会自动处理 XSS 防护。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/02unsafe-echo.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

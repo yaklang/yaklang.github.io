@@ -1,0 +1,57 @@
+---
+sidebar_position: 5
+---
+
+# 05.XSS: 存在于 JS 代码中(字符串中 2)
+
+此案例与前一个类似，但此处是变量值未经适当的处理，直接嵌入到网页中。攻击者可以通过在变量值中传入恶意的 JavaScript 代码，将恶意脚本注入到页面中，从而在用户的浏览器中执行。
+
+### 示例代码：
+
+此处以 get 方式获取参数值，并赋值给 name，正好又在`<script>`标签内
+
+```HTML
+<div>
+    Here are photo for U! <br>
+    <script>
+    const name = "";
+    console.info("Hello" + `${name}`);
+    </script>
+</div>
+```
+
+### 攻击示例：
+
+尝试通过拼接来分割前后，从而执行想要的代码
+
+```HTML
+<!-- 成功的拼接,注意末尾多了两个斜杠-->
+http://test.com/xss/js/in-str2?name=test"</script><script>alert("Hello Yakit")//
+<!--拼接后的代码-->
+<div>Here are photo for U! <br>
+    <script>const name = "test"</script>
+    <script>alert("Hello Yakit") //";
+    console.info("Hello" + `${name}`);
+    </script>
+</div>
+```
+
+在 HTML 中，`//`是 JavaScript 代码中的注释符号。HTML 本身并没有`//`这个特殊的符号含义，但在 HTML 的`<script>`标签中嵌入的 JavaScript 代码中，`//`用于表示单行注释。任何位于`//`之后的内容都会被视为注释，不会被 JavaScript 解释执行。
+
+### 防御措施：
+
+此处的问题任是直接将用户的输入带入到代码中，造成恶意代码的执行，对于此类漏洞防御，具体措施如下：
+
+- 输入验证： 对用户输入进行验证，只接受符合特定格式和类型的数据。拒绝包含特殊字符或 HTML 标签的输入。
+- 输出编码： 在将用户输入显示在网页上之前，进行适当的输出编码，将特殊字符转换为对应的 HTML 实体，以防止恶意脚本的执行。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/xss/05unsafe-instr2.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

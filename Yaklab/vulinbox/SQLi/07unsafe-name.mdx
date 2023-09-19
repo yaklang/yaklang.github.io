@@ -1,0 +1,55 @@
+---
+sidebar_position: 7
+---
+
+# 07.字符串为注入点的 SQL 注入
+
+字符串为注入点的 SQL 注入是一种常见的安全漏洞，它发生在应用程序在处理用户提供的字符串数据时，未正确验证、转义或过滤这些输入，导致攻击者可以通过恶意构造的字符串来执行非授权的数据库操作。
+
+常见的字符串为注入点的 SQL 注入攻击是通过在输入的字符串中插入 SQL 语句的特殊字符，使得这些特殊字符被误解为 SQL 代码的一部分，从而改变原始的 SQL 查询的含义。
+
+### 示例代码：
+
+```Bash
+http://127.0.0.1:8787/user/name?name=admin
+#查询名为admin的用户
+select * from vulin_users where username = 'admin';
+```
+
+此案例中通过用户输入的用户名来执行查询。
+
+### 攻击示例：
+
+```Plain
+user_input1 = ' OR 1=1 --
+user_input2 = ' OR '1'='1
+```
+
+攻击者可以通过恶意构造的用户名来尝试注入 SQL 代码，如果应用程序未进行适当的处理，最终的查询语句会变成：
+
+```SQL
+/*user_input1构造语句*/
+select * from vulin_users where username = '' OR 1=1 --';
+/*user_input2构造语句*/
+select * from vulin_users where username = '' OR '1'='1';
+```
+
+这将使查询始终返回所有用户的数据，绕过了原本的身份验证过程。
+
+### 预防措施：
+
+- 参数化查询： 使用参数化查询（Prepared Statements）来执行 SQL 语句。参数化查询会将用户输入与查询逻辑分开，有效地防止 SQL 注入攻击。
+- 输入验证： 在接收字符串输入之前，进行输入验证，确保它是一个合法的格式和长度。例如，对于用户名，验证是否包含特殊字符或空格。
+- 转义或过滤特殊字符： 在执行查询之前，对用户输入进行转义或过滤，确保不会被误解为 SQL 代码。在大多数编程语言和数据库引擎中，都有提供相关的转义函数，例如在 Python 中可以使用`escape_string()`来转义字符串。
+- 白名单验证： 对于一些特定的输入字段，可以使用白名单验证，只接受预定义的合法输入，拒绝其他非法输入。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/07unsafe-name.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

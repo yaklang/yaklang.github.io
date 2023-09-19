@@ -1,0 +1,69 @@
+---
+sidebar_position: 5
+---
+
+# 05.ID 为数字型的简单边界 SQL 报错检测
+
+边界 SQL 报错检测是一种测试方法，用于探测应用程序在处理数字型 ID 参数时是否存在 SQL 注入漏洞。在此测试中，我们会尝试构造一些特殊的输入，以观察应用程序的反应。这里给出了一些示例：
+
+### 示例代码：
+
+```SQL
+SELECT * FROM users WHERE id = {user_input};
+```
+
+现在有一个查询，用于从数据库中获取用户信息，其中，`{user_input}`是应用程序接收的用户输入。
+
+### 攻击示例：
+
+- 正常输入： 首先，我们使用正常的数字型输入来检查查询是否按预期工作：
+
+```SQL
+user_input = 123
+SELECT * FROM users WHERE id = 123;
+```
+
+如果查询正常执行并返回预期结果，说明应用程序对于正常输入的处理是正确的。
+
+- 边界值测试： 接下来，我们可以测试边界值，包括最小值、最大值和边界附近的值。例如：
+
+```SQL
+user_input = 0  # 最小值
+SELECT * FROM users WHERE id = 0;
+
+user_input = 2147483647  # INT类型最大值
+SELECT * FROM users WHERE id = 2147483647;
+
+user_input = 1  # 边界附近的值
+SELECT * FROM users WHERE id = 1;
+```
+
+通过测试边界值，我们可以确保应用程序在处理边界输入时没有出现错误或异常情况。
+
+- 非数字输入： 接下来，我们可以尝试输入非数字型数据，例如字符串或特殊字符，来观察应用程序的反应：
+
+```SQL
+user_input = "abc"
+SELECT * FROM users WHERE id = "abc";
+```
+
+通以上测试来查看程序是否出现异常错误，从而判断是否存在 SQL 注入漏洞。
+
+### 防御措施：
+
+防止 ID 为数字型的简单边界 SQL 注入，可以采取以下预防措施：
+
+- 使用参数化查询： 使用参数化查询（Prepared Statements）来执行 SQL 语句，确保用户输入的 ID 不会直接拼接到 SQL 查询语句中。参数化查询会将输入和查询逻辑分离，有效地防止 SQL 注入攻击。
+- 输入验证： 在接收用户输入的 ID 之前，进行输入验证，确保它是一个合法的数字。可以使用正则表达式或内置的类型转换函数进行验证。如果输入不是数字类型，应拒绝执行查询。
+- 转义或过滤特殊字符： 对于 ID 参数，可以在执行查询之前，对其进行转义或过滤，以确保不会解释为 SQL 代码。对于数字类型的 ID，这一步通常是不必要的，因为数字不包含特殊字符。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/sqli/05unsafe-id-error.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
