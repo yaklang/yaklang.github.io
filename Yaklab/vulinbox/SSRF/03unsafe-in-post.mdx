@@ -1,0 +1,80 @@
+---
+sidebar_position: 3
+---
+
+# 03.SSRF POST 中 URL 参数
+
+在这个示例中，我们将介绍一个 SSRF 漏洞案例，涉及将 URL 参数嵌入 POST 请求中，导致攻击者可以发起未经授权的请求。
+
+### 示例代码：
+
+用户可以通过 POST 请求提交一个 URL，然后服务器将该 URL 作为目标发起 HTTP 请求，而没有充分的验证。
+
+在提交表单时，攻击者可以将恶意 URL 作为参数，从而导致服务器发起未经授权的请求，从而触发 SSRF 漏洞。
+
+```Go
+{
+DefaultQuery: "",
+Path:         "/in-post",
+Title:        "SSRF POST 中 URL 参数",
+Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == "GET" {
+                writer.Header().Set("Content-Type", "text/html; charset=utf8")
+                writer.Write([]byte(`<form action="/ssrf/in-post" method="post">
+        <!-- ... 省略其他标签 ... -->
+                </form>`))
+        return
+        }
+        raw, err := ioutil.ReadAll(request.Body)
+        if err != nil {
+                writer.Write([]byte(err.Error()))
+                return
+        }
+        values, err := url.ParseQuery(string(raw))
+        if err != nil {
+                writer.Write([]byte(err.Error()))
+                return
+        }
+        var u = fmt.Sprint(values.Get("url"))
+        c := utils.NewDefaultHTTPClient()
+        c.Timeout = 10 * time.Second
+        rsp, err := c.Get(u)
+        if err != nil {
+                writer.Write([]byte(err.Error()))
+                return
+        }
+        rawResponse, err := utils.HttpDumpWithBody(rsp, true)
+        if err != nil {
+                writer.Write([]byte(err.Error()))
+                return
+        }
+        writer.Write(rawResponse)
+                        },
+                        RiskDetected: true,
+},
+```
+
+### 攻击示例：
+
+攻击者在"URL"字段中输入恶意 URL，例如：` http://127.0.0.1:8787/ssrf``/flag `
+
+服务端接收到 POST 请求后，提取"URL"参数，并将其作为目标发起 HTTP 请求
+
+![](/img/yaklab/ssrf/03unsafe-in-post.png)
+
+### 防御措施：
+
+- 白名单验证：限制允许请求的目标 URL，只允许特定的域名、IP 地址或 URL 路径。这将减少攻击者可以发起的恶意请求的范围。
+- 使用 URL 解析库：在解析用户输入的 URL 时，使用专门的 URL 解析库来确保正确解析和规范化 URL。这可以帮助识别和过滤恶意的 URL 结构。
+- 禁用不必要的协议：限制允许的协议，例如只允许 http 和 https，不允许 file、data 等危险协议。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/03unsafe-in-post.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

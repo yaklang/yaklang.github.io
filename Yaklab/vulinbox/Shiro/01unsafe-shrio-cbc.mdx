@@ -1,0 +1,91 @@
+---
+sidebar_position: 1
+---
+
+# 01.Shiro CBC 默认 KEY(<1.4.2)
+
+> shiro 是一个用于处理身份验证、授权、会话管理等安全功能的 Java 框架。在 Shiro 的配置中，有一个关键的密钥（Secret Key）用于加密和解密数据，通常称为"RememberMe Cookie Key"。该密钥用于保护 RememberMe 功能中的 Cookie 数据。
+>
+> Shiro 默认配置中的这个密钥通常是硬编码的，这就导致了一个潜在的安全风险，即攻击者可以利用这个硬编码的密钥来伪造或解密 RememberMe Cookie，从而获得对应用程序的未经授权访问权限。这个问题被称为 Shiro 默认 key 漏洞。
+
+在 Shiro 1.2.4 版本及之前的版本中，存在一个严重的漏洞，该漏洞允许攻击者通过伪造 Cookie 来绕过身份验证，进而访问应用程序中的受保护资源。
+该漏洞涉及到 Shiro 在处理 RememberMe 功能时使用的默认密钥，它在特定情况下使用了一种不安全的加密模式（CBC 模式）。
+
+### 示例代码：
+
+```Go
+{
+    DefaultQuery: "",
+    Path:         "/shiro/cbc",
+    Title:        "Shiro CBC 默认KEY(<1.4.2)",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        failNow := func(writer http.ResponseWriter, request *http.Request, err error) {
+            // 设置一个带有特殊值的cookie
+            cookie := http.Cookie{
+                Name:     "rememberMe",
+                Value:    "deleteMe",
+                Expires:  time.Now().Add(7 * 24 * time.Hour),
+                HttpOnly: false,
+            }
+            http.SetCookie(writer, &cookie)
+            writer.WriteHeader(200)
+            if err != nil {
+                writer.Write([]byte(err.Error()))
+            }
+            return
+        }
+        successNow := func(writer http.ResponseWriter, request *http.Request) {
+            writer.WriteHeader(200)
+            return
+        }
+        rememberMe, err := request.Cookie("rememberMe")
+        if err != nil { // 如果请求中没有rememberMe Cookie，则设置一个特殊的Cookie
+            failNow(writer, request, err)
+            return
+        }
+        cookieVal, _ := codec.DecodeBase64(rememberMe.Value)
+        var iv []byte
+        if len(cookieVal) > len(randKey) {
+            iv = cookieVal[:16]
+            cookieVal = cookieVal[16:]
+        } else { // 第一次请求探测
+            failNow(writer, request, err)
+            return
+        }
+        payload, err := codec.AESCBCDecrypt(randKey, cookieVal, iv)
+        if err != nil || payload == nil { // 如果解密失败，返回deleteMe
+            failNow(writer, request, err)
+            return
+        }
+        payload = codec.PKCS7UnPadding(payload)
+
+        checkGadget(payload, failNow, successNow, writer, request)
+        return
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+攻击者可以模拟特定 Cookie，并将其发送到漏洞受影响的应用程序。通过在 Cookie 中伪造特殊的值，攻击者可以引发解密失败，绕过身份验证。
+
+这里使用 Yakit 插件《Shiro 指纹识别 + 弱密码检测》
+
+### 防御措施：
+
+- 更新 Shiro 版本： 更新至更高版本，以修复该漏洞。
+- 自定义密钥： 不要使用默认密钥，自定义 RememberMe Cookie 密钥，并确保它是随机生成的，以增加攻击者猜测密钥的难度。
+- 监控和日志记录： 实施监控和日志记录，以检测和响应异常活动，例如多次无效的 RememberMe Cookie 尝试。
+- 限制 RememberMe 功能： 如果不是必需，可以考虑禁用 RememberMe 功能，以减少相关风险。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/shiro/01unsafe-shrio-cbc.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

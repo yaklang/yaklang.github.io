@@ -1,0 +1,45 @@
+---
+sidebar_position: 15
+---
+
+# 15.安全的重定向(只重定向 path)
+
+安全的重定向是一种避免完全开放重定向漏洞的安全方法，它仅允许重定向目标为同一站点内的路径，而不是完整的 URL。通过只重定向路径而不是整个 URL，可以有效减少跳转到恶意网站或其他不受信任站点的风险。
+
+### 示例代码：
+
+```Go
+{
+    DefaultQuery: "redirect=/redirect/main",
+    Path:         "/redirect/safe",
+    Title:        "安全的重定向(只重定向path)",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        var u = LoadFromGetParams(request, "redirect")
+        DefaultRenderEx(true, `<!DOCTYPE html>
+<html>
+ <head>
+   <title>Safe Redirect Example</title>
+   <meta http-equiv="refresh" content="0;url={{ .url }}">
+ </head>
+</html>
+`, writer, request, map[string]any{
+            "url": strings.Trim(getPath(u), `"`),
+        })
+    },
+    RiskDetected: true,
+}
+
+func getPath(u string) string {
+    urlInfo, err := url.Parse(u)
+    if err != nil {
+        return ""
+    }
+    return urlInfo.Path
+}
+```
+
+:::tip
+
+总之，安全的重定向方法是一种有效的防御措施，可以减少完全开放重定向漏洞带来的风险。通过只重定向到同一站点内的路径，可以增加应用程序的安全性。
+
+:::

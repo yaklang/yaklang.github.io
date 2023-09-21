@@ -1,0 +1,58 @@
+---
+sidebar_position: 13
+---
+
+# 13.完全开放重定向（meta 延迟跳转）
+
+通过在 HTML 文档中插入`<meta>`标签的`http-equiv`属性，可以控制浏览器在一定时间后自动重定向到新的 URL。这类似于用户访问一个网页后，该网页会在一段时间后自动跳转到其他页面。
+
+### 示例代码：
+
+通过在 HTML 文档中插入`<meta>`标签的`http-equiv`属性，可以控制浏览器在一定时间后自动重定向到新的 URL。这类似于用户访问一个网页后，该网页会在一段时间后自动跳转到其他页面。
+
+```Go
+{
+    DefaultQuery: "redirect=/redirect/main",
+    Path:         "/redirect/meta/case1",
+    Title:        "完全开放重定向（meta 延迟跳转）",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        var u = LoadFromGetParams(request, "redirect")
+        DefaultRenderEx(true, `<!DOCTYPE html>
+        <html>
+            <head>
+                <title>Meta(5s) Refresh Example</title>
+                <meta http-equiv="refresh" content="5;url={{ .url }}">
+            </head>
+        </html>
+        `, writer, request, map[string]any{
+            "url": strings.Trim(strconv.Quote(u), `"`),
+        })
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+```Bash
+http://127.0.0.1:8787/ssrf/redirect/meta/case1?redirect=http://127.0.0.1:8787/ssrf/flag
+```
+
+当用户点击这个链接时，页面将显示一个带有`<meta>`标签的 HTML 文档，其中设置了 5 秒的延迟，然后将自动跳转到恶意站点`http://127.0.0.0:8787/ssrf/flag`
+
+### 防御措施：
+
+- 验证和过滤目标 URL： 在重定向操作中，始终对用户提供的目标 URL 进行严格验证，只允许合法的、事先认证过的 URL 进行重定向。
+- 白名单验证： 维护一个允许重定向的目标 URL 白名单，只允许重定向到可信的 URL。
+- 避免直接使用用户输入： 尽量避免直接使用来自用户的输入作为重定向的目标，这可能会被恶意构造。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/13unsafe-meta-case1.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

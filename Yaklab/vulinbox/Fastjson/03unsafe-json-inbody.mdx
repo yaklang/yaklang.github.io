@@ -1,0 +1,79 @@
+---
+sidebar_position: 3
+---
+
+# 03.POST Body 传参案例
+
+该案例演示了一种潜在的安全漏洞，当后端处理 POST 请求的请求体（Request Body）时，没有对其中的数据进行足够的验证和处理，可能导致安全问题。特别是在使用 Fastjson 或其他 JSON 解析器的情况下，攻击者可以构造恶意 JSON 请求体来触发 Java 反序列化漏洞。
+
+### 示例代码：
+
+```Go
+{
+    Title: "POST Body传参案例案例",
+    Path:  "/json-in-body",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == http.MethodPost {
+            body, err := io.ReadAll(request.Body)
+            if err != nil {
+                writer.WriteHeader(http.StatusBadRequest)
+                writer.Write([]byte("Invalid request"))
+                return
+            }
+            defer request.Body.Close()
+            response := mockController(generateFastjsonParser("1.2.43"), request, string(body))
+            writer.Write([]byte(response))
+        } else {
+            writer.Write([]byte(utils2.Format(string(fastjson_loginPage), map[string]string{
+                "script": `function load(){
+                    name=$("#username").val();
+                    password=$("#password").val();
+                    auth = {"user":name,"password":password};
+                    $.ajax({
+                        type:"post",
+                        url:"/fastjson/json-in-body",
+                        data:JSON.stringify(auth),
+                        dataType: "json",
+                        success: function (data ,textStatus, jqXHR)
+                        {
+                            $("#response").text(JSON.stringify(data));
+                            console.log(data);
+                        },
+                        error:function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("请求出错");
+                        },
+                    })
+                }`,
+            })))
+            return
+        }
+    },
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造 POST 请求，将恶意 JSON 数据作为请求体发送给目标服务器。例如，post payload ` {"@type":"``java.net``.Inet4Address","val":"dnslog"} ` 将触发 Fastjson 反序列化漏洞。
+
+### 防御措施：
+
+- 验证请求体：后端应该对接收到的请求体进行验证和解析，确保其格式正确，数据类型合法。
+- 使用安全的 JSON 解析库：考虑使用安全的 JSON 解析库，这些库通常会提供防御反序列化攻击的功能。
+- 限制反序列化能力：在可能的情况下，禁用或限制应用程序的反序列化能力，只反序列化信任的数据。
+
+:::caution
+
+请注意，漏洞的防御措施可能因编程语言和框架而异，因此确保您的应用程序采取了适当的防御措施，以确保安全性。
+
+:::
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fastjson/03unsafe-json-inbody.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

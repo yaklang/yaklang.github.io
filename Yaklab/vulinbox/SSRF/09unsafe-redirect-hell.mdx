@@ -1,0 +1,48 @@
+---
+sidebar_position: 9
+---
+
+# 09.完全开放重定向(无限重定向)
+
+完全开放的重定向漏洞是一种安全漏洞，它允许攻击者通过构造恶意的重定向链接，将用户重定向到任意的 URL。在这个特定的案例中，重定向是无限的，会导致服务器不断地将用户重定向到同一个 URL，形成一个无限重定向循环，最终可能会导致服务不可用或资源耗尽。
+
+### 示例代码：
+
+```Go
+{
+    DefaultQuery: "destUrl=/redirect/main",
+    Path:         "/redirect/redirect-hell",
+    Title:        "完全开放重定向(无限重定向)",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        var u = LoadFromGetParams(request, "destUrl")
+        writer.Header().Set("Location", u)
+        writer.WriteHeader(302)
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造一个恶意的 URL，将用户重定向到同一个无限循环的重定向页面：
+
+```Bash
+http://127.0.0.1:8787/ssrf/redirect/redirect-hell?destUrl=http://127.0.0.1:8787/ssrf/flag
+```
+
+### 防御措施：
+
+- 白名单验证：在处理重定向请求时，验证目标 URL 是否属于合法的白名单范围内。不要允许用户传递任意的 URL 参数。
+- 限制重定向次数：为重定向设置一个合理的最大次数限制，超过该次数则停止重定向并返回错误。
+- 避免完全开放重定向：避免使用完全开放的重定向，将重定向链接限制为特定的目标，或者使用相对路径进行重定向。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/09unsafe-redirect-hell.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
