@@ -8,6 +8,8 @@
 | [pcapx.InjectIP](#InjectIP) ||
 | [pcapx.InjectRaw](#InjectRaw) ||
 | [pcapx.InjectTCP](#InjectTCP) ||
+| [pcapx.OpenPcapFile](#OpenPcapFile) ||
+| [pcapx.StartSniff](#StartSniff) ||
 | [pcapx.arp_reply](#arp_reply) ||
 | [pcapx.arp_replyEx](#arp_replyEx) ||
 | [pcapx.arp_request](#arp_request) ||
@@ -28,6 +30,16 @@
 | [pcapx.ipv4_srcIp](#ipv4_srcIp) ||
 | [pcapx.ipv4_tos](#ipv4_tos) ||
 | [pcapx.ipv4_ttl](#ipv4_ttl) ||
+| [pcapx.pcap_bpfFilter](#pcap_bpfFilter) ||
+| [pcapx.pcap_debug](#pcap_debug) ||
+| [pcapx.pcap_everyPacket](#pcap_everyPacket) ||
+| [pcapx.pcap_onFlowClosed](#pcap_onFlowClosed) ||
+| [pcapx.pcap_onFlowCreated](#pcap_onFlowCreated) ||
+| [pcapx.pcap_onFlowDataFrame](#pcap_onFlowDataFrame) ||
+| [pcapx.pcap_onFlowDataFrameNoReassembled](#pcap_onFlowDataFrameNoReassembled) ||
+| [pcapx.pcap_onHTTPFlow](#pcap_onHTTPFlow) ||
+| [pcapx.pcap_onHTTPRequest](#pcap_onHTTPRequest) ||
+| [pcapx.pcap_onTLSClientHello](#pcap_onTLSClientHello) ||
 | [pcapx.tcp_ack](#tcp_ack) ||
 | [pcapx.tcp_dataOffset](#tcp_dataOffset) ||
 | [pcapx.tcp_dstPort](#tcp_dstPort) ||
@@ -140,6 +152,48 @@
 |:-----------|:---------- |:-----------|
 | raw | `[]byte` |   |
 | opt | `...ConfigOption` |   |
+
+
+### OpenPcapFile
+
+#### 详细描述
+
+
+#### 定义
+
+`OpenPcapFile(filename string, opts ...CaptureOption) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+| opts | `...CaptureOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### StartSniff
+
+#### 详细描述
+
+
+#### 定义
+
+`StartSniff(iface string, opts ...CaptureOption) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| iface | `string` |   |
+| opts | `...CaptureOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### arp_reply
@@ -548,6 +602,206 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `IPv4Option` |   |
+
+
+### pcap_bpfFilter
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_bpfFilter(bpf string) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| bpf | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_debug
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_debug(b bool) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_everyPacket
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_everyPacket(h func(any)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(any)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onFlowClosed
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onFlowClosed(h func(reason TrafficFlowCloseReason, flow *TrafficFlow)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(reason TrafficFlowCloseReason, flow *TrafficFlow)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onFlowCreated
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onFlowCreated(h func(flow *TrafficFlow)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onFlowDataFrame
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onFlowDataFrame(h func(flow *TrafficFlow, conn *TrafficConnection, frame *TrafficFrame)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow, conn *TrafficConnection, frame *TrafficFrame)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onFlowDataFrameNoReassembled
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onFlowDataFrameNoReassembled(h func(flow *TrafficFlow, conn *TrafficConnection, frame *TrafficFrame)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow, conn *TrafficConnection, frame *TrafficFrame)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onHTTPFlow
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onHTTPFlow(h func(flow *TrafficFlow, req *http.Request, rsp *http.Response)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow, req *http.Request, rsp *http.Response)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onHTTPRequest
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onHTTPRequest(h func(flow *TrafficFlow, req *http.Request)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow, req *http.Request)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_onTLSClientHello
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_onTLSClientHello(h func(flow *TrafficFlow, hello *tlsutils.HandshakeClientHello)) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(flow *TrafficFlow, hello *tlsutils.HandshakeClientHello)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
 
 
 ### tcp_ack

@@ -316,17 +316,20 @@ BuildRequest will build a bytes request, you can use it to send request by yours
 
 #### 定义
 
-`Delete(method string) func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Delete(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
+| r1 | `*lowhttp.LowhttpResponse` |   |
+| r2 | `*http.Request` |   |
+| r3 | `error` |   |
 
 
 ### DeleteHTTPPacketCookie
@@ -526,17 +529,20 @@ poc.Do is something like poc.HTTPEx, but the params is (method string, url strin
 
 #### 定义
 
-`Get(method string) func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Get(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
+| r1 | `*lowhttp.LowhttpResponse` |   |
+| r2 | `*http.Request` |   |
+| r3 | `error` |   |
 
 
 ### GetAllHTTPPacketPostParams
@@ -961,17 +967,20 @@ poc.HTTPEx means send http request and return (*LowhttpResponse, *http.Request, 
 
 #### 定义
 
-`Head(method string) func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Head(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
+| r1 | `*lowhttp.LowhttpResponse` |   |
+| r2 | `*http.Request` |   |
+| r3 | `error` |   |
 
 
 ### IsResponse
@@ -1001,17 +1010,20 @@ IsResp test if bytesstream is http response
 
 #### 定义
 
-`Options(method string) func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Options(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
+| r1 | `*lowhttp.LowhttpResponse` |   |
+| r2 | `*http.Request` |   |
+| r3 | `error` |   |
 
 
 ### ParseBytesToHTTPRequest
@@ -1086,17 +1098,20 @@ IsResp test if bytesstream is http response
 
 #### 定义
 
-`Post(method string) func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Post(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)` |   |
+| r1 | `*lowhttp.LowhttpResponse` |   |
+| r2 | `*http.Request` |   |
+| r3 | `error` |   |
 
 
 ### ReplaceAllHTTPPacketPostParams

@@ -140,17 +140,13 @@
 
 #### 定义
 
-`Error(c *YakitClient) func(tmp string, items ...any)`
+`Error(tmp string, items ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(tmp string, items ...any)` |   |
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
 ### File
@@ -160,17 +156,13 @@
 
 #### 定义
 
-`File(c *YakitClient) func(fileName string, desc ...any)`
+`File(fileName string, desc ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(fileName string, desc ...any)` |   |
+| fileName | `string` |   |
+| desc | `...any` |   |
 
 
 ### GenerateYakitMITMHooksParams
@@ -248,17 +240,13 @@
 
 #### 定义
 
-`Info(c *YakitClient) func(tmp string, items ...any)`
+`Info(tmp string, items ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(tmp string, items ...any)` |   |
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
 ### InitYakit
@@ -283,17 +271,12 @@
 
 #### 定义
 
-`Markdown(c *YakitClient) func(tmp any)`
+`Markdown(tmp any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(tmp any)` |   |
+| tmp | `any` |   |
 
 
 ### NewBarGraph
@@ -427,17 +410,17 @@
 
 #### 定义
 
-`Output(c *YakitClient) func(i any) error`
+`Output(i any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
+| i | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(i any) error` |   |
+| r1 | `error` |   |
 
 
 ### QueryDomainsByDomainKeyword
@@ -719,17 +702,12 @@
 
 #### 定义
 
-`Report(c *YakitClient) func(i int)`
+`Report(i int)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(i int)` |   |
+| i | `int` |   |
 
 
 ### SaveDomain
@@ -860,17 +838,12 @@
 
 #### 定义
 
-`SetProgress(c *YakitClient) func(f float64)`
+`SetProgress(f float64)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(f float64)` |   |
+| f | `float64` |   |
 
 
 ### SetProgressEx
@@ -880,17 +853,13 @@
 
 #### 定义
 
-`SetProgressEx(c *YakitClient) func(id string, f float64)`
+`SetProgressEx(id string, f float64)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(id string, f float64)` |   |
+| id | `string` |   |
+| f | `float64` |   |
 
 
 ### StatusCard
@@ -943,17 +912,13 @@
 
 #### 定义
 
-`Text(c *YakitClient) func(tmp string, items ...any)`
+`Text(tmp string, items ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(tmp string, items ...any)` |   |
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
 ### UpdateOnlineYakitStore
@@ -1035,16 +1000,12 @@
 
 #### 定义
 
-`Warn(c *YakitClient) func(tmp string, items ...any)`
+`Warn(tmp string, items ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*YakitClient` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(tmp string, items ...any)` |   |
+| tmp | `string` |   |
+| items | `...any` |   |
 
 

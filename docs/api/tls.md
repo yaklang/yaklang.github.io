@@ -69,17 +69,14 @@
 
 #### 定义
 
-`GenerateRSA1024KeyPair(i int) func() ([]byte, []byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` |   |
+`GenerateRSA1024KeyPair() ([]byte, []byte, error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func() ([]byte, []byte, error)` |   |
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
 
 
 ### GenerateRSA2048KeyPair
@@ -89,17 +86,14 @@
 
 #### 定义
 
-`GenerateRSA2048KeyPair(i int) func() ([]byte, []byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` |   |
+`GenerateRSA2048KeyPair() ([]byte, []byte, error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func() ([]byte, []byte, error)` |   |
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
 
 
 ### GenerateRSA4096KeyPair
@@ -109,17 +103,14 @@
 
 #### 定义
 
-`GenerateRSA4096KeyPair(i int) func() ([]byte, []byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` |   |
+`GenerateRSA4096KeyPair() ([]byte, []byte, error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func() ([]byte, []byte, error)` |   |
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
 
 
 ### GenerateRSAKeyPair
