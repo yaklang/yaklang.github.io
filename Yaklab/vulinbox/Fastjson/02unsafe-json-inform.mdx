@@ -1,0 +1,59 @@
+---
+sidebar_position: 2
+---
+
+# 02.POST Form 传参案例案例
+
+Fastjson 在处理 JSON 数据时存在一些潜在的安全风险，尤其是在接收用户输入并将其反序列化为 Java 对象时。这个漏洞案例演示了如何通过在 POST 表单参数中注入恶意 JSON 数据来触发 Fastjson 反序列化漏洞。
+
+### 示例代码：
+
+```Go
+{
+    Title: "POST Form传参漏洞案例",
+    Path:  "/json-in-form",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == http.MethodPost {
+            body := request.FormValue("auth")
+            response := mockController(generateFastjsonParser("1.2.43"), request, body)
+            writer.Write([]byte(response))
+        } else {
+            writer.Write([]byte(utils2.Format(string(fastjson_loginPage), map[string]string{
+                "script":
+                // 省略部分代码,
+            })))
+            return
+        }
+    },
+}
+```
+
+### 攻击示例：
+
+攻击者发送 POST 请求到`/json-in-form`，在表单参数`auth`中注入恶意 JSON 数据
+
+```Plain
+{"@type":"java.net.Inet4Address","val":"dnslog"}
+```
+
+服务器使用 Fastjson 反序列化恶意 JSON 数据。
+
+恶意 JSON 数据中的内容被反序列化成 Java 对象，并且攻击者可能获得对服务器的控制或者执行恶意操作。
+
+### 防御措施：
+
+- 更新 Fastjson 库：确保你的应用程序使用的 Fastjson 库版本不受已知漏洞的影响，始终保持最新的安全更新。
+- 输入验证：在接受用户输入并将其用于反序列化之前，进行严格的输入验证和过滤，仅接受符合预期结构的数据。
+- 阻止不必要的反序列化：只在必要的情况下执行反序列化操作，避免将未经验证的数据传递给 Fastjson。
+- 安全配置：Fastjson 提供了一些配置选项，可以帮助减少安全风险，例如关闭自动类型识别。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fastjson/02unsafe-json-inform.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

@@ -1,0 +1,59 @@
+---
+sidebar_position: 11
+---
+
+# 11.完全开放重定向（JS location.replace）
+
+在这个特定的案例中，漏洞利用了 JavaScript 中的 `location.replace` 方法，将用户重定向到指定的 URL。
+
+### 示例代码：
+
+```Go
+{
+    DefaultQuery: "redirect_to=/redirect/main",
+    Path:         "/redirect/js/basic1",
+    Title:        "完全开放重定向（JS location.replace）",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        var u = LoadFromGetParams(request, "redirect_to")
+        DefaultRender(`
+    <h2>Open Redirect With JS</h2>
+    <a href=`+strconv.Quote(u)+`>Click ME JUMP NOW (3s)</a>
+    <script>
+        setTimeout(function() {
+
+    window.location.replace(`+strconv.Quote(u)+`);
+
+    }, 3000)
+    </script>
+    `, writer, request)
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造一个恶意的 URL，将用户重定向到指定的恶意站点
+
+```Bash
+http://127.0.0.1:8787/ssrf/redirect/js/basic1?redirect_to=http://127.0.0.1:8787/ssrf/flag
+```
+
+当用户点击这个链接时，浏览器会执行 JavaScript，使用 `location.replace` 将用户直接重定向到恶意站点，从而可能导致用户受到欺骗或遭受攻击。
+
+### 防御措施：
+
+- 限制重定向次数：为重定向设置一个合理的最大次数限制，超过该次数则停止重定向并返回错误。
+- 避免完全开放重定向：避免使用完全开放的重定向，将重定向链接限制为特定的目标，或者使用相对路径进行重定向。
+- 对用户输入进行严格验证和过滤：对用户提供的输入进行严格的验证和过滤，确保没有恶意的重定向链接被注入到请求中。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/11unsafe-basic1.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

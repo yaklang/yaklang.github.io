@@ -1,0 +1,58 @@
+---
+sidebar_position: 10
+---
+
+# 10.完全开放重定向（JS location.href）
+
+完全开放重定向漏洞是一种存在于应用程序中的安全漏洞，攻击者可以利用该漏洞通过构造恶意的 URL 来将用户重定向到恶意网站或内容。在这种情况下，重定向是通过 JavaScript 的`location.href`属性实现的，使页面在一定时间后自动进行重定向
+
+### 示例代码：
+
+以下是一个示例漏洞代码，展示了一个使用`location.href`进行重定向的漏洞：
+
+```Go
+{
+    DefaultQuery: "redUrl=/redirect/main",
+    Path:         "/redirect/js/basic",
+    Title:        "完全开放重定向（JS location.href）",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        var u = LoadFromGetParams(request, "redUrl")
+        DefaultRender(`
+            <h2>Open Redirect With JS</h2>
+            <a href=` + strconv.Quote(u) + `>Click ME JUMP NOW (3s)</a>
+            <script>
+                setTimeout(function() {
+                    window.location.href = ` + strconv.Quote(u) + `;
+                }, 3000);
+            </script>
+        `, writer, request)
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造一个恶意链接，其中包含恶意的重定向 URL：
+
+```Bash
+http://127.0.0.1:8787/ssrf/redirect/js/basic?redUrl=http://127.0.0.1:8787/ssrf/flag
+```
+
+### 防御措施：
+
+- 白名单验证： 维护一个合法 URL 的白名单，只允许重定向到已知的受信任 URL。
+- 避免直接执行用户输入的 JavaScript： 尽量避免直接执行用户输入的 JavaScript 代码，特别是在重定向过程中。
+- 避免用户提供重定向 URL： 如果可能的话，避免直接使用用户提供的 URL 进行重定向，而是使用内部的标识符，然后在后端进行转换。
+- 安全编码实践： 开发人员应遵循安全编码实践，确保在使用 JavaScript 时对用户输入进行适当的验证和编码。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/10unsafe-redirect-js.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

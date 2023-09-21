@@ -1,0 +1,76 @@
+---
+sidebar_position: 6
+---
+
+# 06.GET 传参 Jackson 后端案例
+
+该案例演示了一种潜在的安全漏洞，当使用`json`将数据作为 GET 请求的查询参数传递到后端，并且后端使用 Jackson 库处理该数据时，可能会导致安全问题。攻击者可以构造恶意 JSON 数据并将其作为查询参数发送，以触发 Jackson 反序列化漏洞，进而导致潜在的远程代码执行。
+
+### 示例代码：
+
+```Go
+{
+    Title:        "GET传参Jackson后端案例",
+    Path:         "/jackson-in-query",
+    DefaultQuery: `auth={"user":"admin","password":"password"}`,
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == http.MethodGet {
+            action := request.URL.Query().Get("action")
+            if action == "" {
+                writer.Write([]byte(utils2.Format(string(fastjson_loginPage), map[string]string{
+                    "script": `function load(){
+                        name=$("#username").val();
+                        password=$("#password").val();
+                        auth = {"user":name,"password":password};
+                        $.ajax({
+                            type:"get",
+                            url:"/fastjson/json-in-query",
+                            data:{"auth":JSON.stringify(auth),"action":"login"},
+                            success: function (data ,textStatus, jqXHR)
+                            {
+                                $("#response").text(JSON.stringify(data));
+                                console.log(data);
+                            },
+                            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert("请求出错");
+                            },
+                        })
+                    }`,
+                })))
+                return
+            }
+            auth := request.URL.Query().Get("auth")
+            if auth == "" {
+                writer.Write([]byte("auth 参数不能为空"))
+                return
+            }
+            response := mockJacksonController(request, auth)
+            writer.Write([]byte(response))
+        } else {
+            writer.WriteHeader(http.StatusMethodNotAllowed)
+        }
+    },
+}
+```
+
+### 攻击示例：
+
+攻击者可以构造 GET 请求，将参数 `auth` 设置为 ` {"@type":"``java.net``.Inet4Address","val":"dnslog"} ` 或其他恶意 JSON 数据。当后端使用 Jackson 库处理此数据时，可能会触发反序列化漏洞，导致潜在的远程代码执行。
+
+### 防御措施：
+
+- 升级 Jackson 版本： 使用最新版本的 Jackson 库，因为较新的版本通常修复了已知的反序列化漏洞。
+- 配置白名单： 在 Jackson 中配置白名单，只允许反序列化预期的类，这可以限制攻击者能够执行的操作。
+- 输入验证和过滤： 在接受用户输入的地方进行有效的输入验证和过滤，以防止恶意数据进入系统。
+- 禁用 Jackson 特性： Jackson 具有许多功能和模块，可以通过配置来禁用不必要的特性，以降低安全风险。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fastjson/06unsafe-query.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

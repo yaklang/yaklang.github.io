@@ -1,0 +1,98 @@
+---
+sidebar_position: 4
+---
+
+# 04.SSRF POST 中 URL 参数 (DNS Rebinding)
+
+DNS Rebinding 攻击是一种通过在恶意网站和受害者之间建立一个恶意的 DNS 记录来绕过同源策略的攻击。攻击者可以利用这种漏洞来访问本地网络、绕过防火墙访问内部服务、窃取敏感信息等。
+
+### 示例代码：
+
+以下是一个简单的示例代码，演示了一个在 POST 请求中存在 SSRF 漏洞的情况，攻击者可以利用这个漏洞进行 DNS Rebinding 攻击。
+
+```Go
+{
+    DefaultQuery: "",
+    Path:         "/rebinding/in-post",
+    Title:        "SSRF POST 中 URL 参数 (DNS Rebinding)",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == "GET" {
+            // ...省略表单HTML代码...
+            return
+        }
+
+        raw, err := ioutil.ReadAll(request.Body)
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            return
+        }
+        values, err := url.ParseQuery(string(raw))
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            return
+        }
+        var u = fmt.Sprint(values.Get("url"))
+
+        if u == "" || !check(u) {
+            writer.Write([]byte("check url failed"))
+            writer.WriteHeader(http.StatusInternalServerError)
+            return
+        }
+
+        // 发起HTTP请求到恶意的URL
+        c := utils.NewDefaultHTTPClient()
+        timeoutSec, err := strconv.Atoi(values.Get("timeout"))
+        if err != nil {
+            writer.Write([]byte("Invalid timeout value"))
+            return
+        }
+
+        c.Timeout = time.Duration(timeoutSec) * time.Second
+        rsp, err := c.Get(u)
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            writer.WriteHeader(http.StatusInternalServerError)
+            return
+        }
+
+        // 返回HTTP响应
+        rawResponse, err := utils.HttpDumpWithBody(rsp, true)
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            return
+        }
+        writer.Write(rawResponse)
+    },
+    RiskDetected: true,
+}
+```
+
+### 攻击示例：
+
+1. 修改 ceye.io 的 DNS Rebinding，一个是 vps 地址，另一个是题目的 docker.ip(110.110.2.1)
+2. vps 建立 index.php 内容为` <?php header("Location:``http://127.0.0.1:8787/ssrf/flag``"); ?> `
+3. 启用 PHP 内置的 Web 服务器监听除 80 和 8080 的任意端口`php -S 0.0.0.0:7777`
+4. url 填写为`http://r.xxxx.ceye.io:7777`，爆破数据包至出现 flag
+
+![](/img/yaklab/ssrf/04unsafe-rebinding.png)
+
+参考地址：`https://xz.aliyun.com/t/8707`
+
+### 防御措施：
+
+- 白名单验证：仅允许请求特定的受信任域名或 IP 地址。
+- 限制超时时间：限制服务器发起请求的超时时间，减少攻击窗口。
+- 检查 URL 格式：验证 URL 参数是否合法，避免构造恶意的 URL。
+- 安全配置：配置服务器和网络设备以限制出站连接，防止与恶意域名建立连接。
+- 使用随机 Token：为每个请求生成随机的 token，并在响应中验证该 token，防止请求被滥用。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/ssrf/04unsafe-rebinding.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
