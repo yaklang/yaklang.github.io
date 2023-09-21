@@ -6,7 +6,7 @@ sidebar_position: 12
 
 这个案例展示了一种输出存在于 HTML 节点属性中，位于 herf 属性中的 XSS（跨站脚本攻击）漏洞类型
 
-**示例代码：**
+### 示例代码：
 
 ```Go
 {
@@ -39,7 +39,7 @@ Handler: func(writer http.ResponseWriter, request *http.Request) {
                 },
 ```
 
-**攻击示例：**
+### 攻击示例：
 
 ```SQL
 http://127.0.0.1:8787/xss/attr/href?href=%27onmousemove=%27alert(123)
@@ -49,11 +49,11 @@ http://127.0.0.1:8787/xss/attr/href?href=%27onmousemove=%27alert(123)
 
 ![](/img/yaklab/xss/12unsafe-img.png)
 
-**防御措施：**
+### 防御措施：
 
 要防止这种类型的漏洞，开发者需要对用户输入的数据进行适当的过滤和转义，确保用户提供的内容不会被解释为 HTML 或 JavaScript 代码。开发者可以使用安全的 HTML 编码函数，以及对用户输入数据进行严格的验证，从而有效地防止 XSS 攻击。
 
-**靶场演示： 视频**
+### 靶场演示： 视频
 
 <video
   src="/img/yaklab/xss/12unsafe-href.mp4"
