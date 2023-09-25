@@ -1,0 +1,58 @@
+---
+sidebar_position: 1
+---
+
+# 01.Shlex 解析的命令注入
+
+Shlex 是一个用于解析命令行参数的库，它能够帮助开发者将命令行参数分割成一个字符串切片，以便于在 Go 语言中执行外部命令。在下面的示例中，我们演示了如何使用 Shlex 安全地执行 ping 命令，以避免命令注入漏洞。
+
+### 示例代码：
+
+```Go
+{
+    DefaultQuery: "ip=127.0.0.1",
+    Path:         "/ping/shlex",
+    Title:        "Shlex 解析的命令注入",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        ip := request.URL.Query().Get("ip")
+        if ip == "" {
+            writer.Write([]byte(`no ip set`))
+            return
+        }
+        var raw = fmt.Sprintf("ping %v", ip)
+        list, err := shlex.Split(raw)
+        if err != nil {
+            writer.Write([]byte(`shlex parse failed: ` + err.Error()))
+            return
+        }
+        ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+        defer cancel()
+        outputs, err1 := exec.CommandContext(ctx, list[0], list[1:]...).CombinedOutput()
+        // 尝试将 GBK 转换为 UTF-8
+        utf8Outputs, err2 := utils.GbkToUtf8(outputs)
+        if err2 != nil {
+            writer.Write(outputs)
+        } else {
+            writer.Write(utf8Outputs)
+        }
+        if err1 != nil {
+            writer.Write([]byte("exec : " + err1.Error()))
+            return
+        }
+    },
+    RiskDetected: false,
+}
+```
+
+### 代码分析：
+
+- 这个示例演示了如何使用 Shlex 解析用户提供的 IP 地址，并使用 `ping` 命令来测试该地址的可达性。
+- `shlex.Split` 函数用于安全地解析命令字符串，避免了常见的命令注入漏洞。如果解析失败，将返回错误信息。
+- 使用 `exec.CommandContext` 函数来创建一个可以执行外部命令的命令对象，然后使用 `CombinedOutput` 方法执行该命令，并将结果捕获到 `outputs` 中。
+- 最后，通过检查错误变量 `err1` 和 `err2` 来处理执行命令的结果和错误信息，并将结果返回给客户端。
+
+:::tip
+
+这个示例中采取了一系列安全措施，包括使用 Shlex 进行安全的命令解析，使用上下文控制命令执行的超时，以及尝试将输出从 GBK 转换为 UTF-8 编码。这些措施大大减少了命令注入的风险。
+
+:::

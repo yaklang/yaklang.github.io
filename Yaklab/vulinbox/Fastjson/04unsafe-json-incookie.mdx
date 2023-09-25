@@ -1,0 +1,76 @@
+---
+sidebar_position: 4
+---
+
+# 04.Cookie 传参案例
+
+该案例演示了一种潜在的安全漏洞，当后端没有对其中的数据进行足够的验证和处理，可能导致安全问题。攻击者可以在 Cookie 中插入恶意 JSON 数据，以触发 Fastjson 反序列化漏洞。
+
+### 示例代码：
+
+```Go
+{
+    Title: "Cookie传参案例",
+    Path:  "/json-in-cookie",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == http.MethodGet {
+            action := request.URL.Query().Get("action")
+            if action == "" {
+                writer.Header().Set("Set-Cookie", `auth=`+codec.EncodeBase64Url(`{"id":"-1"}`)) // Fuzz Coookie暂时没有做只能解码，不能编码
+                writer.Write([]byte(utils2.Format(string(fastjson_loginPage), map[string]string{
+                    "script": `function load(){
+                        name=$("#username").val();
+                        password=$("#password").val();
+                        auth = {"user":name,"password":password};
+                        $.ajax({
+                            type:"get",
+                            url:"/fastjson/json-in-cookie",
+                            data:{"auth":JSON.stringify(auth),"action":"login"},
+                            success: function (data ,textStatus, jqXHR)
+                            {
+                                $("#response").text(JSON.stringify(data));
+                                console.log(data);
+                            },
+                            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert("请求出错");
+                            },
+                        })
+                    }`,
+                })))
+                return
+            }
+            cookie, err := request.Cookie("auth")
+            if err != nil {
+                writer.Write([]byte("auth 参数不能为空"))
+                return
+            }
+            response := mockController(generateFastjsonParser("1.2.43"), request, cookie.Value)
+            writer.Write([]byte(response))
+        } else {
+            writer.WriteHeader(http.StatusMethodNotAllowed)
+        }
+    },
+}
+```
+
+### 攻击示例：
+
+攻击者可以更改 Cookie 的内容为 ` {"@type":"``java.net``.Inet4Address","val":"dnslog"} ` 或其他恶意 JSON 数据。当服务端尝试解析这个 Cookie 数据时，Fastjson 可能会反序列化它，触发反序列化漏洞，导致潜在的远程代码执行。
+
+### 防御措施：
+
+- 升级 fastjson 版本： 使用最新版本的 fastjson，因为较新的版本通常修复了已知的反序列化漏洞。
+- 限制白名单： 在 fastjson 中配置白名单，只允许反序列化预期的类，这可以限制攻击者能够执行的操作。
+- 禁用 AutoType 特性： Fastjson 的 `AutoType` 特性允许自动识别类类型，但这也是许多漏洞的根本原因之一。可以通过配置禁用该特性来提高安全性。
+- 输入验证和过滤： 在接受用户输入的地方进行有效的输入验证和过滤，以防止恶意数据进入系统。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fastjson/04unsafe-json-incookie.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

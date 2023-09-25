@@ -1,0 +1,61 @@
+---
+sidebar_position: 1
+---
+
+# 01.GET 传参案例案例
+
+fastjson 的一个安全问题是不受信任的用户可以构造恶意 JSON 数据，导致远程代码执行漏洞。本漏洞案例演示了一个 fastjson GET 请求传参的示例，其中存在潜在的 fastjson 远程代码执行漏洞。
+
+### 示例代码：
+
+```Go
+{
+    Title:        "GET 传参案例案例",
+    Path:         "/json-in-query",
+    DefaultQuery: `auth={"user":"admin","password":"password"}`,
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        if request.Method == http.MethodGet {
+            action := request.URL.Query().Get("action")
+            if action == "" {
+                // 返回登录页面或脚本
+                // 省略部分代码
+                return
+            }
+            auth := request.URL.Query().Get("auth")
+            if auth == "" {
+                writer.Write([]byte("auth 参数不能为空"))
+                return
+            }
+            response := mockController(generateFastjsonParser("1.2.43"), request, auth)
+            writer.Write([]byte(response))
+        } else {
+            writer.WriteHeader(http.StatusMethodNotAllowed)
+        }
+    },
+}
+```
+
+### 攻击示例：
+
+```Plain
+http://127.0.0.1:8787/fastjson/json-in-query?auth={"@type":"java.net.Inet4Address","val":"dnslog"}&action=login
+```
+
+在以上 URL 中，攻击者传递了一个 auth 参数，其中包含了恶意构造的 JSON 数据。这个恶意 JSON 数据可能触发 fastjson 解析器漏洞。
+
+### 防御措施：
+
+- 更新 fastjson 库： 确保使用的 fastjson 库是最新版本，因为早期版本可能存在已知的漏洞。
+- 白名单： 对 JSON 数据中的字段和内容进行白名单验证，只接受预期的字段和数据。
+- 谨慎使用 fastjson： 在不受信任的环境中，避免使用 fastjson 解析不受信任的 JSON 数据。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fastjson/01unsafe-json-inquery.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
