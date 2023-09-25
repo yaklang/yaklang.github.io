@@ -19,6 +19,7 @@
 | [fuzz.WithNamingContext](#WithNamingContext) ||
 | [fuzz.WithTimeOut](#WithTimeOut) ||
 | [fuzz.https](#https) ||
+| [fuzz.proxy](#proxy) ||
 
 
 ## 函数定义
@@ -358,6 +359,26 @@ fuzz
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BuildFuzzHTTPRequestOption` |   |
+
+
+### proxy
+
+#### 详细描述
+
+
+#### 定义
+
+`proxy(i string) BuildFuzzHTTPRequestOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
