@@ -2,16 +2,16 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [xhtml.CompareHtml](#CompareHtml) ||
-| [xhtml.Find](#Find) ||
-| [xhtml.GenerateXPath](#GenerateXPath) ||
-| [xhtml.MatchBetween](#MatchBetween) ||
-| [xhtml.RandomUpperAndLower](#RandomUpperAndLower) ||
-| [xhtml.Walker](#Walker) ||
+| [xhtml.CompareHtml](#comparehtml) ||
+| [xhtml.Find](#find) ||
+| [xhtml.GenerateXPath](#generatexpath) ||
+| [xhtml.MatchBetween](#matchbetween) ||
+| [xhtml.RandomUpperAndLower](#randomupperandlower) ||
+| [xhtml.Walker](#walker) ||
 
 
 ## 函数定义
-### CompareHtml
+### comparehtml
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### Find
+### find
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `[]*MatchNodeInfo` |   |
 
 
-### GenerateXPath
+### generatexpath
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `string` |   |
 
 
-### MatchBetween
+### matchbetween
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r2 | `string` |   |
 
 
-### RandomUpperAndLower
+### randomupperandlower
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `string` |   |
 
 
-### Walker
+### walker
 
 #### 详细描述
 

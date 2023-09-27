@@ -2,33 +2,33 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [risk.CheckDNSLogByToken](#CheckDNSLogByToken) ||
-| [risk.CheckICMPTriggerByLength](#CheckICMPTriggerByLength) ||
-| [risk.CheckRandomTriggerByToken](#CheckRandomTriggerByToken) ||
-| [risk.CreateRisk](#CreateRisk) ||
-| [risk.DeleteRiskByID](#DeleteRiskByID) ||
-| [risk.DeleteRiskByTarget](#DeleteRiskByTarget) ||
-| [risk.ExtractTokenFromUrl](#ExtractTokenFromUrl) ||
-| [risk.HaveReverseRisk](#HaveReverseRisk) ||
-| [risk.NewDNSLogDomain](#NewDNSLogDomain) ||
-| [risk.NewLocalReverseHTTPSUrl](#NewLocalReverseHTTPSUrl) ||
-| [risk.NewLocalReverseHTTPUrl](#NewLocalReverseHTTPUrl) ||
-| [risk.NewLocalReverseRMIUrl](#NewLocalReverseRMIUrl) ||
-| [risk.NewPublicReverseHTTPSUrl](#NewPublicReverseHTTPSUrl) ||
-| [risk.NewPublicReverseHTTPUrl](#NewPublicReverseHTTPUrl) ||
-| [risk.NewPublicReverseRMIUrl](#NewPublicReverseRMIUrl) ||
-| [risk.NewRandomPortTrigger](#NewRandomPortTrigger) ||
-| [risk.NewRisk](#NewRisk) ||
-| [risk.NewUnverifiedRisk](#NewUnverifiedRisk) ||
-| [risk.RegisterBeforeRiskSave](#RegisterBeforeRiskSave) ||
-| [risk.Save](#Save) ||
-| [risk.YieldRiskByCreateAt](#YieldRiskByCreateAt) ||
-| [risk.YieldRiskByRuntimeId](#YieldRiskByRuntimeId) ||
-| [risk.YieldRiskByTarget](#YieldRiskByTarget) ||
+| [risk.CheckDNSLogByToken](#checkdnslogbytoken) ||
+| [risk.CheckICMPTriggerByLength](#checkicmptriggerbylength) ||
+| [risk.CheckRandomTriggerByToken](#checkrandomtriggerbytoken) ||
+| [risk.CreateRisk](#createrisk) ||
+| [risk.DeleteRiskByID](#deleteriskbyid) ||
+| [risk.DeleteRiskByTarget](#deleteriskbytarget) ||
+| [risk.ExtractTokenFromUrl](#extracttokenfromurl) ||
+| [risk.HaveReverseRisk](#havereverserisk) ||
+| [risk.NewDNSLogDomain](#newdnslogdomain) ||
+| [risk.NewLocalReverseHTTPSUrl](#newlocalreversehttpsurl) ||
+| [risk.NewLocalReverseHTTPUrl](#newlocalreversehttpurl) ||
+| [risk.NewLocalReverseRMIUrl](#newlocalreversermiurl) ||
+| [risk.NewPublicReverseHTTPSUrl](#newpublicreversehttpsurl) ||
+| [risk.NewPublicReverseHTTPUrl](#newpublicreversehttpurl) ||
+| [risk.NewPublicReverseRMIUrl](#newpublicreversermiurl) ||
+| [risk.NewRandomPortTrigger](#newrandomporttrigger) ||
+| [risk.NewRisk](#newrisk) ||
+| [risk.NewUnverifiedRisk](#newunverifiedrisk) ||
+| [risk.RegisterBeforeRiskSave](#registerbeforerisksave) ||
+| [risk.Save](#save) ||
+| [risk.YieldRiskByCreateAt](#yieldriskbycreateat) ||
+| [risk.YieldRiskByRuntimeId](#yieldriskbyruntimeid) ||
+| [risk.YieldRiskByTarget](#yieldriskbytarget) ||
 | [risk.cve](#cve) ||
 | [risk.description](#description) ||
 | [risk.details](#details) ||
-| [risk.fromYakScript](#fromYakScript) ||
+| [risk.fromYakScript](#fromyakscript) ||
 | [risk.ignore](#ignore) ||
 | [risk.level](#level) ||
 | [risk.parameter](#parameter) ||
@@ -36,18 +36,18 @@
 | [risk.potential](#potential) ||
 | [risk.request](#request) ||
 | [risk.response](#response) ||
-| [risk.runtimeId](#runtimeId) ||
+| [risk.runtimeId](#runtimeid) ||
 | [risk.severity](#severity) ||
 | [risk.solution](#solution) ||
 | [risk.title](#title) ||
-| [risk.titleVerbose](#titleVerbose) ||
+| [risk.titleVerbose](#titleverbose) ||
 | [risk.token](#token) ||
 | [risk.type](#type) ||
-| [risk.typeVerbose](#typeVerbose) ||
+| [risk.typeVerbose](#typeverbose) ||
 
 
 ## 函数定义
-### CheckDNSLogByToken
+### checkdnslogbytoken
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### CheckICMPTriggerByLength
+### checkicmptriggerbylength
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r2 | `error` |   |
 
 
-### CheckRandomTriggerByToken
+### checkrandomtriggerbytoken
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r2 | `error` |   |
 
 
-### CreateRisk
+### createrisk
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `*Risk` |   |
 
 
-### DeleteRiskByID
+### deleteriskbyid
 
 #### 详细描述
 
@@ -147,7 +147,7 @@
 | id | `any` |   |
 
 
-### DeleteRiskByTarget
+### deleteriskbytarget
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | addr | `string` |   |
 
 
-### ExtractTokenFromUrl
+### extracttokenfromurl
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `string` |   |
 
 
-### HaveReverseRisk
+### havereverserisk
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `bool` |   |
 
 
-### NewDNSLogDomain
+### newdnslogdomain
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | _ | `error` |   |
 
 
-### NewLocalReverseHTTPSUrl
+### newlocalreversehttpsurl
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `string` |   |
 
 
-### NewLocalReverseHTTPUrl
+### newlocalreversehttpurl
 
 #### 详细描述
 
@@ -259,7 +259,7 @@
 | r1 | `string` |   |
 
 
-### NewLocalReverseRMIUrl
+### newlocalreversermiurl
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `string` |   |
 
 
-### NewPublicReverseHTTPSUrl
+### newpublicreversehttpsurl
 
 #### 详细描述
 
@@ -299,7 +299,7 @@
 | r1 | `string` |   |
 
 
-### NewPublicReverseHTTPUrl
+### newpublicreversehttpurl
 
 #### 详细描述
 
@@ -319,7 +319,7 @@
 | r1 | `string` |   |
 
 
-### NewPublicReverseRMIUrl
+### newpublicreversermiurl
 
 #### 详细描述
 
@@ -339,7 +339,7 @@
 | r1 | `string` |   |
 
 
-### NewRandomPortTrigger
+### newrandomporttrigger
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | _ | `error` |   |
 
 
-### NewRisk
+### newrisk
 
 #### 详细描述
 
@@ -377,7 +377,7 @@
 | opts | `...yakit.RiskParamsOpt` |   |
 
 
-### NewUnverifiedRisk
+### newunverifiedrisk
 
 #### 详细描述
 
@@ -400,7 +400,7 @@
 | r2 | `error` |   |
 
 
-### RegisterBeforeRiskSave
+### registerbeforerisksave
 
 #### 详细描述
 
@@ -415,7 +415,7 @@
 | f | `func(*Risk)` |   |
 
 
-### Save
+### save
 
 #### 详细描述
 
@@ -435,7 +435,7 @@
 | r1 | `error` |   |
 
 
-### YieldRiskByCreateAt
+### yieldriskbycreateat
 
 #### 详细描述
 
@@ -455,7 +455,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### YieldRiskByRuntimeId
+### yieldriskbyruntimeid
 
 #### 详细描述
 
@@ -475,7 +475,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### YieldRiskByTarget
+### yieldriskbytarget
 
 #### 详细描述
 
@@ -555,7 +555,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### fromYakScript
+### fromyakscript
 
 #### 详细描述
 
@@ -715,7 +715,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### runtimeId
+### runtimeid
 
 #### 详细描述
 
@@ -795,7 +795,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### titleVerbose
+### titleverbose
 
 #### 详细描述
 
@@ -855,7 +855,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### typeVerbose
+### typeverbose
 
 #### 详细描述
 

@@ -2,20 +2,20 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [math.Abs](#Abs) |Abs returns the absolute value of x.Special cases are:	Abs(±Inf) = +Inf	Abs(NaN) = NaN|
-| [math.Ceil](#Ceil) |Ceil returns the least integer value greater than or equal to x.Special cases are:	Ceil(±0) = ±0	Ceil(±Inf) = ±Inf	Ceil(NaN) = NaN|
-| [math.Floor](#Floor) |Floor returns the greatest integer value less than or equal to x.Special cases are:	Floor(±0) = ±0	Floor(±Inf) = ±Inf	Floor(NaN) = NaN|
-| [math.IsNaN](#IsNaN) |IsNaN reports whether f is an IEEE 754 “not-a-number” value.|
-| [math.NaN](#NaN) |NaN returns an IEEE 754 “not-a-number” value.|
-| [math.Pow](#Pow) |Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(x, ±0) = 1 for any x	Pow(1, y) = 1 for any y	Pow(x, 1) = x for any x	Pow(NaN, y) = NaN	Pow(x, NaN) = NaN	Pow(±0, y) = ±Inf for y an odd integer < 0	Pow(±0, -Inf) = +Inf	Pow(±0, +Inf) = +0	Pow(±0, y) = +Inf for finite y < 0 and not an odd integer	Pow(±0, y) = ±0 for y an odd integer > 0	Pow(±0, y) = +0 for finite y > 0 and not an odd integer	Pow(-1, ±Inf) = 1	Pow(x, +Inf) = +Inf for |x| > 1	Pow(x, -Inf) = +0 for |x| > 1	Pow(x, +Inf) = +0 for |x| < 1	Pow(x, -Inf) = +Inf for |x| < 1	Pow(+Inf, y) = +Inf for y > 0	Pow(+Inf, y) = +0 for y < 0	Pow(-Inf, y) = Pow(-0, -y)	Pow(x, y) = NaN for finite x < 0 and finite non-integer y|
-| [math.Pow10](#Pow10) |Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) =    0 for n < -323	Pow10(n) = +Inf for n > 308|
-| [math.Round](#Round) |Round returns the nearest integer, rounding half away from zero.Special cases are:	Round(±0) = ±0	Round(±Inf) = ±Inf	Round(NaN) = NaN|
-| [math.RoundToEven](#RoundToEven) |RoundToEven returns the nearest integer, rounding ties to even.Special cases are:	RoundToEven(±0) = ±0	RoundToEven(±Inf) = ±Inf	RoundToEven(NaN) = NaN|
-| [math.Sqrt](#Sqrt) |Sqrt returns the square root of x.Special cases are:	Sqrt(+Inf) = +Inf	Sqrt(±0) = ±0	Sqrt(x < 0) = NaN	Sqrt(NaN) = NaN|
+| [math.Abs](#abs) |Abs returns the absolute value of x.Special cases are:	Abs(±Inf) = +Inf	Abs(NaN) = NaN|
+| [math.Ceil](#ceil) |Ceil returns the least integer value greater than or equal to x.Special cases are:	Ceil(±0) = ±0	Ceil(±Inf) = ±Inf	Ceil(NaN) = NaN|
+| [math.Floor](#floor) |Floor returns the greatest integer value less than or equal to x.Special cases are:	Floor(±0) = ±0	Floor(±Inf) = ±Inf	Floor(NaN) = NaN|
+| [math.IsNaN](#isnan) |IsNaN reports whether f is an IEEE 754 “not-a-number” value.|
+| [math.NaN](#nan) |NaN returns an IEEE 754 “not-a-number” value.|
+| [math.Pow](#pow) |Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(x, ±0) = 1 for any x	Pow(1, y) = 1 for any y	Pow(x, 1) = x for any x	...|
+| [math.Pow10](#pow10) |Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) =    0 for n &lt; -323	Pow10(n) = +Inf for n &gt; 308|
+| [math.Round](#round) |Round returns the nearest integer, rounding half away from zero.Special cases are:	Round(±0) = ±0	Round(±Inf) = ±Inf	Round(NaN) = NaN|
+| [math.RoundToEven](#roundtoeven) |RoundToEven returns the nearest integer, rounding ties to even.Special cases are:	RoundToEven(±0) = ±0	RoundToEven(±Inf) = ±Inf	RoundToEven(NaN) =...|
+| [math.Sqrt](#sqrt) |Sqrt returns the square root of x.Special cases are:	Sqrt(+Inf) = +Inf	Sqrt(±0) = ±0	Sqrt(x &lt; 0) = NaN	Sqrt(NaN) = NaN|
 
 
 ## 函数定义
-### Abs
+### abs
 
 #### 详细描述
 Abs returns the absolute value of x.Special cases are:	Abs(±Inf) = +Inf	Abs(NaN) = NaN
@@ -35,7 +35,7 @@ Abs returns the absolute value of x.Special cases are:	Abs(±Inf) = +Inf	Abs(NaN
 | r1 | `float64` |   |
 
 
-### Ceil
+### ceil
 
 #### 详细描述
 Ceil returns the least integer value greater than or equal to x.Special cases are:	Ceil(±0) = ±0	Ceil(±Inf) = ±Inf	Ceil(NaN) = NaN
@@ -55,7 +55,7 @@ Ceil returns the least integer value greater than or equal to x.Special cases ar
 | r1 | `float64` |   |
 
 
-### Floor
+### floor
 
 #### 详细描述
 Floor returns the greatest integer value less than or equal to x.Special cases are:	Floor(±0) = ±0	Floor(±Inf) = ±Inf	Floor(NaN) = NaN
@@ -75,7 +75,7 @@ Floor returns the greatest integer value less than or equal to x.Special cases a
 | r1 | `float64` |   |
 
 
-### IsNaN
+### isnan
 
 #### 详细描述
 IsNaN reports whether f is an IEEE 754 “not-a-number” value.
@@ -95,7 +95,7 @@ IsNaN reports whether f is an IEEE 754 “not-a-number” value.
 | is | `bool` |   |
 
 
-### NaN
+### nan
 
 #### 详细描述
 NaN returns an IEEE 754 “not-a-number” value.
@@ -110,10 +110,10 @@ NaN returns an IEEE 754 “not-a-number” value.
 | r1 | `float64` |   |
 
 
-### Pow
+### pow
 
 #### 详细描述
-Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(x, ±0) = 1 for any x	Pow(1, y) = 1 for any y	Pow(x, 1) = x for any x	Pow(NaN, y) = NaN	Pow(x, NaN) = NaN	Pow(±0, y) = ±Inf for y an odd integer < 0	Pow(±0, -Inf) = +Inf	Pow(±0, +Inf) = +0	Pow(±0, y) = +Inf for finite y < 0 and not an odd integer	Pow(±0, y) = ±0 for y an odd integer > 0	Pow(±0, y) = +0 for finite y > 0 and not an odd integer	Pow(-1, ±Inf) = 1	Pow(x, +Inf) = +Inf for |x| > 1	Pow(x, -Inf) = +0 for |x| > 1	Pow(x, +Inf) = +0 for |x| < 1	Pow(x, -Inf) = +Inf for |x| < 1	Pow(+Inf, y) = +Inf for y > 0	Pow(+Inf, y) = +0 for y < 0	Pow(-Inf, y) = Pow(-0, -y)	Pow(x, y) = NaN for finite x < 0 and finite non-integer y
+Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(x, ±0) = 1 for any x	Pow(1, y) = 1 for any y	Pow(x, 1) = x for any x	Pow(NaN, y) = NaN	Pow(x, NaN) = NaN	Pow(±0, y) = ±Inf for y an odd integer &lt; 0	Pow(±0, -Inf) = +Inf	Pow(±0, +Inf) = +0	Pow(±0, y) = +Inf for finite y &lt; 0 and not an odd integer	Pow(±0, y) = ±0 for y an odd integer &gt; 0	Pow(±0, y) = +0 for finite y &gt; 0 and not an odd integer	Pow(-1, ±Inf) = 1	Pow(x, +Inf) = +Inf for |x| &gt; 1	Pow(x, -Inf) = +0 for |x| &gt; 1	Pow(x, +Inf) = +0 for |x| &lt; 1	Pow(x, -Inf) = +Inf for |x| &lt; 1	Pow(+Inf, y) = +Inf for y &gt; 0	Pow(+Inf, y) = +0 for y &lt; 0	Pow(-Inf, y) = Pow(-0, -y)	Pow(x, y) = NaN for finite x &lt; 0 and finite non-integer y
 
 #### 定义
 
@@ -131,10 +131,10 @@ Pow returns x**y, the base-x exponential of y.Special cases are (in order):	Pow(
 | r1 | `float64` |   |
 
 
-### Pow10
+### pow10
 
 #### 详细描述
-Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) =    0 for n < -323	Pow10(n) = +Inf for n > 308
+Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) =    0 for n &lt; -323	Pow10(n) = +Inf for n &gt; 308
 
 #### 定义
 
@@ -151,7 +151,7 @@ Pow10 returns 10**n, the base-10 exponential of n.Special cases are:	Pow10(n) = 
 | r1 | `float64` |   |
 
 
-### Round
+### round
 
 #### 详细描述
 Round returns the nearest integer, rounding half away from zero.Special cases are:	Round(±0) = ±0	Round(±Inf) = ±Inf	Round(NaN) = NaN
@@ -171,7 +171,7 @@ Round returns the nearest integer, rounding half away from zero.Special cases ar
 | r1 | `float64` |   |
 
 
-### RoundToEven
+### roundtoeven
 
 #### 详细描述
 RoundToEven returns the nearest integer, rounding ties to even.Special cases are:	RoundToEven(±0) = ±0	RoundToEven(±Inf) = ±Inf	RoundToEven(NaN) = NaN
@@ -191,10 +191,10 @@ RoundToEven returns the nearest integer, rounding ties to even.Special cases are
 | r1 | `float64` |   |
 
 
-### Sqrt
+### sqrt
 
 #### 详细描述
-Sqrt returns the square root of x.Special cases are:	Sqrt(+Inf) = +Inf	Sqrt(±0) = ±0	Sqrt(x < 0) = NaN	Sqrt(NaN) = NaN
+Sqrt returns the square root of x.Special cases are:	Sqrt(+Inf) = +Inf	Sqrt(±0) = ±0	Sqrt(x &lt; 0) = NaN	Sqrt(NaN) = NaN
 
 #### 定义
 

@@ -2,12 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [zip.Compress](#Compress) ||
-| [zip.Decompress](#Decompress) |解压|
+| [zip.Compress](#compress) ||
+| [zip.Decompress](#decompress) |解压|
 
 
 ## 函数定义
-### Compress
+### compress
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r1 | `error` |   |
 
 
-### Decompress
+### decompress
 
 #### 详细描述
 解压

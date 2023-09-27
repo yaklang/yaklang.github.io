@@ -2,17 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [jwt.AllAlgs](#AllAlgs) ||
-| [jwt.JWSGenerate](#JWSGenerate) ||
-| [jwt.JWSGenerateEx](#JWSGenerateEx) ||
-| [jwt.JWTGenerate](#JWTGenerate) ||
-| [jwt.JWTGenerateEx](#JWTGenerateEx) ||
-| [jwt.Parse](#Parse) ||
-| [jwt.RemoveAlg](#RemoveAlg) ||
+| [jwt.AllAlgs](#allalgs) ||
+| [jwt.JWSGenerate](#jwsgenerate) ||
+| [jwt.JWSGenerateEx](#jwsgenerateex) ||
+| [jwt.JWTGenerate](#jwtgenerate) ||
+| [jwt.JWTGenerateEx](#jwtgenerateex) ||
+| [jwt.Parse](#parse) ||
+| [jwt.RemoveAlg](#removealg) ||
 
 
 ## 函数定义
-### AllAlgs
+### allalgs
 
 #### 详细描述
 
@@ -27,7 +27,7 @@
 | r1 | `[]string` |   |
 
 
-### JWSGenerate
+### jwsgenerate
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### JWSGenerateEx
+### jwsgenerateex
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r2 | `error` |   |
 
 
-### JWTGenerate
+### jwtgenerate
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### JWTGenerateEx
+### jwtgenerateex
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r2 | `error` |   |
 
 
-### Parse
+### parse
 
 #### 详细描述
 
@@ -144,7 +144,7 @@
 | r3 | `error` |   |
 
 
-### RemoveAlg
+### removealg
 
 #### 详细描述
 

@@ -2,17 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [context.Background](#Background) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.|
-| [context.New](#New) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.|
-| [context.Seconds](#Seconds) ||
-| [context.WithCancel](#WithCancel) |WithCancel returns a copy of parent with a new Done channel. The returnedcontext's Done channel is closed when the returned cancel function is calledor when the parent context's Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.|
-| [context.WithDeadline](#WithDeadline) |WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent's deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext's Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context's Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.|
-| [context.WithTimeout](#WithTimeout) |WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}|
-| [context.WithValue](#WithValue) |WithValue returns a copy of parent in which the value associated with key isval.Use context Values only for request-scoped data that transits processes andAPIs, not for passing optional parameters to functions.The provided key must be comparable and should not be of typestring or any other built-in type to avoid collisions betweenpackages using context. Users of WithValue should define their owntypes for keys. To avoid allocating when assigning to aninterface{}, context keys often have concrete typestruct{}. Alternatively, exported context key variables' statictype should be a pointer or interface.|
+| [context.Background](#background) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initia...|
+| [context.New](#new) |Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initia...|
+| [context.Seconds](#seconds) ||
+| [context.WithCancel](#withcancel) |WithCancel returns a copy of parent with a new Done channel. The returnedcontext's Done channel is closed when the returned cancel function is calledo...|
+| [context.WithDeadline](#withdeadline) |WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent's deadline is already earlier than d,...|
+| [context.WithTimeout](#withtimeout) |WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall can...|
+| [context.WithValue](#withvalue) |WithValue returns a copy of parent in which the value associated with key isval.Use context Values only for request-scoped data that transits processe...|
 
 
 ## 函数定义
-### Background
+### background
 
 #### 详细描述
 Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.
@@ -27,7 +27,7 @@ Background returns a non-nil, empty Context. It is never canceled, has novalues,
 | r1 | `Context` |   |
 
 
-### New
+### new
 
 #### 详细描述
 Background returns a non-nil, empty Context. It is never canceled, has novalues, and has no deadline. It is typically used by the main function,initialization, and tests, and as the top-level Context for incomingrequests.
@@ -42,7 +42,7 @@ Background returns a non-nil, empty Context. It is never canceled, has novalues,
 | r1 | `Context` |   |
 
 
-### Seconds
+### seconds
 
 #### 详细描述
 
@@ -62,7 +62,7 @@ Background returns a non-nil, empty Context. It is never canceled, has novalues,
 | r1 | `context.Context` |   |
 
 
-### WithCancel
+### withcancel
 
 #### 详细描述
 WithCancel returns a copy of parent with a new Done channel. The returnedcontext's Done channel is closed when the returned cancel function is calledor when the parent context's Done channel is closed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.
@@ -83,7 +83,7 @@ WithCancel returns a copy of parent with a new Done channel. The returnedcontext
 | cancel | `CancelFunc` |   |
 
 
-### WithDeadline
+### withdeadline
 
 #### 详细描述
 WithDeadline returns a copy of the parent context with the deadline adjustedto be no later than d. If the parent's deadline is already earlier than d,WithDeadline(parent, d) is semantically equivalent to parent. The returnedcontext's Done channel is closed when the deadline expires, when the returnedcancel function is called, or when the parent context's Done channel isclosed, whichever happens first.Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete.
@@ -105,7 +105,7 @@ WithDeadline returns a copy of the parent context with the deadline adjustedto b
 | r2 | `CancelFunc` |   |
 
 
-### WithTimeout
+### withtimeout
 
 #### 详细描述
 WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this context releases resources associated with it, so code shouldcall cancel as soon as the operations running in this Context complete:	func slowOperationWithTimeout(ctx context.Context) (Result, error) {		ctx, cancel := context.WithTimeout(ctx, 100*time.Millisecond)		defer cancel()  // releases resources if slowOperation completes before timeout elapses		return slowOperation(ctx)	}
@@ -127,7 +127,7 @@ WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).Canceling this
 | r2 | `CancelFunc` |   |
 
 
-### WithValue
+### withvalue
 
 #### 详细描述
 WithValue returns a copy of parent in which the value associated with key isval.Use context Values only for request-scoped data that transits processes andAPIs, not for passing optional parameters to functions.The provided key must be comparable and should not be of typestring or any other built-in type to avoid collisions betweenpackages using context. Users of WithValue should define their owntypes for keys. To avoid allocating when assigning to aninterface{}, context keys often have concrete typestruct{}. Alternatively, exported context key variables' statictype should be a pointer or interface.

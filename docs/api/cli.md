@@ -2,38 +2,38 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [cli.Args](#Args) ||
-| [cli.Bool](#Bool) ||
-| [cli.Double](#Double) ||
-| [cli.File](#File) ||
-| [cli.FileOrContent](#FileOrContent) ||
-| [cli.Float](#Float) ||
-| [cli.Have](#Have) ||
-| [cli.Host](#Host) ||
-| [cli.Hosts](#Hosts) ||
-| [cli.Int](#Int) ||
-| [cli.Integer](#Integer) ||
-| [cli.LineDict](#LineDict) ||
-| [cli.Net](#Net) ||
-| [cli.Network](#Network) ||
-| [cli.Port](#Port) ||
-| [cli.Ports](#Ports) ||
-| [cli.SetCliName](#SetCliName) ||
-| [cli.SetDoc](#SetDoc) ||
-| [cli.String](#String) ||
-| [cli.StringSlice](#StringSlice) ||
-| [cli.Url](#Url) ||
-| [cli.Urls](#Urls) ||
-| [cli.YakitPlugin](#YakitPlugin) ||
+| [cli.Args](#args) ||
+| [cli.Bool](#bool) ||
+| [cli.Double](#double) ||
+| [cli.File](#file) ||
+| [cli.FileOrContent](#fileorcontent) ||
+| [cli.Float](#float) ||
+| [cli.Have](#have) ||
+| [cli.Host](#host) ||
+| [cli.Hosts](#hosts) ||
+| [cli.Int](#int) ||
+| [cli.Integer](#integer) ||
+| [cli.LineDict](#linedict) ||
+| [cli.Net](#net) ||
+| [cli.Network](#network) ||
+| [cli.Port](#port) ||
+| [cli.Ports](#ports) ||
+| [cli.SetCliName](#setcliname) ||
+| [cli.SetDoc](#setdoc) ||
+| [cli.String](#string) ||
+| [cli.StringSlice](#stringslice) ||
+| [cli.Url](#url) ||
+| [cli.Urls](#urls) ||
+| [cli.YakitPlugin](#yakitplugin) ||
 | [cli.check](#check) ||
 | [cli.help](#help) ||
-| [cli.setDefault](#setDefault) ||
-| [cli.setHelp](#setHelp) ||
-| [cli.setRequired](#setRequired) ||
+| [cli.setDefault](#setdefault) ||
+| [cli.setHelp](#sethelp) ||
+| [cli.setRequired](#setrequired) ||
 
 
 ## 函数定义
-### Args
+### args
 
 #### 详细描述
 
@@ -48,7 +48,7 @@
 | r1 | `[]string` |   |
 
 
-### Bool
+### bool
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r1 | `bool` |   |
 
 
-### Double
+### double
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r1 | `float64` |   |
 
 
-### File
+### file
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r1 | `[]byte` |   |
 
 
-### FileOrContent
+### fileorcontent
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `[]byte` |   |
 
 
-### Float
+### float
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 | r1 | `float64` |   |
 
 
-### Have
+### have
 
 #### 详细描述
 
@@ -174,7 +174,7 @@
 | r1 | `bool` |   |
 
 
-### Host
+### host
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 | r1 | `[]string` |   |
 
 
-### Hosts
+### hosts
 
 #### 详细描述
 
@@ -216,7 +216,7 @@
 | r1 | `[]string` |   |
 
 
-### Int
+### int
 
 #### 详细描述
 
@@ -237,7 +237,7 @@
 | r1 | `int` |   |
 
 
-### Integer
+### integer
 
 #### 详细描述
 
@@ -258,7 +258,7 @@
 | r1 | `int` |   |
 
 
-### LineDict
+### linedict
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `[]string` |   |
 
 
-### Net
+### net
 
 #### 详细描述
 
@@ -300,7 +300,7 @@
 | r1 | `[]string` |   |
 
 
-### Network
+### network
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `[]string` |   |
 
 
-### Port
+### port
 
 #### 详细描述
 
@@ -342,7 +342,7 @@
 | r1 | `[]int` |   |
 
 
-### Ports
+### ports
 
 #### 详细描述
 
@@ -363,7 +363,7 @@
 | r1 | `[]int` |   |
 
 
-### SetCliName
+### setcliname
 
 #### 详细描述
 
@@ -378,7 +378,7 @@
 | name | `string` |   |
 
 
-### SetDoc
+### setdoc
 
 #### 详细描述
 
@@ -393,7 +393,7 @@
 | document | `string` |   |
 
 
-### String
+### string
 
 #### 详细描述
 
@@ -414,7 +414,7 @@
 | r1 | `string` |   |
 
 
-### StringSlice
+### stringslice
 
 #### 详细描述
 
@@ -434,7 +434,7 @@
 | r1 | `[]string` |   |
 
 
-### Url
+### url
 
 #### 详细描述
 
@@ -455,7 +455,7 @@
 | r1 | `[]string` |   |
 
 
-### Urls
+### urls
 
 #### 详细描述
 
@@ -476,7 +476,7 @@
 | r1 | `[]string` |   |
 
 
-### YakitPlugin
+### yakitplugin
 
 #### 详细描述
 
@@ -516,7 +516,7 @@
 | w | `...io.Writer` |   |
 
 
-### setDefault
+### setdefault
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### setHelp
+### sethelp
 
 #### 详细描述
 
@@ -556,7 +556,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### setRequired
+### setrequired
 
 #### 详细描述
 

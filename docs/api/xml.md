@@ -2,13 +2,13 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [xml.Escape](#Escape) ||
+| [xml.Escape](#escape) ||
 | [xml.dumps](#dumps) ||
 | [xml.loads](#loads) ||
 
 
 ## 函数定义
-### Escape
+### escape
 
 #### 详细描述
 

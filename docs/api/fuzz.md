@@ -2,28 +2,28 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [fuzz.FuzzCalcExpr](#FuzzCalcExpr) ||
-| [fuzz.HTTPRequest](#HTTPRequest) ||
-| [fuzz.MustHTTPRequest](#MustHTTPRequest) ||
-| [fuzz.ProtobufBytes](#ProtobufBytes) ||
-| [fuzz.ProtobufHex](#ProtobufHex) ||
-| [fuzz.ProtobufJSON](#ProtobufJSON) ||
-| [fuzz.ProtobufYAML](#ProtobufYAML) ||
-| [fuzz.Strings](#Strings) |fuzz|
-| [fuzz.StringsFunc](#StringsFunc) ||
-| [fuzz.StringsWithParam](#StringsWithParam) ||
-| [fuzz.UrlToHTTPRequest](#UrlToHTTPRequest) ||
-| [fuzz.UrlsToHTTPRequests](#UrlsToHTTPRequests) ||
-| [fuzz.WithConcurrentLimit](#WithConcurrentLimit) ||
-| [fuzz.WithDelay](#WithDelay) ||
-| [fuzz.WithNamingContext](#WithNamingContext) ||
-| [fuzz.WithTimeOut](#WithTimeOut) ||
+| [fuzz.FuzzCalcExpr](#fuzzcalcexpr) ||
+| [fuzz.HTTPRequest](#httprequest) ||
+| [fuzz.MustHTTPRequest](#musthttprequest) ||
+| [fuzz.ProtobufBytes](#protobufbytes) ||
+| [fuzz.ProtobufHex](#protobufhex) ||
+| [fuzz.ProtobufJSON](#protobufjson) ||
+| [fuzz.ProtobufYAML](#protobufyaml) ||
+| [fuzz.Strings](#strings) |fuzz|
+| [fuzz.StringsFunc](#stringsfunc) ||
+| [fuzz.StringsWithParam](#stringswithparam) ||
+| [fuzz.UrlToHTTPRequest](#urltohttprequest) ||
+| [fuzz.UrlsToHTTPRequests](#urlstohttprequests) ||
+| [fuzz.WithConcurrentLimit](#withconcurrentlimit) ||
+| [fuzz.WithDelay](#withdelay) ||
+| [fuzz.WithNamingContext](#withnamingcontext) ||
+| [fuzz.WithTimeOut](#withtimeout) ||
 | [fuzz.https](#https) ||
 | [fuzz.proxy](#proxy) ||
 
 
 ## 函数定义
-### FuzzCalcExpr
+### fuzzcalcexpr
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r1 | `map[string]any` |   |
 
 
-### HTTPRequest
+### httprequest
 
 #### 详细描述
 
@@ -60,7 +60,7 @@
 | r2 | `error` |   |
 
 
-### MustHTTPRequest
+### musthttprequest
 
 #### 详细描述
 
@@ -81,7 +81,7 @@
 | r1 | `*FuzzHTTPRequest` |   |
 
 
-### ProtobufBytes
+### protobufbytes
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### ProtobufHex
+### protobufhex
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### ProtobufJSON
+### protobufjson
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### ProtobufYAML
+### protobufyaml
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### Strings
+### strings
 
 #### 详细描述
 fuzz
@@ -181,7 +181,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### StringsFunc
+### stringsfunc
 
 #### 详细描述
 
@@ -203,7 +203,7 @@ fuzz
 | r1 | `error` |   |
 
 
-### StringsWithParam
+### stringswithparam
 
 #### 详细描述
 
@@ -224,7 +224,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### UrlToHTTPRequest
+### urltohttprequest
 
 #### 详细描述
 
@@ -246,7 +246,7 @@ fuzz
 | r2 | `error` |   |
 
 
-### UrlsToHTTPRequests
+### urlstohttprequests
 
 #### 详细描述
 
@@ -266,7 +266,7 @@ fuzz
 | target | `...interface` |   |
 
 
-### WithConcurrentLimit
+### withconcurrentlimit
 
 #### 详细描述
 
@@ -286,7 +286,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### WithDelay
+### withdelay
 
 #### 详细描述
 
@@ -306,7 +306,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### WithNamingContext
+### withnamingcontext
 
 #### 详细描述
 
@@ -326,7 +326,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### WithTimeOut
+### withtimeout
 
 #### 详细描述
 

@@ -2,19 +2,19 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [sync.NewCond](#NewCond) ||
-| [sync.NewLock](#NewLock) ||
-| [sync.NewMap](#NewMap) ||
-| [sync.NewMutex](#NewMutex) ||
-| [sync.NewOnce](#NewOnce) ||
-| [sync.NewPool](#NewPool) ||
-| [sync.NewRWMutex](#NewRWMutex) ||
-| [sync.NewSizedWaitGroup](#NewSizedWaitGroup) ||
-| [sync.NewWaitGroup](#NewWaitGroup) ||
+| [sync.NewCond](#newcond) ||
+| [sync.NewLock](#newlock) ||
+| [sync.NewMap](#newmap) ||
+| [sync.NewMutex](#newmutex) ||
+| [sync.NewOnce](#newonce) ||
+| [sync.NewPool](#newpool) ||
+| [sync.NewRWMutex](#newrwmutex) ||
+| [sync.NewSizedWaitGroup](#newsizedwaitgroup) ||
+| [sync.NewWaitGroup](#newwaitgroup) ||
 
 
 ## 函数定义
-### NewCond
+### newcond
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `*sync.Cond` |   |
 
 
-### NewLock
+### newlock
 
 #### 详细描述
 
@@ -44,7 +44,7 @@
 | r1 | `*sync.Mutex` |   |
 
 
-### NewMap
+### newmap
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `*sync.Map` |   |
 
 
-### NewMutex
+### newmutex
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `*sync.Mutex` |   |
 
 
-### NewOnce
+### newonce
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `*sync.Once` |   |
 
 
-### NewPool
+### newpool
 
 #### 详细描述
 
@@ -104,7 +104,7 @@
 | r1 | `*sync.Pool` |   |
 
 
-### NewRWMutex
+### newrwmutex
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `*sync.RWMutex` |   |
 
 
-### NewSizedWaitGroup
+### newsizedwaitgroup
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `*utils.SizedWaitGroup` |   |
 
 
-### NewWaitGroup
+### newwaitgroup
 
 #### 详细描述
 

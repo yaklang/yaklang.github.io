@@ -2,47 +2,47 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [os.Chdir](#Chdir) |Chdir changes the current working directory to the named directory.If there is an error, it will be of type *PathError.|
-| [os.Chmod](#Chmod) |Chmod changes the mode of the named file to mode.If the file is a symbolic link, it changes the mode of the link's target.If there is an error, it will be of type *PathError.A different subset of the mode bits are used, depending on theoperating system.On Unix, the mode's permission bits, ModeSetuid, ModeSetgid, andModeSticky are used.On Windows, only the 0200 bit (owner writable) of mode is used; itcontrols whether the file's read-only attribute is set or cleared.The other bits are currently unused. For compatibility with Go 1.12and earlier, use a non-zero mode. Use mode 0400 for a read-onlyfile and 0600 for a readable+writable file.On Plan 9, the mode's permission bits, ModeAppend, ModeExclusive,and ModeTemporary are used.|
-| [os.Chown](#Chown) |Chown changes the numeric uid and gid of the named file.If the file is a symbolic link, it changes the uid and gid of the link's target.A uid or gid of -1 means to not change that value.If there is an error, it will be of type *PathError.On Windows or Plan 9, Chown always returns the syscall.EWINDOWS orEPLAN9 error, wrapped in *PathError.|
-| [os.Clearenv](#Clearenv) |Clearenv deletes all environment variables.|
-| [os.Environ](#Environ) |Environ returns a copy of strings representing the environment,in the form "key=value".|
-| [os.Executable](#Executable) |Executable returns the path name for the executable that startedthe current process. There is no guarantee that the path is stillpointing to the correct executable. If a symlink was used to startthe process, depending on the operating system, the result mightbe the symlink or the path it pointed to. If a stable result isneeded, path/filepath.EvalSymlinks might help.Executable returns an absolute path unless an error occurred.The main use case is finding resources located relative to anexecutable.|
-| [os.Exit](#Exit) |Exit causes the current program to exit with the given status code.Conventionally, code zero indicates success, non-zero an error.The program terminates immediately; deferred functions are not run.For portability, the status code should be in the range [0, 125].|
-| [os.ExpandEnv](#ExpandEnv) |ExpandEnv replaces ${var} or $var in the string according to the valuesof the current environment variables. References to undefinedvariables are replaced by the empty string.|
-| [os.GetDefaultDNSServers](#GetDefaultDNSServers) ||
-| [os.GetMachineID](#GetMachineID) ||
-| [os.GetRandomAvailableTCPPort](#GetRandomAvailableTCPPort) ||
-| [os.GetRandomAvailableUDPPort](#GetRandomAvailableUDPPort) ||
-| [os.Getegid](#Getegid) |Getegid returns the numeric effective group id of the caller.On Windows, it returns -1.|
-| [os.Getenv](#Getenv) |Getenv retrieves the value of the environment variable named by the key.It returns the value, which will be empty if the variable is not present.To distinguish between an empty value and an unset value, use LookupEnv.|
-| [os.Geteuid](#Geteuid) |Geteuid returns the numeric effective user id of the caller.On Windows, it returns -1.|
-| [os.Getgid](#Getgid) |Getgid returns the numeric group id of the caller.On Windows, it returns -1.|
-| [os.Getpid](#Getpid) |Getpid returns the process id of the caller.|
-| [os.Getppid](#Getppid) |Getppid returns the process id of the caller's parent.|
-| [os.Getuid](#Getuid) |Getuid returns the numeric user id of the caller.On Windows, it returns -1.|
-| [os.Getwd](#Getwd) |Getwd returns a rooted path name corresponding to thecurrent directory. If the current directory can bereached via multiple paths (due to symbolic links),Getwd may return any one of them.|
-| [os.Hostname](#Hostname) |Hostname returns the host name reported by the kernel.|
-| [os.IsRemoteTCPPortOpen](#IsRemoteTCPPortOpen) ||
-| [os.IsTCPPortAvailable](#IsTCPPortAvailable) ||
-| [os.IsTCPPortOpen](#IsTCPPortOpen) ||
-| [os.IsUDPPortAvailable](#IsUDPPortAvailable) ||
-| [os.IsUDPPortOpen](#IsUDPPortOpen) ||
-| [os.LookupEnv](#LookupEnv) |LookupEnv retrieves the value of the environment variable namedby the key. If the variable is present in the environment thevalue (which may be empty) is returned and the boolean is true.Otherwise the returned value will be empty and the boolean willbe false.|
-| [os.LookupHost](#LookupHost) ||
-| [os.LookupIP](#LookupIP) ||
-| [os.Pipe](#Pipe) |Pipe returns a connected pair of Files; reads from r return bytes written to w.It returns the files and an error, if any.|
-| [os.Remove](#Remove) |Remove removes the named file or (empty) directory.If there is an error, it will be of type *PathError.|
-| [os.RemoveAll](#RemoveAll) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.|
-| [os.Rename](#Rename) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.|
-| [os.Setenv](#Setenv) |Setenv sets the value of the environment variable named by the key.It returns an error, if any.|
-| [os.TempDir](#TempDir) |TempDir returns the default directory to use for temporary files.On Unix systems, it returns $TMPDIR if non-empty, else /tmp.On Windows, it uses GetTempPath, returning the first non-emptyvalue from %TMP%, %TEMP%, %USERPROFILE%, or the Windows directory.On Plan 9, it returns /tmp.The directory is neither guaranteed to exist nor have accessiblepermissions.|
-| [os.Unsetenv](#Unsetenv) |Unsetenv unsets a single environment variable.|
-| [os.WaitConnect](#WaitConnect) ||
+| [os.Chdir](#chdir) |Chdir changes the current working directory to the named directory.If there is an error, it will be of type *PathError.|
+| [os.Chmod](#chmod) |Chmod changes the mode of the named file to mode.If the file is a symbolic link, it changes the mode of the link's target.If there is an error, it wil...|
+| [os.Chown](#chown) |Chown changes the numeric uid and gid of the named file.If the file is a symbolic link, it changes the uid and gid of the link's target.A uid or gid o...|
+| [os.Clearenv](#clearenv) |Clearenv deletes all environment variables.|
+| [os.Environ](#environ) |Environ returns a copy of strings representing the environment,in the form "key=value".|
+| [os.Executable](#executable) |Executable returns the path name for the executable that startedthe current process. There is no guarantee that the path is stillpointing to the corre...|
+| [os.Exit](#exit) |Exit causes the current program to exit with the given status code.Conventionally, code zero indicates success, non-zero an error.The program terminat...|
+| [os.ExpandEnv](#expandenv) |ExpandEnv replaces ${var} or $var in the string according to the valuesof the current environment variables. References to undefinedvariables are repl...|
+| [os.GetDefaultDNSServers](#getdefaultdnsservers) ||
+| [os.GetMachineID](#getmachineid) ||
+| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) ||
+| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) ||
+| [os.Getegid](#getegid) |Getegid returns the numeric effective group id of the caller.On Windows, it returns -1.|
+| [os.Getenv](#getenv) |Getenv retrieves the value of the environment variable named by the key.It returns the value, which will be empty if the variable is not present.To di...|
+| [os.Geteuid](#geteuid) |Geteuid returns the numeric effective user id of the caller.On Windows, it returns -1.|
+| [os.Getgid](#getgid) |Getgid returns the numeric group id of the caller.On Windows, it returns -1.|
+| [os.Getpid](#getpid) |Getpid returns the process id of the caller.|
+| [os.Getppid](#getppid) |Getppid returns the process id of the caller's parent.|
+| [os.Getuid](#getuid) |Getuid returns the numeric user id of the caller.On Windows, it returns -1.|
+| [os.Getwd](#getwd) |Getwd returns a rooted path name corresponding to thecurrent directory. If the current directory can bereached via multiple paths (due to symbolic lin...|
+| [os.Hostname](#hostname) |Hostname returns the host name reported by the kernel.|
+| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) ||
+| [os.IsTCPPortAvailable](#istcpportavailable) ||
+| [os.IsTCPPortOpen](#istcpportopen) ||
+| [os.IsUDPPortAvailable](#isudpportavailable) ||
+| [os.IsUDPPortOpen](#isudpportopen) ||
+| [os.LookupEnv](#lookupenv) |LookupEnv retrieves the value of the environment variable namedby the key. If the variable is present in the environment thevalue (which may be empty)...|
+| [os.LookupHost](#lookuphost) ||
+| [os.LookupIP](#lookupip) ||
+| [os.Pipe](#pipe) |Pipe returns a connected pair of Files; reads from r return bytes written to w.It returns the files and an error, if any.|
+| [os.Remove](#remove) |Remove removes the named file or (empty) directory.If there is an error, it will be of type *PathError.|
+| [os.RemoveAll](#removeall) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist,...|
+| [os.Rename](#rename) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when...|
+| [os.Setenv](#setenv) |Setenv sets the value of the environment variable named by the key.It returns an error, if any.|
+| [os.TempDir](#tempdir) |TempDir returns the default directory to use for temporary files.On Unix systems, it returns $TMPDIR if non-empty, else /tmp.On Windows, it uses GetTe...|
+| [os.Unsetenv](#unsetenv) |Unsetenv unsets a single environment variable.|
+| [os.WaitConnect](#waitconnect) ||
 
 
 ## 函数定义
-### Chdir
+### chdir
 
 #### 详细描述
 Chdir changes the current working directory to the named directory.If there is an error, it will be of type *PathError.
@@ -62,7 +62,7 @@ Chdir changes the current working directory to the named directory.If there is a
 | r1 | `error` |   |
 
 
-### Chmod
+### chmod
 
 #### 详细描述
 Chmod changes the mode of the named file to mode.If the file is a symbolic link, it changes the mode of the link's target.If there is an error, it will be of type *PathError.A different subset of the mode bits are used, depending on theoperating system.On Unix, the mode's permission bits, ModeSetuid, ModeSetgid, andModeSticky are used.On Windows, only the 0200 bit (owner writable) of mode is used; itcontrols whether the file's read-only attribute is set or cleared.The other bits are currently unused. For compatibility with Go 1.12and earlier, use a non-zero mode. Use mode 0400 for a read-onlyfile and 0600 for a readable+writable file.On Plan 9, the mode's permission bits, ModeAppend, ModeExclusive,and ModeTemporary are used.
@@ -83,7 +83,7 @@ Chmod changes the mode of the named file to mode.If the file is a symbolic link,
 | r1 | `error` |   |
 
 
-### Chown
+### chown
 
 #### 详细描述
 Chown changes the numeric uid and gid of the named file.If the file is a symbolic link, it changes the uid and gid of the link's target.A uid or gid of -1 means to not change that value.If there is an error, it will be of type *PathError.On Windows or Plan 9, Chown always returns the syscall.EWINDOWS orEPLAN9 error, wrapped in *PathError.
@@ -105,7 +105,7 @@ Chown changes the numeric uid and gid of the named file.If the file is a symboli
 | r1 | `error` |   |
 
 
-### Clearenv
+### clearenv
 
 #### 详细描述
 Clearenv deletes all environment variables.
@@ -115,7 +115,7 @@ Clearenv deletes all environment variables.
 `Clearenv()`
 
 
-### Environ
+### environ
 
 #### 详细描述
 Environ returns a copy of strings representing the environment,in the form "key=value".
@@ -130,7 +130,7 @@ Environ returns a copy of strings representing the environment,in the form "key=
 | r1 | `[]string` |   |
 
 
-### Executable
+### executable
 
 #### 详细描述
 Executable returns the path name for the executable that startedthe current process. There is no guarantee that the path is stillpointing to the correct executable. If a symlink was used to startthe process, depending on the operating system, the result mightbe the symlink or the path it pointed to. If a stable result isneeded, path/filepath.EvalSymlinks might help.Executable returns an absolute path unless an error occurred.The main use case is finding resources located relative to anexecutable.
@@ -146,7 +146,7 @@ Executable returns the path name for the executable that startedthe current proc
 | r2 | `error` |   |
 
 
-### Exit
+### exit
 
 #### 详细描述
 Exit causes the current program to exit with the given status code.Conventionally, code zero indicates success, non-zero an error.The program terminates immediately; deferred functions are not run.For portability, the status code should be in the range [0, 125].
@@ -161,7 +161,7 @@ Exit causes the current program to exit with the given status code.Conventionall
 | code | `int` |   |
 
 
-### ExpandEnv
+### expandenv
 
 #### 详细描述
 ExpandEnv replaces ${var} or $var in the string according to the valuesof the current environment variables. References to undefinedvariables are replaced by the empty string.
@@ -181,7 +181,7 @@ ExpandEnv replaces ${var} or $var in the string according to the valuesof the cu
 | r1 | `string` |   |
 
 
-### GetDefaultDNSServers
+### getdefaultdnsservers
 
 #### 详细描述
 
@@ -196,7 +196,7 @@ ExpandEnv replaces ${var} or $var in the string according to the valuesof the cu
 | r1 | `[]string` |   |
 
 
-### GetMachineID
+### getmachineid
 
 #### 详细描述
 
@@ -211,7 +211,7 @@ ExpandEnv replaces ${var} or $var in the string according to the valuesof the cu
 | r1 | `string` |   |
 
 
-### GetRandomAvailableTCPPort
+### getrandomavailabletcpport
 
 #### 详细描述
 
@@ -226,7 +226,7 @@ ExpandEnv replaces ${var} or $var in the string according to the valuesof the cu
 | r1 | `int` |   |
 
 
-### GetRandomAvailableUDPPort
+### getrandomavailableudpport
 
 #### 详细描述
 
@@ -241,7 +241,7 @@ ExpandEnv replaces ${var} or $var in the string according to the valuesof the cu
 | r1 | `int` |   |
 
 
-### Getegid
+### getegid
 
 #### 详细描述
 Getegid returns the numeric effective group id of the caller.On Windows, it returns -1.
@@ -256,7 +256,7 @@ Getegid returns the numeric effective group id of the caller.On Windows, it retu
 | r1 | `int` |   |
 
 
-### Getenv
+### getenv
 
 #### 详细描述
 Getenv retrieves the value of the environment variable named by the key.It returns the value, which will be empty if the variable is not present.To distinguish between an empty value and an unset value, use LookupEnv.
@@ -276,7 +276,7 @@ Getenv retrieves the value of the environment variable named by the key.It retur
 | r1 | `string` |   |
 
 
-### Geteuid
+### geteuid
 
 #### 详细描述
 Geteuid returns the numeric effective user id of the caller.On Windows, it returns -1.
@@ -291,7 +291,7 @@ Geteuid returns the numeric effective user id of the caller.On Windows, it retur
 | r1 | `int` |   |
 
 
-### Getgid
+### getgid
 
 #### 详细描述
 Getgid returns the numeric group id of the caller.On Windows, it returns -1.
@@ -306,7 +306,7 @@ Getgid returns the numeric group id of the caller.On Windows, it returns -1.
 | r1 | `int` |   |
 
 
-### Getpid
+### getpid
 
 #### 详细描述
 Getpid returns the process id of the caller.
@@ -321,7 +321,7 @@ Getpid returns the process id of the caller.
 | r1 | `int` |   |
 
 
-### Getppid
+### getppid
 
 #### 详细描述
 Getppid returns the process id of the caller's parent.
@@ -336,7 +336,7 @@ Getppid returns the process id of the caller's parent.
 | r1 | `int` |   |
 
 
-### Getuid
+### getuid
 
 #### 详细描述
 Getuid returns the numeric user id of the caller.On Windows, it returns -1.
@@ -351,7 +351,7 @@ Getuid returns the numeric user id of the caller.On Windows, it returns -1.
 | r1 | `int` |   |
 
 
-### Getwd
+### getwd
 
 #### 详细描述
 Getwd returns a rooted path name corresponding to thecurrent directory. If the current directory can bereached via multiple paths (due to symbolic links),Getwd may return any one of them.
@@ -367,7 +367,7 @@ Getwd returns a rooted path name corresponding to thecurrent directory. If the c
 | err | `error` |   |
 
 
-### Hostname
+### hostname
 
 #### 详细描述
 Hostname returns the host name reported by the kernel.
@@ -383,7 +383,7 @@ Hostname returns the host name reported by the kernel.
 | err | `error` |   |
 
 
-### IsRemoteTCPPortOpen
+### isremotetcpportopen
 
 #### 详细描述
 
@@ -404,7 +404,7 @@ Hostname returns the host name reported by the kernel.
 | r1 | `bool` |   |
 
 
-### IsTCPPortAvailable
+### istcpportavailable
 
 #### 详细描述
 
@@ -424,7 +424,7 @@ Hostname returns the host name reported by the kernel.
 | r1 | `bool` |   |
 
 
-### IsTCPPortOpen
+### istcpportopen
 
 #### 详细描述
 
@@ -444,7 +444,7 @@ Hostname returns the host name reported by the kernel.
 | r1 | `bool` |   |
 
 
-### IsUDPPortAvailable
+### isudpportavailable
 
 #### 详细描述
 
@@ -464,7 +464,7 @@ Hostname returns the host name reported by the kernel.
 | r1 | `bool` |   |
 
 
-### IsUDPPortOpen
+### isudpportopen
 
 #### 详细描述
 
@@ -484,7 +484,7 @@ Hostname returns the host name reported by the kernel.
 | r1 | `bool` |   |
 
 
-### LookupEnv
+### lookupenv
 
 #### 详细描述
 LookupEnv retrieves the value of the environment variable namedby the key. If the variable is present in the environment thevalue (which may be empty) is returned and the boolean is true.Otherwise the returned value will be empty and the boolean willbe false.
@@ -505,7 +505,7 @@ LookupEnv retrieves the value of the environment variable namedby the key. If th
 | r2 | `bool` |   |
 
 
-### LookupHost
+### lookuphost
 
 #### 详细描述
 
@@ -525,7 +525,7 @@ LookupEnv retrieves the value of the environment variable namedby the key. If th
 | r1 | `[]string` |   |
 
 
-### LookupIP
+### lookupip
 
 #### 详细描述
 
@@ -545,7 +545,7 @@ LookupEnv retrieves the value of the environment variable namedby the key. If th
 | r1 | `[]string` |   |
 
 
-### Pipe
+### pipe
 
 #### 详细描述
 Pipe returns a connected pair of Files; reads from r return bytes written to w.It returns the files and an error, if any.
@@ -562,7 +562,7 @@ Pipe returns a connected pair of Files; reads from r return bytes written to w.I
 | err | `error` |   |
 
 
-### Remove
+### remove
 
 #### 详细描述
 Remove removes the named file or (empty) directory.If there is an error, it will be of type *PathError.
@@ -582,7 +582,7 @@ Remove removes the named file or (empty) directory.If there is an error, it will
 | r1 | `error` |   |
 
 
-### RemoveAll
+### removeall
 
 #### 详细描述
 RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.
@@ -602,7 +602,7 @@ RemoveAll removes path and any children it contains.It removes everything it can
 | r1 | `error` |   |
 
 
-### Rename
+### rename
 
 #### 详细描述
 Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.
@@ -623,7 +623,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r1 | `error` |   |
 
 
-### Setenv
+### setenv
 
 #### 详细描述
 Setenv sets the value of the environment variable named by the key.It returns an error, if any.
@@ -644,7 +644,7 @@ Setenv sets the value of the environment variable named by the key.It returns an
 | r1 | `error` |   |
 
 
-### TempDir
+### tempdir
 
 #### 详细描述
 TempDir returns the default directory to use for temporary files.On Unix systems, it returns $TMPDIR if non-empty, else /tmp.On Windows, it uses GetTempPath, returning the first non-emptyvalue from %TMP%, %TEMP%, %USERPROFILE%, or the Windows directory.On Plan 9, it returns /tmp.The directory is neither guaranteed to exist nor have accessiblepermissions.
@@ -659,7 +659,7 @@ TempDir returns the default directory to use for temporary files.On Unix systems
 | r1 | `string` |   |
 
 
-### Unsetenv
+### unsetenv
 
 #### 详细描述
 Unsetenv unsets a single environment variable.
@@ -679,7 +679,7 @@ Unsetenv unsets a single environment variable.
 | r1 | `error` |   |
 
 
-### WaitConnect
+### waitconnect
 
 #### 详细描述
 

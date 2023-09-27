@@ -2,38 +2,38 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [re2.Compile](#Compile) |Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.|
-| [re2.CompilePOSIX](#CompilePOSIX) |CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.|
-| [re2.ExtractEmail](#ExtractEmail) ||
-| [re2.ExtractHostPort](#ExtractHostPort) |HOSTPORT|
-| [re2.ExtractIP](#ExtractIP) ||
-| [re2.ExtractIPv4](#ExtractIPv4) ||
-| [re2.ExtractIPv6](#ExtractIPv6) ||
-| [re2.ExtractMac](#ExtractMac) ||
-| [re2.ExtractPath](#ExtractPath) |PATHPARAM|
-| [re2.ExtractTTY](#ExtractTTY) |TTY|
-| [re2.ExtractURL](#ExtractURL) |URL|
-| [re2.Find](#Find) ||
-| [re2.FindAll](#FindAll) ||
-| [re2.FindAllIndex](#FindAllIndex) ||
-| [re2.FindGroup](#FindGroup) ||
-| [re2.FindGroupAll](#FindGroupAll) ||
-| [re2.FindIndex](#FindIndex) ||
-| [re2.FindSubmatch](#FindSubmatch) ||
-| [re2.FindSubmatchAll](#FindSubmatchAll) ||
-| [re2.FindSubmatchAllIndex](#FindSubmatchAllIndex) ||
-| [re2.FindSubmatchIndex](#FindSubmatchIndex) ||
-| [re2.Grok](#Grok) ||
-| [re2.Match](#Match) ||
-| [re2.MustCompile](#MustCompile) |MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.|
-| [re2.MustCompilePOSIX](#MustCompilePOSIX) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.|
-| [re2.QuoteMeta](#QuoteMeta) |QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.|
-| [re2.ReplaceAll](#ReplaceAll) ||
-| [re2.ReplaceAllWithFunc](#ReplaceAllWithFunc) ||
+| [re2.Compile](#compile) |Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the ...|
+| [re2.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That i...|
+| [re2.ExtractEmail](#extractemail) ||
+| [re2.ExtractHostPort](#extracthostport) |HOSTPORT|
+| [re2.ExtractIP](#extractip) ||
+| [re2.ExtractIPv4](#extractipv4) ||
+| [re2.ExtractIPv6](#extractipv6) ||
+| [re2.ExtractMac](#extractmac) ||
+| [re2.ExtractPath](#extractpath) |PATHPARAM|
+| [re2.ExtractTTY](#extracttty) |TTY|
+| [re2.ExtractURL](#extracturl) |URL|
+| [re2.Find](#find) ||
+| [re2.FindAll](#findall) ||
+| [re2.FindAllIndex](#findallindex) ||
+| [re2.FindGroup](#findgroup) ||
+| [re2.FindGroupAll](#findgroupall) ||
+| [re2.FindIndex](#findindex) ||
+| [re2.FindSubmatch](#findsubmatch) ||
+| [re2.FindSubmatchAll](#findsubmatchall) ||
+| [re2.FindSubmatchAllIndex](#findsubmatchallindex) ||
+| [re2.FindSubmatchIndex](#findsubmatchindex) ||
+| [re2.Grok](#grok) ||
+| [re2.Match](#match) ||
+| [re2.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regul...|
+| [re2.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding comp...|
+| [re2.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression mat...|
+| [re2.ReplaceAll](#replaceall) ||
+| [re2.ReplaceAllWithFunc](#replaceallwithfunc) ||
 
 
 ## 函数定义
-### Compile
+### compile
 
 #### 详细描述
 Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.
@@ -54,7 +54,7 @@ Compile parses a regular expression and returns, if successful,a Regexp object t
 | r2 | `error` |   |
 
 
-### CompilePOSIX
+### compileposix
 
 #### 详细描述
 CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
@@ -75,7 +75,7 @@ CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (e
 | r2 | `error` |   |
 
 
-### ExtractEmail
+### extractemail
 
 #### 详细描述
 
@@ -95,7 +95,7 @@ CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (e
 | r1 | `[]string` |   |
 
 
-### ExtractHostPort
+### extracthostport
 
 #### 详细描述
 HOSTPORT
@@ -115,7 +115,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### ExtractIP
+### extractip
 
 #### 详细描述
 
@@ -135,7 +135,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### ExtractIPv4
+### extractipv4
 
 #### 详细描述
 
@@ -155,7 +155,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### ExtractIPv6
+### extractipv6
 
 #### 详细描述
 
@@ -175,7 +175,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### ExtractMac
+### extractmac
 
 #### 详细描述
 
@@ -195,7 +195,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### ExtractPath
+### extractpath
 
 #### 详细描述
 PATHPARAM
@@ -215,7 +215,7 @@ PATHPARAM
 | r1 | `[]string` |   |
 
 
-### ExtractTTY
+### extracttty
 
 #### 详细描述
 TTY
@@ -235,7 +235,7 @@ TTY
 | r1 | `[]string` |   |
 
 
-### ExtractURL
+### extracturl
 
 #### 详细描述
 URL
@@ -255,7 +255,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### Find
+### find
 
 #### 详细描述
 
@@ -276,7 +276,7 @@ URL
 | r1 | `string` |   |
 
 
-### FindAll
+### findall
 
 #### 详细描述
 
@@ -297,7 +297,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### FindAllIndex
+### findallindex
 
 #### 详细描述
 
@@ -318,7 +318,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### FindGroup
+### findgroup
 
 #### 详细描述
 
@@ -339,7 +339,7 @@ URL
 | r1 | `map[string]string` |   |
 
 
-### FindGroupAll
+### findgroupall
 
 #### 详细描述
 
@@ -360,7 +360,7 @@ URL
 | r1 | `[]map[string]string` |   |
 
 
-### FindIndex
+### findindex
 
 #### 详细描述
 
@@ -381,7 +381,7 @@ URL
 | r1 | `[]int` |   |
 
 
-### FindSubmatch
+### findsubmatch
 
 #### 详细描述
 
@@ -402,7 +402,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### FindSubmatchAll
+### findsubmatchall
 
 #### 详细描述
 
@@ -423,7 +423,7 @@ URL
 | r1 | `[][]string` |   |
 
 
-### FindSubmatchAllIndex
+### findsubmatchallindex
 
 #### 详细描述
 
@@ -444,7 +444,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### FindSubmatchIndex
+### findsubmatchindex
 
 #### 详细描述
 
@@ -465,7 +465,7 @@ URL
 | r1 | `[]int` |   |
 
 
-### Grok
+### grok
 
 #### 详细描述
 
@@ -486,7 +486,7 @@ URL
 | r1 | `GrokResult` |   |
 
 
-### Match
+### match
 
 #### 详细描述
 
@@ -507,7 +507,7 @@ URL
 | r1 | `bool` |   |
 
 
-### MustCompile
+### mustcompile
 
 #### 详细描述
 MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
@@ -527,7 +527,7 @@ MustCompile is like Compile but panics if the expression cannot be parsed.It sim
 | r1 | `*Regexp` |   |
 
 
-### MustCompilePOSIX
+### mustcompileposix
 
 #### 详细描述
 MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
@@ -547,7 +547,7 @@ MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be par
 | r1 | `*Regexp` |   |
 
 
-### QuoteMeta
+### quotemeta
 
 #### 详细描述
 QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.
@@ -567,7 +567,7 @@ QuoteMeta returns a string that escapes all regular expression metacharactersins
 | r1 | `string` |   |
 
 
-### ReplaceAll
+### replaceall
 
 #### 详细描述
 
@@ -589,7 +589,7 @@ QuoteMeta returns a string that escapes all regular expression metacharactersins
 | r1 | `string` |   |
 
 
-### ReplaceAllWithFunc
+### replaceallwithfunc
 
 #### 详细描述
 

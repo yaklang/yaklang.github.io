@@ -2,36 +2,36 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [crawler.RequestsFromFlow](#RequestsFromFlow) ||
-| [crawler.Start](#Start) ||
-| [crawler.autoLogin](#autoLogin) ||
-| [crawler.basicAuth](#basicAuth) ||
-| [crawler.bodySize](#bodySize) ||
+| [crawler.RequestsFromFlow](#requestsfromflow) ||
+| [crawler.Start](#start) ||
+| [crawler.autoLogin](#autologin) ||
+| [crawler.basicAuth](#basicauth) ||
+| [crawler.bodySize](#bodysize) ||
 | [crawler.concurrent](#concurrent) ||
-| [crawler.connectTimeout](#connectTimeout) ||
+| [crawler.connectTimeout](#connecttimeout) ||
 | [crawler.cookie](#cookie) ||
-| [crawler.disallowSuffix](#disallowSuffix) ||
-| [crawler.domainExclude](#domainExclude) ||
-| [crawler.domainInclude](#domainInclude) ||
-| [crawler.forbiddenFromParent](#forbiddenFromParent) ||
+| [crawler.disallowSuffix](#disallowsuffix) ||
+| [crawler.domainExclude](#domainexclude) ||
+| [crawler.domainInclude](#domaininclude) ||
+| [crawler.forbiddenFromParent](#forbiddenfromparent) ||
 | [crawler.header](#header) ||
-| [crawler.maxDepth](#maxDepth) ||
-| [crawler.maxRedirect](#maxRedirect) ||
-| [crawler.maxRequest](#maxRequest) ||
-| [crawler.maxRetry](#maxRetry) ||
-| [crawler.maxUrls](#maxUrls) ||
+| [crawler.maxDepth](#maxdepth) ||
+| [crawler.maxRedirect](#maxredirect) ||
+| [crawler.maxRequest](#maxrequest) ||
+| [crawler.maxRetry](#maxretry) ||
+| [crawler.maxUrls](#maxurls) ||
 | [crawler.proxy](#proxy) ||
-| [crawler.responseTimeout](#responseTimeout) ||
+| [crawler.responseTimeout](#responsetimeout) ||
 | [crawler.timeout](#timeout) ||
 | [crawler.ua](#ua) ||
-| [crawler.urlExtractor](#urlExtractor) ||
-| [crawler.urlRegexpExclude](#urlRegexpExclude) ||
-| [crawler.urlRegexpInclude](#urlRegexpInclude) ||
-| [crawler.userAgent](#userAgent) ||
+| [crawler.urlExtractor](#urlextractor) ||
+| [crawler.urlRegexpExclude](#urlregexpexclude) ||
+| [crawler.urlRegexpInclude](#urlregexpinclude) ||
+| [crawler.userAgent](#useragent) ||
 
 
 ## 函数定义
-### RequestsFromFlow
+### requestsfromflow
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### Start
+### start
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### autoLogin
+### autologin
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r1 | `configOpt` |   |
 
 
-### basicAuth
+### basicauth
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `configOpt` |   |
 
 
-### bodySize
+### bodysize
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `configOpt` |   |
 
 
-### connectTimeout
+### connecttimeout
 
 #### 详细描述
 
@@ -200,7 +200,7 @@
 | r1 | `configOpt` |   |
 
 
-### disallowSuffix
+### disallowsuffix
 
 #### 详细描述
 
@@ -220,7 +220,7 @@
 | r1 | `configOpt` |   |
 
 
-### domainExclude
+### domainexclude
 
 #### 详细描述
 
@@ -240,7 +240,7 @@
 | r1 | `configOpt` |   |
 
 
-### domainInclude
+### domaininclude
 
 #### 详细描述
 
@@ -260,7 +260,7 @@
 | r1 | `configOpt` |   |
 
 
-### forbiddenFromParent
+### forbiddenfromparent
 
 #### 详细描述
 
@@ -301,7 +301,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxDepth
+### maxdepth
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxRedirect
+### maxredirect
 
 #### 详细描述
 
@@ -341,7 +341,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxRequest
+### maxrequest
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxRetry
+### maxretry
 
 #### 详细描述
 
@@ -381,7 +381,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxUrls
+### maxurls
 
 #### 详细描述
 
@@ -421,7 +421,7 @@
 | r1 | `configOpt` |   |
 
 
-### responseTimeout
+### responsetimeout
 
 #### 详细描述
 
@@ -481,7 +481,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlExtractor
+### urlextractor
 
 #### 详细描述
 
@@ -501,7 +501,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlRegexpExclude
+### urlregexpexclude
 
 #### 详细描述
 
@@ -521,7 +521,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlRegexpInclude
+### urlregexpinclude
 
 #### 详细描述
 
@@ -541,7 +541,7 @@
 | r1 | `configOpt` |   |
 
 
-### userAgent
+### useragent
 
 #### 详细描述
 

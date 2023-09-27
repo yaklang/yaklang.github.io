@@ -2,18 +2,18 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [hids.CPUAverageCallback](#CPUAverageCallback) ||
-| [hids.CPUPercent](#CPUPercent) ||
-| [hids.CPUPercentCallback](#CPUPercentCallback) ||
-| [hids.Init](#Init) ||
-| [hids.MemoryPercent](#MemoryPercent) ||
-| [hids.MemoryPercentCallback](#MemoryPercentCallback) ||
-| [hids.SetMonitorInterval](#SetMonitorInterval) ||
-| [hids.ShowMonitorInterval](#ShowMonitorInterval) ||
+| [hids.CPUAverageCallback](#cpuaveragecallback) ||
+| [hids.CPUPercent](#cpupercent) ||
+| [hids.CPUPercentCallback](#cpupercentcallback) ||
+| [hids.Init](#init) ||
+| [hids.MemoryPercent](#memorypercent) ||
+| [hids.MemoryPercentCallback](#memorypercentcallback) ||
+| [hids.SetMonitorInterval](#setmonitorinterval) ||
+| [hids.ShowMonitorInterval](#showmonitorinterval) ||
 
 
 ## 函数定义
-### CPUAverageCallback
+### cpuaveragecallback
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | callback | `func(i float64)` |   |
 
 
-### CPUPercent
+### cpupercent
 
 #### 详细描述
 
@@ -43,7 +43,7 @@
 | r1 | `float64` |   |
 
 
-### CPUPercentCallback
+### cpupercentcallback
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 | callback | `func(i float64)` |   |
 
 
-### Init
+### init
 
 #### 详细描述
 
@@ -68,7 +68,7 @@
 `Init()`
 
 
-### MemoryPercent
+### memorypercent
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r1 | `float64` |   |
 
 
-### MemoryPercentCallback
+### memorypercentcallback
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | callback | `func(i float64)` |   |
 
 
-### SetMonitorInterval
+### setmonitorinterval
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | i | `float64` |   |
 
 
-### ShowMonitorInterval
+### showmonitorinterval
 
 #### 详细描述
 

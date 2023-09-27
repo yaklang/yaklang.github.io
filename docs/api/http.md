@@ -2,19 +2,19 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [http.Do](#Do) ||
-| [http.Get](#Get) ||
-| [http.GetAllBody](#GetAllBody) ||
-| [http.NewRequest](#NewRequest) ||
-| [http.Post](#Post) ||
-| [http.Raw](#Raw) ||
-| [http.Request](#Request) ||
-| [http.RequestFaviconHash](#RequestFaviconHash) ||
-| [http.RequestToMD5](#RequestToMD5) ||
-| [http.RequestToMMH3Hash128](#RequestToMMH3Hash128) ||
-| [http.RequestToMMH3Hash128x64](#RequestToMMH3Hash128x64) ||
-| [http.RequestToSha1](#RequestToSha1) ||
-| [http.RequestToSha256](#RequestToSha256) ||
+| [http.Do](#do) ||
+| [http.Get](#get) ||
+| [http.GetAllBody](#getallbody) ||
+| [http.NewRequest](#newrequest) ||
+| [http.Post](#post) ||
+| [http.Raw](#raw) ||
+| [http.Request](#request) ||
+| [http.RequestFaviconHash](#requestfaviconhash) ||
+| [http.RequestToMD5](#requesttomd5) ||
+| [http.RequestToMMH3Hash128](#requesttommh3hash128) ||
+| [http.RequestToMMH3Hash128x64](#requesttommh3hash128x64) ||
+| [http.RequestToSha1](#requesttosha1) ||
+| [http.RequestToSha256](#requesttosha256) ||
 | [http.body](#body) ||
 | [http.cookie](#cookie) ||
 | [http.dump](#dump) ||
@@ -37,7 +37,7 @@
 
 
 ## 函数定义
-### Do
+### do
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 | r2 | `error` |   |
 
 
-### Get
+### get
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r2 | `error` |   |
 
 
-### GetAllBody
+### getallbody
 
 #### 详细描述
 
@@ -100,7 +100,7 @@
 | r1 | `[]byte` |   |
 
 
-### NewRequest
+### newrequest
 
 #### 详细描述
 
@@ -123,7 +123,7 @@
 | r2 | `error` |   |
 
 
-### Post
+### post
 
 #### 详细描述
 
@@ -145,7 +145,7 @@
 | r2 | `error` |   |
 
 
-### Raw
+### raw
 
 #### 详细描述
 
@@ -166,7 +166,7 @@
 | r2 | `error` |   |
 
 
-### Request
+### request
 
 #### 详细描述
 
@@ -189,7 +189,7 @@
 | r2 | `error` |   |
 
 
-### RequestFaviconHash
+### requestfaviconhash
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r2 | `error` |   |
 
 
-### RequestToMD5
+### requesttomd5
 
 #### 详细描述
 
@@ -231,7 +231,7 @@
 | r2 | `error` |   |
 
 
-### RequestToMMH3Hash128
+### requesttommh3hash128
 
 #### 详细描述
 
@@ -252,7 +252,7 @@
 | r2 | `error` |   |
 
 
-### RequestToMMH3Hash128x64
+### requesttommh3hash128x64
 
 #### 详细描述
 
@@ -273,7 +273,7 @@
 | r2 | `error` |   |
 
 
-### RequestToSha1
+### requesttosha1
 
 #### 详细描述
 
@@ -294,7 +294,7 @@
 | r2 | `error` |   |
 
 
-### RequestToSha256
+### requesttosha256
 
 #### 详细描述
 

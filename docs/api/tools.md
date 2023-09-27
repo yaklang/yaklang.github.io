@@ -2,12 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [tools.NewBruteUtil](#NewBruteUtil) ||
-| [tools.NewPocInvoker](#NewPocInvoker) ||
+| [tools.NewBruteUtil](#newbruteutil) ||
+| [tools.NewPocInvoker](#newpocinvoker) ||
 
 
 ## 函数定义
-### NewBruteUtil
+### newbruteutil
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### NewPocInvoker
+### newpocinvoker
 
 #### 详细描述
 

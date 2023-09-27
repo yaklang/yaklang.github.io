@@ -2,16 +2,16 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [dyn.Eval](#Eval) ||
-| [dyn.Import](#Import) ||
-| [dyn.IsYakFunc](#IsYakFunc) ||
-| [dyn.LoadVarFromFile](#LoadVarFromFile) ||
+| [dyn.Eval](#eval) ||
+| [dyn.Import](#import) ||
+| [dyn.IsYakFunc](#isyakfunc) ||
+| [dyn.LoadVarFromFile](#loadvarfromfile) ||
 | [dyn.params](#params) ||
 | [dyn.recursive](#recursive) ||
 
 
 ## 函数定义
-### Eval
+### eval
 
 #### 详细描述
 
@@ -31,7 +31,7 @@
 | r1 | `error` |   |
 
 
-### Import
+### import
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r2 | `error` |   |
 
 
-### IsYakFunc
+### isyakfunc
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r1 | `bool` |   |
 
 
-### LoadVarFromFile
+### loadvarfromfile
 
 #### 详细描述
 

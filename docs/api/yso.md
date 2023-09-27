@@ -2,100 +2,100 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [yso.GenerateClassObjectFromBytes](#GenerateClassObjectFromBytes) ||
-| [yso.GenerateDNSlogEvilClassObject](#GenerateDNSlogEvilClassObject) |dnslog生成|
-| [yso.GenerateHeaderEchoClassObject](#GenerateHeaderEchoClassObject) ||
-| [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#GenerateModifyTomcatMaxHeaderSizeEvilClassObject) ||
-| [yso.GenerateMultiEchoClassObject](#GenerateMultiEchoClassObject) ||
-| [yso.GenerateProcessBuilderExecEvilClassObject](#GenerateProcessBuilderExecEvilClassObject) ||
-| [yso.GenerateProcessImplExecEvilClassObject](#GenerateProcessImplExecEvilClassObject) ||
-| [yso.GenerateRuntimeExecEvilClassObject](#GenerateRuntimeExecEvilClassObject) ||
-| [yso.GenerateSleepClassObject](#GenerateSleepClassObject) ||
-| [yso.GenerateSpringEchoEvilClassObject](#GenerateSpringEchoEvilClassObject) |spring生成|
-| [yso.GenerateTcpReverseEvilClassObject](#GenerateTcpReverseEvilClassObject) ||
-| [yso.GenerateTcpReverseShellEvilClassObject](#GenerateTcpReverseShellEvilClassObject) ||
-| [yso.GenerateTomcatEchoClassObject](#GenerateTomcatEchoClassObject) ||
-| [yso.GetAllGadget](#GetAllGadget) ||
-| [yso.GetAllRuntimeExecGadget](#GetAllRuntimeExecGadget) ||
-| [yso.GetAllTemplatesGadget](#GetAllTemplatesGadget) ||
-| [yso.GetBeanShell1JavaObject](#GetBeanShell1JavaObject) ||
-| [yso.GetClick1JavaObject](#GetClick1JavaObject) ||
-| [yso.GetCommonsBeanutils183NOCCJavaObject](#GetCommonsBeanutils183NOCCJavaObject) ||
-| [yso.GetCommonsBeanutils192NOCCJavaObject](#GetCommonsBeanutils192NOCCJavaObject) ||
-| [yso.GetCommonsBeanutils1JavaObject](#GetCommonsBeanutils1JavaObject) ||
-| [yso.GetCommonsCollections1JavaObject](#GetCommonsCollections1JavaObject) ||
-| [yso.GetCommonsCollections2JavaObject](#GetCommonsCollections2JavaObject) ||
-| [yso.GetCommonsCollections3JavaObject](#GetCommonsCollections3JavaObject) ||
-| [yso.GetCommonsCollections4JavaObject](#GetCommonsCollections4JavaObject) ||
-| [yso.GetCommonsCollections5JavaObject](#GetCommonsCollections5JavaObject) ||
-| [yso.GetCommonsCollections6JavaObject](#GetCommonsCollections6JavaObject) ||
-| [yso.GetCommonsCollections7JavaObject](#GetCommonsCollections7JavaObject) ||
-| [yso.GetCommonsCollections8JavaObject](#GetCommonsCollections8JavaObject) ||
-| [yso.GetCommonsCollectionsK1JavaObject](#GetCommonsCollectionsK1JavaObject) ||
-| [yso.GetCommonsCollectionsK2JavaObject](#GetCommonsCollectionsK2JavaObject) ||
-| [yso.GetCommonsCollectionsK3JavaObject](#GetCommonsCollectionsK3JavaObject) ||
-| [yso.GetCommonsCollectionsK4JavaObject](#GetCommonsCollectionsK4JavaObject) ||
-| [yso.GetFindGadgetByDNSJavaObject](#GetFindGadgetByDNSJavaObject) ||
-| [yso.GetGadgetNameByFun](#GetGadgetNameByFun) ||
-| [yso.GetGroovy1JavaObject](#GetGroovy1JavaObject) ||
-| [yso.GetJBossInterceptors1JavaObject](#GetJBossInterceptors1JavaObject) ||
-| [yso.GetJSON1JavaObject](#GetJSON1JavaObject) ||
-| [yso.GetJavaObjectFromBytes](#GetJavaObjectFromBytes) ||
-| [yso.GetJavassistWeld1JavaObject](#GetJavassistWeld1JavaObject) ||
-| [yso.GetJdk7u21JavaObject](#GetJdk7u21JavaObject) ||
-| [yso.GetJdk8u20JavaObject](#GetJdk8u20JavaObject) ||
-| [yso.GetSimplePrincipalCollectionJavaObject](#GetSimplePrincipalCollectionJavaObject) ||
-| [yso.GetURLDNSJavaObject](#GetURLDNSJavaObject) ||
-| [yso.LoadClassFromBCEL](#LoadClassFromBCEL) ||
-| [yso.LoadClassFromBase64](#LoadClassFromBase64) ||
-| [yso.LoadClassFromBytes](#LoadClassFromBytes) ||
-| [yso.ToBcel](#ToBcel) ||
-| [yso.ToBytes](#ToBytes) ||
-| [yso.ToJson](#ToJson) ||
+| [yso.GenerateClassObjectFromBytes](#generateclassobjectfrombytes) ||
+| [yso.GenerateDNSlogEvilClassObject](#generatednslogevilclassobject) |dnslog生成|
+| [yso.GenerateHeaderEchoClassObject](#generateheaderechoclassobject) ||
+| [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#generatemodifytomcatmaxheadersizeevilclassobject) ||
+| [yso.GenerateMultiEchoClassObject](#generatemultiechoclassobject) ||
+| [yso.GenerateProcessBuilderExecEvilClassObject](#generateprocessbuilderexecevilclassobject) ||
+| [yso.GenerateProcessImplExecEvilClassObject](#generateprocessimplexecevilclassobject) ||
+| [yso.GenerateRuntimeExecEvilClassObject](#generateruntimeexecevilclassobject) ||
+| [yso.GenerateSleepClassObject](#generatesleepclassobject) ||
+| [yso.GenerateSpringEchoEvilClassObject](#generatespringechoevilclassobject) |spring生成|
+| [yso.GenerateTcpReverseEvilClassObject](#generatetcpreverseevilclassobject) ||
+| [yso.GenerateTcpReverseShellEvilClassObject](#generatetcpreverseshellevilclassobject) ||
+| [yso.GenerateTomcatEchoClassObject](#generatetomcatechoclassobject) ||
+| [yso.GetAllGadget](#getallgadget) ||
+| [yso.GetAllRuntimeExecGadget](#getallruntimeexecgadget) ||
+| [yso.GetAllTemplatesGadget](#getalltemplatesgadget) ||
+| [yso.GetBeanShell1JavaObject](#getbeanshell1javaobject) ||
+| [yso.GetClick1JavaObject](#getclick1javaobject) ||
+| [yso.GetCommonsBeanutils183NOCCJavaObject](#getcommonsbeanutils183noccjavaobject) ||
+| [yso.GetCommonsBeanutils192NOCCJavaObject](#getcommonsbeanutils192noccjavaobject) ||
+| [yso.GetCommonsBeanutils1JavaObject](#getcommonsbeanutils1javaobject) ||
+| [yso.GetCommonsCollections1JavaObject](#getcommonscollections1javaobject) ||
+| [yso.GetCommonsCollections2JavaObject](#getcommonscollections2javaobject) ||
+| [yso.GetCommonsCollections3JavaObject](#getcommonscollections3javaobject) ||
+| [yso.GetCommonsCollections4JavaObject](#getcommonscollections4javaobject) ||
+| [yso.GetCommonsCollections5JavaObject](#getcommonscollections5javaobject) ||
+| [yso.GetCommonsCollections6JavaObject](#getcommonscollections6javaobject) ||
+| [yso.GetCommonsCollections7JavaObject](#getcommonscollections7javaobject) ||
+| [yso.GetCommonsCollections8JavaObject](#getcommonscollections8javaobject) ||
+| [yso.GetCommonsCollectionsK1JavaObject](#getcommonscollectionsk1javaobject) ||
+| [yso.GetCommonsCollectionsK2JavaObject](#getcommonscollectionsk2javaobject) ||
+| [yso.GetCommonsCollectionsK3JavaObject](#getcommonscollectionsk3javaobject) ||
+| [yso.GetCommonsCollectionsK4JavaObject](#getcommonscollectionsk4javaobject) ||
+| [yso.GetFindGadgetByDNSJavaObject](#getfindgadgetbydnsjavaobject) ||
+| [yso.GetGadgetNameByFun](#getgadgetnamebyfun) ||
+| [yso.GetGroovy1JavaObject](#getgroovy1javaobject) ||
+| [yso.GetJBossInterceptors1JavaObject](#getjbossinterceptors1javaobject) ||
+| [yso.GetJSON1JavaObject](#getjson1javaobject) ||
+| [yso.GetJavaObjectFromBytes](#getjavaobjectfrombytes) ||
+| [yso.GetJavassistWeld1JavaObject](#getjavassistweld1javaobject) ||
+| [yso.GetJdk7u21JavaObject](#getjdk7u21javaobject) ||
+| [yso.GetJdk8u20JavaObject](#getjdk8u20javaobject) ||
+| [yso.GetSimplePrincipalCollectionJavaObject](#getsimpleprincipalcollectionjavaobject) ||
+| [yso.GetURLDNSJavaObject](#geturldnsjavaobject) ||
+| [yso.LoadClassFromBCEL](#loadclassfrombcel) ||
+| [yso.LoadClassFromBase64](#loadclassfrombase64) ||
+| [yso.LoadClassFromBytes](#loadclassfrombytes) ||
+| [yso.ToBcel](#tobcel) ||
+| [yso.ToBytes](#tobytes) ||
+| [yso.ToJson](#tojson) ||
 | [yso.command](#command) ||
-| [yso.dnslogDomain](#dnslogDomain) ||
+| [yso.dnslogDomain](#dnslogdomain) ||
 | [yso.dump](#dump) ||
-| [yso.evilClassName](#evilClassName) |公共参数|
-| [yso.obfuscationClassConstantPool](#obfuscationClassConstantPool) ||
-| [yso.springEchoBody](#springEchoBody) ||
-| [yso.springHeader](#springHeader) ||
-| [yso.springParam](#springParam) ||
-| [yso.springRuntimeExecAction](#springRuntimeExecAction) ||
-| [yso.tcpReverseHost](#tcpReverseHost) ||
-| [yso.tcpReversePort](#tcpReversePort) ||
-| [yso.tcpReverseToken](#tcpReverseToken) ||
-| [yso.useBase64BytesClass](#useBase64BytesClass) ||
-| [yso.useBytesClass](#useBytesClass) ||
-| [yso.useBytesEvilClass](#useBytesEvilClass) |生成自定义Class|
-| [yso.useClassMultiEchoTemplate](#useClassMultiEchoTemplate) |MultiEcho|
-| [yso.useConstructorExecutor](#useConstructorExecutor) ||
-| [yso.useDNSLogEvilClass](#useDNSLogEvilClass) ||
-| [yso.useDNSlogTemplate](#useDNSlogTemplate) |dnslog参数|
-| [yso.useHeaderEchoEvilClass](#useHeaderEchoEvilClass) ||
-| [yso.useHeaderEchoTemplate](#useHeaderEchoTemplate) |HeaderEchoClass|
-| [yso.useHeaderParam](#useHeaderParam) ||
-| [yso.useModifyTomcatMaxHeaderSizeTemplate](#useModifyTomcatMaxHeaderSizeTemplate) |ModifyTomcatMaxHeaderSize|
-| [yso.useMultiEchoEvilClass](#useMultiEchoEvilClass) ||
-| [yso.useProcessBuilderExecEvilClass](#useProcessBuilderExecEvilClass) ||
-| [yso.useProcessBuilderExecTemplate](#useProcessBuilderExecTemplate) |ProcessBuilderExec 参数|
-| [yso.useProcessImplExecEvilClass](#useProcessImplExecEvilClass) ||
-| [yso.useProcessImplExecTemplate](#useProcessImplExecTemplate) |ProcessImplExec 参数|
-| [yso.useRuntimeExecEvilClass](#useRuntimeExecEvilClass) ||
-| [yso.useRuntimeExecTemplate](#useRuntimeExecTemplate) |RuntimeExec 参数|
-| [yso.useSleepEvilClass](#useSleepEvilClass) ||
-| [yso.useSleepTemplate](#useSleepTemplate) |SleepClass|
-| [yso.useSleepTime](#useSleepTime) ||
-| [yso.useSpringEchoTemplate](#useSpringEchoTemplate) |spring参数|
-| [yso.useTcpReverseEvilClass](#useTcpReverseEvilClass) ||
-| [yso.useTcpReverseShellEvilClass](#useTcpReverseShellEvilClass) ||
-| [yso.useTcpReverseShellTemplate](#useTcpReverseShellTemplate) |生成tcp反弹shell|
-| [yso.useTcpReverseTemplate](#useTcpReverseTemplate) |生成tcp反连|
-| [yso.useTomcatEchoEvilClass](#useTomcatEchoEvilClass) ||
-| [yso.useTomcatEchoTemplate](#useTomcatEchoTemplate) |Tomcat回显|
+| [yso.evilClassName](#evilclassname) |公共参数|
+| [yso.obfuscationClassConstantPool](#obfuscationclassconstantpool) ||
+| [yso.springEchoBody](#springechobody) ||
+| [yso.springHeader](#springheader) ||
+| [yso.springParam](#springparam) ||
+| [yso.springRuntimeExecAction](#springruntimeexecaction) ||
+| [yso.tcpReverseHost](#tcpreversehost) ||
+| [yso.tcpReversePort](#tcpreverseport) ||
+| [yso.tcpReverseToken](#tcpreversetoken) ||
+| [yso.useBase64BytesClass](#usebase64bytesclass) ||
+| [yso.useBytesClass](#usebytesclass) ||
+| [yso.useBytesEvilClass](#usebytesevilclass) |生成自定义Class|
+| [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) |MultiEcho|
+| [yso.useConstructorExecutor](#useconstructorexecutor) ||
+| [yso.useDNSLogEvilClass](#usednslogevilclass) ||
+| [yso.useDNSlogTemplate](#usednslogtemplate) |dnslog参数|
+| [yso.useHeaderEchoEvilClass](#useheaderechoevilclass) ||
+| [yso.useHeaderEchoTemplate](#useheaderechotemplate) |HeaderEchoClass|
+| [yso.useHeaderParam](#useheaderparam) ||
+| [yso.useModifyTomcatMaxHeaderSizeTemplate](#usemodifytomcatmaxheadersizetemplate) |ModifyTomcatMaxHeaderSize|
+| [yso.useMultiEchoEvilClass](#usemultiechoevilclass) ||
+| [yso.useProcessBuilderExecEvilClass](#useprocessbuilderexecevilclass) ||
+| [yso.useProcessBuilderExecTemplate](#useprocessbuilderexectemplate) |ProcessBuilderExec 参数|
+| [yso.useProcessImplExecEvilClass](#useprocessimplexecevilclass) ||
+| [yso.useProcessImplExecTemplate](#useprocessimplexectemplate) |ProcessImplExec 参数|
+| [yso.useRuntimeExecEvilClass](#useruntimeexecevilclass) ||
+| [yso.useRuntimeExecTemplate](#useruntimeexectemplate) |RuntimeExec 参数|
+| [yso.useSleepEvilClass](#usesleepevilclass) ||
+| [yso.useSleepTemplate](#usesleeptemplate) |SleepClass|
+| [yso.useSleepTime](#usesleeptime) ||
+| [yso.useSpringEchoTemplate](#usespringechotemplate) |spring参数|
+| [yso.useTcpReverseEvilClass](#usetcpreverseevilclass) ||
+| [yso.useTcpReverseShellEvilClass](#usetcpreverseshellevilclass) ||
+| [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) |生成tcp反弹shell|
+| [yso.useTcpReverseTemplate](#usetcpreversetemplate) |生成tcp反连|
+| [yso.useTomcatEchoEvilClass](#usetomcatechoevilclass) ||
+| [yso.useTomcatEchoTemplate](#usetomcatechotemplate) |Tomcat回显|
 
 
 ## 函数定义
-### GenerateClassObjectFromBytes
+### generateclassobjectfrombytes
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r2 | `error` |   |
 
 
-### GenerateDNSlogEvilClassObject
+### generatednslogevilclassobject
 
 #### 详细描述
 dnslog生成
@@ -139,7 +139,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateHeaderEchoClassObject
+### generateheaderechoclassobject
 
 #### 详细描述
 
@@ -160,7 +160,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateModifyTomcatMaxHeaderSizeEvilClassObject
+### generatemodifytomcatmaxheadersizeevilclassobject
 
 #### 详细描述
 
@@ -181,7 +181,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateMultiEchoClassObject
+### generatemultiechoclassobject
 
 #### 详细描述
 
@@ -202,7 +202,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateProcessBuilderExecEvilClassObject
+### generateprocessbuilderexecevilclassobject
 
 #### 详细描述
 
@@ -224,7 +224,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateProcessImplExecEvilClassObject
+### generateprocessimplexecevilclassobject
 
 #### 详细描述
 
@@ -246,7 +246,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateRuntimeExecEvilClassObject
+### generateruntimeexecevilclassobject
 
 #### 详细描述
 
@@ -268,7 +268,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateSleepClassObject
+### generatesleepclassobject
 
 #### 详细描述
 
@@ -289,7 +289,7 @@ dnslog生成
 | r2 | `error` |   |
 
 
-### GenerateSpringEchoEvilClassObject
+### generatespringechoevilclassobject
 
 #### 详细描述
 spring生成
@@ -310,7 +310,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GenerateTcpReverseEvilClassObject
+### generatetcpreverseevilclassobject
 
 #### 详细描述
 
@@ -333,7 +333,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GenerateTcpReverseShellEvilClassObject
+### generatetcpreverseshellevilclassobject
 
 #### 详细描述
 
@@ -356,7 +356,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GenerateTomcatEchoClassObject
+### generatetomcatechoclassobject
 
 #### 详细描述
 
@@ -377,7 +377,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetAllGadget
+### getallgadget
 
 #### 详细描述
 
@@ -392,7 +392,7 @@ spring生成
 | r1 | `[]any` |   |
 
 
-### GetAllRuntimeExecGadget
+### getallruntimeexecgadget
 
 #### 详细描述
 
@@ -407,7 +407,7 @@ spring生成
 | r1 | `[]RuntimeExecGadget` |   |
 
 
-### GetAllTemplatesGadget
+### getalltemplatesgadget
 
 #### 详细描述
 
@@ -422,7 +422,7 @@ spring生成
 | r1 | `[]TemplatesGadget` |   |
 
 
-### GetBeanShell1JavaObject
+### getbeanshell1javaobject
 
 #### 详细描述
 
@@ -443,7 +443,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetClick1JavaObject
+### getclick1javaobject
 
 #### 详细描述
 
@@ -464,7 +464,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsBeanutils183NOCCJavaObject
+### getcommonsbeanutils183noccjavaobject
 
 #### 详细描述
 
@@ -485,7 +485,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsBeanutils192NOCCJavaObject
+### getcommonsbeanutils192noccjavaobject
 
 #### 详细描述
 
@@ -506,7 +506,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsBeanutils1JavaObject
+### getcommonsbeanutils1javaobject
 
 #### 详细描述
 
@@ -527,7 +527,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections1JavaObject
+### getcommonscollections1javaobject
 
 #### 详细描述
 
@@ -548,7 +548,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections2JavaObject
+### getcommonscollections2javaobject
 
 #### 详细描述
 
@@ -569,7 +569,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections3JavaObject
+### getcommonscollections3javaobject
 
 #### 详细描述
 
@@ -590,7 +590,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections4JavaObject
+### getcommonscollections4javaobject
 
 #### 详细描述
 
@@ -611,7 +611,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections5JavaObject
+### getcommonscollections5javaobject
 
 #### 详细描述
 
@@ -632,7 +632,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections6JavaObject
+### getcommonscollections6javaobject
 
 #### 详细描述
 
@@ -653,7 +653,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections7JavaObject
+### getcommonscollections7javaobject
 
 #### 详细描述
 
@@ -674,7 +674,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollections8JavaObject
+### getcommonscollections8javaobject
 
 #### 详细描述
 
@@ -695,7 +695,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollectionsK1JavaObject
+### getcommonscollectionsk1javaobject
 
 #### 详细描述
 
@@ -716,7 +716,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollectionsK2JavaObject
+### getcommonscollectionsk2javaobject
 
 #### 详细描述
 
@@ -737,7 +737,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollectionsK3JavaObject
+### getcommonscollectionsk3javaobject
 
 #### 详细描述
 
@@ -758,7 +758,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetCommonsCollectionsK4JavaObject
+### getcommonscollectionsk4javaobject
 
 #### 详细描述
 
@@ -779,7 +779,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetFindGadgetByDNSJavaObject
+### getfindgadgetbydnsjavaobject
 
 #### 详细描述
 
@@ -800,7 +800,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetGadgetNameByFun
+### getgadgetnamebyfun
 
 #### 详细描述
 
@@ -821,7 +821,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetGroovy1JavaObject
+### getgroovy1javaobject
 
 #### 详细描述
 
@@ -842,7 +842,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJBossInterceptors1JavaObject
+### getjbossinterceptors1javaobject
 
 #### 详细描述
 
@@ -863,7 +863,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJSON1JavaObject
+### getjson1javaobject
 
 #### 详细描述
 
@@ -884,7 +884,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJavaObjectFromBytes
+### getjavaobjectfrombytes
 
 #### 详细描述
 
@@ -905,7 +905,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJavassistWeld1JavaObject
+### getjavassistweld1javaobject
 
 #### 详细描述
 
@@ -926,7 +926,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJdk7u21JavaObject
+### getjdk7u21javaobject
 
 #### 详细描述
 
@@ -947,7 +947,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetJdk8u20JavaObject
+### getjdk8u20javaobject
 
 #### 详细描述
 
@@ -968,7 +968,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetSimplePrincipalCollectionJavaObject
+### getsimpleprincipalcollectionjavaobject
 
 #### 详细描述
 
@@ -984,7 +984,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### GetURLDNSJavaObject
+### geturldnsjavaobject
 
 #### 详细描述
 
@@ -1005,7 +1005,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### LoadClassFromBCEL
+### loadclassfrombcel
 
 #### 详细描述
 
@@ -1027,7 +1027,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### LoadClassFromBase64
+### loadclassfrombase64
 
 #### 详细描述
 
@@ -1049,7 +1049,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### LoadClassFromBytes
+### loadclassfrombytes
 
 #### 详细描述
 
@@ -1071,7 +1071,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### ToBcel
+### tobcel
 
 #### 详细描述
 
@@ -1092,7 +1092,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### ToBytes
+### tobytes
 
 #### 详细描述
 
@@ -1113,7 +1113,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### ToJson
+### tojson
 
 #### 详细描述
 
@@ -1154,7 +1154,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### dnslogDomain
+### dnslogdomain
 
 #### 详细描述
 
@@ -1195,7 +1195,7 @@ spring生成
 | r2 | `error` |   |
 
 
-### evilClassName
+### evilclassname
 
 #### 详细描述
 公共参数
@@ -1215,7 +1215,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### obfuscationClassConstantPool
+### obfuscationclassconstantpool
 
 #### 详细描述
 
@@ -1230,7 +1230,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### springEchoBody
+### springechobody
 
 #### 详细描述
 
@@ -1245,7 +1245,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### springHeader
+### springheader
 
 #### 详细描述
 
@@ -1266,7 +1266,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### springParam
+### springparam
 
 #### 详细描述
 
@@ -1286,7 +1286,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### springRuntimeExecAction
+### springruntimeexecaction
 
 #### 详细描述
 
@@ -1301,7 +1301,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### tcpReverseHost
+### tcpreversehost
 
 #### 详细描述
 
@@ -1321,7 +1321,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### tcpReversePort
+### tcpreverseport
 
 #### 详细描述
 
@@ -1341,7 +1341,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### tcpReverseToken
+### tcpreversetoken
 
 #### 详细描述
 
@@ -1361,7 +1361,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### useBase64BytesClass
+### usebase64bytesclass
 
 #### 详细描述
 
@@ -1381,7 +1381,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### useBytesClass
+### usebytesclass
 
 #### 详细描述
 
@@ -1401,7 +1401,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### useBytesEvilClass
+### usebytesevilclass
 
 #### 详细描述
 生成自定义Class
@@ -1421,7 +1421,7 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
-### useClassMultiEchoTemplate
+### useclassmultiechotemplate
 
 #### 详细描述
 MultiEcho
@@ -1436,7 +1436,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### useConstructorExecutor
+### useconstructorexecutor
 
 #### 详细描述
 
@@ -1451,7 +1451,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### useDNSLogEvilClass
+### usednslogevilclass
 
 #### 详细描述
 
@@ -1471,7 +1471,7 @@ MultiEcho
 | r1 | `GenClassOptionFun` |   |
 
 
-### useDNSlogTemplate
+### usednslogtemplate
 
 #### 详细描述
 dnslog参数
@@ -1486,7 +1486,7 @@ dnslog参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useHeaderEchoEvilClass
+### useheaderechoevilclass
 
 #### 详细描述
 
@@ -1501,7 +1501,7 @@ dnslog参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useHeaderEchoTemplate
+### useheaderechotemplate
 
 #### 详细描述
 HeaderEchoClass
@@ -1516,7 +1516,7 @@ HeaderEchoClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### useHeaderParam
+### useheaderparam
 
 #### 详细描述
 
@@ -1537,7 +1537,7 @@ HeaderEchoClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### useModifyTomcatMaxHeaderSizeTemplate
+### usemodifytomcatmaxheadersizetemplate
 
 #### 详细描述
 ModifyTomcatMaxHeaderSize
@@ -1552,7 +1552,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### useMultiEchoEvilClass
+### usemultiechoevilclass
 
 #### 详细描述
 
@@ -1567,7 +1567,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### useProcessBuilderExecEvilClass
+### useprocessbuilderexecevilclass
 
 #### 详细描述
 
@@ -1587,7 +1587,7 @@ ModifyTomcatMaxHeaderSize
 | r1 | `GenClassOptionFun` |   |
 
 
-### useProcessBuilderExecTemplate
+### useprocessbuilderexectemplate
 
 #### 详细描述
 ProcessBuilderExec 参数
@@ -1602,7 +1602,7 @@ ProcessBuilderExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useProcessImplExecEvilClass
+### useprocessimplexecevilclass
 
 #### 详细描述
 
@@ -1622,7 +1622,7 @@ ProcessBuilderExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useProcessImplExecTemplate
+### useprocessimplexectemplate
 
 #### 详细描述
 ProcessImplExec 参数
@@ -1637,7 +1637,7 @@ ProcessImplExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useRuntimeExecEvilClass
+### useruntimeexecevilclass
 
 #### 详细描述
 
@@ -1657,7 +1657,7 @@ ProcessImplExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useRuntimeExecTemplate
+### useruntimeexectemplate
 
 #### 详细描述
 RuntimeExec 参数
@@ -1672,7 +1672,7 @@ RuntimeExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useSleepEvilClass
+### usesleepevilclass
 
 #### 详细描述
 
@@ -1687,7 +1687,7 @@ RuntimeExec 参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useSleepTemplate
+### usesleeptemplate
 
 #### 详细描述
 SleepClass
@@ -1702,7 +1702,7 @@ SleepClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### useSleepTime
+### usesleeptime
 
 #### 详细描述
 
@@ -1722,7 +1722,7 @@ SleepClass
 | r1 | `GenClassOptionFun` |   |
 
 
-### useSpringEchoTemplate
+### usespringechotemplate
 
 #### 详细描述
 spring参数
@@ -1737,7 +1737,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTcpReverseEvilClass
+### usetcpreverseevilclass
 
 #### 详细描述
 
@@ -1758,7 +1758,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTcpReverseShellEvilClass
+### usetcpreverseshellevilclass
 
 #### 详细描述
 
@@ -1779,7 +1779,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTcpReverseShellTemplate
+### usetcpreverseshelltemplate
 
 #### 详细描述
 生成tcp反弹shell
@@ -1794,7 +1794,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTcpReverseTemplate
+### usetcpreversetemplate
 
 #### 详细描述
 生成tcp反连
@@ -1809,7 +1809,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTomcatEchoEvilClass
+### usetomcatechoevilclass
 
 #### 详细描述
 
@@ -1824,7 +1824,7 @@ spring参数
 | r1 | `GenClassOptionFun` |   |
 
 
-### useTomcatEchoTemplate
+### usetomcatechotemplate
 
 #### 详细描述
 Tomcat回显

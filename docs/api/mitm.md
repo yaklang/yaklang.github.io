@@ -2,24 +2,24 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [mitm.Bridge](#Bridge) ||
-| [mitm.Start](#Start) ||
+| [mitm.Bridge](#bridge) ||
+| [mitm.Start](#start) ||
 | [mitm.callback](#callback) ||
 | [mitm.context](#context) ||
-| [mitm.hijackHTTPRequest](#hijackHTTPRequest) ||
-| [mitm.hijackHTTPResponse](#hijackHTTPResponse) ||
-| [mitm.hijackHTTPResponseEx](#hijackHTTPResponseEx) ||
+| [mitm.hijackHTTPRequest](#hijackhttprequest) ||
+| [mitm.hijackHTTPResponse](#hijackhttpresponse) ||
+| [mitm.hijackHTTPResponseEx](#hijackhttpresponseex) ||
 | [mitm.host](#host) ||
-| [mitm.isTransparent](#isTransparent) ||
-| [mitm.maxContentLength](#maxContentLength) ||
-| [mitm.rootCA](#rootCA) ||
-| [mitm.useDefaultCA](#useDefaultCA) ||
+| [mitm.isTransparent](#istransparent) ||
+| [mitm.maxContentLength](#maxcontentlength) ||
+| [mitm.rootCA](#rootca) ||
+| [mitm.useDefaultCA](#usedefaultca) ||
 | [mitm.wscallback](#wscallback) ||
 | [mitm.wsforcetext](#wsforcetext) ||
 
 
 ## 函数定义
-### Bridge
+### bridge
 
 #### 详细描述
 
@@ -41,7 +41,7 @@
 | r1 | `error` |   |
 
 
-### Start
+### start
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackHTTPRequest
+### hijackhttprequest
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackHTTPResponse
+### hijackhttpresponse
 
 #### 详细描述
 
@@ -142,7 +142,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackHTTPResponseEx
+### hijackhttpresponseex
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### isTransparent
+### istransparent
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### maxContentLength
+### maxcontentlength
 
 #### 详细描述
 
@@ -222,7 +222,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### rootCA
+### rootca
 
 #### 详细描述
 
@@ -243,7 +243,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### useDefaultCA
+### usedefaultca
 
 #### 详细描述
 

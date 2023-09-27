@@ -2,45 +2,45 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [file.Abs](#Abs) ||
-| [file.Cat](#Cat) ||
-| [file.Cp](#Cp) |Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.|
-| [file.Create](#Create) ||
-| [file.Dir](#Dir) ||
-| [file.GetDirPath](#GetDirPath) |Dir returns all but the last element of path, typically the path's directory.After dropping the final element, Dir calls Clean on the path and trailingslashes are removed.If the path is empty, Dir returns ".".If the path consists entirely of separators, Dir returns a single separator.The returned path does not end in a separator unless it is the root directory.|
-| [file.IsAbs](#IsAbs) |IsAbs reports whether the path is absolute.|
-| [file.IsDir](#IsDir) ||
-| [file.IsExisted](#IsExisted) ||
-| [file.IsFile](#IsFile) ||
-| [file.IsLink](#IsLink) ||
-| [file.Join](#Join) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.|
-| [file.Ls](#Ls) ||
-| [file.Lstat](#Lstat) ||
-| [file.Mkdir](#Mkdir) ||
-| [file.MkdirAll](#MkdirAll) ||
-| [file.Mv](#Mv) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.|
-| [file.NewMultiFileLineReader](#NewMultiFileLineReader) ||
-| [file.Open](#Open) ||
-| [file.OpenFile](#OpenFile) ||
-| [file.ReadAll](#ReadAll) |ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefined to read from src until EOF, it does not treat an EOF from Readas an error to be reported.Deprecated: As of Go 1.16, this function simply calls io.ReadAll.|
-| [file.ReadDirInfoInDirectory](#ReadDirInfoInDirectory) ||
-| [file.ReadFile](#ReadFile) |ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the whole file, it does not treat an EOF from Read as an errorto be reported.Deprecated: As of Go 1.16, this function simply calls os.ReadFile.|
-| [file.ReadFileInfoInDirectory](#ReadFileInfoInDirectory) ||
-| [file.ReadLines](#ReadLines) ||
-| [file.Remove](#Remove) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.|
-| [file.Rename](#Rename) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.|
-| [file.Rm](#Rm) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.|
-| [file.Save](#Save) ||
-| [file.SaveJson](#SaveJson) ||
-| [file.Split](#Split) |Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, Split returns an empty dirand file set to path.The returned values have the property that path = dir+file.|
-| [file.Stat](#Stat) ||
-| [file.TailF](#TailF) ||
-| [file.TempFile](#TempFile) ||
-| [file.TempFileName](#TempFileName) ||
+| [file.Abs](#abs) ||
+| [file.Cat](#cat) ||
+| [file.Cp](#cp) |Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.|
+| [file.Create](#create) ||
+| [file.Dir](#dir) ||
+| [file.GetDirPath](#getdirpath) |Dir returns all but the last element of path, typically the path's directory.After dropping the final element, Dir calls Clean on the path and trailin...|
+| [file.IsAbs](#isabs) |IsAbs reports whether the path is absolute.|
+| [file.IsDir](#isdir) ||
+| [file.IsExisted](#isexisted) ||
+| [file.IsFile](#isfile) ||
+| [file.IsLink](#islink) ||
+| [file.Join](#join) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Clea...|
+| [file.Ls](#ls) ||
+| [file.Lstat](#lstat) ||
+| [file.Mkdir](#mkdir) ||
+| [file.MkdirAll](#mkdirall) ||
+| [file.Mv](#mv) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when...|
+| [file.NewMultiFileLineReader](#newmultifilelinereader) ||
+| [file.Open](#open) ||
+| [file.OpenFile](#openfile) ||
+| [file.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefine...|
+| [file.ReadDirInfoInDirectory](#readdirinfoindirectory) ||
+| [file.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the who...|
+| [file.ReadFileInfoInDirectory](#readfileinfoindirectory) ||
+| [file.ReadLines](#readlines) ||
+| [file.Remove](#remove) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist,...|
+| [file.Rename](#rename) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when...|
+| [file.Rm](#rm) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist,...|
+| [file.Save](#save) ||
+| [file.SaveJson](#savejson) ||
+| [file.Split](#split) |Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, S...|
+| [file.Stat](#stat) ||
+| [file.TailF](#tailf) ||
+| [file.TempFile](#tempfile) ||
+| [file.TempFileName](#tempfilename) ||
 
 
 ## 函数定义
-### Abs
+### abs
 
 #### 详细描述
 
@@ -60,7 +60,7 @@
 | r1 | `string` |   |
 
 
-### Cat
+### cat
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | i | `string` |   |
 
 
-### Cp
+### cp
 
 #### 详细描述
 Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.
@@ -96,7 +96,7 @@ Copy the src file to dst. Any existing file will be overwritten and will notcopy
 | r1 | `error` |   |
 
 
-### Create
+### create
 
 #### 详细描述
 
@@ -117,7 +117,7 @@ Copy the src file to dst. Any existing file will be overwritten and will notcopy
 | r2 | `error` |   |
 
 
-### Dir
+### dir
 
 #### 详细描述
 
@@ -137,7 +137,7 @@ Copy the src file to dst. Any existing file will be overwritten and will notcopy
 | r1 | `[]*utils.FileInfo` |   |
 
 
-### GetDirPath
+### getdirpath
 
 #### 详细描述
 Dir returns all but the last element of path, typically the path's directory.After dropping the final element, Dir calls Clean on the path and trailingslashes are removed.If the path is empty, Dir returns ".".If the path consists entirely of separators, Dir returns a single separator.The returned path does not end in a separator unless it is the root directory.
@@ -157,7 +157,7 @@ Dir returns all but the last element of path, typically the path's directory.Aft
 | r1 | `string` |   |
 
 
-### IsAbs
+### isabs
 
 #### 详细描述
 IsAbs reports whether the path is absolute.
@@ -177,7 +177,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### IsDir
+### isdir
 
 #### 详细描述
 
@@ -197,7 +197,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### IsExisted
+### isexisted
 
 #### 详细描述
 
@@ -217,7 +217,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### IsFile
+### isfile
 
 #### 详细描述
 
@@ -237,7 +237,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### IsLink
+### islink
 
 #### 详细描述
 
@@ -257,7 +257,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### Join
+### join
 
 #### 详细描述
 Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.
@@ -277,7 +277,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `string` |   |
 
 
-### Ls
+### ls
 
 #### 详细描述
 
@@ -297,7 +297,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `[]*utils.FileInfo` |   |
 
 
-### Lstat
+### lstat
 
 #### 详细描述
 
@@ -318,7 +318,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r2 | `error` |   |
 
 
-### Mkdir
+### mkdir
 
 #### 详细描述
 
@@ -338,7 +338,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `error` |   |
 
 
-### MkdirAll
+### mkdirall
 
 #### 详细描述
 
@@ -358,7 +358,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `error` |   |
 
 
-### Mv
+### mv
 
 #### 详细描述
 Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.
@@ -379,7 +379,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r1 | `error` |   |
 
 
-### NewMultiFileLineReader
+### newmultifilelinereader
 
 #### 详细描述
 
@@ -400,7 +400,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r2 | `error` |   |
 
 
-### Open
+### open
 
 #### 详细描述
 
@@ -421,7 +421,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r2 | `error` |   |
 
 
-### OpenFile
+### openfile
 
 #### 详细描述
 
@@ -444,7 +444,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r2 | `error` |   |
 
 
-### ReadAll
+### readall
 
 #### 详细描述
 ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefined to read from src until EOF, it does not treat an EOF from Readas an error to be reported.Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
@@ -465,7 +465,7 @@ ReadAll reads from r until an error or EOF and returns the data it read.A succes
 | r2 | `error` |   |
 
 
-### ReadDirInfoInDirectory
+### readdirinfoindirectory
 
 #### 详细描述
 
@@ -486,7 +486,7 @@ ReadAll reads from r until an error or EOF and returns the data it read.A succes
 | r2 | `error` |   |
 
 
-### ReadFile
+### readfile
 
 #### 详细描述
 ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the whole file, it does not treat an EOF from Read as an errorto be reported.Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
@@ -507,7 +507,7 @@ ReadFile reads the file named by filename and returns the contents.A successful 
 | r2 | `error` |   |
 
 
-### ReadFileInfoInDirectory
+### readfileinfoindirectory
 
 #### 详细描述
 
@@ -528,7 +528,7 @@ ReadFile reads the file named by filename and returns the contents.A successful 
 | r2 | `error` |   |
 
 
-### ReadLines
+### readlines
 
 #### 详细描述
 
@@ -548,7 +548,7 @@ ReadFile reads the file named by filename and returns the contents.A successful 
 | r1 | `[]string` |   |
 
 
-### Remove
+### remove
 
 #### 详细描述
 RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.
@@ -568,7 +568,7 @@ RemoveAll removes path and any children it contains.It removes everything it can
 | r1 | `error` |   |
 
 
-### Rename
+### rename
 
 #### 详细描述
 Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.
@@ -589,7 +589,7 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 | r1 | `error` |   |
 
 
-### Rm
+### rm
 
 #### 详细描述
 RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.
@@ -609,7 +609,7 @@ RemoveAll removes path and any children it contains.It removes everything it can
 | r1 | `error` |   |
 
 
-### Save
+### save
 
 #### 详细描述
 
@@ -630,7 +630,7 @@ RemoveAll removes path and any children it contains.It removes everything it can
 | r1 | `error` |   |
 
 
-### SaveJson
+### savejson
 
 #### 详细描述
 
@@ -651,7 +651,7 @@ RemoveAll removes path and any children it contains.It removes everything it can
 | r1 | `error` |   |
 
 
-### Split
+### split
 
 #### 详细描述
 Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, Split returns an empty dirand file set to path.The returned values have the property that path = dir+file.
@@ -672,7 +672,7 @@ Split splits path immediately following the final Separator,separating it into a
 | file | `string` |   |
 
 
-### Stat
+### stat
 
 #### 详细描述
 
@@ -693,7 +693,7 @@ Split splits path immediately following the final Separator,separating it into a
 | r2 | `error` |   |
 
 
-### TailF
+### tailf
 
 #### 详细描述
 
@@ -709,7 +709,7 @@ Split splits path immediately following the final Separator,separating it into a
 | line | `func(i string)` |   |
 
 
-### TempFile
+### tempfile
 
 #### 详细描述
 
@@ -730,7 +730,7 @@ Split splits path immediately following the final Separator,separating it into a
 | r2 | `error` |   |
 
 
-### TempFileName
+### tempfilename
 
 #### 详细描述
 

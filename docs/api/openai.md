@@ -2,18 +2,18 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [openai.Chat](#Chat) ||
-| [openai.TranslateToChinese](#TranslateToChinese) ||
-| [openai.apiKey](#apiKey) ||
+| [openai.Chat](#chat) ||
+| [openai.TranslateToChinese](#translatetochinese) ||
+| [openai.apiKey](#apikey) ||
 | [openai.domain](#domain) ||
-| [openai.localAPIKey](#localAPIKey) ||
+| [openai.localAPIKey](#localapikey) ||
 | [openai.model](#model) ||
 | [openai.proxy](#proxy) ||
-| [openai.yakDomain](#yakDomain) ||
+| [openai.yakDomain](#yakdomain) ||
 
 
 ## 函数定义
-### Chat
+### chat
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `string` |   |
 
 
-### TranslateToChinese
+### translatetochinese
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `string` |   |
 
 
-### apiKey
+### apikey
 
 #### 详细描述
 
@@ -95,7 +95,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### localAPIKey
+### localapikey
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### yakDomain
+### yakdomain
 
 #### 详细描述
 

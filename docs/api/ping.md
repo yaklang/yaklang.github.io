@@ -2,22 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [ping.Ping](#Ping) ||
-| [ping.Scan](#Scan) ||
+| [ping.Ping](#ping) ||
+| [ping.Scan](#scan) ||
 | [ping.concurrent](#concurrent) ||
-| [ping.dnsServers](#dnsServers) ||
-| [ping.dnsTimeout](#dnsTimeout) ||
-| [ping.excludeHosts](#excludeHosts) ||
-| [ping.onResult](#onResult) ||
+| [ping.dnsServers](#dnsservers) ||
+| [ping.dnsTimeout](#dnstimeout) ||
+| [ping.excludeHosts](#excludehosts) ||
+| [ping.onResult](#onresult) ||
 | [ping.proxy](#proxy) ||
-| [ping.scanCClass](#scanCClass) ||
+| [ping.scanCClass](#scancclass) ||
 | [ping.skip](#skip) ||
-| [ping.tcpPingPorts](#tcpPingPorts) ||
+| [ping.tcpPingPorts](#tcppingports) ||
 | [ping.timeout](#timeout) ||
 
 
 ## 函数定义
-### Ping
+### ping
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r1 | `*pingutil.PingResult` |   |
 
 
-### Scan
+### scan
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### dnsServers
+### dnsservers
 
 #### 详细描述
 
@@ -99,7 +99,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### dnsTimeout
+### dnstimeout
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### excludeHosts
+### excludehosts
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### onResult
+### onresult
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### scanCClass
+### scancclass
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### tcpPingPorts
+### tcppingports
 
 #### 详细描述
 

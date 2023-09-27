@@ -2,13 +2,13 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [csrf.Generate](#Generate) ||
+| [csrf.Generate](#generate) ||
 | [csrf.https](#https) ||
-| [csrf.multipartDefaultValue](#multipartDefaultValue) ||
+| [csrf.multipartDefaultValue](#multipartdefaultvalue) ||
 
 
 ## 函数定义
-### Generate
+### generate
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `csrfConfig` |   |
 
 
-### multipartDefaultValue
+### multipartdefaultvalue
 
 #### 详细描述
 

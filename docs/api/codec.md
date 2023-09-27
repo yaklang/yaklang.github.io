@@ -2,132 +2,132 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [codec.AESCBCDecrypt](#AESCBCDecrypt) ||
-| [codec.AESCBCDecryptWithPKCS7Padding](#AESCBCDecryptWithPKCS7Padding) ||
-| [codec.AESCBCDecryptWithZeroPadding](#AESCBCDecryptWithZeroPadding) ||
-| [codec.AESCBCEncrypt](#AESCBCEncrypt) ||
-| [codec.AESCBCEncryptWithPKCS7Padding](#AESCBCEncryptWithPKCS7Padding) ||
-| [codec.AESCBCEncryptWithZeroPadding](#AESCBCEncryptWithZeroPadding) ||
-| [codec.AESDecrypt](#AESDecrypt) ||
-| [codec.AESECBDecrypt](#AESECBDecrypt) ||
-| [codec.AESECBDecryptWithPKCS7Padding](#AESECBDecryptWithPKCS7Padding) ||
-| [codec.AESECBDecryptWithZeroPadding](#AESECBDecryptWithZeroPadding) ||
-| [codec.AESECBEncrypt](#AESECBEncrypt) ||
-| [codec.AESECBEncryptWithPKCS7Padding](#AESECBEncryptWithPKCS7Padding) ||
-| [codec.AESECBEncryptWithZeroPadding](#AESECBEncryptWithZeroPadding) ||
-| [codec.AESEncrypt](#AESEncrypt) ||
-| [codec.AESGCMDecrypt](#AESGCMDecrypt) ||
-| [codec.AESGCMDecryptWithNonceSize12](#AESGCMDecryptWithNonceSize12) ||
-| [codec.AESGCMDecryptWithNonceSize16](#AESGCMDecryptWithNonceSize16) ||
-| [codec.AESGCMEncrypt](#AESGCMEncrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}|
-| [codec.AESGCMEncryptWithNonceSize12](#AESGCMEncryptWithNonceSize12) ||
-| [codec.AESGCMEncryptWithNonceSize16](#AESGCMEncryptWithNonceSize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}|
-| [codec.AutoDecode](#AutoDecode) ||
-| [codec.DESCBCDecrypt](#DESCBCDecrypt) ||
-| [codec.DESCBCEncrypt](#DESCBCEncrypt) ||
-| [codec.DESDecrypt](#DESDecrypt) ||
-| [codec.DESECBDecrypt](#DESECBDecrypt) ||
-| [codec.DESECBEncrypt](#DESECBEncrypt) ||
-| [codec.DESEncrypt](#DESEncrypt) ||
-| [codec.DecodeASCII](#DecodeASCII) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)|
-| [codec.DecodeBase32](#DecodeBase32) ||
-| [codec.DecodeBase64](#DecodeBase64) ||
-| [codec.DecodeBase64Url](#DecodeBase64Url) ||
-| [codec.DecodeChunked](#DecodeChunked) ||
-| [codec.DecodeHex](#DecodeHex) ||
-| [codec.DecodeHtml](#DecodeHtml) |UnescapeString unescapes entities like "&lt;" to become "<". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacute;"unescapes to "á", as does "&#225;" and "&#xE1;".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.|
-| [codec.DecodeUrl](#DecodeUrl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.|
-| [codec.DoubleDecodeUrl](#DoubleDecodeUrl) ||
-| [codec.DoubleEncodeUrl](#DoubleEncodeUrl) ||
-| [codec.EncodeASCII](#EncodeASCII) ||
-| [codec.EncodeBase32](#EncodeBase32) ||
-| [codec.EncodeBase64](#EncodeBase64) ||
-| [codec.EncodeBase64Url](#EncodeBase64Url) ||
-| [codec.EncodeChunked](#EncodeChunked) ||
-| [codec.EncodeHtml](#EncodeHtml) ||
-| [codec.EncodeHtmlHex](#EncodeHtmlHex) ||
-| [codec.EncodeToHex](#EncodeToHex) ||
-| [codec.EncodeToPrintable](#EncodeToPrintable) ||
-| [codec.EncodeUrl](#EncodeUrl) ||
-| [codec.EscapeHtml](#EscapeHtml) |EscapeString escapes special characters like "<" to become "&lt;". Itescapes only five such characters: <, >, &, ' and ".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.|
-| [codec.EscapePathUrl](#EscapePathUrl) |PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as needed.|
-| [codec.EscapeQueryUrl](#EscapeQueryUrl) |QueryEscape escapes the string so it can be safely placedinside a URL query.|
-| [codec.FixUTF8](#FixUTF8) ||
-| [codec.GB18030ToUTF8](#GB18030ToUTF8) ||
-| [codec.GBKSafe](#GBKSafe) ||
-| [codec.GBKToUTF8](#GBKToUTF8) ||
-| [codec.HTMLChardet](#HTMLChardet) ||
-| [codec.HTMLChardetBest](#HTMLChardetBest) ||
-| [codec.HZGB2312ToUTF8](#HZGB2312ToUTF8) ||
-| [codec.HmacMD5](#HmacMD5) ||
-| [codec.HmacSM3](#HmacSM3) ||
-| [codec.HmacSha1](#HmacSha1) ||
-| [codec.HmacSha256](#HmacSha256) ||
-| [codec.HmacSha512](#HmacSha512) ||
-| [codec.MMH3Hash128](#MMH3Hash128) ||
-| [codec.MMH3Hash128x64](#MMH3Hash128x64) ||
-| [codec.MMH3Hash32](#MMH3Hash32) ||
-| [codec.Md5](#Md5) ||
-| [codec.PKCS5Padding](#PKCS5Padding) ||
-| [codec.PKCS5UnPadding](#PKCS5UnPadding) ||
-| [codec.PKCS7Padding](#PKCS7Padding) ||
-| [codec.PKCS7UnPadding](#PKCS7UnPadding) ||
-| [codec.RC4Decrypt](#RC4Decrypt) ||
-| [codec.RC4Encrypt](#RC4Encrypt) ||
-| [codec.RSADecryptWithOAEP](#RSADecryptWithOAEP) ||
-| [codec.RSADecryptWithPKCS1v15](#RSADecryptWithPKCS1v15) ||
-| [codec.RSAEncryptWithOAEP](#RSAEncryptWithOAEP) ||
-| [codec.RSAEncryptWithPKCS1v15](#RSAEncryptWithPKCS1v15) ||
-| [codec.Sha1](#Sha1) ||
-| [codec.Sha224](#Sha224) ||
-| [codec.Sha256](#Sha256) ||
-| [codec.Sha384](#Sha384) ||
-| [codec.Sha512](#Sha512) ||
-| [codec.Sm2DecryptAsn1](#Sm2DecryptAsn1) ||
-| [codec.Sm2DecryptAsn1WithPassword](#Sm2DecryptAsn1WithPassword) ||
-| [codec.Sm2DecryptC1C2C3](#Sm2DecryptC1C2C3) ||
-| [codec.Sm2DecryptC1C2C3WithPassword](#Sm2DecryptC1C2C3WithPassword) ||
-| [codec.Sm2DecryptC1C3C2](#Sm2DecryptC1C3C2) ||
-| [codec.Sm2DecryptC1C3C2WithPassword](#Sm2DecryptC1C3C2WithPassword) ||
-| [codec.Sm2EncryptAsn1](#Sm2EncryptAsn1) ||
-| [codec.Sm2EncryptC1C2C3](#Sm2EncryptC1C2C3) ||
-| [codec.Sm2EncryptC1C3C2](#Sm2EncryptC1C3C2) ||
-| [codec.Sm2GenerateHexKeyPair](#Sm2GenerateHexKeyPair) ||
-| [codec.Sm2GeneratePemKeyPair](#Sm2GeneratePemKeyPair) ||
-| [codec.Sm3](#Sm3) ||
-| [codec.Sm4CBCDecrypt](#Sm4CBCDecrypt) ||
-| [codec.Sm4CBCEncrypt](#Sm4CBCEncrypt) ||
-| [codec.Sm4CFBDecrypt](#Sm4CFBDecrypt) ||
-| [codec.Sm4CFBEncrypt](#Sm4CFBEncrypt) ||
-| [codec.Sm4EBCDecrypt](#Sm4EBCDecrypt) ||
-| [codec.Sm4EBCEncrypt](#Sm4EBCEncrypt) ||
-| [codec.Sm4ECBDecrypt](#Sm4ECBDecrypt) ||
-| [codec.Sm4ECBEncrypt](#Sm4ECBEncrypt) ||
-| [codec.Sm4GCMDecrypt](#Sm4GCMDecrypt) ||
-| [codec.Sm4GCMEncrypt](#Sm4GCMEncrypt) ||
-| [codec.Sm4OFBDecrypt](#Sm4OFBDecrypt) ||
-| [codec.Sm4OFBEncrypt](#Sm4OFBEncrypt) ||
-| [codec.StrconvQuote](#StrconvQuote) ||
-| [codec.StrconvUnquote](#StrconvUnquote) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)|
-| [codec.TripleDESCBCDecrypt](#TripleDESCBCDecrypt) ||
-| [codec.TripleDESCBCEncrypt](#TripleDESCBCEncrypt) ||
-| [codec.TripleDESDecrypt](#TripleDESDecrypt) ||
-| [codec.TripleDESECBDecrypt](#TripleDESECBDecrypt) ||
-| [codec.TripleDESECBEncrypt](#TripleDESECBEncrypt) ||
-| [codec.TripleDESEncrypt](#TripleDESEncrypt) ||
-| [codec.UTF8ToGB18030](#UTF8ToGB18030) ||
-| [codec.UTF8ToGBK](#UTF8ToGBK) ||
-| [codec.UTF8ToHZGB2312](#UTF8ToHZGB2312) ||
-| [codec.UnescapePathUrl](#UnescapePathUrl) |PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB. It returns an error if any % is not followedby two hexadecimal digits.PathUnescape is identical to QueryUnescape except that it does notunescape '+' to ' ' (space).|
-| [codec.UnescapeQueryUrl](#UnescapeQueryUrl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.|
-| [codec.UnicodeDecode](#UnicodeDecode) ||
-| [codec.UnicodeEncode](#UnicodeEncode) ||
-| [codec.ZeroPadding](#ZeroPadding) ||
-| [codec.ZeroUnPadding](#ZeroUnPadding) ||
+| [codec.AESCBCDecrypt](#aescbcdecrypt) ||
+| [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) ||
+| [codec.AESCBCDecryptWithZeroPadding](#aescbcdecryptwithzeropadding) ||
+| [codec.AESCBCEncrypt](#aescbcencrypt) ||
+| [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) ||
+| [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) ||
+| [codec.AESDecrypt](#aesdecrypt) ||
+| [codec.AESECBDecrypt](#aesecbdecrypt) ||
+| [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) ||
+| [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) ||
+| [codec.AESECBEncrypt](#aesecbencrypt) ||
+| [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) ||
+| [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) ||
+| [codec.AESEncrypt](#aesencrypt) ||
+| [codec.AESGCMDecrypt](#aesgcmdecrypt) ||
+| [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) ||
+| [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) ||
+| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := ...|
+| [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) ||
+| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := ...|
+| [codec.AutoDecode](#autodecode) ||
+| [codec.DESCBCDecrypt](#descbcdecrypt) ||
+| [codec.DESCBCEncrypt](#descbcencrypt) ||
+| [codec.DESDecrypt](#desdecrypt) ||
+| [codec.DESECBDecrypt](#desecbdecrypt) ||
+| [codec.DESECBEncrypt](#desecbencrypt) ||
+| [codec.DESEncrypt](#desencrypt) ||
+| [codec.DecodeASCII](#decodeascii) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quot...|
+| [codec.DecodeBase32](#decodebase32) ||
+| [codec.DecodeBase64](#decodebase64) ||
+| [codec.DecodeBase64Url](#decodebase64url) ||
+| [codec.DecodeChunked](#decodechunked) ||
+| [codec.DecodeHex](#decodehex) ||
+| [codec.DecodeHtml](#decodehtml) |UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacut...|
+| [codec.DecodeUrl](#decodeurl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB....|
+| [codec.DoubleDecodeUrl](#doubledecodeurl) ||
+| [codec.DoubleEncodeUrl](#doubleencodeurl) ||
+| [codec.EncodeASCII](#encodeascii) ||
+| [codec.EncodeBase32](#encodebase32) ||
+| [codec.EncodeBase64](#encodebase64) ||
+| [codec.EncodeBase64Url](#encodebase64url) ||
+| [codec.EncodeChunked](#encodechunked) ||
+| [codec.EncodeHtml](#encodehtml) ||
+| [codec.EncodeHtmlHex](#encodehtmlhex) ||
+| [codec.EncodeToHex](#encodetohex) ||
+| [codec.EncodeToPrintable](#encodetoprintable) ||
+| [codec.EncodeUrl](#encodeurl) ||
+| [codec.EscapeHtml](#escapehtml) |EscapeString escapes special characters like "&lt;" to become "&lt;". Itescapes only five such characters: &lt;, &gt;, &, ' and ".UnescapeString(Escap...|
+| [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as ne...|
+| [codec.EscapeQueryUrl](#escapequeryurl) |QueryEscape escapes the string so it can be safely placedinside a URL query.|
+| [codec.FixUTF8](#fixutf8) ||
+| [codec.GB18030ToUTF8](#gb18030toutf8) ||
+| [codec.GBKSafe](#gbksafe) ||
+| [codec.GBKToUTF8](#gbktoutf8) ||
+| [codec.HTMLChardet](#htmlchardet) ||
+| [codec.HTMLChardetBest](#htmlchardetbest) ||
+| [codec.HZGB2312ToUTF8](#hzgb2312toutf8) ||
+| [codec.HmacMD5](#hmacmd5) ||
+| [codec.HmacSM3](#hmacsm3) ||
+| [codec.HmacSha1](#hmacsha1) ||
+| [codec.HmacSha256](#hmacsha256) ||
+| [codec.HmacSha512](#hmacsha512) ||
+| [codec.MMH3Hash128](#mmh3hash128) ||
+| [codec.MMH3Hash128x64](#mmh3hash128x64) ||
+| [codec.MMH3Hash32](#mmh3hash32) ||
+| [codec.Md5](#md5) ||
+| [codec.PKCS5Padding](#pkcs5padding) ||
+| [codec.PKCS5UnPadding](#pkcs5unpadding) ||
+| [codec.PKCS7Padding](#pkcs7padding) ||
+| [codec.PKCS7UnPadding](#pkcs7unpadding) ||
+| [codec.RC4Decrypt](#rc4decrypt) ||
+| [codec.RC4Encrypt](#rc4encrypt) ||
+| [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) ||
+| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) ||
+| [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) ||
+| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) ||
+| [codec.Sha1](#sha1) ||
+| [codec.Sha224](#sha224) ||
+| [codec.Sha256](#sha256) ||
+| [codec.Sha384](#sha384) ||
+| [codec.Sha512](#sha512) ||
+| [codec.Sm2DecryptAsn1](#sm2decryptasn1) ||
+| [codec.Sm2DecryptAsn1WithPassword](#sm2decryptasn1withpassword) ||
+| [codec.Sm2DecryptC1C2C3](#sm2decryptc1c2c3) ||
+| [codec.Sm2DecryptC1C2C3WithPassword](#sm2decryptc1c2c3withpassword) ||
+| [codec.Sm2DecryptC1C3C2](#sm2decryptc1c3c2) ||
+| [codec.Sm2DecryptC1C3C2WithPassword](#sm2decryptc1c3c2withpassword) ||
+| [codec.Sm2EncryptAsn1](#sm2encryptasn1) ||
+| [codec.Sm2EncryptC1C2C3](#sm2encryptc1c2c3) ||
+| [codec.Sm2EncryptC1C3C2](#sm2encryptc1c3c2) ||
+| [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) ||
+| [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) ||
+| [codec.Sm3](#sm3) ||
+| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) ||
+| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) ||
+| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) ||
+| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) ||
+| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) ||
+| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) ||
+| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) ||
+| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) ||
+| [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) ||
+| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) ||
+| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) ||
+| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) ||
+| [codec.StrconvQuote](#strconvquote) ||
+| [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quot...|
+| [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) ||
+| [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) ||
+| [codec.TripleDESDecrypt](#tripledesdecrypt) ||
+| [codec.TripleDESECBDecrypt](#tripledesecbdecrypt) ||
+| [codec.TripleDESECBEncrypt](#tripledesecbencrypt) ||
+| [codec.TripleDESEncrypt](#tripledesencrypt) ||
+| [codec.UTF8ToGB18030](#utf8togb18030) ||
+| [codec.UTF8ToGBK](#utf8togbk) ||
+| [codec.UTF8ToHZGB2312](#utf8tohzgb2312) ||
+| [codec.UnescapePathUrl](#unescapepathurl) |PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB. I...|
+| [codec.UnescapeQueryUrl](#unescapequeryurl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB....|
+| [codec.UnicodeDecode](#unicodedecode) ||
+| [codec.UnicodeEncode](#unicodeencode) ||
+| [codec.ZeroPadding](#zeropadding) ||
+| [codec.ZeroUnPadding](#zerounpadding) ||
 
 
 ## 函数定义
-### AESCBCDecrypt
+### aescbcdecrypt
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r2 | `error` |   |
 
 
-### AESCBCDecryptWithPKCS7Padding
+### aescbcdecryptwithpkcs7padding
 
 #### 详细描述
 
@@ -173,7 +173,7 @@
 | r2 | `error` |   |
 
 
-### AESCBCDecryptWithZeroPadding
+### aescbcdecryptwithzeropadding
 
 #### 详细描述
 
@@ -196,7 +196,7 @@
 | r2 | `error` |   |
 
 
-### AESCBCEncrypt
+### aescbcencrypt
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r2 | `error` |   |
 
 
-### AESCBCEncryptWithPKCS7Padding
+### aescbcencryptwithpkcs7padding
 
 #### 详细描述
 
@@ -242,7 +242,7 @@
 | r2 | `error` |   |
 
 
-### AESCBCEncryptWithZeroPadding
+### aescbcencryptwithzeropadding
 
 #### 详细描述
 
@@ -265,7 +265,7 @@
 | r2 | `error` |   |
 
 
-### AESDecrypt
+### aesdecrypt
 
 #### 详细描述
 
@@ -288,7 +288,7 @@
 | r2 | `error` |   |
 
 
-### AESECBDecrypt
+### aesecbdecrypt
 
 #### 详细描述
 
@@ -311,7 +311,7 @@
 | r2 | `error` |   |
 
 
-### AESECBDecryptWithPKCS7Padding
+### aesecbdecryptwithpkcs7padding
 
 #### 详细描述
 
@@ -334,7 +334,7 @@
 | r2 | `error` |   |
 
 
-### AESECBDecryptWithZeroPadding
+### aesecbdecryptwithzeropadding
 
 #### 详细描述
 
@@ -357,7 +357,7 @@
 | r2 | `error` |   |
 
 
-### AESECBEncrypt
+### aesecbencrypt
 
 #### 详细描述
 
@@ -380,7 +380,7 @@
 | r2 | `error` |   |
 
 
-### AESECBEncryptWithPKCS7Padding
+### aesecbencryptwithpkcs7padding
 
 #### 详细描述
 
@@ -403,7 +403,7 @@
 | r2 | `error` |   |
 
 
-### AESECBEncryptWithZeroPadding
+### aesecbencryptwithzeropadding
 
 #### 详细描述
 
@@ -426,7 +426,7 @@
 | r2 | `error` |   |
 
 
-### AESEncrypt
+### aesencrypt
 
 #### 详细描述
 
@@ -449,7 +449,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMDecrypt
+### aesgcmdecrypt
 
 #### 详细描述
 
@@ -472,7 +472,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMDecryptWithNonceSize12
+### aesgcmdecryptwithnoncesize12
 
 #### 详细描述
 
@@ -495,7 +495,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMDecryptWithNonceSize16
+### aesgcmdecryptwithnoncesize16
 
 #### 详细描述
 
@@ -518,7 +518,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMEncrypt
+### aesgcmencrypt
 
 #### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}
@@ -541,7 +541,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMEncryptWithNonceSize12
+### aesgcmencryptwithnoncesize12
 
 #### 详细描述
 
@@ -564,7 +564,7 @@
 | r2 | `error` |   |
 
 
-### AESGCMEncryptWithNonceSize16
+### aesgcmencryptwithnoncesize16
 
 #### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}
@@ -587,7 +587,7 @@
 | r2 | `error` |   |
 
 
-### AutoDecode
+### autodecode
 
 #### 详细描述
 
@@ -607,7 +607,7 @@
 | r1 | `[]*AutoDecodeResult` |   |
 
 
-### DESCBCDecrypt
+### descbcdecrypt
 
 #### 详细描述
 
@@ -630,7 +630,7 @@
 | r2 | `error` |   |
 
 
-### DESCBCEncrypt
+### descbcencrypt
 
 #### 详细描述
 
@@ -653,7 +653,7 @@
 | r2 | `error` |   |
 
 
-### DESDecrypt
+### desdecrypt
 
 #### 详细描述
 
@@ -676,7 +676,7 @@
 | r2 | `error` |   |
 
 
-### DESECBDecrypt
+### desecbdecrypt
 
 #### 详细描述
 
@@ -698,7 +698,7 @@
 | r2 | `error` |   |
 
 
-### DESECBEncrypt
+### desecbencrypt
 
 #### 详细描述
 
@@ -720,7 +720,7 @@
 | r2 | `error` |   |
 
 
-### DESEncrypt
+### desencrypt
 
 #### 详细描述
 
@@ -743,7 +743,7 @@
 | r2 | `error` |   |
 
 
-### DecodeASCII
+### decodeascii
 
 #### 详细描述
 Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)
@@ -764,7 +764,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeBase32
+### decodebase32
 
 #### 详细描述
 
@@ -785,7 +785,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeBase64
+### decodebase64
 
 #### 详细描述
 
@@ -806,7 +806,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeBase64Url
+### decodebase64url
 
 #### 详细描述
 
@@ -827,7 +827,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeChunked
+### decodechunked
 
 #### 详细描述
 
@@ -848,7 +848,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeHex
+### decodehex
 
 #### 详细描述
 
@@ -869,10 +869,10 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### DecodeHtml
+### decodehtml
 
 #### 详细描述
-UnescapeString unescapes entities like "&lt;" to become "<". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacute;"unescapes to "á", as does "&#225;" and "&#xE1;".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
+UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacute;"unescapes to "á", as does "&#225;" and "&#xE1;".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
 
 #### 定义
 
@@ -889,7 +889,7 @@ UnescapeString unescapes entities like "&lt;" to become "<". It unescapes alarge
 | r1 | `string` |   |
 
 
-### DecodeUrl
+### decodeurl
 
 #### 详细描述
 QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.
@@ -910,7 +910,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r2 | `error` |   |
 
 
-### DoubleDecodeUrl
+### doubledecodeurl
 
 #### 详细描述
 
@@ -931,7 +931,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r2 | `error` |   |
 
 
-### DoubleEncodeUrl
+### doubleencodeurl
 
 #### 详细描述
 
@@ -951,7 +951,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | i | `interface` |   |
 
 
-### EncodeASCII
+### encodeascii
 
 #### 详细描述
 
@@ -971,7 +971,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeBase32
+### encodebase32
 
 #### 详细描述
 
@@ -991,7 +991,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeBase64
+### encodebase64
 
 #### 详细描述
 
@@ -1011,7 +1011,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeBase64Url
+### encodebase64url
 
 #### 详细描述
 
@@ -1031,7 +1031,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeChunked
+### encodechunked
 
 #### 详细描述
 
@@ -1051,7 +1051,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `[]byte` |   |
 
 
-### EncodeHtml
+### encodehtml
 
 #### 详细描述
 
@@ -1071,7 +1071,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeHtmlHex
+### encodehtmlhex
 
 #### 详细描述
 
@@ -1091,7 +1091,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeToHex
+### encodetohex
 
 #### 详细描述
 
@@ -1111,7 +1111,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeToPrintable
+### encodetoprintable
 
 #### 详细描述
 
@@ -1131,7 +1131,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EncodeUrl
+### encodeurl
 
 #### 详细描述
 
@@ -1151,10 +1151,10 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### EscapeHtml
+### escapehtml
 
 #### 详细描述
-EscapeString escapes special characters like "<" to become "&lt;". Itescapes only five such characters: <, >, &, ' and ".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
+EscapeString escapes special characters like "&lt;" to become "&lt;". Itescapes only five such characters: &lt;, &gt;, &, ' and ".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
 
 #### 定义
 
@@ -1171,7 +1171,7 @@ EscapeString escapes special characters like "<" to become "&lt;". Itescapes onl
 | r1 | `string` |   |
 
 
-### EscapePathUrl
+### escapepathurl
 
 #### 详细描述
 PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as needed.
@@ -1191,7 +1191,7 @@ PathEscape escapes the string so it can be safely placed inside a URL path segme
 | r1 | `string` |   |
 
 
-### EscapeQueryUrl
+### escapequeryurl
 
 #### 详细描述
 QueryEscape escapes the string so it can be safely placedinside a URL query.
@@ -1211,7 +1211,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### FixUTF8
+### fixutf8
 
 #### 详细描述
 
@@ -1231,7 +1231,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### GB18030ToUTF8
+### gb18030toutf8
 
 #### 详细描述
 
@@ -1252,7 +1252,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### GBKSafe
+### gbksafe
 
 #### 详细描述
 
@@ -1273,7 +1273,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### GBKToUTF8
+### gbktoutf8
 
 #### 详细描述
 
@@ -1294,7 +1294,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### HTMLChardet
+### htmlchardet
 
 #### 详细描述
 
@@ -1315,7 +1315,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### HTMLChardetBest
+### htmlchardetbest
 
 #### 详细描述
 
@@ -1336,7 +1336,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### HZGB2312ToUTF8
+### hzgb2312toutf8
 
 #### 详细描述
 
@@ -1357,7 +1357,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### HmacMD5
+### hmacmd5
 
 #### 详细描述
 
@@ -1378,7 +1378,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### HmacSM3
+### hmacsm3
 
 #### 详细描述
 
@@ -1399,7 +1399,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### HmacSha1
+### hmacsha1
 
 #### 详细描述
 
@@ -1420,7 +1420,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### HmacSha256
+### hmacsha256
 
 #### 详细描述
 
@@ -1441,7 +1441,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### HmacSha512
+### hmacsha512
 
 #### 详细描述
 
@@ -1462,7 +1462,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### MMH3Hash128
+### mmh3hash128
 
 #### 详细描述
 
@@ -1482,7 +1482,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### MMH3Hash128x64
+### mmh3hash128x64
 
 #### 详细描述
 
@@ -1502,7 +1502,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### MMH3Hash32
+### mmh3hash32
 
 #### 详细描述
 
@@ -1522,7 +1522,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `int64` |   |
 
 
-### Md5
+### md5
 
 #### 详细描述
 
@@ -1542,7 +1542,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### PKCS5Padding
+### pkcs5padding
 
 #### 详细描述
 
@@ -1563,7 +1563,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### PKCS5UnPadding
+### pkcs5unpadding
 
 #### 详细描述
 
@@ -1583,7 +1583,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### PKCS7Padding
+### pkcs7padding
 
 #### 详细描述
 
@@ -1603,7 +1603,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### PKCS7UnPadding
+### pkcs7unpadding
 
 #### 详细描述
 
@@ -1623,7 +1623,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### RC4Decrypt
+### rc4decrypt
 
 #### 详细描述
 
@@ -1645,7 +1645,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### RC4Encrypt
+### rc4encrypt
 
 #### 详细描述
 
@@ -1667,7 +1667,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### RSADecryptWithOAEP
+### rsadecryptwithoaep
 
 #### 详细描述
 
@@ -1689,7 +1689,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### RSADecryptWithPKCS1v15
+### rsadecryptwithpkcs1v15
 
 #### 详细描述
 
@@ -1711,7 +1711,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### RSAEncryptWithOAEP
+### rsaencryptwithoaep
 
 #### 详细描述
 
@@ -1733,7 +1733,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### RSAEncryptWithPKCS1v15
+### rsaencryptwithpkcs1v15
 
 #### 详细描述
 
@@ -1755,7 +1755,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sha1
+### sha1
 
 #### 详细描述
 
@@ -1775,7 +1775,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### Sha224
+### sha224
 
 #### 详细描述
 
@@ -1795,7 +1795,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### Sha256
+### sha256
 
 #### 详细描述
 
@@ -1815,7 +1815,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### Sha384
+### sha384
 
 #### 详细描述
 
@@ -1835,7 +1835,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### Sha512
+### sha512
 
 #### 详细描述
 
@@ -1855,7 +1855,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### Sm2DecryptAsn1
+### sm2decryptasn1
 
 #### 详细描述
 
@@ -1877,7 +1877,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2DecryptAsn1WithPassword
+### sm2decryptasn1withpassword
 
 #### 详细描述
 
@@ -1900,7 +1900,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2DecryptC1C2C3
+### sm2decryptc1c2c3
 
 #### 详细描述
 
@@ -1922,7 +1922,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2DecryptC1C2C3WithPassword
+### sm2decryptc1c2c3withpassword
 
 #### 详细描述
 
@@ -1945,7 +1945,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2DecryptC1C3C2
+### sm2decryptc1c3c2
 
 #### 详细描述
 
@@ -1967,7 +1967,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2DecryptC1C3C2WithPassword
+### sm2decryptc1c3c2withpassword
 
 #### 详细描述
 
@@ -1990,7 +1990,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2EncryptAsn1
+### sm2encryptasn1
 
 #### 详细描述
 
@@ -2012,7 +2012,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2EncryptC1C2C3
+### sm2encryptc1c2c3
 
 #### 详细描述
 
@@ -2034,7 +2034,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2EncryptC1C3C2
+### sm2encryptc1c3c2
 
 #### 详细描述
 
@@ -2056,7 +2056,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm2GenerateHexKeyPair
+### sm2generatehexkeypair
 
 #### 详细描述
 
@@ -2073,7 +2073,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r3 | `error` |   |
 
 
-### Sm2GeneratePemKeyPair
+### sm2generatepemkeypair
 
 #### 详细描述
 
@@ -2090,7 +2090,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r3 | `error` |   |
 
 
-### Sm3
+### sm3
 
 #### 详细描述
 
@@ -2110,7 +2110,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `[]byte` |   |
 
 
-### Sm4CBCDecrypt
+### sm4cbcdecrypt
 
 #### 详细描述
 
@@ -2133,7 +2133,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4CBCEncrypt
+### sm4cbcencrypt
 
 #### 详细描述
 
@@ -2156,7 +2156,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4CFBDecrypt
+### sm4cfbdecrypt
 
 #### 详细描述
 
@@ -2179,7 +2179,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4CFBEncrypt
+### sm4cfbencrypt
 
 #### 详细描述
 
@@ -2202,7 +2202,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4EBCDecrypt
+### sm4ebcdecrypt
 
 #### 详细描述
 
@@ -2225,7 +2225,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4EBCEncrypt
+### sm4ebcencrypt
 
 #### 详细描述
 
@@ -2248,7 +2248,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4ECBDecrypt
+### sm4ecbdecrypt
 
 #### 详细描述
 
@@ -2271,7 +2271,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4ECBEncrypt
+### sm4ecbencrypt
 
 #### 详细描述
 
@@ -2294,7 +2294,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4GCMDecrypt
+### sm4gcmdecrypt
 
 #### 详细描述
 
@@ -2317,7 +2317,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4GCMEncrypt
+### sm4gcmencrypt
 
 #### 详细描述
 
@@ -2340,7 +2340,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4OFBDecrypt
+### sm4ofbdecrypt
 
 #### 详细描述
 
@@ -2363,7 +2363,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### Sm4OFBEncrypt
+### sm4ofbencrypt
 
 #### 详细描述
 
@@ -2386,7 +2386,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r2 | `error` |   |
 
 
-### StrconvQuote
+### strconvquote
 
 #### 详细描述
 
@@ -2406,7 +2406,7 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 | r1 | `string` |   |
 
 
-### StrconvUnquote
+### strconvunquote
 
 #### 详细描述
 Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)
@@ -2427,7 +2427,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESCBCDecrypt
+### tripledescbcdecrypt
 
 #### 详细描述
 
@@ -2450,7 +2450,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESCBCEncrypt
+### tripledescbcencrypt
 
 #### 详细描述
 
@@ -2473,7 +2473,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESDecrypt
+### tripledesdecrypt
 
 #### 详细描述
 
@@ -2496,7 +2496,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESECBDecrypt
+### tripledesecbdecrypt
 
 #### 详细描述
 
@@ -2518,7 +2518,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESECBEncrypt
+### tripledesecbencrypt
 
 #### 详细描述
 
@@ -2540,7 +2540,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### TripleDESEncrypt
+### tripledesencrypt
 
 #### 详细描述
 
@@ -2563,7 +2563,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### UTF8ToGB18030
+### utf8togb18030
 
 #### 详细描述
 
@@ -2584,7 +2584,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### UTF8ToGBK
+### utf8togbk
 
 #### 详细描述
 
@@ -2605,7 +2605,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### UTF8ToHZGB2312
+### utf8tohzgb2312
 
 #### 详细描述
 
@@ -2626,7 +2626,7 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 | r2 | `error` |   |
 
 
-### UnescapePathUrl
+### unescapepathurl
 
 #### 详细描述
 PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB. It returns an error if any % is not followedby two hexadecimal digits.PathUnescape is identical to QueryUnescape except that it does notunescape '+' to ' ' (space).
@@ -2647,7 +2647,7 @@ PathUnescape does the inverse transformation of PathEscape,converting each 3-byt
 | r2 | `error` |   |
 
 
-### UnescapeQueryUrl
+### unescapequeryurl
 
 #### 详细描述
 QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.
@@ -2668,7 +2668,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r2 | `error` |   |
 
 
-### UnicodeDecode
+### unicodedecode
 
 #### 详细描述
 
@@ -2688,7 +2688,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### UnicodeEncode
+### unicodeencode
 
 #### 详细描述
 
@@ -2708,7 +2708,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `string` |   |
 
 
-### ZeroPadding
+### zeropadding
 
 #### 详细描述
 
@@ -2729,7 +2729,7 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 | r1 | `[]byte` |   |
 
 
-### ZeroUnPadding
+### zerounpadding
 
 #### 详细描述
 

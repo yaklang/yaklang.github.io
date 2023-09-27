@@ -2,14 +2,14 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [ldap.Login](#Login) ||
+| [ldap.Login](#login) ||
 | [ldap.password](#password) ||
 | [ldap.port](#port) ||
 | [ldap.username](#username) ||
 
 
 ## 函数定义
-### Login
+### login
 
 #### 详细描述
 

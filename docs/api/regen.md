@@ -2,12 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [regen.Generate](#Generate) ||
-| [regen.MustGenerate](#MustGenerate) ||
+| [regen.Generate](#generate) ||
+| [regen.MustGenerate](#mustgenerate) ||
 
 
 ## 函数定义
-### Generate
+### generate
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### MustGenerate
+### mustgenerate
 
 #### 详细描述
 

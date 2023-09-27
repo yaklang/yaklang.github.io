@@ -2,20 +2,20 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [facades.NewFacadeServer](#NewFacadeServer) ||
-| [facades.Serve](#Serve) ||
-| [facades.evilClassResource](#evilClassResource) ||
-| [facades.httpResource](#httpResource) ||
-| [facades.javaClassName](#javaClassName) ||
-| [facades.javaCodeBase](#javaCodeBase) ||
-| [facades.javaFactory](#javaFactory) ||
-| [facades.ldapResourceAddr](#ldapResourceAddr) ||
-| [facades.objectClass](#objectClass) ||
-| [facades.rmiResourceAddr](#rmiResourceAddr) ||
+| [facades.NewFacadeServer](#newfacadeserver) ||
+| [facades.Serve](#serve) ||
+| [facades.evilClassResource](#evilclassresource) ||
+| [facades.httpResource](#httpresource) ||
+| [facades.javaClassName](#javaclassname) ||
+| [facades.javaCodeBase](#javacodebase) ||
+| [facades.javaFactory](#javafactory) ||
+| [facades.ldapResourceAddr](#ldapresourceaddr) ||
+| [facades.objectClass](#objectclass) ||
+| [facades.rmiResourceAddr](#rmiresourceaddr) ||
 
 
 ## 函数定义
-### NewFacadeServer
+### newfacadeserver
 
 #### 详细描述
 
@@ -37,7 +37,7 @@
 | r1 | `*FacadeServer` |   |
 
 
-### Serve
+### serve
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `error` |   |
 
 
-### evilClassResource
+### evilclassresource
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### httpResource
+### httpresource
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### javaClassName
+### javaclassname
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### javaCodeBase
+### javacodebase
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### javaFactory
+### javafactory
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### ldapResourceAddr
+### ldapresourceaddr
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### objectClass
+### objectclass
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `FacadeServerConfig` |   |
 
 
-### rmiResourceAddr
+### rmiresourceaddr
 
 #### 详细描述
 

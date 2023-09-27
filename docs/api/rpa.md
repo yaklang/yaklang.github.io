@@ -2,30 +2,30 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [rpa.Bruteforce](#Bruteforce) ||
-| [rpa.Start](#Start) ||
-| [rpa.blackDomain](#blackDomain) ||
-| [rpa.bruteButtonElement](#bruteButtonElement) ||
-| [rpa.bruteCaptchaElement](#bruteCaptchaElement) ||
-| [rpa.brutePassElement](#brutePassElement) ||
-| [rpa.brutePassword](#brutePassword) ||
-| [rpa.bruteUserElement](#bruteUserElement) ||
-| [rpa.bruteUserPassPath](#bruteUserPassPath) ||
-| [rpa.bruteUsername](#bruteUsername) ||
+| [rpa.Bruteforce](#bruteforce) ||
+| [rpa.Start](#start) ||
+| [rpa.blackDomain](#blackdomain) ||
+| [rpa.bruteButtonElement](#brutebuttonelement) ||
+| [rpa.bruteCaptchaElement](#brutecaptchaelement) ||
+| [rpa.brutePassElement](#brutepasselement) ||
+| [rpa.brutePassword](#brutepassword) ||
+| [rpa.bruteUserElement](#bruteuserelement) ||
+| [rpa.bruteUserPassPath](#bruteuserpasspath) ||
+| [rpa.bruteUsername](#bruteusername) ||
 | [rpa.click](#click) ||
 | [rpa.depth](#depth) ||
 | [rpa.headers](#headers) ||
 | [rpa.input](#input) ||
-| [rpa.maxUrl](#maxUrl) ||
+| [rpa.maxUrl](#maxurl) ||
 | [rpa.proxy](#proxy) ||
 | [rpa.select](#select) ||
-| [rpa.strictUrl](#strictUrl) ||
+| [rpa.strictUrl](#stricturl) ||
 | [rpa.timeout](#timeout) ||
-| [rpa.whiteDomain](#whiteDomain) ||
+| [rpa.whiteDomain](#whitedomain) ||
 
 
 ## 函数定义
-### Bruteforce
+### bruteforce
 
 #### 详细描述
 
@@ -47,7 +47,7 @@
 | r2 | `string` |   |
 
 
-### Start
+### start
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### blackDomain
+### blackdomain
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteButtonElement
+### brutebuttonelement
 
 #### 详细描述
 
@@ -109,7 +109,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteCaptchaElement
+### brutecaptchaelement
 
 #### 详细描述
 
@@ -130,7 +130,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutePassElement
+### brutepasselement
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutePassword
+### brutepassword
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteUserElement
+### bruteuserelement
 
 #### 详细描述
 
@@ -190,7 +190,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteUserPassPath
+### bruteuserpasspath
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteUsername
+### bruteusername
 
 #### 详细描述
 
@@ -311,7 +311,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxUrl
+### maxurl
 
 #### 详细描述
 
@@ -373,7 +373,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### strictUrl
+### stricturl
 
 #### 详细描述
 
@@ -413,7 +413,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### whiteDomain
+### whitedomain
 
 #### 详细描述
 

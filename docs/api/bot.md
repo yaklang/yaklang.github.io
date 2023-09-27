@@ -2,16 +2,16 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [bot.FromEnv](#FromEnv) ||
-| [bot.New](#New) ||
+| [bot.FromEnv](#fromenv) ||
+| [bot.New](#new) ||
 | [bot.ding](#ding) ||
 | [bot.webhook](#webhook) ||
-| [bot.webhookWithSecret](#webhookWithSecret) ||
+| [bot.webhookWithSecret](#webhookwithsecret) ||
 | [bot.workwx](#workwx) ||
 
 
 ## 函数定义
-### FromEnv
+### fromenv
 
 #### 详细描述
 
@@ -26,7 +26,7 @@
 | r1 | `*Client` |   |
 
 
-### New
+### new
 
 #### 详细描述
 
@@ -87,7 +87,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### webhookWithSecret
+### webhookwithsecret
 
 #### 详细描述
 

@@ -2,48 +2,48 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [x.All](#All) |All returns true if all elements of the iterable are not empty (or if the iterable is empty)|
-| [x.Any](#Any) |Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.|
-| [x.Chunk](#Chunk) |Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining element.|
-| [x.Contains](#Contains) |Contains returns true if an element is present in a iteratee.|
-| [x.ConvertToMap](#ConvertToMap) ||
-| [x.Difference](#Difference) |Difference returns the difference between two collections.|
-| [x.Drop](#Drop) |Drop creates an array/slice with `n` elements dropped from the beginning.|
-| [x.Equal](#Equal) |IsEqual returns if the two objects are equal|
-| [x.Every](#Every) |Every returns true if every element is present in a iteratee.|
-| [x.Filter](#Filter) ||
-| [x.Find](#Find) ||
-| [x.Foreach](#Foreach) ||
-| [x.ForeachRight](#ForeachRight) ||
-| [x.Head](#Head) |Head gets the first element of array.|
-| [x.If](#If) ||
-| [x.IndexOf](#IndexOf) |IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found|
-| [x.Intersect](#Intersect) ||
-| [x.IsSubset](#IsSubset) |Subset returns true if collection x is a subset of y.|
-| [x.Keys](#Keys) |Keys creates an array of the own enumerable map keys or struct field names.|
-| [x.Map](#Map) ||
-| [x.Max](#Max) ||
-| [x.Min](#Min) ||
-| [x.Range](#Range) ||
-| [x.Reduce](#Reduce) ||
-| [x.RemoveRepeat](#RemoveRepeat) |Uniq creates an array with unique values.|
-| [x.Reverse](#Reverse) |Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.|
-| [x.Shift](#Shift) ||
-| [x.Shuffle](#Shuffle) |Shuffle creates an array of shuffled values|
-| [x.Some](#Some) |Some returns true if atleast one element is present in an iteratee.|
-| [x.Sort](#Sort) |SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type's Less method.|
-| [x.Subtract](#Subtract) |Subtract returns the subtraction between two collections.|
-| [x.Sum](#Sum) |Sum computes the sum of the values in array.|
-| [x.Tail](#Tail) |Tail gets all but the first element of array.|
-| [x.ToFloat64](#ToFloat64) |ToFloat64 converts any numeric value to float64.|
-| [x.ToMap](#ToMap) |ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>|
-| [x.Values](#Values) |Values creates an array of the own enumerable map values or struct field values.|
-| [x.WaitConnect](#WaitConnect) ||
-| [x.Zip](#Zip) |Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in lengthto the length of the shortest input iterable.|
+| [x.All](#all) |All returns true if all elements of the iterable are not empty (or if the iterable is empty)|
+| [x.Any](#any) |Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.|
+| [x.Chunk](#chunk) |Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining elem...|
+| [x.Contains](#contains) |Contains returns true if an element is present in a iteratee.|
+| [x.ConvertToMap](#converttomap) ||
+| [x.Difference](#difference) |Difference returns the difference between two collections.|
+| [x.Drop](#drop) |Drop creates an array/slice with `n` elements dropped from the beginning.|
+| [x.Equal](#equal) |IsEqual returns if the two objects are equal|
+| [x.Every](#every) |Every returns true if every element is present in a iteratee.|
+| [x.Filter](#filter) ||
+| [x.Find](#find) ||
+| [x.Foreach](#foreach) ||
+| [x.ForeachRight](#foreachright) ||
+| [x.Head](#head) |Head gets the first element of array.|
+| [x.If](#if) ||
+| [x.IndexOf](#indexof) |IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found|
+| [x.Intersect](#intersect) ||
+| [x.IsSubset](#issubset) |Subset returns true if collection x is a subset of y.|
+| [x.Keys](#keys) |Keys creates an array of the own enumerable map keys or struct field names.|
+| [x.Map](#map) ||
+| [x.Max](#max) ||
+| [x.Min](#min) ||
+| [x.Range](#range) ||
+| [x.Reduce](#reduce) ||
+| [x.RemoveRepeat](#removerepeat) |Uniq creates an array with unique values.|
+| [x.Reverse](#reverse) |Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.|
+| [x.Shift](#shift) ||
+| [x.Shuffle](#shuffle) |Shuffle creates an array of shuffled values|
+| [x.Some](#some) |Some returns true if atleast one element is present in an iteratee.|
+| [x.Sort](#sort) |SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less f...|
+| [x.Subtract](#subtract) |Subtract returns the subtraction between two collections.|
+| [x.Sum](#sum) |Sum computes the sum of the values in array.|
+| [x.Tail](#tail) |Tail gets all but the first element of array.|
+| [x.ToFloat64](#tofloat64) |ToFloat64 converts any numeric value to float64.|
+| [x.ToMap](#tomap) |ToMap transforms a slice of instances to a Map.[]*Foo =&gt; Map&lt;int, *Foo&gt;|
+| [x.Values](#values) |Values creates an array of the own enumerable map values or struct field values.|
+| [x.WaitConnect](#waitconnect) ||
+| [x.Zip](#zip) |Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in length...|
 
 
 ## 函数定义
-### All
+### all
 
 #### 详细描述
 All returns true if all elements of the iterable are not empty (or if the iterable is empty)
@@ -63,7 +63,7 @@ All returns true if all elements of the iterable are not empty (or if the iterab
 | r1 | `bool` |   |
 
 
-### Any
+### any
 
 #### 详细描述
 Any returns true if any element of the iterable is not empty. If the iterable is empty, return False.
@@ -83,7 +83,7 @@ Any returns true if any element of the iterable is not empty. If the iterable is
 | r1 | `bool` |   |
 
 
-### Chunk
+### chunk
 
 #### 详细描述
 Chunk creates an array of elements split into groups with the length of size.If array can't be split evenly, the final chunk will bethe remaining element.
@@ -104,7 +104,7 @@ Chunk creates an array of elements split into groups with the length of size.If 
 | r1 | `any` |   |
 
 
-### Contains
+### contains
 
 #### 详细描述
 Contains returns true if an element is present in a iteratee.
@@ -125,7 +125,7 @@ Contains returns true if an element is present in a iteratee.
 | r1 | `bool` |   |
 
 
-### ConvertToMap
+### converttomap
 
 #### 详细描述
 
@@ -145,7 +145,7 @@ Contains returns true if an element is present in a iteratee.
 | r1 | `map[string][]string` |   |
 
 
-### Difference
+### difference
 
 #### 详细描述
 Difference returns the difference between two collections.
@@ -167,7 +167,7 @@ Difference returns the difference between two collections.
 | r2 | `any` |   |
 
 
-### Drop
+### drop
 
 #### 详细描述
 Drop creates an array/slice with `n` elements dropped from the beginning.
@@ -188,7 +188,7 @@ Drop creates an array/slice with `n` elements dropped from the beginning.
 | r1 | `any` |   |
 
 
-### Equal
+### equal
 
 #### 详细描述
 IsEqual returns if the two objects are equal
@@ -209,7 +209,7 @@ IsEqual returns if the two objects are equal
 | r1 | `bool` |   |
 
 
-### Every
+### every
 
 #### 详细描述
 Every returns true if every element is present in a iteratee.
@@ -230,7 +230,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `bool` |   |
 
 
-### Filter
+### filter
 
 #### 详细描述
 
@@ -251,7 +251,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `any` |   |
 
 
-### Find
+### find
 
 #### 详细描述
 
@@ -272,7 +272,7 @@ Every returns true if every element is present in a iteratee.
 | r1 | `any` |   |
 
 
-### Foreach
+### foreach
 
 #### 详细描述
 
@@ -288,7 +288,7 @@ Every returns true if every element is present in a iteratee.
 | fc | `func(any)` |   |
 
 
-### ForeachRight
+### foreachright
 
 #### 详细描述
 
@@ -304,7 +304,7 @@ Every returns true if every element is present in a iteratee.
 | fc | `func(any)` |   |
 
 
-### Head
+### head
 
 #### 详细描述
 Head gets the first element of array.
@@ -324,7 +324,7 @@ Head gets the first element of array.
 | r1 | `any` |   |
 
 
-### If
+### if
 
 #### 详细描述
 
@@ -346,7 +346,7 @@ Head gets the first element of array.
 | r1 | `any` |   |
 
 
-### IndexOf
+### indexof
 
 #### 详细描述
 IndexOf gets the index at which the first occurrence of value is found in array or return -1if the value cannot be found
@@ -367,7 +367,7 @@ IndexOf gets the index at which the first occurrence of value is found in array 
 | r1 | `int` |   |
 
 
-### Intersect
+### intersect
 
 #### 详细描述
 
@@ -388,7 +388,7 @@ IndexOf gets the index at which the first occurrence of value is found in array 
 | r1 | `any` |   |
 
 
-### IsSubset
+### issubset
 
 #### 详细描述
 Subset returns true if collection x is a subset of y.
@@ -409,7 +409,7 @@ Subset returns true if collection x is a subset of y.
 | r1 | `bool` |   |
 
 
-### Keys
+### keys
 
 #### 详细描述
 Keys creates an array of the own enumerable map keys or struct field names.
@@ -429,7 +429,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### Map
+### map
 
 #### 详细描述
 
@@ -450,7 +450,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### Max
+### max
 
 #### 详细描述
 
@@ -470,7 +470,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### Min
+### min
 
 #### 详细描述
 
@@ -490,7 +490,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### Range
+### range
 
 #### 详细描述
 
@@ -510,7 +510,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `[]any` |   |
 
 
-### Reduce
+### reduce
 
 #### 详细描述
 
@@ -532,7 +532,7 @@ Keys creates an array of the own enumerable map keys or struct field names.
 | r1 | `any` |   |
 
 
-### RemoveRepeat
+### removerepeat
 
 #### 详细描述
 Uniq creates an array with unique values.
@@ -552,7 +552,7 @@ Uniq creates an array with unique values.
 | r1 | `any` |   |
 
 
-### Reverse
+### reverse
 
 #### 详细描述
 Reverse transforms an array the first element will become the last,the second element will become the second to last, etc.
@@ -572,7 +572,7 @@ Reverse transforms an array the first element will become the last,the second el
 | r1 | `any` |   |
 
 
-### Shift
+### shift
 
 #### 详细描述
 
@@ -592,7 +592,7 @@ Reverse transforms an array the first element will become the last,the second el
 | r1 | `any` |   |
 
 
-### Shuffle
+### shuffle
 
 #### 详细描述
 Shuffle creates an array of shuffled values
@@ -612,7 +612,7 @@ Shuffle creates an array of shuffled values
 | r1 | `any` |   |
 
 
-### Some
+### some
 
 #### 详细描述
 Some returns true if atleast one element is present in an iteratee.
@@ -633,7 +633,7 @@ Some returns true if atleast one element is present in an iteratee.
 | r1 | `bool` |   |
 
 
-### Sort
+### sort
 
 #### 详细描述
 SliceStable sorts the slice x using the provided lessfunction, keeping equal elements in their original order.It panics if x is not a slice.The less function must satisfy the same requirements asthe Interface type's Less method.
@@ -649,7 +649,7 @@ SliceStable sorts the slice x using the provided lessfunction, keeping equal ele
 | less | `func(i, j int) bool` |   |
 
 
-### Subtract
+### subtract
 
 #### 详细描述
 Subtract returns the subtraction between two collections.
@@ -670,7 +670,7 @@ Subtract returns the subtraction between two collections.
 | r1 | `any` |   |
 
 
-### Sum
+### sum
 
 #### 详细描述
 Sum computes the sum of the values in array.
@@ -690,7 +690,7 @@ Sum computes the sum of the values in array.
 | r1 | `float64` |   |
 
 
-### Tail
+### tail
 
 #### 详细描述
 Tail gets all but the first element of array.
@@ -710,7 +710,7 @@ Tail gets all but the first element of array.
 | r1 | `any` |   |
 
 
-### ToFloat64
+### tofloat64
 
 #### 详细描述
 ToFloat64 converts any numeric value to float64.
@@ -731,10 +731,10 @@ ToFloat64 converts any numeric value to float64.
 | r2 | `bool` |   |
 
 
-### ToMap
+### tomap
 
 #### 详细描述
-ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>
+ToMap transforms a slice of instances to a Map.[]*Foo =&gt; Map&lt;int, *Foo&gt;
 
 #### 定义
 
@@ -752,7 +752,7 @@ ToMap transforms a slice of instances to a Map.[]*Foo => Map<int, *Foo>
 | r1 | `any` |   |
 
 
-### Values
+### values
 
 #### 详细描述
 Values creates an array of the own enumerable map values or struct field values.
@@ -772,7 +772,7 @@ Values creates an array of the own enumerable map values or struct field values.
 | r1 | `any` |   |
 
 
-### WaitConnect
+### waitconnect
 
 #### 详细描述
 
@@ -793,7 +793,7 @@ Values creates an array of the own enumerable map values or struct field values.
 | r1 | `error` |   |
 
 
-### Zip
+### zip
 
 #### 详细描述
 Zip returns a list of tuples, where the i-th tuple contains the i-th elementfrom each of the input iterables. The returned list is truncated in lengthto the length of the shortest input iterable.

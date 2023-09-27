@@ -2,17 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [hook.CallYakitPluginFunc](#CallYakitPluginFunc) ||
-| [hook.LoadYakitPlugin](#LoadYakitPlugin) ||
-| [hook.LoadYakitPluginByName](#LoadYakitPluginByName) ||
-| [hook.LoadYakitPluginContext](#LoadYakitPluginContext) ||
-| [hook.NewManager](#NewManager) ||
-| [hook.NewMixPluginCaller](#NewMixPluginCaller) ||
-| [hook.RemoveYakitPluginByName](#RemoveYakitPluginByName) ||
+| [hook.CallYakitPluginFunc](#callyakitpluginfunc) ||
+| [hook.LoadYakitPlugin](#loadyakitplugin) ||
+| [hook.LoadYakitPluginByName](#loadyakitpluginbyname) ||
+| [hook.LoadYakitPluginContext](#loadyakitplugincontext) ||
+| [hook.NewManager](#newmanager) ||
+| [hook.NewMixPluginCaller](#newmixplugincaller) ||
+| [hook.RemoveYakitPluginByName](#removeyakitpluginbyname) ||
 
 
 ## 函数定义
-### CallYakitPluginFunc
+### callyakitpluginfunc
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r2 | `error` |   |
 
 
-### LoadYakitPlugin
+### loadyakitplugin
 
 #### 详细描述
 
@@ -56,7 +56,7 @@
 | r1 | `error` |   |
 
 
-### LoadYakitPluginByName
+### loadyakitpluginbyname
 
 #### 详细描述
 
@@ -78,7 +78,7 @@
 | r1 | `error` |   |
 
 
-### LoadYakitPluginContext
+### loadyakitplugincontext
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `error` |   |
 
 
-### NewManager
+### newmanager
 
 #### 详细描述
 
@@ -116,7 +116,7 @@
 | r1 | `*YakToCallerManager` |   |
 
 
-### NewMixPluginCaller
+### newmixplugincaller
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r2 | `error` |   |
 
 
-### RemoveYakitPluginByName
+### removeyakitpluginbyname
 
 #### 详细描述
 

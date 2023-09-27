@@ -2,32 +2,32 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [git.Checkout](#Checkout) ||
-| [git.Clone](#Clone) ||
-| [git.Fetch](#Fetch) ||
-| [git.IterateCommit](#IterateCommit) ||
-| [git.Pull](#Pull) ||
-| [git.SetProxy](#SetProxy) ||
+| [git.Checkout](#checkout) ||
+| [git.Clone](#clone) ||
+| [git.Fetch](#fetch) ||
+| [git.IterateCommit](#iteratecommit) ||
+| [git.Pull](#pull) ||
+| [git.SetProxy](#setproxy) ||
 | [git.auth](#auth) ||
-| [git.checkoutCreate](#checkoutCreate) ||
-| [git.checkoutForce](#checkoutForce) ||
-| [git.checkoutKeep](#checkoutKeep) ||
+| [git.checkoutCreate](#checkoutcreate) ||
+| [git.checkoutForce](#checkoutforce) ||
+| [git.checkoutKeep](#checkoutkeep) ||
 | [git.context](#context) ||
 | [git.depth](#depth) ||
-| [git.fetchAllTags](#fetchAllTags) ||
-| [git.filterCommit](#filterCommit) ||
-| [git.filterReference](#filterReference) ||
+| [git.fetchAllTags](#fetchalltags) ||
+| [git.filterCommit](#filtercommit) ||
+| [git.filterReference](#filterreference) ||
 | [git.force](#force) ||
-| [git.handleCommit](#handleCommit) ||
-| [git.handleReference](#handleReference) ||
-| [git.noFetchTags](#noFetchTags) ||
+| [git.handleCommit](#handlecommit) ||
+| [git.handleReference](#handlereference) ||
+| [git.noFetchTags](#nofetchtags) ||
 | [git.recursive](#recursive) ||
 | [git.remote](#remote) ||
 | [git.verify](#verify) ||
 
 
 ## 函数定义
-### Checkout
+### checkout
 
 #### 详细描述
 
@@ -49,7 +49,7 @@
 | r1 | `error` |   |
 
 
-### Clone
+### clone
 
 #### 详细描述
 
@@ -71,7 +71,7 @@
 | r1 | `error` |   |
 
 
-### Fetch
+### fetch
 
 #### 详细描述
 
@@ -92,7 +92,7 @@
 | r1 | `error` |   |
 
 
-### IterateCommit
+### iteratecommit
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r1 | `error` |   |
 
 
-### Pull
+### pull
 
 #### 详细描述
 
@@ -134,7 +134,7 @@
 | r1 | `error` |   |
 
 
-### SetProxy
+### setproxy
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutCreate
+### checkoutcreate
 
 #### 详细描述
 
@@ -190,7 +190,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutForce
+### checkoutforce
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutKeep
+### checkoutkeep
 
 #### 详细描述
 
@@ -270,7 +270,7 @@
 | r1 | `Option` |   |
 
 
-### fetchAllTags
+### fetchalltags
 
 #### 详细描述
 
@@ -290,7 +290,7 @@
 | r1 | `Option` |   |
 
 
-### filterCommit
+### filtercommit
 
 #### 详细描述
 
@@ -310,7 +310,7 @@
 | r1 | `Option` |   |
 
 
-### filterReference
+### filterreference
 
 #### 详细描述
 
@@ -350,7 +350,7 @@
 | r1 | `Option` |   |
 
 
-### handleCommit
+### handlecommit
 
 #### 详细描述
 
@@ -370,7 +370,7 @@
 | r1 | `Option` |   |
 
 
-### handleReference
+### handlereference
 
 #### 详细描述
 
@@ -390,7 +390,7 @@
 | r1 | `Option` |   |
 
 
-### noFetchTags
+### nofetchtags
 
 #### 详细描述
 

@@ -2,62 +2,62 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [yakit.AutoInitYakit](#AutoInitYakit) ||
-| [yakit.DeletePayloadByGroup](#DeletePayloadByGroup) ||
-| [yakit.EnableTable](#EnableTable) ||
-| [yakit.EnableWebsiteTrees](#EnableWebsiteTrees) ||
-| [yakit.Error](#Error) ||
-| [yakit.File](#File) ||
-| [yakit.GenerateYakitMITMHooksParams](#GenerateYakitMITMHooksParams) ||
-| [yakit.GetHomeDir](#GetHomeDir) ||
-| [yakit.GetHomeTempDir](#GetHomeTempDir) ||
-| [yakit.GetOnlineBaseUrl](#GetOnlineBaseUrl) ||
-| [yakit.Info](#Info) ||
-| [yakit.InitYakit](#InitYakit) ||
-| [yakit.Markdown](#Markdown) ||
-| [yakit.NewBarGraph](#NewBarGraph) ||
-| [yakit.NewClient](#NewClient) ||
-| [yakit.NewHTTPFlowRisk](#NewHTTPFlowRisk) ||
-| [yakit.NewLineGraph](#NewLineGraph) ||
-| [yakit.NewPieGraph](#NewPieGraph) ||
-| [yakit.NewTable](#NewTable) ||
-| [yakit.NewWordCloud](#NewWordCloud) ||
-| [yakit.Output](#Output) ||
-| [yakit.QueryDomainsByDomainKeyword](#QueryDomainsByDomainKeyword) ||
-| [yakit.QueryDomainsByNetwork](#QueryDomainsByNetwork) ||
-| [yakit.QueryDomainsByTitle](#QueryDomainsByTitle) ||
-| [yakit.QueryHTTPFlowsAll](#QueryHTTPFlowsAll) ||
-| [yakit.QueryHTTPFlowsByKeyword](#QueryHTTPFlowsByKeyword) ||
-| [yakit.QueryHostPortAll](#QueryHostPortAll) ||
-| [yakit.QueryHostPortByKeyword](#QueryHostPortByKeyword) ||
-| [yakit.QueryHostPortByNetwork](#QueryHostPortByNetwork) ||
-| [yakit.QueryHostPortByNetworkAndPort](#QueryHostPortByNetworkAndPort) ||
-| [yakit.QueryHostsByDomain](#QueryHostsByDomain) ||
-| [yakit.QueryHostsByNetwork](#QueryHostsByNetwork) ||
-| [yakit.QueryPortAssetByNetwork](#QueryPortAssetByNetwork) ||
-| [yakit.QueryUrlsAll](#QueryUrlsAll) ||
-| [yakit.QueryUrlsByKeyword](#QueryUrlsByKeyword) ||
-| [yakit.Report](#Report) ||
-| [yakit.SaveDomain](#SaveDomain) ||
-| [yakit.SaveHTTPFlow](#SaveHTTPFlow) ||
-| [yakit.SavePayload](#SavePayload) ||
-| [yakit.SavePayloadByFile](#SavePayloadByFile) ||
-| [yakit.SavePortFromResult](#SavePortFromResult) ||
-| [yakit.SetOnlineBaseUrl](#SetOnlineBaseUrl) ||
-| [yakit.SetProgress](#SetProgress) ||
-| [yakit.SetProgressEx](#SetProgressEx) ||
-| [yakit.StatusCard](#StatusCard) ||
-| [yakit.TableData](#TableData) ||
-| [yakit.Text](#Text) ||
-| [yakit.UpdateOnlineYakitStore](#UpdateOnlineYakitStore) ||
-| [yakit.UpdateYakitStore](#UpdateYakitStore) ||
-| [yakit.UpdateYakitStoreFromGit](#UpdateYakitStoreFromGit) ||
-| [yakit.UpdateYakitStoreLocal](#UpdateYakitStoreLocal) ||
-| [yakit.Warn](#Warn) ||
+| [yakit.AutoInitYakit](#autoinityakit) ||
+| [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
+| [yakit.EnableTable](#enabletable) ||
+| [yakit.EnableWebsiteTrees](#enablewebsitetrees) ||
+| [yakit.Error](#error) ||
+| [yakit.File](#file) ||
+| [yakit.GenerateYakitMITMHooksParams](#generateyakitmitmhooksparams) ||
+| [yakit.GetHomeDir](#gethomedir) ||
+| [yakit.GetHomeTempDir](#gethometempdir) ||
+| [yakit.GetOnlineBaseUrl](#getonlinebaseurl) ||
+| [yakit.Info](#info) ||
+| [yakit.InitYakit](#inityakit) ||
+| [yakit.Markdown](#markdown) ||
+| [yakit.NewBarGraph](#newbargraph) ||
+| [yakit.NewClient](#newclient) ||
+| [yakit.NewHTTPFlowRisk](#newhttpflowrisk) ||
+| [yakit.NewLineGraph](#newlinegraph) ||
+| [yakit.NewPieGraph](#newpiegraph) ||
+| [yakit.NewTable](#newtable) ||
+| [yakit.NewWordCloud](#newwordcloud) ||
+| [yakit.Output](#output) ||
+| [yakit.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
+| [yakit.QueryDomainsByNetwork](#querydomainsbynetwork) ||
+| [yakit.QueryDomainsByTitle](#querydomainsbytitle) ||
+| [yakit.QueryHTTPFlowsAll](#queryhttpflowsall) ||
+| [yakit.QueryHTTPFlowsByKeyword](#queryhttpflowsbykeyword) ||
+| [yakit.QueryHostPortAll](#queryhostportall) ||
+| [yakit.QueryHostPortByKeyword](#queryhostportbykeyword) ||
+| [yakit.QueryHostPortByNetwork](#queryhostportbynetwork) ||
+| [yakit.QueryHostPortByNetworkAndPort](#queryhostportbynetworkandport) ||
+| [yakit.QueryHostsByDomain](#queryhostsbydomain) ||
+| [yakit.QueryHostsByNetwork](#queryhostsbynetwork) ||
+| [yakit.QueryPortAssetByNetwork](#queryportassetbynetwork) ||
+| [yakit.QueryUrlsAll](#queryurlsall) ||
+| [yakit.QueryUrlsByKeyword](#queryurlsbykeyword) ||
+| [yakit.Report](#report) ||
+| [yakit.SaveDomain](#savedomain) ||
+| [yakit.SaveHTTPFlow](#savehttpflow) ||
+| [yakit.SavePayload](#savepayload) ||
+| [yakit.SavePayloadByFile](#savepayloadbyfile) ||
+| [yakit.SavePortFromResult](#saveportfromresult) ||
+| [yakit.SetOnlineBaseUrl](#setonlinebaseurl) ||
+| [yakit.SetProgress](#setprogress) ||
+| [yakit.SetProgressEx](#setprogressex) ||
+| [yakit.StatusCard](#statuscard) ||
+| [yakit.TableData](#tabledata) ||
+| [yakit.Text](#text) ||
+| [yakit.UpdateOnlineYakitStore](#updateonlineyakitstore) ||
+| [yakit.UpdateYakitStore](#updateyakitstore) ||
+| [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
+| [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
+| [yakit.Warn](#warn) ||
 
 
 ## 函数定义
-### AutoInitYakit
+### autoinityakit
 
 #### 详细描述
 
@@ -72,7 +72,7 @@
 | r1 | `` |   |
 
 
-### DeletePayloadByGroup
+### deletepayloadbygroup
 
 #### 详细描述
 
@@ -92,7 +92,7 @@
 | r1 | `error` |   |
 
 
-### EnableTable
+### enabletable
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r1 | `` |   |
 
 
-### EnableWebsiteTrees
+### enablewebsitetrees
 
 #### 详细描述
 
@@ -133,7 +133,7 @@
 | r1 | `` |   |
 
 
-### Error
+### error
 
 #### 详细描述
 
@@ -149,7 +149,7 @@
 | items | `...any` |   |
 
 
-### File
+### file
 
 #### 详细描述
 
@@ -165,7 +165,7 @@
 | desc | `...any` |   |
 
 
-### GenerateYakitMITMHooksParams
+### generateyakitmitmhooksparams
 
 #### 详细描述
 
@@ -188,7 +188,7 @@
 | r2 | `error` |   |
 
 
-### GetHomeDir
+### gethomedir
 
 #### 详细描述
 
@@ -203,7 +203,7 @@
 | r1 | `string` |   |
 
 
-### GetHomeTempDir
+### gethometempdir
 
 #### 详细描述
 
@@ -218,7 +218,7 @@
 | r1 | `string` |   |
 
 
-### GetOnlineBaseUrl
+### getonlinebaseurl
 
 #### 详细描述
 
@@ -233,7 +233,7 @@
 | r1 | `string` |   |
 
 
-### Info
+### info
 
 #### 详细描述
 
@@ -249,7 +249,7 @@
 | items | `...any` |   |
 
 
-### InitYakit
+### inityakit
 
 #### 详细描述
 
@@ -264,7 +264,7 @@
 | y | `*YakitClient` |   |
 
 
-### Markdown
+### markdown
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | tmp | `any` |   |
 
 
-### NewBarGraph
+### newbargraph
 
 #### 详细描述
 
@@ -294,7 +294,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### NewClient
+### newclient
 
 #### 详细描述
 
@@ -314,7 +314,7 @@
 | r1 | `*YakitClient` |   |
 
 
-### NewHTTPFlowRisk
+### newhttpflowrisk
 
 #### 详细描述
 
@@ -338,7 +338,7 @@
 | r1 | `*YakitHTTPFlowRisk` |   |
 
 
-### NewLineGraph
+### newlinegraph
 
 #### 详细描述
 
@@ -353,7 +353,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### NewPieGraph
+### newpiegraph
 
 #### 详细描述
 
@@ -368,7 +368,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### NewTable
+### newtable
 
 #### 详细描述
 
@@ -388,7 +388,7 @@
 | r1 | `*YakitTable` |   |
 
 
-### NewWordCloud
+### newwordcloud
 
 #### 详细描述
 
@@ -403,7 +403,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### Output
+### output
 
 #### 详细描述
 
@@ -423,7 +423,7 @@
 | r1 | `error` |   |
 
 
-### QueryDomainsByDomainKeyword
+### querydomainsbydomainkeyword
 
 #### 详细描述
 
@@ -444,7 +444,7 @@
 | r2 | `error` |   |
 
 
-### QueryDomainsByNetwork
+### querydomainsbynetwork
 
 #### 详细描述
 
@@ -465,7 +465,7 @@
 | r2 | `error` |   |
 
 
-### QueryDomainsByTitle
+### querydomainsbytitle
 
 #### 详细描述
 
@@ -486,7 +486,7 @@
 | r2 | `error` |   |
 
 
-### QueryHTTPFlowsAll
+### queryhttpflowsall
 
 #### 详细描述
 
@@ -501,7 +501,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### QueryHTTPFlowsByKeyword
+### queryhttpflowsbykeyword
 
 #### 详细描述
 
@@ -521,7 +521,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### QueryHostPortAll
+### queryhostportall
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `chan string` |   |
 
 
-### QueryHostPortByKeyword
+### queryhostportbykeyword
 
 #### 详细描述
 
@@ -556,7 +556,7 @@
 | r1 | `chan string` |   |
 
 
-### QueryHostPortByNetwork
+### queryhostportbynetwork
 
 #### 详细描述
 
@@ -576,7 +576,7 @@
 | r1 | `chan string` |   |
 
 
-### QueryHostPortByNetworkAndPort
+### queryhostportbynetworkandport
 
 #### 详细描述
 
@@ -597,7 +597,7 @@
 | r1 | `chan string` |   |
 
 
-### QueryHostsByDomain
+### queryhostsbydomain
 
 #### 详细描述
 
@@ -618,7 +618,7 @@
 | r2 | `error` |   |
 
 
-### QueryHostsByNetwork
+### queryhostsbynetwork
 
 #### 详细描述
 
@@ -639,7 +639,7 @@
 | r2 | `error` |   |
 
 
-### QueryPortAssetByNetwork
+### queryportassetbynetwork
 
 #### 详细描述
 
@@ -660,7 +660,7 @@
 | r2 | `error` |   |
 
 
-### QueryUrlsAll
+### queryurlsall
 
 #### 详细描述
 
@@ -675,7 +675,7 @@
 | r1 | `chan string` |   |
 
 
-### QueryUrlsByKeyword
+### queryurlsbykeyword
 
 #### 详细描述
 
@@ -695,7 +695,7 @@
 | r1 | `chan string` |   |
 
 
-### Report
+### report
 
 #### 详细描述
 
@@ -710,7 +710,7 @@
 | i | `int` |   |
 
 
-### SaveDomain
+### savedomain
 
 #### 详细描述
 
@@ -731,7 +731,7 @@
 | r1 | `error` |   |
 
 
-### SaveHTTPFlow
+### savehttpflow
 
 #### 详细描述
 
@@ -753,7 +753,7 @@
 | r1 | `error` |   |
 
 
-### SavePayload
+### savepayload
 
 #### 详细描述
 
@@ -774,7 +774,7 @@
 | r1 | `error` |   |
 
 
-### SavePayloadByFile
+### savepayloadbyfile
 
 #### 详细描述
 
@@ -795,7 +795,7 @@
 | r1 | `error` |   |
 
 
-### SavePortFromResult
+### saveportfromresult
 
 #### 详细描述
 
@@ -816,7 +816,7 @@
 | r1 | `error` |   |
 
 
-### SetOnlineBaseUrl
+### setonlinebaseurl
 
 #### 详细描述
 
@@ -831,7 +831,7 @@
 | u | `string` |   |
 
 
-### SetProgress
+### setprogress
 
 #### 详细描述
 
@@ -846,7 +846,7 @@
 | f | `float64` |   |
 
 
-### SetProgressEx
+### setprogressex
 
 #### 详细描述
 
@@ -862,7 +862,7 @@
 | f | `float64` |   |
 
 
-### StatusCard
+### statuscard
 
 #### 详细描述
 
@@ -884,7 +884,7 @@
 | data | `interface` |   |
 
 
-### TableData
+### tabledata
 
 #### 详细描述
 
@@ -905,7 +905,7 @@
 | r1 | `*YakitFixedTableData` |   |
 
 
-### Text
+### text
 
 #### 详细描述
 
@@ -921,7 +921,7 @@
 | items | `...any` |   |
 
 
-### UpdateOnlineYakitStore
+### updateonlineyakitstore
 
 #### 详细描述
 
@@ -936,7 +936,7 @@
 | r1 | `error` |   |
 
 
-### UpdateYakitStore
+### updateyakitstore
 
 #### 详细描述
 
@@ -951,7 +951,7 @@
 | r1 | `error` |   |
 
 
-### UpdateYakitStoreFromGit
+### updateyakitstorefromgit
 
 #### 详细描述
 
@@ -973,7 +973,7 @@
 | r1 | `error` |   |
 
 
-### UpdateYakitStoreLocal
+### updateyakitstorelocal
 
 #### 详细描述
 
@@ -993,7 +993,7 @@
 | r1 | `error` |   |
 
 
-### Warn
+### warn
 
 #### 详细描述
 

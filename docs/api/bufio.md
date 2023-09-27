@@ -2,16 +2,16 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [bufio.NewReadWriter](#NewReadWriter) ||
-| [bufio.NewReader](#NewReader) ||
-| [bufio.NewReaderSize](#NewReaderSize) ||
-| [bufio.NewScanner](#NewScanner) ||
-| [bufio.NewWriter](#NewWriter) ||
-| [bufio.NewWriterSize](#NewWriterSize) ||
+| [bufio.NewReadWriter](#newreadwriter) ||
+| [bufio.NewReader](#newreader) ||
+| [bufio.NewReaderSize](#newreadersize) ||
+| [bufio.NewScanner](#newscanner) ||
+| [bufio.NewWriter](#newwriter) ||
+| [bufio.NewWriterSize](#newwritersize) ||
 
 
 ## 函数定义
-### NewReadWriter
+### newreadwriter
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### NewReader
+### newreader
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### NewReaderSize
+### newreadersize
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### NewScanner
+### newscanner
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### NewWriter
+### newwriter
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r2 | `error` |   |
 
 
-### NewWriterSize
+### newwritersize
 
 #### 详细描述
 

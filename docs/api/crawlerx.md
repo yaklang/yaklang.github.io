@@ -2,39 +2,40 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [crawlerx.StartCrawler](#StartCrawler) ||
+| [crawlerx.StartCrawler](#startcrawler) ||
 | [crawlerx.blacklist](#blacklist) ||
-| [crawlerx.browserInfo](#browserInfo) ||
+| [crawlerx.browserInfo](#browserinfo) ||
 | [crawlerx.concurrent](#concurrent) ||
 | [crawlerx.cookies](#cookies) ||
-| [crawlerx.evalJs](#evalJs) ||
-| [crawlerx.extraWaitLoadTime](#extraWaitLoadTime) ||
-| [crawlerx.fileInput](#fileInput) ||
-| [crawlerx.formFill](#formFill) ||
-| [crawlerx.fullTimeout](#fullTimeout) ||
+| [crawlerx.evalJs](#evaljs) ||
+| [crawlerx.extraWaitLoadTime](#extrawaitloadtime) ||
+| [crawlerx.fileInput](#fileinput) ||
+| [crawlerx.formFill](#formfill) ||
+| [crawlerx.fullTimeout](#fulltimeout) ||
 | [crawlerx.headers](#headers) ||
-| [crawlerx.ignoreQueryName](#ignoreQueryName) ||
-| [crawlerx.invalidSuffix](#invalidSuffix) ||
-| [crawlerx.jsResultSend](#jsResultSend) ||
+| [crawlerx.ignoreQueryName](#ignorequeryname) ||
+| [crawlerx.invalidSuffix](#invalidsuffix) ||
+| [crawlerx.jsResultSend](#jsresultsend) ||
 | [crawlerx.leakless](#leakless) ||
-| [crawlerx.localStorage](#localStorage) ||
-| [crawlerx.maxDepth](#maxDepth) ||
-| [crawlerx.maxUrl](#maxUrl) ||
-| [crawlerx.pageTimeout](#pageTimeout) ||
-| [crawlerx.rawCookie](#rawCookie) ||
-| [crawlerx.rawHeaders](#rawHeaders) ||
-| [crawlerx.runtimeID](#runtimeID) ||
-| [crawlerx.runtimeId](#runtimeId) ||
-| [crawlerx.saveToDB](#saveToDB) ||
-| [crawlerx.scanRangeLevel](#scanRangeLevel) ||
-| [crawlerx.scanRepeatLevel](#scanRepeatLevel) ||
-| [crawlerx.sensitiveWords](#sensitiveWords) ||
+| [crawlerx.localStorage](#localstorage) ||
+| [crawlerx.maxDepth](#maxdepth) ||
+| [crawlerx.maxUrl](#maxurl) ||
+| [crawlerx.pageTimeout](#pagetimeout) ||
+| [crawlerx.rawCookie](#rawcookie) ||
+| [crawlerx.rawHeaders](#rawheaders) ||
+| [crawlerx.runtimeID](#runtimeid) ||
+| [crawlerx.runtimeId](#runtimeid) ||
+| [crawlerx.saveToDB](#savetodb) ||
+| [crawlerx.scanRangeLevel](#scanrangelevel) ||
+| [crawlerx.scanRepeatLevel](#scanrepeatlevel) ||
+| [crawlerx.sensitiveWords](#sensitivewords) ||
 | [crawlerx.stealth](#stealth) ||
+| [crawlerx.vue](#vue) ||
 | [crawlerx.whitelist](#whitelist) ||
 
 
 ## 函数定义
-### StartCrawler
+### startcrawler
 
 #### 详细描述
 
@@ -76,7 +77,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### browserInfo
+### browserinfo
 
 #### 详细描述
 
@@ -137,7 +138,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### evalJs
+### evaljs
 
 #### 详细描述
 
@@ -158,7 +159,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### extraWaitLoadTime
+### extrawaitloadtime
 
 #### 详细描述
 
@@ -178,7 +179,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### fileInput
+### fileinput
 
 #### 详细描述
 
@@ -198,7 +199,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### formFill
+### formfill
 
 #### 详细描述
 
@@ -218,7 +219,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### fullTimeout
+### fulltimeout
 
 #### 详细描述
 
@@ -258,7 +259,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### ignoreQueryName
+### ignorequeryname
 
 #### 详细描述
 
@@ -278,7 +279,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### invalidSuffix
+### invalidsuffix
 
 #### 详细描述
 
@@ -298,7 +299,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### jsResultSend
+### jsresultsend
 
 #### 详细描述
 
@@ -338,7 +339,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### localStorage
+### localstorage
 
 #### 详细描述
 
@@ -358,7 +359,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxDepth
+### maxdepth
 
 #### 详细描述
 
@@ -378,7 +379,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxUrl
+### maxurl
 
 #### 详细描述
 
@@ -398,7 +399,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### pageTimeout
+### pagetimeout
 
 #### 详细描述
 
@@ -418,7 +419,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rawCookie
+### rawcookie
 
 #### 详细描述
 
@@ -439,7 +440,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rawHeaders
+### rawheaders
 
 #### 详细描述
 
@@ -459,7 +460,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### runtimeID
+### runtimeid
 
 #### 详细描述
 
@@ -479,7 +480,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### runtimeId
+### runtimeid
 
 #### 详细描述
 
@@ -499,7 +500,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### saveToDB
+### savetodb
 
 #### 详细描述
 
@@ -519,7 +520,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### scanRangeLevel
+### scanrangelevel
 
 #### 详细描述
 
@@ -539,7 +540,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### scanRepeatLevel
+### scanrepeatlevel
 
 #### 详细描述
 
@@ -559,7 +560,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### sensitiveWords
+### sensitivewords
 
 #### 详细描述
 
@@ -592,6 +593,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | stealth | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### vue
+
+#### 详细描述
+
+
+#### 定义
+
+`vue(vue bool) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| vue | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

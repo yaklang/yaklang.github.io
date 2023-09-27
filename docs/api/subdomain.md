@@ -2,22 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [subdomain.Scan](#Scan) ||
-| [subdomain.dnsServer](#dnsServer) ||
-| [subdomain.eachQueryTimeout](#eachQueryTimeout) ||
-| [subdomain.eachSearchTimeout](#eachSearchTimeout) ||
-| [subdomain.mainDict](#mainDict) ||
-| [subdomain.maxDepth](#maxDepth) ||
+| [subdomain.Scan](#scan) ||
+| [subdomain.dnsServer](#dnsserver) ||
+| [subdomain.eachQueryTimeout](#eachquerytimeout) ||
+| [subdomain.eachSearchTimeout](#eachsearchtimeout) ||
+| [subdomain.mainDict](#maindict) ||
+| [subdomain.maxDepth](#maxdepth) ||
 | [subdomain.recursive](#recursive) ||
-| [subdomain.recursiveDict](#recursiveDict) ||
-| [subdomain.targetConcurrent](#targetConcurrent) ||
-| [subdomain.targetTimeout](#targetTimeout) ||
-| [subdomain.wildcardToStop](#wildcardToStop) ||
-| [subdomain.workerConcurrent](#workerConcurrent) ||
+| [subdomain.recursiveDict](#recursivedict) ||
+| [subdomain.targetConcurrent](#targetconcurrent) ||
+| [subdomain.targetTimeout](#targettimeout) ||
+| [subdomain.wildcardToStop](#wildcardtostop) ||
+| [subdomain.workerConcurrent](#workerconcurrent) ||
 
 
 ## 函数定义
-### Scan
+### scan
 
 #### 详细描述
 
@@ -39,7 +39,7 @@
 | r2 | `error` |   |
 
 
-### dnsServer
+### dnsserver
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### eachQueryTimeout
+### eachquerytimeout
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### eachSearchTimeout
+### eachsearchtimeout
 
 #### 详细描述
 
@@ -99,7 +99,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### mainDict
+### maindict
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### maxDepth
+### maxdepth
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### recursiveDict
+### recursivedict
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### targetConcurrent
+### targetconcurrent
 
 #### 详细描述
 
@@ -199,7 +199,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### targetTimeout
+### targettimeout
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### wildcardToStop
+### wildcardtostop
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### workerConcurrent
+### workerconcurrent
 
 #### 详细描述
 

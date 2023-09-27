@@ -2,64 +2,64 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [pcapx.GetStatistics](#GetStatistics) ||
-| [pcapx.InjectChaosTraffic](#InjectChaosTraffic) ||
-| [pcapx.InjectHTTPRequest](#InjectHTTPRequest) ||
-| [pcapx.InjectIP](#InjectIP) ||
-| [pcapx.InjectRaw](#InjectRaw) ||
-| [pcapx.InjectTCP](#InjectTCP) ||
-| [pcapx.OpenPcapFile](#OpenPcapFile) ||
-| [pcapx.StartSniff](#StartSniff) ||
+| [pcapx.GetStatistics](#getstatistics) ||
+| [pcapx.InjectChaosTraffic](#injectchaostraffic) ||
+| [pcapx.InjectHTTPRequest](#injecthttprequest) ||
+| [pcapx.InjectIP](#injectip) ||
+| [pcapx.InjectRaw](#injectraw) ||
+| [pcapx.InjectTCP](#injecttcp) ||
+| [pcapx.OpenPcapFile](#openpcapfile) ||
+| [pcapx.StartSniff](#startsniff) ||
 | [pcapx.arp_reply](#arp_reply) ||
-| [pcapx.arp_replyEx](#arp_replyEx) ||
+| [pcapx.arp_replyEx](#arp_replyex) ||
 | [pcapx.arp_request](#arp_request) ||
-| [pcapx.arp_requestEx](#arp_requestEx) ||
-| [pcapx.ethernet_dstMac](#ethernet_dstMac) ||
-| [pcapx.ethernet_nextLayerType](#ethernet_nextLayerType) ||
-| [pcapx.ethernet_srcMac](#ethernet_srcMac) ||
+| [pcapx.arp_requestEx](#arp_requestex) ||
+| [pcapx.ethernet_dstMac](#ethernet_dstmac) ||
+| [pcapx.ethernet_nextLayerType](#ethernet_nextlayertype) ||
+| [pcapx.ethernet_srcMac](#ethernet_srcmac) ||
 | [pcapx.icmp_id](#icmp_id) ||
 | [pcapx.icmp_payload](#icmp_payload) ||
 | [pcapx.icmp_seq](#icmp_seq) ||
 | [pcapx.icmp_type](#icmp_type) ||
-| [pcapx.ipv4_dstOp](#ipv4_dstOp) ||
+| [pcapx.ipv4_dstOp](#ipv4_dstop) ||
 | [pcapx.ipv4_flags](#ipv4_flags) ||
 | [pcapx.ipv4_fragment](#ipv4_fragment) ||
 | [pcapx.ipv4_id](#ipv4_id) ||
-| [pcapx.ipv4_nextLayerProtocol](#ipv4_nextLayerProtocol) ||
+| [pcapx.ipv4_nextLayerProtocol](#ipv4_nextlayerprotocol) ||
 | [pcapx.ipv4_option](#ipv4_option) ||
-| [pcapx.ipv4_srcIp](#ipv4_srcIp) ||
+| [pcapx.ipv4_srcIp](#ipv4_srcip) ||
 | [pcapx.ipv4_tos](#ipv4_tos) ||
 | [pcapx.ipv4_ttl](#ipv4_ttl) ||
-| [pcapx.pcap_bpfFilter](#pcap_bpfFilter) ||
+| [pcapx.pcap_bpfFilter](#pcap_bpffilter) ||
 | [pcapx.pcap_debug](#pcap_debug) ||
-| [pcapx.pcap_everyPacket](#pcap_everyPacket) ||
-| [pcapx.pcap_onFlowClosed](#pcap_onFlowClosed) ||
-| [pcapx.pcap_onFlowCreated](#pcap_onFlowCreated) ||
-| [pcapx.pcap_onFlowDataFrame](#pcap_onFlowDataFrame) ||
-| [pcapx.pcap_onFlowDataFrameNoReassembled](#pcap_onFlowDataFrameNoReassembled) ||
-| [pcapx.pcap_onHTTPFlow](#pcap_onHTTPFlow) ||
-| [pcapx.pcap_onHTTPRequest](#pcap_onHTTPRequest) ||
-| [pcapx.pcap_onTLSClientHello](#pcap_onTLSClientHello) ||
+| [pcapx.pcap_everyPacket](#pcap_everypacket) ||
+| [pcapx.pcap_onFlowClosed](#pcap_onflowclosed) ||
+| [pcapx.pcap_onFlowCreated](#pcap_onflowcreated) ||
+| [pcapx.pcap_onFlowDataFrame](#pcap_onflowdataframe) ||
+| [pcapx.pcap_onFlowDataFrameNoReassembled](#pcap_onflowdataframenoreassembled) ||
+| [pcapx.pcap_onHTTPFlow](#pcap_onhttpflow) ||
+| [pcapx.pcap_onHTTPRequest](#pcap_onhttprequest) ||
+| [pcapx.pcap_onTLSClientHello](#pcap_ontlsclienthello) ||
 | [pcapx.tcp_ack](#tcp_ack) ||
-| [pcapx.tcp_dataOffset](#tcp_dataOffset) ||
-| [pcapx.tcp_dstPort](#tcp_dstPort) ||
+| [pcapx.tcp_dataOffset](#tcp_dataoffset) ||
+| [pcapx.tcp_dstPort](#tcp_dstport) ||
 | [pcapx.tcp_flag](#tcp_flag) ||
-| [pcapx.tcp_optionMSS](#tcp_optionMSS) |WithTCP_OptionMSS is a IPv4Option default 1460|
-| [pcapx.tcp_optionRaw](#tcp_optionRaw) ||
-| [pcapx.tcp_optionSACK](#tcp_optionSACK) ||
-| [pcapx.tcp_optionSACKPermitted](#tcp_optionSACKPermitted) ||
-| [pcapx.tcp_optionTimestamp](#tcp_optionTimestamp) ||
-| [pcapx.tcp_optionWindowScale](#tcp_optionWindowScale) ||
+| [pcapx.tcp_optionMSS](#tcp_optionmss) |WithTCP_OptionMSS is a IPv4Option default 1460|
+| [pcapx.tcp_optionRaw](#tcp_optionraw) ||
+| [pcapx.tcp_optionSACK](#tcp_optionsack) ||
+| [pcapx.tcp_optionSACKPermitted](#tcp_optionsackpermitted) ||
+| [pcapx.tcp_optionTimestamp](#tcp_optiontimestamp) ||
+| [pcapx.tcp_optionWindowScale](#tcp_optionwindowscale) ||
 | [pcapx.tcp_seq](#tcp_seq) ||
-| [pcapx.tcp_srcPort](#tcp_srcPort) ||
+| [pcapx.tcp_srcPort](#tcp_srcport) ||
 | [pcapx.tcp_urgent](#tcp_urgent) ||
 | [pcapx.tcp_window](#tcp_window) ||
-| [pcapx.udp_dstPort](#udp_dstPort) ||
-| [pcapx.udp_srcPort](#udp_srcPort) ||
+| [pcapx.udp_dstPort](#udp_dstport) ||
+| [pcapx.udp_srcPort](#udp_srcport) ||
 
 
 ## 函数定义
-### GetStatistics
+### getstatistics
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `*Statistics` |   |
 
 
-### InjectChaosTraffic
+### injectchaostraffic
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | opts | `...ConfigOption` |   |
 
 
-### InjectHTTPRequest
+### injecthttprequest
 
 #### 详细描述
 
@@ -106,7 +106,7 @@
 | opt | `...ConfigOption` |   |
 
 
-### InjectIP
+### injectip
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | opt | `...ConfigOption` |   |
 
 
-### InjectRaw
+### injectraw
 
 #### 详细描述
 
@@ -138,7 +138,7 @@
 | opt | `...ConfigOption` |   |
 
 
-### InjectTCP
+### injecttcp
 
 #### 详细描述
 
@@ -154,7 +154,7 @@
 | opt | `...ConfigOption` |   |
 
 
-### OpenPcapFile
+### openpcapfile
 
 #### 详细描述
 
@@ -175,7 +175,7 @@
 | r1 | `error` |   |
 
 
-### StartSniff
+### startsniff
 
 #### 详细描述
 
@@ -217,7 +217,7 @@
 | r1 | `ArpConfig` |   |
 
 
-### arp_replyEx
+### arp_replyex
 
 #### 详细描述
 
@@ -260,7 +260,7 @@
 | r1 | `ArpConfig` |   |
 
 
-### arp_requestEx
+### arp_requestex
 
 #### 详细描述
 
@@ -282,7 +282,7 @@
 | r1 | `ArpConfig` |   |
 
 
-### ethernet_dstMac
+### ethernet_dstmac
 
 #### 详细描述
 
@@ -302,7 +302,7 @@
 | r1 | `EthernetOption` |   |
 
 
-### ethernet_nextLayerType
+### ethernet_nextlayertype
 
 #### 详细描述
 
@@ -322,7 +322,7 @@
 | r1 | `EthernetOption` |   |
 
 
-### ethernet_srcMac
+### ethernet_srcmac
 
 #### 详细描述
 
@@ -423,7 +423,7 @@
 | r1 | `ICMPOption` |   |
 
 
-### ipv4_dstOp
+### ipv4_dstop
 
 #### 详细描述
 
@@ -503,7 +503,7 @@
 | r1 | `IPv4Option` |   |
 
 
-### ipv4_nextLayerProtocol
+### ipv4_nextlayerprotocol
 
 #### 详细描述
 
@@ -544,7 +544,7 @@
 | r1 | `IPv4Option` |   |
 
 
-### ipv4_srcIp
+### ipv4_srcip
 
 #### 详细描述
 
@@ -604,7 +604,7 @@
 | r1 | `IPv4Option` |   |
 
 
-### pcap_bpfFilter
+### pcap_bpffilter
 
 #### 详细描述
 
@@ -644,7 +644,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_everyPacket
+### pcap_everypacket
 
 #### 详细描述
 
@@ -664,7 +664,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onFlowClosed
+### pcap_onflowclosed
 
 #### 详细描述
 
@@ -684,7 +684,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onFlowCreated
+### pcap_onflowcreated
 
 #### 详细描述
 
@@ -704,7 +704,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onFlowDataFrame
+### pcap_onflowdataframe
 
 #### 详细描述
 
@@ -724,7 +724,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onFlowDataFrameNoReassembled
+### pcap_onflowdataframenoreassembled
 
 #### 详细描述
 
@@ -744,7 +744,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onHTTPFlow
+### pcap_onhttpflow
 
 #### 详细描述
 
@@ -764,7 +764,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onHTTPRequest
+### pcap_onhttprequest
 
 #### 详细描述
 
@@ -784,7 +784,7 @@
 | r1 | `CaptureOption` |   |
 
 
-### pcap_onTLSClientHello
+### pcap_ontlsclienthello
 
 #### 详细描述
 
@@ -824,7 +824,7 @@
 | r1 | `TCPOption` |   |
 
 
-### tcp_dataOffset
+### tcp_dataoffset
 
 #### 详细描述
 
@@ -844,7 +844,7 @@
 | r1 | `TCPOption` |   |
 
 
-### tcp_dstPort
+### tcp_dstport
 
 #### 详细描述
 
@@ -884,7 +884,7 @@
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionMSS
+### tcp_optionmss
 
 #### 详细描述
 WithTCP_OptionMSS is a IPv4Option default 1460
@@ -904,7 +904,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionRaw
+### tcp_optionraw
 
 #### 详细描述
 
@@ -925,7 +925,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionSACK
+### tcp_optionsack
 
 #### 详细描述
 
@@ -945,7 +945,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionSACKPermitted
+### tcp_optionsackpermitted
 
 #### 详细描述
 
@@ -960,7 +960,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionTimestamp
+### tcp_optiontimestamp
 
 #### 详细描述
 
@@ -980,7 +980,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_optionWindowScale
+### tcp_optionwindowscale
 
 #### 详细描述
 
@@ -1020,7 +1020,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### tcp_srcPort
+### tcp_srcport
 
 #### 详细描述
 
@@ -1080,7 +1080,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `TCPOption` |   |
 
 
-### udp_dstPort
+### udp_dstport
 
 #### 详细描述
 
@@ -1100,7 +1100,7 @@ WithTCP_OptionMSS is a IPv4Option default 1460
 | r1 | `UDPOption` |   |
 
 
-### udp_srcPort
+### udp_srcport
 
 #### 详细描述
 

@@ -2,14 +2,14 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [ja3.GetTransportByClientHelloSpec](#GetTransportByClientHelloSpec) ||
-| [ja3.ParseJA3](#ParseJA3) ||
-| [ja3.ParseJA3S](#ParseJA3S) ||
-| [ja3.ParseJA3ToClientHelloSpec](#ParseJA3ToClientHelloSpec) ||
+| [ja3.GetTransportByClientHelloSpec](#gettransportbyclienthellospec) ||
+| [ja3.ParseJA3](#parseja3) ||
+| [ja3.ParseJA3S](#parseja3s) ||
+| [ja3.ParseJA3ToClientHelloSpec](#parseja3toclienthellospec) ||
 
 
 ## 函数定义
-### GetTransportByClientHelloSpec
+### gettransportbyclienthellospec
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `*http.Transport` |   |
 
 
-### ParseJA3
+### parseja3
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### ParseJA3S
+### parseja3s
 
 #### 详细描述
 
@@ -71,7 +71,7 @@
 | r2 | `error` |   |
 
 
-### ParseJA3ToClientHelloSpec
+### parseja3toclienthellospec
 
 #### 详细描述
 

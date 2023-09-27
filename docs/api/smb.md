@@ -2,7 +2,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [smb.Connect](#Connect) ||
+| [smb.Connect](#connect) ||
 | [smb.debug](#debug) ||
 | [smb.domain](#domain) ||
 | [smb.hash](#hash) ||
@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### Connect
+### connect
 
 #### 详细描述
 

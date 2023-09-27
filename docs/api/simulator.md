@@ -2,28 +2,28 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [simulator.HttpBruteForce](#HttpBruteForce) ||
-| [simulator.captchaImgSelector](#captchaImgSelector) ||
-| [simulator.captchaInputSelector](#captchaInputSelector) ||
-| [simulator.captchaMode](#captchaMode) ||
-| [simulator.captchaUrl](#captchaUrl) ||
-| [simulator.exePath](#exePath) ||
-| [simulator.extraWaitLoadTime](#extraWaitLoadTime) ||
-| [simulator.leaklessStatus](#leaklessStatus) ||
-| [simulator.loginDetectMode](#loginDetectMode) ||
+| [simulator.HttpBruteForce](#httpbruteforce) ||
+| [simulator.captchaImgSelector](#captchaimgselector) ||
+| [simulator.captchaInputSelector](#captchainputselector) ||
+| [simulator.captchaMode](#captchamode) ||
+| [simulator.captchaUrl](#captchaurl) ||
+| [simulator.exePath](#exepath) ||
+| [simulator.extraWaitLoadTime](#extrawaitloadtime) ||
+| [simulator.leaklessStatus](#leaklessstatus) ||
+| [simulator.loginDetectMode](#logindetectmode) ||
 | [simulator.password](#password) ||
-| [simulator.passwordList](#passwordList) ||
-| [simulator.passwordSelector](#passwordSelector) ||
+| [simulator.passwordList](#passwordlist) ||
+| [simulator.passwordSelector](#passwordselector) ||
 | [simulator.proxy](#proxy) ||
-| [simulator.submitButtonSelector](#submitButtonSelector) ||
+| [simulator.submitButtonSelector](#submitbuttonselector) ||
 | [simulator.username](#username) ||
-| [simulator.usernameList](#usernameList) ||
-| [simulator.usernameSelector](#usernameSelector) ||
-| [simulator.wsAddress](#wsAddress) ||
+| [simulator.usernameList](#usernamelist) ||
+| [simulator.usernameSelector](#usernameselector) ||
+| [simulator.wsAddress](#wsaddress) ||
 
 
 ## 函数定义
-### HttpBruteForce
+### httpbruteforce
 
 #### 详细描述
 
@@ -45,7 +45,7 @@
 | r2 | `error` |   |
 
 
-### captchaImgSelector
+### captchaimgselector
 
 #### 详细描述
 
@@ -65,7 +65,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchaInputSelector
+### captchainputselector
 
 #### 详细描述
 
@@ -85,7 +85,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchaMode
+### captchamode
 
 #### 详细描述
 
@@ -105,7 +105,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchaUrl
+### captchaurl
 
 #### 详细描述
 
@@ -125,7 +125,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### exePath
+### exepath
 
 #### 详细描述
 
@@ -145,7 +145,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### extraWaitLoadTime
+### extrawaitloadtime
 
 #### 详细描述
 
@@ -165,7 +165,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### leaklessStatus
+### leaklessstatus
 
 #### 详细描述
 
@@ -185,7 +185,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### loginDetectMode
+### logindetectmode
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### passwordList
+### passwordlist
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### passwordSelector
+### passwordselector
 
 #### 详细描述
 
@@ -287,7 +287,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### submitButtonSelector
+### submitbuttonselector
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### usernameList
+### usernamelist
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### usernameSelector
+### usernameselector
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### wsAddress
+### wsaddress
 
 #### 详细描述
 

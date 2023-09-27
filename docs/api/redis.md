@@ -2,18 +2,18 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [redis.New](#New) ||
+| [redis.New](#new) ||
 | [redis.addr](#addr) ||
 | [redis.host](#host) ||
 | [redis.password](#password) ||
 | [redis.port](#port) ||
 | [redis.retry](#retry) ||
-| [redis.timeoutSeconds](#timeoutSeconds) ||
+| [redis.timeoutSeconds](#timeoutseconds) ||
 | [redis.username](#username) ||
 
 
 ## 函数定义
-### New
+### new
 
 #### 详细描述
 
@@ -133,7 +133,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### timeoutSeconds
+### timeoutseconds
 
 #### 详细描述
 

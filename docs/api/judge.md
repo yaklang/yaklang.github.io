@@ -2,13 +2,13 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [judge.CompareHTTPResponse](#CompareHTTPResponse) ||
-| [judge.CompareRaw](#CompareRaw) ||
-| [judge.NewDiscriminator](#NewDiscriminator) ||
+| [judge.CompareHTTPResponse](#comparehttpresponse) ||
+| [judge.CompareRaw](#compareraw) ||
+| [judge.NewDiscriminator](#newdiscriminator) ||
 
 
 ## 函数定义
-### CompareHTTPResponse
+### comparehttpresponse
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `float64` |   |
 
 
-### CompareRaw
+### compareraw
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `float64` |   |
 
 
-### NewDiscriminator
+### newdiscriminator
 
 #### 详细描述
 

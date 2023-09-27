@@ -2,24 +2,24 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [synscan.FixPermission](#FixPermission) ||
-| [synscan.Scan](#Scan) ||
-| [synscan.ScanFromPing](#ScanFromPing) ||
+| [synscan.FixPermission](#fixpermission) ||
+| [synscan.Scan](#scan) ||
+| [synscan.ScanFromPing](#scanfromping) ||
 | [synscan.callback](#callback) ||
 | [synscan.concurrent](#concurrent) |设置 SYN 扫描的并发可以有效控制精准度|
-| [synscan.excludeHosts](#excludeHosts) ||
-| [synscan.excludePorts](#excludePorts) ||
-| [synscan.initHostFilter](#initHostFilter) ||
-| [synscan.initPortFilter](#initPortFilter) ||
-| [synscan.outputFile](#outputFile) |端口开放的结果保存到文件|
-| [synscan.outputPrefix](#outputPrefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等|
-| [synscan.rateLimit](#rateLimit) ||
-| [synscan.submitTaskCallback](#submitTaskCallback) ||
+| [synscan.excludeHosts](#excludehosts) ||
+| [synscan.excludePorts](#excludeports) ||
+| [synscan.initHostFilter](#inithostfilter) ||
+| [synscan.initPortFilter](#initportfilter) ||
+| [synscan.outputFile](#outputfile) |端口开放的结果保存到文件|
+| [synscan.outputPrefix](#outputprefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等|
+| [synscan.rateLimit](#ratelimit) ||
+| [synscan.submitTaskCallback](#submittaskcallback) ||
 | [synscan.wait](#wait) |synscan 发出 SYN 包后等待多久？|
 
 
 ## 函数定义
-### FixPermission
+### fixpermission
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `error` |   |
 
 
-### Scan
+### scan
 
 #### 详细描述
 
@@ -57,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### ScanFromPing
+### scanfromping
 
 #### 详细描述
 
@@ -120,7 +120,7 @@
 | r1 | `scanOpt` |   |
 
 
-### excludeHosts
+### excludehosts
 
 #### 详细描述
 
@@ -140,7 +140,7 @@
 | r1 | `scanOpt` |   |
 
 
-### excludePorts
+### excludeports
 
 #### 详细描述
 
@@ -160,7 +160,7 @@
 | r1 | `scanOpt` |   |
 
 
-### initHostFilter
+### inithostfilter
 
 #### 详细描述
 
@@ -180,7 +180,7 @@
 | r1 | `scanOpt` |   |
 
 
-### initPortFilter
+### initportfilter
 
 #### 详细描述
 
@@ -200,7 +200,7 @@
 | r1 | `scanOpt` |   |
 
 
-### outputFile
+### outputfile
 
 #### 详细描述
 端口开放的结果保存到文件
@@ -220,7 +220,7 @@
 | r1 | `scanOpt` |   |
 
 
-### outputPrefix
+### outputprefix
 
 #### 详细描述
 端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
@@ -240,7 +240,7 @@
 | r1 | `scanOpt` |   |
 
 
-### rateLimit
+### ratelimit
 
 #### 详细描述
 
@@ -261,7 +261,7 @@
 | r1 | `scanOpt` |   |
 
 
-### submitTaskCallback
+### submittaskcallback
 
 #### 详细描述
 

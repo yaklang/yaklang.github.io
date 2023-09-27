@@ -2,9 +2,9 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [dnslog.LookupFirst](#LookupFirst) ||
-| [dnslog.NewCustomDNSLog](#NewCustomDNSLog) ||
-| [dnslog.QueryCustomScript](#QueryCustomScript) ||
+| [dnslog.LookupFirst](#lookupfirst) ||
+| [dnslog.NewCustomDNSLog](#newcustomdnslog) ||
+| [dnslog.QueryCustomScript](#querycustomscript) ||
 | [dnslog.local](#local) ||
 | [dnslog.mode](#mode) ||
 | [dnslog.random](#random) ||
@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### LookupFirst
+### lookupfirst
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `string` |   |
 
 
-### NewCustomDNSLog
+### newcustomdnslog
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r1 | `*CustomDNSLog` |   |
 
 
-### QueryCustomScript
+### querycustomscript
 
 #### 详细描述
 

@@ -2,12 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [rdp.Login](#Login) ||
-| [rdp.Version](#Version) ||
+| [rdp.Login](#login) ||
+| [rdp.Version](#version) ||
 
 
 ## 函数定义
-### Login
+### login
 
 #### 详细描述
 
@@ -32,7 +32,7 @@
 | err | `error` |   |
 
 
-### Version
+### version
 
 #### 详细描述
 

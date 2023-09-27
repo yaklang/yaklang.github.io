@@ -2,23 +2,23 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [httpool.Pool](#Pool) ||
+| [httpool.Pool](#pool) ||
 | [httpool.context](#context) ||
 | [httpool.fuzz](#fuzz) ||
-| [httpool.fuzzParams](#fuzzParams) ||
+| [httpool.fuzzParams](#fuzzparams) ||
 | [httpool.host](#host) ||
 | [httpool.https](#https) ||
-| [httpool.noFixContentLength](#noFixContentLength) ||
-| [httpool.perRequestTimeout](#perRequestTimeout) ||
+| [httpool.noFixContentLength](#nofixcontentlength) ||
+| [httpool.perRequestTimeout](#perrequesttimeout) ||
 | [httpool.port](#port) ||
 | [httpool.proxy](#proxy) ||
-| [httpool.rawMode](#rawMode) ||
-| [httpool.redirectTimes](#redirectTimes) ||
+| [httpool.rawMode](#rawmode) ||
+| [httpool.redirectTimes](#redirecttimes) ||
 | [httpool.size](#size) ||
 
 
 ## 函数定义
-### Pool
+### pool
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzzParams
+### fuzzparams
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### noFixContentLength
+### nofixcontentlength
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### perRequestTimeout
+### perrequesttimeout
 
 #### 详细描述
 
@@ -221,7 +221,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### rawMode
+### rawmode
 
 #### 详细描述
 
@@ -241,7 +241,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### redirectTimes
+### redirecttimes
 
 #### 详细描述
 

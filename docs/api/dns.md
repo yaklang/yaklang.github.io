@@ -2,17 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [dns.QuertAxfr](#QuertAxfr) ||
-| [dns.QueryIP](#QueryIP) ||
-| [dns.QueryIPAll](#QueryIPAll) ||
-| [dns.QueryNS](#QueryNS) ||
-| [dns.QueryTXT](#QueryTXT) ||
-| [dns.dnsServers](#dnsServers) ||
+| [dns.QuertAxfr](#quertaxfr) ||
+| [dns.QueryIP](#queryip) ||
+| [dns.QueryIPAll](#queryipall) ||
+| [dns.QueryNS](#queryns) ||
+| [dns.QueryTXT](#querytxt) ||
+| [dns.dnsServers](#dnsservers) ||
 | [dns.timeout](#timeout) ||
 
 
 ## 函数定义
-### QuertAxfr
+### quertaxfr
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `[]string` |   |
 
 
-### QueryIP
+### queryip
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `string` |   |
 
 
-### QueryIPAll
+### queryipall
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### QueryNS
+### queryns
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r1 | `[]string` |   |
 
 
-### QueryTXT
+### querytxt
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r1 | `[]string` |   |
 
 
-### dnsServers
+### dnsservers
 
 #### 详细描述
 

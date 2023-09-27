@@ -2,22 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [exec.CheckCrash](#CheckCrash) ||
-| [exec.Command](#Command) ||
-| [exec.CommandContext](#CommandContext) ||
-| [exec.System](#System) ||
-| [exec.SystemBatch](#SystemBatch) ||
-| [exec.SystemContext](#SystemContext) |执行系统命令|
-| [exec.WatchOutput](#WatchOutput) ||
-| [exec.WatchStderr](#WatchStderr) ||
-| [exec.WatchStdout](#WatchStdout) ||
+| [exec.CheckCrash](#checkcrash) ||
+| [exec.Command](#command) ||
+| [exec.CommandContext](#commandcontext) ||
+| [exec.System](#system) ||
+| [exec.SystemBatch](#systembatch) ||
+| [exec.SystemContext](#systemcontext) |执行系统命令|
+| [exec.WatchOutput](#watchoutput) ||
+| [exec.WatchStderr](#watchstderr) ||
+| [exec.WatchStdout](#watchstdout) ||
 | [exec.callback](#callback) ||
 | [exec.concurrent](#concurrent) ||
 | [exec.timeout](#timeout) ||
 
 
 ## 函数定义
-### CheckCrash
+### checkcrash
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r2 | `error` |   |
 
 
-### Command
+### command
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r2 | `error` |   |
 
 
-### CommandContext
+### commandcontext
 
 #### 详细描述
 
@@ -81,7 +81,7 @@
 | r2 | `error` |   |
 
 
-### System
+### system
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r2 | `error` |   |
 
 
-### SystemBatch
+### systembatch
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | opts | `...poolOpt` |   |
 
 
-### SystemContext
+### systemcontext
 
 #### 详细描述
 执行系统命令
@@ -140,7 +140,7 @@
 | r2 | `error` |   |
 
 
-### WatchOutput
+### watchoutput
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | r1 | `error` |   |
 
 
-### WatchStderr
+### watchstderr
 
 #### 详细描述
 
@@ -184,7 +184,7 @@
 | r1 | `error` |   |
 
 
-### WatchStdout
+### watchstdout
 
 #### 详细描述
 

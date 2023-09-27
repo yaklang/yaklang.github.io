@@ -5,7 +5,7 @@
 | [log.debug](#debug) |Debugf will print when logger's Level is debug.|
 | [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.|
 | [log.info](#info) |Infof will print when logger's Level is info or debug.|
-| [log.setLevel](#setLevel) ||
+| [log.setLevel](#setlevel) ||
 | [log.warn](#warn) ||
 
 
@@ -58,7 +58,7 @@ Infof will print when logger's Level is info or debug.
 | args | `...any` |   |
 
 
-### setLevel
+### setlevel
 
 #### 详细描述
 

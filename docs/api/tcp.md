@@ -2,22 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [tcp.Connect](#Connect) ||
-| [tcp.Forward](#Forward) ||
-| [tcp.MockServe](#MockServe) ||
-| [tcp.MockTCPProtocol](#MockTCPProtocol) ||
-| [tcp.Serve](#Serve) ||
-| [tcp.cliengProxy](#cliengProxy) ||
-| [tcp.clientLocal](#clientLocal) ||
-| [tcp.clientTimeout](#clientTimeout) ||
-| [tcp.clientTls](#clientTls) ||
-| [tcp.serverCallback](#serverCallback) ||
-| [tcp.serverContext](#serverContext) ||
-| [tcp.serverTls](#serverTls) ||
+| [tcp.Connect](#connect) ||
+| [tcp.Forward](#forward) ||
+| [tcp.MockServe](#mockserve) ||
+| [tcp.MockTCPProtocol](#mocktcpprotocol) ||
+| [tcp.Serve](#serve) ||
+| [tcp.cliengProxy](#cliengproxy) ||
+| [tcp.clientLocal](#clientlocal) ||
+| [tcp.clientTimeout](#clienttimeout) ||
+| [tcp.clientTls](#clienttls) ||
+| [tcp.serverCallback](#servercallback) ||
+| [tcp.serverContext](#servercontext) ||
+| [tcp.serverTls](#servertls) ||
 
 
 ## 函数定义
-### Connect
+### connect
 
 #### 详细描述
 
@@ -40,7 +40,7 @@
 | r2 | `error` |   |
 
 
-### Forward
+### forward
 
 #### 详细描述
 
@@ -62,7 +62,7 @@
 | r1 | `error` |   |
 
 
-### MockServe
+### mockserve
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r2 | `int` |   |
 
 
-### MockTCPProtocol
+### mocktcpprotocol
 
 #### 详细描述
 
@@ -104,7 +104,7 @@
 | r2 | `int` |   |
 
 
-### Serve
+### serve
 
 #### 详细描述
 
@@ -126,7 +126,7 @@
 | r1 | `error` |   |
 
 
-### cliengProxy
+### cliengproxy
 
 #### 详细描述
 
@@ -146,7 +146,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clientLocal
+### clientlocal
 
 #### 详细描述
 
@@ -166,7 +166,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clientTimeout
+### clienttimeout
 
 #### 详细描述
 
@@ -186,7 +186,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clientTls
+### clienttls
 
 #### 详细描述
 
@@ -208,7 +208,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### serverCallback
+### servercallback
 
 #### 详细描述
 
@@ -228,7 +228,7 @@
 | r1 | `tcpServerConfigOpt` |   |
 
 
-### serverContext
+### servercontext
 
 #### 详细描述
 
@@ -248,7 +248,7 @@
 | r1 | `tcpServerConfigOpt` |   |
 
 
-### serverTls
+### servertls
 
 #### 详细描述
 

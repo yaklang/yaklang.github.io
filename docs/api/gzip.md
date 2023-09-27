@@ -2,13 +2,13 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [gzip.Compress](#Compress) ||
-| [gzip.Decompress](#Decompress) ||
-| [gzip.IsGzip](#IsGzip) ||
+| [gzip.Compress](#compress) ||
+| [gzip.Decompress](#decompress) ||
+| [gzip.IsGzip](#isgzip) ||
 
 
 ## 函数定义
-### Compress
+### compress
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r2 | `error` |   |
 
 
-### Decompress
+### decompress
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### IsGzip
+### isgzip
 
 #### 详细描述
 

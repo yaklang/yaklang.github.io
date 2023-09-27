@@ -2,149 +2,149 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [str.CalcSSDeep](#CalcSSDeep) ||
-| [str.CalcSSDeepStability](#CalcSSDeepStability) |稳定性定义为最远距离 / 最低分数|
-| [str.CalcSimHash](#CalcSimHash) ||
-| [str.CalcSimHashStability](#CalcSimHashStability) |计算 simhash 稳定性|
-| [str.CalcSimilarity](#CalcSimilarity) ||
-| [str.CalcTextMaxSubStrStability](#CalcTextMaxSubStrStability) ||
-| [str.Compare](#Compare) |Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a < b, and +1 if a > b.Compare is included only for symmetry with package bytes.It is usually clearer and always faster to use the built-instring comparison operators ==, <, >, and so on.|
-| [str.Contains](#Contains) |Contains reports whether substr is within s.|
-| [str.ContainsAny](#ContainsAny) |ContainsAny reports whether any Unicode code points in chars are within s.|
-| [str.Count](#Count) |Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 + the number of Unicode code points in s.|
-| [str.EndsWith](#EndsWith) |HasSuffix tests whether the string s ends with suffix.|
-| [str.EqualFold](#EqualFold) |EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under simple Unicode case-folding, which is a more generalform of case-insensitivity.|
-| [str.ExtractBodyFromHTTPResponseRaw](#ExtractBodyFromHTTPResponseRaw) ||
-| [str.ExtractChineseIDCards](#ExtractChineseIDCards) ||
-| [str.ExtractDomain](#ExtractDomain) ||
-| [str.ExtractHost](#ExtractHost) ||
-| [str.ExtractJson](#ExtractJson) ||
-| [str.ExtractJsonWithRaw](#ExtractJsonWithRaw) ||
-| [str.ExtractRootDomain](#ExtractRootDomain) ||
-| [str.ExtractStrContext](#ExtractStrContext) ||
-| [str.ExtractTitle](#ExtractTitle) ||
-| [str.ExtractURLFromHTTPRequest](#ExtractURLFromHTTPRequest) ||
-| [str.ExtractURLFromHTTPRequestRaw](#ExtractURLFromHTTPRequestRaw) ||
-| [str.Fields](#Fields) |Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of substrings of s or anempty slice if s contains only white space.|
-| [str.FixHTTPRequest](#FixHTTPRequest) ||
-| [str.FixHTTPResponse](#FixHTTPResponse) |FixHTTPResponse try its best to fix and present human-readable response|
-| [str.Grok](#Grok) ||
-| [str.HasPrefix](#HasPrefix) |HasPrefix tests whether the string s begins with prefix.|
-| [str.HasSuffix](#HasSuffix) |HasSuffix tests whether the string s ends with suffix.|
-| [str.HostPort](#HostPort) ||
-| [str.IPv4ToCClassNetwork](#IPv4ToCClassNetwork) ||
-| [str.Index](#Index) |Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.|
-| [str.IndexAny](#IndexAny) |IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.|
-| [str.IndexByte](#IndexByte) |IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.|
-| [str.IntersectString](#IntersectString) |IntersectString returns the intersection between two collections of string.|
-| [str.IsAlNum](#IsAlNum) ||
-| [str.IsAlpha](#IsAlpha) ||
-| [str.IsAlphaNum](#IsAlphaNum) ||
-| [str.IsBase64Value](#IsBase64Value) ||
-| [str.IsCaptchaField](#IsCaptchaField) ||
-| [str.IsDigit](#IsDigit) ||
-| [str.IsHtmlResponse](#IsHtmlResponse) ||
-| [str.IsHttpURL](#IsHttpURL) |IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https|
-| [str.IsIPv4](#IsIPv4) ||
-| [str.IsIPv6](#IsIPv6) ||
-| [str.IsJSONPParam](#IsJSONPParam) ||
-| [str.IsJsonResponse](#IsJsonResponse) ||
-| [str.IsMD5Value](#IsMD5Value) ||
-| [str.IsPasswordField](#IsPasswordField) ||
-| [str.IsPlainBase64Value](#IsPlainBase64Value) ||
-| [str.IsRedirectParam](#IsRedirectParam) |根据 key 的名字猜测是否是用于重定向的参数|
-| [str.IsSQLColumnField](#IsSQLColumnField) ||
-| [str.IsSensitiveJson](#IsSensitiveJson) ||
-| [str.IsSensitiveTokenField](#IsSensitiveTokenField) ||
-| [str.IsServerError](#IsServerError) ||
-| [str.IsSha256Value](#IsSha256Value) ||
-| [str.IsStrongPassword](#IsStrongPassword) ||
-| [str.IsTLSServer](#IsTLSServer) ||
-| [str.IsUrlParam](#IsUrlParam) ||
-| [str.IsUrlPath](#IsUrlPath) |根据 value 猜测是否是一个 url path|
-| [str.IsUsernameField](#IsUsernameField) ||
-| [str.IsXmlParam](#IsXmlParam) ||
-| [str.IsXmlRequest](#IsXmlRequest) ||
-| [str.IsXmlValue](#IsXmlValue) ||
-| [str.Join](#Join) ||
-| [str.JsonStreamToMapList](#JsonStreamToMapList) ||
-| [str.JsonToMap](#JsonToMap) ||
-| [str.JsonToMapList](#JsonToMapList) ||
-| [str.LastIndex](#LastIndex) |LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.|
-| [str.LastIndexAny](#LastIndexAny) |LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s.|
-| [str.LastIndexByte](#LastIndexByte) |LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.|
-| [str.LowerAndTrimSpace](#LowerAndTrimSpace) ||
-| [str.MatchAllOfGlob](#MatchAllOfGlob) ||
-| [str.MatchAllOfRegexp](#MatchAllOfRegexp) ||
-| [str.MatchAllOfSubString](#MatchAllOfSubString) ||
-| [str.MatchAnyOfGlob](#MatchAnyOfGlob) ||
-| [str.MatchAnyOfRegexp](#MatchAnyOfRegexp) ||
-| [str.MatchAnyOfSubString](#MatchAnyOfSubString) ||
-| [str.MergeUrlFromHTTPRequest](#MergeUrlFromHTTPRequest) ||
-| [str.NewFilter](#NewFilter) ||
-| [str.NewReader](#NewReader) |NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferString but more efficient and read-only.|
-| [str.ParamsGetOr](#ParamsGetOr) ||
-| [str.ParseBytesToHTTPRequest](#ParseBytesToHTTPRequest) ||
-| [str.ParseBytesToHTTPResponse](#ParseBytesToHTTPResponse) ||
-| [str.ParseStringToCClassHosts](#ParseStringToCClassHosts) ||
-| [str.ParseStringToHTTPRequest](#ParseStringToHTTPRequest) ||
-| [str.ParseStringToHTTPResponse](#ParseStringToHTTPResponse) ||
-| [str.ParseStringToHostPort](#ParseStringToHostPort) ||
-| [str.ParseStringToHosts](#ParseStringToHosts) ||
-| [str.ParseStringToLines](#ParseStringToLines) ||
-| [str.ParseStringToPorts](#ParseStringToPorts) |ParseStringToPorts 负数端口代表了是 UDP 扫描端口|
-| [str.ParseStringToUrls](#ParseStringToUrls) ||
-| [str.ParseStringToUrlsWith3W](#ParseStringToUrlsWith3W) ||
-| [str.ParseStringUrlToUrlInstance](#ParseStringUrlToUrlInstance) ||
-| [str.ParseStringUrlToWebsiteRootPath](#ParseStringUrlToWebsiteRootPath) ||
-| [str.PathJoin](#PathJoin) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.|
-| [str.RandSecret](#RandSecret) ||
-| [str.RandStr](#RandStr) |RandStringBytes return length `n` alphabet random string|
-| [str.RegexpMatch](#RegexpMatch) ||
-| [str.RemoveRepeat](#RemoveRepeat) |元素去重|
-| [str.Repeat](#Repeat) |Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or if the result of (len(s) * count)overflows.|
-| [str.Replace](#Replace) |Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.If n < 0, there is no limit on the number of replacements.|
-| [str.ReplaceAll](#ReplaceAll) |ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.|
-| [str.ReplaceHTTPPacketBody](#ReplaceHTTPPacketBody) ||
-| [str.Split](#Split) |Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is not empty, Split returns aslice of length 1 whose only element is s.If sep is empty, Split splits after each UTF-8 sequence. If both sand sep are empty, Split returns an empty slice.It is equivalent to SplitN with a count of -1.To split around the first instance of a separator, see Cut.|
-| [str.SplitAfter](#SplitAfter) |SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not empty, SplitAfter returnsa slice of length 1 whose only element is s.If sep is empty, SplitAfter splits after each UTF-8 sequence. Ifboth s and sep are empty, SplitAfter returns an empty slice.It is equivalent to SplitAfterN with a count of -1.|
-| [str.SplitAfterN](#SplitAfterN) |SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings to return:	n > 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n < 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for SplitAfter.|
-| [str.SplitAndTrim](#SplitAndTrim) ||
-| [str.SplitHTTPHeadersAndBodyFromPacket](#SplitHTTPHeadersAndBodyFromPacket) ||
-| [str.SplitHostsToPrivateAndPublic](#SplitHostsToPrivateAndPublic) ||
-| [str.SplitN](#SplitN) |SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of substrings to return:	n > 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n < 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for Split.To split around the first instance of a separator, see Cut.|
-| [str.StartsWith](#StartsWith) |HasPrefix tests whether the string s begins with prefix.|
-| [str.StringContainsAnyOfSubString](#StringContainsAnyOfSubString) ||
-| [str.StringSliceContains](#StringSliceContains) ||
-| [str.StringSliceContainsAll](#StringSliceContainsAll) ||
-| [str.Subtract](#Subtract) |SubtractString returns the subtraction between two collections of string|
-| [str.Title](#Title) |Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for word boundaries does not handle Unicodepunctuation properly. Use golang.org/x/text/cases instead.|
-| [str.ToJsonIndentStr](#ToJsonIndentStr) ||
-| [str.ToLower](#ToLower) |ToLower returns s with all Unicode letters mapped to their lower case.|
-| [str.ToLowerSpecial](#ToLowerSpecial) |ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.|
-| [str.ToStringSlice](#ToStringSlice) ||
-| [str.ToTitle](#ToTitle) |ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.|
-| [str.ToTitleSpecial](#ToTitleSpecial) |ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.|
-| [str.ToUpper](#ToUpper) |ToUpper returns s with all Unicode letters mapped to their upper case.|
-| [str.ToUpperSpecial](#ToUpperSpecial) |ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.|
-| [str.ToValidUTF8](#ToValidUTF8) |ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.|
-| [str.Trim](#Trim) |Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.|
-| [str.TrimLeft](#TrimLeft) |TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.|
-| [str.TrimPrefix](#TrimPrefix) |TrimPrefix returns s without the provided leading prefix string.If s doesn't start with prefix, s is returned unchanged.|
-| [str.TrimRight](#TrimRight) |TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead.|
-| [str.TrimSpace](#TrimSpace) |TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.|
-| [str.TrimSuffix](#TrimSuffix) |TrimSuffix returns s without the provided trailing suffix string.If s doesn't end with suffix, s is returned unchanged.|
-| [str.UrlJoin](#UrlJoin) |https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value => [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value|
-| [str.VersionEqual](#VersionEqual) |VersionEqual v1 等于 v2 返回 true|
-| [str.VersionGreater](#VersionGreater) |VersionGreater v1 大于 v2 返回 true|
-| [str.VersionGreaterEqual](#VersionGreaterEqual) |VersionGreaterEqual v1 大于等于 v2 返回 true|
-| [str.VersionLess](#VersionLess) |VersionLess v1 小于 v2 返回true|
-| [str.VersionLessEqual](#VersionLessEqual) |VersionLessEqual v1 小于等于 v2 返回true|
+| [str.CalcSSDeep](#calcssdeep) ||
+| [str.CalcSSDeepStability](#calcssdeepstability) |稳定性定义为最远距离 / 最低分数|
+| [str.CalcSimHash](#calcsimhash) ||
+| [str.CalcSimHashStability](#calcsimhashstability) |计算 simhash 稳定性|
+| [str.CalcSimilarity](#calcsimilarity) ||
+| [str.CalcTextMaxSubStrStability](#calctextmaxsubstrstability) ||
+| [str.Compare](#compare) |Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b.Compare is inclu...|
+| [str.Contains](#contains) |Contains reports whether substr is within s.|
+| [str.ContainsAny](#containsany) |ContainsAny reports whether any Unicode code points in chars are within s.|
+| [str.Count](#count) |Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 + the number of Unicode code points ...|
+| [str.EndsWith](#endswith) |HasSuffix tests whether the string s ends with suffix.|
+| [str.EqualFold](#equalfold) |EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under simple Unicode case-folding, which is a more generalform of case-insen...|
+| [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) ||
+| [str.ExtractChineseIDCards](#extractchineseidcards) ||
+| [str.ExtractDomain](#extractdomain) ||
+| [str.ExtractHost](#extracthost) ||
+| [str.ExtractJson](#extractjson) ||
+| [str.ExtractJsonWithRaw](#extractjsonwithraw) ||
+| [str.ExtractRootDomain](#extractrootdomain) ||
+| [str.ExtractStrContext](#extractstrcontext) ||
+| [str.ExtractTitle](#extracttitle) ||
+| [str.ExtractURLFromHTTPRequest](#extracturlfromhttprequest) ||
+| [str.ExtractURLFromHTTPRequestRaw](#extracturlfromhttprequestraw) ||
+| [str.Fields](#fields) |Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of ...|
+| [str.FixHTTPRequest](#fixhttprequest) ||
+| [str.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse try its best to fix and present human-readable response|
+| [str.Grok](#grok) ||
+| [str.HasPrefix](#hasprefix) |HasPrefix tests whether the string s begins with prefix.|
+| [str.HasSuffix](#hassuffix) |HasSuffix tests whether the string s ends with suffix.|
+| [str.HostPort](#hostport) ||
+| [str.IPv4ToCClassNetwork](#ipv4tocclassnetwork) ||
+| [str.Index](#index) |Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.|
+| [str.IndexAny](#indexany) |IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.|
+| [str.IndexByte](#indexbyte) |IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.|
+| [str.IntersectString](#intersectstring) |IntersectString returns the intersection between two collections of string.|
+| [str.IsAlNum](#isalnum) ||
+| [str.IsAlpha](#isalpha) ||
+| [str.IsAlphaNum](#isalphanum) ||
+| [str.IsBase64Value](#isbase64value) ||
+| [str.IsCaptchaField](#iscaptchafield) ||
+| [str.IsDigit](#isdigit) ||
+| [str.IsHtmlResponse](#ishtmlresponse) ||
+| [str.IsHttpURL](#ishttpurl) |IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https|
+| [str.IsIPv4](#isipv4) ||
+| [str.IsIPv6](#isipv6) ||
+| [str.IsJSONPParam](#isjsonpparam) ||
+| [str.IsJsonResponse](#isjsonresponse) ||
+| [str.IsMD5Value](#ismd5value) ||
+| [str.IsPasswordField](#ispasswordfield) ||
+| [str.IsPlainBase64Value](#isplainbase64value) ||
+| [str.IsRedirectParam](#isredirectparam) |根据 key 的名字猜测是否是用于重定向的参数|
+| [str.IsSQLColumnField](#issqlcolumnfield) ||
+| [str.IsSensitiveJson](#issensitivejson) ||
+| [str.IsSensitiveTokenField](#issensitivetokenfield) ||
+| [str.IsServerError](#isservererror) ||
+| [str.IsSha256Value](#issha256value) ||
+| [str.IsStrongPassword](#isstrongpassword) ||
+| [str.IsTLSServer](#istlsserver) ||
+| [str.IsUrlParam](#isurlparam) ||
+| [str.IsUrlPath](#isurlpath) |根据 value 猜测是否是一个 url path|
+| [str.IsUsernameField](#isusernamefield) ||
+| [str.IsXmlParam](#isxmlparam) ||
+| [str.IsXmlRequest](#isxmlrequest) ||
+| [str.IsXmlValue](#isxmlvalue) ||
+| [str.Join](#join) ||
+| [str.JsonStreamToMapList](#jsonstreamtomaplist) ||
+| [str.JsonToMap](#jsontomap) ||
+| [str.JsonToMapList](#jsontomaplist) ||
+| [str.LastIndex](#lastindex) |LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.|
+| [str.LastIndexAny](#lastindexany) |LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s...|
+| [str.LastIndexByte](#lastindexbyte) |LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.|
+| [str.LowerAndTrimSpace](#lowerandtrimspace) ||
+| [str.MatchAllOfGlob](#matchallofglob) ||
+| [str.MatchAllOfRegexp](#matchallofregexp) ||
+| [str.MatchAllOfSubString](#matchallofsubstring) ||
+| [str.MatchAnyOfGlob](#matchanyofglob) ||
+| [str.MatchAnyOfRegexp](#matchanyofregexp) ||
+| [str.MatchAnyOfSubString](#matchanyofsubstring) ||
+| [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) ||
+| [str.NewFilter](#newfilter) ||
+| [str.NewReader](#newreader) |NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferString but more efficient and read-only.|
+| [str.ParamsGetOr](#paramsgetor) ||
+| [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) ||
+| [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) ||
+| [str.ParseStringToCClassHosts](#parsestringtocclasshosts) ||
+| [str.ParseStringToHTTPRequest](#parsestringtohttprequest) ||
+| [str.ParseStringToHTTPResponse](#parsestringtohttpresponse) ||
+| [str.ParseStringToHostPort](#parsestringtohostport) ||
+| [str.ParseStringToHosts](#parsestringtohosts) ||
+| [str.ParseStringToLines](#parsestringtolines) ||
+| [str.ParseStringToPorts](#parsestringtoports) |ParseStringToPorts 负数端口代表了是 UDP 扫描端口|
+| [str.ParseStringToUrls](#parsestringtourls) ||
+| [str.ParseStringToUrlsWith3W](#parsestringtourlswith3w) ||
+| [str.ParseStringUrlToUrlInstance](#parsestringurltourlinstance) ||
+| [str.ParseStringUrlToWebsiteRootPath](#parsestringurltowebsiterootpath) ||
+| [str.PathJoin](#pathjoin) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Clea...|
+| [str.RandSecret](#randsecret) ||
+| [str.RandStr](#randstr) |RandStringBytes return length `n` alphabet random string|
+| [str.RegexpMatch](#regexpmatch) ||
+| [str.RemoveRepeat](#removerepeat) |元素去重|
+| [str.Repeat](#repeat) |Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or if the result of (len(s) * count)overflows.|
+| [str.Replace](#replace) |Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning o...|
+| [str.ReplaceAll](#replaceall) |ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the...|
+| [str.ReplaceHTTPPacketBody](#replacehttppacketbody) ||
+| [str.Split](#split) |Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is...|
+| [str.SplitAfter](#splitafter) |SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not emp...|
+| [str.SplitAfterN](#splitaftern) |SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings t...|
+| [str.SplitAndTrim](#splitandtrim) ||
+| [str.SplitHTTPHeadersAndBodyFromPacket](#splithttpheadersandbodyfrompacket) ||
+| [str.SplitHostsToPrivateAndPublic](#splithoststoprivateandpublic) ||
+| [str.SplitN](#splitn) |SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of subs...|
+| [str.StartsWith](#startswith) |HasPrefix tests whether the string s begins with prefix.|
+| [str.StringContainsAnyOfSubString](#stringcontainsanyofsubstring) ||
+| [str.StringSliceContains](#stringslicecontains) ||
+| [str.StringSliceContainsAll](#stringslicecontainsall) ||
+| [str.Subtract](#subtract) |SubtractString returns the subtraction between two collections of string|
+| [str.Title](#title) |Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for w...|
+| [str.ToJsonIndentStr](#tojsonindentstr) ||
+| [str.ToLower](#tolower) |ToLower returns s with all Unicode letters mapped to their lower case.|
+| [str.ToLowerSpecial](#tolowerspecial) |ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.|
+| [str.ToStringSlice](#tostringslice) ||
+| [str.ToTitle](#totitle) |ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.|
+| [str.ToTitleSpecial](#totitlespecial) |ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.|
+| [str.ToUpper](#toupper) |ToUpper returns s with all Unicode letters mapped to their upper case.|
+| [str.ToUpperSpecial](#toupperspecial) |ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.|
+| [str.ToValidUTF8](#tovalidutf8) |ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.|
+| [str.Trim](#trim) |Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.|
+| [str.TrimLeft](#trimleft) |TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.|
+| [str.TrimPrefix](#trimprefix) |TrimPrefix returns s without the provided leading prefix string.If s doesn't start with prefix, s is returned unchanged.|
+| [str.TrimRight](#trimright) |TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead...|
+| [str.TrimSpace](#trimspace) |TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.|
+| [str.TrimSuffix](#trimsuffix) |TrimSuffix returns s without the provided trailing suffix string.If s doesn't end with suffix, s is returned unchanged.|
+| [str.UrlJoin](#urljoin) |https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value|
+| [str.VersionEqual](#versionequal) |VersionEqual v1 等于 v2 返回 true|
+| [str.VersionGreater](#versiongreater) |VersionGreater v1 大于 v2 返回 true|
+| [str.VersionGreaterEqual](#versiongreaterequal) |VersionGreaterEqual v1 大于等于 v2 返回 true|
+| [str.VersionLess](#versionless) |VersionLess v1 小于 v2 返回true|
+| [str.VersionLessEqual](#versionlessequal) |VersionLessEqual v1 小于等于 v2 返回true|
 | [str.f](#f) ||
 
 
 ## 函数定义
-### CalcSSDeep
+### calcssdeep
 
 #### 详细描述
 
@@ -164,7 +164,7 @@
 | r1 | `string` |   |
 
 
-### CalcSSDeepStability
+### calcssdeepstability
 
 #### 详细描述
 稳定性定义为最远距离 / 最低分数
@@ -185,7 +185,7 @@
 | r2 | `error` |   |
 
 
-### CalcSimHash
+### calcsimhash
 
 #### 详细描述
 
@@ -205,7 +205,7 @@
 | r1 | `uint64` |   |
 
 
-### CalcSimHashStability
+### calcsimhashstability
 
 #### 详细描述
 计算 simhash 稳定性
@@ -226,7 +226,7 @@
 | r2 | `error` |   |
 
 
-### CalcSimilarity
+### calcsimilarity
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 | r1 | `float64` |   |
 
 
-### CalcTextMaxSubStrStability
+### calctextmaxsubstrstability
 
 #### 详细描述
 
@@ -267,10 +267,10 @@
 | r2 | `error` |   |
 
 
-### Compare
+### compare
 
 #### 详细描述
-Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a < b, and +1 if a > b.Compare is included only for symmetry with package bytes.It is usually clearer and always faster to use the built-instring comparison operators ==, <, >, and so on.
+Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b.Compare is included only for symmetry with package bytes.It is usually clearer and always faster to use the built-instring comparison operators ==, &lt;, &gt;, and so on.
 
 #### 定义
 
@@ -288,7 +288,7 @@ Compare returns an integer comparing two strings lexicographically.The result wi
 | r1 | `int` |   |
 
 
-### Contains
+### contains
 
 #### 详细描述
 Contains reports whether substr is within s.
@@ -309,7 +309,7 @@ Contains reports whether substr is within s.
 | r1 | `bool` |   |
 
 
-### ContainsAny
+### containsany
 
 #### 详细描述
 ContainsAny reports whether any Unicode code points in chars are within s.
@@ -330,7 +330,7 @@ ContainsAny reports whether any Unicode code points in chars are within s.
 | r1 | `bool` |   |
 
 
-### Count
+### count
 
 #### 详细描述
 Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 + the number of Unicode code points in s.
@@ -351,7 +351,7 @@ Count counts the number of non-overlapping instances of substr in s.If substr is
 | r1 | `int` |   |
 
 
-### EndsWith
+### endswith
 
 #### 详细描述
 HasSuffix tests whether the string s ends with suffix.
@@ -372,7 +372,7 @@ HasSuffix tests whether the string s ends with suffix.
 | r1 | `bool` |   |
 
 
-### EqualFold
+### equalfold
 
 #### 详细描述
 EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under simple Unicode case-folding, which is a more generalform of case-insensitivity.
@@ -393,7 +393,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `bool` |   |
 
 
-### ExtractBodyFromHTTPResponseRaw
+### extractbodyfromhttpresponseraw
 
 #### 详细描述
 
@@ -414,7 +414,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r2 | `error` |   |
 
 
-### ExtractChineseIDCards
+### extractchineseidcards
 
 #### 详细描述
 
@@ -434,7 +434,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `[]string` |   |
 
 
-### ExtractDomain
+### extractdomain
 
 #### 详细描述
 
@@ -454,7 +454,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `[]string` |   |
 
 
-### ExtractHost
+### extracthost
 
 #### 详细描述
 
@@ -474,7 +474,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `string` |   |
 
 
-### ExtractJson
+### extractjson
 
 #### 详细描述
 
@@ -494,7 +494,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `[]string` |   |
 
 
-### ExtractJsonWithRaw
+### extractjsonwithraw
 
 #### 详细描述
 
@@ -515,7 +515,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r2 | `[]string` |   |
 
 
-### ExtractRootDomain
+### extractrootdomain
 
 #### 详细描述
 
@@ -535,7 +535,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `[]string` |   |
 
 
-### ExtractStrContext
+### extractstrcontext
 
 #### 详细描述
 
@@ -556,7 +556,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `[]string` |   |
 
 
-### ExtractTitle
+### extracttitle
 
 #### 详细描述
 
@@ -576,7 +576,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r1 | `string` |   |
 
 
-### ExtractURLFromHTTPRequest
+### extracturlfromhttprequest
 
 #### 详细描述
 
@@ -598,7 +598,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r2 | `error` |   |
 
 
-### ExtractURLFromHTTPRequestRaw
+### extracturlfromhttprequestraw
 
 #### 详细描述
 
@@ -620,7 +620,7 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 | r2 | `error` |   |
 
 
-### Fields
+### fields
 
 #### 详细描述
 Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of substrings of s or anempty slice if s contains only white space.
@@ -640,7 +640,7 @@ Fields splits the string s around each instance of one or more consecutive white
 | r1 | `[]string` |   |
 
 
-### FixHTTPRequest
+### fixhttprequest
 
 #### 详细描述
 
@@ -660,7 +660,7 @@ Fields splits the string s around each instance of one or more consecutive white
 | r1 | `[]byte` |   |
 
 
-### FixHTTPResponse
+### fixhttpresponse
 
 #### 详细描述
 FixHTTPResponse try its best to fix and present human-readable response
@@ -682,7 +682,7 @@ FixHTTPResponse try its best to fix and present human-readable response
 | _ | `error` |   |
 
 
-### Grok
+### grok
 
 #### 详细描述
 
@@ -703,7 +703,7 @@ FixHTTPResponse try its best to fix and present human-readable response
 | r1 | `GrokResult` |   |
 
 
-### HasPrefix
+### hasprefix
 
 #### 详细描述
 HasPrefix tests whether the string s begins with prefix.
@@ -724,7 +724,7 @@ HasPrefix tests whether the string s begins with prefix.
 | r1 | `bool` |   |
 
 
-### HasSuffix
+### hassuffix
 
 #### 详细描述
 HasSuffix tests whether the string s ends with suffix.
@@ -745,7 +745,7 @@ HasSuffix tests whether the string s ends with suffix.
 | r1 | `bool` |   |
 
 
-### HostPort
+### hostport
 
 #### 详细描述
 
@@ -766,7 +766,7 @@ HasSuffix tests whether the string s ends with suffix.
 | r1 | `string` |   |
 
 
-### IPv4ToCClassNetwork
+### ipv4tocclassnetwork
 
 #### 详细描述
 
@@ -787,7 +787,7 @@ HasSuffix tests whether the string s ends with suffix.
 | r2 | `error` |   |
 
 
-### Index
+### index
 
 #### 详细描述
 Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.
@@ -808,7 +808,7 @@ Index returns the index of the first instance of substr in s, or -1 if substr is
 | r1 | `int` |   |
 
 
-### IndexAny
+### indexany
 
 #### 详细描述
 IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.
@@ -829,7 +829,7 @@ IndexAny returns the index of the first instance of any Unicode code pointfrom c
 | r1 | `int` |   |
 
 
-### IndexByte
+### indexbyte
 
 #### 详细描述
 IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.
@@ -850,7 +850,7 @@ IndexByte returns the index of the first instance of c in s, or -1 if c is not p
 | r1 | `int` |   |
 
 
-### IntersectString
+### intersectstring
 
 #### 详细描述
 IntersectString returns the intersection between two collections of string.
@@ -871,7 +871,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `[]string` |   |
 
 
-### IsAlNum
+### isalnum
 
 #### 详细描述
 
@@ -891,7 +891,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsAlpha
+### isalpha
 
 #### 详细描述
 
@@ -911,7 +911,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsAlphaNum
+### isalphanum
 
 #### 详细描述
 
@@ -931,7 +931,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsBase64Value
+### isbase64value
 
 #### 详细描述
 
@@ -951,7 +951,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsCaptchaField
+### iscaptchafield
 
 #### 详细描述
 
@@ -971,7 +971,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsDigit
+### isdigit
 
 #### 详细描述
 
@@ -991,7 +991,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsHtmlResponse
+### ishtmlresponse
 
 #### 详细描述
 
@@ -1011,7 +1011,7 @@ IntersectString returns the intersection between two collections of string.
 | r1 | `bool` |   |
 
 
-### IsHttpURL
+### ishttpurl
 
 #### 详细描述
 IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https
@@ -1031,7 +1031,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsIPv4
+### isipv4
 
 #### 详细描述
 
@@ -1051,7 +1051,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsIPv6
+### isipv6
 
 #### 详细描述
 
@@ -1071,7 +1071,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsJSONPParam
+### isjsonpparam
 
 #### 详细描述
 
@@ -1092,7 +1092,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsJsonResponse
+### isjsonresponse
 
 #### 详细描述
 
@@ -1112,7 +1112,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsMD5Value
+### ismd5value
 
 #### 详细描述
 
@@ -1132,7 +1132,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsPasswordField
+### ispasswordfield
 
 #### 详细描述
 
@@ -1152,7 +1152,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsPlainBase64Value
+### isplainbase64value
 
 #### 详细描述
 
@@ -1172,7 +1172,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsRedirectParam
+### isredirectparam
 
 #### 详细描述
 根据 key 的名字猜测是否是用于重定向的参数
@@ -1193,7 +1193,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsSQLColumnField
+### issqlcolumnfield
 
 #### 详细描述
 
@@ -1213,7 +1213,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsSensitiveJson
+### issensitivejson
 
 #### 详细描述
 
@@ -1233,7 +1233,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsSensitiveTokenField
+### issensitivetokenfield
 
 #### 详细描述
 
@@ -1253,7 +1253,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsServerError
+### isservererror
 
 #### 详细描述
 
@@ -1273,7 +1273,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsSha256Value
+### issha256value
 
 #### 详细描述
 
@@ -1293,7 +1293,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsStrongPassword
+### isstrongpassword
 
 #### 详细描述
 
@@ -1313,7 +1313,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsTLSServer
+### istlsserver
 
 #### 详细描述
 
@@ -1334,7 +1334,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsUrlParam
+### isurlparam
 
 #### 详细描述
 
@@ -1355,7 +1355,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsUrlPath
+### isurlpath
 
 #### 详细描述
 根据 value 猜测是否是一个 url path
@@ -1375,7 +1375,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsUsernameField
+### isusernamefield
 
 #### 详细描述
 
@@ -1395,7 +1395,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsXmlParam
+### isxmlparam
 
 #### 详细描述
 
@@ -1416,7 +1416,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsXmlRequest
+### isxmlrequest
 
 #### 详细描述
 
@@ -1436,7 +1436,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### IsXmlValue
+### isxmlvalue
 
 #### 详细描述
 
@@ -1456,7 +1456,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `bool` |   |
 
 
-### Join
+### join
 
 #### 详细描述
 
@@ -1477,7 +1477,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | defaultResult | `string` |   |
 
 
-### JsonStreamToMapList
+### jsonstreamtomaplist
 
 #### 详细描述
 
@@ -1497,7 +1497,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `[]map[string]any` |   |
 
 
-### JsonToMap
+### jsontomap
 
 #### 详细描述
 
@@ -1517,7 +1517,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `map[string]string` |   |
 
 
-### JsonToMapList
+### jsontomaplist
 
 #### 详细描述
 
@@ -1537,7 +1537,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | r1 | `[]map[string]string` |   |
 
 
-### LastIndex
+### lastindex
 
 #### 详细描述
 LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.
@@ -1558,7 +1558,7 @@ LastIndex returns the index of the last instance of substr in s, or -1 if substr
 | r1 | `int` |   |
 
 
-### LastIndexAny
+### lastindexany
 
 #### 详细描述
 LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s.
@@ -1579,7 +1579,7 @@ LastIndexAny returns the index of the last instance of any Unicode codepoint fro
 | r1 | `int` |   |
 
 
-### LastIndexByte
+### lastindexbyte
 
 #### 详细描述
 LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.
@@ -1600,7 +1600,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `int` |   |
 
 
-### LowerAndTrimSpace
+### lowerandtrimspace
 
 #### 详细描述
 
@@ -1620,7 +1620,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `string` |   |
 
 
-### MatchAllOfGlob
+### matchallofglob
 
 #### 详细描述
 
@@ -1641,7 +1641,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MatchAllOfRegexp
+### matchallofregexp
 
 #### 详细描述
 
@@ -1662,7 +1662,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MatchAllOfSubString
+### matchallofsubstring
 
 #### 详细描述
 
@@ -1683,7 +1683,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MatchAnyOfGlob
+### matchanyofglob
 
 #### 详细描述
 
@@ -1704,7 +1704,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MatchAnyOfRegexp
+### matchanyofregexp
 
 #### 详细描述
 
@@ -1725,7 +1725,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MatchAnyOfSubString
+### matchanyofsubstring
 
 #### 详细描述
 
@@ -1746,7 +1746,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `bool` |   |
 
 
-### MergeUrlFromHTTPRequest
+### mergeurlfromhttprequest
 
 #### 详细描述
 
@@ -1768,7 +1768,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `string` |   |
 
 
-### NewFilter
+### newfilter
 
 #### 详细描述
 
@@ -1783,7 +1783,7 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 | r1 | `*StringFilter` |   |
 
 
-### NewReader
+### newreader
 
 #### 详细描述
 NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferString but more efficient and read-only.
@@ -1803,7 +1803,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r1 | `*Reader` |   |
 
 
-### ParamsGetOr
+### paramsgetor
 
 #### 详细描述
 
@@ -1825,7 +1825,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r1 | `string` |   |
 
 
-### ParseBytesToHTTPRequest
+### parsebytestohttprequest
 
 #### 详细描述
 
@@ -1846,7 +1846,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r2 | `error` |   |
 
 
-### ParseBytesToHTTPResponse
+### parsebytestohttpresponse
 
 #### 详细描述
 
@@ -1867,7 +1867,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r2 | `error` |   |
 
 
-### ParseStringToCClassHosts
+### parsestringtocclasshosts
 
 #### 详细描述
 
@@ -1887,7 +1887,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r1 | `string` |   |
 
 
-### ParseStringToHTTPRequest
+### parsestringtohttprequest
 
 #### 详细描述
 
@@ -1908,7 +1908,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r2 | `error` |   |
 
 
-### ParseStringToHTTPResponse
+### parsestringtohttpresponse
 
 #### 详细描述
 
@@ -1929,7 +1929,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r2 | `error` |   |
 
 
-### ParseStringToHostPort
+### parsestringtohostport
 
 #### 详细描述
 
@@ -1951,7 +1951,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | err | `error` |   |
 
 
-### ParseStringToHosts
+### parsestringtohosts
 
 #### 详细描述
 
@@ -1971,7 +1971,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r1 | `[]string` |   |
 
 
-### ParseStringToLines
+### parsestringtolines
 
 #### 详细描述
 
@@ -1991,7 +1991,7 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 | r1 | `[]string` |   |
 
 
-### ParseStringToPorts
+### parsestringtoports
 
 #### 详细描述
 ParseStringToPorts 负数端口代表了是 UDP 扫描端口
@@ -2011,7 +2011,7 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 | r1 | `[]int` |   |
 
 
-### ParseStringToUrls
+### parsestringtourls
 
 #### 详细描述
 
@@ -2031,7 +2031,7 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 | r1 | `[]string` |   |
 
 
-### ParseStringToUrlsWith3W
+### parsestringtourlswith3w
 
 #### 详细描述
 
@@ -2051,7 +2051,7 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 | r1 | `[]string` |   |
 
 
-### ParseStringUrlToUrlInstance
+### parsestringurltourlinstance
 
 #### 详细描述
 
@@ -2072,7 +2072,7 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 | r2 | `error` |   |
 
 
-### ParseStringUrlToWebsiteRootPath
+### parsestringurltowebsiterootpath
 
 #### 详细描述
 
@@ -2092,7 +2092,7 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 | r1 | `string` |   |
 
 
-### PathJoin
+### pathjoin
 
 #### 详细描述
 Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.
@@ -2112,7 +2112,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `string` |   |
 
 
-### RandSecret
+### randsecret
 
 #### 详细描述
 
@@ -2132,7 +2132,7 @@ Join joins any number of path elements into a single path,separating them with a
 | r1 | `string` |   |
 
 
-### RandStr
+### randstr
 
 #### 详细描述
 RandStringBytes return length `n` alphabet random string
@@ -2152,7 +2152,7 @@ RandStringBytes return length `n` alphabet random string
 | r1 | `string` |   |
 
 
-### RegexpMatch
+### regexpmatch
 
 #### 详细描述
 
@@ -2174,7 +2174,7 @@ RandStringBytes return length `n` alphabet random string
 | i | `interface` |   |
 
 
-### RemoveRepeat
+### removerepeat
 
 #### 详细描述
 元素去重
@@ -2194,7 +2194,7 @@ RandStringBytes return length `n` alphabet random string
 | r1 | `[]string` |   |
 
 
-### Repeat
+### repeat
 
 #### 详细描述
 Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or if the result of (len(s) * count)overflows.
@@ -2215,10 +2215,10 @@ Repeat returns a new string consisting of count copies of the string s.It panics
 | r1 | `string` |   |
 
 
-### Replace
+### replace
 
 #### 详细描述
-Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.If n < 0, there is no limit on the number of replacements.
+Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.If n &lt; 0, there is no limit on the number of replacements.
 
 #### 定义
 
@@ -2238,7 +2238,7 @@ Replace returns a copy of the string s with the first nnon-overlapping instances
 | r1 | `string` |   |
 
 
-### ReplaceAll
+### replaceall
 
 #### 详细描述
 ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.
@@ -2260,7 +2260,7 @@ ReplaceAll returns a copy of the string s with allnon-overlapping instances of o
 | r1 | `string` |   |
 
 
-### ReplaceHTTPPacketBody
+### replacehttppacketbody
 
 #### 详细描述
 
@@ -2282,7 +2282,7 @@ ReplaceAll returns a copy of the string s with allnon-overlapping instances of o
 | r1 | `[]byte` |   |
 
 
-### Split
+### split
 
 #### 详细描述
 Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is not empty, Split returns aslice of length 1 whose only element is s.If sep is empty, Split splits after each UTF-8 sequence. If both sand sep are empty, Split returns an empty slice.It is equivalent to SplitN with a count of -1.To split around the first instance of a separator, see Cut.
@@ -2303,7 +2303,7 @@ Split slices s into all substrings separated by sep and returns a slice ofthe su
 | r1 | `[]string` |   |
 
 
-### SplitAfter
+### splitafter
 
 #### 详细描述
 SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not empty, SplitAfter returnsa slice of length 1 whose only element is s.If sep is empty, SplitAfter splits after each UTF-8 sequence. Ifboth s and sep are empty, SplitAfter returns an empty slice.It is equivalent to SplitAfterN with a count of -1.
@@ -2324,10 +2324,10 @@ SplitAfter slices s into all substrings after each instance of sep andreturns a 
 | r1 | `[]string` |   |
 
 
-### SplitAfterN
+### splitaftern
 
 #### 详细描述
-SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings to return:	n > 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n < 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for SplitAfter.
+SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings to return:	n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for SplitAfter.
 
 #### 定义
 
@@ -2346,7 +2346,7 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 | r1 | `[]string` |   |
 
 
-### SplitAndTrim
+### splitandtrim
 
 #### 详细描述
 
@@ -2367,7 +2367,7 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 | targets | `[]string` |   |
 
 
-### SplitHTTPHeadersAndBodyFromPacket
+### splithttpheadersandbodyfrompacket
 
 #### 详细描述
 
@@ -2389,7 +2389,7 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 | r2 | `[]byte` |   |
 
 
-### SplitHostsToPrivateAndPublic
+### splithoststoprivateandpublic
 
 #### 详细描述
 
@@ -2410,10 +2410,10 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 | pub | `[]string` |   |
 
 
-### SplitN
+### splitn
 
 #### 详细描述
-SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of substrings to return:	n > 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n < 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for Split.To split around the first instance of a separator, see Cut.
+SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of substrings to return:	n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for Split.To split around the first instance of a separator, see Cut.
 
 #### 定义
 
@@ -2432,7 +2432,7 @@ SplitN slices s into substrings separated by sep and returns a slice ofthe subst
 | r1 | `[]string` |   |
 
 
-### StartsWith
+### startswith
 
 #### 详细描述
 HasPrefix tests whether the string s begins with prefix.
@@ -2453,7 +2453,7 @@ HasPrefix tests whether the string s begins with prefix.
 | r1 | `bool` |   |
 
 
-### StringContainsAnyOfSubString
+### stringcontainsanyofsubstring
 
 #### 详细描述
 
@@ -2474,7 +2474,7 @@ HasPrefix tests whether the string s begins with prefix.
 | r1 | `bool` |   |
 
 
-### StringSliceContains
+### stringslicecontains
 
 #### 详细描述
 
@@ -2495,7 +2495,7 @@ HasPrefix tests whether the string s begins with prefix.
 | result | `bool` |   |
 
 
-### StringSliceContainsAll
+### stringslicecontainsall
 
 #### 详细描述
 
@@ -2516,7 +2516,7 @@ HasPrefix tests whether the string s begins with prefix.
 | r1 | `bool` |   |
 
 
-### Subtract
+### subtract
 
 #### 详细描述
 SubtractString returns the subtraction between two collections of string
@@ -2537,7 +2537,7 @@ SubtractString returns the subtraction between two collections of string
 | r1 | `[]string` |   |
 
 
-### Title
+### title
 
 #### 详细描述
 Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for word boundaries does not handle Unicodepunctuation properly. Use golang.org/x/text/cases instead.
@@ -2557,7 +2557,7 @@ Title returns a copy of the string s with all Unicode letters that begin wordsma
 | r1 | `string` |   |
 
 
-### ToJsonIndentStr
+### tojsonindentstr
 
 #### 详细描述
 
@@ -2577,7 +2577,7 @@ Title returns a copy of the string s with all Unicode letters that begin wordsma
 | r1 | `string` |   |
 
 
-### ToLower
+### tolower
 
 #### 详细描述
 ToLower returns s with all Unicode letters mapped to their lower case.
@@ -2597,7 +2597,7 @@ ToLower returns s with all Unicode letters mapped to their lower case.
 | r1 | `string` |   |
 
 
-### ToLowerSpecial
+### tolowerspecial
 
 #### 详细描述
 ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.
@@ -2618,7 +2618,7 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 | r1 | `string` |   |
 
 
-### ToStringSlice
+### tostringslice
 
 #### 详细描述
 
@@ -2638,7 +2638,7 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 | r1 | `[]string` |   |
 
 
-### ToTitle
+### totitle
 
 #### 详细描述
 ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.
@@ -2658,7 +2658,7 @@ ToTitle returns a copy of the string s with all Unicode letters mapped totheir U
 | r1 | `string` |   |
 
 
-### ToTitleSpecial
+### totitlespecial
 
 #### 详细描述
 ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.
@@ -2679,7 +2679,7 @@ ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to
 | r1 | `string` |   |
 
 
-### ToUpper
+### toupper
 
 #### 详细描述
 ToUpper returns s with all Unicode letters mapped to their upper case.
@@ -2699,7 +2699,7 @@ ToUpper returns s with all Unicode letters mapped to their upper case.
 | r1 | `string` |   |
 
 
-### ToUpperSpecial
+### toupperspecial
 
 #### 详细描述
 ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.
@@ -2720,7 +2720,7 @@ ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to
 | r1 | `string` |   |
 
 
-### ToValidUTF8
+### tovalidutf8
 
 #### 详细描述
 ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.
@@ -2741,7 +2741,7 @@ ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte s
 | r1 | `string` |   |
 
 
-### Trim
+### trim
 
 #### 详细描述
 Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.
@@ -2762,7 +2762,7 @@ Trim returns a slice of the string s with all leading andtrailing Unicode code p
 | r1 | `string` |   |
 
 
-### TrimLeft
+### trimleft
 
 #### 详细描述
 TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.
@@ -2783,7 +2783,7 @@ TrimLeft returns a slice of the string s with all leadingUnicode code points con
 | r1 | `string` |   |
 
 
-### TrimPrefix
+### trimprefix
 
 #### 详细描述
 TrimPrefix returns s without the provided leading prefix string.If s doesn't start with prefix, s is returned unchanged.
@@ -2804,7 +2804,7 @@ TrimPrefix returns s without the provided leading prefix string.If s doesn't sta
 | r1 | `string` |   |
 
 
-### TrimRight
+### trimright
 
 #### 详细描述
 TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead.
@@ -2825,7 +2825,7 @@ TrimRight returns a slice of the string s, with all trailingUnicode code points 
 | r1 | `string` |   |
 
 
-### TrimSpace
+### trimspace
 
 #### 详细描述
 TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.
@@ -2845,7 +2845,7 @@ TrimSpace returns a slice of the string s, with all leadingand trailing white sp
 | r1 | `string` |   |
 
 
-### TrimSuffix
+### trimsuffix
 
 #### 详细描述
 TrimSuffix returns s without the provided trailing suffix string.If s doesn't end with suffix, s is returned unchanged.
@@ -2866,10 +2866,10 @@ TrimSuffix returns s without the provided trailing suffix string.If s doesn't en
 | r1 | `string` |   |
 
 
-### UrlJoin
+### urljoin
 
 #### 详细描述
-https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value => [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value
+https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value
 
 #### 定义
 
@@ -2888,7 +2888,7 @@ https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value => [X] http
 | r2 | `error` |   |
 
 
-### VersionEqual
+### versionequal
 
 #### 详细描述
 VersionEqual v1 等于 v2 返回 true
@@ -2909,7 +2909,7 @@ VersionEqual v1 等于 v2 返回 true
 | r1 | `bool` |   |
 
 
-### VersionGreater
+### versiongreater
 
 #### 详细描述
 VersionGreater v1 大于 v2 返回 true
@@ -2930,7 +2930,7 @@ VersionGreater v1 大于 v2 返回 true
 | r1 | `bool` |   |
 
 
-### VersionGreaterEqual
+### versiongreaterequal
 
 #### 详细描述
 VersionGreaterEqual v1 大于等于 v2 返回 true
@@ -2951,7 +2951,7 @@ VersionGreaterEqual v1 大于等于 v2 返回 true
 | r1 | `bool` |   |
 
 
-### VersionLess
+### versionless
 
 #### 详细描述
 VersionLess v1 小于 v2 返回true
@@ -2972,7 +2972,7 @@ VersionLess v1 小于 v2 返回true
 | r1 | `bool` |   |
 
 
-### VersionLessEqual
+### versionlessequal
 
 #### 详细描述
 VersionLessEqual v1 小于等于 v2 返回true

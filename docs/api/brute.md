@@ -2,25 +2,25 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [brute.GetAvailableBruteTypes](#GetAvailableBruteTypes) ||
-| [brute.GetPasswordListFromBruteType](#GetPasswordListFromBruteType) ||
-| [brute.GetUsernameListFromBruteType](#GetUsernameListFromBruteType) ||
-| [brute.New](#New) ||
-| [brute.autoDict](#autoDict) ||
-| [brute.bruteHandler](#bruteHandler) ||
+| [brute.GetAvailableBruteTypes](#getavailablebrutetypes) ||
+| [brute.GetPasswordListFromBruteType](#getpasswordlistfrombrutetype) ||
+| [brute.GetUsernameListFromBruteType](#getusernamelistfrombrutetype) ||
+| [brute.New](#new) ||
+| [brute.autoDict](#autodict) ||
+| [brute.bruteHandler](#brutehandler) ||
 | [brute.concurrent](#concurrent) ||
-| [brute.concurrentTarget](#concurrentTarget) ||
+| [brute.concurrentTarget](#concurrenttarget) ||
 | [brute.debug](#debug) ||
-| [brute.finishingThreshold](#finishingThreshold) ||
-| [brute.maxDelay](#maxDelay) ||
-| [brute.minDelay](#minDelay) ||
-| [brute.okToStop](#okToStop) ||
-| [brute.passList](#passList) ||
-| [brute.userList](#userList) ||
+| [brute.finishingThreshold](#finishingthreshold) ||
+| [brute.maxDelay](#maxdelay) ||
+| [brute.minDelay](#mindelay) ||
+| [brute.okToStop](#oktostop) ||
+| [brute.passList](#passlist) ||
+| [brute.userList](#userlist) ||
 
 
 ## 函数定义
-### GetAvailableBruteTypes
+### getavailablebrutetypes
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | r1 | `[]string` |   |
 
 
-### GetPasswordListFromBruteType
+### getpasswordlistfrombrutetype
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `[]string` |   |
 
 
-### GetUsernameListFromBruteType
+### getusernamelistfrombrutetype
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### New
+### new
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### autoDict
+### autodict
 
 #### 详细描述
 
@@ -112,7 +112,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### bruteHandler
+### brutehandler
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### concurrentTarget
+### concurrenttarget
 
 #### 详细描述
 
@@ -192,7 +192,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### finishingThreshold
+### finishingthreshold
 
 #### 详细描述
 
@@ -212,7 +212,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### maxDelay
+### maxdelay
 
 #### 详细描述
 
@@ -232,7 +232,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### minDelay
+### mindelay
 
 #### 详细描述
 
@@ -252,7 +252,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### okToStop
+### oktostop
 
 #### 详细描述
 
@@ -272,7 +272,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### passList
+### passlist
 
 #### 详细描述
 
@@ -292,7 +292,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### userList
+### userlist
 
 #### 详细描述
 

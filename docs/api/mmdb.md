@@ -2,12 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [mmdb.Open](#Open) ||
-| [mmdb.QueryIPCity](#QueryIPCity) ||
+| [mmdb.Open](#open) ||
+| [mmdb.QueryIPCity](#queryipcity) ||
 
 
 ## 函数定义
-### Open
+### open
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### QueryIPCity
+### queryipcity
 
 #### 详细描述
 
