@@ -1,0 +1,62 @@
+---
+sidebar_position: 2
+---
+
+# JSON 中表达式注入参数
+
+模板注入（Template Injection）在 JSON 中也是一种常见的安全漏洞。它发生在应用程序在处理 JSON 数据时，没有正确地对用户输入进行处理和过滤。攻击者可以构造恶意的 JSON 数据，使得应用程序在解析 JSON 时执行恶意代码。
+
+### 示例代码：
+
+示例代码接收一个名为`b`的 GET 参数，并将其解析为 JSON 数据。在 JSON 数据中，字段`a`的值被用作模板引擎的输入来渲染模板。攻击者可以构造恶意的 JSON 数据，将模板注入代码注入到`a`字段中。
+
+```Go
+for _, paramName := range []string{"a", "b", "c"} {
+            expr1 := request.URL.Query().Get(paramName)
+            buf.WriteString(paramName + "[" + expr1 + "]: ")
+            sanbox := httptpl.NewNucleiDSLYakSandbox()
+            if paramName == "b" {
+                var mapRaw = make(map[string]interface{})
+                err := json.Unmarshal([]byte(expr1), &mapRaw)
+                if err != nil {
+                    buf.WriteString("\n\nb params is should be JSON!!!!!!!!!!!!!!!!!\n\n")
+                    log.Errorf("json unmarshal failed: %v", err)
+                    continue
+                }
+                expr1 = utils.MapGetString(mapRaw, "a")
+            }
+            aResult, err := sanbox.Execute(expr1, nil)
+            if err != nil {
+                buf.WriteString(err.Error())
+            } else {
+                buf.WriteString(utils.InterfaceToString(aResult))
+            }
+            buf.WriteByte('\n')
+            buf.WriteByte('\n')
+        }
+```
+
+### 攻击示例：
+
+在这个例子中，攻击者将`{"a":"{{7*5-3}}"}`作为`b`参数的值。在 JSON 数据中，`a`字段的值是一个模板表达式`{{7*5-3}}`，计算出的结果为`32`。
+
+```HTML
+http://127.0.0.1:8787/expr/injection?b={"a":"{{7*5-3}}"}
+```
+
+![](/img/yaklab/exprinj/02unsafe-exprinj.png)
+
+### 防御措施：
+
+这是一个典型的 JSON 模板注入漏洞示例，强调了验证和过滤用户输入的重要性。修复该漏洞的方法是使用合适的 JSON 解析器配置和输入验证来保护应用程序免受模板注入攻击。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/exprinj/02unsafe-exprinj1.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

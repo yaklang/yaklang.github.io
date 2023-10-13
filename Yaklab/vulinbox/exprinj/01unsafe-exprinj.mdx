@@ -1,0 +1,69 @@
+---
+sidebar_position: 1
+---
+
+# 表达式注入 GET 参数基础
+
+> 服务器端模板注入（Server-Side Template Injection，简称 SSTI）是一种安全漏洞，它发生在服务器端的模板引擎中。模板引擎通常用于将动态数据嵌入到静态 HTML 页面中，以生成最终的网页。当攻击者能够向模板引擎提供恶意输入并成功执行任意代码时，就发生了服务器端模板注入。 SSTI 的风险因素包括： 任意代码执行：攻击者可能利用模板注入来执行任意代码，从而控制服务器或访问敏感数据。 数据泄露：攻击者可能利用模板注入来访问服务器上的敏感数据，例如数据库中的用户凭据或其他重要信息。 拒绝服务：攻击者可能利用模板注入来导致服务器崩溃，导致服务不可用。
+
+表达式注入是一种常见的安全漏洞，它发生在应用程序将用户提供的输入作为代码片段执行时，没有进行充分的验证和过滤。攻击者可以利用表达式注入漏洞在应用程序的上下文中执行恶意代码，导致应用程序出现意外行为，甚至可能导致系统被完全控制。
+
+### 示例代码：
+
+示例代码中，我们可以看到一个简单的表达式注入漏洞检测代码。该代码接收三个 GET 参数（a、b、c），并将它们作为代码片段进行执行。
+
+```Go
+for _, paramName := range []string{"a", "b", "c"} {
+            expr1 := request.URL.Query().Get(paramName)
+            buf.WriteString(paramName + "[" + expr1 + "]: ")
+            sanbox := httptpl.NewNucleiDSLYakSandbox()
+            if paramName == "b" {
+                var mapRaw = make(map[string]interface{})
+                err := json.Unmarshal([]byte(expr1), &mapRaw)
+                if err != nil {
+                    buf.WriteString("\n\nb params is should be JSON!!!!!!!!!!!!!!!!!\n\n")
+                    log.Errorf("json unmarshal failed: %v", err)
+                    continue
+                }
+                expr1 = utils.MapGetString(mapRaw, "a")
+            }
+            aResult, err := sanbox.Execute(expr1, nil)
+            if err != nil {
+                buf.WriteString(err.Error())
+            } else {
+                buf.WriteString(utils.InterfaceToString(aResult))
+            }
+            buf.WriteByte('\n')
+            buf.WriteByte('\n')
+        }
+```
+
+### 攻击示例：
+
+在这个例子中，攻击者将`{{7*5-10}}`作为`a`参数的值，这是一个简单的模板表达式，计算出的结果为`25-10`，最终返回的结果是`15`。
+
+```HTML
+http://127.0.0.1:8787/expr/injection?a={{7*5-10}}
+```
+
+![](/img/yaklab/exprinj/01unsafe-exprinj.png)
+
+### 防御措施：
+
+为了防止服务器端模板注入，可以采取以下措施：
+
+- 输入验证：对用户输入进行严格的验证，确保只接受预期的数据类型和格式。可以使用白名单方法，仅允许已知安全的输入。
+- 输出编码：在将用户输入插入模板之前，对其进行适当的编码，以防止恶意代码执行。 最小权限原则：确保服务器端应用程序以最小权限运行，以减少潜在的损害。
+- 使用安全的模板引擎：选择已知具有良好安全记录的模板引擎，并确保使用最新版本。 通过采取这些措施，可以大大降低服务器端模板注入的风险。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/exprinj/01unsafe-exprinj1.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
+

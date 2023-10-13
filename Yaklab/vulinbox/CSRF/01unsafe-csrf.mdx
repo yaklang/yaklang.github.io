@@ -1,0 +1,77 @@
+---
+sidebar_position: 1
+---
+
+# 没有保护的表单
+
+> 跨站点请求伪造（也称为CSRF）是一种网络安全漏洞，允许攻击者诱导用户执行他们不打算执行的操作。它允许攻击者部分规避同源策略，该策略旨在防止不同的网站相互干扰。
+>
+> 在成功的CSRF攻击中，攻击者导致受害者用户无意中执行操作。例如，更改他们帐户上的电子邮件地址，更改密码或进行资金转账。根据操作的性质，攻击者可能完全控制用户的帐户。如果受损用户在应用程序中具有特权角色，那么攻击者可能能够完全控制应用程序的所有数据和功能。
+
+
+
+利用用户在已认证的会话中执行未经授权的操作。攻击者欺骗用户通过激活他们访问过的受信任网站上的链接或点击恶意广告来执行攻击。
+
+### 示例代码：
+
+在示例代码中，`/csrf/unsafe` 路径代表一个没有适当保护的表单，使得攻击者可以伪装用户的请求并执行未经授权的操作。
+
+```Go
+var router = s.router
+csrfGroup := router.PathPrefix("/csrf").Name("表单 CSRF 保护测试").Subrouter()
+csrfRoutes := []*VulInfo{
+        {
+                DefaultQuery: "",
+                Path:         "/unsafe",
+                Title:        "没有保护的表单",
+                Handler: func(writer http.ResponseWriter, request *http.Request) {
+                        if !cookieCheck(writer, request, "/csrf/unsafe") {
+                                return
+                        }
+                        data := map[string]string{
+                                "Info": info,
+                        }
+                        updateInfo(writer, request, data, string(unsafeUpdate))
+                },
+        },
+```
+
+### 攻击示例：
+
+攻击者会构造一个恶意网页，其中包含一个表单元素和一段 JavaScript 代码。
+
+用户在访问恶意网页后，可能被误导为点击 "Submit request" 按钮。这将导致浏览器向目标 `/csrf/unsafe` 路径发送 POST 请求，携带了被篡改的 `info` 数据。
+
+```HTML
+<html>
+<body>
+<form action="http://127.0.0.1:8787/csrf/unsafe" method="POST" name="form1" enctype="application/x-www-form-urlencoded" >
+<input type="hidden" name="info" value="Crackme"/>
+<input type="submit" value="Submit request" />
+</form>
+<script>history.pushState('', '', '/');</script>
+</body>
+</html>
+```
+
+在表单下面，攻击者使用 JavaScript 的 `history.pushState` 方法来修改浏览器的 URL，以隐藏攻击的存在。这样用户在点击按钮时可能不会察觉到页面发生了变化。
+
+### 防御措施：
+
+- 使用 CSRF Token：在表单中包含一个随机生成的 CSRF 令牌，并将其与用户的会话关联起来。在提交表单时，验证令牌是否匹配会话中的令牌。这可以防止攻击者构造恶意请求，因为他们无法获取到正确的 CSRF 令牌。
+- SameSite Cookie 属性：使用 SameSite 属性来设置 Cookie。将 Cookie 设置为"Strict"或"Lax"，可以限制在请求中发送 Cookie，从而降低 CSRF 攻击的风险。
+- 双重提交 Cookie：在用户的 Cookie 中存储一个随机生成的令牌，然后将该令牌包含在每个表单提交中。服务器验证表单中的令牌是否与 Cookie 中的令牌匹配，以此来确认请求的合法性。
+- Referer 检查：在服务器端验证请求的来源 Referer 头，但这不是一个完全可靠的方法，因为 Referer 头可以被修改。
+- 使用验证码：对于关键操作，如更改密码、支付等，可以使用验证码进行验证，防止未经授权的操作。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/csrf/01unsafe-csrf.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
+

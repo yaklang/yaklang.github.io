@@ -1,0 +1,46 @@
+---
+sidebar_position: 2
+---
+
+# csrf_token保护的表单
+
+使用CSRF令牌来保护表单免受CSRF攻击。对于每个受保护的表单，代码会检查传递的CSRF令牌是否与预期的值匹配，以此来确认请求的合法性。
+
+#### 示例代码：
+
+```Go
+func (s *VulinServer) registerCsrf() {
+    var router = s.router
+    csrfGroup := router.PathPrefix("/csrf").Name("表单 CSRF 保护测试").Subrouter()
+    csrfRoutes := []*VulInfo{
+        {
+            DefaultQuery: "",
+            Path:         "/safe",
+            Title:        "csrf_token保护的表单",
+            Handler: func(writer http.ResponseWriter, request *http.Request) {
+                if !cookieCheck(writer, request, "/csrf/safe") {
+                    return
+                }
+                if request.Method == http.MethodPost {
+                    token := request.PostFormValue("csrf_token")
+                    if token != codec.Md5("confidential_cookie_vulinbox") {
+                        writer.Write([]byte("csrf_token check error"))
+                        writer.WriteHeader(http.StatusForbidden)
+                        return
+                    }
+                }
+                data := map[string]string{
+                    "Info":  info,
+                    "Token": codec.Md5("confidential_cookie_vulinbox"),
+                }
+                updateInfo(writer, request, data, string(safeUpdate))
+            },
+        },
+    }
+    for _, v := range csrfRoutes {
+        addRouteWithVulInfo(csrfGroup, v)
+    }
+}
+```
+
+上述代码是一个基本的CSRF保护示例，它通过实现CSRF令牌来防御CSRF攻击，这种方式可以有效地防止恶意网站向用户的已认证会话发送伪造的请求。

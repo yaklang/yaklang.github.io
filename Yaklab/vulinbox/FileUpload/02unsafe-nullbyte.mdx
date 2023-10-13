@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+---
+
+# 图片上传：nullbyte 可绕过
+
+检测文件拓展名就是在文件被上传到服务端的时候，对于文件名的扩展名进行检查，如果不合法，则拒绝这次上传。
+
+有两种策略：黑名单策略，文件扩展名在黑名单中的为不合法；白名单策略，文件扩展名不在白名单中的均为不合法。
+
+### 示例代码：
+
+这段代码用于确保用户上传的文件扩展名为允许上传的图片类型（jpg、png、jpeg、ico），如果不是，则返回一个包含文件上传失败信息的模板页面。这样做是为了防止上传不合法的文件类型。
+
+```Go
+if !utils.MatchAnyOfSubString(strings.ToLower(serverExt), "jpg", "png", "jpeg", "ico") {
+       unsafeTemplateRender(writer, request, uploadFailed, map[string]any{
+          "reason": fmt.Sprintf(
+          "u upload file: %v, fileSystemExt: %v, serverExt: %v",
+          strconv.Quote(fn), strconv.Quote(fileSystemExt), strconv.Quote(serverExt),),
+                        })
+      return
+      }
+```
+
+### 攻击示例：
+
+```Go
+xxx.php%00.jpg 这样的文件名会被解析为php代码运行
+```
+
+![](/img/yaklab/fileupload/01unsafe-nullbyte1.png)
+
+空字节绕过是一种文件上传漏洞利用技术，攻击者可以在文件名中插入空字节（%00），从而绕过服务器对文件类型的检查，导致上传了非法文件类型的文件。
+
+### 防御措施：
+
+- 移除空字节： 在接收到上传文件的文件名时，对文件名进行处理，移除其中的空字节。可以使用`strings.Replace()`函数将空字节替换为空字符串。
+- 白名单验证： 在服务器端对上传文件的扩展名进行验证时，使用白名单验证机制。即只允许特定的文件类型上传，而不是禁止某些文件类型。这样可以确保只有允许的文件类型能够通过上传验证。
+- 文件类型检查： 不仅仅依赖文件名的扩展名进行验证，还应该通过其他方式对文件类型进行检查，比如读取文件头信息（magic bytes）来判断文件类型是否合法。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fileupload/01unsafe-nullbyte.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

