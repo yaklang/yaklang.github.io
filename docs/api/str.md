@@ -2625,7 +2625,7 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 
 #### 定义
 
-`ToStringSlice(i any) []string`
+`ToStringSlice(i any) (result []string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2635,7 +2635,7 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| result | `[]string` |   |
 
 
 ### totitle

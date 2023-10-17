@@ -3,6 +3,8 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [fuzz.FuzzCalcExpr](#fuzzcalcexpr) ||
+| [fuzz.FuzzCalcExprInt32Safe](#fuzzcalcexprint32safe) ||
+| [fuzz.FuzzCalcExprInt64Safe](#fuzzcalcexprint64safe) ||
 | [fuzz.HTTPRequest](#httprequest) ||
 | [fuzz.MustHTTPRequest](#musthttprequest) ||
 | [fuzz.ProtobufBytes](#protobufbytes) ||
@@ -31,6 +33,36 @@
 #### 定义
 
 `FuzzCalcExpr() map[string]any`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
+
+
+### fuzzcalcexprint32safe
+
+#### 详细描述
+
+
+#### 定义
+
+`FuzzCalcExprInt32Safe() map[string]any`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
+
+
+### fuzzcalcexprint64safe
+
+#### 详细描述
+
+
+#### 定义
+
+`FuzzCalcExprInt64Safe() map[string]any`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
