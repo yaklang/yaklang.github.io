@@ -30,12 +30,12 @@
 
 #### 定义
 
-`HttpBruteForce(urlStr string, opts ...BruteConfigOpt) (chan Result, error)`
+`HttpBruteForce(targetUrl string, opts ...BruteConfigOpt) (chan Result, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| urlStr | `string` |   |
+| targetUrl | `string` |   |
 | opts | `...BruteConfigOpt` |   |
 
 #### 返回值
@@ -52,12 +52,12 @@
 
 #### 定义
 
-`captchaImgSelector(captchaImgSelector string) BruteConfigOpt`
+`captchaImgSelector(selector string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| captchaImgSelector | `string` |   |
+| selector | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -72,12 +72,12 @@
 
 #### 定义
 
-`captchaInputSelector(captchaSelector string) BruteConfigOpt`
+`captchaInputSelector(selector string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| captchaSelector | `string` |   |
+| selector | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -92,12 +92,12 @@
 
 #### 定义
 
-`captchaMode(captchaMode string) BruteConfigOpt`
+`captchaMode(mode string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| captchaMode | `string` |   |
+| mode | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -112,12 +112,12 @@
 
 #### 定义
 
-`captchaUrl(captchaUrl string) BruteConfigOpt`
+`captchaUrl(url string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| captchaUrl | `string` |   |
+| url | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -172,12 +172,12 @@
 
 #### 定义
 
-`leaklessStatus(leakless config.LeaklessMode) BruteConfigOpt`
+`leaklessStatus(leakless LeaklessMode) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| leakless | `config.LeaklessMode` |   |
+| leakless | `LeaklessMode` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -192,12 +192,12 @@
 
 #### 定义
 
-`loginDetectMode(detectMode loginDetectMode, degree ...float64) BruteConfigOpt`
+`loginDetectMode(mode loginDetectMode, degree ...float64) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| detectMode | `loginDetectMode` |   |
+| mode | `loginDetectMode` |   |
 | degree | `...float64` |   |
 
 #### 返回值
@@ -233,12 +233,12 @@
 
 #### 定义
 
-`passwordList(passwords []string) BruteConfigOpt`
+`passwordList(password []string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| passwords | `[]string` |   |
+| password | `[]string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -253,12 +253,12 @@
 
 #### 定义
 
-`passwordSelector(passwordSelector string) BruteConfigOpt`
+`passwordSelector(selector string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| passwordSelector | `string` |   |
+| selector | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -294,12 +294,12 @@
 
 #### 定义
 
-`submitButtonSelector(buttonSelector string) BruteConfigOpt`
+`submitButtonSelector(selector string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| buttonSelector | `string` |   |
+| selector | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -334,12 +334,12 @@
 
 #### 定义
 
-`usernameList(usernames []string) BruteConfigOpt`
+`usernameList(username []string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| usernames | `[]string` |   |
+| username | `[]string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -354,12 +354,12 @@
 
 #### 定义
 
-`usernameSelector(usernameSelector string) BruteConfigOpt`
+`usernameSelector(selector string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| usernameSelector | `string` |   |
+| selector | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -374,12 +374,12 @@
 
 #### 定义
 
-`wsAddress(wsAddress string) BruteConfigOpt`
+`wsAddress(ws string) BruteConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| wsAddress | `string` |   |
+| ws | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

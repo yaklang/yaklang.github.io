@@ -2,19 +2,26 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
+| [.](#) ||
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
 | [yakit.EnableTable](#enabletable) ||
 | [yakit.EnableWebsiteTrees](#enablewebsitetrees) ||
-| [yakit.Error](#error) ||
-| [yakit.File](#file) ||
 | [yakit.GenerateYakitMITMHooksParams](#generateyakitmitmhooksparams) ||
 | [yakit.GetHomeDir](#gethomedir) ||
 | [yakit.GetHomeTempDir](#gethometempdir) ||
 | [yakit.GetOnlineBaseUrl](#getonlinebaseurl) ||
-| [yakit.Info](#info) ||
 | [yakit.InitYakit](#inityakit) ||
-| [yakit.Markdown](#markdown) ||
 | [yakit.NewBarGraph](#newbargraph) ||
 | [yakit.NewClient](#newclient) ||
 | [yakit.NewHTTPFlowRisk](#newhttpflowrisk) ||
@@ -22,7 +29,6 @@
 | [yakit.NewPieGraph](#newpiegraph) ||
 | [yakit.NewTable](#newtable) ||
 | [yakit.NewWordCloud](#newwordcloud) ||
-| [yakit.Output](#output) ||
 | [yakit.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [yakit.QueryDomainsByNetwork](#querydomainsbynetwork) ||
 | [yakit.QueryDomainsByTitle](#querydomainsbytitle) ||
@@ -37,26 +43,131 @@
 | [yakit.QueryPortAssetByNetwork](#queryportassetbynetwork) ||
 | [yakit.QueryUrlsAll](#queryurlsall) ||
 | [yakit.QueryUrlsByKeyword](#queryurlsbykeyword) ||
-| [yakit.Report](#report) ||
 | [yakit.SaveDomain](#savedomain) ||
 | [yakit.SaveHTTPFlow](#savehttpflow) ||
 | [yakit.SavePayload](#savepayload) ||
 | [yakit.SavePayloadByFile](#savepayloadbyfile) ||
 | [yakit.SavePortFromResult](#saveportfromresult) ||
 | [yakit.SetOnlineBaseUrl](#setonlinebaseurl) ||
-| [yakit.SetProgress](#setprogress) ||
-| [yakit.SetProgressEx](#setprogressex) ||
 | [yakit.StatusCard](#statuscard) ||
 | [yakit.TableData](#tabledata) ||
-| [yakit.Text](#text) ||
 | [yakit.UpdateOnlineYakitStore](#updateonlineyakitstore) ||
 | [yakit.UpdateYakitStore](#updateyakitstore) ||
 | [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
-| [yakit.Warn](#warn) ||
 
 
 ## 函数定义
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
 ### autoinityakit
 
 #### 详细描述
@@ -133,38 +244,6 @@
 | r1 | `` |   |
 
 
-### error
-
-#### 详细描述
-
-
-#### 定义
-
-`Error(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
-
-
-### file
-
-#### 详细描述
-
-
-#### 定义
-
-`File(fileName string, desc ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fileName | `string` |   |
-| desc | `...any` |   |
-
-
 ### generateyakitmitmhooksparams
 
 #### 详细描述
@@ -233,22 +312,6 @@
 | r1 | `string` |   |
 
 
-### info
-
-#### 详细描述
-
-
-#### 定义
-
-`Info(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
-
-
 ### inityakit
 
 #### 详细描述
@@ -262,21 +325,6 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | y | `*YakitClient` |   |
-
-
-### markdown
-
-#### 详细描述
-
-
-#### 定义
-
-`Markdown(tmp any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `any` |   |
 
 
 ### newbargraph
@@ -401,26 +449,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*YakitGraph` |   |
-
-
-### output
-
-#### 详细描述
-
-
-#### 定义
-
-`Output(i any) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
 
 
 ### querydomainsbydomainkeyword
@@ -695,21 +723,6 @@
 | r1 | `chan string` |   |
 
 
-### report
-
-#### 详细描述
-
-
-#### 定义
-
-`Report(i int)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` |   |
-
-
 ### savedomain
 
 #### 详细描述
@@ -831,37 +844,6 @@
 | u | `string` |   |
 
 
-### setprogress
-
-#### 详细描述
-
-
-#### 定义
-
-`SetProgress(f float64)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| f | `float64` |   |
-
-
-### setprogressex
-
-#### 详细描述
-
-
-#### 定义
-
-`SetProgressEx(id string, f float64)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| id | `string` |   |
-| f | `float64` |   |
-
-
 ### statuscard
 
 #### 详细描述
@@ -903,22 +885,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*YakitFixedTableData` |   |
-
-
-### text
-
-#### 详细描述
-
-
-#### 定义
-
-`Text(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
 
 
 ### updateonlineyakitstore
@@ -991,21 +957,5 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
-
-
-### warn
-
-#### 详细描述
-
-
-#### 定义
-
-`Warn(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
 
 
