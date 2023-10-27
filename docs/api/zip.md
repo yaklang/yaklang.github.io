@@ -3,7 +3,8 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [zip.Compress](#compress) ||
-| [zip.Decompress](#decompress) |解压|
+| [zip.Decompress](#decompress) |解压
+|
 
 
 ## 函数定义
@@ -32,6 +33,7 @@
 
 #### 详细描述
 解压
+
 
 #### 定义
 

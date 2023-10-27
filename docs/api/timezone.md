@@ -2,7 +2,10 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [timezone.Get](#get) |LoadLocation returns the Location with the given name.If the name is "" or "UTC", LoadLocation returns UTC.If the name is "Local", LoadLocation return...|
+| [timezone.Get](#get) |LoadLocation returns the Location with the given name.
+
+If the name is "" or "UTC", LoadLocation returns UTC.
+If the name is "Local", LoadLocation ret...|
 | [timezone.Now](#now) ||
 
 
@@ -10,7 +13,22 @@
 ### get
 
 #### 详细描述
-LoadLocation returns the Location with the given name.If the name is "" or "UTC", LoadLocation returns UTC.If the name is "Local", LoadLocation returns Local.Otherwise, the name is taken to be a location name corresponding to a filein the IANA Time Zone database, such as "America/New_York".LoadLocation looks for the IANA Time Zone database in the followinglocations in order:  - the directory or uncompressed zip file named by the ZONEINFO environment variable  - on a Unix system, the system standard installation location  - $GOROOT/lib/time/zoneinfo.zip  - the time/tzdata package, if it was imported
+LoadLocation returns the Location with the given name.
+
+If the name is "" or "UTC", LoadLocation returns UTC.
+If the name is "Local", LoadLocation returns Local.
+
+Otherwise, the name is taken to be a location name corresponding to a file
+in the IANA Time Zone database, such as "America/New_York".
+
+LoadLocation looks for the IANA Time Zone database in the following
+locations in order:
+
+  - the directory or uncompressed zip file named by the ZONEINFO environment variable
+  - on a Unix system, the system standard installation location
+  - $GOROOT/lib/time/zoneinfo.zip
+  - the time/tzdata package, if it was imported
+
 
 #### 定义
 

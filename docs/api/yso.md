@@ -3,7 +3,8 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [yso.GenerateClassObjectFromBytes](#generateclassobjectfrombytes) ||
-| [yso.GenerateDNSlogEvilClassObject](#generatednslogevilclassobject) |dnslog生成|
+| [yso.GenerateDNSlogEvilClassObject](#generatednslogevilclassobject) |dnslog生成
+|
 | [yso.GenerateHeaderEchoClassObject](#generateheaderechoclassobject) ||
 | [yso.GenerateModifyTomcatMaxHeaderSizeEvilClassObject](#generatemodifytomcatmaxheadersizeevilclassobject) ||
 | [yso.GenerateMultiEchoClassObject](#generatemultiechoclassobject) ||
@@ -11,7 +12,8 @@
 | [yso.GenerateProcessImplExecEvilClassObject](#generateprocessimplexecevilclassobject) ||
 | [yso.GenerateRuntimeExecEvilClassObject](#generateruntimeexecevilclassobject) ||
 | [yso.GenerateSleepClassObject](#generatesleepclassobject) ||
-| [yso.GenerateSpringEchoEvilClassObject](#generatespringechoevilclassobject) |spring生成|
+| [yso.GenerateSpringEchoEvilClassObject](#generatespringechoevilclassobject) |spring生成
+|
 | [yso.GenerateTcpReverseEvilClassObject](#generatetcpreverseevilclassobject) ||
 | [yso.GenerateTcpReverseShellEvilClassObject](#generatetcpreverseshellevilclassobject) ||
 | [yso.GenerateTomcatEchoClassObject](#generatetomcatechoclassobject) ||
@@ -55,7 +57,8 @@
 | [yso.command](#command) ||
 | [yso.dnslogDomain](#dnslogdomain) ||
 | [yso.dump](#dump) ||
-| [yso.evilClassName](#evilclassname) |公共参数|
+| [yso.evilClassName](#evilclassname) |公共参数
+|
 | [yso.obfuscationClassConstantPool](#obfuscationclassconstantpool) ||
 | [yso.springEchoBody](#springechobody) ||
 | [yso.springHeader](#springheader) ||
@@ -66,32 +69,45 @@
 | [yso.tcpReverseToken](#tcpreversetoken) ||
 | [yso.useBase64BytesClass](#usebase64bytesclass) ||
 | [yso.useBytesClass](#usebytesclass) ||
-| [yso.useBytesEvilClass](#usebytesevilclass) |生成自定义Class|
-| [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) |MultiEcho|
+| [yso.useBytesEvilClass](#usebytesevilclass) |生成自定义Class
+|
+| [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) |MultiEcho
+|
 | [yso.useConstructorExecutor](#useconstructorexecutor) ||
 | [yso.useDNSLogEvilClass](#usednslogevilclass) ||
-| [yso.useDNSlogTemplate](#usednslogtemplate) |dnslog参数|
+| [yso.useDNSlogTemplate](#usednslogtemplate) |dnslog参数
+|
 | [yso.useHeaderEchoEvilClass](#useheaderechoevilclass) ||
-| [yso.useHeaderEchoTemplate](#useheaderechotemplate) |HeaderEchoClass|
+| [yso.useHeaderEchoTemplate](#useheaderechotemplate) |HeaderEchoClass
+|
 | [yso.useHeaderParam](#useheaderparam) ||
-| [yso.useModifyTomcatMaxHeaderSizeTemplate](#usemodifytomcatmaxheadersizetemplate) |ModifyTomcatMaxHeaderSize|
+| [yso.useModifyTomcatMaxHeaderSizeTemplate](#usemodifytomcatmaxheadersizetemplate) |ModifyTomcatMaxHeaderSize
+|
 | [yso.useMultiEchoEvilClass](#usemultiechoevilclass) ||
 | [yso.useProcessBuilderExecEvilClass](#useprocessbuilderexecevilclass) ||
-| [yso.useProcessBuilderExecTemplate](#useprocessbuilderexectemplate) |ProcessBuilderExec 参数|
+| [yso.useProcessBuilderExecTemplate](#useprocessbuilderexectemplate) |ProcessBuilderExec 参数
+|
 | [yso.useProcessImplExecEvilClass](#useprocessimplexecevilclass) ||
-| [yso.useProcessImplExecTemplate](#useprocessimplexectemplate) |ProcessImplExec 参数|
+| [yso.useProcessImplExecTemplate](#useprocessimplexectemplate) |ProcessImplExec 参数
+|
 | [yso.useRuntimeExecEvilClass](#useruntimeexecevilclass) ||
-| [yso.useRuntimeExecTemplate](#useruntimeexectemplate) |RuntimeExec 参数|
+| [yso.useRuntimeExecTemplate](#useruntimeexectemplate) |RuntimeExec 参数
+|
 | [yso.useSleepEvilClass](#usesleepevilclass) ||
-| [yso.useSleepTemplate](#usesleeptemplate) |SleepClass|
+| [yso.useSleepTemplate](#usesleeptemplate) |SleepClass
+|
 | [yso.useSleepTime](#usesleeptime) ||
-| [yso.useSpringEchoTemplate](#usespringechotemplate) |spring参数|
+| [yso.useSpringEchoTemplate](#usespringechotemplate) |spring参数
+|
 | [yso.useTcpReverseEvilClass](#usetcpreverseevilclass) ||
 | [yso.useTcpReverseShellEvilClass](#usetcpreverseshellevilclass) ||
-| [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) |生成tcp反弹shell|
-| [yso.useTcpReverseTemplate](#usetcpreversetemplate) |生成tcp反连|
+| [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) |生成tcp反弹shell
+|
+| [yso.useTcpReverseTemplate](#usetcpreversetemplate) |生成tcp反连
+|
 | [yso.useTomcatEchoEvilClass](#usetomcatechoevilclass) ||
-| [yso.useTomcatEchoTemplate](#usetomcatechotemplate) |Tomcat回显|
+| [yso.useTomcatEchoTemplate](#usetomcatechotemplate) |Tomcat回显
+|
 
 
 ## 函数定义
@@ -121,6 +137,7 @@
 
 #### 详细描述
 dnslog生成
+
 
 #### 定义
 
@@ -293,6 +310,7 @@ dnslog生成
 
 #### 详细描述
 spring生成
+
 
 #### 定义
 
@@ -1200,6 +1218,7 @@ spring生成
 #### 详细描述
 公共参数
 
+
 #### 定义
 
 `evilClassName(className string) GenClassOptionFun`
@@ -1406,6 +1425,7 @@ spring生成
 #### 详细描述
 生成自定义Class
 
+
 #### 定义
 
 `useBytesEvilClass(data []byte) GenClassOptionFun`
@@ -1425,6 +1445,7 @@ spring生成
 
 #### 详细描述
 MultiEcho
+
 
 #### 定义
 
@@ -1476,6 +1497,7 @@ MultiEcho
 #### 详细描述
 dnslog参数
 
+
 #### 定义
 
 `useDNSlogTemplate() GenClassOptionFun`
@@ -1505,6 +1527,7 @@ dnslog参数
 
 #### 详细描述
 HeaderEchoClass
+
 
 #### 定义
 
@@ -1541,6 +1564,7 @@ HeaderEchoClass
 
 #### 详细描述
 ModifyTomcatMaxHeaderSize
+
 
 #### 定义
 
@@ -1592,6 +1616,7 @@ ModifyTomcatMaxHeaderSize
 #### 详细描述
 ProcessBuilderExec 参数
 
+
 #### 定义
 
 `useProcessBuilderExecTemplate() GenClassOptionFun`
@@ -1626,6 +1651,7 @@ ProcessBuilderExec 参数
 
 #### 详细描述
 ProcessImplExec 参数
+
 
 #### 定义
 
@@ -1662,6 +1688,7 @@ ProcessImplExec 参数
 #### 详细描述
 RuntimeExec 参数
 
+
 #### 定义
 
 `useRuntimeExecTemplate() GenClassOptionFun`
@@ -1691,6 +1718,7 @@ RuntimeExec 参数
 
 #### 详细描述
 SleepClass
+
 
 #### 定义
 
@@ -1726,6 +1754,7 @@ SleepClass
 
 #### 详细描述
 spring参数
+
 
 #### 定义
 
@@ -1784,6 +1813,7 @@ spring参数
 #### 详细描述
 生成tcp反弹shell
 
+
 #### 定义
 
 `useTcpReverseShellTemplate() GenClassOptionFun`
@@ -1798,6 +1828,7 @@ spring参数
 
 #### 详细描述
 生成tcp反连
+
 
 #### 定义
 
@@ -1828,6 +1859,7 @@ spring参数
 
 #### 详细描述
 Tomcat回显
+
 
 #### 定义
 

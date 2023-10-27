@@ -4,35 +4,55 @@
 |:------|:--------|
 | [file.Abs](#abs) ||
 | [file.Cat](#cat) ||
-| [file.Cp](#cp) |Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.|
+| [file.Cp](#cp) |Copy the src file to dst. Any existing file will be overwritten and will not
+copy file attributes.
+|
 | [file.Create](#create) ||
 | [file.Dir](#dir) ||
-| [file.GetDirPath](#getdirpath) |Dir returns all but the last element of path, typically the path's directory.After dropping the final element, Dir calls Clean on the path and trailin...|
-| [file.IsAbs](#isabs) |IsAbs reports whether the path is absolute.|
+| [file.GetDirPath](#getdirpath) |Dir returns all but the last element of path, typically the path's directory.
+After dropping the final element, Dir calls Clean on the path and traili...|
+| [file.IsAbs](#isabs) |IsAbs reports whether the path is absolute.
+|
 | [file.IsDir](#isdir) ||
 | [file.IsExisted](#isexisted) ||
 | [file.IsFile](#isfile) ||
 | [file.IsLink](#islink) ||
-| [file.Join](#join) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Clea...|
+| [file.Join](#join) |Join joins any number of path elements into a single path,
+separating them with an OS specific Separator. Empty elements
+are ignored. The result is Cl...|
 | [file.Ls](#ls) ||
 | [file.Lstat](#lstat) ||
 | [file.Mkdir](#mkdir) ||
 | [file.MkdirAll](#mkdirall) ||
-| [file.Mv](#mv) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when...|
+| [file.Mv](#mv) |Rename renames (moves) oldpath to newpath.
+If newpath already exists and is not a directory, Rename replaces it.
+OS-specific restrictions may apply wh...|
 | [file.NewMultiFileLineReader](#newmultifilelinereader) ||
 | [file.Open](#open) ||
 | [file.OpenFile](#openfile) ||
-| [file.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefine...|
+| [file.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read.
+A successful call returns err == nil, not err == EOF. Because ReadAll is
+defi...|
 | [file.ReadDirInfoInDirectory](#readdirinfoindirectory) ||
-| [file.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the who...|
+| [file.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents.
+A successful call returns err == nil, not err == EOF. Because ReadFile
+reads the w...|
 | [file.ReadFileInfoInDirectory](#readfileinfoindirectory) ||
 | [file.ReadLines](#readlines) ||
-| [file.Remove](#remove) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist,...|
-| [file.Rename](#rename) |Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when...|
-| [file.Rm](#rm) |RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist,...|
+| [file.Remove](#remove) |RemoveAll removes path and any children it contains.
+It removes everything it can but returns the first error
+it encounters. If the path does not exis...|
+| [file.Rename](#rename) |Rename renames (moves) oldpath to newpath.
+If newpath already exists and is not a directory, Rename replaces it.
+OS-specific restrictions may apply wh...|
+| [file.Rm](#rm) |RemoveAll removes path and any children it contains.
+It removes everything it can but returns the first error
+it encounters. If the path does not exis...|
 | [file.Save](#save) ||
 | [file.SaveJson](#savejson) ||
-| [file.Split](#split) |Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, S...|
+| [file.Split](#split) |Split splits path immediately following the final Separator,
+separating it into a directory and file name component.
+If there is no Separator in path,...|
 | [file.Stat](#stat) ||
 | [file.TailF](#tailf) ||
 | [file.TempFile](#tempfile) ||
@@ -78,7 +98,9 @@
 ### cp
 
 #### 详细描述
-Copy the src file to dst. Any existing file will be overwritten and will notcopy file attributes.
+Copy the src file to dst. Any existing file will be overwritten and will not
+copy file attributes.
+
 
 #### 定义
 
@@ -140,7 +162,13 @@ Copy the src file to dst. Any existing file will be overwritten and will notcopy
 ### getdirpath
 
 #### 详细描述
-Dir returns all but the last element of path, typically the path's directory.After dropping the final element, Dir calls Clean on the path and trailingslashes are removed.If the path is empty, Dir returns ".".If the path consists entirely of separators, Dir returns a single separator.The returned path does not end in a separator unless it is the root directory.
+Dir returns all but the last element of path, typically the path's directory.
+After dropping the final element, Dir calls Clean on the path and trailing
+slashes are removed.
+If the path is empty, Dir returns ".".
+If the path consists entirely of separators, Dir returns a single separator.
+The returned path does not end in a separator unless it is the root directory.
+
 
 #### 定义
 
@@ -161,6 +189,7 @@ Dir returns all but the last element of path, typically the path's directory.Aft
 
 #### 详细描述
 IsAbs reports whether the path is absolute.
+
 
 #### 定义
 
@@ -260,7 +289,14 @@ IsAbs reports whether the path is absolute.
 ### join
 
 #### 详细描述
-Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.
+Join joins any number of path elements into a single path,
+separating them with an OS specific Separator. Empty elements
+are ignored. The result is Cleaned. However, if the argument
+list is empty or all its elements are empty, Join returns
+an empty string.
+On Windows, the result will only be a UNC path if the first
+non-empty element is a UNC path.
+
 
 #### 定义
 
@@ -361,7 +397,12 @@ Join joins any number of path elements into a single path,separating them with a
 ### mv
 
 #### 详细描述
-Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.
+Rename renames (moves) oldpath to newpath.
+If newpath already exists and is not a directory, Rename replaces it.
+OS-specific restrictions may apply when oldpath and newpath are in different directories.
+Even within the same directory, on non-Unix platforms Rename is not an atomic operation.
+If there is an error, it will be of type *LinkError.
+
 
 #### 定义
 
@@ -447,7 +488,13 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 ### readall
 
 #### 详细描述
-ReadAll reads from r until an error or EOF and returns the data it read.A successful call returns err == nil, not err == EOF. Because ReadAll isdefined to read from src until EOF, it does not treat an EOF from Readas an error to be reported.Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
+ReadAll reads from r until an error or EOF and returns the data it read.
+A successful call returns err == nil, not err == EOF. Because ReadAll is
+defined to read from src until EOF, it does not treat an EOF from Read
+as an error to be reported.
+
+Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
+
 
 #### 定义
 
@@ -489,7 +536,13 @@ ReadAll reads from r until an error or EOF and returns the data it read.A succes
 ### readfile
 
 #### 详细描述
-ReadFile reads the file named by filename and returns the contents.A successful call returns err == nil, not err == EOF. Because ReadFilereads the whole file, it does not treat an EOF from Read as an errorto be reported.Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
+ReadFile reads the file named by filename and returns the contents.
+A successful call returns err == nil, not err == EOF. Because ReadFile
+reads the whole file, it does not treat an EOF from Read as an error
+to be reported.
+
+Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
+
 
 #### 定义
 
@@ -551,7 +604,12 @@ ReadFile reads the file named by filename and returns the contents.A successful 
 ### remove
 
 #### 详细描述
-RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.
+RemoveAll removes path and any children it contains.
+It removes everything it can but returns the first error
+it encounters. If the path does not exist, RemoveAll
+returns nil (no error).
+If there is an error, it will be of type *PathError.
+
 
 #### 定义
 
@@ -571,7 +629,12 @@ RemoveAll removes path and any children it contains.It removes everything it can
 ### rename
 
 #### 详细描述
-Rename renames (moves) oldpath to newpath.If newpath already exists and is not a directory, Rename replaces it.OS-specific restrictions may apply when oldpath and newpath are in different directories.Even within the same directory, on non-Unix platforms Rename is not an atomic operation.If there is an error, it will be of type *LinkError.
+Rename renames (moves) oldpath to newpath.
+If newpath already exists and is not a directory, Rename replaces it.
+OS-specific restrictions may apply when oldpath and newpath are in different directories.
+Even within the same directory, on non-Unix platforms Rename is not an atomic operation.
+If there is an error, it will be of type *LinkError.
+
 
 #### 定义
 
@@ -592,7 +655,12 @@ Rename renames (moves) oldpath to newpath.If newpath already exists and is not a
 ### rm
 
 #### 详细描述
-RemoveAll removes path and any children it contains.It removes everything it can but returns the first errorit encounters. If the path does not exist, RemoveAllreturns nil (no error).If there is an error, it will be of type *PathError.
+RemoveAll removes path and any children it contains.
+It removes everything it can but returns the first error
+it encounters. If the path does not exist, RemoveAll
+returns nil (no error).
+If there is an error, it will be of type *PathError.
+
 
 #### 定义
 
@@ -654,7 +722,12 @@ RemoveAll removes path and any children it contains.It removes everything it can
 ### split
 
 #### 详细描述
-Split splits path immediately following the final Separator,separating it into a directory and file name component.If there is no Separator in path, Split returns an empty dirand file set to path.The returned values have the property that path = dir+file.
+Split splits path immediately following the final Separator,
+separating it into a directory and file name component.
+If there is no Separator in path, Split returns an empty dir
+and file set to path.
+The returned values have the property that path = dir+file.
+
 
 #### 定义
 

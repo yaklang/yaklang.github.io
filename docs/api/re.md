@@ -2,17 +2,28 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [re.Compile](#compile) |Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the ...|
-| [re.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That i...|
+| [re.Compile](#compile) |Compile parses a regular expression and returns, if successful,
+a Regexp object that can be used to match against text.
+
+When matching against text, t...|
+| [re.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expression
+to POSIX ERE (egrep) syntax and changes the match semantics to
+leftmost-longest.
+
+Th...|
 | [re.ExtractEmail](#extractemail) ||
-| [re.ExtractHostPort](#extracthostport) |HOSTPORT|
+| [re.ExtractHostPort](#extracthostport) |HOSTPORT
+|
 | [re.ExtractIP](#extractip) ||
 | [re.ExtractIPv4](#extractipv4) ||
 | [re.ExtractIPv6](#extractipv6) ||
 | [re.ExtractMac](#extractmac) ||
-| [re.ExtractPath](#extractpath) |PATHPARAM|
-| [re.ExtractTTY](#extracttty) |TTY|
-| [re.ExtractURL](#extracturl) |URL|
+| [re.ExtractPath](#extractpath) |PATHPARAM
+|
+| [re.ExtractTTY](#extracttty) |TTY
+|
+| [re.ExtractURL](#extracturl) |URL
+|
 | [re.Find](#find) ||
 | [re.FindAll](#findall) ||
 | [re.FindAllIndex](#findallindex) ||
@@ -23,11 +34,19 @@
 | [re.FindSubmatchAll](#findsubmatchall) ||
 | [re.FindSubmatchAllIndex](#findsubmatchallindex) ||
 | [re.FindSubmatchIndex](#findsubmatchindex) ||
-| [re.Grok](#grok) ||
-| [re.Match](#match) ||
-| [re.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regul...|
-| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding comp...|
-| [re.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression mat...|
+| [re.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-be...|
+| [re.Match](#match) |Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+Example:
+```
+re.Match("^[a-z]+$", "abc") // true
+```
+|
+| [re.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding compiled regu...|
+| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding com...|
+| [re.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharacters
+inside the argument text; the returned string is a regular expression ma...|
 | [re.ReplaceAll](#replaceall) ||
 | [re.ReplaceAllWithFunc](#replaceallwithfunc) ||
 
@@ -36,7 +55,17 @@
 ### compile
 
 #### 详细描述
-Compile parses a regular expression and returns, if successful,a Regexp object that can be used to match against text.When matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses the one that a backtracking search would have found first.This so-called leftmost-first matching is the same semanticsthat Perl, Python, and other implementations use, although thispackage implements it without the expense of backtracking.For POSIX leftmost-longest matching, see CompilePOSIX.
+Compile parses a regular expression and returns, if successful,
+a Regexp object that can be used to match against text.
+
+When matching against text, the regexp returns a match that
+begins as early as possible in the input (leftmost), and among those
+it chooses the one that a backtracking search would have found first.
+This so-called leftmost-first matching is the same semantics
+that Perl, Python, and other implementations use, although this
+package implements it without the expense of backtracking.
+For POSIX leftmost-longest matching, see CompilePOSIX.
+
 
 #### 定义
 
@@ -57,7 +86,26 @@ Compile parses a regular expression and returns, if successful,a Regexp object t
 ### compileposix
 
 #### 详细描述
-CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (egrep) syntax and changes the match semantics toleftmost-longest.That is, when matching against text, the regexp returns a match thatbegins as early as possible in the input (leftmost), and among thoseit chooses a match that is as long as possible.This so-called leftmost-longest matching is the same semanticsthat early regular expression implementations used and that POSIXspecifies.However, there can be multiple leftmost-longest matches, with differentsubmatch choices, and here this package diverges from POSIX.Among the possible leftmost-longest matches, this package choosesthe one that a backtracking search would have found first, while POSIXspecifies that the match be chosen to maximize the length of the firstsubexpression, then the second, and so on from left to right.The POSIX rule is computationally prohibitive and not even well-defined.See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
+CompilePOSIX is like Compile but restricts the regular expression
+to POSIX ERE (egrep) syntax and changes the match semantics to
+leftmost-longest.
+
+That is, when matching against text, the regexp returns a match that
+begins as early as possible in the input (leftmost), and among those
+it chooses a match that is as long as possible.
+This so-called leftmost-longest matching is the same semantics
+that early regular expression implementations used and that POSIX
+specifies.
+
+However, there can be multiple leftmost-longest matches, with different
+submatch choices, and here this package diverges from POSIX.
+Among the possible leftmost-longest matches, this package chooses
+the one that a backtracking search would have found first, while POSIX
+specifies that the match be chosen to maximize the length of the first
+subexpression, then the second, and so on from left to right.
+The POSIX rule is computationally prohibitive and not even well-defined.
+See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
+
 
 #### 定义
 
@@ -99,6 +147,7 @@ CompilePOSIX is like Compile but restricts the regular expressionto POSIX ERE (e
 
 #### 详细描述
 HOSTPORT
+
 
 #### 定义
 
@@ -200,6 +249,7 @@ HOSTPORT
 #### 详细描述
 PATHPARAM
 
+
 #### 定义
 
 `ExtractPath(i any) []string`
@@ -220,6 +270,7 @@ PATHPARAM
 #### 详细描述
 TTY
 
+
 #### 定义
 
 `ExtractTTY(i any) []string`
@@ -239,6 +290,7 @@ TTY
 
 #### 详细描述
 URL
+
 
 #### 定义
 
@@ -468,6 +520,11 @@ URL
 ### grok
 
 #### 详细描述
+Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。
+Example:
+```
+str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
+```
 
 
 #### 定义
@@ -489,17 +546,22 @@ URL
 ### match
 
 #### 详细描述
+Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+Example:
+```
+re.Match("^[a-z]+$", "abc") // true
+```
 
 
 #### 定义
 
-`Match(pattern string, i any) bool`
+`Match(pattern string, s any) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | pattern | `string` |   |
-| i | `any` |   |
+| s | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -510,7 +572,10 @@ URL
 ### mustcompile
 
 #### 详细描述
-MustCompile is like Compile but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
+MustCompile is like Compile but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding compiled regular
+expressions.
+
 
 #### 定义
 
@@ -530,7 +595,10 @@ MustCompile is like Compile but panics if the expression cannot be parsed.It sim
 ### mustcompileposix
 
 #### 详细描述
-MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.It simplifies safe initialization of global variables holding compiled regularexpressions.
+MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.
+It simplifies safe initialization of global variables holding compiled regular
+expressions.
+
 
 #### 定义
 
@@ -550,7 +618,10 @@ MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be par
 ### quotemeta
 
 #### 详细描述
-QuoteMeta returns a string that escapes all regular expression metacharactersinside the argument text; the returned string is a regular expression matchingthe literal text.
+QuoteMeta returns a string that escapes all regular expression metacharacters
+inside the argument text; the returned string is a regular expression matching
+the literal text.
+
 
 #### 定义
 

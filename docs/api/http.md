@@ -23,8 +23,10 @@
 | [http.header](#header) ||
 | [http.json](#json) ||
 | [http.noredirect](#noredirect) ||
-| [http.params](#params) |GetParams set query params|
-| [http.postparams](#postparams) |PostParams set post params|
+| [http.params](#params) |GetParams set query params
+|
+| [http.postparams](#postparams) |PostParams set post params
+|
 | [http.proxy](#proxy) ||
 | [http.redirect](#redirect) ||
 | [http.session](#session) ||
@@ -473,6 +475,7 @@
 #### 详细描述
 GetParams set query params
 
+
 #### 定义
 
 `params(i any) HttpOption`
@@ -492,6 +495,7 @@ GetParams set query params
 
 #### 详细描述
 PostParams set post params
+
 
 #### 定义
 

@@ -2,14 +2,20 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [log.Debug](#debug) |Debugf will print when logger's Level is debug.|
-| [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.|
-| [log.Info](#info) |Infof will print when logger's Level is info or debug.|
+| [log.Debug](#debug) |Debugf will print when logger's Level is debug.
+|
+| [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.
+|
+| [log.Info](#info) |Infof will print when logger's Level is info or debug.
+|
 | [log.SetLevel](#setlevel) ||
 | [log.Warn](#warn) ||
-| [log.debug](#debug) |Debugf will print when logger's Level is debug.|
-| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.|
-| [log.info](#info) |Infof will print when logger's Level is info or debug.|
+| [log.debug](#debug) |Debugf will print when logger's Level is debug.
+|
+| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.
+|
+| [log.info](#info) |Infof will print when logger's Level is info or debug.
+|
 | [log.setLevel](#setlevel) ||
 | [log.warn](#warn) ||
 
@@ -19,6 +25,7 @@
 
 #### 详细描述
 Debugf will print when logger's Level is debug.
+
 
 #### 定义
 
@@ -36,6 +43,7 @@ Debugf will print when logger's Level is debug.
 #### 详细描述
 Errorf will print only when logger's Level is error, warn, info or debug.
 
+
 #### 定义
 
 `Error(format string, args ...any)`
@@ -51,6 +59,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 
 #### 详细描述
 Infof will print when logger's Level is info or debug.
+
 
 #### 定义
 
@@ -99,6 +108,7 @@ Infof will print when logger's Level is info or debug.
 #### 详细描述
 Debugf will print when logger's Level is debug.
 
+
 #### 定义
 
 `debug(format string, args ...any)`
@@ -115,6 +125,7 @@ Debugf will print when logger's Level is debug.
 #### 详细描述
 Errorf will print only when logger's Level is error, warn, info or debug.
 
+
 #### 定义
 
 `error(format string, args ...any)`
@@ -130,6 +141,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 
 #### 详细描述
 Infof will print when logger's Level is info or debug.
+
 
 #### 定义
 

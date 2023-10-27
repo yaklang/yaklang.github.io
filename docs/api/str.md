@@ -2,41 +2,158 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [str.CalcSSDeep](#calcssdeep) ||
-| [str.CalcSSDeepStability](#calcssdeepstability) |稳定性定义为最远距离 / 最低分数|
-| [str.CalcSimHash](#calcsimhash) ||
-| [str.CalcSimHashStability](#calcsimhashstability) |计算 simhash 稳定性|
-| [str.CalcSimilarity](#calcsimilarity) ||
-| [str.CalcTextMaxSubStrStability](#calctextmaxsubstrstability) ||
-| [str.Compare](#compare) |Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b.Compare is inclu...|
-| [str.Contains](#contains) |Contains reports whether substr is within s.|
-| [str.ContainsAny](#containsany) |ContainsAny reports whether any Unicode code points in chars are within s.|
-| [str.Count](#count) |Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 + the number of Unicode code points ...|
-| [str.EndsWith](#endswith) |HasSuffix tests whether the string s ends with suffix.|
-| [str.EqualFold](#equalfold) |EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under simple Unicode case-folding, which is a more generalform of case-insen...|
-| [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) ||
+| [str.CalcSSDeep](#calcssdeep) |CalcSSDeep 计算并返回一段文本的模糊哈希值
+Example:
+```
+str.CalcSSDeep("hello")
+```
+|
+| [str.CalcSSDeepStability](#calcssdeepstability) |CalcSSDeepStability 使用模糊哈希算法计算多段文本之间的相似度，返回相似度与错误。传入的文本应该为大文本，即�...|
+| [str.CalcSimHash](#calcsimhash) |CalcSimHash 计算并返回一段文本的 SimHash 值
+Example:
+```
+str.CalcSimHash("hello")
+```
+|
+| [str.CalcSimHashStability](#calcsimhashstability) |CalcSimHashStability 使用 SimHash 算法计算多段文本之间的相似度，返回相似度与错误。
+Example:
+```
+p, err = str.CalcSimHashStab...|
+| [str.CalcSimilarity](#calcsimilarity) |CalcSimilarity 计算多段文本之间的相似度，根据最长的文本长度选择不同的算法
+如果最长的文本长度小于等于 2000，...|
+| [str.CalcTextMaxSubStrStability](#calctextmaxsubstrstability) |CalcTextMaxSubStrStability 使用文本子串匹配算法计算多段文本之间的相似度，返回相似度与错误
+Example:
+```
+p, err = str.Cal...|
+| [str.Compare](#compare) |Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&lt;b，则返回-1，如果a&gt;b，�...|
+| [str.Contains](#contains) |Contains 判断字符串s是否包含substr
+Example:
+```
+str.Contains("hello yakit", "yak") // true
+```
+|
+| [str.ContainsAny](#containsany) |ContainsAny 判断字符串s是否包含chars中的任意字符
+Example:
+```
+str.ContainsAny("hello yak", "ly") // true
+str.ContainsAny("hello yak", "...|
+| [str.Count](#count) |Count 返回字符串s中substr出现的次数
+Example:
+```
+str.Count("hello yak", "l") // 2
+```
+|
+| [str.EndsWith](#endswith) |EndsWith / HasSuffix 判断字符串s是否以suffix结尾
+Example:
+```
+str.EndsWith("Hello Yak", "Yak") // true
+str.EndsWith("Hello Yak", "Hello") //...|
+| [str.EqualFold](#equalfold) |EqualFold 判断字符串s和t是否相等，忽略大小写
+Example:
+```
+str.EqualFold("hello Yak", "HELLO YAK") // true
+```
+|
+| [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) |ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body
+Example:
+```
+body, err = str.ExtractBodyFromHTTPResponseRaw(b"HTTP/1.1 200 OK...|
 | [str.ExtractChineseIDCards](#extractchineseidcards) ||
-| [str.ExtractDomain](#extractdomain) ||
-| [str.ExtractHost](#extracthost) ||
-| [str.ExtractJson](#extractjson) ||
-| [str.ExtractJsonWithRaw](#extractjsonwithraw) ||
-| [str.ExtractRootDomain](#extractrootdomain) ||
-| [str.ExtractStrContext](#extractstrcontext) ||
-| [str.ExtractTitle](#extracttitle) ||
-| [str.ExtractURLFromHTTPRequest](#extracturlfromhttprequest) ||
-| [str.ExtractURLFromHTTPRequestRaw](#extracturlfromhttprequestraw) ||
-| [str.Fields](#fields) |Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of ...|
-| [str.FixHTTPRequest](#fixhttprequest) ||
-| [str.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse try its best to fix and present human-readable response|
-| [str.Grok](#grok) ||
-| [str.HasPrefix](#hasprefix) |HasPrefix tests whether the string s begins with prefix.|
-| [str.HasSuffix](#hassuffix) |HasSuffix tests whether the string s ends with suffix.|
-| [str.HostPort](#hostport) ||
-| [str.IPv4ToCClassNetwork](#ipv4tocclassnetwork) ||
-| [str.Index](#index) |Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.|
-| [str.IndexAny](#indexany) |IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.|
-| [str.IndexByte](#indexbyte) |IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.|
-| [str.IntersectString](#intersectstring) |IntersectString returns the intersection between two collections of string.|
+| [str.ExtractDomain](#extractdomain) |ExtractDomain 尝试提取字符串中的域名并返回
+Example:
+```
+str.ExtractDomain("hello yak") // []
+str.ExtractDomain("hello yaklang.com or yak...|
+| [str.ExtractHost](#extracthost) |ExtractHost 尝试从字符串中解析出host和port，并返回host
+Example:
+```
+str.ExtractHost("127.0.0.1:8888") // 127.0.0.1
+str.ExtractHost("htt...|
+| [str.ExtractJson](#extractjson) |ExtractJson 尝试提取字符串中的 JSON 并进行修复返回
+Example:
+```
+str.ExtractJson("hello yak") // []
+str.ExtractJson(`{"hello": "yak"}`)...|
+| [str.ExtractJsonWithRaw](#extractjsonwithraw) |ExtractJsonWithRaw 尝试提取字符串中的 JSON 并返回，第一个返回值返回经过修复后的JSON字符串数组，第二个返回值返�...|
+| [str.ExtractRootDomain](#extractrootdomain) |ExtractRootDomain 尝试提取字符串中的根域名并返回
+Example:
+```
+str.ExtractRootDomain("hello yak") // []
+str.ExtractRootDomain("hello www...|
+| [str.ExtractStrContext](#extractstrcontext) |ExtractStrContext 从字符串raw中提取一组关键字res上下文的内容，上下文的长度是512个字符确定。
+Example:
+```
+str.ExtractSt...|
+| [str.ExtractTitle](#extracttitle) |ExtractTitle 尝试将传入的字符串进行HTML解析并提取其中的标题(title标签)返回
+Example:
+```
+str.ExtractTitle("hello yak") // ""
+s...|
+| [str.ExtractURLFromHTTPRequest](#extracturlfromhttprequest) |ExtractURLFromHTTPRequest 从 HTTP 请求结构体中提取 URL，返回URL结构体与错误
+Example:
+```
+v, err = http.Raw("GET / HTTP/1.1\r\nHost: ...|
+| [str.ExtractURLFromHTTPRequestRaw](#extracturlfromhttprequestraw) |ExtractURLFromHTTPRequestRaw 从原始 HTTP 请求报文中提取 URL，返回URL结构体与错误
+Example:
+```
+url, err := str.ExtractURLFromHTTPReq...|
+| [str.Fields](#fields) |Fields 返回将字符串s按照空白字符（'\t', '\n', '\v', '\f', '\r', ' ', 0x85, 0xA0）分割的字符串切片
+Example:
+```
+str.Fields("hello...|
+| [str.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的请求进行修复，并返回修复后的请求
+Example:
+```
+fixedRequest = str.FixHTTPRequest(b"GET / HTTP/1.1\r\nH...|
+| [str.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响应，响应体和错误
+Example:
+```
+fixedResponse, body, err = str.Fi...|
+| [str.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-be...|
+| [str.HasPrefix](#hasprefix) |StartsWith / HasPrefix 判断字符串s是否以prefix开头
+Example:
+```
+str.StartsWith("Hello Yak", "Hello") // true
+str.StartsWith("Hello Yak", "Ya...|
+| [str.HasSuffix](#hassuffix) |EndsWith / HasSuffix 判断字符串s是否以suffix结尾
+Example:
+```
+str.EndsWith("Hello Yak", "Yak") // true
+str.EndsWith("Hello Yak", "Hello") //...|
+| [str.HostPort](#hostport) |HostPort 将 host 和 port 拼接成 host:port 的形式
+Example:
+```
+str.HostPort("yaklang.com", 443) // yaklang.com:443
+```
+|
+| [str.IPv4ToCClassNetwork](#ipv4tocclassnetwork) |IPv4ToCClassNetwork 尝试从一个 IPv4 地址中获取 C 类网络地址，并返回错误
+Example:
+```
+network, err = str.IPv4ToCClassNetwork("192....|
+| [str.Index](#index) |Index 返回字符串s中substr第一次出现的位置的索引，如果字符串中不存在substr，则返回-1
+Example:
+```
+str.Index("hello yak",...|
+| [str.IndexAny](#indexany) |IndexAny 返回字符串s中chars任意字符首次出现的位置的索引，如果字符串中不存在chars，则返回-1
+Example:
+```
+str.IndexAny...|
+| [str.IndexByte](#indexbyte) |IndexByte 返回字符串s中第一个等于c的字符的索引，如果字符串中不存在c，则返回-1
+Example:
+```
+str.IndexByte("hello yak", '...|
+| [str.Intersect](#intersect) |Intersect / IntersectString 返回两个字符串切片之间的交集
+Example:
+```
+str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+```
+|
+| [str.IntersectString](#intersectstring) |Intersect / IntersectString 返回两个字符串切片之间的交集
+Example:
+```
+str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+```
+|
 | [str.IsAlNum](#isalnum) ||
 | [str.IsAlpha](#isalpha) ||
 | [str.IsAlphaNum](#isalphanum) ||
@@ -44,109 +161,340 @@
 | [str.IsCaptchaField](#iscaptchafield) ||
 | [str.IsDigit](#isdigit) ||
 | [str.IsHtmlResponse](#ishtmlresponse) ||
-| [str.IsHttpURL](#ishttpurl) |IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https|
-| [str.IsIPv4](#isipv4) ||
-| [str.IsIPv6](#isipv6) ||
+| [str.IsHttpURL](#ishttpurl) |IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https
+|
+| [str.IsIPv4](#isipv4) |IsIPv4 判断字符串是否是 IPv4 地址
+Example:
+```
+str.IsIPv4("::1") // false
+str.IsIPv4("127.0.0.1") // true
+```
+|
+| [str.IsIPv6](#isipv6) |IsIPv6 判断字符串是否是 IPv6 地址
+Example:
+```
+str.IsIPv6("::1") // true
+str.IsIPv6("127.0.0.1") // false
+```
+|
 | [str.IsJSONPParam](#isjsonpparam) ||
 | [str.IsJsonResponse](#isjsonresponse) ||
 | [str.IsMD5Value](#ismd5value) ||
 | [str.IsPasswordField](#ispasswordfield) ||
 | [str.IsPlainBase64Value](#isplainbase64value) ||
-| [str.IsRedirectParam](#isredirectparam) |根据 key 的名字猜测是否是用于重定向的参数|
+| [str.IsRedirectParam](#isredirectparam) |根据 key 的名字猜测是否是用于重定向的参数
+|
 | [str.IsSQLColumnField](#issqlcolumnfield) ||
 | [str.IsSensitiveJson](#issensitivejson) ||
 | [str.IsSensitiveTokenField](#issensitivetokenfield) ||
 | [str.IsServerError](#isservererror) ||
 | [str.IsSha256Value](#issha256value) ||
-| [str.IsStrongPassword](#isstrongpassword) ||
+| [str.IsStrongPassword](#isstrongpassword) |IsStrongPassword 判断字符串是否为强密码，强密码的定义为：长度大于8，同时包含特殊字符、小写字母、大写字母、...|
 | [str.IsTLSServer](#istlsserver) ||
 | [str.IsUrlParam](#isurlparam) ||
-| [str.IsUrlPath](#isurlpath) |根据 value 猜测是否是一个 url path|
+| [str.IsUrlPath](#isurlpath) |根据 value 猜测是否是一个 url path
+|
 | [str.IsUsernameField](#isusernamefield) ||
 | [str.IsXmlParam](#isxmlparam) ||
 | [str.IsXmlRequest](#isxmlrequest) ||
 | [str.IsXmlValue](#isxmlvalue) ||
-| [str.Join](#join) ||
-| [str.JsonStreamToMapList](#jsonstreamtomaplist) ||
-| [str.JsonToMap](#jsontomap) ||
-| [str.JsonToMapList](#jsontomaplist) ||
-| [str.LastIndex](#lastindex) |LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.|
-| [str.LastIndexAny](#lastindexany) |LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s...|
-| [str.LastIndexByte](#lastindexbyte) |LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.|
-| [str.LowerAndTrimSpace](#lowerandtrimspace) ||
-| [str.MatchAllOfGlob](#matchallofglob) ||
-| [str.MatchAllOfRegexp](#matchallofregexp) ||
-| [str.MatchAllOfSubString](#matchallofsubstring) ||
-| [str.MatchAnyOfGlob](#matchanyofglob) ||
-| [str.MatchAnyOfRegexp](#matchanyofregexp) ||
-| [str.MatchAnyOfSubString](#matchanyofsubstring) ||
-| [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) ||
-| [str.NewFilter](#newfilter) ||
-| [str.NewReader](#newreader) |NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferString but more efficient and read-only.|
-| [str.ParamsGetOr](#paramsgetor) ||
-| [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) ||
-| [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) ||
-| [str.ParseStringToCClassHosts](#parsestringtocclasshosts) ||
-| [str.ParseStringToHTTPRequest](#parsestringtohttprequest) ||
-| [str.ParseStringToHTTPResponse](#parsestringtohttpresponse) ||
-| [str.ParseStringToHostPort](#parsestringtohostport) ||
-| [str.ParseStringToHosts](#parsestringtohosts) ||
-| [str.ParseStringToLines](#parsestringtolines) ||
-| [str.ParseStringToPorts](#parsestringtoports) |ParseStringToPorts 负数端口代表了是 UDP 扫描端口|
-| [str.ParseStringToUrls](#parsestringtourls) ||
-| [str.ParseStringToUrlsWith3W](#parsestringtourlswith3w) ||
-| [str.ParseStringUrlToUrlInstance](#parsestringurltourlinstance) ||
-| [str.ParseStringUrlToWebsiteRootPath](#parsestringurltowebsiterootpath) ||
-| [str.PathJoin](#pathjoin) |Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Clea...|
-| [str.RandSecret](#randsecret) ||
-| [str.RandStr](#randstr) |RandStringBytes return length `n` alphabet random string|
-| [str.RegexpMatch](#regexpmatch) ||
-| [str.RemoveRepeat](#removerepeat) |元素去重|
-| [str.Repeat](#repeat) |Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or if the result of (len(s) * count)overflows.|
-| [str.Replace](#replace) |Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning o...|
-| [str.ReplaceAll](#replaceall) |ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the...|
-| [str.ReplaceHTTPPacketBody](#replacehttppacketbody) ||
-| [str.Split](#split) |Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is...|
-| [str.SplitAfter](#splitafter) |SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not emp...|
-| [str.SplitAfterN](#splitaftern) |SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings t...|
-| [str.SplitAndTrim](#splitandtrim) ||
-| [str.SplitHTTPHeadersAndBodyFromPacket](#splithttpheadersandbodyfrompacket) ||
-| [str.SplitHostsToPrivateAndPublic](#splithoststoprivateandpublic) ||
-| [str.SplitN](#splitn) |SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of subs...|
-| [str.StartsWith](#startswith) |HasPrefix tests whether the string s begins with prefix.|
-| [str.StringContainsAnyOfSubString](#stringcontainsanyofsubstring) ||
-| [str.StringSliceContains](#stringslicecontains) ||
-| [str.StringSliceContainsAll](#stringslicecontainsall) ||
-| [str.Subtract](#subtract) |SubtractString returns the subtraction between two collections of string|
-| [str.Title](#title) |Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for w...|
-| [str.ToJsonIndentStr](#tojsonindentstr) ||
-| [str.ToLower](#tolower) |ToLower returns s with all Unicode letters mapped to their lower case.|
-| [str.ToLowerSpecial](#tolowerspecial) |ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.|
-| [str.ToStringSlice](#tostringslice) ||
-| [str.ToTitle](#totitle) |ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.|
-| [str.ToTitleSpecial](#totitlespecial) |ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.|
-| [str.ToUpper](#toupper) |ToUpper returns s with all Unicode letters mapped to their upper case.|
-| [str.ToUpperSpecial](#toupperspecial) |ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.|
-| [str.ToValidUTF8](#tovalidutf8) |ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.|
-| [str.Trim](#trim) |Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.|
-| [str.TrimLeft](#trimleft) |TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.|
-| [str.TrimPrefix](#trimprefix) |TrimPrefix returns s without the provided leading prefix string.If s doesn't start with prefix, s is returned unchanged.|
-| [str.TrimRight](#trimright) |TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead...|
-| [str.TrimSpace](#trimspace) |TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.|
-| [str.TrimSuffix](#trimsuffix) |TrimSuffix returns s without the provided trailing suffix string.If s doesn't end with suffix, s is returned unchanged.|
-| [str.UrlJoin](#urljoin) |https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value|
-| [str.VersionEqual](#versionequal) |VersionEqual v1 等于 v2 返回 true|
-| [str.VersionGreater](#versiongreater) |VersionGreater v1 大于 v2 返回 true|
-| [str.VersionGreaterEqual](#versiongreaterequal) |VersionGreaterEqual v1 大于等于 v2 返回 true|
-| [str.VersionLess](#versionless) |VersionLess v1 小于 v2 返回true|
-| [str.VersionLessEqual](#versionlessequal) |VersionLessEqual v1 小于等于 v2 返回true|
-| [str.f](#f) ||
+| [str.Join](#join) |Join 将i中的元素用d连接，如果传入的参数不是字符串，会自动将其转为字符串，再将其用d连接。如果连接失败，�...|
+| [str.JsonToMap](#jsontomap) |JsonToMap 将 json 字符串 line 解析为 map
+Example:
+```
+str.JsonToMap(`{"a":1,"b":2}`) // map[a:1 b:2]
+```
+|
+| [str.JsonToMapList](#jsontomaplist) |JsonToMapList 将 json 字符串 line 解析为 map 列表
+Example:
+```
+str.JsonToMapList(`{"a":1,"b":2} {"c":3, "d":4}`) // [map[a:1 b:2] map[c:3 d:4...|
+| [str.LastIndex](#lastindex) |LastIndex 返回字符串s中substr最后一次出现的位置的索引，如果字符串中不存在substr，则返回-1
+Example:
+```
+str.LastIndex("...|
+| [str.LastIndexAny](#lastindexany) |LastIndexAny 返回字符串s中chars任意字符最后一次出现的位置的索引，如果字符串中不存在chars，则返回-1
+Example:
+```
+st...|
+| [str.LastIndexByte](#lastindexbyte) |LastIndexByte 返回字符串s中最后一个等于c的字符的索引，如果字符串中不存在c，则返回-1
+Example:
+```
+str.LastIndexByte("he...|
+| [str.LowerAndTrimSpace](#lowerandtrimspace) |LowerAndTrimSpace 将字符串raw转换为小写并去除前后空白字符
+Example:
+```
+str.LowerAndTrimSpace("  Hello  ") // "hello"
+```
+|
+| [str.MatchAllOfGlob](#matchallofglob) |MatchAllOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式匹配，如果所有的glob模式都匹配成功，则返回 true，否...|
+| [str.MatchAllOfRegexp](#matchallofregexp) |MatchAllOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹配，如果所有的正则表达式都匹配成功，则返回 true�...|
+| [str.MatchAllOfSubString](#matchallofsubstring) |MatchAllOfSubString 尝试将 i 转换为字符串，然后判断所有子串 subStr 是否都存在于 i 中，如果都存在则返回 true，否则...|
+| [str.MatchAnyOfGlob](#matchanyofglob) |MatchAllOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式匹配，如果任意一个glob模式匹配成功，则返回 true，否...|
+| [str.MatchAnyOfRegexp](#matchanyofregexp) |MatchAllOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹配，如果任意一个正则表达式匹配成功，则返回 true�...|
+| [str.MatchAnyOfSubString](#matchanyofsubstring) |MatchAllOfSubString 尝试将 i 转换为字符串，然后判断是否有任意子串 subStr 存在于 i 中，如果有其中一个子串存在于 i...|
+| [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) |MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 URL 进行合并，并返回合并后的 URL
+Example:
+```
+url = str.Mer...|
+| [str.NewFilter](#newfilter) |NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器用于判断一个元素是否在一个集合中，它存在极低的�...|
+| [str.NewReader](#newreader) |NewReader returns a new Reader reading from s.
+It is similar to bytes.NewBufferString but more efficient and read-only.
+|
+| [str.ParamsGetOr](#paramsgetor) |ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue
+Example:
+```
+str.ParamsGetOr({"a": "1"}, "a", "2") // 1
+str.Par...|
+| [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求
+Example:
+```
+req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.co...|
+| [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应
+Example:
+```
+res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Lengt...|
+| [str.ParseStringToCClassHosts](#parsestringtocclasshosts) |ParseStringToCClassHosts 尝试从给定的字符串中解析Host，再将其转为 C 类网段，用,分隔
+Example:
+```
+str.ParseStringToCClassHosts...|
+| [str.ParseStringToHTTPRequest](#parsestringtohttprequest) |ParseStringToHTTPRequest 将字符串解析为 HTTP 请求
+Example:
+```
+req, err = str.ParseStringToHTTPRequest("GET / HTTP/1.1\r\nHost: example.com\r...|
+| [str.ParseStringToHTTPResponse](#parsestringtohttpresponse) |ParseStringToHTTPResponse 将字符串解析为 HTTP 响应
+Example:
+```
+res, err := str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Length:...|
+| [str.ParseStringToHostPort](#parsestringtohostport) |ParseStringToHostPort 尝试从字符串中解析出host和port，并与错误一起返回
+Example:
+```
+host, port, err = str.ParseStringToHostPort("1...|
+| [str.ParseStringToHosts](#parsestringtohosts) |ParseStringToHosts 将字符串解析成 Host 列表， Host 可以以逗号分隔，并且会解析 CIDR 网段
+Example:
+```
+str.ParseStringToHosts("...|
+| [str.ParseStringToLines](#parsestringtolines) |ParseStringToLines 将字符串按换行符(\n)分割成字符串数组，并去除BOM头和空行
+Example:
+```
+str.ParseStringToLines("Hello World\nH...|
+| [str.ParseStringToPorts](#parsestringtoports) |ParseStringToPorts 将字符串解析成 Port 列表， Port 可以以逗号分隔，并且会解析-分隔的范围
+Example:
+```
+str.ParseStringToPor...|
+| [str.ParseStringToUrls](#parsestringtourls) |ParseStringToUrls 尝试从给定的字符串(ip,域名)中解析出 URL 列表，补全协议和端口
+Example:
+```
+str.ParseStringToUrls("yaklang.co...|
+| [str.ParseStringToUrlsWith3W](#parsestringtourlswith3w) |ParseStringToUrlsWith3W 尝试从给定的字符串(ip,域名)中解析出 URL 列表，补全协议和端口，还会补全域名前的 www 前缀
+Ex...|
+| [str.ParseStringUrlToUrlInstance](#parsestringurltourlinstance) |ParseStringUrlToUrlInstance 将字符串 url 解析为 URL 结构体并返回错误
+Example:
+```
+str.ParseStringUrlToUrlInstance("https://yaklang.com/...|
+| [str.ParseStringUrlToWebsiteRootPath](#parsestringurltowebsiterootpath) |ParseStringUrlToWebsiteRootPath 将字符串 url 解析为其根路径的URL
+Example:
+```
+str.ParseStringUrlToWebsiteRootPath("https://yaklang.com/abc...|
+| [str.PathJoin](#pathjoin) |PathJoin 将传入的文件路径进行拼接并返回
+Example:
+```
+str.PathJoin("/var", "www", "html") // in *unix: "/var/www/html"    in Windows: \v...|
+| [str.RandSecret](#randsecret) |RandSecret 返回在所有可见ascii字符表中随机挑选 n 个字符组成的密码字符串，这个密码经过str.IsStrongPassword验证，即...|
+| [str.RandStr](#randstr) |RandStringBytes 返回在大小写字母表中随机挑选 n 个字符组成的字符串
+Example:
+```
+str.RandStr(10)
+```
+|
+| [str.RegexpMatch](#regexpmatch) |RegexpMatch 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+Example:
+```
+str.RegexpMatch("^[a-z]+$", "abc") /...|
+| [str.RemoveRepeat](#removerepeat) |RemoveRepeat 移除字符串切片slc中的重复元素
+Example:
+```
+str.RemoveRepeat(["hello", "yak", "hello"]) // ["hello", "yak"]
+```
+|
+| [str.Repeat](#repeat) |Repeat 返回将字符串s重复count次的字符串
+Example:
+```
+str.Repeat("hello", 3) // hellohellohello
+```
+|
+| [str.Replace](#replace) |Replace 返回将字符串s中前n个old字符串替换为new字符串的字符串
+Example:
+```
+str.Replace("hello yak", "l", "L", 1) // heLlo yak
+```...|
+| [str.ReplaceAll](#replaceall) |ReplaceAll 返回将字符串s中所有old字符串替换为new字符串的字符串
+Example:
+```
+str.ReplaceAll("hello yak", "yak", "yakit") // hello...|
+| [str.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceHTTPPacketBody 将原始 HTTP 请求报文中的 body 替换为指定的 body，并指定是否为 chunked，返回新的 HTTP 请求报文
+|
+| [str.Split](#split) |Split 将字符串s按照sep分割成字符串切片
+Example:
+```
+str.Split("Hello Yak", " ") // [Hello", "Yak"]
+```
+|
+| [str.SplitAfter](#splitafter) |SplitAfter 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep
+Example:
+```
+str.SplitAfter("Hello-Yak", "-") // [Hello-...|
+| [str.SplitAfterN](#splitaftern) |SplitAfterN 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep，最多分为n个元素
+Example:
+```
+str.SplitAfterN("...|
+| [str.SplitAndTrim](#splitandtrim) |SplitAndTrim 将字符串s按照sep分割成字符串切片，并且去除每个字符串的前后空白字符
+Example:
+```
+str.SplitAndTrim(" hello y...|
+| [str.SplitHTTPHeadersAndBodyFromPacket](#splithttpheadersandbodyfrompacket) |SplitHTTPHeadersAndBodyFromPacket 将传入的 HTTP 报文分割为 headers 和 body，如果传入了hook，则会在每次读取到一行 header 时...|
+| [str.SplitHostsToPrivateAndPublic](#splithoststoprivateandpublic) |SplitHostsToPrivateAndPublic 将 hosts 按照私有 IP 和公有 IP 分开
+Example:
+```
+str.SplitHostsToPrivateAndPublic("127.0.0.1", "8.8.8.8", "10.0...|
+| [str.SplitN](#splitn) |SplitN 将字符串s按照sep分割成字符串切片，最多分为n个元素
+Example:
+```
+str.SplitN("Hello-Yak-and-World", "-", 2) // [Hello", "Yak...|
+| [str.StartsWith](#startswith) |StartsWith / HasPrefix 判断字符串s是否以prefix开头
+Example:
+```
+str.StartsWith("Hello Yak", "Hello") // true
+str.StartsWith("Hello Yak", "Ya...|
+| [str.StringContainsAnyOfSubString](#stringcontainsanyofsubstring) |StringContainsAnyOfSubString 判断字符串s中是否包含subs中的任意一个子串
+Example:
+```
+str.StringContainsAnyOfSubString("hello yak", ["...|
+| [str.StringSliceContains](#stringslicecontains) |StringSliceContains 判断字符串切片s中是否包含raw，对于非字符串的切片，会尝试将其元素转换为字符串再判断是否包...|
+| [str.StringSliceContainsAll](#stringslicecontainsall) |StringSliceContainsAll 判断字符串切片s中是否完全包含elements中的所有元素，对于非字符串的切片，会尝试将其元素转�...|
+| [str.Subtract](#subtract) |Subtract 返回两个字符串切片的差集
+Example:
+```
+str.Subtract(["1", "2", "3"], ["3", "4", "5"]) // ["1", "2"]
+```
+|
+| [str.Title](#title) |Title 返回字符串s的标题化版本，即所有单词的首字母都是大写的
+Example:
+```
+str.Title("hello yak") // Hello Yak
+```
+|
+| [str.ToJsonIndentStr](#tojsonindentstr) |ToJsonIndentStr 将v转换为格式化的JSON字符串并返回，如果转换失败，则返回空字符串
+Example:
+```
+str.ToJsonIndentStr({"hello"...|
+| [str.ToLower](#tolower) |ToLower 返回字符串s的小写形式
+Example:
+```
+str.ToLower("HELLO YAK") // hello yak
+```
+|
+| [str.ToLowerSpecial](#tolowerspecial) |ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to their
+lower case using the case mapping specified by c.
+|
+| [str.ToStringSlice](#tostringslice) |ToStringSlice 将任意类型的数据转换为字符串切片
+Example:
+```
+str.ToStringSlice("hello") // ["hello"]
+str.ToStringSlice([1, 2]) // ["1",...|
+| [str.ToTitle](#totitle) |ToTitle 返回字符串s的标题化版本，其中所有Unicode字母都会被转换为其大写
+Example:
+```
+str.ToTitle("hello yak") // HELLO YAK
+`...|
+| [str.ToTitleSpecial](#totitlespecial) |ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to their
+Unicode title case, giving priority to the special casing rules...|
+| [str.ToUpper](#toupper) |ToUpper 返回字符串s的大写形式
+Example:
+```
+str.ToUpper("hello yak") // HELLO YAK
+```
+|
+| [str.ToUpperSpecial](#toupperspecial) |ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to their
+upper case using the case mapping specified by c.
+|
+| [str.ToValidUTF8](#tovalidutf8) |ToValidUTF8 返回将字符串s中无效的UTF-8编码替换为replacement的字符串
+Example:
+```
+
+str.ToValidUTF8("hello yak", "?") // hello yak
+``...|
+| [str.Trim](#trim) |Trim 返回将字符串s两侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.Trim("Hello Yak", "Hk") // ello Ya
+str.Tri...|
+| [str.TrimLeft](#trimleft) |TrimLeft 返回将字符串s左侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.TrimLeft("Hello Yak", "H") // ello Yak...|
+| [str.TrimPrefix](#trimprefix) |TrimPrefix 返回将字符串s前缀prefix去掉的字符串
+Example:
+```
+str.TrimPrefix("Hello Yak", "Hello") //  Yak
+str.TrimPrefix("HelloYak", "Hel...|
+| [str.TrimRight](#trimright) |TrimRight 返回将字符串s右侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.TrimRight("Hello Yak", "k") // Hello ...|
+| [str.TrimSpace](#trimspace) |TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串
+Example:
+```
+str.TrimSpace(" \t\n Hello Yak \n\t\r\n") // Hello Yak
+```
+|
+| [str.TrimSuffix](#trimsuffix) |TrimSuffix 返回将字符串s后缀suffix去掉的字符串
+Example:
+```
+str.TrimSuffix("Hello Yak", "ak") // Hello Y
+str.TrimSuffix("HelloYak", "Yak...|
+| [str.UrlJoin](#urljoin) |UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL 字符串，并返回错误
+Example:
+```
+newURL, err = str.UrlJoin("h...|
+| [str.VersionEqual](#versionequal) |VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 等于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionEqual...|
+| [str.VersionGreater](#versiongreater) |VersionGreater 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionGre...|
+| [str.VersionGreaterEqual](#versiongreaterequal) |VersionGreaterEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于等于 v2 返回 true，否则返回 false
+Example:
+```
+str...|
+| [str.VersionLess](#versionless) |VersionLess 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 小于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionLess("...|
+| [str.VersionLessEqual](#versionlessequal) |VersionLessEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 小于等于 v2 返回 true，否则返回 false
+Example:
+```
+str.Ve...|
+| [str.f](#f) |f 用于对字符串进行格式化
+Example:
+```
+
+str.f("hello %s", "yak") // hello yak
+```
+|
 
 
 ## 函数定义
 ### calcssdeep
 
 #### 详细描述
+CalcSSDeep 计算并返回一段文本的模糊哈希值
+Example:
+```
+str.CalcSSDeep("hello")
+```
 
 
 #### 定义
@@ -167,7 +515,12 @@
 ### calcssdeepstability
 
 #### 详细描述
-稳定性定义为最远距离 / 最低分数
+CalcSSDeepStability 使用模糊哈希算法计算多段文本之间的相似度，返回相似度与错误。传入的文本应该为大文本，即长度大于 30 kb。
+Example:
+```
+p, err = str.CalcSSDeepStability(str.RandStr(100000), str.RandStr(100000))
+```
+
 
 #### 定义
 
@@ -188,6 +541,11 @@
 ### calcsimhash
 
 #### 详细描述
+CalcSimHash 计算并返回一段文本的 SimHash 值
+Example:
+```
+str.CalcSimHash("hello")
+```
 
 
 #### 定义
@@ -208,7 +566,12 @@
 ### calcsimhashstability
 
 #### 详细描述
-计算 simhash 稳定性
+CalcSimHashStability 使用 SimHash 算法计算多段文本之间的相似度，返回相似度与错误。
+Example:
+```
+p, err = str.CalcSimHashStability("hello", "hello world") // p = 0.96484375
+```
+
 
 #### 定义
 
@@ -229,6 +592,14 @@
 ### calcsimilarity
 
 #### 详细描述
+CalcSimilarity 计算多段文本之间的相似度，根据最长的文本长度选择不同的算法
+如果最长的文本长度小于等于 2000，使用文本子串匹配算法
+如果最短的文本长度大于等于 30000，使用模糊哈希算法
+如果上述算法出现错误，则使用 SimHash 算法
+Example:
+```
+str.CalcSimilarity("hello", "hello world") // 0.625
+```
 
 
 #### 定义
@@ -249,6 +620,11 @@
 ### calctextmaxsubstrstability
 
 #### 详细描述
+CalcTextMaxSubStrStability 使用文本子串匹配算法计算多段文本之间的相似度，返回相似度与错误
+Example:
+```
+p, err = str.CalcTextMaxSubStrStability("hello", "hello world") // p = 0.625
+```
 
 
 #### 定义
@@ -270,7 +646,14 @@
 ### compare
 
 #### 详细描述
-Compare returns an integer comparing two strings lexicographically.The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b.Compare is included only for symmetry with package bytes.It is usually clearer and always faster to use the built-instring comparison operators ==, &lt;, &gt;, and so on.
+Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&lt;b，则返回-1，如果a&gt;b，则返回1
+Example:
+```
+str.Compare("hello yak", "hello yak") // 0
+str.Compare("hello yak", "hello") // 1
+str.Compare("hello", "hello yak") // -1
+```
+
 
 #### 定义
 
@@ -291,7 +674,12 @@ Compare returns an integer comparing two strings lexicographically.The result wi
 ### contains
 
 #### 详细描述
-Contains reports whether substr is within s.
+Contains 判断字符串s是否包含substr
+Example:
+```
+str.Contains("hello yakit", "yak") // true
+```
+
 
 #### 定义
 
@@ -312,7 +700,13 @@ Contains reports whether substr is within s.
 ### containsany
 
 #### 详细描述
-ContainsAny reports whether any Unicode code points in chars are within s.
+ContainsAny 判断字符串s是否包含chars中的任意字符
+Example:
+```
+str.ContainsAny("hello yak", "ly") // true
+str.ContainsAny("hello yak", "m") // false
+```
+
 
 #### 定义
 
@@ -333,7 +727,12 @@ ContainsAny reports whether any Unicode code points in chars are within s.
 ### count
 
 #### 详细描述
-Count counts the number of non-overlapping instances of substr in s.If substr is an empty string, Count returns 1 + the number of Unicode code points in s.
+Count 返回字符串s中substr出现的次数
+Example:
+```
+str.Count("hello yak", "l") // 2
+```
+
 
 #### 定义
 
@@ -354,7 +753,13 @@ Count counts the number of non-overlapping instances of substr in s.If substr is
 ### endswith
 
 #### 详细描述
-HasSuffix tests whether the string s ends with suffix.
+EndsWith / HasSuffix 判断字符串s是否以suffix结尾
+Example:
+```
+str.EndsWith("Hello Yak", "Yak") // true
+str.EndsWith("Hello Yak", "Hello") // false
+```
+
 
 #### 定义
 
@@ -375,7 +780,12 @@ HasSuffix tests whether the string s ends with suffix.
 ### equalfold
 
 #### 详细描述
-EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under simple Unicode case-folding, which is a more generalform of case-insensitivity.
+EqualFold 判断字符串s和t是否相等，忽略大小写
+Example:
+```
+str.EqualFold("hello Yak", "HELLO YAK") // true
+```
+
 
 #### 定义
 
@@ -396,6 +806,11 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractbodyfromhttpresponseraw
 
 #### 详细描述
+ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body
+Example:
+```
+body, err = str.ExtractBodyFromHTTPResponseRaw(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok") // body = b"ok"
+```
 
 
 #### 定义
@@ -437,6 +852,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractdomain
 
 #### 详细描述
+ExtractDomain 尝试提取字符串中的域名并返回
+Example:
+```
+str.ExtractDomain("hello yak") // []
+str.ExtractDomain("hello yaklang.com or yaklang.io") // ["yaklang.com", "yaklang.io"]
+```
 
 
 #### 定义
@@ -457,6 +878,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extracthost
 
 #### 详细描述
+ExtractHost 尝试从字符串中解析出host和port，并返回host
+Example:
+```
+str.ExtractHost("127.0.0.1:8888") // 127.0.0.1
+str.ExtractHost("https://example.com") // example.com
+```
 
 
 #### 定义
@@ -477,6 +904,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractjson
 
 #### 详细描述
+ExtractJson 尝试提取字符串中的 JSON 并进行修复返回
+Example:
+```
+str.ExtractJson("hello yak") // []
+str.ExtractJson(`{"hello": "yak"}`) // [{"hello": "yak"}]
+```
 
 
 #### 定义
@@ -497,6 +930,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractjsonwithraw
 
 #### 详细描述
+ExtractJsonWithRaw 尝试提取字符串中的 JSON 并返回，第一个返回值返回经过修复后的JSON字符串数组，第二个返回值返回原始JSON字符串数组(如果修复失败)
+Example:
+```
+str.ExtractJsonWithRaw("hello yak") // [], []
+str.ExtractJsonWithRaw(`{"hello": "yak"}`) // [{"hello": "yak"}], []
+```
 
 
 #### 定义
@@ -518,6 +957,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractrootdomain
 
 #### 详细描述
+ExtractRootDomain 尝试提取字符串中的根域名并返回
+Example:
+```
+str.ExtractRootDomain("hello yak") // []
+str.ExtractRootDomain("hello www.yaklang.com or www.yaklang.io") // ["yaklang.com", "yaklang.io"]
+```
 
 
 #### 定义
@@ -538,16 +983,21 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extractstrcontext
 
 #### 详细描述
+ExtractStrContext 从字符串raw中提取一组关键字res上下文的内容，上下文的长度是512个字符确定。
+Example:
+```
+str.ExtractStrContext("hello yak", ["hello"]) // ["hello yak"]
+```
 
 
 #### 定义
 
-`ExtractStrContext(raw []byte, res []string) []string`
+`ExtractStrContext(raw string, res []string) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `[]byte` |   |
+| raw | `string` |   |
 | res | `[]string` |   |
 
 #### 返回值
@@ -559,6 +1009,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extracttitle
 
 #### 详细描述
+ExtractTitle 尝试将传入的字符串进行HTML解析并提取其中的标题(title标签)返回
+Example:
+```
+str.ExtractTitle("hello yak") // ""
+str.ExtractTitle("&lt;title&gt;hello yak&lt;/title&gt;") // "hello yak"
+```
 
 
 #### 定义
@@ -579,6 +1035,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extracturlfromhttprequest
 
 #### 详细描述
+ExtractURLFromHTTPRequest 从 HTTP 请求结构体中提取 URL，返回URL结构体与错误
+Example:
+```
+v, err = http.Raw("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
+url, err = str.ExtractURLFromHTTPRequest(v, false)
+```
 
 
 #### 定义
@@ -601,6 +1063,11 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### extracturlfromhttprequestraw
 
 #### 详细描述
+ExtractURLFromHTTPRequestRaw 从原始 HTTP 请求报文中提取 URL，返回URL结构体与错误
+Example:
+```
+url, err := str.ExtractURLFromHTTPRequestRaw(b"GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", false)
+```
 
 
 #### 定义
@@ -623,7 +1090,12 @@ EqualFold reports whether s and t, interpreted as UTF-8 strings,are equal under 
 ### fields
 
 #### 详细描述
-Fields splits the string s around each instance of one or more consecutive white spacecharacters, as defined by unicode.IsSpace, returning a slice of substrings of s or anempty slice if s contains only white space.
+Fields 返回将字符串s按照空白字符（'\t', '\n', '\v', '\f', '\r', ' ', 0x85, 0xA0）分割的字符串切片
+Example:
+```
+str.Fields("hello world\nhello yak\tand\vyakit") // [hello", "world", "hello", "yak", "and", "yakit"]
+```
+
 
 #### 定义
 
@@ -643,6 +1115,11 @@ Fields splits the string s around each instance of one or more consecutive white
 ### fixhttprequest
 
 #### 详细描述
+FixHTTPRequest 尝试对传入的请求进行修复，并返回修复后的请求
+Example:
+```
+fixedRequest = str.FixHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+```
 
 
 #### 定义
@@ -663,7 +1140,12 @@ Fields splits the string s around each instance of one or more consecutive white
 ### fixhttpresponse
 
 #### 详细描述
-FixHTTPResponse try its best to fix and present human-readable response
+FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响应，响应体和错误
+Example:
+```
+fixedResponse, body, err = str.FixHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=gbk\r\n\r\n&lt;html&gt;你好&lt;/html&gt;")
+```
+
 
 #### 定义
 
@@ -685,6 +1167,11 @@ FixHTTPResponse try its best to fix and present human-readable response
 ### grok
 
 #### 详细描述
+Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。
+Example:
+```
+str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
+```
 
 
 #### 定义
@@ -706,7 +1193,13 @@ FixHTTPResponse try its best to fix and present human-readable response
 ### hasprefix
 
 #### 详细描述
-HasPrefix tests whether the string s begins with prefix.
+StartsWith / HasPrefix 判断字符串s是否以prefix开头
+Example:
+```
+str.StartsWith("Hello Yak", "Hello") // true
+str.StartsWith("Hello Yak", "Yak") // false
+```
+
 
 #### 定义
 
@@ -727,7 +1220,13 @@ HasPrefix tests whether the string s begins with prefix.
 ### hassuffix
 
 #### 详细描述
-HasSuffix tests whether the string s ends with suffix.
+EndsWith / HasSuffix 判断字符串s是否以suffix结尾
+Example:
+```
+str.EndsWith("Hello Yak", "Yak") // true
+str.EndsWith("Hello Yak", "Hello") // false
+```
+
 
 #### 定义
 
@@ -748,6 +1247,11 @@ HasSuffix tests whether the string s ends with suffix.
 ### hostport
 
 #### 详细描述
+HostPort 将 host 和 port 拼接成 host:port 的形式
+Example:
+```
+str.HostPort("yaklang.com", 443) // yaklang.com:443
+```
 
 
 #### 定义
@@ -769,11 +1273,16 @@ HasSuffix tests whether the string s ends with suffix.
 ### ipv4tocclassnetwork
 
 #### 详细描述
+IPv4ToCClassNetwork 尝试从一个 IPv4 地址中获取 C 类网络地址，并返回错误
+Example:
+```
+network, err = str.IPv4ToCClassNetwork("192.168.0.1") // network = "192.168.0.0/24", err = nil
+```
 
 
 #### 定义
 
-`IPv4ToCClassNetwork(s string) (string, error)`
+`IPv4ToCClassNetwork(s string) (network string, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -783,14 +1292,20 @@ HasSuffix tests whether the string s ends with suffix.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| network | `string` |   |
+| err | `error` |   |
 
 
 ### index
 
 #### 详细描述
-Index returns the index of the first instance of substr in s, or -1 if substr is not present in s.
+Index 返回字符串s中substr第一次出现的位置的索引，如果字符串中不存在substr，则返回-1
+Example:
+```
+str.Index("hello yak", "yak") // 6
+str.Index("hello world", "yak") // -1
+```
+
 
 #### 定义
 
@@ -811,7 +1326,13 @@ Index returns the index of the first instance of substr in s, or -1 if substr is
 ### indexany
 
 #### 详细描述
-IndexAny returns the index of the first instance of any Unicode code pointfrom chars in s, or -1 if no Unicode code point from chars is present in s.
+IndexAny 返回字符串s中chars任意字符首次出现的位置的索引，如果字符串中不存在chars，则返回-1
+Example:
+```
+str.IndexAny("Hello world", "world") // 2，因为l在第三个字符中首次出现
+str.IndexAny("Hello World", "Yak") // -1
+```
+
 
 #### 定义
 
@@ -832,7 +1353,13 @@ IndexAny returns the index of the first instance of any Unicode code pointfrom c
 ### indexbyte
 
 #### 详细描述
-IndexByte returns the index of the first instance of c in s, or -1 if c is not present in s.
+IndexByte 返回字符串s中第一个等于c的字符的索引，如果字符串中不存在c，则返回-1
+Example:
+```
+str.IndexByte("hello yak", 'y') // 6
+str.IndexByte("hello yak", 'm') // -1
+```
+
 
 #### 定义
 
@@ -850,10 +1377,41 @@ IndexByte returns the index of the first instance of c in s, or -1 if c is not p
 | r1 | `int` |   |
 
 
+### intersect
+
+#### 详细描述
+Intersect / IntersectString 返回两个字符串切片之间的交集
+Example:
+```
+str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+```
+
+
+#### 定义
+
+`Intersect(x []string, y []string) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `[]string` |   |
+| y | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
 ### intersectstring
 
 #### 详细描述
-IntersectString returns the intersection between two collections of string.
+Intersect / IntersectString 返回两个字符串切片之间的交集
+Example:
+```
+str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+```
+
 
 #### 定义
 
@@ -1016,6 +1574,7 @@ IntersectString returns the intersection between two collections of string.
 #### 详细描述
 IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http 和 https
 
+
 #### 定义
 
 `IsHttpURL(v any) bool`
@@ -1034,6 +1593,12 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### isipv4
 
 #### 详细描述
+IsIPv4 判断字符串是否是 IPv4 地址
+Example:
+```
+str.IsIPv4("::1") // false
+str.IsIPv4("127.0.0.1") // true
+```
 
 
 #### 定义
@@ -1054,6 +1619,12 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### isipv6
 
 #### 详细描述
+IsIPv6 判断字符串是否是 IPv6 地址
+Example:
+```
+str.IsIPv6("::1") // true
+str.IsIPv6("127.0.0.1") // false
+```
 
 
 #### 定义
@@ -1177,6 +1748,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 #### 详细描述
 根据 key 的名字猜测是否是用于重定向的参数
 
+
 #### 定义
 
 `IsRedirectParam(key string, value any) bool`
@@ -1296,6 +1868,14 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### isstrongpassword
 
 #### 详细描述
+IsStrongPassword 判断字符串是否为强密码，强密码的定义为：长度大于8，同时包含特殊字符、小写字母、大写字母、数字
+Example:
+```
+str.IsStrongPassword("12345678") // false
+str.IsStrongPassword("12345678a") // false
+str.IsStrongPassword("12345678aA") // false
+str.IsStrongPassword("12345678aA!") // true
+```
 
 
 #### 定义
@@ -1359,6 +1939,7 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 
 #### 详细描述
 根据 value 猜测是否是一个 url path
+
 
 #### 定义
 
@@ -1459,6 +2040,12 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### join
 
 #### 详细描述
+Join 将i中的元素用d连接，如果传入的参数不是字符串，会自动将其转为字符串，再将其用d连接。如果连接失败，则会返回i的字符串形式。
+Example:
+```
+str.Join([]string{"hello", "yak"}, " ") // hello yak
+str.Join([]int{1, 2, 3}, " ") // 1 2 3
+```
 
 
 #### 定义
@@ -1477,29 +2064,14 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 | defaultResult | `string` |   |
 
 
-### jsonstreamtomaplist
-
-#### 详细描述
-
-
-#### 定义
-
-`JsonStreamToMapList(reader io.Reader) []map[string]any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| reader | `io.Reader` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]map[string]any` |   |
-
-
 ### jsontomap
 
 #### 详细描述
+JsonToMap 将 json 字符串 line 解析为 map
+Example:
+```
+str.JsonToMap(`{"a":1,"b":2}`) // map[a:1 b:2]
+```
 
 
 #### 定义
@@ -1520,6 +2092,11 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### jsontomaplist
 
 #### 详细描述
+JsonToMapList 将 json 字符串 line 解析为 map 列表
+Example:
+```
+str.JsonToMapList(`{"a":1,"b":2} {"c":3, "d":4}`) // [map[a:1 b:2] map[c:3 d:4]]
+```
 
 
 #### 定义
@@ -1540,7 +2117,13 @@ IsFullURL 根据 value 猜测是否是一个完整 url，目前只关心 http �
 ### lastindex
 
 #### 详细描述
-LastIndex returns the index of the last instance of substr in s, or -1 if substr is not present in s.
+LastIndex 返回字符串s中substr最后一次出现的位置的索引，如果字符串中不存在substr，则返回-1
+Example:
+```
+str.LastIndex("hello yak", "l") // 3
+str.LastIndex("hello yak", "m") // -1
+```
+
 
 #### 定义
 
@@ -1561,7 +2144,13 @@ LastIndex returns the index of the last instance of substr in s, or -1 if substr
 ### lastindexany
 
 #### 详细描述
-LastIndexAny returns the index of the last instance of any Unicode codepoint from chars in s, or -1 if no Unicode code point from chars ispresent in s.
+LastIndexAny 返回字符串s中chars任意字符最后一次出现的位置的索引，如果字符串中不存在chars，则返回-1
+Example:
+```
+str.LastIndexAny("hello yak", "ly") // 6
+str.LastIndexAny("hello yak", "m") // -1
+```
+
 
 #### 定义
 
@@ -1582,7 +2171,13 @@ LastIndexAny returns the index of the last instance of any Unicode codepoint fro
 ### lastindexbyte
 
 #### 详细描述
-LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.
+LastIndexByte 返回字符串s中最后一个等于c的字符的索引，如果字符串中不存在c，则返回-1
+Example:
+```
+str.LastIndexByte("hello yak", 'l') // 3
+str.LastIndexByte("hello yak", 'm') // -1
+```
+
 
 #### 定义
 
@@ -1603,6 +2198,11 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### lowerandtrimspace
 
 #### 详细描述
+LowerAndTrimSpace 将字符串raw转换为小写并去除前后空白字符
+Example:
+```
+str.LowerAndTrimSpace("  Hello  ") // "hello"
+```
 
 
 #### 定义
@@ -1623,6 +2223,11 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchallofglob
 
 #### 详细描述
+MatchAllOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式匹配，如果所有的glob模式都匹配成功，则返回 true，否则返回 false
+Example:
+```
+str.MatchAllOfGlob("abc", "a*", "?b?", "[a-z]?c") // true
+```
 
 
 #### 定义
@@ -1644,6 +2249,11 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchallofregexp
 
 #### 详细描述
+MatchAllOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹配，如果所有的正则表达式都匹配成功，则返回 true，否则返回 false
+Example:
+```
+str.MatchAllOfRegexp("abc", "a.+", ".?b.?", "\\w{2}c") // true
+```
 
 
 #### 定义
@@ -1665,17 +2275,22 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchallofsubstring
 
 #### 详细描述
+MatchAllOfSubString 尝试将 i 转换为字符串，然后判断所有子串 subStr 是否都存在于 i 中，如果都存在则返回 true，否则返回 false，此函数忽略大小写
+Example:
+```
+str.MatchAllOfSubString("abc", "a", "b", "c") // true
+```
 
 
 #### 定义
 
-`MatchAllOfSubString(i any, re ...string) bool`
+`MatchAllOfSubString(i any, subStr ...string) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| re | `...string` |   |
+| subStr | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1686,6 +2301,11 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchanyofglob
 
 #### 详细描述
+MatchAllOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式匹配，如果任意一个glob模式匹配成功，则返回 true，否则返回 false
+Example:
+```
+str.MatchAnyOfGlob("abc", "a*", "??b", "[^a-z]?c") // true
+```
 
 
 #### 定义
@@ -1707,6 +2327,11 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchanyofregexp
 
 #### 详细描述
+MatchAllOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹配，如果任意一个正则表达式匹配成功，则返回 true，否则返回 false
+Example:
+```
+str.MatchAnyOfRegexp("abc", "a.+", "Ab.?", ".?bC") // true
+```
 
 
 #### 定义
@@ -1728,17 +2353,22 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### matchanyofsubstring
 
 #### 详细描述
+MatchAllOfSubString 尝试将 i 转换为字符串，然后判断是否有任意子串 subStr 存在于 i 中，如果有其中一个子串存在于 i 中则返回 true，否则返回 false，此函数忽略大小写
+Example:
+```
+str.MatchAnyOfSubString("abc", "a", "z", "x") // true
+```
 
 
 #### 定义
 
-`MatchAnyOfSubString(i any, re ...string) bool`
+`MatchAnyOfSubString(i any, subStr ...string) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| re | `...string` |   |
+| subStr | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1749,11 +2379,16 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### mergeurlfromhttprequest
 
 #### 详细描述
+MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 URL 进行合并，并返回合并后的 URL
+Example:
+```
+url = str.MergeUrlFromHTTPRequest(b"GET /z HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", "/a/b", true) // url = "https://www.yaklang.com/z/a/b"
+```
 
 
 #### 定义
 
-`MergeUrlFromHTTPRequest(rawRequest []byte, target string, isHttps bool) string`
+`MergeUrlFromHTTPRequest(rawRequest []byte, target string, isHttps bool) (newURL string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1765,12 +2400,19 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| newURL | `string` |   |
 
 
 ### newfilter
 
 #### 详细描述
+NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器用于判断一个元素是否在一个集合中，它存在极低的假阳性（即说存在的元素实际上不存在），通常这个集合中的元素数量非常大才会使用布谷鸟过滤器。
+Example:
+```
+f = str.NewFilter()
+f.Insert("hello")
+f.Exist("hello") // true
+```
 
 
 #### 定义
@@ -1786,7 +2428,9 @@ LastIndexByte returns the index of the last instance of c in s, or -1 if c is no
 ### newreader
 
 #### 详细描述
-NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferString but more efficient and read-only.
+NewReader returns a new Reader reading from s.
+It is similar to bytes.NewBufferString but more efficient and read-only.
+
 
 #### 定义
 
@@ -1806,17 +2450,23 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### paramsgetor
 
 #### 详细描述
+ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue
+Example:
+```
+str.ParamsGetOr({"a": "1"}, "a", "2") // 1
+str.ParamsGetOr({"a": "1"}, "b", "2") // 2
+```
 
 
 #### 定义
 
-`ParamsGetOr(i map[string]string, keyValue string, defaultValue string) string`
+`ParamsGetOr(i map[string]string, key string, defaultValue string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `map[string]string` |   |
-| keyValue | `string` |   |
+| key | `string` |   |
 | defaultValue | `string` |   |
 
 #### 返回值
@@ -1828,6 +2478,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsebytestohttprequest
 
 #### 详细描述
+ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求
+Example:
+```
+req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+```
 
 
 #### 定义
@@ -1849,6 +2504,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsebytestohttpresponse
 
 #### 详细描述
+ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应
+Example:
+```
+res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok")
+```
 
 
 #### 定义
@@ -1870,6 +2530,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtocclasshosts
 
 #### 详细描述
+ParseStringToCClassHosts 尝试从给定的字符串中解析Host，再将其转为 C 类网段，用,分隔
+Example:
+```
+str.ParseStringToCClassHosts("192.168.0.1-255") // 192.168.0.0/24
+```
 
 
 #### 定义
@@ -1890,6 +2555,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtohttprequest
 
 #### 详细描述
+ParseStringToHTTPRequest 将字符串解析为 HTTP 请求
+Example:
+```
+req, err = str.ParseStringToHTTPRequest("GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+```
 
 
 #### 定义
@@ -1911,6 +2581,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtohttpresponse
 
 #### 详细描述
+ParseStringToHTTPResponse 将字符串解析为 HTTP 响应
+Example:
+```
+res, err := str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok")
+```
 
 
 #### 定义
@@ -1932,6 +2607,13 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtohostport
 
 #### 详细描述
+ParseStringToHostPort 尝试从字符串中解析出host和port，并与错误一起返回
+Example:
+```
+host, port, err = str.ParseStringToHostPort("127.0.0.1:8888") // host = "127.0.0.1", port = 8888, err = nil
+host, port, err = str.ParseStringToHostPort("https://example.com") // host = "example.com", port = 443, err = nil
+host, port, err = str.ParseStringToHostPort("Hello Yak") // host = "", port = 0, err = error("unknown port for [Hello Yak]")
+```
 
 
 #### 定义
@@ -1954,6 +2636,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtohosts
 
 #### 详细描述
+ParseStringToHosts 将字符串解析成 Host 列表， Host 可以以逗号分隔，并且会解析 CIDR 网段
+Example:
+```
+str.ParseStringToHosts("192.168.0.1/32,127.0.0.1") // ["192.168.0.1", "127.0.0.1"]
+```
 
 
 #### 定义
@@ -1974,6 +2661,11 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtolines
 
 #### 详细描述
+ParseStringToLines 将字符串按换行符(\n)分割成字符串数组，并去除BOM头和空行
+Example:
+```
+str.ParseStringToLines("Hello World\nHello Yak") // ["Hello World", "Hello Yak"]
+```
 
 
 #### 定义
@@ -1994,7 +2686,12 @@ NewReader returns a new Reader reading from s.It is similar to bytes.NewBufferSt
 ### parsestringtoports
 
 #### 详细描述
-ParseStringToPorts 负数端口代表了是 UDP 扫描端口
+ParseStringToPorts 将字符串解析成 Port 列表， Port 可以以逗号分隔，并且会解析-分隔的范围
+Example:
+```
+str.ParseStringToPorts("10086-10088,23333") // [10086, 10087, 10088, 23333]
+```
+
 
 #### 定义
 
@@ -2014,6 +2711,11 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 ### parsestringtourls
 
 #### 详细描述
+ParseStringToUrls 尝试从给定的字符串(ip,域名)中解析出 URL 列表，补全协议和端口
+Example:
+```
+str.ParseStringToUrls("yaklang.com:443", "https://yaklang.io") // [https://yaklang.com, https://yaklang.io]
+```
 
 
 #### 定义
@@ -2034,6 +2736,11 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 ### parsestringtourlswith3w
 
 #### 详细描述
+ParseStringToUrlsWith3W 尝试从给定的字符串(ip,域名)中解析出 URL 列表，补全协议和端口，还会补全域名前的 www 前缀
+Example:
+```
+str.ParseStringToUrlsWith3W("yaklang.com:443", "https://yaklang.io") // [https://yaklang.com, https://www.yaklang.com, https://yaklang.io, https://www.yaklang.io]
+```
 
 
 #### 定义
@@ -2054,6 +2761,11 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 ### parsestringurltourlinstance
 
 #### 详细描述
+ParseStringUrlToUrlInstance 将字符串 url 解析为 URL 结构体并返回错误
+Example:
+```
+str.ParseStringUrlToUrlInstance("https://yaklang.com/abc?a=1")
+```
 
 
 #### 定义
@@ -2075,31 +2787,41 @@ ParseStringToPorts 负数端口代表了是 UDP 扫描端口
 ### parsestringurltowebsiterootpath
 
 #### 详细描述
+ParseStringUrlToWebsiteRootPath 将字符串 url 解析为其根路径的URL
+Example:
+```
+str.ParseStringUrlToWebsiteRootPath("https://yaklang.com/abc?a=1") // https://yaklang.com/
+```
 
 
 #### 定义
 
-`ParseStringUrlToWebsiteRootPath(s string) string`
+`ParseStringUrlToWebsiteRootPath(url string) (newURL string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| s | `string` |   |
+| url | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| newURL | `string` |   |
 
 
 ### pathjoin
 
 #### 详细描述
-Join joins any number of path elements into a single path,separating them with an OS specific Separator. Empty elementsare ignored. The result is Cleaned. However, if the argumentlist is empty or all its elements are empty, Join returnsan empty string.On Windows, the result will only be a UNC path if the firstnon-empty element is a UNC path.
+PathJoin 将传入的文件路径进行拼接并返回
+Example:
+```
+str.PathJoin("/var", "www", "html") // in *unix: "/var/www/html"    in Windows: \var\www\html
+```
+
 
 #### 定义
 
-`PathJoin(elem ...string) string`
+`PathJoin(elem ...string) (newPath string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2109,12 +2831,17 @@ Join joins any number of path elements into a single path,separating them with a
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| newPath | `string` |   |
 
 
 ### randsecret
 
 #### 详细描述
+RandSecret 返回在所有可见ascii字符表中随机挑选 n 个字符组成的密码字符串，这个密码经过str.IsStrongPassword验证，即为强密码
+Example:
+```
+str.RandSecret(10)
+```
 
 
 #### 定义
@@ -2135,7 +2862,12 @@ Join joins any number of path elements into a single path,separating them with a
 ### randstr
 
 #### 详细描述
-RandStringBytes return length `n` alphabet random string
+RandStringBytes 返回在大小写字母表中随机挑选 n 个字符组成的字符串
+Example:
+```
+str.RandStr(10)
+```
+
 
 #### 定义
 
@@ -2155,29 +2887,38 @@ RandStringBytes return length `n` alphabet random string
 ### regexpmatch
 
 #### 详细描述
+RegexpMatch 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+Example:
+```
+str.RegexpMatch("^[a-z]+$", "abc") // true
+```
 
 
 #### 定义
 
-`RegexpMatch(pattern string, i interface) (pattern string, i interface)`
+`RegexpMatch(pattern string, s any) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | pattern | `string` |   |
-| i | `interface` |   |
+| s | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| pattern | `string` |   |
-| i | `interface` |   |
+| r1 | `bool` |   |
 
 
 ### removerepeat
 
 #### 详细描述
-元素去重
+RemoveRepeat 移除字符串切片slc中的重复元素
+Example:
+```
+str.RemoveRepeat(["hello", "yak", "hello"]) // ["hello", "yak"]
+```
+
 
 #### 定义
 
@@ -2197,7 +2938,12 @@ RandStringBytes return length `n` alphabet random string
 ### repeat
 
 #### 详细描述
-Repeat returns a new string consisting of count copies of the string s.It panics if count is negative or if the result of (len(s) * count)overflows.
+Repeat 返回将字符串s重复count次的字符串
+Example:
+```
+str.Repeat("hello", 3) // hellohellohello
+```
+
 
 #### 定义
 
@@ -2218,7 +2964,12 @@ Repeat returns a new string consisting of count copies of the string s.It panics
 ### replace
 
 #### 详细描述
-Replace returns a copy of the string s with the first nnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.If n &lt; 0, there is no limit on the number of replacements.
+Replace 返回将字符串s中前n个old字符串替换为new字符串的字符串
+Example:
+```
+str.Replace("hello yak", "l", "L", 1) // heLlo yak
+```
+
 
 #### 定义
 
@@ -2241,7 +2992,12 @@ Replace returns a copy of the string s with the first nnon-overlapping instances
 ### replaceall
 
 #### 详细描述
-ReplaceAll returns a copy of the string s with allnon-overlapping instances of old replaced by new.If old is empty, it matches at the beginning of the stringand after each UTF-8 sequence, yielding up to k+1 replacementsfor a k-rune string.
+ReplaceAll 返回将字符串s中所有old字符串替换为new字符串的字符串
+Example:
+```
+str.ReplaceAll("hello yak", "yak", "yakit") // hello yakit
+```
+
 
 #### 定义
 
@@ -2263,11 +3019,12 @@ ReplaceAll returns a copy of the string s with allnon-overlapping instances of o
 ### replacehttppacketbody
 
 #### 详细描述
+ReplaceHTTPPacketBody 将原始 HTTP 请求报文中的 body 替换为指定的 body，并指定是否为 chunked，返回新的 HTTP 请求报文
 
 
 #### 定义
 
-`ReplaceHTTPPacketBody(raw []byte, body []byte, chunk bool) []byte`
+`ReplaceHTTPPacketBody(raw []byte, body []byte, chunk bool) (newHTTPRequest []byte)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2279,13 +3036,18 @@ ReplaceAll returns a copy of the string s with allnon-overlapping instances of o
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
+| newHTTPRequest | `[]byte` |   |
 
 
 ### split
 
 #### 详细描述
-Split slices s into all substrings separated by sep and returns a slice ofthe substrings between those separators.If s does not contain sep and sep is not empty, Split returns aslice of length 1 whose only element is s.If sep is empty, Split splits after each UTF-8 sequence. If both sand sep are empty, Split returns an empty slice.It is equivalent to SplitN with a count of -1.To split around the first instance of a separator, see Cut.
+Split 将字符串s按照sep分割成字符串切片
+Example:
+```
+str.Split("Hello Yak", " ") // [Hello", "Yak"]
+```
+
 
 #### 定义
 
@@ -2306,7 +3068,12 @@ Split slices s into all substrings separated by sep and returns a slice ofthe su
 ### splitafter
 
 #### 详细描述
-SplitAfter slices s into all substrings after each instance of sep andreturns a slice of those substrings.If s does not contain sep and sep is not empty, SplitAfter returnsa slice of length 1 whose only element is s.If sep is empty, SplitAfter splits after each UTF-8 sequence. Ifboth s and sep are empty, SplitAfter returns an empty slice.It is equivalent to SplitAfterN with a count of -1.
+SplitAfter 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep
+Example:
+```
+str.SplitAfter("Hello-Yak", "-") // [Hello-", "Yak"]
+```
+
 
 #### 定义
 
@@ -2327,7 +3094,12 @@ SplitAfter slices s into all substrings after each instance of sep andreturns a 
 ### splitaftern
 
 #### 详细描述
-SplitAfterN slices s into substrings after each instance of sep andreturns a slice of those substrings.The count determines the number of substrings to return:	n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for SplitAfter.
+SplitAfterN 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep，最多分为n个元素
+Example:
+```
+str.SplitAfterN("Hello-Yak-and-World", "-", 2) // [Hello-", "Yak-and-World"]
+```
+
 
 #### 定义
 
@@ -2349,6 +3121,11 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 ### splitandtrim
 
 #### 详细描述
+SplitAndTrim 将字符串s按照sep分割成字符串切片，并且去除每个字符串的前后空白字符
+Example:
+```
+str.SplitAndTrim(" hello yak ", " ") // ["hello", "yak"]
+```
 
 
 #### 定义
@@ -2370,11 +3147,16 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 ### splithttpheadersandbodyfrompacket
 
 #### 详细描述
+SplitHTTPHeadersAndBodyFromPacket 将传入的 HTTP 报文分割为 headers 和 body，如果传入了hook，则会在每次读取到一行 header 时调用 hook
+Example:
+```
+headers, body = str.SplitHTTPHeadersAndBodyFromPacket(b"GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
+```
 
 
 #### 定义
 
-`SplitHTTPHeadersAndBodyFromPacket(raw []byte, hook ...func(line string)) (string, []byte)`
+`SplitHTTPHeadersAndBodyFromPacket(raw []byte, hook ...func(line string)) (headers string, body []byte)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2385,13 +3167,18 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `[]byte` |   |
+| headers | `string` |   |
+| body | `[]byte` |   |
 
 
 ### splithoststoprivateandpublic
 
 #### 详细描述
+SplitHostsToPrivateAndPublic 将 hosts 按照私有 IP 和公有 IP 分开
+Example:
+```
+str.SplitHostsToPrivateAndPublic("127.0.0.1", "8.8.8.8", "10.0.0.1") // ["127.0.0.1", "10.0.0.1"], ["8.8.8.8"]
+```
 
 
 #### 定义
@@ -2413,7 +3200,12 @@ SplitAfterN slices s into substrings after each instance of sep andreturns a sli
 ### splitn
 
 #### 详细描述
-SplitN slices s into substrings separated by sep and returns a slice ofthe substrings between those separators.The count determines the number of substrings to return:	n &gt; 0: at most n substrings; the last substring will be the unsplit remainder.	n == 0: the result is nil (zero substrings)	n &lt; 0: all substringsEdge cases for s and sep (for example, empty strings) are handledas described in the documentation for Split.To split around the first instance of a separator, see Cut.
+SplitN 将字符串s按照sep分割成字符串切片，最多分为n个元素
+Example:
+```
+str.SplitN("Hello-Yak-and-World", "-", 2) // [Hello", "Yak-and-World"]
+```
+
 
 #### 定义
 
@@ -2435,7 +3227,13 @@ SplitN slices s into substrings separated by sep and returns a slice ofthe subst
 ### startswith
 
 #### 详细描述
-HasPrefix tests whether the string s begins with prefix.
+StartsWith / HasPrefix 判断字符串s是否以prefix开头
+Example:
+```
+str.StartsWith("Hello Yak", "Hello") // true
+str.StartsWith("Hello Yak", "Yak") // false
+```
+
 
 #### 定义
 
@@ -2456,6 +3254,11 @@ HasPrefix tests whether the string s begins with prefix.
 ### stringcontainsanyofsubstring
 
 #### 详细描述
+StringContainsAnyOfSubString 判断字符串s中是否包含subs中的任意一个子串
+Example:
+```
+str.StringContainsAnyOfSubString("hello yak", ["yak", "world"]) // true
+```
 
 
 #### 定义
@@ -2477,6 +3280,12 @@ HasPrefix tests whether the string s begins with prefix.
 ### stringslicecontains
 
 #### 详细描述
+StringSliceContains 判断字符串切片s中是否包含raw，对于非字符串的切片，会尝试将其元素转换为字符串再判断是否包含
+Example:
+```
+str.StringSliceContains(["hello", "yak"], "yak") // true
+str.StringSliceContains([1, 2, 3], "4") // false
+```
 
 
 #### 定义
@@ -2498,16 +3307,22 @@ HasPrefix tests whether the string s begins with prefix.
 ### stringslicecontainsall
 
 #### 详细描述
+StringSliceContainsAll 判断字符串切片s中是否完全包含elements中的所有元素，对于非字符串的切片，会尝试将其元素转换为字符串再判断是否包含
+Example:
+```
+str.StringSliceContainsAll(["hello", "yak"], "hello", "yak") // true
+str.StringSliceContainsAll(["hello", "yak"], "hello", "yak", "world") // false
+```
 
 
 #### 定义
 
-`StringSliceContainsAll(o []string, elements ...string) bool`
+`StringSliceContainsAll(s []string, elements ...string) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| o | `[]string` |   |
+| s | `[]string` |   |
 | elements | `...string` |   |
 
 #### 返回值
@@ -2519,7 +3334,12 @@ HasPrefix tests whether the string s begins with prefix.
 ### subtract
 
 #### 详细描述
-SubtractString returns the subtraction between two collections of string
+Subtract 返回两个字符串切片的差集
+Example:
+```
+str.Subtract(["1", "2", "3"], ["3", "4", "5"]) // ["1", "2"]
+```
+
 
 #### 定义
 
@@ -2540,7 +3360,12 @@ SubtractString returns the subtraction between two collections of string
 ### title
 
 #### 详细描述
-Title returns a copy of the string s with all Unicode letters that begin wordsmapped to their Unicode title case.Deprecated: The rule Title uses for word boundaries does not handle Unicodepunctuation properly. Use golang.org/x/text/cases instead.
+Title 返回字符串s的标题化版本，即所有单词的首字母都是大写的
+Example:
+```
+str.Title("hello yak") // Hello Yak
+```
+
 
 #### 定义
 
@@ -2560,6 +3385,11 @@ Title returns a copy of the string s with all Unicode letters that begin wordsma
 ### tojsonindentstr
 
 #### 详细描述
+ToJsonIndentStr 将v转换为格式化的JSON字符串并返回，如果转换失败，则返回空字符串
+Example:
+```
+str.ToJsonIndentStr({"hello":"yak"}) // {"hello": "yak"}
+```
 
 
 #### 定义
@@ -2580,7 +3410,12 @@ Title returns a copy of the string s with all Unicode letters that begin wordsma
 ### tolower
 
 #### 详细描述
-ToLower returns s with all Unicode letters mapped to their lower case.
+ToLower 返回字符串s的小写形式
+Example:
+```
+str.ToLower("HELLO YAK") // hello yak
+```
+
 
 #### 定义
 
@@ -2600,7 +3435,9 @@ ToLower returns s with all Unicode letters mapped to their lower case.
 ### tolowerspecial
 
 #### 详细描述
-ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to theirlower case using the case mapping specified by c.
+ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to their
+lower case using the case mapping specified by c.
+
 
 #### 定义
 
@@ -2621,6 +3458,12 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 ### tostringslice
 
 #### 详细描述
+ToStringSlice 将任意类型的数据转换为字符串切片
+Example:
+```
+str.ToStringSlice("hello") // ["hello"]
+str.ToStringSlice([1, 2]) // ["1", "2"]
+```
 
 
 #### 定义
@@ -2641,7 +3484,12 @@ ToLowerSpecial returns a copy of the string s with all Unicode letters mapped to
 ### totitle
 
 #### 详细描述
-ToTitle returns a copy of the string s with all Unicode letters mapped totheir Unicode title case.
+ToTitle 返回字符串s的标题化版本，其中所有Unicode字母都会被转换为其大写
+Example:
+```
+str.ToTitle("hello yak") // HELLO YAK
+```
+
 
 #### 定义
 
@@ -2661,7 +3509,9 @@ ToTitle returns a copy of the string s with all Unicode letters mapped totheir U
 ### totitlespecial
 
 #### 详细描述
-ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to theirUnicode title case, giving priority to the special casing rules.
+ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to their
+Unicode title case, giving priority to the special casing rules.
+
 
 #### 定义
 
@@ -2682,7 +3532,12 @@ ToTitleSpecial returns a copy of the string s with all Unicode letters mapped to
 ### toupper
 
 #### 详细描述
-ToUpper returns s with all Unicode letters mapped to their upper case.
+ToUpper 返回字符串s的大写形式
+Example:
+```
+str.ToUpper("hello yak") // HELLO YAK
+```
+
 
 #### 定义
 
@@ -2702,7 +3557,9 @@ ToUpper returns s with all Unicode letters mapped to their upper case.
 ### toupperspecial
 
 #### 详细描述
-ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to theirupper case using the case mapping specified by c.
+ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to their
+upper case using the case mapping specified by c.
+
 
 #### 定义
 
@@ -2723,7 +3580,13 @@ ToUpperSpecial returns a copy of the string s with all Unicode letters mapped to
 ### tovalidutf8
 
 #### 详细描述
-ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte sequencesreplaced by the replacement string, which may be empty.
+ToValidUTF8 返回将字符串s中无效的UTF-8编码替换为replacement的字符串
+Example:
+```
+
+str.ToValidUTF8("hello yak", "?") // hello yak
+```
+
 
 #### 定义
 
@@ -2744,7 +3607,13 @@ ToValidUTF8 returns a copy of the string s with each run of invalid UTF-8 byte s
 ### trim
 
 #### 详细描述
-Trim returns a slice of the string s with all leading andtrailing Unicode code points contained in cutset removed.
+Trim 返回将字符串s两侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.Trim("Hello Yak", "Hk") // ello Ya
+str.Trim("HelloYakHello", "Hello") // Yak
+```
+
 
 #### 定义
 
@@ -2765,7 +3634,13 @@ Trim returns a slice of the string s with all leading andtrailing Unicode code p
 ### trimleft
 
 #### 详细描述
-TrimLeft returns a slice of the string s with all leadingUnicode code points contained in cutset removed.To remove a prefix, use TrimPrefix instead.
+TrimLeft 返回将字符串s左侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.TrimLeft("Hello Yak", "H") // ello Yak
+str.TrimLeft("HelloYak", "Hello") // Yak
+```
+
 
 #### 定义
 
@@ -2786,7 +3661,13 @@ TrimLeft returns a slice of the string s with all leadingUnicode code points con
 ### trimprefix
 
 #### 详细描述
-TrimPrefix returns s without the provided leading prefix string.If s doesn't start with prefix, s is returned unchanged.
+TrimPrefix 返回将字符串s前缀prefix去掉的字符串
+Example:
+```
+str.TrimPrefix("Hello Yak", "Hello") //  Yak
+str.TrimPrefix("HelloYak", "Hello") // Yak
+```
+
 
 #### 定义
 
@@ -2807,7 +3688,13 @@ TrimPrefix returns s without the provided leading prefix string.If s doesn't sta
 ### trimright
 
 #### 详细描述
-TrimRight returns a slice of the string s, with all trailingUnicode code points contained in cutset removed.To remove a suffix, use TrimSuffix instead.
+TrimRight 返回将字符串s右侧所有包含cutset字符串中的字符都去掉的字符串
+Example:
+```
+str.TrimRight("Hello Yak", "k") // Hello Ya
+str.TrimRight("HelloYak", "Yak") // Hello
+```
+
 
 #### 定义
 
@@ -2828,7 +3715,12 @@ TrimRight returns a slice of the string s, with all trailingUnicode code points 
 ### trimspace
 
 #### 详细描述
-TrimSpace returns a slice of the string s, with all leadingand trailing white space removed, as defined by Unicode.
+TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串
+Example:
+```
+str.TrimSpace(" \t\n Hello Yak \n\t\r\n") // Hello Yak
+```
+
 
 #### 定义
 
@@ -2848,7 +3740,13 @@ TrimSpace returns a slice of the string s, with all leadingand trailing white sp
 ### trimsuffix
 
 #### 详细描述
-TrimSuffix returns s without the provided trailing suffix string.If s doesn't end with suffix, s is returned unchanged.
+TrimSuffix 返回将字符串s后缀suffix去掉的字符串
+Example:
+```
+str.TrimSuffix("Hello Yak", "ak") // Hello Y
+str.TrimSuffix("HelloYak", "Yak") // Hello
+```
+
 
 #### 定义
 
@@ -2869,11 +3767,17 @@ TrimSuffix returns s without the provided trailing suffix string.If s doesn't en
 ### urljoin
 
 #### 详细描述
-https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] https://baidu.com/abc/a%xxkey=value[X] https://baidu.com/a?key=value
+UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL 字符串，并返回错误
+Example:
+```
+newURL, err = str.UrlJoin("https://yaklang.com", "asd", "qwe") // newURL = "https://yaklang.com/asd/qwe", err = nil
+newURL, err = str.UrlJoin("https://yaklang.com/zxc", "/asd", "qwe") // newURL = "https://yaklang.com/asd/qwe", err = nil
+```
+
 
 #### 定义
 
-`UrlJoin(origin string, paths ...string) (string, error)`
+`UrlJoin(origin string, paths ...string) (newURL string, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2884,14 +3788,20 @@ https://baidu.com/abc   a?key=valuehttps://baidu.com/abc/a?key=value =&gt; [X] h
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| newURL | `string` |   |
+| err | `error` |   |
 
 
 ### versionequal
 
 #### 详细描述
-VersionEqual v1 等于 v2 返回 true
+VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 等于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionEqual("3.0", "3.0") // true
+str.VersionEqual("3.0", "3.0a") // false
+```
+
 
 #### 定义
 
@@ -2912,7 +3822,13 @@ VersionEqual v1 等于 v2 返回 true
 ### versiongreater
 
 #### 详细描述
-VersionGreater v1 大于 v2 返回 true
+VersionGreater 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionGreater("1.0.0", "0.9.9") // true
+str.VersionGreater("3.0", "2.8.8alpha") // true
+```
+
 
 #### 定义
 
@@ -2933,7 +3849,14 @@ VersionGreater v1 大于 v2 返回 true
 ### versiongreaterequal
 
 #### 详细描述
-VersionGreaterEqual v1 大于等于 v2 返回 true
+VersionGreaterEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于等于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionGreaterEqual("1.0.0", "0.9.9") // true
+str.VersionGreaterEqual("3.0", "3.0") // true
+str.VersionGreaterEqual("3.0", "3.0a") // false
+```
+
 
 #### 定义
 
@@ -2954,7 +3877,13 @@ VersionGreaterEqual v1 大于等于 v2 返回 true
 ### versionless
 
 #### 详细描述
-VersionLess v1 小于 v2 返回true
+VersionLess 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 小于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionLess("0.9.9", "1.0.0") // true
+str.VersionLess("3.0", "3.0a") // true
+```
+
 
 #### 定义
 
@@ -2975,7 +3904,14 @@ VersionLess v1 小于 v2 返回true
 ### versionlessequal
 
 #### 详细描述
-VersionLessEqual v1 小于等于 v2 返回true
+VersionLessEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 小于等于 v2 返回 true，否则返回 false
+Example:
+```
+str.VersionLessEqual("0.9.9", "1.0.0") // true
+str.VersionLessEqual("3.0", "3.0") // true
+str.VersionLessEqual("3.0a", "3.0") // false
+```
+
 
 #### 定义
 
@@ -2996,6 +3932,12 @@ VersionLessEqual v1 小于等于 v2 返回true
 ### f
 
 #### 详细描述
+f 用于对字符串进行格式化
+Example:
+```
+
+str.f("hello %s", "yak") // hello yak
+```
 
 
 #### 定义

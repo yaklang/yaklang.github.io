@@ -19,9 +19,15 @@
 | [codec.AESGCMDecrypt](#aesgcmdecrypt) ||
 | [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) ||
 | [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) ||
-| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := ...|
+| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
+
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
+		block, _ ...|
 | [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) ||
-| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := ...|
+| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
+
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
+		block, _ ...|
 | [codec.AutoDecode](#autodecode) ||
 | [codec.DESCBCDecrypt](#descbcdecrypt) ||
 | [codec.DESCBCEncrypt](#descbcencrypt) ||
@@ -29,14 +35,19 @@
 | [codec.DESECBDecrypt](#desecbdecrypt) ||
 | [codec.DESECBEncrypt](#desecbencrypt) ||
 | [codec.DESEncrypt](#desencrypt) ||
-| [codec.DecodeASCII](#decodeascii) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quot...|
+| [codec.DecodeASCII](#decodeascii) |Unquote interprets s as a single-quoted, double-quoted,
+or backquoted Go string literal, returning the string value
+that s quotes.  (If s is single-qu...|
 | [codec.DecodeBase32](#decodebase32) ||
 | [codec.DecodeBase64](#decodebase64) ||
 | [codec.DecodeBase64Url](#decodebase64url) ||
 | [codec.DecodeChunked](#decodechunked) ||
 | [codec.DecodeHex](#decodehex) ||
-| [codec.DecodeHtml](#decodehtml) |UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacut...|
-| [codec.DecodeUrl](#decodeurl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB....|
+| [codec.DecodeHtml](#decodehtml) |UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes a
+larger range of entities than EscapeString escapes. For example, "&aacu...|
+| [codec.DecodeUrl](#decodeurl) |QueryUnescape does the inverse transformation of QueryEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xA...|
 | [codec.DoubleDecodeUrl](#doubledecodeurl) ||
 | [codec.DoubleEncodeUrl](#doubleencodeurl) ||
 | [codec.EncodeASCII](#encodeascii) ||
@@ -49,9 +60,14 @@
 | [codec.EncodeToHex](#encodetohex) ||
 | [codec.EncodeToPrintable](#encodetoprintable) ||
 | [codec.EncodeUrl](#encodeurl) ||
-| [codec.EscapeHtml](#escapehtml) |EscapeString escapes special characters like "&lt;" to become "&lt;". Itescapes only five such characters: &lt;, &gt;, &, ' and ".UnescapeString(Escap...|
-| [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as ne...|
-| [codec.EscapeQueryUrl](#escapequeryurl) |QueryEscape escapes the string so it can be safely placedinside a URL query.|
+| [codec.EscapeHtml](#escapehtml) |EscapeString escapes special characters like "&lt;" to become "&lt;". It
+escapes only five such characters: &lt;, &gt;, &, ' and ".
+UnescapeString(Esc...|
+| [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a URL path segment,
+replacing special characters (including /) with %XX sequences as n...|
+| [codec.EscapeQueryUrl](#escapequeryurl) |QueryEscape escapes the string so it can be safely placed
+inside a URL query.
+|
 | [codec.FixUTF8](#fixutf8) ||
 | [codec.GB18030ToUTF8](#gb18030toutf8) ||
 | [codec.GBKSafe](#gbksafe) ||
@@ -108,7 +124,9 @@
 | [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) ||
 | [codec.Sm4OFBEncrypt](#sm4ofbencrypt) ||
 | [codec.StrconvQuote](#strconvquote) ||
-| [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quot...|
+| [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted,
+or backquoted Go string literal, returning the string value
+that s quotes.  (If s is single-qu...|
 | [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) ||
 | [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) ||
 | [codec.TripleDESDecrypt](#tripledesdecrypt) ||
@@ -118,8 +136,12 @@
 | [codec.UTF8ToGB18030](#utf8togb18030) ||
 | [codec.UTF8ToGBK](#utf8togbk) ||
 | [codec.UTF8ToHZGB2312](#utf8tohzgb2312) ||
-| [codec.UnescapePathUrl](#unescapepathurl) |PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB. I...|
-| [codec.UnescapeQueryUrl](#unescapequeryurl) |QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB....|
+| [codec.UnescapePathUrl](#unescapepathurl) |PathUnescape does the inverse transformation of PathEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xAB....|
+| [codec.UnescapeQueryUrl](#unescapequeryurl) |QueryUnescape does the inverse transformation of QueryEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xA...|
 | [codec.UnicodeDecode](#unicodedecode) ||
 | [codec.UnicodeEncode](#unicodeencode) ||
 | [codec.ZeroPadding](#zeropadding) ||
@@ -521,7 +543,17 @@
 ### aesgcmencrypt
 
 #### 详细描述
-//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}
+//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
+
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
+		block, _ := aes.NewCipher(key)
+		nonce := make([]byte, 16)
+		io.ReadFull(rand.Reader, nonce)
+		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
+		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)
+		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))
+	}
+
 
 #### 定义
 
@@ -567,7 +599,17 @@
 ### aesgcmencryptwithnoncesize16
 
 #### 详细描述
-//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式	func AES_GCM_Encrypt(key []byte, Content []byte) string {		block, _ := aes.NewCipher(key)		nonce := make([]byte, 16)		io.ReadFull(rand.Reader, nonce)		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))	}
+//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
+
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
+		block, _ := aes.NewCipher(key)
+		nonce := make([]byte, 16)
+		io.ReadFull(rand.Reader, nonce)
+		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
+		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)
+		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))
+	}
+
 
 #### 定义
 
@@ -746,7 +788,12 @@
 ### decodeascii
 
 #### 详细描述
-Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)
+Unquote interprets s as a single-quoted, double-quoted,
+or backquoted Go string literal, returning the string value
+that s quotes.  (If s is single-quoted, it would be a Go
+character literal; Unquote returns the corresponding
+one-character string.)
+
 
 #### 定义
 
@@ -872,7 +919,12 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 ### decodehtml
 
 #### 详细描述
-UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes alarger range of entities than EscapeString escapes. For example, "&aacute;"unescapes to "á", as does "&#225;" and "&#xE1;".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
+UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes a
+larger range of entities than EscapeString escapes. For example, "&aacute;"
+unescapes to "á", as does "&#225;" and "&#xE1;".
+UnescapeString(EscapeString(s)) == s always holds, but the converse isn't
+always true.
+
 
 #### 定义
 
@@ -892,7 +944,12 @@ UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes ala
 ### decodeurl
 
 #### 详细描述
-QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.
+QueryUnescape does the inverse transformation of QueryEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xAB.
+It returns an error if any % is not followed by two hexadecimal
+digits.
+
 
 #### 定义
 
@@ -1154,7 +1211,11 @@ QueryUnescape does the inverse transformation of QueryEscape,converting each 3-b
 ### escapehtml
 
 #### 详细描述
-EscapeString escapes special characters like "&lt;" to become "&lt;". Itescapes only five such characters: &lt;, &gt;, &, ' and ".UnescapeString(EscapeString(s)) == s always holds, but the converse isn'talways true.
+EscapeString escapes special characters like "&lt;" to become "&lt;". It
+escapes only five such characters: &lt;, &gt;, &, ' and ".
+UnescapeString(EscapeString(s)) == s always holds, but the converse isn't
+always true.
+
 
 #### 定义
 
@@ -1174,7 +1235,9 @@ EscapeString escapes special characters like "&lt;" to become "&lt;". Itescapes 
 ### escapepathurl
 
 #### 详细描述
-PathEscape escapes the string so it can be safely placed inside a URL path segment,replacing special characters (including /) with %XX sequences as needed.
+PathEscape escapes the string so it can be safely placed inside a URL path segment,
+replacing special characters (including /) with %XX sequences as needed.
+
 
 #### 定义
 
@@ -1194,7 +1257,9 @@ PathEscape escapes the string so it can be safely placed inside a URL path segme
 ### escapequeryurl
 
 #### 详细描述
-QueryEscape escapes the string so it can be safely placedinside a URL query.
+QueryEscape escapes the string so it can be safely placed
+inside a URL query.
+
 
 #### 定义
 
@@ -2409,7 +2474,12 @@ QueryEscape escapes the string so it can be safely placedinside a URL query.
 ### strconvunquote
 
 #### 详细描述
-Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string literal, returning the string valuethat s quotes.  (If s is single-quoted, it would be a Gocharacter literal; Unquote returns the correspondingone-character string.)
+Unquote interprets s as a single-quoted, double-quoted,
+or backquoted Go string literal, returning the string value
+that s quotes.  (If s is single-quoted, it would be a Go
+character literal; Unquote returns the corresponding
+one-character string.)
+
 
 #### 定义
 
@@ -2629,7 +2699,14 @@ Unquote interprets s as a single-quoted, double-quoted,or backquoted Go string l
 ### unescapepathurl
 
 #### 详细描述
-PathUnescape does the inverse transformation of PathEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB. It returns an error if any % is not followedby two hexadecimal digits.PathUnescape is identical to QueryUnescape except that it does notunescape '+' to ' ' (space).
+PathUnescape does the inverse transformation of PathEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xAB. It returns an error if any % is not followed
+by two hexadecimal digits.
+
+PathUnescape is identical to QueryUnescape except that it does not
+unescape '+' to ' ' (space).
+
 
 #### 定义
 
@@ -2650,7 +2727,12 @@ PathUnescape does the inverse transformation of PathEscape,converting each 3-byt
 ### unescapequeryurl
 
 #### 详细描述
-QueryUnescape does the inverse transformation of QueryEscape,converting each 3-byte encoded substring of the form "%AB" into thehex-decoded byte 0xAB.It returns an error if any % is not followed by two hexadecimaldigits.
+QueryUnescape does the inverse transformation of QueryEscape,
+converting each 3-byte encoded substring of the form "%AB" into the
+hex-decoded byte 0xAB.
+It returns an error if any % is not followed by two hexadecimal
+digits.
+
 
 #### 定义
 
