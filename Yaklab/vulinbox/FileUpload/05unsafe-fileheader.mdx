@@ -1,0 +1,61 @@
+---
+sidebar_position: 5
+---
+
+# 图片上传：检查文件头，需配合包含
+
+文件上传检查文件头是一种防御措施，旨在确保用户上传的文件类型与其声明的文件类型一致，从而避免恶意文件的上传和执行，但是当应用存在文件包含漏洞时，仍会造成代码执行。
+
+### 示例代码：
+
+确保上传的文件类型与其声明的文件类型一致
+
+```Go
+fn := header.Filename
+t, _, err := mime.ParseMediaType(header.Header.Get("Content-Type"))
+if err != nil {
+  Failed(writer, request, "mimt.ParseMediaType Failed: %s", err)
+  return}
+
+mimeCheckType, _ := filetype.MatchReader(&buf)
+if !utils.IContains(mimeCheckType.MIME.Value, "image/") {
+        unsafeTemplateRender(writer, request, uploadFailed, map[string]any{
+                "reason": fmt.Sprintf("upload failed: mime header: %v, filetype actually: %v", t, mimeCheckType.MIME.Value),
+        })
+        return
+}
+
+```
+
+### 攻击示例：
+
+上传具有正常文件头的图片马即可
+
+![](/img/yaklab/fileupload/04unsafe-fileheader01.png)
+
+![](/img/yaklab/fileupload/04unsafe-fileheader02.png)
+
+图片马制作方式：
+
+- 文本方式打开,末尾粘贴一句话木马
+- cmd 中 copy 1.jpg/b+2.php 3.jpg
+- 16 进制打开图片在末尾添加一句话木马
+
+### 防御措施：
+
+- 文件扩展名检查：检查文件扩展名是否与文件内容的实际类型匹配，防止文件名绕过。
+- 白名单校验：只允许上传安全、可信任的文件类型，并拒绝所有其他类型的文件。
+- 文件存储路径：将上传的文件存储在安全目录中，确保不允许用户上传的文件执行或包含任意代码。
+- 限制文件大小：限制上传文件的大小，防止大文件占用服务器资源和存储空间。
+- 防止目录穿越：确保上传的文件不能通过文件名或路径绕过应用程序的安全检查访问其他目录。
+
+### 靶场演示： 视频
+
+<video
+  src="/img/yaklab/fileupload/04unsafe-fileheader.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
