@@ -1,6 +1,6 @@
 {
   "name": "yaklang",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
