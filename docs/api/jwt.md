@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### allalgs
+### AllAlgs
 
 #### 详细描述
 
@@ -27,7 +27,7 @@
 | r1 | `[]string` |   |
 
 
-### jwsgenerate
+### JWSGenerate
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### jwsgenerateex
+### JWSGenerateEx
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r2 | `error` |   |
 
 
-### jwtgenerate
+### JWTGenerate
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### jwtgenerateex
+### JWTGenerateEx
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r2 | `error` |   |
 
 
-### parse
+### Parse
 
 #### 详细描述
 
@@ -144,7 +144,7 @@
 | r3 | `error` |   |
 
 
-### removealg
+### RemoveAlg
 
 #### 详细描述
 

@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### lookupfirst
+### LookupFirst
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `string` |   |
 
 
-### newcustomdnslog
+### NewCustomDNSLog
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r1 | `*CustomDNSLog` |   |
 
 
-### querycustomscript
+### QueryCustomScript
 
 #### 详细描述
 

@@ -3,34 +3,24 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [time.After](#after) ||
-| [time.AfterFunc](#afterfunc) |AfterFunc waits for the duration to elapse and then calls f
-in its own goroutine. It returns a Timer that can
-be used to cancel the call using its Sto...|
+| [time.AfterFunc](#afterfunc) |AfterFunc waits for the duration to elapse and then calls f in its own goroutine. It returns a Timer that can be used to cancel the call using its Sto...|
 | [time.GetCurrentDate](#getcurrentdate) ||
 | [time.GetCurrentMonday](#getcurrentmonday) ||
 | [time.NewTicker](#newticker) ||
 | [time.NewTimer](#newtimer) ||
-| [time.Now](#now) |Now returns the current local time.
-|
+| [time.Now](#now) |Now returns the current local time. |
 | [time.Parse](#parse) ||
 | [time.ParseDuration](#parseduration) ||
-| [time.Since](#since) |Since returns the time elapsed since t.
-It is shorthand for time.Now().Sub(t).
-|
+| [time.Since](#since) |Since returns the time elapsed since t. It is shorthand for time.Now().Sub(t). |
 | [time.Sleep](#sleep) ||
-| [time.Unix](#unix) |Unix returns the local Time corresponding to the given Unix time,
-sec seconds and nsec nanoseconds since January 1, 1970 UTC.
-It is valid to pass nsec...|
-| [time.Until](#until) |Until returns the duration until t.
-It is shorthand for t.Sub(time.Now()).
-|
-| [time.now](#now) |Now returns the current local time.
-|
+| [time.Unix](#unix) |Unix returns the local Time corresponding to the given Unix time, sec seconds and nsec nanoseconds since January 1, 1970 UTC. It is valid to pass nsec...|
+| [time.Until](#until) |Until returns the duration until t. It is shorthand for t.Sub(time.Now()). |
+| [time.now](#now) |Now returns the current local time. |
 | [time.sleep](#sleep) ||
 
 
 ## 函数定义
-### after
+### After
 
 #### 详细描述
 
@@ -50,7 +40,7 @@ It is shorthand for t.Sub(time.Now()).
 | r1 | `<-chan time.Time` |   |
 
 
-### afterfunc
+### AfterFunc
 
 #### 详细描述
 AfterFunc waits for the duration to elapse and then calls f
@@ -74,7 +64,7 @@ be used to cancel the call using its Stop method.
 | r1 | `*Timer` |   |
 
 
-### getcurrentdate
+### GetCurrentDate
 
 #### 详细描述
 
@@ -90,7 +80,7 @@ be used to cancel the call using its Stop method.
 | r2 | `error` |   |
 
 
-### getcurrentmonday
+### GetCurrentMonday
 
 #### 详细描述
 
@@ -106,7 +96,7 @@ be used to cancel the call using its Stop method.
 | r2 | `error` |   |
 
 
-### newticker
+### NewTicker
 
 #### 详细描述
 
@@ -126,7 +116,7 @@ be used to cancel the call using its Stop method.
 | r1 | `*time.Ticker` |   |
 
 
-### newtimer
+### NewTimer
 
 #### 详细描述
 
@@ -146,7 +136,7 @@ be used to cancel the call using its Stop method.
 | r1 | `*time.Timer` |   |
 
 
-### now
+### Now
 
 #### 详细描述
 Now returns the current local time.
@@ -162,7 +152,7 @@ Now returns the current local time.
 | r1 | `Time` |   |
 
 
-### parse
+### Parse
 
 #### 详细描述
 
@@ -184,7 +174,7 @@ Now returns the current local time.
 | r2 | `error` |   |
 
 
-### parseduration
+### ParseDuration
 
 #### 详细描述
 
@@ -205,7 +195,7 @@ Now returns the current local time.
 | r2 | `error` |   |
 
 
-### since
+### Since
 
 #### 详细描述
 Since returns the time elapsed since t.
@@ -227,7 +217,7 @@ It is shorthand for time.Now().Sub(t).
 | r1 | `Duration` |   |
 
 
-### sleep
+### Sleep
 
 #### 详细描述
 
@@ -242,7 +232,7 @@ It is shorthand for time.Now().Sub(t).
 | i | `float64` |   |
 
 
-### unix
+### Unix
 
 #### 详细描述
 Unix returns the local Time corresponding to the given Unix time,
@@ -268,7 +258,7 @@ value is 1&lt;&lt;63-1 (the largest int64 value).
 | r1 | `Time` |   |
 
 
-### until
+### Until
 
 #### 详细描述
 Until returns the duration until t.

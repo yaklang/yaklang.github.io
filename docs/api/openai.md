@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### chat
+### Chat
 
 #### 详细描述
 
@@ -34,7 +34,7 @@
 | r1 | `string` |   |
 
 
-### translatetochinese
+### TranslateToChinese
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `string` |   |
 
 
-### apikey
+### apiKey
 
 #### 详细描述
 
@@ -95,7 +95,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### localapikey
+### localAPIKey
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### yakdomain
+### yakDomain
 
 #### 详细描述
 

@@ -18,7 +18,7 @@
 
 
 ## 函数定义
-### pool
+### Pool
 
 #### 详细描述
 
@@ -80,7 +80,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### fuzzparams
+### fuzzParams
 
 #### 详细描述
 
@@ -141,7 +141,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### nofixcontentlength
+### noFixContentLength
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### perrequesttimeout
+### perRequestTimeout
 
 #### 详细描述
 
@@ -221,7 +221,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### rawmode
+### rawMode
 
 #### 详细描述
 
@@ -241,7 +241,7 @@
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### redirecttimes
+### redirectTimes
 
 #### 详细描述
 

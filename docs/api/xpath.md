@@ -2,35 +2,21 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [xpath.CreateXPathNavigator](#createxpathnavigator) |CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.Node.
-|
-| [xpath.ExistedAttr](#existedattr) |ExistsAttr returns whether attribute with specified name exists.
-|
-| [xpath.Find](#find) |Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.
-
-See `QueryAll()` function.
-|
-| [xpath.FindOne](#findone) |FindOne is like Query but will panics if the expression `expr` cannot be parsed.
-See `Query()` function.
-|
-| [xpath.InnerText](#innertext) |InnerText returns the text between the start and end tags of the object.
-|
+| [xpath.CreateXPathNavigator](#createxpathnavigator) |CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.Node. |
+| [xpath.ExistedAttr](#existedattr) |ExistsAttr returns whether attribute with specified name exists. |
+| [xpath.Find](#find) |Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.  See `QueryAll()` function. |
+| [xpath.FindOne](#findone) |FindOne is like Query but will panics if the expression `expr` cannot be parsed. See `Query()` function. |
+| [xpath.InnerText](#innertext) |InnerText returns the text between the start and end tags of the object. |
 | [xpath.LoadHTMLDocument](#loadhtmldocument) ||
 | [xpath.OutputHTML](#outputhtml) ||
 | [xpath.OutputHTMLSelf](#outputhtmlself) ||
-| [xpath.Query](#query) |Query runs the given XPath expression against the given html.Node and
-returns the first matching html.Node, or nil if no matches are found.
-
-Returns a...|
-| [xpath.QueryAll](#queryall) |QueryAll searches the html.Node that matches by the specified XPath expr.
-Return an error if the expression `expr` cannot be parsed.
-|
-| [xpath.SelectAttr](#selectattr) |SelectAttr returns the attribute value with the specified name.
-|
+| [xpath.Query](#query) |Query runs the given XPath expression against the given html.Node and returns the first matching html.Node, or nil if no matches are found.  Returns a...|
+| [xpath.QueryAll](#queryall) |QueryAll searches the html.Node that matches by the specified XPath expr. Return an error if the expression `expr` cannot be parsed. |
+| [xpath.SelectAttr](#selectattr) |SelectAttr returns the attribute value with the specified name. |
 
 
 ## 函数定义
-### createxpathnavigator
+### CreateXPathNavigator
 
 #### 详细描述
 CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.Node.
@@ -51,7 +37,7 @@ CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.No
 | r1 | `*NodeNavigator` |   |
 
 
-### existedattr
+### ExistedAttr
 
 #### 详细描述
 ExistsAttr returns whether attribute with specified name exists.
@@ -73,7 +59,7 @@ ExistsAttr returns whether attribute with specified name exists.
 | r1 | `bool` |   |
 
 
-### find
+### Find
 
 #### 详细描述
 Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.
@@ -97,7 +83,7 @@ See `QueryAll()` function.
 | r1 | `[]*html.Node` |   |
 
 
-### findone
+### FindOne
 
 #### 详细描述
 FindOne is like Query but will panics if the expression `expr` cannot be parsed.
@@ -120,7 +106,7 @@ See `Query()` function.
 | r1 | `*html.Node` |   |
 
 
-### innertext
+### InnerText
 
 #### 详细描述
 InnerText returns the text between the start and end tags of the object.
@@ -141,7 +127,7 @@ InnerText returns the text between the start and end tags of the object.
 | r1 | `string` |   |
 
 
-### loadhtmldocument
+### LoadHTMLDocument
 
 #### 详细描述
 
@@ -162,7 +148,7 @@ InnerText returns the text between the start and end tags of the object.
 | r2 | `error` |   |
 
 
-### outputhtml
+### OutputHTML
 
 #### 详细描述
 
@@ -182,7 +168,7 @@ InnerText returns the text between the start and end tags of the object.
 | r1 | `string` |   |
 
 
-### outputhtmlself
+### OutputHTMLSelf
 
 #### 详细描述
 
@@ -202,7 +188,7 @@ InnerText returns the text between the start and end tags of the object.
 | r1 | `string` |   |
 
 
-### query
+### Query
 
 #### 详细描述
 Query runs the given XPath expression against the given html.Node and
@@ -228,7 +214,7 @@ Returns an error if the expression `expr` cannot be parsed.
 | r2 | `error` |   |
 
 
-### queryall
+### QueryAll
 
 #### 详细描述
 QueryAll searches the html.Node that matches by the specified XPath expr.
@@ -252,7 +238,7 @@ Return an error if the expression `expr` cannot be parsed.
 | r2 | `error` |   |
 
 
-### selectattr
+### SelectAttr
 
 #### 详细描述
 SelectAttr returns the attribute value with the specified name.

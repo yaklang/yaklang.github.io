@@ -14,7 +14,7 @@
 
 
 ## 函数定义
-### newcond
+### NewCond
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `*sync.Cond` |   |
 
 
-### newlock
+### NewLock
 
 #### 详细描述
 
@@ -44,7 +44,7 @@
 | r1 | `*sync.Mutex` |   |
 
 
-### newmap
+### NewMap
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `*sync.Map` |   |
 
 
-### newmutex
+### NewMutex
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `*sync.Mutex` |   |
 
 
-### newonce
+### NewOnce
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `*sync.Once` |   |
 
 
-### newpool
+### NewPool
 
 #### 详细描述
 
@@ -104,7 +104,7 @@
 | r1 | `*sync.Pool` |   |
 
 
-### newrwmutex
+### NewRWMutex
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `*sync.RWMutex` |   |
 
 
-### newsizedwaitgroup
+### NewSizedWaitGroup
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `*utils.SizedWaitGroup` |   |
 
 
-### newwaitgroup
+### NewWaitGroup
 
 #### 详细描述
 

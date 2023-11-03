@@ -2,15 +2,12 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [timezone.Get](#get) |LoadLocation returns the Location with the given name.
-
-If the name is "" or "UTC", LoadLocation returns UTC.
-If the name is "Local", LoadLocation ret...|
+| [timezone.Get](#get) |LoadLocation returns the Location with the given name.  If the name is "" or "UTC", LoadLocation returns UTC. If the name is "Local", LoadLocation ret...|
 | [timezone.Now](#now) ||
 
 
 ## 函数定义
-### get
+### Get
 
 #### 详细描述
 LoadLocation returns the Location with the given name.
@@ -46,7 +43,7 @@ locations in order:
 | r2 | `error` |   |
 
 
-### now
+### Now
 
 #### 详细描述
 

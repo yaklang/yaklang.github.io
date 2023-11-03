@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### ping
+### Ping
 
 #### 详细描述
 
@@ -38,7 +38,7 @@
 | r1 | `*pingutil.PingResult` |   |
 
 
-### scan
+### Scan
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### dnsservers
+### dnsServers
 
 #### 详细描述
 
@@ -99,7 +99,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### dnstimeout
+### dnsTimeout
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### excludehosts
+### excludeHosts
 
 #### 详细描述
 
@@ -139,7 +139,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### onresult
+### onResult
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### scancclass
+### scanCClass
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r1 | `_pingConfigOpt` |   |
 
 
-### tcppingports
+### tcpPingPorts
 
 #### 详细描述
 

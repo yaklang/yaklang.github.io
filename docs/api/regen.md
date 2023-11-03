@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### generate
+### Generate
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### mustgenerate
+### MustGenerate
 
 #### 详细描述
 

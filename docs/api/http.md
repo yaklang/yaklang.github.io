@@ -23,10 +23,8 @@
 | [http.header](#header) ||
 | [http.json](#json) ||
 | [http.noredirect](#noredirect) ||
-| [http.params](#params) |GetParams set query params
-|
-| [http.postparams](#postparams) |PostParams set post params
-|
+| [http.params](#params) |GetParams set query params |
+| [http.postparams](#postparams) |PostParams set post params |
 | [http.proxy](#proxy) ||
 | [http.redirect](#redirect) ||
 | [http.session](#session) ||
@@ -39,7 +37,7 @@
 
 
 ## 函数定义
-### do
+### Do
 
 #### 详细描述
 
@@ -60,7 +58,7 @@
 | r2 | `error` |   |
 
 
-### get
+### Get
 
 #### 详细描述
 
@@ -82,7 +80,7 @@
 | r2 | `error` |   |
 
 
-### getallbody
+### GetAllBody
 
 #### 详细描述
 
@@ -102,7 +100,7 @@
 | r1 | `[]byte` |   |
 
 
-### newrequest
+### NewRequest
 
 #### 详细描述
 
@@ -125,7 +123,7 @@
 | r2 | `error` |   |
 
 
-### post
+### Post
 
 #### 详细描述
 
@@ -147,7 +145,7 @@
 | r2 | `error` |   |
 
 
-### raw
+### Raw
 
 #### 详细描述
 
@@ -168,7 +166,7 @@
 | r2 | `error` |   |
 
 
-### request
+### Request
 
 #### 详细描述
 
@@ -191,7 +189,7 @@
 | r2 | `error` |   |
 
 
-### requestfaviconhash
+### RequestFaviconHash
 
 #### 详细描述
 
@@ -212,7 +210,7 @@
 | r2 | `error` |   |
 
 
-### requesttomd5
+### RequestToMD5
 
 #### 详细描述
 
@@ -233,7 +231,7 @@
 | r2 | `error` |   |
 
 
-### requesttommh3hash128
+### RequestToMMH3Hash128
 
 #### 详细描述
 
@@ -254,7 +252,7 @@
 | r2 | `error` |   |
 
 
-### requesttommh3hash128x64
+### RequestToMMH3Hash128x64
 
 #### 详细描述
 
@@ -275,7 +273,7 @@
 | r2 | `error` |   |
 
 
-### requesttosha1
+### RequestToSha1
 
 #### 详细描述
 
@@ -296,7 +294,7 @@
 | r2 | `error` |   |
 
 
-### requesttosha256
+### RequestToSha256
 
 #### 详细描述
 

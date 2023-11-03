@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### loadsuricatatodatabase
+### LoadSuricataToDatabase
 
 #### 详细描述
 
@@ -32,7 +32,7 @@
 | r1 | `error` |   |
 
 
-### parsesuricata
+### ParseSuricata
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### suricatamatcher
+### SuricataMatcher
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `*Matcher` |   |
 
 
-### trafficgenerator
+### TrafficGenerator
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `*ChaosMaker` |   |
 
 
-### yieldrules
+### YieldRules
 
 #### 详细描述
 
@@ -104,7 +104,7 @@
 | r1 | `chan *rule.Storage` |   |
 
 
-### yieldrulesbykeyword
+### YieldRulesByKeyword
 
 #### 详细描述
 
@@ -125,7 +125,7 @@
 | r1 | `chan *rule.Storage` |   |
 
 
-### yieldsuricatarulesbykeywords
+### YieldSuricataRulesByKeywords
 
 #### 详细描述
 

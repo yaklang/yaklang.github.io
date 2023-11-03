@@ -2,75 +2,20 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [math.Abs](#abs) |Abs returns the absolute value of x.
-
-Special cases are:
-
-	Abs(±Inf) = +Inf
-	Abs(NaN) = NaN
-|
-| [math.Ceil](#ceil) |Ceil returns the least integer value greater than or equal to x.
-
-Special cases are:
-
-	Ceil(±0) = ±0
-	Ceil(±Inf) = ±Inf
-	Ceil(NaN) = NaN
-|
-| [math.Floor](#floor) |Floor returns the greatest integer value less than or equal to x.
-
-Special cases are:
-
-	Floor(±0) = ±0
-	Floor(±Inf) = ±Inf
-	Floor(NaN) = NaN
-|
-| [math.IsNaN](#isnan) |IsNaN reports whether f is an IEEE 754 “not-a-number” value.
-|
-| [math.NaN](#nan) |NaN returns an IEEE 754 “not-a-number” value.
-|
-| [math.Pow](#pow) |Pow returns x**y, the base-x exponential of y.
-
-Special cases are (in order):
-
-	Pow(x, ±0) = 1 for any x
-	Pow(1, y) = 1 for any y
-	Pow(x, 1) = x for ...|
-| [math.Pow10](#pow10) |Pow10 returns 10**n, the base-10 exponential of n.
-
-Special cases are:
-
-	Pow10(n) =    0 for n &lt; -323
-	Pow10(n) = +Inf for n &gt; 308
-|
-| [math.Round](#round) |Round returns the nearest integer, rounding half away from zero.
-
-Special cases are:
-
-	Round(±0) = ±0
-	Round(±Inf) = ±Inf
-	Round(NaN) = NaN
-|
-| [math.RoundToEven](#roundtoeven) |RoundToEven returns the nearest integer, rounding ties to even.
-
-Special cases are:
-
-	RoundToEven(±0) = ±0
-	RoundToEven(±Inf) = ±Inf
-	RoundToEven(...|
-| [math.Sqrt](#sqrt) |Sqrt returns the square root of x.
-
-Special cases are:
-
-	Sqrt(+Inf) = +Inf
-	Sqrt(±0) = ±0
-	Sqrt(x &lt; 0) = NaN
-	Sqrt(NaN) = NaN
-|
+| [math.Abs](#abs) |Abs returns the absolute value of x.  Special cases are:  	Abs(±Inf) = +Inf 	Abs(NaN) = NaN |
+| [math.Ceil](#ceil) |Ceil returns the least integer value greater than or equal to x.  Special cases are:  	Ceil(±0) = ±0 	Ceil(±Inf) = ±Inf 	Ceil(NaN) = NaN |
+| [math.Floor](#floor) |Floor returns the greatest integer value less than or equal to x.  Special cases are:  	Floor(±0) = ±0 	Floor(±Inf) = ±Inf 	Floor(NaN) = NaN |
+| [math.IsNaN](#isnan) |IsNaN reports whether f is an IEEE 754 “not-a-number” value. |
+| [math.NaN](#nan) |NaN returns an IEEE 754 “not-a-number” value. |
+| [math.Pow](#pow) |Pow returns x**y, the base-x exponential of y.  Special cases are (in order):  	Pow(x, ±0) = 1 for any x 	Pow(1, y) = 1 for any y 	Pow(x, 1) = x for a...|
+| [math.Pow10](#pow10) |Pow10 returns 10**n, the base-10 exponential of n.  Special cases are:  	Pow10(n) =    0 for n &lt; -323 	Pow10(n) = +Inf for n &gt; 308 |
+| [math.Round](#round) |Round returns the nearest integer, rounding half away from zero.  Special cases are:  	Round(±0) = ±0 	Round(±Inf) = ±Inf 	Round(NaN) = NaN |
+| [math.RoundToEven](#roundtoeven) |RoundToEven returns the nearest integer, rounding ties to even.  Special cases are:  	RoundToEven(±0) = ±0 	RoundToEven(±Inf) = ±Inf 	RoundToEven(NaN)...|
+| [math.Sqrt](#sqrt) |Sqrt returns the square root of x.  Special cases are:  	Sqrt(+Inf) = +Inf 	Sqrt(±0) = ±0 	Sqrt(x &lt; 0) = NaN 	Sqrt(NaN) = NaN |
 
 
 ## 函数定义
-### abs
+### Abs
 
 #### 详细描述
 Abs returns the absolute value of x.
@@ -96,7 +41,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### ceil
+### Ceil
 
 #### 详细描述
 Ceil returns the least integer value greater than or equal to x.
@@ -123,7 +68,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### floor
+### Floor
 
 #### 详细描述
 Floor returns the greatest integer value less than or equal to x.
@@ -150,7 +95,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### isnan
+### IsNaN
 
 #### 详细描述
 IsNaN reports whether f is an IEEE 754 “not-a-number” value.
@@ -171,7 +116,7 @@ IsNaN reports whether f is an IEEE 754 “not-a-number” value.
 | is | `bool` |   |
 
 
-### nan
+### NaN
 
 #### 详细描述
 NaN returns an IEEE 754 “not-a-number” value.
@@ -187,7 +132,7 @@ NaN returns an IEEE 754 “not-a-number” value.
 | r1 | `float64` |   |
 
 
-### pow
+### Pow
 
 #### 详细描述
 Pow returns x**y, the base-x exponential of y.
@@ -232,7 +177,7 @@ Special cases are (in order):
 | r1 | `float64` |   |
 
 
-### pow10
+### Pow10
 
 #### 详细描述
 Pow10 returns 10**n, the base-10 exponential of n.
@@ -258,7 +203,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### round
+### Round
 
 #### 详细描述
 Round returns the nearest integer, rounding half away from zero.
@@ -285,7 +230,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### roundtoeven
+### RoundToEven
 
 #### 详细描述
 RoundToEven returns the nearest integer, rounding ties to even.
@@ -312,7 +257,7 @@ Special cases are:
 | r1 | `float64` |   |
 
 
-### sqrt
+### Sqrt
 
 #### 详细描述
 Sqrt returns the square root of x.

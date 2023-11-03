@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### comparehttpresponse
+### CompareHTTPResponse
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `float64` |   |
 
 
-### compareraw
+### CompareRaw
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `float64` |   |
 
 
-### newdiscriminator
+### NewDiscriminator
 
 #### 详细描述
 

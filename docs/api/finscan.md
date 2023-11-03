@@ -3,23 +3,19 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [finscan.Scan](#scan) ||
-| [finscan.concurrent](#concurrent) |设置 FIN 扫描的并发可以有效控制精准度
-|
+| [finscan.concurrent](#concurrent) |设置 FIN 扫描的并发可以有效控制精准度 |
 | [finscan.excludeHosts](#excludehosts) ||
 | [finscan.excludePorts](#excludeports) ||
 | [finscan.initHostFilter](#inithostfilter) ||
 | [finscan.initPortFilter](#initportfilter) ||
-| [finscan.outputFile](#outputfile) |端口开放的结果保存到文件
-|
-| [finscan.outputPrefix](#outputprefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
-|
+| [finscan.outputFile](#outputfile) |端口开放的结果保存到文件 |
+| [finscan.outputPrefix](#outputprefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等 |
 | [finscan.rateLimit](#ratelimit) ||
-| [finscan.wait](#wait) |finscan 发出 FIN 包后等待多久？
-|
+| [finscan.wait](#wait) |finscan 发出 FIN 包后等待多久？ |
 
 
 ## 函数定义
-### scan
+### Scan
 
 #### 详细描述
 
@@ -63,7 +59,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### excludehosts
+### excludeHosts
 
 #### 详细描述
 
@@ -83,7 +79,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### excludeports
+### excludePorts
 
 #### 详细描述
 
@@ -103,7 +99,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### inithostfilter
+### initHostFilter
 
 #### 详细描述
 
@@ -123,7 +119,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### initportfilter
+### initPortFilter
 
 #### 详细描述
 
@@ -143,7 +139,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### outputfile
+### outputFile
 
 #### 详细描述
 端口开放的结果保存到文件
@@ -164,7 +160,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### outputprefix
+### outputPrefix
 
 #### 详细描述
 端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
@@ -185,7 +181,7 @@
 | r1 | `finScanOpt` |   |
 
 
-### ratelimit
+### rateLimit
 
 #### 详细描述
 

@@ -6,11 +6,7 @@
 | [json.ExtractJSONEx](#extractjsonex) ||
 | [json.Find](#find) ||
 | [json.FindPath](#findpath) ||
-| [json.Marshal](#marshal) |Marshal returns the JSON encoding of v.
-
-Marshal traverses the value v recursively.
-If an encountered value implements the Marshaler interface
-and is ...|
+| [json.Marshal](#marshal) |Marshal returns the JSON encoding of v.  Marshal traverses the value v recursively. If an encountered value implements the Marshaler interface and is ...|
 | [json.New](#new) ||
 | [json.ReplaceAll](#replaceall) ||
 | [json.dumps](#dumps) ||
@@ -18,7 +14,7 @@ and is ...|
 
 
 ## 函数定义
-### extractjson
+### ExtractJSON
 
 #### 详细描述
 
@@ -38,7 +34,7 @@ and is ...|
 | r1 | `[]string` |   |
 
 
-### extractjsonex
+### ExtractJSONEx
 
 #### 详细描述
 
@@ -59,7 +55,7 @@ and is ...|
 | rawStr | `[]string` |   |
 
 
-### find
+### Find
 
 #### 详细描述
 
@@ -80,7 +76,7 @@ and is ...|
 | r1 | `any` |   |
 
 
-### findpath
+### FindPath
 
 #### 详细描述
 
@@ -101,7 +97,7 @@ and is ...|
 | r1 | `any` |   |
 
 
-### marshal
+### Marshal
 
 #### 详细描述
 Marshal returns the JSON encoding of v.
@@ -251,7 +247,7 @@ an error.
 | r2 | `error` |   |
 
 
-### new
+### New
 
 #### 详细描述
 
@@ -272,7 +268,7 @@ an error.
 | r2 | `error` |   |
 
 
-### replaceall
+### ReplaceAll
 
 #### 详细描述
 

@@ -25,7 +25,7 @@
 
 
 ## 函数定义
-### bruteforce
+### Bruteforce
 
 #### 详细描述
 
@@ -47,7 +47,7 @@
 | r2 | `string` |   |
 
 
-### start
+### Start
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### blackdomain
+### blackDomain
 
 #### 详细描述
 
@@ -89,7 +89,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutebuttonelement
+### bruteButtonElement
 
 #### 详细描述
 
@@ -109,7 +109,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutecaptchaelement
+### bruteCaptchaElement
 
 #### 详细描述
 
@@ -130,7 +130,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutepasselement
+### brutePassElement
 
 #### 详细描述
 
@@ -150,7 +150,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### brutepassword
+### brutePassword
 
 #### 详细描述
 
@@ -170,7 +170,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteuserelement
+### bruteUserElement
 
 #### 详细描述
 
@@ -190,7 +190,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteuserpasspath
+### bruteUserPassPath
 
 #### 详细描述
 
@@ -210,7 +210,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### bruteusername
+### bruteUsername
 
 #### 详细描述
 
@@ -311,7 +311,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxurl
+### maxUrl
 
 #### 详细描述
 
@@ -373,7 +373,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### stricturl
+### strictUrl
 
 #### 详细描述
 
@@ -413,7 +413,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### whitedomain
+### whiteDomain
 
 #### 详细描述
 

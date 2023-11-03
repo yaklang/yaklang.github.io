@@ -33,7 +33,7 @@
 
 
 ## 函数定义
-### args
+### Args
 
 #### 详细描述
 
@@ -48,7 +48,7 @@
 | r1 | `[]string` |   |
 
 
-### bool
+### Bool
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r1 | `bool` |   |
 
 
-### double
+### Double
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r1 | `float64` |   |
 
 
-### file
+### File
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r1 | `[]byte` |   |
 
 
-### fileorcontent
+### FileOrContent
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `[]byte` |   |
 
 
-### float
+### Float
 
 #### 详细描述
 
@@ -153,7 +153,7 @@
 | r1 | `float64` |   |
 
 
-### have
+### Have
 
 #### 详细描述
 
@@ -174,7 +174,7 @@
 | r1 | `bool` |   |
 
 
-### host
+### Host
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 | r1 | `[]string` |   |
 
 
-### hosts
+### Hosts
 
 #### 详细描述
 
@@ -216,7 +216,7 @@
 | r1 | `[]string` |   |
 
 
-### int
+### Int
 
 #### 详细描述
 
@@ -237,7 +237,7 @@
 | r1 | `int` |   |
 
 
-### integer
+### Integer
 
 #### 详细描述
 
@@ -258,7 +258,7 @@
 | r1 | `int` |   |
 
 
-### linedict
+### LineDict
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `[]string` |   |
 
 
-### net
+### Net
 
 #### 详细描述
 
@@ -300,7 +300,7 @@
 | r1 | `[]string` |   |
 
 
-### network
+### Network
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `[]string` |   |
 
 
-### port
+### Port
 
 #### 详细描述
 
@@ -342,7 +342,7 @@
 | r1 | `[]int` |   |
 
 
-### ports
+### Ports
 
 #### 详细描述
 
@@ -363,7 +363,7 @@
 | r1 | `[]int` |   |
 
 
-### setcliname
+### SetCliName
 
 #### 详细描述
 
@@ -378,7 +378,7 @@
 | name | `string` |   |
 
 
-### setdoc
+### SetDoc
 
 #### 详细描述
 
@@ -393,7 +393,7 @@
 | document | `string` |   |
 
 
-### string
+### String
 
 #### 详细描述
 
@@ -414,7 +414,7 @@
 | r1 | `string` |   |
 
 
-### stringslice
+### StringSlice
 
 #### 详细描述
 
@@ -434,7 +434,7 @@
 | r1 | `[]string` |   |
 
 
-### url
+### Url
 
 #### 详细描述
 
@@ -455,7 +455,7 @@
 | r1 | `[]string` |   |
 
 
-### urls
+### Urls
 
 #### 详细描述
 
@@ -476,7 +476,7 @@
 | r1 | `[]string` |   |
 
 
-### yakitplugin
+### YakitPlugin
 
 #### 详细描述
 
@@ -516,7 +516,7 @@
 | w | `...io.Writer` |   |
 
 
-### setdefault
+### setDefault
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### sethelp
+### setHelp
 
 #### 详细描述
 
@@ -556,7 +556,7 @@
 | r1 | `setCliExtraParam` |   |
 
 
-### setrequired
+### setRequired
 
 #### 详细描述
 

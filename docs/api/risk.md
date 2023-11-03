@@ -47,7 +47,7 @@
 
 
 ## 函数定义
-### checkdnslogbytoken
+### CheckDNSLogByToken
 
 #### 详细描述
 
@@ -69,7 +69,7 @@
 | r2 | `error` |   |
 
 
-### checkicmptriggerbylength
+### CheckICMPTriggerByLength
 
 #### 详细描述
 
@@ -90,7 +90,7 @@
 | r2 | `error` |   |
 
 
-### checkrandomtriggerbytoken
+### CheckRandomTriggerByToken
 
 #### 详细描述
 
@@ -111,7 +111,7 @@
 | r2 | `error` |   |
 
 
-### createrisk
+### CreateRisk
 
 #### 详细描述
 
@@ -132,7 +132,7 @@
 | r1 | `*Risk` |   |
 
 
-### deleteriskbyid
+### DeleteRiskByID
 
 #### 详细描述
 
@@ -147,7 +147,7 @@
 | id | `any` |   |
 
 
-### deleteriskbytarget
+### DeleteRiskByTarget
 
 #### 详细描述
 
@@ -162,7 +162,7 @@
 | addr | `string` |   |
 
 
-### extracttokenfromurl
+### ExtractTokenFromUrl
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `string` |   |
 
 
-### havereverserisk
+### HaveReverseRisk
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `bool` |   |
 
 
-### newdnslogdomain
+### NewDNSLogDomain
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | _ | `error` |   |
 
 
-### newlocalreversehttpsurl
+### NewLocalReverseHTTPSUrl
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `string` |   |
 
 
-### newlocalreversehttpurl
+### NewLocalReverseHTTPUrl
 
 #### 详细描述
 
@@ -259,7 +259,7 @@
 | r1 | `string` |   |
 
 
-### newlocalreversermiurl
+### NewLocalReverseRMIUrl
 
 #### 详细描述
 
@@ -279,7 +279,7 @@
 | r1 | `string` |   |
 
 
-### newpublicreversehttpsurl
+### NewPublicReverseHTTPSUrl
 
 #### 详细描述
 
@@ -299,7 +299,7 @@
 | r1 | `string` |   |
 
 
-### newpublicreversehttpurl
+### NewPublicReverseHTTPUrl
 
 #### 详细描述
 
@@ -319,7 +319,7 @@
 | r1 | `string` |   |
 
 
-### newpublicreversermiurl
+### NewPublicReverseRMIUrl
 
 #### 详细描述
 
@@ -339,7 +339,7 @@
 | r1 | `string` |   |
 
 
-### newrandomporttrigger
+### NewRandomPortTrigger
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | _ | `error` |   |
 
 
-### newrisk
+### NewRisk
 
 #### 详细描述
 
@@ -377,7 +377,7 @@
 | opts | `...yakit.RiskParamsOpt` |   |
 
 
-### newunverifiedrisk
+### NewUnverifiedRisk
 
 #### 详细描述
 
@@ -400,7 +400,7 @@
 | r2 | `error` |   |
 
 
-### registerbeforerisksave
+### RegisterBeforeRiskSave
 
 #### 详细描述
 
@@ -415,7 +415,7 @@
 | f | `func(*Risk)` |   |
 
 
-### save
+### Save
 
 #### 详细描述
 
@@ -435,7 +435,7 @@
 | r1 | `error` |   |
 
 
-### yieldriskbycreateat
+### YieldRiskByCreateAt
 
 #### 详细描述
 
@@ -455,7 +455,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### yieldriskbyruntimeid
+### YieldRiskByRuntimeId
 
 #### 详细描述
 
@@ -475,7 +475,7 @@
 | r1 | `chan *yakit.Risk` |   |
 
 
-### yieldriskbytarget
+### YieldRiskByTarget
 
 #### 详细描述
 
@@ -555,7 +555,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### fromyakscript
+### fromYakScript
 
 #### 详细描述
 
@@ -715,7 +715,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### runtimeid
+### runtimeId
 
 #### 详细描述
 
@@ -795,7 +795,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### titleverbose
+### titleVerbose
 
 #### 详细描述
 
@@ -855,7 +855,7 @@
 | r1 | `RiskParamsOpt` |   |
 
 
-### typeverbose
+### typeVerbose
 
 #### 详细描述
 

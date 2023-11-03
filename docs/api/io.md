@@ -2,44 +2,22 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [io.Copy](#copy) |Copy copies from src to dst until either EOF is reached
-on src or an error occurs. It returns the number of bytes
-copied and the first error encounter...|
-| [io.CopyN](#copyn) |CopyN copies n bytes (or until an error) from src to dst.
-It returns the number of bytes copied and the earliest
-error encountered while copying.
-On r...|
-| [io.LimitReader](#limitreader) |LimitReader returns a Reader that reads from r
-but stops with EOF after n bytes.
-The underlying implementation is a *LimitedReader.
-|
+| [io.Copy](#copy) |Copy copies from src to dst until either EOF is reached on src or an error occurs. It returns the number of bytes copied and the first error encounter...|
+| [io.CopyN](#copyn) |CopyN copies n bytes (or until an error) from src to dst. It returns the number of bytes copied and the earliest error encountered while copying. On r...|
+| [io.LimitReader](#limitreader) |LimitReader returns a Reader that reads from r but stops with EOF after n bytes. The underlying implementation is a *LimitedReader. |
 | [io.MultiReader](#multireader) ||
-| [io.NopCloser](#nopcloser) |NopCloser returns a ReadCloser with a no-op Close method wrapping
-the provided Reader r.
-
-Deprecated: As of Go 1.16, this function simply calls io.Nop...|
-| [io.Pipe](#pipe) |Pipe creates a synchronous in-memory pipe.
-It can be used to connect code expecting an io.Reader
-with code expecting an io.Writer.
-
-Reads and Writes o...|
-| [io.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read.
-A successful call returns err == nil, not err == EOF. Because ReadAll is
-defi...|
+| [io.NopCloser](#nopcloser) |NopCloser returns a ReadCloser with a no-op Close method wrapping the provided Reader r.  Deprecated: As of Go 1.16, this function simply calls io.Nop...|
+| [io.Pipe](#pipe) |Pipe creates a synchronous in-memory pipe. It can be used to connect code expecting an io.Reader with code expecting an io.Writer.  Reads and Writes o...|
+| [io.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read. A successful call returns err == nil, not err == EOF. Because ReadAll is defi...|
 | [io.ReadEvery1s](#readevery1s) ||
-| [io.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents.
-A successful call returns err == nil, not err == EOF. Because ReadFile
-reads the w...|
+| [io.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents. A successful call returns err == nil, not err == EOF. Because ReadFile reads the w...|
 | [io.ReadStable](#readstable) ||
-| [io.TeeReader](#teereader) |TeeReader returns a Reader that writes to w what it reads from r.
-All reads from r performed through it are matched with
-corresponding writes to w. Th...|
-| [io.WriteString](#writestring) |WriteString writes the contents of the string s to w, which accepts a slice of bytes.
-If w implements StringWriter, its WriteString method is invoked ...|
+| [io.TeeReader](#teereader) |TeeReader returns a Reader that writes to w what it reads from r. All reads from r performed through it are matched with corresponding writes to w. Th...|
+| [io.WriteString](#writestring) |WriteString writes the contents of the string s to w, which accepts a slice of bytes. If w implements StringWriter, its WriteString method is invoked ...|
 
 
 ## 函数定义
-### copy
+### Copy
 
 #### 详细描述
 Copy copies from src to dst until either EOF is reached
@@ -73,7 +51,7 @@ the copy is implemented by calling dst.ReadFrom(src).
 | err | `error` |   |
 
 
-### copyn
+### CopyN
 
 #### 详细描述
 CopyN copies n bytes (or until an error) from src to dst.
@@ -103,7 +81,7 @@ the copy is implemented using it.
 | err | `error` |   |
 
 
-### limitreader
+### LimitReader
 
 #### 详细描述
 LimitReader returns a Reader that reads from r
@@ -127,7 +105,7 @@ The underlying implementation is a *LimitedReader.
 | r1 | `Reader` |   |
 
 
-### multireader
+### MultiReader
 
 #### 详细描述
 
@@ -147,7 +125,7 @@ The underlying implementation is a *LimitedReader.
 | r1 | `Reader` |   |
 
 
-### nopcloser
+### NopCloser
 
 #### 详细描述
 NopCloser returns a ReadCloser with a no-op Close method wrapping
@@ -171,7 +149,7 @@ Deprecated: As of Go 1.16, this function simply calls io.NopCloser.
 | r1 | `io.ReadCloser` |   |
 
 
-### pipe
+### Pipe
 
 #### 详细描述
 Pipe creates a synchronous in-memory pipe.
@@ -202,7 +180,7 @@ the individual calls will be gated sequentially.
 | r2 | `*PipeWriter` |   |
 
 
-### readall
+### ReadAll
 
 #### 详细描述
 ReadAll reads from r until an error or EOF and returns the data it read.
@@ -229,7 +207,7 @@ Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
 | r2 | `error` |   |
 
 
-### readevery1s
+### ReadEvery1s
 
 #### 详细描述
 
@@ -246,7 +224,7 @@ Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
 | f | `func([]byte) bool` |   |
 
 
-### readfile
+### ReadFile
 
 #### 详细描述
 ReadFile reads the file named by filename and returns the contents.
@@ -273,7 +251,7 @@ Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
 | r2 | `error` |   |
 
 
-### readstable
+### ReadStable
 
 #### 详细描述
 
@@ -294,7 +272,7 @@ Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
 | r1 | `[]byte` |   |
 
 
-### teereader
+### TeeReader
 
 #### 详细描述
 TeeReader returns a Reader that writes to w what it reads from r.
@@ -320,7 +298,7 @@ Any error encountered while writing is reported as a read error.
 | r1 | `Reader` |   |
 
 
-### writestring
+### WriteString
 
 #### 详细描述
 WriteString writes the contents of the string s to w, which accepts a slice of bytes.

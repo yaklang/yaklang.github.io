@@ -11,8 +11,7 @@
 | [fuzz.ProtobufHex](#protobufhex) ||
 | [fuzz.ProtobufJSON](#protobufjson) ||
 | [fuzz.ProtobufYAML](#protobufyaml) ||
-| [fuzz.Strings](#strings) |fuzz
-|
+| [fuzz.Strings](#strings) |fuzz |
 | [fuzz.StringsFunc](#stringsfunc) ||
 | [fuzz.StringsWithParam](#stringswithparam) ||
 | [fuzz.UrlToHTTPRequest](#urltohttprequest) ||
@@ -26,7 +25,7 @@
 
 
 ## 函数定义
-### fuzzcalcexpr
+### FuzzCalcExpr
 
 #### 详细描述
 
@@ -41,7 +40,7 @@
 | r1 | `map[string]any` |   |
 
 
-### fuzzcalcexprint32safe
+### FuzzCalcExprInt32Safe
 
 #### 详细描述
 
@@ -56,7 +55,7 @@
 | r1 | `map[string]any` |   |
 
 
-### fuzzcalcexprint64safe
+### FuzzCalcExprInt64Safe
 
 #### 详细描述
 
@@ -71,7 +70,7 @@
 | r1 | `map[string]any` |   |
 
 
-### httprequest
+### HTTPRequest
 
 #### 详细描述
 
@@ -93,7 +92,7 @@
 | r2 | `error` |   |
 
 
-### musthttprequest
+### MustHTTPRequest
 
 #### 详细描述
 
@@ -114,7 +113,7 @@
 | r1 | `*FuzzHTTPRequest` |   |
 
 
-### protobufbytes
+### ProtobufBytes
 
 #### 详细描述
 
@@ -134,7 +133,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### protobufhex
+### ProtobufHex
 
 #### 详细描述
 
@@ -154,7 +153,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### protobufjson
+### ProtobufJSON
 
 #### 详细描述
 
@@ -174,7 +173,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### protobufyaml
+### ProtobufYAML
 
 #### 详细描述
 
@@ -194,7 +193,7 @@
 | r1 | `*ProtobufRecords` |   |
 
 
-### strings
+### Strings
 
 #### 详细描述
 fuzz
@@ -215,7 +214,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### stringsfunc
+### StringsFunc
 
 #### 详细描述
 
@@ -237,7 +236,7 @@ fuzz
 | r1 | `error` |   |
 
 
-### stringswithparam
+### StringsWithParam
 
 #### 详细描述
 
@@ -258,7 +257,7 @@ fuzz
 | r1 | `[]string` |   |
 
 
-### urltohttprequest
+### UrlToHTTPRequest
 
 #### 详细描述
 
@@ -280,7 +279,7 @@ fuzz
 | r2 | `error` |   |
 
 
-### urlstohttprequests
+### UrlsToHTTPRequests
 
 #### 详细描述
 
@@ -300,7 +299,7 @@ fuzz
 | target | `...interface` |   |
 
 
-### withconcurrentlimit
+### WithConcurrentLimit
 
 #### 详细描述
 
@@ -320,7 +319,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### withdelay
+### WithDelay
 
 #### 详细描述
 
@@ -340,7 +339,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### withnamingcontext
+### WithNamingContext
 
 #### 详细描述
 
@@ -360,7 +359,7 @@ fuzz
 | r1 | `HttpPoolConfigOption` |   |
 
 
-### withtimeout
+### WithTimeOut
 
 #### 详细描述
 

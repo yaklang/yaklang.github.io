@@ -17,12 +17,11 @@
 | [bin.toUint16](#touint16) ||
 | [bin.toUint32](#touint32) ||
 | [bin.toUint64](#touint64) ||
-| [bin.toUint8](#touint8) |builder
-|
+| [bin.toUint8](#touint8) |builder |
 
 
 ## 函数定义
-### read
+### Read
 
 #### 详细描述
 
@@ -44,7 +43,7 @@
 | r2 | `error` |   |
 
 
-### tobool
+### toBool
 
 #### 详细描述
 
@@ -65,7 +64,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### tobytes
+### toBytes
 
 #### 详细描述
 
@@ -86,7 +85,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toint
+### toInt
 
 #### 详细描述
 
@@ -107,7 +106,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toint16
+### toInt16
 
 #### 详细描述
 
@@ -128,7 +127,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toint32
+### toInt32
 
 #### 详细描述
 
@@ -149,7 +148,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toint64
+### toInt64
 
 #### 详细描述
 
@@ -170,7 +169,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toint8
+### toInt8
 
 #### 详细描述
 
@@ -191,7 +190,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### tolist
+### toList
 
 #### 详细描述
 
@@ -211,7 +210,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### toraw
+### toRaw
 
 #### 详细描述
 
@@ -232,7 +231,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### tostruct
+### toStruct
 
 #### 详细描述
 
@@ -252,7 +251,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### touint
+### toUint
 
 #### 详细描述
 
@@ -273,7 +272,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### touint16
+### toUint16
 
 #### 详细描述
 
@@ -294,7 +293,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### touint32
+### toUint32
 
 #### 详细描述
 
@@ -315,7 +314,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### touint64
+### toUint64
 
 #### 详细描述
 
@@ -336,7 +335,7 @@
 | r1 | `*PartDescriptor` |   |
 
 
-### touint8
+### toUint8
 
 #### 详细描述
 builder

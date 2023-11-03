@@ -23,7 +23,7 @@
 
 
 ## 函数定义
-### httpbruteforce
+### HttpBruteForce
 
 #### 详细描述
 
@@ -45,7 +45,7 @@
 | r2 | `error` |   |
 
 
-### captchaimgselector
+### captchaImgSelector
 
 #### 详细描述
 
@@ -65,7 +65,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchainputselector
+### captchaInputSelector
 
 #### 详细描述
 
@@ -85,7 +85,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchamode
+### captchaMode
 
 #### 详细描述
 
@@ -105,7 +105,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### captchaurl
+### captchaUrl
 
 #### 详细描述
 
@@ -125,7 +125,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### exepath
+### exePath
 
 #### 详细描述
 
@@ -145,7 +145,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### extrawaitloadtime
+### extraWaitLoadTime
 
 #### 详细描述
 
@@ -165,7 +165,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### leaklessstatus
+### leaklessStatus
 
 #### 详细描述
 
@@ -185,7 +185,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### logindetectmode
+### loginDetectMode
 
 #### 详细描述
 
@@ -226,7 +226,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### passwordlist
+### passwordList
 
 #### 详细描述
 
@@ -246,7 +246,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### passwordselector
+### passwordSelector
 
 #### 详细描述
 
@@ -287,7 +287,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### submitbuttonselector
+### submitButtonSelector
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### usernamelist
+### usernameList
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### usernameselector
+### usernameSelector
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `BruteConfigOpt` |   |
 
 
-### wsaddress
+### wsAddress
 
 #### 详细描述
 

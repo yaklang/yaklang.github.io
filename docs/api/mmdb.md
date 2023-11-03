@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### open
+### Open
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | r2 | `error` |   |
 
 
-### queryipcity
+### QueryIPCity
 
 #### 详细描述
 

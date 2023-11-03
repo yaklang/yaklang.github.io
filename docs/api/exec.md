@@ -7,8 +7,7 @@
 | [exec.CommandContext](#commandcontext) ||
 | [exec.System](#system) ||
 | [exec.SystemBatch](#systembatch) ||
-| [exec.SystemContext](#systemcontext) |执行系统命令
-|
+| [exec.SystemContext](#systemcontext) |执行系统命令 |
 | [exec.WatchOutput](#watchoutput) ||
 | [exec.WatchStderr](#watchstderr) ||
 | [exec.WatchStdout](#watchstdout) ||
@@ -18,7 +17,7 @@
 
 
 ## 函数定义
-### checkcrash
+### CheckCrash
 
 #### 详细描述
 
@@ -39,7 +38,7 @@
 | r2 | `error` |   |
 
 
-### command
+### Command
 
 #### 详细描述
 
@@ -60,7 +59,7 @@
 | r2 | `error` |   |
 
 
-### commandcontext
+### CommandContext
 
 #### 详细描述
 
@@ -82,7 +81,7 @@
 | r2 | `error` |   |
 
 
-### system
+### System
 
 #### 详细描述
 
@@ -103,7 +102,7 @@
 | r2 | `error` |   |
 
 
-### systembatch
+### SystemBatch
 
 #### 详细描述
 
@@ -119,7 +118,7 @@
 | opts | `...poolOpt` |   |
 
 
-### systemcontext
+### SystemContext
 
 #### 详细描述
 执行系统命令
@@ -142,7 +141,7 @@
 | r2 | `error` |   |
 
 
-### watchoutput
+### WatchOutput
 
 #### 详细描述
 
@@ -164,7 +163,7 @@
 | r1 | `error` |   |
 
 
-### watchstderr
+### WatchStderr
 
 #### 详细描述
 
@@ -186,7 +185,7 @@
 | r1 | `error` |   |
 
 
-### watchstdout
+### WatchStdout
 
 #### 详细描述
 

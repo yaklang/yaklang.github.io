@@ -7,7 +7,7 @@
 
 
 ## 函数定义
-### login
+### Login
 
 #### 详细描述
 
@@ -32,7 +32,7 @@
 | err | `error` |   |
 
 
-### version
+### Version
 
 #### 详细描述
 

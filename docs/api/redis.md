@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### new
+### New
 
 #### 详细描述
 
@@ -133,7 +133,7 @@
 | r1 | `redisConfigOpt` |   |
 
 
-### timeoutseconds
+### timeoutSeconds
 
 #### 详细描述
 

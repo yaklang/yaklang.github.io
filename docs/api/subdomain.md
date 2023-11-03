@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### scan
+### Scan
 
 #### 详细描述
 
@@ -39,7 +39,7 @@
 | r2 | `error` |   |
 
 
-### dnsserver
+### dnsServer
 
 #### 详细描述
 
@@ -59,7 +59,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### eachquerytimeout
+### eachQueryTimeout
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### eachsearchtimeout
+### eachSearchTimeout
 
 #### 详细描述
 
@@ -99,7 +99,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### maindict
+### mainDict
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### maxdepth
+### maxDepth
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### recursivedict
+### recursiveDict
 
 #### 详细描述
 
@@ -179,7 +179,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### targetconcurrent
+### targetConcurrent
 
 #### 详细描述
 
@@ -199,7 +199,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### targettimeout
+### targetTimeout
 
 #### 详细描述
 
@@ -219,7 +219,7 @@
 | r1 | `subdomain.ConfigOption` |   |
 
 
-### wildcardtostop
+### wildcardToStop
 
 #### 详细描述
 
@@ -239,7 +239,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### workerconcurrent
+### workerConcurrent
 
 #### 详细描述
 

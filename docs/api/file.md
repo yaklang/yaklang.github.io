@@ -4,55 +4,35 @@
 |:------|:--------|
 | [file.Abs](#abs) ||
 | [file.Cat](#cat) ||
-| [file.Cp](#cp) |Copy the src file to dst. Any existing file will be overwritten and will not
-copy file attributes.
-|
+| [file.Cp](#cp) |Copy the src file to dst. Any existing file will be overwritten and will not copy file attributes. |
 | [file.Create](#create) ||
 | [file.Dir](#dir) ||
-| [file.GetDirPath](#getdirpath) |Dir returns all but the last element of path, typically the path's directory.
-After dropping the final element, Dir calls Clean on the path and traili...|
-| [file.IsAbs](#isabs) |IsAbs reports whether the path is absolute.
-|
+| [file.GetDirPath](#getdirpath) |Dir returns all but the last element of path, typically the path's directory. After dropping the final element, Dir calls Clean on the path and traili...|
+| [file.IsAbs](#isabs) |IsAbs reports whether the path is absolute. |
 | [file.IsDir](#isdir) ||
 | [file.IsExisted](#isexisted) ||
 | [file.IsFile](#isfile) ||
 | [file.IsLink](#islink) ||
-| [file.Join](#join) |Join joins any number of path elements into a single path,
-separating them with an OS specific Separator. Empty elements
-are ignored. The result is Cl...|
+| [file.Join](#join) |Join joins any number of path elements into a single path, separating them with an OS specific Separator. Empty elements are ignored. The result is Cl...|
 | [file.Ls](#ls) ||
 | [file.Lstat](#lstat) ||
 | [file.Mkdir](#mkdir) ||
 | [file.MkdirAll](#mkdirall) ||
-| [file.Mv](#mv) |Rename renames (moves) oldpath to newpath.
-If newpath already exists and is not a directory, Rename replaces it.
-OS-specific restrictions may apply wh...|
+| [file.Mv](#mv) |Rename renames (moves) oldpath to newpath. If newpath already exists and is not a directory, Rename replaces it. OS-specific restrictions may apply wh...|
 | [file.NewMultiFileLineReader](#newmultifilelinereader) ||
 | [file.Open](#open) ||
 | [file.OpenFile](#openfile) ||
-| [file.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read.
-A successful call returns err == nil, not err == EOF. Because ReadAll is
-defi...|
+| [file.ReadAll](#readall) |ReadAll reads from r until an error or EOF and returns the data it read. A successful call returns err == nil, not err == EOF. Because ReadAll is defi...|
 | [file.ReadDirInfoInDirectory](#readdirinfoindirectory) ||
-| [file.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents.
-A successful call returns err == nil, not err == EOF. Because ReadFile
-reads the w...|
+| [file.ReadFile](#readfile) |ReadFile reads the file named by filename and returns the contents. A successful call returns err == nil, not err == EOF. Because ReadFile reads the w...|
 | [file.ReadFileInfoInDirectory](#readfileinfoindirectory) ||
 | [file.ReadLines](#readlines) ||
-| [file.Remove](#remove) |RemoveAll removes path and any children it contains.
-It removes everything it can but returns the first error
-it encounters. If the path does not exis...|
-| [file.Rename](#rename) |Rename renames (moves) oldpath to newpath.
-If newpath already exists and is not a directory, Rename replaces it.
-OS-specific restrictions may apply wh...|
-| [file.Rm](#rm) |RemoveAll removes path and any children it contains.
-It removes everything it can but returns the first error
-it encounters. If the path does not exis...|
+| [file.Remove](#remove) |RemoveAll removes path and any children it contains. It removes everything it can but returns the first error it encounters. If the path does not exis...|
+| [file.Rename](#rename) |Rename renames (moves) oldpath to newpath. If newpath already exists and is not a directory, Rename replaces it. OS-specific restrictions may apply wh...|
+| [file.Rm](#rm) |RemoveAll removes path and any children it contains. It removes everything it can but returns the first error it encounters. If the path does not exis...|
 | [file.Save](#save) ||
 | [file.SaveJson](#savejson) ||
-| [file.Split](#split) |Split splits path immediately following the final Separator,
-separating it into a directory and file name component.
-If there is no Separator in path,...|
+| [file.Split](#split) |Split splits path immediately following the final Separator, separating it into a directory and file name component. If there is no Separator in path,...|
 | [file.Stat](#stat) ||
 | [file.TailF](#tailf) ||
 | [file.TempFile](#tempfile) ||
@@ -60,7 +40,7 @@ If there is no Separator in path,...|
 
 
 ## 函数定义
-### abs
+### Abs
 
 #### 详细描述
 
@@ -80,7 +60,7 @@ If there is no Separator in path,...|
 | r1 | `string` |   |
 
 
-### cat
+### Cat
 
 #### 详细描述
 
@@ -95,7 +75,7 @@ If there is no Separator in path,...|
 | i | `string` |   |
 
 
-### cp
+### Cp
 
 #### 详细描述
 Copy the src file to dst. Any existing file will be overwritten and will not
@@ -118,7 +98,7 @@ copy file attributes.
 | r1 | `error` |   |
 
 
-### create
+### Create
 
 #### 详细描述
 
@@ -139,7 +119,7 @@ copy file attributes.
 | r2 | `error` |   |
 
 
-### dir
+### Dir
 
 #### 详细描述
 
@@ -159,7 +139,7 @@ copy file attributes.
 | r1 | `[]*utils.FileInfo` |   |
 
 
-### getdirpath
+### GetDirPath
 
 #### 详细描述
 Dir returns all but the last element of path, typically the path's directory.
@@ -185,7 +165,7 @@ The returned path does not end in a separator unless it is the root directory.
 | r1 | `string` |   |
 
 
-### isabs
+### IsAbs
 
 #### 详细描述
 IsAbs reports whether the path is absolute.
@@ -206,7 +186,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### isdir
+### IsDir
 
 #### 详细描述
 
@@ -226,7 +206,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### isexisted
+### IsExisted
 
 #### 详细描述
 
@@ -246,7 +226,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### isfile
+### IsFile
 
 #### 详细描述
 
@@ -266,7 +246,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### islink
+### IsLink
 
 #### 详细描述
 
@@ -286,7 +266,7 @@ IsAbs reports whether the path is absolute.
 | r1 | `bool` |   |
 
 
-### join
+### Join
 
 #### 详细描述
 Join joins any number of path elements into a single path,
@@ -313,7 +293,7 @@ non-empty element is a UNC path.
 | r1 | `string` |   |
 
 
-### ls
+### Ls
 
 #### 详细描述
 
@@ -333,7 +313,7 @@ non-empty element is a UNC path.
 | r1 | `[]*utils.FileInfo` |   |
 
 
-### lstat
+### Lstat
 
 #### 详细描述
 
@@ -354,7 +334,7 @@ non-empty element is a UNC path.
 | r2 | `error` |   |
 
 
-### mkdir
+### Mkdir
 
 #### 详细描述
 
@@ -374,7 +354,7 @@ non-empty element is a UNC path.
 | r1 | `error` |   |
 
 
-### mkdirall
+### MkdirAll
 
 #### 详细描述
 
@@ -394,7 +374,7 @@ non-empty element is a UNC path.
 | r1 | `error` |   |
 
 
-### mv
+### Mv
 
 #### 详细描述
 Rename renames (moves) oldpath to newpath.
@@ -420,7 +400,7 @@ If there is an error, it will be of type *LinkError.
 | r1 | `error` |   |
 
 
-### newmultifilelinereader
+### NewMultiFileLineReader
 
 #### 详细描述
 
@@ -441,7 +421,7 @@ If there is an error, it will be of type *LinkError.
 | r2 | `error` |   |
 
 
-### open
+### Open
 
 #### 详细描述
 
@@ -462,7 +442,7 @@ If there is an error, it will be of type *LinkError.
 | r2 | `error` |   |
 
 
-### openfile
+### OpenFile
 
 #### 详细描述
 
@@ -485,7 +465,7 @@ If there is an error, it will be of type *LinkError.
 | r2 | `error` |   |
 
 
-### readall
+### ReadAll
 
 #### 详细描述
 ReadAll reads from r until an error or EOF and returns the data it read.
@@ -512,7 +492,7 @@ Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
 | r2 | `error` |   |
 
 
-### readdirinfoindirectory
+### ReadDirInfoInDirectory
 
 #### 详细描述
 
@@ -533,7 +513,7 @@ Deprecated: As of Go 1.16, this function simply calls io.ReadAll.
 | r2 | `error` |   |
 
 
-### readfile
+### ReadFile
 
 #### 详细描述
 ReadFile reads the file named by filename and returns the contents.
@@ -560,7 +540,7 @@ Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
 | r2 | `error` |   |
 
 
-### readfileinfoindirectory
+### ReadFileInfoInDirectory
 
 #### 详细描述
 
@@ -581,7 +561,7 @@ Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
 | r2 | `error` |   |
 
 
-### readlines
+### ReadLines
 
 #### 详细描述
 
@@ -601,7 +581,7 @@ Deprecated: As of Go 1.16, this function simply calls os.ReadFile.
 | r1 | `[]string` |   |
 
 
-### remove
+### Remove
 
 #### 详细描述
 RemoveAll removes path and any children it contains.
@@ -626,7 +606,7 @@ If there is an error, it will be of type *PathError.
 | r1 | `error` |   |
 
 
-### rename
+### Rename
 
 #### 详细描述
 Rename renames (moves) oldpath to newpath.
@@ -652,7 +632,7 @@ If there is an error, it will be of type *LinkError.
 | r1 | `error` |   |
 
 
-### rm
+### Rm
 
 #### 详细描述
 RemoveAll removes path and any children it contains.
@@ -677,7 +657,7 @@ If there is an error, it will be of type *PathError.
 | r1 | `error` |   |
 
 
-### save
+### Save
 
 #### 详细描述
 
@@ -698,7 +678,7 @@ If there is an error, it will be of type *PathError.
 | r1 | `error` |   |
 
 
-### savejson
+### SaveJson
 
 #### 详细描述
 
@@ -719,7 +699,7 @@ If there is an error, it will be of type *PathError.
 | r1 | `error` |   |
 
 
-### split
+### Split
 
 #### 详细描述
 Split splits path immediately following the final Separator,
@@ -745,7 +725,7 @@ The returned values have the property that path = dir+file.
 | file | `string` |   |
 
 
-### stat
+### Stat
 
 #### 详细描述
 
@@ -766,7 +746,7 @@ The returned values have the property that path = dir+file.
 | r2 | `error` |   |
 
 
-### tailf
+### TailF
 
 #### 详细描述
 
@@ -782,7 +762,7 @@ The returned values have the property that path = dir+file.
 | line | `func(i string)` |   |
 
 
-### tempfile
+### TempFile
 
 #### 详细描述
 
@@ -803,7 +783,7 @@ The returned values have the property that path = dir+file.
 | r2 | `error` |   |
 
 
-### tempfilename
+### TempFileName
 
 #### 详细描述
 

@@ -31,7 +31,7 @@
 
 
 ## 函数定义
-### requestsfromflow
+### RequestsFromFlow
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### start
+### Start
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### autologin
+### autoLogin
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r1 | `configOpt` |   |
 
 
-### basicauth
+### basicAuth
 
 #### 详细描述
 
@@ -119,7 +119,7 @@
 | r1 | `configOpt` |   |
 
 
-### bodysize
+### bodySize
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `configOpt` |   |
 
 
-### connecttimeout
+### connectTimeout
 
 #### 详细描述
 
@@ -200,7 +200,7 @@
 | r1 | `configOpt` |   |
 
 
-### disallowsuffix
+### disallowSuffix
 
 #### 详细描述
 
@@ -220,7 +220,7 @@
 | r1 | `configOpt` |   |
 
 
-### domainexclude
+### domainExclude
 
 #### 详细描述
 
@@ -240,7 +240,7 @@
 | r1 | `configOpt` |   |
 
 
-### domaininclude
+### domainInclude
 
 #### 详细描述
 
@@ -260,7 +260,7 @@
 | r1 | `configOpt` |   |
 
 
-### forbiddenfromparent
+### forbiddenFromParent
 
 #### 详细描述
 
@@ -301,7 +301,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxdepth
+### maxDepth
 
 #### 详细描述
 
@@ -321,7 +321,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxredirect
+### maxRedirect
 
 #### 详细描述
 
@@ -341,7 +341,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxrequest
+### maxRequest
 
 #### 详细描述
 
@@ -361,7 +361,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxretry
+### maxRetry
 
 #### 详细描述
 
@@ -381,7 +381,7 @@
 | r1 | `configOpt` |   |
 
 
-### maxurls
+### maxUrls
 
 #### 详细描述
 
@@ -421,7 +421,7 @@
 | r1 | `configOpt` |   |
 
 
-### responsetimeout
+### responseTimeout
 
 #### 详细描述
 
@@ -481,7 +481,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlextractor
+### urlExtractor
 
 #### 详细描述
 
@@ -501,7 +501,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlregexpexclude
+### urlRegexpExclude
 
 #### 详细描述
 
@@ -521,7 +521,7 @@
 | r1 | `configOpt` |   |
 
 
-### urlregexpinclude
+### urlRegexpInclude
 
 #### 详细描述
 
@@ -541,7 +541,7 @@
 | r1 | `configOpt` |   |
 
 
-### useragent
+### userAgent
 
 #### 详细描述
 

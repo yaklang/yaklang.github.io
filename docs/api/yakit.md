@@ -168,7 +168,7 @@
 ``
 
 
-### autoinityakit
+### AutoInitYakit
 
 #### 详细描述
 
@@ -183,7 +183,7 @@
 | r1 | `` |   |
 
 
-### deletepayloadbygroup
+### DeletePayloadByGroup
 
 #### 详细描述
 
@@ -203,7 +203,7 @@
 | r1 | `error` |   |
 
 
-### enabletable
+### EnableTable
 
 #### 详细描述
 
@@ -224,7 +224,7 @@
 | r1 | `` |   |
 
 
-### enablewebsitetrees
+### EnableWebsiteTrees
 
 #### 详细描述
 
@@ -244,7 +244,7 @@
 | r1 | `` |   |
 
 
-### generateyakitmitmhooksparams
+### GenerateYakitMITMHooksParams
 
 #### 详细描述
 
@@ -267,7 +267,7 @@
 | r2 | `error` |   |
 
 
-### gethomedir
+### GetHomeDir
 
 #### 详细描述
 
@@ -282,7 +282,7 @@
 | r1 | `string` |   |
 
 
-### gethometempdir
+### GetHomeTempDir
 
 #### 详细描述
 
@@ -297,7 +297,7 @@
 | r1 | `string` |   |
 
 
-### getonlinebaseurl
+### GetOnlineBaseUrl
 
 #### 详细描述
 
@@ -312,7 +312,7 @@
 | r1 | `string` |   |
 
 
-### inityakit
+### InitYakit
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | y | `*YakitClient` |   |
 
 
-### newbargraph
+### NewBarGraph
 
 #### 详细描述
 
@@ -342,7 +342,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### newclient
+### NewClient
 
 #### 详细描述
 
@@ -362,7 +362,7 @@
 | r1 | `*YakitClient` |   |
 
 
-### newhttpflowrisk
+### NewHTTPFlowRisk
 
 #### 详细描述
 
@@ -386,7 +386,7 @@
 | r1 | `*YakitHTTPFlowRisk` |   |
 
 
-### newlinegraph
+### NewLineGraph
 
 #### 详细描述
 
@@ -401,7 +401,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### newpiegraph
+### NewPieGraph
 
 #### 详细描述
 
@@ -416,7 +416,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### newtable
+### NewTable
 
 #### 详细描述
 
@@ -436,7 +436,7 @@
 | r1 | `*YakitTable` |   |
 
 
-### newwordcloud
+### NewWordCloud
 
 #### 详细描述
 
@@ -451,7 +451,7 @@
 | r1 | `*YakitGraph` |   |
 
 
-### querydomainsbydomainkeyword
+### QueryDomainsByDomainKeyword
 
 #### 详细描述
 
@@ -472,7 +472,7 @@
 | r2 | `error` |   |
 
 
-### querydomainsbynetwork
+### QueryDomainsByNetwork
 
 #### 详细描述
 
@@ -493,7 +493,7 @@
 | r2 | `error` |   |
 
 
-### querydomainsbytitle
+### QueryDomainsByTitle
 
 #### 详细描述
 
@@ -514,7 +514,7 @@
 | r2 | `error` |   |
 
 
-### queryhttpflowsall
+### QueryHTTPFlowsAll
 
 #### 详细描述
 
@@ -529,7 +529,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### queryhttpflowsbykeyword
+### QueryHTTPFlowsByKeyword
 
 #### 详细描述
 
@@ -549,7 +549,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### queryhostportall
+### QueryHostPortAll
 
 #### 详细描述
 
@@ -564,7 +564,7 @@
 | r1 | `chan string` |   |
 
 
-### queryhostportbykeyword
+### QueryHostPortByKeyword
 
 #### 详细描述
 
@@ -584,7 +584,7 @@
 | r1 | `chan string` |   |
 
 
-### queryhostportbynetwork
+### QueryHostPortByNetwork
 
 #### 详细描述
 
@@ -604,7 +604,7 @@
 | r1 | `chan string` |   |
 
 
-### queryhostportbynetworkandport
+### QueryHostPortByNetworkAndPort
 
 #### 详细描述
 
@@ -625,7 +625,7 @@
 | r1 | `chan string` |   |
 
 
-### queryhostsbydomain
+### QueryHostsByDomain
 
 #### 详细描述
 
@@ -646,7 +646,7 @@
 | r2 | `error` |   |
 
 
-### queryhostsbynetwork
+### QueryHostsByNetwork
 
 #### 详细描述
 
@@ -667,7 +667,7 @@
 | r2 | `error` |   |
 
 
-### queryportassetbynetwork
+### QueryPortAssetByNetwork
 
 #### 详细描述
 
@@ -688,7 +688,7 @@
 | r2 | `error` |   |
 
 
-### queryurlsall
+### QueryUrlsAll
 
 #### 详细描述
 
@@ -703,7 +703,7 @@
 | r1 | `chan string` |   |
 
 
-### queryurlsbykeyword
+### QueryUrlsByKeyword
 
 #### 详细描述
 
@@ -723,7 +723,7 @@
 | r1 | `chan string` |   |
 
 
-### savedomain
+### SaveDomain
 
 #### 详细描述
 
@@ -744,7 +744,7 @@
 | r1 | `error` |   |
 
 
-### savehttpflow
+### SaveHTTPFlow
 
 #### 详细描述
 
@@ -766,7 +766,7 @@
 | r1 | `error` |   |
 
 
-### savepayload
+### SavePayload
 
 #### 详细描述
 
@@ -787,7 +787,7 @@
 | r1 | `error` |   |
 
 
-### savepayloadbyfile
+### SavePayloadByFile
 
 #### 详细描述
 
@@ -808,7 +808,7 @@
 | r1 | `error` |   |
 
 
-### saveportfromresult
+### SavePortFromResult
 
 #### 详细描述
 
@@ -829,7 +829,7 @@
 | r1 | `error` |   |
 
 
-### setonlinebaseurl
+### SetOnlineBaseUrl
 
 #### 详细描述
 
@@ -844,7 +844,7 @@
 | u | `string` |   |
 
 
-### statuscard
+### StatusCard
 
 #### 详细描述
 
@@ -866,7 +866,7 @@
 | data | `interface` |   |
 
 
-### tabledata
+### TableData
 
 #### 详细描述
 
@@ -887,7 +887,7 @@
 | r1 | `*YakitFixedTableData` |   |
 
 
-### updateonlineyakitstore
+### UpdateOnlineYakitStore
 
 #### 详细描述
 
@@ -902,7 +902,7 @@
 | r1 | `error` |   |
 
 
-### updateyakitstore
+### UpdateYakitStore
 
 #### 详细描述
 
@@ -917,7 +917,7 @@
 | r1 | `error` |   |
 
 
-### updateyakitstorefromgit
+### UpdateYakitStoreFromGit
 
 #### 详细描述
 
@@ -939,7 +939,7 @@
 | r1 | `error` |   |
 
 
-### updateyakitstorelocal
+### UpdateYakitStoreLocal
 
 #### 详细描述
 

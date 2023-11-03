@@ -19,7 +19,7 @@
 
 
 ## 函数定义
-### bridge
+### Bridge
 
 #### 详细描述
 
@@ -41,7 +41,7 @@
 | r1 | `error` |   |
 
 
-### start
+### Start
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackhttprequest
+### hijackHTTPRequest
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackhttpresponse
+### hijackHTTPResponse
 
 #### 详细描述
 
@@ -142,7 +142,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### hijackhttpresponseex
+### hijackHTTPResponseEx
 
 #### 详细描述
 
@@ -182,7 +182,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### istransparent
+### isTransparent
 
 #### 详细描述
 
@@ -202,7 +202,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### maxcontentlength
+### maxContentLength
 
 #### 详细描述
 
@@ -222,7 +222,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### rootca
+### rootCA
 
 #### 详细描述
 
@@ -243,7 +243,7 @@
 | r1 | `mitmConfigOpt` |   |
 
 
-### usedefaultca
+### useDefaultCA
 
 #### 详细描述
 

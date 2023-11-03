@@ -65,7 +65,7 @@
 
 
 ## 函数定义
-### allpoc
+### AllPoC
 
 #### 详细描述
 
@@ -86,7 +86,7 @@
 | r2 | `error` |   |
 
 
-### getpocdir
+### GetPoCDir
 
 #### 详细描述
 
@@ -101,7 +101,7 @@
 | r1 | `string` |   |
 
 
-### pocvultorisk
+### PocVulToRisk
 
 #### 详细描述
 
@@ -121,7 +121,7 @@
 | r1 | `*yakit.Risk` |   |
 
 
-### pulldatabase
+### PullDatabase
 
 #### 详细描述
 
@@ -143,7 +143,7 @@
 | r2 | `error` |   |
 
 
-### removedatabase
+### RemoveDatabase
 
 #### 详细描述
 
@@ -158,7 +158,7 @@
 | r1 | `error` |   |
 
 
-### scan
+### Scan
 
 #### 详细描述
 
@@ -180,7 +180,7 @@
 | r2 | `error` |   |
 
 
-### scanauto
+### ScanAuto
 
 #### 详细描述
 
@@ -196,7 +196,7 @@
 | opt | `...any` |   |
 
 
-### updatedatabase
+### UpdateDatabase
 
 #### 详细描述
 
@@ -236,7 +236,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### bulksize
+### bulkSize
 
 #### 详细描述
 
@@ -276,7 +276,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### debugrequest
+### debugRequest
 
 #### 详细描述
 
@@ -296,7 +296,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### debugresponse
+### debugResponse
 
 #### 详细描述
 
@@ -316,7 +316,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### dnsresolver
+### dnsResolver
 
 #### 详细描述
 
@@ -336,7 +336,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### enablereverseconnection
+### enableReverseConnection
 
 #### 详细描述
 
@@ -356,7 +356,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### excludetags
+### excludeTags
 
 #### 详细描述
 
@@ -376,7 +376,7 @@
 | r1 | `any` |   |
 
 
-### excludetemplates
+### excludeTemplates
 
 #### 详细描述
 
@@ -396,7 +396,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### fromplugin
+### fromPlugin
 
 #### 详细描述
 
@@ -416,7 +416,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### fuzzquerytemplate
+### fuzzQueryTemplate
 
 #### 详细描述
 
@@ -516,7 +516,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### interactshtimeout
+### interactshTimeout
 
 #### 详细描述
 
@@ -536,7 +536,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### logfile
+### logFile
 
 #### 详细描述
 
@@ -596,7 +596,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### newtemplates
+### newTemplates
 
 #### 详细描述
 
@@ -616,7 +616,7 @@
 | r1 | `any` |   |
 
 
-### nocolor
+### noColor
 
 #### 详细描述
 
@@ -636,7 +636,7 @@
 | r1 | `any` |   |
 
 
-### nointeractsh
+### noInteractsh
 
 #### 详细描述
 
@@ -656,7 +656,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### nometa
+### noMeta
 
 #### 详细描述
 
@@ -696,7 +696,7 @@
 | r1 | `any` |   |
 
 
-### pagetimeout
+### pageTimeout
 
 #### 详细描述
 
@@ -736,7 +736,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### ratelimit
+### rateLimit
 
 #### 详细描述
 
@@ -756,7 +756,7 @@
 | r1 | `lowhttp.LowhttpOpt` |   |
 
 
-### rawtemplate
+### rawTemplate
 
 #### 详细描述
 
@@ -776,7 +776,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### reportingconfig
+### reportingConfig
 
 #### 详细描述
 
@@ -796,7 +796,7 @@
 | r1 | `any` |   |
 
 
-### reportingdb
+### reportingDB
 
 #### 详细描述
 
@@ -816,7 +816,7 @@
 | r1 | `any` |   |
 
 
-### resultcallback
+### resultCallback
 
 #### 详细描述
 
@@ -856,7 +856,7 @@
 | r1 | `LowhttpOpt` |   |
 
 
-### reverseurl
+### reverseUrl
 
 #### 详细描述
 
@@ -876,7 +876,7 @@
 | r1 | `any` |   |
 
 
-### runtimeid
+### runtimeId
 
 #### 详细描述
 
@@ -916,7 +916,7 @@
 | r1 | `any` |   |
 
 
-### showbrowser
+### showBrowser
 
 #### 详细描述
 
@@ -956,7 +956,7 @@
 | r1 | `any` |   |
 
 
-### stopatfirstmatch
+### stopAtFirstMatch
 
 #### 详细描述
 
@@ -976,7 +976,7 @@
 | r1 | `any` |   |
 
 
-### systemdnsresolver
+### systemDnsResolver
 
 #### 详细描述
 
@@ -1016,7 +1016,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### targetconcurrent
+### targetConcurrent
 
 #### 详细描述
 
@@ -1036,7 +1036,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### tcpresultcallback
+### tcpResultCallback
 
 #### 详细描述
 
@@ -1056,7 +1056,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### templatelist
+### templateList
 
 #### 详细描述
 
@@ -1096,7 +1096,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### templatesdir
+### templatesDir
 
 #### 详细描述
 
@@ -1116,7 +1116,7 @@
 | r1 | `any` |   |
 
 
-### templatesthreads
+### templatesThreads
 
 #### 详细描述
 
@@ -1136,7 +1136,7 @@
 | r1 | `ConfigOption` |   |
 
 
-### templatesversion
+### templatesVersion
 
 #### 详细描述
 
@@ -1176,7 +1176,7 @@
 | r1 | `lowhttp.LowhttpOpt` |   |
 
 
-### updatetemplates
+### updateTemplates
 
 #### 详细描述
 

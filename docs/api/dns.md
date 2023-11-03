@@ -12,7 +12,7 @@
 
 
 ## 函数定义
-### quertaxfr
+### QuertAxfr
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r1 | `[]string` |   |
 
 
-### queryip
+### QueryIP
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `string` |   |
 
 
-### queryipall
+### QueryIPAll
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### queryns
+### QueryNS
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r1 | `[]string` |   |
 
 
-### querytxt
+### QueryTXT
 
 #### 详细描述
 
@@ -117,7 +117,7 @@
 | r1 | `[]string` |   |
 
 
-### dnsservers
+### dnsServers
 
 #### 详细描述
 

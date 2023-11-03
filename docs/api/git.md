@@ -5,6 +5,7 @@
 | [git.Checkout](#checkout) ||
 | [git.Clone](#clone) ||
 | [git.Fetch](#fetch) ||
+| [git.GitHack](#githack) ||
 | [git.IterateCommit](#iteratecommit) ||
 | [git.Pull](#pull) ||
 | [git.SetProxy](#setproxy) ||
@@ -20,14 +21,17 @@
 | [git.force](#force) ||
 | [git.handleCommit](#handlecommit) ||
 | [git.handleReference](#handlereference) ||
+| [git.httpOpts](#httpopts) ||
 | [git.noFetchTags](#nofetchtags) ||
 | [git.recursive](#recursive) ||
 | [git.remote](#remote) ||
+| [git.threads](#threads) ||
+| [git.useLocalGitBinary](#uselocalgitbinary) ||
 | [git.verify](#verify) ||
 
 
 ## 函数定义
-### checkout
+### Checkout
 
 #### 详细描述
 
@@ -49,7 +53,7 @@
 | r1 | `error` |   |
 
 
-### clone
+### Clone
 
 #### 详细描述
 
@@ -71,7 +75,7 @@
 | r1 | `error` |   |
 
 
-### fetch
+### Fetch
 
 #### 详细描述
 
@@ -92,7 +96,29 @@
 | r1 | `error` |   |
 
 
-### iteratecommit
+### GitHack
+
+#### 详细描述
+
+
+#### 定义
+
+`GitHack(remoteRepoURL string, localPath string, opts ...Option) (finalErr error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| remoteRepoURL | `string` |   |
+| localPath | `string` |   |
+| opts | `...Option` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| finalErr | `error` |   |
+
+
+### IterateCommit
 
 #### 详细描述
 
@@ -113,7 +139,7 @@
 | r1 | `error` |   |
 
 
-### pull
+### Pull
 
 #### 详细描述
 
@@ -134,7 +160,7 @@
 | r1 | `error` |   |
 
 
-### setproxy
+### SetProxy
 
 #### 详细描述
 
@@ -170,7 +196,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutcreate
+### checkoutCreate
 
 #### 详细描述
 
@@ -190,7 +216,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutforce
+### checkoutForce
 
 #### 详细描述
 
@@ -210,7 +236,7 @@
 | r1 | `Option` |   |
 
 
-### checkoutkeep
+### checkoutKeep
 
 #### 详细描述
 
@@ -270,7 +296,7 @@
 | r1 | `Option` |   |
 
 
-### fetchalltags
+### fetchAllTags
 
 #### 详细描述
 
@@ -290,7 +316,7 @@
 | r1 | `Option` |   |
 
 
-### filtercommit
+### filterCommit
 
 #### 详细描述
 
@@ -310,7 +336,7 @@
 | r1 | `Option` |   |
 
 
-### filterreference
+### filterReference
 
 #### 详细描述
 
@@ -350,7 +376,7 @@
 | r1 | `Option` |   |
 
 
-### handlecommit
+### handleCommit
 
 #### 详细描述
 
@@ -370,7 +396,7 @@
 | r1 | `Option` |   |
 
 
-### handlereference
+### handleReference
 
 #### 详细描述
 
@@ -390,7 +416,27 @@
 | r1 | `Option` |   |
 
 
-### nofetchtags
+### httpOpts
+
+#### 详细描述
+
+
+#### 定义
+
+`httpOpts(opts ...yaklib.PocConfig) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...yaklib.PocConfig` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### noFetchTags
 
 #### 详细描述
 
@@ -443,6 +489,46 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | remote | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### threads
+
+#### 详细描述
+
+
+#### 定义
+
+`threads(threads int) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| threads | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### useLocalGitBinary
+
+#### 详细描述
+
+
+#### 定义
+
+`useLocalGitBinary(b bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

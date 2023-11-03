@@ -8,7 +8,7 @@
 
 
 ## 函数定义
-### compress
+### Compress
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r2 | `error` |   |
 
 
-### decompress
+### Decompress
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### isgzip
+### IsGzip
 
 #### 详细描述
 

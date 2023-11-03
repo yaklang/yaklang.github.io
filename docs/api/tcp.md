@@ -17,7 +17,7 @@
 
 
 ## 函数定义
-### connect
+### Connect
 
 #### 详细描述
 
@@ -40,7 +40,7 @@
 | r2 | `error` |   |
 
 
-### forward
+### Forward
 
 #### 详细描述
 
@@ -62,7 +62,7 @@
 | r1 | `error` |   |
 
 
-### mockserve
+### MockServe
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r2 | `int` |   |
 
 
-### mocktcpprotocol
+### MockTCPProtocol
 
 #### 详细描述
 
@@ -104,7 +104,7 @@
 | r2 | `int` |   |
 
 
-### serve
+### Serve
 
 #### 详细描述
 
@@ -126,7 +126,7 @@
 | r1 | `error` |   |
 
 
-### cliengproxy
+### cliengProxy
 
 #### 详细描述
 
@@ -146,7 +146,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clientlocal
+### clientLocal
 
 #### 详细描述
 
@@ -166,7 +166,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clienttimeout
+### clientTimeout
 
 #### 详细描述
 
@@ -186,7 +186,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### clienttls
+### clientTls
 
 #### 详细描述
 
@@ -208,7 +208,7 @@
 | r1 | `dialerOpt` |   |
 
 
-### servercallback
+### serverCallback
 
 #### 详细描述
 
@@ -228,7 +228,7 @@
 | r1 | `tcpServerConfigOpt` |   |
 
 
-### servercontext
+### serverContext
 
 #### 详细描述
 
@@ -248,7 +248,7 @@
 | r1 | `tcpServerConfigOpt` |   |
 
 
-### servertls
+### serverTls
 
 #### 详细描述
 

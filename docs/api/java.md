@@ -36,7 +36,7 @@
 
 
 ## 函数定义
-### fromjson
+### FromJson
 
 #### 详细描述
 
@@ -57,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### marshaljavaobjects
+### MarshalJavaObjects
 
 #### 详细描述
 
@@ -77,7 +77,7 @@
 | r1 | `[]byte` |   |
 
 
-### newjavaarray
+### NewJavaArray
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r1 | `*JavaArray` |   |
 
 
-### newjavablockdatabytes
+### NewJavaBlockDataBytes
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `*JavaBlockData` |   |
 
 
-### newjavaclass
+### NewJavaClass
 
 #### 详细描述
 
@@ -138,7 +138,7 @@
 | r1 | `*JavaClass` |   |
 
 
-### newjavaclassdata
+### NewJavaClassData
 
 #### 详细描述
 
@@ -159,7 +159,7 @@
 | r1 | `*JavaClassData` |   |
 
 
-### newjavaclassdesc
+### NewJavaClassDesc
 
 #### 详细描述
 
@@ -184,7 +184,7 @@
 | r1 | `*JavaClassDesc` |   |
 
 
-### newjavaclassdetails
+### NewJavaClassDetails
 
 #### 详细描述
 
@@ -209,7 +209,7 @@
 | r1 | `*JavaClassDetails` |   |
 
 
-### newjavaclassfield
+### NewJavaClassField
 
 #### 详细描述
 
@@ -231,7 +231,7 @@
 | r1 | `*JavaClassField` |   |
 
 
-### newjavaclassfields
+### NewJavaClassFields
 
 #### 详细描述
 
@@ -251,7 +251,7 @@
 | r1 | `*JavaClassFields` |   |
 
 
-### newjavaendblockdata
+### NewJavaEndBlockData
 
 #### 详细描述
 
@@ -266,7 +266,7 @@
 | r1 | `*JavaEndBlockData` |   |
 
 
-### newjavaenum
+### NewJavaEnum
 
 #### 详细描述
 
@@ -287,7 +287,7 @@
 | r1 | `*JavaEnumDesc` |   |
 
 
-### newjavafieldarrayvalue
+### NewJavaFieldArrayValue
 
 #### 详细描述
 
@@ -307,7 +307,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldboolvalue
+### NewJavaFieldBoolValue
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldbytevalue
+### NewJavaFieldByteValue
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldcharvalue
+### NewJavaFieldCharValue
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafielddoublevalue
+### NewJavaFieldDoubleValue
 
 #### 详细描述
 
@@ -387,7 +387,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldfloatvalue
+### NewJavaFieldFloatValue
 
 #### 详细描述
 
@@ -407,7 +407,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldintvalue
+### NewJavaFieldIntValue
 
 #### 详细描述
 
@@ -427,7 +427,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldlongvalue
+### NewJavaFieldLongValue
 
 #### 详细描述
 
@@ -447,7 +447,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldobjectvalue
+### NewJavaFieldObjectValue
 
 #### 详细描述
 
@@ -467,7 +467,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldshortvalue
+### NewJavaFieldShortValue
 
 #### 详细描述
 
@@ -487,7 +487,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavafieldvalue
+### NewJavaFieldValue
 
 #### 详细描述
 
@@ -508,7 +508,7 @@
 | r1 | `*JavaFieldValue` |   |
 
 
-### newjavalongstring
+### NewJavaLongString
 
 #### 详细描述
 
@@ -528,7 +528,7 @@
 | r1 | `*JavaString` |   |
 
 
-### newjavanull
+### NewJavaNull
 
 #### 详细描述
 
@@ -543,7 +543,7 @@
 | r1 | `*JavaNull` |   |
 
 
-### newjavaobject
+### NewJavaObject
 
 #### 详细描述
 
@@ -564,7 +564,7 @@
 | r1 | `*JavaObject` |   |
 
 
-### newjavareference
+### NewJavaReference
 
 #### 详细描述
 
@@ -584,7 +584,7 @@
 | r1 | `*JavaReference` |   |
 
 
-### newjavastring
+### NewJavaString
 
 #### 详细描述
 
@@ -604,7 +604,7 @@
 | r1 | `*JavaString` |   |
 
 
-### parsehexjavaobjectstream
+### ParseHexJavaObjectStream
 
 #### 详细描述
 
@@ -625,7 +625,7 @@
 | r2 | `error` |   |
 
 
-### parsejavaobjectstream
+### ParseJavaObjectStream
 
 #### 详细描述
 
@@ -646,7 +646,7 @@
 | r2 | `error` |   |
 
 
-### tojson
+### ToJson
 
 #### 详细描述
 

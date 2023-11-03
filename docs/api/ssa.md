@@ -1,93 +1,93 @@
-# ldap
+# ssa
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [ldap.Login](#login) ||
-| [ldap.password](#password) ||
-| [ldap.port](#port) ||
-| [ldap.username](#username) ||
+| [ssa.Parse](#parse) ||
+| [ssa.withExternLib](#withexternlib) ||
+| [ssa.withExternValue](#withexternvalue) ||
+| [ssa.withLanguage](#withlanguage) ||
 
 
 ## 函数定义
-### Login
+### Parse
 
 #### 详细描述
 
 
 #### 定义
 
-`Login(addr string, opts ...func(config *ldapClientConfig)) (*ldap.Conn, error)`
+`Parse(code string, opts ...Option) *Program`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| addr | `string` |   |
-| opts | `...func(config *ldapClientConfig)` |   |
+| code | `string` |   |
+| opts | `...Option` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ldap.Conn` |   |
-| r2 | `error` |   |
+| r1 | `*Program` |   |
 
 
-### password
+### withExternLib
 
 #### 详细描述
 
 
 #### 定义
 
-`password(i string) func(config *ldapClientConfig)`
+`withExternLib(name string, table map[string]any) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |   |
+| name | `string` |   |
+| table | `map[string]any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(config *ldapClientConfig)` |   |
+| r1 | `Option` |   |
 
 
-### port
+### withExternValue
 
 #### 详细描述
 
 
 #### 定义
 
-`port(i int) func(config *ldapClientConfig)`
+`withExternValue(table map[string]any) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `int` |   |
+| table | `map[string]any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(config *ldapClientConfig)` |   |
+| r1 | `Option` |   |
 
 
-### username
+### withLanguage
 
 #### 详细描述
 
 
 #### 定义
 
-`username(i string) func(config *ldapClientConfig)`
+`withLanguage(language Language) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |   |
+| language | `Language` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `func(config *ldapClientConfig)` |   |
+| r1 | `Option` |   |
 
 

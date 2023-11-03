@@ -2,15 +2,13 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [yaml.Marshal](#marshal) |Marshal serializes the value provided into a YAML document. The structure
-of the generated document will reflect the structure of the value itself.
-Ma...|
+| [yaml.Marshal](#marshal) |Marshal serializes the value provided into a YAML document. The structure of the generated document will reflect the structure of the value itself. Ma...|
 | [yaml.Unmarshal](#unmarshal) ||
 | [yaml.UnmarshalStrict](#unmarshalstrict) ||
 
 
 ## 函数定义
-### marshal
+### Marshal
 
 #### 详细描述
 Marshal serializes the value provided into a YAML document. The structure
@@ -73,7 +71,7 @@ For example:
 | err | `error` |   |
 
 
-### unmarshal
+### Unmarshal
 
 #### 详细描述
 
@@ -94,7 +92,7 @@ For example:
 | r2 | `error` |   |
 
 
-### unmarshalstrict
+### UnmarshalStrict
 
 #### 详细描述
 

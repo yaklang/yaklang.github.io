@@ -45,7 +45,7 @@
 
 
 ## 函数定义
-### createtemporaryyakscript
+### CreateTemporaryYakScript
 
 #### 详细描述
 
@@ -67,7 +67,7 @@
 | r2 | `error` |   |
 
 
-### delkey
+### DelKey
 
 #### 详细描述
 
@@ -82,7 +82,7 @@
 | k | `any` |   |
 
 
-### deletepayloadbygroup
+### DeletePayloadByGroup
 
 #### 详细描述
 
@@ -102,7 +102,7 @@
 | r1 | `error` |   |
 
 
-### deleteyakscriptbyname
+### DeleteYakScriptByName
 
 #### 详细描述
 
@@ -122,7 +122,7 @@
 | r1 | `error` |   |
 
 
-### deleteyakitmenuitemall
+### DeleteYakitMenuItemAll
 
 #### 详细描述
 
@@ -137,7 +137,7 @@
 | r1 | `error` |   |
 
 
-### downloadgeoip
+### DownloadGeoIP
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
 | r1 | `error` |   |
 
 
-### getkey
+### GetKey
 
 #### 详细描述
 
@@ -172,7 +172,7 @@
 | r1 | `string` |   |
 
 
-### getprojectkey
+### GetProjectKey
 
 #### 详细描述
 
@@ -192,7 +192,7 @@
 | r1 | `string` |   |
 
 
-### getyakitpluginbyname
+### GetYakitPluginByName
 
 #### 详细描述
 
@@ -213,7 +213,7 @@
 | r2 | `error` |   |
 
 
-### newalivehost
+### NewAliveHost
 
 #### 详细描述
 
@@ -229,7 +229,7 @@
 | opts | `...yakit.AliveHostParamsOpt` |   |
 
 
-### queryalivehost
+### QueryAliveHost
 
 #### 详细描述
 
@@ -249,7 +249,7 @@
 | r1 | `chan *yakit.AliveHost` |   |
 
 
-### querydomainsbydomainkeyword
+### QueryDomainsByDomainKeyword
 
 #### 详细描述
 
@@ -270,7 +270,7 @@
 | r2 | `error` |   |
 
 
-### querydomainsbynetwork
+### QueryDomainsByNetwork
 
 #### 详细描述
 
@@ -291,7 +291,7 @@
 | r2 | `error` |   |
 
 
-### querydomainsbytitle
+### QueryDomainsByTitle
 
 #### 详细描述
 
@@ -312,7 +312,7 @@
 | r2 | `error` |   |
 
 
-### queryhttpflowsall
+### QueryHTTPFlowsAll
 
 #### 详细描述
 
@@ -327,7 +327,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### queryhttpflowsbyid
+### QueryHTTPFlowsByID
 
 #### 详细描述
 
@@ -347,7 +347,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### queryhttpflowsbykeyword
+### QueryHTTPFlowsByKeyword
 
 #### 详细描述
 
@@ -367,7 +367,7 @@
 | r1 | `chan *yakit.HTTPFlow` |   |
 
 
-### queryhostportbykeyword
+### QueryHostPortByKeyword
 
 #### 详细描述
 
@@ -388,7 +388,7 @@
 | r2 | `error` |   |
 
 
-### queryhostportbynetwork
+### QueryHostPortByNetwork
 
 #### 详细描述
 
@@ -408,7 +408,7 @@
 | r1 | `chan string` |   |
 
 
-### queryhostsbydomain
+### QueryHostsByDomain
 
 #### 详细描述
 
@@ -429,7 +429,7 @@
 | r2 | `error` |   |
 
 
-### queryipcity
+### QueryIPCity
 
 #### 详细描述
 
@@ -450,7 +450,7 @@
 | r2 | `error` |   |
 
 
-### queryipforips
+### QueryIPForIPS
 
 #### 详细描述
 
@@ -471,7 +471,7 @@
 | r2 | `error` |   |
 
 
-### querypayloadgroups
+### QueryPayloadGroups
 
 #### 详细描述
 
@@ -491,7 +491,7 @@
 | r1 | `[]string` |   |
 
 
-### queryportsbytaskname
+### QueryPortsByTaskName
 
 #### 详细描述
 
@@ -512,7 +512,7 @@
 | r2 | `error` |   |
 
 
-### queryportsbyupdatedat
+### QueryPortsByUpdatedAt
 
 #### 详细描述
 
@@ -533,7 +533,7 @@
 | r2 | `error` |   |
 
 
-### queryurlsall
+### QueryUrlsAll
 
 #### 详细描述
 
@@ -548,7 +548,7 @@
 | r1 | `chan string` |   |
 
 
-### queryurlsbykeyword
+### QueryUrlsByKeyword
 
 #### 详细描述
 
@@ -568,7 +568,7 @@
 | r1 | `chan string` |   |
 
 
-### savedomain
+### SaveDomain
 
 #### 详细描述
 
@@ -589,7 +589,7 @@
 | r1 | `error` |   |
 
 
-### savehttpflowfromnative
+### SaveHTTPFlowFromNative
 
 #### 详细描述
 
@@ -611,7 +611,7 @@
 | r1 | `error` |   |
 
 
-### savehttpflowfromnativewithtype
+### SaveHTTPFlowFromNativeWithType
 
 #### 详细描述
 
@@ -634,7 +634,7 @@
 | r1 | `error` |   |
 
 
-### savehttpflowfromraw
+### SaveHTTPFlowFromRaw
 
 #### 详细描述
 
@@ -657,7 +657,7 @@
 | r1 | `error` |   |
 
 
-### savehttpflowfromrawwithtype
+### SaveHTTPFlowFromRawWithType
 
 #### 详细描述
 
@@ -680,7 +680,7 @@
 | r1 | `error` |   |
 
 
-### savepayload
+### SavePayload
 
 #### 详细描述
 
@@ -701,7 +701,7 @@
 | r1 | `error` |   |
 
 
-### savepayloadbyfile
+### SavePayloadByFile
 
 #### 详细描述
 
@@ -722,7 +722,7 @@
 | r1 | `error` |   |
 
 
-### saveportfromresult
+### SavePortFromResult
 
 #### 详细描述
 
@@ -743,7 +743,7 @@
 | r1 | `error` |   |
 
 
-### saveyakitmenuitembybatchexecuteconfig
+### SaveYakitMenuItemByBatchExecuteConfig
 
 #### 详细描述
 
@@ -763,7 +763,7 @@
 | r1 | `error` |   |
 
 
-### saveyakitplugin
+### SaveYakitPlugin
 
 #### 详细描述
 
@@ -785,7 +785,7 @@
 | r1 | `error` |   |
 
 
-### setkey
+### SetKey
 
 #### 详细描述
 
@@ -806,7 +806,7 @@
 | r1 | `error` |   |
 
 
-### setprojectkey
+### SetProjectKey
 
 #### 详细描述
 
@@ -827,7 +827,7 @@
 | r1 | `error` |   |
 
 
-### yieldyakscriptall
+### YieldYakScriptAll
 
 #### 详细描述
 

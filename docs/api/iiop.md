@@ -9,7 +9,7 @@
 
 
 ## 函数定义
-### bindpayload
+### BindPayload
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### invokepayload
+### InvokePayload
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### rebindpayload
+### RebindPayload
 
 #### 详细描述
 
@@ -70,7 +70,7 @@
 | r1 | `PayloadGeneraterFun` |   |
 
 
-### sendpayload
+### SendPayload
 
 #### 详细描述
 

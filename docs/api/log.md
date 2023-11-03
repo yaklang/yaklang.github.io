@@ -2,26 +2,20 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [log.Debug](#debug) |Debugf will print when logger's Level is debug.
-|
-| [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.
-|
-| [log.Info](#info) |Infof will print when logger's Level is info or debug.
-|
+| [log.Debug](#debug) |Debugf will print when logger's Level is debug. |
+| [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
+| [log.Info](#info) |Infof will print when logger's Level is info or debug. |
 | [log.SetLevel](#setlevel) ||
 | [log.Warn](#warn) ||
-| [log.debug](#debug) |Debugf will print when logger's Level is debug.
-|
-| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug.
-|
-| [log.info](#info) |Infof will print when logger's Level is info or debug.
-|
+| [log.debug](#debug) |Debugf will print when logger's Level is debug. |
+| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
+| [log.info](#info) |Infof will print when logger's Level is info or debug. |
 | [log.setLevel](#setlevel) ||
 | [log.warn](#warn) ||
 
 
 ## 函数定义
-### debug
+### Debug
 
 #### 详细描述
 Debugf will print when logger's Level is debug.
@@ -38,7 +32,7 @@ Debugf will print when logger's Level is debug.
 | args | `...any` |   |
 
 
-### error
+### Error
 
 #### 详细描述
 Errorf will print only when logger's Level is error, warn, info or debug.
@@ -55,7 +49,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 | args | `...any` |   |
 
 
-### info
+### Info
 
 #### 详细描述
 Infof will print when logger's Level is info or debug.
@@ -72,7 +66,7 @@ Infof will print when logger's Level is info or debug.
 | args | `...any` |   |
 
 
-### setlevel
+### SetLevel
 
 #### 详细描述
 
@@ -87,7 +81,7 @@ Infof will print when logger's Level is info or debug.
 | i | `any` |   |
 
 
-### warn
+### Warn
 
 #### 详细描述
 
@@ -154,7 +148,7 @@ Infof will print when logger's Level is info or debug.
 | args | `...any` |   |
 
 
-### setlevel
+### setLevel
 
 #### 详细描述
 

@@ -2,29 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [context.Background](#background) |Background returns a non-nil, empty Context. It is never canceled, has no
-values, and has no deadline. It is typically used by the main function,
-init...|
-| [context.New](#new) |Background returns a non-nil, empty Context. It is never canceled, has no
-values, and has no deadline. It is typically used by the main function,
-init...|
+| [context.Background](#background) |Background returns a non-nil, empty Context. It is never canceled, has no values, and has no deadline. It is typically used by the main function, init...|
+| [context.New](#new) |Background returns a non-nil, empty Context. It is never canceled, has no values, and has no deadline. It is typically used by the main function, init...|
 | [context.Seconds](#seconds) ||
-| [context.WithCancel](#withcancel) |WithCancel returns a copy of parent with a new Done channel. The returned
-context's Done channel is closed when the returned cancel function is called...|
-| [context.WithDeadline](#withdeadline) |WithDeadline returns a copy of the parent context with the deadline adjusted
-to be no later than d. If the parent's deadline is already earlier than d...|
-| [context.WithTimeout](#withtimeout) |WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).
-
-Canceling this context releases resources associated with it, so code should
-call ...|
-| [context.WithValue](#withvalue) |WithValue returns a copy of parent in which the value associated with key is
-val.
-
-Use context Values only for request-scoped data that transits proce...|
+| [context.WithCancel](#withcancel) |WithCancel returns a copy of parent with a new Done channel. The returned context's Done channel is closed when the returned cancel function is called...|
+| [context.WithDeadline](#withdeadline) |WithDeadline returns a copy of the parent context with the deadline adjusted to be no later than d. If the parent's deadline is already earlier than d...|
+| [context.WithTimeout](#withtimeout) |WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).  Canceling this context releases resources associated with it, so code should call ...|
+| [context.WithValue](#withvalue) |WithValue returns a copy of parent in which the value associated with key is val.  Use context Values only for request-scoped data that transits proce...|
 
 
 ## 函数定义
-### background
+### Background
 
 #### 详细描述
 Background returns a non-nil, empty Context. It is never canceled, has no
@@ -43,7 +31,7 @@ requests.
 | r1 | `Context` |   |
 
 
-### new
+### New
 
 #### 详细描述
 Background returns a non-nil, empty Context. It is never canceled, has no
@@ -62,7 +50,7 @@ requests.
 | r1 | `Context` |   |
 
 
-### seconds
+### Seconds
 
 #### 详细描述
 
@@ -82,7 +70,7 @@ requests.
 | r1 | `context.Context` |   |
 
 
-### withcancel
+### WithCancel
 
 #### 详细描述
 WithCancel returns a copy of parent with a new Done channel. The returned
@@ -109,7 +97,7 @@ call cancel as soon as the operations running in this Context complete.
 | cancel | `CancelFunc` |   |
 
 
-### withdeadline
+### WithDeadline
 
 #### 详细描述
 WithDeadline returns a copy of the parent context with the deadline adjusted
@@ -140,7 +128,7 @@ call cancel as soon as the operations running in this Context complete.
 | r2 | `CancelFunc` |   |
 
 
-### withtimeout
+### WithTimeout
 
 #### 详细描述
 WithTimeout returns WithDeadline(parent, time.Now().Add(timeout)).
@@ -172,7 +160,7 @@ call cancel as soon as the operations running in this Context complete:
 | r2 | `CancelFunc` |   |
 
 
-### withvalue
+### WithValue
 
 #### 详细描述
 WithValue returns a copy of parent in which the value associated with key is

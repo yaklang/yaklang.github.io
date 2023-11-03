@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### comparehtml
+### CompareHtml
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### find
+### Find
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r1 | `[]*MatchNodeInfo` |   |
 
 
-### generatexpath
+### GenerateXPath
 
 #### 详细描述
 
@@ -74,7 +74,7 @@
 | r1 | `string` |   |
 
 
-### matchbetween
+### MatchBetween
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | r2 | `string` |   |
 
 
-### randomupperandlower
+### RandomUpperAndLower
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r1 | `string` |   |
 
 
-### walker
+### Walker
 
 #### 详细描述
 

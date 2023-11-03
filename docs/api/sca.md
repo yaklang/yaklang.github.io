@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### scancontainerfromcontext
+### ScanContainerFromContext
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | err | `error` |   |
 
 
-### scanfilesystem
+### ScanFilesystem
 
 #### 详细描述
 
@@ -57,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### scanimagefromcontext
+### ScanImageFromContext
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r2 | `error` |   |
 
 
-### scanimagefromfile
+### ScanImageFromFile
 
 #### 详细描述
 
@@ -161,7 +161,7 @@
 | r1 | `ScanOption` |   |
 
 
-### scanmode
+### scanMode
 
 #### 详细描述
 

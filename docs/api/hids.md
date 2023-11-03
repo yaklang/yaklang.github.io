@@ -13,7 +13,7 @@
 
 
 ## 函数定义
-### cpuaveragecallback
+### CPUAverageCallback
 
 #### 详细描述
 
@@ -28,7 +28,7 @@
 | callback | `func(i float64)` |   |
 
 
-### cpupercent
+### CPUPercent
 
 #### 详细描述
 
@@ -43,7 +43,7 @@
 | r1 | `float64` |   |
 
 
-### cpupercentcallback
+### CPUPercentCallback
 
 #### 详细描述
 
@@ -58,7 +58,7 @@
 | callback | `func(i float64)` |   |
 
 
-### init
+### Init
 
 #### 详细描述
 
@@ -68,7 +68,7 @@
 `Init()`
 
 
-### memorypercent
+### MemoryPercent
 
 #### 详细描述
 
@@ -83,7 +83,7 @@
 | r1 | `float64` |   |
 
 
-### memorypercentcallback
+### MemoryPercentCallback
 
 #### 详细描述
 
@@ -98,7 +98,7 @@
 | callback | `func(i float64)` |   |
 
 
-### setmonitorinterval
+### SetMonitorInterval
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | i | `float64` |   |
 
 
-### showmonitorinterval
+### ShowMonitorInterval
 
 #### 详细描述
 

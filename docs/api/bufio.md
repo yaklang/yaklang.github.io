@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### newreadwriter
+### NewReadWriter
 
 #### 详细描述
 
@@ -33,7 +33,7 @@
 | r2 | `error` |   |
 
 
-### newreader
+### NewReader
 
 #### 详细描述
 
@@ -54,7 +54,7 @@
 | r2 | `error` |   |
 
 
-### newreadersize
+### NewReaderSize
 
 #### 详细描述
 
@@ -76,7 +76,7 @@
 | r2 | `error` |   |
 
 
-### newscanner
+### NewScanner
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### newwriter
+### NewWriter
 
 #### 详细描述
 
@@ -118,7 +118,7 @@
 | r2 | `error` |   |
 
 
-### newwritersize
+### NewWriterSize
 
 #### 详细描述
 

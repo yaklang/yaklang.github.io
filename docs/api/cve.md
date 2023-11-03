@@ -2,11 +2,9 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [cve.Download](#download) |DownLoad 从NVD下载CVE json数据到本地
-|
+| [cve.Download](#download) |DownLoad 从NVD下载CVE json数据到本地 |
 | [cve.GetCVE](#getcve) ||
-| [cve.LoadCVE](#loadcve) |LoadCVE 从本地的CVE json数据加载构造数据库
-|
+| [cve.LoadCVE](#loadcve) |LoadCVE 从本地的CVE json数据加载构造数据库 |
 | [cve.NewStatistics](#newstatistics) ||
 | [cve.Query](#query) ||
 | [cve.QueryEx](#queryex) ||
@@ -23,7 +21,7 @@
 
 
 ## 函数定义
-### download
+### Download
 
 #### 详细描述
 DownLoad 从NVD下载CVE json数据到本地
@@ -44,7 +42,7 @@ DownLoad 从NVD下载CVE json数据到本地
 | r1 | `error` |   |
 
 
-### getcve
+### GetCVE
 
 #### 详细描述
 
@@ -64,7 +62,7 @@ DownLoad 从NVD下载CVE json数据到本地
 | r1 | `*cveresources.CVE` |   |
 
 
-### loadcve
+### LoadCVE
 
 #### 详细描述
 LoadCVE 从本地的CVE json数据加载构造数据库
@@ -82,7 +80,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | years | `...int` |   |
 
 
-### newstatistics
+### NewStatistics
 
 #### 详细描述
 
@@ -102,7 +100,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `*Statistics` |   |
 
 
-### query
+### Query
 
 #### 详细描述
 
@@ -123,7 +121,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `chan *cveresources.CVE` |   |
 
 
-### queryex
+### QueryEx
 
 #### 详细描述
 
@@ -245,7 +243,7 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 | r1 | `CVEOption` |   |
 
 
-### parsetocpe
+### parseToCpe
 
 #### 详细描述
 

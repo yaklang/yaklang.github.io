@@ -6,24 +6,20 @@
 | [synscan.Scan](#scan) ||
 | [synscan.ScanFromPing](#scanfromping) ||
 | [synscan.callback](#callback) ||
-| [synscan.concurrent](#concurrent) |设置 SYN 扫描的并发可以有效控制精准度
-|
+| [synscan.concurrent](#concurrent) |设置 SYN 扫描的并发可以有效控制精准度 |
 | [synscan.excludeHosts](#excludehosts) ||
 | [synscan.excludePorts](#excludeports) ||
 | [synscan.initHostFilter](#inithostfilter) ||
 | [synscan.initPortFilter](#initportfilter) ||
-| [synscan.outputFile](#outputfile) |端口开放的结果保存到文件
-|
-| [synscan.outputPrefix](#outputprefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
-|
+| [synscan.outputFile](#outputfile) |端口开放的结果保存到文件 |
+| [synscan.outputPrefix](#outputprefix) |端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等 |
 | [synscan.rateLimit](#ratelimit) ||
 | [synscan.submitTaskCallback](#submittaskcallback) ||
-| [synscan.wait](#wait) |synscan 发出 SYN 包后等待多久？
-|
+| [synscan.wait](#wait) |synscan 发出 SYN 包后等待多久？ |
 
 
 ## 函数定义
-### fixpermission
+### FixPermission
 
 #### 详细描述
 
@@ -38,7 +34,7 @@
 | r1 | `error` |   |
 
 
-### scan
+### Scan
 
 #### 详细描述
 
@@ -61,7 +57,7 @@
 | r2 | `error` |   |
 
 
-### scanfromping
+### ScanFromPing
 
 #### 详细描述
 
@@ -125,7 +121,7 @@
 | r1 | `scanOpt` |   |
 
 
-### excludehosts
+### excludeHosts
 
 #### 详细描述
 
@@ -145,7 +141,7 @@
 | r1 | `scanOpt` |   |
 
 
-### excludeports
+### excludePorts
 
 #### 详细描述
 
@@ -165,7 +161,7 @@
 | r1 | `scanOpt` |   |
 
 
-### inithostfilter
+### initHostFilter
 
 #### 详细描述
 
@@ -185,7 +181,7 @@
 | r1 | `scanOpt` |   |
 
 
-### initportfilter
+### initPortFilter
 
 #### 详细描述
 
@@ -205,7 +201,7 @@
 | r1 | `scanOpt` |   |
 
 
-### outputfile
+### outputFile
 
 #### 详细描述
 端口开放的结果保存到文件
@@ -226,7 +222,7 @@
 | r1 | `scanOpt` |   |
 
 
-### outputprefix
+### outputPrefix
 
 #### 详细描述
 端口开放结果保存文件加个前缀，比如 tcp:// https:// http:// 等
@@ -247,7 +243,7 @@
 | r1 | `scanOpt` |   |
 
 
-### ratelimit
+### rateLimit
 
 #### 详细描述
 
@@ -268,7 +264,7 @@
 | r1 | `scanOpt` |   |
 
 
-### submittaskcallback
+### submitTaskCallback
 
 #### 详细描述
 

@@ -2,28 +2,17 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [re2.Compile](#compile) |Compile parses a regular expression and returns, if successful,
-a Regexp object that can be used to match against text.
-
-When matching against text, t...|
-| [re2.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expression
-to POSIX ERE (egrep) syntax and changes the match semantics to
-leftmost-longest.
-
-Th...|
+| [re2.Compile](#compile) |Compile parses a regular expression and returns, if successful, a Regexp object that can be used to match against text.  When matching against text, t...|
+| [re2.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expression to POSIX ERE (egrep) syntax and changes the match semantics to leftmost-longest.  Th...|
 | [re2.ExtractEmail](#extractemail) ||
-| [re2.ExtractHostPort](#extracthostport) |HOSTPORT
-|
+| [re2.ExtractHostPort](#extracthostport) |HOSTPORT |
 | [re2.ExtractIP](#extractip) ||
 | [re2.ExtractIPv4](#extractipv4) ||
 | [re2.ExtractIPv6](#extractipv6) ||
 | [re2.ExtractMac](#extractmac) ||
-| [re2.ExtractPath](#extractpath) |PATHPARAM
-|
-| [re2.ExtractTTY](#extracttty) |TTY
-|
-| [re2.ExtractURL](#extracturl) |URL
-|
+| [re2.ExtractPath](#extractpath) |PATHPARAM |
+| [re2.ExtractTTY](#extracttty) |TTY |
+| [re2.ExtractURL](#extracturl) |URL |
 | [re2.Find](#find) ||
 | [re2.FindAll](#findall) ||
 | [re2.FindAllIndex](#findallindex) ||
@@ -34,25 +23,17 @@ Th...|
 | [re2.FindSubmatchAll](#findsubmatchall) ||
 | [re2.FindSubmatchAllIndex](#findsubmatchallindex) ||
 | [re2.FindSubmatchIndex](#findsubmatchindex) ||
-| [re2.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-be...|
-| [re2.Match](#match) |Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
-Example:
-```
-re.Match("^[a-z]+$", "abc") // true
-```
-|
-| [re2.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed.
-It simplifies safe initialization of global variables holding compiled regu...|
-| [re2.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.
-It simplifies safe initialization of global variables holding com...|
-| [re2.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharacters
-inside the argument text; the returned string is a regular expression ma...|
+| [re2.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。 |
+| [re2.Match](#match) |Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false |
+| [re2.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed. It simplifies safe initialization of global variables holding compiled regu...|
+| [re2.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed. It simplifies safe initialization of global variables holding com...|
+| [re2.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharacters inside the argument text; the returned string is a regular expression ma...|
 | [re2.ReplaceAll](#replaceall) ||
 | [re2.ReplaceAllWithFunc](#replaceallwithfunc) ||
 
 
 ## 函数定义
-### compile
+### Compile
 
 #### 详细描述
 Compile parses a regular expression and returns, if successful,
@@ -83,7 +64,7 @@ For POSIX leftmost-longest matching, see CompilePOSIX.
 | r2 | `error` |   |
 
 
-### compileposix
+### CompilePOSIX
 
 #### 详细描述
 CompilePOSIX is like Compile but restricts the regular expression
@@ -123,7 +104,7 @@ See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
 | r2 | `error` |   |
 
 
-### extractemail
+### ExtractEmail
 
 #### 详细描述
 
@@ -143,7 +124,7 @@ See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
 | r1 | `[]string` |   |
 
 
-### extracthostport
+### ExtractHostPort
 
 #### 详细描述
 HOSTPORT
@@ -164,7 +145,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### extractip
+### ExtractIP
 
 #### 详细描述
 
@@ -184,7 +165,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### extractipv4
+### ExtractIPv4
 
 #### 详细描述
 
@@ -204,7 +185,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### extractipv6
+### ExtractIPv6
 
 #### 详细描述
 
@@ -224,7 +205,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### extractmac
+### ExtractMac
 
 #### 详细描述
 
@@ -244,7 +225,7 @@ HOSTPORT
 | r1 | `[]string` |   |
 
 
-### extractpath
+### ExtractPath
 
 #### 详细描述
 PATHPARAM
@@ -265,7 +246,7 @@ PATHPARAM
 | r1 | `[]string` |   |
 
 
-### extracttty
+### ExtractTTY
 
 #### 详细描述
 TTY
@@ -286,7 +267,7 @@ TTY
 | r1 | `[]string` |   |
 
 
-### extracturl
+### ExtractURL
 
 #### 详细描述
 URL
@@ -307,7 +288,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### find
+### Find
 
 #### 详细描述
 
@@ -328,7 +309,7 @@ URL
 | r1 | `string` |   |
 
 
-### findall
+### FindAll
 
 #### 详细描述
 
@@ -349,7 +330,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### findallindex
+### FindAllIndex
 
 #### 详细描述
 
@@ -370,7 +351,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### findgroup
+### FindGroup
 
 #### 详细描述
 
@@ -391,7 +372,7 @@ URL
 | r1 | `map[string]string` |   |
 
 
-### findgroupall
+### FindGroupAll
 
 #### 详细描述
 
@@ -412,7 +393,7 @@ URL
 | r1 | `[]map[string]string` |   |
 
 
-### findindex
+### FindIndex
 
 #### 详细描述
 
@@ -433,7 +414,7 @@ URL
 | r1 | `[]int` |   |
 
 
-### findsubmatch
+### FindSubmatch
 
 #### 详细描述
 
@@ -454,7 +435,7 @@ URL
 | r1 | `[]string` |   |
 
 
-### findsubmatchall
+### FindSubmatchAll
 
 #### 详细描述
 
@@ -475,7 +456,7 @@ URL
 | r1 | `[][]string` |   |
 
 
-### findsubmatchallindex
+### FindSubmatchAllIndex
 
 #### 详细描述
 
@@ -496,7 +477,7 @@ URL
 | r1 | `[][]int` |   |
 
 
-### findsubmatchindex
+### FindSubmatchIndex
 
 #### 详细描述
 
@@ -517,10 +498,11 @@ URL
 | r1 | `[]int` |   |
 
 
-### grok
+### Grok
 
 #### 详细描述
 Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。
+
 Example:
 ```
 str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
@@ -543,10 +525,11 @@ str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time
 | r1 | `GrokResult` |   |
 
 
-### match
+### Match
 
 #### 详细描述
 Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+
 Example:
 ```
 re.Match("^[a-z]+$", "abc") // true
@@ -569,7 +552,7 @@ re.Match("^[a-z]+$", "abc") // true
 | r1 | `bool` |   |
 
 
-### mustcompile
+### MustCompile
 
 #### 详细描述
 MustCompile is like Compile but panics if the expression cannot be parsed.
@@ -592,7 +575,7 @@ expressions.
 | r1 | `*Regexp` |   |
 
 
-### mustcompileposix
+### MustCompilePOSIX
 
 #### 详细描述
 MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.
@@ -615,7 +598,7 @@ expressions.
 | r1 | `*Regexp` |   |
 
 
-### quotemeta
+### QuoteMeta
 
 #### 详细描述
 QuoteMeta returns a string that escapes all regular expression metacharacters
@@ -638,7 +621,7 @@ the literal text.
 | r1 | `string` |   |
 
 
-### replaceall
+### ReplaceAll
 
 #### 详细描述
 
@@ -660,7 +643,7 @@ the literal text.
 | r1 | `string` |   |
 
 
-### replaceallwithfunc
+### ReplaceAllWithFunc
 
 #### 详细描述
 

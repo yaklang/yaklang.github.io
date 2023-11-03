@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### eval
+### Eval
 
 #### 详细描述
 
@@ -31,7 +31,7 @@
 | r1 | `error` |   |
 
 
-### import
+### Import
 
 #### 详细描述
 
@@ -53,7 +53,7 @@
 | r2 | `error` |   |
 
 
-### isyakfunc
+### IsYakFunc
 
 #### 详细描述
 
@@ -73,7 +73,7 @@
 | r1 | `bool` |   |
 
 
-### loadvarfromfile
+### LoadVarFromFile
 
 #### 详细描述
 

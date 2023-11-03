@@ -11,7 +11,7 @@
 
 
 ## 函数定义
-### fromenv
+### FromEnv
 
 #### 详细描述
 
@@ -26,7 +26,7 @@
 | r1 | `*Client` |   |
 
 
-### new
+### New
 
 #### 详细描述
 
@@ -87,7 +87,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### webhookwithsecret
+### webhookWithSecret
 
 #### 详细描述
 

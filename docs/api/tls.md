@@ -18,7 +18,7 @@
 
 
 ## 函数定义
-### decryptwithpkcs1v15
+### DecryptWithPkcs1v15
 
 #### 详细描述
 
@@ -40,7 +40,7 @@
 | r2 | `error` |   |
 
 
-### encryptwithpkcs1v15
+### EncryptWithPkcs1v15
 
 #### 详细描述
 
@@ -62,7 +62,7 @@
 | r2 | `error` |   |
 
 
-### generatersa1024keypair
+### GenerateRSA1024KeyPair
 
 #### 详细描述
 
@@ -79,7 +79,7 @@
 | r3 | `error` |   |
 
 
-### generatersa2048keypair
+### GenerateRSA2048KeyPair
 
 #### 详细描述
 
@@ -96,7 +96,7 @@
 | r3 | `error` |   |
 
 
-### generatersa4096keypair
+### GenerateRSA4096KeyPair
 
 #### 详细描述
 
@@ -113,7 +113,7 @@
 | r3 | `error` |   |
 
 
-### generatersakeypair
+### GenerateRSAKeyPair
 
 #### 详细描述
 
@@ -135,7 +135,7 @@
 | r3 | `error` |   |
 
 
-### generaterootca
+### GenerateRootCA
 
 #### 详细描述
 
@@ -157,7 +157,7 @@
 | _ | `error` |   |
 
 
-### generatesm2keypair
+### GenerateSM2KeyPair
 
 #### 详细描述
 
@@ -174,7 +174,7 @@
 | r3 | `error` |   |
 
 
-### inspect
+### Inspect
 
 #### 详细描述
 
@@ -195,7 +195,7 @@
 | r2 | `error` |   |
 
 
-### signclientcertandkey
+### SignClientCertAndKey
 
 #### 详细描述
 
@@ -218,7 +218,7 @@
 | _ | `error` |   |
 
 
-### signservercertandkey
+### SignServerCertAndKey
 
 #### 详细描述
 
@@ -241,7 +241,7 @@
 | _ | `error` |   |
 
 
-### signx509clientcertandkey
+### SignX509ClientCertAndKey
 
 #### 详细描述
 
@@ -264,7 +264,7 @@
 | r3 | `error` |   |
 
 
-### signx509servercertandkey
+### SignX509ServerCertAndKey
 
 #### 详细描述
 

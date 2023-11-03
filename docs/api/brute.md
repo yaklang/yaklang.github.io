@@ -20,7 +20,7 @@
 
 
 ## 函数定义
-### getavailablebrutetypes
+### GetAvailableBruteTypes
 
 #### 详细描述
 
@@ -35,7 +35,7 @@
 | r1 | `[]string` |   |
 
 
-### getpasswordlistfrombrutetype
+### GetPasswordListFromBruteType
 
 #### 详细描述
 
@@ -55,7 +55,7 @@
 | r1 | `[]string` |   |
 
 
-### getusernamelistfrombrutetype
+### GetUsernameListFromBruteType
 
 #### 详细描述
 
@@ -75,7 +75,7 @@
 | r1 | `[]string` |   |
 
 
-### new
+### New
 
 #### 详细描述
 
@@ -97,7 +97,7 @@
 | r2 | `error` |   |
 
 
-### autodict
+### autoDict
 
 #### 详细描述
 
@@ -112,7 +112,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### brutehandler
+### bruteHandler
 
 #### 详细描述
 
@@ -152,7 +152,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### concurrenttarget
+### concurrentTarget
 
 #### 详细描述
 
@@ -192,7 +192,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### finishingthreshold
+### finishingThreshold
 
 #### 详细描述
 
@@ -212,7 +212,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### maxdelay
+### maxDelay
 
 #### 详细描述
 
@@ -232,7 +232,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### mindelay
+### minDelay
 
 #### 详细描述
 
@@ -252,7 +252,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### oktostop
+### okToStop
 
 #### 详细描述
 
@@ -272,7 +272,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### passlist
+### passList
 
 #### 详细描述
 
@@ -292,7 +292,7 @@
 | r1 | `yakBruteOpt` |   |
 
 
-### userlist
+### userList
 
 #### 详细描述
 

@@ -9,7 +9,7 @@
 
 
 ## 函数定义
-### gettransportbyclienthellospec
+### GetTransportByClientHelloSpec
 
 #### 详细描述
 
@@ -29,7 +29,7 @@
 | r1 | `*http.Transport` |   |
 
 
-### parseja3
+### ParseJA3
 
 #### 详细描述
 
@@ -50,7 +50,7 @@
 | r2 | `error` |   |
 
 
-### parseja3s
+### ParseJA3S
 
 #### 详细描述
 
@@ -71,7 +71,7 @@
 | r2 | `error` |   |
 
 
-### parseja3toclienthellospec
+### ParseJA3ToClientHelloSpec
 
 #### 详细描述
 

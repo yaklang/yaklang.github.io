@@ -2,6 +2,7 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
+| [crawlerx.PageScreenShot](#pagescreenshot) ||
 | [crawlerx.StartCrawler](#startcrawler) ||
 | [crawlerx.blacklist](#blacklist) ||
 | [crawlerx.browserInfo](#browserinfo) ||
@@ -23,6 +24,7 @@
 | [crawlerx.pageTimeout](#pagetimeout) ||
 | [crawlerx.rawCookie](#rawcookie) ||
 | [crawlerx.rawHeaders](#rawheaders) ||
+| [crawlerx.response](#response) ||
 | [crawlerx.runtimeID](#runtimeid) ||
 | [crawlerx.runtimeId](#runtimeid) ||
 | [crawlerx.saveToDB](#savetodb) ||
@@ -35,7 +37,29 @@
 
 
 ## 函数定义
-### startcrawler
+### PageScreenShot
+
+#### 详细描述
+
+
+#### 定义
+
+`PageScreenShot(targetUrl string, opts ...ConfigOpt) (code string, err error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| targetUrl | `string` |   |
+| opts | `...ConfigOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| code | `string` |   |
+| err | `error` |   |
+
+
+### StartCrawler
 
 #### 详细描述
 
@@ -77,7 +101,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### browserinfo
+### browserInfo
 
 #### 详细描述
 
@@ -138,7 +162,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### evaljs
+### evalJs
 
 #### 详细描述
 
@@ -159,7 +183,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### extrawaitloadtime
+### extraWaitLoadTime
 
 #### 详细描述
 
@@ -179,7 +203,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### fileinput
+### fileInput
 
 #### 详细描述
 
@@ -199,7 +223,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### formfill
+### formFill
 
 #### 详细描述
 
@@ -219,7 +243,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### fulltimeout
+### fullTimeout
 
 #### 详细描述
 
@@ -259,7 +283,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### ignorequeryname
+### ignoreQueryName
 
 #### 详细描述
 
@@ -279,7 +303,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### invalidsuffix
+### invalidSuffix
 
 #### 详细描述
 
@@ -299,7 +323,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### jsresultsend
+### jsResultSend
 
 #### 详细描述
 
@@ -339,7 +363,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### localstorage
+### localStorage
 
 #### 详细描述
 
@@ -359,7 +383,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxdepth
+### maxDepth
 
 #### 详细描述
 
@@ -379,7 +403,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### maxurl
+### maxUrl
 
 #### 详细描述
 
@@ -399,7 +423,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### pagetimeout
+### pageTimeout
 
 #### 详细描述
 
@@ -419,7 +443,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rawcookie
+### rawCookie
 
 #### 详细描述
 
@@ -440,7 +464,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### rawheaders
+### rawHeaders
 
 #### 详细描述
 
@@ -460,7 +484,28 @@
 | r1 | `ConfigOpt` |   |
 
 
-### runtimeid
+### response
+
+#### 详细描述
+
+
+#### 定义
+
+`response(targetUrl string, response string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| targetUrl | `string` |   |
+| response | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### runtimeID
 
 #### 详细描述
 
@@ -480,7 +525,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### runtimeid
+### runtimeId
 
 #### 详细描述
 
@@ -500,7 +545,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### savetodb
+### saveToDB
 
 #### 详细描述
 
@@ -520,7 +565,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### scanrangelevel
+### scanRangeLevel
 
 #### 详细描述
 
@@ -540,7 +585,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### scanrepeatlevel
+### scanRepeatLevel
 
 #### 详细描述
 
@@ -560,7 +605,7 @@
 | r1 | `ConfigOpt` |   |
 
 
-### sensitivewords
+### sensitiveWords
 
 #### 详细描述
 
