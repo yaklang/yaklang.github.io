@@ -2,28 +2,29 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [math.Abs](#abs) |Abs returns the absolute value of x.  Special cases are:  	Abs(±Inf) = +Inf 	Abs(NaN) = NaN |
-| [math.Ceil](#ceil) |Ceil returns the least integer value greater than or equal to x.  Special cases are:  	Ceil(±0) = ±0 	Ceil(±Inf) = ±Inf 	Ceil(NaN) = NaN |
-| [math.Floor](#floor) |Floor returns the greatest integer value less than or equal to x.  Special cases are:  	Floor(±0) = ±0 	Floor(±Inf) = ±Inf 	Floor(NaN) = NaN |
+| [math.Abs](#abs) |Abs 返回x的绝对值 |
+| [math.Ceil](#ceil) |Ceil 返回不小于x的最小整数 |
+| [math.Floor](#floor) |Floor 返回不大于x的最大整数 |
 | [math.IsNaN](#isnan) |IsNaN reports whether f is an IEEE 754 “not-a-number” value. |
 | [math.NaN](#nan) |NaN returns an IEEE 754 “not-a-number” value. |
-| [math.Pow](#pow) |Pow returns x**y, the base-x exponential of y.  Special cases are (in order):  	Pow(x, ±0) = 1 for any x 	Pow(1, y) = 1 for any y 	Pow(x, 1) = x for a...|
-| [math.Pow10](#pow10) |Pow10 returns 10**n, the base-10 exponential of n.  Special cases are:  	Pow10(n) =    0 for n &lt; -323 	Pow10(n) = +Inf for n &gt; 308 |
+| [math.Pow](#pow) |Pow 返回x的y次方 |
+| [math.Pow10](#pow10) |Pow10 返回10的n次方 |
 | [math.Round](#round) |Round returns the nearest integer, rounding half away from zero.  Special cases are:  	Round(±0) = ±0 	Round(±Inf) = ±Inf 	Round(NaN) = NaN |
-| [math.RoundToEven](#roundtoeven) |RoundToEven returns the nearest integer, rounding ties to even.  Special cases are:  	RoundToEven(±0) = ±0 	RoundToEven(±Inf) = ±Inf 	RoundToEven(NaN)...|
-| [math.Sqrt](#sqrt) |Sqrt returns the square root of x.  Special cases are:  	Sqrt(+Inf) = +Inf 	Sqrt(±0) = ±0 	Sqrt(x &lt; 0) = NaN 	Sqrt(NaN) = NaN |
+| [math.RoundToEven](#roundtoeven) |RoundToEven 返回四舍五入到最近的偶整数 |
+| [math.Sqrt](#sqrt) |Sqrt 返回一个数的平方根 如果x &lt; 0，返回NaN |
 
 
 ## 函数定义
 ### Abs
 
 #### 详细描述
-Abs returns the absolute value of x.
+Abs 返回x的绝对值
 
-Special cases are:
-
-	Abs(±Inf) = +Inf
-	Abs(NaN) = NaN
+Example:
+```
+math.Abs(-1) // 1
+math.Abs(1) // 1
+```
 
 
 #### 定义
@@ -44,13 +45,13 @@ Special cases are:
 ### Ceil
 
 #### 详细描述
-Ceil returns the least integer value greater than or equal to x.
+Ceil 返回不小于x的最小整数
 
-Special cases are:
-
-	Ceil(±0) = ±0
-	Ceil(±Inf) = ±Inf
-	Ceil(NaN) = NaN
+Example:
+```
+math.Ceil(1.5) // 2
+math.Ceil(-1.5) // -1
+```
 
 
 #### 定义
@@ -71,13 +72,13 @@ Special cases are:
 ### Floor
 
 #### 详细描述
-Floor returns the greatest integer value less than or equal to x.
+Floor 返回不大于x的最大整数
 
-Special cases are:
-
-	Floor(±0) = ±0
-	Floor(±Inf) = ±Inf
-	Floor(NaN) = NaN
+Example:
+```
+math.Floor(1.5) // 1
+math.Floor(-1.5) // -2
+```
 
 
 #### 定义
@@ -135,30 +136,13 @@ NaN returns an IEEE 754 “not-a-number” value.
 ### Pow
 
 #### 详细描述
-Pow returns x**y, the base-x exponential of y.
+Pow 返回x的y次方
 
-Special cases are (in order):
-
-	Pow(x, ±0) = 1 for any x
-	Pow(1, y) = 1 for any y
-	Pow(x, 1) = x for any x
-	Pow(NaN, y) = NaN
-	Pow(x, NaN) = NaN
-	Pow(±0, y) = ±Inf for y an odd integer &lt; 0
-	Pow(±0, -Inf) = +Inf
-	Pow(±0, +Inf) = +0
-	Pow(±0, y) = +Inf for finite y &lt; 0 and not an odd integer
-	Pow(±0, y) = ±0 for y an odd integer &gt; 0
-	Pow(±0, y) = +0 for finite y &gt; 0 and not an odd integer
-	Pow(-1, ±Inf) = 1
-	Pow(x, +Inf) = +Inf for |x| &gt; 1
-	Pow(x, -Inf) = +0 for |x| &gt; 1
-	Pow(x, +Inf) = +0 for |x| &lt; 1
-	Pow(x, -Inf) = +Inf for |x| &lt; 1
-	Pow(+Inf, y) = +Inf for y &gt; 0
-	Pow(+Inf, y) = +0 for y &lt; 0
-	Pow(-Inf, y) = Pow(-0, -y)
-	Pow(x, y) = NaN for finite x &lt; 0 and finite non-integer y
+Example:
+```
+math.Pow(2, 3) // 8
+math.Pow(2, -1) // 0.5
+```
 
 
 #### 定义
@@ -180,12 +164,13 @@ Special cases are (in order):
 ### Pow10
 
 #### 详细描述
-Pow10 returns 10**n, the base-10 exponential of n.
+Pow10 返回10的n次方
 
-Special cases are:
-
-	Pow10(n) =    0 for n &lt; -323
-	Pow10(n) = +Inf for n &gt; 308
+Example:
+```
+math.Pow10(2) // 100
+math.Pow10(-1) // 0.1
+```
 
 
 #### 定义
@@ -233,13 +218,15 @@ Special cases are:
 ### RoundToEven
 
 #### 详细描述
-RoundToEven returns the nearest integer, rounding ties to even.
+RoundToEven 返回四舍五入到最近的偶整数
 
-Special cases are:
-
-	RoundToEven(±0) = ±0
-	RoundToEven(±Inf) = ±Inf
-	RoundToEven(NaN) = NaN
+Example:
+```
+math.RoundToEven(1.5) // 2
+math.RoundToEven(2.5) // 2
+math.RoundToEven(3.5) // 4
+math.RoundToEven(4.5) // 4
+```
 
 
 #### 定义
@@ -260,14 +247,15 @@ Special cases are:
 ### Sqrt
 
 #### 详细描述
-Sqrt returns the square root of x.
+Sqrt 返回一个数的平方根
 
-Special cases are:
+如果x &lt; 0，返回NaN
 
-	Sqrt(+Inf) = +Inf
-	Sqrt(±0) = ±0
-	Sqrt(x &lt; 0) = NaN
-	Sqrt(NaN) = NaN
+Example:
+```
+math.Sqrt(4) // 2
+math.Sqrt(-1) // NaN
+```
 
 
 #### 定义

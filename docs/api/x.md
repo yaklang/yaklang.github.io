@@ -38,7 +38,7 @@
 | [x.ToFloat64](#tofloat64) |ToFloat64 converts any numeric value to float64. |
 | [x.ToMap](#tomap) |ToMap transforms a slice of instances to a Map. []*Foo =&gt; Map&lt;int, *Foo&gt; |
 | [x.Values](#values) |Values creates an array of the own enumerable map values or struct field values. |
-| [x.WaitConnect](#waitconnect) ||
+| [x.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动 |
 | [x.Zip](#zip) |Zip returns a list of tuples, where the i-th tuple contains the i-th element from each of the input iterables. The returned list is truncated in lengt...|
 
 
@@ -808,6 +808,27 @@ Values creates an array of the own enumerable map values or struct field values.
 ### WaitConnect
 
 #### 详细描述
+WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动
+
+Example:
+```
+timeout, _ = time.ParseDuration("1m")
+ctx, cancel = context.WithTimeout(context.New(), timeout)
+
+	go func() {
+	    err = tcp.Serve("127.0.0.1", 8888, tcp.serverCallback(func (conn) {
+	    conn.Send("hello world")
+	    conn.Close()
+	}), tcp.serverContext(ctx))
+
+	    die(err)
+	}()
+
+os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
+conn = tcp.Connect("127.0.0.1", 8888)~
+bytes = conn.Recv()~
+println(string(bytes))
+```
 
 
 #### 定义

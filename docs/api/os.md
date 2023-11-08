@@ -2,51 +2,55 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [os.Chdir](#chdir) |Chdir changes the current working directory to the named directory. If there is an error, it will be of type *PathError. |
-| [os.Chmod](#chmod) |Chmod changes the mode of the named file to mode. If the file is a symbolic link, it changes the mode of the link's target. If there is an error, it w...|
-| [os.Chown](#chown) |Chown changes the numeric uid and gid of the named file. If the file is a symbolic link, it changes the uid and gid of the link's target. A uid or gid...|
-| [os.Clearenv](#clearenv) |Clearenv deletes all environment variables. |
-| [os.Environ](#environ) |Environ returns a copy of strings representing the environment, in the form "key=value". |
-| [os.Executable](#executable) |Executable returns the path name for the executable that started the current process. There is no guarantee that the path is still pointing to the cor...|
-| [os.Exit](#exit) |Exit causes the current program to exit with the given status code. Conventionally, code zero indicates success, non-zero an error. The program termin...|
-| [os.ExpandEnv](#expandenv) |ExpandEnv replaces ${var} or $var in the string according to the values of the current environment variables. References to undefined variables are re...|
-| [os.GetDefaultDNSServers](#getdefaultdnsservers) ||
-| [os.GetMachineID](#getmachineid) ||
-| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) ||
-| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) ||
-| [os.Getegid](#getegid) |Getegid returns the numeric effective group id of the caller.  On Windows, it returns -1. |
-| [os.Getenv](#getenv) |Getenv retrieves the value of the environment variable named by the key. It returns the value, which will be empty if the variable is not present. To ...|
-| [os.Geteuid](#geteuid) |Geteuid returns the numeric effective user id of the caller.  On Windows, it returns -1. |
-| [os.Getgid](#getgid) |Getgid returns the numeric group id of the caller.  On Windows, it returns -1. |
-| [os.Getpid](#getpid) |Getpid returns the process id of the caller. |
-| [os.Getppid](#getppid) |Getppid returns the process id of the caller's parent. |
-| [os.Getuid](#getuid) |Getuid returns the numeric user id of the caller.  On Windows, it returns -1. |
-| [os.Getwd](#getwd) |Getwd returns a rooted path name corresponding to the current directory. If the current directory can be reached via multiple paths (due to symbolic l...|
-| [os.Hostname](#hostname) |Hostname returns the host name reported by the kernel. |
-| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) ||
-| [os.IsTCPPortAvailable](#istcpportavailable) ||
-| [os.IsTCPPortOpen](#istcpportopen) ||
-| [os.IsUDPPortAvailable](#isudpportavailable) ||
-| [os.IsUDPPortOpen](#isudpportopen) ||
-| [os.LookupEnv](#lookupenv) |LookupEnv retrieves the value of the environment variable named by the key. If the variable is present in the environment the value (which may be empt...|
-| [os.LookupHost](#lookuphost) ||
-| [os.LookupIP](#lookupip) ||
-| [os.Pipe](#pipe) |Pipe returns a connected pair of Files; reads from r return bytes written to w. It returns the files and an error, if any. |
-| [os.Remove](#remove) |Remove removes the named file or (empty) directory. If there is an error, it will be of type *PathError. |
-| [os.RemoveAll](#removeall) |RemoveAll removes path and any children it contains. It removes everything it can but returns the first error it encounters. If the path does not exis...|
-| [os.Rename](#rename) |Rename renames (moves) oldpath to newpath. If newpath already exists and is not a directory, Rename replaces it. OS-specific restrictions may apply wh...|
-| [os.Setenv](#setenv) |Setenv sets the value of the environment variable named by the key. It returns an error, if any. |
-| [os.TempDir](#tempdir) |TempDir returns the default directory to use for temporary files.  On Unix systems, it returns $TMPDIR if non-empty, else /tmp. On Windows, it uses Ge...|
-| [os.Unsetenv](#unsetenv) |Unsetenv unsets a single environment variable. |
-| [os.WaitConnect](#waitconnect) ||
+| [os.Chdir](#chdir) |Chdir 改变当前工作目录 |
+| [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限 |
+| [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组 |
+| [os.Clearenv](#clearenv) |Clearenv 清空所有环境变量 |
+| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为"key=value" |
+| [os.Executable](#executable) |Executable 获取当前可执行文件的路径 |
+| [os.Exit](#exit) |Exit 退出当前进程 |
+| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值 |
+| [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片 |
+| [os.GetMachineID](#getmachineid) |GetMachineID 获取每个机器唯一的标识符 |
+| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) |GetRandomAvailableTCPPort 获取随机可用的TCP端口 |
+| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) |GetRandomAvailableUDPPort 获取随机可用的UDP端口 |
+| [os.Getegid](#getegid) |Getegid 获取当前进程的有效组ID |
+| [os.Getenv](#getenv) |Getenv 获取指定的环境变量的值，如果不存在则返回空字符串 |
+| [os.Geteuid](#geteuid) |Geteuid 获取当前进程的有效用户ID |
+| [os.Getgid](#getgid) |Getgid 获取当前进程的组ID |
+| [os.Getpid](#getpid) |Getpid 获取当前进程的进程ID |
+| [os.Getppid](#getppid) |Getppid  获取当前进程的父进程ID |
+| [os.Getuid](#getuid) |Getuid 获取当前进程的用户ID |
+| [os.Getwd](#getwd) |Getwd 获取当前工作目录路径 |
+| [os.Hostname](#hostname) |Hostname 获取主机名 |
+| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) |IsRemoteTCPPortOpen 检查远程TCP端口是否开放 |
+| [os.IsTCPPortAvailable](#istcpportavailable) |IsTCPPortAvailable 检查TCP端口是否可用 |
+| [os.IsTCPPortOpen](#istcpportopen) |IsTCPPortOpen 检查TCP端口是否开放 |
+| [os.IsUDPPortAvailable](#isudpportavailable) |IsUDPPortAvailable 检查UDP端口是否可用 |
+| [os.IsUDPPortOpen](#isudpportopen) |IsUDPPortOpen 检查UDP端口是否开放 |
+| [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值 |
+| [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP |
+| [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP |
+| [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误 |
+| [os.Remove](#remove) |Remove 删除指定的文件或目录 |
+| [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其子路径 |
+| [os.Rename](#rename) |Rename 重命名文件或目录，可以用于移动文件或目录 |
+| [os.Setenv](#setenv) |Setenv 设置指定的环境变量 |
+| [os.TempDir](#tempdir) |TempDir 获取用于存放临时文件的默认目录路径 |
+| [os.Unsetenv](#unsetenv) |Unsetenv 删除指定的环境变量 |
+| [os.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动 |
 
 
 ## 函数定义
 ### Chdir
 
 #### 详细描述
-Chdir changes the current working directory to the named directory.
-If there is an error, it will be of type *PathError.
+Chdir 改变当前工作目录
+
+Example:
+```
+err = os.Chdir("/tmp")
+```
 
 
 #### 定义
@@ -67,35 +71,23 @@ If there is an error, it will be of type *PathError.
 ### Chmod
 
 #### 详细描述
-Chmod changes the mode of the named file to mode.
-If the file is a symbolic link, it changes the mode of the link's target.
-If there is an error, it will be of type *PathError.
+Chmod 改变指定文件或目录的权限
 
-A different subset of the mode bits are used, depending on the
-operating system.
-
-On Unix, the mode's permission bits, ModeSetuid, ModeSetgid, and
-ModeSticky are used.
-
-On Windows, only the 0200 bit (owner writable) of mode is used; it
-controls whether the file's read-only attribute is set or cleared.
-The other bits are currently unused. For compatibility with Go 1.12
-and earlier, use a non-zero mode. Use mode 0400 for a read-only
-file and 0600 for a readable+writable file.
-
-On Plan 9, the mode's permission bits, ModeAppend, ModeExclusive,
-and ModeTemporary are used.
+Example:
+```
+err = os.Chmod("/tmp/test.txt", 0777)
+```
 
 
 #### 定义
 
-`Chmod(name string, mode FileMode) error`
+`Chmod(name string, mode os.FileMode) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| mode | `FileMode` |   |
+| mode | `os.FileMode` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -106,13 +98,12 @@ and ModeTemporary are used.
 ### Chown
 
 #### 详细描述
-Chown changes the numeric uid and gid of the named file.
-If the file is a symbolic link, it changes the uid and gid of the link's target.
-A uid or gid of -1 means to not change that value.
-If there is an error, it will be of type *PathError.
+Chown 改变指定文件或目录的所有者和所属组
 
-On Windows or Plan 9, Chown always returns the syscall.EWINDOWS or
-EPLAN9 error, wrapped in *PathError.
+Example:
+```
+err = os.Chown("/var/www/html/test.txt", 1000, 1000)
+```
 
 
 #### 定义
@@ -135,7 +126,12 @@ EPLAN9 error, wrapped in *PathError.
 ### Clearenv
 
 #### 详细描述
-Clearenv deletes all environment variables.
+Clearenv 清空所有环境变量
+
+Example:
+```
+os.Clearenv()
+```
 
 
 #### 定义
@@ -146,8 +142,15 @@ Clearenv deletes all environment variables.
 ### Environ
 
 #### 详细描述
-Environ returns a copy of strings representing the environment,
-in the form "key=value".
+Environ 获取表示环境变量的字符串切片，格式为"key=value"
+
+Example:
+```
+for env in os.Environ() {
+value = env.SplitN("=", 2)
+printf("key = %s, value = %v\n", value[0], value[1])
+}
+```
 
 
 #### 定义
@@ -163,17 +166,12 @@ in the form "key=value".
 ### Executable
 
 #### 详细描述
-Executable returns the path name for the executable that started
-the current process. There is no guarantee that the path is still
-pointing to the correct executable. If a symlink was used to start
-the process, depending on the operating system, the result might
-be the symlink or the path it pointed to. If a stable result is
-needed, path/filepath.EvalSymlinks might help.
+Executable 获取当前可执行文件的路径
 
-Executable returns an absolute path unless an error occurred.
-
-The main use case is finding resources located relative to an
-executable.
+Example:
+```
+path, err = os.Executable()
+```
 
 
 #### 定义
@@ -190,11 +188,12 @@ executable.
 ### Exit
 
 #### 详细描述
-Exit causes the current program to exit with the given status code.
-Conventionally, code zero indicates success, non-zero an error.
-The program terminates immediately; deferred functions are not run.
+Exit 退出当前进程
 
-For portability, the status code should be in the range [0, 125].
+Example:
+```
+os.Exit(0)
+```
 
 
 #### 定义
@@ -210,9 +209,12 @@ For portability, the status code should be in the range [0, 125].
 ### ExpandEnv
 
 #### 详细描述
-ExpandEnv replaces ${var} or $var in the string according to the values
-of the current environment variables. References to undefined
-variables are replaced by the empty string.
+ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值
+
+Example:
+```
+os.ExpandEnv("PATH = $PATH")
+```
 
 
 #### 定义
@@ -233,6 +235,12 @@ variables are replaced by the empty string.
 ### GetDefaultDNSServers
 
 #### 详细描述
+GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片
+
+Example:
+```
+os.GetDefaultDNSServers()
+```
 
 
 #### 定义
@@ -248,6 +256,12 @@ variables are replaced by the empty string.
 ### GetMachineID
 
 #### 详细描述
+GetMachineID 获取每个机器唯一的标识符
+
+Example:
+```
+os.GetMachineID()
+```
 
 
 #### 定义
@@ -263,6 +277,12 @@ variables are replaced by the empty string.
 ### GetRandomAvailableTCPPort
 
 #### 详细描述
+GetRandomAvailableTCPPort 获取随机可用的TCP端口
+
+Example:
+```
+tcp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
+```
 
 
 #### 定义
@@ -278,6 +298,12 @@ variables are replaced by the empty string.
 ### GetRandomAvailableUDPPort
 
 #### 详细描述
+GetRandomAvailableUDPPort 获取随机可用的UDP端口
+
+Example:
+```
+udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
+```
 
 
 #### 定义
@@ -293,9 +319,12 @@ variables are replaced by the empty string.
 ### Getegid
 
 #### 详细描述
-Getegid returns the numeric effective group id of the caller.
+Getegid 获取当前进程的有效组ID
 
-On Windows, it returns -1.
+Example:
+```
+os.Getegid()
+```
 
 
 #### 定义
@@ -311,9 +340,12 @@ On Windows, it returns -1.
 ### Getenv
 
 #### 详细描述
-Getenv retrieves the value of the environment variable named by the key.
-It returns the value, which will be empty if the variable is not present.
-To distinguish between an empty value and an unset value, use LookupEnv.
+Getenv 获取指定的环境变量的值，如果不存在则返回空字符串
+
+Example:
+```
+value = os.Getenv("PATH")
+```
 
 
 #### 定义
@@ -334,9 +366,12 @@ To distinguish between an empty value and an unset value, use LookupEnv.
 ### Geteuid
 
 #### 详细描述
-Geteuid returns the numeric effective user id of the caller.
+Geteuid 获取当前进程的有效用户ID
 
-On Windows, it returns -1.
+Example:
+```
+os.Geteuid()
+```
 
 
 #### 定义
@@ -352,9 +387,12 @@ On Windows, it returns -1.
 ### Getgid
 
 #### 详细描述
-Getgid returns the numeric group id of the caller.
+Getgid 获取当前进程的组ID
 
-On Windows, it returns -1.
+Example:
+```
+os.Getgid()
+```
 
 
 #### 定义
@@ -370,7 +408,12 @@ On Windows, it returns -1.
 ### Getpid
 
 #### 详细描述
-Getpid returns the process id of the caller.
+Getpid 获取当前进程的进程ID
+
+Example:
+```
+os.Getpid()
+```
 
 
 #### 定义
@@ -386,7 +429,12 @@ Getpid returns the process id of the caller.
 ### Getppid
 
 #### 详细描述
-Getppid returns the process id of the caller's parent.
+Getppid  获取当前进程的父进程ID
+
+Example:
+```
+os.Getppid()
+```
 
 
 #### 定义
@@ -402,9 +450,12 @@ Getppid returns the process id of the caller's parent.
 ### Getuid
 
 #### 详细描述
-Getuid returns the numeric user id of the caller.
+Getuid 获取当前进程的用户ID
 
-On Windows, it returns -1.
+Example:
+```
+os.Getuid()
+```
 
 
 #### 定义
@@ -420,27 +471,34 @@ On Windows, it returns -1.
 ### Getwd
 
 #### 详细描述
-Getwd returns a rooted path name corresponding to the
-current directory. If the current directory can be
-reached via multiple paths (due to symbolic links),
-Getwd may return any one of them.
+Getwd 获取当前工作目录路径
+
+Example:
+```
+cwd, err = os.Getwd()
+```
 
 
 #### 定义
 
-`Getwd() (dir string, err error)`
+`Getwd() (string, error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| dir | `string` |   |
-| err | `error` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
 ### Hostname
 
 #### 详细描述
-Hostname returns the host name reported by the kernel.
+Hostname 获取主机名
+
+Example:
+```
+name, err = os.Hostname()
+```
 
 
 #### 定义
@@ -457,6 +515,12 @@ Hostname returns the host name reported by the kernel.
 ### IsRemoteTCPPortOpen
 
 #### 详细描述
+IsRemoteTCPPortOpen 检查远程TCP端口是否开放
+
+Example:
+```
+os.IsRemoteTCPPortOpen("yaklang.com", 443) // true
+```
 
 
 #### 定义
@@ -478,6 +542,12 @@ Hostname returns the host name reported by the kernel.
 ### IsTCPPortAvailable
 
 #### 详细描述
+IsTCPPortAvailable 检查TCP端口是否可用
+
+Example:
+```
+os.IsTCPPortAvailable(80)
+```
 
 
 #### 定义
@@ -498,6 +568,12 @@ Hostname returns the host name reported by the kernel.
 ### IsTCPPortOpen
 
 #### 详细描述
+IsTCPPortOpen 检查TCP端口是否开放
+
+Example:
+```
+os.IsTCPPortOpen(80)
+```
 
 
 #### 定义
@@ -518,6 +594,12 @@ Hostname returns the host name reported by the kernel.
 ### IsUDPPortAvailable
 
 #### 详细描述
+IsUDPPortAvailable 检查UDP端口是否可用
+
+Example:
+```
+os.IsUDPPortAvailable(80)
+```
 
 
 #### 定义
@@ -538,6 +620,12 @@ Hostname returns the host name reported by the kernel.
 ### IsUDPPortOpen
 
 #### 详细描述
+IsUDPPortOpen 检查UDP端口是否开放
+
+Example:
+```
+os.IsUDPPortOpen(80)
+```
 
 
 #### 定义
@@ -558,11 +646,12 @@ Hostname returns the host name reported by the kernel.
 ### LookupEnv
 
 #### 详细描述
-LookupEnv retrieves the value of the environment variable named
-by the key. If the variable is present in the environment the
-value (which may be empty) is returned and the boolean is true.
-Otherwise the returned value will be empty and the boolean will
-be false.
+LookupEnv 获取指定的环境变量的值
+
+Example:
+```
+value, ok = os.LookupEnv("PATH")
+```
 
 
 #### 定义
@@ -584,6 +673,12 @@ be false.
 ### LookupHost
 
 #### 详细描述
+LookupHost 通过DNS服务器，根据域名查找IP
+
+Example:
+```
+os.LookupHost("www.yaklang.com")
+```
 
 
 #### 定义
@@ -604,6 +699,12 @@ be false.
 ### LookupIP
 
 #### 详细描述
+LookupIP 通过DNS服务器，根据域名查找IP
+
+Example:
+```
+os.LookupIP("www.yaklang.com")
+```
 
 
 #### 定义
@@ -624,27 +725,45 @@ be false.
 ### Pipe
 
 #### 详细描述
-Pipe returns a connected pair of Files; reads from r return bytes written to w.
-It returns the files and an error, if any.
+Pipe 创建一个管道，返回一个读取端和一个写入端以及错误
+
+Example:
+```
+r, w, err = os.Pipe()
+die(err)
+
+	go func {
+	    w.WriteString("hello yak")
+	    w.Close()
+	}
+
+bytes, err = io.ReadAll(r)
+die(err)
+dump(bytes)
+```
 
 
 #### 定义
 
-`Pipe() (r *File, w *File, err error)`
+`Pipe() (r *os.File, w *os.File, err error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r | `*File` |   |
-| w | `*File` |   |
+| r | `*os.File` |   |
+| w | `*os.File` |   |
 | err | `error` |   |
 
 
 ### Remove
 
 #### 详细描述
-Remove removes the named file or (empty) directory.
-If there is an error, it will be of type *PathError.
+Remove 删除指定的文件或目录
+
+Example:
+```
+os.Remove("/tmp/test.txt")
+```
 
 
 #### 定义
@@ -665,21 +784,22 @@ If there is an error, it will be of type *PathError.
 ### RemoveAll
 
 #### 详细描述
-RemoveAll removes path and any children it contains.
-It removes everything it can but returns the first error
-it encounters. If the path does not exist, RemoveAll
-returns nil (no error).
-If there is an error, it will be of type *PathError.
+RemoveAll 递归删除指定的路径及其子路径
+
+Example:
+```
+os.RemoveAll("/tmp")
+```
 
 
 #### 定义
 
-`RemoveAll(path string) error`
+`RemoveAll(name string) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| path | `string` |   |
+| name | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -690,11 +810,13 @@ If there is an error, it will be of type *PathError.
 ### Rename
 
 #### 详细描述
-Rename renames (moves) oldpath to newpath.
-If newpath already exists and is not a directory, Rename replaces it.
-OS-specific restrictions may apply when oldpath and newpath are in different directories.
-Even within the same directory, on non-Unix platforms Rename is not an atomic operation.
-If there is an error, it will be of type *LinkError.
+Rename 重命名文件或目录，可以用于移动文件或目录
+
+Example:
+```
+os.Rename("/tmp/test.txt", "/tmp/test2.txt")
+os.Rename("/tmp/test", "/root/test")
+```
 
 
 #### 定义
@@ -716,8 +838,12 @@ If there is an error, it will be of type *LinkError.
 ### Setenv
 
 #### 详细描述
-Setenv sets the value of the environment variable named by the key.
-It returns an error, if any.
+Setenv 设置指定的环境变量
+
+Example:
+```
+os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
+```
 
 
 #### 定义
@@ -739,15 +865,12 @@ It returns an error, if any.
 ### TempDir
 
 #### 详细描述
-TempDir returns the default directory to use for temporary files.
+TempDir 获取用于存放临时文件的默认目录路径
 
-On Unix systems, it returns $TMPDIR if non-empty, else /tmp.
-On Windows, it uses GetTempPath, returning the first non-empty
-value from %TMP%, %TEMP%, %USERPROFILE%, or the Windows directory.
-On Plan 9, it returns /tmp.
-
-The directory is neither guaranteed to exist nor have accessible
-permissions.
+Example:
+```
+os.TempDir()
+```
 
 
 #### 定义
@@ -763,7 +886,12 @@ permissions.
 ### Unsetenv
 
 #### 详细描述
-Unsetenv unsets a single environment variable.
+Unsetenv 删除指定的环境变量
+
+Example:
+```
+os.Unsetenv("PATH")
+```
 
 
 #### 定义
@@ -784,6 +912,27 @@ Unsetenv unsets a single environment variable.
 ### WaitConnect
 
 #### 详细描述
+WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动
+
+Example:
+```
+timeout, _ = time.ParseDuration("1m")
+ctx, cancel = context.WithTimeout(context.New(), timeout)
+
+	go func() {
+	    err = tcp.Serve("127.0.0.1", 8888, tcp.serverCallback(func (conn) {
+	    conn.Send("hello world")
+	    conn.Close()
+	}), tcp.serverContext(ctx))
+
+	    die(err)
+	}()
+
+os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
+conn = tcp.Connect("127.0.0.1", 8888)~
+bytes = conn.Recv()~
+println(string(bytes))
+```
 
 
 #### 定义
