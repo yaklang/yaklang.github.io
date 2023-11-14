@@ -301,7 +301,7 @@ AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，�
 Example:
 ```
 _, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
-poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "&lt;?php phpinfo(); ?&gt;", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -2187,7 +2187,7 @@ appendUploadFile 是一个请求选项参数，用于改变请求报文，添加
 
 Example:
 ```
-poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "&lt;?php phpinfo(); ?&gt;", "image/jpeg"))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg"))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -2617,7 +2617,7 @@ Example:
 count = 3
 poc.Get("https://pie.dev/redirect/5", poc.redirectHandler(func(https, req, rsp) {
 count--
-return count &gt;= 0
+return count >= 0
 })) // 向 pie.edv 发起请求，使用自定义 redirectHandler 函数，使用count控制，进行最多3次重定向
 ```
 

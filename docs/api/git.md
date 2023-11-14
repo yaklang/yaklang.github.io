@@ -152,7 +152,11 @@ IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(co
 
 Example:
 ```
-git.IterateCommit("D:/coding/golang/src/yaklang", git.filterReference((ref) =&gt; {return !ref.Name().Contains("ci")}), git.filterCommit((c) =&gt; { return c.Author.Name != "xxx" }), git.handleCommit((c) =&gt; { println(c.String()) })) // 遍历提交记录，过滤名字中包含ci的引用记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
+// 遍历提交记录，过滤名字中包含ci的引用记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.filterCommit((c) => { return c.Author.Name != "xxx" }),
+git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -410,7 +414,10 @@ filterCommit 是一个选项函数，它接收一个回调函数，这个函数�
 
 Example:
 ```
-git.IterateCommit("D:/coding/golang/src/yaklang", git.filterCommit((c) =&gt; { return c.Author.Name != "xxx" }), git.handleCommit((c) =&gt; { println(c.String()) })) // 遍历提交记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
+// 遍历提交记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterCommit((c) => { return c.Author.Name != "xxx" }),
+git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -436,7 +443,10 @@ filterReference 是一个选项函数，它接收一个回调函数，这个函�
 
 Example:
 ```
-git.IterateCommit("D:/coding/golang/src/yaklang", git.filterReference((ref) =&gt; {return !ref.Name().Contains("ci")}), git.handleReference((ref) =&gt; { println(ref.String()) })) // 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
+// 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.handleReference((ref) => { println(ref.String()) }))
 ```
 
 
@@ -488,7 +498,8 @@ handleCommit 是一个选项函数，它接收一个回调函数，这个函数�
 
 Example:
 ```
-git.IterateCommit("D:/coding/golang/src/yaklang", git.handleCommit((c) =&gt; { println(c.String()) })) // 遍历提交记录，打印每个提交记录
+// 遍历提交记录，打印每个提交记录
+git.IterateCommit("D:/coding/golang/src/yaklang", git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -514,7 +525,10 @@ handleReference 是一个选项函数，它接收一个回调函数，这个函�
 
 Example:
 ```
-git.IterateCommit("D:/coding/golang/src/yaklang", git.filterReference((ref) =&gt; {return !ref.Name().Contains("ci")}), git.handleReference((ref) =&gt; { println(ref.String()) })) // 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
+// 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.handleReference((ref) => { println(ref.String()) }))
 ```
 
 

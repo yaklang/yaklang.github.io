@@ -12,11 +12,11 @@
 | [time.Parse](#parse) ||
 | [time.ParseDuration](#parseduration) ||
 | [time.Since](#since) |Since returns the time elapsed since t. It is shorthand for time.Now().Sub(t). |
-| [time.Sleep](#sleep) ||
+| [time.Sleep](#sleep) |sleep 用于让当前协程休眠一段时间，其单位为秒 |
 | [time.Unix](#unix) |Unix returns the local Time corresponding to the given Unix time, sec seconds and nsec nanoseconds since January 1, 1970 UTC. It is valid to pass nsec...|
 | [time.Until](#until) |Until returns the duration until t. It is shorthand for t.Sub(time.Now()). |
 | [time.now](#now) |Now returns the current local time. |
-| [time.sleep](#sleep) ||
+| [time.sleep](#sleep) |sleep 用于让当前协程休眠一段时间，其单位为秒 |
 
 
 ## 函数定义
@@ -220,6 +220,12 @@ It is shorthand for time.Now().Sub(t).
 ### Sleep
 
 #### 详细描述
+sleep 用于让当前协程休眠一段时间，其单位为秒
+
+Example:
+```
+sleep(1.5) // 休眠1.5秒
+```
 
 
 #### 定义
@@ -299,6 +305,12 @@ Now returns the current local time.
 ### sleep
 
 #### 详细描述
+sleep 用于让当前协程休眠一段时间，其单位为秒
+
+Example:
+```
+sleep(1.5) // 休眠1.5秒
+```
 
 
 #### 定义

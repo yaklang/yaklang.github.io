@@ -26,6 +26,7 @@
 | [str.ExtractURLFromHTTPRequest](#extracturlfromhttprequest) |ExtractURLFromHTTPRequest 从 HTTP 请求结构体中提取 URL，返回URL结构体与错误 |
 | [str.ExtractURLFromHTTPRequestRaw](#extracturlfromhttprequestraw) |ExtractURLFromHTTPRequestRaw 从原始 HTTP 请求报文中提取 URL，返回URL结构体与错误 |
 | [str.Fields](#fields) |Fields 返回将字符串s按照空白字符（'\t', '\n', '\v', '\f', '\r', ' ', 0x85, 0xA0）分割的字符串切片 |
+| [str.FilterPorts](#filterports) |FilterPorts 接受两个字符串形式的端口列表作为参数，返回一个新的端口列表， 其中包含了在 `ports1` 中但不在 `ports2` 中的所有端口。 这个函数首先将两个输入字符串解析为端口列表，然后创建一个映射（或集合）来存储 `ports2` 中的所有端口。 然后，它遍历 `ports...|
 | [str.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复后的请求 |
 | [str.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响应，响应体和错误 |
 | [str.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。 |
@@ -101,6 +102,7 @@
 | [str.RandSecret](#randsecret) |RandSecret 返回在所有可见ascii字符表中随机挑选 n 个字符组成的密码字符串，这个密码经过str.IsStrongPassword验证，即为强密码 |
 | [str.RandStr](#randstr) |RandStringBytes 返回在大小写字母表中随机挑选 n 个字符组成的字符串 |
 | [str.RegexpMatch](#regexpmatch) |RegexpMatch 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false |
+| [str.RemoveDuplicatePorts](#removeduplicateports) |RemoveDuplicatePorts 解析两个字符串形式的端口列表，并使用布谷鸟过滤器进行去重。 这个函数首先创建一个布谷鸟过滤器，然后将两个输入字符串解析为端口列表。 接着，它遍历这两个列表，将每个端口添加到布谷鸟过滤器中，如果这个端口之前没有被添加过， 那么它也会被添加到结果列表中。最后，函...|
 | [str.RemoveRepeat](#removerepeat) |RemoveRepeat 移除字符串切片slc中的重复元素 |
 | [str.Repeat](#repeat) |Repeat 返回将字符串s重复count次的字符串 |
 | [str.Replace](#replace) |Replace 返回将字符串s中前n个old字符串替换为new字符串的字符串 |
@@ -135,6 +137,7 @@
 | [str.TrimSpace](#trimspace) |TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串 |
 | [str.TrimSuffix](#trimsuffix) |TrimSuffix 返回将字符串s后缀suffix去掉的字符串 |
 | [str.UrlJoin](#urljoin) |UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL 字符串，并返回错误 |
+| [str.VersionCompare](#versioncompare) |VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&gt;p2返回1,nil, p1&lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err |
 | [str.VersionEqual](#versionequal) |VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 等于 v2 返回 true，否则返回 false |
 | [str.VersionGreater](#versiongreater) |VersionGreater 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于 v2 返回 true，否则返回 false |
 | [str.VersionGreaterEqual](#versiongreaterequal) |VersionGreaterEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于等于 v2 返回 true，否则返回 false |
@@ -699,7 +702,7 @@ ExtractTitle 尝试将传入的字符串进行HTML解析并提取其中的标题
 Example:
 ```
 str.ExtractTitle("hello yak") // ""
-str.ExtractTitle("&lt;title&gt;hello yak&lt;/title&gt;") // "hello yak"
+str.ExtractTitle("<title>hello yak</title>") // "hello yak"
 ```
 
 
@@ -801,6 +804,41 @@ str.Fields("hello world\nhello yak\tand\vyakit") // [hello", "world", "hello", "
 | r1 | `[]string` |   |
 
 
+### FilterPorts
+
+#### 详细描述
+FilterPorts 接受两个字符串形式的端口列表作为参数，返回一个新的端口列表，
+
+其中包含了在 `ports1` 中但不在 `ports2` 中的所有端口。
+
+这个函数首先将两个输入字符串解析为端口列表，然后创建一个映射（或集合）来存储 `ports2` 中的所有端口。
+
+然后，它遍历 `ports1` 中的每个端口，如果这个端口不在 `ports2` 中，那么它就会被添加到结果列表中。
+
+最后，函数返回结果列表，其中包含了所有只在 `ports1` 中出现的端口。
+
+Example:
+```
+FilterPorts("1-10", "2-10") // [1]
+```
+
+
+#### 定义
+
+`FilterPorts(sourcePorts string, excludePorts string) []int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sourcePorts | `string` |   |
+| excludePorts | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]int` |   |
+
+
 ### FixHTTPRequest
 
 #### 详细描述
@@ -834,7 +872,7 @@ FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响�
 
 Example:
 ```
-fixedResponse, body, err = str.FixHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=gbk\r\n\r\n&lt;html&gt;你好&lt;/html&gt;")
+fixedResponse, body, err = str.FixHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=gbk\r\n\r\n<html>你好</html>")
 ```
 
 
@@ -1300,8 +1338,8 @@ IsHtmlResponse 猜测传入的参数是否为原始 HTTP 响应报文
 
 Example:
 ```
-str.IsHtmlResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;") // true
-resp, _ = str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;")
+str.IsHtmlResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html></html>") // true
+resp, _ = str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html></html>")
 str.IsHtmlResponse(resp) // true
 ```
 
@@ -1654,7 +1692,7 @@ IsServerError 猜测传入的参数是否为服务器错误
 
 Example:
 ```
-str.IsServerError(`Fatal error: Uncaught Error: Call to undefined function sum() in F:\xampp\htdocs\test.php:7 Stack trace: #0 {main} thrown in &lt;path&gt; on line 7`) // true，这是PHP报错信息
+str.IsServerError(`Fatal error: Uncaught Error: Call to undefined function sum() in F:\xampp\htdocs\test.php:7 Stack trace: #0 {main} thrown in <path> on line 7`) // true，这是PHP报错信息
 ```
 
 
@@ -1841,8 +1879,8 @@ IsXmlParam 根据传入的参数名和参数值猜测是否为 XML 参数
 
 Example:
 ```
-str.IsXmlParam("xml","&lt;xml&gt;&lt;/xml&gt;") // true，因为参数名为常见的 XML 参数名，且参数值为 XML 格式的字符串
-str.IsXmlParam("X","&lt;xml&gt;&lt;/xml&gt;") // true，因为参数值为 XML 格式的字符串
+str.IsXmlParam("xml","<xml></xml>") // true，因为参数名为常见的 XML 参数名，且参数值为 XML 格式的字符串
+str.IsXmlParam("X","<xml></xml>") // true，因为参数值为 XML 格式的字符串
 str.IsXmlParam("id","1") // false
 ```
 
@@ -1870,8 +1908,8 @@ IsXmlRequest 猜测传入的参数是否为请求头是 XML 格式的原始 HTTP
 
 Example:
 ```
-str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: application/xml\r\n\r\n&lt;xml&gt;&lt;/xml&gt;") // true
-str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;") // false
+str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: application/xml\r\n\r\n<xml></xml>") // true
+str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: text/html\r\n\r\n<html></html>") // false
 ```
 
 
@@ -1897,8 +1935,8 @@ IsXmlValue 尝试将传入的参数转换为字符串，然后猜测其是否是
 
 Example:
 ```
-str.IsXmlValue("&lt;xml&gt;&lt;/xml&gt;") // true
-str.IsXmlValue("&lt;html&gt;&lt;/html&gt;") // false
+str.IsXmlValue("<xml></xml>") // true
+str.IsXmlValue("<html></html>") // false
 ```
 
 
@@ -2823,6 +2861,39 @@ str.RegexpMatch("^[a-z]+$", "abc") // true
 | r1 | `bool` |   |
 
 
+### RemoveDuplicatePorts
+
+#### 详细描述
+RemoveDuplicatePorts 解析两个字符串形式的端口列表，并使用布谷鸟过滤器进行去重。
+
+这个函数首先创建一个布谷鸟过滤器，然后将两个输入字符串解析为端口列表。
+
+接着，它遍历这两个列表，将每个端口添加到布谷鸟过滤器中，如果这个端口之前没有被添加过，
+
+那么它也会被添加到结果列表中。最后，函数返回结果列表，其中包含两个输入字符串中的所有唯一端口。
+
+Example:
+```
+RemoveDuplicatePorts("10086-10088,23333", "10086,10089,23333") // [10086, 10087, 10088, 23333, 10089]
+```
+
+
+#### 定义
+
+`RemoveDuplicatePorts(ports1 string, ports2 string) []int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ports1 | `string` |   |
+| ports2 | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]int` |   |
+
+
 ### RemoveRepeat
 
 #### 详细描述
@@ -3742,6 +3813,29 @@ newURL, err = str.UrlJoin("https://yaklang.com/zxc", "/asd", "qwe") // newURL = 
 |:-----------|:---------- |:-----------|
 | newURL | `string` |   |
 | err | `error` |   |
+
+
+### VersionCompare
+
+#### 详细描述
+VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&gt;p2返回1,nil, p1&lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err
+
+
+#### 定义
+
+`VersionCompare(v1 string, v2 string) (int, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v1 | `string` |   |
+| v2 | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+| r2 | `error` |   |
 
 
 ### VersionEqual
