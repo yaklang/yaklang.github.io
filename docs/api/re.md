@@ -2,55 +2,51 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [re.Compile](#compile) |Compile parses a regular expression and returns, if successful, a Regexp object that can be used to match against text.  When matching against text, t...|
-| [re.CompilePOSIX](#compileposix) |CompilePOSIX is like Compile but restricts the regular expression to POSIX ERE (egrep) syntax and changes the match semantics to leftmost-longest.  Th...|
-| [re.ExtractEmail](#extractemail) ||
-| [re.ExtractHostPort](#extracthostport) |HOSTPORT |
-| [re.ExtractIP](#extractip) ||
-| [re.ExtractIPv4](#extractipv4) ||
-| [re.ExtractIPv6](#extractipv6) ||
-| [re.ExtractMac](#extractmac) ||
-| [re.ExtractPath](#extractpath) |PATHPARAM |
-| [re.ExtractTTY](#extracttty) |TTY |
-| [re.ExtractURL](#extracturl) |URL |
-| [re.Find](#find) ||
-| [re.FindAll](#findall) ||
-| [re.FindAllIndex](#findallindex) ||
-| [re.FindGroup](#findgroup) ||
-| [re.FindGroupAll](#findgroupall) ||
-| [re.FindIndex](#findindex) ||
-| [re.FindSubmatch](#findsubmatch) ||
-| [re.FindSubmatchAll](#findsubmatchall) ||
-| [re.FindSubmatchAllIndex](#findsubmatchallindex) ||
-| [re.FindSubmatchIndex](#findsubmatchindex) ||
-| [re.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。 |
-| [re.Match](#match) |Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false |
-| [re.MustCompile](#mustcompile) |MustCompile is like Compile but panics if the expression cannot be parsed. It simplifies safe initialization of global variables holding compiled regu...|
-| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed. It simplifies safe initialization of global variables holding com...|
-| [re.QuoteMeta](#quotemeta) |QuoteMeta returns a string that escapes all regular expression metacharacters inside the argument text; the returned string is a regular expression ma...|
-| [re.ReplaceAll](#replaceall) ||
-| [re.ReplaceAllWithFunc](#replaceallwithfunc) ||
+| [re.Compile](#compile) |Compile 将正则表达式解析为一个正则表达式结构体引用  |
+| [re.CompilePOSIX](#compileposix) |CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配  |
+| [re.ExtractEmail](#extractemail) |ExtractEmail 提取字符串中所有的 Email 地址  |
+| [re.ExtractHostPort](#extracthostport) |ExtractHostPort 提取字符串中所有的 Host:Port  |
+| [re.ExtractIP](#extractip) |ExtractIP 提取字符串中所有的 IP 地址  |
+| [re.ExtractIPv4](#extractipv4) |ExtractIPv4 提取字符串中所有的 IPv4 地址  |
+| [re.ExtractIPv6](#extractipv6) |ExtractIPv6 提取字符串中所有的 IPv6 地址  |
+| [re.ExtractMac](#extractmac) |ExtractMac 提取字符串中所有的 MAC 地址  |
+| [re.ExtractPath](#extractpath) |ExtractPath 提取URL中的路径和查询字符串  |
+| [re.ExtractTTY](#extracttty) |ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径  |
+| [re.ExtractURL](#extracturl) |ExtractURL 提取字符串中所有的 URL 地址  |
+| [re.Find](#find) |Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串  |
+| [re.FindAll](#findall) |FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片  |
+| [re.FindAllIndex](#findallindex) |FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串的起始位置和结束位置，否则返回空整数的二维切片  |
+| [re.FindGroup](#findgroup) |FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个映射，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射  |
+| [re.FindGroupAll](#findgroupall) |FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一个映射切片，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射切片  |
+| [re.FindIndex](#findindex) |FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长度为2的整数切片，第一个元素为起始位置，第二个元素为结束位置，否则返回空整数切片  |
+| [re.FindSubmatch](#findsubmatch) |FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串，否则返回空字符串切片  |
+| [re.FindSubmatchAll](#findsubmatchall) |FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串，否则返回空字符串切片的二维切片  |
+| [re.FindSubmatchAllIndex](#findsubmatchallindex) |FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片的二维切片  |
+| [re.FindSubmatchIndex](#findsubmatchindex) |FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片  |
+| [re.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。  |
+| [re.Match](#match) |Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false  |
+| [re.MustCompile](#mustcompile) |MustCompile 将正则表达式解析为一个正则表达式对象结构体引用，如果解析失败则会引发崩溃  |
+| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体引用，如果解析失败则会引发崩溃  |
+| [re.QuoteMeta](#quotemeta) |QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式元字符进行转义后的结果  |
+| [re.ReplaceAll](#replaceall) |ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的字符串  |
+| [re.ReplaceAllWithFunc](#replaceallwithfunc) |ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换字符串，并返回替换后的字符串  |
 
 
 ## 函数定义
 ### Compile
 
 #### 详细描述
-Compile parses a regular expression and returns, if successful,
-a Regexp object that can be used to match against text.
+Compile 将正则表达式解析为一个正则表达式结构体引用
 
-When matching against text, the regexp returns a match that
-begins as early as possible in the input (leftmost), and among those
-it chooses the one that a backtracking search would have found first.
-This so-called leftmost-first matching is the same semantics
-that Perl, Python, and other implementations use, although this
-package implements it without the expense of backtracking.
-For POSIX leftmost-longest matching, see CompilePOSIX.
+Example:
+```
+re.Compile("^[a-z]+$")
+```
 
 
 #### 定义
 
-`Compile(expr string) (*Regexp, error)`
+`Compile(expr string) (*regexp.Regexp, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -60,37 +56,24 @@ For POSIX leftmost-longest matching, see CompilePOSIX.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Regexp` |   |
+| r1 | `*regexp.Regexp` |   |
 | r2 | `error` |   |
 
 
 ### CompilePOSIX
 
 #### 详细描述
-CompilePOSIX is like Compile but restricts the regular expression
-to POSIX ERE (egrep) syntax and changes the match semantics to
-leftmost-longest.
+CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配
 
-That is, when matching against text, the regexp returns a match that
-begins as early as possible in the input (leftmost), and among those
-it chooses a match that is as long as possible.
-This so-called leftmost-longest matching is the same semantics
-that early regular expression implementations used and that POSIX
-specifies.
-
-However, there can be multiple leftmost-longest matches, with different
-submatch choices, and here this package diverges from POSIX.
-Among the possible leftmost-longest matches, this package chooses
-the one that a backtracking search would have found first, while POSIX
-specifies that the match be chosen to maximize the length of the first
-subexpression, then the second, and so on from left to right.
-The POSIX rule is computationally prohibitive and not even well-defined.
-See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
+Example:
+```
+re.CompilePOSIX("^[a-z]+$")
+```
 
 
 #### 定义
 
-`CompilePOSIX(expr string) (*Regexp, error)`
+`CompilePOSIX(expr string) (*regexp.Regexp, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -100,13 +83,19 @@ See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Regexp` |   |
+| r1 | `*regexp.Regexp` |   |
 | r2 | `error` |   |
 
 
 ### ExtractEmail
 
 #### 详细描述
+ExtractEmail 提取字符串中所有的 Email 地址
+
+Example:
+```
+re.ExtractEmail("hello your email is anonymous@yaklang.io") // ["anonymous@yaklang.io"]
+```
 
 
 #### 定义
@@ -127,7 +116,12 @@ See https://swtch.com/~rsc/regexp/regexp2.html#posix for details.
 ### ExtractHostPort
 
 #### 详细描述
-HOSTPORT
+ExtractHostPort 提取字符串中所有的 Host:Port
+
+Example:
+```
+re.ExtractHostPort("Open Host:Port\n127.0.0.1:80\n127.0.0.1:443") // ["127.0.0.1:80", "127.0.0.1:443"]
+```
 
 
 #### 定义
@@ -148,6 +142,12 @@ HOSTPORT
 ### ExtractIP
 
 #### 详细描述
+ExtractIP 提取字符串中所有的 IP 地址
+
+Example:
+```
+re.ExtractIP("hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1") // ["127.0.0.1", "fe80::1"]
+```
 
 
 #### 定义
@@ -168,6 +168,12 @@ HOSTPORT
 ### ExtractIPv4
 
 #### 详细描述
+ExtractIPv4 提取字符串中所有的 IPv4 地址
+
+Example:
+```
+re.ExtractIPv4("hello your local ip is 127.0.0.1, your public ip is 1.1.1.1") // ["127.0.0.1", "1.1.1.1"]
+```
 
 
 #### 定义
@@ -188,6 +194,12 @@ HOSTPORT
 ### ExtractIPv6
 
 #### 详细描述
+ExtractIPv6 提取字符串中所有的 IPv6 地址
+
+Example:
+```
+re.ExtractIPv6("hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001:4860:4860::8888") // ["fe80::1", "2001:4860:4860::8888"]
+```
 
 
 #### 定义
@@ -208,6 +220,12 @@ HOSTPORT
 ### ExtractMac
 
 #### 详细描述
+ExtractMac 提取字符串中所有的 MAC 地址
+
+Example:
+```
+re.ExtractMac("hello your mac is 00:00:00:00:00:00") // ["00:00:00:00:00:00"]
+```
 
 
 #### 定义
@@ -228,7 +246,12 @@ HOSTPORT
 ### ExtractPath
 
 #### 详细描述
-PATHPARAM
+ExtractPath 提取URL中的路径和查询字符串
+
+Example:
+```
+re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // ["/docs/api/re?name=anonymous"]
+```
 
 
 #### 定义
@@ -249,7 +272,12 @@ PATHPARAM
 ### ExtractTTY
 
 #### 详细描述
-TTY
+ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径
+
+Example:
+```
+re.ExtractTTY("hello your tty is /dev/pts/1") // ["/dev/pts/1"]
+```
 
 
 #### 定义
@@ -270,7 +298,12 @@ TTY
 ### ExtractURL
 
 #### 详细描述
-URL
+ExtractURL 提取字符串中所有的 URL 地址
+
+Example:
+```
+re.ExtractURL("Yak official website: https://yaklang.com and https://yaklang.io") // ["https://yaklang.com", "https://yaklang.io"]
+```
 
 
 #### 定义
@@ -291,6 +324,12 @@ URL
 ### Find
 
 #### 详细描述
+Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串
+
+Example:
+```
+re.Find("apple is an easy word", "^[a-z]+") // "apple"
+```
 
 
 #### 定义
@@ -312,6 +351,12 @@ URL
 ### FindAll
 
 #### 详细描述
+FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片
+
+Example:
+```
+re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+") // ["yakit", "yaklang"]
+```
 
 
 #### 定义
@@ -333,6 +378,12 @@ URL
 ### FindAllIndex
 
 #### 详细描述
+FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串的起始位置和结束位置，否则返回空整数的二维切片
+
+Example:
+```
+re.FindAllIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [[5, 10], [29, 36]]
+```
 
 
 #### 定义
@@ -354,17 +405,24 @@ URL
 ### FindGroup
 
 #### 详细描述
+FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个映射，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射
+
+Example:
+```
+// {"0": "yakit", "other": "it"}
+re.FindGroup("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
+```
 
 
 #### 定义
 
-`FindGroup(i any, raw string) map[string]string`
+`FindGroup(i any, re string) map[string]string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| raw | `string` |   |
+| re | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -375,6 +433,13 @@ URL
 ### FindGroupAll
 
 #### 详细描述
+FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一个映射切片，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射切片
+
+Example:
+```
+// [{"0": "yakit", "other": "it"}, {"0": "yaklang", "other": "lang"}]
+re.FindGroupAll("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
+```
 
 
 #### 定义
@@ -396,6 +461,12 @@ URL
 ### FindIndex
 
 #### 详细描述
+FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长度为2的整数切片，第一个元素为起始位置，第二个元素为结束位置，否则返回空整数切片
+
+Example:
+```
+re.FindIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [5, 10]
+```
 
 
 #### 定义
@@ -417,6 +488,12 @@ URL
 ### FindSubmatch
 
 #### 详细描述
+FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串，否则返回空字符串切片
+
+Example:
+```
+re.FindSubmatch("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // ["yakit", "it"]
+```
 
 
 #### 定义
@@ -438,6 +515,13 @@ URL
 ### FindSubmatchAll
 
 #### 详细描述
+FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串，否则返回空字符串切片的二维切片
+
+Example:
+```
+// [["yakit", "it"], ["yaklang", "lang"]]
+re.FindSubmatchAll("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
+```
 
 
 #### 定义
@@ -459,6 +543,13 @@ URL
 ### FindSubmatchAllIndex
 
 #### 详细描述
+FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片的二维切片
+
+Example:
+```
+// [[5, 10, 8, 10], [29, 36, 32, 36]]
+re.FindSubmatchAllIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
+```
 
 
 #### 定义
@@ -480,6 +571,12 @@ URL
 ### FindSubmatchIndex
 
 #### 详细描述
+FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片
+
+Example:
+```
+re.FindSubmatchIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // [5, 10, 8, 10]
+```
 
 
 #### 定义
@@ -528,7 +625,7 @@ str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time
 ### Match
 
 #### 详细描述
-Match 使用正则尝试匹配字符串 s，如果匹配成功返回 true，否则返回 false
+Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false
 
 Example:
 ```
@@ -555,14 +652,17 @@ re.Match("^[a-z]+$", "abc") // true
 ### MustCompile
 
 #### 详细描述
-MustCompile is like Compile but panics if the expression cannot be parsed.
-It simplifies safe initialization of global variables holding compiled regular
-expressions.
+MustCompile 将正则表达式解析为一个正则表达式对象结构体引用，如果解析失败则会引发崩溃
+
+Example:
+```
+re.MustCompile("^[a-z]+$")
+```
 
 
 #### 定义
 
-`MustCompile(str string) *Regexp`
+`MustCompile(str string) *regexp.Regexp`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -572,20 +672,23 @@ expressions.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Regexp` |   |
+| r1 | `*regexp.Regexp` |   |
 
 
 ### MustCompilePOSIX
 
 #### 详细描述
-MustCompilePOSIX is like CompilePOSIX but panics if the expression cannot be parsed.
-It simplifies safe initialization of global variables holding compiled regular
-expressions.
+MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体引用，如果解析失败则会引发崩溃
+
+Example:
+```
+re.MustCompilePOSIX("^[a-z]+$")
+```
 
 
 #### 定义
 
-`MustCompilePOSIX(str string) *Regexp`
+`MustCompilePOSIX(str string) *regexp.Regexp`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -595,15 +698,18 @@ expressions.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Regexp` |   |
+| r1 | `*regexp.Regexp` |   |
 
 
 ### QuoteMeta
 
 #### 详细描述
-QuoteMeta returns a string that escapes all regular expression metacharacters
-inside the argument text; the returned string is a regular expression matching
-the literal text.
+QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式元字符进行转义后的结果
+
+Example:
+```
+str.QuoteMeta("^[a-z]+$") // "\^\\[a-z\]\\+$"
+```
 
 
 #### 定义
@@ -624,6 +730,13 @@ the literal text.
 ### ReplaceAll
 
 #### 详细描述
+ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的字符串
+
+Example:
+```
+// "yaklang is a programming language"
+re.ReplaceAll("yakit is programming language", "yak([a-z]+)", "yaklang")
+```
 
 
 #### 定义
@@ -646,6 +759,15 @@ the literal text.
 ### ReplaceAllWithFunc
 
 #### 详细描述
+ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换字符串，并返回替换后的字符串
+
+Example:
+```
+// "yaklang is a programming language"
+re.ReplaceAllWithFunc("yakit is programming language", "yak([a-z]+)", func(s) {
+return "yaklang"
+})
+```
 
 
 #### 定义

@@ -55,13 +55,13 @@
 
 #### 定义
 
-`Bool(name string, opts ...setCliExtraParam) bool`
+`Bool(name string, opts ...SetCliExtraParam) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -76,13 +76,13 @@
 
 #### 定义
 
-`Double(name string, opts ...setCliExtraParam) float64`
+`Double(name string, opts ...SetCliExtraParam) float64`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -97,13 +97,13 @@
 
 #### 定义
 
-`File(name string, opts ...setCliExtraParam) []byte`
+`File(name string, opts ...SetCliExtraParam) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -118,13 +118,13 @@
 
 #### 定义
 
-`FileOrContent(name string, opts ...setCliExtraParam) []byte`
+`FileOrContent(name string, opts ...SetCliExtraParam) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -139,13 +139,13 @@
 
 #### 定义
 
-`Float(name string, opts ...setCliExtraParam) float64`
+`Float(name string, opts ...SetCliExtraParam) float64`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -160,13 +160,13 @@
 
 #### 定义
 
-`Have(name string, opts ...setCliExtraParam) bool`
+`Have(name string, opts ...SetCliExtraParam) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -181,13 +181,13 @@
 
 #### 定义
 
-`Host(name string, opts ...setCliExtraParam) []string`
+`Host(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -202,13 +202,13 @@
 
 #### 定义
 
-`Hosts(name string, opts ...setCliExtraParam) []string`
+`Hosts(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -223,13 +223,13 @@
 
 #### 定义
 
-`Int(name string, opts ...setCliExtraParam) int`
+`Int(name string, opts ...SetCliExtraParam) int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -244,13 +244,13 @@
 
 #### 定义
 
-`Integer(name string, opts ...setCliExtraParam) int`
+`Integer(name string, opts ...SetCliExtraParam) int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -265,13 +265,13 @@
 
 #### 定义
 
-`LineDict(name string, opts ...setCliExtraParam) []string`
+`LineDict(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -286,13 +286,13 @@
 
 #### 定义
 
-`Net(name string, opts ...setCliExtraParam) []string`
+`Net(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -307,13 +307,13 @@
 
 #### 定义
 
-`Network(name string, opts ...setCliExtraParam) []string`
+`Network(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -328,13 +328,13 @@
 
 #### 定义
 
-`Port(name string, opts ...setCliExtraParam) []int`
+`Port(name string, opts ...SetCliExtraParam) []int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -349,13 +349,13 @@
 
 #### 定义
 
-`Ports(name string, opts ...setCliExtraParam) []int`
+`Ports(name string, opts ...SetCliExtraParam) []int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -400,13 +400,13 @@
 
 #### 定义
 
-`String(name string, opts ...setCliExtraParam) string`
+`String(name string, opts ...SetCliExtraParam) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -441,13 +441,13 @@
 
 #### 定义
 
-`Url(name string, opts ...setCliExtraParam) []string`
+`Url(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -462,13 +462,13 @@
 
 #### 定义
 
-`Urls(name string, opts ...setCliExtraParam) []string`
+`Urls(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -523,7 +523,7 @@
 
 #### 定义
 
-`setDefault(i any) setCliExtraParam`
+`setDefault(i any) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -533,7 +533,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setHelp
@@ -543,7 +543,7 @@
 
 #### 定义
 
-`setHelp(i string) setCliExtraParam`
+`setHelp(i string) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -553,7 +553,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setRequired
@@ -563,7 +563,7 @@
 
 #### 定义
 
-`setRequired(t bool) setCliExtraParam`
+`setRequired(t bool) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -573,6 +573,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
 
 

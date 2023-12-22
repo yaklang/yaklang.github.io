@@ -6,7 +6,7 @@
 | [xhtml.Find](#find) ||
 | [xhtml.GenerateXPath](#generatexpath) ||
 | [xhtml.MatchBetween](#matchbetween) ||
-| [xhtml.RandomUpperAndLower](#randomupperandlower) ||
+| [xhtml.RandomUpperAndLower](#randomupperandlower) |RandomUpperAndLower 返回一个随机大小写的字符串  |
 | [xhtml.Walker](#walker) ||
 
 
@@ -101,6 +101,12 @@
 ### RandomUpperAndLower
 
 #### 详细描述
+RandomUpperAndLower 返回一个随机大小写的字符串
+
+Example:
+```
+str.RandomUpperAndLower("target“) // TArGeT
+```
 
 
 #### 定义

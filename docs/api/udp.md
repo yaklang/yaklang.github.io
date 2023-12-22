@@ -20,18 +20,19 @@
 
 #### 定义
 
-`Connect(target string, opts ...udpClientOption) (*udpConn, error)`
+`Connect(target string, portRaw any, opts ...udpClientOption) (*udpConnection, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
+| portRaw | `any` |   |
 | opts | `...udpClientOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*udpConn` |   |
+| r1 | `*udpConnection` |   |
 | r2 | `error` |   |
 
 
@@ -125,12 +126,12 @@
 
 #### 定义
 
-`serverCallback(cb func(*udpConn, []byte, net.Addr)) udpServerOpt`
+`serverCallback(cb func(*udpConnection, []byte)) udpServerOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(*udpConn, []byte, net.Addr)` |   |
+| cb | `func(*udpConnection, []byte)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

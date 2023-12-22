@@ -2,17 +2,6 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
-| [.](#) ||
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
 | [yakit.EnableTable](#enabletable) ||
@@ -29,6 +18,7 @@
 | [yakit.NewPieGraph](#newpiegraph) ||
 | [yakit.NewTable](#newtable) ||
 | [yakit.NewWordCloud](#newwordcloud) ||
+| [yakit.Output](#output) ||
 | [yakit.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [yakit.QueryDomainsByNetwork](#querydomainsbynetwork) ||
 | [yakit.QueryDomainsByTitle](#querydomainsbytitle) ||
@@ -51,123 +41,24 @@
 | [yakit.SetOnlineBaseUrl](#setonlinebaseurl) ||
 | [yakit.StatusCard](#statuscard) ||
 | [yakit.TableData](#tabledata) ||
+| [yakit.TextTabData](#texttabdata) ||
 | [yakit.UpdateOnlineYakitStore](#updateonlineyakitstore) ||
 | [yakit.UpdateYakitStore](#updateyakitstore) ||
 | [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
+| [yakit.YakitDebug](#yakitdebug) ||
+| [yakit.YakitError](#yakiterror) ||
+| [yakit.YakitFile](#yakitfile) ||
+| [yakit.YakitInfo](#yakitinfo) ||
+| [yakit.YakitMarkdown](#yakitmarkdown) ||
+| [yakit.YakitReport](#yakitreport) ||
+| [yakit.YakitSetProgress](#yakitsetprogress) ||
+| [yakit.YakitSetProgressEx](#yakitsetprogressex) ||
+| [yakit.YakitTextBlock](#yakittextblock) ||
+| [yakit.YakitWarn](#yakitwarn) ||
 
 
 ## 函数定义
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
-### 
-
-#### 详细描述
-
-
-#### 定义
-
-``
-
-
 ### AutoInitYakit
 
 #### 详细描述
@@ -304,12 +195,12 @@
 
 #### 定义
 
-`GetOnlineBaseUrl() string`
+`GetOnlineBaseUrl() YAK_ONLINE_BASEURL`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `YAK_ONLINE_BASEURL` |   |
 
 
 ### InitYakit
@@ -449,6 +340,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*YakitGraph` |   |
+
+
+### Output
+
+#### 详细描述
+
+
+#### 定义
+
+`Output(i any) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### QueryDomainsByDomainKeyword
@@ -851,19 +762,19 @@
 
 #### 定义
 
-`StatusCard(id string, data interface) (id string, data interface)`
+`StatusCard(id string, data any, tags ...string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | id | `string` |   |
-| data | `interface` |   |
+| data | `any` |   |
+| tags | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| id | `string` |   |
-| data | `interface` |   |
+| r1 | `` |   |
 
 
 ### TableData
@@ -885,6 +796,22 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*YakitFixedTableData` |   |
+
+
+### TextTabData
+
+#### 详细描述
+
+
+#### 定义
+
+`TextTabData(tabName string, data string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tabName | `string` |   |
+| data | `string` |   |
 
 
 ### UpdateOnlineYakitStore
@@ -957,5 +884,161 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### YakitDebug
+
+#### 详细描述
+
+
+#### 定义
+
+`Debug(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
+
+
+### YakitError
+
+#### 详细描述
+
+
+#### 定义
+
+`Error(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
+
+
+### YakitFile
+
+#### 详细描述
+
+
+#### 定义
+
+`File(fileName string, desc ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| fileName | `string` |   |
+| desc | `...any` |   |
+
+
+### YakitInfo
+
+#### 详细描述
+
+
+#### 定义
+
+`Info(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
+
+
+### YakitMarkdown
+
+#### 详细描述
+
+
+#### 定义
+
+`Markdown(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
+
+
+### YakitReport
+
+#### 详细描述
+
+
+#### 定义
+
+`Report(i int)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `int` |   |
+
+
+### YakitSetProgress
+
+#### 详细描述
+
+
+#### 定义
+
+`SetProgress(f float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `float64` |   |
+
+
+### YakitSetProgressEx
+
+#### 详细描述
+
+
+#### 定义
+
+`SetProgressEx(id string, f float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `string` |   |
+| f | `float64` |   |
+
+
+### YakitTextBlock
+
+#### 详细描述
+
+
+#### 定义
+
+`Text(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
+
+
+### YakitWarn
+
+#### 详细描述
+
+
+#### 定义
+
+`Warn(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
