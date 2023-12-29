@@ -36,7 +36,7 @@
 | [codec.DecodeChunked](#decodechunked) ||
 | [codec.DecodeHex](#decodehex) ||
 | [codec.DecodeHtml](#decodehtml) |UnescapeString unescapes entities like "&lt;" to become "&lt;". It unescapes a larger range of entities than EscapeString escapes. For example, "&aacu...|
-| [codec.DecodeUrl](#decodeurl) |QueryUnescape does the inverse transformation of QueryEscape, converting each 3-byte encoded substring of the form "%AB" into the hex-decoded byte 0xA...|
+| [codec.DecodeUrl](#decodeurl) ||
 | [codec.DoubleDecodeUrl](#doubledecodeurl) ||
 | [codec.DoubleEncodeUrl](#doubleencodeurl) ||
 | [codec.EncodeASCII](#encodeascii) ||
@@ -51,7 +51,8 @@
 | [codec.EncodeUrl](#encodeurl) ||
 | [codec.EscapeHtml](#escapehtml) |EscapeString escapes special characters like "&lt;" to become "&lt;". It escapes only five such characters: &lt;, &gt;, &, ' and ". UnescapeString(Esc...|
 | [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a URL path segment, replacing special characters (including /) with %XX sequences as n...|
-| [codec.EscapeQueryUrl](#escapequeryurl) |QueryEscape escapes the string so it can be safely placed inside a URL query. |
+| [codec.EscapeQueryUrl](#escapequeryurl) ||
+| [codec.EscapeUrl](#escapeurl) ||
 | [codec.FixUTF8](#fixutf8) ||
 | [codec.GB18030ToUTF8](#gb18030toutf8) ||
 | [codec.GBKSafe](#gbksafe) ||
@@ -118,8 +119,8 @@
 | [codec.UTF8ToGB18030](#utf8togb18030) ||
 | [codec.UTF8ToGBK](#utf8togbk) ||
 | [codec.UTF8ToHZGB2312](#utf8tohzgb2312) ||
-| [codec.UnescapePathUrl](#unescapepathurl) |PathUnescape does the inverse transformation of PathEscape, converting each 3-byte encoded substring of the form "%AB" into the hex-decoded byte 0xAB....|
-| [codec.UnescapeQueryUrl](#unescapequeryurl) |QueryUnescape does the inverse transformation of QueryEscape, converting each 3-byte encoded substring of the form "%AB" into the hex-decoded byte 0xA...|
+| [codec.UnescapePathUrl](#unescapepathurl) ||
+| [codec.UnescapeQueryUrl](#unescapequeryurl) ||
 | [codec.UnicodeDecode](#unicodedecode) ||
 | [codec.UnicodeEncode](#unicodeencode) ||
 | [codec.ZeroPadding](#zeropadding) ||
@@ -922,11 +923,6 @@ always true.
 ### DecodeUrl
 
 #### 详细描述
-QueryUnescape does the inverse transformation of QueryEscape,
-converting each 3-byte encoded substring of the form "%AB" into the
-hex-decoded byte 0xAB.
-It returns an error if any % is not followed by two hexadecimal
-digits.
 
 
 #### 定义
@@ -952,7 +948,7 @@ digits.
 
 #### 定义
 
-`DoubleDecodeUrl(i string) (string, error)`
+`DoubleDecodeUrl(i string) (string , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -962,8 +958,8 @@ digits.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| string | `` |   |
+| error | `` |   |
 
 
 ### DoubleEncodeUrl
@@ -973,17 +969,17 @@ digits.
 
 #### 定义
 
-`DoubleEncodeUrl(i interface) (i interface)`
+`DoubleEncodeUrl(i any) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `interface` |   |
+| i | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| i | `interface` |   |
+| r1 | `string` |   |
 
 
 ### EncodeASCII
@@ -1235,13 +1231,31 @@ replacing special characters (including /) with %XX sequences as needed.
 ### EscapeQueryUrl
 
 #### 详细描述
-QueryEscape escapes the string so it can be safely placed
-inside a URL query.
 
 
 #### 定义
 
 `EscapeQueryUrl(s string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### EscapeUrl
+
+#### 详细描述
+
+
+#### 定义
+
+`EscapeUrl(s string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2677,13 +2691,6 @@ one-character string.)
 ### UnescapePathUrl
 
 #### 详细描述
-PathUnescape does the inverse transformation of PathEscape,
-converting each 3-byte encoded substring of the form "%AB" into the
-hex-decoded byte 0xAB. It returns an error if any % is not followed
-by two hexadecimal digits.
-
-PathUnescape is identical to QueryUnescape except that it does not
-unescape '+' to ' ' (space).
 
 
 #### 定义
@@ -2705,11 +2712,6 @@ unescape '+' to ' ' (space).
 ### UnescapeQueryUrl
 
 #### 详细描述
-QueryUnescape does the inverse transformation of QueryEscape,
-converting each 3-byte encoded substring of the form "%AB" into the
-hex-decoded byte 0xAB.
-It returns an error if any % is not followed by two hexadecimal
-digits.
 
 
 #### 定义

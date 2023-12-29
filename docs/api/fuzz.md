@@ -286,17 +286,18 @@ fuzz
 
 #### 定义
 
-`UrlsToHTTPRequests(target ...interface) (target ...interface)`
+`UrlsToHTTPRequests(target ...any) (*FuzzHTTPRequestBatch , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| target | `...interface` |   |
+| target | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| target | `...interface` |   |
+| *FuzzHTTPRequestBatch | `` |   |
+| error | `` |   |
 
 
 ### WithConcurrentLimit

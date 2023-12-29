@@ -2,116 +2,122 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [poc.AppendHTTPPacketCookie](#appendhttppacketcookie) |AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加Cookie请求头中的值 |
-| [poc.AppendHTTPPacketFormEncoded](#appendhttppacketformencoded) |AppendHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，添加请求体中的表单 |
-| [poc.AppendHTTPPacketHeader](#appendhttppacketheader) |AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头 |
-| [poc.AppendHTTPPacketPath](#appendhttppacketpath) |AppendHTTPPacketPath 是一个辅助函数，用于改变请求报文，在现有请求路径后添加请求路径 |
-| [poc.AppendHTTPPacketPostParam](#appendhttppacketpostparam) |AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添加POST请求参数 |
-| [poc.AppendHTTPPacketQueryParam](#appendhttppacketqueryparam) |AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，添加GET请求参数 |
-| [poc.AppendHTTPPacketUploadFile](#appendhttppacketuploadfile) |AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type) |
-| [poc.BasicRequest](#basicrequest) |BasicRequest 返回一个基本的 HTTP 请求，用于测试，它实际上返回一个b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n" |
-| [poc.BuildRequest](#buildrequest) |BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，修改请求报文的选项将被作用，最后返回构建好的请求报文 |
-| [poc.CurlToHTTPRequest](#curltohttprequest) |CurlToHTTPRequest 尝试将curl命令转换为HTTP请求报文，其返回值为bytes，即转换后的HTTP请求报文 |
-| [poc.Delete](#delete) |Delete 向指定URL发送DELETE请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.DeleteHTTPPacketCookie](#deletehttppacketcookie) |DeleteHTTPPacketCookie 是一个辅助函数，用于改变请求报文，删除Cookie中的值 |
-| [poc.DeleteHTTPPacketForm](#deletehttppacketform) |DeleteHTTPPacketForm 是一个辅助函数，用于改变请求报文，删除POST请求表单 |
-| [poc.DeleteHTTPPacketHeader](#deletehttppacketheader) |DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头 |
-| [poc.DeleteHTTPPacketPostParam](#deletehttppacketpostparam) |DeleteHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，删除POST请求参数 |
-| [poc.DeleteHTTPPacketQueryParam](#deletehttppacketqueryparam) |DeleteHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，删除GET请求参数 |
-| [poc.Do](#do) |关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.FixHTTPPacketCRLF](#fixhttppacketcrlf) |FixHTTPPacketCRLF 修复一个HTTP报文的CRLF问题（正常的报文每行末尾为\r\n，但是某些报文可能是有\n），如果noFixLength为true，则不会修复Content-Length，否则会尝试修复Content-Length |
-| [poc.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复后的请求 |
-| [poc.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的HTTP响应报文进行修复，并返回修复后的响应 |
-| [poc.Get](#get) |Get 向指定URL发送GET请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.GetAllHTTPPacketPostParams](#getallhttppacketpostparams) |GetAllHTTPPacketPostParams 是一个辅助函数，用于获取请求报文中的所有POST请求参数，其返回值为map[string]string，其中键为参数名，值为参数值 |
-| [poc.GetAllHTTPPacketQueryParams](#getallhttppacketqueryparams) |GetAllHTTPPacketQueryParams 是一个辅助函数，用于获取请求报文中的所有GET请求参数，其返回值为map[string]string，其中键为参数名，值为参数值 |
-| [poc.GetHTTPPacketBody](#gethttppacketbody) |GetHTTPPacketBody 是一个辅助函数，用于获取请求报文中的请求体，其返回值为bytes |
-| [poc.GetHTTPPacketContentType](#gethttppacketcontenttype) |GetHTTPPacketContentType 是一个辅助函数，用于获取请求报文中的Content-Type请求头，其返回值为string |
-| [poc.GetHTTPPacketCookie](#gethttppacketcookie) |GetHTTPPacketCookie 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为string |
-| [poc.GetHTTPPacketCookieFirst](#gethttppacketcookiefirst) |GetHTTPPacketCookieFirst 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为string |
-| [poc.GetHTTPPacketCookieValues](#gethttppacketcookievalues) |GetHTTPPacketCookieValues 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为[]string，这是因为Cookie可能存在多个相同键名的值 |
-| [poc.GetHTTPPacketCookies](#gethttppacketcookies) |GetHTTPPacketCookies 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string]string |
-| [poc.GetHTTPPacketCookiesFull](#gethttppacketcookiesfull) |GetHTTPPacketCookiesFull 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string][]string，这是因为Cookie可能存在多个相同键名的值 |
-| [poc.GetHTTPPacketFirstLine](#gethttppacketfirstline) |GetHTTPPacketFirstLine 是一个辅助函数，用于获取 HTTP 报文中第一行的值，其返回值为string，string，string 在请求报文中，其三个返回值分别为：请求方法，请求URI，协议版本 在响应报文中，其三个返回值分别为：协议版本，状态码，状态码描述 |
-| [poc.GetHTTPPacketHeader](#gethttppacketheader) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string |
-| [poc.GetHTTPPacketHeaders](#gethttppacketheaders) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string]string |
-| [poc.GetHTTPPacketHeadersFull](#gethttppacketheadersfull) |GetHTTPPacketHeadersFull 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string][]string，这是因为请求头可能存在多个相同键名的值 |
-| [poc.GetHTTPPacketPostParam](#gethttppacketpostparam) |GetHTTPPacketPostParam 是一个辅助函数，用于获取请求报文中指定的POST请求参数，其返回值为string |
-| [poc.GetHTTPPacketQueryParam](#gethttppacketqueryparam) |GetHTTPPacketQueryParam 是一个辅助函数，用于获取请求报文中指定的GET请求参数，其返回值为string |
-| [poc.GetStatusCodeFromResponse](#getstatuscodefromresponse) |GetStatusCodeFromResponse 是一个辅助函数，用于获取响应报文中的状态码，其返回值为int |
-| [poc.HTTP](#http) |HTTP 发送请求并且返回原始响应报文，原始请求报文以及错误，它的第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 |
-| [poc.HTTPEx](#httpex) |HTTPEx 与HTTP类似，它发送请求并且返回响应结构体，请求结构体以及错误，它的第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用...|
-| [poc.HTTPPacketForceChunked](#httppacketforcechunked) |HTTPPacketForceChunked 将一个HTTP报文的body强制转换为chunked编码 |
-| [poc.HTTPRequestToCurl](#httprequesttocurl) |HTTPRequestToCurl 尝试将HTTP请求报文转换为curl命令。第一个参数为是否使用HTTPS，第二个参数为HTTP请求报文，其返回值为string，即转换后的curl命令 |
-| [poc.Head](#head) |Head 向指定URL发送HEAD请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.IsResponse](#isresponse) |IsResp 判断传入的数据是否为 HTTP 响应报文 |
-| [poc.Options](#options) |Options 向指定URL发送OPTIONS请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求 |
-| [poc.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应 |
-| [poc.ParseUrlToHTTPRequestRaw](#parseurltohttprequestraw) |ParseUrlToHTTPRequestRaw 将URL解析为原始 HTTP 请求报文，返回是否为 HTTPS，原始请求报文与错误 |
-| [poc.Post](#post) |Post 向指定URL发送POST请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等 关于结构体中的可用字段和方法可以使用desc函数进行查看 |
-| [poc.ReplaceAllHTTPPacketPostParams](#replaceallhttppacketpostparams) |ReplaceAllHTTPPacketPostParams 是一个辅助函数，用于改变请求报文，修改所有POST请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为POST请求参数名，value为POST请求参数值 |
-| [poc.ReplaceAllHTTPPacketQueryParams](#replaceallhttppacketqueryparams) |ReplaceAllHTTPPacketQueryParams 是一个辅助函数，用于改变请求报文，修改所有GET请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为请求参数名，value为请求参数值 |
-| [poc.ReplaceBody](#replacebody) |ReplaceBody 将原始 HTTP 请求报文中的 body 替换为指定的 body，并指定是否为 chunked，返回新的 HTTP 请求报文 |
+| [poc.AppendHTTPPacketCookie](#appendhttppacketcookie) |AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加Cookie请求头中的值  |
+| [poc.AppendHTTPPacketFormEncoded](#appendhttppacketformencoded) |AppendHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，添加请求体中的表单  |
+| [poc.AppendHTTPPacketHeader](#appendhttppacketheader) |AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头  |
+| [poc.AppendHTTPPacketPath](#appendhttppacketpath) |AppendHTTPPacketPath 是一个辅助函数，用于改变请求报文，在现有请求路径后添加请求路径  |
+| [poc.AppendHTTPPacketPostParam](#appendhttppacketpostparam) |AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添加POST请求参数  |
+| [poc.AppendHTTPPacketQueryParam](#appendhttppacketqueryparam) |AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，添加GET请求参数  |
+| [poc.AppendHTTPPacketUploadFile](#appendhttppacketuploadfile) |AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)  |
+| [poc.BasicRequest](#basicrequest) ||
+| [poc.BasicResponse](#basicresponse) ||
+| [poc.BuildRequest](#buildrequest) |BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，修改请求报文的选项将被作用，最后返回构建好的请求报文  |
+| [poc.CurlToHTTPRequest](#curltohttprequest) |CurlToHTTPRequest 尝试将curl命令转换为HTTP请求报文，其返回值为bytes，即转换后的HTTP请求报文  |
+| [poc.Delete](#delete) |Delete 向指定URL发送DELETE请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.DeleteHTTPPacketCookie](#deletehttppacketcookie) |DeleteHTTPPacketCookie 是一个辅助函数，用于改变请求报文，删除Cookie中的值  |
+| [poc.DeleteHTTPPacketForm](#deletehttppacketform) |DeleteHTTPPacketForm 是一个辅助函数，用于改变请求报文，删除POST请求表单  |
+| [poc.DeleteHTTPPacketHeader](#deletehttppacketheader) |DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头  |
+| [poc.DeleteHTTPPacketPostParam](#deletehttppacketpostparam) |DeleteHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，删除POST请求参数  |
+| [poc.DeleteHTTPPacketQueryParam](#deletehttppacketqueryparam) |DeleteHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，删除GET请求参数  |
+| [poc.Do](#do) |关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.FixHTTPPacketCRLF](#fixhttppacketcrlf) |FixHTTPPacketCRLF 修复一个HTTP报文的CRLF问题（正常的报文每行末尾为\r\n，但是某些报文可能是有\n），如果noFixLength为true，则不会修复Content-Length，否则会尝试修复Content-Length  |
+| [poc.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复后的请求  |
+| [poc.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的HTTP响应报文进行修复，并返回修复后的响应  |
+| [poc.Get](#get) |Get 向指定URL发送GET请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.GetAllHTTPPacketPostParams](#getallhttppacketpostparams) |GetAllHTTPPacketPostParams 是一个辅助函数，用于获取请求报文中的所有POST请求参数，其返回值为map[string]string，其中键为参数名，值为参数值  |
+| [poc.GetAllHTTPPacketQueryParams](#getallhttppacketqueryparams) |GetAllHTTPPacketQueryParams 是一个辅助函数，用于获取请求报文中的所有GET请求参数，其返回值为map[string]string，其中键为参数名，值为参数值  |
+| [poc.GetHTTPPacketBody](#gethttppacketbody) |GetHTTPPacketBody 是一个辅助函数，用于获取请求报文中的请求体，其返回值为bytes  |
+| [poc.GetHTTPPacketContentType](#gethttppacketcontenttype) |GetHTTPPacketContentType 是一个辅助函数，用于获取请求报文中的Content-Type请求头，其返回值为string  |
+| [poc.GetHTTPPacketCookie](#gethttppacketcookie) |GetHTTPPacketCookie 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为string  |
+| [poc.GetHTTPPacketCookieFirst](#gethttppacketcookiefirst) |GetHTTPPacketCookieFirst 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为string  |
+| [poc.GetHTTPPacketCookieValues](#gethttppacketcookievalues) |GetHTTPPacketCookieValues 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为[]string，这是因为Cookie可能存在多个相同键名的值  |
+| [poc.GetHTTPPacketCookies](#gethttppacketcookies) |GetHTTPPacketCookies 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string]string  |
+| [poc.GetHTTPPacketCookiesFull](#gethttppacketcookiesfull) |GetHTTPPacketCookiesFull 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string][]string，这是因为Cookie可能存在多个相同键名的值  |
+| [poc.GetHTTPPacketFirstLine](#gethttppacketfirstline) |GetHTTPPacketFirstLine 是一个辅助函数，用于获取 HTTP 报文中第一行的值，其返回值为string，string，string  在请求报文中，其三个返回值分别为：请求方法，请求URI，协议版本  在响应报文中，其三个返回值分别为：协议版本，状态码，状态码描述  |
+| [poc.GetHTTPPacketHeader](#gethttppacketheader) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string  |
+| [poc.GetHTTPPacketHeaders](#gethttppacketheaders) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string]string  |
+| [poc.GetHTTPPacketHeadersFull](#gethttppacketheadersfull) |GetHTTPPacketHeadersFull 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string][]string，这是因为请求头可能存在多个相同键名的值  |
+| [poc.GetHTTPPacketPostParam](#gethttppacketpostparam) |GetHTTPPacketPostParam 是一个辅助函数，用于获取请求报文中指定的POST请求参数，其返回值为string  |
+| [poc.GetHTTPPacketQueryParam](#gethttppacketqueryparam) |GetHTTPPacketQueryParam 是一个辅助函数，用于获取请求报文中指定的GET请求参数，其返回值为string  |
+| [poc.GetHTTPRequestMethod](#gethttprequestmethod) |GetHTTPRequestMethod 是一个辅助函数，用于获取请求报文中的请求方法，其返回值为string  |
+| [poc.GetHTTPRequestPath](#gethttprequestpath) |GetHTTPRequestPath 是一个辅助函数，用于获取响应报文中的路径，返回值是 string，包含 query  |
+| [poc.GetHTTPRequestPathWithoutQuery](#gethttprequestpathwithoutquery) |GetHTTPRequestPathWithoutQuery 是一个辅助函数，用于获取响应报文中的路径，返回值是 string，不包含 query  |
+| [poc.GetStatusCodeFromResponse](#getstatuscodefromresponse) |GetStatusCodeFromResponse 是一个辅助函数，用于获取响应报文中的状态码，其返回值为int  |
+| [poc.GetUrlFromHTTPRequest](#geturlfromhttprequest) |GetUrlFromHTTPRequest 是一个辅助函数，用于获取请求报文中的URL，其返回值为string  |
+| [poc.HTTP](#http) |HTTP 发送请求并且返回原始响应报文，原始请求报文以及错误，它的第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  |
+| [poc.HTTPEx](#httpex) |HTTPEx 与HTTP类似，它发送请求并且返回响应结构体，请求结构体以及错误，它的第一个参数可以接收[]byte, string, http.Request结构体，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使...|
+| [poc.HTTPPacketForceChunked](#httppacketforcechunked) |HTTPPacketForceChunked 将一个HTTP报文的body强制转换为chunked编码  |
+| [poc.HTTPRequestToCurl](#httprequesttocurl) |HTTPRequestToCurl 尝试将HTTP请求报文转换为curl命令。第一个参数为是否使用HTTPS，第二个参数为HTTP请求报文，其返回值为string，即转换后的curl命令  |
+| [poc.Head](#head) |Head 向指定URL发送HEAD请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.IsResponse](#isresponse) |IsResp 判断传入的数据是否为 HTTP 响应报文  |
+| [poc.Options](#options) |Options 向指定URL发送OPTIONS请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求  |
+| [poc.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应  |
+| [poc.ParseUrlToHTTPRequestRaw](#parseurltohttprequestraw) |ParseUrlToHTTPRequestRaw 将URL解析为原始 HTTP 请求报文，返回是否为 HTTPS，原始请求报文与错误  |
+| [poc.Post](#post) |Post 向指定URL发送POST请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是URL字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用desc函数进行查看  |
+| [poc.ReplaceAllHTTPPacketPostParams](#replaceallhttppacketpostparams) |ReplaceAllHTTPPacketPostParams 是一个辅助函数，用于改变请求报文，修改所有POST请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为POST请求参数名，value为POST请求参数值  |
+| [poc.ReplaceAllHTTPPacketQueryParams](#replaceallhttppacketqueryparams) |ReplaceAllHTTPPacketQueryParams 是一个辅助函数，用于改变请求报文，修改所有GET请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为请求参数名，value为请求参数值  |
+| [poc.ReplaceBody](#replacebody) |ReplaceBody 将原始 HTTP 请求报文中的 body 替换为指定的 body，并指定是否为 chunked，返回新的 HTTP 请求报文  |
 | [poc.ReplaceHTTPPacketBasicAuth](#replacehttppacketbasicauth) |ReplaceHTTPPacketBasicAuth 是一个辅助函数，用于改变请求报文，修改Authorization请求头为基础认证的密文，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Authorization", codec.EncodeBase64(usern...|
-| [poc.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceHTTPPacketBody 是一个辅助函数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输 |
-| [poc.ReplaceHTTPPacketCookie](#replacehttppacketcookie) |ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加 |
-| [poc.ReplaceHTTPPacketFirstLine](#replacehttppacketfirstline) |ReplaceHTTPPacketFirstLine 是一个辅助，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本） |
-| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改修改请求头，如果不存在则会增加 |
-| [poc.ReplaceHTTPPacketHost](#replacehttppackethost) |ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Host", host)的简写 |
-| [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法 |
-| [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径 |
-| [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) |ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加 |
-| [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) |ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加 |
-| [poc.Split](#split) |Split 切割HTTP报文，返回响应头和响应体，其第一个参数是原始HTTP报文，接下来可以接收零个到多个回调函数，其在每次解析到请求头时回调 |
-| [poc.Websocket](#websocket) |Websocket 实际上等价于`poc.HTTP(..., poc.websocket(true))`，用于快速发送请求并建立websocket连接并且返回原始响应报文，原始请求报文以及错误 |
-| [poc.appendCookie](#appendcookie) |appendCookie 是一个请求选项参数，用于改变请求报文，添加Cookie请求头中的值 |
-| [poc.appendFormEncoded](#appendformencoded) |appendFormEncoded 是一个请求选项参数，用于改变请求报文，添加请求体中的表单 |
-| [poc.appendHeader](#appendheader) |appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头 |
-| [poc.appendPath](#appendpath) |appendPath 是一个请求选项参数，用于改变请求报文，在现有请求路径后添加请求路径 |
-| [poc.appendPostParam](#appendpostparam) |appendPostParam 是一个请求选项参数，用于改变请求报文，添加POST请求参数 |
-| [poc.appendQueryParam](#appendqueryparam) |appendQueryParam 是一个请求选项参数，用于改变请求报文，添加GET请求参数 |
-| [poc.appendUploadFile](#appenduploadfile) |appendUploadFile 是一个请求选项参数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type) |
-| [poc.deleteCookie](#deletecookie) |deleteCookie 是一个请求选项参数，用于改变请求报文，删除Cookie中的值 |
-| [poc.deleteForm](#deleteform) |deleteForm 是一个请求选项参数，用于改变请求报文，删除POST请求表单 |
-| [poc.deleteHeader](#deleteheader) |deleteHeader 是一个请求选项参数，用于改变请求报文，删除请求头 |
-| [poc.deletePostParam](#deletepostparam) |deletePostParam 是一个请求选项参数，用于改变请求报文，删除POST请求参数 |
-| [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除GET请求参数 |
-| [poc.host](#host) |host 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host |
-| [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用http2协议，默认为false即使用http1协议 |
-| [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用https协议，默认为false即使用http协议 |
-| [poc.jsRedirect](#jsredirect) |jsRedirect 是一个请求选项参数，用于指定是否跟踪JS重定向，默认为false即不会自动跟踪JS重定向 |
-| [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的Content-Length字段，默认为false即会自动修复Content-Length字段 |
-| [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为false即会自动跟踪重定向 |
-| [poc.params](#params) |params 是一个请求选项参数，用于在请求时使用传入的值，需要注意的是，它可以很方便地使用str.f()代替 |
-| [poc.port](#port) |port 是一个请求选项参数，用于指定实际请求的 port，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的port |
-| [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理 |
-| [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回true，则会继续重定向，否则不会重定向。其第一个参数为是否使用https协议，第二个参数为原始请求报文，第三个参数为原始响应报文 |
-| [poc.redirectTimes](#redirecttimes) |redirectTimes 是一个请求选项参数，用于指定最大重定向次数，默认为5次 |
-| [poc.replaceAllPostParams](#replaceallpostparams) |replaceAllPostParams 是一个请求选项参数，用于改变请求报文，修改所有POST请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为POST请求参数名，value为POST请求参数值 |
-| [poc.replaceAllQueryParams](#replaceallqueryparams) |replaceAllQueryParams 是一个请求选项参数，用于改变请求报文，修改所有GET请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为请求参数名，value为请求参数值 |
+| [poc.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceHTTPPacketBody 是一个辅助函数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输  |
+| [poc.ReplaceHTTPPacketCookie](#replacehttppacketcookie) |ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketFirstLine](#replacehttppacketfirstline) |ReplaceHTTPPacketFirstLine 是一个辅助，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
+| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改修改请求头，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketHost](#replacehttppackethost) |ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Host", host)的简写  |
+| [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法  |
+| [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径  |
+| [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) |ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) |ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加  |
+| [poc.Split](#split) |Split 切割HTTP报文，返回响应头和响应体，其第一个参数是原始HTTP报文，接下来可以接收零个到多个回调函数，其在每次解析到请求头时回调  |
+| [poc.Websocket](#websocket) |Websocket 实际上等价于`poc.HTTP(..., poc.websocket(true))`，用于快速发送请求并建立websocket连接并且返回原始响应报文，原始请求报文以及错误  |
+| [poc.appendCookie](#appendcookie) |appendCookie 是一个请求选项参数，用于改变请求报文，添加Cookie请求头中的值  |
+| [poc.appendFormEncoded](#appendformencoded) |appendFormEncoded 是一个请求选项参数，用于改变请求报文，添加请求体中的表单  |
+| [poc.appendHeader](#appendheader) |appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头  |
+| [poc.appendHeaders](#appendheaders) |appendHeaders 是一个请求选项参数，用于改变请求报文，添加请求头  |
+| [poc.appendPath](#appendpath) |appendPath 是一个请求选项参数，用于改变请求报文，在现有请求路径后添加请求路径  |
+| [poc.appendPostParam](#appendpostparam) |appendPostParam 是一个请求选项参数，用于改变请求报文，添加POST请求参数  |
+| [poc.appendQueryParam](#appendqueryparam) |appendQueryParam 是一个请求选项参数，用于改变请求报文，添加GET请求参数  |
+| [poc.appendUploadFile](#appenduploadfile) |appendUploadFile 是一个请求选项参数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)  |
+| [poc.deleteCookie](#deletecookie) |deleteCookie 是一个请求选项参数，用于改变请求报文，删除Cookie中的值  |
+| [poc.deleteForm](#deleteform) |deleteForm 是一个请求选项参数，用于改变请求报文，删除POST请求表单  |
+| [poc.deleteHeader](#deleteheader) |deleteHeader 是一个请求选项参数，用于改变请求报文，删除请求头  |
+| [poc.deletePostParam](#deletepostparam) |deletePostParam 是一个请求选项参数，用于改变请求报文，删除POST请求参数  |
+| [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除GET请求参数  |
+| [poc.host](#host) |host 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host  |
+| [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用http2协议，默认为false即使用http1协议  |
+| [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用https协议，默认为false即使用http协议  |
+| [poc.jsRedirect](#jsredirect) |jsRedirect 是一个请求选项参数，用于指定是否跟踪JS重定向，默认为false即不会自动跟踪JS重定向  |
+| [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的Content-Length字段，默认为false即会自动修复Content-Length字段  |
+| [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为false即会自动跟踪重定向  |
+| [poc.params](#params) |params 是一个请求选项参数，用于在请求时使用传入的值，需要注意的是，它可以很方便地使用str.f()代替  |
+| [poc.port](#port) |port 是一个请求选项参数，用于指定实际请求的 port，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的port  |
+| [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
+| [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回true，则会继续重定向，否则不会重定向。其第一个参数为是否使用https协议，第二个参数为原始请求报文，第三个参数为原始响应报文  |
+| [poc.redirectTimes](#redirecttimes) |redirectTimes 是一个请求选项参数，用于指定最大重定向次数，默认为5次  |
+| [poc.replaceAllPostParams](#replaceallpostparams) |replaceAllPostParams 是一个请求选项参数，用于改变请求报文，修改所有POST请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为POST请求参数名，value为POST请求参数值  |
+| [poc.replaceAllQueryParams](#replaceallqueryparams) |replaceAllQueryParams 是一个请求选项参数，用于改变请求报文，修改所有GET请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为请求参数名，value为请求参数值  |
 | [poc.replaceBasicAuth](#replacebasicauth) |replaceBasicAuth 是一个请求选项参数，用于改变请求报文，修改Authorization请求头为基础认证的密文，如果不存在则会增加，实际上是replaceHeader("Authorization", codec.EncodeBase64(username + ":" + passwo...|
-| [poc.replaceBody](#replacebody) |replaceBody 是一个请求选项参数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输 |
-| [poc.replaceCookie](#replacecookie) |replaceCookie 是一个请求选项参数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加 |
-| [poc.replaceFirstLine](#replacefirstline) |replaceFirstLine 是一个请求选项参数，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本） |
-| [poc.replaceHeader](#replaceheader) |replaceHeader 是一个请求选项参数，用于改变请求报文，修改修改请求头，如果不存在则会增加 |
-| [poc.replaceHost](#replacehost) |replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader("Host", host)的简写 |
-| [poc.replaceMethod](#replacemethod) |replaceMethod 是一个请求选项参数，用于改变请求报文，修改请求方法 |
-| [poc.replacePath](#replacepath) |replacePath 是一个请求选项参数，用于改变请求报文，修改请求路径 |
-| [poc.replacePostParam](#replacepostparam) |replacePostParam 是一个请求选项参数，用于改变请求报文，修改POST请求参数，如果不存在则会增加 |
-| [poc.replaceQueryParam](#replacequeryparam) |replaceQueryParam 是一个请求选项参数，用于改变请求报文，修改GET请求参数，如果不存在则会增加 |
-| [poc.retryInStatusCode](#retryinstatuscode) |retryInStatusCode 是一个请求选项参数，用于指定在某些响应状态码的情况下重试，需要搭配retryTimes使用 |
-| [poc.retryMaxWaitTime](#retrymaxwaittime) |retryMaxWaitTime 是一个请求选项参数，用于指定重试时最大等待时间，需要搭配retryTimes使用，默认为2秒 |
-| [poc.retryNotInStatusCode](#retrynotinstatuscode) |retryNotInStatusCode 是一个请求选项参数，用于指定非某些响应状态码的情况下重试，需要搭配retryTimes使用 |
-| [poc.retryTimes](#retrytimes) |retryTimes 是一个请求选项参数，用于指定请求失败时的重试次数，需要搭配retryInStatusCode或retryNotInStatusCode使用，来设置在什么响应码的情况下重试 |
-| [poc.retryWaitTime](#retrywaittime) |retryWaitTime 是一个请求选项参数，用于指定重试时最小等待时间，需要搭配retryTimes使用，默认为0.1秒 |
-| [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库 |
-| [poc.session](#session) |session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用 |
-| [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源 |
-| [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒 |
-| [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为websocket，此时发送的请求应该为websocket握手请求 |
-| [poc.websocketFromServer](#websocketfromserver) |websocketFromServer 是一个请求选项参数，它接收一个回调函数，这个函数有两个参数，其中第一个参数为服务端发送的数据，第二个参数为取消函数，调用将会强制断开 websocket |
-| [poc.websocketOnClient](#websocketonclient) |websocketOnClient 是一个请求选项参数，它接收一个回调函数，这个函数有一个参数，是WebsocketClient结构体，通过该结构体可以向服务端发送数据 |
+| [poc.replaceBody](#replacebody) |replaceBody 是一个请求选项参数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输  |
+| [poc.replaceCookie](#replacecookie) |replaceCookie 是一个请求选项参数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加  |
+| [poc.replaceFirstLine](#replacefirstline) |replaceFirstLine 是一个请求选项参数，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
+| [poc.replaceHeader](#replaceheader) |replaceHeader 是一个请求选项参数，用于改变请求报文，修改修改请求头，如果不存在则会增加  |
+| [poc.replaceHost](#replacehost) |replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader("Host", host)的简写  |
+| [poc.replaceMethod](#replacemethod) |replaceMethod 是一个请求选项参数，用于改变请求报文，修改请求方法  |
+| [poc.replacePath](#replacepath) |replacePath 是一个请求选项参数，用于改变请求报文，修改请求路径  |
+| [poc.replacePostParam](#replacepostparam) |replacePostParam 是一个请求选项参数，用于改变请求报文，修改POST请求参数，如果不存在则会增加  |
+| [poc.replaceQueryParam](#replacequeryparam) |replaceQueryParam 是一个请求选项参数，用于改变请求报文，修改GET请求参数，如果不存在则会增加  |
+| [poc.retryInStatusCode](#retryinstatuscode) |retryInStatusCode 是一个请求选项参数，用于指定在某些响应状态码的情况下重试，需要搭配retryTimes使用  |
+| [poc.retryMaxWaitTime](#retrymaxwaittime) |retryMaxWaitTime 是一个请求选项参数，用于指定重试时最大等待时间，需要搭配retryTimes使用，默认为2秒  |
+| [poc.retryNotInStatusCode](#retrynotinstatuscode) |retryNotInStatusCode 是一个请求选项参数，用于指定非某些响应状态码的情况下重试，需要搭配retryTimes使用  |
+| [poc.retryTimes](#retrytimes) |retryTimes 是一个请求选项参数，用于指定请求失败时的重试次数，需要搭配retryInStatusCode或retryNotInStatusCode使用，来设置在什么响应码的情况下重试  |
+| [poc.retryWaitTime](#retrywaittime) |retryWaitTime 是一个请求选项参数，用于指定重试时最小等待时间，需要搭配retryTimes使用，默认为0.1秒  |
+| [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
+| [poc.session](#session) |session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用  |
+| [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
+| [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
+| [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为websocket，此时发送的请求应该为websocket握手请求  |
+| [poc.websocketFromServer](#websocketfromserver) |websocketFromServer 是一个请求选项参数，它接收一个回调函数，这个函数有两个参数，其中第一个参数为服务端发送的数据，第二个参数为取消函数，调用将会强制断开 websocket  |
+| [poc.websocketOnClient](#websocketonclient) |websocketOnClient 是一个请求选项参数，它接收一个回调函数，这个函数有一个参数，是WebsocketClient结构体，通过该结构体可以向服务端发送数据  |
 
 
 ## 函数定义
@@ -301,7 +307,7 @@ AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，�
 Example:
 ```
 _, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
-poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "&lt;?php phpinfo(); ?&gt;", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -327,22 +333,31 @@ poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "&lt;?php phpinfo(); 
 ### BasicRequest
 
 #### 详细描述
-BasicRequest 返回一个基本的 HTTP 请求，用于测试，它实际上返回一个b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n"
-
-Example:
-```
-poc.BasicRequest() // b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n"
-```
 
 
 #### 定义
 
-`BasicRequest() []byte`
+`BasicRequest() basicRequest`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
+| r1 | `basicRequest` |   |
+
+
+### BasicResponse
+
+#### 详细描述
+
+
+#### 定义
+
+`BasicResponse() basicResponse`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `basicResponse` |   |
 
 
 ### BuildRequest
@@ -386,7 +401,7 @@ poc.CurlToHTTPRequest("curl -X POST -d 'a=b&c=d' http://example.com")
 
 #### 定义
 
-`CurlToHTTPRequest(command string) []byte`
+`CurlToHTTPRequest(command string) (req []byte)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -396,7 +411,7 @@ poc.CurlToHTTPRequest("curl -X POST -d 'a=b&c=d' http://example.com")
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
+| req | `[]byte` |   |
 
 
 ### Delete
@@ -415,7 +430,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Delete(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Delete(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -426,9 +441,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### DeleteHTTPPacketCookie
@@ -612,7 +627,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Do(method string, urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Do(method string, urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -624,9 +639,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### FixHTTPPacketCRLF
@@ -728,7 +743,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Get(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Get(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -739,9 +754,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### GetAllHTTPPacketPostParams
@@ -762,7 +777,7 @@ a=b&c=d`) // 获取所有POST请求参数
 
 #### 定义
 
-`GetAllHTTPPacketPostParams(packet []byte) map[string]string`
+`GetAllHTTPPacketPostParams(packet []byte) (params map[string]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -772,7 +787,7 @@ a=b&c=d`) // 获取所有POST请求参数
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| params | `map[string]string` |   |
 
 
 ### GetAllHTTPPacketQueryParams
@@ -792,7 +807,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetAllHTTPPacketQueryParams(packet []byte) map[string]string`
+`GetAllHTTPPacketQueryParams(packet []byte) (params map[string]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -802,7 +817,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| params | `map[string]string` |   |
 
 
 ### GetHTTPPacketBody
@@ -823,7 +838,7 @@ a=b&c=d`) // 获取请求头，这里为b"a=b&c=d"
 
 #### 定义
 
-`GetHTTPPacketBody(packet []byte) []byte`
+`GetHTTPPacketBody(packet []byte) (body []byte)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -833,7 +848,7 @@ a=b&c=d`) // 获取请求头，这里为b"a=b&c=d"
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
+| body | `[]byte` |   |
 
 
 ### GetHTTPPacketContentType
@@ -854,7 +869,7 @@ a=b&c=d`) // 获取Content-Type请求头
 
 #### 定义
 
-`GetHTTPPacketContentType(packet []byte) string`
+`GetHTTPPacketContentType(packet []byte) (contentType string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -864,7 +879,7 @@ a=b&c=d`) // 获取Content-Type请求头
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| contentType | `string` |   |
 
 
 ### GetHTTPPacketCookie
@@ -885,7 +900,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketCookie(packet []byte, key string) string`
+`GetHTTPPacketCookie(packet []byte, key string) (cookieValue string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -896,7 +911,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| cookieValue | `string` |   |
 
 
 ### GetHTTPPacketCookieFirst
@@ -917,7 +932,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketCookieFirst(packet []byte, key string) string`
+`GetHTTPPacketCookieFirst(packet []byte, key string) (cookieValue string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -928,7 +943,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| cookieValue | `string` |   |
 
 
 ### GetHTTPPacketCookieValues
@@ -949,7 +964,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketCookieValues(packet []byte, key string) []string`
+`GetHTTPPacketCookieValues(packet []byte, key string) (cookieValues []string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -960,7 +975,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| cookieValues | `[]string` |   |
 
 
 ### GetHTTPPacketCookies
@@ -981,7 +996,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketCookies(packet []byte) map[string]string`
+`GetHTTPPacketCookies(packet []byte) (cookies map[string]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -991,7 +1006,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| cookies | `map[string]string` |   |
 
 
 ### GetHTTPPacketCookiesFull
@@ -1012,7 +1027,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketCookiesFull(packet []byte) map[string][]string`
+`GetHTTPPacketCookiesFull(packet []byte) (cookies map[string][]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1022,7 +1037,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string][]string` |   |
+| cookies | `map[string][]string` |   |
 
 
 ### GetHTTPPacketFirstLine
@@ -1080,7 +1095,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketHeader(packet []byte, key string) string`
+`GetHTTPPacketHeader(packet []byte, key string) (header string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1091,7 +1106,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| header | `string` |   |
 
 
 ### GetHTTPPacketHeaders
@@ -1112,7 +1127,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketHeaders(packet []byte) map[string]string`
+`GetHTTPPacketHeaders(packet []byte) (headers map[string]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1122,7 +1137,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| headers | `map[string]string` |   |
 
 
 ### GetHTTPPacketHeadersFull
@@ -1144,7 +1159,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketHeadersFull(packet []byte) map[string][]string`
+`GetHTTPPacketHeadersFull(packet []byte) (headers map[string][]string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1154,7 +1169,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string][]string` |   |
+| headers | `map[string][]string` |   |
 
 
 ### GetHTTPPacketPostParam
@@ -1175,7 +1190,7 @@ a=b&c=d`, "a") // 获取POST请求参数a的值
 
 #### 定义
 
-`GetHTTPPacketPostParam(packet []byte, key string) string`
+`GetHTTPPacketPostParam(packet []byte, key string) (paramValue string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1186,7 +1201,7 @@ a=b&c=d`, "a") // 获取POST请求参数a的值
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| paramValue | `string` |   |
 
 
 ### GetHTTPPacketQueryParam
@@ -1206,7 +1221,7 @@ Host: pie.dev
 
 #### 定义
 
-`GetHTTPPacketQueryParam(packet []byte, key string) string`
+`GetHTTPPacketQueryParam(packet []byte, key string) (paramValue string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1217,7 +1232,90 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| paramValue | `string` |   |
+
+
+### GetHTTPRequestMethod
+
+#### 详细描述
+GetHTTPRequestMethod 是一个辅助函数，用于获取请求报文中的请求方法，其返回值为string
+
+Example:
+```
+poc.GetHTTPRequestMethod(`GET /get HTTP/1.1
+Content-Type: application/json
+Cookie: a=b; a=c; c=d
+Host: pie.dev
+
+`) // 获取请求方法，这里会返回"GET"
+```
+
+
+#### 定义
+
+`GetHTTPRequestMethod(packet []byte) (method string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| method | `string` |   |
+
+
+### GetHTTPRequestPath
+
+#### 详细描述
+GetHTTPRequestPath 是一个辅助函数，用于获取响应报文中的路径，返回值是 string，包含 query
+
+Example:
+```
+poc.GetHTTPRequestPath("GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n") // /a/bc.html?a=1
+```
+
+
+#### 定义
+
+`GetHTTPRequestPath(packet []byte) (path string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
+
+
+### GetHTTPRequestPathWithoutQuery
+
+#### 详细描述
+GetHTTPRequestPathWithoutQuery 是一个辅助函数，用于获取响应报文中的路径，返回值是 string，不包含 query
+
+Example:
+```
+poc.GetHTTPRequestPathWithoutQuery("GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n") // /a/bc.html
+```
+
+
+#### 定义
+
+`GetHTTPRequestPathWithoutQuery(packet []byte) (path string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
 
 
 ### GetStatusCodeFromResponse
@@ -1236,7 +1334,7 @@ hello`) // 获取响应报文中的状态码，这里会返回200
 
 #### 定义
 
-`GetStatusCodeFromResponse(packet []byte) int`
+`GetStatusCodeFromResponse(packet []byte) (statusCode int)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1246,7 +1344,37 @@ hello`) // 获取响应报文中的状态码，这里会返回200
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| statusCode | `int` |   |
+
+
+### GetUrlFromHTTPRequest
+
+#### 详细描述
+GetUrlFromHTTPRequest 是一个辅助函数，用于获取请求报文中的URL，其返回值为string
+
+Example:
+```
+poc.GetUrlFromHTTPRequest("https", `GET /get HTTP/1.1
+Content-Type: application/json
+Host: pie.dev
+
+`) // 获取URL，这里会返回"https://pie.dev/get"
+
+
+#### 定义
+
+`GetUrlFromHTTPRequest(scheme string, packet []byte) (url string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| scheme | `string` |   |
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
 
 
 ### HTTP
@@ -1262,7 +1390,7 @@ poc.HTTP("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", poc.https(true), poc
 
 #### 定义
 
-`HTTP(i any, opts ...PocConfig) ([]byte, []byte, error)`
+`HTTP(i any, opts ...PocConfig) (rsp []byte, req []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1273,9 +1401,9 @@ poc.HTTP("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", poc.https(true), poc
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `[]byte` |   |
-| r3 | `error` |   |
+| rsp | `[]byte` |   |
+| req | `[]byte` |   |
+| err | `error` |   |
 
 
 ### HTTPEx
@@ -1294,7 +1422,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`HTTPEx(i any, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`HTTPEx(i any, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1305,9 +1433,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### HTTPPacketForceChunked
@@ -1353,18 +1481,18 @@ poc.HTTPRequestToCurl(true, "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
 
 #### 定义
 
-`HTTPRequestToCurl(https bool, i any) string`
+`HTTPRequestToCurl(https bool, raw any) (curlCommand string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | https | `bool` |   |
-| i | `any` |   |
+| raw | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| curlCommand | `string` |   |
 
 
 ### Head
@@ -1383,7 +1511,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Head(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Head(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1394,9 +1522,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### IsResponse
@@ -1412,17 +1540,17 @@ poc.IsResp(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok") // true
 
 #### 定义
 
-`IsResponse(i any) bool`
+`IsResponse(raw any) (isHTTPResponse bool)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| raw | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| isHTTPResponse | `bool` |   |
 
 
 ### Options
@@ -1441,7 +1569,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Options(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Options(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1452,9 +1580,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### ParseBytesToHTTPRequest
@@ -1470,7 +1598,7 @@ req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\
 
 #### 定义
 
-`ParseBytesToHTTPRequest(raw []byte) (*http.Request, error)`
+`ParseBytesToHTTPRequest(raw []byte) (reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1480,8 +1608,8 @@ req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*http.Request` |   |
-| r2 | `error` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### ParseBytesToHTTPResponse
@@ -1497,7 +1625,7 @@ res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\
 
 #### 定义
 
-`ParseBytesToHTTPResponse(res []byte) (*http.Response, error)`
+`ParseBytesToHTTPResponse(res []byte) (rspInst *http.Response, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1507,8 +1635,8 @@ res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*http.Response` |   |
-| r2 | `error` |   |
+| rspInst | `*http.Response` |   |
+| err | `error` |   |
 
 
 ### ParseUrlToHTTPRequestRaw
@@ -1524,7 +1652,7 @@ ishttps, raw, err = poc.ParseUrlToHTTPRequestRaw("GET", "https://yaklang.com")
 
 #### 定义
 
-`ParseUrlToHTTPRequestRaw(method string, i any) (bool, []byte, error)`
+`ParseUrlToHTTPRequestRaw(method string, i any) (isHttps bool, req []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1535,9 +1663,9 @@ ishttps, raw, err = poc.ParseUrlToHTTPRequestRaw("GET", "https://yaklang.com")
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
-| r2 | `[]byte` |   |
-| r3 | `error` |   |
+| isHttps | `bool` |   |
+| req | `[]byte` |   |
+| err | `error` |   |
 
 
 ### Post
@@ -1556,7 +1684,7 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Post(urlStr string, opts ...PocConfig) (*lowhttp.LowhttpResponse, *http.Request, error)`
+`Post(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1567,9 +1695,9 @@ desc(rsp) // 查看响应结构体中的可用字段
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*lowhttp.LowhttpResponse` |   |
-| r2 | `*http.Request` |   |
-| r3 | `error` |   |
+| rspInst | `*lowhttp.LowhttpResponse` |   |
+| reqInst | `*http.Request` |   |
+| err | `error` |   |
 
 
 ### ReplaceAllHTTPPacketPostParams
@@ -2003,7 +2131,7 @@ time.Sleep(100)
 
 #### 定义
 
-`Websocket(raw any, opts ...PocConfig) ([]byte, []byte, error)`
+`Websocket(raw any, opts ...PocConfig) (rsp []byte, req []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2014,9 +2142,9 @@ time.Sleep(100)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `[]byte` |   |
-| r3 | `error` |   |
+| rsp | `[]byte` |   |
+| req | `[]byte` |   |
+| err | `error` |   |
 
 
 ### appendCookie
@@ -2093,6 +2221,32 @@ poc.Post("https://pie.dev/post", poc.appendHeader("AAA", "BBB")) // 向 pie.dev 
 |:-----------|:---------- |:-----------|
 | key | `string` |   |
 | value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfig` |   |
+
+
+### appendHeaders
+
+#### 详细描述
+appendHeaders 是一个请求选项参数，用于改变请求报文，添加请求头
+
+Example:
+```
+poc.Post("https://pie.dev/post", poc.appendHeaders({"AAA": "BBB","CCC": "DDD"})) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
+```
+
+
+#### 定义
+
+`appendHeaders(headers map[string]string) PocConfig`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| headers | `map[string]string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2187,7 +2341,7 @@ appendUploadFile 是一个请求选项参数，用于改变请求报文，添加
 
 Example:
 ```
-poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "&lt;?php phpinfo(); ?&gt;", "image/jpeg"))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg"))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -2617,7 +2771,7 @@ Example:
 count = 3
 poc.Get("https://pie.dev/redirect/5", poc.redirectHandler(func(https, req, rsp) {
 count--
-return count &gt;= 0
+return count >= 0
 })) // 向 pie.edv 发起请求，使用自定义 redirectHandler 函数，使用count控制，进行最多3次重定向
 ```
 

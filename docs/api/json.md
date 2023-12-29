@@ -6,11 +6,13 @@
 | [json.ExtractJSONEx](#extractjsonex) ||
 | [json.Find](#find) ||
 | [json.FindPath](#findpath) ||
-| [json.Marshal](#marshal) |Marshal returns the JSON encoding of v.  Marshal traverses the value v recursively. If an encountered value implements the Marshaler interface and is ...|
-| [json.New](#new) ||
+| [json.Marshal](#marshal) |Marshal 将一个对象转换为 JSON bytes，返回转换后的 bytes 与错误  |
+| [json.New](#new) |New 根据传入的值创建并返回一个新的 JSON 对象与错误  |
 | [json.ReplaceAll](#replaceall) ||
-| [json.dumps](#dumps) ||
-| [json.loads](#loads) ||
+| [json.dumps](#dumps) |dumps 将一个对象转换为 JSON 字符串，返回转换后的字符串  它还可以接收零个到多个请求选项函数，用于配置转换过程，控制转换后的缩进，前缀等  |
+| [json.loads](#loads) |loads 将一个 JSON 字符串转换为对象，返回转换后的对象  |
+| [json.withIndent](#withindent) |withIndent 设置 JSON dumps时的缩进  |
+| [json.withPrefix](#withprefix) |withPrefix 设置 JSON dumps时的前缀  |
 
 
 ## 函数定义
@@ -100,135 +102,13 @@
 ### Marshal
 
 #### 详细描述
-Marshal returns the JSON encoding of v.
+Marshal 将一个对象转换为 JSON bytes，返回转换后的 bytes 与错误
 
-Marshal traverses the value v recursively.
-If an encountered value implements the Marshaler interface
-and is not a nil pointer, Marshal calls its MarshalJSON method
-to produce JSON. If no MarshalJSON method is present but the
-value implements encoding.TextMarshaler instead, Marshal calls
-its MarshalText method and encodes the result as a JSON string.
-The nil pointer exception is not strictly necessary
-but mimics a similar, necessary exception in the behavior of
-UnmarshalJSON.
-
-Otherwise, Marshal uses the following type-dependent default encodings:
-
-Boolean values encode as JSON booleans.
-
-Floating point, integer, and Number values encode as JSON numbers.
-
-String values encode as JSON strings coerced to valid UTF-8,
-replacing invalid bytes with the Unicode replacement rune.
-So that the JSON will be safe to embed inside HTML &lt;script&gt; tags,
-the string is encoded using HTMLEscape,
-which replaces "&lt;", "&gt;", "&", U+2028, and U+2029 are escaped
-to "\u003c","\u003e", "\u0026", "\u2028", and "\u2029".
-This replacement can be disabled when using an Encoder,
-by calling SetEscapeHTML(false).
-
-Array and slice values encode as JSON arrays, except that
-[]byte encodes as a base64-encoded string, and a nil slice
-encodes as the null JSON value.
-
-Struct values encode as JSON objects.
-Each exported struct field becomes a member of the object, using the
-field name as the object key, unless the field is omitted for one of the
-reasons given below.
-
-The encoding of each struct field can be customized by the format string
-stored under the "json" key in the struct field's tag.
-The format string gives the name of the field, possibly followed by a
-comma-separated list of options. The name may be empty in order to
-specify options without overriding the default field name.
-
-The "omitempty" option specifies that the field should be omitted
-from the encoding if the field has an empty value, defined as
-false, 0, a nil pointer, a nil interface value, and any empty array,
-slice, map, or string.
-
-As a special case, if the field tag is "-", the field is always omitted.
-Note that a field with name "-" can still be generated using the tag "-,".
-
-Examples of struct field tags and their meanings:
-
-	// Field appears in JSON as key "myName".
-	Field int `json:"myName"`
-
-	// Field appears in JSON as key "myName" and
-	// the field is omitted from the object if its value is empty,
-	// as defined above.
-	Field int `json:"myName,omitempty"`
-
-	// Field appears in JSON as key "Field" (the default), but
-	// the field is skipped if empty.
-	// Note the leading comma.
-	Field int `json:",omitempty"`
-
-	// Field is ignored by this package.
-	Field int `json:"-"`
-
-	// Field appears in JSON as key "-".
-	Field int `json:"-,"`
-
-The "string" option signals that a field is stored as JSON inside a
-JSON-encoded string. It applies only to fields of string, floating point,
-integer, or boolean types. This extra level of encoding is sometimes used
-when communicating with JavaScript programs:
-
-	Int64String int64 `json:",string"`
-
-The key name will be used if it's a non-empty string consisting of
-only Unicode letters, digits, and ASCII punctuation except quotation
-marks, backslash, and comma.
-
-Anonymous struct fields are usually marshaled as if their inner exported fields
-were fields in the outer struct, subject to the usual Go visibility rules amended
-as described in the next paragraph.
-An anonymous struct field with a name given in its JSON tag is treated as
-having that name, rather than being anonymous.
-An anonymous struct field of interface type is treated the same as having
-that type as its name, rather than being anonymous.
-
-The Go visibility rules for struct fields are amended for JSON when
-deciding which field to marshal or unmarshal. If there are
-multiple fields at the same level, and that level is the least
-nested (and would therefore be the nesting level selected by the
-usual Go rules), the following extra rules apply:
-
-1) Of those fields, if any are JSON-tagged, only tagged fields are considered,
-even if there are multiple untagged fields that would otherwise conflict.
-
-2) If there is exactly one field (tagged or not according to the first rule), that is selected.
-
-3) Otherwise there are multiple fields, and all are ignored; no error occurs.
-
-Handling of anonymous struct fields is new in Go 1.1.
-Prior to Go 1.1, anonymous struct fields were ignored. To force ignoring of
-an anonymous struct field in both current and earlier versions, give the field
-a JSON tag of "-".
-
-Map values encode as JSON objects. The map's key type must either be a
-string, an integer type, or implement encoding.TextMarshaler. The map keys
-are sorted and used as JSON object keys by applying the following rules,
-subject to the UTF-8 coercion described for string values above:
-  - keys of any string type are used directly
-  - encoding.TextMarshalers are marshaled
-  - integer keys are converted to strings
-
-Pointer values encode as the value pointed to.
-A nil pointer encodes as the null JSON value.
-
-Interface values encode as the value contained in the interface.
-A nil interface value encodes as the null JSON value.
-
-Channel, complex, and function values cannot be encoded in JSON.
-Attempting to encode such a value causes Marshal to return
-an UnsupportedTypeError.
-
-JSON cannot represent cyclic data structures and Marshal does not
-handle them. Passing cyclic structures to Marshal will result in
-an error.
+Example:
+```
+v, err = json.Marshal({"a": "b", "c": "d"})
+// v = b"{"a": "b", "c": "d"}"
+```
 
 
 #### 定义
@@ -250,6 +130,14 @@ an error.
 ### New
 
 #### 详细描述
+New 根据传入的值创建并返回一个新的 JSON 对象与错误
+
+Example:
+```
+v, err = json.New("foo")
+v, err = json.New(b"bar")
+v, err = json.New({"a": "b", "c": "d"})
+```
 
 
 #### 定义
@@ -293,16 +181,25 @@ an error.
 ### dumps
 
 #### 详细描述
+dumps 将一个对象转换为 JSON 字符串，返回转换后的字符串
+
+它还可以接收零个到多个请求选项函数，用于配置转换过程，控制转换后的缩进，前缀等
+
+Example:
+```
+v = json.dumps({"a": "b", "c": "d"})
+```
 
 
 #### 定义
 
-`dumps(raw any) string`
+`dumps(raw any, opts ...JsonOpt) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | raw | `any` |   |
+| opts | `...JsonOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -313,20 +210,79 @@ an error.
 ### loads
 
 #### 详细描述
+loads 将一个 JSON 字符串转换为对象，返回转换后的对象
+
+Example:
+```
+v = json.loads(`{"a": "b", "c": "d"}`)
+```
 
 
 #### 定义
 
-`loads(raw any) any`
+`loads(raw any, opts ...JsonOpt) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | raw | `any` |   |
+| opts | `...JsonOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### withIndent
+
+#### 详细描述
+withIndent 设置 JSON dumps时的缩进
+
+Example:
+```
+v = json.dumps({"a": "b", "c": "d"}, withIndent="  ")
+```
+
+
+#### 定义
+
+`withIndent(indent string) JsonOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| indent | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JsonOpt` |   |
+
+
+### withPrefix
+
+#### 详细描述
+withPrefix 设置 JSON dumps时的前缀
+
+Example:
+```
+v = json.dumps({"a": "b", "c": "d"}, withPrefix="  ")
+```
+
+
+#### 定义
+
+`withPrefix(prefix string) JsonOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| prefix | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JsonOpt` |   |
 
 

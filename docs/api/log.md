@@ -5,12 +5,12 @@
 | [log.Debug](#debug) |Debugf will print when logger's Level is debug. |
 | [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
 | [log.Info](#info) |Infof will print when logger's Level is info or debug. |
-| [log.SetLevel](#setlevel) ||
+| [log.SetLevel](#setlevel) |loglevel 根据传入的字符串设置日志级别  disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试  |
 | [log.Warn](#warn) ||
 | [log.debug](#debug) |Debugf will print when logger's Level is debug. |
 | [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
 | [log.info](#info) |Infof will print when logger's Level is info or debug. |
-| [log.setLevel](#setlevel) ||
+| [log.setLevel](#setlevel) |loglevel 根据传入的字符串设置日志级别  disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试  |
 | [log.warn](#warn) ||
 
 
@@ -69,6 +69,14 @@ Infof will print when logger's Level is info or debug.
 ### SetLevel
 
 #### 详细描述
+loglevel 根据传入的字符串设置日志级别
+
+disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试
+
+Example:
+```
+loglevel("fatal")
+```
 
 
 #### 定义
@@ -151,6 +159,14 @@ Infof will print when logger's Level is info or debug.
 ### setLevel
 
 #### 详细描述
+loglevel 根据传入的字符串设置日志级别
+
+disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试
+
+Example:
+```
+loglevel("fatal")
+```
 
 
 #### 定义

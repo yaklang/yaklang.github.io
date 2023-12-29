@@ -4,16 +4,16 @@
 |:------|:--------|
 | [js.ASTWalk](#astwalk) ||
 | [js.CallFunctionFromCode](#callfunctionfromcode) ||
-| [js.FalseValue](#falsevalue) |FalseValue will return a value representing false.  It is equivalent to:  	ToValue(false) |
+| [js.FalseValue](#falsevalue) ||
 | [js.GetSTType](#getsttype) ||
 | [js.NaNValue](#nanvalue) |NaNValue will return a value representing NaN.  It is equivalent to:  	ToValue(math.NaN()) |
 | [js.New](#new) |create vm |
-| [js.NullValue](#nullvalue) |NullValue will return a Value representing null. |
+| [js.NullValue](#nullvalue) ||
 | [js.Parse](#parse) ||
 | [js.Run](#run) |Run will allocate a new JavaScript runtime, run the given source on the allocated runtime, and return the runtime, resulting value, and error (if any)...|
 | [js.ToValue](#tovalue) |ToValue will convert an interface{} value to a value digestible by otto/JavaScript  This function will not work for advanced types (struct, map, slice...|
-| [js.TrueValue](#truevalue) |TrueValue will return a value representing true.  It is equivalent to:  	ToValue(true) |
-| [js.UndefinedValue](#undefinedvalue) |UndefinedValue will return a Value representing undefined. |
+| [js.TrueValue](#truevalue) ||
+| [js.UndefinedValue](#undefinedvalue) ||
 
 
 ## 函数定义
@@ -64,11 +64,6 @@
 ### FalseValue
 
 #### 详细描述
-FalseValue will return a value representing false.
-
-It is equivalent to:
-
-	ToValue(false)
 
 
 #### 定义
@@ -140,17 +135,16 @@ create vm
 ### NullValue
 
 #### 详细描述
-NullValue will return a Value representing null.
 
 
 #### 定义
 
-`NullValue() Value`
+`NullValue() valueNull}`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
+| r1 | `valueNull}` |   |
 
 
 ### Parse
@@ -233,11 +227,6 @@ you should use Otto.ToValue instead.
 ### TrueValue
 
 #### 详细描述
-TrueValue will return a value representing true.
-
-It is equivalent to:
-
-	ToValue(true)
 
 
 #### 定义
@@ -253,7 +242,6 @@ It is equivalent to:
 ### UndefinedValue
 
 #### 详细描述
-UndefinedValue will return a Value representing undefined.
 
 
 #### 定义

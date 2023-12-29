@@ -3,33 +3,40 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [cli.Args](#args) ||
-| [cli.Bool](#bool) ||
-| [cli.Double](#double) ||
-| [cli.File](#file) ||
-| [cli.FileOrContent](#fileorcontent) ||
-| [cli.Float](#float) ||
-| [cli.Have](#have) ||
-| [cli.Host](#host) ||
-| [cli.Hosts](#hosts) ||
-| [cli.Int](#int) ||
-| [cli.Integer](#integer) ||
-| [cli.LineDict](#linedict) ||
-| [cli.Net](#net) ||
-| [cli.Network](#network) ||
+| [cli.Bool](#bool) |Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回  |
+| [cli.Double](#double) |Float 获取对应名称的命令行参数，并将其转换为 float 类型返回  |
+| [cli.File](#file) |File 获取对应名称的命令行参数，根据其传入的值读取其对应文件内容并返回 []byte 类型  |
+| [cli.FileOrContent](#fileorcontent) |FileOrContent 获取对应名称的命令行参数  根据其传入的值尝试读取其对应文件内容，如果无法读取则直接返回，最后返回 []byte 类型  |
+| [cli.Float](#float) |Float 获取对应名称的命令行参数，并将其转换为 float 类型返回  |
+| [cli.HTTPPacket](#httppacket) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
+| [cli.Have](#have) |Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回  |
+| [cli.Host](#host) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
+| [cli.Hosts](#hosts) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
+| [cli.Int](#int) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回  |
+| [cli.Integer](#integer) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回  |
+| [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数  根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型  |
+| [cli.Net](#net) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
+| [cli.Network](#network) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
 | [cli.Port](#port) ||
 | [cli.Ports](#ports) ||
-| [cli.SetCliName](#setcliname) ||
-| [cli.SetDoc](#setdoc) ||
-| [cli.String](#string) ||
-| [cli.StringSlice](#stringslice) ||
-| [cli.Url](#url) ||
-| [cli.Urls](#urls) ||
-| [cli.YakitPlugin](#yakitplugin) ||
-| [cli.check](#check) ||
-| [cli.help](#help) ||
-| [cli.setDefault](#setdefault) ||
-| [cli.setHelp](#sethelp) ||
-| [cli.setRequired](#setrequired) ||
+| [cli.SetCliName](#setcliname) |SetCliName 设置此命令行程序的名称  这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示  |
+| [cli.SetDoc](#setdoc) |SetDoc 设置此命令行程序的文档  这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示  |
+| [cli.String](#string) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
+| [cli.StringSlice](#stringslice) |StringSlice 获取对应名称的命令行参数，将其字符串根据","切割返回 []string 类型  |
+| [cli.Text](#text) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
+| [cli.Url](#url) |Urls 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型  |
+| [cli.Urls](#urls) |Urls 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型  |
+| [cli.YakCode](#yakcode) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
+| [cli.YakitPlugin](#yakitplugin) |YakitPlugin 获取名称为 yakit-plugin-file 的命令行参数  根据其传入的值读取其对应文件内容并根据"|"切割并返回 []string 类型，表示各个插件名  |
+| [cli.check](#check) |check 用于检查命令行参数是否合法，这主要检查必要参数是否传入与传入值是否合法  |
+| [cli.help](#help) |help 用于输出命令行程序的帮助信息  |
+| [cli.setCliGroup](#setcligroup) ||
+| [cli.setDefault](#setdefault) |setDefaultValue 是一个选项函数，设置参数的默认值  |
+| [cli.setHelp](#sethelp) |setHelp 是一个选项函数，设置参数的帮助信息  这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示  |
+| [cli.setMultipleSelect](#setmultipleselect) ||
+| [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须  |
+| [cli.setSelectOption](#setselectoption) ||
+| [cli.setVerboseName](#setverbosename) ||
 
 
 ## 函数定义
@@ -51,17 +58,23 @@
 ### Bool
 
 #### 详细描述
+Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回
+
+Example:
+```
+verbose = cli.Bool("verbose") // --verbose 则为true
+```
 
 
 #### 定义
 
-`Bool(name string, opts ...setCliExtraParam) bool`
+`Bool(name string, opts ...SetCliExtraParam) bool`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -72,17 +85,22 @@
 ### Double
 
 #### 详细描述
+Float 获取对应名称的命令行参数，并将其转换为 float 类型返回
+
+Example:
+```
+percent = cli.Float("percent") // --percent 0.5 则 percent 为 0.5
 
 
 #### 定义
 
-`Double(name string, opts ...setCliExtraParam) float64`
+`Double(name string, opts ...SetCliExtraParam) float64`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -93,17 +111,24 @@
 ### File
 
 #### 详细描述
+File 获取对应名称的命令行参数，根据其传入的值读取其对应文件内容并返回 []byte 类型
+
+Example:
+```
+file = cli.File("file")
+// --file /etc/passwd 则 file 为 /etc/passwd 文件中的内容
+```
 
 
 #### 定义
 
-`File(name string, opts ...setCliExtraParam) []byte`
+`File(name string, opts ...SetCliExtraParam) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -114,17 +139,27 @@
 ### FileOrContent
 
 #### 详细描述
+FileOrContent 获取对应名称的命令行参数
+
+根据其传入的值尝试读取其对应文件内容，如果无法读取则直接返回，最后返回 []byte 类型
+
+Example:
+```
+foc = cli.FileOrContent("foc")
+// --foc /etc/passwd 则 foc 为 /etc/passwd 文件中的内容
+// --file "asd" 则 file 为 "asd"
+```
 
 
 #### 定义
 
-`FileOrContent(name string, opts ...setCliExtraParam) []byte`
+`FileOrContent(name string, opts ...SetCliExtraParam) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -135,17 +170,22 @@
 ### Float
 
 #### 详细描述
+Float 获取对应名称的命令行参数，并将其转换为 float 类型返回
+
+Example:
+```
+percent = cli.Float("percent") // --percent 0.5 则 percent 为 0.5
 
 
 #### 定义
 
-`Float(name string, opts ...setCliExtraParam) float64`
+`Float(name string, opts ...SetCliExtraParam) float64`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -153,20 +193,53 @@
 | r1 | `float64` |   |
 
 
-### Have
+### HTTPPacket
 
 #### 详细描述
+String 获取对应名称的命令行参数，并将其转换为 string 类型返回
+
+Example:
+```
+target = cli.String("target") // --target yaklang.com 则 target 为 yaklang.com
+```
 
 
 #### 定义
 
-`Have(name string, opts ...setCliExtraParam) bool`
+`HTTPPacket(name string, opts ...SetCliExtraParam) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### Have
+
+#### 详细描述
+Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回
+
+Example:
+```
+verbose = cli.Bool("verbose") // --verbose 则为true
+```
+
+
+#### 定义
+
+`Have(name string, opts ...SetCliExtraParam) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -177,17 +250,23 @@
 ### Host
 
 #### 详细描述
+Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型
+
+Example:
+```
+hosts = cli.Hosts("hosts")
+// --hosts 192.168.0.0/24,172.17.0.1 则 hosts 为 192.168.0.0/24对应的所有IP和172.17.0.1
 
 
 #### 定义
 
-`Host(name string, opts ...setCliExtraParam) []string`
+`Host(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -198,17 +277,23 @@
 ### Hosts
 
 #### 详细描述
+Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型
+
+Example:
+```
+hosts = cli.Hosts("hosts")
+// --hosts 192.168.0.0/24,172.17.0.1 则 hosts 为 192.168.0.0/24对应的所有IP和172.17.0.1
 
 
 #### 定义
 
-`Hosts(name string, opts ...setCliExtraParam) []string`
+`Hosts(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -219,17 +304,23 @@
 ### Int
 
 #### 详细描述
+Int 获取对应名称的命令行参数，并将其转换为 int 类型返回
+
+Example:
+```
+port = cli.Int("port") // --port 80 则 port 为 80
+```
 
 
 #### 定义
 
-`Int(name string, opts ...setCliExtraParam) int`
+`Int(name string, opts ...SetCliExtraParam) int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -240,17 +331,23 @@
 ### Integer
 
 #### 详细描述
+Int 获取对应名称的命令行参数，并将其转换为 int 类型返回
+
+Example:
+```
+port = cli.Int("port") // --port 80 则 port 为 80
+```
 
 
 #### 定义
 
-`Integer(name string, opts ...setCliExtraParam) int`
+`Integer(name string, opts ...SetCliExtraParam) int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -261,17 +358,27 @@
 ### LineDict
 
 #### 详细描述
+LineDict 获取对应名称的命令行参数
+
+根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型
+
+Example:
+```
+dict = cli.LineDict("dict")
+// --dict /etc/passwd 则 dict 为 /etc/passwd 文件中的逐行的内容
+// --dict "asd" 则 dict 为 ["asd"]
+```
 
 
 #### 定义
 
-`LineDict(name string, opts ...setCliExtraParam) []string`
+`LineDict(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -282,17 +389,23 @@
 ### Net
 
 #### 详细描述
+Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型
+
+Example:
+```
+hosts = cli.Hosts("hosts")
+// --hosts 192.168.0.0/24,172.17.0.1 则 hosts 为 192.168.0.0/24对应的所有IP和172.17.0.1
 
 
 #### 定义
 
-`Net(name string, opts ...setCliExtraParam) []string`
+`Net(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -303,17 +416,23 @@
 ### Network
 
 #### 详细描述
+Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型
+
+Example:
+```
+hosts = cli.Hosts("hosts")
+// --hosts 192.168.0.0/24,172.17.0.1 则 hosts 为 192.168.0.0/24对应的所有IP和172.17.0.1
 
 
 #### 定义
 
-`Network(name string, opts ...setCliExtraParam) []string`
+`Network(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -328,13 +447,13 @@
 
 #### 定义
 
-`Port(name string, opts ...setCliExtraParam) []int`
+`Port(name string, opts ...SetCliExtraParam) []int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -349,13 +468,13 @@
 
 #### 定义
 
-`Ports(name string, opts ...setCliExtraParam) []int`
+`Ports(name string, opts ...SetCliExtraParam) []int`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -366,6 +485,14 @@
 ### SetCliName
 
 #### 详细描述
+SetCliName 设置此命令行程序的名称
+
+这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示
+
+Example:
+```
+cli.SetCliName("example-tools")
+```
 
 
 #### 定义
@@ -381,6 +508,14 @@
 ### SetDoc
 
 #### 详细描述
+SetDoc 设置此命令行程序的文档
+
+这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示
+
+Example:
+```
+cli.SetDoc("example-tools is a tool for example")
+```
 
 
 #### 定义
@@ -396,17 +531,23 @@
 ### String
 
 #### 详细描述
+String 获取对应名称的命令行参数，并将其转换为 string 类型返回
+
+Example:
+```
+target = cli.String("target") // --target yaklang.com 则 target 为 yaklang.com
+```
 
 
 #### 定义
 
-`String(name string, opts ...setCliExtraParam) string`
+`String(name string, opts ...SetCliExtraParam) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -417,16 +558,24 @@
 ### StringSlice
 
 #### 详细描述
+StringSlice 获取对应名称的命令行参数，将其字符串根据","切割返回 []string 类型
+
+Example:
+```
+targets = cli.StringSlice("targets")
+// --targets yaklang.com,google.com 则 targets 为 ["yaklang.com", "google.com"]
+```
 
 
 #### 定义
 
-`StringSlice(name string) []string`
+`StringSlice(name string, options ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
+| options | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -434,20 +583,54 @@
 | r1 | `[]string` |   |
 
 
-### Url
+### Text
 
 #### 详细描述
+String 获取对应名称的命令行参数，并将其转换为 string 类型返回
+
+Example:
+```
+target = cli.String("target") // --target yaklang.com 则 target 为 yaklang.com
+```
 
 
 #### 定义
 
-`Url(name string, opts ...setCliExtraParam) []string`
+`Text(name string, opts ...SetCliExtraParam) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### Url
+
+#### 详细描述
+Urls 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型
+
+Example:
+```
+urls = cli.Urls("urls")
+// --urls yaklang.com:443,google.com:443 则 urls 为 ["https://yaklang.com", "https://google.com"]
+```
+
+
+#### 定义
+
+`Url(name string, opts ...SetCliExtraParam) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -458,17 +641,24 @@
 ### Urls
 
 #### 详细描述
+Urls 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型
+
+Example:
+```
+urls = cli.Urls("urls")
+// --urls yaklang.com:443,google.com:443 则 urls 为 ["https://yaklang.com", "https://google.com"]
+```
 
 
 #### 定义
 
-`Urls(name string, opts ...setCliExtraParam) []string`
+`Urls(name string, opts ...SetCliExtraParam) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...setCliExtraParam` |   |
+| opts | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -476,14 +666,55 @@
 | r1 | `[]string` |   |
 
 
-### YakitPlugin
+### YakCode
 
 #### 详细描述
+String 获取对应名称的命令行参数，并将其转换为 string 类型返回
+
+Example:
+```
+target = cli.String("target") // --target yaklang.com 则 target 为 yaklang.com
+```
 
 
 #### 定义
 
-`YakitPlugin() []string`
+`YakCode(name string, opts ...SetCliExtraParam) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### YakitPlugin
+
+#### 详细描述
+YakitPlugin 获取名称为 yakit-plugin-file 的命令行参数
+
+根据其传入的值读取其对应文件内容并根据"|"切割并返回 []string 类型，表示各个插件名
+
+Example:
+```
+plugins = cli.YakitPlugin()
+// --yakit-plugin-file plugins.txt 则 plugins 为 plugins.txt 文件中的各个插件名
+```
+
+
+#### 定义
+
+`YakitPlugin(options ...SetCliExtraParam) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| options | `...SetCliExtraParam` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -494,6 +725,13 @@
 ### check
 
 #### 详细描述
+check 用于检查命令行参数是否合法，这主要检查必要参数是否传入与传入值是否合法
+
+Example:
+```
+target = cli.String("target", cli.SetRequired(true))
+cli.check()
+```
 
 
 #### 定义
@@ -504,6 +742,12 @@
 ### help
 
 #### 详细描述
+help 用于输出命令行程序的帮助信息
+
+Example:
+```
+cli.help()
+```
 
 
 #### 定义
@@ -516,14 +760,30 @@
 | w | `...io.Writer` |   |
 
 
-### setDefault
+### setCliGroup
 
 #### 详细描述
 
 
 #### 定义
 
-`setDefault(i any) setCliExtraParam`
+`setCliGroup()`
+
+
+### setDefault
+
+#### 详细描述
+setDefaultValue 是一个选项函数，设置参数的默认值
+
+Example:
+```
+cli.String("target", cli.SetDefaultValue("yaklang.com"))
+```
+
+
+#### 定义
+
+`setDefault(i any) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -533,17 +793,25 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setHelp
 
 #### 详细描述
+setHelp 是一个选项函数，设置参数的帮助信息
+
+这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示
+
+Example:
+```
+cli.String("target", cli.SetHelp("target host or ip"))
+```
 
 
 #### 定义
 
-`setHelp(i string) setCliExtraParam`
+`setHelp(i string) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -553,17 +821,33 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
 
 
-### setRequired
+### setMultipleSelect
 
 #### 详细描述
 
 
 #### 定义
 
-`setRequired(t bool) setCliExtraParam`
+`setMultipleSelect()`
+
+
+### setRequired
+
+#### 详细描述
+setRequired 是一个选项函数，设置参数是否必须
+
+Example:
+```
+cli.String("target", cli.SetRequired(true))
+```
+
+
+#### 定义
+
+`setRequired(t bool) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -573,6 +857,26 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `setCliExtraParam` |   |
+| r1 | `SetCliExtraParam` |   |
+
+
+### setSelectOption
+
+#### 详细描述
+
+
+#### 定义
+
+`setSelectOption()`
+
+
+### setVerboseName
+
+#### 详细描述
+
+
+#### 定义
+
+`setVerboseName()`
 
 

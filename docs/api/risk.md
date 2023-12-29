@@ -384,7 +384,7 @@
 
 #### 定义
 
-`NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*Risk, error)`
+`NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*Risk , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -396,8 +396,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Risk` |   |
-| r2 | `error` |   |
+| *Risk | `` |   |
+| error | `` |   |
 
 
 ### RegisterBeforeRiskSave
@@ -582,17 +582,17 @@
 
 #### 定义
 
-`ignore(i bool) RiskParamsOpt`
+`ignore(r *Risk)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `bool` |   |
+| r | `*Risk` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RiskParamsOpt` |   |
+| r1 | `` |   |
 
 
 ### level

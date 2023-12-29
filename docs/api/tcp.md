@@ -7,8 +7,8 @@
 | [tcp.MockServe](#mockserve) ||
 | [tcp.MockTCPProtocol](#mocktcpprotocol) ||
 | [tcp.Serve](#serve) ||
-| [tcp.cliengProxy](#cliengproxy) ||
 | [tcp.clientLocal](#clientlocal) ||
+| [tcp.clientProxy](#clientproxy) ||
 | [tcp.clientTimeout](#clienttimeout) ||
 | [tcp.clientTls](#clienttls) ||
 | [tcp.serverCallback](#servercallback) ||
@@ -126,26 +126,6 @@
 | r1 | `error` |   |
 
 
-### cliengProxy
-
-#### 详细描述
-
-
-#### 定义
-
-`cliengProxy(proxy string) dialerOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| proxy | `string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `dialerOpt` |   |
-
-
 ### clientLocal
 
 #### 详细描述
@@ -159,6 +139,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `dialerOpt` |   |
+
+
+### clientProxy
+
+#### 详细描述
+
+
+#### 定义
+
+`clientProxy(proxy string) dialerOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| proxy | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
