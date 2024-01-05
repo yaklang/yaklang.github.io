@@ -56,6 +56,7 @@
 | [yso.dnslogDomain](#dnslogdomain) ||
 | [yso.dump](#dump) ||
 | [yso.evilClassName](#evilclassname) |公共参数 |
+| [yso.majorVersion](#majorversion) ||
 | [yso.obfuscationClassConstantPool](#obfuscationclassconstantpool) ||
 | [yso.springEchoBody](#springechobody) ||
 | [yso.springHeader](#springheader) ||
@@ -67,31 +68,31 @@
 | [yso.useBase64BytesClass](#usebase64bytesclass) ||
 | [yso.useBytesClass](#usebytesclass) ||
 | [yso.useBytesEvilClass](#usebytesevilclass) |生成自定义Class |
-| [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) |MultiEcho |
+| [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) ||
 | [yso.useConstructorExecutor](#useconstructorexecutor) ||
 | [yso.useDNSLogEvilClass](#usednslogevilclass) ||
-| [yso.useDNSlogTemplate](#usednslogtemplate) |dnslog参数 |
+| [yso.useDNSlogTemplate](#usednslogtemplate) ||
 | [yso.useHeaderEchoEvilClass](#useheaderechoevilclass) ||
-| [yso.useHeaderEchoTemplate](#useheaderechotemplate) |HeaderEchoClass |
+| [yso.useHeaderEchoTemplate](#useheaderechotemplate) ||
 | [yso.useHeaderParam](#useheaderparam) ||
-| [yso.useModifyTomcatMaxHeaderSizeTemplate](#usemodifytomcatmaxheadersizetemplate) |ModifyTomcatMaxHeaderSize |
+| [yso.useModifyTomcatMaxHeaderSizeTemplate](#usemodifytomcatmaxheadersizetemplate) ||
 | [yso.useMultiEchoEvilClass](#usemultiechoevilclass) ||
 | [yso.useProcessBuilderExecEvilClass](#useprocessbuilderexecevilclass) ||
-| [yso.useProcessBuilderExecTemplate](#useprocessbuilderexectemplate) |ProcessBuilderExec 参数 |
+| [yso.useProcessBuilderExecTemplate](#useprocessbuilderexectemplate) ||
 | [yso.useProcessImplExecEvilClass](#useprocessimplexecevilclass) ||
-| [yso.useProcessImplExecTemplate](#useprocessimplexectemplate) |ProcessImplExec 参数 |
+| [yso.useProcessImplExecTemplate](#useprocessimplexectemplate) ||
 | [yso.useRuntimeExecEvilClass](#useruntimeexecevilclass) ||
-| [yso.useRuntimeExecTemplate](#useruntimeexectemplate) |RuntimeExec 参数 |
+| [yso.useRuntimeExecTemplate](#useruntimeexectemplate) ||
 | [yso.useSleepEvilClass](#usesleepevilclass) ||
-| [yso.useSleepTemplate](#usesleeptemplate) |SleepClass |
+| [yso.useSleepTemplate](#usesleeptemplate) ||
 | [yso.useSleepTime](#usesleeptime) ||
-| [yso.useSpringEchoTemplate](#usespringechotemplate) |spring参数 |
+| [yso.useSpringEchoTemplate](#usespringechotemplate) ||
 | [yso.useTcpReverseEvilClass](#usetcpreverseevilclass) ||
 | [yso.useTcpReverseShellEvilClass](#usetcpreverseshellevilclass) ||
-| [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) |生成tcp反弹shell |
-| [yso.useTcpReverseTemplate](#usetcpreversetemplate) |生成tcp反连 |
+| [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) ||
+| [yso.useTcpReverseTemplate](#usetcpreversetemplate) ||
 | [yso.useTomcatEchoEvilClass](#usetomcatechoevilclass) ||
-| [yso.useTomcatEchoTemplate](#usetomcatechotemplate) |Tomcat回显 |
+| [yso.useTomcatEchoTemplate](#usetomcatechotemplate) ||
 
 
 ## 函数定义
@@ -1218,6 +1219,26 @@ spring生成
 | r1 | `GenClassOptionFun` |   |
 
 
+### majorVersion
+
+#### 详细描述
+
+
+#### 定义
+
+`majorVersion(v uint16) GenClassOptionFun`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `uint16` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GenClassOptionFun` |   |
+
+
 ### obfuscationClassConstantPool
 
 #### 详细描述
@@ -1225,12 +1246,17 @@ spring生成
 
 #### 定义
 
-`obfuscationClassConstantPool() GenClassOptionFun`
+`obfuscationClassConstantPool(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### springEchoBody
@@ -1240,12 +1266,17 @@ spring生成
 
 #### 定义
 
-`springEchoBody() GenClassOptionFun`
+`springEchoBody(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### springHeader
@@ -1296,12 +1327,17 @@ spring生成
 
 #### 定义
 
-`springRuntimeExecAction() GenClassOptionFun`
+`springRuntimeExecAction(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### tcpReverseHost
@@ -1428,17 +1464,21 @@ spring生成
 ### useClassMultiEchoTemplate
 
 #### 详细描述
-MultiEcho
 
 
 #### 定义
 
-`useClassMultiEchoTemplate() GenClassOptionFun`
+`useClassMultiEchoTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useConstructorExecutor
@@ -1448,12 +1488,17 @@ MultiEcho
 
 #### 定义
 
-`useConstructorExecutor() GenClassOptionFun`
+`useConstructorExecutor(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useDNSLogEvilClass
@@ -1479,17 +1524,21 @@ MultiEcho
 ### useDNSlogTemplate
 
 #### 详细描述
-dnslog参数
 
 
 #### 定义
 
-`useDNSlogTemplate() GenClassOptionFun`
+`useDNSlogTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useHeaderEchoEvilClass
@@ -1499,28 +1548,37 @@ dnslog参数
 
 #### 定义
 
-`useHeaderEchoEvilClass() GenClassOptionFun`
+`useHeaderEchoEvilClass(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useHeaderEchoTemplate
 
 #### 详细描述
-HeaderEchoClass
 
 
 #### 定义
 
-`useHeaderEchoTemplate() GenClassOptionFun`
+`useHeaderEchoTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useHeaderParam
@@ -1547,17 +1605,21 @@ HeaderEchoClass
 ### useModifyTomcatMaxHeaderSizeTemplate
 
 #### 详细描述
-ModifyTomcatMaxHeaderSize
 
 
 #### 定义
 
-`useModifyTomcatMaxHeaderSizeTemplate() GenClassOptionFun`
+`useModifyTomcatMaxHeaderSizeTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useMultiEchoEvilClass
@@ -1567,12 +1629,17 @@ ModifyTomcatMaxHeaderSize
 
 #### 定义
 
-`useMultiEchoEvilClass() GenClassOptionFun`
+`useMultiEchoEvilClass(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useProcessBuilderExecEvilClass
@@ -1598,17 +1665,21 @@ ModifyTomcatMaxHeaderSize
 ### useProcessBuilderExecTemplate
 
 #### 详细描述
-ProcessBuilderExec 参数
 
 
 #### 定义
 
-`useProcessBuilderExecTemplate() GenClassOptionFun`
+`useProcessBuilderExecTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useProcessImplExecEvilClass
@@ -1634,17 +1705,21 @@ ProcessBuilderExec 参数
 ### useProcessImplExecTemplate
 
 #### 详细描述
-ProcessImplExec 参数
 
 
 #### 定义
 
-`useProcessImplExecTemplate() GenClassOptionFun`
+`useProcessImplExecTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useRuntimeExecEvilClass
@@ -1670,17 +1745,21 @@ ProcessImplExec 参数
 ### useRuntimeExecTemplate
 
 #### 详细描述
-RuntimeExec 参数
 
 
 #### 定义
 
-`useRuntimeExecTemplate() GenClassOptionFun`
+`useRuntimeExecTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useSleepEvilClass
@@ -1690,28 +1769,37 @@ RuntimeExec 参数
 
 #### 定义
 
-`useSleepEvilClass() GenClassOptionFun`
+`useSleepEvilClass(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useSleepTemplate
 
 #### 详细描述
-SleepClass
 
 
 #### 定义
 
-`useSleepTemplate() GenClassOptionFun`
+`useSleepTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useSleepTime
@@ -1737,17 +1825,21 @@ SleepClass
 ### useSpringEchoTemplate
 
 #### 详细描述
-spring参数
 
 
 #### 定义
 
-`useSpringEchoTemplate() GenClassOptionFun`
+`useSpringEchoTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useTcpReverseEvilClass
@@ -1795,33 +1887,41 @@ spring参数
 ### useTcpReverseShellTemplate
 
 #### 详细描述
-生成tcp反弹shell
 
 
 #### 定义
 
-`useTcpReverseShellTemplate() GenClassOptionFun`
+`useTcpReverseShellTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useTcpReverseTemplate
 
 #### 详细描述
-生成tcp反连
 
 
 #### 定义
 
-`useTcpReverseTemplate() GenClassOptionFun`
+`useTcpReverseTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useTomcatEchoEvilClass
@@ -1831,27 +1931,36 @@ spring参数
 
 #### 定义
 
-`useTomcatEchoEvilClass() GenClassOptionFun`
+`useTomcatEchoEvilClass(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 
 ### useTomcatEchoTemplate
 
 #### 详细描述
-Tomcat回显
 
 
 #### 定义
 
-`useTomcatEchoTemplate() GenClassOptionFun`
+`useTomcatEchoTemplate(config *ClassConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*ClassConfig` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GenClassOptionFun` |   |
+| r1 | `` |   |
 
 

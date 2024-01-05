@@ -5,11 +5,18 @@
 | [spacengine.FofaQuery](#fofaquery) ||
 | [spacengine.HunterQuery](#hunterquery) ||
 | [spacengine.QuakeQuery](#quakequery) ||
+| [spacengine.Query](#query) ||
 | [spacengine.ShodanQuery](#shodanquery) ||
 | [spacengine.ZoomeyeQuery](#zoomeyequery) ||
+| [spacengine.engine](#engine) ||
+| [spacengine.fofa](#fofa) ||
+| [spacengine.hunter](#hunter) ||
 | [spacengine.maxPage](#maxpage) ||
 | [spacengine.maxRecord](#maxrecord) ||
 | [spacengine.pageSize](#pagesize) ||
+| [spacengine.quake](#quake) ||
+| [spacengine.shodan](#shodan) ||
+| [spacengine.zoomeye](#zoomeye) ||
 
 
 ## 函数定义
@@ -84,6 +91,28 @@
 | r2 | `error` |   |
 
 
+### Query
+
+#### 详细描述
+
+
+#### 定义
+
+`Query(filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filter | `string` |   |
+| opts | `..._spaceEngineConfigOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
+
+
 ### ShodanQuery
 
 #### 详细描述
@@ -128,6 +157,67 @@
 |:-----------|:---------- |:-----------|
 | r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
+
+
+### engine
+
+#### 详细描述
+
+
+#### 定义
+
+`engine(i string, auth ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+| auth | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### fofa
+
+#### 详细描述
+
+
+#### 定义
+
+`fofa(auth ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| auth | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### hunter
+
+#### 详细描述
+
+
+#### 定义
+
+`hunter(auth ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| auth | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
 
 
 ### maxPage
@@ -183,6 +273,66 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### quake
+
+#### 详细描述
+
+
+#### 定义
+
+`quake(api ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| api | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### shodan
+
+#### 详细描述
+
+
+#### 定义
+
+`shodan(api ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| api | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### zoomeye
+
+#### 详细描述
+
+
+#### 定义
+
+`zoomeye(api ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| api | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -9,6 +9,7 @@
 | [httpool.host](#host) ||
 | [httpool.https](#https) ||
 | [httpool.noFixContentLength](#nofixcontentlength) ||
+| [httpool.noRedirect](#noredirect) ||
 | [httpool.perRequestTimeout](#perrequesttimeout) ||
 | [httpool.port](#port) ||
 | [httpool.proxy](#proxy) ||
@@ -154,6 +155,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | f | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `HttpPoolConfigOption` |   |
+
+
+### noRedirect
+
+#### 详细描述
+
+
+#### 定义
+
+`noRedirect(i bool) HttpPoolConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

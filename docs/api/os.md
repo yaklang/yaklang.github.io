@@ -2,43 +2,46 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [os.Chdir](#chdir) |Chdir 改变当前工作目录 |
-| [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限 |
-| [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组 |
-| [os.Clearenv](#clearenv) |Clearenv 清空所有环境变量 |
-| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为"key=value" |
-| [os.Executable](#executable) |Executable 获取当前可执行文件的路径 |
-| [os.Exit](#exit) |Exit 退出当前进程 |
-| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值 |
-| [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片 |
-| [os.GetMachineID](#getmachineid) |GetMachineID 获取每个机器唯一的标识符 |
-| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) |GetRandomAvailableTCPPort 获取随机可用的TCP端口 |
-| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) |GetRandomAvailableUDPPort 获取随机可用的UDP端口 |
-| [os.Getegid](#getegid) |Getegid 获取当前进程的有效组ID |
-| [os.Getenv](#getenv) |Getenv 获取指定的环境变量的值，如果不存在则返回空字符串 |
-| [os.Geteuid](#geteuid) |Geteuid 获取当前进程的有效用户ID |
-| [os.Getgid](#getgid) |Getgid 获取当前进程的组ID |
-| [os.Getpid](#getpid) |Getpid 获取当前进程的进程ID |
-| [os.Getppid](#getppid) |Getppid  获取当前进程的父进程ID |
-| [os.Getuid](#getuid) |Getuid 获取当前进程的用户ID |
-| [os.Getwd](#getwd) |Getwd 获取当前工作目录路径 |
-| [os.Hostname](#hostname) |Hostname 获取主机名 |
-| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) |IsRemoteTCPPortOpen 检查远程TCP端口是否开放 |
-| [os.IsTCPPortAvailable](#istcpportavailable) |IsTCPPortAvailable 检查TCP端口是否可用 |
-| [os.IsTCPPortOpen](#istcpportopen) |IsTCPPortOpen 检查TCP端口是否开放 |
-| [os.IsUDPPortAvailable](#isudpportavailable) |IsUDPPortAvailable 检查UDP端口是否可用 |
-| [os.IsUDPPortOpen](#isudpportopen) |IsUDPPortOpen 检查UDP端口是否开放 |
-| [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值 |
-| [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP |
-| [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP |
-| [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误 |
-| [os.Remove](#remove) |Remove 删除指定的文件或目录 |
-| [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其子路径 |
-| [os.Rename](#rename) |Rename 重命名文件或目录，可以用于移动文件或目录 |
-| [os.Setenv](#setenv) |Setenv 设置指定的环境变量 |
-| [os.TempDir](#tempdir) |TempDir 获取用于存放临时文件的默认目录路径 |
-| [os.Unsetenv](#unsetenv) |Unsetenv 删除指定的环境变量 |
-| [os.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动 |
+| [os.Chdir](#chdir) |Chdir 改变当前工作目录  |
+| [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限  |
+| [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组  |
+| [os.Clearenv](#clearenv) |Clearenv 清空所有环境变量  |
+| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为"key=value"  |
+| [os.Executable](#executable) |Executable 获取当前可执行文件的路径  |
+| [os.Exit](#exit) |Exit 退出当前进程  |
+| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值  |
+| [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片  |
+| [os.GetLocalAddress](#getlocaladdress) |GetLocalAddress 获取本地IP地址  |
+| [os.GetLocalIPv4Address](#getlocalipv4address) |GetLocalIPv4Address 获取本地IPv4地址  |
+| [os.GetLocalIPv6Address](#getlocalipv6address) |GetLocalIPv6Address 获取本地IPv6地址  |
+| [os.GetMachineID](#getmachineid) |GetMachineID 获取每个机器唯一的标识符  |
+| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) |GetRandomAvailableTCPPort 获取随机可用的TCP端口  |
+| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) |GetRandomAvailableUDPPort 获取随机可用的UDP端口  |
+| [os.Getegid](#getegid) |Getegid 获取当前进程的有效组ID  |
+| [os.Getenv](#getenv) |Getenv 获取指定的环境变量的值，如果不存在则返回空字符串  |
+| [os.Geteuid](#geteuid) |Geteuid 获取当前进程的有效用户ID  |
+| [os.Getgid](#getgid) |Getgid 获取当前进程的组ID  |
+| [os.Getpid](#getpid) |Getpid 获取当前进程的进程ID  |
+| [os.Getppid](#getppid) |Getppid  获取当前进程的父进程ID  |
+| [os.Getuid](#getuid) |Getuid 获取当前进程的用户ID  |
+| [os.Getwd](#getwd) |Getwd 获取当前工作目录路径  |
+| [os.Hostname](#hostname) |Hostname 获取主机名  |
+| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) |IsRemoteTCPPortOpen 检查远程TCP端口是否开放  |
+| [os.IsTCPPortAvailable](#istcpportavailable) |IsTCPPortAvailable 检查TCP端口是否可用  |
+| [os.IsTCPPortOpen](#istcpportopen) |IsTCPPortOpen 检查TCP端口是否开放  |
+| [os.IsUDPPortAvailable](#isudpportavailable) |IsUDPPortAvailable 检查UDP端口是否可用  |
+| [os.IsUDPPortOpen](#isudpportopen) |IsUDPPortOpen 检查UDP端口是否开放  |
+| [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值  |
+| [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP  |
+| [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP  |
+| [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误  它实际是 io.Pipe 的别名  |
+| [os.Remove](#remove) |Remove 删除指定的文件或目录  |
+| [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其子路径  |
+| [os.Rename](#rename) |Rename 重命名文件或目录，可以用于移动文件或目录  |
+| [os.Setenv](#setenv) |Setenv 设置指定的环境变量  |
+| [os.TempDir](#tempdir) |TempDir 获取用于存放临时文件的默认目录路径  |
+| [os.Unsetenv](#unsetenv) |Unsetenv 删除指定的环境变量  |
+| [os.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动  |
 
 
 ## 函数定义
@@ -246,6 +249,69 @@ os.GetDefaultDNSServers()
 #### 定义
 
 `GetDefaultDNSServers() []string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### GetLocalAddress
+
+#### 详细描述
+GetLocalAddress 获取本地IP地址
+
+Example:
+```
+os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
+```
+
+
+#### 定义
+
+`GetLocalAddress() []string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### GetLocalIPv4Address
+
+#### 详细描述
+GetLocalIPv4Address 获取本地IPv4地址
+
+Example:
+```
+os.GetLocalIPv4Address() // ["192.168.3.103"]
+```
+
+
+#### 定义
+
+`GetLocalIPv4Address() []string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### GetLocalIPv6Address
+
+#### 详细描述
+GetLocalIPv6Address 获取本地IPv6地址
+
+Example:
+```
+os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
+```
+
+
+#### 定义
+
+`GetLocalIPv6Address() []string`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -726,6 +792,8 @@ os.LookupIP("www.yaklang.com")
 
 #### 详细描述
 Pipe 创建一个管道，返回一个读取端和一个写入端以及错误
+
+它实际是 io.Pipe 的别名
 
 Example:
 ```
