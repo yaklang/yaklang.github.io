@@ -111,14 +111,14 @@
 
 #### 定义
 
-`Serve(host any, port int, opts ...tcpServerConfigOpt) error`
+`Serve(host any, port int, opts ...TcpServerConfigOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | host | `any` |   |
 | port | `int` |   |
-| opts | `...tcpServerConfigOpt` |   |
+| opts | `...TcpServerConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -215,7 +215,7 @@
 
 #### 定义
 
-`serverCallback(cb func(connection *tcpConnection)) tcpServerConfigOpt`
+`serverCallback(cb func(connection *tcpConnection)) TcpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -225,7 +225,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `tcpServerConfigOpt` |   |
+| r1 | `TcpServerConfigOpt` |   |
 
 
 ### serverContext
@@ -235,7 +235,7 @@
 
 #### 定义
 
-`serverContext(ctx context.Context) tcpServerConfigOpt`
+`serverContext(ctx context.Context) TcpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -245,7 +245,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `tcpServerConfigOpt` |   |
+| r1 | `TcpServerConfigOpt` |   |
 
 
 ### serverTls
@@ -255,7 +255,7 @@
 
 #### 定义
 
-`serverTls(crt any, key any, cas ...any) tcpServerConfigOpt`
+`serverTls(crt any, key any, cas ...any) TcpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -267,6 +267,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `tcpServerConfigOpt` |   |
+| r1 | `TcpServerConfigOpt` |   |
 
 

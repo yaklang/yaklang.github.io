@@ -6,6 +6,7 @@
 | [cli.Bool](#bool) |Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回  |
 | [cli.Double](#double) |Float 获取对应名称的命令行参数，并将其转换为 float 类型返回  |
 | [cli.File](#file) |File 获取对应名称的命令行参数，根据其传入的值读取其对应文件内容并返回 []byte 类型  |
+| [cli.FileNames](#filenames) |FileNames 获取对应名称的命令行参数，获得选中的所有文件路径，并返回 []string 类型  |
 | [cli.FileOrContent](#fileorcontent) |FileOrContent 获取对应名称的命令行参数  根据其传入的值尝试读取其对应文件内容，如果无法读取则直接返回，最后返回 []byte 类型  |
 | [cli.Float](#float) |Float 获取对应名称的命令行参数，并将其转换为 float 类型返回  |
 | [cli.HTTPPacket](#httppacket) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
@@ -17,8 +18,8 @@
 | [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数  根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型  |
 | [cli.Net](#net) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
 | [cli.Network](#network) |Hosts 获取对应名称的命令行参数，根据","切割并尝试解析CIDR网段并返回 []string 类型  |
-| [cli.Port](#port) ||
-| [cli.Ports](#ports) ||
+| [cli.Port](#port) |Ports 获取对应名称的命令行参数，根据","与"-"切割并尝试解析端口并返回 []int 类型  |
+| [cli.Ports](#ports) |Ports 获取对应名称的命令行参数，根据","与"-"切割并尝试解析端口并返回 []int 类型  |
 | [cli.SetCliName](#setcliname) |SetCliName 设置此命令行程序的名称  这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示  |
 | [cli.SetDoc](#setdoc) |SetDoc 设置此命令行程序的文档  这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示  |
 | [cli.String](#string) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回  |
@@ -134,6 +135,34 @@ file = cli.File("file")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
+
+
+### FileNames
+
+#### 详细描述
+FileNames 获取对应名称的命令行参数，获得选中的所有文件路径，并返回 []string 类型
+
+Example:
+```
+file = cli.FileNames("file")
+// --file /etc/passwd,/etc/hosts 则 file 为 ["/etc/passwd", "/etc/hosts"]
+```
+
+
+#### 定义
+
+`FileNames(name string, opts ...SetCliExtraParam) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
 
 
 ### FileOrContent
@@ -443,6 +472,13 @@ hosts = cli.Hosts("hosts")
 ### Port
 
 #### 详细描述
+Ports 获取对应名称的命令行参数，根据","与"-"切割并尝试解析端口并返回 []int 类型
+
+Example:
+```
+ports = cli.Ports("ports")
+// --ports 10086-10088,23333 则 ports 为 [10086, 10087, 10088, 23333]
+```
 
 
 #### 定义
@@ -464,6 +500,13 @@ hosts = cli.Hosts("hosts")
 ### Ports
 
 #### 详细描述
+Ports 获取对应名称的命令行参数，根据","与"-"切割并尝试解析端口并返回 []int 类型
+
+Example:
+```
+ports = cli.Ports("ports")
+// --ports 10086-10088,23333 则 ports 为 [10086, 10087, 10088, 23333]
+```
 
 
 #### 定义
@@ -767,7 +810,12 @@ cli.help()
 
 #### 定义
 
-`setCliGroup()`
+`setCliGroup(group string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| group | `string` |   |
 
 
 ### setDefault
@@ -831,7 +879,12 @@ cli.String("target", cli.SetHelp("target host or ip"))
 
 #### 定义
 
-`setMultipleSelect()`
+`setMultipleSelect(multiSelect bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| multiSelect | `bool` |   |
 
 
 ### setRequired
@@ -867,7 +920,13 @@ cli.String("target", cli.SetRequired(true))
 
 #### 定义
 
-`setSelectOption()`
+`setSelectOption(name string, value string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| value | `string` |   |
 
 
 ### setVerboseName
@@ -877,6 +936,11 @@ cli.String("target", cli.SetRequired(true))
 
 #### 定义
 
-`setVerboseName()`
+`setVerboseName(verboseName string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| verboseName | `string` |   |
 
 

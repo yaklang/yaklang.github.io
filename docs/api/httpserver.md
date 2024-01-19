@@ -17,7 +17,7 @@
 
 #### 定义
 
-`LocalFileSystemServe(host string, port int, prefix string, localPath string, opts ..._httpServerConfigOpt) error`
+`LocalFileSystemServe(host string, port int, prefix string, localPath string, opts ...HttpServerConfigOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -26,7 +26,7 @@
 | port | `int` |   |
 | prefix | `string` |   |
 | localPath | `string` |   |
-| opts | `..._httpServerConfigOpt` |   |
+| opts | `...HttpServerConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -41,14 +41,14 @@
 
 #### 定义
 
-`Serve(host string, port int, opts ..._httpServerConfigOpt) error`
+`Serve(host string, port int, opts ...HttpServerConfigOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | host | `string` |   |
 | port | `int` |   |
-| opts | `..._httpServerConfigOpt` |   |
+| opts | `...HttpServerConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -63,7 +63,7 @@
 
 #### 定义
 
-`context(ctx context.Context) _httpServerConfigOpt`
+`context(ctx context.Context) HttpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -73,7 +73,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+| r1 | `HttpServerConfigOpt` |   |
 
 
 ### handler
@@ -83,7 +83,7 @@
 
 #### 定义
 
-`handler(cb func(rsp http.ResponseWriter, req *http.Request)) _httpServerConfigOpt`
+`handler(cb func(rsp http.ResponseWriter, req *http.Request)) HttpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -93,7 +93,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+| r1 | `HttpServerConfigOpt` |   |
 
 
 ### tlsCertAndKey
@@ -103,7 +103,7 @@
 
 #### 定义
 
-`tlsCertAndKey(crt any, key any, cas ...any) _httpServerConfigOpt`
+`tlsCertAndKey(crt any, key any, cas ...any) HttpServerConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -115,6 +115,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_httpServerConfigOpt` |   |
+| r1 | `HttpServerConfigOpt` |   |
 
 

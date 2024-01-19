@@ -26,7 +26,7 @@
 
 #### 定义
 
-`Pool(i any, opts ...HttpPoolConfigOption) (chan *_httpResult, error)`
+`Pool(i any, opts ...HttpPoolConfigOption) (chan *HttpResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -37,7 +37,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *_httpResult` |   |
+| r1 | `chan *HttpResult` |   |
 | r2 | `error` |   |
 
 

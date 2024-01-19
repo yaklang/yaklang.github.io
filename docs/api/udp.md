@@ -64,14 +64,14 @@
 
 #### 定义
 
-`Serve(host string, port any, opts ...udpServerOpt) error`
+`Serve(host string, port any, opts ...UdpServerOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | host | `string` |   |
 | port | `any` |   |
-| opts | `...udpServerOpt` |   |
+| opts | `...UdpServerOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -126,7 +126,7 @@
 
 #### 定义
 
-`serverCallback(cb func(*udpConnection, []byte)) udpServerOpt`
+`serverCallback(cb func(*udpConnection, []byte)) UdpServerOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -136,7 +136,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `udpServerOpt` |   |
+| r1 | `UdpServerOpt` |   |
 
 
 ### serverContext
@@ -146,7 +146,7 @@
 
 #### 定义
 
-`serverContext(ctx context.Context) udpServerOpt`
+`serverContext(ctx context.Context) UdpServerOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -156,7 +156,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `udpServerOpt` |   |
+| r1 | `UdpServerOpt` |   |
 
 
 ### serverTimeout
@@ -166,7 +166,7 @@
 
 #### 定义
 
-`serverTimeout(f float64) udpServerOpt`
+`serverTimeout(f float64) UdpServerOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -176,6 +176,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `udpServerOpt` |   |
+| r1 | `UdpServerOpt` |   |
 
 

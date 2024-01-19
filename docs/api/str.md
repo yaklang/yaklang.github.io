@@ -2924,7 +2924,7 @@ RandomUpperAndLower 返回一个随机大小写的字符串
 
 Example:
 ```
-str.RandomUpperAndLower("target“) // TArGeT
+str.RandomUpperAndLower("target") // TArGeT
 ```
 
 

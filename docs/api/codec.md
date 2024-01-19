@@ -76,9 +76,9 @@
 | [codec.RC4Decrypt](#rc4decrypt) ||
 | [codec.RC4Encrypt](#rc4encrypt) ||
 | [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) ||
-| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) ||
+| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误  |
 | [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) ||
-| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) ||
+| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误  |
 | [codec.Sha1](#sha1) ||
 | [codec.Sha224](#sha224) ||
 | [codec.Sha256](#sha256) ||
@@ -1749,6 +1749,12 @@ replacing special characters (including /) with %XX sequences as needed.
 ### RSADecryptWithPKCS1v15
 
 #### 详细描述
+DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误
+
+Example:
+```
+dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
+```
 
 
 #### 定义
@@ -1793,6 +1799,12 @@ replacing special characters (including /) with %XX sequences as needed.
 ### RSAEncryptWithPKCS1v15
 
 #### 详细描述
+EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误
+
+Example:
+```
+enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
+```
 
 
 #### 定义

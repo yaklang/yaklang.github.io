@@ -36,14 +36,14 @@ mitm.Bridge(8080, "", mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr
 
 #### 定义
 
-`Bridge(port any, downstreamProxy string, opts ...mitmConfigOpt) error`
+`Bridge(port any, downstreamProxy string, opts ...MitmConfigOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | port | `any` |   |
 | downstreamProxy | `string` |   |
-| opts | `...mitmConfigOpt` |   |
+| opts | `...MitmConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -66,13 +66,13 @@ mitm.Start(8080, mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr, req
 
 #### 定义
 
-`Start(port int, opts ...mitmConfigOpt) error`
+`Start(port int, opts ...MitmConfigOpt) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | port | `int` |   |
-| opts | `...mitmConfigOpt` |   |
+| opts | `...MitmConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -93,7 +93,7 @@ mitm.Start(8080, mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req);
 
 #### 定义
 
-`callback(f func(bool, string, *http.Request, *http.Response)) mitmConfigOpt`
+`callback(f func(bool, string, *http.Request, *http.Response)) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -103,7 +103,7 @@ mitm.Start(8080, mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req);
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### context
@@ -119,7 +119,7 @@ mitm.Start(8080, mitm.context(context.Background()))
 
 #### 定义
 
-`context(ctx context.Context) mitmConfigOpt`
+`context(ctx context.Context) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -129,7 +129,7 @@ mitm.Start(8080, mitm.context(context.Background()))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### hijackHTTPRequest
@@ -152,7 +152,7 @@ modified(req)
 
 #### 定义
 
-`hijackHTTPRequest(h func(isHttps bool, u string, req []byte, modified func([]byte), dropped func())) mitmConfigOpt`
+`hijackHTTPRequest(h func(isHttps bool, u string, req []byte, modified func([]byte), dropped func())) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -162,7 +162,7 @@ modified(req)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### hijackHTTPResponse
@@ -185,7 +185,7 @@ modified(rsp)
 
 #### 定义
 
-`hijackHTTPResponse(h func(isHttps bool, u string, rsp []byte, modified func([]byte), dropped func())) mitmConfigOpt`
+`hijackHTTPResponse(h func(isHttps bool, u string, rsp []byte, modified func([]byte), dropped func())) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -195,7 +195,7 @@ modified(rsp)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### hijackHTTPResponseEx
@@ -220,7 +220,7 @@ modified(rsp)
 
 #### 定义
 
-`hijackHTTPResponseEx(h func(bool, string, []byte, []byte, func([]byte), func())) mitmConfigOpt`
+`hijackHTTPResponseEx(h func(bool, string, []byte, []byte, func([]byte), func())) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -230,7 +230,7 @@ modified(rsp)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### host
@@ -246,7 +246,7 @@ mitm.Start(8080, mitm.host("127.0.0.1"))
 
 #### 定义
 
-`host(host string) mitmConfigOpt`
+`host(host string) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -256,7 +256,7 @@ mitm.Start(8080, mitm.host("127.0.0.1"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### isTransparent
@@ -274,7 +274,7 @@ mitm.Start(8080, mitm.isTransparent(true))
 
 #### 定义
 
-`isTransparent(b bool) mitmConfigOpt`
+`isTransparent(b bool) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -284,7 +284,7 @@ mitm.Start(8080, mitm.isTransparent(true))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### maxContentLength
@@ -300,7 +300,7 @@ mitm.Start(8080, mitm.maxContentLength(100 * 1000 * 1000))
 
 #### 定义
 
-`maxContentLength(i int) mitmConfigOpt`
+`maxContentLength(i int) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -310,7 +310,7 @@ mitm.Start(8080, mitm.maxContentLength(100 * 1000 * 1000))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### rootCA
@@ -326,7 +326,7 @@ mitm.Start(8080, mitm.rootCA(cert, key))
 
 #### 定义
 
-`rootCA(cert []byte, key []byte) mitmConfigOpt`
+`rootCA(cert []byte, key []byte) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -337,7 +337,7 @@ mitm.Start(8080, mitm.rootCA(cert, key))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### useDefaultCA
@@ -355,7 +355,7 @@ mitm.Start(8080, mitm.useDefaultCA(true))
 
 #### 定义
 
-`useDefaultCA(t bool) mitmConfigOpt`
+`useDefaultCA(t bool) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -365,7 +365,7 @@ mitm.Start(8080, mitm.useDefaultCA(true))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### wscallback
@@ -387,7 +387,7 @@ mitm.Start(8080, mitm.wscallback(func(data, isRequest) { println(data); return d
 
 #### 定义
 
-`wscallback(f func([]byte, bool) any) mitmConfigOpt`
+`wscallback(f func([]byte, bool) any) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -397,7 +397,7 @@ mitm.Start(8080, mitm.wscallback(func(data, isRequest) { println(data); return d
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
 ### wsforcetext
@@ -415,7 +415,7 @@ mitm.Start(8080, mitm.wsforcetext(true))
 
 #### 定义
 
-`wsforcetext(b bool) mitmConfigOpt`
+`wsforcetext(b bool) MitmConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -425,6 +425,6 @@ mitm.Start(8080, mitm.wsforcetext(true))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `mitmConfigOpt` |   |
+| r1 | `MitmConfigOpt` |   |
 
 
