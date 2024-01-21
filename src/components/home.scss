@@ -179,10 +179,11 @@ $min-width: REM(1232);
       &-type {
         margin-top: REM(16);
         display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
+        grid-template-columns: 32% 25% 25% 25%;
         grid-template-rows: REM(82);
       }
       &-item {
+        position: relative;
         font-size: REM(16);
         font-weight: 600;
         color: #2a2b31;
@@ -214,12 +215,37 @@ $min-width: REM(1232);
         }
 
         &:hover {
-          .guide-body-yakit-item-left {
-            .guide-body-yakit-item-left-icon {
-              display: none;
-            }
-            .guide-body-yakit-item-left-icon-hover {
-              display: inline-flex;
+          .download-btn-wrap {
+            display: block;
+          }
+        }
+
+        .download-btn-wrap {
+          display: none;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.8);
+          box-shadow: 0px 8px 24px 0px rgba(210, 214, 223, 0.3);
+          margin: REM(-16);
+          .download-btn-item-box {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            .download-btn-item {
+              color: #fff;
+              font-size: REM(14);
+              text-align: center;
+              background-color: #ff7d23;
+              width: REM(196);
+              height: REM(32);
+              line-height: REM(32);
+              border-radius: REM(4);
+              cursor: pointer;
+              &:hover {
+                opacity: 0.9;
+              }
             }
           }
         }

@@ -173,8 +173,9 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const [isFunctionRange, setIsFunctionRange] = useState<boolean>(false);
 
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
-  const [currentSelectYak, setCurrentSelectYak] =
-    useState<string>("MacOs(Intel/Apple Sillion)");
+  const [currentSelectYak, setCurrentSelectYak] = useState<string>(
+    "MacOs(Intel/Apple Sillion)"
+  );
 
   const [sureCopy, setSureCopy] = useState<boolean>(false);
   const [loadingCopy, setLoadingCopy] = useState<boolean>(false);
@@ -359,31 +360,30 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     return text;
   });
   const [version, setVersion] = useState<string>("");
-  const [exeList, setExeList] = useState({
-    "macOS (Intel)": {
-      url: "darwin-x64.dmg",
-      icon: AppleIcon,
-      iconHover: AppleHoverIcon,
-      size: 0,
-    },
-    "macOS (Apple Sillion)": {
-      url: "darwin-arm64.dmg",
-      icon: AppleIcon,
-      iconHover: AppleHoverIcon,
-      size: 0,
-    },
-    Linux: {
-      url: "linux-amd64.AppImage",
-      icon: LinuxIcon,
-      iconHover: LinuxHoverIcon,
-      size: 0,
-    },
-    Windows: {
-      url: "windows-amd64.exe",
-      icon: WindowsIcon,
-      iconHover: WindowsHoverIcon,
-      size: 0,
-    },
+  const [macOSIntel, setMacOSIntel] = useState({
+    key: "macOS (Intel)",
+    url: "darwin-x64.dmg",
+    size: 0,
+  });
+  const [macOSAppleSillion, setMacOSAppleSillion] = useState({
+    key: "macOS (Apple Sillion)",
+    url: "darwin-arm64.dmg",
+    size: 0,
+  });
+  const [Linux, setLinux] = useState({
+    key: "Linux",
+    url: "linux-amd64.AppImage",
+    size: 0,
+  });
+  const [Windows, setWindows] = useState({
+    key: "Windows",
+    url: "windows-amd64.exe",
+    size: 0,
+  });
+  const [LinuxArm64, setLinuxArm64] = useState({
+    key: "Linux (Arm64)",
+    url: "",
+    size: 0,
   });
   useEffect(() => {
     init();
@@ -397,13 +397,26 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         if (response && response.data && typeof response.data === "string") {
           const yakVersion = (response.data as string).split("\n")[0];
           setVersion(yakVersion);
-          for (const key in exeList) {
-            if (Object.prototype.hasOwnProperty.call(exeList, key)) {
-              const item = exeList[key];
-              await getSize(item.url, key);
+
+          await getSize(macOSIntel.url, macOSIntel.key, (size) => {
+            setMacOSIntel({ ...macOSIntel, size });
+          });
+          await getSize(
+            macOSAppleSillion.url,
+            macOSAppleSillion.key,
+            (size) => {
+              setMacOSAppleSillion({ ...macOSAppleSillion, size });
             }
-          }
-          setExeList({ ...exeList });
+          );
+          await getSize(Linux.url, Linux.key, (size: number) => {
+            setLinux({ ...Linux, size });
+          });
+          await getSize(Windows.url, Windows.key, (size: number) => {
+            setWindows({ ...Windows, size });
+          });
+          await getSize(LinuxArm64.url, LinuxArm64.key, (size: number) => {
+            setLinuxArm64({ ...LinuxArm64, size });
+          });
         } else {
           message.error("获取yakit版本错误，请刷新页面后重试");
         }
@@ -415,28 +428,30 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const getUrl = useMemoizedFn((url: string) => {
     return `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-${url}`;
   });
-  const getSize = useMemoizedFn(async (url: string, type: string) => {
-    await axios
-      .head(getUrl(url))
-      .then((response) => {
-        if (
-          response &&
-          response.headers &&
-          response.headers["content-length"]
-        ) {
-          const size =
-            Math.ceil(
-              (response.headers["content-length"] / 1024 / 1024) * 100
-            ) / 100;
-          exeList[type].size = size;
-        } else {
+  const getSize = useMemoizedFn(
+    async (url: string, type: string, callBack: any) => {
+      await axios
+        .head(getUrl(url))
+        .then((response) => {
+          if (
+            response &&
+            response.headers &&
+            response.headers["content-length"]
+          ) {
+            const size =
+              Math.ceil(
+                (response.headers["content-length"] / 1024 / 1024) * 100
+              ) / 100;
+            callBack(size);
+          } else {
+            message.error(`获取yakit-${url}版本大小错误`);
+          }
+        })
+        .catch((error) => {
           message.error(`获取yakit-${url}版本大小错误`);
-        }
-      })
-      .catch((error) => {
-        message.error(`获取yakit-${url}版本大小错误`);
-      });
-  });
+        });
+    }
+  );
 
   const onDownload = useMemoizedFn((url: string) => {
     if (!version) {
@@ -551,28 +566,114 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                 </a>
               </div>
               <div className="guide-body-yakit-type">
-                {Object.keys(exeList).map((exeKey) => (
-                  <div
-                    className="guide-body-yakit-item"
-                    key={"exeList" + exeKey}
-                    onClick={() => onDownload(exeList[exeKey].url)}
-                  >
-                    <div className="guide-body-yakit-item-left">
-                      <span className="guide-body-yakit-item-left-icon">
-                        {exeList[exeKey].icon}
-                      </span>
-                      <span className="guide-body-yakit-item-left-icon-hover">
-                        {exeList[exeKey].iconHover}
-                      </span>
+                <div className="guide-body-yakit-item">
+                  <div className="guide-body-yakit-item-left">
+                    <span className="guide-body-yakit-item-left-icon">
+                      {AppleIcon}
+                    </span>
+                  </div>
+                  <div className="guide-body-yakit-item-right">
+                    <div>macOS (Intel / Apple Sillion)</div>
+                    <div className="guide-body-yakit-item-right-size">
+                      {t("版本")}:&nbsp;{version || "-"}&nbsp;(
+                      {macOSIntel.size || "-"}
+                      &nbsp;MB / {macOSAppleSillion.size || "-"}&nbsp;MB)
                     </div>
-                    <div className="guide-body-yakit-item-right">
-                      <div>{exeKey}</div>
-                      <div className="guide-body-yakit-item-right-size">
-                        {t("版本")}:&nbsp;{version||"-"}&nbsp;({exeList[exeKey].size || "-"}&nbsp;MB)
+                  </div>
+
+                  <div className="download-btn-wrap">
+                    <div className="download-btn-item-box">
+                      <div
+                        className="download-btn-item"
+                        style={{ marginBottom: 4 }}
+                        onClick={() => onDownload(macOSIntel.url)}
+                      >
+                        {t("下载")} Inter {t("芯片")}
+                      </div>
+                      <div
+                        className="download-btn-item"
+                        onClick={() => onDownload(macOSAppleSillion.url)}
+                      >
+                        {t("下载")} M1 {t("芯片")}
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
+                <div className="guide-body-yakit-item">
+                  <div className="guide-body-yakit-item-left">
+                    <span className="guide-body-yakit-item-left-icon">
+                      {LinuxIcon}
+                    </span>
+                  </div>
+                  <div className="guide-body-yakit-item-right">
+                    <div>{Linux.key}</div>
+                    <div className="guide-body-yakit-item-right-size">
+                      {t("版本")}:&nbsp;{version || "-"}&nbsp;(
+                      {Linux.size || "-"}
+                      &nbsp;MB)
+                    </div>
+                  </div>
+                  <div className="download-btn-wrap">
+                    <div className="download-btn-item-box">
+                      <div
+                        className="download-btn-item"
+                        onClick={() => onDownload(Linux.url)}
+                      >
+                        {t("下载")}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="guide-body-yakit-item">
+                  <div className="guide-body-yakit-item-left">
+                    <span className="guide-body-yakit-item-left-icon">
+                      {WindowsIcon}
+                    </span>
+                  </div>
+                  <div className="guide-body-yakit-item-right">
+                    <div>{Windows.key}</div>
+                    <div className="guide-body-yakit-item-right-size">
+                      {t("版本")}:&nbsp;{version || "-"}&nbsp;(
+                      {Windows.size || "-"}
+                      &nbsp;MB)
+                    </div>
+                  </div>
+                  <div className="download-btn-wrap">
+                    <div className="download-btn-item-box">
+                      <div
+                        className="download-btn-item"
+                        onClick={() => onDownload(Windows.url)}
+                      >
+                        {t("下载")}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="guide-body-yakit-item">
+                  <div className="guide-body-yakit-item-left">
+                    <span className="guide-body-yakit-item-left-icon">
+                      {LinuxIcon}
+                    </span>
+                  </div>
+                  <div className="guide-body-yakit-item-right">
+                    <div>{LinuxArm64.key}</div>
+                    <div className="guide-body-yakit-item-right-size">
+                      {t("版本")}:&nbsp;{version || "-"}&nbsp;(
+                      {LinuxArm64.size || "-"}
+                      &nbsp;MB)
+                    </div>
+                  </div>
+                  <div className="download-btn-wrap">
+                    <div className="download-btn-item-box">
+                      <div
+                        className="download-btn-item"
+                        onClick={() => onDownload(LinuxArm64.url)}
+                      >
+                        {t("下载")}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -583,7 +684,14 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           }`}
         >
           <div className="sticky-content">
-            <div className="introduce-body-header" dangerouslySetInnerHTML={{ __html: t("网络安全领域的首个DSL", { interpolation: { escapeValue: false } }) }}></div>
+            <div
+              className="introduce-body-header"
+              dangerouslySetInnerHTML={{
+                __html: t("网络安全领域的首个DSL", {
+                  interpolation: { escapeValue: false },
+                }),
+              }}
+            ></div>
             <div className="introduce-body-kinds">
               {IntroduceKinds.map((item, index) => {
                 return (
@@ -637,10 +745,19 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         </div>
 
         <div className="function-body">
-          <div className="function-body-header" dangerouslySetInnerHTML={{ __html: t("Yakit-CDSL的最佳实践", { interpolation: { escapeValue: false } }) }}></div>
+          <div
+            className="function-body-header"
+            dangerouslySetInnerHTML={{
+              __html: t("Yakit-CDSL的最佳实践", {
+                interpolation: { escapeValue: false },
+              }),
+            }}
+          ></div>
           <div className="function-body-description">
             <div className="function-body-description-body">
-              {t("专注于安全领域，使用 DSL 模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持，一应俱全")}
+              {t(
+                "专注于安全领域，使用 DSL 模式提供安全领域能力基座和技术解决方案：漏洞扫描，反连检测，劫持手动测试，特殊协议支持，一应俱全"
+              )}
             </div>
           </div>
 
@@ -1193,7 +1310,7 @@ const KindModules = (props: KindModulesProps) => {
               <div className="efficent-img-content">
                 <div className="efficent-img-content-title">Yaklang</div>
                 <div className="efficent-img-content-text">
-                {t("可能是安全领域最先进的 DSL")} (Domain-Specific Language)
+                  {t("可能是安全领域最先进的 DSL")} (Domain-Specific Language)
                 </div>
                 <img
                   src={
@@ -1307,8 +1424,17 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={function_title}>
-          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("安全领域的语言集成与函数级调用", { interpolation: { escapeValue: false } }) }}></div>
-          <div className="kind-opt-body-title-subtitle">{t("使用函数级别的安全能力实现满足特定场景的定制化安全算法")}</div>
+          <div
+            className="kind-opt-body-title-content"
+            dangerouslySetInnerHTML={{
+              __html: t("安全领域的语言集成与函数级调用", {
+                interpolation: { escapeValue: false },
+              }),
+            }}
+          ></div>
+          <div className="kind-opt-body-title-subtitle">
+            {t("使用函数级别的安全能力实现满足特定场景的定制化安全算法")}
+          </div>
         </div>
       </div>
     );
@@ -1354,14 +1480,23 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={doc_title}>
-          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("自动补全与完善的教程文档为编写助力", { interpolation: { escapeValue: false } }) }}></div>
+          <div
+            className="kind-opt-body-title-content"
+            dangerouslySetInnerHTML={{
+              __html: t("自动补全与完善的教程文档为编写助力", {
+                interpolation: { escapeValue: false },
+              }),
+            }}
+          ></div>
           <div className="kind-opt-body-title-subtitle">
             <span>
-              <span className="subtitle-doc">/</span> {t("与 vscode 兼容的自动补全插件，辅助用户快速上手")}
+              <span className="subtitle-doc">/</span>{" "}
+              {t("与 vscode 兼容的自动补全插件，辅助用户快速上手")}
             </span>
             <br />
             <span>
-              <span className="subtitle-doc">/</span> {t("完善的教程文档提供全面指导")}
+              <span className="subtitle-doc">/</span>{" "}
+              {t("完善的教程文档提供全面指导")}
             </span>
           </div>
         </div>
@@ -1392,7 +1527,14 @@ const KindModules = (props: KindModulesProps) => {
         </div>
 
         <div className="kind-opt-body-title opacity-0" ref={tool_title}>
-          <div className="kind-opt-body-title-content" dangerouslySetInnerHTML={{ __html: t("高阶函数级集成", { interpolation: { escapeValue: false } }) }}></div>
+          <div
+            className="kind-opt-body-title-content"
+            dangerouslySetInnerHTML={{
+              __html: t("高阶函数级集成", {
+                interpolation: { escapeValue: false },
+              }),
+            }}
+          ></div>
           <div className="kind-opt-body-title-subtitle">
             <span>
               <span className="subtitle-doc">/ </span>
@@ -1404,7 +1546,8 @@ const KindModules = (props: KindModulesProps) => {
             </span>
             <br />
             <span className="subtitle-tool">
-              &nbsp;&nbsp;{t("TCP 随机端口(专利技术) / ICMP 反连 / 内置 DNSLog API")}
+              &nbsp;&nbsp;
+              {t("TCP 随机端口(专利技术) / ICMP 反连 / 内置 DNSLog API")}
             </span>
             <br />
             <span>
