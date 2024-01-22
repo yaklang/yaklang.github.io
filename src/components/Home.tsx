@@ -382,7 +382,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   });
   const [LinuxArm64, setLinuxArm64] = useState({
     key: "Linux (Arm64)",
-    url: "",
+    url: "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/Yakit-1.2.9-linux-arm64.AppImage",
     size: 0,
   });
   useEffect(() => {
@@ -431,7 +431,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const getSize = useMemoizedFn(
     async (url: string, type: string, callBack: any) => {
       await axios
-        .head(getUrl(url))
+        .head(type === "Linux (Arm64)" ? url : getUrl(url))
         .then((response) => {
           if (
             response &&
@@ -667,10 +667,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="download-btn-item-box">
                       <div
                         className="download-btn-item"
-                        onClick={() =>
-                          (window.location.href =
-                            "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/Yakit-1.2.9-linux-arm64.AppImage")
-                        }
+                        onClick={() => (window.location.href = LinuxArm64.url)}
                       >
                         {t("下载")}
                       </div>
