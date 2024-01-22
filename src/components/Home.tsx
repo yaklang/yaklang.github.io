@@ -667,7 +667,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     <div className="download-btn-item-box">
                       <div
                         className="download-btn-item"
-                        onClick={() => onDownload(LinuxArm64.url)}
+                        onClick={() =>
+                          (window.location.href =
+                            "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/Yakit-1.2.9-linux-arm64.AppImage")
+                        }
                       >
                         {t("下载")}
                       </div>
