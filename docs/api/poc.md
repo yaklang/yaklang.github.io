@@ -62,7 +62,7 @@
 | [poc.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceHTTPPacketBody 是一个辅助函数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输  |
 | [poc.ReplaceHTTPPacketCookie](#replacehttppacketcookie) |ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketFirstLine](#replacehttppacketfirstline) |ReplaceHTTPPacketFirstLine 是一个辅助，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
-| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改修改请求头，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketHost](#replacehttppackethost) |ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Host", host)的简写  |
 | [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法  |
 | [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径  |
@@ -374,13 +374,13 @@ raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yak
 
 #### 定义
 
-`BuildRequest(i any, opts ...PocConfig) []byte`
+`BuildRequest(i any, opts ...PocConfigOption) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -430,13 +430,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Delete(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Delete(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -627,14 +627,14 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Do(method string, urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Do(method string, urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | method | `string` |   |
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -743,13 +743,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Get(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Get(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1390,13 +1390,13 @@ poc.HTTP("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", poc.https(true), poc
 
 #### 定义
 
-`HTTP(i any, opts ...PocConfig) (rsp []byte, req []byte, err error)`
+`HTTP(i any, opts ...PocConfigOption) (rsp []byte, req []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1422,13 +1422,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`HTTPEx(i any, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`HTTPEx(i any, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1511,13 +1511,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Head(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Head(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1569,13 +1569,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Options(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Options(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1684,13 +1684,13 @@ desc(rsp) // 查看响应结构体中的可用字段
 
 #### 定义
 
-`Post(urlStr string, opts ...PocConfig) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
+`Post(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqInst *http.Request, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlStr | `string` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1903,7 +1903,7 @@ Host: Example.com
 ### ReplaceHTTPPacketHeader
 
 #### 详细描述
-ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改修改请求头，如果不存在则会增加
+ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加
 
 Example:
 ```
@@ -2131,13 +2131,13 @@ time.Sleep(100)
 
 #### 定义
 
-`Websocket(raw any, opts ...PocConfig) (rsp []byte, req []byte, err error)`
+`Websocket(raw any, opts ...PocConfigOption) (rsp []byte, req []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | raw | `any` |   |
-| opts | `...PocConfig` |   |
+| opts | `...PocConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2160,7 +2160,7 @@ poc.Get("https://pie.dev/get", poc.appendCookie("aaa", "bbb")) // 向 pie.dev �
 
 #### 定义
 
-`appendCookie(key string, value string) PocConfig`
+`appendCookie(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2171,7 +2171,7 @@ poc.Get("https://pie.dev/get", poc.appendCookie("aaa", "bbb")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendFormEncoded
@@ -2187,7 +2187,7 @@ poc.Post("https://pie.dev/post", poc.appendFormEncoded("aaa", "bbb")) // 向 pie
 
 #### 定义
 
-`appendFormEncoded(key string, value string) PocConfig`
+`appendFormEncoded(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2198,7 +2198,7 @@ poc.Post("https://pie.dev/post", poc.appendFormEncoded("aaa", "bbb")) // 向 pie
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendHeader
@@ -2214,7 +2214,7 @@ poc.Post("https://pie.dev/post", poc.appendHeader("AAA", "BBB")) // 向 pie.dev 
 
 #### 定义
 
-`appendHeader(key string, value string) PocConfig`
+`appendHeader(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2225,7 +2225,7 @@ poc.Post("https://pie.dev/post", poc.appendHeader("AAA", "BBB")) // 向 pie.dev 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendHeaders
@@ -2241,7 +2241,7 @@ poc.Post("https://pie.dev/post", poc.appendHeaders({"AAA": "BBB","CCC": "DDD"}))
 
 #### 定义
 
-`appendHeaders(headers map[string]string) PocConfig`
+`appendHeaders(headers map[string]string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2251,7 +2251,7 @@ poc.Post("https://pie.dev/post", poc.appendHeaders({"AAA": "BBB","CCC": "DDD"}))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendPath
@@ -2267,7 +2267,7 @@ poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.c
 
 #### 定义
 
-`appendPath(path string) PocConfig`
+`appendPath(path string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2277,7 +2277,7 @@ poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.c
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendPostParam
@@ -2293,7 +2293,7 @@ poc.Post("https://pie.dev/post", poc.appendPostParam("a", "b")) // 向 pie.dev �
 
 #### 定义
 
-`appendPostParam(key string, value string) PocConfig`
+`appendPostParam(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2304,7 +2304,7 @@ poc.Post("https://pie.dev/post", poc.appendPostParam("a", "b")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendQueryParam
@@ -2320,7 +2320,7 @@ poc.Get("https://pie.dev/get", poc.appendQueryParam("a", "b")) // 向 pie.dev �
 
 #### 定义
 
-`appendQueryParam(key string, value string) PocConfig`
+`appendQueryParam(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2331,7 +2331,7 @@ poc.Get("https://pie.dev/get", poc.appendQueryParam("a", "b")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### appendUploadFile
@@ -2347,7 +2347,7 @@ poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?
 
 #### 定义
 
-`appendUploadFile(fieldName string, fileName string, fileContent any, contentType ...string) PocConfig`
+`appendUploadFile(fieldName string, fileName string, fileContent any, contentType ...string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2360,7 +2360,7 @@ poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### deleteCookie
@@ -2381,7 +2381,7 @@ Host: pie.dev
 
 #### 定义
 
-`deleteCookie(key string) PocConfig`
+`deleteCookie(key string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2391,7 +2391,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### deleteForm
@@ -2420,7 +2420,7 @@ ddd
 
 #### 定义
 
-`deleteForm(key string) PocConfig`
+`deleteForm(key string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2430,7 +2430,7 @@ ddd
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### deleteHeader
@@ -2451,7 +2451,7 @@ Host: pie.dev
 
 #### 定义
 
-`deleteHeader(key string) PocConfig`
+`deleteHeader(key string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2461,7 +2461,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### deletePostParam
@@ -2482,7 +2482,7 @@ a=b&c=d`, poc.deletePostParam("a")) // 向 pie.dev 发起请求，删除POST请�
 
 #### 定义
 
-`deletePostParam(key string) PocConfig`
+`deletePostParam(key string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2492,7 +2492,7 @@ a=b&c=d`, poc.deletePostParam("a")) // 向 pie.dev 发起请求，删除POST请�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### deleteQueryParam
@@ -2512,7 +2512,7 @@ Host: pie.dev
 
 #### 定义
 
-`deleteQueryParam(key string) PocConfig`
+`deleteQueryParam(key string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2522,7 +2522,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### host
@@ -2538,7 +2538,7 @@ poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com")) // 实际上请求 yaklang
 
 #### 定义
 
-`host(h string) PocConfig`
+`host(h string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2548,7 +2548,7 @@ poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com")) // 实际上请求 yaklang
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### http2
@@ -2564,7 +2564,7 @@ poc.Get("https://www.example.com", poc.http2(true), poc.https(true)) // 向 www.
 
 #### 定义
 
-`http2(isHttp2 bool) PocConfig`
+`http2(isHttp2 bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2574,7 +2574,7 @@ poc.Get("https://www.example.com", poc.http2(true), poc.https(true)) // 向 www.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### https
@@ -2590,7 +2590,7 @@ poc.HTTP(poc.BasicRequest(), poc.https(true)) // 向 example.com 发起请求，
 
 #### 定义
 
-`https(isHttps bool) PocConfig`
+`https(isHttps bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2600,7 +2600,7 @@ poc.HTTP(poc.BasicRequest(), poc.https(true)) // 向 example.com 发起请求，
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### jsRedirect
@@ -2616,7 +2616,7 @@ poc.HTTP(poc.BasicRequest(), poc.redirectTimes(5), poc.jsRedirect(true)) // 向 
 
 #### 定义
 
-`jsRedirect(b bool) PocConfig`
+`jsRedirect(b bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2626,7 +2626,7 @@ poc.HTTP(poc.BasicRequest(), poc.redirectTimes(5), poc.jsRedirect(true)) // 向 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### noFixContentLength
@@ -2642,7 +2642,7 @@ poc.HTTP(poc.BasicRequest(), poc.noFixContentLength()) // 向 example.com 发起
 
 #### 定义
 
-`noFixContentLength(b bool) PocConfig`
+`noFixContentLength(b bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2652,7 +2652,7 @@ poc.HTTP(poc.BasicRequest(), poc.noFixContentLength()) // 向 example.com 发起
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### noRedirect
@@ -2668,7 +2668,7 @@ poc.HTTP(poc.BasicRequest(), poc.noRedirect()) // 向 example.com 发起请求�
 
 #### 定义
 
-`noRedirect(b bool) PocConfig`
+`noRedirect(b bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2678,7 +2678,7 @@ poc.HTTP(poc.BasicRequest(), poc.noRedirect()) // 向 example.com 发起请求�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### params
@@ -2696,7 +2696,7 @@ Host: pie.dev
 
 #### 定义
 
-`params(i any) PocConfig`
+`params(i any) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2706,7 +2706,7 @@ Host: pie.dev
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### port
@@ -2722,7 +2722,7 @@ poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com"), poc.port(443), poc.https(t
 
 #### 定义
 
-`port(port int) PocConfig`
+`port(port int) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2732,7 +2732,7 @@ poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com"), poc.port(443), poc.https(t
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### proxy
@@ -2748,7 +2748,7 @@ poc.HTTP(poc.BasicRequest(), poc.proxy("http://127.0.0.1:7890")) // 向 example.
 
 #### 定义
 
-`proxy(proxies ...string) PocConfig`
+`proxy(proxies ...string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2758,7 +2758,7 @@ poc.HTTP(poc.BasicRequest(), poc.proxy("http://127.0.0.1:7890")) // 向 example.
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### redirectHandler
@@ -2778,7 +2778,7 @@ return count >= 0
 
 #### 定义
 
-`redirectHandler(i func(isHttps bool, req, rsp []byte) bool) PocConfig`
+`redirectHandler(i func(isHttps bool, req, rsp []byte) bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2788,7 +2788,7 @@ return count >= 0
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### redirectTimes
@@ -2804,7 +2804,7 @@ poc.HTTP(poc.BasicRequest(), poc.redirectTimes(5)) // 向 example.com 发起请�
 
 #### 定义
 
-`redirectTimes(t int) PocConfig`
+`redirectTimes(t int) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2814,7 +2814,7 @@ poc.HTTP(poc.BasicRequest(), poc.redirectTimes(5)) // 向 example.com 发起请�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceAllPostParams
@@ -2830,7 +2830,7 @@ poc.Post("https://pie.dev/post", poc.replaceAllPostParams({"a":"b", "c":"d"})) /
 
 #### 定义
 
-`replaceAllPostParams(values map[string]string) PocConfig`
+`replaceAllPostParams(values map[string]string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2840,7 +2840,7 @@ poc.Post("https://pie.dev/post", poc.replaceAllPostParams({"a":"b", "c":"d"})) /
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceAllQueryParams
@@ -2856,7 +2856,7 @@ poc.Get("https://pie.dev/get", poc.replaceAllQueryParams({"a":"b", "c":"d"})) //
 
 #### 定义
 
-`replaceAllQueryParams(values map[string]string) PocConfig`
+`replaceAllQueryParams(values map[string]string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2866,7 +2866,7 @@ poc.Get("https://pie.dev/get", poc.replaceAllQueryParams({"a":"b", "c":"d"})) //
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceBasicAuth
@@ -2882,7 +2882,7 @@ poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceBasicAuth("admin
 
 #### 定义
 
-`replaceBasicAuth(username string, password string) PocConfig`
+`replaceBasicAuth(username string, password string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2893,7 +2893,7 @@ poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceBasicAuth("admin
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceBody
@@ -2909,7 +2909,7 @@ poc.Post("https://pie.dev/post", poc.replaceBody("a=b", false)) // 向 pie.dev �
 
 #### 定义
 
-`replaceBody(body []byte, chunk bool) PocConfig`
+`replaceBody(body []byte, chunk bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2920,7 +2920,7 @@ poc.Post("https://pie.dev/post", poc.replaceBody("a=b", false)) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceCookie
@@ -2936,7 +2936,7 @@ poc.Get("https://pie.dev/get", poc.replaceCookie("aaa", "bbb")) // 向 pie.dev �
 
 #### 定义
 
-`replaceCookie(key string, value string) PocConfig`
+`replaceCookie(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2947,7 +2947,7 @@ poc.Get("https://pie.dev/get", poc.replaceCookie("aaa", "bbb")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceFirstLine
@@ -2963,7 +2963,7 @@ poc.Get("https://exmaple.com", poc.replaceFirstLine("GET /test HTTP/1.1")) // �
 
 #### 定义
 
-`replaceFirstLine(firstLine string) PocConfig`
+`replaceFirstLine(firstLine string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2973,7 +2973,7 @@ poc.Get("https://exmaple.com", poc.replaceFirstLine("GET /test HTTP/1.1")) // �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceHeader
@@ -2989,7 +2989,7 @@ poc.Get("https://pie.dev/get", poc.replaceHeader("AAA", "BBB")) // 向 pie.dev �
 
 #### 定义
 
-`replaceHeader(key string, value string) PocConfig`
+`replaceHeader(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3000,7 +3000,7 @@ poc.Get("https://pie.dev/get", poc.replaceHeader("AAA", "BBB")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceHost
@@ -3016,7 +3016,7 @@ poc.Get("https://yaklang.com/", poc.replaceHost("www.yaklang.com")) // 向 yakla
 
 #### 定义
 
-`replaceHost(host string) PocConfig`
+`replaceHost(host string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3026,7 +3026,7 @@ poc.Get("https://yaklang.com/", poc.replaceHost("www.yaklang.com")) // 向 yakla
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceMethod
@@ -3042,7 +3042,7 @@ poc.Options("https://exmaple.com", poc.replaceMethod("GET")) // 向 example.com 
 
 #### 定义
 
-`replaceMethod(method string) PocConfig`
+`replaceMethod(method string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3052,7 +3052,7 @@ poc.Options("https://exmaple.com", poc.replaceMethod("GET")) // 向 example.com 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replacePath
@@ -3068,7 +3068,7 @@ poc.Get("https://pie.dev/post", poc.replacePath("/get")) // 向 pie.dev 发起�
 
 #### 定义
 
-`replacePath(path string) PocConfig`
+`replacePath(path string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3078,7 +3078,7 @@ poc.Get("https://pie.dev/post", poc.replacePath("/get")) // 向 pie.dev 发起�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replacePostParam
@@ -3094,7 +3094,7 @@ poc.Post("https://pie.dev/post", poc.replacePostParam("a", "b")) // 向 pie.dev 
 
 #### 定义
 
-`replacePostParam(key string, value string) PocConfig`
+`replacePostParam(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3105,7 +3105,7 @@ poc.Post("https://pie.dev/post", poc.replacePostParam("a", "b")) // 向 pie.dev 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### replaceQueryParam
@@ -3121,7 +3121,7 @@ poc.Get("https://pie.dev/get", poc.replaceQueryParam("a", "b")) // 向 pie.dev �
 
 #### 定义
 
-`replaceQueryParam(key string, value string) PocConfig`
+`replaceQueryParam(key string, value string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3132,7 +3132,7 @@ poc.Get("https://pie.dev/get", poc.replaceQueryParam("a", "b")) // 向 pie.dev �
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### retryInStatusCode
@@ -3148,7 +3148,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryInStatusCode(500, 502))
 
 #### 定义
 
-`retryInStatusCode(codes ...int) PocConfig`
+`retryInStatusCode(codes ...int) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3158,7 +3158,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryInStatusCode(500, 502))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### retryMaxWaitTime
@@ -3174,7 +3174,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200), p
 
 #### 定义
 
-`retryMaxWaitTime(f float64) PocConfig`
+`retryMaxWaitTime(f float64) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3184,7 +3184,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200), p
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### retryNotInStatusCode
@@ -3200,7 +3200,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200)) /
 
 #### 定义
 
-`retryNotInStatusCode(codes ...int) PocConfig`
+`retryNotInStatusCode(codes ...int) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3210,7 +3210,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200)) /
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### retryTimes
@@ -3226,7 +3226,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryInStatusCode(500, 502))
 
 #### 定义
 
-`retryTimes(t int) PocConfig`
+`retryTimes(t int) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3236,7 +3236,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryInStatusCode(500, 502))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### retryWaitTime
@@ -3252,7 +3252,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200), p
 
 #### 定义
 
-`retryWaitTime(f float64) PocConfig`
+`retryWaitTime(f float64) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3262,7 +3262,7 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200), p
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### save
@@ -3278,7 +3278,7 @@ poc.Get("https://exmaple.com", poc.save(true)) // 向 example.com 发起请求�
 
 #### 定义
 
-`save(i bool) PocConfig`
+`save(i bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3288,7 +3288,7 @@ poc.Get("https://exmaple.com", poc.save(true)) // 向 example.com 发起请求�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### session
@@ -3305,7 +3305,7 @@ rsp, req, err = poc.Get("https://pie.dev/cookies", poc.session("test")) // 向 p
 
 #### 定义
 
-`session(i any) PocConfig`
+`session(i any) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3315,7 +3315,7 @@ rsp, req, err = poc.Get("https://pie.dev/cookies", poc.session("test")) // 向 p
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### source
@@ -3331,7 +3331,7 @@ poc.Get("https://exmaple.com", poc.save(true), poc.source("test")) // 向 exampl
 
 #### 定义
 
-`source(i string) PocConfig`
+`source(i string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3341,7 +3341,7 @@ poc.Get("https://exmaple.com", poc.save(true), poc.source("test")) // 向 exampl
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### timeout
@@ -3357,7 +3357,7 @@ poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起�
 
 #### 定义
 
-`timeout(f float64) PocConfig`
+`timeout(f float64) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3367,7 +3367,7 @@ poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### websocket
@@ -3399,7 +3399,7 @@ time.Sleep(100)
 
 #### 定义
 
-`websocket(w bool) PocConfig`
+`websocket(w bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3409,7 +3409,7 @@ time.Sleep(100)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### websocketFromServer
@@ -3441,7 +3441,7 @@ time.Sleep(100)
 
 #### 定义
 
-`websocketFromServer(w func(i []byte, cancel func())) PocConfig`
+`websocketFromServer(w func(i []byte, cancel func())) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3451,7 +3451,7 @@ time.Sleep(100)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 
 ### websocketOnClient
@@ -3483,7 +3483,7 @@ time.Sleep(100)
 
 #### 定义
 
-`websocketOnClient(w func(c *lowhttp.WebsocketClient)) PocConfig`
+`websocketOnClient(w func(c *lowhttp.WebsocketClient)) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -3493,6 +3493,6 @@ time.Sleep(100)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `PocConfig` |   |
+| r1 | `PocConfigOption` |   |
 
 

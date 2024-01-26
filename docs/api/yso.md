@@ -15,7 +15,7 @@
 | [yso.GenerateTcpReverseEvilClassObject](#generatetcpreverseevilclassobject) |GenTcpReverseClassObject  GenerateTcpReverseEvilClassObject 生成一个使用TcpReverse类模板的javaclassparser.ClassObject对象，  这个函数结合使用 useTcpReverseTemplate ，tcpRev...|
 | [yso.GenerateTcpReverseShellEvilClassObject](#generatetcpreverseshellevilclassobject) |GenTcpReverseShellClassObject  GenerateTcpReverseShellEvilClassObject 生成一个使用TcpReverseShell类模板的javaclassparser.ClassObject对象，  这个函数结合使用 useTcpReverseS...|
 | [yso.GenerateTomcatEchoClassObject](#generatetomcatechoclassobject) |GenTomcatEchoClassObject  GenerateTomcatEchoEvilClassObject 生成一个使用TomcatEcho类模板的javaclassparser.ClassObject对象，  options：一组可选的GenClassOptionFun函数，用于进一步...|
-| [yso.GetAllGadget](#getallgadget) |GetAllGadget 获取所有的支持的Gadget ``` |
+| [yso.GetAllGadget](#getallgadget) |GetAllGadget 获取所有的支持的Gadget  |
 | [yso.GetAllRuntimeExecGadget](#getallruntimeexecgadget) |GetAllRuntimeExecGadget 获取所有的支持的RuntimeExecGadget，可用于爆破 gadget  |
 | [yso.GetAllTemplatesGadget](#getalltemplatesgadget) |GetAllTemplatesGadget 获取所有支持模板的Gadget，可用于爆破 gadget  |
 | [yso.GetBeanShell1JavaObject](#getbeanshell1javaobject) |GetBeanShell1JavaObject 基于BeanShell1 序列化模板生成并返回一个Java对象。  它首先解析预定义的BeanShell1序列化模板，然后在解析出的第一个Java对象中替换预设的占位符为传入的命令字符串。  cmd：要传入Java对象的命令字符串。  返回：成功时返回...|
@@ -44,7 +44,7 @@
 | [yso.GetJavassistWeld1JavaObject](#getjavassistweld1javaobject) |GetJavassistWeld1JavaObject 基于JavassistWeld1 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够定制生成的Java对象的特定...|
 | [yso.GetJdk7u21JavaObject](#getjdk7u21javaobject) |GetJdk7u21JavaObject 基于Jdk7u21 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够定制生成的Java对象的特定属性或行为。  option...|
 | [yso.GetJdk8u20JavaObject](#getjdk8u20javaobject) |GetJdk8u20JavaObject 基于Jdk8u20 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够定制生成的Java对象的特定属性或行为。  option...|
-| [yso.GetSimplePrincipalCollectionJavaObject](#getsimpleprincipalcollectionjavaobject) |GetSimplePrincipalCollectionJavaObject 基于SimplePrincipalCollection 序列化模板生成并返回一个Java对象。 主要用于 Shiro 漏洞检测时判断 rememberMe cookie 的个数。 使用一个空的 SimplePrincipa...|
+| [yso.GetSimplePrincipalCollectionJavaObject](#getsimpleprincipalcollectionjavaobject) |GetSimplePrincipalCollectionJavaObject 基于SimplePrincipalCollection 序列化模板生成并返回一个Java对象。  主要用于 Shiro 漏洞检测时判断 rememberMe cookie 的个数。  使用一个空的 SimplePrinci...|
 | [yso.GetURLDNSJavaObject](#geturldnsjavaobject) |GetURLDNSJavaObject 利用Java URL类的特性，生成一个在反序列化时会尝试对提供的URL执行DNS查询的Java对象。  这个函数首先使用预定义的URLDNS序列化模板，然后在序列化对象中替换预设的URL占位符为提供的URL字符串。  url：要在生成的Java对象中设置的UR...|
 | [yso.LoadClassFromBCEL](#loadclassfrombcel) |LoadClassFromBCEL 将BCEL（Byte Code Engineering Library）格式的Java类数据转换为字节数组，  并从这些字节中加载并返回一个javaclassparser.ClassObject对象。  这个函数首先使用javaclassparser.Bcel2b...|
 | [yso.LoadClassFromBase64](#loadclassfrombase64) |LoadClassFromBase64 从base64编码的字符串中加载并返回一个javaclassparser.ClassObject对象。  这个函数使用GenerateClassObjectFromBytes作为其实现，并允许通过可变参数`options`来配置生成的类对象。  这些参数是Ge...|
@@ -54,7 +54,7 @@
 | [yso.ToJson](#tojson) |ToJson 将 Java 或反序列化对象转换为 json 字符串  |
 | [yso.command](#command) |SetExecCommand  command 请求参数选项函数，用于设置要执行的命令。需要配合 useRuntimeExecTemplate 使用。  |
 | [yso.dnslogDomain](#dnslogdomain) |SetDnslog  dnslogDomain 请求参数选项函数，设置指定的 Dnslog 域名，需要配合 useDnslogTemplate 使用。  addr：要设置的 Dnslog 域名。  |
-| [yso.dump](#dump) |Dump  dump 将Java 对象转换为类 Java 代码  |
+| [yso.dump](#dump) |dump 将Java 对象转换为类 Java 代码  |
 | [yso.evilClassName](#evilclassname) |SetClassName  evilClassName 请求参数选项函数，用于设置生成的类名。  className：要设置的类名。  |
 | [yso.majorVersion](#majorversion) ||
 | [yso.obfuscationClassConstantPool](#obfuscationclassconstantpool) ||
@@ -588,6 +588,10 @@ headerClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useHeaderParam("Ech
 
 #### 详细描述
 GetAllGadget 获取所有的支持的Gadget
+
+Example:
+```
+dump(yso.GetAllGadget())
 ```
 
 
@@ -1724,8 +1728,21 @@ gadgetObj,err = yso.GetJdk8u20JavaObject(
 
 #### 详细描述
 GetSimplePrincipalCollectionJavaObject 基于SimplePrincipalCollection 序列化模板生成并返回一个Java对象。
+
 主要用于 Shiro 漏洞检测时判断 rememberMe cookie 的个数。
+
 使用一个空的 SimplePrincipalCollection作为 payload，序列化后使用待检测的秘钥进行加密并发送，秘钥正确和错误的响应表现是不一样的，可以使用这个方法来可靠的枚举 Shiro 当前使用的秘钥。
+
+Example:
+```
+javaObject, _ = yso.GetSimplePrincipalCollectionJavaObject()
+classBytes,_ = yso.ToBytes(javaObject)
+data = codec.PKCS5Padding(classBytes, 16)
+keyDecoded,err = codec.DecodeBase64("kPH+bIxk5D2deZiIxcaaaA==")
+iv = []byte(ramdstr(16))
+cipherText ,_ = codec.AESCBCEncrypt(keyDecoded, data, iv)
+payload = codec.EncodeBase64(append(iv, cipherText...))
+发送 payload
 ```
 
 
@@ -2042,8 +2059,6 @@ yso.GetCommonsBeanutils1JavaObject(yso.useDnslogTemplate(),yso.dnslogDomain("dns
 ### dump
 
 #### 详细描述
-Dump
-
 dump 将Java 对象转换为类 Java 代码
 
 Example:

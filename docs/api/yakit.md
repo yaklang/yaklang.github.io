@@ -158,14 +158,14 @@
 
 #### 定义
 
-`GenerateYakitMITMHooksParams(method string, url string, opts ...yakhttp.HttpOption) ([]any, error)`
+`GenerateYakitMITMHooksParams(method string, url string, opts ...http_struct.HttpOption) ([]any, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | method | `string` |   |
 | url | `string` |   |
-| opts | `...yakhttp.HttpOption` |   |
+| opts | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

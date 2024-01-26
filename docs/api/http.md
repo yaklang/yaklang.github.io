@@ -3,6 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [http.Do](#do) |Do 根据构造好的请求结构体引用发送请求，返回响应结构体引用与错误  ! 已弃用  |
+| [http.ExtractFaviconURL](#extractfaviconurl) |ExtractFaviconURL will receive a site url and html content return the favicon url  |
 | [http.Get](#get) |Get 根据指定的 URL 发起 GET 请求，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置超时时间等  返回响应结构体引用与错误  ! 已弃用，使用 poc.Get 代替  |
 | [http.GetAllBody](#getallbody) |GetAllBody 获取响应结构体引用的原始响应报文  |
 | [http.NewRequest](#newrequest) |NewRequest 根据指定的 method 和 URL 生成请求结构体引用，返回请求结构体引用与错误，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置超时时间等  注意，此函数只会生成请求结构体引用，不会发起请求  ! 已弃用  |
@@ -67,6 +68,35 @@ rsp, err = http.Do(req)
 | r2 | `error` |   |
 
 
+### ExtractFaviconURL
+
+#### 详细描述
+ExtractFaviconURL will receive a site url and html content return the favicon url
+
+Example:
+
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">`))
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="icon" href="/favicon.ico" type="image/x-icon">`))
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="icon" href="/favicon.png" type="image/png">`))
+
+
+#### 定义
+
+`ExtractFaviconURL(siteURL string, content []byte) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| siteURL | `string` |   |
+| content | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
 ### Get
 
 #### 详细描述
@@ -84,18 +114,18 @@ rsp, err = http.Get("http://www.yaklang.com", http.timeout(10))
 
 #### 定义
 
-`Get(url string, options ...HttpOption) (*YakHttpResponse, error)`
+`Get(url string, options ...http_struct.HttpOption) (*http_struct.YakHttpResponse, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
-| options | `...HttpOption` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*YakHttpResponse` |   |
+| r1 | `*http_struct.YakHttpResponse` |   |
 | r2 | `error` |   |
 
 
@@ -143,19 +173,19 @@ req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 
 #### 定义
 
-`NewRequest(method string, url string, opts ...HttpOption) (*YakHttpRequest, error)`
+`NewRequest(method string, url string, opts ...http_struct.HttpOption) (*http_struct.YakHttpRequest, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | method | `string` |   |
 | url | `string` |   |
-| opts | `...HttpOption` |   |
+| opts | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*YakHttpRequest` |   |
+| r1 | `*http_struct.YakHttpRequest` |   |
 | r2 | `error` |   |
 
 
@@ -176,18 +206,18 @@ rsp, err = http.Post("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(1
 
 #### 定义
 
-`Post(url string, options ...HttpOption) (*YakHttpResponse, error)`
+`Post(url string, options ...http_struct.HttpOption) (*http_struct.YakHttpResponse, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | url | `string` |   |
-| options | `...HttpOption` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*YakHttpResponse` |   |
+| r1 | `*http_struct.YakHttpResponse` |   |
 | r2 | `error` |   |
 
 
@@ -239,19 +269,19 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 
 #### 定义
 
-`Request(method string, url string, options ...HttpOption) (*YakHttpResponse, error)`
+`Request(method string, url string, options ...http_struct.HttpOption) (*http_struct.YakHttpResponse, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | method | `string` |   |
 | url | `string` |   |
-| options | `...HttpOption` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*YakHttpResponse` |   |
+| r1 | `*http_struct.YakHttpResponse` |   |
 | r2 | `error` |   |
 
 
@@ -394,7 +424,7 @@ rsp, err = http.Post("https://pie.dev/post", http.body("a=b&c=d"))
 
 #### 定义
 
-`body(value any) HttpOption`
+`body(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -404,7 +434,7 @@ rsp, err = http.Post("https://pie.dev/post", http.body("a=b&c=d"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### cookie
@@ -420,7 +450,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.Cookie("a=b; c=d"))
 
 #### 定义
 
-`cookie(value any) HttpOption`
+`cookie(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -430,7 +460,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.Cookie("a=b; c=d"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### dump
@@ -500,12 +530,12 @@ rspHeadRaw, err = http.dumphead(rsp)
 
 #### 定义
 
-`fakeua() HttpOption`
+`fakeua() http_struct.HttpOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### header
@@ -521,7 +551,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.header("AAA", "BBB"))
 
 #### 定义
 
-`header(key any, value any) HttpOption`
+`header(key any, value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -532,7 +562,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.header("AAA", "BBB"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### json
@@ -550,7 +580,7 @@ rsp, err = http.Post("https://pie.dev/post", http.header("Content-Type", "applic
 
 #### 定义
 
-`json(value any) HttpOption`
+`json(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -560,7 +590,7 @@ rsp, err = http.Post("https://pie.dev/post", http.header("Content-Type", "applic
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### noredirect
@@ -570,12 +600,12 @@ rsp, err = http.Post("https://pie.dev/post", http.header("Content-Type", "applic
 
 #### 定义
 
-`noredirect() HttpOption`
+`noredirect() http_struct.HttpOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### params
@@ -591,7 +621,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.params("a=b"), http.params("c
 
 #### 定义
 
-`params(i any) HttpOption`
+`params(i any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -601,7 +631,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.params("a=b"), http.params("c
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### postparams
@@ -617,7 +647,7 @@ rsp, err = http.Post("http://www.yaklang.com", http.postparams("a=b"), http.post
 
 #### 定义
 
-`postparams(i any) HttpOption`
+`postparams(i any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -627,7 +657,7 @@ rsp, err = http.Post("http://www.yaklang.com", http.postparams("a=b"), http.post
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### proxy
@@ -643,7 +673,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.proxy("http://127.0.0.1:7890"
 
 #### 定义
 
-`proxy(values ...string) HttpOption`
+`proxy(values ...string) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -653,7 +683,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.proxy("http://127.0.0.1:7890"
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### redirect
@@ -671,7 +701,7 @@ rsp, err = http.Get("http://pie.dev/redirect/3", http.redirect(func(r, vias) boo
 
 #### 定义
 
-`redirect(c func(r *http.Request, vias []*http.Request) bool) HttpOption`
+`redirect(c func(r *http.Request, vias []*http.Request) bool) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -681,7 +711,7 @@ rsp, err = http.Get("http://pie.dev/redirect/3", http.redirect(func(r, vias) boo
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### session
@@ -697,7 +727,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.session("request1"))
 
 #### 定义
 
-`session(value any) HttpOption`
+`session(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -707,7 +737,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.session("request1"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### show
@@ -771,7 +801,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.timeout(10))
 
 #### 定义
 
-`timeout(f float64) HttpOption`
+`timeout(f float64) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -781,7 +811,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.timeout(10))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### ua
@@ -797,7 +827,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 
 #### 定义
 
-`ua(value any) HttpOption`
+`ua(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -807,7 +837,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### uarand
@@ -844,7 +874,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 
 #### 定义
 
-`useragent(value any) HttpOption`
+`useragent(value any) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -854,6 +884,6 @@ rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `HttpOption` |   |
+| r1 | `http_struct.HttpOption` |   |
 
 
