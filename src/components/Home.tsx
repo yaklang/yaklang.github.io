@@ -414,9 +414,6 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           await getSize(Windows.url, Windows.key, (size: number) => {
             setWindows({ ...Windows, size });
           });
-          await getSize(LinuxArm64.url, LinuxArm64.key, (size: number) => {
-            setLinuxArm64({ ...LinuxArm64, size });
-          });
         } else {
           message.error("获取yakit版本错误，请刷新页面后重试");
         }
@@ -431,7 +428,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const getSize = useMemoizedFn(
     async (url: string, type: string, callBack: any) => {
       await axios
-        .head(type === "Linux (Arm64)" ? url : getUrl(url))
+        .head(getUrl(url))
         .then((response) => {
           if (
             response &&
@@ -584,17 +581,17 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                   <div className="download-btn-wrap">
                     <div className="download-btn-item-box">
                       <div
-                        className="download-btn-item"
+                        className="download-btn-item download-btn-item-special"
                         style={{ marginBottom: 4 }}
                         onClick={() => onDownload(macOSIntel.url)}
                       >
                         {t("下载")} Inter {t("芯片")}
                       </div>
                       <div
-                        className="download-btn-item"
+                        className="download-btn-item download-btn-item-special"
                         onClick={() => onDownload(macOSAppleSillion.url)}
                       >
-                        {t("下载")} M1 {t("芯片")}
+                        {t("下载")} Apple Sillion {t("芯片")}
                       </div>
                     </div>
                   </div>
@@ -658,9 +655,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                   <div className="guide-body-yakit-item-right">
                     <div>{LinuxArm64.key}</div>
                     <div className="guide-body-yakit-item-right-size">
-                      {t("版本")}:&nbsp;{version || "-"}&nbsp;(
-                      {LinuxArm64.size || "-"}
-                      &nbsp;MB)
+                      {t("支持统信 UOS、麒麟等国产系统")}
                     </div>
                   </div>
                   <div className="download-btn-wrap">

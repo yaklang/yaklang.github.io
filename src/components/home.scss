@@ -208,6 +208,7 @@ $min-width: REM(1232);
         &-right {
           margin-left: REM(8);
           &-size {
+            word-break: break-all;
             font-size: REM(12);
             font-weight: 400;
             color: #999ea8;
@@ -246,6 +247,9 @@ $min-width: REM(1232);
               &:hover {
                 opacity: 0.9;
               }
+            }
+            .download-btn-item-special {
+              width: REM(265);
             }
           }
         }
