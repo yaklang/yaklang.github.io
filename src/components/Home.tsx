@@ -661,7 +661,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                   <div className="download-btn-wrap">
                     <div className="download-btn-item-box">
                       <div
-                        className="download-btn-item"
+                        className="download-btn-item download-btn-item-special2"
                         onClick={() => (window.location.href = LinuxArm64.url)}
                       >
                         {t("下载")}

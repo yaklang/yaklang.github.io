@@ -179,7 +179,7 @@ $min-width: REM(1232);
       &-type {
         margin-top: REM(16);
         display: grid;
-        grid-template-columns: 32% 25% 25% 25%;
+        grid-template-columns: 31% 25% 25% 26.5%;
         grid-template-rows: REM(82);
       }
       &-item {
@@ -249,7 +249,11 @@ $min-width: REM(1232);
               }
             }
             .download-btn-item-special {
-              width: REM(265);
+              width: REM(258);
+            }
+
+            .download-btn-item-special2 {
+              width: REM(210);
             }
           }
         }
