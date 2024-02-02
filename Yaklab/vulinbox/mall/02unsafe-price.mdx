@@ -1,0 +1,91 @@
+---
+sidebar_position: 2
+---
+
+# 02.价格篡改漏洞案例
+
+价格篡改漏洞是指攻击者可以在前端页面中篡改商品价格，并在提交订单时将修改后的价格发送至后端，从而以篡改价格的方式获取商品的更低价格或者执行其他恶意操作。
+
+#### 示例代码：
+
+前端部分代码展示了购物车页面，其中显示了商品的名称、描述、价格等信息，并提供了修改数量和提交订单的按钮。
+
+```HTML
+<form method="post" action="#">
+    <table cellspacing="0" class="shop_table cart">
+        <!-- 省略部分HTML代码 -->
+        <tbody>
+            {{range .CartInfo}}
+            <tr class="cart_item">
+                <!-- 省略部分HTML代码 -->
+                <td class="product-price">
+                    <span class="amount">${{.ProductPrice}}</span>
+                </td>
+                <!-- 省略部分HTML代码 -->
+            </tr>
+            {{end}}
+            <!-- 省略部分HTML代码 -->
+        </tbody>
+    </table>
+</form>
+```
+
+后端部分代码展示了提交订单的接口，其中接收前端传来的订单信息，并在后端进行订单的处理和入库操作。
+
+```Go
+// 提交订单
+{
+    DefaultQuery: "",
+    Path:         "/order/submit",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        // 省略部分代码
+        var order UserOrder
+        var FirstOrder FirstUserOrder
+        err = json.NewDecoder(request.Body).Decode(&FirstOrder)
+        if err != nil {
+            http.Error(writer, err.Error(), http.StatusBadRequest)
+            return
+        }
+        // 调用函数提交订单
+        for _, item := range FirstOrder.OrderItems {
+            order.ProductName = item.ProductName
+            order.Quantity, err = strconv.Atoi(item.Quantity)
+            order.TotalPrice, err = strconv.ParseFloat(item.TotalPrice, 64)
+            order.DeliveryStatus = "已发货"
+            err = s.database.AddOrder(FirstOrder.UserID, order)
+            if err != nil {
+                http.Error(writer, err.Error(), http.StatusInternalServerError)
+                return
+            }
+        }
+        writer.WriteHeader(http.StatusOK)
+        writer.Write([]byte("订单提交成功"))
+    },
+}
+```
+
+#### 攻击示例：
+
+攻击者可以利用浏览器的开发者工具或者其他网络调试工具，在购物车页面中将某些商品的价格进行篡改，例如将高价商品的价格修改为极低的价格。然后攻击者提交篡改后的订单，将修改后的价格发送至后端，后端可能会无条件地接收并处理这些篡改后的价格，导致订单价格与实际商品价格不符。
+
+#### 防御措施：
+
+1. 价格校验： 在前端页面提交订单前，应该对订单中商品的价格进行校验，确保订单中的价格与后端数据库中的价格一致。
+2. 防篡改机制： 在前端页面和后端接口中应该加入防篡改机制，例如在前端页面对价格进行加密或者签名处理，后端在接收到订单后进行价格解密或者验签，确保订单中的价格没有被篡改。
+3. 双重价格校验： 在后端接收到订单后，应该对订单中的价格进行二次校验，确保订单中的价格与商品的实际价格一致，避免篡改后的价格被接受。
+4. 限制价格修改权限： 对于敏感操作或者需要修改价格的功能，应该限制只有特定的管理员或者权限较高的用户才能执行，避免普通用户对价格进行任意修改。
+
+通过以上防御措施，可以有效地防止价格篡改漏洞的利用，保障商城系统的安全性和稳定性。
+
+#### 靶场演示：
+
+会话固定漏洞在靶场的**"加入购物车"**和"**提交订单**"位置，演示如下：
+
+<video
+  src="/img/yaklab/mall/02unsafe-price.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
