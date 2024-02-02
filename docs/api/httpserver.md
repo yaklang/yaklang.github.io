@@ -2,17 +2,25 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [httpserver.LocalFileSystemServe](#localfilesystemserve) ||
-| [httpserver.Serve](#serve) ||
-| [httpserver.context](#context) ||
-| [httpserver.handler](#handler) ||
-| [httpserver.tlsCertAndKey](#tlscertandkey) ||
+| [httpserver.LocalFileSystemServe](#localfilesystemserve) |LocalFileSystemServe 根据给定的 host 和 port 启动一个 http 服务用于访问本地文件系统  第一个参数为监听主机，第二个参数为监听端口，第三个参数为访问路径前缀，第四个参数为本地文件系统路径，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等  |
+| [httpserver.Serve](#serve) |Serve 根据给定的 host 和 port 启动一个 http 服务，第一个参数为监听主机，第二个参数为监听端口，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等  |
+| [httpserver.context](#context) |context 用于设置 HTTP 服务器的上下文  |
+| [httpserver.handler](#handler) |handler 用于设置 HTTP 服务器的回调函数，此函数会在每次收到请求时被调用  此函数的第一个参数为响应回复者结构体，第二个参数为 请求结构体，你可以调用第一个参数中的方法来设置响应头，响应体等  |
+| [httpserver.tlsCertAndKey](#tlscertandkey) |tlsCertAndKey 用于设置 HTTP服务器的 TLS 证书和密钥，第一个参数为证书，第二个参数为密钥，第三个参数为可选的 CA 证书  一般配合tls标准库使用  |
 
 
 ## 函数定义
 ### LocalFileSystemServe
 
 #### 详细描述
+LocalFileSystemServe 根据给定的 host 和 port 启动一个 http 服务用于访问本地文件系统
+
+第一个参数为监听主机，第二个参数为监听端口，第三个参数为访问路径前缀，第四个参数为本地文件系统路径，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等
+
+Example:
+```
+err = httpserver.LocalFileSystemServe("127.0.0.1", 8888, "/static", "/var/www/static")
+```
 
 
 #### 定义
@@ -37,6 +45,12 @@
 ### Serve
 
 #### 详细描述
+Serve 根据给定的 host 和 port 启动一个 http 服务，第一个参数为监听主机，第二个参数为监听端口，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等
+
+Example:
+```
+err = httpserver.Serve("127.0.0.1", 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write("Hello world") }))
+```
 
 
 #### 定义
@@ -59,6 +73,13 @@
 ### context
 
 #### 详细描述
+context 用于设置 HTTP 服务器的上下文
+
+Example:
+```
+ctx = context.New()
+err = httpserver.Serve("127.0.0.1", httpserver, http.context(ctx))
+```
 
 
 #### 定义
@@ -79,6 +100,14 @@
 ### handler
 
 #### 详细描述
+handler 用于设置 HTTP 服务器的回调函数，此函数会在每次收到请求时被调用
+
+此函数的第一个参数为响应回复者结构体，第二个参数为 请求结构体，你可以调用第一个参数中的方法来设置响应头，响应体等
+
+Example:
+```
+err = httpserver.Serve("127.0.0.1", 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write("Hello world") }))
+```
 
 
 #### 定义
@@ -99,6 +128,16 @@
 ### tlsCertAndKey
 
 #### 详细描述
+tlsCertAndKey 用于设置 HTTP服务器的 TLS 证书和密钥，第一个参数为证书，第二个参数为密钥，第三个参数为可选的 CA 证书
+
+一般配合tls标准库使用
+
+Example:
+```
+ca, key, err = tls.GenerateRootCA("yaklang.io")
+cert, sKey, err = tls.SignServerCertAndKey(ca, key)
+err = httpserver.Serve("127.0.0.1", 8888, httpserver.tlsCertAndKey(cert, sKey))
+```
 
 
 #### 定义

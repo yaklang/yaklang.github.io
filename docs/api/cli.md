@@ -810,12 +810,17 @@ cli.help()
 
 #### 定义
 
-`setCliGroup(group string)`
+`setCliGroup(group string) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | group | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setDefault
@@ -879,12 +884,17 @@ cli.String("target", cli.SetHelp("target host or ip"))
 
 #### 定义
 
-`setMultipleSelect(multiSelect bool)`
+`setMultipleSelect(multiSelect bool) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | multiSelect | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setRequired
@@ -920,13 +930,18 @@ cli.String("target", cli.SetRequired(true))
 
 #### 定义
 
-`setSelectOption(name string, value string)`
+`setSelectOption(name string, value string) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
 | value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
 
 
 ### setVerboseName
@@ -936,11 +951,16 @@ cli.String("target", cli.SetRequired(true))
 
 #### 定义
 
-`setVerboseName(verboseName string)`
+`setVerboseName(verboseName string) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | verboseName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
 
 

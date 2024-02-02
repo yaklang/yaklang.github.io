@@ -241,7 +241,7 @@ withIndent 设置 JSON dumps时的缩进
 
 Example:
 ```
-v = json.dumps({"a": "b", "c": "d"}, withIndent="  ")
+v = json.dumps({"a": "b", "c": "d"}, json.withIndent("  "))
 ```
 
 
@@ -267,7 +267,7 @@ withPrefix 设置 JSON dumps时的前缀
 
 Example:
 ```
-v = json.dumps({"a": "b", "c": "d"}, withPrefix="  ")
+v = json.dumps({"a": "b", "c": "d"}, json.withPrefix("  "))
 ```
 
 
