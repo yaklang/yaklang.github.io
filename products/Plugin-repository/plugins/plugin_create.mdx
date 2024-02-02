@@ -27,7 +27,7 @@ Yakit 的插件并不完全依赖于一门 "开发语言"，并不需要用户�
 4. 执行插件
 
 <video
-    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/hello-world-yakit.mp4"
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit_plugin_hello_world.mp4"
     loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
 />
 
@@ -53,7 +53,7 @@ Yakit 的插件并不完全依赖于一门 "开发语言"，并不需要用户�
 
 :::caution 关于迁移
 
-新版的yakit中，对参数信息的设置方式发生一些变化。
+**yakit v1.3.0与 yaklang v1.3.0-sp4**及其之后的版本，对参数信息的设置方式发生一些变化。
 
 由于在之前版本的yakit中，参数是直接设置在前端而非编写在插件代码中的， 而此类插件的代码又不会包含足够的信息。这将会导致参数信息的丢失，因此Yakit内进行了参数信息的数据迁移。
 在使用新版本的时候，编辑插件将会自动检查数据库内储存的参数数据与代码生成的参数是否一致。如果不一致则会产生一下的弹框提示。
@@ -79,23 +79,13 @@ cli.String("param", cli.setHelp("这是一条help信息"),cli.setVerboseName("�
 #### 快速操作预览 Preview
 
 <video
-    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-yak-native-params-basic.mp4"
+    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-plugin-param.mp4"
     loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
 />
 
 :::danger 需要注意的是
 
-设置的参数类型仅仅针对 Yakit 生成插件输入表单生效，`yak.cli` 库仍然需要用户按照自身需求把接收到的参数值转换为需要类型。
-
-例如
-
-```
-cli.String("target") // 会把参数解析为 string 类型
-cli.Bool("target") // 会把参数解析为 bool 类型
-cli.Int("target") // 会把参数解析为 int 类型
-...
-...
-```
+设置的参数类型需要了解`yak.cli` 库的配置选项API，本篇文章在接下来的部分会介绍几个常用的API。
 
 当然具体的 API 大家可以见 [yak.cli 文档](/docs/buildinlibs/lib_cli);
 
@@ -227,7 +217,7 @@ cli.check()
 
 与此同时，如果用户设置非必要参数的时候，建议把参数进行归类
 
-例如 "并发控制类"，"规则限制类"，可以通过 `cli.setCliGroup` 人为设置 "参数组"，这样就可以告诉 Yakit 把那些参数归纳在一起展示给用户。
+例如 "并发控制类"，"规则限制类"，可以通过 `cli.setCliGroup` 设置 "参数组"，这样就可以告诉 Yakit 把那些参数归纳在一起展示给用户。
 
 这是一个简单的例子
 ```
