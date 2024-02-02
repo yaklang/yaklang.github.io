@@ -1,0 +1,74 @@
+---
+sidebar_position: 3
+---
+
+# 03.未授权访问漏洞案例
+
+未授权访问漏洞是指在应用程序中，没有对用户的访问权限进行正确验证和控制，导致攻击者可以通过越权操作或者遍历用户标识符等手段访问敏感信息或执行未经授权的操作。这个漏洞的存在对系统的安全性构成了潜在威胁
+
+#### 示例代码：
+
+以下是一个处理用户个人信息的接口示例代码：
+
+```Go
+// 用户信息接口
+{
+    DefaultQuery: "",
+    Path:         "/user/profile",
+    Handler: func(writer http.ResponseWriter, request *http.Request) {
+        realUser, err := s.database.mallAuthenticate(writer, request)
+        if err != nil {
+            return
+        }
+        // 通过 id 获取用户信息
+        var a = request.URL.Query().Get("id")
+        i, err := strconv.ParseInt(a, 10, 64)
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            writer.WriteHeader(500)
+            return
+        }
+        userInfo, err := s.database.GetUserById(int(i))
+        if err != nil {
+            writer.Write([]byte(err.Error()))
+            writer.WriteHeader(500)
+            return
+        }
+        // 水平越权
+        if realUser.Role != "admin" && realUser.Role != userInfo.Role {
+            writer.Write([]byte("Not Enough Permissions"))
+            writer.WriteHeader(http.StatusBadRequest)
+            return
+        }
+        // 返回用户个人页面
+        // 省略部分代码
+    },
+}
+```
+
+#### 攻击示例：
+
+攻击者可以利用未授权访问漏洞，通过构造恶意请求，直接传递其他用户的ID参数，绕过访问控制逻辑，获取到其他用户的个人信息。攻击者可以通过遍历用户ID等手段，获取到系统中的所有用户信息，甚至可以获取到管理员或特权用户的信息。
+
+#### 防御措施：
+
+1. 权限验证： 在访问敏感资源或执行敏感操作之前，应该对用户的身份和权限进行严格验证，确保用户具有合法的访问权限。
+2. 最小权限原则： 用户的访问权限应该最小化，即每个用户只能访问其所需的资源和数据，不应该具有无关资源的访问权限。
+3. 参数验证： 对于从客户端接收的参数，应该进行严格的验证和过滤，防止恶意用户通过篡改参数来进行未授权访问。
+4. 敏感数据保护： 对于敏感数据和资源，应该加强访问控制，采用加密、身份认证、访问日志等方式加强保护，防止未经授权的访问和操作。
+5. 错误信息处理： 在程序中对错误信息进行处理时，应该避免将敏感信息返回给客户端，防止攻击者利用错误信息获取系统信息和漏洞利用路径。
+
+通过以上防御措施，可以有效地防止未授权访问漏洞的发生，保障系统的安全性和稳定性。
+
+#### 靶场演示：
+
+未授权访问漏洞在靶场的"**购物车**或**我的订单**"位置，演示如下：
+
+<video
+  src="/img/yaklab/mall/03unsafe-unauthorized.mp4"
+  loop={true}
+  playsInline={true}
+  controls={true}
+  autoPlay={true}
+  style={{ width: 890 }}
+/>
