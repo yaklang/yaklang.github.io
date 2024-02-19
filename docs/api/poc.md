@@ -81,12 +81,16 @@
 | [poc.appendPostParam](#appendpostparam) |appendPostParam 是一个请求选项参数，用于改变请求报文，添加 POST 请求参数  |
 | [poc.appendQueryParam](#appendqueryparam) |appendQueryParam 是一个请求选项参数，用于改变请求报文，添加 GET 请求参数  |
 | [poc.appendUploadFile](#appenduploadfile) |appendUploadFile 是一个请求选项参数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)  |
+| [poc.connPool](#connpool) |connPool 是一个请求选项参数，用于指定是否使用连接池，默认不使用连接池  |
 | [poc.connectTimeout](#connecttimeout) |connectTimeout 是一个请求选项参数，用于指定连接超时时间，默认为15秒  |
+| [poc.context](#context) |context 是一个请求选项参数，用于指定请求的上下文  |
 | [poc.deleteCookie](#deletecookie) |deleteCookie 是一个请求选项参数，用于改变请求报文，删除 Cookie 中的值  |
 | [poc.deleteForm](#deleteform) |deleteForm 是一个请求选项参数，用于改变请求报文，删除 POST 请求表单  |
 | [poc.deleteHeader](#deleteheader) |deleteHeader 是一个请求选项参数，用于改变请求报文，删除请求头  |
 | [poc.deletePostParam](#deletepostparam) |deletePostParam 是一个请求选项参数，用于改变请求报文，删除 POST 请求参数  |
 | [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除 GET 请求参数  |
+| [poc.dnsNoCache](#dnsnocache) |dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存，默认使用DNS缓存  |
+| [poc.dnsServer](#dnsserver) |dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器  |
 | [poc.host](#host) |host 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host  |
 | [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用 http2 协议，默认为 false 即使用http1协议  |
 | [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用 https 协议，默认为 false 即使用 http 协议  |
@@ -2460,6 +2464,34 @@ poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?
 | r1 | `PocConfigOption` |   |
 
 
+### connPool
+
+#### 详细描述
+connPool 是一个请求选项参数，用于指定是否使用连接池，默认不使用连接池
+
+Example:
+rsp, req, err = poc.HTTP(x`POST /post HTTP/1.1
+Content-Type: application/json
+Host: pie.dev
+
+{"key": "asd"}`, poc.connPool(true)) // 使用连接池发送请求，这在发送多个请求时非常有用
+
+
+#### 定义
+
+`connPool(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### connectTimeout
 
 #### 详细描述
@@ -2479,6 +2511,33 @@ poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | f | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### context
+
+#### 详细描述
+context 是一个请求选项参数，用于指定请求的上下文
+
+Example:
+```
+ctx = context.New()
+poc.Get("https://exmaple.com", poc.withContext(ctx)) // 向 example.com 发起请求，使用指定的上下文
+```
+
+
+#### 定义
+
+`context(ctx context.Context) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2641,6 +2700,60 @@ Host: pie.dev
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### dnsNoCache
+
+#### 详细描述
+dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存，默认使用DNS缓存
+
+Example:
+```
+// 向 example.com 发起请求，不使用DNS缓存
+poc.Get("https://exmaple.com", poc.dnsNoCache(true))
+```
+
+
+#### 定义
+
+`dnsNoCache(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### dnsServer
+
+#### 详细描述
+dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器
+
+Example:
+```
+// 向 example.com 发起请求，使用指定的DNS服务器
+poc.Get("https://exmaple.com", poc.dnsServer("8.8.8.8", "1.1.1.1"))
+```
+
+
+#### 定义
+
+`dnsServer(servers ...string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| servers | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

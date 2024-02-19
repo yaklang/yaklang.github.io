@@ -3,15 +3,20 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [yakit.AutoInitYakit](#autoinityakit) ||
+| [yakit.Debug](#debug) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
 | [yakit.EnableTable](#enabletable) ||
 | [yakit.EnableText](#enabletext) ||
 | [yakit.EnableWebsiteTrees](#enablewebsitetrees) ||
+| [yakit.Error](#error) ||
+| [yakit.File](#file) ||
 | [yakit.GenerateYakitMITMHooksParams](#generateyakitmitmhooksparams) ||
 | [yakit.GetHomeDir](#gethomedir) ||
 | [yakit.GetHomeTempDir](#gethometempdir) ||
 | [yakit.GetOnlineBaseUrl](#getonlinebaseurl) ||
+| [yakit.Info](#info) ||
 | [yakit.InitYakit](#inityakit) ||
+| [yakit.Markdown](#markdown) ||
 | [yakit.NewBarGraph](#newbargraph) ||
 | [yakit.NewClient](#newclient) ||
 | [yakit.NewHTTPFlowRisk](#newhttpflowrisk) ||
@@ -34,29 +39,24 @@
 | [yakit.QueryPortAssetByNetwork](#queryportassetbynetwork) ||
 | [yakit.QueryUrlsAll](#queryurlsall) ||
 | [yakit.QueryUrlsByKeyword](#queryurlsbykeyword) ||
+| [yakit.Report](#report) ||
 | [yakit.SaveDomain](#savedomain) ||
 | [yakit.SaveHTTPFlow](#savehttpflow) ||
 | [yakit.SavePayload](#savepayload) ||
 | [yakit.SavePayloadByFile](#savepayloadbyfile) ||
 | [yakit.SavePortFromResult](#saveportfromresult) ||
 | [yakit.SetOnlineBaseUrl](#setonlinebaseurl) ||
+| [yakit.SetProgress](#setprogress) ||
+| [yakit.SetProgressEx](#setprogressex) ||
 | [yakit.StatusCard](#statuscard) ||
 | [yakit.TableData](#tabledata) ||
+| [yakit.Text](#text) ||
 | [yakit.TextTabData](#texttabdata) ||
 | [yakit.UpdateOnlineYakitStore](#updateonlineyakitstore) ||
 | [yakit.UpdateYakitStore](#updateyakitstore) ||
 | [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
-| [yakit.YakitDebug](#yakitdebug) ||
-| [yakit.YakitError](#yakiterror) ||
-| [yakit.YakitFile](#yakitfile) ||
-| [yakit.YakitInfo](#yakitinfo) ||
-| [yakit.YakitMarkdown](#yakitmarkdown) ||
-| [yakit.YakitReport](#yakitreport) ||
-| [yakit.YakitSetProgress](#yakitsetprogress) ||
-| [yakit.YakitSetProgressEx](#yakitsetprogressex) ||
-| [yakit.YakitTextBlock](#yakittextblock) ||
-| [yakit.YakitWarn](#yakitwarn) ||
+| [yakit.Warn](#warn) ||
 
 
 ## 函数定义
@@ -73,6 +73,22 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `` |   |
+
+
+### Debug
+
+#### 详细描述
+
+
+#### 定义
+
+`Debug(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
 ### DeletePayloadByGroup
@@ -151,6 +167,38 @@
 | r1 | `` |   |
 
 
+### Error
+
+#### 详细描述
+
+
+#### 定义
+
+`Error(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
+
+
+### File
+
+#### 详细描述
+
+
+#### 定义
+
+`File(fileName string, desc ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| fileName | `string` |   |
+| desc | `...any` |   |
+
+
 ### GenerateYakitMITMHooksParams
 
 #### 详细描述
@@ -219,6 +267,22 @@
 | r1 | `YAK_ONLINE_BASEURL` |   |
 
 
+### Info
+
+#### 详细描述
+
+
+#### 定义
+
+`Info(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
+
+
 ### InitYakit
 
 #### 详细描述
@@ -232,6 +296,21 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | y | `*YakitClient` |   |
+
+
+### Markdown
+
+#### 详细描述
+
+
+#### 定义
+
+`Markdown(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
 
 
 ### NewBarGraph
@@ -650,6 +729,21 @@
 | r1 | `chan string` |   |
 
 
+### Report
+
+#### 详细描述
+
+
+#### 定义
+
+`Report(i int)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `int` |   |
+
+
 ### SaveDomain
 
 #### 详细描述
@@ -771,6 +865,37 @@
 | u | `string` |   |
 
 
+### SetProgress
+
+#### 详细描述
+
+
+#### 定义
+
+`SetProgress(f float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `float64` |   |
+
+
+### SetProgressEx
+
+#### 详细描述
+
+
+#### 定义
+
+`SetProgressEx(id string, f float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `string` |   |
+| f | `float64` |   |
+
+
 ### StatusCard
 
 #### 详细描述
@@ -812,6 +937,21 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*YakitFixedTableData` |   |
+
+
+### Text
+
+#### 详细描述
+
+
+#### 定义
+
+`Text(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
 
 
 ### TextTabData
@@ -902,147 +1042,7 @@
 | r1 | `error` |   |
 
 
-### YakitDebug
-
-#### 详细描述
-
-
-#### 定义
-
-`Debug(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
-
-
-### YakitError
-
-#### 详细描述
-
-
-#### 定义
-
-`Error(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
-
-
-### YakitFile
-
-#### 详细描述
-
-
-#### 定义
-
-`File(fileName string, desc ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fileName | `string` |   |
-| desc | `...any` |   |
-
-
-### YakitInfo
-
-#### 详细描述
-
-
-#### 定义
-
-`Info(tmp string, items ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `string` |   |
-| items | `...any` |   |
-
-
-### YakitMarkdown
-
-#### 详细描述
-
-
-#### 定义
-
-`Markdown(tmp any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `any` |   |
-
-
-### YakitReport
-
-#### 详细描述
-
-
-#### 定义
-
-`Report(i int)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` |   |
-
-
-### YakitSetProgress
-
-#### 详细描述
-
-
-#### 定义
-
-`SetProgress(f float64)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| f | `float64` |   |
-
-
-### YakitSetProgressEx
-
-#### 详细描述
-
-
-#### 定义
-
-`SetProgressEx(id string, f float64)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| id | `string` |   |
-| f | `float64` |   |
-
-
-### YakitTextBlock
-
-#### 详细描述
-
-
-#### 定义
-
-`Text(tmp any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tmp | `any` |   |
-
-
-### YakitWarn
+### Warn
 
 #### 详细描述
 
