@@ -585,7 +585,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                         style={{ marginBottom: 4 }}
                         onClick={() => onDownload(macOSIntel.url)}
                       >
-                        {t("下载")} Inter {t("芯片")}
+                        {t("下载")} Intel {t("芯片")}
                       </div>
                       <div
                         className="download-btn-item download-btn-item-special"
