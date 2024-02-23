@@ -2,24 +2,32 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [xpath.CreateXPathNavigator](#createxpathnavigator) |CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.Node. |
-| [xpath.ExistedAttr](#existedattr) |ExistsAttr returns whether attribute with specified name exists. |
-| [xpath.Find](#find) |Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.  See `QueryAll()` function. |
-| [xpath.FindOne](#findone) |FindOne is like Query but will panics if the expression `expr` cannot be parsed. See `Query()` function. |
-| [xpath.InnerText](#innertext) |InnerText returns the text between the start and end tags of the object. |
-| [xpath.LoadHTMLDocument](#loadhtmldocument) ||
-| [xpath.OutputHTML](#outputhtml) ||
-| [xpath.OutputHTMLSelf](#outputhtmlself) ||
-| [xpath.Query](#query) |Query runs the given XPath expression against the given html.Node and returns the first matching html.Node, or nil if no matches are found.  Returns a...|
-| [xpath.QueryAll](#queryall) |QueryAll searches the html.Node that matches by the specified XPath expr. Return an error if the expression `expr` cannot be parsed. |
-| [xpath.SelectAttr](#selectattr) |SelectAttr returns the attribute value with the specified name. |
+| [xpath.CreateXPathNavigator](#createxpathnavigator) |CreateXPathNavigator 根据传入的节点创建一个新的 XPath 导航器，使用该导航器的方法来遍历该节点及其子节点  |
+| [xpath.ExistedAttr](#existedattr) |ExistsAttr 判断传入节点是否存在指定名称的属性并返回布尔值  |
+| [xpath.Find](#find) |Find 根据传入的 XPath 表达式从传入的节点开始查找匹配的节点，返回节点数组  如果表达式解析出错会 panic  |
+| [xpath.FindOne](#findone) |FindOne 根据传入的 XPath 表达式从传入的节点开始查找第一个匹配的节点  如果表达式解析出错会 panic  |
+| [xpath.InnerText](#innertext) |InnerText 返回指定节点及其子节点的字符串  |
+| [xpath.LoadHTMLDocument](#loadhtmldocument) |LoadHTMLDocument 解析传入的 HTML 文本，返回根节点结构体引用与错误  |
+| [xpath.OutputHTML](#outputhtml) |OutputHTML 将传入的节点结构体引用转换为 HTML 文本  |
+| [xpath.OutputHTMLSelf](#outputhtmlself) |OutputHTMLSelf 将传入的节点结构体引用转换为 HTML 文本，包含自身节点  |
+| [xpath.Query](#query) |Query 根据传入的 XPath 表达式从传入的节点开始查找第一个匹配的节点，返回节点与错误  |
+| [xpath.QueryAll](#queryall) |QueryAll 根据传入的 XPath 表达式从传入的节点开始查找匹配的节点，返回节点数组与错误  |
+| [xpath.SelectAttr](#selectattr) |SelectAttr 返回传入节点指定名称的属性值  |
 
 
 ## 函数定义
 ### CreateXPathNavigator
 
 #### 详细描述
-CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.Node.
+CreateXPathNavigator 根据传入的节点创建一个新的 XPath 导航器，使用该导航器的方法来遍历该节点及其子节点
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+nav = xpath.CreateXPathNavigator(doc)
+nav.MoveToChild()
+println(nav.String())
+```
 
 
 #### 定义
@@ -40,7 +48,14 @@ CreateXPathNavigator creates a new xpath.NodeNavigator for the specified html.No
 ### ExistedAttr
 
 #### 详细描述
-ExistsAttr returns whether attribute with specified name exists.
+ExistsAttr 判断传入节点是否存在指定名称的属性并返回布尔值
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+node = xpath.FindOne(doc, "//div[@class='content']")
+existed = xpath.ExistsAttr(node, "class") // true
+```
 
 
 #### 定义
@@ -62,9 +77,15 @@ ExistsAttr returns whether attribute with specified name exists.
 ### Find
 
 #### 详细描述
-Find is like QueryAll but Will panics if the expression `expr` cannot be parsed.
+Find 根据传入的 XPath 表达式从传入的节点开始查找匹配的节点，返回节点数组
 
-See `QueryAll()` function.
+如果表达式解析出错会 panic
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+nodes = xpath.Find(doc, "//div[@class='content']/text()")
+```
 
 
 #### 定义
@@ -86,8 +107,15 @@ See `QueryAll()` function.
 ### FindOne
 
 #### 详细描述
-FindOne is like Query but will panics if the expression `expr` cannot be parsed.
-See `Query()` function.
+FindOne 根据传入的 XPath 表达式从传入的节点开始查找第一个匹配的节点
+
+如果表达式解析出错会 panic
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+node = xpath.FindOne(doc, "//div[@class='content']/text()")
+```
 
 
 #### 定义
@@ -109,7 +137,14 @@ See `Query()` function.
 ### InnerText
 
 #### 详细描述
-InnerText returns the text between the start and end tags of the object.
+InnerText 返回指定节点及其子节点的字符串
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+node = xpath.FindOne(doc, "//div[@class='content']")
+text = xpath.InnerText(node)
+```
 
 
 #### 定义
@@ -130,6 +165,12 @@ InnerText returns the text between the start and end tags of the object.
 ### LoadHTMLDocument
 
 #### 详细描述
+LoadHTMLDocument 解析传入的 HTML 文本，返回根节点结构体引用与错误
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+```
 
 
 #### 定义
@@ -151,6 +192,13 @@ InnerText returns the text between the start and end tags of the object.
 ### OutputHTML
 
 #### 详细描述
+OutputHTML 将传入的节点结构体引用转换为 HTML 文本
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+htmlText = xpath.OutputHTML(doc)
+```
 
 
 #### 定义
@@ -171,6 +219,13 @@ InnerText returns the text between the start and end tags of the object.
 ### OutputHTMLSelf
 
 #### 详细描述
+OutputHTMLSelf 将传入的节点结构体引用转换为 HTML 文本，包含自身节点
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+htmlText = xpath.OutputHTMLSelf(doc)
+```
 
 
 #### 定义
@@ -191,10 +246,13 @@ InnerText returns the text between the start and end tags of the object.
 ### Query
 
 #### 详细描述
-Query runs the given XPath expression against the given html.Node and
-returns the first matching html.Node, or nil if no matches are found.
+Query 根据传入的 XPath 表达式从传入的节点开始查找第一个匹配的节点，返回节点与错误
 
-Returns an error if the expression `expr` cannot be parsed.
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+node, err = xpath.Query(doc, "//div[@class='content']/text()")
+```
 
 
 #### 定义
@@ -217,8 +275,13 @@ Returns an error if the expression `expr` cannot be parsed.
 ### QueryAll
 
 #### 详细描述
-QueryAll searches the html.Node that matches by the specified XPath expr.
-Return an error if the expression `expr` cannot be parsed.
+QueryAll 根据传入的 XPath 表达式从传入的节点开始查找匹配的节点，返回节点数组与错误
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+nodes, err = xpath.QueryAll(doc, "//div[@class='content']/text()")
+```
 
 
 #### 定义
@@ -241,7 +304,14 @@ Return an error if the expression `expr` cannot be parsed.
 ### SelectAttr
 
 #### 详细描述
-SelectAttr returns the attribute value with the specified name.
+SelectAttr 返回传入节点指定名称的属性值
+
+Example:
+```
+doc, err = xpath.LoadHTMLDocument(htmlText)
+node = xpath.FindOne(doc, "//div[@class='content']")
+attr = xpath.SelectAttr(node, "class")
+```
 
 
 #### 定义

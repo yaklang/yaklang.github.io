@@ -12,6 +12,7 @@
 | [nuclei.UpdateDatabase](#updatedatabase) ||
 | [nuclei.all](#all) ||
 | [nuclei.bulkSize](#bulksize) ||
+| [nuclei.customVulnFilter](#customvulnfilter) ||
 | [nuclei.debug](#debug) ||
 | [nuclei.debugRequest](#debugrequest) ||
 | [nuclei.debugResponse](#debugresponse) ||
@@ -249,6 +250,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### customVulnFilter
+
+#### 详细描述
+
+
+#### 定义
+
+`customVulnFilter(f *filter.StringFilter) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `*filter.StringFilter` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

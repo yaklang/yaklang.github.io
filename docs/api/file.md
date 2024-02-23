@@ -709,6 +709,7 @@ Example:
 for d in file.ReadDirInfoInDirectory("/tmp")~ {
 println(d.Name)
 }
+```
 
 
 #### 定义
