@@ -12,6 +12,7 @@
 | [crawlerx.extraWaitLoadTime](#extrawaitloadtime) ||
 | [crawlerx.fileInput](#fileinput) ||
 | [crawlerx.formFill](#formfill) ||
+| [crawlerx.fromPlugin](#fromplugin) ||
 | [crawlerx.fullTimeout](#fulltimeout) ||
 | [crawlerx.headers](#headers) ||
 | [crawlerx.ignoreQueryName](#ignorequeryname) ||
@@ -31,6 +32,7 @@
 | [crawlerx.scanRangeLevel](#scanrangelevel) ||
 | [crawlerx.scanRepeatLevel](#scanrepeatlevel) ||
 | [crawlerx.sensitiveWords](#sensitivewords) ||
+| [crawlerx.sourceType](#sourcetype) ||
 | [crawlerx.stealth](#stealth) ||
 | [crawlerx.vue](#vue) ||
 | [crawlerx.whitelist](#whitelist) ||
@@ -236,6 +238,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | formFills | `map[string]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### fromPlugin
+
+#### 详细描述
+
+
+#### 定义
+
+`fromPlugin(fromPlugin string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| fromPlugin | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -618,6 +640,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | words | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### sourceType
+
+#### 详细描述
+
+
+#### 定义
+
+`sourceType(sourceType string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sourceType | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
