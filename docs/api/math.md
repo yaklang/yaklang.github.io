@@ -2,22 +2,29 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [math.Abs](#abs) ||
+| [math.Abs](#abs) |Abs 返回x的绝对值  |
 | [math.Ceil](#ceil) |Ceil 返回不小于x的最小整数  |
 | [math.Floor](#floor) |Floor 返回不大于x的最大整数  |
-| [math.IsNaN](#isnan) ||
-| [math.NaN](#nan) |NaN returns an IEEE 754 “not-a-number” value. |
+| [math.IsNaN](#isnan) |IsNaN 判断一个数是否是NaN  |
+| [math.NaN](#nan) |NaN 返回一个IEEE-574 “非数字”的值  |
 | [math.Pow](#pow) |Pow 返回x的y次方  |
 | [math.Pow10](#pow10) |Pow10 返回10的n次方  |
-| [math.Round](#round) ||
+| [math.Round](#round) |Round 返回四舍五入到最近的整数  存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN  |
 | [math.RoundToEven](#roundtoeven) |RoundToEven 返回四舍五入到最近的偶整数  |
-| [math.Sqrt](#sqrt) ||
+| [math.Sqrt](#sqrt) |Sqrt 返回一个数的平方根  如果x &lt; 0，返回NaN  |
 
 
 ## 函数定义
 ### Abs
 
 #### 详细描述
+Abs 返回x的绝对值
+
+Example:
+```
+math.Abs(-1) // 1
+math.Abs(1) // 1
+```
 
 
 #### 定义
@@ -92,22 +99,39 @@ math.Floor(-1.5) // -2
 ### IsNaN
 
 #### 详细描述
+IsNaN 判断一个数是否是NaN
+
+Example:
+```
+math.IsNaN(1) // false
+math.IsNaN(math.NaN()) // true
+```
 
 
 #### 定义
 
-`IsNaN() f`
+`IsNaN(x float64) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| x | `float64` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `f` |   |
+| r1 | `bool` |   |
 
 
 ### NaN
 
 #### 详细描述
-NaN returns an IEEE 754 “not-a-number” value.
+NaN 返回一个IEEE-574 “非数字”的值
+
+Example:
+```
+math.NaN()
+```
 
 
 #### 定义
@@ -178,21 +202,30 @@ math.Pow10(-1) // 0.1
 ### Round
 
 #### 详细描述
+Round 返回四舍五入到最近的整数
+
+存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN
+
+Example:
+```
+math.Round(1.5) // 2
+math.Round(1.4) // 1
+```
 
 
 #### 定义
 
-`Round(x )`
+`Round(x float64) float64`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `` |   |
+| x | `float64` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `float64` |   |
 
 
 ### RoundToEven
@@ -227,6 +260,15 @@ math.RoundToEven(4.5) // 4
 ### Sqrt
 
 #### 详细描述
+Sqrt 返回一个数的平方根
+
+如果x &lt; 0，返回NaN
+
+Example:
+```
+math.Sqrt(4) // 2
+math.Sqrt(-1) // NaN
+```
 
 
 #### 定义

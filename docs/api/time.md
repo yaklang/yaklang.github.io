@@ -13,7 +13,7 @@
 | [time.ParseDuration](#parseduration) |ParseDuration 根据给定的格式解析时间间隔字符串，返回时间间隔结构体与错误  时间间隔字符串是一个可能带有符号的十进制数字序列，每个数字可以带有可选的小数和单位后缀，例如 "300ms"，"-1.5h" 或 "2h45m"  有效的时间单位有 "ns"（纳秒）, "us"（或 "µs" ...|
 | [time.Since](#since) |Since 函数返回自 t (过去时间)到当前时间的时间间隔  |
 | [time.Sleep](#sleep) |sleep 用于让当前协程休眠一段时间，其单位为秒  |
-| [time.Unix](#unix) ||
+| [time.Unix](#unix) |Unix 函数根据给定的 Unix 时间戳（从 1970 年 1 月 1 日 UTC 开始的 sec 秒和 nsec 纳秒）返回相应的本地时间结构体  |
 | [time.Until](#until) |Until 函数返回当前时间到 t (未来时间)的时间间隔  |
 | [time.now](#now) |now 用于获取当前时间的时间结构体  它实际是 time.Now 的别名  |
 | [time.sleep](#sleep) |sleep 用于让当前协程休眠一段时间，其单位为秒  |
@@ -324,6 +324,12 @@ sleep(1.5) // 休眠1.5秒
 ### Unix
 
 #### 详细描述
+Unix 函数根据给定的 Unix 时间戳（从 1970 年 1 月 1 日 UTC 开始的 sec 秒和 nsec 纳秒）返回相应的本地时间结构体
+
+Example:
+```
+time.Unix(1577808000, 0) // 2020-01-01 00:00:00 +0800 CST
+```
 
 
 #### 定义

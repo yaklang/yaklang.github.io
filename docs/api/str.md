@@ -86,7 +86,7 @@
 | [str.MatchAnyOfSubString](#matchanyofsubstring) |MatchAnyOfSubString 尝试将 i 转换为字符串，然后判断是否有任意子串 subStr 存在于 i 中，如果有其中一个子串存在于 i 中则返回 true，否则返回 false，此函数忽略大小写  |
 | [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) |MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 URL 进行合并，并返回合并后的 URL  |
 | [str.NewFilter](#newfilter) |NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器用于判断一个元素是否在一个集合中，它存在极低的假阳性（即说存在的元素实际上不存在），通常这个集合中的元素数量非常大才会使用布谷鸟过滤器。  |
-| [str.NewReader](#newreader) |NewReader returns a new Reader reading from s. It is similar to bytes.NewBufferString but more efficient and read-only. |
+| [str.NewReader](#newreader) |NewReader returns a new Reader reading from s. It is similar to bytes.NewBufferString but more efficient and non-writable. |
 | [str.ParamsGetOr](#paramsgetor) |ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue  |
 | [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求  |
 | [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应  |
@@ -2445,7 +2445,7 @@ f.Exist("hello") // true
 
 #### 详细描述
 NewReader returns a new Reader reading from s.
-It is similar to bytes.NewBufferString but more efficient and read-only.
+It is similar to bytes.NewBufferString but more efficient and non-writable.
 
 
 #### 定义

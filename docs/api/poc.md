@@ -125,6 +125,7 @@
 | [poc.retryWaitTime](#retrywaittime) |retryWaitTime 是一个请求选项参数，用于指定重试时最小等待时间，需要搭配 retryTimes 使用，默认为0.1秒  |
 | [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
 | [poc.session](#session) |session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用  |
+| [poc.sni](#sni) |sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)  |
 | [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
 | [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
 | [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为 websocket，此时发送的请求应该为 websocket 握手请求  |
@@ -3653,6 +3654,32 @@ rsp, req, err = poc.Get("https://pie.dev/cookies", poc.session("test")) // 向 p
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### sni
+
+#### 详细描述
+sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)
+
+Example:
+```
+poc.Get("https://www.example.com", poc.sni("google.com"))
+```
+
+
+#### 定义
+
+`sni(sni string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sni | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

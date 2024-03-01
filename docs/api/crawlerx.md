@@ -34,6 +34,7 @@
 | [crawlerx.sensitiveWords](#sensitivewords) ||
 | [crawlerx.sourceType](#sourcetype) ||
 | [crawlerx.stealth](#stealth) ||
+| [crawlerx.urlCheck](#urlcheck) ||
 | [crawlerx.vue](#vue) ||
 | [crawlerx.whitelist](#whitelist) ||
 
@@ -680,6 +681,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | stealth | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### urlCheck
+
+#### 详细描述
+
+
+#### 定义
+
+`urlCheck(check bool) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| check | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
