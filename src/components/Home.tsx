@@ -382,7 +382,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   });
   const [LinuxArm64, setLinuxArm64] = useState({
     key: "Linux (Arm64)",
-    url: "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/Yakit-1.2.9-linux-arm64.AppImage",
+    url: "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/Yakit-1.3.1-linux-arm64.AppImage",
     size: 0,
   });
   useEffect(() => {
