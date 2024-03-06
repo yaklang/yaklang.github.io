@@ -279,12 +279,13 @@ println("所有任务完成")
 
 #### 定义
 
-`NewSizedWaitGroup(size int) *utils.SizedWaitGroup`
+`NewSizedWaitGroup(size int, ctxs ...context.Context) *utils.SizedWaitGroup`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | size | `int` |   |
+| ctxs | `...context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -315,7 +316,12 @@ println("所有任务完成")
 
 #### 定义
 
-`NewWaitGroup() *WaitGroupProxy`
+`NewWaitGroup(ctxs ...context.Context) *WaitGroupProxy`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctxs | `...context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

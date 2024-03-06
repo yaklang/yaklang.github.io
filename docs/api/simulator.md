@@ -9,12 +9,16 @@
 | [simulator.captchaUrl](#captchaurl) ||
 | [simulator.exePath](#exepath) ||
 | [simulator.extraWaitLoadTime](#extrawaitloadtime) ||
+| [simulator.fromPlugin](#fromplugin) ||
 | [simulator.leaklessStatus](#leaklessstatus) ||
 | [simulator.loginDetectMode](#logindetectmode) ||
 | [simulator.password](#password) ||
 | [simulator.passwordList](#passwordlist) ||
 | [simulator.passwordSelector](#passwordselector) ||
 | [simulator.proxy](#proxy) ||
+| [simulator.runtimeID](#runtimeid) ||
+| [simulator.saveToDB](#savetodb) ||
+| [simulator.sourceType](#sourcetype) ||
 | [simulator.submitButtonSelector](#submitbuttonselector) ||
 | [simulator.username](#username) ||
 | [simulator.usernameList](#usernamelist) ||
@@ -165,6 +169,26 @@
 | r1 | `BruteConfigOpt` |   |
 
 
+### fromPlugin
+
+#### 详细描述
+
+
+#### 定义
+
+`fromPlugin(fromPlugin string) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| fromPlugin | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
 ### leaklessStatus
 
 #### 详细描述
@@ -280,6 +304,66 @@
 |:-----------|:---------- |:-----------|
 | proxy | `string` |   |
 | details | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### runtimeID
+
+#### 详细描述
+
+
+#### 定义
+
+`runtimeID(runtimeID string) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| runtimeID | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### saveToDB
+
+#### 详细描述
+
+
+#### 定义
+
+`saveToDB(saveToDB bool) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| saveToDB | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### sourceType
+
+#### 详细描述
+
+
+#### 定义
+
+`sourceType(sourceType string) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sourceType | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
