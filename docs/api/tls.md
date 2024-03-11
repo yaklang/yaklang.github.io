@@ -11,6 +11,8 @@
 | [tls.GenerateRootCA](#generaterootca) |GenerateRootCA 根据名字生成根证书和私钥，返回PEM格式证书和私钥与错误  |
 | [tls.GenerateSM2KeyPair](#generatesm2keypair) |GenerateSM2KeyPair 生成SM2公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.Inspect](#inspect) |Inspect 检查目标地址的TLS证书，并返回其证书信息与错误  |
+| [tls.InspectForceHttp1_1](#inspectforcehttp1_1) |InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议  |
+| [tls.InspectForceHttp2](#inspectforcehttp2) |InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议  |
 | [tls.SignClientCertAndKey](#signclientcertandkey) |SignClientCertAndKey 根据给定的CA证书和私钥，生成不包含认证的客户端证书和密钥，返回PEM格式的客户端证书和密钥与错误  |
 | [tls.SignServerCertAndKey](#signservercertandkey) |SignServerCertAndKey 根据给定的CA证书和私钥，生成不包含认证的服务器证书和密钥，返回PEM格式的服务器证书和密钥与错误  |
 | [tls.SignX509ClientCertAndKey](#signx509clientcertandkey) |SignX509ClientCertAndKey 根据给定的CA证书和私钥，生成客户端证书和密钥，返回PEM格式的客户端证书和密钥与错误  |
@@ -236,6 +238,60 @@ cert, err := tls.Inspect("yaklang.io:443")
 #### 定义
 
 `Inspect(addr string) ([]*TLSInspectResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| addr | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*TLSInspectResult` |   |
+| r2 | `error` |   |
+
+
+### InspectForceHttp1_1
+
+#### 详细描述
+InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议
+
+Example:
+```
+cert, err := tls.InspectForceHttp1_1("yaklang.io:443")
+```
+
+
+#### 定义
+
+`InspectForceHttp1_1(addr string) ([]*TLSInspectResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| addr | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*TLSInspectResult` |   |
+| r2 | `error` |   |
+
+
+### InspectForceHttp2
+
+#### 详细描述
+InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议
+
+Example:
+```
+cert, err := tls.InspectForceHttp2("yaklang.io:443")
+```
+
+
+#### 定义
+
+`InspectForceHttp2(addr string) ([]*TLSInspectResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

@@ -21,6 +21,7 @@
 | [str.ExtractChineseIDCards](#extractchineseidcards) |ExtractChineseIDCards 尝试将传入的参数转换为字符串，然后提取字符串中的身份证号  |
 | [str.ExtractDomain](#extractdomain) |ExtractDomain 尝试提取字符串中的域名并返回  |
 | [str.ExtractHost](#extracthost) |ExtractHost 尝试从字符串中解析出host和port，并返回host  |
+| [str.ExtractHostPort](#extracthostport) |ExtractHostPort 尝试从字符串中解析出host和port，并返回host:port  |
 | [str.ExtractJson](#extractjson) |ExtractJson 尝试提取字符串中的 JSON 并进行修复返回  |
 | [str.ExtractJsonWithRaw](#extractjsonwithraw) |ExtractJsonWithRaw 尝试提取字符串中的 JSON 并返回，第一个返回值返回经过修复后的JSON字符串数组，第二个返回值返回原始JSON字符串数组(如果修复失败)  |
 | [str.ExtractRootDomain](#extractrootdomain) |ExtractRootDomain 尝试提取字符串中的根域名并返回  |
@@ -656,6 +657,33 @@ str.ExtractHost("https://example.com") // example.com
 #### 定义
 
 `ExtractHost(raw string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### ExtractHostPort
+
+#### 详细描述
+ExtractHostPort 尝试从字符串中解析出host和port，并返回host:port
+
+Example:
+```
+str.ExtractHostPort("https://127.0.0.1:8888") // 127.0.0.1:8888
+str.ExtractHostPort("https://baidu.com") // 127.0.0.1:443
+```
+
+
+#### 定义
+
+`ExtractHostPort(raw string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
