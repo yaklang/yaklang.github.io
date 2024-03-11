@@ -55,11 +55,13 @@ Add 添加一条规则,通过`+`按钮点击:
 
 ![](/img/products/yakit/WeChatAppEx-5.png)
 
-通过 command+shift+G 打开 `/Applications/WeChat.app/Contents/MacOS` 路径, 
+通过 command+shift+G 打开 `/Applications/WeChat.app/Contents/MacOS` 路径,
 
 ![](/img/products/yakit/WeChatAppEx-6.png)
 
 选择 `Mini Program.app` 
+
+> 注意: 新版 Mac 微信小程序的可执行路径发生了变化，可以尝试此路径 `/Applications/WeChat.app/Contents/MacOS/WeChatAppEx.app/Contents/Frameworks/WeChatAppEx Framework.framework/Versions/C/Helpers/WeChatAppEx Helper.app/Contents/MacOS/WeChatAppEx Helper`
 
 ![](/img/products/yakit/WeChatAppEx-7.png)
 
@@ -68,6 +70,8 @@ Proxifier 会自动添加完毕。
 ![](/img/products/yakit/WeChatAppEx-8.png)
 
 或者直接复制 `"Mini Program.app"; "Mini Program"; com.tencent.xinWeChat.MiniProgram` 到 Applications 中。
+
+> 注意: 新版 Mac 微信小程序可以使用 "WeChatAppEx Helper.app"; "WeChatAppEx Helper"; com.tencent.xinWeChat.WeChatAppEx.helper 作为应用程序名称。
 
 ![](/img/products/yakit/WeChatAppEx-8.png)
 
