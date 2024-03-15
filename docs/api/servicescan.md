@@ -736,12 +736,12 @@ die(err)
 
 #### 定义
 
-`service() true`
+`service() fp.ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `true` |   |
+| r1 | `fp.ConfigOption` |   |
 
 
 ### web

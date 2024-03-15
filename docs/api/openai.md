@@ -3,7 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [openai.Chat](#chat) |Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果  @param {string} data 用户的提问或描述  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等  |
-| [openai.ChatEx](#chatex) ||
+| [openai.ChatEx](#chatex) |ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误  @param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、...|
 | [openai.FunctionCall](#functioncall) |FunctionCall 使用 OpenAI 的大语言模型的函数调用功能，描述一个函数并让模型智能地选择输出一个包含调用函数的参数的 JSON 对象  详情请参考 https://platform.openai.com/docs/guides/function-calling  @param {st...|
 | [openai.NewSession](#newsession) ||
 | [openai.TranslateToChinese](#translatetochinese) |TranslateToChinese 使用 OpenAI 的大语言模型将传入的字符串翻译为中文，还可以接收零个到多个配置选项，用于配置代理、API Key、模型等，返回翻译后的中文字符串  |
@@ -59,22 +59,48 @@ result = openai.Chat("Hello, world!", openai.apiKey("sk-xxx"), openai.proxy("htt
 ### ChatEx
 
 #### 详细描述
+ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误
+
+@param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建
+
+@param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等
+
+@return {ChatDetails} 包含对话结果的结构体
+
+@return {error} 错误
+
+Example:
+```
+d = openai.ChatEx(
+[
+openai.userMessage("What is the weather like in Boston?")
+],
+openai.newFunction(
+"get_current_weather",
+"Get the current weather in a given location",
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"),
+),
+openai.proxy("http://127.0.0.1:7890"),
+)~
+println(d.FunctionCallResult())
+```
 
 
 #### 定义
 
-`ChatEx(messages []ChatDetail, opts ...ConfigOption) (ChatDetails, error)`
+`ChatEx(messages []aispec.ChatDetail, opts ...ConfigOption) (aispec.ChatDetails, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| messages | `[]ChatDetail` |   |
+| messages | `[]aispec.ChatDetail` |   |
 | opts | `...ConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ChatDetails` |   |
+| r1 | `aispec.ChatDetails` |   |
 | r2 | `error` |   |
 
 

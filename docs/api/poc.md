@@ -3621,12 +3621,12 @@ poc.Get("https://exmaple.com", poc.save(true)) // 向 example.com 发起请求�
 
 #### 定义
 
-`save(i bool) PocConfigOption`
+`save(b bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -89,12 +89,12 @@ reader = bufio.NewReader(os.Stdin)
 
 #### 定义
 
-`NewReader(i any) (*bufio.Reader, error)`
+`NewReader(raw ...any) (*bufio.Reader, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| raw | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -183,12 +183,12 @@ writer.Flush()
 
 #### 定义
 
-`NewWriter(i any) (*bufio.Writer, error)`
+`NewWriter(raw ...any) (*bufio.Writer, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| raw | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
