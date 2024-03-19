@@ -3,6 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [ai.ChatGLM](#chatglm) ||
+| [ai.Moonshot](#moonshot) ||
 | [ai.OpenAI](#openai) ||
 | [ai.apiKey](#apikey) ||
 | [ai.baseURL](#baseurl) ||
@@ -22,6 +23,26 @@
 #### 定义
 
 `ChatGLM(opts ...aispec.AIConfigOption) aispec.AIGateway`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aispec.AIGateway` |   |
+
+
+### Moonshot
+
+#### 详细描述
+
+
+#### 定义
+
+`Moonshot(opts ...aispec.AIConfigOption) aispec.AIGateway`
 
 #### 参数
 |参数名|参数类型|参数解释|

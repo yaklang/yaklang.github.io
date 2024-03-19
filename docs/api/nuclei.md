@@ -10,8 +10,10 @@
 | [nuclei.Scan](#scan) ||
 | [nuclei.ScanAuto](#scanauto) ||
 | [nuclei.UpdateDatabase](#updatedatabase) ||
+| [nuclei.UpdatePoC](#updatepoc) ||
 | [nuclei.all](#all) ||
 | [nuclei.bulkSize](#bulksize) ||
+| [nuclei.context](#context) ||
 | [nuclei.customVulnFilter](#customvulnfilter) ||
 | [nuclei.debug](#debug) ||
 | [nuclei.debugRequest](#debugrequest) ||
@@ -217,6 +219,21 @@
 | r1 | `error` |   |
 
 
+### UpdatePoC
+
+#### 详细描述
+
+
+#### 定义
+
+`UpdatePoC(proxy ...string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| proxy | `...string` |   |
+
+
 ### all
 
 #### 详细描述
@@ -250,6 +267,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### context
+
+#### 详细描述
+
+
+#### 定义
+
+`context(c context.Context) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| c | `context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -904,17 +941,17 @@
 
 #### 定义
 
-`runtimeId(runtimeId string) LowhttpOpt`
+`runtimeId(id string) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| runtimeId | `string` |   |
+| id | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `LowhttpOpt` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### severity

@@ -52,13 +52,14 @@
 
 #### 定义
 
-`CreateTemporaryYakScript(t string, code string) (string, error)`
+`CreateTemporaryYakScript(t string, code string, suffix ...string) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | t | `string` |   |
 | code | `string` |   |
+| suffix | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
