@@ -24,6 +24,7 @@
 | [yakit.NewPieGraph](#newpiegraph) ||
 | [yakit.NewTable](#newtable) ||
 | [yakit.NewWordCloud](#newwordcloud) ||
+| [yakit.ObjToPort](#objtoport) ||
 | [yakit.Output](#output) ||
 | [yakit.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [yakit.QueryDomainsByNetwork](#querydomainsbynetwork) ||
@@ -437,6 +438,27 @@
 | r1 | `*YakitGraph` |   |
 
 
+### ObjToPort
+
+#### 详细描述
+
+
+#### 定义
+
+`ObjToPort(t any) (*yakit.Port, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*yakit.Port` |   |
+| r2 | `error` |   |
+
+
 ### Output
 
 #### 详细描述
@@ -836,13 +858,13 @@
 
 #### 定义
 
-`SavePortFromResult(t any, taskNames ...string) error`
+`SavePortFromResult(t any, RuntimeId ...string) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | t | `any` |   |
-| taskNames | `...string` |   |
+| RuntimeId | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

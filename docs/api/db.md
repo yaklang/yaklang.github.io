@@ -730,13 +730,13 @@
 
 #### 定义
 
-`SavePortFromResult(t any, taskNames ...string) error`
+`SavePortFromResult(t any, RuntimeId ...string) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | t | `any` |   |
-| taskNames | `...string` |   |
+| RuntimeId | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

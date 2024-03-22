@@ -20,6 +20,7 @@
 | [nuclei.debugResponse](#debugresponse) ||
 | [nuclei.dnsResolver](#dnsresolver) ||
 | [nuclei.enableReverseConnection](#enablereverseconnection) ||
+| [nuclei.exactTemplateIns](#exacttemplateins) ||
 | [nuclei.excludeTags](#excludetags) ||
 | [nuclei.excludeTemplates](#excludetemplates) ||
 | [nuclei.fromPlugin](#fromplugin) ||
@@ -407,6 +408,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### exactTemplateIns
+
+#### 详细描述
+
+
+#### 定义
+
+`exactTemplateIns(script *yakit.YakScript) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| script | `*yakit.YakScript` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

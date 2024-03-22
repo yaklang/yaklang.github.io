@@ -64,13 +64,16 @@
 | [poc.ReplaceHTTPPacketBasicAuth](#replacehttppacketbasicauth) |ReplaceHTTPPacketBasicAuth 是一个辅助函数，用于改变请求报文，修改Authorization请求头为基础认证的密文，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Authorization", codec.EncodeBase64(usern...|
 | [poc.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceHTTPPacketBody 是一个辅助函数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输  |
 | [poc.ReplaceHTTPPacketCookie](#replacehttppacketcookie) |ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketCookies](#replacehttppacketcookies) |ReplaceHTTPPacketCookies 是一个辅助函数，用于改变请求报文，修改Cookie请求头  |
 | [poc.ReplaceHTTPPacketFirstLine](#replacehttppacketfirstline) |ReplaceHTTPPacketFirstLine 是一个辅助，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
+| [poc.ReplaceHTTPPacketFormEncoded](#replacehttppacketformencoded) |ReplaceHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，替换请求体中的表单，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketHost](#replacehttppackethost) |ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader("Host", host)的简写  |
 | [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法  |
 | [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径  |
 | [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) |ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) |ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketUploadFile](#replacehttppacketuploadfile) |ReplaceHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，替换请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)，如果表单名不存在则会增加  |
 | [poc.Split](#split) |Split 切割 HTTP 报文，返回响应头和响应体，其第一个参数是原始HTTP报文，接下来可以接收零个到多个回调函数，其在每次解析到请求头时回调  |
 | [poc.Websocket](#websocket) |Websocket 实际上等价于`poc.HTTP(..., poc.websocket(true))`，用于快速发送请求并建立websocket连接并且返回原始响应报文，原始请求报文以及错误  |
 | [poc.appendCookie](#appendcookie) |appendCookie 是一个请求选项参数，用于改变请求报文，添加 Cookie 请求头中的值  |
@@ -109,7 +112,9 @@
 | [poc.replaceBasicAuth](#replacebasicauth) |replaceBasicAuth 是一个请求选项参数，用于改变请求报文，修改 Authorization 请求头为基础认证的密文，如果不存在则会增加，实际上是replaceHeader("Authorization", codec.EncodeBase64(username + ":" + pass...|
 | [poc.replaceBody](#replacebody) |replaceBody 是一个请求选项参数，用于改变请求报文，修改请求体内容，第一个参数为修改后的请求体内容，第二个参数为是否分块传输  |
 | [poc.replaceCookie](#replacecookie) |replaceCookie 是一个请求选项参数，用于改变请求报文，修改Cookie请求头中的值，如果不存在则会增加  |
+| [poc.replaceCookies](#replacecookies) |replaceAllCookies 是一个请求选项参数，用于改变请求报文，修改所有Cookie请求头中的值  |
 | [poc.replaceFirstLine](#replacefirstline) |replaceFirstLine 是一个请求选项参数，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
+| [poc.replaceFormEncoded](#replaceformencoded) |replaceFormEncoded 是一个请求选项参数，用于改变请求报文，修改请求体中的表单，如果不存在则会增加  |
 | [poc.replaceHeader](#replaceheader) |replaceHeader 是一个请求选项参数，用于改变请求报文，修改修改请求头，如果不存在则会增加  |
 | [poc.replaceHost](#replacehost) |replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader("Host", host)的简写  |
 | [poc.replaceMethod](#replacemethod) |replaceMethod 是一个请求选项参数，用于改变请求报文，修改请求方法  |
@@ -117,6 +122,7 @@
 | [poc.replacePostParam](#replacepostparam) |replacePostParam 是一个请求选项参数，用于改变请求报文，修改 POST 请求参数，如果不存在则会增加  |
 | [poc.replaceQueryParam](#replacequeryparam) |replaceQueryParam 是一个请求选项参数，用于改变请求报文，修改 GET 请求参数，如果不存在则会增加  |
 | [poc.replaceRandomUserAgent](#replacerandomuseragent) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
+| [poc.replaceUploadFile](#replaceuploadfile) |replaceUploadFile 是一个请求选项参数，用于改变请求报文，修改请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)，如果不存在则会增加  |
 | [poc.replaceUserAgent](#replaceuseragent) |replaceUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头，实际上是replaceHeader("User-Agent", userAgent)的简写  |
 | [poc.retryInStatusCode](#retryinstatuscode) |retryInStatusCode 是一个请求选项参数，用于指定在某些响应状态码的情况下重试，需要搭配 retryTimes 使用  |
 | [poc.retryMaxWaitTime](#retrymaxwaittime) |retryMaxWaitTime 是一个请求选项参数，用于指定重试时最大等待时间，需要搭配 retryTimes 使用，默认为2秒  |
@@ -1955,7 +1961,7 @@ ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修�
 
 Example:
 ```
-poc.ReplaceHTTPPacketCookie(poc.BasicRequest(), p"aaa", "bbb") // 修改cookie值，由于这里没有aaa的cookie值，所以会增加
+poc.ReplaceHTTPPacketCookie(poc.BasicRequest(), "aaa", "bbb") // 修改cookie值，由于这里没有aaa的cookie值，所以会增加
 ```
 
 
@@ -1969,6 +1975,33 @@ poc.ReplaceHTTPPacketCookie(poc.BasicRequest(), p"aaa", "bbb") // 修改cookie�
 | packet | `[]byte` |   |
 | key | `string` |   |
 | value | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
+### ReplaceHTTPPacketCookies
+
+#### 详细描述
+ReplaceHTTPPacketCookies 是一个辅助函数，用于改变请求报文，修改Cookie请求头
+
+Example:
+```
+poc.ReplaceHTTPPacketCookies(poc.BasicRequest(), {"aaa":"bbb", "ccc":"ddd"}) // 修改cookie值为aaa=bbb;ccc=ddd
+```
+
+
+#### 定义
+
+`ReplaceHTTPPacketCookies(packet []byte, m any) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+| m | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1998,6 +2031,43 @@ Host: Example.com
 |:-----------|:---------- |:-----------|
 | packet | `[]byte` |   |
 | firstLine | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
+### ReplaceHTTPPacketFormEncoded
+
+#### 详细描述
+ReplaceHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，替换请求体中的表单，如果不存在则会增加
+
+Example:
+```
+poc.ReplaceHTTPPacketFormEncoded(`POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Length: 203
+
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="aaa"
+
+bbb
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, "ccc", "ddd") // 替换POST请求表单，其中ccc为键，ddd为值
+```
+
+
+#### 定义
+
+`ReplaceHTTPPacketFormEncoded(packet []byte, key string, value string) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+| key | `string` |   |
+| value | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2166,6 +2236,37 @@ poc.ReplaceHTTPPacketQueryParam(raw, "a", "b") // 添加GET请求参数a，值�
 | packet | `[]byte` |   |
 | key | `string` |   |
 | value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
+### ReplaceHTTPPacketUploadFile
+
+#### 详细描述
+ReplaceHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，替换请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)，如果表单名不存在则会增加
+
+Example:
+```
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.ReplaceHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
+```
+
+
+#### 定义
+
+`ReplaceHTTPPacketUploadFile(packet []byte, fieldName string, fileName string, fileContent any, contentType ...string) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+| fieldName | `string` |   |
+| fileName | `string` |   |
+| fileContent | `any` |   |
+| contentType | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -3246,6 +3347,32 @@ poc.Get("https://pie.dev/get", poc.replaceCookie("aaa", "bbb")) // 向 pie.dev �
 | r1 | `PocConfigOption` |   |
 
 
+### replaceCookies
+
+#### 详细描述
+replaceAllCookies 是一个请求选项参数，用于改变请求报文，修改所有Cookie请求头中的值
+
+Example:
+```
+poc.Get("https://pie.dev/get", poc.replaceAllCookies({"aaa":"bbb", "ccc":"ddd"})) // 向 pie.dev 发起请求，修改aaa的cookie值为bbb，修改ccc的cookie值为ddd
+```
+
+
+#### 定义
+
+`replaceCookies(cookies any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cookies | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### replaceFirstLine
 
 #### 详细描述
@@ -3265,6 +3392,33 @@ poc.Get("https://exmaple.com", poc.replaceFirstLine("GET /test HTTP/1.1")) // �
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | firstLine | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### replaceFormEncoded
+
+#### 详细描述
+replaceFormEncoded 是一个请求选项参数，用于改变请求报文，修改请求体中的表单，如果不存在则会增加
+
+Example:
+```
+poc.Post("https://pie.dev/post", poc.replaceFormEncoded("aaa", "bbb")) // 向 pie.dev 发起请求，添加POST请求表单，其中aaa为键，bbb为值
+```
+
+
+#### 定义
+
+`replaceFormEncoded(key string, value string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `string` |   |
+| value | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -3445,6 +3599,35 @@ poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent(
 #### 定义
 
 `replaceRandomUserAgent() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### replaceUploadFile
+
+#### 详细描述
+replaceUploadFile 是一个请求选项参数，用于改变请求报文，修改请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)，如果不存在则会增加
+
+Example:
+```
+poc.Post("https://pie.dev/post", poc.replaceUploadFile("file", "phpinfo.php", "<?php phpinfo(); ?>", "application/x-php")) // 向 pie.dev 发起请求，添加POST请求上传文件，其中file为表单名，phpinfo.php为文件名，<?php phpinfo(); ?>为文件内容，application/x-php为文件类型
+```
+
+
+#### 定义
+
+`replaceUploadFile(formName string, fileName string, fileContent []byte, contentType ...string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| formName | `string` |   |
+| fileName | `string` |   |
+| fileContent | `[]byte` |   |
+| contentType | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
