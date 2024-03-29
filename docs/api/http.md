@@ -17,21 +17,26 @@
 | [http.RequestToSha1](#requesttosha1) ||
 | [http.RequestToSha256](#requesttosha256) ||
 | [http.body](#body) |body 是一个请求选项参数，用于指定请求体  |
-| [http.cookie](#cookie) |header 是一个请求选项参数，用于设置 Cookie  |
+| [http.context](#context) |context 是一个请求选项参数，用于设置请求的上下文  |
+| [http.cookie](#cookie) |header 是一个请求选项参数，用于设置完整的 Cookie 字段  |
 | [http.dump](#dump) |dump 获取指定请求结构体引用或响应结构体引用的原始报文，返回原始报文与错误  |
 | [http.dumphead](#dumphead) |dumphead 获取指定请求结构体引用或响应结构体引用的原始报文头部，返回原始报文头部与错误  |
 | [http.fakeua](#fakeua) ||
+| [http.fromPlugin](#fromplugin) ||
 | [http.header](#header) |header 是一个请求选项参数，用于添加/指定请求头  |
-| [http.json](#json) |body 是一个请求选项参数，用于指定 JSON 格式的请求体  它会将传入的值进行 JSON 序列化，然后设置序列化后的值为请求体  |
+| [http.json](#json) |json 是一个请求选项参数，用于指定 JSON 格式的请求体  它会将传入的值进行 JSON 序列化，然后设置序列化后的值为请求体  |
 | [http.noredirect](#noredirect) ||
 | [http.params](#params) |params 是一个请求选项参数，用于添加/指定 GET 参数，这会将参数进行 URL 编码  |
 | [http.postparams](#postparams) |postparams 是一个请求选项参数，用于添加/指定 POST 参数，这会将参数进行 URL 编码  |
 | [http.proxy](#proxy) |proxy 是一个请求选项参数，用于设置一个或多个请求的代理，请求时会根据顺序找到一个可用的代理使用  |
 | [http.redirect](#redirect) |redirect 是一个请求选项参数，它接收重定向处理函数，用于自定义重定向处理逻辑，返回 true 代表继续重定向，返回 false 代表终止重定向  重定向处理函数中第一个参数是当前的请求结构体引用，第二个参数是之前的请求结构体引用  |
+| [http.runtimeID](#runtimeid) ||
+| [http.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
 | [http.session](#session) |session 是一个请求选项参数，用于根据传入的值指定会话，使用相同的值会使用同一个会话，同一个会话会自动复用 Cookie  |
 | [http.show](#show) |show 获取指定请求结构体引用或响应结构体引用的原始报文并输出在标准输出  |
 | [http.showhead](#showhead) |showhead 获取指定请求结构体引用或响应结构体引用的原始报文头部并输出在标准输出  |
-| [http.timeout](#timeout) |timeout 是一个请求选项参数，用于设置请求超时时间，单位是秒  |
+| [http.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
+| [http.timeout](#timeout) |WithTimeout 是一个请求选项参数，用于设置请求超时时间，单位是秒  |
 | [http.ua](#ua) |useragent 是一个请求选项参数，用于指定请求的 User-Agent  |
 | [http.uarand](#uarand) |uarand 返回一个随机的 User-Agent  |
 | [http.useragent](#useragent) |useragent 是一个请求选项参数，用于指定请求的 User-Agent  |
@@ -437,14 +442,41 @@ rsp, err = http.Post("https://pie.dev/post", http.body("a=b&c=d"))
 | r1 | `http_struct.HttpOption` |   |
 
 
-### cookie
+### context
 
 #### 详细描述
-header 是一个请求选项参数，用于设置 Cookie
+context 是一个请求选项参数，用于设置请求的上下文
 
 Example:
 ```
-rsp, err = http.Get("http://www.yaklang.com", http.Cookie("a=b; c=d"))
+ctx = context.New()
+rsp, err = http.Get("http://www.example.com", http.context(ctx)) // 向 example.com 发起请求，使用指定的上下文
+```
+
+
+#### 定义
+
+`context(ctx context.Context) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
+### cookie
+
+#### 详细描述
+header 是一个请求选项参数，用于设置完整的 Cookie 字段
+
+Example:
+```
+rsp, err = http.Get("http://www.yaklang.com", http.WithCookie("a=b; c=d"))
 ```
 
 
@@ -538,6 +570,26 @@ rspHeadRaw, err = http.dumphead(rsp)
 | r1 | `http_struct.HttpOption` |   |
 
 
+### fromPlugin
+
+#### 详细描述
+
+
+#### 定义
+
+`fromPlugin(value string) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
 ### header
 
 #### 详细描述
@@ -568,7 +620,7 @@ rsp, err = http.Get("http://www.yaklang.com", http.header("AAA", "BBB"))
 ### json
 
 #### 详细描述
-body 是一个请求选项参数，用于指定 JSON 格式的请求体
+json 是一个请求选项参数，用于指定 JSON 格式的请求体
 
 它会将传入的值进行 JSON 序列化，然后设置序列化后的值为请求体
 
@@ -714,6 +766,52 @@ rsp, err = http.Get("http://pie.dev/redirect/3", http.redirect(func(r, vias) boo
 | r1 | `http_struct.HttpOption` |   |
 
 
+### runtimeID
+
+#### 详细描述
+
+
+#### 定义
+
+`runtimeID(value string) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
+### save
+
+#### 详细描述
+save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库
+
+Example:
+```
+http.Get("https://exmaple.com", http.save(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中
+```
+
+
+#### 定义
+
+`save(value bool) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| value | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
 ### session
 
 #### 详细描述
@@ -788,14 +886,40 @@ http.showhead(rsp)
 | i | `any` |   |
 
 
-### timeout
+### source
 
 #### 详细描述
-timeout 是一个请求选项参数，用于设置请求超时时间，单位是秒
+source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源
 
 Example:
 ```
-rsp, err = http.Get("http://www.yaklang.com", http.timeout(10))
+rsp, err = http.Get("https://exmaple.com", http.save(true), http.source("test")) // 向 example.com 发起请求，会将此次请求保存到数据库中，指示此次请求的来源为test
+```
+
+
+#### 定义
+
+`source(value string) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
+### timeout
+
+#### 详细描述
+WithTimeout 是一个请求选项参数，用于设置请求超时时间，单位是秒
+
+Example:
+```
+rsp, err = http.Get("http://www.yaklang.com", http.WithTimeout(10))
 ```
 
 

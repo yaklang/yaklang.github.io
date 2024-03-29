@@ -55,6 +55,7 @@
 | [yso.ToBytes](#tobytes) |ToBytes 将 Java 或反序列化对象转换为字节码  |
 | [yso.ToJson](#tojson) |ToJson 将 Java 或反序列化对象转换为 json 字符串  |
 | [yso.command](#command) |SetExecCommand  command 请求参数选项函数，用于设置要执行的命令。需要配合 useRuntimeExecTemplate 使用。  |
+| [yso.dirtyDataLength](#dirtydatalength) ||
 | [yso.dnslogDomain](#dnslogdomain) |SetDnslog  dnslogDomain 请求参数选项函数，设置指定的 Dnslog 域名，需要配合 useDnslogTemplate 使用。  addr：要设置的 Dnslog 域名。  |
 | [yso.dump](#dump) |dump 将Java 对象转换为类 Java 代码  |
 | [yso.evilClassName](#evilclassname) |SetClassName  evilClassName 请求参数选项函数，用于设置生成的类名。  className：要设置的类名。  |
@@ -67,6 +68,8 @@
 | [yso.tcpReverseHost](#tcpreversehost) |SetTcpReverseHost  tcpReverseHost 请求参数选项函数，设置指定的 tcpReverseHost 域名，需要配合 useTcpReverseTemplate ，tcpReversePort 使用。  还需要配合 tcpReverseToken 使用，用于是否反连成功的标...|
 | [yso.tcpReversePort](#tcpreverseport) |SetTcpReversePort  tcpReversePort 请求参数选项函数，设置指定的 tcpReversePort 域名，需要配合 useTcpReverseTemplate ，tcpReverseHost 使用。  还需要配合 tcpReverseToken 使用，用于是否反连成功的标...|
 | [yso.tcpReverseToken](#tcpreversetoken) |SetTcpReverseToken  tcpReverseToken 请求参数选项函数，设置指定的 token 用于是否反连成功的标志，需要配合 useTcpReverseTemplate ，tcpReverseHost ，tcpReversePort 使用。  token：要设置的 token ...|
+| [yso.threeBytesCharString](#threebytescharstring) ||
+| [yso.twoBytesCharString](#twobytescharstring) ||
 | [yso.useBase64BytesClass](#usebase64bytesclass) |SetClassBase64Bytes  useBase64BytesClass 请求参数选项函数，传入base64编码的字节码。  base64：base64编码的字节码。  |
 | [yso.useBytesClass](#usebytesclass) |SetClassBytes  useBytesClass 请求参数选项函数，传入字节码。  data：字节码。  |
 | [yso.useBytesEvilClass](#usebytesevilclass) |SetBytesEvilClass  useBytesEvilClass 请求参数选项函数，传入自定义的字节码。  data：自定义的字节码。  |
@@ -2006,18 +2009,19 @@ ToBytes 将 Java 或反序列化对象转换为字节码
 Example:
 ```
 gadgetObj,_ = yso.GetCommonsBeanutils1JavaObject(yso.useBytesEvilClass(bytesCode),yso.obfuscationClassConstantPool(),yso.evilClassName(className),yso.majorVersion(version))
-gadgetBytes,_ = yso.ToBytes(gadgetObj)
+gadgetBytes,_ = yso.ToBytes(gadgetObj,yso.dirtyDataLength(10000),yso.twoBytesCharString())
 ```
 
 
 #### 定义
 
-`ToBytes(i any) ([]byte, error)`
+`ToBytes(i any, opts ...MarshalOptionFun) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+| opts | `...MarshalOptionFun` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2080,6 +2084,26 @@ yso.GetCommonsBeanutils1JavaObject(yso.command("whoami"),yso.useRuntimeExecTempl
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `GenClassOptionFun` |   |
+
+
+### dirtyDataLength
+
+#### 详细描述
+
+
+#### 定义
+
+`dirtyDataLength(length int) MarshalOptionFun`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| length | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MarshalOptionFun` |   |
 
 
 ### dnslogDomain
@@ -2413,6 +2437,46 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHos
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `GenClassOptionFun` |   |
+
+
+### threeBytesCharString
+
+#### 详细描述
+
+
+#### 定义
+
+`threeBytesCharString(ctx *yserx.MarshalContext)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `*yserx.MarshalContext` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `` |   |
+
+
+### twoBytesCharString
+
+#### 详细描述
+
+
+#### 定义
+
+`twoBytesCharString(ctx *yserx.MarshalContext)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `*yserx.MarshalContext` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `` |   |
 
 
 ### useBase64BytesClass
