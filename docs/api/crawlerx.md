@@ -32,6 +32,7 @@
 | [crawlerx.scanRangeLevel](#scanrangelevel) ||
 | [crawlerx.scanRepeatLevel](#scanrepeatlevel) ||
 | [crawlerx.sensitiveWords](#sensitivewords) ||
+| [crawlerx.sessionStorage](#sessionstorage) ||
 | [crawlerx.sourceType](#sourcetype) ||
 | [crawlerx.stealth](#stealth) ||
 | [crawlerx.urlCheck](#urlcheck) ||
@@ -641,6 +642,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | words | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### sessionStorage
+
+#### 详细描述
+
+
+#### 定义
+
+`sessionStorage(storage map[string]string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| storage | `map[string]string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

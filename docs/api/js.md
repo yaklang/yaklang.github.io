@@ -2,24 +2,40 @@
 
 |成员函数|函数描述/介绍|
 |:------|:--------|
-| [js.ASTWalk](#astwalk) ||
-| [js.CallFunctionFromCode](#callfunctionfromcode) ||
-| [js.FalseValue](#falsevalue) ||
+| [.](#) ||
+| [js.ASTWalk](#astwalk) |ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误  |
+| [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果  它的第一个参数为包含JS代码的字符串  第二个参数为要调用的JS函数名  后续参数为零个到多个函数参数  |
 | [js.GetSTType](#getsttype) ||
-| [js.NaNValue](#nanvalue) |NaNValue will return a value representing NaN.  It is equivalent to:  	ToValue(math.NaN()) |
-| [js.New](#new) |create vm |
-| [js.NullValue](#nullvalue) ||
-| [js.Parse](#parse) ||
-| [js.Run](#run) |Run will allocate a new JavaScript runtime, run the given source on the allocated runtime, and return the runtime, resulting value, and error (if any)...|
-| [js.ToValue](#tovalue) |ToValue will convert an interface{} value to a value digestible by otto/JavaScript  This function will not work for advanced types (struct, map, slice...|
-| [js.TrueValue](#truevalue) ||
-| [js.UndefinedValue](#undefinedvalue) ||
+| [js.New](#new) |New 创建新的JS引擎并返回  |
+| [js.Parse](#parse) |Parse 对传入的JS代码进行解析并返回解析后的AST树和错误  |
+| [js.Run](#run) |Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误  第一个参数为运行的代码字符串  后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等  |
+| [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库  |
+| [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库  |
+| [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库  |
 
 
 ## 函数定义
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
 ### ASTWalk
 
 #### 详细描述
+ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误
+
+Example:
+```
+code = `function add(a, b) { return a + b; }`
+res = javascript.ASTWalk(code)~
+dump(res)
+```
 
 
 #### 定义
@@ -41,39 +57,37 @@
 ### CallFunctionFromCode
 
 #### 详细描述
+CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果
+
+它的第一个参数为包含JS代码的字符串
+
+第二个参数为要调用的JS函数名
+
+后续参数为零个到多个函数参数
+
+Example:
+```
+value = js.CallFunctionFromCode(`function add(a, b) { return a + b; }`, "add", 1, 2)~
+println(value.String())
+```
 
 
 #### 定义
 
-`CallFunctionFromCode(i any, funcName string, params ...any) (otto.Value, error)`
+`CallFunctionFromCode(src any, funcName string, params ...any) (goja.Value, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| src | `any` |   |
 | funcName | `string` |   |
 | params | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `otto.Value` |   |
+| r1 | `goja.Value` |   |
 | r2 | `error` |   |
-
-
-### FalseValue
-
-#### 详细描述
-
-
-#### 定义
-
-`FalseValue() Value`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
 
 
 ### GetSTType
@@ -96,60 +110,40 @@
 | r1 | `string` |   |
 
 
-### NaNValue
-
-#### 详细描述
-NaNValue will return a value representing NaN.
-
-It is equivalent to:
-
-	ToValue(math.NaN())
-
-
-#### 定义
-
-`NaNValue() Value`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
-
-
 ### New
 
 #### 详细描述
-create vm
+New 创建新的JS引擎并返回
+
+Example:
+```
+engine = js.New()
+val = engine.Eval("1+1")~.ToInteger()~
+println(val)
+```
 
 
 #### 定义
 
-`New() *otto.Otto`
+`New() *goja.Runtime`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*otto.Otto` |   |
-
-
-### NullValue
-
-#### 详细描述
-
-
-#### 定义
-
-`NullValue() valueNull}`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `valueNull}` |   |
+| r1 | `*goja.Runtime` |   |
 
 
 ### Parse
 
 #### 详细描述
+Parse 对传入的JS代码进行解析并返回解析后的AST树和错误
+
+Example:
+```
+code = `function add(a, b) { return a + b; }`
+tree = js.Parse(code)~
+dump(tree)
+```
 
 
 #### 定义
@@ -171,86 +165,100 @@ create vm
 ### Run
 
 #### 详细描述
-Run will allocate a new JavaScript runtime, run the given source
-on the allocated runtime, and return the runtime, resulting value, and
-error (if any).
+Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误
 
-src may be a string, a byte slice, a bytes.Buffer, or an io.Reader, but it MUST always be in UTF-8.
+第一个参数为运行的代码字符串
 
-src may also be a Script.
+后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等
 
-src may also be a Program, but if the AST has been modified, then runtime behavior is undefined.
+Example:
+```
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
+println(value.String())
+```
 
 
 #### 定义
 
-`Run(src any) (*Otto, Value, error)`
+`Run(src any, opts ...jsRunOpts) (*goja.Runtime, goja.Value, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | src | `any` |   |
+| opts | `...jsRunOpts` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Otto` |   |
-| r2 | `Value` |   |
+| r1 | `*goja.Runtime` |   |
+| r2 | `goja.Value` |   |
 | r3 | `error` |   |
 
 
-### ToValue
+### libCryptoJSV3
 
 #### 详细描述
-ToValue will convert an interface{} value to a value digestible by otto/JavaScript
+libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库
 
-This function will not work for advanced types (struct, map, slice/array, etc.) and
-you should use Otto.ToValue instead.
+Example:
+```
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
+println(value.String())
+```
 
 
 #### 定义
 
-`ToValue(value any) (Value, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| value | `any` |   |
+`libCryptoJSV3() jsRunOpts`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
-| r2 | `error` |   |
+| r1 | `jsRunOpts` |   |
 
 
-### TrueValue
+### libCryptoJSV4
 
 #### 详细描述
+libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库
+
+Example:
+```
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV4())~
+println(value.String())
+```
 
 
 #### 定义
 
-`TrueValue() Value`
+`libCryptoJSV4() jsRunOpts`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
+| r1 | `jsRunOpts` |   |
 
 
-### UndefinedValue
+### libJSRSASign
 
 #### 详细描述
+libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库
+
+Example:
+```
+_, value = js.Run(`KEYUTIL.getKey(pemPublicKey).encrypt("yaklang")`, js.libJSRSASign())~
+println(value.String())
+```
 
 
 #### 定义
 
-`UndefinedValue() Value`
+`libJSRSASign() jsRunOpts`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Value` |   |
+| r1 | `jsRunOpts` |   |
 
 

@@ -15,6 +15,7 @@
 | [simulator.password](#password) ||
 | [simulator.passwordList](#passwordlist) ||
 | [simulator.passwordSelector](#passwordselector) ||
+| [simulator.preAction](#preaction) ||
 | [simulator.proxy](#proxy) ||
 | [simulator.runtimeID](#runtimeid) ||
 | [simulator.saveToDB](#savetodb) ||
@@ -283,6 +284,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | selector | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### preAction
+
+#### 详细描述
+
+
+#### 定义
+
+`preAction(actionsJs string) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| actionsJs | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

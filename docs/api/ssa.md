@@ -3,6 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [ssa.Parse](#parse) ||
+| [ssa.withDataBase](#withdatabase) |save to database, please set the program name |
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
 | [ssa.withLanguage](#withlanguage) ||
@@ -29,6 +30,27 @@
 |:-----------|:---------- |:-----------|
 | r1 | `*Program` |   |
 | r2 | `error` |   |
+
+
+### withDataBase
+
+#### 详细描述
+save to database, please set the program name
+
+
+#### 定义
+
+`withDataBase(name string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withExternLib
