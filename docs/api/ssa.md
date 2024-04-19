@@ -3,7 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [ssa.Parse](#parse) ||
-| [ssa.withDataBase](#withdatabase) |save to database, please set the program name |
+| [ssa.withDatabaseProgramName](#withdatabaseprogramname) |save to database, please set the program name |
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
 | [ssa.withLanguage](#withlanguage) ||
@@ -32,7 +32,7 @@
 | r2 | `error` |   |
 
 
-### withDataBase
+### withDatabaseProgramName
 
 #### 详细描述
 save to database, please set the program name
@@ -40,7 +40,7 @@ save to database, please set the program name
 
 #### 定义
 
-`withDataBase(name string) Option`
+`withDatabaseProgramName(name string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|

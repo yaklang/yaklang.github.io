@@ -50,6 +50,7 @@
 | [yakit.SetProgress](#setprogress) ||
 | [yakit.SetProgressEx](#setprogressex) ||
 | [yakit.StatusCard](#statuscard) ||
+| [yakit.Stream](#stream) ||
 | [yakit.TableData](#tabledata) ||
 | [yakit.Text](#text) ||
 | [yakit.TextTabData](#texttabdata) ||
@@ -816,13 +817,13 @@
 
 #### 定义
 
-`SavePayload(group string, payloads []string) error`
+`SavePayload(group string, payloadRaw any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | group | `string` |   |
-| payloads | `[]string` |   |
+| payloadRaw | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -938,6 +939,24 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `` |   |
+
+
+### Stream
+
+#### 详细描述
+
+
+#### 定义
+
+`Stream(streamType string, streamId string, stream io.Reader, extra ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| streamType | `string` |   |
+| streamId | `string` |   |
+| stream | `io.Reader` |   |
+| extra | `...any` |   |
 
 
 ### TableData

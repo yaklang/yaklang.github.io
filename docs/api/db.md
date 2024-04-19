@@ -41,6 +41,7 @@
 | [db.SaveYakitPlugin](#saveyakitplugin) ||
 | [db.SetKey](#setkey) ||
 | [db.SetProjectKey](#setprojectkey) ||
+| [db.YieldPayload](#yieldpayload) |YieldPayload means |
 | [db.YieldYakScriptAll](#yieldyakscriptall) ||
 
 
@@ -688,13 +689,13 @@
 
 #### 定义
 
-`SavePayload(group string, payloads []string) error`
+`SavePayload(group string, payloadRaw any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | group | `string` |   |
-| payloads | `[]string` |   |
+| payloadRaw | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -826,6 +827,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### YieldPayload
+
+#### 详细描述
+YieldPayload means
+
+
+#### 定义
+
+`YieldPayload(raw any, extra ...any) chan string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| extra | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan string` |   |
 
 
 ### YieldYakScriptAll
