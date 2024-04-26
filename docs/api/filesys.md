@@ -27,8 +27,10 @@ return: error
 Example:
 ```
 err := filesys.Recursive( //
+
 	"testdata",
 	filesys.dir(["cc", "dd"], filesys.onFileStat((name, info) => {})),
+
 )
 ```
 
@@ -56,12 +58,12 @@ err := filesys.Recursive( //
 
 #### 定义
 
-`dir(i any, opts ...Option) Option`
+`dir(globDir string, opts ...Option) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| globDir | `string` |   |
 | opts | `...Option` |   |
 
 #### 返回值

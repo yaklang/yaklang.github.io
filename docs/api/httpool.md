@@ -3,6 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [httpool.Pool](#pool) ||
+| [httpool.connPool](#connpool) ||
 | [httpool.context](#context) ||
 | [httpool.fuzz](#fuzz) ||
 | [httpool.fuzzParams](#fuzzparams) ||
@@ -39,6 +40,26 @@
 |:-----------|:---------- |:-----------|
 | r1 | `chan *HttpResult` |   |
 | r2 | `error` |   |
+
+
+### connPool
+
+#### 详细描述
+
+
+#### 定义
+
+`connPool(b bool) HttpPoolConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `HttpPoolConfigOption` |   |
 
 
 ### context

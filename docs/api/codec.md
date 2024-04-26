@@ -72,7 +72,9 @@
 | [codec.PKCS5Padding](#pkcs5padding) ||
 | [codec.PKCS5UnPadding](#pkcs5unpadding) ||
 | [codec.PKCS7Padding](#pkcs7padding) ||
+| [codec.PKCS7PaddingForDES](#pkcs7paddingfordes) ||
 | [codec.PKCS7UnPadding](#pkcs7unpadding) ||
+| [codec.PKCS7UnPaddingForDES](#pkcs7unpaddingfordes) ||
 | [codec.RC4Decrypt](#rc4decrypt) ||
 | [codec.RC4Encrypt](#rc4encrypt) ||
 | [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) ||
@@ -1660,6 +1662,26 @@ replacing special characters (including /) with %XX sequences as needed.
 | r1 | `[]byte` |   |
 
 
+### PKCS7PaddingForDES
+
+#### 详细描述
+
+
+#### 定义
+
+`PKCS7PaddingForDES(src []byte) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| src | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
 ### PKCS7UnPadding
 
 #### 详细描述
@@ -1668,6 +1690,26 @@ replacing special characters (including /) with %XX sequences as needed.
 #### 定义
 
 `PKCS7UnPadding(src []byte) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| src | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
+### PKCS7UnPaddingForDES
+
+#### 详细描述
+
+
+#### 定义
+
+`PKCS7UnPaddingForDES(src []byte) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|

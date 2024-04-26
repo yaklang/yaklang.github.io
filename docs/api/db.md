@@ -25,6 +25,7 @@
 | [db.QueryIPCity](#queryipcity) ||
 | [db.QueryIPForIPS](#queryipforips) ||
 | [db.QueryPayloadGroups](#querypayloadgroups) ||
+| [db.QueryPortsByRuntimeId](#queryportsbyruntimeid) ||
 | [db.QueryPortsByTaskName](#queryportsbytaskname) ||
 | [db.QueryPortsByUpdatedAt](#queryportsbyupdatedat) ||
 | [db.QueryUrlsAll](#queryurlsall) ||
@@ -491,6 +492,27 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]string` |   |
+
+
+### QueryPortsByRuntimeId
+
+#### 详细描述
+
+
+#### 定义
+
+`QueryPortsByRuntimeId(runtimeID string) (chan *yakit.Port, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| runtimeID | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *yakit.Port` |   |
+| r2 | `error` |   |
 
 
 ### QueryPortsByTaskName
