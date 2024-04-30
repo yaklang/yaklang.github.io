@@ -107,7 +107,7 @@
 | [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) ||
 | [codec.Sm4ECBEncrypt](#sm4ecbencrypt) ||
 | [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) ||
-| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) ||
+| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) { ...|
 | [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) ||
 | [codec.Sm4OFBEncrypt](#sm4ofbencrypt) ||
 | [codec.StrconvQuote](#strconvquote) ||
@@ -137,7 +137,7 @@
 
 #### 定义
 
-`AESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -149,8 +149,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESCBCDecryptWithPKCS7Padding
@@ -160,7 +160,7 @@
 
 #### 定义
 
-`AESCBCDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -172,8 +172,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESCBCDecryptWithZeroPadding
@@ -183,7 +183,7 @@
 
 #### 定义
 
-`AESCBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -195,8 +195,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESCBCEncrypt
@@ -206,7 +206,7 @@
 
 #### 定义
 
-`AESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -218,8 +218,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESCBCEncryptWithPKCS7Padding
@@ -229,7 +229,7 @@
 
 #### 定义
 
-`AESCBCEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -241,8 +241,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESCBCEncryptWithZeroPadding
@@ -252,7 +252,7 @@
 
 #### 定义
 
-`AESCBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESCBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -264,8 +264,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESDecrypt
@@ -275,7 +275,7 @@
 
 #### 定义
 
-`AESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -287,8 +287,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBDecrypt
@@ -298,7 +298,7 @@
 
 #### 定义
 
-`AESECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -310,8 +310,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBDecryptWithPKCS7Padding
@@ -321,7 +321,7 @@
 
 #### 定义
 
-`AESECBDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -333,8 +333,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBDecryptWithZeroPadding
@@ -344,7 +344,7 @@
 
 #### 定义
 
-`AESECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -356,8 +356,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBEncrypt
@@ -367,7 +367,7 @@
 
 #### 定义
 
-`AESECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -379,8 +379,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBEncryptWithPKCS7Padding
@@ -390,7 +390,7 @@
 
 #### 定义
 
-`AESECBEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -402,8 +402,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESECBEncryptWithZeroPadding
@@ -413,7 +413,7 @@
 
 #### 定义
 
-`AESECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+`AESECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -425,8 +425,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESEncrypt
@@ -436,7 +436,7 @@
 
 #### 定义
 
-`AESEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+`AESEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -448,8 +448,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### AESGCMDecrypt
@@ -637,20 +637,20 @@
 
 #### 定义
 
-`DESCBCDecrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`DESCBCDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### DESCBCEncrypt
@@ -660,20 +660,20 @@
 
 #### 定义
 
-`DESCBCEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`DESCBCEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### DESDecrypt
@@ -683,20 +683,20 @@
 
 #### 定义
 
-`DESDecrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`DESDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### DESECBDecrypt
@@ -750,20 +750,20 @@
 
 #### 定义
 
-`DESEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`DESEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### DecodeASCII
@@ -2228,20 +2228,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4CBCDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4CBCDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4CBCEncrypt
@@ -2251,20 +2251,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4CBCEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4CBCEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4CFBDecrypt
@@ -2274,20 +2274,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4CFBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4CFBDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4CFBEncrypt
@@ -2297,20 +2297,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4CFBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4CFBEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4EBCDecrypt
@@ -2320,20 +2320,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4EBCDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4EBCDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4EBCEncrypt
@@ -2343,20 +2343,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4EBCEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4EBCEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4ECBDecrypt
@@ -2366,20 +2366,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4ECBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4ECBDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4ECBEncrypt
@@ -2389,20 +2389,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4ECBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4ECBEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4GCMDecrypt
@@ -2431,6 +2431,45 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 ### Sm4GCMEncrypt
 
 #### 详细描述
+	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) {
+		return sm4ordinary(key, interfaceToBytes(data), true, iv)
+	}
+
+	func sm4decBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) {
+		return sm4ordinary(key, interfaceToBytes(data), false, iv)
+	}
+
+	func SM4CFBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4encBase(data, key, iv, sm4.Sm4CFB)
+	}
+
+	func SM4CBCEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4encBase(data, key, iv, sm4.Sm4Cbc)
+	}
+
+	func SM4ECBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4encBase(data, key, iv, sm4.Sm4Ecb)
+	}
+
+	func SM4OFBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4encBase(data, key, iv, sm4.Sm4OFB)
+	}
+
+	func SM4CFBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4decBase(data, key, iv, sm4.Sm4CFB)
+	}
+
+	func SM4CBCDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4decBase(data, key, iv, sm4.Sm4Cbc)
+	}
+
+	func SM4ECBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4decBase(data, key, iv, sm4.Sm4Ecb)
+	}
+
+	func SM4OFBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
+		return sm4decBase(data, key, iv, sm4.Sm4OFB)
+	}
 
 
 #### 定义
@@ -2458,20 +2497,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4OFBDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4OFBDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### Sm4OFBEncrypt
@@ -2481,20 +2520,20 @@ enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 
 #### 定义
 
-`Sm4OFBEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+`Sm4OFBEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `any` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### StrconvQuote
@@ -2550,20 +2589,20 @@ one-character string.)
 
 #### 定义
 
-`TripleDESCBCDecrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`TripleDESCBCDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### TripleDESCBCEncrypt
@@ -2573,20 +2612,20 @@ one-character string.)
 
 #### 定义
 
-`TripleDESCBCEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`TripleDESCBCEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### TripleDESDecrypt
@@ -2596,20 +2635,20 @@ one-character string.)
 
 #### 定义
 
-`TripleDESDecrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`TripleDESDecrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### TripleDESECBDecrypt
@@ -2663,20 +2702,20 @@ one-character string.)
 
 #### 定义
 
-`TripleDESEncrypt(key []byte, data []byte, iv []byte) ([]byte, error)`
+`TripleDESEncrypt(key []byte, i any, iv []byte) ([]byte , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | key | `[]byte` |   |
-| data | `[]byte` |   |
+| i | `any` |   |
 | iv | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]byte` |   |
-| r2 | `error` |   |
+| []byte | `` |   |
+| error | `` |   |
 
 
 ### UTF8ToGB18030
