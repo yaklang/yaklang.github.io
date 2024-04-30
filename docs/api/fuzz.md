@@ -22,7 +22,9 @@
 | [fuzz.WithTimeOut](#withtimeout) ||
 | [fuzz.context](#context) ||
 | [fuzz.https](#https) ||
+| [fuzz.noEncode](#noencode) ||
 | [fuzz.proxy](#proxy) ||
+| [fuzz.showTag](#showtag) ||
 
 
 ## 函数定义
@@ -421,6 +423,26 @@ fuzz
 | r1 | `BuildFuzzHTTPRequestOption` |   |
 
 
+### noEncode
+
+#### 详细描述
+
+
+#### 定义
+
+`noEncode(i bool) BuildFuzzHTTPRequestOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BuildFuzzHTTPRequestOption` |   |
+
+
 ### proxy
 
 #### 详细描述
@@ -439,5 +461,25 @@ fuzz
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `BuildFuzzHTTPRequestOption` |   |
+
+
+### showTag
+
+#### 详细描述
+
+
+#### 定义
+
+`showTag(config *buildFuzzHTTPRequestConfig)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| config | `*buildFuzzHTTPRequestConfig` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `` |   |
 
 
