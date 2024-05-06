@@ -11,6 +11,7 @@
 | [risk.ExtractTokenFromUrl](#extracttokenfromurl) ||
 | [risk.HaveReverseRisk](#havereverserisk) ||
 | [risk.NewDNSLogDomain](#newdnslogdomain) ||
+| [risk.NewHTTPLog](#newhttplog) ||
 | [risk.NewLocalReverseHTTPSUrl](#newlocalreversehttpsurl) ||
 | [risk.NewLocalReverseHTTPUrl](#newlocalreversehttpurl) ||
 | [risk.NewLocalReverseRMIUrl](#newlocalreversermiurl) ||
@@ -210,6 +211,23 @@
 #### 定义
 
 `NewDNSLogDomain() (domain string, token string, _ error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| domain | `string` |   |
+| token | `string` |   |
+| _ | `error` |   |
+
+
+### NewHTTPLog
+
+#### 详细描述
+
+
+#### 定义
+
+`NewHTTPLog() (domain string, token string, _ error)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
