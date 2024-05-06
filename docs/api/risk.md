@@ -3,6 +3,7 @@
 |成员函数|函数描述/介绍|
 |:------|:--------|
 | [risk.CheckDNSLogByToken](#checkdnslogbytoken) ||
+| [risk.CheckHTTPLogByToken](#checkhttplogbytoken) ||
 | [risk.CheckICMPTriggerByLength](#checkicmptriggerbylength) ||
 | [risk.CheckRandomTriggerByToken](#checkrandomtriggerbytoken) ||
 | [risk.CreateRisk](#createrisk) ||
@@ -67,6 +68,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*tpb.DNSLogEvent` |   |
+| r2 | `error` |   |
+
+
+### CheckHTTPLogByToken
+
+#### 详细描述
+
+
+#### 定义
+
+`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| token | `string` |   |
+| timeout | `...float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*tpb.HTTPRequestTriggerNotification` |   |
 | r2 | `error` |   |
 
 
@@ -227,7 +250,12 @@
 
 #### 定义
 
-`NewHTTPLog() (domain string, token string, _ error)`
+`NewHTTPLog(i ...any) (domain string, token string, _ error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
