@@ -27,6 +27,7 @@
 | [x.Range](#range) ||
 | [x.Reduce](#reduce) ||
 | [x.RemoveRepeat](#removerepeat) |Uniq creates an array with unique values. |
+| [x.Retry](#retry) |retry 对第二个参数作为函数的情况，重试N次，如果第二个参数返回值是 true，则重试，否则就结束，如果遇到错误，停止重试  |
 | [x.Reverse](#reverse) |Reverse transforms an array the first element will become the last, the second element will become the second to last, etc. |
 | [x.Shift](#shift) ||
 | [x.Shuffle](#shuffle) |Shuffle creates an array of shuffled values |
@@ -566,6 +567,71 @@ Uniq creates an array with unique values.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### Retry
+
+#### 详细描述
+retry 对第二个参数作为函数的情况，重试N次，如果第二个参数返回值是 true，则重试，否则就结束，如果遇到错误，停止重试
+
+Example:
+```
+count = 0
+
+	retry(100, () => {
+	   defer recover()
+
+	   count++
+	   if count > 3 {
+	       die(111)
+	   }
+	   return true
+	})
+
+assert count == 4, f`${count}`
+
+count = 0
+
+	retry(100, () => {
+	   defer recover()
+
+	   count++
+	   if count > 3 {
+	       return false
+	   }
+	   return true
+	})
+
+assert count == 4, f`${count}`
+
+count = 0
+
+	retry(100, () => {
+	   count++
+	})
+
+assert count == 1, f`${count}`
+
+count = 0
+
+	retry(100, () => {
+	   count++
+	   return true
+	})
+
+assert count == 100, f`${count}`
+```
+
+
+#### 定义
+
+`Retry(i int, handler func() bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `int` |   |
+| handler | `func() bool` |   |
 
 
 ### Reverse
