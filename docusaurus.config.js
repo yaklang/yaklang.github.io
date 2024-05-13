@@ -6,7 +6,7 @@ module.exports = {
     },
     title: "Yak Program Language",
     tagline: "Yak 是一门 Web 安全研发领域垂直语言",
-    url: "https://yaklang.io",
+    url: "https://yaklang.com",
     baseUrl: "/",
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
