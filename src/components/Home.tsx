@@ -144,7 +144,7 @@ const IntroduceKinds: IntroduceKindProps[] = [
 ];
 
 const yakEnvironmentConfigureList = {
-  "MacOs(Intel/Apple Sillion)": {
+  "MacOs(Intel/Apple Silicon)": {
     code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
   },
   Linux: {
@@ -174,7 +174,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
 
   const [currentRatio, setCurrentRatio] = useState<number>(100); // 当前屏幕缩放比例
   const [currentSelectYak, setCurrentSelectYak] = useState<string>(
-    "MacOs(Intel/Apple Sillion)"
+    "MacOs(Intel/Apple Silicon)"
   );
 
   const [sureCopy, setSureCopy] = useState<boolean>(false);
@@ -366,7 +366,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     size: 0,
   });
   const [macOSAppleSillion, setMacOSAppleSillion] = useState({
-    key: "macOS (Apple Sillion)",
+    key: "macOS (Apple Silicon)",
     url: "darwin-arm64.dmg",
     size: 0,
   });
@@ -570,7 +570,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                     </span>
                   </div>
                   <div className="guide-body-yakit-item-right">
-                    <div>macOS (Intel / Apple Sillion)</div>
+                    <div>macOS (Intel / Apple Silicon)</div>
                     <div className="guide-body-yakit-item-right-size">
                       {t("版本")}:&nbsp;{version || "-"}&nbsp;(
                       {macOSIntel.size || "-"}
@@ -591,7 +591,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                         className="download-btn-item download-btn-item-special"
                         onClick={() => onDownload(macOSAppleSillion.url)}
                       >
-                        {t("下载")} Apple Sillion {t("芯片")}
+                        {t("下载")} Apple Silicon {t("芯片")}
                       </div>
                     </div>
                   </div>
@@ -823,7 +823,7 @@ const DownLoadBtn = (props) => {
       link: "darwin-x64.dmg",
     },
     {
-      name: "macOS(Apple Sillion)",
+      name: "macOS(Apple Silicon)",
       link: "darwin-arm64.dmg",
     },
     {
