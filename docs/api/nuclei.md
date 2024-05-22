@@ -112,7 +112,7 @@
 
 #### 定义
 
-`PocVulToRisk(p *PocVul) *yakit.Risk`
+`PocVulToRisk(p *PocVul) *schema.Risk`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -122,7 +122,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*yakit.Risk` |   |
+| r1 | `*schema.Risk` |   |
 
 
 ### PullDatabase
@@ -422,12 +422,12 @@
 
 #### 定义
 
-`exactTemplateIns(script *yakit.YakScript) ConfigOption`
+`exactTemplateIns(script *schema.YakScript) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| script | `*yakit.YakScript` |   |
+| script | `*schema.YakScript` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

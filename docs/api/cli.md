@@ -25,12 +25,15 @@
 | [cli.String](#string) |String 获取对应名称的命令行参数，并将其转换为 string 类型返回 |
 | [cli.StringSlice](#stringslice) |StringSlice 获取对应名称的命令行参数，将其字符串根据","切割返回 []string 类型 |
 | [cli.Text](#text) |Text 获取对应名称的命令行参数，并将其转换为 string 类型返回 其作为一个独立脚本运行时与 cli.String 没有区别，仅在 Yakit 图形化中展示为文本框形式 |
+| [cli.UI](#ui) ||
 | [cli.Url](#url) |Url 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型 |
 | [cli.Urls](#urls) |Urls 获取对应名称的命令行参数，根据","切割并尝试将其转换为符合URL格式并返回 []string 类型 |
 | [cli.YakCode](#yakcode) |YakCode 获取对应名称的命令行参数，并将其转换为 string 类型返回 其作为一个独立脚本运行时与 cli.String 没有区别，仅在 Yakit 图形化中展示为 Yak 代码形式 |
 | [cli.YakitPlugin](#yakitplugin) |YakitPlugin 获取名称为 yakit-plugin-file 的命令行参数 根据其传入的值读取其对应文件内容并根据"|"切割并返回 []string 类型，表示各个插件名 |
 | [cli.check](#check) |check 用于检查命令行参数是否合法，这主要检查必要参数是否传入与传入值是否合法 |
 | [cli.help](#help) |help 用于输出命令行程序的帮助信息 |
+| [cli.hideGroup](#hidegroup) ||
+| [cli.hideParams](#hideparams) ||
 | [cli.setCliGroup](#setcligroup) |setCliGroup 是一个选项函数，设置参数的分组 |
 | [cli.setDefault](#setdefault) |setDefault 是一个选项函数，设置参数的默认值 |
 | [cli.setHelp](#sethelp) |setHelp 是一个选项函数，设置参数的帮助信息 这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示 |
@@ -38,6 +41,14 @@
 | [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须 |
 | [cli.setSelectOption](#setselectoption) |setSelectOption 是一个选项函数，设置参数的下拉框选项 此选项仅在`cli.StringSlice`中生效 |
 | [cli.setVerboseName](#setverbosename) |setVerboseName 是一个选项函数，设置参数的中文名 |
+| [cli.showGroup](#showgroup) ||
+| [cli.showParams](#showparams) ||
+| [cli.when](#when) ||
+| [cli.whenDefault](#whendefault) ||
+| [cli.whenEqual](#whenequal) ||
+| [cli.whenFalse](#whenfalse) ||
+| [cli.whenNotEqual](#whennotequal) ||
+| [cli.whenTrue](#whentrue) ||
 
 
 ## 函数定义
@@ -613,6 +624,21 @@ target = cli.Text("target") // --target yaklang.com 则 target 为 yaklang.com
 | r1 | `string` |   |
 
 
+### UI
+
+#### 详细描述
+
+
+#### 定义
+
+`UI(opts ...UIParams)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...UIParams` |   |
+
+
 ### Url
 
 #### 详细描述
@@ -749,6 +775,46 @@ cli.help()
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | w | `...io.Writer` |   |
+
+
+### hideGroup
+
+#### 详细描述
+
+
+#### 定义
+
+`hideGroup(group string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| group | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### hideParams
+
+#### 详细描述
+
+
+#### 定义
+
+`hideParams(params ...string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| params | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
 
 
 ### setCliGroup
@@ -924,5 +990,162 @@ cli.String("target", cli.setVerboseName("目标"))
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `SetCliExtraParam` |   |
+
+
+### showGroup
+
+#### 详细描述
+
+
+#### 定义
+
+`showGroup(group string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| group | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### showParams
+
+#### 详细描述
+
+
+#### 定义
+
+`showParams(params ...string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| params | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### when
+
+#### 详细描述
+
+
+#### 定义
+
+`when(expression string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| expression | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### whenDefault
+
+#### 详细描述
+
+
+#### 定义
+
+`whenDefault() UIParams`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### whenEqual
+
+#### 详细描述
+
+
+#### 定义
+
+`whenEqual(param string, value string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| param | `string` |   |
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### whenFalse
+
+#### 详细描述
+
+
+#### 定义
+
+`whenFalse(param string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| param | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### whenNotEqual
+
+#### 详细描述
+
+
+#### 定义
+
+`whenNotEqual(param string, value string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| param | `string` |   |
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
+
+
+### whenTrue
+
+#### 详细描述
+
+
+#### 定义
+
+`whenTrue(param string) UIParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| param | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UIParams` |   |
 
 

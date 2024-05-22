@@ -446,7 +446,7 @@
 
 #### 定义
 
-`ObjToPort(t any) (*yakit.Port, error)`
+`ObjToPort(t any) (*schema.Port, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -456,7 +456,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*yakit.Port` |   |
+| r1 | `*schema.Port` |   |
 | r2 | `error` |   |
 
 
@@ -487,7 +487,7 @@
 
 #### 定义
 
-`QueryDomainsByDomainKeyword(keyword string) (chan *yakit.Domain, error)`
+`QueryDomainsByDomainKeyword(keyword string) (chan *schema.Domain, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -497,7 +497,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Domain` |   |
+| r1 | `chan *schema.Domain` |   |
 | r2 | `error` |   |
 
 
@@ -508,7 +508,7 @@
 
 #### 定义
 
-`QueryDomainsByNetwork(network string) (chan *yakit.Domain, error)`
+`QueryDomainsByNetwork(network string) (chan *schema.Domain, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -518,7 +518,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Domain` |   |
+| r1 | `chan *schema.Domain` |   |
 | r2 | `error` |   |
 
 
@@ -529,7 +529,7 @@
 
 #### 定义
 
-`QueryDomainsByTitle(title string) (chan *yakit.Domain, error)`
+`QueryDomainsByTitle(title string) (chan *schema.Domain, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -539,7 +539,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Domain` |   |
+| r1 | `chan *schema.Domain` |   |
 | r2 | `error` |   |
 
 
@@ -550,12 +550,12 @@
 
 #### 定义
 
-`QueryHTTPFlowsAll() chan *yakit.HTTPFlow`
+`QueryHTTPFlowsAll() chan *schema.HTTPFlow`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.HTTPFlow` |   |
+| r1 | `chan *schema.HTTPFlow` |   |
 
 
 ### QueryHTTPFlowsByKeyword
@@ -565,7 +565,7 @@
 
 #### 定义
 
-`QueryHTTPFlowsByKeyword(k string) chan *yakit.HTTPFlow`
+`QueryHTTPFlowsByKeyword(k string) chan *schema.HTTPFlow`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -575,7 +575,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.HTTPFlow` |   |
+| r1 | `chan *schema.HTTPFlow` |   |
 
 
 ### QueryHostPortAll
@@ -661,7 +661,7 @@
 
 #### 定义
 
-`QueryHostsByDomain(keyword string) (chan *yakit.Host, error)`
+`QueryHostsByDomain(keyword string) (chan *schema.Host, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -671,7 +671,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Host` |   |
+| r1 | `chan *schema.Host` |   |
 | r2 | `error` |   |
 
 
@@ -682,7 +682,7 @@
 
 #### 定义
 
-`QueryHostsByNetwork(network string) (chan *yakit.Host, error)`
+`QueryHostsByNetwork(network string) (chan *schema.Host, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -692,7 +692,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Host` |   |
+| r1 | `chan *schema.Host` |   |
 | r2 | `error` |   |
 
 
@@ -703,7 +703,7 @@
 
 #### 定义
 
-`QueryPortAssetByNetwork(network string) (chan *yakit.Port, error)`
+`QueryPortAssetByNetwork(network string) (chan *schema.Port, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -713,7 +713,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Port` |   |
+| r1 | `chan *schema.Port` |   |
 | r2 | `error` |   |
 
 

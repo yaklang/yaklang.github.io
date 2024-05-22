@@ -142,7 +142,7 @@
 
 #### 定义
 
-`CreateRisk(u string, opts ...RiskParamsOpt) *Risk`
+`CreateRisk(u string, opts ...RiskParamsOpt) *schema.Risk`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -153,7 +153,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Risk` |   |
+| r1 | `*schema.Risk` |   |
 
 
 ### DeleteRiskByID
@@ -430,7 +430,7 @@
 
 #### 定义
 
-`NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*Risk , error )`
+`NewUnverifiedRisk(u string, token string, opts ...RiskParamsOpt) (*schema.Risk, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -442,8 +442,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *Risk | `` |   |
-| error | `` |   |
+| r1 | `*schema.Risk` |   |
+| r2 | `error` |   |
 
 
 ### RegisterBeforeRiskSave
@@ -453,12 +453,12 @@
 
 #### 定义
 
-`RegisterBeforeRiskSave(f func(*Risk))`
+`RegisterBeforeRiskSave(f func(*schema.Risk))`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| f | `func(*Risk)` |   |
+| f | `func(*schema.Risk)` |   |
 
 
 ### Save
@@ -468,12 +468,12 @@
 
 #### 定义
 
-`Save(r *Risk) error`
+`Save(r *schema.Risk) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| r | `*Risk` |   |
+| r | `*schema.Risk` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -488,7 +488,7 @@
 
 #### 定义
 
-`YieldRiskByCreateAt(timestamp int64) chan *yakit.Risk`
+`YieldRiskByCreateAt(timestamp int64) chan *schema.Risk`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -498,7 +498,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Risk` |   |
+| r1 | `chan *schema.Risk` |   |
 
 
 ### YieldRiskByRuntimeId
@@ -508,7 +508,7 @@
 
 #### 定义
 
-`YieldRiskByRuntimeId(runtimeId string) chan *yakit.Risk`
+`YieldRiskByRuntimeId(runtimeId string) chan *schema.Risk`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -518,7 +518,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Risk` |   |
+| r1 | `chan *schema.Risk` |   |
 
 
 ### YieldRiskByTarget
@@ -528,7 +528,7 @@
 
 #### 定义
 
-`YieldRiskByTarget(target string) chan *yakit.Risk`
+`YieldRiskByTarget(target string) chan *schema.Risk`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -538,7 +538,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *yakit.Risk` |   |
+| r1 | `chan *schema.Risk` |   |
 
 
 ### cve
@@ -628,12 +628,12 @@
 
 #### 定义
 
-`ignore(r *Risk)`
+`ignore(r *schema.Risk)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| r | `*Risk` |   |
+| r | `*schema.Risk` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

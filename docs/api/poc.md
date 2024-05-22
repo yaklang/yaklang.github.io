@@ -54,6 +54,7 @@
 | [poc.Options](#options) |Options 向指定 URL 发送 OPTIONS 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
 | [poc.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求  |
 | [poc.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应  |
+| [poc.ParseMultiPartFormWithCallback](#parsemultipartformwithcallback) |ParseMultiPartFormWithCallback 是一个辅助函数，用于尝试解析请求报文体中的表单并进行回调  |
 | [poc.ParseUrlToHTTPRequestRaw](#parseurltohttprequestraw) |ParseUrlToHTTPRequestRaw 将URL解析为原始 HTTP 请求报文，返回是否为 HTTPS，原始请求报文与错误  |
 | [poc.Post](#post) |Post 向指定 URL 发送 POST 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
 | [poc.ReplaceAllHTTPPacketPostParams](#replaceallhttppacketpostparams) |ReplaceAllHTTPPacketPostParams 是一个辅助函数，用于改变请求报文，修改所有 POST 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为 POST 请求参数名，value 为 POST 请求参数值  |
@@ -101,6 +102,7 @@
 | [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的 Content-Length 字段，默认为 false 即会自动修复Content-Length字段  |
 | [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
 | [poc.params](#params) |params 是一个请求选项参数，用于在请求时使用传入的值，需要注意的是，它可以很方便地使用 `str.f()`或 f-string 代替  |
+| [poc.password](#password) |password 是一个请求选项参数，用于指定认证时的密码  |
 | [poc.port](#port) |port 是一个请求选项参数，用于指定实际请求的端口，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的端口  |
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
 | [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为是否使用 https 协议，第二个参数为原始请求报文，第三个参数为原始响应报文  |
@@ -134,6 +136,7 @@
 | [poc.sni](#sni) |sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)  |
 | [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
 | [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
+| [poc.username](#username) |username 是一个请求选项参数，用于指定认证时的用户名  |
 | [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为 websocket，此时发送的请求应该为 websocket 握手请求  |
 | [poc.websocketFromServer](#websocketfromserver) |websocketFromServer 是一个请求选项参数，它接收一个回调函数，这个函数有两个参数，其中第一个参数为服务端发送的数据，第二个参数为取消函数，调用将会强制断开 websocket  |
 | [poc.websocketOnClient](#websocketonclient) |websocketOnClient 是一个请求选项参数，它接收一个回调函数，这个函数有一个参数，是WebsocketClient结构体，通过该结构体可以向服务端发送数据  |
@@ -1689,6 +1692,48 @@ res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\
 | err | `error` |   |
 
 
+### ParseMultiPartFormWithCallback
+
+#### 详细描述
+ParseMultiPartFormWithCallback 是一个辅助函数，用于尝试解析请求报文体中的表单并进行回调
+
+Example:
+```
+poc.ParseMultiPartFormWithCallback(`POST /post HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Host: pie.dev
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="a"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="b"
+
+2
+------WebKitFormBoundary7MA4YWxkTrZu0gW--`, func(part) {
+content = string(io.ReadAll(part)~)
+println(part.FileName(), part.FormName(), content)
+})
+```
+
+
+#### 定义
+
+`ParseMultiPartFormWithCallback(req []byte, callback func(part *multipart.Part)) (err error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| req | `[]byte` |   |
+| callback | `func(part *multipart.Part)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| err | `error` |   |
+
+
 ### ParseUrlToHTTPRequestRaw
 
 #### 详细描述
@@ -3052,6 +3097,32 @@ Host: pie.dev
 | r1 | `PocConfigOption` |   |
 
 
+### password
+
+#### 详细描述
+password 是一个请求选项参数，用于指定认证时的密码
+
+Example:
+```
+poc.Get("https://www.example.com", poc.username("admin"), poc.password("admin"))
+```
+
+
+#### 定义
+
+`password(password string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### port
 
 #### 详细描述
@@ -3917,6 +3988,32 @@ poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | f | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### username
+
+#### 详细描述
+username 是一个请求选项参数，用于指定认证时的用户名
+
+Example:
+```
+poc.Get("https://www.example.com", poc.username("admin"), poc.password("admin"))
+```
+
+
+#### 定义
+
+`username(username string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| username | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
