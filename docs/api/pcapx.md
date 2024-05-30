@@ -32,6 +32,7 @@
 | [pcapx.ipv4_ttl](#ipv4_ttl) ||
 | [pcapx.pcap_bpfFilter](#pcap_bpffilter) ||
 | [pcapx.pcap_debug](#pcap_debug) ||
+| [pcapx.pcap_disableAssembly](#pcap_disableassembly) ||
 | [pcapx.pcap_everyPacket](#pcap_everypacket) ||
 | [pcapx.pcap_onFlowClosed](#pcap_onflowclosed) ||
 | [pcapx.pcap_onFlowCreated](#pcap_onflowcreated) ||
@@ -632,6 +633,26 @@
 #### 定义
 
 `pcap_debug(b bool) CaptureOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CaptureOption` |   |
+
+
+### pcap_disableAssembly
+
+#### 详细描述
+
+
+#### 定义
+
+`pcap_disableAssembly(b bool) CaptureOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
