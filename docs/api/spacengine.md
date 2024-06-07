@@ -8,6 +8,7 @@
 | [spacengine.Query](#query) ||
 | [spacengine.ShodanQuery](#shodanquery) ||
 | [spacengine.ZoomeyeQuery](#zoomeyequery) ||
+| [spacengine.domain](#domain) ||
 | [spacengine.engine](#engine) ||
 | [spacengine.fofa](#fofa) ||
 | [spacengine.hunter](#hunter) ||
@@ -27,7 +28,7 @@
 
 #### 定义
 
-`FofaQuery(email string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`FofaQuery(email string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -40,7 +41,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
 
 
@@ -51,7 +52,7 @@
 
 #### 定义
 
-`HunterQuery(name string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`HunterQuery(name string, key string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -64,7 +65,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
 
 
@@ -75,7 +76,7 @@
 
 #### 定义
 
-`QuakeQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`QuakeQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -87,7 +88,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
 
 
@@ -98,7 +99,7 @@
 
 #### 定义
 
-`Query(filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`Query(filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -109,7 +110,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
 
 
@@ -120,7 +121,7 @@
 
 #### 定义
 
-`ShodanQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`ShodanQuery(token string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -132,7 +133,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
 
 
@@ -143,7 +144,7 @@
 
 #### 定义
 
-`ZoomeyeQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *spacengine2.NetSpaceEngineResult, error)`
+`ZoomeyeQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -155,8 +156,28 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *spacengine2.NetSpaceEngineResult` |   |
+| r1 | `chan *base.NetSpaceEngineResult` |   |
 | r2 | `error` |   |
+
+
+### domain
+
+#### 详细描述
+
+
+#### 定义
+
+`domain(domain string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| domain | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
 
 
 ### engine
