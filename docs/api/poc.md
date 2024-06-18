@@ -140,6 +140,7 @@
 | [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为 websocket，此时发送的请求应该为 websocket 握手请求  |
 | [poc.websocketFromServer](#websocketfromserver) |websocketFromServer 是一个请求选项参数，它接收一个回调函数，这个函数有两个参数，其中第一个参数为服务端发送的数据，第二个参数为取消函数，调用将会强制断开 websocket  |
 | [poc.websocketOnClient](#websocketonclient) |websocketOnClient 是一个请求选项参数，它接收一个回调函数，这个函数有一个参数，是WebsocketClient结构体，通过该结构体可以向服务端发送数据  |
+| [poc.websocketStrictMode](#websocketstrictmode) |websocketStrictMode 是一个请求选项参数，它用于控制是否启用严格模式，如果启用严格模式，则会遵循 RFC 6455 规范  |
 
 
 ## 函数定义
@@ -4140,6 +4141,42 @@ time.Sleep(100)
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | w | `func(c *lowhttp.WebsocketClient)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### websocketStrictMode
+
+#### 详细描述
+websocketStrictMode 是一个请求选项参数，它用于控制是否启用严格模式，如果启用严格模式，则会遵循 RFC 6455 规范
+
+Example:
+```
+rsp, req, err = poc.HTTP(`GET / HTTP/1.1
+Connection: Upgrade
+Upgrade: websocket
+Sec-Websocket-Version: 13
+Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
+Host: echo.websocket.events
+Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
+Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
+poc.proxy("http://127.0.0.1:7890"), poc.websocketStrictMode(true))
+
+time.Sleep(100)
+```
+
+
+#### 定义
+
+`websocketStrictMode(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
