@@ -6,6 +6,7 @@
 | [risk.CheckHTTPLogByToken](#checkhttplogbytoken) ||
 | [risk.CheckICMPTriggerByLength](#checkicmptriggerbylength) ||
 | [risk.CheckRandomTriggerByToken](#checkrandomtriggerbytoken) ||
+| [risk.CheckServerReachable](#checkserverreachable) ||
 | [risk.CreateRisk](#createrisk) ||
 | [risk.DeleteRiskByID](#deleteriskbyid) ||
 | [risk.DeleteRiskByTarget](#deleteriskbytarget) ||
@@ -132,6 +133,29 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*tpb.RandomPortTriggerEvent` |   |
+| r2 | `error` |   |
+
+
+### CheckServerReachable
+
+#### 详细描述
+
+
+#### 定义
+
+`CheckServerReachable(ctx context.Context, target string, httpCheck bool) (*tpb.CheckServerReachableResponse, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| target | `string` |   |
+| httpCheck | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*tpb.CheckServerReachableResponse` |   |
 | r2 | `error` |   |
 
 
