@@ -12,6 +12,7 @@
 | [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库  |
 | [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库  |
 | [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库  |
+| [js.libJsEncrypt](#libjsencrypt) |_libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入JsEncrypt 3.3.2库  |
 
 
 ## 函数定义
@@ -118,14 +119,19 @@ New 创建新的JS引擎并返回
 Example:
 ```
 engine = js.New()
-val = engine.Eval("1+1")~.ToInteger()~
+val = engine.RunString("1+1")~.ToInteger()~
 println(val)
 ```
 
 
 #### 定义
 
-`New() *goja.Runtime`
+`New(opts ...jsRunOpts) *goja.Runtime`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...jsRunOpts` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -255,6 +261,28 @@ println(value.String())
 #### 定义
 
 `libJSRSASign() jsRunOpts`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `jsRunOpts` |   |
+
+
+### libJsEncrypt
+
+#### 详细描述
+_libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入JsEncrypt 3.3.2库
+
+Example:
+```
+_, value = js.Run("var encrypt = new JSEncrypt();", js._libJsEncrypt())~
+println(value.String())
+```
+
+
+#### 定义
+
+`libJsEncrypt() jsRunOpts`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

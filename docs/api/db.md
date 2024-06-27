@@ -34,7 +34,9 @@
 | [db.SaveHTTPFlowFromNative](#savehttpflowfromnative) ||
 | [db.SaveHTTPFlowFromNativeWithType](#savehttpflowfromnativewithtype) ||
 | [db.SaveHTTPFlowFromRaw](#savehttpflowfromraw) ||
+| [db.SaveHTTPFlowFromRawWithOption](#savehttpflowfromrawwithoption) ||
 | [db.SaveHTTPFlowFromRawWithType](#savehttpflowfromrawwithtype) ||
+| [db.SaveHTTPFlowWithTags](#savehttpflowwithtags) ||
 | [db.SavePayload](#savepayload) ||
 | [db.SavePayloadByFile](#savepayloadbyfile) ||
 | [db.SavePortFromResult](#saveportfromresult) ||
@@ -680,6 +682,29 @@
 | r1 | `error` |   |
 
 
+### SaveHTTPFlowFromRawWithOption
+
+#### 详细描述
+
+
+#### 定义
+
+`SaveHTTPFlowFromRawWithOption(url string, req []byte, rsp []byte, exOption ...yakit.CreateHTTPFlowOptions) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| url | `string` |   |
+| req | `[]byte` |   |
+| rsp | `[]byte` |   |
+| exOption | `...yakit.CreateHTTPFlowOptions` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### SaveHTTPFlowFromRawWithType
 
 #### 详细描述
@@ -701,6 +726,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### SaveHTTPFlowWithTags
+
+#### 详细描述
+
+
+#### 定义
+
+`SaveHTTPFlowWithTags(tags string) CreateHTTPFlowOptions`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tags | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CreateHTTPFlowOptions` |   |
 
 
 ### SavePayload
