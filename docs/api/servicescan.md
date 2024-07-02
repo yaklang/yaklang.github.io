@@ -12,6 +12,7 @@
 | [servicescan.cache](#cache) |cache servicescan 的配置选项，设置本次扫描是否使用缓存  @param {bool} b 是否使用缓存  @return {ConfigOption} 返回配置项  |
 | [servicescan.concurrent](#concurrent) |concurrent servicescan 的配置选项，用于设置整体扫描并发  @param {int} size 并发数量  @return {ConfigOption} 返回配置项  |
 | [servicescan.databaseCache](#databasecache) |databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存  @param {bool} b 是否使用数据库缓存  @return {ConfigOption} 返回配置项  |
+| [servicescan.disableDefaultRule](#disabledefaultrule) ||
 | [servicescan.excludeHosts](#excludehosts) |excludeHosts servicescan 的配置选项，设置本次扫描排除的主机  @param {string} hosts 主机，支持逗号分割、CIDR、-的格式  @return {ConfigOption} 返回配置项  |
 | [servicescan.excludePorts](#excludeports) |excludePorts servicescan 的配置选项，设置本次扫描排除的端口  @param {string} ports 端口，支持逗号分割、-的格式  @return {ConfigOption} 返回配置项  |
 | [servicescan.maxProbes](#maxprobes) |maxProbes servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5  @param {int} m 最大探测包数量  @return {ConfigOption} 返回配置项  |
@@ -405,6 +406,26 @@ die(err)
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ConfigOption` |   |
+
+
+### disableDefaultRule
+
+#### 详细描述
+
+
+#### 定义
+
+`disableDefaultRule(b ...bool) fp.ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `...bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `fp.ConfigOption` |   |
 
 
 ### excludeHosts
