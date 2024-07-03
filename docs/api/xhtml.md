@@ -1,6 +1,6 @@
 # xhtml
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [xhtml.CompareHtml](#comparehtml) |CompareHtml 比较两段 HTML 代码的差异，返回差异的节点信息结构体引用切片与错误  |
 | [xhtml.Find](#find) |Find 解析并遍历一段 HTML 代码的每一个节点并找到匹配字符串的节点，返回匹配字符串的节点信息的引用切片  |

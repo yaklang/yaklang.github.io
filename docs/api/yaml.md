@@ -1,6 +1,6 @@
 # yaml
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [yaml.Marshal](#marshal) |Marshal serializes the value provided into a YAML document. The structure of the generated document will reflect the structure of the value itself. Ma...|
 | [yaml.Unmarshal](#unmarshal) ||

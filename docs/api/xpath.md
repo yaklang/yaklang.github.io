@@ -1,6 +1,6 @@
 # xpath
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [xpath.CreateXPathNavigator](#createxpathnavigator) |CreateXPathNavigator 根据传入的节点创建一个新的 XPath 导航器，使用该导航器的方法来遍历该节点及其子节点  |
 | [xpath.ExistedAttr](#existedattr) |ExistsAttr 判断传入节点是否存在指定名称的属性并返回布尔值  |

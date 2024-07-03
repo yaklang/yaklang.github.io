@@ -1,6 +1,6 @@
 # filesys
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [filesys.Recursive](#recursive) |Recursive recursively walk through the file system  raw: the root path  opts: options  return: error    |
 | [filesys.dir](#dir) ||

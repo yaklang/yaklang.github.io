@@ -1,6 +1,6 @@
 # tls
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误  |
 | [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误  |

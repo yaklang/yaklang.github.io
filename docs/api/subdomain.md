@@ -1,6 +1,6 @@
 # subdomain
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [subdomain.Scan](#scan) ||
 | [subdomain.dnsServer](#dnsserver) ||

@@ -1,6 +1,6 @@
 # udp
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [udp.Connect](#connect) ||
 | [udp.MockUDPProtocol](#mockudpprotocol) ||

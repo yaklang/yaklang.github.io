@@ -1,6 +1,6 @@
 # finscan
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [finscan.Scan](#scan) ||
 | [finscan.concurrent](#concurrent) |设置 FIN 扫描的并发可以有效控制精准度 |

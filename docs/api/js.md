@@ -1,6 +1,15 @@
 # js
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+NullValue|(github.com/dop251/goja.valueNull) null|
+FalseValue|(goja.valueBool) false|
+PoweredBy|(string) "github.com/dop251/goja"|
+UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
+TrueValue|(goja.valueBool) true|
+NaNValue|(goja.valueFloat) NaN|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [.](#) ||
 | [js.ASTWalk](#astwalk) |ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误  |

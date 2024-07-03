@@ -1,6 +1,11 @@
 # io
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+Discard|(io.discard) io.discard{}|
+EOF|(errors.errorString) &errors.errorString{s: "EOF"}|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [io.Copy](#copy) |Copy 将 reader 中的数据拷贝到 writer 中，直到读取到 EOF 或者发生错误，返回拷贝的字节数和错误  |
 | [io.CopyN](#copyn) |CopyN 将 reader 中的数据拷贝到 writer 中，直到读取到 EOF 或者拷贝了 n 个字节，返回拷贝的字节数和错误  |

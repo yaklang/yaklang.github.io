@@ -1,6 +1,6 @@
 # synscan
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [synscan.FixPermission](#fixpermission) |FixPermission 尝试修复 pcap 权限问题  |
 | [synscan.Scan](#scan) |Scan 使用 SYN 扫描技术进行端口扫描，它不必打开一个完整的TCP连接，只发送一个SYN包，就能做到打开连接的效果，然后等待对端的反应  @param {string} target 目标地址，支持 CIDR 格式  @param {string} port 端口，支持 1-65535、1,2...|

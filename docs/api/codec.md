@@ -1,6 +1,6 @@
 # codec
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [codec.AESCBCDecrypt](#aescbcdecrypt) ||
 | [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) ||

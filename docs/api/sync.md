@@ -1,6 +1,6 @@
 # sync
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [sync.NewCond](#newcond) |NewCond 创建一个 Cond 结构体引用，即一个条件变量，参考golang官方文档：https://golang.org/pkg/sync/#Cond  条件变量是一种用于协调多个并发任务之间的同步机制，它允许一个任务等待某个条件成立，同时允许其他任务在条件成立时通知等待的任务  |
 | [sync.NewLock](#newlock) |NewLock 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题  它实际是 NewMutex 的别名  |

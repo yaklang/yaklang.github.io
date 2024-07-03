@@ -1,6 +1,6 @@
 # poc
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [poc.AppendHTTPPacketCookie](#appendhttppacketcookie) |AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加Cookie请求头中的值  |
 | [poc.AppendHTTPPacketFormEncoded](#appendhttppacketformencoded) |AppendHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，添加请求体中的表单  |

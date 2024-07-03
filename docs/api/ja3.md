@@ -1,6 +1,6 @@
 # ja3
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [ja3.GetTransportByClientHelloSpec](#gettransportbyclienthellospec) ||
 | [ja3.ParseJA3](#parseja3) ||

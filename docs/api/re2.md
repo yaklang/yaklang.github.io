@@ -1,6 +1,6 @@
 # re2
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [re2.Compile](#compile) |Compile 将正则表达式解析为一个正则表达式结构体引用  |
 | [re2.CompilePOSIX](#compileposix) |CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配  |

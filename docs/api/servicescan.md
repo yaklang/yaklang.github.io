@@ -1,6 +1,6 @@
 # servicescan
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [servicescan.Scan](#scan) |Scan servicescan 库使用的端口扫描类型的方式为全连接扫描，用于对连接目标进行精准的扫描，相比 synscan 库的单纯扫描，servicescan 库会尝试获取精确指纹信息以及 CPE 信息  @param {string} target 目标地址，支持 CIDR 格式，支持 192...|
 | [servicescan.ScanFromPing](#scanfromping) |ScanFromPing 从 ping.Scan 的结果中进行指纹识别  @param {chan *pingutil.PingResult} res ping.Scan 的结果  @param {string} ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式 ...|

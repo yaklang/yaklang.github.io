@@ -1,6 +1,16 @@
 # crawlerx
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+MediumRepeatLevel|(crawlerx.repeatLevel) 2|
+LowRepeatLevel|(crawlerx.repeatLevel) 1|
+ExtremeRepeatLevel|(crawlerx.repeatLevel) 4|
+HighRepeatLevel|(crawlerx.repeatLevel) 3|
+AllDomainScan|(crawlerx.scanRangeLevel) 0|
+UnLimitRepeat|(crawlerx.repeatLevel) 0|
+SubMenuScan|(crawlerx.scanRangeLevel) 1|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [crawlerx.PageScreenShot](#pagescreenshot) ||
 | [crawlerx.StartCrawler](#startcrawler) ||

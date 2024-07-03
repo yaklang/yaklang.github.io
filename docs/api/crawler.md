@@ -1,6 +1,6 @@
 # crawler
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [crawler.RequestsFromFlow](#requestsfromflow) |RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误  |
 | [crawler.Start](#start) |Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为  返回一个Req结构体引用管道与错误  |

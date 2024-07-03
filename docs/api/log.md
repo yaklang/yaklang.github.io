@@ -1,6 +1,6 @@
 # log
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [log.Debug](#debug) |Debugf will print when logger's Level is debug. |
 | [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |

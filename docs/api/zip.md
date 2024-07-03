@@ -1,6 +1,6 @@
 # zip
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [zip.Compress](#compress) ||
 | [zip.Decompress](#decompress) |解压 |

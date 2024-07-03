@@ -1,6 +1,18 @@
 # file
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+O_APPEND|(int) 1024|
+O_RDWR|(int) 2|
+O_SYNC|(int) 1052672|
+O_CREATE|(int) 64|
+O_WRONLY|(int) 1|
+O_EXCL|(int) 128|
+SEPARATOR|(string) "/"|
+O_TRUNC|(int) 512|
+O_RDONLY|(int) 0|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [file.Abs](#abs) |Abs 返回一个路径的绝对路径  |
 | [file.Cat](#cat) |Cat 模拟 unix 命令 cat，打印文件内容到标准输出  |

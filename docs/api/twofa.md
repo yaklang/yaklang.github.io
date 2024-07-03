@@ -1,6 +1,6 @@
 # twofa
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [twofa.GetUTCCode](#getutccode) |GetUTCCode in twofa lib will receive the secret and return the verify code with utc time |
 | [twofa.VerifyUTCCode](#verifyutccode) |VerifyUTCCode in twofa lib will receive the secret and code, then return the verify result |

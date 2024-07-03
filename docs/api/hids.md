@@ -1,6 +1,6 @@
 # hids
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [hids.CPUAverage](#cpuaverage) |CPUAverage 获取当前系统的 CPU 使用率平均值  |
 | [hids.CPUAverageCallback](#cpuaveragecallback) |CPUPercentCallback 当 CPU 使用率平均值发生变化时，调用 callback 函数  |

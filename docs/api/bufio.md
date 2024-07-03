@@ -1,6 +1,6 @@
 # bufio
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [bufio.NewBuffer](#newbuffer) |NewBuffer 创建一个新的 Buffer 结构体引用，其帮助我们处理字符串  Buffer 也实现了 Reader 和 Writer 接口  常用的 Buffer 方法有：Bytes, String, Read, Write, WriteString, WriteByte, Reset  |
 | [bufio.NewReadWriter](#newreadwriter) |NewReadWriter 根据传入的 Reader 和 Writer 创建一个新的 BufioReadWriter 结构体引用  BufioReadWriter 可以同时调用 BufioReader 和 BufioWriter 的方法  |

@@ -1,6 +1,6 @@
 # yso
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [yso.GenerateClass](#generateclass) ||
 | [yso.GenerateClassObjectFromBytes](#generateclassobjectfrombytes) |GenerateClassObjectFromBytes 从字节数组中加载并返回一个javaclassparser.ClassObject对象。  LoadClassFromBytes、LoadClassFromBase64、LoadClassFromBCEL等函数都是基于这个函数实现的。  参数是...|

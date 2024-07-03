@@ -1,6 +1,16 @@
 # os
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+Stdin|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stdin", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: false, appendMode: false}}|
+OS|(string) "linux"|
+IsPrivileged|(bool) false|
+Stderr|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stderr", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+Args|([]string) []string{"/tmp/go-build1934982240/b001/exe/generate_web_doc", "web_doc/"}|
+Stdout|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stdout", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+ARCH|(string) "amd64"|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [os.Chdir](#chdir) |Chdir 改变当前工作目录  |
 | [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限  |

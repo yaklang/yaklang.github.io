@@ -1,6 +1,6 @@
 # openai
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [openai.Chat](#chat) |Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果  @param {string} data 用户的提问或描述  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等  |
 | [openai.ChatEx](#chatex) |ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误  @param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、...|

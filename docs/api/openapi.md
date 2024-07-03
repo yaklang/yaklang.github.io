@@ -1,6 +1,6 @@
 # openapi
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [openapi.ConvertJsonToYaml](#convertjsontoyaml) |JSONToYAML converts JSON to YAML. |
 | [openapi.ConvertYamlToJson](#convertyamltojson) |YAMLToJSON converts YAML to JSON. Since JSON is a subset of YAML, passing JSON through this method should be a no-op.  Things YAML can do that are not...|

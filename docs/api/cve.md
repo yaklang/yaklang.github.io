@@ -1,6 +1,6 @@
 # cve
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [cve.Download](#download) |DownLoad 从NVD下载CVE json数据到本地 |
 | [cve.GetCVE](#getcve) ||

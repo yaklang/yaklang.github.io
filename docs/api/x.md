@@ -1,6 +1,6 @@
 # x
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [x.All](#all) |All returns true if all elements of the iterable are not empty (or if the iterable is empty) |
 | [x.Any](#any) |Any returns true if any element of the iterable is not empty. If the iterable is empty, return False. |

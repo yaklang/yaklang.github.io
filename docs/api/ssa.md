@@ -1,6 +1,13 @@
 # ssa
 
-|成员函数|函数描述/介绍|
+|实例名|实例描述|
+|:------|:--------|
+Java|(ssaapi.Language) "java"|
+Javascript|(ssaapi.Language) "js"|
+Yak|(ssaapi.Language) "yak"|
+PHP|(ssaapi.Language) "php"|
+
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [ssa.Parse](#parse) ||
 | [ssa.withDatabaseProgramName](#withdatabaseprogramname) |save to database, please set the program name |

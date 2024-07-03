@@ -1,6 +1,6 @@
 # http
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [http.Do](#do) |Do 根据构造好的请求结构体引用发送请求，返回响应结构体引用与错误  ! 已弃用  |
 | [http.ExtractFaviconURL](#extractfaviconurl) |ExtractFaviconURL will receive a site url and html content return the favicon url  |

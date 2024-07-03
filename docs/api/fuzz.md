@@ -1,6 +1,6 @@
 # fuzz
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [fuzz.FuzzCalcExpr](#fuzzcalcexpr) ||
 | [fuzz.FuzzCalcExprInt32Safe](#fuzzcalcexprint32safe) ||

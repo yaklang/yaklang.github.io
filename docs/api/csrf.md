@@ -1,6 +1,6 @@
 # csrf
 
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
 | [csrf.Generate](#generate) |Generate 根据传入的原始请求报文生成跨站请求伪造(CSRF)类型的漏洞验证(POC)，返回生成的POC HTML字符串与错误  |
 | [csrf.https](#https) |https 手动设置请求报文是否为HTTPS类型  |
