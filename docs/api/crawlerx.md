@@ -2,13 +2,13 @@
 
 |实例名|实例描述|
 |:------|:--------|
-MediumRepeatLevel|(crawlerx.repeatLevel) 2|
-LowRepeatLevel|(crawlerx.repeatLevel) 1|
+SubMenuScan|(crawlerx.scanRangeLevel) 1|
+UnLimitRepeat|(crawlerx.repeatLevel) 0|
 ExtremeRepeatLevel|(crawlerx.repeatLevel) 4|
 HighRepeatLevel|(crawlerx.repeatLevel) 3|
+LowRepeatLevel|(crawlerx.repeatLevel) 1|
 AllDomainScan|(crawlerx.scanRangeLevel) 0|
-UnLimitRepeat|(crawlerx.repeatLevel) 0|
-SubMenuScan|(crawlerx.scanRangeLevel) 1|
+MediumRepeatLevel|(crawlerx.repeatLevel) 2|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
