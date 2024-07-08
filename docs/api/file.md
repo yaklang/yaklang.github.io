@@ -2,15 +2,15 @@
 
 |实例名|实例描述|
 |:------|:--------|
-O_CREATE|(int) 64|
-SEPARATOR|(string) "/"|
-O_SYNC|(int) 1052672|
-O_WRONLY|(int) 1|
 O_TRUNC|(int) 512|
 O_APPEND|(int) 1024|
-O_EXCL|(int) 128|
+O_CREATE|(int) 64|
+SEPARATOR|(string) "/"|
 O_RDONLY|(int) 0|
+O_WRONLY|(int) 1|
+O_SYNC|(int) 1052672|
 O_RDWR|(int) 2|
+O_EXCL|(int) 128|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
