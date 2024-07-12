@@ -2,9 +2,9 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Javascript|(ssaapi.Language) "js"|
 Yak|(ssaapi.Language) "yak"|
 Java|(ssaapi.Language) "java"|
+Javascript|(ssaapi.Language) "js"|
 PHP|(ssaapi.Language) "php"|
 
 |函数名|函数描述/介绍|

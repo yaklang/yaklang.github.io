@@ -2,12 +2,12 @@
 
 |实例名|实例描述|
 |:------|:--------|
-NullValue|(github.com/dop251/goja.valueNull) null|
-NaNValue|(goja.valueFloat) NaN|
-FalseValue|(goja.valueBool) false|
-PoweredBy|(string) "github.com/dop251/goja"|
-UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 TrueValue|(goja.valueBool) true|
+UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
+NaNValue|(goja.valueFloat) NaN|
+PoweredBy|(string) "github.com/dop251/goja"|
+FalseValue|(goja.valueBool) false|
+NullValue|(github.com/dop251/goja.valueNull) null|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
