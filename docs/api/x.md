@@ -15,6 +15,7 @@
 | [x.Find](#find) ||
 | [x.Foreach](#foreach) ||
 | [x.ForeachRight](#foreachright) ||
+| [x.GC](#gc) |GC runs a garbage collection and blocks the caller until the garbage collection is complete. It may also block the entire program. |
 | [x.Head](#head) |Head gets the first element of array. |
 | [x.If](#if) ||
 | [x.IndexOf](#indexof) |IndexOf gets the index at which the first occurrence of value is found in array or return -1 if the value cannot be found |
@@ -313,6 +314,19 @@ Every returns true if every element is present in a iteratee.
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
 | fc | `func(any)` |   |
+
+
+### GC
+
+#### 详细描述
+GC runs a garbage collection and blocks the caller until the
+garbage collection is complete. It may also block the entire
+program.
+
+
+#### 定义
+
+`GC()`
 
 
 ### Head

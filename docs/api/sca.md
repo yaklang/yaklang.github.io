@@ -2,29 +2,29 @@
 
 |实例名|实例描述|
 |:------|:--------|
-ANALYZER_TYPE_RUBY_GEMSPEC|(analyzer.TypAnalyzer) "ruby-gemspec-lang"|
-ANALYZER_TYPE_DPKG|(analyzer.TypAnalyzer) "dpkg-pkg"|
-ANALYZER_TYPE_PYTHON_POETRY|(analyzer.TypAnalyzer) "python-poetry-lang"|
-ANALYZER_TYPE_JAVA_GRADLE|(analyzer.TypAnalyzer) "gradle-lang"|
-MODE_ALL|(analyzer.ScanMode) 0|
-ANALYZER_TYPE_RUBY_BUNDLER|(analyzer.TypAnalyzer) "ruby-bundler-lang"|
-ANALYZER_TYPE_PYTHON_PIPENV|(analyzer.TypAnalyzer) "python-pipenv-lang"|
-MODE_PKG|(int) 2|
-ANALYZER_TYPE_GO_BINARY|(analyzer.TypAnalyzer) "go-binary-lang"|
 ANALYZER_TYPE_JAVA_JAR|(analyzer.TypAnalyzer) "jar-lang"|
+ANALYZER_TYPE_NODE_YARN|(analyzer.TypAnalyzer) "yarm-lang"|
+ANALYZER_TYPE_NODE_PNPM|(analyzer.TypAnalyzer) "npmp-lang"|
+ANALYZER_TYPE_JAVA_POM|(analyzer.TypAnalyzer) "pom-lang"|
+ANALYZER_TYPE_PYTHON_PIPENV|(analyzer.TypAnalyzer) "python-pipenv-lang"|
+MODE_ALL|(analyzer.ScanMode) 0|
+ANALYZER_TYPE_PYTHON_POETRY|(analyzer.TypAnalyzer) "python-poetry-lang"|
+ANALYZER_TYPE_RUBY_GEMSPEC|(analyzer.TypAnalyzer) "ruby-gemspec-lang"|
 ANALYZER_TYPE_PYTHON_PACKAGING|(analyzer.TypAnalyzer) "python-packaging-lang"|
-ANALYZER_TYPE_RUST_CARGO|(analyzer.TypAnalyzer) "cargo-lang"|
+ANALYZER_TYPE_NODE_NPM|(analyzer.TypAnalyzer) "npm-lang"|
+ANALYZER_TYPE_PYTHON_PIP|(analyzer.TypAnalyzer) "python-pip-lang"|
+ANALYZER_TYPE_GO_BINARY|(analyzer.TypAnalyzer) "go-binary-lang"|
+ANALYZER_TYPE_RUBY_BUNDLER|(analyzer.TypAnalyzer) "ruby-bundler-lang"|
+ANALYZER_TYPE_RPM|(analyzer.TypAnalyzer) "rpm-pkg"|
 ANALYZER_TYPE_APK|(analyzer.TypAnalyzer) "apk-pkg"|
 MODE_LANGUAGE|(int) 4|
-ANALYZER_TYPE_NODE_PNPM|(analyzer.TypAnalyzer) "npmp-lang"|
-ANALYZER_TYPE_RPM|(analyzer.TypAnalyzer) "rpm-pkg"|
-ANALYZER_TYPE_NODE_NPM|(analyzer.TypAnalyzer) "npm-lang"|
-ANALYZER_TYPE_NODE_YARN|(analyzer.TypAnalyzer) "yarm-lang"|
-ANALYZER_TYPE_JAVA_POM|(analyzer.TypAnalyzer) "pom-lang"|
 ANALYZER_TYPE_CLANG_CONAN|(analyzer.TypAnalyzer) "conan-lang"|
-ANALYZER_TYPE_PYTHON_PIP|(analyzer.TypAnalyzer) "python-pip-lang"|
+MODE_PKG|(int) 2|
 ANALYZER_TYPE_PHP_COMPOSER|(analyzer.TypAnalyzer) "composer-lang"|
+ANALYZER_TYPE_JAVA_GRADLE|(analyzer.TypAnalyzer) "gradle-lang"|
 ANALYZER_TYPE_GO_MOD|(analyzer.TypAnalyzer) "go-mod-lang"|
+ANALYZER_TYPE_DPKG|(analyzer.TypAnalyzer) "dpkg-pkg"|
+ANALYZER_TYPE_RUST_CARGO|(analyzer.TypAnalyzer) "cargo-lang"|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

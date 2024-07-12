@@ -2,11 +2,11 @@
 
 |实例名|实例描述|
 |:------|:--------|
-HighRepeatLevel|(crawlerx.repeatLevel) 3|
 LowRepeatLevel|(crawlerx.repeatLevel) 1|
-MediumRepeatLevel|(crawlerx.repeatLevel) 2|
 ExtremeRepeatLevel|(crawlerx.repeatLevel) 4|
 AllDomainScan|(crawlerx.scanRangeLevel) 0|
+HighRepeatLevel|(crawlerx.repeatLevel) 3|
+MediumRepeatLevel|(crawlerx.repeatLevel) 2|
 UnLimitRepeat|(crawlerx.repeatLevel) 0|
 SubMenuScan|(crawlerx.scanRangeLevel) 1|
 

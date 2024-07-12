@@ -3,13 +3,13 @@
 |实例名|实例描述|
 |:------|:--------|
 O_CREATE|(int) 64|
-O_APPEND|(int) 1024|
-SEPARATOR|(string) "/"|
-O_EXCL|(int) 128|
-O_RDONLY|(int) 0|
 O_TRUNC|(int) 512|
 O_SYNC|(int) 1052672|
+O_RDONLY|(int) 0|
+O_EXCL|(int) 128|
+SEPARATOR|(string) "/"|
 O_WRONLY|(int) 1|
+O_APPEND|(int) 1024|
 O_RDWR|(int) 2|
 
 |函数名|函数描述/介绍|

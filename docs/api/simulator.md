@@ -2,13 +2,13 @@
 
 |实例名|实例描述|
 |:------|:--------|
-simple|(map[string]interface {}) map[string]interface {}{"bodyModifyTarget": "body", "bodyReplaceTarget": "bodyReplace", "createBrowser": (func(...simple.BrowserConfigOpt) *simple.VBrowser)(0x2896960), "headersModifyTarget": "headers", "headless": (func(bool) simple.BrowserConfigOpt)(0x28963a0), "hostModifyTarget": "host", "noSandBox": (func(bool) simple.BrowserConfigOpt)(0x2896320), "proxy": (func(string, ...string) simple.BrowserConfigOpt)(0x2896160), "requestModify": (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x28966c0), "responseModify": (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x2896420), "wsAddress": (func(string) simple.BrowserConfigOpt)(0x2896080)}|
-defaultChangeMode|(simulator.loginDetectMode) -1|
 leaklessOff|(simulator.LeaklessMode) -1|
-leaklessDefault|(simulator.LeaklessMode) 0|
+simple|(map[string]interface {}) map[string]interface {}{"bodyModifyTarget": "body", "bodyReplaceTarget": "bodyReplace", "createBrowser": (func(...simple.BrowserConfigOpt) *simple.VBrowser)(0x2896e00), "headersModifyTarget": "headers", "headless": (func(bool) simple.BrowserConfigOpt)(0x2896840), "hostModifyTarget": "host", "noSandBox": (func(bool) simple.BrowserConfigOpt)(0x28967c0), "proxy": (func(string, ...string) simple.BrowserConfigOpt)(0x2896600), "requestModify": (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x2896b60), "responseModify": (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x28968c0), "wsAddress": (func(string) simple.BrowserConfigOpt)(0x2896520)}|
 urlChangeMode|(simulator.loginDetectMode) 0|
-leaklessOn|(simulator.LeaklessMode) 1|
+defaultChangeMode|(simulator.loginDetectMode) -1|
+leaklessDefault|(simulator.LeaklessMode) 0|
 htmlChangeMode|(simulator.loginDetectMode) 1|
+leaklessOn|(simulator.LeaklessMode) 1|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

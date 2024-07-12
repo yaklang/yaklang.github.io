@@ -2,12 +2,12 @@
 
 |实例名|实例描述|
 |:------|:--------|
-YAKIT_PLUGIN_TYPE_NUCLEI|(string) "nuclei"|
-YAKIT_PLUGIN_TYPE_CODEC|(string) "codec"|
-YAKIT_PLUGIN_TYPE_PACKET_HACK|(string) "packet-hack"|
-YAKIT_PLUGIN_TYPE_YAK|(string) "yak"|
 YAKIT_PLUGIN_TYPE_MITM|(string) "mitm"|
+YAKIT_PLUGIN_TYPE_PACKET_HACK|(string) "packet-hack"|
+YAKIT_PLUGIN_TYPE_CODEC|(string) "codec"|
 YAKIT_PLUGIN_TYPE_PORTSCAN|(string) "port-scan"|
+YAKIT_PLUGIN_TYPE_YAK|(string) "yak"|
+YAKIT_PLUGIN_TYPE_NUCLEI|(string) "nuclei"|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
