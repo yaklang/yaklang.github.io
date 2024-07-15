@@ -2,14 +2,14 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [log.Debug](#debug) |Debugf will print when logger's Level is debug. |
-| [log.Error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
-| [log.Info](#info) |Infof will print when logger's Level is info or debug. |
+| [log.Debug](#debug) |Debugf will print when logger&amp;#39;s Level is debug. |
+| [log.Error](#error) |Errorf will print only when logger&amp;#39;s Level is error, warn, info or debug. |
+| [log.Info](#info) |Infof will print when logger&amp;#39;s Level is info or debug. |
 | [log.SetLevel](#setlevel) |loglevel 根据传入的字符串设置日志级别  disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试  |
 | [log.Warn](#warn) ||
-| [log.debug](#debug) |Debugf will print when logger's Level is debug. |
-| [log.error](#error) |Errorf will print only when logger's Level is error, warn, info or debug. |
-| [log.info](#info) |Infof will print when logger's Level is info or debug. |
+| [log.debug](#debug) |Debugf will print when logger&amp;#39;s Level is debug. |
+| [log.error](#error) |Errorf will print only when logger&amp;#39;s Level is error, warn, info or debug. |
+| [log.info](#info) |Infof will print when logger&amp;#39;s Level is info or debug. |
 | [log.setLevel](#setlevel) |loglevel 根据传入的字符串设置日志级别  disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试  |
 | [log.warn](#warn) ||
 
@@ -18,7 +18,7 @@
 ### Debug
 
 #### 详细描述
-Debugf will print when logger's Level is debug.
+Debugf will print when logger&amp;#39;s Level is debug.
 
 
 #### 定义
@@ -35,7 +35,7 @@ Debugf will print when logger's Level is debug.
 ### Error
 
 #### 详细描述
-Errorf will print only when logger's Level is error, warn, info or debug.
+Errorf will print only when logger&amp;#39;s Level is error, warn, info or debug.
 
 
 #### 定义
@@ -52,7 +52,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 ### Info
 
 #### 详细描述
-Infof will print when logger's Level is info or debug.
+Infof will print when logger&amp;#39;s Level is info or debug.
 
 
 #### 定义
@@ -75,7 +75,7 @@ disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告
 
 Example:
 ```
-loglevel("fatal")
+loglevel(&#34;fatal&#34;)
 ```
 
 
@@ -108,7 +108,7 @@ loglevel("fatal")
 ### debug
 
 #### 详细描述
-Debugf will print when logger's Level is debug.
+Debugf will print when logger&amp;#39;s Level is debug.
 
 
 #### 定义
@@ -125,7 +125,7 @@ Debugf will print when logger's Level is debug.
 ### error
 
 #### 详细描述
-Errorf will print only when logger's Level is error, warn, info or debug.
+Errorf will print only when logger&amp;#39;s Level is error, warn, info or debug.
 
 
 #### 定义
@@ -142,7 +142,7 @@ Errorf will print only when logger's Level is error, warn, info or debug.
 ### info
 
 #### 详细描述
-Infof will print when logger's Level is info or debug.
+Infof will print when logger&amp;#39;s Level is info or debug.
 
 
 #### 定义
@@ -165,7 +165,7 @@ disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告
 
 Example:
 ```
-loglevel("fatal")
+loglevel(&#34;fatal&#34;)
 ```
 
 

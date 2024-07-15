@@ -106,8 +106,8 @@ Marshal 将一个对象转换为 JSON bytes，返回转换后的 bytes 与错误
 
 Example:
 ```
-v, err = json.Marshal({"a": "b", "c": "d"})
-// v = b"{"a": "b", "c": "d"}"
+v, err = json.Marshal({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;})
+// v = b&#34;{&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;}&#34;
 ```
 
 
@@ -134,9 +134,9 @@ New 根据传入的值创建并返回一个新的 JSON 对象与错误
 
 Example:
 ```
-v, err = json.New("foo")
-v, err = json.New(b"bar")
-v, err = json.New({"a": "b", "c": "d"})
+v, err = json.New(&#34;foo&#34;)
+v, err = json.New(b&#34;bar&#34;)
+v, err = json.New({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;})
 ```
 
 
@@ -187,7 +187,7 @@ dumps 将一个对象转换为 JSON 字符串，返回转换后的字符串
 
 Example:
 ```
-v = json.dumps({"a": "b", "c": "d"})
+v = json.dumps({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;})
 ```
 
 
@@ -214,7 +214,7 @@ loads 将一个 JSON 字符串转换为对象，返回转换后的对象
 
 Example:
 ```
-v = json.loads(`{"a": "b", "c": "d"}`)
+v = json.loads(`{&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;}`)
 ```
 
 
@@ -241,7 +241,7 @@ withIndent 设置 JSON dumps时的缩进
 
 Example:
 ```
-v = json.dumps({"a": "b", "c": "d"}, json.withIndent("  "))
+v = json.dumps({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;}, json.withIndent(&#34;  &#34;))
 ```
 
 
@@ -267,7 +267,7 @@ withPrefix 设置 JSON dumps时的前缀
 
 Example:
 ```
-v = json.dumps({"a": "b", "c": "d"}, json.withPrefix("  "))
+v = json.dumps({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;}, json.withPrefix(&#34;  &#34;))
 ```
 
 

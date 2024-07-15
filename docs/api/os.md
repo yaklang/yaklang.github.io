@@ -2,13 +2,13 @@
 
 |实例名|实例描述|
 |:------|:--------|
-ARCH|(string) "amd64"|
-Stdout|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stdout", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: true, appendMode: false}}</Already>|
-Stderr|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stderr", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: true, appendMode: false}}</Already>|
+ARCH|(string) &#34;amd64&#34;|
+Args|([]string) Command line arguments|
 IsPrivileged|(bool) false|
-Stdin|(os.File) &os.File{file: &os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: "/dev/stdin", dirinfo: <Already printed>, nonblock: false, stdoutOrErr: false, appendMode: false}}</Already>|
-Args|([]string) []string{"/tmp/go-build1790288320/b001/exe/generate_web_doc", "web_doc/"}|
-OS|(string) "linux"|
+OS|(string) &#34;linux&#34;|
+Stderr|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stderr&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+Stdin|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdin&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: false, appendMode: false}}|
+Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdout&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: true, appendMode: false}}|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
@@ -16,7 +16,7 @@ OS|(string) "linux"|
 | [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限  |
 | [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组  |
 | [os.Clearenv](#clearenv) |Clearenv 清空所有环境变量  |
-| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为"key=value"  |
+| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为&amp;#34;key=value&amp;#34;  |
 | [os.Executable](#executable) |Executable 获取当前可执行文件的路径  |
 | [os.Exit](#exit) |Exit 退出当前进程  |
 | [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值  |
@@ -62,7 +62,7 @@ Chdir 改变当前工作目录
 
 Example:
 ```
-err = os.Chdir("/tmp")
+err = os.Chdir(&#34;/tmp&#34;)
 ```
 
 
@@ -88,7 +88,7 @@ Chmod 改变指定文件或目录的权限
 
 Example:
 ```
-err = os.Chmod("/tmp/test.txt", 0777)
+err = os.Chmod(&#34;/tmp/test.txt&#34;, 0777)
 ```
 
 
@@ -115,7 +115,7 @@ Chown 改变指定文件或目录的所有者和所属组
 
 Example:
 ```
-err = os.Chown("/var/www/html/test.txt", 1000, 1000)
+err = os.Chown(&#34;/var/www/html/test.txt&#34;, 1000, 1000)
 ```
 
 
@@ -155,13 +155,13 @@ os.Clearenv()
 ### Environ
 
 #### 详细描述
-Environ 获取表示环境变量的字符串切片，格式为"key=value"
+Environ 获取表示环境变量的字符串切片，格式为&amp;#34;key=value&amp;#34;
 
 Example:
 ```
 for env in os.Environ() {
-value = env.SplitN("=", 2)
-printf("key = %s, value = %v\n", value[0], value[1])
+value = env.SplitN(&#34;=&#34;, 2)
+printf(&#34;key = %s, value = %v\n&#34;, value[0], value[1])
 }
 ```
 
@@ -226,7 +226,7 @@ ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的�
 
 Example:
 ```
-os.ExpandEnv("PATH = $PATH")
+os.ExpandEnv(&#34;PATH = $PATH&#34;)
 ```
 
 
@@ -273,7 +273,7 @@ GetLocalAddress 获取本地IP地址
 
 Example:
 ```
-os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
+os.GetLocalAddress() // [&#34;192.168.1.103&#34;, &#34;fe80::605a:5ff:fefb:5405&#34;]
 ```
 
 
@@ -294,7 +294,7 @@ GetLocalIPv4Address 获取本地IPv4地址
 
 Example:
 ```
-os.GetLocalIPv4Address() // ["192.168.3.103"]
+os.GetLocalIPv4Address() // [&#34;192.168.3.103&#34;]
 ```
 
 
@@ -315,7 +315,7 @@ GetLocalIPv6Address 获取本地IPv6地址
 
 Example:
 ```
-os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
+os.GetLocalIPv6Address() // [&#34;fe80::605a:5ff:fefb:5405&#34;]
 ```
 
 
@@ -357,7 +357,7 @@ GetRandomAvailableTCPPort 获取随机可用的TCP端口
 
 Example:
 ```
-tcp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
+tcp.Serve(&#34;127.0.0.1&#34;, os.GetRandomAvailableTCPPort())
 ```
 
 
@@ -378,7 +378,7 @@ GetRandomAvailableUDPPort 获取随机可用的UDP端口
 
 Example:
 ```
-udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
+udp.Serve(&#34;127.0.0.1&#34;, os.GetRandomAvailableTCPPort())
 ```
 
 
@@ -420,7 +420,7 @@ Getenv 获取指定的环境变量的值，如果不存在则返回空字符串
 
 Example:
 ```
-value = os.Getenv("PATH")
+value = os.Getenv(&#34;PATH&#34;)
 ```
 
 
@@ -595,7 +595,7 @@ IsRemoteTCPPortOpen 检查远程TCP端口是否开放
 
 Example:
 ```
-os.IsRemoteTCPPortOpen("yaklang.com", 443) // true
+os.IsRemoteTCPPortOpen(&#34;yaklang.com&#34;, 443) // true
 ```
 
 
@@ -726,7 +726,7 @@ LookupEnv 获取指定的环境变量的值
 
 Example:
 ```
-value, ok = os.LookupEnv("PATH")
+value, ok = os.LookupEnv(&#34;PATH&#34;)
 ```
 
 
@@ -753,7 +753,7 @@ LookupHost 通过DNS服务器，根据域名查找IP
 
 Example:
 ```
-os.LookupHost("www.yaklang.com")
+os.LookupHost(&#34;www.yaklang.com&#34;)
 ```
 
 
@@ -779,7 +779,7 @@ LookupIP 通过DNS服务器，根据域名查找IP
 
 Example:
 ```
-os.LookupIP("www.yaklang.com")
+os.LookupIP(&#34;www.yaklang.com&#34;)
 ```
 
 
@@ -811,7 +811,7 @@ r, w, err = os.Pipe()
 die(err)
 
 	go func {
-	    w.WriteString("hello yak")
+	    w.WriteString(&#34;hello yak&#34;)
 	    w.Close()
 	}
 
@@ -840,7 +840,7 @@ Remove 删除指定的文件或目录
 
 Example:
 ```
-os.Remove("/tmp/test.txt")
+os.Remove(&#34;/tmp/test.txt&#34;)
 ```
 
 
@@ -866,7 +866,7 @@ RemoveAll 递归删除指定的路径及其子路径
 
 Example:
 ```
-os.RemoveAll("/tmp")
+os.RemoveAll(&#34;/tmp&#34;)
 ```
 
 
@@ -892,8 +892,8 @@ Rename 重命名文件或目录，可以用于移动文件或目录
 
 Example:
 ```
-os.Rename("/tmp/test.txt", "/tmp/test2.txt")
-os.Rename("/tmp/test", "/root/test")
+os.Rename(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
+os.Rename(&#34;/tmp/test&#34;, &#34;/root/test&#34;)
 ```
 
 
@@ -920,7 +920,7 @@ Setenv 设置指定的环境变量
 
 Example:
 ```
-os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
+os.Setenv(&#34;PATH&#34;, &#34;/usr/local/bin:/usr/bin:/bin&#34;)
 ```
 
 
@@ -968,7 +968,7 @@ Unsetenv 删除指定的环境变量
 
 Example:
 ```
-os.Unsetenv("PATH")
+os.Unsetenv(&#34;PATH&#34;)
 ```
 
 
@@ -994,20 +994,20 @@ WaitConnect 等待一个地址的端口开放或指导超时时间，如果超�
 
 Example:
 ```
-timeout, _ = time.ParseDuration("1m")
+timeout, _ = time.ParseDuration(&#34;1m&#34;)
 ctx, cancel = context.WithTimeout(context.New(), timeout)
 
 	go func() {
-	    err = tcp.Serve("127.0.0.1", 8888, tcp.serverCallback(func (conn) {
-	    conn.Send("hello world")
+	    err = tcp.Serve(&#34;127.0.0.1&#34;, 8888, tcp.serverCallback(func (conn) {
+	    conn.Send(&#34;hello world&#34;)
 	    conn.Close()
 	}), tcp.serverContext(ctx))
 
 	    die(err)
 	}()
 
-os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
-conn = tcp.Connect("127.0.0.1", 8888)~
+os.WaitConnect(&#34;127.0.0.1:8888&#34;, 5)~ // 等待tcp服务器启动
+conn = tcp.Connect(&#34;127.0.0.1&#34;, 8888)~
 bytes = conn.Recv()~
 println(string(bytes))
 ```

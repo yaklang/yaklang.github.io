@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [timezone.Get](#get) |Get 返回具有给定名称的时区与错误  如果名称为空字符串 "" 或 "UTC"，LoadLocation 返回 UTC 时区  如果名称为 "Local"，LoadLocation 返回本地时区  否则，该名称被视为 IANA 时区数据库中的一个位置名称，如 "America/New_York" ...|
+| [timezone.Get](#get) |Get 返回具有给定名称的时区与错误  如果名称为空字符串 &amp;#34;&amp;#34; 或 &amp;#34;UTC&amp;#34;，LoadLocation 返回 UTC 时区  如果名称为 &amp;#34;Local&amp;#34;，LoadLocation 返回本地时区  否则，该名称被视为 IANA 时区数据库中的一个位置...|
 | [timezone.Now](#now) |Now 根据给定名称的时区返回当前时间结构体  |
 
 
@@ -12,15 +12,15 @@
 #### 详细描述
 Get 返回具有给定名称的时区与错误
 
-如果名称为空字符串 "" 或 "UTC"，LoadLocation 返回 UTC 时区
+如果名称为空字符串 &amp;#34;&amp;#34; 或 &amp;#34;UTC&amp;#34;，LoadLocation 返回 UTC 时区
 
-如果名称为 "Local"，LoadLocation 返回本地时区
+如果名称为 &amp;#34;Local&amp;#34;，LoadLocation 返回本地时区
 
-否则，该名称被视为 IANA 时区数据库中的一个位置名称，如 "America/New_York"
+否则，该名称被视为 IANA 时区数据库中的一个位置名称，如 &amp;#34;America/New_York&amp;#34;
 
 Example:
 ```
-loc, err = timezone.Get("Asia/Shanghai")
+loc, err = timezone.Get(&#34;Asia/Shanghai&#34;)
 ```
 
 
@@ -47,7 +47,7 @@ Now 根据给定名称的时区返回当前时间结构体
 
 Example:
 ```
-now = timezone.Now("Asia/Shanghai")
+now = timezone.Now(&#34;Asia/Shanghai&#34;)
 ```
 
 

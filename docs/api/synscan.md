@@ -58,7 +58,7 @@ Scan 使用 SYN 扫描技术进行端口扫描，它不必打开一个完整的T
 
 Example:
 ```
-res, err := synscan.Scan("127.0.0.1", "1-65535") //
+res, err := synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;) //
 die(err)
 
 	for result := range res {
@@ -101,9 +101,9 @@ ScanFromPing 对使用 ping.Scan 探测出的存活结果进行端口扫描，�
 
 Example:
 ```
-pingResult, err = ping.Scan("192.168.1.1/24") // 先进行存活探测
+pingResult, err = ping.Scan(&#34;192.168.1.1/24&#34;) // 先进行存活探测
 die(err)
-res, err = synscan.ScanFromPing(pingResult, "1-65535") // 对存活结果进行端口扫描
+res, err = synscan.ScanFromPing(pingResult, &#34;1-65535&#34;) // 对存活结果进行端口扫描
 die(err)
 
 	for r := range res {
@@ -142,7 +142,7 @@ callback syn scan 的配置选项，设置一个回调函数，每发现一个�
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
 	synscan.callback(func(i){
 	   db.SavePortFromResult(i) // 将结果保存到数据库
@@ -179,7 +179,7 @@ concurrent syn scan 的配置选项，设置 syn 扫描的并发数
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
 	synscan.concurrent(1000) // 并发 1000
 
@@ -214,9 +214,9 @@ excludeHosts syn scan 的配置选项，设置本次扫描排除的主机
 
 Example:
 ```
-res, err = synscan.Scan("192.168.1.1/24", "1-65535",
+res, err = synscan.Scan(&#34;192.168.1.1/24&#34;, &#34;1-65535&#34;,
 
-	synscan.excludeHosts("192.168.1.1,192.168.1.3-10,192.168.1.1/26")
+	synscan.excludeHosts(&#34;192.168.1.1,192.168.1.3-10,192.168.1.1/26&#34;)
 
 )
 die(err)
@@ -249,9 +249,9 @@ excludePorts syn scan 的配置选项，设置本次扫描排除的端口
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
-	synscan.excludePorts("1-100,200-300") // 排除 1-100 和 200-300 端口
+	synscan.excludePorts(&#34;1-100,200-300&#34;) // 排除 1-100 和 200-300 端口
 
 )
 die(err)
@@ -284,9 +284,9 @@ iface syn scan 的配置选项，设置 syn 扫描的网卡
 
 Example:
 ```
-res, err = synscan.Scan("192.168.1.1/24", "1-65535",
+res, err = synscan.Scan(&#34;192.168.1.1/24&#34;, &#34;1-65535&#34;,
 
-	synscan.iface("eth0") // 使用 eth0 网卡
+	synscan.iface(&#34;eth0&#34;) // 使用 eth0 网卡
 
 )
 die(err)
@@ -319,9 +319,9 @@ initHostFilter syn scan 的配置选项，设置本次扫描的初始主机过�
 
 Example:
 ```
-res, err = synscan.Scan("192.168.1.1/24", "1-65535",
+res, err = synscan.Scan(&#34;192.168.1.1/24&#34;, &#34;1-65535&#34;,
 
-	synscan.initHostFilter("192.168.1.1,192.168.1.2")
+	synscan.initHostFilter(&#34;192.168.1.1,192.168.1.2&#34;)
 
 )
 die(err)
@@ -354,9 +354,9 @@ initPortFilter syn scan 的配置选项，设置本次扫描的初始端口过�
 
 Example:
 ```
-res, err = synscan.Scan("192.168.3.1", "1-65535",
+res, err = synscan.Scan(&#34;192.168.3.1&#34;, &#34;1-65535&#34;,
 
-	synscan.initPortFilter("1-100,200-300")
+	synscan.initPortFilter(&#34;1-100,200-300&#34;)
 
 )
 die(err)
@@ -389,9 +389,9 @@ outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
-	synscan.outputFile("/tmp/open_ports.txt")
+	synscan.outputFile(&#34;/tmp/open_ports.txt&#34;)
 
 )
 die(err)
@@ -424,10 +424,10 @@ outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件�
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
-	 synscan.outputFile("./open_ports.txt"),
-		synscan.outputPrefix("tcp://")
+	 synscan.outputFile(&#34;./open_ports.txt&#34;),
+		synscan.outputPrefix(&#34;tcp://&#34;)
 
 )
 die(err)
@@ -462,7 +462,7 @@ rateLimit syn scan 的配置选项，设置 syn 扫描的速率
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
 	synscan.rateLimit(1, 2000) // 每隔 2000 个数据包延迟 1 毫秒
 
@@ -498,7 +498,7 @@ submitTaskCallback syn scan 的配置选项，设置一个回调函数，每提�
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
 	synscan.submitTaskCallback(func(i){
 	   println(i) // 打印要探测的目标
@@ -535,7 +535,7 @@ wait syn scan 的配置选项，设置等待对端的反应时间
 
 Example:
 ```
-res, err = synscan.Scan("127.0.0.1", "1-65535",
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
 
 	synscan.wait(5) // 等待 5 秒
 

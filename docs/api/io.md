@@ -3,7 +3,7 @@
 |实例名|实例描述|
 |:------|:--------|
 Discard|(io.discard) io.discard{}|
-EOF|(errors.errorString) &errors.errorString{s: "EOF"}|
+EOF|(errors.errorString) &amp;errors.errorString{s: &#34;EOF&#34;}|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
@@ -171,7 +171,7 @@ r, w, err = os.Pipe()
 die(err)
 
 	go func {
-	    w.WriteString("hello yak")
+	    w.WriteString(&#34;hello yak&#34;)
 	    w.Close()
 	}
 
@@ -231,7 +231,7 @@ r, w, err = io.Pipe() // 创建一个管道，返回一个读取端和一个写�
 die(err)
 go func{
 for {
-w.WriteString("hello yak\n")
+w.WriteString(&#34;hello yak\n&#34;)
 time.Sleep(1)
 }
 }
@@ -261,8 +261,8 @@ ReadFile 读取指定文件中的所有内容，返回读取到的数据和错�
 
 Example:
 ```
-// 假设存在文件 /tmp/test.txt，内容为 "hello yak"
-data, err = ioutil.ReadFile("/tmp/test.txt") // data = b"hello yak", err = nil
+// 假设存在文件 /tmp/test.txt，内容为 &#34;hello yak&#34;
+data, err = ioutil.ReadFile(&#34;/tmp/test.txt&#34;) // data = b&#34;hello yak&#34;, err = nil
 ```
 
 
@@ -347,7 +347,7 @@ WriteString 将字符串 s 写入 writer 中，返回写入的字节数和错误
 
 Example:
 ```
-n, err = io.WriteString(writer, "hello yak")
+n, err = io.WriteString(writer, &#34;hello yak&#34;)
 ```
 
 

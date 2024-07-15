@@ -30,7 +30,7 @@ Bridge 与 Start 类似，但略有不同，Bridge可以指定下游代理服务
 
 Example:
 ```
-mitm.Bridge(8080, "", mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req); http.dump(rsp)  })) // 启动一个中间人代理服务器，并将请求和响应打印到标准输出
+mitm.Bridge(8080, &#34;&#34;, mitm.host(&#34;127.0.0.1&#34;), mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req); http.dump(rsp)  })) // 启动一个中间人代理服务器，并将请求和响应打印到标准输出
 ```
 
 
@@ -60,7 +60,7 @@ Start 启动一个 MITM (中间人)代理服务器，它的第一个参数是端
 
 Example:
 ```
-mitm.Start(8080, mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req); http.dump(rsp)  })) // 启动一个中间人代理服务器，并将请求和响应打印到标准输出
+mitm.Start(8080, mitm.host(&#34;127.0.0.1&#34;), mitm.callback(func(isHttps, urlStr, req, rsp) { http.dump(req); http.dump(rsp)  })) // 启动一个中间人代理服务器，并将请求和响应打印到标准输出
 ```
 
 
@@ -143,7 +143,7 @@ Example:
 ```
 mitm.Start(8080, mitm.hijackHTTPRequest(func(isHttps, urlStr, req, modified, dropped) {
 // 添加一个额外的请求头
-req = poc.ReplaceHTTPPacketHeader(req, "AAA", "BBB")
+req = poc.ReplaceHTTPPacketHeader(req, &#34;AAA&#34;, &#34;BBB&#34;)
 modified(req)
 }
 ))
@@ -176,7 +176,7 @@ Example:
 ```
 mitm.Start(8080, mitm.hijackHTTPResponse(func(isHttps, urlStr, rsp, modified, dropped) {
 // 修改响应体为hijacked
-rsp = poc.ReplaceBody(rsp, b"hijacked", false)
+rsp = poc.ReplaceBody(rsp, b&#34;hijacked&#34;, false)
 modified(rsp)
 }
 ))
@@ -211,7 +211,7 @@ Example:
 ```
 mitm.Start(8080, mitm.hijackHTTPResponseEx(func(isHttps, urlStr, req, rsp, modified, dropped) {
 // 修改响应体为hijacked
-rsp = poc.ReplaceBody(rsp, b"hijacked", false)
+rsp = poc.ReplaceBody(rsp, b&#34;hijacked&#34;, false)
 modified(rsp)
 }
 ))
@@ -240,7 +240,7 @@ host 是一个选项函数，用于指定中间人代理服务器的监听地址
 
 Example:
 ```
-mitm.Start(8080, mitm.host("127.0.0.1"))
+mitm.Start(8080, mitm.host(&#34;127.0.0.1&#34;))
 ```
 
 

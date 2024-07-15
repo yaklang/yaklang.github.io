@@ -21,7 +21,7 @@ CPUAverage 获取当前系统的 CPU 使用率平均值
 
 Example:
 ```
-printf("%f%%\n", hids.CPUAverage())
+printf(&#34;%f%%\n&#34;, hids.CPUAverage())
 ```
 
 
@@ -44,7 +44,7 @@ Example:
 ```
 hids.Init()
 hids.CPUAverageCallback(func(i) {
-if (i > 50) { println("cpu average precent is over 50%") } // 当 CPU 使用率平均值超过50%时输出信息
+if (i &gt; 50) { println(&#34;cpu average precent is over 50%&#34;) } // 当 CPU 使用率平均值超过50%时输出信息
 })
 ```
 
@@ -66,7 +66,7 @@ CPUPercent 获取当前系统的 CPU 使用率
 
 Example:
 ```
-printf("%f%%\n", hids.CPUPercent())
+printf(&#34;%f%%\n&#34;, hids.CPUPercent())
 ```
 
 
@@ -89,7 +89,7 @@ Example:
 ```
 hids.Init()
 hids.CPUPercentCallback(func(i) {
-if (i > 50) { println("cpu precent is over 50%") } // 当 CPU 使用率超过50%时输出信息
+if (i &gt; 50) { println(&#34;cpu precent is over 50%&#34;) } // 当 CPU 使用率超过50%时输出信息
 })
 ```
 
@@ -127,7 +127,7 @@ MemoryPercent 获取当前系统的内存使用率
 
 Example:
 ```
-printf("%f%%\n", hids.MemoryPercent())
+printf(&#34;%f%%\n&#34;, hids.MemoryPercent())
 ```
 
 
@@ -150,7 +150,7 @@ Example:
 ```
 hids.Init()
 hids.MemoryPercentCallback(func(i) {
-if (i > 50) { println("memory precent is over 50%") } // 当内存使用率超过50%时输出信息
+if (i &gt; 50) { println(&#34;memory precent is over 50%&#34;) } // 当内存使用率超过50%时输出信息
 })
 ```
 

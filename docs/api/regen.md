@@ -31,7 +31,7 @@ Generate 根据正则表达式生成所有匹配的字符串，返回生成的�
 
 Example:
 ```
-regen.Generate("[a-z]+") // a-z 单个字母，aa-zz 两个字母
+regen.Generate(&#34;[a-z]+&#34;) // a-z 单个字母，aa-zz 两个字母
 ```
 
 
@@ -58,8 +58,8 @@ GenerateOne 根据正则表达式生成一个匹配的字符串，返回生成�
 
 Example:
 ```
-regen.GenerateOne("[a-z]") // a-z 中随机一个字母
-regen.GenerateOne("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.GenerateOne(&#34;[a-z]&#34;) // a-z 中随机一个字母
+regen.GenerateOne(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 
@@ -96,8 +96,8 @@ GenerateStream 根据正则表达式流式生成一个匹配的字符串，返�
 
 Example:
 ```
-regen.GenerateOneStream("[a-z]+") // a-z 中随机一个字母
-regen.GenerateOneStream("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.GenerateOneStream(&#34;[a-z]+&#34;) // a-z 中随机一个字母
+regen.GenerateOneStream(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 
@@ -135,7 +135,7 @@ GenerateStream 根据正则表达式流式生成所有匹配的字符串，返�
 
 Example:
 ```
-ch, cancel, err = regen.GenerateStream("[a-z]+")
+ch, cancel, err = regen.GenerateStream(&#34;[a-z]+&#34;)
 for s = range ch {
 println(s)
 }
@@ -167,8 +167,8 @@ GenerateVisibleOne 根据正则表达式生成一个匹配的字符串(都是可
 
 Example:
 ```
-regen.GenerateVisibleOne("[a-z]") // a-z 中随机一个字母
-regen.GenerateVisibleOne("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.GenerateVisibleOne(&#34;[a-z]&#34;) // a-z 中随机一个字母
+regen.GenerateVisibleOne(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 
@@ -205,8 +205,8 @@ GenerateVisibleOneStream 根据正则表达式流式生成一个匹配的字符�
 
 Example:
 ```
-regen.GenerateVisibleOneStream("[a-z]") // a-z 中随机一个字母
-regen.GenerateVisibleOneStream("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.GenerateVisibleOneStream(&#34;[a-z]&#34;) // a-z 中随机一个字母
+regen.GenerateVisibleOneStream(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 
@@ -244,7 +244,7 @@ MustGenerate 根据正则表达式生成所有匹配的字符串，如果生成�
 
 Example:
 ```
-regen.MustGenerate("[a-z]+") // a-z 单个字母，aa-zz 两个字母
+regen.MustGenerate(&#34;[a-z]+&#34;) // a-z 单个字母，aa-zz 两个字母
 ```
 
 
@@ -270,8 +270,8 @@ MustGenerateOne 根据正则表达式生成一个匹配的字符串，如果生�
 
 Example:
 ```
-regen.MustGenerateOne("[a-z]") // a-z 中随机一个字母
-regen.MustGenerateOne("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.MustGenerateOne(&#34;[a-z]&#34;) // a-z 中随机一个字母
+regen.MustGenerateOne(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 
@@ -297,8 +297,8 @@ MustGenerateVisibleOne 根据正则表达式生成一个匹配的字符串(都�
 
 Example:
 ```
-regen.MustGenerateVisibleOne("[a-z]") // a-z 中随机一个字母
-regen.MustGenerateVisibleOne("^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$") // 生成一个手机号
+regen.MustGenerateVisibleOne(&#34;[a-z]&#34;) // a-z 中随机一个字母
+regen.MustGenerateVisibleOne(&#34;^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$&#34;) // 生成一个手机号
 ```
 
 

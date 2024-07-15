@@ -2,12 +2,12 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Ln10|(float64) 2.302585|
-SqrtE|(float64) 1.648721|
-Pi|(float64) 3.141593|
 E|(float64) 2.718282|
+Ln10|(float64) 2.302585|
 Ln2|(float64) 0.693147|
+Pi|(float64) 3.141593|
 Sqrt2|(float64) 1.414214|
+SqrtE|(float64) 1.648721|
 SqrtPi|(float64) 1.772454|
 
 |函数名|函数描述/介绍|
@@ -27,7 +27,7 @@ SqrtPi|(float64) 1.772454|
 | [math.RoundToEven](#roundtoeven) |RoundToEven 返回四舍五入到最近的偶整数  |
 | [math.Sin](#sin) |Sin 三角函数 sin |
 | [math.Sinh](#sinh) |Sinh 双曲正弦函数 |
-| [math.Sqrt](#sqrt) |Sqrt 返回一个数的平方根  如果x &lt; 0，返回NaN  |
+| [math.Sqrt](#sqrt) |Sqrt 返回一个数的平方根  如果x &amp;lt; 0，返回NaN  |
 | [math.Tan](#tan) |Tan 三角函数 Tan |
 
 
@@ -405,7 +405,7 @@ Sinh 双曲正弦函数
 #### 详细描述
 Sqrt 返回一个数的平方根
 
-如果x &lt; 0，返回NaN
+如果x &amp;lt; 0，返回NaN
 
 Example:
 ```

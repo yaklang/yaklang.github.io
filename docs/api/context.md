@@ -110,7 +110,7 @@ WithDeadline 返回继承自 parent 的 Context 接口（即上下文接口）�
 
 Example:
 ```
-dur, err = time.ParseDuration("10s")
+dur, err = time.ParseDuration(&#34;10s&#34;)
 after = time.Now().Add(dur)
 ctx, cancel := context.WithDeadline(context.Background(), after)
 defer cancel()
@@ -143,7 +143,7 @@ WithTimeout 返回继承自 parent 的 Context 接口（即上下文接口）和
 
 Example:
 ```
-dur, err = time.ParseDuration("10s")
+dur, err = time.ParseDuration(&#34;10s&#34;)
 ctx, cancel := context.WithTimeout(context.Background(), dur)
 defer cancel()
 ```
@@ -201,8 +201,8 @@ WithValue 返回继承自 parent ，同时额外携带键值的 Context 接口�
 
 Example:
 ```
-ctx = context.WithValue(context.Background(), "key", "value")
-ctx.Value("key") // "value"
+ctx = context.WithValue(context.Background(), &#34;key&#34;, &#34;value&#34;)
+ctx.Value(&#34;key&#34;) // &#34;value&#34;
 ```
 
 

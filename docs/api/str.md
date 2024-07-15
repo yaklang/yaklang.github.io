@@ -8,13 +8,13 @@
 | [str.CalcSimHashStability](#calcsimhashstability) |CalcSimHashStability 使用 SimHash 算法计算多段文本之间的相似度，返回相似度与错误。  |
 | [str.CalcSimilarity](#calcsimilarity) |CalcSimilarity 计算多段文本之间的相似度，根据最长的文本长度选择不同的算法  如果最长的文本长度小于等于 2000，使用文本子串匹配算法  如果最短的文本长度大于等于 30000，使用模糊哈希算法  如果上述算法出现错误，则使用 SimHash 算法  |
 | [str.CalcTextMaxSubStrStability](#calctextmaxsubstrstability) |CalcTextMaxSubStrStability 使用文本子串匹配算法计算多段文本之间的相似度，返回相似度与错误  |
-| [str.Compare](#compare) |Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&lt;b，则返回-1，如果a&gt;b，则返回1  |
+| [str.Compare](#compare) |Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&amp;lt;b，则返回-1，如果a&amp;gt;b，则返回1  |
 | [str.Contains](#contains) |Contains 判断字符串s是否包含substr  |
 | [str.ContainsAny](#containsany) |ContainsAny 判断字符串s是否包含chars中的任意字符  |
 | [str.Count](#count) |Count 返回字符串s中substr出现的次数  |
 | [str.Cut](#cut) |Cut slices s around the first instance of sep, returning the text before and after sep. The found result reports whether sep appears in s. If sep does...|
-| [str.CutPrefix](#cutprefix) |CutPrefix returns s without the provided leading prefix string and reports whether it found the prefix. If s doesn't start with prefix, CutPrefix retu...|
-| [str.CutSuffix](#cutsuffix) |CutSuffix returns s without the provided ending suffix string and reports whether it found the suffix. If s doesn't end with suffix, CutSuffix returns...|
+| [str.CutPrefix](#cutprefix) |CutPrefix returns s without the provided leading prefix string and reports whether it found the prefix. If s doesn&amp;#39;t start with prefix, CutPrefix ...|
+| [str.CutSuffix](#cutsuffix) |CutSuffix returns s without the provided ending suffix string and reports whether it found the suffix. If s doesn&amp;#39;t end with suffix, CutSuffix ret...|
 | [str.EndsWith](#endswith) |EndsWith / HasSuffix 判断字符串s是否以suffix结尾  |
 | [str.EqualFold](#equalfold) |EqualFold 判断字符串s和t是否相等，忽略大小写  |
 | [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) |ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body  |
@@ -29,7 +29,7 @@
 | [str.ExtractTitle](#extracttitle) |ExtractTitle 尝试将传入的字符串进行HTML解析并提取其中的标题(title标签)返回  |
 | [str.ExtractURLFromHTTPRequest](#extracturlfromhttprequest) |ExtractURLFromHTTPRequest 从 HTTP 请求结构体中提取 URL，返回URL结构体与错误  |
 | [str.ExtractURLFromHTTPRequestRaw](#extracturlfromhttprequestraw) |ExtractURLFromHTTPRequestRaw 从原始 HTTP 请求报文中提取 URL，返回URL结构体与错误  |
-| [str.Fields](#fields) |Fields 返回将字符串s按照空白字符（'\t', '\n', '\v', '\f', '\r', ' ', 0x85, 0xA0）分割的字符串切片  |
+| [str.Fields](#fields) |Fields 返回将字符串s按照空白字符（&amp;#39;\t&amp;#39;, &amp;#39;\n&amp;#39;, &amp;#39;\v&amp;#39;, &amp;#39;\f&amp;#39;, &amp;#39;\r&amp;#39;, &amp;#39; &amp;#39;, 0x85, 0xA0）分割的字符串切片  |
 | [str.FilterPorts](#filterports) |FilterPorts 接受两个字符串形式的端口列表作为参数，返回一个新的端口列表，  其中包含了在 `ports1` 中但不在 `ports2` 中的所有端口。  这个函数首先将两个输入字符串解析为端口列表，然后创建一个映射（或集合）来存储 `ports2` 中的所有端口。  然后，它遍历 `po...|
 | [str.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复后的请求  |
 | [str.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响应，响应体和错误  |
@@ -142,7 +142,7 @@
 | [str.TrimSpace](#trimspace) |TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串  |
 | [str.TrimSuffix](#trimsuffix) |TrimSuffix 返回将字符串s后缀suffix去掉的字符串  |
 | [str.UrlJoin](#urljoin) |UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL 字符串，并返回错误  |
-| [str.VersionCompare](#versioncompare) |VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&gt;p2返回1,nil, p1&lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err |
+| [str.VersionCompare](#versioncompare) |VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&amp;gt;p2返回1,nil, p1&amp;lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err |
 | [str.VersionEqual](#versionequal) |VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 等于 v2 返回 true，否则返回 false  |
 | [str.VersionGreater](#versiongreater) |VersionGreater 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于 v2 返回 true，否则返回 false  |
 | [str.VersionGreaterEqual](#versiongreaterequal) |VersionGreaterEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 大于等于 v2 返回 true，否则返回 false  |
@@ -159,7 +159,7 @@ CalcSSDeep 计算并返回一段文本的模糊哈希值
 
 Example:
 ```
-str.CalcSSDeep("hello")
+str.CalcSSDeep(&#34;hello&#34;)
 ```
 
 
@@ -212,7 +212,7 @@ CalcSimHash 计算并返回一段文本的 SimHash 值
 
 Example:
 ```
-str.CalcSimHash("hello")
+str.CalcSimHash(&#34;hello&#34;)
 ```
 
 
@@ -238,7 +238,7 @@ CalcSimHashStability 使用 SimHash 算法计算多段文本之间的相似度�
 
 Example:
 ```
-p, err = str.CalcSimHashStability("hello", "hello world") // p = 0.96484375
+p, err = str.CalcSimHashStability(&#34;hello&#34;, &#34;hello world&#34;) // p = 0.96484375
 ```
 
 
@@ -271,7 +271,7 @@ CalcSimilarity 计算多段文本之间的相似度，根据最长的文本长�
 
 Example:
 ```
-str.CalcSimilarity("hello", "hello world") // 0.625
+str.CalcSimilarity(&#34;hello&#34;, &#34;hello world&#34;) // 0.625
 ```
 
 
@@ -297,7 +297,7 @@ CalcTextMaxSubStrStability 使用文本子串匹配算法计算多段文本之�
 
 Example:
 ```
-p, err = str.CalcTextMaxSubStrStability("hello", "hello world") // p = 0.625
+p, err = str.CalcTextMaxSubStrStability(&#34;hello&#34;, &#34;hello world&#34;) // p = 0.625
 ```
 
 
@@ -320,13 +320,13 @@ p, err = str.CalcTextMaxSubStrStability("hello", "hello world") // p = 0.625
 ### Compare
 
 #### 详细描述
-Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&lt;b，则返回-1，如果a&gt;b，则返回1
+Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&amp;lt;b，则返回-1，如果a&amp;gt;b，则返回1
 
 Example:
 ```
-str.Compare("hello yak", "hello yak") // 0
-str.Compare("hello yak", "hello") // 1
-str.Compare("hello", "hello yak") // -1
+str.Compare(&#34;hello yak&#34;, &#34;hello yak&#34;) // 0
+str.Compare(&#34;hello yak&#34;, &#34;hello&#34;) // 1
+str.Compare(&#34;hello&#34;, &#34;hello yak&#34;) // -1
 ```
 
 
@@ -353,7 +353,7 @@ Contains 判断字符串s是否包含substr
 
 Example:
 ```
-str.Contains("hello yakit", "yak") // true
+str.Contains(&#34;hello yakit&#34;, &#34;yak&#34;) // true
 ```
 
 
@@ -380,8 +380,8 @@ ContainsAny 判断字符串s是否包含chars中的任意字符
 
 Example:
 ```
-str.ContainsAny("hello yak", "ly") // true
-str.ContainsAny("hello yak", "m") // false
+str.ContainsAny(&#34;hello yak&#34;, &#34;ly&#34;) // true
+str.ContainsAny(&#34;hello yak&#34;, &#34;m&#34;) // false
 ```
 
 
@@ -408,7 +408,7 @@ Count 返回字符串s中substr出现的次数
 
 Example:
 ```
-str.Count("hello yak", "l") // 2
+str.Count(&#34;hello yak&#34;, &#34;l&#34;) // 2
 ```
 
 
@@ -434,7 +434,7 @@ str.Count("hello yak", "l") // 2
 Cut slices s around the first instance of sep,
 returning the text before and after sep.
 The found result reports whether sep appears in s.
-If sep does not appear in s, cut returns s, "", false.
+If sep does not appear in s, cut returns s, &amp;#34;&amp;#34;, false.
 
 
 #### 定义
@@ -460,7 +460,7 @@ If sep does not appear in s, cut returns s, "", false.
 #### 详细描述
 CutPrefix returns s without the provided leading prefix string
 and reports whether it found the prefix.
-If s doesn't start with prefix, CutPrefix returns s, false.
+If s doesn&amp;#39;t start with prefix, CutPrefix returns s, false.
 If prefix is the empty string, CutPrefix returns s, true.
 
 
@@ -486,7 +486,7 @@ If prefix is the empty string, CutPrefix returns s, true.
 #### 详细描述
 CutSuffix returns s without the provided ending suffix string
 and reports whether it found the suffix.
-If s doesn't end with suffix, CutSuffix returns s, false.
+If s doesn&amp;#39;t end with suffix, CutSuffix returns s, false.
 If suffix is the empty string, CutSuffix returns s, true.
 
 
@@ -514,8 +514,8 @@ EndsWith / HasSuffix 判断字符串s是否以suffix结尾
 
 Example:
 ```
-str.EndsWith("Hello Yak", "Yak") // true
-str.EndsWith("Hello Yak", "Hello") // false
+str.EndsWith(&#34;Hello Yak&#34;, &#34;Yak&#34;) // true
+str.EndsWith(&#34;Hello Yak&#34;, &#34;Hello&#34;) // false
 ```
 
 
@@ -542,7 +542,7 @@ EqualFold 判断字符串s和t是否相等，忽略大小写
 
 Example:
 ```
-str.EqualFold("hello Yak", "HELLO YAK") // true
+str.EqualFold(&#34;hello Yak&#34;, &#34;HELLO YAK&#34;) // true
 ```
 
 
@@ -569,7 +569,7 @@ ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body
 
 Example:
 ```
-body, err = str.ExtractBodyFromHTTPResponseRaw(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok") // body = b"ok"
+body, err = str.ExtractBodyFromHTTPResponseRaw(b&#34;HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok&#34;) // body = b&#34;ok&#34;
 ```
 
 
@@ -596,7 +596,7 @@ ExtractChineseIDCards 尝试将传入的参数转换为字符串，然后提取�
 
 Example:
 ```
-str.ExtractChineseIDCards("Your ChineseID is: 110101202008027420?") // ["110101202008027420"]
+str.ExtractChineseIDCards(&#34;Your ChineseID is: 110101202008027420?&#34;) // [&#34;110101202008027420&#34;]
 ```
 
 
@@ -622,8 +622,8 @@ ExtractDomain 尝试提取字符串中的域名并返回
 
 Example:
 ```
-str.ExtractDomain("hello yak") // []
-str.ExtractDomain("hello yaklang.com or yaklang.io") // ["yaklang.com", "yaklang.io"]
+str.ExtractDomain(&#34;hello yak&#34;) // []
+str.ExtractDomain(&#34;hello yaklang.com or yaklang.io&#34;) // [&#34;yaklang.com&#34;, &#34;yaklang.io&#34;]
 ```
 
 
@@ -649,8 +649,8 @@ ExtractHost 尝试从字符串中解析出host和port，并返回host
 
 Example:
 ```
-str.ExtractHost("127.0.0.1:8888") // 127.0.0.1
-str.ExtractHost("https://example.com") // example.com
+str.ExtractHost(&#34;127.0.0.1:8888&#34;) // 127.0.0.1
+str.ExtractHost(&#34;https://example.com&#34;) // example.com
 ```
 
 
@@ -676,8 +676,8 @@ ExtractHostPort 尝试从字符串中解析出host和port，并返回host:port
 
 Example:
 ```
-str.ExtractHostPort("https://127.0.0.1:8888") // 127.0.0.1:8888
-str.ExtractHostPort("https://baidu.com") // 127.0.0.1:443
+str.ExtractHostPort(&#34;https://127.0.0.1:8888&#34;) // 127.0.0.1:8888
+str.ExtractHostPort(&#34;https://baidu.com&#34;) // 127.0.0.1:443
 ```
 
 
@@ -703,8 +703,8 @@ ExtractJson 尝试提取字符串中的 JSON 并进行修复返回
 
 Example:
 ```
-str.ExtractJson("hello yak") // []
-str.ExtractJson(`{"hello": "yak"}`) // [{"hello": "yak"}]
+str.ExtractJson(&#34;hello yak&#34;) // []
+str.ExtractJson(`{&#34;hello&#34;: &#34;yak&#34;}`) // [{&#34;hello&#34;: &#34;yak&#34;}]
 ```
 
 
@@ -730,8 +730,8 @@ ExtractJsonWithRaw 尝试提取字符串中的 JSON 并返回，第一个返回�
 
 Example:
 ```
-str.ExtractJsonWithRaw("hello yak") // [], []
-str.ExtractJsonWithRaw(`{"hello": "yak"}`) // [{"hello": "yak"}], []
+str.ExtractJsonWithRaw(&#34;hello yak&#34;) // [], []
+str.ExtractJsonWithRaw(`{&#34;hello&#34;: &#34;yak&#34;}`) // [{&#34;hello&#34;: &#34;yak&#34;}], []
 ```
 
 
@@ -758,8 +758,8 @@ ExtractRootDomain 尝试提取字符串中的根域名并返回
 
 Example:
 ```
-str.ExtractRootDomain("hello yak") // []
-str.ExtractRootDomain("hello www.yaklang.com or www.yaklang.io") // ["yaklang.com", "yaklang.io"]
+str.ExtractRootDomain(&#34;hello yak&#34;) // []
+str.ExtractRootDomain(&#34;hello www.yaklang.com or www.yaklang.io&#34;) // [&#34;yaklang.com&#34;, &#34;yaklang.io&#34;]
 ```
 
 
@@ -785,7 +785,7 @@ ExtractStrContext 从字符串raw中提取一组关键字res上下文的内容�
 
 Example:
 ```
-str.ExtractStrContext("hello yak", ["hello"]) // ["hello yak"]
+str.ExtractStrContext(&#34;hello yak&#34;, [&#34;hello&#34;]) // [&#34;hello yak&#34;]
 ```
 
 
@@ -812,8 +812,8 @@ ExtractTitle 尝试将传入的字符串进行HTML解析并提取其中的标题
 
 Example:
 ```
-str.ExtractTitle("hello yak") // ""
-str.ExtractTitle("<title>hello yak</title>") // "hello yak"
+str.ExtractTitle(&#34;hello yak&#34;) // &#34;&#34;
+str.ExtractTitle(&#34;&lt;title&gt;hello yak&lt;/title&gt;&#34;) // &#34;hello yak&#34;
 ```
 
 
@@ -839,7 +839,7 @@ ExtractURLFromHTTPRequest 从 HTTP 请求结构体中提取 URL，返回URL结�
 
 Example:
 ```
-v, err = http.Raw("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
+v, err = http.Raw(&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;)
 url, err = str.ExtractURLFromHTTPRequest(v, false)
 ```
 
@@ -868,7 +868,7 @@ ExtractURLFromHTTPRequestRaw 从原始 HTTP 请求报文中提取 URL，返回UR
 
 Example:
 ```
-url, err := str.ExtractURLFromHTTPRequestRaw(b"GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", false)
+url, err := str.ExtractURLFromHTTPRequestRaw(b&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;, false)
 ```
 
 
@@ -892,11 +892,11 @@ url, err := str.ExtractURLFromHTTPRequestRaw(b"GET / HTTP/1.1\r\nHost: www.yakla
 ### Fields
 
 #### 详细描述
-Fields 返回将字符串s按照空白字符（'\t', '\n', '\v', '\f', '\r', ' ', 0x85, 0xA0）分割的字符串切片
+Fields 返回将字符串s按照空白字符（&amp;#39;\t&amp;#39;, &amp;#39;\n&amp;#39;, &amp;#39;\v&amp;#39;, &amp;#39;\f&amp;#39;, &amp;#39;\r&amp;#39;, &amp;#39; &amp;#39;, 0x85, 0xA0）分割的字符串切片
 
 Example:
 ```
-str.Fields("hello world\nhello yak\tand\vyakit") // [hello", "world", "hello", "yak", "and", "yakit"]
+str.Fields(&#34;hello world\nhello yak\tand\vyakit&#34;) // [hello&#34;, &#34;world&#34;, &#34;hello&#34;, &#34;yak&#34;, &#34;and&#34;, &#34;yakit&#34;]
 ```
 
 
@@ -930,7 +930,7 @@ FilterPorts 接受两个字符串形式的端口列表作为参数，返回一�
 
 Example:
 ```
-FilterPorts("1-10", "2-10") // [1]
+FilterPorts(&#34;1-10&#34;, &#34;2-10&#34;) // [1]
 ```
 
 
@@ -957,7 +957,7 @@ FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复�
 
 Example:
 ```
-str.FixHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+str.FixHTTPRequest(b&#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
 ```
 
 
@@ -983,7 +983,7 @@ FixHTTPResponse 尝试对传入的响应进行修复，并返回修复后的响�
 
 Example:
 ```
-fixedResponse, body, err = str.FixHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=gbk\r\n\r\n<html>你好</html>")
+fixedResponse, body, err = str.FixHTTPResponse(b&#34;HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=gbk\r\n\r\n&lt;html&gt;你好&lt;/html&gt;&#34;)
 ```
 
 
@@ -1011,7 +1011,7 @@ Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回
 
 Example:
 ```
-str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
+str.Grok(&#34;04/18-00:59:45.385191&#34;, &#34;%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}&#34;) // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
 ```
 
 
@@ -1038,8 +1038,8 @@ StartsWith / HasPrefix 判断字符串s是否以prefix开头
 
 Example:
 ```
-str.StartsWith("Hello Yak", "Hello") // true
-str.StartsWith("Hello Yak", "Yak") // false
+str.StartsWith(&#34;Hello Yak&#34;, &#34;Hello&#34;) // true
+str.StartsWith(&#34;Hello Yak&#34;, &#34;Yak&#34;) // false
 ```
 
 
@@ -1066,8 +1066,8 @@ EndsWith / HasSuffix 判断字符串s是否以suffix结尾
 
 Example:
 ```
-str.EndsWith("Hello Yak", "Yak") // true
-str.EndsWith("Hello Yak", "Hello") // false
+str.EndsWith(&#34;Hello Yak&#34;, &#34;Yak&#34;) // true
+str.EndsWith(&#34;Hello Yak&#34;, &#34;Hello&#34;) // false
 ```
 
 
@@ -1094,7 +1094,7 @@ HostPort 将 host 和 port 拼接成 host:port 的形式
 
 Example:
 ```
-str.HostPort("yaklang.com", 443) // yaklang.com:443
+str.HostPort(&#34;yaklang.com&#34;, 443) // yaklang.com:443
 ```
 
 
@@ -1121,7 +1121,7 @@ IPv4ToCClassNetwork 尝试从一个 IPv4 地址中获取 C 类网络地址，并
 
 Example:
 ```
-network, err = str.IPv4ToCClassNetwork("192.168.0.1") // network = "192.168.0.0/24", err = nil
+network, err = str.IPv4ToCClassNetwork(&#34;192.168.0.1&#34;) // network = &#34;192.168.0.0/24&#34;, err = nil
 ```
 
 
@@ -1148,8 +1148,8 @@ Index 返回字符串s中substr第一次出现的位置的索引，如果字符�
 
 Example:
 ```
-str.Index("hello yak", "yak") // 6
-str.Index("hello world", "yak") // -1
+str.Index(&#34;hello yak&#34;, &#34;yak&#34;) // 6
+str.Index(&#34;hello world&#34;, &#34;yak&#34;) // -1
 ```
 
 
@@ -1176,8 +1176,8 @@ IndexAny 返回字符串s中chars任意字符首次出现的位置的索引，�
 
 Example:
 ```
-str.IndexAny("Hello world", "world") // 2，因为l在第三个字符中首次出现
-str.IndexAny("Hello World", "Yak") // -1
+str.IndexAny(&#34;Hello world&#34;, &#34;world&#34;) // 2，因为l在第三个字符中首次出现
+str.IndexAny(&#34;Hello World&#34;, &#34;Yak&#34;) // -1
 ```
 
 
@@ -1204,8 +1204,8 @@ IndexByte 返回字符串s中第一个等于c的字符的索引，如果字符�
 
 Example:
 ```
-str.IndexByte("hello yak", 'y') // 6
-str.IndexByte("hello yak", 'm') // -1
+str.IndexByte(&#34;hello yak&#34;, &#39;y&#39;) // 6
+str.IndexByte(&#34;hello yak&#34;, &#39;m&#39;) // -1
 ```
 
 
@@ -1232,7 +1232,7 @@ Intersect / IntersectString 返回两个字符串切片之间的交集
 
 Example:
 ```
-str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+str.Intersect([&#34;1&#34;, &#34;2&#34;, &#34;3&#34;], [&#34;3&#34;, &#34;4&#34;, &#34;5&#34;]) // [&#34;3&#34;]
 ```
 
 
@@ -1259,7 +1259,7 @@ Intersect / IntersectString 返回两个字符串切片之间的交集
 
 Example:
 ```
-str.Intersect(["1", "2", "3"], ["3", "4", "5"]) // ["3"]
+str.Intersect([&#34;1&#34;, &#34;2&#34;, &#34;3&#34;], [&#34;3&#34;, &#34;4&#34;, &#34;5&#34;]) // [&#34;3&#34;]
 ```
 
 
@@ -1286,8 +1286,8 @@ IsAlphaNum / IsAlNum 尝试将传入的参数转换为字符串，然后判断�
 
 Example:
 ```
-str.IsAlphaNum("abc123") // true
-str.IsAlphaNum("abc123!") // false
+str.IsAlphaNum(&#34;abc123&#34;) // true
+str.IsAlphaNum(&#34;abc123!&#34;) // false
 ```
 
 
@@ -1313,8 +1313,8 @@ IsAlpha 尝试将传入的参数转换为字符串，然后判断其是否都由
 
 Example:
 ```
-str.IsAlpha("abc") // true
-str.IsAlpha("abc123") // false
+str.IsAlpha(&#34;abc&#34;) // true
+str.IsAlpha(&#34;abc123&#34;) // false
 ```
 
 
@@ -1340,8 +1340,8 @@ IsAlphaNum / IsAlNum 尝试将传入的参数转换为字符串，然后判断�
 
 Example:
 ```
-str.IsAlphaNum("abc123") // true
-str.IsAlphaNum("abc123!") // false
+str.IsAlphaNum(&#34;abc123&#34;) // true
+str.IsAlphaNum(&#34;abc123!&#34;) // false
 ```
 
 
@@ -1367,8 +1367,8 @@ IsBase64Value 尝试将传入的参数转换为字符串，然后猜测其是否
 
 Example:
 ```
-str.IsBase64Value("MTI=") // true
-str.IsBase64Value("123") // false
+str.IsBase64Value(&#34;MTI=&#34;) // true
+str.IsBase64Value(&#34;123&#34;) // false
 ```
 
 
@@ -1394,9 +1394,9 @@ IsCaptchaField 尝试将传入的参数转换为字符串，然后猜测其是�
 
 Example:
 ```
-str.IsCaptchaField("captcha") // true
-str.IsCaptchaField("code_img") // true
-str.IsCaptchaField("id") // false
+str.IsCaptchaField(&#34;captcha&#34;) // true
+str.IsCaptchaField(&#34;code_img&#34;) // true
+str.IsCaptchaField(&#34;id&#34;) // false
 ```
 
 
@@ -1422,8 +1422,8 @@ IsDigit 尝试将传入的参数转换为字符串，然后判断其是否都由
 
 Example:
 ```
-str.IsDigit("123") // true
-str.IsDigit("abc123") // false
+str.IsDigit(&#34;123&#34;) // true
+str.IsDigit(&#34;abc123&#34;) // false
 ```
 
 
@@ -1449,8 +1449,8 @@ IsHtmlResponse 猜测传入的参数是否为原始 HTTP 响应报文
 
 Example:
 ```
-str.IsHtmlResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html></html>") // true
-resp, _ = str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<html></html>")
+str.IsHtmlResponse(&#34;HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;&#34;) // true
+resp, _ = str.ParseStringToHTTPResponse(&#34;HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;&#34;)
 str.IsHtmlResponse(resp) // true
 ```
 
@@ -1498,8 +1498,8 @@ IsIPv4 判断字符串是否是 IPv4 地址
 
 Example:
 ```
-str.IsIPv4("::1") // false
-str.IsIPv4("127.0.0.1") // true
+str.IsIPv4(&#34;::1&#34;) // false
+str.IsIPv4(&#34;127.0.0.1&#34;) // true
 ```
 
 
@@ -1525,8 +1525,8 @@ IsIPv6 判断字符串是否是 IPv6 地址
 
 Example:
 ```
-str.IsIPv6("::1") // true
-str.IsIPv6("127.0.0.1") // false
+str.IsIPv6(&#34;::1&#34;) // true
+str.IsIPv6(&#34;127.0.0.1&#34;) // false
 ```
 
 
@@ -1552,9 +1552,9 @@ IsJSONPParam 根据传入的参数名和参数值猜测是否为 JSONP 参数
 
 Example:
 ```
-str.IsJSONPParam("callback","jquery1.0.min.js") // true，因为参数名为常见的 JSONP 参数名，且参数值为常见的JS文件名
-str.IsJSONPParam("f","jquery1.0.min.js") // true，因为参数值为常见的 JS 文件名
-str.IsJSONPParam("id","1") // false
+str.IsJSONPParam(&#34;callback&#34;,&#34;jquery1.0.min.js&#34;) // true，因为参数名为常见的 JSONP 参数名，且参数值为常见的JS文件名
+str.IsJSONPParam(&#34;f&#34;,&#34;jquery1.0.min.js&#34;) // true，因为参数值为常见的 JS 文件名
+str.IsJSONPParam(&#34;id&#34;,&#34;1&#34;) // false
 ```
 
 
@@ -1581,8 +1581,8 @@ IsJsonResponse 尝试将传入的参数转换为字符串，然后猜测传入�
 
 Example:
 ```
-str.IsJsonResponse("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\"code\": 0}") // true
-str.IsJsonResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\nhello") // false
+str.IsJsonResponse(&#34;HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n\r\n{\&#34;code\&#34;: 0}&#34;) // true
+str.IsJsonResponse(&#34;HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\nhello&#34;) // false
 ```
 
 
@@ -1608,8 +1608,8 @@ IsMD5Value 尝试将传入的参数转换为字符串，然后猜测其是否是
 
 Example:
 ```
-str.IsMD5Value("202cb962ac59075b964b07152d234b70") // true
-str.IsMD5Value("123") // false
+str.IsMD5Value(&#34;202cb962ac59075b964b07152d234b70&#34;) // true
+str.IsMD5Value(&#34;123&#34;) // false
 ```
 
 
@@ -1635,9 +1635,9 @@ IsPasswordField 尝试将传入的参数转换为字符串，然后猜测其是�
 
 Example:
 ```
-str.IsPasswordField("password") // true
-str.IsPasswordField("pwd") // true
-str.IsPasswordField("id") // false
+str.IsPasswordField(&#34;password&#34;) // true
+str.IsPasswordField(&#34;pwd&#34;) // true
+str.IsPasswordField(&#34;id&#34;) // false
 ```
 
 
@@ -1663,8 +1663,8 @@ IsPlainBase64Value 尝试将传入的参数转换为字符串，然后猜测其�
 
 Example:
 ```
-str.IsPlainBase64Value("MTI=") // true
-str.IsPlainBase64Value("Aw==") // false
+str.IsPlainBase64Value(&#34;MTI=&#34;) // true
+str.IsPlainBase64Value(&#34;Aw==&#34;) // false
 ```
 
 
@@ -1690,9 +1690,9 @@ IsRedirectParam 根据传入的参数名和参数值猜测是否为重定向参�
 
 Example:
 ```
-str.IsRedirectParam("to","http://www.yaklang.com") // true，因为参数值为完整的 URL
-str.IsRedirectParam("target","/index.php") // true，因为参数值为一个 URL 路径而且参数名为常见的跳转的参数名
-str.IsRedirectParam("id", "1") // false
+str.IsRedirectParam(&#34;to&#34;,&#34;http://www.yaklang.com&#34;) // true，因为参数值为完整的 URL
+str.IsRedirectParam(&#34;target&#34;,&#34;/index.php&#34;) // true，因为参数值为一个 URL 路径而且参数名为常见的跳转的参数名
+str.IsRedirectParam(&#34;id&#34;, &#34;1&#34;) // false
 ```
 
 
@@ -1719,9 +1719,9 @@ IsSQLColumnField 尝试将传入的参数转换为字符串，然后猜测其是
 
 Example:
 ```
-str.IsSQLColumnField("sort") // true
-str.IsSQLColumnField("order") // true
-str.IsSQLColumnField("id") // false
+str.IsSQLColumnField(&#34;sort&#34;) // true
+str.IsSQLColumnField(&#34;order&#34;) // true
+str.IsSQLColumnField(&#34;id&#34;) // false
 ```
 
 
@@ -1747,9 +1747,9 @@ IsSensitiveJson  尝试将传入的参数转换为字符串，然后猜测其是
 
 Example:
 ```
-str.IsSensitiveJson(`{"password":"123456"}`) // true
-str.IsSensitiveJson(`{"uid": 10086}`) // true
-str.IsSensitiveJson(`{"id": 1}`) // false
+str.IsSensitiveJson(`{&#34;password&#34;:&#34;123456&#34;}`) // true
+str.IsSensitiveJson(`{&#34;uid&#34;: 10086}`) // true
+str.IsSensitiveJson(`{&#34;id&#34;: 1}`) // false
 ```
 
 
@@ -1775,9 +1775,9 @@ IsSensitiveTokenField 尝试将传入的参数转换为字符串，然后猜测�
 
 Example:
 ```
-str.IsSensitiveTokenField("token") // true
-str.IsSensitiveTokenField("access_token") // true
-str.IsSensitiveTokenField("id") // false
+str.IsSensitiveTokenField(&#34;token&#34;) // true
+str.IsSensitiveTokenField(&#34;access_token&#34;) // true
+str.IsSensitiveTokenField(&#34;id&#34;) // false
 ```
 
 
@@ -1803,7 +1803,7 @@ IsServerError 猜测传入的参数是否为服务器错误
 
 Example:
 ```
-str.IsServerError(`Fatal error: Uncaught Error: Call to undefined function sum() in F:\xampp\htdocs\test.php:7 Stack trace: #0 {main} thrown in <path> on line 7`) // true，这是PHP报错信息
+str.IsServerError(`Fatal error: Uncaught Error: Call to undefined function sum() in F:\xampp\htdocs\test.php:7 Stack trace: #0 {main} thrown in &lt;path&gt; on line 7`) // true，这是PHP报错信息
 ```
 
 
@@ -1829,8 +1829,8 @@ IsSha256Value 尝试将传入的参数转换为字符串，然后猜测其是否
 
 Example:
 ```
-str.IsSha256Value("a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3") // true
-str.IsSha256Value("123") // false
+str.IsSha256Value(&#34;a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3&#34;) // true
+str.IsSha256Value(&#34;123&#34;) // false
 ```
 
 
@@ -1856,10 +1856,10 @@ IsStrongPassword 判断字符串是否为强密码，强密码的定义为：长
 
 Example:
 ```
-str.IsStrongPassword("12345678") // false
-str.IsStrongPassword("12345678a") // false
-str.IsStrongPassword("12345678aA") // false
-str.IsStrongPassword("12345678aA!") // true
+str.IsStrongPassword(&#34;12345678&#34;) // false
+str.IsStrongPassword(&#34;12345678a&#34;) // false
+str.IsStrongPassword(&#34;12345678aA&#34;) // false
+str.IsStrongPassword(&#34;12345678aA!&#34;) // true
 ```
 
 
@@ -1885,8 +1885,8 @@ IsTLSServer 尝试访问传入的host，然后判断其是否为 TLS 服务。�
 
 Example:
 ```
-str.IsTLSServer("www.yaklang.com:443") // true
-str.IsTLSServer("www.yaklang.com:80") // false
+str.IsTLSServer(&#34;www.yaklang.com:443&#34;) // true
+str.IsTLSServer(&#34;www.yaklang.com:80&#34;) // false
 ```
 
 
@@ -1913,8 +1913,8 @@ IsUrlParam 根据传入的参数名和参数值猜测是否为 URL 参数
 
 Example:
 ```
-str.IsUrlParam("url","http://www.yaklang.com") // true，因为参数名为常见的 URL 参数名，且参数值为完整的URL
-str.IsUrlParam("id","1") // false
+str.IsUrlParam(&#34;url&#34;,&#34;http://www.yaklang.com&#34;) // true，因为参数名为常见的 URL 参数名，且参数值为完整的URL
+str.IsUrlParam(&#34;id&#34;,&#34;1&#34;) // false
 ```
 
 
@@ -1962,9 +1962,9 @@ IsUsernameField 尝试将传入的参数转换为字符串，然后猜测其是�
 
 Example:
 ```
-str.IsUsernameField("username") // true
-str.IsUsernameField("user") // true
-str.IsUsernameField("id") // false
+str.IsUsernameField(&#34;username&#34;) // true
+str.IsUsernameField(&#34;user&#34;) // true
+str.IsUsernameField(&#34;id&#34;) // false
 ```
 
 
@@ -1990,9 +1990,9 @@ IsXmlParam 根据传入的参数名和参数值猜测是否为 XML 参数
 
 Example:
 ```
-str.IsXmlParam("xml","<xml></xml>") // true，因为参数名为常见的 XML 参数名，且参数值为 XML 格式的字符串
-str.IsXmlParam("X","<xml></xml>") // true，因为参数值为 XML 格式的字符串
-str.IsXmlParam("id","1") // false
+str.IsXmlParam(&#34;xml&#34;,&#34;&lt;xml&gt;&lt;/xml&gt;&#34;) // true，因为参数名为常见的 XML 参数名，且参数值为 XML 格式的字符串
+str.IsXmlParam(&#34;X&#34;,&#34;&lt;xml&gt;&lt;/xml&gt;&#34;) // true，因为参数值为 XML 格式的字符串
+str.IsXmlParam(&#34;id&#34;,&#34;1&#34;) // false
 ```
 
 
@@ -2019,8 +2019,8 @@ IsXmlRequest 猜测传入的参数是否为请求头是 XML 格式的原始 HTTP
 
 Example:
 ```
-str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: application/xml\r\n\r\n<xml></xml>") // true
-str.IsXmlRequest("POST / HTTP/1.1\r\nContent-Type: text/html\r\n\r\n<html></html>") // false
+str.IsXmlRequest(&#34;POST / HTTP/1.1\r\nContent-Type: application/xml\r\n\r\n&lt;xml&gt;&lt;/xml&gt;&#34;) // true
+str.IsXmlRequest(&#34;POST / HTTP/1.1\r\nContent-Type: text/html\r\n\r\n&lt;html&gt;&lt;/html&gt;&#34;) // false
 ```
 
 
@@ -2046,8 +2046,8 @@ IsXmlValue 尝试将传入的参数转换为字符串，然后猜测其是否是
 
 Example:
 ```
-str.IsXmlValue("<xml></xml>") // true
-str.IsXmlValue("<html></html>") // false
+str.IsXmlValue(&#34;&lt;xml&gt;&lt;/xml&gt;&#34;) // true
+str.IsXmlValue(&#34;&lt;html&gt;&lt;/html&gt;&#34;) // false
 ```
 
 
@@ -2073,8 +2073,8 @@ Join 将i中的元素用d连接，如果传入的参数不是字符串，会自�
 
 Example:
 ```
-str.Join([]string{"hello", "yak"}, " ") // hello yak
-str.Join([]int{1, 2, 3}, " ") // 1 2 3
+str.Join([]string{&#34;hello&#34;, &#34;yak&#34;}, &#34; &#34;) // hello yak
+str.Join([]int{1, 2, 3}, &#34; &#34;) // 1 2 3
 ```
 
 
@@ -2101,7 +2101,7 @@ JsonToMap 将 json 字符串 line 解析为 map
 
 Example:
 ```
-str.JsonToMap(`{"a":1,"b":2}`) // map[a:1 b:2]
+str.JsonToMap(`{&#34;a&#34;:1,&#34;b&#34;:2}`) // map[a:1 b:2]
 ```
 
 
@@ -2127,7 +2127,7 @@ JsonToMapList 将 json 字符串 line 解析为 map 列表
 
 Example:
 ```
-str.JsonToMapList(`{"a":1,"b":2} {"c":3, "d":4}`) // [map[a:1 b:2] map[c:3 d:4]]
+str.JsonToMapList(`{&#34;a&#34;:1,&#34;b&#34;:2} {&#34;c&#34;:3, &#34;d&#34;:4}`) // [map[a:1 b:2] map[c:3 d:4]]
 ```
 
 
@@ -2153,8 +2153,8 @@ LastIndex 返回字符串s中substr最后一次出现的位置的索引，如果
 
 Example:
 ```
-str.LastIndex("hello yak", "l") // 3
-str.LastIndex("hello yak", "m") // -1
+str.LastIndex(&#34;hello yak&#34;, &#34;l&#34;) // 3
+str.LastIndex(&#34;hello yak&#34;, &#34;m&#34;) // -1
 ```
 
 
@@ -2181,8 +2181,8 @@ LastIndexAny 返回字符串s中chars任意字符最后一次出现的位置的�
 
 Example:
 ```
-str.LastIndexAny("hello yak", "ly") // 6
-str.LastIndexAny("hello yak", "m") // -1
+str.LastIndexAny(&#34;hello yak&#34;, &#34;ly&#34;) // 6
+str.LastIndexAny(&#34;hello yak&#34;, &#34;m&#34;) // -1
 ```
 
 
@@ -2209,8 +2209,8 @@ LastIndexByte 返回字符串s中最后一个等于c的字符的索引，如果�
 
 Example:
 ```
-str.LastIndexByte("hello yak", 'l') // 3
-str.LastIndexByte("hello yak", 'm') // -1
+str.LastIndexByte(&#34;hello yak&#34;, &#39;l&#39;) // 3
+str.LastIndexByte(&#34;hello yak&#34;, &#39;m&#39;) // -1
 ```
 
 
@@ -2237,7 +2237,7 @@ LowerAndTrimSpace 将字符串raw转换为小写并去除前后空白字符
 
 Example:
 ```
-str.LowerAndTrimSpace("  Hello  ") // "hello"
+str.LowerAndTrimSpace(&#34;  Hello  &#34;) // &#34;hello&#34;
 ```
 
 
@@ -2263,7 +2263,7 @@ MatchAllOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式�
 
 Example:
 ```
-str.MatchAllOfGlob("abc", "a*", "?b?", "[a-z]?c") // true
+str.MatchAllOfGlob(&#34;abc&#34;, &#34;a*&#34;, &#34;?b?&#34;, &#34;[a-z]?c&#34;) // true
 ```
 
 
@@ -2290,7 +2290,7 @@ MatchAllOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹
 
 Example:
 ```
-str.MatchAllOfRegexp("abc", "a.+", ".?b.?", "\\w{2}c") // true
+str.MatchAllOfRegexp(&#34;abc&#34;, &#34;a.+&#34;, &#34;.?b.?&#34;, &#34;\\w{2}c&#34;) // true
 ```
 
 
@@ -2317,7 +2317,7 @@ MatchAllOfSubString 尝试将 i 转换为字符串，然后判断所有子串 su
 
 Example:
 ```
-str.MatchAllOfSubString("abc", "a", "b", "c") // true
+str.MatchAllOfSubString(&#34;abc&#34;, &#34;a&#34;, &#34;b&#34;, &#34;c&#34;) // true
 ```
 
 
@@ -2344,7 +2344,7 @@ MatchAnyOfGlob 尝试将 i 转换为字符串，然后使用 glob 匹配模式�
 
 Example:
 ```
-str.MatchAnyOfGlob("abc", "a*", "??b", "[^a-z]?c") // true
+str.MatchAnyOfGlob(&#34;abc&#34;, &#34;a*&#34;, &#34;??b&#34;, &#34;[^a-z]?c&#34;) // true
 ```
 
 
@@ -2371,7 +2371,7 @@ MatchAnyOfRegexp 尝试将 i 转换为字符串，然后使用正则表达式匹
 
 Example:
 ```
-str.MatchAnyOfRegexp("abc", "a.+", "Ab.?", ".?bC") // true
+str.MatchAnyOfRegexp(&#34;abc&#34;, &#34;a.+&#34;, &#34;Ab.?&#34;, &#34;.?bC&#34;) // true
 ```
 
 
@@ -2398,7 +2398,7 @@ MatchAnyOfSubString 尝试将 i 转换为字符串，然后判断是否有任意
 
 Example:
 ```
-str.MatchAnyOfSubString("abc", "a", "z", "x") // true
+str.MatchAnyOfSubString(&#34;abc&#34;, &#34;a&#34;, &#34;z&#34;, &#34;x&#34;) // true
 ```
 
 
@@ -2425,7 +2425,7 @@ MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 U
 
 Example:
 ```
-url = str.MergeUrlFromHTTPRequest(b"GET /z HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", "/a/b", true) // url = "https://www.yaklang.com/z/a/b"
+url = str.MergeUrlFromHTTPRequest(b&#34;GET /z HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;, &#34;/a/b&#34;, true) // url = &#34;https://www.yaklang.com/z/a/b&#34;
 ```
 
 
@@ -2454,8 +2454,8 @@ NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器�
 Example:
 ```
 f = str.NewFilter()
-f.Insert("hello")
-f.Exist("hello") // true
+f.Insert(&#34;hello&#34;)
+f.Exist(&#34;hello&#34;) // true
 ```
 
 
@@ -2498,8 +2498,8 @@ ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaul
 
 Example:
 ```
-str.ParamsGetOr({"a": "1"}, "a", "2") // 1
-str.ParamsGetOr({"a": "1"}, "b", "2") // 2
+str.ParamsGetOr({&#34;a&#34;: &#34;1&#34;}, &#34;a&#34;, &#34;2&#34;) // 1
+str.ParamsGetOr({&#34;a&#34;: &#34;1&#34;}, &#34;b&#34;, &#34;2&#34;) // 2
 ```
 
 
@@ -2527,7 +2527,7 @@ ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求
 
 Example:
 ```
-req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+req, err := str.ParseBytesToHTTPRequest(b&#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
 ```
 
 
@@ -2554,7 +2554,7 @@ ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应
 
 Example:
 ```
-res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok")
+res, err := str.ParseBytesToHTTPResponse(b&#34;HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok&#34;)
 ```
 
 
@@ -2581,7 +2581,7 @@ ParseStringToCClassHosts 尝试从给定的字符串中解析Host，再将其转
 
 Example:
 ```
-str.ParseStringToCClassHosts("192.168.0.1-255") // 192.168.0.0/24
+str.ParseStringToCClassHosts(&#34;192.168.0.1-255&#34;) // 192.168.0.0/24
 ```
 
 
@@ -2607,7 +2607,7 @@ ParseStringToHTTPRequest 将字符串解析为 HTTP 请求
 
 Example:
 ```
-req, err = str.ParseStringToHTTPRequest("GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
+req, err = str.ParseStringToHTTPRequest(&#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
 ```
 
 
@@ -2634,7 +2634,7 @@ ParseStringToHTTPResponse 将字符串解析为 HTTP 响应
 
 Example:
 ```
-res, err := str.ParseStringToHTTPResponse("HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok")
+res, err := str.ParseStringToHTTPResponse(&#34;HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok&#34;)
 ```
 
 
@@ -2661,9 +2661,9 @@ ParseStringToHostPort 尝试从字符串中解析出host和port，并与错误�
 
 Example:
 ```
-host, port, err = str.ParseStringToHostPort("127.0.0.1:8888") // host = "127.0.0.1", port = 8888, err = nil
-host, port, err = str.ParseStringToHostPort("https://example.com") // host = "example.com", port = 443, err = nil
-host, port, err = str.ParseStringToHostPort("Hello Yak") // host = "", port = 0, err = error("unknown port for [Hello Yak]")
+host, port, err = str.ParseStringToHostPort(&#34;127.0.0.1:8888&#34;) // host = &#34;127.0.0.1&#34;, port = 8888, err = nil
+host, port, err = str.ParseStringToHostPort(&#34;https://example.com&#34;) // host = &#34;example.com&#34;, port = 443, err = nil
+host, port, err = str.ParseStringToHostPort(&#34;Hello Yak&#34;) // host = &#34;&#34;, port = 0, err = error(&#34;unknown port for [Hello Yak]&#34;)
 ```
 
 
@@ -2691,7 +2691,7 @@ ParseStringToHosts 将字符串解析成 Host 列表， Host 可以以逗号、�
 
 Example:
 ```
-str.ParseStringToHosts("192.168.0.1/32,127.0.0.1") // ["192.168.0.1", "127.0.0.1"]
+str.ParseStringToHosts(&#34;192.168.0.1/32,127.0.0.1&#34;) // [&#34;192.168.0.1&#34;, &#34;127.0.0.1&#34;]
 ```
 
 
@@ -2717,7 +2717,7 @@ ParseStringToLines 将字符串按换行符(\n)分割成字符串数组，并去
 
 Example:
 ```
-str.ParseStringToLines("Hello World\nHello Yak") // ["Hello World", "Hello Yak"]
+str.ParseStringToLines(&#34;Hello World\nHello Yak&#34;) // [&#34;Hello World&#34;, &#34;Hello Yak&#34;]
 ```
 
 
@@ -2743,7 +2743,7 @@ ParseStringToPorts 将字符串解析成 Port 列表， Port 可以以逗号分�
 
 Example:
 ```
-str.ParseStringToPorts("10086-10088,23333") // [10086, 10087, 10088, 23333]
+str.ParseStringToPorts(&#34;10086-10088,23333&#34;) // [10086, 10087, 10088, 23333]
 ```
 
 
@@ -2769,7 +2769,7 @@ ParseStringToUrls 尝试从给定的字符串(ip,域名)中解析出 URL 列表�
 
 Example:
 ```
-str.ParseStringToUrls("yaklang.com:443", "https://yaklang.io") // [https://yaklang.com, https://yaklang.io]
+str.ParseStringToUrls(&#34;yaklang.com:443&#34;, &#34;https://yaklang.io&#34;) // [https://yaklang.com, https://yaklang.io]
 ```
 
 
@@ -2795,7 +2795,7 @@ ParseStringToUrlsWith3W 尝试从给定的字符串(ip,域名)中解析出 URL �
 
 Example:
 ```
-str.ParseStringToUrlsWith3W("yaklang.com:443", "https://yaklang.io") // [https://yaklang.com, https://www.yaklang.com, https://yaklang.io, https://www.yaklang.io]
+str.ParseStringToUrlsWith3W(&#34;yaklang.com:443&#34;, &#34;https://yaklang.io&#34;) // [https://yaklang.com, https://www.yaklang.com, https://yaklang.io, https://www.yaklang.io]
 ```
 
 
@@ -2821,7 +2821,7 @@ ParseStringUrlToUrlInstance 将字符串 url 解析为 URL 结构体并返回错
 
 Example:
 ```
-str.ParseStringUrlToUrlInstance("https://yaklang.com/abc?a=1")
+str.ParseStringUrlToUrlInstance(&#34;https://yaklang.com/abc?a=1&#34;)
 ```
 
 
@@ -2848,7 +2848,7 @@ ParseStringUrlToWebsiteRootPath 将字符串 url 解析为其根路径的URL
 
 Example:
 ```
-str.ParseStringUrlToWebsiteRootPath("https://yaklang.com/abc?a=1") // https://yaklang.com/
+str.ParseStringUrlToWebsiteRootPath(&#34;https://yaklang.com/abc?a=1&#34;) // https://yaklang.com/
 ```
 
 
@@ -2874,7 +2874,7 @@ PathJoin 将传入的文件路径进行拼接并返回
 
 Example:
 ```
-str.PathJoin("/var", "www", "html") // in *unix: "/var/www/html"    in Windows: \var\www\html
+str.PathJoin(&#34;/var&#34;, &#34;www&#34;, &#34;html&#34;) // in *unix: &#34;/var/www/html&#34;    in Windows: \var\www\html
 ```
 
 
@@ -2952,7 +2952,7 @@ RandomUpperAndLower 返回一个随机大小写的字符串
 
 Example:
 ```
-str.RandomUpperAndLower("target") // TArGeT
+str.RandomUpperAndLower(&#34;target&#34;) // TArGeT
 ```
 
 
@@ -2978,7 +2978,7 @@ RegexpMatch 使用正则尝试匹配字符串，如果匹配成功返回 true，
 
 Example:
 ```
-str.RegexpMatch("^[a-z]+$", "abc") // true
+str.RegexpMatch(&#34;^[a-z]+$&#34;, &#34;abc&#34;) // true
 ```
 
 
@@ -3011,7 +3011,7 @@ RemoveDuplicatePorts 解析两个字符串形式的端口列表，并使用布�
 
 Example:
 ```
-RemoveDuplicatePorts("10086-10088,23333", "10086,10089,23333") // [10086, 10087, 10088, 23333, 10089]
+RemoveDuplicatePorts(&#34;10086-10088,23333&#34;, &#34;10086,10089,23333&#34;) // [10086, 10087, 10088, 23333, 10089]
 ```
 
 
@@ -3038,7 +3038,7 @@ RemoveRepeat 移除字符串切片slc中的重复元素
 
 Example:
 ```
-str.RemoveRepeat(["hello", "yak", "hello"]) // ["hello", "yak"]
+str.RemoveRepeat([&#34;hello&#34;, &#34;yak&#34;, &#34;hello&#34;]) // [&#34;hello&#34;, &#34;yak&#34;]
 ```
 
 
@@ -3064,7 +3064,7 @@ Repeat 返回将字符串s重复count次的字符串
 
 Example:
 ```
-str.Repeat("hello", 3) // hellohellohello
+str.Repeat(&#34;hello&#34;, 3) // hellohellohello
 ```
 
 
@@ -3091,7 +3091,7 @@ Replace 返回将字符串s中前n个old字符串替换为new字符串的字符�
 
 Example:
 ```
-str.Replace("hello yak", "l", "L", 1) // heLlo yak
+str.Replace(&#34;hello yak&#34;, &#34;l&#34;, &#34;L&#34;, 1) // heLlo yak
 ```
 
 
@@ -3120,7 +3120,7 @@ ReplaceAll 返回将字符串s中所有old字符串替换为new字符串的字�
 
 Example:
 ```
-str.ReplaceAll("hello yak", "yak", "yakit") // hello yakit
+str.ReplaceAll(&#34;hello yak&#34;, &#34;yak&#34;, &#34;yakit&#34;) // hello yakit
 ```
 
 
@@ -3152,7 +3152,7 @@ poc.ReplaceBody(`POST / HTTP/1.1
 Host: example.com
 Content-Length: 11
 
-hello world`, "hello yak", false)
+hello world`, &#34;hello yak&#34;, false)
 ```
 
 
@@ -3180,7 +3180,7 @@ Split 将字符串s按照sep分割成字符串切片
 
 Example:
 ```
-str.Split("Hello Yak", " ") // [Hello", "Yak"]
+str.Split(&#34;Hello Yak&#34;, &#34; &#34;) // [Hello&#34;, &#34;Yak&#34;]
 ```
 
 
@@ -3207,7 +3207,7 @@ SplitAfter 将字符串s按照sep分割成字符串切片，但是每个元素�
 
 Example:
 ```
-str.SplitAfter("Hello-Yak", "-") // [Hello-", "Yak"]
+str.SplitAfter(&#34;Hello-Yak&#34;, &#34;-&#34;) // [Hello-&#34;, &#34;Yak&#34;]
 ```
 
 
@@ -3234,7 +3234,7 @@ SplitAfterN 将字符串s按照sep分割成字符串切片，但是每个元素�
 
 Example:
 ```
-str.SplitAfterN("Hello-Yak-and-World", "-", 2) // [Hello-", "Yak-and-World"]
+str.SplitAfterN(&#34;Hello-Yak-and-World&#34;, &#34;-&#34;, 2) // [Hello-&#34;, &#34;Yak-and-World&#34;]
 ```
 
 
@@ -3262,7 +3262,7 @@ SplitAndTrim 将字符串s按照sep分割成字符串切片，并且去除每个
 
 Example:
 ```
-str.SplitAndTrim(" hello yak ", " ") // ["hello", "yak"]
+str.SplitAndTrim(&#34; hello yak &#34;, &#34; &#34;) // [&#34;hello&#34;, &#34;yak&#34;]
 ```
 
 
@@ -3289,7 +3289,7 @@ SplitHTTPHeadersAndBodyFromPacket 将传入的 HTTP 报文分割为 headers 和 
 
 Example:
 ```
-headers, body = str.SplitHTTPHeadersAndBodyFromPacket(b"GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
+headers, body = str.SplitHTTPHeadersAndBodyFromPacket(b&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;)
 ```
 
 
@@ -3317,7 +3317,7 @@ SplitHostsToPrivateAndPublic 将 hosts 按照私有 IP 和公有 IP 分开
 
 Example:
 ```
-str.SplitHostsToPrivateAndPublic("127.0.0.1", "8.8.8.8", "10.0.0.1") // ["127.0.0.1", "10.0.0.1"], ["8.8.8.8"]
+str.SplitHostsToPrivateAndPublic(&#34;127.0.0.1&#34;, &#34;8.8.8.8&#34;, &#34;10.0.0.1&#34;) // [&#34;127.0.0.1&#34;, &#34;10.0.0.1&#34;], [&#34;8.8.8.8&#34;]
 ```
 
 
@@ -3344,7 +3344,7 @@ SplitN 将字符串s按照sep分割成字符串切片，最多分为n个元素
 
 Example:
 ```
-str.SplitN("Hello-Yak-and-World", "-", 2) // [Hello", "Yak-and-World"]
+str.SplitN(&#34;Hello-Yak-and-World&#34;, &#34;-&#34;, 2) // [Hello&#34;, &#34;Yak-and-World&#34;]
 ```
 
 
@@ -3372,8 +3372,8 @@ StartsWith / HasPrefix 判断字符串s是否以prefix开头
 
 Example:
 ```
-str.StartsWith("Hello Yak", "Hello") // true
-str.StartsWith("Hello Yak", "Yak") // false
+str.StartsWith(&#34;Hello Yak&#34;, &#34;Hello&#34;) // true
+str.StartsWith(&#34;Hello Yak&#34;, &#34;Yak&#34;) // false
 ```
 
 
@@ -3400,7 +3400,7 @@ StringContainsAnyOfSubString 判断字符串s中是否包含subs中的任意一�
 
 Example:
 ```
-str.StringContainsAnyOfSubString("hello yak", ["yak", "world"]) // true
+str.StringContainsAnyOfSubString(&#34;hello yak&#34;, [&#34;yak&#34;, &#34;world&#34;]) // true
 ```
 
 
@@ -3427,8 +3427,8 @@ StringSliceContains 判断字符串切片s中是否包含raw，对于非字符�
 
 Example:
 ```
-str.StringSliceContains(["hello", "yak"], "yak") // true
-str.StringSliceContains([1, 2, 3], "4") // false
+str.StringSliceContains([&#34;hello&#34;, &#34;yak&#34;], &#34;yak&#34;) // true
+str.StringSliceContains([1, 2, 3], &#34;4&#34;) // false
 ```
 
 
@@ -3455,8 +3455,8 @@ StringSliceContainsAll 判断字符串切片s中是否完全包含elements中的
 
 Example:
 ```
-str.StringSliceContainsAll(["hello", "yak"], "hello", "yak") // true
-str.StringSliceContainsAll(["hello", "yak"], "hello", "yak", "world") // false
+str.StringSliceContainsAll([&#34;hello&#34;, &#34;yak&#34;], &#34;hello&#34;, &#34;yak&#34;) // true
+str.StringSliceContainsAll([&#34;hello&#34;, &#34;yak&#34;], &#34;hello&#34;, &#34;yak&#34;, &#34;world&#34;) // false
 ```
 
 
@@ -3483,7 +3483,7 @@ Subtract 返回两个字符串切片的差集
 
 Example:
 ```
-str.Subtract(["1", "2", "3"], ["3", "4", "5"]) // ["1", "2"]
+str.Subtract([&#34;1&#34;, &#34;2&#34;, &#34;3&#34;], [&#34;3&#34;, &#34;4&#34;, &#34;5&#34;]) // [&#34;1&#34;, &#34;2&#34;]
 ```
 
 
@@ -3510,7 +3510,7 @@ Title 返回字符串s的标题化版本，即所有单词的首字母都是大�
 
 Example:
 ```
-str.Title("hello yak") // Hello Yak
+str.Title(&#34;hello yak&#34;) // Hello Yak
 ```
 
 
@@ -3536,7 +3536,7 @@ ToJsonIndentStr 将v转换为格式化的JSON字符串并返回，如果转换�
 
 Example:
 ```
-str.ToJsonIndentStr({"hello":"yak"}) // {"hello": "yak"}
+str.ToJsonIndentStr({&#34;hello&#34;:&#34;yak&#34;}) // {&#34;hello&#34;: &#34;yak&#34;}
 ```
 
 
@@ -3562,7 +3562,7 @@ ToLower 返回字符串s的小写形式
 
 Example:
 ```
-str.ToLower("HELLO YAK") // hello yak
+str.ToLower(&#34;HELLO YAK&#34;) // hello yak
 ```
 
 
@@ -3611,8 +3611,8 @@ ToStringSlice 将任意类型的数据转换为字符串切片
 
 Example:
 ```
-str.ToStringSlice("hello") // ["hello"]
-str.ToStringSlice([1, 2]) // ["1", "2"]
+str.ToStringSlice(&#34;hello&#34;) // [&#34;hello&#34;]
+str.ToStringSlice([1, 2]) // [&#34;1&#34;, &#34;2&#34;]
 ```
 
 
@@ -3638,7 +3638,7 @@ ToTitle 返回字符串s的标题化版本，其中所有Unicode字母都会被�
 
 Example:
 ```
-str.ToTitle("hello yak") // HELLO YAK
+str.ToTitle(&#34;hello yak&#34;) // HELLO YAK
 ```
 
 
@@ -3687,7 +3687,7 @@ ToUpper 返回字符串s的大写形式
 
 Example:
 ```
-str.ToUpper("hello yak") // HELLO YAK
+str.ToUpper(&#34;hello yak&#34;) // HELLO YAK
 ```
 
 
@@ -3737,7 +3737,7 @@ ToValidUTF8 返回将字符串s中无效的UTF-8编码替换为replacement的字
 Example:
 ```
 
-str.ToValidUTF8("hello yak", "?") // hello yak
+str.ToValidUTF8(&#34;hello yak&#34;, &#34;?&#34;) // hello yak
 ```
 
 
@@ -3764,8 +3764,8 @@ Trim 返回将字符串s两侧所有包含cutset字符串中的字符都去掉�
 
 Example:
 ```
-str.Trim("Hello Yak", "Hk") // ello Ya
-str.Trim("HelloYakHello", "Hello") // Yak
+str.Trim(&#34;Hello Yak&#34;, &#34;Hk&#34;) // ello Ya
+str.Trim(&#34;HelloYakHello&#34;, &#34;Hello&#34;) // Yak
 ```
 
 
@@ -3792,8 +3792,8 @@ TrimLeft 返回将字符串s左侧所有包含cutset字符串中的字符都去�
 
 Example:
 ```
-str.TrimLeft("Hello Yak", "H") // ello Yak
-str.TrimLeft("HelloYak", "Hello") // Yak
+str.TrimLeft(&#34;Hello Yak&#34;, &#34;H&#34;) // ello Yak
+str.TrimLeft(&#34;HelloYak&#34;, &#34;Hello&#34;) // Yak
 ```
 
 
@@ -3820,8 +3820,8 @@ TrimPrefix 返回将字符串s前缀prefix去掉的字符串
 
 Example:
 ```
-str.TrimPrefix("Hello Yak", "Hello") //  Yak
-str.TrimPrefix("HelloYak", "Hello") // Yak
+str.TrimPrefix(&#34;Hello Yak&#34;, &#34;Hello&#34;) //  Yak
+str.TrimPrefix(&#34;HelloYak&#34;, &#34;Hello&#34;) // Yak
 ```
 
 
@@ -3848,8 +3848,8 @@ TrimRight 返回将字符串s右侧所有包含cutset字符串中的字符都去
 
 Example:
 ```
-str.TrimRight("Hello Yak", "k") // Hello Ya
-str.TrimRight("HelloYak", "Yak") // Hello
+str.TrimRight(&#34;Hello Yak&#34;, &#34;k&#34;) // Hello Ya
+str.TrimRight(&#34;HelloYak&#34;, &#34;Yak&#34;) // Hello
 ```
 
 
@@ -3876,7 +3876,7 @@ TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串
 
 Example:
 ```
-str.TrimSpace(" \t\n Hello Yak \n\t\r\n") // Hello Yak
+str.TrimSpace(&#34; \t\n Hello Yak \n\t\r\n&#34;) // Hello Yak
 ```
 
 
@@ -3902,8 +3902,8 @@ TrimSuffix 返回将字符串s后缀suffix去掉的字符串
 
 Example:
 ```
-str.TrimSuffix("Hello Yak", "ak") // Hello Y
-str.TrimSuffix("HelloYak", "Yak") // Hello
+str.TrimSuffix(&#34;Hello Yak&#34;, &#34;ak&#34;) // Hello Y
+str.TrimSuffix(&#34;HelloYak&#34;, &#34;Yak&#34;) // Hello
 ```
 
 
@@ -3930,8 +3930,8 @@ UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL
 
 Example:
 ```
-newURL, err = str.UrlJoin("https://yaklang.com", "asd", "qwe") // newURL = "https://yaklang.com/asd/qwe", err = nil
-newURL, err = str.UrlJoin("https://yaklang.com/zxc", "/asd", "qwe") // newURL = "https://yaklang.com/asd/qwe", err = nil
+newURL, err = str.UrlJoin(&#34;https://yaklang.com&#34;, &#34;asd&#34;, &#34;qwe&#34;) // newURL = &#34;https://yaklang.com/asd/qwe&#34;, err = nil
+newURL, err = str.UrlJoin(&#34;https://yaklang.com/zxc&#34;, &#34;/asd&#34;, &#34;qwe&#34;) // newURL = &#34;https://yaklang.com/asd/qwe&#34;, err = nil
 ```
 
 
@@ -3955,7 +3955,7 @@ newURL, err = str.UrlJoin("https://yaklang.com/zxc", "/asd", "qwe") // newURL = 
 ### VersionCompare
 
 #### 详细描述
-VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&gt;p2返回1,nil, p1&lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err
+VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&amp;gt;p2返回1,nil, p1&amp;lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err
 
 
 #### 定义
@@ -3982,8 +3982,8 @@ VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 �
 
 Example:
 ```
-str.VersionEqual("3.0", "3.0") // true
-str.VersionEqual("3.0", "3.0a") // false
+str.VersionEqual(&#34;3.0&#34;, &#34;3.0&#34;) // true
+str.VersionEqual(&#34;3.0&#34;, &#34;3.0a&#34;) // false
 ```
 
 
@@ -4010,8 +4010,8 @@ VersionGreater 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 
 
 Example:
 ```
-str.VersionGreater("1.0.0", "0.9.9") // true
-str.VersionGreater("3.0", "2.8.8alpha") // true
+str.VersionGreater(&#34;1.0.0&#34;, &#34;0.9.9&#34;) // true
+str.VersionGreater(&#34;3.0&#34;, &#34;2.8.8alpha&#34;) // true
 ```
 
 
@@ -4038,9 +4038,9 @@ VersionGreaterEqual 使用版本比较算法比较版本 v1 与版本 v2，如�
 
 Example:
 ```
-str.VersionGreaterEqual("1.0.0", "0.9.9") // true
-str.VersionGreaterEqual("3.0", "3.0") // true
-str.VersionGreaterEqual("3.0", "3.0a") // false
+str.VersionGreaterEqual(&#34;1.0.0&#34;, &#34;0.9.9&#34;) // true
+str.VersionGreaterEqual(&#34;3.0&#34;, &#34;3.0&#34;) // true
+str.VersionGreaterEqual(&#34;3.0&#34;, &#34;3.0a&#34;) // false
 ```
 
 
@@ -4067,8 +4067,8 @@ VersionLess 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 小
 
 Example:
 ```
-str.VersionLess("0.9.9", "1.0.0") // true
-str.VersionLess("3.0", "3.0a") // true
+str.VersionLess(&#34;0.9.9&#34;, &#34;1.0.0&#34;) // true
+str.VersionLess(&#34;3.0&#34;, &#34;3.0a&#34;) // true
 ```
 
 
@@ -4095,9 +4095,9 @@ VersionLessEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v
 
 Example:
 ```
-str.VersionLessEqual("0.9.9", "1.0.0") // true
-str.VersionLessEqual("3.0", "3.0") // true
-str.VersionLessEqual("3.0a", "3.0") // false
+str.VersionLessEqual(&#34;0.9.9&#34;, &#34;1.0.0&#34;) // true
+str.VersionLessEqual(&#34;3.0&#34;, &#34;3.0&#34;) // true
+str.VersionLessEqual(&#34;3.0a&#34;, &#34;3.0&#34;) // false
 ```
 
 
@@ -4125,7 +4125,7 @@ f 用于对字符串进行格式化
 Example:
 ```
 
-str.f("hello %s", "yak") // hello yak
+str.f(&#34;hello %s&#34;, &#34;yak&#34;) // hello yak
 ```
 
 

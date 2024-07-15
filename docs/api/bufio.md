@@ -23,9 +23,9 @@ Buffer 也实现了 Reader 和 Writer 接口
 
 Example:
 ```
-buffer = bufio.NewBuffer() // 或者你也可以使用 io.NewBuffer("hello yak") 来初始化一个 Buffer
-buffer.WriteString("hello yak")
-data, err = io.ReadAll(buffer) // data = b"hello yak", err = nil
+buffer = bufio.NewBuffer() // 或者你也可以使用 io.NewBuffer(&#34;hello yak&#34;) 来初始化一个 Buffer
+buffer.WriteString(&#34;hello yak&#34;)
+data, err = io.ReadAll(buffer) // data = b&#34;hello yak&#34;, err = nil
 ```
 
 
@@ -142,7 +142,7 @@ NewScanner 根据传入的 Reader 创建一个新的 Scanner 结构体引用
 
 Example:
 ```
-buf = bufio.NewBuffer("hello yak\nhello yakit")
+buf = bufio.NewBuffer(&#34;hello yak\nhello yakit&#34;)
 scanner, err = bufio.NewScanner(buf)
 for scanner.Scan() {
 println(scanner.Text())
@@ -176,7 +176,7 @@ NewWriter 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用
 Example:
 ```
 writer, err = bufio.NewWriter(os.Stdout)
-writer.WriteString("hello yak")
+writer.WriteString(&#34;hello yak&#34;)
 writer.Flush()
 ```
 
@@ -207,7 +207,7 @@ NewWriterSize 根据传入的 Writer 创建一个新的 BufioWriter 结构体引
 Example:
 ```
 writer, err = bufio.NewWriterSize(os.Stdout, 1024)
-writer.WriteString("hello yak")
+writer.WriteString(&#34;hello yak&#34;)
 writer.Flush()
 ```
 

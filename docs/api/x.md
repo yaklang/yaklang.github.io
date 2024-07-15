@@ -4,7 +4,7 @@
 |:------|:--------|
 | [x.All](#all) |All returns true if all elements of the iterable are not empty (or if the iterable is empty) |
 | [x.Any](#any) |Any returns true if any element of the iterable is not empty. If the iterable is empty, return False. |
-| [x.Chunk](#chunk) |Chunk creates an array of elements split into groups with the length of size. If array can't be split evenly, the final chunk will be the remaining el...|
+| [x.Chunk](#chunk) |Chunk creates an array of elements split into groups with the length of size. If array can&amp;#39;t be split evenly, the final chunk will be the remainin...|
 | [x.Contains](#contains) |Contains returns true if an element is present in a iteratee. |
 | [x.ConvertToMap](#converttomap) ||
 | [x.Difference](#difference) |Difference returns the difference between two collections. |
@@ -38,7 +38,7 @@
 | [x.Sum](#sum) |Sum computes the sum of the values in array. |
 | [x.Tail](#tail) |Tail gets all but the first element of array. |
 | [x.ToFloat64](#tofloat64) |ToFloat64 converts any numeric value to float64. |
-| [x.ToMap](#tomap) |ToMap transforms a slice of instances to a Map. []*Foo =&gt; Map&lt;int, *Foo&gt; |
+| [x.ToMap](#tomap) |ToMap transforms a slice of instances to a Map. []*Foo =&amp;gt; Map&amp;lt;int, *Foo&amp;gt; |
 | [x.Values](#values) |Values creates an array of the own enumerable map values or struct field values. |
 | [x.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动  |
 | [x.Zip](#zip) |Zip returns a list of tuples, where the i-th tuple contains the i-th element from each of the input iterables. The returned list is truncated in lengt...|
@@ -91,7 +91,7 @@ Any returns true if any element of the iterable is not empty. If the iterable is
 
 #### 详细描述
 Chunk creates an array of elements split into groups with the length of size.
-If array can't be split evenly, the final chunk will be
+If array can&amp;#39;t be split evenly, the final chunk will be
 the remaining element.
 
 
@@ -592,11 +592,11 @@ Example:
 ```
 count = 0
 
-	retry(100, () => {
+	retry(100, () =&gt; {
 	   defer recover()
 
 	   count++
-	   if count > 3 {
+	   if count &gt; 3 {
 	       die(111)
 	   }
 	   return true
@@ -606,11 +606,11 @@ assert count == 4, f`${count}`
 
 count = 0
 
-	retry(100, () => {
+	retry(100, () =&gt; {
 	   defer recover()
 
 	   count++
-	   if count > 3 {
+	   if count &gt; 3 {
 	       return false
 	   }
 	   return true
@@ -620,7 +620,7 @@ assert count == 4, f`${count}`
 
 count = 0
 
-	retry(100, () => {
+	retry(100, () =&gt; {
 	   count++
 	})
 
@@ -628,7 +628,7 @@ assert count == 1, f`${count}`
 
 count = 0
 
-	retry(100, () => {
+	retry(100, () =&gt; {
 	   count++
 	   return true
 	})
@@ -741,7 +741,7 @@ function, keeping equal elements in their original order.
 It panics if x is not a slice.
 
 The less function must satisfy the same requirements as
-the Interface type's Less method.
+the Interface type&amp;#39;s Less method.
 
 
 #### 定义
@@ -845,7 +845,7 @@ ToFloat64 converts any numeric value to float64.
 
 #### 详细描述
 ToMap transforms a slice of instances to a Map.
-[]*Foo =&gt; Map&lt;int, *Foo&gt;
+[]*Foo =&amp;gt; Map&amp;lt;int, *Foo&amp;gt;
 
 
 #### 定义
@@ -892,20 +892,20 @@ WaitConnect 等待一个地址的端口开放或指导超时时间，如果超�
 
 Example:
 ```
-timeout, _ = time.ParseDuration("1m")
+timeout, _ = time.ParseDuration(&#34;1m&#34;)
 ctx, cancel = context.WithTimeout(context.New(), timeout)
 
 	go func() {
-	    err = tcp.Serve("127.0.0.1", 8888, tcp.serverCallback(func (conn) {
-	    conn.Send("hello world")
+	    err = tcp.Serve(&#34;127.0.0.1&#34;, 8888, tcp.serverCallback(func (conn) {
+	    conn.Send(&#34;hello world&#34;)
 	    conn.Close()
 	}), tcp.serverContext(ctx))
 
 	    die(err)
 	}()
 
-os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
-conn = tcp.Connect("127.0.0.1", 8888)~
+os.WaitConnect(&#34;127.0.0.1:8888&#34;, 5)~ // 等待tcp服务器启动
+conn = tcp.Connect(&#34;127.0.0.1&#34;, 8888)~
 bytes = conn.Recv()~
 println(string(bytes))
 ```

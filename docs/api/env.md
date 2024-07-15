@@ -16,7 +16,7 @@ Get 获取对应键名的环境变量值
 
 Example:
 ```
-env.Get("PATH")
+env.Get(&#34;PATH&#34;)
 ```
 
 
@@ -44,7 +44,7 @@ Set 设置对应键名的环境变量值
 
 Example:
 ```
-env.Set("YAK_PROXY", "http://127.0.0.1:10808")
+env.Set(&#34;YAK_PROXY&#34;, &#34;http://127.0.0.1:10808&#34;)
 ```
 
 

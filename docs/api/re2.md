@@ -3,16 +3,16 @@
 |实例名|实例描述|
 |:------|:--------|
 OPT_Compiled|(int) 8|
+OPT_Debug|(int) 128|
 OPT_ECMAScript|(int) 256|
-OPT_Multiline|(int) 2|
-OPT_None|(regexp2.RegexOptions) 0|
-OPT_Singleline|(int) 16|
 OPT_ExplicitCapture|(int) 4|
 OPT_IgnoreCase|(int) 1|
 OPT_IgnorePatternWhitespace|(int) 32|
-OPT_RightToLeft|(int) 64|
-OPT_Debug|(int) 128|
+OPT_Multiline|(int) 2|
+OPT_None|(regexp2.RegexOptions) 0|
 OPT_RE2|(int) 512|
+OPT_RightToLeft|(int) 64|
+OPT_Singleline|(int) 16|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

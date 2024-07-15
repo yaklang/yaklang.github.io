@@ -2,10 +2,10 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Java|(ssaapi.Language) "java"|
-Javascript|(ssaapi.Language) "js"|
-PHP|(ssaapi.Language) "php"|
-Yak|(ssaapi.Language) "yak"|
+Java|(ssaapi.Language) &#34;java&#34;|
+Javascript|(ssaapi.Language) &#34;js&#34;|
+PHP|(ssaapi.Language) &#34;php&#34;|
+Yak|(ssaapi.Language) &#34;yak&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

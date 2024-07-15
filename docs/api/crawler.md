@@ -70,7 +70,7 @@ Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函�
 
 Example:
 ```
-ch, err := crawler.Start("https://www.baidu.com", crawler.concurrent(10))
+ch, err := crawler.Start(&#34;https://www.baidu.com&#34;, crawler.concurrent(10))
 for req in ch {
 println(req.Response()~)
 }
@@ -101,7 +101,7 @@ autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.autoLogin("admin", "admin"))
+crawler.Start(&#34;https://example.com&#34;, crawler.autoLogin(&#34;admin&#34;, &#34;admin&#34;))
 ```
 
 
@@ -129,7 +129,7 @@ basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.basicAuth("admin", "admin"))
+crawler.Start(&#34;https://example.com&#34;, crawler.basicAuth(&#34;admin&#34;, &#34;admin&#34;))
 ```
 
 
@@ -156,7 +156,7 @@ bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.bodySize(1024 * 1024))
+crawler.Start(&#34;https://example.com&#34;, crawler.bodySize(1024 * 1024))
 ```
 
 
@@ -182,7 +182,7 @@ concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.concurrent(10))
+crawler.Start(&#34;https://example.com&#34;, crawler.concurrent(10))
 ```
 
 
@@ -208,7 +208,7 @@ connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.connectTimeout(5))
+crawler.Start(&#34;https://example.com&#34;, crawler.connectTimeout(5))
 ```
 
 
@@ -234,7 +234,7 @@ cookie 是一个选项函数，用于指定爬虫时的cookie
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.cookie("key", "value"))
+crawler.Start(&#34;https://example.com&#34;, crawler.cookie(&#34;key&#34;, &#34;value&#34;))
 ```
 
 
@@ -261,7 +261,7 @@ disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.disallowSuffix(".css", ".jpg", ".png")) // 爬虫时不会爬取css、jpg、png文件
+crawler.Start(&#34;https://example.com&#34;, crawler.disallowSuffix(&#34;.css&#34;, &#34;.jpg&#34;, &#34;.png&#34;)) // 爬虫时不会爬取css、jpg、png文件
 ```
 
 
@@ -289,7 +289,7 @@ domain允许使用glob语法，例如*.example.com
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.domainExclude("*.baidu.com"))
+crawler.Start(&#34;https://example.com&#34;, crawler.domainExclude(&#34;*.baidu.com&#34;))
 ```
 
 
@@ -317,7 +317,7 @@ domain允许使用glob语法，例如*.example.com
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.domainInclude("*.example.com"))
+crawler.Start(&#34;https://example.com&#34;, crawler.domainInclude(&#34;*.example.com&#34;))
 ```
 
 
@@ -345,7 +345,7 @@ forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止
 
 Example:
 ```
-crawler.Start("https://example.com/a/b/c", crawler.forbiddenFromParent(false)) // 这会从 https://example.com/ 开始爬取
+crawler.Start(&#34;https://example.com/a/b/c&#34;, crawler.forbiddenFromParent(false)) // 这会从 https://example.com/ 开始爬取
 ```
 
 
@@ -371,7 +371,7 @@ header 是一个选项函数，用于指定爬虫时的请求头
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.header("User-Agent", "yaklang-crawler"))
+crawler.Start(&#34;https://example.com&#34;, crawler.header(&#34;User-Agent&#34;, &#34;yaklang-crawler&#34;))
 ```
 
 
@@ -400,9 +400,9 @@ jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.jsParser()) // 开启
-crawler.Start("https://example.com", crawler.jsParser(true)) // 开启
-crawler.Start("https://example.com", crawler.jsParser(false)) // 关闭
+crawler.Start(&#34;https://example.com&#34;, crawler.jsParser()) // 开启
+crawler.Start(&#34;https://example.com&#34;, crawler.jsParser(true)) // 开启
+crawler.Start(&#34;https://example.com&#34;, crawler.jsParser(false)) // 关闭
 ```
 
 
@@ -428,7 +428,7 @@ maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.maxDepth(10))
+crawler.Start(&#34;https://example.com&#34;, crawler.maxDepth(10))
 ```
 
 
@@ -454,7 +454,7 @@ maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.maxRedirect(10))
+crawler.Start(&#34;https://example.com&#34;, crawler.maxRedirect(10))
 ```
 
 
@@ -480,7 +480,7 @@ maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.maxRequest(10000))
+crawler.Start(&#34;https://example.com&#34;, crawler.maxRequest(10000))
 ```
 
 
@@ -506,7 +506,7 @@ maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.maxRetry(10))
+crawler.Start(&#34;https://example.com&#34;, crawler.maxRetry(10))
 ```
 
 
@@ -532,7 +532,7 @@ maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.maxUrls(20000))
+crawler.Start(&#34;https://example.com&#34;, crawler.maxUrls(20000))
 ```
 
 
@@ -558,7 +558,7 @@ proxy 是一个选项函数，用于指定爬虫时的代理
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.proxy("http://127.0.0.1:8080"))
+crawler.Start(&#34;https://example.com&#34;, crawler.proxy(&#34;http://127.0.0.1:8080&#34;))
 ```
 
 
@@ -604,7 +604,7 @@ connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.connectTimeout(5))
+crawler.Start(&#34;https://example.com&#34;, crawler.connectTimeout(5))
 ```
 
 
@@ -630,7 +630,7 @@ userAgent 是一个选项函数，用于指定爬虫时的User-Agent
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.userAgent("yaklang-crawler"))
+crawler.Start(&#34;https://example.com&#34;, crawler.userAgent(&#34;yaklang-crawler&#34;))
 ```
 
 
@@ -656,7 +656,7 @@ urlExtractor 是一个选项函数，它接收一个函数作为参数，用于�
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.urlExtractor(func(req) {
+crawler.Start(&#34;https://example.com&#34;, crawler.urlExtractor(func(req) {
 尝试编写自己的规则，从响应体(req.Response()或req.ResponseRaw())中提取额外的链接
 })
 ```
@@ -684,7 +684,7 @@ urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.urlRegexpExclude(`\.jpg`))
+crawler.Start(&#34;https://example.com&#34;, crawler.urlRegexpExclude(`\.jpg`))
 ```
 
 
@@ -710,7 +710,7 @@ urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.urlRegexpInclude(`\.html`))
+crawler.Start(&#34;https://example.com&#34;, crawler.urlRegexpInclude(`\.html`))
 ```
 
 
@@ -736,7 +736,7 @@ userAgent 是一个选项函数，用于指定爬虫时的User-Agent
 
 Example:
 ```
-crawler.Start("https://example.com", crawler.userAgent("yaklang-crawler"))
+crawler.Start(&#34;https://example.com&#34;, crawler.userAgent(&#34;yaklang-crawler&#34;))
 ```
 
 

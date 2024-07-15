@@ -19,7 +19,7 @@ LocalFileSystemServe 根据给定的 host 和 port 启动一个 http 服务用�
 
 Example:
 ```
-err = httpserver.LocalFileSystemServe("127.0.0.1", 8888, "/static", "/var/www/static")
+err = httpserver.LocalFileSystemServe(&#34;127.0.0.1&#34;, 8888, &#34;/static&#34;, &#34;/var/www/static&#34;)
 ```
 
 
@@ -49,7 +49,7 @@ Serve 根据给定的 host 和 port 启动一个 http 服务，第一个参数�
 
 Example:
 ```
-err = httpserver.Serve("127.0.0.1", 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write("Hello world") }))
+err = httpserver.Serve(&#34;127.0.0.1&#34;, 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write(&#34;Hello world&#34;) }))
 ```
 
 
@@ -78,7 +78,7 @@ context 用于设置 HTTP 服务器的上下文
 Example:
 ```
 ctx = context.New()
-err = httpserver.Serve("127.0.0.1", httpserver, http.context(ctx))
+err = httpserver.Serve(&#34;127.0.0.1&#34;, httpserver, http.context(ctx))
 ```
 
 
@@ -106,7 +106,7 @@ handler 用于设置 HTTP 服务器的回调函数，此函数会在每次收到
 
 Example:
 ```
-err = httpserver.Serve("127.0.0.1", 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write("Hello world") }))
+err = httpserver.Serve(&#34;127.0.0.1&#34;, 8888, httpserver.handler(func(rspWriter, req) { rspWriter.Write(&#34;Hello world&#34;) }))
 ```
 
 
@@ -134,9 +134,9 @@ tlsCertAndKey 用于设置 HTTP服务器的 TLS 证书和密钥，第一个参�
 
 Example:
 ```
-ca, key, err = tls.GenerateRootCA("yaklang.io")
+ca, key, err = tls.GenerateRootCA(&#34;yaklang.io&#34;)
 cert, sKey, err = tls.SignServerCertAndKey(ca, key)
-err = httpserver.Serve("127.0.0.1", 8888, httpserver.tlsCertAndKey(cert, sKey))
+err = httpserver.Serve(&#34;127.0.0.1&#34;, 8888, httpserver.tlsCertAndKey(cert, sKey))
 ```
 
 

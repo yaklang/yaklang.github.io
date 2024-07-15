@@ -6,11 +6,11 @@
 | [time.AfterFunc](#afterfunc) |AfterFunc 用于创建一个定时器，它会在指定的时间后执行指定的函数，该函数会在另一个协程中执行  该函数本身会立刻返回一个定时器结构体引用，你可以通过调用该引用的Stop方法来取消定时器  |
 | [time.GetCurrentDate](#getcurrentdate) |GetCurrentDate 返回精确到当前日期的时间结构体与错误  |
 | [time.GetCurrentMonday](#getcurrentmonday) |GetCurrentMonday 返回精确到本周星期一的时间结构体与错误  |
-| [time.NewTicker](#newticker) |NewTicker 根据给定的时间间隔(单位：秒)返回一个循环定时器结构体引用，它会周期性的向返回的通道发送当前时间  你可以通过 &lt;- timer.C 来等待循环定时器到期  你也可以通过调用 timer.Stop 来取消循环定时器  |
-| [time.NewTimer](#newtimer) |NewTimer 根据给定的时间间隔(单位：秒)返回一个定时器结构体引用  你可以通过 &lt;- timer.C 来等待定时器到期  你也可以通过调用 timer.Stop 来取消定时器  |
+| [time.NewTicker](#newticker) |NewTicker 根据给定的时间间隔(单位：秒)返回一个循环定时器结构体引用，它会周期性的向返回的通道发送当前时间  你可以通过 &amp;lt;- timer.C 来等待循环定时器到期  你也可以通过调用 timer.Stop 来取消循环定时器  |
+| [time.NewTimer](#newtimer) |NewTimer 根据给定的时间间隔(单位：秒)返回一个定时器结构体引用  你可以通过 &amp;lt;- timer.C 来等待定时器到期  你也可以通过调用 timer.Stop 来取消定时器  |
 | [time.Now](#now) |now 用于获取当前时间的时间结构体  |
 | [time.Parse](#parse) |Parse 根据给定的格式解析时间字符串，返回时间结构体与错误  一个参考的格式为：2006-01-02 15:04:05  |
-| [time.ParseDuration](#parseduration) |ParseDuration 根据给定的格式解析时间间隔字符串，返回时间间隔结构体与错误  时间间隔字符串是一个可能带有符号的十进制数字序列，每个数字可以带有可选的小数和单位后缀，例如 "300ms"，"-1.5h" 或 "2h45m"  有效的时间单位有 "ns"（纳秒）, "us"（或 "µs" ...|
+| [time.ParseDuration](#parseduration) |ParseDuration 根据给定的格式解析时间间隔字符串，返回时间间隔结构体与错误  时间间隔字符串是一个可能带有符号的十进制数字序列，每个数字可以带有可选的小数和单位后缀，例如 &amp;#34;300ms&amp;#34;，&amp;#34;-1.5h&amp;#34; 或 &amp;#34;2h45m&amp;#34;  有效的时间单位...|
 | [time.Since](#since) |Since 函数返回自 t (过去时间)到当前时间的时间间隔  |
 | [time.Sleep](#sleep) |sleep 用于让当前协程休眠一段时间，其单位为秒  |
 | [time.Unix](#unix) |Unix 函数根据给定的 Unix 时间戳（从 1970 年 1 月 1 日 UTC 开始的 sec 秒和 nsec 纳秒）返回相应的本地时间结构体  |
@@ -27,15 +27,15 @@ After 用于创建一个定时器，它会在指定的时间后向返回的通�
 
 Example:
 ```
-d, err = time.ParseDuration("5s")
-<-time.After(d) // 等待5秒后执行后续的语句
-tln("after 5s")
+d, err = time.ParseDuration(&#34;5s&#34;)
+&lt;-time.After(d) // 等待5秒后执行后续的语句
+tln(&#34;after 5s&#34;)
 ```
 
 
 #### 定义
 
-`After(d time.Duration) <-chan time.Time`
+`After(d time.Duration) &lt;-chan time.Time`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -45,7 +45,7 @@ tln("after 5s")
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `<-chan time.Time` |   |
+| r1 | `&lt;-chan time.Time` |   |
 
 
 ### AfterFunc
@@ -57,8 +57,8 @@ AfterFunc 用于创建一个定时器，它会在指定的时间后执行指定�
 
 Example:
 ```
-d, err = time.ParseDuration("5s")
-timer = time.AfterFunc(d, () => println("after 5s")) // 你可以通过调用 timer.Stop() 来取消定时器
+d, err = time.ParseDuration(&#34;5s&#34;)
+timer = time.AfterFunc(d, () =&gt; println(&#34;after 5s&#34;)) // 你可以通过调用 timer.Stop() 来取消定时器
 time.sleep(10)
 ```
 
@@ -128,7 +128,7 @@ monday, err = time.GetCurrentMonday()
 #### 详细描述
 NewTicker 根据给定的时间间隔(单位：秒)返回一个循环定时器结构体引用，它会周期性的向返回的通道发送当前时间
 
-你可以通过 &lt;- timer.C 来等待循环定时器到期
+你可以通过 &amp;lt;- timer.C 来等待循环定时器到期
 
 你也可以通过调用 timer.Stop 来取消循环定时器
 
@@ -137,7 +137,7 @@ Example:
 timer = time.NewTicker(5) // 你可以通过调用 timer.Stop() 来取消定时器
 ticker = time.NewTicker(1)
 for t in ticker.C {
-println("tick") // 每 1 秒打印一次 tick
+println(&#34;tick&#34;) // 每 1 秒打印一次 tick
 }
 ```
 
@@ -162,14 +162,14 @@ println("tick") // 每 1 秒打印一次 tick
 #### 详细描述
 NewTimer 根据给定的时间间隔(单位：秒)返回一个定时器结构体引用
 
-你可以通过 &lt;- timer.C 来等待定时器到期
+你可以通过 &amp;lt;- timer.C 来等待定时器到期
 
 你也可以通过调用 timer.Stop 来取消定时器
 
 Example:
 ```
 timer = time.NewTimer(5) // 你可以通过调用 timer.Stop() 来取消定时器
-<-timer.C // 等待定时器到期
+&lt;-timer.C // 等待定时器到期
 ```
 
 
@@ -195,10 +195,10 @@ now 用于获取当前时间的时间结构体
 
 Example:
 ```
-dur = time.ParseDuration("1m")~
+dur = time.ParseDuration(&#34;1m&#34;)~
 ctx, cancel = context.WithDeadline(context.New(), now().Add(dur))
 
-println(now().Format("2006-01-02 15:04:05"))
+println(now().Format(&#34;2006-01-02 15:04:05&#34;))
 ```
 
 
@@ -221,7 +221,7 @@ Parse 根据给定的格式解析时间字符串，返回时间结构体与错�
 
 Example:
 ```
-t, err = time.Parse("2006-01-02 15:04:05", "2020-01-01 00:00:00")
+t, err = time.Parse(&#34;2006-01-02 15:04:05&#34;, &#34;2020-01-01 00:00:00&#34;)
 ```
 
 
@@ -247,13 +247,13 @@ t, err = time.Parse("2006-01-02 15:04:05", "2020-01-01 00:00:00")
 #### 详细描述
 ParseDuration 根据给定的格式解析时间间隔字符串，返回时间间隔结构体与错误
 
-时间间隔字符串是一个可能带有符号的十进制数字序列，每个数字可以带有可选的小数和单位后缀，例如 "300ms"，"-1.5h" 或 "2h45m"
+时间间隔字符串是一个可能带有符号的十进制数字序列，每个数字可以带有可选的小数和单位后缀，例如 &amp;#34;300ms&amp;#34;，&amp;#34;-1.5h&amp;#34; 或 &amp;#34;2h45m&amp;#34;
 
-有效的时间单位有 "ns"（纳秒）, "us"（或 "µs" 微秒）, "ms"（毫秒）, "s"（秒）, "m"（分）, "h"（小时）
+有效的时间单位有 &amp;#34;ns&amp;#34;（纳秒）, &amp;#34;us&amp;#34;（或 &amp;#34;µs&amp;#34; 微秒）, &amp;#34;ms&amp;#34;（毫秒）, &amp;#34;s&amp;#34;（秒）, &amp;#34;m&amp;#34;（分）, &amp;#34;h&amp;#34;（小时）
 
 Example:
 ```
-d, err = time.ParseDuration("1h30m")
+d, err = time.ParseDuration(&#34;1h30m&#34;)
 ```
 
 
@@ -384,10 +384,10 @@ now 用于获取当前时间的时间结构体
 
 Example:
 ```
-dur = time.ParseDuration("1m")~
+dur = time.ParseDuration(&#34;1m&#34;)~
 ctx, cancel = context.WithDeadline(context.New(), now().Add(dur))
 
-println(now().Format("2006-01-02 15:04:05"))
+println(now().Format(&#34;2006-01-02 15:04:05&#34;))
 ```
 
 

@@ -15,7 +15,7 @@ Generate 根据传入的原始请求报文生成跨站请求伪造(CSRF)类型�
 
 Example:
 ```
-csrfPoc, err = csrf.Generate("POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&age=2")
+csrfPoc, err = csrf.Generate(&#34;POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&amp;age=2&#34;)
 ```
 
 
@@ -43,7 +43,7 @@ https 手动设置请求报文是否为HTTPS类型
 
 Example:
 ```
-csrfPoc, err = csrf.Generate("POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&age=2", csrf.HTTPS(true))
+csrfPoc, err = csrf.Generate(&#34;POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&amp;age=2&#34;, csrf.HTTPS(true))
 ```
 
 
@@ -71,7 +71,7 @@ multipartDefaultValue 手动设置请求报文是否为multipart/form-data类型
 
 Example:
 ```
-csrfPoc, err = csrf.Generate("POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&age=2", csrf.MultipartDefaultValue(true))
+csrfPoc, err = csrf.Generate(&#34;POST / HTTP/1.1\r\nHost:example.com\r\nContent-Type:application/x-www-form-urlencoded\r\n\r\nname=1&amp;age=2&#34;, csrf.MultipartDefaultValue(true))
 ```
 
 
