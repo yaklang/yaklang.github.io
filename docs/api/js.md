@@ -22,6 +22,8 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 | [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库  |
 | [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库  |
 | [js.libJsEncrypt](#libjsencrypt) |_libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入JsEncrypt 3.3.2库  |
+| [js.withVariable](#withvariable) ||
+| [js.withVariables](#withvariables) ||
 
 
 ## 函数定义
@@ -292,6 +294,47 @@ println(value.String())
 #### 定义
 
 `libJsEncrypt() jsRunOpts`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `jsRunOpts` |   |
+
+
+### withVariable
+
+#### 详细描述
+
+
+#### 定义
+
+`withVariable(name string, value any) jsRunOpts`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| value | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `jsRunOpts` |   |
+
+
+### withVariables
+
+#### 详细描述
+
+
+#### 定义
+
+`withVariables(vars map[string]any) jsRunOpts`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| vars | `map[string]any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

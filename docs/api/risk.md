@@ -57,7 +57,7 @@
 
 #### 定义
 
-`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent, error)`
+`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -68,8 +68,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*tpb.DNSLogEvent` |   |
-| r2 | `error` |   |
+| []*tpb.DNSLogEvent | `` |   |
+| error | `` |   |
 
 
 ### CheckHTTPLogByToken
@@ -79,7 +79,7 @@
 
 #### 定义
 
-`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification, error)`
+`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -90,8 +90,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*tpb.HTTPRequestTriggerNotification` |   |
-| r2 | `error` |   |
+| []*tpb.HTTPRequestTriggerNotification | `` |   |
+| error | `` |   |
 
 
 ### CheckICMPTriggerByLength
@@ -101,7 +101,7 @@
 
 #### 定义
 
-`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification, error)`
+`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -111,8 +111,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*tpb.ICMPTriggerNotification` |   |
-| r2 | `error` |   |
+| *tpb.ICMPTriggerNotification | `` |   |
+| error | `` |   |
 
 
 ### CheckRandomTriggerByToken
@@ -122,7 +122,7 @@
 
 #### 定义
 
-`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent, error)`
+`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent , error )`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -132,8 +132,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*tpb.RandomPortTriggerEvent` |   |
-| r2 | `error` |   |
+| *tpb.RandomPortTriggerEvent | `` |   |
+| error | `` |   |
 
 
 ### CheckServerReachable
