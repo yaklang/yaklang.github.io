@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [context.Background](#background) ||
-| [context.New](#new) ||
+| [context.Background](#background) |Background 返回空的 Context 接口（即上下文接口）  |
+| [context.New](#new) |New 返回空的 Context 接口（即上下文接口）  它实际是 context.Background 的别名  |
 | [context.Seconds](#seconds) |Seconds 返回一个超时时间为 d 秒的 Context 接口（即上下文接口）  它实际是 context.WithTimeoutSeconds 的别名  |
 | [context.WithCancel](#withcancel) |WithCancel 返回继承自 parent 的 Context 接口（即上下文接口）和取消函数  当调用返回的取消函数或者 parent 的取消函数时，整个上下文会被取消  |
 | [context.WithDeadline](#withdeadline) |WithDeadline 返回继承自 parent 的 Context 接口（即上下文接口）和取消函数  当调用返回的取消函数或者超出指定时间，整个上下文会被取消  |
@@ -16,6 +16,12 @@
 ### Background
 
 #### 详细描述
+Background 返回空的 Context 接口（即上下文接口）
+
+Example:
+```
+ctx = context.Background()
+```
 
 
 #### 定义
@@ -31,6 +37,14 @@
 ### New
 
 #### 详细描述
+New 返回空的 Context 接口（即上下文接口）
+
+它实际是 context.Background 的别名
+
+Example:
+```
+ctx = context.New()
+```
 
 
 #### 定义

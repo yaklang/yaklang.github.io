@@ -15,7 +15,8 @@
 | [x.Find](#find) ||
 | [x.Foreach](#foreach) ||
 | [x.ForeachRight](#foreachright) ||
-| [x.GC](#gc) |GC runs a garbage collection and blocks the caller until the garbage collection is complete. It may also block the entire program. |
+| [x.GC](#gc) ||
+| [x.GCPercent](#gcpercent) |SetGCPercent sets the garbage collection target percentage: a collection is triggered when the ratio of freshly allocated data to live data remaining ...|
 | [x.Head](#head) |Head gets the first element of array. |
 | [x.If](#if) ||
 | [x.IndexOf](#indexof) |IndexOf gets the index at which the first occurrence of value is found in array or return -1 if the value cannot be found |
@@ -319,14 +320,42 @@ Every returns true if every element is present in a iteratee.
 ### GC
 
 #### 详细描述
-GC runs a garbage collection and blocks the caller until the
-garbage collection is complete. It may also block the entire
-program.
 
 
 #### 定义
 
 `GC()`
+
+
+### GCPercent
+
+#### 详细描述
+SetGCPercent sets the garbage collection target percentage:
+a collection is triggered when the ratio of freshly allocated data
+to live data remaining after the previous collection reaches this percentage.
+SetGCPercent returns the previous setting.
+The initial setting is the value of the GOGC environment variable
+at startup, or 100 if the variable is not set.
+This setting may be effectively reduced in order to maintain a memory
+limit.
+A negative percentage effectively disables garbage collection, unless
+the memory limit is reached.
+See SetMemoryLimit for more details.
+
+
+#### 定义
+
+`GCPercent(percent int) int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| percent | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
 
 
 ### Head

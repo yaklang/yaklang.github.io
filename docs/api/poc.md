@@ -35,7 +35,7 @@
 | [poc.GetHTTPPacketCookies](#gethttppacketcookies) |GetHTTPPacketCookies 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string]string  |
 | [poc.GetHTTPPacketCookiesFull](#gethttppacketcookiesfull) |GetHTTPPacketCookiesFull 是一个辅助函数，用于获取请求报文中所有Cookie值，其返回值为map[string][]string，这是因为Cookie可能存在多个相同键名的值  |
 | [poc.GetHTTPPacketFirstLine](#gethttppacketfirstline) |GetHTTPPacketFirstLine 是一个辅助函数，用于获取 HTTP 报文中第一行的值，其返回值为string，string，string  在请求报文中，其三个返回值分别为：请求方法，请求URI，协议版本  在响应报文中，其三个返回值分别为：协议版本，状态码，状态码描述  |
-| [poc.GetHTTPPacketHeader](#gethttppacketheader) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string  |
+| [poc.GetHTTPPacketHeader](#gethttppacketheader) |GetHTTPPacketHeader 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string  |
 | [poc.GetHTTPPacketHeaders](#gethttppacketheaders) |GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string]string  |
 | [poc.GetHTTPPacketHeadersFull](#gethttppacketheadersfull) |GetHTTPPacketHeadersFull 是一个辅助函数，用于获取请求报文中所有请求头，其返回值为map[string][]string，这是因为请求头可能存在多个相同键名的值  |
 | [poc.GetHTTPPacketPostParam](#gethttppacketpostparam) |GetHTTPPacketPostParam 是一个辅助函数，用于获取请求报文中指定的POST请求参数，其返回值为string  |
@@ -1134,16 +1134,16 @@ Host: pie.dev
 ### GetHTTPPacketHeader
 
 #### 详细描述
-GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string
+GetHTTPPacketHeader 是一个辅助函数，用于获取请求报文中指定的请求头，其返回值为string
 
 Example:
 ```
-poc.GetHTTPPacketCookiesFull(`GET /get HTTP/1.1
+poc.GetHTTPPacketHeader(`GET /get HTTP/1.1
 Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`) // 获取Content-Type请求头，这里会返回&#34;application/json&#34;
+`, &#34;Content-Type&#34;) // 获取Content-Type请求头，这里会返回&#34;application/json&#34;
 ```
 
 
@@ -1170,7 +1170,7 @@ GetHTTPPacketHeaders 是一个辅助函数，用于获取请求报文中所有�
 
 Example:
 ```
-poc.GetHTTPPacketCookiesFull(`GET /get HTTP/1.1
+poc.GetHTTPPacketHeaders(`GET /get HTTP/1.1
 Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev

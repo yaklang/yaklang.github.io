@@ -2,10 +2,10 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Java|(ssaapi.Language) &#34;java&#34;|
-Javascript|(ssaapi.Language) &#34;js&#34;|
-PHP|(ssaapi.Language) &#34;php&#34;|
-Yak|(ssaapi.Language) &#34;yak&#34;|
+Java|(consts.Language) &#34;java&#34;|
+Javascript|(consts.Language) &#34;js&#34;|
+PHP|(consts.Language) &#34;php&#34;|
+Yak|(consts.Language) &#34;yak&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
@@ -108,12 +108,12 @@ save to database, please set the program name
 
 #### 定义
 
-`withLanguage(language Language) Option`
+`withLanguage(language consts.Language) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| language | `Language` |   |
+| language | `consts.Language` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

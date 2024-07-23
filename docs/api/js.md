@@ -17,7 +17,7 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 | [js.GetSTType](#getsttype) ||
 | [js.New](#new) |New 创建新的JS引擎并返回  |
 | [js.Parse](#parse) |Parse 对传入的JS代码进行解析并返回解析后的AST树和错误  |
-| [js.Run](#run) |Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误  第一个参数为运行的代码字符串  后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等  |
+| [js.Run](#run) |Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误  第一个参数为运行的代码字符串  后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等  现在会尝试自动导入代码中使用到的库, CryptoJS会导入V4版本  |
 | [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库  |
 | [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库  |
 | [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库  |
@@ -187,6 +187,8 @@ Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用
 第一个参数为运行的代码字符串
 
 后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等
+
+现在会尝试自动导入代码中使用到的库, CryptoJS会导入V4版本
 
 Example:
 ```
