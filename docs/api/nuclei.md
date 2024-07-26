@@ -302,12 +302,12 @@
 
 #### 定义
 
-`customVulnFilter(f *filter.StringFilter) ConfigOption`
+`customVulnFilter(f filter.Filterable) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| f | `*filter.StringFilter` |   |
+| f | `filter.Filterable` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -140,12 +140,12 @@
 
 #### 定义
 
-`NewMixPluginCallerWithFilter(webFilter *filter.StringFilter) (*MixPluginCaller, error)`
+`NewMixPluginCallerWithFilter(webFilter filter.Filterable) (*MixPluginCaller, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| webFilter | `*filter.StringFilter` |   |
+| webFilter | `filter.Filterable` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
