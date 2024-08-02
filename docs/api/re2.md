@@ -37,12 +37,12 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`Compile(rawRule string) (*regexp2.Regexp, error)`
+`Compile(pattern string) (*regexp2.Regexp, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| rawRule | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -80,13 +80,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`Find(data any, text string) string`
+`Find(data any, pattern string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | data | `any` |   |
-| text | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -101,13 +101,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`FindAll(data any, text string) []string`
+`FindAll(data any, pattern string) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | data | `any` |   |
-| text | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -122,13 +122,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`FindGroup(i any, raw string) map[string]string`
+`FindGroup(i any, pattern string) map[string]string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| raw | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -143,13 +143,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`FindGroupAll(i any, raw string) []map[string]string`
+`FindGroupAll(i any, pattern string) []map[string]string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| raw | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -164,13 +164,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`FindSubmatch(i any, rule string) []string`
+`FindSubmatch(i any, pattern string) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| rule | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -185,13 +185,13 @@ OPT_Singleline|(int) 16|
 
 #### 定义
 
-`FindSubmatchAll(i any, raw string) [][]string`
+`FindSubmatchAll(i any, pattern string) [][]string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
-| raw | `string` |   |
+| pattern | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
