@@ -9,6 +9,7 @@
 | [cli.FileNames](#filenames) |FileNames 获取对应名称的命令行参数，获得选中的所有文件路径，并返回 []string 类型 |
 | [cli.FileOrContent](#fileorcontent) |FileOrContent 获取对应名称的命令行参数 根据其传入的值尝试读取其对应文件内容，如果无法读取则直接返回，最后返回 []byte 类型 |
 | [cli.Float](#float) |Float 获取对应名称的命令行参数，并将其转换为 float 类型返回 |
+| [cli.FolderName](#foldername) |FolderName 获取对应名称的命令行参数，获得选中的文件夹路径，并返回 string 类型 |
 | [cli.HTTPPacket](#httppacket) |HTTPPacket 获取对应名称的命令行参数，并将其转换为 string 类型返回 其作为一个独立脚本运行时与 cli.String 没有区别，仅在 Yakit 图形化中展示为 HTTP 报文形式 |
 | [cli.Have](#have) |Have 获取对应名称的命令行参数，并将其转换为 bool 类型返回 |
 | [cli.Host](#host) |Host 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
@@ -220,6 +221,32 @@ percent = cli.Float(&#34;percent&#34;) // --percent 0.5 则 percent 为 0.5
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `float64` |   |
+
+
+### FolderName
+
+#### 详细描述
+FolderName 获取对应名称的命令行参数，获得选中的文件夹路径，并返回 string 类型
+Example:
+```
+folder = cli.FolderName(&#34;folder&#34;)
+// --folder /etc 则 folder 为 &#34;/etc&#34;
+```
+
+#### 定义
+
+`FolderName(name string, opts ...SetCliExtraParam) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### HTTPPacket
