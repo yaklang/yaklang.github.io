@@ -134,6 +134,8 @@
 | [poc.retryTimes](#retrytimes) |retryTimes 是一个请求选项参数，用于指定请求失败时的重试次数，需要搭配 retryInStatusCode 或 retryNotInStatusCode 使用，来设置在什么响应码的情况下重试  |
 | [poc.retryWaitTime](#retrywaittime) |retryWaitTime 是一个请求选项参数，用于指定重试时最小等待时间，需要搭配 retryTimes 使用，默认为0.1秒  |
 | [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
+| [poc.saveHandler](#savehandler) |saveHandler 是一个请求选项参数，用于设置在将此次请求存入数据库之前的回调函数  |
+| [poc.saveSync](#savesync) |saveSync 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，且同步保存，默认为false即会异步保存到数据库  |
 | [poc.session](#session) |session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用  |
 | [poc.sni](#sni) |sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)  |
 | [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
@@ -3928,6 +3930,62 @@ poc.Get(&#34;https://exmaple.com&#34;, poc.save(true)) // 向 example.com 发起
 #### 定义
 
 `save(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### saveHandler
+
+#### 详细描述
+saveHandler 是一个请求选项参数，用于设置在将此次请求存入数据库之前的回调函数
+
+Example:
+```
+
+	poc.Get(&#34;https://exmaple.com&#34;, poc.save(func(resp){
+		resp.Tags = append(resp.Tags,&#34;test&#34;)
+	})) // 向 example.com 发起请求，添加test tag
+
+```
+
+
+#### 定义
+
+`saveHandler(f func(response *lowhttp.LowhttpResponse)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(response *lowhttp.LowhttpResponse)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### saveSync
+
+#### 详细描述
+saveSync 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，且同步保存，默认为false即会异步保存到数据库
+
+Example:
+```
+poc.Get(&#34;https://exmaple.com&#34;, poc.save(true), poc.saveSync(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中，且同步保存
+```
+
+
+#### 定义
+
+`saveSync(b bool) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|

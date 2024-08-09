@@ -99,6 +99,8 @@ TCP_FLAG_URG|(int) 32|
 | [pcapx.ipv4_srcIp](#ipv4_srcip) ||
 | [pcapx.ipv4_tos](#ipv4_tos) ||
 | [pcapx.ipv4_ttl](#ipv4_ttl) ||
+| [pcapx.loopback_family](#loopback_family) ||
+| [pcapx.loopback_payload](#loopback_payload) ||
 | [pcapx.pcap_bpfFilter](#pcap_bpffilter) ||
 | [pcapx.pcap_debug](#pcap_debug) ||
 | [pcapx.pcap_disableAssembly](#pcap_disableassembly) ||
@@ -672,6 +674,46 @@ TCP_FLAG_URG|(int) 32|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `IPv4Option` |   |
+
+
+### loopback_family
+
+#### 详细描述
+
+
+#### 定义
+
+`loopback_family(i any) LoopbackOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LoopbackOption` |   |
+
+
+### loopback_payload
+
+#### 详细描述
+
+
+#### 定义
+
+`loopback_payload(payload []byte) LoopbackOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| payload | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LoopbackOption` |   |
 
 
 ### pcap_bpfFilter
