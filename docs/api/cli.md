@@ -41,6 +41,7 @@
 | [cli.setMultipleSelect](#setmultipleselect) |SetMultipleSelect 是一个选项函数，设置参数是否可以多选 此选项仅在`cli.StringSlice`中生效 |
 | [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须 |
 | [cli.setSelectOption](#setselectoption) |setSelectOption 是一个选项函数，设置参数的下拉框选项 此选项仅在`cli.StringSlice`中生效 |
+| [cli.setShortName](#setshortname) |setShortName 是一个选项函数，设置参数的短名称 |
 | [cli.setVerboseName](#setverbosename) |setVerboseName 是一个选项函数，设置参数的中文名 |
 | [cli.showGroup](#showgroup) ||
 | [cli.showParams](#showparams) ||
@@ -988,6 +989,31 @@ cli.StringSlice(&#34;targets&#34;, cli.setSelectOption(&#34;下拉框选项&#34;
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
 | value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
+
+
+### setShortName
+
+#### 详细描述
+setShortName 是一个选项函数，设置参数的短名称
+Example:
+```
+cli.String(&#34;target&#34;, cli.setShortName(&#34;t&#34;))
+```
+在命令行可以使用`-t`代替`--target`
+
+#### 定义
+
+`setShortName(shortName string) SetCliExtraParam`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| shortName | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

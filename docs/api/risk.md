@@ -57,7 +57,7 @@
 
 #### 定义
 
-`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent , error )`
+`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -68,8 +68,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []*tpb.DNSLogEvent | `` |   |
-| error | `` |   |
+| []*tpb.DNSLogEvent | `any` |   |
+| error | `any` |   |
 
 
 ### CheckHTTPLogByToken
@@ -79,7 +79,7 @@
 
 #### 定义
 
-`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification , error )`
+`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -90,8 +90,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []*tpb.HTTPRequestTriggerNotification | `` |   |
-| error | `` |   |
+| []*tpb.HTTPRequestTriggerNotification | `any` |   |
+| error | `any` |   |
 
 
 ### CheckICMPTriggerByLength
@@ -101,7 +101,7 @@
 
 #### 定义
 
-`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification , error )`
+`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -111,8 +111,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *tpb.ICMPTriggerNotification | `` |   |
-| error | `` |   |
+| *tpb.ICMPTriggerNotification | `any` |   |
+| error | `any` |   |
 
 
 ### CheckRandomTriggerByToken
@@ -122,7 +122,7 @@
 
 #### 定义
 
-`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent , error )`
+`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -132,8 +132,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *tpb.RandomPortTriggerEvent | `` |   |
-| error | `` |   |
+| *tpb.RandomPortTriggerEvent | `any` |   |
+| error | `any` |   |
 
 
 ### CheckServerReachable
@@ -652,7 +652,7 @@
 
 #### 定义
 
-`ignore(r *schema.Risk)`
+`ignore(r *schema.Risk) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -662,7 +662,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### level

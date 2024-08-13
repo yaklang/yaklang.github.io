@@ -81,7 +81,7 @@
 
 #### 定义
 
-`ParseSuricata(data string, envs ...string) ([]*Rule , error )`
+`ParseSuricata(data string, envs ...string) ([]*Rule any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -92,8 +92,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []*Rule | `` |   |
-| error | `` |   |
+| []*Rule | `any` |   |
+| error | `any` |   |
 
 
 ### TrafficGenerator

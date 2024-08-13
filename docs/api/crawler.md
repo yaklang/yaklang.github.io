@@ -584,7 +584,7 @@ crawler.Start(&#34;https://example.com&#34;, crawler.proxy(&#34;http://127.0.0.1
 
 #### 定义
 
-`responseTimeout(c *Config)`
+`responseTimeout(c *Config) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -594,7 +594,7 @@ crawler.Start(&#34;https://example.com&#34;, crawler.proxy(&#34;http://127.0.0.1
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### timeout

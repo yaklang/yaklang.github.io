@@ -274,7 +274,7 @@
 
 #### 定义
 
-`service_kill9(c *SystemdServiceConfig)`
+`service_kill9(c *SystemdServiceConfig) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -284,7 +284,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### service_kill_mode

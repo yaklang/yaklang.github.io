@@ -43,7 +43,7 @@
 
 #### 定义
 
-`FromJson(raw []byte) ([]JavaSerializable , error )`
+`FromJson(raw []byte) ([]JavaSerializable any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -53,8 +53,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `` |   |
-| error | `` |   |
+| []JavaSerializable | `any` |   |
+| error | `any` |   |
 
 
 ### MarshalJavaObjects
@@ -611,7 +611,7 @@
 
 #### 定义
 
-`ParseHexJavaObjectStream(raw string) ([]JavaSerializable , error )`
+`ParseHexJavaObjectStream(raw string) ([]JavaSerializable any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -621,8 +621,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `` |   |
-| error | `` |   |
+| []JavaSerializable | `any` |   |
+| error | `any` |   |
 
 
 ### ParseJavaObjectStream
@@ -632,7 +632,7 @@
 
 #### 定义
 
-`ParseJavaObjectStream(raw []byte) ([]JavaSerializable , error )`
+`ParseJavaObjectStream(raw []byte) ([]JavaSerializable any, error any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -642,8 +642,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `` |   |
-| error | `` |   |
+| []JavaSerializable | `any` |   |
+| error | `any` |   |
 
 
 ### ToJson

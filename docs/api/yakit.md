@@ -69,12 +69,12 @@
 
 #### 定义
 
-`AutoInitYakit()`
+`AutoInitYakit() any`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### Debug
@@ -120,7 +120,7 @@
 
 #### 定义
 
-`EnableTable(tableName string, columns []string)`
+`EnableTable(tableName string, columns []string) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -131,7 +131,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### EnableText
@@ -156,7 +156,7 @@
 
 #### 定义
 
-`EnableWebsiteTrees(targets string)`
+`EnableWebsiteTrees(targets string) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -166,7 +166,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### Error
@@ -926,7 +926,7 @@
 
 #### 定义
 
-`StatusCard(id string, data any, tags ...string)`
+`StatusCard(id string, data any, tags ...string) any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -938,7 +938,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `` |   |
+| r1 | `any` |   |
 
 
 ### Stream
