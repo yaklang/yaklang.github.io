@@ -11,13 +11,16 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:------|:--------|
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
-| [ssa.withDatabaseProgramName](#withdatabaseprogramname) |save to database, please set the program name |
+| [ssa.withDatabasePath](#withdatabasepath) ||
+| [ssa.withDescription](#withdescription) ||
 | [ssa.withEntryFile](#withentryfile) ||
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
 | [ssa.withLanguage](#withlanguage) ||
 | [ssa.withProcess](#withprocess) ||
+| [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
 | [ssa.withReCompile](#withrecompile) ||
+| [ssa.withSaveToProfile](#withsavetoprofile) ||
 
 
 ## 函数定义
@@ -65,20 +68,39 @@ Yak|(consts.Language) &#34;yak&#34;|
 | r2 | `error` |   |
 
 
-### withDatabaseProgramName
+### withDatabasePath
 
 #### 详细描述
-save to database, please set the program name
 
 
 #### 定义
 
-`withDatabaseProgramName(name string) Option`
+`withDatabasePath(path string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
+| path | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withDescription
+
+#### 详细描述
+
+
+#### 定义
+
+`withDescription(desc string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| desc | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -187,6 +209,27 @@ save to database, please set the program name
 | r1 | `Option` |   |
 
 
+### withProgramName
+
+#### 详细描述
+save to database, please set the program name
+
+
+#### 定义
+
+`withProgramName(name string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
 ### withReCompile
 
 #### 详细描述
@@ -200,6 +243,26 @@ save to database, please set the program name
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withSaveToProfile
+
+#### 详细描述
+
+
+#### 定义
+
+`withSaveToProfile(b ...bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
