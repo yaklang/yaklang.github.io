@@ -1,8 +1,8 @@
 ---
-sidebar_position: 19
+sidebar_position: 20
 ---
 
-# 十、热加载场景案例：爆破aes cbc加密
+# 热加载场景案例：爆破aes cbc加密
 这篇文章我们将会介绍另一个热加载的实际应用案例：爆破aes cbc加密。我们以 yakit 官方的 Vulinbox靶场为例。
 
 首先我们需要安全并启动 Vulinbox 靶场，打开 yakit ，点击**试验性功能 - (靶场)Vulinbox**：

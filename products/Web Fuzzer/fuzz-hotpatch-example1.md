@@ -1,8 +1,8 @@
 ---
-sidebar_position: 18
+sidebar_position: 19
 ---
 
-# 九、热加载场景案例：csrf token保护下的爆破
+# 热加载场景案例：csrf token保护下的爆破
 这篇文章我们将会介绍一个热加载的实际应用案例：csrf token保护下的爆破。我们以pikachu靶场为例，安装pikachu靶场后(**记得要初始化**)，我们打开如下页面：
 ![](/img/products/yakit/Fuzz-hotpatch-example1/1.png)
 

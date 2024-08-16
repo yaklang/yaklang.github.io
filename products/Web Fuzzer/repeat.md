@@ -1,7 +1,7 @@
 ---
 sidebar_position: 10
 ---
-# 一、重放
+# 重放
 
 这篇文章我们开始学习Yakit的核心组件之一**Web Fuzzer**。Web Fuzzer模块支持用户自定义HTTP原文发送请求。为了让用户使用简单，符合直觉，只需要关心数据相关信息，Yakit后端(yaklang)做了很多工作。
 
