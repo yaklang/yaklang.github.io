@@ -27,6 +27,7 @@
 | [risk.Save](#save) ||
 | [risk.YieldRiskByCreateAt](#yieldriskbycreateat) ||
 | [risk.YieldRiskByRuntimeId](#yieldriskbyruntimeid) ||
+| [risk.YieldRiskByScriptName](#yieldriskbyscriptname) ||
 | [risk.YieldRiskByTarget](#yieldriskbytarget) ||
 | [risk.cve](#cve) ||
 | [risk.description](#description) ||
@@ -538,6 +539,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | runtimeId | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.Risk` |   |
+
+
+### YieldRiskByScriptName
+
+#### 详细描述
+
+
+#### 定义
+
+`YieldRiskByScriptName(scriptName string) chan *schema.Risk`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| scriptName | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

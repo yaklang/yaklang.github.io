@@ -45,7 +45,6 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SaveHTTPFlowFromRaw](#savehttpflowfromraw) ||
 | [db.SaveHTTPFlowFromRawWithOption](#savehttpflowfromrawwithoption) ||
 | [db.SaveHTTPFlowFromRawWithType](#savehttpflowfromrawwithtype) ||
-| [db.SaveHTTPFlowWithTags](#savehttpflowwithtags) ||
 | [db.SavePayload](#savepayload) ||
 | [db.SavePayloadByFile](#savepayloadbyfile) ||
 | [db.SavePortFromResult](#saveportfromresult) ||
@@ -55,6 +54,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SetProjectKey](#setprojectkey) ||
 | [db.YieldPayload](#yieldpayload) |YieldPayload means |
 | [db.YieldYakScriptAll](#yieldyakscriptall) ||
+| [db.saveHTTPFlowWithTags](#savehttpflowwithtags) ||
 
 
 ## 函数定义
@@ -737,26 +737,6 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | r1 | `error` |   |
 
 
-### SaveHTTPFlowWithTags
-
-#### 详细描述
-
-
-#### 定义
-
-`SaveHTTPFlowWithTags(tags string) CreateHTTPFlowOptions`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tags | `string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CreateHTTPFlowOptions` |   |
-
-
 ### SavePayload
 
 #### 详细描述
@@ -939,5 +919,25 @@ YieldPayload means
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `chan *schema.YakScript` |   |
+
+
+### saveHTTPFlowWithTags
+
+#### 详细描述
+
+
+#### 定义
+
+`saveHTTPFlowWithTags(tags string) CreateHTTPFlowOptions`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tags | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CreateHTTPFlowOptions` |   |
 
 
