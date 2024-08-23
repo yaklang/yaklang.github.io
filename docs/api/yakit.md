@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [yakit.AutoInitYakit](#autoinityakit) ||
+| [yakit.Code](#code) ||
 | [yakit.Debug](#debug) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
 | [yakit.EnableTable](#enabletable) ||
@@ -51,6 +52,7 @@
 | [yakit.SetProgressEx](#setprogressex) ||
 | [yakit.StatusCard](#statuscard) ||
 | [yakit.Stream](#stream) ||
+| [yakit.Success](#success) ||
 | [yakit.TableData](#tabledata) ||
 | [yakit.Text](#text) ||
 | [yakit.TextTabData](#texttabdata) ||
@@ -75,6 +77,21 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### Code
+
+#### 详细描述
+
+
+#### 定义
+
+`Code(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
 
 
 ### Debug
@@ -322,7 +339,12 @@
 
 #### 定义
 
-`NewBarGraph() *YakitGraph`
+`NewBarGraph(graphName ...string) *YakitGraph`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| graphName | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -381,7 +403,12 @@
 
 #### 定义
 
-`NewLineGraph() *YakitGraph`
+`NewLineGraph(graphName ...string) *YakitGraph`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| graphName | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -396,7 +423,12 @@
 
 #### 定义
 
-`NewPieGraph() *YakitGraph`
+`NewPieGraph(graphName ...string) *YakitGraph`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| graphName | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -431,7 +463,12 @@
 
 #### 定义
 
-`NewWordCloud() *YakitGraph`
+`NewWordCloud(graphName ...string) *YakitGraph`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| graphName | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -957,6 +994,21 @@
 | streamId | `string` |   |
 | stream | `io.Reader` |   |
 | extra | `...any` |   |
+
+
+### Success
+
+#### 详细描述
+
+
+#### 定义
+
+`Success(tmp any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `any` |   |
 
 
 ### TableData

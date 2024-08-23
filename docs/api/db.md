@@ -45,6 +45,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SaveHTTPFlowFromRaw](#savehttpflowfromraw) ||
 | [db.SaveHTTPFlowFromRawWithOption](#savehttpflowfromrawwithoption) ||
 | [db.SaveHTTPFlowFromRawWithType](#savehttpflowfromrawwithtype) ||
+| [db.SaveHTTPFlowInstance](#savehttpflowinstance) ||
 | [db.SavePayload](#savepayload) ||
 | [db.SavePayloadByFile](#savepayloadbyfile) ||
 | [db.SavePortFromResult](#saveportfromresult) ||
@@ -730,6 +731,26 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | req | `[]byte` |   |
 | rsp | `[]byte` |   |
 | typeStr | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### SaveHTTPFlowInstance
+
+#### 详细描述
+
+
+#### 定义
+
+`SaveHTTPFlowInstance(flow *schema.HTTPFlow) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| flow | `*schema.HTTPFlow` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
