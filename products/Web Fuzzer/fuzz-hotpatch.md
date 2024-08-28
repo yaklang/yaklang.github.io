@@ -1,8 +1,8 @@
 ---
-sidebar_position: 17
+sidebar_position: 18
 ---
 
-# 八、热加载
+# 热加载
 
 在聊热加载之前，我们首先需要对其进行了解：什么是热加载？
 

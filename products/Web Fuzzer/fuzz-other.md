@@ -1,8 +1,8 @@
 ---
-sidebar_position: 20
+sidebar_position: 21
 ---
 
-# 十一、其他
+# 其他
 在这里，我们介绍一些 Web Fuzzer 的小功能，功能虽小，但是却很实用。
 
 ## 新建 Web Fuzzer
