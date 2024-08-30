@@ -7,7 +7,7 @@ htmlChangeMode|(simulator.loginDetectMode) 1|
 leaklessDefault|(simulator.LeaklessMode) 0|
 leaklessOff|(simulator.LeaklessMode) -1|
 leaklessOn|(simulator.LeaklessMode) 1|
-simple|(map[string]interface {}) map[string]interface {}{&#34;bodyModifyTarget&#34;: &#34;body&#34;, &#34;bodyReplaceTarget&#34;: &#34;bodyReplace&#34;, &#34;createBrowser&#34;: (func(...simple.BrowserConfigOpt) *simple.VBrowser)(0x27102a0), &#34;headersModifyTarget&#34;: &#34;headers&#34;, &#34;headless&#34;: (func(bool) simple.BrowserConfigOpt)(0x270fce0), &#34;hostModifyTarget&#34;: &#34;host&#34;, &#34;noSandBox&#34;: (func(bool) simple.BrowserConfigOpt)(0x270fc60), &#34;proxy&#34;: (func(string, ...string) simple.BrowserConfigOpt)(0x270faa0), &#34;requestModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x2710000), &#34;responseModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x270fd60), &#34;wsAddress&#34;: (func(string) simple.BrowserConfigOpt)(0x270f9c0)}|
+simple|(map[string]interface {}) map[string]interface {}{&#34;bodyModifyTarget&#34;: &#34;body&#34;, &#34;bodyReplaceTarget&#34;: &#34;bodyReplace&#34;, &#34;createBrowser&#34;: (func(...simple.BrowserConfigOpt) *simple.VBrowser)(0x2713900), &#34;headersModifyTarget&#34;: &#34;headers&#34;, &#34;headless&#34;: (func(bool) simple.BrowserConfigOpt)(0x2713340), &#34;hostModifyTarget&#34;: &#34;host&#34;, &#34;noSandBox&#34;: (func(bool) simple.BrowserConfigOpt)(0x27132c0), &#34;proxy&#34;: (func(string, ...string) simple.BrowserConfigOpt)(0x2713100), &#34;requestModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x2713660), &#34;responseModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x27133c0), &#34;wsAddress&#34;: (func(string) simple.BrowserConfigOpt)(0x2713020)}|
 urlChangeMode|(simulator.loginDetectMode) 0|
 
 |函数名|函数描述/介绍|
@@ -16,6 +16,7 @@ urlChangeMode|(simulator.loginDetectMode) 0|
 | [simulator.captchaImgSelector](#captchaimgselector) ||
 | [simulator.captchaInputSelector](#captchainputselector) ||
 | [simulator.captchaMode](#captchamode) ||
+| [simulator.captchaType](#captchatype) ||
 | [simulator.captchaUrl](#captchaurl) ||
 | [simulator.exePath](#exepath) ||
 | [simulator.extraWaitLoadTime](#extrawaitloadtime) ||
@@ -113,6 +114,26 @@ urlChangeMode|(simulator.loginDetectMode) 0|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | mode | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### captchaType
+
+#### 详细描述
+
+
+#### 定义
+
+`captchaType(typeEnum int) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typeEnum | `int` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
