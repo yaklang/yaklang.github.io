@@ -12,7 +12,7 @@
 | [synscan.iface](#iface) |iface syn scan 的配置选项，设置 syn 扫描的网卡  @param {string} iface 网卡名称  @return {scanOpt} 返回配置选项  |
 | [synscan.initHostFilter](#inithostfilter) |initHostFilter syn scan 的配置选项，设置本次扫描的主机过滤器，只展示这些主机的扫描结果  @param {string} f 主机，支持逗号、CIDR、-分割  @return {scanOpt} 返回配置选项  |
 | [synscan.initPortFilter](#initportfilter) |initPortFilter syn scan 的配置选项，设置本次扫描的端口过滤器，只展示这些端口的扫描结果  @param {string} f 端口，支持逗号、-分割  @return {scanOpt} 返回配置选项  |
-| [synscan.maxPorts](#maxports) ||
+| [synscan.maxPorts](#maxports) |maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数  @param {int} max 最大开放端口数  @return {scanOpt} 返回配置选项  |
 | [synscan.outputFile](#outputfile) |outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的文件  @param {string} file 文件路径  @return {scanOpt} 返回配置选项  |
 | [synscan.outputPrefix](#outputprefix) |outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用  @param {string} prefix 前缀  @return {scanOpt} 返回配置选项...|
 | [synscan.rateLimit](#ratelimit) |rateLimit syn scan 的配置选项，设置 syn 扫描的速率  @param {int} ms 延迟多少毫秒  @param {int} count 每隔多少个数据包延迟一次  @return {scanOpt} 返回配置选项  |
@@ -383,6 +383,21 @@ die(err)
 ### maxPorts
 
 #### 详细描述
+maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数
+
+@param {int} max 最大开放端口数
+
+@return {scanOpt} 返回配置选项
+
+Example:
+```
+res, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;1-65535&#34;,
+
+	synscan.maxOpenPorts(100) // 单个 IP 最多开放 100 个端口
+
+)
+die(err)
+```
 
 
 #### 定义

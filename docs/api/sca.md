@@ -28,6 +28,7 @@ MODE_PKG|(int) 2|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [sca.NewAnalyzerResult](#newanalyzerresult) ||
 | [sca.ScanContainerFromContext](#scancontainerfromcontext) ||
 | [sca.ScanFilesystem](#scanfilesystem) ||
 | [sca.ScanGitRepo](#scangitrepo) ||
@@ -36,11 +37,33 @@ MODE_PKG|(int) 2|
 | [sca.ScanLocalFilesystem](#scanlocalfilesystem) ||
 | [sca.analyzers](#analyzers) ||
 | [sca.concurrent](#concurrent) ||
+| [sca.customAnalyzer](#customanalyzer) ||
 | [sca.endpoint](#endpoint) ||
 | [sca.scanMode](#scanmode) ||
 
 
 ## 函数定义
+### NewAnalyzerResult
+
+#### 详细描述
+
+
+#### 定义
+
+`NewAnalyzerResult(name string, version string) *CustomPackage`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| version | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*CustomPackage` |   |
+
+
 ### ScanContainerFromContext
 
 #### 详细描述
@@ -70,12 +93,12 @@ MODE_PKG|(int) 2|
 
 #### 定义
 
-`ScanFilesystem(p fs.FS, opts ...ScanOption) ([]*dxtypes.Package, error)`
+`ScanFilesystem(p fi.FileSystem, opts ...ScanOption) ([]*dxtypes.Package, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `fs.FS` |   |
+| p | `fi.FileSystem` |   |
 | opts | `...ScanOption` |   |
 
 #### 返回值
@@ -206,6 +229,27 @@ MODE_PKG|(int) 2|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ScanOption` |   |
+
+
+### customAnalyzer
+
+#### 详细描述
+
+
+#### 定义
+
+`customAnalyzer(matchFunc func(info analyzer.MatchInfo) int, analyzeFunc func(fi *analyzer.FileInfo, otherFi map[string]*analyzer.FileInfo) []*analyzer.CustomPackage) ScanOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| matchFunc | `func(info analyzer.MatchInfo) int` |   |
+| analyzeFunc | `func(fi *analyzer.FileInfo, otherFi map[string]*analyzer.FileInfo) []*analyzer.CustomPackage` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
