@@ -258,6 +258,19 @@ $min-width: REM(1232);
           }
         }
       }
+      &-legacy-wrap {
+        margin-top: REM(30);
+        text-align: center;
+        .guide-body-yakit-legacy-btn {
+          cursor: pointer;
+          color: #999ea8;
+          text-decoration: underline;
+          font-family: PingFangSC-Regular, PingFang SC;
+          &:hover {
+            color: #ff7d23;
+          }
+        }
+      }
     }
   }
 
@@ -428,6 +441,41 @@ $min-width: REM(1232);
         width: REM(300);
         height: REM(299);
         z-index: 99;
+      }
+    }
+  }
+}
+
+.yakit-legacy-dropdown {
+  .ant-dropdown-menu {
+    border-radius: 4px;
+    .yakit-legacy-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: REM(10);
+      &-left {
+        .yakit-legacy-item-name {
+          font-weight: 600;
+          font-size: REM(16);
+        }
+        .yakit-legacy-item-desc {
+          font-weight: 400;
+          color: #999ea8;
+          font-size: REM(12);
+        }
+      }
+      &:hover {
+        .yakit-legacy-item-right {
+          visibility: visible;
+        }
+      }
+      &-right {
+        visibility: hidden;
+        svg {
+          width: REM(16);
+          height: REM(16);
+        }
       }
     }
   }
