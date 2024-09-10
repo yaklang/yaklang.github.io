@@ -449,6 +449,11 @@ $min-width: REM(1232);
 .yakit-legacy-dropdown {
   .ant-dropdown-menu {
     border-radius: 4px;
+    padding: REM(11) 0;
+    .ant-dropdown-menu-item {
+      padding-left: REM(20);
+      padding-right: REM(20);
+    }
     .yakit-legacy-item {
       display: flex;
       justify-content: space-between;
