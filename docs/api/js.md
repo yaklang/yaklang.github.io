@@ -79,7 +79,7 @@ CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用
 
 Example:
 ```
-value = js.CallFunctionFromCode(`function add(a, b) { return a + b; }`, &#34;add&#34;, 1, 2)~
+value = js.CallFunctionFromCode(`function add(a, b) { return a + b; }`, "add", 1, 2)~
 println(value.String())
 ```
 
@@ -130,7 +130,7 @@ New 创建新的JS引擎并返回
 Example:
 ```
 engine = js.New()
-val = engine.RunString(&#34;1+1&#34;)~.ToInteger()~
+val = engine.RunString("1+1")~.ToInteger()~
 println(val)
 ```
 
@@ -192,7 +192,7 @@ Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用
 
 Example:
 ```
-_, value = js.Run(`CryptoJS.HmacSHA256(&#34;Message&#34;, &#34;secret&#34;).toString();`, js.libCryptoJSV3())~
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
 println(value.String())
 ```
 
@@ -222,7 +222,7 @@ libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入Cr
 
 Example:
 ```
-_, value = js.Run(`CryptoJS.HmacSHA256(&#34;Message&#34;, &#34;secret&#34;).toString();`, js.libCryptoJSV3())~
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
 println(value.String())
 ```
 
@@ -244,7 +244,7 @@ libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入Cr
 
 Example:
 ```
-_, value = js.Run(`CryptoJS.HmacSHA256(&#34;Message&#34;, &#34;secret&#34;).toString();`, js.libCryptoJSV4())~
+_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV4())~
 println(value.String())
 ```
 
@@ -266,7 +266,7 @@ libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsr
 
 Example:
 ```
-_, value = js.Run(`KEYUTIL.getKey(pemPublicKey).encrypt(&#34;yaklang&#34;)`, js.libJSRSASign())~
+_, value = js.Run(`KEYUTIL.getKey(pemPublicKey).encrypt("yaklang")`, js.libJSRSASign())~
 println(value.String())
 ```
 
@@ -288,7 +288,7 @@ _libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入Js
 
 Example:
 ```
-_, value = js.Run(&#34;var encrypt = new JSEncrypt();&#34;, js._libJsEncrypt())~
+_, value = js.Run("var encrypt = new JSEncrypt();", js._libJsEncrypt())~
 println(value.String())
 ```
 

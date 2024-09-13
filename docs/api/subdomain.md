@@ -26,7 +26,7 @@ Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串
 
 Example:
 ```
-for domain in subdomain.Scan(&#34;example.com&#34;)~ {
+for domain in subdomain.Scan("example.com")~ {
 dump(domain)
 }
 ```
@@ -56,7 +56,7 @@ dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，�
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.dnsServer(&#34;1.1.1.1&#34;))
+subdomain.Scan("example.com", subdomain.dnsServer("1.1.1.1"))
 ```
 
 
@@ -82,7 +82,7 @@ eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.eachQueryTimeout(5))
+subdomain.Scan("example.com", subdomain.eachQueryTimeout(5))
 ```
 
 
@@ -108,7 +108,7 @@ withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间�
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.withEachSearchTimeout(5))
+subdomain.Scan("example.com", subdomain.withEachSearchTimeout(5))
 ```
 
 
@@ -134,8 +134,8 @@ mainDict 是一个选项参数，设置子域名爆破主字典，其第一个�
 
 Example:
 ```
-dict = &#34;/tmp/dict.txt&#34;
-subdomain.Scan(&#34;example.com&#34;, subdomain.mainDict(dict))
+dict = "/tmp/dict.txt"
+subdomain.Scan("example.com", subdomain.mainDict(dict))
 ```
 
 
@@ -161,7 +161,7 @@ maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认�
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.maxDepth(10), subdomain.recursive(true))
+subdomain.Scan("example.com", subdomain.maxDepth(10), subdomain.recursive(true))
 ```
 
 
@@ -187,7 +187,7 @@ recursive 是一个选项参数，设置是否递归扫描子域名，如果不�
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.recursive(true))
+subdomain.Scan("example.com", subdomain.recursive(true))
 ```
 
 
@@ -213,8 +213,8 @@ recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第
 
 Example:
 ```
-dict = &#34;/tmp/sub-dict.txt&#34;
-subdomain.Scan(&#34;example.com&#34;, subdomain.recursive(true), subdomain.recursiveDict(dict))
+dict = "/tmp/sub-dict.txt"
+subdomain.Scan("example.com", subdomain.recursive(true), subdomain.recursiveDict(dict))
 ```
 
 
@@ -240,7 +240,7 @@ targetConcurrent 是一个选项参数，设置每个目标的最大线程数量
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.targetConcurrent(5))
+subdomain.Scan("example.com", subdomain.targetConcurrent(5))
 ```
 
 
@@ -266,7 +266,7 @@ targetTimeout 是一个选项参数，设置每个目标的超时时间，单位
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.targetTimeout(10))
+subdomain.Scan("example.com", subdomain.targetTimeout(10))
 ```
 
 
@@ -292,7 +292,7 @@ wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上�
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.wildcardToStop(true))
+subdomain.Scan("example.com", subdomain.wildcardToStop(true))
 ```
 
 
@@ -318,7 +318,7 @@ workerConcurrent 是一个选项参数，设置总的工作线程数量，默认
 
 Example:
 ```
-subdomain.Scan(&#34;example.com&#34;, subdomain.workerConcurrent(10))
+subdomain.Scan("example.com", subdomain.workerConcurrent(10))
 ```
 
 

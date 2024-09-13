@@ -30,24 +30,24 @@ c.L.Lock()
 for !done {
 c.Wait()
 }
-println(name, &#34;start reading&#34;)
+println(name, "start reading")
 c.L.Unlock()
 }
 
 func write(name) {
 time.sleep(1)
-println(name, &#34;start writing&#34;)
+println(name, "start writing")
 c.L.Lock()
 done = true
 c.L.Unlock()
-println(name, &#34;wakes all&#34;)
+println(name, "wakes all")
 c.Broadcast()
 }
 
-go read(&#34;reader1&#34;)
-go read(&#34;reader2&#34;)
-go read(&#34;reader3&#34;)
-write(&#34;writer&#34;)
+go read("reader1")
+go read("reader2")
+go read("reader3")
+write("writer")
 time.sleep(3)
 ```
 
@@ -77,11 +77,11 @@ go func{
 for {
 m.Lock()         // 请求锁
 defer m.Unlock() // 释放锁
-newMap[&#34;key&#34;] = &#34;value&#34; // 防止多个并发任务同时修改 newMap
+newMap["key"] = "value" // 防止多个并发任务同时修改 newMap
 }
 }
 for {
-println(newMap[&#34;key&#34;])
+println(newMap["key"])
 }
 ```
 
@@ -106,12 +106,12 @@ Example:
 m = sync.NewMap()
 go func {
 for {
-m.Store(&#34;key&#34;, &#34;value2&#34;)
+m.Store("key", "value2")
 }
 }
 for {
-m.Store(&#34;key&#34;, &#34;value&#34;)
-v, ok = m.Load(&#34;key&#34;)
+m.Store("key", "value")
+v, ok = m.Load("key")
 if ok {
 println(v)
 }
@@ -142,11 +142,11 @@ go func{
 for {
 m.Lock()         // 请求锁
 defer m.Unlock() // 释放锁
-newMap[&#34;key&#34;] = &#34;value&#34; // 防止多个并发任务同时修改 newMap
+newMap["key"] = "value" // 防止多个并发任务同时修改 newMap
 }
 }
 for {
-println(newMap[&#34;key&#34;])
+println(newMap["key"])
 }
 ```
 
@@ -170,7 +170,7 @@ Example:
 ```
 o = sync.NewOnce()
 for i in 10 {
-o.Do(func() { println(&#34;this message will only print once&#34;) })
+o.Do(func() { println("this message will only print once") })
 }
 ```
 
@@ -196,12 +196,12 @@ p = sync.NewPool(func() {
 return make(map[string]string)
 })
 m = p.Get() // 从 Pool 中获取，如果 Pool 中没有，则会调用传入的第一个参数函数，返回一个新的 map[string]string
-m[&#34;1&#34;] = &#34;2&#34;
-println(m) // {&#34;1&#34;: &#34;2&#34;}
+m["1"] = "2"
+println(m) // {"1": "2"}
 // 将 m 放回 Pool 中
 p.Put(m)
 m2 = p.Get() // 从 Pool 中获取，实际上我们获取到的是刚 Put 进去的 m
-println(m2) // {&#34;1&#34;: &#34;2&#34;}
+println(m2) // {"1": "2"}
 ```
 
 
@@ -233,13 +233,13 @@ go func{
 for {
 m.Lock()         // 请求写锁
 defer m.Unlock() // 释放写锁
-newMap[&#34;key&#34;] = &#34;value&#34; // 防止多个并发任务同时修改 newMap
+newMap["key"] = "value" // 防止多个并发任务同时修改 newMap
 }
 }
 for {
 m.RLock()         // 请求读锁
 defer m.RUnlock() // 释放读锁
-println(newMap[&#34;key&#34;])
+println(newMap["key"])
 }
 ```
 
@@ -269,11 +269,11 @@ wg.Add() // 任务数量超过5时，会阻塞，直到有任务完成
 go func(i) {
 defer wg.Done()
 time.Sleep(i)
-printf(&#34;任务%d 完成\n&#34;, i)
+printf("任务%d 完成\n", i)
 }(i)
 }
 wg.Wait()
-println(&#34;所有任务完成&#34;)
+println("所有任务完成")
 ```
 
 
@@ -306,11 +306,11 @@ wg.Add() // 增加一个任务
 go func(i) {
 defer wg.Done()
 time.Sleep(i)
-printf(&#34;任务%d 完成\n&#34;, i)
+printf("任务%d 完成\n", i)
 }(i)
 }
 wg.Wait()
-println(&#34;所有任务完成&#34;)
+println("所有任务完成")
 ```
 
 

@@ -55,7 +55,7 @@ EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回�
 
 Example:
 ```
-enc, err := tls.EncryptWithPkcs1v15(pemBytes, &#34;hello&#34;)
+enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 ```
 
 
@@ -180,7 +180,7 @@ GenerateRootCA 根据名字生成根证书和私钥，返回PEM格式证书和�
 
 Example:
 ```
-cert, key, err := tls.GenerateRootCA(&#34;yaklang.io&#34;)
+cert, key, err := tls.GenerateRootCA("yaklang.io")
 ```
 
 
@@ -231,7 +231,7 @@ Inspect 检查目标地址的TLS证书，并返回其证书信息与错误
 
 Example:
 ```
-cert, err := tls.Inspect(&#34;yaklang.io:443&#34;)
+cert, err := tls.Inspect("yaklang.io:443")
 ```
 
 
@@ -258,7 +258,7 @@ InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与
 
 Example:
 ```
-cert, err := tls.InspectForceHttp1_1(&#34;yaklang.io:443&#34;)
+cert, err := tls.InspectForceHttp1_1("yaklang.io:443")
 ```
 
 
@@ -285,7 +285,7 @@ InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与�
 
 Example:
 ```
-cert, err := tls.InspectForceHttp2(&#34;yaklang.io:443&#34;)
+cert, err := tls.InspectForceHttp2("yaklang.io:443")
 ```
 
 
@@ -312,7 +312,7 @@ SignClientCertAndKey 根据给定的CA证书和私钥，生成不包含认证的
 
 Example:
 ```
-ca, key, err = tls.GenerateRootCA(&#34;yaklang.io&#34;)
+ca, key, err = tls.GenerateRootCA("yaklang.io")
 cert, sKey, err = tls.SignClientCertAndKey(ca, key)
 ```
 
@@ -342,7 +342,7 @@ SignServerCertAndKey 根据给定的CA证书和私钥，生成不包含认证的
 
 Example:
 ```
-ca, key, err = tls.GenerateRootCA(&#34;yaklang.io&#34;)
+ca, key, err = tls.GenerateRootCA("yaklang.io")
 cert, sKey, err = tls.SignServerCertAndKey(ca, key)
 ```
 
@@ -372,7 +372,7 @@ SignX509ClientCertAndKey 根据给定的CA证书和私钥，生成客户端证�
 
 Example:
 ```
-ca, key, err = tls.GenerateRootCA(&#34;yaklang.io&#34;)
+ca, key, err = tls.GenerateRootCA("yaklang.io")
 cert, sKey, err = tls.SignX509ClientCertAndKey(ca, key)
 ```
 
@@ -402,7 +402,7 @@ SignX509ServerCertAndKey 根据给定的CA证书和私钥，生成服务器证�
 
 Example:
 ```
-ca, key, err = tls.GenerateRootCA(&#34;yaklang.io&#34;)
+ca, key, err = tls.GenerateRootCA("yaklang.io")
 cert, sKey, err = tls.SignX509ServerCertAndKey(ca, key)
 ```
 

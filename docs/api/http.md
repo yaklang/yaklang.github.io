@@ -52,7 +52,7 @@ Do 根据构造好的请求结构体引用发送请求，返回响应结构体�
 
 Example:
 ```
-req, err = http.Raw(&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;)
+req, err = http.Raw("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
 rsp, err = http.Do(req)
 ```
 
@@ -80,9 +80,9 @@ ExtractFaviconURL will receive a site url and html content return the favicon ur
 
 Example:
 
-	http.ExtractFaviconURL(&#34;https://www.baidu.com&#34;, []byte(`&lt;link rel=&#34;shortcut icon&#34; href=&#34;/favicon.ico&#34; type=&#34;image/x-icon&#34;&gt;`))
-	http.ExtractFaviconURL(&#34;https://www.baidu.com&#34;, []byte(`&lt;link rel=&#34;icon&#34; href=&#34;/favicon.ico&#34; type=&#34;image/x-icon&#34;&gt;`))
-	http.ExtractFaviconURL(&#34;https://www.baidu.com&#34;, []byte(`&lt;link rel=&#34;icon&#34; href=&#34;/favicon.png&#34; type=&#34;image/png&#34;&gt;`))
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">`))
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="icon" href="/favicon.ico" type="image/x-icon">`))
+	http.ExtractFaviconURL("https://www.baidu.com", []byte(`<link rel="icon" href="/favicon.png" type="image/png">`))
 
 
 #### 定义
@@ -113,7 +113,7 @@ Get 根据指定的 URL 发起 GET 请求，它的第一个参数是 URL ，接�
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.timeout(10))
+rsp, err = http.Get("http://www.yaklang.com", http.timeout(10))
 ```
 
 
@@ -141,7 +141,7 @@ GetAllBody 获取响应结构体引用的原始响应报文
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;)
+rsp, err = http.Get("http://www.yaklang.com")
 raw = http.GetAllBody(rsp)
 ```
 
@@ -172,7 +172,7 @@ NewRequest 根据指定的 method 和 URL 生成请求结构体引用，返回�
 
 Example:
 ```
-req, err = http.NewRequest(&#34;GET&#34;, &#34;http://www.yaklang.com&#34;, http.timeout(10))
+req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 ```
 
 
@@ -205,7 +205,7 @@ Post 根据指定的 URL 发起 POST 请求，它的第一个参数是 URL ，�
 
 Example:
 ```
-rsp, err = http.Post(&#34;http://pie.dev/post&#34;, http.body(&#34;a=b&amp;c=d&#34;), http.timeout(10))
+rsp, err = http.Post("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
 ```
 
 
@@ -237,7 +237,7 @@ Raw 根据原始请求报文生成请求结构体引用，返回请求结构体�
 
 Example:
 ```
-req, err = http.Raw(&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;)
+req, err = http.Raw("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n")
 ```
 
 
@@ -268,7 +268,7 @@ Request 根据指定的 URL 发起请求，它的第一个参数是 URL ，接�
 
 Example:
 ```
-rsp, err = http.Request(&#34;POST&#34;,&#34;http://pie.dev/post&#34;, http.body(&#34;a=b&amp;c=d&#34;), http.timeout(10))
+rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
 ```
 
 
@@ -423,7 +423,7 @@ body 是一个请求选项参数，用于指定请求体
 
 Example:
 ```
-rsp, err = http.Post(&#34;https://pie.dev/post&#34;, http.body(&#34;a=b&amp;c=d&#34;))
+rsp, err = http.Post("https://pie.dev/post", http.body("a=b&c=d"))
 ```
 
 
@@ -450,7 +450,7 @@ context 是一个请求选项参数，用于设置请求的上下文
 Example:
 ```
 ctx = context.New()
-rsp, err = http.Get(&#34;http://www.example.com&#34;, http.context(ctx)) // 向 example.com 发起请求，使用指定的上下文
+rsp, err = http.Get("http://www.example.com", http.context(ctx)) // 向 example.com 发起请求，使用指定的上下文
 ```
 
 
@@ -476,7 +476,7 @@ header 是一个请求选项参数，用于设置完整的 Cookie 字段
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.WithCookie(&#34;a=b; c=d&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.WithCookie("a=b; c=d"))
 ```
 
 
@@ -502,7 +502,7 @@ dump 获取指定请求结构体引用或响应结构体引用的原始报文，
 
 Example:
 ```
-req, err = http.NewRequest(&#34;GET&#34;, &#34;http://www.yaklang.com&#34;, http.timeout(10))
+req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 reqRaw, err = http.dump(req)
 rsp, err = http.Do(req)
 rspRaw, err = http.dump(rsp)
@@ -532,7 +532,7 @@ dumphead 获取指定请求结构体引用或响应结构体引用的原始报�
 
 Example:
 ```
-req, err = http.NewRequest(&#34;GET&#34;, &#34;http://www.yaklang.com&#34;, http.timeout(10))
+req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 reqHeadRaw, err = http.dumphead(req)
 rsp, err = http.Do(req)
 rspHeadRaw, err = http.dumphead(rsp)
@@ -597,7 +597,7 @@ header 是一个请求选项参数，用于添加/指定请求头
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.header(&#34;AAA&#34;, &#34;BBB&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.header("AAA", "BBB"))
 ```
 
 
@@ -626,7 +626,7 @@ json 是一个请求选项参数，用于指定 JSON 格式的请求体
 
 Example:
 ```
-rsp, err = http.Post(&#34;https://pie.dev/post&#34;, http.header(&#34;Content-Type&#34;, &#34;application/json&#34;), http.json({&#34;a&#34;: &#34;b&#34;, &#34;c&#34;: &#34;d&#34;}))
+rsp, err = http.Post("https://pie.dev/post", http.header("Content-Type", "application/json"), http.json({"a": "b", "c": "d"}))
 ```
 
 
@@ -667,7 +667,7 @@ params 是一个请求选项参数，用于添加/指定 GET 参数，这会将�
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.params(&#34;a=b&#34;), http.params(&#34;c=d&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.params("a=b"), http.params("c=d"))
 ```
 
 
@@ -693,7 +693,7 @@ postparams 是一个请求选项参数，用于添加/指定 POST 参数，这�
 
 Example:
 ```
-rsp, err = http.Post(&#34;http://www.yaklang.com&#34;, http.postparams(&#34;a=b&#34;), http.postparams(&#34;c=d&#34;))
+rsp, err = http.Post("http://www.yaklang.com", http.postparams("a=b"), http.postparams("c=d"))
 ```
 
 
@@ -719,7 +719,7 @@ proxy 是一个请求选项参数，用于设置一个或多个请求的代理�
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.proxy(&#34;http://127.0.0.1:7890&#34;, &#34;http://127.0.0.1:8083&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.proxy("http://127.0.0.1:7890", "http://127.0.0.1:8083"))
 ```
 
 
@@ -747,7 +747,7 @@ redirect 是一个请求选项参数，它接收重定向处理函数，用于�
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://pie.dev/redirect/3&#34;, http.redirect(func(r, vias) bool { return true })
+rsp, err = http.Get("http://pie.dev/redirect/3", http.redirect(func(r, vias) bool { return true })
 ```
 
 
@@ -793,7 +793,7 @@ save 是一个请求选项参数，用于指定是否将此次请求的记录保
 
 Example:
 ```
-http.Get(&#34;https://exmaple.com&#34;, http.save(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中
+http.Get("https://exmaple.com", http.save(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中
 ```
 
 
@@ -819,7 +819,7 @@ session 是一个请求选项参数，用于根据传入的值指定会话，使
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.session(&#34;request1&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.session("request1"))
 ```
 
 
@@ -845,7 +845,7 @@ show 获取指定请求结构体引用或响应结构体引用的原始报文并
 
 Example:
 ```
-req, err = http.NewRequest(&#34;GET&#34;, &#34;http://www.yaklang.com&#34;, http.timeout(10))
+req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 http.show(req)
 rsp, err = http.Do(req)
 http.show(rsp)
@@ -869,7 +869,7 @@ showhead 获取指定请求结构体引用或响应结构体引用的原始报�
 
 Example:
 ```
-req, err = http.NewRequest(&#34;GET&#34;, &#34;http://www.yaklang.com&#34;, http.timeout(10))
+req, err = http.NewRequest("GET", "http://www.yaklang.com", http.timeout(10))
 http.showhead(req)
 rsp, err = http.Do(req)
 http.showhead(rsp)
@@ -893,7 +893,7 @@ source 是一个请求选项参数，用于在请求记录保存到数据库时�
 
 Example:
 ```
-rsp, err = http.Get(&#34;https://exmaple.com&#34;, http.save(true), http.source(&#34;test&#34;)) // 向 example.com 发起请求，会将此次请求保存到数据库中，指示此次请求的来源为test
+rsp, err = http.Get("https://exmaple.com", http.save(true), http.source("test")) // 向 example.com 发起请求，会将此次请求保存到数据库中，指示此次请求的来源为test
 ```
 
 
@@ -919,7 +919,7 @@ WithTimeout 是一个请求选项参数，用于设置请求超时时间，单�
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.WithTimeout(10))
+rsp, err = http.Get("http://www.yaklang.com", http.WithTimeout(10))
 ```
 
 
@@ -945,7 +945,7 @@ useragent 是一个请求选项参数，用于指定请求的 User-Agent
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.ua(&#34;yaklang-http&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 ```
 
 
@@ -992,7 +992,7 @@ useragent 是一个请求选项参数，用于指定请求的 User-Agent
 
 Example:
 ```
-rsp, err = http.Get(&#34;http://www.yaklang.com&#34;, http.ua(&#34;yaklang-http&#34;))
+rsp, err = http.Get("http://www.yaklang.com", http.ua("yaklang-http"))
 ```
 
 

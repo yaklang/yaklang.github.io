@@ -36,7 +36,7 @@ Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果
 
 Example:
 ```
-result = openai.Chat(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;), openai.proxy(&#34;http://127.0.0.1:7890&#34;))
+result = openai.Chat("Hello, world!", openai.apiKey("sk-xxx"), openai.proxy("http://127.0.0.1:7890"))
 ```
 
 
@@ -73,15 +73,15 @@ Example:
 ```
 d = openai.ChatEx(
 [
-openai.userMessage(&#34;What is the weather like in Boston?&#34;)
+openai.userMessage("What is the weather like in Boston?")
 ],
 openai.newFunction(
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;),
+"get_current_weather",
+"Get the current weather in a given location",
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"),
 ),
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
+openai.proxy("http://127.0.0.1:7890"),
 )~
 println(d.FunctionCallResult())
 ```
@@ -124,13 +124,13 @@ FunctionCall 使用 OpenAI 的大语言模型的函数调用功能，描述一�
 Example:
 ```
 resultMap = openai.FunctionCall(
-&#34;What is the weather like in Boston?&#34;,
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.apiKey(&#34;sk-xxxx&#34;),
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;))
+"What is the weather like in Boston?",
+"get_current_weather",
+"Get the current weather in a given location",
+openai.apiKey("sk-xxxx"),
+openai.proxy("http://127.0.0.1:7890"),
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"))
 ```
 
 
@@ -179,7 +179,7 @@ TranslateToChinese 使用 OpenAI 的大语言模型将传入的字符串翻译�
 
 Example:
 ```
-result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;), openai.proxy(&#34;http://127.0.0.1:7890&#34;))
+result = openai.TranslateToChinese("Hello, world!", openai.apiKey("sk-xxx"), openai.proxy("http://127.0.0.1:7890"))
 ```
 
 
@@ -206,7 +206,7 @@ apiKey 设置 OpenAI的API Key
 
 Example:
 ```
-result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;))
+result = openai.TranslateToChinese("Hello, world!", openai.apiKey("sk-xxx"))
 ```
 
 
@@ -234,9 +234,9 @@ Example:
 ```
 d = openai.ChatEx(
 [
-openai.userMessage(&#34;What is the weather like today?&#34;),
-openai.assistantMessage(&#34;72 degrees and sunny.&#34;),
-openai.userMessage(&#34;What will the temperature be tomorrow?&#34;),
+openai.userMessage("What is the weather like today?"),
+openai.assistantMessage("72 degrees and sunny."),
+openai.userMessage("What will the temperature be tomorrow?"),
 ],
 )~
 ```
@@ -264,7 +264,7 @@ domain 设置 OpenAI的第三方加速域名，用于加速访问
 
 Example:
 ```
-result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;), openai.domain(&#34;api.ai.yaklang.com&#34;))
+result = openai.TranslateToChinese("Hello, world!", openai.apiKey("sk-xxx"), openai.domain("api.ai.yaklang.com"))
 ```
 
 
@@ -286,18 +286,18 @@ result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;s
 ### functionParamType
 
 #### 详细描述
-functionParamType 设置函数调用时的参数类型，默认为 &amp;#34;object&amp;#34;
+functionParamType 设置函数调用时的参数类型，默认为 &#34;object&#34;
 
 Example:
 ```
 resultMap = openai.FunctionCall(
-&#34;What is the weather like in Boston?&#34;,
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.apiKey(&#34;sk-xxxx&#34;),
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;))
+"What is the weather like in Boston?",
+"get_current_weather",
+"Get the current weather in a given location",
+openai.apiKey("sk-xxxx"),
+openai.proxy("http://127.0.0.1:7890"),
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"))
 ```
 
 
@@ -324,13 +324,13 @@ functionProperty 设置函数调用时的单个参数属性
 Example:
 ```
 resultMap = openai.FunctionCall(
-&#34;What is the weather like in Boston?&#34;,
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.apiKey(&#34;sk-xxxx&#34;),
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;))
+"What is the weather like in Boston?",
+"get_current_weather",
+"Get the current weather in a given location",
+openai.apiKey("sk-xxxx"),
+openai.proxy("http://127.0.0.1:7890"),
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"))
 ```
 
 
@@ -360,13 +360,13 @@ functionRequired 设置函数调用时的必须参数
 Example:
 ```
 resultMap = openai.FunctionCall(
-&#34;What is the weather like in Boston?&#34;,
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.apiKey(&#34;sk-xxxx&#34;),
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;))
+"What is the weather like in Boston?",
+"get_current_weather",
+"Get the current weather in a given location",
+openai.apiKey("sk-xxxx"),
+openai.proxy("http://127.0.0.1:7890"),
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"))
 ```
 
 
@@ -412,7 +412,7 @@ model 设置 OpenAI的大语言模型
 
 Example:
 ```
-result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;), openai.model(&#34;gpt-4-0613&#34;))
+result = openai.TranslateToChinese("Hello, world!", openai.apiKey("sk-xxx"), openai.model("gpt-4-0613"))
 ```
 
 
@@ -449,17 +449,17 @@ newFunction 设置新的函数调用
 Example:
 ```
 f = openai.newFunction(
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;),
+"get_current_weather",
+"Get the current weather in a given location",
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"),
 )
 d = openai.ChatEx(
 [
-openai.userMessage(&#34;What is the weather like in Boston?&#34;)
+openai.userMessage("What is the weather like in Boston?")
 ],
 f,
-openai.proxy(&#34;http://127.0.0.1:7890&#34;),
+openai.proxy("http://127.0.0.1:7890"),
 )~
 println(d.FunctionCallResult())
 ```
@@ -489,7 +489,7 @@ proxy 设置调用 OpenAI 时使用的代理
 
 Example:
 ```
-result = openai.TranslateToChinese(&#34;Hello, world!&#34;, openai.apiKey(&#34;sk-xxx&#34;), openai.proxy(&#34;http://127.0.0.1:7890&#34;))
+result = openai.TranslateToChinese("Hello, world!", openai.apiKey("sk-xxx"), openai.proxy("http://127.0.0.1:7890"))
 ```
 
 
@@ -517,8 +517,8 @@ Example:
 ```
 d = openai.ChatEx(
 [
-openai.systemMessage(&#34;The weather in Boston is 72 degrees and sunny.&#34;),
-openai.userMessage(&#34;What is the weather like today?&#34;),
+openai.systemMessage("The weather in Boston is 72 degrees and sunny."),
+openai.userMessage("What is the weather like today?"),
 ],
 )~
 ```
@@ -547,17 +547,17 @@ toolMessage 根据传入的函数名,内容构造并返回一个 OpenAI 工具�
 Example:
 ```
 session = openai.NewSession(
-openai.proxy(&#34;http://127.0.0.1:7890&#34;)
+openai.proxy("http://127.0.0.1:7890")
 )
-result = session.Chat(openai.userMessage(&#34;What is the weather like in Boston?&#34;),
+result = session.Chat(openai.userMessage("What is the weather like in Boston?"),
 openai.newFunction(
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;),
+"get_current_weather",
+"Get the current weather in a given location",
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"),
 ),
 )~
-result = session.Chat(openai.toolMessage(&#34;get_current_weather&#34;, `{&#34;degree&#34;:72,&#34;weather&#34;:&#34;sunny&#34;}`))~
+result = session.Chat(openai.toolMessage("get_current_weather", `{"degree":72,"weather":"sunny"}`))~
 println(result.String())
 ```
 
@@ -586,17 +586,17 @@ toolMessageWithID 根据传入的ID,函数名,内容构造并返回一个 OpenAI
 Example:
 ```
 session = openai.NewSession(
-openai.proxy(&#34;http://127.0.0.1:7890&#34;)
+openai.proxy("http://127.0.0.1:7890")
 )
-result = session.Chat(openai.userMessage(&#34;What is the weather like in Boston?&#34;),
+result = session.Chat(openai.userMessage("What is the weather like in Boston?"),
 openai.newFunction(
-&#34;get_current_weather&#34;,
-&#34;Get the current weather in a given location&#34;,
-openai.functionProperty(&#34;location&#34;, &#34;string&#34;, &#34;The city and state, e.g. San Francisco, CA&#34;),
-openai.functionRequired(&#34;location&#34;),
+"get_current_weather",
+"Get the current weather in a given location",
+openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
+openai.functionRequired("location"),
 ),
 )~
-result = session.Chat(openai.toolMessage(&#34;get_current_weather&#34;, `{&#34;degree&#34;:72,&#34;weather&#34;:&#34;sunny&#34;}`))~
+result = session.Chat(openai.toolMessage("get_current_weather", `{"degree":72,"weather":"sunny"}`))~
 println(result.String())
 ```
 
@@ -627,8 +627,8 @@ Example:
 ```
 d = openai.ChatEx(
 [
-openai.systemMessage(&#34;The weather in Boston is 72 degrees and sunny.&#34;),
-openai.userMessage(&#34;What is the weather like today?&#34;),
+openai.systemMessage("The weather in Boston is 72 degrees and sunny."),
+openai.userMessage("What is the weather like today?"),
 ],
 )~
 ```

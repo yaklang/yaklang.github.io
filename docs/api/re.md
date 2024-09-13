@@ -40,7 +40,7 @@ Compile 将正则表达式解析为一个正则表达式结构体引用
 
 Example:
 ```
-re.Compile(&#34;^[a-z]+$&#34;)
+re.Compile("^[a-z]+$")
 ```
 
 
@@ -67,7 +67,7 @@ CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的�
 
 Example:
 ```
-re.CompilePOSIX(&#34;^[a-z]+$&#34;)
+re.CompilePOSIX("^[a-z]+$")
 ```
 
 
@@ -94,7 +94,7 @@ ExtractEmail 提取字符串中所有的 Email 地址
 
 Example:
 ```
-re.ExtractEmail(&#34;hello your email is anonymous@yaklang.io&#34;) // [&#34;anonymous@yaklang.io&#34;]
+re.ExtractEmail("hello your email is anonymous@yaklang.io") // ["anonymous@yaklang.io"]
 ```
 
 
@@ -120,7 +120,7 @@ ExtractHostPort 提取字符串中所有的 Host:Port
 
 Example:
 ```
-re.ExtractHostPort(&#34;Open Host:Port\n127.0.0.1:80\n127.0.0.1:443&#34;) // [&#34;127.0.0.1:80&#34;, &#34;127.0.0.1:443&#34;]
+re.ExtractHostPort("Open Host:Port\n127.0.0.1:80\n127.0.0.1:443") // ["127.0.0.1:80", "127.0.0.1:443"]
 ```
 
 
@@ -146,7 +146,7 @@ ExtractIP 提取字符串中所有的 IP 地址
 
 Example:
 ```
-re.ExtractIP(&#34;hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1&#34;) // [&#34;127.0.0.1&#34;, &#34;fe80::1&#34;]
+re.ExtractIP("hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1") // ["127.0.0.1", "fe80::1"]
 ```
 
 
@@ -172,7 +172,7 @@ ExtractIPv4 提取字符串中所有的 IPv4 地址
 
 Example:
 ```
-re.ExtractIPv4(&#34;hello your local ip is 127.0.0.1, your public ip is 1.1.1.1&#34;) // [&#34;127.0.0.1&#34;, &#34;1.1.1.1&#34;]
+re.ExtractIPv4("hello your local ip is 127.0.0.1, your public ip is 1.1.1.1") // ["127.0.0.1", "1.1.1.1"]
 ```
 
 
@@ -198,7 +198,7 @@ ExtractIPv6 提取字符串中所有的 IPv6 地址
 
 Example:
 ```
-re.ExtractIPv6(&#34;hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001:4860:4860::8888&#34;) // [&#34;fe80::1&#34;, &#34;2001:4860:4860::8888&#34;]
+re.ExtractIPv6("hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001:4860:4860::8888") // ["fe80::1", "2001:4860:4860::8888"]
 ```
 
 
@@ -224,7 +224,7 @@ ExtractMac 提取字符串中所有的 MAC 地址
 
 Example:
 ```
-re.ExtractMac(&#34;hello your mac is 00:00:00:00:00:00&#34;) // [&#34;00:00:00:00:00:00&#34;]
+re.ExtractMac("hello your mac is 00:00:00:00:00:00") // ["00:00:00:00:00:00"]
 ```
 
 
@@ -250,7 +250,7 @@ ExtractPath 提取URL中的路径和查询字符串
 
 Example:
 ```
-re.ExtractPath(&#34;visit this website: yaklang.com/docs/api/re?name=anonymous&#34;) // [&#34;/docs/api/re?name=anonymous&#34;]
+re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // ["/docs/api/re?name=anonymous"]
 ```
 
 
@@ -276,7 +276,7 @@ ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径
 
 Example:
 ```
-re.ExtractTTY(&#34;hello your tty is /dev/pts/1&#34;) // [&#34;/dev/pts/1&#34;]
+re.ExtractTTY("hello your tty is /dev/pts/1") // ["/dev/pts/1"]
 ```
 
 
@@ -302,7 +302,7 @@ ExtractURL 提取字符串中所有的 URL 地址
 
 Example:
 ```
-re.ExtractURL(&#34;Yak official website: https://yaklang.com and https://yaklang.io&#34;) // [&#34;https://yaklang.com&#34;, &#34;https://yaklang.io&#34;]
+re.ExtractURL("Yak official website: https://yaklang.com and https://yaklang.io") // ["https://yaklang.com", "https://yaklang.io"]
 ```
 
 
@@ -328,7 +328,7 @@ Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配
 
 Example:
 ```
-re.Find(&#34;apple is an easy word&#34;, &#34;^[a-z]+&#34;) // &#34;apple&#34;
+re.Find("apple is an easy word", "^[a-z]+") // "apple"
 ```
 
 
@@ -355,7 +355,7 @@ FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配
 
 Example:
 ```
-re.FindAll(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak[a-z]+&#34;) // [&#34;yakit&#34;, &#34;yaklang&#34;]
+re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+") // ["yakit", "yaklang"]
 ```
 
 
@@ -382,7 +382,7 @@ FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有�
 
 Example:
 ```
-re.FindAllIndex(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak[a-z]+&#34;) // [[5, 10], [29, 36]]
+re.FindAllIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [[5, 10], [29, 36]]
 ```
 
 
@@ -409,8 +409,8 @@ FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个�
 
 Example:
 ```
-// {&#34;0&#34;: &#34;yakit&#34;, &#34;other&#34;: &#34;it&#34;}
-re.FindGroup(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak(?P&lt;other&gt;[a-z]+)&#34;)
+// {"0": "yakit", "other": "it"}
+re.FindGroup("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 ```
 
 
@@ -437,8 +437,8 @@ FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一�
 
 Example:
 ```
-// [{&#34;0&#34;: &#34;yakit&#34;, &#34;other&#34;: &#34;it&#34;}, {&#34;0&#34;: &#34;yaklang&#34;, &#34;other&#34;: &#34;lang&#34;}]
-re.FindGroupAll(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak(?P&lt;other&gt;[a-z]+)&#34;)
+// [{"0": "yakit", "other": "it"}, {"0": "yaklang", "other": "lang"}]
+re.FindGroupAll("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 ```
 
 
@@ -465,7 +465,7 @@ FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长�
 
 Example:
 ```
-re.FindIndex(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak[a-z]+&#34;) // [5, 10]
+re.FindIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [5, 10]
 ```
 
 
@@ -492,7 +492,7 @@ FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一�
 
 Example:
 ```
-re.FindSubmatch(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak([a-z]+)&#34;) // [&#34;yakit&#34;, &#34;it&#34;]
+re.FindSubmatch("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // ["yakit", "it"]
 ```
 
 
@@ -519,8 +519,8 @@ FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所�
 
 Example:
 ```
-// [[&#34;yakit&#34;, &#34;it&#34;], [&#34;yaklang&#34;, &#34;lang&#34;]]
-re.FindSubmatchAll(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak([a-z]+)&#34;)
+// [["yakit", "it"], ["yaklang", "lang"]]
+re.FindSubmatchAll("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 ```
 
 
@@ -548,7 +548,7 @@ FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返�
 Example:
 ```
 // [[5, 10, 8, 10], [29, 36, 32, 36]]
-re.FindSubmatchAllIndex(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak([a-z]+)&#34;)
+re.FindSubmatchAllIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 ```
 
 
@@ -575,7 +575,7 @@ FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回�
 
 Example:
 ```
-re.FindSubmatchIndex(&#34;Well,yakit is GUI client for yaklang&#34;, &#34;yak([a-z]+)&#34;) // [5, 10, 8, 10]
+re.FindSubmatchIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // [5, 10, 8, 10]
 ```
 
 
@@ -602,7 +602,7 @@ Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回
 
 Example:
 ```
-str.Grok(&#34;04/18-00:59:45.385191&#34;, &#34;%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}&#34;) // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
+str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
 ```
 
 
@@ -629,7 +629,7 @@ Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则
 
 Example:
 ```
-re.Match(&#34;^[a-z]+$&#34;, &#34;abc&#34;) // true
+re.Match("^[a-z]+$", "abc") // true
 ```
 
 
@@ -656,7 +656,7 @@ MustCompile 将正则表达式解析为一个正则表达式对象结构体引�
 
 Example:
 ```
-re.MustCompile(&#34;^[a-z]+$&#34;)
+re.MustCompile("^[a-z]+$")
 ```
 
 
@@ -682,7 +682,7 @@ MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体�
 
 Example:
 ```
-re.MustCompilePOSIX(&#34;^[a-z]+$&#34;)
+re.MustCompilePOSIX("^[a-z]+$")
 ```
 
 
@@ -708,7 +708,7 @@ QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式�
 
 Example:
 ```
-str.QuoteMeta(&#34;^[a-z]+$&#34;) // &#34;\^\\[a-z\]\\+$&#34;
+str.QuoteMeta("^[a-z]+$") // "\^\\[a-z\]\\+$"
 ```
 
 
@@ -734,8 +734,8 @@ ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的
 
 Example:
 ```
-// &#34;yaklang is a programming language&#34;
-re.ReplaceAll(&#34;yakit is programming language&#34;, &#34;yak([a-z]+)&#34;, &#34;yaklang&#34;)
+// "yaklang is a programming language"
+re.ReplaceAll("yakit is programming language", "yak([a-z]+)", "yaklang")
 ```
 
 
@@ -763,9 +763,9 @@ ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换�
 
 Example:
 ```
-// &#34;yaklang is a programming language&#34;
-re.ReplaceAllWithFunc(&#34;yakit is programming language&#34;, &#34;yak([a-z]+)&#34;, func(s) {
-return &#34;yaklang&#34;
+// "yaklang is a programming language"
+re.ReplaceAllWithFunc("yakit is programming language", "yak([a-z]+)", func(s) {
+return "yaklang"
 })
 ```
 

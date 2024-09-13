@@ -405,7 +405,7 @@ Sinh 双曲正弦函数
 #### 详细描述
 Sqrt 返回一个数的平方根
 
-如果x &amp;lt; 0，返回NaN
+如果x &lt; 0，返回NaN
 
 Example:
 ```

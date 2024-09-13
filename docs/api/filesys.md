@@ -28,8 +28,8 @@ Example:
 ```
 err := filesys.Recursive( //
 
-	&#34;testdata&#34;,
-	filesys.dir([&#34;cc&#34;, &#34;dd&#34;], filesys.onFileStat((name, info) =&gt; {})),
+	"testdata",
+	filesys.dir(["cc", "dd"], filesys.onFileStat((name, info) => {})),
 
 )
 ```

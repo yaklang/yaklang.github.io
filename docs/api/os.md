@@ -62,7 +62,7 @@ Chdir 改变当前工作目录
 
 Example:
 ```
-err = os.Chdir(&#34;/tmp&#34;)
+err = os.Chdir("/tmp")
 ```
 
 
@@ -88,7 +88,7 @@ Chmod 改变指定文件或目录的权限
 
 Example:
 ```
-err = os.Chmod(&#34;/tmp/test.txt&#34;, 0777)
+err = os.Chmod("/tmp/test.txt", 0777)
 ```
 
 
@@ -115,7 +115,7 @@ Chown 改变指定文件或目录的所有者和所属组
 
 Example:
 ```
-err = os.Chown(&#34;/var/www/html/test.txt&#34;, 1000, 1000)
+err = os.Chown("/var/www/html/test.txt", 1000, 1000)
 ```
 
 
@@ -155,13 +155,13 @@ os.Clearenv()
 ### Environ
 
 #### 详细描述
-Environ 获取表示环境变量的字符串切片，格式为&amp;#34;key=value&amp;#34;
+Environ 获取表示环境变量的字符串切片，格式为&#34;key=value&#34;
 
 Example:
 ```
 for env in os.Environ() {
-value = env.SplitN(&#34;=&#34;, 2)
-printf(&#34;key = %s, value = %v\n&#34;, value[0], value[1])
+value = env.SplitN("=", 2)
+printf("key = %s, value = %v\n", value[0], value[1])
 }
 ```
 
@@ -226,7 +226,7 @@ ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的�
 
 Example:
 ```
-os.ExpandEnv(&#34;PATH = $PATH&#34;)
+os.ExpandEnv("PATH = $PATH")
 ```
 
 
@@ -273,7 +273,7 @@ GetLocalAddress 获取本地IP地址
 
 Example:
 ```
-os.GetLocalAddress() // [&#34;192.168.1.103&#34;, &#34;fe80::605a:5ff:fefb:5405&#34;]
+os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
 ```
 
 
@@ -294,7 +294,7 @@ GetLocalIPv4Address 获取本地IPv4地址
 
 Example:
 ```
-os.GetLocalIPv4Address() // [&#34;192.168.3.103&#34;]
+os.GetLocalIPv4Address() // ["192.168.3.103"]
 ```
 
 
@@ -315,7 +315,7 @@ GetLocalIPv6Address 获取本地IPv6地址
 
 Example:
 ```
-os.GetLocalIPv6Address() // [&#34;fe80::605a:5ff:fefb:5405&#34;]
+os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
 ```
 
 
@@ -357,7 +357,7 @@ GetRandomAvailableTCPPort 获取随机可用的TCP端口
 
 Example:
 ```
-tcp.Serve(&#34;127.0.0.1&#34;, os.GetRandomAvailableTCPPort())
+tcp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
 ```
 
 
@@ -378,7 +378,7 @@ GetRandomAvailableUDPPort 获取随机可用的UDP端口
 
 Example:
 ```
-udp.Serve(&#34;127.0.0.1&#34;, os.GetRandomAvailableTCPPort())
+udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
 ```
 
 
@@ -420,7 +420,7 @@ Getenv 获取指定的环境变量的值，如果不存在则返回空字符串
 
 Example:
 ```
-value = os.Getenv(&#34;PATH&#34;)
+value = os.Getenv("PATH")
 ```
 
 
@@ -595,7 +595,7 @@ IsRemoteTCPPortOpen 检查远程TCP端口是否开放
 
 Example:
 ```
-os.IsRemoteTCPPortOpen(&#34;yaklang.com&#34;, 443) // true
+os.IsRemoteTCPPortOpen("yaklang.com", 443) // true
 ```
 
 
@@ -726,7 +726,7 @@ LookupEnv 获取指定的环境变量的值
 
 Example:
 ```
-value, ok = os.LookupEnv(&#34;PATH&#34;)
+value, ok = os.LookupEnv("PATH")
 ```
 
 
@@ -753,7 +753,7 @@ LookupHost 通过DNS服务器，根据域名查找IP
 
 Example:
 ```
-os.LookupHost(&#34;www.yaklang.com&#34;)
+os.LookupHost("www.yaklang.com")
 ```
 
 
@@ -779,7 +779,7 @@ LookupIP 通过DNS服务器，根据域名查找IP
 
 Example:
 ```
-os.LookupIP(&#34;www.yaklang.com&#34;)
+os.LookupIP("www.yaklang.com")
 ```
 
 
@@ -811,7 +811,7 @@ r, w, err = os.Pipe()
 die(err)
 
 	go func {
-	    w.WriteString(&#34;hello yak&#34;)
+	    w.WriteString("hello yak")
 	    w.Close()
 	}
 
@@ -840,7 +840,7 @@ Remove 删除指定的文件或目录
 
 Example:
 ```
-os.Remove(&#34;/tmp/test.txt&#34;)
+os.Remove("/tmp/test.txt")
 ```
 
 
@@ -866,7 +866,7 @@ RemoveAll 递归删除指定的路径及其子路径
 
 Example:
 ```
-os.RemoveAll(&#34;/tmp&#34;)
+os.RemoveAll("/tmp")
 ```
 
 
@@ -892,8 +892,8 @@ Rename 重命名文件或目录，可以用于移动文件或目录
 
 Example:
 ```
-os.Rename(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
-os.Rename(&#34;/tmp/test&#34;, &#34;/root/test&#34;)
+os.Rename("/tmp/test.txt", "/tmp/test2.txt")
+os.Rename("/tmp/test", "/root/test")
 ```
 
 
@@ -920,7 +920,7 @@ Setenv 设置指定的环境变量
 
 Example:
 ```
-os.Setenv(&#34;PATH&#34;, &#34;/usr/local/bin:/usr/bin:/bin&#34;)
+os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
 ```
 
 
@@ -968,7 +968,7 @@ Unsetenv 删除指定的环境变量
 
 Example:
 ```
-os.Unsetenv(&#34;PATH&#34;)
+os.Unsetenv("PATH")
 ```
 
 
@@ -994,20 +994,20 @@ WaitConnect 等待一个地址的端口开放或指导超时时间，如果超�
 
 Example:
 ```
-timeout, _ = time.ParseDuration(&#34;1m&#34;)
+timeout, _ = time.ParseDuration("1m")
 ctx, cancel = context.WithTimeout(context.New(), timeout)
 
 	go func() {
-	    err = tcp.Serve(&#34;127.0.0.1&#34;, 8888, tcp.serverCallback(func (conn) {
-	    conn.Send(&#34;hello world&#34;)
+	    err = tcp.Serve("127.0.0.1", 8888, tcp.serverCallback(func (conn) {
+	    conn.Send("hello world")
 	    conn.Close()
 	}), tcp.serverContext(ctx))
 
 	    die(err)
 	}()
 
-os.WaitConnect(&#34;127.0.0.1:8888&#34;, 5)~ // 等待tcp服务器启动
-conn = tcp.Connect(&#34;127.0.0.1&#34;, 8888)~
+os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
+conn = tcp.Connect("127.0.0.1", 8888)~
 bytes = conn.Recv()~
 println(string(bytes))
 ```

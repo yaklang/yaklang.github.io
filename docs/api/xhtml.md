@@ -46,7 +46,7 @@ Find 解析并遍历一段 HTML 代码的每一个节点并找到匹配字符串
 
 Example:
 ```
-matchInfoRes = xhtml.Find(&#34;&lt;html&gt;&lt;body&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#34;, &#34;hello&#34;)
+matchInfoRes = xhtml.Find("<html><body><div>hello</div></body></html>", "hello")
 ```
 
 
@@ -73,7 +73,7 @@ GenerateXPath 根据节点引用生成一个节点的 XPath 路径
 
 Example:
 ```
-xhtml.Walker(&#34;&lt;html&gt;&lt;body&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#34;, func(node) {
+xhtml.Walker("<html><body><div>hello</div></body></html>", func(node) {
 println(xhtml.GenerateXPath(node))
 })
 ```
@@ -103,7 +103,7 @@ MatchBetween 从字符串中匹配两个字符串之间的内容，最多匹配 
 
 Example:
 ```
-xhtml.MatchBetween(&#34;123456789&#34;, &#34;2&#34;, &#34;6&#34;, -1) // 2, &#34;345&#34;
+xhtml.MatchBetween("123456789", "2", "6", -1) // 2, "345"
 ```
 
 
@@ -133,7 +133,7 @@ RandomUpperAndLower 返回一个随机大小写的字符串
 
 Example:
 ```
-xhtml.RandomUpperAndLower(&#34;target&#34;) // TArGeT
+xhtml.RandomUpperAndLower("target") // TArGeT
 ```
 
 
@@ -159,7 +159,7 @@ Walker 解析并遍历一段 HTML 代码的每一个节点并回调函数，返�
 
 Example:
 ```
-err = xhtml.Walker(&#34;&lt;html&gt;&lt;body&gt;&lt;div&gt;hello&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;&#34;, func(node) {
+err = xhtml.Walker("<html><body><div>hello</div></body></html>", func(node) {
 println(node.Data)
 })
 ```

@@ -900,10 +900,10 @@ one-character string.)
 ### DecodeHtml
 
 #### 详细描述
-UnescapeString unescapes entities like &amp;#34;&amp;amp;lt;&amp;#34; to become &amp;#34;&amp;lt;&amp;#34;. It unescapes a
-larger range of entities than EscapeString escapes. For example, &amp;#34;&amp;amp;aacute;&amp;#34;
-unescapes to &amp;#34;á&amp;#34;, as does &amp;#34;&amp;amp;#225;&amp;#34; and &amp;#34;&amp;amp;#xE1;&amp;#34;.
-UnescapeString(EscapeString(s)) == s always holds, but the converse isn&amp;#39;t
+UnescapeString unescapes entities like &#34;&amp;lt;&#34; to become &#34;&lt;&#34;. It unescapes a
+larger range of entities than EscapeString escapes. For example, &#34;&amp;aacute;&#34;
+unescapes to &#34;á&#34;, as does &#34;&amp;#225;&#34; and &#34;&amp;#xE1;&#34;.
+UnescapeString(EscapeString(s)) == s always holds, but the converse isn&#39;t
 always true.
 
 
@@ -1187,9 +1187,9 @@ always true.
 ### EscapeHtml
 
 #### 详细描述
-EscapeString escapes special characters like &amp;#34;&amp;lt;&amp;#34; to become &amp;#34;&amp;amp;lt;&amp;#34;. It
-escapes only five such characters: &amp;lt;, &amp;gt;, &amp;amp;, &amp;#39; and &amp;#34;.
-UnescapeString(EscapeString(s)) == s always holds, but the converse isn&amp;#39;t
+EscapeString escapes special characters like &#34;&lt;&#34; to become &#34;&amp;lt;&#34;. It
+escapes only five such characters: &lt;, &gt;, &amp;, &#39; and &#34;.
+UnescapeString(EscapeString(s)) == s always holds, but the converse isn&#39;t
 always true.
 
 
@@ -1845,7 +1845,7 @@ EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回�
 
 Example:
 ```
-enc, err := tls.EncryptWithPkcs1v15(pemBytes, &#34;hello&#34;)
+enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
 ```
 
 

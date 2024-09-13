@@ -43,7 +43,7 @@ Scan servicescan 库使用的端口扫描类型的方式为全连接扫描，用
 
 Example:
 ```
-ch, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389&#34;)  // 开始扫描，函数会立即返回一个错误和结果管道
+ch, err = servicescan.Scan("127.0.0.1", "22-80,443,3389")  // 开始扫描，函数会立即返回一个错误和结果管道
 die(err) // 如果错误非空则报错
 for result := range ch { // 通过遍历管道的形式获取管道中的结果
 
@@ -89,9 +89,9 @@ ScanFromPing 从 ping.Scan 的结果中进行指纹识别
 
 Example:
 ```
-pingResult, err = ping.Scan(&#34;192.168.1.1/24&#34;) // 先进行存活探测
+pingResult, err = ping.Scan("192.168.1.1/24") // 先进行存活探测
 die(err)
-fpResults, err := servicescan.ScanFromPing(pingResult, &#34;22-80,443,3389&#34;) // 将ping中拿到的结果传入servicescan中进行指纹扫描
+fpResults, err := servicescan.ScanFromPing(pingResult, "22-80,443,3389") // 将ping中拿到的结果传入servicescan中进行指纹扫描
 die(err) // 如果错误非空则报错
 for result := range fpResults { // 通过遍历管道的形式获取管道中的结果，一旦有结果返回就会执行循环体的代码
 
@@ -132,7 +132,7 @@ ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query
 
 Example:
 ```
-ch, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389&#34;)  // 开始扫描，函数会立即返回一个错误和结果管道
+ch, err = synscan.Scan("127.0.0.1", "22-80,443,3389")  // 开始扫描，函数会立即返回一个错误和结果管道
 die(err) // 如果错误非空则报错
 fpResults, err := servicescan.ScanFromSynResult(ch) // 将synscan中拿到的结果传入servicescan中进行指纹扫描
 die(err) // 如果错误非空则报错
@@ -183,7 +183,7 @@ ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query
 
 Example:
 ```
-ch, err = synscan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389&#34;)  // 开始扫描，函数会立即返回一个错误和结果管道
+ch, err = synscan.Scan("127.0.0.1", "22-80,443,3389")  // 开始扫描，函数会立即返回一个错误和结果管道
 die(err) // 如果错误非空则报错
 fpResults, err := servicescan.ScanFromSynResult(ch) // 将synscan中拿到的结果传入servicescan中进行指纹扫描
 die(err) // 如果错误非空则报错
@@ -236,7 +236,7 @@ ScanOne servicescan 单体扫描，同步扫描一个目标，主机+端口
 
 Example:
 ```
-result, err = servicescan.ScanOne(&#34;127.0.0.1&#34;, &#34;22-80,443,3389&#34;)  // 开始扫描，函数会立即返回一个错误和结果
+result, err = servicescan.ScanOne("127.0.0.1", "22-80,443,3389")  // 开始扫描，函数会立即返回一个错误和结果
 die(err) // 如果错误非空则报错
 if result.IsOpen() { // 获取到的结果是一个结构体，可以调用IsOpen方法判断该端口是否打开
 
@@ -311,7 +311,7 @@ cache servicescan 的配置选项，设置本次扫描是否使用缓存
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.cache(true))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.cache(true))
 die(err)
 
 	for v := range result {
@@ -347,7 +347,7 @@ concurrent servicescan 的配置选项，用于设置整体扫描并发
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.concurrent(100))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.concurrent(100))
 die(err)
 
 	for v := range result {
@@ -383,7 +383,7 @@ databaseCache servicescan 的配置选项，设置本次扫描是否使用数据
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.databaseCache(true))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.databaseCache(true))
 die(err)
 
 	for v := range result {
@@ -439,7 +439,7 @@ excludeHosts servicescan 的配置选项，设置本次扫描排除的主机
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;192.168.1.1/24&#34;, &#34;22-80,443,3389&#34;, servicescan.excludeHosts(&#34;192.168.1.1&#34;))
+result, err = servicescan.Scan("192.168.1.1/24", "22-80,443,3389", servicescan.excludeHosts("192.168.1.1"))
 die(err)
 
 	for v := range result {
@@ -475,7 +475,7 @@ excludePorts servicescan 的配置选项，设置本次扫描排除的端口
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.excludePorts(&#34;22,80&#34;))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.excludePorts("22,80"))
 die(err)
 
 	for v := range result {
@@ -511,7 +511,7 @@ maxProbes servicescan 的配置选项，在主动模式发包的基础上设置�
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;,
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161",
 servicescan.active(true), // 需要在主动发包的基础上
 servicescan.maxProbes(10)
 )
@@ -550,7 +550,7 @@ maxProbesConcurrent servicescan 的配置选项，设置本次扫描发送 Probe
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;,
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161",
 servicescan.active(true), // 需要在主动发包的基础上
 servicescan.maxProbes(50), // 设置本次扫描使用的最大探测包数量
 servicescan.maxProbesConcurrent(10) // 设置本次扫描发送 Probe 的并发量
@@ -592,7 +592,7 @@ nmapRarityMax servicescan 的配置选项，设置本次扫描使用的 Nmap 指
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;,
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161",
 servicescan.active(true), // 需要在主动发包的基础上通过稀有度进行筛选
 servicescan.nmapRarityMax(9),
 )
@@ -653,7 +653,7 @@ probeTimeout servicescan 的配置选项，设置每一个探测包的超时时�
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.probeTimeout(5))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.probeTimeout(5))
 die(err)
 
 	for v := range result {
@@ -689,7 +689,7 @@ proto servicescan 的配置选项，用于指定扫描协议
 
 Example:
 ```
-result,err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.proto([&#34;tcp&#34;,&#34;udp&#34;]...)) // 使用 TCP 和 UDP 进行扫描
+result,err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.proto(["tcp","udp"]...)) // 使用 TCP 和 UDP 进行扫描
 die(err) // 如果错误非空则报错
 for res := range result { // 通过遍历管道的形式获取管道中的结果，一旦有结果返回就会执行循环体的代码
 
@@ -725,7 +725,7 @@ proxy servicescan 的配置选项，设置本次扫描使用的代理
 
 Example:
 ```
-result, err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.proxy(&#34;http://127.0.0.1:1080&#34;))
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.proxy("http://127.0.0.1:1080"))
 die(err)
 
 	for v := range result {

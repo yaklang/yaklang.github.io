@@ -38,8 +38,8 @@ Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树�
 
 Example:
 ```
-git.Checkout(&#34;C:/Users/xxx/Desktop/yaklang&#34;, &#34;feat/new-branch&#34;, git.checkoutCreate(true)) // 创建新分支
-git.Checkout(&#34;C:/Users/xxx/Desktop/yaklang&#34;, &#34;old-branch&#34;, git.checkoutForce(true)) // 强制切换
+git.Checkout("C:/Users/xxx/Desktop/yaklang", "feat/new-branch", git.checkoutCreate(true)) // 创建新分支
+git.Checkout("C:/Users/xxx/Desktop/yaklang", "old-branch", git.checkoutForce(true)) // 强制切换
 ```
 
 
@@ -67,7 +67,7 @@ Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收�
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.recursive(true), git.verify(false))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.recursive(true), git.verify(false))
 ```
 
 
@@ -95,7 +95,7 @@ Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，�
 
 Example:
 ```
-git.Fetch(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.verify(false), git.remote(&#34;origin&#34;), git.fetchAllTags(true))
+git.Fetch("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin"), git.fetchAllTags(true))
 ```
 
 
@@ -124,7 +124,7 @@ Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通�
 
 Example:
 ```
-git.GitHack(&#34;http://127.0.0.1:8787/git/website&#34;, &#34;C:/Users/xxx/Desktop/githack-test&#34;, git.threads(8))
+git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-test", git.threads(8))
 ```
 
 
@@ -153,10 +153,10 @@ IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(co
 Example:
 ```
 // 遍历提交记录，过滤名字中包含ci的引用记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
-git.IterateCommit(&#34;D:/coding/golang/src/yaklang&#34;,
-git.filterReference((ref) =&gt; {return !ref.Name().Contains(&#34;ci&#34;)}),
-git.filterCommit((c) =&gt; { return c.Author.Name != &#34;xxx&#34; }),
-git.handleCommit((c) =&gt; { println(c.String()) }))
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.filterCommit((c) => { return c.Author.Name != "xxx" }),
+git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -183,7 +183,7 @@ Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合
 
 Example:
 ```
-git.Pull(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.verify(false), git.remote(&#34;origin&#34;))
+git.Pull("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin"))
 ```
 
 
@@ -210,7 +210,7 @@ SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）�
 
 Example:
 ```
-git.SetProxy(&#34;http://127.0.0.1:1080&#34;)
+git.SetProxy("http://127.0.0.1:1080")
 ```
 
 
@@ -231,7 +231,7 @@ auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时�
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.auth(&#34;admin&#34;, &#34;admin&#34;))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.auth("admin", "admin"))
 ```
 
 
@@ -258,7 +258,7 @@ fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否
 
 Example:
 ```
-git.Checkout(&#34;C:/Users/xxx/Desktop/yaklang&#34;, &#34;feat/new-branch&#34;, git.checkoutCreate(true))
+git.Checkout("C:/Users/xxx/Desktop/yaklang", "feat/new-branch", git.checkoutCreate(true))
 ```
 
 
@@ -284,7 +284,7 @@ fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否
 
 Example:
 ```
-git.Checkout(&#34;C:/Users/xxx/Desktop/yaklang&#34;, &#34;old-branch&#34;, git.checkoutForce(true))
+git.Checkout("C:/Users/xxx/Desktop/yaklang", "old-branch", git.checkoutForce(true))
 ```
 
 
@@ -310,7 +310,7 @@ checkoutKeep 是一个选项函数，用于指定检出(checkout)操作时，本
 
 Example:
 ```
-git.Checkout(&#34;C:/Users/xxx/Desktop/yaklang&#34;, &#34;old-branch&#34;, git.checkoutKeep(true))
+git.Checkout("C:/Users/xxx/Desktop/yaklang", "old-branch", git.checkoutKeep(true))
 ```
 
 
@@ -336,7 +336,7 @@ context 是一个选项函数，用于指定其他 Git 操作（例如Clone）�
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.context(context.New()))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.context(context.New()))
 ```
 
 
@@ -362,7 +362,7 @@ depth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时�
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.Depth(1))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.Depth(1))
 ```
 
 
@@ -388,7 +388,7 @@ fetchAllTags 是一个选项函数，用于指定获取(fetch)操作时是否拉
 
 Example:
 ```
-git.Fetch(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.fetchAllTags(true)) // 拉取所有标签
+git.Fetch("C:/Users/xxx/Desktop/yaklang", git.fetchAllTags(true)) // 拉取所有标签
 ```
 
 
@@ -415,9 +415,9 @@ filterCommit 是一个选项函数，它接收一个回调函数，这个函数�
 Example:
 ```
 // 遍历提交记录，过滤作者名字为xxx的提交记录，打印剩余的每个提交记录
-git.IterateCommit(&#34;D:/coding/golang/src/yaklang&#34;,
-git.filterCommit((c) =&gt; { return c.Author.Name != &#34;xxx&#34; }),
-git.handleCommit((c) =&gt; { println(c.String()) }))
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterCommit((c) => { return c.Author.Name != "xxx" }),
+git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -444,9 +444,9 @@ filterReference 是一个选项函数，它接收一个回调函数，这个函�
 Example:
 ```
 // 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
-git.IterateCommit(&#34;D:/coding/golang/src/yaklang&#34;,
-git.filterReference((ref) =&gt; {return !ref.Name().Contains(&#34;ci&#34;)}),
-git.handleReference((ref) =&gt; { println(ref.String()) }))
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.handleReference((ref) => { println(ref.String()) }))
 ```
 
 
@@ -472,7 +472,7 @@ force 是一个选项函数，用于指定其他 Git 操作（例如Pull）时�
 
 Example:
 ```
-git.Pull(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.verify(false), git.force(true))
+git.Pull("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.force(true))
 ```
 
 
@@ -499,7 +499,7 @@ handleCommit 是一个选项函数，它接收一个回调函数，这个函数�
 Example:
 ```
 // 遍历提交记录，打印每个提交记录
-git.IterateCommit(&#34;D:/coding/golang/src/yaklang&#34;, git.handleCommit((c) =&gt; { println(c.String()) }))
+git.IterateCommit("D:/coding/golang/src/yaklang", git.handleCommit((c) => { println(c.String()) }))
 ```
 
 
@@ -526,9 +526,9 @@ handleReference 是一个选项函数，它接收一个回调函数，这个函�
 Example:
 ```
 // 遍历提交记录，过滤名字中包含ci的引用记录，打印剩余的每个引用记录
-git.IterateCommit(&#34;D:/coding/golang/src/yaklang&#34;,
-git.filterReference((ref) =&gt; {return !ref.Name().Contains(&#34;ci&#34;)}),
-git.handleReference((ref) =&gt; { println(ref.String()) }))
+git.IterateCommit("D:/coding/golang/src/yaklang",
+git.filterReference((ref) => {return !ref.Name().Contains("ci")}),
+git.handleReference((ref) => { println(ref.String()) }))
 ```
 
 
@@ -554,7 +554,7 @@ httpOpts 是一个GitHack选项函数，用于指定GitHack的HTTP选项，其�
 
 Example:
 ```
-git.GitHack(&#34;http://127.0.0.1:8787/git/website&#34;, &#34;C:/Users/xxx/Desktop/githack-test&#34;, git.httpOpts(poc.timeout(10), poc.https(true)))
+git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-test", git.httpOpts(poc.timeout(10), poc.https(true)))
 ```
 
 
@@ -580,7 +580,7 @@ noFetchTags 是一个选项函数，用于指定获取(fetch)操作时是否不�
 
 Example:
 ```
-git.Fetch(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.noFetchTags(true)) // 不拉取标签
+git.Fetch("C:/Users/xxx/Desktop/yaklang", git.noFetchTags(true)) // 不拉取标签
 ```
 
 
@@ -606,7 +606,7 @@ recursive 是一个选项函数，用于指定其他 Git 操作（例如Clone）
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.recursive(true))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.recursive(true))
 ```
 
 
@@ -632,7 +632,7 @@ remote 是一个选项函数，用于指定其他 Git 操作（例如Pull）时�
 
 Example:
 ```
-git.Pull(&#34;C:/Users/xxx/Desktop/yaklang&#34;, git.verify(false), git.remote(&#34;origin&#34;))
+git.Pull("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin"))
 ```
 
 
@@ -658,7 +658,7 @@ threads 是一个GitHack选项函数，用于指定并发数，默认为8
 
 Example:
 ```
-git.GitHack(&#34;http://127.0.0.1:8787/git/website&#34;, &#34;C:/Users/xxx/Desktop/githack-test&#34;, git.threads(8))
+git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-test", git.threads(8))
 ```
 
 
@@ -684,7 +684,7 @@ useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地�
 
 Example:
 ```
-git.GitHack(&#34;http://127.0.0.1:8787/git/website&#34;, &#34;C:/Users/xxx/Desktop/githack-test&#34;, git.useLocalGitBinary(true))
+git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-test", git.useLocalGitBinary(true))
 ```
 
 
@@ -710,7 +710,7 @@ verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时
 
 Example:
 ```
-git.Clone(&#34;https://github.com/yaklang/yaklang&#34;, &#34;C:/Users/xxx/Desktop/yaklang&#34;, git.recursive(true), git.verify(false))
+git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", git.recursive(true), git.verify(false))
 ```
 
 

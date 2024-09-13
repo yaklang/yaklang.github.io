@@ -155,7 +155,7 @@ AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加
 
 Example:
 ```
-poc.AppendHTTPPacketCookie(poc.BasicRequest(), &#34;aaa&#34;, &#34;bbb&#34;) // 添加cookie键值对aaa:bbb
+poc.AppendHTTPPacketCookie(poc.BasicRequest(), "aaa", "bbb") // 添加cookie键值对aaa:bbb
 ```
 
 
@@ -189,10 +189,10 @@ Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimim
 Content-Length: 203
 
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;aaa&#34;
+Content-Disposition: form-data; name="aaa"
 
 bbb
---------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, &#34;ccc&#34;, &#34;ddd&#34;) // 添加POST请求表单，其中ccc为键，ddd为值
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, "ccc", "ddd") // 添加POST请求表单，其中ccc为键，ddd为值
 ```
 
 
@@ -220,7 +220,7 @@ AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加
 
 Example:
 ```
-poc.AppendHTTPPacketHeader(poc.BasicRequest(), &#34;AAA&#34;, &#34;BBB&#34;) // 添加AAA请求头的值为BBB
+poc.AppendHTTPPacketHeader(poc.BasicRequest(), "AAA", "BBB") // 添加AAA请求头的值为BBB
 ```
 
 
@@ -250,7 +250,7 @@ Example:
 ```
 poc.AppendHTTPPacketPath(`GET /docs HTTP/1.1
 Host: yaklang.com
-`, &#34;/api/poc&#34;)) // 向 example.com 发起请求，实际上请求路径改为/docs/api/poc
+`, "/api/poc")) // 向 example.com 发起请求，实际上请求路径改为/docs/api/poc
 ```
 
 
@@ -277,7 +277,7 @@ AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添
 
 Example:
 ```
-poc.AppendHTTPPacketPostParam(poc.BasicRequest(), &#34;a&#34;, &#34;b&#34;) // 向 pie.dev 发起请求，添加POST请求参数a，值为b
+poc.AppendHTTPPacketPostParam(poc.BasicRequest(), "a", "b") // 向 pie.dev 发起请求，添加POST请求参数a，值为b
 ```
 
 
@@ -305,7 +305,7 @@ AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-poc.AppendHTTPPacketQueryParam(poc.BasicRequest(), &#34;a&#34;, &#34;b&#34;) // 添加GET请求参数a，值为b
+poc.AppendHTTPPacketQueryParam(poc.BasicRequest(), "a", "b") // 添加GET请求参数a，值为b
 ```
 
 
@@ -333,8 +333,8 @@ AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;POST&#34;, &#34;https://pie.dev/post&#34;)
-poc.AppendHTTPPacketUploadFile(raw, &#34;file&#34;, &#34;phpinfo.php&#34;, &#34;&lt;?php phpinfo(); ?&gt;&#34;, &#34;image/jpeg&#34;)) // 添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -394,8 +394,8 @@ BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一�
 
 Example:
 ```
-raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost(&#34;yaklang.com&#34;), poc.replacePath(&#34;/docs/api/poc&#34;)) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/docs/api/poc
-// raw = b&#34;GET /docs/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;
+raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yaklang.com"), poc.replacePath("/docs/api/poc")) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/docs/api/poc
+// raw = b"GET /docs/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n"
 ```
 
 
@@ -422,7 +422,7 @@ CurlToHTTPRequest 尝试将curl命令转换为HTTP请求报文，其返回值为
 
 Example:
 ```
-poc.CurlToHTTPRequest(&#34;curl -X POST -d &#39;a=b&amp;c=d&#39; http://example.com&#34;)
+poc.CurlToHTTPRequest("curl -X POST -d 'a=b&c=d' http://example.com")
 ```
 
 
@@ -450,7 +450,7 @@ Delete 向指定 URL 发送 DELETE 请求并且返回响应结构体，请求结
 
 Example:
 ```
-poc.Delete(&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的DELETE请求
+poc.Delete("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的DELETE请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -485,7 +485,7 @@ Content-Type: application/json
 Cookie: aaa=bbb; ccc=ddd
 Host: pie.dev
 
-`, &#34;aaa&#34;) // 删除Cookie中的aaa
+`, "aaa") // 删除Cookie中的aaa
 ```
 
 
@@ -518,14 +518,14 @@ Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimim
 Content-Length: 308
 
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;aaa&#34;
+Content-Disposition: form-data; name="aaa"
 
 bbb
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;ccc&#34;
+Content-Disposition: form-data; name="ccc"
 
 ddd
---------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, &#34;aaa&#34;) // 删除POST请求表单aaa
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, "aaa") // 删除POST请求表单aaa
 ```
 
 
@@ -557,7 +557,7 @@ Content-Type: application/json
 AAA: BBB
 Host: pie.dev
 
-`, &#34;AAA&#34;) // 删除AAA请求头
+`, "AAA") // 删除AAA请求头
 ```
 
 
@@ -589,7 +589,7 @@ Content-Type: application/json
 Content-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`, &#34;a&#34;) // 删除POST请求参数a
+a=b&c=d`, "a") // 删除POST请求参数a
 ```
 
 
@@ -616,11 +616,11 @@ DeleteHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-poc.DeleteHTTPPacketQueryParam(`GET /get?a=b&amp;c=d HTTP/1.1
+poc.DeleteHTTPPacketQueryParam(`GET /get?a=b&c=d HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-`, &#34;a&#34;) // 删除GET请求参数a
+`, "a") // 删除GET请求参数a
 ```
 
 
@@ -649,7 +649,7 @@ Do 向指定 URL 发送指定请求方法的请求并且返回响应结构体，
 
 Example:
 ```
-poc.Do(&#34;GET&#34;,&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的GET请求
+poc.Do("GET","https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的GET请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -680,8 +680,8 @@ ExtractPostParams 尝试将 HTTP 请求报文中的各种 POST 参数(普通格�
 
 Example:
 ```
-params, err = poc.ExtractPostParams(&#34;POST / HTTP/1.1\r\nContent-Type: application/json\r\nHost: example.com\r\n\r\n{\&#34;key\&#34;: \&#34;value\&#34;}&#34;)
-dump(params) // {&#34;key&#34;: &#34;value&#34;}
+params, err = poc.ExtractPostParams("POST / HTTP/1.1\r\nContent-Type: application/json\r\nHost: example.com\r\n\r\n{\"key\": \"value\"}")
+dump(params) // {"key": "value"}
 ```
 
 
@@ -739,7 +739,7 @@ FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复�
 
 Example:
 ```
-poc.FixHTTPRequest(b&#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
+poc.FixHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
 ```
 
 
@@ -765,7 +765,7 @@ FixHTTPResponse 尝试对传入的 HTTP 响应报文进行修复，并返回修�
 
 Example:
 ```
-poc.FixHTTPResponse(b&#34;HTTP/1.1 200 OK\nContent-Length: 5\n\nhello&#34;)
+poc.FixHTTPResponse(b"HTTP/1.1 200 OK\nContent-Length: 5\n\nhello")
 ```
 
 
@@ -793,7 +793,7 @@ Get 向指定 URL 发送 GET 请求并且返回响应结构体，请求结构体
 
 Example:
 ```
-poc.Get(&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的GET请求
+poc.Get("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的GET请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -828,7 +828,7 @@ Content-Type: application/json
 COntent-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`) // 获取所有POST请求参数
+a=b&c=d`) // 获取所有POST请求参数
 ```
 
 
@@ -854,7 +854,7 @@ GetAllHTTPPacketQueryParams 是一个辅助函数，用于获取请求报文中�
 
 Example:
 ```
-poc.GetAllHTTPPacketQueryParams(`GET /get?a=b&amp;c=d HTTP/1.1
+poc.GetAllHTTPPacketQueryParams(`GET /get?a=b&c=d HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
@@ -889,7 +889,7 @@ Content-Type: application/json
 COntent-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`) // 获取请求头，这里为b&#34;a=b&amp;c=d&#34;
+a=b&c=d`) // 获取请求头，这里为b"a=b&c=d"
 ```
 
 
@@ -920,7 +920,7 @@ Content-Type: application/json
 COntent-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`) // 获取Content-Type请求头
+a=b&c=d`) // 获取Content-Type请求头
 ```
 
 
@@ -951,7 +951,7 @@ Content-Type: application/json
 Cookie: a=b; c=d
 Host: pie.dev
 
-`, &#34;a&#34;) // 获取键名为a的Cookie值，这里会返回&#34;b&#34;
+`, "a") // 获取键名为a的Cookie值，这里会返回"b"
 ```
 
 
@@ -983,7 +983,7 @@ Content-Type: application/json
 Cookie: a=b; c=d
 Host: pie.dev
 
-`, &#34;a&#34;) // 获取键名为a的Cookie值，这里会返回&#34;b&#34;
+`, "a") // 获取键名为a的Cookie值，这里会返回"b"
 ```
 
 
@@ -1015,7 +1015,7 @@ Content-Type: application/json
 Cookie: a=b; a=c
 Host: pie.dev
 
-`, &#34;a&#34;) // 获取键名为a的Cookie值，这里会返回[&#34;b&#34;, &#34;c&#34;]
+`, "a") // 获取键名为a的Cookie值，这里会返回["b", "c"]
 ```
 
 
@@ -1047,7 +1047,7 @@ Content-Type: application/json
 Cookie: a=b; c=d
 Host: pie.dev
 
-`) // 获取所有Cookie值，这里会返回{&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;}
+`) // 获取所有Cookie值，这里会返回{"a":"b", "c":"d"}
 ```
 
 
@@ -1078,7 +1078,7 @@ Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`) // 获取所有Cookie值，这里会返回{&#34;a&#34;:[&#34;b&#34;, &#34;c&#34;], &#34;c&#34;:[&#34;d&#34;]}
+`) // 获取所有Cookie值，这里会返回{"a":["b", "c"], "c":["d"]}
 ```
 
 
@@ -1113,7 +1113,7 @@ Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`) // 获取请求方法，请求URI，协议版本，这里会返回&#34;GET&#34;, &#34;/get&#34;, &#34;HTTP/1.1&#34;
+`) // 获取请求方法，请求URI，协议版本，这里会返回"GET", "/get", "HTTP/1.1"
 ```
 
 
@@ -1146,7 +1146,7 @@ Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`, &#34;Content-Type&#34;) // 获取Content-Type请求头，这里会返回&#34;application/json&#34;
+`, "Content-Type") // 获取Content-Type请求头，这里会返回"application/json"
 ```
 
 
@@ -1178,7 +1178,7 @@ Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`) // 获取所有请求头，这里会返回{&#34;Content-Type&#34;: &#34;application/json&#34;, &#34;Cookie&#34;: &#34;a=b; a=c; c=d&#34;, &#34;Host&#34;: &#34;pie.dev&#34;}
+`) // 获取所有请求头，这里会返回{"Content-Type": "application/json", "Cookie": "a=b; a=c; c=d", "Host": "pie.dev"}
 ```
 
 
@@ -1210,7 +1210,7 @@ Cookie: a=b; a=c; c=d
 Cookie: e=f
 Host: pie.dev
 
-`) // 获取所有请求头，这里会返回{&#34;Content-Type&#34;: [&#34;application/json&#34;], &#34;Cookie&#34;: []&#34;a=b; a=c; c=d&#34;, &#34;e=f&#34;], &#34;Host&#34;: [&#34;pie.dev&#34;]}
+`) // 获取所有请求头，这里会返回{"Content-Type": ["application/json"], "Cookie": []"a=b; a=c; c=d", "e=f"], "Host": ["pie.dev"]}
 ```
 
 
@@ -1241,7 +1241,7 @@ Content-Type: application/json
 COntent-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`, &#34;a&#34;) // 获取POST请求参数a的值
+a=b&c=d`, "a") // 获取POST请求参数a的值
 ```
 
 
@@ -1268,11 +1268,11 @@ GetHTTPPacketQueryParam 是一个辅助函数，用于获取请求报文中指�
 
 Example:
 ```
-poc.GetHTTPPacketQueryParam(`GET /get?a=b&amp;c=d HTTP/1.1
+poc.GetHTTPPacketQueryParam(`GET /get?a=b&c=d HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-`, &#34;a&#34;) // 获取GET请求参数a的值
+`, "a") // 获取GET请求参数a的值
 ```
 
 
@@ -1304,7 +1304,7 @@ Content-Type: application/json
 Cookie: a=b; a=c; c=d
 Host: pie.dev
 
-`) // 获取请求方法，这里会返回&#34;GET&#34;
+`) // 获取请求方法，这里会返回"GET"
 ```
 
 
@@ -1330,7 +1330,7 @@ GetHTTPRequestPath 是一个辅助函数，用于获取响应报文中的路径�
 
 Example:
 ```
-poc.GetHTTPRequestPath(&#34;GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n&#34;) // /a/bc.html?a=1
+poc.GetHTTPRequestPath("GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n") // /a/bc.html?a=1
 ```
 
 
@@ -1356,7 +1356,7 @@ GetHTTPRequestPathWithoutQuery 是一个辅助函数，用于获取响应报文�
 
 Example:
 ```
-poc.GetHTTPRequestPathWithoutQuery(&#34;GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n&#34;) // /a/bc.html
+poc.GetHTTPRequestPathWithoutQuery("GET /a/bc.html?a=1 HTTP/1.1\r\nHost: www.example.com\r\n\r\n") // /a/bc.html
 ```
 
 
@@ -1411,11 +1411,11 @@ GetUrlFromHTTPRequest 是一个辅助函数，用于获取请求报文中的URL�
 
 Example:
 ```
-poc.GetUrlFromHTTPRequest(&#34;https&#34;, `GET /get HTTP/1.1
+poc.GetUrlFromHTTPRequest("https", `GET /get HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-`) // 获取URL，这里会返回&#34;https://pie.dev/get&#34;
+`) // 获取URL，这里会返回"https://pie.dev/get"
 ```
 
 
@@ -1442,7 +1442,7 @@ HTTP 发送请求并且返回原始响应报文，原始请求报文以及错误
 
 Example:
 ```
-poc.HTTP(&#34;GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n&#34;, poc.https(true), poc.replaceHeader(&#34;AAA&#34;, &#34;BBB&#34;)) // yaklang.com发送一个基于HTTPS协议的GET请求，并且添加一个请求头AAA，它的值为BBB
+poc.HTTP("GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n", poc.https(true), poc.replaceHeader("AAA", "BBB")) // yaklang.com发送一个基于HTTPS协议的GET请求，并且添加一个请求头AAA，它的值为BBB
 ```
 
 
@@ -1473,7 +1473,7 @@ HTTPEx 与 HTTP 类似，它发送请求并且返回响应结构体，请求结�
 
 Example:
 ```
-rsp, req, err = poc.HTTPEx(`GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n`, poc.https(true), poc.replaceHeader(&#34;AAA&#34;, &#34;BBB&#34;)) // 向yaklang.com发送一个基于HTTPS协议的GET请求，并且添加一个请求头AAA，它的值为BBB
+rsp, req, err = poc.HTTPEx(`GET / HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n`, poc.https(true), poc.replaceHeader("AAA", "BBB")) // 向yaklang.com发送一个基于HTTPS协议的GET请求，并且添加一个请求头AAA，它的值为BBB
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1533,7 +1533,7 @@ HTTPRequestToCurl 尝试将 HTTP 请求报文转换为curl命令。第一个参�
 
 Example:
 ```
-poc.HTTPRequestToCurl(true, &#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
+poc.HTTPRequestToCurl(true, "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
 ```
 
 
@@ -1562,7 +1562,7 @@ Head 向指定 URL 发送 HEAD 请求并且返回响应结构体，请求结构�
 
 Example:
 ```
-poc.Head(&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的HEAD请求
+poc.Head("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的HEAD请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1592,7 +1592,7 @@ IsResp 判断传入的数据是否为 HTTP 响应报文
 
 Example:
 ```
-poc.IsResp(b&#34;HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok&#34;) // true
+poc.IsResp(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok") // true
 ```
 
 
@@ -1620,7 +1620,7 @@ Options 向指定 URL 发送 OPTIONS 请求并且返回响应结构体，请求�
 
 Example:
 ```
-poc.Options(&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的Options请求
+poc.Options("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的Options请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1650,7 +1650,7 @@ ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求
 
 Example:
 ```
-req, err := str.ParseBytesToHTTPRequest(b&#34;GET / HTTP/1.1\r\nHost: example.com\r\n\r\n&#34;)
+req, err := str.ParseBytesToHTTPRequest(b"GET / HTTP/1.1\r\nHost: example.com\r\n\r\n")
 ```
 
 
@@ -1677,7 +1677,7 @@ ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应
 
 Example:
 ```
-res, err := str.ParseBytesToHTTPResponse(b&#34;HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok&#34;)
+res, err := str.ParseBytesToHTTPResponse(b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\nok")
 ```
 
 
@@ -1709,11 +1709,11 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Host: pie.dev
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name=&#34;a&#34;
+Content-Disposition: form-data; name="a"
 
 1
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name=&#34;b&#34;
+Content-Disposition: form-data; name="b"
 
 2
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--`, func(part) {
@@ -1746,7 +1746,7 @@ ParseUrlToHTTPRequestRaw 将URL解析为原始 HTTP 请求报文，返回是否�
 
 Example:
 ```
-ishttps, raw, err = poc.ParseUrlToHTTPRequestRaw(&#34;GET&#34;, &#34;https://yaklang.com&#34;)
+ishttps, raw, err = poc.ParseUrlToHTTPRequestRaw("GET", "https://yaklang.com")
 ```
 
 
@@ -1777,7 +1777,7 @@ Post 向指定 URL 发送 POST 请求并且返回响应结构体，请求结构�
 
 Example:
 ```
-poc.Post(&#34;https://yaklang.com&#34;, poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的POST请求
+poc.Post("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的POST请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1807,8 +1807,8 @@ ReplaceAllHTTPPacketPostParams 是一个辅助函数，用于改变请求报文�
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;POST&#34;, &#34;https://pie.dev/post&#34;)
-poc.ReplaceAllHTTPPacketPostParams(raw, {&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;}) // 添加POST请求参数a，值为b，POST请求参数c，值为d
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.ReplaceAllHTTPPacketPostParams(raw, {"a":"b", "c":"d"}) // 添加POST请求参数a，值为b，POST请求参数c，值为d
 ```
 
 
@@ -1839,8 +1839,8 @@ ReplaceAllHTTPPacketPostParamsWithoutEscape 是一个辅助函数，用于改变
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;POST&#34;, &#34;https://pie.dev/post&#34;)
-poc.ReplaceAllHTTPPacketPostParamsWithoutEscape(raw, {&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;}) // 添加POST请求参数a，值为b，POST请求参数c，值为d
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.ReplaceAllHTTPPacketPostParamsWithoutEscape(raw, {"a":"b", "c":"d"}) // 添加POST请求参数a，值为b，POST请求参数c，值为d
 ```
 
 
@@ -1867,7 +1867,7 @@ ReplaceAllHTTPPacketQueryParams 是一个辅助函数，用于改变请求报文
 
 Example:
 ```
-poc.ReplaceAllHTTPPacketQueryParams(poc.BasicRequest(), {&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;}) // 添加GET请求参数a，值为b，添加GET请求参数c，值为d
+poc.ReplaceAllHTTPPacketQueryParams(poc.BasicRequest(), {"a":"b", "c":"d"}) // 添加GET请求参数a，值为b，添加GET请求参数c，值为d
 ```
 
 
@@ -1896,7 +1896,7 @@ ReplaceAllHTTPPacketQueryParamsWithoutEscape 是一个辅助函数，用于改�
 
 Example:
 ```
-poc.ReplaceAllHTTPPacketQueryParamsWithoutEscape(poc.BasicRequest(), {&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;}) // 添加GET请求参数a，值为b，添加GET请求参数c，值为d
+poc.ReplaceAllHTTPPacketQueryParamsWithoutEscape(poc.BasicRequest(), {"a":"b", "c":"d"}) // 添加GET请求参数a，值为b，添加GET请求参数c，值为d
 ```
 
 
@@ -1927,7 +1927,7 @@ poc.ReplaceBody(`POST / HTTP/1.1
 Host: example.com
 Content-Length: 11
 
-hello world`, &#34;hello yak&#34;, false)
+hello world`, "hello yak", false)
 ```
 
 
@@ -1951,12 +1951,12 @@ hello world`, &#34;hello yak&#34;, false)
 ### ReplaceHTTPPacketBasicAuth
 
 #### 详细描述
-ReplaceHTTPPacketBasicAuth 是一个辅助函数，用于改变请求报文，修改Authorization请求头为基础认证的密文，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader(&amp;#34;Authorization&amp;#34;, codec.EncodeBase64(username + &amp;#34;:&amp;#34; + password))的简写
+ReplaceHTTPPacketBasicAuth 是一个辅助函数，用于改变请求报文，修改Authorization请求头为基础认证的密文，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader(&#34;Authorization&#34;, codec.EncodeBase64(username + &#34;:&#34; + password))的简写
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;GET&#34;, &#34;https://pie.dev/basic-auth/admin/password&#34;)
-poc.ReplaceHTTPPacketBasicAuth(raw, &#34;admin&#34;, &#34;password&#34;) // 修改Authorization请求头
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("GET", "https://pie.dev/basic-auth/admin/password")
+poc.ReplaceHTTPPacketBasicAuth(raw, "admin", "password") // 修改Authorization请求头
 ```
 
 
@@ -1984,7 +1984,7 @@ ReplaceHTTPPacketBody 是一个辅助函数，用于改变 HTTP 报文，修改 
 
 Example:
 ```
-poc.ReplaceHTTPPacketBody(poc.BasicRequest(), &#34;a=b&#34;) // 修改请求体内容为a=b
+poc.ReplaceHTTPPacketBody(poc.BasicRequest(), "a=b") // 修改请求体内容为a=b
 ```
 
 
@@ -2011,7 +2011,7 @@ ReplaceHTTPPacketCookie 是一个辅助函数，用于改变请求报文，修�
 
 Example:
 ```
-poc.ReplaceHTTPPacketCookie(poc.BasicRequest(), &#34;aaa&#34;, &#34;bbb&#34;) // 修改cookie值，由于这里没有aaa的cookie值，所以会增加
+poc.ReplaceHTTPPacketCookie(poc.BasicRequest(), "aaa", "bbb") // 修改cookie值，由于这里没有aaa的cookie值，所以会增加
 ```
 
 
@@ -2039,7 +2039,7 @@ ReplaceHTTPPacketCookies 是一个辅助函数，用于改变请求报文，修�
 
 Example:
 ```
-poc.ReplaceHTTPPacketCookies(poc.BasicRequest(), {&#34;aaa&#34;:&#34;bbb&#34;, &#34;ccc&#34;:&#34;ddd&#34;}) // 修改cookie值为aaa=bbb;ccc=ddd
+poc.ReplaceHTTPPacketCookies(poc.BasicRequest(), {"aaa":"bbb", "ccc":"ddd"}) // 修改cookie值为aaa=bbb;ccc=ddd
 ```
 
 
@@ -2068,7 +2068,7 @@ Example:
 ```
 poc.ReplaceHTTPPacketFirstLine(`GET / HTTP/1.1
 Host: Example.com
-`, &#34;GET /test HTTP/1.1&#34;)) // 向 example.com 发起请求，修改请求报文的第一行，请求/test路径
+`, "GET /test HTTP/1.1")) // 向 example.com 发起请求，修改请求报文的第一行，请求/test路径
 ```
 
 
@@ -2101,10 +2101,10 @@ Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimim
 Content-Length: 203
 
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;aaa&#34;
+Content-Disposition: form-data; name="aaa"
 
 bbb
---------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, &#34;ccc&#34;, &#34;ddd&#34;) // 替换POST请求表单，其中ccc为键，ddd为值
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, "ccc", "ddd") // 替换POST请求表单，其中ccc为键，ddd为值
 ```
 
 
@@ -2132,7 +2132,7 @@ ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修�
 
 Example:
 ```
-poc.ReplaceHTTPPacketHeader(poc.BasicRequest(),&#34;AAA&#34;, &#34;BBB&#34;) // 修改AAA请求头的值为BBB，这里没有AAA请求头，所以会增加该请求头
+poc.ReplaceHTTPPacketHeader(poc.BasicRequest(),"AAA", "BBB") // 修改AAA请求头的值为BBB，这里没有AAA请求头，所以会增加该请求头
 ```
 
 
@@ -2156,12 +2156,12 @@ poc.ReplaceHTTPPacketHeader(poc.BasicRequest(),&#34;AAA&#34;, &#34;BBB&#34;) // 
 ### ReplaceHTTPPacketHost
 
 #### 详细描述
-ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader(&amp;#34;Host&amp;#34;, host)的简写
+ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader(&#34;Host&#34;, host)的简写
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;GET&#34;, &#34;https://yaklang.com&#34;)
-poc.ReplaceHTTPPacketHost(raw, &#34;www.yaklang.com&#34;) // 修改Host请求头的值为 www.yaklang.com
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("GET", "https://yaklang.com")
+poc.ReplaceHTTPPacketHost(raw, "www.yaklang.com") // 修改Host请求头的值为 www.yaklang.com
 ```
 
 
@@ -2188,7 +2188,7 @@ ReplaceHTTPPacketJsonBody 是一个辅助函数，用于改变 HTTP 报文，修
 
 Example:
 ```
-poc.ReplaceHTTPPacketJsonBody(poc.BasicRequest(), {&#34;a&#34;:&#34;b&#34;}) // 修改请求体内容为{&#34;a&#34;:&#34;b&#34;}
+poc.ReplaceHTTPPacketJsonBody(poc.BasicRequest(), {"a":"b"}) // 修改请求体内容为{"a":"b"}
 ```
 
 
@@ -2215,7 +2215,7 @@ ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修�
 
 Example:
 ```
-poc.ReplaceHTTPPacketMethod(poc.BasicRequest(), &#34;OPTIONS&#34;) // 修改请求方法为OPTIONS
+poc.ReplaceHTTPPacketMethod(poc.BasicRequest(), "OPTIONS") // 修改请求方法为OPTIONS
 ```
 
 
@@ -2242,7 +2242,7 @@ ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改�
 
 Example:
 ```
-poc.ReplaceHTTPPacketPath(poc.BasicRequest(), &#34;/get&#34;) // 修改请求路径为/get
+poc.ReplaceHTTPPacketPath(poc.BasicRequest(), "/get") // 修改请求路径为/get
 ```
 
 
@@ -2269,8 +2269,8 @@ ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;POST&#34;, &#34;https://pie.dev/post&#34;)
-poc.ReplaceHTTPPacketPostParam(raw, &#34;a&#34;, &#34;b&#34;) // 添加POST请求参数a，值为b
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.ReplaceHTTPPacketPostParam(raw, "a", "b") // 添加POST请求参数a，值为b
 ```
 
 
@@ -2298,8 +2298,8 @@ ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;GET&#34;, &#34;https://pie.dev/get&#34;)
-poc.ReplaceHTTPPacketQueryParam(raw, &#34;a&#34;, &#34;b&#34;) // 添加GET请求参数a，值为b
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("GET", "https://pie.dev/get")
+poc.ReplaceHTTPPacketQueryParam(raw, "a", "b") // 添加GET请求参数a，值为b
 ```
 
 
@@ -2327,8 +2327,8 @@ ReplaceHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，�
 
 Example:
 ```
-_, raw, _ = poc.ParseUrlToHTTPRequestRaw(&#34;POST&#34;, &#34;https://pie.dev/post&#34;)
-poc.ReplaceHTTPPacketUploadFile(raw, &#34;file&#34;, &#34;phpinfo.php&#34;, &#34;&lt;?php phpinfo(); ?&gt;&#34;, &#34;image/jpeg&#34;)) // 添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+_, raw, _ = poc.ParseUrlToHTTPRequestRaw("POST", "https://pie.dev/post")
+poc.ReplaceHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg")) // 添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -2362,7 +2362,7 @@ poc.Split(`POST / HTTP/1.1
 Content-Type: application/json
 Host: www.example.com
 
-{&#34;key&#34;: &#34;value&#34;}`, func(header) {
+{"key": "value"}`, func(header) {
 dump(header)
 })
 ```
@@ -2401,10 +2401,10 @@ Host: echo.websocket.events
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
 Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
 
-	poc.proxy(&#34;http://127.0.0.1:7890&#34;), poc.websocketFromServer(func(rsp, cancel) {
+	poc.proxy("http://127.0.0.1:7890"), poc.websocketFromServer(func(rsp, cancel) {
 		    dump(rsp)
 		}), poc.websocketOnClient(func(c) {
-		    c.WriteText(&#34;123&#34;)
+		    c.WriteText("123")
 		})
 
 )
@@ -2437,7 +2437,7 @@ appendCookie 是一个请求选项参数，用于改变请求报文，添加 Coo
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.appendCookie(&#34;aaa&#34;, &#34;bbb&#34;)) // 向 pie.dev 发起请求，添加cookie键值对aaa:bbb
+poc.Get("https://pie.dev/get", poc.appendCookie("aaa", "bbb")) // 向 pie.dev 发起请求，添加cookie键值对aaa:bbb
 ```
 
 
@@ -2464,7 +2464,7 @@ appendFormEncoded 是一个请求选项参数，用于改变请求报文，添�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.appendFormEncoded(&#34;aaa&#34;, &#34;bbb&#34;)) // 向 pie.dev 发起请求，添加POST请求表单，其中aaa为键，bbb为值
+poc.Post("https://pie.dev/post", poc.appendFormEncoded("aaa", "bbb")) // 向 pie.dev 发起请求，添加POST请求表单，其中aaa为键，bbb为值
 ```
 
 
@@ -2491,7 +2491,7 @@ appendHeader 是一个请求选项参数，用于改变请求报文，添加请�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.appendHeader(&#34;AAA&#34;, &#34;BBB&#34;)) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
+poc.Post("https://pie.dev/post", poc.appendHeader("AAA", "BBB")) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
 ```
 
 
@@ -2518,7 +2518,7 @@ appendHeaders 是一个请求选项参数，用于改变请求报文，添加请
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.appendHeaders({&#34;AAA&#34;: &#34;BBB&#34;,&#34;CCC&#34;: &#34;DDD&#34;})) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
+poc.Post("https://pie.dev/post", poc.appendHeaders({"AAA": "BBB","CCC": "DDD"})) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
 ```
 
 
@@ -2544,7 +2544,7 @@ appendPath 是一个请求选项参数，用于改变请求报文，在现有请
 
 Example:
 ```
-poc.Get(&#34;https://yaklang.com/docs&#34;, poc.appendPath(&#34;/api/poc&#34;)) // 向 yaklang.com 发起请求，实际上请求路径为/docs/api/poc
+poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.com 发起请求，实际上请求路径为/docs/api/poc
 ```
 
 
@@ -2570,7 +2570,7 @@ appendPostParam 是一个请求选项参数，用于改变请求报文，添加 
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.appendPostParam(&#34;a&#34;, &#34;b&#34;)) // 向 pie.dev 发起请求，添加POST请求参数a，值为b
+poc.Post("https://pie.dev/post", poc.appendPostParam("a", "b")) // 向 pie.dev 发起请求，添加POST请求参数a，值为b
 ```
 
 
@@ -2597,7 +2597,7 @@ appendQueryParam 是一个请求选项参数，用于改变请求报文，添加
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.appendQueryParam(&#34;a&#34;, &#34;b&#34;)) // 向 pie.dev 发起请求，添加GET请求参数a，值为b
+poc.Get("https://pie.dev/get", poc.appendQueryParam("a", "b")) // 向 pie.dev 发起请求，添加GET请求参数a，值为b
 ```
 
 
@@ -2624,7 +2624,7 @@ appendUploadFile 是一个请求选项参数，用于改变请求报文，添加
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.appendUploadFile(&#34;file&#34;, &#34;phpinfo.php&#34;, &#34;&lt;?php phpinfo(); ?&gt;&#34;, &#34;image/jpeg&#34;))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为&lt;?php phpinfo(); ?&gt;，文件类型为image/jpeg
+poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?php phpinfo(); ?>", "image/jpeg"))// 向 pie.dev 发起请求，添加POST请求表单，其文件名为phpinfo.php，内容为<?php phpinfo(); ?>，文件类型为image/jpeg
 ```
 
 
@@ -2657,7 +2657,7 @@ rsp, req, err = poc.HTTP(x`POST /post HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-{&#34;key&#34;: &#34;asd&#34;}`, poc.connPool(true)) // 使用连接池发送请求，这在发送多个请求时非常有用
+{"key": "asd"}`, poc.connPool(true)) // 使用连接池发送请求，这在发送多个请求时非常有用
 ```
 
 
@@ -2683,7 +2683,7 @@ connectTimeout 是一个请求选项参数，用于指定连接超时时间，�
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.timeout(15)) // 向 www.baidu.com 发起请求，读取超时时间为15秒
+poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起请求，读取超时时间为15秒
 ```
 
 
@@ -2710,7 +2710,7 @@ context 是一个请求选项参数，用于指定请求的上下文
 Example:
 ```
 ctx = context.New()
-poc.Get(&#34;https://exmaple.com&#34;, poc.withContext(ctx)) // 向 example.com 发起请求，使用指定的上下文
+poc.Get("https://exmaple.com", poc.withContext(ctx)) // 向 example.com 发起请求，使用指定的上下文
 ```
 
 
@@ -2741,7 +2741,7 @@ Content-Type: application/json
 Cookie: aaa=bbb; ccc=ddd
 Host: pie.dev
 
-`, poc.deleteCookie(&#34;aaa&#34;))// 向 pie.dev 发起请求，删除Cookie中的aaa
+`, poc.deleteCookie("aaa"))// 向 pie.dev 发起请求，删除Cookie中的aaa
 ```
 
 
@@ -2773,14 +2773,14 @@ Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimim
 Content-Length: 308
 
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;aaa&#34;
+Content-Disposition: form-data; name="aaa"
 
 bbb
 --------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
-Content-Disposition: form-data; name=&#34;ccc&#34;
+Content-Disposition: form-data; name="ccc"
 
 ddd
---------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, poc.deleteForm(&#34;aaa&#34;)) // 向 pie.dev 发起请求，删除POST请求表单aaa
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--`, poc.deleteForm("aaa")) // 向 pie.dev 发起请求，删除POST请求表单aaa
 ```
 
 
@@ -2811,7 +2811,7 @@ Content-Type: application/json
 AAA: BBB
 Host: pie.dev
 
-`, poc.deleteHeader(&#34;AAA&#34;))// 向 pie.dev 发起请求，删除AAA请求头
+`, poc.deleteHeader("AAA"))// 向 pie.dev 发起请求，删除AAA请求头
 ```
 
 
@@ -2842,7 +2842,7 @@ Content-Type: application/json
 Content-Length: 7
 Host: pie.dev
 
-a=b&amp;c=d`, poc.deletePostParam(&#34;a&#34;)) // 向 pie.dev 发起请求，删除POST请求参数a
+a=b&c=d`, poc.deletePostParam("a")) // 向 pie.dev 发起请求，删除POST请求参数a
 ```
 
 
@@ -2868,11 +2868,11 @@ deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除
 
 Example:
 ```
-poc.HTTP(`GET /get?a=b&amp;c=d HTTP/1.1
+poc.HTTP(`GET /get?a=b&c=d HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-`, poc.deleteQueryParam(&#34;a&#34;)) // 向 pie.dev 发起请求，删除GET请求参数a
+`, poc.deleteQueryParam("a")) // 向 pie.dev 发起请求，删除GET请求参数a
 ```
 
 
@@ -2899,7 +2899,7 @@ dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存
 Example:
 ```
 // 向 example.com 发起请求，不使用DNS缓存
-poc.Get(&#34;https://exmaple.com&#34;, poc.dnsNoCache(true))
+poc.Get("https://exmaple.com", poc.dnsNoCache(true))
 ```
 
 
@@ -2926,7 +2926,7 @@ dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务�
 Example:
 ```
 // 向 example.com 发起请求，使用指定的DNS服务器
-poc.Get(&#34;https://exmaple.com&#34;, poc.dnsServer(&#34;8.8.8.8&#34;, &#34;1.1.1.1&#34;))
+poc.Get("https://exmaple.com", poc.dnsServer("8.8.8.8", "1.1.1.1"))
 ```
 
 
@@ -2952,7 +2952,7 @@ host 是一个请求选项参数，用于指定实际请求的 host，如果没�
 
 Example:
 ```
-poc.HTTP(poc.BasicRequest(), poc.host(&#34;yaklang.com&#34;)) // 实际上请求 yaklang.com
+poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com")) // 实际上请求 yaklang.com
 ```
 
 
@@ -2978,7 +2978,7 @@ http2 是一个请求选项参数，用于指定是否使用 http2 协议，默�
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.http2(true), poc.https(true)) // 向 www.example.com 发起请求，使用 http2 协议
+poc.Get("https://www.example.com", poc.http2(true), poc.https(true)) // 向 www.example.com 发起请求，使用 http2 协议
 ```
 
 
@@ -3111,7 +3111,7 @@ rsp, req, err = poc.HTTP(x`POST /post HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-{&#34;key&#34;: &#34;{{params(a)}}&#34;}`, poc.params({&#34;a&#34;:&#34;bbb&#34;})) // 实际上发送的POST参数为{&#34;key&#34;: &#34;bbb&#34;}
+{"key": "{{params(a)}}"}`, poc.params({"a":"bbb"})) // 实际上发送的POST参数为{"key": "bbb"}
 
 
 #### 定义
@@ -3136,7 +3136,7 @@ password 是一个请求选项参数，用于指定认证时的密码
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.username(&#34;admin&#34;), poc.password(&#34;admin&#34;))
+poc.Get("https://www.example.com", poc.username("admin"), poc.password("admin"))
 ```
 
 
@@ -3162,7 +3162,7 @@ port 是一个请求选项参数，用于指定实际请求的端口，如果没
 
 Example:
 ```
-poc.HTTP(poc.BasicRequest(), poc.host(&#34;yaklang.com&#34;), poc.port(443), poc.https(true)) // 实际上请求 yaklang.com 的443端口
+poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com"), poc.port(443), poc.https(true)) // 实际上请求 yaklang.com 的443端口
 ```
 
 
@@ -3188,7 +3188,7 @@ proxy 是一个请求选项参数，用于指定请求使用的代理，可以�
 
 Example:
 ```
-poc.HTTP(poc.BasicRequest(), poc.proxy(&#34;http://127.0.0.1:7890&#34;)) // 向 example.com 发起请求，使用 http://127.0.0.1:7890 代理
+poc.HTTP(poc.BasicRequest(), poc.proxy("http://127.0.0.1:7890")) // 向 example.com 发起请求，使用 http://127.0.0.1:7890 代理
 ```
 
 
@@ -3235,9 +3235,9 @@ redirectHandler 是一个请求选项参数，用于作为重定向处理函数�
 Example:
 ```
 count = 3
-poc.Get(&#34;https://pie.dev/redirect/5&#34;, poc.redirectHandler(func(https, req, rsp) {
+poc.Get("https://pie.dev/redirect/5", poc.redirectHandler(func(https, req, rsp) {
 count--
-return count &gt;= 0
+return count >= 0
 })) // 向 pie.edv 发起请求，使用自定义 redirectHandler 函数，使用 count 控制，进行最多3次重定向
 ```
 
@@ -3290,7 +3290,7 @@ replaceAllPostParams 是一个请求选项参数，用于改变请求报文，�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceAllPostParams({&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;})) // 向 pie.dev 发起请求，添加POST请求参数a，值为b，POST请求参数c，值为d
+poc.Post("https://pie.dev/post", poc.replaceAllPostParams({"a":"b", "c":"d"})) // 向 pie.dev 发起请求，添加POST请求参数a，值为b，POST请求参数c，值为d
 ```
 
 
@@ -3318,7 +3318,7 @@ replaceAllPostParamsWithoutEscape 是一个请求选项参数，用于改变请�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceAllPostParamsWithoutEscape({&#34;a&#34;:&#34;{{}}&#34;, &#34;c&#34;:&#34;%%&#34;})) // 向 pie.dev 发起请求，添加POST请求参数a，值为{{}}，POST请求参数c，值为%%
+poc.Post("https://pie.dev/post", poc.replaceAllPostParamsWithoutEscape({"a":"{{}}", "c":"%%"})) // 向 pie.dev 发起请求，添加POST请求参数a，值为{{}}，POST请求参数c，值为%%
 ```
 
 
@@ -3344,7 +3344,7 @@ replaceAllQueryParams 是一个请求选项参数，用于改变请求报文，�
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceAllQueryParams({&#34;a&#34;:&#34;b&#34;, &#34;c&#34;:&#34;d&#34;})) // 向 pie.dev 发起请求，添加GET请求参数a，值为b，添加GET请求参数c，值为d
+poc.Get("https://pie.dev/get", poc.replaceAllQueryParams({"a":"b", "c":"d"})) // 向 pie.dev 发起请求，添加GET请求参数a，值为b，添加GET请求参数c，值为d
 ```
 
 
@@ -3372,7 +3372,7 @@ replaceAllQueryParamsWithoutEscape 是一个请求选项参数，用于改变请
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceAllQueryParamsWithoutEscape({&#34;a&#34;:&#34;{{}}&#34;, &#34;c&#34;:&#34;%%&#34;})) // 向 pie.dev 发起请求，添加GET请求参数a，值为{{}}，添加GET请求参数c，值为%%
+poc.Get("https://pie.dev/get", poc.replaceAllQueryParamsWithoutEscape({"a":"{{}}", "c":"%%"})) // 向 pie.dev 发起请求，添加GET请求参数a，值为{{}}，添加GET请求参数c，值为%%
 ```
 
 
@@ -3394,11 +3394,11 @@ poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceAllQueryParamsWithoutEscape({&
 ### replaceBasicAuth
 
 #### 详细描述
-replaceBasicAuth 是一个请求选项参数，用于改变请求报文，修改 Authorization 请求头为基础认证的密文，如果不存在则会增加，实际上是replaceHeader(&amp;#34;Authorization&amp;#34;, codec.EncodeBase64(username + &amp;#34;:&amp;#34; + password))的简写
+replaceBasicAuth 是一个请求选项参数，用于改变请求报文，修改 Authorization 请求头为基础认证的密文，如果不存在则会增加，实际上是replaceHeader(&#34;Authorization&#34;, codec.EncodeBase64(username + &#34;:&#34; + password))的简写
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/basic-auth/admin/password&#34;, poc.replaceBasicAuth(&#34;admin&#34;, &#34;password&#34;)) // 向 pie.dev 发起请求进行基础认证，会得到200响应状态码
+poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceBasicAuth("admin", "password")) // 向 pie.dev 发起请求进行基础认证，会得到200响应状态码
 ```
 
 
@@ -3425,7 +3425,7 @@ replaceBody 是一个请求选项参数，用于改变请求报文，修改请�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceBody(&#34;a=b&#34;, false)) // 向 pie.dev 发起请求，修改请求体内容为a=b
+poc.Post("https://pie.dev/post", poc.replaceBody("a=b", false)) // 向 pie.dev 发起请求，修改请求体内容为a=b
 ```
 
 
@@ -3452,7 +3452,7 @@ replaceCookie 是一个请求选项参数，用于改变请求报文，修改Coo
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceCookie(&#34;aaa&#34;, &#34;bbb&#34;)) // 向 pie.dev 发起请求，这里没有aaa的cookie值，所以会增加
+poc.Get("https://pie.dev/get", poc.replaceCookie("aaa", "bbb")) // 向 pie.dev 发起请求，这里没有aaa的cookie值，所以会增加
 ```
 
 
@@ -3479,7 +3479,7 @@ replaceAllCookies 是一个请求选项参数，用于改变请求报文，修�
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceAllCookies({&#34;aaa&#34;:&#34;bbb&#34;, &#34;ccc&#34;:&#34;ddd&#34;})) // 向 pie.dev 发起请求，修改aaa的cookie值为bbb，修改ccc的cookie值为ddd
+poc.Get("https://pie.dev/get", poc.replaceAllCookies({"aaa":"bbb", "ccc":"ddd"})) // 向 pie.dev 发起请求，修改aaa的cookie值为bbb，修改ccc的cookie值为ddd
 ```
 
 
@@ -3505,7 +3505,7 @@ replaceFirstLine 是一个请求选项参数，用于改变请求报文，修改
 
 Example:
 ```
-poc.Get(&#34;https://exmaple.com&#34;, poc.replaceFirstLine(&#34;GET /test HTTP/1.1&#34;)) // 向 example.com 发起请求，修改请求报文的第一行，请求/test路径
+poc.Get("https://exmaple.com", poc.replaceFirstLine("GET /test HTTP/1.1")) // 向 example.com 发起请求，修改请求报文的第一行，请求/test路径
 ```
 
 
@@ -3531,7 +3531,7 @@ replaceFormEncoded 是一个请求选项参数，用于改变请求报文，修�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceFormEncoded(&#34;aaa&#34;, &#34;bbb&#34;)) // 向 pie.dev 发起请求，添加POST请求表单，其中aaa为键，bbb为值
+poc.Post("https://pie.dev/post", poc.replaceFormEncoded("aaa", "bbb")) // 向 pie.dev 发起请求，添加POST请求表单，其中aaa为键，bbb为值
 ```
 
 
@@ -3558,7 +3558,7 @@ replaceHeader 是一个请求选项参数，用于改变请求报文，修改修
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceHeader(&#34;AAA&#34;, &#34;BBB&#34;)) // 向 pie.dev 发起请求，修改AAA请求头的值为BBB，这里没有AAA请求头，所以会增加该请求头
+poc.Get("https://pie.dev/get", poc.replaceHeader("AAA", "BBB")) // 向 pie.dev 发起请求，修改AAA请求头的值为BBB，这里没有AAA请求头，所以会增加该请求头
 ```
 
 
@@ -3581,11 +3581,11 @@ poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceHeader(&#34;AAA&#34;, &#34;BBB
 ### replaceHost
 
 #### 详细描述
-replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader(&amp;#34;Host&amp;#34;, host)的简写
+replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader(&#34;Host&#34;, host)的简写
 
 Example:
 ```
-poc.Get(&#34;https://yaklang.com/&#34;, poc.replaceHost(&#34;www.yaklang.com&#34;)) // 向 yaklang.com 发起请求，修改Host请求头的值为 www.yaklang.com
+poc.Get("https://yaklang.com/", poc.replaceHost("www.yaklang.com")) // 向 yaklang.com 发起请求，修改Host请求头的值为 www.yaklang.com
 ```
 
 
@@ -3611,7 +3611,7 @@ replaceMethod 是一个请求选项参数，用于改变请求报文，修改请
 
 Example:
 ```
-poc.Options(&#34;https://exmaple.com&#34;, poc.replaceMethod(&#34;GET&#34;)) // 向 example.com 发起请求，修改请求方法为GET
+poc.Options("https://exmaple.com", poc.replaceMethod("GET")) // 向 example.com 发起请求，修改请求方法为GET
 ```
 
 
@@ -3637,7 +3637,7 @@ replacePath 是一个请求选项参数，用于改变请求报文，修改请�
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/post&#34;, poc.replacePath(&#34;/get&#34;)) // 向 pie.dev 发起请求，实际上请求路径为/get
+poc.Get("https://pie.dev/post", poc.replacePath("/get")) // 向 pie.dev 发起请求，实际上请求路径为/get
 ```
 
 
@@ -3663,7 +3663,7 @@ replacePostParam 是一个请求选项参数，用于改变请求报文，修改
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replacePostParam(&#34;a&#34;, &#34;b&#34;)) // 向 pie.dev 发起请求，添加POST请求参数a，值为b
+poc.Post("https://pie.dev/post", poc.replacePostParam("a", "b")) // 向 pie.dev 发起请求，添加POST请求参数a，值为b
 ```
 
 
@@ -3690,7 +3690,7 @@ replaceQueryParam 是一个请求选项参数，用于改变请求报文，修�
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/get&#34;, poc.replaceQueryParam(&#34;a&#34;, &#34;b&#34;)) // 向 pie.dev 发起请求，添加GET请求参数a，值为b
+poc.Get("https://pie.dev/get", poc.replaceQueryParam("a", "b")) // 向 pie.dev 发起请求，添加GET请求参数a，值为b
 ```
 
 
@@ -3717,7 +3717,7 @@ replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/basic-auth/admin/password&#34;, poc.replaceRandomUserAgent()) // 向 pie.dev 发起请求，修改 User-Agent 请求头为随机的常见请求头
+poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent()) // 向 pie.dev 发起请求，修改 User-Agent 请求头为随机的常见请求头
 ```
 
 
@@ -3738,7 +3738,7 @@ replaceUploadFile 是一个请求选项参数，用于改变请求报文，修�
 
 Example:
 ```
-poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceUploadFile(&#34;file&#34;, &#34;phpinfo.php&#34;, &#34;&lt;?php phpinfo(); ?&gt;&#34;, &#34;application/x-php&#34;)) // 向 pie.dev 发起请求，添加POST请求上传文件，其中file为表单名，phpinfo.php为文件名，&lt;?php phpinfo(); ?&gt;为文件内容，application/x-php为文件类型
+poc.Post("https://pie.dev/post", poc.replaceUploadFile("file", "phpinfo.php", "<?php phpinfo(); ?>", "application/x-php")) // 向 pie.dev 发起请求，添加POST请求上传文件，其中file为表单名，phpinfo.php为文件名，<?php phpinfo(); ?>为文件内容，application/x-php为文件类型
 ```
 
 
@@ -3763,11 +3763,11 @@ poc.Post(&#34;https://pie.dev/post&#34;, poc.replaceUploadFile(&#34;file&#34;, &
 ### replaceUserAgent
 
 #### 详细描述
-replaceUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头，实际上是replaceHeader(&amp;#34;User-Agent&amp;#34;, userAgent)的简写
+replaceUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头，实际上是replaceHeader(&#34;User-Agent&#34;, userAgent)的简写
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/basic-auth/admin/password&#34;, poc.replaceUserAgent(&#34;yak-http-client&#34;)) // 向 pie.dev 发起请求，修改 User-Agent 请求头为 yak-http-client
+poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceUserAgent("yak-http-client")) // 向 pie.dev 发起请求，修改 User-Agent 请求头为 yak-http-client
 ```
 
 
@@ -3923,7 +3923,7 @@ save 是一个请求选项参数，用于指定是否将此次请求的记录保
 
 Example:
 ```
-poc.Get(&#34;https://exmaple.com&#34;, poc.save(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中
+poc.Get("https://exmaple.com", poc.save(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中
 ```
 
 
@@ -3950,8 +3950,8 @@ saveHandler 是一个请求选项参数，用于设置在将此次请求存入�
 Example:
 ```
 
-	poc.Get(&#34;https://exmaple.com&#34;, poc.save(func(resp){
-		resp.Tags = append(resp.Tags,&#34;test&#34;)
+	poc.Get("https://exmaple.com", poc.save(func(resp){
+		resp.Tags = append(resp.Tags,"test")
 	})) // 向 example.com 发起请求，添加test tag
 
 ```
@@ -3979,7 +3979,7 @@ saveSync 是一个请求选项参数，用于指定是否将此次请求的记�
 
 Example:
 ```
-poc.Get(&#34;https://exmaple.com&#34;, poc.save(true), poc.saveSync(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中，且同步保存
+poc.Get("https://exmaple.com", poc.save(true), poc.saveSync(true)) // 向 example.com 发起请求，会将此次请求保存到数据库中，且同步保存
 ```
 
 
@@ -4005,8 +4005,8 @@ session 是一个请求选项参数，用于指定请求的session，参数可�
 
 Example:
 ```
-poc.Get(&#34;https://pie.dev/cookies/set/AAA/BBB&#34;, poc.session(&#34;test&#34;)) // 向 pie.dev 发起第一次请求，这会设置一个名为AAA，值为BBB的cookie
-rsp, req, err = poc.Get(&#34;https://pie.dev/cookies&#34;, poc.session(&#34;test&#34;)) // 向 pie.dev 发起第二次请求，这个请求会输出所有的cookies，可以看到第一次请求设置的cookie已经存在了
+poc.Get("https://pie.dev/cookies/set/AAA/BBB", poc.session("test")) // 向 pie.dev 发起第一次请求，这会设置一个名为AAA，值为BBB的cookie
+rsp, req, err = poc.Get("https://pie.dev/cookies", poc.session("test")) // 向 pie.dev 发起第二次请求，这个请求会输出所有的cookies，可以看到第一次请求设置的cookie已经存在了
 ```
 
 
@@ -4032,7 +4032,7 @@ sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.sni(&#34;google.com&#34;))
+poc.Get("https://www.example.com", poc.sni("google.com"))
 ```
 
 
@@ -4058,7 +4058,7 @@ source 是一个请求选项参数，用于在请求记录保存到数据库时�
 
 Example:
 ```
-poc.Get(&#34;https://exmaple.com&#34;, poc.save(true), poc.source(&#34;test&#34;)) // 向 example.com 发起请求，会将此次请求保存到数据库中，指示此次请求的来源为test
+poc.Get("https://exmaple.com", poc.save(true), poc.source("test")) // 向 example.com 发起请求，会将此次请求保存到数据库中，指示此次请求的来源为test
 ```
 
 
@@ -4084,7 +4084,7 @@ timeout 是一个请求选项参数，用于指定读取超时时间，默认为
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.timeout(15)) // 向 www.baidu.com 发起请求，读取超时时间为15秒
+poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起请求，读取超时时间为15秒
 ```
 
 
@@ -4110,7 +4110,7 @@ username 是一个请求选项参数，用于指定认证时的用户名
 
 Example:
 ```
-poc.Get(&#34;https://www.example.com&#34;, poc.username(&#34;admin&#34;), poc.password(&#34;admin&#34;))
+poc.Get("https://www.example.com", poc.username("admin"), poc.password("admin"))
 ```
 
 
@@ -4145,10 +4145,10 @@ Host: echo.websocket.events
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
 Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
 
-	poc.proxy(&#34;http://127.0.0.1:7890&#34;), poc.websocketFromServer(func(rsp, cancel) {
+	poc.proxy("http://127.0.0.1:7890"), poc.websocketFromServer(func(rsp, cancel) {
 		    dump(rsp)
 		}), poc.websocketOnClient(func(c) {
-		    c.WriteText(&#34;123&#34;)
+		    c.WriteText("123")
 		}), poc.websocket(true),
 
 )
@@ -4187,10 +4187,10 @@ Host: echo.websocket.events
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
 Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
 
-	poc.proxy(&#34;http://127.0.0.1:7890&#34;), poc.websocketFromServer(func(rsp, cancel) {
+	poc.proxy("http://127.0.0.1:7890"), poc.websocketFromServer(func(rsp, cancel) {
 		    dump(rsp)
 		}), poc.websocketOnClient(func(c) {
-		    c.WriteText(&#34;123&#34;)
+		    c.WriteText("123")
 		}), poc.websocket(true),
 
 )
@@ -4229,10 +4229,10 @@ Host: echo.websocket.events
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
 Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
 
-	poc.proxy(&#34;http://127.0.0.1:7890&#34;), poc.websocketFromServer(func(rsp, cancel) {
+	poc.proxy("http://127.0.0.1:7890"), poc.websocketFromServer(func(rsp, cancel) {
 		    dump(rsp)
 		}), poc.websocketOnClient(func(c) {
-		    c.WriteText(&#34;123&#34;)
+		    c.WriteText("123")
 		}), poc.websocket(true),
 
 )
@@ -4270,7 +4270,7 @@ Sec-Websocket-Extensions: permessage-deflate; client_max_window_bits
 Host: echo.websocket.events
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-US;q=0.7
 Sec-Websocket-Key: L31R1As+71fwuXqhwhABuA==`,
-poc.proxy(&#34;http://127.0.0.1:7890&#34;), poc.websocketStrictMode(true))
+poc.proxy("http://127.0.0.1:7890"), poc.websocketStrictMode(true))
 
 time.Sleep(100)
 ```

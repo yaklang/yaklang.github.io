@@ -65,7 +65,7 @@ Abs 返回一个路径的绝对路径
 Example:
 ```
 // 假设当前目录是 /tmp
-file.Abs(&#34;./test.txt&#34;) // /tmp/test.txt
+file.Abs("./test.txt") // /tmp/test.txt
 ```
 
 
@@ -91,7 +91,7 @@ Cat 模拟 unix 命令 cat，打印文件内容到标准输出
 
 Example:
 ```
-file.Cat(&#34;/tmp/test.txt&#34;)
+file.Cat("/tmp/test.txt")
 ```
 
 
@@ -112,7 +112,7 @@ Clean 清理路径中的多余的分隔符和 . 和 ..
 
 Example:
 ```
-file.Clean(&#34;/tmp/../tmp/test.txt&#34;) // &#34;/tmp/test.txt&#34;
+file.Clean("/tmp/../tmp/test.txt") // "/tmp/test.txt"
 ```
 
 
@@ -138,8 +138,8 @@ Cp 拷贝文件或目录，返回错误
 
 Example:
 ```
-file.Cp(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
-file.Cp(&#34;/tmp/test&#34;, &#34;/root/tmp/test&#34;)
+file.Cp("/tmp/test.txt", "/tmp/test2.txt")
+file.Cp("/tmp/test", "/root/tmp/test")
 ```
 
 
@@ -166,7 +166,7 @@ Create 创建一个文件，返回一个文件结构体引用与错误
 
 Example:
 ```
-f, err = file.Create(&#34;/tmp/test.txt&#34;)
+f, err = file.Create("/tmp/test.txt")
 ```
 
 
@@ -193,7 +193,7 @@ Ls 列出一个目录下的所有文件和目录，返回一个文件信息切�
 
 Example:
 ```
-for f in file.Ls(&#34;/tmp&#34;) {
+for f in file.Ls("/tmp") {
 println(f.Name)
 }
 ```
@@ -221,7 +221,7 @@ GetBase 获取文件的基本名
 
 Example:
 ```
-file.GetBase(&#34;/tmp/test.txt&#34;) // &#34;test.txt&#34;
+file.GetBase("/tmp/test.txt") // "test.txt"
 ```
 
 
@@ -247,7 +247,7 @@ GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原
 
 Example:
 ```
-file.GetDirPath(&#34;/usr/bin/bash&#34;) // &#34;/usr/bin/&#34;
+file.GetDirPath("/usr/bin/bash") // "/usr/bin/"
 ```
 
 
@@ -273,7 +273,7 @@ GetExt 获取文件的扩展名
 
 Example:
 ```
-file.GetExt(&#34;/tmp/test.txt&#34;) // &#34;.txt&#34;
+file.GetExt("/tmp/test.txt") // ".txt"
 ```
 
 
@@ -299,8 +299,8 @@ IsAbs 判断路径是否是绝对路径
 
 Example:
 ```
-file.IsAbs(&#34;/usr/bin/bash&#34;) // true
-file.IsAbs(&#34;../../../usr/bin/bash&#34;) // false
+file.IsAbs("/usr/bin/bash") // true
+file.IsAbs("../../../usr/bin/bash") // false
 ```
 
 
@@ -327,8 +327,8 @@ IsDir 判断路径是否存在且是一个目录
 Example:
 ```
 // 假设存在 /usr/bin/bash 文件
-file.IsDir(&#34;/usr/bin&#34;) // true
-file.IsDir(&#34;/usr/bin/bash&#34;) // false
+file.IsDir("/usr/bin") // true
+file.IsDir("/usr/bin/bash") // false
 ```
 
 
@@ -354,7 +354,7 @@ IsExisted 判断文件或目录是否存在
 
 Example:
 ```
-file.IsExisted(&#34;/usr/bin/bash&#34;)
+file.IsExisted("/usr/bin/bash")
 ```
 
 
@@ -381,8 +381,8 @@ IsFile 判断路径是否存在且是一个文件
 Example:
 ```
 // 假设存在 /usr/bin/bash 文件
-file.IsFile(&#34;/usr/bin/bash&#34;) // true
-file.IsFile(&#34;/usr/bin&#34;) // false
+file.IsFile("/usr/bin/bash") // true
+file.IsFile("/usr/bin") // false
 ```
 
 
@@ -409,8 +409,8 @@ IsLink 判断文件是否是一个符号链接
 Example:
 ```
 假设 /usr/bin/bash 是一个符号链接，指向 /bin/bash
-file.IsLink(&#34;/usr/bin/bash&#34;) // true
-file.IsLink(&#34;/bin/bash&#34;) // false
+file.IsLink("/usr/bin/bash") // true
+file.IsLink("/bin/bash") // false
 ```
 
 
@@ -436,7 +436,7 @@ Join 将任意数量的路径以默认路径分隔符链接在一起
 
 Example:
 ```
-file.Join(&#34;/usr&#34;, &#34;bin&#34;, &#34;bash&#34;) // &#34;/usr/bin/bash&#34;
+file.Join("/usr", "bin", "bash") // "/usr/bin/bash"
 ```
 
 
@@ -462,7 +462,7 @@ Dir 列出一个目录下的所有文件和目录，返回一个文件信息切�
 
 Example:
 ```
-for f in file.Ls(&#34;/tmp&#34;) {
+for f in file.Ls("/tmp") {
 println(f.Name)
 }
 ```
@@ -490,7 +490,7 @@ Lstat 返回一个文件的信息和错误，如果文件是一个符号链接�
 
 Example:
 ```
-info, err = file.Lstat(&#34;/tmp/test.txt&#34;)
+info, err = file.Lstat("/tmp/test.txt")
 desc(info)
 ```
 
@@ -518,7 +518,7 @@ Mkdir 创建一个目录，返回错误
 
 Example:
 ```
-err = file.Mkdir(&#34;/tmp/test&#34;)
+err = file.Mkdir("/tmp/test")
 ```
 
 
@@ -545,7 +545,7 @@ MkdirAll 创建一个递归创建一个目录，返回错误
 Example:
 ```
 // 假设存在 /tmp 目录，不存在 /tmp/test 目录
-err = file.MkdirAll(&#34;/tmp/test/test2&#34;)
+err = file.MkdirAll("/tmp/test/test2")
 ```
 
 
@@ -574,7 +574,7 @@ Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动�
 Example:
 ```
 // 假设存在 /tmp/test.txt 文件
-err = file.Rename(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
+err = file.Rename("/tmp/test.txt", "/tmp/test2.txt")
 ```
 
 
@@ -603,7 +603,7 @@ Example:
 ```
 // 假设存在 /tmp/test.txt 文件，内容为 123
 // 假设存在 /tmp/test2.txt 文件，内容为 456
-m, err = file.NewMultiFileLineReader(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
+m, err = file.NewMultiFileLineReader("/tmp/test.txt", "/tmp/test2.txt")
 for m.Next() {
 println(m.Text())
 }
@@ -633,7 +633,7 @@ Open 打开一个文件，返回一个文件结构体引用与错误
 
 Example:
 ```
-f, err = file.Open(&#34;/tmp/test.txt&#34;)
+f, err = file.Open("/tmp/test.txt")
 content, err = file.ReadAll(f)
 ```
 
@@ -661,7 +661,7 @@ OpenFile 打开一个文件，使用 file.O_CREATE ... 和权限控制，返回�
 
 Example:
 ```
-f = file.OpenFile(&#34;/tmp/test.txt&#34;, file.O_CREATE|file.O_RDWR, 0o777)~; defer f.Close()
+f = file.OpenFile("/tmp/test.txt", file.O_CREATE|file.O_RDWR, 0o777)~; defer f.Close()
 ```
 
 
@@ -690,7 +690,7 @@ ReadAll 从 Reader 读取直到出现错误或 EOF，然后返回字节切片与
 
 Example:
 ```
-f, err = file.Open(&#34;/tmp/test.txt&#34;)
+f, err = file.Open("/tmp/test.txt")
 content, err = file.ReadAll(f)
 ```
 
@@ -718,7 +718,7 @@ ReadDirInfoInDirectory 读取一个目录下的所有目录信息，返回一个
 
 Example:
 ```
-for d in file.ReadDirInfoInDirectory(&#34;/tmp&#34;)~ {
+for d in file.ReadDirInfoInDirectory("/tmp")~ {
 println(d.Name)
 }
 ```
@@ -747,7 +747,7 @@ ReadFile 读取一个文件的所有内容，返回字节切片与错误
 
 Example:
 ```
-content, err = file.ReadFile(&#34;/tmp/test.txt&#34;)
+content, err = file.ReadFile("/tmp/test.txt")
 ```
 
 
@@ -774,7 +774,7 @@ ReadFileInfoInDirectory 读取一个目录下的所有文件信息，返回一�
 
 Example:
 ```
-for f in file.ReadFileInfoInDirectory(&#34;/tmp&#34;)~ {
+for f in file.ReadFileInfoInDirectory("/tmp")~ {
 println(f.Name)
 }
 ```
@@ -803,7 +803,7 @@ ReadLines 尝试读取一个文件中的所有行，返回一个字符串切片�
 
 Example:
 ```
-lines = file.ReadLines(&#34;/tmp/test.txt&#34;)
+lines = file.ReadLines("/tmp/test.txt")
 ```
 
 
@@ -829,7 +829,7 @@ ReadLinesWithCallback 尝试读取一个文件中的所有行，每读取一行�
 
 Example:
 ```
-err = file.ReadLinesWithCallback(&#34;/tmp/test.txt&#34;, func(line) { println(line) })
+err = file.ReadLinesWithCallback("/tmp/test.txt", func(line) { println(line) })
 ```
 
 
@@ -857,7 +857,7 @@ Remove 删除路径及其包含的所有子路径
 Example:
 ```
 // 假设存在 /tmp/test/test.txt 文件和 /tmp/test/test2.txt 文件
-err = file.Remove(&#34;/tmp/test&#34;)
+err = file.Remove("/tmp/test")
 ```
 
 
@@ -886,7 +886,7 @@ Rename 重命名一个文件或文件夹，返回错误，这个函数也会移�
 Example:
 ```
 // 假设存在 /tmp/test.txt 文件
-err = file.Rename(&#34;/tmp/test.txt&#34;, &#34;/tmp/test2.txt&#34;)
+err = file.Rename("/tmp/test.txt", "/tmp/test2.txt")
 ```
 
 
@@ -914,7 +914,7 @@ Rm 删除路径及其包含的所有子路径，它是 Remove 的别名
 Example:
 ```
 // 假设存在 /tmp/test/test.txt 文件和 /tmp/test/test2.txt 文件
-err = file.Remove(&#34;/tmp/test&#34;)
+err = file.Remove("/tmp/test")
 ```
 
 
@@ -940,7 +940,7 @@ Save 将字符串或字节切片或字符串切片写入到文件中，如果文
 
 Example:
 ```
-file.Save(&#34;/tmp/test.txt&#34;, &#34;hello yak&#34;)
+file.Save("/tmp/test.txt", "hello yak")
 ```
 
 
@@ -969,7 +969,7 @@ SaveJson 将字符串或字节切片或字符串切片写入到文件中，如�
 
 Example:
 ```
-file.SaveJson(&#34;/tmp/test.txt&#34;, &#34;hello yak&#34;)
+file.SaveJson("/tmp/test.txt", "hello yak")
 ```
 
 
@@ -996,7 +996,7 @@ Split 以操作系统的默认路径分隔符分割路径，返回目录和文�
 
 Example:
 ```
-file.Split(&#34;/usr/bin/bash&#34;) // &#34;/usr/bin&#34;, &#34;bash&#34;
+file.Split("/usr/bin/bash") // "/usr/bin", "bash"
 ```
 
 
@@ -1023,7 +1023,7 @@ Stat 返回一个文件的信息和错误
 
 Example:
 ```
-info, err = file.Stat(&#34;/tmp/test.txt&#34;)
+info, err = file.Stat("/tmp/test.txt")
 desc(info)
 ```
 
@@ -1051,7 +1051,7 @@ TailF 模拟 unix 命令 tail -f，执行这个函数会一直阻塞，打印文
 
 Example:
 ```
-file.TailF(&#34;/tmp/test.txt&#34;)
+file.TailF("/tmp/test.txt")
 ```
 
 
@@ -1076,7 +1076,7 @@ Example:
 f, err = file.TempFile()
 die(err)
 defer f.Close()
-f.WriteString(&#34;hello yak&#34;)
+f.WriteString("hello yak")
 ```
 
 
@@ -1106,7 +1106,7 @@ Example:
 name, err = file.TempFileName()
 die(err)
 defer os.Remove(name)
-file.Save(name, &#34;hello yak&#34;)
+file.Save(name, "hello yak")
 ```
 
 
@@ -1128,7 +1128,7 @@ Walk 遍历一个目录下的所有文件和目录，返回错误
 
 Example:
 ```
-file.Walk(&#34;/tmp&#34;, func(info) {println(info.Name); return true})~
+file.Walk("/tmp", func(info) {println(info.Name); return true})~
 ```
 
 

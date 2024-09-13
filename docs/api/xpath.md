@@ -53,8 +53,8 @@ ExistsAttr 判断传入节点是否存在指定名称的属性并返回布尔值
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-node = xpath.FindOne(doc, &#34;//div[@class=&#39;content&#39;]&#34;)
-existed = xpath.ExistsAttr(node, &#34;class&#34;) // true
+node = xpath.FindOne(doc, "//div[@class='content']")
+existed = xpath.ExistsAttr(node, "class") // true
 ```
 
 
@@ -84,7 +84,7 @@ Find 根据传入的 XPath 表达式从传入的节点开始查找匹配的节�
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-nodes = xpath.Find(doc, &#34;//div[@class=&#39;content&#39;]/text()&#34;)
+nodes = xpath.Find(doc, "//div[@class='content']/text()")
 ```
 
 
@@ -114,7 +114,7 @@ FindOne 根据传入的 XPath 表达式从传入的节点开始查找第一个�
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-node = xpath.FindOne(doc, &#34;//div[@class=&#39;content&#39;]/text()&#34;)
+node = xpath.FindOne(doc, "//div[@class='content']/text()")
 ```
 
 
@@ -142,7 +142,7 @@ InnerText 返回指定节点及其子节点的字符串
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-node = xpath.FindOne(doc, &#34;//div[@class=&#39;content&#39;]&#34;)
+node = xpath.FindOne(doc, "//div[@class='content']")
 text = xpath.InnerText(node)
 ```
 
@@ -251,7 +251,7 @@ Query 根据传入的 XPath 表达式从传入的节点开始查找第一个匹�
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-node, err = xpath.Query(doc, &#34;//div[@class=&#39;content&#39;]/text()&#34;)
+node, err = xpath.Query(doc, "//div[@class='content']/text()")
 ```
 
 
@@ -280,7 +280,7 @@ QueryAll 根据传入的 XPath 表达式从传入的节点开始查找匹配的�
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-nodes, err = xpath.QueryAll(doc, &#34;//div[@class=&#39;content&#39;]/text()&#34;)
+nodes, err = xpath.QueryAll(doc, "//div[@class='content']/text()")
 ```
 
 
@@ -309,8 +309,8 @@ SelectAttr 返回传入节点指定名称的属性值
 Example:
 ```
 doc, err = xpath.LoadHTMLDocument(htmlText)
-node = xpath.FindOne(doc, &#34;//div[@class=&#39;content&#39;]&#34;)
-attr = xpath.SelectAttr(node, &#34;class&#34;)
+node = xpath.FindOne(doc, "//div[@class='content']")
+attr = xpath.SelectAttr(node, "class")
 ```
 
 

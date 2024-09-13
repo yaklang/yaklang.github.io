@@ -24,7 +24,7 @@ CheckCrash 检查命令执行是否发生了崩溃，不支持 Windows 系统，
 
 Example:
 ```
-cmd = exec.Command(&#34;ls -al&#34;)~
+cmd = exec.Command("ls -al")~
 isCrash = exec.CheckCrash(cmd)~
 if isCrash {
 // ...
@@ -55,7 +55,7 @@ Command 创建一个命令结构体
 
 Example:
 ```
-cmd = exec.Command(&#34;ls -al&#34;)
+cmd = exec.Command("ls -al")
 output = cmd.CombineOutput()~
 dump(output)
 ```
@@ -84,7 +84,7 @@ CommandContext 创建一个受上下文控制的命令结构体，其第一个�
 
 Example:
 ```
-cmd = exec.CommandContext(context.New(), &#34;ls -al&#34;)
+cmd = exec.CommandContext(context.New(), "ls -al")
 output = cmd.CombineOutput()~
 dump(output)
 ```
@@ -114,7 +114,7 @@ System 创建命令结构体并执行，返回结果与错误
 
 Example:
 ```
-output, err = exec.System(&#34;ls -al&#34;)~
+output, err = exec.System("ls -al")~
 dump(output)
 ```
 
@@ -142,11 +142,11 @@ SystemBatch 批量执行命令，它的第一个参数为要批量执行的命�
 
 Example:
 ```
-exec.SystemBatch(&#34;ping 192.168.1.{{int(1-100)}}&#34;,
+exec.SystemBatch("ping 192.168.1.{{int(1-100)}}",
 exec.timeout(10),
 exec.concurrent(20),
 exec.callback(func(cmd, result) {
-log.Infof(&#34;exec[%v] result: %v&#34;, cmd, string(result))
+log.Infof("exec[%v] result: %v", cmd, string(result))
 })
 ```
 
@@ -169,7 +169,7 @@ SystemContext 创建受上下文控制的命令结构体并执行，返回结果
 
 Example:
 ```
-output, err = exec.SystemContext(context.New(),&#34;ls -al&#34;)~
+output, err = exec.SystemContext(context.New(),"ls -al")~
 dump(output)
 ```
 
@@ -198,8 +198,8 @@ WatchStdout 执行命令并监控标准输出，当标准输出有数据时，�
 
 Example:
 ```
-exec.WatchStdout(&#34;tail -f /tmp/log&#34;, 60, func(raw) {
-log.Infof(&#34;stdout: %v&#34;, string(raw))
+exec.WatchStdout("tail -f /tmp/log", 60, func(raw) {
+log.Infof("stdout: %v", string(raw))
 return true
 }
 ```
@@ -229,8 +229,8 @@ WatchStderr 执行命令并监控标准错误，当标准错误有数据时，�
 
 Example:
 ```
-exec.WatchStderr(&#34;tail -f /tmp/log&#34;, 60, func(raw) {
-log.Infof(&#34;stderr: %v&#34;, string(raw))
+exec.WatchStderr("tail -f /tmp/log", 60, func(raw) {
+log.Infof("stderr: %v", string(raw))
 return true
 }
 ```
@@ -260,8 +260,8 @@ WatchStdout 执行命令并监控标准输出，当标准输出有数据时，�
 
 Example:
 ```
-exec.WatchStdout(&#34;tail -f /tmp/log&#34;, 60, func(raw) {
-log.Infof(&#34;stdout: %v&#34;, string(raw))
+exec.WatchStdout("tail -f /tmp/log", 60, func(raw) {
+log.Infof("stdout: %v", string(raw))
 return true
 }
 ```
@@ -291,11 +291,11 @@ callback 是一个选项参数，用于设置批量命令执行的回调函数�
 
 Example:
 ```
-exec.SystemBatch(&#34;ping 192.168.1.{{int(1-100)}}&#34;,
+exec.SystemBatch("ping 192.168.1.{{int(1-100)}}",
 exec.timeout(10),
 exec.concurrent(20),
 exec.callback(func(cmd, result) {
-log.Infof(&#34;exec[%v] result: %v&#34;, cmd, string(result))
+log.Infof("exec[%v] result: %v", cmd, string(result))
 })
 ```
 
@@ -322,11 +322,11 @@ concurrent 是一个选项参数，用于设置批量命令执行的并发数，
 
 Example:
 ```
-exec.SystemBatch(&#34;ping 192.168.1.{{int(1-100)}}&#34;,
+exec.SystemBatch("ping 192.168.1.{{int(1-100)}}",
 exec.timeout(10),
 exec.concurrent(20),
 exec.callback(func(cmd, result) {
-log.Infof(&#34;exec[%v] result: %v&#34;, cmd, string(result))
+log.Infof("exec[%v] result: %v", cmd, string(result))
 })
 ```
 
@@ -353,11 +353,11 @@ timeout 是一个选项参数，用于设置批量命令执行的超时时间，
 
 Example:
 ```
-exec.SystemBatch(&#34;ping 192.168.1.{{int(1-100)}}&#34;,
+exec.SystemBatch("ping 192.168.1.{{int(1-100)}}",
 exec.timeout(10),
 exec.concurrent(20),
 exec.callback(func(cmd, result) {
-log.Infof(&#34;exec[%v] result: %v&#34;, cmd, string(result))
+log.Infof("exec[%v] result: %v", cmd, string(result))
 })
 ```
 
