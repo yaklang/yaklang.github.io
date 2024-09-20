@@ -789,12 +789,12 @@ webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规�
 
 #### 定义
 
-`webRule(i any) ConfigOption`
+`webRule(rs ...any) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| rs | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

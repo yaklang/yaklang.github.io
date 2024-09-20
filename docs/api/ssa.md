@@ -11,6 +11,7 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:------|:--------|
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
+| [ssa.withContext](#withcontext) ||
 | [ssa.withDatabasePath](#withdatabasepath) ||
 | [ssa.withDescription](#withdescription) ||
 | [ssa.withEntryFile](#withentryfile) ||
@@ -66,6 +67,26 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:-----------|:---------- |:-----------|
 | r1 | `Programs` |   |
 | r2 | `error` |   |
+
+
+### withContext
+
+#### 详细描述
+
+
+#### 定义
+
+`withContext(ctx context.Context) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withDatabasePath
