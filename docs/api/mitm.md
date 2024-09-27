@@ -6,6 +6,9 @@
 | [mitm.Start](#start) |Start 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  如果没有指定 CA 证书和私钥，那么将使用内置的证书和私钥  |
 | [mitm.callback](#callback) |callback 是一个选项函数，用于指定中间人代理服务器的回调函数，当接收到请求和响应后，会调用该回调函数  |
 | [mitm.context](#context) |context 是一个选项函数，用于指定中间人代理服务器的上下文  |
+| [mitm.gmtls](#gmtls) |gmtls 是一个选项参数，用于指定中间人代理服务器是否开启 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器会劫持所有的 GMTLS 流量  |
+| [mitm.gmtlsOnly](#gmtlsonly) |gmtlsOnly 是一个选项参数，用于指定中间人代理服务器是否只使用 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器只会使用 GMTLS 劫持模式  |
+| [mitm.gmtlsPrefer](#gmtlsprefer) |gmtlsPrefer 是一个选项参数，用于指定中间人代理服务器是否优先使用 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器会优先使用 GMTLS 劫持模式  |
 | [mitm.hijackHTTPRequest](#hijackhttprequest) |hijackHTTPRequest 是一个选项函数，用于指定中间人代理服务器的请求劫持函数，当接收到请求后，会调用该回调函数  通过调用该回调函数的第四个参数，可以修改请求内容，通过调用该回调函数的第五个参数，可以丢弃请求  |
 | [mitm.hijackHTTPResponse](#hijackhttpresponse) |hijackHTTPResponse 是一个选项函数，用于指定中间人代理服务器的响应劫持函数，当接收到响应后，会调用该回调函数  通过调用该回调函数的第四个参数，可以修改响应内容，通过调用该回调函数的第五个参数，可以丢弃响应  |
 | [mitm.hijackHTTPResponseEx](#hijackhttpresponseex) |hijackHTTPResponseEx 是一个选项函数，用于指定中间人代理服务器的响应劫持函数，当接收到响应后，会调用该回调函数  通过调用该回调函数的第五个参数，可以修改响应内容，通过调用该回调函数的第六个参数，可以丢弃响应  它与 hijackHTTPResponse 的区别在于，它可以获取到...|
@@ -125,6 +128,90 @@ mitm.Start(8080, mitm.context(context.Background()))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### gmtls
+
+#### 详细描述
+gmtls 是一个选项参数，用于指定中间人代理服务器是否开启 GMTLS 劫持模式，默认为false
+
+在开启 GMTLS 劫持模式下，中间人代理服务器会劫持所有的 GMTLS 流量
+
+Example:
+```
+mitm.Start(8080, mitm.gmtls(true))
+```
+
+
+#### 定义
+
+`gmtls(b bool) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### gmtlsOnly
+
+#### 详细描述
+gmtlsOnly 是一个选项参数，用于指定中间人代理服务器是否只使用 GMTLS 劫持模式，默认为false
+
+在开启 GMTLS 劫持模式下，中间人代理服务器只会使用 GMTLS 劫持模式
+
+Example:
+```
+mitm.Start(8080, mitm.gmtlsOnly(true))
+```
+
+
+#### 定义
+
+`gmtlsOnly(b bool) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### gmtlsPrefer
+
+#### 详细描述
+gmtlsPrefer 是一个选项参数，用于指定中间人代理服务器是否优先使用 GMTLS 劫持模式，默认为false
+
+在开启 GMTLS 劫持模式下，中间人代理服务器会优先使用 GMTLS 劫持模式
+
+Example:
+```
+mitm.Start(8080, mitm.gmtlsPrefer(true))
+```
+
+
+#### 定义
+
+`gmtlsPrefer(b bool) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
