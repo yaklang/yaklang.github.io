@@ -19,7 +19,7 @@
 | [str.EqualFold](#equalfold) |EqualFold 判断字符串s和t是否相等，忽略大小写  |
 | [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) |ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body  |
 | [str.ExtractChineseIDCards](#extractchineseidcards) |ExtractChineseIDCards 尝试将传入的参数转换为字符串，然后提取字符串中的身份证号  |
-| [str.ExtractDomain](#extractdomain) |ExtractDomain 尝试提取字符串中的域名并返回  |
+| [str.ExtractDomain](#extractdomain) |ExtractDomain 尝试提取字符串中的域名并返回，后续可以接收一个 tryDecode 参数，如果传入 true，则会尝试对输入的文本进行解码(双重URL编码，URL编码，unicode编码，quoted编码)  |
 | [str.ExtractHost](#extracthost) |ExtractHost 尝试从字符串中解析出host和port，并返回host  |
 | [str.ExtractHostPort](#extracthostport) |ExtractHostPort 尝试从字符串中解析出host和port，并返回host:port  |
 | [str.ExtractJson](#extractjson) |ExtractJson 尝试提取字符串中的 JSON 并进行修复返回  |
@@ -618,23 +618,25 @@ str.ExtractChineseIDCards("Your ChineseID is: 110101202008027420?") // ["1101012
 ### ExtractDomain
 
 #### 详细描述
-ExtractDomain 尝试提取字符串中的域名并返回
+ExtractDomain 尝试提取字符串中的域名并返回，后续可以接收一个 tryDecode 参数，如果传入 true，则会尝试对输入的文本进行解码(双重URL编码，URL编码，unicode编码，quoted编码)
 
 Example:
 ```
 str.ExtractDomain("hello yak") // []
 str.ExtractDomain("hello yaklang.com or yaklang.io") // ["yaklang.com", "yaklang.io"]
+str.ExtractDomain(`{"message:"%79%61%6b%6c%61%6e%67.com"}`, true) // ["yaklang.com"]
 ```
 
 
 #### 定义
 
-`ExtractDomain(i any) []string`
+`ExtractDomain(i any, tryDecode ...bool) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+| tryDecode | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

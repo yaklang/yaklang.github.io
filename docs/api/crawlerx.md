@@ -9,6 +9,7 @@ LowRepeatLevel|(crawlerx.repeatLevel) 1|
 MediumRepeatLevel|(crawlerx.repeatLevel) 2|
 SubMenuScan|(crawlerx.scanRangeLevel) 1|
 UnLimitRepeat|(crawlerx.repeatLevel) 0|
+UnlimitedDomainScan|(crawlerx.scanRangeLevel) 2|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

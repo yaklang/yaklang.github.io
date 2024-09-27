@@ -82,13 +82,13 @@
 
 #### 定义
 
-`New(typeStr string, opts ...yakBruteOpt) (*yakBruter, error)`
+`New(typeStr string, opts ...BruteOpt) (*yakBruter, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | typeStr | `string` |   |
-| opts | `...yakBruteOpt` |   |
+| opts | `...BruteOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -104,12 +104,12 @@
 
 #### 定义
 
-`autoDict() yakBruteOpt`
+`autoDict() BruteOpt`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### bruteHandler
@@ -119,7 +119,7 @@
 
 #### 定义
 
-`bruteHandler(cb func(item *bruteutils.BruteItem) *bruteutils.BruteItemResult) yakBruteOpt`
+`bruteHandler(cb func(item *bruteutils.BruteItem) *bruteutils.BruteItemResult) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -129,7 +129,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### concurrent
@@ -139,7 +139,7 @@
 
 #### 定义
 
-`concurrent(c int) yakBruteOpt`
+`concurrent(c int) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -149,7 +149,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### concurrentTarget
@@ -159,7 +159,7 @@
 
 #### 定义
 
-`concurrentTarget(c int) yakBruteOpt`
+`concurrentTarget(c int) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -169,7 +169,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### debug
@@ -179,7 +179,7 @@
 
 #### 定义
 
-`debug(b bool) yakBruteOpt`
+`debug(b bool) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -189,7 +189,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### finishingThreshold
@@ -199,7 +199,7 @@
 
 #### 定义
 
-`finishingThreshold(i int) yakBruteOpt`
+`finishingThreshold(i int) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -209,7 +209,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### maxDelay
@@ -219,7 +219,7 @@
 
 #### 定义
 
-`maxDelay(max int) yakBruteOpt`
+`maxDelay(max int) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -229,7 +229,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### minDelay
@@ -239,7 +239,7 @@
 
 #### 定义
 
-`minDelay(min int) yakBruteOpt`
+`minDelay(min int) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -249,7 +249,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### okToStop
@@ -259,7 +259,7 @@
 
 #### 定义
 
-`okToStop(b bool) yakBruteOpt`
+`okToStop(b bool) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -269,7 +269,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### passList
@@ -279,7 +279,7 @@
 
 #### 定义
 
-`passList(passes ...string) yakBruteOpt`
+`passList(passes ...string) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -289,7 +289,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
 ### userList
@@ -299,7 +299,7 @@
 
 #### 定义
 
-`userList(users ...string) yakBruteOpt`
+`userList(users ...string) BruteOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -309,6 +309,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `yakBruteOpt` |   |
+| r1 | `BruteOpt` |   |
 
 
