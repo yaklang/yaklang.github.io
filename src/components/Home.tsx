@@ -674,79 +674,83 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
               </div>
               <div className="guide-body-yakit-legacy-wrap">
                 <Dropdown
-                  overlayClassName="yakit-legacy-dropdown"
-                  visible={legacyVisible}
-                  destroyPopupOnHide={true}
-                  overlay={
-                    <Menu>
-                      {[
-                        {
-                          name: "Windows",
-                          desc: "支持Win7系统",
-                          url: "windows-legacy-amd64.exe",
-                        },
-                        {
-                          name: "Linux-amd",
-                          desc: "支持统信UOS、麒麟等国产系统，注意识别系统架构",
-                          url: "linux-legacy-amd64.AppImage",
-                        },
-                        {
-                          name: "Linux-arm",
-                          desc: "支持统信UOS、麒麟等国产系统，注意识别系统架构",
-                          url: "linux-legacy-arm64.AppImage",
-                        },
-                        {
-                          name: "macOS Intel",
-                          desc: "支持macOS 10.13和macOS 10.14",
-                          url: "darwin-legacy-x64.dmg",
-                        },
-                        {
-                          name: "macOS Apple Silicon",
-                          desc: "支持macOS 10.13和macOS 10.14",
-                          url: "darwin-legacy-arm64.dmg",
-                        },
-                      ].map((item) => {
-                        return (
-                          <Menu.Item key={item.name}>
-                            <div
-                              className="yakit-legacy-item"
-                              onClick={() => {
-                                onDownload(item.url);
-                                setLegacyVisible(false);
-                              }}
-                            >
-                              <div className="yakit-legacy-item-left">
-                                <div className="yakit-legacy-item-name">{`${t(
-                                  item.name
-                                )}`}</div>
-                                <div className="yakit-legacy-item-desc">
-                                  {t(item.desc)}（{version}）
+                    overlayClassName="yakit-legacy-dropdown"
+                    visible={legacyVisible}
+                    destroyPopupOnHide={true}
+                    overlay={
+                      <Menu>
+                        {[
+                          {
+                            name: "Windows",
+                            desc: "支持Win7系统",
+                            url: "windows-legacy-amd64.exe",
+                          },
+                          {
+                            name: "Linux-amd",
+                            desc: "支持统信UOS、麒麟等国产系统，注意识别系统架构",
+                            url: "linux-legacy-amd64.AppImage",
+                          },
+                          {
+                            name: "Linux-arm",
+                            desc: "支持统信UOS、麒麟等国产系统，注意识别系统架构",
+                            url: "linux-legacy-arm64.AppImage",
+                          },
+                          {
+                            name: "macOS Intel",
+                            desc: "支持macOS 10.13和macOS 10.14",
+                            url: "darwin-legacy-x64.dmg",
+                          },
+                          {
+                            name: "macOS Apple Silicon",
+                            desc: "支持macOS 10.13和macOS 10.14",
+                            url: "darwin-legacy-arm64.dmg",
+                          },
+                        ].map((item) => {
+                          return (
+                              <Menu.Item key={item.name}>
+                                <div
+                                    className="yakit-legacy-item"
+                                    onClick={() => {
+                                      onDownload(item.url);
+                                      setLegacyVisible(false);
+                                    }}
+                                >
+                                  <div className="yakit-legacy-item-left">
+                                    <div className="yakit-legacy-item-name">{`${t(
+                                        item.name
+                                    )}`}</div>
+                                    <div className="yakit-legacy-item-desc">
+                                      {t(item.desc)}（{version}）
+                                    </div>
+                                  </div>
+                                  <div className="yakit-legacy-item-right">
+                                    {DownloadIcon}
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="yakit-legacy-item-right">
-                                {DownloadIcon}
-                              </div>
-                            </div>
-                          </Menu.Item>
-                        );
-                      })}
-                    </Menu>
-                  }
-                  trigger={["click"]}
-                  placement="bottomCenter"
-                  onVisibleChange={(visible) => setLegacyVisible(visible)}
+                              </Menu.Item>
+                          );
+                        })}
+                      </Menu>
+                    }
+                    trigger={["click"]}
+                    placement="bottomCenter"
+                    onVisibleChange={(visible) => setLegacyVisible(visible)}
                 >
                   <span className="guide-body-yakit-legacy-btn">
                     {t("下载兼容版本")}
                   </span>
+
                 </Dropdown>
+                <span style={{ display: 'block',fontSize :'12px',color:'#999ea8'}}>
+                    {t("如果您需要使用Yakit用于商业化目的，请确保你们已经获得官方授权，否则我们将追究您的相关责任。")}
+                  </span>
               </div>
             </div>
           </div>
         </div>
         <div
-          className={`introduce-body  ${
-            (currentRatio !== 100 && "introduce-body-height-auto") || ""
+            className={`introduce-body  ${
+                (currentRatio !== 100 && "introduce-body-height-auto") || ""
           }`}
         >
           <div className="sticky-content">
