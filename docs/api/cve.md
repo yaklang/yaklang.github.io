@@ -29,12 +29,13 @@ DownLoad 从NVD下载CVE json数据到本地
 
 #### 定义
 
-`Download(dir string) error`
+`Download(dir string, cached bool) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | dir | `string` |   |
+| cached | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

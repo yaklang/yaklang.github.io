@@ -4,7 +4,7 @@
 |:------|:--------|
 | [openai.Chat](#chat) |Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果  @param {string} data 用户的提问或描述  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等  |
 | [openai.ChatEx](#chatex) |ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误  @param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、...|
-| [openai.FunctionCall](#functioncall) |FunctionCall 使用 OpenAI 的大语言模型的函数调用功能，描述一个函数并让模型智能地选择输出一个包含调用函数的参数的 JSON 对象  详情请参考 https://platform.openai.com/docs/guides/function-calling  @param {st...|
+| [openai.FunctionCall](#functioncall) ||
 | [openai.NewSession](#newsession) ||
 | [openai.TranslateToChinese](#translatetochinese) |TranslateToChinese 使用 OpenAI 的大语言模型将传入的字符串翻译为中文，还可以接收零个到多个配置选项，用于配置代理、API Key、模型等，返回翻译后的中文字符串  |
 | [openai.apiKey](#apikey) |apiKey 设置 OpenAI的API Key  |
@@ -107,31 +107,6 @@ println(d.FunctionCallResult())
 ### FunctionCall
 
 #### 详细描述
-FunctionCall 使用 OpenAI 的大语言模型的函数调用功能，描述一个函数并让模型智能地选择输出一个包含调用函数的参数的 JSON 对象
-
-详情请参考 https://platform.openai.com/docs/guides/function-calling
-
-@param {string} data 用户的提问或描述
-
-@param {string} funcName 函数名
-
-@param {string} funcDesc 函数描述
-
-@param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等
-
-@return {map[string]any} 包含调用函数的参数的映射
-
-Example:
-```
-resultMap = openai.FunctionCall(
-"What is the weather like in Boston?",
-"get_current_weather",
-"Get the current weather in a given location",
-openai.apiKey("sk-xxxx"),
-openai.proxy("http://127.0.0.1:7890"),
-openai.functionProperty("location", "string", "The city and state, e.g. San Francisco, CA"),
-openai.functionRequired("location"))
-```
 
 
 #### 定义
