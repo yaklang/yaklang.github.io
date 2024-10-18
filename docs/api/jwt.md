@@ -50,13 +50,13 @@ ALG_RS512|(string) &#34;RS512&#34;|
 
 #### 定义
 
-`JWSGenerate(alg string, i any, key []byte) (string, error)`
+`JWSGenerate(alg string, i map[string]any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| i | `any` |   |
+| i | `map[string]any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -73,14 +73,14 @@ ALG_RS512|(string) &#34;RS512&#34;|
 
 #### 定义
 
-`JWSGenerateEx(alg string, extraHeader any, i any, key []byte) (string, error)`
+`JWSGenerateEx(alg string, extraHeader map[string]any, i map[string]any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| extraHeader | `any` |   |
-| i | `any` |   |
+| extraHeader | `map[string]any` |   |
+| i | `map[string]any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -97,13 +97,13 @@ ALG_RS512|(string) &#34;RS512&#34;|
 
 #### 定义
 
-`JWTGenerate(alg string, i any, key []byte) (string, error)`
+`JWTGenerate(alg string, i map[string]any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| i | `any` |   |
+| i | `map[string]any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -120,14 +120,14 @@ ALG_RS512|(string) &#34;RS512&#34;|
 
 #### 定义
 
-`JWTGenerateEx(alg string, extraHeader any, i any, key []byte) (string, error)`
+`JWTGenerateEx(alg string, extraHeader map[string]any, i map[string]any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| extraHeader | `any` |   |
-| i | `any` |   |
+| extraHeader | `map[string]any` |   |
+| i | `map[string]any` |   |
 | key | `[]byte` |   |
 
 #### 返回值

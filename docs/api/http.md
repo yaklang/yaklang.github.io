@@ -10,12 +10,13 @@
 | [http.Post](#post) |Post 根据指定的 URL 发起 POST 请求，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应结构体引用与错误  ! 已弃用，使用 poc.Post 代替  |
 | [http.Raw](#raw) |Raw 根据原始请求报文生成请求结构体引用，返回请求结构体引用与错误  注意，此函数只会生成请求结构体引用，不会发起请求  ! 已弃用，使用 poc.HTTP 或 poc.HTTPEx 代替  |
 | [http.Request](#request) |Request 根据指定的 URL 发起请求，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应结构体引用与错误  ! 已弃用，使用 poc.Do 代替  |
-| [http.RequestFaviconHash](#requestfaviconhash) ||
-| [http.RequestToMD5](#requesttomd5) ||
-| [http.RequestToMMH3Hash128](#requesttommh3hash128) ||
-| [http.RequestToMMH3Hash128x64](#requesttommh3hash128x64) ||
-| [http.RequestToSha1](#requesttosha1) ||
-| [http.RequestToSha256](#requesttosha256) ||
+| [http.RequestFaviconHash](#requestfaviconhash) |RequestFaviconHash 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的base64编码的mmh3 hash的结果&amp;lt;响应...|
+| [http.RequestToMD5](#requesttomd5) |RequestToMD5 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的md5 hash的结果与错误  |
+| [http.RequestToMMH3Hash128](#requesttommh3hash128) |RequestToMMH3Hash128 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的mmh3 hash&amp;lt;128&amp;gt;的结果与错...|
+| [http.RequestToMMH3Hash128x64](#requesttommh3hash128x64) |RequestToMMH3Hash128x64 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的mmh3 hash&amp;lt;128x64&amp;gt...|
+| [http.RequestToSha1](#requesttosha1) |RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha1 hash的结果与错误  |
+| [http.RequestToSha256](#requesttosha256) |RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha256 hash的结果与错误  |
+| [http.RequestToSha512](#requesttosha512) |RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha512 hash的结果与错误  |
 | [http.body](#body) |body 是一个请求选项参数，用于指定请求体  |
 | [http.context](#context) |context 是一个请求选项参数，用于设置请求的上下文  |
 | [http.cookie](#cookie) |header 是一个请求选项参数，用于设置完整的 Cookie 字段  |
@@ -293,16 +294,25 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestFaviconHash
 
 #### 详细描述
+RequestFaviconHash 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的base64编码的mmh3 hash的结果&lt;响应状态码码为2xx时&gt;与错误，常用于计算网站的favicon hash
+
+Example:
+```
+rsp, err = http.RequestFaviconHash("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestFaviconHash(urlRaw string) (string, error)`
+`RequestFaviconHash(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -314,16 +324,25 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestToMD5
 
 #### 详细描述
+RequestToMD5 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的md5 hash的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToMD5("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestToMD5(url string) (string, error)`
+`RequestToMD5(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -335,16 +354,25 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestToMMH3Hash128
 
 #### 详细描述
+RequestToMMH3Hash128 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的mmh3 hash&lt;128&gt;的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToMMH3Hash128("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestToMMH3Hash128(url string) (string, error)`
+`RequestToMMH3Hash128(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -356,16 +384,25 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestToMMH3Hash128x64
 
 #### 详细描述
+RequestToMMH3Hash128x64 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的mmh3 hash&lt;128x64&gt;的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToMMH3Hash128x64("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestToMMH3Hash128x64(url string) (string, error)`
+`RequestToMMH3Hash128x64(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -377,16 +414,25 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestToSha1
 
 #### 详细描述
+RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的sha1 hash的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToSha1("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestToSha1(url string) (string, error)`
+`RequestToSha1(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -398,16 +444,55 @@ rsp, err = http.Request("POST","http://pie.dev/post", http.body("a=b&c=d"), http
 ### RequestToSha256
 
 #### 详细描述
+RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的sha256 hash的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToSha256("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
 
 
 #### 定义
 
-`RequestToSha256(url string) (string, error)`
+`RequestToSha256(urlRaw string, options ...http_struct.HttpOption) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| url | `string` |   |
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### RequestToSha512
+
+#### 详细描述
+RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等
+
+返回响应主体(body)的sha512 hash的结果与错误
+
+Example:
+```
+rsp, err = http.RequestToSha512("http://pie.dev/post", http.body("a=b&c=d"), http.timeout(10))
+```
+
+
+#### 定义
+
+`RequestToSha512(urlRaw string, options ...http_struct.HttpOption) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| urlRaw | `string` |   |
+| options | `...http_struct.HttpOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

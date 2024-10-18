@@ -24,13 +24,13 @@
 
 #### 定义
 
-`Ping(target string, opts ..._pingConfigOpt) *pingutil.PingResult`
+`Ping(target string, opts ...PingConfigOpt) *pingutil.PingResult`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
-| opts | `..._pingConfigOpt` |   |
+| opts | `...PingConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -45,13 +45,13 @@
 
 #### 定义
 
-`Scan(target string, opts ..._pingConfigOpt) chan *pingutil.PingResult`
+`Scan(target string, opts ...PingConfigOpt) chan *pingutil.PingResult`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
-| opts | `..._pingConfigOpt` |   |
+| opts | `...PingConfigOpt` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -66,7 +66,7 @@
 
 #### 定义
 
-`concurrent(i int) _pingConfigOpt`
+`concurrent(i int) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -76,7 +76,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### dnsServers
@@ -86,7 +86,7 @@
 
 #### 定义
 
-`dnsServers(i ...string) _pingConfigOpt`
+`dnsServers(i ...string) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -96,7 +96,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### dnsTimeout
@@ -106,7 +106,7 @@
 
 #### 定义
 
-`dnsTimeout(i float64) _pingConfigOpt`
+`dnsTimeout(i float64) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -116,7 +116,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### excludeHosts
@@ -126,7 +126,7 @@
 
 #### 定义
 
-`excludeHosts(host string) _pingConfigOpt`
+`excludeHosts(host string) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -136,7 +136,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### onResult
@@ -146,7 +146,7 @@
 
 #### 定义
 
-`onResult(i func(result *pingutil.PingResult)) _pingConfigOpt`
+`onResult(i func(result *pingutil.PingResult)) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -156,7 +156,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### proxy
@@ -166,7 +166,7 @@
 
 #### 定义
 
-`proxy(i ...string) _pingConfigOpt`
+`proxy(i ...string) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -176,7 +176,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### scanCClass
@@ -186,7 +186,7 @@
 
 #### 定义
 
-`scanCClass(i bool) _pingConfigOpt`
+`scanCClass(i bool) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -196,7 +196,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### skip
@@ -206,7 +206,7 @@
 
 #### 定义
 
-`skip(i bool) _pingConfigOpt`
+`skip(i bool) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -216,7 +216,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### tcpPingPorts
@@ -226,7 +226,7 @@
 
 #### 定义
 
-`tcpPingPorts(i string) _pingConfigOpt`
+`tcpPingPorts(i string) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -236,7 +236,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
 ### timeout
@@ -246,7 +246,7 @@
 
 #### 定义
 
-`timeout(i float64) _pingConfigOpt`
+`timeout(i float64) PingConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -256,6 +256,6 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `_pingConfigOpt` |   |
+| r1 | `PingConfigOpt` |   |
 
 
