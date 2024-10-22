@@ -50,7 +50,7 @@
 | [codec.EncodeToPrintable](#encodetoprintable) ||
 | [codec.EncodeUrl](#encodeurl) ||
 | [codec.EscapeHtml](#escapehtml) |EscapeString escapes special characters like &amp;#34;&amp;lt;&amp;#34; to become &amp;#34;&amp;amp;lt;&amp;#34;. It escapes only five such characters: &amp;lt;, &amp;gt;, &amp;amp;, &amp;#3...|
-| [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a URL path segment, replacing special characters (including /) with %XX sequences as n...|
+| [codec.EscapePathUrl](#escapepathurl) |PathEscape escapes the string so it can be safely placed inside a [URL] path segment, replacing special characters (including /) with %XX sequences as...|
 | [codec.EscapeQueryUrl](#escapequeryurl) ||
 | [codec.EscapeUrl](#escapeurl) ||
 | [codec.FixUTF8](#fixutf8) ||
@@ -1211,7 +1211,7 @@ always true.
 ### EscapePathUrl
 
 #### 详细描述
-PathEscape escapes the string so it can be safely placed inside a URL path segment,
+PathEscape escapes the string so it can be safely placed inside a [URL] path segment,
 replacing special characters (including /) with %XX sequences as needed.
 
 

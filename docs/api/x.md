@@ -772,6 +772,9 @@ It panics if x is not a slice.
 The less function must satisfy the same requirements as
 the Interface type&#39;s Less method.
 
+Note: in many situations, the newer [slices.SortStableFunc] function is more
+ergonomic and runs faster.
+
 
 #### 定义
 
