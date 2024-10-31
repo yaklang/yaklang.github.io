@@ -95,7 +95,7 @@ module.exports = {
                 },
 		        {
                     href: "/Yaklab/yaklab",
-                    label: "YakLib 实战手册",
+                    label: "YakLab 实战手册",
                     position: "left",
                 },
                 {
