@@ -64,7 +64,7 @@ module.exports = {
                         {
                             // type: "doc",
                             // docId: "intro",
-                            label: "Yak 语言",
+                            label: "Yak 语言文档",
                             href: "/docs/intro",
                         },
                         {
@@ -72,16 +72,15 @@ module.exports = {
                             //     type: "doc",
                             //     docId: "intro",
                             //     docsPluginId: "products",
-                            label: "YAK IDE",
+                            label: "Yakit(YAK IDE) 文档与手册 ",
                             href: "/products/intro",
                         },
                     ],
                 },
-                {
+		        {
+                    href: "/articles/intro",
+                    label: "Yak 技术博客",
                     position: "left",
-                    to: "/team",
-                    activeBasePath: "pages",
-                    label: "关于我们",
                 },
                 // {
                 //     position: "left",
@@ -91,13 +90,19 @@ module.exports = {
                 // },
                 {
                     position: "left",
-                    href: "https://chat.yaklang.com",
-                    label: "Ya! 一刻",
+                    href: "https://ssa.to",
+                    label: "静态代码分析技术",
                 },
 		        {
                     href: "/Yaklab/yaklab",
-                    label: "YakLab",
+                    label: "YakLib 实战手册",
                     position: "left",
+                },
+                {
+                    position: "left",
+                    to: "/team",
+                    activeBasePath: "pages",
+                    label: "关于我们",
                 },
                 {
                     position: "left",
@@ -213,6 +218,16 @@ module.exports = {
                 id: "Yaklab",
                 path: "Yaklab",
                 routeBasePath: "Yaklab",
+                sidebarPath: require.resolve("./sidebarsProducts.js"),
+                // ... other options
+            },
+        ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "articles",
+                path: "articles",
+                routeBasePath: "articles",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
                 // ... other options
             },
