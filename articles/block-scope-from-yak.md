@@ -9,9 +9,7 @@
   
 没错，我和Yaker有一个孩子（bushi  
   
-今天  
-我们的孩子  
-YakLang来给大家介绍介绍，ta对块作用域的处理方式  
+今天我们的孩子——YakLang！来给大家介绍介绍，ta对块作用域的处理方式  
   
   
 ![](/articles/wechat2md-3eb2f9d279501724d2a786402628fe1e.png)  
@@ -20,8 +18,7 @@ YakLang来给大家介绍介绍，ta对块作用域的处理方式
   
 ![](/articles/wechat2md-13ced54a9c82e234f5f058aeb16c9792.png)  
   
-在编程中，  
-**作用域**（Scope）指的是变量、函数和对象的可访问性和生命周期的范围。不同的编程语言可能对作用域有不同的定义和实现。  
+在编程中，**作用域**（Scope）指的是变量、函数和对象的可访问性和生命周期的范围。不同的编程语言可能对作用域有不同的定义和实现。  
   
 **块级作用域**  
 （Block Scope）是指在代码块（如条件语句、循环、函数等）内部定义的变量仅在该块内可访问的特性。这一概念在许多现代高级编程语言中得到了广泛应用。  
@@ -30,15 +27,21 @@ YakLang来给大家介绍介绍，ta对块作用域的处理方式
   
 首先查看如下的 golang if 语句  
 ```
-if a := 0; a > 0 {    a = 1} else {    a := 2}
+if a := 0;  
+a > 0   {    
+        a = 1  
+        }   
+        else   
+        {    
+        a := 2
+        }
 ```  
   
 可以发现，上述代码实际上形成了如下的 block 结构：  
   
 ![](/articles/wechat2md-e3655b8661cb8e25fae02b7335a74387.png)  
   
-想必细心的同学已经发现了，在   
-**true block 中的表达式**会影响外部的 global block 并且生成 phi 值，而 false block 则不会。  
+想必细心的同学已经发现了，在**true block 中的表达式**会影响外部的 global block 并且生成 phi 值，而 false block 则不会。  
   
 那么 yaklang 是如何区分是否生成 phi 的呢？这就涉及到了 scope 的3种常规操作：  
 **sub，merge，cover**。  
@@ -50,17 +53,13 @@ if a := 0; a > 0 {    a = 1} else {    a := 2}
   
 - 当控制流图中的某个节点（如条件分支）需要根据不同的路径选择变量的值时就会生成 phi 值，phi 值用于描述一个变量在当前作用域中可能存在的所有值  
   
-### Scope 常规操作：  
-###   
+### Scope 常规操作： 
   
 **Sub（产生子****作用域****）**  
 - **定义**：  
-以一个 scope 为父类，产生该 scope 的子作用域（在查找变量时可以通过_parent  
- 指针索引到父类 scope）。  
+以一个 scope 为父类，产生该 scope 的子作用域（在查找变量时可以通过_parent 指针索引到父类 scope）。  
   
-- **实例**  
-：  
-  
+- **实例**：  
 ```
 if a := 1; a > 0 { // condition block sub true block
     println(a) // 1
@@ -68,12 +67,10 @@ if a := 1; a > 0 { // condition block sub true block
 ```  
   
 **Cover（覆盖）**  
-- **定义**  
-：当一个变量在内部 scope 被重新赋值时，内部作用域的变量将“  
-**覆盖**”外部作用域中同名的变量。这意味着在内部作用域中，引用该变量时将使用新定义的值。  
+- **定义**：  
+当一个变量在内部 scope 被重新赋值时，内部作用域的变量将“**覆盖**”外部作用域中同名的变量。这意味着在内部作用域中，引用该变量时将使用新定义的值。  
   
-- **实例**  
-：  
+- **实例**：  
   
 ```
 a := 1
@@ -85,12 +82,10 @@ println(a) // 2
   
 ****  
 **Merge（合并）**  
-- **定义**  
-: 在作用域中，合并通常指将多个作用域中的变量或命名空间组合在一起，以便可以访问所有变量。这种合并可能发生在不同的作用域级别之间，特别是在模块或命名空间中。  
+- **定义**:  
+在作用域中，合并通常指将多个作用域中的变量或命名空间组合在一起，以便可以访问所有变量。这种合并可能发生在不同的作用域级别之间，特别是在模块或命名空间中。  
   
-- **实例**  
-：  
-  
+- **实例**：  
 ```
 if a > 0 {
     a = 1
@@ -115,8 +110,7 @@ if a := 0 /* local value(condition block) */; a > 0 {
 }
 ```  
   
-如果在某个 scope 中产生了一个  
-**非本地变量**，那么在当前 scope 中将会生成一个 capture value，而 merge 正是通过 capture value 来生产 phi 值的。  
+如果在某个 scope 中产生了一个**非本地变量**，那么在当前 scope 中将会生成一个 capture value，而 merge 正是通过 capture value 来生产 phi 值的。  
   
 ![](/articles/wechat2md-ab2d95cb138af2fcd42945fafadf8b60.png)  
   
@@ -140,9 +134,7 @@ println(b) // phi(b)[0,1]
   
 在 true scope 中存在非本地变量 “a” 与 “b”，然后分别生成对应的 capture value（capture value 会记录当前 scope 中非本地变量的最后一次赋值）。  
   
-当 true block 和 false block 都处理完毕以后，程序就会将 true scope 和 false scope merge 到一起，由于检测到 capture value，因此会生成 phi 值（分别是 phi(a)[0,2]  
- 和 phi(b)[0,1]  
-）。  
+当 true block 和 false block 都处理完毕以后，程序就会将 true scope 和 false scope merge 到一起，由于检测到 capture value，因此会生成 phi 值（分别是 phi(a)[0,2]和 phi(b)[0,1]）。  
   
 在 yaklang 中，最后两步处理比较特殊：  
   
@@ -264,8 +256,7 @@ Values: 2
   
 可以发现，yaklang 不仅对块作用域有明确的标识，还分析了各个块的逻辑关系，生产的 phi 值也有明确的来源，最后在查找的过程中也区分开了变量 “a” 与变量 “b” 的作用域范围。  
   
-在 yaklang 中，目前已经对   
-**if，loop，try-catch，switch，break，continue**都有了比较完善的处理，和对 goto 的部分处理（正在开发）。  
+在 yaklang 中，目前已经对**if，loop，try-catch，switch，break，continue**都有了比较完善的处理，和对 goto 的部分处理（正在开发）。  
   
   
 **END**  
@@ -276,24 +267,23 @@ Values: 2
   
   
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakit  
-  
-https://github.com/yaklang/yaklang  
-  
-Yakit官网下载地址：  
-https://yaklang.com/  
-Yakit安装文档：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
 https://yaklang.com/products/download_and_install  
 Yakit使用文档：  
 https://yaklang.com/products/intro/  
 常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
-  
-  
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员  
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)  
   
   

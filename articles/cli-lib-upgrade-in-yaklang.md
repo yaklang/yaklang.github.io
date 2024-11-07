@@ -17,10 +17,7 @@ cli.check()
 mirrorHTTPFlow = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rsp /*[]byte*/, body /*[]byte*/) {
     yakit.Output(sprintf("input data %s", test))
 }
-
 ```  
-  
-  
 此插件可以接收一个cli参数，然后在流量经过的时候将其发送给yakit，写好这样的代码会发现在参数预览一栏中已经有了对应的参数存在。  
   
 ![](/articles/wechat2md-69f4aa1c8530b91a1e523e8de578798d.png)  
@@ -58,7 +55,6 @@ oc.replaceHeader("Cookie", lowCookie),poc.https(isHttps))
         } 
     }
 }
-
 ```  
   
 但是这样简单的检测逻辑是不够在实战中使用的，很多页面是本身就不需要鉴权的，无论使用什么身份访问都是返回相同的响应，这样会出现大量的误报情况，所以可以再丰富一下插件的逻辑，来减少误报的可能性。  
@@ -117,7 +113,7 @@ mirrorHTTPFlow = func(isHttps , url , req , rsp , body ) {
   
 ### MITM中间人劫持  
   
-****### 在mitm中间人劫持模块的插件栏 在更新之后分出了 带参数部分。  
+在mitm中间人劫持模块的插件栏在更新之后分出了带参数部分。  
   
 ![](/articles/wechat2md-5f20509fcdfa1bf87efad3f924e67a1b.png)  
   
@@ -173,16 +169,21 @@ sec-ch-ua-mobile: ?0
   
   
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
-  
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
-  
-  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)  
