@@ -28,6 +28,7 @@
 | [nuclei.headers](#headers) ||
 | [nuclei.headless](#headless) ||
 | [nuclei.http2](#http2) ||
+| [nuclei.http3](#http3) ||
 | [nuclei.https](#https) ||
 | [nuclei.interactshTimeout](#interactshtimeout) ||
 | [nuclei.logFile](#logfile) ||
@@ -568,6 +569,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | Http2 | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LowhttpOpt` |   |
+
+
+### http3
+
+#### 详细描述
+
+
+#### 定义
+
+`http3(http3 bool) LowhttpOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| http3 | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

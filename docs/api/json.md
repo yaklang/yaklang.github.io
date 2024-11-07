@@ -10,7 +10,7 @@
 | [json.New](#new) |New 根据传入的值创建并返回一个新的 JSON 对象与错误  |
 | [json.ReplaceAll](#replaceall) ||
 | [json.dumps](#dumps) |dumps 将一个对象转换为 JSON 字符串，返回转换后的字符串  它还可以接收零个到多个请求选项函数，用于配置转换过程，控制转换后的缩进，前缀等  |
-| [json.loads](#loads) |loads 将一个 JSON 字符串转换为对象，返回转换后的对象  |
+| [json.loads](#loads) |loads 将一个 JSON 字符串转换为对象，返回转换后的对象，通常是一个omap  |
 | [json.withIndent](#withindent) |withIndent 设置 JSON dumps时的缩进  |
 | [json.withPrefix](#withprefix) |withPrefix 设置 JSON dumps时的前缀  |
 
@@ -210,7 +210,7 @@ v = json.dumps({"a": "b", "c": "d"})
 ### loads
 
 #### 详细描述
-loads 将一个 JSON 字符串转换为对象，返回转换后的对象
+loads 将一个 JSON 字符串转换为对象，返回转换后的对象，通常是一个omap
 
 Example:
 ```

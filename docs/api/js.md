@@ -13,7 +13,9 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 |:------|:--------|
 | [.](#) ||
 | [js.ASTWalk](#astwalk) |ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误  |
-| [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果  它的第一个参数为包含JS代码的字符串  第二个参数为要调用的JS函数名  后续参数为零个到多个函数参数  |
+| [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果  第一个参数为包含JS代码的字符串  第二个参数为要调用的JS函数名  后续参数为零个到多个函数参数  |
+| [js.GetFunction](#getfunction) |GetFunction 将传入的Value转换为可以调用的对象(Object)函数  第一个参数为JS引擎  第二个参数为函数名字  |
+| [js.GetObjectFunction](#getobjectfunction) |GetObjectFunction 将传入的Value转换为可以调用的对象(Object)函数  第一个参数为JS引擎  第二个参数为Object名字  第三个参数为方法名字  |
 | [js.GetSTType](#getsttype) ||
 | [js.New](#new) |New 创建新的JS引擎并返回  |
 | [js.Parse](#parse) |Parse 对传入的JS代码进行解析并返回解析后的AST树和错误  |
@@ -71,7 +73,7 @@ dump(res)
 #### 详细描述
 CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果
 
-它的第一个参数为包含JS代码的字符串
+第一个参数为包含JS代码的字符串
 
 第二个参数为要调用的JS函数名
 
@@ -100,6 +102,84 @@ println(value.String())
 |:-----------|:---------- |:-----------|
 | r1 | `goja.Value` |   |
 | r2 | `error` |   |
+
+
+### GetFunction
+
+#### 详细描述
+GetFunction 将传入的Value转换为可以调用的对象(Object)函数
+
+第一个参数为JS引擎
+
+第二个参数为函数名字
+
+Example:
+```
+vm, _ = js.Run(`function sum(a, b) {return a+b;}`)~
+sum, ok = js.GetFunction(vm,"sum")
+if ok {
+println(sum(2,3).ToInteger()) // 5
+}
+```
+
+
+#### 定义
+
+`GetFunction(vm *goja.Runtime, funcName string) (jsFunction, bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| vm | `*goja.Runtime` |   |
+| funcName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `jsFunction` |   |
+| r2 | `bool` |   |
+
+
+### GetObjectFunction
+
+#### 详细描述
+GetObjectFunction 将传入的Value转换为可以调用的对象(Object)函数
+
+第一个参数为JS引擎
+
+第二个参数为Object名字
+
+第三个参数为方法名字
+
+Example:
+```
+vm, _ = js.Run(`a = {
+d: 3,
+add(a) {return this.d+a},
+}`)~
+add, ok = js.GetObjectFunction(vm, "a", "add")
+if ok {
+println(add(1).ToInteger()) // 4
+}
+```
+
+
+#### 定义
+
+`GetObjectFunction(vm *goja.Runtime, thisName string, funcName string) (jsFunction, bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| vm | `*goja.Runtime` |   |
+| thisName | `string` |   |
+| funcName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `jsFunction` |   |
+| r2 | `bool` |   |
 
 
 ### GetSTType
