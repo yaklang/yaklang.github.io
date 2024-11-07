@@ -3,9 +3,6 @@ Q16G  Yak Project   2024-07-19 17:28
   
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
-#   
-#   
-  
 ![](/articles/wechat2md-03d98d951f4627887508345df64f47a7.png)  
 ![](/articles/wechat2md-eeb9db18f654c38ee264fee22d4bc08e.png)  
 ![](/articles/wechat2md-52339620690b57bffc7cedac4ec32940.png)  
@@ -37,8 +34,6 @@ Q16G  Yak Project   2024-07-19 17:28
 ```  
   
  ![](/articles/wechat2md-bf2fb9bfa74053756ce830cf70eff089.png)  
-  
-###   
   
 ![](/articles/wechat2md-f7126ff220d643dd58910df75c410972.png)  
   
@@ -95,7 +90,6 @@ Q16G  Yak Project   2024-07-19 17:28
         "VerboseName": "致远 M1"
     }
  ]
- 
 ```  
   
 在热加载中使用的代码为：  
@@ -116,8 +110,7 @@ mirrorNewWebsitePath = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rs
 }
 ```  
   
-![](/articles/wechat2md-71d2db1486ce11ceb105c572b7b5a002.png)  
-####   
+![](/articles/wechat2md-71d2db1486ce11ceb105c572b7b5a002.png)    
 #### 场景分析2：对请求包中的某个参数进行加密或者修改  
   
 选择到的hijackHTTPRequest或者beforeRequest，这里我选择使用hijackHTTPRequest，需求：  
@@ -162,22 +155,26 @@ yak-mitm在多个场景中有不同的应用，热加载模式是可以直接对
   
   
 **END**  
-  
-  
- **YAK官方资源**  
-  
-  
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)
   
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
   

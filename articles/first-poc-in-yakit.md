@@ -13,23 +13,19 @@
   
 **又到了“秋天的第一杯奶茶”刷屏的时刻**  
   
-**而我们要追求的是**  
-**“秋天的第一个POC”**  
+**而我们要追求的是** **“秋天的第一个POC”**  
   
 **做好变强的准备了吗**  
   
 **Yak POC编写，这一篇就够了**  
   
 ****  
-**文章中指代的POC仅指使用 Yaklang 编程语言编写的POC**  
+> **文章中指代的POC仅指使用 Yaklang 编程语言编写的POC**  
   
 ![](/articles/wechat2md-41e166a641bad190e9d0d5fa5bc8ba45.png)  
 ![](/articles/wechat2md-da9c230e2728d1149baba04b4f32a15f.png)  
-##   
-## 在此篇文章中就详细描述 Yaklang 语法的学习了，可以移步至 YAK官网 进行学习。  
-  
-  
-**文末“阅读原文”可直接跳转官网**  
+ 
+在此篇文章中就不详细描述 Yaklang 语法的学习了，可以移步至YAK官网进行学习。  
   
 Yaklang 的语法总的来说参考了其他许多语言，你可以看到许多语言中的影子，例如 Golang（主要），Python，JS等。这使得学习 Yaklang 的成本对于学习过相关语言（尤其是 Yaklang）的用户来说是非常低的，通常这类用户可以在 10 分钟内快速上手 Yaklang 。  
   
@@ -41,7 +37,7 @@ Yaklang 的语法总的来说参考了其他许多语言，你可以看到许多
 在旧版的 Yaklang 中，有许多库都能够完成发包工作，例如 fuzz，httppool，http等，实际上对于编写 POC 来说，我们**只需要重点关注 poc 库即可**。  
   
 ****  
-**发送请求**  
+## **发送请求**  
 ### 发送 URL 请求  
   
 对于如何请求一个指定的URL， poc 库提供了以下几个简单的函数：  
@@ -163,9 +159,7 @@ func HTTPEx(i any, opts ...PocConfigOption) (rsp *lowhttp.LowhttpResponse, req *
   
 在三个返回值中，我们重点关注**第一个返回值**，我们想要的响应信息都存储在这里。  
   
-我们可以简单地使用一行  
-desc(rsp)  
-代码，或者通过在 Yakit 的 Yak Runner 中鼠标悬浮提示来了解这个响应结构体及其成员的信息。  
+我们可以简单地使用一行```desc(rsp)  ```代码，或者通过在 Yakit 的 Yak Runner 中鼠标悬浮提示来了解这个响应结构体及其成员的信息。  
   
 我们常用到的响应信息如下：  
 ```
@@ -206,8 +200,8 @@ t = rsp.GetDurationFloat()
   
 第三步也是最关键的一步，在编写一个 POC 之前，我们需要了解其定位，或者说这个漏洞是属于什么类型的，这样我们才能更好地去思考漏洞检测逻辑，编写 POC。以下列出一些常见漏洞的 POC 编写模版。  
   
-**代码执行/命令执行**  
-### 此类漏洞能够实现的功能很多，因此我们漏洞的检测逻辑不应该简单地执行echo，同时我们要考虑到目标操作系统的问题（Windows/Linux等）。  
+## **代码执行/命令执行**  
+此类漏洞能够实现的功能很多，因此我们漏洞的检测逻辑不应该简单地执行echo，同时我们要考虑到目标操作系统的问题（Windows/Linux等）。  
   
 那么我们如何优雅而又有效地检测代码执行或者命令执行呢？  
   
@@ -274,7 +268,7 @@ if codec.Md5(s) in rsp.RawPacket {
 在其他操作系统与脚本语言中一样能找到类似的函数来进行**计算**，通过这种方法来判断此类漏洞，就可以减少误报的发生。  
   
   
-**文件读取**  
+## **文件读取**  
   
 此类漏洞我们主要思考的是读取文件的路径，一般寻找固定位置和固定特征以及默认存在的文件，同时要考虑目标操作系统的问题（Windows/Linux等）。  
   
@@ -309,7 +303,7 @@ if rsp.GetStatusCode() == 200 && len(body) > 0 && "16-bit app support" in body {
 ```  
   
   
-**SQL注入**  
+## **SQL注入**  
   
 此类漏洞我们首先需要知道的是有没有回显，根据回显的有无，我们可以通过不同的方式进行判断。  
   
@@ -359,7 +353,7 @@ if rsp.GetDurationFloat() > 3 {
 ```  
   
   
-**文件上传**  
+## **文件上传**  
   
 对于此类漏洞，需要思考的是如何在没有危害的情况下验证漏洞的存在，因此一般在可能的情况下会考虑**计算输出+自我删除**的形式。  
   
@@ -417,14 +411,13 @@ if codec.Md5(s) in body {
 ```  
   
   
-**服务端请求伪造（SSRF）**  
+## **服务端请求伪造（SSRF）**  
   
 此类漏洞首先需要知道的也是有没有回显，根据回显的有无，我们可以通过不同的方式进行判断。  
   
 **案例：有回显 通过curl请求 linux**  
   
-此案例思路与前文中文件读取差不多，只是访问路径为  
-file:///etc/passwd  
+此案例思路与前文中文件读取差不多，只是访问路径为file:///etc/passwd  
 ```
 // 这里以 pikachu 靶场的SSRF为例
 url = codec.EscapeQueryUrl(f`file:///etc/passwd`)
@@ -491,26 +484,28 @@ if rsp.GetStatusCode() == 200 && len(body) > 0 && s in body {
   
   
   
-  
  **YAK官方资源**  
   
   
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
-  
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
-  
-  
-  
-点击这里阅读原文  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)  
   
   
   
