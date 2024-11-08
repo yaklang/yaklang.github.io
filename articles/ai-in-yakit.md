@@ -22,15 +22,16 @@
   
 随着使用 Yakit 的安全从业人员规模增长，我们发现 History 和 Web Fuzzer 几乎是时刻都会打开的功能，实际上不论是劫持功能还是数据包重放，数据源几乎都是随手都可以获取到的。在一般的其他 AI 用户应用使用中，用户都需要**手动复制数据包到 AI 工具或者 IDE 中**进行操作。实际在工作中，这个过程就**非常割裂**，很多用户甚至因为这种复制到 AI 的操作会中断思路而拒绝使用 AI。  
   
-经过思考之后，用户入口不应该是 “复制粘贴” 到别的应用，在软件的 **“右键菜单”中直接操作**即是我们认为的 AI 最佳的接入方式。那么在 Yakit 的右键扩展中，其实已经有了插件系统的接入，我们可以用右键执行 Yaklang 代码帮助我们处理任何数据包变形，数据提取等事情。那么**只要让 Yaklang 可以接入多种 AI 系统**，把多种平台的 AI 综合表达成统一的接口，这样用户就无需复制粘贴数据到别的平台了，并且在接入 AI 系统之前，用户可以按照自己的要求构建 prompt 或者获取数据源。  
-<video
-  src="/img/yaklab/fastjson/ai1.mp4"
-  loop={true}
-  playsInline={true}
-  controls={true}
-  autoPlay={true}
-  style={{ width: 890 }}
-/>   
+经过思考之后，用户入口不应该是 “复制粘贴” 到别的应用，在软件的 **“右键菜单”中直接操作**即是我们认为的 AI 最佳的接入方式。那么在 Yakit 的右键扩展中，其实已经有了插件系统的接入，我们可以用右键执行 Yaklang 代码帮助我们处理任何数据包变形，数据提取等事情。那么**只要让 Yaklang 可以接入多种 AI 系统**，把多种平台的 AI 综合表达成统一的接口，这样用户就无需复制粘贴数据到别的平台了，并且在接入 AI 系统之前，用户可以按照自己的要求构建 prompt 或者获取数据源。    
+
+<video  
+  src="https://aliyun-oss.yaklang.com/video/yakit-ai-plugin-use-case.mp4"  
+  loop={true}  
+  playsInline={true}  
+  controls={true}  
+  autoPlay={true}  
+  style={{ width: 890 }}  
+/>     
 
   
 ## **Yaklang 全面拥抱 AI**    
@@ -53,7 +54,7 @@
   
 ### **在 Yakit 中配置 APIKey**  
 <video
-  src="https://aliyun-oss.yaklang.com/video/yakit-ai-plugin-use-case.mp4"
+  src="https://aliyun-oss.yaklang.com/video/config-global-ai-demo.mp4"
   loop={true}
   playsInline={true}
   controls={true}
