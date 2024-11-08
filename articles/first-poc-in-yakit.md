@@ -4,11 +4,6 @@
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
 ![](/articles/wechat2md-3c7b63447b178dca759252db58a2f6c2.png)  
   
-![](/articles/wechat2md-b767efc51500b4f158504b28c037ef6c.png)  
-  
-  
-**⬆️ 你好，加群，谢谢 ⬆️**  
-  
 **立秋就这么水灵灵地过了**  
   
 **又到了“秋天的第一杯奶茶”刷屏的时刻**  

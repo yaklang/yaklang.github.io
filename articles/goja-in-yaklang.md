@@ -26,11 +26,10 @@
   
 ## **几乎一致性的API**  
   
-对于yaklang语言的用户来说，此次升级是几乎无感知的，在升级的同时确保了 80% 的API无变动，但由于底层实现不尽相同，因此可能会存在某些不常用的函数（如js.ASTWalk，js.GetSTType  
-）以及结构体方法（如Value）会存在某些差异，对此库用户的影响控制在合适的范围内。  
+对于yaklang语言的用户来说，此次升级是几乎无感知的，在升级的同时确保了 80% 的API无变动，但由于底层实现不尽相同，因此可能会存在某些不常用的函数（如js.ASTWalk，js.GetSTType）以及结构体方法（如Value）会存在某些差异，对此库用户的影响控制在合适的范围内。  
   
   
-## **全新的****内置第三方JavaScript依赖API**  
+## **全新的内置第三方JavaScript依赖API**  
  
 此次升级的一个重要点在于为了解决使用某些常用 **JavaScript**第三方依赖（如上文提到的 **CryptoJS**）的问题。通过新的API，我们可以快速地使用这些 **JavaScript**第三方依赖，而省略编译的过程（初次编译之后会进行缓存，之后不再需要进行编译）。  
   
@@ -42,8 +41,7 @@ _, value = js.Run(`
  println(value.String())
 ```  
 ## **实战案例**    
-以 **Yakit** 自带的 **Vulinbox**靶场其中的高级前端加解密与验签实战 - CryptoJS.AES(CBC) 前端加密登陆表单  
-为例，讲解一下如何使用升级后的 js 库。如何安装与启动 **Vulinbox**靶场这里不再赘述。靶场详细参考此文[【文末抽奖】Yak叫你来打靶了](http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&mid=2247512304&idx=1&sn=dc1f3b3119309c495f1bd438b6b8b059&chksm=c2d1cc54f5a645420b1a075484b3f444d4b29736b7aa32265c877ba1a45620fdf04fcd9d7cda&scene=21#wechat_redirect)  
+以 **Yakit** 自带的 **Vulinbox**靶场其中的高级前端加解密与验签实战 - CryptoJS.AES(CBC) 前端加密登陆表单为例，讲解一下如何使用升级后的 js 库。如何安装与启动 **Vulinbox**靶场这里不再赘述。靶场详细参考此文[【文末抽奖】Yak叫你来打靶了](http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&mid=2247512304&idx=1&sn=dc1f3b3119309c495f1bd438b6b8b059&chksm=c2d1cc54f5a645420b1a075484b3f444d4b29736b7aa32265c877ba1a45620fdf04fcd9d7cda&scene=21#wechat_redirect)  
    
 网站页面如下：  
   

@@ -7,16 +7,9 @@
   
 ![](/articles/wechat2md-29ead4cd197c5a1527a10a15be7837e6.png)  
   
-现在直接打开Yak Runner，在最中间的位置将会有三个选项以供选择，分别是  
-**新建文件**  
-、  
-**打开文件**  
-和  
-**打开文件夹**  
-。  
+现在直接打开Yak Runner，在最中间的位置将会有三个选项以供选择，分别是**新建文件**、**打开文件**和**打开文件夹**。  
   
-新建文件允许你快速的打开一个临时文件，以便你快速开发一个小脚本或者是使用某些你急需使用到的函数（你知道的，Yaklang中有许多令人喜欢便捷的适用于安全领域的库）；  
-打开文件和打开文件夹则更适用于你想要花更多的时间去写一份Yaklang项目，我们也期待着你这么去做！  
+新建文件允许你快速的打开一个临时文件，以便你快速开发一个小脚本或者是使用某些你急需使用到的函数（你知道的，Yaklang中有许多令人喜欢便捷的适用于安全领域的库）；打开文件和打开文件夹则更适用于你想要花更多的时间去写一份Yaklang项目，我们也期待着你这么去做！  
   
 点击Yak Runner，想想你想要使用它做点什么有趣的事情吧！  
   
@@ -26,10 +19,7 @@
   
 首先是一个大更新，Yak Runner以前监修中的终端现在可以使用了。  
   
-你可以点击  
-左下角终端按钮，或者  
-右击文件选择打开终端，也会打开相应文件地址的终端。这与你熟悉的IDE的操作逻辑是一致的。当然也可以使用快捷键ctrl+`  
-进行呼出。  
+你可以**点击左下角终端按钮**，或者**右击文件选择打开终端**，也会打开相应文件地址的终端。这与你熟悉的IDE的操作逻辑是一致的。当然也可以使用快捷键**ctrl+`**进行呼出。  
   
 ![](/articles/wechat2md-0711cb5b4b9c9e4e2faf5facb8cf8bd7.gif)  
   
@@ -45,8 +35,7 @@
   
 ![](/articles/wechat2md-9a547e914cbe1675b9e3a45167438639.png)  
   
-在终端左边的选项就是  
-语法检查，它能够实时的检测你输入的Yak代码是否正确，并提供报错信息。点击其报错信息，就能够跳转到报错代码的具体位置。因此，现在在Yak Runner写代码，调试更加的简单了。  
+在终端左边的选项就是语法检查，它能够实时的检测你输入的Yak代码是否正确，并提供报错信息。点击其报错信息，就能够跳转到报错代码的具体位置。因此，现在在Yak Runner写代码，调试更加的简单了。  
   
 ![](/articles/wechat2md-5115b293c78bc727f8363b47843b476e.gif)  
   
@@ -56,15 +45,11 @@
   
 ![](/articles/wechat2md-ec1ec7574f3f798f672ab3d9812041f9.gif)  
   
-同时也有很多有意思的小操作，比如当你新建一个文件的时候，不用总是输入其后缀名，现在默认使用.yak  
-作为后缀名。  
+同时也有很多有意思的小操作，比如当你新建一个文件的时候，不用总是输入其后缀名，现在默认使用 **.yak** 作为后缀名。  
   
 ![](/articles/wechat2md-27dc863fc3cd9da756e21ad5f6bbca4b.gif)  
   
-另外，现在Yak Runner也支持了更多快捷键操作。而快捷键操作的逻辑与Vs Code  
-是高度一致的，比如你可以使用F2  
-进行文件的重命名，或者使用delete  
-来删除文件。  
+另外，现在Yak Runner也支持了更多快捷键操作。而快捷键操作的逻辑与Vs Code 是高度一致的，比如你可以使用F2进行文件的重命名，或者使用delete来删除文件。  
   
 ![](/articles/wechat2md-e98c4b6150467a7a0c3352722a866f4b.gif)  
   
@@ -74,8 +59,7 @@
   
 ![](/articles/wechat2md-cd4d8124af386ba547c87d671bfc208a.png)  
   
-最后，与旧版Yak Runner有很大不同的是，在新版Yak Runner左侧边栏中，现在提供了一个新选项：  
-帮助文档。  
+最后，与旧版Yak Runner有很大不同的是，在新版Yak Runner左侧边栏中，现在提供了一个新选项：**帮助文档。**  
   
 帮助文档能够让你在忘记函数如何使用或者想用的函数具体什么名称的时候进行搜索，它支持可靠的模糊搜索。(再也不用担心禁不住函数名称而发愁了)  
   
@@ -91,22 +75,26 @@
   
   
 **END**  
-  
-  
- **YAK官方资源**  
-  
-  
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)
   
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
   

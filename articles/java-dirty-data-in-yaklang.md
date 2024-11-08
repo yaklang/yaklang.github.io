@@ -4,11 +4,9 @@ Z3r0ne  Yak Project   2024-03-22 17:30
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 ![](/articles/wechat2md-69ccb1a450342e9d14a3d91bc01e943c.png)  
-#   
-#   
-#   
   
-**前言**  
+  
+# **前言**  
   
 有师傅提出了 Yso JavaHack 的生成序列化payload需要填充脏数据的需求，由于yak引擎没有java环境，所以不能直接对gadget封装，只能对数据化流操作，记录下分析过程。  
   

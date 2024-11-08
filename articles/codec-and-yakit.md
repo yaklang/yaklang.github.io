@@ -33,11 +33,9 @@
   
 >codec插件是YAK的一个插件类型，在之前的文章中常常作为单独的小脚本被介绍，或者在Yakit codec模块中作为编码流的一个步骤使用。  
   
-**如何使用联动技能？****可****在不同场景进行触发**！   
+**如何使用联动技能？可在不同场景进行触发**！   
   
 ## **触发前准备：**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
 codec联动Web Fuzzer十分简单，只需要在新建codec插件的时候配置好选项即可。在新建插件中选择codec插件，如下图所示。  
   
 ![](/articles/wechat2md-2e5a9fb8dd8a9534cb9ce13e537ff03f.png)  
@@ -60,8 +58,6 @@ codec联动Web Fuzzer十分简单，只需要在新建codec插件的时候配置
   
   
 ## **场景一：自定义的HTTP数据包变形**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
   
   
 ### **关卡1：转化POST参数功能**  
@@ -161,8 +157,6 @@ key=value
  
   
 ## **场景二：自定义右键菜单执行**  
-  
-![](/articles/wechat2md-151d5edc5897dd0c05900660571b46ab.png)  
 
 自定义右键菜单执行可以通过勾选来选择处理某段数据。  
   
