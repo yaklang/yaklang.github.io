@@ -53,7 +53,7 @@
   
 ### **在 Yakit 中配置 APIKey**  
 <video
-  src="/img/yaklab/fastjson/ai2.mp4"
+  src="https://aliyun-oss.yaklang.com/video/yakit-ai-plugin-use-case.mp4"
   loop={true}
   playsInline={true}
   controls={true}
