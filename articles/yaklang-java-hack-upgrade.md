@@ -116,24 +116,25 @@ public byte[] transform(ClassLoader   loader,
   
   
 **END**  
-  
-  
- **YAK官方资源**  
-  
-  
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
   
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
-  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif) 
   
   
   

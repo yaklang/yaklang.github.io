@@ -90,72 +90,37 @@ for result in results {
   
   
   
-对成组的PoC进行批量执行，可以点击左上角的“批量执行”：  
-  
-#   
-#   
-  
-**SUMMARIZE**  
+对成组的PoC进行批量执行，可以点击左上角的“批量执行”：  **SUMMARIZE**  
   
   
 **总结**  
-  
-  
-#   
-  
-  
 Yak集成nuclei，并非只是将该工具生硬地放了进来，而是在更高层面做了有机的融合，打通了nuclei的生态与Yak的生态的壁垒，体现了Yak安全能力融合的思想。这种融合有许多应用场景，比如渗透测试的复测。在渗透测试过程中，对目标资产测试完成之后，往往需要过段时间再进行第二次测试，也就是复测。可以想到的是，利用Yak的nuclei的操作流程可以帮你更好地进行复测。比方说，在第一次渗透测试出结果的时候，可以使用Web Fuzzer将HTTP数据包转化为Yaml格式的PoC，并通过插件系统，将本次PoC添加成一组，而在下次复测的时候，即可使用批量执行的功能，并在漏洞数据库中查看复测的结果。  
-  
   
 **END**  
   
-  
-  
-[](http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&mid=2247520696&idx=1&sn=11d3dc7d59607ff96a9951d0e524c809&chksm=c2d1ed1cf5a6640a2ea4dfbc9f747daa0f4c0299185af6fd5dce8a86793061765df6c1a1380a&scene=21#wechat_redirect)  
-  
-点击上方图片跳转链接 ⬆️  
-  
-  
-Yakit插件  
-活动补  
-充信息：  
-  
+Yakit插件活动补充信息：  
 参与插件治理活动的小伙伴们请知悉  
-  
-1.在提交误报插件时，为方便更好地为大家计数  
-  
-请以文字方式在插件评论区备注**"修复误报"**并发布  
-  
-重复提交同一个误报，以提交时间最先的为准  
-  
-  
+1.在提交误报插件时，为方便更好地为大家计数,请以文字方式在插件评论区备注 **"修复误报"**并发布，重复提交同一个误报，以提交时间最先的为准  
 ![](/articles/wechat2md-b32a63ba03ab66b15301c159cff84758.png)  
-  
-  
-2.报告重复插件时，请评论备注**“该插件与XX插件重复”**并发布。方法同上  
-  
+2.报告重复插件时，请评论备注 **“该插件与XX插件重复”**并发布。方法同上  
 重复插件将保留发布时间最早的版本，被下架插件会在yakit软件内通知作者  
-  
-  
 特此补充说明，以便后续统计和赠礼  
-  
 再次感谢大家的支持  
-  
-  
-  
-  
-  
-  
- **YAK官方资源**  
-  
-  
+ 
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
 ![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
