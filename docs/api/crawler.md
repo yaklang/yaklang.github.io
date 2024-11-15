@@ -584,17 +584,12 @@ crawler.Start("https://example.com", crawler.proxy("http://127.0.0.1:8080"))
 
 #### 定义
 
-`responseTimeout(c *Config) any`
+`responseTimeout(c *Config)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | c | `*Config` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### timeout

@@ -2,6 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [.](#) ||
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.Code](#code) ||
 | [yakit.Debug](#debug) ||
@@ -14,7 +15,6 @@
 | [yakit.GenerateYakitMITMHooksParams](#generateyakitmitmhooksparams) ||
 | [yakit.GetHomeDir](#gethomedir) ||
 | [yakit.GetHomeTempDir](#gethometempdir) ||
-| [yakit.GetOnlineBaseUrl](#getonlinebaseurl) ||
 | [yakit.Info](#info) ||
 | [yakit.InitYakit](#inityakit) ||
 | [yakit.Markdown](#markdown) ||
@@ -64,6 +64,16 @@
 
 
 ## 函数定义
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
 ### AutoInitYakit
 
 #### 详细描述
@@ -71,12 +81,7 @@
 
 #### 定义
 
-`AutoInitYakit() any`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`AutoInitYakit()`
 
 
 ### Code
@@ -137,18 +142,13 @@
 
 #### 定义
 
-`EnableTable(tableName string, columns []string) any`
+`EnableTable(tableName string, columns []string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | tableName | `string` |   |
 | columns | `[]string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### EnableText
@@ -173,17 +173,12 @@
 
 #### 定义
 
-`EnableWebsiteTrees(targets string) any`
+`EnableWebsiteTrees(targets string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | targets | `string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### Error
@@ -269,21 +264,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
-
-
-### GetOnlineBaseUrl
-
-#### 详细描述
-
-
-#### 定义
-
-`GetOnlineBaseUrl() YAK_ONLINE_BASEURL`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `YAK_ONLINE_BASEURL` |   |
 
 
 ### Info
@@ -963,7 +943,7 @@
 
 #### 定义
 
-`StatusCard(id string, data any, tags ...string) any`
+`StatusCard(id string, data any, tags ...string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -971,11 +951,6 @@
 | id | `string` |   |
 | data | `any` |   |
 | tags | `...string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### Stream

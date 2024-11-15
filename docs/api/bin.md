@@ -28,7 +28,7 @@
 
 #### 定义
 
-`Read(data any, descriptors ...*PartDescriptor) ([]ResultIf any, error any)`
+`Read(data any, descriptors ...*PartDescriptor) ([]ResultIf, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -39,8 +39,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []ResultIf | `any` |   |
-| error | `any` |   |
+| r1 | `[]ResultIf` |   |
+| r2 | `error` |   |
 
 
 ### toBool

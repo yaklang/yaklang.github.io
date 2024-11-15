@@ -2,6 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [java.Decompile](#decompile) |Decompile 反编译一个 jar包或者 class  返回值是反编译后的 java 文件路径  |
 | [java.FromJson](#fromjson) ||
 | [java.MarshalJavaObjects](#marshaljavaobjects) ||
 | [java.NewJavaArray](#newjavaarray) ||
@@ -36,6 +37,37 @@
 
 
 ## 函数定义
+### Decompile
+
+#### 详细描述
+Decompile 反编译一个 jar包或者 class
+
+返回值是反编译后的 java 文件路径
+
+Example:
+```
+err = Decompile("test.jar", "test/"); die(err)
+err = Decompile("test.war", "test/"); die(err)
+Decompile("a.class", "a.java"); die(err)
+```
+
+
+#### 定义
+
+`Decompile(from string, to string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| from | `string` |   |
+| to | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### FromJson
 
 #### 详细描述
@@ -43,7 +75,7 @@
 
 #### 定义
 
-`FromJson(raw []byte) ([]JavaSerializable any, error any)`
+`FromJson(raw []byte) ([]JavaSerializable, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -53,8 +85,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `any` |   |
-| error | `any` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
 ### MarshalJavaObjects
@@ -611,7 +643,7 @@
 
 #### 定义
 
-`ParseHexJavaObjectStream(raw string) ([]JavaSerializable any, error any)`
+`ParseHexJavaObjectStream(raw string) ([]JavaSerializable, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -621,8 +653,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `any` |   |
-| error | `any` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
 ### ParseJavaObjectStream
@@ -632,7 +664,7 @@
 
 #### 定义
 
-`ParseJavaObjectStream(raw []byte) ([]JavaSerializable any, error any)`
+`ParseJavaObjectStream(raw []byte) ([]JavaSerializable, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -642,8 +674,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| []JavaSerializable | `any` |   |
-| error | `any` |   |
+| r1 | `[]JavaSerializable` |   |
+| r2 | `error` |   |
 
 
 ### ToJson

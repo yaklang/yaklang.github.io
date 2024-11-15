@@ -367,17 +367,7 @@ openai.functionRequired("location"))
 
 #### 定义
 
-`localAPIKey(client *Client) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| client | `*Client` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`localAPIKey()`
 
 
 ### model
@@ -631,16 +621,6 @@ openai.userMessage("What is the weather like today?"),
 
 #### 定义
 
-`yakDomain(client *Client) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| client | `*Client` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` |   |
+`yakDomain()`
 
 

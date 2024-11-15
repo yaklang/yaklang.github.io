@@ -2,6 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [.](#) ||
+| [.](#) ||
 | [poc.AppendHTTPPacketCookie](#appendhttppacketcookie) |AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加Cookie请求头中的值  |
 | [poc.AppendHTTPPacketFormEncoded](#appendhttppacketformencoded) |AppendHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，添加请求体中的表单  |
 | [poc.AppendHTTPPacketHeader](#appendhttppacketheader) |AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头  |
@@ -9,8 +11,6 @@
 | [poc.AppendHTTPPacketPostParam](#appendhttppacketpostparam) |AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添加POST请求参数  |
 | [poc.AppendHTTPPacketQueryParam](#appendhttppacketqueryparam) |AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，添加GET请求参数  |
 | [poc.AppendHTTPPacketUploadFile](#appendhttppacketuploadfile) |AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)  |
-| [poc.BasicRequest](#basicrequest) ||
-| [poc.BasicResponse](#basicresponse) ||
 | [poc.BuildRequest](#buildrequest) |BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一个参数可以接收 []byte, string, http.Request 结构体，接下来可以接收零个到多个请求选项，修改请求报文的选项将被作用，最后返回构建好的请求报文  |
 | [poc.CurlToHTTPRequest](#curltohttprequest) |CurlToHTTPRequest 尝试将curl命令转换为HTTP请求报文，其返回值为bytes，即转换后的HTTP请求报文  |
 | [poc.Delete](#delete) |Delete 向指定 URL 发送 DELETE 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
@@ -26,7 +26,9 @@
 | [poc.FixHTTPResponse](#fixhttpresponse) |FixHTTPResponse 尝试对传入的 HTTP 响应报文进行修复，并返回修复后的响应  |
 | [poc.Get](#get) |Get 向指定 URL 发送 GET 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
 | [poc.GetAllHTTPPacketPostParams](#getallhttppacketpostparams) |GetAllHTTPPacketPostParams 是一个辅助函数，用于获取请求报文中的所有POST请求参数，其返回值为map[string]string，其中键为参数名，值为参数值  |
+| [poc.GetAllHTTPPacketPostParamsFull](#getallhttppacketpostparamsfull) |GetAllHTTPPacketPostParamsFull 是一个辅助函数，用于获取请求报文中的所有POST请求参数，其返回值为map[string][]string，其中键为参数名，值为参数值切片  |
 | [poc.GetAllHTTPPacketQueryParams](#getallhttppacketqueryparams) |GetAllHTTPPacketQueryParams 是一个辅助函数，用于获取请求报文中的所有GET请求参数，其返回值为map[string]string，其中键为参数名，值为参数值  |
+| [poc.GetAllHTTPPacketQueryParamsFull](#getallhttppacketqueryparamsfull) |GetAllHTTPPacketQueryParamsFull 是一个辅助函数，用于获取请求报文中的所有GET请求参数，其返回值为map[string][]string，其中键为参数名，值为参数值切片  |
 | [poc.GetHTTPPacketBody](#gethttppacketbody) |GetHTTPPacketBody 是一个辅助函数，用于获取请求报文中的请求体，其返回值为bytes  |
 | [poc.GetHTTPPacketContentType](#gethttppacketcontenttype) |GetHTTPPacketContentType 是一个辅助函数，用于获取请求报文中的Content-Type请求头，其返回值为string  |
 | [poc.GetHTTPPacketCookie](#gethttppacketcookie) |GetHTTPPacketCookie 是一个辅助函数，用于获取请求报文中Cookie值，其返回值为string  |
@@ -148,6 +150,26 @@
 
 
 ## 函数定义
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
+### 
+
+#### 详细描述
+
+
+#### 定义
+
+``
+
+
 ### AppendHTTPPacketCookie
 
 #### 详细描述
@@ -355,36 +377,6 @@ poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>"
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
-
-
-### BasicRequest
-
-#### 详细描述
-
-
-#### 定义
-
-`BasicRequest() basicRequest`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `basicRequest` |   |
-
-
-### BasicResponse
-
-#### 详细描述
-
-
-#### 定义
-
-`BasicResponse() basicResponse`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `basicResponse` |   |
 
 
 ### BuildRequest
@@ -847,6 +839,37 @@ a=b&c=d`) // 获取所有POST请求参数
 | params | `map[string]string` |   |
 
 
+### GetAllHTTPPacketPostParamsFull
+
+#### 详细描述
+GetAllHTTPPacketPostParamsFull 是一个辅助函数，用于获取请求报文中的所有POST请求参数，其返回值为map[string][]string，其中键为参数名，值为参数值切片
+
+Example:
+```
+poc.GetAllHTTPPacketPostParams(`POST /post HTTP/1.1
+Content-Type: application/json
+COntent-Length: 7
+Host: pie.dev
+
+a=b&a=c`) // 获取所有POST请求参数，这里会返回{"a":["b", "c"]}
+```
+
+
+#### 定义
+
+`GetAllHTTPPacketPostParamsFull(packet []byte) (params map[string][]string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| params | `map[string][]string` |   |
+
+
 ### GetAllHTTPPacketQueryParams
 
 #### 详细描述
@@ -875,6 +898,36 @@ Host: pie.dev
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | params | `map[string]string` |   |
+
+
+### GetAllHTTPPacketQueryParamsFull
+
+#### 详细描述
+GetAllHTTPPacketQueryParamsFull 是一个辅助函数，用于获取请求报文中的所有GET请求参数，其返回值为map[string][]string，其中键为参数名，值为参数值切片
+
+Example:
+```
+poc.GetAllHTTPPacketQueryParamsFull(`GET /get?a=b&a=c HTTP/1.1
+Content-Type: application/json
+Host: pie.dev
+
+`) // 返回所有GET请求参数，这里会返回{"a":["b", "c"]}
+```
+
+
+#### 定义
+
+`GetAllHTTPPacketQueryParamsFull(packet []byte) (params map[string][]string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| params | `map[string][]string` |   |
 
 
 ### GetHTTPPacketBody

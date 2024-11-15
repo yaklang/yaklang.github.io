@@ -36,7 +36,7 @@
 
 #### 定义
 
-`ParseJA3(ja3FullString string) (*JA3 any, error any)`
+`ParseJA3(ja3FullString string) (*JA3, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -46,8 +46,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *JA3 | `any` |   |
-| error | `any` |   |
+| r1 | `*JA3` |   |
+| r2 | `error` |   |
 
 
 ### ParseJA3S
@@ -57,7 +57,7 @@
 
 #### 定义
 
-`ParseJA3S(ja3sFullString string) (*JA3S any, error any)`
+`ParseJA3S(ja3sFullString string) (*JA3S, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -67,8 +67,8 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| *JA3S | `any` |   |
-| error | `any` |   |
+| r1 | `*JA3S` |   |
+| r2 | `error` |   |
 
 
 ### ParseJA3ToClientHelloSpec

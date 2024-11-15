@@ -21,6 +21,7 @@ Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex
 | [os.Exit](#exit) |Exit 退出当前进程  |
 | [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值  |
 | [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片  |
+| [os.GetHomeDir](#gethomedir) |GetHomeDir 获取当前用户的家目录  |
 | [os.GetLocalAddress](#getlocaladdress) |GetLocalAddress 获取本地IP地址  |
 | [os.GetLocalIPv4Address](#getlocalipv4address) |GetLocalIPv4Address 获取本地IPv4地址  |
 | [os.GetLocalIPv6Address](#getlocalipv6address) |GetLocalIPv6Address 获取本地IPv6地址  |
@@ -264,6 +265,27 @@ os.GetDefaultDNSServers()
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]string` |   |
+
+
+### GetHomeDir
+
+#### 详细描述
+GetHomeDir 获取当前用户的家目录
+
+Example:
+```
+os.GetHomeDir() // "/Users/yaklang"
+```
+
+
+#### 定义
+
+`GetHomeDir() string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### GetLocalAddress
