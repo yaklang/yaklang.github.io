@@ -66,6 +66,7 @@ module.exports = {
                             // docId: "intro",
                             label: "Yak 语言文档",
                             href: "/docs/intro",
+                            sidebarCollapsed: false,
                         },
                         {
                             // {
@@ -74,6 +75,7 @@ module.exports = {
                             //     docsPluginId: "products",
                             label: "Yakit(YAK IDE) 文档与手册 ",
                             href: "/products/intro",
+                            sidebarCollapsed: false,
                         },
                     ],
                 },
@@ -81,6 +83,7 @@ module.exports = {
                     href: "/articles/intro",
                     label: "Yak 技术博客",
                     position: "left",
+                    sidebarCollapsed: false,
                 },
                 // {
                 //     position: "left",
@@ -209,6 +212,7 @@ module.exports = {
                 path: "products",
                 routeBasePath: "products",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
+                sidebarCollapsed: false,
                 // ... other options
             },
         ],
@@ -219,6 +223,7 @@ module.exports = {
                 path: "Yaklab",
                 routeBasePath: "Yaklab",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
+                sidebarCollapsed: false,
                 // ... other options
             },
         ],
@@ -229,6 +234,7 @@ module.exports = {
                 path: "articles",
                 routeBasePath: "articles",
                 sidebarPath: require.resolve("./sidebarsProducts.js"),
+                sidebarCollapsed: false,
                 // ... other options
             },
         ],
@@ -239,6 +245,7 @@ module.exports = {
             {
                 docs: {
                     sidebarPath: require.resolve("./sidebars.js"),
+                    sidebarCollapsed: false,
                     // Please change this to your repo.
                     editUrl: "https://github.com/yaklang/",
                 },
