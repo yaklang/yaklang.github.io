@@ -4,8 +4,11 @@
 |:------|:--------|
 | [syntaxflow.ExecRule](#execrule) ||
 | [syntaxflow.QuerySyntaxFlowRules](#querysyntaxflowrules) ||
+| [syntaxflow.withContext](#withcontext) ||
 | [syntaxflow.withExecDebug](#withexecdebug) ||
 | [syntaxflow.withExecTaskID](#withexectaskid) ||
+| [syntaxflow.withProcess](#withprocess) ||
+| [syntaxflow.withSave](#withsave) ||
 
 
 ## 函数定义
@@ -16,14 +19,14 @@
 
 #### 定义
 
-`ExecRule(r *schema.SyntaxFlowRule, prog *ssaapi.Program, opts ...ExecRuleOption) (*ssaapi.SyntaxFlowResult, error)`
+`ExecRule(r *schema.SyntaxFlowRule, prog *ssaapi.Program, opts ...ssaapi.QueryOption) (*ssaapi.SyntaxFlowResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | r | `*schema.SyntaxFlowRule` |   |
 | prog | `*ssaapi.Program` |   |
-| opts | `...ExecRuleOption` |   |
+| opts | `...ssaapi.QueryOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -53,6 +56,26 @@
 | r1 | `chan *schema.SyntaxFlowRule` |   |
 
 
+### withContext
+
+#### 详细描述
+
+
+#### 定义
+
+`withContext(ctx context.Context) QueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `QueryOption` |   |
+
+
 ### withExecDebug
 
 #### 详细描述
@@ -60,17 +83,17 @@
 
 #### 定义
 
-`withExecDebug(debug ...bool) ExecRuleOption`
+`withExecDebug(b ...bool) QueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| debug | `...bool` |   |
+| b | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ExecRuleOption` |   |
+| r1 | `QueryOption` |   |
 
 
 ### withExecTaskID
@@ -80,7 +103,7 @@
 
 #### 定义
 
-`withExecTaskID(taskID string) ExecRuleOption`
+`withExecTaskID(taskID string) QueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -90,6 +113,36 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ExecRuleOption` |   |
+| r1 | `QueryOption` |   |
+
+
+### withProcess
+
+#### 详细描述
+
+
+#### 定义
+
+`withProcess(cb func(float64, string)) QueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func(float64, string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `QueryOption` |   |
+
+
+### withSave
+
+#### 详细描述
+
+
+#### 定义
+
+`withSave()`
 
 
