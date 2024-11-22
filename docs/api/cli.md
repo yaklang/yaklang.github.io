@@ -16,6 +16,7 @@
 | [cli.Hosts](#hosts) |Hosts 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
 | [cli.Int](#int) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
 | [cli.Integer](#integer) |Integer 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
+| [cli.Json](#json) |JsonSchema 获取对应名称的命令行参数|
 | [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数 根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型 |
 | [cli.Net](#net) |Net 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
 | [cli.Network](#network) |NetWork 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
@@ -38,11 +39,14 @@
 | [cli.setCliGroup](#setcligroup) |setCliGroup 是一个选项函数，设置参数的分组 |
 | [cli.setDefault](#setdefault) |setDefault 是一个选项函数，设置参数的默认值 |
 | [cli.setHelp](#sethelp) |setHelp 是一个选项函数，设置参数的帮助信息 这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示 |
+| [cli.setJsonSchema](#setjsonschema) ||
 | [cli.setMultipleSelect](#setmultipleselect) |SetMultipleSelect 是一个选项函数，设置参数是否可以多选 此选项仅在`cli.StringSlice`中生效 |
+| [cli.setPluginEnv](#setpluginenv) |setPluginEnv 是一个选项函数，设置参数从插件环境中取值 |
 | [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须 |
 | [cli.setSelectOption](#setselectoption) |setSelectOption 是一个选项函数，设置参数的下拉框选项 此选项仅在`cli.StringSlice`中生效 |
 | [cli.setShortName](#setshortname) |setShortName 是一个选项函数，设置参数的短名称 |
 | [cli.setVerboseName](#setverbosename) |setVerboseName 是一个选项函数，设置参数的中文名 |
+| [cli.setYakitPayload](#setyakitpayload) |setYakitPayload 是一个选项函数，设置参数建议值为Yakit payload的字典名列表 |
 | [cli.showGroup](#showgroup) ||
 | [cli.showParams](#showparams) ||
 | [cli.when](#when) ||
@@ -401,6 +405,27 @@ port = cli.Integer("port") // --port 80 则 port 为 80
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `int` |   |
+
+
+### Json
+
+#### 详细描述
+JsonSchema 获取对应名称的命令行参数
+
+#### 定义
+
+`Json(name string, opts ...SetCliExtraParam) map[string]any`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
 
 
 ### LineDict
@@ -921,6 +946,26 @@ cli.String("target", cli.SetHelp("target host or ip"))
 | r1 | `SetCliExtraParam` |   |
 
 
+### setJsonSchema
+
+#### 详细描述
+
+
+#### 定义
+
+`setJsonSchema(schema string) SetCliExtraParam`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| schema | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
+
+
 ### setMultipleSelect
 
 #### 详细描述
@@ -939,6 +984,30 @@ cli.StringSlice("targets", cli.SetMultipleSelect(true))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | multiSelect | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
+
+
+### setPluginEnv
+
+#### 详细描述
+setPluginEnv 是一个选项函数，设置参数从插件环境中取值
+Example:
+```
+cli.String("key", cli.setPluginEnv("api-key"))
+```
+
+#### 定义
+
+`setPluginEnv(key string) SetCliExtraParam`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1038,6 +1107,30 @@ cli.String("target", cli.setVerboseName("目标"))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | verboseName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SetCliExtraParam` |   |
+
+
+### setYakitPayload
+
+#### 详细描述
+setYakitPayload 是一个选项函数，设置参数建议值为Yakit payload的字典名列表
+Example:
+```
+cli.String("dictName", cli.setYakitPayload(true))
+```
+
+#### 定义
+
+`setYakitPayload(b bool) SetCliExtraParam`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

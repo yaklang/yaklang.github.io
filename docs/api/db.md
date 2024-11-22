@@ -17,6 +17,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.DeleteYakScriptByName](#deleteyakscriptbyname) ||
 | [db.DeleteYakitMenuItemAll](#deleteyakitmenuitemall) ||
 | [db.DownloadGeoIP](#downloadgeoip) ||
+| [db.GetAllPayloadGroupsName](#getallpayloadgroupsname) ||
 | [db.GetKey](#getkey) ||
 | [db.GetProjectKey](#getprojectkey) ||
 | [db.GetYakitPluginByName](#getyakitpluginbyname) ||
@@ -165,6 +166,21 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### GetAllPayloadGroupsName
+
+#### 详细描述
+
+
+#### 定义
+
+`GetAllPayloadGroupsName() []string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
 
 
 ### GetKey

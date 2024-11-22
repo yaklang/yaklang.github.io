@@ -12,6 +12,8 @@ Yak|(consts.Language) &#34;yak&#34;|
 | [ssa.NewFromProgramName](#newfromprogramname) ||
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
+| [ssa.ParseProject](#parseproject) ||
+| [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDatabasePath](#withdatabasepath) ||
 | [ssa.withDescription](#withdescription) ||
@@ -34,13 +36,12 @@ Yak|(consts.Language) &#34;yak&#34;|
 
 #### 定义
 
-`NewFromProgramName(programName string, opts ...Option) (*Program, error)`
+`NewFromProgramName(programName string) (*Program, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | programName | `string` |   |
-| opts | `...Option` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -91,6 +92,47 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:-----------|:---------- |:-----------|
 | r1 | `Programs` |   |
 | r2 | `error` |   |
+
+
+### ParseProject
+
+#### 详细描述
+
+
+#### 定义
+
+`ParseProject(opts ...Option) (Programs, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...Option` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Programs` |   |
+| r2 | `error` |   |
+
+
+### withConfigInfo
+
+#### 详细描述
+
+
+#### 定义
+
+`withConfigInfo(input map[string]any) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `map[string]any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withContext
