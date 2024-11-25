@@ -3,8 +3,9 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [xml.Escape](#escape) ||
+| [xml.Prettify](#prettify) ||
 | [xml.dumps](#dumps) ||
-| [xml.escape](#escape) |WithHTMLEscape 设置是否转义 HTML 的选项，默认为 True，即转义 HTML  |
+| [xml.escape](#escape) ||
 | [xml.loads](#loads) ||
 
 
@@ -29,6 +30,26 @@
 | r1 | `string` |   |
 
 
+### Prettify
+
+#### 详细描述
+
+
+#### 定义
+
+`Prettify(b []byte) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
 ### dumps
 
 #### 详细描述
@@ -36,13 +57,13 @@
 
 #### 定义
 
-`dumps(v any, opts ...EncoderOption) []byte`
+`dumps(v any, opts ...XmlDumpOptions) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | v | `any` |   |
-| opts | `...EncoderOption` |   |
+| opts | `...XmlDumpOptions` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -53,18 +74,11 @@
 ### escape
 
 #### 详细描述
-WithHTMLEscape 设置是否转义 HTML 的选项，默认为 True，即转义 HTML
-
-Example:
-```
-m = {"a": "qwe&zxc"}
-e := xml.dumps(m, xml.escape(false))
-```
 
 
 #### 定义
 
-`escape(escape bool) EncoderOption`
+`escape(escape bool) XmlDumpOptions`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -74,7 +88,7 @@ e := xml.dumps(m, xml.escape(false))
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `EncoderOption` |   |
+| r1 | `XmlDumpOptions` |   |
 
 
 ### loads
