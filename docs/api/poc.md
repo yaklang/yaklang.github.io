@@ -88,6 +88,7 @@
 | [poc.appendPostParam](#appendpostparam) |appendPostParam 是一个请求选项参数，用于改变请求报文，添加 POST 请求参数  |
 | [poc.appendQueryParam](#appendqueryparam) |appendQueryParam 是一个请求选项参数，用于改变请求报文，添加 GET 请求参数  |
 | [poc.appendUploadFile](#appenduploadfile) |appendUploadFile 是一个请求选项参数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)  |
+| [poc.body](#body) |body 是一个请求选项参数，用于指定请求的 body，需要传入一个任意类型的参数，如果不是 string 或者 bytes 会抛出日志并忽略。  |
 | [poc.connPool](#connpool) |connPool 是一个请求选项参数，用于指定是否使用连接池，默认不使用连接池  |
 | [poc.connectTimeout](#connecttimeout) |connectTimeout 是一个请求选项参数，用于指定连接超时时间，默认为15秒  |
 | [poc.context](#context) |context 是一个请求选项参数，用于指定请求的上下文  |
@@ -102,12 +103,16 @@
 | [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用 http2 协议，默认为 false 即使用http1协议  |
 | [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用 https 协议，默认为 false 即使用 http 协议  |
 | [poc.jsRedirect](#jsredirect) |jsRedirect 是一个请求选项参数，用于指定是否跟踪JS重定向，默认为false即不会自动跟踪JS重定向  |
+| [poc.json](#json) |json 是一个请求选项参数，用于指定请求的 body 为 json 格式，需要传入一个任意类型的参数，会自动转换为 json 格式  |
 | [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的 Content-Length 字段，默认为 false 即会自动修复Content-Length字段  |
 | [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
 | [poc.params](#params) |params 是一个请求选项参数，用于在请求时使用传入的值，需要注意的是，它可以很方便地使用 `str.f()`或 f-string 代替  |
 | [poc.password](#password) |password 是一个请求选项参数，用于指定认证时的密码  |
 | [poc.port](#port) |port 是一个请求选项参数，用于指定实际请求的端口，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的端口  |
+| [poc.postData](#postdata) |postData 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是原始字符串，不会修改 Content-Type  |
+| [poc.postParams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
+| [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;} 转换为 a=b  如果输入的是其他，会把字符串结果...|
 | [poc.randomJA3](#randomja3) ||
 | [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为是否使用 https 协议，第二个参数为原始请求报文，第三个参数为原始响应报文  |
 | [poc.redirectTimes](#redirecttimes) |redirectTimes 是一个请求选项参数，用于指定最大重定向次数，默认为5次  |
@@ -2699,6 +2704,32 @@ poc.Post("https://pie.dev/post", poc.appendUploadFile("file", "phpinfo.php", "<?
 | r1 | `PocConfigOption` |   |
 
 
+### body
+
+#### 详细描述
+body 是一个请求选项参数，用于指定请求的 body，需要传入一个任意类型的参数，如果不是 string 或者 bytes 会抛出日志并忽略。
+
+Example:
+```
+poc.Post("https://www.example.com", poc.body("a=b")) // 向 www.example.com 发起请求，请求的 body 为 a=b
+```
+
+
+#### 定义
+
+`body(i any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### connPool
 
 #### 详细描述
@@ -3102,6 +3133,32 @@ poc.HTTP(poc.BasicRequest(), poc.redirectTimes(5), poc.jsRedirect(true)) // 向 
 | r1 | `PocConfigOption` |   |
 
 
+### json
+
+#### 详细描述
+json 是一个请求选项参数，用于指定请求的 body 为 json 格式，需要传入一个任意类型的参数，会自动转换为 json 格式
+
+Example:
+```
+poc.Post("https://www.example.com", poc.json({"a": "b"})) // 向 www.example.com 发起请求，请求的 body 为 {"a": "b"} 并自动设置 Content-Type 为 application/json
+```
+
+
+#### 定义
+
+`json(i any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### noFixContentLength
 
 #### 详细描述
@@ -3234,6 +3291,62 @@ poc.HTTP(poc.BasicRequest(), poc.host("yaklang.com"), poc.port(443), poc.https(t
 | r1 | `PocConfigOption` |   |
 
 
+### postData
+
+#### 详细描述
+postData 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据
+
+输入是原始字符串，不会修改 Content-Type
+
+Example:
+```
+poc.Post("https://www.example.com", poc.postData("a=b")) // 向 www.example.com 发起请求，请求的 body 为 a=b
+```
+
+
+#### 定义
+
+`postData(i string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### postParams
+
+#### 详细描述
+postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据
+
+输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urlencoded
+
+Example:
+```
+poc.Post("https://www.example.com", poc.postParams({"a": "b"})) // 向 www.example.com 发起请求，请求的 body 为 a=b 并自动设置 Content-Type 为 application/x-www-form-urlencoded
+```
+
+
+#### 定义
+
+`postParams(i any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### proxy
 
 #### 详细描述
@@ -3253,6 +3366,38 @@ poc.HTTP(poc.BasicRequest(), poc.proxy("http://127.0.0.1:7890")) // 向 example.
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | proxies | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### query
+
+#### 详细描述
+query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数
+
+如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&#34;a&#34;: &#34;b&#34;} 转换为 a=b
+
+如果输入的是其他，会把字符串结果直接作为 query 设置
+
+Example:
+```
+poc.Get("https://www.example.com", poc.query({"a": "b"})) // 向 www.example.com 发起请求，请求的 query 为 a=b, url 为 https://www.example.com?a=b
+poc.Get("https://www.example.com", poc.query("a=b")) // 向 www.example.com 发起请求，请求的 query 为 a=b, url 为 https://www.example.com?a=b
+poc.Get("https://www.example.com", poc.query("abc")) // 向 www.example.com 发起请求，请求的 query 为 a=b, url 为 https://www.example.com?abc
+```
+
+
+#### 定义
+
+`query(i any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
