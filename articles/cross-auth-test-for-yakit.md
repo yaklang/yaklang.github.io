@@ -1,147 +1,169 @@
-#  玩越权测试插件？我来助你   
-原创 intSheep  Yak Project   2024-08-30 17:31  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-![](/articles/wechat2md-a4f2bfae3f0ef062eb864a5cf570c1a8.other)  
-[](http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&mid=2247520865&idx=1&sn=b56361be1d147e02733410b9be1a75b9&chksm=c2d1eec5f5a667d3f65a78c0837685809c036e8d55f7a5add58c177f2d6a57de949dd416fb86&scene=21#wechat_redirect)  
-  
-![](/articles/wechat2md-7709f2e0b02ccd8287c1260685352f0f.png)  
-  
-在MITM交互劫持页面的交互插件，便能够找到我们的多认证综合越权测试插件。  
-  
-![](/articles/wechat2md-e87cc15527860ebb0e8715d50e7a4e3e.png)  
-  
-目前多认证综合越权测试能够支持基于Cookie与Header Auth认证两种模式。  
-  
-![](/articles/wechat2md-d63d1afa3a4fcd0aa8c32791bb08d61b.png)  
-  
-![](/articles/wechat2md-c25965cb24b83218ea0f395a42da2566.png)  
-  
-这里使用Vulinbox靶场中的逻辑场景进行插件测试。  
-  
-![](/articles/wechat2md-168c6ca4dcfd3ad96a6483b28a430700.png)  
-  
-  
-首先注册两个用户，用户名分别为**test1**和**test2**，接着登录**test1**的账号，获取其**cookie**为   
-```
-_cookie:11e0bdd7-c1e2-4fcd-82a6-7a341d5dc54e
-br
-```  
-  
-![](/articles/wechat2md-e1b93721379a19ecf0ef753fb32faa28.png)  
-  
-接着将cookie配置进多认证综合越权测试插件，并启动插件:  
-  
-![](/articles/wechat2md-a0fde05fa4a20c9572ac72ee675bcb7c.png)  
-  
-  
-接着在 **不退出test1** 的情况下，使用 **test2** 账号进行登录，从MITM流量中的 **插件** 是可以看到经过修改的数据包的。如下图，一共有两条数据，第一条为 **_cookie** 被移除了，做了一个未授权访问的检测，发现不存在未授权访问。而第二条的 **_cookie** 使用的是 **test1** 的，并且其返回包的内容与使用 **test2** 的 **_cookie** 一模一样，因此我们认为其存在水平越权漏洞，并且将该条报文设置成 **红色** ，以便其更加显眼。  
-  
-![](/articles/wechat2md-a9287ed0266b72f356d3d5940f3fb9d5.png)  
-  
-这里只有两条被修改过cookie的报文，那么我们要看原报文如何查看呢？  
-很简单，只要点击MITM便可以了。  
-  
-![](/articles/wechat2md-6000b3f7d7f5580a7cefc0647e10e0b7.png)  
-  
-  
-![](/articles/wechat2md-397689b9ae494d9a5de8c9e0c20b07f9.png)  
-  
-怎么样？该插件相比之前的交互式插件是不是更"酷"了呢？以上，我们实现了数据包的**染色**以及**tag**的添加，以便能够一眼看到哪些报文存在越权漏洞。事实上，对数据包添加tag与染色并不是什么魔法，它只是"简单地"加了一串yaklang的代码，便能够有如此之奇效。所以，在你编写自己的插件的时候，完完全全可以应用这些功能，让你的插件更加的酷炫，更加具有表现力。  
-  
-为了进一步了解其相关原理，我们可以将鼠标悬浮于"多认证越权测试插件"上，查看其代码的实现。其染色与加tag主要逻辑在下方的handleReq中：  
-```
- handleReq = (reqBytes, newValue) => {
-        poc.HTTP(
-            reqBytes,
-            poc.https(https),
-            poc.saveHandler(response => {
-                tag= ""
-                if len(enableResponseKeywordList) > 0 {
+#  "Yaker，你可以全局配置插件环境变量!"
+原创 Yak  Yak Project   2024-11-28 17:30
 
-                    if respMatch(response.RawPacket,enableResponseKeywordList...){
-                        tag = "响应内容标志值匹配"
-                        response.Red()
-                    }else {
-                        tag = "响应内容标志值消失"
-                        response.Green()
-                    }
-                }else{
-                    sim := str.CalcSimilarity(baseResponse, response.RawPacket)
-                    if sim > 0.95 {
-                        response.Red()
-                    } elif sim <= 0.4 {
-                        response.Green()
-                    } else {
-                        response.Grey()
-                    }
-                    showSim = "%.2f" % (sim * 100.0)
-                    tag = f"相似：${showSim}% "
-                }
-                if newValue == "" {
-                    tag = f"${tag} 移除 ${isCookieMode? f`Cookie[${key}]`:f`Header[${key}]`}"
-                }else{
-                    tag = f"${tag} 值: ${newValue}"
-                }
-                response.AddTag(tag)
-            }), 
-        )
-    }
+![](\articles\wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)
 
+周  
+四周四，  
+Vme50(bushi
+
+大家好，这里是疯狂超级牛（功能上新版）
+
+![](\articles\wechat2md-be056115ce4cad5a943f713126836d75.png)
+
+经常有用户问
+
+“牛牛如何为不同插件配置相同的变量值呢？”
+
+“能有一个一波搞定插件变量的方式就好了”
+
+超级牛听到了广大用户的声音，默默地拿起了鞭子，走向开发团队...
+
+于是！  
+**插件全局变量配置功能**  
+，上新！
+
+那么如何具体使用此功能来配置插件的环境变量呢？
+
+请看VCR⬇️
+
+![](\articles\wechat2md-f449c4ddfa6b3c48c868fc5c880bb625.jpeg)
+
+![](\articles\wechat2md-aff5859e2a52e9f6b3cdb79577b4490b.png)
+
+![](\articles\wechat2md-4716e77f643320a73d13ca6cfbc8e1bd.png)
+
+我们的设计中，使用cli的选项作为环境变量的获取接口。一个简单的例子如下
+```
+// setPluginEnv 是一个选项函数，设置参数从插件环境中取值
+key = cli.String("key", cli.setPluginEnv("api-key"))
 ```  
-  
-可以看到，当http数据包要被保存的时候，会调用**saveHandler**进行相关处理（函数的相关作用可以在yakRunner代码提示中进行查看）。  
-具体逻辑为，如果返回包匹配到了我们手动设置的相关字段，那么就使用**response.Red()**让该数据染成红色，否则就是绿色。  
-而如果没有手动设置关键字的话，那么就使用**str.CalcSimilarity**文本相似性算法，计算新的返回包与原来返回包直接的相似性，如果精度达到0.95以上的话就设置为红色。最后使用**response.AddTag(tag)** 进行tag的添加。  
-  
-![](/articles/wechat2md-deec0737b462cea36b947e8d29314aad.png)  
-与多认证综合越权测试插件一起上架的还有修改 HTTP 请求 Cookie与修改 HTTP 请求 Header两款交互性插件，因为两款插件大差不差。这里以修改 HTTP 请求 Cookie做介绍。  
-  
-以下是该交互性插件所需要添加的参数，分别为cookie的key和value。同时还有一个前提URL条件，如果填了前提URL条件，那么就只会改相关URL的cookie。修改cookie的行为本质是调用**poc.ReplaceHTTPPacketCookie**函数的，因此如果请求包中存在该cookie就会进行修改，不存在的话就会添加这个cookie。  
-  
-![](/articles/wechat2md-6fab4a3b31bfa0ba64855915eebe2d4b.png)  
-  
-在这里，我们以访问百度为例，配置内容如下:  
-  
-![](/articles/wechat2md-d2afd0627d4b19c0c67d4eb2495355cc.png)  
-  
-启动后，可以发现与百度相关cookie都会被修改了：  
-  
-![](/articles/wechat2md-72e6ad634da34a06160b5d282dd98116.png)  
-> 这里值得注意的是，如果取消选中交互插件，那么页面会默认显示MITM的流量，需要点击插件最右边的按钮才能查看相关插件的流量。  
-  
-  
-![](/articles/wechat2md-2e221840dfad326b136f71cdf7427fb9.png)    
-  
-![](/articles/wechat2md-178404567bd5369ce0ce41ff7c7dbf21.png)  
-官网新上线的这几个交互插件，可以更为方便进行渗透测试。其中多认证越权测试能够对存在的越权漏洞的数据包打上颜色与标签，可以说表现力比以往更上一层次。在了解其相关原理以后，也推荐师傅们可以开发出类似酷炫的插件！  
-  
-  
-  
-**END**  
-  
-  
-  
- **YAK官方资源**  
-  
-  
+
+获取插件环境变量和使用普通cli参数基本一致，只需要在选项里设置 cli.setPluginEnv("api-key")即可，其中传入的是环境变量的key值。
+
+需要说明的是一旦设置这个选项，Yakit将不再提供输入，其数据必定来自于插件环境变量。
+
+![](\articles\wechat2md-b8b16137585d937c62e015ba908cdcbd.png)
+
+可以看到上述demo中为cli参数 env设置 setPluginEnv之后，参数预览处就没有对应的输入框了。
+
+![](\articles\wechat2md-1a801c50533ae96fb847ce0684387123.png)
+#   
+
+插件环境变量可以在两处配置 插件商店页面的配置页 和 单个插件的配置页
+
+![](\articles\wechat2md-c3d38c9c921bb07ae8e56fd9dc9044c6.png)
+
+这两处的配置有一些细节的不同。
+
+![](\articles\wechat2md-7a5f49a132d2c96ea9ec5802ac063f84.png)
+##   
+
+![](\articles\wechat2md-ebe23df29491b7cec345f26b5f5e29d3.png)
+
+这里的配置页面拥有  
+完整的对环境变量的增删改查能力。可以新建环境变量，即使没有插件使用。
+
+![](\articles\wechat2md-8f1aaea01d4fa3ca6da42ff5dc2a7c07.png)
+
+需要说明的是变量是  
+**可以支持空值**的，  
+**这与没有环境变量并不等价。**
+
+![](\articles\wechat2md-cd2cc4afc7fd915eafc2b6c3cea555a4.png)
+##   
+
+这部分的配置是为了方便使用做出的针对单个插件的简单版配置
+
+![](\articles\wechat2md-61644b57d884342a3156ba198a13a62d.png)
+
+它只对本插件代码中使用的环境变量进行了展示，只提供对应的修改功能。
+
+这里是对代码进行了解析处理，如果有代码中需要使用的环境变量没有被配置的话，会在此处提示用户。
+
+![](\articles\wechat2md-a93f331e03d4781d13aa42728374e991.png)
+
+点击配置即可在此处快捷配置环境变量
+> 需要注意的时候环境变量的影响范围是全局，这里修改之后，所有的使用对应环境变量的地方都会受到影响。
+
+
+![](\articles\wechat2md-f933d85b578090be8ecbd16adea56dcd.png)
+#   
+
+有了插件环境变量之后，一些情况可以有更好的解决方案。比如为简单改动插件 就可以为其添加特定的校验头。
+
+这里使用简单的内置插件——HTTP请求走私为例
+```
+buildSmugglePacket = (host, newPacket) => {
+...
+}
+
+mirrorNewWebsite = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rsp /*[]byte*/, body /*[]byte*/) {
+    ...
+    payload = buildSmugglePacket(host, req)
+    println(payload)
+    ...
+    rsp, _ = poc.HTTPEx(payload, poc.https(isHttps), poc.noFixContentLength(true))~
+    ...
+}
+```  
+
+假设现在进行渗透测试的一批目标中，分别添加特定的头 TestHeader，不同的测试目标的校验值不一样。
+
+那么这个时候就可以通过环境变量进行一次通用改造。
+```
+header = cli.String("header",cli.setPluginEnv("testheader"))
+cli.check()
+
+buildSmugglePacket = (host, newPacket) => {
+...
+}
+
+mirrorNewWebsite = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rsp /*[]byte*/, body /*[]byte*/) {
+    ...
+    payload = buildSmugglePacket(host, req)
+    println(payload)
+    ...
+    originResponse, req = poc.HTTP(standardPacket.Replace("REPLACEME_HOST", host), poc.https(isHttps),poc.replaceHeader("TestHeader", header))~
+    ...
+}
+```  
+
+改造之后此参数会在插件发送测试数据包的时候添加特定的请求头值，如需改动请求头值只需，修改环境变量配置即可，无需再改代码。
+
+修改完毕在配置页面可以看到有未配置的变量
+
+![](\articles\wechat2md-e0099c9fb757084b7c3d4bc20bcc2398.png)
+
+点击配置设置好环境变量之后执行插件，可以看到成功地进行请求头插入
+
+![](\articles\wechat2md-20542c2fdecf06753b38084ba59526d6.png)
+
+如果需要更换测试目标，只需要在配置页面替换即可。
+
+当然，这只是一个例子用来帮助社区用户快速了解插件环境变量的用途。
+
+实际工作中可以改造热加载插件，使用hijack系列的hook，达到”一处修改，全局生效“的效果，用户可以自行探索。
+
+
+
+**END**
+
+
+**YAK官方资源**
+
+
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit   
-视频教程：  
-https://space.bilibili.com/437503777Github  
-下载地址：  
-https://github.com/yaklang/yakitYakit  
-官网下载地址：  
-https://yaklang.com/Yakit  
-安装文档：  
-https://yaklang.com/products/download_and_install  
-Yakit使用文档：  
-https://yaklang.com/products/intro/  
-常见问题速查：  
-https://yaklang.com/products/FAQ  
+https://yaklang.com/docs/intro/Yakit 视频教程：  
+https://space.bilibili.com/437503777Github下载地址：  
+https://github.com/yaklang/yakitYakit官网下载地址：  
+https://yaklang.com/Yakit安装文档：  
+https://yaklang.com/products/download_and_installYakit使用文档：  
+https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/products/FAQ
+
+![](\articles\wechat2md-382b711760574d429c6c8742ecfc1d9b.png)
+
+![](\articles\wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
-![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
-长按识别添加工作人员
-开启Yakit进阶之旅  
-![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)
   
