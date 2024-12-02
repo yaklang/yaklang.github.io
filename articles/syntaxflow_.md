@@ -1,11 +1,11 @@
 #  你这SyntaxFlow，保熟吗？   
 原创 Yak  Yak Project   2024-11-01 17:30  
   
-![](\articles\wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
+![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 朋友，你还在苦苦寻觅代码审计更便捷的方式么？  
   
-![](\articles\wechat2md-7fe779cc6a661bc8a40d988ea655889c.png)  
+![](/articles/wechat2md-7fe779cc6a661bc8a40d988ea655889c.png)  
   
 本周不仅有  
 **Yakit SyntaxFlow界面上新**  
@@ -17,40 +17,40 @@
   
 谁说这代码审计老啊？这代码审计可太棒了！  
   
-![](\articles\wechat2md-94dca69ebf7899b3c0e4f01624fb439d.jpeg)  
+![](/articles/wechat2md-94dca69ebf7899b3c0e4f01624fb439d.jpeg)  
   
-![](\articles\wechat2md-3ef8a0cfe654499ea76424d7c463e36d.png)  
+![](/articles/wechat2md-3ef8a0cfe654499ea76424d7c463e36d.png)  
   
-![](\articles\wechat2md-babc2efe77cb9d8433eb8ecabf620d44.png)  
+![](/articles/wechat2md-babc2efe77cb9d8433eb8ecabf620d44.png)  
   
 **代码审计功能：项目管理**  
   
 点击代码审计功能会进入到项目管理页面， 在此页面将会展示已编译的所有项目，可以在操作中选择跳转到代码扫描页面或代码审计页面。  
   
-![](\articles\wechat2md-394168d6468ddc047d1363d20c56c78a.png)  
+![](/articles/wechat2md-394168d6468ddc047d1363d20c56c78a.png)  
   
 在此页面也可以在右上角开始编译新的项目，将会在编译完成以后自动跳转到代码审计页面：  
   
 代码审计页面如下：  
   
-![](\articles\wechat2md-22a6b0c582cb79bb91e2ef91b3880f92.png)  
+![](/articles/wechat2md-22a6b0c582cb79bb91e2ef91b3880f92.png)  
   
 可以看到类似之前的yakRunner内的代码扫描功能，调整了下文件系统和代码审计框的布局。  
   
-![](\articles\wechat2md-537c297579d241fbc262b21812fa4901.png)  
+![](/articles/wechat2md-537c297579d241fbc262b21812fa4901.png)  
   
 点击代码扫描功能，可以使用内置规则对已编译项目进行代码扫描：  
   
-![](\articles\wechat2md-15b045434942023439a1c295d0bb3e5f.png)  
+![](/articles/wechat2md-15b045434942023439a1c295d0bb3e5f.png)  
 - 在页面左侧为规则选择页面，目前支持内置规则和内置规则分组。  
   
 > 内置规则正在持续更新。接下来也会开放用户自定义规则、自定义规则分组的功能。  
   
 - 在页面中间可以通过下拉框选择已编译的项目，也可以通过右上角添加项目进行编译。  
   
-![](\articles\wechat2md-561416c5867c942b9e3caf6ae3a904e7.png)  
+![](/articles/wechat2md-561416c5867c942b9e3caf6ae3a904e7.png)  
   
-![](\articles\wechat2md-3bcdfa94d9f8d89f6942b084b7709612.png)  
+![](/articles/wechat2md-3bcdfa94d9f8d89f6942b084b7709612.png)  
   
 在选中规则以及项目以后可以开始扫描：  
   
@@ -69,34 +69,34 @@
   
 - 一般失败是因为执行或执行结果的保存失败，可以在日志中观察到失败的规则和其原因  
   
-![](\articles\wechat2md-cc59ae6415624c912ad88dd8ec738f8f.png)  
+![](/articles/wechat2md-cc59ae6415624c912ad88dd8ec738f8f.png)  
   
 在表格中，将会展示审计结果和漏洞风险。  
   
-![](\articles\wechat2md-e27f181afab58dea2596269e90db2e85.png)  
+![](/articles/wechat2md-e27f181afab58dea2596269e90db2e85.png)  
   
 审计结果默认仅展示风险个数大于0的审计结果。在扫描执行结束以后可以手动取消选中查看全部的规则，也可以对表内的等级等信息进行筛选。  
   
-![](\articles\wechat2md-4d4dcc9d5a38de1d23edd7912c9962d7.png)  
+![](/articles/wechat2md-4d4dcc9d5a38de1d23edd7912c9962d7.png)  
   
 表中的每一项都是一次审计的结果。其中出现风险个数的是有意义的审计结果。其中的每一项都可以查看信息：  
 - 操作中的终端图标将可以直接跳转到代码审计页面打开整个项目查看相关信息。  
   
 - 操作中的➡️图标将会用侧边栏打开并展示相关信息，此时也可以跳转到代码审计页面查看项目。  
   
-![](\articles\wechat2md-e42c940c641f19f1a7facaa5846656b5.png)  
+![](/articles/wechat2md-e42c940c641f19f1a7facaa5846656b5.png)  
   
 相关的操作与代码审计页面一致，查看审计的结果，审计的路径以及过程图。  
   
 值得注意的是如果当前展示的审计结果有相关漏洞与风险信息的话将会标注漏洞风险的bug图标，点击可以查看对应的漏洞风险信息。  
   
-![](\articles\wechat2md-681b8919fcc35c255b10a2cb576c2d23.png)  
+![](/articles/wechat2md-681b8919fcc35c255b10a2cb576c2d23.png)  
   
-![](\articles\wechat2md-acb94fc751faa74a7bd55f8bbf868686.png)  
+![](/articles/wechat2md-acb94fc751faa74a7bd55f8bbf868686.png)  
   
 漏洞与风险的数据展示如下：  
   
-![](\articles\wechat2md-d269b9395db4c0d6ccaf51aae15d6256.png)  
+![](/articles/wechat2md-d269b9395db4c0d6ccaf51aae15d6256.png)  
   
 和之前的漏洞与风险同样的操作逻辑，点击将会显示漏洞与风险信息。  
   
@@ -104,9 +104,9 @@
   
 代码扫描产生的漏洞与风险同样被保存在全局，如下图所示，将会在yakit顶栏出现通知，并且可以在全局数据库内看到：  
   
-![](\articles\wechat2md-c7258f2de9aa6a345e1b6d85b0b672d5.png)  
+![](/articles/wechat2md-c7258f2de9aa6a345e1b6d85b0b672d5.png)  
   
-![](\articles\wechat2md-2ae65ed92e788798b771b54dcc8f5594.png)  
+![](/articles/wechat2md-2ae65ed92e788798b771b54dcc8f5594.png)  
   
 **无需安装yakit**  
 ，在线启动代码审计？  
@@ -122,16 +122,16 @@ Hello from SSA.to | SSA.to
   
 全新风格平台，代码扫描启动！  
   
-![](\articles\wechat2md-10f451fc9964a6fb0de67a9567aabe41.png)  
+![](/articles/wechat2md-10f451fc9964a6fb0de67a9567aabe41.png)  
   
 AI协助研判，  
 代码片段快速分析，误报漏报一键反馈  
   
-![](\articles\wechat2md-b60646245637afb65d5fd4d8b70df681.png)  
+![](/articles/wechat2md-b60646245637afb65d5fd4d8b70df681.png)  
   
 教程详细，多个版本一站速通  
   
-![](\articles\wechat2md-aa1141297007ed5490a5263ecfbbe550.png)  
+![](/articles/wechat2md-aa1141297007ed5490a5263ecfbbe550.png)  
   
 Let's Start For Free！  
   
@@ -150,8 +150,8 @@ https://yaklang.com/products/download_and_installYakit使用文档：
 https://yaklang.com/products/intro/常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](\articles\wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   
-![](\articles\wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
   

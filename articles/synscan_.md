@@ -1,13 +1,13 @@
 #  嘿朋友，你想成为SYN扫描传奇吗？   
 原创 Yak  Yak Project   2024-11-15 17:31  
   
-![](\articles\wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
+![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 周五周五，敲锣打鼓！  
   
 周五周五，脱胎换骨！  
   
-![](\articles\wechat2md-45183062e7da4f3ff64df1995f4a83fb.png)  
+![](/articles/wechat2md-45183062e7da4f3ff64df1995f4a83fb.png)  
   
 等等，我知道你很急但你先别急  
   
@@ -15,9 +15,9 @@ SYN扫描原理 奇妙至极~
   
 朋友，想成为SYN扫描传奇吗？  
   
-![](\articles\wechat2md-ddf16f1039911f81029b4381e07925e1.png)  
+![](/articles/wechat2md-ddf16f1039911f81029b4381e07925e1.png)  
   
-![](\articles\wechat2md-5555b6d148204a48d108fc10b9187f7e.png)  
+![](/articles/wechat2md-5555b6d148204a48d108fc10b9187f7e.png)  
   
 **发送SYN包：**  
 扫描器向目标端口发送一个SYN（同步序列编号）数据包，它正试图建立一个正常的连接。  
@@ -34,9 +34,9 @@ SYN扫描原理 奇妙至极~
   
 使用 Wireshark 查看对IP 192.167.3.3的80端口进行SYN 扫描的数据包如下图：  
   
-![](\articles\wechat2md-276d755430bb25b2fe4d6c0d04559a63.png)  
+![](/articles/wechat2md-276d755430bb25b2fe4d6c0d04559a63.png)  
   
-![](\articles\wechat2md-3d04d44a881df1848577ff74c7823217.png)  
+![](/articles/wechat2md-3d04d44a881df1848577ff74c7823217.png)  
   
 要构建一个完整的数据包，需要按照协议栈的层次结构依次封装这些层。  
   
@@ -50,7 +50,7 @@ SYN扫描原理 奇妙至极~
   
 1. 数据负载（如果有的话）  
   
-![](\articles\wechat2md-1ed6b0901dc8d9afb58ff3a4b258f886.png)  
+![](/articles/wechat2md-1ed6b0901dc8d9afb58ff3a4b258f886.png)  
   
 对于 IP 和 TCP 头的构建，比较简单，只需要填写，源/目的IP(端口)，设置 TCP Flags，以及一些 Option。  
   
@@ -76,7 +76,7 @@ opts = append(opts,
 )
 ```  
   
-![](\articles\wechat2md-81230b6e71ef679a9efeb4312369ac63.png)  
+![](/articles/wechat2md-81230b6e71ef679a9efeb4312369ac63.png)  
   
 以太网帧头指的是在以太网层（或称为数据链路层）中，每个数据包开头的部分，用于定义数据包的一些基本属性。  
   
@@ -97,11 +97,11 @@ opts = append(opts,
   
 其中，源MAC地址就相当于是本机发包网卡的MAC地址，目的MAC地址则需要我们通过其他方法获取，因此在构建一个完整的数据包前，我们还需要一些前置工作。  
   
-![](\articles\wechat2md-0cff4c3b299f8fe6a12013778554a608.png)  
+![](/articles/wechat2md-0cff4c3b299f8fe6a12013778554a608.png)  
   
 路由表包含了一系列的路由条目，这些条目指导数据包如何从一个网络传输到另一个网络。  
   
-![](\articles\wechat2md-c5bc863e61ddf0b6b0b54471ce10926e.png)  
+![](/articles/wechat2md-c5bc863e61ddf0b6b0b54471ce10926e.png)  
   
 本地子网检测  
 ：  
@@ -111,7 +111,7 @@ opts = append(opts,
   
 对于同一个子网掩码地址内的两个内网IP通信相对简单，因为它们位于同一个局域网（LAN）内。这种情况下，数据包通常不需要经过路由器进行路由，而是直接通过交换机或者集线器在内部网络中传输。  
   
-![](\articles\wechat2md-9810c7fbb5a05d80dc3c813c0baa6926.png)  
+![](/articles/wechat2md-9810c7fbb5a05d80dc3c813c0baa6926.png)  
   
 **目的IP非本地子网：**  
 - 当数据包的目的IP地址不在同一子网时，设备必须通过一个或多个路由器发送数据包到目的地。  
@@ -161,7 +161,7 @@ IPv4 路由表
   
 1. 外网扫描时，目标IP 的MAC 地址通过 ARP 协议请求路由器 IP 获取。  
   
-![](\articles\wechat2md-9fe05b606658f55a02ca496aafceefca.png)  
+![](/articles/wechat2md-9fe05b606658f55a02ca496aafceefca.png)  
   
 通过前文得知，最终我们需要先通过构造ARP数据包来拿到相应的目的MAC地址。  
   
@@ -201,13 +201,13 @@ arp := layers.ARP{
 }
 ```  
   
-![](\articles\wechat2md-361d7ae804d6351480d805a583d0a032.png)  
+![](/articles/wechat2md-361d7ae804d6351480d805a583d0a032.png)  
   
-![](\articles\wechat2md-dba49271ce3ba112432e5f27f19fc93e.png)  
+![](/articles/wechat2md-dba49271ce3ba112432e5f27f19fc93e.png)  
   
 至此，我们已经完成了所有的前置工作，最终的关键扫描逻辑大致如下  
   
-![](\articles\wechat2md-58860b59286debac7f021f6d0502a346.png)  
+![](/articles/wechat2md-58860b59286debac7f021f6d0502a346.png)  
   
 ****  
 **END**  
@@ -224,8 +224,8 @@ https://yaklang.com/products/download_and_installYakit使用文档：
 https://yaklang.com/products/intro/常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](\articles\wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   
-![](\articles\wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
   
