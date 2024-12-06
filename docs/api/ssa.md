@@ -10,6 +10,7 @@ Yak|(consts.Language) &#34;yak&#34;|
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [ssa.NewFromProgramName](#newfromprogramname) ||
+| [ssa.NewProgramFromDB](#newprogramfromdb) ||
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
@@ -37,6 +38,27 @@ Yak|(consts.Language) &#34;yak&#34;|
 #### 定义
 
 `NewFromProgramName(programName string) (*Program, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| programName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Program` |   |
+| r2 | `error` |   |
+
+
+### NewProgramFromDB
+
+#### 详细描述
+
+
+#### 定义
+
+`NewProgramFromDB(programName string) (*Program, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

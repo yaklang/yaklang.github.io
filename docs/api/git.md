@@ -5,6 +5,9 @@
 | [git.Checkout](#checkout) |Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为  |
 | [git.Clone](#clone) |Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为  |
 | [git.Fetch](#fetch) |Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为  |
+| [git.FileSystemFromCommit](#filesystemfromcommit) |FileSystemFromCommit 从指定的commit中获取文件系统    |
+| [git.FileSystemFromCommitRange](#filesystemfromcommitrange) |FileSystemFromCommitRange 从commit范围中获取文件系统    |
+| [git.FileSystemFromCommits](#filesystemfromcommits) |FileSystemFromCommits 从多个commit中获取文件系统    |
 | [git.GitHack](#githack) |GitHack 是一个用于利用 Git 源码泄露漏洞的函数  Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露  |
 | [git.IterateCommit](#iteratecommit) |IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(commit)，并对过滤后的每个提交记录执行指定的操作，它还可以接收零个到多个选项函数，用于配置回调函数  |
 | [git.Pull](#pull) |Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合并到本地仓库中，这种行为称之为拉取(pull)，它还可以接收零个到多个选项函数，用于影响拉取行为  |
@@ -113,6 +116,99 @@ git.Fetch("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin"
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### FileSystemFromCommit
+
+#### 详细描述
+FileSystemFromCommit 从指定的commit中获取文件系统
+
+
+
+Example:
+```
+fs := git.FileSystemFromCommit("path/to/repo", "2871a988b2ed7ec10a1fd45eca248a96a99a8560")~
+fs, err := git.FileSystemFromCommit("path/to/repo", "2871a988b2ed7ec10a1fd45eca248a96a99a8560")
+```
+
+
+#### 定义
+
+`FileSystemFromCommit(repos string, commitHash string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| commitHash | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemFromCommitRange
+
+#### 详细描述
+FileSystemFromCommitRange 从commit范围中获取文件系统
+
+
+
+Example:
+```
+fs := git.FileSystemFromCommitRange("path/to/repo", "2871a988b2ed7ec10a1fd45eca248a96a99a8560", "54165a396a219d085980dca623ae1ff6582033ad")~
+```
+
+
+#### 定义
+
+`FileSystemFromCommitRange(repos string, start string, end string) (*filesys.VirtualFS, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| start | `string` |   |
+| end | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*filesys.VirtualFS` |   |
+| r2 | `error` |   |
+
+
+### FileSystemFromCommits
+
+#### 详细描述
+FileSystemFromCommits 从多个commit中获取文件系统
+
+
+
+Example:
+```
+fs := git.FileSystemFromCommits("path/to/repo", "2871a988b2ed7ec10a1fd45eca248a96a99a8560", "54165a396a219d085980dca623ae1ff6582033ad")~
+fs, err := git.FileSystemFromCommits("path/to/repo", "54165a396a219d085980dca623ae1ff6582033ad", "2871a988b2ed7ec10a1fd45eca248a96a99a8560")
+```
+
+
+#### 定义
+
+`FileSystemFromCommits(repos string, commitHashes ...string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| commitHashes | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
 
 
 ### GitHack
