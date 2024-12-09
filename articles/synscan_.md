@@ -89,10 +89,10 @@ opts = append(opts,
 1. **类型/长度字段（Type/Length Field）：**  
 字段可以是两种形式之一：  
   
-- **类型（Type）****：**  
+- **类型（Type）：**  
 表示随后数据包内容的协议类型（如IPv4, IPv6, ARP等），通常使用2字节来表示。  
   
-- **长度（Length）****：**  
+- **长度（Length）：**  
 在某些协议（如IEEE 802.3）中，这个字段表示数据字段的长度。  
   
 其中，源MAC地址就相当于是本机发包网卡的MAC地址，目的MAC地址则需要我们通过其他方法获取，因此在构建一个完整的数据包前，我们还需要一些前置工作。  
@@ -103,8 +103,7 @@ opts = append(opts,
   
 ![](/articles/wechat2md-c5bc863e61ddf0b6b0b54471ce10926e.png)  
   
-本地子网检测  
-：  
+本地子网检测：  
 - 当数据包的目的IP地址与源IP地址处于同一子网时，即目的地址与源地址的网络部分相同（根据子网掩码计算），这被认为是内网路由。  
   
 例如，如果源IP是192.168.1.100，子网掩码是255.255.255.0，目的IP是192.168.1.101，那么这两个IP都在192.168.1.0/24网络内。  
@@ -211,21 +210,24 @@ arp := layers.ARP{
   
 ****  
 **END**  
-  
- **YAK官方资源**  
-  
-  
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
   
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif) 
   
   

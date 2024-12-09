@@ -9,9 +9,7 @@
   
 虽然没能拿下阿美利卡总统之位  
   
-但是牛牛的  
-**热加载**功能，却能轻松拿下  
-**验证码的识别与爆破**  
+但是牛牛的**热加载**功能，却能轻松拿下**验证码的识别与爆破**  
   
 ![](/articles/wechat2md-15188eeeaf0c79d60b92b341f1486886.jpeg)  
   
@@ -28,9 +26,7 @@
   
 ![](/articles/wechat2md-f5b088e2dfd6190597b9696a177cab58.png)  
   
-那么，Yakit的热加载如何进行验证码爆破呢？答案是我们需要让热加载参与到  
-**客户端请求验证码**、**客户端接收验证码**  
-和**客户端发送验证码**的生命周期中。如下图所示：  
+那么，Yakit的热加载如何进行验证码爆破呢？答案是我们需要让热加载参与到**客户端请求验证码**、**客户端接收验证码**和**客户端发送验证码**的生命周期中。如下图所示：  
   
 ![](/articles/wechat2md-bb53cf22379e0f1d33d7c5e79ddd4228.png)  
 - 客户端请求验证码：在这个阶段，我们可以使用poc库发送HTTP请求，请求一份验证码。  
@@ -128,28 +124,32 @@ beforeRequest = func(req) {
   
 一本书带你CDSL-YAK从入门到起飞  
   
-直戳即可查看详情⬇️  
+jd搜索关键词：CDSL-YAK 
   
   
   
 ****  
   
-  
- **YAK官方资源**  
-  
-  
+ **END**  
+**YAK官方资源**  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-8764ec1e71cc199b4b0b0bfb3a12e542.other)  
   
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif) 
   
   
   
