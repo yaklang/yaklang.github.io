@@ -47,7 +47,7 @@ jobs:
       - name: Use Node.js 
         uses: actions/setup-node@v3
         with:
-          node-version: 16.13
+          node-version: 18.12
 
       # 打包
       - name: build
