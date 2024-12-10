@@ -97,9 +97,7 @@ JavaScript 签名的算法可能用的算法库一般不需要用户手动实现
         <button id="submit" type="submit" class="btn btn-primary">Submit</button>
     </form>
 ```  
-```
 
-```  
   
 我们要记住 id='json-form'  
 这个表格内的内容，，在验签的时候，多半是需要操作 DOM 元素取值计算的。细心的读者可能发现了，这个表格和我们有时候见到的表格是不一样的，他没有action  
@@ -120,13 +118,13 @@ JavaScript 签名的算法可能用的算法库一般不需要用户手动实现
   
 表单只提交到当前页面使用默认的 method 方法  
   
-在看页面内容中，我们发现 <script>  
+在看页面内容中，我们发现 &lt;script&gt;
 中有一段 JavaScript 代码比较明显，从generateKey  
 到Encrypt  
 和Decrypt  
 应有尽有，这个很明显这个表单就是通过 JS 去操作的了。  
 > 重新整理一下思路我们想到，JS 操作表单提交数据的话，一般有几种方式？笔者在这里列出一些基础的特性，大家可以有一个印象：  
-> 通过创建一个form元素然后执行他的submit方法来实现，一般来说特征代码是使用 constform Instance = document.createElement("form"); ... ;formInstance.submit()使用 AJAX：var xhr = new XMLHttpRequest(); ... xhr.open("POST", '/submit', true);使用 jQuery Ajax：$.ajax(...)通过 JavaScript fetch 函数实现使用第三方库例如Axios API实现  
+> 通过创建一个form元素然后执行他的submit方法来实现，一般来说特征代码是使用 `constform Instance = document.createElement("form"); ... ;formInstance.submit()`使用 `AJAX：var xhr = new XMLHttpRequest(); ... xhr.open("POST", '/submit', true);`使用 `jQuery Ajax：$.ajax(...)`通过 JavaScript fetch 函数实现使用第三方库例如Axios API实现  
   
   
 ![](/articles/wechat2md-6ed1830e75f159d65ee8af8d9722edd7.png)  
@@ -149,8 +147,7 @@ JavaScript 签名的算法可能用的算法库一般不需要用户手动实现
   
 **03**  
   
-**03**  
-  
+
   
   
   
@@ -259,7 +256,7 @@ signRequest = result => {
   
   
 对于AES的CBC模式和ECB模式，我们需要知道他们的**区别和联系**才能方便后面的计算：  
-<table><colgroup><col width="173"/><col width="226"/><col width="210"/></colgroup><tbody><tr style="height:39px;"><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">加密方式</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">AES-CBC</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">AES-ECB</span></p></td></tr><tr style="height:39px;"><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">IV（初始块）</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">需要</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">不需要</span></p></td></tr><tr style="height:39px;"><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">KEY 的长度</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">16/24/32 字节</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">16/24/32 字节</span></p></td></tr><tr style="height:39px;"><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">加密后特征</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">与前一个密文进行异或，明文块相同，密文不一定相同</span></p></td><td colspan="1" rowspan="1" style="border-color: rgb(222, 224, 227);font-size: 10pt;"><p><span style="font-size: 13px;">明文是静态的 - 两个明文相同，那么他们密文也相同</span></p></td></tr></tbody></table>  
+明文是静态的 - 两个明文相同，那么他们密文也相同
 对于 CryptoJS 来说，我们需要记住下面几个易错点：  
   
 **01**  
@@ -267,8 +264,8 @@ signRequest = result => {
   
   
   
-key = CryptoJS.enc.Utf8.parse(...) 是常见的构建加密密钥的代码，通过这种方式构建出来的代码，直接调用   
-key.toString()得到的数据实际上是原值进行  
+`key = CryptoJS.enc.Utf8.parse(...) `是常见的构建加密密钥的代码，通过这种方式构建出来的代码，直接调用   
+`key.toString()`得到的数据实际上是原值进行  
 **十六进制编码**的结果  
   
 **02**  
@@ -277,18 +274,17 @@ key.toString()得到的数据实际上是原值进行
   
   
 如果想要得到key的Base64编码需要  
-key.toString(CryptoJS.enc.Base64)  
+`key.toString(CryptoJS.enc.Base64)`
   
 **03**  
-  
-**03**  
+
   
   
   
   
   
 如果需要得到最原始的 key 的值（Utf8），则需要  
-key.toString(CryptoJS.enc.Utf8)  
+`key.toString(CryptoJS.enc.Utf8) ` 
   
 **04**  
   
@@ -355,9 +351,7 @@ aescbc = result => {
     return string(result)
 }
 ```  
-```
 
-```  
   
 这个加密函数其实非常简单，我们放入热加载代码之后，调试出一个可用的 Payload，然后再 Web Fuzzer 种尝试进行爆破；检查一批发送成功的结果。  
   
