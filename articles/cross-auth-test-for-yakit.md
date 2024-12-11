@@ -3,9 +3,7 @@
 
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)
 
-周  
-四周四，  
-Vme50(bushi
+周四周四，Vme50(bushi
 
 大家好，这里是疯狂超级牛（功能上新版）
 
@@ -19,9 +17,7 @@ Vme50(bushi
 
 超级牛听到了广大用户的声音，默默地拿起了鞭子，走向开发团队...
 
-于是！  
-**插件全局变量配置功能**  
-，上新！
+于是！**插件全局变量配置功能** ，上新！
 
 那么如何具体使用此功能来配置插件的环境变量呢？
 
@@ -61,17 +57,13 @@ key = cli.String("key", cli.setPluginEnv("api-key"))
 
 ![](/articles/wechat2md-ebe23df29491b7cec345f26b5f5e29d3.png)
 
-这里的配置页面拥有  
-完整的对环境变量的增删改查能力。可以新建环境变量，即使没有插件使用。
+这里的配置页面拥有完整的对环境变量的增删改查能力。可以新建环境变量，即使没有插件使用。
 
 ![](/articles/wechat2md-8f1aaea01d4fa3ca6da42ff5dc2a7c07.png)
 
-需要说明的是变量是  
-**可以支持空值**的，  
-**这与没有环境变量并不等价。**
+需要说明的是变量是**可以支持空值**的，**这与没有环境变量并不等价。**
 
-![](/articles/wechat2md-cd2cc4afc7fd915eafc2b6c3cea555a4.png)
-##   
+![](/articles/wechat2md-cd2cc4afc7fd915eafc2b6c3cea555a4.png) 
 
 这部分的配置是为了方便使用做出的针对单个插件的简单版配置
 
@@ -147,23 +139,25 @@ mirrorNewWebsite = func(isHttps /*bool*/, url /*string*/, req /*[]byte*/, rsp /*
 
 
 
-**END**
-
-
-**YAK官方资源**
-
-
+**YAK官方资源**  
+  
+  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
-https://yaklang.com/products/FAQ
-
-![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)
-
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777Github  
+下载地址：  
+https://github.com/yaklang/yakitYakit  
+官网下载地址：  
+https://yaklang.com/Yakit  
+安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
+https://yaklang.com/products/FAQ  
   
-  
+![](/articles/wechat2md-85062b6e6c63b9d9d17d1e2a5ca2ec01.other)  
+长按识别添加工作人员  
+开启Yakit进阶之旅  
+![](/articles/wechat2md-14665f86963c7c123b43378ebc55bb0f.other)  
