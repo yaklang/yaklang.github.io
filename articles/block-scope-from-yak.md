@@ -1,6 +1,4 @@
-#  Yak 中的块作用域
-原创 Yhellow  Yak Project   2024-09-20 14:36  
-  
+#  Yak 中的块作用域  
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
 ##   
 家人们早上好呀  

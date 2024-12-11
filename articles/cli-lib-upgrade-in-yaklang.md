@@ -1,5 +1,4 @@
 #  CLI参数助力MITM插件升级，起飞！   
-原创 rookie  Yak Project   2024-08-02 17:30  
   
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
 ![](/articles/wechat2md-b904917540c9ce445abf66c529954953.png)  
