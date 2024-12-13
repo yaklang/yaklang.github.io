@@ -15,6 +15,7 @@
 | [cli.Host](#host) |Host 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
 | [cli.Hosts](#hosts) |Hosts 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
 | [cli.Int](#int) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
+| [cli.IntSlice](#intslice) |IntSlice 获取对应名称的命令行参数，将其字符串根据&amp;#34;,&amp;#34;切割并尝试转换为 int 类型返回 []int 类型 |
 | [cli.Integer](#integer) |Integer 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
 | [cli.Json](#json) |JsonSchema 获取对应名称的命令行参数|
 | [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数 根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型 |
@@ -380,6 +381,32 @@ port = cli.Int("port") // --port 80 则 port 为 80
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `int` |   |
+
+
+### IntSlice
+
+#### 详细描述
+IntSlice 获取对应名称的命令行参数，将其字符串根据&#34;,&#34;切割并尝试转换为 int 类型返回 []int 类型
+Example:
+```
+ports = cli.IntSlice("ports")
+// --ports 80,443,8080 则 ports 为 [80, 443, 8080]
+```
+
+#### 定义
+
+`IntSlice(name string, options ...SetCliExtraParam) []int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| options | `...SetCliExtraParam` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]int` |   |
 
 
 ### Integer

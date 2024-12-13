@@ -26,6 +26,7 @@
 | [risk.RegisterBeforeRiskSave](#registerbeforerisksave) ||
 | [risk.Save](#save) |Save 将漏洞记录结构体保存到数据库中其通常与 CreateRisk 一起使用  |
 | [risk.YieldRiskByCreateAt](#yieldriskbycreateat) |YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道  |
+| [risk.YieldRiskByIds](#yieldriskbyids) |YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByRuntimeId](#yieldriskbyruntimeid) |YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByScriptName](#yieldriskbyscriptname) |YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByTarget](#yieldriskbytarget) |YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记录的管道  |
@@ -223,7 +224,7 @@ DeleteRiskByTarget 根据目标(ip或ip:port)删除风险记录
 
 Example:
 ```
-DeleteRiskByTarget("example.com")
+risk.DeleteRiskByTarget("example.com")
 ```
 
 
@@ -348,7 +349,7 @@ NewLocalReverseHTTPSUrl 返回一个本地 Bridge 的反向 HTTPS URL
 
 Example:
 ```
-url := NewLocalReverseHTTPSUrl()
+url := risk.NewLocalReverseHTTPSUrl()
 ```
 
 
@@ -369,7 +370,7 @@ NewLocalReverseHTTPUrl 返回一个本地 Bridge 的反向 HTTP URL
 
 Example:
 ```
-url := NewLocalReverseHTTPUrl()
+url := risk.NewLocalReverseHTTPUrl()
 ```
 
 
@@ -390,7 +391,7 @@ NewLocalReverseRMIUrl 返回一个本地 Bridge 的反向 RMI URL
 
 Example:
 ```
-url := NewLocalReverseRMIUrl()
+url := risk.NewLocalReverseRMIUrl()
 ```
 
 
@@ -411,7 +412,7 @@ NewPublicReverseHTTPSUrl 返回一个公网 Bridge 的反向 HTTPS URL
 
 Example:
 ```
-url := NewPublicReverseHTTPSUrl()
+url := risk.NewPublicReverseHTTPSUrl()
 ```
 
 
@@ -432,7 +433,7 @@ NewPublicReverseHTTPUrl 返回一个公网 Bridge 的反向 HTTP URL
 
 Example:
 ```
-url := NewPublicReverseHTTPUrl()
+url := risk.NewPublicReverseHTTPUrl()
 ```
 
 
@@ -453,7 +454,7 @@ NewPublicReverseRMIUrl 返回一个公网 Bridge 的反向 RMI URL
 
 Example:
 ```
-url := NewPublicReverseRMIUrl()
+url := risk.NewPublicReverseRMIUrl()
 ```
 
 
@@ -584,7 +585,7 @@ YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录
 Example:
 ```
 ts = time.Parse("2006-01-02 15:04:05", "2020-01-01 00:00:00")~.Unix()
-for risk := range YieldRiskByCreateAt(ts) {
+for risk := range risk.YieldRiskByCreateAt(ts) {
 println(risk)
 }
 ```
@@ -605,6 +606,34 @@ println(risk)
 | r1 | `chan *schema.Risk` |   |
 
 
+### YieldRiskByIds
+
+#### 详细描述
+YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道
+
+Example:
+```
+for risk := range risk.YieldRiskByIds([1,2,3]) {
+println(risk)
+}
+```
+
+
+#### 定义
+
+`YieldRiskByIds(ids []int) chan *schema.Risk`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ids | `[]int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.Risk` |   |
+
+
 ### YieldRiskByRuntimeId
 
 #### 详细描述
@@ -612,7 +641,7 @@ YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的
 
 Example:
 ```
-for risk := range YieldRiskByRuntimeId("161c5372-3e75-46f6-a6bf-1a3182da625e") {
+for risk := range risk.YieldRiskByRuntimeId("161c5372-3e75-46f6-a6bf-1a3182da625e") {
 println(risk)
 }
 ```
@@ -640,7 +669,7 @@ YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录�
 
 Example:
 ```
-for risk := range YieldRiskByScriptName("基础 XSS 检测") {
+for risk := range risk.YieldRiskByScriptName("基础 XSS 检测") {
 println(risk)
 }
 ```
@@ -668,7 +697,7 @@ YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记
 
 Example:
 ```
-for risk := range YieldRiskByTarget("example.com") {
+for risk := range risk.YieldRiskByTarget("example.com") {
 println(risk)
 }
 ```
