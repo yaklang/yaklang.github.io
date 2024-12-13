@@ -1,6 +1,4 @@
-#  闭包处理问题？真是自己→吓↓自己↙   
-原创 Yak  Yak Project   2024-12-12 17:30  
-  
+#  Yaklang中的闭包与side-effect     
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 之前的文章中曾经和大家讨论过**Yaklang对块作用域的处理**  
