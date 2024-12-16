@@ -231,10 +231,12 @@ func main(){
 ```   
   
 在这个样例中的 f 可能生成 side-effect 也可能不生成，因此应该生成一个**phi(freevalue,2)**。而 freevalue 只是一个占位符，它将在该闭包被调用时替换为绑定变量在当前作用域中的值。  
-  
-目前该功能正在实现中，敬请期待后续版本。  
-  
-  
+
+关于更多SSA闭包特性内容，可以参考`SSA To`相关文档:
+https://ssa.to/static-analysis-guide/deep-dive-into-ssa-closure
+
+
+
 **END**  
   
  **YAK官方资源**  
