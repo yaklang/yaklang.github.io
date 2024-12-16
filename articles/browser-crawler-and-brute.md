@@ -1,6 +1,4 @@
-# Yakit 中使用浏览器爆破的爆破插件
-bcy  Yak Project   2024-03-28 17:30  
-  
+# Yakit 中使用浏览器爆破的爆破插件  
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
 ****  
 ![](/articles/wechat2md-c758c62e2096e61428a36454c2cd72ed.jpeg)  
