@@ -1,5 +1,19 @@
 # cli
 
+|实例名|实例描述|
+|:------|:--------|
+uiPosDefault|(cli.UISchemaFieldClassName) &#34;&#34;|
+uiPosHorizontal|(cli.UISchemaFieldClassName) &#34;json-schema-row-form&#34;|
+uiWidgetCheckbox|(cli.UISchemaWidgetType) &#34;checkbox&#34;|
+uiWidgetFile|(cli.UISchemaWidgetType) &#34;file&#34;|
+uiWidgetFiles|(cli.UISchemaWidgetType) &#34;files&#34;|
+uiWidgetFolder|(cli.UISchemaWidgetType) &#34;folder&#34;|
+uiWidgetPassword|(cli.UISchemaWidgetType) &#34;password&#34;|
+uiWidgetRadio|(cli.UISchemaWidgetType) &#34;radio&#34;|
+uiWidgetSelect|(cli.UISchemaWidgetType) &#34;select&#34;|
+uiWidgetTextarea|(cli.UISchemaWidgetType) &#34;textarea&#34;|
+uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [cli.Args](#args) ||
@@ -17,7 +31,7 @@
 | [cli.Int](#int) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
 | [cli.IntSlice](#intslice) |IntSlice 获取对应名称的命令行参数，将其字符串根据&amp;#34;,&amp;#34;切割并尝试转换为 int 类型返回 []int 类型 |
 | [cli.Integer](#integer) |Integer 获取对应名称的命令行参数，并将其转换为 int 类型返回 |
-| [cli.Json](#json) |JsonSchema 获取对应名称的命令行参数|
+| [cli.Json](#json) |Json 获取对应名称的命令行参数, 与cli.JsonSchema一起使用以构建复杂参数 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/ |
 | [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数 根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型 |
 | [cli.Net](#net) |Net 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
 | [cli.Network](#network) |NetWork 获取对应名称的命令行参数，根据&amp;#34;,&amp;#34;切割并尝试解析CIDR网段并返回 []string 类型 |
@@ -40,16 +54,25 @@
 | [cli.setCliGroup](#setcligroup) |setCliGroup 是一个选项函数，设置参数的分组 |
 | [cli.setDefault](#setdefault) |setDefault 是一个选项函数，设置参数的默认值 |
 | [cli.setHelp](#sethelp) |setHelp 是一个选项函数，设置参数的帮助信息 这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示 |
-| [cli.setJsonSchema](#setjsonschema) ||
+| [cli.setJsonSchema](#setjsonschema) |setJsonSchema 是一个选项参数,用于在cli.Json中使用JsonSchema构建复杂参数 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/ |
 | [cli.setMultipleSelect](#setmultipleselect) |SetMultipleSelect 是一个选项函数，设置参数是否可以多选 此选项仅在`cli.StringSlice`中生效 |
 | [cli.setPluginEnv](#setpluginenv) |setPluginEnv 是一个选项函数，设置参数从插件环境中取值 |
 | [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须 |
 | [cli.setSelectOption](#setselectoption) |setSelectOption 是一个选项函数，设置参数的下拉框选项 此选项仅在`cli.StringSlice`中生效 |
 | [cli.setShortName](#setshortname) |setShortName 是一个选项函数，设置参数的短名称 |
+| [cli.setUISchema](#setuischema) |setUISchema 是一个选项参数,用于对JsonSchema设置的参数进行图形化的调整 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/ 3. https://...|
 | [cli.setVerboseName](#setverbosename) |setVerboseName 是一个选项函数，设置参数的中文名 |
 | [cli.setYakitPayload](#setyakitpayload) |setYakitPayload 是一个选项函数，设置参数建议值为Yakit payload的字典名列表 |
 | [cli.showGroup](#showgroup) ||
 | [cli.showParams](#showparams) ||
+| [cli.uiField](#uifield) |uiField 是一个选项参数,用于指定UISchema中的一个字段 第一个参数指定字段名 第二个参数指定这个字段所占的宽度比(0.0-1.0) 接下来可以接收零个到多个选项，用于对此字段进行其他的设置,例如内嵌分组(cli.uiFieldGroups)或者指定其部件(cli.uiFieldWidg...|
+| [cli.uiFieldComponentStyle](#uifieldcomponentstyle) |uiFieldComponentStyle 是一个选项参数,用于指定UISchema中的CSS样式 |
+| [cli.uiFieldGroups](#uifieldgroups) |uiFieldGroups 是一个选项参数,用于设置UISchema中字段的嵌套组 |
+| [cli.uiFieldPosition](#uifieldposition) |uiFieldPosition 是一个选项参数,用于指定UISchema中的字段位置,默认为垂直排列 |
+| [cli.uiFieldWidget](#uifieldwidget) |uiFieldWidget 是一个选项参数,用于指定UISchema中的字段使用的组件 |
+| [cli.uiGlobalFieldPosition](#uiglobalfieldposition) |uiGlobalFieldPosition 是一个选项参数,用于指定UISchema中全局的字段位置,默认为垂直排列 |
+| [cli.uiGroup](#uigroup) |uiGroup 是一个选项参数,用于指定UISchema中的一个分组,接收多个字段(cli.Field),同一分组的字段会放在一行 |
+| [cli.uiGroups](#uigroups) |uiGroups 是一个选项参数,用于指定UISchema中的字段整体分组,接受多个分组(cli.uiGroup) |
 | [cli.when](#when) ||
 | [cli.whenDefault](#whendefault) ||
 | [cli.whenEqual](#whenequal) ||
@@ -437,7 +460,20 @@ port = cli.Integer("port") // --port 80 则 port 为 80
 ### Json
 
 #### 详细描述
-JsonSchema 获取对应名称的命令行参数
+Json 获取对应名称的命令行参数, 与cli.JsonSchema一起使用以构建复杂参数
+详情参考:
+1. https://json-schema.org/docs
+2. https://rjsf-team.github.io/react-jsonschema-form/
+Example:
+```
+info = cli.Json("info",
+cli.setVerboseName("项目信息"),
+cli.setJsonSchema(<<<JSON
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,cli.setUISchema()),
+)
+cli.check()
+```
 
 #### 定义
 
@@ -976,16 +1012,30 @@ cli.String("target", cli.SetHelp("target host or ip"))
 ### setJsonSchema
 
 #### 详细描述
-
+setJsonSchema 是一个选项参数,用于在cli.Json中使用JsonSchema构建复杂参数
+详情参考:
+1. https://json-schema.org/docs
+2. https://rjsf-team.github.io/react-jsonschema-form/
+Example:
+```
+info = cli.Json("info",
+cli.setVerboseName("项目信息"),
+cli.setJsonSchema(<<<JSON
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,cli.setUISchema()),
+)
+cli.check()
+```
 
 #### 定义
 
-`setJsonSchema(schema string) SetCliExtraParam`
+`setJsonSchema(schema string, uis ...*UISchema) SetCliExtraParam`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | schema | `string` |   |
+| uis | `...*UISchema` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1117,6 +1167,55 @@ cli.String("target", cli.setShortName("t"))
 | r1 | `SetCliExtraParam` |   |
 
 
+### setUISchema
+
+#### 详细描述
+setUISchema 是一个选项参数,用于对JsonSchema设置的参数进行图形化的调整
+详情参考:
+1. https://json-schema.org/docs
+2. https://rjsf-team.github.io/react-jsonschema-form/
+3. https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema/
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1)),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`setUISchema(params ...UISchemaParams) *UISchema`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| params | `...UISchemaParams` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*UISchema` |   |
+
+
 ### setVerboseName
 
 #### 详细描述
@@ -1203,6 +1302,378 @@ cli.String("dictName", cli.setYakitPayload(true))
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `UIParams` |   |
+
+
+### uiField
+
+#### 详细描述
+uiField 是一个选项参数,用于指定UISchema中的一个字段
+第一个参数指定字段名
+第二个参数指定这个字段所占的宽度比(0.0-1.0)
+接下来可以接收零个到多个选项，用于对此字段进行其他的设置,例如内嵌分组(cli.uiFieldGroups)或者指定其部件(cli.uiFieldWidget)
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1)),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiField(name string, widthPercent float64, opts ...UISchemaFieldParams) *uiSchemaField`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| widthPercent | `float64` |   |
+| opts | `...UISchemaFieldParams` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*uiSchemaField` |   |
+
+
+### uiFieldComponentStyle
+
+#### 详细描述
+uiFieldComponentStyle 是一个选项参数,用于指定UISchema中的CSS样式
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField(
+	            "telephone",
+	            1,
+	            cli.uiFieldComponentStyle({"width": "50%"}),
+	        )),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiFieldComponentStyle(css map[string]any) UISchemaFieldParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| css | `map[string]any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaFieldParams` |   |
+
+
+### uiFieldGroups
+
+#### 详细描述
+uiFieldGroups 是一个选项参数,用于设置UISchema中字段的嵌套组
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A list of tasks","type":"object","required":["title"],"properties":{"title":{"type":"string","title":"Task list title"},"tasks":{"type":"array","title":"Tasks","items":{"type":"object","required":["title"],"properties":{"title":{"type":"string","title":"Title","description":"A sample title"},"details":{"type":"string","title":"Task details","description":"Enter the task details"},"done":{"type":"boolean","title":"Done?","default":false}}}}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(cli.uiField("title", 1)),
+	        cli.uiGroup(cli.uiField(
+	            "tasks",
+	            1,
+	            cli.uiFieldGroups(cli.uiGroup(cli.uiField(
+	                "items",
+	                1,
+	                cli.uiFieldGroups(
+	                    cli.uiGroup(cli.uiField("title", 1)),
+	                    cli.uiGroup(cli.uiField("details", 1, cli.uiFieldWidget(cli.uiWidgetTextarea))),
+	                    cli.uiGroup(cli.uiField("done", 1)),
+	                ),
+	            ))),
+	        )),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiFieldGroups(groups ...uiSchemaGroup) UISchemaFieldParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| groups | `...uiSchemaGroup` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaFieldParams` |   |
+
+
+### uiFieldPosition
+
+#### 详细描述
+uiFieldPosition 是一个选项参数,用于指定UISchema中的字段位置,默认为垂直排列
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1, cli.uiFieldPosition(cli.uiPosHorizontal))),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiFieldPosition(position UISchemaFieldClassName) UISchemaFieldParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| position | `UISchemaFieldClassName` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaFieldParams` |   |
+
+
+### uiFieldWidget
+
+#### 详细描述
+uiFieldWidget 是一个选项参数,用于指定UISchema中的字段使用的组件
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1)),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiFieldWidget(widget UISchemaWidgetType) UISchemaFieldParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| widget | `UISchemaWidgetType` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaFieldParams` |   |
+
+
+### uiGlobalFieldPosition
+
+#### 详细描述
+uiGlobalFieldPosition 是一个选项参数,用于指定UISchema中全局的字段位置,默认为垂直排列
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGlobalFieldPosition(cli.uiPosHorizontal)),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiGlobalFieldPosition(style UISchemaFieldClassName) UISchemaParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| style | `UISchemaFieldClassName` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaParams` |   |
+
+
+### uiGroup
+
+#### 详细描述
+uiGroup 是一个选项参数,用于指定UISchema中的一个分组,接收多个字段(cli.Field),同一分组的字段会放在一行
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1)),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiGroup(fields ...uiSchemaField) *uiSchemaGroup`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| fields | `...uiSchemaField` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*uiSchemaGroup` |   |
+
+
+### uiGroups
+
+#### 详细描述
+uiGroups 是一个选项参数,用于指定UISchema中的字段整体分组,接受多个分组(cli.uiGroup)
+Example:
+```
+info = cli.Json(
+
+	"info",
+	cli.setVerboseName("项目信息"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"title":"A registration form","description":"A simple form example.","type":"object","required":["firstName","lastName"],"properties":{"name":{"type":"string","title":"Name","default":"Chuck"},"password":{"type":"string","title":"Password","minLength":3},"telephone":{"type":"string","title":"Telephone","minLength":10}}}
+JSON,
+
+	    cli.setUISchema(cli.uiGroups(
+	        cli.uiGroup(
+	            cli.uiField("name", 0.5),
+	            cli.uiField("password", 0.5, cli.uiFieldWidget(cli.uiWidgetPassword)),
+	        ),
+	        cli.uiGroup(cli.uiField("telephone", 1)),
+	    )),
+	),
+
+cli.setRequired(true),
+)
+cli.check()
+```
+
+#### 定义
+
+`uiGroups(groups ...uiSchemaGroup) UISchemaParams`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| groups | `...uiSchemaGroup` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `UISchemaParams` |   |
 
 
 ### when

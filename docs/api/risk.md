@@ -23,6 +23,7 @@
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) |NewRandomPortTrigger 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误  |
 | [risk.NewRisk](#newrisk) ||
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) ||
+| [risk.QueryRisksByKeyword](#queryrisksbykeyword) |QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道  |
 | [risk.RegisterBeforeRiskSave](#registerbeforerisksave) ||
 | [risk.Save](#save) |Save 将漏洞记录结构体保存到数据库中其通常与 CreateRisk 一起使用  |
 | [risk.YieldRiskByCreateAt](#yieldriskbycreateat) |YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道  |
@@ -35,6 +36,7 @@
 | [risk.details](#details) |details 是一个选项参数，用于指定风险记录的详细信息  |
 | [risk.fromYakScript](#fromyakscript) |fromScript 是一个选项参数，用于指定风险记录的来源插件名  |
 | [risk.ignore](#ignore) ||
+| [risk.ip](#ip) ||
 | [risk.level](#level) |severity 是一个选项参数，用于指定风险记录的严重程度  可用的严重程度有: critical, high, warning, info, low  |
 | [risk.parameter](#parameter) |parameter 是一个选项参数，用于指定风险记录的参数  |
 | [risk.payload](#payload) |payload 是一个选项参数，用于指定漏洞记录的载荷(payload)  |
@@ -44,6 +46,7 @@
 | [risk.runtimeId](#runtimeid) |runtimeId 是一个选项参数，用于指定风险记录的运行时 ID  |
 | [risk.severity](#severity) |severity 是一个选项参数，用于指定风险记录的严重程度  可用的严重程度有: critical, high, warning, info, low  |
 | [risk.solution](#solution) |solution 是一个选项参数，用于指定漏洞记录的解决方案  |
+| [risk.tag](#tag) ||
 | [risk.title](#title) |title 是一个选项参数，用于指定漏洞记录的标题  |
 | [risk.titleVerbose](#titleverbose) |titleVerbose 是一个选项参数，用于指定漏洞记录的详细标题  |
 | [risk.token](#token) |token 是一个选项参数，用于指定风险记录的反连 token  |
@@ -535,6 +538,35 @@ token, addr = risk.NewRandomPortTrigger()~
 | r2 | `error` |   |
 
 
+### QueryRisksByKeyword
+
+#### 详细描述
+QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道
+
+Example:
+```
+for risk := range risk.QueryRisksByKeyword("SQL注入", risk.severity("high")) {
+println(risk)
+}
+```
+
+
+#### 定义
+
+`QueryRisksByKeyword(keyword string, opts ...yakit.RiskParamsOpt) chan *schema.Risk`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyword | `string` |   |
+| opts | `...yakit.RiskParamsOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.Risk` |   |
+
+
 ### RegisterBeforeRiskSave
 
 #### 详细描述
@@ -837,6 +869,26 @@ risk.NewRisk(target, risk.fromScript("plugin_name"))
 | r | `*schema.Risk` |   |
 
 
+### ip
+
+#### 详细描述
+
+
+#### 定义
+
+`ip(i string) RiskParamsOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RiskParamsOpt` |   |
+
+
 ### level
 
 #### 详细描述
@@ -1057,6 +1109,26 @@ risk.NewRisk(target, risk.description(description), risk.solution(solution))
 #### 定义
 
 `solution(i string) RiskParamsOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RiskParamsOpt` |   |
+
+
+### tag
+
+#### 详细描述
+
+
+#### 定义
+
+`tag(i string) RiskParamsOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|

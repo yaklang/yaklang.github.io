@@ -143,6 +143,11 @@
 
 #### 定义
 
-`withSave()`
+`withSave() ssaapi.QueryOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ssaapi.QueryOption` |   |
 
 
