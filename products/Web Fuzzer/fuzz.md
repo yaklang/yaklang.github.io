@@ -46,7 +46,7 @@ fuzztag还有许多变体，例如它可以嵌套调用：`{{base64(randint(100)
 #### 插入模糊测试字典标签
 ![](/img/products/yakit/Fuzz-fuzz/4.png)
 
-这个功能实际上是与yakit中的另外一个模块：payload的联动。当你再payload中导入了字典后，你可以使用这个功能点击闪电按钮将字典中的内容按行插入为fuzztag。
+这个功能实际上是与yakit中的另外一个模块：payload的联动。当你再payload中导入了字典后，你可以使用这个功能预览字典中的内容，或将字典中的内容按行插入为fuzztag。
 
 #### 插入热加载标签
 由于热加载的使用门槛较高，所以我们会在后续的教程中再提及相关的内容。
@@ -58,8 +58,9 @@ fuzztag还有许多变体，例如它可以嵌套调用：`{{base64(randint(100)
 
 ### * 插入标签
 ![](/img/products/yakit/Fuzz-fuzz/6.png)
+![](/img/products/yakit/Fuzz-fuzz/6-2.png)
 
-这是yakit最近新增的功能，当你在Web Fuzzer中鼠标点选了某个位置时，会弹出一个插入标签的悬浮框，在这个悬浮框中你可以选择插入一些常见的fuzztag。
+当你在Web Fuzzer中鼠标点选了某个位置时，会弹出一个插入标签的悬浮框，在这个悬浮框中你可以选择插入一些常见的fuzztag，同时你也可以添加与保存自己常用的fuzztag。
 
 ## 爆破模式
 我们知道，Burp Suite中存在四种爆破模式：Sniper，Battering ram，Pitchfork，Cluster bomb。但实际上我们真的需要爆破模式吗？它是不可替代的吗？
