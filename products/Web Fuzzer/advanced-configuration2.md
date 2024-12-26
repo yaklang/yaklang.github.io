@@ -86,7 +86,7 @@ Content-Length: 154
 
 变量同样存在三种模式：**nuclei**，**fuzztag**，**raw**。
 1. nuclei：nuclei模式下，其变量值实际上是nuclei的表达式，可以调用绝大部分nuclei-dsl中包含的函数。需要注意的是，当你引用其他变量时，其的值都是string类型，所以可能需要手动进行类型转换。一个简单的例子如下：`{{int(a)+3}}`。
-2. fuzztag：fuzzta模式下，其变量值实际上就是fuzztag，在值中使用fuzztag也会使得Web Fuzzer发送多个请求包。一个简单的例子如下：`{{int(1-2)}}`。
+2. fuzztag：fuzztag模式下，其变量值实际上就是fuzztag，在值中使用fuzztag也会使得Web Fuzzer发送多个请求包。一个简单的例子如下：`{{int(1-2)}}`。
 3. raw：raw模式下，变量值相当于你输入的字符串，不会被解析。
 
 ## GET 参数 / POST 参数 / Cookie / Header
