@@ -2,6 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [pprof.AutoAnalyzeFile](#autoanalyzefile) |AutoAnalyzeFile 分析指定的 pprof 文件并返回人类可读的分析结果 |
 | [pprof.StartCPUAndMemoryProfile](#startcpuandmemoryprofile) ||
 | [pprof.StartCPUProfile](#startcpuprofile) ||
 | [pprof.StartMemoryProfile](#startmemoryprofile) ||
@@ -17,6 +18,28 @@
 
 
 ## 函数定义
+### AutoAnalyzeFile
+
+#### 详细描述
+AutoAnalyzeFile 分析指定的 pprof 文件并返回人类可读的分析结果
+
+
+#### 定义
+
+`AutoAnalyzeFile(filename string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
 ### StartCPUAndMemoryProfile
 
 #### 详细描述

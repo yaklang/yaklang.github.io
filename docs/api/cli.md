@@ -11,6 +11,7 @@ uiWidgetFolder|(cli.UISchemaWidgetType) &#34;folder&#34;|
 uiWidgetPassword|(cli.UISchemaWidgetType) &#34;password&#34;|
 uiWidgetRadio|(cli.UISchemaWidgetType) &#34;radio&#34;|
 uiWidgetSelect|(cli.UISchemaWidgetType) &#34;select&#34;|
+uiWidgetTable|(cli.UISchemaWidgetType) &#34;table&#34;|
 uiWidgetTextarea|(cli.UISchemaWidgetType) &#34;textarea&#34;|
 uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 
@@ -73,6 +74,7 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 | [cli.uiGlobalFieldPosition](#uiglobalfieldposition) |uiGlobalFieldPosition 是一个选项参数,用于指定UISchema中全局的字段位置,默认为垂直排列 |
 | [cli.uiGroup](#uigroup) |uiGroup 是一个选项参数,用于指定UISchema中的一个分组,接收多个字段(cli.Field),同一分组的字段会放在一行 |
 | [cli.uiGroups](#uigroups) |uiGroups 是一个选项参数,用于指定UISchema中的字段整体分组,接受多个分组(cli.uiGroup) |
+| [cli.uiTableField](#uitablefield) |uiTableField 是一个选项参数,用于指定UISchema中的一个表格字段 第一个参数指定字段名 第二个参数指定这个字段所占宽度 接下来可以接收零个到多个选项，用于对此字段进行其他的设置,例如内嵌分组(cli.uiFieldGroups)或者指定其部件(cli.uiFieldWidget) |
 | [cli.when](#when) ||
 | [cli.whenDefault](#whendefault) ||
 | [cli.whenEqual](#whenequal) ||
@@ -1674,6 +1676,68 @@ cli.check()
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `UISchemaParams` |   |
+
+
+### uiTableField
+
+#### 详细描述
+uiTableField 是一个选项参数,用于指定UISchema中的一个表格字段
+第一个参数指定字段名
+第二个参数指定这个字段所占宽度
+接下来可以接收零个到多个选项，用于对此字段进行其他的设置,例如内嵌分组(cli.uiFieldGroups)或者指定其部件(cli.uiFieldWidget)
+Example:
+```
+args = cli.Json(
+
+	"kv",
+	cli.setVerboseName("键值对abc"),
+	cli.setJsonSchema(
+	    <<<JSON
+
+{"type":"object","properties":{"kvs":{"type":"array","title":"键值对","minItems":1,"items":{"properties":{"key":{"type":"string","title":"键"},"value":{"type":"string","title":"值"}},"require":["key","value"]}}}}
+JSON,
+cli.setUISchema(
+
+	cli.uiGroups(
+	    cli.uiGroup(
+	        cli.uiField("kvs", 1, cli.uiFieldWidget(cli.uiWidgetTable), cli.uiFieldGroups(
+	            cli.uiGroup(
+	                cli.uiField("items", 1, cli.uiFieldGroups(
+	                    cli.uiGroup(
+	                        cli.uiTableField("key", 100),
+	                        cli.uiTableField("value", 100),
+	                    )
+	                ))
+	            )
+	        ))
+	    )
+	)
+
+),
+
+),
+
+	cli.setRequired(true),
+
+)
+cli.check()
+```
+
+#### 定义
+
+`uiTableField(name string, width float64, opts ...UISchemaFieldParams) *uiSchemaField`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| width | `float64` |   |
+| opts | `...UISchemaFieldParams` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*uiSchemaField` |   |
 
 
 ### when

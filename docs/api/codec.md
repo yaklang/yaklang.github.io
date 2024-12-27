@@ -112,7 +112,7 @@
 | [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) { ...|
 | [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) ||
 | [codec.Sm4OFBEncrypt](#sm4ofbencrypt) ||
-| [codec.StrconvQuote](#strconvquote) ||
+| [codec.StrconvQuote](#strconvquote) |Quote returns a double-quoted Go string literal representing s. The returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for control charac...|
 | [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted, or backquoted Go string literal, returning the string value that s quotes.  (If s is single-qu...|
 | [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) ||
 | [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) ||
@@ -2608,6 +2608,10 @@ die(err)
 ### StrconvQuote
 
 #### 详细描述
+Quote returns a double-quoted Go string literal representing s. The
+returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for
+control characters and non-printable characters as defined by
+[IsPrint].
 
 
 #### 定义

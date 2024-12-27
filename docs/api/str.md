@@ -44,6 +44,7 @@
 | [str.Intersect](#intersect) |Intersect / IntersectString 返回两个字符串切片之间的交集  |
 | [str.IntersectString](#intersectstring) |Intersect / IntersectString 返回两个字符串切片之间的交集  |
 | [str.IsAlNum](#isalnum) |IsAlphaNum / IsAlNum 尝试将传入的参数转换为字符串，然后判断其是否都由英文字母和数字组成  |
+| [str.IsAllVisibleASCII](#isallvisibleascii) ||
 | [str.IsAlpha](#isalpha) |IsAlpha 尝试将传入的参数转换为字符串，然后判断其是否都由英文字母组成  |
 | [str.IsAlphaNum](#isalphanum) |IsAlphaNum / IsAlNum 尝试将传入的参数转换为字符串，然后判断其是否都由英文字母和数字组成  |
 | [str.IsBase64Value](#isbase64value) |IsBase64Value 尝试将传入的参数转换为字符串，然后猜测其是否是 Base64 编码的数据  |
@@ -103,6 +104,7 @@
 | [str.ParseStringUrlToUrlInstance](#parsestringurltourlinstance) |ParseStringUrlToUrlInstance 将字符串 url 解析为 URL 结构体并返回错误  |
 | [str.ParseStringUrlToWebsiteRootPath](#parsestringurltowebsiterootpath) |ParseStringUrlToWebsiteRootPath 将字符串 url 解析为其根路径的URL  |
 | [str.PathJoin](#pathjoin) |PathJoin 将传入的文件路径进行拼接并返回  |
+| [str.Quote](#quote) |Quote returns a double-quoted Go string literal representing s. The returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for control charac...|
 | [str.RandSecret](#randsecret) |RandSecret 返回在所有可见ascii字符表中随机挑选 n 个字符组成的密码字符串，这个密码经过str.IsStrongPassword验证，即为强密码  |
 | [str.RandStr](#randstr) |RandStringBytes 返回在大小写字母表中随机挑选 n 个字符组成的字符串  |
 | [str.Random](#random) |RandomUpperAndLower 返回一个随机大小写的字符串  |
@@ -141,6 +143,7 @@
 | [str.TrimRight](#trimright) |TrimRight 返回将字符串s右侧所有包含cutset字符串中的字符都去掉的字符串  |
 | [str.TrimSpace](#trimspace) |TrimSpace 返回将字符串s两侧所有的空白字符都去掉的字符串  |
 | [str.TrimSuffix](#trimsuffix) |TrimSuffix 返回将字符串s后缀suffix去掉的字符串  |
+| [str.Unquote](#unquote) |Unquote interprets s as a single-quoted, double-quoted, or backquoted Go string literal, returning the string value that s quotes.  (If s is single-qu...|
 | [str.UrlJoin](#urljoin) |UrlJoin 将 字符串 origin 和 字符串数组 paths 拼接成一个新的 URL 字符串，并返回错误  |
 | [str.VersionCompare](#versioncompare) |VersionCompare 泛用形的版本比较,传入(p1,p2 string), p1&amp;gt;p2返回1,nil, p1&amp;lt;p2返回-1,nil, p1==p2返回0,nil, 比较失败返回 -2,err |
 | [str.VersionEqual](#versionequal) |VersionEqual 使用版本比较算法比较版本 v1 与版本 v2，如果 v1 等于 v2 返回 true，否则返回 false  |
@@ -1301,6 +1304,26 @@ str.IsAlphaNum("abc123!") // false
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### IsAllVisibleASCII
+
+#### 详细描述
+
+
+#### 定义
+
+`IsAllVisibleASCII(s string) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2895,6 +2918,30 @@ str.PathJoin("/var", "www", "html") // in *unix: "/var/www/html"    in Windows: 
 | newPath | `string` |   |
 
 
+### Quote
+
+#### 详细描述
+Quote returns a double-quoted Go string literal representing s. The
+returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for
+control characters and non-printable characters as defined by
+[IsPrint].
+
+
+#### 定义
+
+`Quote(s string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
 ### RandSecret
 
 #### 详细描述
@@ -3923,6 +3970,32 @@ str.TrimSuffix("HelloYak", "Yak") // Hello
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+
+
+### Unquote
+
+#### 详细描述
+Unquote interprets s as a single-quoted, double-quoted,
+or backquoted Go string literal, returning the string value
+that s quotes.  (If s is single-quoted, it would be a Go
+character literal; Unquote returns the corresponding
+one-character string.)
+
+
+#### 定义
+
+`Unquote(s string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
 ### UrlJoin
