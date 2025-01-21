@@ -132,7 +132,7 @@ module.exports = {
                 //     position: "right",
                 // },
                 {
-                    href: "https://yaklang.oss-cn-beijing.aliyuncs.com/yakit-technical-white-paper.pdf",
+                    href: "https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf",
                     label: "下载白皮书",
                     position: "right",
                 },

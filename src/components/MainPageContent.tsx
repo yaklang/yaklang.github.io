@@ -167,11 +167,11 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                                 {/*            {[*/}
                                 {/*                {*/}
                                 {/*                    name: `MacOS Yakit-${latestYakitVersion}`,*/}
-                                {/*                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-darwin-amd64.dmg`,*/}
+                                {/*                    url: `https://oss-qn.yaklang.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-darwin-amd64.dmg`,*/}
                                 {/*                },*/}
                                 {/*                {*/}
                                 {/*                    name: `Windows Yakit-${latestYakitVersion}`,*/}
-                                {/*                    url: `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-windows-amd64.exe`,*/}
+                                {/*                    url: `https://oss-qn.yaklang.com/yak/${latestYakitVersion}/Yakit-${latestYakitVersion}-windows-amd64.exe`,*/}
                                 {/*                }*/}
                                 {/*            ].map(i => {*/}
                                 {/*                return <Button target={"_blank"} type={"primary"}*/}
@@ -235,7 +235,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
             <br/>
             <ReactPlayer
                 url={[
-                    "https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view_1.5.mp4"
+                    "https://oss-qn.yaklang.com/yak_quick_view_1.5.mp4"
                 ]}
                 loop={true}
                 playsinline={true}
@@ -246,7 +246,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
             />
             {/*<video*/}
             {/*    id={"video-for-yaklang"}*/}
-            {/*    src="https://yaklang.oss-cn-beijing.aliyuncs.com/yak_quick_view.mov"*/}
+            {/*    src="https://oss-qn.yaklang.com/yak_quick_view.mov"*/}
             {/*    loop={true} playsInline={true} controls={true} autoPlay={true} */}
             {/*    width={1000}*/}
             {/*/>*/}

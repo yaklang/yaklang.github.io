@@ -15,28 +15,28 @@ export const YakitVersionTag: React.FC<VersionTagProp> = (props) => {
             <Space>
                 <Button
                     type={"link"}
-                    href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-darwin-x64.dmg`}>
+                    href={`https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-darwin-x64.dmg`}>
                     下载 MacOS(intel) 版本的 Yakit 安装包 （v{version}）
                 </Button>
             </Space>
             <Space>
                 <Button
                     type={"link"}
-                    href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-darwin-arm64.dmg`}>
+                    href={`https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-darwin-arm64.dmg`}>
                     下载 MacOS(Silicon-Chip m1/pro/max) 版本的 Yakit 安装包 （v{version}）
                 </Button>
             </Space>
             <Space>
                 <Button
                     type={"link"}
-                    href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-windows-amd64.exe`}>
+                    href={`https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-windows-amd64.exe`}>
                     下载 Windows 版本的 Yakit 安装包 （v{version}）
                 </Button>
             </Space>
             <Space>
                 <Button
                     type={"link"}
-                    href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-linux-amd64.AppImage`}>
+                    href={`https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-linux-amd64.AppImage`}>
                     下载 Linux 版本的 Yakit 安装包 （v{version}）
                 </Button>
             </Space>

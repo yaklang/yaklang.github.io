@@ -416,7 +416,7 @@ interface DownLoadBtnProps {}
 const DownLoadBtn = (props: DownLoadBtnProps) => {
     return (
         <a
-            href="https://yaklang.oss-cn-beijing.aliyuncs.com/yakit-technical-white-paper.pdf"
+            href="https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf"
             className="download-white-paper-btn"
             target="_blank"
         >

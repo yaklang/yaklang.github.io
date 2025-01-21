@@ -152,7 +152,7 @@ const yakEnvironmentConfigureList = {
     code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
   },
   Windows: {
-    code: "powershell (new-object System.Net.WebClient).DownloadFile('https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe",
+    code: "powershell (new-object System.Net.WebClient).DownloadFile('https://oss-qn.yaklang.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe",
   },
 };
 
@@ -393,7 +393,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
   const init = useMemoizedFn(() => {
     axios
       .get(
-        "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yakit-version.txt"
+        "https://oss-qn.yaklang.com/yak/latest/yakit-version.txt"
       )
       .then(async (response) => {
         if (response && response.data && typeof response.data === "string") {
@@ -425,7 +425,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       });
   });
   const getUrl = useMemoizedFn((url: string) => {
-    return `https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-${url}`;
+    return `https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-${url}`;
   });
   const getSize = useMemoizedFn(
     async (url: string, type: string, callBack: any) => {
@@ -914,7 +914,7 @@ const DownLoadBtn = (props) => {
   useEffect(() => {
     axios
       .get(
-        "https://yaklang.oss-cn-beijing.aliyuncs.com/yak/latest/yakit-version.txt"
+        "https://oss-qn.yaklang.com/yak/latest/yakit-version.txt"
       )
       .then(function (response) {
         if (response && response.data && typeof response.data === "string") {
@@ -939,7 +939,7 @@ const DownLoadBtn = (props) => {
               <Menu.Item key={item.name} disabled={disabled}>
                 <a
                   target="_blank"
-                  href={`https://yaklang.oss-cn-beijing.aliyuncs.com/yak/${version}/Yakit-${version}-${item.link}`}
+                  href={`https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-${item.link}`}
                   onClick={() => setVisible(false)}
                 >
                   {`${item.name}(${version})`}

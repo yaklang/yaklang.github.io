@@ -48,7 +48,7 @@ log4j 的黑盒漏洞检测其实是一个老大难的问题，不像 “正常�
 当然在详细介绍怎么样 fuzz 之前，我们来直接看一下检测效果。
 
 <video
-    src="https://yaklang.oss-cn-beijing.aliyuncs.com/video/yakit-log4j-fuzzer.mp4"
+    src="https://oss-qn.yaklang.com/video/yakit-log4j-fuzzer.mp4"
     loop={true} playsInline={true} controls={true} autoPlay={true} style={{width: 890}}
 />
 
