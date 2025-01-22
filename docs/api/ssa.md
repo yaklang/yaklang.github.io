@@ -17,8 +17,10 @@ Yak|(consts.Language) &#34;yak&#34;|
 | [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDatabasePath](#withdatabasepath) ||
+| [ssa.withDefaultExcludeFunc](#withdefaultexcludefunc) ||
 | [ssa.withDescription](#withdescription) ||
 | [ssa.withEntryFile](#withentryfile) ||
+| [ssa.withExcludeFile](#withexcludefile) ||
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
 | [ssa.withLanguage](#withlanguage) ||
@@ -198,6 +200,27 @@ Yak|(consts.Language) &#34;yak&#34;|
 | r1 | `Option` |   |
 
 
+### withDefaultExcludeFunc
+
+#### 详细描述
+
+
+#### 定义
+
+`withDefaultExcludeFunc(patterns []string) (Option, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| patterns | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+| r2 | `error` |   |
+
+
 ### withDescription
 
 #### 详细描述
@@ -231,6 +254,26 @@ Yak|(consts.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | files | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withExcludeFile
+
+#### 详细描述
+
+
+#### 定义
+
+`withExcludeFile(f func(path, filename string) bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(path, filename string) bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
