@@ -13,7 +13,7 @@ sidebar_position: 19
     2. 支持递归检测，可以支持递归深度，检测各种复杂多级子域名
     3. 合理的资源控制，并发限制
    
-[详细使用文档](/docs/api/subdomain)
+[详细使用文档](/api-manual/api/subdomain)
     
 ## 核心函数与基础使用
 
@@ -138,4 +138,4 @@ for result := range res {
 1. `fn subdomain.wildcardToStop(var_1: bool): subdomain.ConfigOption` 遇到泛解析立即停止爆破
 1. `fn subdomain.workerConcurrent(var_1: int): subdomain.ConfigOption` DNS 请求最大并发
 
-详细的参数以及使用文档见：[详细使用文档](/docs/api/subdomain)
+详细的参数以及使用文档见：[详细使用文档](/api-manual/api/subdomain)

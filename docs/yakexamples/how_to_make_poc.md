@@ -24,10 +24,10 @@ sidebar_position: 11
 
 ## Yak 中可以用来编写 PoC/Exp 的模块
 
-1. 【最推荐】[`poc` 最简单的方案进行 PoC 发包](/docs/api/poc)
-1. [`http` 模块用于发最基础的 HTTP 请求](/docs/buildinlibs/lib_http)
-1. [`fuzz` 用于构造可用于模糊测试的 HTTP 请求](/docs/buildinlibs/lib_fuzz)
-1. [`nuclei` 构造适配于 nuclei yaml poc 的 PoC](/docs/buildinlibs/lib_nuclei)
+1. 【最推荐】[`poc` 最简单的方案进行 PoC 发包](/api-manual/api/poc)
+1. [`http` 模块用于发最基础的 HTTP 请求](/api-manual/buildinlibs/lib_http)
+1. [`fuzz` 用于构造可用于模糊测试的 HTTP 请求](/api-manual/buildinlibs/lib_fuzz)
+1. [`nuclei` 构造适配于 nuclei yaml poc 的 PoC](/api-manual/buildinlibs/lib_nuclei)
 
 ## 在 Yak 中，如何编写 PoC？
 
@@ -39,9 +39,9 @@ sidebar_position: 11
 
 意图很明显：我们想告诉用户，PoC 的编写，并不真的只靠用户自己去编写所有逻辑
 
-1. 如果你的 PoC 需要用到爬虫，那 Yak 有爬虫可以帮助你 [`crawler` 使用教程](/docs/buildinlibs/lib_crawler)
-1. 如果你的 PoC 需要条件竞争，[`那就用 `fuzz` 模块`](/docs/buildinlibs/lib_fuzz)
-1. 如果你的会写 nuclei yaml poc，那么也可以把你的 PoC [`直接交给 nuclei 模块去扫描`](/docs/buildinlibs/lib_nuclei)
+1. 如果你的 PoC 需要用到爬虫，那 Yak 有爬虫可以帮助你 [`crawler` 使用教程](/api-manual/buildinlibs/lib_crawler)
+1. 如果你的 PoC 需要条件竞争，[`那就用 `fuzz` 模块`](/api-manual/buildinlibs/lib_fuzz)
+1. 如果你的会写 nuclei yaml poc，那么也可以把你的 PoC [`直接交给 nuclei 模块去扫描`](/api-manual/buildinlibs/lib_nuclei)
 
 :::
 
@@ -122,7 +122,7 @@ if re.Match(`((uid\=\d*)|(gid\=\d*)|(groups=\d*))`, rsp) {
 }
 ```
 
-当然如果需要针对返回的数据包进行精细化处理，可以参考 [`poc` 辅助库中所有可用参数](/docs/api/poc)
+当然如果需要针对返回的数据包进行精细化处理，可以参考 [`poc` 辅助库中所有可用参数](/api-manual/api/poc)
 
 ### 使用 `http` 构造 PoC
 

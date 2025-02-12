@@ -37,8 +37,8 @@ die(err)
 
 我们的基础爬虫模块其实也是内置的，在使用基础爬虫进行扫描的时候，我们可以设置很多参数
 
-1. 基础使用手册可以具体参考 [crawler 基础爬虫使用文档](../buildinlibs/lib_crawler)
-1. 爬虫所有 API 可以参考 [crawler 完全 API](/docs/api/crawler)
+1. 基础使用手册可以具体参考 [crawler 基础爬虫使用文档](/api-manual/buildinlibs/lib_crawler)
+1. 爬虫所有 API 可以参考 [crawler 完全 API](/api-manual/api/crawler)
 
 ```go
 // 创建一个文件夹为 `./scan_and_crawler` 的临时文件位置。

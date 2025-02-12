@@ -259,7 +259,7 @@ dump(fuzz.Strings(`fuzzedStr:{{integer(1-4)}}`))
 {{md5}} {{sha1}} {{sha256}} {{sha512}} ...
 ```
 
-上述标签更详细的使用教程大家可以参考这里[【fuzz】使用手册](/docs/buildinlibs/lib_fuzz#fuzz-标签定义以及使用)
+上述标签更详细的使用教程大家可以参考这里[【fuzz】使用手册](/api-manual/buildinlibs/lib_fuzz#fuzz-标签定义以及使用)
 
 ### HTTP 协议其他 Fuzz 方法：
 

@@ -61,7 +61,7 @@ for result := range ch {
 
 对于我们要发送 http 请求来说，yak 的接口设计非常自然。
 
-我们以 [`http.Get`](/docs/api/http#httpget) 为例讲解一下如何发起一个 http 请求
+我们以 [`http.Get`](/api-manual/api/http#httpget) 为例讲解一下如何发起一个 http 请求
 
 ```go
 rsp, err := http.Get("http://example.com")

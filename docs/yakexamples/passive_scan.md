@@ -45,7 +45,7 @@ die(err)
 
 当你 `mitm.useDefaultCA(false)` 选项被使用的时候，将不会使用默认的证书名，这个时候，需要用户强制使用自己的证书。
 
-详情参考 [`mitm` 使用文档](/docs/buildinlibs/lib_mitm)
+详情参考 [`mitm` 使用文档](/api-manual/buildinlibs/lib_mitm)
 
 :::
 

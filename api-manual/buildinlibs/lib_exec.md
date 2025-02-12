@@ -4,7 +4,7 @@ sidebar_position: 20
 
 # [exec] 命令执行封装
 
-[API 完全手册](/docs/api/exec)
+[API 完全手册](/api-manual/api/exec)
 
 本模块是一个高度封装的系统命令执行模块，支持基础的命令执行，同时也支持复杂的针对命令执行中内容的分析，本教程简单通过两个例子来介绍 `exec` 对 Golang 原生命令执行的封装。
 
@@ -76,9 +76,9 @@ dump(raw)
 
 1. `fn exec.SystemBatch(var_1: string, vars: ...yaklib.poolOpt)`
 
-这个函数是 yak 的特有功能，[`fuzz.Strings`](/docs/api/fuzz#fuzzstrings) 这个函数大家如果有有了解的话，其实就很容易理解这个批量系统命令执行的能力了。
+这个函数是 yak 的特有功能，[`fuzz.Strings`](/api-manual/api/fuzz#fuzzstrings) 这个函数大家如果有有了解的话，其实就很容易理解这个批量系统命令执行的能力了。
 
-通过 [`fuzz.Strings`](/docs/api/fuzz#fuzzstrings)，拆成多个字符串（命令），以一定并发批量执行所有的命令，执行的结果通过 `exec.callback` 参数返回结果交给用户处理。
+通过 [`fuzz.Strings`](/api-manual/api/fuzz#fuzzstrings)，拆成多个字符串（命令），以一定并发批量执行所有的命令，执行的结果通过 `exec.callback` 参数返回结果交给用户处理。
 
 经典案例如下：
 

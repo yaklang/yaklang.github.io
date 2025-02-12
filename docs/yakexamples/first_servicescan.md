@@ -20,7 +20,7 @@ Yakit 的 Yak Runner 是一个很好的执行代码，调试脚本的地方。
 
 ## 处理命令行参数从未这么简单
 
-我们 yak 语言中，内置了很多功能库，这些功能库并不需要用户手动来导入，直接 `package_name.methodName` 即可调用，例如我们本节教程将会遇见的案例：[`cli.String`](/docs/api/cli#clistring) 这些案例
+我们 yak 语言中，内置了很多功能库，这些功能库并不需要用户手动来导入，直接 `package_name.methodName` 即可调用，例如我们本节教程将会遇见的案例：[`cli.String`](/api-manual/api/cli#clistring) 这些案例
 
 一般来说，我们接收命令行参数，需要通过预先定义参数类型和描述来操作，但是在 yak 中，我们处理参数其实可以非常简单
 
@@ -72,7 +72,7 @@ yak data/yak-basic/1_handleCliParam.yak --target targetParamValue --int-param 12
 
 YAK 自带了服务扫描功能
 
-1. 大家可以打开 [servicescan 的 API手册](/docs/api/servicescan#servicescanscan) 自行查看相关接口 
+1. 大家可以打开 [servicescan 的 API手册](/api-manual/api/servicescan#servicescanscan) 自行查看相关接口 
 1. 也可以查看这个模块的详细文档：[](/)
 
 :::

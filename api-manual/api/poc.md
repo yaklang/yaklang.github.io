@@ -277,7 +277,7 @@ Example:
 ```
 poc.AppendHTTPPacketPath(`GET /docs HTTP/1.1
 Host: yaklang.com
-`, "/api/poc")) // 向 example.com 发起请求，实际上请求路径改为/docs/api/poc
+`, "/api/poc")) // 向 example.com 发起请求，实际上请求路径改为/api-manual/api/poc
 ```
 
 
@@ -391,8 +391,8 @@ BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一�
 
 Example:
 ```
-raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yaklang.com"), poc.replacePath("/docs/api/poc")) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/docs/api/poc
-// raw = b"GET /docs/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n"
+raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yaklang.com"), poc.replacePath("/api-manual/api/poc")) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/api-manual/api/poc
+// raw = b"GET /api-manual/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n"
 ```
 
 
@@ -2602,7 +2602,7 @@ appendPath 是一个请求选项参数，用于改变请求报文，在现有请
 
 Example:
 ```
-poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.com 发起请求，实际上请求路径为/docs/api/poc
+poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.com 发起请求，实际上请求路径为/api-manual/api/poc
 ```
 
 

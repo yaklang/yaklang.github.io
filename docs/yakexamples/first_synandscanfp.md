@@ -48,7 +48,7 @@ for ret := range res {
 
 ### `synscan.Scan` 的返回值
 
-参考如下核心文档：[`synscan.Scan`](/docs/api/synscan#synscanscan)
+参考如下核心文档：[`synscan.Scan`](/api-manual/api/synscan#synscanscan)
 
 上述代码返回值有两个：
 
@@ -107,7 +107,7 @@ type palm/common/yak/yaklib/tools.(SynScanResult) struct {
 会有一种方法把这两个扫描对接起来吗？我们想要 SYN 的速度，同时也想要指纹扫描的精准度？应该如何做？
 
 幸运的是，Yak 当然自带的接口可以集成实现 `synscan` 到 `servicescan`
-的无缝对接，这个接口就是 [`servicescan.ScanFromSynResult`](/docs/api/servicescan#servicescanscanfromsynresult)
+的无缝对接，这个接口就是 [`servicescan.ScanFromSynResult`](/api-manual/api/servicescan#servicescanscanfromsynresult)
 
 我们看如下案例：
 
@@ -126,7 +126,7 @@ for fp := range fpResults {
 }
 ```
 
-我们使用 [`servicescan.ScanFromSynResult`](/docs/api/servicescan#servicescanscanfromsynresult) 只修改了非常少量的代码，就可以把 `synscan`
+我们使用 [`servicescan.ScanFromSynResult`](/api-manual/api/servicescan#servicescanscanfromsynresult) 只修改了非常少量的代码，就可以把 `synscan`
 和 `servicescan` 串起来了。执行的结果，由大家自己去操作吧！
 
 ## 并非银弹

@@ -56,32 +56,47 @@ module.exports = {
             },
             items: [
                 {
-                    // dropdown类型现在只能跳转网站内的页面，不能跳转外链，需要跳转外链的请修改[src/theme/NavbarItem/DefaultNavbarItem.js]文件内的dropdown逻辑
-                    type: "dropdown",
-                    position: "left",
-                    label: "官方文档",
-                    items: [
-                        {
-                            // type: "doc",
-                            // docId: "intro",
-                            label: "Yak 语言文档",
-                            href: "/docs/intro",
-                            sidebarCollapsed: false,
-                        },
-                        {
-                            // {
-                            //     type: "doc",
-                            //     docId: "intro",
-                            //     docsPluginId: "products",
-                            label: "Yakit(YAK IDE) 文档与手册 ",
-                            href: "/products/intro",
-                            sidebarCollapsed: false,
-                        },
-                    ],
+                    label: "Yak 语言文档",
+                    href: "/docs/intro",
+                    sidebarCollapsed: false,
                 },
+                {
+                    label: "API 手册",
+                    href: "/api-manual/intro",
+                    sidebarCollapsed: false,
+                },
+                {
+                    label: "Yakit 使用手册",
+                    href: "/products/intro",
+                    sidebarCollapsed: false,
+                },
+                // {
+                //     // dropdown类型现在只能跳转网站内的页面，不能跳转外链，需要跳转外链的请修改[src/theme/NavbarItem/DefaultNavbarItem.js]文件内的dropdown逻辑
+                //     type: "dropdown",
+                //     position: "left",
+                //     label: "官方文档",
+                //     items: [
+                //         {
+                //             // type: "doc",
+                //             // docId: "intro",
+                //             label: "Yak 语言文档",
+                //             href: "/docs/intro",
+                //             sidebarCollapsed: false,
+                //         },
+                //         {
+                //             // {
+                //             //     type: "doc",
+                //             //     docId: "intro",
+                //             //     docsPluginId: "products",
+                //             label: "Yakit(YAK IDE) 文档与手册 ",
+                //             href: "/products/intro",
+                //             sidebarCollapsed: false,
+                //         },
+                //     ],
+                // },
 		        {
                     href: "/articles/intro",
-                    label: "Yak 技术博客",
+                    label: "技术博客",
                     position: "left",
                     sidebarCollapsed: false,
                 },
@@ -102,17 +117,34 @@ module.exports = {
                     position: "left",
                 },
                 {
+                    type: "dropdown",
                     position: "left",
-                    to: "/team",
-                    activeBasePath: "pages",
                     label: "关于我们",
+                    items: [
+                        {
+                            to: "/team",
+                            activeBasePath: "pages",
+                            label: "关于我们",
+                        },
+                        {
+                            to: "/cooperativePartner",
+                            activeBasePath: "pages",
+                            label: "合作伙伴",
+                        },
+                    ],
                 },
-                {
-                    position: "left",
-                    to: "/cooperativePartner",
-                    activeBasePath: "pages",
-                    label: "合作伙伴",
-                },
+                // {
+                //     position: "left",
+                //     to: "/team",
+                //     activeBasePath: "pages",
+                //     label: "关于我们",
+                // },
+                // {
+                //     position: "left",
+                //     to: "/cooperativePartner",
+                //     activeBasePath: "pages",
+                //     label: "合作伙伴",
+                // },
                 // {
                 //     position: "left",
                 //     to: "/team",
@@ -195,16 +227,17 @@ module.exports = {
     },
     plugins: [
         "docusaurus-plugin-sass",
-        // [
-        //     "@docusaurus/plugin-content-docs",
-        //     {
-        //         id: "team",
-        //         path: "team",
-        //         routeBasePath: "team",
-        //         sidebarPath: require.resolve("./sidebarsTeam.js"),
-        //         // ... other options
-        //     },
-        // ],
+        [
+            "@docusaurus/plugin-content-docs",
+            {
+                id: "api-manual",
+                path: "api-manual",
+                routeBasePath: "api-manual",
+                sidebarPath: require.resolve("./sidebarsAPIManual.js"),
+                sidebarCollapsed: false,
+                // ... other options
+            },
+        ],
         [
             "@docusaurus/plugin-content-docs",
             {
