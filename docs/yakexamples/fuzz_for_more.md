@@ -133,7 +133,7 @@ Content-Length: 0
 
 幸运的是，我们 yak 中并不缺乏把扫描目标的数据包进入 fuzz 的方法。我们很自然的会想到，我们做一个爬虫，把爬到的 HTTP 数据包交给 fuzz 模块，就可以轻易做到针对于一个 Web 站点的常见参数的全覆盖。
 
-在 [【实战2: 指纹扫描+基础爬虫】](/docs/newforyak/scan_and_crawler) 这一节中，我们可以做到爬虫爬取指纹扫描的结果，尽可能获取一个 Web 应用的常见的 URL 与可扫描的数据包。
+在 [【实战2: 指纹扫描+基础爬虫】](/docs/yakexamples/scan_and_crawler) 这一节中，我们可以做到爬虫爬取指纹扫描的结果，尽可能获取一个 Web 应用的常见的 URL 与可扫描的数据包。
 
 ```go
 loglevel("error")
@@ -204,7 +204,7 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 ## 配合 `mitm` 来使用 `fuzz`
 
-我们实际上明确知道，爬虫远远是不够的，日常针对带有 Cookie / Authorization JWT 认证的各种常见应用，最有效的方式其实是通过中间人劫持来获取具体的 HTTP 的包，然后针对这个包来发起 Fuzz。我们在之前的文档中，已经了解过如何进行被动扫描 [【使用 `mitm`】进行被动扫描](/docs/newforyak/passive_scan)。
+我们实际上明确知道，爬虫远远是不够的，日常针对带有 Cookie / Authorization JWT 认证的各种常见应用，最有效的方式其实是通过中间人劫持来获取具体的 HTTP 的包，然后针对这个包来发起 Fuzz。我们在之前的文档中，已经了解过如何进行被动扫描 [【使用 `mitm`】进行被动扫描](/docs/yakexamples/passive_scan)。
 
 ```go title="fuzz_with_mitm.yak" {3-5}
 loglevel(`info`)

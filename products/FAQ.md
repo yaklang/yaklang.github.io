@@ -88,7 +88,7 @@ sidebar_position: 28
 
 19. 0000-9999写法
 
-   {{int(0-9999|4)}}，参考 https://www.yaklang.com/docs/newforyak/fuzztag
+   {{int(0-9999|4)}}，参考 https://www.yaklang.com/docs/yakexamples/fuzztag
 
 20. database is locked 
 

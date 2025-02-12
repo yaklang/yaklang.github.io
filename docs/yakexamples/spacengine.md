@@ -204,4 +204,4 @@ for result := range ch {
 
 限于篇幅，我们把解决方案留到下一节来讲
 
-### [欢迎享受 yak 中的并发编程](/docs/newforyak/concurrent)
+### [欢迎享受 yak 中的并发编程](/docs/yakexamples/concurrent)

@@ -21,7 +21,7 @@ sidebar_position: 11
 
 fuzztag还有许多变体，例如它可以嵌套调用：`{{base64(randint(100))}}`生成base64编码后的1-100随机整数。
 
-想要了解fuzztag可用标签和使用样例的同学可以查看这篇文章：[Fuzz Tag Playbook](/docs/newforyak/fuzztag)。
+想要了解fuzztag可用标签和使用样例的同学可以查看这篇文章：[Fuzz Tag Playbook](/docs/yakexamples/fuzztag)。
 
 ## 使用模糊测试标签进行爆破
 
