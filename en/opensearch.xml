@@ -4,8 +4,8 @@
   <ShortName>Yak Program Language</ShortName>
   <Description>Search Yak Program Language</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://yaklang.io/en/img/favicon.ico</Image>
-  <Url type="text/html" method="get" template="https://yaklang.io/en/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://yaklang.io/en/opensearch.xml" />
-  <moz:SearchForm>https://yaklang.io/en/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://yaklang.com/en/img/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://yaklang.com/en/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://yaklang.com/en/opensearch.xml" />
+  <moz:SearchForm>https://yaklang.com/en/</moz:SearchForm>
 </OpenSearchDescription>
