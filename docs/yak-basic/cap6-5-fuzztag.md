@@ -1,3 +1,5 @@
+# 模糊文本渲染: FuzzTag
+
 # 6.9 模糊文本渲染: FuzzTag
 
 ## 6.9.1 什么是FuzzTag
