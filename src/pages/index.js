@@ -84,7 +84,7 @@ import { HomePage } from "../components/Home";
 //                                     >
 //                                         <Link
 //                                             to={
-//                                                 "/docs/newforyak/first_servicescan"
+//                                                 "/docs/yakexamples/first_servicescan"
 //                                             }
 //                                         >
 //                                             <strong>

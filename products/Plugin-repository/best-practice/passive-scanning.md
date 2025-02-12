@@ -85,8 +85,8 @@ log4j 的黑盒漏洞检测其实是一个老大难的问题，不像 “正常�
 
 其实上面的代码，非常简单，我们在
 
-1. Web Fuzz 基础 API https://www.yaklang.io/docs/newforyak/fuzz_tutorial
-2. Web Fuzz 高级教程 https://www.yaklang.io/docs/newforyak/fuzz_for_more
+1. Web Fuzz 基础 API https://www.yaklang.io/docs/yakexamples/fuzz_tutorial
+2. Web Fuzz 高级教程 https://www.yaklang.io/docs/yakexamples/fuzz_for_more
 
 中都可以找到如何使用这样的模块与 API。
 
