@@ -9,6 +9,7 @@
 | [syntaxflow.withExecTaskID](#withexectaskid) ||
 | [syntaxflow.withProcess](#withprocess) ||
 | [syntaxflow.withSave](#withsave) ||
+| [syntaxflow.withSearch](#withsearch) ||
 
 
 ## 函数定义
@@ -144,6 +145,21 @@
 #### 定义
 
 `withSave() ssaapi.QueryOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ssaapi.QueryOption` |   |
+
+
+### withSearch
+
+#### 详细描述
+
+
+#### 定义
+
+`withSearch() ssaapi.QueryOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

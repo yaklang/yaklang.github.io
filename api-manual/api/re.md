@@ -250,7 +250,7 @@ ExtractPath 提取URL中的路径和查询字符串
 
 Example:
 ```
-re.ExtractPath("visit this website: yaklang.com/api-manual/api/re?name=anonymous") // ["/api-manual/api/re?name=anonymous"]
+re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // ["/docs/api/re?name=anonymous"]
 ```
 
 

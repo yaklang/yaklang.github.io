@@ -92,6 +92,7 @@
 | [poc.connPool](#connpool) |connPool 是一个请求选项参数，用于指定是否使用连接池，默认不使用连接池  |
 | [poc.connectTimeout](#connecttimeout) |connectTimeout 是一个请求选项参数，用于指定连接超时时间，默认为15秒  |
 | [poc.context](#context) |context 是一个请求选项参数，用于指定请求的上下文  |
+| [poc.cookie](#cookie) |cookie 是一个请求选项参数，用于改变请求报文，添加 Cookie 请求头中的值  |
 | [poc.deleteCookie](#deletecookie) |deleteCookie 是一个请求选项参数，用于改变请求报文，删除 Cookie 中的值  |
 | [poc.deleteForm](#deleteform) |deleteForm 是一个请求选项参数，用于改变请求报文，删除 POST 请求表单  |
 | [poc.deleteHeader](#deleteheader) |deleteHeader 是一个请求选项参数，用于改变请求报文，删除请求头  |
@@ -99,6 +100,9 @@
 | [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除 GET 请求参数  |
 | [poc.dnsNoCache](#dnsnocache) |dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存，默认使用DNS缓存  |
 | [poc.dnsServer](#dnsserver) |dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器  |
+| [poc.fakeua](#fakeua) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
+| [poc.fromPlugin](#fromplugin) ||
+| [poc.header](#header) |appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头  |
 | [poc.host](#host) |host 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host  |
 | [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用 http2 协议，默认为 false 即使用http1协议  |
 | [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用 https 协议，默认为 false 即使用 http 协议  |
@@ -106,11 +110,13 @@
 | [poc.json](#json) |json 是一个请求选项参数，用于指定请求的 body 为 json 格式，需要传入一个任意类型的参数，会自动转换为 json 格式  |
 | [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的 Content-Length 字段，默认为 false 即会自动修复Content-Length字段  |
 | [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
+| [poc.noredirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
 | [poc.params](#params) |params 是一个请求选项参数，用于在请求时使用传入的值，需要注意的是，它可以很方便地使用 `str.f()`或 f-string 代替  |
 | [poc.password](#password) |password 是一个请求选项参数，用于指定认证时的密码  |
 | [poc.port](#port) |port 是一个请求选项参数，用于指定实际请求的端口，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的端口  |
 | [poc.postData](#postdata) |postData 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是原始字符串，不会修改 Content-Type  |
 | [poc.postParams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
+| [poc.postparams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
 | [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;} 转换为 a=b  如果输入的是其他，会把字符串结果...|
 | [poc.randomJA3](#randomja3) ||
@@ -140,6 +146,7 @@
 | [poc.retryNotInStatusCode](#retrynotinstatuscode) |retryNotInStatusCode 是一个请求选项参数，用于指定非某些响应状态码的情况下重试，需要搭配 retryTimes 使用  |
 | [poc.retryTimes](#retrytimes) |retryTimes 是一个请求选项参数，用于指定请求失败时的重试次数，需要搭配 retryInStatusCode 或 retryNotInStatusCode 使用，来设置在什么响应码的情况下重试  |
 | [poc.retryWaitTime](#retrywaittime) |retryWaitTime 是一个请求选项参数，用于指定重试时最小等待时间，需要搭配 retryTimes 使用，默认为0.1秒  |
+| [poc.runtimeID](#runtimeid) ||
 | [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
 | [poc.saveHandler](#savehandler) |saveHandler 是一个请求选项参数，用于设置在将此次请求存入数据库之前的回调函数  |
 | [poc.saveSync](#savesync) |saveSync 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，且同步保存，默认为false即会异步保存到数据库  |
@@ -147,6 +154,9 @@
 | [poc.sni](#sni) |sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)  |
 | [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
 | [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
+| [poc.ua](#ua) |ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值  |
+| [poc.uarand](#uarand) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
+| [poc.useragent](#useragent) |ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值  |
 | [poc.username](#username) |username 是一个请求选项参数，用于指定认证时的用户名  |
 | [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为 websocket，此时发送的请求应该为 websocket 握手请求  |
 | [poc.websocketFromServer](#websocketfromserver) |websocketFromServer 是一个请求选项参数，它接收一个回调函数，这个函数有两个参数，其中第一个参数为服务端发送的数据，第二个参数为取消函数，调用将会强制断开 websocket  |
@@ -277,7 +287,7 @@ Example:
 ```
 poc.AppendHTTPPacketPath(`GET /docs HTTP/1.1
 Host: yaklang.com
-`, "/api/poc")) // 向 example.com 发起请求，实际上请求路径改为/api-manual/api/poc
+`, "/api/poc")) // 向 example.com 发起请求，实际上请求路径改为/docs/api/poc
 ```
 
 
@@ -391,8 +401,8 @@ BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一�
 
 Example:
 ```
-raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yaklang.com"), poc.replacePath("/api-manual/api/poc")) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/api-manual/api/poc
-// raw = b"GET /api-manual/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n"
+raw = poc.BuildRequest(poc.BasicRequest(), poc.https(true), poc.replaceHost("yaklang.com"), poc.replacePath("/docs/api/poc")) // 构建一个基础GET请求，修改其Host为yaklang.com，访问的URI路径为/docs/api/poc
+// raw = b"GET /docs/api/poc HTTP/1.1\r\nHost: www.yaklang.com\r\n\r\n"
 ```
 
 
@@ -2602,7 +2612,7 @@ appendPath 是一个请求选项参数，用于改变请求报文，在现有请
 
 Example:
 ```
-poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.com 发起请求，实际上请求路径为/api-manual/api/poc
+poc.Get("https://yaklang.com/docs", poc.appendPath("/api/poc")) // 向 yaklang.com 发起请求，实际上请求路径为/docs/api/poc
 ```
 
 
@@ -2806,6 +2816,34 @@ poc.Get("https://exmaple.com", poc.withContext(ctx)) // 向 example.com 发起�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### cookie
+
+#### 详细描述
+cookie 是一个请求选项参数，用于改变请求报文，添加 Cookie 请求头中的值
+
+Example:
+```
+poc.Get("https://pie.dev/get", poc.cookie("a=b; c=d")) // 向 pie.dev 发起请求，添加Cookie请求头，其值为a=b; c=d
+poc.Get("https://pie.dev/get", poc.cookie("a", "b")) // 向 pie.dev 发起请求，添加Cookie请求头，其值为a=b
+```
+
+
+#### 定义
+
+`cookie(c string, values ...any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| c | `string` |   |
+| values | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -3029,6 +3067,74 @@ poc.Get("https://exmaple.com", poc.dnsServer("8.8.8.8", "1.1.1.1"))
 | r1 | `PocConfigOption` |   |
 
 
+### fakeua
+
+#### 详细描述
+replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头
+
+Example:
+```
+poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent()) // 向 pie.dev 发起请求，修改 User-Agent 请求头为随机的常见请求头
+```
+
+
+#### 定义
+
+`fakeua() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### fromPlugin
+
+#### 详细描述
+
+
+#### 定义
+
+`fromPlugin(b string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### header
+
+#### 详细描述
+appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头
+
+Example:
+```
+poc.Post("https://pie.dev/post", poc.appendHeader("AAA", "BBB")) // 向 pie.dev 发起请求，添加AAA请求头的值为BBB
+```
+
+
+#### 定义
+
+`header(key string, value string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `string` |   |
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### host
 
 #### 详细描述
@@ -3211,6 +3317,32 @@ poc.HTTP(poc.BasicRequest(), poc.noRedirect()) // 向 example.com 发起请求�
 | r1 | `PocConfigOption` |   |
 
 
+### noredirect
+
+#### 详细描述
+noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向
+
+Example:
+```
+poc.HTTP(poc.BasicRequest(), poc.noRedirect()) // 向 example.com 发起请求，如果响应重定向到其他链接也不会自动跟踪重定向
+```
+
+
+#### 定义
+
+`noredirect(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### params
 
 #### 详细描述
@@ -3335,6 +3467,34 @@ poc.Post("https://www.example.com", poc.postParams({"a": "b"})) // 向 www.examp
 #### 定义
 
 `postParams(i any) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### postparams
+
+#### 详细描述
+postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据
+
+输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urlencoded
+
+Example:
+```
+poc.Post("https://www.example.com", poc.postParams({"a": "b"})) // 向 www.example.com 发起请求，请求的 body 为 a=b 并自动设置 Content-Type 为 application/x-www-form-urlencoded
+```
+
+
+#### 定义
+
+`postparams(i any) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -4114,6 +4274,26 @@ poc.HTTP(poc.BasicRequest(), poc.retryTimes(5), poc.retryNotInStatusCode(200), p
 | r1 | `PocConfigOption` |   |
 
 
+### runtimeID
+
+#### 详细描述
+
+
+#### 定义
+
+`runtimeID(r string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| r | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### save
 
 #### 详细描述
@@ -4294,6 +4474,79 @@ poc.Get("https://www.example.com", poc.timeout(15)) // 向 www.baidu.com 发起�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | f | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### ua
+
+#### 详细描述
+ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值
+
+Example:
+```
+poc.Get("https://pie.dev/get", poc.ua("Mozilla/5.0")) // 向 pie.dev 发起请求，添加User-Agent请求头，其值为Mozilla/5.0
+```
+
+
+#### 定义
+
+`ua(ua string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ua | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### uarand
+
+#### 详细描述
+replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头
+
+Example:
+```
+poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent()) // 向 pie.dev 发起请求，修改 User-Agent 请求头为随机的常见请求头
+```
+
+
+#### 定义
+
+`uarand() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### useragent
+
+#### 详细描述
+ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值
+
+Example:
+```
+poc.Get("https://pie.dev/get", poc.ua("Mozilla/5.0")) // 向 pie.dev 发起请求，添加User-Agent请求头，其值为Mozilla/5.0
+```
+
+
+#### 定义
+
+`useragent(ua string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ua | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
