@@ -14,6 +14,7 @@ Yak|(consts.Language) &#34;yak&#34;|
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
+| [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
 | [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDatabasePath](#withdatabasepath) ||
@@ -138,6 +139,27 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:-----------|:---------- |:-----------|
 | r1 | `Programs` |   |
 | r2 | `error` |   |
+
+
+### YaklangScriptChecking
+
+#### 详细描述
+
+
+#### 定义
+
+`YaklangScriptChecking(code string, pluginType string) []*result.StaticAnalyzeResult`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| code | `string` |   |
+| pluginType | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*result.StaticAnalyzeResult` |   |
 
 
 ### withConfigInfo

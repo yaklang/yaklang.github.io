@@ -102,6 +102,9 @@
 | [poc.dnsServer](#dnsserver) |dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器  |
 | [poc.fakeua](#fakeua) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
 | [poc.fromPlugin](#fromplugin) ||
+| [poc.gmTLSPrefer](#gmtlsprefer) ||
+| [poc.gmTls](#gmtls) ||
+| [poc.gmTlsOnly](#gmtlsonly) ||
 | [poc.header](#header) |appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头  |
 | [poc.host](#host) |host 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host  |
 | [poc.http2](#http2) |http2 是一个请求选项参数，用于指定是否使用 http2 协议，默认为 false 即使用http1协议  |
@@ -3101,6 +3104,51 @@ poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent(
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### gmTLSPrefer
+
+#### 详细描述
+
+
+#### 定义
+
+`gmTLSPrefer() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### gmTls
+
+#### 详细描述
+
+
+#### 定义
+
+`gmTls() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### gmTlsOnly
+
+#### 详细描述
+
+
+#### 定义
+
+`gmTlsOnly() PocConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
