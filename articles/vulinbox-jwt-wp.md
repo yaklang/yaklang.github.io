@@ -1,15 +1,4 @@
-#  震惊！YAK-JWT靶场的通关方式竟然是...   
-Yak  Yak Project   2025-02-14 17:30  
-  
-![](wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-先祝大家情人节快乐  
-  
-然而作为一头单身奋斗牛，超级牛表示：  
-  
-心中无爱人，工作自然神  
-  
-![](wechat2md-22ac12aa7dede6743620818f9571d487.gif)  
+#  YAK-JWT靶场的通关   
   
 ![](wechat2md-148bc7946a6236b7f129b680fb88560c.webp)  
   
@@ -35,7 +24,8 @@ Yak  Yak Project   2025-02-14 17:30
   
 ![](wechat2md-7244bb965618bbe1db99240d3d2e678c.png)  
   
-第二个页面：**https://127.0.0.1:8080/jwt/unsafe-login1**（POST请求）  
+第二个页面：  
+**https://127.0.0.1:8080/jwt/unsafe-login1**（POST请求）  
   
 同在/jwt/unsafe-login1页面，通过POST请求发送认证信息，如果成功则返回jwt，否则返回认证失败的错误  
   
@@ -115,11 +105,7 @@ jwtStr = jwt.JWTGenerateEx("HS256", {
         "flag":1,
     },{}, key)~
 println(jwtStr)
-```  
-```
-
-```  
-  
+```    
 将生成的jwt应用到/jwt/unsafe-login2/profile接口，得到返回数据  
   
 ![](wechat2md-205f1f90aa43b2d58cccf66d015d0ac4.png)  
@@ -129,20 +115,23 @@ println(jwtStr)
 ![](wechat2md-d5d254364fe911486f4952ac3de47160.png)  
   
   
-**END**  
-  
-  
  **YAK官方资源**  
   
   
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
-https://yaklang.com/products/FAQ  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777  
+Github下载地址：  
+https://github.com/yaklang/yakit  
+Yakit官网下载地址：  
+https://yaklang.com/  
+Yakit安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
+https://yaklang.com/products/FAQ 
   
 ![](wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   
