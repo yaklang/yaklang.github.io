@@ -1,13 +1,13 @@
 #  很好SCA规则，爱来自Syntaxflow   
 原创 Yak  Yak Project   2025-01-23 17:30  
   
-![](wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
+![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 大家好  
   
 这里是热（归）爱（心）工（似）作（箭）的超级牛  
   
-![](wechat2md-07e0331bde864646e79458f6fbb4e246.png)  
+![](/articles/wechat2md-07e0331bde864646e79458f6fbb4e246.png)  
   
 新的一年即将到来  
   
@@ -15,13 +15,13 @@
   
 身体健康，万事如意，新年快乐！  
   
-![](wechat2md-f449c4ddfa6b3c48c868fc5c880bb625.webp)  
+![](/articles/wechat2md-f449c4ddfa6b3c48c868fc5c880bb625.webp)  
   
-![](wechat2md-87fd12308509d61b07e63bec52e70ef3.png)  
+![](/articles/wechat2md-87fd12308509d61b07e63bec52e70ef3.png)  
   
-![](wechat2md-6d4494c6dd3c39615269f0f52a7a8c6b.png)  
+![](/articles/wechat2md-6d4494c6dd3c39615269f0f52a7a8c6b.png)  
   
-![](wechat2md-858b0652cf9f686725318c3cc2369132.png)  
+![](/articles/wechat2md-858b0652cf9f686725318c3cc2369132.png)  
   
 SyntaxFlow 通过内置变量 __dependency__ 存储解析后的依赖信息。用户可以通过筛选依赖名称的方式获取特定依赖的版本信息或文件信息。以下是获取依赖信息的示例：  
 ```
@@ -43,7 +43,7 @@ __dependency__.*fastjson.filename as $file;
 **依赖文件**，并将结果存储在变量   
 **$file** 中。  
   
-![](wechat2md-1528d325e3cddabf56a5281bc35560be.png)  
+![](/articles/wechat2md-1528d325e3cddabf56a5281bc35560be.png)  
   
 获取到依赖的版本信息后，下一步通常是筛选出存在已知漏洞的版本。SyntaxFlow 提供了 version_in 语法来定义版本区间，以便检测依赖版本是否落在特定的漏洞版本范围内。  
 ### version_in 语法示例  
@@ -78,7 +78,7 @@ $version ?{version_in:[1.1,1.3] || [2.2,2.3] || [3.2,3.3]} // 版本号是否在
 > 使用 in 关键字版本范围表示："]" 闭 ")"开版本范围之间可以通过 "||" 并集多个不连续的版本范围。  
   
   
-![](wechat2md-924cabf9397a9f37edd9d0b8c604b373.png)  
+![](/articles/wechat2md-924cabf9397a9f37edd9d0b8c604b373.png)  
   
 下面是yak内置的fastjson SCA规则的一部分  
 ```
@@ -98,11 +98,11 @@ alert $vuln_1_2_68 for {
   
 下面是一个简单案例的使用  
   
-![](wechat2md-9fcdded4bb4f1ee2c33decfa1d01e7de.png)  
+![](/articles/wechat2md-9fcdded4bb4f1ee2c33decfa1d01e7de.png)  
   
 整个流程十分简单明了，不过SCA规则数量会相对更多，如果都是手写规则，可能比较吃力。而本身SCA规则的格式相对稳定，所以这部分的规则可以尝试通过脚本生成。  
   
-![](wechat2md-db6438da5723da9dc693aa451f52b14a.png)  
+![](/articles/wechat2md-db6438da5723da9dc693aa451f52b14a.png)  
   
 比较常见的一个SCA合规信息的获取来源是CVE信息库，yakit本身有CVE信息基础支持，所以可以尝试联动，进行CVE合规的自动生成。cve.QueryEx的返回值结构的部分内容如下所示  
 ```
@@ -301,7 +301,7 @@ yakit.Text(rule)
   
 生成一个fastjson的CVE合规规则  
   
-![](wechat2md-fe577d571f1b604ed127cf1d9c173b3a.png)  
+![](/articles/wechat2md-fe577d571f1b604ed127cf1d9c173b3a.png)  
 ```
 __dependency__.*fastjson.version as $ver;
 $ver in (,1.2.25) as $CVE_2017_18349 
@@ -328,7 +328,7 @@ JavaSecLab（https://github.com/whgojp/JavaSecLab）
   
 来到代码审计页面编译好项目，运行上述脚本获取到的规则。可以看到检查出了 CVE-2022-25845 ，此CVE命中条件版本低于 1.2.83，而Lab的版本为 1.2.37，符合预期。  
   
-![](wechat2md-a680a21daaf9e8970f20b330b6dc4fe8.png)  
+![](/articles/wechat2md-a680a21daaf9e8970f20b330b6dc4fe8.png)  
   
 当然我们可以修改一下目标产品生成一些其他的合规规则比如 xstream，此靶场依赖里的xstream版本为 1.4.14，此版本有多个CVE。  
   
@@ -355,7 +355,7 @@ alert $CVE_2022_40152 for {
   
 再在代码审计中使用生成的规则，可以看到产出了多个CVE检查的提示  
   
-![](wechat2md-cc3a9f34255b3e2c9fc99492dfefd14d.png)  
+![](/articles/wechat2md-cc3a9f34255b3e2c9fc99492dfefd14d.png)  
   
 上述的demo脚本还有许多可以优化的地方，比如对供应商的筛选，以及一些产品的别名的修正等，感兴趣的师傅可以继续尝试可改进。  
   
@@ -376,8 +376,8 @@ https://yaklang.com/products/download_and_installYakit使用文档：
 https://yaklang.com/products/intro/常见问题速查：  
 https://yaklang.com/products/FAQ  
   
-![](wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
+![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   
-![](wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
+![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
   
   
