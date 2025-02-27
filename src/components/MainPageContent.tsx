@@ -130,7 +130,7 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                         {/*            <div style={{marginTop: 30}}>*/}
                         {/*                MacOS/Linux: <Text*/}
                         {/*                code={true}*/}
-                        {/*                copyable={true}>{`bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)`}</Text>*/}
+                        {/*                copyable={true}>{`bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)`}</Text>*/}
                         {/*            </div>*/}
                         {/*        </Tabs.TabPane>*/}
                         {/*        <Tabs.TabPane key={"windows-install-yak"} tab={"Windows 上安装 Yak"}>*/}

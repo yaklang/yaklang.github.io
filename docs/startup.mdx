@@ -93,12 +93,12 @@ brew install libpcap
 在 MacOS 下，使用 Yak 是非常简单的事情，直接执行：
 
 ```go
-bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)
+bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)
 ```
 
 即可安装完成：
 
-```bash title="bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)"
+```bash title="bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)"
 Install for Darwin(MacOS) intel/m1 fit
 -------------------------------------
 Downloading for yak_darwin_amd64
@@ -144,7 +144,7 @@ Linux 平台的 Yak 是通过静态编译的，一般来说是不需要额外安
 大多数情况下，用户可以通过以命令来安装，Linux x64 版本的 Yak 发行版。
 
 ```go
-bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)
+bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)
 ```
 
 安装过程基本同 MacOS 平台。
@@ -244,7 +244,7 @@ Yak Language Build Info:
 
 #### Yak 安装的原理是啥？
 
-1. 安装脚本托管在阿里云OSS上，大家可以通过下载 `http://oss.yaklang.io/install-latest-yak.sh` 这个脚本查看具体的安装方法。
+1. 安装脚本托管在阿里云OSS上，大家可以通过下载 `http://oss-qn.yaklang.com/install-latest-yak.sh` 这个脚本查看具体的安装方法。
 1. 安装脚本会下载 yak 主程序到本地
 1. yak 程序会把自己的二进制复制到可执行的目录中(例如：`/usr/local/bin` 或者 `C:\Windows\System32\`)，然后执行 `yak version` 来验证自己的安装过程。
 

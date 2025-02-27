@@ -146,10 +146,10 @@ const IntroduceKinds: IntroduceKindProps[] = [
 
 const yakEnvironmentConfigureList = {
   "MacOs(Intel/Apple Silicon)": {
-    code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
+    code: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
   },
   Linux: {
-    code: "bash <(curl -sS -L http://oss.yaklang.io/install-latest-yak.sh)",
+    code: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
   },
   Windows: {
     code: "powershell (new-object System.Net.WebClient).DownloadFile('https://oss-qn.yaklang.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe",
