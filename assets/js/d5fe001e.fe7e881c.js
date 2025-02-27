@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[9499],{20353:a=>{a.exports=[]}}]);
