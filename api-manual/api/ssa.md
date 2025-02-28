@@ -11,6 +11,7 @@ Yak|(consts.Language) &#34;yak&#34;|
 |:------|:--------|
 | [ssa.NewFromProgramName](#newfromprogramname) ||
 | [ssa.NewProgramFromDB](#newprogramfromdb) ||
+| [ssa.NewResultFromDB](#newresultfromdb) ||
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
@@ -73,6 +74,27 @@ Yak|(consts.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*Program` |   |
+| r2 | `error` |   |
+
+
+### NewResultFromDB
+
+#### 详细描述
+
+
+#### 定义
+
+`NewResultFromDB(resultID uint) (*SyntaxFlowResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| resultID | `uint` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*SyntaxFlowResult` |   |
 | r2 | `error` |   |
 
 

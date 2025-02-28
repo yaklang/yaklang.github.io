@@ -108,6 +108,7 @@
 | [str.RandSecret](#randsecret) |RandSecret 返回在所有可见ascii字符表中随机挑选 n 个字符组成的密码字符串，这个密码经过str.IsStrongPassword验证，即为强密码  |
 | [str.RandStr](#randstr) |RandStringBytes 返回在大小写字母表中随机挑选 n 个字符组成的字符串  |
 | [str.Random](#random) |RandomUpperAndLower 返回一个随机大小写的字符串  |
+| [str.RandomUpperAndLower](#randomupperandlower) |RandomUpperAndLower 返回一个随机大小写的字符串  |
 | [str.RegexpMatch](#regexpmatch) |RegexpMatch 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false  |
 | [str.RemoveDuplicatePorts](#removeduplicateports) |RemoveDuplicatePorts 解析两个字符串形式的端口列表，并使用布谷鸟过滤器进行去重。  这个函数首先创建一个布谷鸟过滤器，然后将两个输入字符串解析为端口列表。  接着，它遍历这两个列表，将每个端口添加到布谷鸟过滤器中，如果这个端口之前没有被添加过，  那么它也会被添加到结果列表中。最...|
 | [str.RemoveRepeat](#removerepeat) |RemoveRepeat 移除字符串切片slc中的重复元素  |
@@ -3008,6 +3009,32 @@ str.RandomUpperAndLower("target") // TArGeT
 #### 定义
 
 `Random(s string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### RandomUpperAndLower
+
+#### 详细描述
+RandomUpperAndLower 返回一个随机大小写的字符串
+
+Example:
+```
+str.RandomUpperAndLower("target") // TArGeT
+```
+
+
+#### 定义
+
+`RandomUpperAndLower(s string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|

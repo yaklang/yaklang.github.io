@@ -53,6 +53,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SaveYakitMenuItemByBatchExecuteConfig](#saveyakitmenuitembybatchexecuteconfig) ||
 | [db.SaveYakitPlugin](#saveyakitplugin) ||
 | [db.SetKey](#setkey) ||
+| [db.SetKeyWithTTL](#setkeywithttl) ||
 | [db.SetProjectKey](#setprojectkey) ||
 | [db.YieldPayload](#yieldpayload) |YieldPayload means |
 | [db.YieldYakScriptAll](#yieldyakscriptall) ||
@@ -893,6 +894,28 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |:-----------|:---------- |:-----------|
 | k | `any` |   |
 | v | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### SetKeyWithTTL
+
+#### 详细描述
+
+
+#### 定义
+
+`SetKeyWithTTL(k any, v any, ttl int) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| k | `any` |   |
+| v | `any` |   |
+| ttl | `int` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

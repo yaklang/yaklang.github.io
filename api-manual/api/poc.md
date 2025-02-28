@@ -123,6 +123,7 @@
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
 | [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;} 转换为 a=b  如果输入的是其他，会把字符串结果...|
 | [poc.randomJA3](#randomja3) ||
+| [poc.redirect](#redirect) |redirect 是一个请求选项参数，用于设置旧风格的 redirectHandler 函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为当前的请求，第二个参数为既往的多个请求  |
 | [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为是否使用 https 协议，第二个参数为原始请求报文，第三个参数为原始响应报文  |
 | [poc.redirectTimes](#redirecttimes) |redirectTimes 是一个请求选项参数，用于指定最大重定向次数，默认为5次  |
 | [poc.replaceAllPostParams](#replaceallpostparams) |replaceAllPostParams 是一个请求选项参数，用于改变请求报文，修改所有POST请求参数，如果不存在则会增加，其接收一个map[string]string类型的参数，其中key为POST请求参数名，value为POST请求参数值  |
@@ -3626,6 +3627,34 @@ poc.Get("https://www.example.com", poc.query("abc")) // 向 www.example.com 发�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### redirect
+
+#### 详细描述
+redirect 是一个请求选项参数，用于设置旧风格的 redirectHandler 函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为当前的请求，第二个参数为既往的多个请求
+
+Example:
+```
+poc.HTTP(poc.BasicRequest(), poc.redirect(func(current, vias) {
+return true
+})) // 向 example.com 发起请求，使用自定义 redirectHandler 函数，如果该函数返回 true，则会继续重定向，否则不会重定向
+```
+
+
+#### 定义
+
+`redirect(i func(current *http.Request, vias []*http.Request) bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `func(current *http.Request, vias []*http.Request) bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -7,6 +7,7 @@
 | [ai.FunctionCall](#functioncall) ||
 | [ai.Moonshot](#moonshot) ||
 | [ai.OpenAI](#openai) ||
+| [ai.StructuredStream](#structuredstream) ||
 | [ai.apiKey](#apikey) ||
 | [ai.baseURL](#baseurl) ||
 | [ai.debugStream](#debugstream) ||
@@ -124,6 +125,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `aispec.AIClient` |   |
+
+
+### StructuredStream
+
+#### 详细描述
+
+
+#### 定义
+
+`StructuredStream(input string, opts ...aispec.AIConfigOption) (chan *aispec.StructuredData, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *aispec.StructuredData` |   |
+| r2 | `error` |   |
 
 
 ### apiKey

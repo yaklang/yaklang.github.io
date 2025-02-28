@@ -71,6 +71,7 @@ TCP_FLAG_URG|(int) 32|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [pcapx.FixPermission](#fixpermission) |FixPermission 尝试修复 pcap 权限问题  |
 | [pcapx.GetStatistics](#getstatistics) ||
 | [pcapx.InjectChaosTraffic](#injectchaostraffic) ||
 | [pcapx.InjectHTTPRequest](#injecthttprequest) ||
@@ -79,6 +80,7 @@ TCP_FLAG_URG|(int) 32|
 | [pcapx.InjectTCP](#injecttcp) ||
 | [pcapx.OpenPcapFile](#openpcapfile) ||
 | [pcapx.StartSniff](#startsniff) ||
+| [pcapx.WithdrawPermission](#withdrawpermission) |WithdrawPermission 撤销 pcap 权限  |
 | [pcapx.arp_reply](#arp_reply) ||
 | [pcapx.arp_replyEx](#arp_replyex) ||
 | [pcapx.arp_request](#arp_request) ||
@@ -131,6 +133,29 @@ TCP_FLAG_URG|(int) 32|
 
 
 ## 函数定义
+### FixPermission
+
+#### 详细描述
+FixPermission 尝试修复 pcap 权限问题
+
+Example:
+```
+err := pcapx.FixPermission()
+die(err) // 没有错误，即可正常使用 syn 扫描
+...
+```
+
+
+#### 定义
+
+`FixPermission() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### GetStatistics
 
 #### 详细描述
@@ -261,6 +286,29 @@ TCP_FLAG_URG|(int) 32|
 |:-----------|:---------- |:-----------|
 | iface | `string` |   |
 | opts | `...CaptureOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### WithdrawPermission
+
+#### 详细描述
+WithdrawPermission 撤销 pcap 权限
+
+Example:
+```
+err := pcapx.Withdraw()
+die(err)
+...
+```
+
+
+#### 定义
+
+`WithdrawPermission() error`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
