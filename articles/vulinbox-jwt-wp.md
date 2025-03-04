@@ -50,11 +50,9 @@
   
 ![](wechat2md-2d1055f4bda6fa1f93c1482548baa192.png)  
   
-首先打开JWT的登录  
-(未验证算法)案例，在这个案例中，后端未校验加密算法，将根据用户传递的加密算法解密验证jwt。  
+首先打开JWT的登录(未验证算法)案例，在这个案例中，后端未校验加密算法，将根据用户传递的加密算法解密验证jwt。  
   
-如图是正常的jwt结构。可以看到在header中存储了用户名，根据页面提示，游戏目标是  
-**为用户信息添加flag字段**。所以我们的目标就是修改jwt内的header，并绕过后端的校验。  
+如图是正常的jwt结构。可以看到在header中存储了用户名，根据页面提示，游戏目标是**为用户信息添加flag字段**。所以我们的目标就是修改jwt内的header，并绕过后端的校验。  
   
 ![](wechat2md-63521bcd51caa44b63d7a4284b025ced.png)  
   
@@ -88,11 +86,9 @@ println("%s.%s."%[header,claims])
   
 ![](wechat2md-bc1ac79ac44a6e1da07b6f0a5857ac52.png)  
   
-打开案例：登  
-录(错误中泄漏key)  
+打开案例：登录(错误中泄漏key)  
   
-和案例1相同的页面，发现获取用户信息的接口改为了  
-**/jwt/unsafe-login2/profile**。尝试使用案例1的手段发现报错：  
+和案例1相同的页面，发现获取用户信息的接口改为了 **/jwt/unsafe-login2/profile**。尝试使用案例1的手段发现报错：  
   
 ![](wechat2md-2d40b02a0c758764762eb60ab8ae40b8.png)  
   
@@ -118,9 +114,9 @@ println(jwtStr)
  **YAK官方资源**  
   
   
-Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit   
-视频教程：  
+Yak语言官方教程：  
+https://yaklang.com/docs/intro/
+Yakit视频教程：  
 https://space.bilibili.com/437503777  
 Github下载地址：  
 https://github.com/yaklang/yakit  
