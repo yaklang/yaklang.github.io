@@ -1,0 +1,72 @@
+name: Ragsync Verification
+
+on:
+  workflow_dispatch:  # Allow manual workflow trigger
+  push:
+    branches: [ main ]
+    paths:
+      - 'Yaklab/**'
+      - 'articles/**'
+      - 'docs/**'
+      - 'products/**'
+      - 'api-manual/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Yaklab/**'
+      - 'articles/**'
+      - 'docs/**'
+      - 'products/**'
+      - 'api-manual/**'
+
+jobs:
+  check-ragsync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download Ragsync binary
+        run: |
+          wget https://oss-qn.yaklang.com/ragsync/v1.0.7/ragsync_linux_amd64 -O ragsync
+          chmod +x ragsync
+
+      - name: Verify Ragsync command
+        run: |
+          ./ragsync sync -h
+
+      - name: Load Ragsync Config
+        run: |
+          mkdir -p ~/.ragsync
+          echo "${{ secrets.RAGSYNC_CONFIG }}" | base64 -d > ~/.ragsync/yaklang.com.ragsync.yaml
+          echo "Config loaded to ~/.ragsync/yaklang.com.ragsync.yaml"
+
+      - name: Validate Ragsync Config
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml validate
+          if [ $? -ne 0 ]; then
+            echo "Ragsync config validation failed"
+            exit 1
+          fi
+          echo "Ragsync config validation passed"
+
+      - name: Run Ragsync Yaklab
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir Yaklab
+
+      - name: Run Ragsync Articles
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir articles
+
+      - name: Run Ragsync Docs
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir docs
+
+      - name: Run Ragsync Products
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir products
+
+      - name: Run Ragsync API Manual
+        run: |
+          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir api-manual
