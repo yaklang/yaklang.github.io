@@ -1,5 +1,4 @@
-#  震惊！YAK-JWT靶场的通关方式竟然是...   
-Yak  Yak Project   2025-02-14 17:30  
+#  YAK-JWT靶场通关
   
 ![](wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
