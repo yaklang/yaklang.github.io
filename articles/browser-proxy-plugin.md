@@ -1,34 +1,11 @@
-<<<<<<< HEAD
-#  Yak中的Proxy浏览器插件
-
-
-=======
-#  Oi，不要小看Proxy浏览器插件与Yak之间的羁绊啊！   
-原创 Yak  Yak Project   2025-02-20 17:30  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-超级牛：  
-  
-不知道啊  
-# 这插件他喊着友情啊羁绊啊未来啊什么的就冲上来了  
-  
-![](/articles/wechat2md-c86671c6a14b48b08bf482aeb4ae10c6.gif)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
-  
+#  Yak中的Proxy浏览器插件  
 ![](/articles/wechat2md-ddf16f1039911f81029b4381e07925e1.png)  
   
 ![](/articles/wechat2md-1a51e5f3429bb8be39d107d9c6cee861.png)  
   
-<<<<<<< HEAD
 ![](wechat2md-40aba6b8408caf813ef332684a830aa4.png)  
 对于 Yakit 用户来说，免配置浏览器带来了很多的便捷，一键启动即可打开一个配置好了 Yakit MITM 代理的浏览器，并且与日常使用的浏览器互不干扰。  
 为了进一步增强免配置浏览器的使用体验、以及完成对 Proxy SwitchyOmega 插件需求的过渡，我们开发了一个类似 Proxy SwitchyOmega 功能的插件，现在当用户打开免配置浏览器时，本质上是通过插件控制浏览器的代理项，而非此前的使用固定的 chromeFlags  的方式来启动，现在点击启动免配置浏览器时，会通过 --load-extension chromeFlags  来加载我们编写的浏览器插件，如下图：  
-=======
-![](/articles/wechat2md-40aba6b8408caf813ef332684a830aa4.png)  
-## 对于 Yakit 用户来说，免配置浏览器带来了很多的便捷，一键启动即可打开一个配置好了 Yakit MITM 代理的浏览器，并且与日常使用的浏览器互不干扰。  
-## 为了进一步增强免配置浏览器的使用体验、以及完成对 Proxy SwitchyOmega 插件需求的过渡，我们开发了一个类似 Proxy SwitchyOmega 功能的插件，现在当用户打开免配置浏览器时，本质上是通过插件控制浏览器的代理项，而非此前的使用固定的 chromeFlags  的方式来启动，现在点击启动免配置浏览器时，会通过 --load-extension chromeFlags  来加载我们编写的浏览器插件，如下图：  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 ![](/articles/wechat2md-9b861b3d9374cf6afe7e38ab8c393fec.png)  
   
@@ -55,31 +32,16 @@ Yakit 浏览器插件也提供了自定义添加，相对比较简单。
   
 ![](/articles/wechat2md-92c1a6c3cff2f67f0406950cfb45ebef.png)  
   
-<<<<<<< HEAD
 ![](wechat2md-f2ed87398c9a3478d35ca5bbbf7b608b.png)  
-=======
-![](/articles/wechat2md-f2ed87398c9a3478d35ca5bbbf7b608b.png)  
-##   
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 代理实现部分用到了 Chrome Extensions 提供的 chrome.proxy api，  
 基本概念如下：  
   
-<<<<<<< HEAD
 ![](wechat2md-54a3022d0e06c6b3c2e8518583f6bd1f.png)  
  
 在 proxy.ProxyConfig 对象中定义。根据 Chrome 的代理设置， 这些设置可能包含 proxy.ProxyRules 或 proxy.PacScript。  
   
 ![](wechat2md-579e8f31f8015b5ef8a0fe27112481e3.png)  
-=======
-![](/articles/wechat2md-54a3022d0e06c6b3c2e8518583f6bd1f.png)  
-###   
-  
-在 proxy.ProxyConfig 对象中定义。根据 Chrome 的代理设置， 这些设置可能包含 proxy.ProxyRules 或 proxy.PacScript。  
-  
-![](/articles/wechat2md-579e8f31f8015b5ef8a0fe27112481e3.png)  
-###   
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 ProxyConfig 对象的 mode 属性决定了 Chrome 的整体行为 代理用量。它可以采用以下值：  
   

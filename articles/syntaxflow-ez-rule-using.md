@@ -1,35 +1,9 @@
-<<<<<<< HEAD
 #  Java代码审计   
     
 ![](wechat2md-5e10ecc37e4802dec6e5ddac3d229ee4.png)  
   
 ![](wechat2md-e455349e47d438fa3d4bc614f2423b90.png)  
 - 在java中，不一定是和php一样 （只要有文件上传就一定有漏洞（bushi）），比如springBoot中，条件限制非常多。  
-=======
-#  成魔成仙，牛牛自己说了算！   
-原创 Yak  Yak Project   2025-02-07 17:31  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-我是YAK超级牛，  
-  
-能抓包来能审计。  
-  
-漏洞bug一眼有，  
-  
-调试代码不喘气。  
-  
-![](/articles/wechat2md-f7ef4b9d19c6077d3296946b5e1b6bc0.gif)  
-  
-![](/articles/wechat2md-45e61895f06615591f72c3a3a6f0e459.webp)  
-  
-![](/articles/wechat2md-5e10ecc37e4802dec6e5ddac3d229ee4.png)  
-  
-![](/articles/wechat2md-e455349e47d438fa3d4bc614f2423b90.png)  
-- 在java中，不一定是和php一样  
-（只要有文件上传就一定有漏洞）  
-，比如springBoot中，条件限制非常多。  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 - 硬编码：在代码审计过程中，我们需要关注硬编码，有时会有意想不到的收获  
   
@@ -121,14 +95,7 @@ $source(* #{
 CODE
 }-> as $sink)
 ```  
-<<<<<<< HEAD
 ![](wechat2md-718f301442591e95f52eaef7aa28388f.png)  
-=======
-```
-```  
-  
-![](/articles/wechat2md-718f301442591e95f52eaef7aa28388f.png)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 ![](/articles/wechat2md-e7709a1e34ab7f7199ce92d695bc08e8.png)  
 ### 多处Xss：  
@@ -156,16 +123,8 @@ $targetFunc(* #{
 *?{opcode: param && *<getFunc>.annotation?{.RequestMapping || .GetMapping || .PostMapping}}
 CODE,
 }-> as $sink)
-<<<<<<< HEAD
 ```   
 ![](wechat2md-f685b0dc9e0d23f3d42cbeaa47da7abe.png)  
-=======
-```  
-```
-```  
-  
-![](/articles/wechat2md-f685b0dc9e0d23f3d42cbeaa47da7abe.png)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
 #### Tip：  
   
 这里看了几处，如果是权限绕过的话，session中不存在用户，那么基本上不能使用添加的功能。  
@@ -188,18 +147,12 @@ CODE,
   
 我们都将其作为一个规则组  
   
-<<<<<<< HEAD
 ![](wechat2md-f6c401379c4637e3b2b53d54f91f774c.png)  
-=======
-  
-![](/articles/wechat2md-f6c401379c4637e3b2b53d54f91f774c.png)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
  **YAK官方资源**  
   
   
 Yak 语言官方教程：  
-<<<<<<< HEAD
 https://yaklang.com/docs/intro/Yakit   
 视频教程：  
 https://space.bilibili.com/437503777  
@@ -213,18 +166,5 @@ Yakit使用文档：
 https://yaklang.com/products/intro/  
 常见问题速查：  
 https://yaklang.com/products/FAQ 
-=======
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
-https://yaklang.com/products/FAQ  
-  
-![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
-  
-![](/articles/wechat2md-304b45488320344b4c7cdbd5759ee4e8.gif)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
   

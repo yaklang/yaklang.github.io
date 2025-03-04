@@ -1,24 +1,4 @@
 #  很好SCA规则，爱来自Syntaxflow   
-<<<<<<< HEAD
-=======
-原创 Yak  Yak Project   2025-01-23 17:30  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-大家好  
-  
-这里是热（归）爱（心）工（似）作（箭）的超级牛  
-  
-![](/articles/wechat2md-07e0331bde864646e79458f6fbb4e246.png)  
-  
-新的一年即将到来  
-  
-在这里提前祝大家  
-  
-身体健康，万事如意，新年快乐！  
-  
-![](/articles/wechat2md-f449c4ddfa6b3c48c868fc5c880bb625.webp)  
->>>>>>> f4538a210d3a0684bb752d3a4648d7bd062fbac4
   
 ![](/articles/wechat2md-87fd12308509d61b07e63bec52e70ef3.png)  
   
