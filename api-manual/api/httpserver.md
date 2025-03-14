@@ -4,6 +4,7 @@
 |:------|:--------|
 | [httpserver.LocalFileSystemServe](#localfilesystemserve) |LocalFileSystemServe 根据给定的 host 和 port 启动一个 http 服务用于访问本地文件系统  第一个参数为监听主机，第二个参数为监听端口，第三个参数为访问路径前缀，第四个参数为本地文件系统路径，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等  |
 | [httpserver.Serve](#serve) |Serve 根据给定的 host 和 port 启动一个 http 服务，第一个参数为监听主机，第二个参数为监听端口，接下来可以接收零个到多个选项函数，用于设置上下文，回调函数等  |
+| [httpserver.captchaRouteHandler](#captcharoutehandler) |captchaRouteHandler 用于设置 HTTP 服务器的验证码处理函数，第一个参数为路由路径，第二个参数为超时时间，第三个参数为处理函数  此函数会根据路由路径自动添加前缀 &amp;#34;/&amp;#34;  |
 | [httpserver.context](#context) |context 用于设置 HTTP 服务器的上下文  |
 | [httpserver.handler](#handler) |handler 用于设置 HTTP 服务器的回调函数，此函数会在每次收到请求时被调用  此函数的第一个参数为响应回复者结构体，第二个参数为 请求结构体，你可以调用第一个参数中的方法来设置响应头，响应体等  |
 | [httpserver.localFileSystemHandler](#localfilesystemhandler) ||
@@ -70,6 +71,40 @@ err = httpserver.Serve("127.0.0.1", 8888, httpserver.handler(func(rspWriter, req
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### captchaRouteHandler
+
+#### 详细描述
+captchaRouteHandler 用于设置 HTTP 服务器的验证码处理函数，第一个参数为路由路径，第二个参数为超时时间，第三个参数为处理函数
+
+此函数会根据路由路径自动添加前缀 &#34;/&#34;
+
+Example:
+```
+
+	err = httpserver.Serve("127.0.0.1", 8888, httpserver.captchaRouteHandler("/captcha", 30, func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Hello world"))
+	}))
+
+```
+
+
+#### 定义
+
+`captchaRouteHandler(route string, timeoutSeconds float64, handler http.HandlerFunc) HttpServerConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| route | `string` |   |
+| timeoutSeconds | `float64` |   |
+| handler | `http.HandlerFunc` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `HttpServerConfigOpt` |   |
 
 
 ### context

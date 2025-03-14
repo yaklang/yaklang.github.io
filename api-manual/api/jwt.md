@@ -145,7 +145,7 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 #### 定义
 
-`Parse(tokenStr string, keys ...string) (*jwt.Token, []byte, error)`
+`Parse(tokenStr string, keys ...string) (*Token, []byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -156,7 +156,7 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*jwt.Token` |   |
+| r1 | `*Token` |   |
 | r2 | `[]byte` |   |
 | r3 | `error` |   |
 

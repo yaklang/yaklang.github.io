@@ -30,7 +30,6 @@ Yak|(consts.Language) &#34;yak&#34;|
 | [ssa.withProcess](#withprocess) ||
 | [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
 | [ssa.withReCompile](#withrecompile) ||
-| [ssa.withSaveToProfile](#withsavetoprofile) ||
 | [ssa.withStrictMode](#withstrictmode) ||
 
 
@@ -460,26 +459,6 @@ save to database, please set the program name
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
-
-
-### withSaveToProfile
-
-#### 详细描述
-
-
-#### 定义
-
-`withSaveToProfile(b ...bool) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| b | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
