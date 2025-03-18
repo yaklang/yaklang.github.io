@@ -51,13 +51,13 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 #### 定义
 
-`JWSGenerate(alg string, i map[string]any, key []byte) (string, error)`
+`JWSGenerate(alg string, claims any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| i | `map[string]any` |   |
+| claims | `any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -74,14 +74,14 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 #### 定义
 
-`JWSGenerateEx(alg string, extraHeader map[string]any, i map[string]any, key []byte) (string, error)`
+`JWSGenerateEx(alg string, extraHeader any, claims any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| extraHeader | `map[string]any` |   |
-| i | `map[string]any` |   |
+| extraHeader | `any` |   |
+| claims | `any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -98,13 +98,13 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 #### 定义
 
-`JWTGenerate(alg string, i map[string]any, key []byte) (string, error)`
+`JWTGenerate(alg string, i any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| i | `map[string]any` |   |
+| i | `any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
@@ -121,14 +121,14 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 #### 定义
 
-`JWTGenerateEx(alg string, extraHeader map[string]any, i map[string]any, key []byte) (string, error)`
+`JWTGenerateEx(alg string, extraHeader any, claims any, key []byte) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | alg | `string` |   |
-| extraHeader | `map[string]any` |   |
-| i | `map[string]any` |   |
+| extraHeader | `any` |   |
+| claims | `any` |   |
 | key | `[]byte` |   |
 
 #### 返回值
