@@ -1,21 +1,4 @@
 #  很好SCA规则，爱来自Syntaxflow   
-原创 Yak  Yak Project   2025-01-23 17:30  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-大家好  
-  
-这里是热（归）爱（心）工（似）作（箭）的超级牛  
-  
-![](/articles/wechat2md-07e0331bde864646e79458f6fbb4e246.png)  
-  
-新的一年即将到来  
-  
-在这里提前祝大家  
-  
-身体健康，万事如意，新年快乐！  
-  
-![](/articles/wechat2md-f449c4ddfa6b3c48c868fc5c880bb625.webp)  
   
 ![](/articles/wechat2md-87fd12308509d61b07e63bec52e70ef3.png)  
   
@@ -31,8 +14,7 @@ __dependency__.*fastjson.version as $ver;
 // 获取依赖名以 fastjson 结尾所在的依赖文件
 __dependency__.*fastjson.filename as $file;
 ```  
-```
-```  
+
 - **__dependency__.*fastjson.version as $ver;**  
 ：筛选依赖名称以 fastjson 结尾的  
 **依赖版本**，并将结果存储在变量   
@@ -61,9 +43,7 @@ $version in (1.2.3-beta,2.2.1-beta]
 
 // 检查版本是否在 [1.1,1.3] 或 [2.2,2.3] 或 [3.2,3.3] 范围内
 $version in [1.1,1.3] || [2.2,2.3] || [3.2,3.3]
-```  
-```
-```  
+```   
   
 此外，也可以使用分析值筛选过滤的语法进行版本筛选：  
 ```
@@ -72,11 +52,8 @@ $version ?{version_in:(1.0.0,2.0.0]} // 版本号是否在 1.0.0 < version <= 2.
 $version ?{version_in:(1.2.3-beta,2.2.1-beta]} // 版本号是否在 1.2.3-beta < version <= 2.2.1-beta 范围内
 $version ?{version_in:[1.1,1.3] || [2.2,2.3] || [3.2,3.3]} // 版本号是否在多个范围内
 ```  
-```
-```  
 > 总结一下：version_in 语法  
-> 使用 in 关键字版本范围表示："]" 闭 ")"开版本范围之间可以通过 "||" 并集多个不连续的版本范围。  
-  
+> 使用 in 关键字版本范围表示："]" 闭 ")"开版本范围之间可以通过 "||" 并集多个不连续的版本范围。   
   
 ![](/articles/wechat2md-924cabf9397a9f37edd9d0b8c604b373.png)  
   
@@ -90,7 +67,6 @@ alert $vuln_1_2_68 for {
 
 }
 ```  
-  
 简单解析一下其中使用，首先通过   
 **__dependency__** 内置变量获取到审计项目的所有依赖信息，然后使用  
 ***alibaba*fastjson**作为过滤条件获取到所有和fastjson相关的依赖信息。最后通过  
@@ -123,8 +99,7 @@ type CVE struct {
     ...
 }
 ```  
-```
-```  
+
   
 其中在生成合规规则需要重点关注的信息有两个：  
 - CVE ：CVE编号  
@@ -204,8 +179,6 @@ CVE-2022-25845
     ]
 }
 */
-```  
-```
 ```  
   
 可以看到在  
@@ -317,10 +290,7 @@ alert $CVE_2022_25845 for {
     cve: "CVE-2022-25845"
     level: medium,
 }
-```  
-```
-```  
-  
+```    
 我们这里使用一个lab的源码作为审计目标：  
 JavaSecLab（https://github.com/whgojp/JavaSecLab）  
   
@@ -360,21 +330,21 @@ alert $CVE_2022_40152 for {
 上述的demo脚本还有许多可以优化的地方，比如对供应商的筛选，以及一些产品的别名的修正等，感兴趣的师傅可以继续尝试可改进。  
   
   
-**END**  
-  
-  
-  
  **YAK官方资源**  
-  
-  
 Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
-https://yaklang.com/products/FAQ  
+https://yaklang.com/docs/intro/Yakit   
+视频教程：  
+https://space.bilibili.com/437503777  
+Github下载地址：  
+https://github.com/yaklang/yakit  
+Yakit官网下载地址：  
+https://yaklang.com/  
+Yakit安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
+https://yaklang.com/products/FAQ 
   
 ![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   
