@@ -127,3 +127,25 @@ Fetch Error: panic in try!
 working in finally
 ```
 
+## 6.6.4 **简化调用：WavyCalling**
+
+在 Yaklang 中，我们新增了一个非常有趣的语法糖 `WavyCalling`；这个特性指的是
+
+**通过 `~` 加入函数调用的结尾，可以自动处理这个函数返回值中的错误（目前自动处理的行为是，如果这个函数结尾有错误，那么自动中断程序执行，抛出错误提示）**
+
+如下，一下两段代码是等价的
+
+```go
+// 处理 error，但是 error 不重要，打印到屏幕即可
+res, err = servicescan.Scan("127.0.0.1", "443,80")
+if err != nil {
+    die(err)
+}
+
+// 简化上述代码后
+// 使用 wavy calling 来简化代码
+res = servicescan.Scan("127.0.0.1", "443,80")~
+```
+
+我们可以使用这个有意思的语法让自己编写代码更为简洁。
+
