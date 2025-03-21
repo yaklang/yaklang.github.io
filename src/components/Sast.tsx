@@ -234,8 +234,8 @@ function SastPage() {
   const getUrl = useMemoizedFn((url, newVersion = version) => {
     return `https://oss-qn.yaklang.com/sast/${newVersion}/SastScan-${newVersion}-${url}`;
   });
-  const getSize = useMemoizedFn(async (url, newVersion, callBack) => {
-    await axios
+  const getSize = useMemoizedFn((url, newVersion, callBack) => {
+    axios
       .head(getUrl(url, newVersion))
       .then((response) => {
         if (
