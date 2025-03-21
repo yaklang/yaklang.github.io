@@ -37,7 +37,7 @@ username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
 
 在这个模版中，我们使用了 `randstr` 标签生成了一个长度为 8 的随机字符串作为用户名，并使用 `urlenc` 标签对其进行 URL 编码。同样，我们使用 `randstr` 生成了一个长度为 10 的随机字符串作为密码，并使用 `urlenc` 对其进行 URL 编码。最终，我们将这些数据作为表单数据发送到 `/login` 接口。这是一个简单的案例，演示了如何使用 Fuzztag 生成随机数据并对其进行编码，以便进行 Web 应用程序的安全测试。
 
-那么我们完成上述数据包之后，如何得到他真实的渲染结果呢？熟悉 Yaklang 的小伙伴很容易回答这个问题，可以在 [x-string fuzztag 快速渲染](/docs/yak-basic/string-fuzztag-x) 中找到答案。
+那么我们完成上述数据包之后，如何得到他真实的渲染结果呢？熟悉 Yaklang 的小伙伴很容易回答这个问题，可以在 [x-string fuzztag 快速渲染](/docs/yak-basic/cap6-5-fuzztag#fuzztag快速执行x-string) 中找到答案。
 
 ```go title="获取 fuzztag 的渲染结果"
 // raw: []string
@@ -694,9 +694,9 @@ dump(res)
 同样的，这个标签分为四种情况
 
 1. `{{randint(max)}}` 生成一个最大值不超过 max 的随机整数
-1. `{{randint(min,max)}}` 生成一个最大最小值在 min 和 max 之间的整数
-1. `{{randint(min,max,repeat)}}` 生成 `repeat` 个值在 `min` 和 `max`
-1. `{{randint}}` 等价于 `{{randint(10)}}`
+2. `{{randint(min,max)}}` 生成一个最大最小值在 min 和 max 之间的整数
+3. `{{randint(min,max,repeat)}}` 生成 `repeat` 个值在 `min` 和 `max`
+4. `{{randint}}` 等价于 `{{randint(10)}}`
 
 #### 别名
 
@@ -763,17 +763,17 @@ dump(res)
 `randstr` 是一个非常常见的渲染模版，这个模版的意思是，生成一个随机字符串，只包含二十六个英文字母大小写，值得注意的是，`{{randstr}}` 的参数有四种不同类型分别如下：
 
 1. `{{randstr(length)}}` 例如：`{{randstr(8)}}` 意思是，生成一个长度是 8 的随机字符串
-1. `{{randstr(min,max)}}` 生成一个长度在 `min` 和 `max` 之间的随机字符串，例如 `{{randstr(4,8)}}`
-1. `{{randstr(min,max,repeat)}}` 重复 `repeat` 次生成一个 `min` 和 `max` 之间长度的字符串组
-1. `{{randstr}}` 例如：`{{randstr}}` 就可以直接被渲染，等效为 `{{randstr(8,8)}}`
+2. `{{randstr(min,max)}}` 生成一个长度在 `min` 和 `max` 之间的随机字符串，例如 `{{randstr(4,8)}}`
+3. `{{randstr(min,max,repeat)}}` 重复 `repeat` 次生成一个 `min` 和 `max` 之间长度的字符串组
+4. `{{randstr}}` 例如：`{{randstr}}` 就可以直接被渲染，等效为 `{{randstr(8,8)}}`
 
 #### 别名
 
 我们以 `{{randstr}}` 为例，他的各种别名如下
 
 1. `{{randstr}}`
-1. `{{rands}}`
-1. `{{rs}}`
+2. `{{rands}}`
+3. `{{rs}}`
 
 #### 使用案例
 
@@ -915,15 +915,15 @@ dump(res)
 #### 定义说明
 
 1. `{{base64(txt)}}` 把 txt 进行 base64 编码，等价于 `codec.EncodeBase64`
-1. `{{md5(txt)}}` 把 txt 编码成 md5，等价于 `codec.Md5`
-1. `{{hex(txt)}}` 把 txt 进行 HEX 编码，等价于 `codec.EncodeToHex`
-1. `{{sha1(txt)}}` 把 txt 进行双 sha1 编码，等价于 `codec.Sha1`
-1. `{{sha256(txt)}}` 把 txt 进行 sha256 编码，等价于 `codec.Sha256`
-1. `{{sha512(txt)}}` 把 txt 进行 sha521编码，等价于 `codec.Sha512`
-1. `{{urlenc(txt)}}` 把 txt 进行 url 编码，等价于 `codec.EncodeUrl`
-1. `{{doubleurlenc(txt)}}` 把 txt 进行 双重url 编码，等价于 `codec.DoubleEncodeUrl`
-1. `{{htmlenc(txt)}}` 把 txt 进行 html 实体编码，等价于 `codec.EncodeHtml`
-1. `{{htmlhexenc(txt)}}` 把 txt 进行 html 十六进制实体编码，等价于 `codec.EncodeHtmlHex`
+2. `{{md5(txt)}}` 把 txt 编码成 md5，等价于 `codec.Md5`
+3. `{{hex(txt)}}` 把 txt 进行 HEX 编码，等价于 `codec.EncodeToHex`
+4. `{{sha1(txt)}}` 把 txt 进行双 sha1 编码，等价于 `codec.Sha1`
+5. `{{sha256(txt)}}` 把 txt 进行 sha256 编码，等价于 `codec.Sha256`
+6. `{{sha512(txt)}}` 把 txt 进行 sha521编码，等价于 `codec.Sha512`
+7. `{{urlenc(txt)}}` 把 txt 进行 url 编码，等价于 `codec.EncodeUrl`
+8. `{{doubleurlenc(txt)}}` 把 txt 进行 双重url 编码，等价于 `codec.DoubleEncodeUrl`
+9. `{{htmlenc(txt)}}` 把 txt 进行 html 实体编码，等价于 `codec.EncodeHtml`
+10. `{{htmlhexenc(txt)}}` 把 txt 进行 html 十六进制实体编码，等价于 `codec.EncodeHtmlHex`
 
 
 #### 使用案例
@@ -1046,8 +1046,8 @@ line 1: call func codec.EscapeQueryUrl(v1) failed
 #### 定义说明
 
 1. `{{yak(handle|params)}}` 此标签只能在webfuzzer 里面配置了热加载 函数之后使用params为传入的参数
-1. `{{params}}` 此标签能方便用户动态获取不同的参数
-1. `{{codec()}}` 次标签能直接调用Codec模块的插件
+2. `{{params}}` 此标签能方便用户动态获取不同的参数
+3. `{{codec()}}` 次标签能直接调用Codec模块的插件
 
 #### 使用案例
 
