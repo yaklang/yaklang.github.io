@@ -108,7 +108,7 @@ module.exports = {
                 // },
                 {
                     position: "left",
-                    href: "https://ssa.to",
+                    href: "/sast",
                     label: "静态代码分析技术",
                 },
 		        {
