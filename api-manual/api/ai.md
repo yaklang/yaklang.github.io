@@ -5,6 +5,8 @@
 | [ai.Chat](#chat) ||
 | [ai.ChatGLM](#chatglm) ||
 | [ai.FunctionCall](#functioncall) ||
+| [ai.ListModelByProviderType](#listmodelbyprovidertype) ||
+| [ai.ListModels](#listmodels) ||
 | [ai.Moonshot](#moonshot) ||
 | [ai.OpenAI](#openai) ||
 | [ai.StructuredStream](#structuredstream) ||
@@ -15,6 +17,7 @@
 | [ai.funcCallRetryTimes](#funccallretrytimes) ||
 | [ai.model](#model) ||
 | [ai.noHttps](#nohttps) ||
+| [ai.onReasonStream](#onreasonstream) ||
 | [ai.onStream](#onstream) ||
 | [ai.proxy](#proxy) ||
 | [ai.timeout](#timeout) ||
@@ -84,6 +87,49 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `map[string]any` |   |
+| r2 | `error` |   |
+
+
+### ListModelByProviderType
+
+#### 详细描述
+
+
+#### 定义
+
+`ListModelByProviderType(providerType string, opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| providerType | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*aispec.ModelMeta` |   |
+| r2 | `error` |   |
+
+
+### ListModels
+
+#### 详细描述
+
+
+#### 定义
+
+`ListModels(opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*aispec.ModelMeta` |   |
 | r2 | `error` |   |
 
 
@@ -282,6 +328,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
+### onReasonStream
+
+#### 详细描述
+
+
+#### 定义
+
+`onReasonStream(h func(io.Reader)) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(io.Reader)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
