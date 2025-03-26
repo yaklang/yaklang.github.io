@@ -151,6 +151,11 @@ export const CooperativePartnerPage: React.FC<
       name: "三叶草",
       links: "https://www.sycsec.com/",
     },
+    {
+      img: "/img/partner/c4.jpg",
+      name: "c4安全团队",
+      links: "http://www.code4th.cn/",
+    },
   ];
 
   return (

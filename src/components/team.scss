@@ -10,108 +10,47 @@
     max-width: 1600px;
     margin: 0 auto;
     margin-top: 150px;
-    // padding: 0 20%;
     &-logo {
       text-align: center;
-      .img-style {
-        width: 160px;
-        height: 127px;
-      }
     }
     &-content {
-      padding: 0 20%;
-      margin-top: 13px;
-      font-size: 16px;
+      position: relative;
+      padding: 85px;
+      margin: 72px 10%;
+      font-size: 18px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #686c78;
-      line-height: 28px;
-      text-align: center;
-      &-color {
-        background: rgba(255, 125, 35, 0.08);
-      }
-    }
-    .safety-body-show {
-      padding-top: calc(70px + 16px);
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      width: 100%;
-      margin: 0 auto;
-      padding-right: 20px;
-      padding-left: 20px;
-      position: relative;
-      .safety-body-box {
+      line-height: 29px;
+      background-color: #e6f8f326;
+      &-left-top {
         position: absolute;
-        width: 70%;
-        transform: translateY(-50%);
-        left: 15%;
-        height: 140px;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        border-top: 5px solid #46d2ab;
+        border-left: 5px solid #46d2ab;
+        border-top-left-radius: 8px;
+      }
+      &-right-bottom {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 40px;
+        height: 40px;
+        border-right: 5px solid #46d2ab;
+        border-bottom: 5px solid #46d2ab;
+        border-bottom-right-radius: 8px;
+      }
+      .teachingmaterials-wrapper {
         text-align: center;
-        background-color: #42d7ad;
-        border: 1px solid #42d7ad;
-        border-radius: 4px;
-        .left-img-style {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          z-index: -1;
+        margin-top: 100px;
+        font-size: 16px;
+        .teachingmaterials-img {
+          width: 150px;
+          margin-bottom: 50px;
         }
-        .right-img-style {
-          position: absolute;
-          top: 0;
-          right: 0;
-          height: 100%;
-          z-index: -1;
-        }
-        &-show {
-          height: 100%;
-          display: flex;
-          position: relative;
-          .item-box {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            &-title {
-              font-size: 24px;
-              font-weight: 600;
-              color: #ffffff;
-              line-height: 40px;
-            }
-            &-content {
-              margin-top: 8px;
-              font-size: 16px;
-              font-weight: 400;
-              color: #bff5e5;
-              line-height: 22px;
-            }
-          }
-        }
-        .img-style {
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-    @media (min-width: 1200px) {
-      .safety-body-show {
-        padding-top: calc(100px + 16px);
-        padding-left: 196px;
-        padding-right: 196px;
-        max-width: 1552px;
-        .safety-body-box {
-          width: 60%;
-          left: 20%;
-        }
-      }
-    }
-    @media (min-width: 768px) {
-      .safety-body-show {
-        padding-left: 64px;
-        padding-right: 64px;
-        max-width: 1288px;
       }
     }
   }
@@ -247,7 +186,7 @@
     width: 100%;
     padding-bottom: 96px;
     position: relative;
-    .fill-background{
+    .fill-background {
       z-index: -2;
       position: absolute;
       top: 0;
@@ -270,7 +209,7 @@
         flex: 1;
         padding-right: 64px;
         @media (max-width: 1450px) {
-          .consultant-header-info-title  {
+          .consultant-header-info-title {
             font-size: 24px;
           }
           .consultant-header-info-name {
@@ -641,7 +580,7 @@
   width: 100%;
   position: relative;
   font-size: 14px;
-  @media (min-width:1180px) and (max-width: 1450px) {
+  @media (min-width: 1180px) and (max-width: 1450px) {
     .right-line {
       display: none;
     }
@@ -653,7 +592,7 @@
     position: absolute;
     top: 76px;
   }
-  
+
   .member-info-img {
     width: 100%;
     height: 52px;
