@@ -387,42 +387,41 @@ export const Team: React.FC<TeamProps> = (props) => {
     <div className="team-and-thank-container">
       <div className="safety-body">
         <div className="safety-body-logo">
-          <img src="/img/team/safety-title.png" className="img-style" />
+          <img src="/img/team/MegaVector.png" style={{ width: 300 }} />
         </div>
-        <div className="safety-body-content" dangerouslySetInnerHTML={{ __html: t("电子科技大学网络空间安全研究院描述", { interpolation: { escapeValue: false } }) }}></div>
-        <div className="safety-body-show">
-          <div className="safety-body-box">
-            <div className="safety-body-box-show">
-              <img
-                src="/img/team/safety-bg-left.png"
-                className="left-img-style"
-              />
-              <img
-                src="/img/team/safety-bg-right.png"
-                className="right-img-style"
-              />
-              <div className="item-box">
-                <div className="item-box-title">{t("2项")}</div>
-                <div className="item-box-content">{t("国家级奖项")}</div>
-              </div>
-              <div className="item-box">
-                <div className="item-box-title">{t("5项")}</div>
-                <div className="item-box-content">{t("省级奖项")}</div>
-              </div>
-              <div className="item-box">
-                <div className="item-box-title">400+</div>
-                <div className="item-box-content">{t("学术论文")}</div>
-              </div>
-              <div className="item-box">
-                <div className="item-box-title">{t("多部")}</div>
-                <div className="item-box-content">{t("学术著作")}</div>
-              </div>
+        <div className="safety-body-content">
+          <div className="safety-body-content-left-top"></div>
+          {t(
+            "四维创智（北京）科技发展有限公司，公司品牌名称万径安全，成立于2013年，公司以“让世界更安全，让安全更简单”为使命，致力于为用户提供全面、高效、安全的网络安全解决方案。公司以“AI+YAK”为企业核心战略，专注于网络安全基础设施和智能化技术研究，打造了国内外首创的全国产化网络安全开发环境YAK和网络安全高级AI智能体万径千机两大核心，并基于YAK构建自主可控的网络安全生态体系，推动安全产业融合发展，自研产品已广泛应用于能源、金融、运营商等多个行业。"
+          )}
+          <br />
+          {t(
+            "YAK是国内外首创的全国产化网络安全领域开发环境。2023年，YAK入选工信部信息通信领域十大科技进展。2024年，YAK教材《CDSL-YAK网络安全领域编程语言—从入门到实践》正式出版。2024年、2025年YAK被九位院士鉴定为国内外首创、国际先进、国内领先水平，具有完全自主知识产权。"
+          )}
+          <div className="teachingmaterials-wrapper">
+            <img
+              src="/img/team/teachingmaterials.png"
+              className="teachingmaterials-img"
+            />
+            <div>
+              {t("Yak教材《CDSL-YAK网络安全领域编程语言-从入门到实践》")}
             </div>
           </div>
-
-          <img src="/img/team/bigHouse.png" className="img-style" />
+          <div className="safety-body-content-right-bottom"></div>
         </div>
       </div>
+
+      <div className="safety-body">
+        <div className="safety-body-logo">
+          <img src="/img/team/safety-title.png" style={{ width: 260 }} />
+        </div>
+        <div className="safety-body-content">
+          <div className="safety-body-content-left-top"></div>
+          {t("电子科技大学网络空间安全研究院描述")}
+          <div className="safety-body-content-right-bottom"></div>
+        </div>
+      </div>
+
       <div className="owner-body">
         <div className="owner-header-title">Yaklang.io {t("团队")}</div>
         <div className="owner-member-introduce-body">
@@ -453,7 +452,9 @@ export const Team: React.FC<TeamProps> = (props) => {
               })}
             </div>
           </div>
-          <div className="owner-member-introduce-title">{t("做难且正确的事")}！</div>
+          <div className="owner-member-introduce-title">
+            {t("做难且正确的事")}！
+          </div>
         </div>
       </div>
 
