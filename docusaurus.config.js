@@ -108,7 +108,7 @@ module.exports = {
                 // },
                 {
                     position: "left",
-                    href: "/sast",
+                    href: "/irify",
                     label: "静态代码分析技术",
                 },
 		        {
