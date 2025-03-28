@@ -12,6 +12,7 @@
 | [servicescan.cache](#cache) |cache servicescan 的配置选项，设置本次扫描是否使用缓存  @param {bool} b 是否使用缓存  @return {ConfigOption} 返回配置项  |
 | [servicescan.concurrent](#concurrent) |concurrent servicescan 的配置选项，用于设置整体扫描并发  @param {int} size 并发数量  @return {ConfigOption} 返回配置项  |
 | [servicescan.databaseCache](#databasecache) |databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存  @param {bool} b 是否使用数据库缓存  @return {ConfigOption} 返回配置项  |
+| [servicescan.debugLog](#debuglog) |debugLog 的配置选项，设置本次扫描是否使用 debugLog  @param {bool} b 是否使用 debugLog  @return {ConfigOption} 返回配置项  |
 | [servicescan.disableDefaultRule](#disabledefaultrule) ||
 | [servicescan.excludeHosts](#excludehosts) |excludeHosts servicescan 的配置选项，设置本次扫描排除的主机  @param {string} hosts 主机，支持逗号分割、CIDR、-的格式  @return {ConfigOption} 返回配置项  |
 | [servicescan.excludePorts](#excludeports) |excludePorts servicescan 的配置选项，设置本次扫描排除的端口  @param {string} ports 端口，支持逗号分割、-的格式  @return {ConfigOption} 返回配置项  |
@@ -19,6 +20,8 @@
 | [servicescan.maxProbesConcurrent](#maxprobesconcurrent) |maxProbesConcurrent servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 5  @param {int} m 并发量  @return {ConfigOption} 返回配置项  |
 | [servicescan.nmapRarityMax](#nmapraritymax) |nmapRarityMax servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹稀有度，在主动模式发包的基础上进行探测控制  稀有度越大，表示这个服务在现实存在的可能性越小，取值范围为 1-9，默认值为 5  @param {int} rarity 稀有度，取值范围为 1-9  @...|
 | [servicescan.nmapRule](#nmaprule) |nmapRule servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹规则 @param {interface{}} i Nmap 指纹规则 |
+| [servicescan.onFinish](#onfinish) |onFinish servicescan 的配置选项，设置本次扫描端口开放时的回调函数  @param {func(*MatchResult)} cb 回调函数  @return {ConfigOption} 返回配置项  |
+| [servicescan.onOpen](#onopen) |onOpen servicescan 的配置选项，设置本次扫描端口开放时的回调函数  @param {func(*MatchResult)} cb 回调函数  @return {ConfigOption} 返回配置项  |
 | [servicescan.probeTimeout](#probetimeout) |probeTimeout servicescan 的配置选项，设置每一个探测包的超时时间  @param {float64} f 超时时间，单位为秒  @return {ConfigOption} 返回配置项  |
 | [servicescan.proto](#proto) |proto servicescan 的配置选项，用于指定扫描协议  @param {...interface{}} [proto] 协议，例如：tcp、udp，可选参数，不传入参数默认为 tcp  @return {ConfigOption} 返回配置选项  |
 | [servicescan.proxy](#proxy) |proxy servicescan 的配置选项，设置本次扫描使用的代理  @param {string} proxies 代理地址，支持 http 和 socks5  @return {ConfigOption} 返回配置项  |
@@ -315,7 +318,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.ca
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -351,7 +354,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.co
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -387,7 +390,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.da
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -401,6 +404,42 @@ die(err)
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### debugLog
+
+#### 详细描述
+debugLog 的配置选项，设置本次扫描是否使用 debugLog
+
+@param {bool} b 是否使用 debugLog
+
+@return {ConfigOption} 返回配置项
+
+Example:
+```
+result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.debugLog(true))
+die(err)
+
+	for v := range result {
+		println(v.String())
+	}
+
+```
+
+
+#### 定义
+
+`debugLog(b ...bool) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -443,7 +482,7 @@ result, err = servicescan.Scan("192.168.1.1/24", "22-80,443,3389", servicescan.e
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -479,7 +518,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.ex
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -518,7 +557,7 @@ servicescan.maxProbes(10)
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -558,7 +597,7 @@ servicescan.maxProbesConcurrent(10) // 设置本次扫描发送 Probe 的并发�
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -599,7 +638,7 @@ servicescan.nmapRarityMax(9),
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -642,6 +681,75 @@ nmapRule servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹�
 | r1 | `ConfigOption` |   |
 
 
+### onFinish
+
+#### 详细描述
+onFinish servicescan 的配置选项，设置本次扫描端口开放时的回调函数
+
+@param {func(*MatchResult)} cb 回调函数
+
+@return {ConfigOption} 返回配置项
+
+Example:
+```
+	result, err := servicescan.Scan("127.0.0.1", "22,80,443", servicescan.onFinish(result => dump(result.String())))
+	die(err)
+	for i in result {
+		println(i.String())
+	}
+
+```
+
+
+#### 定义
+
+`onFinish(cb func(*MatchResult)) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func(*MatchResult)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### onOpen
+
+#### 详细描述
+onOpen servicescan 的配置选项，设置本次扫描端口开放时的回调函数
+
+@param {func(*MatchResult)} cb 回调函数
+
+@return {ConfigOption} 返回配置项
+
+Example:
+```
+result, err := servicescan.Scan("127.0.0.1", "22,80,443", servicescan.onOpen(result => dump(result.String())))
+die(err)
+for i in result {
+		println(i.String())
+	}
+```
+
+
+#### 定义
+
+`onOpen(cb func(*MatchResult)) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func(*MatchResult)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
 ### probeTimeout
 
 #### 详细描述
@@ -657,7 +765,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.pr
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
@@ -729,7 +837,7 @@ result, err = servicescan.Scan("127.0.0.1", "22-80,443,3389,161", servicescan.pr
 die(err)
 
 	for v := range result {
-		fmt.Println(v.String())
+		println(v.String())
 	}
 
 ```
