@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import "antd/dist/antd.min.css";
-import { Sast } from "../components/Sast";
+import { IRify } from "../components/IRify";
 
 export default function Home() {
     const { siteConfig } = useDocusaurusContext();
@@ -13,7 +13,7 @@ export default function Home() {
             description="Web安全能力研发最强语言"
         >
             <main>
-                <Sast />
+                <IRify />
             </main>
         </Layout>
     );

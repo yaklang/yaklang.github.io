@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { OutlineArrowrightIcon } from "./SastIcon";
+import { OutlineArrowrightIcon } from "./IRifyIcon";
 import { AppleIcon, DownloadIcon, LinuxIcon, WindowsIcon } from "./HomeIcon";
 
 import { useMemoizedFn } from "ahooks";
 import { Dropdown, Menu, message } from "antd";
 
 const axios = require("axios");
-export interface SastProps {}
+export interface IRifyProps {}
 
-export const Sast: React.FC<SastProps> = (props) => {
+export const IRify: React.FC<IRifyProps> = (props) => {
   return (
     <div>
-      <SastPage />
+      <IRifyPage />
     </div>
   );
 };
@@ -20,7 +20,7 @@ export const Sast: React.FC<SastProps> = (props) => {
 const FeatureList = [
   {
     title: () => "多语言多框架技术支持",
-    img: require("../../static/img/sast/MultipleLanguagesSupported.png")
+    img: require("../../static/img/irify/MultipleLanguagesSupported.png")
       .default,
     description: () => (
       <>
@@ -77,7 +77,7 @@ const FeatureList = [
   },
   {
     title: () => "先进的分析技术",
-    img: require("../../static/img/sast/AdvancedAnalysisTechniques.png")
+    img: require("../../static/img/irify/AdvancedAnalysisTechniques.png")
       .default,
     description: () => (
       <>
@@ -123,7 +123,7 @@ const FeatureList = [
   },
   {
     title: () => "IR 数据库与分析规则",
-    img: require("../../static/img/sast/IR-DatabaseandAnalysisRule.png")
+    img: require("../../static/img/irify/IR-DatabaseandAnalysisRule.png")
       .default,
     description: () => (
       <>
@@ -171,7 +171,7 @@ const FeatureList = [
   },
 ];
 
-function SastPage() {
+function IRifyPage() {
   const { t } = useTranslation();
   const [legacyVisible, setLegacyVisible] = useState(false);
   const [version, setVersion] = useState("");
@@ -205,7 +205,7 @@ function SastPage() {
   }, []);
   const init = useMemoizedFn(() => {
     axios
-      .get("https://oss-qn.yaklang.com/sast/latest/yakit-version.txt")
+      .get("https://oss-qn.yaklang.com/irify/latest/yakit-version.txt")
       .then(async (response) => {
         if (response && response.data && typeof response.data === "string") {
           const yakVersion = response.data.split("\n")[0];
@@ -224,15 +224,15 @@ function SastPage() {
             setWindows({ ...Windows, size });
           });
         } else {
-          message.error("获取sast版本错误，请刷新页面后重试");
+          message.error("获取irify版本错误，请刷新页面后重试");
         }
       })
       .catch((error) => {
-        message.error("获取sast版本错误，请刷新页面后重试");
+        message.error("获取irify版本错误，请刷新页面后重试");
       });
   });
   const getUrl = useMemoizedFn((url, newVersion = version) => {
-    return `https://oss-qn.yaklang.com/sast/${newVersion}/SastScan-${newVersion}-${url}`;
+    return `https://oss-qn.yaklang.com/irify/${newVersion}/IRify-${newVersion}-${url}`;
   });
   const getSize = useMemoizedFn(async (url, newVersion, callBack) => {
     await axios
@@ -266,7 +266,7 @@ function SastPage() {
     window.location.href = link;
   });
   return (
-    <div className="sast-page">
+    <div className="irify-page">
       <div className="heroBanner">
         <div className="container">
           <h1>
@@ -294,7 +294,7 @@ function SastPage() {
         <div className="guide-words-body">
           <div className="guide-body-yakit guide-body-yak-heard">
             <span className="guide-body-yak-heard-text">
-              {t("下载SAST IDE (Sast)")}
+              {t("下载IRIFY IDE (IRify)")}
             </span>
           </div>
           <div className="guide-body-yakit-type">
@@ -477,7 +477,7 @@ function SastPage() {
               style={{ display: "block", fontSize: "12px", color: "#999ea8" }}
             >
               {t(
-                "如果您需要使用Sast用于商业化目的，请确保你们已经获得官方授权，否则我们将追究您的相关责任。"
+                "如果您需要使用IRify用于商业化目的，请确保你们已经获得官方授权，否则我们将追究您的相关责任。"
               )}
             </span>
           </div>
