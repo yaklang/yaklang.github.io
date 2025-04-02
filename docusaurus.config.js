@@ -206,20 +206,20 @@ module.exports = {
         },
         algolia: {
             // The application ID provided by Algolia
-            appId: "KU1F47O3Q6",
+            appId: "-",
 
             // Public API key: it is safe to commit it
-            apiKey: "84508cc662df9bef2f7e8bab1a3508bb",
+            apiKey: "-",
 
             indexName: "yaklang",
 
-            // Optional: see doc section below
-            contextualSearch: false,
+            // // Optional: see doc section below
+            // contextualSearch: false,
 
-            // Optional: Algolia search parameters
-            searchParameters: {
-                facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
-            },
+            // // Optional: Algolia search parameters
+            // searchParameters: {
+            //     facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
+            // },
         },
         prism: {
             theme: require("prism-react-renderer/themes/github"),
@@ -271,6 +271,38 @@ module.exports = {
                 // ... other options
             },
         ],
+        function ProxyPlugin() {
+            return {
+                name: 'proxy-plugin',
+                configureWebpack() {
+                return {
+                    devServer: {
+                        proxy: {
+                            '/api': {
+                                target: 'http://192.168.3.100:8083/',
+                                // pathRewrite: {'^/api': ''},
+                                changeOrigin: true,
+                            },
+                            '/fastgocaptcha': {
+                                target: 'http://192.168.3.100:8083/',
+                                // pathRewrite: {'^/api': ''},
+                                changeOrigin: true,
+                            },
+                        },
+                        client: {
+                            overlay: false, 
+                        },
+                        setupMiddlewares: (middlewares, devServer) => {
+                            if (!devServer) {
+                                throw new Error('webpack-dev-server is not defined');
+                            }
+                            return middlewares;
+                        },
+                    },
+                };
+                },
+            };
+        },
     ],
     presets: [
         [
@@ -294,4 +326,5 @@ module.exports = {
             },
         ],
     ],
+
 };

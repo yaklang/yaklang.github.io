@@ -166,7 +166,7 @@ function NavbarMobileSidebar({sidebarShown, toggleSidebar}) {
           type="button"
           className="clean-btn navbar-sidebar__close"
           onClick={toggleSidebar}>
-          <IconCloseThin
+          <IconCloseThin 
             width={20}
             height={20}
             className={styles.navbarSidebarCloseSvg}
