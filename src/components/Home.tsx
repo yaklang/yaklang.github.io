@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useRef,
   useState,
+  version,
 } from "react";
 import { Button, Dropdown, Menu, message, Popover } from "antd";
 import {
@@ -391,8 +392,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
     init();
   }, []);
   const init = useMemoizedFn(() => {
-    axios
-      .get(
+    axios.get(
         "https://oss-qn.yaklang.com/yak/latest/yakit-version.txt"
       )
       .then(async (response) => {
@@ -421,6 +421,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         }
       })
       .catch((error) => {
+        console.log(error,'error1')
         message.error("获取yakit版本错误，请刷新页面后重试");
       });
   });

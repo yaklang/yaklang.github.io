@@ -1,0 +1,93 @@
+.search-bar-modal{
+    .ant-modal-content{
+        border-radius: 24px;
+        .ant-modal-body{
+            padding: 0px !important;
+            background: #f5f6f7;
+            border-radius: 24px;
+            overflow: hidden;
+            .modal-container{
+                .ant-input-group-wrapper{
+                    padding: 24px 12px;
+                    padding-bottom: 12px;
+                    box-shadow: 0 2px 8px #0000000d;
+                    .ant-input-affix-wrapper:hover{
+                        border: 1px solid #eee4fa 
+                    }
+                    .ant-input-affix-wrapper:focus{
+                        border: 1px solid #eee4fa;
+                        box-shadow: 0 0 2px 2px rgba(174, 141, 216, 0.2);
+                    }
+                    .ant-input-affix-wrapper-focused:focus{
+                        border: 1px solid #eee4fa;
+                        box-shadow: 0 0 2px 2px rgba(174, 141, 216, 0.2);
+                    }
+                    .ant-input-affix-wrapper-focused{
+                        border: 1px solid #eee4fa;
+                        box-shadow: 0 0 2px 2px rgba(174, 141, 216, 0.2);
+                    }
+                    .ant-input-affix-wrapper{
+                        border-radius: 12px 0px 0px 12px;
+                        height: 40px;
+                    }
+                    .ant-input-group-addon{
+                        .ant-input-search-button{
+                            border-radius: 0px 12px 12px 0;
+                            color: #000;
+                            background: #eee4fa;
+                            border-color: #eee4fa;
+                        }
+                    }
+                }
+                .context-box{
+                    padding: 24px;
+                    padding-top: 0px;
+                    max-height: 600px;
+                    overflow-y: scroll;
+                    background-color: #fff;
+                    .search-bar-content-box{
+                        margin: 12px 0;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 8px #0000000d;
+                        padding: 1rem;
+                        transition: transform .3s, box-shadow .3s;
+                        cursor: pointer;
+                        &:hover{
+                            box-shadow: 0 2px 8px #0000001a;
+                            transform: translateY(-1px);
+                            background-color: #f2f4f5;
+                        }
+                        .search-bar-content{
+                            color: #444950;
+                            display: block;
+                            font-size: .95rem;
+                            line-height: 1.5;
+                            max-height: 180px;
+                            position: relative;
+                            word-break: break-all;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            white-space: pre-line;
+                            // &:hover{
+                            //     color: #1890ff;
+                                
+                            // }
+                            // &::after{
+                            //     background: linear-gradient(to bottom, #fff0, #f5f6f7);
+                            //     bottom: 0;
+                            //     content: "";
+                            //     height: 60px;
+                            //     pointer-events: none;
+                            //     position: absolute;
+                            //     right: 0;
+                            //     width: 100%;
+                            // }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
