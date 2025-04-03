@@ -47,7 +47,7 @@ ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字
 Example:
 ```
 code = `function add(a, b) { return a + b; }`
-res = javascript.ASTWalk(code)~
+res = js.ASTWalk(code)~
 dump(res)
 ```
 
