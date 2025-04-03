@@ -282,11 +282,13 @@ module.exports = {
                                 target: 'http://192.168.3.100:8083/',
                                 // pathRewrite: {'^/api': ''},
                                 changeOrigin: true,
+                                secure: false, // 忽略 HTTPS 证书验证
                             },
                             '/fastgocaptcha': {
                                 target: 'http://192.168.3.100:8083/',
                                 // pathRewrite: {'^/api': ''},
                                 changeOrigin: true,
+                                secure: false, // 忽略 HTTPS 证书验证
                             },
                         },
                         client: {
