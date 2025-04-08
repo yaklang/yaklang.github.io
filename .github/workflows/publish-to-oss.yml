@@ -71,14 +71,24 @@ jobs:
           path: |
             node_modules
             **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-${{ hashFiles('yarn.lock') }}
           restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-
             ${{ runner.os }}-node-
 
       # 打包
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
+
+      - name: Save Node Modules Cache
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-${{ hashFiles('yarn.lock') }}
       
       - name: Build
         run: yarn run build
