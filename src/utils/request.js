@@ -8,7 +8,7 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-    config.url = `api${config.url}`;
+    config.url = `${config.url}`;
 
     return config;
 });
