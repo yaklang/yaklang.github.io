@@ -271,38 +271,40 @@ module.exports = {
                 // ... other options
             },
         ],
-        function ProxyPlugin() {
-            return {
-                name: 'proxy-plugin',
-                configureWebpack() {
-                return {
-                    devServer: {
-                        proxy: {
-                            '/api': {
-                                target: 'http://192.168.3.100:8083/',
-                                // pathRewrite: {'^/api': ''},
-                                changeOrigin: true,
-                            },
-                            '/fastgocaptcha': {
-                                target: 'http://192.168.3.100:8083/',
-                                // pathRewrite: {'^/api': ''},
-                                changeOrigin: true,
-                            },
-                        },
-                        client: {
-                            overlay: false, 
-                        },
-                        setupMiddlewares: (middlewares, devServer) => {
-                            if (!devServer) {
-                                throw new Error('webpack-dev-server is not defined');
-                            }
-                            return middlewares;
-                        },
-                    },
-                };
-                },
-            };
-        },
+        // function ProxyPlugin() {
+        //     return {
+        //         name: 'proxy-plugin',
+        //         configureWebpack() {
+        //         return {
+        //             devServer: {
+        //                 proxy: {
+        //                     '/api': {
+        //                         target: 'http://192.168.3.100:8083/',
+        //                         // pathRewrite: {'^/api': ''},
+        //                         changeOrigin: true,
+        //                         secure: false, // 忽略 HTTPS 证书验证
+        //                     },
+        //                     '/fastgocaptcha': {
+        //                         target: 'http://192.168.3.100:8083/',
+        //                         // pathRewrite: {'^/api': ''},
+        //                         changeOrigin: true,
+        //                         secure: false, // 忽略 HTTPS 证书验证
+        //                     },
+        //                 },
+        //                 client: {
+        //                     overlay: false, 
+        //                 },
+        //                 setupMiddlewares: (middlewares, devServer) => {
+        //                     if (!devServer) {
+        //                         throw new Error('webpack-dev-server is not defined');
+        //                     }
+        //                     return middlewares;
+        //                 },
+        //             },
+        //         };
+        //         },
+        //     };
+        // },
     ],
     presets: [
         [
