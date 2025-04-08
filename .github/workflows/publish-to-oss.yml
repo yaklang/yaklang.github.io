@@ -34,6 +34,8 @@ on:
   push:
     tags:
       - "v*"
+    paths:
+      - '.github/workflows/publish-to-oss.yml'
   workflow_dispatch:
     inputs:
       environment:
@@ -51,7 +53,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          retry-on-error: true
       
       - name: Use Node.js 
         uses: actions/setup-node@v3
