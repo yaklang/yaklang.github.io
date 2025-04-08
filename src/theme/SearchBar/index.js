@@ -112,16 +112,16 @@ function DocSearch({contextualSearch, ...props}) {
 
   return (
     <>
-      <Head>
-        {/* This hints the browser that the website will load data from Algolia,
-        and allows it to preconnect to the DocSearch cluster. It makes the first
-        query faster, especially on mobile. */}
+      {/* This hints the browser that the website will load data from Algolia,
+      and allows it to preconnect to the DocSearch cluster. It makes the first
+      query faster, especially on mobile. */}
+      {/* <Head>
         <link
           rel="preconnect"
           href={`https://${props.appId}-dsn.algolia.net`}
           crossOrigin="anonymous"
         />
-      </Head>
+      </Head> */}
 
       <div className={styles.searchBox}>
         <DocSearchButton

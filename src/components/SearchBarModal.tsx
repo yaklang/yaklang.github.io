@@ -11,7 +11,7 @@ interface TSearchBarModalProps {
     reviseModalStatusMemoizedFn: () => void;
 }
 
-const getSearchPower = (searchValue) => apiClient.get(`/ai/search?keywords=${searchValue}`, { withCredentials: true })
+const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
 
 
 export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalStatusMemoizedFn }) => { 
