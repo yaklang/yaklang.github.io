@@ -45,13 +45,30 @@
                     max-height: 600px;
                     overflow-y: scroll;
                     background-color: #fff;
+                    .search-bar-tag{
+                        margin: 12px 0;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 8px #0000000d;
+                        padding: 1rem;
+                        transition: transform .3s, box-shadow .3s;
+                        border-left: 4px solid #eee4fa;
+                        .search-bar-tag-cursor{
+                            display: inline-block; /* ✅ 关键 */
+                            animation: blink 0.8s infinite;
+                            background-color: rgba(174, 141, 216);
+                            height: 1.2rem;
+                            margin-left: 4px;
+                            vertical-align: middle;
+                            width: .6rem;
+                        }
+                    }
                     .search-bar-content-box{
                         margin: 12px 0;
                         border-radius: 8px;
                         box-shadow: 0 2px 8px #0000000d;
                         padding: 1rem;
                         transition: transform .3s, box-shadow .3s;
-                        cursor: pointer;
+                        // cursor: pointer;
                         &:hover{
                             box-shadow: 0 2px 8px #0000001a;
                             transform: translateY(-1px);
@@ -89,5 +106,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
     }
 }

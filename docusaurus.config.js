@@ -279,11 +279,11 @@ module.exports = {
                     devServer: {
                         proxy: {
                             '/api': {
-                                target: 'http://192.168.3.100:8083/',
+                                target: 'http://192.168.3.100:8080/',
                                 changeOrigin: true,
                             },
                             '/fastgocaptcha': {
-                                target: 'http://192.168.3.100:8083/',
+                                target: 'http://192.168.3.100:8080/',
                                 changeOrigin: true,
                             },
                         },
