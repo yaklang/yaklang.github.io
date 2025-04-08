@@ -12,6 +12,7 @@ interface TSearchBarModalProps {
 }
 
 const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
+// const getSearchPower = (searchValue) => apiClient.get(`/ai/search?keywords=${searchValue}`, { withCredentials: true })
 
 
 export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalStatusMemoizedFn }) => { 
@@ -21,6 +22,7 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
     const [iframeUrl, setIframeUrl] = useSafeState<string | null>(null);
     const [searchValue, setSearchValue] = useSafeState("")
     const [dataList, setDataList] = useSafeState<Array<any>>([])
+    const [searchTag, setSearchTag] = useSafeState<string>("")
 
     const { loading, runAsync, refresh } = useRequest(getSearchPower, {
         manual: true,
@@ -38,6 +40,16 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
                 }
             })
             const fliterList = mapList.filter(items => typeof (items.result) === "object")
+
+            const filterTag = Array.from(
+                new Map(
+                    mapList
+                    .filter(item => typeof item.result === "string")
+                    .map(item => [item.result, item]) // 用 result 做 key
+                ).values()
+            ).map((item: any) => item.result).join(" ");
+            setSearchTag(filterTag)
+
             const resultList = fliterList.map(item =>
                 item?.result?.chunkList ?
                     item.result.chunkList :
@@ -153,9 +165,28 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
                         {
                             Array.isArray(dataList) && dataList.length > 0 ?
                                 <div className='context-box'>
+                                        <div className='search-bar-tag'>
+                                            {searchTag}
+                                            <span className='search-bar-tag-cursor' />
+                                        </div>
                                     { dataList?.map((item) => (<ModalContent key={item.documentName} item={item} />)) }
                                 </div>:
-                                <Empty style={{margin: "24px 0"}} description="暂无数据" />
+                                    <Empty
+                                        style={{ margin: "24px 0" }}
+                                        description={
+                                            <span>暂无数据
+                                                <span
+                                                    onClick={() => {
+                                                        searchValue && searchValue.length > 0 &&
+                                                        runAsync(searchValue)
+                                                    }}
+                                                    style={{ color: "rgba(174, 141, 216)", cursor: "pointer" }}
+                                                >
+                                                    &nbsp;请重试
+                                                </span>
+                                            </span>
+                                        }
+                                    />
                         }
                     </Spin>
                 </div>
@@ -166,17 +197,61 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
 
 
 const ModalContent: FC<{item: any}> = ({item}) => {
+    const url = `${window.location.protocol}//${window.location.hostname}${item.documentName}`
     // const [expand, setExpand] = React.useState(true);
 
     // const handExpand = () => {
     //     setExpand(!expand);
     // }
     return (
-        <div className='search-bar-content-box' id="captchaIframe">
-            <div className='search-bar-content' style={{ WebkitLineClamp: 4, }} onClick={
-                    () => window.location.href = (`/${item.documentName}`)
-                }
-            >
+        <div
+            className='search-bar-content-box'
+            id="captchaIframe"
+            onClick={
+                () => window.location.href = (`/${item.documentName}`)
+            }
+        >
+            <div style={{display: "flex", justifyContent: "space-between", alignItems: "flex-start"}}>
+                <div
+                    style={{ color: "rgba(174, 141, 216)", display: "flex", alignItems: "flex-start"}}
+                >
+                    <div
+                        style={{ maxWidth: "450px", cursor: "pointer"}}
+                    >
+                        <span style={{ fontWeight: 600 }}>URL：</span>
+                        <span
+                            style={{
+                            display: "inline",
+                            wordBreak: "break-all",
+                            }}
+                        >
+                            {url}
+                        </span>
+                    </div>
+                    <div style={{
+                        marginLeft: "8px",
+                        background: "rgba(174, 141, 216)",
+                        color: "#fff",
+                        borderRadius: "12px",
+                        padding: "2px 8px",
+                    }}>
+                        关联度：{Math.round(item.score * 100) / 100}
+                    </div>
+                </div>
+                {/* <div
+                    style={{
+                        marginLeft: "8px",
+                        backgroundColor: "#aae3f6",
+                        color: "#fff",
+                        borderRadius: "12px",
+                        padding: "2px 8px",
+                    }}
+                >
+                    JSON
+                </div> */}
+            </div>
+            <div style={{lineHeight: '36px'}}>来源文档： {item.documentName}</div>
+            <div className='search-bar-content' style={{ WebkitLineClamp: 4, }}>
                 {item.content}
             </div>
             {/* <div className='expand-icon' onClick={handExpand}>
