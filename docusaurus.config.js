@@ -280,12 +280,10 @@ module.exports = {
                         proxy: {
                             '/api': {
                                 target: 'http://192.168.3.100:8083/',
-                                // pathRewrite: {'^/api': ''},
                                 changeOrigin: true,
                             },
                             '/fastgocaptcha': {
                                 target: 'http://192.168.3.100:8083/',
-                                // pathRewrite: {'^/api': ''},
                                 changeOrigin: true,
                             },
                         },
