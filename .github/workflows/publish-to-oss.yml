@@ -105,8 +105,9 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          GIT_USER=v1ll4n yarn deploy
+          GIT_USER: v1ll4n
+          GIT_PASS: ${{ secrets.GH_TOKEN }}
+        run: yarn deploy
 
       # 部署到服务器
       - name: Upload Build Files via SSH
