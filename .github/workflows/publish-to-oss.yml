@@ -58,8 +58,21 @@ jobs:
         with:
           node-version: "18.20.0"
 
+      # 缓存 node_modules
+      - name: Cache Node Modules
+        uses: actions/cache@v3
+        id: node-cache
+        with:
+          path: |
+            node_modules
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       # 打包
       - name: Install Dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
       
       - name: Build
