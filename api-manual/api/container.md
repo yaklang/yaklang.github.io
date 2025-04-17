@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [container.NewLinkedList](#newlinkedlist) |New returns an initialized list. |
+| [container.NewLinkedList](#newlinkedlist) ||
 | [container.NewSet](#newset) |NewSet creates a new set  |
 | [container.NewUnsafeSet](#newunsafeset) |NewUnsafeSet creates a new set that is not thread-safe  |
 
@@ -11,17 +11,16 @@
 ### NewLinkedList
 
 #### 详细描述
-New returns an initialized list.
 
 
 #### 定义
 
-`NewLinkedList() *List`
+`NewLinkedList() *LinkedList`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*List` |   |
+| r1 | `*LinkedList` |   |
 
 
 ### NewSet
