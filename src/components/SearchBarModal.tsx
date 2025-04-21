@@ -11,8 +11,8 @@ interface TSearchBarModalProps {
     reviseModalStatusMemoizedFn: () => void;
 }
 
-const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
-// const getSearchPower = (searchValue) => apiClient.get(`/ai/search?keywords=${searchValue}`, { withCredentials: true })
+// const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
+const getSearchPower = (searchValue) => apiClient.get(`/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
 
 
 export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalStatusMemoizedFn }) => { 
@@ -27,46 +27,55 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
     const { loading, runAsync, refresh } = useRequest(getSearchPower, {
         manual: true,
         onSuccess: (values: string) => {
-            const searchListFlat = JSON.parse(values).flat(Infinity)
-            const parsedData = searchListFlat.map(s => JSON.parse(s));
-            const mapList = parsedData.map(item => {
-                try {
-                    // 检查 result 是否是一个字符串，并尝试解析
-                    const parsed = JSON.parse(item.result);
-                    return typeof parsed === 'object' ? { result: parsed } : item;
-                } catch {
-                    // 解析失败，说明不是 JSON，直接返回原对象
-                    return item;
+            try {
+                const jsonValues = JSON.parse(values)
+                if (Array.isArray(jsonValues)) {
+                    const searchListFlat = jsonValues.flat(Infinity)
+                    const parsedData = searchListFlat.map(s => JSON.parse(s));
+                    const mapList = parsedData.map(item => {
+                        try {
+                            // 检查 result 是否是一个字符串，并尝试解析
+                            const parsed = JSON.parse(item.result);
+                            return typeof parsed === 'object' ? { result: parsed } : item;
+                        } catch {
+                            // 解析失败，说明不是 JSON，直接返回原对象
+                            return item;
+                        }
+                    })
+                    const fliterList = mapList.filter(items => typeof (items.result) === "object")
+
+                    const filterTag = Array.from(
+                        new Map(
+                            mapList
+                            .filter(item => typeof item.result === "string")
+                            .map(item => [item.result, item]) // 用 result 做 key
+                        ).values()
+                    ).map((item: any) => item.result).join(" ");
+                    setSearchTag(filterTag)
+
+                    const resultList = fliterList.map(item =>
+                        item?.result?.chunkList ?
+                            item.result.chunkList :
+                            item.result?.records?.chunkList
+                    )?.flat(Infinity)
+
+                    const uniqueData = resultList.filter((item, index, self) =>
+                        self.findIndex(i => i.documentName === item.documentName) === index
+                    ).map(items => {
+                        const match = items?.content?.match(/【正文】:(.*)/s); // `s` 让 `.` 匹配换行
+                        const content = match ? match[1].trim() : "";
+                        return {
+                            ...items,
+                            content
+                        }
+                    });
+                    setDataList(uniqueData)
+                } else {
+                    return 
                 }
-            })
-            const fliterList = mapList.filter(items => typeof (items.result) === "object")
-
-            const filterTag = Array.from(
-                new Map(
-                    mapList
-                    .filter(item => typeof item.result === "string")
-                    .map(item => [item.result, item]) // 用 result 做 key
-                ).values()
-            ).map((item: any) => item.result).join(" ");
-            setSearchTag(filterTag)
-
-            const resultList = fliterList.map(item =>
-                item?.result?.chunkList ?
-                    item.result.chunkList :
-                    item.result?.records?.chunkList
-            ).flat(Infinity)
-
-            const uniqueData = resultList.filter((item, index, self) =>
-                self.findIndex(i => i.documentName === item.documentName) === index
-            ).map(items => {
-                const match = items?.content?.match(/【正文】:(.*)/s); // `s` 让 `.` 匹配换行
-                const content = match ? match[1].trim() : "";
-                return {
-                    ...items,
-                    content
-                }
-            });
-            setDataList(uniqueData)
+            } catch (error) {
+                console.error(error, 'error')
+            }
         },
         onError: (error: any) => {
             const responseErrorText = error?.response?.request?.responseText;
@@ -76,8 +85,10 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
             if (targetHerfUrl) {
                 // window.location.href = targetHerfUrl; // 直接跳转到新的 URL
                 setTimeout(() => {
-                    setIframeUrl(targetHerfUrl); // 让 React 处理 iframe 渲染
+                    setIframeUrl("https://yaklang.com" + targetHerfUrl); // 让 React 处理 iframe 渲染
                 }, 300)
+            } else {
+                console.error(error, 'error')
             }
         },
         debounceWait: 500,
