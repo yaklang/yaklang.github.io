@@ -11,8 +11,8 @@ interface TSearchBarModalProps {
     reviseModalStatusMemoizedFn: () => void;
 }
 
-const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
-// const getSearchPower = (searchValue) => apiClient.get(`/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
+// const getSearchPower = (searchValue) => apiClient.get(`https://yaklang.com/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
+const getSearchPower = (searchValue) => apiClient.get(`/api/ai/search?keywords=${searchValue}`, { withCredentials: true })
 
 
 export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalStatusMemoizedFn }) => { 
@@ -80,12 +80,12 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
         onError: (error: any) => {
             const responseErrorText = error?.response?.request?.responseText;
             const matchUrl = responseErrorText?.match(/href='(.*?)'/);
-            const targetHerfUrl = matchUrl ? `${matchUrl[1]}` : undefined;
+            const targetHrefUrl = matchUrl ? `${matchUrl[1]}` : undefined;
 
-            if (targetHerfUrl) {
+            if (targetHrefUrl) {
                 // window.location.href = targetHerfUrl; // 直接跳转到新的 URL
                 setTimeout(() => {
-                    setIframeUrl("https://yaklang.com" + targetHerfUrl); // 让 React 处理 iframe 渲染
+                    setIframeUrl("https://yaklang.com" + targetHrefUrl); // 让 React 处理 iframe 渲染
                 }, 300)
             } else {
                 console.error(error, 'error')
@@ -106,17 +106,15 @@ export const SearchBarModal: FC<TSearchBarModalProps> = ({ isOpen, reviseModalSt
     }
 
     const handleMessage = (event: MessageEvent) => {
-        const source = event.source as any
         if (
-            event &&
-            source.location &&
-            source.location.pathname &&
-            source.location.pathname?.length > 1) {
-                if (event.data.status === "success") {
-                    clearIframe()
-                     refresh()
-                }
-            }
+            event && 
+            event?.origin && 
+            event.origin === "https://yaklang.com" &&
+            event.data.status === "success"
+        ) {
+            clearIframe()
+            refresh()
+        }
     };
 
     useEffect(() => {
