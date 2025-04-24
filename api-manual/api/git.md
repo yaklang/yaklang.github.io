@@ -9,8 +9,13 @@
 | [git.FileSystemFromCommitRange](#filesystemfromcommitrange) |FileSystemFromCommitRange 从commit范围中获取文件系统    |
 | [git.FileSystemFromCommits](#filesystemfromcommits) |FileSystemFromCommits 从多个commit中获取文件系统    |
 | [git.GitHack](#githack) |GitHack 是一个用于利用 Git 源码泄露漏洞的函数  Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露  |
+| [git.HeadBranch](#headbranch) ||
+| [git.HeadBranchRange](#headbranchrange) ||
+| [git.HeadHash](#headhash) ||
 | [git.IterateCommit](#iteratecommit) |IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(commit)，并对过滤后的每个提交记录执行指定的操作，它还可以接收零个到多个选项函数，用于配置回调函数  |
+| [git.ParentHash](#parenthash) ||
 | [git.Pull](#pull) |Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合并到本地仓库中，这种行为称之为拉取(pull)，它还可以接收零个到多个选项函数，用于影响拉取行为  |
+| [git.RevParse](#revparse) ||
 | [git.SetProxy](#setproxy) |SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）的代理  |
 | [git.auth](#auth) |auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的认证用户名和密码  |
 | [git.checkoutCreate](#checkoutcreate) |fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否创建新分支  |
@@ -241,6 +246,69 @@ git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-t
 | finalErr | `error` |   |
 
 
+### HeadBranch
+
+#### 详细描述
+
+
+#### 定义
+
+`HeadBranch(repos string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### HeadBranchRange
+
+#### 详细描述
+
+
+#### 定义
+
+`HeadBranchRange(repos string, branchName string) (start string, end string, err error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| branchName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| start | `string` |   |
+| end | `string` |   |
+| err | `error` |   |
+
+
+### HeadHash
+
+#### 详细描述
+
+
+#### 定义
+
+`HeadHash(repos string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
 ### IterateCommit
 
 #### 详细描述
@@ -272,6 +340,28 @@ git.handleCommit((c) => { println(c.String()) }))
 | r1 | `error` |   |
 
 
+### ParentHash
+
+#### 详细描述
+
+
+#### 定义
+
+`ParentHash(repos string, commit string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| commit | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
 ### Pull
 
 #### 详细描述
@@ -297,6 +387,28 @@ git.Pull("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### RevParse
+
+#### 详细描述
+
+
+#### 定义
+
+`RevParse(repos string, rev string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| rev | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
 ### SetProxy
