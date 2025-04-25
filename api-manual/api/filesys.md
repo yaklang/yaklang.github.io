@@ -4,6 +4,7 @@
 |:------|:--------|
 | [filesys.CopyToRefLocal](#copytoreflocal) ||
 | [filesys.CopyToTemporary](#copytotemporary) ||
+| [filesys.Glance](#glance) |Glance is for quickly viewing the basic info in fs |
 | [filesys.Recursive](#recursive) |Recursive recursively walk through the file system  raw: the root path  opts: options  return: error    |
 | [filesys.dir](#dir) ||
 | [filesys.onDirStat](#ondirstat) |onDirStat will be called when the walker met one directory. |
@@ -56,6 +57,27 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*RelLocalFs` |   |
+
+
+### Glance
+
+#### 详细描述
+Glance is for quickly viewing the basic info in fs
+
+
+#### 定义
+
+`Glance(localfile any) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| localfile | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### Recursive

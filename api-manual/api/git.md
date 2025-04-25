@@ -2,6 +2,9 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [git.Blame](#blame) ||
+| [git.BlameCommit](#blamecommit) ||
+| [git.Branch](#branch) ||
 | [git.Checkout](#checkout) |Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为  |
 | [git.Clone](#clone) |Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为  |
 | [git.Fetch](#fetch) |Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为  |
@@ -9,6 +12,7 @@
 | [git.FileSystemFromCommitRange](#filesystemfromcommitrange) |FileSystemFromCommitRange 从commit范围中获取文件系统    |
 | [git.FileSystemFromCommits](#filesystemfromcommits) |FileSystemFromCommits 从多个commit中获取文件系统    |
 | [git.GitHack](#githack) |GitHack 是一个用于利用 Git 源码泄露漏洞的函数  Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露  |
+| [git.Glance](#glance) ||
 | [git.HeadBranch](#headbranch) ||
 | [git.HeadBranchRange](#headbranchrange) ||
 | [git.HeadHash](#headhash) ||
@@ -39,6 +43,72 @@
 
 
 ## 函数定义
+### Blame
+
+#### 详细描述
+
+
+#### 定义
+
+`Blame(repos string, fileName string) (BlameLines, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| fileName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BlameLines` |   |
+| r2 | `error` |   |
+
+
+### BlameCommit
+
+#### 详细描述
+
+
+#### 定义
+
+`BlameCommit(repos string, fileName string, rev string) (BlameLines, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| fileName | `string` |   |
+| rev | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BlameLines` |   |
+| r2 | `error` |   |
+
+
+### Branch
+
+#### 详细描述
+
+
+#### 定义
+
+`Branch(repos string) ([]string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+| r2 | `error` |   |
+
+
 ### Checkout
 
 #### 详细描述
@@ -244,6 +314,26 @@ git.GitHack("http://127.0.0.1:8787/git/website", "C:/Users/xxx/Desktop/githack-t
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | finalErr | `error` |   |
+
+
+### Glance
+
+#### 详细描述
+
+
+#### 定义
+
+`Glance(repos string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### HeadBranch
