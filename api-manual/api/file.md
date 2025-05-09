@@ -1107,12 +1107,26 @@ name, err = file.TempFileName()
 die(err)
 defer os.Remove(name)
 file.Save(name, "hello yak")
+
+name, err = file.TempFileName("pattern-*.txt")
+
+	if die(err) {
+		return
+	}
+
+defer os.Remove(name)
+file.Save(name, "hello yak")
 ```
 
 
 #### 定义
 
-`TempFileName() (string, error)`
+`TempFileName(pattern ...string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pattern | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
