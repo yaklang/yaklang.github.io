@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误  |
-| [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误  |
+| [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误  |
+| [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误  |
 | [tls.GenerateRSA1024KeyPair](#generatersa1024keypair) |GenerateRSA1024KeyPair 生成1024位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA2048KeyPair](#generatersa2048keypair) |GenerateRSA2048KeyPair 生成2048位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA4096KeyPair](#generatersa4096keypair) |GenerateRSA4096KeyPair 生成4096位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
@@ -23,22 +23,22 @@
 ### DecryptWithPkcs1v15
 
 #### 详细描述
-DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误
+DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误
 
 Example:
 ```
-dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
+dec, err := tls.DecryptWithPkcs1v15(raw, enc)
 ```
 
 
 #### 定义
 
-`DecryptWithPkcs1v15(pemPriBytes []byte, data any) ([]byte, error)`
+`DecryptWithPkcs1v15(raw []byte, data any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pemPriBytes | `[]byte` |   |
+| raw | `[]byte` |   |
 | data | `any` |   |
 
 #### 返回值
@@ -51,22 +51,22 @@ dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
 ### EncryptWithPkcs1v15
 
 #### 详细描述
-EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误
+EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误
 
 Example:
 ```
-enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
+enc, err := tls.EncryptWithPkcs1v15(raw, "hello")
 ```
 
 
 #### 定义
 
-`EncryptWithPkcs1v15(pemBytes []byte, data any) ([]byte, error)`
+`EncryptWithPkcs1v15(raw []byte, data any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` |   |
+| raw | `[]byte` |   |
 | data | `any` |   |
 
 #### 返回值

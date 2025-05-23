@@ -26,6 +26,7 @@
 | [x.Map](#map) ||
 | [x.Max](#max) ||
 | [x.Min](#min) ||
+| [x.NewReducer](#newreducer) ||
 | [x.Range](#range) ||
 | [x.Reduce](#reduce) ||
 | [x.RemoveRepeat](#removerepeat) |Uniq creates an array with unique values. |
@@ -547,6 +548,27 @@ Keys creates an array of the own enumerable map keys or struct field names.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### NewReducer
+
+#### 详细描述
+
+
+#### 定义
+
+`NewReducer(reduceLimit int, handle ReduceFunction) *Reducer`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| reduceLimit | `int` |   |
+| handle | `ReduceFunction` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Reducer` |   |
 
 
 ### Range

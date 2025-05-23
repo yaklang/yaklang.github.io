@@ -78,9 +78,9 @@
 | [codec.RC4Decrypt](#rc4decrypt) ||
 | [codec.RC4Encrypt](#rc4encrypt) ||
 | [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) ||
-| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误  |
+| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误  |
 | [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) ||
-| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误  |
+| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误  |
 | [codec.Sha1](#sha1) ||
 | [codec.Sha224](#sha224) ||
 | [codec.Sha256](#sha256) ||
@@ -1793,22 +1793,22 @@ replacing special characters (including /) with %XX sequences as needed.
 ### RSADecryptWithPKCS1v15
 
 #### 详细描述
-DecryptWithPkcs1v15 将PEM格式的私钥与密文进行PKCS1v15解密，返回明文与错误
+DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误
 
 Example:
 ```
-dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
+dec, err := tls.DecryptWithPkcs1v15(raw, enc)
 ```
 
 
 #### 定义
 
-`RSADecryptWithPKCS1v15(pemPriBytes []byte, data any) ([]byte, error)`
+`RSADecryptWithPKCS1v15(raw []byte, data any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pemPriBytes | `[]byte` |   |
+| raw | `[]byte` |   |
 | data | `any` |   |
 
 #### 返回值
@@ -1825,12 +1825,12 @@ dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
 
 #### 定义
 
-`RSAEncryptWithOAEP(pemBytes []byte, data any) ([]byte, error)`
+`RSAEncryptWithOAEP(raw []byte, data any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` |   |
+| raw | `[]byte` |   |
 | data | `any` |   |
 
 #### 返回值
@@ -1843,22 +1843,22 @@ dec, err := tls.DecryptWithPkcs1v15(pemBytes, enc)
 ### RSAEncryptWithPKCS1v15
 
 #### 详细描述
-EncryptWithPkcs1v15 将PEM格式的公钥与数据进行PKCS1v15加密，返回密文与错误
+EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误
 
 Example:
 ```
-enc, err := tls.EncryptWithPkcs1v15(pemBytes, "hello")
+enc, err := tls.EncryptWithPkcs1v15(raw, "hello")
 ```
 
 
 #### 定义
 
-`RSAEncryptWithPKCS1v15(pemBytes []byte, data any) ([]byte, error)`
+`RSAEncryptWithPKCS1v15(raw []byte, data any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` |   |
+| raw | `[]byte` |   |
 | data | `any` |   |
 
 #### 返回值

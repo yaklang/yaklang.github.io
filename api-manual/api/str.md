@@ -128,6 +128,8 @@
 | [str.StringSliceContains](#stringslicecontains) |StringSliceContains 判断字符串切片s中是否包含raw，对于非字符串的切片，会尝试将其元素转换为字符串再判断是否包含  |
 | [str.StringSliceContainsAll](#stringslicecontainsall) |StringSliceContainsAll 判断字符串切片s中是否完全包含elements中的所有元素，对于非字符串的切片，会尝试将其元素转换为字符串再判断是否包含  |
 | [str.Subtract](#subtract) |Subtract 返回两个字符串切片的差集  |
+| [str.TextReaderSplit](#textreadersplit) ||
+| [str.TextSplit](#textsplit) |核心分割方法|
 | [str.Title](#title) |Title 返回字符串s的标题化版本，即所有单词的首字母都是大写的  |
 | [str.ToJsonIndentStr](#tojsonindentstr) |ToJsonIndentStr 将v转换为格式化的JSON字符串并返回，如果转换失败，则返回空字符串  |
 | [str.ToLower](#tolower) |ToLower 返回字符串s的小写形式  |
@@ -3572,6 +3574,48 @@ str.Subtract(["1", "2", "3"], ["3", "4", "5"]) // ["1", "2"]
 |:-----------|:---------- |:-----------|
 | x | `[]string` |   |
 | y | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### TextReaderSplit
+
+#### 详细描述
+
+
+#### 定义
+
+`TextReaderSplit(ctx context.Context, reader io.Reader) chan string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| reader | `io.Reader` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan string` |   |
+
+
+### TextSplit
+
+#### 详细描述
+核心分割方法
+
+#### 定义
+
+`TextSplit(ctx context.Context, text string) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| text | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
