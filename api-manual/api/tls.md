@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误  |
-| [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误  |
+| [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。  参数 raw 表示 RSA 私钥，支持以下格式：    - DER 编码的私钥（raw ASN.1 DER 字节流）    - Base64...|
+| [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Ba...|
 | [tls.GenerateRSA1024KeyPair](#generatersa1024keypair) |GenerateRSA1024KeyPair 生成1024位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA2048KeyPair](#generatersa2048keypair) |GenerateRSA2048KeyPair 生成2048位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA4096KeyPair](#generatersa4096keypair) |GenerateRSA4096KeyPair 生成4096位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
@@ -23,11 +23,37 @@
 ### DecryptWithPkcs1v15
 
 #### 详细描述
-DecryptWithPkcs1v15 将私钥与密文进行PKCS1v15解密，返回明文与错误
+DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。
+
+参数 raw 表示 RSA 私钥，支持以下格式：
+
+  - DER 编码的私钥（raw ASN.1 DER 字节流）
+
+  - Base64 编码的 DER 格式（自动解码）
+
+  - PEM 编码（包括带有 &#34;-----BEGIN PRIVATE KEY-----&#34; 或 &#34;-----BEGIN RSA PRIVATE KEY-----&#34; 的块）
+
+  - Base64 编码的 PEM 格式（自动解码）
+
+
+
+参数 data 是被加密后的数据（密文）
+
+返回值是解密得到的原始明文，如果失败则返回错误。
+
+
 
 Example:
 ```
-dec, err := tls.DecryptWithPkcs1v15(raw, enc)
+
+		raw := `
+		-----BEGIN PRIVATE KEY-----
+		MIIEvQIBADANBgkqhkiG9w0BAQEFAASC...（略）
+		-----END PRIVATE KEY-----
+		`
+		plaintext, err := DecryptWithPkcs1v15(raw, encryptedData)
+	 	plaintext, err := RSADecryptWithPKCS1v15(raw, encryptedData)
+
 ```
 
 
@@ -51,11 +77,39 @@ dec, err := tls.DecryptWithPkcs1v15(raw, enc)
 ### EncryptWithPkcs1v15
 
 #### 详细描述
-EncryptWithPkcs1v15 将公钥与数据进行PKCS1v15加密，返回密文与错误
+EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。
+
+
+
+参数 raw 表示 RSA 公钥，支持以下格式：
+
+  - DER 编码的公钥（raw ASN.1 DER 字节流）
+
+  - Base64 编码的 DER 格式（自动解码）
+
+  - PEM 编码（例如 &#34;-----BEGIN PUBLIC KEY-----&#34; 或 &#34;-----BEGIN RSA PUBLIC KEY-----&#34; 块）
+
+  - Base64 编码的 PEM 格式（自动解码）
+
+
+
+参数 data 是要加密的明文数据，可以是 []byte、string 或其他可转换为字节数组的类型。
+
+返回值是加密后的密文（字节切片），如果加密失败则返回错误。
+
+
 
 Example:
 ```
-enc, err := tls.EncryptWithPkcs1v15(raw, "hello")
+
+		raw := `
+		-----BEGIN PUBLIC KEY-----
+		MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn...（略）
+		-----END PUBLIC KEY-----
+		`
+		ciphertext, err := EncryptWithPkcs1v15(raw, "hello world")
+	 ciphertext, err := RSAEncryptWithPKCS1v15(raw, "hello world")
+
 ```
 
 
