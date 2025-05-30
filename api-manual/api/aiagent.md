@@ -16,7 +16,6 @@
 | [aiagent.aiAgree](#aiagree) ||
 | [aiagent.aiAutoRetry](#aiautoretry) ||
 | [aiagent.aiCallback](#aicallback) ||
-| [aiagent.aiForgeSearchTool](#aiforgesearchtool) ||
 | [aiagent.aiToolsSearchTool](#aitoolssearchtool) ||
 | [aiagent.aiTransactionRetry](#aitransactionretry) ||
 | [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) ||
@@ -344,21 +343,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `Option` |   |
-
-
-### aiForgeSearchTool
-
-#### 详细描述
-
-
-#### 定义
-
-`aiForgeSearchTool() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
 
 
 ### aiToolsSearchTool
