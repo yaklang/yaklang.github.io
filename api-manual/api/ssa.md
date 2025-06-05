@@ -18,7 +18,6 @@ Yak|(consts.Language) &#34;yak&#34;|
 | [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
 | [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
-| [ssa.withDatabasePath](#withdatabasepath) ||
 | [ssa.withDefaultExcludeFunc](#withdefaultexcludefunc) ||
 | [ssa.withDescription](#withdescription) ||
 | [ssa.withEntryFile](#withentryfile) ||
@@ -217,26 +216,6 @@ Yak|(consts.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | ctx | `context.Context` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
-
-
-### withDatabasePath
-
-#### 详细描述
-
-
-#### 定义
-
-`withDatabasePath(path string) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| path | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

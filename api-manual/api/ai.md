@@ -15,6 +15,7 @@
 | [ai.debugStream](#debugstream) ||
 | [ai.domain](#domain) ||
 | [ai.funcCallRetryTimes](#funccallretrytimes) ||
+| [ai.imageFile](#imagefile) ||
 | [ai.model](#model) ||
 | [ai.noHttps](#nohttps) ||
 | [ai.onReasonStream](#onreasonstream) ||
@@ -288,6 +289,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | times | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
+### imageFile
+
+#### 详细描述
+
+
+#### 定义
+
+`imageFile(i string) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
