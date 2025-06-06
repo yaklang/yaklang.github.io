@@ -3,9 +3,11 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [aiagent.CreateForge](#createforge) ||
+| [aiagent.CreateLiteForge](#createliteforge) ||
 | [aiagent.ExecuteForge](#executeforge) ||
 | [aiagent.ExtractAction](#extractaction) ||
 | [aiagent.ExtractPlan](#extractplan) ||
+| [aiagent.GetDefaultMemory](#getdefaultmemory) ||
 | [aiagent.NewExecutor](#newexecutor) ||
 | [aiagent.NewExecutorFromJson](#newexecutorfromjson) ||
 | [aiagent.agreeAuto](#agreeauto) ||
@@ -37,6 +39,11 @@
 | [aiagent.initPrompt](#initprompt) |WithInitializePrompt 设置AI助手的初始化提示词 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 |
 | [aiagent.initializePrompt](#initializeprompt) |WithInitializePrompt 设置AI助手的初始化提示词 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 |
 | [aiagent.jarOperator](#jaroperator) ||
+| [aiagent.liteForgeOutputMemoryOP](#liteforgeoutputmemoryop) ||
+| [aiagent.liteForgeOutputSchema](#liteforgeoutputschema) ||
+| [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) ||
+| [aiagent.liteForgePrompt](#liteforgeprompt) ||
+| [aiagent.liteForgedRequireParams](#liteforgedrequireparams) ||
 | [aiagent.manualAssistantCallback](#manualassistantcallback) ||
 | [aiagent.memory](#memory) ||
 | [aiagent.offsetSeq](#offsetseq) ||
@@ -80,6 +87,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*aiforge.ForgeBlueprint` |   |
+
+
+### CreateLiteForge
+
+#### 详细描述
+
+
+#### 定义
+
+`CreateLiteForge(name string, opts ...any) (*aiforge.LiteForge, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*aiforge.LiteForge` |   |
+| r2 | `error` |   |
 
 
 ### ExecuteForge
@@ -148,6 +177,21 @@
 |:-----------|:---------- |:-----------|
 | r1 | `*PlanResponse` |   |
 | r2 | `error` |   |
+
+
+### GetDefaultMemory
+
+#### 详细描述
+
+
+#### 定义
+
+`GetDefaultMemory() *Memory`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Memory` |   |
 
 
 ### NewExecutor
@@ -752,6 +796,102 @@ WithInitializePrompt 设置AI助手的初始化提示词
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### liteForgeOutputMemoryOP
+
+#### 详细描述
+
+
+#### 定义
+
+`liteForgeOutputMemoryOP() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### liteForgeOutputSchema
+
+#### 详细描述
+
+
+#### 定义
+
+`liteForgeOutputSchema(params ...aitool.ToolOption) LiteForgeOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| params | `...aitool.ToolOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LiteForgeOption` |   |
+
+
+### liteForgeOutputSchemaRaw
+
+#### 详细描述
+
+
+#### 定义
+
+`liteForgeOutputSchemaRaw(actionName string, outputSchema string) LiteForgeOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| actionName | `string` |   |
+| outputSchema | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LiteForgeOption` |   |
+
+
+### liteForgePrompt
+
+#### 详细描述
+
+
+#### 定义
+
+`liteForgePrompt(i string) LiteForgeOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LiteForgeOption` |   |
+
+
+### liteForgedRequireParams
+
+#### 详细描述
+
+
+#### 定义
+
+`liteForgedRequireParams(params ...aitool.ToolOption) LiteForgeOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| params | `...aitool.ToolOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LiteForgeOption` |   |
 
 
 ### manualAssistantCallback
