@@ -28,6 +28,8 @@
 | [servicescan.service](#service) ||
 | [servicescan.web](#web) ||
 | [servicescan.webRule](#webrule) |webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规则 @param {interface{}} i Web 指纹规则 |
+| [servicescan.withRuleGroup](#withrulegroup) ||
+| [servicescan.withRuleGroupAll](#withrulegroupall) ||
 
 
 ## 函数定义
@@ -692,6 +694,7 @@ onFinish servicescan 的配置选项，设置本次扫描端口开放时的回�
 
 Example:
 ```
+
 	result, err := servicescan.Scan("127.0.0.1", "22,80,443", servicescan.onFinish(result => dump(result.String())))
 	die(err)
 	for i in result {
@@ -729,9 +732,11 @@ Example:
 ```
 result, err := servicescan.Scan("127.0.0.1", "22,80,443", servicescan.onOpen(result => dump(result.String())))
 die(err)
-for i in result {
-		println(i.String())
-	}
+
+	for i in result {
+			println(i.String())
+		}
+
 ```
 
 
@@ -903,6 +908,41 @@ webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | rs | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### withRuleGroup
+
+#### 详细描述
+
+
+#### 定义
+
+`withRuleGroup(groups ...string) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| groups | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### withRuleGroupAll
+
+#### 详细描述
+
+
+#### 定义
+
+`withRuleGroupAll() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
