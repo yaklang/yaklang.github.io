@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [json.ExtractJSON](#extractjson) ||
+| [json.ExtractJSON](#extractjson) |ExtractJSON 尝试提取字符串中的 JSON 并进行修复, 返回中的元素都是原始 Json  |
 | [json.ExtractJSONEx](#extractjsonex) ||
 | [json.Find](#find) ||
 | [json.FindPath](#findpath) ||
@@ -19,6 +19,14 @@
 ### ExtractJSON
 
 #### 详细描述
+ExtractJSON 尝试提取字符串中的 JSON 并进行修复, 返回中的元素都是原始 Json
+
+Example:
+```
+json.ExtractJson("hello yak") // []
+res = json.ExtractJson(`[{"hello": "yak"}]`) // [[{"key": "value"}]]
+assert(res[0]==`[{"key": "value"}]`)
+```
 
 
 #### 定义

@@ -22,7 +22,7 @@
 | [str.ExtractDomain](#extractdomain) |ExtractDomain 尝试提取字符串中的域名并返回，后续可以接收一个 tryDecode 参数，如果传入 true，则会尝试对输入的文本进行解码(双重URL编码，URL编码，unicode编码，quoted编码)  |
 | [str.ExtractHost](#extracthost) |ExtractHost 尝试从字符串中解析出host和port，并返回host  |
 | [str.ExtractHostPort](#extracthostport) |ExtractHostPort 尝试从字符串中解析出host和port，并返回host:port  |
-| [str.ExtractJson](#extractjson) |ExtractJson 尝试提取字符串中的 JSON 并进行修复返回  |
+| [str.ExtractJson](#extractjson) |ExtractJson 尝试提取字符串中的 JSON 并进行修复, 返回中的元素都是Object  |
 | [str.ExtractJsonWithRaw](#extractjsonwithraw) |ExtractJsonWithRaw 尝试提取字符串中的 JSON 并返回，第一个返回值返回经过修复后的JSON字符串数组，第二个返回值返回原始JSON字符串数组(如果修复失败)  |
 | [str.ExtractRootDomain](#extractrootdomain) |ExtractRootDomain 尝试提取字符串中的根域名并返回  |
 | [str.ExtractStrContext](#extractstrcontext) |ExtractStrContext 从字符串raw中提取一组关键字res上下文的内容，上下文的长度是512个字符确定。  |
@@ -707,7 +707,7 @@ str.ExtractHostPort("https://baidu.com") // 127.0.0.1:443
 ### ExtractJson
 
 #### 详细描述
-ExtractJson 尝试提取字符串中的 JSON 并进行修复返回
+ExtractJson 尝试提取字符串中的 JSON 并进行修复, 返回中的元素都是Object
 
 Example:
 ```
