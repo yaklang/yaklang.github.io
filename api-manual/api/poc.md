@@ -461,7 +461,7 @@ Delete 向指定 URL 发送 DELETE 请求并且返回响应结构体，请求结
 
 Example:
 ```
-poc.Delete("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的DELETE请求
+rsp,req = poc.Delete("https://yaklang.com", poc.https(true))~ // 向yaklang.com发送一个基于HTTPS协议的DELETE请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -804,7 +804,7 @@ Get 向指定 URL 发送 GET 请求并且返回响应结构体，请求结构体
 
 Example:
 ```
-poc.Get("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的GET请求
+rsp,req = poc.Get("https://yaklang.com", poc.https(true))~ // 向yaklang.com发送一个基于HTTPS协议的GET请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1634,7 +1634,7 @@ Head 向指定 URL 发送 HEAD 请求并且返回响应结构体，请求结构�
 
 Example:
 ```
-poc.Head("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的HEAD请求
+rsp,req = poc.Head("https://yaklang.com", poc.https(true))~ // 向yaklang.com发送一个基于HTTPS协议的HEAD请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1692,7 +1692,7 @@ Options 向指定 URL 发送 OPTIONS 请求并且返回响应结构体，请求�
 
 Example:
 ```
-poc.Options("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的Options请求
+rsp,req = poc.Options("https://yaklang.com", poc.https(true))~ // 向yaklang.com发送一个基于HTTPS协议的Options请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
@@ -1849,7 +1849,7 @@ Post 向指定 URL 发送 POST 请求并且返回响应结构体，请求结构�
 
 Example:
 ```
-poc.Post("https://yaklang.com", poc.https(true)) // 向yaklang.com发送一个基于HTTPS协议的POST请求
+rsp,req = poc.Post("https://yaklang.com", poc.https(true))~ // 向yaklang.com发送一个基于HTTPS协议的POST请求
 desc(rsp) // 查看响应结构体中的可用字段
 ```
 
