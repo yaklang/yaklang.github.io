@@ -2,20 +2,20 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [codec.AESCBCDecrypt](#aescbcdecrypt) ||
-| [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) ||
-| [codec.AESCBCDecryptWithZeroPadding](#aescbcdecryptwithzeropadding) ||
-| [codec.AESCBCEncrypt](#aescbcencrypt) ||
-| [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) ||
-| [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) ||
-| [codec.AESDecrypt](#aesdecrypt) ||
-| [codec.AESECBDecrypt](#aesecbdecrypt) ||
-| [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) ||
-| [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) ||
-| [codec.AESECBEncrypt](#aesecbencrypt) ||
-| [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) ||
-| [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) ||
-| [codec.AESEncrypt](#aesencrypt) ||
+| [codec.AESCBCDecrypt](#aescbcdecrypt) |AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) |AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESCBCDecryptWithZeroPadding](#aescbcdecryptwithzeropadding) |AESCBCDecryptWithZeroPadding 使用 AES 算法，在 CBC 模式下，使用 Zero 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-1...|
+| [codec.AESCBCEncrypt](#aescbcencrypt) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 CBC 模式下，使用 Zero 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-1...|
+| [codec.AESDecrypt](#aesdecrypt) |AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESECBDecrypt](#aesecbdecrypt) |AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) |AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) |AESDecryptECBWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 ZeroPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESECBEncrypt](#aesecbencrypt) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要加密的数据（data to encrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要加密的数据（data to encrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 ZeroPadding 填充方式 它接受一个密钥（key）、需要加密的数据（data to encrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
+| [codec.AESEncrypt](#aesencrypt) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
 | [codec.AESGCMDecrypt](#aesgcmdecrypt) ||
 | [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) ||
 | [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) ||
@@ -23,12 +23,12 @@
 | [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) ||
 | [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string { 		block, _ := aes.NewCipher(key) 		nonc...|
 | [codec.AutoDecode](#autodecode) ||
-| [codec.DESCBCDecrypt](#descbcdecrypt) ||
-| [codec.DESCBCEncrypt](#descbcencrypt) ||
-| [codec.DESDecrypt](#desdecrypt) ||
-| [codec.DESECBDecrypt](#desecbdecrypt) ||
-| [codec.DESECBEncrypt](#desecbencrypt) ||
-| [codec.DESEncrypt](#desencrypt) ||
+| [codec.DESCBCDecrypt](#descbcdecrypt) |DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
+| [codec.DESCBCEncrypt](#descbcencrypt) |DESCBCEncrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
+| [codec.DESDecrypt](#desdecrypt) |DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
+| [codec.DESECBDecrypt](#desecbdecrypt) |DESECBDecrypt 是一个便捷函数，用于使用 DES 算法，在 ECB 模式下，使用 零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）（ecb 模式下 iv 无用） 密钥的长度必须是 8 个字节。 example: ``` codec.DESEC...|
+| [codec.DESECBEncrypt](#desecbencrypt) |DESECBEncrypt 是一个便捷函数，用于使用 DES 算法，在 ECB 模式下，使用 零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）（ecb 模式下 iv 无用） 密钥的长度必须是 8 个字节。 example: ``` codec.DESEC...|
+| [codec.DESEncrypt](#desencrypt) |DESCBCEncrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
 | [codec.DecodeASCII](#decodeascii) |Unquote interprets s as a single-quoted, double-quoted, or backquoted Go string literal, returning the string value that s quotes.  (If s is single-qu...|
 | [codec.DecodeBase32](#decodebase32) ||
 | [codec.DecodeBase64](#decodebase64) ||
@@ -100,26 +100,26 @@
 | [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) ||
 | [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) ||
 | [codec.Sm3](#sm3) ||
-| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) ||
-| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) ||
-| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) ||
-| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) ||
-| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) ||
-| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) ||
-| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) ||
-| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) ||
+| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) |Sm4CBCDecrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) |Sm4CBCEncrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来加密数据 CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。 example: ``` codec.Sm4CBCEncrypt(&amp;#34;123412341234...|
+| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) |Sm4CFBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此它可以为 nil (空)。  |
+| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) |Sm4CFBEncrypt 使用 SM4 算法，在 CFB 模式下，使用 PKCS#5 填充来加密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) |Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  |
+| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) |Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.  |
+| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) |Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  |
+| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) |Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.  |
 | [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) ||
 | [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) { ...|
-| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) ||
-| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) ||
+| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) |Sm4OFBDecrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来解密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) |Sm4OFBEncrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来加密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
 | [codec.StrconvQuote](#strconvquote) |Quote returns a double-quoted Go string literal representing s. The returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for control charac...|
 | [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted, or backquoted Go string literal, returning the string value that s quotes.  (If s is single-qu...|
-| [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) ||
-| [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) ||
-| [codec.TripleDESDecrypt](#tripledesdecrypt) ||
-| [codec.TripleDESECBDecrypt](#tripledesecbdecrypt) ||
-| [codec.TripleDESECBEncrypt](#tripledesecbencrypt) ||
-| [codec.TripleDESEncrypt](#tripledesencrypt) ||
+| [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) |TripleDESCBCDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 24 个字节（即 3 * 8 字节），并...|
+| [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) |TripleDESCBCEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 24 个字节（即 3 * 8 字节），并...|
+| [codec.TripleDESDecrypt](#tripledesdecrypt) |TripleDESCBCDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 24 个字节（即 3 * 8 字节），并...|
+| [codec.TripleDESECBDecrypt](#tripledesecbdecrypt) |TripleDESECBDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 ECB 模式下，使用 零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）（ecb 模式下 iv 无用） 密钥的长度必须是 24 个字节（即 3 * 8 字节）...|
+| [codec.TripleDESECBEncrypt](#tripledesecbencrypt) |TripleDESECBEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 ECB 模式下，使用 零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）（ecb 模式下 iv 无用） 密钥的长度必须是 24 个字节（即 3 * 8 字节）...|
+| [codec.TripleDESEncrypt](#tripledesencrypt) |TripleDESCBCEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 24 个字节（即 3 * 8 字节），并...|
 | [codec.UTF8ToGB18030](#utf8togb18030) ||
 | [codec.UTF8ToGBK](#utf8togbk) ||
 | [codec.UTF8ToHZGB2312](#utf8tohzgb2312) ||
@@ -135,6 +135,17 @@
 ### AESCBCDecrypt
 
 #### 详细描述
+AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCDecrypt AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCDecryptWithPKCS7Padding(&#34;1234567890123456&#34;, ciphertext, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -158,6 +169,17 @@
 ### AESCBCDecryptWithPKCS7Padding
 
 #### 详细描述
+AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCDecrypt AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCDecryptWithPKCS7Padding(&#34;1234567890123456&#34;, ciphertext, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -181,6 +203,14 @@
 ### AESCBCDecryptWithZeroPadding
 
 #### 详细描述
+AESCBCDecryptWithZeroPadding 使用 AES 算法，在 CBC 模式下，使用 Zero 填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+example：
+```
+codec.AESCBCDecryptWithZeroPadding(&#34;1234567890123456&#34;, ciphertext, &#34;1234567890123456&#34;)
+```
 
 
 #### 定义
@@ -204,6 +234,17 @@
 ### AESCBCEncrypt
 
 #### 详细描述
+AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCEncrypt AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCEncryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -227,6 +268,17 @@
 ### AESCBCEncryptWithPKCS7Padding
 
 #### 详细描述
+AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCEncrypt AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCEncryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -250,6 +302,14 @@
 ### AESCBCEncryptWithZeroPadding
 
 #### 详细描述
+AESCBCEncryptWithZeroPadding 使用 AES 算法，在 CBC 模式下，使用 Zero 填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+example：
+```
+codec.AESCBCEncryptWithZeroPadding(&#34;1234567890123456&#34;, &#34;hello world&#34;, &#34;1234567890123456&#34;)
+```
 
 
 #### 定义
@@ -273,6 +333,17 @@
 ### AESDecrypt
 
 #### 详细描述
+AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCDecrypt AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCDecryptWithPKCS7Padding(&#34;1234567890123456&#34;, ciphertext, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -296,6 +367,15 @@
 ### AESECBDecrypt
 
 #### 详细描述
+AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式
+它接受一个密钥（key）、需要解密的数据（data to decrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+AESECBDecrypt 和 AESDecryptECBWithPKCSPadding 是同一个函数。
+example:
+```
+codec.AESECBDecryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -319,6 +399,15 @@
 ### AESECBDecryptWithPKCS7Padding
 
 #### 详细描述
+AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式
+它接受一个密钥（key）、需要解密的数据（data to decrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+AESECBDecrypt 和 AESDecryptECBWithPKCSPadding 是同一个函数。
+example:
+```
+codec.AESECBDecryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -342,6 +431,14 @@
 ### AESECBDecryptWithZeroPadding
 
 #### 详细描述
+AESDecryptECBWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 ZeroPadding 填充方式
+它接受一个密钥（key）、需要解密的数据（data to decrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+example:
+```
+codec.AESECBDecryptWithZeroPadding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -365,6 +462,15 @@
 ### AESECBEncrypt
 
 #### 详细描述
+AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 PKCSPadding 填充方式
+它接受一个密钥（key）、需要加密的数据（data to encrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+AESECBEncrypt 和 AESECBEncryptWithPKCSPadding 是同一个函数。
+example:
+```
+codec.AESECBEncryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -388,6 +494,15 @@
 ### AESECBEncryptWithPKCS7Padding
 
 #### 详细描述
+AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 PKCSPadding 填充方式
+它接受一个密钥（key）、需要加密的数据（data to encrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+AESECBEncrypt 和 AESECBEncryptWithPKCSPadding 是同一个函数。
+example:
+```
+codec.AESECBEncryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -411,6 +526,14 @@
 ### AESECBEncryptWithZeroPadding
 
 #### 详细描述
+AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 ZeroPadding 填充方式
+它接受一个密钥（key）、需要加密的数据（data to encrypt）。
+ecb 模式下iv 无用。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+example:
+```
+codec.AESECBEncryptWithZeroPadding(&#34;1234567890123456&#34;, &#34;hello world&#34;, nil)
+```
 
 
 #### 定义
@@ -434,6 +557,17 @@
 ### AESEncrypt
 
 #### 详细描述
+AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+注意：AESCBCEncrypt AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
+example：
+```
+
+	codec.AESCBCEncryptWithPKCS7Padding(&#34;1234567890123456&#34;, &#34;hello world&#34;, &#34;1234567890123456&#34;)
+
+```
 
 
 #### 定义
@@ -635,6 +769,15 @@
 ### DESCBCDecrypt
 
 #### 详细描述
+DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+DESCBCDecrypt DESDecrypt 是同一个函数。
+example:
+```
+codec.DESCBCEncrypt([]byte(&#34;12345678&#34;), ciphertext, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -658,6 +801,15 @@
 ### DESCBCEncrypt
 
 #### 详细描述
+DESCBCEncrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+DESCBCEncrypt DESEncrypt 是同一个函数。
+example:
+```
+codec.DESCBCEncrypt([]byte(&#34;12345678&#34;), &#34;hello world&#34;, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -681,6 +833,15 @@
 ### DESDecrypt
 
 #### 详细描述
+DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+DESCBCDecrypt DESDecrypt 是同一个函数。
+example:
+```
+codec.DESCBCEncrypt([]byte(&#34;12345678&#34;), ciphertext, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -704,6 +865,13 @@
 ### DESECBDecrypt
 
 #### 详细描述
+DESECBDecrypt 是一个便捷函数，用于使用 DES 算法，在 ECB 模式下，使用 零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）（ecb 模式下 iv 无用）
+密钥的长度必须是 8 个字节。
+example:
+```
+codec.DESECBDecrypt([]byte(&#34;12345678&#34;), ciphertext)
+```
 
 
 #### 定义
@@ -726,6 +894,13 @@
 ### DESECBEncrypt
 
 #### 详细描述
+DESECBEncrypt 是一个便捷函数，用于使用 DES 算法，在 ECB 模式下，使用 零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）（ecb 模式下 iv 无用）
+密钥的长度必须是 8 个字节。
+example:
+```
+codec.DESECBEncrypt([]byte(&#34;12345678&#34;), &#34;hello world&#34;)
+```
 
 
 #### 定义
@@ -748,6 +923,15 @@
 ### DESEncrypt
 
 #### 详细描述
+DESCBCEncrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+DESCBCEncrypt DESEncrypt 是同一个函数。
+example:
+```
+codec.DESCBCEncrypt([]byte(&#34;12345678&#34;), &#34;hello world&#34;, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -775,7 +959,8 @@ Unquote interprets s as a single-quoted, double-quoted,
 or backquoted Go string literal, returning the string value
 that s quotes.  (If s is single-quoted, it would be a Go
 character literal; Unquote returns the corresponding
-one-character string.)
+one-character string. For an empty character literal
+Unquote returns the empty string.)
 
 
 #### 定义
@@ -2398,6 +2583,14 @@ die(err)
 ### Sm4CBCDecrypt
 
 #### 详细描述
+Sm4CBCDecrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来解密数据
+
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+Example:
+```
+codec.Sm4CBCDecrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -2421,6 +2614,12 @@ die(err)
 ### Sm4CBCEncrypt
 
 #### 详细描述
+Sm4CBCEncrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来加密数据
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+example:
+```
+codec.Sm4CBCEncrypt(&#34;1234123412341234&#34;, &#34;123412341234123456&#34;, &#34;1234123412341234&#34;)
+```
 
 
 #### 定义
@@ -2444,6 +2643,14 @@ die(err)
 ### Sm4CFBDecrypt
 
 #### 详细描述
+Sm4CFBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此它可以为 nil (空)。
+
+Example:
+```
+codec.Sm4CFBDecrypt("1234123412341234", "123412341234123456", nil)
+```
 
 
 #### 定义
@@ -2467,6 +2674,14 @@ die(err)
 ### Sm4CFBEncrypt
 
 #### 详细描述
+Sm4CFBEncrypt 使用 SM4 算法，在 CFB 模式下，使用 PKCS#5 填充来加密数据
+
+CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+Example:
+```
+codec.Sm4CFBEncrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -2490,6 +2705,14 @@ die(err)
 ### Sm4EBCDecrypt
 
 #### 详细描述
+Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+
+Example:
+```
+codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
+```
 
 
 #### 定义
@@ -2513,6 +2736,14 @@ die(err)
 ### Sm4EBCEncrypt
 
 #### 详细描述
+Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.
+
+Example:
+```
+codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
+```
 
 
 #### 定义
@@ -2536,6 +2767,14 @@ die(err)
 ### Sm4ECBDecrypt
 
 #### 详细描述
+Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+
+Example:
+```
+codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
+```
 
 
 #### 定义
@@ -2559,6 +2798,14 @@ die(err)
 ### Sm4ECBEncrypt
 
 #### 详细描述
+Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.
+
+Example:
+```
+codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
+```
 
 
 #### 定义
@@ -2667,6 +2914,14 @@ die(err)
 ### Sm4OFBDecrypt
 
 #### 详细描述
+Sm4OFBDecrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来解密数据
+
+OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+Example:
+```
+codec.Sm4OFBDecrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -2690,6 +2945,14 @@ die(err)
 ### Sm4OFBEncrypt
 
 #### 详细描述
+Sm4OFBEncrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来加密数据
+
+OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+Example:
+```
+codec.Sm4OFBEncrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -2741,7 +3004,8 @@ Unquote interprets s as a single-quoted, double-quoted,
 or backquoted Go string literal, returning the string value
 that s quotes.  (If s is single-quoted, it would be a Go
 character literal; Unquote returns the corresponding
-one-character string.)
+one-character string. For an empty character literal
+Unquote returns the empty string.)
 
 
 #### 定义
@@ -2763,6 +3027,15 @@ one-character string.)
 ### TripleDESCBCDecrypt
 
 #### 详细描述
+TripleDESCBCDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 24 个字节（即 3 * 8 字节），并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+TripleDESCBCDecrypt TripleDESDecrypt 是同一个函数。
+example:
+```
+codec.TripleDESCBCDecrypt([]byte(&#34;123456789012345678901234&#34;), ciphertext, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -2786,6 +3059,15 @@ one-character string.)
 ### TripleDESCBCEncrypt
 
 #### 详细描述
+TripleDESCBCEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 24 个字节（即 3 * 8 字节），并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥.
+TripleDESCBCDecrypt TripleDESEncrypt 是同一个函数。
+example:
+```
+codec.TripleDESCBCEncrypt([]byte(&#34;123456789012345678901234&#34;), &#34;hello world&#34;, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -2809,6 +3091,15 @@ one-character string.)
 ### TripleDESDecrypt
 
 #### 详细描述
+TripleDESCBCDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。
+密钥的长度必须是 24 个字节（即 3 * 8 字节），并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥，或者用零填充到 8 个字节。
+TripleDESCBCDecrypt TripleDESDecrypt 是同一个函数。
+example:
+```
+codec.TripleDESCBCDecrypt([]byte(&#34;123456789012345678901234&#34;), ciphertext, &#34;12345678&#34;)
+```
 
 
 #### 定义
@@ -2832,6 +3123,13 @@ one-character string.)
 ### TripleDESECBDecrypt
 
 #### 详细描述
+TripleDESECBDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 ECB 模式下，使用 零填充来解密数据。
+它接受一个密钥（key）、需要解密的数据（data to decrypt）（ecb 模式下 iv 无用）
+密钥的长度必须是 24 个字节（即 3 * 8 字节）。
+example:
+```
+codec.TripleDESECBDecrypt([]byte(&#34;123456789012345678901234&#34;), ciphertext)
+```
 
 
 #### 定义
@@ -2854,6 +3152,13 @@ one-character string.)
 ### TripleDESECBEncrypt
 
 #### 详细描述
+TripleDESECBEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 ECB 模式下，使用 零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）（ecb 模式下 iv 无用）
+密钥的长度必须是 24 个字节（即 3 * 8 字节）。
+example:
+```
+codec.TripleDESECBEncrypt([]byte(&#34;123456789012345678901234&#34;), &#34;hello world&#34;)
+```
 
 
 #### 定义
@@ -2876,6 +3181,15 @@ one-character string.)
 ### TripleDESEncrypt
 
 #### 详细描述
+TripleDESCBCEncrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来加密数据。
+它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。
+密钥的长度必须是 24 个字节（即 3 * 8 字节），并且 iv 可以是 nil 或者 8 个字节长。
+如果 iv 为 nil，它将被固定为密钥.
+TripleDESCBCDecrypt TripleDESEncrypt 是同一个函数。
+example:
+```
+codec.TripleDESCBCEncrypt([]byte(&#34;123456789012345678901234&#34;), &#34;hello world&#34;, &#34;12345678&#34;)
+```
 
 
 #### 定义

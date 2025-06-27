@@ -4050,7 +4050,8 @@ Unquote interprets s as a single-quoted, double-quoted,
 or backquoted Go string literal, returning the string value
 that s quotes.  (If s is single-quoted, it would be a Go
 character literal; Unquote returns the corresponding
-one-character string.)
+one-character string. For an empty character literal
+Unquote returns the empty string.)
 
 
 #### 定义

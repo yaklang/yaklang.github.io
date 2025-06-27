@@ -122,6 +122,10 @@
 | [poc.postparams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
 | [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;} 转换为 a=b  如果输入的是其他，会把字符串结果...|
+| [poc.randomChunked](#randomchunked) |randomChunked 是一个请求选项参数，用于启用随机分块传输，默认不启用  |
+| [poc.randomChunkedDelay](#randomchunkeddelay) |randomChunkedDelay是一个请求选项参数，用于设置随机分块传输的分块延迟范围，默认最小延迟为50毫秒，最大延迟为100毫秒  |
+| [poc.randomChunkedLength](#randomchunkedlength) |randomChunkedLength 是一个请求选项参数，用于设置随机分块传输的分块长度范围，默认最小长度为10，最大长度为25  |
+| [poc.randomChunkedResultHandler](#randomchunkedresulthandler) |randomChunkedResultHandler 是一个请求选项参数，用于设置随机分块传输的结果处理函数  处理函数接受四个参数，id为分块的ID，chunkRaw为分块的原始数据，totalTime为总耗时，chunkSendTime为分块发送的耗时  |
 | [poc.randomJA3](#randomja3) ||
 | [poc.redirect](#redirect) |redirect 是一个请求选项参数，用于设置旧风格的 redirectHandler 函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为当前的请求，第二个参数为既往的多个请求  |
 | [poc.redirectHandler](#redirecthandler) |redirectHandler 是一个请求选项参数，用于作为重定向处理函数，如果设置了该选项，则会在重定向时调用该函数，如果该函数返回 true，则会继续重定向，否则不会重定向。其第一个参数为是否使用 https 协议，第二个参数为原始请求报文，第三个参数为原始响应报文  |
@@ -3607,6 +3611,189 @@ poc.Get("https://www.example.com", poc.query("abc")) // 向 www.example.com 发�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### randomChunked
+
+#### 详细描述
+randomChunked 是一个请求选项参数，用于启用随机分块传输，默认不启用
+
+Example:
+```
+data = `
+POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Length: 308
+
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="aaa"
+
+bbb
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="ccc"
+
+ddd
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--
+`
+
+poc.HTTP(data,poc.randomChunked(true),poc.randomChunkedLength(10,25),poc.randomChunkedDelay(50,200))~
+```
+
+
+#### 定义
+
+`randomChunked(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### randomChunkedDelay
+
+#### 详细描述
+randomChunkedDelay是一个请求选项参数，用于设置随机分块传输的分块延迟范围，默认最小延迟为50毫秒，最大延迟为100毫秒
+
+Example:
+```
+data = `
+POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Length: 308
+
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="aaa"
+
+bbb
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="ccc"
+
+ddd
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--
+`
+
+poc.HTTP(data,poc.randomChunked(true),poc.randomChunkedLength(10,25),poc.randomChunkedDelay(50,200))~
+```
+
+
+#### 定义
+
+`randomChunkedDelay(min int, max int) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| min | `int` |   |
+| max | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### randomChunkedLength
+
+#### 详细描述
+randomChunkedLength 是一个请求选项参数，用于设置随机分块传输的分块长度范围，默认最小长度为10，最大长度为25
+
+Example:
+```
+data = `
+POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Length: 308
+
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="aaa"
+
+bbb
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="ccc"
+
+ddd
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--
+`
+
+poc.HTTP(data,poc.randomChunked(true),poc.randomChunkedLength(10,25),poc.randomChunkedDelay(50,200))~
+```
+
+
+#### 定义
+
+`randomChunkedLength(min int, max int) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| min | `int` |   |
+| max | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### randomChunkedResultHandler
+
+#### 详细描述
+randomChunkedResultHandler 是一个请求选项参数，用于设置随机分块传输的结果处理函数
+
+处理函数接受四个参数，id为分块的ID，chunkRaw为分块的原始数据，totalTime为总耗时，chunkSendTime为分块发送的耗时
+
+Example:
+```
+data = `
+POST /post HTTP/1.1
+Host: pie.dev
+Content-Type: multipart/form-data; boundary=------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Length: 308
+
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="aaa"
+
+bbb
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm
+Content-Disposition: form-data; name="ccc"
+
+ddd
+--------------------------OFHnlKtUimimGcXvRSxgCZlIMAyDkuqsxeppbIFm--
+`
+
+poc.HTTP(data,poc.randomChunked(true),
+poc.randomChunkedLength(10,25),
+poc.randomChunkedDelay(50,200),
+
+	poc.randomChunkedResultHandler(func(id,data,totalTime,chunkTime){
+		print(sprintf("id:%v\tdata:%s\ttotalTime:%vms\tdelay:%vms\n", id,data,totalTime,chunkTime))
+	}))~
+
+```
+
+
+#### 定义
+
+`randomChunkedResultHandler(f func(id int, chunkRaw []byte, totalTime time.Duration, chunkSendTime time.Duration)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(id int, chunkRaw []byte, totalTime time.Duration, chunkSendTime time.Duration)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
