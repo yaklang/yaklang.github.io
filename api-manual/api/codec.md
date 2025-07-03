@@ -99,6 +99,9 @@
 | [codec.Sm2EncryptC1C3C2](#sm2encryptc1c3c2) ||
 | [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) ||
 | [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) ||
+| [codec.Sm2SignWithSM3](#sm2signwithsm3) |SM2SignWithSM3 使用SM2私钥对数据进行SM3签名，返回签名与错误    参数 priKeyBytes 表示 SM2 私钥，支持以下格式：    - PEM 编码（例如 &amp;#34;-----BEGIN PRIVATE KEY-----&amp;#34; 块）    - HEX 字符串格式（64...|
+| [codec.Sm2SignWithSM3WithPassword](#sm2signwithsm3withpassword) |SM2SignWithSM3WithPassword 使用带密码保护的SM2私钥对数据进行SM3签名    参数 priKeyBytes 表示加密的 SM2 私钥（PEM格式）  参数 data 是要签名的原始数据  参数 password 是私钥的保护密码，如果私钥未加密则传入 nil  返回值是...|
+| [codec.Sm2VerifyWithSM3](#sm2verifywithsm3) |SM2VerifyWithSM3 使用SM2公钥对数据进行SM3签名验证，返回错误    参数 pubKeyBytes 表示 SM2 公钥，支持以下格式：    - PEM 编码（例如 &amp;#34;-----BEGIN PUBLIC KEY-----&amp;#34; 块）    - HEX 字符串格式（12...|
 | [codec.Sm3](#sm3) ||
 | [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) |Sm4CBCDecrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
 | [codec.Sm4CBCEncrypt](#sm4cbcencrypt) |Sm4CBCEncrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来加密数据 CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。 example: ``` codec.Sm4CBCEncrypt(&amp;#34;123412341234...|
@@ -2558,6 +2561,161 @@ die(err)
 | r1 | `[]byte` |   |
 | r2 | `[]byte` |   |
 | r3 | `error` |   |
+
+
+### Sm2SignWithSM3
+
+#### 详细描述
+SM2SignWithSM3 使用SM2私钥对数据进行SM3签名，返回签名与错误
+
+
+
+参数 priKeyBytes 表示 SM2 私钥，支持以下格式：
+
+  - PEM 编码（例如 &#34;-----BEGIN PRIVATE KEY-----&#34; 块）
+
+  - HEX 字符串格式（64位十六进制字符串）
+
+  - 原始字节数组（32字节的私钥数据）
+
+
+
+参数 data 是要签名的原始数据，可以是 []byte、string 或其他可转换为字节数组的类型。
+
+返回值是SM2签名结果（ASN.1 DER编码），如果签名失败则返回错误。
+
+
+
+Example:
+```
+priKey, pubKey, _ := codec.Sm2GeneratePemKeyPair()
+data := "hello world"
+signature, err := codec.Sm2SignWithSM3(priKey, data)
+die(err)
+println("签名成功")
+```
+
+
+#### 定义
+
+`Sm2SignWithSM3(priKeyBytes []byte, data any) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| priKeyBytes | `[]byte` |   |
+| data | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm2SignWithSM3WithPassword
+
+#### 详细描述
+SM2SignWithSM3WithPassword 使用带密码保护的SM2私钥对数据进行SM3签名
+
+
+
+参数 priKeyBytes 表示加密的 SM2 私钥（PEM格式）
+
+参数 data 是要签名的原始数据
+
+参数 password 是私钥的保护密码，如果私钥未加密则传入 nil
+
+返回值是SM2签名结果（ASN.1 DER编码），如果签名失败则返回错误。
+
+
+
+Example:
+```
+encryptedPriKey := []byte(`-----BEGIN ENCRYPTED PRIVATE KEY-----
+MIGHAgEAMBMGByqGSM49AgEGCCqBHM9VAYItBG0wawIBAQQg...
+-----END ENCRYPTED PRIVATE KEY-----`)
+data := "hello world"
+password := []byte("mypassword")
+signature, err := codec.Sm2SignWithSM3WithPassword(encryptedPriKey, data, password)
+die(err)
+println("加密私钥签名成功")
+```
+
+
+#### 定义
+
+`Sm2SignWithSM3WithPassword(priKeyBytes []byte, data any, password []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| priKeyBytes | `[]byte` |   |
+| data | `any` |   |
+| password | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm2VerifyWithSM3
+
+#### 详细描述
+SM2VerifyWithSM3 使用SM2公钥对数据进行SM3签名验证，返回错误
+
+
+
+参数 pubKeyBytes 表示 SM2 公钥，支持以下格式：
+
+  - PEM 编码（例如 &#34;-----BEGIN PUBLIC KEY-----&#34; 块）
+
+  - HEX 字符串格式（128位或130位十六进制字符串）
+
+  - 原始字节数组（64或65字节的公钥数据）
+
+
+
+参数 originData 是原始签名数据
+
+参数 sign 是SM2签名结果（ASN.1 DER编码）
+
+如果验证成功返回 nil，验证失败返回错误信息。
+
+
+
+Example:
+```
+priKey, pubKey, _ := codec.Sm2GeneratePemKeyPair()
+data := "hello world"
+signature, _ := codec.Sm2SignWithSM3(priKey, data)
+err := codec.Sm2VerifyWithSM3(pubKey, data, signature)
+
+if err == nil {
+   println("签名验证成功")
+}else {
+   println("签名验证失败:", err.Error())
+}
+```
+
+
+#### 定义
+
+`Sm2VerifyWithSM3(pubKeyBytes []byte, originData any, sign []byte) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pubKeyBytes | `[]byte` |   |
+| originData | `any` |   |
+| sign | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### Sm3
