@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [dns.QuertAxfr](#quertaxfr) ||
+| [dns.QueryAxfr](#queryaxfr) ||
 | [dns.QueryIP](#queryip) ||
 | [dns.QueryIPAll](#queryipall) ||
 | [dns.QueryNS](#queryns) ||
@@ -20,6 +21,27 @@
 #### 定义
 
 `QuertAxfr(target string, opts ..._dnsConfigOpt) []string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| target | `string` |   |
+| opts | `..._dnsConfigOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### QueryAxfr
+
+#### 详细描述
+
+
+#### 定义
+
+`QueryAxfr(target string, opts ..._dnsConfigOpt) []string`
 
 #### 参数
 |参数名|参数类型|参数解释|

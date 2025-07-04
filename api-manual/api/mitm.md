@@ -6,6 +6,7 @@
 | [mitm.Start](#start) |Start 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  如果没有指定 CA 证书和私钥，那么将使用内置的证书和私钥  |
 | [mitm.callback](#callback) |callback 是一个选项函数，用于指定中间人代理服务器的回调函数，当接收到请求和响应后，会调用该回调函数  |
 | [mitm.context](#context) |context 是一个选项函数，用于指定中间人代理服务器的上下文  |
+| [mitm.gmRootCA](#gmrootca) |gmRootCA 是一个选项函数，用于指定中间人代理服务器的国密根证书和私钥  |
 | [mitm.gmtls](#gmtls) |gmtls 是一个选项参数，用于指定中间人代理服务器是否开启 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器会劫持所有的 GMTLS 流量  |
 | [mitm.gmtlsOnly](#gmtlsonly) |gmtlsOnly 是一个选项参数，用于指定中间人代理服务器是否只使用 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器只会使用 GMTLS 劫持模式  |
 | [mitm.gmtlsPrefer](#gmtlsprefer) |gmtlsPrefer 是一个选项参数，用于指定中间人代理服务器是否优先使用 GMTLS 劫持模式，默认为false  在开启 GMTLS 劫持模式下，中间人代理服务器会优先使用 GMTLS 劫持模式  |
@@ -128,6 +129,33 @@ mitm.Start(8080, mitm.context(context.Background()))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### gmRootCA
+
+#### 详细描述
+gmRootCA 是一个选项函数，用于指定中间人代理服务器的国密根证书和私钥
+
+Example:
+```
+mitm.Start(8080, mitm.gmRootCA(cert, key))
+```
+
+
+#### 定义
+
+`gmRootCA(cert []byte, key []byte) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cert | `[]byte` |   |
+| key | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

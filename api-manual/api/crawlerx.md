@@ -3,6 +3,7 @@
 |实例名|实例描述|
 |:------|:--------|
 AllDomainScan|(crawlerx.scanRangeLevel) 0|
+BoardDomain|(crawlerx.scanRangeLevel) 3|
 ExtremeRepeatLevel|(crawlerx.repeatLevel) 4|
 HighRepeatLevel|(crawlerx.repeatLevel) 3|
 LowRepeatLevel|(crawlerx.repeatLevel) 1|
@@ -13,6 +14,7 @@ UnlimitedDomainScan|(crawlerx.scanRangeLevel) 2|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [crawlerx.OutputResult](#outputresult) |OutputResult 将channel中输出的爬虫结果保存在本地  第一个参数为需要存储的结果 第二个参数为保存的本地路径 请确保本地文件可以正常写入  Examples:  		``` 			targetUrl = &amp;#34;http://testphp.vulnweb.com/&amp;#34; 	...|
 | [crawlerx.PageScreenShot](#pagescreenshot) ||
 | [crawlerx.StartCrawler](#startcrawler) |StartCrawler 开启一个无头浏览器模拟点击爬虫任务 第一个参数为目标url，后面可以添加零个或多个请求选项，用于对此次请求进行配置 返回值包括channel和错误，从channel中获取爬虫结果  Examples: ```  	targetUrl = &amp;#34;http://testph...|
 | [crawlerx.aiInputInfo](#aiinputinfo) ||
@@ -54,6 +56,47 @@ UnlimitedDomainScan|(crawlerx.scanRangeLevel) 2|
 
 
 ## 函数定义
+### OutputResult
+
+#### 详细描述
+OutputResult 将channel中输出的爬虫结果保存在本地
+
+第一个参数为需要存储的结果 第二个参数为保存的本地路径 请确保本地文件可以正常写入
+
+Examples:
+
+		```
+			targetUrl = &#34;http://testphp.vulnweb.com/&#34;
+			ch, err = crawlerx.StartCrawler(targetUrl, crawlerx.pageTimeout(30), crawlerx.concurrent(3))
+			resultList = []
+			for item = range ch {
+				yakit.Info(item.Method() + &#34; &#34; + item.Url())
+				resultList = append(resultList, item)
+			}
+			err = crawlerx.OutputResult(resultList, &#34;test.txt&#34;)
+			if err != nil {
+	            println(err)
+			}
+
+		```
+
+
+#### 定义
+
+`OutputResult(data []any, outputFile string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| data | `[]any` |   |
+| outputFile | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### PageScreenShot
 
 #### 详细描述
