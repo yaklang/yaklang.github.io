@@ -6,24 +6,35 @@ Java|(consts.Language) &#34;java&#34;|
 Javascript|(consts.Language) &#34;js&#34;|
 PHP|(consts.Language) &#34;php&#34;|
 Yak|(consts.Language) &#34;yak&#34;|
+progName|(schema.SSADiffResultKind) &#34;program&#34;|
+runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [ssa.NewFromProgramName](#newfromprogramname) ||
 | [ssa.NewProgramFromDB](#newprogramfromdb) ||
 | [ssa.NewResultFromDB](#newresultfromdb) ||
+| [ssa.NewRiskCompare](#newriskcompare) ||
+| [ssa.NewRiskCompareItem](#newriskcompareitem) ||
 | [ssa.Parse](#parse) ||
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
 | [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
+| [ssa.withCompareResultCallback](#withcompareresultcallback) ||
 | [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDefaultExcludeFunc](#withdefaultexcludefunc) ||
+| [ssa.withDefaultRiskSave](#withdefaultrisksave) |WithSSARiskDiffSaveResultHandler is used to set the function that handles the comparison results for SSARisk. |
 | [ssa.withDescription](#withdescription) ||
+| [ssa.withDiffProgName](#withdiffprogname) ||
+| [ssa.withDiffRuleName](#withdiffrulename) ||
+| [ssa.withDiffRuntimeId](#withdiffruntimeid) ||
+| [ssa.withDiffVariableName](#withdiffvariablename) ||
 | [ssa.withEntryFile](#withentryfile) ||
 | [ssa.withExcludeFile](#withexcludefile) ||
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
+| [ssa.withGenerateHash](#withgeneratehash) |WithSSARiskComparisonInfoGenerate 设置用于生成SSARisk比较信息的函数 |
 | [ssa.withLanguage](#withlanguage) ||
 | [ssa.withPeepholeSize](#withpeepholesize) ||
 | [ssa.withProcess](#withprocess) ||
@@ -94,6 +105,47 @@ Yak|(consts.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*SyntaxFlowResult` |   |
+| r2 | `error` |   |
+
+
+### NewRiskCompare
+
+#### 详细描述
+
+
+#### 定义
+
+`NewRiskCompare(item *ComparisonItem[T]) *SSAComparator[T]`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| item | `*ComparisonItem[T]` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*SSAComparator[T]` |   |
+
+
+### NewRiskCompareItem
+
+#### 详细描述
+
+
+#### 定义
+
+`NewRiskCompareItem(opts ...SSAComparisonItemOption) (*ComparisonItem[*schema.SSARisk], error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...SSAComparisonItemOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ComparisonItem[*schema.SSARisk]` |   |
 | r2 | `error` |   |
 
 
@@ -183,6 +235,26 @@ Yak|(consts.Language) &#34;yak&#34;|
 | r1 | `[]*result.StaticAnalyzeResult` |   |
 
 
+### withCompareResultCallback
+
+#### 详细描述
+
+
+#### 定义
+
+`withCompareResultCallback(f func(result *ComparisonResult[*schema.SSARisk])) func(options *ComparatorConfig[*schema.SSARisk])`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(result *ComparisonResult[*schema.SSARisk])` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `func(options *ComparatorConfig[*schema.SSARisk])` |   |
+
+
 ### withConfigInfo
 
 #### 详细描述
@@ -244,6 +316,29 @@ Yak|(consts.Language) &#34;yak&#34;|
 | r2 | `error` |   |
 
 
+### withDefaultRiskSave
+
+#### 详细描述
+WithSSARiskDiffSaveResultHandler is used to set the function that handles the comparison results for SSARisk.
+
+
+#### 定义
+
+`withDefaultRiskSave(baseItem string, compareItem string, kind string) func(options *ComparatorConfig[*schema.SSARisk])`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| baseItem | `string` |   |
+| compareItem | `string` |   |
+| kind | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `func(options *ComparatorConfig[*schema.SSARisk])` |   |
+
+
 ### withDescription
 
 #### 详细描述
@@ -262,6 +357,86 @@ Yak|(consts.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `Option` |   |
+
+
+### withDiffProgName
+
+#### 详细描述
+
+
+#### 定义
+
+`withDiffProgName(name string) SSAComparisonItemOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SSAComparisonItemOption` |   |
+
+
+### withDiffRuleName
+
+#### 详细描述
+
+
+#### 定义
+
+`withDiffRuleName(name string) SSAComparisonItemOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SSAComparisonItemOption` |   |
+
+
+### withDiffRuntimeId
+
+#### 详细描述
+
+
+#### 定义
+
+`withDiffRuntimeId(runtimeId string) SSAComparisonItemOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| runtimeId | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SSAComparisonItemOption` |   |
+
+
+### withDiffVariableName
+
+#### 详细描述
+
+
+#### 定义
+
+`withDiffVariableName(variable string) SSAComparisonItemOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| variable | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SSAComparisonItemOption` |   |
 
 
 ### withEntryFile
@@ -343,6 +518,35 @@ Yak|(consts.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `Option` |   |
+
+
+### withGenerateHash
+
+#### 详细描述
+WithSSARiskComparisonInfoGenerate 设置用于生成SSARisk比较信息的函数
+
+
+#### 定义
+
+`withGenerateHash(f func(risk *schema.SSARisk) (
+	rule string,
+	originHash string,
+	diffHash string,
+)) func(options *ComparatorConfig[*schema.SSARisk])`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(risk *schema.SSARisk) (
+	rule string,
+	originHash string,
+	diffHash string,
+)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `func(options *ComparatorConfig[*schema.SSARisk])` |   |
 
 
 ### withLanguage
