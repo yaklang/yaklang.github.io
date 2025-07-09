@@ -26,6 +26,7 @@
 | [x.Map](#map) ||
 | [x.Max](#max) ||
 | [x.Min](#min) ||
+| [x.NewEventWatcher](#neweventwatcher) ||
 | [x.NewReducer](#newreducer) ||
 | [x.Range](#range) ||
 | [x.Reduce](#reduce) ||
@@ -548,6 +549,28 @@ Keys creates an array of the own enumerable map keys or struct field names.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### NewEventWatcher
+
+#### 详细描述
+
+
+#### 定义
+
+`NewEventWatcher(ctx context.Context, triggerTime time.Duration, triggerCount int) *EventWatcherManager`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| triggerTime | `time.Duration` |   |
+| triggerCount | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*EventWatcherManager` |   |
 
 
 ### NewReducer

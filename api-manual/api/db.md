@@ -22,6 +22,9 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.GetProjectKey](#getprojectkey) ||
 | [db.GetYakitPluginByName](#getyakitpluginbyname) ||
 | [db.NewAliveHost](#newalivehost) ||
+| [db.OpenDatabase](#opendatabase) ||
+| [db.OpenSqliteDatabase](#opensqlitedatabase) ||
+| [db.OpenTempSqliteDatabase](#opentempsqlitedatabase) ||
 | [db.QueryAliveHost](#queryalivehost) ||
 | [db.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [db.QueryDomainsByNetwork](#querydomainsbynetwork) ||
@@ -52,6 +55,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SavePortFromResult](#saveportfromresult) ||
 | [db.SaveYakitMenuItemByBatchExecuteConfig](#saveyakitmenuitembybatchexecuteconfig) ||
 | [db.SaveYakitPlugin](#saveyakitplugin) ||
+| [db.ScanResult](#scanresult) ||
 | [db.SetKey](#setkey) ||
 | [db.SetKeyWithTTL](#setkeywithttl) ||
 | [db.SetProjectKey](#setprojectkey) ||
@@ -259,6 +263,65 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |:-----------|:---------- |:-----------|
 | target | `string` |   |
 | opts | `...yakit.AliveHostParamsOpt` |   |
+
+
+### OpenDatabase
+
+#### 详细描述
+
+
+#### 定义
+
+`OpenDatabase(dialect string, source string) (*gorm.DB, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| dialect | `string` |   |
+| source | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*gorm.DB` |   |
+| r2 | `error` |   |
+
+
+### OpenSqliteDatabase
+
+#### 详细描述
+
+
+#### 定义
+
+`OpenSqliteDatabase(path string) (*gorm.DB, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*gorm.DB` |   |
+| r2 | `error` |   |
+
+
+### OpenTempSqliteDatabase
+
+#### 详细描述
+
+
+#### 定义
+
+`OpenTempSqliteDatabase() (*gorm.DB, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*gorm.DB` |   |
+| r2 | `error` |   |
 
 
 ### QueryAliveHost
@@ -878,6 +941,29 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### ScanResult
+
+#### 详细描述
+
+
+#### 定义
+
+`ScanResult(db *gorm.DB, query string, args ...any) ([]map[string]any, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| db | `*gorm.DB` |   |
+| query | `string` |   |
+| args | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]map[string]any` |   |
+| r2 | `error` |   |
 
 
 ### SetKey
