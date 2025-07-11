@@ -27,6 +27,7 @@
 | [aiagent.coordinatorAICallback](#coordinatoraicallback) ||
 | [aiagent.debug](#debug) ||
 | [aiagent.debugPrompt](#debugprompt) ||
+| [aiagent.disableOutputType](#disableoutputtype) ||
 | [aiagent.disableToolUse](#disabletooluse) ||
 | [aiagent.disallowRequireForUserPrompt](#disallowrequireforuserprompt) ||
 | [aiagent.eventHandler](#eventhandler) ||
@@ -560,6 +561,26 @@
 | r1 | `Option` |   |
 
 
+### disableOutputType
+
+#### 详细描述
+
+
+#### 定义
+
+`disableOutputType(typeString ...string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typeString | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
 ### disableToolUse
 
 #### 详细描述
@@ -602,12 +623,12 @@
 
 #### 定义
 
-`eventHandler(h func(e *Event)) Option`
+`eventHandler(h func(e *schema.AiOutputEvent)) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `func(e *Event)` |   |
+| h | `func(e *schema.AiOutputEvent)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
