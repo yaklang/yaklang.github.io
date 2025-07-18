@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [bufio.NewBuffer](#newbuffer) |NewBuffer 创建一个新的 Buffer 结构体引用，其帮助我们处理字符串  Buffer 也实现了 Reader 和 Writer 接口  常用的 Buffer 方法有：Bytes, String, Read, Write, WriteString, WriteByte, Reset  |
+| [bufio.NewPipe](#newpipe) ||
 | [bufio.NewReadWriter](#newreadwriter) |NewReadWriter 根据传入的 Reader 和 Writer 创建一个新的 BufioReadWriter 结构体引用  BufioReadWriter 可以同时调用 BufioReader 和 BufioWriter 的方法  |
 | [bufio.NewReader](#newreader) |NewReader 根据传入的 Reader 创建一个新的 BufioReader 结构体引用  常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset  |
 | [bufio.NewReaderSize](#newreadersize) |NewReaderSize 根据传入的 Reader 创建一个新的 BufioReader 结构体引用，其的缓存大小为 size  常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset  |
@@ -42,6 +43,22 @@ data, err = io.ReadAll(buffer) // data = b"hello yak", err = nil
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*bytes.Buffer` |   |
+
+
+### NewPipe
+
+#### 详细描述
+
+
+#### 定义
+
+`NewPipe() (*PipeReader, *PipeWriter)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*PipeReader` |   |
+| r2 | `*PipeWriter` |   |
 
 
 ### NewReadWriter

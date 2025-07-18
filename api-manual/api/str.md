@@ -116,6 +116,7 @@
 | [str.Replace](#replace) |Replace 返回将字符串s中前n个old字符串替换为new字符串的字符串  |
 | [str.ReplaceAll](#replaceall) |ReplaceAll 返回将字符串s中所有old字符串替换为new字符串的字符串  |
 | [str.ReplaceHTTPPacketBody](#replacehttppacketbody) |ReplaceBody 将原始 HTTP 请求报文中的 body 替换为指定的 body，并指定是否为 chunked，返回新的 HTTP 请求报文  |
+| [str.ShrinkString](#shrinkstring) |str.ShrinkString 将会把一个字符串压缩成一个设定一个长度下的较短的字符串  |
 | [str.Split](#split) |Split 将字符串s按照sep分割成字符串切片  |
 | [str.SplitAfter](#splitafter) |SplitAfter 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep  |
 | [str.SplitAfterN](#splitaftern) |SplitAfterN 将字符串s按照sep分割成字符串切片，但是每个元素都会保留sep，最多分为n个元素  |
@@ -3249,6 +3250,35 @@ hello world`, "hello yak", false)
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | newHTTPRequest | `[]byte` |   |
+
+
+### ShrinkString
+
+#### 详细描述
+str.ShrinkString 将会把一个字符串压缩成一个设定一个长度下的较短的字符串
+
+Example:
+```
+result = str.ShrinkString("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 20)
+println(result)
+/* output: aaaaaaaaaa...aaaaaaaaaa */
+```
+
+
+#### 定义
+
+`ShrinkString(i any, size int) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| size | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### Split

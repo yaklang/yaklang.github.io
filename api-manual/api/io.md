@@ -12,7 +12,7 @@ EOF|(errors.errorString) &amp;errors.errorString{s: &#34;EOF&#34;}|
 | [io.LimitReader](#limitreader) |LimitReader 返回一个 Reader，该 Reader 从 r 中读取字节，但在读取 n 个字节后就会返回 EOF  |
 | [io.MultiReader](#multireader) |MultiReader 返回一个 Reader，该 Reader 从多个 Reader 中读取数据  |
 | [io.NopCloser](#nopcloser) |NopCloser 返回一个 ReadCloser，该 ReadCloser 从 r 中读取数据，并实现了一个空的 Close 方法  |
-| [io.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误  |
+| [io.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以  |
 | [io.ReadAll](#readall) |ReadAll 读取 Reader 中的所有字节，返回读取到的数据和错误  |
 | [io.ReadEvery1s](#readevery1s) |ReadEvery1s 每秒读取 Reader 一次，直到读取到 EOF 或者回调函数返回 false  |
 | [io.ReadFile](#readfile) |ReadFile 读取指定文件中的所有内容，返回读取到的数据和错误  |
@@ -163,12 +163,11 @@ r.Close() // 什么都不做
 ### Pipe
 
 #### 详细描述
-Pipe 创建一个管道，返回一个读取端和一个写入端以及错误
+Pipe 创建一个管道，返回一个读取端和一个写入端以
 
 Example:
 ```
-r, w, err = os.Pipe()
-die(err)
+r, w = io.Pipe()
 
 	go func {
 	    w.WriteString("hello yak")
@@ -183,14 +182,13 @@ dump(bytes)
 
 #### 定义
 
-`Pipe() (r *os.File, w *os.File, err error)`
+`Pipe() (*bufpipe.PipeReader, *bufpipe.PipeWriter)`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r | `*os.File` |   |
-| w | `*os.File` |   |
-| err | `error` |   |
+| r1 | `*bufpipe.PipeReader` |   |
+| r2 | `*bufpipe.PipeWriter` |   |
 
 
 ### ReadAll
@@ -227,18 +225,20 @@ ReadEvery1s 每秒读取 Reader 一次，直到读取到 EOF 或者回调函数�
 
 Example:
 ```
-r, w, err = io.Pipe() // 创建一个管道，返回一个读取端和一个写入端以及错误
-die(err)
-go func{
-for {
-w.WriteString("hello yak\n")
-time.Sleep(1)
-}
-}
-io.ReadEvery1s(context.New(), r, func(data) {
-println(string(data))
-return true
-})
+r, w = io.Pipe() // 创建一个管道，返回一个读取端和一个写入端
+
+	go func{
+	    for {
+		       w.WriteString("hello yak\n")
+		       time.Sleep(1)
+		   }
+	}
+
+	io.ReadEvery1s(context.New(), r, func(data) {
+	    println(string(data))
+		   return true
+	})
+
 ```
 
 
