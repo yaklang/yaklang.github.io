@@ -2,6 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [aiagent.AllYakScriptAiTools](#allyakscriptaitools) ||
 | [aiagent.CreateForge](#createforge) ||
 | [aiagent.CreateLiteForge](#createliteforge) ||
 | [aiagent.ExecuteForge](#executeforge) ||
@@ -69,6 +70,21 @@
 
 
 ## 函数定义
+### AllYakScriptAiTools
+
+#### 详细描述
+
+
+#### 定义
+
+`AllYakScriptAiTools() []*aitool.Tool`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*aitool.Tool` |   |
+
+
 ### CreateForge
 
 #### 详细描述

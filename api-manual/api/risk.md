@@ -25,7 +25,7 @@
 | [risk.NewUnverifiedRisk](#newunverifiedrisk) ||
 | [risk.QueryRisksByKeyword](#queryrisksbykeyword) |QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道  |
 | [risk.RegisterBeforeRiskSave](#registerbeforerisksave) ||
-| [risk.Save](#save) |Save 将漏洞记录结构体保存到数据库中其通常与 CreateRisk 一起使用  |
+| [risk.Save](#save) ||
 | [risk.YieldRiskByCreateAt](#yieldriskbycreateat) |YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByIds](#yieldriskbyids) |YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByRuntimeId](#yieldriskbyruntimeid) |YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道  |
@@ -585,23 +585,16 @@ println(risk)
 ### Save
 
 #### 详细描述
-Save 将漏洞记录结构体保存到数据库中其通常与 CreateRisk 一起使用
-
-Example:
-```
-r = risk.CreateRisk("http://example.com", risk.title("SQL注入漏洞"), risk.type("sqli"), risk.severity("high"))
-risk.Save(r)
-```
 
 
 #### 定义
 
-`Save(r *schema.Risk) error`
+`Save(risk *schema.Risk) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| r | `*schema.Risk` |   |
+| risk | `*schema.Risk` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
