@@ -61,6 +61,13 @@
 | [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
 | [yakit.Warn](#warn) ||
+| [yakit.fileChmodAction](#filechmodaction) ||
+| [yakit.fileCreateAction](#filecreateaction) ||
+| [yakit.fileDeleteAction](#filedeleteaction) ||
+| [yakit.fileFindAction](#filefindaction) ||
+| [yakit.fileReadAction](#filereadaction) ||
+| [yakit.fileStatusAction](#filestatusaction) ||
+| [yakit.fileWriteAction](#filewriteaction) ||
 
 
 ## 函数定义
@@ -204,13 +211,13 @@
 
 #### 定义
 
-`File(fileName string, desc ...any)`
+`File(fileName string, option ...any)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | fileName | `string` |   |
-| desc | `...any` |   |
+| option | `...any` |   |
 
 
 ### GenerateYakitMITMHooksParams
@@ -1124,5 +1131,153 @@
 |:-----------|:---------- |:-----------|
 | tmp | `string` |   |
 | items | `...any` |   |
+
+
+### fileChmodAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileChmodAction(chmodMode uint32) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| chmodMode | `uint32` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileCreateAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileCreateAction(isDir bool, chmodMode uint32) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| isDir | `bool` |   |
+| chmodMode | `uint32` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileDeleteAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileDeleteAction(isDir bool) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| isDir | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileFindAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileFindAction(findMode string, findCondition string, findContent ...string) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| findMode | `string` |   |
+| findCondition | `string` |   |
+| findContent | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileReadAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileReadAction(offset int, length int, unit string, content []byte) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| offset | `int` |   |
+| length | `int` |   |
+| unit | `string` |   |
+| content | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileStatusAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileStatusAction(status any) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| status | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
+
+
+### fileWriteAction
+
+#### 详细描述
+
+
+#### 定义
+
+`fileWriteAction(length int, mode string, content []byte) *YakitFileAction`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| length | `int` |   |
+| mode | `string` |   |
+| content | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitFileAction` |   |
 
 

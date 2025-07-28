@@ -43,6 +43,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.QueryPortsByUpdatedAt](#queryportsbyupdatedat) ||
 | [db.QueryUrlsAll](#queryurlsall) ||
 | [db.QueryUrlsByKeyword](#queryurlsbykeyword) ||
+| [db.SaveAIYakScript](#saveaiyakscript) ||
 | [db.SaveDomain](#savedomain) ||
 | [db.SaveHTTPFlowFromNative](#savehttpflowfromnative) ||
 | [db.SaveHTTPFlowFromNativeWithType](#savehttpflowfromnativewithtype) ||
@@ -682,6 +683,26 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `chan string` |   |
+
+
+### SaveAIYakScript
+
+#### 详细描述
+
+
+#### 定义
+
+`SaveAIYakScript(tool *schema.AIYakTool) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tool | `*schema.AIYakTool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### SaveDomain

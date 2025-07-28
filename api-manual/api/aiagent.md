@@ -11,6 +11,8 @@
 | [aiagent.GetDefaultMemory](#getdefaultmemory) ||
 | [aiagent.NewExecutor](#newexecutor) ||
 | [aiagent.NewExecutorFromJson](#newexecutorfromjson) ||
+| [aiagent.ParseYakScriptToAiTools](#parseyakscripttoaitools) ||
+| [aiagent.UpdateYakScriptMetaData](#updateyakscriptmetadata) ||
 | [aiagent.agreeAuto](#agreeauto) ||
 | [aiagent.agreeManual](#agreemanual) ||
 | [aiagent.agreePolicy](#agreepolicy) ||
@@ -255,6 +257,51 @@
 |:-----------|:---------- |:-----------|
 | r1 | `*aid.Coordinator` |   |
 | r2 | `error` |   |
+
+
+### ParseYakScriptToAiTools
+
+#### 详细描述
+
+
+#### 定义
+
+`ParseYakScriptToAiTools(name string, content string) *schema.AIYakTool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| content | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*schema.AIYakTool` |   |
+
+
+### UpdateYakScriptMetaData
+
+#### 详细描述
+
+
+#### 定义
+
+`UpdateYakScriptMetaData(name string, content string, forceUpdate bool) (string, *metadata.YakScriptMetadata, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| content | `string` |   |
+| forceUpdate | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `*metadata.YakScriptMetadata` |   |
+| r3 | `error` |   |
 
 
 ### agreeAuto
