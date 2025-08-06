@@ -8,9 +8,16 @@
 | [git.Checkout](#checkout) |Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为  |
 | [git.Clone](#clone) |Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为  |
 | [git.Fetch](#fetch) |Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为  |
+| [git.FileSystemCurrentDay](#filesystemcurrentday) |FileSystemCurrentDay 获取当前自然日的文件系统 |
+| [git.FileSystemCurrentMonth](#filesystemcurrentmonth) |FileSystemCurrentMonth 获取当前自然月的文件系统 |
+| [git.FileSystemCurrentWeek](#filesystemcurrentweek) |FileSystemCurrentWeek 获取当前自然周（周一到周天）的文件系统 |
 | [git.FileSystemFromCommit](#filesystemfromcommit) |FileSystemFromCommit 从指定的commit中获取文件系统    |
+| [git.FileSystemFromCommitDateRange](#filesystemfromcommitdaterange) |FileSystemFromCommitDateRange 根据日期范围获取文件系统 startDate: 起始日期，支持多种格式和类型 endDate: 结束日期，支持多种格式和类型 |
 | [git.FileSystemFromCommitRange](#filesystemfromcommitrange) |FileSystemFromCommitRange 从commit范围中获取文件系统    |
 | [git.FileSystemFromCommits](#filesystemfromcommits) |FileSystemFromCommits 从多个commit中获取文件系统    |
+| [git.FileSystemFromDate](#filesystemfromdate) |FileSystemFromDate 根据指定日期获取该日的文件系统 |
+| [git.FileSystemFromMonth](#filesystemfrommonth) |FileSystemFromMonth 根据指定年月获取该月的文件系统 |
+| [git.FileSystemLastSevenDay](#filesystemlastsevenday) |FileSystemLastSevenDay 获取最近七天的文件系统 |
 | [git.GitHack](#githack) |GitHack 是一个用于利用 Git 源码泄露漏洞的函数  Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露  |
 | [git.Glance](#glance) ||
 | [git.HeadBranch](#headbranch) ||
@@ -193,6 +200,72 @@ git.Fetch("C:/Users/xxx/Desktop/yaklang", git.verify(false), git.remote("origin"
 | r1 | `error` |   |
 
 
+### FileSystemCurrentDay
+
+#### 详细描述
+FileSystemCurrentDay 获取当前自然日的文件系统
+
+
+#### 定义
+
+`FileSystemCurrentDay(repos string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemCurrentMonth
+
+#### 详细描述
+FileSystemCurrentMonth 获取当前自然月的文件系统
+
+
+#### 定义
+
+`FileSystemCurrentMonth(repos string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemCurrentWeek
+
+#### 详细描述
+FileSystemCurrentWeek 获取当前自然周（周一到周天）的文件系统
+
+
+#### 定义
+
+`FileSystemCurrentWeek(repos string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
 ### FileSystemFromCommit
 
 #### 详细描述
@@ -216,6 +289,32 @@ fs, err := git.FileSystemFromCommit("path/to/repo", "2871a988b2ed7ec10a1fd45eca2
 |:-----------|:---------- |:-----------|
 | repos | `string` |   |
 | commitHash | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemFromCommitDateRange
+
+#### 详细描述
+FileSystemFromCommitDateRange 根据日期范围获取文件系统
+startDate: 起始日期，支持多种格式和类型
+endDate: 结束日期，支持多种格式和类型
+
+
+#### 定义
+
+`FileSystemFromCommitDateRange(repos string, startDate any, endDate any) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| startDate | `any` |   |
+| endDate | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -278,6 +377,75 @@ fs, err := git.FileSystemFromCommits("path/to/repo", "54165a396a219d085980dca623
 |:-----------|:---------- |:-----------|
 | repos | `string` |   |
 | commitHashes | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemFromDate
+
+#### 详细描述
+FileSystemFromDate 根据指定日期获取该日的文件系统
+
+
+#### 定义
+
+`FileSystemFromDate(repos string, date any) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| date | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemFromMonth
+
+#### 详细描述
+FileSystemFromMonth 根据指定年月获取该月的文件系统
+
+
+#### 定义
+
+`FileSystemFromMonth(repos string, year int, month int) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
+| year | `int` |   |
+| month | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `filesys_interface.FileSystem` |   |
+| r2 | `error` |   |
+
+
+### FileSystemLastSevenDay
+
+#### 详细描述
+FileSystemLastSevenDay 获取最近七天的文件系统
+
+
+#### 定义
+
+`FileSystemLastSevenDay(repos string) (filesys_interface.FileSystem, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| repos | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
