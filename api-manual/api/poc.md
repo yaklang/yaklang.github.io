@@ -164,6 +164,7 @@
 | [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
 | [poc.ua](#ua) |ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值  |
 | [poc.uarand](#uarand) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
+| [poc.useMitmRule](#usemitmrule) |mitmRule 是一个请求选项参数，用于指定是否使用MITM规则，默认为false即不会使用MITM规则，使用规则可以完成流量染色，附加tag与提取数据的功能  |
 | [poc.useragent](#useragent) |ua 是一个请求选项参数，用于改变请求报文，添加 User-Agent 请求头中的值  |
 | [poc.username](#username) |username 是一个请求选项参数，用于指定认证时的用户名  |
 | [poc.websocket](#websocket) |websocket 是一个请求选项参数，用于允许将链接升级为 websocket，此时发送的请求应该为 websocket 握手请求  |
@@ -4601,12 +4602,12 @@ Example:
 
 #### 定义
 
-`saveHandler(f func(response *lowhttp.LowhttpResponse)) PocConfigOption`
+`saveHandler(f ...func(response *lowhttp.LowhttpResponse)) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| f | `func(response *lowhttp.LowhttpResponse)` |   |
+| f | `...func(response *lowhttp.LowhttpResponse)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -4785,6 +4786,32 @@ poc.Get("https://pie.dev/basic-auth/admin/password", poc.replaceRandomUserAgent(
 #### 定义
 
 `uarand() PocConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### useMitmRule
+
+#### 详细描述
+mitmRule 是一个请求选项参数，用于指定是否使用MITM规则，默认为false即不会使用MITM规则，使用规则可以完成流量染色，附加tag与提取数据的功能
+
+Example:
+```
+poc.Get("https://exmaple.com", poc.save(true), poc.mitmReplacer(true))
+```
+
+
+#### 定义
+
+`useMitmRule(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

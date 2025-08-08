@@ -14,6 +14,7 @@
 | [servicescan.databaseCache](#databasecache) |databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存  @param {bool} b 是否使用数据库缓存  @return {ConfigOption} 返回配置项  |
 | [servicescan.debugLog](#debuglog) |debugLog 的配置选项，设置本次扫描是否使用 debugLog  @param {bool} b 是否使用 debugLog  @return {ConfigOption} 返回配置项  |
 | [servicescan.disableDefaultRule](#disabledefaultrule) ||
+| [servicescan.disableWebScanConnPool](#disablewebscanconnpool) |disableWebScanConnPool servicescan 的配置选项，用于禁用 web 扫描的连接池 @param {bool} b 是否禁用连接池，默认为 false @return {ConfigOption} 返回配置选项 ``` result,err = servicescan....|
 | [servicescan.excludeHosts](#excludehosts) |excludeHosts servicescan 的配置选项，设置本次扫描排除的主机  @param {string} hosts 主机，支持逗号分割、CIDR、-的格式  @return {ConfigOption} 返回配置项  |
 | [servicescan.excludePorts](#excludeports) |excludePorts servicescan 的配置选项，设置本次扫描排除的端口  @param {string} ports 端口，支持逗号分割、-的格式  @return {ConfigOption} 返回配置项  |
 | [servicescan.maxProbes](#maxprobes) |maxProbes servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5  @param {int} m 最大探测包数量  @return {ConfigOption} 返回配置项  |
@@ -462,6 +463,39 @@ die(err)
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `...bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `fp.ConfigOption` |   |
+
+
+### disableWebScanConnPool
+
+#### 详细描述
+disableWebScanConnPool servicescan 的配置选项，用于禁用 web 扫描的连接池
+@param {bool} b 是否禁用连接池，默认为 false
+@return {ConfigOption} 返回配置选项
+```
+result,err = servicescan.Scan(&#34;127.0.0.1&#34;, &#34;22-80,443,3389,161&#34;, servicescan.disableWebScanConnPool(true)) // 禁用 web 扫描的连接池
+die(err) // 如果错误非空则报错
+for res := range result { // 通过遍历管道的形式获取管道中的结果，一旦有结果返回就会执行循环体的代码
+
+	   println(res.String()) // 输出结果，调用String方法获取可读
+	   println(res.String()) // 输出结果，调用String方法获取可读字符串
+	}
+
+```
+
+
+#### 定义
+
+`disableWebScanConnPool(b bool) fp.ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

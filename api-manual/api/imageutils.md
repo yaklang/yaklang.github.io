@@ -37,12 +37,13 @@ we can handle some video formats, PDF, and other files that may contain images.
 
 #### 定义
 
-`ExtractImageFromFile(filePath string) (chan *ImageResult, error)`
+`ExtractImageFromFile(filePath string, options ...ImageExtractorOption) (chan *ImageResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | filePath | `string` |   |
+| options | `...ImageExtractorOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
