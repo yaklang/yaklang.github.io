@@ -19,6 +19,8 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Clean](#clean) |Clean 清理路径中的多余的分隔符和 . 和 ..  |
 | [file.Cp](#cp) |Cp 拷贝文件或目录，返回错误  |
 | [file.Create](#create) |Create 创建一个文件，返回一个文件结构体引用与错误  |
+| [file.DetectMIMETypeFromFile](#detectmimetypefromfile) ||
+| [file.DetectMIMETypeFromRaw](#detectmimetypefromraw) ||
 | [file.Dir](#dir) |Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片  |
 | [file.GetBase](#getbase) |GetBase 获取文件的基本名  |
 | [file.GetDirPath](#getdirpath) |GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录  |
@@ -184,6 +186,47 @@ f, err = file.Create("/tmp/test.txt")
 |:-----------|:---------- |:-----------|
 | r1 | `*_yakFile` |   |
 | r2 | `error` |   |
+
+
+### DetectMIMETypeFromFile
+
+#### 详细描述
+
+
+#### 定义
+
+`DetectMIMETypeFromFile(path string) (*MIME, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*MIME` |   |
+| r2 | `error` |   |
+
+
+### DetectMIMETypeFromRaw
+
+#### 详细描述
+
+
+#### 定义
+
+`DetectMIMETypeFromRaw(raw []byte) *MIME`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*MIME` |   |
 
 
 ### Dir

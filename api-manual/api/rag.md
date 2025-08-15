@@ -5,6 +5,7 @@
 | [rag.AddDocument](#adddocument) ||
 | [rag.DeleteCollection](#deletecollection) ||
 | [rag.DeleteDocument](#deletedocument) ||
+| [rag.EnableMockMode](#enablemockmode) ||
 | [rag.GetCollection](#getcollection) ||
 | [rag.GetCollectionInfo](#getcollectioninfo) ||
 | [rag.ListCollection](#listcollection) ||
@@ -87,6 +88,16 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### EnableMockMode
+
+#### 详细描述
+
+
+#### 定义
+
+`EnableMockMode()`
 
 
 ### GetCollection

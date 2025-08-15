@@ -5,11 +5,11 @@
 | [aireducer.NewReducerFromFile](#newreducerfromfile) ||
 | [aireducer.NewReducerFromReader](#newreducerfromreader) ||
 | [aireducer.NewReducerFromString](#newreducerfromstring) ||
-| [aireducer.callback](#callback) ||
+| [aireducer.callback](#callback) |aireducer.reducer |
 | [aireducer.chunkSize](#chunksize) ||
 | [aireducer.context](#context) ||
 | [aireducer.memory](#memory) ||
-| [aireducer.reducerCallback](#reducercallback) ||
+| [aireducer.reducerCallback](#reducercallback) |aireducer.reducer |
 | [aireducer.separator](#separator) ||
 | [aireducer.timeTriggerInterval](#timetriggerinterval) ||
 | [aireducer.timeTriggerIntervalSeconds](#timetriggerintervalseconds) ||
@@ -85,6 +85,7 @@
 ### callback
 
 #### 详细描述
+aireducer.reducer
 
 
 #### 定义
@@ -165,6 +166,7 @@
 ### reducerCallback
 
 #### 详细描述
+aireducer.reducer
 
 
 #### 定义

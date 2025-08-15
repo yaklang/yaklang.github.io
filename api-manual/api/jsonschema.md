@@ -2,8 +2,12 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [jsonschema.ActionObject](#actionobject) ||
 | [jsonschema.NewObjectArraySchema](#newobjectarrayschema) ||
 | [jsonschema.NewObjectSchema](#newobjectschema) ||
+| [jsonschema.Object](#object) ||
+| [jsonschema.ObjectArray](#objectarray) ||
+| [jsonschema.action](#action) ||
 | [jsonschema.const](#const) |WithParam_Enum specifies a list of allowed values for a string property. The property value must be one of the specified enum values. |
 | [jsonschema.description](#description) |WithParam_Description adds a description to a property in the JSON Schema. The description should explain the purpose and expected values of the prope...|
 | [jsonschema.enum](#enum) |WithParam_Enum specifies a list of allowed values for a string property. The property value must be one of the specified enum values. |
@@ -18,6 +22,8 @@
 | [jsonschema.paramNumber](#paramnumber) |WithNumberParam adds a number property to the tool schema. It accepts property options to configure the number property&amp;#39;s behavior and constraints...|
 | [jsonschema.paramNumberArray](#paramnumberarray) |WithNumberArrayParam adds a number array property to the tool schema. It accepts property options to configure the number-array property&amp;#39;s behavio...|
 | [jsonschema.paramObject](#paramobject) ||
+| [jsonschema.paramObjectArray](#paramobjectarray) ||
+| [jsonschema.paramObjectArrayEx](#paramobjectarrayex) ||
 | [jsonschema.paramRaw](#paramraw) |WithRawParam adds a custom object property to the tool schema. It accepts property options to configure the object property&amp;#39;s behavior and constra...|
 | [jsonschema.paramString](#paramstring) |WithStringParam adds a string property to the tool schema. It accepts property options to configure the string property&amp;#39;s behavior and constraints...|
 | [jsonschema.paramStringArray](#paramstringarray) |WithStringArrayParam adds a string array property to the tool schema. It accepts property options to configure the string-array property&amp;#39;s behavio...|
@@ -27,6 +33,26 @@
 
 
 ## 函数定义
+### ActionObject
+
+#### 详细描述
+
+
+#### 定义
+
+`ActionObject(opts ...any) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
 ### NewObjectArraySchema
 
 #### 详细描述
@@ -65,6 +91,66 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+
+
+### Object
+
+#### 详细描述
+
+
+#### 定义
+
+`Object(opts ...any) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### ObjectArray
+
+#### 详细描述
+
+
+#### 定义
+
+`ObjectArray(opts ...any) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### action
+
+#### 详细描述
+
+
+#### 定义
+
+`action(action string) ToolOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| action | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ToolOption` |   |
 
 
 ### const
@@ -368,6 +454,49 @@ It accepts property options to configure the number-array property&#39;s behavio
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | objectName | `string` |   |
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ToolOption` |   |
+
+
+### paramObjectArray
+
+#### 详细描述
+
+
+#### 定义
+
+`paramObjectArray(name string, opts ...any) ToolOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ToolOption` |   |
+
+
+### paramObjectArrayEx
+
+#### 详细描述
+
+
+#### 定义
+
+`paramObjectArrayEx(name string, arrayPropsRaw []any, opts ...any) ToolOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+| arrayPropsRaw | `[]any` |   |
 | opts | `...any` |   |
 
 #### 返回值

@@ -103,18 +103,42 @@
 | [codec.Sm2SignWithSM3WithPassword](#sm2signwithsm3withpassword) |SM2SignWithSM3WithPassword 使用带密码保护的SM2私钥对数据进行SM3签名    参数 priKeyBytes 表示加密的 SM2 私钥（PEM格式）  参数 data 是要签名的原始数据  参数 password 是私钥的保护密码，如果私钥未加密则传入 nil  返回值是...|
 | [codec.Sm2VerifyWithSM3](#sm2verifywithsm3) |SM2VerifyWithSM3 使用SM2公钥对数据进行SM3签名验证，返回错误    参数 pubKeyBytes 表示 SM2 公钥，支持以下格式：    - PEM 编码（例如 &amp;#34;-----BEGIN PUBLIC KEY-----&amp;#34; 块）    - HEX 字符串格式（12...|
 | [codec.Sm3](#sm3) ||
-| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) |Sm4CBCDecrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
-| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) |Sm4CBCEncrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来加密数据 CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。 example: ``` codec.Sm4CBCEncrypt(&amp;#34;123412341234...|
-| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) |Sm4CFBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此它可以为 nil (空)。  |
-| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) |Sm4CFBEncrypt 使用 SM4 算法，在 CFB 模式下，使用 PKCS#5 填充来加密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
-| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) |Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  |
-| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) |Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.  |
-| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) |Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  |
-| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) |Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.  |
-| [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) ||
-| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) { ...|
-| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) |Sm4OFBDecrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来解密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
-| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) |Sm4OFBEncrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来加密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) |SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Decrypt SM4CBCDecrypt 和 SM4...|
+| [codec.Sm4CBCDecryptWithPKCSPadding](#sm4cbcdecryptwithpkcspadding) |SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Decrypt SM4CBCDecrypt 和 SM4...|
+| [codec.Sm4CBCDecryptWithZeroPadding](#sm4cbcdecryptwithzeropadding) ||
+| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) |SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Encrypt SM4CBCEncrypt 和 SM4...|
+| [codec.Sm4CBCEncryptWithPKCSPadding](#sm4cbcencryptwithpkcspadding) |SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Encrypt SM4CBCEncrypt 和 SM4...|
+| [codec.Sm4CBCEncryptWithZeroPadding](#sm4cbcencryptwithzeropadding) ||
+| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) |SM4DecryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来解密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4CFBDecrypt 和 SM4DecryptCFBW...|
+| [codec.Sm4CFBDecryptWithPKCSPadding](#sm4cfbdecryptwithpkcspadding) |SM4DecryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来解密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4CFBDecrypt 和 SM4DecryptCFBW...|
+| [codec.Sm4CFBDecryptWithZeroPadding](#sm4cfbdecryptwithzeropadding) ||
+| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) |SM4EncryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来加密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4CFBEncrypt 和 SM4EncryptCFBW...|
+| [codec.Sm4CFBEncryptWithPKCSPadding](#sm4cfbencryptwithpkcspadding) |SM4EncryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来加密数据  CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4CFBEncrypt 和 SM4EncryptCFBW...|
+| [codec.Sm4CFBEncryptWithZeroPadding](#sm4cfbencryptwithzeropadding) ||
+| [codec.Sm4CTRDecrypt](#sm4ctrdecrypt) ||
+| [codec.Sm4CTRDecryptWithPKCSPadding](#sm4ctrdecryptwithpkcspadding) ||
+| [codec.Sm4CTRDecryptWithZeroPadding](#sm4ctrdecryptwithzeropadding) ||
+| [codec.Sm4CTREncrypt](#sm4ctrencrypt) ||
+| [codec.Sm4CTREncryptWithPKCSPadding](#sm4ctrencryptwithpkcspadding) ||
+| [codec.Sm4CTREncryptWithZeroPadding](#sm4ctrencryptwithzeropadding) ||
+| [codec.Sm4Decrypt](#sm4decrypt) |SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Decrypt SM4CBCDecrypt 和 SM4...|
+| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) |SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据 Deprecated: 请使用 Sm4ECBDecrypt（EBC 是 ECB 的拼写错误） |
+| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) |SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据 Deprecated: 请使用 Sm4ECBEncrypt（EBC 是 ECB 的拼写错误） |
+| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) |SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  注意：SM4ECBDecrypt 和 SM4DecryptECBWithPKCSPadding...|
+| [codec.Sm4ECBDecryptWithPKCSPadding](#sm4ecbdecryptwithpkcspadding) |SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  注意：SM4ECBDecrypt 和 SM4DecryptECBWithPKCSPadding...|
+| [codec.Sm4ECBDecryptWithZeroPadding](#sm4ecbdecryptwithzeropadding) ||
+| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) |SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  注意：SM4ECBEncrypt 和 SM4EncryptECBWithPKCSPadding...|
+| [codec.Sm4ECBEncryptWithPKCSPadding](#sm4ecbencryptwithpkcspadding) |SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据  ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。  注意：SM4ECBEncrypt 和 SM4EncryptECBWithPKCSPadding...|
+| [codec.Sm4ECBEncryptWithZeroPadding](#sm4ecbencryptwithzeropadding) ||
+| [codec.Sm4Encrypt](#sm4encrypt) |SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据  CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4Encrypt SM4CBCEncrypt 和 SM4...|
+| [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) |Sm4GCMDecrypt 使用 SM4 算法，在 GCM 模式下解密数据  GCM 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |Sm4GCMEncrypt 使用 SM4 算法，在 GCM 模式下加密数据  GCM 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  |
+| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) |SM4DecryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来解密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4OFBDecrypt 和 SM4DecryptOFBW...|
+| [codec.Sm4OFBDecryptWithPKCSPadding](#sm4ofbdecryptwithpkcspadding) |SM4DecryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来解密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4OFBDecrypt 和 SM4DecryptOFBW...|
+| [codec.Sm4OFBDecryptWithZeroPadding](#sm4ofbdecryptwithzeropadding) ||
+| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) |SM4EncryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来加密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4OFBEncrypt 和 SM4EncryptOFBW...|
+| [codec.Sm4OFBEncryptWithPKCSPadding](#sm4ofbencryptwithpkcspadding) |SM4EncryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来加密数据  OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。  注意：SM4OFBEncrypt 和 SM4EncryptOFBW...|
+| [codec.Sm4OFBEncryptWithZeroPadding](#sm4ofbencryptwithzeropadding) ||
 | [codec.StrconvQuote](#strconvquote) |Quote returns a double-quoted Go string literal representing s. The returned string uses Go escape sequences (\t, \n, \xFF, \u0100) for control charac...|
 | [codec.StrconvUnquote](#strconvunquote) |Unquote interprets s as a single-quoted, double-quoted, or backquoted Go string literal, returning the string value that s quotes.  (If s is single-qu...|
 | [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) |TripleDESCBCDecrypt 是一个便捷函数，用于使用 Triple DES 算法，在 CBC 模式下，使用 零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 24 个字节（即 3 * 8 字节），并...|
@@ -2741,13 +2765,15 @@ if err == nil {
 ### Sm4CBCDecrypt
 
 #### 详细描述
-Sm4CBCDecrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来解密数据
+SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据
 
 CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
 
+注意：SM4Decrypt SM4CBCDecrypt 和 SM4DecryptCBCWithPKCSPadding 是同一个函数的别名
+
 Example:
 ```
-codec.Sm4CBCDecrypt("1234123412341234", "123412341234123456", "1234123412341234")
+codec.SM4DecryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
@@ -2769,14 +2795,74 @@ codec.Sm4CBCDecrypt("1234123412341234", "123412341234123456", "1234123412341234"
 | r2 | `error` |   |
 
 
+### Sm4CBCDecryptWithPKCSPadding
+
+#### 详细描述
+SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据
+
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4Decrypt SM4CBCDecrypt 和 SM4DecryptCBCWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4DecryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4CBCDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CBCDecryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### Sm4CBCEncrypt
 
 #### 详细描述
-Sm4CBCEncrypt 使用 SM4 算法，在 CBC 模式下，使用 PKCS#5 填充来加密数据
+SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据
+
 CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
-example:
+
+注意：SM4Encrypt SM4CBCEncrypt 和 SM4EncryptCBCWithPKCSPadding 是同一个函数的别名
+
+Example:
 ```
-codec.Sm4CBCEncrypt(&#34;1234123412341234&#34;, &#34;123412341234123456&#34;, &#34;1234123412341234&#34;)
+codec.SM4EncryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
@@ -2798,16 +2884,74 @@ codec.Sm4CBCEncrypt(&#34;1234123412341234&#34;, &#34;123412341234123456&#34;, &#
 | r2 | `error` |   |
 
 
-### Sm4CFBDecrypt
+### Sm4CBCEncryptWithPKCSPadding
 
 #### 详细描述
-Sm4CFBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据
 
-ECB 模式下不需要 IV (初始化向量)，因此它可以为 nil (空)。
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4Encrypt SM4CBCEncrypt 和 SM4EncryptCBCWithPKCSPadding 是同一个函数的别名
 
 Example:
 ```
-codec.Sm4CFBDecrypt("1234123412341234", "123412341234123456", nil)
+codec.SM4EncryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4CBCEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CBCEncryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CFBDecrypt
+
+#### 详细描述
+SM4DecryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来解密数据
+
+CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4CFBDecrypt 和 SM4DecryptCFBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4DecryptCFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
@@ -2829,16 +2973,74 @@ codec.Sm4CFBDecrypt("1234123412341234", "123412341234123456", nil)
 | r2 | `error` |   |
 
 
-### Sm4CFBEncrypt
+### Sm4CFBDecryptWithPKCSPadding
 
 #### 详细描述
-Sm4CFBEncrypt 使用 SM4 算法，在 CFB 模式下，使用 PKCS#5 填充来加密数据
+SM4DecryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来解密数据
 
 CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
 
+注意：SM4CFBDecrypt 和 SM4DecryptCFBWithPKCSPadding 是同一个函数的别名
+
 Example:
 ```
-codec.Sm4CFBEncrypt("1234123412341234", "123412341234123456", "1234123412341234")
+codec.SM4DecryptCFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4CFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CFBDecryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CFBEncrypt
+
+#### 详细描述
+SM4EncryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来加密数据
+
+CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4CFBEncrypt 和 SM4EncryptCFBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptCFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
@@ -2860,17 +3062,238 @@ codec.Sm4CFBEncrypt("1234123412341234", "123412341234123456", "1234123412341234"
 | r2 | `error` |   |
 
 
-### Sm4EBCDecrypt
+### Sm4CFBEncryptWithPKCSPadding
 
 #### 详细描述
-Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+SM4EncryptCFBWithPKCSPadding 使用 SM4 算法，在 CFB 模式下，使用 PKCS#7 填充来加密数据
 
-ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+CFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4CFBEncrypt 和 SM4EncryptCFBWithPKCSPadding 是同一个函数的别名
 
 Example:
 ```
-codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
+codec.SM4EncryptCFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
+
+
+#### 定义
+
+`Sm4CFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CFBEncryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTRDecrypt
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTRDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTRDecryptWithPKCSPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTRDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTRDecryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTRDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTREncrypt
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTREncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTREncryptWithPKCSPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTREncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4CTREncryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4CTREncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4Decrypt
+
+#### 详细描述
+SM4DecryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来解密数据
+
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4Decrypt SM4CBCDecrypt 和 SM4DecryptCBCWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4DecryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4Decrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4EBCDecrypt
+
+#### 详细描述
+SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据
+Deprecated: 请使用 Sm4ECBDecrypt（EBC 是 ECB 的拼写错误）
 
 
 #### 定义
@@ -2894,14 +3317,8 @@ codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
 ### Sm4EBCEncrypt
 
 #### 详细描述
-Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据
-
-ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.
-
-Example:
-```
-codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
-```
+SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据
+Deprecated: 请使用 Sm4ECBEncrypt（EBC 是 ECB 的拼写错误）
 
 
 #### 定义
@@ -2925,13 +3342,15 @@ codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
 ### Sm4ECBDecrypt
 
 #### 详细描述
-Sm4ECBDecrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来解密数据
+SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据
 
 ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
 
+注意：SM4ECBDecrypt 和 SM4DecryptECBWithPKCSPadding 是同一个函数的别名
+
 Example:
 ```
-codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
+codec.SM4DecryptECBWithPKCSPadding("1234123412341234", "123412341234123456", nil)
 ```
 
 
@@ -2953,16 +3372,74 @@ codec.Sm4ECBDecrypt("1234123412341234", "123412341234123456", nil)
 | r2 | `error` |   |
 
 
-### Sm4ECBEncrypt
+### Sm4ECBDecryptWithPKCSPadding
 
 #### 详细描述
-Sm4ECBEncrypt 使用 SM4 算法，在 ECB 模式下，使用 PKCS#5 填充来加密数据
+SM4DecryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来解密数据
 
-ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段.
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+
+注意：SM4ECBDecrypt 和 SM4DecryptECBWithPKCSPadding 是同一个函数的别名
 
 Example:
 ```
-codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
+codec.SM4DecryptECBWithPKCSPadding("1234123412341234", "123412341234123456", nil)
+```
+
+
+#### 定义
+
+`Sm4ECBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4ECBDecryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4ECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4ECBEncrypt
+
+#### 详细描述
+SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+
+注意：SM4ECBEncrypt 和 SM4EncryptECBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptECBWithPKCSPadding("1234123412341234", "123412341234123456", nil)
 ```
 
 
@@ -2984,9 +3461,106 @@ codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
 | r2 | `error` |   |
 
 
+### Sm4ECBEncryptWithPKCSPadding
+
+#### 详细描述
+SM4EncryptECBWithPKCSPadding 使用 SM4 算法，在 ECB 模式下，使用 PKCS#7 填充来加密数据
+
+ECB 模式下不需要 IV (初始化向量)，因此其是一个无用字段。
+
+注意：SM4ECBEncrypt 和 SM4EncryptECBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptECBWithPKCSPadding("1234123412341234", "123412341234123456", nil)
+```
+
+
+#### 定义
+
+`Sm4ECBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4ECBEncryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4ECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4Encrypt
+
+#### 详细描述
+SM4EncryptCBCWithPKCSPadding 使用 SM4 算法，在 CBC 模式下，使用 PKCS#7 填充来加密数据
+
+CBC 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4Encrypt SM4CBCEncrypt 和 SM4EncryptCBCWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptCBCWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4Encrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### Sm4GCMDecrypt
 
 #### 详细描述
+Sm4GCMDecrypt 使用 SM4 算法，在 GCM 模式下解密数据
+
+GCM 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+Example:
+```
+codec.Sm4GCMDecrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -3010,45 +3584,14 @@ codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
 ### Sm4GCMEncrypt
 
 #### 详细描述
-	func sm4encBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) {
-		return sm4ordinary(key, interfaceToBytes(data), true, iv)
-	}
+Sm4GCMEncrypt 使用 SM4 算法，在 GCM 模式下加密数据
 
-	func sm4decBase(data interface{}, key []byte, iv []byte, sm4ordinary func(key, in []byte, encode bool, iv []byte) ([]byte, error)) ([]byte, error) {
-		return sm4ordinary(key, interfaceToBytes(data), false, iv)
-	}
+GCM 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
 
-	func SM4CFBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4encBase(data, key, iv, sm4.Sm4CFB)
-	}
-
-	func SM4CBCEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4encBase(data, key, iv, sm4.Sm4Cbc)
-	}
-
-	func SM4ECBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4encBase(data, key, iv, sm4.Sm4Ecb)
-	}
-
-	func SM4OFBEnc(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4encBase(data, key, iv, sm4.Sm4OFB)
-	}
-
-	func SM4CFBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4decBase(data, key, iv, sm4.Sm4CFB)
-	}
-
-	func SM4CBCDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4decBase(data, key, iv, sm4.Sm4Cbc)
-	}
-
-	func SM4ECBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4decBase(data, key, iv, sm4.Sm4Ecb)
-	}
-
-	func SM4OFBDec(key []byte, data interface{}, iv []byte) ([]byte, error) {
-		return sm4decBase(data, key, iv, sm4.Sm4OFB)
-	}
+Example:
+```
+codec.Sm4GCMEncrypt("1234123412341234", "123412341234123456", "1234123412341234")
+```
 
 
 #### 定义
@@ -3072,13 +3615,15 @@ codec.Sm4ECBEncrypt("1234123412341234", "123412341234123456", nil)
 ### Sm4OFBDecrypt
 
 #### 详细描述
-Sm4OFBDecrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来解密数据
+SM4DecryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来解密数据
 
 OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
 
+注意：SM4OFBDecrypt 和 SM4DecryptOFBWithPKCSPadding 是同一个函数的别名
+
 Example:
 ```
-codec.Sm4OFBDecrypt("1234123412341234", "123412341234123456", "1234123412341234")
+codec.SM4DecryptOFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
@@ -3100,22 +3645,136 @@ codec.Sm4OFBDecrypt("1234123412341234", "123412341234123456", "1234123412341234"
 | r2 | `error` |   |
 
 
-### Sm4OFBEncrypt
+### Sm4OFBDecryptWithPKCSPadding
 
 #### 详细描述
-Sm4OFBEncrypt 使用 SM4 算法，在 OFB 模式下，使用 PKCS#5 填充来加密数据
+SM4DecryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来解密数据
 
 OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
 
+注意：SM4OFBDecrypt 和 SM4DecryptOFBWithPKCSPadding 是同一个函数的别名
+
 Example:
 ```
-codec.Sm4OFBEncrypt("1234123412341234", "123412341234123456", "1234123412341234")
+codec.SM4DecryptOFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4OFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4OFBDecryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4OFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4OFBEncrypt
+
+#### 详细描述
+SM4EncryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来加密数据
+
+OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4OFBEncrypt 和 SM4EncryptOFBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptOFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
 ```
 
 
 #### 定义
 
 `Sm4OFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4OFBEncryptWithPKCSPadding
+
+#### 详细描述
+SM4EncryptOFBWithPKCSPadding 使用 SM4 算法，在 OFB 模式下，使用 PKCS#7 填充来加密数据
+
+OFB 模式下需要 IV (初始化向量)，若为空则会使用 key 的前 16 字节作为 IV。
+
+注意：SM4OFBEncrypt 和 SM4EncryptOFBWithPKCSPadding 是同一个函数的别名
+
+Example:
+```
+codec.SM4EncryptOFBWithPKCSPadding("1234123412341234", "123412341234123456", "1234123412341234")
+```
+
+
+#### 定义
+
+`Sm4OFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### Sm4OFBEncryptWithZeroPadding
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm4OFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

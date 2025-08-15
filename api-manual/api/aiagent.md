@@ -441,12 +441,12 @@
 
 #### 定义
 
-`aiCallback(cb AICallbackType) Option`
+`aiCallback(cb aicommon.AICallbackType) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `AICallbackType` |   |
+| cb | `aicommon.AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -571,12 +571,12 @@
 
 #### 定义
 
-`coordinatorAICallback(cb AICallbackType) Option`
+`coordinatorAICallback(cb aicommon.AICallbackType) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `AICallbackType` |   |
+| cb | `aicommon.AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1147,12 +1147,12 @@ WithPersistentPrompt 设置AI助手的持久提示词
 
 #### 定义
 
-`planAICallback(cb AICallbackType) Option`
+`planAICallback(cb aicommon.AICallbackType) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `AICallbackType` |   |
+| cb | `aicommon.AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1268,12 +1268,12 @@ WithResultPrompt 设置AI助手的生成结果提示词
 
 #### 定义
 
-`taskAICallback(cb AICallbackType) Option`
+`taskAICallback(cb aicommon.AICallbackType) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `AICallbackType` |   |
+| cb | `aicommon.AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
