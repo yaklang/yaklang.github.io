@@ -746,13 +746,13 @@
 
 #### 定义
 
-`extendedActionCallback(name string, cb func(config *Config, action *Action)) Option`
+`extendedActionCallback(name string, cb func(config *Config, action *aicommon.Action)) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| cb | `func(config *Config, action *Action)` |   |
+| cb | `func(config *Config, action *aicommon.Action)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
