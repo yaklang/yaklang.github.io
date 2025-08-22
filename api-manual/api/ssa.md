@@ -27,6 +27,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
 | [ssa.withLanguage](#withlanguage) ||
+| [ssa.withMemory](#withmemory) ||
 | [ssa.withPeepholeSize](#withpeepholesize) ||
 | [ssa.withProcess](#withprocess) ||
 | [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
@@ -42,7 +43,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`NewFromProgramName(programName string) (*Program, error)`
+`NewFromProgramName(programName string) (p *Program, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -52,8 +53,8 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Program` |   |
-| r2 | `error` |   |
+| p | `*Program` |   |
+| err | `error` |   |
 
 
 ### NewProgramFromDB
@@ -63,7 +64,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`NewProgramFromDB(programName string) (*Program, error)`
+`NewProgramFromDB(programName string) (p *Program, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -73,8 +74,8 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Program` |   |
-| r2 | `error` |   |
+| p | `*Program` |   |
+| err | `error` |   |
 
 
 ### NewResultFromDB
@@ -360,6 +361,26 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | input_language | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withMemory
+
+#### 详细描述
+
+
+#### 定义
+
+`withMemory(ttl ...time.Duration) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ttl | `...time.Duration` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
