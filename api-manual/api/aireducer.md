@@ -5,11 +5,11 @@
 | [aireducer.NewReducerFromFile](#newreducerfromfile) ||
 | [aireducer.NewReducerFromReader](#newreducerfromreader) ||
 | [aireducer.NewReducerFromString](#newreducerfromstring) ||
-| [aireducer.callback](#callback) |aireducer.reducer |
+| [aireducer.callback](#callback) |aireducer.reducerCallback is called when a new chunk is ready to be processed.    |
 | [aireducer.chunkSize](#chunksize) ||
 | [aireducer.context](#context) ||
 | [aireducer.memory](#memory) ||
-| [aireducer.reducerCallback](#reducercallback) |aireducer.reducer |
+| [aireducer.reducerCallback](#reducercallback) |aireducer.reducerCallback is called when a new chunk is ready to be processed.    |
 | [aireducer.separator](#separator) ||
 | [aireducer.timeTriggerInterval](#timetriggerinterval) ||
 | [aireducer.timeTriggerIntervalSeconds](#timetriggerintervalseconds) ||
@@ -85,7 +85,18 @@
 ### callback
 
 #### 详细描述
-aireducer.reducer
+aireducer.reducerCallback is called when a new chunk is ready to be processed.
+
+
+
+Example:
+```
+
+	aireducer.NewReducerFromFile("example.txt", aireducer.reducerCallback((config, memory, chunk) => {
+			// handle chunk
+	}))
+
+```
 
 
 #### 定义
@@ -166,7 +177,18 @@ aireducer.reducer
 ### reducerCallback
 
 #### 详细描述
-aireducer.reducer
+aireducer.reducerCallback is called when a new chunk is ready to be processed.
+
+
+
+Example:
+```
+
+	aireducer.NewReducerFromFile("example.txt", aireducer.reducerCallback((config, memory, chunk) => {
+			// handle chunk
+	}))
+
+```
 
 
 #### 定义
