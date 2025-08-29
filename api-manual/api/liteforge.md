@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [liteforge.AnalyzeAudioFile](#analyzeaudiofile) ||
+| [liteforge.AnalyzeERM](#analyzeerm) ||
 | [liteforge.AnalyzeFile](#analyzefile) ||
 | [liteforge.AnalyzeImage](#analyzeimage) ||
 | [liteforge.AnalyzeImageFile](#analyzeimagefile) ||
@@ -49,6 +50,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `&lt;-chan *AudioAnalysisResult` |   |
+| r2 | `error` |   |
+
+
+### AnalyzeERM
+
+#### 详细描述
+
+
+#### 定义
+
+`AnalyzeERM(path string, option ...any) (*entitybase.EntityRepository, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*entitybase.EntityRepository` |   |
 | r2 | `error` |   |
 
 

@@ -88,17 +88,21 @@
 | [codec.Sha512](#sha512) ||
 | [codec.SignSHA256WithRSA](#signsha256withrsa) |SignSHA256WithRSA 使用RSA私钥对数据进行SHA256签名，返回签名与错误  |
 | [codec.SignVerifySHA256WithRSA](#signverifysha256withrsa) |SignVerifySHA256WithRSA 使用RSA公钥对数据进行SHA256签名验证，返回错误  |
+| [codec.Sm2Decrypt](#sm2decrypt) ||
 | [codec.Sm2DecryptAsn1](#sm2decryptasn1) ||
 | [codec.Sm2DecryptAsn1WithPassword](#sm2decryptasn1withpassword) ||
 | [codec.Sm2DecryptC1C2C3](#sm2decryptc1c2c3) ||
 | [codec.Sm2DecryptC1C2C3WithPassword](#sm2decryptc1c2c3withpassword) ||
 | [codec.Sm2DecryptC1C3C2](#sm2decryptc1c3c2) ||
 | [codec.Sm2DecryptC1C3C2WithPassword](#sm2decryptc1c3c2withpassword) ||
+| [codec.Sm2Encrypt](#sm2encrypt) ||
 | [codec.Sm2EncryptAsn1](#sm2encryptasn1) ||
 | [codec.Sm2EncryptC1C2C3](#sm2encryptc1c2c3) ||
 | [codec.Sm2EncryptC1C3C2](#sm2encryptc1c3c2) ||
 | [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) ||
 | [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) ||
+| [codec.Sm2GenerateTemporaryKeyPair](#sm2generatetemporarykeypair) |SM2GenerateTemporaryKeyPair 生成用于密钥交换的临时密钥对    返回值：    - []byte: 临时私钥（HEX格式）    - []byte: 临时公钥（HEX格式）    - error: 错误信息    |
+| [codec.Sm2KeyExchange](#sm2keyexchange) |SM2KeyExchange 执行SM2密钥交换算法    参数说明：    - keyLength: 期望的共享密钥长度（字节）    - idA: A方标识（[]byte）    - idB: B方标识（[]byte）    - priKey: 调用方私钥（[]byte，支持PEM、HEX、原始...|
 | [codec.Sm2SignWithSM3](#sm2signwithsm3) |SM2SignWithSM3 使用SM2私钥对数据进行SM3签名，返回签名与错误    参数 priKeyBytes 表示 SM2 私钥，支持以下格式：    - PEM 编码（例如 &amp;#34;-----BEGIN PRIVATE KEY-----&amp;#34; 块）    - HEX 字符串格式（64...|
 | [codec.Sm2SignWithSM3WithPassword](#sm2signwithsm3withpassword) |SM2SignWithSM3WithPassword 使用带密码保护的SM2私钥对数据进行SM3签名    参数 priKeyBytes 表示加密的 SM2 私钥（PEM格式）  参数 data 是要签名的原始数据  参数 password 是私钥的保护密码，如果私钥未加密则传入 nil  返回值是...|
 | [codec.Sm2VerifyWithSM3](#sm2verifywithsm3) |SM2VerifyWithSM3 使用SM2公钥对数据进行SM3签名验证，返回错误    参数 pubKeyBytes 表示 SM2 公钥，支持以下格式：    - PEM 编码（例如 &amp;#34;-----BEGIN PUBLIC KEY-----&amp;#34; 块）    - HEX 字符串格式（12...|
@@ -2352,6 +2356,28 @@ die(err)
 | r1 | `error` |   |
 
 
+### Sm2Decrypt
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm2Decrypt(priKey []byte, data []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| priKey | `[]byte` |   |
+| data | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### Sm2DecryptAsn1
 
 #### 详细描述
@@ -2487,6 +2513,28 @@ die(err)
 | r2 | `error` |   |
 
 
+### Sm2Encrypt
+
+#### 详细描述
+
+
+#### 定义
+
+`Sm2Encrypt(pubKey []byte, data []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pubKey | `[]byte` |   |
+| data | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### Sm2EncryptAsn1
 
 #### 详细描述
@@ -2585,6 +2633,137 @@ die(err)
 | r1 | `[]byte` |   |
 | r2 | `[]byte` |   |
 | r3 | `error` |   |
+
+
+### Sm2GenerateTemporaryKeyPair
+
+#### 详细描述
+SM2GenerateTemporaryKeyPair 生成用于密钥交换的临时密钥对
+
+
+
+返回值：
+
+  - []byte: 临时私钥（HEX格式）
+
+  - []byte: 临时公钥（HEX格式）
+
+  - error: 错误信息
+
+
+
+Example:
+```
+tempPriKey, tempPubKey, err := codec.Sm2GenerateTemporaryKeyPair()
+die(err)
+println("临时私钥:", string(tempPriKey))
+println("临时公钥:", string(tempPubKey))
+```
+
+
+#### 定义
+
+`Sm2GenerateTemporaryKeyPair() ([]byte, []byte, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
+
+
+### Sm2KeyExchange
+
+#### 详细描述
+SM2KeyExchange 执行SM2密钥交换算法
+
+
+
+参数说明：
+
+  - keyLength: 期望的共享密钥长度（字节）
+
+  - idA: A方标识（[]byte）
+
+  - idB: B方标识（[]byte）
+
+  - priKey: 调用方私钥（[]byte，支持PEM、HEX、原始字节）
+
+  - pubKey: 对方公钥（[]byte，支持PEM、HEX、原始字节）
+
+  - tempPriKey: 调用方临时私钥（[]byte，支持PEM、HEX、原始字节）
+
+  - tempPubKey: 对方临时公钥（[]byte，支持PEM、HEX、原始字节）
+
+  - thisIsA: 如果是A方调用设置为true，B方调用设置为false
+
+
+
+返回值：
+
+  - sharedKey: 协商得到的共享密钥（[]byte）
+
+  - s1: 验证值S1，用于A验证B的身份（[]byte）
+
+  - s2: 验证值S2，用于B验证A的身份（[]byte）
+
+  - error: 错误信息
+
+
+
+Example:
+```
+// A方和B方各自生成长期密钥对
+priKeyA, pubKeyA, _ := codec.Sm2GenerateHexKeyPair()
+priKeyB, pubKeyB, _ := codec.Sm2GenerateHexKeyPair()
+
+// A方和B方各自生成临时密钥对
+tempPriKeyA, tempPubKeyA, _ := codec.Sm2GenerateHexKeyPair()
+tempPriKeyB, tempPubKeyB, _ := codec.Sm2GenerateHexKeyPair()
+
+// A方执行密钥交换
+sharedKeyA, s1A, s2A, err := codec.Sm2KeyExchange(32, []byte("Alice"), []byte("Bob"),
+
+	priKeyA, pubKeyB, tempPriKeyA, tempPubKeyB, true)
+
+die(err)
+
+// B方执行密钥交换
+sharedKeyB, s1B, s2B, err := codec.Sm2KeyExchange(32, []byte("Alice"), []byte("Bob"),
+
+	priKeyB, pubKeyA, tempPriKeyB, tempPubKeyA, false)
+
+die(err)
+
+println("A方协商密钥:", codec.EncodeToHex(sharedKeyA))
+println("B方协商密钥:", codec.EncodeToHex(sharedKeyB))
+```
+
+
+#### 定义
+
+`Sm2KeyExchange(keyLength int, idA []byte, idB []byte, priKey []byte, pubKey []byte, tempPriKey []byte, tempPubKey []byte, thisIsA bool) ([]byte, []byte, []byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyLength | `int` |   |
+| idA | `[]byte` |   |
+| idB | `[]byte` |   |
+| priKey | `[]byte` |   |
+| pubKey | `[]byte` |   |
+| tempPriKey | `[]byte` |   |
+| tempPubKey | `[]byte` |   |
+| thisIsA | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `[]byte` |   |
+| r4 | `error` |   |
 
 
 ### Sm2SignWithSM3
@@ -2717,11 +2896,13 @@ data := "hello world"
 signature, _ := codec.Sm2SignWithSM3(priKey, data)
 err := codec.Sm2VerifyWithSM3(pubKey, data, signature)
 
-if err == nil {
-   println("签名验证成功")
-}else {
-   println("签名验证失败:", err.Error())
-}
+	if err == nil {
+	   println("签名验证成功")
+	}else {
+
+	   println("签名验证失败:", err.Error())
+	}
+
 ```
 
 
