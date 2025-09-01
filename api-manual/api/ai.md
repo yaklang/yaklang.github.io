@@ -21,6 +21,7 @@
 | [ai.onReasonStream](#onreasonstream) ||
 | [ai.onStream](#onstream) ||
 | [ai.proxy](#proxy) ||
+| [ai.thinking](#thinking) ||
 | [ai.timeout](#timeout) ||
 | [ai.type](#type) ||
 
@@ -409,6 +410,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | p | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
+### thinking
+
+#### 详细描述
+
+
+#### 定义
+
+`thinking(t any) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
