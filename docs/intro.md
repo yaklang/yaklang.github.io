@@ -169,7 +169,7 @@ myString := `Hello World`
 3. Heredoc 语法
 
 ```go
-myString := <<EOF
+myString := <<<EOF
 Hello World
 EOF
 ```
