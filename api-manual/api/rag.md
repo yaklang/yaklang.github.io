@@ -3,6 +3,9 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [rag.AddDocument](#adddocument) ||
+| [rag.BuildCollectionFromFile](#buildcollectionfromfile) ||
+| [rag.BuildCollectionFromRaw](#buildcollectionfromraw) ||
+| [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
 | [rag.DeleteCollection](#deletecollection) ||
 | [rag.DeleteDocument](#deletedocument) ||
 | [rag.EnableMockMode](#enablemockmode) ||
@@ -11,16 +14,28 @@
 | [rag.ListCollection](#listcollection) ||
 | [rag.NewRagDatabase](#newragdatabase) ||
 | [rag.NewTempRagDatabase](#newtempragdatabase) ||
+| [rag.Query](#query) ||
 | [rag.QueryDocuments](#querydocuments) ||
 | [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) ||
+| [rag.ctx](#ctx) ||
 | [rag.docMetadata](#docmetadata) ||
 | [rag.docRawMetadata](#docrawmetadata) ||
+| [rag.entryLength](#entrylength) ||
+| [rag.extraPrompt](#extraprompt) ||
+| [rag.log](#log) ||
+| [rag.queryCollection](#querycollection) |WithRAGCollectionName 指定搜索的集合名称 |
+| [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent 设置并发数 |
+| [rag.queryCtx](#queryctx) |WithRAGCtx 设置上下文 |
+| [rag.queryEnhance](#queryenhance) |WithRAGEnhance 启用或禁用增强搜索 |
+| [rag.queryLimit](#querylimit) |WithRAGLimit 设置查询结果限制 |
+| [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit 设置集合搜索分数阈值 |
 | [rag.ragCosineDistance](#ragcosinedistance) ||
 | [rag.ragDescription](#ragdescription) ||
 | [rag.ragEmbeddingModel](#ragembeddingmodel) |WithEmbeddingModel 设置embedding模型 |
 | [rag.ragForceNew](#ragforcenew) ||
 | [rag.ragHNSWParameters](#raghnswparameters) |WithHNSWParameters 批量设置HNSW参数 |
 | [rag.ragModelDimension](#ragmodeldimension) |WithModelDimension 设置模型维度 |
+| [rag.statusCard](#statuscard) ||
 
 
 ## 函数定义
@@ -46,6 +61,75 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### BuildCollectionFromFile
+
+#### 详细描述
+
+
+#### 定义
+
+`BuildCollectionFromFile(kbName string, path string, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| path | `string` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### BuildCollectionFromRaw
+
+#### 详细描述
+
+
+#### 定义
+
+`BuildCollectionFromRaw(kbName string, content []byte, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| content | `[]byte` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### BuildCollectionFromReader
+
+#### 详细描述
+
+
+#### 定义
+
+`BuildCollectionFromReader(kbName string, reader io.Reader, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| reader | `io.Reader` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
 
 
 ### DeleteCollection
@@ -129,7 +213,7 @@
 
 #### 定义
 
-`GetCollectionInfo(name string) (*CollectionInfo, error)`
+`GetCollectionInfo(name string) (*rag.CollectionInfo, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -139,7 +223,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*CollectionInfo` |   |
+| r1 | `*rag.CollectionInfo` |   |
 | r2 | `error` |   |
 
 
@@ -195,6 +279,28 @@
 | r2 | `error` |   |
 
 
+### Query
+
+#### 详细描述
+
+
+#### 定义
+
+`Query(query string, opts ...RAGQueryOption) (chan *RAGSearchResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| query | `string` |   |
+| opts | `...RAGQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *RAGSearchResult` |   |
+| r2 | `error` |   |
+
+
 ### QueryDocuments
 
 #### 详细描述
@@ -202,7 +308,7 @@
 
 #### 定义
 
-`QueryDocuments(knowledgeBaseName string, query string, limit int, opts ...any) ([]SearchResult, error)`
+`QueryDocuments(knowledgeBaseName string, query string, limit int, opts ...any) ([]rag.SearchResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -215,7 +321,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]SearchResult` |   |
+| r1 | `[]rag.SearchResult` |   |
 | r2 | `error` |   |
 
 
@@ -241,6 +347,26 @@
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
 | r2 | `error` |   |
+
+
+### ctx
+
+#### 详细描述
+
+
+#### 定义
+
+`ctx(ctx context.Context) AnalysisOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AnalysisOption` |   |
 
 
 ### docMetadata
@@ -284,6 +410,192 @@
 | r1 | `DocumentOption` |   |
 
 
+### entryLength
+
+#### 详细描述
+
+
+#### 定义
+
+`entryLength(length int) RefineOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| length | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RefineOption` |   |
+
+
+### extraPrompt
+
+#### 详细描述
+
+
+#### 定义
+
+`extraPrompt(prompt string) AnalysisOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| prompt | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AnalysisOption` |   |
+
+
+### log
+
+#### 详细描述
+
+
+#### 定义
+
+`log(handler func(format string, args ...any)) AnalysisOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handler | `func(format string, args ...any)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AnalysisOption` |   |
+
+
+### queryCollection
+
+#### 详细描述
+WithRAGCollectionName 指定搜索的集合名称
+
+
+#### 定义
+
+`queryCollection(collectionName string) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| collectionName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryConcurrent
+
+#### 详细描述
+WithRAGConcurrent 设置并发数
+
+
+#### 定义
+
+`queryConcurrent(concurrent int) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| concurrent | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryCtx
+
+#### 详细描述
+WithRAGCtx 设置上下文
+
+
+#### 定义
+
+`queryCtx(ctx context.Context) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryEnhance
+
+#### 详细描述
+WithRAGEnhance 启用或禁用增强搜索
+
+
+#### 定义
+
+`queryEnhance(enhancePlan string) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enhancePlan | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryLimit
+
+#### 详细描述
+WithRAGLimit 设置查询结果限制
+
+
+#### 定义
+
+`queryLimit(limit int) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| limit | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryScoreLimit
+
+#### 详细描述
+WithRAGCollectionScoreLimit 设置集合搜索分数阈值
+
+
+#### 定义
+
+`queryScoreLimit(scoreLimit float64) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| scoreLimit | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
 ### ragCosineDistance
 
 #### 详细描述
@@ -291,12 +603,7 @@
 
 #### 定义
 
-`ragCosineDistance() RAGOption`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `RAGOption` |   |
+`ragCosineDistance()`
 
 
 ### ragDescription
@@ -403,5 +710,25 @@ WithModelDimension 设置模型维度
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RAGOption` |   |
+
+
+### statusCard
+
+#### 详细描述
+
+
+#### 定义
+
+`statusCard(handler func(id string, data any, tags ...string)) AnalysisOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handler | `func(id string, data any, tags ...string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AnalysisOption` |   |
 
 

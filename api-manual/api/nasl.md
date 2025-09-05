@@ -1,360 +1,232 @@
 # nasl
 
-
-|成员函数|函数描述/介绍|
+|函数名|函数描述/介绍|
 |:------|:--------|
- | [nasl.QueryAllScripts](#naslqueryallscripts) |  |
- | [nasl.RemoveDatabase](#naslremovedatabase) |  |
- | [nasl.Scan](#naslscan) |  |
- | [nasl.ScanTarget](#naslscantarget) |  |
- | [nasl.UpdateDatabase](#naslupdatedatabase) |  |
- | [nasl.conditions](#naslconditions) |  |
- | [nasl.family](#naslfamily) |  |
- | [nasl.plugin](#naslplugin) |  |
- | [nasl.preference](#naslpreference) |  |
- | [nasl.proxy](#naslproxy) |  |
- | [nasl.riskHandle](#naslriskhandle) |  |
-
-
-
-
- 
-
+| [nasl.QueryAllScripts](#queryallscripts) ||
+| [nasl.RemoveDatabase](#removedatabase) ||
+| [nasl.Scan](#scan) ||
+| [nasl.ScanTarget](#scantarget) ||
+| [nasl.UpdateDatabase](#updatedatabase) ||
+| [nasl.conditions](#conditions) ||
+| [nasl.family](#family) ||
+| [nasl.plugin](#plugin) ||
+| [nasl.proxy](#proxy) ||
+| [nasl.riskHandle](#riskhandle) ||
+| [nasl.sourcePaths](#sourcepaths) ||
 
 
 ## 函数定义
-
-### nasl.QueryAllScripts
-
-
+### QueryAllScripts
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.QueryAllScripts(v1 ...any) return (r0: []*antlr4nasl.NaslScriptInfo)`
-
+`QueryAllScripts(script ...any) []*script_core.NaslScriptInfo`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| script | `...any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `[]*antlr4nasl.NaslScriptInfo` |   |
+| r1 | `[]*script_core.NaslScriptInfo` |   |
 
 
- 
-### nasl.RemoveDatabase
-
-
+### RemoveDatabase
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.RemoveDatabase() return (r0: error)`
-
- 
-
+`RemoveDatabase() error`
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `error` |   |
-
-
- 
-### nasl.Scan
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func nasl.Scan(v1: string, v2: string, v3 ...antlr4nasl.NaslScriptConfigOptFunc) return (r0: map[string]any, r1: error)`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `string` |   |
-| v3 | `...antlr4nasl.NaslScriptConfigOptFunc` |   |
-
-
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `map[string]any` |   |
 | r1 | `error` |   |
 
 
- 
-### nasl.ScanTarget
-
-
+### Scan
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.ScanTarget(v1: string, v2 ...antlr4nasl.NaslScriptConfigOptFunc) return (r0: map[string]any, r1: error)`
-
+`Scan(hosts string, ports string, opts ...NaslScriptConfigOptFunc) chan *NaslKBs`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-| v2 | `...antlr4nasl.NaslScriptConfigOptFunc` |   |
-
-
-
-
+| hosts | `string` |   |
+| ports | `string` |   |
+| opts | `...NaslScriptConfigOptFunc` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `map[string]any` |   |
-| r1 | `error` |   |
+| r1 | `chan *NaslKBs` |   |
 
 
- 
-### nasl.UpdateDatabase
-
-
+### ScanTarget
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-``func nasl.UpdateDatabase(v1: string)``
-
+`ScanTarget(target string, opts ...script_core.NaslScriptConfigOptFunc) (chan *script_core.NaslKBs, error)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
-
-
-
-
- 
-
- 
-### nasl.conditions
-
-
-
-#### 详细描述
-
-
-
-#### 定义：
-
-`func nasl.conditions(v1 ...any) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
-
-#### 参数
-
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v1 | `...any` |   |
-
-
-
-
+| target | `string` |   |
+| opts | `...script_core.NaslScriptConfigOptFunc` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
+| r1 | `chan *script_core.NaslKBs` |   |
+| r2 | `error` |   |
 
 
- 
-### nasl.family
-
-
+### UpdateDatabase
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.family(v1: string) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
+`UpdateDatabase(p string)`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `string` |   |
+| p | `string` |   |
 
 
-
-
-
-#### 返回值
-
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
-
-
- 
-### nasl.plugin
-
-
+### conditions
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.plugin(v1 ...string) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
+`conditions(script ...any) NaslScriptConfigOptFunc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| script | `...any` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
+| r1 | `NaslScriptConfigOptFunc` |   |
 
 
- 
-### nasl.preference
-
-
+### family
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.preference(v1: any) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
+`family(family string) NaslScriptConfigOptFunc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `any` |   |
-
-
-
-
+| family | `string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
+| r1 | `NaslScriptConfigOptFunc` |   |
 
 
- 
-### nasl.proxy
-
-
+### plugin
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.proxy(v1 ...string) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
+`plugin(plugins ...string) NaslScriptConfigOptFunc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `...string` |   |
-
-
-
-
+| plugins | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
+| r1 | `NaslScriptConfigOptFunc` |   |
 
 
- 
-### nasl.riskHandle
-
-
+### proxy
 
 #### 详细描述
 
 
+#### 定义
 
-#### 定义：
-
-`func nasl.riskHandle(v1: func (v1: any) ) return (r0: func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) )`
-
+`proxy(proxies ...string) NaslScriptConfigOptFunc`
 
 #### 参数
-
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| v1 | `func (v1: any) ` |   |
-
-
-
-
+| proxies | `...string` |   |
 
 #### 返回值
-
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r0 | `func NaslScriptConfigOptFunc(v1: *antlr4nasl.NaslScriptConfig) ` |   |
+| r1 | `NaslScriptConfigOptFunc` |   |
 
 
- 
+### riskHandle
+
+#### 详细描述
+
+
+#### 定义
+
+`riskHandle(f func(any)) NaslScriptConfigOptFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(any)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `NaslScriptConfigOptFunc` |   |
+
+
+### sourcePaths
+
+#### 详细描述
+
+
+#### 定义
+
+`sourcePaths(sourcePath ...string) NaslScriptConfigOptFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sourcePath | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `NaslScriptConfigOptFunc` |   |
 
 

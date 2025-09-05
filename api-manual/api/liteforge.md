@@ -2,14 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [liteforge.AnalyzeAudioFile](#analyzeaudiofile) ||
-| [liteforge.AnalyzeERM](#analyzeerm) ||
-| [liteforge.AnalyzeFile](#analyzefile) ||
-| [liteforge.AnalyzeImage](#analyzeimage) ||
-| [liteforge.AnalyzeImageFile](#analyzeimagefile) ||
-| [liteforge.AnalyzeVideo](#analyzevideo) ||
 | [liteforge.Execute](#execute) ||
-| [liteforge.Refine](#refine) ||
 | [liteforge.action](#action) |liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,  example: ``` liteforge.Execute(&amp;lt;&amp;lt;&amp;lt;P...|
 | [liteforge.analyzeCtx](#analyzectx) ||
 | [liteforge.analyzeLog](#analyzelog) ||
@@ -31,138 +24,6 @@
 
 
 ## 函数定义
-### AnalyzeAudioFile
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeAudioFile(audio string, opts ...any) (&lt;-chan *AudioAnalysisResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| audio | `string` |   |
-| opts | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `&lt;-chan *AudioAnalysisResult` |   |
-| r2 | `error` |   |
-
-
-### AnalyzeERM
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeERM(path string, option ...any) (*entitybase.EntityRepository, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| path | `string` |   |
-| option | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*entitybase.EntityRepository` |   |
-| r2 | `error` |   |
-
-
-### AnalyzeFile
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeFile(path string, option ...any) (&lt;-chan AnalysisResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| path | `string` |   |
-| option | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `&lt;-chan AnalysisResult` |   |
-| r2 | `error` |   |
-
-
-### AnalyzeImage
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeImage(image any, opts ...any) (*ImageAnalysisResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| image | `any` |   |
-| opts | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ImageAnalysisResult` |   |
-| r2 | `error` |   |
-
-
-### AnalyzeImageFile
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeImageFile(image string, opts ...any) (*ImageAnalysisResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| image | `string` |   |
-| opts | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ImageAnalysisResult` |   |
-| r2 | `error` |   |
-
-
-### AnalyzeVideo
-
-#### 详细描述
-
-
-#### 定义
-
-`AnalyzeVideo(video string, options ...any) (&lt;-chan AnalysisResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| video | `string` |   |
-| options | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `&lt;-chan AnalysisResult` |   |
-| r2 | `error` |   |
-
-
 ### Execute
 
 #### 详细描述
@@ -182,28 +43,6 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*ForgeResult` |   |
-| r2 | `error` |   |
-
-
-### Refine
-
-#### 详细描述
-
-
-#### 定义
-
-`Refine(path string, option ...any) (*knowledgebase.KnowledgeBase, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| path | `string` |   |
-| option | `...any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*knowledgebase.KnowledgeBase` |   |
 | r2 | `error` |   |
 
 
