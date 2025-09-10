@@ -16,6 +16,7 @@
 | [mitm.host](#host) |host 是一个选项函数，用于指定中间人代理服务器的监听地址，默认为空，即监听所有网卡  |
 | [mitm.isTransparent](#istransparent) |isTransparent 是一个选项函数，用于指定中间人代理服务器是否开启透明劫持模式，默认为false  在开启透明模式下，所有流量都会被默认转发，所有的回调函数都会被忽略  |
 | [mitm.maxContentLength](#maxcontentlength) |maxContentLength 是一个选项函数，用于指定中间人代理服务器的最大的请求和响应内容长度，默认为10MB  |
+| [mitm.randomJA3](#randomja3) |randomJA3 是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 劫持模式，默认为false  |
 | [mitm.rootCA](#rootca) |rootCA 是一个选项函数，用于指定中间人代理服务器的根证书和私钥  |
 | [mitm.useDefaultCA](#usedefaultca) |useDefaultCA 是一个选项函数，用于指定中间人代理服务器是否使用内置的证书和私钥，默认为true  默认的证书与私钥路径：~/yakit-projects/yak-mitm-ca.crt 和 ~/yakit-projects/yak-mitm-ca.key  |
 | [mitm.wscallback](#wscallback) |wscallback 是一个选项函数，用于指定中间人代理服务器的 websocket 劫持函数，当接收到 websocket 请求或响应后，会调用该回调函数  该回调函数的第一个参数是请求或响应的内容  第二个参数是一个布尔值，用于指示该内容是请求还是响应，true 表示请求，false 表示响应 ...|
@@ -421,6 +422,32 @@ mitm.Start(8080, mitm.maxContentLength(100 * 1000 * 1000))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### randomJA3
+
+#### 详细描述
+randomJA3 是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 劫持模式，默认为false
+
+Example:
+```
+mitm.Start(8080, mitm.randomJA3(true))
+```
+
+
+#### 定义
+
+`randomJA3(b bool) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
