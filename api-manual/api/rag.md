@@ -22,6 +22,9 @@
 | [rag.docRawMetadata](#docrawmetadata) ||
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
+| [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
+| [rag.khopkMax](#khopkmax) |WithKHopKMin 设置最小路径长度，最小值为2 |
+| [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
 | [rag.log](#log) ||
 | [rag.queryCollection](#querycollection) |WithRAGCollectionName 指定搜索的集合名称 |
 | [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent 设置并发数 |
@@ -448,6 +451,69 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `AnalysisOption` |   |
+
+
+### khopk
+
+#### 详细描述
+WithKHopK 设置k-hop的跳数，k&gt;=2时返回k-hop路径，k=0返回所有路径
+
+
+#### 定义
+
+`khopk(k int) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| k | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
+
+
+### khopkMax
+
+#### 详细描述
+WithKHopKMin 设置最小路径长度，最小值为2
+
+
+#### 定义
+
+`khopkMax(kMax int) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kMax | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
+
+
+### khopkMin
+
+#### 详细描述
+WithKHopKMin 设置最小路径长度，最小值为2
+
+
+#### 定义
+
+`khopkMin(kMin int) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kMin | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
 
 
 ### log

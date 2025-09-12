@@ -11,6 +11,10 @@
 | [risk.DeleteRiskByID](#deleteriskbyid) |DeleteRiskByID 根据风险记录ID删除风险记录 |
 | [risk.DeleteRiskByTarget](#deleteriskbytarget) |DeleteRiskByTarget 根据目标(ip或ip:port)删除风险记录  |
 | [risk.ExtractTokenFromUrl](#extracttokenfromurl) ||
+| [risk.GetSSARiskByID](#getssariskbyid) |GetSSARiskByID 根据 SSA Risk ID 获取 SSA 风险记录  |
+| [risk.GetSSARiskSourceCode](#getssarisksourcecode) |GetSSARiskSourceCode 根据 SSA Risk ID 获取完整的源代码,无法获取会返回相关代码片段CodeFragment  |
+| [risk.GetSSARiskSourceCodeWithFragment](#getssarisksourcecodewithfragment) |GetSSARiskSourceCodeWithFragment 根据 SSA Risk ID 获取源代码，如果获取完整源码失败则返回代码片段CodeFragment  返回: (完整源码, 代码片段, 是否成功获取完整源码)  |
+| [risk.GetSSARiskWithDataFlow](#getssariskwithdataflow) |GetSSARiskWithDataFlow 根据 SSA Risk ID 获取包含数据流信息的风险记录  |
 | [risk.HaveReverseRisk](#havereverserisk) |HaveReverseRisk 通过轮询检查是否存在对应token的反连记录，重试最多5次，每次等待1秒， 如果存在返回true，否则返回false  |
 | [risk.NewDNSLogDomain](#newdnslogdomain) |NewDNSLogDomain 返回一个公网 Bridge 的 DNSLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误  |
 | [risk.NewHTTPLog](#newhttplog) |NewHTTPLog 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误  |
@@ -264,6 +268,139 @@ risk.DeleteRiskByTarget("example.com")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+
+
+### GetSSARiskByID
+
+#### 详细描述
+GetSSARiskByID 根据 SSA Risk ID 获取 SSA 风险记录
+
+Example:
+```
+ssaRisk = risk.GetSSARiskByID(123)
+
+	if ssaRisk != nil {
+	    println("风险标题:", ssaRisk.Title)
+	    println("代码片段:", ssaRisk.CodeFragment)
+	}
+
+```
+
+
+#### 定义
+
+`GetSSARiskByID(id int64) *schema.SSARisk`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*schema.SSARisk` |   |
+
+
+### GetSSARiskSourceCode
+
+#### 详细描述
+GetSSARiskSourceCode 根据 SSA Risk ID 获取完整的源代码,无法获取会返回相关代码片段CodeFragment
+
+Example:
+```
+sourceCode = risk.GetSSARiskSourceCode(123)
+
+	if sourceCode != "" {
+	    println("完整源代码:", sourceCode)
+	}
+
+```
+
+
+#### 定义
+
+`GetSSARiskSourceCode(id int64) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### GetSSARiskSourceCodeWithFragment
+
+#### 详细描述
+GetSSARiskSourceCodeWithFragment 根据 SSA Risk ID 获取源代码，如果获取完整源码失败则返回代码片段CodeFragment
+
+返回: (完整源码, 代码片段, 是否成功获取完整源码)
+
+Example:
+```
+fullCode, fragment, isFullCode = risk.GetSSARiskSourceCodeWithFragment(123)
+
+	if isFullCode {
+	    println("获取到完整源代码")
+	} else {
+
+	    println("只获取到代码片段")
+	}
+
+```
+
+
+#### 定义
+
+`GetSSARiskSourceCodeWithFragment(id int64) (string, string, bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `string` |   |
+| r3 | `bool` |   |
+
+
+### GetSSARiskWithDataFlow
+
+#### 详细描述
+GetSSARiskWithDataFlow 根据 SSA Risk ID 获取包含数据流信息的风险记录
+
+Example:
+```
+wrappedRisk = risk.GetSSARiskWithDataFlow(123)
+
+	if wrappedRisk != nil {
+	    println("风险标题:", wrappedRisk.Title)
+	    println("数据流路径数量:", len(wrappedRisk.DataFlowPaths))
+	}
+
+```
+
+
+#### 定义
+
+`GetSSARiskWithDataFlow(id int64) *sfreport.Risk`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*sfreport.Risk` |   |
 
 
 ### HaveReverseRisk
