@@ -7,6 +7,7 @@
 | [yakit.Code](#code) ||
 | [yakit.Debug](#debug) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
+| [yakit.EnableDotGraphTab](#enabledotgraphtab) ||
 | [yakit.EnableTable](#enabletable) ||
 | [yakit.EnableText](#enabletext) ||
 | [yakit.EnableWebsiteTrees](#enablewebsitetrees) ||
@@ -27,6 +28,7 @@
 | [yakit.NewWordCloud](#newwordcloud) ||
 | [yakit.ObjToPort](#objtoport) ||
 | [yakit.Output](#output) ||
+| [yakit.OutputDotGraph](#outputdotgraph) ||
 | [yakit.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [yakit.QueryDomainsByNetwork](#querydomainsbynetwork) ||
 | [yakit.QueryDomainsByTitle](#querydomainsbytitle) ||
@@ -140,6 +142,21 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### EnableDotGraphTab
+
+#### 详细描述
+
+
+#### 定义
+
+`EnableDotGraphTab(tabName string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tabName | `string` |   |
 
 
 ### EnableTable
@@ -502,6 +519,27 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### OutputDotGraph
+
+#### 详细描述
+
+
+#### 定义
+
+`OutputDotGraph(tabName string, data string) *YakitDotGraphData`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tabName | `string` |   |
+| data | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*YakitDotGraphData` |   |
 
 
 ### QueryDomainsByDomainKeyword
