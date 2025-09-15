@@ -32,6 +32,7 @@
 | [rag.queryEnhance](#queryenhance) |WithRAGEnhance 启用或禁用增强搜索 |
 | [rag.queryLimit](#querylimit) |WithRAGLimit 设置查询结果限制 |
 | [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit 设置集合搜索分数阈值 |
+| [rag.queryStatus](#querystatus) ||
 | [rag.ragCosineDistance](#ragcosinedistance) ||
 | [rag.ragDescription](#ragdescription) ||
 | [rag.ragEmbeddingModel](#ragembeddingmodel) |WithEmbeddingModel 设置embedding模型 |
@@ -655,6 +656,26 @@ WithRAGCollectionScoreLimit 设置集合搜索分数阈值
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | scoreLimit | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryStatus
+
+#### 详细描述
+
+
+#### 定义
+
+`queryStatus(i func(label string, i any, tags ...string)) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `func(label string, i any, tags ...string)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
