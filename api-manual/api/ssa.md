@@ -18,6 +18,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
 | [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
+| [ssa.withConcurrency](#withconcurrency) ||
 | [ssa.withConfigInfo](#withconfiginfo) ||
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDefaultExcludeFunc](#withdefaultexcludefunc) ||
@@ -184,6 +185,26 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*result.StaticAnalyzeResult` |   |
+
+
+### withConcurrency
+
+#### 详细描述
+
+
+#### 定义
+
+`withConcurrency(concurrency int) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| concurrency | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withConfigInfo
