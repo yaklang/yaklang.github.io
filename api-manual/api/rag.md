@@ -33,6 +33,7 @@
 | [rag.queryLimit](#querylimit) |WithRAGLimit 设置查询结果限制 |
 | [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit 设置集合搜索分数阈值 |
 | [rag.queryStatus](#querystatus) ||
+| [rag.queryType](#querytype) |todo 这里暂时使用临时构建图的方式处理，等待恢复图速度优化 |
 | [rag.ragCosineDistance](#ragcosinedistance) ||
 | [rag.ragDescription](#ragdescription) ||
 | [rag.ragEmbeddingModel](#ragembeddingmodel) |WithEmbeddingModel 设置embedding模型 |
@@ -608,12 +609,12 @@ WithRAGEnhance 启用或禁用增强搜索
 
 #### 定义
 
-`queryEnhance(enhancePlan string) RAGQueryOption`
+`queryEnhance(enhancePlan ...string) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| enhancePlan | `string` |   |
+| enhancePlan | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -676,6 +677,27 @@ WithRAGCollectionScoreLimit 设置集合搜索分数阈值
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `func(label string, i any, tags ...string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGQueryOption` |   |
+
+
+### queryType
+
+#### 详细描述
+todo 这里暂时使用临时构建图的方式处理，等待恢复图速度优化
+
+
+#### 定义
+
+`queryType(documentType ...string) RAGQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| documentType | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -32,6 +32,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 | [ssa.withPeepholeSize](#withpeepholesize) ||
 | [ssa.withProcess](#withprocess) ||
 | [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
+| [ssa.withProjectName](#withprojectname) ||
 | [ssa.withReCompile](#withrecompile) ||
 | [ssa.withStrictMode](#withstrictmode) ||
 
@@ -458,6 +459,26 @@ save to database, please set the program name
 #### 定义
 
 `withProgramName(name string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withProjectName
+
+#### 详细描述
+
+
+#### 定义
+
+`withProjectName(name string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|

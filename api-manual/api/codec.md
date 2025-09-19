@@ -1,5 +1,13 @@
 # codec
 
+|实例名|实例描述|
+|:------|:--------|
+CBC|(string) &#34;CBC&#34;|
+CFB|(string) &#34;CFB&#34;|
+CTR|(string) &#34;CTR&#34;|
+ECB|(string) &#34;ECB&#34;|
+OFB|(string) &#34;OFB&#34;|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [codec.AESCBCDecrypt](#aescbcdecrypt) |AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
@@ -8,7 +16,12 @@
 | [codec.AESCBCEncrypt](#aescbcencrypt) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
 | [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
 | [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 CBC 模式下，使用 Zero 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-1...|
+| [codec.AESCFBDecrypt](#aescfbdecrypt) |AESCFBDecryptWithPKCS7Padding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来解密数据。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。 如果iv为 nil，则使用key的前16字节作为iv...|
+| [codec.AESCFBEncrypt](#aescfbencrypt) |AESEncryptCFBWithPKCSPadding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来加密数据。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。 如果iv为 nil，则使用key的前16字节作为iv。...|
 | [codec.AESDecrypt](#aesdecrypt) |AESCBCDecryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESDecryptBasic](#aesdecryptbasic) |AESDecryptBasic 使用 AES 算法对数据进行解密，支持多种模式（CBC、CFB、ECB、OFB、CTR）。 注意：此函数是底层的高级用法，需要外部自行处理 padding，key，iv 等问题。 example： ```  	codec.AESDecryptBasic(&amp;#34;12...|
+| [codec.AESDecryptCFBWithPKCSPadding](#aesdecryptcfbwithpkcspadding) |AESCFBDecryptWithPKCS7Padding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来解密数据。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。 如果iv为 nil，则使用key的前16字节作为iv...|
+| [codec.AESDecryptCFBWithZeroPadding](#aesdecryptcfbwithzeropadding) |AESCFBDecryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero 填充来解密数据。 |
 | [codec.AESECBDecrypt](#aesecbdecrypt) |AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
 | [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) |AESDecryptECBWithPKCSPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
 | [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) |AESDecryptECBWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行解密，使用 ZeroPadding 填充方式 它接受一个密钥（key）、需要解密的数据（data to decrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
@@ -16,6 +29,9 @@
 | [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 PKCSPadding 填充方式 它接受一个密钥（key）、需要加密的数据（data to encrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
 | [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) |AESCBCEncryptWithZeroPadding 使用 AES 算法，在 ECB 模式下对数据进行加密，使用 ZeroPadding 填充方式 它接受一个密钥（key）、需要加密的数据（data to encrypt）。 ecb 模式下iv 无用。 密钥的长度必须是 16、24 或 32 字...|
 | [codec.AESEncrypt](#aesencrypt) |AESCBCEncryptWithPKCS7Padding 使用 AES 算法，在 CBC 模式下，使用 PKCS5 填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES...|
+| [codec.AESEncryptBasic](#aesencryptbasic) |AESEncryptBasic 使用 AES 算法对数据进行加密，支持多种模式（CBC、CFB、ECB、OFB、CTR） 。 注意：此函数是底层的高级用法，需要外部自行处理 padding，key，iv 等问题。 example： ```  	codec.AESEncryptBasic(&amp;#34;1...|
+| [codec.AESEncryptCFBWithPKCSPadding](#aesencryptcfbwithpkcspadding) |AESEncryptCFBWithPKCSPadding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来加密数据。 密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。 如果iv为 nil，则使用key的前16字节作为iv。...|
+| [codec.AESEncryptCFBWithZeroPadding](#aesencryptcfbwithzeropadding) |AESCFBEncryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero 填充来加密数据。 |
 | [codec.AESGCMDecrypt](#aesgcmdecrypt) ||
 | [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) ||
 | [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) ||
@@ -361,6 +377,58 @@ codec.AESCBCEncryptWithZeroPadding(&#34;1234567890123456&#34;, &#34;hello world&
 | r2 | `error` |   |
 
 
+### AESCFBDecrypt
+
+#### 详细描述
+AESCFBDecryptWithPKCS7Padding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来解密数据。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+
+
+#### 定义
+
+`AESCFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESCFBEncrypt
+
+#### 详细描述
+AESEncryptCFBWithPKCSPadding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来加密数据。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+
+
+#### 定义
+
+`AESCFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### AESDecrypt
 
 #### 详细描述
@@ -380,6 +448,88 @@ example：
 #### 定义
 
 `AESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESDecryptBasic
+
+#### 详细描述
+AESDecryptBasic 使用 AES 算法对数据进行解密，支持多种模式（CBC、CFB、ECB、OFB、CTR）。
+注意：此函数是底层的高级用法，需要外部自行处理 padding，key，iv 等问题。
+example：
+```
+
+	codec.AESDecryptBasic(&#34;1234567890123456&#34;, cipertext, &#34;1234567890123456&#34;, codec.CBC)
+
+```
+
+
+#### 定义
+
+`AESDecryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| data | `[]byte` |   |
+| iv | `[]byte` |   |
+| mode | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESDecryptCFBWithPKCSPadding
+
+#### 详细描述
+AESCFBDecryptWithPKCS7Padding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来解密数据。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+
+
+#### 定义
+
+`AESDecryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESDecryptCFBWithZeroPadding
+
+#### 详细描述
+AESCFBDecryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero 填充来解密数据。
+
+
+#### 定义
+
+`AESDecryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -604,6 +754,88 @@ example：
 #### 定义
 
 `AESEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESEncryptBasic
+
+#### 详细描述
+AESEncryptBasic 使用 AES 算法对数据进行加密，支持多种模式（CBC、CFB、ECB、OFB、CTR） 。
+注意：此函数是底层的高级用法，需要外部自行处理 padding，key，iv 等问题。
+example：
+```
+
+	codec.AESEncryptBasic(&#34;1234567890123456&#34;, codec.PKCS5Padding(&#34;hello world&#34;,16), &#34;1234567890123456&#34;, codec.CBC)
+
+```
+
+
+#### 定义
+
+`AESEncryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| data | `[]byte` |   |
+| iv | `[]byte` |   |
+| mode | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESEncryptCFBWithPKCSPadding
+
+#### 详细描述
+AESEncryptCFBWithPKCSPadding 使用 AES 算法，在 CFB 模式下，使用 PKCS5 填充来加密数据。
+密钥的长度必须是 16、24 或 32 字节（分别对应 AES-128、AES-192 或 AES-256）。
+如果iv为 nil，则使用key的前16字节作为iv。
+
+
+#### 定义
+
+`AESEncryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+| i | `any` |   |
+| iv | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### AESEncryptCFBWithZeroPadding
+
+#### 详细描述
+AESCFBEncryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero 填充来加密数据。
+
+
+#### 定义
+
+`AESEncryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

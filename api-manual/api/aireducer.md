@@ -5,11 +5,13 @@
 | [aireducer.NewReducerFromFile](#newreducerfromfile) ||
 | [aireducer.NewReducerFromReader](#newreducerfromreader) ||
 | [aireducer.NewReducerFromString](#newreducerfromstring) ||
-| [aireducer.callback](#callback) |aireducer.reducerCallback is called when a new chunk is ready to be processed.    |
+| [aireducer.callback](#callback) ||
 | [aireducer.chunkSize](#chunksize) ||
 | [aireducer.context](#context) ||
+| [aireducer.enableLineNumber](#enablelinenumber) |WithEnableLineNumber enables line number prefixing for chunk content. When enabled, each line in the chunk will be prefixed with line numbers. This op...|
+| [aireducer.lines](#lines) |WithLines sets the line trigger for chunking. When set to a positive value,  chunks will be created every N lines. If the N lines content is smaller t...|
 | [aireducer.memory](#memory) ||
-| [aireducer.reducerCallback](#reducercallback) |aireducer.reducerCallback is called when a new chunk is ready to be processed.    |
+| [aireducer.reducerCallback](#reducercallback) ||
 | [aireducer.separator](#separator) ||
 | [aireducer.timeTriggerInterval](#timetriggerinterval) ||
 | [aireducer.timeTriggerIntervalSeconds](#timetriggerintervalseconds) ||
@@ -85,18 +87,6 @@
 ### callback
 
 #### 详细描述
-aireducer.reducerCallback is called when a new chunk is ready to be processed.
-
-
-
-Example:
-```
-
-	aireducer.NewReducerFromFile("example.txt", aireducer.reducerCallback((config, memory, chunk) => {
-			// handle chunk
-	}))
-
-```
 
 
 #### 定义
@@ -154,6 +144,67 @@ Example:
 | r1 | `Option` |   |
 
 
+### enableLineNumber
+
+#### 详细描述
+WithEnableLineNumber enables line number prefixing for chunk content.
+When enabled, each line in the chunk will be prefixed with line numbers.
+This option works with all chunking modes and respects ChunkSize limits.
+
+
+#### 定义
+
+`enableLineNumber(enable bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### lines
+
+#### 详细描述
+WithLines sets the line trigger for chunking. When set to a positive value,
+
+chunks will be created every N lines. If the N lines content is smaller than
+
+ChunkSize, it will be kept intact. If larger than ChunkSize, it will be split
+
+according to ChunkSize (ChunkSize is a hard limit).
+
+
+
+Example:
+```
+
+	aireducer.NewReducerFromFile("file.txt", aireducer.WithLines(10), aireducer.WithChunkSize(1024))
+	// This will create chunks every 10 lines, but if 10 lines exceed 1024 bytes,
+	// they will be split at 1024 byte boundaries.
+
+```
+
+
+#### 定义
+
+`lines(lines int) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| lines | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
 ### memory
 
 #### 详细描述
@@ -177,18 +228,6 @@ Example:
 ### reducerCallback
 
 #### 详细描述
-aireducer.reducerCallback is called when a new chunk is ready to be processed.
-
-
-
-Example:
-```
-
-	aireducer.NewReducerFromFile("example.txt", aireducer.reducerCallback((config, memory, chunk) => {
-			// handle chunk
-	}))
-
-```
 
 
 #### 定义
