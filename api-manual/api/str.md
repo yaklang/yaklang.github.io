@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [str.AddPrefixLineNubmerToReader](#addprefixlinenubmertoreader) ||
 | [str.AddPrefixLineNumber](#addprefixlinenumber) ||
+| [str.AddPrefixLineNumberToReader](#addprefixlinenumbertoreader) ||
 | [str.CalcSSDeep](#calcssdeep) |CalcSSDeep 计算并返回一段文本的模糊哈希值  |
 | [str.CalcSSDeepStability](#calcssdeepstability) |CalcSSDeepStability 使用模糊哈希算法计算多段文本之间的相似度，返回相似度与错误。传入的文本应该为大文本，即长度大于 30 kb。  |
 | [str.CalcSimHash](#calcsimhash) |CalcSimHash 计算并返回一段文本的 SimHash 值  |
@@ -114,6 +114,7 @@
 | [str.RegexpMatch](#regexpmatch) |RegexpMatch 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false  |
 | [str.RemoveDuplicatePorts](#removeduplicateports) |RemoveDuplicatePorts 解析两个字符串形式的端口列表，并使用布谷鸟过滤器进行去重。  这个函数首先创建一个布谷鸟过滤器，然后将两个输入字符串解析为端口列表。  接着，它遍历这两个列表，将每个端口添加到布谷鸟过滤器中，如果这个端口之前没有被添加过，  那么它也会被添加到结果列表中。最...|
 | [str.RemoveRepeat](#removerepeat) |RemoveRepeat 移除字符串切片slc中的重复元素  |
+| [str.RenderTemplate](#rendertemplate) ||
 | [str.Repeat](#repeat) |Repeat 返回将字符串s重复count次的字符串  |
 | [str.Replace](#replace) |Replace 返回将字符串s中前n个old字符串替换为new字符串的字符串  |
 | [str.ReplaceAll](#replaceall) |ReplaceAll 返回将字符串s中所有old字符串替换为new字符串的字符串  |
@@ -161,26 +162,6 @@
 
 
 ## 函数定义
-### AddPrefixLineNubmerToReader
-
-#### 详细描述
-
-
-#### 定义
-
-`AddPrefixLineNubmerToReader(i any) io.Reader`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `io.Reader` |   |
-
-
 ### AddPrefixLineNumber
 
 #### 详细描述
@@ -199,6 +180,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+
+
+### AddPrefixLineNumberToReader
+
+#### 详细描述
+
+
+#### 定义
+
+`AddPrefixLineNumberToReader(i any) io.Reader`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `io.Reader` |   |
 
 
 ### CalcSSDeep
@@ -3176,6 +3177,27 @@ str.RemoveRepeat(["hello", "yak", "hello"]) // ["hello", "yak"]
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]string` |   |
+
+
+### RenderTemplate
+
+#### 详细描述
+
+
+#### 定义
+
+`RenderTemplate(i string, m any) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` |   |
+| m | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### Repeat

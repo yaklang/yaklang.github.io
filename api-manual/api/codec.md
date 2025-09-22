@@ -81,6 +81,8 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.HmacSha1](#hmacsha1) ||
 | [codec.HmacSha256](#hmacsha256) ||
 | [codec.HmacSha512](#hmacsha512) ||
+| [codec.IsUTF8](#isutf8) ||
+| [codec.IsUTF8File](#isutf8file) |IsUTF8File checks if a file is UTF-8 encoded using sampling strategy For files &amp;lt; 0.5K: check entire content For files 0.5K-1K: check one 0.5K sampl...|
 | [codec.MMH3Hash128](#mmh3hash128) ||
 | [codec.MMH3Hash128x64](#mmh3hash128x64) ||
 | [codec.MMH3Hash32](#mmh3hash32) ||
@@ -1969,6 +1971,53 @@ replacing special characters (including /) with %XX sequences as needed.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
+
+
+### IsUTF8
+
+#### 详细描述
+
+
+#### 定义
+
+`IsUTF8(i any) (bool, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+| r2 | `error` |   |
+
+
+### IsUTF8File
+
+#### 详细描述
+IsUTF8File checks if a file is UTF-8 encoded using sampling strategy
+For files &lt; 0.5K: check entire content
+For files 0.5K-1K: check one 0.5K sample
+For files &gt; 1K: check 4+ samples (256 runes each), up to 8 samples max
+If sampling cuts into UTF-8 character, look forward/backward to find valid boundaries
+
+
+#### 定义
+
+`IsUTF8File(filename string) (bool, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+| r2 | `error` |   |
 
 
 ### MMH3Hash128

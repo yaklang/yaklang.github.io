@@ -2,13 +2,16 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [aireducer.File](#file) ||
 | [aireducer.NewReducerFromFile](#newreducerfromfile) ||
 | [aireducer.NewReducerFromReader](#newreducerfromreader) ||
 | [aireducer.NewReducerFromString](#newreducerfromstring) ||
+| [aireducer.Reader](#reader) ||
+| [aireducer.String](#string) ||
 | [aireducer.callback](#callback) ||
 | [aireducer.chunkSize](#chunksize) ||
 | [aireducer.context](#context) ||
-| [aireducer.enableLineNumber](#enablelinenumber) |WithEnableLineNumber enables line number prefixing for chunk content. When enabled, each line in the chunk will be prefixed with line numbers. This op...|
+| [aireducer.lineNumber](#linenumber) |WithEnableLineNumber enables line number prefixing for chunk content. When enabled, each line in the chunk will be prefixed with line numbers. This op...|
 | [aireducer.lines](#lines) |WithLines sets the line trigger for chunking. When set to a positive value,  chunks will be created every N lines. If the N lines content is smaller t...|
 | [aireducer.memory](#memory) ||
 | [aireducer.reducerCallback](#reducercallback) ||
@@ -18,6 +21,28 @@
 
 
 ## 函数定义
+### File
+
+#### 详细描述
+
+
+#### 定义
+
+`File(filename string, callback func(chunk chunkmaker.Chunk), options ...Option) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+| callback | `func(chunk chunkmaker.Chunk)` |   |
+| options | `...Option` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### NewReducerFromFile
 
 #### 详细描述
@@ -84,6 +109,50 @@
 | r2 | `error` |   |
 
 
+### Reader
+
+#### 详细描述
+
+
+#### 定义
+
+`Reader(i io.Reader, callback func(chunk chunkmaker.Chunk), options ...Option) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `io.Reader` |   |
+| callback | `func(chunk chunkmaker.Chunk)` |   |
+| options | `...Option` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### String
+
+#### 详细描述
+
+
+#### 定义
+
+`String(s string, callback func(chunk chunkmaker.Chunk), options ...Option) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+| callback | `func(chunk chunkmaker.Chunk)` |   |
+| options | `...Option` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### callback
 
 #### 详细描述
@@ -144,7 +213,7 @@
 | r1 | `Option` |   |
 
 
-### enableLineNumber
+### lineNumber
 
 #### 详细描述
 WithEnableLineNumber enables line number prefixing for chunk content.
@@ -154,7 +223,7 @@ This option works with all chunking modes and respects ChunkSize limits.
 
 #### 定义
 
-`enableLineNumber(enable bool) Option`
+`lineNumber(enable bool) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
