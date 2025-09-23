@@ -6,6 +6,7 @@
 | [rag.BuildCollectionFromFile](#buildcollectionfromfile) ||
 | [rag.BuildCollectionFromRaw](#buildcollectionfromraw) ||
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
+| [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
 | [rag.DeleteCollection](#deletecollection) ||
 | [rag.DeleteDocument](#deletedocument) ||
 | [rag.EnableMockMode](#enablemockmode) ||
@@ -17,11 +18,14 @@
 | [rag.Query](#query) ||
 | [rag.QueryDocuments](#querydocuments) ||
 | [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) ||
+| [rag.buildFilter](#buildfilter) ||
+| [rag.buildQuery](#buildquery) ||
 | [rag.ctx](#ctx) ||
 | [rag.docMetadata](#docmetadata) ||
 | [rag.docRawMetadata](#docrawmetadata) ||
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
+| [rag.khopLimit](#khoplimit) ||
 | [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
 | [rag.khopkMax](#khopkmax) |WithKHopKMin 设置最小路径长度，最小值为2 |
 | [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
@@ -128,6 +132,28 @@
 |:-----------|:---------- |:-----------|
 | kbName | `string` |   |
 | reader | `io.Reader` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### BuildKnowledgeFromEntityRepos
+
+#### 详细描述
+
+
+#### 定义
+
+`BuildKnowledgeFromEntityRepos(name string, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
 | option | `...any` |   |
 
 #### 返回值
@@ -354,6 +380,46 @@
 | r2 | `error` |   |
 
 
+### buildFilter
+
+#### 详细描述
+
+
+#### 定义
+
+`buildFilter(filter *ypb.EntityFilter) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filter | `*ypb.EntityFilter` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
+
+
+### buildQuery
+
+#### 详细描述
+
+
+#### 定义
+
+`buildQuery(query string) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| query | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
+
+
 ### ctx
 
 #### 详细描述
@@ -453,6 +519,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `AnalysisOption` |   |
+
+
+### khopLimit
+
+#### 详细描述
+
+
+#### 定义
+
+`khopLimit(k int) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| k | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
 
 
 ### khopk
