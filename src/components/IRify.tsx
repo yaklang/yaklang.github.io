@@ -160,7 +160,7 @@ const FeatureList = [
           <span style={{ color: "#10b981", marginRight: "8px" }}>📚</span>
           <span>
             查看{" "}
-            <a href="/cookbook" style={{ color: "#059669" }}>
+            <a href="https://ssa.to/cookbook" style={{ color: "#059669" }}>
               技术文档
             </a>{" "}
             了解详细使用方法
