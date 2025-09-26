@@ -35,6 +35,8 @@ UnlimitedDomainScan|(crawlerx.scanRangeLevel) 2|
 | [crawlerx.jsResultSend](#jsresultsend) ||
 | [crawlerx.leakless](#leakless) ||
 | [crawlerx.localStorage](#localstorage) ||
+| [crawlerx.loginPassword](#loginpassword) ||
+| [crawlerx.loginUsername](#loginusername) ||
 | [crawlerx.maxDepth](#maxdepth) |maxDepth 是一个请求选项 用于设置网站最大爬取深度  Examples: ```  	targetUrl = &amp;#34;http://testphp.vulnweb.com/&amp;#34; 	ch, err = crawlerx.StartCrawler(targetUrl, crawlerx....|
 | [crawlerx.maxUrl](#maxurl) |maxUrl 是一个请求选项 用于设置最大爬取url数量  Examples: ```  	targetUrl = &amp;#34;http://testphp.vulnweb.com/&amp;#34; 	ch, err = crawlerx.StartCrawler(targetUrl, crawlerx.m...|
 | [crawlerx.pageTimeout](#pagetimeout) |pageTimeout 是一个请求选项 用于设置单个页面超时时间  Examples: ```  	targetUrl = &amp;#34;http://testphp.vulnweb.com/&amp;#34; 	ch, err = crawlerx.StartCrawler(targetUrl, crawle...|
@@ -628,6 +630,46 @@ Examples:
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | storage | `map[string]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### loginPassword
+
+#### 详细描述
+
+
+#### 定义
+
+`loginPassword(password string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### loginUsername
+
+#### 详细描述
+
+
+#### 定义
+
+`loginUsername(username string) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| username | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
