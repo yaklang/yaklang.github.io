@@ -37,7 +37,7 @@
 | [rag.queryLimit](#querylimit) |WithRAGLimit 设置查询结果限制 |
 | [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit 设置集合搜索分数阈值 |
 | [rag.queryStatus](#querystatus) ||
-| [rag.queryType](#querytype) ||
+| [rag.queryType](#querytype) |todo 这里暂时使用临时构建图的方式处理，等待恢复图速度优化 |
 | [rag.ragCosineDistance](#ragcosinedistance) ||
 | [rag.ragDescription](#ragdescription) ||
 | [rag.ragEmbeddingModel](#ragembeddingmodel) |WithEmbeddingModel 设置embedding模型 |
@@ -317,7 +317,7 @@
 
 #### 定义
 
-`Query(query string, opts ...RAGQueryOption) (&lt;-chan *RAGSearchResult, error)`
+`Query(query string, opts ...RAGQueryOption) (chan *RAGSearchResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -328,7 +328,7 @@
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `&lt;-chan *RAGSearchResult` |   |
+| r1 | `chan *RAGSearchResult` |   |
 | r2 | `error` |   |
 
 
@@ -773,6 +773,7 @@ WithRAGCollectionScoreLimit 设置集合搜索分数阈值
 ### queryType
 
 #### 详细描述
+todo 这里暂时使用临时构建图的方式处理，等待恢复图速度优化
 
 
 #### 定义
