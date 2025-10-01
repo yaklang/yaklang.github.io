@@ -1288,17 +1288,17 @@ WithResultPrompt 设置AI助手的生成结果提示词
 
 #### 定义
 
-`timeLineLimit(i int) Option`
+`timeLineLimit(config *Config) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `int` |   |
+| config | `*Config` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `error` |   |
 
 
 ### timelineContentLimit
