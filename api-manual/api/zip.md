@@ -11,14 +11,26 @@
 | [zip.ExtractFileFromRaw](#extractfilefromraw) |ExtractFileFromRaw 从 ZIP 原始数据中提取单个文件 |
 | [zip.ExtractFiles](#extractfiles) |ExtractFiles 从 ZIP 文件中并发提取多个文件 |
 | [zip.ExtractFilesFromRaw](#extractfilesfromraw) |ExtractFilesFromRaw 从 ZIP 原始数据中并发提取多个文件 |
+| [zip.GrepPathRawRegexp](#greppathrawregexp) |GrepPathRawRegexp 使用正则表达式在原始数据中搜索文件路径 |
+| [zip.GrepPathRawSubString](#greppathrawsubstring) |GrepPathRawSubString 使用子字符串在原始数据中搜索文件路径 |
+| [zip.GrepPathRegexp](#greppathregexp) |GrepPathRegexp 使用正则表达式搜索文件路径 |
+| [zip.GrepPathSubString](#greppathsubstring) |GrepPathSubString 使用子字符串搜索文件路径 |
 | [zip.GrepRawRegexp](#greprawregexp) |GrepRawRegexp 使用正则表达式在 ZIP 原始数据中搜索 |
 | [zip.GrepRawSubString](#greprawsubstring) |GrepRawSubString 使用子字符串在 ZIP 原始数据中搜索 |
 | [zip.GrepRegexp](#grepregexp) |GrepRegexp 使用正则表达式在 ZIP 文件中搜索 |
 | [zip.GrepSubString](#grepsubstring) |GrepSubString 使用子字符串在 ZIP 文件中搜索 |
+| [zip.MergeGrepResults](#mergegrepresults) |MergeGrepResults 合并多个 GrepResult，将可以合并的结果合并在一起 |
+| [zip.NewGrepSearcher](#newgrepsearcher) |NewZipGrepSearcher 创建一个新的 ZIP 搜索器（从文件） |
+| [zip.NewGrepSearcherFromRaw](#newgrepsearcherfromraw) |NewZipGrepSearcherFromRaw 创建一个新的 ZIP 搜索器（从原始数据） |
+| [zip.RRFRankResults](#rrfrankresults) |RRFRankGrepResults 使用 RRF 算法对 GrepResult 进行排序  |
 | [zip.Recursive](#recursive) |Recursive Decompress decompresses a zip file to a directory  |
 | [zip.RecursiveFromRaw](#recursivefromraw) |RecursiveFromRaw decompresses a zip file to a directory  |
 | [zip.grepCaseSensitive](#grepcasesensitive) ||
 | [zip.grepContextLine](#grepcontextline) ||
+| [zip.grepExcludePathRegexp](#grepexcludepathregexp) ||
+| [zip.grepExcludePathSubString](#grepexcludepathsubstring) ||
+| [zip.grepIncludePathRegexp](#grepincludepathregexp) ||
+| [zip.grepIncludePathSubString](#grepincludepathsubstring) ||
 | [zip.grepLimit](#greplimit) ||
 
 
@@ -237,6 +249,102 @@ ExtractFilesFromRaw 从 ZIP 原始数据中并发提取多个文件
 | r2 | `error` |   |
 
 
+### GrepPathRawRegexp
+
+#### 详细描述
+GrepPathRawRegexp 使用正则表达式在原始数据中搜索文件路径
+
+
+#### 定义
+
+`GrepPathRawRegexp(raw any, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| pattern | `string` |   |
+| opts | `...GrepOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*GrepResult` |   |
+| r2 | `error` |   |
+
+
+### GrepPathRawSubString
+
+#### 详细描述
+GrepPathRawSubString 使用子字符串在原始数据中搜索文件路径
+
+
+#### 定义
+
+`GrepPathRawSubString(raw any, substring string, opts ...GrepOption) ([]*GrepResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| substring | `string` |   |
+| opts | `...GrepOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*GrepResult` |   |
+| r2 | `error` |   |
+
+
+### GrepPathRegexp
+
+#### 详细描述
+GrepPathRegexp 使用正则表达式搜索文件路径
+
+
+#### 定义
+
+`GrepPathRegexp(zipFile string, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| pattern | `string` |   |
+| opts | `...GrepOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*GrepResult` |   |
+| r2 | `error` |   |
+
+
+### GrepPathSubString
+
+#### 详细描述
+GrepPathSubString 使用子字符串搜索文件路径
+
+
+#### 定义
+
+`GrepPathSubString(zipFile string, substring string, opts ...GrepOption) ([]*GrepResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| substring | `string` |   |
+| opts | `...GrepOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*GrepResult` |   |
+| r2 | `error` |   |
+
+
 ### GrepRawRegexp
 
 #### 详细描述
@@ -333,6 +441,103 @@ GrepSubString 使用子字符串在 ZIP 文件中搜索
 | r2 | `error` |   |
 
 
+### MergeGrepResults
+
+#### 详细描述
+MergeGrepResults 合并多个 GrepResult，将可以合并的结果合并在一起
+
+
+#### 定义
+
+`MergeGrepResults(results []*GrepResult) []*GrepResult`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| results | `[]*GrepResult` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*GrepResult` |   |
+
+
+### NewGrepSearcher
+
+#### 详细描述
+NewZipGrepSearcher 创建一个新的 ZIP 搜索器（从文件）
+
+
+#### 定义
+
+`NewGrepSearcher(zipFile string) (*ZipGrepSearcher, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ZipGrepSearcher` |   |
+| r2 | `error` |   |
+
+
+### NewGrepSearcherFromRaw
+
+#### 详细描述
+NewZipGrepSearcherFromRaw 创建一个新的 ZIP 搜索器（从原始数据）
+
+
+#### 定义
+
+`NewGrepSearcherFromRaw(raw any, filename ...string) (*ZipGrepSearcher, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| filename | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ZipGrepSearcher` |   |
+| r2 | `error` |   |
+
+
+### RRFRankResults
+
+#### 详细描述
+RRFRankGrepResults 使用 RRF 算法对 GrepResult 进行排序
+
+Example:
+```
+
+	results1 = zip.GrepRegexp("file.zip", "pattern1")~
+	results2 = zip.GrepSubString("file.zip", "keyword")~
+	allResults = append(results1, results2...)
+	ranked = zip.RRFRankResults(allResults)~
+
+```
+
+
+#### 定义
+
+`RRFRankResults(results []*ziputil.GrepResult) []*ziputil.GrepResult`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| results | `[]*ziputil.GrepResult` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*ziputil.GrepResult` |   |
+
+
 ### Recursive
 
 #### 详细描述
@@ -403,7 +608,17 @@ Example:
 
 #### 定义
 
-`grepCaseSensitive()`
+`grepCaseSensitive(i ...bool) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `...bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
 
 
 ### grepContextLine
@@ -419,6 +634,86 @@ Example:
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | context | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
+
+
+### grepExcludePathRegexp
+
+#### 详细描述
+
+
+#### 定义
+
+`grepExcludePathRegexp(patterns ...string) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| patterns | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
+
+
+### grepExcludePathSubString
+
+#### 详细描述
+
+
+#### 定义
+
+`grepExcludePathSubString(patterns ...string) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| patterns | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
+
+
+### grepIncludePathRegexp
+
+#### 详细描述
+
+
+#### 定义
+
+`grepIncludePathRegexp(patterns ...string) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| patterns | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
+
+
+### grepIncludePathSubString
+
+#### 详细描述
+
+
+#### 定义
+
+`grepIncludePathSubString(patterns ...string) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| patterns | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
