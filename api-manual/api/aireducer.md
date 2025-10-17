@@ -281,12 +281,12 @@ Example:
 
 #### 定义
 
-`memory(memory *aid.Memory) Option`
+`memory(memory *aid.PromptContextProvider) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| memory | `*aid.Memory` |   |
+| memory | `*aid.PromptContextProvider` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

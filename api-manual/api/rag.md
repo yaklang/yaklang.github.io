@@ -25,11 +25,13 @@
 | [rag.docRawMetadata](#docrawmetadata) ||
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
+| [rag.getEntityFilter](#getentityfilter) ||
 | [rag.khopLimit](#khoplimit) ||
 | [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
-| [rag.khopkMax](#khopkmax) |WithKHopKMin 设置最小路径长度，最小值为2 |
+| [rag.khopkMax](#khopkmax) |WithKHopKMax 设置最大路径长度，最小值为2 |
 | [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
 | [rag.log](#log) ||
+| [rag.pathDepth](#pathdepth) ||
 | [rag.queryCollection](#querycollection) |WithRAGCollectionName 指定搜索的集合名称 |
 | [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent 设置并发数 |
 | [rag.queryCtx](#queryctx) |WithRAGCtx 设置上下文 |
@@ -521,6 +523,30 @@
 | r1 | `AnalysisOption` |   |
 
 
+### getEntityFilter
+
+#### 详细描述
+
+
+#### 定义
+
+`getEntityFilter(reposName string, entityTypes []string, names []string, HiddenIndex []string, keywords []string) *ypb.EntityFilter`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| reposName | `string` |   |
+| entityTypes | `[]string` |   |
+| names | `[]string` |   |
+| HiddenIndex | `[]string` |   |
+| keywords | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ypb.EntityFilter` |   |
+
+
 ### khopLimit
 
 #### 详细描述
@@ -565,7 +591,7 @@ WithKHopK 设置k-hop的跳数，k&gt;=2时返回k-hop路径，k=0返回所有�
 ### khopkMax
 
 #### 详细描述
-WithKHopKMin 设置最小路径长度，最小值为2
+WithKHopKMax 设置最大路径长度，最小值为2
 
 
 #### 定义
@@ -622,6 +648,26 @@ WithKHopKMin 设置最小路径长度，最小值为2
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `AnalysisOption` |   |
+
+
+### pathDepth
+
+#### 详细描述
+
+
+#### 定义
+
+`pathDepth(deep int) KHopQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| deep | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `KHopQueryOption` |   |
 
 
 ### queryCollection

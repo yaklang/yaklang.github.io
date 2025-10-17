@@ -205,12 +205,12 @@
 
 #### 定义
 
-`GetDefaultMemory() *Memory`
+`GetDefaultMemory() *PromptContextProvider`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Memory` |   |
+| r1 | `*PromptContextProvider` |   |
 
 
 ### NewExecutor
@@ -1005,12 +1005,12 @@ WithInitializePrompt 设置AI助手的初始化提示词
 
 #### 定义
 
-`memory(m *Memory) Option`
+`memory(m *PromptContextProvider) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| m | `*Memory` |   |
+| m | `*PromptContextProvider` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
