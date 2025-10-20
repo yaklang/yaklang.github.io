@@ -205,7 +205,9 @@ function IRifyPage() {
   }, []);
   const init = useMemoizedFn(() => {
     axios
-      .get("https://oss-qn.yaklang.com/irify/latest/yakit-version.txt")
+      .get(
+        `https://oss-qn.yaklang.com/irify/latest/yakit-version.txt?_=${Date.now()}`
+      )
       .then(async (response) => {
         if (response && response.data && typeof response.data === "string") {
           const yakVersion = response.data.split("\n")[0];
