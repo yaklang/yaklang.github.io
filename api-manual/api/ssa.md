@@ -34,6 +34,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 | [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
 | [ssa.withProjectName](#withprojectname) ||
 | [ssa.withReCompile](#withrecompile) ||
+| [ssa.withSSAConfig](#withssaconfig) ||
 | [ssa.withStrictMode](#withstrictmode) ||
 
 
@@ -504,6 +505,26 @@ save to database, please set the program name
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withSSAConfig
+
+#### 详细描述
+
+
+#### 定义
+
+`withSSAConfig(sc *ssaconfig.Config) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sc | `*ssaconfig.Config` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

@@ -39,6 +39,7 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) ||
 | [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string { 		block, _ := aes.NewCipher(key) 		nonc...|
 | [codec.AutoDecode](#autodecode) ||
+| [codec.CryptoRandBytes](#cryptorandbytes) ||
 | [codec.DESCBCDecrypt](#descbcdecrypt) |DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
 | [codec.DESCBCEncrypt](#descbcencrypt) |DESCBCEncrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来加密数据。 它接受一个密钥（key）、需要加密的数据（data to encrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
 | [codec.DESDecrypt](#desdecrypt) |DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
@@ -99,6 +100,7 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。  参数 raw 表示 RSA 私钥，支持以下格式：    - DER 编码的私钥（raw ASN.1 DER 字节流）    - Base64...|
 | [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) |RSAEncryptWithOAEP 使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Base64 编码的 DER 格式（自动解码）    - PEM ...|
 | [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Ba...|
+| [codec.RandBytes](#randbytes) ||
 | [codec.Sha1](#sha1) ||
 | [codec.Sha224](#sha224) ||
 | [codec.Sha256](#sha256) ||
@@ -1029,6 +1031,26 @@ AESCFBEncryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*AutoDecodeResult` |   |
+
+
+### CryptoRandBytes
+
+#### 详细描述
+
+
+#### 定义
+
+`CryptoRandBytes(n int) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
 
 
 ### DESCBCDecrypt
@@ -2468,6 +2490,26 @@ Example:
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
 | r2 | `error` |   |
+
+
+### RandBytes
+
+#### 详细描述
+
+
+#### 定义
+
+`RandBytes(n int) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
 
 
 ### Sha1
