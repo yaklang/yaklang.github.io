@@ -161,7 +161,7 @@ dump(x.Find(origin, func(i){return str.MatchAnyOfGlob(i, "*:1233", "*:1234")}))
 (string) (len=14) "127.0.0.1:1233"
 ```
 
-## 经典案例：`x.Reducer` 求列表和
+## 经典案例：`x.Reduce` 求列表和
 
 ```go
 result = x.Reduce([1,2,3,4,5,6,7,8], func(a,b){return a+b}, 0)
