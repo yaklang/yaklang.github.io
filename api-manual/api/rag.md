@@ -6,6 +6,7 @@
 | [rag.BuildCollectionFromFile](#buildcollectionfromfile) ||
 | [rag.BuildCollectionFromRaw](#buildcollectionfromraw) ||
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
+| [rag.BuildIndexKnowledgeFromFile](#buildindexknowledgefromfile) ||
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
 | [rag.DeleteCollection](#deletecollection) ||
 | [rag.DeleteDocument](#deletedocument) ||
@@ -20,6 +21,7 @@
 | [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) ||
 | [rag.buildFilter](#buildfilter) ||
 | [rag.buildQuery](#buildquery) ||
+| [rag.chunkSize](#chunksize) ||
 | [rag.ctx](#ctx) ||
 | [rag.docMetadata](#docmetadata) ||
 | [rag.docRawMetadata](#docrawmetadata) ||
@@ -134,6 +136,29 @@
 |:-----------|:---------- |:-----------|
 | kbName | `string` |   |
 | reader | `io.Reader` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### BuildIndexKnowledgeFromFile
+
+#### 详细描述
+
+
+#### 定义
+
+`BuildIndexKnowledgeFromFile(kbName string, path string, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| path | `string` |   |
 | option | `...any` |   |
 
 #### 返回值
@@ -420,6 +445,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `KHopQueryOption` |   |
+
+
+### chunkSize
+
+#### 详细描述
+
+
+#### 定义
+
+`chunkSize(size int64) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| size | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### ctx

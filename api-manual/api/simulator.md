@@ -7,7 +7,8 @@ htmlChangeMode|(simulator.loginDetectMode) 1|
 leaklessDefault|(simulator.LeaklessMode) 0|
 leaklessOff|(simulator.LeaklessMode) -1|
 leaklessOn|(simulator.LeaklessMode) 1|
-simple|(map[string]interface {}) map[string]interface {}{&#34;CreateBrowser&#34;: (func(...simple.BrowserConfigOpt) (*simple.VBrowser, error))(0x322f300), &#34;bodyModifyTarget&#34;: &#34;body&#34;, &#34;bodyReplaceTarget&#34;: &#34;bodyReplace&#34;, &#34;createBrowser&#34;: (func(...simple.BrowserConfigOpt) (*simple.VBrowser, error))(0x322f300), &#34;exePath&#34;: (func(string) simple.BrowserConfigOpt)(0x322e900), &#34;headersModifyTarget&#34;: &#34;headers&#34;, &#34;headless&#34;: (func(bool) simple.BrowserConfigOpt)(0x322ec00), &#34;hijack&#34;: (func(bool) simple.BrowserConfigOpt)(0x322ec80), &#34;hostModifyTarget&#34;: &#34;host&#34;, &#34;leakless&#34;: (func(bool) simple.BrowserConfigOpt)(0x322f280), &#34;noSandBox&#34;: (func(bool) simple.BrowserConfigOpt)(0x322eb80), &#34;proxy&#34;: (func(string, ...string) simple.BrowserConfigOpt)(0x322e9e0), &#34;requestModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x322ef80), &#34;responseModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x322ed00), &#34;timeout&#34;: (func(int) simple.BrowserConfigOpt)(0x322f200), &#34;wsAddress&#34;: (func(string) simple.BrowserConfigOpt)(0x322e820)}|
+simple|(map[string]interface {}) map[string]interface {}{&#34;CreateBrowser&#34;: (func(...simple.BrowserConfigOpt) (*simple.VBrowser, error))(0x3238e80), &#34;bodyModifyTarget&#34;: &#34;body&#34;, &#34;bodyReplaceTarget&#34;: &#34;bodyReplace&#34;, &#34;createBrowser&#34;: (func(...simple.BrowserConfigOpt) (*simple.VBrowser, error))(0x3238e80), &#34;exePath&#34;: (func(string) simple.BrowserConfigOpt)(0x3238480), &#34;headersModifyTarget&#34;: &#34;headers&#34;, &#34;headless&#34;: (func(bool) simple.BrowserConfigOpt)(0x3238780), &#34;hijack&#34;: (func(bool) simple.BrowserConfigOpt)(0x3238800), &#34;hostModifyTarget&#34;: &#34;host&#34;, &#34;leakless&#34;: (func(bool) simple.BrowserConfigOpt)(0x3238e00), &#34;noSandBox&#34;: (func(bool) simple.BrowserConfigOpt)(0x3238700), &#34;proxy&#34;: (func(string, ...string) simple.BrowserConfigOpt)(0x3238560), &#34;requestModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x3238b00), &#34;responseModify&#34;: (func(string, simple.ModifyTarget, interface {}) simple.BrowserConfigOpt)(0x3238880), &#34;timeout&#34;: (func(int) simple.BrowserConfigOpt)(0x3238d80), &#34;wsAddress&#34;: (func(string) simple.BrowserConfigOpt)(0x32383a0)}|
+stringMatchMode|(simulator.loginDetectMode) 2|
 urlChangeMode|(simulator.loginDetectMode) 0|
 
 |函数名|函数描述/介绍|
@@ -32,6 +33,7 @@ urlChangeMode|(simulator.loginDetectMode) 0|
 | [simulator.saveToDB](#savetodb) ||
 | [simulator.sourceType](#sourcetype) ||
 | [simulator.submitButtonSelector](#submitbuttonselector) |submitButtonSelector 是一个请求选项 用于在提交登录按钮位置识别错误时输入提交登录按钮对应的selector    |
+| [simulator.successMatchers](#successmatchers) |successMatchers 是一个请求选项 用于在页面变化中匹配指定字符串来判断登录成功    |
 | [simulator.username](#username) |username 是一个请求选项 用于输入爆破的用户名    	|
 | [simulator.usernameList](#usernamelist) |usernameList 是一个请求选项 用于输入爆破的用户名的列表    |
 | [simulator.usernameSelector](#usernameselector) |usernameSelector 是一个请求选项 用于在用户框位置识别错误时输入用户框对应的selector    |
@@ -347,6 +349,8 @@ simulator.urlChangeMode 表示检测url变化 如果url发生变化则认为登�
 
 simulator.defaultChangeMode 表示同时使用以上两种策略
 
+simulator.stringMatchMode 表示使用页面内容或变动中的字符串匹配结果判断登录
+
 第二个参数表示检测html变化程度的比例，超过该比例则认为发生变化 默认为0.6
 
 
@@ -602,6 +606,36 @@ Example:
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | selector | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BruteConfigOpt` |   |
+
+
+### successMatchers
+
+#### 详细描述
+successMatchers 是一个请求选项 用于在页面变化中匹配指定字符串来判断登录成功
+
+
+
+Example:
+```
+
+	ch, err = simulator.HttpBruteForce("http://127.0.0.1:8080/", simulator.successMatchers("login success"))
+
+```
+
+
+#### 定义
+
+`successMatchers(matchers ...string) BruteConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| matchers | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
