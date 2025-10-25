@@ -6,7 +6,7 @@
 | [aiagent.CreateForge](#createforge) ||
 | [aiagent.CreateLiteForge](#createliteforge) ||
 | [aiagent.ExecuteForge](#executeforge) ||
-| [aiagent.ExtractAction](#extractaction) ||
+| [aiagent.ExtractAction](#extractaction) |ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action |
 | [aiagent.ExtractPlan](#extractplan) ||
 | [aiagent.GetDefaultMemory](#getdefaultmemory) ||
 | [aiagent.NewExecutor](#newexecutor) ||
@@ -156,6 +156,7 @@
 ### ExtractAction
 
 #### 详细描述
+ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action
 
 
 #### 定义

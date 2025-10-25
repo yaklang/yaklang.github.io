@@ -89,6 +89,7 @@
 | [poc.appendQueryParam](#appendqueryparam) |appendQueryParam 是一个请求选项参数，用于改变请求报文，添加 GET 请求参数  |
 | [poc.appendUploadFile](#appenduploadfile) |appendUploadFile 是一个请求选项参数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为表单名，第二个参数为文件名，第三个参数为文件内容，第四个参数是可选参数，为文件类型(Content-Type)  |
 | [poc.body](#body) |body 是一个请求选项参数，用于指定请求的 body，需要传入一个任意类型的参数，如果不是 string 或者 bytes 会抛出日志并忽略。  |
+| [poc.bodyStreamHandler](#bodystreamhandler) |stream 是一个请求选项参数，可以设置一个回调函数，如果 body 读取了，将会复制一份给这个流，在这个流中处理 body 是不会影响最终结果的，一般用于处理较长的 chunk 数据 |
 | [poc.connPool](#connpool) |connPool 是一个请求选项参数，用于指定是否使用连接池，默认不使用连接池  |
 | [poc.connectTimeout](#connecttimeout) |connectTimeout 是一个请求选项参数，用于指定连接超时时间，默认为15秒  |
 | [poc.context](#context) |context 是一个请求选项参数，用于指定请求的上下文  |
@@ -111,6 +112,7 @@
 | [poc.https](#https) |https 是一个请求选项参数，用于指定是否使用 https 协议，默认为 false 即使用 http 协议  |
 | [poc.jsRedirect](#jsredirect) |jsRedirect 是一个请求选项参数，用于指定是否跟踪JS重定向，默认为false即不会自动跟踪JS重定向  |
 | [poc.json](#json) |json 是一个请求选项参数，用于指定请求的 body 为 json 格式，需要传入一个任意类型的参数，会自动转换为 json 格式  |
+| [poc.noBodyBuffer](#nobodybuffer) |noBodyBuffer 是一个请求选项参数，用于指定是否禁用响应体缓冲，设置为 true 时可以避免大文件下载时的内存占用  通常与 WithBodyStreamReaderHandler 配合使用，用于流式处理大文件  |
 | [poc.noFixContentLength](#nofixcontentlength) |noFixContentLength 是一个请求选项参数，用于指定是否修复响应报文中的 Content-Length 字段，默认为 false 即会自动修复Content-Length字段  |
 | [poc.noRedirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
 | [poc.noredirect](#noredirect) |noRedirect 是一个请求选项参数，用于指定是否跟踪重定向，默认为 false 即会自动跟踪重定向  |
@@ -2749,6 +2751,27 @@ poc.Post("https://www.example.com", poc.body("a=b")) // 向 www.example.com 发�
 | r1 | `PocConfigOption` |   |
 
 
+### bodyStreamHandler
+
+#### 详细描述
+stream 是一个请求选项参数，可以设置一个回调函数，如果 body 读取了，将会复制一份给这个流，在这个流中处理 body 是不会影响最终结果的，一般用于处理较长的 chunk 数据
+
+
+#### 定义
+
+`bodyStreamHandler(i func(r []byte, closer io.ReadCloser)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `func(r []byte, closer io.ReadCloser)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### connPool
 
 #### 详细描述
@@ -3312,6 +3335,41 @@ poc.Post("https://www.example.com", poc.json({"a": "b"})) // 向 www.example.com
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### noBodyBuffer
+
+#### 详细描述
+noBodyBuffer 是一个请求选项参数，用于指定是否禁用响应体缓冲，设置为 true 时可以避免大文件下载时的内存占用
+
+通常与 WithBodyStreamReaderHandler 配合使用，用于流式处理大文件
+
+Example:
+```
+poc.Get("https://example.com/large-file.zip",
+
+	poc.noBodyBuffer(true),
+	poc.bodyStreamHandler(func(header, body) {
+	    // 流式处理响应体，不会将整个文件读入内存
+	    io.Copy(file, body)
+	}))
+
+```
+
+
+#### 定义
+
+`noBodyBuffer(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
