@@ -5,6 +5,7 @@
 | [diff.Diff](#diff) |Diff 比较两个输入并返回 diff 结果字符串（为了向后兼容，现在返回字符串） |
 | [diff.DiffDir](#diffdir) ||
 | [diff.DiffFromFileSystem](#difffromfilesystem) |FileSystemDiff 比较两个文件系统并返回diff字符串（为了向后兼容，现在返回字符串） |
+| [diff.DiffZIPFile](#diffzipfile) |DiffZIPFile compares two ZIP files and returns diff string or invokes the handler for each change This is a high-level wrapper around FileSystemDiff f...|
 
 
 ## 函数定义
@@ -69,6 +70,31 @@ FileSystemDiff 比较两个文件系统并返回diff字符串（为了向后兼�
 |:-----------|:---------- |:-----------|
 | fs1 | `fi.FileSystem` |   |
 | fs2 | `fi.FileSystem` |   |
+| handler | `...DiffHandler` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### DiffZIPFile
+
+#### 详细描述
+DiffZIPFile compares two ZIP files and returns diff string or invokes the handler for each change
+This is a high-level wrapper around FileSystemDiff for ZIP files
+
+
+#### 定义
+
+`DiffZIPFile(zipFile1 string, zipFile2 string, handler ...DiffHandler) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile1 | `string` |   |
+| zipFile2 | `string` |   |
 | handler | `...DiffHandler` |   |
 
 #### 返回值
