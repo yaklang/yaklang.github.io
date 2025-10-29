@@ -2,38 +2,51 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [rag.AddDocument](#adddocument) ||
+| [rag.AddDocument](#adddocument) |_addDocument 向指定集合添加文档  |
 | [rag.BuildCollectionFromFile](#buildcollectionfromfile) ||
 | [rag.BuildCollectionFromRaw](#buildcollectionfromraw) ||
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
 | [rag.BuildIndexKnowledgeFromFile](#buildindexknowledgefromfile) ||
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
-| [rag.DeleteCollection](#deletecollection) ||
-| [rag.DeleteDocument](#deletedocument) ||
+| [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
+| [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
 | [rag.EnableMockMode](#enablemockmode) ||
+| [rag.Export](#export) ||
 | [rag.GetCollection](#getcollection) ||
-| [rag.GetCollectionInfo](#getcollectioninfo) ||
-| [rag.ListCollection](#listcollection) ||
+| [rag.GetCollectionInfo](#getcollectioninfo) |_getCollectionInfo 获取指定集合的详细信息  |
+| [rag.HasCollection](#hascollection) |_hasCollection 检查指定集合是否存在  |
+| [rag.Import](#import) |ImportRAGFromFile 从二进制文件导入RAG数据，支持从文件路径导入 |
+| [rag.ListCollection](#listcollection) |_listCollection 获取所有 RAG 集合列表  |
 | [rag.NewRagDatabase](#newragdatabase) ||
-| [rag.NewTempRagDatabase](#newtempragdatabase) ||
+| [rag.NewTempRagDatabase](#newtempragdatabase) |_newTempRagDatabase 创建临时 RAG 数据库  |
 | [rag.Query](#query) ||
-| [rag.QueryDocuments](#querydocuments) ||
-| [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) ||
+| [rag.QueryDocuments](#querydocuments) |_queryDocuments 在指定集合中查询文档  |
+| [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) |_queryDocumentsWithAISummary 在指定集合中查询文档并生成 AI 摘要  |
 | [rag.buildFilter](#buildfilter) ||
 | [rag.buildQuery](#buildquery) ||
 | [rag.chunkSize](#chunksize) ||
 | [rag.ctx](#ctx) ||
+| [rag.db](#db) ||
 | [rag.docMetadata](#docmetadata) ||
 | [rag.docRawMetadata](#docrawmetadata) ||
+| [rag.documentHandler](#documenthandler) ||
+| [rag.embeddingHandle](#embeddinghandle) |_embeddingHandle 创建自定义嵌入处理器  |
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
 | [rag.getEntityFilter](#getentityfilter) ||
+| [rag.importName](#importname) ||
+| [rag.importOverwrite](#importoverwrite) ||
 | [rag.khopLimit](#khoplimit) ||
 | [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
 | [rag.khopkMax](#khopkmax) |WithKHopKMax 设置最大路径长度，最小值为2 |
 | [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
 | [rag.log](#log) ||
+| [rag.noHNSWGraph](#nohnswgraph) ||
+| [rag.noMetadata](#nometadata) |RAG 配置选项 |
+| [rag.noOriginInput](#noorigininput) ||
+| [rag.onlyPQCode](#onlypqcode) ||
 | [rag.pathDepth](#pathdepth) ||
+| [rag.progressHandler](#progresshandler) ||
 | [rag.queryCollection](#querycollection) |WithRAGCollectionName 指定搜索的集合名称 |
 | [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent 设置并发数 |
 | [rag.queryCtx](#queryctx) |WithRAGCtx 设置上下文 |
@@ -55,6 +68,14 @@
 ### AddDocument
 
 #### 详细描述
+_addDocument 向指定集合添加文档
+
+Example:
+```
+
+	err = rag.AddDocument("my_collection", "doc1", "content", {"key": "value"})
+
+```
 
 
 #### 定义
@@ -193,6 +214,14 @@
 ### DeleteCollection
 
 #### 详细描述
+_deleteCollection 删除指定的 RAG 集合
+
+Example:
+```
+
+	err = rag.DeleteCollection("my_collection")
+
+```
 
 
 #### 定义
@@ -213,6 +242,14 @@
 ### DeleteDocument
 
 #### 详细描述
+_deleteDocument 从指定集合删除文档
+
+Example:
+```
+
+	err = rag.DeleteDocument("my_collection", "doc1")
+
+```
 
 
 #### 定义
@@ -242,6 +279,28 @@
 `EnableMockMode()`
 
 
+### Export
+
+#### 详细描述
+
+
+#### 定义
+
+`Export(collectionName string, fileName string, opts ...RAGExportOptionFunc) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| collectionName | `string` |   |
+| fileName | `string` |   |
+| opts | `...RAGExportOptionFunc` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### GetCollection
 
 #### 详细描述
@@ -267,6 +326,14 @@
 ### GetCollectionInfo
 
 #### 详细描述
+_getCollectionInfo 获取指定集合的详细信息
+
+Example:
+```
+
+	info, err = rag.GetCollectionInfo("my_collection")
+
+```
 
 
 #### 定义
@@ -285,9 +352,67 @@
 | r2 | `error` |   |
 
 
+### HasCollection
+
+#### 详细描述
+_hasCollection 检查指定集合是否存在
+
+Example:
+```
+
+	exists = rag.HasCollection("my_collection")
+
+```
+
+
+#### 定义
+
+`HasCollection(name string) bool`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+
+
+### Import
+
+#### 详细描述
+ImportRAGFromFile 从二进制文件导入RAG数据，支持从文件路径导入
+
+
+#### 定义
+
+`Import(inputPath string, optFuncs ...RAGExportOptionFunc) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| inputPath | `string` |   |
+| optFuncs | `...RAGExportOptionFunc` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### ListCollection
 
 #### 详细描述
+_listCollection 获取所有 RAG 集合列表
+
+Example:
+```
+
+	collections = rag.ListCollection()
+
+```
 
 
 #### 定义
@@ -324,6 +449,14 @@
 ### NewTempRagDatabase
 
 #### 详细描述
+_newTempRagDatabase 创建临时 RAG 数据库
+
+Example:
+```
+
+	db, err = rag.NewTempRagDatabase()
+
+```
 
 
 #### 定义
@@ -362,6 +495,14 @@
 ### QueryDocuments
 
 #### 详细描述
+_queryDocuments 在指定集合中查询文档
+
+Example:
+```
+
+	results, err = rag.QueryDocuments("my_collection", "query", 10)
+
+```
 
 
 #### 定义
@@ -386,6 +527,14 @@
 ### QueryDocumentsWithAISummary
 
 #### 详细描述
+_queryDocumentsWithAISummary 在指定集合中查询文档并生成 AI 摘要
+
+Example:
+```
+
+	summary, err = rag.QueryDocumentsWithAISummary("my_collection", "query", 10)
+
+```
 
 
 #### 定义
@@ -487,6 +636,26 @@
 | r1 | `AnalysisOption` |   |
 
 
+### db
+
+#### 详细描述
+
+
+#### 定义
+
+`db(db *gorm.DB) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| db | `*gorm.DB` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
 ### docMetadata
 
 #### 详细描述
@@ -526,6 +695,56 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `DocumentOption` |   |
+
+
+### documentHandler
+
+#### 详细描述
+
+
+#### 定义
+
+`documentHandler(handler func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handler | `func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### embeddingHandle
+
+#### 详细描述
+_embeddingHandle 创建自定义嵌入处理器
+
+Example:
+```
+
+	embeddingOpt = rag.embeddingHandle((text) => {
+		return [0.1, 0.2, 0.3] // 返回嵌入向量
+	})
+
+```
+
+
+#### 定义
+
+`embeddingHandle(handle func(text string) any) rag.RAGOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handle | `func(text string) any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `rag.RAGOption` |   |
 
 
 ### entryLength
@@ -590,6 +809,46 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*ypb.EntityFilter` |   |
+
+
+### importName
+
+#### 详细描述
+
+
+#### 定义
+
+`importName(name string) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### importOverwrite
+
+#### 详细描述
+
+
+#### 定义
+
+`importOverwrite(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### khopLimit
@@ -695,6 +954,87 @@ WithKHopKMin 设置最小路径长度，最小值为2
 | r1 | `AnalysisOption` |   |
 
 
+### noHNSWGraph
+
+#### 详细描述
+
+
+#### 定义
+
+`noHNSWGraph(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### noMetadata
+
+#### 详细描述
+RAG 配置选项
+
+
+#### 定义
+
+`noMetadata(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### noOriginInput
+
+#### 详细描述
+
+
+#### 定义
+
+`noOriginInput(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### onlyPQCode
+
+#### 详细描述
+
+
+#### 定义
+
+`onlyPQCode(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
 ### pathDepth
 
 #### 详细描述
@@ -713,6 +1053,26 @@ WithKHopKMin 设置最小路径长度，最小值为2
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `KHopQueryOption` |   |
+
+
+### progressHandler
+
+#### 详细描述
+
+
+#### 定义
+
+`progressHandler(handler func(percent float64, message string, messageType string)) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handler | `func(percent float64, message string, messageType string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### queryCollection
