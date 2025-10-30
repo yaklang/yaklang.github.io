@@ -2,10 +2,10 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Java|(consts.Language) &#34;java&#34;|
-Javascript|(consts.Language) &#34;js&#34;|
-PHP|(consts.Language) &#34;php&#34;|
-Yak|(consts.Language) &#34;yak&#34;|
+Java|(ssaconfig.Language) &#34;java&#34;|
+Javascript|(ssaconfig.Language) &#34;js&#34;|
+PHP|(ssaconfig.Language) &#34;php&#34;|
+Yak|(ssaconfig.Language) &#34;yak&#34;|
 progName|(schema.SSADiffResultKind) &#34;program&#34;|
 runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
