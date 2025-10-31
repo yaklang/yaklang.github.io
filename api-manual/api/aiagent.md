@@ -19,24 +19,24 @@
 | [aiagent.agreePolicyAI](#agreepolicyai) ||
 | [aiagent.agreeYOLO](#agreeyolo) ||
 | [aiagent.aiAgree](#aiagree) ||
-| [aiagent.aiAutoRetry](#aiautoretry) ||
-| [aiagent.aiCallback](#aicallback) ||
+| [aiagent.aiAutoRetry](#aiautoretry) |WithAIAutoRetry sets AiAutoRetry count. |
+| [aiagent.aiCallback](#aicallback) |Callback setters |
 | [aiagent.aiForgeSearchTool](#aiforgesearchtool) ||
 | [aiagent.aiToolsSearchTool](#aitoolssearchtool) ||
-| [aiagent.aiTransactionRetry](#aitransactionretry) ||
-| [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) ||
-| [aiagent.appendPersistentMemory](#appendpersistentmemory) ||
+| [aiagent.aiTransactionRetry](#aitransactionretry) |WithAITransactionRetry alias to existing WithAITransactionAutoRetry for naming compatibility. |
+| [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) |Interactive / review / require_user |
+| [aiagent.appendPersistentMemory](#appendpersistentmemory) |WithAppendPersistentMemory appends keys to PersistentMemory. |
 | [aiagent.context](#context) ||
 | [aiagent.coordinatorAICallback](#coordinatoraicallback) ||
-| [aiagent.debug](#debug) ||
-| [aiagent.debugPrompt](#debugprompt) ||
-| [aiagent.disableOutputType](#disableoutputtype) ||
+| [aiagent.debug](#debug) |WithDebug toggles both prompt and event debug flags. |
+| [aiagent.debugPrompt](#debugprompt) |Debug flags |
+| [aiagent.disableOutputType](#disableoutputtype) |WithDisableOutputEvent is a name-compatible wrapper for disabling output event types. |
 | [aiagent.disableToolUse](#disabletooluse) ||
-| [aiagent.disallowRequireForUserPrompt](#disallowrequireforuserprompt) ||
-| [aiagent.eventHandler](#eventhandler) ||
-| [aiagent.eventInputChan](#eventinputchan) ||
+| [aiagent.disallowRequireForUserPrompt](#disallowrequireforuserprompt) |WithDisallowRequireForUserPrompt disables require-for-user-interact. |
+| [aiagent.eventHandler](#eventhandler) |Event / output |
+| [aiagent.eventInputChan](#eventinputchan) |WithEventInputChan sets a custom event input channel. |
 | [aiagent.extendAIDOptions](#extendaidoptions) ||
-| [aiagent.extendedActionCallback](#extendedactioncallback) ||
+| [aiagent.extendedActionCallback](#extendedactioncallback) |WithExtendedActionCallback sets the ExtendedActionCallback map. |
 | [aiagent.forgeName](#forgename) ||
 | [aiagent.forgePlanMocker](#forgeplanmocker) |WithPlanMocker 设置AI助手的计划生成器 |
 | [aiagent.forgeTools](#forgetools) |WithTools 为AI助手添加可用的工具 这些工具可以扩展AI的能力，使其能够执行特定的任务 |
@@ -48,24 +48,24 @@
 | [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) ||
 | [aiagent.liteForgePrompt](#liteforgeprompt) ||
 | [aiagent.liteForgedRequireParams](#liteforgedrequireparams) ||
-| [aiagent.manualAssistantCallback](#manualassistantcallback) ||
+| [aiagent.manualAssistantCallback](#manualassistantcallback) |WithManualAssistantCallback is an alias to the agree/manual callback setter. |
 | [aiagent.memory](#memory) ||
-| [aiagent.offsetSeq](#offsetseq) ||
+| [aiagent.offsetSeq](#offsetseq) |WithSequence sets the starting sequence/id and installs a simple id generator that increments it. |
 | [aiagent.omniSearchTool](#omnisearchtool) ||
 | [aiagent.originYaklangCliCode](#originyaklangclicode) |WithOriginYaklangCliCode 设置原始的Yaklang CLI代码 这个结构需要 Yak 引擎根据 CLI 代码构建出正确的用户需要输入的工具 这个结构是表单构建的核心依据，可以使用 Yak 原声插件基础设施直接构建表单 |
 | [aiagent.persistentPrompt](#persistentprompt) |WithPersistentPrompt 设置AI助手的持久提示词 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 |
 | [aiagent.persistentPromptForge](#persistentpromptforge) |WithPersistentPrompt 设置AI助手的持久提示词 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 |
 | [aiagent.plan](#plan) ||
 | [aiagent.planAICallback](#planaicallback) ||
-| [aiagent.resultHandler](#resulthandler) ||
+| [aiagent.resultHandler](#resulthandler) |cycle import issue |
 | [aiagent.resultHandlerForge](#resulthandlerforge) |WithResultHandler 设置AI助手的结果处理函数 这个函数会在AI助手生成结果后被调用，用于处理AI的输出 |
 | [aiagent.resultPrompt](#resultprompt) |WithResultPrompt 设置AI助手的生成结果提示词 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 |
 | [aiagent.resultPromptForge](#resultpromptforge) |WithResultPrompt 设置AI助手的生成结果提示词 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 |
 | [aiagent.systemFileOperator](#systemfileoperator) ||
 | [aiagent.taskAICallback](#taskaicallback) ||
-| [aiagent.timeLineLimit](#timelinelimit) ||
-| [aiagent.timelineContentLimit](#timelinecontentlimit) ||
-| [aiagent.tool](#tool) ||
+| [aiagent.timeLineLimit](#timelinelimit) |WithTimeLineLimit sets the timeline content size limit (deprecated name, kept for compatibility). |
+| [aiagent.timelineContentLimit](#timelinecontentlimit) |WithTimelineContentLimit sets timeline content size limit (keeps naming parity). |
+| [aiagent.tool](#tool) |WithTool is a convenience wrapper to add a single tool (delegates to WithTools). |
 | [aiagent.toolKeywords](#toolkeywords) |WithToolKeywords 设置AI助手的工具关键词 这些关键词可以扩展AI的能力，使其能够执行特定的任务 |
 | [aiagent.toolManager](#toolmanager) ||
 | [aiagent.tools](#tools) ||
@@ -184,12 +184,12 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`ExtractPlan(c *Config, rawResponse string) (*PlanResponse, error)`
+`ExtractPlan(c *Coordinator, rawResponse string) (*PlanResponse, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*Config` |   |
+| c | `*Coordinator` |   |
 | rawResponse | `string` |   |
 
 #### 返回值
@@ -312,17 +312,12 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`agreeAuto(interval time.Duration) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| interval | `time.Duration` |   |
+`agreeAuto() error`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `error` |   |
 
 
 ### agreeManual
@@ -332,17 +327,12 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`agreeManual(cb ...func(context.Context, *Config) (aitool.InvokeParams, error)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| cb | `...func(context.Context, *Config) (aitool.InvokeParams, error)` |   |
+`agreeManual() error`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `error` |   |
 
 
 ### agreePolicy
@@ -352,17 +342,17 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`agreePolicy(policy aicommon.AgreePolicyType) Option`
+`agreePolicy(p AgreePolicyType) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| policy | `aicommon.AgreePolicyType` |   |
+| p | `AgreePolicyType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### agreePolicyAI
@@ -387,17 +377,17 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`agreeYOLO(i ...bool) Option`
+`agreeYOLO(b ...bool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `...bool` |   |
+| b | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### aiAgree
@@ -418,41 +408,43 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 ### aiAutoRetry
 
 #### 详细描述
+WithAIAutoRetry sets AiAutoRetry count.
 
 
 #### 定义
 
-`aiAutoRetry(t int) Option`
+`aiAutoRetry(n int64) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `int` |   |
+| n | `int64` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### aiCallback
 
 #### 详细描述
+Callback setters
 
 
 #### 定义
 
-`aiCallback(cb aicommon.AICallbackType) Option`
+`aiCallback(cb AICallbackType) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `aicommon.AICallbackType` |   |
+| cb | `AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### aiForgeSearchTool
@@ -488,61 +480,64 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 ### aiTransactionRetry
 
 #### 详细描述
+WithAITransactionRetry alias to existing WithAITransactionAutoRetry for naming compatibility.
 
 
 #### 定义
 
-`aiTransactionRetry(t int) Option`
+`aiTransactionRetry(n int64) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `int` |   |
+| n | `int64` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### allowRequireForUserInteract
 
 #### 详细描述
+Interactive / review / require_user
 
 
 #### 定义
 
-`allowRequireForUserInteract(opts ...bool) Option`
+`allowRequireForUserInteract(v bool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...bool` |   |
+| v | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### appendPersistentMemory
 
 #### 详细描述
+WithAppendPersistentMemory appends keys to PersistentMemory.
 
 
 #### 定义
 
-`appendPersistentMemory(i ...string) Option`
+`appendPersistentMemory(keys ...string) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `...string` |   |
+| keys | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### context
@@ -572,77 +567,80 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`coordinatorAICallback(cb aicommon.AICallbackType) Option`
+`coordinatorAICallback(cb AICallbackType) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `aicommon.AICallbackType` |   |
+| cb | `AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### debug
 
 #### 详细描述
+WithDebug toggles both prompt and event debug flags.
 
 
 #### 定义
 
-`debug(i ...bool) Option`
+`debug(v bool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `...bool` |   |
+| v | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### debugPrompt
 
 #### 详细描述
+Debug flags
 
 
 #### 定义
 
-`debugPrompt(i ...bool) Option`
+`debugPrompt(v ...bool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `...bool` |   |
+| v | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### disableOutputType
 
 #### 详细描述
+WithDisableOutputEvent is a name-compatible wrapper for disabling output event types.
 
 
 #### 定义
 
-`disableOutputType(typeString ...string) Option`
+`disableOutputType(types ...string) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| typeString | `...string` |   |
+| types | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### disableToolUse
@@ -652,72 +650,75 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`disableToolUse(i ...bool) Option`
+`disableToolUse(disable bool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `...bool` |   |
+| disable | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### disallowRequireForUserPrompt
 
 #### 详细描述
+WithDisallowRequireForUserPrompt disables require-for-user-interact.
 
 
 #### 定义
 
-`disallowRequireForUserPrompt() error`
+`disallowRequireForUserPrompt() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### eventHandler
 
 #### 详细描述
+Event / output
 
 
 #### 定义
 
-`eventHandler(h func(e *schema.AiOutputEvent)) Option`
+`eventHandler(handler func(e *schema.AiOutputEvent)) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `func(e *schema.AiOutputEvent)` |   |
+| handler | `func(e *schema.AiOutputEvent)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### eventInputChan
 
 #### 详细描述
+WithEventInputChan sets a custom event input channel.
 
 
 #### 定义
 
-`eventInputChan(ch chan *InputEvent) Option`
+`eventInputChan(ch *chanx.UnlimitedChan[*ypb.AIInputEvent]) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ch | `chan *InputEvent` |   |
+| ch | `*chanx.UnlimitedChan[*ypb.AIInputEvent]` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### extendAIDOptions
@@ -727,12 +728,12 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 
 #### 定义
 
-`extendAIDOptions(opts ...aid.Option) AIAgentOption`
+`extendAIDOptions(opts ...aicommon.ConfigOption) AIAgentOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aid.Option` |   |
+| opts | `...aicommon.ConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -743,22 +744,23 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 ### extendedActionCallback
 
 #### 详细描述
+WithExtendedActionCallback sets the ExtendedActionCallback map.
 
 
 #### 定义
 
-`extendedActionCallback(name string, cb func(config *Config, action *aicommon.Action)) Option`
+`extendedActionCallback(name string, callback func(config *Config, action *Action)) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| cb | `func(config *Config, action *aicommon.Action)` |   |
+| callback | `func(config *Config, action *Action)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### forgeName
@@ -789,12 +791,12 @@ WithPlanMocker 设置AI助手的计划生成器
 
 #### 定义
 
-`forgePlanMocker(plan func(config *aid.Config) *aid.PlanResponse) Option`
+`forgePlanMocker(plan func(config *aid.Coordinator) *aid.PlanResponse) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| plan | `func(config *aid.Config) *aid.PlanResponse` |   |
+| plan | `func(config *aid.Coordinator) *aid.PlanResponse` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -982,11 +984,12 @@ WithInitializePrompt 设置AI助手的初始化提示词
 ### manualAssistantCallback
 
 #### 详细描述
+WithManualAssistantCallback is an alias to the agree/manual callback setter.
 
 
 #### 定义
 
-`manualAssistantCallback(cb func(context.Context, *Config) (aitool.InvokeParams, error)) Option`
+`manualAssistantCallback(cb func(context.Context, *Config) (aitool.InvokeParams, error)) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -996,7 +999,7 @@ WithInitializePrompt 设置AI助手的初始化提示词
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### memory
@@ -1006,27 +1009,28 @@ WithInitializePrompt 设置AI助手的初始化提示词
 
 #### 定义
 
-`memory(m *PromptContextProvider) Option`
+`memory(provider *PromptContextProvider) aicommon.ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| m | `*PromptContextProvider` |   |
+| provider | `*PromptContextProvider` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `aicommon.ConfigOption` |   |
 
 
 ### offsetSeq
 
 #### 详细描述
+WithSequence sets the starting sequence/id and installs a simple id generator that increments it.
 
 
 #### 定义
 
-`offsetSeq(seq int64) Option`
+`offsetSeq(seq int64) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1036,7 +1040,7 @@ WithInitializePrompt 设置AI助手的初始化提示词
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### omniSearchTool
@@ -1128,17 +1132,17 @@ WithPersistentPrompt 设置AI助手的持久提示词
 
 #### 定义
 
-`plan(i func(*Config) *PlanResponse) Option`
+`plan(i func(coordinator *Coordinator) *PlanResponse) aicommon.ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `func(*Config) *PlanResponse` |   |
+| i | `func(coordinator *Coordinator) *PlanResponse` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `aicommon.ConfigOption` |   |
 
 
 ### planAICallback
@@ -1148,37 +1152,38 @@ WithPersistentPrompt 设置AI助手的持久提示词
 
 #### 定义
 
-`planAICallback(cb aicommon.AICallbackType) Option`
+`planAICallback(cb AICallbackType) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `aicommon.AICallbackType` |   |
+| cb | `AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### resultHandler
 
 #### 详细描述
+cycle import issue
 
 
 #### 定义
 
-`resultHandler(h func(*Config)) Option`
+`resultHandler(h func(c *Coordinator)) aicommon.ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `func(*Config)` |   |
+| h | `func(c *Coordinator)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `aicommon.ConfigOption` |   |
 
 
 ### resultHandlerForge
@@ -1269,67 +1274,70 @@ WithResultPrompt 设置AI助手的生成结果提示词
 
 #### 定义
 
-`taskAICallback(cb aicommon.AICallbackType) Option`
+`taskAICallback(cb AICallbackType) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `aicommon.AICallbackType` |   |
+| cb | `AICallbackType` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### timeLineLimit
 
 #### 详细描述
+WithTimeLineLimit sets the timeline content size limit (deprecated name, kept for compatibility).
 
 
 #### 定义
 
-`timeLineLimit(config *Config) error`
+`timeLineLimit(limit int) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| config | `*Config` |   |
+| limit | `int` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### timelineContentLimit
 
 #### 详细描述
+WithTimelineContentLimit sets timeline content size limit (keeps naming parity).
 
 
 #### 定义
 
-`timelineContentLimit(i int) Option`
+`timelineContentLimit(limit int) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `int` |   |
+| limit | `int` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### tool
 
 #### 详细描述
+WithTool is a convenience wrapper to add a single tool (delegates to WithTools).
 
 
 #### 定义
 
-`tool(tool *aitool.Tool) Option`
+`tool(tool *aitool.Tool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1339,7 +1347,7 @@ WithResultPrompt 设置AI助手的生成结果提示词
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### toolKeywords
@@ -1371,17 +1379,17 @@ WithToolKeywords 设置AI助手的工具关键词
 
 #### 定义
 
-`toolManager(manager *buildinaitools.AiToolManager) Option`
+`toolManager(tm *buildinaitools.AiToolManager) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| manager | `*buildinaitools.AiToolManager` |   |
+| tm | `*buildinaitools.AiToolManager` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 
 ### tools
@@ -1391,7 +1399,7 @@ WithToolKeywords 设置AI助手的工具关键词
 
 #### 定义
 
-`tools(tool ...*aitool.Tool) Option`
+`tools(tool ...*aitool.Tool) ConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1401,6 +1409,6 @@ WithToolKeywords 设置AI助手的工具关键词
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ConfigOption` |   |
 
 

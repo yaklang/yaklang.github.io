@@ -7,6 +7,7 @@
 | [ai.FunctionCall](#functioncall) ||
 | [ai.ListModelByProviderType](#listmodelbyprovidertype) ||
 | [ai.ListModels](#listmodels) ||
+| [ai.LoadAIService](#loadaiservice) ||
 | [ai.Moonshot](#moonshot) ||
 | [ai.OpenAI](#openai) ||
 | [ai.StructuredStream](#structuredstream) ||
@@ -132,6 +133,28 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*aispec.ModelMeta` |   |
+| r2 | `error` |   |
+
+
+### LoadAIService
+
+#### 详细描述
+
+
+#### 定义
+
+`LoadAIService(typeName string, opts ...aispec.AIConfigOption) (AICallbackType, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typeName | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AICallbackType` |   |
 | r2 | `error` |   |
 
 

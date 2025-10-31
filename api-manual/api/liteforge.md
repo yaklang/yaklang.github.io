@@ -466,12 +466,12 @@ PROMPT, liteforge.verboseName(&#34;my-forge-instance&#34;))
 
 #### 定义
 
-`verboseName(opts ...aid.Option) LiteForgeExecOption`
+`verboseName(opts ...aicommon.ConfigOption) LiteForgeExecOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aid.Option` |   |
+| opts | `...aicommon.ConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

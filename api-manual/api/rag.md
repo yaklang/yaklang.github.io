@@ -36,6 +36,7 @@
 | [rag.getEntityFilter](#getentityfilter) ||
 | [rag.importName](#importname) ||
 | [rag.importOverwrite](#importoverwrite) ||
+| [rag.importRebuildGraph](#importrebuildgraph) ||
 | [rag.khopLimit](#khoplimit) ||
 | [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
 | [rag.khopkMax](#khopkmax) |WithKHopKMax 设置最大路径长度，最小值为2 |
@@ -839,6 +840,26 @@ Example:
 #### 定义
 
 `importOverwrite(b bool) RAGExportOptionFunc`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGExportOptionFunc` |   |
+
+
+### importRebuildGraph
+
+#### 详细描述
+
+
+#### 定义
+
+`importRebuildGraph(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
