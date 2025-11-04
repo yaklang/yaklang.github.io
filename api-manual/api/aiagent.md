@@ -18,11 +18,8 @@
 | [aiagent.agreePolicy](#agreepolicy) ||
 | [aiagent.agreePolicyAI](#agreepolicyai) ||
 | [aiagent.agreeYOLO](#agreeyolo) ||
-| [aiagent.aiAgree](#aiagree) ||
 | [aiagent.aiAutoRetry](#aiautoretry) |WithAIAutoRetry sets AiAutoRetry count. |
 | [aiagent.aiCallback](#aicallback) |Callback setters |
-| [aiagent.aiForgeSearchTool](#aiforgesearchtool) ||
-| [aiagent.aiToolsSearchTool](#aitoolssearchtool) ||
 | [aiagent.aiTransactionRetry](#aitransactionretry) |WithAITransactionRetry alias to existing WithAITransactionAutoRetry for naming compatibility. |
 | [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) |Interactive / review / require_user |
 | [aiagent.appendPersistentMemory](#appendpersistentmemory) |WithAppendPersistentMemory appends keys to PersistentMemory. |
@@ -33,8 +30,6 @@
 | [aiagent.disableOutputType](#disableoutputtype) |WithDisableOutputEvent is a name-compatible wrapper for disabling output event types. |
 | [aiagent.disableToolUse](#disabletooluse) ||
 | [aiagent.disallowRequireForUserPrompt](#disallowrequireforuserprompt) |WithDisallowRequireForUserPrompt disables require-for-user-interact. |
-| [aiagent.eventHandler](#eventhandler) |Event / output |
-| [aiagent.eventInputChan](#eventinputchan) |WithEventInputChan sets a custom event input channel. |
 | [aiagent.extendAIDOptions](#extendaidoptions) ||
 | [aiagent.extendedActionCallback](#extendedactioncallback) |WithExtendedActionCallback sets the ExtendedActionCallback map. |
 | [aiagent.forgeName](#forgename) ||
@@ -42,14 +37,11 @@
 | [aiagent.forgeTools](#forgetools) |WithTools 为AI助手添加可用的工具 这些工具可以扩展AI的能力，使其能够执行特定的任务 |
 | [aiagent.initPrompt](#initprompt) |WithInitializePrompt 设置AI助手的初始化提示词 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 |
 | [aiagent.initializePrompt](#initializeprompt) |WithInitializePrompt 设置AI助手的初始化提示词 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 |
-| [aiagent.jarOperator](#jaroperator) ||
-| [aiagent.liteForgeOutputMemoryOP](#liteforgeoutputmemoryop) ||
 | [aiagent.liteForgeOutputSchema](#liteforgeoutputschema) ||
 | [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) ||
 | [aiagent.liteForgePrompt](#liteforgeprompt) ||
 | [aiagent.liteForgedRequireParams](#liteforgedrequireparams) ||
 | [aiagent.manualAssistantCallback](#manualassistantcallback) |WithManualAssistantCallback is an alias to the agree/manual callback setter. |
-| [aiagent.memory](#memory) ||
 | [aiagent.offsetSeq](#offsetseq) |WithSequence sets the starting sequence/id and installs a simple id generator that increments it. |
 | [aiagent.omniSearchTool](#omnisearchtool) ||
 | [aiagent.originYaklangCliCode](#originyaklangclicode) |WithOriginYaklangCliCode 设置原始的Yaklang CLI代码 这个结构需要 Yak 引擎根据 CLI 代码构建出正确的用户需要输入的工具 这个结构是表单构建的核心依据，可以使用 Yak 原声插件基础设施直接构建表单 |
@@ -63,11 +55,9 @@
 | [aiagent.resultPromptForge](#resultpromptforge) |WithResultPrompt 设置AI助手的生成结果提示词 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 |
 | [aiagent.systemFileOperator](#systemfileoperator) ||
 | [aiagent.taskAICallback](#taskaicallback) ||
-| [aiagent.timeLineLimit](#timelinelimit) |WithTimeLineLimit sets the timeline content size limit (deprecated name, kept for compatibility). |
 | [aiagent.timelineContentLimit](#timelinecontentlimit) |WithTimelineContentLimit sets timeline content size limit (keeps naming parity). |
 | [aiagent.tool](#tool) |WithTool is a convenience wrapper to add a single tool (delegates to WithTools). |
 | [aiagent.toolKeywords](#toolkeywords) |WithToolKeywords 设置AI助手的工具关键词 这些关键词可以扩展AI的能力，使其能够执行特定的任务 |
-| [aiagent.toolManager](#toolmanager) ||
 | [aiagent.tools](#tools) ||
 
 
@@ -390,21 +380,6 @@ ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这�
 | r1 | `ConfigOption` |   |
 
 
-### aiAgree
-
-#### 详细描述
-
-
-#### 定义
-
-`aiAgree() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
-
-
 ### aiAutoRetry
 
 #### 详细描述
@@ -445,36 +420,6 @@ Callback setters
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ConfigOption` |   |
-
-
-### aiForgeSearchTool
-
-#### 详细描述
-
-
-#### 定义
-
-`aiForgeSearchTool() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
-
-
-### aiToolsSearchTool
-
-#### 详细描述
-
-
-#### 定义
-
-`aiToolsSearchTool() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
 
 
 ### aiTransactionRetry
@@ -679,48 +624,6 @@ WithDisallowRequireForUserPrompt disables require-for-user-interact.
 | r1 | `ConfigOption` |   |
 
 
-### eventHandler
-
-#### 详细描述
-Event / output
-
-
-#### 定义
-
-`eventHandler(handler func(e *schema.AiOutputEvent)) ConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| handler | `func(e *schema.AiOutputEvent)` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
-
-
-### eventInputChan
-
-#### 详细描述
-WithEventInputChan sets a custom event input channel.
-
-
-#### 定义
-
-`eventInputChan(ch *chanx.UnlimitedChan[*ypb.AIInputEvent]) ConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ch | `*chanx.UnlimitedChan[*ypb.AIInputEvent]` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
-
-
 ### extendAIDOptions
 
 #### 详细描述
@@ -870,36 +773,6 @@ WithInitializePrompt 设置AI助手的初始化提示词
 | r1 | `Option` |   |
 
 
-### jarOperator
-
-#### 详细描述
-
-
-#### 定义
-
-`jarOperator() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
-
-
-### liteForgeOutputMemoryOP
-
-#### 详细描述
-
-
-#### 定义
-
-`liteForgeOutputMemoryOP() error`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` |   |
-
-
 ### liteForgeOutputSchema
 
 #### 详细描述
@@ -1000,26 +873,6 @@ WithManualAssistantCallback is an alias to the agree/manual callback setter.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ConfigOption` |   |
-
-
-### memory
-
-#### 详细描述
-
-
-#### 定义
-
-`memory(provider *PromptContextProvider) aicommon.ConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| provider | `*PromptContextProvider` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `aicommon.ConfigOption` |   |
 
 
 ### offsetSeq
@@ -1287,27 +1140,6 @@ WithResultPrompt 设置AI助手的生成结果提示词
 | r1 | `ConfigOption` |   |
 
 
-### timeLineLimit
-
-#### 详细描述
-WithTimeLineLimit sets the timeline content size limit (deprecated name, kept for compatibility).
-
-
-#### 定义
-
-`timeLineLimit(limit int) ConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| limit | `int` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
-
-
 ### timelineContentLimit
 
 #### 详细描述
@@ -1370,26 +1202,6 @@ WithToolKeywords 设置AI助手的工具关键词
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `Option` |   |
-
-
-### toolManager
-
-#### 详细描述
-
-
-#### 定义
-
-`toolManager(tm *buildinaitools.AiToolManager) ConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| tm | `*buildinaitools.AiToolManager` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
 
 
 ### tools
