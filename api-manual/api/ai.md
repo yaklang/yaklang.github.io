@@ -7,7 +7,7 @@
 | [ai.FunctionCall](#functioncall) ||
 | [ai.ListModelByProviderType](#listmodelbyprovidertype) ||
 | [ai.ListModels](#listmodels) ||
-| [ai.MockAIService](#mockaiservice) ||
+| [ai.LoadAIService](#loadaiservice) ||
 | [ai.Moonshot](#moonshot) ||
 | [ai.OpenAI](#openai) ||
 | [ai.StructuredStream](#structuredstream) ||
@@ -136,24 +136,26 @@
 | r2 | `error` |   |
 
 
-### MockAIService
+### LoadAIService
 
 #### 详细描述
 
 
 #### 定义
 
-`MockAIService(handle func(message string) string) aicommon.AICallbackType`
+`LoadAIService(typeName string, opts ...aispec.AIConfigOption) (AICallbackType, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| handle | `func(message string) string` |   |
+| typeName | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `aicommon.AICallbackType` |   |
+| r1 | `AICallbackType` |   |
+| r2 | `error` |   |
 
 
 ### Moonshot
