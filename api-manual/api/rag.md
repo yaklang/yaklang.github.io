@@ -12,31 +12,29 @@
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
 | [rag.EnableMockMode](#enablemockmode) ||
 | [rag.Export](#export) ||
-| [rag.Get](#get) ||
 | [rag.GetCollection](#getcollection) ||
 | [rag.GetCollectionInfo](#getcollectioninfo) |_getCollectionInfo 获取指定集合的详细信息  |
 | [rag.HasCollection](#hascollection) |_hasCollection 检查指定集合是否存在  |
-| [rag.Import](#import) ||
+| [rag.Import](#import) |ImportRAGFromFile 从二进制文件导入RAG数据，支持从文件路径导入 |
 | [rag.ListCollection](#listcollection) |_listCollection 获取所有 RAG 集合列表  |
 | [rag.NewRagDatabase](#newragdatabase) ||
 | [rag.NewTempRagDatabase](#newtempragdatabase) |_newTempRagDatabase 创建临时 RAG 数据库  |
 | [rag.Query](#query) ||
 | [rag.QueryDocuments](#querydocuments) |_queryDocuments 在指定集合中查询文档  |
-| [rag.aiService](#aiservice) ||
-| [rag.aiServiceType](#aiservicetype) ||
+| [rag.QueryDocumentsWithAISummary](#querydocumentswithaisummary) |_queryDocumentsWithAISummary 在指定集合中查询文档并生成 AI 摘要  |
 | [rag.buildFilter](#buildfilter) ||
 | [rag.buildQuery](#buildquery) ||
 | [rag.chunkSize](#chunksize) ||
 | [rag.ctx](#ctx) ||
 | [rag.db](#db) ||
-| [rag.docMetadata](#docmetadata) |WithDocumentMetadataKeyValue sets document metadata key-value pairs |
-| [rag.docRawMetadata](#docrawmetadata) |WithDocumentRawMetadata sets raw document metadata |
+| [rag.docMetadata](#docmetadata) ||
+| [rag.docRawMetadata](#docrawmetadata) ||
 | [rag.documentHandler](#documenthandler) ||
 | [rag.embeddingHandle](#embeddinghandle) |_embeddingHandle 创建自定义嵌入处理器  |
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
 | [rag.getEntityFilter](#getentityfilter) ||
-| [rag.importName](#importname) |WithRAGCollectionName sets the specific collection name to query |
+| [rag.importName](#importname) ||
 | [rag.importOverwrite](#importoverwrite) ||
 | [rag.importRebuildGraph](#importrebuildgraph) ||
 | [rag.khopLimit](#khoplimit) ||
@@ -44,29 +42,26 @@
 | [rag.khopkMax](#khopkmax) |WithKHopKMax 设置最大路径长度，最小值为2 |
 | [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
 | [rag.log](#log) ||
-| [rag.noEntityRepository](#noentityrepository) |_noEntityRepository 禁用实体仓库  |
 | [rag.noHNSWGraph](#nohnswgraph) ||
-| [rag.noKnowledgeBase](#noknowledgebase) |_noKnowledgeBase 禁用知识库  |
-| [rag.noMetadata](#nometadata) ||
+| [rag.noMetadata](#nometadata) |RAG 配置选项 |
 | [rag.noOriginInput](#noorigininput) ||
 | [rag.onlyPQCode](#onlypqcode) ||
 | [rag.pathDepth](#pathdepth) ||
 | [rag.progressHandler](#progresshandler) ||
-| [rag.queryCollection](#querycollection) |WithRAGCollectionName sets the specific collection name to query |
-| [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent sets the concurrency level for query operations |
-| [rag.queryCtx](#queryctx) |WithRAGCtx sets the context for RAG query operations |
-| [rag.queryEnhance](#queryenhance) |WithRAGEnhance sets the enhancement strategies to apply |
-| [rag.queryLimit](#querylimit) |WithRAGLimit sets the maximum number of results to return |
-| [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit sets the score limit for collection filtering |
-| [rag.queryStatus](#querystatus) |WithRAGQueryStatus sets the query status callback function |
-| [rag.queryType](#querytype) |WithRAGDocumentType sets the document type filter |
+| [rag.queryCollection](#querycollection) |WithRAGCollectionName 指定搜索的集合名称 |
+| [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent 设置并发数 |
+| [rag.queryCtx](#queryctx) |WithRAGCtx 设置上下文 |
+| [rag.queryEnhance](#queryenhance) |WithRAGEnhance 启用或禁用增强搜索 |
+| [rag.queryLimit](#querylimit) |WithRAGLimit 设置查询结果限制 |
+| [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit 设置集合搜索分数阈值 |
+| [rag.queryStatus](#querystatus) ||
+| [rag.queryType](#querytype) ||
 | [rag.ragCosineDistance](#ragcosinedistance) ||
 | [rag.ragDescription](#ragdescription) ||
-| [rag.ragEmbeddingModel](#ragembeddingmodel) ||
-| [rag.ragForceNew](#ragforcenew) |WithForceNew sets whether to force creation of new collection |
-| [rag.ragHNSWParameters](#raghnswparameters) |WithHNSWParameters sets HNSW parameters |
-| [rag.ragImportFile](#ragimportfile) ||
-| [rag.ragModelDimension](#ragmodeldimension) |WithModelDimension sets the model dimension |
+| [rag.ragEmbeddingModel](#ragembeddingmodel) |WithEmbeddingModel 设置embedding模型 |
+| [rag.ragForceNew](#ragforcenew) ||
+| [rag.ragHNSWParameters](#raghnswparameters) |WithHNSWParameters 批量设置HNSW参数 |
+| [rag.ragModelDimension](#ragmodeldimension) |WithModelDimension 设置模型维度 |
 | [rag.statusCard](#statuscard) ||
 
 
@@ -86,7 +81,7 @@ Example:
 
 #### 定义
 
-`AddDocument(knowledgeBaseName string, documentName string, document string, metadata map[string]any, opts ...rag.RAGSystemConfigOption) error`
+`AddDocument(knowledgeBaseName string, documentName string, document string, metadata map[string]any, opts ...any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -95,7 +90,7 @@ Example:
 | documentName | `string` |   |
 | document | `string` |   |
 | metadata | `map[string]any` |   |
-| opts | `...rag.RAGSystemConfigOption` |   |
+| opts | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -179,7 +174,7 @@ Example:
 
 #### 定义
 
-`BuildIndexKnowledgeFromFile(kbName string, path string, option ...any) error`
+`BuildIndexKnowledgeFromFile(kbName string, path string, option ...any) (&lt;-chan *schema.KnowledgeBaseEntry, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -191,7 +186,8 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
 
 
 ### BuildKnowledgeFromEntityRepos
@@ -259,14 +255,14 @@ Example:
 
 #### 定义
 
-`DeleteDocument(knowledgeBaseName string, documentName string, opts ...rag.RAGSystemConfigOption) error`
+`DeleteDocument(knowledgeBaseName string, documentName string, opts ...any) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | knowledgeBaseName | `string` |   |
 | documentName | `string` |   |
-| opts | `...rag.RAGSystemConfigOption` |   |
+| opts | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -291,41 +287,19 @@ Example:
 
 #### 定义
 
-`Export(collectionName string, fileName string, opts ...RAGSystemConfigOption) error`
+`Export(collectionName string, fileName string, opts ...RAGExportOptionFunc) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | collectionName | `string` |   |
 | fileName | `string` |   |
-| opts | `...RAGSystemConfigOption` |   |
+| opts | `...RAGExportOptionFunc` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
-
-
-### Get
-
-#### 详细描述
-
-
-#### 定义
-
-`Get(name string, opts ...RAGSystemConfigOption) (*RAGSystem, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| name | `string` |   |
-| opts | `...RAGSystemConfigOption` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*RAGSystem` |   |
-| r2 | `error` |   |
 
 
 ### GetCollection
@@ -335,13 +309,13 @@ Example:
 
 #### 定义
 
-`GetCollection(name string, opts ...RAGSystemConfigOption) (*RAGSystem, error)`
+`GetCollection(name string, i ...any) (*RAGSystem, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
-| opts | `...RAGSystemConfigOption` |   |
+| i | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -365,7 +339,7 @@ Example:
 
 #### 定义
 
-`GetCollectionInfo(name string) (*vectorstore.CollectionInfo, error)`
+`GetCollectionInfo(name string) (*rag.CollectionInfo, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -375,7 +349,7 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*vectorstore.CollectionInfo` |   |
+| r1 | `*rag.CollectionInfo` |   |
 | r2 | `error` |   |
 
 
@@ -410,17 +384,18 @@ Example:
 ### Import
 
 #### 详细描述
+ImportRAGFromFile 从二进制文件导入RAG数据，支持从文件路径导入
 
 
 #### 定义
 
-`Import(inputPath string, optFuncs ...RAGSystemConfigOption) error`
+`Import(inputPath string, optFuncs ...RAGExportOptionFunc) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | inputPath | `string` |   |
-| optFuncs | `...RAGSystemConfigOption` |   |
+| optFuncs | `...RAGExportOptionFunc` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -503,13 +478,13 @@ Example:
 
 #### 定义
 
-`Query(query string, opts ...RAGSystemConfigOption) (&lt;-chan *RAGSearchResult, error)`
+`Query(query string, opts ...RAGQueryOption) (&lt;-chan *RAGSearchResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | query | `string` |   |
-| opts | `...RAGSystemConfigOption` |   |
+| opts | `...RAGQueryOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -533,7 +508,7 @@ Example:
 
 #### 定义
 
-`QueryDocuments(knowledgeBaseName string, query string, limit int, opts ...rag.RAGSystemConfigOption) ([]*rag.SearchResult, error)`
+`QueryDocuments(knowledgeBaseName string, query string, limit int, opts ...any) ([]rag.SearchResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -541,54 +516,45 @@ Example:
 | knowledgeBaseName | `string` |   |
 | query | `string` |   |
 | limit | `int` |   |
-| opts | `...rag.RAGSystemConfigOption` |   |
+| opts | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*rag.SearchResult` |   |
+| r1 | `[]rag.SearchResult` |   |
 | r2 | `error` |   |
 
 
-### aiService
+### QueryDocumentsWithAISummary
 
 #### 详细描述
+_queryDocumentsWithAISummary 在指定集合中查询文档并生成 AI 摘要
+
+Example:
+```
+
+	summary, err = rag.QueryDocumentsWithAISummary("my_collection", "query", 10)
+
+```
 
 
 #### 定义
 
-`aiService(aiService aicommon.AICallbackType) RAGSystemConfigOption`
+`QueryDocumentsWithAISummary(knowledgeBaseName string, query string, limit int, opts ...any) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| aiService | `aicommon.AICallbackType` |   |
+| knowledgeBaseName | `string` |   |
+| query | `string` |   |
+| limit | `int` |   |
+| opts | `...any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
-
-
-### aiServiceType
-
-#### 详细描述
-
-
-#### 定义
-
-`aiServiceType(aiServiceName string, aiServiceConfig ...aispec.AIConfigOption) RAGSystemConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| aiServiceName | `string` |   |
-| aiServiceConfig | `...aispec.AIConfigOption` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
 ### buildFilter
@@ -598,7 +564,7 @@ Example:
 
 #### 定义
 
-`buildFilter(filter *ypb.EntityFilter) RAGSystemConfigOption`
+`buildFilter(filter *ypb.EntityFilter) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -608,7 +574,7 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### buildQuery
@@ -618,7 +584,7 @@ Example:
 
 #### 定义
 
-`buildQuery(query string) RAGSystemConfigOption`
+`buildQuery(query string) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -628,7 +594,7 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### chunkSize
@@ -678,7 +644,7 @@ Example:
 
 #### 定义
 
-`db(db *gorm.DB) RAGSystemConfigOption`
+`db(db *gorm.DB) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -688,18 +654,17 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### docMetadata
 
 #### 详细描述
-WithDocumentMetadataKeyValue sets document metadata key-value pairs
 
 
 #### 定义
 
-`docMetadata(key string, value any) RAGSystemConfigOption`
+`docMetadata(key string, value any) DocumentOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -710,28 +675,27 @@ WithDocumentMetadataKeyValue sets document metadata key-value pairs
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `DocumentOption` |   |
 
 
 ### docRawMetadata
 
 #### 详细描述
-WithDocumentRawMetadata sets raw document metadata
 
 
 #### 定义
 
-`docRawMetadata(metadata map[string]any) RAGSystemConfigOption`
+`docRawMetadata(i map[string]any) DocumentOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| metadata | `map[string]any` |   |
+| i | `map[string]any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `DocumentOption` |   |
 
 
 ### documentHandler
@@ -741,17 +705,17 @@ WithDocumentRawMetadata sets raw document metadata
 
 #### 定义
 
-`documentHandler(documentHandler func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)) RAGSystemConfigOption`
+`documentHandler(handler func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| documentHandler | `func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)` |   |
+| handler | `func(doc schema.VectorStoreDocument) (schema.VectorStoreDocument, error)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### embeddingHandle
@@ -771,7 +735,7 @@ Example:
 
 #### 定义
 
-`embeddingHandle(handle func(text string) any) rag.RAGSystemConfigOption`
+`embeddingHandle(handle func(text string) any) rag.RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -781,7 +745,7 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `rag.RAGSystemConfigOption` |   |
+| r1 | `rag.RAGOption` |   |
 
 
 ### entryLength
@@ -851,22 +815,21 @@ Example:
 ### importName
 
 #### 详细描述
-WithRAGCollectionName sets the specific collection name to query
 
 
 #### 定义
 
-`importName(collectionName string) RAGSystemConfigOption`
+`importName(name string) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| collectionName | `string` |   |
+| name | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### importOverwrite
@@ -876,17 +839,17 @@ WithRAGCollectionName sets the specific collection name to query
 
 #### 定义
 
-`importOverwrite(overwriteExisting bool) RAGSystemConfigOption`
+`importOverwrite(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| overwriteExisting | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### importRebuildGraph
@@ -896,17 +859,17 @@ WithRAGCollectionName sets the specific collection name to query
 
 #### 定义
 
-`importRebuildGraph(rebuildHNSWIndex bool) RAGSystemConfigOption`
+`importRebuildGraph(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| rebuildHNSWIndex | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### khopLimit
@@ -916,7 +879,7 @@ WithRAGCollectionName sets the specific collection name to query
 
 #### 定义
 
-`khopLimit(k int) RAGSystemConfigOption`
+`khopLimit(k int) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -926,7 +889,7 @@ WithRAGCollectionName sets the specific collection name to query
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### khopk
@@ -937,7 +900,7 @@ WithKHopK 设置k-hop的跳数，k&gt;=2时返回k-hop路径，k=0返回所有�
 
 #### 定义
 
-`khopk(k int) RAGSystemConfigOption`
+`khopk(k int) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -947,7 +910,7 @@ WithKHopK 设置k-hop的跳数，k&gt;=2时返回k-hop路径，k=0返回所有�
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### khopkMax
@@ -958,7 +921,7 @@ WithKHopKMax 设置最大路径长度，最小值为2
 
 #### 定义
 
-`khopkMax(kMax int) RAGSystemConfigOption`
+`khopkMax(kMax int) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -968,7 +931,7 @@ WithKHopKMax 设置最大路径长度，最小值为2
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### khopkMin
@@ -979,7 +942,7 @@ WithKHopKMin 设置最小路径长度，最小值为2
 
 #### 定义
 
-`khopkMin(kMin int) RAGSystemConfigOption`
+`khopkMin(kMin int) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -989,7 +952,7 @@ WithKHopKMin 设置最小路径长度，最小值为2
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### log
@@ -1012,29 +975,6 @@ WithKHopKMin 设置最小路径长度，最小值为2
 | r1 | `AnalysisOption` |   |
 
 
-### noEntityRepository
-
-#### 详细描述
-_noEntityRepository 禁用实体仓库
-
-Example:
-```
-
-	rag.noEntityRepository()
-
-```
-
-
-#### 定义
-
-`noEntityRepository() rag.RAGSystemConfigOption`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `rag.RAGSystemConfigOption` |   |
-
-
 ### noHNSWGraph
 
 #### 详细描述
@@ -1042,60 +982,38 @@ Example:
 
 #### 定义
 
-`noHNSWGraph(noHNSWGraph bool) RAGSystemConfigOption`
+`noHNSWGraph(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| noHNSWGraph | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
-
-
-### noKnowledgeBase
-
-#### 详细描述
-_noKnowledgeBase 禁用知识库
-
-Example:
-```
-
-	rag.noKnowledgeBase()
-
-```
-
-
-#### 定义
-
-`noKnowledgeBase() rag.RAGSystemConfigOption`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `rag.RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### noMetadata
 
 #### 详细描述
+RAG 配置选项
 
 
 #### 定义
 
-`noMetadata(noMetadata bool) RAGSystemConfigOption`
+`noMetadata(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| noMetadata | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### noOriginInput
@@ -1105,17 +1023,17 @@ Example:
 
 #### 定义
 
-`noOriginInput(noOriginInput bool) RAGSystemConfigOption`
+`noOriginInput(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| noOriginInput | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### onlyPQCode
@@ -1125,17 +1043,17 @@ Example:
 
 #### 定义
 
-`onlyPQCode(onlyPQCode bool) RAGSystemConfigOption`
+`onlyPQCode(b bool) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| onlyPQCode | `bool` |   |
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### pathDepth
@@ -1145,7 +1063,7 @@ Example:
 
 #### 定义
 
-`pathDepth(deep int) RAGSystemConfigOption`
+`pathDepth(deep int) KHopQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1155,7 +1073,7 @@ Example:
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `KHopQueryOption` |   |
 
 
 ### progressHandler
@@ -1165,28 +1083,28 @@ Example:
 
 #### 定义
 
-`progressHandler(progressHandler func(percent float64, message string, messageType string)) RAGSystemConfigOption`
+`progressHandler(handler func(percent float64, message string, messageType string)) RAGExportOptionFunc`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| progressHandler | `func(percent float64, message string, messageType string)` |   |
+| handler | `func(percent float64, message string, messageType string)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGExportOptionFunc` |   |
 
 
 ### queryCollection
 
 #### 详细描述
-WithRAGCollectionName sets the specific collection name to query
+WithRAGCollectionName 指定搜索的集合名称
 
 
 #### 定义
 
-`queryCollection(collectionName string) RAGSystemConfigOption`
+`queryCollection(collectionName string) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1196,18 +1114,18 @@ WithRAGCollectionName sets the specific collection name to query
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryConcurrent
 
 #### 详细描述
-WithRAGConcurrent sets the concurrency level for query operations
+WithRAGConcurrent 设置并发数
 
 
 #### 定义
 
-`queryConcurrent(concurrent int) RAGSystemConfigOption`
+`queryConcurrent(concurrent int) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1217,18 +1135,18 @@ WithRAGConcurrent sets the concurrency level for query operations
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryCtx
 
 #### 详细描述
-WithRAGCtx sets the context for RAG query operations
+WithRAGCtx 设置上下文
 
 
 #### 定义
 
-`queryCtx(ctx context.Context) RAGSystemConfigOption`
+`queryCtx(ctx context.Context) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1238,39 +1156,39 @@ WithRAGCtx sets the context for RAG query operations
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryEnhance
 
 #### 详细描述
-WithRAGEnhance sets the enhancement strategies to apply
+WithRAGEnhance 启用或禁用增强搜索
 
 
 #### 定义
 
-`queryEnhance(enhance ...string) RAGSystemConfigOption`
+`queryEnhance(enhancePlan ...string) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| enhance | `...string` |   |
+| enhancePlan | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryLimit
 
 #### 详细描述
-WithRAGLimit sets the maximum number of results to return
+WithRAGLimit 设置查询结果限制
 
 
 #### 定义
 
-`queryLimit(limit int) RAGSystemConfigOption`
+`queryLimit(limit int) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1280,18 +1198,18 @@ WithRAGLimit sets the maximum number of results to return
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryScoreLimit
 
 #### 详细描述
-WithRAGCollectionScoreLimit sets the score limit for collection filtering
+WithRAGCollectionScoreLimit 设置集合搜索分数阈值
 
 
 #### 定义
 
-`queryScoreLimit(scoreLimit float64) RAGSystemConfigOption`
+`queryScoreLimit(scoreLimit float64) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1301,39 +1219,37 @@ WithRAGCollectionScoreLimit sets the score limit for collection filtering
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryStatus
 
 #### 详细描述
-WithRAGQueryStatus sets the query status callback function
 
 
 #### 定义
 
-`queryStatus(callback func(label string, i any, tags ...string)) RAGSystemConfigOption`
+`queryStatus(i func(label string, i any, tags ...string)) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| callback | `func(label string, i any, tags ...string)` |   |
+| i | `func(label string, i any, tags ...string)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### queryType
 
 #### 详细描述
-WithRAGDocumentType sets the document type filter
 
 
 #### 定义
 
-`queryType(documentType ...string) RAGSystemConfigOption`
+`queryType(documentType ...string) RAGQueryOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1343,7 +1259,7 @@ WithRAGDocumentType sets the document type filter
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGQueryOption` |   |
 
 
 ### ragCosineDistance
@@ -1363,7 +1279,7 @@ WithRAGDocumentType sets the document type filter
 
 #### 定义
 
-`ragDescription(description string) RAGSystemConfigOption`
+`ragDescription(description string) RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1373,17 +1289,18 @@ WithRAGDocumentType sets the document type filter
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGOption` |   |
 
 
 ### ragEmbeddingModel
 
 #### 详细描述
+WithEmbeddingModel 设置embedding模型
 
 
 #### 定义
 
-`ragEmbeddingModel(model string) RAGSystemConfigOption`
+`ragEmbeddingModel(model string) RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1393,39 +1310,38 @@ WithRAGDocumentType sets the document type filter
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGOption` |   |
 
 
 ### ragForceNew
 
 #### 详细描述
-WithForceNew sets whether to force creation of new collection
 
 
 #### 定义
 
-`ragForceNew(force bool) RAGSystemConfigOption`
+`ragForceNew(i ...bool) RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| force | `bool` |   |
+| i | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGOption` |   |
 
 
 ### ragHNSWParameters
 
 #### 详细描述
-WithHNSWParameters sets HNSW parameters
+WithHNSWParameters 批量设置HNSW参数
 
 
 #### 定义
 
-`ragHNSWParameters(m int, ml float64, efSearch int, efConstruct int) RAGSystemConfigOption`
+`ragHNSWParameters(m int, ml float64, efSearch int, efConstruct int) RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1438,38 +1354,18 @@ WithHNSWParameters sets HNSW parameters
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
-
-
-### ragImportFile
-
-#### 详细描述
-
-
-#### 定义
-
-`ragImportFile(importFile string) RAGSystemConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| importFile | `string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGOption` |   |
 
 
 ### ragModelDimension
 
 #### 详细描述
-WithModelDimension sets the model dimension
+WithModelDimension 设置模型维度
 
 
 #### 定义
 
-`ragModelDimension(dimension int) RAGSystemConfigOption`
+`ragModelDimension(dimension int) RAGOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -1479,7 +1375,7 @@ WithModelDimension sets the model dimension
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `RAGSystemConfigOption` |   |
+| r1 | `RAGOption` |   |
 
 
 ### statusCard

@@ -10,6 +10,7 @@
 | [httpserver.localFileSystemHandler](#localfilesystemhandler) ||
 | [httpserver.routeHandler](#routehandler) |routeHandler 用于设置 HTTP 服务器的路由处理函数，第一个参数为路由路径，第二个参数为处理函数  此函数会根据路由路径自动添加前缀 &amp;#34;/&amp;#34;  |
 | [httpserver.tlsCertAndKey](#tlscertandkey) |tlsCertAndKey 用于设置 HTTP服务器的 TLS 证书和密钥，第一个参数为证书，第二个参数为密钥，第三个参数为可选的 CA 证书  一般配合tls标准库使用  |
+| [httpserver.wsRouteHandler](#wsroutehandler) |wsRouteHandler 用于设置 HTTP 服务器的 WebSocket 路由处理函数，第一个参数为路由路径，第二个参数为 WebSocket 处理函数  此函数会自动处理 WebSocket 握手升级，并在连接建立后调用处理函数  |
 
 
 ## 函数定义
@@ -241,6 +242,45 @@ err = httpserver.Serve("127.0.0.1", 8888, httpserver.tlsCertAndKey(cert, sKey))
 | crt | `any` |   |
 | key | `any` |   |
 | cas | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `HttpServerConfigOpt` |   |
+
+
+### wsRouteHandler
+
+#### 详细描述
+wsRouteHandler 用于设置 HTTP 服务器的 WebSocket 路由处理函数，第一个参数为路由路径，第二个参数为 WebSocket 处理函数
+
+此函数会自动处理 WebSocket 握手升级，并在连接建立后调用处理函数
+
+Example:
+```
+
+	err = httpserver.Serve("127.0.0.1", 8888, httpserver.wsRouteHandler("/ws", func(conn) {
+		for {
+			messageType, message, err = conn.ReadMessage()
+			if err != nil {
+				return
+			}
+			conn.WriteMessage(messageType, message) // echo back
+		}
+	}))
+
+```
+
+
+#### 定义
+
+`wsRouteHandler(route string, handler WebSocketHandler) HttpServerConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| route | `string` |   |
+| handler | `WebSocketHandler` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
