@@ -260,6 +260,7 @@ Example:
 ```
 
 	err = httpserver.Serve("127.0.0.1", 8888, httpserver.wsRouteHandler("/ws", func(conn) {
+		rawReq := conn.GetRawRequest() // 获取原始 HTTP 请求
 		for {
 			messageType, message, err = conn.ReadMessage()
 			if err != nil {
