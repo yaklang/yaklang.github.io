@@ -29,7 +29,6 @@
 | [git.RevParse](#revparse) ||
 | [git.SetProxy](#setproxy) |SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）的代理  |
 | [git.auth](#auth) |auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的认证用户名和密码  |
-| [git.branch](#branch) ||
 | [git.checkoutCreate](#checkoutcreate) |fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否创建新分支  |
 | [git.checkoutForce](#checkoutforce) |fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否强制  |
 | [git.checkoutKeep](#checkoutkeep) |checkoutKeep 是一个选项函数，用于指定检出(checkout)操作时，本地更改（索引或工作树更改）是否被保留，如果保留，就可以将它们提交到目标分支，默认为false  |
@@ -711,26 +710,6 @@ git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", 
 |:-----------|:---------- |:-----------|
 | username | `string` |   |
 | password | `string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
-
-
-### branch
-
-#### 详细描述
-
-
-#### 定义
-
-`branch(branch string) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| branch | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

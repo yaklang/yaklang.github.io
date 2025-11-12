@@ -10,6 +10,7 @@
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
 | [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
+| [rag.DeleteRAG](#deleterag) |DeleteRAG 完整删除一个RAG系统，包括集合、知识库、实体仓库 |
 | [rag.EnableMockMode](#enablemockmode) ||
 | [rag.Export](#export) ||
 | [rag.Get](#get) ||
@@ -267,6 +268,28 @@ Example:
 | knowledgeBaseName | `string` |   |
 | documentName | `string` |   |
 | opts | `...rag.RAGSystemConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### DeleteRAG
+
+#### 详细描述
+DeleteRAG 完整删除一个RAG系统，包括集合、知识库、实体仓库
+
+
+#### 定义
+
+`DeleteRAG(db *gorm.DB, name string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| db | `*gorm.DB` |   |
+| name | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
