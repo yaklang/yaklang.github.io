@@ -2,8 +2,14 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [mitm.AddMITMRootCertIntoSystem](#addmitmrootcertintosystem) |AddMITMRootCertIntoSystem 将 MITM 根证书添加到 Linux 系统信任库 支持多个发行版的证书安装路径 |
 | [mitm.Bridge](#bridge) |Bridge 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，第二个参数是下游代理服务器地址，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  Bridge 与 Start 类似，但略有不同，Bridge可以指定下游代理服务器地址，同时默认会在接收到请求和响应时打印...|
+| [mitm.QuickVerifyMITMRootCert](#quickverifymitmrootcert) |QuickVerifyMITMRootCert 快速验证证书状态（不启动服务器，只检查系统证书池） |
 | [mitm.Start](#start) |Start 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  如果没有指定 CA 证书和私钥，那么将使用内置的证书和私钥  |
+| [mitm.TestCertificateOperations](#testcertificateoperations) |TestCertificateOperations 测试证书的安装、验证和撤销操作 |
+| [mitm.VerifyMITMRootCertInstalled](#verifymitmrootcertinstalled) |VerifyMITMRootCertInstalled 验证 MITM 根证书是否已正确安装到系统信任库 验证方法： 1. 使用 MITM 根证书启动一个临时 HTTPS 服务器 2. 使用系统证书池（不跳过验证）连接到该服务器 3. 如果连接成功且 TLS 握手完成，说明证书已正确安装 |
+| [mitm.VerifyMITMRootCertNotInstalled](#verifymitmrootcertnotinstalled) |VerifyMITMRootCertNotInstalled 验证 MITM 根证书是否已从系统信任库中移除 验证方法：与 VerifyMITMRootCertInstalled 相反，连接应该失败 |
+| [mitm.WithdrawMITMRootCertFromSystem](#withdrawmitmrootcertfromsystem) |WithdrawMITMRootCertFromSystem 从 Linux 系统信任库中移除 MITM 根证书 |
 | [mitm.callback](#callback) |callback 是一个选项函数，用于指定中间人代理服务器的回调函数，当接收到请求和响应后，会调用该回调函数  |
 | [mitm.context](#context) |context 是一个选项函数，用于指定中间人代理服务器的上下文  |
 | [mitm.extraIncomingConn](#extraincomingconn) |extraIncomingConn 是一个选项函数，用于指定中间人代理服务器接受外部传入的连接通道  通过该选项，可以将外部的 net.Conn 连接注入到 MITM 服务器中进行劫持处理  |
@@ -26,6 +32,23 @@
 
 
 ## 函数定义
+### AddMITMRootCertIntoSystem
+
+#### 详细描述
+AddMITMRootCertIntoSystem 将 MITM 根证书添加到 Linux 系统信任库
+支持多个发行版的证书安装路径
+
+
+#### 定义
+
+`AddMITMRootCertIntoSystem() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### Bridge
 
 #### 详细描述
@@ -58,6 +81,23 @@ mitm.Bridge(8080, "", mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr
 | r1 | `error` |   |
 
 
+### QuickVerifyMITMRootCert
+
+#### 详细描述
+QuickVerifyMITMRootCert 快速验证证书状态（不启动服务器，只检查系统证书池）
+
+
+#### 定义
+
+`QuickVerifyMITMRootCert() (bool, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
+| r2 | `error` |   |
+
+
 ### Start
 
 #### 详细描述
@@ -80,6 +120,75 @@ mitm.Start(8080, mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr, req
 |:-----------|:---------- |:-----------|
 | port | `int` |   |
 | opts | `...MitmConfigOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### TestCertificateOperations
+
+#### 详细描述
+TestCertificateOperations 测试证书的安装、验证和撤销操作
+
+
+#### 定义
+
+`TestCertificateOperations() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### VerifyMITMRootCertInstalled
+
+#### 详细描述
+VerifyMITMRootCertInstalled 验证 MITM 根证书是否已正确安装到系统信任库
+验证方法：
+1. 使用 MITM 根证书启动一个临时 HTTPS 服务器
+2. 使用系统证书池（不跳过验证）连接到该服务器
+3. 如果连接成功且 TLS 握手完成，说明证书已正确安装
+
+
+#### 定义
+
+`VerifyMITMRootCertInstalled() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### VerifyMITMRootCertNotInstalled
+
+#### 详细描述
+VerifyMITMRootCertNotInstalled 验证 MITM 根证书是否已从系统信任库中移除
+验证方法：与 VerifyMITMRootCertInstalled 相反，连接应该失败
+
+
+#### 定义
+
+`VerifyMITMRootCertNotInstalled() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### WithdrawMITMRootCertFromSystem
+
+#### 详细描述
+WithdrawMITMRootCertFromSystem 从 Linux 系统信任库中移除 MITM 根证书
+
+
+#### 定义
+
+`WithdrawMITMRootCertFromSystem() error`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
