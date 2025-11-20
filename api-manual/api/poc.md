@@ -77,6 +77,7 @@
 | [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径  |
 | [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) |ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) |ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketQueryParamWithoutEscape](#replacehttppacketqueryparamwithoutescape) |ReplaceHTTPPacketQueryParamWithoutEscape 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值  与 poc.Repl...|
 | [poc.ReplaceHTTPPacketUploadFile](#replacehttppacketuploadfile) |ReplaceHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，替换请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)，如果表单名不存在则会增加  |
 | [poc.Split](#split) |Split 切割 HTTP 报文，返回响应头和响应体，其第一个参数是原始HTTP报文，接下来可以接收零个到多个回调函数，其在每次解析到请求头时回调  |
 | [poc.Websocket](#websocket) |Websocket 实际上等价于`poc.HTTP(..., poc.websocket(true))`，用于快速发送请求并建立websocket连接并且返回原始响应报文，原始请求报文以及错误  |
@@ -2385,6 +2386,36 @@ poc.ReplaceHTTPPacketQueryParam(raw, "a", "b") // 添加GET请求参数a，值�
 #### 定义
 
 `ReplaceHTTPPacketQueryParam(packet []byte, key string, value string) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+| key | `string` |   |
+| value | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
+### ReplaceHTTPPacketQueryParamWithoutEscape
+
+#### 详细描述
+ReplaceHTTPPacketQueryParamWithoutEscape 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值
+
+与 poc.ReplaceHTTPPacketQueryParam 类似，但是不会将参数值进行转义
+
+Example:
+```
+poc.ReplaceAllHTTPPacketQueryParamsWithoutEscape(poc.BasicRequest(), "a", "b") // 添加GET请求参数a，值为b
+```
+
+
+#### 定义
+
+`ReplaceHTTPPacketQueryParamWithoutEscape(packet []byte, key string, value string) []byte`
 
 #### 参数
 |参数名|参数类型|参数解释|

@@ -6,8 +6,6 @@ Java|(ssaconfig.Language) &#34;java&#34;|
 Javascript|(ssaconfig.Language) &#34;js&#34;|
 PHP|(ssaconfig.Language) &#34;php&#34;|
 Yak|(ssaconfig.Language) &#34;yak&#34;|
-progName|(schema.SSADiffResultKind) &#34;program&#34;|
-runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
@@ -31,10 +29,9 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 | [ssa.withMemory](#withmemory) ||
 | [ssa.withPeepholeSize](#withpeepholesize) ||
 | [ssa.withProcess](#withprocess) ||
-| [ssa.withProgramName](#withprogramname) |save to database, please set the program name |
+| [ssa.withProgramName](#withprogramname) ||
 | [ssa.withProjectName](#withprojectname) ||
 | [ssa.withReCompile](#withrecompile) ||
-| [ssa.withSSAConfig](#withssaconfig) ||
 | [ssa.withStrictMode](#withstrictmode) ||
 
 
@@ -110,13 +107,13 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`Parse(code string, opts ...Option) (*Program, error)`
+`Parse(code string, opts ...ssaconfig.Option) (*Program, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | code | `string` |   |
-| opts | `...Option` |   |
+| opts | `...ssaconfig.Option` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -132,13 +129,13 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`ParseLocalProject(path string, opts ...Option) (Programs, error)`
+`ParseLocalProject(path string, opts ...ssaconfig.Option) (Programs, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | path | `string` |   |
-| opts | `...Option` |   |
+| opts | `...ssaconfig.Option` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -154,12 +151,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`ParseProject(opts ...Option) (prog Programs, err error)`
+`ParseProject(opts ...ssaconfig.Option) (prog Programs, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...Option` |   |
+| opts | `...ssaconfig.Option` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -256,7 +253,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withDefaultExcludeFunc(patterns []string) (Option, error)`
+`withDefaultExcludeFunc(patterns []string) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -266,8 +263,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
-| r2 | `error` |   |
+| r1 | `ssaconfig.Option` |   |
 
 
 ### withDescription
@@ -277,12 +273,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withDescription(desc string) Option`
+`withDescription(description string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| desc | `string` |   |
+| description | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -297,17 +293,17 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withEntryFile(files ...string) Option`
+`withEntryFile(v ...string) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| files | `...string` |   |
+| v | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ssaconfig.Option` |   |
 
 
 ### withExcludeFile
@@ -317,12 +313,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withExcludeFile(f func(path, filename string) bool) Option`
+`withExcludeFile(value TValue) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| f | `func(path, filename string) bool` |   |
+| value | `TValue` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -337,7 +333,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withExternLib(name string, table map[string]any) Option`
+`withExternLib(name string, table map[string]any) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -348,7 +344,7 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ssaconfig.Option` |   |
 
 
 ### withExternValue
@@ -358,12 +354,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withExternValue(table map[string]any) Option`
+`withExternValue(value TValue) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| table | `map[string]any` |   |
+| value | `TValue` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -378,12 +374,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withLanguage(input_language string) Option`
+`withLanguage(language string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input_language | `string` |   |
+| language | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -398,12 +394,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withMemory(ttl ...time.Duration) Option`
+`withMemory(memoryCompile ...bool) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ttl | `...time.Duration` |   |
+| memoryCompile | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -418,12 +414,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withPeepholeSize(size int) Option`
+`withPeepholeSize(peepholeSize int) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| size | `int` |   |
+| peepholeSize | `int` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -438,12 +434,12 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 
 #### 定义
 
-`withProcess(process ProcessFunc) Option`
+`withProcess(value TValue) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| process | `ProcessFunc` |   |
+| value | `TValue` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -454,17 +450,16 @@ runtimeId|(schema.SSADiffResultKind) &#34;runtimeId&#34;|
 ### withProgramName
 
 #### 详细描述
-save to database, please set the program name
 
 
 #### 定义
 
-`withProgramName(name string) Option`
+`withProgramName(programName ...string) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
+| programName | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -499,32 +494,12 @@ save to database, please set the program name
 
 #### 定义
 
-`withReCompile(b bool) Option`
+`withReCompile(reCompile bool) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `bool` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
-
-
-### withSSAConfig
-
-#### 详细描述
-
-
-#### 定义
-
-`withSSAConfig(sc *ssaconfig.Config) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| sc | `*ssaconfig.Config` |   |
+| reCompile | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -539,12 +514,12 @@ save to database, please set the program name
 
 #### 定义
 
-`withStrictMode(b bool) Option`
+`withStrictMode(strictMode bool) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `bool` |   |
+| strictMode | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
