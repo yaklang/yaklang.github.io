@@ -10,7 +10,7 @@
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
 | [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
-| [rag.DeleteRAG](#deleterag) |DeleteRAG 完整删除一个RAG系统，包括集合、知识库、实体仓库 |
+| [rag.DeleteRAG](#deleterag) |_deleteRAG 删除指定的 RAG 系统  |
 | [rag.EnableMockMode](#enablemockmode) ||
 | [rag.Export](#export) ||
 | [rag.Get](#get) ||
@@ -19,6 +19,7 @@
 | [rag.HasCollection](#hascollection) |_hasCollection 检查指定集合是否存在  |
 | [rag.Import](#import) ||
 | [rag.ListCollection](#listcollection) |_listCollection 获取所有 RAG 集合列表  |
+| [rag.ListRAG](#listrag) |_listRAG 列出所有 RAG 系统列表  |
 | [rag.NewRagDatabase](#newragdatabase) ||
 | [rag.NewTempRagDatabase](#newtempragdatabase) |_newTempRagDatabase 创建临时 RAG 数据库  |
 | [rag.Query](#query) ||
@@ -278,17 +279,23 @@ Example:
 ### DeleteRAG
 
 #### 详细描述
-DeleteRAG 完整删除一个RAG系统，包括集合、知识库、实体仓库
+_deleteRAG 删除指定的 RAG 系统
+
+Example:
+```
+
+	err = rag.DeleteRAG("my_rag")
+
+```
 
 
 #### 定义
 
-`DeleteRAG(db *gorm.DB, name string) error`
+`DeleteRAG(name string) error`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| db | `*gorm.DB` |   |
 | name | `string` |   |
 
 #### 返回值
@@ -467,6 +474,29 @@ Example:
 #### 定义
 
 `ListCollection() []string`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+
+
+### ListRAG
+
+#### 详细描述
+_listRAG 列出所有 RAG 系统列表
+
+Example:
+```
+
+	ragSystems = rag.ListRAG()
+
+```
+
+
+#### 定义
+
+`ListRAG() []string`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

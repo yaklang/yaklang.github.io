@@ -6,6 +6,7 @@
 | [netstack.CreatePrivilegedDeviceWithMTU](#createprivilegeddevicewithmtu) |_createPrivilegedDeviceWithMTU creates a privileged TUN device with specified MTU |
 | [netstack.GetSystemRouteManager](#getsystemroutemanager) |GetSystemRouteManager 获取系统路由管理器的单例实例 |
 | [netstack.NewVMFromDevice](#newvmfromdevice) |_newVMFromDevice creates a network stack virtual machine from a TUN device The VM will hijack TCP connections and make them available via GetTCPConnCh...|
+| [netstack.NewVMFromDeviceWithContext](#newvmfromdevicewithcontext) ||
 
 
 ## 函数定义
@@ -78,6 +79,28 @@ The VM will hijack TCP connections and make them available via GetTCPConnChan()
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
+| device | `lowtun.Device` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*NetstackVM` |   |
+| r2 | `error` |   |
+
+
+### NewVMFromDeviceWithContext
+
+#### 详细描述
+
+
+#### 定义
+
+`NewVMFromDeviceWithContext(ctx context.Context, device lowtun.Device) (*NetstackVM, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
 | device | `lowtun.Device` |   |
 
 #### 返回值

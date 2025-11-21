@@ -1,9 +1,14 @@
 # mitm
 
+|实例名|实例描述|
+|:------|:--------|
+grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [mitm.AddMITMRootCertIntoSystem](#addmitmrootcertintosystem) |AddMITMRootCertIntoSystem 将 MITM 根证书添加到 Linux 系统信任库 支持多个发行版的证书安装路径 |
 | [mitm.Bridge](#bridge) |Bridge 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，第二个参数是下游代理服务器地址，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  Bridge 与 Start 类似，但略有不同，Bridge可以指定下游代理服务器地址，同时默认会在接收到请求和响应时打印...|
+| [mitm.GetDefaultExtraConnManager](#getdefaultextraconnmanager) ||
 | [mitm.QuickVerifyMITMRootCert](#quickverifymitmrootcert) |QuickVerifyMITMRootCert 快速验证证书状态（不启动服务器，只检查系统证书池） |
 | [mitm.Start](#start) |Start 启动一个 MITM (中间人)代理服务器，它的第一个参数是端口，接下来可以接收零个到多个选项函数，用于影响中间人代理服务器的行为  如果没有指定 CA 证书和私钥，那么将使用内置的证书和私钥  |
 | [mitm.TestCertificateOperations](#testcertificateoperations) |TestCertificateOperations 测试证书的安装、验证和撤销操作 |
@@ -79,6 +84,21 @@ mitm.Bridge(8080, "", mitm.host("127.0.0.1"), mitm.callback(func(isHttps, urlStr
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### GetDefaultExtraConnManager
+
+#### 详细描述
+
+
+#### 定义
+
+`GetDefaultExtraConnManager() *MitmExtraConnManager`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*MitmExtraConnManager` |   |
 
 
 ### QuickVerifyMITMRootCert
