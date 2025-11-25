@@ -4,12 +4,14 @@
 |:------|:--------|
 | [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。  参数 raw 表示 RSA 私钥，支持以下格式：    - DER 编码的私钥（raw ASN.1 DER 字节流）    - Base64...|
 | [tls.EncryptWithPkcs1v15](#encryptwithpkcs1v15) |EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Ba...|
+| [tls.GenerateClientCert](#generateclientcert) |GenerateClientCert 使用给定的 CA 签发一个客户端证书。 caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。 |
 | [tls.GenerateRSA1024KeyPair](#generatersa1024keypair) |GenerateRSA1024KeyPair 生成1024位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA2048KeyPair](#generatersa2048keypair) |GenerateRSA2048KeyPair 生成2048位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSA4096KeyPair](#generatersa4096keypair) |GenerateRSA4096KeyPair 生成4096位大小的RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRSAKeyPair](#generatersakeypair) |GenerateRSAKeyPair 根据给定的bit大小生成RSA公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateRootCA](#generaterootca) |GenerateRootCA 根据名字生成根证书和私钥，返回PEM格式证书和私钥与错误  |
 | [tls.GenerateSM2KeyPair](#generatesm2keypair) |GenerateSM2KeyPair 生成SM2公私钥对，返回PEM格式公钥和私钥与错误  |
+| [tls.GenerateServerCert](#generateservercert) |GenerateServerCert 使用给定的 CA 签发一个服务器证书。 caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。 |
 | [tls.Inspect](#inspect) |Inspect 检查目标地址的TLS证书，并返回其证书信息与错误  |
 | [tls.InspectForceHttp1_1](#inspectforcehttp1_1) |InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议  |
 | [tls.InspectForceHttp2](#inspectforcehttp2) |InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议  |
@@ -17,6 +19,18 @@
 | [tls.SignServerCertAndKey](#signservercertandkey) |SignServerCertAndKey 根据给定的CA证书和私钥，生成不包含认证的服务器证书和密钥，返回PEM格式的服务器证书和密钥与错误  |
 | [tls.SignX509ClientCertAndKey](#signx509clientcertandkey) |SignX509ClientCertAndKey 根据给定的CA证书和私钥，生成客户端证书和密钥，返回PEM格式的客户端证书和密钥与错误  |
 | [tls.SignX509ServerCertAndKey](#signx509servercertandkey) |SignX509ServerCertAndKey 根据给定的CA证书和私钥，生成服务器证书和密钥，返回PEM格式的服务器证书和密钥与错误  |
+| [tls.alternativeDNS](#alternativedns) |WithAlternativeDNS 添加一个或多个 DNS 备用名称 (SAN)。 |
+| [tls.alternativeIP](#alternativeip) |WithAlternativeIPStrings 添加一个或多个字符串格式的 IP 备用名称 (SAN)。 无效的 IP 字符串将被忽略。 |
+| [tls.commonName](#commonname) |WithCommonName 设置证书的通用名称 (Common Name)。 |
+| [tls.country](#country) ||
+| [tls.locality](#locality) ||
+| [tls.notAfter](#notafter) |WithNotAfter 设置证书的过期时间。 |
+| [tls.notBefore](#notbefore) |WithNotBefore 设置证书的生效时间。 |
+| [tls.organization](#organization) |WithOrganization 设置证书的组织 (Organization)。 |
+| [tls.privateKeyFromFile](#privatekeyfromfile) ||
+| [tls.privateKeyFromRaw](#privatekeyfromraw) ||
+| [tls.province](#province) ||
+| [tls.validity](#validity) |WithValidity 设置证书的有效期（从现在开始，持续时间为 duration）。 |
 
 
 ## 函数定义
@@ -130,6 +144,32 @@ Example:
 | r2 | `error` |   |
 
 
+### GenerateClientCert
+
+#### 详细描述
+GenerateClientCert 使用给定的 CA 签发一个客户端证书。
+caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。
+
+
+#### 定义
+
+`GenerateClientCert(caCertPEM []byte, caKeyPEM []byte, opts ...CertOption) ([]byte, []byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| caCertPEM | `[]byte` |   |
+| caKeyPEM | `[]byte` |   |
+| opts | `...CertOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
+
+
 ### GenerateRSA1024KeyPair
 
 #### 详细描述
@@ -240,12 +280,13 @@ cert, key, err := tls.GenerateRootCA("yaklang.io")
 
 #### 定义
 
-`GenerateRootCA(commonName string) (ca []byte, key []byte, err error)`
+`GenerateRootCA(commonName string, opts ...tlsutils.CertOption) (ca []byte, key []byte, err error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | commonName | `string` |   |
+| opts | `...tlsutils.CertOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -269,6 +310,32 @@ pub, pri, err := tls.GenerateSM2KeyPair()
 #### 定义
 
 `GenerateSM2KeyPair() ([]byte, []byte, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `[]byte` |   |
+| r3 | `error` |   |
+
+
+### GenerateServerCert
+
+#### 详细描述
+GenerateServerCert 使用给定的 CA 签发一个服务器证书。
+caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。
+
+
+#### 定义
+
+`GenerateServerCert(caCertPEM []byte, caKeyPEM []byte, opts ...CertOption) ([]byte, []byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| caCertPEM | `[]byte` |   |
+| caKeyPEM | `[]byte` |   |
+| opts | `...CertOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -477,5 +544,253 @@ cert, sKey, err = tls.SignX509ServerCertAndKey(ca, key)
 | cert | `[]byte` |   |
 | sKey | `[]byte` |   |
 | _ | `error` |   |
+
+
+### alternativeDNS
+
+#### 详细描述
+WithAlternativeDNS 添加一个或多个 DNS 备用名称 (SAN)。
+
+
+#### 定义
+
+`alternativeDNS(dnsNames ...string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| dnsNames | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### alternativeIP
+
+#### 详细描述
+WithAlternativeIPStrings 添加一个或多个字符串格式的 IP 备用名称 (SAN)。
+无效的 IP 字符串将被忽略。
+
+
+#### 定义
+
+`alternativeIP(ipStrings ...string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ipStrings | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### commonName
+
+#### 详细描述
+WithCommonName 设置证书的通用名称 (Common Name)。
+
+
+#### 定义
+
+`commonName(cn string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cn | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### country
+
+#### 详细描述
+
+
+#### 定义
+
+`country(country string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| country | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### locality
+
+#### 详细描述
+
+
+#### 定义
+
+`locality(locality string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| locality | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### notAfter
+
+#### 详细描述
+WithNotAfter 设置证书的过期时间。
+
+
+#### 定义
+
+`notAfter(t time.Time) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `time.Time` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### notBefore
+
+#### 详细描述
+WithNotBefore 设置证书的生效时间。
+
+
+#### 定义
+
+`notBefore(t time.Time) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `time.Time` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### organization
+
+#### 详细描述
+WithOrganization 设置证书的组织 (Organization)。
+
+
+#### 定义
+
+`organization(org string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| org | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### privateKeyFromFile
+
+#### 详细描述
+
+
+#### 定义
+
+`privateKeyFromFile(path string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| path | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### privateKeyFromRaw
+
+#### 详细描述
+
+
+#### 定义
+
+`privateKeyFromRaw(key []byte) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### province
+
+#### 详细描述
+
+
+#### 定义
+
+`province(province string) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| province | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
+
+
+### validity
+
+#### 详细描述
+WithValidity 设置证书的有效期（从现在开始，持续时间为 duration）。
+
+
+#### 定义
+
+`validity(duration time.Duration) CertOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| duration | `time.Duration` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CertOption` |   |
 
 
