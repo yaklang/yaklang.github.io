@@ -64,6 +64,7 @@
 | [nuclei.templatesVersion](#templatesversion) ||
 | [nuclei.timeout](#timeout) ||
 | [nuclei.updateTemplates](#updatetemplates) ||
+| [nuclei.vars](#vars) ||
 | [nuclei.verbose](#verbose) ||
 | [nuclei.version](#version) ||
 | [nuclei.workflows](#workflows) ||
@@ -1294,6 +1295,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### vars
+
+#### 详细描述
+
+
+#### 定义
+
+`vars(raw any) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
 
 
 ### verbose

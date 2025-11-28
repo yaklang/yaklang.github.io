@@ -6,7 +6,7 @@
 | [.](#) ||
 | [poc.AppendHTTPPacketCookie](#appendhttppacketcookie) |AppendHTTPPacketCookie 是一个辅助函数，用于改变请求报文，添加Cookie请求头中的值  |
 | [poc.AppendHTTPPacketFormEncoded](#appendhttppacketformencoded) |AppendHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，添加请求体中的表单  |
-| [poc.AppendHTTPPacketHeader](#appendhttppacketheader) |AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头  |
+| [poc.AppendHTTPPacketHeader](#appendhttppacketheader) |AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头。  无论 header 是否已存在都会直接附加（大小写不敏感行为与 Replace 不冲突）。  |
 | [poc.AppendHTTPPacketPath](#appendhttppacketpath) |AppendHTTPPacketPath 是一个辅助函数，用于改变请求报文，在现有请求路径后添加请求路径  |
 | [poc.AppendHTTPPacketPostParam](#appendhttppacketpostparam) |AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添加POST请求参数  |
 | [poc.AppendHTTPPacketQueryParam](#appendhttppacketqueryparam) |AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，添加GET请求参数  |
@@ -16,7 +16,7 @@
 | [poc.Delete](#delete) |Delete 向指定 URL 发送 DELETE 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
 | [poc.DeleteHTTPPacketCookie](#deletehttppacketcookie) |DeleteHTTPPacketCookie 是一个辅助函数，用于改变请求报文，删除Cookie中的值  |
 | [poc.DeleteHTTPPacketForm](#deletehttppacketform) |DeleteHTTPPacketForm 是一个辅助函数，用于改变请求报文，删除POST请求表单  |
-| [poc.DeleteHTTPPacketHeader](#deletehttppacketheader) |DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头  |
+| [poc.DeleteHTTPPacketHeader](#deletehttppacketheader) |DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头。  默认情况下匹配会忽略 Header 名大小写，若需严格匹配可使用 DeleteHTTPPacketHeaderStrict。  |
 | [poc.DeleteHTTPPacketPostParam](#deletehttppacketpostparam) |DeleteHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，删除POST请求参数  |
 | [poc.DeleteHTTPPacketQueryParam](#deletehttppacketqueryparam) |DeleteHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，删除GET请求参数  |
 | [poc.Do](#do) |Do 向指定 URL 发送指定请求方法的请求并且返回响应结构体，请求结构体以及错误，它的是第一个参数是请求方法，第二个参数 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看 ...|
@@ -70,7 +70,7 @@
 | [poc.ReplaceHTTPPacketCookies](#replacehttppacketcookies) |ReplaceHTTPPacketCookies 是一个辅助函数，用于改变请求报文，修改Cookie请求头  |
 | [poc.ReplaceHTTPPacketFirstLine](#replacehttppacketfirstline) |ReplaceHTTPPacketFirstLine 是一个辅助，用于改变请求报文，修改第一行（即请求方法，请求路径，协议版本）  |
 | [poc.ReplaceHTTPPacketFormEncoded](#replacehttppacketformencoded) |ReplaceHTTPPacketFormEncoded 是一个辅助函数，用于改变请求报文，替换请求体中的表单，如果不存在则会增加  |
-| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加  |
+| [poc.ReplaceHTTPPacketHeader](#replacehttppacketheader) |ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加。  默认情况下（ignoreCase=true）会忽略大小写匹配，若需要严格匹配可使用 ReplaceHTTPPacketHeaderStrict。  |
 | [poc.ReplaceHTTPPacketHost](#replacehttppackethost) |ReplaceHTTPPacketHost 是一个辅助函数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是ReplaceHTTPPacketHeader(&amp;#34;Host&amp;#34;, host)的简写  |
 | [poc.ReplaceHTTPPacketJsonBody](#replacehttppacketjsonbody) |ReplaceHTTPPacketJsonBody 是一个辅助函数，用于改变 HTTP 报文，修改 HTTP 报文主体内容（ json 格式），第一个参数为原始 HTTP 报文，第二个参数为修改的报文主体内容（ map 对象）  |
 | [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法  |
@@ -266,11 +266,13 @@ bbb
 ### AppendHTTPPacketHeader
 
 #### 详细描述
-AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头
+AppendHTTPPacketHeader 是一个辅助函数，用于改变请求报文，添加请求头。
+
+无论 header 是否已存在都会直接附加（大小写不敏感行为与 Replace 不冲突）。
 
 Example:
 ```
-poc.AppendHTTPPacketHeader(poc.BasicRequest(), "AAA", "BBB") // 添加AAA请求头的值为BBB
+poc.AppendHTTPPacketHeader(poc.BasicRequest(), "AAA", "BBB") // 添加 AAA 请求头
 ```
 
 
@@ -568,7 +570,9 @@ ddd
 ### DeleteHTTPPacketHeader
 
 #### 详细描述
-DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头
+DeleteHTTPPacketHeader 是一个辅助函数，用于改变请求报文，删除请求头。
+
+默认情况下匹配会忽略 Header 名大小写，若需严格匹配可使用 DeleteHTTPPacketHeaderStrict。
 
 Example:
 ```
@@ -577,7 +581,14 @@ Content-Type: application/json
 AAA: BBB
 Host: pie.dev
 
-`, "AAA") // 删除AAA请求头
+`, "AAA") // 删除 AAA 请求头（忽略大小写）
+
+poc.DeleteHTTPPacketHeaderStrict(`GET /get HTTP/1.1
+Content-Type: application/json
+AAA: BBB
+Host: pie.dev
+
+`, "AAA") // 仅当 Header 严格等于 AAA 时才删除
 ```
 
 
@@ -2209,11 +2220,14 @@ bbb
 ### ReplaceHTTPPacketHeader
 
 #### 详细描述
-ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加
+ReplaceHTTPPacketHeader 是一个辅助函数，用于改变请求报文，修改请求头，如果不存在则会增加。
+
+默认情况下（ignoreCase=true）会忽略大小写匹配，若需要严格匹配可使用 ReplaceHTTPPacketHeaderStrict。
 
 Example:
 ```
-poc.ReplaceHTTPPacketHeader(poc.BasicRequest(),"AAA", "BBB") // 修改AAA请求头的值为BBB，这里没有AAA请求头，所以会增加该请求头
+poc.ReplaceHTTPPacketHeader(poc.BasicRequest(),"AAA", "BBB") // 修改 AAA 请求头，如果不存在则新增（忽略大小写）
+poc.ReplaceHTTPPacketHeaderStrict(poc.BasicRequest(),"AAA", "BBB") // 严格匹配 AAA 的大小写，再进行修改/新增
 ```
 
 
