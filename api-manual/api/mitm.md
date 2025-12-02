@@ -29,6 +29,7 @@ grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
 | [mitm.host](#host) |host 是一个选项函数，用于指定中间人代理服务器的监听地址，默认为空，即监听所有网卡  |
 | [mitm.isTransparent](#istransparent) |isTransparent 是一个选项函数，用于指定中间人代理服务器是否开启透明劫持模式，默认为false  在开启透明模式下，所有流量都会被默认转发，所有的回调函数都会被忽略  |
 | [mitm.maxContentLength](#maxcontentlength) |maxContentLength 是一个选项函数，用于指定中间人代理服务器的最大的请求和响应内容长度，默认为10MB  |
+| [mitm.mockHTTPRequest](#mockhttprequest) |mockHTTPRequest 是一个选项函数，用于指定中间人代理服务器的请求 mock 函数  当接收到请求后，会调用该回调函数，通过调用 mockResponse 函数可以直接返回自定义响应，跳过真实的网络请求  mockResponse 接受一个响应（字符串或字节数组），会自动修复响应格式，如...|
 | [mitm.randomJA3](#randomja3) |randomJA3 是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 劫持模式，默认为false  |
 | [mitm.rootCA](#rootca) |rootCA 是一个选项函数，用于指定中间人代理服务器的根证书和私钥  |
 | [mitm.useDefaultCA](#usedefaultca) |useDefaultCA 是一个选项函数，用于指定中间人代理服务器是否使用内置的证书和私钥，默认为true  默认的证书与私钥路径：~/yakit-projects/yak-mitm-ca.crt 和 ~/yakit-projects/yak-mitm-ca.key  |
@@ -614,6 +615,42 @@ mitm.Start(8080, mitm.maxContentLength(100 * 1000 * 1000))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### mockHTTPRequest
+
+#### 详细描述
+mockHTTPRequest 是一个选项函数，用于指定中间人代理服务器的请求 mock 函数
+
+当接收到请求后，会调用该回调函数，通过调用 mockResponse 函数可以直接返回自定义响应，跳过真实的网络请求
+
+mockResponse 接受一个响应（字符串或字节数组），会自动修复响应格式，如果修复失败则返回 502 Bad Gateway
+
+Example:
+```
+mitm.Start(8080, mitm.mockHTTPRequest(func(isHttps, urlStr, req, mockResponse) {
+
+	if str.Contains(urlStr, "test") {
+	    mockResponse("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\nMocked Response")
+	}
+
+}))
+```
+
+
+#### 定义
+
+`mockHTTPRequest(h func(isHttps bool, urlStr string, req []byte, mockResponse func(rsp any))) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(isHttps bool, urlStr string, req []byte, mockResponse func(rsp any))` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
