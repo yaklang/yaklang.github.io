@@ -4,6 +4,7 @@
 |:------|:--------|
 | [netstack.CreatePrivilegedDevice](#createprivilegeddevice) |_createPrivilegedDevice creates a privileged TUN device with default MTU (1500) |
 | [netstack.CreatePrivilegedDeviceWithMTU](#createprivilegeddevicewithmtu) |_createPrivilegedDeviceWithMTU creates a privileged TUN device with specified MTU |
+| [netstack.GetPrivilegedSystemRouteManager](#getprivilegedsystemroutemanager) ||
 | [netstack.GetSystemRouteManager](#getsystemroutemanager) |GetSystemRouteManager 获取系统路由管理器的单例实例 |
 | [netstack.NewVMFromDevice](#newvmfromdevice) |_newVMFromDevice creates a network stack virtual machine from a TUN device The VM will hijack TCP connections and make them available via GetTCPConnCh...|
 | [netstack.NewVMFromDeviceWithContext](#newvmfromdevicewithcontext) ||
@@ -46,6 +47,22 @@ _createPrivilegedDeviceWithMTU creates a privileged TUN device with specified MT
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `lowtun.Device` |   |
+| r2 | `error` |   |
+
+
+### GetPrivilegedSystemRouteManager
+
+#### 详细描述
+
+
+#### 定义
+
+`GetPrivilegedSystemRouteManager() (*SystemRouteManager, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*SystemRouteManager` |   |
 | r2 | `error` |   |
 
 
