@@ -4,7 +4,7 @@
 |:------|:--------|
 Java|(ssaconfig.Language) &#34;java&#34;|
 Javascript|(ssaconfig.Language) &#34;js&#34;|
-ModeAll|(ssaconfig.Mode) 63|
+ModeAll|(ssaconfig.Mode) 127|
 ModeProjectCompile|(ssaconfig.Mode) 35|
 PHP|(ssaconfig.Language) &#34;php&#34;|
 Yak|(ssaconfig.Language) &#34;yak&#34;|
