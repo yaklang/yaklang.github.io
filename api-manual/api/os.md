@@ -45,6 +45,8 @@ Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex
 | [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值  |
 | [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP  |
 | [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP  |
+| [os.NewConnectionsWatcher](#newconnectionswatcher) |NewWatcher 创建一个新的进程监控器实例 |
+| [os.NewProcessWatcher](#newprocesswatcher) |NewProcessesWatcher 创建并初始化一个新的进程监控器 |
 | [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误  它实际是 io.Pipe 的别名  |
 | [os.Remove](#remove) |Remove 删除指定的文件或目录  |
 | [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其子路径  |
@@ -818,6 +820,46 @@ os.LookupIP("www.yaklang.com")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]string` |   |
+
+
+### NewConnectionsWatcher
+
+#### 详细描述
+NewWatcher 创建一个新的进程监控器实例
+
+
+#### 定义
+
+`NewConnectionsWatcher(pid int32, cb NewRemoteIPCallback, interval time.Duration) (*ConnectionsWatcher, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pid | `int32` |   |
+| cb | `NewRemoteIPCallback` |   |
+| interval | `time.Duration` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ConnectionsWatcher` |   |
+| r2 | `error` |   |
+
+
+### NewProcessWatcher
+
+#### 详细描述
+NewProcessesWatcher 创建并初始化一个新的进程监控器
+
+
+#### 定义
+
+`NewProcessWatcher() *ProcessesWatcher`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*ProcessesWatcher` |   |
 
 
 ### Pipe
