@@ -19,6 +19,8 @@
 | [yakit.Info](#info) ||
 | [yakit.InitYakit](#inityakit) ||
 | [yakit.Markdown](#markdown) ||
+| [yakit.MockHTTPFlowSlowSQL](#mockhttpflowslowsql) ||
+| [yakit.MockMITMSlowRuleHook](#mockmitmslowrulehook) ||
 | [yakit.NewBarGraph](#newbargraph) ||
 | [yakit.NewClient](#newclient) ||
 | [yakit.NewHTTPFlowRisk](#newhttpflowrisk) ||
@@ -334,6 +336,36 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | tmp | `any` |   |
+
+
+### MockHTTPFlowSlowSQL
+
+#### 详细描述
+
+
+#### 定义
+
+`MockHTTPFlowSlowSQL(seconds ...float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| seconds | `...float64` |   |
+
+
+### MockMITMSlowRuleHook
+
+#### 详细描述
+
+
+#### 定义
+
+`MockMITMSlowRuleHook(seconds ...float64)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| seconds | `...float64` |   |
 
 
 ### NewBarGraph
