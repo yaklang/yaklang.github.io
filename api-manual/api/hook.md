@@ -4,6 +4,8 @@
 |:------|:--------|
 | [hook.CallYakitPluginFunc](#callyakitpluginfunc) ||
 | [hook.LoadYakitPlugin](#loadyakitplugin) ||
+| [hook.LoadYakitPluginByID](#loadyakitpluginbyid) |loadScriptByID loads a plugin by its database ID or UUID If id is int64, it will be treated as database ID If id is string, it will be treated as UUID...|
+| [hook.LoadYakitPluginByIDContext](#loadyakitpluginbyidcontext) ||
 | [hook.LoadYakitPluginByName](#loadyakitpluginbyname) ||
 | [hook.LoadYakitPluginContext](#loadyakitplugincontext) ||
 | [hook.NewManager](#newmanager) ||
@@ -49,6 +51,54 @@
 |:-----------|:---------- |:-----------|
 | mng | `*YakToCallerManager` |   |
 | scriptType | `string` |   |
+| hookNames | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### LoadYakitPluginByID
+
+#### 详细描述
+loadScriptByID loads a plugin by its database ID or UUID
+If id is int64, it will be treated as database ID
+If id is string, it will be treated as UUID
+
+
+#### 定义
+
+`LoadYakitPluginByID(mng *YakToCallerManager, id any, hookNames ...string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| mng | `*YakToCallerManager` |   |
+| id | `any` |   |
+| hookNames | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### LoadYakitPluginByIDContext
+
+#### 详细描述
+
+
+#### 定义
+
+`LoadYakitPluginByIDContext(mng *YakToCallerManager, ctx context.Context, id any, hookNames ...string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| mng | `*YakToCallerManager` |   |
+| ctx | `context.Context` |   |
+| id | `any` |   |
 | hookNames | `...string` |   |
 
 #### 返回值
