@@ -4,7 +4,7 @@
 |:------|:--------|
 | [hook.CallYakitPluginFunc](#callyakitpluginfunc) ||
 | [hook.LoadYakitPlugin](#loadyakitplugin) ||
-| [hook.LoadYakitPluginByID](#loadyakitpluginbyid) |loadScriptByID loads a plugin by its database ID or UUID If id is int64, it will be treated as database ID If id is string, it will be treated as UUID...|
+| [hook.LoadYakitPluginByID](#loadyakitpluginbyid) |loadScriptByID loads a plugin by its database ID or UUID Supports various numeric types as database ID, or string as UUID |
 | [hook.LoadYakitPluginByIDContext](#loadyakitpluginbyidcontext) ||
 | [hook.LoadYakitPluginByName](#loadyakitpluginbyname) ||
 | [hook.LoadYakitPluginContext](#loadyakitplugincontext) ||
@@ -63,8 +63,7 @@
 
 #### 详细描述
 loadScriptByID loads a plugin by its database ID or UUID
-If id is int64, it will be treated as database ID
-If id is string, it will be treated as UUID
+Supports various numeric types as database ID, or string as UUID
 
 
 #### 定义
