@@ -16,7 +16,9 @@
 | [ai.debugStream](#debugstream) ||
 | [ai.domain](#domain) ||
 | [ai.funcCallRetryTimes](#funccallretrytimes) ||
+| [ai.imageBase64](#imagebase64) ||
 | [ai.imageFile](#imagefile) ||
+| [ai.imageRaw](#imageraw) ||
 | [ai.model](#model) ||
 | [ai.noHttps](#nohttps) ||
 | [ai.onReasonStream](#onreasonstream) ||
@@ -318,6 +320,26 @@
 | r1 | `AIConfigOption` |   |
 
 
+### imageBase64
+
+#### 详细描述
+
+
+#### 定义
+
+`imageBase64(b64 string) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b64 | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
 ### imageFile
 
 #### 详细描述
@@ -331,6 +353,26 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
+### imageRaw
+
+#### 详细描述
+
+
+#### 定义
+
+`imageRaw(raw []byte) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

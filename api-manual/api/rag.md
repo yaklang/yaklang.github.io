@@ -8,9 +8,12 @@
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
 | [rag.BuildIndexKnowledgeFromFile](#buildindexknowledgefromfile) ||
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
+| [rag.DeleteAllKnowledgeBase](#deleteallknowledgebase) |_deleteAllKnowledgeBase 删除所有知识库及其关联的 RAG 内容  清空所有: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等  |
 | [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
+| [rag.DeleteKnowledgeBase](#deleteknowledgebase) |_deleteKnowledgeBase 删除指定的知识库及其关联的 RAG 内容  包括: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等  |
 | [rag.DeleteRAG](#deleterag) |_deleteRAG 删除指定的 RAG 系统  |
+| [rag.Embedding](#embedding) |_embedding 生成文本的嵌入向量  使用默认的嵌入服务生成文本的向量表示（优先使用在线服务，回退到本地服务）  |
 | [rag.EnableMockMode](#enablemockmode) ||
 | [rag.Export](#export) ||
 | [rag.Get](#get) ||
@@ -20,8 +23,10 @@
 | [rag.Import](#import) ||
 | [rag.ListCollection](#listcollection) |_listCollection 获取所有 RAG 集合列表  |
 | [rag.ListRAG](#listrag) |_listRAG 列出所有 RAG 系统列表  |
+| [rag.LocalEmbedding](#localembedding) |_localEmbedding 使用本地嵌入服务生成文本的向量表示  本地服务需要安装本地模型（如 Qwen3-Embedding-0.6B-Q4_K_M）  |
 | [rag.NewRagDatabase](#newragdatabase) ||
 | [rag.NewTempRagDatabase](#newtempragdatabase) |_newTempRagDatabase 创建临时 RAG 数据库  |
+| [rag.OnlineEmbedding](#onlineembedding) |_onlineEmbedding 使用在线嵌入服务生成文本的向量表示  使用 AIBalance 免费在线服务，无需安装本地模型  |
 | [rag.Query](#query) ||
 | [rag.QueryDocuments](#querydocuments) |_queryDocuments 在指定集合中查询文档  |
 | [rag.aiService](#aiservice) ||
@@ -218,6 +223,31 @@ Example:
 | r2 | `error` |   |
 
 
+### DeleteAllKnowledgeBase
+
+#### 详细描述
+_deleteAllKnowledgeBase 删除所有知识库及其关联的 RAG 内容
+
+清空所有: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等
+
+Example:
+```
+
+	err = rag.DeleteAllKnowledgeBase()
+
+```
+
+
+#### 定义
+
+`DeleteAllKnowledgeBase() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### DeleteCollection
 
 #### 详细描述
@@ -276,6 +306,36 @@ Example:
 | r1 | `error` |   |
 
 
+### DeleteKnowledgeBase
+
+#### 详细描述
+_deleteKnowledgeBase 删除指定的知识库及其关联的 RAG 内容
+
+包括: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等
+
+Example:
+```
+
+	err = rag.DeleteKnowledgeBase("my_knowledge_base")
+
+```
+
+
+#### 定义
+
+`DeleteKnowledgeBase(name string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### DeleteRAG
 
 #### 详细描述
@@ -302,6 +362,41 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### Embedding
+
+#### 详细描述
+_embedding 生成文本的嵌入向量
+
+使用默认的嵌入服务生成文本的向量表示（优先使用在线服务，回退到本地服务）
+
+Example:
+```
+
+	result, err = rag.Embedding("你好")
+	if err != nil {
+	    // handle error
+	}
+	// result is []float32
+
+```
+
+
+#### 定义
+
+`Embedding(text string) ([]float32, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]float32` |   |
+| r2 | `error` |   |
 
 
 ### EnableMockMode
@@ -504,6 +599,41 @@ Example:
 | r1 | `[]string` |   |
 
 
+### LocalEmbedding
+
+#### 详细描述
+_localEmbedding 使用本地嵌入服务生成文本的向量表示
+
+本地服务需要安装本地模型（如 Qwen3-Embedding-0.6B-Q4_K_M）
+
+Example:
+```
+
+	result, err = rag.LocalEmbedding("你好")
+	if err != nil {
+	    // handle error - 本地服务不可用
+	}
+	// result is []float32, dimension: 1024
+
+```
+
+
+#### 定义
+
+`LocalEmbedding(text string) ([]float32, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]float32` |   |
+| r2 | `error` |   |
+
+
 ### NewRagDatabase
 
 #### 详细描述
@@ -546,6 +676,41 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*gorm.DB` |   |
+| r2 | `error` |   |
+
+
+### OnlineEmbedding
+
+#### 详细描述
+_onlineEmbedding 使用在线嵌入服务生成文本的向量表示
+
+使用 AIBalance 免费在线服务，无需安装本地模型
+
+Example:
+```
+
+	result, err = rag.OnlineEmbedding("你好")
+	if err != nil {
+	    // handle error - 在线服务不可用
+	}
+	// result is []float32, dimension: 1024
+
+```
+
+
+#### 定义
+
+`OnlineEmbedding(text string) ([]float32, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]float32` |   |
 | r2 | `error` |   |
 
 
