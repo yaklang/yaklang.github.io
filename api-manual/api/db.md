@@ -20,7 +20,9 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.GetAllPayloadGroupsName](#getallpayloadgroupsname) ||
 | [db.GetKey](#getkey) ||
 | [db.GetProjectKey](#getprojectkey) ||
+| [db.GetYakitPluginByID](#getyakitpluginbyid) ||
 | [db.GetYakitPluginByName](#getyakitpluginbyname) ||
+| [db.GetYakitPluginByUUID](#getyakitpluginbyuuid) ||
 | [db.NewAliveHost](#newalivehost) ||
 | [db.OpenDatabase](#opendatabase) ||
 | [db.OpenSqliteDatabase](#opensqlitedatabase) ||
@@ -229,6 +231,27 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | r1 | `string` |   |
 
 
+### GetYakitPluginByID
+
+#### 详细描述
+
+
+#### 定义
+
+`GetYakitPluginByID(i any) (*schema.YakScript, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*schema.YakScript` |   |
+| r2 | `error` |   |
+
+
 ### GetYakitPluginByName
 
 #### 详细描述
@@ -242,6 +265,27 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*schema.YakScript` |   |
+| r2 | `error` |   |
+
+
+### GetYakitPluginByUUID
+
+#### 详细描述
+
+
+#### 定义
+
+`GetYakitPluginByUUID(i any) (*schema.YakScript, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
