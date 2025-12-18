@@ -22,6 +22,11 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
 | [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
+| [ssa.withCodeSourceAuthKeyContent](#withcodesourceauthkeycontent) ||
+| [ssa.withCodeSourceAuthKeyPath](#withcodesourceauthkeypath) ||
+| [ssa.withCodeSourceAuthKind](#withcodesourceauthkind) ||
+| [ssa.withCodeSourceAuthPassword](#withcodesourceauthpassword) ||
+| [ssa.withCodeSourceAuthUserName](#withcodesourceauthusername) ||
 | [ssa.withCodeSourceBranch](#withcodesourcebranch) ||
 | [ssa.withCodeSourceKind](#withcodesourcekind) ||
 | [ssa.withCodeSourceLocalFile](#withcodesourcelocalfile) ||
@@ -286,6 +291,106 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*result.StaticAnalyzeResult` |   |
+
+
+### withCodeSourceAuthKeyContent
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceAuthKeyContent(keyContent string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyContent | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withCodeSourceAuthKeyPath
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceAuthKeyPath(keyPath string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyPath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withCodeSourceAuthKind
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceAuthKind(kind string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kind | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withCodeSourceAuthPassword
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceAuthPassword(password string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withCodeSourceAuthUserName
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceAuthUserName(userName string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| userName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withCodeSourceBranch

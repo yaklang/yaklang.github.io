@@ -48,6 +48,9 @@
 | [git.threads](#threads) |threads 是一个GitHack选项函数，用于指定并发数，默认为8  |
 | [git.useLocalGitBinary](#uselocalgitbinary) |useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行`git fsck`命令，这个命令用于尽可能恢复完整的git仓库，默认为true  |
 | [git.verify](#verify) |verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书  |
+| [git.withInsecureIgnoreHostKey](#withinsecureignorehostkey) ||
+| [git.withPrivateKey](#withprivatekey) ||
+| [git.withPrivateKeyContent](#withprivatekeycontent) |WithPrivateKeyContent 使用私钥内容进行认证  |
 
 
 ## 函数定义
@@ -1209,6 +1212,79 @@ git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withInsecureIgnoreHostKey
+
+#### 详细描述
+
+
+#### 定义
+
+`withInsecureIgnoreHostKey() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### withPrivateKey
+
+#### 详细描述
+
+
+#### 定义
+
+`withPrivateKey(userName string, keyPath string, password string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| userName | `string` |   |
+| keyPath | `string` |   |
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withPrivateKeyContent
+
+#### 详细描述
+WithPrivateKeyContent 使用私钥内容进行认证
+
+Example:
+```
+keyContent := `-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmU...
+-----END OPENSSH PRIVATE KEY-----`
+git.Clone("git@github.com:user/repo.git", "/tmp/repo",
+
+	git.WithPrivateKeyContent("git", keyContent, ""),
+	git.WithInsecureIgnoreHostKey(),  // 跳过主机密钥验证
+
+)
+```
+
+
+#### 定义
+
+`withPrivateKeyContent(userName string, keyContent string, password string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| userName | `string` |   |
+| keyContent | `string` |   |
+| password | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
