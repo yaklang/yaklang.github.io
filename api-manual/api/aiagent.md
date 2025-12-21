@@ -22,7 +22,7 @@
 | [aiagent.aiCallback](#aicallback) |Callback setters |
 | [aiagent.aiTransactionRetry](#aitransactionretry) |WithAITransactionRetry alias to existing WithAITransactionAutoRetry for naming compatibility. |
 | [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) |Interactive / review / require_user |
-| [aiagent.appendPersistentMemory](#appendpersistentmemory) |WithAppendPersistentMemory appends keys to PersistentMemory. |
+| [aiagent.appendPersistentMemory](#appendpersistentmemory) |WithAppendPersistentContext appends keys to PersistentMemory. |
 | [aiagent.context](#context) ||
 | [aiagent.coordinatorAICallback](#coordinatoraicallback) ||
 | [aiagent.debug](#debug) |WithDebug toggles both prompt and event debug flags. |
@@ -467,7 +467,7 @@ Interactive / review / require_user
 ### appendPersistentMemory
 
 #### 详细描述
-WithAppendPersistentMemory appends keys to PersistentMemory.
+WithAppendPersistentContext appends keys to PersistentMemory.
 
 
 #### 定义
