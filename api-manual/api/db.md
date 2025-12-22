@@ -62,6 +62,9 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.SetKey](#setkey) ||
 | [db.SetKeyWithTTL](#setkeywithttl) ||
 | [db.SetProjectKey](#setprojectkey) ||
+| [db.YieldAllAIForges](#yieldallaiforges) ||
+| [db.YieldAllAITools](#yieldallaitools) ||
+| [db.YieldAllMCPServers](#yieldallmcpservers) ||
 | [db.YieldPayload](#yieldpayload) |YieldPayload means |
 | [db.YieldYakScriptAll](#yieldyakscriptall) ||
 | [db.saveHTTPFlowWithTags](#savehttpflowwithtags) ||
@@ -1093,6 +1096,51 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### YieldAllAIForges
+
+#### 详细描述
+
+
+#### 定义
+
+`YieldAllAIForges() chan *schema.AIForge`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.AIForge` |   |
+
+
+### YieldAllAITools
+
+#### 详细描述
+
+
+#### 定义
+
+`YieldAllAITools() chan *schema.AIYakTool`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.AIYakTool` |   |
+
+
+### YieldAllMCPServers
+
+#### 详细描述
+
+
+#### 定义
+
+`YieldAllMCPServers() chan *schema.MCPServer`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.MCPServer` |   |
 
 
 ### YieldPayload
