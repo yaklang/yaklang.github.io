@@ -41,6 +41,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.withExcludeFile](#withexcludefile) ||
 | [ssa.withExternLib](#withexternlib) ||
 | [ssa.withExternValue](#withexternvalue) ||
+| [ssa.withFilePerformanceLog](#withfileperformancelog) ||
 | [ssa.withJsonRawConfig](#withjsonrawconfig) ||
 | [ssa.withLanguage](#withlanguage) ||
 | [ssa.withMemory](#withmemory) ||
@@ -667,6 +668,26 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | value | `TValue` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withFilePerformanceLog
+
+#### 详细描述
+
+
+#### 定义
+
+`withFilePerformanceLog(enable bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
