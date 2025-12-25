@@ -561,17 +561,17 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 #### 定义
 
-`withDefaultExcludeFunc(excludeFiles ...string) Option`
+`withDefaultExcludeFunc(patterns []string) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| excludeFiles | `...string` |   |
+| patterns | `[]string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |   |
+| r1 | `ssaconfig.Option` |   |
 
 
 ### withDescription
@@ -621,12 +621,12 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 #### 定义
 
-`withExcludeFile(excludeFiles ...string) Option`
+`withExcludeFile(value TValue) Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| excludeFiles | `...string` |   |
+| value | `TValue` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
