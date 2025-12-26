@@ -33,6 +33,7 @@
 | [nuclei.interactshTimeout](#interactshtimeout) ||
 | [nuclei.logFile](#logfile) ||
 | [nuclei.metrics](#metrics) ||
+| [nuclei.mockHTTPRequest](#mockhttprequest) ||
 | [nuclei.mode](#mode) ||
 | [nuclei.newTemplates](#newtemplates) ||
 | [nuclei.noColor](#nocolor) ||
@@ -675,6 +676,26 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `any` |   |
+
+
+### mockHTTPRequest
+
+#### 详细描述
+
+
+#### 定义
+
+`mockHTTPRequest(f func(isHttps bool, urlStr string, req []byte, mockResponse func(rsp any))) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(isHttps bool, urlStr string, req []byte, mockResponse func(rsp any))` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
 
 
 ### mode
