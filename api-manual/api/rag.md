@@ -8,6 +8,8 @@
 | [rag.BuildCollectionFromReader](#buildcollectionfromreader) ||
 | [rag.BuildIndexKnowledgeFromFile](#buildindexknowledgefromfile) ||
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
+| [rag.BuildSearchIndexKnowledge](#buildsearchindexknowledge) |BuildSearchIndexKnowledge builds a search index for the given text content.  It generates 5-10 search questions that users might ask to find this cont...|
+| [rag.BuildSearchIndexKnowledgeFromFile](#buildsearchindexknowledgefromfile) |BuildSearchIndexKnowledgeFromFile builds a search index from a file.  It reads the file content and calls BuildSearchIndexKnowledge.    Parameters:   ...|
 | [rag.DeleteAllKnowledgeBase](#deleteallknowledgebase) |_deleteAllKnowledgeBase 删除所有知识库及其关联的 RAG 内容  清空所有: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等  |
 | [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
@@ -220,6 +222,111 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `&lt;-chan *schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### BuildSearchIndexKnowledge
+
+#### 详细描述
+BuildSearchIndexKnowledge builds a search index for the given text content.
+
+It generates 5-10 search questions that users might ask to find this content,
+
+and stores the original content as the knowledge entry.
+
+
+
+Parameters:
+
+  - kbName: the knowledge base name
+
+  - text: the content to index (e.g., tool description, usage, parameters)
+
+  - options: optional configuration (rag options, AI options, etc.)
+
+
+
+The function will:
+
+1. Use AI to generate 5-10 search questions based on the text
+
+2. Store the original text as the knowledge entry
+
+3. Set docMetadata with question_index and search_target for each question
+
+
+
+Example:
+```yak
+text = `
+工具名：端口扫描器
+目标：扫描目标主机的开放端口
+用法：指定目标IP和端口范围，工具会返回开放的端口列表
+`
+result = rag.BuildSearchIndexKnowledge("my-tools", text)~
+println("Generated questions:", result.Questions)
+```
+
+
+#### 定义
+
+`BuildSearchIndexKnowledge(kbName string, text string, option ...any) (*aiforge.SearchIndexResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| text | `string` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*aiforge.SearchIndexResult` |   |
+| r2 | `error` |   |
+
+
+### BuildSearchIndexKnowledgeFromFile
+
+#### 详细描述
+BuildSearchIndexKnowledgeFromFile builds a search index from a file.
+
+It reads the file content and calls BuildSearchIndexKnowledge.
+
+
+
+Parameters:
+
+  - kbName: the knowledge base name
+
+  - filename: the path to the file containing the content to index
+
+  - options: optional configuration (rag options, AI options, etc.)
+
+
+
+Example:
+```yak
+result = rag.BuildSearchIndexKnowledgeFromFile("my-tools", "/path/to/tool-description.txt")~
+println("Generated questions:", result.Questions)
+```
+
+
+#### 定义
+
+`BuildSearchIndexKnowledgeFromFile(kbName string, filename string, option ...any) (*aiforge.SearchIndexResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| kbName | `string` |   |
+| filename | `string` |   |
+| option | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*aiforge.SearchIndexResult` |   |
 | r2 | `error` |   |
 
 

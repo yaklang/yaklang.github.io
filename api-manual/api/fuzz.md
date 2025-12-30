@@ -23,6 +23,7 @@
 | [fuzz.context](#context) ||
 | [fuzz.https](#https) ||
 | [fuzz.noEncode](#noencode) ||
+| [fuzz.noEscapeHTML](#noescapehtml) ||
 | [fuzz.proxy](#proxy) ||
 | [fuzz.showTag](#showtag) ||
 
@@ -431,6 +432,26 @@ fuzz
 #### 定义
 
 `noEncode(i bool) BuildFuzzHTTPRequestOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BuildFuzzHTTPRequestOption` |   |
+
+
+### noEscapeHTML
+
+#### 详细描述
+
+
+#### 定义
+
+`noEscapeHTML(i bool) BuildFuzzHTTPRequestOption`
 
 #### 参数
 |参数名|参数类型|参数解释|

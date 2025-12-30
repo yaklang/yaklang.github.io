@@ -75,6 +75,7 @@
 | [poc.ReplaceHTTPPacketJsonBody](#replacehttppacketjsonbody) |ReplaceHTTPPacketJsonBody 是一个辅助函数，用于改变 HTTP 报文，修改 HTTP 报文主体内容（ json 格式），第一个参数为原始 HTTP 报文，第二个参数为修改的报文主体内容（ map 对象）  |
 | [poc.ReplaceHTTPPacketMethod](#replacehttppacketmethod) |ReplaceHTTPPacketMethod 是一个辅助函数，用于改变请求报文，修改请求方法  |
 | [poc.ReplaceHTTPPacketPath](#replacehttppacketpath) |ReplaceHTTPPacketPath 是一个辅助函数，用于改变请求报文，修改请求路径  |
+| [poc.ReplaceHTTPPacketPathFunc](#replacehttppacketpathfunc) ||
 | [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) |ReplaceHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) |ReplaceHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加  |
 | [poc.ReplaceHTTPPacketQueryParamWithoutEscape](#replacehttppacketqueryparamwithoutescape) |ReplaceHTTPPacketQueryParamWithoutEscape 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值  与 poc.Repl...|
@@ -148,6 +149,7 @@
 | [poc.replaceHost](#replacehost) |replaceHost 是一个请求选项参数，用于改变请求报文，修改Host请求头，如果不存在则会增加，实际上是replaceHeader(&amp;#34;Host&amp;#34;, host)的简写  |
 | [poc.replaceMethod](#replacemethod) |replaceMethod 是一个请求选项参数，用于改变请求报文，修改请求方法  |
 | [poc.replacePath](#replacepath) |replacePath 是一个请求选项参数，用于改变请求报文，修改请求路径  |
+| [poc.replacePathFunc](#replacepathfunc) |replacePathFunc 是一个请求选项参数，用于使用回调改变请求报文，修改请求路径  |
 | [poc.replacePostParam](#replacepostparam) |replacePostParam 是一个请求选项参数，用于改变请求报文，修改 POST 请求参数，如果不存在则会增加  |
 | [poc.replaceQueryParam](#replacequeryparam) |replaceQueryParam 是一个请求选项参数，用于改变请求报文，修改 GET 请求参数，如果不存在则会增加  |
 | [poc.replaceRandomUserAgent](#replacerandomuseragent) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
@@ -2357,6 +2359,27 @@ poc.ReplaceHTTPPacketPath(poc.BasicRequest(), "/get") // 修改请求路径为/g
 | r1 | `[]byte` |   |
 
 
+### ReplaceHTTPPacketPathFunc
+
+#### 详细描述
+
+
+#### 定义
+
+`ReplaceHTTPPacketPathFunc(packet []byte, callback func(originPath string) string) []byte`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| packet | `[]byte` |   |
+| callback | `func(originPath string) string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+
+
 ### ReplaceHTTPPacketPostParam
 
 #### 详细描述
@@ -4402,6 +4425,36 @@ poc.Get("https://pie.dev/post", poc.replacePath("/get")) // 向 pie.dev 发起�
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | path | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### replacePathFunc
+
+#### 详细描述
+replacePathFunc 是一个请求选项参数，用于使用回调改变请求报文，修改请求路径
+
+Example:
+```
+
+	poc.Get("https://pie.dev/post", poc.replacePath(func(a){
+		return "/get"
+	})) // 向 pie.dev 发起请求，实际上请求路径为/get
+
+```
+
+
+#### 定义
+
+`replacePathFunc(handle func(string) string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handle | `func(string) string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

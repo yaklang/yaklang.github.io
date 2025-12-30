@@ -6,6 +6,7 @@
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.Code](#code) ||
 | [yakit.Debug](#debug) ||
+| [yakit.DeleteAllAIEvent](#deleteallaievent) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
 | [yakit.EnableDotGraphTab](#enabledotgraphtab) ||
 | [yakit.EnableTable](#enabletable) ||
@@ -65,6 +66,7 @@
 | [yakit.UpdateYakitStoreFromGit](#updateyakitstorefromgit) ||
 | [yakit.UpdateYakitStoreLocal](#updateyakitstorelocal) ||
 | [yakit.Warn](#warn) ||
+| [yakit.YieldAllAIEvent](#yieldallaievent) ||
 | [yakit.fileChmodAction](#filechmodaction) ||
 | [yakit.fileCreateAction](#filecreateaction) ||
 | [yakit.fileDeleteAction](#filedeleteaction) ||
@@ -124,6 +126,21 @@
 |:-----------|:---------- |:-----------|
 | tmp | `string` |   |
 | items | `...any` |   |
+
+
+### DeleteAllAIEvent
+
+#### 详细描述
+
+
+#### 定义
+
+`DeleteAllAIEvent() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### DeletePayloadByGroup
@@ -1201,6 +1218,21 @@
 |:-----------|:---------- |:-----------|
 | tmp | `string` |   |
 | items | `...any` |   |
+
+
+### YieldAllAIEvent
+
+#### 详细描述
+
+
+#### 定义
+
+`YieldAllAIEvent() chan *schema.AiOutputEvent`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *schema.AiOutputEvent` |   |
 
 
 ### fileChmodAction
