@@ -12,9 +12,9 @@
 | [tls.GenerateRootCA](#generaterootca) |GenerateRootCA 根据名字生成根证书和私钥，返回PEM格式证书和私钥与错误  |
 | [tls.GenerateSM2KeyPair](#generatesm2keypair) |GenerateSM2KeyPair 生成SM2公私钥对，返回PEM格式公钥和私钥与错误  |
 | [tls.GenerateServerCert](#generateservercert) |GenerateServerCert 使用给定的 CA 签发一个服务器证书。 caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。 |
-| [tls.Inspect](#inspect) |Inspect 检查目标地址的TLS证书，并返回其证书信息与错误  |
-| [tls.InspectForceHttp1_1](#inspectforcehttp1_1) |InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议  |
-| [tls.InspectForceHttp2](#inspectforcehttp2) |InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议  |
+| [tls.Inspect](#inspect) |Inspect 检查目标地址的TLS证书，并返回其证书信息与错误  支持检测普通TLS和国密TLS(GMTLS)证书，自动尝试多种TLS握手方式并去重返回结果  |
+| [tls.InspectForceHttp1_1](#inspectforcehttp1_1) |InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议  支持检测普通TLS和国密TLS(GMTLS)证书  |
+| [tls.InspectForceHttp2](#inspectforcehttp2) |InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议  支持检测普通TLS和国密TLS(GMTLS)证书  |
 | [tls.SignClientCertAndKey](#signclientcertandkey) |SignClientCertAndKey 根据给定的CA证书和私钥，生成不包含认证的客户端证书和密钥，返回PEM格式的客户端证书和密钥与错误  |
 | [tls.SignServerCertAndKey](#signservercertandkey) |SignServerCertAndKey 根据给定的CA证书和私钥，生成不包含认证的服务器证书和密钥，返回PEM格式的服务器证书和密钥与错误  |
 | [tls.SignX509ClientCertAndKey](#signx509clientcertandkey) |SignX509ClientCertAndKey 根据给定的CA证书和私钥，生成客户端证书和密钥，返回PEM格式的客户端证书和密钥与错误  |
@@ -350,6 +350,8 @@ caCertPEM 和 caKeyPEM 是 PEM 编码的 CA 证书和私钥。
 #### 详细描述
 Inspect 检查目标地址的TLS证书，并返回其证书信息与错误
 
+支持检测普通TLS和国密TLS(GMTLS)证书，自动尝试多种TLS握手方式并去重返回结果
+
 Example:
 ```
 cert, err := tls.Inspect("yaklang.io:443")
@@ -377,6 +379,8 @@ cert, err := tls.Inspect("yaklang.io:443")
 #### 详细描述
 InspectForceHttp1_1 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/1.1协议
 
+支持检测普通TLS和国密TLS(GMTLS)证书
+
 Example:
 ```
 cert, err := tls.InspectForceHttp1_1("yaklang.io:443")
@@ -403,6 +407,8 @@ cert, err := tls.InspectForceHttp1_1("yaklang.io:443")
 
 #### 详细描述
 InspectForceHttp2 检查目标地址的TLS证书，并返回其证书信息与错误，强制使用HTTP/2协议
+
+支持检测普通TLS和国密TLS(GMTLS)证书
 
 Example:
 ```

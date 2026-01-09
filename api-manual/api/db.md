@@ -31,6 +31,7 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 | [db.QueryDomainsByDomainKeyword](#querydomainsbydomainkeyword) ||
 | [db.QueryDomainsByNetwork](#querydomainsbynetwork) ||
 | [db.QueryDomainsByTitle](#querydomainsbytitle) ||
+| [db.QueryHTTPFlowByID](#queryhttpflowbyid) ||
 | [db.QueryHTTPFlowsAll](#queryhttpflowsall) ||
 | [db.QueryHTTPFlowsByID](#queryhttpflowsbyid) ||
 | [db.QueryHTTPFlowsByKeyword](#queryhttpflowsbykeyword) ||
@@ -452,6 +453,27 @@ YAKIT_PLUGIN_TYPE_YAK|(string) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `chan *schema.Domain` |   |
+| r2 | `error` |   |
+
+
+### QueryHTTPFlowByID
+
+#### 详细描述
+
+
+#### 定义
+
+`QueryHTTPFlowByID(id int64) (*schema.HTTPFlow, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*schema.HTTPFlow` |   |
 | r2 | `error` |   |
 
 

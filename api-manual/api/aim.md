@@ -6,7 +6,7 @@
 | [aim.InvokeReActAsync](#invokereactasync) |InvokeReActAsync 异步执行 ReAct 任务，并返回引擎实例 |
 | [aim.NewAIEngine](#newaiengine) |NewAIEngine 创建新的 AI 引擎实例 |
 | [aim.aiCallback](#aicallback) |WithAICallback 设置 AI 回调 |
-| [aim.aiConfig](#aiconfig) ||
+| [aim.aiConfig](#aiconfig) |WithAIConfig 设置 AI 配置 |
 | [aim.aiReviewMode](#aireviewmode) ||
 | [aim.aiService](#aiservice) |WithAIService 设置 AI 服务 |
 | [aim.allowUserInteract](#allowuserinteract) |WithAllowUserInteract 设置是否允许用户交互 |
@@ -131,6 +131,7 @@ WithAICallback 设置 AI 回调
 ### aiConfig
 
 #### 详细描述
+WithAIConfig 设置 AI 配置
 
 
 #### 定义

@@ -32,6 +32,7 @@ grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
 | [mitm.mockHTTPRequest](#mockhttprequest) |mockHTTPRequest 是一个选项函数，用于指定中间人代理服务器的请求 mock 函数  当接收到请求后，会调用该回调函数，通过调用 mockResponse 函数可以直接返回自定义响应，跳过真实的网络请求  mockResponse 接受一个响应（字符串或字节数组），会自动修复响应格式，如...|
 | [mitm.randomJA3](#randomja3) |randomJA3 是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 劫持模式，默认为false  |
 | [mitm.rootCA](#rootca) |rootCA 是一个选项函数，用于指定中间人代理服务器的根证书和私钥  |
+| [mitm.sni](#sni) |sni 是一个选项函数，用于控制 MITM 代理连接目标服务器时的 SNI (Server Name Indication)  这在测试 CDN、WAF 或进行域前置 (Domain Fronting) 测试时非常有用    支持三种模式：  1. 自动模式（默认）：不调用此函数，根据请求的 Hos...|
 | [mitm.useDefaultCA](#usedefaultca) |useDefaultCA 是一个选项函数，用于指定中间人代理服务器是否使用内置的证书和私钥，默认为true  默认的证书与私钥路径：~/yakit-projects/yak-mitm-ca.crt 和 ~/yakit-projects/yak-mitm-ca.key  |
 | [mitm.wscallback](#wscallback) |wscallback 是一个选项函数，用于指定中间人代理服务器的 websocket 劫持函数，当接收到 websocket 请求或响应后，会调用该回调函数  该回调函数的第一个参数是请求或响应的内容  第二个参数是一个布尔值，用于指示该内容是请求还是响应，true 表示请求，false 表示响应 ...|
 | [mitm.wsforcetext](#wsforcetext) |wsforcetext 是一个选项函数，用于强制指定中间人代理服务器的 websocket 劫持的数据帧转换为文本帧，默认为false  ! 已弃用  |
@@ -704,6 +705,54 @@ mitm.Start(8080, mitm.rootCA(cert, key))
 |:-----------|:---------- |:-----------|
 | cert | `[]byte` |   |
 | key | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `MitmConfigOpt` |   |
+
+
+### sni
+
+#### 详细描述
+sni 是一个选项函数，用于控制 MITM 代理连接目标服务器时的 SNI (Server Name Indication)
+
+这在测试 CDN、WAF 或进行域前置 (Domain Fronting) 测试时非常有用
+
+
+
+支持三种模式：
+
+1. 自动模式（默认）：不调用此函数，根据请求的 Host 自动推断 SNI
+
+2. 强制模式：mitm.sni(&#34;custom.domain.com&#34;, true)，总是使用指定的 SNI
+
+3. 清空模式：mitm.sni(&#34;&#34;, true)，不发送 SNI
+
+
+
+Example:
+```
+// 强制模式：总是使用指定的 SNI
+mitm.Start(8080, mitm.sni("admin.example.com", true))
+
+// 清空模式：不发送 SNI
+mitm.Start(8080, mitm.sni("", true))
+
+// 自动模式：根据 Host 自动推断（默认行为）
+mitm.Start(8080)  // 或 mitm.sni("", false)
+```
+
+
+#### 定义
+
+`sni(sni string, overwrite bool) MitmConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sni | `string` |   |
+| overwrite | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

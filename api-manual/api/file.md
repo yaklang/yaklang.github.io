@@ -19,12 +19,14 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Clean](#clean) |Clean 清理路径中的多余的分隔符和 . 和 ..  |
 | [file.Cp](#cp) |Cp 拷贝文件或目录，返回错误  |
 | [file.Create](#create) |Create 创建一个文件，返回一个文件结构体引用与错误  |
+| [file.DetectFileType](#detectfiletype) |DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型  支持常见操作系统（Linux、Windows、macOS）中的各种文件格式  @param {string} filepath 文件路径  @return {string} MIME 类型字符串  @return {err...|
 | [file.DetectMIMETypeFromFile](#detectmimetypefromfile) ||
 | [file.DetectMIMETypeFromRaw](#detectmimetypefromraw) ||
 | [file.Dir](#dir) |Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片  |
 | [file.GetBase](#getbase) |GetBase 获取文件的基本名  |
 | [file.GetDirPath](#getdirpath) |GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录  |
 | [file.GetExt](#getext) |GetExt 获取文件的扩展名  |
+| [file.GetTypeByExtension](#gettypebyextension) |GetTypeByExtension 根据文件扩展名获取 MIME 类型  @param {string} ext 文件扩展名（可以带或不带点号，如 &amp;#34;.txt&amp;#34; 或 &amp;#34;txt&amp;#34;）  @return {string} MIME 类型字符串，如果未找到则返回 &amp;#34;...|
 | [file.IsAbs](#isabs) |IsAbs 判断路径是否是绝对路径  |
 | [file.IsDir](#isdir) |IsDir 判断路径是否存在且是一个目录  |
 | [file.IsExisted](#isexisted) |IsExisted 判断文件或目录是否存在  |
@@ -33,6 +35,7 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Join](#join) |Join 将任意数量的路径以默认路径分隔符链接在一起  |
 | [file.Ls](#ls) |Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名  |
 | [file.Lstat](#lstat) |Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息  |
+| [file.Md5](#md5) |Md5 计算文件的 MD5 哈希值  @param {string} filepath 文件路径  @return {string} MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串  |
 | [file.Mkdir](#mkdir) |Mkdir 创建一个目录，返回错误  |
 | [file.MkdirAll](#mkdirall) |MkdirAll 创建一个递归创建一个目录，返回错误  |
 | [file.Mv](#mv) |Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹，它是 Rename 的别名  ! 在 windows 下，无法将文件移动到不同的磁盘  |
@@ -188,6 +191,46 @@ f, err = file.Create("/tmp/test.txt")
 | r2 | `error` |   |
 
 
+### DetectFileType
+
+#### 详细描述
+DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型
+
+支持常见操作系统（Linux、Windows、macOS）中的各种文件格式
+
+@param {string} filepath 文件路径
+
+@return {string} MIME 类型字符串
+
+@return {error} 错误信息，如果无法识别文件类型则返回错误
+
+Example:
+```
+mimeType, err = file.DetectFileType("/path/to/file")
+
+	if err == nil {
+	    println(mimeType)  // "text/plain" 或 "application/pdf" 等
+	}
+
+```
+
+
+#### 定义
+
+`DetectFileType(filePath string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filePath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
 ### DetectMIMETypeFromFile
 
 #### 详细描述
@@ -328,6 +371,38 @@ file.GetExt("/tmp/test.txt") // ".txt"
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### GetTypeByExtension
+
+#### 详细描述
+GetTypeByExtension 根据文件扩展名获取 MIME 类型
+
+@param {string} ext 文件扩展名（可以带或不带点号，如 &#34;.txt&#34; 或 &#34;txt&#34;）
+
+@return {string} MIME 类型字符串，如果未找到则返回 &#34;application/octet-stream&#34;
+
+Example:
+```
+mimeType = file.GetTypeByExtension(".txt")  // "text/plain"
+mimeType = file.GetTypeByExtension("jpg")    // "image/jpeg"
+mimeType = file.GetTypeByExtension(".pdf")   // "application/pdf"
+```
+
+
+#### 定义
+
+`GetTypeByExtension(ext string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ext | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -552,6 +627,37 @@ desc(info)
 |:-----------|:---------- |:-----------|
 | r1 | `os.FileInfo` |   |
 | r2 | `error` |   |
+
+
+### Md5
+
+#### 详细描述
+Md5 计算文件的 MD5 哈希值
+
+@param {string} filepath 文件路径
+
+@return {string} MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串
+
+Example:
+```
+md5Hash = file.Md5("/path/to/file")
+println(md5Hash)  // "5d41402abc4b2a76b9719d911017c592"
+```
+
+
+#### 定义
+
+`Md5(filepath string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filepath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### Mkdir

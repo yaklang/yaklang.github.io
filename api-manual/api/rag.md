@@ -1,5 +1,13 @@
 # rag
 
+|实例名|实例描述|
+|:------|:--------|
+QUERY_ENHANCE_TYPE_BASIC|(string) &#34;basic&#34;|
+QUERY_ENHANCE_TYPE_EXACT_KEYWORD_SEARCH|(string) &#34;exact_keyword_search&#34;|
+QUERY_ENHANCE_TYPE_GENERALIZE_QUERY|(string) &#34;generalize_query&#34;|
+QUERY_ENHANCE_TYPE_HYPOTHETICAL_ANSWER|(string) &#34;hypothetical_answer&#34;|
+QUERY_ENHANCE_TYPE_SPLIT_QUERY|(string) &#34;split_query&#34;|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [rag.AddDocument](#adddocument) |_addDocument 向指定集合添加文档  |
@@ -10,6 +18,12 @@
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) ||
 | [rag.BuildSearchIndexKnowledge](#buildsearchindexknowledge) |BuildSearchIndexKnowledge builds a search index for the given text content.  It generates 5-10 search questions that users might ask to find this cont...|
 | [rag.BuildSearchIndexKnowledgeFromFile](#buildsearchindexknowledgefromfile) |BuildSearchIndexKnowledgeFromFile builds a search index from a file.  It reads the file content and calls BuildSearchIndexKnowledge.    Parameters:   ...|
+| [rag.DBQueryCountVectorsByEntry](#dbquerycountvectorsbyentry) |_dbQueryCountVectorsByEntryID 根据 entry_id 计算向量文档数量  用于检查某个知识条目有多少向量索引    Parameters:    - entryID: 知识条目的 HiddenIndex    - opts: 查询选项    |
+| [rag.DBQueryEntity](#dbqueryentity) |_dbQueryEntity 数据库直接查询实体  使用 SQL 模糊搜索，不使用语义搜索，速度非常快  适合去重检查、快速验证等场景    Parameters:    - keyword: 搜索关键词    - opts: 查询选项（集合、限制、偏移等）    |
+| [rag.DBQueryKnowledge](#dbqueryknowledge) |_dbQueryKnowledge 数据库直接查询知识库条目  使用 SQL 模糊搜索，不使用语义搜索，速度非常快（~2ms）  适合去重检查、快速验证等场景    Parameters:    - keyword: 搜索关键词    - opts: 查询选项（集合、限制、偏移等）    |
+| [rag.DBQueryKnowledgeExists](#dbqueryknowledgeexists) |_dbQueryKnowledgeExists 检查知识条目是否存在且有对应的向量索引  这个函数用于增量更新时的去重检查  只有当知识条目存在且有对应的向量文档时，才认为该条目已被完整索引    Parameters:    - keyword: 搜索关键词（通常是工具/插件名称）    - op...|
+| [rag.DBQueryUniqueKnowledgeTitles](#dbqueryuniqueknowledgetitles) |_dbQueryUniqueKnowledgeTitles 获取唯一的知识标题列表  使用 SQL DISTINCT 查询，返回不重复的 KnowledgeTitle 列表  适合增量更新时的快速去重检查    Parameters:    - opts: 查询选项（集合、限制等）    Retur...|
+| [rag.DBQueryVectorDocument](#dbqueryvectordocument) |_dbQueryVectorDocument 数据库直接查询向量文档  使用 SQL 模糊搜索，不使用语义搜索，速度非常快  适合去重检查、快速验证等场景    Parameters:    - keyword: 搜索关键词    - opts: 查询选项（集合、限制、偏移等）    |
 | [rag.DeleteAllKnowledgeBase](#deleteallknowledgebase) |_deleteAllKnowledgeBase 删除所有知识库及其关联的 RAG 内容  清空所有: RAG 向量库、RAG 集合综述库、知识库条目库、知识库集合、问题索引库等  |
 | [rag.DeleteCollection](#deletecollection) |_deleteCollection 删除指定的 RAG 集合  |
 | [rag.DeleteDocument](#deletedocument) |_deleteDocument 从指定集合删除文档  |
@@ -29,7 +43,7 @@
 | [rag.NewRagDatabase](#newragdatabase) ||
 | [rag.NewTempRagDatabase](#newtempragdatabase) |_newTempRagDatabase 创建临时 RAG 数据库  |
 | [rag.OnlineEmbedding](#onlineembedding) |_onlineEmbedding 使用在线嵌入服务生成文本的向量表示  使用 AIBalance 免费在线服务，无需安装本地模型  |
-| [rag.Query](#query) ||
+| [rag.Query](#query) |_query 统一的查询/搜索接口  支持多种查询模式:  1. 无参数 - 查询所有集合  2. queryCollection/queryCollections - 指定集合查询  3. queryRAGFilename - 从 RAG 文件导入后查询    |
 | [rag.QueryDocuments](#querydocuments) |_queryDocuments 在指定集合中查询文档  |
 | [rag.aiService](#aiservice) ||
 | [rag.aiServiceType](#aiservicetype) ||
@@ -38,10 +52,18 @@
 | [rag.chunkSize](#chunksize) ||
 | [rag.ctx](#ctx) ||
 | [rag.db](#db) ||
+| [rag.dbQueryCollection](#dbquerycollection) |_dbQueryCollection 指定查询的集合名称（单个）  |
+| [rag.dbQueryCollections](#dbquerycollections) |_dbQueryCollections 指定查询的多个集合名称  |
+| [rag.dbQueryCtx](#dbqueryctx) |_dbQueryCtx 设置查询上下文  |
+| [rag.dbQueryDB](#dbquerydb) |_dbQueryDB 指定数据库连接  |
+| [rag.dbQueryLimit](#dbquerylimit) |_dbQueryLimit 设置查询结果数量限制  |
+| [rag.dbQueryOffset](#dbqueryoffset) |_dbQueryOffset 设置查询偏移量（用于分页）  |
+| [rag.dbQueryRAGFilename](#dbqueryragfilename) |_dbQueryRAGFilename 从 RAG 文件导入后查询  自动导入 RAG 文件到临时集合，然后在该集合上执行查询  |
 | [rag.docMetadata](#docmetadata) |WithDocumentMetadataKeyValue sets document metadata key-value pairs |
 | [rag.docRawMetadata](#docrawmetadata) |WithDocumentRawMetadata sets raw document metadata |
 | [rag.documentHandler](#documenthandler) ||
 | [rag.embeddingHandle](#embeddinghandle) |_embeddingHandle 创建自定义嵌入处理器  |
+| [rag.enableQuestionIndex](#enablequestionindex) ||
 | [rag.entryLength](#entrylength) ||
 | [rag.extraPrompt](#extraprompt) ||
 | [rag.getEntityFilter](#getentityfilter) ||
@@ -58,15 +80,19 @@
 | [rag.noKnowledgeBase](#noknowledgebase) |_noKnowledgeBase 禁用知识库  |
 | [rag.noMetadata](#nometadata) ||
 | [rag.noOriginInput](#noorigininput) ||
+| [rag.noPotentialQuestions](#nopotentialquestions) |NoPotentialQuestions returns a RAGSystemConfigOption that excludes potential_questions from metadata This is a convenient shortcut for WithNoPotential...|
 | [rag.onlyPQCode](#onlypqcode) ||
 | [rag.pathDepth](#pathdepth) ||
 | [rag.progressHandler](#progresshandler) ||
 | [rag.queryCollection](#querycollection) |WithRAGCollectionName sets the specific collection name to query |
+| [rag.queryCollections](#querycollections) |_queryCollections 指定查询的多个集合名称  |
 | [rag.queryConcurrent](#queryconcurrent) |WithRAGConcurrent sets the concurrency level for query operations |
 | [rag.queryCtx](#queryctx) |WithRAGCtx sets the context for RAG query operations |
 | [rag.queryEnhance](#queryenhance) |WithRAGEnhance sets the enhancement strategies to apply |
 | [rag.queryLimit](#querylimit) |WithRAGLimit sets the maximum number of results to return |
+| [rag.queryRAGFilename](#queryragfilename) |_queryRAGFilename 从 RAG 文件导入后查询（自动导入）  适合法规条文、技术规范等精确搜索场景  |
 | [rag.queryScoreLimit](#queryscorelimit) |WithRAGCollectionScoreLimit sets the score limit for collection filtering |
+| [rag.querySimilarityThreshold](#querysimilaritythreshold) |WithRAGSimilarityThreshold sets the minimum similarity threshold for results |
 | [rag.queryStatus](#querystatus) |WithRAGQueryStatus sets the query status callback function |
 | [rag.queryType](#querytype) |WithRAGDocumentType sets the document type filter |
 | [rag.ragCosineDistance](#ragcosinedistance) ||
@@ -76,6 +102,7 @@
 | [rag.ragHNSWParameters](#raghnswparameters) |WithHNSWParameters sets HNSW parameters |
 | [rag.ragImportFile](#ragimportfile) ||
 | [rag.ragModelDimension](#ragmodeldimension) |WithModelDimension sets the model dimension |
+| [rag.setSearchMeta](#setsearchmeta) |_setSearchMeta 快捷设置搜索元数据 (search_type 和 search_target)  用于同时设置 search_type 和 search_target 两个元数据字段    Parameters:    - searchType: 搜索类型，例如 &amp;#34;AI工具&amp;#...|
 | [rag.statusCard](#statuscard) ||
 
 
@@ -327,6 +354,321 @@ println("Generated questions:", result.Questions)
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*aiforge.SearchIndexResult` |   |
+| r2 | `error` |   |
+
+
+### DBQueryCountVectorsByEntry
+
+#### 详细描述
+_dbQueryCountVectorsByEntryID 根据 entry_id 计算向量文档数量
+
+用于检查某个知识条目有多少向量索引
+
+
+
+Parameters:
+
+  - entryID: 知识条目的 HiddenIndex
+
+  - opts: 查询选项
+
+
+
+Example:
+```yak
+
+	count = rag.DBQueryCountVectorsByEntryID("abc123", rag.dbQueryRAGFilename("/tmp/caps.rag"))~
+	println("This entry has", count, "vector indexes")
+
+```
+
+
+#### 定义
+
+`DBQueryCountVectorsByEntry(entryID string, opts ...DBQueryOption) (int, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| entryID | `string` |   |
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+| r2 | `error` |   |
+
+
+### DBQueryEntity
+
+#### 详细描述
+_dbQueryEntity 数据库直接查询实体
+
+使用 SQL 模糊搜索，不使用语义搜索，速度非常快
+
+适合去重检查、快速验证等场景
+
+
+
+Parameters:
+
+  - keyword: 搜索关键词
+
+  - opts: 查询选项（集合、限制、偏移等）
+
+
+
+Example:
+```yak
+
+	// 基本用法
+	entities = rag.DBQueryEntity("用户")~
+	for _, entity := range entities {
+	    println(entity.EntityName, entity.EntityType)
+	}
+
+	// 指定集合
+	entities = rag.DBQueryEntity("关键词", rag.dbQueryCollection("my-repo"))~
+
+	// 从 RAG 文件查询
+	entities = rag.DBQueryEntity("关键词", rag.dbQueryRAGFilename("/tmp/my.rag"))~
+
+```
+
+
+#### 定义
+
+`DBQueryEntity(keyword string, opts ...DBQueryOption) ([]*schema.ERModelEntity, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyword | `string` |   |
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*schema.ERModelEntity` |   |
+| r2 | `error` |   |
+
+
+### DBQueryKnowledge
+
+#### 详细描述
+_dbQueryKnowledge 数据库直接查询知识库条目
+
+使用 SQL 模糊搜索，不使用语义搜索，速度非常快（~2ms）
+
+适合去重检查、快速验证等场景
+
+
+
+Parameters:
+
+  - keyword: 搜索关键词
+
+  - opts: 查询选项（集合、限制、偏移等）
+
+
+
+Example:
+```yak
+
+	// 基本用法
+	entries = rag.DBQueryKnowledge("get_location")~
+	for _, entry := range entries {
+	    println(entry.KnowledgeTitle)
+	}
+
+	// 指定集合
+	entries = rag.DBQueryKnowledge("关键词", rag.dbQueryCollection("my-collection"))~
+
+	// 从 RAG 文件查询
+	entries = rag.DBQueryKnowledge("关键词", rag.dbQueryRAGFilename("/tmp/my.rag"))~
+
+	// 分页查询
+	entries = rag.DBQueryKnowledge("关键词", rag.dbQueryLimit(10), rag.dbQueryOffset(20))~
+
+```
+
+
+#### 定义
+
+`DBQueryKnowledge(keyword string, opts ...DBQueryOption) ([]*schema.KnowledgeBaseEntry, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyword | `string` |   |
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*schema.KnowledgeBaseEntry` |   |
+| r2 | `error` |   |
+
+
+### DBQueryKnowledgeExists
+
+#### 详细描述
+_dbQueryKnowledgeExists 检查知识条目是否存在且有对应的向量索引
+
+这个函数用于增量更新时的去重检查
+
+只有当知识条目存在且有对应的向量文档时，才认为该条目已被完整索引
+
+
+
+Parameters:
+
+  - keyword: 搜索关键词（通常是工具/插件名称）
+
+  - opts: 查询选项
+
+
+
+Returns:
+
+  - *DBQueryKnowledgeExistsResult: 检查结果，包含是否存在、知识条目、向量数量等
+
+
+
+Example:
+```yak
+
+	result = rag.DBQueryKnowledgeExists("get_location", rag.dbQueryRAGFilename("/tmp/caps.rag"))~
+	if result.Exists {
+	    println("Already indexed with", result.VectorDocCount, "vectors")
+	}
+
+```
+
+
+#### 定义
+
+`DBQueryKnowledgeExists(keyword string, opts ...DBQueryOption) (*DBQueryKnowledgeExistsResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyword | `string` |   |
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*DBQueryKnowledgeExistsResult` |   |
+| r2 | `error` |   |
+
+
+### DBQueryUniqueKnowledgeTitles
+
+#### 详细描述
+_dbQueryUniqueKnowledgeTitles 获取唯一的知识标题列表
+
+使用 SQL DISTINCT 查询，返回不重复的 KnowledgeTitle 列表
+
+适合增量更新时的快速去重检查
+
+
+
+Parameters:
+
+  - opts: 查询选项（集合、限制等）
+
+
+
+Returns:
+
+  - []string: 唯一的知识标题列表
+
+
+
+Example:
+```yak
+
+	// 获取所有唯一的知识标题
+	titles = rag.DBQueryUniqueKnowledgeTitles(rag.dbQueryCollection("my-collection"))~
+	for _, title := range titles {
+	    println(title)
+	}
+
+	// 从 RAG 文件查询
+	titles = rag.DBQueryUniqueKnowledgeTitles(rag.dbQueryRAGFilename("/tmp/my.rag"))~
+
+```
+
+
+#### 定义
+
+`DBQueryUniqueKnowledgeTitles(opts ...DBQueryOption) ([]string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+| r2 | `error` |   |
+
+
+### DBQueryVectorDocument
+
+#### 详细描述
+_dbQueryVectorDocument 数据库直接查询向量文档
+
+使用 SQL 模糊搜索，不使用语义搜索，速度非常快
+
+适合去重检查、快速验证等场景
+
+
+
+Parameters:
+
+  - keyword: 搜索关键词
+
+  - opts: 查询选项（集合、限制、偏移等）
+
+
+
+Example:
+```yak
+
+	// 基本用法
+	docs = rag.DBQueryVectorDocument("关键词")~
+	for _, doc := range docs {
+	    println(doc.DocumentID, doc.Content[:100])
+	}
+
+	// 指定集合
+	docs = rag.DBQueryVectorDocument("关键词", rag.dbQueryCollection("my-collection"))~
+
+	// 从 RAG 文件查询
+	docs = rag.DBQueryVectorDocument("关键词", rag.dbQueryRAGFilename("/tmp/my.rag"))~
+
+```
+
+
+#### 定义
+
+`DBQueryVectorDocument(keyword string, opts ...DBQueryOption) ([]*schema.VectorStoreDocument, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| keyword | `string` |   |
+| opts | `...DBQueryOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*schema.VectorStoreDocument` |   |
 | r2 | `error` |   |
 
 
@@ -824,22 +1166,61 @@ Example:
 ### Query
 
 #### 详细描述
+_query 统一的查询/搜索接口
+
+支持多种查询模式:
+
+1. 无参数 - 查询所有集合
+
+2. queryCollection/queryCollections - 指定集合查询
+
+3. queryRAGFilename - 从 RAG 文件导入后查询
+
+
+
+Example:
+```
+
+	// 查询所有集合
+	results = rag.Query("如何使用 XSS 检测?")~
+
+	// 查询指定集合（单个）
+	results = rag.Query("如何使用 MITM 插件?", rag.queryCollection("yaklang-yakscript-plugins"))~
+
+	// 查询多个集合
+	results = rag.Query("XSS 漏洞", rag.queryCollections("plugins", "tools", "docs"))~
+
+	// 从 RAG 文件导入后查询（适合法规条文等精确搜索）
+	results = rag.Query("法规第2.3条", rag.queryRAGFilename("/path/to/law.rag"))~
+
+	// 组合使用
+	results = rag.Query("XSS 漏洞",
+	    rag.queryCollections("plugins"),
+	    rag.queryLimit(20),
+	    rag.querySimilarityThreshold(0.5),
+	    rag.queryEnhance(
+	        rag.QUERY_ENHANCE_TYPE_HYPOTHETICAL_ANSWER,
+	        rag.QUERY_ENHANCE_TYPE_EXACT_KEYWORD_SEARCH,
+	    ),
+	)~
+
+```
 
 
 #### 定义
 
-`Query(query string, opts ...RAGSystemConfigOption) (&lt;-chan *RAGSearchResult, error)`
+`Query(query string, opts ...rag.RAGSystemConfigOption) (&lt;-chan *rag.RAGSearchResult, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | query | `string` |   |
-| opts | `...RAGSystemConfigOption` |   |
+| opts | `...rag.RAGSystemConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `&lt;-chan *RAGSearchResult` |   |
+| r1 | `&lt;-chan *rag.RAGSearchResult` |   |
 | r2 | `error` |   |
 
 
@@ -1016,6 +1397,206 @@ Example:
 | r1 | `RAGSystemConfigOption` |   |
 
 
+### dbQueryCollection
+
+#### 详细描述
+_dbQueryCollection 指定查询的集合名称（单个）
+
+Example:
+```
+
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryCollection("my-collection"))
+
+```
+
+
+#### 定义
+
+`dbQueryCollection(name string) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryCollections
+
+#### 详细描述
+_dbQueryCollections 指定查询的多个集合名称
+
+Example:
+```
+
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryCollections("col1", "col2"))
+
+```
+
+
+#### 定义
+
+`dbQueryCollections(names ...string) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| names | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryCtx
+
+#### 详细描述
+_dbQueryCtx 设置查询上下文
+
+Example:
+```
+
+	ctx = context.WithTimeout(context.Background(), 10*time.Second)
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryCtx(ctx))
+
+```
+
+
+#### 定义
+
+`dbQueryCtx(ctx context.Context) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryDB
+
+#### 详细描述
+_dbQueryDB 指定数据库连接
+
+Example:
+```
+
+	db = rag.NewRagDatabase("/path/to/db")
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryDB(db))
+
+```
+
+
+#### 定义
+
+`dbQueryDB(db *gorm.DB) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| db | `*gorm.DB` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryLimit
+
+#### 详细描述
+_dbQueryLimit 设置查询结果数量限制
+
+Example:
+```
+
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryLimit(10))
+
+```
+
+
+#### 定义
+
+`dbQueryLimit(limit int) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| limit | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryOffset
+
+#### 详细描述
+_dbQueryOffset 设置查询偏移量（用于分页）
+
+Example:
+```
+
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryOffset(20), rag.dbQueryLimit(10))
+
+```
+
+
+#### 定义
+
+`dbQueryOffset(offset int) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| offset | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
+### dbQueryRAGFilename
+
+#### 详细描述
+_dbQueryRAGFilename 从 RAG 文件导入后查询
+
+自动导入 RAG 文件到临时集合，然后在该集合上执行查询
+
+Example:
+```
+
+	results = rag.DBQueryKnowledge("关键词", rag.dbQueryRAGFilename("/path/to/my.rag"))
+
+```
+
+
+#### 定义
+
+`dbQueryRAGFilename(filename string) DBQueryOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DBQueryOption` |   |
+
+
 ### docMetadata
 
 #### 详细描述
@@ -1107,6 +1688,26 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `rag.RAGSystemConfigOption` |   |
+
+
+### enableQuestionIndex
+
+#### 详细描述
+
+
+#### 定义
+
+`enableQuestionIndex(enable bool) RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGSystemConfigOption` |   |
 
 
 ### entryLength
@@ -1443,6 +2044,23 @@ Example:
 | r1 | `RAGSystemConfigOption` |   |
 
 
+### noPotentialQuestions
+
+#### 详细描述
+NoPotentialQuestions returns a RAGSystemConfigOption that excludes potential_questions from metadata
+This is a convenient shortcut for WithNoPotentialQuestions(true)
+
+
+#### 定义
+
+`noPotentialQuestions() RAGSystemConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGSystemConfigOption` |   |
+
+
 ### onlyPQCode
 
 #### 详细描述
@@ -1522,6 +2140,34 @@ WithRAGCollectionName sets the specific collection name to query
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RAGSystemConfigOption` |   |
+
+
+### queryCollections
+
+#### 详细描述
+_queryCollections 指定查询的多个集合名称
+
+Example:
+```
+
+	results = rag.Query("如何使用 MITM 插件?", rag.queryCollections("collection1", "collection2", "collection3"))~
+
+```
+
+
+#### 定义
+
+`queryCollections(names ...string) rag.RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| names | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `rag.RAGSystemConfigOption` |   |
 
 
 ### queryConcurrent
@@ -1608,6 +2254,36 @@ WithRAGLimit sets the maximum number of results to return
 | r1 | `RAGSystemConfigOption` |   |
 
 
+### queryRAGFilename
+
+#### 详细描述
+_queryRAGFilename 从 RAG 文件导入后查询（自动导入）
+
+适合法规条文、技术规范等精确搜索场景
+
+Example:
+```
+
+	results = rag.Query("法规第2.3条", rag.queryRAGFilename("/path/to/law.rag"))~
+
+```
+
+
+#### 定义
+
+`queryRAGFilename(filename string) rag.RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `rag.RAGSystemConfigOption` |   |
+
+
 ### queryScoreLimit
 
 #### 详细描述
@@ -1622,6 +2298,27 @@ WithRAGCollectionScoreLimit sets the score limit for collection filtering
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | scoreLimit | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGSystemConfigOption` |   |
+
+
+### querySimilarityThreshold
+
+#### 详细描述
+WithRAGSimilarityThreshold sets the minimum similarity threshold for results
+
+
+#### 定义
+
+`querySimilarityThreshold(threshold float64) RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| threshold | `float64` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -1805,6 +2502,45 @@ WithModelDimension sets the model dimension
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RAGSystemConfigOption` |   |
+
+
+### setSearchMeta
+
+#### 详细描述
+_setSearchMeta 快捷设置搜索元数据 (search_type 和 search_target)
+
+用于同时设置 search_type 和 search_target 两个元数据字段
+
+
+
+Parameters:
+
+  - searchType: 搜索类型，例如 &#34;AI工具&#34;, &#34;Yak插件&#34;, &#34;aiforge/模版/技能&#34; 等
+
+  - searchTarget: 搜索目标，例如插件名称、工具名称等
+
+
+
+Example:
+```yak
+rag.BuildSearchIndexKnowledge("my-tools", text, rag.setSearchMeta("AI工具", "端口扫描器"))
+```
+
+
+#### 定义
+
+`setSearchMeta(searchType string, searchTarget string) rag.RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| searchType | `string` |   |
+| searchTarget | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `rag.RAGSystemConfigOption` |   |
 
 
 ### statusCard
