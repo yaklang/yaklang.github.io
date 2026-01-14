@@ -35,10 +35,13 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Join](#join) |Join 将任意数量的路径以默认路径分隔符链接在一起  |
 | [file.Ls](#ls) |Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名  |
 | [file.Lstat](#lstat) |Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息  |
+| [file.MatchMalicious](#matchmalicious) |MatchMalicious 检测文件或内容是否包含恶意特征  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容  @param {string\|[]byte} input 文件路径或文件内容  @return {[]s...|
+| [file.MatchMaliciousWithDetails](#matchmaliciouswithdetails) |MatchMaliciousWithDetails 检测文件或内容并返回详细信息  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容  @param {string\|[]byte} input 文件路径或文件内容  @r...|
 | [file.Md5](#md5) |Md5 计算文件的 MD5 哈希值  @param {string} filepath 文件路径  @return {string} MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串  |
 | [file.Mkdir](#mkdir) |Mkdir 创建一个目录，返回错误  |
 | [file.MkdirAll](#mkdirall) |MkdirAll 创建一个递归创建一个目录，返回错误  |
 | [file.Mv](#mv) |Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹，它是 Rename 的别名  ! 在 windows 下，无法将文件移动到不同的磁盘  |
+| [file.NewMaliciousFileMatcher](#newmaliciousfilematcher) |NewMaliciousFileMatcher 创建恶意文件特征匹配器 |
 | [file.NewMultiFileLineReader](#newmultifilelinereader) |NewMultiFileLineReader 创建一个多文件读取器，返回一个多文件读取器结构体引用和错误  |
 | [file.Open](#open) |Open 打开一个文件，返回一个文件结构体引用与错误  |
 | [file.OpenFile](#openfile) |OpenFile 打开一个文件，使用 file.O_CREATE ... 和权限控制，返回一个文件结构体引用与错误  |
@@ -53,6 +56,8 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Rm](#rm) |Rm 删除路径及其包含的所有子路径，它是 Remove 的别名  |
 | [file.Save](#save) |Save 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误  |
 | [file.SaveJson](#savejson) |SaveJson 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误  与 Save 不同的是，如果传入的参数是其他类型，会尝试将其序列化为 json 字符再写入到文件中  |
+| [file.Sha1](#sha1) |Sha1 计算文件的 SHA1 哈希值  @param {string} filepath 文件路径  @return {string} SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串  |
+| [file.Sha256](#sha256) |Sha256 计算文件的 SHA256 哈希值  @param {string} filepath 文件路径  @return {string} SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串  |
 | [file.Split](#split) |Split 以操作系统的默认路径分隔符分割路径，返回目录和文件名  |
 | [file.Stat](#stat) |Stat 返回一个文件的信息和错误  |
 | [file.TailF](#tailf) |TailF 模拟 unix 命令 tail -f，执行这个函数会一直阻塞，打印文件内容到标准输出，如果文件有变化，会自动打印新的内容  |
@@ -629,6 +634,106 @@ desc(info)
 | r2 | `error` |   |
 
 
+### MatchMalicious
+
+#### 详细描述
+MatchMalicious 检测文件或内容是否包含恶意特征
+
+支持两种输入类型：
+
+  - string: 文件路径，会读取文件内容进行匹配
+
+  - []byte: 文件内容，直接匹配内容
+
+@param {string|[]byte} input 文件路径或文件内容
+
+@return {[]string} 匹配到的特征名称列表
+
+@return {error} 错误信息（仅当输入为文件路径且读取失败时返回）
+
+Example:
+```
+// 方式1: 匹配文件
+matches, err = file.MatchMalicious("/path/to/suspicious.php")
+if err == nil && len(matches) > 0 {
+    println("发现恶意特征:", matches)
+}
+
+// 方式2: 匹配内容
+content = file.ReadFile("/path/to/suspicious.php")
+matches, err = file.MatchMalicious(content)
+if len(matches) > 0 {
+    println("发现恶意特征:", matches)
+}
+```
+
+
+#### 定义
+
+`MatchMalicious(input any) ([]string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]string` |   |
+| r2 | `error` |   |
+
+
+### MatchMaliciousWithDetails
+
+#### 详细描述
+MatchMaliciousWithDetails 检测文件或内容并返回详细信息
+
+支持两种输入类型：
+
+  - string: 文件路径，会读取文件内容进行匹配
+
+  - []byte: 文件内容，直接匹配内容
+
+@param {string|[]byte} input 文件路径或文件内容
+
+@return {[]map[string]interface{}} 匹配到的特征详细信息列表
+
+@return {error} 错误信息（仅当输入为文件路径且读取失败时返回）
+
+Example:
+```
+// 方式1: 匹配文件
+details, err = file.MatchMaliciousWithDetails("/path/to/suspicious.php")
+if err == nil {
+    for detail in details {
+        println(sprintf("特征: %s, 分类: %s, 严重程度: %s",
+            detail["name"], detail["category"], detail["severity"]))
+    }
+}
+
+// 方式2: 匹配内容
+content = file.ReadFile("/path/to/suspicious.php")
+details, err = file.MatchMaliciousWithDetails(content)
+```
+
+
+#### 定义
+
+`MatchMaliciousWithDetails(input any) ([]map[string]any, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]map[string]any` |   |
+| r2 | `error` |   |
+
+
 ### Md5
 
 #### 详细描述
@@ -741,6 +846,22 @@ err = file.Rename("/tmp/test.txt", "/tmp/test2.txt")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### NewMaliciousFileMatcher
+
+#### 详细描述
+NewMaliciousFileMatcher 创建恶意文件特征匹配器
+
+
+#### 定义
+
+`NewMaliciousFileMatcher() *MaliciousFileMatcher`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*MaliciousFileMatcher` |   |
 
 
 ### NewMultiFileLineReader
@@ -1136,6 +1257,68 @@ file.SaveJson("/tmp/test.txt", "hello yak")
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### Sha1
+
+#### 详细描述
+Sha1 计算文件的 SHA1 哈希值
+
+@param {string} filepath 文件路径
+
+@return {string} SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串
+
+Example:
+```
+sha1Hash = file.Sha1("/path/to/file")
+println(sha1Hash)  // "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d"
+```
+
+
+#### 定义
+
+`Sha1(filepath string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filepath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### Sha256
+
+#### 详细描述
+Sha256 计算文件的 SHA256 哈希值
+
+@param {string} filepath 文件路径
+
+@return {string} SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串
+
+Example:
+```
+sha256Hash = file.Sha256("/path/to/file")
+println(sha256Hash)  // "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+```
+
+
+#### 定义
+
+`Sha256(filepath string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filepath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
 
 
 ### Split

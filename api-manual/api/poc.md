@@ -20,6 +20,8 @@
 | [poc.DeleteHTTPPacketPostParam](#deletehttppacketpostparam) |DeleteHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，删除POST请求参数  |
 | [poc.DeleteHTTPPacketQueryParam](#deletehttppacketqueryparam) |DeleteHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，删除GET请求参数  |
 | [poc.Do](#do) |Do 向指定 URL 发送指定请求方法的请求并且返回响应结构体，请求结构体以及错误，它的是第一个参数是请求方法，第二个参数 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看 ...|
+| [poc.Download](#download) |Download 从指定 URL 下载文件并保存到本地，返回保存的文件路径和错误  支持进度回调、完成回调、自定义文件名和保存目录等选项  |
+| [poc.DownloadWithMethod](#downloadwithmethod) |DownloadWithMethod 使用指定的 HTTP 方法从 URL 下载文件  |
 | [poc.ExtractPostParams](#extractpostparams) |ExtractPostParams 尝试将 HTTP 请求报文中的各种 POST 参数(普通格式，表单格式，JSON格式，XML格式)提取出来，返回提取出来的 POST 参数与错误  |
 | [poc.FixHTTPPacketCRLF](#fixhttppacketcrlf) |FixHTTPPacketCRLF 修复一个HTTP报文的CRLF问题（正常的报文每行末尾为\r\n，但是某些报文可能是有\n），如果noFixLength为true，则不会修复Content-Length，否则会尝试修复Content-Length  |
 | [poc.FixHTTPRequest](#fixhttprequest) |FixHTTPRequest 尝试对传入的HTTP请求报文进行修复，并返回修复后的请求  |
@@ -103,6 +105,10 @@
 | [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除 GET 请求参数  |
 | [poc.dnsNoCache](#dnsnocache) |dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存，默认使用DNS缓存  |
 | [poc.dnsServer](#dnsserver) |dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器  |
+| [poc.downloadDir](#downloaddir) |downloadDir 是一个下载选项参数，用于指定文件保存目录  如果不指定，将保存到默认的 yakit 下载目录  |
+| [poc.downloadFilename](#downloadfilename) |downloadFilename 是一个下载选项参数，用于手动指定保存的文件名  如果不指定，将自动从 Content-Disposition 响应头或 URL 路径中提取文件名  |
+| [poc.downloadFinished](#downloadfinished) |downloadFinished 是一个下载选项参数，用于设置下载完成回调函数  回调函数接收一个参数：保存的文件完整路径  |
+| [poc.downloadProgress](#downloadprogress) |downloadProgress 是一个下载选项参数，用于设置下载进度回调函数  回调函数接收三个参数：已下载字节数、总字节数、下载百分比(0-100)  |
 | [poc.fakeua](#fakeua) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
 | [poc.fixQueryEscape](#fixqueryescape) |fixQueryEscape 是一个请求选项参数，用于指定是否修复查询参数中的 URL 编码，默认为 false 即会自动修复URL编码  |
 | [poc.fromPlugin](#fromplugin) ||
@@ -704,6 +710,70 @@ desc(rsp) // 查看响应结构体中的可用字段
 | rspInst | `*lowhttp.LowhttpResponse` |   |
 | reqInst | `*http.Request` |   |
 | err | `error` |   |
+
+
+### Download
+
+#### 详细描述
+Download 从指定 URL 下载文件并保存到本地，返回保存的文件路径和错误
+
+支持进度回调、完成回调、自定义文件名和保存目录等选项
+
+Example:
+```
+filename, err = poc.Download("https://example.com/file.zip")
+filename, err = poc.Download("https://example.com/file.zip", poc.downloadProgress(func(downloaded, total, percent) {
+
+	println(sprintf("下载进度: %.2f%%", percent))
+
+}), poc.downloadFilename("my_file.zip"))
+```
+
+
+#### 定义
+
+`Download(urlStr string, opts ...PocConfigOption) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| urlStr | `string` |   |
+| opts | `...PocConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### DownloadWithMethod
+
+#### 详细描述
+DownloadWithMethod 使用指定的 HTTP 方法从 URL 下载文件
+
+Example:
+```
+filename, err = poc.DownloadWithMethod("POST", "https://example.com/download", poc.body("token=xxx"))
+```
+
+
+#### 定义
+
+`DownloadWithMethod(method string, urlStr string, opts ...PocConfigOption) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| method | `string` |   |
+| urlStr | `string` |   |
+| opts | `...PocConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
 
 
 ### ExtractPostParams
@@ -3161,6 +3231,126 @@ poc.Get("https://exmaple.com", poc.dnsServer("8.8.8.8", "1.1.1.1"))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | servers | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### downloadDir
+
+#### 详细描述
+downloadDir 是一个下载选项参数，用于指定文件保存目录
+
+如果不指定，将保存到默认的 yakit 下载目录
+
+Example:
+```
+poc.Download("https://example.com/file.zip", poc.downloadDir("/tmp/downloads"))
+```
+
+
+#### 定义
+
+`downloadDir(dir string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| dir | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### downloadFilename
+
+#### 详细描述
+downloadFilename 是一个下载选项参数，用于手动指定保存的文件名
+
+如果不指定，将自动从 Content-Disposition 响应头或 URL 路径中提取文件名
+
+Example:
+```
+poc.Download("https://example.com/file.zip", poc.downloadFilename("my_file.zip"))
+```
+
+
+#### 定义
+
+`downloadFilename(filename string) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### downloadFinished
+
+#### 详细描述
+downloadFinished 是一个下载选项参数，用于设置下载完成回调函数
+
+回调函数接收一个参数：保存的文件完整路径
+
+Example:
+```
+poc.Download("https://example.com/file.zip", poc.downloadFinished(func(filePath) {
+
+	println("下载完成: " + filePath)
+
+}))
+```
+
+
+#### 定义
+
+`downloadFinished(callback func(filePath string)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(filePath string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### downloadProgress
+
+#### 详细描述
+downloadProgress 是一个下载选项参数，用于设置下载进度回调函数
+
+回调函数接收三个参数：已下载字节数、总字节数、下载百分比(0-100)
+
+Example:
+```
+poc.Download("https://example.com/file.zip", poc.downloadProgress(func(downloaded, total, percent) {
+
+	println(sprintf("下载进度: %.2f%% (%d/%d)", percent, downloaded, total))
+
+}))
+```
+
+
+#### 定义
+
+`downloadProgress(callback func(downloaded int64, total int64, percent float64)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(downloaded int64, total int64, percent float64)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
