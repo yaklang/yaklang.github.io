@@ -35,8 +35,8 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Join](#join) |Join 将任意数量的路径以默认路径分隔符链接在一起  |
 | [file.Ls](#ls) |Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名  |
 | [file.Lstat](#lstat) |Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息  |
-| [file.MatchMalicious](#matchmalicious) |MatchMalicious 检测文件或内容是否包含恶意特征  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容  @param {string\|[]byte} input 文件路径或文件内容  @return {[]s...|
-| [file.MatchMaliciousWithDetails](#matchmaliciouswithdetails) |MatchMaliciousWithDetails 检测文件或内容并返回详细信息  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容  @param {string\|[]byte} input 文件路径或文件内容  @r...|
+| [file.MatchMalicious](#matchmalicious) |MatchMalicious 检测文件或内容是否包含恶意特征  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容    @param {string\|[]byte} input 文件路径或文件内容  @return {[...|
+| [file.MatchMaliciousWithDetails](#matchmaliciouswithdetails) |MatchMaliciousWithDetails 检测文件或内容并返回详细信息  支持两种输入类型：    - string: 文件路径，会读取文件内容进行匹配    - []byte: 文件内容，直接匹配内容    @param {string\|[]byte} input 文件路径或文件内容  ...|
 | [file.Md5](#md5) |Md5 计算文件的 MD5 哈希值  @param {string} filepath 文件路径  @return {string} MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串  |
 | [file.Mkdir](#mkdir) |Mkdir 创建一个目录，返回错误  |
 | [file.MkdirAll](#mkdirall) |MkdirAll 创建一个递归创建一个目录，返回错误  |
@@ -645,6 +645,8 @@ MatchMalicious 检测文件或内容是否包含恶意特征
 
   - []byte: 文件内容，直接匹配内容
 
+
+
 @param {string|[]byte} input 文件路径或文件内容
 
 @return {[]string} 匹配到的特征名称列表
@@ -655,16 +657,19 @@ Example:
 ```
 // 方式1: 匹配文件
 matches, err = file.MatchMalicious("/path/to/suspicious.php")
-if err == nil && len(matches) > 0 {
-    println("发现恶意特征:", matches)
-}
+
+	if err == nil && len(matches) > 0 {
+	    println("发现恶意特征:", matches)
+	}
 
 // 方式2: 匹配内容
 content = file.ReadFile("/path/to/suspicious.php")
 matches, err = file.MatchMalicious(content)
-if len(matches) > 0 {
-    println("发现恶意特征:", matches)
-}
+
+	if len(matches) > 0 {
+	    println("发现恶意特征:", matches)
+	}
+
 ```
 
 
@@ -695,6 +700,8 @@ MatchMaliciousWithDetails 检测文件或内容并返回详细信息
 
   - []byte: 文件内容，直接匹配内容
 
+
+
 @param {string|[]byte} input 文件路径或文件内容
 
 @return {[]map[string]interface{}} 匹配到的特征详细信息列表
@@ -705,12 +712,13 @@ Example:
 ```
 // 方式1: 匹配文件
 details, err = file.MatchMaliciousWithDetails("/path/to/suspicious.php")
-if err == nil {
-    for detail in details {
-        println(sprintf("特征: %s, 分类: %s, 严重程度: %s",
-            detail["name"], detail["category"], detail["severity"]))
-    }
-}
+
+	if err == nil {
+	    for detail in details {
+	        println(sprintf("特征: %s, 分类: %s, 严重程度: %s",
+	            detail["name"], detail["category"], detail["severity"]))
+	    }
+	}
 
 // 方式2: 匹配内容
 content = file.ReadFile("/path/to/suspicious.php")

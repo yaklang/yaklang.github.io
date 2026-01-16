@@ -2,6 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [suricata.DeleteSuricataRuleByID](#deletesuricatarulebyid) ||
 | [suricata.LoadSuricataToDatabase](#loadsuricatatodatabase) ||
 | [suricata.NewSuricataMatcher](#newsuricatamatcher) ||
 | [suricata.NewSuricataMatcherGroup](#newsuricatamatchergroup) ||
@@ -14,6 +15,26 @@
 
 
 ## 函数定义
+### DeleteSuricataRuleByID
+
+#### 详细描述
+
+
+#### 定义
+
+`DeleteSuricataRuleByID(id int64) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| id | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### LoadSuricataToDatabase
 
 #### 详细描述

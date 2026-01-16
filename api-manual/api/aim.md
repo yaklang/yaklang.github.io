@@ -10,6 +10,12 @@
 | [aim.aiReviewMode](#aireviewmode) ||
 | [aim.aiService](#aiservice) |WithAIService 设置 AI 服务 |
 | [aim.allowUserInteract](#allowuserinteract) |WithAllowUserInteract 设置是否允许用户交互 |
+| [aim.attachedAIForge](#attachedaiforge) ||
+| [aim.attachedAITool](#attachedaitool) ||
+| [aim.attachedFileContent](#attachedfilecontent) ||
+| [aim.attachedFilePath](#attachedfilepath) ||
+| [aim.attachedKnowledgeBase](#attachedknowledgebase) ||
+| [aim.attachedResource](#attachedresource) |WithAttachedResources 设置附加资源 |
 | [aim.context](#context) |WithContext 设置上下文 |
 | [aim.debugMode](#debugmode) |WithDebugMode 设置调试模式 |
 | [aim.disableAIForge](#disableaiforge) ||
@@ -195,6 +201,129 @@ WithAllowUserInteract 设置是否允许用户交互
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | allow | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedAIForge
+
+#### 详细描述
+
+
+#### 定义
+
+`attachedAIForge(aiForgeName string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| aiForgeName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedAITool
+
+#### 详细描述
+
+
+#### 定义
+
+`attachedAITool(aitoolName string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| aitoolName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedFileContent
+
+#### 详细描述
+
+
+#### 定义
+
+`attachedFileContent(content string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| content | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedFilePath
+
+#### 详细描述
+
+
+#### 定义
+
+`attachedFilePath(filePath string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filePath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedKnowledgeBase
+
+#### 详细描述
+
+
+#### 定义
+
+`attachedKnowledgeBase(knowledgeBaseName string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| knowledgeBaseName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### attachedResource
+
+#### 详细描述
+WithAttachedResources 设置附加资源
+
+
+#### 定义
+
+`attachedResource(typ string, key string, value string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typ | `string` |   |
+| key | `string` |   |
+| value | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

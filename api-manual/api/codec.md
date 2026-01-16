@@ -176,6 +176,7 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.UTF8ToHZGB2312](#utf8tohzgb2312) ||
 | [codec.UnescapePathUrl](#unescapepathurl) ||
 | [codec.UnescapeQueryUrl](#unescapequeryurl) ||
+| [codec.UnescapeString](#unescapestring) |UnescapeString 处理字符串中的转义字符，无需外层引号 支持 \&amp;#34; \\ \n \r \t \xNN \uNNNN \UNNNNNNNN 等转义序列 与 codec.StrconvUnquote 不同，本函数不要求输入带引号包裹 |
 | [codec.UnicodeDecode](#unicodedecode) ||
 | [codec.UnicodeEncode](#unicodeencode) ||
 | [codec.ZeroPadding](#zeropadding) ||
@@ -4627,6 +4628,30 @@ codec.TripleDESCBCEncrypt([]byte(&#34;123456789012345678901234&#34;), &#34;hello
 #### 定义
 
 `UnescapeQueryUrl(s string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### UnescapeString
+
+#### 详细描述
+UnescapeString 处理字符串中的转义字符，无需外层引号
+支持 \&#34; \\ \n \r \t \xNN \uNNNN \UNNNNNNNN 等转义序列
+与 codec.StrconvUnquote 不同，本函数不要求输入带引号包裹
+
+
+#### 定义
+
+`UnescapeString(s string) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

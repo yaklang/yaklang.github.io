@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [.](#) ||
+| [yakit.AIOutput](#aioutput) |AIOutput writes AI-focused output that can be filtered for AI tool stdout. aiLevel is an optional category for downstream consumers.|
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.Code](#code) ||
 | [yakit.Debug](#debug) ||
@@ -85,6 +86,23 @@
 #### 定义
 
 ``
+
+
+### AIOutput
+
+#### 详细描述
+AIOutput writes AI-focused output that can be filtered for AI tool stdout.
+aiLevel is an optional category for downstream consumers.
+
+#### 定义
+
+`AIOutput(tmp string, items ...any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tmp | `string` |   |
+| items | `...any` |   |
 
 
 ### AutoInitYakit

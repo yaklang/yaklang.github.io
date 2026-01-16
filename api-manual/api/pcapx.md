@@ -79,7 +79,9 @@ TCP_FLAG_URG|(int) 32|
 | [pcapx.InjectRaw](#injectraw) ||
 | [pcapx.InjectTCP](#injecttcp) ||
 | [pcapx.OpenPcapFile](#openpcapfile) ||
+| [pcapx.PacketBuilder](#packetbuilder) ||
 | [pcapx.StartSniff](#startsniff) ||
+| [pcapx.WithPayload](#withpayload) ||
 | [pcapx.WithdrawPermission](#withdrawpermission) |WithdrawPermission 撤销 pcap 权限  |
 | [pcapx.arp_reply](#arp_reply) ||
 | [pcapx.arp_replyEx](#arp_replyex) ||
@@ -272,6 +274,27 @@ die(err) // 没有错误，即可正常使用 syn 扫描
 | r1 | `error` |   |
 
 
+### PacketBuilder
+
+#### 详细描述
+
+
+#### 定义
+
+`PacketBuilder(opts ...any) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### StartSniff
 
 #### 详细描述
@@ -291,6 +314,26 @@ die(err) // 没有错误，即可正常使用 syn 扫描
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### WithPayload
+
+#### 详细描述
+
+
+#### 定义
+
+`WithPayload(payload []byte) BuilderConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| payload | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `BuilderConfigOption` |   |
 
 
 ### WithdrawPermission

@@ -59,6 +59,8 @@ QUERY_ENHANCE_TYPE_SPLIT_QUERY|(string) &#34;split_query&#34;|
 | [rag.dbQueryLimit](#dbquerylimit) |_dbQueryLimit 设置查询结果数量限制  |
 | [rag.dbQueryOffset](#dbqueryoffset) |_dbQueryOffset 设置查询偏移量（用于分页）  |
 | [rag.dbQueryRAGFilename](#dbqueryragfilename) |_dbQueryRAGFilename 从 RAG 文件导入后查询  自动导入 RAG 文件到临时集合，然后在该集合上执行查询  |
+| [rag.disableERM](#disableerm) ||
+| [rag.disableIndex](#disableindex) ||
 | [rag.docMetadata](#docmetadata) |WithDocumentMetadataKeyValue sets document metadata key-value pairs |
 | [rag.docRawMetadata](#docrawmetadata) |WithDocumentRawMetadata sets raw document metadata |
 | [rag.documentHandler](#documenthandler) ||
@@ -74,6 +76,7 @@ QUERY_ENHANCE_TYPE_SPLIT_QUERY|(string) &#34;split_query&#34;|
 | [rag.khopk](#khopk) |WithKHopK 设置k-hop的跳数，k&amp;gt;=2时返回k-hop路径，k=0返回所有路径 |
 | [rag.khopkMax](#khopkmax) |WithKHopKMax 设置最大路径长度，最小值为2 |
 | [rag.khopkMin](#khopkmin) |WithKHopKMin 设置最小路径长度，最小值为2 |
+| [rag.lazyEmbedding](#lazyembedding) ||
 | [rag.log](#log) ||
 | [rag.noEntityRepository](#noentityrepository) |_noEntityRepository 禁用实体仓库  |
 | [rag.noHNSWGraph](#nohnswgraph) ||
@@ -102,6 +105,7 @@ QUERY_ENHANCE_TYPE_SPLIT_QUERY|(string) &#34;split_query&#34;|
 | [rag.ragHNSWParameters](#raghnswparameters) |WithHNSWParameters sets HNSW parameters |
 | [rag.ragImportFile](#ragimportfile) ||
 | [rag.ragModelDimension](#ragmodeldimension) |WithModelDimension sets the model dimension |
+| [rag.serialVersionUID](#serialversionuid) ||
 | [rag.setSearchMeta](#setsearchmeta) |_setSearchMeta 快捷设置搜索元数据 (search_type 和 search_target)  用于同时设置 search_type 和 search_target 两个元数据字段    Parameters:    - searchType: 搜索类型，例如 &amp;#34;AI工具&amp;#...|
 | [rag.statusCard](#statuscard) ||
 
@@ -1597,6 +1601,46 @@ Example:
 | r1 | `DBQueryOption` |   |
 
 
+### disableERM
+
+#### 详细描述
+
+
+#### 定义
+
+`disableERM(disable bool) RefineOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| disable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RefineOption` |   |
+
+
+### disableIndex
+
+#### 详细描述
+
+
+#### 定义
+
+`disableIndex(disable bool) RefineOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| disable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RefineOption` |   |
+
+
 ### docMetadata
 
 #### 详细描述
@@ -1916,6 +1960,26 @@ WithKHopKMin 设置最小路径长度，最小值为2
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RAGSystemConfigOption` |   |
+
+
+### lazyEmbedding
+
+#### 详细描述
+
+
+#### 定义
+
+`lazyEmbedding(lazy ...bool) rag.RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| lazy | `...bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `rag.RAGSystemConfigOption` |   |
 
 
 ### log
@@ -2497,6 +2561,26 @@ WithModelDimension sets the model dimension
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | dimension | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `RAGSystemConfigOption` |   |
+
+
+### serialVersionUID
+
+#### 详细描述
+
+
+#### 定义
+
+`serialVersionUID(serialVersionUID string) RAGSystemConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| serialVersionUID | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

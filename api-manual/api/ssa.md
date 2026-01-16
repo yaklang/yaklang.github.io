@@ -28,6 +28,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.withCodeSourceAuthPassword](#withcodesourceauthpassword) ||
 | [ssa.withCodeSourceAuthUserName](#withcodesourceauthusername) ||
 | [ssa.withCodeSourceBranch](#withcodesourcebranch) ||
+| [ssa.withCodeSourceJarRecursiveParse](#withcodesourcejarrecursiveparse) ||
 | [ssa.withCodeSourceKind](#withcodesourcekind) ||
 | [ssa.withCodeSourceLocalFile](#withcodesourcelocalfile) ||
 | [ssa.withCodeSourcePath](#withcodesourcepath) ||
@@ -407,6 +408,26 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | branch | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withCodeSourceJarRecursiveParse
+
+#### 详细描述
+
+
+#### 定义
+
+`withCodeSourceJarRecursiveParse(enable bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
