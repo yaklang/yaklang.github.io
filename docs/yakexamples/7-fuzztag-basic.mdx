@@ -86,7 +86,7 @@ firstResult = fuzz.Strings(raw)[0]
 |`char`|`c, ch`|生成一个字符，例如：`{{char(a-z)}}`, 结果为 [a b c ... x y z]|
 |`repeat`|  |重复产生空字符串，例如：<code>{{repeat(3)}}</code>，结果为：["", "", ""] 一般用来重复发包，或重复生成数据|
 |`payload`|`x`|从数据库加载 Payload, `{{payload(pass_top25)}}`|
-|`array`|`list`|设置一个数组，使用 `&#124;` 分割，例如：<code>{{array(1&#124;2&#124;3)}}</code>，结果为：[1,2,3]，|
+|`array`|`list`|设置一个数组，使用 \| 分割，例如：<code>{{array(1 \| 2 \| 3)}}</code>，结果为：[1,2,3]，|
 |`ico`|  |生成一个 ico 文件头，例如 `{{ico}}`|
 |`tiff`|  |生成一个 tiff 文件头，例如 `{{tiff}}`|
 |`bmp`|  |生成一个 bmp 文件头，例如 {{bmp}}|
@@ -96,12 +96,12 @@ firstResult = fuzz.Strings(raw)[0]
 |`punctuation`|`punc`|生成所有标点符号|
 |`rangechar`|`range:char, range`|按顺序生成一个 range 字符集，例如 `{{rangechar(20,7e)}}` 生成 0x20 - 0x7e 的字符集|
 |`network`|`host, hosts, cidr, ip, net`|生成一个网络地址，例如 `{{network(192.168.1.1/24)}}` 对应 cidr 192.168.1.1/24 所有地址，可以逗号分隔，例如 `{{network(8.8.8.8,192.168.1.1/25,example.com)}}`|
-|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 <code>{{int(1-5&#124;4)}}</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
+|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 <code>{{int(1-5 \| 4)}}</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
 |`randint`|`ri, rand:int, randi`|随机生成整数，定义为 {{randint(10)}} 生成0-10中任意一个随机数，{{randint(1,50)}} 生成 1-50 任意一个随机数，{{randint(1,50,10)}} 生成 1-50 任意一个随机数，重复 10 次|
 |`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 {{randstr(10)}} 生成长度为 10 的随机字符串，{{randstr(1,30)}} 生成长度为 1-30 为随机字符串，{{randstr(1,30,10)}} 生成 10 个随机字符串，长度为 1-30|
-|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code>&#124;</code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>{{file:line(/tmp/test.txt&#124;/tmp/1.txt)}}</code>|
-|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>{{file:dir(/tmp/test&#124;/tmp/1)}}</code>|
-|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>{{file(/tmp/1.txt&#124;/tmp/test.txt)}}</code>|
+|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code> \| </code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>{{file:line(/tmp/test.txt \| /tmp/1.txt)}}</code>|
+|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>{{file:dir(/tmp/test \| /tmp/1)}}</code>|
+|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>{{file(/tmp/1.txt \| /tmp/test.txt)}}</code>|
 |`codec`|  |调用 Yakit Codec 插件|
 |`codec:line`|  |调用 Yakit Codec 插件，把结果解析成行|
 |`unquote`|  |把内容进行 strconv.Unquote 转化|
@@ -129,7 +129,7 @@ firstResult = fuzz.Strings(raw)[0]
 |`htmlenc`|`htmlencode, html, htmle, htmlescape`|HTML 实体编码，`{{htmlenc(abc)}}` => &#97;&#98;&#99;|
 |`htmlhexenc`|`htmlhex, htmlhexencode, htmlhexescape`|HTML 十六进制实体编码，`{{htmlhexenc(abc)}}` => &#x61;&#x62;&#x63;|
 |`htmldec`|`htmldecode, htmlunescape`|HTML 解码，`{{htmldec(&#97;&#98;&#99;)}}` => abc|
-|`repeatstr`|`repeat:str`|重复字符串，<code>{{repeatstr(abc&#124;3)}}</code> => abcabcabc|
+|`repeatstr`|`repeat:str`|重复字符串，<code>{{repeatstr(abc \| 3)}}</code> => abcabcabc|
 |`randomupper`|`random:upper, random:lower`|随机大小写，{{randomupper(abc)}} => aBc|
 
 ### 【基础标签】``{{repeatstr(str|num)}} ``重复一个字符串

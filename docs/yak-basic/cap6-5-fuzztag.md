@@ -192,7 +192,7 @@ user=admin&password=admin_000000
 
 | 标签名                  | 标签别名                              | 标签描述                                                     |
 | ----------------------- | ------------------------------------- | ------------------------------------------------------------ |
-| array                   | list                                  | 设置一个数组，使用 &#124; 分割，例如：{{array(1&#124;2&#124;3)}}，结果为：[1,2,3]， |
+| array                   | list                                  | 设置一个数组，使用  \|  分割，例如：{{array(1 \| 2 \| 3)}}，结果为：[1,2,3]， |
 | base64dec               | base64decode, base64d, b64d           | 进行 base64 解码，{{base64dec(YWJj)}} => abc                 |
 | base64enc               | base64encode, base64e, base64, b64    | 进行 base64 编码，{{base64enc(abc)}} => YWJj                 |
 | base64tohex             | b642h, base642hex                     | 把 Base64 字符串转换为 HEX 编码，{{base64tohex(YWJj)}} => 616263 |
@@ -204,9 +204,9 @@ user=admin&password=admin_000000
 | datetime                | time                                  | 生成一个时间，格式为YYYY-MM-dd HH:mm:ss，如果指定了格式，将按照指定的格式生成时间 |
 | doubleurldec            | doubleurldecode, durldec, durldecode  | 双重URL解码，{{doubleurldec(%2561%2562%2563)}} => abc        |
 | doubleurlenc            | doubleurlencode, durlenc, durl        | 双重URL编码，{{doubleurlenc(abc)}} => %2561%2562%2563        |
-| file                    |                                       | 读取文件内容，可以支持多个文件，用竖线分割，{{file(/tmp/1.txt)}} 或 {{file(/tmp/1.txt&#124;/tmp/test.txt)}} |
-| file:dir                | filedir                               | 解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 {{file:dir(/tmp/test)}} 或 {{file:dir(/tmp/test&#124;/tmp/1)}} |
-| file:line               | fileline, file:lines                  | 解析文件名（可以用 &#124; 分割），把文件中的内容按行返回成数组，定义为 {{file:line(/tmp/test.txt)}} 或 {{file:line(/tmp/test.txt&#124;/tmp/1.txt)}} |
+| file                    |                                       | 读取文件内容，可以支持多个文件，用竖线分割，{{file(/tmp/1.txt)}} 或 {{file(/tmp/1.txt \| /tmp/test.txt)}} |
+| file:dir                | filedir                               | 解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 {{file:dir(/tmp/test)}} 或 {{file:dir(/tmp/test \| /tmp/1)}} |
+| file:line               | fileline, file:lines                  | 解析文件名（可以用  \|  分割），把文件中的内容按行返回成数组，定义为 {{file:line(/tmp/test.txt)}} 或 {{file:line(/tmp/test.txt \| /tmp/1.txt)}} |
 | fuzz:password           | fuzz:pass                             | 根据所输入的操作随机生成可能的密码（默认为 root/admin 生成） |
 | fuzz:username           | fuzz:user                             | 根据所输入的操作随机生成可能的用户名（默认为 root/admin 生成） |
 | gif                     |                                       | 生成 gif 文件头                                              |
@@ -218,7 +218,7 @@ user=admin&password=admin_000000
 | htmlenc                 | htmlencode, html, htmle, htmlescape   | HTML 实体编码，{{htmlenc(abc)}} => abc                       |
 | htmlhexenc              | htmlhex, htmlhexencode, htmlhexescape | HTML 十六进制实体编码，{{htmlhexenc(abc)}} => abc            |
 | ico                     |                                       | 生成一个 ico 文件头，例如 {{ico}}                            |
-| int                     | port, ports, integer, i, p            | 生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 {{int(1-5&#124;4)}} 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005 |
+| int                     | port, ports, integer, i, p            | 生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 {{int(1-5 \| 4)}} 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005 |
 | jpg                     | jpeg                                  | 生成 jpeg / jpg 文件头                                       |
 | lower                   |                                       | 把传入的内容都设置成小写 {{lower(Abc)}} => abc               |
 | md5                     |                                       | 进行 md5 编码，{{md5(abc)}} => 900150983cd24fb0d6963f7d28e17f72 |
@@ -235,9 +235,9 @@ user=admin&password=admin_000000
 | randstr                 | rand:str, rs, rands                   | 随机生成个字符串，定义为 {{randstr(10)}} 生成长度为 10 的随机字符串，{{randstr(1,30)}} 生成长度为 1-30 为随机字符串，{{randstr(1,30,10)}} 生成 10 个随机字符串，长度为 1-30 |
 | rangechar               | range:char, range                     | 按顺序生成一个 range 字符集，例如 {{rangechar(20,7e)}} 生成 0x20 - 0x7e 的字符集 |
 | regen                   | re                                    | 使用正则生成所有可能的字符                                   |
-| repeat                  |                                       | 重复一个字符串，例如：{{repeat(abc&#124;3)}}，结果为：abcabcabc |
-| repeat:range            |                                       | 重复一个字符串，并把重复步骤全都输出出来，例如：{{repeat(abc&#124;3)}}，结果为：['' abc abcabc abcabcabc] |
-| repeatstr               | repeat:str                            | 重复字符串，{{repeatstr(abc&#124;3)}} => abcabcabc           |
+| repeat                  |                                       | 重复一个字符串，例如：{{repeat(abc \| 3)}}，结果为：abcabcabc |
+| repeat:range            |                                       | 重复一个字符串，并把重复步骤全都输出出来，例如：{{repeat(abc \| 3)}}，结果为：['' abc abcabc abcabcabc] |
+| repeatstr               | repeat:str                            | 重复字符串，{{repeatstr(abc \| 3)}} => abcabcabc           |
 | sha1                    |                                       | 进行 sha1 编码，{{sha1(abc)}} => a9993e364706816aba3e25717850c26c9cd0d89d |
 | sha224                  |                                       | 进行 sha224 编码，{{sha224(abc)}} => 23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7 |
 | sha256                  |                                       | 进行 sha256 编码，{{sha256(abc)}} => ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad |
