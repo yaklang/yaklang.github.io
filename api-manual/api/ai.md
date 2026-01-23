@@ -26,6 +26,7 @@
 | [ai.proxy](#proxy) ||
 | [ai.thinking](#thinking) ||
 | [ai.timeout](#timeout) ||
+| [ai.toolCallCallback](#toolcallcallback) |WithToolCallCallback sets a callback function that will be called when the AI response contains tool_calls. If set, tool_calls will NOT be converted t...|
 | [ai.type](#type) ||
 
 
@@ -513,6 +514,30 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | timeout | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+
+### toolCallCallback
+
+#### 详细描述
+WithToolCallCallback sets a callback function that will be called when the AI response contains tool_calls.
+If set, tool_calls will NOT be converted to &lt;|TOOL_CALL...|&gt; format in the output stream.
+Instead, the callback will be invoked with the parsed ToolCall objects.
+If not set, the original behavior (converting to &lt;|TOOL_CALL...|&gt; format) is preserved for backward compatibility.
+
+
+#### 定义
+
+`toolCallCallback(cb func([]*ToolCall)) AIConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func([]*ToolCall)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

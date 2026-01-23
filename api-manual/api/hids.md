@@ -6,6 +6,7 @@
 | [hids.CPUAverageCallback](#cpuaveragecallback) |CPUPercentCallback 当 CPU 使用率平均值发生变化时，调用 callback 函数  |
 | [hids.CPUPercent](#cpupercent) |CPUPercent 获取当前系统的 CPU 使用率  |
 | [hids.CPUPercentCallback](#cpupercentcallback) |CPUPercentCallback 当 CPU 使用率发生变化时，调用 callback 函数  |
+| [hids.CheckAuditSystem](#checkauditsystem) ||
 | [hids.GetConnectionStats](#getconnectionstats) |GetConnectionStats 获取连接统计信息  |
 | [hids.GetConnectionsByPid](#getconnectionsbypid) |GetConnectionsByPid 获取指定进程的连接  |
 | [hids.GetConnectionsByPort](#getconnectionsbyport) |GetConnectionsByPort 获取指定端口的连接  |
@@ -26,6 +27,7 @@
 | [hids.MemoryPercent](#memorypercent) |MemoryPercent 获取当前系统的内存使用率  |
 | [hids.MemoryPercentCallback](#memorypercentcallback) |MemoryPercentCallback 当内存使用率发生变化时，调用 callback  |
 | [hids.Netstat](#netstat) |Netstat 获取网络连接列表（类似netstat命令）  |
+| [hids.NewAuditMonitor](#newauditmonitor) ||
 | [hids.NewConnectionFilter](#newconnectionfilter) |NewConnectionFilter 创建新的连接过滤器  |
 | [hids.NewConnectionMonitor](#newconnectionmonitor) |NewConnectionMonitor 创建连接监控器  |
 | [hids.NewProcessFilter](#newprocessfilter) |NewProcessFilter 创建新的进程过滤器  |
@@ -35,12 +37,21 @@
 | [hids.ProcessExists](#processexists) |ProcessExists 检查指定PID的进程是否存在  |
 | [hids.SetMonitorInterval](#setmonitorinterval) |SetMonitorInterval 设置全局健康管理器的监控间隔(单位：秒)，如果在全局健康管理器运行时调用，会重置全局健康管理器  |
 | [hids.ShowMonitorInterval](#showmonitorinterval) |ShowMonitorInterval 在标准输出中输出全局健康管理器的监控间隔(单位：秒)  |
+| [hids.WatchAuditEvents](#watchauditevents) |WatchAuditEvents 简化的监控函数 - 监控audit事件  |
 | [hids.WatchConnections](#watchconnections) |WatchConnections 简单的连接监控函数，监控指定时长后返回事件列表  |
 | [hids.WatchProcess](#watchprocess) |WatchProcess 简单的进程监控函数，监控指定时长后返回事件列表  |
+| [hids.WithAuditBufferSize](#withauditbuffersize) |WithAuditBufferSize 设置缓冲区大小  |
+| [hids.WithAuditFilterCommands](#withauditfiltercommands) |WithAuditFilterCommands 设置命令过滤器（支持正则）  |
+| [hids.WithAuditFilterLoginUsers](#withauditfilterloginusers) |WithAuditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）  过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）  |
+| [hids.WithAuditFilterUsers](#withauditfilterusers) |WithAuditFilterUsers 设置当前用户过滤器（按 Username 过滤）  过滤当前执行操作的用户（例如 su 后的用户）  |
+| [hids.WithAuditMonitorCommand](#withauditmonitorcommand) |WithAuditMonitorCommand 设置是否监控命令执行事件  |
+| [hids.WithAuditMonitorLogin](#withauditmonitorlogin) |WithAuditMonitorLogin 设置是否监控登录事件  |
 | [hids.WithConnectionFilter](#withconnectionfilter) |WithConnectionFilter 设置连接过滤器 |
 | [hids.WithConnectionHistory](#withconnectionhistory) |WithConnectionHistory 启用历史记录 |
 | [hids.WithConnectionMonitorInterval](#withconnectionmonitorinterval) |WithConnectionMonitorInterval 设置监控间隔 |
+| [hids.WithOnCommandEvent](#withoncommandevent) |WithOnCommandEvent 设置命令执行事件回调  |
 | [hids.WithOnConnectionDisappear](#withonconnectiondisappear) |WithOnConnectionDisappear 设置连接消失回调 |
+| [hids.WithOnLoginEvent](#withonloginevent) |WithOnLoginEvent 设置登录事件回调  |
 | [hids.WithOnNewConnection](#withonnewconnection) |WithOnNewConnection 设置新连接回调 |
 | [hids.WithOnProcessCreate](#withonprocesscreate) |WithOnProcessCreate 设置进程创建回调  |
 | [hids.WithOnProcessExit](#withonprocessexit) |WithOnProcessExit 设置进程退出回调  |
@@ -137,6 +148,22 @@ if (i > 50) { println("cpu precent is over 50%") } // 当 CPU 使用率超过50%
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | callback | `func(i float64)` |   |
+
+
+### CheckAuditSystem
+
+#### 详细描述
+
+
+#### 定义
+
+`CheckAuditSystem() (*AuditStatus, error)`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*AuditStatus` |   |
+| r2 | `error` |   |
 
 
 ### GetConnectionStats
@@ -668,6 +695,27 @@ conns, err = hids.Netstat(filter)
 | r2 | `error` |   |
 
 
+### NewAuditMonitor
+
+#### 详细描述
+
+
+#### 定义
+
+`NewAuditMonitor(opts ...AuditMonitorOption) (*AuditMonitor, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...AuditMonitorOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*AuditMonitor` |   |
+| r2 | `error` |   |
+
+
 ### NewConnectionFilter
 
 #### 详细描述
@@ -900,6 +948,44 @@ hids.ShowMonitorInterval()
 `ShowMonitorInterval()`
 
 
+### WatchAuditEvents
+
+#### 详细描述
+WatchAuditEvents 简化的监控函数 - 监控audit事件
+
+Example:
+```
+ctx, cancel = context.WithTimeout(context.Background(), 10)
+defer cancel()
+err = hids.WatchAuditEvents(ctx, func(event) {
+
+	println("Login:", event.Username)
+
+}, func(event) {
+
+	println("Command:", event.Command)
+
+})
+```
+
+
+#### 定义
+
+`WatchAuditEvents(ctx context.Context, onLogin func(*LoginEvent), onCommand func(*CommandEvent)) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| onLogin | `func(*LoginEvent)` |   |
+| onCommand | `func(*CommandEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### WatchConnections
 
 #### 详细描述
@@ -962,6 +1048,168 @@ for _, event := range events {
 |:-----------|:---------- |:-----------|
 | r1 | `[]*ProcessEvent` |   |
 | r2 | `error` |   |
+
+
+### WithAuditBufferSize
+
+#### 详细描述
+WithAuditBufferSize 设置缓冲区大小
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithAuditBufferSize(16384))
+```
+
+
+#### 定义
+
+`WithAuditBufferSize(size int) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| size | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### WithAuditFilterCommands
+
+#### 详细描述
+WithAuditFilterCommands 设置命令过滤器（支持正则）
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithAuditFilterCommands(".*ssh.*", "sudo"))
+```
+
+
+#### 定义
+
+`WithAuditFilterCommands(commands ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| commands | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### WithAuditFilterLoginUsers
+
+#### 详细描述
+WithAuditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）
+
+过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）
+
+Example:
+```
+// 只监控原始登录用户为 root 的会话中的操作
+monitor = hids.NewAuditMonitor(hids.WithAuditFilterLoginUsers("root"))
+```
+
+
+#### 定义
+
+`WithAuditFilterLoginUsers(users ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| users | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### WithAuditFilterUsers
+
+#### 详细描述
+WithAuditFilterUsers 设置当前用户过滤器（按 Username 过滤）
+
+过滤当前执行操作的用户（例如 su 后的用户）
+
+Example:
+```
+// 只监控 matrix 用户执行的命令
+monitor = hids.NewAuditMonitor(hids.WithAuditFilterUsers("matrix", "admin"))
+```
+
+
+#### 定义
+
+`WithAuditFilterUsers(users ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| users | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### WithAuditMonitorCommand
+
+#### 详细描述
+WithAuditMonitorCommand 设置是否监控命令执行事件
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithAuditMonitorCommand(true))
+```
+
+
+#### 定义
+
+`WithAuditMonitorCommand(enable bool) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### WithAuditMonitorLogin
+
+#### 详细描述
+WithAuditMonitorLogin 设置是否监控登录事件
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithAuditMonitorLogin(true))
+```
+
+
+#### 定义
+
+`WithAuditMonitorLogin(enable bool) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
 
 
 ### WithConnectionFilter
@@ -1027,6 +1275,36 @@ WithConnectionMonitorInterval 设置监控间隔
 | r1 | `ConnectionMonitorOption` |   |
 
 
+### WithOnCommandEvent
+
+#### 详细描述
+WithOnCommandEvent 设置命令执行事件回调
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithOnCommandEvent(func(event) {
+
+	println("Command:", event.Command, "by", event.Username)
+
+}))
+```
+
+
+#### 定义
+
+`WithOnCommandEvent(callback func(*CommandEvent)) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*CommandEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
 ### WithOnConnectionDisappear
 
 #### 详细描述
@@ -1046,6 +1324,36 @@ WithOnConnectionDisappear 设置连接消失回调
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ConnectionMonitorOption` |   |
+
+
+### WithOnLoginEvent
+
+#### 详细描述
+WithOnLoginEvent 设置登录事件回调
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.WithOnLoginEvent(func(event) {
+
+	println("Login:", event.Username, "from", event.RemoteIP)
+
+}))
+```
+
+
+#### 定义
+
+`WithOnLoginEvent(callback func(*LoginEvent)) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*LoginEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
 
 
 ### WithOnNewConnection

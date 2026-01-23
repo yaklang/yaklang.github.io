@@ -47,6 +47,7 @@ QUERY_ENHANCE_TYPE_SPLIT_QUERY|(string) &#34;split_query&#34;|
 | [rag.QueryDocuments](#querydocuments) |_queryDocuments 在指定集合中查询文档  |
 | [rag.aiService](#aiservice) ||
 | [rag.aiServiceType](#aiservicetype) ||
+| [rag.analyzeConcurrency](#analyzeconcurrency) ||
 | [rag.buildFilter](#buildfilter) ||
 | [rag.buildQuery](#buildquery) ||
 | [rag.chunkSize](#chunksize) ||
@@ -1299,6 +1300,26 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RAGSystemConfigOption` |   |
+
+
+### analyzeConcurrency
+
+#### 详细描述
+
+
+#### 定义
+
+`analyzeConcurrency(concurrency int) AnalysisOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| concurrency | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AnalysisOption` |   |
 
 
 ### buildFilter

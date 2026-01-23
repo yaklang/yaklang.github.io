@@ -11,6 +11,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [ssa.GetLatestProgramNameByProjectName](#getlatestprogramnamebyprojectname) ||
 | [ssa.GetSSAProjectByID](#getssaprojectbyid) ||
 | [ssa.GetSSAProjectByNameAndURL](#getssaprojectbynameandurl) ||
 | [ssa.NewConfig](#newconfig) ||
@@ -22,6 +23,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.ParseLocalProject](#parselocalproject) ||
 | [ssa.ParseProject](#parseproject) ||
 | [ssa.YaklangScriptChecking](#yaklangscriptchecking) ||
+| [ssa.withBaseProgramName](#withbaseprogramname) ||
 | [ssa.withCodeSourceAuthKeyContent](#withcodesourceauthkeycontent) ||
 | [ssa.withCodeSourceAuthKeyPath](#withcodesourceauthkeypath) ||
 | [ssa.withCodeSourceAuthKind](#withcodesourceauthkind) ||
@@ -38,6 +40,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.withContext](#withcontext) ||
 | [ssa.withDefaultExcludeFunc](#withdefaultexcludefunc) ||
 | [ssa.withDescription](#withdescription) ||
+| [ssa.withEnableIncrementalCompile](#withenableincrementalcompile) ||
 | [ssa.withEntryFile](#withentryfile) ||
 | [ssa.withExcludeFile](#withexcludefile) ||
 | [ssa.withExternLib](#withexternlib) ||
@@ -59,6 +62,27 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 
 ## 函数定义
+### GetLatestProgramNameByProjectName
+
+#### 详细描述
+
+
+#### 定义
+
+`GetLatestProgramNameByProjectName(projectName string) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| projectName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
 ### GetSSAProjectByID
 
 #### 详细描述
@@ -293,6 +317,26 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]*result.StaticAnalyzeResult` |   |
+
+
+### withBaseProgramName
+
+#### 详细描述
+
+
+#### 定义
+
+`withBaseProgramName(baseProgramName string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| baseProgramName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withCodeSourceAuthKeyContent
@@ -608,6 +652,26 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | description | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withEnableIncrementalCompile
+
+#### 详细描述
+
+
+#### 定义
+
+`withEnableIncrementalCompile(enable bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

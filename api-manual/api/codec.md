@@ -107,7 +107,9 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.Sha384](#sha384) ||
 | [codec.Sha512](#sha512) ||
 | [codec.SignSHA256WithRSA](#signsha256withrsa) |SignSHA256WithRSA 使用RSA私钥对数据进行SHA256签名，返回签名与错误  |
+| [codec.SignSHA512WithRSA](#signsha512withrsa) |SignSHA512WithRSA 使用RSA私钥对数据进行SHA512签名，返回签名与错误  |
 | [codec.SignVerifySHA256WithRSA](#signverifysha256withrsa) |SignVerifySHA256WithRSA 使用RSA公钥对数据进行SHA256签名验证，返回错误  |
+| [codec.SignVerifySHA512WithRSA](#signverifysha512withrsa) |SignVerifySHA512WithRSA 使用RSA公钥对数据进行SHA512签名验证，返回错误  |
 | [codec.Sm2Decrypt](#sm2decrypt) ||
 | [codec.Sm2DecryptAsn1](#sm2decryptasn1) ||
 | [codec.Sm2DecryptAsn1WithPassword](#sm2decryptasn1withpassword) ||
@@ -2651,6 +2653,40 @@ signString = string(signBytes)
 | r2 | `error` |   |
 
 
+### SignSHA512WithRSA
+
+#### 详细描述
+SignSHA512WithRSA 使用RSA私钥对数据进行SHA512签名，返回签名与错误
+
+Example:
+```
+pemBytes = string(`-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDZz5Zz3z3z3z3z
+...
+-----END PRIVATE KEY-----`)
+signBytes, err := tls.SignSHA512WithRSA(pemBytes, "hello")
+die(err)
+signString = string(signBytes)
+```
+
+
+#### 定义
+
+`SignSHA512WithRSA(pemBytes []byte, data any) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pemBytes | `[]byte` |   |
+| data | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### SignVerifySHA256WithRSA
 
 #### 详细描述
@@ -2670,6 +2706,39 @@ die(err)
 #### 定义
 
 `SignVerifySHA256WithRSA(pemBytes []byte, originData any, sign []byte) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pemBytes | `[]byte` |   |
+| originData | `any` |   |
+| sign | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### SignVerifySHA512WithRSA
+
+#### 详细描述
+SignVerifySHA512WithRSA 使用RSA公钥对数据进行SHA512签名验证，返回错误
+
+Example:
+```
+pemBytes = string(`-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs1pvFYNQpPSPbshg6F7Z
+...
+-----END PUBLIC KEY-----`)
+err := tls.PemVerifySignSha512WithRSA(pemBytes, "hello", signBytes)
+die(err)
+```
+
+
+#### 定义
+
+`SignVerifySHA512WithRSA(pemBytes []byte, originData any, sign []byte) error`
 
 #### 参数
 |参数名|参数类型|参数解释|

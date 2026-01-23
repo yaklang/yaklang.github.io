@@ -2,13 +2,17 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
+| [cve.AICompleteFields](#aicompletefields) |CVEAICompleteFields uses AI to complete missing CVE fields like translations Usage:   - cve.AICompleteFields() - use default settings   - cve.AIComple...|
 | [cve.Download](#download) |DownLoad 从NVD下载CVE json数据到本地 |
+| [cve.Export](#export) |ExportCVE exports all CVE entries to a JSONL file Each line is a JSON object representing a CVE entry |
 | [cve.GetCVE](#getcve) ||
+| [cve.Import](#import) |ImportCVE imports CVE entries from a JSONL file Each line should be a JSON object representing a CVE entry |
 | [cve.LoadCVE](#loadcve) |LoadCVE 从本地的CVE json数据加载构造数据库 |
 | [cve.NewStatistics](#newstatistics) ||
 | [cve.Query](#query) ||
 | [cve.QueryEx](#queryex) ||
 | [cve.after](#after) ||
+| [cve.aiConcurrent](#aiconcurrent) |WithCVEAIConcurrent sets the number of concurrent workers for AI completion |
 | [cve.before](#before) ||
 | [cve.cpe](#cpe) ||
 | [cve.cve](#cve) ||
@@ -17,10 +21,38 @@
 | [cve.product](#product) ||
 | [cve.score](#score) ||
 | [cve.severity](#severity) ||
+| [cve.testLimit](#testlimit) |WithCVETestLimit sets the maximum number of CVEs to process (for testing) |
 | [cve.vendor](#vendor) ||
 
 
 ## 函数定义
+### AICompleteFields
+
+#### 详细描述
+CVEAICompleteFields uses AI to complete missing CVE fields like translations
+Usage:
+  - cve.AICompleteFields() - use default settings
+  - cve.AICompleteFields(ai.type(&#34;openai&#34;)) - specify AI type
+  - cve.AICompleteFields(cve.aiConcurrent(10)) - use 10 concurrent workers
+  - cve.AICompleteFields(cve.testLimit(5)) - only process 5 CVEs for testing
+  - cve.AICompleteFields(cve.aiConcurrent(10), cve.testLimit(5), ai.type(&#34;openai&#34;))
+
+
+#### 定义
+
+`AICompleteFields(opts ...any) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### Download
 
 #### 详细描述
@@ -36,6 +68,28 @@ DownLoad 从NVD下载CVE json数据到本地
 |:-----------|:---------- |:-----------|
 | dir | `string` |   |
 | cached | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### Export
+
+#### 详细描述
+ExportCVE exports all CVE entries to a JSONL file
+Each line is a JSON object representing a CVE entry
+
+
+#### 定义
+
+`Export(filename string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -61,6 +115,28 @@ DownLoad 从NVD下载CVE json数据到本地
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*cveresources.CVE` |   |
+
+
+### Import
+
+#### 详细描述
+ImportCVE imports CVE entries from a JSONL file
+Each line should be a JSON object representing a CVE entry
+
+
+#### 定义
+
+`Import(filename string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### LoadCVE
@@ -161,6 +237,27 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `CVEOption` |   |
+
+
+### aiConcurrent
+
+#### 详细描述
+WithCVEAIConcurrent sets the number of concurrent workers for AI completion
+
+
+#### 定义
+
+`aiConcurrent(n int) CVEAICompleteOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CVEAICompleteOption` |   |
 
 
 ### before
@@ -324,6 +421,27 @@ LoadCVE 从本地的CVE json数据加载构造数据库
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `CVEOption` |   |
+
+
+### testLimit
+
+#### 详细描述
+WithCVETestLimit sets the maximum number of CVEs to process (for testing)
+
+
+#### 定义
+
+`testLimit(n int) CVEAICompleteOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CVEAICompleteOption` |   |
 
 
 ### vendor
