@@ -1,7 +1,6 @@
-#  震惊！YAK-JWT靶场的通关方式竟然是...   
-Yak  Yak Project   2025-02-14 17:30  
+#  YAK-JWT靶场通关
   
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
+![](wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
   
 先祝大家情人节快乐  
   
@@ -9,7 +8,7 @@ Yak  Yak Project   2025-02-14 17:30
   
 心中无爱人，工作自然神  
   
-![](/articles/wechat2md-22ac12aa7dede6743620818f9571d487.gif)  
+![](wechat2md-22ac12aa7dede6743620818f9571d487.gif)  
   
 ![](/articles/wechat2md-148bc7946a6236b7f129b680fb88560c.webp)  
   
@@ -35,7 +34,8 @@ Yak  Yak Project   2025-02-14 17:30
   
 ![](/articles/wechat2md-7244bb965618bbe1db99240d3d2e678c.png)  
   
-第二个页面：**https://127.0.0.1:8080/jwt/unsafe-login1**（POST请求）  
+第二个页面：  
+**https://127.0.0.1:8080/jwt/unsafe-login1**（POST请求）  
   
 同在/jwt/unsafe-login1页面，通过POST请求发送认证信息，如果成功则返回jwt，否则返回认证失败的错误  
   
@@ -60,11 +60,9 @@ Yak  Yak Project   2025-02-14 17:30
   
 ![](/articles/wechat2md-2d1055f4bda6fa1f93c1482548baa192.png)  
   
-首先打开JWT的登录  
-(未验证算法)案例，在这个案例中，后端未校验加密算法，将根据用户传递的加密算法解密验证jwt。  
+首先打开JWT的登录(未验证算法)案例，在这个案例中，后端未校验加密算法，将根据用户传递的加密算法解密验证jwt。  
   
-如图是正常的jwt结构。可以看到在header中存储了用户名，根据页面提示，游戏目标是  
-**为用户信息添加flag字段**。所以我们的目标就是修改jwt内的header，并绕过后端的校验。  
+如图是正常的jwt结构。可以看到在header中存储了用户名，根据页面提示，游戏目标是**为用户信息添加flag字段**。所以我们的目标就是修改jwt内的header，并绕过后端的校验。  
   
 ![](/articles/wechat2md-63521bcd51caa44b63d7a4284b025ced.png)  
   
@@ -98,11 +96,9 @@ println("%s.%s."%[header,claims])
   
 ![](/articles/wechat2md-bc1ac79ac44a6e1da07b6f0a5857ac52.png)  
   
-打开案例：登  
-录(错误中泄漏key)  
+打开案例：登录(错误中泄漏key)  
   
-和案例1相同的页面，发现获取用户信息的接口改为了  
-**/jwt/unsafe-login2/profile**。尝试使用案例1的手段发现报错：  
+和案例1相同的页面，发现获取用户信息的接口改为了 **/jwt/unsafe-login2/profile**。尝试使用案例1的手段发现报错：  
   
 ![](/articles/wechat2md-2d40b02a0c758764762eb60ab8ae40b8.png)  
   
@@ -115,34 +111,35 @@ jwtStr = jwt.JWTGenerateEx("HS256", {
         "flag":1,
     },{}, key)~
 println(jwtStr)
-```  
-```
-
-```  
-  
+```    
 将生成的jwt应用到/jwt/unsafe-login2/profile接口，得到返回数据  
   
 ![](/articles/wechat2md-205f1f90aa43b2d58cccf66d015d0ac4.png)  
   
 从前端页面可以看到修改成功  
   
-![](/articles/wechat2md-d5d254364fe911486f4952ac3de47160.png)  
+![](wechat2md-d5d254364fe911486f4952ac3de47160.png)  
   
   
 **END**  
   
   
- **YAK官方资源**  
+**YAK官方资源**  
   
-  
-Yak 语言官方教程：  
-https://yaklang.com/docs/intro/Yakit 视频教程：  
-https://space.bilibili.com/437503777Github下载地址：  
-https://github.com/yaklang/yakitYakit官网下载地址：  
-https://yaklang.com/Yakit安装文档：  
-https://yaklang.com/products/download_and_installYakit使用文档：  
-https://yaklang.com/products/intro/常见问题速查：  
-https://yaklang.com/products/FAQ  
+Yak语言官方教程：  
+https://yaklang.com/docs/intro/
+Yakit视频教程：  
+https://space.bilibili.com/437503777  
+Github下载地址：  
+https://github.com/yaklang/yakit  
+Yakit官网下载地址：  
+https://yaklang.com/  
+Yakit安装文档：  
+https://yaklang.com/products/download_and_install  
+Yakit使用文档：  
+https://yaklang.com/products/intro/  
+常见问题速查：  
+https://yaklang.com/products/FAQ 
   
 ![](/articles/wechat2md-382b711760574d429c6c8742ecfc1d9b.png)  
   

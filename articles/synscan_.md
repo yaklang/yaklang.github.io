@@ -1,19 +1,4 @@
-#  嘿朋友，你想成为SYN扫描传奇吗？   
-原创 Yak  Yak Project   2024-11-15 17:31  
-  
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-周五周五，敲锣打鼓！  
-  
-周五周五，脱胎换骨！  
-  
-![](/articles/wechat2md-45183062e7da4f3ff64df1995f4a83fb.png)  
-  
-等等，我知道你很急但你先别急  
-  
-SYN扫描原理 奇妙至极~  
-  
-朋友，想成为SYN扫描传奇吗？  
+#  嘿朋友，你想成为SYN扫描传奇吗？    
   
 ![](/articles/wechat2md-ddf16f1039911f81029b4381e07925e1.png)  
   

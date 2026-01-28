@@ -1,12 +1,6 @@
 #  Yak Java-Hack TemplatesImpl 升级
 原创 Yak  Yak Project   2024-10-25 17:30  
   
-![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)  
-  
-Yaklang里传来，Java-hack升级啦~  
-  
-隔壁抽鞭子的黑工厂里，牛牛更新了吗~?  
-  
 ![](/articles/wechat2md-1a81b255d0eb25ee0b3db6ccbde33174.png)  
   
 ![](/articles/wechat2md-64ccd1a8cfa82e7bce38332e033ef4d5.png)  
