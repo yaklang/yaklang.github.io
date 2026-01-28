@@ -1,0 +1,1365 @@
+---
+sidebar_position: 2
+sidebar_label: ai
+slug: /api/ai
+tags: []
+title: ai
+description: AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+:::info
+AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+:::
+
+## 核心函数
+
+|函数名|函数描述|
+|:------|:--------|
+| [ai.Chat](#chat) | 快速调用 AI 进行对话 |
+| [ai.OpenAI](#openai) | 创建 OpenAI 客户端 |
+| [ai.ChatGLM](#chatglm) | 创建 ChatGLM 客户端 |
+| [ai.Moonshot](#moonshot) | 创建 Moonshot 客户端 |
+| [ai.FunctionCall](#functioncall) | AI 函数调用 |
+| [ai.StructuredStream](#structuredstream) | 结构化流式输出 |
+| [ai.ListModels](#listmodels) | 列出所有可用模型 |
+| [ai.ListModelByProviderType](#listmodelbyprovidertype) | 按提供商列出模型 |
+| [ai.MockAIService](#mockaiservice) | Mock AI 服务用于测试 |
+
+## 配置选项
+
+|选项名|说明|
+|:------|:--------|
+| [ai.apiKey](#apikey) | 设置 API 密钥 |
+| [ai.model](#model) | 指定模型名称 |
+| [ai.baseURL](#baseurl) | 设置 API 基础 URL |
+| [ai.proxy](#proxy) | 设置代理服务器 |
+| [ai.timeout](#timeout) | 设置超时时间 |
+| [ai.type](#type) | 指定 AI 服务类型 |
+| [ai.domain](#domain) | 设置域名 |
+| [ai.noHttps](#nohttps) | 禁用 HTTPS |
+| [ai.onStream](#onstream) | 流式输出回调 |
+| [ai.onReasonStream](#onreasonstream) | 推理流式输出回调 |
+| [ai.debugStream](#debugstream) | 调试流式输出 |
+| [ai.thinking](#thinking) | 启用思维链模式 |
+| [ai.funcCallRetryTimes](#funccallretrytimes) | 函数调用重试次数 |
+| [ai.toolCallCallback](#toolCallCallback) | 拦截并处理 tool_calls |
+
+## 图像处理选项
+
+|选项名|说明|
+|:------|:--------|
+| [ai.imageBase64](#imagebase64) | 传入 Base64 编码的图片 |
+| [ai.imageFile](#imagefile) | 传入图片文件路径 |
+| [ai.imageRaw](#imageraw) | 传入原始图片数据 |
+---
+
+## 函数详解
+
+### Chat
+
+- 描述: 快速调用 AI 服务进行对话，这是最简单的调用方式。
+
+<Tabs>
+<TabItem value="Chat-1" label="定义" default>
+
+```go
+Chat(msg string, opts ...aispec.AIConfigOption) (string, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| msg | `string` | 要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` | AI 配置选项（如 apiKey、model 等） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` | AI 返回的回复内容 |
+| r2 | `error` | 错误信息 |
+
+
+</TabItem>
+
+<TabItem value="Chat-2" label="示例">
+
+```go
+response, err = ai.Chat("介绍一下 Yakit", 
+    ai.baseURL("https://api.openai-proxy.com/v1"),
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+    ai.model("gpt-4"), 
+    ai.proxy("http://127.0.0.1:7890"),
+    ai.timeout(60),
+)
+
+if err != nil {
+    panic(err)
+}
+
+println(response)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### OpenAI
+
+- 描述: 创建一个 OpenAI 客户端实例，支持 OpenAI 官方 API 及兼容的第三方服务。
+
+<Tabs>
+<TabItem value="OpenAI-1" label="定义" default>
+
+```go
+OpenAI(opts ...aispec.AIConfigOption) aispec.AIClient
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aispec.AIClient` | AI 客户端实例 |
+
+</TabItem>
+
+<TabItem value="OpenAI-2" label="示例">
+
+```go
+// 创建 OpenAI 客户端
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-3.5-turbo"),
+)
+
+// 发送消息
+response, err = client.Chat("你好")
+die(err)
+println(response)
+
+// 使用自定义 API 地址
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.baseURL("https://api.openai-proxy.com/v1"),
+    ai.model("gpt-4"),
+)
+```
+
+</TabItem>
+</Tabs>  
+
+---
+
+### ChatGLM
+
+- 描述: 创建 ChatGLM 客户端实例，用于调用智谱 AI 的 ChatGLM 系列模型。
+
+<Tabs>
+<TabItem value="ChatGLM-1" label="定义" default>
+
+```go
+ChatGLM(opts ...aispec.AIConfigOption) aispec.AIClient
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aispec.AIClient` | AI 客户端实例 |
+
+</TabItem>
+
+<TabItem value="ChatGLM-2" label="示例">
+
+```go
+// 创建 ChatGLM 客户端
+client = ai.ChatGLM(
+    ai.apiKey("your-api-key"),
+    ai.model("chatglm_turbo"),
+)
+
+// 调用对话
+response, err = client.Chat("介绍一下你自己")
+die(err)
+println(response)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### Moonshot
+
+- 描述: 创建 Moonshot（月之暗面）客户端实例，用于调用 Moonshot AI 服务。
+
+<Tabs>
+<TabItem value="Moonshot-1" label="定义" default>
+
+```go
+Moonshot(opts ...aispec.AIConfigOption) aispec.AIClient
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aispec.AIClient` | AI 客户端实例 |
+
+</TabItem>
+
+<TabItem value="Moonshot-2" label="示例">
+
+```go
+// 创建 Moonshot 客户端
+client = ai.Moonshot(
+    ai.apiKey("sk-xxx"),
+    ai.model("moonshot-v1-8k"),
+)
+
+// 使用客户端
+response, err = client.Chat("帮我分析这段代码")
+die(err)
+println(response)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### FunctionCall
+
+- 描述: 让 AI 根据用户输入自动调用预定义的函数，实现智能函数调用能力。
+
+<Tabs>
+<TabItem value="FunctionCall-1" label="定义" default>
+
+```go
+FunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string]any, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` | 用户输入的自然语言指令 |
+| funcs | `any` | 函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` | AI 配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` | 函数调用结果 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="FunctionCall-2" label="示例">
+
+```go
+// 定义可调用的函数
+funcs = {
+    "searchVulnerability": func(keyword) {
+        return {"result": sprintf("搜索漏洞: %s", keyword)}
+    },
+    "scanTarget": func(target, port) {
+        return {"target": target, "port": port, "status": "scanning"}
+    },
+}
+
+// AI 自动识别并调用函数
+result, err = ai.FunctionCall(
+    "帮我搜索 SQL 注入漏洞",
+    funcs,
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+die(err)
+dump(result)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### StructuredStream
+
+- 描述: 获取结构化的流式输出，支持实时接收 AI 返回的数据。
+
+<Tabs>
+<TabItem value="StructuredStream-1" label="定义" default>
+
+```go
+StructuredStream(input string, opts ...aispec.AIConfigOption) (chan *aispec.StructuredData, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` | 输入消息 |
+| opts | `...aispec.AIConfigOption` | 配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *aispec.StructuredData` | 结构化数据通道 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="StructuredStream-2" label="示例">
+
+```go
+// 获取流式输出
+stream, err = ai.StructuredStream(
+    "生成一个端口扫描脚本",
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+die(err)
+
+// 读取流数据
+for data = range stream {
+    printf("收到数据: %v\n", data)
+}
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### ListModels
+
+- 描述: 列出当前配置下所有可用的 AI 模型。
+
+<Tabs>
+<TabItem value="ListModels-1" label="定义" default>
+
+```go
+ListModels(opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aispec.AIConfigOption` | 配置选项（如 apiKey、type） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*aispec.ModelMeta` | 模型元数据列表 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="ListModels-2" label="示例">
+
+```go
+// 列出 OpenAI 的所有模型
+models, err = ai.ListModels(
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+die(err)
+
+for _, model = range models {
+    printf("模型: %s\n", model.Name)
+}
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### ListModelByProviderType
+
+- 描述: 根据提供商类型列出可用的 AI 模型。
+
+<Tabs>
+<TabItem value="ListModelByProviderType-1" label="定义" default>
+
+```go
+ListModelByProviderType(providerType string, opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| providerType | `string` | 提供商类型（如 "openai"、"chatglm"、"moonshot"） |
+| opts | `...aispec.AIConfigOption` | 配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*aispec.ModelMeta` | 模型元数据列表 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="ListModelByProviderType-2" label="示例">
+
+```go
+// 列出 ChatGLM 的模型
+models, err = ai.ListModelByProviderType(
+    "chatglm",
+    ai.apiKey("your-key"),
+)
+die(err)
+
+for _, model = range models {
+    printf("ChatGLM 模型: %s\n", model.Name)
+}
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### MockAIService
+
+- 描述: 创建一个 Mock AI 服务，用于测试和开发环境。
+
+<Tabs>
+<TabItem value="MockAIService-1" label="定义" default>
+
+```go
+MockAIService(handle func(message string) string) aicommon.AICallbackType
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| handle | `func(message string) string` | 处理消息的回调函数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `aicommon.AICallbackType` | Mock AI 服务实例 |
+
+</TabItem>
+
+<TabItem value="MockAIService-2" label="示例">
+
+```go
+// 创建 Mock 服务
+mockAI = ai.MockAIService(fn(msg) {
+    return sprintf("Mock 回复: 收到消息 '%s'", msg)
+})
+
+// 使用 Mock 服务进行测试
+response = mockAI("测试消息")
+println(response)  // 输出: Mock 回复: 收到消息 '测试消息'
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 配置选项详解
+
+### apiKey
+
+- 描述: 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。
+
+<Tabs>
+<TabItem value="apiKey-1" label="定义" default>
+
+```go
+apiKey(k string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| k | `string` | API 密钥字符串 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="apiKey-2" label="示例">
+
+```go
+client = ai.OpenAI(
+    ai.apiKey("sk-xxxxxxxxxxxxxxxx"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### model
+
+- 描述: 指定要使用的 AI 模型名称。
+
+<Tabs>
+<TabItem value="model-1" label="定义" default>
+
+```go
+model(model string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| model | `string` | 模型名称（如 "gpt-4"、"gpt-3.5-turbo"） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="model-2" label="示例">
+
+```go
+// 使用 GPT-4
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4"),
+)
+
+// 使用 GPT-3.5
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-3.5-turbo"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### baseURL
+
+- 描述: 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。
+
+<Tabs>
+<TabItem value="baseURL-1" label="定义" default>
+
+```go
+baseURL(baseURL string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| baseURL | `string` | API 基础 URL |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="baseURL-2" label="示例">
+
+```go
+// 使用自定义 API 地址
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.baseURL("https://api.openai-proxy.com/v1"),
+)
+
+// 使用国内中转服务
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.baseURL("https://api.chatanywhere.com.cn/v1"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### proxy
+
+- 描述: 设置 HTTP 代理服务器，用于网络请求。
+
+<Tabs>
+<TabItem value="proxy-1" label="定义" default>
+
+```go
+proxy(p string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| p | `string` | 代理服务器地址（支持 http/https/socks5） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="proxy-2" label="示例">
+
+```go
+// HTTP 代理
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.proxy("http://127.0.0.1:7890"),
+)
+
+// SOCKS5 代理
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.proxy("socks5://127.0.0.1:1080"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### timeout
+
+- 描述: 设置请求超时时间（单位：秒）。
+
+<Tabs>
+<TabItem value="timeout-1" label="定义" default>
+
+```go
+timeout(timeout float64) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| timeout | `float64` | 超时时间（秒） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="timeout-2" label="示例">
+
+```go
+// 设置 60 秒超时
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.timeout(60),
+)
+
+// 长时间任务设置更长超时
+response, err = ai.Chat(
+    "生成一个完整的渗透测试报告",
+    ai.apiKey("sk-xxx"),
+    ai.timeout(180),  // 3 分钟
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### type
+
+- 描述: 指定 AI 服务提供商类型。
+
+<Tabs>
+<TabItem value="type-1" label="定义" default>
+
+```go
+type(t string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `string` | 服务类型（"openai"、"chatglm"、"moonshot" 等） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="type-2" label="示例">
+
+```go
+// 使用 OpenAI
+response, err = ai.Chat("你好", 
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+
+// 使用 ChatGLM
+response, err = ai.Chat("你好", 
+    ai.apiKey("your-key"),
+    ai.type("chatglm"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### domain
+
+- 描述: 设置服务域名，用于某些特定的 AI 服务。
+
+<Tabs>
+<TabItem value="domain-1" label="定义" default>
+
+```go
+domain(domain string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| domain | `string` | 域名字符串 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="domain-2" label="示例">
+
+```go
+client = ai.OpenAI(
+    ai.apiKey("sk-xxx"),
+    ai.domain("api.openai.com"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### noHttps
+
+- 描述: 禁用 HTTPS，使用 HTTP 协议进行通信。
+
+<Tabs>
+<TabItem value="noHttps-1" label="定义" default>
+
+```go
+noHttps(b bool) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` | true 表示禁用 HTTPS |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="noHttps-2" label="示例">
+
+```go
+// 本地测试环境使用 HTTP
+client = ai.OpenAI(
+    ai.apiKey("test-key"),
+    ai.baseURL("localhost:8080"),
+    ai.noHttps(true),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### onStream
+
+- 描述: 设置流式输出的回调函数，实时接收 AI 响应。
+
+<Tabs>
+<TabItem value="onStream-1" label="定义" default>
+
+```go
+onStream(h func(io.Reader)) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(io.Reader)` | 流式数据处理回调函数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="onStream-2" label="示例">
+
+```go
+// 实时输出 AI 回复
+response, err = ai.Chat(
+    "介绍一下 SQL 注入",
+    ai.apiKey("sk-xxx"),
+    ai.onStream(fn(reader) {
+        data, _ = io.ReadAll(reader)
+        print(string(data))  // 实时打印
+    }),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### onReasonStream
+
+- 描述: 设置推理过程的流式输出回调，用于获取 AI 的思考过程。
+
+<Tabs>
+<TabItem value="onReasonStream-1" label="定义" default>
+
+```go
+onReasonStream(h func(io.Reader)) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `func(io.Reader)` | 推理流处理回调函数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="onReasonStream-2" label="示例">
+
+```go
+// 获取推理过程
+response, err = ai.Chat(
+    "分析这个安全漏洞",
+    ai.apiKey("sk-xxx"),
+    ai.onReasonStream(fn(reader) {
+        data, _ = io.ReadAll(reader)
+        println("推理过程:", string(data))
+    }),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### debugStream
+
+- 描述: 启用流式输出调试模式，用于开发调试。
+
+<Tabs>
+<TabItem value="debugStream-1" label="定义" default>
+
+```go
+debugStream(h ...bool) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| h | `...bool` | 是否启用调试（默认 true） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="debugStream-2" label="示例">
+
+```go
+// 启用调试模式
+response, err = ai.Chat(
+    "测试消息",
+    ai.apiKey("sk-xxx"),
+    ai.debugStream(true),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### thinking
+
+- 描述: 启用思维链模式，让 AI 显示思考过程。
+
+<Tabs>
+<TabItem value="thinking-1" label="定义" default>
+
+```go
+thinking(t any) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| t | `any` | 思维链配置 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="thinking-2" label="示例">
+
+```go
+// 启用思维链
+response, err = ai.Chat(
+    "分析这个漏洞的利用方式",
+    ai.apiKey("sk-xxx"),
+    ai.thinking(true),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### funcCallRetryTimes
+
+- 描述: 设置函数调用失败时的重试次数。
+
+<Tabs>
+<TabItem value="funcCallRetryTimes-1" label="定义" default>
+
+```go
+funcCallRetryTimes(times int) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| times | `int` | 重试次数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="funcCallRetryTimes-2" label="示例">
+
+```go
+// 设置重试 3 次
+result, err = ai.FunctionCall(
+    "扫描目标",
+    funcs,
+    ai.apiKey("sk-xxx"),
+    ai.funcCallRetryTimes(3),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### toolCallCallback
+
+- 描述: 设置 tool_calls 回调函数，用于在 AI 响应中包含 tool_calls 时接管其处理逻辑。
+一旦设置，tool_calls 不会再被自动转换为 <|TOOL_CALL...|> 格式输出，而是通过回调函数直接返回解析后的 ToolCall 对象。
+
+<Tabs>
+<TabItem value="toolCallCallback-1" label="定义" default>
+
+```go
+toolCallCallback(cb func([]*ToolCall)) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `func([]*ToolCall)` |  当 AI 响应中包含 tool_calls 时触发的回调函数 |
+
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  配置选项 |
+
+</TabItem>
+
+<TabItem value="toolCallCallback-2" label="示例">
+
+```go
+result, err := ai.Chat(
+    "请调用工具获取用户信息",
+    ai.apiKey("sk-xxx"),
+    ai.toolCallCallback(func(calls []*ToolCall) {
+        for _, call := range calls {
+            fmt.Println("Tool Name:", call.Name)
+            fmt.Println("Arguments:", call.Arguments)
+        }
+    }),
+)
+```
+
+</TabItem>
+</Tabs>
+
+
+## 图像处理选项
+
+### imageBase64
+
+- 描述: 传入 Base64 编码的图片数据，用于图像识别场景。
+
+<Tabs>
+<TabItem value="imageBase64-1" label="定义" default>
+
+```go
+imageBase64(b64 string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b64 | `string` | Base64 编码的图片字符串 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="imageBase64-2" label="示例">
+
+```go
+// 使用 Base64 图片
+imageData = "iVBORw0KGgoAAAANSUhEUgAA..."  // Base64 字符串
+response, err = ai.Chat(
+    "分析这张图片中的内容",
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4-vision-preview"),
+    ai.imageBase64(imageData),
+)
+die(err)
+println(response)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### imageFile
+
+- 描述: 传入图片文件路径，自动读取并发送给 AI 进行分析。
+
+<Tabs>
+<TabItem value="imageFile-1" label="定义" default>
+
+```go
+imageFile(i string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` | 图片文件路径 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="imageFile-2" label="示例">
+
+```go
+// 分析本地图片
+response, err = ai.Chat(
+    "这张图片中有什么漏洞特征？",
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4-vision-preview"),
+    ai.imageFile("/path/to/screenshot.png"),
+)
+die(err)
+println(response)
+
+// 分析验证码
+response, err = ai.Chat(
+    "识别这个验证码",
+    ai.apiKey("sk-xxx"),
+    ai.imageFile("./captcha.jpg"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### imageRaw
+
+- 描述: 传入原始图片字节数据。
+
+<Tabs>
+<TabItem value="imageRaw-1" label="定义" default>
+
+```go
+imageRaw(raw []byte) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `[]byte` | 图片的原始字节数据 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="imageRaw-2" label="示例">
+
+```go
+// 从网络获取图片并分析
+imageBytes, err = http.Get("https://example.com/image.png")
+die(err)
+
+response, err = ai.Chat(
+    "分析这张图片",
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4-vision-preview"),
+    ai.imageRaw(imageBytes),
+)
+die(err)
+println(response)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 使用场景示例
+
+### 快速问答
+
+```go
+// 简单的问答
+answer, err = ai.Chat("什么是 XSS 漏洞？", 
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+die(err)
+println(answer)
+```
+
+### 代码生成
+
+```go
+// 让 AI 生成 POC 代码
+code, err = ai.Chat(`
+    生成一个 SQL 注入的 POC 代码，目标是 MySQL 数据库
+`, 
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4"),
+)
+die(err)
+println(code)
+```
+
+### 漏洞分析
+
+```go
+// 分析代码漏洞
+vulnCode = `
+function login(username, password) {
+    let sql = "SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'";
+    return db.query(sql);
+}
+`
+
+analysis, err = ai.Chat(
+    sprintf("分析这段代码的安全问题：\n%s", vulnCode),
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4"),
+)
+die(err)
+println(analysis)
+```
+
+### 流式输出
+
+```go
+// 实时显示 AI 回复
+_, err = ai.Chat(
+    "详细介绍一下 SSRF 漏洞的原理和防御方法",
+    ai.apiKey("sk-xxx"),
+    ai.onStream(fn(reader) {
+        data, _ = io.ReadAll(reader)
+        print(string(data))  // 逐步打印
+    }),
+)
+die(err)
+```
+
+### 图像识别
+
+```go
+// 识别验证码
+captchaText, err = ai.Chat(
+    "请识别图片中的验证码文字",
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4-vision-preview"),
+    ai.imageFile("./captcha.png"),
+)
+die(err)
+println("验证码:", captchaText)
+```
+
+### 智能函数调用
+
+```go
+// 定义工具函数
+tools = {
+    "portScan": func(target, ports) {
+        printf("扫描目标: %s, 端口: %v\n", target, ports)
+        return {"status": "success", "open_ports": [80, 443]}
+    },
+    "getWebTitle": func(url) {
+        // 获取网页标题的实现
+        return {"title": "Example Website"}
+    },
+}
+
+// AI 自动选择和调用函数
+result, err = ai.FunctionCall(
+    "帮我扫描 192.168.1.1 的 80 和 443 端口",
+    tools,
+    ai.apiKey("sk-xxx"),
+    ai.type("openai"),
+)
+die(err)
+dump(result)
+```
+
+---
+
+## 注意事项
+
+1. **API 密钥安全**：不要在代码中硬编码 API 密钥，建议使用环境变量或配置文件
+2. **超时设置**：对于复杂任务，建议设置较长的超时时间
+3. **错误处理**：始终检查返回的错误，AI 服务可能因为网络、配额等原因失败
+4. **代理配置**：在某些网络环境下，可能需要配置代理才能访问 AI 服务
+5. **模型选择**：不同模型有不同的能力和价格，根据实际需求选择合适的模型
+6. **流式输出**：对于长文本生成，使用流式输出可以获得更好的用户体验
+
+
