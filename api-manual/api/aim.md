@@ -24,6 +24,7 @@
 | [aim.enableAISearchTool](#enableaisearchtool) |WithEnableAISearchTool 启用 AI 搜索工具 |
 | [aim.enableForgeSearchTool](#enableforgesearchtool) |WithEnableForgeSearchTool 启用 Forge 搜索工具 |
 | [aim.excludeToolNames](#excludetoolnames) |WithExcludeToolNames 设置排除的工具名称 |
+| [aim.extendedForgeFromZip](#extendedforgefromzip) |WithExtendedForgeFromZip 设置扩展 Forge 从 ZIP 文件中加载 |
 | [aim.focus](#focus) |WithFocus 设置焦点 |
 | [aim.includeToolNames](#includetoolnames) |WithIncludeToolNames 设置包含的工具名称 |
 | [aim.keywords](#keywords) |WithKeywords 设置关键词 |
@@ -490,6 +491,28 @@ WithExcludeToolNames 设置排除的工具名称
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | names | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### extendedForgeFromZip
+
+#### 详细描述
+WithExtendedForgeFromZip 设置扩展 Forge 从 ZIP 文件中加载
+
+
+#### 定义
+
+`extendedForgeFromZip(zipPath string, password ...string) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipPath | `string` |   |
+| password | `...string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
