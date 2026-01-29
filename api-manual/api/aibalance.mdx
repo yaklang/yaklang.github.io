@@ -1,0 +1,612 @@
+---
+sidebar_position: 4
+sidebar_label: aibalance
+slug: /api/aibalance
+tags: []
+title: aibalance
+description: AI Balance 模块提供了 AI 服务负载均衡能力，可以统一管理和调度多个 AI 服务提供商的 API，实现自动负载分配、故障转移和成本优化。适用于需要高可用性和成本控制的 AI 应用场景。
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+:::info
+AI Balance 模块提供了 AI 服务负载均衡能力，可以统一管理和调度多个 AI 服务提供商的 API，实现自动负载分配、故障转移和成本优化。适用于需要高可用性和成本控制的 AI 应用场景。
+:::
+
+## 核心功能
+
+|函数名|函数描述|
+|:------|:--------|
+| [aibalance.Start](#start) | 启动 AI 负载均衡服务器 |
+
+## 配置选项
+
+|选项名|说明|
+|:------|:--------|
+| [aibalance.host](#host) | 设置服务监听地址 |
+| [aibalance.port](#port) | 设置服务监听端口 |
+| [aibalance.config](#config) | 指定配置文件路径 |
+| [aibalance.adminPassword](#adminpassword) | 设置管理员密码 |
+
+---
+
+## 函数详解
+
+### Start
+
+- 描述: 启动 AI 负载均衡服务器，该服务器作为代理层统一管理多个 AI 服务提供商，自动进行负载分配和故障转移。
+
+<Tabs>
+<TabItem value="Start-1" label="定义" default>
+
+```go
+Start(opts ...StartOption) error
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...StartOption` | 启动配置选项（如 host、port、config 等） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` | 错误信息，成功返回 nil |
+
+</TabItem>
+
+<TabItem value="Start-2" label="示例">
+
+```go
+// 基础启动 - 使用默认配置
+err = aibalance.Start()
+die(err)
+
+// 指定监听地址和端口
+err = aibalance.Start(
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+)
+die(err)
+
+// 完整配置启动
+err = aibalance.Start(
+    aibalance.host("127.0.0.1"),
+    aibalance.port(8080),
+    aibalance.config("./aibalance-config.yaml"),
+    aibalance.adminPassword("secure_password_123"),
+)
+die(err)
+println("AI 负载均衡服务已启动")
+
+// 后台启动服务
+go fn {
+    err = aibalance.Start(
+        aibalance.host("0.0.0.0"),
+        aibalance.port(9090),
+    )
+    if err != nil {
+        println("服务启动失败:", err)
+    }
+}()
+sleep(1)  // 等待服务启动
+println("服务已在后台运行")
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 配置选项详解
+
+### host
+
+- 描述: 设置 AI 负载均衡服务器的监听地址，默认为 `0.0.0.0` 监听所有网络接口。
+
+<Tabs>
+<TabItem value="host-1" label="定义" default>
+
+```go
+host(host string) StartOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| host | `string` | 监听地址（如 "0.0.0.0"、"127.0.0.1"） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StartOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="host-2" label="示例">
+
+```go
+// 仅本地访问
+err = aibalance.Start(
+    aibalance.host("127.0.0.1"),
+    aibalance.port(8080),
+)
+
+// 允许外网访问
+err = aibalance.Start(
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+)
+
+// 绑定特定 IP
+err = aibalance.Start(
+    aibalance.host("192.168.1.100"),
+    aibalance.port(8080),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### port
+
+- 描述: 设置 AI 负载均衡服务器的监听端口，默认为 `8080`。
+
+<Tabs>
+<TabItem value="port-1" label="定义" default>
+
+```go
+port(port int) StartOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| port | `int` | 监听端口号（1-65535） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StartOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="port-2" label="示例">
+
+```go
+// 使用标准端口
+err = aibalance.Start(
+    aibalance.port(8080),
+)
+
+// 使用自定义端口
+err = aibalance.Start(
+    aibalance.port(9090),
+)
+
+// 组合使用
+err = aibalance.Start(
+    aibalance.host("127.0.0.1"),
+    aibalance.port(3000),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### config
+
+- 描述: 指定配置文件路径，配置文件包含 AI 服务提供商的密钥、负载策略等详细配置信息。
+
+<Tabs>
+<TabItem value="config-1" label="定义" default>
+
+```go
+config(configFile string) StartOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| configFile | `string` | 配置文件路径（支持 YAML、JSON 格式） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StartOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="config-2" label="示例">
+
+```go
+// 使用 YAML 配置文件
+err = aibalance.Start(
+    aibalance.config("./config/aibalance.yaml"),
+)
+
+// 使用 JSON 配置文件
+err = aibalance.Start(
+    aibalance.config("./config/aibalance.json"),
+)
+
+// 使用绝对路径
+err = aibalance.Start(
+    aibalance.config("/etc/yakit/aibalance-config.yaml"),
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+)
+```
+
+**配置文件示例 (YAML)**
+
+```yaml
+# aibalance-config.yaml
+providers:
+  - name: openai-primary
+    type: openai
+    apiKey: sk-xxx
+    model: gpt-4
+    weight: 5
+    maxRetry: 3
+    
+  - name: openai-backup
+    type: openai
+    apiKey: sk-yyy
+    model: gpt-3.5-turbo
+    weight: 3
+    maxRetry: 2
+    
+  - name: chatglm
+    type: chatglm
+    apiKey: your-key
+    model: chatglm_turbo
+    weight: 2
+
+strategy:
+  type: weighted-round-robin  # 加权轮询
+  fallback: true              # 启用故障转移
+  timeout: 30                 # 超时时间（秒）
+
+limits:
+  maxConcurrent: 100          # 最大并发数
+  rateLimit: 1000             # 每分钟请求限制
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### adminPassword
+
+- 描述: 设置管理员密码，用于访问负载均衡服务器的管理接口，如查看统计信息、修改配置等。
+
+<Tabs>
+<TabItem value="adminPassword-1" label="定义" default>
+
+```go
+adminPassword(password string) StartOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` | 管理员密码（建议使用强密码） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StartOption` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="adminPassword-2" label="示例">
+
+```go
+// 设置管理员密码
+err = aibalance.Start(
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+    aibalance.adminPassword("MySecurePass@2024"),
+)
+
+// 结合配置文件使用
+err = aibalance.Start(
+    aibalance.config("./aibalance.yaml"),
+    aibalance.adminPassword("Admin123!@#"),
+)
+die(err)
+
+// 访问管理接口示例（需要密码认证）
+// GET http://localhost:8080/admin/stats
+// Authorization: Bearer MySecurePass@2024
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 使用场景示例
+
+### 基础服务启动
+
+```go
+// 快速启动一个负载均衡服务
+err = aibalance.Start(
+    aibalance.host("127.0.0.1"),
+    aibalance.port(8080),
+)
+die(err)
+println("AI 负载均衡服务运行在 http://127.0.0.1:8080")
+```
+
+### 生产环境部署
+
+```go
+// 生产环境完整配置
+err = aibalance.Start(
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+    aibalance.config("/etc/yakit/aibalance-prod.yaml"),
+    aibalance.adminPassword("ComplexPassword!@#123"),
+)
+die(err)
+println("生产环境服务已启动")
+```
+
+### 多环境配置
+
+```go
+// 根据环境变量选择配置
+env = os.Getenv("ENVIRONMENT")
+configFile = "./config/aibalance-dev.yaml"
+
+if env == "production" {
+    configFile = "./config/aibalance-prod.yaml"
+} else if env == "staging" {
+    configFile = "./config/aibalance-staging.yaml"
+}
+
+err = aibalance.Start(
+    aibalance.config(configFile),
+    aibalance.host("0.0.0.0"),
+    aibalance.port(8080),
+    aibalance.adminPassword(os.Getenv("ADMIN_PASSWORD")),
+)
+die(err)
+printf("服务已启动 [环境: %s]\n", env)
+```
+
+### 开发测试环境
+
+```go
+// 开发环境 - 本地快速启动
+go fn {
+    err = aibalance.Start(
+        aibalance.host("127.0.0.1"),
+        aibalance.port(3000),
+        aibalance.adminPassword("dev123"),
+    )
+    if err != nil {
+        println("启动失败:", err)
+    }
+}()
+
+// 等待服务就绪
+sleep(2)
+
+// 测试服务是否正常
+resp, err = http.Get("http://127.0.0.1:3000/health")
+if err == nil && resp.StatusCode == 200 {
+    println("✓ 服务健康检查通过")
+} else {
+    println("✗ 服务启动异常")
+}
+```
+
+### 结合 AI 模块使用
+
+```go
+// 先启动负载均衡服务
+go fn {
+    err = aibalance.Start(
+        aibalance.host("127.0.0.1"),
+        aibalance.port(8080),
+        aibalance.config("./aibalance.yaml"),
+    )
+    die(err)
+}()
+
+sleep(2)  // 等待服务启动
+
+// 通过负载均衡服务调用 AI
+response, err = ai.Chat(
+    "介绍一下 SQL 注入漏洞",
+    ai.baseURL("http://127.0.0.1:8080/v1"),
+    ai.apiKey("balance-service-key"),  // 负载均衡服务的密钥
+)
+die(err)
+println(response)
+```
+
+### 监控和统计
+
+```go
+// 启动服务并获取统计信息
+err = aibalance.Start(
+    aibalance.host("127.0.0.1"),
+    aibalance.port(8080),
+    aibalance.adminPassword("admin123"),
+)
+
+// 定期获取统计信息（伪代码）
+go fn {
+    for {
+        sleep(60)  // 每分钟检查一次
+        // 调用管理接口获取统计
+        // stats = getBalancerStats()
+        // println("当前负载:", stats)
+    }
+}()
+```
+
+---
+
+## 负载均衡策略说明
+
+### 支持的负载策略
+
+1. **轮询 (Round Robin)**
+   - 按顺序轮流分配请求到各个 AI 服务
+   - 适合服务性能相近的场景
+
+2. **加权轮询 (Weighted Round Robin)**
+   - 根据配置的权重分配请求
+   - 适合服务性能差异较大的场景
+
+3. **最少连接 (Least Connections)**
+   - 优先分配给当前连接数最少的服务
+   - 适合请求处理时间差异大的场景
+
+4. **随机 (Random)**
+   - 随机选择一个可用服务
+   - 适合简单的负载均衡需求
+
+### 故障转移
+
+当某个 AI 服务不可用时，自动切换到其他可用服务，确保服务连续性。
+
+---
+
+## 管理接口
+
+启动服务后，可以通过以下接口管理和监控：
+
+| 接口路径 | 方法 | 说明 |
+|:--------|:-----|:-----|
+| `/health` | GET | 健康检查 |
+| `/admin/stats` | GET | 获取统计信息 |
+| `/admin/providers` | GET | 查看所有服务提供商状态 |
+| `/admin/config` | GET | 查看当前配置 |
+| `/admin/reload` | POST | 重新加载配置 |
+
+**注意**：访问 `/admin/*` 接口需要提供管理员密码进行认证。
+
+---
+
+## 注意事项
+
+1. **配置文件安全**：配置文件包含 API 密钥等敏感信息，务必妥善保管，建议使用环境变量或密钥管理服务
+
+2. **管理员密码**：使用强密码保护管理接口，避免未经授权的访问
+
+3. **端口冲突**：确保指定的端口未被其他服务占用
+
+4. **网络安全**：生产环境建议配置防火墙规则，限制访问来源
+
+5. **性能监控**：定期检查负载均衡服务的性能指标和各个 AI 服务提供商的状态
+
+6. **故障转移测试**：部署前应测试故障转移机制是否正常工作
+
+7. **日志记录**：配置适当的日志级别，便于问题排查和性能分析
+
+8. **资源限制**：根据实际需求设置最大并发数和速率限制，防止资源耗尽
+
+---
+
+## 最佳实践
+
+### 配置文件管理
+
+```yaml
+# 推荐的配置文件结构
+providers:
+  # 主服务 - 高权重
+  - name: primary-gpt4
+    type: openai
+    apiKey: ${OPENAI_PRIMARY_KEY}  # 使用环境变量
+    model: gpt-4
+    weight: 10
+    timeout: 30
+    maxRetry: 3
+    
+  # 备用服务 - 中权重  
+  - name: backup-gpt35
+    type: openai
+    apiKey: ${OPENAI_BACKUP_KEY}
+    model: gpt-3.5-turbo
+    weight: 5
+    timeout: 20
+    maxRetry: 2
+    
+  # 成本优化服务 - 低权重
+  - name: chatglm-turbo
+    type: chatglm
+    apiKey: ${CHATGLM_KEY}
+    model: chatglm_turbo
+    weight: 3
+    timeout: 15
+    maxRetry: 1
+
+strategy:
+  type: weighted-round-robin
+  fallback: true
+  healthCheck: true
+  healthCheckInterval: 60  # 秒
+
+limits:
+  maxConcurrent: 200
+  rateLimit: 2000  # 每分钟
+  maxQueueSize: 500
+
+logging:
+  level: info
+  file: /var/log/yakit/aibalance.log
+  maxSize: 100  # MB
+```
+
+### 环境变量设置
+
+```bash
+# 设置环境变量
+export OPENAI_PRIMARY_KEY="sk-xxx"
+export OPENAI_BACKUP_KEY="sk-yyy"
+export CHATGLM_KEY="your-key"
+export ADMIN_PASSWORD="secure-password"
+```
+
+### Docker 部署
+
+```dockerfile
+# Dockerfile 示例
+FROM yaklang/yakit:latest
+
+COPY aibalance-config.yaml /etc/yakit/
+ENV ADMIN_PASSWORD="change-me"
+
+EXPOSE 8080
+
+CMD ["yak", "aibalance.Start", \
+     "--host=0.0.0.0", \
+     "--port=8080", \
+     "--config=/etc/yakit/aibalance-config.yaml"]
+```
+
+

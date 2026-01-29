@@ -1,0 +1,993 @@
+---
+sidebar_position: 6
+sidebar_label: aireducer
+slug: /api/aireducer
+tags: []
+title: aireducer
+description: aireducer 模块提供文本和文件内容分块处理能力，支持多种分块策略（按大小、按行数、按时间）。用于处理大文件或长文本内容，将其分割成易于 AI 处理的块，提高处理效率。
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+:::info
+aireducer 模块提供文本和文件内容分块处理能力，支持多种分块策略（按大小、按行数、按时间）。用于处理大文件或长文本内容，将其分割成易于 AI 处理的块，提高处理效率。
+:::
+
+## 核心函数
+
+|函数名|函数描述|
+|:------|:--------|
+| [aireducer.String](#string) | 对字符串内容进行分块处理 |
+| [aireducer.Reader](#reader) | 对 Reader 流进行分块处理 |
+| [aireducer.File](#file) | 对文件内容进行分块处理 |
+| [aireducer.NewReducerFromString](#newreducerfromstring) | 从字符串创建分块处理器 |
+| [aireducer.NewReducerFromReader](#newreducerfromreader) | 从 Reader 创建分块处理器 |
+| [aireducer.NewReducerFromFile](#newreducerfromfile) | 从文件创建分块处理器 |
+
+## 配置选项
+
+|选项名|说明|
+|:------|:--------|
+| [aireducer.chunkSize](#chunksize) | 设置每个块的大小（字节） |
+| [aireducer.lines](#lines) | 按行数分块 |
+| [aireducer.separator](#separator) | 设置分块分隔符 |
+| [aireducer.lineNumber](#linenumber) | 为块内容添加行号前缀 |
+| [aireducer.timeTriggerIntervalSeconds](#timetriggerintervalseconds) | 设置时间触发间隔（秒） |
+| [aireducer.timeTriggerInterval](#timetriggerinterval) | 设置时间触发间隔 |
+| [aireducer.callback](#callback) | 设置分块处理回调函数 |
+| [aireducer.reducerCallback](#reducercallback) | 设置分块处理回调函数（别名） |
+| [aireducer.memory](#memory) | 设置提示词上下文提供者 |
+| [aireducer.context](#context) | 设置上下文 |
+
+
+
+
+---
+
+## 函数详解
+
+### String
+
+- 描述: 对字符串内容进行分块处理，支持多种分块策略。
+
+<Tabs>
+<TabItem value="String-1" label="定义" default>
+
+```go
+String(s string, callback func(chunk chunkmaker.Chunk), options ...Option) error
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` | 要处理的字符串内容 |
+| callback | `func(chunk chunkmaker.Chunk)` | 处理每个块的回调函数 |
+| options | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="String-2" label="示例">
+
+```go
+// 按大小分块
+err = aireducer.String("这是一个很长的文本内容...", 
+    fn(chunk) {
+        printf("块内容: %s\n", chunk.Data())
+    },
+    aireducer.chunkSize(1024),
+)
+die(err)
+
+// 按行数分块
+err = aireducer.String("第一行\n第二行\n第三行\n...", 
+    fn(chunk) {
+        printf("内容: %s\n", chunk.Data())
+    },
+    aireducer.chunkSize(1024),
+    aireducer.lines(10),  // 每 10 行一个块
+)
+die(err)
+
+// 启用行号显示
+err = aireducer.String("代码第一行\n代码第二行\n...", 
+    fn(chunk) {
+        printf("块内容:\n%s\n", chunk.Data())
+    },
+    aireducer.chunkSize(2048),
+    aireducer.lineNumber(true),  // 添加行号前缀
+)
+die(err)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### Reader
+
+- 描述: 对 Reader 流进行分块处理，适合处理网络流或大文件。
+
+<Tabs>
+<TabItem value="Reader-1" label="定义" default>
+
+```go
+Reader(i io.Reader, callback func(chunk chunkmaker.Chunk), options ...Option) error
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `io.Reader` | 输入的 Reader 流 |
+| callback | `func(chunk chunkmaker.Chunk)` | 处理每个块的回调函数 |
+| options | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="Reader-2" label="示例">
+
+```go
+// 处理网络响应流
+rsp,req = poc.Get("https://af.alicdn.com/AWSC/uab/1.140.0/collina.js", poc.https(true))~
+
+err = aireducer.Reader(str.NewReader(string(rsp.GetBody())), 
+    fn(chunk) {
+        printf("接收内容 %d\n", string(chunk.Data()))
+    },
+    aireducer.chunkSize(4096),
+)
+die(err)
+
+// 处理文件流
+file, err = file.Open("/path/to/large-file.log")
+die(err)
+
+err = aireducer.Reader(file, 
+    fn(chunk) {
+        // 处理日志块
+        printf("处理日志块: %s\n", chunk.Data())
+    },
+    aireducer.lines(100),  // 每 100 行一个块
+)
+die(err)
+
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### File
+
+- 描述: 对文件内容进行分块处理，直接读取文件并处理。
+
+<Tabs>
+<TabItem value="File-1" label="定义" default>
+
+```go
+File(filename string, callback func(chunk chunkmaker.Chunk), options ...Option) error
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` | 文件路径 |
+| callback | `func(chunk chunkmaker.Chunk)` | 处理每个块的回调函数 |
+| options | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="File-2" label="示例">
+
+```go
+// 处理大型 JSON 文件
+err = aireducer.File("/data/large-file.json", 
+    fn(chunk) {
+        printf("处理 JSON 块: %s\n", chunk.Data())
+    },
+    aireducer.chunkSize(8192),
+)
+die(err)
+
+// 处理代码文件（保留行号）
+err = aireducer.File("./main.go", 
+    fn(chunk) {
+        printf("代码块 %s\n", chunk.Data())
+    },
+    aireducer.chunkSize(4096),
+    aireducer.lineNumber(true),
+)
+die(err)
+
+// 处理日志文件（按行分块）
+err = aireducer.File("/var/log/application.log", 
+    fn(chunk) {
+        printf("日志块: %s\n", chunk.Data())
+    },
+    aireducer.lines(50),
+)
+die(err)
+
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### NewReducerFromString
+
+- 描述: 从字符串创建分块处理器，支持链式调用多个操作。
+
+<Tabs>
+<TabItem value="NewReducerFromString-1" label="定义" default>
+
+```go
+NewReducerFromString(i string, opts ...Option) (*Reducer, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `string` | 输入字符串内容 |
+| opts | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Reducer` | 分块处理器实例 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="NewReducerFromString-2" label="示例">
+
+```go
+// 创建处理器
+reducer, err = aireducer.NewReducerFromString(
+    "这是要处理的长文本内容...",
+    aireducer.chunkSize(1024),
+    aireducer.lineNumber(true),
+)
+die(err)
+
+// 使用处理器处理块
+err = reducer.Process(fn(chunk) {
+    printf("处理块: %s\n", chunk.Content)
+})
+die(err)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### NewReducerFromReader
+
+- 描述: 从 Reader 创建分块处理器，用于处理流式数据。
+
+<Tabs>
+<TabItem value="NewReducerFromReader-1" label="定义" default>
+
+```go
+NewReducerFromReader(r io.Reader, opts ...Option) (*Reducer, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| r | `io.Reader` | 输入 Reader 流 |
+| opts | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Reducer` | 分块处理器实例 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="NewReducerFromReader-2" label="示例">
+
+```go
+// 从网络流创建处理器
+rsp,req = poc.Get("https://example.com/data.txt", poc.https(true))~
+
+reducer, err = aireducer.NewReducerFromReader(
+    rsp.GetBody(),
+    aireducer.chunkSize(2048),
+)
+die(err)
+
+// 处理块
+blocks = []
+err = reducer.Process(fn(chunk) {
+    blocks = append(blocks, chunk.Data())
+})
+die(err)
+
+printf("共处理 %d 个块\n", len(blocks))
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### NewReducerFromFile
+
+- 描述: 从文件创建分块处理器，用于处理文件内容。
+
+<Tabs>
+<TabItem value="NewReducerFromFile-1" label="定义" default>
+
+```go
+NewReducerFromFile(filename string, opts ...Option) (*Reducer, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filename | `string` | 文件路径 |
+| opts | `...Option` | 分块配置选项 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*Reducer` | 分块处理器实例 |
+| r2 | `error` | 错误信息 |
+
+</TabItem>
+
+<TabItem value="NewReducerFromFile-2" label="示例">
+
+```go
+// 创建文件处理器
+reducer, err = aireducer.NewReducerFromFile(
+    "./document.md",
+    aireducer.chunkSize(4096),
+    aireducer.lines(20),
+)
+die(err)
+
+// 处理所有块
+totalSize = 0
+err = reducer.Process(fn(chunk) {
+    totalSize += len(chunk.Data())
+    printf("%d 字节\n", len(chunk.Data()))
+})
+die(err)
+
+printf("总大小: %d 字节\n", totalSize)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 配置选项详解
+
+### chunkSize
+
+- 描述: 设置每个块的大小，以字节为单位。这是最基础的分块方式。
+
+<Tabs>
+<TabItem value="chunkSize-1" label="定义" default>
+
+```go
+chunkSize(size int64) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| size | `int64` | 块大小（字节） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="chunkSize-2" label="示例">
+
+```go
+// 设置 1KB 块
+err = aireducer.String(content, 
+    fn(chunk) { printf("块大小: %d\n", len(chunk.Data())) },
+    aireducer.chunkSize(1024),
+)
+
+// 设置 4KB 块用于大文件
+err = aireducer.File("large.log", 
+    fn(chunk) { printf("处理块\n") },
+    aireducer.chunkSize(4096),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### lines
+
+- 描述: 按行数分块。当设置此选项时，每 N 行创建一个块。如果 N 行的内容小于 chunkSize，则保持完整；如果超过 chunkSize，则按大小分割。
+
+<Tabs>
+<TabItem value="lines-1" label="定义" default>
+
+```go
+lines(lines int) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| lines | `int` | 每个块包含的行数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="lines-2" label="示例">
+
+```go
+// 每 10 行一个块
+err = aireducer.File("log.txt", 
+    fn(chunk) { printf("块: %s\n", chunk.Data()) },
+    aireducer.lines(10),
+    aireducer.chunkSize(1024),  // 硬限制：如果 10 行超过 1KB，则按 1KB 分割
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### lineNumber
+
+- 描述: 为块内容的每一行添加行号前缀。适合需要行号信息的场景，如代码分析。
+
+<Tabs>
+<TabItem value="lineNumber-1" label="定义" default>
+
+```go
+lineNumber(enable bool) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` | true 表示启用行号 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="lineNumber-2" label="示例">
+
+```go
+// 启用行号前缀
+err = aireducer.File("source.py", 
+    fn(chunk) { 
+        printf("代码:\n%s\n", chunk.Data())
+        // 输出: 
+        // 1: def hello():
+        // 2:     print("hello")
+    },
+    aireducer.chunkSize(2048),
+    aireducer.lineNumber(true),
+)
+
+// AI 分析代码时保留行号
+err = aireducer.File("script.sh",
+    fn(chunk) {
+        analysis, _ = ai.Chat(
+            sprintf("分析这段脚本:\n%s", chunk.Data()),
+            ai.apiKey("sk-xxx"),
+        )
+        printf("分析结果: %s\n", analysis)
+    },
+    aireducer.lineNumber(true),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### separator
+
+- 描述: 设置分块分隔符，按指定的分隔符分块。
+
+<Tabs>
+<TabItem value="separator-1" label="定义" default>
+
+```go
+separator(separator string) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| separator | `string` | 分隔符字符串 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="separator-2" label="示例">
+
+```go
+// 按段落分块（使用空行作为分隔符）
+err = aireducer.String(document, 
+    fn(chunk) { printf("段落: %s\n\n", chunk.Data()) },
+    aireducer.separator("\n\n"),
+)
+
+// JSON 数组按对象分块
+err = aireducer.String(jsonData, 
+    fn(chunk) { printf("对象: %s\n", chunk.Data()) },
+    aireducer.separator("}\n{"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### timeTriggerIntervalSeconds
+
+- 描述: 设置时间触发间隔（单位：秒）。每隔指定秒数自动触发一个块处理。
+
+<Tabs>
+<TabItem value="timeTriggerIntervalSeconds-1" label="定义" default>
+
+```go
+timeTriggerIntervalSeconds(seconds float64) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| seconds | `float64` | 时间间隔（秒） |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="timeTriggerIntervalSeconds-2" label="示例">
+
+```go
+document = "这是一个很长的文本内容..."
+
+
+// 每 5 秒触发一次块处理
+err = aireducer.Reader(str.NewReader(document), 
+    fn(chunk) { printf("日志块处理: %s\n", chunk.Data()) },
+    aireducer.timeTriggerIntervalSeconds(5),
+)
+
+// 实时监控流数据
+err = aireducer.Reader(dataStream, 
+    fn(chunk) { 
+        printf("处理时间: %v\n", time.Now())
+    },
+    aireducer.timeTriggerIntervalSeconds(2.5),  // 每 2.5 秒
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### timeTriggerInterval
+
+- 描述: 设置时间触发间隔。支持标准 Go duration 格式。
+
+<Tabs>
+<TabItem value="timeTriggerInterval-1" label="定义" default>
+
+```go
+timeTriggerInterval(interval time.Duration) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| interval | `time.Duration` | 时间间隔 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="timeTriggerInterval-2" label="示例">
+
+```go
+// 每 10 秒处理一次
+err = aireducer.Reader(stream, 
+    fn(chunk) { printf("处理: %s\n", chunk.Data()) },
+    aireducer.timeTriggerInterval(10 * time.Second),
+)
+
+// 每 5 分钟处理一次
+err = aireducer.File("access.log", 
+    fn(chunk) { printf("日志块\n") },
+    aireducer.timeTriggerInterval(5 * time.Minute),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### callback
+
+- 描述: 设置分块处理回调函数，每当生成一个块时调用此函数。
+
+<Tabs>
+<TabItem value="callback-1" label="定义" default>
+
+```go
+callback(callback ReducerCallbackType) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `ReducerCallbackType` | 回调函数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="callback-2" label="示例">
+
+```go
+// 直接指定回调
+reducer, err = aireducer.NewReducerFromFile(
+    "data.txt",
+    aireducer.chunkSize(1024),
+    aireducer.callback(fn(chunk) {
+        printf("块内容: %s\n", chunk.Data())
+    }),
+)
+die(err)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### reducerCallback
+
+- 描述: 设置分块处理回调函数（`callback` 的别名）。
+
+<Tabs>
+<TabItem value="reducerCallback-1" label="定义" default>
+
+```go
+reducerCallback(callback ReducerCallbackType) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `ReducerCallbackType` | 回调函数 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="reducerCallback-2" label="示例">
+
+```go
+// 使用别名设置回调
+err = aireducer.File("report.md",
+    aireducer.reducerCallback(fn(chunk) {
+        printf("处理报告块\n")
+    }),
+    aireducer.chunkSize(2048),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### memory
+
+- 描述: 设置提示词上下文提供者，用于在处理块时保持上下文信息。
+
+<Tabs>
+<TabItem value="memory-1" label="定义" default>
+
+```go
+memory(memory *aid.PromptContextProvider) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| memory | `*aid.PromptContextProvider` | 上下文提供者 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="memory-2" label="示例">
+
+```go
+// 使用上下文处理多个文件块
+contextProvider = aid.NewPromptContextProvider()
+
+reducer, err = aireducer.NewReducerFromFile(
+    "document.md",
+    aireducer.chunkSize(4096),
+    aireducer.memory(contextProvider),
+)
+die(err)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+### context
+
+- 描述: 设置上下文，用于控制分块处理过程（如支持取消操作）。
+
+<Tabs>
+<TabItem value="context-1" label="定义" default>
+
+```go
+context(ctx context.Context) Option
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` | Go 上下文 |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` | 配置选项 |
+
+</TabItem>
+
+<TabItem value="context-2" label="示例">
+
+```go
+// 支持超时控制
+ctx, cancel = context.WithTimeout(context.Background(), 30 * time.Second)
+defer cancel()
+
+err = aireducer.File("large-file.log",
+    fn(chunk) { printf("处理: %s\n", chunk.Data()) },
+    aireducer.chunkSize(2048),
+    aireducer.context(ctx),
+)
+die(err)
+
+// 支持取消处理
+ctx, cancel = context.WithCancel(context.Background())
+
+go fn() {
+    time.Sleep(5 * time.Second)
+    cancel()  // 5 秒后取消处理
+}()
+
+err = aireducer.File("data.txt",
+    fn(chunk) { printf("处理块\n") },
+    aireducer.context(ctx),
+)
+```
+
+</TabItem>
+</Tabs>
+
+---
+
+## 使用场景示例
+
+### 处理日志文件
+
+```go
+// 按行分块处理大型日志文件
+err = aireducer.File("/var/log/app.log", 
+    fn(chunk) {
+        // 分析日志块
+        analysis, _ = ai.Chat(
+            sprintf("分析这些日志行找出错误:\n%s", chunk.Data()),
+            ai.apiKey("sk-xxx"),
+            ai.model("gpt-3.5-turbo"),
+        )
+        printf("分析结果: %s\n", analysis)
+    },
+    aireducer.lines(50),          // 每 50 行一个块
+    aireducer.lineNumber(true),   // 显示行号便于定位
+)
+die(err)
+```
+
+### 分析代码文件
+
+```go
+// 处理源代码文件进行安全审计
+err = aireducer.File("./main.go", 
+    fn(chunk) {
+        // 逐块分析代码安全问题
+        result, _ = ai.Chat(
+            sprintf("审计这段代码的安全问题:\n%s", chunk.Data()),
+            ai.apiKey("sk-xxx"),
+            ai.model("gpt-4"),
+        )
+        printf("安全审计: %s\n", result)
+    },
+    aireducer.chunkSize(4096),
+    aireducer.lineNumber(true),
+)
+die(err)
+```
+
+### 处理 API 响应流
+
+```go
+// 实时处理 API 流式响应
+response, err = http.Get("https://api.example.com/data-stream")
+die(err)
+defer response.Body.Close()
+
+err = aireducer.Reader(response.Body,
+    fn(chunk) {
+        printf("块 %d: %s\n", chunk.Index, chunk.Data())
+        // 实时处理数据
+    },
+    aireducer.chunkSize(1024),
+)
+die(err)
+```
+
+### 处理 Markdown 文档
+
+```go
+// 按段落分块处理 Markdown 文档
+document, _ = os.ReadFile("README.md")
+
+err = aireducer.String(string(document),
+    fn(chunk) {
+        // 处理每个段落
+        summary, _ = ai.Chat(
+            sprintf("用一句话总结:\n%s", chunk.Data()),
+            ai.apiKey("sk-xxx"),
+        )
+        printf("摘要: %s\n", summary)
+    },
+    aireducer.separator("\n\n"),  // 按段落分块
+)
+die(err)
+```
+
+### 处理大文件并生成报告
+
+```go
+// 分块处理大文件，汇总生成报告
+chunks = []
+err = aireducer.File("data.json",
+    fn(chunk) {
+        // 收集所有块
+        chunks = append(chunks, chunk.Data())
+    },
+    aireducer.chunkSize(8192),
+)
+die(err)
+
+// 生成综合报告
+report, _ = ai.Chat(
+    sprintf("基于以下数据块生成报告:\n%s", 
+        str.Join(chunks, "\n---\n")),
+    ai.apiKey("sk-xxx"),
+    ai.model("gpt-4"),
+)
+printf("报告: %s\n", report)
+```
+
+---
+
+## 注意事项
+
+1. **块大小平衡**：设置合适的 `chunkSize`，过小会增加处理次数，过大可能超过 AI 模型的 token 限制。
+2. **行号开销**：启用 `lineNumber` 会增加块大小，需要在可读性和大小之间平衡。
+3. **内存占用**：处理大文件时，及时处理块避免内存溢出。
+4. **分隔符选择**：自定义 `separator` 时确保分隔符不会出现在正常内容中。
+5. **超时设置**：处理大文件时，为 `context` 设置足够长的超时时间。
+6. **流式处理**：使用 `Reader` 时注意及时关闭流资源，避免资源泄漏。
+7. **组合策略**：`lines` 和 `chunkSize` 可同时使用，`chunkSize` 是硬限制。
+8. **错误处理**：始终检查返回的错误，文件可能不存在或无法读取。
+
