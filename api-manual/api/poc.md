@@ -61,6 +61,7 @@
 | [poc.ParseMultiPartFormWithCallback](#parsemultipartformwithcallback) |ParseMultiPartFormWithCallback 是一个辅助函数，用于尝试解析请求报文体中的表单并进行回调  |
 | [poc.ParseUrlToHTTPRequestRaw](#parseurltohttprequestraw) |ParseUrlToHTTPRequestRaw 将URL解析为原始 HTTP 请求报文，返回是否为 HTTPS，原始请求报文与错误  |
 | [poc.Post](#post) |Post 向指定 URL 发送 POST 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
+| [poc.RemoveSession](#removesession) |RemoveSession 清除指定的 session，删除其关联的 cookiejar  这在完成一系列请求后清理资源时很有用  |
 | [poc.ReplaceAllHTTPPacketPostParams](#replaceallhttppacketpostparams) |ReplaceAllHTTPPacketPostParams 是一个辅助函数，用于改变请求报文，修改所有 POST 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为 POST 请求参数名，value 为 POST 请求参数值  |
 | [poc.ReplaceAllHTTPPacketPostParamsWithoutEscape](#replaceallhttppacketpostparamswithoutescape) |ReplaceAllHTTPPacketPostParamsWithoutEscape 是一个辅助函数，用于改变请求报文，修改所有 POST 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为 POST 请求参数名，value 为 POST 请...|
 | [poc.ReplaceAllHTTPPacketQueryParams](#replaceallhttppacketqueryparams) |ReplaceAllHTTPPacketQueryParams 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值  |
@@ -1962,6 +1963,31 @@ desc(rsp) // 查看响应结构体中的可用字段
 | rspInst | `*lowhttp.LowhttpResponse` |   |
 | reqInst | `*http.Request` |   |
 | err | `error` |   |
+
+
+### RemoveSession
+
+#### 详细描述
+RemoveSession 清除指定的 session，删除其关联的 cookiejar
+
+这在完成一系列请求后清理资源时很有用
+
+Example:
+```
+poc.Get("https://example.com/login", poc.session("user1")) // 使用 session "user1" 登录
+poc.Get("https://example.com/api", poc.session("user1"))   // 继续使用 session "user1"
+poc.RemoveSession("user1") // 清除 session "user1"，释放其 cookiejar
+```
+
+
+#### 定义
+
+`RemoveSession(session any)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| session | `any` |   |
 
 
 ### ReplaceAllHTTPPacketPostParams
