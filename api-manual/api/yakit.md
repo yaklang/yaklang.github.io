@@ -15,6 +15,9 @@
 | [yakit.EnableWebsiteTrees](#enablewebsitetrees) ||
 | [yakit.Error](#error) ||
 | [yakit.File](#file) ||
+| [yakit.ForceSyncBuildInForge](#forcesyncbuildinforge) ||
+| [yakit.ForceSyncCorePlugin](#forcesynccoreplugin) ||
+| [yakit.ForceSyncSyntaxFlowRule](#forcesyncsyntaxflowrule) ||
 | [yakit.GenerateYakitMITMHooksParams](#generateyakitmitmhooksparams) ||
 | [yakit.GetHomeDir](#gethomedir) ||
 | [yakit.GetHomeTempDir](#gethometempdir) ||
@@ -272,6 +275,66 @@ aiLevel is an optional category for downstream consumers.
 |:-----------|:---------- |:-----------|
 | fileName | `string` |   |
 | option | `...any` |   |
+
+
+### ForceSyncBuildInForge
+
+#### 详细描述
+
+
+#### 定义
+
+`ForceSyncBuildInForge(notify func(float64, string)) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| notify | `func(float64, string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### ForceSyncCorePlugin
+
+#### 详细描述
+
+
+#### 定义
+
+`ForceSyncCorePlugin(notify func(float64, string)) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| notify | `func(float64, string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### ForceSyncSyntaxFlowRule
+
+#### 详细描述
+
+
+#### 定义
+
+`ForceSyncSyntaxFlowRule(notify func(float64, string)) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| notify | `func(float64, string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### GenerateYakitMITMHooksParams
