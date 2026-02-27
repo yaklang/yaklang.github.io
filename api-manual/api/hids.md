@@ -7,6 +7,7 @@
 | [hids.CPUPercent](#cpupercent) |CPUPercent 获取当前系统的 CPU 使用率  |
 | [hids.CPUPercentCallback](#cpupercentcallback) |CPUPercentCallback 当 CPU 使用率发生变化时，调用 callback 函数  |
 | [hids.CheckAuditSystem](#checkauditsystem) ||
+| [hids.CheckJournalAvailable](#checkjournalavailable) |CheckJournalAvailable 检查 journalctl 是否可用且当前用户有权读取系统级 sshd 日志    sshd 日志属于 system journal，非 root 用户需要加入 systemd-journal（或 adm）组才能读取。  如果权限不足，journalctl...|
 | [hids.GetConnectionStats](#getconnectionstats) |GetConnectionStats 获取连接统计信息  |
 | [hids.GetConnectionsByPid](#getconnectionsbypid) |GetConnectionsByPid 获取指定进程的连接  |
 | [hids.GetConnectionsByPort](#getconnectionsbyport) |GetConnectionsByPort 获取指定端口的连接  |
@@ -30,6 +31,7 @@
 | [hids.NewAuditMonitor](#newauditmonitor) ||
 | [hids.NewConnectionFilter](#newconnectionfilter) |NewConnectionFilter 创建新的连接过滤器  |
 | [hids.NewConnectionMonitor](#newconnectionmonitor) |NewConnectionMonitor 创建连接监控器  |
+| [hids.NewJournalSSHMonitor](#newjournalsshmonitor) ||
 | [hids.NewProcessFilter](#newprocessfilter) |NewProcessFilter 创建新的进程过滤器  |
 | [hids.NewProcessMonitor](#newprocessmonitor) |NewProcessMonitor 创建进程监控器  |
 | [hids.NewWhitelistRule](#newwhitelistrule) |NewWhitelistRule 创建新的白名单规则  |
@@ -37,26 +39,34 @@
 | [hids.ProcessExists](#processexists) |ProcessExists 检查指定PID的进程是否存在  |
 | [hids.SetMonitorInterval](#setmonitorinterval) |SetMonitorInterval 设置全局健康管理器的监控间隔(单位：秒)，如果在全局健康管理器运行时调用，会重置全局健康管理器  |
 | [hids.ShowMonitorInterval](#showmonitorinterval) |ShowMonitorInterval 在标准输出中输出全局健康管理器的监控间隔(单位：秒)  |
-| [hids.WatchAuditEvents](#watchauditevents) |WatchAuditEvents 简化的监控函数 - 监控audit事件  |
+| [hids.WatchAuditEvents](#watchauditevents) |WatchAuditEvents 简化的audit监控函数  |
 | [hids.WatchConnections](#watchconnections) |WatchConnections 简单的连接监控函数，监控指定时长后返回事件列表  |
+| [hids.WatchJournalSSHEvents](#watchjournalsshevents) |WatchJournalSSHEvents 简化的 SSH journal 监控函数  使用 context 控制生命周期，onSuccess 和 onFailed 可以为 nil  |
 | [hids.WatchProcess](#watchprocess) |WatchProcess 简单的进程监控函数，监控指定时长后返回事件列表  |
-| [hids.WithAuditBufferSize](#withauditbuffersize) |WithAuditBufferSize 设置缓冲区大小  |
-| [hids.WithAuditFilterCommands](#withauditfiltercommands) |WithAuditFilterCommands 设置命令过滤器（支持正则）  |
-| [hids.WithAuditFilterLoginUsers](#withauditfilterloginusers) |WithAuditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）  过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）  |
-| [hids.WithAuditFilterUsers](#withauditfilterusers) |WithAuditFilterUsers 设置当前用户过滤器（按 Username 过滤）  过滤当前执行操作的用户（例如 su 后的用户）  |
-| [hids.WithAuditMonitorCommand](#withauditmonitorcommand) |WithAuditMonitorCommand 设置是否监控命令执行事件  |
-| [hids.WithAuditMonitorLogin](#withauditmonitorlogin) |WithAuditMonitorLogin 设置是否监控登录事件  |
 | [hids.WithConnectionFilter](#withconnectionfilter) |WithConnectionFilter 设置连接过滤器 |
 | [hids.WithConnectionHistory](#withconnectionhistory) |WithConnectionHistory 启用历史记录 |
 | [hids.WithConnectionMonitorInterval](#withconnectionmonitorinterval) |WithConnectionMonitorInterval 设置监控间隔 |
-| [hids.WithOnCommandEvent](#withoncommandevent) |WithOnCommandEvent 设置命令执行事件回调  |
 | [hids.WithOnConnectionDisappear](#withonconnectiondisappear) |WithOnConnectionDisappear 设置连接消失回调 |
-| [hids.WithOnLoginEvent](#withonloginevent) |WithOnLoginEvent 设置登录事件回调  |
 | [hids.WithOnNewConnection](#withonnewconnection) |WithOnNewConnection 设置新连接回调 |
 | [hids.WithOnProcessCreate](#withonprocesscreate) |WithOnProcessCreate 设置进程创建回调  |
 | [hids.WithOnProcessExit](#withonprocessexit) |WithOnProcessExit 设置进程退出回调  |
 | [hids.WithProcessMonitorInterval](#withprocessmonitorinterval) |WithProcessMonitorInterval 设置监控间隔  |
 | [hids.WithWhitelist](#withwhitelist) |WithWhitelist 设置进程白名单规则  |
+| [hids.auditFilterCommands](#auditfiltercommands) |auditFilterCommands 设置命令过滤器（支持正则）  |
+| [hids.auditFilterLoginUsers](#auditfilterloginusers) |auditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）  过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）  |
+| [hids.auditFilterUsers](#auditfilterusers) |auditFilterUsers 设置当前用户过滤器（按 Username 过滤）  过滤当前执行操作的用户（例如 su 后的用户）  |
+| [hids.auditMonitorCommand](#auditmonitorcommand) |auditMonitorCommand 设置是否监控命令执行事件  |
+| [hids.auditMonitorLogin](#auditmonitorlogin) |auditMonitorLogin 设置是否监控登录事件  |
+| [hids.auditOnCommandEvent](#auditoncommandevent) |auditOnCommandEvent 设置命令执行事件回调  |
+| [hids.auditOnLoginEvent](#auditonloginevent) |auditOnLoginEvent 设置登录事件回调  |
+| [hids.journalSSHFilterRemoteIPs](#journalsshfilterremoteips) |journalSSHFilterRemoteIPs 只监控来自指定 IP 的 SSH 登录事件  |
+| [hids.journalSSHFilterUsers](#journalsshfilterusers) |journalSSHFilterUsers 只监控指定用户名的 SSH 登录事件  |
+| [hids.journalSSHOnAnyEvent](#journalsshonanyevent) |journalSSHOnAnyEvent 设置任意 SSH 事件回调（成功/失败/断开均触发）  |
+| [hids.journalSSHOnDisconnected](#journalsshondisconnected) |journalSSHOnDisconnected 设置会话断开事件回调  |
+| [hids.journalSSHOnLoginFailed](#journalsshonloginfailed) |journalSSHOnLoginFailed 设置登录失败事件回调  |
+| [hids.journalSSHOnLoginSuccess](#journalsshonloginsuccess) |journalSSHOnLoginSuccess 设置登录成功事件回调  |
+| [hids.journalSSHSince](#journalsshsince) |journalSSHSince 设置从何时开始读取日志（journalctl --since 参数格式）  默认为 &amp;#34;now&amp;#34;，即只读取启动后的新日志  |
+| [hids.journalSSHUnits](#journalsshunits) |journalSSHUnits 设置要监听的 systemd unit 名称（默认自动检测 sshd/ssh）  |
 
 
 ## 函数定义
@@ -164,6 +174,38 @@ if (i > 50) { println("cpu precent is over 50%") } // 当 CPU 使用率超过50%
 |:-----------|:---------- |:-----------|
 | r1 | `*AuditStatus` |   |
 | r2 | `error` |   |
+
+
+### CheckJournalAvailable
+
+#### 详细描述
+CheckJournalAvailable 检查 journalctl 是否可用且当前用户有权读取系统级 sshd 日志
+
+
+
+sshd 日志属于 system journal，非 root 用户需要加入 systemd-journal（或 adm）组才能读取。
+
+如果权限不足，journalctl 会静默返回空结果而不报错，导致监控无法捕获任何事件。
+
+本函数通过不带 -q 执行 journalctl，捕获其向 stderr 输出的权限提示来判断。
+
+
+
+Example:
+```
+err = hids.CheckJournalAvailable()
+if err != nil { println("journal not available:", err) }
+```
+
+
+#### 定义
+
+`CheckJournalAvailable() error`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
 
 
 ### GetConnectionStats
@@ -773,6 +815,27 @@ monitor = hids.NewConnectionMonitor(
 | r1 | `*ConnectionMonitor` |   |
 
 
+### NewJournalSSHMonitor
+
+#### 详细描述
+
+
+#### 定义
+
+`NewJournalSSHMonitor(opts ...JournalSSHMonitorOption) (*JournalSSHMonitor, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...JournalSSHMonitorOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*JournalSSHMonitor` |   |
+| r2 | `error` |   |
+
+
 ### NewProcessFilter
 
 #### 详细描述
@@ -951,21 +1014,18 @@ hids.ShowMonitorInterval()
 ### WatchAuditEvents
 
 #### 详细描述
-WatchAuditEvents 简化的监控函数 - 监控audit事件
+WatchAuditEvents 简化的audit监控函数
 
 Example:
 ```
 ctx, cancel = context.WithTimeout(context.Background(), 10)
 defer cancel()
-err = hids.WatchAuditEvents(ctx, func(event) {
+err = hids.WatchAuditEvents(ctx,
 
-	println("Login:", event.Username)
+	fn(event) { println("Login:", event.Username) },
+	fn(event) { println("Command:", event.Command) },
 
-}, func(event) {
-
-	println("Command:", event.Command)
-
-})
+)
 ```
 
 
@@ -1018,6 +1078,43 @@ for _, event := range events {
 | r2 | `error` |   |
 
 
+### WatchJournalSSHEvents
+
+#### 详细描述
+WatchJournalSSHEvents 简化的 SSH journal 监控函数
+
+使用 context 控制生命周期，onSuccess 和 onFailed 可以为 nil
+
+Example:
+```
+ctx, cancel = context.WithTimeout(context.Background(), 60)
+defer cancel()
+err = hids.WatchJournalSSHEvents(ctx,
+
+	fn(event) { printf("Login success: %s from %s\n", event.Username, event.RemoteIP) },
+	fn(event) { printf("Login failed: %s from %s\n", event.Username, event.RemoteIP) },
+
+)
+```
+
+
+#### 定义
+
+`WatchJournalSSHEvents(ctx context.Context, onSuccess func(*JournalSSHEvent), onFailed func(*JournalSSHEvent)) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
+| onSuccess | `func(*JournalSSHEvent)` |   |
+| onFailed | `func(*JournalSSHEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### WatchProcess
 
 #### 详细描述
@@ -1048,168 +1145,6 @@ for _, event := range events {
 |:-----------|:---------- |:-----------|
 | r1 | `[]*ProcessEvent` |   |
 | r2 | `error` |   |
-
-
-### WithAuditBufferSize
-
-#### 详细描述
-WithAuditBufferSize 设置缓冲区大小
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithAuditBufferSize(16384))
-```
-
-
-#### 定义
-
-`WithAuditBufferSize(size int) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| size | `int` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
-### WithAuditFilterCommands
-
-#### 详细描述
-WithAuditFilterCommands 设置命令过滤器（支持正则）
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithAuditFilterCommands(".*ssh.*", "sudo"))
-```
-
-
-#### 定义
-
-`WithAuditFilterCommands(commands ...string) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| commands | `...string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
-### WithAuditFilterLoginUsers
-
-#### 详细描述
-WithAuditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）
-
-过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）
-
-Example:
-```
-// 只监控原始登录用户为 root 的会话中的操作
-monitor = hids.NewAuditMonitor(hids.WithAuditFilterLoginUsers("root"))
-```
-
-
-#### 定义
-
-`WithAuditFilterLoginUsers(users ...string) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| users | `...string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
-### WithAuditFilterUsers
-
-#### 详细描述
-WithAuditFilterUsers 设置当前用户过滤器（按 Username 过滤）
-
-过滤当前执行操作的用户（例如 su 后的用户）
-
-Example:
-```
-// 只监控 matrix 用户执行的命令
-monitor = hids.NewAuditMonitor(hids.WithAuditFilterUsers("matrix", "admin"))
-```
-
-
-#### 定义
-
-`WithAuditFilterUsers(users ...string) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| users | `...string` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
-### WithAuditMonitorCommand
-
-#### 详细描述
-WithAuditMonitorCommand 设置是否监控命令执行事件
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithAuditMonitorCommand(true))
-```
-
-
-#### 定义
-
-`WithAuditMonitorCommand(enable bool) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| enable | `bool` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
-### WithAuditMonitorLogin
-
-#### 详细描述
-WithAuditMonitorLogin 设置是否监控登录事件
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithAuditMonitorLogin(true))
-```
-
-
-#### 定义
-
-`WithAuditMonitorLogin(enable bool) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| enable | `bool` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
 
 
 ### WithConnectionFilter
@@ -1275,36 +1210,6 @@ WithConnectionMonitorInterval 设置监控间隔
 | r1 | `ConnectionMonitorOption` |   |
 
 
-### WithOnCommandEvent
-
-#### 详细描述
-WithOnCommandEvent 设置命令执行事件回调
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithOnCommandEvent(func(event) {
-
-	println("Command:", event.Command, "by", event.Username)
-
-}))
-```
-
-
-#### 定义
-
-`WithOnCommandEvent(callback func(*CommandEvent)) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| callback | `func(*CommandEvent)` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
-
-
 ### WithOnConnectionDisappear
 
 #### 详细描述
@@ -1324,36 +1229,6 @@ WithOnConnectionDisappear 设置连接消失回调
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ConnectionMonitorOption` |   |
-
-
-### WithOnLoginEvent
-
-#### 详细描述
-WithOnLoginEvent 设置登录事件回调
-
-Example:
-```
-monitor = hids.NewAuditMonitor(hids.WithOnLoginEvent(func(event) {
-
-	println("Login:", event.Username, "from", event.RemoteIP)
-
-}))
-```
-
-
-#### 定义
-
-`WithOnLoginEvent(callback func(*LoginEvent)) AuditMonitorOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| callback | `func(*LoginEvent)` |   |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AuditMonitorOption` |   |
 
 
 ### WithOnNewConnection
@@ -1489,5 +1364,452 @@ monitor = hids.NewProcessMonitor(hids.WithWhitelist(rules))
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ProcessMonitorOption` |   |
+
+
+### auditFilterCommands
+
+#### 详细描述
+auditFilterCommands 设置命令过滤器（支持正则）
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.auditFilterCommands(".*ssh.*", "sudo"))
+```
+
+
+#### 定义
+
+`auditFilterCommands(commands ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| commands | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditFilterLoginUsers
+
+#### 详细描述
+auditFilterLoginUsers 设置原始登录用户过滤器（按 LoginUser 过滤）
+
+过滤原始登录的用户（例如 SSH 登录的用户，即使后来 su 到其他用户）
+
+Example:
+```
+// 只监控原始登录用户为 root 的会话中的操作
+monitor = hids.NewAuditMonitor(hids.auditFilterLoginUsers("root"))
+```
+
+
+#### 定义
+
+`auditFilterLoginUsers(users ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| users | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditFilterUsers
+
+#### 详细描述
+auditFilterUsers 设置当前用户过滤器（按 Username 过滤）
+
+过滤当前执行操作的用户（例如 su 后的用户）
+
+Example:
+```
+// 只监控 matrix 用户执行的命令
+monitor = hids.NewAuditMonitor(hids.auditFilterUsers("root", "www"))
+```
+
+
+#### 定义
+
+`auditFilterUsers(users ...string) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| users | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditMonitorCommand
+
+#### 详细描述
+auditMonitorCommand 设置是否监控命令执行事件
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.auditMonitorCommand(true))
+```
+
+
+#### 定义
+
+`auditMonitorCommand(enable bool) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditMonitorLogin
+
+#### 详细描述
+auditMonitorLogin 设置是否监控登录事件
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.auditMonitorLogin(true))
+```
+
+
+#### 定义
+
+`auditMonitorLogin(enable bool) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditOnCommandEvent
+
+#### 详细描述
+auditOnCommandEvent 设置命令执行事件回调
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.auditOnCommandEvent(fn(event) {
+
+	println("Command:", event.Command, "by", event.Username)
+
+}))
+```
+
+
+#### 定义
+
+`auditOnCommandEvent(callback func(*CommandEvent)) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*CommandEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### auditOnLoginEvent
+
+#### 详细描述
+auditOnLoginEvent 设置登录事件回调
+
+Example:
+```
+monitor = hids.NewAuditMonitor(hids.auditOnLoginEvent(fn(event) {
+
+	println("Login:", event.Username, "from", event.RemoteIP)
+
+}))
+```
+
+
+#### 定义
+
+`auditOnLoginEvent(callback func(*LoginEvent)) AuditMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*LoginEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AuditMonitorOption` |   |
+
+
+### journalSSHFilterRemoteIPs
+
+#### 详细描述
+journalSSHFilterRemoteIPs 只监控来自指定 IP 的 SSH 登录事件
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHFilterRemoteIPs("192.168.1.1", "10.0.0.2"),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHFilterRemoteIPs(ips ...string) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ips | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHFilterUsers
+
+#### 详细描述
+journalSSHFilterUsers 只监控指定用户名的 SSH 登录事件
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHFilterUsers("root", "admin"),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHFilterUsers(users ...string) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| users | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHOnAnyEvent
+
+#### 详细描述
+journalSSHOnAnyEvent 设置任意 SSH 事件回调（成功/失败/断开均触发）
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHOnAnyEvent(fn(event) {
+	    println("SSH event:", event.EventType, event.Username, event.RemoteIP)
+	}),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHOnAnyEvent(callback func(*JournalSSHEvent)) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*JournalSSHEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHOnDisconnected
+
+#### 详细描述
+journalSSHOnDisconnected 设置会话断开事件回调
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHOnDisconnected(fn(event) {
+	    println("SSH disconnected:", event.Username, "from", event.RemoteIP)
+	}),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHOnDisconnected(callback func(*JournalSSHEvent)) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*JournalSSHEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHOnLoginFailed
+
+#### 详细描述
+journalSSHOnLoginFailed 设置登录失败事件回调
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHOnLoginFailed(fn(event) {
+	    println("SSH login failed:", event.Username, "from", event.RemoteIP)
+	}),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHOnLoginFailed(callback func(*JournalSSHEvent)) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*JournalSSHEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHOnLoginSuccess
+
+#### 详细描述
+journalSSHOnLoginSuccess 设置登录成功事件回调
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHOnLoginSuccess(fn(event) {
+	    println("SSH login success:", event.Username, "from", event.RemoteIP)
+	}),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHOnLoginSuccess(callback func(*JournalSSHEvent)) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(*JournalSSHEvent)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHSince
+
+#### 详细描述
+journalSSHSince 设置从何时开始读取日志（journalctl --since 参数格式）
+
+默认为 &#34;now&#34;，即只读取启动后的新日志
+
+Example:
+```
+// 读取最近1小时的历史日志并持续监控
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHSince("1 hour ago"),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHSince(since string) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| since | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
+
+
+### journalSSHUnits
+
+#### 详细描述
+journalSSHUnits 设置要监听的 systemd unit 名称（默认自动检测 sshd/ssh）
+
+Example:
+```
+monitor, err = hids.NewJournalSSHMonitor(
+
+	hids.journalSSHUnits("sshd.service"),
+
+)
+```
+
+
+#### 定义
+
+`journalSSHUnits(units ...string) JournalSSHMonitorOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| units | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `JournalSSHMonitorOption` |   |
 
 

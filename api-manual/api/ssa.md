@@ -58,6 +58,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 | [ssa.withProjectName](#withprojectname) ||
 | [ssa.withProjectTags](#withprojecttags) ||
 | [ssa.withReCompile](#withrecompile) ||
+| [ssa.withSetProgramName](#withsetprogramname) ||
 | [ssa.withStrictMode](#withstrictmode) ||
 
 
@@ -176,7 +177,7 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 #### 定义
 
-`NewProgramFromDB(programName string) (p *Program, err error)`
+`NewProgramFromDB(programName string) (SyntaxFlowQueryInstance, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -186,8 +187,8 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| p | `*Program` |   |
-| err | `error` |   |
+| r1 | `SyntaxFlowQueryInstance` |   |
+| r2 | `error` |   |
 
 
 ### NewResultFromDB
@@ -1013,6 +1014,26 @@ Yak|(ssaconfig.Language) &#34;yak&#34;|
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | reCompile | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### withSetProgramName
+
+#### 详细描述
+
+
+#### 定义
+
+`withSetProgramName(name string) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| name | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

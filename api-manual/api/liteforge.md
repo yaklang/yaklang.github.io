@@ -19,6 +19,7 @@
 | [liteforge.knowledgeEntryLength](#knowledgeentrylength) ||
 | [liteforge.output](#output) |liteforge.output is an option for liteforge.Execute it can limit the output of the liteforge.Execute use `jsonschema.ActionObject` to limit the output...|
 | [liteforge.refinePrompt](#refineprompt) ||
+| [liteforge.speedPriority](#speedpriority) |liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks |
 | [liteforge.strictRefine](#strictrefine) ||
 | [liteforge.verboseName](#verbosename) |liteforge.verboseName is an option for liteforge.Execute it adds verbose naming options to the execution  example: ``` liteforge.Execute(&amp;lt;&amp;lt;&amp;lt;P...|
 
@@ -428,6 +429,27 @@ PROMPT, liteforge.output(jsonschema.ActionObject(jsonschema.paramString(&#34;val
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `RefineOption` |   |
+
+
+### speedPriority
+
+#### 详细描述
+liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks
+
+
+#### 定义
+
+`speedPriority(b ...bool) LiteForgeExecOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `...bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `LiteForgeExecOption` |   |
 
 
 ### strictRefine
