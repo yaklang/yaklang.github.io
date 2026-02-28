@@ -11,6 +11,7 @@
 | [poc.AppendHTTPPacketPostParam](#appendhttppacketpostparam) |AppendHTTPPacketPostParam 是一个辅助函数，用于改变请求报文，添加POST请求参数  |
 | [poc.AppendHTTPPacketQueryParam](#appendhttppacketqueryparam) |AppendHTTPPacketQueryParam 是一个辅助函数，用于改变请求报文，添加GET请求参数  |
 | [poc.AppendHTTPPacketUploadFile](#appendhttppacketuploadfile) |AppendHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，添加请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)  |
+| [poc.AutoUnzipPacketEncoding](#autounzippacketencoding) |AutoUnzipPacketEncoding 是一个辅助函数，用于将 HTTP 报文中的传输/内容编码“解开”，以便前端展示/编辑。    - 支持处理 Transfer-Encoding: chunked（会自动反分块，并移除相关头）  - 支持处理 Content-Encoding（如 gzi...|
 | [poc.BuildRequest](#buildrequest) |BuildRequest 是一个用于辅助构建请求报文的工具函数，它第一个参数可以接收 []byte, string, http.Request 结构体，接下来可以接收零个到多个请求选项，修改请求报文的选项将被作用，最后返回构建好的请求报文  |
 | [poc.CurlToHTTPRequest](#curltohttprequest) |CurlToHTTPRequest 尝试将curl命令转换为HTTP请求报文，其返回值为bytes，即转换后的HTTP请求报文  |
 | [poc.Delete](#delete) |Delete 向指定 URL 发送 DELETE 请求并且返回响应结构体，请求结构体以及错误，它的第一个参数是 URL 字符串，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如对设置超时时间，或者修改请求报文等  关于结构体中的可用字段和方法可以使用 desc 函数进行查看  |
@@ -416,6 +417,57 @@ poc.AppendHTTPPacketUploadFile(raw, "file", "phpinfo.php", "<?php phpinfo(); ?>"
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
+
+
+### AutoUnzipPacketEncoding
+
+#### 详细描述
+AutoUnzipPacketEncoding 是一个辅助函数，用于将 HTTP 报文中的传输/内容编码“解开”，以便前端展示/编辑。
+
+
+
+- 支持处理 Transfer-Encoding: chunked（会自动反分块，并移除相关头）
+
+- 支持处理 Content-Encoding（如 gzip/br/zstd/zlib/deflate），优先按 header 解码；header 缺失时会尝试用 magic number 判断（如 gzip/zstd/zlib）
+
+- 失败时保持保守：返回 (raw, nil, false)，避免破坏原始报文
+
+
+
+该函数通常与 AutoZipPacketEncoding 配对使用：前端编辑 plain 报文后，服务端可用 state 将其重新压回原始编码形态。
+
+
+
+Example:
+```
+raw := []byte(`HTTP/1.1 200 OK
+Transfer-Encoding: chunked
+
+5
+hello
+0
+
+`)
+plain, state, ok = poc.AutoUnzipPacketEncoding(raw)
+// plain 的 body 变为 "hello"，并移除了 Transfer-Encoding: chunked
+```
+
+
+#### 定义
+
+`AutoUnzipPacketEncoding(raw []byte) (plain []byte, state *PacketEncodingState, ok bool)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| plain | `[]byte` |   |
+| state | `*PacketEncodingState` |   |
+| ok | `bool` |   |
 
 
 ### BuildRequest
