@@ -51,7 +51,7 @@ const OwnerInfoOpt: OwnerInfoOptProps[] = [
     info: {
       img: "/img/team/sucre.jpg",
       name: "sucre",
-      links: [{ name: "@四维创智", href: "https://www.4dogs.cn/" }],
+      links: [{ name: "@万径安全", href: "https://www.megavector.cn/" }],
       tags: [{ name: "能力研发", color: "green" }],
       description: "乙方红队负责人",
       address: "北京",
@@ -228,7 +228,7 @@ const ContributorsInfo: ContributorsInfoProps[] = [
   {
     img: "/img/team/shangzeng.jpeg",
     name: "shangzeng",
-    links: [{ name: "@shangzeng.club", href: "http://shangzeng.club/" }],
+    links: [{ name: "@shangzeng.club" }],
     description: "金融安全工作者",
     address: "长春",
     icon: { href: "https://github.com/shangzeng/" },
