@@ -21,6 +21,7 @@
 | [cve.product](#product) ||
 | [cve.score](#score) ||
 | [cve.severity](#severity) ||
+| [cve.skipAnyVersion](#skipanyversion) ||
 | [cve.testLimit](#testlimit) |WithCVETestLimit sets the maximum number of CVEs to process (for testing) |
 | [cve.vendor](#vendor) ||
 
@@ -416,6 +417,26 @@ WithCVEAIConcurrent sets the number of concurrent workers for AI completion
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | level | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CVEOption` |   |
+
+
+### skipAnyVersion
+
+#### 详细描述
+
+
+#### 定义
+
+`skipAnyVersion(flag bool) CVEOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| flag | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
