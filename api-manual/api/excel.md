@@ -9,6 +9,8 @@
 | [excel.NewFile](#newfile) |CreateExcelFile 创建新的Excel文件 |
 | [excel.NewSheet](#newsheet) |NewSheet 创建新工作表 |
 | [excel.Parse](#parse) ||
+| [excel.ParseTableFast](#parsetablefast) ||
+| [excel.ParseTableOnly](#parsetableonly) ||
 | [excel.Save](#save) |SaveExcelFile 保存Excel文件 |
 | [excel.SetCellStyle](#setcellstyle) |SetCellStyle 设置单元格样式 |
 | [excel.SetFormula](#setformula) |SetFormula 设置单元格公式 |
@@ -154,6 +156,49 @@ NewSheet 创建新工作表
 #### 定义
 
 `Parse(filePath string) ([]ExcelNode, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filePath | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]ExcelNode` |   |
+| r2 | `error` |   |
+
+
+### ParseTableFast
+
+#### 详细描述
+
+
+#### 定义
+
+`ParseTableFast(filePath string, maxDataRows int) ([]ExcelNode, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| filePath | `string` |   |
+| maxDataRows | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]ExcelNode` |   |
+| r2 | `error` |   |
+
+
+### ParseTableOnly
+
+#### 详细描述
+
+
+#### 定义
+
+`ParseTableOnly(filePath string) ([]ExcelNode, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|

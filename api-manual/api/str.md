@@ -76,8 +76,8 @@
 | [str.IsXmlRequest](#isxmlrequest) |IsXmlRequest 猜测传入的参数是否为请求头是 XML 格式的原始 HTTP 请求报文  |
 | [str.IsXmlValue](#isxmlvalue) |IsXmlValue 尝试将传入的参数转换为字符串，然后猜测其是否是 XML 格式的数据  |
 | [str.Join](#join) |Join 将i中的元素用d连接，如果传入的参数不是字符串，会自动将其转为字符串，再将其用d连接。如果连接失败，则会返回i的字符串形式。  |
-| [str.JsonToMap](#jsontomap) |JsonToMap 将 json 字符串 line 解析为 map  |
-| [str.JsonToMapList](#jsontomaplist) |JsonToMapList 将 json 字符串 line 解析为 map 列表  |
+| [str.JsonToMap](#jsontomap) |JsonToMap 将 json 字符串 line 解析为 map，保留嵌套结构（对象/数组不会被转为字符串）  单对象时优先用 json.Unmarshal 确保嵌套正确；多对象（如 `{} {}`）时回退到 jstream。  |
+| [str.JsonToMapList](#jsontomaplist) |JsonToMapList 将 json 字符串 line 解析为 map 列表，保留嵌套结构（对象/数组不会被转为字符串）  |
 | [str.LastIndex](#lastindex) |LastIndex 返回字符串s中substr最后一次出现的位置的索引，如果字符串中不存在substr，则返回-1  |
 | [str.LastIndexAny](#lastindexany) |LastIndexAny 返回字符串s中chars任意字符最后一次出现的位置的索引，如果字符串中不存在chars，则返回-1  |
 | [str.LastIndexByte](#lastindexbyte) |LastIndexByte 返回字符串s中最后一个等于c的字符的索引，如果字符串中不存在c，则返回-1  |
@@ -91,7 +91,7 @@
 | [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) |MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 URL 进行合并，并返回合并后的 URL  |
 | [str.NewFilter](#newfilter) |NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器用于判断一个元素是否在一个集合中，它存在极低的假阳性（即说存在的元素实际上不存在），通常这个集合中的元素数量非常大才会使用布谷鸟过滤器。  |
 | [str.NewReader](#newreader) |NewReader returns a new [Reader] reading from s. It is similar to [bytes.NewBufferString] but more efficient and non-writable. |
-| [str.ParamsGetOr](#paramsgetor) |ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue  |
+| [str.ParamsGetOr](#paramsgetor) |ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue。支持 map[string]string 与 map[string]any。  |
 | [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求  |
 | [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应  |
 | [str.ParseStringToCClassHosts](#parsestringtocclasshosts) |ParseStringToCClassHosts 尝试从给定的字符串中解析Host，再将其转为 C 类网段，用,分隔  |
@@ -2169,17 +2169,20 @@ str.Join([]int{1, 2, 3}, " ") // 1 2 3
 ### JsonToMap
 
 #### 详细描述
-JsonToMap 将 json 字符串 line 解析为 map
+JsonToMap 将 json 字符串 line 解析为 map，保留嵌套结构（对象/数组不会被转为字符串）
+
+单对象时优先用 json.Unmarshal 确保嵌套正确；多对象（如 `{} {}`）时回退到 jstream。
 
 Example:
 ```
-str.JsonToMap(`{"a":1,"b":2}`) // map[a:1 b:2]
+str.JsonToMap(`{"a":1,"b":2}`)           // map[a:1 b:2]
+str.JsonToMap(`{"b":{},"c":[],"d":{"d1":""}}`)  // 嵌套结构完整保留
 ```
 
 
 #### 定义
 
-`JsonToMap(line string) map[string]string`
+`JsonToMap(line string) map[string]any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2189,23 +2192,24 @@ str.JsonToMap(`{"a":1,"b":2}`) // map[a:1 b:2]
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| r1 | `map[string]any` |   |
 
 
 ### JsonToMapList
 
 #### 详细描述
-JsonToMapList 将 json 字符串 line 解析为 map 列表
+JsonToMapList 将 json 字符串 line 解析为 map 列表，保留嵌套结构（对象/数组不会被转为字符串）
 
 Example:
 ```
 str.JsonToMapList(`{"a":1,"b":2} {"c":3, "d":4}`) // [map[a:1 b:2] map[c:3 d:4]]
+str.JsonToMapList(`{"a":{"x":1},"b":[]}`)         // [map[a:map[x:1] b:[]]
 ```
 
 
 #### 定义
 
-`JsonToMapList(line string) []map[string]string`
+`JsonToMapList(line string) []map[string]any`
 
 #### 参数
 |参数名|参数类型|参数解释|
@@ -2215,7 +2219,7 @@ str.JsonToMapList(`{"a":1,"b":2} {"c":3, "d":4}`) // [map[a:1 b:2] map[c:3 d:4]]
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]map[string]string` |   |
+| r1 | `[]map[string]any` |   |
 
 
 ### LastIndex
@@ -2566,7 +2570,7 @@ It is similar to [bytes.NewBufferString] but more efficient and non-writable.
 ### ParamsGetOr
 
 #### 详细描述
-ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue
+ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue。支持 map[string]string 与 map[string]any。
 
 Example:
 ```
@@ -2577,12 +2581,12 @@ str.ParamsGetOr({"a": "1"}, "b", "2") // 2
 
 #### 定义
 
-`ParamsGetOr(i map[string]string, key string, defaultValue string) string`
+`ParamsGetOr(i any, key string, defaultValue string) string`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `map[string]string` |   |
+| i | `any` |   |
 | key | `string` |   |
 | defaultValue | `string` |   |
 

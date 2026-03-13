@@ -96,10 +96,16 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.PKCS7UnPaddingForDES](#pkcs7unpaddingfordes) ||
 | [codec.RC4Decrypt](#rc4decrypt) ||
 | [codec.RC4Encrypt](#rc4encrypt) ||
+| [codec.RSADecryptWithJSEncryptStyle](#rsadecryptwithjsencryptstyle) |RSADecryptWithJSEncryptStyle is an alias for PKCS#1 v1.5 block decryption compatibility. |
 | [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) |RSADecryptWithOAEP 使用 RSA私钥 和 RSA-OAEP 填充方式解密给定的密文。 参数 raw 表示 RSA 私钥，支持以下格式：   - DER 编码的私钥（raw ASN.1 DER 字节流）   - Base64 编码的 DER 格式（自动解码）   - PEM 编码（包...|
 | [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。  参数 raw 表示 RSA 私钥，支持以下格式：    - DER 编码的私钥（raw ASN.1 DER 字节流）    - Base64...|
+| [codec.RSADecryptWithPKCS1v15Block](#rsadecryptwithpkcs1v15block) |RSADecryptWithPKCS1v15Block decrypts ciphertext with PKCS#1 v1.5 and automatically chunks by key size. |
+| [codec.RSAEncryptWithJSEncryptStyle](#rsaencryptwithjsencryptstyle) |RSAEncryptWithJSEncryptStyle is an alias for PKCS#1 v1.5 block encryption compatibility. |
 | [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) |RSAEncryptWithOAEP 使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Base64 编码的 DER 格式（自动解码）    - PEM ...|
 | [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。    参数 raw 表示 RSA 公钥，支持以下格式：    - DER 编码的公钥（raw ASN.1 DER 字节流）    - Ba...|
+| [codec.RSAEncryptWithPKCS1v15Block](#rsaencryptwithpkcs1v15block) |RSAEncryptWithPKCS1v15Block encrypts plaintext with PKCS#1 v1.5 and automatically chunks long plaintext. |
+| [codec.RSASignWithPKCS1v15Digest](#rsasignwithpkcs1v15digest) |RSASignWithPKCS1v15Digest signs data using PKCS#1 v1.5 with sha256/sha512. |
+| [codec.RSAVerifyWithPKCS1v15Digest](#rsaverifywithpkcs1v15digest) |RSAVerifyWithPKCS1v15Digest verifies RSA signature using PKCS#1 v1.5 with sha256/sha512. |
 | [codec.RandBytes](#randbytes) ||
 | [codec.Sha1](#sha1) ||
 | [codec.Sha224](#sha224) ||
@@ -2294,6 +2300,29 @@ If sampling cuts into UTF-8 character, look forward/backward to find valid bound
 | r2 | `error` |   |
 
 
+### RSADecryptWithJSEncryptStyle
+
+#### 详细描述
+RSADecryptWithJSEncryptStyle is an alias for PKCS#1 v1.5 block decryption compatibility.
+
+
+#### 定义
+
+`RSADecryptWithJSEncryptStyle(privKeyPem string, ciphertext []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| privKeyPem | `string` |   |
+| ciphertext | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### RSADecryptWithOAEP
 
 #### 详细描述
@@ -2380,6 +2409,52 @@ Example:
 |:-----------|:---------- |:-----------|
 | raw | `[]byte` |   |
 | data | `any` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### RSADecryptWithPKCS1v15Block
+
+#### 详细描述
+RSADecryptWithPKCS1v15Block decrypts ciphertext with PKCS#1 v1.5 and automatically chunks by key size.
+
+
+#### 定义
+
+`RSADecryptWithPKCS1v15Block(privKeyPem string, ciphertext []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| privKeyPem | `string` |   |
+| ciphertext | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### RSAEncryptWithJSEncryptStyle
+
+#### 详细描述
+RSAEncryptWithJSEncryptStyle is an alias for PKCS#1 v1.5 block encryption compatibility.
+
+
+#### 定义
+
+`RSAEncryptWithJSEncryptStyle(pubKeyPem string, data []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pubKeyPem | `string` |   |
+| data | `[]byte` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -2496,6 +2571,78 @@ Example:
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### RSAEncryptWithPKCS1v15Block
+
+#### 详细描述
+RSAEncryptWithPKCS1v15Block encrypts plaintext with PKCS#1 v1.5 and automatically chunks long plaintext.
+
+
+#### 定义
+
+`RSAEncryptWithPKCS1v15Block(pubKeyPem string, data []byte) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pubKeyPem | `string` |   |
+| data | `[]byte` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### RSASignWithPKCS1v15Digest
+
+#### 详细描述
+RSASignWithPKCS1v15Digest signs data using PKCS#1 v1.5 with sha256/sha512.
+
+
+#### 定义
+
+`RSASignWithPKCS1v15Digest(privKeyPem string, data []byte, algo string) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| privKeyPem | `string` |   |
+| data | `[]byte` |   |
+| algo | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### RSAVerifyWithPKCS1v15Digest
+
+#### 详细描述
+RSAVerifyWithPKCS1v15Digest verifies RSA signature using PKCS#1 v1.5 with sha256/sha512.
+
+
+#### 定义
+
+`RSAVerifyWithPKCS1v15Digest(pubKeyPem string, data []byte, signature []byte, algo string) (bool, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| pubKeyPem | `string` |   |
+| data | `[]byte` |   |
+| signature | `[]byte` |   |
+| algo | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `bool` |   |
 | r2 | `error` |   |
 
 
