@@ -7,6 +7,7 @@
 | [spacengine.QuakeQuery](#quakequery) ||
 | [spacengine.Query](#query) ||
 | [spacengine.ShodanQuery](#shodanquery) ||
+| [spacengine.ZoneQuery](#zonequery) ||
 | [spacengine.ZoomeyeQuery](#zoomeyequery) ||
 | [spacengine.domain](#domain) ||
 | [spacengine.engine](#engine) ||
@@ -19,6 +20,7 @@
 | [spacengine.randomDelay](#randomdelay) ||
 | [spacengine.retryTimes](#retrytimes) ||
 | [spacengine.shodan](#shodan) ||
+| [spacengine.zone](#zone) ||
 | [spacengine.zoomeye](#zoomeye) ||
 
 
@@ -129,6 +131,29 @@
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | token | `string` |   |
+| filter | `string` |   |
+| opts | `..._spaceEngineConfigOpt` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `chan *base.NetSpaceEngineResult` |   |
+| r2 | `error` |   |
+
+
+### ZoneQuery
+
+#### 详细描述
+
+
+#### 定义
+
+`ZoneQuery(key string, filter string, opts ..._spaceEngineConfigOpt) (chan *base.NetSpaceEngineResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| key | `string` |   |
 | filter | `string` |   |
 | opts | `..._spaceEngineConfigOpt` |   |
 
@@ -371,6 +396,26 @@
 #### 定义
 
 `shodan(api ...string) _spaceEngineConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| api | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `_spaceEngineConfigOpt` |   |
+
+
+### zone
+
+#### 详细描述
+
+
+#### 定义
+
+`zone(api ...string) _spaceEngineConfigOpt`
 
 #### 参数
 |参数名|参数类型|参数解释|
