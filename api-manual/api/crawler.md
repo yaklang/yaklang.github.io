@@ -15,6 +15,7 @@
 | [crawler.domainInclude](#domaininclude) |domainInclude 是一个选项函数，用于指定爬虫时的域名白名单  domain允许使用glob语法，例如*.example.com  |
 | [crawler.forbiddenFromParent](#forbiddenfromparent) |forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false  对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取  |
 | [crawler.header](#header) |header 是一个选项函数，用于指定爬虫时的请求头  |
+| [crawler.httpsToHttpFallback](#httpstohttpfallback) ||
 | [crawler.jsParser](#jsparser) |jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。  填写该选项默认开启，也可以传入false强制关闭。  |
 | [crawler.maxDepth](#maxdepth) |maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5  |
 | [crawler.maxRedirect](#maxredirect) |maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5  |
@@ -29,6 +30,7 @@
 | [crawler.urlRegexpExclude](#urlregexpexclude) |urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单  |
 | [crawler.urlRegexpInclude](#urlregexpinclude) |urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单  |
 | [crawler.userAgent](#useragent) |userAgent 是一个选项函数，用于指定爬虫时的User-Agent  |
+| [crawler.verifyCertificate](#verifycertificate) ||
 
 
 ## 函数定义
@@ -391,6 +393,26 @@ crawler.Start("https://example.com", crawler.header("User-Agent", "yaklang-crawl
 | r1 | `ConfigOpt` |   |
 
 
+### httpsToHttpFallback
+
+#### 详细描述
+
+
+#### 定义
+
+`httpsToHttpFallback(enable bool) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| enable | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
 ### jsParser
 
 #### 详细描述
@@ -743,6 +765,26 @@ crawler.Start("https://example.com", crawler.userAgent("yaklang-crawler"))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | ua | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### verifyCertificate
+
+#### 详细描述
+
+
+#### 定义
+
+`verifyCertificate(b bool) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
