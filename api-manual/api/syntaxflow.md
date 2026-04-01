@@ -14,6 +14,7 @@
 | [syntaxflow.withExecTaskID](#withexectaskid) ||
 | [syntaxflow.withProcess](#withprocess) ||
 | [syntaxflow.withSave](#withsave) ||
+| [syntaxflow.withScanConcurrency](#withscanconcurrency) ||
 | [syntaxflow.withScanProcessCallback](#withscanprocesscallback) ||
 | [syntaxflow.withScanPrograms](#withscanprograms) ||
 | [syntaxflow.withScanResultCallback](#withscanresultcallback) ||
@@ -397,6 +398,26 @@ die(err)
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `ssaapi.QueryOption` |   |
+
+
+### withScanConcurrency
+
+#### 详细描述
+
+
+#### 定义
+
+`withScanConcurrency(concurrency uint32) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| concurrency | `uint32` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
 
 
 ### withScanProcessCallback

@@ -9,6 +9,7 @@
 | [yakit.Debug](#debug) ||
 | [yakit.DeleteAllAIEvent](#deleteallaievent) ||
 | [yakit.DeletePayloadByGroup](#deletepayloadbygroup) ||
+| [yakit.EmitSSAResult](#emitssaresult) ||
 | [yakit.EnableDotGraphTab](#enabledotgraphtab) ||
 | [yakit.EnableTable](#enabletable) ||
 | [yakit.EnableText](#enabletext) ||
@@ -51,6 +52,7 @@
 | [yakit.QueryUrlsAll](#queryurlsall) ||
 | [yakit.QueryUrlsByKeyword](#queryurlsbykeyword) ||
 | [yakit.Report](#report) ||
+| [yakit.SSAStream](#ssastream) ||
 | [yakit.SaveDomain](#savedomain) ||
 | [yakit.SaveHTTPFlow](#savehttpflow) ||
 | [yakit.SavePayload](#savepayload) ||
@@ -182,6 +184,29 @@ aiLevel is an optional category for downstream consumers.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### EmitSSAResult
+
+#### 详细描述
+
+
+#### 定义
+
+`EmitSSAResult(result *ssaapi.SyntaxFlowResult) (int, int, int, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| result | `*ssaapi.SyntaxFlowResult` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+| r2 | `int` |   |
+| r3 | `int` |   |
+| r4 | `error` |   |
 
 
 ### EnableDotGraphTab
@@ -957,6 +982,21 @@ aiLevel is an optional category for downstream consumers.
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | i | `int` |   |
+
+
+### SSAStream
+
+#### 详细描述
+
+
+#### 定义
+
+`SSAStream(partsJSON string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| partsJSON | `string` |   |
 
 
 ### SaveDomain

@@ -9,10 +9,16 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) ||
+| [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) ||
+| [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) ||
 | [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) ||
 | [sfreport.NewReport](#newreport) ||
 | [sfreport.withDataflowPath](#withdataflowpath) ||
 | [sfreport.withFileContent](#withfilecontent) ||
+| [sfreport.withStreamReportType](#withstreamreporttype) ||
+| [sfreport.withStreamShowDataflowPath](#withstreamshowdataflowpath) ||
+| [sfreport.withStreamShowFileContent](#withstreamshowfilecontent) ||
+| [sfreport.withStreamWithFile](#withstreamwithfile) ||
 
 
 ## 函数定义
@@ -35,6 +41,53 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### ConvertSingleResultToJSONWithOptions
+
+#### 详细描述
+
+
+#### 定义
+
+`ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflow bool, showFileContent bool, withFile bool) (string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| result | `*ssaapi.SyntaxFlowResult` |   |
+| reportType | `ReportType` |   |
+| showDataflow | `bool` |   |
+| showFileContent | `bool` |   |
+| withFile | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+
+### ConvertSingleResultToSSAResultPartsJSONPayload
+
+#### 详细描述
+
+
+#### 定义
+
+`ConvertSingleResultToSSAResultPartsJSONPayload(result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption) (map[string]any, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| result | `*ssaapi.SyntaxFlowResult` |   |
+| opts | `...StreamPartsOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
 | r2 | `error` |   |
 
 
@@ -120,5 +173,85 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `func(*Config)` |   |
+
+
+### withStreamReportType
+
+#### 详细描述
+
+
+#### 定义
+
+`withStreamReportType(v ReportType) StreamPartsOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `ReportType` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StreamPartsOption` |   |
+
+
+### withStreamShowDataflowPath
+
+#### 详细描述
+
+
+#### 定义
+
+`withStreamShowDataflowPath(v bool) StreamPartsOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StreamPartsOption` |   |
+
+
+### withStreamShowFileContent
+
+#### 详细描述
+
+
+#### 定义
+
+`withStreamShowFileContent(v bool) StreamPartsOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StreamPartsOption` |   |
+
+
+### withStreamWithFile
+
+#### 详细描述
+
+
+#### 定义
+
+`withStreamWithFile(v bool) StreamPartsOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| v | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `StreamPartsOption` |   |
 
 
