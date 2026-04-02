@@ -19,17 +19,24 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.Chat](#chat) | Chat 快速调用 AI 服务进行对话，这是最简单的调用方式。 |
 | [ai.ChatGLM](#chatglm) | ChatGLM 创建一个 ChatGLM 客户端实例，用于调用智谱 AI 的 ChatGLM 系列模型。 |
 | [ai.FunctionCall](#functioncall) | FunctionCall 让 AI 根据用户输入自动调用预定义的函数，实现智能函数调用能力。 |
+| [ai.IntelligentChat](#intelligentchat) | IntelligentChat uses the intelligent (high-quality) model |
+| [ai.IntelligentFunctionCall](#intelligentfunctioncall) |  |
+| [ai.LightweightChat](#lightweightchat) | LightweightChat uses the lightweight (fast) model |
+| [ai.LightweightFunctionCall](#lightweightfunctioncall) |  |
 | [ai.ListModelByProviderType](#listmodelbyprovidertype) | ListModelByProviderType 根据提供商类型列出可用的 AI 模型。 |
 | [ai.ListModels](#listmodels) | ListModels 列出当前配置下所有可用的 AI 模型。 |
 | [ai.MockAIService](#mockaiservice) | MockAIService 创建一个 Mock AI 响应 目前仅供项目内部测试脚本使用。 |
 | [ai.Moonshot](#moonshot) | Moonshot 创建一个 Moonshot 客户端实例，用于调用 Moonshot AI 服务。 |
 | [ai.OpenAI](#openai) | OpenAI 创建一个 OpenAI 客户端实例，支持 OpenAI 官方 API 及兼容的第三方服务。 |
 | [ai.StructuredStream](#structuredstream) | StructuredStream 获取结构化的流式输出，支持实时接收 AI 返回的数据。 |
+| [ai.VisionChat](#visionchat) | VisionChat uses the vision model |
+| [ai.VisionFunctionCall](#visionfunctioncall) |  |
 | [ai.apiKey](#apikey) | WithAPIKey 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。 |
 | [ai.baseURL](#baseurl) | WithBaseURL 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。 |
 | [ai.debugStream](#debugstream) | WithDebugStream 启用流式输出调试模式，用于开发调试。 |
 | [ai.domain](#domain) | WithDomain 设置服务域名，用于某些特定的 AI 服务提供商。 |
 | [ai.funcCallRetryTimes](#funccallretrytimes) | WithFunctionCallRetryTimes 设置函数调用失败时的重试次数。 |
+| [ai.imageAI](#imageai) |  |
 | [ai.imageBase64](#imagebase64) | WithImageBase64 传入 Base64 编码的图片数据，用于图像识别场景。 |
 | [ai.imageFile](#imagefile) | WithImageFile 传入图片文件路径，自动读取并发送给 AI 进行分析。 |
 | [ai.imageRaw](#imageraw) | WithImageRaw 传入原始图片字节数据，用于图像识别场景。 |
@@ -39,13 +46,17 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.noHttps](#nohttps) | WithNoHttps 禁用 HTTPS，使用 HTTP 协议进行通信。 |
 | [ai.onReasonStream](#onreasonstream) | WithReasonStreamHandler 设置推理过程的流式输出回调，用于获取 AI 的思考过程。 |
 | [ai.onStream](#onstream) | WithStreamHandler 设置流式输出的回调函数，用于实时接收 AI 响应数据。 |
+| [ai.preferredTier](#preferredtier) |  |
 | [ai.proxy](#proxy) | WithProxy 设置 HTTP 代理服务器，用于网络请求。 |
+| [ai.qualityPriority](#qualitypriority) |  |
 | [ai.rawHTTPRequestResponseCallback](#rawhttprequestresponsecallback) |  |
 | [ai.rawHTTPResponseCallback](#rawhttpresponsecallback) |  |
+| [ai.speedPriority](#speedpriority) |  |
 | [ai.thinking](#thinking) | WithEnableThinking 启用think模式，目前只有当ai模型类型为`volcengine`类型也就是豆包相关模型时此配置才生效。 |
 | [ai.timeout](#timeout) | WithTimeout 设置请求超时时间（单位：秒）。 |
 | [ai.toolCallCallback](#toolcallcallback) | WithToolCallCallback 设置 tool_calls 回调函数，用于在 AI 响应中包含 tool_calls 时接管其处理逻辑。启用后，tool_calls 将不再以默认的占位标记形式输出，而是直接通过回调函数返回解析后的 ToolCall 对象。 目前只在项目内部测试脚本使用 |
 | [ai.type](#type) | WithType 指定 AI 服务提供商类型。 |
+| [ai.visionPriority](#visionpriority) |  |
 
 
 ## API 详情
@@ -84,6 +95,14 @@ Chat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 ```go
 response = ai.Chat("介绍一下Yakit")~
+println(response)
+
+// 显式使用质量优先模型
+response = ai.Chat("分析这个漏洞利用链", ai.qualityPriority())~
+println(response)
+
+// 显式使用图片模型
+response = ai.Chat("分析这张截图", ai.imageFile("/tmp/demo.png"), ai.imageAI())~
 println(response)
 ```
 
@@ -182,7 +201,142 @@ result, err = ai.FunctionCall("帮我搜索 SQL 注入漏洞", funcs)
 
 die(err)
 dump(result)
+
+// 显式使用速度优先模型做函数调用
+result, err = ai.FunctionCall("快速提取端口参数", funcs, ai.speedPriority())
+die(err)
+dump(result)
 ```
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### IntelligentChat
+
+- 描述: IntelligentChat uses the intelligent (high-quality) model
+
+
+<Tabs>
+<TabItem value="IntelligentChat-1" label="定义" default>
+
+```go
+IntelligentChat(msg string, opts ...aispec.AIConfigOption) (string, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| msg | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### IntelligentFunctionCall
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="IntelligentFunctionCall-1" label="定义" default>
+
+```go
+IntelligentFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string]any, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` |   |
+| funcs | `any` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
+| r2 | `error` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### LightweightChat
+
+- 描述: LightweightChat uses the lightweight (fast) model
+
+
+<Tabs>
+<TabItem value="LightweightChat-1" label="定义" default>
+
+```go
+LightweightChat(msg string, opts ...aispec.AIConfigOption) (string, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| msg | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### LightweightFunctionCall
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="LightweightFunctionCall-1" label="定义" default>
+
+```go
+LightweightFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string]any, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` |   |
+| funcs | `any` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
+| r2 | `error` |   |
 
 </TabItem>
 </Tabs>
@@ -463,6 +617,71 @@ printf("最终输出: %s\n", collectedData)
 
 ---
 
+### VisionChat
+
+- 描述: VisionChat uses the vision model
+
+
+<Tabs>
+<TabItem value="VisionChat-1" label="定义" default>
+
+```go
+VisionChat(msg string, opts ...aispec.AIConfigOption) (string, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| msg | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+| r2 | `error` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### VisionFunctionCall
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="VisionFunctionCall-1" label="定义" default>
+
+```go
+VisionFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string]any, error)
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| input | `string` |   |
+| funcs | `any` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `map[string]any` |   |
+| r2 | `error` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
 ### apiKey
 
 - 描述: WithAPIKey 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。
@@ -658,6 +877,30 @@ funcs = {"searchVulnerability": func(keyword) {
 result = ai.FunctionCall("扫描目标 127.0.0.1:8080", funcs, ai.funcCallRetryTimes(3))~
 dump(result)
 ```
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### imageAI
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="imageAI-1" label="定义" default>
+
+```go
+imageAI() AIConfigOption
+```
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
 
 </TabItem>
 </Tabs>
@@ -1059,6 +1302,36 @@ response = ai.Chat(
 
 ---
 
+### preferredTier
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="preferredTier-1" label="定义" default>
+
+```go
+preferredTier(tier consts.ModelTier) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tier | `consts.ModelTier` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
 ### proxy
 
 - 描述: WithProxy 设置 HTTP 代理服务器，用于网络请求。
@@ -1094,6 +1367,30 @@ client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.proxy("http://127.0.0.1:7890"))
 // SOCKS5 代理
 client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.proxy("socks5://127.0.0.1:1080"))
 ```
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### qualityPriority
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="qualityPriority-1" label="定义" default>
+
+```go
+qualityPriority() AIConfigOption
+```
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
 
 </TabItem>
 </Tabs>
@@ -1148,6 +1445,30 @@ rawHTTPResponseCallback(cb func(headerBytes []byte, bodyPreview []byte)) AIConfi
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | cb | `func(headerBytes []byte, bodyPreview []byte)` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### speedPriority
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="speedPriority-1" label="定义" default>
+
+```go
+speedPriority() AIConfigOption
+```
 
 **返回值**
 
@@ -1316,6 +1637,30 @@ response, err = ai.Chat("你好", ai.apiKey("sk-xxx"), ai.type("openai"))
 // 使用 ChatGLM
 response, err = ai.Chat("你好", ai.apiKey("your-key"), ai.type("chatglm"))
 ```
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### visionPriority
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="visionPriority-1" label="定义" default>
+
+```go
+visionPriority() AIConfigOption
+```
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
 
 </TabItem>
 </Tabs>

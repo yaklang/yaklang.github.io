@@ -86,6 +86,7 @@
 | [poc.ReplaceHTTPPacketUploadFile](#replacehttppacketuploadfile) |ReplaceHTTPPacketUploadFile 是一个辅助函数，用于改变请求报文，替换请求体中的上传的文件，其中第一个参数为原始请求报文，第二个参数为表单名，第三个参数为文件名，第四个参数为文件内容，第五个参数是可选参数，为文件类型(Content-Type)，如果表单名不存在则会增加  |
 | [poc.Split](#split) |Split 切割 HTTP 报文，返回响应头和响应体，其第一个参数是原始HTTP报文，接下来可以接收零个到多个回调函数，其在每次解析到请求头时回调  |
 | [poc.Websocket](#websocket) |Websocket 实际上等价于`poc.HTTP(..., poc.websocket(true))`，用于快速发送请求并建立websocket连接并且返回原始响应报文，原始请求报文以及错误  |
+| [poc.afterSaveHandler](#aftersavehandler) ||
 | [poc.appendCookie](#appendcookie) |appendCookie 是一个请求选项参数，用于改变请求报文，添加 Cookie 请求头中的值  |
 | [poc.appendFormEncoded](#appendformencoded) |appendFormEncoded 是一个请求选项参数，用于改变请求报文，添加请求体中的表单  |
 | [poc.appendHeader](#appendheader) |appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头  |
@@ -2724,6 +2725,26 @@ time.Sleep(100)
 | rsp | `[]byte` |   |
 | req | `[]byte` |   |
 | err | `error` |   |
+
+
+### afterSaveHandler
+
+#### 详细描述
+
+
+#### 定义
+
+`afterSaveHandler(f ...func(flow *schema.HTTPFlow)) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `...func(flow *schema.HTTPFlow)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
 
 
 ### appendCookie

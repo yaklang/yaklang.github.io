@@ -17,6 +17,7 @@
 | [http.RequestToSha1](#requesttosha1) |RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha1 hash的结果与错误  |
 | [http.RequestToSha256](#requesttosha256) |RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha256 hash的结果与错误  |
 | [http.RequestToSha512](#requesttosha512) |RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体hash，它的第一个参数是 URL ，接下来可以接收零个到多个请求选项，用于对此次请求进行配置，例如设置请求体，设置超时时间等  返回响应主体(body)的sha512 hash的结果与错误  |
+| [http.afterSaveHandler](#aftersavehandler) ||
 | [http.body](#body) |body 是一个请求选项参数，用于指定请求体  |
 | [http.context](#context) |context 是一个请求选项参数，用于设置请求的上下文  |
 | [http.cookie](#cookie) |header 是一个请求选项参数，用于设置完整的 Cookie 字段  |
@@ -499,6 +500,26 @@ rsp, err = http.RequestToSha512("http://pie.dev/post", http.body("a=b&c=d"), htt
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
 | r2 | `error` |   |
+
+
+### afterSaveHandler
+
+#### 详细描述
+
+
+#### 定义
+
+`afterSaveHandler(f ...func(flow *schema.HTTPFlow)) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `...func(flow *schema.HTTPFlow)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
 
 
 ### body
