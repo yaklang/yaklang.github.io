@@ -19,7 +19,7 @@
 | [aiagent.agreePolicyAI](#agreepolicyai) ||
 | [aiagent.agreeYOLO](#agreeyolo) ||
 | [aiagent.aiAutoRetry](#aiautoretry) |WithAIAutoRetry sets AiAutoRetry count. |
-| [aiagent.aiCallback](#aicallback) |Callback setters |
+| [aiagent.aiCallback](#aicallback) |WithAICallback WARNING 粗粒度的ai callback 设置，只可在测试或者功能固定单一的ai模块（如知识库蒸馏）使用，其他位置应该用 WithAutoTieredAICallback |
 | [aiagent.aiTransactionRetry](#aitransactionretry) |WithAITransactionRetry alias to existing WithAITransactionAutoRetry for naming compatibility. |
 | [aiagent.allowRequireForUserInteract](#allowrequireforuserinteract) |Interactive / review / require_user |
 | [aiagent.appendPersistentMemory](#appendpersistentmemory) |WithAppendPersistentContext appends keys to PersistentMemory. |
@@ -404,7 +404,8 @@ WithAIAutoRetry sets AiAutoRetry count.
 ### aiCallback
 
 #### 详细描述
-Callback setters
+WithAICallback
+WARNING 粗粒度的ai callback 设置，只可在测试或者功能固定单一的ai模块（如知识库蒸馏）使用，其他位置应该用 WithAutoTieredAICallback
 
 
 #### 定义
