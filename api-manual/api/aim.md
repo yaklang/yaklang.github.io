@@ -37,6 +37,7 @@
 | [aim.onInputRequired](#oninputrequired) |WithOnInputRequired 设置需要用户输入回调 |
 | [aim.onInputRequiredRaw](#oninputrequiredraw) |WithOnInputRequiredRaw 设置需要用户输入回调 |
 | [aim.onStream](#onstream) |WithOnStream 设置流式输出回调 |
+| [aim.onStreamContent](#onstreamcontent) |WithOnStreamContent 设置流式输出结束回调，并返回重组后的完整流内容 |
 | [aim.onStreamEnd](#onstreamend) |WithOnStreamEnd 设置流式输出结束回调 |
 | [aim.reviewPolicy](#reviewpolicy) |WithReviewPolicy 设置审批策略 policy: &amp;#34;yolo&amp;#34; (自动通过), &amp;#34;ai&amp;#34; (AI 审批), &amp;#34;manual&amp;#34; (手动审批) |
 | [aim.sessionID](#sessionid) |WithSessionID 设置会话 ID |
@@ -754,6 +755,27 @@ WithOnStream 设置流式输出回调
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | callback | `func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string, data []byte)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### onStreamContent
+
+#### 详细描述
+WithOnStreamContent 设置流式输出结束回调，并返回重组后的完整流内容
+
+
+#### 定义
+
+`onStreamContent(callback func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string, totalContent []byte)) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(react aicommon.AIEngineOperator, event *schema.AiOutputEvent, NodeId string, totalContent []byte)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

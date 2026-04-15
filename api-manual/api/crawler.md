@@ -22,6 +22,7 @@
 | [crawler.maxRequest](#maxrequest) |maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000  |
 | [crawler.maxRetry](#maxretry) |maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3  |
 | [crawler.maxUrls](#maxurls) |maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000  |
+| [crawler.onUrlFound](#onurlfound) |onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL）  |
 | [crawler.proxy](#proxy) |proxy 是一个选项函数，用于指定爬虫时的代理  |
 | [crawler.responseTimeout](#responsetimeout) ||
 | [crawler.timeout](#timeout) |connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s  |
@@ -566,6 +567,32 @@ crawler.Start("https://example.com", crawler.maxUrls(20000))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | limit | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### onUrlFound
+
+#### 详细描述
+onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL）
+
+Example:
+```
+crawler.Start("https://example.com", crawler.onUrlFound(func(url) { println(url) }))
+```
+
+
+#### 定义
+
+`onUrlFound(f func(string)) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| f | `func(string)` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
