@@ -51,6 +51,7 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.qualityPriority](#qualitypriority) |  |
 | [ai.rawHTTPRequestResponseCallback](#rawhttprequestresponsecallback) |  |
 | [ai.rawHTTPResponseCallback](#rawhttpresponsecallback) |  |
+| [ai.rawHTTPResponseHeaderCallback](#rawhttpresponseheadercallback) |  |
 | [ai.speedPriority](#speedpriority) |  |
 | [ai.thinking](#thinking) | WithEnableThinking 启用think模式，目前只有当ai模型类型为`volcengine`类型也就是豆包相关模型时此配置才生效。 |
 | [ai.timeout](#timeout) | WithTimeout 设置请求超时时间（单位：秒）。 |
@@ -1445,6 +1446,36 @@ rawHTTPResponseCallback(cb func(headerBytes []byte, bodyPreview []byte)) AIConfi
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | cb | `func(headerBytes []byte, bodyPreview []byte)` |   |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |   |
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### rawHTTPResponseHeaderCallback
+
+- 描述: 
+
+
+<Tabs>
+<TabItem value="rawHTTPResponseHeaderCallback-1" label="定义" default>
+
+```go
+rawHTTPResponseHeaderCallback(cb RawHTTPResponseHeaderCallback) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| cb | `RawHTTPResponseHeaderCallback` |   |
 
 **返回值**
 
