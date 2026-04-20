@@ -16,6 +16,7 @@
 | [aireducer.memory](#memory) ||
 | [aireducer.reducerCallback](#reducercallback) ||
 | [aireducer.separator](#separator) ||
+| [aireducer.separatorAsBoundary](#separatorasboundary) |WithSeparatorAsBoundary switches the separator semantics from &amp;#34;trigger every occurrence&amp;#34; (default) to &amp;#34;use the separator as a preferred cu...|
 | [aireducer.timeTriggerInterval](#timetriggerinterval) ||
 | [aireducer.timeTriggerIntervalSeconds](#timetriggerintervalseconds) ||
 
@@ -327,6 +328,31 @@ Example:
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | separator | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `Option` |   |
+
+
+### separatorAsBoundary
+
+#### 详细描述
+WithSeparatorAsBoundary switches the separator semantics from &#34;trigger every
+occurrence&#34; (default) to &#34;use the separator as a preferred cut boundary&#34;.
+When true, the reducer fills up to ChunkSize and, inside each chunk, cuts at
+the LAST separator occurrence in the window so that pre-structured blocks
+stay intact. Combine with WithSeparatorTrigger(sep) + WithChunkSize(n).
+
+
+#### 定义
+
+`separatorAsBoundary(asBoundary bool) Option`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| asBoundary | `bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

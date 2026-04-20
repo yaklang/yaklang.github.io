@@ -4,6 +4,14 @@
 |:------|:--------|
 | [crawler.RequestsFromFlow](#requestsfromflow) |RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误  |
 | [crawler.Start](#start) |Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为  返回一个Req结构体引用管道与错误  |
+| [crawler.aiJSAIOptions](#aijsaioptions) |WithAIJS_AIOptions forwards aicommon.ConfigOption (model, key, ...) to LiteForge. |
+| [crawler.aiJSChunkBytes](#aijschunkbytes) |WithAIJS_ChunkBytes overrides the target byte size of each AI call slice. |
+| [crawler.aiJSConcurrency](#aijsconcurrency) |WithAIJS_Concurrency caps parallel AI calls. |
+| [crawler.aiJSContextBytes](#aijscontextbytes) |WithAIJS_ContextBytes overrides the half-window size around each regex hit. |
+| [crawler.aiJSExtract](#aijsextract) |aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道，  与现有 SSA / 回调通道并行（不互相影响）。  该通道按以下三阶段工作：   1. 宽松正则预筛选可疑窗口（URL / 路径风格）   2. aireducer 按字节切片，DumpWithOv...|
+| [crawler.aiJSMaxTokens](#aijsmaxtokens) |WithAIJS_MaxTokens overrides the per-call token budget. |
+| [crawler.aiJSOverlapBytes](#aijsoverlapbytes) |WithAIJS_OverlapBytes overrides the cross-chunk fold size. |
+| [crawler.aiJSSkipBelow](#aijsskipbelow) |WithAIJS_SkipBelowBytes sets the candidate-stream size below which the AI step is skipped and raw hits are emitted directly. |
 | [crawler.autoLogin](#autologin) |autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单  |
 | [crawler.basicAuth](#basicauth) |basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码  |
 | [crawler.bodySize](#bodysize) |bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB  |
@@ -95,6 +103,193 @@ println(req.Response()~)
 |:-----------|:---------- |:-----------|
 | r1 | `chan *Req` |   |
 | r2 | `error` |   |
+
+
+### aiJSAIOptions
+
+#### 详细描述
+WithAIJS_AIOptions forwards aicommon.ConfigOption (model, key, ...) to LiteForge.
+
+
+#### 定义
+
+`aiJSAIOptions(opts ...aicommon.ConfigOption) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...aicommon.ConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSChunkBytes
+
+#### 详细描述
+WithAIJS_ChunkBytes overrides the target byte size of each AI call slice.
+
+
+#### 定义
+
+`aiJSChunkBytes(n int64) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSConcurrency
+
+#### 详细描述
+WithAIJS_Concurrency caps parallel AI calls.
+
+
+#### 定义
+
+`aiJSConcurrency(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSContextBytes
+
+#### 详细描述
+WithAIJS_ContextBytes overrides the half-window size around each regex hit.
+
+
+#### 定义
+
+`aiJSContextBytes(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSExtract
+
+#### 详细描述
+aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道，
+
+与现有 SSA / 回调通道并行（不互相影响）。
+
+该通道按以下三阶段工作：
+
+ 1. 宽松正则预筛选可疑窗口（URL / 路径风格）
+
+ 2. aireducer 按字节切片，DumpWithOverlap 跨切片折叠
+
+ 3. aiforge.LiteForge SpeedPriority 抽取结构化路径列表
+
+
+
+Example:
+```
+crawler.Start("https://example.com", crawler.aiJSExtract()) // 启用，全部默认值
+crawler.Start("https://example.com", crawler.aiJSExtract(crawler.aiJSMaxTokens(40000))) // 调整 token 上限
+```
+
+
+#### 定义
+
+`aiJSExtract(opts ...AIJSExtractOption) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| opts | `...AIJSExtractOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### aiJSMaxTokens
+
+#### 详细描述
+WithAIJS_MaxTokens overrides the per-call token budget.
+
+
+#### 定义
+
+`aiJSMaxTokens(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSOverlapBytes
+
+#### 详细描述
+WithAIJS_OverlapBytes overrides the cross-chunk fold size.
+
+
+#### 定义
+
+`aiJSOverlapBytes(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSSkipBelow
+
+#### 详细描述
+WithAIJS_SkipBelowBytes sets the candidate-stream size below which the AI
+step is skipped and raw hits are emitted directly.
+
+
+#### 定义
+
+`aiJSSkipBelow(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
 
 
 ### autoLogin
