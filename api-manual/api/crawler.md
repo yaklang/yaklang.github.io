@@ -12,6 +12,8 @@
 | [crawler.aiJSMaxTokens](#aijsmaxtokens) |WithAIJS_MaxTokens overrides the per-call token budget. |
 | [crawler.aiJSOverlapBytes](#aijsoverlapbytes) |WithAIJS_OverlapBytes overrides the cross-chunk fold size. |
 | [crawler.aiJSSkipBelow](#aijsskipbelow) |WithAIJS_SkipBelowBytes sets the candidate-stream size below which the AI step is skipped and raw hits are emitted directly. |
+| [crawler.aiJSSmallInputBytes](#aijssmallinputbytes) |WithAIJS_SmallInputBytes sets the raw input byte threshold for the direct-feed fast path. Set to 0 to disable. |
+| [crawler.aiJSSmallInputTokens](#aijssmallinputtokens) |WithAIJS_SmallInputTokens sets the raw input token threshold for the direct-feed fast path. Set to 0 to disable. |
 | [crawler.autoLogin](#autologin) |autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单  |
 | [crawler.basicAuth](#basicauth) |basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码  |
 | [crawler.bodySize](#bodysize) |bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB  |
@@ -280,6 +282,50 @@ step is skipped and raw hits are emitted directly.
 #### 定义
 
 `aiJSSkipBelow(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSSmallInputBytes
+
+#### 详细描述
+WithAIJS_SmallInputBytes sets the raw input byte threshold for the
+direct-feed fast path. Set to 0 to disable.
+
+
+#### 定义
+
+`aiJSSmallInputBytes(n int) AIJSExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| n | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIJSExtractOption` |   |
+
+
+### aiJSSmallInputTokens
+
+#### 详细描述
+WithAIJS_SmallInputTokens sets the raw input token threshold for the
+direct-feed fast path. Set to 0 to disable.
+
+
+#### 定义
+
+`aiJSSmallInputTokens(n int) AIJSExtractOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
