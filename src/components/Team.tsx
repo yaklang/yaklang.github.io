@@ -353,6 +353,14 @@ const ThanksForInfo: ThanksForInfoProps[] = [
     home: "http://www.uestc.edu.cn",
   },
   {
+    img: "/img/partner/asiainfo-sec-icon.png",
+    name: "亚信安全",
+    tag: { name: "企业安全与生态合作", color: "green" },
+    description: ["在网络安全与生态方面与万径安全开展协作。"],
+    address: "北京",
+    home: "https://www.asiainfo-sec.com",
+  },
+  {
     img: "/img/team/projectdiscovery.png",
     name: "ProjectDiscovery",
     tag: { name: "nuclei 集成", color: "purple" },

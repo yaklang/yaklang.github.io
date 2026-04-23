@@ -47,6 +47,11 @@ export const CooperativePartnerPage: React.FC<
   const { t } = useTranslation();
   const CooperativePartnerInfo: CooperativePartnerInfoProps[] = [
     {
+      img: "/img/partner/asiainfo-sec.png",
+      name: "亚信安全",
+      links: "https://www.asiainfo-sec.com",
+    },
+    {
       img: "/img/partner/logo.png",
       name: "奇安信",
       links: "https://hunter.qianxin.com",
