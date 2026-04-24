@@ -11,6 +11,7 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 | [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) ||
 | [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) ||
 | [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) ||
+| [sfreport.GenerateSSAReportMarkdownForTask](#generatessareportmarkdownfortask) |GenerateSSAReportMarkdownForTask matches gRPC Yak.GenerateSSAReport for the task-id path (in-process). |
 | [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) ||
 | [sfreport.NewReport](#newreport) ||
 | [sfreport.withDataflowPath](#withdataflowpath) ||
@@ -89,6 +90,30 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 |:-----------|:---------- |:-----------|
 | r1 | `map[string]any` |   |
 | r2 | `error` |   |
+
+
+### GenerateSSAReportMarkdownForTask
+
+#### 详细描述
+GenerateSSAReportMarkdownForTask matches gRPC Yak.GenerateSSAReport for the task-id path (in-process).
+
+
+#### 定义
+
+`GenerateSSAReportMarkdownForTask(taskID string, reportName string) (int, string, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| taskID | `string` |   |
+| reportName | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
+| r2 | `string` |   |
+| r3 | `error` |   |
 
 
 ### ImportSSARiskFromJSON

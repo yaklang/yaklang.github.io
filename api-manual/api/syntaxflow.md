@@ -7,6 +7,7 @@
 | [syntaxflow.MergeCompletionResults](#mergecompletionresults) |MergeCompletionResultsForYak 供 Yak 调用，将 desc/alert forge 输出合并到规则内容。descMap/alertMap 为 map[string]any。 |
 | [syntaxflow.QuerySyntaxFlowRules](#querysyntaxflowrules) ||
 | [syntaxflow.ResumeScan](#resumescan) |ResumeScan 恢复之前暂停的扫描任务    参数:    - ctx: 上下文，用于控制扫描任务的生命周期    - taskId: 要恢复的任务ID    - callback: 回调函数，用于处理扫描结果    返回值:    - error: 如果恢复失败则返回错误信息    |
+| [syntaxflow.RunSyntaxFlowProjectScanCheck](#runsyntaxflowprojectscancheck) |RunSyntaxFlowProjectScanCheck performs one query and returns both report and latest task id. |
 | [syntaxflow.StartScan](#startscan) |StartScan 启动新的SyntaxFlow扫描任务，使用options模式配置扫描参数    参数:    - ctx: 上下文，用于控制扫描任务的生命周期    - callback: 回调函数，用于处理扫描结果    - opts: 可变数量的选项函数，用于配置扫描参数    返回值:  ...|
 | [syntaxflow.withCache](#withcache) ||
 | [syntaxflow.withContext](#withcontext) ||
@@ -205,6 +206,30 @@ die(err)
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `error` |   |
+
+
+### RunSyntaxFlowProjectScanCheck
+
+#### 详细描述
+RunSyntaxFlowProjectScanCheck performs one query and returns both report and latest task id.
+
+
+#### 定义
+
+`RunSyntaxFlowProjectScanCheck(programHint string, scanOnly bool, limit int) (*SyntaxFlowProjectScanCheckResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| programHint | `string` |   |
+| scanOnly | `bool` |   |
+| limit | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `*SyntaxFlowProjectScanCheckResult` |   |
+| r2 | `error` |   |
 
 
 ### StartScan
