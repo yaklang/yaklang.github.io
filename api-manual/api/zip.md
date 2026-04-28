@@ -1,16 +1,35 @@
 # zip
 
+|实例名|实例描述|
+|:------|:--------|
+AES128|(zip.EncryptionMethod) 2|
+AES192|(zip.EncryptionMethod) 3|
+AES256|(zip.EncryptionMethod) 4|
+StandardEncryption|(zip.EncryptionMethod) 1|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [zip.Compress](#compress) ||
+| [zip.CompressByNameWithOptions](#compressbynamewithoptions) |CompressByNameWithOptions 与 CompressByName 行为一致，但支持 CompressOption（含密码、加密方法）。 关键词: CompressByName, 密码 zip 写 |
 | [zip.CompressRaw](#compressraw) |CompressRaw compresses a map to a zip file  |
+| [zip.CompressRawWithPassword](#compressrawwithpassword) |CompressRawWithPassword 与 CompressRaw 类似，但生成 AES-256 加密的 zip。  关键词: 内存加密 zip, AES256 zip 创建    |
+| [zip.CompressWithPassword](#compresswithpassword) |CompressWithPassword 把若干文件压缩成带密码的 zip。  关键词: 文件加密压缩, AES zip 压缩    |
 | [zip.Decompress](#decompress) |解压 |
+| [zip.DecompressFromRawWithOptions](#decompressfromrawwithoptions) |DeCompressFromRawWithOptions 从原始字节解压 zip，支持 DecompressOption（含密码）。 关键词: zip 内存解压, DeCompressFromRaw, 密码 zip 解压 |
+| [zip.DecompressWithOptions](#decompresswithoptions) |DeCompressWithOptions 解压 zip 文件，支持 DecompressOption（含密码）。 关键词: zip 解压密码, DeCompress |
+| [zip.DecompressWithPassword](#decompresswithpassword) |DecompressWithPassword 解压带密码的 zip 到目标目录。  关键词: 加密 zip 解压, AES zip 解压    |
 | [zip.ExtractByPattern](#extractbypattern) |ExtractByPattern 根据文件名模式提取文件（支持通配符） |
 | [zip.ExtractByPatternFromRaw](#extractbypatternfromraw) |ExtractByPatternFromRaw 从原始数据根据文件名模式提取文件 |
+| [zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions) ||
+| [zip.ExtractByPatternWithOptions](#extractbypatternwithoptions) ||
 | [zip.ExtractFile](#extractfile) |ExtractFile 从 ZIP 文件中提取单个文件 |
 | [zip.ExtractFileFromRaw](#extractfilefromraw) |ExtractFileFromRaw 从 ZIP 原始数据中提取单个文件 |
+| [zip.ExtractFileFromRawWithOptions](#extractfilefromrawwithoptions) |ExtractFileFromRawWithOptions 从原始字节提取单个文件 关键词: ExtractFileFromRaw, 内存提取, 密码提取 |
+| [zip.ExtractFileWithOptions](#extractfilewithoptions) |ExtractFileWithOptions 提取单个文件，支持 ExtractOption（含密码） 关键词: ExtractFile, 密码提取 |
 | [zip.ExtractFiles](#extractfiles) |ExtractFiles 从 ZIP 文件中并发提取多个文件 |
 | [zip.ExtractFilesFromRaw](#extractfilesfromraw) |ExtractFilesFromRaw 从 ZIP 原始数据中并发提取多个文件 |
+| [zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions) ||
+| [zip.ExtractFilesWithOptions](#extractfileswithoptions) ||
 | [zip.GrepPathRawRegexp](#greppathrawregexp) |GrepPathRawRegexp 使用正则表达式在原始数据中搜索文件路径 |
 | [zip.GrepPathRawSubString](#greppathrawsubstring) |GrepPathRawSubString 使用子字符串在原始数据中搜索文件路径 |
 | [zip.GrepPathRegexp](#greppathregexp) |GrepPathRegexp 使用正则表达式搜索文件路径 |
@@ -25,6 +44,10 @@
 | [zip.RRFRankResults](#rrfrankresults) |RRFRankGrepResults 使用 RRF 算法对 GrepResult 进行排序  |
 | [zip.Recursive](#recursive) |Recursive Decompress decompresses a zip file to a directory  |
 | [zip.RecursiveFromRaw](#recursivefromraw) |RecursiveFromRaw decompresses a zip file to a directory  |
+| [zip.compressEncryption](#compressencryption) |WithCompressEncryption 设置加密方法（默认 AES256） 关键词: zip 加密方法, AES256 |
+| [zip.compressPassword](#compresspassword) |WithCompressPassword 为压缩设置密码 关键词: zip 压缩密码, 加密 zip 创建 |
+| [zip.decompressPassword](#decompresspassword) |WithDecompressPassword 为解压设置密码 关键词: zip 解压密码 |
+| [zip.extractPassword](#extractpassword) |WithExtractPassword 为提取设置密码 关键词: zip 提取密码 |
 | [zip.grepCaseSensitive](#grepcasesensitive) ||
 | [zip.grepContextLine](#grepcontextline) ||
 | [zip.grepExcludePathRegexp](#grepexcludepathregexp) ||
@@ -32,6 +55,7 @@
 | [zip.grepIncludePathRegexp](#grepincludepathregexp) ||
 | [zip.grepIncludePathSubString](#grepincludepathsubstring) ||
 | [zip.grepLimit](#greplimit) ||
+| [zip.grepPassword](#greppassword) |WithGrepPassword 在 zip 中执行 grep 时设置解密密码 关键词: zip grep 密码, 加密 zip 搜索 |
 
 
 ## 函数定义
@@ -49,6 +73,30 @@
 |:-----------|:---------- |:-----------|
 | zipName | `string` |   |
 | filenames | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### CompressByNameWithOptions
+
+#### 详细描述
+CompressByNameWithOptions 与 CompressByName 行为一致，但支持 CompressOption（含密码、加密方法）。
+关键词: CompressByName, 密码 zip 写
+
+
+#### 定义
+
+`CompressByNameWithOptions(files []string, dest string, opts ...CompressOption) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| files | `[]string` |   |
+| dest | `string` |   |
+| opts | `...CompressOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -89,6 +137,75 @@ Example:
 | r2 | `error` |   |
 
 
+### CompressRawWithPassword
+
+#### 详细描述
+CompressRawWithPassword 与 CompressRaw 类似，但生成 AES-256 加密的 zip。
+
+关键词: 内存加密 zip, AES256 zip 创建
+
+
+
+Example:
+```
+
+	zipBytes = zip.CompressRawWithPassword({"a.txt": "hello"}, "123456")~
+
+```
+
+
+#### 定义
+
+`CompressRawWithPassword(i any, password string, encryption ...ziputil.EncryptionMethod) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` |   |
+| password | `string` |   |
+| encryption | `...ziputil.EncryptionMethod` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### CompressWithPassword
+
+#### 详细描述
+CompressWithPassword 把若干文件压缩成带密码的 zip。
+
+关键词: 文件加密压缩, AES zip 压缩
+
+
+
+Example:
+```
+
+	zip.CompressWithPassword("/tmp/out.zip", "123456", "/tmp/a.txt", "/tmp/b.txt")~
+
+```
+
+
+#### 定义
+
+`CompressWithPassword(zipName string, password string, filenames ...string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipName | `string` |   |
+| password | `string` |   |
+| filenames | `...string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
 ### Decompress
 
 #### 详细描述
@@ -104,6 +221,88 @@ Example:
 |:-----------|:---------- |:-----------|
 | zipFile | `string` |   |
 | dest | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### DecompressFromRawWithOptions
+
+#### 详细描述
+DeCompressFromRawWithOptions 从原始字节解压 zip，支持 DecompressOption（含密码）。
+关键词: zip 内存解压, DeCompressFromRaw, 密码 zip 解压
+
+
+#### 定义
+
+`DecompressFromRawWithOptions(raw []byte, dest string, opts ...DecompressOption) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `[]byte` |   |
+| dest | `string` |   |
+| opts | `...DecompressOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### DecompressWithOptions
+
+#### 详细描述
+DeCompressWithOptions 解压 zip 文件，支持 DecompressOption（含密码）。
+关键词: zip 解压密码, DeCompress
+
+
+#### 定义
+
+`DecompressWithOptions(zipFile string, dest string, opts ...DecompressOption) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| dest | `string` |   |
+| opts | `...DecompressOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `error` |   |
+
+
+### DecompressWithPassword
+
+#### 详细描述
+DecompressWithPassword 解压带密码的 zip 到目标目录。
+
+关键词: 加密 zip 解压, AES zip 解压
+
+
+
+Example:
+```
+
+	zip.DecompressWithPassword("/tmp/out.zip", "/tmp/dest", "123456")~
+
+```
+
+
+#### 定义
+
+`DecompressWithPassword(zipFile string, dest string, password string) error`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| dest | `string` |   |
+| password | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -149,6 +348,52 @@ ExtractByPatternFromRaw 从原始数据根据文件名模式提取文件
 |:-----------|:---------- |:-----------|
 | raw | `any` |   |
 | pattern | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*ExtractResult` |   |
+| r2 | `error` |   |
+
+
+### ExtractByPatternFromRawWithOptions
+
+#### 详细描述
+
+
+#### 定义
+
+`ExtractByPatternFromRawWithOptions(raw any, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| pattern | `string` |   |
+| opts | `...ExtractOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*ExtractResult` |   |
+| r2 | `error` |   |
+
+
+### ExtractByPatternWithOptions
+
+#### 详细描述
+
+
+#### 定义
+
+`ExtractByPatternWithOptions(zipFile string, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| pattern | `string` |   |
+| opts | `...ExtractOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -203,6 +448,56 @@ ExtractFileFromRaw 从 ZIP 原始数据中提取单个文件
 | r2 | `error` |   |
 
 
+### ExtractFileFromRawWithOptions
+
+#### 详细描述
+ExtractFileFromRawWithOptions 从原始字节提取单个文件
+关键词: ExtractFileFromRaw, 内存提取, 密码提取
+
+
+#### 定义
+
+`ExtractFileFromRawWithOptions(raw any, targetFile string, opts ...ExtractOption) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| targetFile | `string` |   |
+| opts | `...ExtractOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
+### ExtractFileWithOptions
+
+#### 详细描述
+ExtractFileWithOptions 提取单个文件，支持 ExtractOption（含密码）
+关键词: ExtractFile, 密码提取
+
+
+#### 定义
+
+`ExtractFileWithOptions(zipFile string, targetFile string, opts ...ExtractOption) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| targetFile | `string` |   |
+| opts | `...ExtractOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
+
+
 ### ExtractFiles
 
 #### 详细描述
@@ -241,6 +536,52 @@ ExtractFilesFromRaw 从 ZIP 原始数据中并发提取多个文件
 |:-----------|:---------- |:-----------|
 | raw | `any` |   |
 | targetFiles | `[]string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*ExtractResult` |   |
+| r2 | `error` |   |
+
+
+### ExtractFilesFromRawWithOptions
+
+#### 详细描述
+
+
+#### 定义
+
+`ExtractFilesFromRawWithOptions(raw any, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `any` |   |
+| targetFiles | `[]string` |   |
+| opts | `...ExtractOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]*ExtractResult` |   |
+| r2 | `error` |   |
+
+
+### ExtractFilesWithOptions
+
+#### 详细描述
+
+
+#### 定义
+
+`ExtractFilesWithOptions(zipFile string, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| zipFile | `string` |   |
+| targetFiles | `[]string` |   |
+| opts | `...ExtractOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -601,6 +942,94 @@ Example:
 | r1 | `error` |   |
 
 
+### compressEncryption
+
+#### 详细描述
+WithCompressEncryption 设置加密方法（默认 AES256）
+关键词: zip 加密方法, AES256
+
+
+#### 定义
+
+`compressEncryption(method EncryptionMethod) CompressOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| method | `EncryptionMethod` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CompressOption` |   |
+
+
+### compressPassword
+
+#### 详细描述
+WithCompressPassword 为压缩设置密码
+关键词: zip 压缩密码, 加密 zip 创建
+
+
+#### 定义
+
+`compressPassword(password string) CompressOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `CompressOption` |   |
+
+
+### decompressPassword
+
+#### 详细描述
+WithDecompressPassword 为解压设置密码
+关键词: zip 解压密码
+
+
+#### 定义
+
+`decompressPassword(password string) DecompressOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `DecompressOption` |   |
+
+
+### extractPassword
+
+#### 详细描述
+WithExtractPassword 为提取设置密码
+关键词: zip 提取密码
+
+
+#### 定义
+
+`extractPassword(password string) ExtractOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ExtractOption` |   |
+
+
 ### grepCaseSensitive
 
 #### 详细描述
@@ -734,6 +1163,28 @@ Example:
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | limit | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `GrepOption` |   |
+
+
+### grepPassword
+
+#### 详细描述
+WithGrepPassword 在 zip 中执行 grep 时设置解密密码
+关键词: zip grep 密码, 加密 zip 搜索
+
+
+#### 定义
+
+`grepPassword(password string) GrepOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
