@@ -39,7 +39,7 @@
 | [aiagent.initializePrompt](#initializeprompt) |WithInitializePrompt 设置AI助手的初始化提示词 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 |
 | [aiagent.liteForgeOutputSchema](#liteforgeoutputschema) ||
 | [aiagent.liteForgeOutputSchemaRaw](#liteforgeoutputschemaraw) ||
-| [aiagent.liteForgePrompt](#liteforgeprompt) ||
+| [aiagent.liteForgePrompt](#liteforgeprompt) |WithLiteForge_Prompt 设置 LiteForge 的&amp;#34;上下文/动态&amp;#34; prompt 文本。  渲染后该字段被包在 &amp;lt;\|PROMPT_SECTION_dynamic_&amp;lt;nonce&amp;gt;\|&amp;gt;...&amp;lt;\|PROMPT_SECTION_dynamic...|
 | [aiagent.liteForgedRequireParams](#liteforgedrequireparams) ||
 | [aiagent.manualAssistantCallback](#manualassistantcallback) |WithManualAssistantCallback is an alias to the agree/manual callback setter. |
 | [aiagent.offsetSeq](#offsetseq) |WithSequence sets the starting sequence/id and installs a simple id generator that increments it. |
@@ -818,6 +818,22 @@ WithInitializePrompt 设置AI助手的初始化提示词
 ### liteForgePrompt
 
 #### 详细描述
+WithLiteForge_Prompt 设置 LiteForge 的&#34;上下文/动态&#34; prompt 文本。
+
+渲染后该字段被包在 &lt;|PROMPT_SECTION_dynamic_&lt;nonce&gt;|&gt;...&lt;|PROMPT_SECTION_dynamic_END_&lt;nonce&gt;|&gt;
+内的 &lt;context_&lt;nonce&gt;&gt;...&lt;/context_&lt;nonce&gt;&gt; 子标签里, 即 dynamic 段。dynamic
+段每次请求都包含 nonce 因此 byte-hash 必定不同, 没有跨调用 prefix cache 命中
+价值, **不要把任何静态指令** (例如 INSTRUCTION / CRITICAL RULES / Selection
+rules) 塞进这里。
+
+调用约定 (P0-B4):
+  - 真正动态的内容 (USER_QUERY / PARENT_TASK / CURRENT_TASK / 当次具体输入) -&gt;
+    WithLiteForge_Prompt
+  - 跨调用稳定的指令文本 (规则 / Schema / 角色定义) -&gt;
+    WithLiteForge_StaticInstruction (进 semi-dynamic 段) 或写到调用方传给
+    NewLiteForge 的 schema 里
+
+关键词: WithLiteForge_Prompt, dynamic 段, 调用方约定
 
 
 #### 定义
