@@ -21,6 +21,7 @@
 | [http.body](#body) |body 是一个请求选项参数，用于指定请求体  |
 | [http.context](#context) |context 是一个请求选项参数，用于设置请求的上下文  |
 | [http.cookie](#cookie) |header 是一个请求选项参数，用于设置完整的 Cookie 字段  |
+| [http.disableSession](#disablesession) |disableSession 为 true 时不自动分配 session，也不使用 cookie jar |
 | [http.dump](#dump) |dump 获取指定请求结构体引用或响应结构体引用的原始报文，返回原始报文与错误  |
 | [http.dumphead](#dumphead) |dumphead 获取指定请求结构体引用或响应结构体引用的原始报文头部，返回原始报文头部与错误  |
 | [http.fakeua](#fakeua) ||
@@ -601,6 +602,27 @@ rsp, err = http.Get("http://www.yaklang.com", http.WithCookie("a=b; c=d"))
 | r1 | `http_struct.HttpOption` |   |
 
 
+### disableSession
+
+#### 详细描述
+disableSession 为 true 时不自动分配 session，也不使用 cookie jar
+
+
+#### 定义
+
+`disableSession(b bool) http_struct.HttpOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `http_struct.HttpOption` |   |
+
+
 ### dump
 
 #### 详细描述
@@ -931,12 +953,12 @@ rsp, err = http.Get("http://www.yaklang.com", http.session("request1"))
 
 #### 定义
 
-`session(value any) http_struct.HttpOption`
+`session(value string) http_struct.HttpOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| value | `any` |   |
+| value | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

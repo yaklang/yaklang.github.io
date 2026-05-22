@@ -7,6 +7,7 @@ Javascript|(ssaconfig.Language) &#34;js&#34;|
 ModeAll|(ssaconfig.Mode) 127|
 ModeProjectCompile|(ssaconfig.Mode) 35|
 PHP|(ssaconfig.Language) &#34;php&#34;|
+Python|(ssaconfig.Language) &#34;python&#34;|
 Yak|(ssaconfig.Language) &#34;yak&#34;|
 
 |函数名|函数描述/介绍|

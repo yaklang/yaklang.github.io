@@ -106,6 +106,7 @@
 | [poc.deleteHeader](#deleteheader) |deleteHeader 是一个请求选项参数，用于改变请求报文，删除请求头  |
 | [poc.deletePostParam](#deletepostparam) |deletePostParam 是一个请求选项参数，用于改变请求报文，删除 POST 请求参数  |
 | [poc.deleteQueryParam](#deletequeryparam) |deleteQueryParam 是一个请求选项参数，用于改变请求报文，删除 GET 请求参数  |
+| [poc.disableSession](#disablesession) |disableSession 为 true 时不自动分配 session，也不启用 cookie jar（适合无需 cookie 的探测请求） |
 | [poc.dnsNoCache](#dnsnocache) |dnsNoCache 是一个请求选项参数，用于指定请求时不使用DNS缓存，默认使用DNS缓存  |
 | [poc.dnsServer](#dnsserver) |dnsServer 是一个请求选项参数，用于指定请求所使用的DNS服务器，默认使用系统自带的DNS服务器  |
 | [poc.downloadDir](#downloaddir) |downloadDir 是一个下载选项参数，用于指定文件保存目录  如果不指定，将保存到默认的 yakit 下载目录  |
@@ -115,6 +116,8 @@
 | [poc.fakeua](#fakeua) |replaceRandomUserAgent 是一个请求选项参数，用于改变请求报文，修改 User-Agent 请求头为随机的常见请求头  |
 | [poc.fixQueryEscape](#fixqueryescape) |fixQueryEscape 是一个请求选项参数，用于指定是否修复查询参数中的 URL 编码，默认为 false 即会自动修复URL编码  |
 | [poc.fromPlugin](#fromplugin) ||
+| [poc.gmTLSCipherSuite](#gmtlsciphersuite) |WithGmTLSCipherSuite 指定国密 TLS 套件，使用 tls.GMTLS_* 常量（可传多个）。  |
+| [poc.gmTLSDisableCompatMode](#gmtlsdisablecompatmode) |WithGmTLSDisableCompatMode 关闭国密兼容模式；不传参等价于 true（仅单次四套）。  |
 | [poc.gmTLSPrefer](#gmtlsprefer) ||
 | [poc.gmTls](#gmtls) ||
 | [poc.gmTlsOnly](#gmtlsonly) ||
@@ -173,7 +176,7 @@
 | [poc.save](#save) |save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为true即会保存到数据库  |
 | [poc.saveHandler](#savehandler) |saveHandler 是一个请求选项参数，用于设置在将此次请求存入数据库之前的回调函数  |
 | [poc.saveSync](#savesync) |saveSync 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，且同步保存，默认为false即会异步保存到数据库  |
-| [poc.session](#session) |session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用  |
+| [poc.session](#session) |session 是一个请求选项参数，用于指定请求的 session 标识（string），同一 session 共享 cookie jar，适合登录后连续请求  |
 | [poc.sni](#sni) |sni 是一个请求选项参数，用于指定使用 tls(https) 协议时的 服务器名称指示(SNI)  |
 | [poc.source](#source) |source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源  |
 | [poc.timeout](#timeout) |timeout 是一个请求选项参数，用于指定读取超时时间，默认为15秒  |
@@ -2035,12 +2038,12 @@ poc.RemoveSession("user1") // 清除 session "user1"，释放其 cookiejar
 
 #### 定义
 
-`RemoveSession(session any)`
+`RemoveSession(session string)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| session | `any` |   |
+| session | `string` |   |
 
 
 ### ReplaceAllHTTPPacketPostParams
@@ -3283,6 +3286,27 @@ Host: pie.dev
 | r1 | `PocConfigOption` |   |
 
 
+### disableSession
+
+#### 详细描述
+disableSession 为 true 时不自动分配 session，也不启用 cookie jar（适合无需 cookie 的探测请求）
+
+
+#### 定义
+
+`disableSession(b bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| b | `bool` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
 ### dnsNoCache
 
 #### 详细描述
@@ -3517,6 +3541,60 @@ poc.HTTP(poc.BasicRequest(), poc.fixQueryEscape(true)) // 向 example.com 发起
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | b | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### gmTLSCipherSuite
+
+#### 详细描述
+WithGmTLSCipherSuite 指定国密 TLS 套件，使用 tls.GMTLS_* 常量（可传多个）。
+
+Example:
+```
+poc.Get("https://example.com", poc.gmTLS(true), poc.gmTLSCipherSuite(tls.GMTLS_ECC_SM4_CBC_SM3))
+```
+
+
+#### 定义
+
+`gmTLSCipherSuite(suites ...int) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| suites | `...int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `PocConfigOption` |   |
+
+
+### gmTLSDisableCompatMode
+
+#### 详细描述
+WithGmTLSDisableCompatMode 关闭国密兼容模式；不传参等价于 true（仅单次四套）。
+
+Example:
+```
+poc.Get(url, poc.gmTLS(true)) // 默认兼容模式开启
+poc.Get(url, poc.gmTLS(true), poc.gmTLSDisableCompatMode()) // 关闭兼容
+poc.Get(url, poc.gmTLS(true), poc.gmTLSDisableCompatMode(false)) // 显式保持兼容开启
+```
+
+
+#### 定义
+
+`gmTLSDisableCompatMode(disable ...bool) PocConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| disable | `...bool` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
@@ -5116,7 +5194,7 @@ poc.Get("https://exmaple.com", poc.save(true), poc.saveSync(true)) // 向 exampl
 ### session
 
 #### 详细描述
-session 是一个请求选项参数，用于指定请求的session，参数可以是任意类型的值，用此值做标识符从而找到唯一的session。使用session进行请求时会自动管理cookie，这在登录后操作的场景非常有用
+session 是一个请求选项参数，用于指定请求的 session 标识（string），同一 session 共享 cookie jar，适合登录后连续请求
 
 Example:
 ```
@@ -5127,12 +5205,12 @@ rsp, req, err = poc.Get("https://pie.dev/cookies", poc.session("test")) // 向 p
 
 #### 定义
 
-`session(i any) PocConfigOption`
+`session(session string) PocConfigOption`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| session | `string` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

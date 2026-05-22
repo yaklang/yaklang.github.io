@@ -11,6 +11,7 @@
 | [servicescan.all](#all) ||
 | [servicescan.cache](#cache) |cache servicescan 的配置选项，设置本次扫描是否使用缓存  @param {bool} b 是否使用缓存  @return {ConfigOption} 返回配置项  |
 | [servicescan.concurrent](#concurrent) |concurrent servicescan 的配置选项，用于设置整体扫描并发  @param {int} size 并发数量  @return {ConfigOption} 返回配置项  |
+| [servicescan.context](#context) ||
 | [servicescan.databaseCache](#databasecache) |databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存  @param {bool} b 是否使用数据库缓存  @return {ConfigOption} 返回配置项  |
 | [servicescan.debugLog](#debuglog) |debugLog 的配置选项，设置本次扫描是否使用 debugLog  @param {bool} b 是否使用 debugLog  @return {ConfigOption} 返回配置项  |
 | [servicescan.disableDefaultRule](#disabledefaultrule) ||
@@ -158,6 +159,16 @@ for result := range fpResults { // 通过遍历管道的形式获取管道中的
 
 ```
 
+Context 契约 (重要):
+  - 通过 servicescan.ctx() 注入的 ctx 会被本函数下游 inner goroutine 用作
+    "发送结果时的退出信号". 调用方在停止 range outC 之前应当 cancel ctx,
+    否则 inner goroutine 会通过 sendMatchResultOrDrop 的 ctx.Done() 分支
+    退出, 结果会被丢弃 (首次丢弃会有一条 log.Warn, 后续静默).
+  - ctx 缺省 (config.Ctx == nil) 时退化为 context.Background(), 仅依赖
+    fp 内部超时托底, 这种情况下 cancel 路径不存在, 建议生产环境显式注入 ctx.
+
+关键词: _scanFromTargetStream ctx 契约, outC goroutine 泄漏防护
+
 
 #### 定义
 
@@ -208,6 +219,16 @@ for result := range fpResults { // 通过遍历管道的形式获取管道中的
 	}
 
 ```
+
+Context 契约 (重要):
+  - 通过 servicescan.ctx() 注入的 ctx 会被本函数下游 inner goroutine 用作
+    "发送结果时的退出信号". 调用方在停止 range outC 之前应当 cancel ctx,
+    否则 inner goroutine 会通过 sendMatchResultOrDrop 的 ctx.Done() 分支
+    退出, 结果会被丢弃 (首次丢弃会有一条 log.Warn, 后续静默).
+  - ctx 缺省 (config.Ctx == nil) 时退化为 context.Background(), 仅依赖
+    fp 内部超时托底, 这种情况下 cancel 路径不存在, 建议生产环境显式注入 ctx.
+
+关键词: _scanFromTargetStream ctx 契约, outC goroutine 泄漏防护
 
 
 #### 定义
@@ -371,6 +392,26 @@ die(err)
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | size | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOption` |   |
+
+
+### context
+
+#### 详细描述
+
+
+#### 定义
+
+`context(ctx context.Context) ConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

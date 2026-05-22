@@ -1,5 +1,12 @@
 # tls
 
+|实例名|实例描述|
+|:------|:--------|
+GMTLS_ECC_SM4_CBC_SM3|(int) 57363|
+GMTLS_ECC_SM4_GCM_SM3|(int) 57427|
+GMTLS_ECDHE_SM4_CBC_SM3|(int) 57361|
+GMTLS_ECDHE_SM4_GCM_SM3|(int) 57425|
+
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [tls.DecryptWithPkcs1v15](#decryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。  参数 raw 表示 RSA 私钥，支持以下格式：    - DER 编码的私钥（raw ASN.1 DER 字节流）    - Base64...|
