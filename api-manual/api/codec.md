@@ -88,6 +88,7 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.MMH3Hash128x64](#mmh3hash128x64) ||
 | [codec.MMH3Hash32](#mmh3hash32) ||
 | [codec.Md5](#md5) ||
+| [codec.PBKDF2SHA1Key](#pbkdf2sha1key) |PBKDF2SHA1Key derives a key with PBKDF2-HMAC-SHA1 (e.g. WeChat wxapkg V1MMWX decryption). |
 | [codec.PKCS5Padding](#pkcs5padding) ||
 | [codec.PKCS5UnPadding](#pkcs5unpadding) ||
 | [codec.PKCS7Padding](#pkcs7padding) ||
@@ -2133,6 +2134,31 @@ If sampling cuts into UTF-8 character, look forward/backward to find valid bound
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `string` |   |
+
+
+### PBKDF2SHA1Key
+
+#### 详细描述
+PBKDF2SHA1Key derives a key with PBKDF2-HMAC-SHA1 (e.g. WeChat wxapkg V1MMWX decryption).
+
+
+#### 定义
+
+`PBKDF2SHA1Key(password any, salt any, iterations int, keyLen int) ([]byte, error)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| password | `any` |   |
+| salt | `any` |   |
+| iterations | `int` |   |
+| keyLen | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]byte` |   |
+| r2 | `error` |   |
 
 
 ### PKCS5Padding
