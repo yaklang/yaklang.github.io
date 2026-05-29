@@ -4,12 +4,14 @@
 |:------|:--------|
 | [str.AddPrefixLineNumber](#addprefixlinenumber) ||
 | [str.AddPrefixLineNumberToReader](#addprefixlinenumbertoreader) ||
+| [str.CalcOrdinaryTokenCount](#calcordinarytokencount) |CalcOrdinaryTokenCount 计算文本的 token 数量（基于 Qwen BPE 词表），但不对特殊 token 做识别处理。  |
 | [str.CalcSSDeep](#calcssdeep) |CalcSSDeep 计算并返回一段文本的模糊哈希值  |
 | [str.CalcSSDeepStability](#calcssdeepstability) |CalcSSDeepStability 使用模糊哈希算法计算多段文本之间的相似度，返回相似度与错误。传入的文本应该为大文本，即长度大于 30 kb。  |
 | [str.CalcSimHash](#calcsimhash) |CalcSimHash 计算并返回一段文本的 SimHash 值  |
 | [str.CalcSimHashStability](#calcsimhashstability) |CalcSimHashStability 使用 SimHash 算法计算多段文本之间的相似度，返回相似度与错误。  |
 | [str.CalcSimilarity](#calcsimilarity) |CalcSimilarity 计算多段文本之间的相似度，根据最长的文本长度选择不同的算法  如果最长的文本长度小于等于 2000，使用文本子串匹配算法  如果最短的文本长度大于等于 30000，使用模糊哈希算法  如果上述算法出现错误，则使用 SimHash 算法  |
 | [str.CalcTextMaxSubStrStability](#calctextmaxsubstrstability) |CalcTextMaxSubStrStability 使用文本子串匹配算法计算多段文本之间的相似度，返回相似度与错误  |
+| [str.CalcTokenCount](#calctokencount) |CalcTokenCount 计算文本的 token 数量（基于 Qwen BPE 词表），会识别特殊 token（如 &amp;lt;|im_start|&amp;gt;、&amp;lt;|im_end|&amp;gt;、&amp;lt;|endoftext|&amp;gt;）。  常用于大模型上下文预算估算、长文本裁剪等 AI 处理场景。  |
 | [str.Compare](#compare) |Compare 按照ascii码表顺序逐个比较字符串a和b中的每个字符，如果a==b，则返回0，如果a&amp;lt;b，则返回-1，如果a&amp;gt;b，则返回1  |
 | [str.Contains](#contains) |Contains 判断字符串s是否包含substr  |
 | [str.ContainsAny](#containsany) |ContainsAny 判断字符串s是否包含chars中的任意字符  |
@@ -17,6 +19,9 @@
 | [str.Cut](#cut) |Cut slices s around the first instance of sep, returning the text before and after sep. The found result reports whether sep appears in s. If sep does...|
 | [str.CutPrefix](#cutprefix) |CutPrefix returns s without the provided leading prefix string and reports whether it found the prefix. If s doesn&amp;#39;t start with prefix, CutPrefix ...|
 | [str.CutSuffix](#cutsuffix) |CutSuffix returns s without the provided ending suffix string and reports whether it found the suffix. If s doesn&amp;#39;t end with suffix, CutSuffix ret...|
+| [str.DecodeTokens](#decodetokens) |DecodeTokens 将 Qwen BPE token id 列表解码还原为文本，是 EncodeTokens 的逆操作。  |
+| [str.EncodeOrdinaryTokens](#encodeordinarytokens) |EncodeOrdinaryTokens 将文本编码为 Qwen BPE token id 列表（不识别特殊 token）。  |
+| [str.EncodeTokens](#encodetokens) |EncodeTokens 将文本编码为 Qwen BPE token id 列表（会识别特殊 token）。  |
 | [str.EndsWith](#endswith) |EndsWith / HasSuffix 判断字符串s是否以suffix结尾  |
 | [str.EqualFold](#equalfold) |EqualFold 判断字符串s和t是否相等，忽略大小写  |
 | [str.ExtractBodyFromHTTPResponseRaw](#extractbodyfromhttpresponseraw) |ExtractBodyFromHTTPResponseRaw 从原始 HTTP 响应报文中提取 body  |
@@ -76,6 +81,7 @@
 | [str.IsXmlRequest](#isxmlrequest) |IsXmlRequest 猜测传入的参数是否为请求头是 XML 格式的原始 HTTP 请求报文  |
 | [str.IsXmlValue](#isxmlvalue) |IsXmlValue 尝试将传入的参数转换为字符串，然后猜测其是否是 XML 格式的数据  |
 | [str.Join](#join) |Join 将i中的元素用d连接，如果传入的参数不是字符串，会自动将其转为字符串，再将其用d连接。如果连接失败，则会返回i的字符串形式。  |
+| [str.JsonStringDecode](#jsonstringdecode) |JsonStringDecode 解码一个 JSON 字符串值（一次性版本），去掉首尾引号并还原转义（\n、\t、\uXXXX、\xNN 等），  返回真实字符串内容。相比 str.Unquote 更容错：遇到非标准/畸形数据会回退返回原始内容而不是报错。  适合处理 jsonstream onFi...|
 | [str.JsonToMap](#jsontomap) |JsonToMap 将 json 字符串 line 解析为 map，保留嵌套结构（对象/数组不会被转为字符串）  单对象时优先用 json.Unmarshal 确保嵌套正确；多对象（如 `{} {}`）时回退到 jstream。  |
 | [str.JsonToMapList](#jsontomaplist) |JsonToMapList 将 json 字符串 line 解析为 map 列表，保留嵌套结构（对象/数组不会被转为字符串）  |
 | [str.LastIndex](#lastindex) |LastIndex 返回字符串s中substr最后一次出现的位置的索引，如果字符串中不存在substr，则返回-1  |
@@ -90,7 +96,9 @@
 | [str.MatchAnyOfSubString](#matchanyofsubstring) |MatchAnyOfSubString 尝试将 i 转换为字符串，然后判断是否有任意子串 subStr 存在于 i 中，如果有其中一个子串存在于 i 中则返回 true，否则返回 false，此函数忽略大小写  |
 | [str.MergeUrlFromHTTPRequest](#mergeurlfromhttprequest) |MergeUrlFromHTTPRequest 将传入的 target 与 原始 HTTP 请求报文中的 URL 进行合并，并返回合并后的 URL  |
 | [str.NewFilter](#newfilter) |NewFilter 创建一个默认的字符串布谷鸟过滤器，布谷鸟过滤器用于判断一个元素是否在一个集合中，它存在极低的假阳性（即说存在的元素实际上不存在），通常这个集合中的元素数量非常大才会使用布谷鸟过滤器。  |
+| [str.NewJSONStringReader](#newjsonstringreader) |NewJSONStringReader 包装一个 JSON 字符串值的 Reader，流式解码其中的转义（\n、\t、\uXXXX、\xNN 等），  返回去引号、去转义后的真实字符串内容。内部已用 UTF-8 安全读取，遇到非标准/畸形数据会自动回退为原始透传。  常用于 jsonstream 的...|
 | [str.NewReader](#newreader) |NewReader returns a new [Reader] reading from s. It is similar to [bytes.NewBufferString] but more efficient and non-writable. |
+| [str.NewUTF8Reader](#newutf8reader) |NewUTF8Reader 包装一个 Reader，使每次读取都只返回完整的 UTF-8 字符，  避免在按字节/小缓冲读取数据流（如 jsonstream 字段流）时把一个多字节字符（中文等）从中间截断。  |
 | [str.ParamsGetOr](#paramsgetor) |ParamsGetOr 从 map 中获取 key 对应的值，如果不存在则返回 defaultValue。支持 map[string]string 与 map[string]any。  |
 | [str.ParseBytesToHTTPRequest](#parsebytestohttprequest) |ParseBytesToHTTPRequest 将字节数组解析为 HTTP 请求  |
 | [str.ParseBytesToHTTPResponse](#parsebytestohttpresponse) |ParseBytesToHTTPResponse 将字节数组解析为 HTTP 响应  |
@@ -200,6 +208,32 @@
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `io.Reader` |   |
+
+
+### CalcOrdinaryTokenCount
+
+#### 详细描述
+CalcOrdinaryTokenCount 计算文本的 token 数量（基于 Qwen BPE 词表），但不对特殊 token 做识别处理。
+
+Example:
+```
+n = str.CalcOrdinaryTokenCount("Hello, Yak!")
+```
+
+
+#### 定义
+
+`CalcOrdinaryTokenCount(text string) int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
 
 
 ### CalcSSDeep
@@ -365,6 +399,35 @@ p, err = str.CalcTextMaxSubStrStability("hello", "hello world") // p = 0.625
 |:-----------|:---------- |:-----------|
 | r1 | `float64` |   |
 | r2 | `error` |   |
+
+
+### CalcTokenCount
+
+#### 详细描述
+CalcTokenCount 计算文本的 token 数量（基于 Qwen BPE 词表），会识别特殊 token（如 &lt;|im_start|&gt;、&lt;|im_end|&gt;、&lt;|endoftext|&gt;）。
+
+常用于大模型上下文预算估算、长文本裁剪等 AI 处理场景。
+
+Example:
+```
+n = str.CalcTokenCount("Hello, Yak!")   // 英文 token 数
+n = str.CalcTokenCount("你好，世界")      // 中文 token 数
+```
+
+
+#### 定义
+
+`CalcTokenCount(text string) int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `int` |   |
 
 
 ### Compare
@@ -555,6 +618,86 @@ If suffix is the empty string, CutSuffix returns s, true.
 |:-----------|:---------- |:-----------|
 | before | `string` |   |
 | found | `bool` |   |
+
+
+### DecodeTokens
+
+#### 详细描述
+DecodeTokens 将 Qwen BPE token id 列表解码还原为文本，是 EncodeTokens 的逆操作。
+
+Example:
+```
+ids = str.EncodeTokens("Hello, Yak!")
+text = str.DecodeTokens(ids) // Hello, Yak!
+```
+
+
+#### 定义
+
+`DecodeTokens(tokens []int) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| tokens | `[]int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
+### EncodeOrdinaryTokens
+
+#### 详细描述
+EncodeOrdinaryTokens 将文本编码为 Qwen BPE token id 列表（不识别特殊 token）。
+
+Example:
+```
+ids = str.EncodeOrdinaryTokens("Hello, Yak!")
+```
+
+
+#### 定义
+
+`EncodeOrdinaryTokens(text string) []int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]int` |   |
+
+
+### EncodeTokens
+
+#### 详细描述
+EncodeTokens 将文本编码为 Qwen BPE token id 列表（会识别特殊 token）。
+
+Example:
+```
+ids = str.EncodeTokens("Hello, Yak!")
+println(len(ids))
+```
+
+
+#### 定义
+
+`EncodeTokens(text string) []int`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| text | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `[]int` |   |
 
 
 ### EndsWith
@@ -2166,6 +2309,37 @@ str.Join([]int{1, 2, 3}, " ") // 1 2 3
 | defaultResult | `string` |   |
 
 
+### JsonStringDecode
+
+#### 详细描述
+JsonStringDecode 解码一个 JSON 字符串值（一次性版本），去掉首尾引号并还原转义（\n、\t、\uXXXX、\xNN 等），
+
+返回真实字符串内容。相比 str.Unquote 更容错：遇到非标准/畸形数据会回退返回原始内容而不是报错。
+
+适合处理 jsonstream onField 给出的带引号原始值。
+
+Example:
+```
+str.JsonStringDecode(`"Hello\nYak"`)            // Hello(换行)Yak
+str.JsonStringDecode(`"\u4f60\u597d"`)          // 你好
+```
+
+
+#### 定义
+
+`JsonStringDecode(raw string) string`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| raw | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `string` |   |
+
+
 ### JsonToMap
 
 #### 详细描述
@@ -2545,6 +2719,43 @@ f.Exist("hello") // true
 | r1 | `*StringFilter` |   |
 
 
+### NewJSONStringReader
+
+#### 详细描述
+NewJSONStringReader 包装一个 JSON 字符串值的 Reader，流式解码其中的转义（\n、\t、\uXXXX、\xNN 等），
+
+返回去引号、去转义后的真实字符串内容。内部已用 UTF-8 安全读取，遇到非标准/畸形数据会自动回退为原始透传。
+
+常用于 jsonstream 的 onField 回调：字段流给出的是带引号和转义的原始值，用它解码即可拿到真实内容。
+
+Example:
+```
+jsonstream.Extract(`{"content": "Hello\nYak \u4f60\u597d"}`,
+
+	jsonstream.onField("content", func(key, reader, parents) {
+	    data = io.ReadAll(str.NewJSONStringReader(reader))~
+	    println(string(data)) // Hello(换行)Yak 你好
+	}),
+
+)
+```
+
+
+#### 定义
+
+`NewJSONStringReader(r io.Reader) io.Reader`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| r | `io.Reader` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `io.Reader` |   |
+
+
 ### NewReader
 
 #### 详细描述
@@ -2565,6 +2776,37 @@ It is similar to [bytes.NewBufferString] but more efficient and non-writable.
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `*Reader` |   |
+
+
+### NewUTF8Reader
+
+#### 详细描述
+NewUTF8Reader 包装一个 Reader，使每次读取都只返回完整的 UTF-8 字符，
+
+避免在按字节/小缓冲读取数据流（如 jsonstream 字段流）时把一个多字节字符（中文等）从中间截断。
+
+Example:
+```
+// 配合 jsonstream 字段流逐块读取中文内容时避免乱码
+r = str.NewUTF8Reader(rawReader)
+buf = make([]byte, 4)
+n, err = r.Read(buf) // buf[:n] 一定是完整的 UTF-8 字符序列
+```
+
+
+#### 定义
+
+`NewUTF8Reader(r io.Reader) io.Reader`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| r | `io.Reader` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `io.Reader` |   |
 
 
 ### ParamsGetOr
