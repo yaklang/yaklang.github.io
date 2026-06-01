@@ -202,7 +202,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `<a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">Copyright © ${new Date().getFullYear()} for Yak Project. 京ICP备17047700号-3</a>`,
+            copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a>`,
         },
         algolia: {
             // The application ID provided by Algolia
