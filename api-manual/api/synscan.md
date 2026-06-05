@@ -7,6 +7,7 @@
 | [synscan.ScanFromPing](#scanfromping) |ScanFromPing 对使用 ping.Scan 探测出的存活结果进行端口扫描，需要配合 ping.Scan 使用  @param {chan *PingResult} res ping.Scan 的扫描结果  @param {string} ports 端口，支持 1-65535、1,2,3、...|
 | [synscan.callback](#callback) |callback syn scan 的配置选项，设置一个回调函数，每发现一个端口就会调用一次  @param {func(i *synscan.SynScanResult)} i 回调函数  @return {scanOpt} 返回配置选项  |
 | [synscan.concurrent](#concurrent) |concurrent syn scan 的配置选项，设置 syn 扫描的发包速率，和 rateLimit 基本相同  @param {int} count 并发数  @return {scanOpt} 返回配置选项  |
+| [synscan.context](#context) ||
 | [synscan.excludeHosts](#excludehosts) |excludeHosts syn scan 的配置选项，设置本次扫描排除的主机  @param {string} hosts 主机，支持逗号分割、CIDR、-的格式  @return {scanOpt} 返回配置选项  |
 | [synscan.excludePorts](#excludeports) |excludePorts syn scan 的配置选项，设置本次扫描排除的端口  @param {string} ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式  @return {scanOpt} 返回配置选项  |
 | [synscan.iface](#iface) |iface syn scan 的配置选项，设置 syn 扫描的网卡  @param {string} iface 网卡名称  @return {scanOpt} 返回配置选项  |
@@ -198,6 +199,26 @@ die(err)
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | count | `int` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `SynxConfigOption` |   |
+
+
+### context
+
+#### 详细描述
+
+
+#### 定义
+
+`context(ctx context.Context) SynxConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

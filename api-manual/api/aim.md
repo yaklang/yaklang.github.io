@@ -36,11 +36,16 @@
 | [aim.onFinished](#onfinished) |WithOnFinished 设置完成回调 |
 | [aim.onInputRequired](#oninputrequired) |WithOnInputRequired 设置需要用户输入回调 |
 | [aim.onInputRequiredRaw](#oninputrequiredraw) |WithOnInputRequiredRaw 设置需要用户输入回调 |
+| [aim.onSessionID](#onsessionid) |WithOnSessionID 设置会话 ID 就绪回调 |
 | [aim.onStream](#onstream) |WithOnStream 设置流式输出回调 |
 | [aim.onStreamContent](#onstreamcontent) |WithOnStreamContent 设置流式输出结束回调，并返回重组后的完整流内容 |
 | [aim.onStreamEnd](#onstreamend) |WithOnStreamEnd 设置流式输出结束回调 |
+| [aim.qualityPriorityAICallback](#qualitypriorityaicallback) ||
+| [aim.qualityPriorityAIConfig](#qualitypriorityaiconfig) ||
 | [aim.reviewPolicy](#reviewpolicy) |WithReviewPolicy 设置审批策略 policy: &amp;#34;yolo&amp;#34; (自动通过), &amp;#34;ai&amp;#34; (AI 审批), &amp;#34;manual&amp;#34; (手动审批) |
 | [aim.sessionID](#sessionid) |WithSessionID 设置会话 ID |
+| [aim.speedPriorityAICallback](#speedpriorityaicallback) ||
+| [aim.speedPriorityAIConfig](#speedpriorityaiconfig) ||
 | [aim.timelineContentLimit](#timelinecontentlimit) |WithTimelineContentLimit 设置 Timeline 内容大小限制 |
 | [aim.timeout](#timeout) ||
 | [aim.userInteractLimit](#userinteractlimit) |WithUserInteractLimit 设置用户交互次数限制 |
@@ -741,6 +746,27 @@ WithOnInputRequiredRaw 设置需要用户输入回调
 | r1 | `AIEngineConfigOption` |   |
 
 
+### onSessionID
+
+#### 详细描述
+WithOnSessionID 设置会话 ID 就绪回调
+
+
+#### 定义
+
+`onSessionID(callback func(sessionID string)) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `func(sessionID string)` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
 ### onStream
 
 #### 详细描述
@@ -804,6 +830,47 @@ WithOnStreamEnd 设置流式输出结束回调
 | r1 | `AIEngineConfigOption` |   |
 
 
+### qualityPriorityAICallback
+
+#### 详细描述
+
+
+#### 定义
+
+`qualityPriorityAICallback(callback aicommon.AICallbackType) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `aicommon.AICallbackType` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### qualityPriorityAIConfig
+
+#### 详细描述
+
+
+#### 定义
+
+`qualityPriorityAIConfig(typeName string, opts ...aispec.AIConfigOption) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typeName | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
 ### reviewPolicy
 
 #### 详细描述
@@ -840,6 +907,47 @@ WithSessionID 设置会话 ID
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | sessionID | `string` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### speedPriorityAICallback
+
+#### 详细描述
+
+
+#### 定义
+
+`speedPriorityAICallback(callback aicommon.AICallbackType) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| callback | `aicommon.AICallbackType` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` |   |
+
+
+### speedPriorityAIConfig
+
+#### 详细描述
+
+
+#### 定义
+
+`speedPriorityAIConfig(typeName string, opts ...aispec.AIConfigOption) AIEngineConfigOption`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| typeName | `string` |   |
+| opts | `...aispec.AIConfigOption` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

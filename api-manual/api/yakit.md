@@ -3,6 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [.](#) ||
+| [yakit.AIAgentSession](#aiagentsession) ||
 | [yakit.AIOutput](#aioutput) |AIOutput writes AI-focused output that can be filtered for AI tool stdout. aiLevel is an optional category for downstream consumers.|
 | [yakit.AutoInitYakit](#autoinityakit) ||
 | [yakit.Code](#code) ||
@@ -91,6 +92,22 @@
 #### 定义
 
 ``
+
+
+### AIAgentSession
+
+#### 详细描述
+
+
+#### 定义
+
+`AIAgentSession(sessionID string, source ...string)`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| sessionID | `string` |   |
+| source | `...string` |   |
 
 
 ### AIOutput
