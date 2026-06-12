@@ -35,7 +35,7 @@
 | [risk.YieldRiskByRuntimeId](#yieldriskbyruntimeid) |YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByScriptName](#yieldriskbyscriptname) |YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录的管道  |
 | [risk.YieldRiskByTarget](#yieldriskbytarget) |YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记录的管道  |
-| [risk.appendPacketPairs](#appendpacketpairs) |appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文  会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id 与 url，前端可展示 url 再按 id 查询详情  支持 string / []byte / 任...|
+| [risk.appendPacketPairs](#appendpacketpairs) |appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文  会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id、url 以及请求/响应快照，  前端可优先按 id 查询详情；HTTPFlow 被删除后仍可使用 P...|
 | [risk.cve](#cve) |cve 是一个选项参数，用于指定风险记录的 CVE 编号  |
 | [risk.description](#description) |description 是一个选项参数，用于指定漏洞记录的描述  |
 | [risk.details](#details) |details 是一个选项参数，用于指定风险记录的详细信息  |
@@ -886,7 +886,9 @@ println(risk)
 #### 详细描述
 appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文
 
-会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id 与 url，前端可展示 url 再按 id 查询详情
+会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id、url 以及请求/响应快照，
+
+前端可优先按 id 查询详情；HTTPFlow 被删除后仍可使用 PacketPairs 中的快照展示流量。
 
 支持 string / []byte / 任意可转成字符串的类型
 

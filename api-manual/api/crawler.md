@@ -19,6 +19,7 @@
 | [crawler.bodySize](#bodysize) |bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB  |
 | [crawler.concurrent](#concurrent) |concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20  |
 | [crawler.connectTimeout](#connecttimeout) |connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s  |
+| [crawler.context](#context) ||
 | [crawler.cookie](#cookie) |cookie 是一个选项函数，用于指定爬虫时的cookie  |
 | [crawler.disallowSuffix](#disallowsuffix) |disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单  |
 | [crawler.domainExclude](#domainexclude) |domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单  domain允许使用glob语法，例如*.example.com  |
@@ -464,6 +465,26 @@ crawler.Start("https://example.com", crawler.connectTimeout(5))
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
 | f | `float64` |   |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `ConfigOpt` |   |
+
+
+### context
+
+#### 详细描述
+
+
+#### 定义
+
+`context(ctx context.Context) ConfigOpt`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| ctx | `context.Context` |   |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
