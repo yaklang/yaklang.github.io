@@ -7,7 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const ROOTS = ["docs", "api-manual", "products", "Yaklab", "articles", "blog", "team"];
+const ROOTS = ["docs", "api-manual", "products", "Yaklab", "blog", "team"];
 const repo = path.resolve(__dirname, "..");
 
 function walk(dir, acc) {

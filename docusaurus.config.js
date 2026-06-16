@@ -83,10 +83,9 @@ module.exports = {
                 //     ],
                 // },
 		        {
-                    href: "/articles/intro",
+                    to: "/blog",
                     label: "技术博客",
                     position: "left",
-                    sidebarCollapsed: false,
                 },
                 // {
                 //     position: "left",
@@ -235,17 +234,6 @@ module.exports = {
                 // ... other options
             },
         ],
-        [
-            "@docusaurus/plugin-content-docs",
-            {
-                id: "articles",
-                path: "articles",
-                routeBasePath: "articles",
-                sidebarPath: require.resolve("./sidebarsProducts.js"),
-                sidebarCollapsed: false,
-                // ... other options
-            },
-        ],
         function ProxyPlugin() {
             return {
                 name: 'proxy-plugin',
@@ -285,12 +273,22 @@ module.exports = {
                     // Please change this to your repo.
                     editUrl: "https://github.com/yaklang/",
                 },
-                // blog: {
-                //     showReadingTime: true,
-                //     // Please change this to your repo.
-                //     editUrl:
-                //         'https://github.com/yaklang/',
-                // },
+                blog: {
+                    path: "blog",
+                    routeBasePath: "/blog",
+                    blogTitle: "Yak 技术博客",
+                    blogDescription:
+                        "Yak Project 公众号技术文章合集，覆盖代码审计、AI、流量分析、Java 安全等方向",
+                    blogSidebarTitle: "近期文章",
+                    blogSidebarCount: "ALL",
+                    showReadingTime: true,
+                    postsPerPage: 10,
+                    feedOptions: {
+                        type: ["rss", "atom"],
+                        title: "Yak 技术博客",
+                        copyright: `Copyright © ${new Date().getFullYear()} Yak Project.`,
+                    },
+                },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),
                 },
