@@ -6,7 +6,7 @@ module.exports = {
     './products/**/*.{md,mdx}',
     './api-manual/**/*.{md,mdx}',
     './Yaklab/**/*.{md,mdx}',
-    './articles/**/*.{md,mdx}',
+    './blog/**/*.{md,mdx}',
     './i18n/**/*.{js,jsx,ts,tsx,md,mdx}',
   ],
   theme: {
