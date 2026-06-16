@@ -11,9 +11,12 @@ html.plugin-blog {
     "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
     Helvetica, Arial, sans-serif;
 
+  // Infima 的 .margin-vert--lg 工具类带 !important（margin-top: 2rem !important），
+  // 不加 !important 会被压制，导致容器仅 32px 顶距、文章标题被 60px 固定导航栏遮挡，
+  // 与靠 sticky(top:72) 的左侧"近期文章"/右侧 TOC 错位。此处用 !important 强制对齐到导航栏下方。
   .main-wrapper > .container {
-    margin-top: REM(72);
-    margin-bottom: REM(48);
+    margin-top: REM(72) !important;
+    margin-bottom: REM(48) !important;
   }
 
   // 左侧"近期文章"栏：粘性吸顶时停在导航栏下方，避免被遮挡
