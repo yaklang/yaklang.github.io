@@ -63,20 +63,17 @@ $min-width: REM(1152);
   min-width: $min-width;
 }
 
-// 解决doc文档呗navbar遮挡问题
-.main-wrapper.docs-wrapper.docs-doc-page {
-  .container {
-    margin-top: REM(63);
-    width: 100%;
-  }
-  aside {
-    border-right: 0px;
-  }
-  aside > :first-child {
-    position: fixed;
-    padding-top: 0;
-    top: REM(63);
-    border-right: 1px solid var(--ifm-toc-border-color);
+// 解决文档正文被固定导航栏遮挡的问题
+// 背景：本站导航栏被改为 position: fixed(见 navbar.scss)，脱离文档流，
+//       正文不会被自动下推；Docusaurus 3 又把 docs-wrapper/docs-doc-page
+//       挂在 <html> 上(旧 .main-wrapper.docs-* 选择器已失配)，导致顶距归零、
+//       面包屑被 60px 导航栏完全遮住丢失。
+// 方案：按 v3 结构为文档正文容器补足顶距(margin，而非遮盖)，使面包屑落到
+//       导航栏下方，并与右侧 TOC(sticky top:76) / 左侧目录顶端对齐。
+//       侧边栏与 TOC 沿用 Docusaurus 默认 sticky 逻辑，本身已正常，无需干预。
+html.docs-wrapper {
+  .main-wrapper .container {
+    margin-top: var(--ifm-navbar-height);
   }
 }
 .theme-doc-sidebar-menu.menu__list {
