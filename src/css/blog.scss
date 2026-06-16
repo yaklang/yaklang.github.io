@@ -49,28 +49,29 @@ html.plugin-blog {
 }
 
 // ---------- 列表/标签/归档页：卡片化（排除文章详情页） ----------
+// 设计目标：高信息密度、弱化卡片间距、移除作者与标签、预览灰色斜体、每屏容纳更多
 html.plugin-blog:not(.blog-post-page) {
   .main-wrapper article {
     background: #ffffff;
     border: 1px solid #ebedf0;
-    border-radius: REM(14);
-    padding: REM(26) REM(32);
-    margin-bottom: REM(22);
+    border-radius: REM(10);
+    padding: REM(12) REM(18);
+    // Infima 的 .margin-bottom--xl 带 !important(3rem)，需 !important 才能收紧卡片间距
+    margin-bottom: REM(10) !important;
     box-shadow: 0 1px 2px rgba(20, 23, 28, 0.04);
-    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    transition: box-shadow 0.18s ease, border-color 0.18s ease;
 
     &:hover {
-      box-shadow: 0 10px 30px rgba(20, 23, 28, 0.08);
-      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(20, 23, 28, 0.08);
       border-color: var(--ifm-color-primary-lighter);
     }
 
-    // 标题
+    // 标题：更紧凑
     header h2 {
-      font-size: REM(23);
-      line-height: 1.45;
+      font-size: REM(17);
+      line-height: 1.35;
       font-weight: 700;
-      margin-bottom: REM(8);
+      margin-bottom: REM(2);
 
       a {
         color: var(--base-font-color);
@@ -81,21 +82,34 @@ html.plugin-blog:not(.blog-post-page) {
       }
     }
 
-    // 元信息（日期 / 阅读时长 / 作者）
-    header .margin-vert--md,
+    // 日期：收紧上下间距(覆盖 Infima .margin-vert--md 的 !important)
+    header [class*="container_"].margin-vert--md {
+      margin-top: REM(2) !important;
+      margin-bottom: 0 !important;
+    }
     header time {
-      color: #8a9099;
-      font-size: REM(13);
+      color: #9aa0a8;
+      font-size: REM(12);
     }
 
-    // 摘要：限制为四行，保持卡片观感统一；隐藏摘要内图片
+    // 移除作者信息行(头像/名称/简介)
+    header .row:has([class*="authorCol"]) {
+      display: none;
+    }
+    // 兜底：低版本浏览器不支持 :has 时，至少隐藏作者列本体
+    header [class*="authorCol"] {
+      display: none;
+    }
+
+    // 摘要预览：灰色斜体、限 2 行、收紧间距，提升信息密度
     .markdown {
-      font-size: REM(15);
-      line-height: 1.85;
-      color: #41464e;
-      margin: REM(12) 0 REM(14);
+      font-size: REM(13.5);
+      line-height: 1.6;
+      color: #9298a1;
+      font-style: italic;
+      margin: REM(6) 0 0;
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
 
@@ -103,25 +117,37 @@ html.plugin-blog:not(.blog-post-page) {
         display: none;
       }
       p {
-        margin: 0 0 REM(6);
+        margin: 0;
       }
       // 摘要里的标题降级为普通文字，避免突兀
       h1,
       h2,
       h3,
       h4 {
-        font-size: REM(15);
+        display: inline;
+        font-size: REM(13.5);
         font-weight: 600;
-        margin: 0 0 REM(6);
+        font-style: italic;
+        margin: 0;
       }
     }
 
-    // "阅读更多" 按钮
-    footer,
-    .margin-top--md {
+    // 页脚：移除标签列，仅保留"阅读更多"，收紧上间距
+    footer {
+      margin-top: REM(6) !important;
+
+      // 隐藏标签所在列(含"标签："标签与 pill)
+      .col:has(ul[class*="tags"]) {
+        display: none;
+      }
+      // 兜底：不支持 :has 时直接隐藏标签 ul
+      ul[class*="tags"] {
+        display: none;
+      }
+
       .button,
       a[href] {
-        font-size: REM(14);
+        font-size: REM(13);
       }
     }
   }
