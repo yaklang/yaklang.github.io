@@ -132,9 +132,9 @@ html.plugin-blog:not(.blog-post-page) {
       }
     }
 
-    // 页脚：移除标签列，仅保留"阅读更多"，收紧上间距
+    // 页脚：移除标签列；"阅读更多"靠最右、紧贴摘要下方，减少空白
     footer {
-      margin-top: REM(6) !important;
+      margin-top: REM(2) !important;
 
       // 隐藏标签所在列(含"标签："标签与 pill)
       .col:has(ul[class*="tags"]) {
@@ -143,6 +143,12 @@ html.plugin-blog:not(.blog-post-page) {
       // 兜底：不支持 :has 时直接隐藏标签 ul
       ul[class*="tags"] {
         display: none;
+      }
+
+      // "阅读更多"占满整行并靠最右(原 col--3 仅 25% 宽会偏左)
+      .col.text--right {
+        flex: 0 0 100%;
+        max-width: 100%;
       }
 
       .button,
