@@ -110,6 +110,7 @@ jobs:
           key: ${{ secrets.ONLINE_PRIV_KEY }}
           script: |
             cd /root/yaklang-io/
+            rm -rf build
             tar zxvf out.tgz
             rm -rf out.tgz
 
