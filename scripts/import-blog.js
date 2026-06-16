@@ -111,6 +111,9 @@ function cleanBody(raw) {
     break;
   }
 
+  // 全局清除孤立的 "E N D" / "END" 装饰行（公众号文末标记）
+  lines = lines.filter((l) => !/^\s*E\s*N\s*D\.?\s*$/i.test(l));
+
   let body = lines.join("\n");
 
   // rewrite image paths: static/<hash>.<ext> -> /blog-img/<hash>.<ext>
@@ -176,15 +179,48 @@ function fixBareUrls(body) {
   return out.join("\n");
 }
 
+// 判定装饰性/无信息量的行：前言/引言/序、孤立的小节序号(01/02)、E N D 等
+function isDecorativeLine(t) {
+  return (
+    /^#{0,6}\s*(前言|前 言|引言|序言|序|正文)\s*$/.test(t) ||
+    /^E\s*N\s*D\.?$/i.test(t) ||
+    /^0?\d{1,2}$/.test(t)
+  );
+}
+
+function isImageLine(t) {
+  return /^!\[.*\]\(.*\)\s*$/.test(t) || /^<img\b/i.test(t);
+}
+
+// 生成摘要截断点：先丢弃开头的装饰行，再把截断点放在"首个正文文本段落"之后，
+// 使列表卡片摘要展示一段真实文字，而不是孤零零的"前言"。
 function insertTruncate(body) {
   const lines = body.split("\n");
-  let idx = 0;
-  // skip leading blanks
-  while (idx < lines.length && lines[idx].trim() === "") idx++;
-  // consume first content block (until blank line)
-  while (idx < lines.length && lines[idx].trim() !== "") idx++;
-  const head = lines.slice(0, idx).join("\n");
-  const tail = lines.slice(idx).join("\n");
+  // 丢弃开头的空行与装饰行
+  let start = 0;
+  while (start < lines.length) {
+    const t = lines[start].trim();
+    if (t === "" || isDecorativeLine(t)) {
+      start++;
+      continue;
+    }
+    break;
+  }
+  const work = lines.slice(start);
+  // 向后跳过图片行/标题行/空行，定位首个正文文本行
+  let k = 0;
+  while (k < work.length) {
+    const t = work[k].trim();
+    if (t === "" || isImageLine(t) || /^#{1,6}\s/.test(t)) {
+      k++;
+      continue;
+    }
+    break;
+  }
+  // 消费这一段正文（直到空行）
+  while (k < work.length && work[k].trim() !== "") k++;
+  const head = work.slice(0, k).join("\n");
+  const tail = work.slice(k).join("\n");
   return head + "\n\n<!-- truncate -->\n" + tail;
 }
 

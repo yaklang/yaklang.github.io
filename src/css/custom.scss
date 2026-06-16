@@ -83,17 +83,6 @@ $min-width: REM(1152);
   font-size: 14px;
 }
 
-// 博客页（列表/详情/标签/归档）同样避让固定导航栏，左栏与正文都不被遮挡
-.main-wrapper.blog-wrapper {
-  .container {
-    margin-top: REM(63);
-  }
-  // 左侧"近期文章"栏：粘性吸顶时停在导航栏下方
-  aside[class*="col"] nav {
-    top: REM(63);
-  }
-}
-
 img {
   -webkit-user-drag: none;
 }
@@ -103,6 +92,7 @@ video {
 
 // layout style file
 @import "../css/navbar.scss";
+@import "../css/blog.scss";
 @import "../theme/Footer/footer.scss";
 // page style file
 @import "../components/home.scss";

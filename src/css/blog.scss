@@ -1,0 +1,217 @@
+// ===================================================================
+// 技术博客样式：布局避让、卡片化列表、阅读排版
+// 说明：blog-wrapper / blog-list-page / blog-post-page / plugin-blog
+//       这些 class 由 Docusaurus 挂在 <html> 元素上，需用后代选择器命中
+// ===================================================================
+
+// ---------- 通用：博客页避让固定导航栏 ----------
+html.plugin-blog {
+  // 统一字体，保证中英文混排和谐
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+
+  .main-wrapper > .container {
+    margin-top: REM(72);
+    margin-bottom: REM(48);
+  }
+
+  // 左侧"近期文章"栏：粘性吸顶时停在导航栏下方，避免被遮挡
+  aside[class*="col"] {
+    > div,
+    nav {
+      top: REM(72);
+    }
+  }
+}
+
+// ---------- 左侧"近期文章"导航栏样式 ----------
+html.plugin-blog {
+  aside nav {
+    a {
+      font-size: REM(14);
+      line-height: 1.6;
+      color: #51565d;
+      &:hover {
+        color: var(--ifm-color-primary);
+        text-decoration: none;
+      }
+    }
+    // 年份分组标题
+    > div > div:first-child {
+      font-weight: 700;
+      color: var(--base-font-color);
+    }
+  }
+}
+
+// ---------- 列表/标签/归档页：卡片化（排除文章详情页） ----------
+html.plugin-blog:not(.blog-post-page) {
+  .main-wrapper article {
+    background: #ffffff;
+    border: 1px solid #ebedf0;
+    border-radius: REM(14);
+    padding: REM(26) REM(32);
+    margin-bottom: REM(22);
+    box-shadow: 0 1px 2px rgba(20, 23, 28, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 10px 30px rgba(20, 23, 28, 0.08);
+      transform: translateY(-2px);
+      border-color: var(--ifm-color-primary-lighter);
+    }
+
+    // 标题
+    header h2 {
+      font-size: REM(23);
+      line-height: 1.45;
+      font-weight: 700;
+      margin-bottom: REM(8);
+
+      a {
+        color: var(--base-font-color);
+        &:hover {
+          color: var(--ifm-color-primary);
+          text-decoration: none;
+        }
+      }
+    }
+
+    // 元信息（日期 / 阅读时长 / 作者）
+    header .margin-vert--md,
+    header time {
+      color: #8a9099;
+      font-size: REM(13);
+    }
+
+    // 摘要：限制为四行，保持卡片观感统一；隐藏摘要内图片
+    .markdown {
+      font-size: REM(15);
+      line-height: 1.85;
+      color: #41464e;
+      margin: REM(12) 0 REM(14);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      img {
+        display: none;
+      }
+      p {
+        margin: 0 0 REM(6);
+      }
+      // 摘要里的标题降级为普通文字，避免突兀
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-size: REM(15);
+        font-weight: 600;
+        margin: 0 0 REM(6);
+      }
+    }
+
+    // "阅读更多" 按钮
+    footer,
+    .margin-top--md {
+      .button,
+      a[href] {
+        font-size: REM(14);
+      }
+    }
+  }
+}
+
+// ---------- 标签 pill ----------
+html.plugin-blog {
+  .main-wrapper {
+    ul[class*="tags"] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: REM(8);
+      padding-left: 0;
+      list-style: none;
+      margin: REM(8) 0 0;
+    }
+    a[class*="tag_"] {
+      border-radius: REM(20);
+      padding: REM(2) REM(12);
+      font-size: REM(12);
+    }
+  }
+}
+
+// ---------- 文章详情页：阅读排版 ----------
+html.blog-post-page {
+  .main-wrapper {
+    // 文章主标题
+    header h1 {
+      font-size: REM(34);
+      line-height: 1.3;
+      margin-bottom: REM(12);
+      letter-spacing: 0.2px;
+    }
+
+    .markdown {
+      font-size: REM(16);
+      line-height: 1.9;
+      color: #2b2f36;
+
+      h2 {
+        font-size: REM(25);
+        margin-top: REM(38);
+        padding-bottom: REM(8);
+        border-bottom: 1px solid #eef0f2;
+      }
+      h3 {
+        font-size: REM(20);
+        margin-top: REM(28);
+      }
+      h4 {
+        font-size: REM(17);
+        margin-top: REM(22);
+      }
+
+      p {
+        margin: REM(14) 0;
+      }
+
+      a {
+        color: var(--ifm-color-primary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        margin: REM(20) auto;
+        border-radius: REM(8);
+        box-shadow: 0 2px 14px rgba(20, 23, 28, 0.08);
+      }
+
+      blockquote {
+        border-left: REM(4) solid var(--ifm-color-primary-lighter);
+        background: #f6f9fc;
+        padding: REM(10) REM(18);
+        color: #51565d;
+        border-radius: 0 REM(6) REM(6) 0;
+      }
+
+      pre {
+        border-radius: REM(10);
+        font-size: REM(13.5);
+      }
+
+      ul,
+      ol {
+        padding-left: REM(24);
+        li {
+          margin: REM(6) 0;
+        }
+      }
+    }
+  }
+}
