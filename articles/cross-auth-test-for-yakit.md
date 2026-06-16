@@ -1,5 +1,4 @@
-#  "Yaker，你可以全局配置插件环境变量!"
-原创 Yak  Yak Project   2024-11-28 17:30
+#  【功能上新】插件全局变量配置
 
 ![](/articles/wechat2md-57d4b38fb5fac67b077017855ed50c43.gif)
 
