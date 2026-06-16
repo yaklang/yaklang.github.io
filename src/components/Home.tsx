@@ -404,22 +404,39 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
           const yakVersion = (response.data as string).split("\n")[0];
           setVersion(yakVersion);
 
-          await getSize(macOSIntel.url, macOSIntel.key, (size) => {
-            setMacOSIntel({ ...macOSIntel, size });
-          });
+          // 显式传入 yakVersion，避免依赖尚未刷新的 version 状态(否则首个请求版本号为空会失败)
+          await getSize(
+            macOSIntel.url,
+            macOSIntel.key,
+            (size) => {
+              setMacOSIntel({ ...macOSIntel, size });
+            },
+            yakVersion
+          );
           await getSize(
             macOSAppleSillion.url,
             macOSAppleSillion.key,
             (size) => {
               setMacOSAppleSillion({ ...macOSAppleSillion, size });
-            }
+            },
+            yakVersion
           );
-          await getSize(Linux.url, Linux.key, (size: number) => {
-            setLinux({ ...Linux, size });
-          });
-          await getSize(Windows.url, Windows.key, (size: number) => {
-            setWindows({ ...Windows, size });
-          });
+          await getSize(
+            Linux.url,
+            Linux.key,
+            (size: number) => {
+              setLinux({ ...Linux, size });
+            },
+            yakVersion
+          );
+          await getSize(
+            Windows.url,
+            Windows.key,
+            (size: number) => {
+              setWindows({ ...Windows, size });
+            },
+            yakVersion
+          );
         } else {
           message.error("获取yakit版本错误，请刷新页面后重试");
         }
@@ -429,13 +446,16 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
         message.error("获取yakit版本错误，请刷新页面后重试");
       });
   });
-  const getUrl = useMemoizedFn((url: string) => {
-    return `https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-${url}`;
+  const getUrl = useMemoizedFn((url: string, ver?: string) => {
+    // 优先使用显式传入的版本号(ver)。init 中 setVersion 后 version 状态尚未刷新，
+    // 直接读取 version 会得到空值，导致首个请求 URL 缺少版本号而失败。
+    const v = ver || version;
+    return `https://oss-qn.yaklang.com/yak/${v}/Yakit-${v}-${url}`;
   });
   const getSize = useMemoizedFn(
-    async (url: string, type: string, callBack: any) => {
+    async (url: string, type: string, callBack: any, ver?: string) => {
       await axios
-        .head(getUrl(url))
+        .head(getUrl(url, ver))
         .then((response) => {
           if (
             response &&
