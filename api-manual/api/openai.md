@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [openai.Chat](#chat) |Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果  @param {string} data 用户的提问或描述  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等  |
-| [openai.ChatEx](#chatex) |ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误  @param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建  @param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、...|
+| [openai.Chat](#chat) |Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果  @param &#123;string&#125; data 用户的提问或描述  @param &#123;ConfigOption&#125; ...opts 配置选项，用于配置代理、API Key、模型等  |
+| [openai.ChatEx](#chatex) |ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误  @param &#123;[]ChatDetail&#125; 聊天的消息上下文，可以通过openai.userMessage等创建  @param &#123;ConfigOption&#125; ...opts 配置选项，用于配置代理、API Key、...|
 | [openai.FunctionCall](#functioncall) ||
 | [openai.NewSession](#newsession) ||
 | [openai.TranslateToChinese](#translatetochinese) |TranslateToChinese 使用 OpenAI 的大语言模型将传入的字符串翻译为中文，还可以接收零个到多个配置选项，用于配置代理、API Key、模型等，返回翻译后的中文字符串  |
@@ -15,7 +15,7 @@
 | [openai.functionRequired](#functionrequired) |functionRequired 设置函数调用时的必须参数  |
 | [openai.localAPIKey](#localapikey) ||
 | [openai.model](#model) |model 设置 OpenAI的大语言模型  |
-| [openai.newFunction](#newfunction) |newFunction 设置新的函数调用  详情请参考 https://platform.openai.com/docs/guides/function-calling  @param {string} name 函数名称  @param {string} description 函数描述  @pa...|
+| [openai.newFunction](#newfunction) |newFunction 设置新的函数调用  详情请参考 https://platform.openai.com/docs/guides/function-calling  @param &#123;string&#125; name 函数名称  @param &#123;string&#125; description 函数描述  @pa...|
 | [openai.proxy](#proxy) |proxy 设置调用 OpenAI 时使用的代理  |
 | [openai.systemMessage](#systemmessage) |systemMessage 根据传入的内容构造并返回一个 OpenAI 系统信息  |
 | [openai.toolMessage](#toolmessage) |toolMessage 根据传入的函数名,内容构造并返回一个 OpenAI 工具信息，用于指示工具返回结果  |
@@ -30,9 +30,9 @@
 #### 详细描述
 Chat 使用 OpenAI 的大语言模型进行对话，返回对话结果
 
-@param {string} data 用户的提问或描述
+@param &#123;string&#125; data 用户的提问或描述
 
-@param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等
+@param &#123;ConfigOption&#125; ...opts 配置选项，用于配置代理、API Key、模型等
 
 Example:
 ```
@@ -61,13 +61,13 @@ result = openai.Chat("Hello, world!", openai.apiKey("sk-xxx"), openai.proxy("htt
 #### 详细描述
 ChatEx 使用 OpenAI 的大语言模型进行对话，返回对话结果结构体与错误
 
-@param {[]ChatDetail} 聊天的消息上下文，可以通过openai.userMessage等创建
+@param &#123;[]ChatDetail&#125; 聊天的消息上下文，可以通过openai.userMessage等创建
 
-@param {ConfigOption} ...opts 配置选项，用于配置代理、API Key、模型等
+@param &#123;ConfigOption&#125; ...opts 配置选项，用于配置代理、API Key、模型等
 
-@return {ChatDetails} 包含对话结果的结构体
+@return &#123;ChatDetails&#125; 包含对话结果的结构体
 
-@return {error} 错误
+@return &#123;error&#125; 错误
 
 Example:
 ```
@@ -403,13 +403,13 @@ newFunction 设置新的函数调用
 
 详情请参考 https://platform.openai.com/docs/guides/function-calling
 
-@param {string} name 函数名称
+@param &#123;string&#125; name 函数名称
 
-@param {string} description 函数描述
+@param &#123;string&#125; description 函数描述
 
-@param {ConfigOption} ...opts 配置选项，接收openai.functionParamType,openai.functionProperty,openai.functionRequired
+@param &#123;ConfigOption&#125; ...opts 配置选项，接收openai.functionParamType,openai.functionProperty,openai.functionRequired
 
-@return {ConfigOption} 配置选项
+@return &#123;ConfigOption&#125; 配置选项
 
 Example:
 ```

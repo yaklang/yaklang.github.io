@@ -93,7 +93,7 @@ Action 选择上一步中添加的 proxy server, 点击 OK 保存。
 
 ![](/img/products/yakit/WeChatAppEx-10.png)
 
-同时也内置了一个 Proxy Server 地址，默认Address 为 127.0.0.1 ，端口 8083，类型为 HTTPS，<span style={{ color: 'red' }}>如果你 MITM 监听的端口不为 8083，请修改为 Yakit MITM 监听的端口。</span>
+同时也内置了一个 Proxy Server 地址，默认Address 为 127.0.0.1 ，端口 8083，类型为 HTTPS，<span style=&#123;&#123; color: 'red' &#125;&#125;>如果你 MITM 监听的端口不为 8083，请修改为 Yakit MITM 监听的端口。</span>
 
 ### 导入方式
 
@@ -131,7 +131,7 @@ Windows 和 Mac 的导入方式一致，下载 [Yakit-WeChatAppEx.ppx](https://a
 
 ### 解决方案
 
-在 Yakit v1.3.0 添加Windows 自定义安装路径之后，我们<span style={{ color: 'red' }}>需要对 Yakit 的证书进行重新安装</span>，并且证书安装完成后，需要<span style={{ color: 'red' }}>重启微信</span>，随后即可正常抓包
+在 Yakit v1.3.0 添加Windows 自定义安装路径之后，我们<span style=&#123;&#123; color: 'red' &#125;&#125;>需要对 Yakit 的证书进行重新安装</span>，并且证书安装完成后，需要<span style=&#123;&#123; color: 'red' &#125;&#125;>重启微信</span>，随后即可正常抓包
 
 ## App 抓包
 

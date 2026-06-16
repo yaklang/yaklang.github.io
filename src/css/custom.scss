@@ -1,4 +1,8 @@
 /* stylelint-disable docusaurus/copyright-header */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -86,16 +90,6 @@ video {
   -webkit-user-drag: none;
 }
 
-.DocSearch-HitsFooter {
-  display: none !important;
-}
-
-.DocSearch-Button:active,
-.DocSearch-Button:focus,
-.DocSearch-Button:hover {
-  box-shadow: inset 0 0 0 2px#F69C5D !important;
-}
-
 // layout style file
 @import "../css/navbar.scss";
 @import "../theme/Footer/footer.scss";
@@ -105,4 +99,3 @@ video {
 @import "../components/enterpriseCollaboration.scss";
 @import "../pages/middle.scss";
 @import "../components/irify.scss";
-@import "../components/searchBarModal.scss";

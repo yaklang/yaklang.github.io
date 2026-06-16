@@ -18,7 +18,7 @@ fn xpath.QueryAll(var_1: *html.Node, var_2: string): ([]*html.Node, error)
 fn xpath.SelectAttr(var_1: *html.Node, var_2: string): string
 ```
 
-## 案例: 使用 `xpath.Find` 来查询 HTML 节点 {#find}
+## 案例: 使用 `xpath.Find` 来查询 HTML 节点 &#123;#find&#125;
 
 在使用查询 API 之前，我们需要通过 `xpath.LoadHTMLDocument` 来生成一个 HTML 可操作文档，然后把文档的实例传递给其他的查询参数获取内容。
 

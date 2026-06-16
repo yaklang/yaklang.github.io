@@ -26,11 +26,11 @@
 
 <video  
   src="https://aliyun-oss.yaklang.com/video/yakit-ai-plugin-use-case.mp4"  
-  loop={true}  
-  playsInline={true}  
-  controls={true}  
-  autoPlay={true}  
-  style={{ width: 890 }}  
+  loop=&#123;true&#125;  
+  playsInline=&#123;true&#125;  
+  controls=&#123;true&#125;  
+  autoPlay=&#123;true&#125;  
+  style=&#123;&#123; width: 890 &#125;&#125;  
 />     
 
   
@@ -55,11 +55,11 @@
 ### **在 Yakit 中配置 APIKey**  
 <video
   src="https://aliyun-oss.yaklang.com/video/config-global-ai-demo.mp4"
-  loop={true}
-  playsInline={true}
-  controls={true}
-  autoPlay={true}
-  style={{ width: 890 }}
+  loop=&#123;true&#125;
+  playsInline=&#123;true&#125;
+  controls=&#123;true&#125;
+  autoPlay=&#123;true&#125;
+  style=&#123;&#123; width: 890 &#125;&#125;
 />    
 
 ### **编写一个 AI 插件**  

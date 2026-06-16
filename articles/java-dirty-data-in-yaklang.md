@@ -82,7 +82,7 @@ println(codec.EncodeBase64(res))
   
 readObject0的执行流程是先读对象类型，再根据类型采取不同的处理方式，如类型为ARRAY使用readArray处理。readArray的执行流程是，读classDesc，读长度，创建数组，根据数组长度，循环readObject读取数组元素。  
   
-所以只要在payload前加一个array头就可以随便塞垃圾数据了，再将gadget作为最后一个元素，所以最终的payload类似这种：[]Object{null,null,null,........,gadget}  
+所以只要在payload前加一个array头就可以随便塞垃圾数据了，再将gadget作为最后一个元素，所以最终的payload类似这种：[]Object&#123;null,null,null,........,gadget&#125;  
   
 在构造payload前需要准备一下：  
 1. 构造classDesc  

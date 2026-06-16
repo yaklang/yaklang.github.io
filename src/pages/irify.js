@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import "antd/dist/antd.min.css";
 import { IRify } from "../components/IRify";
 
 export default function Home() {

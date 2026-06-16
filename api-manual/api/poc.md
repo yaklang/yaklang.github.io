@@ -138,7 +138,7 @@
 | [poc.postParams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
 | [poc.postparams](#postparams) |postParams 是一个请求选项参数，用于指定请求的 body 为 post 数据，需要传入一个任意类型的参数，会自动转换为 post 数据  输入是 map 类型，会自动转换为 post 数据，同时会自动设置 Content-Type 为 application/x-www-form-urle...|
 | [poc.proxy](#proxy) |proxy 是一个请求选项参数，用于指定请求使用的代理，可以指定多个代理，默认会使用系统代理  |
-| [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;} 转换为 a=b  如果输入的是其他，会把字符串结果...|
+| [poc.query](#query) |query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数  如果输入的是 map 类型，则会自动转换为 query 参数，例如：&#123;&amp;#34;a&amp;#34;: &amp;#34;b&amp;#34;&#125; 转换为 a=b  如果输入的是其他，会把字符串结果...|
 | [poc.randomChunked](#randomchunked) |randomChunked 是一个请求选项参数，用于启用随机分块传输，默认不启用  |
 | [poc.randomChunkedDelay](#randomchunkeddelay) |randomChunkedDelay是一个请求选项参数，用于设置随机分块传输的分块延迟范围，默认最小延迟为50毫秒，最大延迟为100毫秒  |
 | [poc.randomChunkedLength](#randomchunkedlength) |randomChunkedLength 是一个请求选项参数，用于设置随机分块传输的分块长度范围，默认最小长度为10，最大长度为25  |
@@ -3927,7 +3927,7 @@ rsp, req, err = poc.HTTP(x`POST /post HTTP/1.1
 Content-Type: application/json
 Host: pie.dev
 
-{"key": "{{params(a)}}"}`, poc.params({"a":"bbb"})) // 实际上发送的POST参数为{"key": "bbb"}
+&#123;"key": "&#123;&#123;params(a)&#125;&#125;"&#125;`, poc.params({"a":"bbb"})) // 实际上发送的POST参数为{"key": "bbb"}
 
 
 #### 定义
@@ -4112,7 +4112,7 @@ poc.HTTP(poc.BasicRequest(), poc.proxy("http://127.0.0.1:7890")) // 向 example.
 #### 详细描述
 query 是一个请求选项参数，用于指定请求的 query 参数，需要传入一个任意类型的参数，会自动转换为 query 参数
 
-如果输入的是 map 类型，则会自动转换为 query 参数，例如：{&#34;a&#34;: &#34;b&#34;} 转换为 a=b
+如果输入的是 map 类型，则会自动转换为 query 参数，例如：&#123;&#34;a&#34;: &#34;b&#34;&#125; 转换为 a=b
 
 如果输入的是其他，会把字符串结果直接作为 query 设置
 

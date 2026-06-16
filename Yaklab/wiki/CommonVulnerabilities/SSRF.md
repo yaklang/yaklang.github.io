@@ -14,7 +14,7 @@ sidebar_position: 12
 ![](/img/products/yakit/ssrf-1.png)
 
 在测试网站URL后拼接生成的域名地址
-例如：https://xxx.xxx/download.php?filename=http://{yakit 生成的域名}
+例如：https://xxx.xxx/download.php?filename=http://&#123;yakit 生成的域名&#125;
 访问发现yakit中DNSlog收到记录
 
 ![](/img/products/yakit/ssrf-2.png)

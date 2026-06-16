@@ -83,9 +83,9 @@ sidebar_position: 1
 
 <video
   src="/img/yaklab/shiro/01unsafe-shrio-cbc.mp4"
-  loop={true}
-  playsInline={true}
-  controls={true}
-  autoPlay={true}
-  style={{ width: 890 }}
+  loop=&#123;true&#125;
+  playsInline=&#123;true&#125;
+  controls=&#123;true&#125;
+  autoPlay=&#123;true&#125;
+  style=&#123;&#123; width: 890 &#125;&#125;
 />

@@ -19,7 +19,7 @@ Go0p Yak Project 2024-04-03 17:30
 - **--templates, -t**  
 指定插件模板文件或目录（使用逗号分隔）。这些模板定义了扫描的具体方式和检查点，允许用户定制化扫描任务，例如：-t './templates/1.yaml,./templates/vulns/'  
 - **--target, --host**
-指定目标主机，可以是单个主机或多个主机（使用逗号分隔）。支持域名和IP地址，甚至是IP段，例如：--target example.com,http://www2.example.com,192.168.1.2/24  
+指定目标主机，可以是单个主机或多个主机（使用逗号分隔）。支持域名和IP地址，甚至是IP段，例如：`--target example.com,http://www2.example.com,192.168.1.2/24`  
 - **--target-file, -f**  
 通过文件指定目标主机，文件中每一行包含一个主机，适用于批量扫描
 - **--raw-packet-file, --raw** 

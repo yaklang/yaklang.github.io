@@ -11,7 +11,7 @@ import { useThemeConfig } from "@docusaurus/theme-common";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import isInternalUrl from "@docusaurus/isInternalUrl";
 import ThemedImage from "@theme/ThemedImage";
-import IconExternalLink from "@theme/IconExternalLink";
+import IconExternalLink from "@theme/Icon/ExternalLink";
 import { useTranslation } from "react-i18next";
 
 import { Popover } from "antd";

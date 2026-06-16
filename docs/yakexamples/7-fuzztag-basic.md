@@ -79,46 +79,46 @@ firstResult = fuzz.Strings(raw)[0]
 
 :::
 
-## 单体可用 Fuzztag 速览 {#tagtable}
+## 单体可用 Fuzztag 速览 &#123;#tagtable&#125;
 
 |标签名|标签别名|标签描述|
 |:-------|:-------|:-------|
 |`char`|`c, ch`|生成一个字符，例如：`{{char(a-z)}}`, 结果为 [a b c ... x y z]|
-|`repeat`|  |重复产生空字符串，例如：<code>{{repeat(3)}}</code>，结果为：["", "", ""] 一般用来重复发包，或重复生成数据|
+|`repeat`|  |重复产生空字符串，例如：<code>&#123;&#123;repeat(3)&#125;&#125;</code>，结果为：["", "", ""] 一般用来重复发包，或重复生成数据|
 |`payload`|`x`|从数据库加载 Payload, `{{payload(pass_top25)}}`|
-|`array`|`list`|设置一个数组，使用 \| 分割，例如：<code>{{array(1 \| 2 \| 3)}}</code>，结果为：[1,2,3]，|
+|`array`|`list`|设置一个数组，使用 \| 分割，例如：<code>&#123;&#123;array(1 \| 2 \| 3)&#125;&#125;</code>，结果为：[1,2,3]，|
 |`ico`|  |生成一个 ico 文件头，例如 `{{ico}}`|
 |`tiff`|  |生成一个 tiff 文件头，例如 `{{tiff}}`|
-|`bmp`|  |生成一个 bmp 文件头，例如 {{bmp}}|
+|`bmp`|  |生成一个 bmp 文件头，例如 &#123;&#123;bmp&#125;&#125;|
 |`gif`|  |生成 gif 文件头|
 |`png`|  |生成 PNG 文件头|
 |`jpg`|`jpeg`|生成 jpeg / jpg 文件头|
 |`punctuation`|`punc`|生成所有标点符号|
 |`rangechar`|`range:char, range`|按顺序生成一个 range 字符集，例如 `{{rangechar(20,7e)}}` 生成 0x20 - 0x7e 的字符集|
 |`network`|`host, hosts, cidr, ip, net`|生成一个网络地址，例如 `{{network(192.168.1.1/24)}}` 对应 cidr 192.168.1.1/24 所有地址，可以逗号分隔，例如 `{{network(8.8.8.8,192.168.1.1/25,example.com)}}`|
-|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 {{int(1,2,3,4,5)}} 生成 1,2,3,4,5 中的一个整数，也可以使用 {{int(1-5)}} 生成 1-5 的整数，也可以使用 <code>{{int(1-5 \| 4)}}</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
-|`randint`|`ri, rand:int, randi`|随机生成整数，定义为 {{randint(10)}} 生成0-10中任意一个随机数，{{randint(1,50)}} 生成 1-50 任意一个随机数，{{randint(1,50,10)}} 生成 1-50 任意一个随机数，重复 10 次|
-|`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 {{randstr(10)}} 生成长度为 10 的随机字符串，{{randstr(1,30)}} 生成长度为 1-30 为随机字符串，{{randstr(1,30,10)}} 生成 10 个随机字符串，长度为 1-30|
-|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code> \| </code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>{{file:line(/tmp/test.txt \| /tmp/1.txt)}}</code>|
-|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>{{file:dir(/tmp/test \| /tmp/1)}}</code>|
-|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>{{file(/tmp/1.txt \| /tmp/test.txt)}}</code>|
+|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 &#123;&#123;int(1,2,3,4,5)&#125;&#125; 生成 1,2,3,4,5 中的一个整数，也可以使用 &#123;&#123;int(1-5)&#125;&#125; 生成 1-5 的整数，也可以使用 <code>&#123;&#123;int(1-5 \| 4)&#125;&#125;</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
+|`randint`|`ri, rand:int, randi`|随机生成整数，定义为 &#123;&#123;randint(10)&#125;&#125; 生成0-10中任意一个随机数，&#123;&#123;randint(1,50)&#125;&#125; 生成 1-50 任意一个随机数，&#123;&#123;randint(1,50,10)&#125;&#125; 生成 1-50 任意一个随机数，重复 10 次|
+|`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 &#123;&#123;randstr(10)&#125;&#125; 生成长度为 10 的随机字符串，&#123;&#123;randstr(1,30)&#125;&#125; 生成长度为 1-30 为随机字符串，&#123;&#123;randstr(1,30,10)&#125;&#125; 生成 10 个随机字符串，长度为 1-30|
+|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code> \| </code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>&#123;&#123;file:line(/tmp/test.txt \| /tmp/1.txt)&#125;&#125;</code>|
+|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>&#123;&#123;file:dir(/tmp/test \| /tmp/1)&#125;&#125;</code>|
+|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>&#123;&#123;file(/tmp/1.txt \| /tmp/test.txt)&#125;&#125;</code>|
 |`codec`|  |调用 Yakit Codec 插件|
 |`codec:line`|  |调用 Yakit Codec 插件，把结果解析成行|
 |`unquote`|  |把内容进行 strconv.Unquote 转化|
 |`quote`|  |strconv.Quote 转化|
-|`lower`|  |把传入的内容都设置成小写 {{lower(Abc)}} => abc|
-|`upper`|  |把传入的内容变成大写 {{upper(abc)}} => ABC|
-|`base64enc`|`base64encode, base64e, base64, b64`|进行 base64 编码，<code>{{base64enc(abc)}}</code> => YWJj|
-|`base64dec`|`base64decode, base64d, b64d`|进行 base64 解码，<code>{{base64dec(YWJj)}}</code> => abc|
-|`md5`|  |进行 md5 编码，<code>{{md5(abc)}}</code> => 900150983cd24fb0d6963f7d28e17f72|
-|`hexenc`|`hex, hexencode`|HEX 编码，<code>{{hexenc(abc)}}</code> => 616263|
-|`hexdec`|`hexd, hexdec, hexdecode`|HEX 解码，<code>{{hexdec(616263)}}</code> => abc|
-|`sha1`|  |进行 sha1 编码，<code>{{sha1(abc)}}</code> => a9993e364706816aba3e25717850c26c9cd0d89d|
-|`sha256`|  |进行 sha256 编码，<code>{{sha256(abc)}}</code> => ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
+|`lower`|  |把传入的内容都设置成小写 &#123;&#123;lower(Abc)&#125;&#125; => abc|
+|`upper`|  |把传入的内容变成大写 &#123;&#123;upper(abc)&#125;&#125; => ABC|
+|`base64enc`|`base64encode, base64e, base64, b64`|进行 base64 编码，<code>&#123;&#123;base64enc(abc)&#125;&#125;</code> => YWJj|
+|`base64dec`|`base64decode, base64d, b64d`|进行 base64 解码，<code>&#123;&#123;base64dec(YWJj)&#125;&#125;</code> => abc|
+|`md5`|  |进行 md5 编码，<code>&#123;&#123;md5(abc)&#125;&#125;</code> => 900150983cd24fb0d6963f7d28e17f72|
+|`hexenc`|`hex, hexencode`|HEX 编码，<code>&#123;&#123;hexenc(abc)&#125;&#125;</code> => 616263|
+|`hexdec`|`hexd, hexdec, hexdecode`|HEX 解码，<code>&#123;&#123;hexdec(616263)&#125;&#125;</code> => abc|
+|`sha1`|  |进行 sha1 编码，<code>&#123;&#123;sha1(abc)&#125;&#125;</code> => a9993e364706816aba3e25717850c26c9cd0d89d|
+|`sha256`|  |进行 sha256 编码，<code>&#123;&#123;sha256(abc)&#125;&#125;</code> => ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
 |`sha224`|  ||
-|`sha512`|  |进行 sha512 编码，<code>{{sha512(abc)}}</code> => ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f|
+|`sha512`|  |进行 sha512 编码，<code>&#123;&#123;sha512(abc)&#125;&#125;</code> => ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f|
 |`sha384`|  ||
-|`sm3`|  |计算 sm3 哈希值，<code>{{sm3(abc)}}</code> => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a3f0b8ddb27d8a7eb3|
+|`sm3`|  |计算 sm3 哈希值，<code>&#123;&#123;sm3(abc)&#125;&#125;</code> => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a3f0b8ddb27d8a7eb3|
 |`hextobase64`|`h2b64, hex2base64`|把 HEX 字符串转换为 base64 编码，`{{hextobase64(616263)}}` => YWJj|
 |`base64tohex`|`b642h, base642hex`|把 Base64 字符串转换为 HEX 编码，`{{base64tohex(YWJj)}}` => 616263|
 |`urlescape`|`urlesc`|url 编码(只编码特殊字符)，`{{urlescape(abc=)}}` => abc%3d|
@@ -129,14 +129,14 @@ firstResult = fuzz.Strings(raw)[0]
 |`htmlenc`|`htmlencode, html, htmle, htmlescape`|HTML 实体编码，`{{htmlenc(abc)}}` => &#97;&#98;&#99;|
 |`htmlhexenc`|`htmlhex, htmlhexencode, htmlhexescape`|HTML 十六进制实体编码，`{{htmlhexenc(abc)}}` => &#x61;&#x62;&#x63;|
 |`htmldec`|`htmldecode, htmlunescape`|HTML 解码，`{{htmldec(&#97;&#98;&#99;)}}` => abc|
-|`repeatstr`|`repeat:str`|重复字符串，<code>{{repeatstr(abc \| 3)}}</code> => abcabcabc|
-|`randomupper`|`random:upper, random:lower`|随机大小写，{{randomupper(abc)}} => aBc|
+|`repeatstr`|`repeat:str`|重复字符串，<code>&#123;&#123;repeatstr(abc \| 3)&#125;&#125;</code> => abcabcabc|
+|`randomupper`|`random:upper, random:lower`|随机大小写，&#123;&#123;randomupper(abc)&#125;&#125; => aBc|
 
-### 【基础标签】``{{repeatstr(str|num)}} ``重复一个字符串
+### 【基础标签】``&#123;&#123;repeatstr(str|num)&#125;&#125; ``重复一个字符串
 
 `repeatstr`的意思是，指定一个字符或者字符串，通过指定`num`的大小来控制字符重复的次数：
 
-1.`{{repeatstr(str|num)}}`例如：{{repeatstr(abc|3)}}意思是，abc字符串重复三次，结果为abcabcabc
+1.`{{repeatstr(str|num)}}`例如：&#123;&#123;repeatstr(abc|3)&#125;&#125;意思是，abc字符串重复三次，结果为abcabcabc
 
 #### 使用案例
 
@@ -158,7 +158,7 @@ dump(res)
 }
 ```
 
-### 【基础标签】``{{payload(str)}}`` 从数据库中加载paylaod
+### 【基础标签】``&#123;&#123;payload(str)&#125;&#125;`` 从数据库中加载paylaod
 
 yakit中内置payload管理功能，我们不仅可以使用yakit中内置的payload，还可以通过自己添加payload去生成自己专有的payload。
 
@@ -232,9 +232,9 @@ dump(res)
 }
 ```
 
-### 【基础标签】``{{array(str|str)}}``设置一个数组
+### 【基础标签】``&#123;&#123;array(str|str)&#125;&#125;``设置一个数组
 
-`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符号对数组进行分割。例如：{{array(1|2|3)}}，输出结果为：[1,2,3]。
+`array`的意思是创建一个数组，当我们使用`array`创建一个数组之后，我们可以用`|`符号对数组进行分割。例如：&#123;&#123;array(1|2|3)&#125;&#125;，输出结果为：[1,2,3]。
 
 #### 使用案例
 
@@ -258,11 +258,11 @@ dump(res)
 }
 ```
 
-### 【文件头标签】`{{ico}}` `{{tiff}}` ``{{gif}}`` ``{{png}}`` ``{{jpeg}}``
+### 【文件头标签】`{{ico}}` `{{tiff}}` ``&#123;&#123;gif&#125;&#125;`` ``&#123;&#123;png&#125;&#125;`` ``&#123;&#123;jpeg&#125;&#125;``
 
 yak内置了很强大的功能，我们可以通过指定文件头标签直接去生成我们需要的文件头来使用。
 
-我们可以使用`{{ico}}`来直接生成一个ico的文件头；可以使用``{{tiff}}``来生成gif文件头；使用``{{gif}}``来生成gif文件头；使用``{{png}}``来生成PNG文件头；使用``{{jpeg}}``来 生成jpeg/jpg文件头。
+我们可以使用`{{ico}}`来直接生成一个ico的文件头；可以使用``&#123;&#123;tiff&#125;&#125;``来生成gif文件头；使用``&#123;&#123;gif&#125;&#125;``来生成gif文件头；使用``&#123;&#123;png&#125;&#125;``来生成PNG文件头；使用``&#123;&#123;jpeg&#125;&#125;``来 生成jpeg/jpg文件头。
 
 #### 使用案例
 
@@ -648,7 +648,7 @@ dump(res)
 
 ##### 案例三：生成随机数爆破
 
-如果我们想用yaki进行爆破四位或者六位数的验证码，也是很容易可以实现的。``{{int(1-5|4)}}`` 前面``1-5``生成1-5的整数，后边的4则是规定每个数字必须为四位数。这里演示一下四位验证码的生成方式。
+如果我们想用yaki进行爆破四位或者六位数的验证码，也是很容易可以实现的。``&#123;&#123;int(1-5|4)&#125;&#125;`` 前面``1-5``生成1-5的整数，后边的4则是规定每个数字必须为四位数。这里演示一下四位验证码的生成方式。
 
 ```go
 origin := "{{int(1-20|4)}}"
@@ -836,7 +836,7 @@ dump(res)
 
 ### 【基础标签】`{{file:line(dir)}}` 解析文件内容以数组输出
 
-``{{file:line(dir)}}``可以从本地读取我们的文件，并以数组的形式返回。如果我们需要读取多个文件，可以用`|`来进行分割。
+``&#123;&#123;file:line(dir)&#125;&#125;``可以从本地读取我们的文件，并以数组的形式返回。如果我们需要读取多个文件，可以用`|`来进行分割。
 
 #### 使用案例
 
@@ -870,9 +870,9 @@ dump(res)
 }
 ```
 
-### 【基础标签】``{{file()}}``读取文件内容
+### 【基础标签】``&#123;&#123;file()&#125;&#125;``读取文件内容
 
-``{{file()}}``使用方式和``{{file:line()}}``基本相同。可以读取文件内容，并且可以支持多个文件，用``|``分割。
+``&#123;&#123;file()&#125;&#125;``使用方式和``&#123;&#123;file:line()&#125;&#125;``基本相同。可以读取文件内容，并且可以支持多个文件，用``|``分割。
 
 #### 使用案例
 
@@ -1039,7 +1039,7 @@ line 1: call func codec.EscapeQueryUrl(v1) failed
 ---------------------
 ```
 
-### 【插件标签】{{yak}}{{params}}{{codec}}
+### 【插件标签】&#123;&#123;yak&#125;&#125;&#123;&#123;params&#125;&#125;&#123;&#123;codec&#125;&#125;
 
 这几个标签会调用用户定义的函数
 

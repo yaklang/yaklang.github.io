@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import "antd/dist/antd.min.css";
 import { CooperativePartnerPage } from "../components/CooperativePartner";
 
 export default function CooperativePartner() {

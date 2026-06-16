@@ -56,7 +56,7 @@ sidebar_position: 1
 
 ### 攻击示例：
 
-1. 构造恶意 JSON 请求：{"abc": 123, "ref": "`http://127.0.0.1:8787/ssrf/flag`"}
+1. 构造恶意 JSON 请求：&#123;"abc": 123, "ref": "`http://127.0.0.1:8787/ssrf/flag`"&#125;
 2. 将该 JSON 请求作为请求体，发送到目标服务器的 /json-in-get 路径。
 3. 服务器解析 JSON 请求体，并尝试访问 "ref" 字段中指定的恶意 URL（`http://127.0.0.1:8787/ssrf/flag`）
 4. 如果服务器没有适当的防御措施，可能会成功发起请求，攻击者可以获取响应，从而获得攻击目标内部的信息。
@@ -75,9 +75,9 @@ sidebar_position: 1
 
 <video
   src="/img/yaklab/ssrf/01unsafe-json-in-get.mp4"
-  loop={true}
-  playsInline={true}
-  controls={true}
-  autoPlay={true}
-  style={{ width: 890 }}
+  loop=&#123;true&#125;
+  playsInline=&#123;true&#125;
+  controls=&#123;true&#125;
+  autoPlay=&#123;true&#125;
+  style=&#123;&#123; width: 890 &#125;&#125;
 />

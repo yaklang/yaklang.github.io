@@ -178,9 +178,9 @@ func GetXpathFromNode(node *xmlquery.Node) string {
       </book>
     </bookstore>`)~
     
-    for p in freq.GetCommonParams() {
+    for p in freq.GetCommonParams() &#123;
       p.Fuzz("123").Show()
-    }
+    &#125;
 
 ## **通过FuzzPostXMLParams使用**  
    

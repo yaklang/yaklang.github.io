@@ -101,9 +101,9 @@ use WithFlowHandler to recv and handle it
 
 Example:
 
-	openapi.Generate(fileName, openapi.flowHandler(flow => {
+	openapi.Generate(fileName, openapi.flowHandler(flow => &#123;
 		dump(flow.Url)
-	}))
+	&#125;))
 
 
 #### 定义

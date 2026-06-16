@@ -34,9 +34,9 @@
 默认的验证码数据接口匹配使用ddddocr的ocr_api_server项目：  
 https://github.com/sml2h3/ocr_api_server  
 这里默认操作类型ocr，数据类型b64，返回类型json，所以使用该项目时默认接口为：  
-http://{host}:{port}/ocr/b64/json
+http://&#123;host&#125;:&#123;port&#125;/ocr/b64/json
 或者也可以使用别的验证码识别工具，只需要将response的数据格式设置为ddddocr的格式：  
-{"status": 1, "result": "xxxx", "msg": "ok"}  
+&#123;"status": 1, "result": "xxxx", "msg": "ok"&#125;  
 其中result里为验证码识别结果，msg里为登录相关信息。  
   
   

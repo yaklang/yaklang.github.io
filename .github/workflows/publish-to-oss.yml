@@ -53,43 +53,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # retry-on-error: true
-      
-      - name: Use Node.js 
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.20.0"
 
-      # 缓存 node_modules
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        id: node-cache
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-
-            ${{ runner.os }}-node-
+          node-version: "20"
+          cache: "yarn"
 
-      # 打包
       - name: Install Dependencies
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
-      - name: Save Node Modules Cache
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}-${{ hashFiles('yarn.lock') }}
-      
       - name: Build
         run: yarn run build
 

@@ -132,7 +132,7 @@ ToValidUTF8
 1. [Split之后把元素两边的空白移除 `fn str.SplitAndTrim(var_1: string, var_2: string): []string`](#SplitAndTrim)
 1. [把 Json 字符串转换成 `map[string]string` `fn str.JsonToMap(var_1: string): map[string]string`](#JsonToMap)
 1. [把 Json 字符串转换成 `[]map[string]string` `fn str.JsonToMapList(var_1: string): []map[string]string`](#JsonToMapList)
-1. [使用 io.Reader 读取 Json 数据流 `fn str.JsonStreamToMapList(var_1: io.Reader): []map[string]interface `{}](#JsonStreamToMapList)
+1. [使用 io.Reader 读取 Json 数据流 `fn str.JsonStreamToMapList(var_1: io.Reader): []map[string]interface `&#123;&#125;](#JsonStreamToMapList)
 1. [把字符串数组作为 Path 进行拼接`fn str.PathJoin(vars: ...string): string`](#PathJoin)
 1. [正则匹配 `fn str.RegexpMatch(var_1: interface {}, var_2: string): bool`](#RegexpMatch)
 1. [把一个对象转变成 Json 字符串，做好锁进展示 `fn str.ToJsonIndentStr(var_1: interface {}): string`](#ToJsonIndentStr)

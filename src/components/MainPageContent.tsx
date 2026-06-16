@@ -1,7 +1,7 @@
 // @ts-ignore
 import React, {useEffect} from "react";
 import {Button, Card, Col, Divider, Image, Layout, Row, Space, Tabs, Tag, Typography} from "antd";
-import ReactPlayer from "react-player";
+import {VideoPlayer} from "./media/VideoPlayer";
 import {GithubOutlined} from "@ant-design/icons";
 
 const {Text, Paragraph} = Typography;
@@ -20,19 +20,16 @@ export interface ViewPlayerProp {
 }
 
 export const ViewPlayer: React.FC<ViewPlayerProp> = (props) => {
-    return <>
-        <ReactPlayer
-            url={[
-                props.url,
-            ]}
+    return <div style={{maxWidth: 1000, width: "100%", margin: "0 auto"}}>
+        <VideoPlayer
+            src={props.url}
             loop={true}
-            playsinline={true}
             controls={true}
-            playing={true}
-            width={"75%"}
-            height={"75%"}
+            autoPlay={true}
+            muted={true}
+            aspect="16/9"
         />
-    </>
+    </div>
 };
 
 const profiles: Profile[] = [
@@ -233,17 +230,16 @@ export const MainPageContent: React.FC<MainPageContentProp> = (props) => {
                 mark={true}>CODE
             </Text></Typography.Title>
             <br/>
-            <ReactPlayer
-                url={[
-                    "https://oss-qn.yaklang.com/yak_quick_view_1.5.mp4"
-                ]}
-                loop={true}
-                playsinline={true}
-                controls={true}
-                playing={true}
-                width={"75%"}
-                height={"75%"}
-            />
+            <div style={{maxWidth: 1000, width: "100%", margin: "0 auto"}}>
+                <VideoPlayer
+                    src={"https://oss-qn.yaklang.com/yak_quick_view_1.5.mp4"}
+                    loop={true}
+                    controls={true}
+                    autoPlay={true}
+                    muted={true}
+                    aspect="16/9"
+                />
+            </div>
             {/*<video*/}
             {/*    id={"video-for-yaklang"}*/}
             {/*    src="https://oss-qn.yaklang.com/yak_quick_view.mov"*/}

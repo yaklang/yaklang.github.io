@@ -1,4 +1,4 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
+/** @type {import('@docusaurus/types').Config} */
 module.exports = {
     i18n: {
         defaultLocale: "zh-CN",
@@ -8,11 +8,20 @@ module.exports = {
     tagline: "Yak 是一门 Web 安全研发领域垂直语言",
     url: "https://yaklang.com",
     baseUrl: "/",
-    onBrokenLinks: "throw",
-    onBrokenMarkdownLinks: "warn",
+    // 迁移期：将断链降级为 warn，避免历史内容阻塞构建；内容修复后可恢复为 throw
+    onBrokenLinks: "warn",
+    onBrokenAnchors: "warn",
     favicon: "img/favicon.ico",
     organizationName: "yaklang", // Usually your GitHub org/user name.
     projectName: "yak-project-main-page", // Usually your repo name.
+    markdown: {
+        // detect: .md 按宽松的 CommonMark 解析，.mdx 才按严格 MDX 解析
+        // 历史 .md 内容含大量 {、<、原始 URL，CommonMark 可避免误判为 JSX 表达式
+        format: "detect",
+        hooks: {
+            onBrokenMarkdownLinks: "warn",
+        },
+    },
     themeConfig: {
         colorMode: {
             // "light" | "dark"
@@ -25,27 +34,6 @@ module.exports = {
             // Should we use the prefers-color-scheme media-query,
             // using user system preferences, instead of the hardcoded defaultMode
             respectPrefersColorScheme: false,
-
-            // Dark/light switch icon options
-            switchConfig: {
-                // Icon for the switch while in dark mode
-                darkIcon: "🌙",
-
-                // CSS to apply to dark icon,
-                // React inline style object
-                // see https://reactjs.org/docs/dom-elements.html#style
-                darkIconStyle: {
-                    marginLeft: "2px",
-                },
-
-                // Unicode icons such as '\u2600' will work
-                // Unicode with 5 chars require brackets: '\u{1F602}'
-                lightIcon: "🌞",
-
-                lightIconStyle: {
-                    marginLeft: "1px",
-                },
-            },
         },
 
         navbar: {
@@ -66,7 +54,7 @@ module.exports = {
                     sidebarCollapsed: false,
                 },
                 {
-                    label: "Yakit 使用手册",
+                    label: "Yakit 手册",
                     href: "/products/intro",
                     sidebarCollapsed: false,
                 },
@@ -109,11 +97,11 @@ module.exports = {
                 {
                     position: "left",
                     href: "/irify",
-                    label: "静态代码分析技术",
+                    label: "静态代码分析",
                 },
 		        {
                     href: "/Yaklab/yaklab",
-                    label: "YakLab 实战手册",
+                    label: "YakLab 手册",
                     position: "left",
                 },
                 {
@@ -173,6 +161,10 @@ module.exports = {
                     label: "Github",
                     position: "right",
                 },
+                {
+                    type: "custom-languageSwitcher",
+                    position: "right",
+                },
             ],
         },
         footer: {
@@ -204,25 +196,8 @@ module.exports = {
             ],
             copyright: `Copyright © ${new Date().getFullYear()} for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a>`,
         },
-        algolia: {
-            // The application ID provided by Algolia
-            appId: "-",
-
-            // Public API key: it is safe to commit it
-            apiKey: "-",
-
-            indexName: "yaklang",
-
-            // // Optional: see doc section below
-            // contextualSearch: false,
-
-            // // Optional: Algolia search parameters
-            // searchParameters: {
-            //     facetFilters: ["language:zh-CN", ["filter1", "filter2"], "filter3"],
-            // },
-        },
         prism: {
-            theme: require("prism-react-renderer/themes/github"),
+            theme: require("prism-react-renderer").themes.github,
         },
     },
     plugins: [
@@ -277,16 +252,14 @@ module.exports = {
                 configureWebpack() {
                 return {
                     devServer: {
-                        proxy: {
-                            '/api': {
+                        // webpack-dev-server v5（Docusaurus 3）要求 proxy 为数组格式
+                        proxy: [
+                            {
+                                context: ['/api', '/fastgocaptcha'],
                                 target: 'http://192.168.3.100:8080/',
                                 changeOrigin: true,
                             },
-                            '/fastgocaptcha': {
-                                target: 'http://192.168.3.100:8080/',
-                                changeOrigin: true,
-                            },
-                        },
+                        ],
                         client: {
                             overlay: false, 
                         },

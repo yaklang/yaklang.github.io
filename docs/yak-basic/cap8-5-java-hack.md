@@ -44,8 +44,8 @@ Java的序列化机制采用一种标准格式编码对象，包括`Magic Header
 | TC_LONGSTRING     | 0x7c ('          | ')                           |
 | TC_ENUM           | 0x7e ('~')       | 表示一个枚举类型             |
 | TC_CLASSDESC      | 0x72 ('r')       | 类描述标记                   |
-| TC_PROXYCLASSDESC | 0x7d ('}')       | 代理类描述标记               |
-| TC_EXCEPTION      | 0x7b ('{')       | 在序列化过程中发生的异常     |
+| TC_PROXYCLASSDESC | 0x7d ('&#125;')       | 代理类描述标记               |
+| TC_EXCEPTION      | 0x7b ('&#123;')       | 在序列化过程中发生的异常     |
 | TC_RESET          | 0x79 ('y')       | 重置序列化流的回溯状态       |
 | TC_REFERENCE      | 0x71 ('q')       | 表示对先前已序列化对象的引用 |
 | TC_NULL           | 0x70 ('p')       | 表示一个空引用               |

@@ -1,25 +1,101 @@
 .navbar {
   width: 100%;
-  height: REM(63);
+  // 使用固定 px 高度，避免首页根字号缩放时导航栏过小不可点
+  height: 60px;
   background-color: rgba(255, 255, 255, 0);
   position: fixed;
   top: 0;
   left: 0;
-  padding: REM(8) REM(32);
+  padding: 8px 32px;
   right: 0;
   margin: 0 auto;
   max-width: $max-width;
-  .dropdown > .navbar__link:after {
-    display: none;
+
+  // 禁止整行换行，避免小屏时导航项折行错位
+  .navbar__inner {
+    flex-wrap: nowrap;
   }
   .navbar__items {
     font-size: 14px;
+    flex-wrap: nowrap;
+  }
+  // 每个导航项文字不换行（修复"API 手/册"被拆行的问题）
+  .navbar__item,
+  .navbar__link {
+    white-space: nowrap;
+  }
+  // 导航项间距（宽屏宽松，窄屏逐级收紧，保证 996px 以上单行不折行）
+  .navbar__items > .navbar__item,
+  .navbar__items > .navbar__link,
+  .navbar__items .dropdown {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .navbar__link {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dropdown > .navbar__link:after {
+    display: none;
   }
   .navbar__logo {
-    width: REM(133);
-    height: REM(32);
+    width: 133px;
+    height: 32px;
+    flex-shrink: 0;
   }
   .diy-link-item:hover {
     color: var(--base-theme-color);
+  }
+
+  // 中等宽度（笔记本/小桌面）收紧间距与 logo
+  @media (max-width: 1200px) {
+    padding: 8px 20px;
+    .navbar__items > .navbar__item,
+    .navbar__items > .navbar__link,
+    .navbar__items .dropdown {
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+    .navbar__link {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+    .navbar__logo {
+      width: 118px;
+      height: 28px;
+    }
+  }
+
+  // 接近汉堡阈值（997~1040）的最窄桌面区间，进一步压缩间距
+  @media (max-width: 1040px) {
+    padding: 8px 14px;
+    .navbar__items {
+      font-size: 13px;
+    }
+    .navbar__items > .navbar__item,
+    .navbar__items > .navbar__link,
+    .navbar__items .dropdown {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .navbar__link {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .navbar__logo {
+      width: 104px;
+      height: 25px;
+    }
+  }
+
+  // 移动端：交给 Docusaurus 内置抽屉菜单（汉堡），保持白底可读
+  @media (max-width: 996px) {
+    height: 56px;
+    padding: 8px 16px;
+    background-color: #ffffff !important;
+    .navbar__items {
+      font-size: 14px;
+    }
   }
 }

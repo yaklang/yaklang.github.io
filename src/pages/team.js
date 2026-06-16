@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import "antd/dist/antd.min.css";
 import { Team } from "../components/Team";
 
 export default function Home() {

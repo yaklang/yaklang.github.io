@@ -48,24 +48,24 @@ yak-yso中内置了两种模式的反序列化链(漏洞点为反序列化的漏
     import java.io.ObjectInputStream;
     
     @WebServlet(name = "HelloServlet", value = "/api/HelloServlet")
-    public class HelloServlet extends HttpServlet {
+    public class HelloServlet extends HttpServlet &#123;
         @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
             ObjectInputStream objectInputStream = new ObjectInputStream(request.getInputStream());
-            try {
+            try &#123;
                 objectInputStream.readObject();
-            } catch (ClassNotFoundException e) {
+            &#125; catch (ClassNotFoundException e) &#123;
                 throw new RuntimeException(e);
-            } finally {
+            &#125; finally &#123;
                 objectInputStream.close();
-            }
-        }
+            &#125;
+        &#125;
     
         @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
             response.getWriter().write("hello");
-        }
-    }
+        &#125;
+    &#125;
 **Yak-yso-attack**  
 **具体使用**：  
 这里就以urldns为例，使用yak-yso生成cc2-dnslog，我们可以配合yak中内置的dnslog来进行测试。我们发送数据包就可以成功进行复现。如图  

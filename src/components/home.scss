@@ -283,7 +283,7 @@ $min-width: REM(1232);
     .sticky-content {
       position: sticky;
       height: REM(696);
-      top: REM(117);
+      top: REM(88);
       max-width: REM(2048);
       margin: 0 auto;
     }
@@ -310,8 +310,8 @@ $min-width: REM(1232);
       }
     }
     &-kinds {
-      margin-top: REM(16);
-      margin-bottom: REM(88);
+      margin-top: REM(12);
+      margin-bottom: REM(32);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -1024,6 +1024,52 @@ $min-width: REM(1232);
     .kind-opt-body-title {
       margin-left: -3%;
     }
+  }
+}
+
+// 短视口适配：DSL 演出区为 sticky 固定布局，标题/标签占用过多纵向空间会截断下方画布。
+// 按视口高度逐级压缩：先收紧间距与标题，空间不足时隐藏大标题并等比缩放整个画布
+// （transform 缩放不会破坏画布内部的绝对定位，从顶部居中收缩，避免底部被截断）。
+@media screen and (max-height: 880px) {
+  .home-container .introduce-body .sticky-content {
+    // 固定 px，保证位于固定导航栏(60px)下方
+    top: 76px;
+  }
+  .home-container .introduce-body-header {
+    height: auto;
+    font-size: REM(32);
+    line-height: 1.25;
+  }
+  .home-container .introduce-body-kinds {
+    margin-top: REM(8);
+    margin-bottom: REM(16);
+  }
+}
+
+@media screen and (max-height: 760px) {
+  .home-container .introduce-body .sticky-content {
+    top: 70px;
+  }
+  .home-container .introduce-body-header {
+    display: none;
+  }
+  .home-container .introduce-body-kinds {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  .home-container .introduce-body-imgs {
+    transform: scale(0.86);
+    transform-origin: top center;
+  }
+}
+
+@media screen and (max-height: 620px) {
+  .home-container .introduce-body .sticky-content {
+    top: 66px;
+  }
+  .home-container .introduce-body-imgs {
+    transform: scale(0.74);
+    transform-origin: top center;
   }
 }
 

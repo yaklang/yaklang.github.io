@@ -137,7 +137,7 @@ signRequest = result => {
 }
 ```  
   
-这两个函数在热加载中可以通过 {{yak(signRequest|...)}}  
+这两个函数在热加载中可以通过 &#123;&#123;yak(signRequest|...)&#125;&#125;  
 来调用，配合我们编写的标签，直接实现发包的时候签名，达到爆破的目的。  
   
 ![](/articles/wechat2md-a8cb4b69a9328f9d7acfd38d717e28f8.png)  

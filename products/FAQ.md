@@ -80,7 +80,7 @@ sidebar_position: 28
    - http:// user:pass@ip:port 
 17. int复数形式标签
 
-   {{list(|-)}}{{int(1-10)}} 
+   &#123;&#123;list(|-)&#125;&#125;&#123;&#123;int(1-10)&#125;&#125; 
 
 18. yakit打开mitm的时候cpu跟要炸了一样，内存能跑6个G，磁盘能跑800mb/s，重启引擎也无法解决
 
@@ -88,7 +88,7 @@ sidebar_position: 28
 
 19. 0000-9999写法
 
-   {{int(0-9999|4)}}，参考 https://www.yaklang.com/docs/yakexamples/fuzztag
+   &#123;&#123;int(0-9999|4)&#125;&#125;，参考 https://www.yaklang.com/docs/yakexamples/fuzztag
 
 20. database is locked 
 
@@ -100,7 +100,7 @@ sidebar_position: 28
 
 22. 401爆破语法
 
-   {{base64({{x(user_top10)}}:{{x(pass_top25)}})}} 
+   &#123;&#123;base64(&#123;&#123;x(user_top10)&#125;&#125;:&#123;&#123;x(pass_top25)&#125;&#125;)&#125;&#125; 
 
 23. 反连报错
 
@@ -108,8 +108,8 @@ sidebar_position: 28
    
 24. 怎么达到下面的效果
     ![](/img/products/yakit/FQA-7.jpeg)
-   {{regen([a-zA-Z0-9]{3})}}  （反向正则标签）
-   {{regen([a-zA-Z0-9])}}{{regen([a-zA-Z0-9])}}{{regen([a-zA-Z0-9])}}{{regen([a-zA-Z0-9])}}
+   &#123;&#123;regen([a-zA-Z0-9]&#123;3&#125;)&#125;&#125;  （反向正则标签）
+   &#123;&#123;regen([a-zA-Z0-9])&#125;&#125;&#123;&#123;regen([a-zA-Z0-9])&#125;&#125;&#123;&#123;regen([a-zA-Z0-9])&#125;&#125;&#123;&#123;regen([a-zA-Z0-9])&#125;&#125;
    如果不够快的话，可以拆成四个，拆成四个就会加快，输出中间结果 
 
 25. 远程连接如何自己启动端口
@@ -128,8 +128,8 @@ sidebar_position: 28
 28. yakit的fuzzer能直接插入时间戳吗? 比如某个请求携带了时间戳 fuzzing时根据发包时间赛一个时间戳进去
 
    目前的做法可以在热加载里面写一个
-   {{yak(ts)}}
-   ts = func(s) { return f${timestamp()}} 就行了 
+   &#123;&#123;yak(ts)&#125;&#125;
+   ts = func(s) &#123; return f$&#123;timestamp()&#125;&#125; 就行了 
 
 29. 为什么系统代理只能http/https
 
@@ -147,4 +147,4 @@ sidebar_position: 28
 
 32. 插入多个数据格式
 
-   {{list(xxxx|bbbbb)}}
+   &#123;&#123;list(xxxx|bbbbb)&#125;&#125;

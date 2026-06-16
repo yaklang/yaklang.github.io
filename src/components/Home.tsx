@@ -13,8 +13,8 @@ import {
   EyeOutlined,
   ArrowRightOutlined,
 } from "@ant-design/icons";
-import ReactPlayer from "react-player";
-import { Autoplay } from "swiper";
+import { VideoPlayer } from "./media/VideoPlayer";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "animate.css";
@@ -32,6 +32,7 @@ import {
   WindowsIcon,
 } from "./HomeIcon";
 import { useTranslation } from "react-i18next";
+import { LazyImage } from "./media/LazyImage";
 
 const axios = require("axios");
 
@@ -1302,7 +1303,7 @@ const KindModules = (props: KindModulesProps) => {
 
   useEffect(() => {
     if (currentRatio !== 100) {
-      // 网页比例被缩放
+      // 网页比例被缩放，直接展示
       switch (name) {
         case "高效":
           return efficentShow();
@@ -1315,53 +1316,51 @@ const KindModules = (props: KindModulesProps) => {
         default:
           break;
       }
-    } else {
-      if (name === "高效") {
-        if (isScrollUp) {
-          if (rate <= 0.85 && rate >= 0.05 && isRange && !efficent_show.current)
-            efficentShow();
-          if ((rate < 0.05 && isRange) || !isRange) efficentHide();
-        } else {
-          if (rate >= 0.05 && rate <= 0.85 && isRange && !efficent_show.current)
-            efficentShow();
-          if (rate > 0.85 && isRange) efficentHide();
-        }
-      }
-      if (name === "函数级调用") {
-        if (isScrollUp) {
-          if (rate <= 0.85 && rate >= 0.05 && isRange && !function_show.current)
-            functionShow();
-          if (rate < 0.05 && isRange) functionHide();
-        } else {
-          if (rate >= 0.05 && rate <= 0.85 && isRange && !function_show.current)
-            functionShow();
-          if (rate > 0.85 && isRange) functionHide();
-        }
-      }
-      if (name === "自动补全") {
-        if (isScrollUp) {
-          if (rate <= 0.85 && rate >= 0.05 && isRange && !doc_show.current)
-            docShow();
-          if (rate < 0.05 && isRange) docHide();
-        } else {
-          if (rate >= 0.05 && rate <= 0.85 && isRange && !doc_show.current)
-            docShow();
-          if (rate > 0.85 && isRange) docHide();
-        }
-      }
-      if (name === "高阶工具") {
-        if (isScrollUp) {
-          if (rate <= 0.85 && rate >= 0.05 && isRange && !tool_show.current)
-            toolShow();
-          if (rate < 0.05 && isRange) toolHide();
-        } else {
-          if (rate >= 0.05 && rate <= 0.85 && isRange && !tool_show.current)
-            toolShow();
-          if ((rate > 0.85 && isRange) || !isRange) toolHide();
-        }
-      }
+      return;
     }
-  }, [name, rate, isRange, isScrollUp, currentRatio]);
+
+    // 画布为 sticky，基于 rate 的演出窗口会在 kind 切换起始留下死区(卡空白)。
+    // 改为：只要进入演出区(isRange)就立即演出当前 kind，切换 kind 时立即切换，
+    // 画布边缘一出现内容即在，全程无"固定空白"。
+    if (!isRange) {
+      // 离开演出区：复位所有标识，便于再次进入时重新演出
+      efficent_show.current = false;
+      function_show.current = false;
+      doc_show.current = false;
+      tool_show.current = false;
+      return;
+    }
+
+    // 切换到某个 kind 时，复位其它 kind 标识(其 DOM 已随分支切换卸载)，并立即演出当前 kind
+    switch (name) {
+      case "高效":
+        function_show.current = false;
+        doc_show.current = false;
+        tool_show.current = false;
+        if (!efficent_show.current) efficentShow();
+        break;
+      case "函数级调用":
+        efficent_show.current = false;
+        doc_show.current = false;
+        tool_show.current = false;
+        if (!function_show.current) functionShow();
+        break;
+      case "自动补全":
+        efficent_show.current = false;
+        function_show.current = false;
+        tool_show.current = false;
+        if (!doc_show.current) docShow();
+        break;
+      case "高阶工具":
+        efficent_show.current = false;
+        function_show.current = false;
+        doc_show.current = false;
+        if (!tool_show.current) toolShow();
+        break;
+      default:
+        break;
+    }
+  }, [name, isRange, currentRatio]);
 
   if (name === "高效") {
     return (
@@ -1659,6 +1658,7 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
 
   const [index, setIndex] = useState<number>(0);
 
+  const moduleRef = useRef(null);
   const imgRef = useRef(null);
   const listRef = useRef(null);
   const img_count = useRef<number>(0);
@@ -1711,34 +1711,41 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
     div_list.className = `module-list opacity-0 ${listStr}`;
   };
 
+  // 网页被缩放时直接展示（与原逻辑保持一致）
   useEffect(() => {
-    if (kind !== moduleIndex) return;
     if (currentRatio !== 100) {
       showAnimation();
-    } else {
-      if (isScrollUp) {
-        if (rate <= 0.85 && rate > 0.1 && isRange && img_count.current === 0) {
-          img_count.current = 1;
-          showAnimation();
-        }
-        //   if ((rate <= 0.1 && isRange) || !isRange) {
-        //     img_count.current = 0;
-        //     hideAnimation();
-        //   }
-      } else {
-        if (rate >= 0.1 && rate < 0.85 && isRange && img_count.current === 0) {
-          img_count.current = 1;
-          showAnimation();
-        }
-        //   if ((rate >= 0.85 && isRange) || !isRange) {
-        //     img_count.current = 0;
-        //     hideAnimation();
-        //   }
-      }
     }
-  }, [kind, rate, isRange, isScrollUp, currentRatio]);
+  }, [currentRatio]);
+
+  // 使用 IntersectionObserver 在区块露出约 1/4 时即触发两侧向中间靠拢的演出，
+  // 避免依赖脆弱的滚动数学导致"位置已到中间却仍无内容"的尴尬。
+  useEffect(() => {
+    if (currentRatio !== 100) return;
+    const el = moduleRef.current as unknown as HTMLDivElement | null;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            entry.intersectionRatio >= 0.22 &&
+            img_count.current === 0
+          ) {
+            img_count.current = 1;
+            showAnimation();
+            io.disconnect();
+          }
+        });
+      },
+      // 露出约 1/4 即开始演出；阈值多点采样以适配高块/矮视口
+      { threshold: [0, 0.1, 0.22, 0.5, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [currentRatio]);
   return (
-    <div className="function-module-body">
+    <div className="function-module-body" ref={moduleRef}>
       {!isReversal ? (
         <div
           className={`module-img ${
@@ -1746,7 +1753,13 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
           }`}
           ref={imgRef}
         >
-          <img src={img[index]} className="module-img-style" />
+          <div className="module-img-style overflow-hidden rounded-xl border border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-slate-50">
+            <LazyImage
+              src={img[index]}
+              alt={t(title)}
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       ) : (
         <div
@@ -1795,7 +1808,13 @@ const FunctionModule = React.memo((props: functionModuleProps) => {
           }`}
           ref={imgRef}
         >
-          <img src={img[index]} className="module-img-style" />
+          <div className="module-img-style overflow-hidden rounded-xl border border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-slate-50">
+            <LazyImage
+              src={img[index]}
+              alt={t(title)}
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       ) : (
         <div
@@ -2315,17 +2334,15 @@ const AppraiseInfoBody = React.memo(() => {
       </div>
 
       <div className="propagate-video">
-        {/* @ts-ignore */}
-        <ReactPlayer
-          url={require("../../static/img/home/video.mp4").default}
-          loop={true}
-          playsinline={true}
+        <VideoPlayer
+          src={require("../../static/img/home/video.mp4").default}
+          autoPlay
+          loop
+          muted
           controls={false}
-          playing={true}
-          volume={0}
-          width={"100%"}
-          height={"100%"}
-          style={{ display: "flex" }}
+          fill
+          objectFit="cover"
+          className="!rounded-none !border-0 !shadow-none !bg-transparent"
         />
       </div>
     </div>

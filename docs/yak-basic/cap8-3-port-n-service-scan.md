@@ -84,8 +84,8 @@ synscan.ScanFromPing(hosts:string,ports:string,opts ...synscan.scanOpt) (chan *s
 
 | 额外参数           | 解释                                                         |
 | ------------------ | ------------------------------------------------------------ |
-| callback           | 设置一个回调函数，可以自由处理结果，设置扫描结果的回调synscan.callback(func(i){    db.SavePortFromResult(i) }) |
-| submitTaskCallback | 设置一个回调函数，每提交一个数据包的时候，这个回调会执行一次synscan.submitTaskCallback(func(i){    println(i)}) |
+| callback           | 设置一个回调函数，可以自由处理结果，设置扫描结果的回调synscan.callback(func(i)&#123;    db.SavePortFromResult(i) &#125;) |
+| submitTaskCallback | 设置一个回调函数，每提交一个数据包的时候，这个回调会执行一次synscan.submitTaskCallback(func(i)&#123;    println(i)&#125;) |
 | excludePorts       | 本次扫描排除的端口，synscan.excludePorts("22")               |
 | excludeHosts       | 本次扫描排除的 host，synscan.excludeHosts("192.168.1.1")     |
 | wait               | synscan 发出 SYN 包后等待的秒数，synscan.wait(5)             |

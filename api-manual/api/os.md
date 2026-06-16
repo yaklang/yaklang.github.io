@@ -6,9 +6,9 @@ ARCH|(string) &#34;amd64&#34;|
 Args|([]string) Command line arguments|
 IsPrivileged|(bool) false|
 OS|(string) &#34;linux&#34;|
-Stderr|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stderr&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: true, appendMode: false}}|
-Stdin|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdin&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: false, appendMode: false}}|
-Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdout&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+Stderr|(os.File) &amp;os.File&#123;file: &amp;os.file&#123;pfd: poll.FD&#123;fdmu: poll.fdMutex&#123;state: 0, rsema: 0, wsema: 0&#125;, Sysfd: 2, SysFile: poll.SysFile&#123;iovecs: (*[]syscall.Iovec)(nil)&#125;, pd: poll.pollDesc&#123;runtimeCtx: 0&#125;, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true&#125;, name: &#34;/dev/stderr&#34;, dirinfo: atomic.Pointer[os.dirInfo]&#123;_: [0]*os.dirInfo&#123;&#125;, _: atomic.noCopy&#123;&#125;, v: (unsafe.Pointer)(nil)&#125;, nonblock: false, stdoutOrErr: true, appendMode: false&#125;&#125;|
+Stdin|(os.File) &amp;os.File&#123;file: &amp;os.file&#123;pfd: poll.FD&#123;fdmu: poll.fdMutex&#123;state: 0, rsema: 0, wsema: 0&#125;, Sysfd: 0, SysFile: poll.SysFile&#123;iovecs: (*[]syscall.Iovec)(nil)&#125;, pd: poll.pollDesc&#123;runtimeCtx: 0&#125;, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true&#125;, name: &#34;/dev/stdin&#34;, dirinfo: atomic.Pointer[os.dirInfo]&#123;_: [0]*os.dirInfo&#123;&#125;, _: atomic.noCopy&#123;&#125;, v: (unsafe.Pointer)(nil)&#125;, nonblock: false, stdoutOrErr: false, appendMode: false&#125;&#125;|
+Stdout|(os.File) &amp;os.File&#123;file: &amp;os.file&#123;pfd: poll.FD&#123;fdmu: poll.fdMutex&#123;state: 0, rsema: 0, wsema: 0&#125;, Sysfd: 1, SysFile: poll.SysFile&#123;iovecs: (*[]syscall.Iovec)(nil)&#125;, pd: poll.pollDesc&#123;runtimeCtx: 0&#125;, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true&#125;, name: &#34;/dev/stdout&#34;, dirinfo: atomic.Pointer[os.dirInfo]&#123;_: [0]*os.dirInfo&#123;&#125;, _: atomic.noCopy&#123;&#125;, v: (unsafe.Pointer)(nil)&#125;, nonblock: false, stdoutOrErr: true, appendMode: false&#125;&#125;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
@@ -19,7 +19,7 @@ Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex
 | [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为&amp;#34;key=value&amp;#34;  |
 | [os.Executable](#executable) |Executable 获取当前可执行文件的路径  |
 | [os.Exit](#exit) |Exit 退出当前进程  |
-| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值  |
+| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的$&#123;var&#125;或$var替换为其对应环境变量名的值  |
 | [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片  |
 | [os.GetHomeDir](#gethomedir) |GetHomeDir 获取当前用户的家目录  |
 | [os.GetLocalAddress](#getlocaladdress) |GetLocalAddress 获取本地IP地址  |
@@ -225,7 +225,7 @@ os.Exit(0)
 ### ExpandEnv
 
 #### 详细描述
-ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值
+ExpandEnv  将字符串中的$&#123;var&#125;或$var替换为其对应环境变量名的值
 
 Example:
 ```
