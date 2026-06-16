@@ -252,7 +252,10 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
       const first = (786 / 16) * FontSize;
       // 第二区域paddigTop、paddingBottom、每块区域高度
       const secondPaddingTop = (54 / 16) * FontSize;
-      const secondBlock = ((950 - 54 - 200) / 16) * FontSize;
+      // 每个 kind 演出的滚动切换间隔。收紧间隔(原 696 -> 480)，
+      // 让"锁屏后再滚动"能更快进入下一个演出，避免长时间停在同一画面。
+      // 注意：此值需与下方标签点击跳转(window.scrollTo)的计算保持一致。
+      const secondBlock = (480 / 16) * FontSize;
       // 第二区域总高度
       const second = (3143 / 16) * FontSize;
       // 第三区域paddingTop、block、gap
@@ -781,11 +784,13 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                           +document.documentElement.style.fontSize.split(
                             "px"
                           )[0];
+                        // 与滚动处理中的 secondBlock(480) 保持一致，
+                        // 偏移量取块内中部以保证落点处于对应演出区间内。
                         let height =
-                          ((786 + 54 + 696 * index + 140) / 16) * FontSize;
+                          ((786 + 54 + 480 * index + 200) / 16) * FontSize;
                         if (index === 3) {
                           height =
-                            ((786 + 54 + 696 * index + 50) / 16) * FontSize;
+                            ((786 + 54 + 480 * index + 100) / 16) * FontSize;
                         }
                         window.scrollTo(0, height);
                       }
@@ -994,6 +999,12 @@ interface KindModulesProps {
 const KindModules = (props: KindModulesProps) => {
   const { t } = useTranslation();
   const { name, rate, isRange, isScrollUp, currentRatio } = props;
+
+  // 画布(sticky)是否已露出到足够比例。用于在画布刚出现(约 1/4)时即触发首个演出，
+  // 与下方功能区(FunctionModule)使用 IntersectionObserver 的体验保持一致，
+  // 避免"画布已出现却仍空白"的死区。
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState<boolean>(false);
 
   const efficent_1 = useRef(null);
   const efficent_2 = useRef(null);
@@ -1301,6 +1312,24 @@ const KindModules = (props: KindModulesProps) => {
     tool_show.current = false;
   };
 
+  // 画布露出约 1/4 即认为进入演出区，触发首个演出；离开则复位以便再次进入时重演。
+  // 多点阈值采样以适配不同视口高度，行为与下方 FunctionModule 一致。
+  useEffect(() => {
+    if (currentRatio !== 100) return;
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setInView(entry.isIntersecting && entry.intersectionRatio >= 0.22);
+        });
+      },
+      { threshold: [0, 0.1, 0.22, 0.5, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [name, currentRatio]);
+
   useEffect(() => {
     if (currentRatio !== 100) {
       // 网页比例被缩放，直接展示
@@ -1320,9 +1349,10 @@ const KindModules = (props: KindModulesProps) => {
     }
 
     // 画布为 sticky，基于 rate 的演出窗口会在 kind 切换起始留下死区(卡空白)。
-    // 改为：只要进入演出区(isRange)就立即演出当前 kind，切换 kind 时立即切换，
-    // 画布边缘一出现内容即在，全程无"固定空白"。
-    if (!isRange) {
+    // 改为：只要进入演出区(滚动命中 isRange 或画布已露出 inView)就立即演出当前 kind，
+    // 切换 kind 时立即切换，画布边缘一出现内容即在，全程无"固定空白"。
+    const active = isRange || inView;
+    if (!active) {
       // 离开演出区：复位所有标识，便于再次进入时重新演出
       efficent_show.current = false;
       function_show.current = false;
@@ -1360,11 +1390,11 @@ const KindModules = (props: KindModulesProps) => {
       default:
         break;
     }
-  }, [name, isRange, currentRatio]);
+  }, [name, isRange, inView, currentRatio]);
 
   if (name === "高效") {
     return (
-      <div className="kind-opt-body">
+      <div className="kind-opt-body" ref={rootRef}>
         <div className="efficent-img">
           <div className="efficent-img-body">
             <div ref={efficent_1} className="efficent-img-1 opacity-0">
@@ -1440,7 +1470,7 @@ const KindModules = (props: KindModulesProps) => {
 
   if (name === "函数级调用") {
     return (
-      <div className="kind-opt-body">
+      <div className="kind-opt-body" ref={rootRef}>
         <div className="function-img">
           <div className="function-img-body">
             <img
@@ -1512,7 +1542,7 @@ const KindModules = (props: KindModulesProps) => {
 
   if (name === "自动补全") {
     return (
-      <div className="kind-opt-body">
+      <div className="kind-opt-body" ref={rootRef}>
         <div className="doc-img">
           <div className="doc-img-body">
             <img
@@ -1576,7 +1606,7 @@ const KindModules = (props: KindModulesProps) => {
 
   if (name === "高阶工具") {
     return (
-      <div className="kind-opt-body">
+      <div className="kind-opt-body" ref={rootRef}>
         <div className="tool-img">
           <div className="tool-img-body">
             <img
