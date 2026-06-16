@@ -4,7 +4,9 @@
   padding-top: 24px;
   padding-bottom: 24px;
   width: 100%;
-  min-width: $min-width;
+  // 不再用固定像素 min-width 撑宽页脚：固定根字号(文档/博客)下会把整页撑到 1152px，
+  // 在中间宽度造成横向溢出。改为响应式，窄屏允许换行降级。
+  min-width: 0;
   .div--flex {
     display: flex;
     justify-content: space-between;
@@ -83,6 +85,29 @@
       }
       .contact-icon-body + .contact-icon-body {
         margin-left: 22px;
+      }
+    }
+  }
+}
+
+// 窄屏(移动端/中间宽度)：页脚单行放不下时换行降级，避免内容重叠或撑出横向滚动
+@media screen and (max-width: 996px) {
+  .footer {
+    height: auto;
+    .div--flex {
+      flex-wrap: wrap;
+      height: auto;
+      gap: 12px;
+      .footer-logo-copyright-navigation {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 16px;
+        .link-body {
+          margin-left: 0;
+        }
+        .copyright-style {
+          margin-left: 0;
+        }
       }
     }
   }

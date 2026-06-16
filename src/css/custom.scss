@@ -54,13 +54,15 @@ $REM: 16;
 }
 
 $max-width: REM(8000);
-// $min-width: REM(1840);
-$min-width: REM(1152);
 .main-wrapper {
   max-width: $max-width;
   margin: 0 auto;
   width: 100%;
-  min-width: $min-width;
+  // 注意：不要在这里加 min-width。
+  // 首页按视口等比缩放根字号(rem)自适应，其布局宽度由 .home-container 自带的
+  // min-width 约束；而文档/博客根字号固定 16px，若此处用 rem 的 min-width 会被
+  // 固定为像素值(如 72rem=1152px)，在介于移动端与桌面端之间的中间宽度下导致
+  // 横向溢出、正文被推出视口、左侧出现大片空白。
 }
 
 // 解决文档正文被固定导航栏遮挡的问题
