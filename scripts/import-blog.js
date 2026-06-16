@@ -256,7 +256,7 @@ function main() {
       "date: " + date,
       "authors: [yak]",
       "tags: [" + tags.map((t) => '"' + t + '"').join(", ") + "]",
-      "slug: /blog/p" + num,
+      "slug: p" + num,
       "---",
       "",
     ].join("\n");
