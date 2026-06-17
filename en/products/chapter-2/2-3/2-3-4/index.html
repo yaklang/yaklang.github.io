@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.4 资产测绘双引擎：基础爬虫与空间搜索引擎 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-2/2-3/2-3-4"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.4 资产测绘双引擎：基础爬虫与空间搜索引擎 | Yak Program Language"><meta data-rh="true" name="description" content="在前续章节中，我们已经探讨了如何识别和确认目标的基本网络服务，例如开放的端口和运行的服务。然而，这些仅仅是目标暴露在外的“点”。要构建起完整的攻击面地图，我们必须从“点”扩展到“面”——既要深入探查单个Web资产的内部结构与潜在入口，也要横向发掘其在广阔互联网中的关联资产与部署指纹。"><meta data-rh="true" property="og:description" content="在前续章节中，我们已经探讨了如何识别和确认目标的基本网络服务，例如开放的端口和运行的服务。然而，这些仅仅是目标暴露在外的“点”。要构建起完整的攻击面地图，我们必须从“点”扩展到“面”——既要深入探查单个Web资产的内部结构与潜在入口，也要横向发掘其在广阔互联网中的关联资产与部署指纹。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-4"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-4" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-4" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-4" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/en/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/en/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.4 资产测绘双引擎","item":"https://yaklang.com/en/products/chapter-2/2-3/2-3-4"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -38,7 +38,7 @@
 <ol>
 <li class=""><strong>启动基础爬虫模块：</strong> 打开 Yakit 客户端，在左侧导航栏中，点击 <strong>&quot;安全工具&quot;</strong> ，然后选择 <strong>&quot;基础爬虫&quot;</strong> 功能。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit安全工具中基础爬虫功能入口" src="/en/assets/images/ch2-037-7430292627f6c64096add9ff0c983bde.png" width="924" height="242" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit安全工具中基础爬虫功能入口"><img decoding="async" loading="lazy" alt="Yakit安全工具中基础爬虫功能入口" src="/en/assets/images/ch2-037-7430292627f6c64096add9ff0c983bde.png" width="924" height="242" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit安全工具中基础爬虫功能入口</p>
 <ol start="2">
 <li class="">
@@ -51,7 +51,7 @@
 <p><strong>配置额外参数（高级选项）：</strong> 点击 <strong>&quot;额外参数&quot;</strong> 按钮，可以对爬虫的行为进行更精细的控制。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit基础爬虫额外参数配置界面" src="/en/assets/images/ch2-038-5397e935cb780fc55688c4526b03fd0a.png" width="1176" height="1019" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit基础爬虫额外参数配置界面"><img decoding="async" loading="lazy" alt="Yakit基础爬虫额外参数配置界面" src="/en/assets/images/ch2-038-5397e935cb780fc55688c4526b03fd0a.png" width="1176" height="1019" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit基础爬虫额外参数配置界面</p>
 <ul>
 <li class="">
@@ -128,7 +128,7 @@
 <p><strong>查看爬取结果</strong>：在运行过程中可以实时查看爬取结果。爬取结果以网站树的形式呈现。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit爬虫扫描结果以网站树形式展示" src="/en/assets/images/ch2-039-ac390a82bc1c6272fa36f63a745b2804.png" width="1324" height="438" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit爬虫扫描结果以网站树形式展示"><img decoding="async" loading="lazy" alt="Yakit爬虫扫描结果以网站树形式展示" src="/en/assets/images/ch2-039-ac390a82bc1c6272fa36f63a745b2804.png" width="1324" height="438" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit爬虫扫描结果以网站树形式展示</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2342-空间引擎从海量数据中发现隐藏资产">2.3.4.2 空间引擎：从海量数据中发现隐藏资产<a href="#2342-空间引擎从海量数据中发现隐藏资产" class="hash-link" aria-label="Direct link to 2.3.4.2 空间引擎：从海量数据中发现隐藏资产" title="Direct link to 2.3.4.2 空间引擎：从海量数据中发现隐藏资产" translate="no">​</a></h3>
 <p>空间引擎是利用公共网络搜索引擎 (如 ZoomEye, Fofa, Shodan, Hunter, Quake 等) 的海量数据进行资产发现的强大工具。它允许用户通过特定的查询语法，从这些“网络空间测绘”数据库中搜索全球范围内的设备、服务、组件和漏洞信息。这对于发现组织外部暴露的资产、识别供应链风险、或进行大规模漏洞普查具有不可替代的价值。</p>
@@ -138,7 +138,7 @@
 <ol>
 <li class=""><strong>启动空间引擎模块：</strong> 打开 Yakit 客户端，在左侧导航栏中，点击 <strong>&quot;安全工具&quot;</strong> ，然后选择 <strong>&quot;空间引擎&quot;</strong> 功能。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit安全工具栏空间引擎入口" src="/en/assets/images/ch2-040-653cf7b3092c8ecb7249a1cd5b8f514f.png" width="894" height="240" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit安全工具栏空间引擎入口"><img decoding="async" loading="lazy" alt="Yakit安全工具栏空间引擎入口" src="/en/assets/images/ch2-040-653cf7b3092c8ecb7249a1cd5b8f514f.png" width="894" height="240" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit安全工具栏空间引擎入口</p>
 <ol start="2">
 <li class="">
@@ -148,7 +148,7 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit客户端添加第三方应用配置界面" src="/en/assets/images/ch2-041-3789a8aeb55546abd90245fac20e0c26.png" width="1602" height="680" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit客户端添加第三方应用配置界面"><img decoding="async" loading="lazy" alt="Yakit客户端添加第三方应用配置界面" src="/en/assets/images/ch2-041-3789a8aeb55546abd90245fac20e0c26.png" width="1602" height="680" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit客户端添加第三方应用配置界面</p>
 <ul>
 <li class="">
@@ -172,7 +172,7 @@
 <p><strong>查看与分析搜索结果：</strong> Yakit 会在结果区域以列表形式展示从空间引擎获取的资产信息。同时支持通过右侧导出全部按钮将查询结果导出为Excel。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit空间引擎数据卡片与结果列表" src="/en/assets/images/ch2-042-50b3b3b8eec006bbac63cf19079df396.png" width="926" height="371" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit空间引擎数据卡片与结果列表"><img decoding="async" loading="lazy" alt="Yakit空间引擎数据卡片与结果列表" src="/en/assets/images/ch2-042-50b3b3b8eec006bbac63cf19079df396.png" width="926" height="371" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit空间引擎数据卡片与结果列表</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/products/chapter-2/2-3/2-3-3"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">2.3.3 目录扫描</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/products/chapter-2/2-3/2-3-5"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">2.3.5 Codec 编解码</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#2341-基础爬虫深度挖掘-web-应用的内部结构" class="table-of-contents__link toc-highlight">2.3.4.1 基础爬虫：深度挖掘 Web 应用的内部结构</a></li><li><a href="#2342-空间引擎从海量数据中发现隐藏资产" class="table-of-contents__link toc-highlight">2.3.4.2 空间引擎：从海量数据中发现隐藏资产</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

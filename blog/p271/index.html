@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">想拥有自己的 Yak Bridge？ DNSLog、ICMPLog、TCPLog 全部免费 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p271"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="想拥有自己的 Yak Bridge？ DNSLog、ICMPLog、TCPLog 全部免费 | Yak Program Language"><meta data-rh="true" name="description" content="随着大家对 Yakit 的使用越来越深入，一些场景支持逐渐被提上日程。"><meta data-rh="true" property="og:description" content="随着大家对 Yakit 的使用越来越深入，一些场景支持逐渐被提上日程。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-07-21T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p271"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p271" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p271" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p271" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p271","mainEntityOfPage":"https://yaklang.com/blog/p271","url":"https://yaklang.com/blog/p271","headline":"想拥有自己的 Yak Bridge？ DNSLog、ICMPLog、TCPLog 全部免费","name":"想拥有自己的 Yak Bridge？ DNSLog、ICMPLog、TCPLog 全部免费","description":"随着大家对 Yakit 的使用越来越深入，一些场景支持逐渐被提上日程。","datePublished":"2022-07-21T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -60,14 +60,14 @@
 <p>三、配置NS地址指向</p>
 <p>在确定完成上述步骤后，我们进入 <code>cybertunnel.run</code> 的后台，为他添加两条 A 记录，指向的 IP 为我们搭建 Yak Bridge 的地址：<code>124.223.202.90</code></p>
 <p>我们配置<code>ns1.cybertunnel.run</code> 和<code>ns2.cybertunnel.run</code> 指向上述地址</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/32fe7ca116c42a09-ad1a74424c39862aa68bddda2805b9f9.png" width="1080" height="335" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/32fe7ca116c42a09-ad1a74424c39862aa68bddda2805b9f9.png" width="1080" height="335" class="yakdoc-image"></button></p>
 <p>在配置完毕后，等待记录生效后我们的 Yak Bridge 就算配置完毕了。</p>
 <p><strong>备注：</strong></p>
 <p>一般推荐大家使用两域名版本来配置 DNSLog，通用性更强，绝大多数服务提供商均可按此配置；</p>
 <p>单域名版本需要服务提供商支持配置 DNS Hosts，目前支持此项配置的并不多（阿里云）</p>
 <p><strong>Yakit中使用自定义配置（v1.0.15-sp16）</strong></p>
 <p>一、点击右上角“配置”-&gt;配置全局反连</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e179f800785d25bc-bd1fcc7a83d3426badcebdf7c84a4bf1.png" width="1080" height="494" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e179f800785d25bc-bd1fcc7a83d3426badcebdf7c84a4bf1.png" width="1080" height="494" class="yakdoc-image"></button></p>
 <p>二、在全局反连中配置DNSLog链接选项</p>
 <p>在这个配置中，如果要自定义 dnslog 必须提前配好 dnslog 域名</p>
 <hr>

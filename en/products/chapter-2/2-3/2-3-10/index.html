@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.10 Yak IDE：Yak Runner 集成开发环境 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-2/2-3/2-3-10"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.10 Yak IDE：Yak Runner 集成开发环境 | Yak Program Language"><meta data-rh="true" name="description" content="在前续章节中，我们已经探索了 Yakit 平台提供的各类成品化安全工具，如 History 流量审计模块和 Vulnbox 靶场。然而，Yakit 的真正潜力在于其开放的生态与强大的自定义能力，而这一切都始于其核心——Yak 语言。本章将深入剖析承载 Yak 语言从代码到执行全生命周期的核心组件：Yak Runner。它不仅是一个文本编辑器，更是一个功能完备的集成开发环境（IDE），是连接 Yak 语言理论与安全自动化实践的桥梁。本章将围绕“高效的代码工程管理”与“一体化的开发\-执行\-调试闭环”两大命题，指导您掌握利用 Yak Runner 构建自定义安全工具的能力。"><meta data-rh="true" property="og:description" content="在前续章节中，我们已经探索了 Yakit 平台提供的各类成品化安全工具，如 History 流量审计模块和 Vulnbox 靶场。然而，Yakit 的真正潜力在于其开放的生态与强大的自定义能力，而这一切都始于其核心——Yak 语言。本章将深入剖析承载 Yak 语言从代码到执行全生命周期的核心组件：Yak Runner。它不仅是一个文本编辑器，更是一个功能完备的集成开发环境（IDE），是连接 Yak 语言理论与安全自动化实践的桥梁。本章将围绕“高效的代码工程管理”与“一体化的开发\-执行\-调试闭环”两大命题，指导您掌握利用 Yak Runner 构建自定义安全工具的能力。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-10"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-10" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-10" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-10" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/en/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/en/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.10 Yak IDE","item":"https://yaklang.com/en/products/chapter-2/2-3/2-3-10"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23101-工作区管理项目化脚本组织与导航">2.3.10.1 工作区管理：项目化脚本组织与导航<a href="#23101-工作区管理项目化脚本组织与导航" class="hash-link" aria-label="Direct link to 2.3.10.1 工作区管理：项目化脚本组织与导航" title="Direct link to 2.3.10.1 工作区管理：项目化脚本组织与导航" translate="no">​</a></h3>
 <p>专业的安全工具开发往往涉及多个脚本文件、配置文件与资源文件的协同工作。Yak Runner 提供了强大的工作区管理能力，以适应从快速脚本验证到复杂项目开发的不同场景。与简单的文本编辑器打开单个文件不同，Yak Runner 鼓励以“项目”或“文件夹”为单位进行工作。</p>
 <p>用户通过主界面右上角的 <code>[Yak Runner]</code> 按钮即可进入，并在工作区打开一个专属标签页。其核心文件操作逻辑体现在欢迎页面的三个入口：</p>
-<p><img decoding="async" loading="lazy" alt="Yak Runner 工作区 Tab 打开后的欢迎界面" src="/en/assets/images/ch2-105-17b03feb3c2deba9b378e43e4e490a4c.png" width="1024" height="742" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yak Runner 工作区 Tab 打开后的欢迎界面"><img decoding="async" loading="lazy" alt="Yak Runner 工作区 Tab 打开后的欢迎界面" src="/en/assets/images/ch2-105-17b03feb3c2deba9b378e43e4e490a4c.png" width="1024" height="742" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yak Runner 工作区 Tab 打开后的欢迎界面</p>
 <ul>
 <li class="">
@@ -32,7 +32,7 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23102-一体化开发工作台">2.3.10.2 一体化开发工作台<a href="#23102-一体化开发工作台" class="hash-link" aria-label="Direct link to 2.3.10.2 一体化开发工作台" title="Direct link to 2.3.10.2 一体化开发工作台" translate="no">​</a></h3>
 <p>当一个项目文件夹被加载后，Yak Runner 会展现其功能强大的一体化开发工作台。该界面经过精心设计，将文件管理、代码编写与结果调试等核心功能整合在单一视图内，极大地提升了开发工作流的效率。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit一体化开发工作台界面展示" src="/en/assets/images/ch2-106-096a4401b0ea5ae6e5b53dab20d105b0.png" width="1098" height="738" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit一体化开发工作台界面展示"><img decoding="async" loading="lazy" alt="Yakit一体化开发工作台界面展示" src="/en/assets/images/ch2-106-096a4401b0ea5ae6e5b53dab20d105b0.png" width="1098" height="738" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit一体化开发工作台界面展示</p>
 <p>整个工作台可以被解构为以下几个关键区域：</p>
 <ol>
@@ -83,49 +83,49 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23103-高效代码编辑智能辅助与开发工作流">2.3.10.3 高效代码编辑：智能辅助与开发工作流<a href="#23103-高效代码编辑智能辅助与开发工作流" class="hash-link" aria-label="Direct link to 2.3.10.3 高效代码编辑：智能辅助与开发工作流" title="Direct link to 2.3.10.3 高效代码编辑：智能辅助与开发工作流" translate="no">​</a></h3>
 <p>Yak Runner 的核心是其功能强大的代码编辑区，它并非一个简单的文本输入框，而是一个旨在加速整个“编码-执行-调试”生命周期的集成式工作台。本节将从基础编辑、智能辅助到代码导航，系统性地解析其如何赋能开发者高效产出高质量的 Yak 脚本。</p>
 <p>作为现代化 IDE 的基石，编辑器首先提供了完备的基础功能。其中，<strong>语法高亮 (Syntax Highlighting)</strong> 机制能够自动识别并以不同色彩渲染 Yak 语言的关键字（如 <code>func</code>, <code>if</code>）、变量、字符串及注释等语法元素。这种结构化的视觉呈现，极大地增强了复杂代码的可读性与可维护性。代码编写完成后，开发者可通过点击界面右上角的 <code>[执行]</code> 按钮，将当前脚本提交给后端的 Yak 引擎进行即时编译与运行，其结果会立刻反馈在下方的输出面板中，构成了敏捷开发的快速反馈闭环。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit代码编辑器执行与输出演示" src="/en/assets/images/ch2-107-8c0ac0ff98039f0afb6a92d2b666ad51.png" width="1997" height="1109" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit代码编辑器执行与输出演示"><img decoding="async" loading="lazy" alt="Yakit代码编辑器执行与输出演示" src="/en/assets/images/ch2-107-8c0ac0ff98039f0afb6a92d2b666ad51.png" width="1997" height="1109" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit代码编辑器执行与输出演示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 代码编辑器中的 Go 语言函数定义与逻辑" src="/en/assets/images/ch2-108-75db39de799c633dfb13f37adaba5554.png" width="1235" height="712" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 代码编辑器中的 Go 语言函数定义与逻辑"><img decoding="async" loading="lazy" alt="Yakit 代码编辑器中的 Go 语言函数定义与逻辑" src="/en/assets/images/ch2-108-75db39de799c633dfb13f37adaba5554.png" width="1235" height="712" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 代码编辑器中的 Go 语言函数定义与逻辑</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23104-智能编码辅助从代码补全到即时诊断">2.3.10.4 智能编码辅助：从代码补全到即时诊断<a href="#23104-智能编码辅助从代码补全到即时诊断" class="hash-link" aria-label="Direct link to 2.3.10.4 智能编码辅助：从代码补全到即时诊断" title="Direct link to 2.3.10.4 智能编码辅助：从代码补全到即时诊断" translate="no">​</a></h3>
 <p>为了将开发者从繁琐的记忆和手动纠错中解放出来，Yak Runner 深度集成了上下文感知的智能编码辅助系统，使开发者能更专注于安全逻辑的实现。</p>
 <p><strong>智能代码补全 (IntelliSense)</strong> 是其核心特性。当开发者输入代码时，编辑器会基于当前上下文，实时提供精准的补全建议。这不仅涵盖了 Yaklang 标准库的模块与函数（如输入 <code>os.</code> 后提示 <code>Getenv</code>），也包括项目中用户自定义的变量与函数。选中建议项后，编辑器还会浮现出该函数的完整签名、参数说明及用法示例，这在极大提升编码效率的同时，也从源头上减少了因拼写或记忆模糊引发的低级错误。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit智能编码辅助界面展示代码补全功能" src="/en/assets/images/ch2-109-269273544d7b7d372b92db6e76e270fc.png" width="1578" height="832" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit智能编码辅助界面展示代码补全功能"><img decoding="async" loading="lazy" alt="Yakit智能编码辅助界面展示代码补全功能" src="/en/assets/images/ch2-109-269273544d7b7d372b92db6e76e270fc.png" width="1578" height="832" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit智能编码辅助界面展示代码补全功能</p>
 <p><em>(图注：输入 <strong><code>os.</code></strong> 后，编辑器智能提示 <strong><code>os</code></strong> 模块下的可用函数及文档，加速开发进程)</em></p>
 <p><strong>上下文悬停信息 (Contextual Hover)</strong> 功能则提供了“零打扰”的即时文档查阅体验。只需将鼠标光标悬停在代码中的任意函数或标识符上，其定义、类型和功能注释便会以浮窗形式呈现。这一功能使得开发者无需离开当前编码环境，即可快速获取所需信息，显著提升了代码阅读和理解的流畅度。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit智能编码辅助功能演示" src="/en/assets/images/ch2-110-b4c4b1633b840a4b1cc7c5bcec129500.png" width="921" height="477" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit智能编码辅助功能演示"><img decoding="async" loading="lazy" alt="Yakit智能编码辅助功能演示" src="/en/assets/images/ch2-110-b4c4b1633b840a4b1cc7c5bcec129500.png" width="921" height="477" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit智能编码辅助功能演示</p>
 <p><em>(图注：鼠标悬停在 <strong><code>cli.String</code></strong> 函数上，即可显示其完整的函数签名、参数说明和使用示例)</em></p>
 <p>此外，强大的 <strong>静态与运行时错误诊断</strong> 机制为代码质量提供了双重保障。首先，<strong>静态分析 (Linting)</strong> 引擎在编码阶段即对代码进行实时扫描，任何潜在的语法错误或不规范写法都会以波浪线标记，并汇总到“语法检查”面板中，实现了“边写边改”。其次，当脚本在<strong>运行时</strong>遭遇逻辑异常（如引用未定义变量），详细的错误堆栈信息会直接打印在“输出”面板，为快速定位并修复问题提供了关键线索。如下图展示三种错误提示内容：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit代码编辑器中的智能诊断与类型提示" src="/en/assets/images/ch2-111-7bc0444db9b3396f0f1aa3001546e818.png" width="1836" height="357" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit代码编辑器中的智能诊断与类型提示"><img decoding="async" loading="lazy" alt="Yakit代码编辑器中的智能诊断与类型提示" src="/en/assets/images/ch2-111-7bc0444db9b3396f0f1aa3001546e818.png" width="1836" height="357" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit代码编辑器中的智能诊断与类型提示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 语法检查功能界面展示" src="/en/assets/images/ch2-112-758c3928676ed8b3163eb2de94499685.png" width="1896" height="237" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 语法检查功能界面展示"><img decoding="async" loading="lazy" alt="Yakit 语法检查功能界面展示" src="/en/assets/images/ch2-112-758c3928676ed8b3163eb2de94499685.png" width="1896" height="237" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 语法检查功能界面展示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 终端输出显示代码运行警告与错误" src="/en/assets/images/ch2-113-7365e990a33426af80c80aa434989b7f.png" width="1939" height="366" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 终端输出显示代码运行警告与错误"><img decoding="async" loading="lazy" alt="Yakit 终端输出显示代码运行警告与错误" src="/en/assets/images/ch2-113-7365e990a33426af80c80aa434989b7f.png" width="1939" height="366" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 终端输出显示代码运行警告与错误</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23105-代码洞察与导航深度理解代码库">2.3.10.5 代码洞察与导航：深度理解代码库<a href="#23105-代码洞察与导航深度理解代码库" class="hash-link" aria-label="Direct link to 2.3.10.5 代码洞察与导航：深度理解代码库" title="Direct link to 2.3.10.5 代码洞察与导航：深度理解代码库" translate="no">​</a></h3>
 <p>在处理复杂项目或研读他人代码时，快速理解代码结构与依赖关系至关重要。为此，Yak Runner 提供了专业级别的代码洞察与导航能力。</p>
 <p><strong>集成式标准库文档</strong> 功能解决了频繁查阅外部文档的痛点。侧边栏的“帮助文档”视图提供了一个可全文搜索的函数库。开发者可以按模块浏览或直接搜索函数关键字。选中函数后（如 <code>os.Chdir</code>），其完整的函数签名、功能描述和标准使用范例会一并展示，实现了开发与学习的闭环，是日常工作中不可或缺的参考手册。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit帮助文档中搜索os.Chdir功能" src="/en/assets/images/ch2-114-cf9b7914b9ca3128d91249cd37d35593.png" width="558" height="472" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit帮助文档中搜索os.Chdir功能"><img decoding="async" loading="lazy" alt="Yakit帮助文档中搜索os.Chdir功能" src="/en/assets/images/ch2-114-cf9b7914b9ca3128d91249cd37d35593.png" width="558" height="472" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit帮助文档中搜索os.Chdir功能</p>
 <p><em>(图注：在“帮助文档”中查询 <strong><code>os.Chdir</code></strong> 函数，获取其签名、描述和使用示例)</em></p>
 <p>对于代码内部的逻辑追溯，<strong>引用-定义跳转与查找 (Go to Definition &amp; Find References)</strong> 功能提供了强大的支持。开发者可以通过<strong>标准快捷键（如 <strong><strong><code>Cmd/Ctrl + 鼠标左键</code></strong></strong>）</strong>，对代码中的任意标识符（如变量或函数名）发起查询。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit代码洞察功能展示路径变量引用" src="/en/assets/images/ch2-115-5f14583dfa26e755609005a0267bb20d.png" width="1596" height="749" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit代码洞察功能展示路径变量引用"><img decoding="async" loading="lazy" alt="Yakit代码洞察功能展示路径变量引用" src="/en/assets/images/ch2-115-5f14583dfa26e755609005a0267bb20d.png" width="1596" height="749" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit代码洞察功能展示路径变量引用</p>
 <p>除了传统弹出式窗口，Yak Runner 还将查询结果，包括该标识符的**【原始定义】(Definition)** 和所有**【被引用处】(References)**，系统性地聚合呈现在下方的“<strong>帮助信息</strong>”面板中。如图所示，当对变量 <code>req</code> 进行探查时，该面板清晰地列出了其定义点的文件路径与代码，以及每一处引用的代码片段和行号，点击任意条目即可实现精准跳转。这种集成的展示方式极大地提升了代码审查、项目重构以及追踪复杂数据流向的效率。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit代码导航界面展示定义与引用" src="/en/assets/images/ch2-116-d048baba21a0eee4c7935e5440d8d008.png" width="807" height="693" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit代码导航界面展示定义与引用"><img decoding="async" loading="lazy" alt="Yakit代码导航界面展示定义与引用" src="/en/assets/images/ch2-116-d048baba21a0eee4c7935e5440d8d008.png" width="807" height="693" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit代码导航界面展示定义与引用</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23106-文件项目管理资源管理器与文件操作">2.3.10.6 文件项目管理：资源管理器与文件操作<a href="#23106-文件项目管理资源管理器与文件操作" class="hash-link" aria-label="Direct link to 2.3.10.6 文件项目管理：资源管理器与文件操作" title="Direct link to 2.3.10.6 文件项目管理：资源管理器与文件操作" translate="no">​</a></h3>
 <p>在高效的代码编辑与导航之外，强大的项目管理能力是 Yak Runner 工作流不可或缺的一环。Yak Runner 通过左侧的“资源管理器”视图，提供了一个集成的文件与目录管理界面，旨在让开发者无需离开 IDE 环境即可完成所有项目组织任务，保障开发流程的连贯性。</p>
 <p>当用户通过“打开文件夹”功能加载项目后，资源管理器会以树状结构清晰地呈现当前工作目录下的所有文件和子文件夹。除了基础的单击展开/折叠与双击打开文件外，其核心价值体现在功能丰富的右键上下文菜单上。该菜单提供了从<strong>创建</strong>（新建文件/文件夹）、<strong>修改</strong>（重命名、粘贴）到<strong>删除</strong>的一站式文件生命周期管理。更重要的是，它集成了多个深度融合开发流的功能，如<strong>路径复制</strong>（支持绝对与相对路径）和<strong>操作系统集成</strong>（在系统文件浏览器中显示），极大地提升了操作效率。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit资源管理器文件右键菜单" src="/en/assets/images/ch2-117-771cc1a4728da51ddf47160c8ab58f5c.png" width="1440" height="1030" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit资源管理器文件右键菜单"><img decoding="async" loading="lazy" alt="Yakit资源管理器文件右键菜单" src="/en/assets/images/ch2-117-771cc1a4728da51ddf47160c8ab58f5c.png" width="1440" height="1030" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit资源管理器文件右键菜单</p>
 <p>其中，“<strong>在终端打开</strong>”功能是连接项目管理与命令行执行的关键桥梁。无论右键点击的是文件还是文件夹，该操作都会在下方的集成终端中启动一个新会话，并自动将终端的当前工作目录（CWD）切换至所选对象的路径。这一特性确保了命令行操作的上下文与开发者在图形界面中的焦点保持一致，为后续的脚本执行与调试奠定了无缝的基础。具体内容，我们会在下一小节详细介绍。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23107-命令行驱动开发集成终端与参数化执行">2.3.10.7 命令行驱动开发：集成终端与参数化执行<a href="#23107-命令行驱动开发集成终端与参数化执行" class="hash-link" aria-label="Direct link to 2.3.10.7 命令行驱动开发：集成终端与参数化执行" title="Direct link to 2.3.10.7 命令行驱动开发：集成终端与参数化执行" translate="no">​</a></h3>
 <p>本章我们介绍了 Yak Runner 从代码编辑、导航到项目管理的全方位支持，但要发挥 Yak 脚本作为自动化工具的全部潜力，离不开强大的命令行交互能力。本节将深入探讨 Yak Runner 的集成终端，阐释其如何从一个标准 Shell 环境，跃升为与 Yak <code>cli</code> 库无缝协同、支持复杂参数化脚本执行的开发利器。</p>
 <p>Yak Runner 内置了一个功能完备的终端模拟器，它与“输出”、“语法检查”等面板并列，构成了 IDE 的核心交互区域。其最基础也最便捷的特性是，当项目被加载时，终端的当前工作目录会自动与项目根目录同步。这一设计免去了开发者手动 <code>cd</code> 的繁琐步骤，使其可以立即开始执行编译、版本控制或脚本运行等命令。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit集成终端与参数化执行界面" src="/en/assets/images/ch2-118-2272ea00d23156039bf9c7c9d2e011d9.png" width="1606" height="693" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit集成终端与参数化执行界面"><img decoding="async" loading="lazy" alt="Yakit集成终端与参数化执行界面" src="/en/assets/images/ch2-118-2272ea00d23156039bf9c7c9d2e011d9.png" width="1606" height="693" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit集成终端与参数化执行界面</p>
 <p><em>(图注：集成终端自动将工作目录（高亮处）设置为当前项目文件夹路径，实现了与资源管理器的无缝联动)</em></p>
 <p>然而，集成终端的真正威力在于它为 Yak 语言的 <code>cli</code>** 标准库** 提供了原生的执行与调试环境。<code>cli</code> 库允许开发者为 Yak 脚本定义命令行参数、标志位（flags）和子命令，从而将一个硬编码的脚本转化为一个可配置、可复用的命令行工具。</p>
@@ -141,7 +141,7 @@
 </ol>
 <div class="language-Plain language-plain codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-plain codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">❯ yak a.yak --input &quot;this is user_cli_input&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">cli input is:  this is user_cli_input</span><br></span></code></pre></div></div>
 <p>终端会将命令行中提供的 <code>--input &quot;this is user_cli_input&quot;</code> 参数准确地传递给正在执行的 a.yak 脚本。脚本内部的 <code>cli.check()</code> 函数会解析这些参数，并将解析到的值赋给通过 <code>cli.String()</code> 定义的 <code>cli_input</code> 变量，脚本后续的逻辑便可使用这个从命令行获取的动态输入。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit集成终端参数化执行演示" src="/en/assets/images/ch2-119-d70f82bf7b9ee0bd3942e1a5e9e8897c.png" width="914" height="1131" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit集成终端参数化执行演示"><img decoding="async" loading="lazy" alt="Yakit集成终端参数化执行演示" src="/en/assets/images/ch2-119-d70f82bf7b9ee0bd3942e1a5e9e8897c.png" width="914" height="1131" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit集成终端参数化执行演示</p>
 <p>这种从 <strong>编码（编辑器）</strong> 到 <strong>执行与交互（集成终端）</strong> 的闭环工作流，是 Yak Runner 的核心优势之一。它将脚本的开发、测试与实际使用流程紧密地集成在同一个界面内，极大地简化了需要灵活配置的自动化任务、安全工具的开发过程，赋予了 Yak 语言强大的实战能力和可扩展性。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23108-章节总结构建代码脚本的一体化工作流">2.3.10.8 章节总结：构建代码脚本的一体化工作流<a href="#23108-章节总结构建代码脚本的一体化工作流" class="hash-link" aria-label="Direct link to 2.3.10.8 章节总结：构建代码脚本的一体化工作流" title="Direct link to 2.3.10.8 章节总结：构建代码脚本的一体化工作流" translate="no">​</a></h3>

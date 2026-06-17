@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">YakVM：编写栈机虚拟机分离语法编译与运行时 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p246"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="YakVM：编写栈机虚拟机分离语法编译与运行时 | Yak Program Language"><meta data-rh="true" name="description" content="0.0"><meta data-rh="true" property="og:description" content="0.0"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-11-25T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p246"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p246" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p246" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p246" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p246","mainEntityOfPage":"https://yaklang.com/blog/p246","url":"https://yaklang.com/blog/p246","headline":"YakVM：编写栈机虚拟机分离语法编译与运行时","name":"YakVM：编写栈机虚拟机分离语法编译与运行时","description":"0.0","datePublished":"2022-11-25T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -68,13 +68,13 @@
 <p>当实现了这些内容之后，在和团队总结中，大家对基于栈机的语言无论是语法还是 Opcode 还是 VM 层面，都有了比较深的理解。以至于我们开玩笑说，我们可以把市面上很多语言都翻译到我们自己的 VM 上来执行，大家都觉得 “<strong>也不是特别难</strong>，就是要多写几行代码而已”。</p>
 <p>这个事儿如果细想，就觉得很有意思了。长久以来，Lua 需要 Lua VM，Yaklang 自然也需要 Yak VM，但是对于我来说，Lua 需要 Yak VM 其实才是比较有意思的操作，我们已经实现了规范化工程化的 Yaklang 的编译字节码步骤，那么编译成 JVM 字节码，还是 Yak VM 字节码，当然也无所谓了。幸运的是，我们实现了自己的虚拟机，并且编译到了自己的字节码格式。也就是说，Lua 我也可以编译到 Yak VM 上，JS 也可以，Java 也可以（当然，静态类型需要做一些补充，禁用一些类型自动转换的特性），Lua 更可以了。</p>
 <p>任何 Lua 写的脚本，只要 VM 提供合理的内置函数，均可以马上运行。我们仔细思考之后，<strong>VM 突破语言边界，和语言突破能力边界的道理是一样的</strong>，一旦接受了这个设定，我们就并不会觉得这些是遥不可及的梦想，至少对我来说，无非是多写几行代码而已。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/486aaefd72e864a1-d80b40023beffc5502096c14b56cf6b9.png" width="550" height="645" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/486aaefd72e864a1-d80b40023beffc5502096c14b56cf6b9.png" width="550" height="645" class="yakdoc-image"></button></p>
 <p><strong>02未来</strong></p>
 <p>当然从技术角度来说，新版本的 Yaklang 语法在保持对原有语法完全兼容的基础上，扩增了一些非常优秀且有用的语法特性，这些语法特性对 AST 编译到字节码的过程要求其实非常高，其复杂度远超当前常见同类脚本语言。实际上 Yaklang 的语法复杂度和特性，复杂程度以及实现难度已经远超Lua / NASL。</p>
 <p>当我们完全实现 Yaklang 的时候，这类特性已经非常成熟了，在几个内部版本的测试中，我们扩充的语法：模版字符串，箭头函数实现了对 JavaScript 闭包的完全复制，也实现了 Golang 风格的定义域定义，以至于旧版本引擎的代码可以百分之百地运行在 YakVM 的新架构下，同时效果不打折，性能还能更强，基础设施接口完全可复用。</p>
 <p>当然，未来我们也会推出 Lua-YakVM，Nasl-YakVM 的新版本。</p>
 <p><strong>YaklangParser.g4：快速预览</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/26c3ac7348e71e30-97408ffa4e5d0f31c28d1903781b6cfd.png" width="787" height="801" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/26c3ac7348e71e30-97408ffa4e5d0f31c28d1903781b6cfd.png" width="787" height="801" class="yakdoc-image"></button></p>
 <p><strong>更新通知</strong></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yakit-114-sp1">Yakit-1.1.4-sp1<a href="#yakit-114-sp1" class="hash-link" aria-label="Yakit-1.1.4-sp1的直接链接" title="Yakit-1.1.4-sp1的直接链接" translate="no">​</a></h2>
 <p><strong>往期推荐&gt;&gt;</strong></p>

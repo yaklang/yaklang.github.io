@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">使用规则管理新功能，进行新年的第一场代码审计！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p078"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="使用规则管理新功能，进行新年的第一场代码审计！ | Yak Program Language"><meta data-rh="true" name="description" content="规则管理 是代码审计继代码审计、代码扫描和项目管理后又一新的功能模块。目前已在最新版的Yakit上线。有了规则管理以后，用户能够更为方便地使用Yakit创建、调试与管理SyntaxFlow规则。"><meta data-rh="true" property="og:description" content="规则管理 是代码审计继代码审计、代码扫描和项目管理后又一新的功能模块。目前已在最新版的Yakit上线。有了规则管理以后，用户能够更为方便地使用Yakit创建、调试与管理SyntaxFlow规则。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-01-02T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p078"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p078" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p078" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p078" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p078","mainEntityOfPage":"https://yaklang.com/en/blog/p078","url":"https://yaklang.com/en/blog/p078","headline":"使用规则管理新功能，进行新年的第一场代码审计！","name":"使用规则管理新功能，进行新年的第一场代码审计！","description":"规则管理 是代码审计继代码审计、代码扫描和项目管理后又一新的功能模块。目前已在最新版的Yakit上线。有了规则管理以后，用户能够更为方便地使用Yakit创建、调试与管理SyntaxFlow规则。","datePublished":"2025-01-02T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,22 +17,22 @@
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则管理简介">规则管理简介<a href="#规则管理简介" class="hash-link" aria-label="Direct link to 规则管理简介" title="Direct link to 规则管理简介" translate="no">​</a></h2>
 <p>以下为该功能的大致一览。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6f1d69eeee745b3a-43f5df59a2734bf8dca54073bfddebfe.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6f1d69eeee745b3a-43f5df59a2734bf8dca54073bfddebfe.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>该模块可以分为两个部分，组别为规则的组管理，右边为规则的详细信息。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/96df8c6cb2156d08-31ce8267ed5951205d9b19ac1fdf19e5.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/96df8c6cb2156d08-31ce8267ed5951205d9b19ac1fdf19e5.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p><strong>组</strong>除了方便管理规则外，主要作用是<strong>在代码扫描中会按组选取规则进行扫描</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/65571d04b49880fb-6a751a01ae8863ca50b7d95a98eabb0b.png" width="1080" height="430" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/65571d04b49880fb-6a751a01ae8863ca50b7d95a98eabb0b.png" width="1080" height="430" class="yakdoc-image"></button></p>
 <p>目前有内置一些基础的组，也可根据自己需求新建规则组。</p>
 <p><strong>右侧规则详细信息</strong>中，包含着许多需要我们在创建规则的时候填写的信息。</p>
 <p>可能有些师傅已经熟悉如何使用Yak在命令行下创建规则了，而使用Yakit创建规则会有一些区别。接下来将为大家介绍规则的创建、调试以及相关的管理。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="创建规则">创建规则<a href="#创建规则" class="hash-link" aria-label="Direct link to 创建规则" title="Direct link to 创建规则" translate="no">​</a></h2>
 <p>创建规则功能的按钮在右上角，如图:</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/acb029cd1781f2c2-aaeb4e55ca92bacc175f21a267e1dca7.png" width="1080" height="582" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/136a62fd49594e64-0ea82e8eee278355bf8326cce9b3d61f.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/acb029cd1781f2c2-aaeb4e55ca92bacc175f21a267e1dca7.png" width="1080" height="582" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/136a62fd49594e64-0ea82e8eee278355bf8326cce9b3d61f.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则结构">规则结构<a href="#规则结构" class="hash-link" aria-label="Direct link to 规则结构" title="Direct link to 规则结构" translate="no">​</a></h2>
 <p>一个完整的规则一般包含三个部分：规则描述、规则内容和规则输出。</p>
 <p>如图:</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/22f0b535200fd612-0eb01c28a191beebc7d077938d880b81.png" width="1080" height="363" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/22f0b535200fd612-0eb01c28a191beebc7d077938d880b81.png" width="1080" height="363" class="yakdoc-image"></button></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则描述"><strong>规则描述</strong><a href="#规则描述" class="hash-link" aria-label="Direct link to 规则描述" title="Direct link to 规则描述" translate="no">​</a></h4>
 <p>规则描述对于一个规则是必要的，它能够表示一个规则的目的、漏洞等级、已经审计出的漏洞类型或者是CVE编号等信息。它由Desc语句中的键值对表示，一些有效的内置键值对如下:</p>
 
@@ -227,11 +227,11 @@
 <p>规则描述的默认level为mid,但是当规则检测到路径穿越漏洞的数据流从source到sink中间没有任何过滤的时候，alert语法将level修正为high；当检测到数据流有filter的时候，将level修正为low。因此规则具体的level只有在具体运行时才能知道。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="调试规则">调试规则<a href="#调试规则" class="hash-link" aria-label="Direct link to 调试规则" title="Direct link to 调试规则" translate="no">​</a></h2>
 <p>现在，在创建完规则后，可以直接选择项目进行规则调试。如下图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a0b7cdb51e1c41dc-f3b07b49f171577a75d87cf4f76459a9.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a0b7cdb51e1c41dc-f3b07b49f171577a75d87cf4f76459a9.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>但是，调试功能还可以有更好的效果。目前只能够调试规则,在未来，也将会支持规则和项目能够在同一个页面修改的调试，就避免了对项目进行重新编译。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="管理规则">管理规则<a href="#管理规则" class="hash-link" aria-label="Direct link to 管理规则" title="Direct link to 管理规则" translate="no">​</a></h2>
 <p>现在支持对规则进行分组，更加方便的管理规则。值得一提的是，对于每个规则，在创建的时候会进行默认分组。默认的分组为语言、规则类型与默认漏洞等级。如图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3788041340f33497-63c56a5b3ecae081b1539e30ff01e086.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3788041340f33497-63c56a5b3ecae081b1539e30ff01e086.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结" translate="no">​</a></h2>
 <p>新的代码审计规则管理功能已经上线，现在编写一条SyntaxFlow规则更为方便!同时，编写规则的时候务需准确填写规则的描述信息，因为引擎会根据描述信息自动生成规则的默认分组。也欢迎各位社区的伙伴去编写SyntaxFlow规则，并反馈你遇到的问题！</p>
 <hr>

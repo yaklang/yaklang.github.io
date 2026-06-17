@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Memfit AI 专业记忆：Agent 动手之前，先翻了一遍你的知识库 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p008"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Memfit AI 专业记忆：Agent 动手之前，先翻了一遍你的知识库 | Yak Program Language"><meta data-rh="true" name="description" content="当AI Agent碰到它不知道的东西"><meta data-rh="true" property="og:description" content="当AI Agent碰到它不知道的东西"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-03-20T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,AI"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p008"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p008" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p008" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p008" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p008","mainEntityOfPage":"https://yaklang.com/blog/p008","url":"https://yaklang.com/blog/p008","headline":"Memfit AI 专业记忆：Agent 动手之前，先翻了一遍你的知识库","name":"Memfit AI 专业记忆：Agent 动手之前，先翻了一遍你的知识库","description":"当AI Agent碰到它不知道的东西","datePublished":"2026-03-20T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -28,13 +28,13 @@
 <p>05 底层的技术实现——从索引构建到多轮搜索的完整链路</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="进入知识库">进入知识库<a href="#进入知识库" class="hash-link" aria-label="进入知识库的直接链接" title="进入知识库的直接链接" translate="no">​</a></h2>
 <p>Memfit AI 的知识库功能集成在主界面中。打开 Memfit 后，在顶部导航栏可以看到&quot;知识库&quot;标签页，点击即可进入知识库管理界面。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c9a5eea5362891f2-646cf6dbcbacc186364cc6ef75685f5a.png" width="1080" height="672" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c9a5eea5362891f2-646cf6dbcbacc186364cc6ef75685f5a.png" width="1080" height="672" class="yakdoc-image"></button></p>
 <p>在这个界面的左侧，我们可以看到已有的知识库列表——包括在线知识库和本地知识库。右侧区域是 AI Agent 的对话窗口，知识库和 Agent 共享同一个工作空间。这个布局本身就暗示了两者的紧密关系。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="创建一个知识库">创建一个知识库<a href="#创建一个知识库" class="hash-link" aria-label="创建一个知识库的直接链接" title="创建一个知识库的直接链接" translate="no">​</a></h2>
 <p>接下来我们实际操作一下。点击&quot;快捷创建知识库&quot;按钮，或者在知识库列表下方找到&quot;新建知识库&quot;入口。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e21d5d426f5b8b07-898cdff379d0401a946fb149d675e958.png" width="1080" height="805" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e21d5d426f5b8b07-898cdff379d0401a946fb149d675e958.png" width="1080" height="805" class="yakdoc-image"></button></p>
 <p>系统会弹出一个参数填写窗口：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/099dacd0bce7deac-776654594ec683cb5d1ec9210c4d6857.png" width="1080" height="727" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/099dacd0bce7deac-776654594ec683cb5d1ec9210c4d6857.png" width="1080" height="727" class="yakdoc-image"></button></p>
 <p>我们需要填入以下几个关键参数：</p>
 <p>01 <strong>知识库名称</strong>：给知识库起一个语义化的名字，方便后续在 Agent 中引用</p>
 <p>02 <strong>上传文件</strong>：支持直接拖拽或选择文件路径，可以导入 PDF、文档、文本等格</p>
@@ -42,15 +42,15 @@
 <p>04 <strong>Tags</strong>：可选的分类标签，用于组织和筛选</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="两种构建模式">两种构建模式<a href="#两种构建模式" class="hash-link" aria-label="两种构建模式的直接链接" title="两种构建模式的直接链接" translate="no">​</a></h3>
 <p>构建模式的选择直接影响知识库的存储结构和查询能力。我们用一张表来对比：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1c1c432e5460d3e8-5b749fe1bad2e1d5accb39bcce393960.png" width="1048" height="342" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/1c1c432e5460d3e8-5b749fe1bad2e1d5accb39bcce393960.png" width="1048" height="342" class="yakdoc-image"></button></p>
 <p>&quot;增强知识图谱索引&quot;模式会对文档进行深度分析：先切片，然后通过 ERM（Entity Relationship Model）抽取实体和关系，构建知识图谱；同时还会为每个切片生成问题索引，用于向量化检索。整个过程涉及多轮 AI 调用，因此构建时间会更长，但查询质量也更高。</p>
 <p>&quot;仅构建知识索引&quot;模式更轻量。它跳过了实体关系抽取的步骤，直接对切片内容生成查询强化索引，然后向量化入库。如果你的文档本身已经是高质量的结构化知识（比如 API 文档、技术规范），这个模式的性价比更高。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="实战导入-gbt-34944-2017">实战：导入 GB/T 34944-2017<a href="#实战导入-gbt-34944-2017" class="hash-link" aria-label="实战：导入 GB/T 34944-2017的直接链接" title="实战：导入 GB/T 34944-2017的直接链接" translate="no">​</a></h3>
 <p>我们用一个具体的例子来走完整个流程。这次选择导入 GB/T 34944-2017《Java 语言源代码漏洞测试规范》这份国标文档。</p>
 <p>在弹窗中填入知识库名称为&quot;我的知识库&quot;，上传文件选择本地的 PDF 文件路径，构建模式选择&quot;增强知识图谱索引&quot;——因为国标文档包含大量的漏洞分类、测试方法和判定标准之间的关联关系，适合构建知识图谱。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a730ad71a59ae696-cce1f9ffaa2f262bebd5a519b41bfb7c.png" width="713" height="599" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a730ad71a59ae696-cce1f9ffaa2f262bebd5a519b41bfb7c.png" width="713" height="599" class="yakdoc-image"></button></p>
 <p>点击&quot;确定&quot;后，构建过程开始执行。在执行面板中可以实时看到构建进度：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/ad65207e0dc6146e-27cdfe0a94a7591035e7c80cc3236cb2.png" width="1080" height="762" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/ad65207e0dc6146e-27cdfe0a94a7591035e7c80cc3236cb2.png" width="1080" height="762" class="yakdoc-image"></button></p>
 <p>从日志中可以观察到几个关键阶段：</p>
 <p>01 <strong>文档解析</strong>：系统识别 PDF 文件类型，解析文档内容</p>
 <p>02 <strong>分片处理</strong>：将长文档切分为多个 chunk，每个 chunk 保持语义完整性</p>
@@ -59,7 +59,7 @@
 <p>构建完成后，我们可以在知识库界面看到结果。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="知识图谱可视化">知识图谱可视化<a href="#知识图谱可视化" class="hash-link" aria-label="知识图谱可视化的直接链接" title="知识图谱可视化的直接链接" translate="no">​</a></h3>
 <p>这是最直观的部分。切换到知识库的图谱视图，可以看到系统自动抽取出来的实体和关系网络：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a3b99e758ca7f03b-80b84276e4d7da2fe2657d946ebf92d7.png" width="1080" height="623" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a3b99e758ca7f03b-80b84276e4d7da2fe2657d946ebf92d7.png" width="1080" height="623" class="yakdoc-image"></button></p>
 <p>选择任意一个节点，可以查看该实体的详细属性和关联关系。这个图谱在后续的查询中会发挥重要作用——当 Agent 搜索到一个实体时，可以通过 K-hop 遍历找到与它关联的其他知识点，这就是多跳知识查询的基础。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="查询验证">查询验证<a href="#查询验证" class="hash-link" aria-label="查询验证的直接链接" title="查询验证的直接链接" translate="no">​</a></h2>
 <p>知识库构建好了，接下来验证一下查询效果。</p>
@@ -68,12 +68,12 @@
 <blockquote>
 <p>Java 中关于日志的相关安全设置应该如何操作？</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/ccd2ab8cdd961314-d2e3b7a5064ae378e10b3f7e2d5647a6.png" width="952" height="1031" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/ccd2ab8cdd961314-d2e3b7a5064ae378e10b3f7e2d5647a6.png" width="952" height="1031" class="yakdoc-image"></button></p>
 <p>系统会将问题转化为搜索查询，在选中的知识库中检索相关内容。搜索框下方的 @ 选择器可以指定搜索范围——是搜索所有知识库，还是只搜索特定的某一个。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agentic-rag-召回">Agentic RAG 召回<a href="#agentic-rag-召回" class="hash-link" aria-label="Agentic RAG 召回的直接链接" title="Agentic RAG 召回的直接链接" translate="no">​</a></h3>
 <p>这才是真正有意思的部分。</p>
 <p>当我们发起一次 Agentic RAG 查询时，系统会将用户的问题转化为一个 Agent 搜索任务。AI 会自主决定搜索策略，然后逐步探索知识库中的内容。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/ea9ca48e23c82d1d-8bb6d9f630d2619ea111aad1dd222b78.png" width="548" height="831" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/ea9ca48e23c82d1d-8bb6d9f630d2619ea111aad1dd222b78.png" width="548" height="831" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>我们可以观察到几个关键行为：</p>
 <p>01 AI 先理解用户问题的意图，将其拆分或泛化为多个子查询</p>
 <p>02 调用 search_knowledge_semantic 和 search_query 等搜索函数</p>
@@ -81,15 +81,15 @@
 <p>04 如果需要更多细节，自动调整查询内容进行下一轮搜索</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="查询结果">查询结果<a href="#查询结果" class="hash-link" aria-label="查询结果的直接链接" title="查询结果的直接链接" translate="no">​</a></h3>
 <p>来看一个典型的查询结果。我们问了一个关于&quot;Java 日志安全设置&quot;的问题，系统返回了结构化的回答：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a71d6c98aec88ac1-4774f0e809f772edfd1bd30eeda6929b.png" width="538" height="1273" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a71d6c98aec88ac1-4774f0e809f772edfd1bd30eeda6929b.png" width="538" height="1273" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>这个结果有几个值得注意的地方。AI 对搜索到的多个知识片段进行了去重、合并和结构化整理，形成了&quot;日志安全守则&quot;这样的归纳性标题，下面按&quot;日志访问控制&quot;、&quot;禁止日志记录敏感信息&quot;等维度组织具体内容。每个要点都可以追溯到原始的知识库条目——这些内容来自 GB/T 34944 中关于日志安全的多个章节，AI 把它们关联起来了。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="从agent中直接使用知识库">从Agent中直接使用知识库<a href="#从agent中直接使用知识库" class="hash-link" aria-label="从Agent中直接使用知识库的直接链接" title="从Agent中直接使用知识库的直接链接" translate="no">​</a></h2>
 <p>到现在为止，我们展示的还是在知识库界面中手动查询的场景。那么更核心的问题来了：Agent 执行任务的时候，如何使用知识库？</p>
 <p>在 Memfit AI 的对话界面中，我们可以通过 @ 符号引用知识库。</p>
 <p>Agent 在规划和执行任务的过程中，会根据当前任务的需要自主决定是否查询知识库、查询哪个知识库、用什么问题去查。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/be858ff8e5ef73cf-e0ed656917bc57b16ae4a5c5b3d1a2b8.png" width="1080" height="632" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/be858ff8e5ef73cf-e0ed656917bc57b16ae4a5c5b3d1a2b8.png" width="1080" height="632" class="yakdoc-image"></button></p>
 <p>举个具体的例子。我们让 Agent 回答一个综合性问题，这个问题涉及 Java 安全领域的多个方面。Agent 在执行过程中，自动触发了知识库的 Agentic 搜索。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/8f6726ba3a9bb6b6-17ee4643fbb64cefe334ed91f5091a98.png" width="1080" height="871" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/8f6726ba3a9bb6b6-17ee4643fbb64cefe334ed91f5091a98.png" width="1080" height="871" class="yakdoc-image"></button></p>
 <p>我们搜索一个综合问题，可以看到 Agentic 的两轮搜索过程。第一轮搜索拿到了部分结果，Agent 评估后认为还缺少某些维度的信息，于是调整了查询内容进行第二轮搜索。</p>
 <p>这种自我调整的能力，一般的独立知识库系统做不到——它们只会被动地接收查询、返回结果。Agent 的&quot;主动探索&quot;才是 Agentic RAG 真正的价值所在。</p>
 <p>这也是为什么我们说&quot;知行合一&quot;。知识库提供记忆，Agent 提供行动力，两者在同一个运行时内紧密协作。Agent 遇到不确定的问题时，会像一个经验丰富的工程师翻阅参考手册一样，反复查找、交叉验证，直到获得足够的信心来做出判断。</p>
@@ -97,7 +97,7 @@
 <p>讲完了使用体验，我们来看看底层的技术实现。这部分面向对 RAG 系统和 Agent 架构有兴趣的读者，我们会结合实际代码来分析几个关键模块。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="强化索引构建与知识图谱构建">强化索引构建与知识图谱构建<a href="#强化索引构建与知识图谱构建" class="hash-link" aria-label="强化索引构建与知识图谱构建的直接链接" title="强化索引构建与知识图谱构建的直接链接" translate="no">​</a></h3>
 <p>文档从上传到可查询，需要经过一条完整的处理管线。我们用一张流程图来说明：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a7e38d23f901ee4e-f826c17c49aa4db088f2b427d98344a9.png" width="581" height="1155" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a7e38d23f901ee4e-f826c17c49aa4db088f2b427d98344a9.png" width="581" height="1155" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>两种模式的差异体现在中间环节。&quot;增强知识图谱索引&quot;模式走完整链路：ERM 抽取 + 问题索引 + 向量化；&quot;仅构建知识索引&quot;模式跳过 ERM，直接从分片内容生成问题索引。</p>
 <p>问题索引构建是一个值得展开说的环节。系统会调用 AI 对每个文档切片生成一组&quot;检索问题&quot;——这些问题模拟的是真实用户可能会搜索的内容，覆盖了操作方法、概念定义、原因分析、最佳实践、故障排查等多个维度。核心逻辑在 BuildIndexQuestions 函数中：</p>
 <div class="language-go codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-go codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">funcBuildIndexQuestions</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">rawInput </span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token builtin">string</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> aiService aicommon</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">AICallbackType</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">map</span><span class="token punctuation" style="color:#393A34">[</span><span class="token builtin">string</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token builtin">string</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token builtin">error</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    linedInput </span><span class="token operator" style="color:#393A34">:=</span><span class="token plain"> utils</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">PrefixLinesWithLineNumbers</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">rawInput</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    query</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> err </span><span class="token operator" style="color:#393A34">:=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">LiteForgeQueryFromChunk</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">indexBuildPrompt</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">chunkmaker</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">NewBufferChunk</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">[</span><span class="token punctuation" style="color:#393A34">]</span><span class="token function" style="color:#d73a49">byte</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">linedInput</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">200</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    result</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> err </span><span class="token operator" style="color:#393A34">:=</span><span class="token plain"> aicommon</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">InvokeLiteForge</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">query</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> forgeOpts</span><span class="token operator" style="color:#393A34">...</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// ...</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    entries</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> err </span><span class="token operator" style="color:#393A34">:=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">index2KnowledgeEntity</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">Action</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> rawInput</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">return</span><span class="token plain"> entries</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">nil</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
@@ -106,7 +106,7 @@
 <p>知识图谱的构建则通过 ERM 实体关系抽取完成。系统利用 AI 从文档中识别出实体（如漏洞类型、安全标准、测试方法等）和它们之间的关系（如&quot;属于&quot;、&quot;测试方法&quot;、&quot;防护措施&quot;等），构建成一张有向图。这张图存储在本地数据库中，支持 K-hop 多跳遍历查询。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="多策略搜索管线">多策略搜索管线<a href="#多策略搜索管线" class="hash-link" aria-label="多策略搜索管线的直接链接" title="多策略搜索管线的直接链接" translate="no">​</a></h3>
 <p>一条用户查询进来之后，系统不会只做一次简单的向量搜索。实际上，Memfit 的搜索管线会<strong>并行</strong>执行多种搜索策略，然后将所有结果融合排序。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1f39c16034f0dccb-3d571d1d199ef3f34533dd80bc24f11b.png" width="800" height="375" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/1f39c16034f0dccb-3d571d1d199ef3f34533dd80bc24f11b.png" width="800" height="375" class="yakdoc-image"></button></p>
 <p>五种搜索策略各有侧重，对应代码中的 SearchHandler 接口：</p>
 <p>01 <strong>基础向量搜索（Basic）</strong>：用原始查询直接做向量相似度匹配，这是最基本的语义搜索</p>
 <p>02 <strong>HyDE 假设回答（Hypothetical Document Embedding）</strong>：AI 先针对用户问题生成一段&quot;假设的理想答案&quot;，然后用这段答案作为查询内容去搜索。因为&quot;答案&quot;和&quot;文档内容&quot;的语义空间更接近，往往能搜到直接搜问题搜不到的结果</p>
@@ -132,7 +132,7 @@
 <p>这确保了最终回答严格基于知识库内容，不会混入大模型的&quot;幻觉&quot;。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agentic-自我调整与多轮迭代">Agentic 自我调整与多轮迭代<a href="#agentic-自我调整与多轮迭代" class="hash-link" aria-label="Agentic 自我调整与多轮迭代的直接链接" title="Agentic 自我调整与多轮迭代的直接链接" translate="no">​</a></h3>
 <p>到这里，我们已经讲清楚了单次查询的完整流程。那么 Agentic RAG 的&quot;多轮搜索&quot;又是怎么实现的？</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/372a1d8c930e8713-dc0e8f3127c4f75db831a943eca4fc7f.png" width="537" height="2124" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/372a1d8c930e8713-dc0e8f3127c4f75db831a943eca4fc7f.png" width="537" height="2124" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>核心机制可以拆解为三个环节：</p>
 <p><strong>01 搜索计划制定。</strong></p>
 <p>Agent 收到一个需要知识支撑的问题后，首先分析问题涉及哪些知识维度。比如&quot;Java 安全审计的完整流程&quot;可能涉及漏洞分类、测试方法、工具使用、报告规范等多个方面。Agent 会据此决定第一轮搜索的查询内容。</p>
@@ -147,20 +147,20 @@
 <p>那么，真正的生产场景呢？</p>
 <p>如果我们给 Agent 下达一个具体的任务——比如&quot;对一个 Java SpringBoot2 项目进行代码审计&quot;——Agent 在执行过程中能不能自己去翻阅知识库里的安全规范？</p>
 <p>我们来试一下。在 Memfit AI 的对话框中输入任务指令，同时通过 @ 符号挂载上刚才创建的知识库：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5ba7c58a251ac388-15197f9e18a3a6d45e9b7330f50e0f15.png" width="1048" height="682" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5ba7c58a251ac388-15197f9e18a3a6d45e9b7330f50e0f15.png" width="1048" height="682" class="yakdoc-image"></button></p>
 <p>注意看这个操作：我们告诉 Agent &quot;进行代码审计&quot;，并且指定使用 @我的知识库 中的内容来辅助审计过程。Agent 接到指令后，会将知识库作为自己的&quot;参考资料&quot;带入整个任务执行链路。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="先查知识再规划任务">先查知识，再规划任务<a href="#先查知识再规划任务" class="hash-link" aria-label="先查知识，再规划任务的直接链接" title="先查知识，再规划任务的直接链接" translate="no">​</a></h3>
 <p>Agent 启动任务后，做的第一件事很有意思——它没有直接开始扫描代码，而是先去知识库里查了一轮资料。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/77065ae0920d5926-182251f209fd1a543023d463f52af58f.png" width="1080" height="628" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/77065ae0920d5926-182251f209fd1a543023d463f52af58f.png" width="1080" height="628" class="yakdoc-image"></button></p>
 <p>从执行日志中可以看到，Agent 在规划阶段就触发了知识库搜索。它从 GB/T 34944 中检索到了 Java 代码审计需要关注的漏洞类型和测试方法，然后<strong>基于这些知识来制定任务计划</strong>。</p>
 <p>这个顺序值得留意：先查资料，再定方案。这和一个有经验的安全工程师接到审计任务时的行为模式完全一致——拿到项目之后，先翻一遍安全规范，搞清楚要审什么、按什么标准审，然后才开始动手。</p>
 <p>更值得关注的是，执行过程中我们看到了上一篇文章中介绍过的动态任务规划能力。Agent 在查阅知识库之后，根据检索到的安全规范条目，<strong>主动修改了自己的任务列表</strong>——把原本比较笼统的&quot;代码审计&quot;拆分成了更具体的子任务，比如针对 SQL 注入的检测、针对 XSS 的检测、针对日志安全的检测等等。每个子任务的目标和方法都贴合了知识库中的规范要求。</p>
 <p>这就是知识库和 Agent 深度融合之后产生的化学反应：知识库的内容直接影响了 Agent 的行为决策，Agent 的任务规划会随着知识的注入而变得更加精准和有针对性。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="执行结果">执行结果<a href="#执行结果" class="hash-link" aria-label="执行结果的直接链接" title="执行结果的直接链接" translate="no">​</a></h3>
 <p>当然我们毫不意外的可以收获一些漏洞：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/519e4a3be98581b5-5d822978afa8309fac903e1f545c5ee5.png" width="1080" height="827" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/519e4a3be98581b5-5d822978afa8309fac903e1f545c5ee5.png" width="1080" height="827" class="yakdoc-image"></button></p>
 <p>当我们等待系统执行完毕，可以看到如下内容：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/db760d2f8aeefe25-a755055046034df77d374578b2a9cb82.png" width="1080" height="9152" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/db760d2f8aeefe25-a755055046034df77d374578b2a9cb82.png" width="1080" height="9152" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>这个流程和前面&quot;在对话中 @ 知识库问问题&quot;的场景有本质区别。对话中的查询是一次性的，Agent 问完就结束了；而在任务执行中，知识库被反复调用，贯穿了规划、执行、判定、报告的全过程。</p>
 <p>Agent 真正把知识库当成了自己随身携带的&quot;参考手册&quot;——需要的时候翻一下，不需要的时候放在一边，但始终带在身上。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="回顾">回顾<a href="#回顾" class="hash-link" aria-label="回顾的直接链接" title="回顾的直接链接" translate="no">​</a></h2>

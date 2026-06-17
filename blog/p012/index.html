@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">告别漏报！Al + SSA 数据流分析精准捕获17处密码泄露 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p012"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="告别漏报！Al + SSA 数据流分析精准捕获17处密码泄露 | Yak Program Language"><meta data-rh="true" name="description" content="AI Agent 这两年正以不可思议的速度发展着。这种由大语言模型（LLM）驱动的自然交互模式，正在重塑静态应用安全测试（SAST）领域。基于 AI Agent 的自动化代码审计方案，已逐渐成为当前安全工程实践的重点探索方向。"><meta data-rh="true" property="og:description" content="AI Agent 这两年正以不可思议的速度发展着。这种由大语言模型（LLM）驱动的自然交互模式，正在重塑静态应用安全测试（SAST）领域。基于 AI Agent 的自动化代码审计方案，已逐渐成为当前安全工程实践的重点探索方向。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-02-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,代码审计,AI"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p012"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p012" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p012" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p012" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p012","mainEntityOfPage":"https://yaklang.com/blog/p012","url":"https://yaklang.com/blog/p012","headline":"告别漏报！Al + SSA 数据流分析精准捕获17处密码泄露","name":"告别漏报！Al + SSA 数据流分析精准捕获17处密码泄露","description":"AI Agent 这两年正以不可思议的速度发展着。这种由大语言模型（LLM）驱动的自然交互模式，正在重塑静态应用安全测试（SAST）领域。基于 AI Agent 的自动化代码审计方案，已逐渐成为当前安全工程实践的重点探索方向。","datePublished":"2026-02-27T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -44,7 +44,7 @@
 <li class=""><strong>精准切片验证 (Read)</strong>：当引擎返回确凿的文件路径与行号后，AI 才会切换到“显微镜模式”，利用 <code>Read</code> 工具读取涉事节点周围的局部上下文（通常为 ±20 行）。这种按需读取的方式，确保了 AI 只处理经过引擎验证的有效逻辑，极大地降低了 Token 的无效消耗，并有效规避了由无关代码诱发的“幻觉”。</li>
 <li class=""><strong>边缘工具降级 (Grep/Glob)</strong>：在 Engine-First模型中，文本搜索工具被降级为处理非代码类资产（如 <code>.yml</code>、<code>.xml</code> 配置文件）的辅助手段，避免过多参与数据流分析导致严重的噪声。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f2b2b5fa469a8938-d42184c41fabe1b8343233ea156d8833.png" width="1024" height="559" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f2b2b5fa469a8938-d42184c41fabe1b8343233ea156d8833.png" width="1024" height="559" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="自愈机制">自愈机制<a href="#自愈机制" class="hash-link" aria-label="自愈机制的直接链接" title="自愈机制的直接链接" translate="no">​</a></h2>
 <p>由于 SyntaxFlow 的语法极其严谨，AI 在构造复杂规则时难免出现细微偏差。为了防止因琐碎的语法错误导致任务中断，该 skill 还引入了自愈机制。</p>
 <p>具体而言，当 <code>ssa_query</code> 返回语法解析错误时，AI 不会向用户道歉或请求帮助，而是直接进入自愈流程：即 AI 会自动修复 SyntaxFlow 语法报错并重新查询（感谢完善的SyntaxFlow 机制，能返回完整的报错信息以及预期 Token 信息）。</p>
@@ -56,7 +56,7 @@
 <li class=""><strong>内存</strong>里的补丁（Memory Layer）**：当你修改了代码再次调用时，引擎只会针对那些变动的文件进行解析。这份增量数据非常轻量，直接存放在内存里以保证读写极速。</li>
 <li class=""><strong>双层叠加（ProgramOverLay）</strong>：当你发起查询时，AI 会告诉引擎将这两层数据“缝合”在一起。查询指令会同时穿透数据库里的底座和内存里的补丁，确保你拿到的永远是代码最新状态的完整视图。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/66598da296ba861b-920b22cde42d1ef146e23f53d1caab31.png" width="1024" height="559" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/66598da296ba861b-920b22cde42d1ef146e23f53d1caab31.png" width="1024" height="559" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="实战体验">实战体验<a href="#实战体验" class="hash-link" aria-label="实战体验的直接链接" title="实战体验的直接链接" translate="no">​</a></h2>
 <p>在聊完架构和原理后，最终还是要回归到用起来效果怎么样这个核心问题上。在这里分享如何快速搭建这套环境，并展示其在真实项目审计中的表现。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="获取yak二进制引擎">获取Yak二进制引擎<a href="#获取yak二进制引擎" class="hash-link" aria-label="获取Yak二进制引擎的直接链接" title="获取Yak二进制引擎的直接链接" translate="no">​</a></h2>
@@ -79,13 +79,13 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="开启-irify-sast-skill">开启 irify-sast-skill<a href="#开启-irify-sast-skill" class="hash-link" aria-label="开启 irify-sast-skill的直接链接" title="开启 irify-sast-skill的直接链接" translate="no">​</a></h4>
 <p>在具备 Skill 的情况下，AI 表现出了极强的“确定性”执行力。它并没有盲目翻阅文件，而是严格执行 Engine-First 范式。</p>
 <p>AI 意识到这是一个典型的污点分析需求。它首先通过 <code>ssa_compile</code>完成项目编译，随后利用注入的知识构造了一条复杂的 <code>ssa_query</code> 规则：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9eb4894df5396513-198bf280843bfb665db7b2e8e10baca4.png" width="1080" height="582" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f414ef3992baab9e-56de035a0cdb734dfa310b01c80d10e5.png" width="1080" height="582" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/8362e75be61735a3-6e31e4115dba28359137b5895d3395e3.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/9eb4894df5396513-198bf280843bfb665db7b2e8e10baca4.png" width="1080" height="582" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f414ef3992baab9e-56de035a0cdb734dfa310b01c80d10e5.png" width="1080" height="582" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/8362e75be61735a3-6e31e4115dba28359137b5895d3395e3.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="关闭-skill文本猜测模式">关闭 Skill：文本猜测模式<a href="#关闭-skill文本猜测模式" class="hash-link" aria-label="关闭 Skill：文本猜测模式的直接链接" title="关闭 Skill：文本猜测模式的直接链接" translate="no">​</a></h4>
 <p>在失去 Skill 的约束与知识注入后，AI 陷入了典型的“信息溺水”状态。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/aaa1ee3142477a6f-da8293de524317851e1c2ac028734ccd.png" width="1080" height="582" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/652a8c22449f27c5-75cb0a7833d5484dd766f8232dcc161f.png" width="1080" height="521" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/aaa1ee3142477a6f-da8293de524317851e1c2ac028734ccd.png" width="1080" height="582" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/652a8c22449f27c5-75cb0a7833d5484dd766f8232dcc161f.png" width="1080" height="521" class="yakdoc-image"></button></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="对比">对比<a href="#对比" class="hash-link" aria-label="对比的直接链接" title="对比的直接链接" translate="no">​</a></h4>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="简单对比一下两者实际效果">简单对比一下两者实际效果：<a href="#简单对比一下两者实际效果" class="hash-link" aria-label="简单对比一下两者实际效果：的直接链接" title="简单对比一下两者实际效果：的直接链接" translate="no">​</a></h4>
 <ul>

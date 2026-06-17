@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">新功能：史上最好用的反连&amp;JavaHack，安全能力基座强化ing | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p253"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="新功能：史上最好用的反连&amp;JavaHack，安全能力基座强化ing | Yak Program Language"><meta data-rh="true" name="description" content="反序列化、类加载、JNDI漏洞利用是Java漏洞中特别常见的几种类型，但相对来说利用过程又是较为复杂的。所以Yakit提供了两个特别好用的功能，无需Java环境，仅需一个Yakit。"><meta data-rh="true" property="og:description" content="反序列化、类加载、JNDI漏洞利用是Java漏洞中特别常见的几种类型，但相对来说利用过程又是较为复杂的。所以Yakit提供了两个特别好用的功能，无需Java环境，仅需一个Yakit。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-10-13T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,Java 安全"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p253"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p253" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p253" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p253" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p253","mainEntityOfPage":"https://yaklang.com/en/blog/p253","url":"https://yaklang.com/en/blog/p253","headline":"新功能：史上最好用的反连&JavaHack，安全能力基座强化ing","name":"新功能：史上最好用的反连&JavaHack，安全能力基座强化ing","description":"反序列化、类加载、JNDI漏洞利用是Java漏洞中特别常见的几种类型，但相对来说利用过程又是较为复杂的。所以Yakit提供了两个特别好用的功能，无需Java环境，仅需一个Yakit。","datePublished":"2022-10-13T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,26 +19,26 @@
 <p>01</p>
 <p>本地启动</p>
 <p>初始页面如图(如果有配置公网反连，则会自动启用公网穿透，并自动填写Bridge信息)，反连地址默认是获取本机的第一块网卡IP。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2f19a2877d3435e9-9a5c44fb43bf3f1268af158f53cea795.png" width="1080" height="444" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2f19a2877d3435e9-9a5c44fb43bf3f1268af158f53cea795.png" width="1080" height="444" class="yakdoc-image"></button></p>
 <p>启动成功后如图，根据需求填写蓝色提示框内的地址.</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c611d642f610467-43c5930889d85abae62302ea1b808ca5.png" width="1080" height="465" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c611d642f610467-43c5930889d85abae62302ea1b808ca5.png" width="1080" height="465" class="yakdoc-image"></button></p>
 <p>02</p>
 <p>漏洞检测</p>
 <p>写一段java代码测试下连接</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3114991cbf6cc571-d2b7201fb834ff08e099a5db8e249a35.png" width="1080" height="420" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3114991cbf6cc571-d2b7201fb834ff08e099a5db8e249a35.png" width="1080" height="420" class="yakdoc-image"></button></p>
 <p>在Yakit上可以看见收到请求，token为aaa，返回内容为<empty>（代表响应内容为空）</empty></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4a46550d1d10e4d0-53b939e9fc158505b5e33dd1d966c602.png" width="1080" height="303" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4a46550d1d10e4d0-53b939e9fc158505b5e33dd1d966c602.png" width="1080" height="303" class="yakdoc-image"></button></p>
 <p>03</p>
 <p>漏洞利用</p>
 <p>在返连页面右上角有个Payload配置，开启后可以看见左面出现类似 Yso-Java Hack 的页面，在这里可以配置payload。</p>
 <p>命令填写</p>
 <p><code>open /System/Applications/Calculator.app</code></p>
 <p>然后点生成。可以看见返连地址自动添加了token。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/807cff1af07318d8-5b1712301574c11a699c644230c298ee.png" width="1080" height="556" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/807cff1af07318d8-5b1712301574c11a699c644230c298ee.png" width="1080" height="556" class="yakdoc-image"></button></p>
 <p>复制新地址，再试一下连接ldap，发现弹出计算器。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fe61162506332842-946aee3ec45f690f75bf4f8474248b70.png" width="1080" height="561" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fe61162506332842-946aee3ec45f690f75bf4f8474248b70.png" width="1080" height="561" class="yakdoc-image"></button></p>
 <p>在 Yakit 上可以看见利用流程: 受害端发出 ldap 请求，Yakit 返回一个 reference 类，指向一个 web 地址 -&gt; 受害端访问 web 地址，Yakit 返回一个恶意类 -&gt; 受害端加载恶意类导致命令执行。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c6912bbca16339d-93ff6043f1c66d8030594de30f6dc4ce.png" width="1080" height="457" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c6912bbca16339d-93ff6043f1c66d8030594de30f6dc4ce.png" width="1080" height="457" class="yakdoc-image"></button></p>
 <p>04</p>
 <p>公网穿透</p>
 <p>对于公网的目标，反连服务就需要在公网监听了，一是可以将Yak引擎公网部署，二是可以在公网搭建Bridge，这里主要讲下第二种方法。</p>
@@ -46,32 +46,32 @@
 <p>（执行<code>bash &lt;(curl -sS -L ``http://oss.yaklang.io/install-latest-yak.sh``)</code>进行安装），执行<code>yak grpc --secret yourpassword</code>启动Bridge。</p>
 <p>更多介绍可以看这篇文章<a href="http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247488877&amp;idx=1&amp;sn=901321bb720ca8ba2024f702ccfffd47&amp;chksm=c2d269c9f5a5e0df5605995845dafc2278bd90ded27f15e4c9e45b37ac15d62a2d3350519f75&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">《想拥有自己的 Yak Bridge？DNSLog、ICMPLog、TCPLog 全部免费》。</a></p>
 <p>如图输入 Bridge 地址和密码，启动（如果报错 connection refused 则表示连接 Bridge 失败，检查下密码是否正确、端口是否成功开启、vps 上是否有防火墙限制、云服务控制台上是否设置了安全策略）</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e89003ae2f0a78f0-6f57437d90249326eed446cb7cd3c844.png" width="1080" height="480" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5a2add489110c4a-0477427d4c8ab6f05385a859e8a3b59e.png" width="1080" height="579" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e89003ae2f0a78f0-6f57437d90249326eed446cb7cd3c844.png" width="1080" height="480" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5a2add489110c4a-0477427d4c8ab6f05385a859e8a3b59e.png" width="1080" height="579" class="yakdoc-image"></button></p>
 <p>连接成功后可以看到反连地址的 IP 已经变为 Bridge 服务器的 IP 了，接下来的操作和本地启动相同。</p>
 <p>Yso-Java Hack</p>
 <p>页面初始状态如图，左侧配置 payload 参数，右侧用来展示生成的 payload。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/964ec8ee6f868cac-a44837bf2b2447063a01870afc67ca6f.png" width="1080" height="516" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/964ec8ee6f868cac-a44837bf2b2447063a01870afc67ca6f.png" width="1080" height="516" class="yakdoc-image"></button></p>
 <p>01</p>
 <p>生成序列号payload</p>
 <p>默认开启 “使用利用链”，即生成序列化 payload ，一级选项是利用链，二级选项是恶意类。鼠标放到小问号上可以看到介绍。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f4b3d62ab7da3264-10039af6276c090d8c25b7458b2d6b2d.png" width="744" height="405" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f4b3d62ab7da3264-10039af6276c090d8c25b7458b2d6b2d.png" width="744" height="405" class="yakdoc-image"></button></p>
 <p>选择利用链和恶意类后，会出现配置表单，类名默认是随机生成的，填写所有表单信息，点击生成，就可以在右侧看到生成的 payload ，点击上方可以切换展示方式。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/87f829231615bb80-6b62a77a42232c820caa4ef7d933c57e.png" width="1080" height="456" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/550240742276bae3-823fa8ef279d4b1d1778897c7d9d9f05.png" width="1080" height="619" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/87f829231615bb80-6b62a77a42232c820caa4ef7d933c57e.png" width="1080" height="456" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/550240742276bae3-823fa8ef279d4b1d1778897c7d9d9f05.png" width="1080" height="619" class="yakdoc-image"></button></p>
 <p>还可以展示生成payload的代码，还可以将代码发送到Yak Runner，师傅们写插件时如果懒得写，就可以直接在这里直接生成代码。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c3bb2b274c016cf0-99efa9889501463739547dafaf12ef9e.png" width="1080" height="196" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c3bb2b274c016cf0-99efa9889501463739547dafaf12ef9e.png" width="1080" height="196" class="yakdoc-image"></button></p>
 <p>最新版本 payload 展示类型增加了一个 DUMP ，可以看到 payload 的数据结构，像下面这样。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/269365bdd95e1a8e-dba4517bece6a6ce5311e8b08c423bbc.png" width="1080" height="650" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/269365bdd95e1a8e-dba4517bece6a6ce5311e8b08c423bbc.png" width="1080" height="650" class="yakdoc-image"></button></p>
 <p>02</p>
 <p>生成恶意类</p>
 <p>如图，关闭 “使用利用链” 就可以生成恶意类，具体操作和生成利用链类似</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/dfaeabec82226fa7-e08f96deeb4fb589c1d9609a3be90774.png" width="1080" height="496" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/dfaeabec82226fa7-e08f96deeb4fb589c1d9609a3be90774.png" width="1080" height="496" class="yakdoc-image"></button></p>
 <p>可以看见关闭 “使用利用链” 时多了一个启动反连服务按钮，下面再看一下反连服务。</p>
 <p>0303</p>
 <p>配合反连使用</p>
 <p>在配置好恶意类后，点击启动反连，就可以使用当前恶意类直接启动反连了（如果配置了公网反连则使用此配置启动，否则使用本地启动，如果启动失败，请自行在高级配置里配置反连地址），如图</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6a69ff528509665d-3dd3e335f1e726fe6ae86e31a48bf5fb.png" width="1080" height="575" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6a69ff528509665d-3dd3e335f1e726fe6ae86e31a48bf5fb.png" width="1080" height="575" class="yakdoc-image"></button></p>
 <p>实战测试</p>
 <p>新功能介绍完了，下面看下实战场景吧，以 Fastjson 和 shiro 利用为例。</p>
 <p>01</p>
@@ -79,29 +79,29 @@
 <p>这里使用 vulfocus 启动一个 CNVD-2017-02833 实例，攻击流程如下</p>
 <ol>
 <li class="">在 vps 启动一个 yak 引擎<code>yak grpc --host 0.0.0.0</code>，Yakit 端输入服务器地址和端口（默认8087），连接</li>
-<li class="">打开Yakit的端口监听器，监听一个端口，以 8086 为例 <img decoding="async" loading="lazy" alt="image" src="/en/assets/images/eb7cb87b9efae614-8154fe2538add71d0fbb9bcd84117458.png" width="1080" height="453" class="img_ev3q"></li>
+<li class="">打开Yakit的端口监听器，监听一个端口，以 8086 为例 <button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/eb7cb87b9efae614-8154fe2538add71d0fbb9bcd84117458.png" width="1080" height="453" class="yakdoc-image"></button></li>
 <li class="">启动反连服务器并配置恶意类为 TCPReverseShell ，主机填 vps 的 ip ，端口填上面监听的 8086 ，点击应用</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b8d651de40e09c81-8e2079d5deb30df60ef79738a0d69251.png" width="1080" height="597" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b8d651de40e09c81-8e2079d5deb30df60ef79738a0d69251.png" width="1080" height="597" class="yakdoc-image"></button></p>
 <ol>
 <li class="">打开 webfuzzer，发送 Payload</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/de83183144c89773-52050e55f5277291bc1ce999999b882f.png" width="1080" height="548" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3908ab223a5a2206-e27a72e710a8b670f0ab5241a89e428c.png" width="1080" height="469" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/de83183144c89773-52050e55f5277291bc1ce999999b882f.png" width="1080" height="548" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3908ab223a5a2206-e27a72e710a8b670f0ab5241a89e428c.png" width="1080" height="469" class="yakdoc-image"></button></p>
 <p>如图，反连列表中可以看见成功收到 LDAP 和 HTTP 请求，说明目标成功加载了恶意类（如果只收到 LDAP 请求，没有 HTTP 请求，可能是目标未开启</p>
 <p>com.sun.jndi.ldap.object.trustURLCodebase ）</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/92ffd6411ce8d9b8-ca86ae01d27e8255ed4d74e7ade422d7.png" width="1080" height="529" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/92ffd6411ce8d9b8-ca86ae01d27e8255ed4d74e7ade422d7.png" width="1080" height="529" class="yakdoc-image"></button></p>
 <p>端口监听器收到了目标机器的连接</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/544c6090dab81827-7b06129b25f1ead37a7320b7f63be81f.png" width="1080" height="493" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/544c6090dab81827-7b06129b25f1ead37a7320b7f63be81f.png" width="1080" height="493" class="yakdoc-image"></button></p>
 <p>02</p>
 <p>Shiro测试</p>
 <p>使用vulfocus/shiro-CVE-2016-4437镜像搭建环境，启动Yakit</p>
 <p>打开Yso-Java Hack</p>
 <p>利用链选择CommonsBeanutils1</p>
 <p>恶意类选择RuntimeExec，填写命令，生成Yak代码</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c179b9b4b2b02f40-4732f1981ef18673be0a99c51daa5043.png" width="1080" height="258" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c179b9b4b2b02f40-4732f1981ef18673be0a99c51daa5043.png" width="1080" height="258" class="yakdoc-image"></button></p>
 <p>编写Yak脚本</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b375a708de5853f8-33cc71734cb00b02e2aeb03e271cd279.png" width="1080" height="386" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b375a708de5853f8-33cc71734cb00b02e2aeb03e271cd279.png" width="1080" height="386" class="yakdoc-image"></button></p>
 <p>执行后进入容器看见/tmp目录下多了111文件，利用成功</p>
 <p>总结</p>
 <p>有些Java漏洞的利用太繁琐了，需要java环境、多种工具配合使用、还要在 VPS 上看回显、记各种命令…</p>
@@ -109,11 +109,11 @@
 <p>插件新功能速递</p>
 <p>插件可以申请修改他人的插件啦！作者同意修改后，插件协作者也会增加你的署名噢~</p>
 <p>插件仓库—下载—编辑—提交申请内容，只需几步轻松完成。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5ba06aab1136ad1f-15b0299ede995fbc1e6a5a170041b1a5.png" width="1080" height="598" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5ba06aab1136ad1f-15b0299ede995fbc1e6a5a170041b1a5.png" width="1080" height="598" class="yakdoc-image"></button></p>
 <p>提交修改以后，可在“日志”查看修改记录，以及作者审核结果。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ea6d3aa4ad1b228e-b3faaf449bf3e45fb76250b6a50223de.png" width="1080" height="318" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ea6d3aa4ad1b228e-b3faaf449bf3e45fb76250b6a50223de.png" width="1080" height="318" class="yakdoc-image"></button></p>
 <p>为了帮助作者更好审核插件，贴心提供了插件源码的对比功能，一眼就可看出修改内容。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5e53c5532d52e9f8-4ce7d9b4a982e6abc535c8bf4d6820eb.png" width="1080" height="437" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5e53c5532d52e9f8-4ce7d9b4a982e6abc535c8bf4d6820eb.png" width="1080" height="437" class="yakdoc-image"></button></p>
 <p>往期推荐&gt;&gt;</p>
 <p><a href="http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247490844&amp;idx=1&amp;sn=b15855b571e692203bba13340b891f6b&amp;chksm=c2d261b8f5a5e8aec2f7c0e399593c0b663273f6af92c84a0860a772c74176accd9e905dfa1e&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">插件分析|Yaklang SQL Injection 检测启发式算法</a></p>
 <p><a href="http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247489735&amp;idx=1&amp;sn=8a1382f694f55d2966e920aea534d44a&amp;chksm=c2d26463f5a5ed756c9848b6641c67ca09dbf49893de53293da87546fad9d1f775c4e4bc5251&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">安全研发启蒙课: 子域名收集联动Yak漏扫插件</a></p>

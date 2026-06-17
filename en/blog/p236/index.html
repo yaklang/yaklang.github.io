@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yaklang 升级！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p236"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yaklang 升级！ | Yak Program Language"><meta data-rh="true" name="description" content="背景"><meta data-rh="true" property="og:description" content="背景"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-02-09T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p236"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p236" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p236" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p236" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p236","mainEntityOfPage":"https://yaklang.com/en/blog/p236","url":"https://yaklang.com/en/blog/p236","headline":"Yaklang 升级！","name":"Yaklang 升级！","description":"背景","datePublished":"2023-02-09T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -16,7 +16,7 @@
 <p>前段时间 Yaklang 实现了重构，在实现原有语法的基础上增加了很多新的语法，非常的好用。在之前的一次更新中，我们悄咪咪的更新了语言引擎，现在经过了几个版本的迭代，新语言引擎逐渐稳定。本篇简单介绍下新语言引擎一些<strong>有意思</strong>的更新内容。</p>
 <p>报错信息</p>
 <p>报错信息是最直观的，新引擎的报错更好看了，更方便我们写代码时排查错误。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0282473e73043917-e3c38f686a885c60e3ce16f6781c5b04.png" width="892" height="280" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0282473e73043917-e3c38f686a885c60e3ce16f6781c5b04.png" width="892" height="280" class="yakdoc-image"></button></p>
 <p>错误信息中包含了<strong>触发异常的调用栈</strong>、<strong>文件路径</strong>、<strong>触发错误的代码所处结构（函数或是全局代码）</strong>、<strong>行号和异常代码预览</strong>。</p>
 <p>错误处理</p>
 <p>回顾下之前YAK的异常处理，很像Go的风格，例如：</p>
@@ -26,17 +26,17 @@
 <p>本次更新增加了小尾巴，效果和die类似，如下，在函数调用后增加一个<code>~</code>，函数的最后一个返回值会被小尾巴吃掉，并且对它检查，如果不为空则panic。</p>
 <div class="language-makefile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-makefile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">data = codec.DecodeBase64(&quot;aaa&quot;)~</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dump(data)</span><br></span></code></pre></div></div>
 <p><code>try-catch</code>的支持如下，可以对代码块捕获panic信息，当出现panic时会直接进入catch代码块处理异常。不影响代码后续执行。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/044cf37b623ac05c-81d047f6f90926b65e339c419c08b673.png" width="874" height="270" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/044cf37b623ac05c-81d047f6f90926b65e339c419c08b673.png" width="874" height="270" class="yakdoc-image"></button></p>
 <p>try-catch还可以与小尾巴一起使用，可以对 <code>从请求包提取url instance</code> 这个代码块进行异常捕获，相较于之前每次函数调用都要处理error方便多了。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/83433426f2df12f5-c251d0445a034a32b09b11b35c117c2d.png" width="1080" height="255" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/83433426f2df12f5-c251d0445a034a32b09b11b35c117c2d.png" width="1080" height="255" class="yakdoc-image"></button></p>
 <p>字符串</p>
 <p>字符串在原本基础上，支持了前缀，包括b、f、x。前缀b用法和python类似，可以直接创建[]byte类型数据，前缀用法f类似javascript，可以通过<code>${}</code>执行表达式并拼接到字符串中，<strong>x是YAK特有的Fuzztag语法，与WebFuzzer的Fuzztag相同</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ac1656dd5e1a95c1-cccf6b8d61876e8aaf75c512f877a9de.png" width="639" height="355" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ac1656dd5e1a95c1-cccf6b8d61876e8aaf75c512f877a9de.png" width="639" height="355" class="yakdoc-image"></button></p>
 <p>除此之外还有一些有意思的语法糖，如字符串格式化、字符串切片，使用*重复字符串</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/49bb443b2d78164e-572f2d9aceb4aa3c6371d309212b51d4.png" width="349" height="258" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/49bb443b2d78164e-572f2d9aceb4aa3c6371d309212b51d4.png" width="349" height="258" class="yakdoc-image"></button></p>
 <p>类型内置函数</p>
 <p>字符串、列表、字典类型都支持了内置函数，这里只演示几个比较常用的函数，全部函数可以去官网查看(代码补全也可以看)。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/01ec531c92f7311e-e91c130f4cd66285669409f7bcf862cc.png" width="468" height="553" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/01ec531c92f7311e-e91c130f4cd66285669409f7bcf862cc.png" width="468" height="553" class="yakdoc-image"></button></p>
 <p>For循环</p>
 <p>除了支持传统的*<code>for</code>*<code> i=0;i&lt;n;i++ {}</code>用法，还支持golang风格的<code>for index,value = range list{}</code>，还有新增的python风格的<code>for in</code></p>
 <div class="language-swift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-swift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> v </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string-literal string" style="color:#e3116c">&quot;a&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string-literal string" style="color:#e3116c">&quot;b&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string-literal string" style="color:#e3116c">&quot;c&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string-literal string" style="color:#e3116c">&quot;d&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token function" style="color:#d73a49">print</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">v</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// abcd</span><br></span></code></pre></div></div>
@@ -52,9 +52,9 @@
 <p>STRICT模式</p>
 <p>对于未声明的变量，Yaklang的处理方式是赋予nil值并在控制台warn log警告。但这种对未声明变量的使用，几乎都是非预期的，可能会造成一些非预期的错误，所以提供了strict模式。</p>
 <p>在环境变量中添加YVMODE=strict即可开启</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/234dbc9cd500d99a-2f2619f3c5a83216bf3048cac2d90668.png" width="780" height="575" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/234dbc9cd500d99a-2f2619f3c5a83216bf3048cac2d90668.png" width="780" height="575" class="yakdoc-image"></button></p>
 <p>对于未声明变量，会在Yak Runner中标注出来，编译时会抛出编译错误</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d70bed516b865b8b-c555dd807063e96cbdbe7da1a7bf2b11.png" width="916" height="198" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d70bed516b865b8b-c555dd807063e96cbdbe7da1a7bf2b11.png" width="916" height="198" class="yakdoc-image"></button></p>
 <p>总结</p>
 <p>本篇介绍了Yaklang的部分更新，<strong>真的很好用</strong>，师傅们可以<strong>在插件中使用新语法了</strong>，完整的介绍请戳<strong>阅读原文</strong>直达官网教程！</p>
 <p>往期推荐</p>

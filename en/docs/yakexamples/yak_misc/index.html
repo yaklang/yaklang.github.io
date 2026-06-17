@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">实战1: 扫端口/子域名+指纹识别 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/yakexamples/yak_misc"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="实战1: 扫端口/子域名+指纹识别 | Yak Program Language"><meta data-rh="true" name="description" content="本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。"><meta data-rh="true" property="og:description" content="本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/yakexamples/yak_misc"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yakexamples/yak_misc" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/yakexamples/yak_misc" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yakexamples/yak_misc" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"实战1: 扫端口/子域名+指纹识别","item":"https://yaklang.com/en/docs/yakexamples/yak_misc"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -16,7 +16,7 @@
 <p>本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。</p>
 <p>之前我们要完成这些功能，可能需要一个语言的很多的库，然而在 Yak 中，这些全部被封装在了一个个的内置模块中。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="信息收集流程设计">信息收集流程设计<a href="#信息收集流程设计" class="hash-link" aria-label="Direct link to 信息收集流程设计" title="Direct link to 信息收集流程设计" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="流程图" src="/en/assets/images/process-ba46ee9545bae1debafbd1ccfd8c3d7d.jpg" width="1061" height="1120" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: 流程图"><img decoding="async" loading="lazy" alt="流程图" src="/en/assets/images/process-ba46ee9545bae1debafbd1ccfd8c3d7d.jpg" width="1061" height="1120" class="yakdoc-image"></button></p>
 <p>这个流程虽然也并没有什么特殊的，也并没有任何特色，甚至大家可以认为这是一件很简单的事情，但是实际上，市面上想要找到一个这么简单的流程，也并不是一件容易的事情。</p>
 <p>很多优秀的工具，只实现了其中的一部分，而且和其他工具的配合/联动，并不是特别的舒服。</p>
 <p>于是市面上出现了一大批缝合项目，但是缝合项目也是有代价的，我们需要安装依赖，或者把整个项目运行在 docker 中。由于很多用户缺乏 docker 使用经验，也懒得去安装语言以及对应依赖

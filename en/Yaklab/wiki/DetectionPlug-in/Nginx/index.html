@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Nginx插件使用 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/Nginx"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="Nginx插件使用 | Yak Program Language"><meta data-rh="true" name="description" content="1 Nginx 文件解析漏洞"><meta data-rh="true" property="og:description" content="1 Nginx 文件解析漏洞"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/Nginx"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/DetectionPlug-in/Nginx" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/Nginx" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/DetectionPlug-in/Nginx" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Nginx插件使用","item":"https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/Nginx"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,30 +19,30 @@
 <p><strong>测试过程：</strong></p>
 <p>vulhub测试网站访问上传的图片
 <a href="http://xx.xx.xx.xx/uploadfiles/nginx.png" target="_blank" rel="noopener noreferrer" class="">http://xx.xx.xx.xx/uploadfiles/nginx.png</a></p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/nginx-1-9d900bb2931682906a81b86440f597ea.png" width="1280" height="678" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/nginx-1-9d900bb2931682906a81b86440f597ea.png" width="1280" height="678" class="yakdoc-image"></button></p>
 <p>利用文件解析漏洞进行解析
 <a href="http://xx.xx.xx.xx/uploadfiles/nginx.png/.php" target="_blank" rel="noopener noreferrer" class="">http://xx.xx.xx.xx/uploadfiles/nginx.png/.php</a></p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/nginx-2-094e3eb7d54fb971c3d3cda90fb16dda.png" width="1280" height="700" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/nginx-2-094e3eb7d54fb971c3d3cda90fb16dda.png" width="1280" height="700" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-nginx-cve-2017-7529-漏洞检测">2 Nginx CVE-2017-7529 漏洞检测<a href="#2-nginx-cve-2017-7529-漏洞检测" class="hash-link" aria-label="Direct link to 2 Nginx CVE-2017-7529 漏洞检测" title="Direct link to 2 Nginx CVE-2017-7529 漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>f863b7be-9536-4de3-bc94-5800ac2a7010</p>
 <p><strong>测试过程：</strong></p>
 <p>输入ip:端口 点击开始执行
 成功检测出漏洞</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/nginx-3-23397bcd3957dcc4400dcb6f5a1babe8.png" width="1065" height="697" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/nginx-3-23397bcd3957dcc4400dcb6f5a1babe8.png" width="1065" height="697" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-nginx-目录遍历漏洞检测">3 Nginx 目录遍历漏洞检测<a href="#3-nginx-目录遍历漏洞检测" class="hash-link" aria-label="Direct link to 3 Nginx 目录遍历漏洞检测" title="Direct link to 3 Nginx 目录遍历漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>58587b92-e88c-4557-8f56-23bac605bbe1</p>
 <p><strong>测试过程：</strong></p>
 <p>输入ip:端口 点击开始执行
 成功检测出漏洞</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/nginx-4-b33e4aac29b93b769112561ff237c218.png" width="1056" height="811" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/nginx-4-b33e4aac29b93b769112561ff237c218.png" width="1056" height="811" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-nginx-crlf注入漏洞检测">4 Nginx CRLF注入漏洞检测<a href="#4-nginx-crlf注入漏洞检测" class="hash-link" aria-label="Direct link to 4 Nginx CRLF注入漏洞检测" title="Direct link to 4 Nginx CRLF注入漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>Yakit正在努力编写~</p>
 <p><strong>测试过程：</strong></p>
 <p>执行pyload：curl -I <a href="http://xx.xx.xx.xx:8080/%0d%0aSet-Cookie:%20a=1" target="_blank" rel="noopener noreferrer" class="">http://xx.xx.xx.xx:8080/%0d%0aSet-Cookie:%20a=1</a></p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/nginx-5-1f6b6b9db9722aa0a711c52e3bf6a782.png" width="718" height="161" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/nginx-5-1f6b6b9db9722aa0a711c52e3bf6a782.png" width="718" height="161" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-nginx-空字节任意代码执行漏洞检测">5 Nginx 空字节任意代码执行漏洞检测<a href="#5-nginx-空字节任意代码执行漏洞检测" class="hash-link" aria-label="Direct link to 5 Nginx 空字节任意代码执行漏洞检测" title="Direct link to 5 Nginx 空字节任意代码执行漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>Yakit正在努力编写~</p>

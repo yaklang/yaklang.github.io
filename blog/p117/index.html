@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">实战分享：用Yak-yso解决一些常见问题 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p117"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="实战分享：用Yak-yso解决一些常见问题 | Yak Program Language"><meta data-rh="true" name="description" content="一直以来，yso 作为 JAVA 安全领域比较出名的工具，受到广大的好评价，Yak 内也集成了 yso 部分，下面进行针对性介绍。"><meta data-rh="true" property="og:description" content="一直以来，yso 作为 JAVA 安全领域比较出名的工具，受到广大的好评价，Yak 内也集成了 yso 部分，下面进行针对性介绍。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2024-07-05T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2024 年,Java 安全"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p117"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p117" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p117" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p117" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p117","mainEntityOfPage":"https://yaklang.com/blog/p117","url":"https://yaklang.com/blog/p117","headline":"实战分享：用Yak-yso解决一些常见问题","name":"实战分享：用Yak-yso解决一些常见问题","description":"一直以来，yso 作为 JAVA 安全领域比较出名的工具，受到广大的好评价，Yak 内也集成了 yso 部分，下面进行针对性介绍。","datePublished":"2024-07-05T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,7 +18,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="常见问题解决">常见问题解决<a href="#常见问题解决" class="hash-link" aria-label="常见问题解决的直接链接" title="常见问题解决的直接链接" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="java版本问题">JAVA版本问题<a href="#java版本问题" class="hash-link" aria-label="JAVA版本问题的直接链接" title="JAVA版本问题的直接链接" translate="no">​</a></h2>
 <p>有同学常常使用<code>yak-yso</code>生成的时候，不关注java版本而使用了默认的（默认<code>52</code>也就是JDK1.8），会导致有些情况下，某些链子打不通的情况。（原因是：当版本进行升级的时候，有些内置函数、方法、接口都会做出改变）</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/3dbb4cce2a8a584a-ceccb18a259fbafe92fdc04eab96c905.png" width="1080" height="782" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/3dbb4cce2a8a584a-ceccb18a259fbafe92fdc04eab96c905.png" width="1080" height="782" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yak-yso">Yak-yso<a href="#yak-yso" class="hash-link" aria-label="Yak-yso的直接链接" title="Yak-yso的直接链接" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="介绍">介绍<a href="#介绍" class="hash-link" aria-label="介绍的直接链接" title="介绍的直接链接" translate="no">​</a></h2>
 <p>yak-yso中内置了两种模式的<code>反序列化链(漏洞点为反序列化的漏洞。以shiro为例)</code>和 <code>恶意类加载(漏洞点为类加载的漏洞。这里就以fastjson为例)</code>。</p>
@@ -32,8 +32,8 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="yak-yso-attack"><strong>Yak-yso-attack</strong><a href="#yak-yso-attack" class="hash-link" aria-label="yak-yso-attack的直接链接" title="yak-yso-attack的直接链接" translate="no">​</a></h4>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="具体使用">具体使用：<a href="#具体使用" class="hash-link" aria-label="具体使用：的直接链接" title="具体使用：的直接链接" translate="no">​</a></h5>
 <p>这里就以<code>urldns</code>为例，使用<code>yak-yso</code>生成cc2-dnslog，我们可以配合yak中内置的dnslog来进行测试。我们发送数据包就可以成功进行复现。如图</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/49e5ac8a3fd1733e-a6cf4b0d8face7c0cae84df1d61b33ea.png" width="1080" height="501" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/80f6ac823741a660-b4bbe8eb4fce7418dbab39c56d012833.png" width="1080" height="443" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/49e5ac8a3fd1733e-a6cf4b0d8face7c0cae84df1d61b33ea.png" width="1080" height="501" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/80f6ac823741a660-b4bbe8eb4fce7418dbab39c56d012833.png" width="1080" height="443" class="yakdoc-image"></button></p>
 <blockquote>
 <p>这里不仅限于使用dnslog，还可以启动反连服务器来进行漏洞验证。</p>
 </blockquote>
@@ -43,7 +43,7 @@
 <p>当进行类加载的时候，<code>java</code>默认同一类加载一次，而<code>yak-yso</code>生成时候是同名的，所以有可能会出现二次加载不成功的问题，所以，类加载的时候要时刻注意名称的问题。</p>
 </blockquote>
 <p>我们这里以加载恶意类为例，可以用<code>yso</code>来生成恶意类，以RuntimeExec为例，输出为base64</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/59f47ff1686185ac-fe33a12091ec3e18efd7d0eb21fec9d8.png" width="920" height="1010" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/59f47ff1686185ac-fe33a12091ec3e18efd7d0eb21fec9d8.png" width="920" height="1010" class="yakdoc-image"></button></p>
 <p>我们在选择利用链，使用<code>cc2--&gt;TemplateImplClassLoader</code> 将base64恶意类填入生成<code>hex</code>然后发包即可。</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="和webfuzzer进行联动"><strong>和webfuzzer进行联动</strong><a href="#和webfuzzer进行联动" class="hash-link" aria-label="和webfuzzer进行联动的直接链接" title="和webfuzzer进行联动的直接链接" translate="no">​</a></h5>
 <p>上面每次发送都需要  <code>生成--&gt;填入参数--&gt;.....</code> 每次都需要经历重复性的操作，是非常繁琐的。可以使用web-fuzzer的热加载来完成。</p>
@@ -54,7 +54,7 @@
 <blockquote>
 <p>当返回是一个数组的时候， Web Fuzzer 会将数组中的每一个元素都作为值去发包。所以要转成hex然后再进行解码</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fdf681873ea24cce-bfd4d529f550d5a77bc52806f1a3aecc.png" width="1080" height="562" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/fdf681873ea24cce-bfd4d529f550d5a77bc52806f1a3aecc.png" width="1080" height="562" class="yakdoc-image"></button></p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">handle = func(domain) {    gadgetObj = yso.GetGadget(&quot;CommonsCollections2&quot;,yso.useTemplate(&quot;DNSLog&quot;),yso.obfuscationClassConstantPool(),yso.evilClassName(&quot;AaZszFvX&quot;),yso.majorVersion(52),yso.useClassParam(&quot;domain&quot;,domain))~gadgetBytes = yso.ToBytes(gadgetObj,yso.dirtyDataLength(0))~return codec.EncodeToHex(gadgetBytes)}</span><br></span></code></pre></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="还能做什么">还能做什么？<a href="#还能做什么" class="hash-link" aria-label="还能做什么？的直接链接" title="还能做什么？的直接链接" translate="no">​</a></h2>
 <ul>

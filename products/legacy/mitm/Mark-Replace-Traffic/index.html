@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">标记/替换流量 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/legacy/mitm/Mark-Replace-Traffic"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="标记/替换流量 | Yak Program Language"><meta data-rh="true" name="description" content="在日常的工作中，我们需要对测试的目标网站进行流量分析；当然除了在分析流量之外，我们经常需要涉及一些操作，以实现对流量的修改。"><meta data-rh="true" property="og:description" content="在日常的工作中，我们需要对测试的目标网站进行流量分析；当然除了在分析流量之外，我们经常需要涉及一些操作，以实现对流量的修改。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/legacy/mitm/Mark-Replace-Traffic"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/legacy/mitm/Mark-Replace-Traffic" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/legacy/mitm/Mark-Replace-Traffic" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/legacy/mitm/Mark-Replace-Traffic" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"标记/替换流量","item":"https://yaklang.com/products/legacy/mitm/Mark-Replace-Traffic"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,27 +19,27 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="导入导出规则">导入/导出规则<a href="#导入导出规则" class="hash-link" aria-label="导入/导出规则的直接链接" title="导入/导出规则的直接链接" translate="no">​</a></h3>
 <p>在启动 MITM 之前，我们就可以配置这些规则，当然，我们也可以在 MITM 劫持过程中动态修改。</p>
 <p>首先，在开始劫持页面的内容规则选项我们可以看到 ①<code>默认配置</code> ② <code>导入配置</code> ③<code>导出配置</code> 三个与内容规则相关的操作选项。我们点击默认配置选项。</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-16-c73f7d07fff94f4777c45bbdff981200.png" width="1096" height="556" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-16-c73f7d07fff94f4777c45bbdff981200.png" width="1096" height="556" class="yakdoc-image"></button></p>
 <p>在弹出的对话框中，点击 ①<code>使用默认配置</code>，导入JSON以后，点击 ②<code>导入</code></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-17-84e2af387a06508069361c779aa215c0.png" width="1252" height="793" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-17-84e2af387a06508069361c779aa215c0.png" width="1252" height="793" class="yakdoc-image"></button></p>
 <p>即可看到成功导入官方默认的55条规则内容，如果想使用其他规则，只需将JSON文件复制进来，点击导入即可。</p>
 <p><strong>注意</strong>，<code>全部替换</code>是本地导入的规则是否需要覆盖之前导入的规则，如果是新增规则请将全部替换关闭，如果是想进行覆盖，则可开启全部替换。</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-18-c6278fffb441729cc90f0fa45385e675.png" width="983" height="643" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-18-c6278fffb441729cc90f0fa45385e675.png" width="983" height="643" class="yakdoc-image"></button></p>
 <p>点击内容规则旁边的小齿轮，即可查看官方默认规则内容，官方规则如图所示</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-19-e4134f82b5841451347e2b5b79bb30ab.png" width="1583" height="883" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-19-e4134f82b5841451347e2b5b79bb30ab.png" width="1583" height="883" class="yakdoc-image"></button></p>
 <p>点击右上角的<code>导出配置</code>，可以将规则导出为JSON文件，可将文件进行分享给他人使用。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="新建编辑规则">新建/编辑规则<a href="#新建编辑规则" class="hash-link" aria-label="新建/编辑规则的直接链接" title="新建/编辑规则的直接链接" translate="no">​</a></h3>
 <p>在劫持页面点击右上角<code>规则配置</code>可以查看已有规则</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-20-ea09f99983f393b8380f80ef408c2027.png" width="1429" height="512" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-20-ea09f99983f393b8380f80ef408c2027.png" width="1429" height="512" class="yakdoc-image"></button></p>
 <p>编写规则的部分采用 Golang 风格正则表达式：推荐使用 <a href="https://regex101.com/" target="_blank" rel="noopener noreferrer" class="">https://regex101.com/</a> 调试，规则如果编译失败，则自动降级为关键字匹配</p>
 <p>已有的规则可以进行编辑操作，或者新增规则，编辑或新增以后点击<code>添加该规则</code>或 <code>修改</code>进行保存</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-21-8facfc945d61375a64526e53fbb48a6d.png" width="1047" height="663" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-21-8facfc945d61375a64526e53fbb48a6d.png" width="1047" height="663" class="yakdoc-image"></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="标记替换流量案例">标记替换流量案例<a href="#标记替换流量案例" class="hash-link" aria-label="标记替换流量案例的直接链接" title="标记替换流量案例的直接链接" translate="no">​</a></h3>
 <p><strong>标记替换文本</strong></p>
 <p>在规则内容页点击右上角<code>新增规则</code>，然后对每个选项进行配置。</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-22-7cda09cb495c90025c1037a15087d6b1.png" width="856" height="583" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-22-7cda09cb495c90025c1037a15087d6b1.png" width="856" height="583" class="yakdoc-image"></button></p>
 <p>非常简单的配置就可以实现 “百度一下” 变为 YAK一下！</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/mitm-23-4121f0e2dfc194c8bfa1e83b79a79e67.png" width="1633" height="546" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/mitm-23-4121f0e2dfc194c8bfa1e83b79a79e67.png" width="1633" height="546" class="yakdoc-image"></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="细节说明">细节说明<a href="#细节说明" class="hash-link" aria-label="细节说明的直接链接" title="细节说明的直接链接" translate="no">​</a></h3>
 <ol>
 <li class="">

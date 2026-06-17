@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">中间人攻击: MITM | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/yak-basic/cap8-2-mitm"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="中间人攻击: MITM | Yak Program Language"><meta data-rh="true" name="description" content="8.3.1 基础概念：MITM"><meta data-rh="true" property="og:description" content="8.3.1 基础概念：MITM"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/yak-basic/cap8-2-mitm"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yak-basic/cap8-2-mitm" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/yak-basic/cap8-2-mitm" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yak-basic/cap8-2-mitm" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"中间人攻击: MITM","item":"https://yaklang.com/docs/yak-basic/cap8-2-mitm"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <p>中间人攻击（英语：<strong>M</strong>an-<strong>i</strong>n-<strong>t</strong>he-<strong>m</strong>iddle attack，缩写：<strong>MITM</strong>）又称为中间人劫持技术，是一种会话劫持攻击。作为中间人的攻击者伪装为通信双方的终端，并以此劫持到通信双方的通信信息以及通信过程，从而达到窃取信息或冒充等目的。中间人攻击通常是因为通信双方缺乏认证而造成的。实际上，中间人攻击是一个统称，其具体的攻击方式有多种，例如Wi-Fi仿冒、邮件劫持、DNS欺骗、SSL劫持等，在后文，我们重点讨论HTTP(s)协议的中间人攻击。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="攻击示例">攻击示例<a href="#攻击示例" class="hash-link" aria-label="攻击示例的直接链接" title="攻击示例的直接链接" translate="no">​</a></h3>
 <p>假设有三个人：小明（A）、小红（B）和攻击者（C）。小明和小红想要通过互联网进行通信，通常他们会使用加密技术。在这个例子中，我们假设他们使用一种简单的加密方法：对称加密。在对称加密中，通信双方需要使用相同的密钥（Key）来加密和解密信息。</p>
-<p><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-2-1-97bfc72396401f3582353bd3d1c22744.png" width="1192" height="815" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: img"><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-2-1-97bfc72396401f3582353bd3d1c22744.png" width="1192" height="815" class="yakdoc-image"></button></p>
 <p>在上述示例中，攻击者通过执行中间人攻击，成功获取了通信双方的信息内容。此外，攻击者还能随意伪造信息或终止通信过程。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="832-mitm基础应用">8.3.2 MITM基础应用<a href="#832-mitm基础应用" class="hash-link" aria-label="8.3.2 MITM基础应用的直接链接" title="8.3.2 MITM基础应用的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="流量嗅探">流量嗅探<a href="#流量嗅探" class="hash-link" aria-label="流量嗅探的直接链接" title="流量嗅探的直接链接" translate="no">​</a></h3>
@@ -33,7 +33,7 @@
 <p>根据前文，我们了解到HTTPS是一种防护中间人攻击的方法。然而，我们仍需探讨是否存在某种方式能够嗅探或劫持HTTPS流量。为此，我们必须深入了解HTTPS的具体实现，该实现依赖于 CA 证书。</p>
 <p>CA 证书是一种由证书颁发机构（CA）签发的数字证书。 CA 是一个默认信任的第三方组织，负责验证网站的身份并向其颁发数字证书。数字证书中包含了网站的公钥、证书颁发者、有效期等信息，这些信息用于确认网站的身份并建立加密通信。</p>
 <p>一个简要的通信过程如下：</p>
-<p><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-2-2-ebd54d8c0e690346dc7f34e415b33065.png" width="1182" height="815" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: img"><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-2-2-ebd54d8c0e690346dc7f34e415b33065.png" width="1182" height="815" class="yakdoc-image"></button></p>
 <p>根据上述通信过程分析，我们得出结论： CA 证书在整个通信过程中具有重要作用。若客户端信任了一个自签名的CA证书并将其导入客户端的受信任证书颁发机构列表，这将导致客户端信任由该 CA 颁发的所有证书。在这种情况下，中间人攻击便有可能成功实施。</p>
 <p>在Yak语言中，在使用 MITM 功能之前，Yak语言会自动生成一份默认的CA证书，分别为<code>yak-mitm-ca.crt</code>和<code>yak-mitm-ca.key</code>，并将其存储在安装目录（默认情况下是家目录）下的<code>yakit-projects</code>文件夹中。完成信任 CA 证书的步骤后，用户便可利用Yak编程语言的MITM功能来嗅探或劫持HTTPS流量。</p>
 <p>若要在MITM标准库中配置MITM服务器以使用默认的 CA 证书，只需调用函数：<code>mitm.useDefaultCA(true)</code>。需要注意的是，此选项默认已启用。若需使用其他 CA 证书，请参考以下示例：</p>

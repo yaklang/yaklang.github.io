@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.2 Yakit 界面概览与核心功能导航 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-2/2-2"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.2 Yakit 界面概览与核心功能导航 | Yak Program Language"><meta data-rh="true" name="description" content="在上一节中，我们成功完成了 Yakit 的初始化配置，无论是选择了高效便捷的本地模式，还是灵活部署的远程模式，我们都已抵达 Yakit 的主界面。这个界面并非简单的工具罗列，而是遵循专业安全测试工作流精心设计的集成化作战平台。本章的核心任务，是从宏观视角解析 Yakit 的界面布局与功能分区，为您建立一个清晰的“功能地图”。理解这个地图，是高效运用 Yakit、打通各类工具链形成战斗力的前提，并为我们即将在后续章节中深入剖析的两大核心引擎——MITM 与 Web Fuzzer——奠定认知基础。"><meta data-rh="true" property="og:description" content="在上一节中，我们成功完成了 Yakit 的初始化配置，无论是选择了高效便捷的本地模式，还是灵活部署的远程模式，我们都已抵达 Yakit 的主界面。这个界面并非简单的工具罗列，而是遵循专业安全测试工作流精心设计的集成化作战平台。本章的核心任务，是从宏观视角解析 Yakit 的界面布局与功能分区，为您建立一个清晰的“功能地图”。理解这个地图，是高效运用 Yakit、打通各类工具链形成战斗力的前提，并为我们即将在后续章节中深入剖析的两大核心引擎——MITM 与 Web Fuzzer——奠定认知基础。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-2/2-2"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.2 界面与功能导航","item":"https://yaklang.com/products/chapter-2/2-2"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -16,7 +16,7 @@
 <p>在上一节中，我们成功完成了 Yakit 的初始化配置，无论是选择了高效便捷的本地模式，还是灵活部署的远程模式，我们都已抵达 Yakit 的主界面。这个界面并非简单的工具罗列，而是遵循专业安全测试工作流精心设计的集成化作战平台。本章的核心任务，是从宏观视角解析 Yakit 的界面布局与功能分区，为您建立一个清晰的“功能地图”。理解这个地图，是高效运用 Yakit、打通各类工具链形成战斗力的前提，并为我们即将在后续章节中深入剖析的<strong>两大核心引擎</strong>——<strong>MITM</strong> 与 <strong>Web Fuzzer</strong>——奠定认知基础。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="221-主界面布局与状态栏解析">2.2.1 主界面布局与状态栏解析<a href="#221-主界面布局与状态栏解析" class="hash-link" aria-label="2.2.1 主界面布局与状态栏解析的直接链接" title="2.2.1 主界面布局与状态栏解析的直接链接" translate="no">​</a></h2>
 <p>首次进入 Yakit，首先看到的是一个高度集成且信息丰富的主工作区。其整体布局遵循了“状态监控在顶、核心导航在左、主操作区居中”的经典设计范式。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 渗透测试平台主界面布局与功能模块展示" src="/assets/images/ch2-010-be6da514c2064979fe390a2f9aa24893.png" width="2476" height="1536" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 渗透测试平台主界面布局与功能模块展示"><img decoding="async" loading="lazy" alt="Yakit 渗透测试平台主界面布局与功能模块展示" src="/assets/images/ch2-010-be6da514c2064979fe390a2f9aa24893.png" width="2476" height="1536" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 渗透测试平台主界面布局与功能模块展示</p>
 <p>界面的最顶部是<strong>全局状态栏</strong>，它是整个平台的“仪表盘”，实时呈现着关键的系统信息：</p>
 <ul>
@@ -29,11 +29,11 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="222-核心功能导航结构化测试的起点">2.2.2 核心功能导航：结构化测试的起点<a href="#222-核心功能导航结构化测试的起点" class="hash-link" aria-label="2.2.2 核心功能导航：结构化测试的起点的直接链接" title="2.2.2 核心功能导航：结构化测试的起点的直接链接" translate="no">​</a></h2>
 <p>主界面左侧的<strong>多标签导航栏</strong>是 Yakit 的核心功能入口，它将复杂的安全测试流程解构为五个逻辑清晰、功能内聚的模块。这种设计不仅是功能的分类，更体现了一套完整的渗透测试方法论。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 主界面功能导航栏与工具模块展示" src="/assets/images/ch2-011-a71d3db3f9ba3119519ee0cc789e7ba5.png" width="1824" height="270" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 主界面功能导航栏与工具模块展示"><img decoding="async" loading="lazy" alt="Yakit 主界面功能导航栏与工具模块展示" src="/assets/images/ch2-011-a71d3db3f9ba3119519ee0cc789e7ba5.png" width="1824" height="270" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 主界面功能导航栏与工具模块展示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit安全工具界面展示" src="/assets/images/ch2-012-46b6b84d4e21da4c80692782f459f227.png" width="1814" height="224" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit安全工具界面展示"><img decoding="async" loading="lazy" alt="Yakit安全工具界面展示" src="/assets/images/ch2-012-46b6b84d4e21da4c80692782f459f227.png" width="1814" height="224" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit安全工具界面展示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 软件界面功能导航区域展示" src="/assets/images/ch2-013-80c9d44d10a55a7259c403a46d1783f8.png" width="2106" height="832" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 软件界面功能导航区域展示"><img decoding="async" loading="lazy" alt="Yakit 软件界面功能导航区域展示" src="/assets/images/ch2-013-80c9d44d10a55a7259c403a46d1783f8.png" width="2106" height="832" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 软件界面功能导航区域展示</p>
 <ul>
 <li class="">

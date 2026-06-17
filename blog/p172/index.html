@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yakit靶场通关教程|SQL注入篇（二） | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p172"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yakit靶场通关教程|SQL注入篇（二） | Yak Program Language"><meta data-rh="true" name="description" content="前言"><meta data-rh="true" property="og:description" content="前言"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-10-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年,靶场实战,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p172"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p172" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p172" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p172" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p172","mainEntityOfPage":"https://yaklang.com/blog/p172","url":"https://yaklang.com/blog/p172","headline":"Yakit靶场通关教程|SQL注入篇（二）","name":"Yakit靶场通关教程|SQL注入篇（二）","description":"前言","datePublished":"2023-10-27T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -94,7 +94,7 @@
 <p><strong>靶场演示：视频结尾</strong></p>
 <p>SQL注入虽说是一种流行的攻击方法，但是通过采取适当的预防措施也是可以进行防范的。牛牛在每一种类型后都附上了具体的<strong>防御措施</strong>，师傅们可在靶场练习过程中同步收入备忘录。</p>
 <p>下周Yak靶场系列将开启<strong>新类型教学——XSS多场景</strong>，长按文末二维码一键关注哦，敬请期待~</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/06042b855a046da6-bd1349a7c386a8e9bd804bffd7dc995c.png" width="500" height="627" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/06042b855a046da6-bd1349a7c386a8e9bd804bffd7dc995c.png" width="500" height="627" class="yakdoc-image"></button></p>
 <p><strong>Loading...安全实体转义直接拼接导致XSS注入不安全的过滤导致XSSXSS: 存在于 JS 代码中(字符串中)XSS: 存在于 JS 代码中(字符串中 2)XSS: 存在于 JS 代码中(字符串模版中)输出存在于HTML节点on...属性中输出存在于HTML节点属性中，但是不再on属性中(IMG ALT)</strong></p>
 <hr>
 <blockquote>

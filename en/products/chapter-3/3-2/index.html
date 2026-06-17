@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">3.2 Yakit MITM基础使用 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-3/3-2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="3.2 Yakit MITM基础使用 | Yak Program Language"><meta data-rh="true" name="description" content="Yakit MITM 是一个高交互的MITM（中间人攻击）测试框架，主要用于Web安全测试和流量分析。其作为中间人攻击测试框架，其核心是提供实时的HTTP/HTTPS流量监控能力。工具能够捕获并展示所有通过代理的网络请求，包括完整的请求头、响应内容、目标IP地址和响应长度等关键信息。对于初学者而言，这种可视化的流量展示功能是理解Web应用通信机制的重要入门工具，同时支持关键字过滤和标签分类，帮助用户快速定位感兴趣的请求流量。"><meta data-rh="true" property="og:description" content="Yakit MITM 是一个高交互的MITM（中间人攻击）测试框架，主要用于Web安全测试和流量分析。其作为中间人攻击测试框架，其核心是提供实时的HTTP/HTTPS流量监控能力。工具能够捕获并展示所有通过代理的网络请求，包括完整的请求头、响应内容、目标IP地址和响应长度等关键信息。对于初学者而言，这种可视化的流量展示功能是理解Web应用通信机制的重要入门工具，同时支持关键字过滤和标签分类，帮助用户快速定位感兴趣的请求流量。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-3/3-2"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-3/3-2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-3/3-2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-3/3-2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"三、MITM 通信劫持","item":"https://yaklang.com/en/products/chapter-3/overview"},{"@type":"ListItem","position":2,"name":"3.2 MITM 基础使用","item":"https://yaklang.com/en/products/chapter-3/3-2"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,7 +18,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="321-准备工作">3.2.1 准备工作<a href="#321-准备工作" class="hash-link" aria-label="Direct link to 3.2.1 准备工作" title="Direct link to 3.2.1 准备工作" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="基本配置与操作台">基本配置与操作台<a href="#基本配置与操作台" class="hash-link" aria-label="Direct link to 基本配置与操作台" title="Direct link to 基本配置与操作台" translate="no">​</a></h3>
 <p>在正式开始MITM交互式劫持操作之前，我们需要了解基本的进入劫持操作和使用的方法。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 渗透测试 MITM 交互式劫持界面" src="/en/assets/images/ch3-004-f04fc6e596bd024edc48cd185cc9228b.png" width="796" height="826" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 渗透测试 MITM 交互式劫持界面"><img decoding="async" loading="lazy" alt="Yakit 渗透测试 MITM 交互式劫持界面" src="/en/assets/images/ch3-004-f04fc6e596bd024edc48cd185cc9228b.png" width="796" height="826" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 渗透测试 MITM 交互式劫持界面</p>
 <p><strong>方法一：通过主界面顶部导航</strong></p>
 <ol>
@@ -45,14 +45,14 @@
 </li>
 </ol>
 <p>这两种启动方式略有区别，如果用户通过<strong>主界面导航进入</strong>MITM功能，会进入MITM启动前的参数配置页面，点击下方“劫持启动”即可直接进入操作台：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM 交互式劫持配置界面" src="/en/assets/images/ch3-005-067efd717045c5e8140d1cc0bba38f52.png" width="1392" height="887" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM 交互式劫持配置界面"><img decoding="async" loading="lazy" alt="Yakit MITM 交互式劫持配置界面" src="/en/assets/images/ch3-005-067efd717045c5e8140d1cc0bba38f52.png" width="1392" height="887" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM 交互式劫持配置界面</p>
 <p>在配置页面中，用户基本可以看到如下配置信息，用户可以按需求改以实现一些特殊需求</p>
 <p>一般情况下，Yakit MITM 的默认配置选项无需修改即可直接启动使用。当用户在实际使用中遇到特殊情况，比如国密TLS无法正常劫持时，可以通过修改配置选项中的TLS配置来实现更复杂的功能和兼容性需求。</p>
 <p>除了基础的普通配置选项外，Yakit MITM 在高级配置中提供了更加强大和灵活的自定义配置能力。高级配置涵盖了专业级的网络劫持控制功能，从网络层面的DNS服务器设置和Hosts域名映射，到国密TLS安全传输的优先级控制和仅国密模式，再到连接管理的长连接禁用和WebSocket劫持控制，以及安全认证机制中的代理认证和mTLS双向认证的客户端证书导入，最后还包括流量控制的过滤器规则配置和初始页面控制等功能。这些高级配置主要面向安全测试专家和有特殊技术需求的用户，为他们提供了对整个网络流量劫持过程的精细化控制能力。</p>
 <p><strong>操作台介绍</strong></p>
 <p>在Yakit的基本使用的时候我们已经对Yakit的基本界面构造有了一定了解，在用户使用MITM的核心功能的时候</p>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM 劫持工具操作界面与请求响应详情" src="/en/assets/images/ch3-006-1bf0d7647a68a73347b226505e48116d.png" width="1955" height="938" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM 劫持工具操作界面与请求响应详情"><img decoding="async" loading="lazy" alt="Yakit MITM 劫持工具操作界面与请求响应详情" src="/en/assets/images/ch3-006-1bf0d7647a68a73347b226505e48116d.png" width="1955" height="938" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM 劫持工具操作界面与请求响应详情</p>
 <ul>
 <li class="">
@@ -76,14 +76,14 @@
 <li class="">使用“首页”的证书安装引导-自动安装</li>
 </ul>
 <p>当系统检测到证书未配置时，会在MITM界面显示红色的警告提示&quot;检测到证书未配置&quot;，此时用户需要点击&quot;下载安装&quot;按钮来启动证书安装流程。Yakit会智能识别当前操作系统环境，并生成相应的自动安装脚本。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM证书自动安装脚本执行界面" src="/en/assets/images/ch3-007-f57ccb507a10b01ba2f88b519ad1334c.png" width="1863" height="801" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM证书自动安装脚本执行界面"><img decoding="async" loading="lazy" alt="Yakit MITM证书自动安装脚本执行界面" src="/en/assets/images/ch3-007-f57ccb507a10b01ba2f88b519ad1334c.png" width="1863" height="801" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM证书自动安装脚本执行界面</p>
 <p>通过上述截图可以看到完整的证书安装过程：首先Yakit检测到证书未配置并提示用户进行安装，点击&quot;下载安装&quot;后会弹出详细的操作指引对话框，指导用户执行自动安装脚本。在macOS系统中，脚本会自动检测系统环境并要求输入管理员密码来完成证书的安装和信任设置。</p>
 <p>安装成功后，终端会显示&quot;Certificate successfully installed and trusted.&quot;的确认信息，表示证书已经成功安装到系统的信任存储中。此时用户就可以正常使用MITM功能来拦截和分析HTTPS流量了。</p>
 <ul>
 <li class="">在Yakit MITM的操作台中安装-手动安装</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="macOS 信任 Yakit MITM 根证书操作指引" src="/en/assets/images/ch3-008-c1206faa54fcfb971d5605472ec5c125.png" width="1825" height="927" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: macOS 信任 Yakit MITM 根证书操作指引"><img decoding="async" loading="lazy" alt="macOS 信任 Yakit MITM 根证书操作指引" src="/en/assets/images/ch3-008-c1206faa54fcfb971d5605472ec5c125.png" width="1825" height="927" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：macOS 信任 Yakit MITM 根证书操作指引</p>
 <p>在MITM劫持界面中，点击&quot;证书下载&quot;按钮，系统会显示完整的证书内容。用户可以选择两种方式获取证书：</p>
 <ol>
@@ -137,16 +137,16 @@
 <li class="">使用“首页”的证书安装引导-自动安装</li>
 </ul>
 <p>我们直接通过图例来展示自动安装证书的流程</p>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM Windows证书安装脚本操作流程" src="/en/assets/images/ch3-009-a02c32029f53f880a16ffaef9bc75c10.png" width="1494" height="840" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM Windows证书安装脚本操作流程"><img decoding="async" loading="lazy" alt="Yakit MITM Windows证书安装脚本操作流程" src="/en/assets/images/ch3-009-a02c32029f53f880a16ffaef9bc75c10.png" width="1494" height="840" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM Windows证书安装脚本操作流程</p>
 <p>通过图例中的执行步骤，安装成功后，终端会显示&quot;Certificate successfully installed.&quot;的确认信息，表示证书已经成功安装到系统的信任存储中。</p>
 <ul>
 <li class="">在Yakit MITM的操作台中安装-手动安装</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM证书下载与安装流程" src="/en/assets/images/ch3-010-f77d81b42392a78c3164eba2b80fd918.png" width="1468" height="761" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM证书下载与安装流程"><img decoding="async" loading="lazy" alt="Yakit MITM证书下载与安装流程" src="/en/assets/images/ch3-010-f77d81b42392a78c3164eba2b80fd918.png" width="1468" height="761" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM证书下载与安装流程</p>
 <p>下载证书后，双击打开 <code>crt</code> 文件，点击安装证书④，进入证书导入向导⑤</p>
-<p><img decoding="async" loading="lazy" alt="Windows系统信任Yakit MITM根证书步骤" src="/en/assets/images/ch3-011-a2cc236d9b788ce99d801d96cc8abc64.png" width="866" height="981" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Windows系统信任Yakit MITM根证书步骤"><img decoding="async" loading="lazy" alt="Windows系统信任Yakit MITM根证书步骤" src="/en/assets/images/ch3-011-a2cc236d9b788ce99d801d96cc8abc64.png" width="866" height="981" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Windows系统信任Yakit MITM根证书步骤</p>
 <p><strong>自定义证书存储区域⑥</strong></p>
 <ul>
@@ -171,7 +171,7 @@
 <blockquote>
 <p>本小节将会介绍Yakit MITM中的两个劫持模式。在使用这个功能之前，为了聚焦使用和获得更清晰的操作界面，我们可以“<strong>收起插件面板</strong>”：点击左侧边栏高亮的<strong>工具Tab页</strong>，可以收起插件相关功能面板。</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="Yakit 劫持模式下的插件热加载界面" src="/en/assets/images/ch3-012-1c834da3d1a7917f2eedbe8c530044a9.png" width="717" height="528" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 劫持模式下的插件热加载界面"><img decoding="async" loading="lazy" alt="Yakit 劫持模式下的插件热加载界面" src="/en/assets/images/ch3-012-1c834da3d1a7917f2eedbe8c530044a9.png" width="717" height="528" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 劫持模式下的插件热加载界面</p>
 &gt; 
 &gt; 
@@ -200,17 +200,17 @@
 <ol>
 <li class="">点击&quot;免配置启动&quot;按钮，系统将自动启动一个预配置的Chrome浏览器实例。此浏览器已经内置了代理设置（<a href="http://127%5C.0%5C.0%5C.1:8083%EF%BC%89%EF%BC%8C%E6%97%A0%E9%9C%80%E6%89%8B%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E8%AF%81%E4%B9%A6%E6%88%96%E4%BB%A3%E7%90%86%E5%8F%82%E6%95%B0%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E7%94%A8%E4%BA%8EMITM%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E3%80%82%E5%90%AF%E5%8A%A8%E5%90%8E%E4%BC%9A%E5%BC%B9%E5%87%BA%E9%85%8D%E7%BD%AE%E5%AF%B9%E8%AF%9D%E6%A1%86%EF%BC%8C%E6%98%BE%E7%A4%BA%E4%BB%A3%E7%90%86%E5%9C%B0%E5%9D%80%E5%92%8C%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE%E3%80%82" target="_blank" rel="noopener noreferrer" class="">http://127\.0\.0\.1:8083），无需手动配置系统证书或代理参数，可以直接用于MITM流量分析。启动后会弹出配置对话框，显示代理地址和相关参数设置。</a></li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 自动启动免配置 Chrome 浏览器" src="/en/assets/images/ch3-013-bd3d9b810dff9ec5ff0e8a575f8eb00c.png" width="1885" height="1047" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 自动启动免配置 Chrome 浏览器"><img decoding="async" loading="lazy" alt="Yakit 自动启动免配置 Chrome 浏览器" src="/en/assets/images/ch3-013-bd3d9b810dff9ec5ff0e8a575f8eb00c.png" width="1885" height="1047" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 自动启动免配置 Chrome 浏览器</p>
 <ol start="2">
 <li class="">在新启动的浏览器地址栏中输入目标网址进行访问。当浏览器发起HTTP请求时，所有的网络流量都会被自动捕获并实时显示在Yakit的&quot;自动放行&quot;标签页中。流量记录表会显示请求的序号、HTTP方法、状态码和完整URL等关键信息，让用户能够清晰地观察到每一次网络交互。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit自动放行模式劫持流量示例" src="/en/assets/images/ch3-014-8329b5e1f4ca72a810eb437a44bc5c98.png" width="1423" height="700" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit自动放行模式劫持流量示例"><img decoding="async" loading="lazy" alt="Yakit自动放行模式劫持流量示例" src="/en/assets/images/ch3-014-8329b5e1f4ca72a810eb437a44bc5c98.png" width="1423" height="700" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit自动放行模式劫持流量示例</p>
 <ol start="3">
 <li class="">点击流量记录表中的任意一条记录，可以查看该请求的完整详情。左侧面板显示HTTP请求的详细信息，包括请求头、请求方法等；右侧面板显示服务器响应内容，包括响应状态码、响应头和响应体。需要注意的是，在自动放行模式下查看的都是已完成的历史流量，无法进行实时修改或拦截。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit自动放行模式下的MITM流量劫持详情" src="/en/assets/images/ch3-015-dc0f654c135389687b4d04ec84fe2d34.png" width="1280" height="671" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit自动放行模式下的MITM流量劫持详情"><img decoding="async" loading="lazy" alt="Yakit自动放行模式下的MITM流量劫持详情" src="/en/assets/images/ch3-015-dc0f654c135389687b4d04ec84fe2d34.png" width="1280" height="671" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit自动放行模式下的MITM流量劫持详情</p>
 <p>通过免配置启动浏览器、访问目标网站、查看流量详情这三个步骤，用户可以快速实现对网络流量的被动监控和分析。整个过程无需复杂的代理配置，适合快速进行流量观察和初步分析，为后续的深入测试提供基础数据支持。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="善于使用过滤器筛选目标流量">善于使用过滤器：筛选目标流量<a href="#善于使用过滤器筛选目标流量" class="hash-link" aria-label="Direct link to 善于使用过滤器：筛选目标流量" title="Direct link to 善于使用过滤器：筛选目标流量" translate="no">​</a></h3>
@@ -218,7 +218,7 @@
 <blockquote>
 <p>注意：被过滤掉的流量并不会进入数据库</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="Yakit过滤器基础与高级配置界面" src="/en/assets/images/ch3-016-bafcbea2586ff6c4c76788c7a97d021f.png" width="2506" height="1389" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit过滤器基础与高级配置界面"><img decoding="async" loading="lazy" alt="Yakit过滤器基础与高级配置界面" src="/en/assets/images/ch3-016-bafcbea2586ff6c4c76788c7a97d021f.png" width="2506" height="1389" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit过滤器基础与高级配置界面</p>
 <p><strong>匹配模式说明</strong></p>
 <ul>
@@ -239,7 +239,7 @@
 <ol>
 <li class="">在Yakit操作台中，点击切换至**&quot;手动劫持&quot;**模式。此时系统将显示劫持HTTP Request的监听状态，准备拦截所有经过代理的流量。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit手动劫持界面及Tab切换区域" src="/en/assets/images/ch3-017-57116765f06992981d63717a45e0adf3.png" width="820" height="246" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit手动劫持界面及Tab切换区域"><img decoding="async" loading="lazy" alt="Yakit手动劫持界面及Tab切换区域" src="/en/assets/images/ch3-017-57116765f06992981d63717a45e0adf3.png" width="820" height="246" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit手动劫持界面及Tab切换区域</p>
 <ol start="2">
 <li class="">
@@ -257,7 +257,7 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM手动劫持HTTP请求界面" src="/en/assets/images/ch3-018-48d471d033ca08fca36f2c11c9ecd4fc.png" width="1392" height="772" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM手动劫持HTTP请求界面"><img decoding="async" loading="lazy" alt="Yakit MITM手动劫持HTTP请求界面" src="/en/assets/images/ch3-018-48d471d033ca08fca36f2c11c9ecd4fc.png" width="1392" height="772" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM手动劫持HTTP请求界面</p>
 <ol start="3">
 <li class="">
@@ -282,7 +282,7 @@
 </li>
 </ol>
 <p><strong>在本案例中</strong>：将原始的GET请求修改为POST请求</p>
-<p><img decoding="async" loading="lazy" alt="Yakit手动劫持界面演示修改请求方法" src="/en/assets/images/ch3-019-0ec5bdfdef1cab7ff78c72991e305504.png" width="1381" height="496" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit手动劫持界面演示修改请求方法"><img decoding="async" loading="lazy" alt="Yakit手动劫持界面演示修改请求方法" src="/en/assets/images/ch3-019-0ec5bdfdef1cab7ff78c72991e305504.png" width="1381" height="496" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit手动劫持界面演示修改请求方法</p>
 <div class="language-JavaScript language-javascript codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">复制</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># 修改前</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token constant" style="color:#36acaa">GET</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">/</span><span class="token plain">hijacked </span><span class="token constant" style="color:#36acaa">HTTP</span><span class="token operator" style="color:#393A34">/</span><span class="token number" style="color:#36acaa">1.1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token literal-property property" style="color:#36acaa">Host</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> www</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">example</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">com</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># 修改后  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token constant" style="color:#36acaa">POST</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">/</span><span class="token plain">hijacked </span><span class="token constant" style="color:#36acaa">HTTP</span><span class="token operator" style="color:#393A34">/</span><span class="token number" style="color:#36acaa">1.1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token literal-property property" style="color:#36acaa">Host</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> www</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">example</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access">com</span><br></span></code></pre></div></div>
 <ol start="4">
@@ -312,18 +312,18 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 自动放行模式下手动修改请求的界面" src="/en/assets/images/ch3-020-491bb521e7d65c52be18b67ba6350a97.png" width="1360" height="731" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 自动放行模式下手动修改请求的界面"><img decoding="async" loading="lazy" alt="Yakit 自动放行模式下手动修改请求的界面" src="/en/assets/images/ch3-020-491bb521e7d65c52be18b67ba6350a97.png" width="1360" height="731" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 自动放行模式下手动修改请求的界面</p>
 <p>一般来说，这个整个过程的使用非常简单，总体可以总结为以下步骤</p>
-<p><img decoding="async" loading="lazy" alt="手动劫持请求修改流程" src="/en/assets/images/ch3-021-38a00f1eeb98df48bd078e16586f8d4c.png" width="1624" height="97" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 手动劫持请求修改流程"><img decoding="async" loading="lazy" alt="手动劫持请求修改流程" src="/en/assets/images/ch3-021-38a00f1eeb98df48bd078e16586f8d4c.png" width="1624" height="97" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：手动劫持请求修改流程</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="手动劫持二修改响应数据包">手动劫持（二）：修改响应数据包<a href="#手动劫持二修改响应数据包" class="hash-link" aria-label="Direct link to 手动劫持（二）：修改响应数据包" title="Direct link to 手动劫持（二）：修改响应数据包" translate="no">​</a></h3>
 <p>在前面的操作中，我们已经可以实现基本的劫持数据包，修改请求，把发送的请求转交给真正服务器的过程。我们在本小节中，将会演示如何在MITM操作台中实现修改响应的操作：</p>
 <p>在开启手动劫持之后，在劫持请求的操作按钮中，点击&quot;劫持响应&quot;按钮。此时系统会放行请求数据包，同时等待响应数据包返回，如果有返回，则会在数据包到达用户浏览器之前进行拦截，在Yakit可以看到拦截时响应内容。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 手动劫持界面展示请求与响应操作" src="/en/assets/images/ch3-022-37bae1d4c6636783f0f0bd41bb56b1b1.png" width="1398" height="530" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 手动劫持界面展示请求与响应操作"><img decoding="async" loading="lazy" alt="Yakit 手动劫持界面展示请求与响应操作" src="/en/assets/images/ch3-022-37bae1d4c6636783f0f0bd41bb56b1b1.png" width="1398" height="530" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 手动劫持界面展示请求与响应操作</p>
 <p>在点击劫持响应后，请求会直接提交到服务器，响应的数据包接下来会展示出来。在劫持列表中，状态会显示为&quot;劫持响应←&quot;，表明当前正在拦截响应数据包。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit手动劫持修改响应数据包界面" src="/en/assets/images/ch3-023-54ed4fbd1670997802070da2701f07db.png" width="1382" height="613" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit手动劫持修改响应数据包界面"><img decoding="async" loading="lazy" alt="Yakit手动劫持修改响应数据包界面" src="/en/assets/images/ch3-023-54ed4fbd1670997802070da2701f07db.png" width="1382" height="613" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit手动劫持修改响应数据包界面</p>
 <p>当我们看到响应结果后，可以直接修改响应内容。例如在本示例中：</p>
 <ol>
@@ -335,7 +335,7 @@
 </li>
 </ol>
 <p>在Response编辑器中，找到需要修改的内容行（如第15行的title标签），直接进行编辑修改。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM修改响应包标题效果" src="/en/assets/images/ch3-024-a937d48dbb623066da714cff2110bc18.png" width="2029" height="980" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM修改响应包标题效果"><img decoding="async" loading="lazy" alt="Yakit MITM修改响应包标题效果" src="/en/assets/images/ch3-024-a937d48dbb623066da714cff2110bc18.png" width="2029" height="980" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM修改响应包标题效果</p>
 <p>完成响应内容的修改后，点击&quot;放行&quot;按钮，修改后的响应数据包会被发送到浏览器。浏览器接收到修改后的响应数据包，页面会按照我们修改的内容进行渲染。在本示例中，浏览器标签页的标题从原来的&quot;Example Domain&quot;变成了&quot;Modified Via Yakit Example Domain&quot;，证明响应修改成功生效。</p>
 <p>通过这种方式，我们可以实时修改服务器返回的任何响应内容，包括HTML代码、JSON数据、图片等各种类型的响应数据，为安全测试和调试提供了强大的功能支持。</p>
@@ -355,7 +355,7 @@
 <p><strong>交互插件</strong>：交互插件相较于被动插件，其启动和执行需要依赖用户输入或确认特定参数，能够实现更复杂的漏洞测试和流量处理功能。可实现：复杂漏洞的自动化测试；基于用户配置的定制化检测；动态修改HTTP请求参数；自动化的响应内容替换。主要特点就是<strong>需要用户参数配置。</strong></p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit MITM插件系统请求与响应处理流程" src="/en/assets/images/ch3-025-7c91206287a23a232f7b51efc0acb066.png" width="1547" height="883" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit MITM插件系统请求与响应处理流程"><img decoding="async" loading="lazy" alt="Yakit MITM插件系统请求与响应处理流程" src="/en/assets/images/ch3-025-7c91206287a23a232f7b51efc0acb066.png" width="1547" height="883" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit MITM插件系统请求与响应处理流程</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="被动插件流量驱动自动测试">被动插件：流量驱动自动测试<a href="#被动插件流量驱动自动测试" class="hash-link" aria-label="Direct link to 被动插件：流量驱动自动测试" title="Direct link to 被动插件：流量驱动自动测试" translate="no">​</a></h3>
 <p>被动插件是Yakit MITM环境中的核心自动化安全检测组件，采用<strong>流量驱动模式</strong>实现零配置的实时安全扫描。当HTTP流量经过MITM代理时，被动插件会自动拦截并分析所有请求响应数据，根据内置的安全规则进行漏洞检测，无需用户手动触发或配置参数。</p>
@@ -363,12 +363,12 @@
 <ol>
 <li class=""><strong>插件加载阶段</strong> - 用户在MITM界面左侧插件列表中选择所需插件，点击开关按钮即可将插件加载进内存，系统自动完成初始化配置（可以在“已启用”查看成功加载的插件）。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 被动插件劫持 HTTP 请求与日志界面" src="/en/assets/images/ch3-026-a4ab116927a7457e33a4de0e56d86d56.png" width="2122" height="1022" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 被动插件劫持 HTTP 请求与日志界面"><img decoding="async" loading="lazy" alt="Yakit 被动插件劫持 HTTP 请求与日志界面" src="/en/assets/images/ch3-026-a4ab116927a7457e33a4de0e56d86d56.png" width="2122" height="1022" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 被动插件劫持 HTTP 请求与日志界面</p>
 <ol start="2">
 <li class=""><strong>流量拦截分析</strong> - HTTP请求通过MITM代理时自动触发插件执行，插件获取完整的请求头、请求体、响应头、响应体等数据，基于预设的安全检测规则进行实时分析。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 被动插件自动测试界面" src="/en/assets/images/ch3-027-be83f63ad11bb13e60115a390482d99a.png" width="1725" height="799" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 被动插件自动测试界面"><img decoding="async" loading="lazy" alt="Yakit 被动插件自动测试界面" src="/en/assets/images/ch3-027-be83f63ad11bb13e60115a390482d99a.png" width="1725" height="799" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 被动插件自动测试界面</p>
 <ol start="3">
 <li class=""><strong>结果输出记录</strong> - 检测结果实时显示在控制台日志中，如果发现了安全漏洞，用户可以通过数据库的漏洞管理按漏洞类型自动分类查看记录，并提供详细的漏洞信息。</li>
@@ -376,12 +376,12 @@
 <p>被动插件的<strong>流量驱动架构</strong>具有显著优势：实现了<strong>零干扰检测</strong>（不修改原始请求）、<strong>并行处理</strong>（多个插件同时工作）和<strong>实时反馈</strong>（即时输出检测结果）。这种设计使得安全测试人员可以在进行正常业务操作的同时，自动完成全面的安全漏洞检测，大幅提升测试效率和发现漏洞的准确性。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="交互插件可配置参数化插件">交互插件：可配置参数化插件<a href="#交互插件可配置参数化插件" class="hash-link" aria-label="Direct link to 交互插件：可配置参数化插件" title="Direct link to 交互插件：可配置参数化插件" translate="no">​</a></h3>
 <p>交互插件与被动插件不同，它更加专注于用户操作和自定义内容，允许安全测试人员进行更灵活的配置。我们将在下面展示基本的交互式插件的用法：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit交互插件修改HTTP请求Header参数设置" src="/en/assets/images/ch3-028-29074849f4e0307723fad9b1f39b8b79.png" width="1822" height="1058" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit交互插件修改HTTP请求Header参数设置"><img decoding="async" loading="lazy" alt="Yakit交互插件修改HTTP请求Header参数设置" src="/en/assets/images/ch3-028-29074849f4e0307723fad9b1f39b8b79.png" width="1822" height="1058" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit交互插件修改HTTP请求Header参数设置</p>
 <p>如上图所示，图中特别展示了&quot;修改 HTTP 请求 Header&quot;这一交互插件的使用流程：用户首先需要在左侧的插件列表中点击&quot;交互插件&quot;标签页，然后从列表中选择&quot;修改 HTTP 请求 Header&quot;插件。点击后会打开参数设置界面，用户可以在此配置 HTTP Header 的名称和值，例如添加自定义的&quot;Yakit-Header&quot;及其对应的&quot;Custom-Value&quot;。界面还提供了&quot;添加一行数据&quot;按钮，方便用户添加多个 Header 配置。</p>
 <p>此外，用户可以在参数组中的&quot;前提条件&quot;设置区域，用户可以通过设置&quot;URL 前提条件&quot;来限定插件仅在特定 URL 请求时生效，进一步提高了测试的精确性和针对性。</p>
 <p>在配置完毕之后，用户可以点击右上角的“确定”按钮，来把交互式插件加载到内存中。我们可以用接下来的操作直接验证这个插件是否在工作：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit交互插件修改HTTP请求Header配置界面" src="/en/assets/images/ch3-029-738c61ca04cd0040f226a47e297bf8fc.png" width="2912" height="1250" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit交互插件修改HTTP请求Header配置界面"><img decoding="async" loading="lazy" alt="Yakit交互插件修改HTTP请求Header配置界面" src="/en/assets/images/ch3-029-738c61ca04cd0040f226a47e297bf8fc.png" width="2912" height="1250" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit交互插件修改HTTP请求Header配置界面</p>
 <p>在配置完成交互插件后，用户可通过简单的操作验证其有效性：首先在界面上选择&quot;自动放行&quot;并勾选&quot;MITM&quot;和&quot;插件&quot;功能，当 HTTP 请求通过 Yakit 代理时，系统会在流量列表中记录这些请求。用户可点击列表中的具体请求（如图中 ID 为 54244 的 example.com GET 请求）查看详情，从而确认请求头是否已按预期被修改——例如成功添加了自定义的&quot;Yakit-Header: Custom-Value&quot;头信息。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="插件模式总结">插件模式总结<a href="#插件模式总结" class="hash-link" aria-label="Direct link to 插件模式总结" title="Direct link to 插件模式总结" translate="no">​</a></h3>

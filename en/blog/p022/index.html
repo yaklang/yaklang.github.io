@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">用 SyntaxFlow 规则“狩猎”逻辑漏洞 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p022"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="用 SyntaxFlow 规则“狩猎”逻辑漏洞 | Yak Program Language"><meta data-rh="true" name="description" content="逻辑漏洞往往隐藏在业务代码深处，传统扫描工具难以覆盖。本文以 fuint 和 forest 两个开源项目中被分配了 CVE 编号的真实漏洞为例，分享如何通过 IRify 的 SyntaxFlow 语法编写规则，快速定位 Token 伪造与未授权访问等高危逻辑漏洞。"><meta data-rh="true" property="og:description" content="逻辑漏洞往往隐藏在业务代码深处，传统扫描工具难以覆盖。本文以 fuint 和 forest 两个开源项目中被分配了 CVE 编号的真实漏洞为例，分享如何通过 IRify 的 SyntaxFlow 语法编写规则，快速定位 Token 伪造与未授权访问等高危逻辑漏洞。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-12-19T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p022"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p022" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p022" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p022" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p022","mainEntityOfPage":"https://yaklang.com/en/blog/p022","url":"https://yaklang.com/en/blog/p022","headline":"用 SyntaxFlow 规则“狩猎”逻辑漏洞","name":"用 SyntaxFlow 规则“狩猎”逻辑漏洞","description":"逻辑漏洞往往隐藏在业务代码深处，传统扫描工具难以覆盖。本文以 fuint 和 forest 两个开源项目中被分配了 CVE 编号的真实漏洞为例，分享如何通过 IRify 的 SyntaxFlow 语法编写规则，快速定位 Token 伪造与未授权访问等高危逻辑漏洞。","datePublished":"2025-12-19T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -26,7 +26,7 @@
 <div class="language-java codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-java codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// ClientSignController.java - Line 324-349</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// 方式2：通过账号密码登录</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if (StringUtil.isNotEmpty(account) &amp;&amp; StringUtil.isNotEmpty(password) &amp;&amp; StringUtil.isNotEmpty(captchaCode)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Boolean captchaVerify = captchaService.checkCodeByUuid(captchaCode, uuid);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (!captchaVerify) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return getFailureResult(201,&quot;图形验证码有误&quot;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    MtUser userInfo = memberService.queryMemberByName(merchantId, account);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if (userInfo != null) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        String myPassword = userInfo.getPassword();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        String inputPassword = memberService.deCodePassword(password, userInfo.getSalt());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        if (myPassword.equals(inputPassword)) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            UserInfo loginInfo = new UserInfo();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            // Step 1: Generate secure token (e.g., &quot;e5d8f6a3b2c4d1a7f9e8...&quot;)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            loginInfo.setToken(TokenUtil.generateToken(userAgent, userInfo.getId()));</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            loginInfo.setId(userInfo.getId());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">           // Step 2: ❌ CRITICAL BUG - Overwrite secure token with mobile number</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            loginInfo.setToken(userInfo.getMobile());</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            TokenUtil.saveToken(loginInfo);  // Save phone number as token in Redis</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            dto.setToken(loginInfo.getToken());  // Return phone number to client</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            mtUser = userInfo;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        } else {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            return getFailureResult(201, &quot;账号或密码有误&quot;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre></div></div>
 <p>这意味着，攻击者只要知道用户的手机号，就可以直接将其作为 Token 进行 API 调用，完全接管该用户的账户。</p>
 <p>如下图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b3c41bf6f4c55497-27436e4b40209640bf1a5e1825155d52.png" width="1080" height="411" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b3c41bf6f4c55497-27436e4b40209640bf1a5e1825155d52.png" width="1080" height="411" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="irify-挖掘思路">IRify 挖掘思路<a href="#irify-挖掘思路" class="hash-link" aria-label="Direct link to IRify 挖掘思路" title="Direct link to IRify 挖掘思路" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="这个漏洞的特征在于settoken方法被调用时传入的参数竟然不是一个生成的-token通常包含-token-字样的方法调用而是一个普通的手机号字段"><strong>这个漏洞的特征在于</strong><code>setT``oken</code>方法被调用时，传入的参数竟然不是一个生成的 Token（通常包含 &quot;token&quot; 字样的方法调用），而是一个普通的手机号字段。<a href="#这个漏洞的特征在于settoken方法被调用时传入的参数竟然不是一个生成的-token通常包含-token-字样的方法调用而是一个普通的手机号字段" class="hash-link" aria-label="Direct link to 这个漏洞的特征在于settoken方法被调用时传入的参数竟然不是一个生成的-token通常包含-token-字样的方法调用而是一个普通的手机号字段" title="Direct link to 这个漏洞的特征在于settoken方法被调用时传入的参数竟然不是一个生成的-token通常包含-token-字样的方法调用而是一个普通的手机号字段" translate="no">​</a></h3>
 <p>我们利用 IRify 编写了如下规则来捕获这种异常行为：</p>
@@ -41,7 +41,7 @@
 </li>
 </ul>
 <p>在上述代码中，<code>userInfo.getM``obile()</code> 作为参数，里面完全没有 &quot;token&quot; 这个词，因此被精准识别出来：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/74f484a618bf3bf2-b07d22bb61f2a2c692b8daac1c9ad2eb.png" width="1080" height="544" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/74f484a618bf3bf2-b07d22bb61f2a2c692b8daac1c9ad2eb.png" width="1080" height="544" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="cve-2025-12924--12925----消失的权限校验门神">CVE-2025-12924 &amp; 12925 -- 消失的权限校验门神<a href="#cve-2025-12924--12925----消失的权限校验门神" class="hash-link" aria-label="Direct link to CVE-2025-12924 &amp; 12925 -- 消失的权限校验门神" title="Direct link to CVE-2025-12924 &amp; 12925 -- 消失的权限校验门神" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="项目信息-1">项目信息<a href="#项目信息-1" class="hash-link" aria-label="Direct link to 项目信息" title="Direct link to 项目信息" translate="no">​</a></h2>
 <p>**漏洞项目：**rymcu/forest (社区论坛系统)</p>
@@ -68,7 +68,7 @@
 <li class=""><strong><code>!have:&quot;getCurrentUserByToken&quot;</code></strong>: 如果代码里连“获取当前用户”的操作都没有，大概率是没有做垂直越权检查的。</li>
 </ul>
 <p>这条规则成功定位到了<code>UserDicController</code>和 <code>BankController</code>中那些“裸奔”的接口：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5603905d3bd45446-96529dedc0be9bd6715a46ea7d63e23f.png" width="1080" height="581" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5603905d3bd45446-96529dedc0be9bd6715a46ea7d63e23f.png" width="1080" height="581" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结与思考交互式挖掘所想即所得">总结与思考：交互式挖掘，所想即所得<a href="#总结与思考交互式挖掘所想即所得" class="hash-link" aria-label="Direct link to 总结与思考：交互式挖掘，所想即所得" title="Direct link to 总结与思考：交互式挖掘，所想即所得" translate="no">​</a></h2>
 <p>通过以上几个漏洞案例，我们可以清晰地看到：<strong>逻辑漏洞往往隐藏在特定的业务上下文中</strong>，需要审计人员敏锐的直觉来发现。</p>
 <p>而 <strong>IRify</strong>配合 <strong>SyntaxFlow</strong>的最大价值，在于它为安全研究人员提供了一个极其流畅的<code>交互式审计环境</code>：</p>
@@ -81,7 +81,7 @@
 <p>以下是新版界面的核心功能图解：</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-常用操作一键直达">1. 常用操作一键直达<a href="#1-常用操作一键直达" class="hash-link" aria-label="Direct link to 1. 常用操作一键直达" title="Direct link to 1. 常用操作一键直达" translate="no">​</a></h4>
 <p>我们将最常用的四个核心功能提取到了项目列表页，您可以参考下图的数字索引进行操作：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b52a2ba2dbe4d69-6ddff5a3a59045c5b121d311c0391539.png" width="1080" height="738" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b52a2ba2dbe4d69-6ddff5a3a59045c5b121d311c0391539.png" width="1080" height="738" class="yakdoc-image"></button></p>
 <ul>
 <li class=""><strong>① 代码编译 (Compile)</strong></li>
 <li class=""><strong>② 代码扫描 (Scan)</strong></li>
@@ -91,14 +91,14 @@
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-智能化的项目创建流程">2. 智能化的项目创建流程<a href="#2-智能化的项目创建流程" class="hash-link" aria-label="Direct link to 2. 智能化的项目创建流程" title="Direct link to 2. 智能化的项目创建流程" translate="no">​</a></h4>
 <p>“添加项目”不仅仅是填个表，它内置了智能探测逻辑：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/10cc0d01445e6c5e-144f170fa61619cb032c613355fce205.png" width="1080" height="884" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/10cc0d01445e6c5e-144f170fa61619cb032c613355fce205.png" width="1080" height="884" class="yakdoc-image"></button></p>
 <ul>
 <li class=""><strong>智能探测</strong>：您只需输入项目路径（支持<strong>本地绝对路径</strong>或 <strong>Git 、SVN远程链接</strong>），系统会自动探测项目语言，并自动配置过滤规则（排除无关文件），以避免无效编译影响性能。</li>
 <li class=""><strong>流程控制</strong>：</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-灵活的扫描策略">3. 灵活的扫描策略<a href="#3-灵活的扫描策略" class="hash-link" aria-label="Direct link to 3. 灵活的扫描策略" title="Direct link to 3. 灵活的扫描策略" translate="no">​</a></h4>
 <p>点击列表中的“扫描”按钮后，将进入扫描配置页：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6d567fb9b266aeb4-13ce05c767539a7cfbf1effe00f20ee0.png" width="1080" height="738" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6d567fb9b266aeb4-13ce05c767539a7cfbf1effe00f20ee0.png" width="1080" height="738" class="yakdoc-image"></button></p>
 <ul>
 <li class=""><strong>自动补全</strong>：如果该项目从未编译过，系统会默认拉取代码并进行首次编译。</li>
 <li class=""><strong>版本回溯</strong>：在<code>编译历史</code>下拉框中，您可以选择<code>编译并扫描最新代码</code><strong>，也可以选择</strong>历史上任意一次编译版本**进行重扫。这意味着您可以随时用新写的规则去检测老版本的代码。</li>
@@ -107,7 +107,7 @@
 <li class="">全面的历史回溯 (双维视图)</li>
 </ol>
 <p>进入<code>项目历史</code>页面，我们将数据分为了左右两栏，逻辑更加清晰：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e0dab24df7c775fb-1f680b83853eed92191b4f7f9bbe9d63.png" width="1080" height="738" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e0dab24df7c775fb-1f680b83853eed92191b4f7f9bbe9d63.png" width="1080" height="738" class="yakdoc-image"></button></p>
 <ul>
 <li class=""><strong>左侧 - 编译历史</strong>：记录了代码的每一次变更版本。您可以在这里对旧版本的代码发起新的扫描或审计任务。</li>
 <li class=""><strong>右侧 - 扫描历史</strong>：对应左侧选中版本的每一次扫描结果。您可以在这里<strong>查看漏洞详情</strong>或<strong>一键导出审计报告</strong>。</li>
@@ -116,7 +116,7 @@
 <li class="">旧项目迁移</li>
 </ol>
 <p>如果您是从旧版本升级到新版的用户，可能会发现以前的扫描记录在列表中“消失”了。这是因为旧版的历史数据缺少新版项目管理所需的配置信息。在项目启动时候会提醒是否迁移旧项目数据，点击即可迁移；也可以在项目管理进行迁移。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e3892479edd20391-7b525814ad00f2dfa2006eec13ad406a.png" width="1080" height="738" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e3892479edd20391-7b525814ad00f2dfa2006eec13ad406a.png" width="1080" height="738" class="yakdoc-image"></button></p>
 <p><strong>功能作用</strong>：点击列表右上角的**“迁移旧项目数据”**按钮。</p>
 <p><strong>执行逻辑</strong>：系统会自动扫描数据库中那些没有关联项目配置的“孤儿”数据（即旧版产生的编译/扫描记录），并将它们识别、归档到新的项目视图中，确保您的历史资产不丢失。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-旧版入口说明">6. 旧版入口说明<a href="#6-旧版入口说明" class="hash-link" aria-label="Direct link to 6. 旧版入口说明" title="Direct link to 6. 旧版入口说明" translate="no">​</a></h4>

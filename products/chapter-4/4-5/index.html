@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">4.5 数据匹配与处理规则 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-4/4-5"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.5 数据匹配与处理规则 | Yak Program Language"><meta data-rh="true" name="description" content="在 4.4 节中，我们掌握了如何利用 Web Fuzzer 的 Fuzztag 机制构造并发送海量、高度定制化的测试请求。然而，成功的模糊测试不仅在于“提问”的广度和深度，更在于“理解答案”的效率和精度。每一次大规模的测试任务都会生成成百上千乃至数万条响应，这些数据构成了信息富矿，但也混杂着大量噪声。如何从这片数据海洋中快速、准确地识别出预期的结果或异常的响应，是决定自动化测试成败的关键环节。"><meta data-rh="true" property="og:description" content="在 4.4 节中，我们掌握了如何利用 Web Fuzzer 的 Fuzztag 机制构造并发送海量、高度定制化的测试请求。然而，成功的模糊测试不仅在于“提问”的广度和深度，更在于“理解答案”的效率和精度。每一次大规模的测试任务都会生成成百上千乃至数万条响应，这些数据构成了信息富矿，但也混杂着大量噪声。如何从这片数据海洋中快速、准确地识别出预期的结果或异常的响应，是决定自动化测试成败的关键环节。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-4/4-5"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-5" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-5" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-5" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.5 数据匹配与处理","item":"https://yaklang.com/products/chapter-4/4-5"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -36,7 +36,7 @@
 <p>结果列表的每个表头（如 <code>状态</code>、<code>响应大小</code>、<code>延迟</code>）均支持点击排序。这是一个简单但极其有效的分析手段。例如，在进行目录爆破时，大多数不存在的路径会返回相同的响应大小（如404页面的固定大小）。通过对 <code>响应大小</code> 列进行降序或升序排序，可以瞬间将那些大小异常的响应（可能代表200 OK的有效路径或500错误的详细报错页面）置于列表顶部，从而快速发现潜在的目标。同理，对 <code>延迟</code> 列排序有助于识别可能存在时间盲注或处理密集型操作的端点。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="表头筛选器多维度的条件过滤">表头筛选器：多维度的条件过滤<a href="#表头筛选器多维度的条件过滤" class="hash-link" aria-label="表头筛选器：多维度的条件过滤的直接链接" title="表头筛选器：多维度的条件过滤的直接链接" translate="no">​</a></h3>
 <p>为了实现更精确的定位，Web Fuzzer 在结果列表的右上角提供了一个漏斗状的“表头筛选”图标。点击后会弹出一个多维度筛选面板，允许用户根据响应的元数据（Metadata）组合过滤结果。</p>
-<p><img decoding="async" loading="lazy" alt="表头筛选器功能界面展示" src="/assets/images/ch4-041-89f0e69be2177e118534c79ac8646869.png" width="1173" height="442" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 表头筛选器功能界面展示"><img decoding="async" loading="lazy" alt="表头筛选器功能界面展示" src="/assets/images/ch4-041-89f0e69be2177e118534c79ac8646869.png" width="1173" height="442" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：表头筛选器功能界面展示</p>
 <p>该筛选器提供了以下核心过滤维度：</p>
 <ul>
@@ -61,7 +61,7 @@
 <p>这个功能的核心目标是从“找到”感兴趣的响应，升级到“获取”响应中的核心数据。它允许测试人员在不离开当前结果界面的情况下，对所有（或已筛选的）响应执行一次性的、可视化的内容抓取操作，极大地提升了信息聚合与二次分析的效率。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="操作流程可视化正则生成与批量提取">操作流程：可视化正则生成与批量提取<a href="#操作流程可视化正则生成与批量提取" class="hash-link" aria-label="操作流程：可视化正则生成与批量提取的直接链接" title="操作流程：可视化正则生成与批量提取的直接链接" translate="no">​</a></h4>
 <p>该提取功能的设计哲学是“所见即所得”，它将复杂的正则表达式提取任务，简化为简单的鼠标划词操作。下面我们通过一个具体案例来解析其操作流程。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 提取响应数据包内容界面" src="/assets/images/ch4-042-a8709cadd07a7894e388532cc3b0bd04.png" width="1082" height="874" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 提取响应数据包内容界面"><img decoding="async" loading="lazy" alt="Yakit 提取响应数据包内容界面" src="/assets/images/ch4-042-a8709cadd07a7894e388532cc3b0bd04.png" width="1082" height="874" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 提取响应数据包内容界面</p>
 <p>假设我们正在对一个订单查询接口进行越权测试，通过遍历订单ID，我们获取了大量包含用户个人信息的响应。现在，我们需要将所有响应中的“客户电话”提取出来。</p>
 <ol>
@@ -113,9 +113,9 @@
 <p>匹配器的本质是一个谓词逻辑引擎，它允许用户定义一组条件，并规定当一个HTTP响应满足这些条件时应执行的动作。最常见的应用场景就是自动“丢弃”（Discard）那些已知的、无价值的响应（如404页面、无效订单提示等），从而极大地降低信噪比，使测试人员能聚焦于真正有意义的结果。</p>
 <p><strong>工作流：从定义规则到实战应用</strong></p>
 <p>我们将通过一个典型案例——过滤掉“订单号不存在”的无效响应——来详细分解匹配器的配置过程（继续从4.4.4.2中的结果开始）：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 模糊测试响应匹配结果展示" src="/assets/images/ch4-043-c7f5984f229b8020e892af93e45e446c.png" width="1278" height="676" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer 模糊测试响应匹配结果展示"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 模糊测试响应匹配结果展示" src="/assets/images/ch4-043-c7f5984f229b8020e892af93e45e446c.png" width="1278" height="676" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer 模糊测试响应匹配结果展示</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 响应匹配器配置界面" src="/assets/images/ch4-044-0db3ef8d3ffe966637b7a034145e5e5e.png" width="1551" height="575" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 响应匹配器配置界面"><img decoding="async" loading="lazy" alt="Yakit 响应匹配器配置界面" src="/assets/images/ch4-044-0db3ef8d3ffe966637b7a034145e5e5e.png" width="1551" height="575" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 响应匹配器配置界面</p>
 <ol>
 <li class="">
@@ -146,7 +146,7 @@
 </li>
 </ol>
 <p>当配置了丢弃规则并重新执行请求后，可以看到结果列表上方的状态栏会明确提示“已丢弃[...]个响应”，表明匹配器正在有效地净化数据流，将无效结果自动过滤。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 响应列表与详细数据预览界面" src="/assets/images/ch4-045-7c851c7b35aad0783106604832f803d5.png" width="1285" height="544" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 响应列表与详细数据预览界面"><img decoding="async" loading="lazy" alt="Yakit 响应列表与详细数据预览界面" src="/assets/images/ch4-045-7c851c7b35aad0783106604832f803d5.png" width="1285" height="544" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 响应列表与详细数据预览界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="多样的匹配规则">多样的匹配规则<a href="#多样的匹配规则" class="hash-link" aria-label="多样的匹配规则的直接链接" title="多样的匹配规则的直接链接" translate="no">​</a></h4>
 <p>为了应对复杂的Web应用场景，匹配器提供了丰富的规则类型，以实现精确的条件判断：</p>
@@ -154,10 +154,10 @@
 <p>在通过匹配器过滤掉大量噪声后，我们的目标是进一步从剩余的有效响应中，系统性地、可复用地提取关键信息。这正是“数据提取器”的用武之地。与<code>4.5.2</code>节介绍的即时提取不同，规则系统中的数据提取器是一条持久化规则，它会自动从每一个通过匹配器筛选的响应中抓取数据，并以结构化的字段呈现在结果列表中。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="工作流从定义提取规则到结果呈现">工作流：从定义提取规则到结果呈现<a href="#工作流从定义提取规则到结果呈现" class="hash-link" aria-label="工作流：从定义提取规则到结果呈现的直接链接" title="工作流：从定义提取规则到结果呈现的直接链接" translate="no">​</a></h4>
 <p>接续上文的订单遍历场景，假设我们已经过滤掉了无效订单，现在需要批量提取所有有效订单中的“客户电话”。接下来我们还是从“规则”-“数据提取器”点击进入操作台：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 数据提取器与请求构造界面" src="/assets/images/ch4-046-fe7705b74d1312ae42114ec63419dbdf.png" width="993" height="410" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer 数据提取器与请求构造界面"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 数据提取器与请求构造界面" src="/assets/images/ch4-046-fe7705b74d1312ae42114ec63419dbdf.png" width="993" height="410" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer 数据提取器与请求构造界面</p>
 <p>在进入数据提取器操作台之后，我们可以按照下图的操作步骤一步一步进行设置从而实现提取订单页面中的手机号：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit数据提取器正则匹配与调试流程" src="/assets/images/ch4-047-94f980c023ed8a492f3d0aea396ad366.png" width="1182" height="465" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit数据提取器正则匹配与调试流程"><img decoding="async" loading="lazy" alt="Yakit数据提取器正则匹配与调试流程" src="/assets/images/ch4-047-94f980c023ed8a492f3d0aea396ad366.png" width="1182" height="465" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit数据提取器正则匹配与调试流程</p>
 <ol>
 <li class="">
@@ -184,17 +184,17 @@
 <p><strong>调试与命名</strong>：输入表达式后，点击“调试执行”。下方“提取结果”会立即显示从样例数据中捕获的内容。默认情况下，提取的字段名为<code>data_0</code>。我们可以点击字段名进行修改，例如改为更具语义的 <code>phoneNumber</code>。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit模糊测试中定义正则提取规则" src="/assets/images/ch4-048-e2fed35aaf527343768540b85e7c67b0.png" width="639" height="343" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit模糊测试中定义正则提取规则"><img decoding="async" loading="lazy" alt="Yakit模糊测试中定义正则提取规则" src="/assets/images/ch4-048-e2fed35aaf527343768540b85e7c67b0.png" width="639" height="343" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit模糊测试中定义正则提取规则</p>
 <ol start="5">
 <li class=""><strong>应用规则</strong>：确认提取结果正确无误后，点击“应用”保存。</li>
 </ol>
 <p>规则生效后，Web Fuzzer 会自动为结果列表填充提取数据，用户可以右拉数据表，查看“提取数据”中的<code>phoneNumber</code>。所有成功提取到的电话号码都会实时填充到这一列，实现了数据的自动化结构化。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit模糊测试数据提取与结果展示" src="/assets/images/ch4-049-3cdabe194d9cf35ad85e242ce726cf2a.png" width="1425" height="493" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit模糊测试数据提取与结果展示"><img decoding="async" loading="lazy" alt="Yakit模糊测试数据提取与结果展示" src="/assets/images/ch4-049-3cdabe194d9cf35ad85e242ce726cf2a.png" width="1425" height="493" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit模糊测试数据提取与结果展示</p>
 <p>这种方式不仅便于直接查看，也为后续的数据导出和二次分析提供了极大的便利。如果需要提取多个字段（如同时提取客户姓名），只需在提取器中添加更多的提取规则即可。数据提取器的设计充分考虑了这种多字段提取的场景。用户可以在一个数据提取器实例中配置多条相互正交的提取规则，每一条规则负责一个特定字段的捕获。这种设计具备高度的灵活性和扩展性，允许我们从同一个响应中构建出复杂的数据结构。</p>
 <p>让我们回到订单遍历的案例。在成功提取了<code>phoneNumber</code>之后，我们进一步的目标是同时获取“客户姓名”。</p>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer数据提取规则配置与结果展示" src="/assets/images/ch4-050-8678d60084156b43a142a19653cea14d.png" width="1388" height="555" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer数据提取规则配置与结果展示"><img decoding="async" loading="lazy" alt="Web Fuzzer数据提取规则配置与结果展示" src="/assets/images/ch4-050-8678d60084156b43a142a19653cea14d.png" width="1388" height="555" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer数据提取规则配置与结果展示</p>
 <ol>
 <li class="">
@@ -233,7 +233,7 @@
 </li>
 </ol>
 <p>当此包含多条规则的提取器生效后，Web Fuzzer 的结果展示将发生显著变化。它并不会为每个字段创建单独的列，而是会将所有提取出的字段聚合到统一的“提取数据”列中，并以 <code>字段名: 值</code> 的格式清晰呈现。这种聚合展示方式在提取字段较多时依然能保持界面的整洁性，一目了然。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer提取数据结果展示" src="/assets/images/ch4-051-5123a0a79d45985b7fae5f9afaca634d.png" width="882" height="478" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer提取数据结果展示"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer提取数据结果展示" src="/assets/images/ch4-051-5123a0a79d45985b7fae5f9afaca634d.png" width="882" height="478" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer提取数据结果展示</p>
 <p>至此，我们通过组合使用匹配器和数据提取器，构建了一个完整的自动化工作流：首先通过匹配器自动过滤无效数据，然后从所有有效数据中通过数据提取器，自动、结构化地提取出客户电话和客户姓名两个关键信息字段。这为后续的数据分析、漏洞验证和报告撰写奠定了坚实的数据基础。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="453-大规模-fuzz-结果处理联动流量分析器">4.5.3 大规模 Fuzz 结果处理：联动流量分析器<a href="#453-大规模-fuzz-结果处理联动流量分析器" class="hash-link" aria-label="4.5.3 大规模 Fuzz 结果处理：联动流量分析器的直接链接" title="4.5.3 大规模 Fuzz 结果处理：联动流量分析器的直接链接" translate="no">​</a></h2>
@@ -241,12 +241,12 @@
 <p>为了解决这一工程挑战，Yakit 设计了一套优雅的性能保护与数据处理联动机制。它通过设定前端渲染阈值，将大规模结果集的深度分析任务无缝迁移至专为批处理而设计的<strong>流量分析器</strong>。本节将详细阐述这一从“数据生成”到“数据挖掘”的核心工作流。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4531-前端渲染性能保护机制">4.5.3.1 前端渲染性能保护机制<a href="#4531-前端渲染性能保护机制" class="hash-link" aria-label="4.5.3.1 前端渲染性能保护机制的直接链接" title="4.5.3.1 前端渲染性能保护机制的直接链接" translate="no">​</a></h3>
 <p>Yakit 的性能保护机制基于一个全局配置项：<strong>前端渲染数量</strong>。该配置位于全局“配置”面板中，它定义了任何单一视图（包括 <code>Web Fuzzer</code> 的结果列表）在前端直接渲染数据的上限，默认值通常为一个经过性能权衡的数值（如 2000）。</p>
-<p><img decoding="async" loading="lazy" alt="前端渲染数量配置项" src="/assets/images/ch4-052-711990534a558db36e66c2b6a9de9853.png" width="381" height="430" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: 前端渲染数量配置项"><img decoding="async" loading="lazy" alt="前端渲染数量配置项" src="/assets/images/ch4-052-711990534a558db36e66c2b6a9de9853.png" width="381" height="430" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：前端渲染数量配置项</p>
 <p>这个阈值是保障工具在高负载下依然保持流畅响应的关键。当 <code>Web Fuzzer</code> 完成一个测试任务后，如果其生成的响应数量超过了此阈值，系统便会自动触发性能保护模式。此时，界面仅会加载并显示前 <code>前端渲染数量</code> 条结果以供快速预览，同时在结果列表的顶部显示一个提示信息。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4532-查看全部无缝切换至分析工作台">4.5.3.2 “查看全部”：无缝切换至分析工作台<a href="#4532-查看全部无缝切换至分析工作台" class="hash-link" aria-label="4.5.3.2 “查看全部”：无缝切换至分析工作台的直接链接" title="4.5.3.2 “查看全部”：无缝切换至分析工作台的直接链接" translate="no">​</a></h3>
 <p>在性能保护模式的提示信息中，核心交互入口是 <strong>“查看全部”</strong> 按钮。这个按钮并非简单地加载更多数据，而是作为一座桥梁，将 <code>Web Fuzzer</code> 的海量原始结果集，整体、高效地移交给后端的流量分析引擎。</p>
-<p><img decoding="async" loading="lazy" alt="点击查看全部进入流量分析器" src="/assets/images/ch4-053-89c2f129efce546313a4dc450e857857.png" width="1149" height="693" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 点击查看全部进入流量分析器"><img decoding="async" loading="lazy" alt="点击查看全部进入流量分析器" src="/assets/images/ch4-053-89c2f129efce546313a4dc450e857857.png" width="1149" height="693" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：点击查看全部进入流量分析器</p>
 <p>如上图展示，点击“查看全部”后，系统将执行以下操作：</p>
 <ol>

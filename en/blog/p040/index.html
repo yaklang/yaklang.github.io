@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">超级牛的 Java 反编译大法（四）：Switch 语句 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p040"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="超级牛的 Java 反编译大法（四）：Switch 语句 | Yak Program Language"><meta data-rh="true" name="description" content="前文指路：YAK，公众号：Yak Project超级牛的 Java 反编译大法（三）：循环结构"><meta data-rh="true" property="og:description" content="前文指路：YAK，公众号：Yak Project超级牛的 Java 反编译大法（三）：循环结构"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-08-15T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,代码审计,Java 安全"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p040"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p040" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p040" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p040" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p040","mainEntityOfPage":"https://yaklang.com/en/blog/p040","url":"https://yaklang.com/en/blog/p040","headline":"超级牛的 Java 反编译大法（四）：Switch 语句","name":"超级牛的 Java 反编译大法（四）：Switch 语句","description":"前文指路：YAK，公众号：Yak Project超级牛的 Java 反编译大法（三）：循环结构","datePublished":"2025-08-15T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -30,17 +30,17 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="控制流图中的-switch-拓扑">控制流图中的 Switch 拓扑<a href="#控制流图中的-switch-拓扑" class="hash-link" aria-label="Direct link to 控制流图中的 Switch 拓扑" title="Direct link to 控制流图中的 Switch 拓扑" translate="no">​</a></h2>
 <p>下图展示了常见的三种形态。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="1无-break-的贯穿式fall-throughswitch">1、无 break 的贯穿式（fall-through）Switch<a href="#1无-break-的贯穿式fall-throughswitch" class="hash-link" aria-label="Direct link to 1、无 break 的贯穿式（fall-through）Switch" title="Direct link to 1、无 break 的贯穿式（fall-through）Switch" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7e68ec97486ad484-8c553c79dc0d0395dde1f941bfd25775.png" width="1080" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7e68ec97486ad484-8c553c79dc0d0395dde1f941bfd25775.png" width="1080" height="646" class="yakdoc-image"></button></p>
 <p>特征：多个 case 可能顺序相连，形成贯穿；<code>default</code> 可能直接指向后继。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2带-break-的结构化-switch">2、带 break 的结构化 Switch<a href="#2带-break-的结构化-switch" class="hash-link" aria-label="Direct link to 2、带 break 的结构化 Switch" title="Direct link to 2、带 break 的结构化 Switch" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6520d30772d60694-7659d0d7faa0de19c3be141988f7c170.png" width="1080" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6520d30772d60694-7659d0d7faa0de19c3be141988f7c170.png" width="1080" height="646" class="yakdoc-image"></button></p>
 <p>特征：每个 case 以 <code>break</code> 结束，统一流向汇合节点 <code>D</code>。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3default-为后继语句的-switch">3、default 为“后继语句”的 Switch<a href="#3default-为后继语句的-switch" class="hash-link" aria-label="Direct link to 3、default 为“后继语句”的 Switch" title="Direct link to 3、default 为“后继语句”的 Switch" translate="no">​</a></h2>
 <p>当源码未显式书写 <code>default</code>，或编译器将“switch 后继语句”作为兜底路径时，CFG 可能如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/bbdcc6153f1a1818-edf99b9722887f497d1eb88b59db6ef3.png" width="1080" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/bbdcc6153f1a1818-edf99b9722887f497d1eb88b59db6ef3.png" width="1080" height="646" class="yakdoc-image"></button></p>
 <p>在反编译层面，若满足数据与控制一致性约束（详见后文“ Default 判定策略”），可将“ <code>Switch 的后继语句”</code>等价视为 <code>default</code> 代码块。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4多个流程控制关键词的-switch-语句">4、多个流程控制关键词的 Switch 语句<a href="#4多个流程控制关键词的-switch-语句" class="hash-link" aria-label="Direct link to 4、多个流程控制关键词的 Switch 语句" title="Direct link to 4、多个流程控制关键词的 Switch 语句" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f96fd60414fc548e-962b09da493bf3fedbd8ed9ef2ec8980.png" width="1080" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f96fd60414fc548e-962b09da493bf3fedbd8ed9ef2ec8980.png" width="1080" height="646" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="jvm-字节码与-cfg-tableswitch-与-lookupswitch">JVM 字节码与 CFG: tableswitch 与 lookupswitch<a href="#jvm-字节码与-cfg-tableswitch-与-lookupswitch" class="hash-link" aria-label="Direct link to JVM 字节码与 CFG: tableswitch 与 lookupswitch" title="Direct link to JVM 字节码与 CFG: tableswitch 与 lookupswitch" translate="no">​</a></h2>
 <p>JVM 提供两条专用于 <code>switch</code> 的分派指令：</p>
 <ul>
@@ -120,7 +120,7 @@
 <p>1、基于 <code>hashCode()</code> 的整数分派（<code>tableswitch</code>/<code>lookupswitch</code>），将若干可能相同哈希的字符串聚到同一分支；</p>
 <p>2、在该分支内以 <code>equals</code> 逐一精确匹配，跳转到真实的 case body。</p>
 <p>高层结构示意：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2db7bc04d1b7d6ff-c6427c0d9f272f7f29995b9f8212383e.png" width="1080" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2db7bc04d1b7d6ff-c6427c0d9f272f7f29995b9f8212383e.png" width="1080" height="646" class="yakdoc-image"></button></p>
 <p>识别与还原要点：</p>
 <ul>
 <li class="">模式检测：<code>hash = s.hashCode()</code> → 按 hash 分支 → 分支内 <code>equals</code> 链；</li>

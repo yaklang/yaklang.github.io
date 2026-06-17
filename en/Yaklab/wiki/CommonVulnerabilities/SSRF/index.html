@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">SSRF漏洞 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/SSRF"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="SSRF漏洞 | Yak Program Language"><meta data-rh="true" name="description" content="漏洞描述："><meta data-rh="true" property="og:description" content="漏洞描述："><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/SSRF"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/SSRF" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/SSRF" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/SSRF" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SSRF漏洞","item":"https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/SSRF"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,11 +17,11 @@
 <p>服务器端请求伪造（也称为 SSRF）是一种 Web 安全漏洞，允许攻击者诱导服务器端应用程序向非预期位置发出请求，攻击者可以滥用服务器上的功能来读取或更新内部资源。</p>
 <p><strong>漏洞案例：</strong></p>
 <p>使用yakit中DNSlog功能生成一个可用域名</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/ssrf-1-36556346455f191b0db7020675c40801.png" width="1280" height="790" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/ssrf-1-36556346455f191b0db7020675c40801.png" width="1280" height="790" class="yakdoc-image"></button></p>
 <p>在测试网站URL后拼接生成的域名地址
 例如：<a href="https://xxx.xxx/download.php?filename=http://&amp;#123;yakit" target="_blank" rel="noopener noreferrer" class="">https://xxx.xxx/download.php?filename=http://&amp;#123;yakit</a> 生成的域名}
 访问发现yakit中DNSlog收到记录</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/ssrf-2-f7928ba6e27784abf4cf5e7b3fcbba9e.png" width="1280" height="790" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/ssrf-2-f7928ba6e27784abf4cf5e7b3fcbba9e.png" width="1280" height="790" class="yakdoc-image"></button></p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>漏洞修复方案</p><ol>
 <li class="">将应用程序需要访问的主机名（DNS 名称）或 IP 地址列入白名单；</li>
 <li class="">在任何情况下都不应将来自服务器发送的请求的原始响应正文传递给客户端；</li>

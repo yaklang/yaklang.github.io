@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">悄然上线的爆破与未授权检测 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p309"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="悄然上线的爆破与未授权检测 | Yak Program Language"><meta data-rh="true" name="description" content="不知道大家最近更新有没有发现我们悄悄上线了爆破与授权检测，近期收集了大家对于这个功能的意见反馈，进行了优化后，在满足预期的基础上跟大家讲一讲这个功能的使用与具体的技术逻辑"><meta data-rh="true" property="og:description" content="不知道大家最近更新有没有发现我们悄悄上线了爆破与授权检测，近期收集了大家对于这个功能的意见反馈，进行了优化后，在满足预期的基础上跟大家讲一讲这个功能的使用与具体的技术逻辑"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2021-12-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2021 年,WebFuzzer,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p309"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p309" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p309" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p309" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p309","mainEntityOfPage":"https://yaklang.com/blog/p309","url":"https://yaklang.com/blog/p309","headline":"悄然上线的爆破与未授权检测","name":"悄然上线的爆破与未授权检测","description":"不知道大家最近更新有没有发现我们悄悄上线了爆破与授权检测，近期收集了大家对于这个功能的意见反馈，进行了优化后，在满足预期的基础上跟大家讲一讲这个功能的使用与具体的技术逻辑","datePublished":"2021-12-27T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -53,7 +53,7 @@
 <p>细节一：单目标并发与多目标并发</p>
 <p>大量的实践都证明，一些不够“精致”的爆破手段喜欢增加并发，并发无脑加到了“单个目标”上，导致爆破很快遭到察觉和封禁。</p>
 <p>比较合适的手段应该是可以同时爆破“多个目标”，每个目标低并发。这样在有多个目标的时候，并不会影响效率，而且单个目标也不会过快 “打草惊蛇”。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e14510e91e5969e7-1df28122b375686682b5bb0d659a16aa.png" width="639" height="308" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e14510e91e5969e7-1df28122b375686682b5bb0d659a16aa.png" width="639" height="308" class="yakdoc-image"></button></p>
 <p>02</p>
 <p>细节二：随机 Sleep 来规避 “反制爆破的策略”</p>
 <p>在我们“多个目标并发”的爆破策略下，有时候还是难以解决被 Ban 的问题。虽然我们并有从根源上解决这个 “被 ban” 的问题。</p>
@@ -61,7 +61,7 @@
 <p>但是以我作为一个 “研发” 的角度来讲，我如果要 ban 爆破行为的话，我会设置一个时间窗口，短时间时间窗口被打满我会认为发生了爆破事件</p>
 </blockquote>
 <p>如果可以再 “放缓” 针对单个目标的测试强度，其实有可能可以缓解这个问题，所以我们可以通过这种设置参数来解决这个问题。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b2436ec3400ae8fb-bfa9c11987b2c009edcbc18876be8e7d.png" width="491" height="334" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b2436ec3400ae8fb-bfa9c11987b2c009edcbc18876be8e7d.png" width="491" height="334" class="yakdoc-image"></button></p>
 <p>03</p>
 <p>细节三：未授权应该放在爆破前做检查</p>
 <p>很多时候，我们无脑在爆破的时候，未授权和指纹检查其实已经可以发现一些可用的信息。遇到这种情况，我们可以决定到底要不要爆破。</p>
@@ -71,14 +71,14 @@
 <p>04</p>
 <p>yak 中的爆破框架 schema</p>
 <p>yaklang.io 的爆破框架其实解决了上面提到的大多数细节问题，在 yak 的 brute 模块中，我们定义了如下内容：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b060cae0fab043e4-55e249df25fc31f1dc3d6fb0231983cb.png" width="966" height="305" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b060cae0fab043e4-55e249df25fc31f1dc3d6fb0231983cb.png" width="966" height="305" class="yakdoc-image"></button></p>
 <p>每个服务，我们会设置默认用户名和密码，同时为每一个模块编写 “UnAuthVerify”：</p>
 <ol>
 <li class="">这个函数的意义是，进行 “预检查”，在这个模块中，可以检查 TCP 的状态，检查 banner</li>
 <li class="">当然这个函数的精髓其实是每一个 “目标” 只会执行一次</li>
 </ol>
 <p>我们以 MySQL 来举例：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/093823c39b552c5f-91ab99e1b6b57d9c29f6c5678ac84eaf.png" width="866" height="589" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/093823c39b552c5f-91ab99e1b6b57d9c29f6c5678ac84eaf.png" width="866" height="589" class="yakdoc-image"></button></p>
 <p>很多时候，我们虽然同时支持 “多目标并发” 和 “单目标并发”，但是多目标并发仍然绕不开 “too many open sockets/files” 魔咒，当遇到这种情况，用户需要手动修改本机的配置，ulimit 等。</p>
 <p>05</p>
 <p>项目进展</p>
@@ -90,8 +90,8 @@
 </ol>
 <p>到现在两个月有余，我们承诺将会把常见的基础安全工具全部提供足够易用的 GUI，爆破与未授权检测是这个承诺的一部分。虽然 brute 模块中的爆破类型仍然有限，但是这并不是终点，而是一个起点，肉眼可见的，我们可以编写 yak 脚本热加载到程序中，作为 yak 爆破框架的用户自定义插件，在在线的插件商店完备之后，这类操作将会带来无限的想象力。</p>
 <p>我们提到的上述内容，并不以营利为目的，初衷仍然是免费的“安全能力基座 + 安全单兵装备”。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="yakdoc-image"></button></p>
 <p>近期github大佬们留下的issue，也在最新的版本中进行了修复</p>
 <p>1、MITM模块的“发送到Web Fuzzer”不管用</p>
 <p>2、使用插件被动扫描会受到手动劫持模式开关影响</p>

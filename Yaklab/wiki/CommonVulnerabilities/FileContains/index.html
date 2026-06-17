@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">文件包含漏洞 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/FileContains"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="文件包含漏洞 | Yak Program Language"><meta data-rh="true" name="description" content="1 本地文件包含（LFI）"><meta data-rh="true" property="og:description" content="1 本地文件包含（LFI）"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/FileContains"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/FileContains" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/FileContains" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/FileContains" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"文件包含漏洞","item":"https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/FileContains"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,9 +18,9 @@
 <p>文件包含函数加载的参数没有经过</p>
 <p><strong>漏洞案例：</strong></p>
 <p>访问测试网站
-<img decoding="async" loading="lazy" src="/assets/images/FileContains-1-fb4dc0a7a3a4ec249f672bcc5dd3a36c.png" width="1280" height="637" class="img_ev3q"></p>
+<button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/FileContains-1-fb4dc0a7a3a4ec249f672bcc5dd3a36c.png" width="1280" height="637" class="yakdoc-image"></button></p>
 <p>对存在漏洞的页面进行抓包，并构建恶意payload</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/FileContains-2-8dcf6bf30e1d84786d087ea6f0fec519.png" width="1280" height="359" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/FileContains-2-8dcf6bf30e1d84786d087ea6f0fec519.png" width="1280" height="359" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-远程文件包含rfi">2 远程文件包含（RFI）<a href="#2-远程文件包含rfi" class="hash-link" aria-label="2 远程文件包含（RFI）的直接链接" title="2 远程文件包含（RFI）的直接链接" translate="no">​</a></h2>
 <p><strong>漏洞描述：</strong></p>
 <p>远程文件包含就是允许攻击者包含一个远程的文件,一般是在远程服务器上预先设置好的脚本</p>

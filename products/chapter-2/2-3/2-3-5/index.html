@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.5 Codec - 编码与加解密模块 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-2/2-3/2-3-5"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.5 Codec - 编码与加解密模块 | Yak Program Language"><meta data-rh="true" name="description" content="在前面的章节中，我们聚焦于资产的发现与测绘。然而，获取原始资产列表只是渗透测试的起点。有效的安全评估要求我们能够与这些资产进行深度交互，而交互的核心便是对数据流的精确解析与构造。在现代应用协议中，数据极少以明文形式存在，它们往往经过编码（如Base64）、序列化（如JSON等）、哈希或加密处理。因此，高效地进行数据格式转换，是贯穿安全测试全生命周期的核心技能。"><meta data-rh="true" property="og:description" content="在前面的章节中，我们聚焦于资产的发现与测绘。然而，获取原始资产列表只是渗透测试的起点。有效的安全评估要求我们能够与这些资产进行深度交互，而交互的核心便是对数据流的精确解析与构造。在现代应用协议中，数据极少以明文形式存在，它们往往经过编码（如Base64）、序列化（如JSON等）、哈希或加密处理。因此，高效地进行数据格式转换，是贯穿安全测试全生命周期的核心技能。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-2/2-3/2-3-5"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-5" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-5" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-5" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.5 Codec 编解码","item":"https://yaklang.com/products/chapter-2/2-3/2-3-5"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,7 +19,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="顶部导航栏快捷入口即时编解码工具">顶部导航栏快捷入口：即时编解码工具<a href="#顶部导航栏快捷入口即时编解码工具" class="hash-link" aria-label="顶部导航栏快捷入口：即时编解码工具的直接链接" title="顶部导航栏快捷入口：即时编解码工具的直接链接" translate="no">​</a></h3>
 <p>第二种方式是利用位于 Yakit 界面右上角全局工具栏中的“Codec”快捷入口。与全功能的独立视图不同，此入口旨在提供一种轻量级、即时性的“上下文相关”编解码能力。当用户在其他模块（如 MITM 、Fuzzer）中遇到需要快速处理的少量数据时，无需切换整个视图，即可就地完成操作。</p>
 <p>点击顶部导航栏的“Codec”按钮，会出现一个紧凑的、非模态或模态的对话框。这个工具的设计哲学是“用完即走”，聚焦于单次、独立的编解码操作。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 编解码工具界面布局" src="/assets/images/ch2-043-74c0ba31a311af48841a4006965fb404.png" width="1591" height="180" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 编解码工具界面布局"><img decoding="async" loading="lazy" alt="Yakit 编解码工具界面布局" src="/assets/images/ch2-043-74c0ba31a311af48841a4006965fb404.png" width="1591" height="180" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 编解码工具界面布局</p>
 <p>例如，在分析一个HTTP请求时，发现一个参数值是 Base64 编码的，用户可以：</p>
 <ol>
@@ -42,7 +42,7 @@
 <p>本节将围绕两个核心命题展开：“原子化操作的模块化集成” 与 “可重用处理流水线的构建与管理”。通过对 Codec 工作台三栏式布局的逐一解析，您将掌握如何利用其丰富的内置函数库和灵活的“配方”系统，将繁琐的数据转换任务流程化、自动化，从而将精力聚焦于更高层次的安全分析与测试。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="界面架构三栏式协同工作流设计">界面架构：三栏式协同工作流设计<a href="#界面架构三栏式协同工作流设计" class="hash-link" aria-label="界面架构：三栏式协同工作流设计的直接链接" title="界面架构：三栏式协同工作流设计的直接链接" translate="no">​</a></h4>
 <p>Codec 工作台采用经典且高效的三栏式布局，将功能选择、流程编排与数据交互清晰地分离，构成了—个完整且闭环的操作流程。这种设计旨在提供极致的灵活性和清晰的逻辑层次，即使用户面对再复杂的数据结构，也能有条不紊地进行处理。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 三栏式界面架构示意图" src="/assets/images/ch2-044-84e59a500e6e774823aedc1037e00ac7.png" width="3840" height="1611" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 三栏式界面架构示意图"><img decoding="async" loading="lazy" alt="Yakit 三栏式界面架构示意图" src="/assets/images/ch2-044-84e59a500e6e774823aedc1037e00ac7.png" width="3840" height="1611" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 三栏式界面架构示意图</p>
 <p>如上图所示，整个界面被划分为三个核心功能区域：</p>
 <ul>
@@ -59,7 +59,7 @@
 <p>这三个区域协同工作，形成了一个从“选择工具”到“编排流程”再到“执行验证”的完整闭环，下面我们将对每个区域进行深度解析。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="原子操作库功能列表深度解析">原子操作库：功能列表深度解析<a href="#原子操作库功能列表深度解析" class="hash-link" aria-label="原子操作库：功能列表深度解析的直接链接" title="原子操作库：功能列表深度解析的直接链接" translate="no">​</a></h4>
 <p>左侧的功能列表是 Codec 模块能力的核心体现，它不仅功能全面，而且组织结构清晰，便于快速检索。其核心设计思想是将每一个加解密、编解码算法都封装成一个独立的“原子操作”模块，用户可以像搭积木一样使用它们。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit原子操作库功能列表展示" src="/assets/images/ch2-045-75d2c2e18080123fda33b5828bfb7fb7.png" width="595" height="1463" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit原子操作库功能列表展示"><img decoding="async" loading="lazy" alt="Yakit原子操作库功能列表展示" src="/assets/images/ch2-045-75d2c2e18080123fda33b5828bfb7fb7.png" width="595" height="1463" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit原子操作库功能列表展示</p>
 <p>该列表系统性地将功能分为几大类：</p>
 <ul>
@@ -82,7 +82,7 @@
 <p>为了在庞大的功能库中快速定位，该列表顶部提供了一个关键词搜索框。用户只需输入算法名称（如“aes”或“base64”），列表将即时过滤出所有相关操作，极大地提升了工作效率。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="处理流水线编解码配方的构建与管理">处理流水线：编解码配方的构建与管理<a href="#处理流水线编解码配方的构建与管理" class="hash-link" aria-label="处理流水线：编解码配方的构建与管理的直接链接" title="处理流水线：编解码配方的构建与管理的直接链接" translate="no">​</a></h4>
 <p>中部的“编解码配方”区域是 Codec 工作台的灵魂所在。它允许用户将左侧的原子操作通过简单的拖拽方式，按顺序排列组合，形成一条自定义的数据处理流水线。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit编解码流水线配置界面" src="/assets/images/ch2-046-03398779056ecb19f96054acfd19d740.png" width="841" height="992" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit编解码流水线配置界面"><img decoding="async" loading="lazy" alt="Yakit编解码流水线配置界面" src="/assets/images/ch2-046-03398779056ecb19f96054acfd19d740.png" width="841" height="992" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit编解码流水线配置界面</p>
 <p>其核心特性包括：</p>
 <ul>
@@ -96,7 +96,7 @@
 <p><strong>可重用性（配方保存）</strong>: 针对特定应用或目标的复杂处理流程，一旦构建完成，可以将其保存为一个具名的“配方”。未来当再次遇到相同的数据结构时，可以直接调用已保存的配方，一键完成所有转换步骤，实现了“一次构建，多次使用”，这对于处理标准化的私有协议或固定的数据加密模式尤其高效。关于配方保存与管理的具体操作。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit 编解码配方保存与管理界面" src="/assets/images/ch2-047-7d24f3e26e430d8d31e8f914a109677c.png" width="1324" height="605" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 编解码配方保存与管理界面"><img decoding="async" loading="lazy" alt="Yakit 编解码配方保存与管理界面" src="/assets/images/ch2-047-7d24f3e26e430d8d31e8f914a109677c.png" width="1324" height="605" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 编解码配方保存与管理界面</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">上图完整地展示了配方从创建到最终被调用复现的全过程，构成了一个闭环的工作流。下面，我们将对此流程中的每一个关键节点进行原理级和操作级的深度解析。</span><br></span></code></pre></div></div>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="配方的持久化从构建到归档">配方的持久化：从构建到归档<a href="#配方的持久化从构建到归档" class="hash-link" aria-label="配方的持久化：从构建到归档的直接链接" title="配方的持久化：从构建到归档的直接链接" translate="no">​</a></h5>
@@ -114,7 +114,7 @@
 </li>
 </ul>
 <p>上图展示了 Codec 工作台的核心数据交互区域，由 Input 和 Output 两大面板构成。这个上下布局的设计，直观地映射了数据“输入-处理-输出”的线性流动模型。面板中的每一个控件，都服务于提升数据处理的流畅度和效率。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit实时交互面板的输入输出操作功能" src="/assets/images/ch2-048-7d8ddab0e4c10524ae1416f864f2d49b.png" width="1111" height="1093" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit实时交互面板的输入输出操作功能"><img decoding="async" loading="lazy" alt="Yakit实时交互面板的输入输出操作功能" src="/assets/images/ch2-048-7d8ddab0e4c10524ae1416f864f2d49b.png" width="1111" height="1093" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit实时交互面板的输入输出操作功能</p>
 <ul>
 <li class=""><strong>Input Panel: 数据流的起点</strong></li>
@@ -159,12 +159,12 @@
 <p>阶段二: 清空并重新配置“编解码配方”，载入 解密A 的模块。此时，Output 将显示最终的明文</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 级联处理链路的数据流闭环示意图" src="/assets/images/ch2-049-58de27ae80208208e6069f1eefad9415.png" width="618" height="2350" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit 级联处理链路的数据流闭环示意图"><img decoding="async" loading="lazy" alt="Yakit 级联处理链路的数据流闭环示意图" src="/assets/images/ch2-049-58de27ae80208208e6069f1eefad9415.png" width="618" height="2350" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit 级联处理链路的数据流闭环示意图</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据保真性与底层透视hex原文查看器">数据保真性与底层透视：Hex原文查看器<a href="#数据保真性与底层透视hex原文查看器" class="hash-link" aria-label="数据保真性与底层透视：Hex原文查看器的直接链接" title="数据保真性与底层透视：Hex原文查看器的直接链接" translate="no">​</a></h5>
 <p>当输出结果包含非打印字符（如 <code>NUL</code> 字节 <code>\x00</code>）、控制字符，或者本身就是纯二进制数据（如图片、序列化对象）时，文本框的渲染结果可能是误导性的，甚至会发生信息丢失，即“数据失真”。</p>
 <p>为了解决这一问题，确保用户能够观察到最原始、最真实的数据形态，Codec 的 Output 面板提供了一个至关重要的底层透视工具——Hex 原文查看器。此功能的设计核心是保证数据的保真性（Data Fidelity），允许用户穿透文本渲染层，直接检视构成输出结果的底层字节流。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit界面展示Hex原文查看功能" src="/assets/images/ch2-050-d1e7d8cad7846fe2e60b3c2e1d198e67.png" width="1153" height="187" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit界面展示Hex原文查看功能"><img decoding="async" loading="lazy" alt="Yakit界面展示Hex原文查看功能" src="/assets/images/ch2-050-d1e7d8cad7846fe2e60b3c2e1d198e67.png" width="1153" height="187" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit界面展示Hex原文查看功能</p>
 <p>如上图所示，当 <code>Output</code> 面板检测到输出结果中可能包含无法在文本框中准确表示的字节时，会主动提示“数据失真”，并提供一个 <code>hex原文</code> 的切换按钮。这一机制旨在解决两大核心痛点：</p>
 <ol>
@@ -190,7 +190,7 @@
 </blockquote>
 <p>Yakit 的 Fuzztag 语法是其模糊测试引擎的基石，提供了强大的数据生成能力。然而，基础的 Fuzztag（如 <code>{{int}}</code>, <code>{{randstr}}</code>）主要解决的是“从无到有”生成数据的问题。当我们需要对一个<strong>已有数据或另一个 Fuzz<strong><strong>t</strong></strong>ag 生成的数据</strong>进行复杂转换时，就需要一种更高级的机制。这正是 <code>{{codecflow}}</code> 语法存在的意义。</p>
 <p><code>{{codecflow}}</code> 是 Fuzztag 体系中的一个特殊指令，它充当了 Fuzzing 引擎与 Codec 模块之间的桥梁。其核心工作原理是：在 Fuzzing 任务执行期间，当引擎解析到 <code>{{codecflow(flow_name|abc)}}</code> 这样的标签时，它会使用 <code>flow_name</code> 作为标识符，在已保存的 Codec 配方库中查找对应的“编码配方流”，并调用该流程来处理数据。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer中Codecflow语法使用示例" src="/assets/images/ch2-051-9212632202bb433038db2ad701f93823.png" width="919" height="301" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer中Codecflow语法使用示例"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer中Codecflow语法使用示例" src="/assets/images/ch2-051-9212632202bb433038db2ad701f93823.png" width="919" height="301" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer中Codecflow语法使用示例</p>
 <p>以上图为例，在一个典型的 Web Fuzzer 请求体构造场景中，<code>{{codecflow}}</code> 标签的出现，意味着此处的值并非静态字符串或简单的随机数据。相反，Yakit 将执行以下内部调用链路</p>
 <ol>

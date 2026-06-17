@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Mock 热加载重塑无污染客户端测试 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p024"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Mock 热加载重塑无污染客户端测试 | Yak Program Language"><meta data-rh="true" name="description" content="在传统的渗透测试中，我们常常在客户端与服务器之间架设窃听设备，我们拦截、观察、篡改真实的通信。这种模式有效，但存在固有缺陷："><meta data-rh="true" property="og:description" content="在传统的渗透测试中，我们常常在客户端与服务器之间架设窃听设备，我们拦截、观察、篡改真实的通信。这种模式有效，但存在固有缺陷："><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-12-05T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,热加载"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p024"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p024" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p024" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p024" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p024","mainEntityOfPage":"https://yaklang.com/blog/p024","url":"https://yaklang.com/blog/p024","headline":"Mock 热加载重塑无污染客户端测试","name":"Mock 热加载重塑无污染客户端测试","description":"在传统的渗透测试中，我们常常在客户端与服务器之间架设窃听设备，我们拦截、观察、篡改真实的通信。这种模式有效，但存在固有缺陷：","datePublished":"2025-12-05T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -72,19 +72,19 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="实验靶场设计">实验靶场设计<a href="#实验靶场设计" class="hash-link" aria-label="实验靶场设计的直接链接" title="实验靶场设计的直接链接" translate="no">​</a></h2>
 <p>**后端：**极其简单，它只是模拟一个功能，用户单例级别的创建和销毁容器。</p>
 <p>下面是一个后端代表逻辑图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fcf7baa81cc7aef4-57c5101e62dcd236eac4bac0cd85ba4b.png" width="1080" height="223" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/fcf7baa81cc7aef4-57c5101e62dcd236eac4bac0cd85ba4b.png" width="1080" height="223" class="yakdoc-image"></button></p>
 <p><strong>前端</strong>(<strong>HTML</strong>with<strong>JavaScript</strong>)：**</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4069481a05e64249-7cf707898fc01f2fb2a6e1d5ef2e944d.png" width="1080" height="398" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4069481a05e64249-7cf707898fc01f2fb2a6e1d5ef2e944d.png" width="1080" height="398" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="实验步骤与分析">实验步骤与分析<a href="#实验步骤与分析" class="hash-link" aria-label="实验步骤与分析的直接链接" title="实验步骤与分析的直接链接" translate="no">​</a></h2>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="正常使用销毁测试"><strong>正常使用销毁测试</strong><a href="#正常使用销毁测试" class="hash-link" aria-label="正常使用销毁测试的直接链接" title="正常使用销毁测试的直接链接" translate="no">​</a></h4>
 <p>1、启动vulinbox，点击<strong>逻辑场景</strong>的<strong>用户容器</strong>靶场，登陆用户；</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fbbee272cd86a6b3-742e3a62a674db8a23fe44d0edfe0376.jpg" width="1080" height="496" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/fbbee272cd86a6b3-742e3a62a674db8a23fe44d0edfe0376.jpg" width="1080" height="496" class="yakdoc-image"></button></p>
 <p><strong>2、<strong>操</strong>作</strong>: 点击 &quot;Activate&quot; 按钮。建立一个容器；</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/352ccef570b92a4f-780abf2f849853b597e9b1ace03aabad.png" width="1080" height="467" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/352ccef570b92a4f-780abf2f849853b597e9b1ace03aabad.png" width="1080" height="467" class="yakdoc-image"></button></p>
 <p><strong>3、<strong>观</strong>察</strong>前端**：**获取到建立的Active 容器，显示了Deactivate 按钮；</p>
 <p>**4、操作：**点击 &quot;Deactivate&quot; 按钮，销毁这个容器；</p>
 <p><strong>5、观察</strong>前端**：**重新回到了没有容器建立的样式；</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/3d35390ab1f044a5-00c52095c1b98ae65744ae6ff43813d5.png" width="1080" height="507" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/3d35390ab1f044a5-00c52095c1b98ae65744ae6ff43813d5.png" width="1080" height="507" class="yakdoc-image"></button></p>
 <p><strong>6、分析</strong>: 我们成功测试了一次流程。但问题也随之而来：</p>
 <ul>
 <li class=""><strong>数据已“销毁”</strong>: 在真实系统中，这个主机已经没了。</li>
@@ -97,17 +97,17 @@
 <p><strong>操作与观察：</strong></p>
 <p>1、在 mitm 中间人劫持中加载并启用上述热加载代码；</p>
 <p>2、正常操作申请到容器；</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/55447544cef7215f-2c4a65b1e62662c2a4771bcbe9ff9807.png" width="1080" height="440" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/55447544cef7215f-2c4a65b1e62662c2a4771bcbe9ff9807.png" width="1080" height="440" class="yakdoc-image"></button></p>
 <p>3、点击销毁容器；</p>
 <p><strong>4、观察结果</strong>:</p>
 <ul>
 <li class=""><strong>前端</strong>UI<strong>表现</strong>: 页面触发刷新后，仍然表现为建立好了容器的情况，证明后端的容器并没有被清空，也就没有触发危险的“销毁操作”。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/acc23c6681732c4f-0284e7286ab59257febec12d97502153.png" width="1080" height="601" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/acc23c6681732c4f-0284e7286ab59257febec12d97502153.png" width="1080" height="601" class="yakdoc-image"></button></p>
 <ul>
 <li class="">**MITM 日志：**正确捕获和打印出了 mock 信息。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/fe24e3d9bf3acd32-814769b6ba1bc75be4ffc8dc0c13f566.png" width="1080" height="224" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/fe24e3d9bf3acd32-814769b6ba1bc75be4ffc8dc0c13f566.png" width="1080" height="224" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="结论">结论<a href="#结论" class="hash-link" aria-label="结论的直接链接" title="结论的直接链接" translate="no">​</a></h2>
 <p>本次实验证明：<code>mockHTTPRequest</code> 不仅仅是一个攻击工具，更是一个强大的客户端行为分析与测试框架。</p>
 <p>**1、测试隔离：**我们创建了一个安全的“沙箱”，让前端应用在其中自由运行。所有操作都在这个沙箱内完成，对外部世界（后端、数据库、Cookie）的影响为零。这解决了状态污染和危险操作的问题。</p>

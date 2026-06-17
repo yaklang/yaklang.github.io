@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">从Redis未授权简单学习yak语言 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p298"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="从Redis未授权简单学习yak语言 | Yak Program Language"><meta data-rh="true" name="description" content="yak语言简介"><meta data-rh="true" property="og:description" content="yak语言简介"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-02-18T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p298"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p298" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p298" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p298" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p298","mainEntityOfPage":"https://yaklang.com/blog/p298","url":"https://yaklang.com/blog/p298","headline":"从Redis未授权简单学习yak语言","name":"从Redis未授权简单学习yak语言","description":"yak语言简介","datePublished":"2022-02-18T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -31,7 +31,7 @@
 <p>接着我们对目标返回响应进行判断：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">log.Info(&quot;Start to waiting result&quot;)result, err := conn.RecvStringTimeout(1)if str.Contains(result, &quot;redis_version&quot;) {    log.info(&quot;Found Redis未授权访问漏洞&quot;, str.HostPort(target, port))}</span><br></span></code></pre></div></div>
 <p>就这样，一个非常基础简单的未授权检测脚本就写好了，测试一下看看：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b311b630065c9b83-0b65d248f760c51b994b06ed6eb294e4.png" width="1030" height="125" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b311b630065c9b83-0b65d248f760c51b994b06ed6eb294e4.png" width="1030" height="125" class="yakdoc-image"></button></p>
 <p>很有趣对吧。</p>
 <p>有了基础的框架之后，我们就可以进行添加功能，比如结果保存至自定义文本、批量扫描，这里以自定义文本举例：</p>
 <p>首先要满足自定义文本，我们需要用到yak的file函数，根据文档，<code>file.Open(&quot;test-file.txt&quot;)</code>等效为<code>file.OpenFile(&quot;test-file.txt&quot;, file.O_CREATE|file.O_RDWR, 0777)</code></p>
@@ -40,14 +40,14 @@
 <p>这里的out_put参数也就是新添加的参数：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">out_put = cli.String(&quot;output&quot;,cli.setDefault(&quot;_result.txt&quot;))if out_put == &quot;&quot;{    die(&quot;Empty output&quot;)    return}</span><br></span></code></pre></div></div>
 <p>这里我们是把目标<code>redis</code>运行<code>info</code>的结果保存到本地，此时运行：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/dd2663cb68e2a881-919b29b007fbf55c0331647ae11c769f.png" width="1004" height="137" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/dd2663cb68e2a881-919b29b007fbf55c0331647ae11c769f.png" width="1004" height="137" class="yakdoc-image"></button></p>
 <p>此时目录下会自动创建一个redis.txt的文本，内容为info的具体信息：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/777b2cd5b56099e1-597fb89b8a9081b2d62d8c49c113544e.png" width="704" height="442" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/777b2cd5b56099e1-597fb89b8a9081b2d62d8c49c113544e.png" width="704" height="442" class="yakdoc-image"></button></p>
 <p>如果我们想进行批量扫描，同样也需要file函数按行读写功能，这里暂不赘述：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">f, err := file.Open(&quot;12_fileio.yak&quot;)die(err)dump(f.ReadLines())f.Close()</span><br></span></code></pre></div></div>
 <p>yak脚本编写完成之后，我们运行<code>Yakit</code>，尝试编写一个<code>Yakit插件</code>：</p>
 <p>首先新建一个插件，填写基础信息：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f678c02dada41954-8ed74c94cdc285e9f54de6e7fed9486e.png" width="1080" height="543" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f678c02dada41954-8ed74c94cdc285e9f54de6e7fed9486e.png" width="1080" height="543" class="yakdoc-image"></button></p>
 <p>之后开始编写插件源码。</p>
 <p>首先我们必须要对插件进行初始化：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">yakit.AutoInitYakit()</span><br></span></code></pre></div></div>
@@ -55,10 +55,10 @@
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">target = cli.String(&quot;target&quot;)if target == &quot;&quot; {    yakit.Error(&quot;Empty Target&quot;)    return}port = cli.Int(&quot;port&quot;, cli.setDefault(6379))if port &lt;= 0 {    yakit.Error(&quot;Port is invalid&quot;)    return}conn,err = tcp.Connect(target, port)if err != nil {    yakit.Error(&quot;Connect to %v failed: %v&quot;, target, err)}die(err)yakit.Info(&quot;write info to %v&quot;, target)conn.Send(&quot;info\r\n&quot;)yakit.Info(&quot;Start to waiting result&quot;)result, err := conn.RecvStringTimeout(3)if str.MatchAllOfSubString(result, &quot;redis_version&quot;) {    yakit.StatusCard(&quot;Redis未授权访问漏洞&quot;, str.HostPort(target, port))}</span><br></span></code></pre></div></div>
 <p>这里面某些函数和单独编写<code>yak</code>脚本不同，具体内容可以参考<code>Yakit</code>的API文档</p>
 <p>源码编写好之后，我们需要添加一个必要参数，也就是目标：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/cef0f64640300608-d042e5e668bc5062e3d1901f20225d58.png" width="1080" height="589" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/95b55268876f4382-2dc9987f29caa48ff19def521162afbf.png" width="1080" height="382" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/cef0f64640300608-d042e5e668bc5062e3d1901f20225d58.png" width="1080" height="589" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/95b55268876f4382-2dc9987f29caa48ff19def521162afbf.png" width="1080" height="382" class="yakdoc-image"></button></p>
 <p>输出目标IP之后测试一下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/dfc20ad54264063d-3d4fed8d674957542d9867780459109a.png" width="873" height="753" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/dfc20ad54264063d-3d4fed8d674957542d9867780459109a.png" width="873" height="753" class="yakdoc-image"></button></p>
 <p>至此，一个简单的<code>Redis未授权</code>检测插件编写完毕。</p>
 <p>结语</p>
 <p>yak的用法显然不止如此，还有更为强大的<code>poc</code>函数和<code>nuclei</code>函数，官方的文档也非常清晰易懂，适合小白入手。</p>

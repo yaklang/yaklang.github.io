@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">HTTP 历史流量分析专家 Agent 正式上线！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p015"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="HTTP 历史流量分析专家 Agent 正式上线！ | Yak Program Language"><meta data-rh="true" name="description" content="这是 AI Agent 相关能力第一次正式应用到 Yakit 的日常功能模块中。本次以 HTTP 历史流量分析 作为试点，在不改变用户原有使用习惯的前提下，引入一个“懂流量、能对话”的分析专家，用来辅助用户理解和分析已有流量数据。"><meta data-rh="true" property="og:description" content="这是 AI Agent 相关能力第一次正式应用到 Yakit 的日常功能模块中。本次以 HTTP 历史流量分析 作为试点，在不改变用户原有使用习惯的前提下，引入一个“懂流量、能对话”的分析专家，用来辅助用户理解和分析已有流量数据。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-02-06T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,AI,流量分析"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p015"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p015" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p015" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p015" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p015","mainEntityOfPage":"https://yaklang.com/blog/p015","url":"https://yaklang.com/blog/p015","headline":"HTTP 历史流量分析专家 Agent 正式上线！","name":"HTTP 历史流量分析专家 Agent 正式上线！","description":"这是 AI Agent 相关能力第一次正式应用到 Yakit 的日常功能模块中。本次以 HTTP 历史流量分析 作为试点，在不改变用户原有使用习惯的前提下，引入一个“懂流量、能对话”的分析专家，用来辅助用户理解和分析已有流量数据。","datePublished":"2026-02-06T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -25,7 +25,7 @@
 </ul>
 <p>AI 并不是“凭感觉”回答，而是基于当前历史流量数据进行分析，并在必要时加载对应的请求、响应内容到上下文中。</p>
 <p>这也是 Yakit 中第一次让 AI 以 <strong>Agent</strong> 的形式，参与到一个真实、可复用的日常分析场景里。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1a16620a259f602-6d5d51723eced73f35bb1e7aff20ee34.png" width="600" height="909" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1a16620a259f602-6d5d51723eced73f35bb1e7aff20ee34.png" width="600" height="909" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="http-流量分析专家模式">HTTP 流量分析专家模式<a href="#http-流量分析专家模式" class="hash-link" aria-label="HTTP 流量分析专家模式的直接链接" title="HTTP 流量分析专家模式的直接链接" translate="no">​</a></h2>
 <p>本次新增的能力，本质上是一个<strong>HTTP 流量分析专家 Agent</strong>。</p>
 <p>它构建在现有的 AI Agent 基础能力之上，尤其是记忆管理和上下文控制能力，使得它可以：</p>
@@ -40,7 +40,7 @@
 <p>然后，AI 会进一步分析这几十条流量的特征，比如哪些返回了 200 状态码（说明请求成功），哪些 URL 路径看起来比较敏感。经过这一轮，可能就剩下 5-10 条真正需要关注的流量。</p>
 <p>最后，AI 才会去查看这 5-10 条流量的完整请求和响应内容，仔细检查是否真的存在敏感信息泄露。</p>
 <p>这种渐进式的分析方式，既保证了效率，又不会遗漏重要信息。即使面对上千条流量，AI 也能快速定位到关键问题。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a089131e270171f4-7f6bd4b29f692564732ec150565661c6.jpg" width="1080" height="287" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a089131e270171f4-7f6bd4b29f692564732ec150565661c6.jpg" width="1080" height="287" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="流量查询与筛选能力">流量查询与筛选能力<a href="#流量查询与筛选能力" class="hash-link" aria-label="流量查询与筛选能力的直接链接" title="流量查询与筛选能力的直接链接" translate="no">​</a></h2>
 <p>HTTP 流量分析专家可以直接使用 Yakit 现有流量分析器里的能力，包括：</p>
 <ul>
@@ -60,7 +60,7 @@
 <p>3、检查是否存在潜在的敏感上下文、认证信息、异常输入或风险点</p>
 <p>4、给出一个基于当前流量数据的分析结论</p>
 <p>整个过程不依赖用户手动点选或反复筛选，而是通过对话逐步推进分析。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1adff287465b0d93-e5e3c0aa78b058df3c88542b3452a7d6.png" width="989" height="808" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/1adff287465b0d93-e5e3c0aa78b058df3c88542b3452a7d6.png" width="989" height="808" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="记忆管理与按需加载">记忆管理与按需加载<a href="#记忆管理与按需加载" class="hash-link" aria-label="记忆管理与按需加载的直接链接" title="记忆管理与按需加载的直接链接" translate="no">​</a></h2>
 <p>为了让 Agent 能在复杂分析中保持上下文一致性，这里引入了记忆管理机制，但整体设计是偏克制的。</p>
 <ul>

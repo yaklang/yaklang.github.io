@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">探索程序分析：以静态单赋值(SSA)格式为基础的YakSSA | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p127"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="探索程序分析：以静态单赋值(SSA)格式为基础的YakSSA | Yak Program Language"><meta data-rh="true" name="description" content="数据流分析是什么"><meta data-rh="true" property="og:description" content="数据流分析是什么"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2024-05-10T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2024 年,代码审计"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p127"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p127" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p127" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p127" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p127","mainEntityOfPage":"https://yaklang.com/blog/p127","url":"https://yaklang.com/blog/p127","headline":"探索程序分析：以静态单赋值(SSA)格式为基础的YakSSA","name":"探索程序分析：以静态单赋值(SSA)格式为基础的YakSSA","description":"数据流分析是什么","datePublished":"2024-05-10T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -44,13 +44,13 @@
 <p><strong>2、数据流是什么</strong></p>
 <p>基于上面的这个例子，我们发现通过将重新赋值的变量拆分，我们可以直接让每一个变量都表示单独的一个值，那么进一步，为什么还需要变量呢？</p>
 <p>如果去掉变量仅仅保留值之间的关系，我们将会得到以下这张图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7427b9f2e6a2586-d6b1e3f4669ae017705a75635021140e.png" width="985" height="720" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7427b9f2e6a2586-d6b1e3f4669ae017705a75635021140e.png" width="985" height="720" class="yakdoc-image"></button></p>
 <p>可以看到，这张图里，每一个节点都是值，函数本身是一个值，像这里的函数f和函数func1、func2，常量、运算、函数调用都是值。</p>
 <p>数据流是通过有向图的形式表达值之间的使用和被使用的关系。</p>
 <p>在这里呢，我们隐去了很多编译相关的前置知识，用这样一个例子展示了下数据流和基于数据流的程序分析，这其实是非常符合我们在分析一段代码时的逻辑的。</p>
 <p><strong>在编译领域的程序分析</strong></p>
 <p>首先 编译过程的概述图如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5881e9fb3012f930-2e812d7ede534f712524167ffc1a49fe.png" width="1080" height="289" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5881e9fb3012f930-2e812d7ede534f712524167ffc1a49fe.png" width="1080" height="289" class="yakdoc-image"></button></p>
 <p>值得注意的有两点：</p>
 <ul>
 <li class="">多前端，通过统一的中间表示抽象出来编译中端，将多种前端进行整合，并将可通用的分析方案在编译中端进行。</li>
@@ -60,11 +60,11 @@
 <ul>
 <li class="">基于抽象语法树(AST)的分析：</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/a4b81f11917a0bf7-5e6cff37855c860f6a0b30da6f196639.png" width="1080" height="695" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/a4b81f11917a0bf7-5e6cff37855c860f6a0b30da6f196639.png" width="1080" height="695" class="yakdoc-image"></button></p>
 <ul>
 <li class="">基于三地址码形式的中间代码表示</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d5d8bca7e25f6bbd-320d9f077ad26d207d6b251df96f6128.png" width="1080" height="611" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d5d8bca7e25f6bbd-320d9f077ad26d207d6b251df96f6128.png" width="1080" height="611" class="yakdoc-image"></button></p>
 <ul>
 <li class="">基于静态单赋值格式(SSA)的中间代码表示(IR)</li>
 </ul>
@@ -80,12 +80,12 @@
 <li class="">soot的传统数据流分析不能直接通过数据流图进行分析，并且这套方案维护复杂，很多基于soot的工具也只能在此基础上增加规则而非修改数据流分析方案。</li>
 <li class="">CodeQL的用户接口设计优秀，但基于AST的方案导致不同的语言API和分析方案基本都是特化的，甚至某些概念在不同语言中结构都不一致。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/002c6a304510dfcf-a477978c197a8833b49f4be1bc795f17.png" width="1080" height="597" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/002c6a304510dfcf-a477978c197a8833b49f4be1bc795f17.png" width="1080" height="597" class="yakdoc-image"></button></p>
 <p>对于安全领域程序分析的一些探索：</p>
 <p>需要一个强大的基于图的数据流分析方案，同时尽量保证其通用性，在不同语言中只需要前端接入，即可实现分析能力。</p>
 <p>基于图的SSA格式IR的分析：这是各种编译器内部已经做的，从SSA这个概念提出、到LLVM中大量的使用、再到目前的绝大多数编译器都会保留这一设计，甚至目前的很多编译器中端设计中尽力保持SSA格式贯穿分析过程，这一分析思路已经在编译领域反复验证。</p>
 <p>但同时，多语言的抽象和统一问题，传统SSA设计上的太过于底层以及内存操作指令 都导致在安全领域的实践中存在较大的差距。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/cf7319101639ce7b-d46de7ba2a7b771b71315aeff8f894ee.png" width="1080" height="602" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/cf7319101639ce7b-d46de7ba2a7b771b71315aeff8f894ee.png" width="1080" height="602" class="yakdoc-image"></button></p>
 <p><strong>YakSSA HIR</strong></p>
 <p>YakSSA的使用如下：通过简单的API即可进行：</p>
 <ul>
@@ -94,15 +94,15 @@
 <li class="">通过<code>GetTopDefs</code>进行对于该值的数据流分析。</li>
 </ul>
 <p>可以看到在这一个例子中，和我们文章开头的例子一致，得到了一致的结果。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e7d1a56d383b543e-eee610810552c503efb20ccaffbe96b5.png" width="1080" height="612" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e7d1a56d383b543e-eee610810552c503efb20ccaffbe96b5.png" width="1080" height="612" class="yakdoc-image"></button></p>
 <p>在以下的例子中，可以看到YakSSA在过程内的分析能力：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/bcaf95a8960d1248-3e506e88f6df68a59df40421828d7db3.png" width="1080" height="624" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/bcaf95a8960d1248-3e506e88f6df68a59df40421828d7db3.png" width="1080" height="624" class="yakdoc-image"></button></p>
 <p>分析Yaklang语言，跨过程分析演示：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/80e33d95b22dbcfe-3dcff671ed0917aa84db7cf467b4a7e5.png" width="1080" height="615" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/80e33d95b22dbcfe-3dcff671ed0917aa84db7cf467b4a7e5.png" width="1080" height="615" class="yakdoc-image"></button></p>
 <p>分析Java语言，左侧是代码，右侧是YakSSA测试以及结果，可以看到类之间的跨过程分析能力：</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yakssa效果演示跨类分析-java-访问静态方法">YakSSA效果演示：跨类分析 java 访问静态方法<a href="#yakssa效果演示跨类分析-java-访问静态方法" class="hash-link" aria-label="YakSSA效果演示：跨类分析 java 访问静态方法的直接链接" title="YakSSA效果演示：跨类分析 java 访问静态方法的直接链接" translate="no">​</a></h2>
 <p>分析Java语言，跨越类对类成员的访问能力：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4fdd0a79b5379350-4ab2bf9430883dc36fa4a68727e6fd30.png" width="1080" height="621" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4fdd0a79b5379350-4ab2bf9430883dc36fa4a68727e6fd30.png" width="1080" height="621" class="yakdoc-image"></button></p>
 <p>这是一个反例，可以发现对类成员的追踪的精准性。</p>
 <hr>
 <blockquote>

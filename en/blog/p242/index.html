@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">使用 Fuzztag 一键爆破反序列化链 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p242"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="使用 Fuzztag 一键爆破反序列化链 | Yak Program Language"><meta data-rh="true" name="description" content="背景"><meta data-rh="true" property="og:description" content="背景"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-12-22T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,WebFuzzer,Java 安全"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p242"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p242" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p242" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p242" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p242","mainEntityOfPage":"https://yaklang.com/en/blog/p242","url":"https://yaklang.com/en/blog/p242","headline":"使用 Fuzztag 一键爆破反序列化链","name":"使用 Fuzztag 一键爆破反序列化链","description":"背景","datePublished":"2022-12-22T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -49,32 +49,32 @@
 <p>在开始靶场测试前先分析下测试流程：</p>
 <p><strong>首先要判断出目标站点是否有反序列化漏洞，再爆破反序列化利用链，得到一条可以代码执行或命令执行的链，这个过程需要想办法得知是否命令执行成功了。最后利用这条链完成后续攻击。</strong></p>
 <p>总结下流程大概是这样的：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e5163163116b19be-e7856abc7f471bd6b7c223ba80e538c9.png" width="1080" height="1413" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e5163163116b19be-e7856abc7f471bd6b7c223ba80e538c9.png" width="1080" height="1413" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <blockquote>
 <p>2
 <strong>环境搭建</strong></p>
 </blockquote>
 <p>在本地搭建一个测试环境，源码如下</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1ab0f89fbc4cee49-59e29165451dade85d89cfed61b3c951.png" width="1080" height="483" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1ab0f89fbc4cee49-59e29165451dade85d89cfed61b3c951.png" width="1080" height="483" class="yakdoc-image"></button></p>
 <p>这里已经给需要测试的师傅打包好了docker环境，docker运行下就可以docker run -p 8080:8080 -itd --name=&quot;deserilize_test&quot; z3r0ne0/deserilize_test</p>
 <blockquote>
 <p>3
 <strong>漏洞检测</strong></p>
 </blockquote>
 <p>先使用urldns检测目标是否存在漏洞</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/06634ad1f439b9d6-8ed05c4b81bb3708c52c10eb97728a82.png" width="1080" height="339" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e5ea09f6dfb48181-4a47df7c1dc6bc916502d299c81e329e.png" width="1080" height="244" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/06634ad1f439b9d6-8ed05c4b81bb3708c52c10eb97728a82.png" width="1080" height="339" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e5ea09f6dfb48181-4a47df7c1dc6bc916502d299c81e329e.png" width="1080" height="244" class="yakdoc-image"></button></p>
 <p>如图，未收到dnslog记录，说明可能目标机器不出网，那再继续测试下不出网回显。</p>
 <p>使用yso:headerecho和yso:bodyecho时要注意下，需要在header中加入{{headerauth}}并设置并发数量为1，随机延迟的最大和最小值要大于1，原因是回显链的原理是遍历所有请求，并在header中有特殊标志的的请求的header中添加元素，这种方式在并发情况下会有问题。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/82902cf02530c9f1-dc9901b6faa8950e9d2b5c2c4408939d.png" width="1080" height="543" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/82902cf02530c9f1-dc9901b6faa8950e9d2b5c2c4408939d.png" width="1080" height="543" class="yakdoc-image"></button></p>
 <p>注意看我设置的回显header的kay和value都很长，目的是可以通过header头相似度找出成功回显的请求</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/556c0247ccbbb1f4-71a179a9d57ae2b12342864e52b88b1d.png" width="1080" height="788" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/556c0247ccbbb1f4-71a179a9d57ae2b12342864e52b88b1d.png" width="1080" height="788" class="yakdoc-image"></button></p>
 <p>如图，CommonsBeanutils183NOCC链的相似度明显小了0.1，看下响应，发现成功回显。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d84a265b4f34882-aec7aa510f35d6819fbe2382356240e3.png" width="1080" height="453" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d84a265b4f34882-aec7aa510f35d6819fbe2382356240e3.png" width="1080" height="453" class="yakdoc-image"></button></p>
 <p>再测试下命令执行回显，如图</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/66a5cd5ed103cfc0-98e4fd4e67bfb45f81c524f90970f022.png" width="1080" height="400" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/66a5cd5ed103cfc0-98e4fd4e67bfb45f81c524f90970f022.png" width="1080" height="400" class="yakdoc-image"></button></p>
 <p>CommonsBeanutils183NOCC和CommonsCollectionsK1的响应大小明显不正常，在详情中可以看到命令执行成功。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/261bec537a5d01a1-837d91c671c41db9772cae9c1c914a61.png" width="1080" height="460" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/261bec537a5d01a1-837d91c671c41db9772cae9c1c914a61.png" width="1080" height="460" class="yakdoc-image"></button></p>
 <p>至此，我们就得到了 CommonsBeanutils183NOCC 和 CommonsCollectionsK1 两条可以代码执行的利用链了。</p>
 <blockquote>
 <p>4
@@ -82,15 +82,15 @@
 </blockquote>
 <p>如果回显失败，可能是不支持该中间件回显，那就可以使用yso:dnslog去爆破可代码执行的链，也有可能代码执行链用不了，那就使用yso:exec爆破命令执行链。</p>
 <p>先试下yso:dnslog爆破，使用时注意，此标签第一个参数是域名，第二个参数是可选参数，如果设置了，那么每条链调用的域名将会是&lt;参数2&gt;&lt;编号&gt;.&lt;域名&gt;</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fe89fe273dc7435d-da98d7655bf7caae42ecbf2008d2ba2c.png" width="1080" height="473" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fe89fe273dc7435d-da98d7655bf7caae42ecbf2008d2ba2c.png" width="1080" height="473" class="yakdoc-image"></button></p>
 <p>如图，收到dnslog，可以看到标号9和标号3对应的链触发了dnslog</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/226f5a39e7be6590-85d5d0ba96554f67ff6f9f1c70e72b7b.png" width="1080" height="367" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/226f5a39e7be6590-85d5d0ba96554f67ff6f9f1c70e72b7b.png" width="1080" height="367" class="yakdoc-image"></button></p>
 <p>在 Responses 的 Payloads 中可以看见对应的链为 CommonsBeanutils183NOCC 和 CommonsCollectionsK1。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d49ceb810729d8e5-dd03e5be06e697b53cee26e0810e8a3c.png" width="1080" height="966" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d49ceb810729d8e5-dd03e5be06e697b53cee26e0810e8a3c.png" width="1080" height="966" class="yakdoc-image"></button></p>
 <p>如果还是收不到dnslog，那就只能用yso:exec试试反弹shell、在web目录写文件、延时等操作了，这里测试下写文件。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6c258eb9fbfe196a-4ee25eb5bb09647db4d49004228b3572.png" width="1080" height="548" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6c258eb9fbfe196a-4ee25eb5bb09647db4d49004228b3572.png" width="1080" height="548" class="yakdoc-image"></button></p>
 <p>进入docker可以看见写入文件成功</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/02c85edf8768102b-981de065eb42362830798eaa9d5086a7.png" width="1080" height="34" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/02c85edf8768102b-981de065eb42362830798eaa9d5086a7.png" width="1080" height="34" class="yakdoc-image"></button></p>
 <blockquote>
 <p>5
 <strong>打内存马</strong></p>

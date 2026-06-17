@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">北半球_强的出网反连检测技术 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p303"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="北半球_强的出网反连检测技术 | Yak Program Language"><meta data-rh="true" name="description" content="前情提要"><meta data-rh="true" property="og:description" content="前情提要"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-01-25T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p303"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p303" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p303" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p303" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p303","mainEntityOfPage":"https://yaklang.com/blog/p303","url":"https://yaklang.com/blog/p303","headline":"北半球_强的出网反连检测技术","name":"北半球_强的出网反连检测技术","description":"前情提要","datePublished":"2022-01-25T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -36,9 +36,9 @@
 <p>这是一种 “抓内鬼” 的思路，我们告诉 “内鬼” 一个假端口，如果这个假端口被人访问了，那么就说明有 “内鬼” 暴露了。</p>
 <p>当然，这个过程的一个关键点在于：“不监听端口，只分析流量”。</p>
 <p>大家具备基础 TCP 协议知识的话，将会马上意识到，我们这个方案的关键记录点其实在 SYN 三次握手的第一个 SYN 握手包：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f29275a5d42131a0-a3c3659425ec04026170a43c3e0d5f65.png" width="858" height="964" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f29275a5d42131a0-a3c3659425ec04026170a43c3e0d5f65.png" width="858" height="964" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>当我们 SYN 握手一个不开放的端口时，端口将会直接被操作系统 RST 或者没有任何回复，但是 SYN 数据包实际将会被收到，我们就知道了 “谁尝试连接了‘内鬼端口’”</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/65f0bdd27fcbc13b-33a8766e20d4dd6e95ff8d64a6934cfd.jpg" width="1080" height="1012" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/65f0bdd27fcbc13b-33a8766e20d4dd6e95ff8d64a6934cfd.jpg" width="1080" height="1012" class="yakdoc-image"></button></p>
 <p>4</p>
 <p>优势</p>
 <p>看起来流程和使用 Token 大体一样，本质上随机端口触发来代替 Token 触发，但是却出现了细思极恐的优势：</p>
@@ -77,10 +77,10 @@
 <li class="">在公网服务器按引导启动 / 配置好 Yak Bridge，保证端口开放（记得设置 VPS/ECS 相关安全策略组）</li>
 </ol>
 <p>当然用户也可以通过 <a href="https://github.com/yaklang/yak-bridge-docker" target="_blank" rel="noopener noreferrer" class="">https://github.com/yaklang/yak-bridge-docker</a> 中的引导来配置</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/2a732f273b30fbb9-e3f38234301c18414000bf80b30c05cd.png" width="1080" height="633" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/2a732f273b30fbb9-e3f38234301c18414000bf80b30c05cd.png" width="1080" height="633" class="yakdoc-image"></button></p>
 <p>当我们配置好后，可以在 Yak Runner 中执行如下代码</p>
 <p>代码</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7b64b531be8b143e-4b3e04a8c6c80f4a0145540a7734a7b7.png" width="442" height="351" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/7b64b531be8b143e-4b3e04a8c6c80f4a0145540a7734a7b7.png" width="442" height="351" class="yakdoc-image"></button></p>
 <p>我们使用十几行代码，来展示随机端口反连的接口是如何生效的：</p>
 <ol>
 <li class="">使用 <code>risk.NewRandomPortTrigger()</code> 来向 yak bridge 申请一个端口</li>
@@ -89,9 +89,9 @@
 </ol>
 <p>结论</p>
 <p>当我们执行上述代码之后，在输出台中，我们看到如下内容</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/028d883d06fcc99a-d11914bbcc2824a281c70538da16a088.png" width="1080" height="235" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/028d883d06fcc99a-d11914bbcc2824a281c70538da16a088.png" width="1080" height="235" class="yakdoc-image"></button></p>
 <p>当我们打开 Yakit “风险与漏洞” 页，我们看到如下内容</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/03b29ec676756ae9-e9bd2653b31f1cf21f4934ec26916ad2.png" width="539" height="233" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/03b29ec676756ae9-e9bd2653b31f1cf21f4934ec26916ad2.png" width="539" height="233" class="yakdoc-image"></button></p>
 <p>我们发现，我们的反连检测其实已经可以实现了，并且实际上这个不依赖任何应用层协议。</p>
 <p>7</p>
 <p>实战案例</p>
@@ -101,17 +101,17 @@
 </blockquote>
 <p>在 Yakit 插件仓库中，我们更新了一个来源于社区同学的 Log4j2 的漏洞检测模组：</p>
 <p>插件使用</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c0c1d53a1a182409-d09183e126888618fdfdff240b425928.png" width="1080" height="652" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c0c1d53a1a182409-d09183e126888618fdfdff240b425928.png" width="1080" height="652" class="yakdoc-image"></button></p>
 <p>我们配置好 Brigde 服务之后，访问</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9bec4718bebb9201-7c43b13d2e936f11fa896f194caf0225.png" width="520" height="137" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/9bec4718bebb9201-7c43b13d2e936f11fa896f194caf0225.png" width="520" height="137" class="yakdoc-image"></button></p>
 <p>Vulfocus 任意靶场，将会发现，MITM 被动扫描页面输出了内容。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1b8a18f4bdc8f27-41c5721102115207ca445eb8f702ff17.png" width="1080" height="768" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1b8a18f4bdc8f27-41c5721102115207ca445eb8f702ff17.png" width="1080" height="768" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="关键步骤-1获取随机端口触发器">关键步骤 1：获取随机端口触发器<a href="#关键步骤-1获取随机端口触发器" class="hash-link" aria-label="关键步骤 1：获取随机端口触发器的直接链接" title="关键步骤 1：获取随机端口触发器的直接链接" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/2ebc3820f89336d4-47d9ae8ba92ef35345e2d26298234316.png" width="798" height="240" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/2ebc3820f89336d4-47d9ae8ba92ef35345e2d26298234316.png" width="798" height="240" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="关键步骤-2-使用-yakfuzz-链式-api">关键步骤 2: 使用 yak.fuzz 链式 API<a href="#关键步骤-2-使用-yakfuzz-链式-api" class="hash-link" aria-label="关键步骤 2: 使用 yak.fuzz 链式 API的直接链接" title="关键步骤 2: 使用 yak.fuzz 链式 API的直接链接" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/ddbbc4a1c51c77ba-a36d75ad97b44f7269300da52d2984ea.png" width="942" height="698" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/ddbbc4a1c51c77ba-a36d75ad97b44f7269300da52d2984ea.png" width="942" height="698" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="关键步骤-3检查漏洞输出内容">关键步骤 3：检查漏洞输出内容<a href="#关键步骤-3检查漏洞输出内容" class="hash-link" aria-label="关键步骤 3：检查漏洞输出内容的直接链接" title="关键步骤 3：检查漏洞输出内容的直接链接" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e3aaa0a585397d5e-29512d2ce14d94497479934640bf1596.png" width="708" height="374" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e3aaa0a585397d5e-29512d2ce14d94497479934640bf1596.png" width="708" height="374" class="yakdoc-image"></button></p>
 <p>8</p>
 <p>BTW：Yakit 传新版本！</p>
 <hr>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">实战2: 指纹扫描+基础爬虫 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/yakexamples/scan_and_crawler"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="实战2: 指纹扫描+基础爬虫 | Yak Program Language"><meta data-rh="true" name="description" content="本节内容其实相对简单多了，大家如果学习了前面的内容之后，本节扫描端口+爬虫其实是一个非常顺理成章的程序："><meta data-rh="true" property="og:description" content="本节内容其实相对简单多了，大家如果学习了前面的内容之后，本节扫描端口+爬虫其实是一个非常顺理成章的程序："><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/yakexamples/scan_and_crawler"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yakexamples/scan_and_crawler" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/yakexamples/scan_and_crawler" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yakexamples/scan_and_crawler" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"实战2: 指纹扫描+基础爬虫","item":"https://yaklang.com/en/docs/yakexamples/scan_and_crawler"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -16,7 +16,7 @@
 <p>本节内容其实相对简单多了，大家如果学习了前面的内容之后，本节扫描端口+爬虫其实是一个非常顺理成章的程序：</p>
 <p>我们经常在扫描端口的时候，发现他是一个 Web 端口，但是他的内部的一些 URL 我们并不能获取到。同时往往进行 PoC 扫描/漏洞扫描的时候，我们需要精确到 URL，甚至数据包才能确定这个需要扫描的参数。</p>
 <p>我们把上述描述过程使用流程图表示如下：</p>
-<p><img decoding="async" loading="lazy" alt="process" src="/en/assets/images/process-931801baa14462048408a2ecb9b43afe.jpg" width="1076" height="1097" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: process"><img decoding="async" loading="lazy" alt="process" src="/en/assets/images/process-931801baa14462048408a2ecb9b43afe.jpg" width="1076" height="1097" class="yakdoc-image"></button></p>
 <p>大家应该很熟悉这个图了，我们在上一节中已经看过类似的图，并针对每一个步骤进行了讲解和拆分，我们可以很容易独立自主完成绝大多数的步骤。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="0x01-温故而知新输入处理与扫描端口">0x01 温故而知新：输入处理与扫描端口<a href="#0x01-温故而知新输入处理与扫描端口" class="hash-link" aria-label="Direct link to 0x01 温故而知新：输入处理与扫描端口" title="Direct link to 0x01 温故而知新：输入处理与扫描端口" translate="no">​</a></h2>
 <p>这一部分内容非常简单，我们在前面已经写过很多次了，通过 <code>servicescan.ScanFromSynResult</code> 我们可以把 SYN 端口开放扫描和指纹识别扫描进行关联与对接，这一步会针对初步单端口的扫描非常快速。</p>

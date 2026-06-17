@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Web Fuzzer 高级进阶：支持前端 AES-ECB 加密Web 安全测试实战 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p270"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Web Fuzzer 高级进阶：支持前端 AES-ECB 加密Web 安全测试实战 | Yak Program Language"><meta data-rh="true" name="description" content="背景知识"><meta data-rh="true" property="og:description" content="背景知识"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-07-28T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,WebFuzzer,加密对抗"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p270"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p270" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p270" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p270" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p270","mainEntityOfPage":"https://yaklang.com/blog/p270","url":"https://yaklang.com/blog/p270","headline":"Web Fuzzer 高级进阶：支持前端 AES-ECB 加密Web 安全测试实战","name":"Web Fuzzer 高级进阶：支持前端 AES-ECB 加密Web 安全测试实战","description":"背景知识","datePublished":"2022-07-28T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,38 +17,38 @@
 <p>我们以非常常见的 AES-ECB 进行前端加密的场景来使用 Yakit 解决测试问题。</p>
 <p>Web Fuzzer 核心流程</p>
 <p>我们实现 Web Fuzzer 的时候，其实并不是简单的把一个数据包发送出去，同时为了保证数据包的自动纠错，自动修复<code>Content-Type</code>，实现自动热加载，我们实现了下面非常复杂的流程</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/effe1ae7c5a272a9-6a4e6785451f52f9e79bd71e0becbe88.png" width="1080" height="498" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/effe1ae7c5a272a9-6a4e6785451f52f9e79bd71e0becbe88.png" width="1080" height="498" class="yakdoc-image"></button></p>
 <p>依托于 Yak 引擎内置的动态代码加载能力，我们可以很容易进行预处理，参数预加载，动态代码执行，beforeRequest 和 afterRequest Hook。</p>
 <p>如何在Web Fuzzer 中使用 params？</p>
 <p>版本要求：Yakit-1.0.16-sp2 以及以上</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/700508d142826d98-32f2115fec0eee23659b3ea0f972877e.png" width="994" height="731" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/700508d142826d98-32f2115fec0eee23659b3ea0f972877e.png" width="994" height="731" class="yakdoc-image"></button></p>
 <p>我们通过 Web Fuzzer Request 区域的 “热加载标签” 打开热加载代码调试界面，然后点击 “预加载参数展开” 即可看到 <code>__getParams__</code> 函数，我们填写这个函数，可以快速生成一个可适配在 <code>{{params(...)}}</code> 标签中的参数列表</p>
 <p><strong>基</strong>础使用：使用params标签替换同时替换一个或多个值**</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c4277efab91b4dd3-2ceae4a8d89df363bf68f90294bca420.png" width="689" height="769" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c4277efab91b4dd3-2ceae4a8d89df363bf68f90294bca420.png" width="689" height="769" class="yakdoc-image"></button></p>
 <p><strong>一、构造一段params生成代码</strong></p>
 <div class="language-swift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-swift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">__getParams__ </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">func</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">/*</span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">        __getParams__ 是一个用户可控生成复杂数据初始数据的参数：</span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">        可以在这个函数中同时处理所有数据：</span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic"></span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">        1. CSRF Bypass</span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">        2. 获取额外信息，进行强关联的信息变形</span><br></span><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">    */</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">return</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string-literal string" style="color:#e3116c">&quot;test2&quot;</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string-literal string" style="color:#e3116c">&quot;test2的值&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token string-literal string" style="color:#e3116c">&quot;test&quot;</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string-literal string" style="color:#e3116c">&quot;test 有两个值&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string-literal string" style="color:#e3116c">&quot;123123&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
 <p>上述代码，返回一个 <code>map</code>，这个结构体包含两个不同的 key，分别为 <code>test</code> 和<code>test2</code>于是我们可以在我们的数据包中使用<code>{{params(test)}}</code>和 <code>{{params(test2)}}</code>，分别会替换成大家返回的两个值。</p>
 <p><strong>二、使用标签构造Request</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5dc1e8faef2f5c44-b20c224560b864b086ae88c074799184.png" width="835" height="249" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5dc1e8faef2f5c44-b20c224560b864b086ae88c074799184.png" width="835" height="249" class="yakdoc-image"></button></p>
 <p>我们使用上述设置好的标签，数据包修改为上述内容，将会把生成的标签内容渲染到数据包中，上述内容，我们返回了一个数组和一个字符串，那么发送数据包将得到两个结果。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f30b61f80e9bb430-ac85e17626d4753fd4634778f93e2a89.png" width="1080" height="399" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f30b61f80e9bb430-ac85e17626d4753fd4634778f93e2a89.png" width="1080" height="399" class="yakdoc-image"></button></p>
 <p>这两个结果分别为如下内容：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/78cf06b5d9ae091d-d6c6a6e21bb06a8f9b9a7b632ce6505a.png" width="395" height="165" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/6759a6b0e1a5c07d-148b0681965fe75cdab366c1622056dc.png" width="337" height="156" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/78cf06b5d9ae091d-d6c6a6e21bb06a8f9b9a7b632ce6505a.png" width="395" height="165" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/6759a6b0e1a5c07d-148b0681965fe75cdab366c1622056dc.png" width="337" height="156" class="yakdoc-image"></button></p>
 <p>实战案例：前端加密的解决方案</p>
 <p><strong>加密分析：前端AES-ECB 加密</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e2f62a69c5aeb027-a0905edd205c3c9e8dc7a6c1f59ebfc6.png" width="838" height="692" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e2f62a69c5aeb027-a0905edd205c3c9e8dc7a6c1f59ebfc6.png" width="838" height="692" class="yakdoc-image"></button></p>
 <p>我们观察目标网站中的内容，发现实际上 S1 是硬编码的，经过验证后，我们可以用 Yak 实现上述加密：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e056c8c7435ae057-05b0f1d282a055e66532e68e173292c4.png" width="384" height="108" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e056c8c7435ae057-05b0f1d282a055e66532e68e173292c4.png" width="384" height="108" class="yakdoc-image"></button></p>
 <p>除此之外，每一次刷新之后，我们发现 COOKIE_DT_T 和 code 在 Set-Cookie 中会被携带：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/2b47776b4e5104a2-b2aea815956337feee19f8f042791433.png" width="848" height="389" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/2b47776b4e5104a2-b2aea815956337feee19f8f042791433.png" width="848" height="389" class="yakdoc-image"></button></p>
 <p>这两个值对应了表单中的 t1 和验证码（... 并不鼓励大家这么实现应用，验证码应该和 Cookie / JSESSIONID 进行绑定，而不应该出现在 Cookie 明文）</p>
 <p>T1 对应的值大体是 CSRF Token 类似的作用。</p>
 <p>当每一次刷新页面时，HTML 中下面内容会动态变化（渲染 value 的值）</p>
 <div class="language-cs codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-cs codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">&lt;input type=&quot;hidden&quot; id=&quot;t1&quot; class=&quot;form-control pword m-b&quot; value=&quot;....&quot;&gt;</span><br></span></code></pre></div></div>
 <p><strong>如何测试该接口？</strong></p>
 <p>整体的数据包大致为这个样子</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/6952ac811ecc7e79-fb5b7dfc716aec09e1c24a9807dd6482.png" width="871" height="444" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/6952ac811ecc7e79-fb5b7dfc716aec09e1c24a9807dd6482.png" width="871" height="444" class="yakdoc-image"></button></p>
 <p>我们发现：</p>
 <ol>
 <li class="">token 是 HEX 编码的字符串</li>
@@ -56,20 +56,20 @@
 </ol>
 <p>那针对这种情况我们应该如何测试？</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="简易方案仅针对-password-进行编码"><strong>简易方案：仅针对 password 进行编码</strong><a href="#简易方案仅针对-password-进行编码" class="hash-link" aria-label="简易方案仅针对-password-进行编码的直接链接" title="简易方案仅针对-password-进行编码的直接链接" translate="no">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/68df7972f6ff7f4f-5d13f5751301f110cf5fa1be8653ba04.png" width="716" height="380" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/68df7972f6ff7f4f-5d13f5751301f110cf5fa1be8653ba04.png" width="716" height="380" class="yakdoc-image"></button></p>
 <p>当我们实现了这个加密函数之后，我们可以直接编写一个 Yak 热加载标签，加载 `aesecbpcks7 这个函数，这个函数实现具体内容如下</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/cc19c8c250266e10-c781cdfe6c50c6540054a5f3844d2df6.png" width="703" height="366" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/cc19c8c250266e10-c781cdfe6c50c6540054a5f3844d2df6.png" width="703" height="366" class="yakdoc-image"></button></p>
 <p>我们在热加载中加入如下代码，可以实现对这个点的测试</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/02d47ae19171afd6-876294551df1acdef5bd6e7029266f64.png" width="739" height="370" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/02d47ae19171afd6-876294551df1acdef5bd6e7029266f64.png" width="739" height="370" class="yakdoc-image"></button></p>
 <p><strong>完美方案：解决 CSRF Token 问题</strong></p>
 <blockquote>
 <p>跨站请求伪造（CSRF）：简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并执行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去执行。这利用了web中用户身份验证的一个漏洞：<strong>简单的身份验证只能保证请求是发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。</strong></p>
 </blockquote>
 <p>如果说我们这个案例的网站更 “安全” 一些，CSRF Token 在表单中被加载，那么我们每一次测试之前，需要访问这个网站，获取 Set-Cookie 中的 Session ID 以及其他内容来设置我们新的 “敏感请求”。</p>
 <p>于是我们编写了一段 Yak 代码来获取 t1 的值</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b5f73b07e883d752-b41266c46db597727bd4c171789c8a62.png" width="416" height="139" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b5f73b07e883d752-b41266c46db597727bd4c171789c8a62.png" width="416" height="139" class="yakdoc-image"></button></p>
 <p>我们把这段代码融合到上述模块中，可以同时解决 CSRF 的问题以及加密的问题</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/bd2cfcc470d213f6-0de579f5d70e1ec6111fdbb9ed8ae516.png" width="737" height="774" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/bd2cfcc470d213f6-0de579f5d70e1ec6111fdbb9ed8ae516.png" width="737" height="774" class="yakdoc-image"></button></p>
 <p>在上述热加载调试中，我们实现了 CSRF Token 的自动替换，同时也实现了前端加密解密的问题。</p>
 <p>结语</p>
 <p>本文实践难度并不低，我们实现了在 Burp Suite 中也非常难以测试的场景，通过 Yak 热加载代码与 Params 机制轻松支持了 AES-ECB 的安全测试，实际在这种场景下，我们一般需要编写一个 Python 脚本来实现全套的测试流程，同样在 Yak 中也需要编写，Yakit 可以很好地让用户只关注 “加密解密” 逻辑和 CSRF 的问题。</p>

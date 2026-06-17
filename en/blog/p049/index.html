@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">超级牛的 Java 反编译大法（三）：循环结构 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p049"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="超级牛的 Java 反编译大法（三）：循环结构 | Yak Program Language"><meta data-rh="true" name="description" content="前文指路：YAK，公众号：Yak Project超级牛的Java反编译大法（二）：If 语句解析"><meta data-rh="true" property="og:description" content="前文指路：YAK，公众号：Yak Project超级牛的Java反编译大法（二）：If 语句解析"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-06-13T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,代码审计,Java 安全"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p049"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p049" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p049" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p049" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p049","mainEntityOfPage":"https://yaklang.com/en/blog/p049","url":"https://yaklang.com/en/blog/p049","headline":"超级牛的 Java 反编译大法（三）：循环结构","name":"超级牛的 Java 反编译大法（三）：循环结构","description":"前文指路：YAK，公众号：Yak Project超级牛的Java反编译大法（二）：If 语句解析","datePublished":"2025-06-13T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -24,7 +24,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="从表象到本质">从表象到本质<a href="#从表象到本质" class="hash-link" aria-label="Direct link to 从表象到本质" title="Direct link to 从表象到本质" translate="no">​</a></h2>
 <p>在高级编程语言 Java 中，我们拥有多种循环语法，如 <code>for</code>、<code>foreach</code>、<code>while </code>以及 <code>do-while</code>。这些语法糖为开发者提供了便利，但在 JVM 眼中，它们最终都会被转换为一系列更基础的条件跳转和无条件跳转指令，如上一篇中提到的 <code>ifeq</code>,  <code>ifne</code>, <code>if_icmp&lt;cond&gt; </code>等字节码指令。</p>
 <p>循环结构则是巧妙地利用这些条件跳转指令与无条件跳转指令（如 <code>goto </code>）组合，构建出一个可重复执行的代码路径。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b62362d3b7e9ddf-e4fcbfca51ded6cd8878a1ae765b11fd.png" width="1025" height="722" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b62362d3b7e9ddf-e4fcbfca51ded6cd8878a1ae765b11fd.png" width="1025" height="722" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="控制流图中的环">控制流图中的环<a href="#控制流图中的环" class="hash-link" aria-label="Direct link to 控制流图中的环" title="Direct link to 控制流图中的环" translate="no">​</a></h2>
 <p>通过分析不同循环语句生成的 CFG，我们可以发现一个共同的拓扑特征：图中存在一个有向环（ Cycle ）。这个环代表了代码的重复执行部分，而环的退出机制则由环内的一个或多个条件分支节点提供。</p>
 <p>让我们分别审视几种典型循环的 CFG 结构：</p>
@@ -38,7 +38,7 @@
 </ol>
 <p><code>for </code>循环（如 <code>for(int i=0; i&lt;10; i++)</code>）和 <code>foreach </code>循环本质上是 <code>while </code>循环的语法糖。其初始化语句在循环前执行，而迭代语句（如 <code>i++</code>）则被置于循环体的末尾，紧邻着跳回循环头的回边。因此，它们的 CFG 结构与 <code>while </code>循环高度同构。</p>
 <p>下图展示了一个典型的 <code>while </code>或 <code>for </code>循环的 CFG 结构：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/86475218ec9929a3-6c55eb9fe2178c21d65f7a84a4ff5992.png" width="672" height="1055" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/86475218ec9929a3-6c55eb9fe2178c21d65f7a84a4ff5992.png" width="672" height="1055" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="do-while-循环_">do-while 循环_<a href="#do-while-循环_" class="hash-link" aria-label="Direct link to do-while 循环_" title="Direct link to do-while 循环_" translate="no">​</a></h2>
 <p><code>do-while</code> 循环是一种“后测试”循环，其 CFG 结构与 <code>while</code> 略有不同：</p>
 <p>1、入口: 直接进入循环体，而不是先进行条件判断。</p>
@@ -46,7 +46,7 @@
 <p>3、循环条件判断: 循环体执行完毕后，才会遇到条件判断节点。</p>
 <p>4、回边: 条件为真（ True ）的分支指回循环体的入口，形成环。</p>
 <p>5、循环出口: 条件为假（ False ）的分支指向循环外的后继节点。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fb9d131e69bf1ea6-0a73fe813739f854233cdcce7ee5a774.png" width="936" height="173" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fb9d131e69bf1ea6-0a73fe813739f854233cdcce7ee5a774.png" width="936" height="173" class="yakdoc-image"></button></p>
 <p>综上所述，所有循环结构在 CFG 中都可以被抽象为：一个包含条件分支的有向环，其中一条分支导向环内（继续循环），另一条分支导向环外（跳出循环）。</p>
 <p>这个统一的模型是后续自动化识别算法的基础。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="循环的图论形式化定义与识别">循环的图论形式化定义与识别<a href="#循环的图论形式化定义与识别" class="hash-link" aria-label="Direct link to 循环的图论形式化定义与识别" title="Direct link to 循环的图论形式化定义与识别" translate="no">​</a></h2>
@@ -56,7 +56,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="回边back-edge">回边（Back Edge）<a href="#回边back-edge" class="hash-link" aria-label="Direct link to 回边（Back Edge）" title="Direct link to 回边（Back Edge）" translate="no">​</a></h2>
 <p>一条有向边 <code>T -&gt; H</code>（从节点<code>T</code>指向节点 <code>H</code>）被称为回边，当且仅当它的头节点<code>H</code>支配其尾节点 <code>T</code>（<code>H dom T</code>）。</p>
 <p>回边的存在是循环的充要条件。回边的头节点 <code>H</code>，即被支配者指向支配者的那个节点，就是我们直观感受上的循环头（ Loop Header ）。循环头是进入循环的唯一入口（在“结构化”程序中），并且它支配着循环体内的所有节点。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ea081678be8ac99b-c0436127dd4c19678bcab2b7ef151b07.png" width="583" height="715" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ea081678be8ac99b-c0436127dd4c19678bcab2b7ef151b07.png" width="583" height="715" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="自然循环natural-loop">自然循环（Natural Loop）<a href="#自然循环natural-loop" class="hash-link" aria-label="Direct link to 自然循环（Natural Loop）" title="Direct link to 自然循环（Natural Loop）" translate="no">​</a></h2>
 <p>一个由回边  <code>T -&gt; H</code> 定义的自然循环，其节点集合包括：</p>
 <ol>
@@ -64,7 +64,7 @@
 <li class="">所有能够到达 <code>T</code> 且不经过 <code>H</code> 的节点集合。</li>
 </ol>
 <p>这个定义精确地圈定了循环体内的所有基本块。一个循环由其唯一的回边和循环头唯一确定。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d3fd1f3436aea666-ec81b43b6af99b643436e8e35fc30088.png" width="561" height="734" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d3fd1f3436aea666-ec81b43b6af99b643436e8e35fc30088.png" width="561" height="734" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="循环识别的算法实现">循环识别的算法实现<a href="#循环识别的算法实现" class="hash-link" aria-label="Direct link to 循环识别的算法实现" title="Direct link to 循环识别的算法实现" translate="no">​</a></h2>
 <p>基于以上理论，我们可以设计一套精确的循环识别算法：</p>
 <p>前提：已经构建完成程序的控制流图（ CFG ）。</p>
@@ -84,7 +84,7 @@
 <li class="">带标签的跳转（ Labeled Jumps ）： Java 等语言支持 <code>break label；和 ``continue label；，</code>这使得跳转可以跨越多层嵌套的循环。在 CFG 层面，这依然是一个 <code>goto </code>指令，但其跳转目标是：</li>
 <li class="">在分析时，需要根据支配关系和循环嵌套关系，正确匹配跳转指令与其对应的目标循环。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6fe88cf7f90f445e-a54325e97b12e05ee5a365fbee032f01.png" width="603" height="734" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6fe88cf7f90f445e-a54325e97b12e05ee5a365fbee032f01.png" width="603" height="734" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结" translate="no">​</a></h2>
 <p>本文介绍了从高级语言的循环语法到其底层控制流图表示的转换，并在此基础上提供了形式化的循环识别方法。我们通过引入支配关系、回边和自然循环等图论概念，将直观的循环认知转化为严谨的算法步骤。</p>
 <p>这套方法不仅能够精确地识别出各类循环的边界，还能清晰地解析 <code>break</code>、<code>continue</code> 等复杂的控制流转移，以便将字节码清晰准确的转为 Java 源码。</p>

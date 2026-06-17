@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Web Fuzzer 进阶 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p167"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Web Fuzzer 进阶 | Yak Program Language"><meta data-rh="true" name="description" content="前言Web Fuzzer，作为Yakit平台的核心组件之一，已经超越了传统的“重放数据包”的功能，成为了一个多面的工具，支持更加丰富的功能，本篇文章会围绕最近添加的Fuzzer序列功能和 PoC模板生成功能展开讲讲。"><meta data-rh="true" property="og:description" content="前言Web Fuzzer，作为Yakit平台的核心组件之一，已经超越了传统的“重放数据包”的功能，成为了一个多面的工具，支持更加丰富的功能，本篇文章会围绕最近添加的Fuzzer序列功能和 PoC模板生成功能展开讲讲。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-11-17T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年,WebFuzzer"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p167"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p167" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p167" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p167" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p167","mainEntityOfPage":"https://yaklang.com/en/blog/p167","url":"https://yaklang.com/en/blog/p167","headline":"Web Fuzzer 进阶","name":"Web Fuzzer 进阶","description":"前言Web Fuzzer，作为Yakit平台的核心组件之一，已经超越了传统的“重放数据包”的功能，成为了一个多面的工具，支持更加丰富的功能，本篇文章会围绕最近添加的Fuzzer序列功能和 PoC模板生成功能展开讲讲。","datePublished":"2023-11-17T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,56 +17,56 @@
 <p>在此前的<a href="http://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247514879&amp;idx=1&amp;sn=d370483231ad2074e331a839b26c039b&amp;chksm=c2d1c65bf5a64f4dcdc074a8491cdc531c4ea574645466dad8235e75f4a3242cbb57a61c7aef&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">PoC免写攻略</a> 文章中，我们以 ThinkPHP RCE 为例，通过 &quot;点点点&quot; 的方式，生成了一个还算合格的 Yaml PoC 插件，相信师傅们在阅读后，心中多半会有一个疑问，**例子中的 ThinkPHP RCE 只需要发送一次请求包即可判断漏洞是否存在，那么对于下列的一些漏洞场景，怎么办呢？访问漏洞API前，**需要先获取token的场景上传文件后，<strong>想要对上传的文件是否成功进行判断的场景... 其他需要前置包的场景</strong></p>
 <p>仔细思考可以发现，这些场景和 Web Fuzzer 序列功能十分契合，本质就是通过设置数据包发送的顺序，达到触发漏洞的目的，因此，对于多数据包的 PoC 生成也理所应当的被放在了 Fuzzer 序列中。</p>
 <p>我们再以 ThinkPHP RCE 为例，为了体现出<strong>多次发包</strong>的要求，我们不再使用回显 phpinfo() 的方式判断漏洞检出，我们首先构造文件写入数据包，随后访问写入文件是否成功的方式来判断漏洞是否存在。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8643c43fe0e3d052-f94ed678bd4b19165aa93750fae08d23.png" width="263" height="614" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8643c43fe0e3d052-f94ed678bd4b19165aa93750fae08d23.png" width="263" height="614" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>我们使用 Vulhub 启动一个 ThinkPHP 的靶场，随后在 Web Fuzzer 中构造如下数据包：</p>
 <div class="language-perl codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-perl codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// 上传一个名为 test.php 的文件，文件内容是打印 Yakit md5 后的值，并且在访问后会自行删除 test.php 文件</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">GET /index.php?s=index/\think\template\driver\file/write&amp;cacheFile=test.php&amp;content=%3C?php%20echo%20md5(%27Yakit%27);unlink(__FILE__);?%3E HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: 127.0.0.1:8888</span><br></span></code></pre></div></div>
 <p>发送文件写入数据包</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fa13def4ce131c1f-5e2a61015140de1350a19ed2b4c93f05.png" width="1080" height="183" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fa13def4ce131c1f-5e2a61015140de1350a19ed2b4c93f05.png" width="1080" height="183" class="yakdoc-image"></button></p>
 <p>验证文件是否上传成功，通过我们上面发送的 <code>Payload</code>内容可以知道，上传成功的标准应当是 response 中有 &quot;Yakit&quot; 字符串 md5 后的结果</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d3d555792d761b7a-e14e5fd05406c1c664eed659c8f993c8.png" width="1080" height="247" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d3d555792d761b7a-e14e5fd05406c1c664eed659c8f993c8.png" width="1080" height="247" class="yakdoc-image"></button></p>
 <p>点击发送数据包，观察结果，完美符合预期！复现漏洞阶段结束，接下来我们开始把这两个数据包变为一个插件，首先需要对第二个数据包设置一个匹配器，用于设置漏洞是否存在的条件，也就是我们前面提到的 <strong>Response body 中有 Yakit md5 后的结果。</strong></p>
 <p>我们可以根据需求，选择使用硬编码匹配的方式进行判断，如下设置匹配 &quot;53d363904730659dc7c1338948f77772&quot;</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2011a382d2dae768-d2955b83dadc45a760db1bedd698408b.png" width="701" height="731" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2011a382d2dae768-d2955b83dadc45a760db1bedd698408b.png" width="701" height="731" class="yakdoc-image"></button></p>
 <p>也可以配合 <strong>设置变量功能</strong> 使用更加灵活的方式来设置匹配器，通过对结果和设置的变量进行比较来确认漏洞是否存在，如下所示：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5a4b6d4060f7544d-51349b2bb8dd0ff1295c30bfc4c4a3a6.png" width="1080" height="280" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5a4b6d4060f7544d-51349b2bb8dd0ff1295c30bfc4c4a3a6.png" width="1080" height="280" class="yakdoc-image"></button></p>
 <p>之后我们可以把前面的两个数据包添加进一个 Fuzzer 序列组中</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/681f56f8eedd052d-f559e1e88db0314375e791911b49361c.png" width="333" height="357" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/681f56f8eedd052d-f559e1e88db0314375e791911b49361c.png" width="333" height="357" class="yakdoc-image"></button></p>
 <p>点击开始执行，我们可以在验证数据包中，看见匹配成功的字样</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/af2f4f2d14d8c225-d655143f23b65a7dfee41fe823fc99f9.png" width="1080" height="257" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/af2f4f2d14d8c225-d655143f23b65a7dfee41fe823fc99f9.png" width="1080" height="257" class="yakdoc-image"></button></p>
 <p>随后我们就可以点击右上角的 &quot;生成为 Raw 模板&quot;</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8e0207819994ffa2-bef1b8f743c6608ac8d8d475fdca5b6e.png" width="1080" height="212" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8e0207819994ffa2-bef1b8f743c6608ac8d8d475fdca5b6e.png" width="1080" height="212" class="yakdoc-image"></button></p>
 <p>生成如下的 Ymal PoC：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2d5e86f15c8224ef-066e34b13dd4ceaf3df45e1e8736c028.png" width="1080" height="464" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2d5e86f15c8224ef-066e34b13dd4ceaf3df45e1e8736c028.png" width="1080" height="464" class="yakdoc-image"></button></p>
 <p>点击执行后，可以发现检出了漏洞</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/194b01b1ce0ce34d-5635cefd9ae9ec35c15325a5691e7bad.png" width="1080" height="157" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/df7609d5220b87eb-7246d35811c87181e5969fa4798c2b1a.png" width="1080" height="219" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/194b01b1ce0ce34d-5635cefd9ae9ec35c15325a5691e7bad.png" width="1080" height="157" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/df7609d5220b87eb-7246d35811c87181e5969fa4798c2b1a.png" width="1080" height="219" class="yakdoc-image"></button></p>
 <p>至此，我们使用序列构造的多请求包 PoC 就完成了，可以后续完善一些漏洞信息即可保存为 Yaml 插件，方便后续的使用了</p>
 <p><strong>Fuzzer 序列场景：CSRF Token 保护下的爆破</strong></p>
 <p>在官网的 Web Fuzzer 教程中有热加载场景案例：csrf token保护下的爆破，链接如下：</p>
 <p><em><a href="https://yaklang.com/products/Web%20Fuzzer/fuzz-hotpatch-example1" target="_blank" rel="noopener noreferrer" class="">https://yaklang.com/products/Web%20Fuzzer/fuzz-hotpatch-example1</a></em></p>
 <p>我们现在使用 Fuzzer 序列的方式来实现一下。以pikachu靶场为例，安装pikachu靶场后(<strong>记得要初始化</strong>)，我们打开如下页面：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2ed597b7ebe6cfbd-b39ebfbe0245a54a52dd0eb046b5eb4e.png" width="1080" height="481" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2ed597b7ebe6cfbd-b39ebfbe0245a54a52dd0eb046b5eb4e.png" width="1080" height="481" class="yakdoc-image"></button></p>
 <p>任意输入账号密码之后，使用 Yakit 的 MITM 模块拦截登录请求，我们可以看到请求如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/769411fac9560b4a-ad649626eb202e26d7eea58e4e9c997a.png" width="643" height="333" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/769411fac9560b4a-ad649626eb202e26d7eea58e4e9c997a.png" width="643" height="333" class="yakdoc-image"></button></p>
 <p>注意到除了用户和密码之外，还存在一个 token 的 post 参数，这是一个 CSRF token，它主要是用来防止CSRF攻击的，但是这也给我们的爆破增加了一定的难度，因为每次爆破都需要使用一个新的 token。</p>
 <p>观察返回包中的 token ，后续的请求需要带上这个 token。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9a9a5e9a1953b66f-248565ab9b2e571ac32b2561e900b2b4.png" width="1080" height="354" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9a9a5e9a1953b66f-248565ab9b2e571ac32b2561e900b2b4.png" width="1080" height="354" class="yakdoc-image"></button></p>
 <p>理清思路后，本次的爆破流程如下图所示</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/174b1f258c01364d-ca8e504ae503aae14a3eb89b18673362.png" width="474" height="331" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/174b1f258c01364d-ca8e504ae503aae14a3eb89b18673362.png" width="474" height="331" class="yakdoc-image"></button></p>
 <p>第一步，我们首先需要提取 token，使用 Web Fuzzer 中的提取器，添加一个变量名为 token 的 Xpath 提取器，使用 <code>//input[@name=&#x27;token&#x27;]/@value</code>进行匹配</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d2848386c388961e-a840d0ffeacd5b84dca744492cb61253.png" width="699" height="286" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d2848386c388961e-a840d0ffeacd5b84dca744492cb61253.png" width="699" height="286" class="yakdoc-image"></button></p>
 <p>由于第二个登录数据包中每次都需要一个新的 token，所以我们需要在进行登录尝试前，都去获取一次 token，因此，<strong>对于字典的设置，需要在第一个数据包中进行设置，第二个数据包中使用</strong>，最终，第一个数据包 &quot;提取 token&quot; 如下图，我们设置了一个名为 <code>pass</code> 类型为 <code>fuzztag</code>的字典，用于在后续包中使用。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/70d7e63fc2207008-2b4fd7116ebd0e2f1033c72fe24b6098.png" width="902" height="613" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/70d7e63fc2207008-2b4fd7116ebd0e2f1033c72fe24b6098.png" width="902" height="613" class="yakdoc-image"></button></p>
 <p><strong>！提示</strong></p>
 <p>由于此靶场的Cookie 和 CSRF Token 有绑定关系，在获取 token 的数据包中，需要删掉Header 中的 Cookie。</p>
 <p>第二个数据包的设置就十分简单了，只需要使用数据包一中设置的两个变量<code>token</code>和<code>pass</code>。如下图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1d988dda97dd69ca-db584180dc5dededc01e9577a38a1d19.png" width="578" height="482" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1d988dda97dd69ca-db584180dc5dededc01e9577a38a1d19.png" width="578" height="482" class="yakdoc-image"></button></p>
 <p>随后将数据包一和数据包二变成一个序列组，设置执行顺序即可开始进行爆破了</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cfafae96b716b90c-b7bc8d57942fd8e9c0aa5c56478e3d26.png" width="1080" height="454" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cfafae96b716b90c-b7bc8d57942fd8e9c0aa5c56478e3d26.png" width="1080" height="454" class="yakdoc-image"></button></p>
 <p>最后可以通过搜索字符串来进行验证，发现所有的 token 都正常使用</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f0e0472de8e5c058-4072ffb58cd45919de5b67ff3f69465d.png" width="606" height="270" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f0e0472de8e5c058-4072ffb58cd45919de5b67ff3f69465d.png" width="606" height="270" class="yakdoc-image"></button></p>
 <p>同时爆破出了 admin/123456 的用户名和密码</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f460a70d9f8933f0-5536f10a220a5af85b2f6542f47fba33.png" width="600" height="206" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f460a70d9f8933f0-5536f10a220a5af85b2f6542f47fba33.png" width="600" height="206" class="yakdoc-image"></button></p>
 <p>至此，我们的目的也已经完成。</p>
 <p><strong>小结</strong></p>
 <p>本文通过两个例子，分享了一些 Fuzzer 序列的场景，希望对大家有所帮助。</p>

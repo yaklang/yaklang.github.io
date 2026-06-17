@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">功能更新：WebFuzzer 组并发，一键多包齐发！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p027"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="功能更新：WebFuzzer 组并发，一键多包齐发！ | Yak Program Language"><meta data-rh="true" name="description" content="在日常渗透测试里，WebFuzzer 已经成了各位师傅最常使用的模块了：发/改包、测试 Payload、复现漏洞，基本都离不开它。但对于一些特殊的场景，诸如“并发抢订单”“库存被超刷”这类必须多条请求同时冲击的场景，单个 Web-fuzzer 还是力不从心--多个标签页来回点既耗时间，也很难保持同样节奏。"><meta data-rh="true" property="og:description" content="在日常渗透测试里，WebFuzzer 已经成了各位师傅最常使用的模块了：发/改包、测试 Payload、复现漏洞，基本都离不开它。但对于一些特殊的场景，诸如“并发抢订单”“库存被超刷”这类必须多条请求同时冲击的场景，单个 Web-fuzzer 还是力不从心--多个标签页来回点既耗时间，也很难保持同样节奏。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-11-14T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,WebFuzzer"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p027"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p027" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p027" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p027" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p027","mainEntityOfPage":"https://yaklang.com/en/blog/p027","url":"https://yaklang.com/en/blog/p027","headline":"功能更新：WebFuzzer 组并发，一键多包齐发！","name":"功能更新：WebFuzzer 组并发，一键多包齐发！","description":"在日常渗透测试里，WebFuzzer 已经成了各位师傅最常使用的模块了：发/改包、测试 Payload、复现漏洞，基本都离不开它。但对于一些特殊的场景，诸如“并发抢订单”“库存被超刷”这类必须多条请求同时冲击的场景，单个 Web-fuzzer 还是力不从心--多个标签页来回点既耗时间，也很难保持同样节奏。","datePublished":"2025-11-14T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -31,28 +31,28 @@
 </ul>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="靶场演示">靶场演示<a href="#靶场演示" class="hash-link" aria-label="Direct link to 靶场演示" title="Direct link to 靶场演示" translate="no">​</a></h2>
 <p>更新 vulinbox 后，点击启动，找到如下的靶场入口：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e25f23dff40df077-bbca4bad1549e1703ad0650b0039d585.png" width="621" height="369" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e25f23dff40df077-bbca4bad1549e1703ad0650b0039d585.png" width="621" height="369" class="yakdoc-image"></button></p>
 <p>点击进入后，可以看见靶场前端如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/62b4e14baa542f66-cf42e8adf47f5d46b8176b39e1768047.png" width="715" height="815" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/62b4e14baa542f66-cf42e8adf47f5d46b8176b39e1768047.png" width="715" height="815" class="yakdoc-image"></button></p>
 <p>启动 MITM，点击“初始化”，获得 <code>session_id</code> 生成的流量。</p>
 <blockquote>
 <p>关于 session_id：在靶场里我们把它当成“活动/库存实例 ID”，所有 buy 请求只要共享同一个 session_id，就会竞争同一份库存，方便复现超卖。实际业务中虽然是不同用户、不同登录态在抢，但它们指向的库存标识通常相同（商品 ID、活动 ID、券批次等）。因此只需让 WebFuzzer 们共享同一个“库存 ID”，同时把 user/cookie/token 换成各自的账号信息，就能更贴近真实的并发抢购场景。</p>
 </blockquote>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e8bb2e8edbf4300f-aaed29217150e00081983d239f09ea19.png" width="932" height="552" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e8bb2e8edbf4300f-aaed29217150e00081983d239f09ea19.png" width="932" height="552" class="yakdoc-image"></button></p>
 <p>再点击 “单次抢购”，获取抢购接口的数据包：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/040a18aa0aabdcce-f4833115ca36dbe110b4ae39d37a800e.png" width="910" height="491" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/040a18aa0aabdcce-f4833115ca36dbe110b4ae39d37a800e.png" width="910" height="491" class="yakdoc-image"></button></p>
 <p>将上面的两个关键的数据包，发送到 Webfuzzer 模块，处理一下，变成如下的 <code>init </code>初始页，和<strong>并发竞争测试组</strong>。**</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d21c80a5d34e2196-d11385ef56770785288d79a0b2b5ffb4.png" width="719" height="569" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d21c80a5d34e2196-d11385ef56770785288d79a0b2b5ffb4.png" width="719" height="569" class="yakdoc-image"></button></p>
 <p>首先，初始化库存，获得 <code>session_id</code>，本次测试为 <code>aa4fc679-fb6c-4f34-87a5-64e0237371db</code></p>
 <p>设置 user1 和 user2 为相同的 <code>session_id</code> ，并且设置组并发配置如下图，保存后，点击开始执行。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/eb6fb763e91bcaaf-bf6808de67ccd1d56fbcaa62898ff7a7.png" width="1042" height="523" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/eb6fb763e91bcaaf-bf6808de67ccd1d56fbcaa62898ff7a7.png" width="1042" height="523" class="yakdoc-image"></button></p>
 <p>可以看见如下数据包：</p>
 <p>user1</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/08da14464648fae8-db4cdb9271701ed7863c3a6fee694227.png" width="1080" height="443" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/08da14464648fae8-db4cdb9271701ed7863c3a6fee694227.png" width="1080" height="443" class="yakdoc-image"></button></p>
 <p>user2</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6a557b10272e552a-f93a971c653b71cb0478f41856eb6afc.png" width="1080" height="478" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/6a557b10272e552a-f93a971c653b71cb0478f41856eb6afc.png" width="1080" height="478" class="yakdoc-image"></button></p>
 <p>可以发现，远不止我们初始化库存时设置的 5 个，在 vulinbox 页面输入我们测试的 <code>session_id</code>，点击刷新状态，可以发现库存直接变成负数了。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/362c14ab1ad9e701-a011cd94441c24371817d6ab6c5e386b.png" width="732" height="622" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/362c14ab1ad9e701-a011cd94441c24371817d6ab6c5e386b.png" width="732" height="622" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="靶场源码">靶场源码<a href="#靶场源码" class="hash-link" aria-label="Direct link to 靶场源码" title="Direct link to 靶场源码" translate="no">​</a></h2>
 <p>后端实现位于 <code>common/vulinbox/vul_groupfuzzer.go</code>。<code>inventorySession</code> 结构体记录商品、剩余库存和成功列表；</p>
 <p><code>groupFuzzerSessions</code> 则充当线程安全的会话存储。</p>

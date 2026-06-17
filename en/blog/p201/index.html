@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">无 Java 依赖的 Shiro 靶场 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p201"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="无 Java 依赖的 Shiro 靶场 | Yak Program Language"><meta data-rh="true" name="description" content="背景"><meta data-rh="true" property="og:description" content="背景"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-07-07T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年,Java 安全,靶场实战"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p201"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p201" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p201" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p201" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p201","mainEntityOfPage":"https://yaklang.com/en/blog/p201","url":"https://yaklang.com/en/blog/p201","headline":"无 Java 依赖的 Shiro 靶场","name":"无 Java 依赖的 Shiro 靶场","description":"背景","datePublished":"2023-07-07T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -30,7 +30,7 @@
 </blockquote>
 <p>在步骤 d 中，为了保证回显的随机性，我们执行的操作是：先加载回显的 Class 文件，在 Class 常量池中找到我们预设的常量值，替换为随机值，得到修改后的 Class 字节码。</p>
 <p>得益于 Yaklang <strong>完善的 java 字节码相关的基础设施</strong>，上述的操作十分的简单，仅需如下几行代码即可完成：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a7e762c2a0d82488-87f3a93757a116d1442365ad3995abda.png" width="582" height="211" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a7e762c2a0d82488-87f3a93757a116d1442365ad3995abda.png" width="582" height="211" class="yakdoc-image"></button></p>
 <blockquote>
 <p>完整的代码可以直接在 Yakit 插件商店查看</p>
 </blockquote>
@@ -51,30 +51,30 @@
 </ol>
 <p>稍微有些复杂的是在 d,e 两步。</p>
 <p>不过得益于 Yaklang <strong>完善的 Java 序列化相关的基础设施</strong>，我们可以轻易地判断一个数据流是否是 Java 序列化对象流，并且将其反序列化。其实也就是早已添加在 Codec 模块中的 Java 相关的功能。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/60a5342d2d213250-553494998d12960ee9d44a80e0417a37.png" width="1080" height="493" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/60a5342d2d213250-553494998d12960ee9d44a80e0417a37.png" width="1080" height="493" class="yakdoc-image"></button></p>
 <p>现在来到了 e 步骤 ：</p>
 <p>我们使用的四条回显链分别为，CB183NOCC、CB192NOCC、CCK1、CCK2，其中</p>
 <p>CB183 和 CB192 的 <code>SerialVersionUID</code> 是不一样的，所以除了类名<code>org.apache.commons.beanutils.BeanComparator</code>我们也要判断 <code>SerialVersionUID</code> , 上图中的 <code>serial_version</code>字段在经过转换后，其实就是常见的 <code>-3490850999041592962</code> 这种 SerialVersionUID 了。</p>
 <p>UID 和 类名的问题解决了，我们开始着手构造出符合 payload 预期结果的 fake Header 回显。</p>
 <p>熟悉这四条链的师傅应该能知道，这四条链有一个共同点，那就是可以<strong>利用 TemplatesImpl 执行字节码</strong>，可以更加直观的感受一下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9746f95403ba5cc6-67adb5558249e7fbaa730fece18c2afe.png" width="1080" height="482" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9746f95403ba5cc6-67adb5558249e7fbaa730fece18c2afe.png" width="1080" height="482" class="yakdoc-image"></button></p>
 <p>发现了十分熟悉的 <code>yv66</code>，那接下来的思路就简单多了，反序列化 Java 对象流(也就是解密后的payload) -&gt; 拿到 <code>Class</code> 字节码 -&gt; 解析 <code>Class</code> 字节码 -&gt; 遍历常量池，找到 <code>setHeader</code> 的传入值 -&gt; 靶场 Server 响应头添加对应回显 -&gt; Shiro 插件检出<code>(Shiro Header 回显)</code>风险。</p>
 <p>03</p>
 <p>Vulinbox Shiro 靶场漏洞检出</p>
 <p>让我们直接启动靶场来看看实际的效果，先启动 Vulinbox 靶场 ，如下图，我们可以看到本次启动随机使用的 Shiro Key <code>IduElDUpDDXE677ZkhhKnQ==</code> 和 gadget <code>CCK1</code>:</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c740ff551ea0f6da-b7f5b7a148a81c664fee83fdb2771137.png" width="1080" height="183" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c740ff551ea0f6da-b7f5b7a148a81c664fee83fdb2771137.png" width="1080" height="183" class="yakdoc-image"></button></p>
 <p>随后我们在 Yakit 中的插件调试功能中，选择 Shiro 插件，输入 Vulinbox 靶场中的 Shiro 地址，点击执行插件。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/984cd6f35f7c0216-8ed9d4e3fbbc575ebfc391a323e2ef07.png" width="1080" height="634" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/984cd6f35f7c0216-8ed9d4e3fbbc575ebfc391a323e2ef07.png" width="1080" height="634" class="yakdoc-image"></button></p>
 <p>可以发现检出了三个风险，分别是：发现 shiro 框架、发现 shiro 默认 Key 、发现 shiro 回显。</p>
 <p>查看一下风险详细信息，Shiro Key 和利用链符合预期，响应头也存在 <code>Vhmymv: emImhYiW。</code></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0c9ec2167323cb62-6847951b3fa7f7951be3fcbeb82fe4e8.png" width="1080" height="789" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0c9ec2167323cb62-6847951b3fa7f7951be3fcbeb82fe4e8.png" width="1080" height="789" class="yakdoc-image"></button></p>
 <p>靶场效果完美符合预期，赶紧添加一个测试用例，<strong>设置检出预期值</strong>，提交代码后自动跑个 CI， 有了这一层保障，也不用担心再出现回归错误啦~</p>
 <p>04</p>
 <p>不按套路出牌的环境</p>
 <p>在修改完插件后，为了测试其健壮性，找了一些使用了 Shiro 框架的进行测试，发现其中一个网站连 Shiro 框架都没有探测出来。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a530a04c638863b3-1eca3c324e9142e388a62a4bd07b3827.png" width="1080" height="257" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a530a04c638863b3-1eca3c324e9142e388a62a4bd07b3827.png" width="1080" height="257" class="yakdoc-image"></button></p>
 <p>经过测试发现必须在 <code>body</code> 中存在 <code>rememberMe=1</code> 或者 <code>rememberMe=true</code> 时，才会进入后续的 <code>Cookie rememberMe</code> 处理流程。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5f557305aa649440-9a4fdb743b71105a2eafaf50c96c5f72.png" width="1080" height="281" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5f557305aa649440-9a4fdb743b71105a2eafaf50c96c5f72.png" width="1080" height="281" class="yakdoc-image"></button></p>
 <p>勾选 Shiro 插件，开启 MITM 劫持，成功检出，这种边缘情况也确实不太好处理，好在还有被动扫描的模式。</p>
 <p>总结</p>
 <p>本次以 Shiro 靶场为例展开说明，其实现在内置的 4 个插件，均有对应的靶场和<strong>检出预期值</strong>。**</p>

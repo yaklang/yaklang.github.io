@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">APP端加密（DES-CBC）的HTTP流量如何自动化解密？ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p294"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="APP端加密（DES-CBC）的HTTP流量如何自动化解密？ | Yak Program Language"><meta data-rh="true" name="description" content="? ? ? MITM解密插件之社会主义没有后门"><meta data-rh="true" property="og:description" content="? ? ? MITM解密插件之社会主义没有后门"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-03-04T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,流量分析,加密对抗"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p294"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p294" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p294" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p294" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p294","mainEntityOfPage":"https://yaklang.com/en/blog/p294","url":"https://yaklang.com/en/blog/p294","headline":"APP端加密（DES-CBC）的HTTP流量如何自动化解密？","name":"APP端加密（DES-CBC）的HTTP流量如何自动化解密？","description":"? ? ? MITM解密插件之社会主义没有后门","datePublished":"2022-03-04T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,7 +18,7 @@
 <p>起因</p>
 <p>场景一</p>
 <p>以前 app测试遇到这个问题</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c21e8b51fbc23909-13f1b414f4a3bfb42f57e8d7fc6a9bbc.png" width="1080" height="607" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c21e8b51fbc23909-13f1b414f4a3bfb42f57e8d7fc6a9bbc.png" width="1080" height="607" class="yakdoc-image"></button></p>
 <p>如何用yakit 解决？</p>
 <p>场景发送的报文和响应报文都是加密的</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="需求"><strong>需求:</strong><a href="#需求" class="hash-link" aria-label="Direct link to 需求" title="Direct link to 需求" translate="no">​</a></h3>
@@ -26,26 +26,26 @@
 <p>不影响发送的报文和响应的报文 在展示的时候展示解密之后的字符串</p>
 </blockquote>
 <p>Demo</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/328b1df6aac6c9f2-a84c202d7195bbe6c21cec00b484ae23.png" width="1080" height="359" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/328b1df6aac6c9f2-a84c202d7195bbe6c21cec00b484ae23.png" width="1080" height="359" class="yakdoc-image"></button></p>
 <p>1、编写解密插件</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b6ecf7cdf6f506b-e53c7dc5f1ba9d23fc7a852cacd32279.png" width="1080" height="724" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1b6ecf7cdf6f506b-e53c7dc5f1ba9d23fc7a852cacd32279.png" width="1080" height="724" class="yakdoc-image"></button></p>
 <p>2、将需要解密的报文进行发送到数据包扫描</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c747581804eb3c5e-edfd751e85d59b1bd22fe5d98cd9d734.png" width="1080" height="309" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c747581804eb3c5e-edfd751e85d59b1bd22fe5d98cd9d734.png" width="1080" height="309" class="yakdoc-image"></button></p>
 <p>3、选择刚刚的插件点击立即执行获得解密结果</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cc3784eda16598f9-95d173df7d71b1802acf7ed419589ac2.png" width="1080" height="661" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cc3784eda16598f9-95d173df7d71b1802acf7ed419589ac2.png" width="1080" height="661" class="yakdoc-image"></button></p>
 <p>现实场景</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/da4ef2811b5001d9-106c04ac5b404cc0384e2c896f8e17af.png" width="1080" height="402" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/da4ef2811b5001d9-106c04ac5b404cc0384e2c896f8e17af.png" width="1080" height="402" class="yakdoc-image"></button></p>
 <p>1、经过 脱壳、分析、代码定位（过程不重要）解密算法如下</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d1034d7c38ec2b16-a9b943e51433785b06dec05028597496.png" width="1080" height="849" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d1034d7c38ec2b16-a9b943e51433785b06dec05028597496.png" width="1080" height="849" class="yakdoc-image"></button></p>
 <p>2、获得密钥</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0a5664781b87139f-dd1b5023c61d590ba6f1f35153816a00.png" width="1080" height="463" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0a5664781b87139f-dd1b5023c61d590ba6f1f35153816a00.png" width="1080" height="463" class="yakdoc-image"></button></p>
 <p>3、不会步骤1和2咋办、改变思路可以从同属二级域名的网站中找找看、比如说:</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4d5d7d51de858106-e6d1cc1251b1d81de39e31335c766c8d.png" width="1080" height="337" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4d5d7d51de858106-e6d1cc1251b1d81de39e31335c766c8d.png" width="1080" height="337" class="yakdoc-image"></button></p>
 <p>4、编写解密函数</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/086d49f8679f2279-f9252ba3a6529bfb26c6afcb409f8576.png" width="1080" height="816" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/086d49f8679f2279-f9252ba3a6529bfb26c6afcb409f8576.png" width="1080" height="816" class="yakdoc-image"></button></p>
 <p>5、测试</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/785bf9ec5ea917ae-858709fdf282abf22bce77bdeb38bfe1.png" width="1080" height="212" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9001524cca4f4baa-d2e3cd5dc66b09d3d1df0d0db76a11c6.png" width="1080" height="594" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/785bf9ec5ea917ae-858709fdf282abf22bce77bdeb38bfe1.png" width="1080" height="212" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9001524cca4f4baa-d2e3cd5dc66b09d3d1df0d0db76a11c6.png" width="1080" height="594" class="yakdoc-image"></button></p>
 <p>这个数据包扫描是将缓存数据的http报文进行处理不会发起http请求，发起http请求等其他功能需要在handle函数中实现</p>
 <p>当然类似功能也可以使用 mitm插件来进行实现</p>
 <p>招人招人</p>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yakit 新增内置插件：知识实体构建×知识检索，超长上下文秒变“最强大脑”！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p035"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yakit 新增内置插件：知识实体构建×知识检索，超长上下文秒变“最强大脑”！ | Yak Program Language"><meta data-rh="true" name="description" content="在之前的文章中有提到我们为处理超长输入的上下文，进行一些知识蒸馏萃取的功能，在最近的一段时间里这部分的工程有了一些的应用，也就是在 yakit 中新增的两个内置插件——知识构建与知识检索。"><meta data-rh="true" property="og:description" content="在之前的文章中有提到我们为处理超长输入的上下文，进行一些知识蒸馏萃取的功能，在最近的一段时间里这部分的工程有了一些的应用，也就是在 yakit 中新增的两个内置插件——知识构建与知识检索。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-09-19T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,漏洞检测与插件"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p035"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p035" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p035" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p035" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p035","mainEntityOfPage":"https://yaklang.com/en/blog/p035","url":"https://yaklang.com/en/blog/p035","headline":"Yakit 新增内置插件：知识实体构建×知识检索，超长上下文秒变“最强大脑”！","name":"Yakit 新增内置插件：知识实体构建×知识检索，超长上下文秒变“最强大脑”！","description":"在之前的文章中有提到我们为处理超长输入的上下文，进行一些知识蒸馏萃取的功能，在最近的一段时间里这部分的工程有了一些的应用，也就是在 yakit 中新增的两个内置插件——知识构建与知识检索。","datePublished":"2025-09-19T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -16,12 +16,12 @@
 <p>在之前的文章中有提到我们为处理超长输入的上下文，进行一些知识蒸馏萃取的功能，在最近的一段时间里这部分的工程有了一些的应用，也就是在 yakit 中新增的两个内置插件——知识构建与知识检索。</p>
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="知识实体构建">知识实体构建<a href="#知识实体构建" class="hash-link" aria-label="Direct link to 知识实体构建" title="Direct link to 知识实体构建" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0e19d3a3220e7e6b-d694646daedb0a2daa9eb74c4f9363bf.png" width="1080" height="1967" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0e19d3a3220e7e6b-d694646daedb0a2daa9eb74c4f9363bf.png" width="1080" height="1967" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据预处理与结构化层">数据预处理与结构化层<a href="#数据预处理与结构化层" class="hash-link" aria-label="Direct link to 数据预处理与结构化层" title="Direct link to 数据预处理与结构化层" translate="no">​</a></h2>
 <p>我们的内置插件提供了对绝大多数文件格式的强大支持，其在知识实体构建的预处理阶段。根据信息载体的不同，我们将文件处理策略划分为三大类：</p>
 <p><strong>1、多媒体文件 (以</strong>MP4<strong>为代表)</strong></p>
 <p>针对视频、音频这类动态信息流，我们创新性地提出了**聚焦式音频语义触发采样 (**Focused Audio-Semantic Triggered Sampling,<strong>F.A.S.T.)</strong> 框架。该技术能智能识别内容中的关键语义节点（如对话转换、事件发生），并据此进行非线性采样，从而高效、精准地捕捉核心信息，避免了传统等时采样带来的大量冗余。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/23ea26cdaa024bae-1334030f46bde18a0c8c0b9ad45be79d.png" width="1038" height="769" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/23ea26cdaa024bae-1334030f46bde18a0c8c0b9ad45be79d.png" width="1038" height="769" class="yakdoc-image"></button></p>
 <p><strong>2、富文本文件 (以</strong>PDF<strong>为代表)此类文件常包含图片、表格等非纯文本信息，传统 OCR 容易丢失版式和视觉元素。出于这点考虑，我们采用</strong>高<strong>保真</strong>视觉解析<strong>路径：首先通过底层基础设施将文件按页稳定地转换为图片，再运用视觉模型进行理解。这种“所见即所得”的处理方式，最大限度地保留了原始文档的全部信息，确保知识提取的</strong>真实性<strong>和</strong>可靠性**。</p>
 <p><strong>3、纯文本文件 (以</strong>TXT、<strong>源代码</strong>为代表)对于纯粹的文本文件处理就十分简易。通过这套差异化、专业化的预处理与模态转化步骤，我们确保了从不同来源的异构数据提取数据的准确性与高效性，并且在完成了归一化让后面的建模处理的数据都是提取完成的文本数据。**</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="实体建模层">实体建模层<a href="#实体建模层" class="hash-link" aria-label="Direct link to 实体建模层" title="Direct link to 实体建模层" translate="no">​</a></h2>
@@ -63,7 +63,7 @@
 <p>插件的使用界面被设计得直观明了，整个过程可以概括为简单的两步：</p>
 <p><strong>1、选择输入源</strong>：用户只需点击“选择文件”，即可从本地上传需要处理的文档。如下方截图所示，我们支持多种格式，从技术文档（如 PDF、Word ）、代码库，到多媒体文件（未来规划）。</p>
 <p>在这里，我们以之前发布的《编译拾遗（一）：代码静态行为分析》的 <strong>PDF</strong>文件**作为本次演示的输入源。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458755ca0bd3f83f-87af0a006466a518b7a0f05c899b3a9b.png" width="1080" height="253" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458755ca0bd3f83f-87af0a006466a518b7a0f05c899b3a9b.png" width="1080" height="253" class="yakdoc-image"></button></p>
 <p><strong>2、指定知识库</strong>：选择希望将分析结果存入的目标知识库。这允许用户将不同主题、不同来源的知识进行归类管理，例如可以创建“编译器知识库”、“项目 A 代码库”、“安全规范库”等。</p>
 <p>完成这两步后，只需点击“开始分析”，系统便会自动在后台执行我们前面所详述的四层知识处理流程。</p>
 <p>分析过程是全自动的。当处理完成后，系统就成功地：</p>
@@ -71,9 +71,9 @@
 <li class=""><strong>构建出 127 个的实体</strong></li>
 <li class=""><strong>识别出 106 条的实体间关系</strong></li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458755ca0bd3f83f-87af0a006466a518b7a0f05c899b3a9b.png" width="1080" height="253" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458755ca0bd3f83f-87af0a006466a518b7a0f05c899b3a9b.png" width="1080" height="253" class="yakdoc-image"></button></p>
 <p>我们已经成功地将一篇线性的、供人类阅读的 PDF 文档，<strong>转化成了一个</strong>网状的、机器可理解的知识模型**。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/83ae3252dfff7c70-7bea80c46843eda0df20cf5e0da54c5e.png" width="1080" height="635" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/83ae3252dfff7c70-7bea80c46843eda0df20cf5e0da54c5e.png" width="1080" height="635" class="yakdoc-image"></button></p>
 <ul>
 <li class=""><strong>127</strong>个实体**：经过了 RAG 语义聚合与消歧“概念节点”。例如“SSA (静态单赋值)”、“CFG (控制流图)”、“AST (抽象语法树)”这样的核心概念</li>
 <li class=""><strong>106</strong>条关系**：这些关系（如 <code>(SSA, is a form of, IR)</code>、<code>(Clang, uses, AST)</code>) 构成了知识的骨架。它们揭示了这 127 个实体之间是如何相互关联、相互作用的，将孤立的概念点连接成了富有逻辑的知识网络。</li>
@@ -172,7 +172,7 @@
 </li>
 </ul>
 <p>如下方截图所示，检索结果清晰地展示了与 SSA 概念直接相关的知识内容，证明了“假设性回答”策略在处理模糊、简略查询时的卓越效果。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/161dff2ff3e292d9-68353943e8f16559478ca01e67bfd58d.png" width="1080" height="588" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/161dff2ff3e292d9-68353943e8f16559478ca01e67bfd58d.png" width="1080" height="588" class="yakdoc-image"></button></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="4帮助数据">4、帮助数据<a href="#4帮助数据" class="hash-link" aria-label="Direct link to 4、帮助数据" title="Direct link to 4、帮助数据" translate="no">​</a></h4>
 <p>除去查询到知识的结果外我们还提供了一些帮助性数据，他们是结果数据的<strong>结构化与可视化呈现</strong>，帮助用户从不同维度快速理解和溯源知识。</p>
 <p><strong>5、实体关系图</strong></p>
@@ -180,7 +180,7 @@
 <li class=""><strong>功能</strong>：对于检索到的核心知识，系统能够即时生成一张<strong>实体关系图（<strong>ER</strong>图）</strong>。这张有向图以可视化的方式，结构化地展现了与“SSA”相关的实体及其相互关系。</li>
 <li class=""><strong>价值</strong>：这种图形化的表达方式，远比阅读大段文字描述更高效，能帮助使用者在几快速建立起关于一个复杂概念的关系认知。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f1e0a108779dc63d-7c489807bfb15bfa866ec5a10ec0f4b5.png" width="1080" height="412" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f1e0a108779dc63d-7c489807bfb15bfa866ec5a10ec0f4b5.png" width="1080" height="412" class="yakdoc-image"></button></p>
 <p><strong>6、关联实体列表：精准溯源，支持微调</strong></p>
 <ul>
 <li class=""><strong>功能</strong>：除了关系图，系统还会提供一个与查询问题相关的<strong>实体列表</strong>。该列表详细列出了在本次查询中涉及到的所有关键实体</li>

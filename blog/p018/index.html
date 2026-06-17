@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">TUN劫持：给流量戴上“进程追踪器” | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p018"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="TUN劫持：给流量戴上“进程追踪器” | Yak Program Language"><meta data-rh="true" name="description" content="为什么我们需要监控进程？"><meta data-rh="true" property="og:description" content="为什么我们需要监控进程？"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-01-16T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,流量分析"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p018"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p018" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p018" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p018" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p018","mainEntityOfPage":"https://yaklang.com/blog/p018","url":"https://yaklang.com/blog/p018","headline":"TUN劫持：给流量戴上“进程追踪器”","name":"TUN劫持：给流量戴上“进程追踪器”","description":"为什么我们需要监控进程？","datePublished":"2026-01-16T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -20,14 +20,14 @@
 <p>传统的抓包工具往往只关注包内容，而我们的工具在网络层拦截的同时，通过系统底层的调用，实时关联了网络连接与进程 PID。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="进程视图概览">进程视图概览<a href="#进程视图概览" class="hash-link" aria-label="进程视图概览的直接链接" title="进程视图概览的直接链接" translate="no">​</a></h2>
 <p>在工具的“进程列表”选项卡中，你可以看到当前系统中所有活跃的进程。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4a47418103dbb3c0-8012c645a3397807ce85e235a93837c5.jpg" width="718" height="1400" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4a47418103dbb3c0-8012c645a3397807ce85e235a93837c5.jpg" width="718" height="1400" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="查看进程详细连接">查看进程详细连接<a href="#查看进程详细连接" class="hash-link" aria-label="查看进程详细连接的直接链接" title="查看进程详细连接的直接链接" translate="no">​</a></h2>
 <p>点击“查看信息”，你可以深入到进程内部。工具会展示该进程当前持有的所有 连接，包括源地址、目的地址、目标域名（如有）。这对于识别 CDN 流量或隐藏的 API 调用非常有帮助。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/25573391f7dc414a-6f014f13b8969171f45871aa329043bf.png" width="1080" height="709" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/25573391f7dc414a-6f014f13b8969171f45871aa329043bf.png" width="1080" height="709" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="一键路由转换">一键路由转换<a href="#一键路由转换" class="hash-link" aria-label="一键路由转换的直接链接" title="一键路由转换的直接链接" translate="no">​</a></h2>
 <p>在发现感兴趣的连接后，如何快速将其导入劫持流程？</p>
 <p>在“信息详情”窗口中，每个连接条目后都有一个“添加路由”按钮。一旦点击，该目的 IP 会立刻被推送到我们的<strong>TUN</strong>路由表**中。此时，该 IP 的所有流量都将通过我们的 TUN 设备进行强行劫持。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b9929f58ffa9aaaa-f34c85fb547fa55257c32a254782476f.png" width="1080" height="458" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b9929f58ffa9aaaa-f34c85fb547fa55257c32a254782476f.png" width="1080" height="458" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="持续劫持进程">持续劫持进程<a href="#持续劫持进程" class="hash-link" aria-label="持续劫持进程的直接链接" title="持续劫持进程的直接链接" translate="no">​</a></h2>
 <p>在之前的 tun 劫持模块中，用户需要手动发现一个 IP，然后手动将其添加到路由表中。但在面对现代复杂应用时，这种操作模式已经不够使用了。</p>
 <p>本次更新关键在于实现了<strong>针对进程的持续劫持</strong>。无论你是指定一个具体的 <strong>PID</strong>，还是通过<strong>Glob 模式</strong>匹配一组进程，工具都会进入一个自动化的闭环逻辑，持续添加目标进程的连接到劫持目标中。</p>
@@ -44,7 +44,7 @@
 <li class=""><strong>一键锁定：</strong> 输入*<code>*Chrome*</code>*，工具会自动关联当前所有的 Chrome 进程。</li>
 <li class=""><strong>新进程自动收纳：<strong>最重要的是，如果在劫持过程中 Chrome 启动了新的子进程（例如你新开了一个标签页），Glob 监控逻辑会</strong>实时感知</strong>到这个新进程的加入，并自动将其纳入劫持范围。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/866975105135f199-2c1f1ebb7d1e9d46209d45f3eba496b1.png" width="734" height="518" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/866975105135f199-2c1f1ebb7d1e9d46209d45f3eba496b1.png" width="734" height="518" class="yakdoc-image"></button></p>
 <p>当你在工具中点击“劫持”后，后台会启动如下自动化流水线：</p>
 <p><strong>1、动态扫描与 Glob 模糊匹配</strong></p>
 <p>工具后台维持着一个扫描任务，它会定期轮询系统进程树。通过引入<strong>Glob 模式匹配</strong>，你不再需要死盯着某个 PID，只需输入期望的匹配字符串，就会自动将所有匹配到的进程拉入“劫持预备役”。</p>
@@ -60,7 +60,7 @@
 <p>**2、设置规则：**在进程列表搜索框输入 <em><code>*Chrome*</code></em>，点击“劫持”。</p>
 <p><strong>3、触发流量：</strong> 在 Chrome 中访问任意网站。</p>
 <p>**4、实时审计：**点击“已劫持任务”中的“查看信息”，你会发现工具已经自动捕获了 Chrome 正在访问的后端服务器 IP。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/39e6881201219fef-5620d6ec2da208c01da12ad55c977edd.png" width="1080" height="456" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/39e6881201219fef-5620d6ec2da208c01da12ad55c977edd.png" width="1080" height="456" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="#总结" class="hash-link" aria-label="总结的直接链接" title="总结的直接链接" translate="no">​</a></h2>
 <p>本次“进程监控”的更新，标志着我们的 TUN 劫持工具从一个“底层网络工具”进化为了一个“应用级分析利器”。通过 <strong>Glob 模式匹配</strong> 和 <strong>实时路由添加</strong>，我们极大缩短了从发现目标到实施劫持的操作链路。</p>
 <hr>

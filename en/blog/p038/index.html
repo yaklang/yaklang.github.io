@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">AI 无限上下文（一）：如何让 AI 吞下超长视频沉淀知识库【AI 学习必备】 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p038"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="AI 无限上下文（一）：如何让 AI 吞下超长视频沉淀知识库【AI 学习必备】 | Yak Program Language"><meta data-rh="true" name="description" content="背景"><meta data-rh="true" property="og:description" content="背景"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-08-29T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,AI"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p038"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p038" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p038" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p038" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p038","mainEntityOfPage":"https://yaklang.com/en/blog/p038","url":"https://yaklang.com/en/blog/p038","headline":"AI 无限上下文（一）：如何让 AI 吞下超长视频沉淀知识库【AI 学习必备】","name":"AI 无限上下文（一）：如何让 AI 吞下超长视频沉淀知识库【AI 学习必备】","description":"背景","datePublished":"2025-08-29T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,11 +17,11 @@
 <p>给 AI 当老师是一个非常困难的事情，难度不亚于你去教一个通用知识能力远超自己的学生，但是受限于他没有完善的记忆系统，周边生态配套缺乏。在做这件事儿的过程中，我们的认知也发生了很大变化。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="需求诞生">需求诞生<a href="#需求诞生" class="hash-link" aria-label="Direct link to 需求诞生" title="Direct link to 需求诞生" translate="no">​</a></h2>
 <p>我们只做了一套任务执行系统，并且认为只要告诉 AI 方法论与骨架，AI 就可以按照我们的构想去构建任务，并且执行任务，交付结果：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fbb5b55923176224-1e865af8e3d010732ad845389a56fccc.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fbb5b55923176224-1e865af8e3d010732ad845389a56fccc.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>实际我们确实这么做了，马上遇到了第一个问题，任务越来越复杂，需要的背景知识越来越多？如何稳定，并且分阶段提供给AI对应的知识呢？这些知识可能来自 GB 编号的文件，可能来自一个五小时的教学视频，也可能来自于某一个公司的内部文件，不至于我们每一次都需要构建对应的方法论吧？</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="知识系统">知识系统<a href="#知识系统" class="hash-link" aria-label="Direct link to 知识系统" title="Direct link to 知识系统" translate="no">​</a></h2>
 <p>因为上面的核心需求，我们需要实现一个知识系统，帮助 AI 在规划任何任务的时候，都有所依据。这就回到了我们一开始的诉求：“我们有大量的专业系统的知识，这些知识是我们做事儿的指引，如何让这些知识在 AI 没有系统训练的情况下，也成为 AI 做事儿的指引？”</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/00b0c19103cf91ae-39636ad9052f1677cf59ccebc4495f0f.png" width="1080" height="731" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/00b0c19103cf91ae-39636ad9052f1677cf59ccebc4495f0f.png" width="1080" height="731" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="知己知彼">知己知彼<a href="#知己知彼" class="hash-link" aria-label="Direct link to 知己知彼" title="Direct link to 知己知彼" translate="no">​</a></h2>
 <p>如何将离散的、碎片化的信息和经验，系统性地构建成一个可计算、可推理、可演化的知识体系。这一过程的起点，也是其最重要的第一性原理，便是对“知识”本身进行建模。若要实现真正的“知己知彼”，我们首先必须回答一个根本问题：知识从何而来，其本质又是什么？</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="知识源与密度">知识源与密度<a href="#知识源与密度" class="hash-link" aria-label="Direct link to 知识源与密度" title="Direct link to 知识源与密度" translate="no">​</a></h2>
@@ -49,7 +49,7 @@
 <p>我们遵循“实体-属性-关系”的框架进行拆解：</p>
 <p>1、识别核心实体 (Entity)：</p>
 <p><strong>2、解析实体属性 (Attribute)：3、厘清实体关系 (Relation)：</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/02b594fa6a37a3ef-af8ee75d669abe23b0b926bd26b7aa64.png" width="1080" height="391" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/02b594fa6a37a3ef-af8ee75d669abe23b0b926bd26b7aa64.png" width="1080" height="391" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例二代码实体建模">案例二：代码实体建模<a href="#案例二代码实体建模" class="hash-link" aria-label="Direct link to 案例二：代码实体建模" title="Direct link to 案例二：代码实体建模" translate="no">​</a></h2>
 <p>代码不仅是文本，它是一种形式化语言，内含了严谨的逻辑、数据流和层级结构。传统的代码分析依赖于抽象语法树（AST）等编译器技术，这些技术侧重于语法解析。而实体建模则提供了一个更高维度的视角，旨在捕捉代码的<strong>语义</strong>和<strong>组件间交互关系</strong>，从而构建一个可用于深度分析的“代码知识图谱”。</p>
 <p>我们以一个简单的 Python 类为例，该类用于从一个 API 获取用户信息：</p>
@@ -68,7 +68,7 @@
 <p>本文重点我们会讲解，其核心目标不再是生成浅层的文本摘要，而是从视频流中进行深度的、结构化的知识提取。我们将详细论证，为何传统的固定频率采样（如每秒一帧）方案在此场景下是低效且不可取的，并提出我们基于“动态采样”理念的优化框架。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="动态采样的核心思想fast-框架">动态采样的核心思想：F.A.S.T. 框架<a href="#动态采样的核心思想fast-框架" class="hash-link" aria-label="Direct link to 动态采样的核心思想：F.A.S.T. 框架" title="Direct link to 动态采样的核心思想：F.A.S.T. 框架" translate="no">​</a></h2>
 <p>传统视频处理方案，如固定帧率采样，其根本缺陷在于它对视频内容的一视同仁。它无法区分讲解核心概念的30秒与沉默或重复操作的5分钟之间在知识价值上的巨大差异，导致最终采集成百上千的冗余或无意义的图像帧。为了解决这一问题，我们提出了一套创新的处理框架：<strong>聚焦式音频语义触发采样（Focused Audio-Semantic Triggered Sampling, F.A.S.T.）</strong>。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ad2a0aca284c9080-eb7a7bb924b037068e139636e3f2cec3.png" width="1038" height="769" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ad2a0aca284c9080-eb7a7bb924b037068e139636e3f2cec3.png" width="1038" height="769" class="yakdoc-image"></button></p>
 <p>F.A.S.T. 框架的基本原理是：<strong>利用视频中信息密度相对更高的音频通道，来智能引导对信息密度较低的视觉通道的采样过程。</strong></p>
 <p>音频，尤其是包含人类语音的音轨，其转录文本是高度结构化且易于进行语义分析的。我们可以通过分析语音内容，反向定位视频中的“知识高光时刻”，从而实现对采样资源的精确投放。</p>
 <p>该框架主要包含以下几个核心阶段：</p>
@@ -103,7 +103,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="效果演示从理论到可观测的实践剪影">效果演示：从理论到可观测的实践剪影<a href="#效果演示从理论到可观测的实践剪影" class="hash-link" aria-label="Direct link to 效果演示：从理论到可观测的实践剪影" title="Direct link to 效果演示：从理论到可观测的实践剪影" translate="no">​</a></h2>
 <p>上述框架并非停留在理论设想，而是已经过我们大量、深入的工程实践验证。我们深知，衡量一项技术成熟度的唯一标准是其在真实场景下的表现。为此，我们对海量的视频数据，尤其是知识密度变化剧烈的教学类、操作演示类视频，进行了严苛的测试。我们成功地实现了让系统自动“生吞”数小时的超长视频，并从中精确地提取、标注和结构化其蕴含的核心知识。</p>
 <p>下图所展示的，正是我们内部系统在处理一段教学视频时，实时生成的执行日志与分析界面。这并非模拟数据，而是系统工作的真实剪影。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7d757efbe3f37b91-c5bea8e13850fc61cfd1f1af30ef412e.png" width="1080" height="669" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7d757efbe3f37b91-c5bea8e13850fc61cfd1f1af30ef412e.png" width="1080" height="669" class="yakdoc-image"></button></p>
 <p>这份看似简单的日志，实际上蕴含了 F.A.S.T. 框架的核心价值：</p>
 <ul>
 <li class=""><strong>证据一：可验证的动态采样。</strong> 日志中明确的 <code>start_seconds</code> 和 <code>end_seconds</code> 时间戳，正是音频语义分析后反哺给采样器的执行指令。我们可以看到系统并非线性扫描，而是聚焦于<code>5.75-9.50</code>秒、<code>9.50-19.18</code>秒等被判定为“知识高光”的区间。</li>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">yaklang的新标准库：SCA | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p199"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="yaklang的新标准库：SCA | Yak Program Language"><meta data-rh="true" name="description" content="什么是SCA"><meta data-rh="true" property="og:description" content="什么是SCA"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-07-20T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p199"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p199" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p199" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p199" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p199","mainEntityOfPage":"https://yaklang.com/en/blog/p199","url":"https://yaklang.com/en/blog/p199","headline":"yaklang的新标准库：SCA","name":"yaklang的新标准库：SCA","description":"什么是SCA","datePublished":"2023-07-20T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,11 +18,11 @@
 <p>01</p>
 <p>镜像文件系统</p>
 <p>镜像里面是一层层的文件系统,叫做 Union FS（联合文件系统）,联合文件系统，可以将几层目录挂载（叠）到一起，形成一个虚拟文件系统，每一层文件系统叫做一层 layer，layer都是只读的，构建镜像的时候，从一个最基本的操作系统开始，每个构建提交的操作都相当于做一层的修改，增加了一层文件系统，一层层往上叠加，上层的修改会覆盖底层该位置的可见性。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0d266f5829f9e9f5-08e515d61ad1daaf2ce73da1f4d91ed9.jpg" width="781" height="260" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0d266f5829f9e9f5-08e515d61ad1daaf2ce73da1f4d91ed9.jpg" width="781" height="260" class="yakdoc-image"></button></p>
 <p>02</p>
 <p>镜像包结构</p>
 <p>镜像可以通过docker save命令存储为一个tar包，其中的文件结构如下（以Ubuntu:latest）为例：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cff18d2e8c55f9fb-af3cbea048dd8014e47f7540d2d85868.png" width="1080" height="519" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/cff18d2e8c55f9fb-af3cbea048dd8014e47f7540d2d85868.png" width="1080" height="519" class="yakdoc-image"></button></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="mainfestjson">mainfest.json<a href="#mainfestjson" class="hash-link" aria-label="Direct link to mainfest.json" title="Direct link to mainfest.json" translate="no">​</a></h4>
 <p>这个文件存储了镜像结构和基础信息的描述文件，可以看到里面主要存储了Layers的哈希值和镜像的tags。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="hashjson">${hash}.json<a href="#hashjson" class="hash-link" aria-label="Direct link to ${hash}.json" title="Direct link to ${hash}.json" translate="no">​</a></h4>
@@ -45,7 +45,7 @@
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">C:Q1i+1SpSpyplqn9ztFds6RP7eIv8U=P:curlV:8.1.2-r0A:x86_64S:139967I:241664T:URL retrival utility and libraryU:https://curl.se/L:curlo:curlm:Natanael Copa &lt;ncopa@alpinelinux.org&gt;t:1685465048c:e8990bc463779592e3fb62eae7aacc48ed8abb3fD:libcurl=8.1.2-r0 so:libc.musl-x86_64.so.1 so:libcurl.so.4 so:libz.so.1p:cmd:curl=8.1.2-r0F:usrF:usr/binR:curla:0:0:755Z:Q1L2dyojkjpAQ7JazurYSkGNQZFTk=</span><br></span></code></pre></div></div>
 <p>这里面同样包含了安装的包信息：包名，版本，依赖，描述等。</p>
 <p><strong>SCA流程</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4b5a9aee686b242c-a31bef8fc1f87fef73c9623a7d15a45a.png" width="1080" height="270" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4b5a9aee686b242c-a31bef8fc1f87fef73c9623a7d15a45a.png" width="1080" height="270" class="yakdoc-image"></button></p>
 <p><strong>初步成果</strong></p>
 <p>（想看详细代码实现的师傅请查看：<a href="https://github.com/yaklang/yaklang/pull/149" target="_blank" rel="noopener noreferrer" class="">https://github.com/yaklang/yaklang/pull/149</a> 👍）</p>
 <p>为yak提供了一个新的标准库:<code>sca</code>，这个标准库主要提供了以下功能：</p>
@@ -61,7 +61,7 @@
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">pkgs = sca.ScanImageFromContext(&quot;1318b700e415&quot;)~ // ubuntu:latest cveOptions = make([]var, len(pkgs))for i, pkg = range pkgs {    cveOptions[i] = cve.product(pkg.Name, pkg.Version)}cveCh = cve.QueryEx(cveOptions...)for result in cveCh {    printf(&quot;%v\n&quot;, result.CVE)}/*CVE-2019-9923CVE-2022-0563CVE-2022-1271CVE-2022-1664CVE-2022-48303CVE-2009-2360CVE-2021-20193CVE-2021-32803CVE-2021-32804CVE-2021-37600CVE-2021-37701CVE-2021-37712CVE-2021-37713CVE-2021-3995CVE-2021-3996CVE-2020-3810CVE-2016-2781CVE-2018-1121*/</span><br></span></code></pre></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="使用dot画出依赖供应链">使用DOT画出依赖供应链<a href="#使用dot画出依赖供应链" class="hash-link" aria-label="Direct link to 使用DOT画出依赖供应链" title="Direct link to 使用DOT画出依赖供应链" translate="no">​</a></h3>
 <p>（只用于临时展示）</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7e82a9fe81a1fcef-b82f5573d167afb7b1e3891ba1997798.png" width="1080" height="712" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7e82a9fe81a1fcef-b82f5573d167afb7b1e3891ba1997798.png" width="1080" height="712" class="yakdoc-image"></button></p>
 <p>image.png</p>
 <p><strong>后续</strong></p>
 <p>后续我们会在yakit中提供一个新的页面，方便用户操作，用户提供一个镜像ID/容器ID/本地文件，yakit对其进行扫描后输出依赖供应链和可能存在的CVE。</p>

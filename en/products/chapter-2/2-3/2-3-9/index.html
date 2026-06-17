@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.9 Vulinbox：漏洞分析与测试实战靶场 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-2/2-3/2-3-9"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.9 Vulinbox：漏洞分析与测试实战靶场 | Yak Program Language"><meta data-rh="true" name="description" content="在前序章节中，我们已经系统性地探讨了 Yakit 平台提供的各类成品化安全工具。然而，任何工具与理论的最终价值，都必须在接近真实的攻防场景中得到检验与确证。本章将聚焦于 Yakit 生态中承担这一“实效性验证”角色的核心组件——Vulinbox。它绝非一个简单的漏洞集合，而是一个为安全研究、脚本开发乃至高级攻防技术演练量身打造的、标准化的基础实施。"><meta data-rh="true" property="og:description" content="在前序章节中，我们已经系统性地探讨了 Yakit 平台提供的各类成品化安全工具。然而，任何工具与理论的最终价值，都必须在接近真实的攻防场景中得到检验与确证。本章将聚焦于 Yakit 生态中承担这一“实效性验证”角色的核心组件——Vulinbox。它绝非一个简单的漏洞集合，而是一个为安全研究、脚本开发乃至高级攻防技术演练量身打造的、标准化的基础实施。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-9"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-9" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-9" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-9" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/en/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/en/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.9 Vulinbox 靶场","item":"https://yaklang.com/en/products/chapter-2/2-3/2-3-9"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -35,18 +35,18 @@
 <p>在 Yakit 的集成化环境中，访问 Vulinbox 模块的路径被设计得非常直观，以满足不同用户的使用习惯。平台提供了两种主要的入口，确保用户可以便捷地进入靶场管理界面。</p>
 <p><strong>入口一：通过右侧工具箱快速访问</strong>
 对于日常高频使用者，最快捷的方式是通过主界面右侧的“工具箱”面板。该面板集成了 Yakit 的核心功能模块，用户可以直接找到并点击【靶场 Vulinbox】选项，一步进入靶场环境。这种设计极大提升了操作效率。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit工具箱中靶场Vulinbox入口" src="/en/assets/images/ch2-092-585a1b0dbe5276977d552248594a361b.png" width="1345" height="348" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit工具箱中靶场Vulinbox入口"><img decoding="async" loading="lazy" alt="Yakit工具箱中靶场Vulinbox入口" src="/en/assets/images/ch2-092-585a1b0dbe5276977d552248594a361b.png" width="1345" height="348" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit工具箱中靶场Vulinbox入口</p>
 <p><strong>入口二：通过“试验性功能”菜单访问</strong>
 作为 Yakit 生态中不断演进的组件，Vulinbox 也被纳入“试验性功能”菜单中。此路径更符合其作为高级攻防演练与研究环境的定位。具体操作路径为：点击顶部菜单栏的【设置】图标 → 在下拉菜单中选择【试验性功能】 → 点击【(靶场)Vulinbox】。</p>
-<p><img decoding="async" loading="lazy" alt="通过设置菜单进入靶场模块" src="/en/assets/images/ch2-093-72e01d2ee5bd47fff5923ea60648b620.png" width="427" height="427" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 通过设置菜单进入靶场模块"><img decoding="async" loading="lazy" alt="通过设置菜单进入靶场模块" src="/en/assets/images/ch2-093-72e01d2ee5bd47fff5923ea60648b620.png" width="427" height="427" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：通过设置菜单进入靶场模块</p>
 <p>在首次进入或长期未使用后，我们强烈建议执行“安装/升级靶场”操作。Vulinbox 的漏洞案例库是持续更新的，点击【安装/升级靶场】按钮将从官方源拉取最新的靶场程序与漏洞场景。这一步骤是确保您能够体验到最新漏洞、避免因环境陈旧导致复现失败的关键。当您发现某个预期中的漏洞场景不存在或行为异常时，执行更新通常是首选的解决方案。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox靶场安装确认弹窗界面" src="/en/assets/images/ch2-094-e260ef3941063f8daf3c44196499c127.png" width="1164" height="239" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox靶场安装确认弹窗界面"><img decoding="async" loading="lazy" alt="Vulinbox靶场安装确认弹窗界面" src="/en/assets/images/ch2-094-e260ef3941063f8daf3c44196499c127.png" width="1164" height="239" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox靶场安装确认弹窗界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="靶场服务的启动与参数配置">靶场服务的启动与参数配置<a href="#靶场服务的启动与参数配置" class="hash-link" aria-label="Direct link to 靶场服务的启动与参数配置" title="Direct link to 靶场服务的启动与参数配置" translate="no">​</a></h4>
 <p>成功进入 Vulinbox 管理界面并完成更新后，下一步是启动靶场服务。点击【启动靶场】按钮，系统会弹出一个参数配置对话框，允许用户对即将运行的靶场实例进行精细化控制。理解这些参数对于后续的测试至关重要。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Vulinbox靶场服务启动参数配置界面" src="/en/assets/images/ch2-095-bc6b24eb1a9e2998edf9b7069face2d3.png" width="2892" height="764" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Vulinbox靶场服务启动参数配置界面"><img decoding="async" loading="lazy" alt="Yakit Vulinbox靶场服务启动参数配置界面" src="/en/assets/images/ch2-095-bc6b24eb1a9e2998edf9b7069face2d3.png" width="2892" height="764" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Vulinbox靶场服务启动参数配置界面</p>
 <p><strong>核心配置参数解析：</strong></p>
 <ul>
@@ -62,10 +62,10 @@
 </ul>
 <p><strong>访问靶场并解析其交互界面</strong></p>
 <p>完成参数配置并点击【启动靶场】后，Yakit 将在后台启动 Vulinbox 服务。服务成功启动后，Vulinbox 管理器的界面状态会随之更新：原有的【启动靶场】按钮将变为【关闭靶场】，并新增一个<strong>浏览器图标</strong>的快捷访问按钮。同时，在界面的日志区域，可以看到服务已成功监听在指定地址和端口（如 <code>INFO rt vulinbox on: ``http://127.0.0.1:8787</code>）的明确提示，标志着靶场环境已准备就绪。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox靶场启动界面与浏览器访问入口" src="/en/assets/images/ch2-096-eb85e95da76182a17a851bb8f15cfbe0.png" width="988" height="215" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox靶场启动界面与浏览器访问入口"><img decoding="async" loading="lazy" alt="Vulinbox靶场启动界面与浏览器访问入口" src="/en/assets/images/ch2-096-eb85e95da76182a17a851bb8f15cfbe0.png" width="988" height="215" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox靶场启动界面与浏览器访问入口</p>
 <p>点击此浏览器图标，Yakit 将自动调用系统默认浏览器，打开 Vulinbox 靶场的交互式主页面。该页面的设计严格服务于高效的漏洞学习与测试，其核心布局与交互模式如下：</p>
-<p><img decoding="async" loading="lazy" alt="靶场服务快速筛选漏洞案例界面" src="/en/assets/images/ch2-097-70c6c7112b968b4089677c31acb54e0b.png" width="999" height="691" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 靶场服务快速筛选漏洞案例界面"><img decoding="async" loading="lazy" alt="靶场服务快速筛选漏洞案例界面" src="/en/assets/images/ch2-097-70c6c7112b968b4089677c31acb54e0b.png" width="999" height="691" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：靶场服务快速筛选漏洞案例界面</p>
 <ul>
 <li class="">
@@ -83,12 +83,12 @@
 <p>该漏洞场景的根本成因在于，Web 应用程序在处理用户输入时，直接将未经充分验证和过滤的参数值拼接到后端的 SQL 查询语句中。对于期望接收数字型参数的边界，这种直接拼接为攻击者操控数据库查询逻辑打开了通道。</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="原理与场景分析">原理与场景分析<a href="#原理与场景分析" class="hash-link" aria-label="Direct link to 原理与场景分析" title="Direct link to 原理与场景分析" translate="no">​</a></h5>
 <p>在 Vulinbox 靶场中，我们首先从主页面的“SQL注入漏洞案例”分类中选择“ID为数字型的简单边界SQL注入”，以进入该特定实验场景。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox Agent漏洞案例选择界面" src="/en/assets/images/ch2-098-ccda5c1b6727a987bc78ca57be4b62d8.png" width="748" height="410" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox Agent漏洞案例选择界面"><img decoding="async" loading="lazy" alt="Vulinbox Agent漏洞案例选择界面" src="/en/assets/images/ch2-098-ccda5c1b6727a987bc78ca57be4b62d8.png" width="748" height="410" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox Agent漏洞案例选择界面</p>
 <p>进入该场景后，页面将展示一个基于 ID 查询的用户信息表格，其 URL 格式为 <code>http://127.0.0.1:8787/user/id?id=1</code>。这直观地模拟了一个常见的业务查询功能。根据此 URL 结构可以合理推断，其后端的 SQL 查询逻辑极有可能如下所示，其中用户输入的 <code>id</code> 参数被直接代入到一个未加引号的数值比较中：</p>
 <div class="language-Plain language-plain codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-plain codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">SELECT * FROM users WHERE id = {用户输入的ID值};</span><br></span></code></pre></div></div>
 <p>当攻击者篡改 <code>id</code> 参数，输入恶意构造的 SQL 语句片段时，原始查询的语义就会被改变，从而可能导致数据泄露或更严重的安全问题，例如执行任意数据库命令。</p>
-<p><img decoding="async" loading="lazy" alt="浏览器地址栏显示用户查询接口与数据表格" src="/en/assets/images/ch2-099-37e7b1e036afa2a8371a3066b8c1fbe6.png" width="1008" height="235" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 浏览器地址栏显示用户查询接口与数据表格"><img decoding="async" loading="lazy" alt="浏览器地址栏显示用户查询接口与数据表格" src="/en/assets/images/ch2-099-37e7b1e036afa2a8371a3066b8c1fbe6.png" width="1008" height="235" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：浏览器地址栏显示用户查询接口与数据表格</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="实战验证基于时间延迟的盲注技术">实战验证：基于时间延迟的盲注技术<a href="#实战验证基于时间延迟的盲注技术" class="hash-link" aria-label="Direct link to 实战验证：基于时间延迟的盲注技术" title="Direct link to 实战验证：基于时间延迟的盲注技术" translate="no">​</a></h5>
 <p>为了精确验证该漏洞的存在，并展示其利用方式，我们采用 Yakit 的 <strong>Web Fuzzer</strong> 模块进行自动化验证。在本案例中，我们将使用一种基于响应时间差异来判断漏洞的典型方法——<strong>时间盲注（Time-based Blind SQL Injection）</strong>。</p>
@@ -104,7 +104,7 @@
 <p><strong>发送请求并分析响应</strong>：点击【发送请求】后，我们重点观察响应信息中的耗时。在截图中可以看到，服务器响应耗时为 <code>10016ms</code>，即约 10 秒。这个显著且非正常的响应延迟与我们注入的 <code>sleep(10)</code> 命令高度一致。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 基于时间延迟的盲注技术验证" src="/en/assets/images/ch2-100-24bc69fd466593ef66217feccd06865b.png" width="1350" height="506" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 基于时间延迟的盲注技术验证"><img decoding="async" loading="lazy" alt="Yakit 基于时间延迟的盲注技术验证" src="/en/assets/images/ch2-100-24bc69fd466593ef66217feccd06865b.png" width="1350" height="506" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 基于时间延迟的盲注技术验证</p>
 <p>通过这种方式，即便页面没有返回任何数据库错误信息，我们也能通过可控的时间延迟，确凿地证明 SQL 注入漏洞的存在和可利用性。这一过程完美展示了 Yakit 工具链如何与 Vulinbox 靶场结合，将理论知识转化为可度量的、可验证的实战操作。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="反射型-xss使用-vulinbox-学习与验证">反射型 XSS：使用 Vulinbox 学习与验证<a href="#反射型-xss使用-vulinbox-学习与验证" class="hash-link" aria-label="Direct link to 反射型 XSS：使用 Vulinbox 学习与验证" title="Direct link to 反射型 XSS：使用 Vulinbox 学习与验证" translate="no">​</a></h4>
@@ -113,11 +113,11 @@
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="场景设定与基线分析定位-vulinbox-靶点">场景设定与基线分析：定位 Vulinbox 靶点<a href="#场景设定与基线分析定位-vulinbox-靶点" class="hash-link" aria-label="Direct link to 场景设定与基线分析：定位 Vulinbox 靶点" title="Direct link to 场景设定与基线分析：定位 Vulinbox 靶点" translate="no">​</a></h5>
 <p>Vulinbox 作为一个标准化的实验平台，其核心价值在于将抽象的漏洞原理具象化为可交互、可验证的靶点。在进行漏洞演练之前，首要任务是从其丰富的案例库中精确定位到本次实验的目标。</p>
 <p>第一步，我们需通过 Vulinbox 的界面来筛选并启动靶场案例。利用其内置的搜索功能，输入关键词“XSS”，系统会列出所有相关的漏洞场景。我们选择 “直接拼接导致XSS注入” 这一基础案例，它完美地模拟了用户输入被直接嵌入 HTML 的情景。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox界面搜索XSS并选择漏洞场景" src="/en/assets/images/ch2-101-0485f3f6dc928e93f7b8d380d870381d.png" width="749" height="440" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox界面搜索XSS并选择漏洞场景"><img decoding="async" loading="lazy" alt="Vulinbox界面搜索XSS并选择漏洞场景" src="/en/assets/images/ch2-101-0485f3f6dc928e93f7b8d380d870381d.png" width="749" height="440" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox界面搜索XSS并选择漏洞场景</p>
 <p>点击进入该案例后，Vulinbox 会启动一个测试环境。这种启动直接运行在本机中，确保了每次实验的纯净性与结果的可复现性。</p>
 <p>接下来是至关重要的一步：<strong>建立基线行为（Baseline Behavior）分析</strong>。在进行任何安全探测之前，我们必须通过一次合法的、无害的请求来理解靶场的预期工作模式。我们访问该靶点的入口 URL <code>http://127.0.0.1:8787/xss/echo</code>，并附加一个正常的 <code>name</code> 参数，例如 <code>name=admin</code>。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox靶点XSS漏洞基线分析" src="/en/assets/images/ch2-102-610755b8d3ceb3dbafd62bb68052edb5.png" width="821" height="262" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox靶点XSS漏洞基线分析"><img decoding="async" loading="lazy" alt="Vulinbox靶点XSS漏洞基线分析" src="/en/assets/images/ch2-102-610755b8d3ceb3dbafd62bb68052edb5.png" width="821" height="262" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox靶点XSS漏洞基线分析</p>
 <p>如上图所示，Vulinbox 的响应页面准确地在浏览器中回显了“Hello admin”。这个简单的验证过程，为我们提供了两个关键信息：</p>
 <ol>
@@ -129,7 +129,7 @@
 </li>
 </ol>
 <p>然而，专业的安全分析不能止步于表象。为了从根本上理解数据处理机制，我们需要审查服务器返回的原始 HTML 源码。通过在浏览器地址栏前添加 <code>view-source:</code> 协议头，我们能够直接检查后端响应的真实内容。</p>
-<p><img decoding="async" loading="lazy" alt="浏览器源码查看Vulinbox XSS漏洞回显" src="/en/assets/images/ch2-103-4d1441ce37e11b7d08605ec530928d74.png" width="670" height="499" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 浏览器源码查看Vulinbox XSS漏洞回显"><img decoding="async" loading="lazy" alt="浏览器源码查看Vulinbox XSS漏洞回显" src="/en/assets/images/ch2-103-4d1441ce37e11b7d08605ec530928d74.png" width="670" height="499" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：浏览器源码查看Vulinbox XSS漏洞回显</p>
 <p>如上图源码所示，我们获得了决定性的证据：参数值 <code>admin</code> 被原封不动地插入到了 <code>&lt;body&gt;</code> 标签内的一个 <code>&lt;div&gt;</code> 元素中，其间没有任何形式的编码或转义措施。这一发现将我们的分析从“输入影响输出”的猜测，推进到了“<strong>用户输入被直接拼接为 HTML 文档内容</strong>”的确定性结论。至此，我们不仅确认了靶场环境的正常工作，更从原理上洞悉了其脆弱性的根源，为下一步的漏洞验证奠定了坚实的基础。</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="漏洞验证与原理剖析">漏洞验证与原理剖析<a href="#漏洞验证与原理剖析" class="hash-link" aria-label="Direct link to 漏洞验证与原理剖析" title="Direct link to 漏洞验证与原理剖析" translate="no">​</a></h5>
@@ -137,7 +137,7 @@
 <p>为此，我们构建一个标准的 XSS 测试负载（Payload）：<code>&lt;script&gt;alert(&quot;alert in vulinbox xss/echo&quot;)&lt;/script&gt;</code>。此负载的意图是，当它被嵌入 HTML 页面时，浏览器会执行 <code>&lt;script&gt;</code> 标签内的 JavaScript 代码，即弹出一个警告框。</p>
 <p>我们将此负载作为 <code>name</code> 参数的值，通过浏览器地址栏直接向 Vulinbox 发起请求：</p>
 <div class="language-Plain language-plain codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-plain codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">http://127.0.0.1:8787/xss/echo?name=&lt;script&gt;alert(&quot;alert in vulinbox xss/echo&quot;)&lt;/script&gt;</span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" alt="浏览器弹窗验证XSS漏洞" src="/en/assets/images/ch2-104-a3a04407f90f718da8cd224226ff19df.png" width="817" height="217" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 浏览器弹窗验证XSS漏洞"><img decoding="async" loading="lazy" alt="浏览器弹窗验证XSS漏洞" src="/en/assets/images/ch2-104-a3a04407f90f718da8cd224226ff19df.png" width="817" height="217" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：浏览器弹窗验证XSS漏洞</p>
 <p>上图所示的弹窗结果，为我们的实验提供了终极的、无可辩驳的验证。浏览器成功弹出了包含预设文本的警告框，这证明了以下事实：</p>
 <ol>

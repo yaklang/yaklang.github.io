@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">网络端口扫描与指纹识别 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/yak-basic/cap8-3-port-n-service-scan"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="网络端口扫描与指纹识别 | Yak Program Language"><meta data-rh="true" name="description" content="本节开始介绍网络安全中比较常用的功能，端口扫描和指纹识别，在Yak 中对应的两个库为 synsscan和servicescan，在开始具体的库讲解前，先来了解什么是端口扫描与指纹"><meta data-rh="true" property="og:description" content="本节开始介绍网络安全中比较常用的功能，端口扫描和指纹识别，在Yak 中对应的两个库为 synsscan和servicescan，在开始具体的库讲解前，先来了解什么是端口扫描与指纹"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/yak-basic/cap8-3-port-n-service-scan"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yak-basic/cap8-3-port-n-service-scan" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/yak-basic/cap8-3-port-n-service-scan" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/yak-basic/cap8-3-port-n-service-scan" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"网络端口扫描与指纹识别","item":"https://yaklang.com/docs/yak-basic/cap8-3-port-n-service-scan"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -68,7 +68,7 @@
 <li class="">只进行第一次握手，如果收到了扫描目标的 <code>SYN-ACK</code> 则判定为端口开放</li>
 <li class="">发送 <code>RST</code> 强行中断握手</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-3-1-a201e3f0be2e5b481ea2e7fb8f9fbdc2.png" width="665" height="643" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: img"><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-3-1-a201e3f0be2e5b481ea2e7fb8f9fbdc2.png" width="665" height="643" class="yakdoc-image"></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="synscan库-api-介绍">synscan库 API 介绍<a href="#synscan库-api-介绍" class="hash-link" aria-label="synscan库 API 介绍的直接链接" title="synscan库 API 介绍的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="核心函数">核心函数<a href="#核心函数" class="hash-link" aria-label="核心函数的直接链接" title="核心函数的直接链接" translate="no">​</a></h4>
 <p>Yak 库 api 始终遵循简单易用的理念，在 synscan 库中只有两个个核心扫描函数</p>
@@ -145,7 +145,7 @@
 <li class="">允许用户按照现有的格式自定义添加 <code>namp</code>或者 Web 应用指纹</li>
 <li class="">规范化的使用了 CPE 来作为扫描结果</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-3-2-a57a6bb47e4ac7bd3b97eecd2cd9bd6a.png" width="850" height="587" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: img"><img decoding="async" loading="lazy" alt="img" src="/assets/images/cap8-3-2-a57a6bb47e4ac7bd3b97eecd2cd9bd6a.png" width="850" height="587" class="yakdoc-image"></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="servicescan-库api介绍">servicescan 库API介绍<a href="#servicescan-库api介绍" class="hash-link" aria-label="servicescan 库API介绍的直接链接" title="servicescan 库API介绍的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="核心函数-1">核心函数<a href="#核心函数-1" class="hash-link" aria-label="核心函数的直接链接" title="核心函数的直接链接" translate="no">​</a></h4>
 <p>Yak 库 api 始终遵循简单易用的理念，在 synscan 库中只有两个个核心扫描函数</p>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yaklang 又一&quot;杀手级&quot;功能发布！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p187"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yaklang 又一&quot;杀手级&quot;功能发布！ | Yak Program Language"><meta data-rh="true" name="description" content="前言"><meta data-rh="true" property="og:description" content="前言"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-08-31T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p187"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p187" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p187" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p187" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p187","mainEntityOfPage":"https://yaklang.com/blog/p187","url":"https://yaklang.com/blog/p187","headline":"Yaklang 又一\"杀手级\"功能发布！","name":"Yaklang 又一\"杀手级\"功能发布！","description":"前言","datePublished":"2023-08-31T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,33 +17,33 @@
 <p>Web Fuzzer 序列基本是由 Web Fuzzer 页面中的<strong>数据提取器</strong>以及<strong>设置变量</strong>这个两个功能所组成的复合功能，接下来牛牛将首先介绍数据提取器和设置变量。</p>
 <p><strong>0</strong>1数据提取器的妙用**</p>
 <p>单从数据提取器来看，大家可能觉得功能十分的简单，不就是提取返回包中的一些值吗？但是其实它还有另一个功能——声明变量，直接看图说话：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5231f527d3704593-ffe3665427fac8ae4fde0b182de780d0.png" width="709" height="316" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5231f527d3704593-ffe3665427fac8ae4fde0b182de780d0.png" width="709" height="316" class="yakdoc-image"></button></p>
 <p>图中红框中的 <code>data_0</code>就是提取结果后声明的变量名，用伪代码的方式可以像如下表示:</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">data_0 = &quot;提取的目标值&quot;</span><br></span></code></pre></div></div>
 <p>熟悉代码的小伙伴应该马上能想到，既然都能声明变量了，那肯定也可以使用变量对吧！</p>
 <p>没错，下面让我们配合<strong>匹配器</strong>功能来测试一下我们声明的变量该如何使用吧</p>
 <p>首先，我们先启动一个 <code>MockEchoServer</code>，这个 HTTP Server 十分的简单，它会把我们发送的请求头、请求体，原封不动的放在返回包中</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f5e9e7df637bd72c-26aa67e45b12c8c0d6b131b3910b8598.png" width="1080" height="322" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f5e9e7df637bd72c-26aa67e45b12c8c0d6b131b3910b8598.png" width="1080" height="322" class="yakdoc-image"></button></p>
 <p>启动了这个<code>MockEchoServer</code>后，我们就可以很方便的进行调试了，现在我们可以设置一个<strong>数据提取器规则</strong>了，如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/685ec5a9b16798ad-49ecd95769233cfc0534743b4443d793.png" width="1080" height="511" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/685ec5a9b16798ad-49ecd95769233cfc0534743b4443d793.png" width="1080" height="511" class="yakdoc-image"></button></p>
 <p>解释一下我们设置的提取器，首先我们把原来的 <code>data_0</code>变量名修改为了<code>token</code>，其次我们的提取类型为<strong>键值对</strong>，提取范围为 <strong>Raw</strong>，也就是将提取的范围限定为整个返回包，最下方的 <code>token</code>则是特定键名了，我们通过<code>token</code>这个键名就可以获取到<code>1c544524-e8d8-42fd-921b-373c2345d201</code>的值了，点击调试执行，看看结果是否复合预期。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/0574c11691cf8f00-24c08d7aa1427da37f56f2c4e76326d2.png" width="1080" height="657" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/0574c11691cf8f00-24c08d7aa1427da37f56f2c4e76326d2.png" width="1080" height="657" class="yakdoc-image"></button></p>
 <p>那么我们上面设置的<strong>提取器规则</strong>，相当于是我们声明了一段代码：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">token = &quot;1c544524-e8d8-42fd-921b-373c2345d201&quot;</span><br></span></code></pre></div></div>
 <blockquote>
 <p>键值对的提取方式指的是从一个数据结构中获取或检索与特定键关联的值。这通常在编程中用于访问诸如字典（Dictionary）、哈希表（HashMap）或关联数组（Associative Array）等数据结构中的数据。</p>
 </blockquote>
 <p>数据提取器的规则设置完毕了，接下来就是用<strong>匹配器</strong>来验证我们上面声明的变量是否可以使用了，我们设置一个如下的匹配器规则：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5f221dcf93bae017-0d4a3ecd794c2d34a403134f015f1d70.png" width="1080" height="580" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5f221dcf93bae017-0d4a3ecd794c2d34a403134f015f1d70.png" width="1080" height="580" class="yakdoc-image"></button></p>
 <p>在这个匹配器规则中，我们选择了使用<strong>变量</strong>配合<strong>表达式语句</strong>进行匹配，箭头指向的 <code>token</code>就是我们在上一步中<strong>声明的变量(token)</strong>，那么这个<strong>匹配器规则</strong>配合之前的<strong>提取器规则</strong>的伪代码如下：</p>
 <div class="language-swift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-swift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 使用 {{int(20000-20003)}} 会发送四个包for req in [req1 , req2 , req3 , req4]{    rsp,_ = poc.HTTP(req)~    // 提取器 从 body 中提取 {&quot;token&quot;:&quot;20000&quot;} 的值    token = 键值对提取器(rsp.body,&quot;token&quot;) // token = &quot;20002&quot;    // 匹配器 使用我们输入的表达式    if 表达式匹配器(`token == &quot;20002&quot;`){        println(&quot;匹配成功&quot;)    }}</span><br></span></code></pre></div></div>
 <p>我们发送一下请求，查看结果发现，<strong>匹配器</strong>成功的使用了<strong>提取器的获取的值</strong>进行了表达式的判断</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/bfb773b729ba5ef4-96def16bbe220352f6e66a5bbfda6f28.png" width="1080" height="375" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/bfb773b729ba5ef4-96def16bbe220352f6e66a5bbfda6f28.png" width="1080" height="375" class="yakdoc-image"></button></p>
 <p>我们现在把表达式的值由原来的 <code>token == &#x27;20002&#x27;</code>改为<code>token != &#x27;20002&#x27;</code>后继续测试，结果完美符合预期！</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/376ab279875b064a-05580b6a8f9379f0d8bed63039db32ba.png" width="1080" height="332" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/376ab279875b064a-05580b6a8f9379f0d8bed63039db32ba.png" width="1080" height="332" class="yakdoc-image"></button></p>
 <p><strong>0</strong>2设置变量模块**</p>
 <p>设置变量部分比较简单，我们直接对应着发包来讲解，我们先设置四个变量来初步看看：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/37d31ebbaf7a91e8-1049555af171da3dabe13aefc04ffff0.png" width="1080" height="516" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/37d31ebbaf7a91e8-1049555af171da3dabe13aefc04ffff0.png" width="1080" height="516" class="yakdoc-image"></button></p>
 <p>上图分别设置了四个变量，分别是：</p>
 <ol>
 <li class=""><code>dsl_var</code>未开启 Fuzztag 识别，同时变量的值被包裹在<code>{{}}</code>中则默认使用的是<code>nuclei ``dsl</code>的方法，此处使用的是 <code>rand_int(1000,2000)</code>，表示生成一个范围在 1000 到 2000 的随机数。</li>
@@ -52,24 +52,24 @@
 <li class=""><code>expr</code>它的值是一个 <code>If</code>语句，是执行了 <code>if true { return 22222}</code> 这段代码后的结果</li>
 </ol>
 <p>简单介绍了<strong>设置变量</strong>功能后，我们同样结合着<strong>匹配器</strong>功能，来进一步的讲解，设置变量功能究竟有何作用，我们本次用一个 <code>Struts2-045</code>的本地靶场来进行演示。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/6458bed477253121-dc5cf6458316a44f3099b27fbd8af27a.png" width="1080" height="504" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/6458bed477253121-dc5cf6458316a44f3099b27fbd8af27a.png" width="1080" height="504" class="yakdoc-image"></button></p>
 <p>我们设置了三个变量，以及一个匹配器规则，很完美的发送了一个漏洞检测数据包，是不是有写 <code>Poc</code>的感觉了？实际上，后续也确实会有 Web Fuzzer 配合匹配器、提取器、设置变量，一键生成 <code>Yaml Poc</code> 的功能。</p>
 <p><strong>0</strong>3Fuzzer 序列**</p>
 <p>铺垫了这么多，终于要到 Web Fuzzer 序列功能了，直接上图展示：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/abd66dcf1646fd16-a94a54e8fe8c79cdd1064cfd26d09cd7.png" width="952" height="529" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/abd66dcf1646fd16-a94a54e8fe8c79cdd1064cfd26d09cd7.png" width="952" height="529" class="yakdoc-image"></button></p>
 <p>在 Web-Fuzzer 子标签的左侧我们发现多了一个侧边 <code>Tab</code>页，当我们点击 <code>Fuzzer 序列</code>时，会将 <code>WF-[1]</code>这个子标签页拖入一个<strong>序列组</strong>中，变成如下所示：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e4921c909da7644f-e8f2dcb6fb4170e476623d85d86de6c6.png" width="1080" height="530" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e4921c909da7644f-e8f2dcb6fb4170e476623d85d86de6c6.png" width="1080" height="530" class="yakdoc-image"></button></p>
 <p>随后我们可以在 <code>Step [0]</code>这个节点中，添加 <code>Web Fuzzer</code> 的标签页<code>WF-[1]</code></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/93d994c659fe43f6-fe9959c0d4a3c530a706a7ce28918f1f.png" width="1066" height="615" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/93d994c659fe43f6-fe9959c0d4a3c530a706a7ce28918f1f.png" width="1066" height="615" class="yakdoc-image"></button></p>
 <p>我们还可以继续添加其他的 Fuzzer 标签页，随后只需要将标签页拖入序列组中，即可再次添加节点</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/53064c7d2a6fed38-0dab61a40aa5d7c4d87206260a58b246.png" width="781" height="491" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/53064c7d2a6fed38-0dab61a40aa5d7c4d87206260a58b246.png" width="781" height="491" class="yakdoc-image"></button></p>
 <p>随后我们在 <code>WF-[1]</code>中设置一个提取器规则，规则内容是提取键值为<code>Node1</code>的值，声明为 <code>get</code>变量</p>
 <p>再设置一个变量 <code>node1</code>，内容是字符串</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4d7214e418b6ae31-50020c7a58e16188895b603f2694af9d.png" width="1080" height="555" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4d7214e418b6ae31-50020c7a58e16188895b603f2694af9d.png" width="1080" height="555" class="yakdoc-image"></button></p>
 <p>最后我们在 <code>WF-[2]</code>中设置一下上面中声明的变量，可以发现，直接发送请求，结果是为空的，这是因为单独发送这一个请求，是没有<code>WF-[1]</code>中声明的变量的上下文的</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/76b4b6ed6db759e4-f13807aa9e32a63cf1989da2c60af944.png" width="1080" height="476" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/76b4b6ed6db759e4-f13807aa9e32a63cf1989da2c60af944.png" width="1080" height="476" class="yakdoc-image"></button></p>
 <p>那么我们使用 Fuzzer 序列功能尝试一下，在 <code>WF-[1]</code>到<code>WF-[2]</code>的中间，开启<strong>继承变量</strong>(默认都是开启的)，查看结果，<code>WF-[2]</code>已经完美继承了在<code>WF-[1]</code>中设置的功能了</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/287d00d5d35bca00-8d7719009503db4d1e020434961e9669.png" width="1080" height="273" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/287d00d5d35bca00-8d7719009503db4d1e020434961e9669.png" width="1080" height="273" class="yakdoc-image"></button></p>
 <p><strong>0</strong>4Fuzzer序列的使用场景**</p>
 <ol>
 <li class="">需要登陆后进行的一些操作，比如说，你完全可以使用 Fuzzer 序列功能写一个每日签到脚本</li>

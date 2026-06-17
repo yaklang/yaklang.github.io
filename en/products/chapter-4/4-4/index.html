@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">4.4 Fuzztag - 智能化请求构造引擎 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-4/4-4"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.4 Fuzztag - 智能化请求构造引擎 | Yak Program Language"><meta data-rh="true" name="description" content="在前序章节中，我们已经基本掌握了 Web Fuzzer 的批量发包能力（4\.2）与各项执行配置（4\.3）。然而，真正驱动“批量”这一核心能力、将静态请求模板转化为成千上万个动态测试用例的，是 Yakit 的核心技术之一：Fuzztag。本章将从原理层面剖析 Fuzztag 的工作机制，并由浅入深地展示其在各类安全测试场景下的基础及高级用法，帮助用户掌握这一无需编程即可实现复杂自动化测试的强大工具。"><meta data-rh="true" property="og:description" content="在前序章节中，我们已经基本掌握了 Web Fuzzer 的批量发包能力（4\.2）与各项执行配置（4\.3）。然而，真正驱动“批量”这一核心能力、将静态请求模板转化为成千上万个动态测试用例的，是 Yakit 的核心技术之一：Fuzztag。本章将从原理层面剖析 Fuzztag 的工作机制，并由浅入深地展示其在各类安全测试场景下的基础及高级用法，帮助用户掌握这一无需编程即可实现复杂自动化测试的强大工具。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-4/4-4"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-4" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-4" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-4" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/en/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.4 Fuzztag 构造引擎","item":"https://yaklang.com/en/products/chapter-4/4-4"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -36,7 +36,7 @@
 </li>
 </ul>
 <p>为了更清晰地理解，下图精确展示了这一过程：</p>
-<p><img decoding="async" loading="lazy" alt="HTTP请求词法语法分析与AST构建示意图" src="/en/assets/images/ch4-017-95aab80ca7c6a094a2919760bc562eda.png" width="1340" height="764" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: HTTP请求词法语法分析与AST构建示意图"><img decoding="async" loading="lazy" alt="HTTP请求词法语法分析与AST构建示意图" src="/en/assets/images/ch4-017-95aab80ca7c6a094a2919760bc562eda.png" width="1340" height="764" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：HTTP请求词法语法分析与AST构建示意图</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="节点求值与生成动态生成器的构建与执行">节点求值与生成：动态生成器的构建与执行<a href="#节点求值与生成动态生成器的构建与执行" class="hash-link" aria-label="Direct link to 节点求值与生成：动态生成器的构建与执行" title="Direct link to 节点求值与生成：动态生成器的构建与执行" translate="no">​</a></h3>
 <p>解析完成后，Fuzzer 引擎遍历 AST，构建生成器：</p>
@@ -49,7 +49,7 @@
 </li>
 </ul>
 <p>如图是输入文本<code>id={{int(1-{{int({{int(1-3)}}-{{int(4-6)}})}})}}</code>生成的AST案例：</p>
-<p><img decoding="async" loading="lazy" alt="AST解析结构图展示动态生成器节点分解" src="/en/assets/images/ch4-018-d32ef1765ebc41219d80afbf43a93737.png" width="2613" height="1564" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: AST解析结构图展示动态生成器节点分解"><img decoding="async" loading="lazy" alt="AST解析结构图展示动态生成器节点分解" src="/en/assets/images/ch4-018-d32ef1765ebc41219d80afbf43a93737.png" width="2613" height="1564" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：AST解析结构图展示动态生成器节点分解</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据传播与组合自底向上的生成">数据传播与组合：自底向上的生成<a href="#数据传播与组合自底向上的生成" class="hash-link" aria-label="Direct link to 数据传播与组合：自底向上的生成" title="Direct link to 数据传播与组合：自底向上的生成" translate="no">​</a></h3>
 <p>不同于传统的笛卡尔积组合方式，Fuzztag 采用自底向上的数据传播机制，确保生成结果的全面性并等效于笛卡尔积效果，同时支持更灵活的控制（如同步渲染）。这一过程通过以下步骤实现：</p>
@@ -95,7 +95,7 @@
 <p><strong>适用场景</strong>：当您不确定使用哪个标签、忘记标签语法或需要验证复杂嵌套标签的输出时，全局助手是您最可靠的参考手册和沙盒环境。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit Fuzzer Tag调试工具界面及Zlib编码参数详情" src="/en/assets/images/ch4-019-4daa11602205004c6451472fafba033f.png" width="2132" height="1080" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Fuzzer Tag调试工具界面及Zlib编码参数详情"><img decoding="async" loading="lazy" alt="Yakit Fuzzer Tag调试工具界面及Zlib编码参数详情" src="/en/assets/images/ch4-019-4daa11602205004c6451472fafba033f.png" width="2132" height="1080" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Fuzzer Tag调试工具界面及Zlib编码参数详情</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="快捷方式通过上下文菜单快速处理数据">快捷方式：通过上下文菜单快速处理数据<a href="#快捷方式通过上下文菜单快速处理数据" class="hash-link" aria-label="Direct link to 快捷方式：通过上下文菜单快速处理数据" title="Direct link to 快捷方式：通过上下文菜单快速处理数据" translate="no">​</a></h4>
 <p>当您对常用标签有一定了解，并希望提升操作效率时，上下文“智能菜单”是您的不二之选。这种方式尤其适合对已有数据进行编码、加密等处理。</p>
@@ -110,7 +110,7 @@
 <p><strong>适用场景</strong>：这是日常渗透测试中最高频的操作之一，适用于需要对特定参数进行快速编码或转换的场景，极大地简化了重复性工作。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit 右键菜单展示多种编码工具选项" src="/en/assets/images/ch4-020-960a1451be294a443598a62464b11037.png" width="1700" height="900" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 右键菜单展示多种编码工具选项"><img decoding="async" loading="lazy" alt="Yakit 右键菜单展示多种编码工具选项" src="/en/assets/images/ch4-020-960a1451be294a443598a62464b11037.png" width="1700" height="900" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 右键菜单展示多种编码工具选项</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="快捷补全利用代码自动补全高效编写">快捷补全：利用代码自动补全高效编写<a href="#快捷补全利用代码自动补全高效编写" class="hash-link" aria-label="Direct link to 快捷补全：利用代码自动补全高效编写" title="Direct link to 快捷补全：利用代码自动补全高效编写" translate="no">​</a></h4>
 <p>对于已经熟练掌握 Fuzztag 语法的高级用户和 Yaklang 开发者而言，直接在请求包中编写是最快的方式。Yakit 为此提供了强大的代码自动补全支持。</p>
@@ -125,12 +125,12 @@
 <p><strong>适用场景</strong>：当您明确知道需要使用的标签，追求极致的编写速度时，此方法效率最高。它是高级用户和脚本编写者的首选。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit 编辑器代码自动补全功能演示" src="/en/assets/images/ch4-021-c9074e217a7ff7d1cf81d77f6b224b73.png" width="1430" height="618" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 编辑器代码自动补全功能演示"><img decoding="async" loading="lazy" alt="Yakit 编辑器代码自动补全功能演示" src="/en/assets/images/ch4-021-c9074e217a7ff7d1cf81d77f6b224b73.png" width="1430" height="618" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 编辑器代码自动补全功能演示</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4422-fuzztag-的双重角色数据生成与数据处理">4.4.2.2 Fuzztag 的双重角色：数据生成与数据处理<a href="#4422-fuzztag-的双重角色数据生成与数据处理" class="hash-link" aria-label="Direct link to 4.4.2.2 Fuzztag 的双重角色：数据生成与数据处理" title="Direct link to 4.4.2.2 Fuzztag 的双重角色：数据生成与数据处理" translate="no">​</a></h3>
 <p>从功能角度看，所有的 Fuzztag 可被归为两大类：<strong>生成型标签</strong>与<strong>处理型标签</strong>。理解这种分类是掌握 Fuzztag 的关键，它有助于您在构造测试用例时，清晰地规划数据流：从何处生成原始数据，经过何种处理，最终形成怎样的测试载荷。</p>
 <p>为了便于实践，用户可以利用 Yakit 导航栏中的“安全工具”-&gt;“Fuzzer”-&gt;“Fuzztag 调试器”快速验证和学习这些标签。如下图所示，您可以在输入框中编写 Fuzztag，实时查看其渲染结果，这是掌握本节内容最有效的方法。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Fuzztag 数据生成与展示界面" src="/en/assets/images/ch4-022-9ef8a15411c14f89670b9ce47c13da9b.png" width="1318" height="165" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Fuzztag 数据生成与展示界面"><img decoding="async" loading="lazy" alt="Yakit Fuzztag 数据生成与展示界面" src="/en/assets/images/ch4-022-9ef8a15411c14f89670b9ce47c13da9b.png" width="1318" height="165" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Fuzztag 数据生成与展示界面</p>
 <p>标签的数量非常多，用户可以随时通过4.4.2.1中的Fuzztag助手进行查阅和快速学习。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="生成型标签作为数据的源头">生成型标签：作为数据的源头<a href="#生成型标签作为数据的源头" class="hash-link" aria-label="Direct link to 生成型标签：作为数据的源头" title="Direct link to 生成型标签：作为数据的源头" translate="no">​</a></h4>
@@ -157,7 +157,7 @@
 </ul>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="生成型标签数据源与结果展示" src="/en/assets/images/ch4-023-eaf94f8e08fa6ebc925a99ef354453c8.png" width="915" height="137" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 生成型标签数据源与结果展示"><img decoding="async" loading="lazy" alt="生成型标签数据源与结果展示" src="/en/assets/images/ch4-023-eaf94f8e08fa6ebc925a99ef354453c8.png" width="915" height="137" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：生成型标签数据源与结果展示</p>
 <ul>
 <li class=""><strong>应用场景</strong>：用于参数遍历、ID 枚举、字典爆破、随机化输入绕过缓存等。</li>
@@ -193,11 +193,11 @@
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例驱动创建并使用一个解码配方">案例驱动：创建并使用一个解码配方<a href="#案例驱动创建并使用一个解码配方" class="hash-link" aria-label="Direct link to 案例驱动：创建并使用一个解码配方" title="Direct link to 案例驱动：创建并使用一个解码配方" translate="no">​</a></h5>
 <p>为了具象化理解其工作流程，我们以一个实际案例——“对一个经过 Base64 和 URL 双重编码的数据进行解码”——来展示 <code>{{codecflow}}</code> 的威力。</p>
 <p><strong>第一步：在 Codec 模块中创建并保存配方</strong></p>
-<p><img decoding="async" loading="lazy" alt="Yakit创建解码配方保存顺序" src="/en/assets/images/ch4-024-7e52d54aed8e5bbe82e187243a7adb21.png" width="779" height="598" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit创建解码配方保存顺序"><img decoding="async" loading="lazy" alt="Yakit创建解码配方保存顺序" src="/en/assets/images/ch4-024-7e52d54aed8e5bbe82e187243a7adb21.png" width="779" height="598" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit创建解码配方保存顺序</p>
 <p>如上图所示，我们在 Yakit 的 Codec 模块中进行操作。首先，从左侧的“解码”分类中，依次将“URL 解码”和“base64解码”拖拽到右侧的“编解码顺序”工作区。然后，点击保存图标，将这个由两个步骤组成的流水线命名为 <code>url-base64-decode</code> 并保存。此后，这个配方就成为了一个可被全局调用的、可复用的处理逻辑。</p>
 <p><strong>第二步：在 Fuzzer 中调用已保存的配方</strong></p>
-<p><img decoding="async" loading="lazy" alt="Yakit 解码配方与模糊标签使用界面" src="/en/assets/images/ch4-025-d39b23fcd866ad865f6ce001d5fdb8e4.png" width="950" height="115" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 解码配方与模糊标签使用界面"><img decoding="async" loading="lazy" alt="Yakit 解码配方与模糊标签使用界面" src="/en/assets/images/ch4-025-d39b23fcd866ad865f6ce001d5fdb8e4.png" width="950" height="115" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 解码配方与模糊标签使用界面</p>
 <p>在 Fuzztag 调试器或 Web Fuzzer 的请求模板中，我们可以通过以下语法来调用刚刚创建的配方：</p>
 <div class="language-Plain language-plain codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-plain codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">{{codecflow(url-base64-decode|%61%47%56%73%62%47%38%74%64%32%39%79%62%47%51%3d)}}</span><br></span></code></pre></div></div>
@@ -215,7 +215,7 @@
 </ul>
 <p>当 Fuzzing 引擎执行此标签时，它会将输入数据 <code>%61...3d</code> 先进行 URL 解码得到 <code>aGVsbG8td29ybGQ=</code>，再将此结果进行 Base64 解码，最终得到清晰的明文 <code>hello-world</code>，并用此结果替换整个标签。</p>
 <p>如果你忘记了你刚刚保存的<code>codecflow</code>的规则名，可通过“历史存储”查看和重新使用来找回名字</p>
-<p><img decoding="async" loading="lazy" alt="解码配方历史存储与清空功能" src="/en/assets/images/ch4-026-49d066a66b298fad2c660ba28ad90071.png" width="508" height="272" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 解码配方历史存储与清空功能"><img decoding="async" loading="lazy" alt="解码配方历史存储与清空功能" src="/en/assets/images/ch4-026-49d066a66b298fad2c660ba28ad90071.png" width="508" height="272" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：解码配方历史存储与清空功能</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="内部工作原理回顾">内部工作原理回顾<a href="#内部工作原理回顾" class="hash-link" aria-label="Direct link to 内部工作原理回顾" title="Direct link to 内部工作原理回顾" translate="no">​</a></h5>
 <p>正如我们在 <code>2.3.5</code> 章节中深入探讨的，<code>{{codecflow}}</code> 的执行依赖于一条严谨的内部调用链路，确保了 Fuzzing 引擎与 Codec 模块的精确协同：</p>
@@ -238,7 +238,7 @@
 </ol>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="param在规则与序列中实现参数化与状态管理">{{param}}：在规则与序列中实现参数化与状态管理<a href="#param在规则与序列中实现参数化与状态管理" class="hash-link" aria-label="Direct link to {{param}}：在规则与序列中实现参数化与状态管理" title="Direct link to {{param}}：在规则与序列中实现参数化与状态管理" translate="no">​</a></h4>
 <p><code>{{param(...)}}</code>（可简写为 <code>{{p(...)}}</code>）是实现状态管理（State Management）和配置复用的关键指令。它允许我们在 Fuzzing 任务的执行期间定义、存储和引用变量，其应用场景在“规则”和“序列”模式下各有侧重。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 规则与序列中的变量配置界面" src="/en/assets/images/ch4-027-e250d86673cce59cda8c1a366846967b.png" width="1144" height="603" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 规则与序列中的变量配置界面"><img decoding="async" loading="lazy" alt="Yakit 规则与序列中的变量配置界面" src="/en/assets/images/ch4-027-e250d86673cce59cda8c1a366846967b.png" width="1144" height="603" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 规则与序列中的变量配置界面</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="在规则中定义静态变量与任务级常量">在“规则”中定义静态变量与任务级常量<a href="#在规则中定义静态变量与任务级常量" class="hash-link" aria-label="Direct link to 在“规则”中定义静态变量与任务级常量" title="Direct link to 在“规则”中定义静态变量与任务级常量" translate="no">​</a></h5>
 <p>如上图左侧所示，在 Web Fuzzer 的“规则”配置界面，可以通过“设置变量”功能定义一个变量。例如，设置一个名为 <code>nuclei</code> 的变量，其值为 <code>fuzztag</code>。</p>
@@ -456,7 +456,7 @@
 <p>最终，发送到服务器的实际载荷被精确地重组为 <code>{&quot;key&quot;: &quot;{{7*7}}&quot;}</code>，成功绕过了本地 Fuzztag 解析器的限制。具体案例用户可直接通过下面查看</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer JSON载荷模板注入示例" src="/en/assets/images/ch4-028-7788726fb2d15b002eef0c27a69ed20c.png" width="764" height="117" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer JSON载荷模板注入示例"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer JSON载荷模板注入示例" src="/en/assets/images/ch4-028-7788726fb2d15b002eef0c27a69ed20c.png" width="764" height="117" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer JSON载荷模板注入示例</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="注入非可见字符">注入非可见字符<a href="#注入非可见字符" class="hash-link" aria-label="Direct link to 注入非可见字符" title="Direct link to 注入非可见字符" translate="no">​</a></h3>
 <p>在前一节中，我们解决了如何在 Fuzztag 语法中处理 <code>{{</code>、<code>}</code> 等可见的特殊字符。然而，在真实的网络攻防场景中，对<strong>非可见字符</strong>（如空字符 <code>\x00</code>、回车换行 <code>CRLF</code>）的精确控制同样是攻击能否成功的关键。这些字符在协议层面或特定语言的解析器中具有特殊含义，能够导致截断、绕过等致命缺陷。</p>
@@ -489,7 +489,7 @@
 <p><strong>HTTP 请求包构造：</strong></p>
 <div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">POST /upload HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: example.com</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">------WebKitFormBoundary7MA4YWxkTrZu0gW</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;shell.php{{null}}.jpg&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Content-Type: image/jpeg</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">&lt;?php phpinfo(); ?&gt;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">------WebKitFormBoundary7MA4YWxkTrZu0gW--</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
 <p>通过这种方式，<code>{{null}}</code> 标签成为了连接 Fuzztag 能力与底层漏洞原理的关键桥梁，使得原本需要特殊工具才能实现的攻击载荷，可以用声明式的方式轻松构造。用户在 Web Fuzzer 输入后，可看到如下<code>{{null}}</code>高亮后的内容：</p>
-<p><img decoding="async" loading="lazy" alt="Yakit工具构造PHP空字符截断漏洞请求" src="/en/assets/images/ch4-029-f5059124e7784872596c4f8fbdca2dbe.png" width="868" height="353" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit工具构造PHP空字符截断漏洞请求"><img decoding="async" loading="lazy" alt="Yakit工具构造PHP空字符截断漏洞请求" src="/en/assets/images/ch4-029-f5059124e7784872596c4f8fbdca2dbe.png" width="868" height="353" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit工具构造PHP空字符截断漏洞请求</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="终极方案使用和处理原始文本块">终极方案：使用{{=和=}}处理原始文本块<a href="#终极方案使用和处理原始文本块" class="hash-link" aria-label="Direct link to 终极方案：使用{{=和=}}处理原始文本块" title="Direct link to 终极方案：使用{{=和=}}处理原始文本块" translate="no">​</a></h3>
 <p>在前面的章节中，我们探讨了 Fuzztag 中标准的转义与编码机制，这些机制是处理动态数据注入的基础。然而，在面对包含复杂内嵌语法或需保持绝对字面保真度的静态数据块时，传统方法显得力不从心。本章将深入剖析 Fuzztag 的终极解决方案——原始文本块（Raw Literal Block）<code>{{=...=}}</code>。我们将围绕其**“解析豁免”的核心原理<strong>与</strong>“高保真载荷构造”的工程实践**两大命题展开，阐明该机制如何从根本上解决语法冲突，确保复杂载荷的精确传递，这对于高级安全测试和复杂系统集成场景至关重要。</p>
@@ -631,7 +631,7 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="编写热加载函数返回单字符串">编写热加载函数（返回单字符串）<a href="#编写热加载函数返回单字符串" class="hash-link" aria-label="Direct link to 编写热加载函数（返回单字符串）" title="Direct link to 编写热加载函数（返回单字符串）" translate="no">​</a></h4>
 <p>首先，我们需要在“热加载代码”编辑器中定义处理逻辑。如下图所示，我们创建了一个名为 <code>appendPrefix</code> 的函数，它接收一个参数 <code>data</code>，并返回一个拼接了固定前缀的新字符串。</p>
 <div class="language-Plain language-plain codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-plain codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// 定义一个函数，用于为输入数据添加特定前缀</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">func appendPrefix(data) {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    return &quot;string-prefix-is-me====&quot; + data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" alt="Yakit 热加载函数编写界面及 Go 代码示例" src="/en/assets/images/ch4-030-1989d642946b7b08be188c50f71e322e.png" width="915" height="797" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 热加载函数编写界面及 Go 代码示例"><img decoding="async" loading="lazy" alt="Yakit 热加载函数编写界面及 Go 代码示例" src="/en/assets/images/ch4-030-1989d642946b7b08be188c50f71e322e.png" width="915" height="797" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 热加载函数编写界面及 Go 代码示例</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="在请求模板中调用">在请求模板中调用<a href="#在请求模板中调用" class="hash-link" aria-label="Direct link to 在请求模板中调用" title="Direct link to 在请求模板中调用" translate="no">​</a></h4>
 <p>接着，我们在请求报文模板中，使用 <code>{{yak(...)}}</code> 语法来调用这个刚刚定义的函数。在这里，我们希望为字符串 <code>abc</code> 添加前缀。</p>
@@ -641,7 +641,7 @@
 <li class=""><strong>调试与验证</strong></li>
 </ol>
 <p>在正式发起大规模 Fuzz 之前，Yakit 提供了“调试执行”功能，可以即时验证热加载标签的输出是否符合预期。点击“调试执行”，系统会弹出一个窗口，清晰地展示该标签经过 Yak 引擎解释执行后的最终结果。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit热加载代码调用与结果展示" src="/en/assets/images/ch4-031-dad5491a100df2a143965b4216f9fd41.png" width="665" height="635" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit热加载代码调用与结果展示"><img decoding="async" loading="lazy" alt="Yakit热加载代码调用与结果展示" src="/en/assets/images/ch4-031-dad5491a100df2a143965b4216f9fd41.png" width="665" height="635" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit热加载代码调用与结果展示</p>
 <p>如上图所示，输出结果与我们的预期完全一致。这个简单的案例完整地演示了从 <strong>定义逻辑</strong> -&gt; <strong>模板调用</strong> -&gt; <strong>运行时生成</strong> 的全过程。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="通过返回数组实现一对多-payload-生成">通过返回数组实现一对多 Payload 生成<a href="#通过返回数组实现一对多-payload-生成" class="hash-link" aria-label="Direct link to 通过返回数组实现一对多 Payload 生成" title="Direct link to 通过返回数组实现一对多 Payload 生成" translate="no">​</a></h4>
@@ -662,7 +662,7 @@
 <li class=""><strong>结果解析与引擎行为</strong>：
 当 Fuzz 任务启动时，引擎执行 <code>handleCommaSplit(&quot;a,b,c,d&quot;)</code>，并收到返回值——一个包含四个元素的数组 <code>[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</code>。此时，引擎的迭代机制被激活：它会依次取出数组中的每个元素，生成四个独立的请求，其 <code>orderId</code> 参数值分别为 <code>a</code>、<code>b</code>、<code>c</code> 和 <code>d</code>。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer通过handleCommaSplit生成多组Payload" src="/en/assets/images/ch4-032-bc6d97650a2aa8979c489d7e0445ce42.png" width="1113" height="311" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer通过handleCommaSplit生成多组Payload"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer通过handleCommaSplit生成多组Payload" src="/en/assets/images/ch4-032-bc6d97650a2aa8979c489d7e0445ce42.png" width="1113" height="311" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer通过handleCommaSplit生成多组Payload</p>
 <p>这个案例清晰地展示了同步返回模式的强大之处：用户只需编写简单的逻辑来生成一个数据集（数组），即可将繁琐的迭代任务完全交给 Fuzzer 引擎自动完成。这为动态生成复杂、批量的测试用例提供了极大的便利。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4443-异步模式流式实时生成">4.4.4.3 异步模式：流式实时生成<a href="#4443-异步模式流式实时生成" class="hash-link" aria-label="Direct link to 4.4.4.3 异步模式：流式实时生成" title="Direct link to 4.4.4.3 异步模式：流式实时生成" translate="no">​</a></h3>
@@ -725,7 +725,7 @@
 </li>
 </ul>
 <p>您会在结果列表中看到，每隔约 0.5 秒就会出现一条新的测试结果，而不是等待 2.5 秒后一次性出现。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 实时生成带延迟的 MD5 值演示" src="/en/assets/images/ch4-033-567f4b1c7a47e1b2cc693d1b9a2319bd.png" width="1367" height="334" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 实时生成带延迟的 MD5 值演示"><img decoding="async" loading="lazy" alt="Yakit 实时生成带延迟的 MD5 值演示" src="/en/assets/images/ch4-033-567f4b1c7a47e1b2cc693d1b9a2319bd.png" width="1367" height="334" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 实时生成带延迟的 MD5 值演示</p>
 <p>通过这个案例，我们清晰地看到，异步产出模式将 Payload 的生成过程从一个“批处理任务”转变为一个“数据流”，是应对复杂动态场景、提升 Fuzz 效率的终极武器。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4444-嵌套调用与组合范式">4.4.4.4 嵌套调用与组合范式<a href="#4444-嵌套调用与组合范式" class="hash-link" aria-label="Direct link to 4.4.4.4 嵌套调用与组合范式" title="Direct link to 4.4.4.4 嵌套调用与组合范式" translate="no">​</a></h3>
@@ -771,10 +771,10 @@
 <p>选择并启动 <code>Vulinbox</code> 靶场服务。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Vulinbox靶场启动参数配置界面" src="/en/assets/images/ch4-034-6f97244b5c15a31e323a727ff5325125.png" width="1489" height="820" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox靶场启动参数配置界面"><img decoding="async" loading="lazy" alt="Vulinbox靶场启动参数配置界面" src="/en/assets/images/ch4-034-6f97244b5c15a31e323a727ff5325125.png" width="1489" height="820" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox靶场启动参数配置界面</p>
 <p>启动后，在 Vulinbox 的漏洞列表中搜索关键字“遍历”，并选择“遍历与爆破练习 - 订单详情页面（爆破 / 遍历订单号为 4 位数字 0-9999）”这一靶场。</p>
-<p><img decoding="async" loading="lazy" alt="Vulinbox Agent 界面展示漏洞筛选与订单详情页面" src="/en/assets/images/ch4-035-5a8bbd0283448761bab19a7a98e976f7.png" width="1380" height="678" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox Agent 界面展示漏洞筛选与订单详情页面"><img decoding="async" loading="lazy" alt="Vulinbox Agent 界面展示漏洞筛选与订单详情页面" src="/en/assets/images/ch4-035-5a8bbd0283448761bab19a7a98e976f7.png" width="1380" height="678" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox Agent 界面展示漏洞筛选与订单详情页面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第二步捕获请求并构造测试模板">第二步：捕获请求并构造测试模板<a href="#第二步捕获请求并构造测试模板" class="hash-link" aria-label="Direct link to 第二步：捕获请求并构造测试模板" title="Direct link to 第二步：捕获请求并构造测试模板" translate="no">​</a></h4>
 <p>进入靶场页面后，系统会展示一个示例请求。这是我们构造请求模板的基础。</p>
@@ -789,7 +789,7 @@
 <p>定位到核心参数 <code>orderId=3321</code>，将其修改为 Fuzztag 动态载荷生成器：<code>orderId={{int(0-9999)}}</code>。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit界面展示包含整数模糊测试的HTTP请求构造" src="/en/assets/images/ch4-036-98514537d4650fd84725b041c66d8905.png" width="824" height="281" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit界面展示包含整数模糊测试的HTTP请求构造"><img decoding="async" loading="lazy" alt="Yakit界面展示包含整数模糊测试的HTTP请求构造" src="/en/assets/images/ch4-036-98514537d4650fd84725b041c66d8905.png" width="824" height="281" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit界面展示包含整数模糊测试的HTTP请求构造</p>
 <p>这里的 <code>{{int(0-9999)}}</code> 是 Fuzztag 的内置函数，其作用是生成一个从 0 到 9999 的整数序列。通过这一步，我们就完成了一个从静态请求到动态测试模板的转换。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三步执行测试与结果分析">第三步：执行测试与结果分析<a href="#第三步执行测试与结果分析" class="hash-link" aria-label="Direct link to 第三步：执行测试与结果分析" title="Direct link to 第三步：执行测试与结果分析" translate="no">​</a></h4>
@@ -805,14 +805,14 @@
 <p><strong>实时反馈</strong>：界面右侧的响应列表会实时更新每次请求的结果，包括状态码、响应大小、响应时间以及当前使用的 Payload 值。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer 执行测试界面与结果列表" src="/en/assets/images/ch4-037-ea132ceaf7f5486a1dae9dcf146749e1.png" width="1232" height="496" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer 执行测试界面与结果列表"><img decoding="async" loading="lazy" alt="Web Fuzzer 执行测试界面与结果列表" src="/en/assets/images/ch4-037-ea132ceaf7f5486a1dae9dcf146749e1.png" width="1232" height="496" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer 执行测试界面与结果列表</p>
 <p>通过对响应列表进行排序或筛选（例如，筛选出包含特定关键字的响应），测试人员可以迅速定位到所有存在的、可被访问的有效订单ID，从而验证是否存在水平越权访问漏洞（具体的筛选方式方法我们在后面章节详细讲述）。</p>
 <p>上述基础案例完整地展示了 Web Fuzzer 的核心工作流，它将一个原本需要手动重复上万次的操作，简化为一次配置和点击，体现了自动化工具在安全测试中的巨大价值。</p>
 <p>真实的业务场景远比此复杂。我们经常面临多参数关联爆破（如用户名和密码）、动态令牌（如 CSRF-Token）处理、以及业务逻辑强相关的数据遍历（如用户ID和其名下的订单ID必须对应）等高级挑战。这些场景无法通过简单的单参数生成器解决，需要运用 Fuzztag 更为复杂的联动与数据处理机制。接下来的章节，我们将逐一攻克这些难题。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4453-实践案例二时间戳与序列号结合的订单-id">4.4.5.3 实践案例二：时间戳与序列号结合的订单 ID<a href="#4453-实践案例二时间戳与序列号结合的订单-id" class="hash-link" aria-label="Direct link to 4.4.5.3 实践案例二：时间戳与序列号结合的订单 ID" title="Direct link to 4.4.5.3 实践案例二：时间戳与序列号结合的订单 ID" translate="no">​</a></h3>
 <p>通过之前的学习，我们掌握了利用 Web Fuzzer 对单一、独立的参数进行自动化遍历的基础工作流。然而，在真实的业务系统中，参数的结构往往更为复杂。一个常见的模式是，单个参数值本身由多个动态部分组合而成，例如，一个订单号可能由“日期前缀”与“自增序列号”拼接而成。这种场景对测试工具的载荷生成能力提出了更高的要求。接下来我们就对这种场景进行探索，用户可以通过第二个案例进入靶场：</p>
-<p><img decoding="async" loading="lazy" alt="订单详情页面参数爆破练习" src="/en/assets/images/ch4-038-fb9f09f062f6fae3e1e9e84f21b88619.png" width="1239" height="568" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 订单详情页面参数爆破练习"><img decoding="async" loading="lazy" alt="订单详情页面参数爆破练习" src="/en/assets/images/ch4-038-fb9f09f062f6fae3e1e9e84f21b88619.png" width="1239" height="568" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：订单详情页面参数爆破练习</p>
 <p>与前例不同，这里的 <code>orderId</code> 参数展现出一种复合结构。</p>
 <p>通过对请求 <code>GET /bruteplayground/by-order-id-2?orderId=202506220001</code> 进行分析，可以清晰地识别出 <code>orderId</code> 的构成规则：<code>[日期前缀][4位序列号]</code>。</p>
@@ -845,7 +845,7 @@
 <code>orderId={{date(YYYYMMdd)}}{{int(0000-9999)}}</code></p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit HTTP请求编辑器中的Fuzztag语法示例" src="/en/assets/images/ch4-039-b6c973e2e46b6b0c295aeae38125e99e.png" width="923" height="288" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit HTTP请求编辑器中的Fuzztag语法示例"><img decoding="async" loading="lazy" alt="Yakit HTTP请求编辑器中的Fuzztag语法示例" src="/en/assets/images/ch4-039-b6c973e2e46b6b0c295aeae38125e99e.png" width="923" height="288" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit HTTP请求编辑器中的Fuzztag语法示例</p>
 <p><strong>执行与结果解析</strong></p>
 <p>当测试启动后，Web Fuzzer 引擎的执行逻辑如下：</p>
@@ -860,7 +860,7 @@
 <p>引擎将第一步的静态日期前缀与第二步的每一个动态数字进行字符串拼接，形成最终的载荷，如 <code>20250622</code>、<code>202506220001</code>、<code>202506220002</code> 等，并构建完整的 HTTP 请求发送出去。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer界面展示Fuzztag生成器串联应用" src="/en/assets/images/ch4-040-68d0bfadda14a11b24e8cfb5a5376406.png" width="1362" height="394" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer界面展示Fuzztag生成器串联应用"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer界面展示Fuzztag生成器串联应用" src="/en/assets/images/ch4-040-68d0bfadda14a11b24e8cfb5a5376406.png" width="1362" height="394" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer界面展示Fuzztag生成器串联应用</p>
 <p><strong>关键点说明：</strong><code>Payloads</code>** 列的展示机制**</p>
 <p>请注意，Web Fuzzer 的结果列表中 <code>Payloads</code> 列的设计是为了便于调试和追溯。当一个参数由多个 Fuzztag 生成器组合而成时，该列会使用逗号 <code>,</code> 将每个生成器的当次输出值分隔开，例如 <code>20250606,0001</code>。这清晰地展示了最终载荷的构成来源。然而，在实际发送的 HTTP 请求中，这些值是被无缝拼接在一起的（即 <code>orderId=202506220001</code>），并不包含逗号。</p>

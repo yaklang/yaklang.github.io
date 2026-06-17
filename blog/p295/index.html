@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">使用Yakit进行常规渗透测试 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p295"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="使用Yakit进行常规渗透测试 | Yak Program Language"><meta data-rh="true" name="description" content="说明：本文项目中涉及的任何软件工具，仅用于测试和学习研究，其所用目标的环境为个人在本机的靶机环境，数据仅在本地，未对他人信息系统造成任何破坏，文章表达所展现的观点及技术等信息仅用于学习交流。"><meta data-rh="true" property="og:description" content="说明：本文项目中涉及的任何软件工具，仅用于测试和学习研究，其所用目标的环境为个人在本机的靶机环境，数据仅在本地，未对他人信息系统造成任何破坏，文章表达所展现的观点及技术等信息仅用于学习交流。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-02-25T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p295"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p295" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p295" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p295" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p295","mainEntityOfPage":"https://yaklang.com/blog/p295","url":"https://yaklang.com/blog/p295","headline":"使用Yakit进行常规渗透测试","name":"使用Yakit进行常规渗透测试","description":"说明：本文项目中涉及的任何软件工具，仅用于测试和学习研究，其所用目标的环境为个人在本机的靶机环境，数据仅在本地，未对他人信息系统造成任何破坏，文章表达所展现的观点及技术等信息仅用于学习交流。","datePublished":"2022-02-25T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,43 +18,43 @@
 <p>简单来说就是为安全而开发的一种语言的方言。</p>
 <p>关于Yakit</p>
 <p>Yakit 是一个基于yak语言编写的工具，功能类似Burpsuite，主要功能有拦截http/s数据包，漏洞检测，网站地图，自动/手动测试web应用，编码解码，请求与响应差异数据化等功能，此外yakit插件库还集成了多个专项漏洞检测的插件，支持检测排查新发现的以及过去的经典级漏洞，如log4j2漏洞和struts2漏洞。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/21b005f1e91aae8a-9494a5d91fe55de13050e0dfa010cb06.png" width="554" height="289" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1c7fc2edcc0a2b0-36db601afa6fe6c70c1dc2460ccbb4a8.png" width="865" height="334" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/21b005f1e91aae8a-9494a5d91fe55de13050e0dfa010cb06.png" width="554" height="289" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c1c7fc2edcc0a2b0-36db601afa6fe6c70c1dc2460ccbb4a8.png" width="865" height="334" class="yakdoc-image"></button></p>
 <p>扫描端口、指纹</p>
 <p>靶场：192.168.131.130</p>
 <p>Yakit所在的：192.168.131.2</p>
 <p>点击左侧的基础安全工具---扫描端口/指纹---填写目标IP----其他项目保持默认即可---下滑到底部---点击开始扫描端口---等待结果</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9fc61aff62c0ed16-7e2defa1481752d6947cede2b91bd91e.png" width="865" height="514" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4dad395152d64fb1-d468f6d22c755bfa31dd59fdab92f7ac.png" width="865" height="554" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/9fc61aff62c0ed16-7e2defa1481752d6947cede2b91bd91e.png" width="865" height="514" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4dad395152d64fb1-d468f6d22c755bfa31dd59fdab92f7ac.png" width="865" height="554" class="yakdoc-image"></button></p>
 <p>扫描发现主机开放了ssh服务web服务，当然，这些都是常见端口，对于其他特定端口我们可以调整端口范围，不过最大目前只能扫描200个端口，还无法全端口扫描，一般来说，我们常规保持默认即可。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/53d9b43bd2819a2d-238fcc0f78603c864456bf616df4c8a7.png" width="798" height="386" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/35917c979c93fa85-c3d2bff0416ac415239d902e0d842710.png" width="865" height="454" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/53d9b43bd2819a2d-238fcc0f78603c864456bf616df4c8a7.png" width="798" height="386" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/35917c979c93fa85-c3d2bff0416ac415239d902e0d842710.png" width="865" height="454" class="yakdoc-image"></button></p>
 <p><strong>Web服务</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f4283a97eb4f0634-aa866905f89856a720318b1c50e9e020.png" width="865" height="499" class="img_ev3q"></p>
-<p><strong>ssh服务<img decoding="async" loading="lazy" alt="image" src="/assets/images/26304b207efb5591-b89c2e25e83b7f45bd20c89311818760.png" width="865" height="222" class="img_ev3q"></strong></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f4283a97eb4f0634-aa866905f89856a720318b1c50e9e020.png" width="865" height="499" class="yakdoc-image"></button></p>
+<p><strong>ssh服务<button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/26304b207efb5591-b89c2e25e83b7f45bd20c89311818760.png" width="865" height="222" class="yakdoc-image"></button></strong></p>
 <p>两个端口处都有登录框，可以从爆力登录试试，而web服务可以查看中间件版本是否有对应版本相关的漏洞。</p>
 <p>登录口令爆破</p>
 <p>点击基础安全工具---爆破与未授权---右侧的可用爆破类型里，目前只有11个类型可用，没有web登录的，一般的也足够了，那这里就只能勾选ssh类型了。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e654185d8b8264fb-4343bc243c41cff34e6aa58c1099f718.png" width="670" height="605" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e654185d8b8264fb-4343bc243c41cff34e6aa58c1099f718.png" width="670" height="605" class="yakdoc-image"></button></p>
 <p>之后右边这里填写好目标IP后，需要指定字典，点击更多参数</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/53e7dfd2cf28ebfb-03d222d97e612b859f2ddc19ec6ac1e5.png" width="865" height="328" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/53e7dfd2cf28ebfb-03d222d97e612b859f2ddc19ec6ac1e5.png" width="865" height="328" class="yakdoc-image"></button></p>
 <p>指定字典，预设字典可以在左侧的payload管理里修改，也可以增加，由于这里我没有添加，所以就写了几个试试。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d6ad9d816cc59e7c-03263600b2199072e3608e2dfaa33d95.png" width="865" height="615" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d6ad9d816cc59e7c-03263600b2199072e3608e2dfaa33d95.png" width="865" height="615" class="yakdoc-image"></button></p>
 <p>填写完后，没有确定按钮，就只能点击右上角关闭，应该是实时保存了的，之后就点击开始检测，走起。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7f9a24a7986f08fd-c72ce4857b7a67b2b97a7fea650ba6ec.png" width="865" height="402" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/7f9a24a7986f08fd-c72ce4857b7a67b2b97a7fea650ba6ec.png" width="865" height="402" class="yakdoc-image"></button></p>
 <p>很快之后，出一个了，Yakit速度还是蛮快的，还是字典的原因？不管了，登录试试看看。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e96ca6f8b129cd06-31b4b24b1d08afd5db7b37bab3b30f1d.png" width="865" height="443" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e96ca6f8b129cd06-31b4b24b1d08afd5db7b37bab3b30f1d.png" width="865" height="443" class="yakdoc-image"></button></p>
 <p>登录进去之后，可惜权限很小，在家目录发现了flag4，打开看，应该是想让我们以同样方法试试其他服务拿到root权限，可惜目前yakit不支持对接web登录框。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/89000cc74ed677c3-44705779dca8d46fe05f0e180c771398.png" width="865" height="536" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/89000cc74ed677c3-44705779dca8d46fe05f0e180c771398.png" width="865" height="536" class="yakdoc-image"></button></p>
 <p>再找找看其他地方还有没有flag。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5c18306fcc0076b2-f95bd56183e92967fc7f88e4400324d2.png" width="746" height="355" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5c18306fcc0076b2-f95bd56183e92967fc7f88e4400324d2.png" width="746" height="355" class="yakdoc-image"></button></p>
 <p>最终是在这个文件里找到了flag2，这个文件里面还有数据库的配置信息，其他的目录则需要更高权限查看了，可以从权限提升方面着手。</p>
 <p>权限提升</p>
 <p>目标主机是Linux系统，我们可以用最近曝出的Polkit pkexec for Linux本地权限提升漏洞CVE-2021-4034方法来提权，这个相对而言成功率比其他方式高。</p>
 <p>可以通过第三方远程工具来将文件上传至目标主机。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/297a70c3da0550ae-5f52838a81c76443e2755f1c1703a862.png" width="865" height="444" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/297a70c3da0550ae-5f52838a81c76443e2755f1c1703a862.png" width="865" height="444" class="yakdoc-image"></button></p>
 <p>上传之后，执行试试看。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/632bc52f15250ef9-5f059bdcfe7c090b973dab6b204ae8bb.png" width="865" height="334" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/632bc52f15250ef9-5f059bdcfe7c090b973dab6b204ae8bb.png" width="865" height="334" class="yakdoc-image"></button></p>
 <p>翻车了额，目标主机没有python3环境。</p>
 <p>Yakit使用心得</p>
 <p>虽然最终没有获取到另外的flag，也没有获取到管理员权限，但对于当前的yakit而言，是很不错的非常NICE的一个工具，对用户起到了很好的辅路链路效果，而其他功能自己也还没体验，还没发现yakit的真正厉害之处，特别是yak runner，专项漏洞检测，反连管理，数据库等很多压箱底的实用性功能，总体而言yakit界面友好，排版美观，容易上手，使用流畅，提升了工作效率，这次是使用yakit为主的渗透测试之旅。期待yakti以后会越来越好。</p>

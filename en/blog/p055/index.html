@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">功能上新 | 流量分析，一键启动！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p055"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="功能上新 | 流量分析，一键启动！ | Yak Program Language"><meta data-rh="true" name="description" content="本期分享文章分享的是 Yakit 最近上线的流量分析功能。"><meta data-rh="true" property="og:description" content="本期分享文章分享的是 Yakit 最近上线的流量分析功能。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-04-30T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,流量分析"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p055"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p055" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p055" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p055" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p055","mainEntityOfPage":"https://yaklang.com/en/blog/p055","url":"https://yaklang.com/en/blog/p055","headline":"功能上新 | 流量分析，一键启动！","name":"功能上新 | 流量分析，一键启动！","description":"本期分享文章分享的是 Yakit 最近上线的流量分析功能。","datePublished":"2025-04-30T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -22,7 +22,7 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="为什么需要流量分析">为什么需要流量分析<a href="#为什么需要流量分析" class="hash-link" aria-label="Direct link to 为什么需要流量分析" title="Direct link to 为什么需要流量分析" translate="no">​</a></h2>
 <p>为什么需要流量分析功能呢？</p>
 <p>在以往，我们一般通过 <code>History </code>页面来处理已经存进数据库的流量，通过关键词、网站树等方法筛选出我们想要的流量。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f15e807ce1a19641-9a37eb43e1c176932b7bd13f01fe92ec.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f15e807ce1a19641-9a37eb43e1c176932b7bd13f01fe92ec.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>一般情况下这是足够用的，但是如果需要符合筛选就比较难了。比如：筛选出请求包中包括&quot;baidu&quot;，返回包包含&quot;helloworld&quot;的流量，那么单纯关键字搜索框就无法满足我们的需求了。</p>
 <p>这个时候，有使用 Yaklang 编程经验的用户，可能会通过 YAK 代码完成这项需求。通过 <code>db.QueryHTTPFlowsAll() </code>的遍历数据库的所有流量数据，拿出所有合适的内容。</p>
 <p>这是一种很好的解决思路。事实上，流量分析也正是通过遍历数据库的流量、分析，拿到最终的结果。不过，流量分析能够完成的工作不止这些，它还支持使用 MITM 提取器规则进行分析，这意味着在有新规则的时候，能够对旧的流量数据再次进行分析。</p>
@@ -30,21 +30,21 @@
 <p>我们先大体介绍一下 Yakit 流量分析的功能分布以及运行流程。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="功能分布">功能分布<a href="#功能分布" class="hash-link" aria-label="Direct link to 功能分布" title="Direct link to 功能分布" translate="no">​</a></h2>
 <p>流量分析功能页面的入口在<strong>History</strong>右边的小图标上面：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f7f59bfab67f3c8f-9546cda3b21e3012d47b07df5b0378fe.png" width="1080" height="582" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8a94db365db4294c-2e87b447dc1b5065c477c6aebebab2fd.png" width="1080" height="458" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f7f59bfab67f3c8f-9546cda3b21e3012d47b07df5b0378fe.png" width="1080" height="582" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8a94db365db4294c-2e87b447dc1b5065c477c6aebebab2fd.png" width="1080" height="458" class="yakdoc-image"></button></p>
 <p>如上图，流量分析功能大概分为三大部分：</p>
 <ol>
 <li class="">筛选页面。这个页面和History一样，你可以通过<code>网站树</code>、<code>关键字</code>、<code>协议类型</code>等各种方式筛选你想要进行分析的流量，避免将所有数据库的流量都进行分析，造成性能负担。</li>
 <li class="">分析方式。分析方式分为<code>规则</code>与<code>热加载</code>，<code>规则</code>就是MITM匹配器的规则，而<code>热加载</code>则赋予使用代码处理流量的能力。这两种分析方式是并存的，也就是如果同时配置规则与热加载，他们都会运行。</li>
-<li class="">配置页面。这个页面是一些流量分析功能一些配置信息，包括数据类型、并发以及单条记录的去重等。 <img decoding="async" loading="lazy" alt="image" src="/en/assets/images/74e39cab3a6721e7-0db2c3384713c108647c2b3d3eca7edd.png" width="1080" height="300" class="img_ev3q"></li>
+<li class="">配置页面。这个页面是一些流量分析功能一些配置信息，包括数据类型、并发以及单条记录的去重等。 <button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/74e39cab3a6721e7-0db2c3384713c108647c2b3d3eca7edd.png" width="1080" height="300" class="yakdoc-image"></button></li>
 </ol>
 <p>流量分析是个简单的输入输出模型，运行流程图如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/41d3131cb38e5a70-c08d6747b7c9e2f9b863dd4d46bae8d7.png" width="1080" height="706" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/41d3131cb38e5a70-c08d6747b7c9e2f9b863dd4d46bae8d7.png" width="1080" height="706" class="yakdoc-image"></button></p>
 <p>接下来，文章会对 Yakit 的数据输入、流量分析、结果处理模块做个详细的介绍。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="具体功能讲解">具体功能讲解<a href="#具体功能讲解" class="hash-link" aria-label="Direct link to 具体功能讲解" title="Direct link to 具体功能讲解" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据输入">数据输入<a href="#数据输入" class="hash-link" aria-label="Direct link to 数据输入" title="Direct link to 数据输入" translate="no">​</a></h2>
 <p>选择数据的输入可以通过配置页面进行配置：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d8b440ca69419bf-d100b6c1579a48031233f18678d5d1c9.png" width="806" height="405" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d8b440ca69419bf-d100b6c1579a48031233f18678d5d1c9.png" width="806" height="405" class="yakdoc-image"></button></p>
 <p>在配置页面中，有数据类型设置，分别为<strong>筛选流量</strong>和<strong>数据包</strong>。这两个设置其实代表着想要分析的流量的来源。</p>
 <ul>
 <li class="">筛选流量：设置以后会通过筛选页面设置的条件，从数据库中遍历每个符合条件的流量进行分析。</li>
@@ -52,7 +52,7 @@
 </ul>
 <p>默认使用的是筛选流量，只有设置了筛选流量后筛选页面才能生效。</p>
 <p>如果设置数据包，那么需要手动填入要分析的流量：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8c2a2d926f0441d4-c88753119d6c60009d4623ec000daec5.png" width="1080" height="473" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8c2a2d926f0441d4-c88753119d6c60009d4623ec000daec5.png" width="1080" height="473" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则与热加载">规则与热加载<a href="#规则与热加载" class="hash-link" aria-label="Direct link to 规则与热加载" title="Direct link to 规则与热加载" translate="no">​</a></h2>
 <p>流量分析分为规则分析和热加载分析，他们可以同时运行。</p>
 <p>（一）规则</p>
@@ -63,20 +63,20 @@
 <li class="">flow：从数据源来的流量。</li>
 <li class="">extract：用来提取分析完成的流量。extract 方法有两个参数，第一个参数为提取的规则名，第二个参数为提取的流量。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5e356cb5ebff441-bd73c3c1373893e007e03a75a0e3cf9d.png" width="1080" height="264" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5e356cb5ebff441-bd73c3c1373893e007e03a75a0e3cf9d.png" width="1080" height="264" class="yakdoc-image"></button></p>
 <p>我们使用热加载来实现上面我们提到的需求：筛选出请求包中包括“baidu”，返回包包含“helloworld”的流量，同时我们还可以将其标记为绿色。</p>
 <p>热加载代码：</p>
 <div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">analyzeHTTPFlow </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">func</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">flow </span><span class="token comment" style="color:#999988;font-style:italic">/* *yakit.HTTPFlow */</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">extract </span><span class="token comment" style="color:#999988;font-style:italic">/*func(ruleName string, flow *yakit.HTTPFlow)*/</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword control-flow" style="color:#00009f">if</span><span class="token plain"> str</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access maybe-class-name" style="color:#d73a49">Contains</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">flow</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access maybe-class-name">Request</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;baidu&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">&amp;&amp;</span><span class="token plain"> str</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access maybe-class-name" style="color:#d73a49">Contains</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">flow</span><span class="token punctuation" style="color:#393A34">.</span><span class="token property-access maybe-class-name">Response</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;helloworld&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        flow</span><span class="token punctuation" style="color:#393A34">.</span><span class="token method function property-access maybe-class-name" style="color:#d73a49">Green</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token function" style="color:#d73a49">extract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;提取helloworld&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain">flow</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
 <p>结果如下：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ada68ffe0806b318-0e4ea9ae2abf950d44c5fef47aaaaad3.png" width="1080" height="478" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ada68ffe0806b318-0e4ea9ae2abf950d44c5fef47aaaaad3.png" width="1080" height="478" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="结果处理_">结果处理_<a href="#结果处理_" class="hash-link" aria-label="Direct link to 结果处理_" title="Direct link to 结果处理_" translate="no">​</a></h2>
 <p>在流量分析完以后，可以查看匹配到的内容。如上图，可以看到两个“导出”的按钮：上面的导出为将本次所有提取的规则数据进行导出，下面的导出则针对单条数据匹配到的规则。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d44e1733563a79ad-a7d91f3ae17f9ab0d860fad9ace11e51.png" width="1080" height="637" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d44e1733563a79ad-a7d91f3ae17f9ab0d860fad9ace11e51.png" width="1080" height="637" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tip流量分析">Tip:WebFuzzer+流量分析<a href="#tip流量分析" class="hash-link" aria-label="Direct link to Tip:WebFuzzer+流量分析" title="Direct link to Tip:WebFuzzer+流量分析" translate="no">​</a></h2>
 <p>在使用 WebFuzzer 的时候，如果产生数据包过多，可以跳转到流量分析里面进行流量分析。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/58f3694fbdbe640c-b5a13f37177251709231a05d49525109.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/58f3694fbdbe640c-b5a13f37177251709231a05d49525109.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>此时流量分析器的筛选页面就会默认筛选出刚才 WebFuzzer 产生的流量，从而可以进一步分析。这个方式在 WebFuzzer 产生大量数据包的时候，对于想要查找有价值的数据十分有用。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4db9518b664bbd39-8d7d97790b9e452e602ef6551ec808c6.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4db9518b664bbd39-8d7d97790b9e452e602ef6551ec808c6.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结" translate="no">​</a></h2>
 <p>Yakit 流量分析功能突破传统流量筛选限制，通过 MITM 规则复用与热加载自定义代码，支持历史数据重分析及多源数据实时处理，实现复杂条件精准匹配与高效特征提取，结合结果标记与灵活导出，全面优化安全测试效率，推动工具生态闭环与深度数据价值挖掘。</p>
 <hr>

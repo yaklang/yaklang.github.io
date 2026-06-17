@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yak基础插件案例——CDN检测 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p299"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yak基础插件案例——CDN检测 | Yak Program Language"><meta data-rh="true" name="description" content="解释一下上次文章的招聘要求（写漏了一点）。安全类的至少符合两项即可（不是很符合，对我们感兴趣也可以），设计师也不一定非要艺术相关专业，简单来说就是我们招这些岗位，条件都不是硬性要求，你觉得你可以，对我们也感兴趣就可以来聊聊~~"><meta data-rh="true" property="og:description" content="解释一下上次文章的招聘要求（写漏了一点）。安全类的至少符合两项即可（不是很符合，对我们感兴趣也可以），设计师也不一定非要艺术相关专业，简单来说就是我们招这些岗位，条件都不是硬性要求，你觉得你可以，对我们也感兴趣就可以来聊聊~~"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-02-16T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,漏洞检测与插件"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p299"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p299" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p299" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p299" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p299","mainEntityOfPage":"https://yaklang.com/en/blog/p299","url":"https://yaklang.com/en/blog/p299","headline":"Yak基础插件案例——CDN检测","name":"Yak基础插件案例——CDN检测","description":"解释一下上次文章的招聘要求（写漏了一点）。安全类的至少符合两项即可（不是很符合，对我们感兴趣也可以），设计师也不一定非要艺术相关专业，简单来说就是我们招这些岗位，条件都不是硬性要求，你觉得你可以，对我们也感兴趣就可以来聊聊~~","datePublished":"2022-02-16T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -37,13 +37,13 @@
 <p>01</p>
 <p>CNAME指纹</p>
 <p>配置中说的第一种方法是去配置一个<code>CNAME</code>记录为CDN厂商提供的域名，这个域名通常会有一个前缀，后缀一般都是固定的。找了两个加载js库的CDN加速服务，看一下他们的<code>CNAME</code>记录。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/54f46cdaeefec777-99b9322e5427b0166b03b277614fb0ed.jpg" width="715" height="435" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8e29e39a20ee740a-c9723e9284930c813c4cec5a863c602f.jpg" width="715" height="450" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/54f46cdaeefec777-99b9322e5427b0166b03b277614fb0ed.jpg" width="715" height="435" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8e29e39a20ee740a-c9723e9284930c813c4cec5a863c602f.jpg" width="715" height="450" class="yakdoc-image"></button></p>
 <p>可以看到不同的CDN厂商的域名一般会有个共同点，就是带有cdn/dns等字眼（不一定），这就相当于CDN厂商的一个指纹。我们只需要维护一个常见CDN厂商的<code>CNAME</code>指纹字典，可以去里面查目标的CNAME记录是否为某个CDN厂商的域名。但是这种方式的缺点十分明显，就是维护指纹的成本很高，如果某个CDN厂商加了新的域名，那就需要重新添加指纹了。</p>
 <p>02</p>
 <p>IP段</p>
 <p>我们都知道CDN厂商一般会有很多个节点，而这些节点一般是是在一些IP段里面。所以我们可以维护一个常见CDN厂商的IP段列表。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/24e7938b7266a93d-4f30875e891ddea02223152af51faa7d.jpg" width="1035" height="809" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/24e7938b7266a93d-4f30875e891ddea02223152af51faa7d.jpg" width="1035" height="809" class="yakdoc-image"></button></p>
 <blockquote>
 <p><a href="https://github.com/al0ne/Vxscan/blob/master/lib/iscdn.py" target="_blank" rel="noopener noreferrer" class="">https://github.com/al0ne/Vxscan/blob/master/lib/iscdn.py</a></p>
 </blockquote>
@@ -55,22 +55,22 @@
 <p>自治系统或自治域（英文：Autonomous system, AS）是指在互联网中，一个或多个实体管辖下的所有IP网络和路由器的组合，它们对互联网执行共同的路由策略。——来自维基百科</p>
 </blockquote>
 <p>我们可以整理出常见CDN厂商的ASN号列表，如果目标域名<code>A</code>记录IP的ASN号在列表中，那么我们也可以暂时认为其接入了CDN。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a9cbb75b04c8876b-20b2be8dffe16dc6ede8747ae42ed16c.jpg" width="976" height="297" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/a9cbb75b04c8876b-20b2be8dffe16dc6ede8747ae42ed16c.jpg" width="976" height="297" class="yakdoc-image"></button></p>
 <p>但是还是有明显的误报/漏报问题，因为谁也不知道会不会突然冒出一个新的CDN厂商被我们遇到，或者某些家大业大的大厂自己实现了CDN的接入，没有使用CDN厂商的服务。</p>
 <p>04</p>
 <p>多地区ping</p>
 <p>上面介绍的三种方式的优点就是速度快，需要检测的域名非常多时优势很大。基本就是DNS查一下然后进行各种类型指纹的匹配就行，但缺点就是误报/漏报率高。想要降低误报/漏报率可以将以上的方式做一下结合，例如精灵师傅的<code>OneForAll</code>子域名工具就结合了上面提到的方式。但是再怎么样也只是能将误报/漏报率降到最低，达不到零误报/漏报。</p>
 <p>前面介绍到CDN会根据地区返回不同的IP。那么我们可以准备很多个地区的服务器，同时对该域名执行ping操作。看看返回的IP是否相同，达到判断是否接入CDN的目的。</p>
 <p>但是这样成本非常高，好在网上有现成的服务可以使用。例如：站长之家多地区ping</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1e79f904b313f031-7531f7d5a0e633f422053bedbc0da7b5.jpg" width="1080" height="754" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1e79f904b313f031-7531f7d5a0e633f422053bedbc0da7b5.jpg" width="1080" height="754" class="yakdoc-image"></button></p>
 <p>但是在官网使用该服务一次只会请求一部分监测点进行ping操作，效率不高。所以我打算使用<code>yaklang</code>利用其探测点，重新写一个并发的版本。</p>
 <p>03</p>
 <p>插件编写</p>
 <p>其实这个插件本质上是一个“爬虫”，我们需要去分析一下站长之家的请求流程。</p>
 <p>大概流程如下：首先会发送一个<code>POST</code>请求到<code>https://ping.chinaz.com/</code>，获取监测点的<code>guid</code>，以及<code>enkey</code>、<code>checkType</code>等参数，作为后续请求的参数。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1fb6e264e02d0c31-c3ec879bbc0dfabed38b7ea6b826c444.jpg" width="1080" height="565" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1fb6e264e02d0c31-c3ec879bbc0dfabed38b7ea6b826c444.jpg" width="1080" height="565" class="yakdoc-image"></button></p>
 <p>接着带着上一步获取到的参数发送一个<code>POST</code>请求到<code>https://ping.chinaz.com/iframe.ashx?t=ping</code></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/589a6ac021a54649-af0318e3f5eadc1178d506ff60ee33ec.jpg" width="1080" height="387" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/589a6ac021a54649-af0318e3f5eadc1178d506ff60ee33ec.jpg" width="1080" height="387" class="yakdoc-image"></button></p>
 <p>如果成功则返回格式如下</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">{state:1,msg:&#x27;&#x27;,result:{ip:&#x27;36.152.44.96&#x27;,ipaddress:&#x27;中国江苏南京 移动&#x27;,responsetime:&#x27;13毫秒&#x27;,ttl:&#x27;51&#x27;,bytes:&#x27;32&#x27;}}</span><br></span></code></pre></div></div>
 <p>反之则返回格式如下</p>
@@ -100,15 +100,15 @@
 <p>从通道中拿到结果，将结果做一系列处理（如统计返回IP数量、进度条、表格等）和最重要的CDN判断后用<code>yakit</code>库进行输出。</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">for targetIndex, target := range targetList {    yakit.EnableTable(target, [&quot;监测点&quot;, &quot;响应IP&quot;, &quot;IP归属地&quot;, &quot;响应时间&quot;, &quot;TTL&quot;, &quot;数据包大小&quot;])    results := make(chan var)    // https://www.yaklang.io/docs/newforyak/concurrent    submitTask := func(param...) {        go ping(param...)    }    for _, serverInfo := range pingServerInfoList {        submitTask(serverInfo, enkey, checkType, target, results)    }    // println(&lt;- results)    ips := make(map[string]int)    for i := 0; i &lt; serverNum; i++ {        data := &lt;- results     // dump(data)        // 总进度条        // yakit.SetProgress(( float64(i+1)*(float64(targetIndex+1)/float64(len(targetList))) )/float64(serverNum))        yakit.SetProgress( float64(i+1)*float64(targetIndex+1) / (float64(len(targetList)) * float64(serverNum)) )        // 子任务进度条        yakit.SetProgressEx(target, float64(i+1)/float64(serverNum))        // 统计结果、处理表格输出        if data[&quot;state&quot;] == float64(1) {            if data[&quot;result&quot;][&quot;ip&quot;] != &quot;&quot; {                if ips[data[&quot;result&quot;][&quot;ip&quot;]] == undefined {                    ips[data[&quot;result&quot;][&quot;ip&quot;]] = 1                }else {                    ips[data[&quot;result&quot;][&quot;ip&quot;]]++                }                // 成功的探测点输出表格                tableData := make(map[string]var)                tableData[&quot;监测点&quot;] = data[&quot;cityname&quot;]                tableData[&quot;响应IP&quot;] = data[&quot;result&quot;][&quot;ip&quot;]                tableData[&quot;IP归属地&quot;] = data[&quot;result&quot;][&quot;ipaddress&quot;]                tableData[&quot;响应时间&quot;] = data[&quot;result&quot;][&quot;responsetime&quot;]                tableData[&quot;TTL&quot;] = data[&quot;result&quot;][&quot;ttl&quot;]                tableData[&quot;数据包大小&quot;] = data[&quot;result&quot;][&quot;bytes&quot;]                yakit.Output(yakit.TableData(target, tableData))            }        }        // printf(&quot;\r正在执行ping操作，当前：%v/%v个，成功：%v/%v个，失败：%v/%v个，总进度：%.2f%%&quot;, i+1, serverNum, success, serverNum, failure, serverNum, 100*(float64(i+1)/float64(serverNum)))    }    println()    if len(ips) &gt; 1 {        yakit.StatusCard(sprintf(&quot;%v:IS CDN&quot;, target), &quot;是&quot;, target)        yakit.StatusCard(sprintf(&quot;%v:IP Number&quot;, target), len(ips), target)        // println(&quot;监测点返回不同IP，可能存在CDN&quot;)    }else {        for ip := range ips {            yakit.StatusCard(sprintf(&quot;%v:IS CDN&quot;, target), &quot;否&quot;, target)            yakit.StatusCard(sprintf(&quot;%v:IP Address&quot;, target), ip, target)            // printf(&quot;所有监测点返回IP一致，为%v\n&quot;, ip)        }    }    // break}</span><br></span></code></pre></div></div>
 <p><strong>最终插件效果</strong></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3a3d8728fc925d9a-ea3e31c5a76acb2d8dfefcc20eaa1785.jpg" width="1080" height="1287" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3a3d8728fc925d9a-ea3e31c5a76acb2d8dfefcc20eaa1785.jpg" width="1080" height="1287" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>（其实还可以再给每个域名都分配一个<code>goroutine</code>，让每个目标间的监测也是异步进行的。但是考虑到可能会对接口产生较大的压力，所以就没这样做了。</p>
 <p>04</p>
 <p>插件地址</p>
 <p>如果大家对这个CDN判断插件感兴趣的话，可以直接在插件仓库中导入米斯特的第三方<code>yakit-store</code>插件库。地址为：<a href="https://github.com/Acmesec/yakit-store" target="_blank" rel="noopener noreferrer" class="">https://github.com/Acmesec/yakit-store</a></p>
 <p>更新后点击头部的刷新按钮</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/08ea047d95a82e1f-0a7af4043a400a350dac236bc7bd739b.jpg" width="1080" height="140" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/08ea047d95a82e1f-0a7af4043a400a350dac236bc7bd739b.jpg" width="1080" height="140" class="yakdoc-image"></button></p>
 <p>就可以在插件仓库或者基础安全工具中看到插件啦！</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c0239bda24453812-5746397a5c0234184dd70ef87789d764.jpg" width="1080" height="388" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c0239bda24453812-5746397a5c0234184dd70ef87789d764.jpg" width="1080" height="388" class="yakdoc-image"></button></p>
 <p>05</p>
 <hr>
 <blockquote>

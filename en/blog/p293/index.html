@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Web Fuzzer: MORE than Repeater + Intruder | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p293"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Web Fuzzer: MORE than Repeater + Intruder | Yak Program Language"><meta data-rh="true" name="description" content="如果我们只是想做 Repeater / Intruder 的平替，其实并没有太大的意义。实际上基于 Fuzz 模版变形的 Web Fuzzer 的操作在灰度测试的过程中取得了巨大反响，收获了大量好评，同时也有很多关于操作和使用的有效反馈。在迭代了很多个版本，优化了很多交互逻辑，修复了诸多 BUG 之后，我们认为 Web Fuzzer 已经相对比较成熟。"><meta data-rh="true" property="og:description" content="如果我们只是想做 Repeater / Intruder 的平替，其实并没有太大的意义。实际上基于 Fuzz 模版变形的 Web Fuzzer 的操作在灰度测试的过程中取得了巨大反响，收获了大量好评，同时也有很多关于操作和使用的有效反馈。在迭代了很多个版本，优化了很多交互逻辑，修复了诸多 BUG 之后，我们认为 Web Fuzzer 已经相对比较成熟。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-03-10T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,WebFuzzer"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p293"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p293" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p293" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p293" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p293","mainEntityOfPage":"https://yaklang.com/en/blog/p293","url":"https://yaklang.com/en/blog/p293","headline":"Web Fuzzer: MORE than Repeater + Intruder","name":"Web Fuzzer: MORE than Repeater + Intruder","description":"如果我们只是想做 Repeater / Intruder 的平替，其实并没有太大的意义。实际上基于 Fuzz 模版变形的 Web Fuzzer 的操作在灰度测试的过程中取得了巨大反响，收获了大量好评，同时也有很多关于操作和使用的有效反馈。在迭代了很多个版本，优化了很多交互逻辑，修复了诸多 BUG 之后，我们认为 Web Fuzzer 已经相对比较成熟。","datePublished":"2022-03-10T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -63,7 +63,7 @@
 <p>针对这个案例，我们在 page=/etc/{{list(hosts|passwd|nginx.conf)}} 设置了一个这样的内容，意味着整个数据包将会被渲染成三个数据包，分别为</p>
 <div class="language-properties codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-properties codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">// hosts</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">GET /fileincl/example1.php?page=/etc/hosts HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: 172.16.86.134</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Connection: close</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// passwd</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">GET /fileincl/example1.php?page=/etc/passwd HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: 172.16.86.134</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Connection: close</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">// nginx.conf</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">GET /fileincl/example1.php?page=/etc/nginx.conf HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: 172.16.86.134</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Connection: close</span><br></span></code></pre></div></div>
 <p>在 Web Fuzzer 中我们发送这个数据包</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c217de319494bca-20fff6f7ff1ba854ef1f94bba969733c.png" width="1080" height="591" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4c217de319494bca-20fff6f7ff1ba854ef1f94bba969733c.png" width="1080" height="591" class="yakdoc-image"></button></p>
 <p>当我们发送了这种可以渲染的数据包的时候，我们的界面将不再会是之前的左边请求，右边单个响应体的布局，右边将会变成一个列表，列表中每个请求的各种指标：响应大小（Burpsuite 常用），响应内容的相似度，响应 Header 的相似度，Payload 内容可以帮助用户迅速筛选出想要的结果。</p>
 <p>高级案例: 可作为 Web 扫描器的 Fuzzer！</p>
 <p>众所周知，在 Burp 的 2021 年 12 月的版本中，才支持可以针对 Host 的 Intruder 配置。</p>
@@ -73,7 +73,7 @@
 <p>如果直接根据 Host 去发起请求的话，那如何实现 Host 碰撞的问题呢</p>
 </blockquote>
 <p>这是一个好问题，从 Host 取需要请求的网站是正常的逻辑，但是这种会造成 Host 碰撞的需求无法实现。但是并不代表 Yakit Web Fuzzer 放弃了这个能力</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5ba80a9e5a185338-9f99d9a43a00f15df15e39c51b50e8c9.png" width="1080" height="507" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5ba80a9e5a185338-9f99d9a43a00f15df15e39c51b50e8c9.png" width="1080" height="507" class="yakdoc-image"></button></p>
 <p>当我们打开 “高级配置”，我们发现可以静态设置 Host，这个 Host 是实际请求将会采用的 Host，如果设置了他，意味着发包过程中，Web Fuzzer 不会根据数据包的 Host 字段去决定要给谁发送请求了。</p>
 <p>通过固定 Host，我们再在数据包中，对 Hosts 进行 fuzz 标签标记，就可以轻松达到 Host 碰撞的目的。</p>
 <p>同样的，其他的高级配置均可生效，我们可以很容易的配置</p>
@@ -90,11 +90,11 @@
 <div class="language-makefile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-makefile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">{{net(172.168.1.1/24)}}:{{port(80,443,8080)}}</span><br></span></code></pre></div></div>
 <p>作为输入时，即使笔者不给大家介绍这个标签，大家也可以从标签内容看出这个标签承担的作用。渲染一段网段，渲染几个端口，然后把渲染出的结果进行笛卡尔乘积：</p>
 <p>大家可以随时在 “数据处理=&gt;Codec=&gt;模糊测试” 功能中测试自己编写的标签模版。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/77a79d8c2a33f9d3-ac5b1489388667b260c0a7e3e701839c.png" width="1080" height="636" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/77a79d8c2a33f9d3-ac5b1489388667b260c0a7e3e701839c.png" width="1080" height="636" class="yakdoc-image"></button></p>
 <p>在有了这个积累之后，我们可以很容易构造一个数据包，来爆破管理员目录</p>
 <p>比如说，我们只爆破 admin/, login.php, wp-login  这三个目录，针对某一个网段的 80,443,8080 端口，那么我们的 Payload 很可能长成这样。</p>
 <div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">GET /{{list(admin/|login.php|wp-login)}} HTTP/1.1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Host: {{net(47.52.100.1/24)}}:{{port(80,443,8080)}}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Connection: close</span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9fa19a419a020351-c7c85b0b179d3bd7203debeb9d9e3c09.png" width="1080" height="589" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9fa19a419a020351-c7c85b0b179d3bd7203debeb9d9e3c09.png" width="1080" height="589" class="yakdoc-image"></button></p>
 <p>在爆破过程中，我们点击 StatusCode 筛选，可以从状态码筛选出我们想要的内容。</p>
 <p>其实在熟练的情况下，我们的核心操作只有：</p>
 <ol>
@@ -107,13 +107,13 @@
 <li class="">选中想要替换的位置，右键</li>
 <li class="">选择字典进行替换</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1fd27366ee2c32eb-1f810ee7c4628a75ad0a5ea7b924112f.png" width="848" height="910" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1fd27366ee2c32eb-1f810ee7c4628a75ad0a5ea7b924112f.png" width="848" height="910" class="yakdoc-image"></button></p>
 <p>当点击 “插入模糊测试字典标签” 之后将会看到如下对话框。</p>
 <p>在新的框中，用户可以选择字典，同时查看里面的内容，在决定要选择哪个字典之后，可以点击 “小闪电” 或者 “选择该 Fuzz 标签”。自动把标签内容替换到 Web Fuzzer 中选中部分。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0aca244821ded4bb-f5f5eed031c7111f9bbda5d9ef022505.png" width="1080" height="572" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e60ee0f549bb5070-2c2f871e3fca1847a3b7017c01581792.png" width="855" height="392" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0aca244821ded4bb-f5f5eed031c7111f9bbda5d9ef022505.png" width="1080" height="572" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e60ee0f549bb5070-2c2f871e3fca1847a3b7017c01581792.png" width="855" height="392" class="yakdoc-image"></button></p>
 <p>在插入了新的标签之后，我们再点击 “发送数据包”，将会在表格中的 Payload 看到这次渲染的 “结果”。值得注意的是</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5266dd3d15bf426a-047539d3fa1a85c7a80523d2f30b3107.png" width="1080" height="622" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5266dd3d15bf426a-047539d3fa1a85c7a80523d2f30b3107.png" width="1080" height="622" class="yakdoc-image"></button></p>
 <p>当用户可以完成我上述的一些操作的时候，发现其实 Repeater 和 Intruder 的功能是完全可以有一种 “奇妙的结合” 的，原本在 Burpsuite 中需要 Repeater 和 Intruder 切换的功能，在 Yakit 的 Web Fuzzer 中通过 Fuzz 标签得到了平衡，同时摒弃了 “不直观” 的问题，真的所见即所得。</p>
 <p>技术补充说明</p>
 <ol>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yak 原生插件编写：基础操作整合 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/legacy/Plugin-repository/plugins/plugin_workthrough"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="Yak 原生插件编写：基础操作整合 | Yak Program Language"><meta data-rh="true" name="description" content="把大象装冰箱，需要分几步？"><meta data-rh="true" property="og:description" content="把大象装冰箱，需要分几步？"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/legacy/Plugin-repository/plugins/plugin_workthrough"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/legacy/Plugin-repository/plugins/plugin_workthrough" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/legacy/Plugin-repository/plugins/plugin_workthrough" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/legacy/Plugin-repository/plugins/plugin_workthrough" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"插件使用及编写","item":"https://yaklang.com/products/legacy/Plugin-repository/"},{"@type":"ListItem","position":2,"name":"Yak 原生插件编写：基础操作整合","item":"https://yaklang.com/products/legacy/Plugin-repository/plugins/plugin_workthrough"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -30,10 +30,10 @@
 <video src="https://oss-qn.yaklang.com/video/yakit-config-params.mp4" loop="" playsinline="" controls="" autoplay="" style="width:890px"></video>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="创建新的插件">创建新的插件<a href="#创建新的插件" class="hash-link" aria-label="创建新的插件的直接链接" title="创建新的插件的直接链接" translate="no">​</a></h3>
 <p>我们在 &quot;插件商店&quot; 中点击 &quot;新插件&quot; 之后，将会弹出如下窗口，我们可以创建自己的插件</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/create-new-plugin-52465f061d5d2600069abe601e3d60cb.png" width="1566" height="952" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/create-new-plugin-52465f061d5d2600069abe601e3d60cb.png" width="1566" height="952" class="yakdoc-image"></button></p>
 <p>我们其实可以在创建插件的过程中来配置用户的参数，就像视频中一样，我们配置的参数，将会自动生成用户可以输入的 UI 表单！</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/config-one-param-3c9f98987b069843e03140dfcfc59c90.jpg" width="1347" height="939" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" src="/assets/images/use-param-2718b09834c3c306e3b63956d1647df3.jpg" width="1416" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/config-one-param-3c9f98987b069843e03140dfcfc59c90.jpg" width="1347" height="939" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/use-param-2718b09834c3c306e3b63956d1647df3.jpg" width="1416" height="646" class="yakdoc-image"></button></p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>配置参数其实非常简单，不是特别需要文档，但是需要注意的是，使用参数的方法，是使用 <code>cli.</code> 模块。</p><p>为什么要这么做呢？方便大家编写插件的时候，使用 vscode 进行调试和自己手动输入。</p><p>虽然说笔者最推荐使用 yakit 本身去做插件的编写。可以保证调试结果非常统一且好用。</p></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="编写插件">编写插件<a href="#编写插件" class="hash-link" aria-label="编写插件的直接链接" title="编写插件的直接链接" translate="no">​</a></h2>
 <p>当我们学会如何为你的插件添加参数的时候，就已经看得出来了，插件的参数最终获取和使用，其实都是在插件内部进行的。</p>
@@ -44,7 +44,7 @@
 <p>当然，如果你愿意来编写一点点脚本代码的时候，我们也会尽量帮助 yak 代码更好的和 yakit GUI 进行融合。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="标准输出流与错误流处理">标准输出流与错误流处理<a href="#标准输出流与错误流处理" class="hash-link" aria-label="标准输出流与错误流处理的直接链接" title="标准输出流与错误流处理的直接链接" translate="no">​</a></h4>
 <p>yak 代码执行的标准输出和错误流将会直接打印到 yakit 端对应的 Console 中</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/yakit-plugin-console-16dfc7571be718b22f2c9afeeef0f625.png" width="1254" height="871" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/yakit-plugin-console-16dfc7571be718b22f2c9afeeef0f625.png" width="1254" height="871" class="yakdoc-image"></button></p>
 <p>这是一种非常廉价的输出方法，实际上效果并不好，重要的信息经常被忽略。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="输入日志信息">输入日志信息<a href="#输入日志信息" class="hash-link" aria-label="输入日志信息的直接链接" title="输入日志信息的直接链接" translate="no">​</a></h4>
 <p>从这一节开始，我们会用到一个 &quot;全新的&quot; 包，这个包以平台名称来命名 <code>yakit</code>。</p>

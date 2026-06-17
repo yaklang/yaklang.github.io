@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">12.输出存在于 HTML 节点属性中，但是不再 on 属性中(HREF) | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/Yaklab/vulinbox/XSS/12unsafe-href"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="12.输出存在于 HTML 节点属性中，但是不再 on 属性中(HREF) | Yak Program Language"><meta data-rh="true" name="description" content="这个案例展示了一种输出存在于 HTML 节点属性中，位于 herf 属性中的 XSS（跨站脚本攻击）漏洞类型"><meta data-rh="true" property="og:description" content="这个案例展示了一种输出存在于 HTML 节点属性中，位于 herf 属性中的 XSS（跨站脚本攻击）漏洞类型"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/Yaklab/vulinbox/XSS/12unsafe-href"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/vulinbox/XSS/12unsafe-href" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/vulinbox/XSS/12unsafe-href" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/vulinbox/XSS/12unsafe-href" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Vulinbox 靶场通关指南","item":"https://yaklang.com/Yaklab/vulinbox/"},{"@type":"ListItem","position":2,"name":"12.输出存在于 HTML 节点属性中，但是不再 on 属性中(HREF)","item":"https://yaklang.com/Yaklab/vulinbox/XSS/12unsafe-href"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,7 +19,7 @@
 <p><strong>攻击示例：</strong></p>
 <div class="language-SQL language-sql codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-sql codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">http:</span><span class="token comment" style="color:#999988;font-style:italic">//127.0.0.1:8787/xss/attr/href?href=%27onmousemove=%27alert(123)</span><br></span></code></pre></div></div>
 <p>在上述攻击示例中，攻击者通过在<code>href</code>参数中注入恶意代码，将恶意代码嵌入到 HREF 属性中。当用户点击链接时，浏览器会执行嵌入的 JavaScript 代码，弹出一个弹窗，显示&quot;alert(123)&quot;。</p>
-<p><img decoding="async" loading="lazy" src="/assets/images/12unsafe-img-740325cff56f93ca43d1fb0ab1a600a6.png" width="1280" height="539" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/assets/images/12unsafe-img-740325cff56f93ca43d1fb0ab1a600a6.png" width="1280" height="539" class="yakdoc-image"></button></p>
 <p><strong>防御措施：</strong></p>
 <p>要防止这种类型的漏洞，开发者需要对用户输入的数据进行适当的过滤和转义，确保用户提供的内容不会被解释为 HTML 或 JavaScript 代码。开发者可以使用安全的 HTML 编码函数，以及对用户输入数据进行严格的验证，从而有效地防止 XSS 攻击。</p>
 <p><strong>靶场演示： 视频</strong></p>

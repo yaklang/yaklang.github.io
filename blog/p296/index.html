@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">yakit向日葵远程命令执行检测插件 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p296"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="yakit向日葵远程命令执行检测插件 | Yak Program Language"><meta data-rh="true" name="description" content="练习"><meta data-rh="true" property="og:description" content="练习"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2022-02-24T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2022 年,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p296"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p296" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p296" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p296" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p296","mainEntityOfPage":"https://yaklang.com/blog/p296","url":"https://yaklang.com/blog/p296","headline":"yakit向日葵远程命令执行检测插件","name":"yakit向日葵远程命令执行检测插件","description":"练习","datePublished":"2022-02-24T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,17 +19,17 @@
 <p>复现过程</p>
 <p>首先在一台win7虚拟机上安装了向日葵v11.0.0.33162</p>
 <p>通过yakit进行端口扫描（由于yakit有端口扫描能力，所以插件中不包含端口扫描功能），寻找向日葵client服务所占用的端口。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7ee0f08ff83e1db6-86f0587e1bfcee83e4ecda7276471e3c.png" width="1080" height="633" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/7ee0f08ff83e1db6-86f0587e1bfcee83e4ecda7276471e3c.png" width="1080" height="633" class="yakdoc-image"></button></p>
 <p>通过浏览器逐个访问，最终确定49157为向日葵客户端使用端口，使用浏览器访问。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/4b05a4d80d4842db-1d8c97892d81056911eadb1a1cc4b8a1.png" width="724" height="220" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/4b05a4d80d4842db-1d8c97892d81056911eadb1a1cc4b8a1.png" width="724" height="220" class="yakdoc-image"></button></p>
 <p>开始我们的POC编写：新建插件，Yak原生模块，填入几个清晰简洁的选项就可以写代码了。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/076b4ff5992694d9-ed48ee962367fb477bc619e26d793e60.png" width="1080" height="924" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/076b4ff5992694d9-ed48ee962367fb477bc619e26d793e60.png" width="1080" height="924" class="yakdoc-image"></button></p>
 <p>编辑器自带Yak补全，用起来很顺手（希望大佬们能搞个适用neovim的补全插件）。<code>cli</code>用来获取参数，与增加参数处对应好，由于整个复现过程都是通过HTTP协议，<code>poc.HTTP</code>就可以全部搞定，返回包的处理有<code>str.SplitHTTPHeadersAndBodyFromPacket()</code>,body的返回值是[]bytes,转成string后使用<code>json.loads()</code>能快速提取Cookie中需要的<code>&quot;verify_string&quot;</code>，整个编写过程轻松搞定，所以为什么说对新手极其友好。</p>
 <p>03</p>
 <p>效果</p>
 <p>最后我们看一下写好的插件执行的效果。</p>
 <p>只需要填写测试目标一个参数：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/89a9ba2609d7e0c7-06d5798d822f847406c621af1e90d3c3.png" width="1080" height="600" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/89a9ba2609d7e0c7-06d5798d822f847406c621af1e90d3c3.png" width="1080" height="600" class="yakdoc-image"></button></p>
 <p>04</p>
 <hr>
 <blockquote>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">插件商店“活”了！Yakit AI联动解锁安全自动化新玩法 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p003"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="插件商店“活”了！Yakit AI联动解锁安全自动化新玩法 | Yak Program Language"><meta data-rh="true" name="description" content="背景"><meta data-rh="true" property="og:description" content="背景"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-04-24T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,AI,漏洞检测与插件"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p003"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p003" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p003" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p003" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p003","mainEntityOfPage":"https://yaklang.com/en/blog/p003","url":"https://yaklang.com/en/blog/p003","headline":"插件商店“活”了！Yakit AI联动解锁安全自动化新玩法","name":"插件商店“活”了！Yakit AI联动解锁安全自动化新玩法","description":"背景","datePublished":"2026-04-24T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -41,7 +41,7 @@
 <p><strong>2.语义召回</strong>：为后续的能力检索提供描述词、关键词和任务场景；</p>
 <p><strong>3.执行提示</strong>：帮助 Agent 判断这个能力应该在什么阶段被调用。</p>
 <p>也就是说，插件一旦“开放给 AI”，它就不再只是脚本仓库中的一段代码，而是被提升成一个可以被 Agent 检索、理解和调用的能力节点。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/49799137eef5b502-435424ae4485f9862c2858398ae6d754.png" width="396" height="347" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/49799137eef5b502-435424ae4485f9862c2858398ae6d754.png" width="396" height="347" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="它是怎么做到不死板的">它是怎么做到“不死板”的<a href="#它是怎么做到不死板的" class="hash-link" aria-label="Direct link to 它是怎么做到“不死板”的" title="Direct link to 它是怎么做到“不死板”的" translate="no">​</a></h2>
 <p>如果只说“AI 可以自动调用插件”，听起来很像一个普通的函数绑定。但实际上，这套机制更像是一条带有多层决策的智能编排链路。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1分层意图路由不是所有请求都走同一条路径">1）分层意图路由：不是所有请求都走同一条路径<a href="#1分层意图路由不是所有请求都走同一条路径" class="hash-link" aria-label="Direct link to 1）分层意图路由：不是所有请求都走同一条路径" title="Direct link to 1）分层意图路由：不是所有请求都走同一条路径" translate="no">​</a></h3>
@@ -62,7 +62,7 @@
 </ul>
 <p>这一步的价值在于：</p>
 <p>用户说的是自然语言，但系统需要的是<strong>可以驱动能力检索和执行的任务语义表示</strong>。这实际上是一种典型的<strong>Hierarchical Intent Routing</strong>：先做低成本预路由，再决定是否进入更重的深层分析。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3390a2e3c3418791-0fb8d26bb96a1e7f60c117abff558218.png" width="1080" height="1919" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3390a2e3c3418791-0fb8d26bb96a1e7f60c117abff558218.png" width="1080" height="1919" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2渐进式披露ai-看到的不是整个插件商店而是被逐层收敛后的能力集合">2）渐进式披露：AI 看到的不是整个插件商店，而是被逐层收敛后的能力集合<a href="#2渐进式披露ai-看到的不是整个插件商店而是被逐层收敛后的能力集合" class="hash-link" aria-label="Direct link to 2）渐进式披露：AI 看到的不是整个插件商店，而是被逐层收敛后的能力集合" title="Direct link to 2）渐进式披露：AI 看到的不是整个插件商店，而是被逐层收敛后的能力集合" translate="no">​</a></h3>
 <p>这套机制很重要的一点，是它没有把所有插件一次性完整暴露给模型。如果把整个平台所有插件和所有参数都直接塞进上下文，结果通常不会更智能，只会更混乱。因此这里采用了一种更适合 Agent 的策略：<strong>渐进式披露（Progressive Disclosure）</strong>。</p>
 <p>能力并不是一次性全部展开，而是按阶段逐层暴露：</p>
@@ -147,8 +147,8 @@
 <p>6.基于响应与延迟特征做结果判断；</p>
 <p>7.把验证结果写回上下文，作为后续决策依据。</p>
 <p>这说明 AI 开始拥有的是<strong>任务级能力闭环</strong>，而不是一次性工具调用。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c05fd616aa11d1fd-5fd4abc05e041fd96534ad0d98468a2a.png" width="886" height="564" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e54834c4d01a01b0-3ce67912d32fd72c041ddfe806ef5db8.png" width="1080" height="367" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c05fd616aa11d1fd-5fd4abc05e041fd96534ad0d98468a2a.png" width="886" height="564" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e54834c4d01a01b0-3ce67912d32fd72c041ddfe806ef5db8.png" width="1080" height="367" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例二弱口令检测">案例二：弱口令检测<a href="#案例二弱口令检测" class="hash-link" aria-label="Direct link to 案例二：弱口令检测" title="Direct link to 案例二：弱口令检测" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="再看弱口令检测这个例子会更容易理解-skill-在其中的作用">再看弱口令检测这个例子，会更容易理解 Skill 在其中的作用。<a href="#再看弱口令检测这个例子会更容易理解-skill-在其中的作用" class="hash-link" aria-label="Direct link to 再看弱口令检测这个例子，会更容易理解 Skill 在其中的作用。" title="Direct link to 再看弱口令检测这个例子，会更容易理解 Skill 在其中的作用。" translate="no">​</a></h2>
 <p>弱口令检测 Skill 本身并不一定直接执行扫描，它更像是给 AI 提供了一个特定任务框架：</p>
@@ -168,9 +168,9 @@
 <p>如果说插件负责“执行”，</p>
 <p>那么 Skill 更像负责“方法论”，</p>
 <p>而 Agent 则负责“把方法论和执行能力串起来”。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/dd06433036cba1fc-ffc810c3aaf84b6c80740755f27e06f8.png" width="955" height="812" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/672a441c62bb1714-70bb63fb5ba90a9c3ddb37257e6c6c28.png" width="876" height="616" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5be572492cbfa823-7a1ae54a3f88b033eddf0617857c344f.png" width="917" height="543" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/dd06433036cba1fc-ffc810c3aaf84b6c80740755f27e06f8.png" width="955" height="812" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/672a441c62bb1714-70bb63fb5ba90a9c3ddb37257e6c6c28.png" width="876" height="616" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5be572492cbfa823-7a1ae54a3f88b033eddf0617857c344f.png" width="917" height="543" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="一个很关键的变化从知道走向能做">一个很关键的变化:AI从“知道”走向“能做”<a href="#一个很关键的变化从知道走向能做" class="hash-link" aria-label="Direct link to 一个很关键的变化:AI从“知道”走向“能做”" title="Direct link to 一个很关键的变化:AI从“知道”走向“能做”" translate="no">​</a></h2>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="这次插件联动真正带来的变化是-ai-从知识型能力走向了操作型能力">这次插件联动真正带来的变化，是 AI 从“知识型能力”走向了“操作型能力”。<a href="#这次插件联动真正带来的变化是-ai-从知识型能力走向了操作型能力" class="hash-link" aria-label="Direct link to 这次插件联动真正带来的变化，是 AI 从“知识型能力”走向了“操作型能力”。" title="Direct link to 这次插件联动真正带来的变化，是 AI 从“知识型能力”走向了“操作型能力”。" translate="no">​</a></h2>
 <p>过去：</p>

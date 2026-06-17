@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Spring插件使用 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/spring"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="Spring插件使用 | Yak Program Language"><meta data-rh="true" name="description" content="1 CVE-2022-22965 远程代码执行漏洞"><meta data-rh="true" property="og:description" content="1 CVE-2022-22965 远程代码执行漏洞"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/spring"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/DetectionPlug-in/spring" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/spring" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/DetectionPlug-in/spring" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Spring插件使用","item":"https://yaklang.com/en/Yaklab/wiki/DetectionPlug-in/spring"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -18,66 +18,66 @@
 <p>552eee98-1201-40bd-bc4a-019ce80c3655</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url + 端口得出测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-1-43d3fddd563b51bfa070182d0d707396.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-1-43d3fddd563b51bfa070182d0d707396.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-springboot-env-unauth-漏洞">2 springboot env unauth 漏洞<a href="#2-springboot-env-unauth-漏洞" class="hash-link" aria-label="Direct link to 2 springboot env unauth 漏洞" title="Direct link to 2 springboot env unauth 漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>edde968f-5246-44c3-b0fd-7af3eaacfa96</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url + 端口得出测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-2-7e3b4c970b6d389e42eee80aa4e7ccbc.png" width="1280" height="791" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-2-7e3b4c970b6d389e42eee80aa4e7ccbc.png" width="1280" height="791" class="yakdoc-image"></button></p>
 <p>测试网站真正存在漏洞的路径是/env</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-3-1009ccb459f5c91624e9066af0fbe778.png" width="1280" height="802" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-3-1009ccb459f5c91624e9066af0fbe778.png" width="1280" height="802" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-spring-actuator-敏感信息泄漏">3 Spring Actuator 敏感信息泄漏<a href="#3-spring-actuator-敏感信息泄漏" class="hash-link" aria-label="Direct link to 3 Spring Actuator 敏感信息泄漏" title="Direct link to 3 Spring Actuator 敏感信息泄漏" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>c6195a4c-6a1f-4240-b0b8-f148a7d84b4f</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit挂着插件成功检测出漏洞</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-4-56220e2648ceaf7be60bd1b7d88101c6.png" width="1280" height="791" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-4-56220e2648ceaf7be60bd1b7d88101c6.png" width="1280" height="791" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-cve-2018-1273-漏洞检测">4 CVE-2018-1273 漏洞检测<a href="#4-cve-2018-1273-漏洞检测" class="hash-link" aria-label="Direct link to 4 CVE-2018-1273 漏洞检测" title="Direct link to 4 CVE-2018-1273 漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>d0b071ec-2518-48d7-befe-d1e2acd66ee3</p>
 <p><strong>测试过程：</strong></p>
 <p>靶场环境：Vulhub
 访问url：</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-5-e71c3cfebc22bfb34d645390d8086871.png" width="1018" height="645" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-5-e71c3cfebc22bfb34d645390d8086871.png" width="1018" height="645" class="yakdoc-image"></button></p>
 <p>使用yakit插件对该站点进行测试：输入url+端口号</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-6-af13f54b8f1f17e39d88b8eb276576b6.png" width="1280" height="688" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-6-af13f54b8f1f17e39d88b8eb276576b6.png" width="1280" height="688" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-cve-2022-22963-漏洞检测">5 CVE-2022-22963 漏洞检测<a href="#5-cve-2022-22963-漏洞检测" class="hash-link" aria-label="Direct link to 5 CVE-2022-22963 漏洞检测" title="Direct link to 5 CVE-2022-22963 漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>823238dd-db66-4024-8dd3-5404060f8d5c</p>
 <p><strong>测试过程：</strong></p>
 <p>使用yakit插件对该站点进行测试：输入url+端口号</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-7-f739302fa2f3e20bbc303b2f347750a4.png" width="1280" height="688" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-7-f739302fa2f3e20bbc303b2f347750a4.png" width="1280" height="688" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-spring-cloud-function-spel表达式注入漏洞">6 Spring Cloud Function SPEL表达式注入漏洞<a href="#6-spring-cloud-function-spel表达式注入漏洞" class="hash-link" aria-label="Direct link to 6 Spring Cloud Function SPEL表达式注入漏洞" title="Direct link to 6 Spring Cloud Function SPEL表达式注入漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>0934ab9c-9d75-445a-a2eb-d4b39dfcb1aa</p>
 <p><strong>测试过程：</strong></p>
 <p>使用yakit插件对该站点进行测试：输入url+端口号</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-8-87909e7e0c094bbe6bac4df9d63bd21a.png" width="1280" height="790" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-8-87909e7e0c094bbe6bac4df9d63bd21a.png" width="1280" height="790" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="7-cve-2022-22947-漏洞检测">7 CVE-2022-22947 漏洞检测<a href="#7-cve-2022-22947-漏洞检测" class="hash-link" aria-label="Direct link to 7 CVE-2022-22947 漏洞检测" title="Direct link to 7 CVE-2022-22947 漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>8c784bb1-80c8-449f-8dfc-00022bbb65f7</p>
 <p><strong>测试过程：</strong></p>
 <p>使用yakit插件对该站点进行测试：输入url+端口号</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-9-120a3c92d2eea97d0f29d5ac6b81fa0c.png" width="1280" height="688" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-9-120a3c92d2eea97d0f29d5ac6b81fa0c.png" width="1280" height="688" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="8-cve-2020-5398-反射型文件下载漏洞">8 CVE-2020-5398 反射型文件下载漏洞<a href="#8-cve-2020-5398-反射型文件下载漏洞" class="hash-link" aria-label="Direct link to 8 CVE-2020-5398 反射型文件下载漏洞" title="Direct link to 8 CVE-2020-5398 反射型文件下载漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>5cb01b5a-c29f-4e4a-8d4c-0152545a14ce</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-10-72c824b710c8ca6f7712b6d4823ec33c.png" width="1280" height="688" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-10-72c824b710c8ca6f7712b6d4823ec33c.png" width="1280" height="688" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="9-spring-whitelabel-error-page-spel表达式注入漏洞">9 Spring Whitelabel Error Page SpEL表达式注入漏洞<a href="#9-spring-whitelabel-error-page-spel表达式注入漏洞" class="hash-link" aria-label="Direct link to 9 Spring Whitelabel Error Page SpEL表达式注入漏洞" title="Direct link to 9 Spring Whitelabel Error Page SpEL表达式注入漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>b770e799-ce06-459c-8d27-ead1ece640ba</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-11-5614cbeb2cff355fd65becf97837c47d.png" width="1280" height="791" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-11-5614cbeb2cff355fd65becf97837c47d.png" width="1280" height="791" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="10-cve-2020-5410-目录遍历漏洞检测">10 CVE-2020-5410 目录遍历漏洞检测<a href="#10-cve-2020-5410-目录遍历漏洞检测" class="hash-link" aria-label="Direct link to 10 CVE-2020-5410 目录遍历漏洞检测" title="Direct link to 10 CVE-2020-5410 目录遍历漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>675af3f1-e1a4-48e1-bb93-5db0967cceed</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-12-942f08336cc03d04b8b42e4da386eca2.png" width="1280" height="790" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-12-942f08336cc03d04b8b42e4da386eca2.png" width="1280" height="790" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="11-cve-2019-3799-目录遍历漏洞">11 CVE-2019-3799 目录遍历漏洞<a href="#11-cve-2019-3799-目录遍历漏洞" class="hash-link" aria-label="Direct link to 11 CVE-2019-3799 目录遍历漏洞" title="Direct link to 11 CVE-2019-3799 目录遍历漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>c0ea2e04-1dde-41f7-ad76-3216a7289a61</p>
@@ -93,25 +93,25 @@
 <p>05c0973e-c2eb-4003-b420-019e66f93ff6</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-13-a39a5650fff64e2b3b41d93de5d5bee2.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-13-a39a5650fff64e2b3b41d93de5d5bee2.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="14-cve-2017-8046-漏洞检测">14 CVE-2017-8046 漏洞检测<a href="#14-cve-2017-8046-漏洞检测" class="hash-link" aria-label="Direct link to 14 CVE-2017-8046 漏洞检测" title="Direct link to 14 CVE-2017-8046 漏洞检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>19584629-4991-496b-8f17-c0487b25144e</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-14-323686c97b47df96ec4e306d32ad9934.png" width="1280" height="790" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-14-323686c97b47df96ec4e306d32ad9934.png" width="1280" height="790" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="15-cve-2022-22965-dns反连检测">15 CVE-2022-22965 DNS反连检测<a href="#15-cve-2022-22965-dns反连检测" class="hash-link" aria-label="Direct link to 15 CVE-2022-22965 DNS反连检测" title="Direct link to 15 CVE-2022-22965 DNS反连检测" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>2ac82fa2-bd21-4f40-933b-963821bdf52c</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-15-4b2b257e5c559b9ca775e4dfbcdbea98.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-15-4b2b257e5c559b9ca775e4dfbcdbea98.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="16-spring-boot-信息泄露漏洞">16 Spring Boot-信息泄露漏洞<a href="#16-spring-boot-信息泄露漏洞" class="hash-link" aria-label="Direct link to 16 Spring Boot-信息泄露漏洞" title="Direct link to 16 Spring Boot-信息泄露漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>21ee4a8-8c2b-45a1-981e-ba9ee340bfc8</p>
 <p><strong>测试过程：</strong></p>
 <p>Yakit插件输入url加端口后开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-16-0ba45ea64c0059aa958fe232702a860a.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-16-0ba45ea64c0059aa958fe232702a860a.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="17-spring-cloud-config-server-目录遍历漏洞">17 Spring Cloud Config Server 目录遍历漏洞<a href="#17-spring-cloud-config-server-目录遍历漏洞" class="hash-link" aria-label="Direct link to 17 Spring Cloud Config Server 目录遍历漏洞" title="Direct link to 17 Spring Cloud Config Server 目录遍历漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>Yakit正在努力编写~</p>
@@ -122,9 +122,9 @@
 <p>b70c9b72-31b0-494e-82fd-dd49572960bb</p>
 <p><strong>测试过程：</strong></p>
 <p>手工测试：漏洞存在</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-17-968d520294db653e9751afa1efcfdf61.png" width="1280" height="693" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-17-968d520294db653e9751afa1efcfdf61.png" width="1280" height="693" class="yakdoc-image"></button></p>
 <p>插件测试：输入url+端口，开始执行测试，得到测试结果</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/Spring-18-19b52855d96abb644b63123d869f0c20.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/Spring-18-19b52855d96abb644b63123d869f0c20.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="19-cve-2020-5405-路径穿越漏洞">19 CVE-2020-5405 路径穿越漏洞<a href="#19-cve-2020-5405-路径穿越漏洞" class="hash-link" aria-label="Direct link to 19 CVE-2020-5405 路径穿越漏洞" title="Direct link to 19 CVE-2020-5405 路径穿越漏洞" translate="no">​</a></h2>
 <p><strong>插件id：</strong></p>
 <p>97decf92-0c50-48e9-bd40-270209a5a491</p>

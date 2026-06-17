@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yakit MITM 实战：如何打通国密双向认证的“证书关卡”？ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p029"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yakit MITM 实战：如何打通国密双向认证的“证书关卡”？ | Yak Program Language"><meta data-rh="true" name="description" content="随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人（MITM）类工具带来了新的挑战。近期我们收到了部分用户咨询有关双向认证的问题，问题大致集中在："><meta data-rh="true" property="og:description" content="随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人（MITM）类工具带来了新的挑战。近期我们收到了部分用户咨询有关双向认证的问题，问题大致集中在："><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-10-31T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,流量分析,加密对抗"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p029"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p029" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p029" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p029" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p029","mainEntityOfPage":"https://yaklang.com/en/blog/p029","url":"https://yaklang.com/en/blog/p029","headline":"Yakit MITM 实战：如何打通国密双向认证的“证书关卡”？","name":"Yakit MITM 实战：如何打通国密双向认证的“证书关卡”？","description":"随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人（MITM）类工具带来了新的挑战。近期我们收到了部分用户咨询有关双向认证的问题，问题大致集中在：","datePublished":"2025-10-31T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,27 +17,27 @@
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="如何使用-yakit-mitm与采用双向国密认证的服务器通信">如何使用 Yakit MITM与采用双向国密认证的服务器通信<a href="#如何使用-yakit-mitm与采用双向国密认证的服务器通信" class="hash-link" aria-label="Direct link to 如何使用 Yakit MITM与采用双向国密认证的服务器通信" title="Direct link to 如何使用 Yakit MITM与采用双向国密认证的服务器通信" translate="no">​</a></h2>
 <p>这里我们采用互联网公开的 GMSSL 在线 demo 网站进行测试。启动 MITM 然后访问 URL：<a href="https://demo.gmssl.cn:2443" target="_blank" rel="noopener noreferrer" class="">https://demo.gmssl.cn:2443</a></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4943cf07bea77981-0b9e1615e016af312a1f0db061452987.png" width="1080" height="532" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4943cf07bea77981-0b9e1615e016af312a1f0db061452987.png" width="1080" height="532" class="yakdoc-image"></button></p>
 <p>这时我们会发现网站返回了 400 Bad Request：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4e47153b943a12a7-f73931acd71de95cc72f4ea784e4c356.png" width="1080" height="236" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4e47153b943a12a7-f73931acd71de95cc72f4ea784e4c356.png" width="1080" height="236" class="yakdoc-image"></button></p>
 <p>这个页面其实是 Nginx 为我们生成的一个页面，根据目标服务器的配置不同在国密双向认证握手失败的情况下 Yakit MITM 可能会报错 <code>tls: handshake failure</code>表示与远程服务器的握手失败。这时我们只需要在 Yakit 的全局配置中添加国密双向认证证书对中的签名证书。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/69aa968bb8afdaa4-2ada13622e59fe253c0187a4b5040f35.png" width="1080" height="390" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/69aa968bb8afdaa4-2ada13622e59fe253c0187a4b5040f35.png" width="1080" height="390" class="yakdoc-image"></button></p>
 <p>添加后即可正常访问目标站点：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9b8a4f1c5a61dcbd-b37d9fcca75fc555e6fae308e135ed88.png" width="1080" height="313" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/9b8a4f1c5a61dcbd-b37d9fcca75fc555e6fae308e135ed88.png" width="1080" height="313" class="yakdoc-image"></button></p>
 <p><strong>这意味着</strong>Yakit<strong>的插件系统和</strong>WebFuzzer<strong>都可以在启用国密双向认证的目标上正常生效</strong>。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="将证书与指定host-绑定">将证书与指定Host 绑定<a href="#将证书与指定host-绑定" class="hash-link" aria-label="Direct link to 将证书与指定Host 绑定" title="Direct link to 将证书与指定Host 绑定" translate="no">​</a></h2>
 <p>早些时候有用户反馈希望能提供证书和 Host 绑定的功能，场景大概如下图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/78b84f8dbef21403-9085f5a4fbfed58998d2291003610323.png" width="1080" height="904" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/78b84f8dbef21403-9085f5a4fbfed58998d2291003610323.png" width="1080" height="904" class="yakdoc-image"></button></p>
 <p>大概就是在服务器前级存在类似证书网关的中间件，他在要求客户端提供证书的时候。如图：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/327c19e1ed9ac7a2-a7064e7f9a2e856f383305366690ff4c.png" width="759" height="232" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/327c19e1ed9ac7a2-a7064e7f9a2e856f383305366690ff4c.png" width="759" height="232" class="yakdoc-image"></button></p>
 <p>这里的限制可能比较宽泛，这时我们简单依靠算法和 CA 可能无法筛选出合适的证书，因此在这种场景下需要支持证书与 host 的绑定。</p>
 <p>我们在 Yakit 的全局配置中，在添加完证书后点击证书左侧的齿轮即可将该证书与指定 host 绑定。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/29c9cc331714d546-22424b622dc3b4b7c9db55cd073f232b.png" width="1080" height="398" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/29c9cc331714d546-22424b622dc3b4b7c9db55cd073f232b.png" width="1080" height="398" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="证书宽松匹配机制">证书宽松匹配机制<a href="#证书宽松匹配机制" class="hash-link" aria-label="Direct link to 证书宽松匹配机制" title="Direct link to 证书宽松匹配机制" translate="no">​</a></h2>
 <p>最近也有用户反馈在使用证书后仍然无法正常访问启用了 mTLS 的目标服务器。首先，我们需要了解客户端在收到服务端的客户端证书验证请求后会如何处理。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/757dbc776d900526-e42bfa6ab5d00e878ee0ad97e88c553f.png" width="1080" height="997" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/757dbc776d900526-e42bfa6ab5d00e878ee0ad97e88c553f.png" width="1080" height="997" class="yakdoc-image"></button></p>
 <p>这里其实最关键的是：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d7c941ff9904b940-dd9244119d78de45c06956dd6f8e4eb0.png" width="844" height="533" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d7c941ff9904b940-dd9244119d78de45c06956dd6f8e4eb0.png" width="844" height="533" class="yakdoc-image"></button></p>
 <p>在 go 的源码中直接使用了 bytes.Equal 去判断证书的 RawIssuer 和 ca 是否相同。这里需要简单介绍一下 <strong>ASN.1（<strong>Abstract</strong>Syntax</strong>Notation One，抽象语法标记法一**）**的相关概念:  这个术语。</p>
 <p>我们可以将 ASN.1 理解为一种“数据结构的语言”：</p>
 <p><strong>1、抽象语法：<strong>它是一套国际标准，用于</strong>定义和描述</strong>各种复杂数据的结构，比如证书、密钥或数字签名等。它规定了数据“长什么样”，而与使用哪种编程语言或计算机系统无关。</p>

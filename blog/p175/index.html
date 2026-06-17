@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">YakSSA和语法提示 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p175"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="YakSSA和语法提示 | Yak Program Language"><meta data-rh="true" name="description" content="前言"><meta data-rh="true" property="og:description" content="前言"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-10-19T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年,代码审计"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p175"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p175" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p175" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p175" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p175","mainEntityOfPage":"https://yaklang.com/blog/p175","url":"https://yaklang.com/blog/p175","headline":"YakSSA和语法提示","name":"YakSSA和语法提示","description":"前言","datePublished":"2023-10-19T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -20,30 +20,30 @@
 <p>简而言之！YakSSA 模块提供了非常不错的程序分析能力！如果经常使用 Yak Runner 的朋友们可能已经注意到，目前的 Yak Runner 错误提示功能已经不只有编译语法报错了，这就得益于 SSA 模块的加入。通过静态分析的错误提示，在大家编写代码的时候可以边写边进行修正，以后再也不用等运行时报错再修改代码了！</p>
 <p><strong>目前的 YakRunner 支持以下的程序错误检查：1变量未定义</strong></p>
 <p>SSA 在生成时就会计算变量的 use-def 链，因此对于各种未定义变量的使用的定位手到擒来！从最简单的单纯使用未定义变量：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/dda882ece88f85b4-fa50cb70dee800c7f7c056af8ae04524.png" width="818" height="214" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/dda882ece88f85b4-fa50cb70dee800c7f7c056af8ae04524.png" width="818" height="214" class="yakdoc-image"></button></p>
 <p>到在 <code>a.$b</code> 形式的索引：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b1f54f3684f149dc-746136666840cd9270e2fb608d4e9da4.png" width="1080" height="293" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b1f54f3684f149dc-746136666840cd9270e2fb608d4e9da4.png" width="1080" height="293" class="yakdoc-image"></button></p>
 <p>再到数据流交汇时可能出现的未定义变量：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c6c81b1758d51157-b0d7878ad0ee648cab0a62e7fa19e883.png" width="1052" height="728" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c6c81b1758d51157-b0d7878ad0ee648cab0a62e7fa19e883.png" width="1052" height="728" class="yakdoc-image"></button></p>
 <p>甚至在模板字符串中的未定义变量使用：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9f2a9709157704ab-63519187735ec0b7aebaf8a2c20fa5ca.png" width="1062" height="248" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/9f2a9709157704ab-63519187735ec0b7aebaf8a2c20fa5ca.png" width="1062" height="248" class="yakdoc-image"></button></p>
 <p>再进一步，如果在闭包函数中使用到了外部变量，但是其实外部根本没有定义该变量呢？或者定义闭包函数时定义了变量，但调用函数时外部变量不存在了呢？YakSSA 仍然可以帮到你！</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/febfe1305ca82295-aded1df119afa0fd5f4c93a590a4c001.png" width="1080" height="446" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/febfe1305ca82295-aded1df119afa0fd5f4c93a590a4c001.png" width="1080" height="446" class="yakdoc-image"></button></p>
 <p><strong>2函数参数和返回值检查</strong></p>
 <p>在之前，对于大家经常使用（并且真的非常好用）的标准库函数的检查一直不到位，很多时候不熟悉的函数需要查找文档甚至代码的定义才能确定参数以及返回值。现在有了 YakSSA 的检查，将会对这些统统进行静态检查！大家遇到报错也可以立刻修正！对于返回值个数的检查：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/df8c80f3d48dfda0-681445123d865584002fac779add53ee.png" width="1080" height="311" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/df8c80f3d48dfda0-681445123d865584002fac779add53ee.png" width="1080" height="311" class="yakdoc-image"></button></p>
 <p>对于参数的检查：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c6db7f9f3410ce72-7c8c0fc577abad904b19d19b1a724cef.png" width="1080" height="266" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c6db7f9f3410ce72-7c8c0fc577abad904b19d19b1a724cef.png" width="1080" height="266" class="yakdoc-image"></button></p>
 <p><strong>3函数错误追踪</strong></p>
 <p>另一个经常出现在标准库函数调用的问题就是错误处理，
 大家可能会在调用函数时将几个参数全部使用同一个变量接受，这当然是可行的，这个变量将会成为一个列表。但是很多时候大家直接忘记了该函数返回的错误，当这个错误存在的时候，可能该列表其他数据都是无意义甚至引起错误的。错误必须要得到处理，YakSSA 贯彻了这个思路，并且得益于数据流分析，无论这个错误被如何传递，YakSSA可以将这个错误追踪的相当准确。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/2cf0082f19909d0a-a479d1280ee6dc5be8fdee01d669371a.png" width="1070" height="658" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/2cf0082f19909d0a-a479d1280ee6dc5be8fdee01d669371a.png" width="1070" height="658" class="yakdoc-image"></button></p>
 <p>当然处理错误仍然是非常简单的，在 Yak 内只需要 <code>die(err)</code> 或者使用 <code>~</code> 形式的函数调用即可，比 Golang 方便得多，又保证程序流程的正确性，何乐不为呢。</p>
 <p><strong>4函数~ 调用</strong></p>
 <p>当使用 <code>~</code> 调用的时候，函数最后的错误将会被自动处理，此时的函数返回值将会少一个错误。这大家都知道，但是这意味着我们需要记住大部分函数的返回值数量么？当然不是，现在 YakSSA 将会自动检查函数返回值的数量，包括使用 <code>~</code> 调用的情况，同样会去除最后一个错误。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/15fb37d3e6aaa7e6-d8bcf6048cdec44f18dff0736dedcfd6.png" width="1080" height="471" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/15fb37d3e6aaa7e6-d8bcf6048cdec44f18dff0736dedcfd6.png" width="1080" height="471" class="yakdoc-image"></button></p>
 <p>但是如果一个函数并没有返回错误的话，是不应该对其使用 <code>~</code> 形式的调用的！</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7c01e8f4773b893-3935a905784f95238dd0ec59a8afae7f.png" width="1080" height="237" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c7c01e8f4773b893-3935a905784f95238dd0ec59a8afae7f.png" width="1080" height="237" class="yakdoc-image"></button></p>
 <p><strong>下一步！</strong></p>
 <p>目前的 YakSSA 静态分析能力已经在 YakRunner 中初步使用起来，但这只是一小步，接下来的一段时间内 Yak 将会继续加强对代码的静态检查，基于此我们还可以做很多有趣的事情！</p>
 <hr>

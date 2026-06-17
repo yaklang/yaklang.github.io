@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">任意用户密码重置 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/Yaklab/wiki/AnyUserPasswordReset"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="任意用户密码重置 | Yak Program Language"><meta data-rh="true" name="description" content="1 验证码可爆破"><meta data-rh="true" property="og:description" content="1 验证码可爆破"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/Yaklab/wiki/AnyUserPasswordReset"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/AnyUserPasswordReset" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/AnyUserPasswordReset" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/AnyUserPasswordReset" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"任意用户密码重置","item":"https://yaklang.com/en/Yaklab/wiki/AnyUserPasswordReset"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -33,21 +33,21 @@
 <p>客户端进行验证码检验是不安全的，本地判断返回一个判断结果True/flase，我们可以修改这个判断结果进行绕过</p>
 <p><strong>漏洞案例：</strong></p>
 <p>访问测试网站重置密码的界面，这里拿到一个已经存在的测试账号模拟攻击验证绕过</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-1-9646508961041574a0e26f77c176516f.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-1-9646508961041574a0e26f77c176516f.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>这里使用yakit重置该测试账号的密码</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-2-b07f02beb8ece3531362088ef4b50ca5.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-2-b07f02beb8ece3531362088ef4b50ca5.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>随意输入验证码，点击下一步抓包</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-3-9abde9ad8736436b1d3144bed7769822.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-3-9abde9ad8736436b1d3144bed7769822.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>抓取这一步的返回包</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-4-eb025542d2fc37e063e167e212c3a02b.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-4-eb025542d2fc37e063e167e212c3a02b.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>这里的statuscode 200 代表成功，所以我们修改返回包</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-5-d750b27d1748b6dbb7f2ab9fb4eaaca2.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-5-d750b27d1748b6dbb7f2ab9fb4eaaca2.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>可以看到这里成功跳转到修改密码的界面了</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-6-91fe42fab7ac9ce1156eca70db9c1df6.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-6-91fe42fab7ac9ce1156eca70db9c1df6.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>输入密码之后点击下一步提示密码修改成功</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-7-1c3442cd20292617b21545456c748f91.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-7-1c3442cd20292617b21545456c748f91.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>返回登录界面验证是否成功将密码修改，使用新密码成功登录</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-8-75c07d67f7bf9ed69454d787ad3c514a.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-8-75c07d67f7bf9ed69454d787ad3c514a.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-跳过验证步骤">5 跳过验证步骤<a href="#5-跳过验证步骤" class="hash-link" aria-label="Direct link to 5 跳过验证步骤" title="Direct link to 5 跳过验证步骤" translate="no">​</a></h2>
 <p><strong>漏洞描述：</strong></p>
 <p>开发人员在开发注册模块是，对使用者进行注册操作时没有做严格的检验机制，从而导致绕过注册。
@@ -56,15 +56,15 @@
 <p><strong>漏洞案例：</strong></p>
 <p>测试网站重置密码页面
 输入手机号和图片验证码，点击下一步</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-1-9646508961041574a0e26f77c176516f.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-1-9646508961041574a0e26f77c176516f.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>进入第2步验证身份环节</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-2-b07f02beb8ece3531362088ef4b50ca5.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-2-b07f02beb8ece3531362088ef4b50ca5.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>此时直接输入第3步重置密码的url可直接绕过验证身份步骤进入密码重置环节</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-3-9abde9ad8736436b1d3144bed7769822.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-3-9abde9ad8736436b1d3144bed7769822.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>输入新密码后点击下一步，发现直接密码重置成功</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-4-eb025542d2fc37e063e167e212c3a02b.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-4-eb025542d2fc37e063e167e212c3a02b.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>使用新密码成功登录系统</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-5-d750b27d1748b6dbb7f2ab9fb4eaaca2.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-5-d750b27d1748b6dbb7f2ab9fb4eaaca2.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="6-重置链接可fuzz">6 重置链接可fuzz<a href="#6-重置链接可fuzz" class="hash-link" aria-label="Direct link to 6 重置链接可fuzz" title="Direct link to 6 重置链接可fuzz" translate="no">​</a></h2>
 <p><strong>漏洞描述：</strong></p>
 <p>有些重置密码过程中会发送一个密码重置链接，例如：<a href="http://www.xxx.com/repass?token=aaa" target="_blank" rel="noopener noreferrer" class="">www.xxx.com/repass?token=aaa</a>
@@ -73,10 +73,10 @@
 <p><strong>漏洞案例：</strong></p>
 <p>这里以一个案例作演示类似可能存在问题的密码重置链接</p>
 <p>访问登录界面，点击忘记密码</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-9-a7645fe56075dcb541022f8e7119b744.png" width="424" height="484" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-9-a7645fe56075dcb541022f8e7119b744.png" width="424" height="484" class="yakdoc-image"></button></p>
 <p>输入已知账户存在的邮箱
 点击发送验证码</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-10-7b191272cc11165fd670a1adcabe1beb.png" width="630" height="482" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-10-7b191272cc11165fd670a1adcabe1beb.png" width="630" height="482" class="yakdoc-image"></button></p>
 <p>邮箱中收到一个密码重置链接
 例如：<a href="https://xxxx.xxx.xxx.xx/index/index/resetpass/code/280938b01d7742de39dbdd7tfffe2453bfaf4c48" target="_blank" rel="noopener noreferrer" class="">https://xxxx.xxx.xxx.xx/index/index/resetpass/code/280938b01d7742de39dbdd7tfffe2453bfaf4c48</a>
 像这种类似的密码重置链接如果验证凭证存在一定规律可以尝试进行猜解，从而重置其他用户密码</p>
@@ -86,23 +86,23 @@
 <p><strong>漏洞案例：</strong></p>
 <p>（这里的案例为修改两个参数，有些情况可能直接通过类似userid的一个参数即可修改，这里只是一个参考）</p>
 <p>访问测试网站登录界面</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-11-cf6d54a5b5ba9559c04576e54b7748a8.png" width="406" height="397" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-11-cf6d54a5b5ba9559c04576e54b7748a8.png" width="406" height="397" class="yakdoc-image"></button></p>
 <p>右上角找到更改密码功能</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-12-e07ae6d376cd1b603c38a2509e29edcb.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-12-e07ae6d376cd1b603c38a2509e29edcb.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <p>正常获取当前手机号的验证码进入到下一步</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-13-0364bbfe8ed3a6cce1e6a5efc3aca952.png" width="407" height="251" class="img_ev3q">
-<img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-14-e1cd034e5e25b845d8c23fc3cccdc999.png" width="433" height="345" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-13-0364bbfe8ed3a6cce1e6a5efc3aca952.png" width="407" height="251" class="yakdoc-image"></button>
+<button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-14-e1cd034e5e25b845d8c23fc3cccdc999.png" width="433" height="345" class="yakdoc-image"></button></p>
 <p>输入密码的之后点击提交用yakit抓取数据包</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-15-2885d8f253599c4af1f209ed2cd47d49.png" width="464" height="380" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-15-2885d8f253599c4af1f209ed2cd47d49.png" width="464" height="380" class="yakdoc-image"></button></p>
 <p>抓到如图数据包</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-16-6fc05650336d2553e85593d4c517ffbf.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-16-6fc05650336d2553e85593d4c517ffbf.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>此功能校验userid与phone是否绑定，若为绑定则返回true
 这里注册了另一个账号userid为110853。 手机号为173xxxxxxxx
 发送数据包发现成功越权修改</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-17-cb8ed1ff3d5d7b8a724d8f2480b4c0cf.png" width="1280" height="800" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-17-cb8ed1ff3d5d7b8a724d8f2480b4c0cf.png" width="1280" height="800" class="yakdoc-image"></button></p>
 <p>使用密码Admin119登录173xxxxxxxx账号
 成功登录</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-18-8b31be85ced6f5c5cf4825b63f12853c.png" width="1280" height="823" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyUserPasswordReset-18-8b31be85ced6f5c5cf4825b63f12853c.png" width="1280" height="823" class="yakdoc-image"></button></p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>漏洞修复方案</p><p>设置验证码失效时间并设置验证码尝试次数过多失效
 校验用户传入的验证码与当前手机号是否绑定，而不是只单独校验验证码是否正确
 禁止服务器返回验证码在返回包中

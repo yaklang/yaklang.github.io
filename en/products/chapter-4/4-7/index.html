@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">4.7 从手动验证到自动化资产：生成 Yaml PoC 工作流 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-4/4-7"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.7 从手动验证到自动化资产：生成 Yaml PoC 工作流 | Yak Program Language"><meta data-rh="true" name="description" content="在前面的章节中，我们已经深入探讨了如何利用 Web Fuzzer 进行精细化的手动测试，以及如何通过热加载脚本应对复杂的认证与加解密场景。这些操作的核心成果是一系列经过验证的、能够触发特定行为的有效数据包。然而，手动测试的价值并不仅仅在于单次的成功利用，更关键的是如何将这些发现沉淀为可复用、可共享、可自动化的安全资产。"><meta data-rh="true" property="og:description" content="在前面的章节中，我们已经深入探讨了如何利用 Web Fuzzer 进行精细化的手动测试，以及如何通过热加载脚本应对复杂的认证与加解密场景。这些操作的核心成果是一系列经过验证的、能够触发特定行为的有效数据包。然而，手动测试的价值并不仅仅在于单次的成功利用，更关键的是如何将这些发现沉淀为可复用、可共享、可自动化的安全资产。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-4/4-7"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-7" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-7" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-7" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/en/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.7 生成 Yaml PoC","item":"https://yaklang.com/en/products/chapter-4/4-7"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,10 +19,10 @@
 <p>信息泄露，特别是API定义文件的泄露，是诸多严重漏洞的起点。因此，构建一个能够精准识别这类文件的PoC具有极高的实战价值。我们将以此为例，分解PoC的自动化生成步骤。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="设定探测目标与构造基础请求">设定探测目标与构造基础请求<a href="#设定探测目标与构造基础请求" class="hash-link" aria-label="Direct link to 设定探测目标与构造基础请求" title="Direct link to 设定探测目标与构造基础请求" translate="no">​</a></h3>
 <p>流程的起点是获取一个明确的测试目标。我们首先通过Yakit内置的Vulfocus靶场环境搜索并定位到“OpenAPI 2.0 Swagger 泄漏”场景，获取到目标URL。</p>
-<p><img decoding="async" loading="lazy" alt="Swagger 敏感信息泄漏检测与 JSON 响应展示" src="/en/assets/images/ch4-072-d029293fab8024aca13fa68739ab0983.png" width="1158" height="647" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Swagger 敏感信息泄漏检测与 JSON 响应展示"><img decoding="async" loading="lazy" alt="Swagger 敏感信息泄漏检测与 JSON 响应展示" src="/en/assets/images/ch4-072-d029293fab8024aca13fa68739ab0983.png" width="1158" height="647" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Swagger 敏感信息泄漏检测与 JSON 响应展示</p>
 <p>随后，在Web Fuzzer中使用“从URL构造请求”功能，将该URL（例如 <code>http://127.0.0.1:8787/swagger/v1/swagger.json</code>）快速转换为一个基础的GET请求。发送该请求后，我们在响应面板可以看到返回的JSON内容，确认了该文件的存在和基本结构。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 输入 URL 构造请求并查看响应内容" src="/en/assets/images/ch4-073-54f7ff4de403fb3ae7e109f4e0bf1b2f.png" width="1187" height="550" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 输入 URL 构造请求并查看响应内容"><img decoding="async" loading="lazy" alt="Yakit 输入 URL 构造请求并查看响应内容" src="/en/assets/images/ch4-073-54f7ff4de403fb3ae7e109f4e0bf1b2f.png" width="1187" height="550" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 输入 URL 构造请求并查看响应内容</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义精准的验证规则">定义精准的验证规则<a href="#定义精准的验证规则" class="hash-link" aria-label="Direct link to 定义精准的验证规则" title="Direct link to 定义精准的验证规则" translate="no">​</a></h3>
 <p>一个可靠的PoC必须具备精确的验证逻辑，以避免误报。仅通过HTTP状态码 <code>200 OK</code> 来判断是远远不够的。对于Swagger 2.0的定义文件，其响应内容中必然包含 <code>&quot;swagger&quot;: &quot;2.0&quot;</code> 这样的关键特征。我们将基于此特征来构建匹配规则。</p>
@@ -39,14 +39,14 @@
 </li>
 </ul>
 <p>这条正则表达式能够精确匹配 <code>swagger</code> 字段及其 <code>2.x</code> 版本的版本号，同时忽略了冒号和版本号两侧可能存在的任意空白字符。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 定义 HTTP 重放验证规则的操作界面" src="/en/assets/images/ch4-074-9515ee3472a46d45185824d620e9a4c8.png" width="1438" height="728" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 定义 HTTP 重放验证规则的操作界面"><img decoding="async" loading="lazy" alt="Yakit 定义 HTTP 重放验证规则的操作界面" src="/en/assets/images/ch4-074-9515ee3472a46d45185824d620e9a4c8.png" width="1438" height="728" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 定义 HTTP 重放验证规则的操作界面</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则验证与一键生成模版">规则验证与一键生成模版<a href="#规则验证与一键生成模版" class="hash-link" aria-label="Direct link to 规则验证与一键生成模版" title="Direct link to 规则验证与一键生成模版" translate="no">​</a></h3>
 <p>在应用规则前，点击“调试执行”可以立即验证当前规则是否能成功匹配已获取的响应，此时系统提示“匹配成功”，证明我们的规则配置无误。确认后，点击“应用”将该匹配器固化到当前测试会话中。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 匹配器规则验证与调试界面" src="/en/assets/images/ch4-075-3fe683224d7c6a2cc4bd31fc404c2b0b.png" width="730" height="579" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 匹配器规则验证与调试界面"><img decoding="async" loading="lazy" alt="Yakit 匹配器规则验证与调试界面" src="/en/assets/images/ch4-075-3fe683224d7c6a2cc4bd31fc404c2b0b.png" width="730" height="579" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 匹配器规则验证与调试界面</p>
 <p>当再次发送请求时，可以看到界面上出现了“匹配成功”的绿色标签，这标志着我们已经拥有了一个完整的、包含有效请求和精确验证逻辑的测试单元。此时，万事俱备，我们点击界面右上角的“<strong>生成Yaml模板</strong>”按钮。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit匹配成功生成Yaml模版界面" src="/en/assets/images/ch4-076-b5090136cd6fe24bc65c6f5f0a33d3a5.png" width="1720" height="437" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit匹配成功生成Yaml模版界面"><img decoding="async" loading="lazy" alt="Yakit匹配成功生成Yaml模版界面" src="/en/assets/images/ch4-076-b5090136cd6fe24bc65c6f5f0a33d3a5.png" width="1720" height="437" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit匹配成功生成Yaml模版界面</p>
 <p>如图所示，Yakit 提供了两种生成模式，以满足不同场景的工程化需求。这两种模式最终都会生成一个结构化的 YAML 文件，但其对 HTTP 请求的表达方式有所不同。</p>
 <ul>
@@ -57,7 +57,7 @@
 <p><strong>Raw 模式</strong>：该模式将完整的原始 HTTP 请求报文——从请求行到请求体——作为一个整体的字符串块（raw block）进行保存。此模式提供了最高的保真度，能够 1:1 完整复现原始请求的每一个字节，包括那些可能存在的特殊换行符或非标准头部。它特别适用于那些结构异常复杂、难以通过字段逐一描述的请求。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer 规则验证与模版生成界面" src="/en/assets/images/ch4-077-d1a6cf0c207973f5774773d06984d707.png" width="1353" height="914" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer 规则验证与模版生成界面"><img decoding="async" loading="lazy" alt="Web Fuzzer 规则验证与模版生成界面" src="/en/assets/images/ch4-077-d1a6cf0c207973f5774773d06984d707.png" width="1353" height="914" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer 规则验证与模版生成界面</p>
 <p>无论选择哪种模式，生成的YAML模板都具备高度的工程化价值和通用性。Yakit生成的PoC在顶层结构上（如 <code>id</code>, <code>info</code>, <code>http</code>, <code>matchers</code> 等字段）与业界广泛使用的安全扫描工具 <strong>Nuclei</strong> 的模板格式高度兼容。这意味着，由Yakit生成的PoC不仅可以在Yakit生态内无缝流转，也可以在简单修改后被Nuclei等支持该格式的工具加载执行，极大地增强了产出资产的通用性和价值。</p>
 <p>更重要的是，Yakit为用户提供了双轨并行的工作流。对于标准场景，用户完全可以通过图形化界面中的“<strong>规则配置</strong>”与“<strong>匹配器/提取器</strong>”来定义PoC的全部逻辑，实现“零代码”快速生成。而对于追求极致灵活性的高级用户，可以直接在导出的YAML文件上进行二次开发，手动添加更复杂的请求链、动态变量提取与注入逻辑，以实现GUI无法直接覆盖的复杂场景。这种“<strong>GUI快速生成，代码灵活定制</strong>”的模式，兼顾了效率与深度。</p>
@@ -82,7 +82,7 @@
 <p>关键在于将多个条件之间的“<strong>条件关系</strong>”设置为“<strong>AND</strong>”。这表示只有当<strong>所有</strong>条件（状态码为200 <strong>且</strong> 正则表达式匹配成功）都得到满足时，最终的匹配结果才为成功。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit状态码匹配规则配置与验证界面" src="/en/assets/images/ch4-078-5676524943fa931d129cff83b6281ef7.png" width="769" height="673" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit状态码匹配规则配置与验证界面"><img decoding="async" loading="lazy" alt="Yakit状态码匹配规则配置与验证界面" src="/en/assets/images/ch4-078-5676524943fa931d129cff83b6281ef7.png" width="769" height="673" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit状态码匹配规则配置与验证界面</p>
 <p>通过“调试执行”功能，我们可以立即验证这条组合规则的有效性。这种“状态码+内容”的黄金组合是编写高质量PoC的基石。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4722-多关键字验证提升特征识别精度">4.7.2.2 多关键字验证：提升特征识别精度<a href="#4722-多关键字验证提升特征识别精度" class="hash-link" aria-label="Direct link to 4.7.2.2 多关键字验证：提升特征识别精度" title="Direct link to 4.7.2.2 多关键字验证：提升特征识别精度" translate="no">​</a></h3>
@@ -110,14 +110,14 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="多关键字匹配验证配置界面" src="/en/assets/images/ch4-079-3df819c8aa540dcd9e8d0eee3a56b85d.png" width="740" height="431" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 多关键字匹配验证配置界面"><img decoding="async" loading="lazy" alt="多关键字匹配验证配置界面" src="/en/assets/images/ch4-079-3df819c8aa540dcd9e8d0eee3a56b85d.png" width="740" height="431" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：多关键字匹配验证配置界面</p>
 <p>这种方式为特征识别提供了更高的灵活性，能够根据实际场景精确定义目标画像。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4723-终极利器使用表达式dsl实现动态判断">4.7.2.3 终极利器：使用表达式（DSL）实现动态判断<a href="#4723-终极利器使用表达式dsl实现动态判断" class="hash-link" aria-label="Direct link to 4.7.2.3 终极利器：使用表达式（DSL）实现动态判断" title="Direct link to 4.7.2.3 终极利器：使用表达式（DSL）实现动态判断" translate="no">​</a></h3>
 <p>对于需要进行数值比较、函数运算或复杂逻辑组合的场景，Yakit提供了功能强大的“<strong>表达式（Expression）</strong>”模式。这本质上是启用了一个领域特定语言（DSL），允许用户编写简短的代码片段来执行动态、精细的验证。</p>
 <p>值得一提的是，Yakit的表达式引擎在语法和核心函数上与业界流行的 <strong>Nuclei</strong> 工具高度兼容，这极大地降低了用户的学习成本，并使得PoC资产可以在两个生态之间轻松迁移。</p>
 <p>一个典型的应用场景是检测时间盲注漏洞。我们可以通过<code>duration</code>这个内置变量来获取请求的响应时间（单位：秒），并设置一个阈值，例如 <code>duration &gt; 3</code>，意为当响应时间超过3秒时匹配成功。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer表达式匹配设置界面" src="/en/assets/images/ch4-080-d3cc4155167c459f35ef88e4e6b5ac3f.png" width="741" height="325" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit Web Fuzzer表达式匹配设置界面"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer表达式匹配设置界面" src="/en/assets/images/ch4-080-d3cc4155167c459f35ef88e4e6b5ac3f.png" width="741" height="325" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer表达式匹配设置界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="典型dsl表达式案例从实践中学习">典型DSL表达式案例：从实践中学习<a href="#典型dsl表达式案例从实践中学习" class="hash-link" aria-label="Direct link to 典型DSL表达式案例：从实践中学习" title="Direct link to 典型DSL表达式案例：从实践中学习" translate="no">​</a></h4>
 <p>在深入了解完整的函数列表之前，我们先通过几个真实且高频的使用场景来直观感受DSL的威力。理论源于实践，这些案例覆盖了从基础验证到高级技巧的多个层面。</p>
@@ -164,7 +164,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4731-poc的在线调试与验证">4.7.3.1 PoC的在线调试与验证<a href="#4731-poc的在线调试与验证" class="hash-link" aria-label="Direct link to 4.7.3.1 PoC的在线调试与验证" title="Direct link to 4.7.3.1 PoC的在线调试与验证" translate="no">​</a></h3>
 <p>理论上的完美规则，在面对真实世界的复杂网络环境时仍可能出现偏差。因此，在最终确认一个 PoC 之前，进行在线调试是保证其质量的最后一道，也是最重要的一道防线。当一个 PoC 模板在 Web Fuzzer 中生成后，Yakit 会引导用户直接进入一个专门的“<strong>插件调试</strong>”界面。</p>
 <p>该界面在设计上遵循了“<strong>配置与代码分离，输入与验证分离</strong>”的核心原则，实现了高效的“所见即所得”调试体验。</p>
-<p><img decoding="async" loading="lazy" alt="点击请求配置查看PoC参数化信息" src="/en/assets/images/ch4-081-4c944ed3054b8fc89cfa5bfd1509feaa.png" width="1569" height="901" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 点击请求配置查看PoC参数化信息"><img decoding="async" loading="lazy" alt="点击请求配置查看PoC参数化信息" src="/en/assets/images/ch4-081-4c944ed3054b8fc89cfa5bfd1509feaa.png" width="1569" height="901" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：点击请求配置查看PoC参数化信息</p>
 <p>如上图所示，整个调试界面被逻辑地划分为左右两个核心区域：</p>
 <ul>
@@ -192,7 +192,7 @@
 </li>
 </ul>
 <p>完成配置后，参数化的信息将直接作用于本次执行，而不会修改右侧的 PoC 源码，确保了模板的纯净性。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit插件调试界面展示" src="/en/assets/images/ch4-082-b671391b470ff8aae18b37a22c7585cd.png" width="1307" height="732" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit插件调试界面展示"><img decoding="async" loading="lazy" alt="Yakit插件调试界面展示" src="/en/assets/images/ch4-082-b671391b470ff8aae18b37a22c7585cd.png" width="1307" height="732" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit插件调试界面展示</p>
 <ol>
 <li class=""><strong>闭环调试与迭代优化 (右侧面板)</strong></li>
@@ -227,7 +227,7 @@
 <p>通过这样“<strong>执行 → 观测 → 修正 → 再次执行</strong>”的快速迭代循环，测试人员可以高效地将一个理论上的 PoC 打磨成一个在多种预期环境下都能准确、稳定工作的、经过实战验证的可靠安全资产。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4733-保存为插件将能力资产化">4.7.3.3 保存为插件：将能力资产化<a href="#4733-保存为插件将能力资产化" class="hash-link" aria-label="Direct link to 4.7.3.3 保存为插件：将能力资产化" title="Direct link to 4.7.3.3 保存为插件：将能力资产化" translate="no">​</a></h3>
 <p>当PoC经过充分的调试和验证，证明其稳定可靠后，最后一步就是将其保存为Yakit中的一个标准化插件。这是一个将临时脚本转化为永久资产质变过程。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 插件调试界面与保存按钮" src="/en/assets/images/ch4-083-71c83819dc2c56691e7f451ca81cdf74.png" width="1470" height="686" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 插件调试界面与保存按钮"><img decoding="async" loading="lazy" alt="Yakit 插件调试界面与保存按钮" src="/en/assets/images/ch4-083-71c83819dc2c56691e7f451ca81cdf74.png" width="1470" height="686" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 插件调试界面与保存按钮</p>
 <p>点击调试界面右上角的“<strong>存为插件</strong>”按钮，Yakit会将当前调试好的PoC模板正式保存到本地的插件库中。一旦保存，这个PoC便不再是一个孤立的YAML文件，而是Yakit插件生态系统中的一员，可以像其他内置插件一样被搜索、管理和调用，尤其是在进行大规模批量扫描任务时。</p>
 <p>这个“<strong>构造数据包 -&gt; 生成模板 -&gt; 在线调试 -&gt; 保存插件</strong>”的流程，构成了Yakit的“免写(Code-Free)”PoC工作流。它极大地降低了PoC的开发门槛，将开发者的精力从繁琐的模板语法和调试环境搭建中解放出来，使其能完全专注于漏洞利用逻辑本身。</p>

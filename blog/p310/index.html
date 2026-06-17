@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">“化学反应”：log4j JNDI fuzz 与被动扫描 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p310"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="“化学反应”：log4j JNDI fuzz 与被动扫描 | Yak Program Language"><meta data-rh="true" name="description" content="Log4j JNDI Lookup 潜在威胁"><meta data-rh="true" property="og:description" content="Log4j JNDI Lookup 潜在威胁"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2021-12-17T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2021 年,WebFuzzer,Java 安全,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p310"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p310" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p310" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p310" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p310","mainEntityOfPage":"https://yaklang.com/blog/p310","url":"https://yaklang.com/blog/p310","headline":"“化学反应”：log4j JNDI fuzz 与被动扫描","name":"“化学反应”：log4j JNDI fuzz 与被动扫描","description":"Log4j JNDI Lookup 潜在威胁","datePublished":"2021-12-17T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -50,21 +50,21 @@
 <li class="">点击 “加载插件”，选择【log4j fuzzer】</li>
 <li class="">输入在 dnslog 平台中获取到的域名，启动</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/27a994eebe65fa78-0f85af381f96c2b3a971ba3f57798376.png" width="533" height="540" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/27a994eebe65fa78-0f85af381f96c2b3a971ba3f57798376.png" width="533" height="540" class="yakdoc-image"></button></p>
 <p>看到上述内容时，意味着我们的 log4j fuzzer 加载成功了！</p>
 <ol>
 <li class="">于是我们可以挂上代理，访问想要检测的网站 (Powered by Vulfocus)了~</li>
 </ol>
 <p>访问之后，进入 dnslog 平台查看结果</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/9973abcc29880472-f52d4767471e97115583887e29257b47.png" width="840" height="745" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/9973abcc29880472-f52d4767471e97115583887e29257b47.png" width="840" height="745" class="yakdoc-image"></button></p>
 <p>04</p>
 <p>知其所以然</p>
 <p>大家也许很好奇，Yakit 的 MITM 的插件是如何做到上述自动 fuzz 发包的。我们打开 Yakit 的插件商店，可以查看到插件的源码，其实插件源码如大家所见，非常简单</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5d18c97bd4eb5005-d0f7e568f19ee9e070ba8bea2ffb3e9d.png" width="1080" height="613" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5d18c97bd4eb5005-d0f7e568f19ee9e070ba8bea2ffb3e9d.png" width="1080" height="613" class="yakdoc-image"></button></p>
 <p>1111</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="yakfuzz-语法与-api">yak.fuzz 语法与 API<a href="#yakfuzz-语法与-api" class="hash-link" aria-label="yak.fuzz 语法与 API的直接链接" title="yak.fuzz 语法与 API的直接链接" translate="no">​</a></h2>
 <p>当然，下面的代码仅仅是插件的一小部分，完整的代码，用户可通过 “更新插件商店” 来查看</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5d18c97bd4eb5005-d0f7e568f19ee9e070ba8bea2ffb3e9d.png" width="1080" height="613" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5d18c97bd4eb5005-d0f7e568f19ee9e070ba8bea2ffb3e9d.png" width="1080" height="613" class="yakdoc-image"></button></p>
 <p>其实上面的代码，非常简单，我们在</p>
 <ol>
 <li class="">Web Fuzz 基础 API <a href="https://www.yaklang.io/docs/newforyak/fuzz_tutorial" target="_blank" rel="noopener noreferrer" class="">https://www.yaklang.io/docs/newforyak/fuzz_tutorial</a></li>
@@ -76,7 +76,7 @@
 <p>本质上 yak 语言的 fuzz 模块，封装了很多可以模糊测试的 API，精细操作数据包中的内容，对于这种场景来说。</p>
 <p>相比于 Burpsuite 的插件体系，需要编写 Java UI 和 Java 环境。与此同时【<a href="http://mp.weixin.qq.com/s?__biz=MzA3MzI1MTIzMw==&amp;mid=2247483711&amp;idx=1&amp;sn=470e496f4e761cccadf962a23b493573&amp;chksm=9f10a1f1a86728e7290c83b60028942df2436b75fd7bb699fb5cca8ad4926353500d2620c1cd&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">Log4shell中被忽视的威胁:BurpSuite插件</a> 】这篇文章中提到的问题也不应该被忽视。</p>
 <p>Yakit 使用配置化和自动生成的 UI，并且插件核心内容其实就是一段 Yak 脚本（“文本”）更具有便携性。同时允许用户 “热加载” 现场编写的代码，这可能是市面上任何工具/平台，都做不到的</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/f3903d94ab38eb7e-8bdfba9cc9aba675f9bec2976e28d010.png" width="1080" height="548" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/f3903d94ab38eb7e-8bdfba9cc9aba675f9bec2976e28d010.png" width="1080" height="548" class="yakdoc-image"></button></p>
 <p>05</p>
 <p>BTW</p>
 <blockquote>
@@ -86,7 +86,7 @@
 <p>爆肝写代码做产品之余还是周四上午随手写了一下 fuzz 发包的插件，就发了吧！大家看个热闹，顺便告诉大家 yaklang.io 还活着，虽然才两个月零几天，踉踉跄跄已经会走路了。</p>
 <p>同时，yaklang.io 也迎来了更多靠谱的同伴，大家观察到的 Yakit 前端肉眼可见的变 “精致” 与好用，github 项目中悄无声息增加了很多“文档”，让项目变得更“透明”，也能让我解放出来做一些更有“创造性”的事情。</p>
 <p>我们并不给自己设置天花板，永远有新奇的小玩意来发挥它的价值。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAMBAMAAAA64UZ0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAFVBMVEUAAAA/ifE/iPEui+g/ivI/ifH///+4hqkxAAAABXRSTlMAzbkLvzTpgiMAAAABYktHRAZhZrh9AAAATUlEQVQY02MQMmBgYFZkgAMcfFVnBgaTIIQwDr5JiAGzqzNCGAef2dXZJMQAIYyLbxKCrBknn9kVWTNOPpHKiLOUSC8QGSBEBi9xkQUAT3kiRZQA3W0AAAAASUVORK5CYII=" width="76" height="12" class="yakdoc-image"></button></p>
 <hr>
 <blockquote>
 <p>本文首发于 Yak Project 公众号，<a href="https://mp.weixin.qq.com/s/8i1pxuX9gnhfE0Y48fPGXg" target="_blank" rel="noopener noreferrer" class="">阅读原文</a>。</p>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.1 Yakit 应用架构与安装配置 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-2/2-1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.1 Yakit 应用架构与安装配置 | Yak Program Language"><meta data-rh="true" name="description" content="2.1.1 Yakit 应用架构"><meta data-rh="true" property="og:description" content="2.1.1 Yakit 应用架构"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-2/2-1"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-1" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-1" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/en/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.1 应用架构与安装","item":"https://yaklang.com/en/products/chapter-2/2-1"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <p>在深入探索 Yakit 强大的功能集之前，理解其底层的应用架构至关重要。这不仅能帮助我们更高效地利用平台，还能在遇到问题时，提供清晰的故障排查思路。Yakit 采用了现代软件工程中主流的<strong>前后端分离（Client-Server）设计模式</strong>，将整个系统解耦为两个独立而又协同工作的核心部分：用户区与核心功能区。</p>
 <p>本小节将围绕两大核心命题展开：<strong>第一，阐明 Yakit 前后端分离架构的核心理念与组件构成；第二，解析各组件之间的通信机制与数据流转过程。</strong> 通过对这一架构的理解，用户将能从“黑盒”使用者转变为能够洞察其内部工作原理的“白盒”使用者，为后续的高级应用和二次开发奠定坚实的理论基础。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="架构组件解析">架构组件解析<a href="#架构组件解析" class="hash-link" aria-label="Direct link to 架构组件解析" title="Direct link to 架构组件解析" translate="no">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="Yakit 架构组件解析示意图" src="/en/assets/images/ch2-001-b264088b418591fa46aa490473a934ba.png" width="2680" height="1312" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 架构组件解析示意图"><img decoding="async" loading="lazy" alt="Yakit 架构组件解析示意图" src="/en/assets/images/ch2-001-b264088b418591fa46aa490473a934ba.png" width="2680" height="1312" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 架构组件解析示意图</p>
 <p>Yakit 的整体架构可以清晰地划分为两大区域：负责用户交互的<strong>用户区</strong>和执行核心安全任务的<strong>核心功能区</strong>。</p>
 <ol>
@@ -68,19 +68,19 @@
 <ul>
 <li class=""><strong>官网下载</strong>：访问 Yaklang 的官方网站（<a href="https://yaklang.com/" target="_blank" rel="noopener noreferrer" class="">https://yaklang.com</a>），在首页可以找到 Yakit 最新版本的安装程序并下载。官网通常提供 Windows 安装包（.exe）、macOS 安装包（.dmg）以及 Linux 可执行文件或压缩包。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit IDE多平台安装包下载界面" src="/en/assets/images/ch2-002-39533d472cad95c70a54ee0134382615.png" width="2940" height="1662" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit IDE多平台安装包下载界面"><img decoding="async" loading="lazy" alt="Yakit IDE多平台安装包下载界面" src="/en/assets/images/ch2-002-39533d472cad95c70a54ee0134382615.png" width="2940" height="1662" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit IDE多平台安装包下载界面</p>
 <ul>
 <li class=""><strong>Github Releases</strong>：也可以前往 Yakit 的 GitHub 仓库页面（<a href="https://github.com/yaklang/yakit/releases" target="_blank" rel="noopener noreferrer" class="">https://github.com/yaklang/yakit/releases</a>）下载发布的安装文件。GitHub 上通常也提供各平台对应的版本。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit GitHub页面v1.4.1-0606版本发布页" src="/en/assets/images/ch2-003-3f1b0eb89dbab42206069b88e7d96fa3.png" width="1169" height="907" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit GitHub页面v1.4.1-0606版本发布页"><img decoding="async" loading="lazy" alt="Yakit GitHub页面v1.4.1-0606版本发布页" src="/en/assets/images/ch2-003-3f1b0eb89dbab42206069b88e7d96fa3.png" width="1169" height="907" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit GitHub页面v1.4.1-0606版本发布页</p>
 <p>下载完成后，应该获得对应平台的安装程序文件。例如 Windows 下是一个 <code>.exe</code> 可执行安装程序，macOS 下是 <code>.dmg</code> 安装镜像，Linux 下可能是一个可运行的压缩包或安装脚本。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="在多系统多平台下安装yakit">在多系统多平台下安装Yakit<a href="#在多系统多平台下安装yakit" class="hash-link" aria-label="Direct link to 在多系统多平台下安装Yakit" title="Direct link to 在多系统多平台下安装Yakit" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="windows下安装-yakit">Windows下安装 Yakit<a href="#windows下安装-yakit" class="hash-link" aria-label="Direct link to Windows下安装 Yakit" title="Direct link to Windows下安装 Yakit" translate="no">​</a></h4>
 <p><strong>Yakit 的 Windows 安装程序是一个独立的 <strong><strong><code>.exe</code></strong></strong> 可执行文件，封装了所有必要的组件和依赖。整个过程通过一个清晰的向导界面引导用户完成，无需复杂的手动配置。</strong></p>
 <p>双击下载的 <strong><code>Yakit-&lt;version&gt;-windows-amd64.exe</code></strong> 安装文件。随后将出现标准的安装向导界面。基于 Windows 标准安装向含，Yakit 的部署流程被清晰地分解为以下四个核心步骤。每一步都包含了关键的配置选项和需要用户理解的背景信息，以确保安装的顺利与后续使用的稳定。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 安装向导步骤界面" src="/en/assets/images/ch2-004-25ffc92e4b15b666946cb59574cdda04.png" width="1038" height="755" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 安装向导步骤界面"><img decoding="async" loading="lazy" alt="Yakit 安装向导步骤界面" src="/en/assets/images/ch2-004-25ffc92e4b15b666946cb59574cdda04.png" width="1038" height="755" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 安装向导步骤界面</p>
 <p><strong>步骤一：启动向导与准备 (对应图示 ①)</strong>
 在执行下载的 <code>Yakit-&lt;version&gt;-windows-amd64.exe</code> 文件后，用户将首先看到“欢迎使用 Yakit 安装向导”界面。这是一个标准的启动画面，其主要作用是告知用户即将开始安装流程。如向导提示，建议在进行下一步操作前关闭其他所有应用程序，这是一个保障安装过程不受干扰的行业标准实践，可以有效避免因文件占用或系统资源冲突导致的安装失败。用户确认准备就绪后，应单击“下一步(N)”继续。</p>
@@ -105,7 +105,7 @@
 <p>根据个人需求完成上述选项的配置后，点击“完成(F)”即可正式结束安装流程。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="macos安装yakit">macOS安装Yakit<a href="#macos安装yakit" class="hash-link" aria-label="Direct link to macOS安装Yakit" title="Direct link to macOS安装Yakit" translate="no">​</a></h4>
 <p>我们将以 macOS 平台为例，详细阐述从获取安装包到首次启动并完成引擎初始化的完整流程。对于专业用户而言，正确的初始化配置是决定工具工作模式（本地或远程）的关键步骤，直接影响后续的协作效率与资源利用。首先我们打开下载好的 <strong><code>Yakit-&lt;version&gt;.dmg</code></strong> 镜像文件。按照弹出的安装窗口提示，将 Yakit 图标拖动到“Applications”（应用程序）文件夹中完成安装。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit macOS安装界面展示拖拽操作" src="/en/assets/images/ch2-005-03b2b79aeddd6df05fb977204b20918a.png" width="536" height="421" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit macOS安装界面展示拖拽操作"><img decoding="async" loading="lazy" alt="Yakit macOS安装界面展示拖拽操作" src="/en/assets/images/ch2-005-03b2b79aeddd6df05fb977204b20918a.png" width="536" height="421" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit macOS安装界面展示拖拽操作</p>
 <p>操作步骤非常直观：</p>
 <ol>
@@ -130,7 +130,7 @@
 <p>本节的核心任务是<strong>阐明两种运行模式的定位与价值，并提供清晰的配置指引</strong>。我们将重点介绍作为标准推荐的<strong>本地模式</strong>，它已经能够满足绝大多数大规模、高性能的专业安全任务需求。同时，我们也会解析<strong>远程模式</strong>，它作为一种灵活的架构补充，在特定场景下发挥着不可替代的作用。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="初始化页面">初始化页面<a href="#初始化页面" class="hash-link" aria-label="Direct link to 初始化页面" title="Direct link to 初始化页面" translate="no">​</a></h4>
 <p>当您完成安装并首次运行 Yakit 客户端时，一个简洁的初始化向导会呈现在您面前。这是您进入 Yakit 世界的第一个关口，它提供了两个核心选项：“初始化引擎”和“远程连接”。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit本地引擎初始化界面与提示" src="/en/assets/images/ch2-006-d6900a5c81ac38802e9fe5c9ab419736.png" width="943" height="330" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit本地引擎初始化界面与提示"><img decoding="async" loading="lazy" alt="Yakit本地引擎初始化界面与提示" src="/en/assets/images/ch2-006-d6900a5c81ac38802e9fe5c9ab419736.png" width="943" height="330" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit本地引擎初始化界面与提示</p>
 <ul>
 <li class="">
@@ -146,7 +146,7 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="本地模式开箱即用的一体化高性能工作站">本地模式：开箱即用的一体化高性能工作站<a href="#本地模式开箱即用的一体化高性能工作站" class="hash-link" aria-label="Direct link to 本地模式：开箱即用的一体化高性能工作站" title="Direct link to 本地模式：开箱即用的一体化高性能工作站" translate="no">​</a></h4>
 <p>对于绝大多数用户而言，本地模式是兼具便捷性与强大性能的最佳选择。它实现了“开箱即用”的体验，让您能立刻投入核心工作。直接点击之前的“初始化引擎”然后重启应用，初始化成功后系统将直接带您进入 <strong>“项目管理”</strong> 页面，这是您所有工作的起点。</p>
 <p>在此，推荐用户直接使用“初始化引擎”直接进入 Yakit 操作界面，在第一次使用Yakit平台的时候，用户会首先看到“项目管理”功能（我们在后续讲详细讲解项目管理的功能）</p>
-<p><img decoding="async" loading="lazy" alt="Yakit本地模式项目管理界面" src="/en/assets/images/ch2-007-8bf28b6ed23217017ffe3d8275af2c6a.png" width="1159" height="335" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit本地模式项目管理界面"><img decoding="async" loading="lazy" alt="Yakit本地模式项目管理界面" src="/en/assets/images/ch2-007-8bf28b6ed23217017ffe3d8275af2c6a.png" width="1159" height="335" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit本地模式项目管理界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="远程模式应对特定架构的分布式部署方案">远程模式：应对特定架构的分布式部署方案<a href="#远程模式应对特定架构的分布式部署方案" class="hash-link" aria-label="Direct link to 远程模式：应对特定架构的分布式部署方案" title="Direct link to 远程模式：应对特定架构的分布式部署方案" translate="no">​</a></h4>
 <p>虽然本地模式已足够强大，但在某些特定场景下，将“界面”与“计算”分离的远程模式会更具优势。其核心价值在于<strong>资源解耦</strong>与<strong>协同作业</strong>。</p>
@@ -187,7 +187,7 @@
 返回客户端，选择“远程模式”，并填写服务器的 <strong>IP 地址</strong> 和 <strong>端口号</strong>。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit远程模式连接配置界面" src="/en/assets/images/ch2-008-a0c8635ca61989c9f9c4de1b9a447c24.png" width="676" height="589" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit远程模式连接配置界面"><img decoding="async" loading="lazy" alt="Yakit远程模式连接配置界面" src="/en/assets/images/ch2-008-a0c8635ca61989c9f9c4de1b9a447c24.png" width="676" height="589" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit远程模式连接配置界面</p>
 <ol start="4">
 <li class="">点击 <strong>“启动连接”</strong>，成功后即可像使用本地模式一样操作，但所有任务都将在远程服务器上执行。</li>
@@ -195,7 +195,7 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="项目管理结构化工作的核心枢纽">项目管理：结构化工作的核心枢纽<a href="#项目管理结构化工作的核心枢纽" class="hash-link" aria-label="Direct link to 项目管理：结构化工作的核心枢纽" title="Direct link to 项目管理：结构化工作的核心枢纽" translate="no">​</a></h4>
 <p>当您完成初始化并进入 Yakit 主界面后，首先接触到的便是“项目管理”视图。这并非一个简单的文件列表，而是 Yakit 进行结构化安全工作的核心枢纽，是您所有测试活动的起点。</p>
 <p>其核心设计理念是<strong>工作空间隔离</strong>与<strong>数据持久化</strong>。在专业的安全测试流程中，针对不同目标或任务的数据（如资产信息、MITM 流量、漏洞详情、插件扫描结果等）必须进行严格分离，以确保数据的完整性和机密性。Yakit 中的每一个“项目”，本质上都是一个独立的、自包含的数据库文件，它封装了特定任务的全部上下文数据，从而实现了彻底的逻辑隔离。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit项目管理界面展示" src="/en/assets/images/ch2-009-8bf28b6ed23217017ffe3d8275af2c6a.png" width="1159" height="335" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit项目管理界面展示"><img decoding="async" loading="lazy" alt="Yakit项目管理界面展示" src="/en/assets/images/ch2-009-8bf28b6ed23217017ffe3d8275af2c6a.png" width="1159" height="335" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit项目管理界面展示</p>
 <p>如图所示，项目管理界面提供了清晰的操作路径：</p>
 <ul>

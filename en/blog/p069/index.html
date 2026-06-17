@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">震惊！YAK-JWT靶场的通关方式竟然是... | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p069"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="震惊！YAK-JWT靶场的通关方式竟然是... | Yak Program Language"><meta data-rh="true" name="description" content="JWT（JSON Web Token）是一种广泛使用的身份验证和授权机制，但由于其设计和实现的特点，可能存在一些安全漏洞。yak靶场内置了两个常见jwt漏洞类型，本文章介绍下分析过程和利用方式。"><meta data-rh="true" property="og:description" content="JWT（JSON Web Token）是一种广泛使用的身份验证和授权机制，但由于其设计和实现的特点，可能存在一些安全漏洞。yak靶场内置了两个常见jwt漏洞类型，本文章介绍下分析过程和利用方式。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-02-14T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,靶场实战"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p069"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p069" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p069" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p069" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p069","mainEntityOfPage":"https://yaklang.com/en/blog/p069","url":"https://yaklang.com/en/blog/p069","headline":"震惊！YAK-JWT靶场的通关方式竟然是...","name":"震惊！YAK-JWT靶场的通关方式竟然是...","description":"JWT（JSON Web Token）是一种广泛使用的身份验证和授权机制，但由于其设计和实现的特点，可能存在一些安全漏洞。yak靶场内置了两个常见jwt漏洞类型，本文章介绍下分析过程和利用方式。","datePublished":"2025-02-14T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,44 +17,44 @@
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="靶场概览">靶场概览<a href="#靶场概览" class="hash-link" aria-label="Direct link to 靶场概览" title="Direct link to 靶场概览" translate="no">​</a></h2>
 <p>打开jwt靶场是一个登录页面</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/40063f8a8bc6fe24-4fa80712b244d3d93787ab854507271f.png" width="556" height="409" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/40063f8a8bc6fe24-4fa80712b244d3d93787ab854507271f.png" width="556" height="409" class="yakdoc-image"></button></p>
 <p>尝试弱口令admin/admin成功登录。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/334a73add000c62c-802173c48f6a121813d380ebd47ec553.png" width="1080" height="372" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/334a73add000c62c-802173c48f6a121813d380ebd47ec553.png" width="1080" height="372" class="yakdoc-image"></button></p>
 <p>通过抓包可以看到，整个登录过程主要是3个请求：</p>
 <p>第一个页面：<strong><a href="https://127.0.0.1:8080/jwt/unsafe-login1" target="_blank" rel="noopener noreferrer" class="">https://127.0.0.1:8080/jwt/unsafe-login1</a></strong> （GET请求）</p>
 <p>这个页面是登录首页，通过localStorage从会话中读取VULINBOX_JWT变量，如果存在则通过这个jwt请求/jwt/unsafe-login1/profile，获取用户信息并展示。否则显示登录页面。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d332e62b84aabeca-526aedf70fe8a57fbbb2337f20be4eb6.png" width="565" height="366" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d332e62b84aabeca-526aedf70fe8a57fbbb2337f20be4eb6.png" width="565" height="366" class="yakdoc-image"></button></p>
 <p>第二个页面：<strong><a href="https://127.0.0.1:8080/jwt/unsafe-login1" target="_blank" rel="noopener noreferrer" class="">https://127.0.0.1:8080/jwt/unsafe-login1</a></strong> （POST请求）</p>
 <p>同在/jwt/unsafe-login1页面，通过POST请求发送认证信息，如果成功则返回jwt，否则返回认证失败的错误</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0a7efed64812a885-db2434e14c6815de1395070ff3160d5b.png" width="680" height="313" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3bd16f9d354c4ff4-c5b69cf386ee925a606b0ae78a20c20f.png" width="343" height="149" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/0a7efed64812a885-db2434e14c6815de1395070ff3160d5b.png" width="680" height="313" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/3bd16f9d354c4ff4-c5b69cf386ee925a606b0ae78a20c20f.png" width="343" height="149" class="yakdoc-image"></button></p>
 <p>第三个页面：<strong><a href="https://127.0.0.1:8080/jwt/unsafe-login1/profile" target="_blank" rel="noopener noreferrer" class="">https://127.0.0.1:8080/jwt/unsafe-login1/profile</a></strong></p>
 <p>通过Authorization将jwt传递给后端，如果验证成功则返回用户信息，否则返回认证失败的提示</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1a5ac1f381ebccf6-9def305ee99d2bc6340bae628c3d6c22.png" width="464" height="180" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8034648ca5e7615b-f4c03221496432f7a50627942f39c163.png" width="424" height="156" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1a5ac1f381ebccf6-9def305ee99d2bc6340bae628c3d6c22.png" width="464" height="180" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8034648ca5e7615b-f4c03221496432f7a50627942f39c163.png" width="424" height="156" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="流程分析">流程分析<a href="#流程分析" class="hash-link" aria-label="Direct link to 流程分析" title="Direct link to 流程分析" translate="no">​</a></h2>
 <p>用户首先通过用户名密码向后端请求得到jwt，再通过jwt向后端请求得到完整用户信息，并将信息展示在前端。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2ca4ab9d8be2df91-a867b6eb55498a447d4d2217874f0c8d.png" width="727" height="709" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/2ca4ab9d8be2df91-a867b6eb55498a447d4d2217874f0c8d.png" width="727" height="709" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例1-none攻击">案例1: None攻击<a href="#案例1-none攻击" class="hash-link" aria-label="Direct link to 案例1: None攻击" title="Direct link to 案例1: None攻击" translate="no">​</a></h2>
 <p>首先打开JWT的登录(未验证算法)案例，在这个案例中，后端未校验加密算法，将根据用户传递的加密算法解密验证jwt。</p>
 <p>如图是正常的jwt结构。可以看到在header中存储了用户名，根据页面提示，游戏目标是<strong>为用户信息添加flag字段</strong>。所以我们的目标就是修改jwt内的header，并绕过后端的校验。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d8142c897c8671fb-f48619fd021f24d4ced6b84a54730594.png" width="1023" height="362" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d8142c897c8671fb-f48619fd021f24d4ced6b84a54730594.png" width="1023" height="362" class="yakdoc-image"></button></p>
 <p>首先了解一下jwt结构：jwt由3部分组成，使用.连接，第一部分是header信息，第二部分是Claims信息，第三部分是签名。</p>
 <p>如果使用node方式生成jwt那header部分和Claims部分都是直接通过base64编码，签名为空，那可以编写脚本：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">header = codec.EncodeBase64(json.dumps({        &quot;age&quot;: 25,        &quot;alg&quot;: &quot;none&quot;,        &quot;kid&quot;: 1,        &quot;typ&quot;: &quot;JWT&quot;,        &quot;username&quot;: &quot;admin&quot;,        &quot;flag&quot;:1,    }))claims = codec.EncodeBase64(json.dumps({    }))println(&quot;%s.%s.&quot;%[header,claims])</span><br></span></code></pre></div></div>
 <p>通过webfuzzer将刚生成的jwt发送到/jwt/unsafe-login1/profile接口，发现这次返回值只有一个flag</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ef4594fe59874390-51f862fb8e63e6e3a5877db108d267b3.png" width="321" height="135" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ef4594fe59874390-51f862fb8e63e6e3a5877db108d267b3.png" width="321" height="135" class="yakdoc-image"></button></p>
 <p>通过mitm抓包改包修改jwt可以看到通关页面</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5113efe8970e930-9121d2012475a6ea5650e45598d07ea7.png" width="1080" height="225" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/c5113efe8970e930-9121d2012475a6ea5650e45598d07ea7.png" width="1080" height="225" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例2-密钥泄漏">案例2: 密钥泄漏<a href="#案例2-密钥泄漏" class="hash-link" aria-label="Direct link to 案例2: 密钥泄漏" title="Direct link to 案例2: 密钥泄漏" translate="no">​</a></h2>
 <p>打开案例：登录(错误中泄漏key)</p>
 <p>和案例1相同的页面，发现获取用户信息的接口改为了**/jwt/unsafe-login2/profile**。尝试使用案例1的手段发现报错：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/59d2fbe890d983f8-c6305e1905b4ea5e626c94aae8b77ab9.png" width="710" height="210" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/59d2fbe890d983f8-c6305e1905b4ea5e626c94aae8b77ab9.png" width="710" height="210" class="yakdoc-image"></button></p>
 <p>可以看到原因是禁用了none的认证方式：&#x27;none&#x27; signature type is not allowed，但从错误中可以看到泄漏的key。</p>
 <p>key是一个byte数组，所以可以编写yak代码，通过泄漏的key生成修改后的jwt：</p>
 <div class="language-makefile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-makefile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">key = []byte{100,89,84,117,75,83,66,116,72,120,88,98,73,109,110,70,99,74,97,75}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">jwtStr = jwt.JWTGenerateEx(&quot;HS256&quot;, {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        &quot;flag&quot;:1,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    },{}, key)~</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">println(jwtStr)</span><br></span></code></pre></div></div>
 <p>将生成的jwt应用到/jwt/unsafe-login2/profile接口，得到返回数据</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fba1e35429ff9556-ad669e3e01a2a35f3743a2428443da36.png" width="320" height="143" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/fba1e35429ff9556-ad669e3e01a2a35f3743a2428443da36.png" width="320" height="143" class="yakdoc-image"></button></p>
 <p>从前端页面可以看到修改成功</p>
 <hr>
 <blockquote>

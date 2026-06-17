@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">任意文件下载/读取 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-Yaklab-current"><meta data-rh="true" property="og:title" content="任意文件下载/读取 | Yak Program Language"><meta data-rh="true" name="description" content="漏洞描述："><meta data-rh="true" property="og:description" content="漏洞描述："><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"任意文件下载/读取","item":"https://yaklang.com/en/Yaklab/wiki/CommonVulnerabilities/AnyFileDownload"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,11 +17,11 @@
 <p>一些网站由于业务需求，可能提供文件查看或下载的功能，如果对用户查看或下载的文件不做限制，则恶意用户就能够查看或下载任意的文件，可以是源代码文件、敏感文件等。</p>
 <p><strong>漏洞案例：</strong></p>
 <p>访问测试网站具有下载文件的功能点</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-1-4631ff4b7ac7416a89c2dcd04e534b14.png" width="1280" height="604" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-1-4631ff4b7ac7416a89c2dcd04e534b14.png" width="1280" height="604" class="yakdoc-image"></button></p>
 <p>拼接想要访问的文件路径，例如../../etc/passwd文件，成功读取到该文件内容</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-2-ef7cb54aec1b8ae558be3424dc678730.png" width="1280" height="793" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-2-ef7cb54aec1b8ae558be3424dc678730.png" width="1280" height="793" class="yakdoc-image"></button></p>
 <p>Windows系统下可以拼接访问............\Windows\win.ini</p>
-<p><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-3-6142e782e6c07893ddd4b5a1cf159372.png" width="1280" height="646" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 文档插图"><img decoding="async" loading="lazy" src="/en/assets/images/AnyFileDownload-3-6142e782e6c07893ddd4b5a1cf159372.png" width="1280" height="646" class="yakdoc-image"></button></p>
 <div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>note</div><div class="admonitionContent_BuS1"><p>漏洞修复方案</p><ol>
 <li class="">过滤点(.)使用户在url中不能回溯上级目录；</li>
 <li class="">正则严格判断用户输入参数的格式；</li>

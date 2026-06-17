@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">4.8 Web Fuzzer 序列：构建多包联动测试流水线 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/products/chapter-4/4-8"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.8 Web Fuzzer 序列：构建多包联动测试流水线 | Yak Program Language"><meta data-rh="true" name="description" content="在前面的章节中，我们的讨论聚焦于对单个 HTTP 端点的深度探测与验证，并学习了如何将单次成功的请求固化为标准化的 PoC 资产。这种方法在测试无状态、独立的接口时表现卓越。然而，现代 Web 应用的复杂性早已超越了单次请求\-响应模型。"><meta data-rh="true" property="og:description" content="在前面的章节中，我们的讨论聚焦于对单个 HTTP 端点的深度探测与验证，并学习了如何将单次成功的请求固化为标准化的 PoC 资产。这种方法在测试无状态、独立的接口时表现卓越。然而，现代 Web 应用的复杂性早已超越了单次请求\-响应模型。"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/products/chapter-4/4-8"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-8" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-8" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-8" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/en/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.8 多包联动序列","item":"https://yaklang.com/en/products/chapter-4/4-8"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <p>本章将引入一个更高维度的测试范式：<strong>序列化测试</strong>。我们将深入探讨 Yakit Web Fuzzer 的序列（Sequence）功能，它专为应对需要状态维持、上下文依赖和多步操作的复杂业务场景而设计。您将学习如何从单个节点的测试，跃迁到构建可视化的、由多个请求节点构成的自动化测试流水线，并掌握其核心的<strong>变量传递机制</strong>与强大的<strong>联动爆破模型</strong>。这标志着我们从“点”的测试，迈向了对完整业务“线”的自动化渗透。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="481-基本概念节点变量与流水线">4.8.1 基本概念：节点、变量与流水线<a href="#481-基本概念节点变量与流水线" class="hash-link" aria-label="Direct link to 4.8.1 基本概念：节点、变量与流水线" title="Direct link to 4.8.1 基本概念：节点、变量与流水线" translate="no">​</a></h2>
 <p>要精通序列功能，我们必须首先在具体场景中理解其三个基本构成要素：<strong>节点 (Node)</strong>、<strong>变量 (Variable)</strong> 和 <strong>流水线 (Pipeline)</strong>。这三者协同工作，共同构成了序列化测试的骨架。与其进行抽象的定义，不如通过一个经典的“先登录获取凭证，后带凭证查询信息”的案例来具象化解析其工作机制。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit流水线变量提取与传递流程示意图" src="/en/assets/images/ch4-084-c774c484a31ae59499cebac7043ae7bd.png" width="813" height="1038" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit流水线变量提取与传递流程示意图"><img decoding="async" loading="lazy" alt="Yakit流水线变量提取与传递流程示意图" src="/en/assets/images/ch4-084-c774c484a31ae59499cebac7043ae7bd.png" width="813" height="1038" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit流水线变量提取与传递流程示意图</p>
 <p>上图所示的流程，便是对这三大核心机制最直观的诠释。</p>
 <ol>
@@ -80,7 +80,7 @@
 <p><strong>完成组织</strong>：在弹出的对话框中为新组命名（例如，可以命名为 <code>CSRF-Test</code>），并确认要移动的标签页。点击确定后，这些标签页将在界面顶部被收纳到一个可折叠的组内。至此，我们的“节点源”便已准备就绪。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit重命名标签页并批量新建组操作演示" src="/en/assets/images/ch4-085-4ee2cf8e449caf63591a19f461f8f34d.png" width="1351" height="769" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit重命名标签页并批量新建组操作演示"><img decoding="async" loading="lazy" alt="Yakit重命名标签页并批量新建组操作演示" src="/en/assets/images/ch4-085-4ee2cf8e449caf63591a19f461f8f34d.png" width="1351" height="769" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit重命名标签页并批量新建组操作演示</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第二步搭建与配置流水线">第二步：搭建与配置流水线<a href="#第二步搭建与配置流水线" class="hash-link" aria-label="Direct link to 第二步：搭建与配置流水线" title="Direct link to 第二步：搭建与配置流水线" translate="no">​</a></h4>
 <p>当节点源被组织好之后，我们就可以切换到【序列】面板，正式开始搭建流水线。</p>
@@ -101,7 +101,7 @@
 <p><strong>构建后续节点</strong>：再次点击**“添加节点 +”**，创建 <code>Step [1]</code>。用同样的方式，从下拉菜单中选择 <code>csrf-submit</code>。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer流水线节点配置与变量设置界面" src="/en/assets/images/ch4-086-ca7d8327b671f851d3cee495b80acb1b.png" width="1585" height="520" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer流水线节点配置与变量设置界面"><img decoding="async" loading="lazy" alt="Web Fuzzer流水线节点配置与变量设置界面" src="/en/assets/images/ch4-086-ca7d8327b671f851d3cee495b80acb1b.png" width="1585" height="520" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer流水线节点配置与变量设置界面</p>
 <p>通过以上步骤，一个基础的、包含两个节点的线性序列便已创建完成。此时，流水线定义了 <code>csrf-step1</code> 必须先于 <code>csrf-submit</code> 执行。下一步的关键工作，便是在 <code>Step [0]</code> (<code>csrf-step1</code>) 中配置<strong>数据提取器</strong>以捕获变量（例如 CSRF Token），并在 <code>Step [1]</code> (<code>csrf-submit</code>) 中使用该变量，从而真正实现数据的自动流动与业务逻辑的串联。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="482-联动模型介绍串行分裂与笛卡尔积">4.8.2 联动模型介绍：串行、分裂与笛卡尔积<a href="#482-联动模型介绍串行分裂与笛卡尔积" class="hash-link" aria-label="Direct link to 4.8.2 联动模型介绍：串行、分裂与笛卡尔积" title="Direct link to 4.8.2 联动模型介绍：串行、分裂与笛卡尔积" translate="no">​</a></h2>
@@ -120,7 +120,7 @@
 <p><strong>模式定义：</strong> 当流水线中相邻的两个节点均为<strong>静态节点</strong>时，触发基础串行模式。这是最简单的 1-to-1 联动，构成了固化业务流程的基础。</p>
 <p><strong>技术原理解析：</strong>
 此模式是序列功能的基线行为。执行引擎从上至下处理流水线，<code>Step 1</code> 是一个不含 <code>Fuzztag</code> 的普通请求，因此只执行一次。其提取的变量被传递给同样不含 <code>Fuzztag</code> 的 <code>Step 2</code>，<code>Step 2</code> 也仅执行一次。整个过程形成一个线性的、一对一的执行链，精确模拟固定的多步骤用户操作。</p>
-<p><img decoding="async" loading="lazy" alt="基础串行模式静态到静态流程图" src="/en/assets/images/ch4-087-27db28cebe3b3aa16b7baa983bff4d70.png" width="1155" height="273" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 基础串行模式静态到静态流程图"><img decoding="async" loading="lazy" alt="基础串行模式静态到静态流程图" src="/en/assets/images/ch4-087-27db28cebe3b3aa16b7baa983bff4d70.png" width="1155" height="273" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：基础串行模式静态到静态流程图</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4822-前置分裂模式">4.8.2.2 前置分裂模式<a href="#4822-前置分裂模式" class="hash-link" aria-label="Direct link to 4.8.2.2 前置分裂模式" title="Direct link to 4.8.2.2 前置分裂模式" translate="no">​</a></h3>
 <p><strong>模式定义：</strong> 当上游节点为<strong>动态节点</strong>，而紧邻的下游节点为<strong>静态节点</strong>时，触发前置分裂模式。此模式的本质是，上游的每一次动态执行都独立驱动一次下游操作，形成 <strong>M-to-M</strong> 的**“链式反应”**。</p>
@@ -138,7 +138,7 @@
 </li>
 </ol>
 <p>因此，<code>Step [1]</code> 总共被执行 M 次，且每一次执行都严格绑定于上游某一次特定的动态执行。</p>
-<p><img decoding="async" loading="lazy" alt="前置分裂模式流程示意图" src="/en/assets/images/ch4-088-6c6a109ef5a4e01b1101fe08790c9afe.png" width="1445" height="836" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 前置分裂模式流程示意图"><img decoding="async" loading="lazy" alt="前置分裂模式流程示意图" src="/en/assets/images/ch4-088-6c6a109ef5a4e01b1101fe08790c9afe.png" width="1445" height="836" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：前置分裂模式流程示意图</p>
 <ul>
 <li class=""><strong>场景示例：</strong> <code>Step [0]</code> 使用字典 Fuzztag 爆破接口，成功遍历出 10 个有效的订单 ID。<code>Step [1]</code> 是一个查询订单详情的静态请求模板。流水线将自动建立 10 条执行链，执行 10 次 <code>Step [1]</code>，每次都代入一个从 <code>Step [0]</code> 对应执行中获取到的不同订单 ID。</li>
@@ -147,7 +147,7 @@
 <p><strong>模式定义：</strong> 当上游节点为<strong>静态节点</strong>，而下游节点为<strong>动态节点</strong>时，触发后置分裂模式。此模式实现了“一次认证，多次探测”的经典安全测试场景，是 <strong>1-to-N</strong> 联动的核心体现。</p>
 <p><strong>技术原理解析：</strong>
 此模式的触发点在于下游节点 <code>Step [1]</code> 中包含了 Fuzztag。执行引擎首先完整执行一次上游的静态节点 <code>Step [0]</code>，并将其成功提取的变量（如 <code>session_id</code>）<strong>缓存为一份共享的全局上下文 (Shared Global Context)</strong>。随后，当流程进入动态节点 <code>Step [1]</code> 时，<strong>分裂操作才开始</strong>。引擎将这份<strong>固定不变的</strong>共享上下文，注入到 <code>Step [1]</code> 的每一次动态执行中。<code>Step [1]</code> 的 Fuzzer 模块根据其规则生成 N 个 Payload，从而发出 N 个携带相同认证信息的、但业务参数不同的探测请求。</p>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer后置分裂模式流程图" src="/en/assets/images/ch4-089-9cdb687b8e49f633b50ff31a6eca55c8.png" width="1329" height="700" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer后置分裂模式流程图"><img decoding="async" loading="lazy" alt="Web Fuzzer后置分裂模式流程图" src="/en/assets/images/ch4-089-9cdb687b8e49f633b50ff31a6eca55c8.png" width="1329" height="700" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer后置分裂模式流程图</p>
 <ul>
 <li class=""><strong>场景示例：</strong> <code>Step [0]</code> 是一个登录请求，成功后提取到 <code>session_id</code>。<code>Step [1]</code> 对 <code>user_id</code> 参数使用了 Fuzztag <code>{{int(1-100)}}</code> 进行越权测试。流水线将使用 <code>Step [0]</code> 获取到的<strong>同一个</strong> <code>session_id</code>，连续向 <code>Step [1]</code> 发送 100 次请求，遍历不同的 <code>user_id</code>。</li>
@@ -165,7 +165,7 @@
 </li>
 </ol>
 <p>这种嵌套机制天然地实现了两个 Payload 集合的笛卡尔积，总请求数精确地为 <code>M x N</code>。这可能导致请求数量的指数级增长，形成“请求风暴”，使用时需谨慎评估目标系统的承受能力。</p>
-<p><img decoding="async" loading="lazy" alt="笛卡尔积模糊测试流程图" src="/en/assets/images/ch4-090-f4a59f3204703c4f03714c6aae359663.png" width="1597" height="607" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 笛卡尔积模糊测试流程图"><img decoding="async" loading="lazy" alt="笛卡尔积模糊测试流程图" src="/en/assets/images/ch4-090-f4a59f3204703c4f03714c6aae359663.png" width="1597" height="607" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：笛卡尔积模糊测试流程图</p>
 <ul>
 <li class=""><strong>场景示例：</strong> <code>Step [0]</code> 使用 Fuzztag 获得一组有效的用户名（M=3）。<code>Step [1]</code> 使用另一个 Fuzztag 加载密码字典进行密码爆破（N=1000）。流水线将首先对第一个用户尝试全部 1000 个密码，然后对第二个用户尝试全部 1000 个密码，以此类推，总计发送 <code>3 * 1000 = 3000</code> 次请求。</li>
@@ -174,7 +174,7 @@
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4831-利用基础串行模式自动化-csrf-验证">4.8.3.1 利用基础串行模式自动化 CSRF 验证<a href="#4831-利用基础串行模式自动化-csrf-验证" class="hash-link" aria-label="Direct link to 4.8.3.1 利用基础串行模式自动化 CSRF 验证" title="Direct link to 4.8.3.1 利用基础串行模式自动化 CSRF 验证" translate="no">​</a></h3>
 <p>为了将理论付诸实践，我们将以一个经典的 Web 安全场景——绕过 CSRF Token 验证——来深度剖析基础串行模式的应用。在多数现代 Web 应用中，为防止跨站请求伪造（CSRF）攻击，表单提交时需要附带一个一次性的、与用户会话绑定的 <code>csrf_token</code>。手动测试此流程需要两步：1. 访问表单页面，复制 Token。2. 将 Token 粘贴到提交请求中。这个过程繁琐且易错，而序列功能正是为了自动化此类流程而生。</p>
 <p>首先了解我们的靶场，用户可以通过 Vulinbox 搜索 CSRF 进入：</p>
-<p><img decoding="async" loading="lazy" alt="Vulnbox Agent界面与浏览器CSRF表单跳转示意" src="/en/assets/images/ch4-091-896da9c4741eb4e1a32f90ea0cb0f629.png" width="1325" height="436" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulnbox Agent界面与浏览器CSRF表单跳转示意"><img decoding="async" loading="lazy" alt="Vulnbox Agent界面与浏览器CSRF表单跳转示意" src="/en/assets/images/ch4-091-896da9c4741eb4e1a32f90ea0cb0f629.png" width="1325" height="436" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulnbox Agent界面与浏览器CSRF表单跳转示意</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第一步准备节点请求">第一步：准备节点请求<a href="#第一步准备节点请求" class="hash-link" aria-label="Direct link to 第一步：准备节点请求" title="Direct link to 第一步：准备节点请求" translate="no">​</a></h4>
 <p>我们首先需要准备两个独立的 Web Fuzzer 请求配置，分别代表业务流程的两个原子化操作：</p>
@@ -214,7 +214,7 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 配置数据提取器及正则规则" src="/en/assets/images/ch4-092-45c3ccee08fc8911a8fdd7c41c00ffe0.png" width="1593" height="676" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 配置数据提取器及正则规则"><img decoding="async" loading="lazy" alt="Yakit 配置数据提取器及正则规则" src="/en/assets/images/ch4-092-45c3ccee08fc8911a8fdd7c41c00ffe0.png" width="1593" height="676" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 配置数据提取器及正则规则</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三步配置变量注入-在-step-1-中">第三步：配置变量注入 (在 Step [1] 中)<a href="#第三步配置变量注入-在-step-1-中" class="hash-link" aria-label="Direct link to 第三步：配置变量注入 (在 Step [1] 中)" title="Direct link to 第三步：配置变量注入 (在 Step [1] 中)" translate="no">​</a></h4>
 <p>接下来，我们需要让 <code>Step [1]</code> 在执行时使用上一步提取到的 <code>csrf</code> 变量。</p>
@@ -237,7 +237,7 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit序列配置与变量注入界面" src="/en/assets/images/ch4-093-fa69efcd59042d2d3a8d95ac3e269cc4.png" width="980" height="505" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit序列配置与变量注入界面"><img decoding="async" loading="lazy" alt="Yakit序列配置与变量注入界面" src="/en/assets/images/ch4-093-fa69efcd59042d2d3a8d95ac3e269cc4.png" width="980" height="505" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit序列配置与变量注入界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="第四步执行与验证">第四步：执行与验证<a href="#第四步执行与验证" class="hash-link" aria-label="Direct link to 第四步：执行与验证" title="Direct link to 第四步：执行与验证" translate="no">​</a></h4>
 <p>完成上述配置后，点击 <strong>“开始执行”</strong>。Yakit 将自动完成以下操作：</p>
@@ -256,7 +256,7 @@
 </li>
 </ol>
 <p>通过观察 <code>Step [1]</code> 的最终响应结果，我们可以验证序列是否成功。如果响应页面显示了信息被成功修改的提示（如 “修改成功” 和 <code>hello-world</code>），则证明我们的自动化流程已成功获取并利用了动态 Token。反之，如果响应中出现 <code>csrf_token check error</code> 等错误，则说明流程存在问题。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit 模糊测试 CSRF 验证结果对比" src="/en/assets/images/ch4-094-39c6288a92cc67be2c51b6a2d8358514.png" width="1396" height="415" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 模糊测试 CSRF 验证结果对比"><img decoding="async" loading="lazy" alt="Yakit 模糊测试 CSRF 验证结果对比" src="/en/assets/images/ch4-094-39c6288a92cc67be2c51b6a2d8358514.png" width="1396" height="415" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 模糊测试 CSRF 验证结果对比</p>
 <p>通过此案例，我们不仅验证了基础串行模式的工作原理，更将一个需要人工介入的、易出错的测试流程，固化成了一个高内聚、可一键重复执行的自动化测试资产。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4832-利用发散分裂模式爆破-csrf-保护的表单">4.8.3.2 利用发散分裂模式爆破 CSRF 保护的表单<a href="#4832-利用发散分裂模式爆破-csrf-保护的表单" class="hash-link" aria-label="Direct link to 4.8.3.2 利用发散分裂模式爆破 CSRF 保护的表单" title="Direct link to 4.8.3.2 利用发散分裂模式爆破 CSRF 保护的表单" translate="no">​</a></h3>
@@ -280,10 +280,10 @@
 <p><strong>Step [1] (Dynamic Node)</strong>：以 <code>Step [0]</code> 提取的 <code>csrf_token</code> 为固定输入，同时将 4 位 PIN 码作为 <code>fuzztag</code> 变量，执行 10,000 次 <code>POST</code> 提交。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Vulinbox Agent界面与PIN码爆破测试页面" src="/en/assets/images/ch4-095-63f7334441edbb488ac86f5c1579a877.png" width="1405" height="435" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Vulinbox Agent界面与PIN码爆破测试页面"><img decoding="async" loading="lazy" alt="Vulinbox Agent界面与PIN码爆破测试页面" src="/en/assets/images/ch4-095-63f7334441edbb488ac86f5c1579a877.png" width="1405" height="435" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Vulinbox Agent界面与PIN码爆破测试页面</p>
 <p>场景分析，我们发现爆破需要4位整数，input 有一个隐藏的 csrf token，这个是关键。</p>
-<p><img decoding="async" loading="lazy" alt="浏览器开发者工具展示CSRF Token源码" src="/en/assets/images/ch4-096-ce537ee2e38fc8f937c5626caacf4723.png" width="787" height="356" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: 浏览器开发者工具展示CSRF Token源码"><img decoding="async" loading="lazy" alt="浏览器开发者工具展示CSRF Token源码" src="/en/assets/images/ch4-096-ce537ee2e38fc8f937c5626caacf4723.png" width="787" height="356" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：浏览器开发者工具展示CSRF Token源码</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="步骤一构建基础串型流程">步骤一：构建基础串型流程<a href="#步骤一构建基础串型流程" class="hash-link" aria-label="Direct link to 步骤一：构建基础串型流程" title="Direct link to 步骤一：构建基础串型流程" translate="no">​</a></h4>
 <p>在引入 Fuzzing 之前，我们首先构建一个能成功完成一次操作的串行流程，以验证基础逻辑。</p>
@@ -295,7 +295,7 @@
 <p><strong>配置变量提取器:</strong> 在 <code>Step [0]</code> 的“数据提取器”中，使用正则表达式 <code>name=&quot;csrf_token&quot;\s+value=&quot;([^&quot;]*)&quot;</code> 提取 <code>csrf_token</code> 的值。将该提取器命名为 <code>csrftoken</code>。该正则精确匹配隐藏输入框的 <code>value</code> 属性。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer 响应体正则提取配置界面" src="/en/assets/images/ch4-097-008d4f866115bfb29a99e265e94be9f5.png" width="726" height="604" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer 响应体正则提取配置界面"><img decoding="async" loading="lazy" alt="Web Fuzzer 响应体正则提取配置界面" src="/en/assets/images/ch4-097-008d4f866115bfb29a99e265e94be9f5.png" width="726" height="604" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer 响应体正则提取配置界面</p>
 <ol start="3">
 <li class="">
@@ -305,7 +305,7 @@
 <p><strong>串行测试:</strong> 此时，点击“开始执行”。流水线应能成功完成一次提交，并在 <code>Step [1]</code> 的响应中看到“失败：PIN码错误，请重试”的提示，证明 <code>csrf_token</code> 已被正确传递和接受。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit界面显示的HTML响应源码及PIN错误提示" src="/en/assets/images/ch4-098-32506357e793a0403f67afd471ac5aac.png" width="732" height="561" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit界面显示的HTML响应源码及PIN错误提示"><img decoding="async" loading="lazy" alt="Yakit界面显示的HTML响应源码及PIN错误提示" src="/en/assets/images/ch4-098-32506357e793a0403f67afd471ac5aac.png" width="732" height="561" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit界面显示的HTML响应源码及PIN错误提示</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="步骤二激活前置分裂模式">步骤二：激活前置分裂模式<a href="#步骤二激活前置分裂模式" class="hash-link" aria-label="Direct link to 步骤二：激活前置分裂模式" title="Direct link to 步骤二：激活前置分裂模式" translate="no">​</a></h4>
 <p>现在，我们将静态流程转换为动态爆破流程。关键在于，<strong>必须在 <strong><code>Step [0]</code></strong> 上添加 Fuzztag</strong>，从而在流程的源头触发分裂。</p>
@@ -328,17 +328,17 @@
 </ul>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit 界面展示 fuzztag 模式变量配置" src="/en/assets/images/ch4-099-8ab72eb866ba43bfe51fa807347f26fc.png" width="585" height="637" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: Yakit 界面展示 fuzztag 模式变量配置"><img decoding="async" loading="lazy" alt="Yakit 界面展示 fuzztag 模式变量配置" src="/en/assets/images/ch4-099-8ab72eb866ba43bfe51fa807347f26fc.png" width="585" height="637" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 界面展示 fuzztag 模式变量配置</p>
 <ol start="4">
 <li class=""><strong>更新 <strong><code>Step [1]</code></strong>:</strong> 修改 <code>Step [1]</code> 的请求体，将写死的 PIN 码替换为对 fuzztag 变量的引用：<code>pin={{params(pin)}}&amp;csrf_token={{param(csrftoken)}}</code>。注意，这里的 <code>{{pin}}</code> 是 fuzztag 变量，而 <code>{{param(csrftoken)}}</code> 是数据提取器变量。</li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Web Fuzzer序列配置与参数化请求界面" src="/en/assets/images/ch4-100-83f3466911bd0b8286a13c78f4e58a2f.png" width="1136" height="519" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Web Fuzzer序列配置与参数化请求界面"><img decoding="async" loading="lazy" alt="Web Fuzzer序列配置与参数化请求界面" src="/en/assets/images/ch4-100-83f3466911bd0b8286a13c78f4e58a2f.png" width="1136" height="519" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Web Fuzzer序列配置与参数化请求界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="步骤三执行与结果分析">步骤三：执行与结果分析<a href="#步骤三执行与结果分析" class="hash-link" aria-label="Direct link to 步骤三：执行与结果分析" title="Direct link to 步骤三：执行与结果分析" translate="no">​</a></h4>
 <p>完成配置后，点击&quot;发送请求➔&quot;启动前置分裂模式攻击。Yakit 引擎将自动生成 10,000 个 PIN 值，对于每一个候选值（如 0001），系统会先执行 Step [0] 获取一个全新的 csrf_token，然后立即执行 Step [1] 提交对应的 PIN 值和 token，这个 M-to-M 链式攻击过程会自动重复 10,000 次直至完成整个爆破流程。</p>
 <p>值得注意的是，该靶场环境在每次重启时都会随机生成一个新的 4 位 PIN 码，因此正确答案每次都不相同。但通过观察爆破结果，成功的请求会表现出明显的特征差异。如下图所示，在大量状态码为 200、响应大小为 562 字节的失败请求中，第 976 号请求的响应大小仅为 550 字节，明显异于其他结果。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer响应包大小差异分析" src="/en/assets/images/ch4-101-dbe7a0309459c9767965db5b60501307.png" width="714" height="883" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: Yakit Web Fuzzer响应包大小差异分析"><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer响应包大小差异分析" src="/en/assets/images/ch4-101-dbe7a0309459c9767965db5b60501307.png" width="714" height="883" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit Web Fuzzer响应包大小差异分析</p>
 <p>点击该异常请求查看详细响应内容，可以清晰地看到页面返回了&quot;成功！PIN码正确。&quot;的提示信息，同时从 Payload 列可以直接识别出正确的 PIN 码为 &quot;1303&quot;。通过这种响应长度差异分析法，我们无需逐一检查每个响应，即可快速定位到爆破成功的那一次请求。</p>
 <p>通过本案例，我们不仅完成了复杂的自动化爆破任务，更重要的是掌握了根据目标系统的状态刷新机制来选择正确联动模型的核心方法论，以及利用响应特征快速识别成功结果的实战技巧。</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/products/chapter-4/4-7"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">4.7 生成 Yaml PoC</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/products/chapter-4/4-9"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">4.9 本章总结</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#481-基本概念节点变量与流水线" class="table-of-contents__link toc-highlight">4.8.1 基本概念：节点、变量与流水线</a><ul><li><a href="#基本使用构建你的第一个测试序列" class="table-of-contents__link toc-highlight">基本使用：构建你的第一个测试序列</a></li></ul></li><li><a href="#482-联动模型介绍串行分裂与笛卡尔积" class="table-of-contents__link toc-highlight">4.8.2 联动模型介绍：串行、分裂与笛卡尔积</a><ul><li><a href="#4821-基础串行模式" class="table-of-contents__link toc-highlight">4.8.2.1 基础串行模式</a></li><li><a href="#4822-前置分裂模式" class="table-of-contents__link toc-highlight">4.8.2.2 前置分裂模式</a></li><li><a href="#4823-后置分裂模式" class="table-of-contents__link toc-highlight">4.8.2.3 后置分裂模式</a></li><li><a href="#4824-笛卡尔积模式" class="table-of-contents__link toc-highlight">4.8.2.4 笛卡尔积模式</a></li></ul></li><li><a href="#483-工程实践将复杂流程沉淀为测试资产" class="table-of-contents__link toc-highlight">4.8.3 工程实践：将复杂流程沉淀为测试资产</a><ul><li><a href="#4831-利用基础串行模式自动化-csrf-验证" class="table-of-contents__link toc-highlight">4.8.3.1 利用基础串行模式自动化 CSRF 验证</a></li><li><a href="#4832-利用发散分裂模式爆破-csrf-保护的表单" class="table-of-contents__link toc-highlight">4.8.3.2 利用发散分裂模式爆破 CSRF 保护的表单</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>

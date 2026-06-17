@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">JsSSA与网络请求解析 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p141"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="JsSSA与网络请求解析 | Yak Program Language"><meta data-rh="true" name="description" content="前言"><meta data-rh="true" property="og:description" content="前言"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2024-02-22T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2024 年,代码审计"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p141"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p141" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p141" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p141" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p141","mainEntityOfPage":"https://yaklang.com/blog/p141","url":"https://yaklang.com/blog/p141","headline":"JsSSA与网络请求解析","name":"JsSSA与网络请求解析","description":"前言","datePublished":"2024-02-22T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -24,12 +24,12 @@
 <p>给一段简单的代码作为例子：</p>
 <div class="language-makefile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-makefile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">a = ajax.send0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">a(&quot;1111&quot;)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">a = () =&gt; {}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">a(&quot;2222&quot;)</span><br></span></code></pre></div></div>
 <p>这段代码会生成这样一棵抽象语法树：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e6d5e38cf89deebf-707d4c8d16ce7d013a4c1c47fc7ba41d.png" width="596" height="1072" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e6d5e38cf89deebf-707d4c8d16ce7d013a4c1c47fc7ba41d.png" width="596" height="1072" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>如果想去寻找“a”的调用，那么每次都要从program这根节点开始搜寻，进入树的分支，再从头开始找，循环往复……</p>
 <p>有时可能需要找某种类型的“a”的调用，亦或者这种类型调用的参数，类型和赋值甚至还在两个分支里……</p>
 <p>仅仅四行代码的消耗已经可见搜寻AST树的效率之低，代码之复杂，做这样一个难用又难做的东西，实属是不可行。</p>
 <p>相比较于如此复杂的AST，SSA显得就先进非常多了：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/01759127f67df770-ec2540b11812901dbb905422dad4a7f6.png" width="452" height="315" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/01759127f67df770-ec2540b11812901dbb905422dad4a7f6.png" width="452" height="315" class="yakdoc-image"></button></p>
 <p>在SSA中，每个量都是一个value，它有user和def，即使用它的量和它的定义等，包括参数，类型等等的属性。利用每个量维护的一个value结构，可以轻松找到某个量的调用链，它的类型，使用者以及位置，任何你想要的信息都可以在SSA中维护，而不用在AST中一遍遍地遍历整颗的树还难以找到对应了。</p>
 <p>由此，SSA形式是分析的不二之选。</p>
 <p><strong>JS网络请求形式</strong></p>

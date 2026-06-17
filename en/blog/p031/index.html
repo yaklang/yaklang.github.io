@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">MITM 热加载全流程解析 ：一文拆解 Hook 函数四大实战场景！ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p031"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="MITM 热加载全流程解析 ：一文拆解 Hook 函数四大实战场景！ | Yak Program Language"><meta data-rh="true" name="description" content="最近有很多用户会询问 MITM 中的热加载部分，对于热加载中的 Hook 函数的使用场景了解不充分，本篇将围绕 Hook 函数定义并且给出具体的小例子帮助用户进行理解。"><meta data-rh="true" property="og:description" content="最近有很多用户会询问 MITM 中的热加载部分，对于热加载中的 Hook 函数的使用场景了解不充分，本篇将围绕 Hook 函数定义并且给出具体的小例子帮助用户进行理解。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-10-17T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,流量分析,热加载"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p031"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p031" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p031" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p031" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p031","mainEntityOfPage":"https://yaklang.com/en/blog/p031","url":"https://yaklang.com/en/blog/p031","headline":"MITM 热加载全流程解析 ：一文拆解 Hook 函数四大实战场景！","name":"MITM 热加载全流程解析 ：一文拆解 Hook 函数四大实战场景！","description":"最近有很多用户会询问 MITM 中的热加载部分，对于热加载中的 Hook 函数的使用场景了解不充分，本篇将围绕 Hook 函数定义并且给出具体的小例子帮助用户进行理解。","datePublished":"2025-10-17T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,8 +19,8 @@
 <p><strong>Yakit MITM 的热加载是允许安全测试人员在不中断代理服务的情况下，动态加载、更新和卸载各种安全功能模块。</strong></p>
 <p>Yakit MITM 热加载的工作原理基于事件驱动模型，系统在 HTTP 请求和响应的各个关键处理阶段设置了多个&quot;钩子&quot;( Hook 点)，当流量经过这些 Hook 点时，系统会触发相应的事件，并执行已加载的处理函数。</p>
 <p>根据使用的优先级，给出下表：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/429d07ba6ce3e2cb-f6733eafb57d221aed0a1222eaf977c9.png" width="1080" height="446" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4883b4ca5dc30997-ec3c044a050bf22b8c03b6c1ad92cc54.png" width="1080" height="582" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/429d07ba6ce3e2cb-f6733eafb57d221aed0a1222eaf977c9.png" width="1080" height="446" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4883b4ca5dc30997-ec3c044a050bf22b8c03b6c1ad92cc54.png" width="1080" height="582" class="yakdoc-image"></button></p>
 <p>在 Yakit MITM 框架里，有三个基本角色，理解清楚它们后，再看各个 Hook 就很直观：</p>
 <ul>
 <li class="">MITM 客户端：指把流量导向 Yakit 的那一端，通常是浏览器、移动 App、自动化脚本等。它们把 HTTP/HTTPS 请求发到 Yakit 监听的地址，而不是直接连目标站点，为了方便理解，后文统一称为<strong>浏览器。</strong></li>
@@ -35,13 +35,13 @@
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="http-请求响应劫持">HTTP 请求响应劫持<a href="#http-请求响应劫持" class="hash-link" aria-label="Direct link to HTTP 请求响应劫持" title="Direct link to HTTP 请求响应劫持" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hijackhttprequest---劫持-http-请求触发时机">hijackHTTPRequest <strong>- 劫持 HTTP 请求触发时机：</strong><a href="#hijackhttprequest---劫持-http-请求触发时机" class="hash-link" aria-label="Direct link to hijackhttprequest---劫持-http-请求触发时机" title="Direct link to hijackhttprequest---劫持-http-请求触发时机" translate="no">​</a></h3>
 <p>在<strong>浏览器</strong>发起请求后，Yakit 准备将请求发送到目标服务器之前触发。这是<strong>最主要</strong>的请求拦截和修改点，等同于用代码的方式，完成 Yakit MITM UI 界面中的 &quot;手动劫持请求&quot; 的功能。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7681544ba2d56ba7-8ccd14b76c06d334446019b456063a69.png" width="911" height="477" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/7681544ba2d56ba7-8ccd14b76c06d334446019b456063a69.png" width="911" height="477" class="yakdoc-image"></button></p>
 <p><strong>使用场景</strong>：</p>
 <p>例如，前端把订单金额、折扣、余额变动这些敏感字段写死在 JS 校验里，浏览器准备提交正常金额时抓包，在 hijackHTTPRequest 把金额改成负数，钱包余额增加。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hijackhttpresponse--hijackhttpresponseex"><strong>hijackHTTPResponse / hijackHTTPResponseEx</strong><a href="#hijackhttpresponse--hijackhttpresponseex" class="hash-link" aria-label="Direct link to hijackhttpresponse--hijackhttpresponseex" title="Direct link to hijackhttpresponse--hijackhttpresponseex" translate="no">​</a></h3>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="--劫持-http-响应触发时机"><strong>- 劫持 HTTP 响应触发时机：</strong><a href="#--劫持-http-响应触发时机" class="hash-link" aria-label="Direct link to --劫持-http-响应触发时机" title="Direct link to --劫持-http-响应触发时机" translate="no">​</a></h3>
 <p>在 Yakit 从目标服务器接收到响应后，准备将响应发送回客户端之前触发。这是<strong>最主要</strong>的响应拦截和修改点。等同于用代码的方式，完成 Yakit MITM UI 界面中的 &quot;手动劫持响应&quot; 的功能。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e1a1a909d1b1776a-698dc13b8765dd686095735bca57e174.png" width="1080" height="440" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/e1a1a909d1b1776a-698dc13b8765dd686095735bca57e174.png" width="1080" height="440" class="yakdoc-image"></button></p>
 <p><strong>使用场景</strong>：</p>
 <p>在响应回到浏览器前修改内容，比如某个管理后台的响应包里自带一段 js：先 alert(&quot;未授权访问&quot;)，然后立刻 window.location.href = &quot;/login&quot;。此时通过 <strong>hijackHTTPResponse</strong>/<strong>hijackHTTPResponseEx</strong>里把这段脚本删掉或改成空函数，就能阻止浏览器弹窗和跳转，从而保留在当前页面继续观察 DOM、以及后台页面。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="beforerequestafterrequest">beforeRequest/<strong>afterRequest</strong><a href="#beforerequestafterrequest" class="hash-link" aria-label="Direct link to beforerequestafterrequest" title="Direct link to beforerequestafterrequest" translate="no">​</a></h3>
@@ -56,7 +56,7 @@
 <p>与 hijackHTTPRequest 不同的是，beforeRequest 通过返回值来提交修改后的请求，如果没有返回值则使用 hijack 阶段修改后的请求。</p>
 <p><strong>使用说明：</strong></p>
 <p>这个钩子函数与其他函数略有区别，它可以直接获取到 hijackHTTPRequest 处理后的结果，允许用户统一对所有请求做最终调整。<strong>重要特性：这一步的修改是对用户不可见的</strong> - 如果用户触发手动劫持，在劫持界面看到的内容是 beforeRequest 处理之前的状态，而 beforeRequest 的修改会在用户确认发送后才被应用。这意味着 beforeRequest 中的修改不会影响用户劫持时的可视化界面。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f024246984af55e2-0c26ea3e44fdc1bbf8bdd015e58783be.png" width="762" height="889" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="narrow" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/f024246984af55e2-0c26ea3e44fdc1bbf8bdd015e58783be.png" width="762" height="889" class="yakdoc-image"></button></p>
 <p><strong>使用场景</strong>:</p>
 <p>常用于添加全局性的请求头、控制重放频率、统一的身份认证信息、或者不希望用户感知到的底层调整，确保请求的完整性和正确性。</p>
 <p><strong>afterRequest - 响应最终修改</strong>Hook触发时机：**</p>
@@ -76,7 +76,7 @@
 <p>除非用户知道自己在做什么，否则不推荐频繁使用，因为包含大量无关流量（如广告、统计、CDN 资源等），会造成性能开销和数据冗余。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mirrorfilteredhttpflow--过滤后流量镜像触发时机">mirrorFilteredHTTPFlow**- 过滤后流量镜像触发时机**：<a href="#mirrorfilteredhttpflow--过滤后流量镜像触发时机" class="hash-link" aria-label="Direct link to mirrorFilteredHTTPFlow**- 过滤后流量镜像触发时机**：" title="Direct link to mirrorFilteredHTTPFlow**- 过滤后流量镜像触发时机**：" translate="no">​</a></h3>
 <p>只有通过 Yakit 过滤规则的 HTTP 流量才会触发。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/96ce18b1e65d6441-299efcaf6b1a75498f488b7017522c7f.png" width="893" height="182" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/96ce18b1e65d6441-299efcaf6b1a75498f488b7017522c7f.png" width="893" height="182" class="yakdoc-image"></button></p>
 <p><strong>使用场景</strong>：</p>
 <p>典型场景例如：只关注 api 接口(/api)请求，通过配置过滤器排除<code>.css</code>、<code>.js</code>、<code>.png</code>等静态资源以及广告域名后，该函数只会捕获真正有价值的业务请求，随后按需处理。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mirrornewwebsite---新网站发现镜像触发时机"><strong>mirrorNewWebsite - 新网站发现镜像触发时机：</strong><a href="#mirrornewwebsite---新网站发现镜像触发时机" class="hash-link" aria-label="Direct link to mirrornewwebsite---新网站发现镜像触发时机" title="Direct link to mirrornewwebsite---新网站发现镜像触发时机" translate="no">​</a></h3>
@@ -113,7 +113,7 @@
 <p>该函数专注于参数级别的去重分析。例如，对于路径 <code>/api/user</code>，首次遇到 <code>?id=123&amp;type=admin </code>这种参数结构时会触发，但后续的 <code>?id=456&amp;type=user</code>（相同参数名但不同值）不会重复触发。这对于 API 参数发现、SQL 注入点识别、以及参数污染测试的准备工作非常重要，能够帮助研究人员快速识别所有可能的攻击面而不被重复的参数值干扰。</p>
 <p><strong>详细解读</strong>：当访问以下 URL 序列时：</p>
 <div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">https://192.168.1.100:8080/abc/https://192.168.1.100:8080/abc/12https://192.168.1.100:8080/abc/13https://192.168.1.100:8080/abc/14https://192.168.1.100:8080/abc/14?a=1https://192.168.1.100:8080/abc/14?a=1  # 重复https://192.168.1.100:8080/abc/14?a=2  # 结构同上https://192.168.1.100:8080/abc/14?a=2&amp;&amp;c=1https://192.168.1.100:8080/abc/14?a=2&amp;&amp;c=1  # 重复https://localhost:8080/abc/14?a=2&amp;&amp;c=1mirrorNewWebsitePathParams 会触发 7 次调用：</span><br></span></code></pre></div></div>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5031ca7d5c438169-c97e1cf8b949838472b0a69c68c5a8e6.png" width="1080" height="268" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5031ca7d5c438169-c97e1cf8b949838472b0a69c68c5a8e6.png" width="1080" height="268" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="数据包存储">数据包存储<a href="#数据包存储" class="hash-link" aria-label="Direct link to 数据包存储" title="Direct link to 数据包存储" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="hijacksavehttpflow---流量存储前处理触发时机">hijackSaveHTTPFlow - <strong>流量存储前处理触发时机</strong>：<a href="#hijacksavehttpflow---流量存储前处理触发时机" class="hash-link" aria-label="Direct link to hijacksavehttpflow---流量存储前处理触发时机" title="Direct link to hijacksavehttpflow---流量存储前处理触发时机" translate="no">​</a></h3>
 <p>在 HTTP 请求响应完整处理完成后，即将存储到 History 数据库之前触发。这是流量处理链的最后一个环节，所有的请求响应修改都已完成。</p>

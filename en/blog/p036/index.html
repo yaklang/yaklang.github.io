@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">IRify 性能升级（二）：前端并发一键开挂，构建高并发编译引擎 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p036"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="IRify 性能升级（二）：前端并发一键开挂，构建高并发编译引擎 | Yak Program Language"><meta data-rh="true" name="description" content="之前我们发布了 IRify 性能升级的第一篇技术文档，在文中详细阐述了针对 IRify 编译后端进行的一系列基础性架构优化。通过将指令间的引用从内存指针迁移为持久化 ID，并引入 Fetch 和 Save 异步 I/O 抽象，我们成功地将编译器的核心计算逻辑与缓慢的数据库持久化操作解耦，在数据库模式下获得了约20%的显著性能提升。"><meta data-rh="true" property="og:description" content="之前我们发布了 IRify 性能升级的第一篇技术文档，在文中详细阐述了针对 IRify 编译后端进行的一系列基础性架构优化。通过将指令间的引用从内存指针迁移为持久化 ID，并引入 Fetch 和 Save 异步 I/O 抽象，我们成功地将编译器的核心计算逻辑与缓慢的数据库持久化操作解耦，在数据库模式下获得了约20%的显著性能提升。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-09-12T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p036"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p036" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p036" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p036" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p036","mainEntityOfPage":"https://yaklang.com/en/blog/p036","url":"https://yaklang.com/en/blog/p036","headline":"IRify 性能升级（二）：前端并发一键开挂，构建高并发编译引擎","name":"IRify 性能升级（二）：前端并发一键开挂，构建高并发编译引擎","description":"之前我们发布了 IRify 性能升级的第一篇技术文档，在文中详细阐述了针对 IRify 编译后端进行的一系列基础性架构优化。通过将指令间的引用从内存指针迁移为持久化 ID，并引入 Fetch 和 Save 异步 I/O 抽象，我们成功地将编译器的核心计算逻辑与缓慢的数据库持久化操作解耦，在数据库模式下获得了约20%的显著性能提升。","datePublished":"2025-09-12T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -27,7 +27,7 @@
 <p><strong>3、第三遍：完整编译</strong>：第三次遍历目录，对需要的文件执行“<strong>再次打开</strong> -&gt; 解析 AST -&gt; 完整编译”的同步阻塞操作。</p>
 <p>这种设计的根本缺陷在于，在后两次操作中，它将编译任务中大量可以并行处理的工作（如独立文件的读取和 AST解析）强行置于一个严格的顺序队列中，导致 I/O 设备和 CPU 核心永远无法高效协同工作。</p>
 <p>下图直观地展示了这一低效的串行流程：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/72eb491eaf614ff5-77dd6b6788ed6da26c7979dae2d17d0c.png" width="1080" height="153" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/72eb491eaf614ff5-77dd6b6788ed6da26c7979dae2d17d0c.png" width="1080" height="153" class="yakdoc-image"></button></p>
 <p>为了彻底打破串行模型的束缚，我们设计并实现了一个通用的并发处理组件——<code>Pipe</code>（异步处理器管道）。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pipe-核心设计">Pipe 核心设计<a href="#pipe-核心设计" class="hash-link" aria-label="Direct link to Pipe 核心设计" title="Direct link to Pipe 核心设计" translate="no">​</a></h2>
 <p><code>Pipe</code> 本质上是“管道与过滤器”模式和“工作池”模式的结合体。它封装了 Go 语言的 Channel 和 Goroutine，提供了一个简单的抽象：<code>输入 -&gt; 并发处理 -&gt; 输出</code>。</p>
@@ -43,14 +43,14 @@
 </li>
 </ul>
 <p>这种设计将任务的提交、执行与结果的获取完全解耦，实现了最大程度的并行化。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4289cecc5354fd74-e402307a3a2d9ab7dd5daadc52df9e71.png" width="1080" height="1004" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4289cecc5354fd74-e402307a3a2d9ab7dd5daadc52df9e71.png" width="1080" height="1004" class="yakdoc-image"></button></p>
 <p>基于<code>Pipe</code> 抽象，我们将原有的三遍扫描重构成一个高效的、单次启动的流水线：</p>
 <p><strong>1、路径收集</strong>：仅需一次快速的目录遍历，收集所有待处理文件的路径列表。</p>
 <p><strong>2、管道一：并发文件读取器</strong>：创建一个 <code>Pipe</code>，其处理函数负责接收文件路径、读取文件内容，并输出一个包含路径和内容的 <code>FileContent</code> 结构体。这是一个I/O密集型的工作池。</p>
 <p><strong>3、管道二：并发AST</strong>解析<strong>器</strong>：创建第二个 <code>Pipe</code>，它的输入直接连接到第一个管道的输出。其处理函数负责接收 <code>FileContent</code> 结构体，解析其内容生成 AST，并将 AST 填充回结构体后输出。这是一个 CPU 密集型的工作池。</p>
 <p>通过这种方式，I/O 操作和 CPU 计算实现了高度重叠。当一个 CPU 核心在解析文件 A 的 AST 时，I/O 系统可以同时在读取文件 B、C、D 的内容。</p>
 <p>下图展示了这个全新的双管道并行流水线：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d7c8b47ac2748b5-5e3d85c6758eeb473b040eb561fd691e.png" width="549" height="1266" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/8d7c8b47ac2748b5-5e3d85c6758eeb473b040eb561fd691e.png" width="549" height="1266" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="结果缓存与流程简化">结果缓存与流程简化<a href="#结果缓存与流程简化" class="hash-link" aria-label="Direct link to 结果缓存与流程简化" title="Direct link to 结果缓存与流程简化" translate="no">​</a></h2>
 <p>流水线最终的输出被收集到一个 <code>FileContent </code>对象列表中，在内存中形成了一个完整的中间结果缓存。后续的预编译和完整编译阶段，不再需要访问磁盘，直接从这个缓存中获取数据即可。</p>
 <p>这彻底消除了原流程中的第二和第三次目录遍历，将整个前端流程简化为“<strong>一次收集 -&gt;<strong>并行</strong>处理 -&gt; 多次使用</strong>”的高效模式。</p>
@@ -80,7 +80,7 @@
 <p>这种设计带来了决定性的优势：它使得来自指令缓存和类型缓存的两个巨大 <code>fetch </code>请求，在数据库层面能够高效地交错执行。数据库不再被单个长事务长时间锁定，而是快速地处理着来自不同缓存的大量小型请求。</p>
 <p>对于编译器而言，缓存池的填充过程变成了一个非阻塞的、流式的过程。它几乎可以立即从两个缓存中获取到第一批数据并开始工作，而无需等待任何一个缓存被完全填满。这彻底解决了“冷启动”时的阻塞问题，保证了编译流水线的持续流畅。</p>
 <p>下图详细描绘了 <code>batchFetch </code>微事务调度器的工作原理：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1f6c144138675fde-3cf49da673cecf92f0d3f69d3fa64f18.png" width="1080" height="991" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/1f6c144138675fde-3cf49da673cecf92f0d3f69d3fa64f18.png" width="1080" height="991" class="yakdoc-image"></button></p>
 <p>第二阶段的优化，是一次从前端到后端的全链路并发改造。通过引入异步 <code>Pipe </code>流水线，我们彻底解决了文件处理和AST解析的串行瓶颈，实现了 I/O 与 CPU 计算的深度重叠。同时，通过对后端缓存、ID 分配策略和数据库事务模型的精细化调优，我们确保了整个系统能够稳定、高效地应对前端并行化带来的巨大数据吞-吐压力。</p>
 <p>这两阶段的优化相辅相成，共同将 IRify 编译器从一个传统的、受多重瓶颈制约的工具，演进为一个架构清晰、高度并发的现代化编译引擎，为未来更复杂、更大规模的静态分析任务奠定了坚实的性能基础。</p>
 <hr>

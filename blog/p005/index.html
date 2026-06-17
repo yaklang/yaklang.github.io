@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">IRify 智能化改造：AI 代码审计 + Poc 自动生成，安全效率翻倍 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p005"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="IRify 智能化改造：AI 代码审计 + Poc 自动生成，安全效率翻倍 | Yak Program Language"><meta data-rh="true" name="description" content="随着 Memfit AI 新功能的扩展和相关机制的完善，我们已经可以将现有的 AI 功能扩展到我们的其他产品中，本文主要介绍目前我们在 IRify 工具的 AI 化扩展中做出的新尝试。"><meta data-rh="true" property="og:description" content="随着 Memfit AI 新功能的扩展和相关机制的完善，我们已经可以将现有的 AI 功能扩展到我们的其他产品中，本文主要介绍目前我们在 IRify 工具的 AI 化扩展中做出的新尝试。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-04-10T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,代码审计,AI,漏洞检测与插件"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p005"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p005" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p005" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p005" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p005","mainEntityOfPage":"https://yaklang.com/blog/p005","url":"https://yaklang.com/blog/p005","headline":"IRify 智能化改造：AI 代码审计 + Poc 自动生成，安全效率翻倍","name":"IRify 智能化改造：AI 代码审计 + Poc 自动生成，安全效率翻倍","description":"随着 Memfit AI 新功能的扩展和相关机制的完善，我们已经可以将现有的 AI 功能扩展到我们的其他产品中，本文主要介绍目前我们在 IRify 工具的 AI 化扩展中做出的新尝试。","datePublished":"2026-04-10T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,19 +19,19 @@
 <p>在 Yaklang 的AI ReAct体系里，“代码安全审计”被注册为一个独立的循环类型。用户触发后，运行时会先构造一份贯穿全程的审计状态对象，并把 AI 工作目录记下来，所有阶段性产物都收敛到该目录下的审计子目录里，避免和别的任务混杂</p>
 <p>目前在 IRify 中有两个入口：</p>
 <p>1.在项目编译的右下角选择：进行AI审计（前端需要更新，后续版本会修复）</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/83a3543ffb1e4853-a6bfdd4336502d3001562c4534d09cbb.png" width="1080" height="578" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/83a3543ffb1e4853-a6bfdd4336502d3001562c4534d09cbb.png" width="1080" height="578" class="yakdoc-image"></button></p>
 <p>2.在 AI Agent 页面选择专注模式：代码安全审计</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/81eebe577bd92d14-564aee6899cf02f0a09c69bd380dddeb.png" width="1080" height="731" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/81eebe577bd92d14-564aee6899cf02f0a09c69bd380dddeb.png" width="1080" height="731" class="yakdoc-image"></button></p>
 <p>审计状态贯穿四个阶段，记录项目名称与路径、技术栈与入口点摘要、侦察报告路径与笔记文件列表、扫描阶段的结构化发现列表、各类别扫描的观察与不确定线索、验证阶段的确认与排除结论、以及最终报告内容与路径。</p>
 <p>接下来我们就使用 Yaklang 的内置靶场进行测试。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="第一阶段项目探索">第一阶段：项目探索<a href="#第一阶段项目探索" class="hash-link" aria-label="第一阶段：项目探索的直接链接" title="第一阶段：项目探索的直接链接" translate="no">​</a></h2>
 <p>主编排器并不亲自完成目录巡视，而是创建一个“目录探索”类的子循环，把侦察笔记的预期输出路径和探索工作目录通过变量传进去，然后用独立的子任务执行该循环。</p>
 <p>在探索过程中，程序会先阅读 go.mod 读取依赖，然后利用各种内置工具获取项目结构。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/b79ea124a2e372d6-1a74775bcd7be2d8cfb78ed98c10fa29.png" width="1080" height="273" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/bf0ae8e8293c81ef-913bacd7f9f5e5b0c0195fbd2e610bbc.png" width="1080" height="519" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/eaf5795561037c45-23d045f2b463c0a33e049cce490ad601.png" width="1080" height="425" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/b79ea124a2e372d6-1a74775bcd7be2d8cfb78ed98c10fa29.png" width="1080" height="273" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/bf0ae8e8293c81ef-913bacd7f9f5e5b0c0195fbd2e610bbc.png" width="1080" height="519" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/eaf5795561037c45-23d045f2b463c0a33e049cce490ad601.png" width="1080" height="425" class="yakdoc-image"></button></p>
 <p>探索结束后，主编排器从子循环的命名变量里回收结果：真实项目路径与名称、技术栈描述、入口点摘要、汇总侦察报告文件路径、以及探索过程中通过写文件产生的笔记路径列表等，并写回共享审计状态。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d717291720a15f03-bf09277668f1875280657b62531cfe57.png" width="1080" height="581" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d717291720a15f03-bf09277668f1875280657b62531cfe57.png" width="1080" height="581" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="第二阶段扫描计划加按类别串行的双阶段审计">第二阶段：扫描计划加按类别串行的双阶段审计<a href="#第二阶段扫描计划加按类别串行的双阶段审计" class="hash-link" aria-label="第二阶段：扫描计划加按类别串行的双阶段审计的直接链接" title="第二阶段：扫描计划加按类别串行的双阶段审计的直接链接" translate="no">​</a></h2>
 <p>第二阶段本身又分为两层：外层的类别编排与内层单个类别的 ReAct 扫描。</p>
 <p>外层首先用一次偏“快”的模型调用，让 AI 在结构化输出中确定本次要扫哪些默认漏洞类别、用户是否额外指定了自定义类别（带关键词与补充说明）。若这次规划失败，则退回内置默认类别全集，保证流程不中断。</p>
@@ -40,9 +40,9 @@
 <li class="">第一段是关键词搜索阶段：模型根据该类别的 Sink 语义提示和技术栈，自行决定 grep 策略，强调用“仅返回匹配文件”的模式避免结果被截断遗漏；每搜一轮就把命中文件的绝对路径通过专用动作合并进待审计列表，并可继续多轮搜索。</li>
 <li class="">第二段是逐文件审计阶段：对上一段锁定的每个文件依次读取内容，若确认存在问题则提交结构化 finding，其中对置信度有下限要求，过低会被拒绝以抑制随手报漏洞。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/23a61e548bdeefc8-fe7cb8fe51741286d5b2d0e360960f23.png" width="1080" height="198" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/23a61e548bdeefc8-fe7cb8fe51741286d5b2d0e360960f23.png" width="1080" height="198" class="yakdoc-image"></button></p>
 <p>上图为关键词搜索第一段的截图，程序先找到了<code>vul_cmdi.go</code> 等明显包含漏洞示例的高风险文件，然后进入第二段逐行搜索。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/51e9edd1e0baf5f1-2e3c8f9bc21e0b7627700b5fe8c75d53.png" width="1080" height="592" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/51e9edd1e0baf5f1-2e3c8f9bc21e0b7627700b5fe8c75d53.png" width="1080" height="592" class="yakdoc-image"></button></p>
 <p>通过工具阅读可能有问题的代码片段，交给AI完成进行审计。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="第三阶段逐条验证与证据记录">第三阶段：逐条验证与证据记录<a href="#第三阶段逐条验证与证据记录" class="hash-link" aria-label="第三阶段：逐条验证与证据记录的直接链接" title="第三阶段：逐条验证与证据记录的直接链接" translate="no">​</a></h2>
 <p>验证阶段的专用动作主要包括几类：</p>
@@ -53,19 +53,19 @@
 <p>5.当全部 finding 都有了结论后调用完成验证并退出本阶段</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="第四阶段报告生成与兜底">第四阶段：报告生成与兜底<a href="#第四阶段报告生成与兜底" class="hash-link" aria-label="第四阶段：报告生成与兜底的直接链接" title="第四阶段：报告生成与兜底的直接链接" translate="no">​</a></h2>
 <p>系统创建“报告生成”类的子循环，把最终 Markdown 报告路径、写作任务说明、以及必须阅读的参考文件列表注入子循环变量，由专门写长文的循环读入这些数据并写入磁盘。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/20df50f99b07d507-9b9cd2d42d98a765cac782cc6ba496c8.png" width="1080" height="208" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/20df50f99b07d507-9b9cd2d42d98a765cac782cc6ba496c8.png" width="1080" height="208" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="基于风险的代码审计">基于风险的代码审计<a href="#基于风险的代码审计" class="hash-link" aria-label="基于风险的代码审计的直接链接" title="基于风险的代码审计的直接链接" translate="no">​</a></h2>
 <p>除了纯AI的代码审计以外，IRify 还支持利用现有的风险信息进行代码审计。对于这种精确又轻量级的功能我们选择使用 forge 实现。</p>
 <p>例如我们已经对某个项目完成了扫描，得到了如下的风险信息：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7dae1abb4c56c4b5-74f61777e1f9aef4ed6ba5df8cad3726.png" width="1080" height="341" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/7dae1abb4c56c4b5-74f61777e1f9aef4ed6ba5df8cad3726.png" width="1080" height="341" class="yakdoc-image"></button></p>
 <p>现在我们想对序号为1的高危风险 “检测到Golang服务器端模板注入漏洞” 进行AI审计，就可以在 AI Agent 的工具库中搜索<code>ssa-risk</code>找到目标，点击后在弹窗页面输入风险序号：1</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/7c9e1f848cbbe73a-01e36a672ceb360ca7046933be0f4c4d.png" width="1080" height="569" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d8713eb52aac4167-fb5d01810bf292a709a5b947ff1c4cb9.png" width="1080" height="378" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/7c9e1f848cbbe73a-01e36a672ceb360ca7046933be0f4c4d.png" width="1080" height="569" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d8713eb52aac4167-fb5d01810bf292a709a5b947ff1c4cb9.png" width="1080" height="378" class="yakdoc-image"></button></p>
 <p>执行完成后AI会返回一个简单的漏洞解析报告。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="风险智能生成poc样例">风险智能生成Poc样例<a href="#风险智能生成poc样例" class="hash-link" aria-label="风险智能生成Poc样例的直接链接" title="风险智能生成Poc样例的直接链接" translate="no">​</a></h2>
 <p>目前 IRify 中内置了 python 和 yak 这两种语言的代码构造器，可以生成没有语法错误的正确代码，结合对风险的代码审计功能（工具库中的<code>ssa-risk</code>），即可直接根据风险生成Poc样例。</p>
 <p>在已有静态分析风险结果的前提下，用多步推理把「风险元数据 + 源码/片段上下文 + 漏洞类型」转成「能拿去授权环境里做验证的概念验证脚本」。在技能库中搜索“根据SSA Risk智能生成Poc”，点击后在弹窗配置需要审计的风险序列号后即可开始生成Poc样例。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/daad5a2670df5e54-32bef3d3b076a9d45278bc5d009af81a.png" width="1080" height="724" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/daad5a2670df5e54-32bef3d3b076a9d45278bc5d009af81a.png" width="1080" height="724" class="yakdoc-image"></button></p>
 <p>程序会先运行一次<code>ssa-risk</code>审计风险相关内容，之后程序会从如下几个方向进行思考：</p>
 <p>1.判断源码能不能跟</p>
 <p>看关联项目是不是内存编译、有没有源码：能跟就继续用 listing/grep/read 补全路由和调用链；不能跟就主要依赖 Risk 里自带的代码片段。</p>
@@ -76,20 +76,20 @@
 <p>4.找 Poc 模板</p>
 <p>用模板检索工具按漏洞类型拿 Python 侧的请求构造、解析结果等骨架，减少AI幻觉。</p>
 <p>下面图片中展示了程序判断目标项目是否可达和进行数据流分析的过程：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/cd9a963b449f6362-2d26cad81a82e8504985e09dc7f05e42.png" width="1080" height="707" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/825247eb931e92f5-d463431fa6ffca7e92647751fdf94058.png" width="1080" height="730" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/cd9a963b449f6362-2d26cad81a82e8504985e09dc7f05e42.png" width="1080" height="707" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/825247eb931e92f5-d463431fa6ffca7e92647751fdf94058.png" width="1080" height="730" class="yakdoc-image"></button></p>
 <p>本系统支持在参数<code>target_base_url</code>中配置目标项目的<strong>真实运行环境地址</strong>（如<code>http://your-app:8080</code>），系统将自动执行智能化安全分析验证流程，最终会生成报告和Poc样例代码：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/20cee84f92672f87-43e9bdde0d6f215b3bc145c6da7d1a84.png" width="1080" height="665" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/20cee84f92672f87-43e9bdde0d6f215b3bc145c6da7d1a84.png" width="1080" height="665" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="syntaxflow规则美化">Syntaxflow规则美化<a href="#syntaxflow规则美化" class="hash-link" aria-label="Syntaxflow规则美化的直接链接" title="Syntaxflow规则美化的直接链接" translate="no">​</a></h2>
 <p>这里的「美化」主要指把一份<code>.sf</code> 规则文本按统一规范重新排版输出：缩进、换行、<code>desc</code> / <code>alert</code> 与规则体的结构会更整齐；在带选项时还可以补全或规范化元数据（例如规则 ID、描述里要求的字段等）。</p>
 <p>目前 Syntaxflow 规则美化有两个入口：新建规则右上角，代码审计的规则编写页面右上角。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d29f055eac2743fc-ea84019f8faaeae86643d460b4f6f4d4.png" width="1080" height="452" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d0663e208b9b2b72-232d360dfea5bb334878701021ff50d0.png" width="1080" height="337" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d29f055eac2743fc-ea84019f8faaeae86643d460b4f6f4d4.png" width="1080" height="452" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d0663e208b9b2b72-232d360dfea5bb334878701021ff50d0.png" width="1080" height="337" class="yakdoc-image"></button></p>
 <p>需要注意的是：在美化开始之前需要保证当前的规则没有语法错误，因为我们会在美化开始前后结束后各运行一次 Syntaxflow 语法检测以保证美化本身不会破坏规则的语法。并且规则美化采用了严格元数据替换逻辑，不用担心会破坏规则本身的内容。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="syntaxflow-规则自动生成">Syntaxflow 规则自动生成<a href="#syntaxflow-规则自动生成" class="hash-link" aria-label="Syntaxflow 规则自动生成的直接链接" title="Syntaxflow 规则自动生成的直接链接" translate="no">​</a></h2>
 <p>该功能会在内置规则样例知识包上做检索，再结合单文件编辑工具链和 SyntaxFlow 编译校验，迭代写出合法的 <code>.sf</code>文件</p>
 <p>在AI Agent页面选择专注模式：write_syntaxflow_rule</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/8be718f3358fe4e1-17aa2a711e82673e7fbf03a1f732108b.png" width="611" height="528" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/8be718f3358fe4e1-17aa2a711e82673e7fbf03a1f732108b.png" width="611" height="528" class="yakdoc-image"></button></p>
 <p>系统行为：抽取样例（语言/虚拟文件名/代码正文）并保存 → 生成规则时把样例作为 UNSAFE 正例测试块嵌入规则末尾 → 生成后必须用语法/样例命中校验做自检，不通过就迭代修改直到通过。</p>
 <p>1.知识检索</p>
 <ul>
@@ -113,7 +113,7 @@
 <li class="">模型用写/改规则等动作维护规则正文；每次改动会走 SyntaxFlow 语法与格式诊断（有误则阻断继续乱改）。若带了样例，还会用 check-syntaxflow-syntax 做正例自检，直到规则在样例上能按预期命中。</li>
 </ul>
 <p>使用方法直接输入一段漏洞样例代码，它就会自动完成 Syntaxflow 规则并且进行语法检测和可用性检查，最后会进行规则打分。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/c3822ad8d203d2b0-f16217f104d221c9d36b917fa9bd15c6.png" width="1080" height="328" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/c3822ad8d203d2b0-f16217f104d221c9d36b917fa9bd15c6.png" width="1080" height="328" class="yakdoc-image"></button></p>
 <p>可以在文件树中找到生成的 Syntaxflow 规则。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="未来的扩展">未来的扩展<a href="#未来的扩展" class="hash-link" aria-label="未来的扩展的直接链接" title="未来的扩展的直接链接" translate="no">​</a></h2>
 <p>现有的 AI 代码审计仍然有许多代码难点没有攻克，受到模型质量和上下文限制的影响，AI 审计在面对大项目时表现不佳，核心问题就是稳定性太低，多少审计很难输出相同的结果。我们正在尝试用稳定的代码扫描风险产物来为不稳定的纯 AI 代码审计补充支撑。</p>

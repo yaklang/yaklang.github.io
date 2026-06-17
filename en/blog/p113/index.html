@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yak Runner 新版本，City不City？ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/p113"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yak Runner 新版本，City不City？ | Yak Program Language"><meta data-rh="true" name="description" content="Yak Runner，在Yakit中内置的代码编辑器，近期迎来了大更新。新版本的Yak Runner更具美观与实用性，本期文章将对近期的更新做个小盘点。"><meta data-rh="true" property="og:description" content="Yak Runner，在Yakit中内置的代码编辑器，近期迎来了大更新。新版本的Yak Runner更具美观与实用性，本期文章将对近期的更新做个小盘点。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2024-07-26T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2024 年"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/p113"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p113" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p113" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p113" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/p113","mainEntityOfPage":"https://yaklang.com/en/blog/p113","url":"https://yaklang.com/en/blog/p113","headline":"Yak Runner 新版本，City不City？","name":"Yak Runner 新版本，City不City？","description":"Yak Runner，在Yakit中内置的代码编辑器，近期迎来了大更新。新版本的Yak Runner更具美观与实用性，本期文章将对近期的更新做个小盘点。","datePublished":"2024-07-26T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.0ca46a7f.css">
-<script src="/en/assets/js/runtime~main.3af06820.js" defer="defer"></script>
-<script src="/en/assets/js/main.56bd7d6d.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.abee82ad.css">
+<script src="/en/assets/js/runtime~main.38b54a73.js" defer="defer"></script>
+<script src="/en/assets/js/main.70423a13.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,34 +19,34 @@
 <p>现在直接打开Yak Runner，在最中间的位置将会有三个选项以供选择，分别是**<code>新建文件</code><strong>、</strong><code>打开文件</code><strong>和</strong><code>打开文件夹</code>**。</p>
 <p>新建文件允许你快速的打开一个临时文件，以便你快速开发一个小脚本或者是使用某些你急需使用到的函数（你知道的，Yaklang中有许多令人喜欢便捷的适用于安全领域的库）；打开文件和打开文件夹则更适用于你想要花更多的时间去写一份Yaklang项目，我们也期待着你这么去做！</p>
 <p>点击Yak Runner，想想你想要使用它做点什么有趣的事情吧！</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ef68cbd87ebde02f-b9a92db17d2d9b682facd6484deee130.png" width="1080" height="453" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ef68cbd87ebde02f-b9a92db17d2d9b682facd6484deee130.png" width="1080" height="453" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="终端">终端<a href="#终端" class="hash-link" aria-label="Direct link to 终端" title="Direct link to 终端" translate="no">​</a></h2>
 <p>首先是一个大更新，Yak Runner以前监修中的终端现在可以使用了。</p>
 <p>你可以点击左下角终端按钮，或者右击文件选择打开终端，也会打开相应文件地址的终端。这与你熟悉的IDE的操作逻辑是一致的。当然也可以使用快捷键`ctrl+``进行呼出。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d226c28d32577fc9-aa1cfbc0f2e8b5f93f687e54ddc424b4.gif" width="1080" height="536" class="img_ev3q"></p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/202cbe8958ec5521-0e311e99b49d21feba553ecd54080591.gif" width="1080" height="536" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/d226c28d32577fc9-aa1cfbc0f2e8b5f93f687e54ddc424b4.gif" width="1080" height="536" class="yakdoc-image"></button></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/202cbe8958ec5521-0e311e99b49d21feba553ecd54080591.gif" width="1080" height="536" class="yakdoc-image"></button></p>
 <p>除此之外，Yak Runner也支持了多终端，多个终端在以列表的形式在右边。现在你能够同时打开多个终端，这会大大方便你进行调试代码等操作。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ac15ae2b7f2f5747-620d8080f39ed4f810cf19cc95bdf8c6.gif" width="1080" height="536" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/ac15ae2b7f2f5747-620d8080f39ed4f810cf19cc95bdf8c6.gif" width="1080" height="536" class="yakdoc-image"></button></p>
 <p>而在终端的右上角，则有个设置按钮，在这里，你能够修改你想要的字体样式或者字体大小。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458db5f567b0396a-12f4f840581e72eecca12cb9bf5282c0.gif" width="1080" height="536" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/458db5f567b0396a-12f4f840581e72eecca12cb9bf5282c0.gif" width="1080" height="536" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="语法检查">语法检查<a href="#语法检查" class="hash-link" aria-label="Direct link to 语法检查" title="Direct link to 语法检查" translate="no">​</a></h2>
 <p>在终端左边的选项就是语法检查，它能够实时的检测你输入的Yak代码是否正确，并提供报错信息。点击其报错信息，就能够跳转到报错代码的具体位置。因此，现在在Yak Runner写代码，调试更加的简单了。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/424a6f84ad3fbddb-a5dd6e4f32e0f0483179203b1cbb91d0.gif" width="1079" height="599" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/424a6f84ad3fbddb-a5dd6e4f32e0f0483179203b1cbb91d0.gif" width="1079" height="599" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="文件树">文件树<a href="#文件树" class="hash-link" aria-label="Direct link to 文件树" title="Direct link to 文件树" translate="no">​</a></h2>
 <p>文件树相比之前，也迎来了较大的更新。现在的文件树中，允许你右击文件，提供了更多的选项以供你选择，如复制文件路径、复制文件相对路径。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/85e1f998a6844494-effab90d1ec1e6cb14071f1a265e5908.gif" width="640" height="346" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/85e1f998a6844494-effab90d1ec1e6cb14071f1a265e5908.gif" width="640" height="346" class="yakdoc-image"></button></p>
 <p>同时也有很多有意思的小操作，比如当你新建一个文件的时候，不用总是输入其后缀名，现在默认使用<code>.yak</code>作为后缀名。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b8993f51acd83357-a42ba022a4addac5f2424c8963c0fa9e.gif" width="640" height="347" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/b8993f51acd83357-a42ba022a4addac5f2424c8963c0fa9e.gif" width="640" height="347" class="yakdoc-image"></button></p>
 <p>另外，现在Yak Runner也支持了更多快捷键操作。而快捷键操作的逻辑与<code>Vs Code</code>是高度一致的，比如你可以使用<code>F2</code>进行文件的重命名，或者使用<code>delete</code>来删除文件。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/76fd1dfd9f0bffae-55fcda977d0e87330f5eca62e178e890.gif" width="640" height="347" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/76fd1dfd9f0bffae-55fcda977d0e87330f5eca62e178e890.gif" width="640" height="347" class="yakdoc-image"></button></p>
 <p>文件树的交互性也迎来提升。在你对多个文件进行切换的时候，文件树中相应的文件也会有高亮提示。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/44c53daa0451eec1-3dad3898e49298aefbd3d95c47305e7f.gif" width="640" height="347" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/44c53daa0451eec1-3dad3898e49298aefbd3d95c47305e7f.gif" width="640" height="347" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="帮助文档">帮助文档<a href="#帮助文档" class="hash-link" aria-label="Direct link to 帮助文档" title="Direct link to 帮助文档" translate="no">​</a></h2>
 <p>最后，与旧版Yak Runner有很大不同的是，在新版Yak Runner左侧边栏中，现在提供了一个新选项：帮助文档。</p>
 <p>帮助文档能够让你在忘记函数如何使用或者想用的函数具体什么名称的时候进行搜索，它支持可靠的模糊搜索。(再也不用担心禁不住函数名称而发愁了)</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5e3d669d6cd7301d-5e5fd64a2f118d9eda7a8f2121e1461c.gif" width="640" height="262" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/5e3d669d6cd7301d-5e5fd64a2f118d9eda7a8f2121e1461c.gif" width="640" height="262" class="yakdoc-image"></button></p>
 <p>帮助文档除了搜索相关函数的名字，也可以使用中文作为关键字检索文档。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4b51eb65ae9d1a2b-44b05d28bc713847a5c3d9033a7b6c8a.gif" width="640" height="320" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/en/assets/images/4b51eb65ae9d1a2b-44b05d28bc713847a5c3d9033a7b6c8a.gif" width="640" height="320" class="yakdoc-image"></button></p>
 <p>当然，除了帮助文档以外，你在编辑代码的过程中，也可以使用相应的函数使用提醒，帮助你更好地了解怎么使用该函数。</p>
 <hr>
 <blockquote>

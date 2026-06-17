@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">SSA格式到底是个啥？ | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p195"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="SSA格式到底是个啥？ | Yak Program Language"><meta data-rh="true" name="description" content="SSA在编译过程中的位置"><meta data-rh="true" property="og:description" content="SSA在编译过程中的位置"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2023-08-03T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2023 年,代码审计"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p195"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p195" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p195" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p195" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p195","mainEntityOfPage":"https://yaklang.com/blog/p195","url":"https://yaklang.com/blog/p195","headline":"SSA格式到底是个啥？","name":"SSA格式到底是个啥？","description":"SSA在编译过程中的位置","datePublished":"2023-08-03T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -19,7 +19,7 @@
 <p>在 3.0 时期，由于 LLVM 设计的前中后转换，编译问题进一步被抽象为多前端到多后端的转换问题，并被应用在其他领域，比如 Ai 的部署问题和 HPC 等领域。同时由于编译中端蕴藏的信息极大，也开始使用在语言支持、代码格式化、静态代码审计等方向。</p>
 <p>前端的重点在于源代码的解析和语法树的构建。中端的重点在于对 IR 的处理。后端的重点在于体系结构领域。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="专有名词"><strong>专有名词</strong><a href="#专有名词" class="hash-link" aria-label="专有名词的直接链接" title="专有名词的直接链接" translate="no">​</a></h2>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/07077893410f5719-f42ba4abe8af7cd21b9af6105aaa9711.png" width="1080" height="254" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/07077893410f5719-f42ba4abe8af7cd21b9af6105aaa9711.png" width="1080" height="254" class="yakdoc-image"></button></p>
 <p>image.png</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1语法阶段">1、语法阶段<a href="#1语法阶段" class="hash-link" aria-label="1、语法阶段的直接链接" title="1、语法阶段的直接链接" translate="no">​</a></h3>
 <p>词法语法分析：按照预定义的语法规则解析输入的字符流，得到其对应的语法树。</p>
@@ -57,7 +57,7 @@
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="2多维度">2）多维度<a href="#2多维度" class="hash-link" aria-label="2）多维度的直接链接" title="2）多维度的直接链接" translate="no">​</a></h4>
 <p>需要注意，IR 的设计是多维度的, 主要体现在以下两个点：</p>
 <ol>
-<li class="">在编译顺序中，可能一个语言将会使用多种 IR 进行一层层的处理， TinyGo 很好的表达了一个中级 SSA 形式的 IR (GoSSA)向低级 SSA 形式 IR (LLVM-IR)转移的过程。MLIR 项目的设计目标之一也是为了统一高级 IR。如下图所示，多种语言都会使用自己的语言特定高级 IR 进行语言特定的优化，然后向 LLVMIR 转换并接入 LLVM。 <img decoding="async" loading="lazy" alt="image" src="/assets/images/e857031cd892200d-540a34822e9115d2005d878ad9d4467f.png" width="787" height="364" class="img_ev3q"></li>
+<li class="">在编译顺序中，可能一个语言将会使用多种 IR 进行一层层的处理， TinyGo 很好的表达了一个中级 SSA 形式的 IR (GoSSA)向低级 SSA 形式 IR (LLVM-IR)转移的过程。MLIR 项目的设计目标之一也是为了统一高级 IR。如下图所示，多种语言都会使用自己的语言特定高级 IR 进行语言特定的优化，然后向 LLVMIR 转换并接入 LLVM。 <button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e857031cd892200d-540a34822e9115d2005d878ad9d4467f.png" width="787" height="364" class="yakdoc-image"></button></li>
 <li class="">对于任意一个 IR 本身而言，一般也会设计: 运行时、可阅读、序列化三类 IR 的具体表示。LLVM 对于 IR 的设计就分为这三类，</li>
 </ol>
 <ul>

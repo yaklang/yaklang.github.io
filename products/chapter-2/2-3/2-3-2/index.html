@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.2 弱口令爆破 – 测试账户密码安全性 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-2/2-3/2-3-2"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.2 弱口令爆破 – 测试账户密码安全性 | Yak Program Language"><meta data-rh="true" name="description" content="在 2.3.1 节中，我们学习了如何通过端口扫描来发现目标网络中存活的主机与开放的服务。探测到开放服务后，评估其安全性的一个关键步骤，便是检查是否存在弱口令配置漏洞。弱密码检测（通常称为“爆破”或字典攻击）是信息安全评估中最基础也最有效的技术之一，其核心原理在于系统化地尝试使用预定义的凭据列表（用户名字典和密码字典）去登录目标服务，直至发现有效的访问凭证。Yakit 的该模块将此过程工程化、自动化，极大地提升了检测效率。"><meta data-rh="true" property="og:description" content="在 2.3.1 节中，我们学习了如何通过端口扫描来发现目标网络中存活的主机与开放的服务。探测到开放服务后，评估其安全性的一个关键步骤，便是检查是否存在弱口令配置漏洞。弱密码检测（通常称为“爆破”或字典攻击）是信息安全评估中最基础也最有效的技术之一，其核心原理在于系统化地尝试使用预定义的凭据列表（用户名字典和密码字典）去登录目标服务，直至发现有效的访问凭证。Yakit 的该模块将此过程工程化、自动化，极大地提升了检测效率。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-2/2-3/2-3-2"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.2 弱口令爆破","item":"https://yaklang.com/products/chapter-2/2-3/2-3-2"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -17,7 +17,7 @@
 <p>该模块的主要应用场景是在获得授权的前提下，对内部或外部网络中的服务进行安全审计，以发现和修复弱密码问题。例如，在一次内部网络渗透测试中，攻击者首要目标之一就是寻找一个立足点（Foothold），而一个使用了“admin/admin123”这类常见弱口令的SSH、RDP或数据库服务，往往就成为最易被攻破的突破口。此模块通过内置对多种协议的支持，如 <strong>SSH、FTP、Tomcat、VNC、PostgreSQL、MySQL、Redis、MSSQL、RDP</strong> 等，实现了对企业常见信息化资产的广泛覆盖。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="操作界面与核心参数配置">操作界面与核心参数配置<a href="#操作界面与核心参数配置" class="hash-link" aria-label="操作界面与核心参数配置的直接链接" title="操作界面与核心参数配置的直接链接" translate="no">​</a></h3>
 <p>模块的界面设计兼顾了易用性与灵活性，允许用户通过精细化的参数配置来应对不同的测试环境和策略需求。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit弱口令检测配置界面" src="/assets/images/ch2-028-91d4c6b43460edbc51d46397560ebc15.png" width="1518" height="1190" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit弱口令检测配置界面"><img decoding="async" loading="lazy" alt="Yakit弱口令检测配置界面" src="/assets/images/ch2-028-91d4c6b43460edbc51d46397560ebc15.png" width="1518" height="1190" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit弱口令检测配置界面</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="服务类型选择service-type-selection">服务类型选择（Service Type Selection）<a href="#服务类型选择service-type-selection" class="hash-link" aria-label="服务类型选择（Service Type Selection）的直接链接" title="服务类型选择（Service Type Selection）的直接链接" translate="no">​</a></h4>
 <p>操作界面的左侧是“可被爆破类型”列表，这是定义任何爆破任务的起点。该列表收录了企业网络环境中常见的、依赖于身份认证的各类网络服务协议。</p>
@@ -34,7 +34,7 @@
 <li class=""><strong>爆破目标</strong>：这是任务定义的核心输入区域。它支持高度灵活的目标格式，用户可以输入单个目标（如 <code>192.168.1.1</code> 或 <code>test.com:3306</code>），也可以输入CIDR格式的IP段（如 <code>192.168.1.0/24</code>）。为了便于批量操作，系统支持通过换行符分割多个目标，并可以直接导入TXT或Excel文件，这对于处理大规模资产列表至关重要。</li>
 </ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="额外参数-advanced-parameters-configuration">额外参数 (Advanced Parameters Configuration)<a href="#额外参数-advanced-parameters-configuration" class="hash-link" aria-label="额外参数 (Advanced Parameters Configuration)的直接链接" title="额外参数 (Advanced Parameters Configuration)的直接链接" translate="no">​</a></h4>
-<p><img decoding="async" loading="lazy" alt="Yakit 爆破任务高级参数配置界面" src="/assets/images/ch2-029-d1bafbef1b6e225393c460ffe8c6e6d1.png" width="980" height="1306" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: Yakit 爆破任务高级参数配置界面"><img decoding="async" loading="lazy" alt="Yakit 爆破任务高级参数配置界面" src="/assets/images/ch2-029-d1bafbef1b6e225393c460ffe8c6e6d1.png" width="980" height="1306" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：Yakit 爆破任务高级参数配置界面</p>
 <p>点击“额外参数”按钮，可以展开对爆破任务行为的精细化控制面板。这部分是实现高效、隐蔽测试的关键。</p>
 <ul>
@@ -69,7 +69,7 @@
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="标准操作流程指引">标准操作流程指引<a href="#标准操作流程指引" class="hash-link" aria-label="标准操作流程指引的直接链接" title="标准操作流程指引的直接链接" translate="no">​</a></h3>
 <p>执行一次完整的弱密码检测任务通常遵循以下步骤：</p>
-<p><img decoding="async" loading="lazy" alt="弱密码爆破模块标准操作流程" src="/assets/images/ch2-030-051bbd4f70d8fe8b29197a29b311824d.png" width="726" height="2256" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: 弱密码爆破模块标准操作流程"><img decoding="async" loading="lazy" alt="弱密码爆破模块标准操作流程" src="/assets/images/ch2-030-051bbd4f70d8fe8b29197a29b311824d.png" width="726" height="2256" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p class="manual-figcaption">图：弱密码爆破模块标准操作流程</p>
 <ol>
 <li class="">
@@ -113,7 +113,7 @@
 </ul>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit弱口令检测配置与结果展示" src="/assets/images/ch2-031-65f01e0fbc5c71b7734caf746f497d55.png" width="1812" height="1110" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit弱口令检测配置与结果展示"><img decoding="async" loading="lazy" alt="Yakit弱口令检测配置与结果展示" src="/assets/images/ch2-031-65f01e0fbc5c71b7734caf746f497d55.png" width="1812" height="1110" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit弱口令检测配置与结果展示</p>
 <p>上图直观地展示了整个任务的配置界面。整个操作流程体现了安全审计的精确性原则：首先识别出高风险的检查点（默认口令），然后配置最小化的测试集（<code>admin/admin</code>）进行快速验证。还展示了本次审计任务的最终结果。结果面板提供了直接且明确的反馈，验证了安全风险的存在：</p>
 <ul>

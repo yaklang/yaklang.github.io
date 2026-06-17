@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">2.3.11 漏洞检测：自动化扫描的工程化实践 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-2/2-3/2-3-11"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.11 漏洞检测：自动化扫描的工程化实践 | Yak Program Language"><meta data-rh="true" name="description" content="在前续章节中，我们已经系统性地掌握了如何通过主动探测（如端口扫描）和被动分析（如历史流量审查）等手段，对目标资产进行全面的信息收集与特征描绘。然而，这些情报的最终价值在于指导我们发现并确认实际存在的安全风险。至此，我们的工作重心将从“资产识别”自然过渡到“漏洞验证”，而 Yakit 的漏洞检测（Vulnerability Detection）模块正是承载这一核心使命的工程化中枢。"><meta data-rh="true" property="og:description" content="在前续章节中，我们已经系统性地掌握了如何通过主动探测（如端口扫描）和被动分析（如历史流量审查）等手段，对目标资产进行全面的信息收集与特征描绘。然而，这些情报的最终价值在于指导我们发现并确认实际存在的安全风险。至此，我们的工作重心将从“资产识别”自然过渡到“漏洞验证”，而 Yakit 的漏洞检测（Vulnerability Detection）模块正是承载这一核心使命的工程化中枢。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-2/2-3/2-3-11"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-11" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-11" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-11" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.11 漏洞检测","item":"https://yaklang.com/products/chapter-2/2-3/2-3-11"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -34,7 +34,7 @@
 <p><strong>批量执行</strong>：此模式则赋予用户完全的自主权，可以从完整的插件库中 <strong>自由组合</strong> 任意数量、任意类型的插件进行扫描。其核心价值在于 “<strong>广度覆盖</strong>” 和 “<strong>高度定制</strong>”，适用于对目标进行全面基线评估、周期性回归测试或构建符合特定需求的自定义扫描方案。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit漏洞检测双模式配置流程图" src="/assets/images/ch2-120-726ed8a4ad91adebd902d52103eb0dc2.png" width="1977" height="1322" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit漏洞检测双模式配置流程图"><img decoding="async" loading="lazy" alt="Yakit漏洞检测双模式配置流程图" src="/assets/images/ch2-120-726ed8a4ad91adebd902d52103eb0dc2.png" width="1977" height="1322" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit漏洞检测双模式配置流程图</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23112-专项漏洞扫描聚焦高危深度检测">2.3.11.2 专项漏洞扫描：聚焦高危，深度检测<a href="#23112-专项漏洞扫描聚焦高危深度检测" class="hash-link" aria-label="2.3.11.2 专项漏洞扫描：聚焦高危，深度检测的直接链接" title="2.3.11.2 专项漏洞扫描：聚焦高危，深度检测的直接链接" translate="no">​</a></h3>
 <p>在完成了对 Yakit 基础功能的初步了解之后，我们现在需要转向更具针对性和深度的安全检测实践。不同于宽泛的资产探测，现代安全评估更要求对特定技术栈、特定漏洞类型进行精确打击。本章将详细阐述 Yakit 的核心功能之一——“专项漏洞扫描”，它正是为此类高精度、深度化的检测需求而设计的。我们将深入其工作流，解析其“插件选择”与“任务配置”分离的设计哲学，以及如何通过它实现高效、可控的漏洞验证过程。</p>
@@ -48,10 +48,10 @@
 <p><strong>仪表盘快速启动</strong>：在首页 Dashboard 的“漏洞扫描”卡片中，选择【专项漏洞检测】选项。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit安全工具专项漏洞检测入口说明" src="/assets/images/ch2-121-b2fa0d176d38bb49523792219f34c74c.png" width="1123" height="583" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit安全工具专项漏洞检测入口说明"><img decoding="async" loading="lazy" alt="Yakit安全工具专项漏洞检测入口说明" src="/assets/images/ch2-121-b2fa0d176d38bb49523792219f34c74c.png" width="1123" height="583" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit安全工具专项漏洞检测入口说明</p>
 <p>该模块的界面采用了 Yakit 标志性的<strong>双视界（Dual-View）交互模型</strong>。这种设计将整个操作界面清晰地划分为左侧的“插件选择区”和右侧的“任务配置与执行区”。其核心设计理念在于将**“做什么检测”（What）<strong>与</strong>“对谁检测以及如何检测”（Whom &amp; How）**在物理空间上进行分离，从而引导用户构建一个逻辑清晰、步骤分明的扫描任务。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit专项漏洞检测界面展示" src="/assets/images/ch2-122-4d2e6fd0e26ccb6adc75c11e6d0b6ed5.png" width="1356" height="617" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit专项漏洞检测界面展示"><img decoding="async" loading="lazy" alt="Yakit专项漏洞检测界面展示" src="/assets/images/ch2-122-4d2e6fd0e26ccb6adc75c11e6d0b6ed5.png" width="1356" height="617" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit专项漏洞检测界面展示</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="核心工作流详解">核心工作流详解<a href="#核心工作流详解" class="hash-link" aria-label="核心工作流详解的直接链接" title="核心工作流详解的直接链接" translate="no">​</a></h4>
 <p>一个完整的专项扫描任务遵循一个标准化的三步流程：选择插件、配置任务、执行分析。下面我们将对每个步骤进行详细拆解。</p>
@@ -73,7 +73,7 @@
 <p><strong>高效筛选与选择</strong>：顶部的搜索框支持通过插件名称或关键词快速定位。同时，“全选”与“清空”功能为批量操作提供了便利，无论是针对某一分类的全量检测，还是重新构建扫描策略，都极为高效。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit插件按关键词和组别两种筛选方式" src="/assets/images/ch2-123-d934098e10d643d8d52ddce962ec29c6.png" width="1137" height="606" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit插件按关键词和组别两种筛选方式"><img decoding="async" loading="lazy" alt="Yakit插件按关键词和组别两种筛选方式" src="/assets/images/ch2-123-d934098e10d643d8d52ddce962ec29c6.png" width="1137" height="606" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit插件按关键词和组别两种筛选方式</p>
 <p><strong>步骤二：灵活配置扫描任务</strong></p>
 <p>右侧的“插件执行”区域负责定义扫描的目标和行为。</p>
@@ -98,7 +98,7 @@
 </ul>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit 扫描目标文件读取方式配置" src="/assets/images/ch2-124-f8c590ddbfca9b1e75dad0fdd9a14865.png" width="807" height="354" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit 扫描目标文件读取方式配置"><img decoding="async" loading="lazy" alt="Yakit 扫描目标文件读取方式配置" src="/assets/images/ch2-124-f8c590ddbfca9b1e75dad0fdd9a14865.png" width="807" height="354" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit 扫描目标文件读取方式配置</p>
 <ul>
 <li class="">
@@ -113,7 +113,7 @@
 </ul>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit扫描任务额外参数配置界面" src="/assets/images/ch2-125-662bcdc557d488e02d9ed4570bf1c1c7.png" width="1280" height="653" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit扫描任务额外参数配置界面"><img decoding="async" loading="lazy" alt="Yakit扫描任务额外参数配置界面" src="/assets/images/ch2-125-662bcdc557d488e02d9ed4570bf1c1c7.png" width="1280" height="653" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit扫描任务额外参数配置界面</p>
 <p><strong>步骤三：执行扫描与结果分析</strong></p>
 <p>配置完成后，点击“开始执行”按钮，Yakit 后端引擎会基于设定的并发数，创建并调度扫描任务。</p>
@@ -125,12 +125,12 @@
 <p><strong>深度验证支持</strong>：点击任意一条漏洞结果，下方会联动展示完整的请求包（Request）和响应包（Response），以及详细的漏洞说明。这为安全分析师提供了直接的、可供复现的证据链，便于进行深度分析和手动验证。所有发现的漏洞会自动同步至“漏洞库”，以供后续统一管理。</p>
 </li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="Yakit插件执行界面展示XSS漏洞检测详情" src="/assets/images/ch2-126-8f7c5bca3d0cf5fe21fb8514abee9a53.png" width="2049" height="1019" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit插件执行界面展示XSS漏洞检测详情"><img decoding="async" loading="lazy" alt="Yakit插件执行界面展示XSS漏洞检测详情" src="/assets/images/ch2-126-8f7c5bca3d0cf5fe21fb8514abee9a53.png" width="2049" height="1019" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit插件执行界面展示XSS漏洞检测详情</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="任务生命周期管理">任务生命周期管理<a href="#任务生命周期管理" class="hash-link" aria-label="任务生命周期管理的直接链接" title="任务生命周期管理的直接链接" translate="no">​</a></h4>
 <p>对于已执行的扫描任务，Yakit 提供了完善的生命周期管理功能。点击界面右上角的“任务列表”按钮，可以查看所有历史任务。</p>
 <p>该列表清晰地展示了每个任务的扫描目标、执行状态、创建与更新时间。这项功能在需要对历史任务进行审计，或对同一目标进行**周期性复测（Retesting）**时尤为关键。用户可以方便地查看过往的扫描配置与结果，或对已完成的任务进行删除等管理操作。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit插件执行界面中的任务列表弹窗" src="/assets/images/ch2-127-529189ee4714c0e4eee6b35fe3196a2e.png" width="1246" height="544" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit插件执行界面中的任务列表弹窗"><img decoding="async" loading="lazy" alt="Yakit插件执行界面中的任务列表弹窗" src="/assets/images/ch2-127-529189ee4714c0e4eee6b35fe3196a2e.png" width="1246" height="544" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit插件执行界面中的任务列表弹窗</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23113-批量执行自由组合与广度覆盖">2.3.11.3 批量执行：自由组合与广度覆盖<a href="#23113-批量执行自由组合与广度覆盖" class="hash-link" aria-label="2.3.11.3 批量执行：自由组合与广度覆盖的直接链接" title="2.3.11.3 批量执行：自由组合与广度覆盖的直接链接" translate="no">​</a></h3>
 <p>在前一章节中，我们深入探讨了基于预设分类的“专项漏洞扫描”，它为针对特定技术栈的深度检测提供了结构化的路径。然而，在复杂的安全评估场景中，测试需求往往超越了固定的分类边界，需要跨类别、大规模地执行自定义插件组合。为此，Yakit 提供了“批量执行”模式，它赋予了用户无与伦比的灵活性，是实现广度覆盖和自定义基线扫描的核心工具。</p>
@@ -146,12 +146,12 @@
 <p><strong>仪表盘快速启动</strong>：在首页 Dashboard 的“漏洞扫描”卡片中，选择【自定义检测】启动该模式。</p>
 </li>
 </ol>
-<p><img decoding="async" loading="lazy" alt="Yakit批量执行功能入口与自定义检测路径" src="/assets/images/ch2-128-218b5004b50c6ef5da57f953769e23db.png" width="907" height="492" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit批量执行功能入口与自定义检测路径"><img decoding="async" loading="lazy" alt="Yakit批量执行功能入口与自定义检测路径" src="/assets/images/ch2-128-218b5004b50c6ef5da57f953769e23db.png" width="907" height="492" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit批量执行功能入口与自定义检测路径</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="界面布局与核心差异">界面布局与核心差异<a href="#界面布局与核心差异" class="hash-link" aria-label="界面布局与核心差异的直接链接" title="界面布局与核心差异的直接链接" translate="no">​</a></h4>
 <p>虽然“批量执行”模式的整体界面布局依然沿用了双视界（Dual-View）模型，其操作流程与“专项漏洞扫描”高度相似，但两者的根本性差异体现在左侧的“选择插件”区域。</p>
 <p>在该模式下，左侧列表不再是固定的分类文件夹，而是将所有已安装的 Yak 插件以<strong>平铺列表</strong>的形式完全展示。用户可以利用顶部的关键词搜索框快速过滤，然后自由地勾选任何插件。每一个被选中的插件都会被添加到右侧的“已选插件”列表中，形成本次任务的执行集合。这种“购物车”式的选择机制，为用户构建高度定制化的扫描策略提供了基础。</p>
-<p><img decoding="async" loading="lazy" alt="Yakit批量执行界面插件选择与参数配置" src="/assets/images/ch2-129-4a5c77cc79a8c29690d694e22279518a.png" width="1237" height="617" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: Yakit批量执行界面插件选择与参数配置"><img decoding="async" loading="lazy" alt="Yakit批量执行界面插件选择与参数配置" src="/assets/images/ch2-129-4a5c77cc79a8c29690d694e22279518a.png" width="1237" height="617" class="yakdoc-image"></button></p>
 <p class="manual-figcaption">图：Yakit批量执行界面插件选择与参数配置</p>
 <p>右侧的“插件执行”区域在功能上与“专项漏洞扫描”保持一致，同样支持 HTTPS 切换、多种请求类型（原始请求、请求配置、请求 ID）以及详尽的额外参数配置。这种设计上的一致性降低了用户的学习成本，使得用户可以将精力完全集中在“选择哪些插件”这一核心决策上。</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="典型应用场景">典型应用场景<a href="#典型应用场景" class="hash-link" aria-label="典型应用场景的直接链接" title="典型应用场景的直接链接" translate="no">​</a></h4>

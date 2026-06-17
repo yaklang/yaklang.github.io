@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Yakit MITM 劫持，国密通信“破壁人”! | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/blog/p045"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Yakit MITM 劫持，国密通信“破壁人”! | Yak Program Language"><meta data-rh="true" name="description" content="随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人攻击（MITM）工具带来了新的挑战。"><meta data-rh="true" property="og:description" content="随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人攻击（MITM）工具带来了新的挑战。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2025-07-11T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2025 年,流量分析,加密对抗"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/blog/p045"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p045" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/p045" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/p045" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/blog/p045","mainEntityOfPage":"https://yaklang.com/blog/p045","url":"https://yaklang.com/blog/p045","headline":"Yakit MITM 劫持，国密通信“破壁人”!","name":"Yakit MITM 劫持，国密通信“破壁人”!","description":"随着国家网络安全战略的深入实施，国密算法（SM2、SM3、SM4 等）在我国关键信息基础设施和重要领域得到了广泛应用，旨在构建自主可控、安全可靠的密码体系。国密 TLS（GMTLS）作为其在传输层安全协议的体现，正逐步取代传统的 RSA/ECC TLS 协议。然而，这种安全性的提升也给传统的网络分析工具，尤其是中间人攻击（MITM）工具带来了新的挑战。","datePublished":"2025-07-11T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/blog","name":"Yak 技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
-<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
-<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ffcd2374.css">
+<script src="/assets/js/runtime~main.9312152f.js" defer="defer"></script>
+<script src="/assets/js/main.41b34197.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -27,15 +27,15 @@
 <p><strong>传统场景分析：</strong></p>
 <p>当我们使用 Chrome 等传统浏览器访问 <code>https://ebssec.boc.cn/</code> 这样的国密站点时，浏览器会发出一个 <code>ClientHello</code> 消息，其中包含了其支持的 TLS 版本（如 TLS 1.2、TLS 1.3）和密码套件。</p>
 <p>由于远程服务器只接受 GMTLS 握手，它会响应一个<strong>Fatal Alert</strong>（如 &quot;Protocol Version Alert&quot; 或 &quot;Handshake Failure&quot;），从而终止 TLS 握手过程。通过 Wireshark 抓包，我们可以清晰地观察到这一失败过程，确定是由于协议版本协商不匹配所致。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/04193521c1253483-93fbe148d850cb3feb778f77eed883da.png" width="604" height="401" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/04193521c1253483-93fbe148d850cb3feb778f77eed883da.png" width="604" height="401" class="yakdoc-image"></button></p>
 <p>传统浏览器无法直接访问仅支持 GMTLS 的站点</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5e3ba6fbec1b3b31-322fe68bad07904440e4ba5a80856e86.png" width="1080" height="464" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5e3ba6fbec1b3b31-322fe68bad07904440e4ba5a80856e86.png" width="1080" height="464" class="yakdoc-image"></button></p>
 <blockquote>
 <p>观察 Wireshark 流量可以发现是因为浏览器尝试进行进行 TLS 握手的时候，发送的 ClientHello 消息中指定的浏览器支持的 TLS 版本不被远程服务器（远程服务器采用国密 TLS ）认可，所以远程服务器响应 Fatal Alert 终止了 TLS 握手。</p>
 </blockquote>
 <p><strong>Yakit MITM 国密代理流程：</strong></p>
 <p>当客户端配置 Yakit MITM 作为代理服务器时，情况发生了根本性变化：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5c82b1046a4775b1-478c7d1ecd7190e1c091573457d4582d.png" width="1080" height="2483" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5c82b1046a4775b1-478c7d1ecd7190e1c091573457d4582d.png" width="1080" height="2483" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>**效果：**通过这种机制，Yakit MITM 扮演了“协议转换器”的角色，使得原本不具备国密能力的客户端能够无缝访问国密 TLS 站点，极大地拓宽了测试和分析范围。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="国密服务器功能应对主动使用-gmtls-的客户端">国密服务器功能：应对主动使用 GMTLS 的客户端<a href="#国密服务器功能应对主动使用-gmtls-的客户端" class="hash-link" aria-label="国密服务器功能：应对主动使用 GMTLS 的客户端的直接链接" title="国密服务器功能：应对主动使用 GMTLS 的客户端的直接链接" translate="no">​</a></h2>
 <p>在某些高安全要求的场景下，客户端应用程序（如特定的银行 APP、内部系统客户端）会<strong>主动发起</strong>GMTLS<strong>连接</strong>，而不是传统的 TLS。这是因为这些应用程序内置了国密协议栈，旨在直接与国密服务器进行安全通信。</p>
@@ -43,24 +43,24 @@
 <p><strong>新增的国密服务器功能：</strong> 最新版本的 Yakit MITM 增强了其作为<strong>国密中间人服务器</strong>的能力。这意味着：</p>
 <p>**1、客户端 (GMTLS) -&gt; Yakit MITM (GMTLS):**当客户端发起 GMTLS 握手时，Yakit MITM 能够以一个国密服务器的身份接受并完成 GMTLS 握手。它会使用其内部的国密证书（通常是自签国密 CA 证书签发的）来与客户端建立 GMTLS 连接。</p>
 <p><strong>2、Yakit MITM -&gt; 目标网站 (国密或传统</strong>TLS**):**建立连接后，Yakit MITM 再根据目标网站的协议支持情况（ GMTLS 或传统 TLS ）发起相应的握手并建立与目标服务器的连接。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/1da775079be8ef0a-ca3f2c2232422a55df1e91b35a7b05e8.png" width="1080" height="3106" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/1da775079be8ef0a-ca3f2c2232422a55df1e91b35a7b05e8.png" width="1080" height="3106" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <p>**效果：**这一新增特性解决了对主动使用 GMTLS 协议的客户端进行抓包分析的痛点，使得安全研究人员可以全面地对基于国密 TLS 的应用程序进行渗透测试、流量分析和漏洞挖掘。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="国密自签根证书下载">国密自签根证书下载<a href="#国密自签根证书下载" class="hash-link" aria-label="国密自签根证书下载的直接链接" title="国密自签根证书下载的直接链接" translate="no">​</a></h2>
 <p>在启动 MITM 的时候，如果 YAK 检测到用户 yakit-projects 目录下不存在国密 CA 证书，则会尝试创建自签的国密 CA 证书。用户可以通过手动从 yakit-projects 目录下复制，也可以通过 Yakit 下载，后续国密证书下载功能会移动到证书下载中。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/5f3a259eb2e87988-f34ce2802e8f73f3d5f84aaf0fd95259.png" width="1080" height="718" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/5f3a259eb2e87988-f34ce2802e8f73f3d5f84aaf0fd95259.png" width="1080" height="718" class="yakdoc-image"></button></p>
 <p>如果已经启动了 MITM 服务器，则可以通过 MITM 内置页面下载。</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e54aeba375f707bb-f8cdd18a31ff844b60245bcf7d6451fa.png" width="1080" height="1234" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e54aeba375f707bb-f8cdd18a31ff844b60245bcf7d6451fa.png" width="1080" height="1234" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="实战演示-yakit-mitm-的效果对比">实战演示: Yakit MITM 的效果对比<a href="#实战演示-yakit-mitm-的效果对比" class="hash-link" aria-label="实战演示: Yakit MITM 的效果对比的直接链接" title="实战演示: Yakit MITM 的效果对比的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ca-证书导入">CA 证书导入<a href="#ca-证书导入" class="hash-link" aria-label="CA 证书导入的直接链接" title="CA 证书导入的直接链接" translate="no">​</a></h3>
 <p>和传统 RSA CA 证书不同，国密证书无法导入系统的根证书库，在 Mac 上导入钥匙串会报错，而在 Windows 上打开证书会提示：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/d8617fdede10b632-350c24e0618109938017af01076bfc24.png" width="679" height="254" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/d8617fdede10b632-350c24e0618109938017af01076bfc24.png" width="679" height="254" class="yakdoc-image"></button></p>
 <p>由于系统不支持导入国密证书到信任根证书池中，我们需要在浏览器中导入可信证书：</p>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/baac49c7e1a0528a-a45835c0d709d2dbb734d791bbaf6616.png" width="1080" height="630" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/baac49c7e1a0528a-a45835c0d709d2dbb734d791bbaf6616.png" width="1080" height="630" class="yakdoc-image"></button></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="不使用任何代理直接通过国密浏览器访问国密网站">不使用任何代理直接通过国密浏览器访问国密网站<a href="#不使用任何代理直接通过国密浏览器访问国密网站" class="hash-link" aria-label="不使用任何代理直接通过国密浏览器访问国密网站的直接链接" title="不使用任何代理直接通过国密浏览器访问国密网站的直接链接" translate="no">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/61e74e09719cef79-78240b3ffa728234c0030df205372d5e.png" width="587" height="40" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/61e74e09719cef79-78240b3ffa728234c0030df205372d5e.png" width="587" height="40" class="yakdoc-image"></button></p>
 <p>可以看到该站点使用了国密 TLS，使用的国密证书所属组织是中国银行股份有限公司。</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="老版本-mitm-代理">老版本 MITM 代理<a href="#老版本-mitm-代理" class="hash-link" aria-label="老版本 MITM 代理的直接链接" title="老版本 MITM 代理的直接链接" translate="no">​</a></h3>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/e1c86ff334bc092a-ec6f4abd367c2efe1b46fc8e8420011a.png" width="1080" height="630" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/e1c86ff334bc092a-ec6f4abd367c2efe1b46fc8e8420011a.png" width="1080" height="630" class="yakdoc-image"></button></p>
 <p>使用仅支持传统 TLS 代理的老版本 Yakit MITM 进行代理访问。</p>
 <ul>
 <li class=""><strong>结果：</strong> 站点可以正常访问，但浏览器中显示的证书是<strong>普通的</strong>RSA<strong>证书</strong>，而不是原始的国密证书。</li>
@@ -74,7 +74,7 @@
 <li class="">**结果：**站点正常访问，且最关键的是，现在客户端（国密浏览器）与 Yakit MITM 之间的通信也采用了 <strong>GMTLS 协议</strong>。浏览器会显示由 Yakit MITM 自签国密 CA 证书所签发的国密中间人证书。</li>
 <li class="">**分析：**这验证了新版本 MITM 能够充当国密服务器的能力。它与客户端建立了 GMTLS 连接，实现了真正的国密流量中间人。这意味着即使客户端强制使用 GMTLS，Yakit 也能成功介入进行流量解密和分析。</li>
 </ul>
-<p><img decoding="async" loading="lazy" alt="image" src="/assets/images/6427f822f1f18bbc-f666e4fc457c573f4d613f5bcf56da9b.png" width="1080" height="623" class="img_ev3q"></p>
+<p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="/assets/images/6427f822f1f18bbc-f666e4fc457c573f4d613f5bcf56da9b.png" width="1080" height="623" class="yakdoc-image"></button></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="#总结" class="hash-link" aria-label="总结的直接链接" title="总结的直接链接" translate="no">​</a></h2>
 <p>Yakit MITM 对国密通信的支持是网络安全工具发展的重要一步，它有效弥补了传统工具在面对我国国密算法推广应用时的不足。通过其<strong>国密代理</strong>和<strong>国密服务器</strong>功能，Yakit 成功地扮演了国密通信的“破壁人”角色，使得安全研究人员、开发人员能够：</p>
 <ul>
