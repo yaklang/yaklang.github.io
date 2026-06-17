@@ -1,0 +1,265 @@
+// 文档插图统一版式：圆角卡片 + 居中 + 固定最大宽度 + 点击放大(lightbox)
+// 与 memfit-home 风格保持一致，让全站截图更整齐、更现代
+// 关键词: 图片圆角包装, 点击放大, lightbox, 文档插图统一样式
+
+// 去掉 MDX 自动给图片套的段落默认外边距，避免卡片上下出现多余空白
+.theme-doc-markdown p:has(> .yakdoc-figure),
+.markdown p:has(> .yakdoc-figure) {
+  margin: 0;
+}
+
+.yakdoc-figure {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: min(100%, 860px);
+  margin: 28px auto;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(45, 58, 88, 0.07);
+  appearance: none;
+  color: inherit;
+  cursor: zoom-in;
+  font: inherit;
+  line-height: 0;
+  text-align: inherit;
+  vertical-align: top;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.yakdoc-figure:hover {
+  box-shadow: 0 16px 48px rgba(45, 58, 88, 0.12);
+  transform: translateY(-2px);
+}
+
+.yakdoc-figure:focus-visible {
+  outline: 3px solid rgba(51, 153, 221, 0.35);
+  outline-offset: 4px;
+}
+
+.yakdoc-figure[data-layout="narrow"] {
+  width: min(100%, 680px);
+}
+
+.yakdoc-figure[data-layout="tall"] {
+  width: min(100%, 760px);
+  max-height: 680px;
+}
+
+.yakdoc-figure[data-layout="tall"]::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 1;
+  height: 120px;
+  pointer-events: none;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.92) 62%,
+    rgba(255, 255, 255, 0.98)
+  );
+}
+
+.yakdoc-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  line-height: 0;
+}
+
+.yakdoc-expand-hint {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #566173;
+  font-size: 14px;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+.yakdoc-expand-hint__text {
+  font-weight: 500;
+}
+
+.yakdoc-expand-hint__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 16px;
+  border: 1px solid rgba(51, 153, 221, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ifm-color-primary-darker);
+  box-shadow: 0 8px 24px rgba(51, 153, 221, 0.12);
+  font-weight: 700;
+}
+
+// 放大预览遮罩层
+.yakdoc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+  overflow: auto;
+  background: rgba(12, 14, 20, 0.84);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: zoom-out;
+}
+
+.yakdoc-lightbox__image {
+  display: block;
+  width: auto;
+  max-width: min(1200px, calc(100vw - 48px));
+  max-height: calc(100vh - 96px);
+  height: auto;
+  margin: auto;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+  cursor: default;
+}
+
+.yakdoc-lightbox[data-layout="narrow"] .yakdoc-lightbox__image {
+  max-width: min(760px, calc(100vw - 48px));
+}
+
+.yakdoc-lightbox[data-layout="tall"] .yakdoc-lightbox__image {
+  max-width: min(860px, calc(100vw - 48px));
+  max-height: none;
+}
+
+.yakdoc-lightbox__close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.yakdoc-lightbox__close:hover,
+.yakdoc-lightbox__close:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+// 深色模式
+[data-theme="dark"] .yakdoc-figure {
+  border-color: rgba(126, 148, 188, 0.28);
+  background: #1f232a;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="dark"] .yakdoc-figure[data-layout="tall"]::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 35, 42, 0),
+    rgba(31, 35, 42, 0.92) 62%,
+    rgba(31, 35, 42, 0.98)
+  );
+}
+
+[data-theme="dark"] .yakdoc-expand-hint {
+  color: #c7d0df;
+}
+
+[data-theme="dark"] .yakdoc-expand-hint__button {
+  border-color: rgba(126, 166, 232, 0.28);
+  background: rgba(31, 35, 42, 0.9);
+  color: #8db9ff;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+// 移动端适配
+@media screen and (max-width: 996px) {
+  .yakdoc-figure,
+  .yakdoc-figure[data-layout="narrow"],
+  .yakdoc-figure[data-layout="tall"] {
+    width: 100%;
+    margin: 22px auto;
+    padding: 8px;
+    border-radius: 12px;
+    transform: none;
+  }
+
+  .yakdoc-image {
+    border-radius: 8px;
+  }
+
+  .yakdoc-figure[data-layout="tall"] {
+    max-height: 560px;
+  }
+
+  .yakdoc-figure[data-layout="tall"]::after {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    height: 104px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+
+  .yakdoc-expand-hint {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .yakdoc-lightbox {
+    padding: 56px 16px 24px;
+  }
+
+  .yakdoc-lightbox__image,
+  .yakdoc-lightbox[data-layout="narrow"] .yakdoc-lightbox__image,
+  .yakdoc-lightbox[data-layout="tall"] .yakdoc-lightbox__image {
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 80px);
+    border-radius: 10px;
+  }
+
+  .yakdoc-lightbox[data-layout="tall"] .yakdoc-lightbox__image {
+    max-height: none;
+  }
+
+  .yakdoc-lightbox__close {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+}

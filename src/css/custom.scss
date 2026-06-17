@@ -77,6 +77,17 @@ html.docs-wrapper {
   .main-wrapper .container {
     margin-top: var(--ifm-navbar-height);
   }
+
+  // 修复：固定导航栏下，短页面(如各章概述落地页)左侧目录顶到导航栏上方的 BUG。
+  // 背景：本站 navbar 改为 position:fixed(脱离文档流)，而 Docusaurus 默认侧栏容器仍带
+  //       margin-top: calc(-1 * navbar-height)(该值假设 navbar 在文档流内/sticky)。
+  //       当正文比目录短时，flex 行高被压缩，sticky 侧栏被矮容器约束而上移约 60px，
+  //       导致目录覆盖到导航栏之上。取消该负外边距即可让 sticky 始终从导航栏下方起算。
+  @media (min-width: 997px) {
+    .theme-doc-sidebar-container {
+      margin-top: 0;
+    }
+  }
 }
 .theme-doc-sidebar-menu.menu__list {
   font-size: 14px;
@@ -90,9 +101,10 @@ video {
 }
 
 // 手册插图说明文字（由 memfit-vision-free 模型识别生成）
+// 紧贴在圆角图片卡片下方居中显示
 .manual-figcaption {
-  margin-top: -0.4rem;
-  margin-bottom: 1.2rem;
+  margin-top: -12px;
+  margin-bottom: 24px;
   text-align: center;
   font-size: 0.85rem;
   color: #6a6f7a;
@@ -100,6 +112,7 @@ video {
 }
 
 // layout style file
+@import "../css/doc-image.scss";
 @import "../css/navbar.scss";
 @import "../css/blog.scss";
 @import "../theme/Footer/footer.scss";
