@@ -44,14 +44,20 @@ module.exports = {
             },
             items: [
                 {
-                    label: "Yak 语言文档",
-                    href: "/docs/intro",
-                    sidebarCollapsed: false,
-                },
-                {
-                    label: "API 手册",
-                    href: "/api-manual/intro",
-                    sidebarCollapsed: false,
+                    // Yak 语言文档 + API 手册 合并为「Yaklang 手册」下拉，引导用户选择
+                    type: "dropdown",
+                    position: "left",
+                    label: "Yaklang 手册",
+                    items: [
+                        {
+                            label: "Yaklang 编程教程",
+                            to: "/docs/intro",
+                        },
+                        {
+                            label: "Yaklang SDK 手册",
+                            to: "/api-manual/intro",
+                        },
+                    ],
                 },
                 {
                     label: "Yakit 手册",
@@ -84,7 +90,7 @@ module.exports = {
                 // },
 		        {
                     to: "/blog",
-                    label: "技术博客",
+                    label: "博客文章",
                     position: "left",
                 },
                 // {
@@ -99,8 +105,8 @@ module.exports = {
                     label: "静态代码分析",
                 },
 		        {
-                    href: "/Yaklab/yaklab",
-                    label: "YakLab 手册",
+                    href: "/Yaklab/vulinbox/",
+                    label: "实战手册",
                     position: "left",
                 },
                 {
@@ -276,7 +282,7 @@ module.exports = {
                 blog: {
                     path: "blog",
                     routeBasePath: "/blog",
-                    blogTitle: "Yak 技术博客",
+                    blogTitle: "博客文章",
                     blogDescription:
                         "Yak Project 公众号技术文章合集，覆盖代码审计、AI、流量分析、Java 安全等方向",
                     blogSidebarTitle: "近期文章",
@@ -285,7 +291,7 @@ module.exports = {
                     postsPerPage: 10,
                     feedOptions: {
                         type: ["rss", "atom"],
-                        title: "Yak 技术博客",
+                        title: "博客文章",
                         copyright: `Copyright © ${new Date().getFullYear()} Yak Project.`,
                     },
                 },
