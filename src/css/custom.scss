@@ -89,6 +89,16 @@ video {
   -webkit-user-drag: none;
 }
 
+// 手册插图说明文字（由 memfit-vision-free 模型识别生成）
+.manual-figcaption {
+  margin-top: -0.4rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6a6f7a;
+  line-height: 1.5;
+}
+
 // layout style file
 @import "../css/navbar.scss";
 @import "../css/blog.scss";

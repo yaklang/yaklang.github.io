@@ -583,7 +583,7 @@ export const HomePage: React.FC<HomePageProps> = (props) => {
                 </span>
                 <a
                   target="_blank"
-                  href="/products/download_and_install"
+                  href="/products/legacy/download_and_install"
                   className="guide-body-yak-heard-tip"
                 >
                   {t("安装说明")}
@@ -1002,7 +1002,7 @@ const DownLoadBtn = (props) => {
 const CourseDocBtn = React.memo((props) => {
   const { t } = useTranslation();
   return (
-    <a className="course-doc-btn" href="/products/download_and_install">
+    <a className="course-doc-btn" href="/products/legacy/download_and_install">
       <EyeOutlined className="icon-style" />
       <span className="title-style">{t("查看安装教程")}</span>
     </a>

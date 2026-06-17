@@ -1,0 +1,233 @@
+// Yakit 新版手册：图片下载 + memfit-vision-free 识别 生成 manifest
+// 关键词: ai.FunctionCall, memfit-vision-free, 图像识别, 下载图片, manifest 缓存断点续传
+
+repo = "/Users/v1ll4n/Projects/yaklang.github.io"
+imgRoot = repo + "/static/img/products/manual"
+manifestPath = repo + "/scripts/manual-image-manifest.json"
+srcDir = "/Users/v1ll4n/Downloads"
+
+// 可用环境变量 ONLY_CHAPTER 限定只跑某一章（验证用）；CONCURRENCY 控制并发
+onlyChapter = os.Getenv("ONLY_CHAPTER")
+concurrency = 6
+cEnv = os.Getenv("CONCURRENCY")
+if cEnv != "" { concurrency = atoi(cEnv)~ }
+
+chapters = [
+    {"n": 1, "title": "为什么需要统一安全工具平台", "file": srcDir + "/第一章：为什么需要统一安全工具平台？.md"},
+    {"n": 2, "title": "Yakit 的基础功能介绍与使用", "file": srcDir + "/第二章：Yakit 的基础功能介绍与使用.md"},
+    {"n": 3, "title": "通信劫持核心套件 - Yakit MITM", "file": srcDir + "/第三章：通信劫持核心套件 - Yakit MITM.md"},
+    {"n": 4, "title": "HTTP重放与模糊测试套件 - Web Fuzzer", "file": srcDir + "/第四章：HTTP重放与模糊测试套件 - Web Fuzzer.md"},
+    {"n": 5, "title": "高扩展性的Yakit插件系统", "file": srcDir + "/第五章：高扩展性的Yakit插件系统.md"},
+]
+
+// ---- 载入已有 manifest 作为缓存（断点续传）----
+manifest = {}
+if file.IsExisted(manifestPath) {
+    raw = string(file.ReadFile(manifestPath)~)
+    if len(str.TrimSpace(raw)) > 0 {
+        manifest = json.loads(raw)
+    }
+}
+manifestLock = sync.NewLock()
+
+func saveManifest() {
+    manifestLock.Lock()
+    defer manifestLock.Unlock()
+    file.Save(manifestPath, json.dumps(manifest, json.withIndent("  ")))
+}
+
+// 根据魔数判断图片扩展名
+func detectExt(data) {
+    if len(data) >= 8 && data[0] == 0x89 && data[1] == 0x50 { return ".png" }
+    if len(data) >= 3 && data[0] == 0xFF && data[1] == 0xD8 { return ".jpg" }
+    if len(data) >= 6 && data[0] == 0x47 && data[1] == 0x49 && data[2] == 0x46 { return ".gif" }
+    if len(data) >= 12 && data[8] == 0x57 && data[9] == 0x45 && data[10] == 0x42 { return ".webp" }
+    return ".png"
+}
+
+// 下载图片，返回 (本地绝对路径, 扩展名, error)
+func download(url, destNoExt) {
+    rsp, _, err = poc.Get(url, poc.timeout(40))
+    if err != nil { return "", "", err }
+    body = rsp.GetBody()
+    if len(body) < 100 { return "", "", f"empty body (len=${len(body)})" }
+    ext = detectExt(body)
+    dest = destNoExt + ext
+    file.Save(dest, body)
+    return dest, ext, nil
+}
+
+// 将图片缩放到最长边 1400px 的 JPEG 临时文件，规避视觉模型对超大图片返回空响应的问题
+func downscale(srcPath) {
+    tmp = "/tmp/manual_ds_" + codec.Md5(srcPath) + ".jpg"
+    _, err = exec.System(f`sips -s format jpeg -Z 1400 "${srcPath}" --out "${tmp}"`)
+    if err != nil { return srcPath }
+    if !file.IsExisted(tmp) { return srcPath }
+    return tmp
+}
+
+// 用 memfit-vision-free 识别图片（自由文本 + 固定格式解析，避免 JSON 解析失败回退到其它无效 provider）
+func recognize(localPath, chapterTitle, heading) {
+    imgForAI = downscale(localPath)
+    prompt = f`这是网络安全工具 Yakit 使用手册《第${chapterTitle}》中的一张配图，所在小节标题为「${heading}」。
+请仔细识别图片真实内容（可能是软件界面截图、架构示意图、流程图、终端输出或概念图），不要臆测不存在的内容。
+请严格按以下两行格式用简体中文输出，不要输出任何多余内容：
+标题：<用一句话概括图片，作为插图标题，不超过24个字，结尾不要标点>
+描述：<客观描述图片中实际可见的内容，60字以内>`
+
+    text = ""
+    lastErr = ""
+    for attempt = 0; attempt < 4; attempt++ {
+        if attempt > 0 { sleep(1.5) }
+        t, err = ai.Chat(prompt,
+            ai.imageFile(imgForAI),
+            ai.type("aibalance"),
+            ai.model("memfit-vision-free"),
+            ai.baseURL("https://aibalance.yaklang.com/v1/chat/completions"),
+            ai.apiKey("free-user"),
+            ai.timeout(120),
+        )
+        if err != nil { lastErr = sprintf("%v", err); continue }
+        t = str.TrimSpace(t)
+        if t == "" { lastErr = "empty ai response"; continue }
+        text = t
+        break
+    }
+    if text == "" { return "", "", lastErr }
+
+    capText = ""
+    descText = ""
+    for line in str.Split(text, "\n") {
+        l = str.TrimSpace(line)
+        if str.HasPrefix(l, "标题") {
+            l = str.TrimLeft(l, "标题")
+            capText = str.TrimSpace(str.TrimLeft(str.TrimSpace(l), "：:"))
+        } else if str.HasPrefix(l, "描述") {
+            l = str.TrimLeft(l, "描述")
+            descText = str.TrimSpace(str.TrimLeft(str.TrimSpace(l), "：:"))
+        }
+    }
+    // 解析兜底：若没解析出标题，用首行作标题、整体作描述
+    if capText == "" {
+        first = str.TrimSpace(str.Split(text, "\n")[0])
+        capText = first
+    }
+    if descText == "" { descText = str.ReplaceAll(text, "\n", " ") }
+    // 清理可能残留的 markdown 加粗
+    capText = str.TrimSpace(str.ReplaceAll(capText, "*", ""))
+    descText = str.TrimSpace(str.ReplaceAll(descText, "*", ""))
+    return capText, descText, nil
+}
+
+// ---- 收集所有图片任务（按章节、出现顺序）----
+imgRe = `!\[[^\]]*\]\(([^)]+)\)`
+tasks = []
+for ch in chapters {
+    if onlyChapter != "" && sprintf("%v", ch["n"]) != onlyChapter { continue }
+    content = string(file.ReadFile(ch["file"])~)
+    lines = str.Split(content, "\n")
+    heading = ""
+    idx = 0
+    for line in lines {
+        t = str.TrimSpace(line)
+        if str.HasPrefix(t, "#") {
+            heading = str.TrimSpace(str.TrimLeft(t, "#"))
+            // 去掉 markdown 加粗与转义反斜杠
+            heading = str.ReplaceAll(heading, "**", "")
+            heading = str.ReplaceAll(heading, "\\", "")
+        }
+        ms = re.FindSubmatchAll(line, imgRe)
+        for m in ms {
+            idx++
+            url = m[1]
+            tasks = append(tasks, {
+                "chapter": ch["n"],
+                "title": ch["title"],
+                "idx": idx,
+                "url": url,
+                "heading": heading,
+            })
+        }
+    }
+    log.info("chapter %v collected %v images", ch["n"], idx)
+}
+log.info("total image tasks: %v", len(tasks))
+
+// ---- 并发处理 ----
+swg = sync.NewSizedWaitGroup(concurrency)
+done = 0
+total = len(tasks)
+doneLock = sync.NewLock()
+
+for taskItem in tasks {
+    t = taskItem
+    swg.Add()
+    go func{
+        defer swg.Done()
+        defer func{
+            e = recover()
+            if e != nil { log.error("task panic: %v", e) }
+        }
+
+        url = t["url"]
+        chN = t["chapter"]
+        dirRel = f"chapter${chN}"
+        absDir = imgRoot + "/" + dirRel
+        file.MkdirAll(absDir)
+        baseName = f"ch${chN}-" + sprintf("%03d", t["idx"])
+        destNoExt = absDir + "/" + baseName
+
+        // 缓存命中：已下载且已识别则跳过
+        cached = manifest[url]
+        if cached != nil && cached["ok"] == true && cached["caption"] != "" {
+            doneLock.Lock(); done++; doneLock.Unlock()
+            return
+        }
+
+        // 1) 下载
+        localAbs = ""
+        ext = ""
+        if cached != nil && cached["localAbs"] != nil && file.IsExisted(sprintf("%v", cached["localAbs"])) {
+            localAbs = sprintf("%v", cached["localAbs"])
+            ext = file.GetExt(localAbs)
+        } else {
+            la, e, derr = download(url, destNoExt)
+            if derr != nil {
+                log.error("download failed ch%v#%v: %v", chN, t["idx"], derr)
+                manifestLock.Lock()
+                manifest[url] = {"chapter": chN, "idx": t["idx"], "ok": false, "error": sprintf("download: %v", derr)}
+                manifestLock.Unlock()
+                return
+            }
+            localAbs = la; ext = e
+        }
+        relPath = f"/img/products/manual/${dirRel}/${baseName}${ext}"
+
+        // 2) 识别
+        capText, desc, rerr = recognize(localAbs, t["title"], t["heading"])
+        if rerr != nil {
+            log.error("recognize failed ch%v#%v: %v", chN, t["idx"], rerr)
+            manifestLock.Lock()
+            manifest[url] = {"chapter": chN, "idx": t["idx"], "ok": false, "localAbs": localAbs, "relPath": relPath, "error": sprintf("recognize: %v", rerr)}
+            manifestLock.Unlock()
+            return
+        }
+
+        manifestLock.Lock()
+        manifest[url] = {
+            "chapter": chN, "idx": t["idx"], "ok": true,
+            "localAbs": localAbs, "relPath": relPath,
+            "heading": t["heading"], "caption": capText, "description": desc,
+        }
+        manifestLock.Unlock()
+
+        doneLock.Lock(); done++; doneLock.Unlock()
+        log.info("[%v/%v] ch%v#%v OK: %v", done, total, chN, t["idx"], capText)
+
+        // 周期性落盘
+        if done % 10 == 0 { saveManifest() }
+    }
+}
+swg.Wait()
+saveManifest()
+log.info("ALL DONE. manifest saved to %v", manifestPath)

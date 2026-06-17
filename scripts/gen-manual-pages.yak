@@ -1,0 +1,266 @@
+// Yakit 新版手册：把每章源 md 拆分为 docusaurus 页面
+// - 章节大类用 _category_.json 的 link.type=doc 指向 overview，点击大章节即显示概述 + 本章目录(可跳转)
+// - 概述不再作为独立 sidebar 项出现
+// - 第二章 2.3 进一步拆成子目录(默认展开)
+// - 第一章默认折叠，其余默认展开
+// - sidebar_label 全部精炼成一行
+// 关键词: 章节拆分, docusaurus 嵌套侧边栏, category link doc, 图片本地化, 插图说明
+
+repo = "/Users/v1ll4n/Projects/yaklang.github.io"
+productsDir = repo + "/products"
+manifestPath = repo + "/scripts/manual-image-manifest.json"
+srcDir = "/Users/v1ll4n/Downloads"
+
+chapters = [
+    {"n": 1, "dir": "chapter-1", "pos": 2, "splitH": "##", "collapsed": true,  "subsplit": [],      "label": "一、统一安全工具平台",   "file": srcDir + "/第一章：为什么需要统一安全工具平台？.md"},
+    {"n": 2, "dir": "chapter-2", "pos": 3, "splitH": "#",  "collapsed": false, "subsplit": ["2.3"], "label": "二、基础功能与使用",     "file": srcDir + "/第二章：Yakit 的基础功能介绍与使用.md"},
+    {"n": 3, "dir": "chapter-3", "pos": 4, "splitH": "#",  "collapsed": false, "subsplit": [],      "label": "三、MITM 通信劫持",      "file": srcDir + "/第三章：通信劫持核心套件 - Yakit MITM.md"},
+    {"n": 4, "dir": "chapter-4", "pos": 5, "splitH": "#",  "collapsed": false, "subsplit": [],      "label": "四、Web Fuzzer 模糊测试", "file": srcDir + "/第四章：HTTP重放与模糊测试套件 - Web Fuzzer.md"},
+    {"n": 5, "dir": "chapter-5", "pos": 6, "splitH": "#",  "collapsed": false, "subsplit": [],      "label": "五、Yakit 插件系统",      "file": srcDir + "/第五章：高扩展性的Yakit插件系统.md"},
+]
+
+// 精炼的一行 sidebar 标题（编号 + 短名）
+shortLabels = {
+    "1.1": "1.1 安全威胁与测试需求", "1.2": "1.2 工具生态碎片化", "1.3": "1.3 安全融合理念",
+    "1.4": "1.4 Yakit 平台优势", "1.5": "1.5 学习路径与前景",
+    "2.1": "2.1 应用架构与安装", "2.2": "2.2 界面与功能导航", "2.3": "2.3 工具集实践入门", "2.4": "2.4 注意事项与原则",
+    "2.3.1": "2.3.1 端口扫描", "2.3.2": "2.3.2 弱口令爆破", "2.3.3": "2.3.3 目录扫描",
+    "2.3.4": "2.3.4 资产测绘双引擎", "2.3.5": "2.3.5 Codec 编解码", "2.3.6": "2.3.6 History 流量审计",
+    "2.3.7": "2.3.7 综合反连 OOB", "2.3.8": "2.3.8 Yso-Hack Java 利用", "2.3.9": "2.3.9 Vulinbox 靶场",
+    "2.3.10": "2.3.10 Yak IDE", "2.3.11": "2.3.11 漏洞检测", "2.3.12": "2.3.12 数据库",
+    "3.1": "3.1 MITM 技术原理", "3.2": "3.2 MITM 基础使用", "3.3": "3.3 MITM 热加载进阶",
+    "3.4": "3.4 高级流量操控", "3.5": "3.5 本章小结",
+    "4.1": "4.1 Web Fuzzer 概述", "4.2": "4.2 界面与基础使用", "4.3": "4.3 精细化配置",
+    "4.4": "4.4 Fuzztag 构造引擎", "4.5": "4.5 数据匹配与处理", "4.6": "4.6 热加载与钩子",
+    "4.7": "4.7 生成 Yaml PoC", "4.8": "4.8 多包联动序列", "4.9": "4.9 本章总结",
+    "5.1": "5.1 插件系统概述", "5.2": "5.2 插件生态系统", "5.3": "5.3 插件编写指南",
+    "5.4": "5.4 插件开发与调试", "5.5": "5.5 常见错误与修复",
+}
+
+manifest = {}
+if file.IsExisted(manifestPath) {
+    raw = string(file.ReadFile(manifestPath)~)
+    if len(str.TrimSpace(raw)) > 0 { manifest = json.loads(raw) }
+}
+
+imgRe = `!\[[^\]]*\]\(([^)]+)\)`
+
+func cleanTitle(s) {
+    t = str.TrimSpace(s)
+    t = str.TrimLeft(t, "#")
+    t = str.TrimSpace(t)
+    t = str.ReplaceAll(t, "**", "")
+    t = str.ReplaceAll(t, "\\", "")
+    t = re.ReplaceAll(t, `@[\p{Han}A-Za-z0-9_]+\s*$`, "")
+    t = str.ReplaceAll(t, "`", "")
+    return str.TrimSpace(t)
+}
+
+func shortOf(num, fullTitle) {
+    s = shortLabels[num]
+    if s == nil || sprintf("%v", s) == "" { return fullTitle }
+    return sprintf("%v", s)
+}
+
+func buildImg(url) {
+    m = manifest[url]
+    if m == nil { return f`![](${url})` }
+    rel = sprintf("%v", m["relPath"])
+    if rel == "" || rel == "<nil>" { return f`![](${url})` }
+    cap = sprintf("%v", m["caption"])
+    if m["ok"] != true || cap == "" || cap == "<nil>" { return f`![配图](${rel})` }
+    altCap = str.ReplaceAll(str.ReplaceAll(cap, "]", ""), "[", "")
+    return f`![${altCap}](${rel})` + "\n\n" + f`<p class="manual-figcaption">图：${cap}</p>`
+}
+
+func processLine(line, inFence) {
+    if inFence { return line }
+    if str.Contains(line, "![") && str.Contains(line, "](") {
+        ms = re.FindSubmatchAll(line, imgRe)
+        if len(ms) > 0 {
+            out = []
+            for m in ms { out = append(out, buildImg(m[1])) }
+            return str.Join(out, "\n\n")
+        }
+    }
+    t = str.TrimSpace(line)
+    if str.HasPrefix(t, "#") {
+        hashes = ""
+        for i = 0; i < len(t); i++ {
+            if t[i:i+1] == "#" { hashes += "#" } else { break }
+        }
+        txt = cleanTitle(t)
+        if txt == "" { return line }
+        return hashes + " " + txt
+    }
+    return line
+}
+
+func bodyOf(lines) {
+    body = ""
+    inFence = false
+    for l in lines {
+        if str.HasPrefix(str.TrimSpace(l), "```") {
+            body += l + "\n"
+            inFence = !inFence
+            continue
+        }
+        body += processLine(l, inFence) + "\n"
+    }
+    return str.TrimSpace(body)
+}
+
+// 写普通页面（带 sidebar_position / sidebar_label）
+func writePage(absDir, fname, pos, label, h1, lines) {
+    safeLabel = str.ReplaceAll(label, `"`, `\"`)
+    fm = "---\n" + f`sidebar_position: ${pos}` + "\n" + f`sidebar_label: "${safeLabel}"` + "\n---\n\n"
+    content = fm + f`# ${h1}` + "\n\n" + bodyOf(lines) + "\n"
+    file.Save(absDir + "/" + fname, content)
+}
+
+// 写概述页（category link 指向，不带 sidebar 项）；catalog 为 [{title, target}]
+func writeOverview(absDir, h1, lines, catalogTitle, catalog) {
+    body = f`# ${h1}` + "\n\n" + bodyOf(lines) + "\n\n"
+    if len(catalog) > 0 {
+        body += f`## ${catalogTitle}` + "\n\n"
+        for e in catalog {
+            body += f`- [${e["title"]}](${e["target"]})` + "\n"
+        }
+        body += "\n"
+    }
+    file.Save(absDir + "/overview.md", str.TrimSpace(body) + "\n")
+}
+
+func writeCategory(absDir, label, position, collapsed, linkDocId) {
+    safe = str.ReplaceAll(label, `"`, `\"`)
+    c = "{\n"
+    c += `  "label": "` + safe + `",` + "\n"
+    c += `  "position": ` + sprintf("%v", position) + ",\n"
+    c += `  "collapsed": ` + sprintf("%v", collapsed) + ",\n"
+    c += `  "link": { "type": "doc", "id": "` + linkDocId + `" }` + "\n"
+    c += "}\n"
+    file.Save(absDir + "/_category_.json", c)
+}
+
+func contains(list, v) {
+    for x in list { if sprintf("%v", x) == sprintf("%v", v) { return true } }
+    return false
+}
+
+// 按指定 markdown 级别把行列表切成 [{title, lines}]，pre 为首个标题前内容
+func splitByLevel(lines, level) {
+    pre = []
+    secs = []
+    cur = nil
+    inFence = false
+    for line in lines {
+        t = str.TrimSpace(line)
+        if str.HasPrefix(t, "```") { inFence = !inFence }
+        isSec = false
+        if !inFence {
+            pat = "^" + level + `\s+\*{0,2}\d+\\?\.\d`
+            if re.Match(pat, t) {
+                nextChar = ""
+                if len(t) > len(level) { nextChar = t[len(level):len(level)+1] }
+                if nextChar == " " { isSec = true }
+            }
+        }
+        if isSec {
+            if cur != nil { secs = append(secs, cur) }
+            cur = {"title": t, "lines": []}
+            continue
+        }
+        if cur == nil { pre = append(pre, line) } else { cur["lines"] = append(cur["lines"], line) }
+    }
+    if cur != nil { secs = append(secs, cur) }
+    return pre, secs
+}
+
+for ch in chapters {
+    cn = os.Getenv("CH")
+    if cn != "" && sprintf("%v", ch["n"]) != cn { continue }
+
+    content = string(file.ReadFile(ch["file"])~)
+    allLines = str.Split(content, "\n")
+    absDir = productsDir + "/" + ch["dir"]
+    if file.IsExisted(absDir) { exec.System(f`rm -rf "${absDir}"`) }
+    file.MkdirAll(absDir)
+
+    // 提取章节大标题 + 切分到 X.Y
+    chapterTitle = ""
+    bodyLines = []
+    seenTitle = false
+    inFence = false
+    for line in allLines {
+        t = str.TrimSpace(line)
+        if str.HasPrefix(t, "```") { inFence = !inFence }
+        if !seenTitle && !inFence && str.HasPrefix(t, "# ") {
+            chapterTitle = cleanTitle(t)
+            seenTitle = true
+            continue
+        }
+        bodyLines = append(bodyLines, line)
+    }
+    pre, sections = splitByLevel(bodyLines, ch["splitH"])
+
+    // 构造本章目录 catalog
+    catalog = []
+    for sec in sections {
+        title = cleanTitle(sec["title"])
+        gm = re.FindSubmatch(title, `(\d+)\.(\d+)`)
+        slug = "sec"
+        num = ""
+        if len(gm) >= 3 { slug = gm[1] + "-" + gm[2]; num = gm[1] + "." + gm[2] }
+        target = "./" + slug + ".md"
+        if contains(ch["subsplit"], num) { target = "./" + slug + "/overview.md" }
+        catalog = append(catalog, {"title": title, "target": target})
+    }
+
+    // 写章节概述（category link 目标）
+    writeOverview(absDir, chapterTitle, pre, "本章目录", catalog)
+    writeCategory(absDir, ch["label"], ch["pos"], ch["collapsed"], ch["dir"] + "/overview")
+
+    // 写各节
+    for sec in sections {
+        title = cleanTitle(sec["title"])
+        gm = re.FindSubmatch(title, `(\d+)\.(\d+)`)
+        slug = "sec"
+        num = ""
+        posNum = 1
+        if len(gm) >= 3 { slug = gm[1] + "-" + gm[2]; num = gm[1] + "." + gm[2]; posNum = atoi(gm[2])~ }
+
+        if contains(ch["subsplit"], num) {
+            // 子目录拆分
+            subDir = absDir + "/" + slug
+            file.MkdirAll(subDir)
+            subPre, subs = splitByLevel(sec["lines"], "##")
+            // 子目录 catalog
+            subCatalog = []
+            for ss in subs {
+                st = cleanTitle(ss["title"])
+                sgm = re.FindSubmatch(st, `(\d+)\.(\d+)\.(\d+)`)
+                sslug = "sub"
+                if len(sgm) >= 4 { sslug = sgm[1] + "-" + sgm[2] + "-" + sgm[3] }
+                subCatalog = append(subCatalog, {"title": st, "target": "./" + sslug + ".md"})
+            }
+            writeOverview(subDir, title, subPre, "本节目录", subCatalog)
+            writeCategory(subDir, shortOf(num, title), posNum, false, ch["dir"] + "/" + slug + "/overview")
+            for ss in subs {
+                st = cleanTitle(ss["title"])
+                sgm = re.FindSubmatch(st, `(\d+)\.(\d+)\.(\d+)`)
+                sslug = "sub"; spos = 1; snum = ""
+                if len(sgm) >= 4 {
+                    sslug = sgm[1] + "-" + sgm[2] + "-" + sgm[3]
+                    spos = atoi(sgm[3])~
+                    snum = sgm[1] + "." + sgm[2] + "." + sgm[3]
+                }
+                writePage(subDir, sslug + ".md", spos, shortOf(snum, st), st, ss["lines"])
+            }
+            log.info("ch%v wrote subcategory %v (%v subs)", ch["n"], slug, len(subs))
+        } else {
+            writePage(absDir, slug + ".md", posNum, shortOf(num, title), title, sec["lines"])
+        }
+    }
+    log.info("chapter %v: %v sections", ch["n"], len(sections))
+}
+log.info("PAGES DONE")
