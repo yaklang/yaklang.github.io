@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Yak 技术博客</title>
+        <title>博客文章</title>
         <link>https://yaklang.com/en/blog</link>
         <description>Yak Program Language Blog</description>
         <lastBuildDate>Fri, 08 May 2026 00:00:00 GMT</lastBuildDate>
