@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr" class="docs-wrapper plugin-docs plugin-id-products docs-version-current docs-doc-page docs-doc-id-chapter-4/4-7" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">4.7 从手动验证到自动化资产：生成 Yaml PoC 工作流 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-4/4-7"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.7 从手动验证到自动化资产：生成 Yaml PoC 工作流 | Yak Program Language"><meta data-rh="true" name="description" content="在前面的章节中，我们已经深入探讨了如何利用 Web Fuzzer 进行精细化的手动测试，以及如何通过热加载脚本应对复杂的认证与加解密场景。这些操作的核心成果是一系列经过验证的、能够触发特定行为的有效数据包。然而，手动测试的价值并不仅仅在于单次的成功利用，更关键的是如何将这些发现沉淀为可复用、可共享、可自动化的安全资产。"><meta data-rh="true" property="og:description" content="在前面的章节中，我们已经深入探讨了如何利用 Web Fuzzer 进行精细化的手动测试，以及如何通过热加载脚本应对复杂的认证与加解密场景。这些操作的核心成果是一系列经过验证的、能够触发特定行为的有效数据包。然而，手动测试的价值并不仅仅在于单次的成功利用，更关键的是如何将这些发现沉淀为可复用、可共享、可自动化的安全资产。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-4/4-7"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-7" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-7" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-7" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.7 生成 Yaml PoC","item":"https://yaklang.com/products/chapter-4/4-7"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
+<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
+<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Yak 语言文档</a><a class="navbar__item navbar__link" href="/api-manual/intro">API 手册</a><a class="navbar__item navbar__link" href="/products/intro">Yakit 手册</a><a class="navbar__item navbar__link" href="/blog">技术博客</a><a class="navbar__item navbar__link" href="/irify">静态代码分析</a><a class="navbar__item navbar__link" href="/Yaklab/yaklab">YakLab 手册</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">关于我们</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/team">关于我们</a></li><li><a class="dropdown__link" href="/cooperativePartner">合作伙伴</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">下载白皮书<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Github<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="languageSwitcher"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="20" height="20"><path d="M249.7536 378.5728c10.6496 31.6416 28.3648 59.0848 53.0432 83.2512 20.992-22.7328 36.7616-50.7904 47.0016-83.2512h-100.0448zM902.2464 191.488H511.2832L488.96 71.8848H125.952c-40.0384 0-72.6016 32.5632-72.6016 72.6016v617.1648c0 40.0384 32.5632 72.6016 72.6016 72.6016h330.9568l-26.5216 119.6032h471.9616c40.0384 0 72.6016-32.5632 72.6016-72.6016V264.192c-0.1024-40.1408-32.768-72.704-72.704-72.704zM409.3952 558.1824c-42.8032-15.7696-78.1312-35.84-106.5984-59.0848-29.7984 26.5216-67.072 46.08-110.2848 58.1632l-14.9504-24.6784c42.3936-11.1616 77.7216-27.9552 105.5744-51.712-28.7744-29.3888-48.8448-63.2832-60.1088-101.888h-40.448v-27.9552h105.5744c-6.5536-12.0832-14.9504-23.7568-24.6784-34.9184l27.9552-10.24c9.728 12.5952 18.6368 27.4432 26.5216 44.7488h100.9664v27.9552h-40.448c-13.0048 40.0384-31.6416 73.5232-56.32 100.5568 27.4432 21.9136 61.8496 40.0384 102.4 54.8864 0.1024 0.2048-15.1552 24.1664-15.1552 24.1664z m529.1008 322.56a36.352 36.352 0 0 1-36.352 36.352H475.9552l18.1248-83.2512h136.2944l-77.7216-433.2544-0.4096 2.3552-3.2768-17.3056 0.9216 0.4096-28.3648-158.3104h381.1328a36.352 36.352 0 0 1 36.352 36.352v616.6528h-0.512zM643.4816 538.2144h100.1472v-26.5216h-100.1472v-53.0432h106.5984V432.128H612.2496v190.7712h141.9264v-26.5216H643.4816v-58.1632z m208.9984-57.2416c-8.3968 0-15.7696 1.3312-22.7328 5.12-6.5536 3.2768-13.0048 8.3968-18.1248 14.9504v-16.2816H781.312v138.24h30.3104v-83.2512c0.9216-11.1616 4.7104-19.5584 11.1616-25.6 5.632-5.12 12.0832-7.9872 19.5584-7.9872 20.992 0 31.1296 11.1616 31.1296 33.9968v82.432h30.3104v-85.2992c0.8192-37.6832-16.896-56.32-51.3024-56.32z" p-id="4164"></path></svg></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/products/intro"><span title="手册总览" class="linkLabel_WmDU">手册总览</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-1/overview"><span title="一、统一安全工具平台" class="categoryLinkLabel_W154">一、统一安全工具平台</span></a><button aria-label="展开侧边栏分类 &#x27;一、统一安全工具平台&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-2/overview"><span title="二、基础功能与使用" class="categoryLinkLabel_W154">二、基础功能与使用</span></a><button aria-label="折叠侧边栏分类 &#x27;二、基础功能与使用&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-1"><span title="2.1 应用架构与安装" class="linkLabel_WmDU">2.1 应用架构与安装</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-2"><span title="2.2 界面与功能导航" class="linkLabel_WmDU">2.2 界面与功能导航</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/products/chapter-2/2-3/overview"><span title="2.3 工具集实践入门" class="categoryLinkLabel_W154">2.3 工具集实践入门</span></a><button aria-label="折叠侧边栏分类 &#x27;2.3 工具集实践入门&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-1"><span title="2.3.1 端口扫描" class="linkLabel_WmDU">2.3.1 端口扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-2"><span title="2.3.2 弱口令爆破" class="linkLabel_WmDU">2.3.2 弱口令爆破</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-3"><span title="2.3.3 目录扫描" class="linkLabel_WmDU">2.3.3 目录扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-4"><span title="2.3.4 资产测绘双引擎" class="linkLabel_WmDU">2.3.4 资产测绘双引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-5"><span title="2.3.5 Codec 编解码" class="linkLabel_WmDU">2.3.5 Codec 编解码</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-6"><span title="2.3.6 History 流量审计" class="linkLabel_WmDU">2.3.6 History 流量审计</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-7"><span title="2.3.7 综合反连 OOB" class="linkLabel_WmDU">2.3.7 综合反连 OOB</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-8"><span title="2.3.8 Yso-Hack Java 利用" class="linkLabel_WmDU">2.3.8 Yso-Hack Java 利用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-9"><span title="2.3.9 Vulinbox 靶场" class="linkLabel_WmDU">2.3.9 Vulinbox 靶场</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-10"><span title="2.3.10 Yak IDE" class="linkLabel_WmDU">2.3.10 Yak IDE</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-11"><span title="2.3.11 漏洞检测" class="linkLabel_WmDU">2.3.11 漏洞检测</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-12"><span title="2.3.12 数据库" class="linkLabel_WmDU">2.3.12 数据库</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-4"><span title="2.4 注意事项与原则" class="linkLabel_WmDU">2.4 注意事项与原则</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-3/overview"><span title="三、MITM 通信劫持" class="categoryLinkLabel_W154">三、MITM 通信劫持</span></a><button aria-label="折叠侧边栏分类 &#x27;三、MITM 通信劫持&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-1"><span title="3.1 MITM 技术原理" class="linkLabel_WmDU">3.1 MITM 技术原理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-2"><span title="3.2 MITM 基础使用" class="linkLabel_WmDU">3.2 MITM 基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-3"><span title="3.3 MITM 热加载进阶" class="linkLabel_WmDU">3.3 MITM 热加载进阶</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-4"><span title="3.4 高级流量操控" class="linkLabel_WmDU">3.4 高级流量操控</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-5"><span title="3.5 本章小结" class="linkLabel_WmDU">3.5 本章小结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/products/chapter-4/overview"><span title="四、Web Fuzzer 模糊测试" class="categoryLinkLabel_W154">四、Web Fuzzer 模糊测试</span></a><button aria-label="折叠侧边栏分类 &#x27;四、Web Fuzzer 模糊测试&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-1"><span title="4.1 Web Fuzzer 概述" class="linkLabel_WmDU">4.1 Web Fuzzer 概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-2"><span title="4.2 界面与基础使用" class="linkLabel_WmDU">4.2 界面与基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-3"><span title="4.3 精细化配置" class="linkLabel_WmDU">4.3 精细化配置</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-4"><span title="4.4 Fuzztag 构造引擎" class="linkLabel_WmDU">4.4 Fuzztag 构造引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-5"><span title="4.5 数据匹配与处理" class="linkLabel_WmDU">4.5 数据匹配与处理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-6"><span title="4.6 热加载与钩子" class="linkLabel_WmDU">4.6 热加载与钩子</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/products/chapter-4/4-7"><span title="4.7 生成 Yaml PoC" class="linkLabel_WmDU">4.7 生成 Yaml PoC</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-8"><span title="4.8 多包联动序列" class="linkLabel_WmDU">4.8 多包联动序列</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-9"><span title="4.9 本章总结" class="linkLabel_WmDU">4.9 本章总结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-5/overview"><span title="五、Yakit 插件系统" class="categoryLinkLabel_W154">五、Yakit 插件系统</span></a><button aria-label="折叠侧边栏分类 &#x27;五、Yakit 插件系统&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-1"><span title="5.1 插件系统概述" class="linkLabel_WmDU">5.1 插件系统概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-2"><span title="5.2 插件生态系统" class="linkLabel_WmDU">5.2 插件生态系统</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-3"><span title="5.3 插件编写指南" class="linkLabel_WmDU">5.3 插件编写指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-4"><span title="5.4 插件开发与调试" class="linkLabel_WmDU">5.4 插件开发与调试</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-5"><span title="5.5 常见错误与修复" class="linkLabel_WmDU">5.5 常见错误与修复</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/products/legacy/intro"><span title="旧版：Yakit 手册" class="categoryLinkLabel_W154">旧版：Yakit 手册</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/products/chapter-4/overview"><span>四、Web Fuzzer 模糊测试</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">4.7 生成 Yaml PoC</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>4.7 从手动验证到自动化资产：生成 Yaml PoC 工作流</h1></header>
+<p>在前面的章节中，我们已经深入探讨了如何利用 Web Fuzzer 进行精细化的手动测试，以及如何通过热加载脚本应对复杂的认证与加解密场景。这些操作的核心成果是一系列经过验证的、能够触发特定行为的有效数据包。然而，手动测试的价值并不仅仅在于单次的成功利用，更关键的是如何将这些发现沉淀为可复用、可共享、可自动化的安全资产。</p>
+<p>本节将聚焦于Yakit Web Fuzzer的一项核心工程化能力：<strong>一键生成 Yaml PoC</strong>。我们将以一个常见的安全信息探测场景——检测并验证Swagger API定义文件（<code>swagger.json</code>）——作为实战案例，完整地演示从构造探测请求、定义精准的验证规则，到最终生成兼容业界标准的自动化验证脚本的全过程。这一工作流旨在将传统繁琐的PoC编写过程，重塑为一个高效、可靠的“一键式”自动化流程，实现从手动发现到自动化资产的无缝转换。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="471-poc生成实战以swagger-api定义检测为例">4.7.1 PoC生成实战：以Swagger API定义检测为例<a href="#471-poc生成实战以swagger-api定义检测为例" class="hash-link" aria-label="4.7.1 PoC生成实战：以Swagger API定义检测为例的直接链接" title="4.7.1 PoC生成实战：以Swagger API定义检测为例的直接链接" translate="no">​</a></h2>
+<p>信息泄露，特别是API定义文件的泄露，是诸多严重漏洞的起点。因此，构建一个能够精准识别这类文件的PoC具有极高的实战价值。我们将以此为例，分解PoC的自动化生成步骤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="设定探测目标与构造基础请求">设定探测目标与构造基础请求<a href="#设定探测目标与构造基础请求" class="hash-link" aria-label="设定探测目标与构造基础请求的直接链接" title="设定探测目标与构造基础请求的直接链接" translate="no">​</a></h3>
+<p>流程的起点是获取一个明确的测试目标。我们首先通过Yakit内置的Vulfocus靶场环境搜索并定位到“OpenAPI 2.0 Swagger 泄漏”场景，获取到目标URL。</p>
+<p><img decoding="async" loading="lazy" alt="Swagger 敏感信息泄漏检测与 JSON 响应展示" src="/assets/images/ch4-072-d029293fab8024aca13fa68739ab0983.png" width="1158" height="647" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Swagger 敏感信息泄漏检测与 JSON 响应展示</p>
+<p>随后，在Web Fuzzer中使用“从URL构造请求”功能，将该URL（例如 <code>http://127.0.0.1:8787/swagger/v1/swagger.json</code>）快速转换为一个基础的GET请求。发送该请求后，我们在响应面板可以看到返回的JSON内容，确认了该文件的存在和基本结构。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 输入 URL 构造请求并查看响应内容" src="/assets/images/ch4-073-54f7ff4de403fb3ae7e109f4e0bf1b2f.png" width="1187" height="550" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 输入 URL 构造请求并查看响应内容</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义精准的验证规则">定义精准的验证规则<a href="#定义精准的验证规则" class="hash-link" aria-label="定义精准的验证规则的直接链接" title="定义精准的验证规则的直接链接" translate="no">​</a></h3>
+<p>一个可靠的PoC必须具备精确的验证逻辑，以避免误报。仅通过HTTP状态码 <code>200 OK</code> 来判断是远远不够的。对于Swagger 2.0的定义文件，其响应内容中必然包含 <code>&quot;swagger&quot;: &quot;2.0&quot;</code> 这样的关键特征。我们将基于此特征来构建匹配规则。</p>
+<p>在Web Fuzzer的“规则设置”面板中，我们添加一个<strong>匹配器</strong>。为提升规则的健壮性，我们不使用简单的关键字匹配，而是采用<strong>正则表达式</strong>。这可以有效应对JSON格式中可能存在的空格、换行等变化。我们配置如下：</p>
+<ul>
+<li class="">
+<p><strong>匹配类型</strong>：<code>正则表达式</code></p>
+</li>
+<li class="">
+<p><strong>匹配位置</strong>：<code>响应体</code></p>
+</li>
+<li class="">
+<p><strong>正则表达式</strong>：<code>&quot;swagger&quot;\s*:\s*&quot;2\.[0-9]+&quot;</code></p>
+</li>
+</ul>
+<p>这条正则表达式能够精确匹配 <code>swagger</code> 字段及其 <code>2.x</code> 版本的版本号，同时忽略了冒号和版本号两侧可能存在的任意空白字符。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 定义 HTTP 重放验证规则的操作界面" src="/assets/images/ch4-074-9515ee3472a46d45185824d620e9a4c8.png" width="1438" height="728" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 定义 HTTP 重放验证规则的操作界面</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="规则验证与一键生成模版">规则验证与一键生成模版<a href="#规则验证与一键生成模版" class="hash-link" aria-label="规则验证与一键生成模版的直接链接" title="规则验证与一键生成模版的直接链接" translate="no">​</a></h3>
+<p>在应用规则前，点击“调试执行”可以立即验证当前规则是否能成功匹配已获取的响应，此时系统提示“匹配成功”，证明我们的规则配置无误。确认后，点击“应用”将该匹配器固化到当前测试会话中。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 匹配器规则验证与调试界面" src="/assets/images/ch4-075-3fe683224d7c6a2cc4bd31fc404c2b0b.png" width="730" height="579" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 匹配器规则验证与调试界面</p>
+<p>当再次发送请求时，可以看到界面上出现了“匹配成功”的绿色标签，这标志着我们已经拥有了一个完整的、包含有效请求和精确验证逻辑的测试单元。此时，万事俱备，我们点击界面右上角的“<strong>生成Yaml模板</strong>”按钮。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit匹配成功生成Yaml模版界面" src="/assets/images/ch4-076-b5090136cd6fe24bc65c6f5f0a33d3a5.png" width="1720" height="437" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit匹配成功生成Yaml模版界面</p>
+<p>如图所示，Yakit 提供了两种生成模式，以满足不同场景的工程化需求。这两种模式最终都会生成一个结构化的 YAML 文件，但其对 HTTP 请求的表达方式有所不同。</p>
+<ul>
+<li class="">
+<p><strong>Path 模式（推荐）</strong>：该模式将 HTTP 请求进行结构化拆分，把请求方法（<code>method</code>）、路径（<code>path</code>）、头部（<code>headers</code>）等元素作为独立的 YAML 字段进行存储。这种格式可读性极强，非常便于后期的人工审查与参数化修改，例如将硬编码的路径部分替换为变量。它本质上是将您在 Web Fuzzer 中的分步配置直接映射为 YAML 结构，是绝大多数场景下的首选。</p>
+</li>
+<li class="">
+<p><strong>Raw 模式</strong>：该模式将完整的原始 HTTP 请求报文——从请求行到请求体——作为一个整体的字符串块（raw block）进行保存。此模式提供了最高的保真度，能够 1:1 完整复现原始请求的每一个字节，包括那些可能存在的特殊换行符或非标准头部。它特别适用于那些结构异常复杂、难以通过字段逐一描述的请求。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Web Fuzzer 规则验证与模版生成界面" src="/assets/images/ch4-077-d1a6cf0c207973f5774773d06984d707.png" width="1353" height="914" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Web Fuzzer 规则验证与模版生成界面</p>
+<p>无论选择哪种模式，生成的YAML模板都具备高度的工程化价值和通用性。Yakit生成的PoC在顶层结构上（如 <code>id</code>, <code>info</code>, <code>http</code>, <code>matchers</code> 等字段）与业界广泛使用的安全扫描工具 <strong>Nuclei</strong> 的模板格式高度兼容。这意味着，由Yakit生成的PoC不仅可以在Yakit生态内无缝流转，也可以在简单修改后被Nuclei等支持该格式的工具加载执行，极大地增强了产出资产的通用性和价值。</p>
+<p>更重要的是，Yakit为用户提供了双轨并行的工作流。对于标准场景，用户完全可以通过图形化界面中的“<strong>规则配置</strong>”与“<strong>匹配器/提取器</strong>”来定义PoC的全部逻辑，实现“零代码”快速生成。而对于追求极致灵活性的高级用户，可以直接在导出的YAML文件上进行二次开发，手动添加更复杂的请求链、动态变量提取与注入逻辑，以实现GUI无法直接覆盖的复杂场景。这种“<strong>GUI快速生成，代码灵活定制</strong>”的模式，兼顾了效率与深度。</p>
+<p>至此，我们已经成功地将一次手动的资产探测操作，转化为一个标准化的、可维护、可移植、可被自动化工具直接调用的PoC文件，完成了从临时发现到持久化安全资产的关键一步。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="472-更复杂的条件解读构建生产级poc规则">4.7.2 更复杂的条件解读：构建生产级PoC规则<a href="#472-更复杂的条件解读构建生产级poc规则" class="hash-link" aria-label="4.7.2 更复杂的条件解读：构建生产级PoC规则的直接链接" title="4.7.2 更复杂的条件解读：构建生产级PoC规则的直接链接" translate="no">​</a></h2>
+<p>前一节我们通过一个简单的正则表达式成功识别了目标，但这仅仅是PoC编写的起点。在真实的攻防场景中，为了最大限度地提高检测的<strong>准确性</strong>并降低<strong>误报率</strong>，我们往往需要构建更为复杂和严谨的验证逻辑。生产环境级别的PoC规则，通常不是单一维度的判断，而是多重条件的组合。</p>
+<p>本节将深入探讨Yakit Web Fuzzer中规则配置的高级用法。我们将从状态码与内容关键字的组合匹配，到多关键字的逻辑与/或，再到利用表达式（DSL）实现高度灵活的动态判断，逐层递进地展示如何将一个基础PoC升级为稳健、可靠的自动化安全资产。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4721-组合验证状态码与响应内容的双重确认">4.7.2.1 组合验证：状态码与响应内容的双重确认<a href="#4721-组合验证状态码与响应内容的双重确认" class="hash-link" aria-label="4.7.2.1 组合验证：状态码与响应内容的双重确认的直接链接" title="4.7.2.1 组合验证：状态码与响应内容的双重确认的直接链接" translate="no">​</a></h3>
+<p>在安全检测中，最经典也最有效的验证模式之一，就是将HTTP响应状态码与响应体中的特定内容进行**与(AND)**逻辑组合。单独依赖<code>200 OK</code>状态码会引入大量误报（例如，任何正常页面都返回200），而单独依赖关键字也可能匹配到错误页面或无关内容。双重确认则能极大提升规则的健壮性。</p>
+<p>操作流程如下：</p>
+<ol>
+<li class="">
+<p>首先，我们保留或配置好一个基础的内容匹配规则（如4.7.1中的正则表达式）。</p>
+</li>
+<li class="">
+<p>在规则配置面板中，点击“<strong>+ 添加条件</strong>”，新增一个验证维度。</p>
+</li>
+<li class="">
+<p>在新增的条件中，将“匹配类型”设置为“<strong>状态码</strong>”，并在输入框中填入期望的HTTP状态码，例如 <code>200</code>。</p>
+</li>
+<li class="">
+<p>关键在于将多个条件之间的“<strong>条件关系</strong>”设置为“<strong>AND</strong>”。这表示只有当<strong>所有</strong>条件（状态码为200 <strong>且</strong> 正则表达式匹配成功）都得到满足时，最终的匹配结果才为成功。</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Yakit状态码匹配规则配置与验证界面" src="/assets/images/ch4-078-5676524943fa931d129cff83b6281ef7.png" width="769" height="673" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit状态码匹配规则配置与验证界面</p>
+<p>通过“调试执行”功能，我们可以立即验证这条组合规则的有效性。这种“状态码+内容”的黄金组合是编写高质量PoC的基石。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4722-多关键字验证提升特征识别精度">4.7.2.2 多关键字验证：提升特征识别精度<a href="#4722-多关键字验证提升特征识别精度" class="hash-link" aria-label="4.7.2.2 多关键字验证：提升特征识别精度的直接链接" title="4.7.2.2 多关键字验证：提升特征识别精度的直接链接" translate="no">​</a></h3>
+<p>当需要验证的目标特征无法用单一关键字或简单的正则表达式描述时，使用多个关键字进行组合匹配就显得尤为重要。例如，要确认一个页面是某个特定系统的后台登录页，可能需要同时存在 &quot;Management Console&quot;、&quot;Username&quot; 和 &quot;Password&quot; 三个词。</p>
+<p>在Yakit中，配置多关键字非常直观：</p>
+<ol>
+<li class="">
+<p>将“匹配类型”设置为“<strong>关键字</strong>”。</p>
+</li>
+<li class="">
+<p>在第一个输入框中填入首个关键字，如 <code>&quot;paths&quot;</code>。</p>
+</li>
+<li class="">
+<p>点击下方的“<strong>+ 添加匹配内容</strong>”，即可增加新的输入框，用于填入更多关键字，如 <code>&quot;swagger&quot;</code> 和 <code>&quot;application/json&quot;</code>。</p>
+</li>
+<li class="">
+<p>同样，通过“<strong>条件关系</strong>”开关来定义这些关键字之间的逻辑关系：</p>
+<ul>
+<li class="">
+<p><strong>AND</strong>: 响应中必须<strong>同时包含</strong>所有列出的关键字。</p>
+</li>
+<li class="">
+<p><strong>OR</strong>: 响应中只要<strong>包含任意一个</strong>列出的关键字即可。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="多关键字匹配验证配置界面" src="/assets/images/ch4-079-3df819c8aa540dcd9e8d0eee3a56b85d.png" width="740" height="431" class="img_ev3q"></p>
+<p class="manual-figcaption">图：多关键字匹配验证配置界面</p>
+<p>这种方式为特征识别提供了更高的灵活性，能够根据实际场景精确定义目标画像。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4723-终极利器使用表达式dsl实现动态判断">4.7.2.3 终极利器：使用表达式（DSL）实现动态判断<a href="#4723-终极利器使用表达式dsl实现动态判断" class="hash-link" aria-label="4.7.2.3 终极利器：使用表达式（DSL）实现动态判断的直接链接" title="4.7.2.3 终极利器：使用表达式（DSL）实现动态判断的直接链接" translate="no">​</a></h3>
+<p>对于需要进行数值比较、函数运算或复杂逻辑组合的场景，Yakit提供了功能强大的“<strong>表达式（Expression）</strong>”模式。这本质上是启用了一个领域特定语言（DSL），允许用户编写简短的代码片段来执行动态、精细的验证。</p>
+<p>值得一提的是，Yakit的表达式引擎在语法和核心函数上与业界流行的 <strong>Nuclei</strong> 工具高度兼容，这极大地降低了用户的学习成本，并使得PoC资产可以在两个生态之间轻松迁移。</p>
+<p>一个典型的应用场景是检测时间盲注漏洞。我们可以通过<code>duration</code>这个内置变量来获取请求的响应时间（单位：秒），并设置一个阈值，例如 <code>duration &gt; 3</code>，意为当响应时间超过3秒时匹配成功。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer表达式匹配设置界面" src="/assets/images/ch4-080-d3cc4155167c459f35ef88e4e6b5ac3f.png" width="741" height="325" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit Web Fuzzer表达式匹配设置界面</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="典型dsl表达式案例从实践中学习">典型DSL表达式案例：从实践中学习<a href="#典型dsl表达式案例从实践中学习" class="hash-link" aria-label="典型DSL表达式案例：从实践中学习的直接链接" title="典型DSL表达式案例：从实践中学习的直接链接" translate="no">​</a></h4>
+<p>在深入了解完整的函数列表之前，我们先通过几个真实且高频的使用场景来直观感受DSL的威力。理论源于实践，这些案例覆盖了从基础验证到高级技巧的多个层面。</p>
+<ol>
+<li class=""><strong>基础条件组合：状态码与关键字</strong>
+这是最经典的用法，确保请求成功且页面包含预期内容。</li>
+</ol>
+<div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 案例：确认响应成功(200)并且响应体中包含&quot;Welcome to Admin&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">status_code == 200 &amp;&amp; contains(body, &quot;Welcome to Admin&quot;)</span><br></span></code></pre></div></div>
+<ol start="2">
+<li class=""><strong>精确内容与结构匹配：正则表达式</strong></li>
+</ol>
+<p>当需要匹配特定格式的敏感信息（如密钥、身份证号、内部IP）或代码结构时，正则表达式是最佳选择。</p>
+<div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 案例：在响应体中查找类似/etc/passwd文件泄露的特征</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">regex(&quot;root:[x*]:0:0&quot;, body)</span><br></span></code></pre></div></div>
+<ol start="3">
+<li class=""><strong>响应特征检测：响应时间与内容长度</strong>
+这种方法常用于检测性能异常和侧信道漏洞，如时间盲注。</li>
+</ol>
+<div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 案例1: 检测时间盲注，判断响应时间是否超过5秒</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">duration &gt;= 5.0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># 案例2: 查找内容极少的错误页面</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">content_length &lt; 50 &amp;&amp; contains(body, &quot;Error&quot;) </span><br></span></code></pre></div></div>
+<ol start="4">
+<li class=""><strong>多请求逻辑关联：构建攻击链</strong>
+在复杂的漏洞利用链中，需要验证多个请求之间的因果关系。DSL通过带数字后缀的变量（如<code>body_1</code>, <code>status_code_2</code>）完美支持了这一点。</li>
+</ol>
+<div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 案例：验证一个登录跳转逻辑。请求1提交表单后应返回302，且请求2的响应头中必须包含新的会话cookie</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">status_code_1 == 302 &amp;&amp; contains(all_headers_2, &quot;Set-Cookie: sessionid=&quot;)</span><br></span></code></pre></div></div>
+<ol start="5">
+<li class=""><strong>动态数据哈希验证：应用指纹识别</strong>
+通过计算响应中特定资源的哈希值（如favicon.ico、logo图片、JS文件），可以极其精准地识别出目标应用的类型和版本。</li>
+</ol>
+<div class="language-Thrift language-thrift codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-thrift codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 案例：通过计算favicon.ico的MD5哈希值来识别Shiro框架</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">md5(body) == &quot;ed8ce15da9b57ec84ad8562a714a6713&quot;</span><br></span></code></pre></div></div>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="dsl函数与变量速查手册">DSL函数与变量速查手册<a href="#dsl函数与变量速查手册" class="hash-link" aria-label="DSL函数与变量速查手册的直接链接" title="DSL函数与变量速查手册的直接链接" translate="no">​</a></h4>
+<p>掌握了核心应用场景后，下面我们提供一份详尽的DSL函数和变量参考手册，供您在构建自定义规则时查阅。</p>
+<p><strong>内置变量</strong></p>
+<p>这些变量是DSL环境预先定义好的，可以直接在表达式中使用，用于访问HTTP响应的各个部分。</p>
+<p><strong>内置函数库</strong></p>
+<p>函数库提供了丰富的处理能力，涵盖字符串、编码、加密等多个方面。</p>
+<p><strong>1. 字符串处理函数</strong></p>
+<p><strong>2. 编码与解码函数</strong></p>
+<p><strong>3. 加密与哈希函数</strong></p>
+<p><strong>4. 其他高级函数</strong></p>
+<p><strong>逻辑运算符</strong>：DSL同样支持标准的逻辑运算符 <code>&amp;&amp;</code> (AND), <code>||</code> (OR), <code>!</code> (NOT) 以及比较运算符 <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>，您可以将它们自由组合，构建出任何复杂的判断逻辑。</p>
+<p>通过这种“<strong>场景驱动学习+手册随时查阅</strong>”的方式，您可以快速将自己的安全经验固化为精准、高效、可复用的自动化检测规则，这正是Yakit赋能安全工程师，实现能力沉淀与效率提升的核心价值所在。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="473-从模板到插件poc的调试与固化">4.7.3 从模板到插件：PoC的调试与固化<a href="#473-从模板到插件poc的调试与固化" class="hash-link" aria-label="4.7.3 从模板到插件：PoC的调试与固化的直接链接" title="4.7.3 从模板到插件：PoC的调试与固化的直接链接" translate="no">​</a></h2>
+<p>在前面的章节中，我们已经掌握了如何从一个原始HTTP请求出发，通过配置丰富的匹配条件，最终生成一个结构化的YAML PoC模板。但这仅仅完成了“定义”漏洞的工作。一个真正可用于实战的PoC，必须经过严格的实靶验证，并最终转化为可复用、可管理的工具资产。</p>
+<p>本节将详细阐述Yakit中将一个临时PoC模板“固化”为标准插件的完整工作流。我们将深入探讨PoC的在线调试、迭代优化以及最终保存为插件的全过程。这一流程的目标是将安全研究员的瞬时发现，沉淀为团队可长期依赖的自动化检测能力。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4731-poc的在线调试与验证">4.7.3.1 PoC的在线调试与验证<a href="#4731-poc的在线调试与验证" class="hash-link" aria-label="4.7.3.1 PoC的在线调试与验证的直接链接" title="4.7.3.1 PoC的在线调试与验证的直接链接" translate="no">​</a></h3>
+<p>理论上的完美规则，在面对真实世界的复杂网络环境时仍可能出现偏差。因此，在最终确认一个 PoC 之前，进行在线调试是保证其质量的最后一道，也是最重要的一道防线。当一个 PoC 模板在 Web Fuzzer 中生成后，Yakit 会引导用户直接进入一个专门的“<strong>插件调试</strong>”界面。</p>
+<p>该界面在设计上遵循了“<strong>配置与代码分离，输入与验证分离</strong>”的核心原则，实现了高效的“所见即所得”调试体验。</p>
+<p><img decoding="async" loading="lazy" alt="点击请求配置查看PoC参数化信息" src="/assets/images/ch4-081-4c944ed3054b8fc89cfa5bfd1509feaa.png" width="1569" height="901" class="img_ev3q"></p>
+<p class="manual-figcaption">图：点击请求配置查看PoC参数化信息</p>
+<p>如上图所示，整个调试界面被逻辑地划分为左右两个核心区域：</p>
+<ul>
+<li class="">
+<p><strong>左侧：运行时参数配置区</strong>。此区域作为 PoC 的动态输入端，负责定义单次调试任务的具体目标与上下文环境。</p>
+</li>
+<li class="">
+<p><strong>右侧：代码与结果验证区</strong>。此区域承载了 PoC 的静态定义（YAML 源码）与动态执行结果的展示，是分析与优化的主战场。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4732-调试工作流详解">4.7.3.2 调试工作流详解<a href="#4732-调试工作流详解" class="hash-link" aria-label="4.7.3.2 调试工作流详解的直接链接" title="4.7.3.2 调试工作流详解的直接链接" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>运行时参数配置 (左侧面板)</strong></li>
+</ol>
+<p>这是 PoC 执行前的准备阶段。用户需要在左侧的“参数列表”中，为本次调试配置所有必需的运行时变量。其核心配置项包括：</p>
+<ul>
+<li class="">
+<p><strong>扫描目标 (</strong><code>*扫描目标</code><strong>)</strong>: 这是 PoC 的执行对象。Yakit 不仅支持输入单个 URL 进行精确调试，还支持通过上传 TXT 或 Excel 文件来进行小范围的批量验证，这在验证 PoC 对不同目标的普适性时尤为重要。</p>
+</li>
+<li class="">
+<p><strong>请求类型 (</strong><code>请求类型</code><strong>)</strong>: 可选择“原始请求”或“请求配置”，以决定是采用 PoC 中定义的请求模板，还是通过下方的表单进行临时覆盖。</p>
+</li>
+<li class="">
+<p><strong>请求参数 (</strong><code>GET 参数</code><strong>, <strong><code>POST 参数</code></strong>, <strong><code>Header</code></strong>, <strong><code>Cookie</code></strong> 等)</strong>: 用户可以在此精细地调整或注入 HTTP 请求的各个部分。这使得同一个 PoC 模板可以方便地在不同目标、不同用户认证状态（通过修改 Cookie 或 Authorization 头）下进行灵活测试。</p>
+</li>
+</ul>
+<p>完成配置后，参数化的信息将直接作用于本次执行，而不会修改右侧的 PoC 源码，确保了模板的纯净性。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit插件调试界面展示" src="/assets/images/ch4-082-b671391b470ff8aae18b37a22c7585cd.png" width="1307" height="732" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit插件调试界面展示</p>
+<ol>
+<li class=""><strong>闭环调试与迭代优化 (右侧面板)</strong></li>
+</ol>
+<p>点击“<strong>执行</strong>”按钮后，Yakit 将根据左侧的配置和右侧的 YAML 定义发起真实的网络请求，并将调试重心转移到右侧面板的“<strong>执行结果</strong>”选项卡。</p>
+<p>这个过程形成了一个高效的反馈闭环，是 PoC 优化的核心所在：</p>
+<ol>
+<li class="">
+<p><strong>执行与观测</strong>：启动执行后，实时结果将呈现在结果列表中，包括请求的目标 URL、HTTP 响应状态码等关键信息。测试人员可以选中任意一条记录，在下方的 <strong>HTTP 流量</strong>、<strong>日志</strong> 和 <strong>Console</strong> 选项卡中深入分析。</p>
+<ul>
+<li class="">
+<p><strong>HTTP 流量</strong>：提供最原始的请求与响应报文，用于检查网络层面的每一个细节。</p>
+</li>
+<li class="">
+<p><strong>日志</strong>：输出 PoC 执行过程中的内部日志，便于排查逻辑错误。</p>
+</li>
+<li class="">
+<p><strong>Console</strong>：显示 <code>yak</code> 脚本中的打印输出，用于高级调试。</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>分析与判断</strong>：根据实际的返回结果，判断 PoC 的表现是否符合预期。例如，是否成功命中了预期的漏洞响应（匹配器成功），或者是否存在误报（在正常页面上触发了匹配）。</p>
+</li>
+<li class="">
+<p><strong>迭代与修正</strong>：如果结果不符合预期，测试人员可直接切换回右侧面板的“<strong>源码</strong>”选项卡。在这里，可以直接在 YAML 代码编辑器中调整匹配条件 (<code>matchers</code>)、修正请求路径 (<code>path</code>)、补充缺失的头部信息，或优化变量处理逻辑。</p>
+</li>
+<li class="">
+<p><strong>再次验证</strong>：完成代码修改后，无需退出界面，直接再次点击“<strong>执行</strong>”按钮，立即在新逻辑下发起测试。</p>
+</li>
+</ol>
+<p>通过这样“<strong>执行 → 观测 → 修正 → 再次执行</strong>”的快速迭代循环，测试人员可以高效地将一个理论上的 PoC 打磨成一个在多种预期环境下都能准确、稳定工作的、经过实战验证的可靠安全资产。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4733-保存为插件将能力资产化">4.7.3.3 保存为插件：将能力资产化<a href="#4733-保存为插件将能力资产化" class="hash-link" aria-label="4.7.3.3 保存为插件：将能力资产化的直接链接" title="4.7.3.3 保存为插件：将能力资产化的直接链接" translate="no">​</a></h3>
+<p>当PoC经过充分的调试和验证，证明其稳定可靠后，最后一步就是将其保存为Yakit中的一个标准化插件。这是一个将临时脚本转化为永久资产质变过程。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 插件调试界面与保存按钮" src="/assets/images/ch4-083-71c83819dc2c56691e7f451ca81cdf74.png" width="1470" height="686" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 插件调试界面与保存按钮</p>
+<p>点击调试界面右上角的“<strong>存为插件</strong>”按钮，Yakit会将当前调试好的PoC模板正式保存到本地的插件库中。一旦保存，这个PoC便不再是一个孤立的YAML文件，而是Yakit插件生态系统中的一员，可以像其他内置插件一样被搜索、管理和调用，尤其是在进行大规模批量扫描任务时。</p>
+<p>这个“<strong>构造数据包 -&gt; 生成模板 -&gt; 在线调试 -&gt; 保存插件</strong>”的流程，构成了Yakit的“免写(Code-Free)”PoC工作流。它极大地降低了PoC的开发门槛，将开发者的精力从繁琐的模板语法和调试环境搭建中解放出来，使其能完全专注于漏洞利用逻辑本身。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="4743-poc与核心模块的深度联动">4.7.4.3 PoC与核心模块的深度联动<a href="#4743-poc与核心模块的深度联动" class="hash-link" aria-label="4.7.4.3 PoC与核心模块的深度联动的直接链接" title="4.7.4.3 PoC与核心模块的深度联动的直接链接" translate="no">​</a></h3>
+<p>Yakit最大的优势在于其模块间的深度集成。一个固化后的PoC插件并非终点，而是可以串联起更强大工作流的起点。</p>
+<p>一个经典的联动场景是<strong>MITM（中间人攻击模块）与Web Fuzzer的协同</strong>。在处理需要复杂认证（如动态CSRF Token、验证码、加密参数）的Web应用时，测试人员可以：</p>
+<ol>
+<li class="">
+<p><strong>MITM捕获与分析</strong>：首先利用MITM劫持一个合法的业务请求，在交互式控制台中清晰地观察和理解认证流程与动态参数的生成逻辑。</p>
+</li>
+<li class="">
+<p><strong>发送至Fuzzer构造</strong>：将这个带有合法凭据的请求一键发送到Web Fuzzer，在其基础上构造漏洞利用的Payload。</p>
+</li>
+<li class="">
+<p><strong>生成并固化PoC</strong>：在Fuzzer中测试成功后，生成包含完整认证信息的PoC模板，并最终保存为插件。</p>
+</li>
+</ol>
+<p>此外，生成的PoC插件还可以反向赋能其他模块：</p>
+<ul>
+<li class="">
+<p><strong>自动化检测</strong>：在MITM中配置规则，当劫持到符合特定条件的流量时，自动调用此PoC插件进行实时漏洞检测。</p>
+</li>
+<li class="">
+<p><strong>与扫描器结合</strong>：在配置Web爬虫或批量扫描任务时，将该PoC作为一个检测项加入扫描策略，对所有发现的Web资产进行自动化漏洞排查。</p>
+</li>
+</ul>
+<p>通过这种方式，Yakit将<strong>手动流量分析 (MITM)</strong>、<strong>半自动Payload测试 (Web Fuzzer)</strong> 与 <strong>全自动漏洞扫描 (PoC插件)</strong> 有机地结合起来，实现了从漏洞发现、验证、固化到规模化应用的全流程闭环，为安全工程师提供了强大而高效的武器库。</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/products/chapter-4/4-6"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">4.6 热加载与钩子</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/products/chapter-4/4-8"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">4.8 多包联动序列</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#471-poc生成实战以swagger-api定义检测为例" class="table-of-contents__link toc-highlight">4.7.1 PoC生成实战：以Swagger API定义检测为例</a><ul><li><a href="#设定探测目标与构造基础请求" class="table-of-contents__link toc-highlight">设定探测目标与构造基础请求</a></li><li><a href="#定义精准的验证规则" class="table-of-contents__link toc-highlight">定义精准的验证规则</a></li><li><a href="#规则验证与一键生成模版" class="table-of-contents__link toc-highlight">规则验证与一键生成模版</a></li></ul></li><li><a href="#472-更复杂的条件解读构建生产级poc规则" class="table-of-contents__link toc-highlight">4.7.2 更复杂的条件解读：构建生产级PoC规则</a><ul><li><a href="#4721-组合验证状态码与响应内容的双重确认" class="table-of-contents__link toc-highlight">4.7.2.1 组合验证：状态码与响应内容的双重确认</a></li><li><a href="#4722-多关键字验证提升特征识别精度" class="table-of-contents__link toc-highlight">4.7.2.2 多关键字验证：提升特征识别精度</a></li><li><a href="#4723-终极利器使用表达式dsl实现动态判断" class="table-of-contents__link toc-highlight">4.7.2.3 终极利器：使用表达式（DSL）实现动态判断</a></li></ul></li><li><a href="#473-从模板到插件poc的调试与固化" class="table-of-contents__link toc-highlight">4.7.3 从模板到插件：PoC的调试与固化</a><ul><li><a href="#4731-poc的在线调试与验证" class="table-of-contents__link toc-highlight">4.7.3.1 PoC的在线调试与验证</a></li><li><a href="#4732-调试工作流详解" class="table-of-contents__link toc-highlight">4.7.3.2 调试工作流详解</a></li><li><a href="#4733-保存为插件将能力资产化" class="table-of-contents__link toc-highlight">4.7.3.3 保存为插件：将能力资产化</a></li><li><a href="#4743-poc与核心模块的深度联动" class="table-of-contents__link toc-highlight">4.7.4.3 PoC与核心模块的深度联动</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+</body>
+</html>

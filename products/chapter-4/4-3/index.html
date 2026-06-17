@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr" class="docs-wrapper plugin-docs plugin-id-products docs-version-current docs-doc-page docs-doc-id-chapter-4/4-3" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">4.3 配置：精细控制测试行为 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-4/4-3"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="4.3 配置：精细控制测试行为 | Yak Program Language"><meta data-rh="true" name="description" content="在前面的章节中，我们探讨了两种核心的测试范式：交互式的单一请求操纵与参数化的批量测试。前者追求深度与精确，后者追求广度与效率。然而，要真正发挥这两种范式的威力，离不开一个强大而灵活的执行环境。本章将详细解读 Web Fuzzer 的“配置”面板，这些选项是您控制网络行为、并发策略、错误处理和解析逻辑的精密仪表盘，是实现从“能用”到“精通”的关键一步。"><meta data-rh="true" property="og:description" content="在前面的章节中，我们探讨了两种核心的测试范式：交互式的单一请求操纵与参数化的批量测试。前者追求深度与精确，后者追求广度与效率。然而，要真正发挥这两种范式的威力，离不开一个强大而灵活的执行环境。本章将详细解读 Web Fuzzer 的“配置”面板，这些选项是您控制网络行为、并发策略、错误处理和解析逻辑的精密仪表盘，是实现从“能用”到“精通”的关键一步。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-4/4-3"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-3" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-4/4-3" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-4/4-3" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"四、Web Fuzzer 模糊测试","item":"https://yaklang.com/products/chapter-4/overview"},{"@type":"ListItem","position":2,"name":"4.3 精细化配置","item":"https://yaklang.com/products/chapter-4/4-3"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
+<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
+<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Yak 语言文档</a><a class="navbar__item navbar__link" href="/api-manual/intro">API 手册</a><a class="navbar__item navbar__link" href="/products/intro">Yakit 手册</a><a class="navbar__item navbar__link" href="/blog">技术博客</a><a class="navbar__item navbar__link" href="/irify">静态代码分析</a><a class="navbar__item navbar__link" href="/Yaklab/yaklab">YakLab 手册</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">关于我们</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/team">关于我们</a></li><li><a class="dropdown__link" href="/cooperativePartner">合作伙伴</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">下载白皮书<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Github<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="languageSwitcher"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="20" height="20"><path d="M249.7536 378.5728c10.6496 31.6416 28.3648 59.0848 53.0432 83.2512 20.992-22.7328 36.7616-50.7904 47.0016-83.2512h-100.0448zM902.2464 191.488H511.2832L488.96 71.8848H125.952c-40.0384 0-72.6016 32.5632-72.6016 72.6016v617.1648c0 40.0384 32.5632 72.6016 72.6016 72.6016h330.9568l-26.5216 119.6032h471.9616c40.0384 0 72.6016-32.5632 72.6016-72.6016V264.192c-0.1024-40.1408-32.768-72.704-72.704-72.704zM409.3952 558.1824c-42.8032-15.7696-78.1312-35.84-106.5984-59.0848-29.7984 26.5216-67.072 46.08-110.2848 58.1632l-14.9504-24.6784c42.3936-11.1616 77.7216-27.9552 105.5744-51.712-28.7744-29.3888-48.8448-63.2832-60.1088-101.888h-40.448v-27.9552h105.5744c-6.5536-12.0832-14.9504-23.7568-24.6784-34.9184l27.9552-10.24c9.728 12.5952 18.6368 27.4432 26.5216 44.7488h100.9664v27.9552h-40.448c-13.0048 40.0384-31.6416 73.5232-56.32 100.5568 27.4432 21.9136 61.8496 40.0384 102.4 54.8864 0.1024 0.2048-15.1552 24.1664-15.1552 24.1664z m529.1008 322.56a36.352 36.352 0 0 1-36.352 36.352H475.9552l18.1248-83.2512h136.2944l-77.7216-433.2544-0.4096 2.3552-3.2768-17.3056 0.9216 0.4096-28.3648-158.3104h381.1328a36.352 36.352 0 0 1 36.352 36.352v616.6528h-0.512zM643.4816 538.2144h100.1472v-26.5216h-100.1472v-53.0432h106.5984V432.128H612.2496v190.7712h141.9264v-26.5216H643.4816v-58.1632z m208.9984-57.2416c-8.3968 0-15.7696 1.3312-22.7328 5.12-6.5536 3.2768-13.0048 8.3968-18.1248 14.9504v-16.2816H781.312v138.24h30.3104v-83.2512c0.9216-11.1616 4.7104-19.5584 11.1616-25.6 5.632-5.12 12.0832-7.9872 19.5584-7.9872 20.992 0 31.1296 11.1616 31.1296 33.9968v82.432h30.3104v-85.2992c0.8192-37.6832-16.896-56.32-51.3024-56.32z" p-id="4164"></path></svg></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/products/intro"><span title="手册总览" class="linkLabel_WmDU">手册总览</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-1/overview"><span title="一、统一安全工具平台" class="categoryLinkLabel_W154">一、统一安全工具平台</span></a><button aria-label="展开侧边栏分类 &#x27;一、统一安全工具平台&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-2/overview"><span title="二、基础功能与使用" class="categoryLinkLabel_W154">二、基础功能与使用</span></a><button aria-label="折叠侧边栏分类 &#x27;二、基础功能与使用&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-1"><span title="2.1 应用架构与安装" class="linkLabel_WmDU">2.1 应用架构与安装</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-2"><span title="2.2 界面与功能导航" class="linkLabel_WmDU">2.2 界面与功能导航</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/products/chapter-2/2-3/overview"><span title="2.3 工具集实践入门" class="categoryLinkLabel_W154">2.3 工具集实践入门</span></a><button aria-label="折叠侧边栏分类 &#x27;2.3 工具集实践入门&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-1"><span title="2.3.1 端口扫描" class="linkLabel_WmDU">2.3.1 端口扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-2"><span title="2.3.2 弱口令爆破" class="linkLabel_WmDU">2.3.2 弱口令爆破</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-3"><span title="2.3.3 目录扫描" class="linkLabel_WmDU">2.3.3 目录扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-4"><span title="2.3.4 资产测绘双引擎" class="linkLabel_WmDU">2.3.4 资产测绘双引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-5"><span title="2.3.5 Codec 编解码" class="linkLabel_WmDU">2.3.5 Codec 编解码</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-6"><span title="2.3.6 History 流量审计" class="linkLabel_WmDU">2.3.6 History 流量审计</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-7"><span title="2.3.7 综合反连 OOB" class="linkLabel_WmDU">2.3.7 综合反连 OOB</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-8"><span title="2.3.8 Yso-Hack Java 利用" class="linkLabel_WmDU">2.3.8 Yso-Hack Java 利用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-9"><span title="2.3.9 Vulinbox 靶场" class="linkLabel_WmDU">2.3.9 Vulinbox 靶场</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-10"><span title="2.3.10 Yak IDE" class="linkLabel_WmDU">2.3.10 Yak IDE</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-11"><span title="2.3.11 漏洞检测" class="linkLabel_WmDU">2.3.11 漏洞检测</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-12"><span title="2.3.12 数据库" class="linkLabel_WmDU">2.3.12 数据库</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-4"><span title="2.4 注意事项与原则" class="linkLabel_WmDU">2.4 注意事项与原则</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-3/overview"><span title="三、MITM 通信劫持" class="categoryLinkLabel_W154">三、MITM 通信劫持</span></a><button aria-label="折叠侧边栏分类 &#x27;三、MITM 通信劫持&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-1"><span title="3.1 MITM 技术原理" class="linkLabel_WmDU">3.1 MITM 技术原理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-2"><span title="3.2 MITM 基础使用" class="linkLabel_WmDU">3.2 MITM 基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-3"><span title="3.3 MITM 热加载进阶" class="linkLabel_WmDU">3.3 MITM 热加载进阶</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-4"><span title="3.4 高级流量操控" class="linkLabel_WmDU">3.4 高级流量操控</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-5"><span title="3.5 本章小结" class="linkLabel_WmDU">3.5 本章小结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/products/chapter-4/overview"><span title="四、Web Fuzzer 模糊测试" class="categoryLinkLabel_W154">四、Web Fuzzer 模糊测试</span></a><button aria-label="折叠侧边栏分类 &#x27;四、Web Fuzzer 模糊测试&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-1"><span title="4.1 Web Fuzzer 概述" class="linkLabel_WmDU">4.1 Web Fuzzer 概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-2"><span title="4.2 界面与基础使用" class="linkLabel_WmDU">4.2 界面与基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/products/chapter-4/4-3"><span title="4.3 精细化配置" class="linkLabel_WmDU">4.3 精细化配置</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-4"><span title="4.4 Fuzztag 构造引擎" class="linkLabel_WmDU">4.4 Fuzztag 构造引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-5"><span title="4.5 数据匹配与处理" class="linkLabel_WmDU">4.5 数据匹配与处理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-6"><span title="4.6 热加载与钩子" class="linkLabel_WmDU">4.6 热加载与钩子</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-7"><span title="4.7 生成 Yaml PoC" class="linkLabel_WmDU">4.7 生成 Yaml PoC</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-8"><span title="4.8 多包联动序列" class="linkLabel_WmDU">4.8 多包联动序列</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-9"><span title="4.9 本章总结" class="linkLabel_WmDU">4.9 本章总结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-5/overview"><span title="五、Yakit 插件系统" class="categoryLinkLabel_W154">五、Yakit 插件系统</span></a><button aria-label="折叠侧边栏分类 &#x27;五、Yakit 插件系统&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-1"><span title="5.1 插件系统概述" class="linkLabel_WmDU">5.1 插件系统概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-2"><span title="5.2 插件生态系统" class="linkLabel_WmDU">5.2 插件生态系统</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-3"><span title="5.3 插件编写指南" class="linkLabel_WmDU">5.3 插件编写指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-4"><span title="5.4 插件开发与调试" class="linkLabel_WmDU">5.4 插件开发与调试</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-5"><span title="5.5 常见错误与修复" class="linkLabel_WmDU">5.5 常见错误与修复</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/products/legacy/intro"><span title="旧版：Yakit 手册" class="categoryLinkLabel_W154">旧版：Yakit 手册</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/products/chapter-4/overview"><span>四、Web Fuzzer 模糊测试</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">4.3 精细化配置</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>4.3 配置：精细控制测试行为</h1></header>
+<p>在前面的章节中，我们探讨了两种核心的测试范式：交互式的单一请求操纵与参数化的批量测试。前者追求深度与精确，后者追求广度与效率。然而，要真正发挥这两种范式的威力，离不开一个强大而灵活的执行环境。本章将详细解读 Web Fuzzer 的“配置”面板，这些选项是您控制网络行为、并发策略、错误处理和解析逻辑的精密仪表盘，是实现从“能用”到“精通”的关键一步。</p>
+<p>掌握这些配置，意味着您可以将模糊测试从一次粗放的自动化扫描，升华为一场经过周密设计的、针对特定目标环境的、高成功率的技术评估。如图所示，通过点击侧边栏的“配置”按钮，即可展开完整的控制面板。接下来，我们将系统性地剖析每一个配置模块的核心价值与应用场景。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 配置面板展开示意图" src="/assets/images/ch4-010-494e38531028f48d4bac39f2a125e9da.png" width="651" height="556" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit Web Fuzzer 配置面板展开示意图</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="431-基础环境与网络配置">4.3.1 基础环境与网络配置<a href="#431-基础环境与网络配置" class="hash-link" aria-label="4.3.1 基础环境与网络配置的直接链接" title="4.3.1 基础环境与网络配置的直接链接" translate="no">​</a></h2>
+<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer基础环境配置界面" src="/assets/images/ch4-011-ae2d3ab73133f7849031cbb548a0d848.png" width="378" height="399" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit Web Fuzzer基础环境配置界面</p>
+<p>该配置模块为所有发出的测试请求设定了基础的网络环境与协议行为，是控制测试流量从何处发出、以何种形式封装、如何抵达目标的关键。精确地配置这些参数，是实现复杂场景测试（如绕过 CDN、测试国密合规性）的第一步。</p>
+<ul>
+<li class="">
+<p><strong>强制 HTTPS</strong>
+此开关开启后，所有测试请求的协议部分将强制转换为 <code>https</code>。在现代 Web 应用中，HTTP 和 HTTPS 端口背后可能由不同的服务器或配置进行处理，其应用逻辑与安全策略也可能存在差异。启用此选项可确保测试流量始终针对加密的应用入口，这对于评估生产环境中主流配置的安全性至关重要。</p>
+</li>
+<li class="">
+<p><strong>TLS 配置</strong>
+此选项提供了对客户端 TLS 握手行为的精细控制，其功能类似于在通信劫持（MITM）模块中对 TLS 协议的配置。</p>
+<ul>
+<li class="">
+<p><strong>国密 TLS</strong>：启用后，客户端（Web Fuzzer）在发起 TLS 握手时，将优先使用并宣告支持中国国家密码标准算法套件（如 SM2, SM3, SM4）。这对于测试需要满足国家等保或金融行业合规性要求的系统是必不可少的功能。</p>
+</li>
+<li class="">
+<p><strong>随机 TLS</strong>：该功能通过随机化 TLS 握手中的参数（如 Cipher Suites 的顺序、扩展等），生成变化的 JA3/JA4 指纹。这是一种有效的反指纹识别技术，可以用于规避某些基于客户端 TLS 指纹进行识别和封禁的高级安全策略。</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>真实 Host</strong>
+该配置允许用户在发送请求时，将 TCP/IP 连接的目标地址与 HTTP <code>Host</code> 请求头的内容分离。其核心应用场景在于测试位于内容分发网络（CDN）、负载均衡器或反向代理背后的源站服务器。通过将目标服务器的真实 IP 填入，同时在 <code>Host</code> 头中保留业务域名，测试流量可以绕过前端的防护与加速设施，直接对后端应用逻辑进行深入探测。</p>
+</li>
+<li class="">
+<p><strong>设置代理 / 禁用系统代理</strong>
+这两个选项共同构成了 Fuzzer 灵活的流量出口策略。用户可以手动“设置代理”，将 Fuzzer 的所有流量转发至另一个分析工具（如上游抓包代理）以构建复杂的工具链。反之，“禁用系统代理”则确保 Fuzzer 的流量完全独立，不受操作系统级别代理配置的影响，从而保证测试环境的纯净与测试结果的一致性。</p>
+</li>
+<li class="">
+<p><strong>前端渲染数量</strong>
+这是一个关键的性能优化设计。当使用 Fuzztag 生成海量的测试用例（可能多达数十万甚至数百万）时，将所有请求数据一次性加载到用户界面会导致浏览器性能瓶颈甚至崩溃。此配置项定义了仅在“序列”面板中预览展示的请求数量。后台数据库会完整记录所有生成的测试用例，而前端仅渲染此有限数量作为样本，既能让用户直观预览生成结果，又保证了大规模测试下工具界面的流畅性。</p>
+</li>
+<li class="">
+<p><strong>响应体长度限制</strong>
+此为一项重要的自我保护和资源控制机制。在模糊测试中，特定 payload 有可能意外触发服务器返回巨量数据（例如，一个无限制的日志文件或数据库 dump）。通过设定一个合理的响应体大小上限（如 5 MB），可以有效防止 Fuzzer 因处理单个超大响应而耗尽内存或陷入长时间等待，从而确保整体测试任务的稳定与高效。</p>
+</li>
+<li class="">
+<p><strong>SNI 配置</strong>
+SNI (Server Name Indication) 是 TLS 协议的一项关键扩展，它允许客户端在 TLS 握手的初始阶段（ClientHello 消息中）就告知服务器其希望访问的具体域名。这一机制使得单个 IP 地址可以托管多个不同域名的 HTTPS 网站，服务器能够根据 SNI 值返回正确的 TLS 证书。</p>
+<ul>
+<li class="">
+<p><strong>自动</strong>：Yakit 会自动从目标 URL 中提取主机名并填入 SNI 字段，这是标准行为。</p>
+</li>
+<li class="">
+<p><strong>强制</strong>：允许手动指定一个 SNI 值，可用于测试服务器对 SNI 与 HTTP Host 头不一致时的处理逻辑，是发现某些路由或配置类漏洞的高级技巧。</p>
+</li>
+<li class="">
+<p><strong>清空</strong>：发送不含 SNI 信息的 ClientHello 握手包，可用于模拟不支持 SNI 的老旧客户端，或探测服务器在接收到此类请求时的默认行为。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="432-请求包与-fuzz-策略配置">4.3.2 请求包与 Fuzz 策略配置<a href="#432-请求包与-fuzz-策略配置" class="hash-link" aria-label="4.3.2 请求包与 Fuzz 策略配置的直接链接" title="4.3.2 请求包与 Fuzz 策略配置的直接链接" translate="no">​</a></h2>
+<p>如果说基础网络配置决定了测试流量的“传输管道”，那么本模块则直接定义了“管道”中流淌的“数据内容”及其生成逻辑。这些配置是模糊测试的核心引擎，控制着从 Payload 生成到最终请求发送的每一个关键环节，其设计的灵活性和精确性直接决定了测试的深度与广度。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer 请求包配置界面截图" src="/assets/images/ch4-012-f7ba99e698089755549e0c5a5568ca3d.png" width="371" height="378" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit Web Fuzzer 请求包配置界面截图</p>
+<ul>
+<li class="">
+<p><strong>Fuzztag 辅助</strong>
+这是一个旨在提升 Fuzztag 语法编写效率的用户界面（UI）辅助工具。它提供了快捷插入 <code>yak.fuzz</code> 语法模板的功能，可以帮助用户快速构建复杂的测试逻辑，减少手动输入的错误。关于 Fuzztag 语法的完整体系和高级用法，我们将在 4.4 章节中进行系统性的深入讲解。</p>
+</li>
+<li class="">
+<p><strong>渲染 Fuzz (开关)</strong>
+此为模糊测试功能的总开关。</p>
+<ul>
+<li class="">
+<p><strong>关闭</strong>：Fuzzer 将不会解析和执行请求中的任何 Fuzztag 语法，仅发送原始的、未经修改的请求包。</p>
+</li>
+<li class="">
+<p><strong>标准</strong>：启用标准的 Fuzztag 渲染引擎。这是推荐的默认模式，用于执行所有 <code>yak.fuzz</code> 语法定义的测试逻辑。</p>
+</li>
+<li class="">
+<p><strong>兼容</strong>：用于支持某些旧版本 Yakit 的特定语法，不推荐在新项目中使用，主要用于保障历史任务的可迁移性。</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>渲染模式</strong>
+当一个请求中包含多个 Fuzztag 时，此模式定义了这些 Fuzztag 的负载（Payload）如何组合。</p>
+<ul>
+<li class="">
+<p><strong>交叉乘积 (Cartesian Product)</strong>：此模式将创建所有 Fuzztag 负载集的笛卡尔积。例如，若请求中存在两个 Fuzztag，<code>tagA</code> 有 10 个负载，<code>tagB</code> 有 5 个负载，则此模式将生成 <code>10 * 5 = 50</code> 个独立的请求，覆盖所有参数的组合可能。这是一种最彻底的测试方式，适用于需要验证不同参数交互影响的场景。</p>
+</li>
+<li class="">
+<p><strong>草叉 / 同步 (Pitchfork / Synchronous)</strong>：此模式对多个 Fuzztag 的负载列表进行同步迭代。在上述例子中，该模式将生成 10 个请求（取最长列表的长度）。第一个请求使用 <code>tagA[0]</code> 和 <code>tagB[0]</code>，第二个请求使用 <code>tagA[1]</code> 和 <code>tagB[1]</code>，以此类推。当某个列表较短时，其行为取决于具体配置。该模式适用于负载之间存在一一对应关系的场景，如使用用户名和密码列表进行凭据爆破，效率更高。</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>禁用热加载</strong>
+这是一个确保长时间任务稳定性的重要开关。Yakit 支持“热加载”机制，允许在任务运行时动态修改请求模板。禁用此功能后，Fuzzer 将在任务启动时锁定当前配置和请求模板，后续的任何修改都不会影响正在运行的测试任务，从而保证了测试过程的一致性和结果的可复现性。关于热加载机制的详细原理，我们将在 4.6 章节中探讨。</p>
+</li>
+<li class="">
+<p><strong>不修复长度</strong>
+一个专为高级安全测试设计的选项。默认情况下，Fuzzer 会在每次修改请求体（Body）后，自动重新计算 <code>Content-Length</code> 请求头的值以确保请求的合法性。当启用“不修复长度”后，Fuzzer 将发送原始的、可能与实际 Body 长度不符的 <code>Content-Length</code>。这是进行 HTTP 请求走私（HTTP Request Smuggling）等协议层漏洞测试的关键技术。</p>
+</li>
+<li class="">
+<p><strong>超时时长</strong>
+此配置将超时概念分解为两个不同阶段，提供了更精细的网络容错控制。</p>
+<ul>
+<li class="">
+<p><strong>连接 (Connection Timeout)</strong>：定义了发起 TCP 握手到成功建立连接所允许的最长时间。如果在此时间内无法与目标服务器建立 TCP 连接，请求将被判定为失败。</p>
+</li>
+<li class="">
+<p><strong>响应 (Response Timeout)</strong>：定义了在成功建立连接并发送请求后，等待服务器返回响应数据的最长时间。如果在该时间内未收到任何响应数据，请求将被判定为超时。</p>
+</li>
+</ul>
+</li>
+<li class="">
+<p><strong>批量目标</strong>
+这是一项极其强大的功能，它将请求模板与测试目标进行了解耦，实现了“一次定义，多处执行”的测试模式。其基本原理是：用户提供一个固定的 HTTP 请求模板（包含 Fuzztag），并额外提供一个目标列表。Fuzzer 会遍历这个列表，将模板请求依次发送到每一个目标。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit批量目标配置弹窗界面" src="/assets/images/ch4-013-c6a1c5813ecf4fbf26f8e59bc0639f07.png" width="742" height="290" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit批量目标配置弹窗界面</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">- **配置方式**：用户可以手动粘贴或上传文件（如 TXT）来提供目标列表，每个目标占一行。目标格式可以是 `host`、`host:port` 或完整的 URL 如 `https://example.com`。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- **执行逻辑**：当批量目标列表中的条目是完整的 URL 时，该 URL 的协议（http/https）和主机信息将覆盖原始请求包中的设定。</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- **应用案例**：在某一高危漏洞（如 Log4Shell）爆发时，安全工程师可以构建一个包含验证 Payload 的标准请求包，然后将资产清单中所有可能受影响的服务器 IP 或域名作为“批量目标”导入，即可快速完成对所有资产的批量化漏洞验证，极大地提升了应急响应的效率。</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="433-并发策略与速率控制">4.3.3 并发策略与速率控制<a href="#433-并发策略与速率控制" class="hash-link" aria-label="4.3.3 并发策略与速率控制的直接链接" title="4.3.3 并发策略与速率控制的直接链接" translate="no">​</a></h2>
+<p>在前序小节中，我们定义了请求的传输通道与内容构造逻辑。本小节将聚焦于请求的“发射”行为本身——即以何种速率、何种模式将这些精心构造的请求发送至目标。这是一项对测试效率、目标系统压力以及隐蔽性进行综合平衡的关键配置，它直接决定了测试任务的执行特性。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit Web Fuzzer并发配置界面截图" src="/assets/images/ch4-014-9e6b2230c807e5a026bef08a9147dcbc.png" width="363" height="285" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit Web Fuzzer并发配置界面截图</p>
+<ul>
+<li class="">
+<p><strong>禁用连接池</strong>
+此选项控制是否复用底层的 TCP 连接（即 HTTP Keep-Alive 机制）。在默认情况下（连接池启用），Yakit 会维持与目标服务器的持久连接，并在该连接上发送多个 HTTP 请求。这极大地减少了因反复进行 TCP 握手和 TLS 握手带来的性能开销，显著提升了发包速率。</p>
+</li>
+<li class="">
+<p>然而，我们必须辩证地看待此项技术。在某些特定测试场景下，禁用连接池，即为每个请求建立一个全新的 TCP 连接，是必要且唯一的选择：</p>
+<ol>
+<li class="">
+<p><strong>状态隔离</strong>：某些服务器或中间件可能会将应用层状态（如会话信息）与 TCP 连接进行绑定。复用连接可能导致后续请求继承了非预期的状态，从而污染测试结果。</p>
+</li>
+<li class="">
+<p><strong>协议层测试</strong>：在进行负载均衡算法探测或某些特定协议漏洞（如部分请求走私场景）的测试时，需要确保每个请求都经历完整的连接建立过程，以观察服务器的初始响应行为。</p>
+</li>
+<li class="">
+<p><strong>模拟多样化客户端</strong>：模拟大量不支持 Keep-Alive 的客户端行为，对服务器的连接处理能力进行压力测试。 因此，此选项是在追求极致性能与保障测试独立性之间进行权衡的关键开关。</p>
+</li>
+</ol>
+</li>
+<li class="">
+<p><strong>重复发包</strong>
+该配置项允许将每一个经过 Fuzztag 渲染后生成的独立请求，重复发送指定的次数。其核心应用场景是为了在极短的时间窗口内，向服务器的同一处理逻辑施加集中的、瞬时的压力。这对于探测和利用条件竞争（Race Condition）漏洞至关重要。例如，在测试一个兑换码功能时，通过将兑换请求重复发送 10 次，可以有效增加在后台系统校验有效性与将其置为已使用状态之间的微小间隙内，成功兑换多次的概率。</p>
+</li>
+<li class="">
+<p><strong>并发线程与随机延迟</strong>
+这两个参数共同构成了 Fuzzer 的核心速率控制引擎。</p>
+<ul>
+<li class="">
+<p><strong>并发线程 (Concurrency)</strong>：定义了同时执行发包任务的工作线程数量。<strong>一个常见的误区是将其等同于每秒请求数（RPS）</strong>。并发数代表的是“在任何时刻，有多少个请求正处于‘飞行’中（即已发送但未收到完整响应）”。实际的 RPS 取决于并发数和目标的平均响应延迟，其关系大致为 <code>RPS ≈ 并发线程数 / 平均请求响应时间</code>。</p>
+</li>
+<li class="">
+<p><strong>随机延迟 (Random Delay)</strong>：定义了每个工作线程在完成一次请求后，到发起下一次请求之间需要等待的时间。设置为一个区间（Min/Max）可以使发包间隔变得不规律，有效模拟人类用户的行为，从而在一定程度上规避基于固定请求频率的 WAF/IPS 防护策略。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="434-响应处理重试与重定向策略">4.3.4 响应处理：重试与重定向策略<a href="#434-响应处理重试与重定向策略" class="hash-link" aria-label="4.3.4 响应处理：重试与重定向策略的直接链接" title="4.3.4 响应处理：重试与重定向策略的直接链接" translate="no">​</a></h2>
+<p>在定义了请求的构造和发送策略后，下一步是规划如何处理服务器的响应，尤其是在面对非理想网络环境和复杂的应用逻辑时。本节将深入探讨两个响应处理机制：请求重试与自动重定向。这二者共同构成了 Fuzzer 的可靠性工程与智能导航系统，确保测试任务能够在多变的条件下稳健运行并触达最终的应用端点。</p>
+<p><img decoding="async" loading="lazy" alt="Web Fuzzer重试与重定向配置界面" src="/assets/images/ch4-015-2b0c25b61a5966d062e40b066ef2e053.png" width="723" height="269" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Web Fuzzer重试与重定向配置界面</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="重试配置-retry">重试配置 (Retry)<a href="#重试配置-retry" class="hash-link" aria-label="重试配置 (Retry)的直接链接" title="重试配置 (Retry)的直接链接" translate="no">​</a></h3>
+<p>重试机制是为应对网络中的瞬时故障或服务端临时不可用而设计的容错策略。它避免了因单次网络抖动或偶发性服务器错误（如 <code>502 Bad Gateway</code>）而导致整个测试用例被误判为失败。</p>
+<ul>
+<li class="">
+<p><strong>配置与执行逻辑</strong>：用户可以设定“重试次数”，并定义触发重试的“重试条件”。条件通常基于不成功的 HTTP 状态码（例如，默认不为 <code>200</code>-<code>399</code> 的响应都可能触发重试）。当一次请求的响应满足重试条件时，Fuzzer 不会立即将其标记为失败，而是自动重新发送该请求，直至达到重试次数上限。</p>
+</li>
+<li class="">
+<p><strong>结果判定</strong>：如果在重试次数内，某次请求获得了成功的响应（不满足重试条件），那么该测试用例的最终结果将被记录为“成功”。只有当所有重试尝试均告失败后，该请求才会被最终归类到“失败请求列表”中。这种设计确保了测试结果能够最大限度地排除网络层面的干扰。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="重定向配置-redirection">重定向配置 (Redirection)<a href="#重定向配置-redirection" class="hash-link" aria-label="重定向配置 (Redirection)的直接链接" title="重定向配置 (Redirection)的直接链接" translate="no">​</a></h3>
+<p>在现代 Web 应用中，通过重定向（Redirect）来引导用户或程序流转是常见做法。Fuzzer 具备智能跟踪重定向的能力，以确保测试 Payload 能够作用于最终的目标页面。</p>
+<ul>
+<li class="">
+<p><strong>标准重定向</strong>：默认情况下，Yakit 会自动处理两种标准的重定向方式：</p>
+<ol>
+<li class="">
+<p><strong>HTTP 状态码重定向</strong>：遵循 <code>3xx</code> 响应码（如 <code>301</code>, <code>302</code>, <code>307</code>）中的 <code>Location</code> 头，自动向新地址发起请求。</p>
+</li>
+<li class="">
+<p><strong>Meta 标签重定向</strong>：解析 HTML 响应体中的 <code>&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0;url=...&quot;&gt;</code> 标签，并跳转到指定的 URL。 用户可以通过“重定向次数”来限制跟踪跳转的深度，防止陷入无限重定向循环。</p>
+</li>
+</ol>
+</li>
+<li class="">
+<p><strong>JS 重定向（实验性支持）</strong>：此选项尝试通过静态分析响应体中的 JavaScript 代码（如匹配 <code>window.location.href</code> 等模式）来识别并跟踪由脚本发起的重定向。然而，<strong>用户必须清醒地认识到其局限性：Web Fuzzer 本身并不具备 JavaScript 执行引擎。</strong> 这意味着它无法处理动态生成、经过混淆或依赖异步事件的重定向逻辑。因此，该功能属于一种“尽力而为”的启发式探测，其结果并不完全可靠，在严肃的测试场景下需谨慎使用并结合其他工具进行验证。</p>
+</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="435-网络基础dns-与-hosts-映射">4.3.5 网络基础：DNS 与 Hosts 映射<a href="#435-网络基础dns-与-hosts-映射" class="hash-link" aria-label="4.3.5 网络基础：DNS 与 Hosts 映射的直接链接" title="4.3.5 网络基础：DNS 与 Hosts 映射的直接链接" translate="no">​</a></h2>
+<p>至此，我们已完成应用层请求的全部配置。最后一步是回归网络基础，定义域名到 IP 地址的解析方式。如第三章所述，精确控制 DNS 解析是确保测试流量被发送至正确目标的前提。本模块提供了独立于系统配置的、任务级别的 DNS 控制能力。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit工具DNS配置与Hosts映射界面" src="/assets/images/ch4-016-c4bad0ddcd75261f5e4fdb826b2d62fe.png" width="392" height="161" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit工具DNS配置与Hosts映射界面</p>
+<ul>
+<li class="">
+<p><strong>DNS 服务器</strong>
+该配置允许用户为当前 Fuzzer 任务指定一个特定的 DNS 服务器地址。所有在此任务中产生的域名解析请求都将通过该服务器进行，而不是使用操作系统默认的 DNS 设置。这在需要使用内部 DNS 服务解析内网域名，或使用特定公共 DNS（如 <code>1.1.2.2</code>）进行故障排查时非常有用。</p>
+</li>
+<li class="">
+<p><strong>Hosts 配置</strong>
+Hosts 映射提供了对域名解析的最高优先级控制，其原理与操作系统的 <code>hosts</code> 文件完全一致。用户可以在此直接添加“IP 地址 主机名”的映射关系。当 Fuzzer 需要解析一个域名时，会优先查询此处的 Hosts 映射表。</p>
+</li>
+<li class="">
+<p>该功能在以下专业场景中具有核心价值：</p>
+<ol>
+<li class="">
+<p><strong>绕过 CDN/负载均衡</strong>：在进行安全审计或性能测试时，通常需要绕过 CDN 或负载均衡器，直接对后端的某台源站服务器进行测试。通过 Hosts 配置，可以将站点域名直接指向源站服务器的 IP 地址。</p>
+</li>
+<li class="">
+<p><strong>预上线环境测试</strong>：在应用迁移或新功能上线前，可以在不修改任何公开 DNS 记录的情况下，将生产环境的域名指向预发布服务器的 IP，从而在隔离环境中用真实域名进行完整的回归测试。</p>
+</li>
+<li class="">
+<p><strong>构建确定性环境</strong>：确保测试流量的去向完全确定，不受公共 DNS 缓存、污染或解析故障的影响，为测试结果的可复现性提供坚实保障。</p>
+</li>
+</ol>
+</li>
+</ul></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/products/chapter-4/4-2"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">4.2 界面与基础使用</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/products/chapter-4/4-4"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">4.4 Fuzztag 构造引擎</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#431-基础环境与网络配置" class="table-of-contents__link toc-highlight">4.3.1 基础环境与网络配置</a></li><li><a href="#432-请求包与-fuzz-策略配置" class="table-of-contents__link toc-highlight">4.3.2 请求包与 Fuzz 策略配置</a></li><li><a href="#433-并发策略与速率控制" class="table-of-contents__link toc-highlight">4.3.3 并发策略与速率控制</a></li><li><a href="#434-响应处理重试与重定向策略" class="table-of-contents__link toc-highlight">4.3.4 响应处理：重试与重定向策略</a><ul><li><a href="#重试配置-retry" class="table-of-contents__link toc-highlight">重试配置 (Retry)</a></li><li><a href="#重定向配置-redirection" class="table-of-contents__link toc-highlight">重定向配置 (Redirection)</a></li></ul></li><li><a href="#435-网络基础dns-与-hosts-映射" class="table-of-contents__link toc-highlight">4.3.5 网络基础：DNS 与 Hosts 映射</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+</body>
+</html>

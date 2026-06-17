@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr" class="docs-wrapper plugin-docs plugin-id-products docs-version-current docs-doc-page docs-doc-id-chapter-2/2-3/2-3-11" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">2.3.11 漏洞检测：自动化扫描的工程化实践 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-2/2-3/2-3-11"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="2.3.11 漏洞检测：自动化扫描的工程化实践 | Yak Program Language"><meta data-rh="true" name="description" content="在前续章节中，我们已经系统性地掌握了如何通过主动探测（如端口扫描）和被动分析（如历史流量审查）等手段，对目标资产进行全面的信息收集与特征描绘。然而，这些情报的最终价值在于指导我们发现并确认实际存在的安全风险。至此，我们的工作重心将从“资产识别”自然过渡到“漏洞验证”，而 Yakit 的漏洞检测（Vulnerability Detection）模块正是承载这一核心使命的工程化中枢。"><meta data-rh="true" property="og:description" content="在前续章节中，我们已经系统性地掌握了如何通过主动探测（如端口扫描）和被动分析（如历史流量审查）等手段，对目标资产进行全面的信息收集与特征描绘。然而，这些情报的最终价值在于指导我们发现并确认实际存在的安全风险。至此，我们的工作重心将从“资产识别”自然过渡到“漏洞验证”，而 Yakit 的漏洞检测（Vulnerability Detection）模块正是承载这一核心使命的工程化中枢。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-2/2-3/2-3-11"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-11" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-2/2-3/2-3-11" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-2/2-3/2-3-11" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"二、基础功能与使用","item":"https://yaklang.com/products/chapter-2/overview"},{"@type":"ListItem","position":2,"name":"2.3 工具集实践入门","item":"https://yaklang.com/products/chapter-2/2-3/overview"},{"@type":"ListItem","position":3,"name":"2.3.11 漏洞检测","item":"https://yaklang.com/products/chapter-2/2-3/2-3-11"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
+<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
+<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Yak 语言文档</a><a class="navbar__item navbar__link" href="/api-manual/intro">API 手册</a><a class="navbar__item navbar__link" href="/products/intro">Yakit 手册</a><a class="navbar__item navbar__link" href="/blog">技术博客</a><a class="navbar__item navbar__link" href="/irify">静态代码分析</a><a class="navbar__item navbar__link" href="/Yaklab/yaklab">YakLab 手册</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">关于我们</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/team">关于我们</a></li><li><a class="dropdown__link" href="/cooperativePartner">合作伙伴</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">下载白皮书<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Github<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="languageSwitcher"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="20" height="20"><path d="M249.7536 378.5728c10.6496 31.6416 28.3648 59.0848 53.0432 83.2512 20.992-22.7328 36.7616-50.7904 47.0016-83.2512h-100.0448zM902.2464 191.488H511.2832L488.96 71.8848H125.952c-40.0384 0-72.6016 32.5632-72.6016 72.6016v617.1648c0 40.0384 32.5632 72.6016 72.6016 72.6016h330.9568l-26.5216 119.6032h471.9616c40.0384 0 72.6016-32.5632 72.6016-72.6016V264.192c-0.1024-40.1408-32.768-72.704-72.704-72.704zM409.3952 558.1824c-42.8032-15.7696-78.1312-35.84-106.5984-59.0848-29.7984 26.5216-67.072 46.08-110.2848 58.1632l-14.9504-24.6784c42.3936-11.1616 77.7216-27.9552 105.5744-51.712-28.7744-29.3888-48.8448-63.2832-60.1088-101.888h-40.448v-27.9552h105.5744c-6.5536-12.0832-14.9504-23.7568-24.6784-34.9184l27.9552-10.24c9.728 12.5952 18.6368 27.4432 26.5216 44.7488h100.9664v27.9552h-40.448c-13.0048 40.0384-31.6416 73.5232-56.32 100.5568 27.4432 21.9136 61.8496 40.0384 102.4 54.8864 0.1024 0.2048-15.1552 24.1664-15.1552 24.1664z m529.1008 322.56a36.352 36.352 0 0 1-36.352 36.352H475.9552l18.1248-83.2512h136.2944l-77.7216-433.2544-0.4096 2.3552-3.2768-17.3056 0.9216 0.4096-28.3648-158.3104h381.1328a36.352 36.352 0 0 1 36.352 36.352v616.6528h-0.512zM643.4816 538.2144h100.1472v-26.5216h-100.1472v-53.0432h106.5984V432.128H612.2496v190.7712h141.9264v-26.5216H643.4816v-58.1632z m208.9984-57.2416c-8.3968 0-15.7696 1.3312-22.7328 5.12-6.5536 3.2768-13.0048 8.3968-18.1248 14.9504v-16.2816H781.312v138.24h30.3104v-83.2512c0.9216-11.1616 4.7104-19.5584 11.1616-25.6 5.632-5.12 12.0832-7.9872 19.5584-7.9872 20.992 0 31.1296 11.1616 31.1296 33.9968v82.432h30.3104v-85.2992c0.8192-37.6832-16.896-56.32-51.3024-56.32z" p-id="4164"></path></svg></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/products/intro"><span title="手册总览" class="linkLabel_WmDU">手册总览</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-1/overview"><span title="一、统一安全工具平台" class="categoryLinkLabel_W154">一、统一安全工具平台</span></a><button aria-label="展开侧边栏分类 &#x27;一、统一安全工具平台&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/products/chapter-2/overview"><span title="二、基础功能与使用" class="categoryLinkLabel_W154">二、基础功能与使用</span></a><button aria-label="折叠侧边栏分类 &#x27;二、基础功能与使用&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-1"><span title="2.1 应用架构与安装" class="linkLabel_WmDU">2.1 应用架构与安装</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-2"><span title="2.2 界面与功能导航" class="linkLabel_WmDU">2.2 界面与功能导航</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex="0" href="/products/chapter-2/2-3/overview"><span title="2.3 工具集实践入门" class="categoryLinkLabel_W154">2.3 工具集实践入门</span></a><button aria-label="折叠侧边栏分类 &#x27;2.3 工具集实践入门&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-1"><span title="2.3.1 端口扫描" class="linkLabel_WmDU">2.3.1 端口扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-2"><span title="2.3.2 弱口令爆破" class="linkLabel_WmDU">2.3.2 弱口令爆破</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-3"><span title="2.3.3 目录扫描" class="linkLabel_WmDU">2.3.3 目录扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-4"><span title="2.3.4 资产测绘双引擎" class="linkLabel_WmDU">2.3.4 资产测绘双引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-5"><span title="2.3.5 Codec 编解码" class="linkLabel_WmDU">2.3.5 Codec 编解码</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-6"><span title="2.3.6 History 流量审计" class="linkLabel_WmDU">2.3.6 History 流量审计</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-7"><span title="2.3.7 综合反连 OOB" class="linkLabel_WmDU">2.3.7 综合反连 OOB</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-8"><span title="2.3.8 Yso-Hack Java 利用" class="linkLabel_WmDU">2.3.8 Yso-Hack Java 利用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-9"><span title="2.3.9 Vulinbox 靶场" class="linkLabel_WmDU">2.3.9 Vulinbox 靶场</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-10"><span title="2.3.10 Yak IDE" class="linkLabel_WmDU">2.3.10 Yak IDE</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/products/chapter-2/2-3/2-3-11"><span title="2.3.11 漏洞检测" class="linkLabel_WmDU">2.3.11 漏洞检测</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-12"><span title="2.3.12 数据库" class="linkLabel_WmDU">2.3.12 数据库</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-4"><span title="2.4 注意事项与原则" class="linkLabel_WmDU">2.4 注意事项与原则</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-3/overview"><span title="三、MITM 通信劫持" class="categoryLinkLabel_W154">三、MITM 通信劫持</span></a><button aria-label="折叠侧边栏分类 &#x27;三、MITM 通信劫持&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-1"><span title="3.1 MITM 技术原理" class="linkLabel_WmDU">3.1 MITM 技术原理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-2"><span title="3.2 MITM 基础使用" class="linkLabel_WmDU">3.2 MITM 基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-3"><span title="3.3 MITM 热加载进阶" class="linkLabel_WmDU">3.3 MITM 热加载进阶</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-4"><span title="3.4 高级流量操控" class="linkLabel_WmDU">3.4 高级流量操控</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-5"><span title="3.5 本章小结" class="linkLabel_WmDU">3.5 本章小结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-4/overview"><span title="四、Web Fuzzer 模糊测试" class="categoryLinkLabel_W154">四、Web Fuzzer 模糊测试</span></a><button aria-label="折叠侧边栏分类 &#x27;四、Web Fuzzer 模糊测试&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-1"><span title="4.1 Web Fuzzer 概述" class="linkLabel_WmDU">4.1 Web Fuzzer 概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-2"><span title="4.2 界面与基础使用" class="linkLabel_WmDU">4.2 界面与基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-3"><span title="4.3 精细化配置" class="linkLabel_WmDU">4.3 精细化配置</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-4"><span title="4.4 Fuzztag 构造引擎" class="linkLabel_WmDU">4.4 Fuzztag 构造引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-5"><span title="4.5 数据匹配与处理" class="linkLabel_WmDU">4.5 数据匹配与处理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-6"><span title="4.6 热加载与钩子" class="linkLabel_WmDU">4.6 热加载与钩子</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-7"><span title="4.7 生成 Yaml PoC" class="linkLabel_WmDU">4.7 生成 Yaml PoC</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-8"><span title="4.8 多包联动序列" class="linkLabel_WmDU">4.8 多包联动序列</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-9"><span title="4.9 本章总结" class="linkLabel_WmDU">4.9 本章总结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-5/overview"><span title="五、Yakit 插件系统" class="categoryLinkLabel_W154">五、Yakit 插件系统</span></a><button aria-label="折叠侧边栏分类 &#x27;五、Yakit 插件系统&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-1"><span title="5.1 插件系统概述" class="linkLabel_WmDU">5.1 插件系统概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-2"><span title="5.2 插件生态系统" class="linkLabel_WmDU">5.2 插件生态系统</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-3"><span title="5.3 插件编写指南" class="linkLabel_WmDU">5.3 插件编写指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-4"><span title="5.4 插件开发与调试" class="linkLabel_WmDU">5.4 插件开发与调试</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-5"><span title="5.5 常见错误与修复" class="linkLabel_WmDU">5.5 常见错误与修复</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/products/legacy/intro"><span title="旧版：Yakit 手册" class="categoryLinkLabel_W154">旧版：Yakit 手册</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/products/chapter-2/overview"><span>二、基础功能与使用</span></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/products/chapter-2/2-3/overview"><span>2.3 工具集实践入门</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">2.3.11 漏洞检测</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>2.3.11 漏洞检测：自动化扫描的工程化实践</h1></header>
+<p>在前续章节中，我们已经系统性地掌握了如何通过主动探测（如端口扫描）和被动分析（如历史流量审查）等手段，对目标资产进行全面的信息收集与特征描绘。然而，这些情报的最终价值在于指导我们发现并确认实际存在的安全风险。至此，我们的工作重心将从“资产识别”自然过渡到“漏洞验证”，而 Yakit 的**漏洞检测（Vulnerability Detection）**模块正是承载这一核心使命的工程化中枢。</p>
+<p>本章将深入剖析 Yakit 漏洞检测模块的架构设计与实战应用。其核心设计目标是将安全专家的经验与洞察力，固化为可大规模、自动化执行的标准化检测流程，从而将安全评估从依赖个人技巧的手工劳动，提升至工业级的效率与覆盖面。本章的学习将围绕两大主题展开：</p>
+<ol>
+<li class="">
+<p><strong>漏洞检测的工程化理念与工作流编排：</strong> 我们将首先从设计层面，解析该模块如何将复杂的安全测试抽象为标准化的任务单元。这包括理解<strong>专项漏洞扫描</strong>与<strong>批量执行</strong>两种核心工作模式的适用场景与实现原理，以及它们是如何通过统一的接口来编排和调度底层 Yak 插件的。</p>
+</li>
+<li class="">
+<p><strong>基于 Yak 插件库的高效扫描实践：</strong> 理论之后，我们将转向实践。您将学习如何根据具体测试需求，从 Yakit 丰富的插件库中筛选合适的检测脚本，如何精细化配置扫描任务（包括目标范围、并发参数与认证信息等），以及如何解读和验证扫描结果，最终形成一个从“任务创建”到“风险确认”的完整、高效的测试闭环。</p>
+</li>
+</ol>
+<p>通过本章的学习，您将不再仅仅是安全插件的使用者，而是能够驾驭 Yakit 自动化扫描引擎，将平台强大的插件生态转化为可量化、可复现的、高效率的安全评估能力。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23111-双模式解析漏洞检测功能详解">2.3.11.1 双模式解析：漏洞检测功能详解<a href="#23111-双模式解析漏洞检测功能详解" class="hash-link" aria-label="2.3.11.1 双模式解析：漏洞检测功能详解的直接链接" title="2.3.11.1 双模式解析：漏洞检测功能详解的直接链接" translate="no">​</a></h3>
+<p>Yakit 的漏洞检测模块提供了两种既独立又互补的工作模式：“<strong>专项漏洞扫描</strong>” 和 “<strong>批量执行</strong>”。这种设计旨在平衡扫描的 <strong>深度</strong> 与 <strong>广度</strong>，让安全工程师能够根据测试目标和阶段，灵活选择最高效的检测策略。</p>
+<ul>
+<li class="">
+<p><strong>专项漏洞扫描</strong>：此模式聚焦于特定类型的漏洞，将相关的检测插件预先归类分组（如 Java 框架漏洞、SQL 注入、安全产品漏洞等）。其核心价值在于 “<strong>深度挖掘</strong>” 和 “<strong>快速集火</strong>”，适用于应急响应、已知高危漏洞排查或对特定技术栈进行专项审计的场景。</p>
+</li>
+<li class="">
+<p><strong>批量执行</strong>：此模式则赋予用户完全的自主权，可以从完整的插件库中 <strong>自由组合</strong> 任意数量、任意类型的插件进行扫描。其核心价值在于 “<strong>广度覆盖</strong>” 和 “<strong>高度定制</strong>”，适用于对目标进行全面基线评估、周期性回归测试或构建符合特定需求的自定义扫描方案。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit漏洞检测双模式配置流程图" src="/assets/images/ch2-120-726ed8a4ad91adebd902d52103eb0dc2.png" width="1977" height="1322" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit漏洞检测双模式配置流程图</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23112-专项漏洞扫描聚焦高危深度检测">2.3.11.2 专项漏洞扫描：聚焦高危，深度检测<a href="#23112-专项漏洞扫描聚焦高危深度检测" class="hash-link" aria-label="2.3.11.2 专项漏洞扫描：聚焦高危，深度检测的直接链接" title="2.3.11.2 专项漏洞扫描：聚焦高危，深度检测的直接链接" translate="no">​</a></h3>
+<p>在完成了对 Yakit 基础功能的初步了解之后，我们现在需要转向更具针对性和深度的安全检测实践。不同于宽泛的资产探测，现代安全评估更要求对特定技术栈、特定漏洞类型进行精确打击。本章将详细阐述 Yakit 的核心功能之一——“专项漏洞扫描”，它正是为此类高精度、深度化的检测需求而设计的。我们将深入其工作流，解析其“插件选择”与“任务配置”分离的设计哲学，以及如何通过它实现高效、可控的漏洞验证过程。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="界面架构与功能入口">界面架构与功能入口<a href="#界面架构与功能入口" class="hash-link" aria-label="界面架构与功能入口的直接链接" title="界面架构与功能入口的直接链接" translate="no">​</a></h4>
+<p>“专项漏洞扫描”是执行深度、目标明确的漏洞扫描的主战场。Yakit 提供了两种主要入口以访问此功能，确保了操作的便捷性与流程的统一性：</p>
+<ol>
+<li class="">
+<p><strong>工具栏直接进入</strong>：通过顶部导航栏的【安全工具】-&gt;【专项漏洞检测】路径。</p>
+</li>
+<li class="">
+<p><strong>仪表盘快速启动</strong>：在首页 Dashboard 的“漏洞扫描”卡片中，选择【专项漏洞检测】选项。</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Yakit安全工具专项漏洞检测入口说明" src="/assets/images/ch2-121-b2fa0d176d38bb49523792219f34c74c.png" width="1123" height="583" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit安全工具专项漏洞检测入口说明</p>
+<p>该模块的界面采用了 Yakit 标志性的<strong>双视界（Dual-View）交互模型</strong>。这种设计将整个操作界面清晰地划分为左侧的“插件选择区”和右侧的“任务配置与执行区”。其核心设计理念在于将**“做什么检测”（What）<strong>与</strong>“对谁检测以及如何检测”（Whom &amp; How）**在物理空间上进行分离，从而引导用户构建一个逻辑清晰、步骤分明的扫描任务。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit专项漏洞检测界面展示" src="/assets/images/ch2-122-4d2e6fd0e26ccb6adc75c11e6d0b6ed5.png" width="1356" height="617" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit专项漏洞检测界面展示</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="核心工作流详解">核心工作流详解<a href="#核心工作流详解" class="hash-link" aria-label="核心工作流详解的直接链接" title="核心工作流详解的直接链接" translate="no">​</a></h4>
+<p>一个完整的专项扫描任务遵循一个标准化的三步流程：选择插件、配置任务、执行分析。下面我们将对每个步骤进行详细拆解。</p>
+<p><strong>步骤一：精确选择检测插件</strong></p>
+<p>左侧的“选择插件”区域是定义扫描能力的核心。Yakit 通过精细化的组织方式，帮助用户从庞大的插件库中快速定位所需能力。</p>
+<ul>
+<li class="">
+<p><strong>结构化插件分组</strong>：Yakit 的插件库并非扁平列表，而是基于两种维度进行组织：</p>
+<ol>
+<li class="">
+<p><strong>关键词分组</strong>：依据技术栈或漏洞类型（如 Java、PHP、SQL注入）自动聚合。</p>
+</li>
+<li class="">
+<p><strong>预设插件组</strong>：针对特定产品或场景（如 WebLogic、致远OA、默认配置检查）进行人工编排的插件集合。</p>
+</li>
+</ol>
+</li>
+<li class="">
+<p><strong>高效筛选与选择</strong>：顶部的搜索框支持通过插件名称或关键词快速定位。同时，“全选”与“清空”功能为批量操作提供了便利，无论是针对某一分类的全量检测，还是重新构建扫描策略，都极为高效。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit插件按关键词和组别两种筛选方式" src="/assets/images/ch2-123-d934098e10d643d8d52ddce962ec29c6.png" width="1137" height="606" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit插件按关键词和组别两种筛选方式</p>
+<p><strong>步骤二：灵活配置扫描任务</strong></p>
+<p>右侧的“插件执行”区域负责定义扫描的目标和行为。</p>
+<ul>
+<li class="">
+<p><strong>定义扫描目标</strong>：</p>
+<ul>
+<li class="">
+<p><strong>手动输入</strong>：在“扫描目标”文本框中，可以直接输入目标地址，多个目标之间使用英文逗号或换行符分隔。</p>
+</li>
+<li class="">
+<p><strong>文件导入</strong>：支持直接拖拽或点击上传 TXT/Excel 文件。为应对大规模目标列表，Yakit 提供了两种文件读取方式：</p>
+<ul>
+<li class="">
+<p><strong>文件内容</strong>：将文件内容直接读入前端，适用于小文件（为避免前端渲染性能问题，通常限制在 10MB 以内）。</p>
+</li>
+<li class="">
+<p><strong>路径</strong>：仅传递文件路径至后端引擎，由后端流式读取，这是处理大规模目标列表的推荐方式，可有效避免浏览器卡顿或崩溃。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit 扫描目标文件读取方式配置" src="/assets/images/ch2-124-f8c590ddbfca9b1e75dad0fdd9a14865.png" width="807" height="354" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 扫描目标文件读取方式配置</p>
+<ul>
+<li class="">
+<p><strong>配置高级参数</strong>： 点击“额外参数”可展开高级设置面板，对请求行为和任务调度进行精细化控制。</p>
+<ul>
+<li class="">
+<p><strong>请求配置</strong>：允许用户自定义全局的 HTTP 方法、请求路径、Header 及 Cookie。这些参数将作为基础模板，被所有插件调用，适用于需要统一认证信息或特定请求头的场景。</p>
+</li>
+<li class="">
+<p><strong>任务配置</strong>：包括设置网络代理、并发进程数和请求超时时间等。这些参数对于适应不同的网络环境、平衡扫描速度与目标服务器负载至关重要。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit扫描任务额外参数配置界面" src="/assets/images/ch2-125-662bcdc557d488e02d9ed4570bf1c1c7.png" width="1280" height="653" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit扫描任务额外参数配置界面</p>
+<p><strong>步骤三：执行扫描与结果分析</strong></p>
+<p>配置完成后，点击“开始执行”按钮，Yakit 后端引擎会基于设定的并发数，创建并调度扫描任务。</p>
+<ul>
+<li class="">
+<p><strong>实时结果反馈</strong>：扫描结果会实时地展示在下方的结果列表中。一旦有插件成功检测到漏洞，该条目会被高亮标记，并提供漏洞类型、目标地址等关键信息。</p>
+</li>
+<li class="">
+<p><strong>深度验证支持</strong>：点击任意一条漏洞结果，下方会联动展示完整的请求包（Request）和响应包（Response），以及详细的漏洞说明。这为安全分析师提供了直接的、可供复现的证据链，便于进行深度分析和手动验证。所有发现的漏洞会自动同步至“漏洞库”，以供后续统一管理。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit插件执行界面展示XSS漏洞检测详情" src="/assets/images/ch2-126-8f7c5bca3d0cf5fe21fb8514abee9a53.png" width="2049" height="1019" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit插件执行界面展示XSS漏洞检测详情</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="任务生命周期管理">任务生命周期管理<a href="#任务生命周期管理" class="hash-link" aria-label="任务生命周期管理的直接链接" title="任务生命周期管理的直接链接" translate="no">​</a></h4>
+<p>对于已执行的扫描任务，Yakit 提供了完善的生命周期管理功能。点击界面右上角的“任务列表”按钮，可以查看所有历史任务。</p>
+<p>该列表清晰地展示了每个任务的扫描目标、执行状态、创建与更新时间。这项功能在需要对历史任务进行审计，或对同一目标进行**周期性复测（Retesting）**时尤为关键。用户可以方便地查看过往的扫描配置与结果，或对已完成的任务进行删除等管理操作。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit插件执行界面中的任务列表弹窗" src="/assets/images/ch2-127-529189ee4714c0e4eee6b35fe3196a2e.png" width="1246" height="544" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit插件执行界面中的任务列表弹窗</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23113-批量执行自由组合与广度覆盖">2.3.11.3 批量执行：自由组合与广度覆盖<a href="#23113-批量执行自由组合与广度覆盖" class="hash-link" aria-label="2.3.11.3 批量执行：自由组合与广度覆盖的直接链接" title="2.3.11.3 批量执行：自由组合与广度覆盖的直接链接" translate="no">​</a></h3>
+<p>在前一章节中，我们深入探讨了基于预设分类的“专项漏洞扫描”，它为针对特定技术栈的深度检测提供了结构化的路径。然而，在复杂的安全评估场景中，测试需求往往超越了固定的分类边界，需要跨类别、大规模地执行自定义插件组合。为此，Yakit 提供了“批量执行”模式，它赋予了用户无与伦比的灵活性，是实现广度覆盖和自定义基线扫描的核心工具。</p>
+<p>本章将详细解析“批量执行”模式的设计哲学与核心工作流。我们将阐明其与“专项漏洞扫描”的主要区别，并展示如何利用其高度的自由度，构建针对“入场扫描”、“回归测试”等多样化场景的定制化检测方案。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="模式定义与功能入口">模式定义与功能入口<a href="#模式定义与功能入口" class="hash-link" aria-label="模式定义与功能入口的直接链接" title="模式定义与功能入口的直接链接" translate="no">​</a></h4>
+<p>“批量执行”模式，亦可在首页仪表盘中被称为“自定义检测”，其核心设计目标是<strong>解除插件分类的限制</strong>，允许用户从整个插件库中自由挑选任意插件，组合成一个临时的“扫描任务集”。这与“专项漏洞扫描”的**“按组选择”**模式形成了鲜明的对比与互补。</p>
+<p>访问此功能同样存在两条清晰的路径：</p>
+<ol>
+<li class="">
+<p><strong>安全工具导航</strong>：通过顶部菜单栏的【安全工具】-&gt;【批量执行】直接进入。</p>
+</li>
+<li class="">
+<p><strong>仪表盘快速启动</strong>：在首页 Dashboard 的“漏洞扫描”卡片中，选择【自定义检测】启动该模式。</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Yakit批量执行功能入口与自定义检测路径" src="/assets/images/ch2-128-218b5004b50c6ef5da57f953769e23db.png" width="907" height="492" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit批量执行功能入口与自定义检测路径</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="界面布局与核心差异">界面布局与核心差异<a href="#界面布局与核心差异" class="hash-link" aria-label="界面布局与核心差异的直接链接" title="界面布局与核心差异的直接链接" translate="no">​</a></h4>
+<p>虽然“批量执行”模式的整体界面布局依然沿用了双视界（Dual-View）模型，其操作流程与“专项漏洞扫描”高度相似，但两者的根本性差异体现在左侧的“选择插件”区域。</p>
+<p>在该模式下，左侧列表不再是固定的分类文件夹，而是将所有已安装的 Yak 插件以<strong>平铺列表</strong>的形式完全展示。用户可以利用顶部的关键词搜索框快速过滤，然后自由地勾选任何插件。每一个被选中的插件都会被添加到右侧的“已选插件”列表中，形成本次任务的执行集合。这种“购物车”式的选择机制，为用户构建高度定制化的扫描策略提供了基础。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit批量执行界面插件选择与参数配置" src="/assets/images/ch2-129-4a5c77cc79a8c29690d694e22279518a.png" width="1237" height="617" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit批量执行界面插件选择与参数配置</p>
+<p>右侧的“插件执行”区域在功能上与“专项漏洞扫描”保持一致，同样支持 HTTPS 切换、多种请求类型（原始请求、请求配置、请求 ID）以及详尽的额外参数配置。这种设计上的一致性降低了用户的学习成本，使得用户可以将精力完全集中在“选择哪些插件”这一核心决策上。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="典型应用场景">典型应用场景<a href="#典型应用场景" class="hash-link" aria-label="典型应用场景的直接链接" title="典型应用场景的直接链接" translate="no">​</a></h4>
+<p>“批量执行”模式的灵活性使其在多个关键安全测试场景中发挥着不可或缺的作用。</p>
+<ul>
+<li class="">
+<p><strong>入场扫描与基线评估</strong>
+当安全团队首次接触一个新项目或新系统时，需要进行快速的基线安全评估。此时，可以利用“批量执行”模式，组合一套覆盖面广的基础插件集，例如：同时选择信息泄露、常见的 Web 漏洞（SQLi、XSS）、弱口令爆破、以及特定中间件的默认配置检查插件，形成一个全面的“入场扫描”方案，一次性完成对目标资产的初步风险排查。</p>
+</li>
+<li class="">
+<p><strong>安全回归测试</strong>
+在系统发布新版本或应用安全补丁后，验证旧有漏洞是否被正确修复且未引入新的风险，是回归测试的核心目标。安全工程师可以精确勾选与历史漏洞报告相关的插件，构建一个针对性的回归测试集，对新版本进行自动化验证，确保修复的有效性和系统的稳定性。</p>
+</li>
+<li class="">
+<p><strong>构建团队专属扫描方案</strong>
+高级安全团队或企业安全部门通常有自己沉淀的、针对特定业务或行业特点的检测方法论。通过“批量执行”模式，他们可以将内部开发的私有插件与社区优秀插件进行有机组合，形成标准化的、可复用的扫描方案。这些方案可以被固化并共享，从而在团队内部推行标准化的安全作业流程，提升整体安全评估的效率和质量。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="23114-本章小结深度与广度的协同策略">2.3.11.4 本章小结：深度与广度的协同策略<a href="#23114-本章小结深度与广度的协同策略" class="hash-link" aria-label="2.3.11.4 本章小结：深度与广度的协同策略的直接链接" title="2.3.11.4 本章小结：深度与广度的协同策略的直接链接" translate="no">​</a></h3>
+<p>通过对“专项漏洞扫描”与“批量执行”两种模式的深入剖析，我们已经完整地展示了 Yakit 如何在漏洞检测领域，通过精巧的设计来满足不同层次的实战需求。这两种模式并非孤立存在，而是共同构成了 Yakit 漏洞检测能力的一体两面。它们共享强大的 Yak 插件引擎作为统一的技术底座，但通过截然不同的插件组织与交互范式，成功地解决了安全测试中“深度”与“广度”这一对核心矛盾。</p>
+<p>为了更精确地理解其定位，我们可以将其核心价值与应用场景归纳如下：</p>
+<ul>
+<li class="">
+<p><strong>专项漏洞扫描：精确制导，深度验证</strong>
+该模式如同安全评估中的“精确制导武器”，其核心价值在于<strong>效率</strong>和<strong>深度</strong>。通过结构化的插件分类，它引导用户对已知的高价值目标或特定的风险组件进行快速、集中的火力投送。它最适用于漏洞复现、定向渗透测试以及针对特定技术栈的专项审计等目标明确的场景。</p>
+</li>
+<li class="">
+<p><strong>批量执行：广域侦察，自定义基线</strong>
+该模式则承担了“广域覆盖侦察”的职能，其核心价值在于<strong>灵活性</strong>和<strong>覆盖度</strong>。它解除了插件分类的限制，允许用户根据具体情境自由组合插件，对目标资产进行大范围、多维度的自动化探索。它是在执行入场扫描、大规模回归测试以及构建团队化、标准化的自定义扫描基线等场景下的不二之选。</p>
+</li>
+</ul>
+<p>对这两种模式的深刻理解与娴熟运用，是发挥 Yakit 平台潜力的关键。当安全工程师能够将这两种扫描模式与平台的其他核心功能（如资产发现、被动流量分析）无缝整合时，便能构建起一套从资产识别到漏洞验证、再到风险管理的完整、高效且系统化的工作流。这正是将 Yaklang 插件生态的巨大潜力，最终转化为发现并管理安全风险的核心技术竞争力的必由之路。</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/products/chapter-2/2-3/2-3-10"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">2.3.10 Yak IDE</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/products/chapter-2/2-3/2-3-12"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">2.3.12 数据库</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#23111-双模式解析漏洞检测功能详解" class="table-of-contents__link toc-highlight">2.3.11.1 双模式解析：漏洞检测功能详解</a></li><li><a href="#23112-专项漏洞扫描聚焦高危深度检测" class="table-of-contents__link toc-highlight">2.3.11.2 专项漏洞扫描：聚焦高危，深度检测</a></li><li><a href="#23113-批量执行自由组合与广度覆盖" class="table-of-contents__link toc-highlight">2.3.11.3 批量执行：自由组合与广度覆盖</a></li><li><a href="#23114-本章小结深度与广度的协同策略" class="table-of-contents__link toc-highlight">2.3.11.4 本章小结：深度与广度的协同策略</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+</body>
+</html>

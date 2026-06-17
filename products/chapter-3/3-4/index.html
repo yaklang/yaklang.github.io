@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr" class="docs-wrapper plugin-docs plugin-id-products docs-version-current docs-doc-page docs-doc-id-chapter-3/3-4" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.2">
+<title data-rh="true">3.4 高级流量操控配置与环境模拟 | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/products/chapter-3/3-4"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-products-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-products-current"><meta data-rh="true" property="og:title" content="3.4 高级流量操控配置与环境模拟 | Yak Program Language"><meta data-rh="true" name="description" content="3.4.1 代理链构建：下游代理与上游代理的原理辨析"><meta data-rh="true" property="og:description" content="3.4.1 代理链构建：下游代理与上游代理的原理辨析"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/products/chapter-3/3-4"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-3/3-4" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/products/chapter-3/3-4" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/products/chapter-3/3-4" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"三、MITM 通信劫持","item":"https://yaklang.com/products/chapter-3/overview"},{"@type":"ListItem","position":2,"name":"3.4 高级流量操控","item":"https://yaklang.com/products/chapter-3/3-4"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Yak 技术博客 RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Yak 技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.ef17a765.css">
+<script src="/assets/js/runtime~main.f742e953.js" defer="defer"></script>
+<script src="/assets/js/main.e8f7a097.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>document.documentElement.setAttribute("data-theme","light"),document.documentElement.setAttribute("data-theme-choice","light"),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.png"><div role="region" aria-label="跳到主要内容"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">跳到主要内容</a></div><nav aria-label="主导航" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="切换导航栏" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/docs/intro">Yak 语言文档</a><a class="navbar__item navbar__link" href="/api-manual/intro">API 手册</a><a class="navbar__item navbar__link" href="/products/intro">Yakit 手册</a><a class="navbar__item navbar__link" href="/blog">技术博客</a><a class="navbar__item navbar__link" href="/irify">静态代码分析</a><a class="navbar__item navbar__link" href="/Yaklab/yaklab">YakLab 手册</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">关于我们</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/team">关于我们</a></li><li><a class="dropdown__link" href="/cooperativePartner">合作伙伴</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">下载白皮书<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Github<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="languageSwitcher"><svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4163" width="20" height="20"><path d="M249.7536 378.5728c10.6496 31.6416 28.3648 59.0848 53.0432 83.2512 20.992-22.7328 36.7616-50.7904 47.0016-83.2512h-100.0448zM902.2464 191.488H511.2832L488.96 71.8848H125.952c-40.0384 0-72.6016 32.5632-72.6016 72.6016v617.1648c0 40.0384 32.5632 72.6016 72.6016 72.6016h330.9568l-26.5216 119.6032h471.9616c40.0384 0 72.6016-32.5632 72.6016-72.6016V264.192c-0.1024-40.1408-32.768-72.704-72.704-72.704zM409.3952 558.1824c-42.8032-15.7696-78.1312-35.84-106.5984-59.0848-29.7984 26.5216-67.072 46.08-110.2848 58.1632l-14.9504-24.6784c42.3936-11.1616 77.7216-27.9552 105.5744-51.712-28.7744-29.3888-48.8448-63.2832-60.1088-101.888h-40.448v-27.9552h105.5744c-6.5536-12.0832-14.9504-23.7568-24.6784-34.9184l27.9552-10.24c9.728 12.5952 18.6368 27.4432 26.5216 44.7488h100.9664v27.9552h-40.448c-13.0048 40.0384-31.6416 73.5232-56.32 100.5568 27.4432 21.9136 61.8496 40.0384 102.4 54.8864 0.1024 0.2048-15.1552 24.1664-15.1552 24.1664z m529.1008 322.56a36.352 36.352 0 0 1-36.352 36.352H475.9552l18.1248-83.2512h136.2944l-77.7216-433.2544-0.4096 2.3552-3.2768-17.3056 0.9216 0.4096-28.3648-158.3104h381.1328a36.352 36.352 0 0 1 36.352 36.352v616.6528h-0.512zM643.4816 538.2144h100.1472v-26.5216h-100.1472v-53.0432h106.5984V432.128H612.2496v190.7712h141.9264v-26.5216H643.4816v-58.1632z m208.9984-57.2416c-8.3968 0-15.7696 1.3312-22.7328 5.12-6.5536 3.2768-13.0048 8.3968-18.1248 14.9504v-16.2816H781.312v138.24h30.3104v-83.2512c0.9216-11.1616 4.7104-19.5584 11.1616-25.6 5.632-5.12 12.0832-7.9872 19.5584-7.9872 20.992 0 31.1296 11.1616 31.1296 33.9968v82.432h30.3104v-85.2992c0.8192-37.6832-16.896-56.32-51.3024-56.32z" p-id="4164"></path></svg></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="回到顶部" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="文档侧边栏" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/products/intro"><span title="手册总览" class="linkLabel_WmDU">手册总览</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-1/overview"><span title="一、统一安全工具平台" class="categoryLinkLabel_W154">一、统一安全工具平台</span></a><button aria-label="展开侧边栏分类 &#x27;一、统一安全工具平台&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-2/overview"><span title="二、基础功能与使用" class="categoryLinkLabel_W154">二、基础功能与使用</span></a><button aria-label="折叠侧边栏分类 &#x27;二、基础功能与使用&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-1"><span title="2.1 应用架构与安装" class="linkLabel_WmDU">2.1 应用架构与安装</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-2"><span title="2.2 界面与功能导航" class="linkLabel_WmDU">2.2 界面与功能导航</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex="0" href="/products/chapter-2/2-3/overview"><span title="2.3 工具集实践入门" class="categoryLinkLabel_W154">2.3 工具集实践入门</span></a><button aria-label="折叠侧边栏分类 &#x27;2.3 工具集实践入门&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-1"><span title="2.3.1 端口扫描" class="linkLabel_WmDU">2.3.1 端口扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-2"><span title="2.3.2 弱口令爆破" class="linkLabel_WmDU">2.3.2 弱口令爆破</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-3"><span title="2.3.3 目录扫描" class="linkLabel_WmDU">2.3.3 目录扫描</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-4"><span title="2.3.4 资产测绘双引擎" class="linkLabel_WmDU">2.3.4 资产测绘双引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-5"><span title="2.3.5 Codec 编解码" class="linkLabel_WmDU">2.3.5 Codec 编解码</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-6"><span title="2.3.6 History 流量审计" class="linkLabel_WmDU">2.3.6 History 流量审计</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-7"><span title="2.3.7 综合反连 OOB" class="linkLabel_WmDU">2.3.7 综合反连 OOB</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-8"><span title="2.3.8 Yso-Hack Java 利用" class="linkLabel_WmDU">2.3.8 Yso-Hack Java 利用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-9"><span title="2.3.9 Vulinbox 靶场" class="linkLabel_WmDU">2.3.9 Vulinbox 靶场</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-10"><span title="2.3.10 Yak IDE" class="linkLabel_WmDU">2.3.10 Yak IDE</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-11"><span title="2.3.11 漏洞检测" class="linkLabel_WmDU">2.3.11 漏洞检测</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-3/2-3-12"><span title="2.3.12 数据库" class="linkLabel_WmDU">2.3.12 数据库</span></a></li></ul></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-2/2-4"><span title="2.4 注意事项与原则" class="linkLabel_WmDU">2.4 注意事项与原则</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/products/chapter-3/overview"><span title="三、MITM 通信劫持" class="categoryLinkLabel_W154">三、MITM 通信劫持</span></a><button aria-label="折叠侧边栏分类 &#x27;三、MITM 通信劫持&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-1"><span title="3.1 MITM 技术原理" class="linkLabel_WmDU">3.1 MITM 技术原理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-2"><span title="3.2 MITM 基础使用" class="linkLabel_WmDU">3.2 MITM 基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-3"><span title="3.3 MITM 热加载进阶" class="linkLabel_WmDU">3.3 MITM 热加载进阶</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/products/chapter-3/3-4"><span title="3.4 高级流量操控" class="linkLabel_WmDU">3.4 高级流量操控</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-3/3-5"><span title="3.5 本章小结" class="linkLabel_WmDU">3.5 本章小结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-4/overview"><span title="四、Web Fuzzer 模糊测试" class="categoryLinkLabel_W154">四、Web Fuzzer 模糊测试</span></a><button aria-label="折叠侧边栏分类 &#x27;四、Web Fuzzer 模糊测试&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-1"><span title="4.1 Web Fuzzer 概述" class="linkLabel_WmDU">4.1 Web Fuzzer 概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-2"><span title="4.2 界面与基础使用" class="linkLabel_WmDU">4.2 界面与基础使用</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-3"><span title="4.3 精细化配置" class="linkLabel_WmDU">4.3 精细化配置</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-4"><span title="4.4 Fuzztag 构造引擎" class="linkLabel_WmDU">4.4 Fuzztag 构造引擎</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-5"><span title="4.5 数据匹配与处理" class="linkLabel_WmDU">4.5 数据匹配与处理</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-6"><span title="4.6 热加载与钩子" class="linkLabel_WmDU">4.6 热加载与钩子</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-7"><span title="4.7 生成 Yaml PoC" class="linkLabel_WmDU">4.7 生成 Yaml PoC</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-8"><span title="4.8 多包联动序列" class="linkLabel_WmDU">4.8 多包联动序列</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-4/4-9"><span title="4.9 本章总结" class="linkLabel_WmDU">4.9 本章总结</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/products/chapter-5/overview"><span title="五、Yakit 插件系统" class="categoryLinkLabel_W154">五、Yakit 插件系统</span></a><button aria-label="折叠侧边栏分类 &#x27;五、Yakit 插件系统&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-1"><span title="5.1 插件系统概述" class="linkLabel_WmDU">5.1 插件系统概述</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-2"><span title="5.2 插件生态系统" class="linkLabel_WmDU">5.2 插件生态系统</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-3"><span title="5.3 插件编写指南" class="linkLabel_WmDU">5.3 插件编写指南</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-4"><span title="5.4 插件开发与调试" class="linkLabel_WmDU">5.4 插件开发与调试</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/products/chapter-5/5-5"><span title="5.5 常见错误与修复" class="linkLabel_WmDU">5.5 常见错误与修复</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/products/legacy/intro"><span title="旧版：Yakit 手册" class="categoryLinkLabel_W154">旧版：Yakit 手册</span></a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="页面路径"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="主页面" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/products/chapter-3/overview"><span>三、MITM 通信劫持</span></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">3.4 高级流量操控</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>3.4 高级流量操控配置与环境模拟</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="341-代理链构建下游代理与上游代理的原理辨析">3.4.1 代理链构建：下游代理与上游代理的原理辨析<a href="#341-代理链构建下游代理与上游代理的原理辨析" class="hash-link" aria-label="3.4.1 代理链构建：下游代理与上游代理的原理辨析的直接链接" title="3.4.1 代理链构建：下游代理与上游代理的原理辨析的直接链接" translate="no">​</a></h2>
+<p>在渗透测试和安全研究中，将一个中间人代理（如 Yakit MITM）的流量再次通过另一个代理服务器是一种常见的技术手段。然而，对于这第二个代理的命名，业界存在两种主流术语：“上游代理 (Upstream Proxy)”和“下游代理 (Downstream Proxy)”。这种术语上的差异根源在于对流量参照系的不同定义，理解其本质对于精确配置和排查问题至关重要。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="术语辨析流量视角下的上游与下游">术语辨析：流量视角下的“上游”与“下游”<a href="#术语辨析流量视角下的上游与下游" class="hash-link" aria-label="术语辨析：流量视角下的“上游”与“下游”的直接链接" title="术语辨析：流量视角下的“上游”与“下游”的直接链接" translate="no">​</a></h3>
+<p>为直观理解这一概念，我们可以构建一个标准的流量模型：<strong>客户端 (Client) → 中间人代理 (MITM Proxy) → 第二代理 (Second Proxy) → 目标服务器 (Target Server)</strong>。</p>
+<ul>
+<li class="">
+<p><strong>Yakit 的“下游代理”视角</strong>
+Yakit 的设计哲学将流量的起点定为用户客户端。因此，数据流被视为从用户出发，依次流经各个处理节点。在这个模型中，Yakit MITM 之后的任何代理都被认为是位于其“下游”。这个命名直观地反映了数据处理的先后顺序。</p>
+<ul>
+<li class=""><strong>流量路径</strong>：<code>客户端 → Yakit MITM → 下游代理 → 目标服务器</code></li>
+</ul>
+</li>
+<li class="">
+<p><strong>Burp Suite 的“上游代理”视角</strong>
+以 Burp Suite 等工具为代表的另一种视角，则常将参照物定为自身。它们认为流量是从客户端流向自己，再从自己流向目标服务器。因此，位于自身与目标服务器之间的代理，被视为在数据流的“上游”。这个术语强调了该代理更接近数据流的最终目的地。</p>
+<ul>
+<li class=""><strong>流量路径</strong>：<code>客户端 → Burp Suite → 上游代理 → 目标服务器</code></li>
+</ul>
+</li>
+</ul>
+<p>尽管术语不同，其功能和在代理链中的位置是完全一致的。Yakit 采用“下游代理”的命名，旨在为用户提供一个从数据产生到最终消费的、逻辑连贯的流向认知。</p>
+<p><img decoding="async" loading="lazy" alt="流量模型对比图展示Burp Suite与Yakit视角差异" src="/assets/images/ch3-041-312c2691abde6a2fa4e6256dc7c5d29e.png" width="1976" height="232" class="img_ev3q"></p>
+<p class="manual-figcaption">图：流量模型对比图展示Burp Suite与Yakit视角差异</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="工程实践下游代理的配置与应用场景">工程实践：下游代理的配置与应用场景<a href="#工程实践下游代理的配置与应用场景" class="hash-link" aria-label="工程实践：下游代理的配置与应用场景的直接链接" title="工程实践：下游代理的配置与应用场景的直接链接" translate="no">​</a></h3>
+<p>在 Yakit 中，配置下游代理提供了极大的灵活性，允许用户将 MITM 流量无缝对接到更复杂的网络环境或自动化分析工具中。Yakit 支持通过两种途径进行配置，且设置均可即时生效。</p>
+<ol>
+<li class="">
+<p><strong>启动时配置</strong>：在 MITM 模块的启动配置页面，可以直接填入下游代理服务器的地址。此方法适用于在开始一次测试任务前，已经明确需要使用代理链的场景。</p>
+</li>
+<li class="">
+<p><strong>运行时配置</strong>：在 MITM 核心操作台中，可以随时点击“下游代理”按钮进行设置或修改。此方法赋予了用户在测试过程中根据需要动态调整网络路径的能力。</p>
+</li>
+</ol>
+<p><img decoding="async" loading="lazy" alt="Yakit MITM下游代理配置界面展示" src="/assets/images/ch3-042-dfac0f53fbbab76a822081d3ad801c95.png" width="1762" height="733" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit MITM下游代理配置界面展示</p>
+<p>配置下游代理的核心价值体现在以下两大关键应用场景：</p>
+<ul>
+<li class="">
+<p><strong>网络穿透与访问控制</strong>
+当目标服务器位于特定网络环境（如企业内网、隔离区）或需要通过特定的出口 IP 访问时，下游代理成为必需的“跳板”。通过将下游代理设置为一个能够访问目标网络的 SOCKS5 或 HTTP 代理，Yakit 即可将其所有流量路由至该网络，实现对内网应用或特殊资源的透明化测试。</p>
+</li>
+<li class="">
+<p><strong>安全工具链协同</strong>
+这是下游代理最具价值的高级用法。通过将下游代理指向另一个安全工具（如被动漏洞扫描器 XRAY），可以构建一个强大的协同分析流水线。</p>
+<ul>
+<li class="">
+<p><strong>协同工作流</strong>：<code>客户端 → Yakit MITM (手动分析、修改、重放) → XRAY (自动化被动扫描) → 目标服务器</code></p>
+</li>
+<li class="">
+<p><strong>实现价值</strong>：在这个工作流中，Yakit 作为流量控制和手动深度测试的核心，而 XRAY 则作为自动化哨兵，对所有流经的流量进行安全审计。这种组合兼顾了手动测试的灵活性与自动化扫描的广度，极大地提升了测试效率和漏洞发现能力。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>配置时，Yakit 支持标准的代理格式，包括 HTTP 和 SOCKS5。若代理需要认证，可采用 <code>协议://用户:密码@IP:端口</code> 的格式，例如 <code>http://admin:pass123@10.0.0.1:8080</code> 或 <code>socks5://127.0.0.1:1080</code>。</p>
+<p>代理设置的核心价值在于提供了一个标准化的接口，将 Yakit 的流量控制能力与外部网络环境及其他安全工具进行解耦和链接。通过对“下游”与“上游”概念的原理级辨析，用户可以更加自信地构建和管理复杂的代理链。而在工程实践层面，熟练运用下游代理进行网络穿透和工具协同，是衡量一名安全工程师是否能高效驾驭现代安全测试工具栈的重要标志。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="342-流量规则引擎流量载荷的自动化匹配与替换">3.4.2 流量规则引擎：流量载荷的自动化匹配与替换<a href="#342-流量规则引擎流量载荷的自动化匹配与替换" class="hash-link" aria-label="3.4.2 流量规则引擎：流量载荷的自动化匹配与替换的直接链接" title="3.4.2 流量规则引擎：流量载荷的自动化匹配与替换的直接链接" translate="no">​</a></h2>
+<p>在前一节中，我们探讨了如何通过配置下游代理来编排和重定向整个流量流。这种宏观层面的控制力在打通网络路径、串联工具链时至关重要。然而，在诸多安全测试场景中，我们需要的不仅仅是重定向流量，更是要对流经的数据载荷（Payload）进行精细化、自动化的“微观手术”。</p>
+<p>本节将聚焦于 Yakit MITM 的另一核心高级功能——<strong>匹配与替换规则引擎 (Match and Replace Engine)</strong>。我们将深入剖析该引擎的工作原理，它如何将安全从业者从大量重复、繁琐的手动修改中解放出来。本节的核心命题是：<strong>通过声明式的规则定义，实现对 HTTP/HTTPS 流量的自动化、可复现、规模化的篡改与标记</strong>，从而将手动测试的精准性与自动化工具的效率完美结合。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="原理透视从手动篡改到声明式自动化">原理透视：从手动篡改到声明式自动化<a href="#原理透视从手动篡改到声明式自动化" class="hash-link" aria-label="原理透视：从手动篡改到声明式自动化的直接链接" title="原理透视：从手动篡改到声明式自动化的直接链接" translate="no">​</a></h3>
+<p>在常规的 MITM 操作中，用户需要手动拦截每一个感兴趣的请求，进行修改后再放行。这种模式虽然灵活，但在处理以下场景时效率低下：</p>
+<ul>
+<li class="">
+<p><strong>批量移除安全头部</strong>：如在测试中需要为所有请求移除 <code>Content-Security-Policy</code> 响应头。</p>
+</li>
+<li class="">
+<p><strong>动态参数修复</strong>：如自动为所有请求的 Body 中过期的 <code>timestamp</code> 或无效的 <code>signature</code> 字段替换为当前有效值。</p>
+</li>
+<li class="">
+<p><strong>前端逻辑绕过</strong>：如将响应体中的 <code>isAdmin: false</code> 批量替换为 <code>isAdmin: true</code>，以测试前端的访问控制逻辑。</p>
+</li>
+</ul>
+<p>Yakit 的规则引擎正是为解决此类问题而设计的。这套规则系统提供了更为整合与便捷的配置体验。其核心工作流是：用户预先定义一系列“匹配条件”与“执行动作”的规则，Yakit MITM 会在流量经过时，自动对每一个数据包进行规则匹配，并执行相应的动作（如替换、高亮），无需任何人工干预。这是一种典型的“声明式”自动化，用户只需声明“做什么”，而无需关心“如何做”的底层实现细节。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="工程实践规则的创建与应用">工程实践：规则的创建与应用<a href="#工程实践规则的创建与应用" class="hash-link" aria-label="工程实践：规则的创建与应用的直接链接" title="工程实践：规则的创建与应用的直接链接" translate="no">​</a></h3>
+<p>在Yakit中，使用特定规则匹配替换规则内容是一个比较高级的需求，一般涉及到自动篡改或者自动修复请求响应中的某一些内容。在Yakit中实现一半有两种途径，一种是通过“交互式插件”使用直接修改，读者可以参考3.2.3中的插件模式-交互式插件，来实现这个功能。</p>
+<p>Yakit 提供了统一的入口来管理这些自动化规则。用户可以通过 <strong>MITM 启动配置页的“内容规则”</strong> 或 <strong>MITM 核心操作台的“规则配置”</strong> 按钮进入规则管理面板。随即用户点击“新增规则”以创建一个有效的规则，在表格中用户需要精确定义其各个组成部分。具体操作如下：</p>
+<p><img decoding="async" loading="lazy" alt="Yakit MITM 内容规则配置界面与新增流程" src="/assets/images/ch3-043-04968f979e7d7c8a1b9f6f758230ae1d.png" width="1722" height="861" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit MITM 内容规则配置界面与新增流程</p>
+<p>在规则设置中，参数需求如下：</p>
+<ul>
+<li class="">
+<p><strong>规则名称 (Rule Name)</strong>: 规则的唯一标识符，便于管理和识别。</p>
+</li>
+<li class="">
+<p><strong>规则内容（必填） (Match Content)</strong>: 定义匹配目标。这可以是简单的字符串，也可以是功能强大的正则表达式，用于定位需要操作的内容。</p>
+</li>
+<li class="">
+<p><strong>替换结果 (Replacement Type)</strong>: 定义操作的目标范围，如 <code>文本</code> (Body)、<code>HTTP Header/Cookie</code> 等。这决定了匹配和替换将在消息的哪个部分进行。</p>
+</li>
+<li class="">
+<p><strong>文本 (Replacement Text)</strong>: 定义替换后的新内容。</p>
+</li>
+<li class="">
+<p><strong>生效URL (Effective URL)</strong>: 关键的<strong>作用域控制</strong>参数。可以通过 URL (支持正则) 来限定此规则仅对特定目标生效，避免对无关流量造成干扰。</p>
+</li>
+<li class="">
+<p><strong>命中颜色 (Highlight Color)</strong>: 视觉反馈机制。当规则被成功匹配时，对应的流量条目会在历史记录中以指定颜色高亮显示。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例自动篡改和标记响应体">案例：自动篡改和标记响应体<a href="#案例自动篡改和标记响应体" class="hash-link" aria-label="案例：自动篡改和标记响应体的直接链接" title="案例：自动篡改和标记响应体的直接链接" translate="no">​</a></h3>
+<p>理论是基础，而实践是检验其价值的唯一标准。现在，我们将通过一个具体的实战案例来演示规则引擎的强大威力。</p>
+<p><strong>场景设定</strong>：在一次 Web 应用安全测试中，我们怀疑某个前端页面 <code>http://example.com/</code> 的部分功能是根据响应体中是否存在特定字符串 (<code>Example</code>) 来动态渲染的。我们的目标是：</p>
+<ol>
+<li class="">
+<p><strong>主动验证</strong>：通过自动将响应体中的 <code>Example</code> 字符串替换为 <code>Yakit Rule Changed!</code>，来观察前端的反应，测试是否存在潜在的客户端逻辑注入点。</p>
+</li>
+<li class="">
+<p><strong>被动标记</strong>：在不修改任何内容的情况下，高亮所有包含 <code>Example</code> 字符串的响应，以便于后续审计。</p>
+</li>
+</ol>
+<p>Yakit 的规则引擎可以优雅地同时满足这两个需求。</p>
+<p>我们首先执行主动验证。在 MITM 的规则配置面板中，我们点击“新增规则”来定义一个自动化篡改任务。规则的每一个参数都服务于一个精确的意图，共同构成了一条自动化指令。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 新增规则界面展示" src="/assets/images/ch3-044-f1cab4efbe4d8848a0ca4b8e9ebebfc9.png" width="868" height="769" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 新增规则界面展示</p>
+<p>根据我们的目标，配置如下：</p>
+<ul>
+<li class="">
+<p><strong>规则内容 (Match Content)</strong>: 填入 <code>Example</code>。这是我们指令中的“IF”条件，即匹配的目标。</p>
+</li>
+<li class="">
+<p><strong>替换结果 (Replacement Result)</strong>: 保持默认的 <code>文本</code>，明确指令的操作对象是 HTTP Body。</p>
+</li>
+<li class="">
+<p><strong>文本 (Replacement Text)</strong>: 填入 <code>Yakit Rule Changed!</code>。这是我们指令中的“THEN”动作，即要替换成的内容。</p>
+</li>
+<li class="">
+<p><strong>命中颜色 (Highlight Color)</strong>: 选择“红色”。这是一个重要的<strong>视觉反馈机制</strong>，用于在海量流量中快速识别出被本条规则处理过的数据包。</p>
+</li>
+</ul>
+<p>点击“添加该规则”后，规则被保存并默认激活。在规则列表中，我们可以清晰地看到该规则的概要信息，并能进行快速调整。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit MITM 内容规则配置界面展示" src="/assets/images/ch3-045-acd38d675c163942ce78fbd9e17ffd0f.png" width="1469" height="231" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit MITM 内容规则配置界面展示</p>
+<p>这张管理列表提供了超越简单开关的核心信息。特别要注意的是 <code>规则作用范围</code>。在这里，我们可以确认此规则被设定为作用于 <code>响应 (Response)</code> 流量的 <code>Body</code> 部分，这与我们的预期完全一致。这种精细化的作用域控制是防止规则误伤其他正常流量（如请求头、URL参数等）的关键保障。</p>
+<p>规则启用后，我们重新访问目标页面 <code>http://example.com/</code>。规则引擎会自动在后台对流经的流量进行匹配与处理，其效果是即时且显著的。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit自动篡改响应体示例" src="/assets/images/ch3-046-c50e9b25c16192a8d98c2e41d3eec9ec.png" width="1092" height="943" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit自动篡改响应体示例</p>
+<p>验证结果体现为两个层面：</p>
+<ul>
+<li class="">
+<p><strong>工具内反馈</strong>: 在 Yakit 的 MITM 历史记录中，目标请求 <code>http://example.com/</code> 的条目被成功染成红色。同时，界面上方出现提示“检测到配置替换规则”，这为操作者提供了明确的、即时的“规则已命中”的信号。</p>
+</li>
+<li class="">
+<p><strong>浏览器端呈现</strong>: 最终呈现在浏览器中的页面内容已经被成功修改，原始的 <code>Example Domain</code> 文本已被我们定义的 <code>Yakit Rule Changed! Domain</code> 所取代。这证明我们的自动化篡改规则已准确无误地执行。</p>
+</li>
+</ul>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="双重用途从主动篡改到被动标记">双重用途：从主动篡改到被动标记<a href="#双重用途从主动篡改到被动标记" class="hash-link" aria-label="双重用途：从主动篡改到被动标记的直接链接" title="双重用途：从主动篡改到被动标记的直接链接" translate="no">​</a></h4>
+<p>现在，我们来探讨该功能的另一半核心价值——<strong>被动识别</strong>。一个卓越的工具不仅应具备“手术刀”般的精确修改能力，还应具备“探针”般的无损探测能力。</p>
+<p>Yakit 的规则引擎通过一个简单的切换即可实现角色转变。在规则列表中，<strong>如果我们仅启用规则的匹配和染色功能，但不执行替换动作（例如，通过“批量操作”选择“不修改内容”）</strong>，规则的行为就会从“主动篡改”转变为“被动标记”。</p>
+<p>这种“仅染色，不修改”的模式在安全测试中具有极高的战略价值。它允许分析师：</p>
+<ul>
+<li class="">
+<p>在不干扰应用正常逻辑的情况下，对特定模式的流量（如包含<code>internal_ip</code>、<code>debug_mode: true</code>的响应）进行高亮告警。</p>
+</li>
+<li class="">
+<p>在进行大规模流量重放或模糊测试时，快速定位出哪些载荷触发了特定的、感兴趣的服务器响应。</p>
+</li>
+<li class="">
+<p>为不同类型的漏洞或关注点设置不同颜色的规则，从而在流量历史中形成一幅色彩分明的“安全态势图”。</p>
+</li>
+</ul>
+<p>通过这一案例，我们不仅学习了如何配置一条替换规则，更重要的是理解了 Yakit 规则引擎设计的核心思想：<strong>将流量的“修改权”与“观察权”分离，赋予使用者根据不同场景按需组合，实现主动测试与被动分析的无缝切换。</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="343-高级tls配置指纹伪装国密适配与双向认证">3.4.3 高级TLS配置：指纹伪装、国密适配与双向认证<a href="#343-高级tls配置指纹伪装国密适配与双向认证" class="hash-link" aria-label="3.4.3 高级TLS配置：指纹伪装、国密适配与双向认证的直接链接" title="3.4.3 高级TLS配置：指纹伪装、国密适配与双向认证的直接链接" translate="no">​</a></h2>
+<p>我们在 <code>3.4.2</code> 节掌握了对已建立连接的流量载荷进行微观操控的能力。现在，我们将把视线进一步下沉，聚焦于流量传输的基石——TLS 协议本身。一个标准的 TLS 握手过程虽然看似透明，但在专业的安全对抗和复杂的网络环境中，其协商细节本身就构成了攻防博弈的关键战场。本章将详细阐述 Yakit 如何通过高级 TLS 配置，对连接建立过程本身进行深度定制，从而实现客户端指纹伪装、兼容特定密码学标准以及满足严格的双向认证要求。这标志着我们从“控制内容”迈向了“控制信道”的更高维度。</p>
+<p>当中间人代理与上游服务器建立 TLS 连接时，它扮演的是“客户端”的角色。然而，许多现代 Web 应用防火墙（WAF）或高级安全网关不仅仅验证证书的有效性，还会通过分析 TLS <code>ClientHello</code> 消息的特征来识别客户端类型，这种特征被称为 <strong>TLS 指纹</strong>（最著名的是 JA3 指纹）。如果指纹暴露了代理工具的身份，服务器可能会直接拒绝连接或施加更严格的监控。Yakit 的高级 TLS 配置正是为了应对这类挑战而设计的。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit MITM高级TLS配置界面展示" src="/assets/images/ch3-047-7e8ab6cea98bb35942a0101de94728e9.png" width="917" height="328" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit MITM高级TLS配置界面展示</p>
+<p>如图 <code>3.4-8</code> 所示，Yakit 在 <code>HTTPS 配置</code>中提供了三种核心模式，每一种都对应着一种特定的高级对抗或兼容场景。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="原理透视ja3-指纹与随机化伪装">原理透视：JA3 指纹与随机化伪装<a href="#原理透视ja3-指纹与随机化伪装" class="hash-link" aria-label="原理透视：JA3 指纹与随机化伪装的直接链接" title="原理透视：JA3 指纹与随机化伪装的直接链接" translate="no">​</a></h3>
+<p>JA3 是一种通过将 TLS <code>ClientHello</code> 消息中的特定字段（TLS 版本、加密套件、扩展列表、椭圆曲线、椭圆曲线格式）拼接并进行 MD5 哈希计算，从而生成一个32位指纹的技术。由于不同客户端（如 Chrome、Firefox、cURL、Python脚本、Yakit）其 <code>ClientHello</code> 的实现细节各不相同，因此会产生相对固定的 JA3 指纹。这为服务器识别和封禁自动化工具或恶意软件提供了有效依据。</p>
+<p>Yakit 的 <code>随机TLS指纹</code> 模式正是为了破解这种基于指纹的识别机制。当启用此模式时，Yakit 在每次与上游服务器发起新的 TLS 连接时，会对其 <code>ClientHello</code> 包的参数（如加密套件的顺序、扩展的排列等）进行算法层面的随机化调整。这使得每次连接产生的 JA3 指纹都各不相同，从而模拟出大量不同浏览器或合法客户端的行为，有效规避基于固定指纹的封禁策略，是进行大规模扫描和渗透测试时必备的伪装技术。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="工程实践国密gmt标准适配">工程实践：国密（GM/T）标准适配<a href="#工程实践国密gmt标准适配" class="hash-link" aria-label="工程实践：国密（GM/T）标准适配的直接链接" title="工程实践：国密（GM/T）标准适配的直接链接" translate="no">​</a></h3>
+<p><code>国密</code> 模式并非为了伪装，而是为了<strong>兼容</strong>。国密（GM）是中国国家密码管理局发布的一系列商用密码标准，其中 <code>GM/T 0024-2014</code> 标准定义了 <code>GM-TLS</code>，即使用国密 SM 系列算法（如 SM2、SM3、SM4）的 TLS 协议。在访问中国的特定金融、政府或关键基础设施的服务器时，这些服务器可能强制要求或仅支持国密算法套件。</p>
+<p>当用户选择 <code>国密</code> 模式时，Yakit 的 TLS 客户端在与服务器进行握手协商时，会主动声明自己支持并优先使用国密加密套件。这确保了 Yakit 能够与这些有特殊准入要求的服务器成功建立加密信道，这对于针对特定行业的安全审计与合规性测试至关重要。与之相对的 <code>默认</code> 模式，则使用标准的、具备最广泛兼容性的 Go 语言原生 TLS 库实现，适用于绝大多数常规 Web 服务器。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="客户端认证与-mtls双向认证">客户端认证与 mTLS（双向认证）<a href="#客户端认证与-mtls双向认证" class="hash-link" aria-label="客户端认证与 mTLS（双向认证）的直接链接" title="客户端认证与 mTLS（双向认证）的直接链接" translate="no">​</a></h3>
+<p>本节标题中提到的 <code>mTLS 双向认证</code> 是 TLS 配置中另一个至关重要的维度。在标准的 TLS 中，仅有服务器向客户端提供证书以证明其身份。而在 mTLS（Mutual TLS）场景下，服务器会反过来要求客户端也必须提供一个有效的客户端证书来证明自己的身份。这种机制常见于高安全级别的 API 网关、IoT 设备管理、微服务间的内部通信等场景。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="原理透视mtls-的密码学基石与零信任意义">原理透视：mTLS 的密码学基石与零信任意义<a href="#原理透视mtls-的密码学基石与零信任意义" class="hash-link" aria-label="原理透视：mTLS 的密码学基石与零信任意义的直接链接" title="原理透视：mTLS 的密码学基石与零信任意义的直接链接" translate="no">​</a></h4>
+<p>在标准的 TLS 1.2/1.3 握手流程中，身份验证是单向的：客户端通过验证服务器证书（及其信任链）来确认服务器的真实身份，但服务器通常对客户端的身份一无所知，后续认证依赖于应用层的用户名/密码、Token 等方式。mTLS 在这个基础上增加了一个关键步骤：在 TLS 握手过程中，服务器会向客户端发送一个 <code>Certificate Request</code> 消息，明确要求客户端出示自己的数字证书。</p>
+<p>这背后是公钥密码体系（Public Key Cryptography）的直接应用。客户端在收到请求后，会将其客户端证书（包含公钥）发送给服务器，并使用对应的私钥对握手信息的一部分进行签名。服务器接收到证书后，首先会验证该证书是否由其信任的 CA（可能是内部私有 CA）签发，然后用证书中的公钥来验证客户端的签名。只有签名验证成功，才能证明客户端确实持有与该证书匹配的私钥，从而确认了其身份。这个过程在应用层数据开始传输之前就已经完成，提供了信道级别的强身份认证。</p>
+<p>mTLS 的重要性在现代 <strong>“零信任（Zero Trust）”</strong> 安全架构中尤为凸显。在零信任模型中，网络位置不再作为信任的依据，任何访问请求，无论来自内网还是外网，都必须经过严格的身份验证。mTLS 正是实现服务间（Service-to-Service）通信认证的基石技术，广泛应用于微服务网格（如 Istio）、高安全级别的 API 网关、以及对身份有严格要求的物联网（IoT）设备通信场景。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="实践在yakit中配置mtls">实践：在Yakit中配置mTLS<a href="#实践在yakit中配置mtls" class="hash-link" aria-label="实践：在Yakit中配置mTLS的直接链接" title="实践：在Yakit中配置mTLS的直接链接" translate="no">​</a></h4>
+<p>当安全工程师需要测试一个受 mTLS 保护的端点时，Yakit 必须能够正确地向目标服务器“扮演”被授权的客户端。这要求 Yakit 能够管理并适时出示相应的客户端证书。Yakit 提供了两种灵活的配置方式来应对这一需求：针对特定目标的临时配置和全局默认配置。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="单次或特定目标配置">单次或特定目标配置<a href="#单次或特定目标配置" class="hash-link" aria-label="单次或特定目标配置的直接链接" title="单次或特定目标配置的直接链接" translate="no">​</a></h5>
+<p>对于临时的测试任务或仅针对特定 MITM 代理实例的配置，可以直接在“高级配置”中进行。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 高级配置界面展示 DNS 及 TLS 设置" src="/assets/images/ch3-048-fdd38cb8c13b883819aa96e9b0cf9815.png" width="761" height="863" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 高级配置界面展示 DNS 及 TLS 设置</p>
+<p>如上图所示，用户可以在启动 MITM 代理前的“高级配置”面板中找到“客户端 TLS 导入”选项。通过点击“添加”，可以导入针对本次抓包目标的客户端证书（通常是包含证书和私钥的 <code>.p12</code> / <code>.pfx</code> 文件或 <code>.pem</code> 格式的文件对）。此配置快速对当前这个 MITM 代理实例生效。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="全局配置中增加mtls支持">全局配置中增加mTLS支持<a href="#全局配置中增加mtls支持" class="hash-link" aria-label="全局配置中增加mTLS支持的直接链接" title="全局配置中增加mTLS支持的直接链接" translate="no">​</a></h5>
+<p>对于需要频繁使用的客户端证书，或为所有 MITM 代理设置一个默认身份，可以进行全局配置。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit全局配置界面展示mTLS设置" src="/assets/images/ch3-049-6924195d9c4d4c9c6da0fe95a98bec54.png" width="1312" height="543" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit全局配置界面展示mTLS设置</p>
+<p>在 Yakit 的“全局配置”-&gt;“系统设置”-&gt;“TLS 客户端配置”区域，用户可以添加并管理多个客户端证书。在这里配置的证书将作为所有 MITM 代理的默认选项。</p>
+<p>无论采用哪种方式配置，其工作流程是相同的：当 Yakit 的 MITM 代理在与上游服务器进行 TLS 握手时，一旦监测到服务器发来的 <code>Certificate Request</code> 消息，它会立即从其证书库（优先使用特定配置，若无则使用全局配置）中查找并加载匹配的客户端证书，呈递给服务器以完成双向认证。这种无缝的证书管理与自动呈递机制，是 Yakit 能够成功介入并分析 mTLS 加密流量的关键所在。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="344-域名解析层控制自定义-hosts-与高级-dns-策略">3.4.4 域名解析层控制：自定义 Hosts 与高级 DNS 策略<a href="#344-域名解析层控制自定义-hosts-与高级-dns-策略" class="hash-link" aria-label="3.4.4 域名解析层控制：自定义 Hosts 与高级 DNS 策略的直接链接" title="3.4.4 域名解析层控制：自定义 Hosts 与高级 DNS 策略的直接链接" translate="no">​</a></h2>
+<p>在前序章节中，我们已经掌握了从流量拦截到 TLS 握手定制的全链路控制能力。然而，在任何网络请求发起之前，必须先完成一个基础但至关重要的步骤：将人类可读的域名（如 <code>example.com</code>）解析为机器可识别的 IP 地址。这一过程的控制权，直接决定了流量的最终去向。本章将聚焦于域名解析（DNS）这一核心环节，深入探讨 Yakit 如何通过静态 Hosts 映射和动态高级 DNS 策略，赋予用户在测试环境中操纵流量目的地、绕过网络审查与投毒的决定性能力。</p>
+<p>在安全测试，尤其是内网渗透、应用重定向分析或对抗 DNS 污染等场景中，简单地依赖系统默认的 DNS 解析器是远远不够的。我们需要一种机制，能够精确地、强制性地将特定域名指向我们期望的服务器 IP，无论是测试服务器、恶意行为模拟器还是高可用的公共 DNS。Yakit 提供的配置正是为了满足这一专业需求。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="静态映射hosts-配置的原理与应用">静态映射：Hosts 配置的原理与应用<a href="#静态映射hosts-配置的原理与应用" class="hash-link" aria-label="静态映射：Hosts 配置的原理与应用的直接链接" title="静态映射：Hosts 配置的原理与应用的直接链接" translate="no">​</a></h3>
+<p><strong>Hosts 文件</strong>是操作系统中一个用于存储域名到 IP 地址静态映射关系的本地文本文件。其核心原理在于，操作系统在进行域名解析时，会<strong>优先</strong>于查询远程 DNS 服务器之前，检查本地 Hosts 文件中是否存在相应条目。如果找到匹配项，系统将直接使用该 IP 地址，不再进行后续的 DNS 查询。这种机制为我们提供了一种最高优先级的、强制性的域名指向手段。</p>
+<p>在 Yakit 中，用户无需直接修改操作系统级别的 Hosts 文件，而是可以在 MITM 代理实例的粒度上进行配置，这提供了极大的灵活性和安全性，避免了对系统全局配置的污染</p>
+<p>同样的，在高级配置中，Yakit MITM 允许用户主动控制Hosts和DNS Server以适应内网使用的情况和其他复杂开发工况环境。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit 高级配置界面添加 Hosts 映射操作" src="/assets/images/ch3-050-9767c3ad7cece3f3ae701f8fa7ca772a.png" width="701" height="576" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit 高级配置界面添加 Hosts 映射操作</p>
+<p>如上图所示，在 MITM 的“高级配置”中，用户可以为特定的 MITM 实例添加 Hosts 映射。其典型应用场景包括：</p>
+<ul>
+<li class="">
+<p><strong>内网应用测试</strong>：将内部系统域名（如 <code>oa.internal.corp</code>）直接指向其开发或测试环境的 IP 地址（如 <code>10.0.0.1</code>），而无需配置复杂的内部 DNS。</p>
+</li>
+<li class="">
+<p><strong>流量重定向分析</strong>：将目标应用的 API 域名强制指向一个由安全工程师控制的服务器，用于分析客户端行为、模拟服务器响应或进行更复杂的中间人攻击测试。</p>
+</li>
+<li class="">
+<p><strong>绕过 CDN 与负载均衡</strong>：当需要测试 CDN 或负载均衡器背后的某台特定源站服务器时，可通过 Hosts 将域名直接指向该源站 IP，绕过前端分发网络。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="高级-dns-策略tcp-dns-与-doh-抗污染">高级 DNS 策略：TCP DNS 与 DoH 抗污染<a href="#高级-dns-策略tcp-dns-与-doh-抗污染" class="hash-link" aria-label="高级 DNS 策略：TCP DNS 与 DoH 抗污染的直接链接" title="高级 DNS 策略：TCP DNS 与 DoH 抗污染的直接链接" translate="no">​</a></h3>
+<p>当请求的域名在自定义 Hosts 中未找到时，Yakit 将会使用其内置的 DNS 解析器进行查询。Yakit 同样允许对这一解析过程的行为进行深度定制，以增强其在复杂网络环境下的可靠性与安全性。</p>
+<p><img decoding="async" loading="lazy" alt="Yakit MITM 全局配置中的 DNS 设置界面" src="/assets/images/ch3-051-adf974482859aaf53db181af099f1a37.png" width="618" height="320" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit MITM 全局配置中的 DNS 设置界面</p>
+<p>如图所示，在“全局配置”的 DNS 设置中，用户可以配置一系列高级选项，这些选项同样可以在单个 MITM 实例的“高级配置”中指定，实现更精细的控制。</p>
+<ul>
+<li class="">
+<p><strong>指定/备用 DNS 服务器</strong>：允许用户脱离系统默认 DNS，强制 Yakit 使用指定的 DNS 服务器（如 <code>1.1.1.1</code>, <code>8.8.8.8</code> 或企业内网 DNS）。当“禁用系统 DNS”开启时，Yakit 将完全依赖用户配置的 DNS 列表。</p>
+</li>
+<li class="">
+<p><strong>启用 TCP DNS</strong>：标准的 DNS 查询主要使用 UDP 协议（端口 53），其优点是速度快、开销小。但 UDP 是无连接的，更容易遭受 DNS 缓存投毒（DNS Poisoning）和劫持攻击。切换到 <strong>TCP DNS</strong> 后，DNS 查询将通过建立一个完整的 TCP 连接来完成。虽然速度略有下降，但 TCP 的三次握手和可靠传输机制能有效抵御大部分针对 UDP 的欺骗和劫持攻击。</p>
+</li>
+<li class="">
+<p><strong>启用 DoH 抗污染</strong>：这是目前最先进的 DNS 解析方案。<strong>DoH（DNS-over-HTTPS）</strong> 的核心原理是将传统的 DNS 查询（通常是 UDP 53 端口的明文流量）封装在一个标准的 HTTPS 请求中，并通过 TCP 443 端口发送给支持 DoH 的解析服务器。</p>
+</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Yakit DNS 配置界面展示 TCP 与 DoH 设置" src="/assets/images/ch3-052-a9a50ad4da7d247a7ed5a1ba385431c0.png" width="885" height="363" class="img_ev3q"></p>
+<p class="manual-figcaption">图：Yakit DNS 配置界面展示 TCP 与 DoH 设置</p>
+<p>启用 DoH 带来的革命性优势在于：</p>
+<ol>
+<li class="">
+<p><strong>机密性</strong>：由于整个 DNS 查询和响应都在 TLS 加密通道内，任何中间网络节点（如 ISP）都无法窥探用户正在请求解析哪个域名。</p>
+</li>
+<li class="">
+<p><strong>完整性</strong>：HTTPS 的加密和签名机制确保了从 DoH 服务器返回的 DNS 解析结果是真实且未被篡改的，从根本上杜绝了 DNS 投毒。</p>
+</li>
+<li class="">
+<p><strong>伪装性</strong>：由于 DoH 流量与普通 HTTPS 网页浏览流量无异（均使用 TCP 443 端口），它可以有效穿透仅针对 DNS 端口进行封锁或干扰的网络防火墙。</p>
+</li>
+</ol>
+<p>通过组合使用 Hosts 静态映射、自定义 DNS 服务器、TCP DNS 以及 DoH，Yakit 赋予了安全工程师对域名解析全方位的控制力。这不仅是进行高级网络测试的基础，也是在恶劣网络环境下保障分析工作正常进行的关键技术保障。</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/products/chapter-3/3-3"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">3.3 MITM 热加载进阶</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/products/chapter-3/3-5"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">3.5 本章小结</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#341-代理链构建下游代理与上游代理的原理辨析" class="table-of-contents__link toc-highlight">3.4.1 代理链构建：下游代理与上游代理的原理辨析</a><ul><li><a href="#术语辨析流量视角下的上游与下游" class="table-of-contents__link toc-highlight">术语辨析：流量视角下的“上游”与“下游”</a></li><li><a href="#工程实践下游代理的配置与应用场景" class="table-of-contents__link toc-highlight">工程实践：下游代理的配置与应用场景</a></li></ul></li><li><a href="#342-流量规则引擎流量载荷的自动化匹配与替换" class="table-of-contents__link toc-highlight">3.4.2 流量规则引擎：流量载荷的自动化匹配与替换</a><ul><li><a href="#原理透视从手动篡改到声明式自动化" class="table-of-contents__link toc-highlight">原理透视：从手动篡改到声明式自动化</a></li><li><a href="#工程实践规则的创建与应用" class="table-of-contents__link toc-highlight">工程实践：规则的创建与应用</a></li><li><a href="#案例自动篡改和标记响应体" class="table-of-contents__link toc-highlight">案例：自动篡改和标记响应体</a></li></ul></li><li><a href="#343-高级tls配置指纹伪装国密适配与双向认证" class="table-of-contents__link toc-highlight">3.4.3 高级TLS配置：指纹伪装、国密适配与双向认证</a><ul><li><a href="#原理透视ja3-指纹与随机化伪装" class="table-of-contents__link toc-highlight">原理透视：JA3 指纹与随机化伪装</a></li><li><a href="#工程实践国密gmt标准适配" class="table-of-contents__link toc-highlight">工程实践：国密（GM/T）标准适配</a></li><li><a href="#客户端认证与-mtls双向认证" class="table-of-contents__link toc-highlight">客户端认证与 mTLS（双向认证）</a></li></ul></li><li><a href="#344-域名解析层控制自定义-hosts-与高级-dns-策略" class="table-of-contents__link toc-highlight">3.4.4 域名解析层控制：自定义 Hosts 与高级 DNS 策略</a><ul><li><a href="#静态映射hosts-配置的原理与应用" class="table-of-contents__link toc-highlight">静态映射：Hosts 配置的原理与应用</a></li><li><a href="#高级-dns-策略tcp-dns-与-doh-抗污染" class="table-of-contents__link toc-highlight">高级 DNS 策略：TCP DNS 与 DoH 抗污染</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_5dah_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+</body>
+</html>
