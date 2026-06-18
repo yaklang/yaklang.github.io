@@ -10,7 +10,7 @@
         <language>en</language>
         <copyright>Copyright © 2026 Yak Project.</copyright>
         <item>
-            <title><![CDATA[Yakit AI 强化：使用AI高效解决渗透测试中验证码问题]]></title>
+            <title><![CDATA[工程实践：基于大模型的验证码识别与登录爆破自动化]]></title>
             <link>https://yaklang.com/en/blog/p001</link>
             <guid>https://yaklang.com/en/blog/p001</guid>
             <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
@@ -282,14 +282,14 @@
             <category>AI</category>
         </item>
         <item>
-            <title><![CDATA[Ghost Bits 自动化提效：让WAF绕过告别重复劳作]]></title>
+            <title><![CDATA[漏洞分析：Ghost Bits WAF 绕过原理与 Codec/Fuzz 插件实现]]></title>
             <link>https://yaklang.com/en/blog/p002</link>
             <guid>https://yaklang.com/en/blog/p002</guid>
             <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
             <description><![CDATA[Ghost Bits 是近期安全社区热度很高的 WAF 绕过技术，Blackhat 相关议题以及多个 CVE（如 CVE-2025-41242）都涉及到这一手法。在实际渗透测试中，Ghost Bits 编码本身不难——写几行脚本就能实现。但每次都是"打开编辑器 → 改代码 → 跑脚本 → 复制结果 → 粘贴到工具里"，步骤一多就容易打断思路。为此我们写了一个 Yak Codec 插件，选中 payload 右键直接输出编码结果，省去来回切换窗口的麻烦。]]></description>
             <content:encoded><![CDATA[<p>Ghost Bits 是近期安全社区热度很高的 WAF 绕过技术，Blackhat 相关议题以及多个 CVE（如 CVE-2025-41242）都涉及到这一手法。在实际渗透测试中，Ghost Bits 编码本身不难——写几行脚本就能实现。但每次都是"打开编辑器 → 改代码 → 跑脚本 → 复制结果 → 粘贴到工具里"，步骤一多就容易打断思路。为此我们写了一个 Yak Codec 插件，选中 payload 右键直接输出编码结果，省去来回切换窗口的麻烦。</p>
 <p>除了编码，批量探测靶点是否受 Ghost Bits 影响也是个重复活动。针对这个场景我们还写了一个 <strong>Yak Fuzz插件</strong>，内置了 CVE-2025-41242、Jackson、fastjson 等常见场景的 preset，跑一遍就能快速判断目标是否存在截断风险。</p>
-<p>本文在梳理核心原理的基础上，分别介绍这两个插件的设计思路和使用方式：Codec 负责"一键编码"，Fuzz 负责"批量探测"。希望能帮师傅们在检测这类漏洞时少做一些重复劳动、提高效率。</p>
+<p>本文在梳理核心原理的基础上，分别介绍这两个插件的设计思路和使用方式：Codec 负责"一键编码"，Fuzz 负责"批量探测"。希望能在检测这类漏洞时减少重复劳动、提高效率。</p>
 <p>如果你也厌倦了手动复制粘贴 Unicode 字符，或者想快速批量验证一批目标是否受 Ghost Bits 影响，这篇文章适合你。这些插件目前你可以在Yakit插件商城下载。</p>
 <p>前这些插件你可以在在线商店下载：</p>
 <p>一、Ghost Bits 漏洞原理</p>
@@ -358,8 +358,8 @@
 <p>该脚本的核心逻辑就是模拟服务端的截断行为：<code>ord(unicodeChar) &amp; 0xFF == ord(originalChar)</code>。</p>
 <p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="https://yaklang.com/en/assets/images/e589fc27478feaa9-85ef16054a402bb8d6e63d23c0a13caa.png" width="1080" height="672" class="yakdoc-image"></button></p>
 <p><strong>六、总结Ghost Bits 漏洞的本质是</strong>编码层与解析层的语义差异**：WAF 在编码层看到无害的 Unicode，服务端在解析层截断还原成恶意的 ASCII。</p>
-<p>本文分享的 Codec、Fuzzer 和验证脚本三个工具，希望能帮师傅们在检测这类漏洞时少做一些重复劳动、提高测试效率。Codec 插件把 Ghost Bits 编码压缩成"选中 → 右键 → 输出"的三步操作；截断验证脚本则自动确认编码结果的正确性，避免人眼比对出错。</p>
-<p>需要说明的是，Fuzzer 插件中内置的场景（CVE-2025-41242、Jackson、fastjson 等）并不通用——它们借鉴了 AsiaCCS 2026 相关议题和论文中对 Ghost Bits 利用路径的分析，但每个目标的业务场景、框架版本、WAF 规则都不相同。师傅们可以参考其中的 payload 构造思路和场景分类方法，根据自己的实际目标修改测试脚本，而不是直接照搬运行。</p>
+<p>本文分享的 Codec、Fuzzer 和验证脚本三个工具，希望能在检测这类漏洞时减少重复劳动、提高测试效率。Codec 插件把 Ghost Bits 编码压缩成"选中 → 右键 → 输出"的三步操作；截断验证脚本则自动确认编码结果的正确性，避免人眼比对出错。</p>
+<p>需要说明的是，Fuzzer 插件中内置的场景（CVE-2025-41242、Jackson、fastjson 等）并不通用——它们借鉴了 AsiaCCS 2026 相关议题和论文中对 Ghost Bits 利用路径的分析，但每个目标的业务场景、框架版本、WAF 规则都不相同。读者可以参考其中的 payload 构造思路和场景分类方法，根据自己的实际目标修改测试脚本，而不是直接照搬运行。</p>
 <hr>
 <blockquote>
 <p>本文首发于 Yak Project 公众号，<a href="https://mp.weixin.qq.com/s/WMD3MQ-8QM8hZXtTpbxFnA" target="_blank" rel="noopener noreferrer" class="">阅读原文</a>。</p>
@@ -367,7 +367,7 @@
             <category>2026 年</category>
         </item>
         <item>
-            <title><![CDATA[插件商店“活”了！Yakit AI联动解锁安全自动化新玩法]]></title>
+            <title><![CDATA[工程实践：Yakit 插件商店接入 AI Agent 能力编排链路]]></title>
             <link>https://yaklang.com/en/blog/p003</link>
             <guid>https://yaklang.com/en/blog/p003</guid>
             <pubDate>Fri, 24 Apr 2026 00:00:00 GMT</pubDate>
@@ -589,7 +589,7 @@
             <category>漏洞检测与插件</category>
         </item>
         <item>
-            <title><![CDATA[Harness 到底是什么？揭秘 IRify 规模化背后的“注意力保卫战”]]></title>
+            <title><![CDATA[方法论：Harness Engineering 与 IRify 规模化研发实践]]></title>
             <link>https://yaklang.com/en/blog/p004</link>
             <guid>https://yaklang.com/en/blog/p004</guid>
             <pubDate>Fri, 17 Apr 2026 00:00:00 GMT</pubDate>
@@ -639,7 +639,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[IRify 智能化改造：AI 代码审计 + Poc 自动生成，安全效率翻倍]]></title>
+            <title><![CDATA[代码审计：IRify 的 AI 化扩展与 PoC 自动生成]]></title>
             <link>https://yaklang.com/en/blog/p005</link>
             <guid>https://yaklang.com/en/blog/p005</guid>
             <pubDate>Fri, 10 Apr 2026 00:00:00 GMT</pubDate>
@@ -760,7 +760,7 @@
             <category>漏洞检测与插件</category>
         </item>
         <item>
-            <title><![CDATA[Memfit AI 长期记忆：让渗透 Agent 告别 “失忆”，练就实战肌肉记忆]]></title>
+            <title><![CDATA[技术研究：Memfit AI 长期记忆系统与 C.O.R.E.P.A.C.T. 评估模型]]></title>
             <link>https://yaklang.com/en/blog/p006</link>
             <guid>https://yaklang.com/en/blog/p006</guid>
             <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
@@ -1014,7 +1014,7 @@
             <category>AI</category>
         </item>
         <item>
-            <title><![CDATA[深度拆解 IRify 性能优化2.0：从能跑到稳快省的全路径重构]]></title>
+            <title><![CDATA[性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）]]></title>
             <link>https://yaklang.com/en/blog/p007</link>
             <guid>https://yaklang.com/en/blog/p007</guid>
             <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
@@ -1606,7 +1606,7 @@
 <li class="">PHP mixed HTML 能把 benchmark、pprof、规则验证一起串起来</li>
 </ul>
 <p>放在这一轮里，这件事最适合用一句话来概括：</p>
-<p><em>“兄弟们，<strong>ai</strong>太好用了你知道吗。”</em></p>
+<p><em>这一轮优化让 AI 辅助真正融入了性能调优的工作流。</em></p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="https://yaklang.com/en/blog/p007#%E6%80%BB%E7%BB%93" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结" translate="no">​</a></h2>
 <p>如果把这轮 IRify 性能优化 2.0 压成一句话，那就是：</p>
 <p><em>这一轮不是只做了“更快”，而是把几条最关键的路径真正做成了“更快、更稳、更可继续优化”。</em></p>
@@ -1639,7 +1639,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[Memfit AI 专业记忆：Agent 动手之前，先翻了一遍你的知识库]]></title>
+            <title><![CDATA[技术研究：Memfit AI 内置知识库系统与 Agentic RAG 实现]]></title>
             <link>https://yaklang.com/en/blog/p008</link>
             <guid>https://yaklang.com/en/blog/p008</guid>
             <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
@@ -1816,7 +1816,7 @@
             <category>AI</category>
         </item>
         <item>
-            <title><![CDATA[前端加密测不动？全局热加载帮你自动接管签名流程]]></title>
+            <title><![CDATA[工程实践：全局热加载自动接管前端加密与动态签名流程]]></title>
             <link>https://yaklang.com/en/blog/p009</link>
             <guid>https://yaklang.com/en/blog/p009</guid>
             <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
@@ -2145,7 +2145,7 @@
             <category>加密对抗</category>
         </item>
         <item>
-            <title><![CDATA[Memfit AI: 连续渗透测试N小时不迷路的生产级AI Agent]]></title>
+            <title><![CDATA[技术研究：Memfit AI 生产级自主渗透测试 Agent 架构]]></title>
             <link>https://yaklang.com/en/blog/p010</link>
             <guid>https://yaklang.com/en/blog/p010</guid>
             <pubDate>Fri, 13 Mar 2026 00:00:00 GMT</pubDate>
@@ -2341,7 +2341,7 @@
             <category>AI</category>
         </item>
         <item>
-            <title><![CDATA[解析提速+语义深耕！解锁 JS/TS 规模化审计新能力]]></title>
+            <title><![CDATA[代码审计：JavaScript/TypeScript SSA 前端重构与规则扩展]]></title>
             <link>https://yaklang.com/en/blog/p011</link>
             <guid>https://yaklang.com/en/blog/p011</guid>
             <pubDate>Fri, 06 Mar 2026 00:00:00 GMT</pubDate>
@@ -2406,7 +2406,7 @@
             <category>2026 年</category>
         </item>
         <item>
-            <title><![CDATA[告别漏报！Al + SSA 数据流分析精准捕获17处密码泄露]]></title>
+            <title><![CDATA[代码审计：AI 结合 SSA 数据流分析检测密码泄露]]></title>
             <link>https://yaklang.com/en/blog/p012</link>
             <guid>https://yaklang.com/en/blog/p012</guid>
             <pubDate>Fri, 27 Feb 2026 00:00:00 GMT</pubDate>
@@ -2581,7 +2581,7 @@
             <category>AI</category>
         </item>
         <item>
-            <title><![CDATA[HTTP 历史流量分析专家 Agent 正式上线！]]></title>
+            <title><![CDATA[功能发布：HTTP 历史流量分析专家 Agent]]></title>
             <link>https://yaklang.com/en/blog/p015</link>
             <guid>https://yaklang.com/en/blog/p015</guid>
             <pubDate>Fri, 06 Feb 2026 00:00:00 GMT</pubDate>
@@ -2669,7 +2669,7 @@
             <category>流量分析</category>
         </item>
         <item>
-            <title><![CDATA[IRify 性能升级（五）：增量编译技术详解]]></title>
+            <title><![CDATA[性能优化：IRify 增量编译技术详解（五）]]></title>
             <link>https://yaklang.com/en/blog/p016</link>
             <guid>https://yaklang.com/en/blog/p016</guid>
             <pubDate>Fri, 30 Jan 2026 00:00:00 GMT</pubDate>
@@ -2762,7 +2762,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[IRify 性能升级（四）: ANTLR4 Go 运行时高并发解析性能调优]]></title>
+            <title><![CDATA[性能优化：IRify ANTLR4 Go 运行时高并发解析调优（四）]]></title>
             <link>https://yaklang.com/en/blog/p017</link>
             <guid>https://yaklang.com/en/blog/p017</guid>
             <pubDate>Fri, 23 Jan 2026 00:00:00 GMT</pubDate>
@@ -2859,7 +2859,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[TUN劫持：给流量戴上“进程追踪器”]]></title>
+            <title><![CDATA[流量分析：TUN 劫持的进程监控与连接关联实现]]></title>
             <link>https://yaklang.com/en/blog/p018</link>
             <guid>https://yaklang.com/en/blog/p018</guid>
             <pubDate>Fri, 16 Jan 2026 00:00:00 GMT</pubDate>
@@ -2923,7 +2923,7 @@
             <category>流量分析</category>
         </item>
         <item>
-            <title><![CDATA[IRify 报告功能：一键生成专业代码审计报告！]]></title>
+            <title><![CDATA[功能发布：IRify 代码审计报告生成功能]]></title>
             <link>https://yaklang.com/en/blog/p019</link>
             <guid>https://yaklang.com/en/blog/p019</guid>
             <pubDate>Fri, 09 Jan 2026 00:00:00 GMT</pubDate>
@@ -3032,7 +3032,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[Mock 热加载进阶：从WebFuzzer到模板调试的全链路支持]]></title>
+            <title><![CDATA[工程实践：Mock 热加载从 Web Fuzzer 到模板调试全链路]]></title>
             <link>https://yaklang.com/en/blog/p021</link>
             <guid>https://yaklang.com/en/blog/p021</guid>
             <pubDate>Fri, 26 Dec 2025 00:00:00 GMT</pubDate>
@@ -3130,7 +3130,7 @@
             <category>热加载</category>
         </item>
         <item>
-            <title><![CDATA[用 SyntaxFlow 规则“狩猎”逻辑漏洞]]></title>
+            <title><![CDATA[代码审计：使用 SyntaxFlow 规则检测逻辑漏洞]]></title>
             <link>https://yaklang.com/en/blog/p022</link>
             <guid>https://yaklang.com/en/blog/p022</guid>
             <pubDate>Fri, 19 Dec 2025 00:00:00 GMT</pubDate>
@@ -3252,7 +3252,7 @@
             <category>代码审计</category>
         </item>
         <item>
-            <title><![CDATA[TUN劫持与代理规则详解]]></title>
+            <title><![CDATA[流量分析：TUN 劫持与代理规则详解]]></title>
             <link>https://yaklang.com/en/blog/p023</link>
             <guid>https://yaklang.com/en/blog/p023</guid>
             <pubDate>Fri, 12 Dec 2025 00:00:00 GMT</pubDate>
@@ -3319,7 +3319,7 @@
 </ol>
 <p><button type="button" class="yakdoc-figure" data-layout="standard" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="https://yaklang.com/en/assets/images/1c4754052491f51a-567902c3e4a09ffc17d1d3e5961a0e90.png" width="1080" height="600" class="yakdoc-image"></button></p>
 <blockquote>
-<p><strong>可能会有师傅问，</strong><code>api.m.jd.com</code><strong>这个域名改怎么来呢？别担心，后续我们会添加相应的获取方式，完善</strong>抓包<strong>流程与体验</strong></p>
+<p><strong>可能会有读者问，</strong><code>api.m.jd.com</code><strong>这个域名改怎么来呢？别担心，后续我们会添加相应的获取方式，完善</strong>抓包<strong>流程与体验</strong></p>
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="代理规则">代理规则<a href="https://yaklang.com/en/blog/p023#%E4%BB%A3%E7%90%86%E8%A7%84%E5%88%99" class="hash-link" aria-label="Direct link to 代理规则" title="Direct link to 代理规则" translate="no">​</a></h2>
 <p>全局代理规则目前可在 MITM 启动页，以及 webfuzzer 配置项中进行配置，入口如下:</p>
