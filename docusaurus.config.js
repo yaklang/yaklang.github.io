@@ -80,7 +80,7 @@ module.exports = {
                 // },
 		        {
                     to: "/blog",
-                    label: "博客文章",
+                    label: "技术博客",
                     position: "left",
                 },
                 // {
@@ -265,7 +265,7 @@ module.exports = {
                 blog: {
                     path: "blog",
                     routeBasePath: "/blog",
-                    blogTitle: "博客文章",
+                    blogTitle: "技术博客",
                     blogDescription:
                         "Yak Project 公众号技术文章合集，覆盖代码审计、AI、流量分析、Java 安全等方向",
                     blogSidebarTitle: "近期文章",
@@ -274,7 +274,7 @@ module.exports = {
                     postsPerPage: 10,
                     feedOptions: {
                         type: ["rss", "atom"],
-                        title: "博客文章",
+                        title: "技术博客",
                         copyright: `Copyright © ${new Date().getFullYear()} Yak Project.`,
                     },
                 },

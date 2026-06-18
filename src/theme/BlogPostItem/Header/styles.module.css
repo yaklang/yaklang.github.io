@@ -1,0 +1,65 @@
+.meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.5rem 0 1rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--ifm-color-emphasis-600);
+}
+
+/* Collapse the default vertical margins of the date/reading-time block so it
+   sits on a single tight line together with the author. */
+.meta .info {
+    margin: 0 !important;
+    font-size: inherit;
+    color: inherit;
+}
+
+.authors {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.author {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Separator between the reading-time and the first author. */
+.author::before {
+    content: "·";
+    margin-right: 0.4rem;
+    color: var(--ifm-color-emphasis-400);
+}
+
+.authorLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.authorLink:hover {
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+}
+
+/* A subtle, small avatar - only "a little bit" of icon as requested. */
+.avatar {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.name {
+    font-weight: 600;
+    color: var(--ifm-color-emphasis-800);
+}
