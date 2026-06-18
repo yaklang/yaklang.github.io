@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[81903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/en/blog","blogTitle":"\u6280\u672f\u535a\u5ba2","authorsListPath":"/en/blog/authors"}')}}]);
