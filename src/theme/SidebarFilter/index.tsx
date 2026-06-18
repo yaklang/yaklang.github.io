@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import "./styles.scss";
 
 // 纯前端侧边栏搜索过滤控制器。
-// - 覆盖所有文档侧边栏(docs / api-manual / products / Yaklab)与博客侧边栏。
+// - 覆盖所有文档侧边栏(docs / products / Yaklab)与博客侧边栏。
 // - 仅在浏览器端运行，通过 MutationObserver 应对 SPA 路由切换/懒加载导致的重渲染。
 // - 文档侧边栏分类采用 lazy collapsible，折叠时子项不在 DOM 中。为保证折叠分类也能被搜到，
 //   搜索时主动展开所有折叠分类(点击 caret 触发懒加载渲染)，配合 MutationObserver 逐层收敛；
@@ -30,7 +30,7 @@ function createBox(onInput: (value: string) => void): HTMLElement {
   const input = document.createElement("input");
   input.type = "search";
   input.className = "sidebar-filter-input";
-  input.placeholder = "搜索目录...";
+  input.placeholder = "搜索目录";
   input.setAttribute("aria-label", "search sidebar items");
   input.autocomplete = "off";
   input.spellcheck = false;

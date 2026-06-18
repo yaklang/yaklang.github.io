@@ -1,0 +1,6 @@
+{
+  "label": "安全能力与漏洞验证",
+  "position": 9,
+  "collapsed": false,
+  "link": { "type": "doc", "id": "security/overview" }
+}

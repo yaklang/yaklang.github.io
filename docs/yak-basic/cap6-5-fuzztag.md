@@ -12,13 +12,13 @@ FuzzTag是yaklang内置的一种基于模糊文本生成引擎实现的tag语法
 
 可以在Yak语言中使用模板字符串观察FuzzTag行为，如：
 
-```Go
+```yak
 dump(x"{{int(1-10)}}")
 ```
 
 输出：
 
-```Go
+```text
 ([]string) (len=10 cap=10) {
  (string) (len=1) "1",
  (string) (len=1) "2",
@@ -37,14 +37,14 @@ dump(x"{{int(1-10)}}")
 
 测试代码：`fuzztag_test2.yak`
 
-```Go
+```yak
 dump(x"{{int(7-13|2)}}")
 dump(x"{{int(7-13|2|2)}}")
 ```
 
 输出：
 
-```Go
+```text
 ([]string) (len=7 cap=7) {
  (string) (len=2) "07",
  (string) (len=2) "08",
@@ -68,13 +68,13 @@ FuzzTag支持在数据中嵌入，在FuzzTag生成多个字符串时，默认会
 
 测试案例:fuzztag_test3.yak
 
-```Go
+```yak
 dump(x"id={{int(1-5)}}")
 ```
 
 输出：
 
-```Go
+```text
 ([]string) (len=5 cap=5) {
  (string) (len=4) "id=1",
  (string) (len=4) "id=2",
@@ -92,13 +92,13 @@ dump(x"id={{int(1-5)}}")
 
 测试案例:fuzztag_test3.yak
 
-```Go
+```yak
 dump(x"id1={{int(1-2)}}&id2={{int(1-2)}}")
 ```
 
 输出：
 
-```Go
+```text
 ([]string) (len=4 cap=4) {
  (string) (len=11) "id1=1&id2=1",
  (string) (len=11) "id1=1&id2=2",
@@ -113,13 +113,13 @@ dump(x"id1={{int(1-2)}}&id2={{int(1-2)}}")
 
 以用户名密码爆破为例（array标签用于将多个参数生成列表），fuzztag_test4.yak：
 
-```Go
+```yak
 dump(x"user={{array::user_password(root|admin)}}&password={{array::user_password(root_123456|admin_000000)}}")
 ```
 
 输出：
 
-```Go
+```text
 ([]string) (len=2 cap=2) {
  (string) (len=30) "user=root&password=root_123456",
  (string) (len=32) "user=admin&password=admin_000000"
@@ -128,7 +128,7 @@ dump(x"user={{array::user_password(root|admin)}}&password={{array::user_password
 
 在一些特殊场景下，如密码需要使用base64编码，可能fuzz脚本为:
 
-```Go
+```text
 user={{array::user_password(root|admin)}}&password={{base64({{array::user_password(root_123456|admin_000000)}})}}
 ```
 
@@ -140,7 +140,7 @@ user={{array::user_password(root|admin)}}&password={{base64({{array::user_passwo
 
 如果将两个标签调换顺序，如：
 
-```Go
+```text
 password={{base64({{array::user_password(root_123456|admin_000000)}})}}&user={{array::user_password(root|admin)}}
 ```
 
@@ -150,13 +150,13 @@ password={{base64({{array::user_password(root_123456|admin_000000)}})}}&user={{a
 
 上面两个案例看起来很合理，生成数据符合预期，但如果在更复杂场景，例如：
 
-```Go
+```text
 password={{array(aaa|{{array::user_password(root_123456|admin_000000)}})}}&user={{array::user_password(root|admin)}}
 ```
 
 按照执行顺序，第一个array标签在执行时，会调用子标签生成root_123456、admin_000000，子标签生成参数aaa|root_123456、aaa|admin_000000，最后array标签生成数据为aaa、root_123456、aaa、admin_000000。所以与user标签同步渲染后的结果为
 
-```Go
+```text
 password=aaa&user=root
 password=root_123456&user=root
 password=aaa&user=root
@@ -169,13 +169,13 @@ password=admin_000000&user=admin
 
 如果再调换顺序为：
 
-```Go
+```text
 user={{array::user_password(root|admin)}}&password={{array(aaa|{{array::user_password(root_123456|admin_000000)}})}}
 ```
 
 则生成结果变为了
 
-```Go
+```text
 user=root&password=aaa
 user=admin&password=aaa
 user=root&password=aaa

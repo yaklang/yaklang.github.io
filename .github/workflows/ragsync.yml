@@ -9,7 +9,6 @@ on:
       - 'articles/**'
       - 'docs/**'
       - 'products/**'
-      - 'api-manual/**'
   pull_request:
     branches: [ main ]
     paths:
@@ -17,7 +16,6 @@ on:
       - 'articles/**'
       - 'docs/**'
       - 'products/**'
-      - 'api-manual/**'
 
 jobs:
   check-ragsync:
@@ -66,7 +64,3 @@ jobs:
       - name: Run Ragsync Products
         run: |
           ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir products
-
-      - name: Run Ragsync API Manual
-        run: |
-          ./ragsync -c ~/.ragsync/yaklang.com.ragsync.yaml sync --exclude _category_ --dir api-manual

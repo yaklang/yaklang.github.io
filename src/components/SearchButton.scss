@@ -1,0 +1,106 @@
+// 导航栏搜索按钮与搜索弹框样式
+// 关键词: navbar search button, search modal
+
+.navbar-search-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 12px;
+  margin: 0 4px;
+  font-size: 0.875rem;
+  font-weight: var(--ifm-font-weight-semibold, 600);
+  color: var(--ifm-navbar-link-color);
+  background: transparent;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+  svg {
+    flex: 0 0 auto;
+  }
+
+  &:hover {
+    color: var(--ifm-navbar-link-hover-color);
+    border-color: var(--ifm-color-primary);
+    background: var(--ifm-color-emphasis-100);
+  }
+}
+
+// 窄屏只显示放大镜图标，进一步节省空间
+@media (max-width: 996px) {
+  .navbar-search-button {
+    padding: 0 8px;
+  }
+  .navbar-search-button__text {
+    display: none;
+  }
+}
+
+.navbar-search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.navbar-search-modal__panel {
+  width: min(560px, 92vw);
+  background: var(--ifm-background-surface-color, #fff);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.navbar-search-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.navbar-search-modal__title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.navbar-search-modal__close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ifm-color-emphasis-600);
+
+  &:hover {
+    color: var(--ifm-color-emphasis-900);
+  }
+}
+
+.navbar-search-modal__body {
+  padding: 18px;
+}
+
+.navbar-search-modal__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  outline: none;
+}
+
+.navbar-search-modal__todo {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+}

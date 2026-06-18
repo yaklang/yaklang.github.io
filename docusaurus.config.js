@@ -44,23 +44,13 @@ module.exports = {
             },
             items: [
                 {
-                    // Yak 语言文档 + API 手册 合并为「Yaklang 手册」下拉，引导用户选择
-                    type: "dropdown",
+                    // 编程教程与内置库参考已合并为单一文档树，统一入口
+                    label: "YAK 编程文档",
+                    to: "/docs/intro",
                     position: "left",
-                    label: "Yaklang 手册",
-                    items: [
-                        {
-                            label: "Yaklang 编程教程",
-                            to: "/docs/intro",
-                        },
-                        {
-                            label: "Yaklang 内置库参考",
-                            to: "/api-manual/intro",
-                        },
-                    ],
                 },
                 {
-                    label: "Yakit 手册",
+                    label: "Yakit 使用手册",
                     href: "/products/intro",
                     sidebarCollapsed: false,
                 },
@@ -162,6 +152,10 @@ module.exports = {
                     position: "right",
                 },
                 {
+                    type: "custom-searchButton",
+                    position: "right",
+                },
+                {
                     href: "https://github.com/yaklang",
                     label: "Github",
                     position: "right",
@@ -207,17 +201,6 @@ module.exports = {
     },
     plugins: [
         "docusaurus-plugin-sass",
-        [
-            "@docusaurus/plugin-content-docs",
-            {
-                id: "api-manual",
-                path: "api-manual",
-                routeBasePath: "api-manual",
-                sidebarPath: require.resolve("./sidebarsAPIManual.js"),
-                sidebarCollapsed: false,
-                // ... other options
-            },
-        ],
         [
             "@docusaurus/plugin-content-docs",
             {

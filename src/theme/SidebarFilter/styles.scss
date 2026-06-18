@@ -2,23 +2,34 @@
 // 关键词: sidebar filter input, hidden item, force expand
 
 .sidebar-filter-box {
-  // 上下留出小间距，让搜索框与 logo / 列表分隔更清晰
-  padding: 0.25rem 0.75rem;
-  margin: 0.5rem 0 0.75rem;
+  // 迷你化：尽量减小占用空间，与 logo / 列表保持紧凑分隔
+  padding: 0.1rem 0.6rem;
+  margin: 0.25rem 0 0.35rem;
 }
 
 .sidebar-filter-input {
   width: 100%;
   box-sizing: border-box;
-  padding: 7px 12px;
-  font-size: 0.875rem;
-  line-height: 1.5;
+  // 左侧留出放大镜图标的位置，整体更矮更紧凑
+  padding: 3px 8px 3px 26px;
+  font-size: 0.78rem;
+  line-height: 1.35;
   color: var(--ifm-font-color-base);
-  background: var(--ifm-background-surface-color, #fff);
+  background: var(--ifm-background-surface-color, #fff)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.5' y2='16.5'/%3E%3C/svg%3E")
+    no-repeat 8px center;
+  background-size: 12px 12px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 8px;
+  border-radius: 6px;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  // 隐藏 type=search 默认的清除按钮，保持简洁
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
 
   &::placeholder {
     color: var(--ifm-color-emphasis-500);
@@ -30,7 +41,7 @@
 
   &:focus {
     border-color: var(--ifm-color-primary);
-    box-shadow: 0 0 0 3px rgba(51, 153, 221, 0.18);
+    box-shadow: 0 0 0 2px rgba(51, 153, 221, 0.16);
   }
 }
 

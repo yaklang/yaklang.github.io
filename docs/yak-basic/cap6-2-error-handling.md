@@ -6,14 +6,14 @@
 
 比如以下这个代码样例：
 
-```Go
+```text
 a = 1/0
 println("after a = ", a)
 ```
 
 程序运行时将会产生以下的信息： 
 
-```Go
+```text
 Panic Stack:
 File "/var/folders/8f/m14c7x3x1c55rzvk5qvvb1w00000gn/T/yaki-code-3822814179.yak", in __yak_main__
 --> 1 a = 1/0
@@ -33,8 +33,8 @@ YakVM Panic: runtime error: integer divide by zero
 
 当调用可能返回错误的函数时，Yak 的常见处理方式如下：
 
-```Plain
-ret, err = func(arg)
+```text
+ret, err = someFunc(arg)
 if err != nil {
     // 处理错误，通常是返回或触发崩溃
 }
@@ -46,17 +46,17 @@ Yak 还支持一种简化的错误处理语法。在函数调用后使用 `~`，
 
 以下是三种错误处理方式的等价代码：
 
-```Plain
+```text
 // 使用 panic 进行错误处理
-ret, err = func(arg)
+ret, err = someFunc(arg)
 if err != nil {
     panic(err)
 }
 // 使用 die 进行错误处理
-ret, err = func(arg)
+ret, err = someFunc(arg)
 die(err)
 // 使用 ~ 进行错误处理
-ret = func(arg)~
+ret = someFunc(arg)~
 ```
 
 注意，不仅在调用可能返回错误的函数时可以使用 panic，而且在代码的任何位置都可以使用 panic 来表示错误或崩溃。
@@ -65,7 +65,7 @@ ret = func(arg)~
 
 如前文所述，panic 函数会触发一个崩溃。当崩溃发生时，它会立即终止当前函数并返回到上层函数，一层层向上返回。当返回到最外层时，程序会直接崩溃。 recover 是一个函数，当调用它时，它会立即检查是否存在崩溃的向上传递。如果存在，recover 就会捕获这个崩溃，并停止向上的传递，同时返回这个崩溃的信息。 一般来说，发生时，将停止执行任何后续语句，并向上层函数传递。当函数退出时，无论是否存在崩溃，都会运行函数的 defer 语句。因此，通常会使用 defer 和 recover 配合进行错误处理。 以下是一个代码示例：
 
-```Plain
+```yak
 defer fn{
     println(recover()) // 设置 main 函数的错误处理
 }
@@ -84,7 +84,7 @@ b()
 
 在这段代码中，首先在 main 函数中设置了一个 defer 函数来处理错误。然后调用函数 b，函数 b 再调用函数 a，函数 a 调用 panic 触发崩溃。这会立即退出函数 a 并返回到函数 b，然后运行函数 b 的 defer 函数打印信息并立即退出函数 b，返回到 main 函数。最后，在运行 main 函数的 defer 函数时，recover被调用，捕获并打印错误。 这段代码的运行结果如下：
 
-```Plaintext
+```text
 defer in b
 panic in a
 ```
@@ -93,7 +93,7 @@ panic in a
 
 Yak 将错误通过 panic 和相关语法转换为崩溃。对于崩溃的处理，Yak 提供了两种方式。前面一小节已经介绍了recover的崩溃处理方案，这一小节将介绍第二种方案，即 try-catch 模式。语法如下：
 
-```Plain
+```yak
 try {
     // 代码
     // 如果此处出现崩溃，则直接跳到 catch 代码块执行
@@ -108,7 +108,7 @@ try {
 
 在 catch 语句中，崩溃信息存储在名为 err 的变量中。如果不需要获取该信息，可以省略 err。 以下是一个代码示例：
 
-```Plain
+```yak
 try {
     println("We are in Trying")
     panic("panic in try!")
@@ -121,7 +121,7 @@ try {
 
 这段代码首先在 try 语句中主动调用 panic 触发崩溃，因为在 try 语句内，所以会跳转到 catch 代码块执行，其中的错误信息存储在 err 变量中。最后，无论是否发生崩溃，都会执行 finally 代码块。代码示例的输出如下：
 
-```Plaintext
+```text
 We are in Trying
 Fetch Error: panic in try!
 working in finally
@@ -135,7 +135,7 @@ working in finally
 
 如下，一下两段代码是等价的
 
-```go
+```yak
 // 处理 error，但是 error 不重要，打印到屏幕即可
 res, err = servicescan.Scan("127.0.0.1", "443,80")
 if err != nil {

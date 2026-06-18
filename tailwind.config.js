@@ -4,7 +4,6 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx,md,mdx}',
     './docs/**/*.{md,mdx}',
     './products/**/*.{md,mdx}',
-    './api-manual/**/*.{md,mdx}',
     './Yaklab/**/*.{md,mdx}',
     './blog/**/*.{md,mdx}',
     './i18n/**/*.{js,jsx,ts,tsx,md,mdx}',
