@@ -54,7 +54,7 @@ module.exports = {
                             to: "/docs/intro",
                         },
                         {
-                            label: "Yaklang SDK 手册",
+                            label: "Yaklang 内置库参考",
                             to: "/api-manual/intro",
                         },
                     ],

@@ -1,0 +1,73 @@
+// 侧边栏搜索过滤样式
+// 关键词: sidebar filter input, hidden item, force expand
+
+.sidebar-filter-box {
+  // 上下留出小间距，让搜索框与 logo / 列表分隔更清晰
+  padding: 0.25rem 0.75rem;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.sidebar-filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 12px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: var(--ifm-color-emphasis-500);
+  }
+
+  &:hover {
+    border-color: var(--ifm-color-emphasis-400);
+  }
+
+  &:focus {
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 0 0 3px rgba(51, 153, 221, 0.18);
+  }
+}
+
+// 被过滤掉的条目
+.sidebar-filter-hidden {
+  display: none !important;
+}
+
+// 搜索激活时，强制展开所有折叠的子列表，覆盖 Docusaurus 折叠动画的内联样式
+.sidebar-filter-active .menu__list {
+  display: block !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+// 侧边栏自定义浮层 tooltip：单行省略号截断时，hover 立即显示完整内容。
+// 用 transform 让其垂直居中对齐被悬停的条目；position:fixed 由 JS 计算坐标。
+.sidebar-tooltip {
+  position: fixed;
+  z-index: 1000;
+  max-width: 320px;
+  padding: 6px 10px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: #fff;
+  background: rgba(30, 31, 35, 0.96);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  white-space: normal;
+  word-break: break-word;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%) translateX(-2px);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}

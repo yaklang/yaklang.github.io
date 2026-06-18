@@ -1,136 +1,84 @@
 ---
-sidebar_position: 7
+sidebar_position: 10
 ---
 
-# 功能集：fuzztag - 模糊测试标签
+# Fuzz Tag Playbook
 
-Fuzztag 是一个用于数据生成和转换的工具，它可以帮助用户生成各种类型的数据，如字符串、数字、网络地址、文件内容等。它还支持许多常见的编码转换，如 Base64 编码、URL 编码、HTML 实体编码等。
+## 单体可用 Fuzztag 速览
 
-1. `char`：生成一个字符集合。
-2. `repeat`：重复产生空字符串，用于重复发包或重复生成数据。
-3. `payload`：从数据库加载 Payload。
-4. `array`：设置一个数组，用 | 分割。
-5. `network`：生成一个网络地址。
-6. `int`：生成一个整数以及范围。
-7. `randint`：随机生成整数。
-8. `randstr`：随机生成字符串。
-9. `file:line`：解析文件名，把文件中的内容按行返回成数组。
-10. `file:dir`：解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回。
-11. `file`：读取文件内容，支持多个文件，用 | 分割。
-12. `codec`：调用 Yakit Codec 插件。
-13. `unquote`：把内容进行 strconv.Unquote 转化。
-14. ...
-
-当然，Fuzztag 可用的标签非常多，我们在 [这里](#tagtable) 可以快速查阅。
-
-## 快速开始
-
-当我们大概了解了 Fuzztag 能做什么之后，结合下面的案例，将会更快帮助我们了解这个功能
-
-```go title="编写一个模版"
-POST /login HTTP/1.1
-Host: example.com
-Content-Type: application/x-www-form-urlencoded
-
-username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
-```
-
-在这个模版中，我们使用了 `randstr` 标签生成了一个长度为 8 的随机字符串作为用户名，并使用 `urlenc` 标签对其进行 URL 编码。同样，我们使用 `randstr` 生成了一个长度为 10 的随机字符串作为密码，并使用 `urlenc` 对其进行 URL 编码。最终，我们将这些数据作为表单数据发送到 `/login` 接口。这是一个简单的案例，演示了如何使用 Fuzztag 生成随机数据并对其进行编码，以便进行 Web 应用程序的安全测试。
-
-那么我们完成上述数据包之后，如何得到他真实的渲染结果呢？熟悉 Yaklang 的小伙伴很容易回答这个问题，可以在 [x-string fuzztag 快速渲染](/docs/yak-basic/cap6-5-fuzztag#fuzztag快速执行x-string) 中找到答案。
-
-```go title="获取 fuzztag 的渲染结果"
-// raw: []string
-raw = x`POST /login HTTP/1.1
-Host: example.com
-Content-Type: application/x-www-form-urlencoded
-
-username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
-`
-firstResult = raw[0]
-
-/*
-firstResult:
-
-POST /login HTTP/1.1
-Host: example.com
-Content-Type: application/x-www-form-urlencoded
-
-username=%61%6c%72%49%70%65%77%77&password=%61%57%6d%70%70%78%51%76%64%71
-*/
-```
-
-:::tip 等效 API
-
-当然与上述代码等效的是：
-
-```go title="使用 fuzz.Strings 更新"
-// raw: []string
-raw = `POST /login HTTP/1.1
-Host: example.com
-Content-Type: application/x-www-form-urlencoded
-
-username={{urlenc({{randstr(8)}})}}&password={{urlenc({{randstr(10)}})}}
-`
-firstResult = fuzz.Strings(raw)[0]
-```
-
-上面的代码将 Fuzztag 应用于一个简单的 HTTP 请求。`raw` 变量包含 HTTP 请求字符串，它包含两个标签 `randstr` 和 `urlenc`，它们分别用于生成随机字符串和对字符串进行 URL 编码。这个请求将被传递给 fuzz.Strings 函数，该函数将返回一个字符串数组，每个字符串都是通过应用 Fuzztag 标签来生成的。我们可以简单地使用 [0] 操作符从数组中获取第一个字符串，并将其赋值给 firstResult 变量。最终的结果将是一个包含随机字符串的 HTTP 请求。
-
-:::
-
-## 单体可用 Fuzztag 速览 &#123;#tagtable&#125;
+## fuzztag 可用标签一览
 
 |标签名|标签别名|标签描述|
 |:-------|:-------|:-------|
-|`char`|`c, ch`|生成一个字符，例如：`{{char(a-z)}}`, 结果为 [a b c ... x y z]|
-|`repeat`|  |重复产生空字符串，例如：<code>&#123;&#123;repeat(3)&#125;&#125;</code>，结果为：["", "", ""] 一般用来重复发包，或重复生成数据|
-|`payload`|`x`|从数据库加载 Payload, `{{payload(pass_top25)}}`|
-|`array`|`list`|设置一个数组，使用 \| 分割，例如：<code>&#123;&#123;array(1 \| 2 \| 3)&#125;&#125;</code>，结果为：[1,2,3]，|
-|`ico`|  |生成一个 ico 文件头，例如 `{{ico}}`|
-|`tiff`|  |生成一个 tiff 文件头，例如 `{{tiff}}`|
+|`array`|`list`|设置一个数组，使用 \| 分割，例如：&#123;&#123;array(1 \| 2 \| 3)&#125;&#125;，结果为：[1,2,3]，|
+|`base64dec`|`base64decode, base64d, b64d`|进行 base64 解码，&#123;&#123;base64dec(YWJj)&#125;&#125; => abc|
+|`base64enc`|`base64encode, base64e, base64, b64`|进行 base64 编码，&#123;&#123;base64enc(abc)&#125;&#125; => YWJj|
+|`base64tohex`|`b642h, base642hex`|把 Base64 字符串转换为 HEX 编码，&#123;&#123;base64tohex(YWJj)&#125;&#125; => 616263|
 |`bmp`|  |生成一个 bmp 文件头，例如 &#123;&#123;bmp&#125;&#125;|
-|`gif`|  |生成 gif 文件头|
-|`png`|  |生成 PNG 文件头|
-|`jpg`|`jpeg`|生成 jpeg / jpg 文件头|
-|`punctuation`|`punc`|生成所有标点符号|
-|`rangechar`|`range:char, range`|按顺序生成一个 range 字符集，例如 `{{rangechar(20,7e)}}` 生成 0x20 - 0x7e 的字符集|
-|`network`|`host, hosts, cidr, ip, net`|生成一个网络地址，例如 `{{network(192.168.1.1/24)}}` 对应 cidr 192.168.1.1/24 所有地址，可以逗号分隔，例如 `{{network(8.8.8.8,192.168.1.1/25,example.com)}}`|
-|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 &#123;&#123;int(1,2,3,4,5)&#125;&#125; 生成 1,2,3,4,5 中的一个整数，也可以使用 &#123;&#123;int(1-5)&#125;&#125; 生成 1-5 的整数，也可以使用 <code>&#123;&#123;int(1-5 \| 4)&#125;&#125;</code> 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
-|`randint`|`ri, rand:int, randi`|随机生成整数，定义为 &#123;&#123;randint(10)&#125;&#125; 生成0-10中任意一个随机数，&#123;&#123;randint(1,50)&#125;&#125; 生成 1-50 任意一个随机数，&#123;&#123;randint(1,50,10)&#125;&#125; 生成 1-50 任意一个随机数，重复 10 次|
-|`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 &#123;&#123;randstr(10)&#125;&#125; 生成长度为 10 的随机字符串，&#123;&#123;randstr(1,30)&#125;&#125; 生成长度为 1-30 为随机字符串，&#123;&#123;randstr(1,30,10)&#125;&#125; 生成 10 个随机字符串，长度为 1-30|
-|`file:line`|`fileline, file:lines`|解析文件名（可以用 <code> \| </code> 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 <code>&#123;&#123;file:line(/tmp/test.txt \| /tmp/1.txt)&#125;&#125;</code>|
-|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 <code>&#123;&#123;file:dir(/tmp/test \| /tmp/1)&#125;&#125;</code>|
-|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 <code>&#123;&#123;file(/tmp/1.txt \| /tmp/test.txt)&#125;&#125;</code>|
+|`char`|`c, ch`|生成一个字符，例如：`{{char(a-z)}}`, 结果为 [a b c ... x y z]|
 |`codec`|  |调用 Yakit Codec 插件|
 |`codec:line`|  |调用 Yakit Codec 插件，把结果解析成行|
-|`unquote`|  |把内容进行 strconv.Unquote 转化|
-|`quote`|  |strconv.Quote 转化|
+|`date`|  |生成一个时间，格式为YYYY-MM-dd，如果指定了格式，将按照指定的格式生成时间|
+|`datetime`|`time`|生成一个时间，格式为YYYY-MM-dd HH:mm:ss，如果指定了格式，将按照指定的格式生成时间|
+|`doubleurldec`|`doubleurldecode, durldec, durldecode`|双重URL解码，&#123;&#123;doubleurldec(%2561%2562%2563)&#125;&#125; => abc|
+|`doubleurlenc`|`doubleurlencode, durlenc, durl`|双重URL编码，&#123;&#123;doubleurlenc(abc)&#125;&#125; => %2561%2562%2563|
+|`file`|  |读取文件内容，可以支持多个文件，用竖线分割，`{{file(/tmp/1.txt)}}` 或 &#123;&#123;file(/tmp/1.txt \| /tmp/test.txt)&#125;&#125;|
+|`file:dir`|`filedir`|解析文件夹，把文件夹中文件的内容读取出来，读取成数组返回，定义为 `{{file:dir(/tmp/test)}}` 或 &#123;&#123;file:dir(/tmp/test \| /tmp/1)&#125;&#125;|
+|`file:line`|`fileline, file:lines`|解析文件名（可以用 \| 分割），把文件中的内容按行返回成数组，定义为 `{{file:line(/tmp/test.txt)}}` 或 &#123;&#123;file:line(/tmp/test.txt \| /tmp/1.txt)&#125;&#125;|
+|`fuzz:password`|`fuzz:pass`|根据所输入的操作随机生成可能的密码（默认为 root/admin 生成）|
+|`fuzz:username`|`fuzz:user`|根据所输入的操作随机生成可能的用户名（默认为 root/admin 生成）|
+|`gif`|  |生成 gif 文件头|
+|`headerauth`|  ||
+|`hexdec`|`hexd, hexdec, hexdecode`|HEX 解码，&#123;&#123;hexdec(616263)&#125;&#125; => abc|
+|`hexenc`|`hex, hexencode`|HEX 编码，&#123;&#123;hexenc(abc)&#125;&#125; => 616263|
+|`hextobase64`|`h2b64, hex2base64`|把 HEX 字符串转换为 base64 编码，&#123;&#123;hextobase64(616263)&#125;&#125; => YWJj|
+|`htmldec`|`htmldecode, htmlunescape`|HTML 解码，&#123;&#123;htmldec(&#97;&#98;&#99;)&#125;&#125; => abc|
+|`htmlenc`|`htmlencode, html, htmle, htmlescape`|HTML 实体编码，&#123;&#123;htmlenc(abc)&#125;&#125; => &#97;&#98;&#99;|
+|`htmlhexenc`|`htmlhex, htmlhexencode, htmlhexescape`|HTML 十六进制实体编码，&#123;&#123;htmlhexenc(abc)&#125;&#125; => &#x61;&#x62;&#x63;|
+|`ico`|  |生成一个 ico 文件头，例如 `{{ico}}`|
+|`int`|`port, ports, integer, i, p`|生成一个整数以及范围，例如 &#123;&#123;int(1,2,3,4,5)&#125;&#125; 生成 1,2,3,4,5 中的一个整数，也可以使用 &#123;&#123;int(1-5)&#125;&#125; 生成 1-5 的整数，也可以使用 &#123;&#123;int(1-5 \| 4)&#125;&#125; 生成 1-5 的整数，但是每个整数都是 4 位数，例如 0001, 0002, 0003, 0004, 0005|
+|`jpg`|`jpeg`|生成 jpeg / jpg 文件头|
 |`lower`|  |把传入的内容都设置成小写 &#123;&#123;lower(Abc)&#125;&#125; => abc|
-|`upper`|  |把传入的内容变成大写 &#123;&#123;upper(abc)&#125;&#125; => ABC|
-|`base64enc`|`base64encode, base64e, base64, b64`|进行 base64 编码，<code>&#123;&#123;base64enc(abc)&#125;&#125;</code> => YWJj|
-|`base64dec`|`base64decode, base64d, b64d`|进行 base64 解码，<code>&#123;&#123;base64dec(YWJj)&#125;&#125;</code> => abc|
-|`md5`|  |进行 md5 编码，<code>&#123;&#123;md5(abc)&#125;&#125;</code> => 900150983cd24fb0d6963f7d28e17f72|
-|`hexenc`|`hex, hexencode`|HEX 编码，<code>&#123;&#123;hexenc(abc)&#125;&#125;</code> => 616263|
-|`hexdec`|`hexd, hexdec, hexdecode`|HEX 解码，<code>&#123;&#123;hexdec(616263)&#125;&#125;</code> => abc|
-|`sha1`|  |进行 sha1 编码，<code>&#123;&#123;sha1(abc)&#125;&#125;</code> => a9993e364706816aba3e25717850c26c9cd0d89d|
-|`sha256`|  |进行 sha256 编码，<code>&#123;&#123;sha256(abc)&#125;&#125;</code> => ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
-|`sha224`|  ||
-|`sha512`|  |进行 sha512 编码，<code>&#123;&#123;sha512(abc)&#125;&#125;</code> => ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f|
-|`sha384`|  ||
-|`sm3`|  |计算 sm3 哈希值，<code>&#123;&#123;sm3(abc)&#125;&#125;</code> => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a3f0b8ddb27d8a7eb3|
-|`hextobase64`|`h2b64, hex2base64`|把 HEX 字符串转换为 base64 编码，`{{hextobase64(616263)}}` => YWJj|
-|`base64tohex`|`b642h, base642hex`|把 Base64 字符串转换为 HEX 编码，`{{base64tohex(YWJj)}}` => 616263|
-|`urlescape`|`urlesc`|url 编码(只编码特殊字符)，`{{urlescape(abc=)}}` => abc%3d|
-|`urlenc`|`urlencode, url`|URL 强制编码，`{{urlenc(abc)}}` => %61%62%63|
-|`urldec`|`urldecode, urld`|URL 强制解码，`{{urldec(%61%62%63)}}` => abc|
-|`doubleurlenc`|`doubleurlencode, durlenc, durl`|双重URL编码，`{{doubleurlenc(abc)}}` => %2561%2562%2563|
-|`doubleurldec`|`doubleurldecode, durldec, durldecode`|双重URL解码，`{{doubleurldec(%2561%2562%2563)}}` => abc|
-|`htmlenc`|`htmlencode, html, htmle, htmlescape`|HTML 实体编码，`{{htmlenc(abc)}}` => &#97;&#98;&#99;|
-|`htmlhexenc`|`htmlhex, htmlhexencode, htmlhexescape`|HTML 十六进制实体编码，`{{htmlhexenc(abc)}}` => &#x61;&#x62;&#x63;|
-|`htmldec`|`htmldecode, htmlunescape`|HTML 解码，`{{htmldec(&#97;&#98;&#99;)}}` => abc|
-|`repeatstr`|`repeat:str`|重复字符串，<code>&#123;&#123;repeatstr(abc \| 3)&#125;&#125;</code> => abcabcabc|
+|`md5`|  |进行 md5 编码，&#123;&#123;md5(abc)&#125;&#125; => 900150983cd24fb0d6963f7d28e17f72|
+|`network`|`host, hosts, cidr, ip, net`|生成一个网络地址，例如 `{{network(192.168.1.1/24)}}` 对应 cidr 192.168.1.1/24 所有地址，可以逗号分隔，例如 `{{network(8.8.8.8,192.168.1.1/25,example.com)}}`|
+|`null`|`nullbyte`|生成一个空字节，如果指定了数量，将生成指定数量的空字节 &#123;&#123;null(5)&#125;&#125; 表示生成 5 个空字节|
+|`padding:null`|`nullpadding, np`|使用 \x00 来填充补偿字符串长度不足的问题，&#123;&#123;nullpadding(abc \| 5)&#125;&#125; 表示将 abc 填充到长度为 5 的字符串（\x00\x00abc），&#123;&#123;nullpadding(abc \| -5)&#125;&#125; 表示将 abc 填充到长度为 5 的字符串，并且在右边填充 (abc\x00\x00)|
+|`padding:zero`|`zeropadding, zp`|使用0来填充补偿字符串长度不足的问题，&#123;&#123;zeropadding(abc \| 5)&#125;&#125; 表示将 abc 填充到长度为 5 的字符串（00abc），&#123;&#123;zeropadding(abc \| -5)&#125;&#125; 表示将 abc 填充到长度为 5 的字符串，并且在右边填充 (abc00)|
+|`payload`|`x`|从数据库加载 Payload, `{{payload(pass_top25)}}`|
+|`png`|  |生成 PNG 文件头|
+|`punctuation`|`punc`|生成所有标点符号|
+|`quote`|  |strconv.Quote 转化|
+|`randint`|`ri, rand:int, randi`|随机生成整数，定义为 &#123;&#123;randint(10)&#125;&#125; 生成0-10中任意一个随机数，&#123;&#123;randint(1,50)&#125;&#125; 生成 1-50 任意一个随机数，&#123;&#123;randint(1,50,10)&#125;&#125; 生成 1-50 任意一个随机数，重复 10 次|
 |`randomupper`|`random:upper, random:lower`|随机大小写，&#123;&#123;randomupper(abc)&#125;&#125; => aBc|
+|`randstr`|`rand:str, rs, rands`|随机生成个字符串，定义为 &#123;&#123;randstr(10)&#125;&#125; 生成长度为 10 的随机字符串，&#123;&#123;randstr(1,30)&#125;&#125; 生成长度为 1-30 为随机字符串，&#123;&#123;randstr(1,30,10)&#125;&#125; 生成 10 个随机字符串，长度为 1-30|
+|`rangechar`|`range:char, range`|按顺序生成一个 range 字符集，例如 `{{rangechar(20,7e)}}` 生成 0x20 - 0x7e 的字符集|
+|`regen`|`re`|使用正则生成所有可能的字符|
+|`repeat`|  |重复一个字符串，例如：&#123;&#123;repeat(abc \| 3)&#125;&#125;，结果为：abcabcabc|
+|`repeat:range`|  |重复一个字符串，并把重复步骤全都输出出来，例如：&#123;&#123;repeat(abc \| 3)&#125;&#125;，结果为：['' abc abcabc abcabcabc]|
+|`repeatstr`|`repeat:str`|重复字符串，&#123;&#123;repeatstr(abc \| 3)&#125;&#125; => abcabcabc|
+|`sha1`|  |进行 sha1 编码，&#123;&#123;sha1(abc)&#125;&#125; => a9993e364706816aba3e25717850c26c9cd0d89d|
+|`sha224`|  ||
+|`sha256`|  |进行 sha256 编码，&#123;&#123;sha256(abc)&#125;&#125; => ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
+|`sha384`|  ||
+|`sha512`|  |进行 sha512 编码，&#123;&#123;sha512(abc)&#125;&#125; => ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f|
+|`sm3`|  |计算 sm3 哈希值，&#123;&#123;sm3(abc)&#125;&#125; => 66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a3f0b8ddb27d8a7eb3|
+|`tiff`|  |生成一个 tiff 文件头，例如 `{{tiff}}`|
+|`timestamp`|  |生成一个时间戳，默认单位为秒，可指定单位：s, ms, ns: &#123;&#123;timestamp(s)&#125;&#125;|
+|`trim`|  |去除字符串两边的空格，一般配合其他 tag 使用，如：&#123;&#123;trim(&#123;&#123;x(dict)&#125;&#125;)&#125;&#125;|
+|`unquote`|  |把内容进行 strconv.Unquote 转化|
+|`upper`|  |把传入的内容变成大写 &#123;&#123;upper(abc)&#125;&#125; => ABC|
+|`urldec`|`urldecode, urld`|URL 强制解码，&#123;&#123;urldec(%61%62%63)&#125;&#125; => abc|
+|`urlenc`|`urlencode, url`|URL 强制编码，&#123;&#123;urlenc(abc)&#125;&#125; => %61%62%63|
+|`urlescape`|`urlesc`|url 编码(只编码特殊字符)，&#123;&#123;urlescape(abc=)&#125;&#125; => abc%3d|
+|`uuid`|  |生成一个随机的uuid，如果指定了数量，将生成指定数量的uuid|
+|`yso:bodyexec`|  |尽力使用 class body exec 的方式生成多个链|
+|`yso:dnslog`|  ||
+|`yso:exec`|  ||
+|`yso:find_gadget_by_bomb`|  ||
+|`yso:find_gadget_by_dns`|  ||
+|`yso:headerecho`|  |尽力使用 header echo 生成多个链|
+|`yso:urldns`|  ||
+
 
 ### 【基础标签】``&#123;&#123;repeatstr(str|num)&#125;&#125; ``重复一个字符串
 
@@ -145,7 +93,7 @@ origin := "randomStr: {{repeatstr(abc|3)}}"
 res := fuzz.Strings(origin)
 println("需要模糊随机渲染的字符串为：", origin)
 println("渲染结果为：")
-dump(res)
+dump(res) 
 ```
 
 执行的结果为
@@ -694,9 +642,9 @@ dump(res)
 同样的，这个标签分为四种情况
 
 1. `{{randint(max)}}` 生成一个最大值不超过 max 的随机整数
-2. `{{randint(min,max)}}` 生成一个最大最小值在 min 和 max 之间的整数
-3. `{{randint(min,max,repeat)}}` 生成 `repeat` 个值在 `min` 和 `max`
-4. `{{randint}}` 等价于 `{{randint(10)}}`
+1. `{{randint(min,max)}}` 生成一个最大最小值在 min 和 max 之间的整数
+1. `{{randint(min,max,repeat)}}` 生成 `repeat` 个值在 `min` 和 `max`
+1. `{{randint}}` 等价于 `{{randint(10)}}`
 
 #### 别名
 
@@ -763,17 +711,17 @@ dump(res)
 `randstr` 是一个非常常见的渲染模版，这个模版的意思是，生成一个随机字符串，只包含二十六个英文字母大小写，值得注意的是，`{{randstr}}` 的参数有四种不同类型分别如下：
 
 1. `{{randstr(length)}}` 例如：`{{randstr(8)}}` 意思是，生成一个长度是 8 的随机字符串
-2. `{{randstr(min,max)}}` 生成一个长度在 `min` 和 `max` 之间的随机字符串，例如 `{{randstr(4,8)}}`
-3. `{{randstr(min,max,repeat)}}` 重复 `repeat` 次生成一个 `min` 和 `max` 之间长度的字符串组
-4. `{{randstr}}` 例如：`{{randstr}}` 就可以直接被渲染，等效为 `{{randstr(8,8)}}`
+1. `{{randstr(min,max)}}` 生成一个长度在 `min` 和 `max` 之间的随机字符串，例如 `{{randstr(4,8)}}`
+1. `{{randstr(min,max,repeat)}}` 重复 `repeat` 次生成一个 `min` 和 `max` 之间长度的字符串组
+1. `{{randstr}}` 例如：`{{randstr}}` 就可以直接被渲染，等效为 `{{randstr(8,8)}}`
 
 #### 别名
 
 我们以 `{{randstr}}` 为例，他的各种别名如下
 
 1. `{{randstr}}`
-2. `{{rands}}`
-3. `{{rs}}`
+1. `{{rands}}`
+1. `{{rs}}`
 
 #### 使用案例
 
@@ -910,20 +858,20 @@ dump(res)
 
 ### 【编码标签】`{{base64}} {{md5}} {{hex}} {{sha1}} {{sha256}} {{sha512}} {{urlenc}}  {{doubleurlenc}} {{htmlenc}} {htmlhexenc}`
 
-这几个编码标签对应 `codec` \([点击这里查看具体函数](/docs/yakexamples/codec)\) 这个包中的各个函数
+这几个编码标签对应 `codec` \([点击这里查看具体函数](/api-manual/yakexamples/codec)\) 这个包中的各个函数
 
 #### 定义说明
 
 1. `{{base64(txt)}}` 把 txt 进行 base64 编码，等价于 `codec.EncodeBase64`
-2. `{{md5(txt)}}` 把 txt 编码成 md5，等价于 `codec.Md5`
-3. `{{hex(txt)}}` 把 txt 进行 HEX 编码，等价于 `codec.EncodeToHex`
-4. `{{sha1(txt)}}` 把 txt 进行双 sha1 编码，等价于 `codec.Sha1`
-5. `{{sha256(txt)}}` 把 txt 进行 sha256 编码，等价于 `codec.Sha256`
-6. `{{sha512(txt)}}` 把 txt 进行 sha521编码，等价于 `codec.Sha512`
-7. `{{urlenc(txt)}}` 把 txt 进行 url 编码，等价于 `codec.EncodeUrl`
-8. `{{doubleurlenc(txt)}}` 把 txt 进行 双重url 编码，等价于 `codec.DoubleEncodeUrl`
-9. `{{htmlenc(txt)}}` 把 txt 进行 html 实体编码，等价于 `codec.EncodeHtml`
-10. `{{htmlhexenc(txt)}}` 把 txt 进行 html 十六进制实体编码，等价于 `codec.EncodeHtmlHex`
+1. `{{md5(txt)}}` 把 txt 编码成 md5，等价于 `codec.Md5`
+1. `{{hex(txt)}}` 把 txt 进行 HEX 编码，等价于 `codec.EncodeToHex`
+1. `{{sha1(txt)}}` 把 txt 进行双 sha1 编码，等价于 `codec.Sha1`
+1. `{{sha256(txt)}}` 把 txt 进行 sha256 编码，等价于 `codec.Sha256`
+1. `{{sha512(txt)}}` 把 txt 进行 sha521编码，等价于 `codec.Sha512`
+1. `{{urlenc(txt)}}` 把 txt 进行 url 编码，等价于 `codec.EncodeUrl`
+1. `{{doubleurlenc(txt)}}` 把 txt 进行 双重url 编码，等价于 `codec.DoubleEncodeUrl`
+1. `{{htmlenc(txt)}}` 把 txt 进行 html 实体编码，等价于 `codec.EncodeHtml`
+1. `{{htmlhexenc(txt)}}` 把 txt 进行 html 十六进制实体编码，等价于 `codec.EncodeHtmlHex`
 
 
 #### 使用案例
@@ -1046,8 +994,8 @@ line 1: call func codec.EscapeQueryUrl(v1) failed
 #### 定义说明
 
 1. `{{yak(handle|params)}}` 此标签只能在webfuzzer 里面配置了热加载 函数之后使用params为传入的参数
-2. `{{params}}` 此标签能方便用户动态获取不同的参数
-3. `{{codec()}}` 次标签能直接调用Codec模块的插件
+1. `{{params}}` 此标签能方便用户动态获取不同的参数
+1. `{{codec()}}` 次标签能直接调用Codec模块的插件
 
 #### 使用案例
 
@@ -1100,7 +1048,7 @@ __getParams__ = func() {
     /*
         __getParams__ 是一个用户可控生成复杂数据初始数据的参数：
         可以在这个函数中同时处理所有数据：
-
+        
         1. CSRF Bypass
         2. 获取额外信息，进行强关联的信息变形
     */
@@ -1141,5 +1089,4 @@ println("---------------------")
 ---------------------
 
 ```
-
 

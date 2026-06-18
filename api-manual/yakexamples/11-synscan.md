@@ -101,8 +101,8 @@ OPEN: **.**.*00.243:80     from synscan
 
 `synscan.Scan` 有两个必选参数和一个可变参数，定义为 `synscan.Scan(hosts: string, ports: string, opts...) (chan *SynScanResult, error)`。
 
-1. `hosts` 参数表示想要扫描的主机地址，他支持多种格式：包括但不限于 `CIDR，IP，域名等`，其行为主要和 [`str.ParseStringToHosts`](/docs/yakexamples/strutils#解析扫描目标主机) 保持一直；
-1. `ports` 参数表示想要扫描的端口，行为和 [`str.ParseStringToPorts`](/docs/yakexamples/strutils#解析扫描端口) 保持一致；
+1. `hosts` 参数表示想要扫描的主机地址，他支持多种格式：包括但不限于 `CIDR，IP，域名等`，其行为主要和 [`str.ParseStringToHosts`](/api-manual/yakexamples/strutils#解析扫描目标主机) 保持一直；
+1. `ports` 参数表示想要扫描的端口，行为和 [`str.ParseStringToPorts`](/api-manual/yakexamples/strutils#解析扫描端口) 保持一致；
 1. `opts` 可变参数来传递可以控制 synscan 的额外参数；
 
 他的返回值为 `chan *SynScanResult` 这是一个 channel 复合类型，他的核心结构定义为：
