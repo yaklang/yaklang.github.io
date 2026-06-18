@@ -2,16 +2,16 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [elf.DisplayELF](#displayelf) |DisplayELF 以 readelf 风格显示 ELF 文件信息  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;string&#125; 格式化的 ELF 信息字符串  @return &#123;error&#125; 错误信息  |
-| [elf.GetELFArchitecture](#getelfarchitecture) |GetELFArchitecture 获取ELF文件的架构类型  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;string&#125; 架构类型字符串  @return &#123;error&#125; 错误信息  |
-| [elf.GetELFEntryPoint](#getelfentrypoint) |GetELFEntryPoint 获取ELF文件的入口地址  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;uint64&#125; 入口地址  @return &#123;error&#125; 错误信息  |
-| [elf.GetELFSection](#getelfsection) |GetELFSection 获取指定索引的ELF节信息  @param &#123;*ELFInfo&#125; info ELF信息结构  @param &#123;int&#125; index 节索引  @return &#123;*ELFSection&#125; ELF节信息  @return &#123;error&#125; 错误信息  |
-| [elf.GetELFSegment](#getelfsegment) |GetELFSegment 获取指定索引的ELF段信息  @param &#123;*ELFInfo&#125; info ELF信息结构  @param &#123;int&#125; index 段索引  @return &#123;*ELFSegment&#125; ELF段信息  @return &#123;error&#125; 错误信息  |
-| [elf.IsELF](#iself) |IsELF 检查文件是否为ELF格式  @param &#123;string&#125; file 文件路径  @return &#123;bool&#125; 是否为ELF文件  |
-| [elf.ParseELF](#parseelf) |ParseELF 解析ELF文件，返回ELF信息结构  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;*ELFInfo&#125; ELF文件信息  @return &#123;error&#125; 错误信息  |
-| [elf.ReadELFHeader](#readelfheader) |ReadELFHeader 仅读取ELF文件头信息  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;*ELFHeader&#125; ELF文件头信息  @return &#123;error&#125; 错误信息  |
-| [elf.ReadELFSections](#readelfsections) |ReadELFSections 读取ELF节信息  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;[]ELFSection&#125; ELF节信息列表  @return &#123;error&#125; 错误信息  |
-| [elf.ReadELFSegments](#readelfsegments) |ReadELFSegments 读取ELF段信息  @param &#123;string|[]byte&#125; file 文件路径或字节数组  @return &#123;[]ELFSegment&#125; ELF段信息列表  @return &#123;error&#125; 错误信息  |
+| [elf.DisplayELF](#displayelf) |DisplayELF 以 readelf 风格显示 ELF 文件信息  @param {string|[]byte} file 文件路径或字节数组  @return {string} 格式化的 ELF 信息字符串  @return {error} 错误信息  |
+| [elf.GetELFArchitecture](#getelfarchitecture) |GetELFArchitecture 获取ELF文件的架构类型  @param {string|[]byte} file 文件路径或字节数组  @return {string} 架构类型字符串  @return {error} 错误信息  |
+| [elf.GetELFEntryPoint](#getelfentrypoint) |GetELFEntryPoint 获取ELF文件的入口地址  @param {string|[]byte} file 文件路径或字节数组  @return {uint64} 入口地址  @return {error} 错误信息  |
+| [elf.GetELFSection](#getelfsection) |GetELFSection 获取指定索引的ELF节信息  @param {*ELFInfo} info ELF信息结构  @param {int} index 节索引  @return {*ELFSection} ELF节信息  @return {error} 错误信息  |
+| [elf.GetELFSegment](#getelfsegment) |GetELFSegment 获取指定索引的ELF段信息  @param {*ELFInfo} info ELF信息结构  @param {int} index 段索引  @return {*ELFSegment} ELF段信息  @return {error} 错误信息  |
+| [elf.IsELF](#iself) |IsELF 检查文件是否为ELF格式  @param {string} file 文件路径  @return {bool} 是否为ELF文件  |
+| [elf.ParseELF](#parseelf) |ParseELF 解析ELF文件，返回ELF信息结构  @param {string|[]byte} file 文件路径或字节数组  @return {*ELFInfo} ELF文件信息  @return {error} 错误信息  |
+| [elf.ReadELFHeader](#readelfheader) |ReadELFHeader 仅读取ELF文件头信息  @param {string|[]byte} file 文件路径或字节数组  @return {*ELFHeader} ELF文件头信息  @return {error} 错误信息  |
+| [elf.ReadELFSections](#readelfsections) |ReadELFSections 读取ELF节信息  @param {string|[]byte} file 文件路径或字节数组  @return {[]ELFSection} ELF节信息列表  @return {error} 错误信息  |
+| [elf.ReadELFSegments](#readelfsegments) |ReadELFSegments 读取ELF段信息  @param {string|[]byte} file 文件路径或字节数组  @return {[]ELFSegment} ELF段信息列表  @return {error} 错误信息  |
 
 
 ## 函数定义
@@ -20,11 +20,11 @@
 #### 详细描述
 DisplayELF 以 readelf 风格显示 ELF 文件信息
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;string&#125; 格式化的 ELF 信息字符串
+@return {string} 格式化的 ELF 信息字符串
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -58,11 +58,11 @@ println(output)  // 显示类似 readelf 的输出
 #### 详细描述
 GetELFArchitecture 获取ELF文件的架构类型
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;string&#125; 架构类型字符串
+@return {string} 架构类型字符串
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -96,11 +96,11 @@ dump(arch)  // "EM_X86_64 (AMD x86-64)"
 #### 详细描述
 GetELFEntryPoint 获取ELF文件的入口地址
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;uint64&#125; 入口地址
+@return {uint64} 入口地址
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -134,13 +134,13 @@ dump(entry)  // 0x401000
 #### 详细描述
 GetELFSection 获取指定索引的ELF节信息
 
-@param &#123;*ELFInfo&#125; info ELF信息结构
+@param {*ELFInfo} info ELF信息结构
 
-@param &#123;int&#125; index 节索引
+@param {int} index 节索引
 
-@return &#123;*ELFSection&#125; ELF节信息
+@return {*ELFSection} ELF节信息
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -172,13 +172,13 @@ dump(sect.Name, sect.Type)
 #### 详细描述
 GetELFSegment 获取指定索引的ELF段信息
 
-@param &#123;*ELFInfo&#125; info ELF信息结构
+@param {*ELFInfo} info ELF信息结构
 
-@param &#123;int&#125; index 段索引
+@param {int} index 段索引
 
-@return &#123;*ELFSegment&#125; ELF段信息
+@return {*ELFSegment} ELF段信息
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -210,9 +210,9 @@ dump(seg.Type, seg.Flags)
 #### 详细描述
 IsELF 检查文件是否为ELF格式
 
-@param &#123;string&#125; file 文件路径
+@param {string} file 文件路径
 
-@return &#123;bool&#125; 是否为ELF文件
+@return {bool} 是否为ELF文件
 
 Example:
 ```
@@ -244,11 +244,11 @@ Example:
 #### 详细描述
 ParseELF 解析ELF文件，返回ELF信息结构
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;*ELFInfo&#125; ELF文件信息
+@return {*ELFInfo} ELF文件信息
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -285,11 +285,11 @@ info, err = elf.ParseELF(data)
 #### 详细描述
 ReadELFHeader 仅读取ELF文件头信息
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;*ELFHeader&#125; ELF文件头信息
+@return {*ELFHeader} ELF文件头信息
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -326,11 +326,11 @@ dump(header.Entry)  // 入口地址
 #### 详细描述
 ReadELFSections 读取ELF节信息
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;[]ELFSection&#125; ELF节信息列表
+@return {[]ELFSection} ELF节信息列表
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```
@@ -373,11 +373,11 @@ sections, err = elf.ReadELFSections(data)
 #### 详细描述
 ReadELFSegments 读取ELF段信息
 
-@param &#123;string|[]byte&#125; file 文件路径或字节数组
+@param {string|[]byte} file 文件路径或字节数组
 
-@return &#123;[]ELFSegment&#125; ELF段信息列表
+@return {[]ELFSegment} ELF段信息列表
 
-@return &#123;error&#125; 错误信息
+@return {error} 错误信息
 
 Example:
 ```

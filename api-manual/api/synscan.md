@@ -3,23 +3,23 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [synscan.FixPermission](#fixpermission) |FixPermission 尝试修复 pcap 权限问题  |
-| [synscan.Scan](#scan) |Scan 使用 SYN 扫描技术进行端口扫描，它不必打开一个完整的TCP连接，只发送一个SYN包，就能做到打开连接的效果，然后等待对端的反应  @param &#123;string&#125; target 目标地址，支持 CIDR 格式  @param &#123;string&#125; port 端口，支持 1-65535、1,2...|
-| [synscan.ScanFromPing](#scanfromping) |ScanFromPing 对使用 ping.Scan 探测出的存活结果进行端口扫描，需要配合 ping.Scan 使用  @param &#123;chan *PingResult&#125; res ping.Scan 的扫描结果  @param &#123;string&#125; ports 端口，支持 1-65535、1,2,3、...|
-| [synscan.callback](#callback) |callback syn scan 的配置选项，设置一个回调函数，每发现一个端口就会调用一次  @param &#123;func(i *synscan.SynScanResult)&#125; i 回调函数  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.concurrent](#concurrent) |concurrent syn scan 的配置选项，设置 syn 扫描的发包速率，和 rateLimit 基本相同  @param &#123;int&#125; count 并发数  @return &#123;scanOpt&#125; 返回配置选项  |
+| [synscan.Scan](#scan) |Scan 使用 SYN 扫描技术进行端口扫描，它不必打开一个完整的TCP连接，只发送一个SYN包，就能做到打开连接的效果，然后等待对端的反应  @param {string} target 目标地址，支持 CIDR 格式  @param {string} port 端口，支持 1-65535、1,2...|
+| [synscan.ScanFromPing](#scanfromping) |ScanFromPing 对使用 ping.Scan 探测出的存活结果进行端口扫描，需要配合 ping.Scan 使用  @param {chan *PingResult} res ping.Scan 的扫描结果  @param {string} ports 端口，支持 1-65535、1,2,3、...|
+| [synscan.callback](#callback) |callback syn scan 的配置选项，设置一个回调函数，每发现一个端口就会调用一次  @param {func(i *synscan.SynScanResult)} i 回调函数  @return {scanOpt} 返回配置选项  |
+| [synscan.concurrent](#concurrent) |concurrent syn scan 的配置选项，设置 syn 扫描的发包速率，和 rateLimit 基本相同  @param {int} count 并发数  @return {scanOpt} 返回配置选项  |
 | [synscan.context](#context) ||
-| [synscan.excludeHosts](#excludehosts) |excludeHosts syn scan 的配置选项，设置本次扫描排除的主机  @param &#123;string&#125; hosts 主机，支持逗号分割、CIDR、-的格式  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.excludePorts](#excludeports) |excludePorts syn scan 的配置选项，设置本次扫描排除的端口  @param &#123;string&#125; ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.iface](#iface) |iface syn scan 的配置选项，设置 syn 扫描的网卡  @param &#123;string&#125; iface 网卡名称  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.initHostFilter](#inithostfilter) |initHostFilter syn scan 的配置选项，设置本次扫描的主机过滤器，只展示这些主机的扫描结果  @param &#123;string&#125; f 主机，支持逗号、CIDR、-分割  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.initPortFilter](#initportfilter) |initPortFilter syn scan 的配置选项，设置本次扫描的端口过滤器，只展示这些端口的扫描结果  @param &#123;string&#125; f 端口，支持逗号、-分割  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.maxPorts](#maxports) |maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数  @param &#123;int&#125; max 最大开放端口数  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.outputFile](#outputfile) |outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的文件  @param &#123;string&#125; file 文件路径  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.outputPrefix](#outputprefix) |outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用  @param &#123;string&#125; prefix 前缀  @return &#123;scanOpt&#125; 返回配置选项...|
-| [synscan.rateLimit](#ratelimit) |rateLimit syn scan 的配置选项，设置 syn 扫描的速率  @param &#123;int&#125; ms 延迟多少毫秒  @param &#123;int&#125; count 每隔多少个数据包延迟一次  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.shuffle](#shuffle) |shuffle syn scan 的配置选项，设置是否打乱扫描顺序  @param &#123;bool&#125; s 是否打乱  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.submitTaskCallback](#submittaskcallback) |submitTaskCallback syn scan 的配置选项，设置一个回调函数，每提交一个探测数据包的时候，这个回调会执行一次  @param &#123;func(string)&#125; i 回调函数  @return &#123;scanOpt&#125; 返回配置选项  |
-| [synscan.wait](#wait) |wait syn scan 的配置选项，设置等待扫描目标回包的最大时间  @param &#123;float64&#125; sec 等待时间，单位秒  @return &#123;scanOpt&#125; 返回配置选项  |
+| [synscan.excludeHosts](#excludehosts) |excludeHosts syn scan 的配置选项，设置本次扫描排除的主机  @param {string} hosts 主机，支持逗号分割、CIDR、-的格式  @return {scanOpt} 返回配置选项  |
+| [synscan.excludePorts](#excludeports) |excludePorts syn scan 的配置选项，设置本次扫描排除的端口  @param {string} ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式  @return {scanOpt} 返回配置选项  |
+| [synscan.iface](#iface) |iface syn scan 的配置选项，设置 syn 扫描的网卡  @param {string} iface 网卡名称  @return {scanOpt} 返回配置选项  |
+| [synscan.initHostFilter](#inithostfilter) |initHostFilter syn scan 的配置选项，设置本次扫描的主机过滤器，只展示这些主机的扫描结果  @param {string} f 主机，支持逗号、CIDR、-分割  @return {scanOpt} 返回配置选项  |
+| [synscan.initPortFilter](#initportfilter) |initPortFilter syn scan 的配置选项，设置本次扫描的端口过滤器，只展示这些端口的扫描结果  @param {string} f 端口，支持逗号、-分割  @return {scanOpt} 返回配置选项  |
+| [synscan.maxPorts](#maxports) |maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数  @param {int} max 最大开放端口数  @return {scanOpt} 返回配置选项  |
+| [synscan.outputFile](#outputfile) |outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的文件  @param {string} file 文件路径  @return {scanOpt} 返回配置选项  |
+| [synscan.outputPrefix](#outputprefix) |outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用  @param {string} prefix 前缀  @return {scanOpt} 返回配置选项...|
+| [synscan.rateLimit](#ratelimit) |rateLimit syn scan 的配置选项，设置 syn 扫描的速率  @param {int} ms 延迟多少毫秒  @param {int} count 每隔多少个数据包延迟一次  @return {scanOpt} 返回配置选项  |
+| [synscan.shuffle](#shuffle) |shuffle syn scan 的配置选项，设置是否打乱扫描顺序  @param {bool} s 是否打乱  @return {scanOpt} 返回配置选项  |
+| [synscan.submitTaskCallback](#submittaskcallback) |submitTaskCallback syn scan 的配置选项，设置一个回调函数，每提交一个探测数据包的时候，这个回调会执行一次  @param {func(string)} i 回调函数  @return {scanOpt} 返回配置选项  |
+| [synscan.wait](#wait) |wait syn scan 的配置选项，设置等待扫描目标回包的最大时间  @param {float64} sec 等待时间，单位秒  @return {scanOpt} 返回配置选项  |
 
 
 ## 函数定义
@@ -51,13 +51,13 @@ die(err) // 没有错误，即可正常使用 syn 扫描
 #### 详细描述
 Scan 使用 SYN 扫描技术进行端口扫描，它不必打开一个完整的TCP连接，只发送一个SYN包，就能做到打开连接的效果，然后等待对端的反应
 
-@param &#123;string&#125; target 目标地址，支持 CIDR 格式
+@param {string} target 目标地址，支持 CIDR 格式
 
-@param &#123;string&#125; port 端口，支持 1-65535、1,2,3、1-100,200-300 格式
+@param {string} port 端口，支持 1-65535、1,2,3、1-100,200-300 格式
 
-@param &#123;scanOpt&#125; [opts] synscan 扫描参数
+@param {scanOpt} [opts] synscan 扫描参数
 
-@return &#123;chan *synscan.SynScanResult&#125; 返回结果
+@return {chan *synscan.SynScanResult} 返回结果
 
 Example:
 ```
@@ -94,13 +94,13 @@ die(err)
 #### 详细描述
 ScanFromPing 对使用 ping.Scan 探测出的存活结果进行端口扫描，需要配合 ping.Scan 使用
 
-@param &#123;chan *PingResult&#125; res ping.Scan 的扫描结果
+@param {chan *PingResult} res ping.Scan 的扫描结果
 
-@param &#123;string&#125; ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式
+@param {string} ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式
 
-@param &#123;scanOpt&#125; [opts] synscan 扫描参数
+@param {scanOpt} [opts] synscan 扫描参数
 
-@return &#123;chan *synscan.SynScanResult&#125; 返回结果
+@return {chan *synscan.SynScanResult} 返回结果
 
 Example:
 ```
@@ -139,9 +139,9 @@ die(err)
 #### 详细描述
 callback syn scan 的配置选项，设置一个回调函数，每发现一个端口就会调用一次
 
-@param &#123;func(i *synscan.SynScanResult)&#125; i 回调函数
+@param {func(i *synscan.SynScanResult)} i 回调函数
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -176,9 +176,9 @@ die(err)
 #### 详细描述
 concurrent syn scan 的配置选项，设置 syn 扫描的发包速率，和 rateLimit 基本相同
 
-@param &#123;int&#125; count 并发数
+@param {int} count 并发数
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -231,9 +231,9 @@ die(err)
 #### 详细描述
 excludeHosts syn scan 的配置选项，设置本次扫描排除的主机
 
-@param &#123;string&#125; hosts 主机，支持逗号分割、CIDR、-的格式
+@param {string} hosts 主机，支持逗号分割、CIDR、-的格式
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -266,9 +266,9 @@ die(err)
 #### 详细描述
 excludePorts syn scan 的配置选项，设置本次扫描排除的端口
 
-@param &#123;string&#125; ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式
+@param {string} ports 端口，支持 1-65535、1,2,3、1-100,200-300 格式
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -301,9 +301,9 @@ die(err)
 #### 详细描述
 iface syn scan 的配置选项，设置 syn 扫描的网卡
 
-@param &#123;string&#125; iface 网卡名称
+@param {string} iface 网卡名称
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -336,9 +336,9 @@ die(err)
 #### 详细描述
 initHostFilter syn scan 的配置选项，设置本次扫描的主机过滤器，只展示这些主机的扫描结果
 
-@param &#123;string&#125; f 主机，支持逗号、CIDR、-分割
+@param {string} f 主机，支持逗号、CIDR、-分割
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -371,9 +371,9 @@ die(err)
 #### 详细描述
 initPortFilter syn scan 的配置选项，设置本次扫描的端口过滤器，只展示这些端口的扫描结果
 
-@param &#123;string&#125; f 端口，支持逗号、-分割
+@param {string} f 端口，支持逗号、-分割
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -406,9 +406,9 @@ die(err)
 #### 详细描述
 maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数
 
-@param &#123;int&#125; max 最大开放端口数
+@param {int} max 最大开放端口数
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -441,9 +441,9 @@ die(err)
 #### 详细描述
 outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的文件
 
-@param &#123;string&#125; file 文件路径
+@param {string} file 文件路径
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -476,9 +476,9 @@ die(err)
 #### 详细描述
 outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用
 
-@param &#123;string&#125; prefix 前缀
+@param {string} prefix 前缀
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -512,11 +512,11 @@ die(err)
 #### 详细描述
 rateLimit syn scan 的配置选项，设置 syn 扫描的速率
 
-@param &#123;int&#125; ms 延迟多少毫秒
+@param {int} ms 延迟多少毫秒
 
-@param &#123;int&#125; count 每隔多少个数据包延迟一次
+@param {int} count 每隔多少个数据包延迟一次
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -550,9 +550,9 @@ die(err)
 #### 详细描述
 shuffle syn scan 的配置选项，设置是否打乱扫描顺序
 
-@param &#123;bool&#125; s 是否打乱
+@param {bool} s 是否打乱
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -585,9 +585,9 @@ die(err)
 #### 详细描述
 submitTaskCallback syn scan 的配置选项，设置一个回调函数，每提交一个探测数据包的时候，这个回调会执行一次
 
-@param &#123;func(string)&#125; i 回调函数
+@param {func(string)} i 回调函数
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```
@@ -622,9 +622,9 @@ die(err)
 #### 详细描述
 wait syn scan 的配置选项，设置等待扫描目标回包的最大时间
 
-@param &#123;float64&#125; sec 等待时间，单位秒
+@param {float64} sec 等待时间，单位秒
 
-@return &#123;scanOpt&#125; 返回配置选项
+@return {scanOpt} 返回配置选项
 
 Example:
 ```

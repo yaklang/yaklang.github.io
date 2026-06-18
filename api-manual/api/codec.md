@@ -35,9 +35,9 @@ OFB|(string) &#34;OFB&#34;|
 | [codec.AESGCMDecrypt](#aesgcmdecrypt) ||
 | [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) ||
 | [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) ||
-| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string &#123; 		block, _ := aes.NewCipher(key) 		nonc...|
+| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string { 		block, _ := aes.NewCipher(key) 		nonc...|
 | [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) ||
-| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string &#123; 		block, _ := aes.NewCipher(key) 		nonc...|
+| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式  	func AES_GCM_Encrypt(key []byte, Content []byte) string { 		block, _ := aes.NewCipher(key) 		nonc...|
 | [codec.AutoDecode](#autodecode) ||
 | [codec.CryptoRandBytes](#cryptorandbytes) ||
 | [codec.DESCBCDecrypt](#descbcdecrypt) |DESCBCDecrypt 是一个便捷函数，用于使用 DES 算法，在 CBC 模式下，使用零填充来解密数据。 它接受一个密钥（key）、需要解密的数据（data to decrypt）和一个初始化向量（iv）。 密钥的长度必须是 8 个字节，并且 iv 可以是 nil 或者 8 个字节长。 如果 ...|
@@ -939,14 +939,14 @@ AESCFBEncryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero
 #### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
 
-	func AES_GCM_Encrypt(key []byte, Content []byte) string &#123;
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
 		block, _ := aes.NewCipher(key)
 		nonce := make([]byte, 16)
 		io.ReadFull(rand.Reader, nonce)
 		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
 		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)
 		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))
-	&#125;
+	}
 
 
 #### 定义
@@ -995,14 +995,14 @@ AESCFBEncryptWithZeroPadding 使用 AES 算法，在 CFB 模式下，使用 Zero
 #### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
 
-	func AES_GCM_Encrypt(key []byte, Content []byte) string &#123;
+	func AES_GCM_Encrypt(key []byte, Content []byte) string {
 		block, _ := aes.NewCipher(key)
 		nonce := make([]byte, 16)
 		io.ReadFull(rand.Reader, nonce)
 		aesgcm, _ := cipher.NewGCMWithNonceSize(block, 16)
 		ciphertext := aesgcm.Seal(nil, nonce, Content, nil)
 		return base64.StdEncoding.EncodeToString(append(nonce, ciphertext...))
-	&#125;
+	}
 
 
 #### 定义

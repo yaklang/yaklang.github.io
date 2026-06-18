@@ -2,8 +2,8 @@
 
 |实例名|实例描述|
 |:------|:--------|
-Discard|(io.discard) io.discard&#123;&#125;|
-EOF|(errors.errorString) &amp;errors.errorString&#123;s: &#34;EOF&#34;&#125;|
+Discard|(io.discard) io.discard{}|
+EOF|(errors.errorString) &amp;errors.errorString{s: &#34;EOF&#34;}|
 
 |函数名|函数描述/介绍|
 |:------|:--------|

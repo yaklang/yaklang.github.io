@@ -47,12 +47,12 @@ In addition, if the key is &#34;-&#34;, the field is ignored.
 
 For example:
 
-    type T struct &#123;
+    type T struct {
         F int `yaml:&#34;a,omitempty&#34;`
         B int
-    &#125;
-    yaml.Marshal(&amp;T&#123;B: 2&#125;) // Returns &#34;b: 2\n&#34;
-    yaml.Marshal(&amp;T&#123;F: 1&#125;&#125; // Returns &#34;a: 1\nb: 0\n&#34;
+    }
+    yaml.Marshal(&amp;T{B: 2}) // Returns &#34;b: 2\n&#34;
+    yaml.Marshal(&amp;T{F: 1}} // Returns &#34;a: 1\nb: 0\n&#34;
 
 
 #### 定义

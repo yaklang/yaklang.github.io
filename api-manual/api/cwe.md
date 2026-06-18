@@ -7,7 +7,7 @@
 | [cwe.Get](#get) ||
 | [cwe.Import](#import) |ImportCWE imports CWE entries from a JSONL file Each line should be a JSON object representing a CWE entry |
 | [cwe.ListAll](#listall) |ListAllCWE returns a channel that yields all CWE entries from the database |
-| [cwe.Update](#update) |CWEUpdate downloads and updates the CWE database Usage: cwe.Update() or cwe.Update(cwe.proxy(&amp;#34;`http://127.0.0.1:8080`&amp;#34;), cwe.url(&amp;#34;https://cu...|
+| [cwe.Update](#update) |CWEUpdate downloads and updates the CWE database Usage: cwe.Update() or cwe.Update(cwe.proxy(&amp;#34;http://127.0.0.1:8080&amp;#34;), cwe.url(&amp;#34;https://cu...|
 | [cwe.aiConcurrent](#aiconcurrent) |WithAIConcurrent sets the number of concurrent workers for AI completion |
 | [cwe.proxy](#proxy) |WithCWEProxy sets the proxy for CWE download |
 | [cwe.testLimit](#testlimit) |WithTestLimit sets the maximum number of CWEs to process (for testing) |
@@ -126,7 +126,7 @@ ListAllCWE returns a channel that yields all CWE entries from the database
 
 #### 详细描述
 CWEUpdate downloads and updates the CWE database
-Usage: cwe.Update() or cwe.Update(cwe.proxy(&#34;`http://127.0.0.1:8080`&#34;), cwe.url(&#34;`https://custom-url.com/cwe.zip`&#34;))
+Usage: cwe.Update() or cwe.Update(cwe.proxy(&#34;http://127.0.0.1:8080&#34;), cwe.url(&#34;https://custom-url.com/cwe.zip&#34;))
 
 
 #### 定义
