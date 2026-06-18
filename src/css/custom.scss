@@ -65,17 +65,27 @@ $max-width: REM(8000);
   // 横向溢出、正文被推出视口、左侧出现大片空白。
 }
 
-// 解决文档正文被固定导航栏遮挡的问题
-// 背景：本站导航栏被改为 position: fixed(见 navbar.scss)，脱离文档流，
-//       正文不会被自动下推；Docusaurus 3 又把 docs-wrapper/docs-doc-page
-//       挂在 <html> 上(旧 .main-wrapper.docs-* 选择器已失配)，导致顶距归零、
-//       面包屑被 60px 导航栏完全遮住丢失。
-// 方案：按 v3 结构为文档正文容器补足顶距(margin，而非遮盖)，使面包屑落到
-//       导航栏下方，并与右侧 TOC(sticky top:76) / 左侧目录顶端对齐。
-//       侧边栏与 TOC 沿用 Docusaurus 默认 sticky 逻辑，本身已正常，无需干预。
+// 解决文档布局被固定导航栏遮挡/重叠的问题
+// 背景：本站导航栏被改为 position: fixed(见 navbar.scss)，脱离文档流，整个文档
+//       布局(docsWrapper > docRoot)从 y=0 起算，需要各自补足一个导航栏高度的顶距。
+// 关键事实(来自 Docusaurus 默认 CSS)：
+//   - docRoot / docMainContainer 均为 display:flex；左侧栏 <aside> 与正文 <main>
+//     (docMainContainer)是 docRoot 的两个 flex 子项。
+//   - 左侧栏 <aside> 的内层包裹 .sidebar 已自带 padding-top: var(--ifm-navbar-height)，
+//     且滚动视口 .sidebarViewport 为 sticky top:0；只要 <aside> 本身落在 y=0，
+//     侧栏条目就会被这段 padding 顶到导航栏下方(滚动时 padding 区落在不透明导航栏后)。
+//   - 正文列：早期用 .container { margin-top } 不可靠(flex 布局下未能把正文推下，
+//     表现为正文/面包屑顶进导航栏)。改用对正文侧 flex 子项 docMainContainer 加
+//     padding-top —— padding 不会被折叠、必定生效，且只影响正文这一侧。
+// 正确方案(两侧各补各的，互不叠加)：
+//   - 正文：docMainContainer 补 padding-top = 导航栏高度；
+//   - 侧栏：把 Docusaurus 默认的 margin-top:-navbar-height 归零，让 <aside> 回到 y=0，
+//           其余交给 .sidebar 自带的 padding-top 处理。
+// 切勿给共同祖先 docRoot 加 padding-top：那会和 .sidebar 自带的 padding-top 叠加，
+//   导致侧栏顶部凭空多出一个导航栏高度的空白(搜索框被压低一截)。
 html.docs-wrapper {
-  .main-wrapper .container {
-    margin-top: var(--ifm-navbar-height);
+  [class*="docMainContainer_"] {
+    padding-top: var(--ifm-navbar-height);
   }
 
   // 修复：固定导航栏下，短页面(如各章概述落地页)左侧目录顶到导航栏上方的 BUG。

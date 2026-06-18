@@ -3,13 +3,14 @@
   // 使用固定 px 高度，避免首页根字号缩放时导航栏过小不可点
   height: 60px;
   // 不透明白底，避免下层侧栏/正文内容透出造成"遮挡/重叠"错觉
-  background-color: #ffffff;
+  // 用 !important 兜底：dev / prod 下样式注入顺序不同，避免被 Infima 同特异性规则覆盖成透明
+  background-color: #ffffff !important;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
   position: fixed;
   top: 0;
   left: 0;
-  // 高于固定侧栏，保证导航栏始终压在内容之上
-  z-index: 220;
+  // 远高于侧栏/正文/TOC 等任何文档层级，保证固定导航栏始终压在最上层
+  z-index: 1000;
   padding: 8px 32px;
   right: 0;
   margin: 0 auto;
