@@ -88,9 +88,57 @@ html.docs-wrapper {
       margin-top: 0;
     }
   }
+
+  // 正文左右留白：给文档正文列增加克制的内边距，让内容不贴左侧目录/右侧 TOC，
+  // 整体更精致。仅桌面端生效(移动端保持紧凑)，并随视口分级放大。
+  // docItemContainer 的 hash 后缀每次构建会变，用前缀匹配保证稳定。
+  // box-sizing 为 border-box，内边距只压缩内容宽度，不会造成横向溢出。
+  @media (min-width: 997px) {
+    [class*="docItemContainer_"] {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1440px) {
+    [class*="docItemContainer_"] {
+      padding-inline: 2.75rem;
+    }
+  }
 }
 .theme-doc-sidebar-menu.menu__list {
   font-size: 14px;
+}
+
+// 侧边栏菜单项强制单行：超长用省略号(...)截断，hover 时由 span 自带的
+// title 属性显示完整内容(tooltip)。覆盖文档与博客两类侧边栏。
+// 关键点:
+//  - 分类(带 caret)的行是 flex 布局，需给可伸缩子项加 min-width:0 才能正确收缩出省略号；
+//  - 标签实际文字在内层 span(linkLabel_*/categoryLinkLabel_*)上，hash 后缀会变，用前缀匹配。
+.menu__list .menu__link,
+.theme-doc-sidebar-menu .menu__list-item-collapsible {
+  min-width: 0;
+}
+.menu__list .menu__link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.menu__list .menu__link > span,
+.menu__list [class*="linkLabel_"],
+.menu__list [class*="categoryLinkLabel_"] {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 博客侧边栏(非 .menu 的 aside nav)链接同样单行省略。
+.theme-blog-sidebar-container a,
+aside nav:not(.menu) a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 img {
@@ -109,6 +157,56 @@ video {
   font-size: 0.85rem;
   color: #6a6f7a;
   line-height: 1.5;
+}
+
+// Yaklang(.yak) 代码块语法配色
+// 语言规则在 src/theme/prism-include-languages.js 注册，
+// 配色参照 yakit Monaco 主题(utils/monacoSpec/theme.ts)做近似映射。
+// 作用域限定在 .language-yak 内，避免影响其它语言(沿用 github 主题)。
+// 注意: prism-react-renderer 的 github 主题会给 token 加“行内 style”，
+// 优先级高于普通 class，因此这里统一用 !important 覆盖，保证 yakit 配色生效。
+.language-yak {
+  // 关键字 break/func/if/for... 对应 yakit keyword(蓝)
+  .token.keyword {
+    color: #2f6ad9 !important;
+    font-weight: 600;
+  }
+  // 空值常量 nil/undefined 与布尔 true/false，沿用关键字蓝
+  .token.boolean,
+  .token.constant {
+    color: #2f6ad9 !important;
+  }
+  // 内置基础类型 int/string/bool... 对应 yakit basic.type(品红)
+  .token.builtin,
+  .token.class-name {
+    color: #a826a4 !important;
+  }
+  // 函数调用 / 库方法 对应 yakit globals & libFunction(橙棕)
+  .token.function {
+    color: #c4652f !important;
+  }
+  // 字符串(含 f-string / 反引号原始串) 对应 yakit string(橄榄绿)
+  .token.string,
+  .token.char {
+    color: #5f8700 !important;
+  }
+  // 注释 对应 yakit comment(灰)
+  .token.comment {
+    color: #8a8f99 !important;
+    font-style: italic;
+  }
+  // 数字 对应 yakit number(湖蓝)
+  .token.number {
+    color: #2a8fbd !important;
+  }
+  // 运算符 对应 yakit operator(紫)
+  .token.operator {
+    color: #9a5fd0 !important;
+    background: transparent !important;
+  }
+  .token.punctuation {
+    color: #5c6370 !important;
+  }
 }
 
 // layout style file

@@ -83,7 +83,7 @@ import { HomePage } from "../components/Home";
 //                                     >
 //                                         <Link
 //                                             to={
-//                                                 "/docs/yakexamples/first_servicescan"
+//                                                 "/api-manual/yakexamples/first_servicescan"
 //                                             }
 //                                         >
 //                                             <strong>

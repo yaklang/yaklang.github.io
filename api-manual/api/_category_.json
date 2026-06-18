@@ -1,4 +1,5 @@
 {
-  "label": "API 接口完全手册",
-  "position": 15
+  "label": "内置标准库完全手册",
+  "position": 90,
+  "collapsed": true
 }
