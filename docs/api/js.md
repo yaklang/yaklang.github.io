@@ -12,27 +12,27 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [.](#) ||
-| [js.ASTWalk](#astwalk) |ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误  |
-| [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果  第一个参数为包含JS代码的字符串  第二个参数为要调用的JS函数名  后续参数为零个到多个函数参数  |
-| [js.GetFunction](#getfunction) |GetFunction 将传入的Value转换为可以调用的对象(Object)函数  第一个参数为JS引擎  第二个参数为函数名字  |
-| [js.GetObjectFunction](#getobjectfunction) |GetObjectFunction 将传入的Value转换为可以调用的对象(Object)函数  第一个参数为JS引擎  第二个参数为Object名字  第三个参数为方法名字  |
-| [js.GetSTType](#getsttype) ||
-| [js.New](#new) |New 创建新的JS引擎并返回  |
-| [js.Parse](#parse) |Parse 对传入的JS代码进行解析并返回解析后的AST树和错误  |
-| [js.Run](#run) |Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误  第一个参数为运行的代码字符串  后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等  现在会尝试自动导入代码中使用到的库, CryptoJS会导入V4版本  |
-| [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库  |
-| [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库  |
-| [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库  |
-| [js.libJsEncrypt](#libjsencrypt) |_libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入JsEncrypt 3.3.2库  |
-| [js.withVariable](#withvariable) ||
-| [js.withVariables](#withvariables) ||
+| [js.ASTWalk](#astwalk) |ASTWalk 对传入的 JS 代码进行 AST 遍历，收集字面量、标识符与语法错误（导出名为 js.ASTWalk） 参数: - code: JS 源代码字符串 返回值: - 遍历结果（含字符串字面量、标识符、语法错误等） - 错误信息|
+| [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入代码中调用指定的 JS 函数并返回结果 参数: - src: 包含 JS 代码的字符串 - funcName: 要调用的 JS 函数名 - params: 零个或多个函数参数 返回值: - 函数调用的返回值 - 错误信息|
+| [js.GetFunction](#getfunction) |GetFunction 从 JS 引擎中取出某个全局函数并转换为可调用函数 参数: - vm: JS 引擎 - funcName: 函数名 返回值: - 可调用的 JS 函数 - 是否成功获取|
+| [js.GetObjectFunction](#getobjectfunction) |GetObjectFunction 从 JS 引擎中取出某个对象的方法并转换为可调用函数 参数: - vm: JS 引擎 - thisName: 对象名 - funcName: 方法名 返回值: - 可调用的 JS 函数 - 是否成功获取|
+| [js.GetSTType](#getsttype) |GetStatementType 返回 JS AST 节点的类型名（去掉 *ast. 前缀，导出名为 js.GetSTType） 参数: - st: JS AST 节点（如 js.Parse 的返回值或其子节点） 返回值: - 节点类型名字符串|
+| [js.New](#new) |New 创建一个新的 JS 引擎（goja Runtime）并返回 参数: - opts: 零个或多个运行选项，如嵌入第三方库或预置变量 返回值: - JS 引擎对象，可调用 RunString 执行 JS 代码|
+| [js.Parse](#parse) |Parse 对传入的 JS 代码进行解析并返回 AST 语法树 参数: - code: JS 源代码字符串 返回值: - 解析得到的 AST 程序节点 - 错误信息|
+| [js.Run](#run) |Run 创建新的 JS 引擎并运行传入代码，返回引擎、运行结果值和错误 会尝试自动导入代码中用到的库（CryptoJS 默认导入 V4 版本） 参数: - src: 要运行的 JS 代码字符串 - opts: 零个或多个运行选项，如嵌入第三方库或预置变量 返回值: - JS 引擎对象 - 运行结果值...|
+| [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 3.3.0 库 返回值: - JS 运行选项|
+| [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 4.2.0 库 返回值: - JS 运行选项|
+| [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 jsrsasign 10.8.6 库 返回值: - JS 运行选项|
+| [js.libJsEncrypt](#libjsencrypt) |libJsEncrypt 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 JSEncrypt 3.3.2 库 返回值: - JS 运行选项|
+| [js.withVariable](#withvariable) |withVariable 为 JS 运行设置单个全局变量（导出名为 js.withVariable） 参数: - name: 变量名 - value: 变量值 返回值: - JS 运行选项|
+| [js.withVariables](#withvariables) |withVariables 为 JS 运行批量设置多个全局变量（导出名为 js.withVariables） 参数: - vars: 变量名到变量值的映射 返回值: - JS 运行选项|
 
 
 ## 函数定义
 ### 
 
 #### 详细描述
-
+暂无描述
 
 #### 定义
 
@@ -42,14 +42,29 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 ### ASTWalk
 
 #### 详细描述
-ASTWalk 对传入的JS代码进行AST遍历，返回遍历后的结果(包含字面量，标识符，语法错误)和错误
+ASTWalk 对传入的 JS 代码进行 AST 遍历，收集字面量、标识符与语法错误（导出名为 js.ASTWalk）
+
+参数:
+
+  - code: JS 源代码字符串
+
+
+
+返回值:
+
+  - 遍历结果（含字符串字面量、标识符、语法错误等）
+
+  - 错误信息
+
+
+
 
 Example:
-```
-code = `function add(a, b) { return a + b; }`
-res = js.ASTWalk(code)~
+
+``````````````yak
+res = js.ASTWalk(`var name = "yak"; foo("bar");`)~
 dump(res)
-```
+``````````````
 
 
 #### 定义
@@ -59,31 +74,46 @@ dump(res)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| code | `string` |   |
+| code | `string` | JS 源代码字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ASTWalkerResult` |   |
-| r2 | `error` |   |
+| r1 | `*ASTWalkerResult` | 遍历结果（含字符串字面量、标识符、语法错误等） |
+| r2 | `error` | 错误信息 |
 
 
 ### CallFunctionFromCode
 
 #### 详细描述
-CallFunctionFromCode 从传入的代码中调用指定的JS函数并返回调用结果
+CallFunctionFromCode 从传入代码中调用指定的 JS 函数并返回结果
 
-第一个参数为包含JS代码的字符串
+参数:
 
-第二个参数为要调用的JS函数名
+  - src: 包含 JS 代码的字符串
 
-后续参数为零个到多个函数参数
+  - funcName: 要调用的 JS 函数名
+
+  - params: 零个或多个函数参数
+
+
+
+返回值:
+
+  - 函数调用的返回值
+
+  - 错误信息
+
+
+
 
 Example:
-```
+
+``````````````yak
 value = js.CallFunctionFromCode(`function add(a, b) { return a + b; }`, "add", 1, 2)~
-println(value.String())
-```
+println(value.ToInteger())   // OUT: 3
+assert value.ToInteger() == 3, "add(1,2) should be 3"
+``````````````
 
 
 #### 定义
@@ -93,34 +123,47 @@ println(value.String())
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| src | `any` |   |
-| funcName | `string` |   |
-| params | `...any` |   |
+| src | `any` | 包含 JS 代码的字符串 |
+| funcName | `string` | 要调用的 JS 函数名 |
+| params | `...any` | 零个或多个函数参数 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `goja.Value` |   |
-| r2 | `error` |   |
+| r1 | `goja.Value` | 函数调用的返回值 |
+| r2 | `error` | 错误信息 |
 
 
 ### GetFunction
 
 #### 详细描述
-GetFunction 将传入的Value转换为可以调用的对象(Object)函数
+GetFunction 从 JS 引擎中取出某个全局函数并转换为可调用函数
 
-第一个参数为JS引擎
+参数:
 
-第二个参数为函数名字
+  - vm: JS 引擎
+
+  - funcName: 函数名
+
+
+
+返回值:
+
+  - 可调用的 JS 函数
+
+  - 是否成功获取
+
+
+
 
 Example:
-```
+
+``````````````yak
 vm, _ = js.Run(`function sum(a, b) {return a+b;}`)~
-sum, ok = js.GetFunction(vm,"sum")
-if ok {
-println(sum(2,3).ToInteger()) // 5
-}
-```
+sum, ok = js.GetFunction(vm, "sum")
+assert ok, "should get function sum"
+assert sum(2, 3)~.ToInteger() == 5, "sum(2,3) should be 5"
+``````````````
 
 
 #### 定义
@@ -130,38 +173,48 @@ println(sum(2,3).ToInteger()) // 5
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| vm | `*goja.Runtime` |   |
-| funcName | `string` |   |
+| vm | `*goja.Runtime` | JS 引擎 |
+| funcName | `string` | 函数名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsFunction` |   |
-| r2 | `bool` |   |
+| r1 | `jsFunction` | 可调用的 JS 函数 |
+| r2 | `bool` | 是否成功获取 |
 
 
 ### GetObjectFunction
 
 #### 详细描述
-GetObjectFunction 将传入的Value转换为可以调用的对象(Object)函数
+GetObjectFunction 从 JS 引擎中取出某个对象的方法并转换为可调用函数
 
-第一个参数为JS引擎
+参数:
 
-第二个参数为Object名字
+  - vm: JS 引擎
 
-第三个参数为方法名字
+  - thisName: 对象名
+
+  - funcName: 方法名
+
+
+
+返回值:
+
+  - 可调用的 JS 函数
+
+  - 是否成功获取
+
+
+
 
 Example:
-```
-vm, _ = js.Run(`a = {
-d: 3,
-add(a) {return this.d+a},
-}`)~
+
+``````````````yak
+vm, _ = js.Run(`a = { d: 3, add(a) {return this.d+a} }`)~
 add, ok = js.GetObjectFunction(vm, "a", "add")
-if ok {
-println(add(1).ToInteger()) // 4
-}
-```
+assert ok, "should get object method add"
+assert add(1)~.ToInteger() == 4, "a.add(1) should be 4"
+``````````````
 
 
 #### 定义
@@ -171,20 +224,42 @@ println(add(1).ToInteger()) // 4
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| vm | `*goja.Runtime` |   |
-| thisName | `string` |   |
-| funcName | `string` |   |
+| vm | `*goja.Runtime` | JS 引擎 |
+| thisName | `string` | 对象名 |
+| funcName | `string` | 方法名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsFunction` |   |
-| r2 | `bool` |   |
+| r1 | `jsFunction` | 可调用的 JS 函数 |
+| r2 | `bool` | 是否成功获取 |
 
 
 ### GetSTType
 
 #### 详细描述
+GetStatementType 返回 JS AST 节点的类型名（去掉 *ast. 前缀，导出名为 js.GetSTType）
+
+参数:
+
+  - st: JS AST 节点（如 js.Parse 的返回值或其子节点）
+
+
+
+返回值:
+
+  - 节点类型名字符串
+
+
+
+
+Example:
+
+``````````````yak
+tree = js.Parse("function add(a, b) { return a + b; }")~
+println(js.GetSTType(tree))   // OUT: Program
+assert js.GetSTType(tree) == "Program", "parsed root node should be Program"
+``````````````
 
 
 #### 定义
@@ -194,25 +269,40 @@ println(add(1).ToInteger()) // 4
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| st | `any` |   |
+| st | `any` | JS AST 节点（如 js.Parse 的返回值或其子节点） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 节点类型名字符串 |
 
 
 ### New
 
 #### 详细描述
-New 创建新的JS引擎并返回
+New 创建一个新的 JS 引擎（goja Runtime）并返回
+
+参数:
+
+  - opts: 零个或多个运行选项，如嵌入第三方库或预置变量
+
+
+
+返回值:
+
+  - JS 引擎对象，可调用 RunString 执行 JS 代码
+
+
+
 
 Example:
-```
+
+``````````````yak
 engine = js.New()
-val = engine.RunString("1+1")~.ToInteger()~
-println(val)
-```
+val = engine.RunString("1+1")~.ToInteger()
+println(val)   // OUT: 2
+assert val == 2, "js engine should evaluate 1+1 to 2"
+``````````````
 
 
 #### 定义
@@ -222,25 +312,41 @@ println(val)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...jsRunOpts` |   |
+| opts | `...jsRunOpts` | 零个或多个运行选项，如嵌入第三方库或预置变量 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*goja.Runtime` |   |
+| r1 | `*goja.Runtime` | JS 引擎对象，可调用 RunString 执行 JS 代码 |
 
 
 ### Parse
 
 #### 详细描述
-Parse 对传入的JS代码进行解析并返回解析后的AST树和错误
+Parse 对传入的 JS 代码进行解析并返回 AST 语法树
+
+参数:
+
+  - code: JS 源代码字符串
+
+
+
+返回值:
+
+  - 解析得到的 AST 程序节点
+
+  - 错误信息
+
+
+
 
 Example:
-```
-code = `function add(a, b) { return a + b; }`
-tree = js.Parse(code)~
-dump(tree)
-```
+
+``````````````yak
+tree = js.Parse(`function add(a, b) { return a + b; }`)~
+assert tree != nil, "parse should return a non-nil AST"
+println(js.GetSTType(tree))   // OUT: Program
+``````````````
 
 
 #### 定义
@@ -250,31 +356,48 @@ dump(tree)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| code | `string` |   |
+| code | `string` | JS 源代码字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ast.Program` |   |
-| r2 | `error` |   |
+| r1 | `*ast.Program` | 解析得到的 AST 程序节点 |
+| r2 | `error` | 错误信息 |
 
 
 ### Run
 
 #### 详细描述
-Run 创建新的JS引擎并运行传入的代码并返回JS引擎结构体引用，运行值和错误
+Run 创建新的 JS 引擎并运行传入代码，返回引擎、运行结果值和错误
 
-第一个参数为运行的代码字符串
+会尝试自动导入代码中用到的库（CryptoJS 默认导入 V4 版本）
 
-后续参数为零个到多个运行选项，用于对此次运行进行配置，例如嵌入常用的JS第三方库等
+参数:
 
-现在会尝试自动导入代码中使用到的库, CryptoJS会导入V4版本
+  - src: 要运行的 JS 代码字符串
+
+  - opts: 零个或多个运行选项，如嵌入第三方库或预置变量
+
+
+
+返回值:
+
+  - JS 引擎对象
+
+  - 运行结果值
+
+  - 错误信息
+
+
+
 
 Example:
-```
-_, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
-println(value.String())
-```
+
+``````````````yak
+_, value = js.Run("1+1")~
+println(value.ToInteger())   // OUT: 2
+assert value.ToInteger() == 2, "js.Run should evaluate 1+1 to 2"
+``````````````
 
 
 #### 定义
@@ -284,27 +407,35 @@ println(value.String())
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| src | `any` |   |
-| opts | `...jsRunOpts` |   |
+| src | `any` | 要运行的 JS 代码字符串 |
+| opts | `...jsRunOpts` | 零个或多个运行选项，如嵌入第三方库或预置变量 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*goja.Runtime` |   |
-| r2 | `goja.Value` |   |
-| r3 | `error` |   |
+| r1 | `*goja.Runtime` | JS 引擎对象 |
+| r2 | `goja.Value` | 运行结果值 |
+| r3 | `error` | 错误信息 |
 
 
 ### libCryptoJSV3
 
 #### 详细描述
-libCryptoJSV3 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 3.3.0库
+libCryptoJSV3 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 3.3.0 库
+
+返回值:
+
+  - JS 运行选项
+
+
+
 
 Example:
-```
+
+``````````````yak
 _, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV3())~
-println(value.String())
-```
+assert value.String() == "aa747c502a898200f9e4fa21bac68136f886a0e27aec70ba06daf2e2a5cb5597", "HmacSHA256 should be deterministic"
+``````````````
 
 
 #### 定义
@@ -314,19 +445,27 @@ println(value.String())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 
 ### libCryptoJSV4
 
 #### 详细描述
-libCryptoJSV4 是一个JS运行选项参数，用于在运行JS代码时嵌入CryptoJS 4.2.0库
+libCryptoJSV4 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 4.2.0 库
+
+返回值:
+
+  - JS 运行选项
+
+
+
 
 Example:
-```
+
+``````````````yak
 _, value = js.Run(`CryptoJS.HmacSHA256("Message", "secret").toString();`, js.libCryptoJSV4())~
-println(value.String())
-```
+assert value.String() == "aa747c502a898200f9e4fa21bac68136f886a0e27aec70ba06daf2e2a5cb5597", "HmacSHA256 should be deterministic"
+``````````````
 
 
 #### 定义
@@ -336,19 +475,28 @@ println(value.String())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 
 ### libJSRSASign
 
 #### 详细描述
-libJSRSASign 是一个JS运行选项参数，用于在运行JS代码时嵌入jsrsasign 10.8.6库
+libJSRSASign 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 jsrsasign 10.8.6 库
+
+返回值:
+
+  - JS 运行选项
+
+
+
 
 Example:
-```
+
+``````````````yak
+// 示意性示例，需要有效的 PEM 公钥
 _, value = js.Run(`KEYUTIL.getKey(pemPublicKey).encrypt("yaklang")`, js.libJSRSASign())~
 println(value.String())
-```
+``````````````
 
 
 #### 定义
@@ -358,19 +506,27 @@ println(value.String())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 
 ### libJsEncrypt
 
 #### 详细描述
-_libJsEncrypt 是一个JS运行选项参数，用于在运行JS代码时嵌入JsEncrypt 3.3.2库
+libJsEncrypt 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 JSEncrypt 3.3.2 库
+
+返回值:
+
+  - JS 运行选项
+
+
+
 
 Example:
-```
-_, value = js.Run("var encrypt = new JSEncrypt();", js._libJsEncrypt())~
-println(value.String())
-```
+
+``````````````yak
+_, value = js.Run("var encrypt = new JSEncrypt(); 'ok';", js.libJsEncrypt())~
+assert value.String() == "ok", "JSEncrypt lib should be embedded successfully"
+``````````````
 
 
 #### 定义
@@ -380,12 +536,36 @@ println(value.String())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 
 ### withVariable
 
 #### 详细描述
+withVariable 为 JS 运行设置单个全局变量（导出名为 js.withVariable）
+
+参数:
+
+  - name: 变量名
+
+  - value: 变量值
+
+
+
+返回值:
+
+  - JS 运行选项
+
+
+
+
+Example:
+
+``````````````yak
+_, value = js.Run("a + b", js.withVariable("a", 1), js.withVariable("b", 2))~
+println(value.ToInteger())   // OUT: 3
+assert value.ToInteger() == 3, "a + b with injected variables should be 3"
+``````````````
 
 
 #### 定义
@@ -395,18 +575,40 @@ println(value.String())
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
-| value | `any` |   |
+| name | `string` | 变量名 |
+| value | `any` | 变量值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 
 ### withVariables
 
 #### 详细描述
+withVariables 为 JS 运行批量设置多个全局变量（导出名为 js.withVariables）
+
+参数:
+
+  - vars: 变量名到变量值的映射
+
+
+
+返回值:
+
+  - JS 运行选项
+
+
+
+
+Example:
+
+``````````````yak
+_, value = js.Run("a + b", js.withVariables({"a": 10, "b": 5}))~
+println(value.ToInteger())   // OUT: 15
+assert value.ToInteger() == 15, "a + b with injected variables should be 15"
+``````````````
 
 
 #### 定义
@@ -416,11 +618,11 @@ println(value.String())
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| vars | `map[string]any` |   |
+| vars | `map[string]any` | 变量名到变量值的映射 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `jsRunOpts` |   |
+| r1 | `jsRunOpts` | JS 运行选项 |
 
 

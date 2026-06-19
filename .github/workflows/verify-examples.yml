@@ -1,0 +1,40 @@
+name: Verify Doc Examples
+
+# 校验文档(含自动生成的 api/)里 14 反引号 yak 示例块的语法与 assert。
+# 仅含 assert / OUT / 确定性渲染的块会被实际执行; 真实网络/外部依赖的示意块自动跳过。
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'scripts/verify-manual-examples.py'
+      - '.github/workflows/verify-examples.yml'
+
+jobs:
+  verify-examples:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Prepare yak engine
+        run: |
+          # 下载官方发布的最新 yak 引擎二进制(含文档示例所需的全部库)。
+          mkdir -p "$HOME/bin"
+          wget -q -O "$HOME/bin/yak" https://aliyun-oss.yaklang.com/yak/latest/yak_linux_amd64
+          chmod +x "$HOME/bin/yak"
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+
+      - name: Show yak version
+        run: yak version || true
+
+      - name: Verify examples
+        run: |
+          python3 scripts/verify-manual-examples.py

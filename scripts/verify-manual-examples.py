@@ -34,8 +34,10 @@ DOCS = os.environ.get(
 FENCE14 = "`" * 14  # 14 backticks, 见 MANUAL_EXAMPLE_SPEC.md 第二节
 FENCE3 = "`" * 3
 
-# 不验证的遗留目录(相对 docs/): 旧版手册 / 编程实战案例 / 自动生成的完全手册
-EXCLUDE_DIRS = {"buildinlibs", "yakexamples", "api"}
+# 不验证的遗留目录(相对 docs/): 旧版手册 / 编程实战案例。
+# 注意: api/ 由 generate_web_doc 自动生成, 示例统一为 14 反引号 yak 块, 已纳入验证;
+# 其中真实网络/外部依赖且无 assert/OUT 的示意块会被下方跳过逻辑自动忽略。
+EXCLUDE_DIRS = {"buildinlibs", "yakexamples"}
 
 # 视为 Yaklang 代码的 3 反引号语言标识。
 # 注意: 真正可运行的 yak 示例一律用 `yak` 标注; `go`/`golang` 仅用于展示

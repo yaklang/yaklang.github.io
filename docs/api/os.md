@@ -2,59 +2,59 @@
 
 |实例名|实例描述|
 |:------|:--------|
-ARCH|(string) &#34;amd64&#34;|
+ARCH|(string) &#34;arm64&#34;|
 Args|([]string) Command line arguments|
 IsPrivileged|(bool) false|
-OS|(string) &#34;linux&#34;|
-Stderr|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stderr&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: true, appendMode: false}}|
-Stdin|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdin&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: false, appendMode: false}}|
-Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdout&#34;, dirinfo: atomic.Pointer[os.dirInfo]{_: [0]*os.dirInfo{}, _: atomic.noCopy{}, v: (unsafe.Pointer)(nil)}, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+OS|(string) &#34;darwin&#34;|
+Stderr|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 2, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stderr&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: true, appendMode: false}}|
+Stdin|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 0, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdin&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: false, appendMode: false}}|
+Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex{state: 0, rsema: 0, wsema: 0}, Sysfd: 1, SysFile: poll.SysFile{iovecs: (*[]syscall.Iovec)(nil)}, pd: poll.pollDesc{runtimeCtx: 0}, csema: 0, isBlocking: 1, IsStream: true, ZeroReadIsEOF: true, isFile: true}, name: &#34;/dev/stdout&#34;, dirinfo: &lt;Already printed&gt;, nonblock: false, stdoutOrErr: true, appendMode: false}}|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [os.Chdir](#chdir) |Chdir 改变当前工作目录  |
-| [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限  |
-| [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组  |
-| [os.Clearenv](#clearenv) |Clearenv 清空所有环境变量  |
-| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为&amp;#34;key=value&amp;#34;  |
-| [os.Executable](#executable) |Executable 获取当前可执行文件的路径  |
-| [os.Exit](#exit) |Exit 退出当前进程  |
-| [os.ExpandEnv](#expandenv) |ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值  |
-| [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片  |
-| [os.GetHomeDir](#gethomedir) |GetHomeDir 获取当前用户的家目录  |
-| [os.GetLocalAddress](#getlocaladdress) |GetLocalAddress 获取本地IP地址  |
-| [os.GetLocalIPv4Address](#getlocalipv4address) |GetLocalIPv4Address 获取本地IPv4地址  |
-| [os.GetLocalIPv6Address](#getlocalipv6address) |GetLocalIPv6Address 获取本地IPv6地址  |
-| [os.GetMachineID](#getmachineid) |GetMachineID 获取每个机器唯一的标识符  |
-| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) |GetRandomAvailableTCPPort 获取随机可用的TCP端口  |
-| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) |GetRandomAvailableUDPPort 获取随机可用的UDP端口  |
-| [os.Getegid](#getegid) |Getegid 获取当前进程的有效组ID  |
-| [os.Getenv](#getenv) |Getenv 获取指定的环境变量的值，如果不存在则返回空字符串  |
-| [os.Geteuid](#geteuid) |Geteuid 获取当前进程的有效用户ID  |
-| [os.Getgid](#getgid) |Getgid 获取当前进程的组ID  |
-| [os.Getpid](#getpid) |Getpid 获取当前进程的进程ID  |
-| [os.Getppid](#getppid) |Getppid  获取当前进程的父进程ID  |
-| [os.Getuid](#getuid) |Getuid 获取当前进程的用户ID  |
-| [os.Getwd](#getwd) |Getwd 获取当前工作目录路径  |
-| [os.Hostname](#hostname) |Hostname 获取主机名  |
-| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) |IsRemoteTCPPortOpen 检查远程TCP端口是否开放  |
-| [os.IsTCPPortAvailable](#istcpportavailable) |IsTCPPortAvailable 检查TCP端口是否可用  |
-| [os.IsTCPPortOpen](#istcpportopen) |IsTCPPortOpen 检查TCP端口是否开放  |
-| [os.IsUDPPortAvailable](#isudpportavailable) |IsUDPPortAvailable 检查UDP端口是否可用  |
-| [os.IsUDPPortOpen](#isudpportopen) |IsUDPPortOpen 检查UDP端口是否开放  |
-| [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值  |
-| [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP  |
-| [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP  |
-| [os.NewConnectionsWatcher](#newconnectionswatcher) |NewWatcher 创建一个新的进程监控器实例 |
-| [os.NewProcessWatcher](#newprocesswatcher) |NewProcessesWatcher 创建并初始化一个新的进程监控器 |
-| [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误  它实际是 io.Pipe 的别名  |
-| [os.Remove](#remove) |Remove 删除指定的文件或目录  |
-| [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其子路径  |
-| [os.Rename](#rename) |Rename 重命名文件或目录，可以用于移动文件或目录  |
-| [os.Setenv](#setenv) |Setenv 设置指定的环境变量  |
-| [os.TempDir](#tempdir) |TempDir 获取用于存放临时文件的默认目录路径  |
-| [os.Unsetenv](#unsetenv) |Unsetenv 删除指定的环境变量  |
-| [os.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动  |
+| [os.Chdir](#chdir) |Chdir 改变当前工作目录 参数: - dir: 目标工作目录路径 返回值: - 错误信息|
+| [os.Chmod](#chmod) |Chmod 改变指定文件或目录的权限 参数: - name: 文件或目录路径 - mode: 目标权限（如 0o777） 返回值: - 错误信息|
+| [os.Chown](#chown) |Chown 改变指定文件或目录的所有者和所属组 参数: - name: 文件或目录路径 - uid: 新的所有者用户 ID - gid: 新的所属组 ID 返回值: - 错误信息|
+| [os.Clearenv](#clearenv) |Clearenv 清空当前进程的所有环境变量|
+| [os.Environ](#environ) |Environ 获取表示环境变量的字符串切片，格式为&#34;key=value&#34; 返回值: - 形如 &#34;key=value&#34; 的环境变量字符串切片|
+| [os.Executable](#executable) |Executable 获取当前可执行文件的路径 返回值: - 当前可执行文件的绝对路径 - 错误信息|
+| [os.Exit](#exit) |Exit 以指定状态码退出当前进程 参数: - code: 进程退出状态码（0 表示成功）|
+| [os.ExpandEnv](#expandenv) |ExpandEnv 将字符串中的 ${var} 或 $var 替换为其对应环境变量的值 参数: - s: 含有环境变量引用的字符串 返回值: - 替换后的字符串|
+| [os.GetDefaultDNSServers](#getdefaultdnsservers) |GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片 返回值: - 默认 DNS 服务器 IP 字符串切片|
+| [os.GetHomeDir](#gethomedir) |GetHomeDir 获取当前用户的家目录 返回值: - 当前用户的家目录路径|
+| [os.GetLocalAddress](#getlocaladdress) |GetLocalAddress 获取本地IP地址 返回值: - 本地网卡 IP 地址字符串切片|
+| [os.GetLocalIPv4Address](#getlocalipv4address) |GetLocalIPv4Address 获取本地IPv4地址 返回值: - 本地非回环 IPv4 地址字符串切片|
+| [os.GetLocalIPv6Address](#getlocalipv6address) |GetLocalIPv6Address 获取本地IPv6地址 返回值: - 本地非回环 IPv6 地址字符串切片|
+| [os.GetMachineID](#getmachineid) |GetMachineID 获取每个机器唯一的标识符 返回值: - 当前机器的唯一标识字符串|
+| [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) |GetRandomAvailableTCPPort 获取一个随机可用的TCP端口 返回值: - 一个当前可用的 TCP 端口号|
+| [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) |GetRandomAvailableUDPPort 获取一个随机可用的UDP端口 返回值: - 一个当前可用的 UDP 端口号|
+| [os.Getegid](#getegid) |Getegid 获取当前进程的有效组ID 返回值: - 当前进程的有效组 ID|
+| [os.Getenv](#getenv) |Getenv 获取指定的环境变量的值，如果不存在则返回空字符串 参数: - key: 环境变量名 返回值: - 环境变量的值，不存在时为空字符串|
+| [os.Geteuid](#geteuid) |Geteuid 获取当前进程的有效用户ID 返回值: - 当前进程的有效用户 ID|
+| [os.Getgid](#getgid) |Getgid 获取当前进程的组ID 返回值: - 当前进程的组 ID|
+| [os.Getpid](#getpid) |Getpid 获取当前进程的进程ID 返回值: - 当前进程 ID|
+| [os.Getppid](#getppid) |Getppid 获取当前进程的父进程ID 返回值: - 当前进程的父进程 ID|
+| [os.Getuid](#getuid) |Getuid 获取当前进程的用户ID 返回值: - 当前进程的用户 ID|
+| [os.Getwd](#getwd) |Getwd 获取当前工作目录路径 返回值: - 当前工作目录路径 - 错误信息|
+| [os.Hostname](#hostname) |Hostname 获取主机名 返回值: - 主机名 - 错误信息|
+| [os.IsRemoteTCPPortOpen](#isremotetcpportopen) |IsRemoteTCPPortOpen 检查远程主机的TCP端口是否开放 参数: - host: 远程主机地址（域名或 IP） - p: 待检查的 TCP 端口号 返回值: - 远程端口是否开放|
+| [os.IsTCPPortAvailable](#istcpportavailable) |IsTCPPortAvailable 检查本地TCP端口是否可用（未被占用） 参数: - p: 待检查的 TCP 端口号 返回值: - 端口是否可用（可被监听）|
+| [os.IsTCPPortOpen](#istcpportopen) |IsTCPPortOpen 检查本地TCP端口是否开放（被占用） 参数: - p: 待检查的 TCP 端口号 返回值: - 端口是否开放（已被监听）|
+| [os.IsUDPPortAvailable](#isudpportavailable) |IsUDPPortAvailable 检查本地UDP端口是否可用（未被占用） 参数: - p: 待检查的 UDP 端口号 返回值: - 端口是否可用|
+| [os.IsUDPPortOpen](#isudpportopen) |IsUDPPortOpen 检查本地UDP端口是否开放（被占用） 参数: - p: 待检查的 UDP 端口号 返回值: - 端口是否开放（已被占用）|
+| [os.LookupEnv](#lookupenv) |LookupEnv 获取指定的环境变量的值，并返回该变量是否存在 参数: - key: 环境变量名 返回值: - 环境变量的值 - 该环境变量是否存在|
+| [os.LookupHost](#lookuphost) |LookupHost 通过DNS服务器，根据域名查找IP 参数: - i: 待查询的域名 返回值: - 解析得到的 IP 字符串切片|
+| [os.LookupIP](#lookupip) |LookupIP 通过DNS服务器，根据域名查找IP 参数: - i: 待查询的域名 返回值: - 解析得到的 IP 字符串切片|
+| [os.NewConnectionsWatcher](#newconnectionswatcher) |NewConnectionsWatcher 针对单个进程创建一个网络连接监控器，发现新的远程 IP 时回调通知 参数: - pid: 待监控的进程 ID - cb: 发现新远程 IP 时的回调函数，签名为 func(pid, remoteIP) - interval: 轮询连接的时间间隔 返回值: ...|
+| [os.NewProcessWatcher](#newprocesswatcher) |NewProcessWatcher 创建并初始化一个新的系统进程监控器，用于监控进程的创建与退出 返回值: - 进程监控器对象|
+| [os.Pipe](#pipe) |Pipe 创建一个管道，返回一个读取端和一个写入端以及错误 它实际是 io.Pipe 的别名 返回值: - 管道的读取端文件对象 - 管道的写入端文件对象 - 错误信息|
+| [os.Remove](#remove) |Remove 删除指定的文件或空目录 参数: - name: 待删除的文件或目录路径 返回值: - 错误信息|
+| [os.RemoveAll](#removeall) |RemoveAll 递归删除指定的路径及其包含的所有子路径 参数: - name: 待删除的路径 返回值: - 错误信息|
+| [os.Rename](#rename) |Rename 重命名文件或目录，可以用于移动文件或目录 参数: - oldpath: 原路径 - newpath: 目标路径 返回值: - 错误信息|
+| [os.Setenv](#setenv) |Setenv 设置指定的环境变量 参数: - key: 环境变量名 - value: 环境变量值 返回值: - 错误信息|
+| [os.TempDir](#tempdir) |TempDir 获取用于存放临时文件的默认目录路径 返回值: - 系统临时目录路径|
+| [os.Unsetenv](#unsetenv) |Unsetenv 删除指定的环境变量 参数: - key: 待删除的环境变量名 返回值: - 错误信息|
+| [os.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动 参数: - addr: 目标地址（host:port） - timeout: 最长等待时间（秒） 返回值: - 错误信息（超时或连接失败时非空）|
 
 
 ## 函数定义
@@ -63,10 +63,24 @@ Stdout|(os.File) &amp;os.File{file: &amp;os.file{pfd: poll.FD{fdmu: poll.fdMutex
 #### 详细描述
 Chdir 改变当前工作目录
 
+参数:
+
+  - dir: 目标工作目录路径
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 err = os.Chdir("/tmp")
-```
+``````````````
 
 
 #### 定义
@@ -76,12 +90,12 @@ err = os.Chdir("/tmp")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| dir | `string` |   |
+| dir | `string` | 目标工作目录路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### Chmod
@@ -89,10 +103,26 @@ err = os.Chdir("/tmp")
 #### 详细描述
 Chmod 改变指定文件或目录的权限
 
+参数:
+
+  - name: 文件或目录路径
+
+  - mode: 目标权限（如 0o777）
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 err = os.Chmod("/tmp/test.txt", 0777)
-```
+``````````````
 
 
 #### 定义
@@ -102,13 +132,13 @@ err = os.Chmod("/tmp/test.txt", 0777)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
-| mode | `os.FileMode` |   |
+| name | `string` | 文件或目录路径 |
+| mode | `os.FileMode` | 目标权限（如 0o777） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### Chown
@@ -116,10 +146,28 @@ err = os.Chmod("/tmp/test.txt", 0777)
 #### 详细描述
 Chown 改变指定文件或目录的所有者和所属组
 
+参数:
+
+  - name: 文件或目录路径
+
+  - uid: 新的所有者用户 ID
+
+  - gid: 新的所属组 ID
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 err = os.Chown("/var/www/html/test.txt", 1000, 1000)
-```
+``````````````
 
 
 #### 定义
@@ -129,25 +177,27 @@ err = os.Chown("/var/www/html/test.txt", 1000, 1000)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
-| uid | `int` |   |
-| gid | `int` |   |
+| name | `string` | 文件或目录路径 |
+| uid | `int` | 新的所有者用户 ID |
+| gid | `int` | 新的所属组 ID |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### Clearenv
 
 #### 详细描述
-Clearenv 清空所有环境变量
+Clearenv 清空当前进程的所有环境变量
+
 
 Example:
-```
+
+``````````````yak
 os.Clearenv()
-```
+``````````````
 
 
 #### 定义
@@ -160,13 +210,21 @@ os.Clearenv()
 #### 详细描述
 Environ 获取表示环境变量的字符串切片，格式为&#34;key=value&#34;
 
+返回值:
+
+  - 形如 &#34;key=value&#34; 的环境变量字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 for env in os.Environ() {
 value = env.SplitN("=", 2)
 printf("key = %s, value = %v\n", value[0], value[1])
 }
-```
+``````````````
 
 
 #### 定义
@@ -176,7 +234,7 @@ printf("key = %s, value = %v\n", value[0], value[1])
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 形如 &#34;key=value&#34; 的环境变量字符串切片 |
 
 
 ### Executable
@@ -184,10 +242,20 @@ printf("key = %s, value = %v\n", value[0], value[1])
 #### 详细描述
 Executable 获取当前可执行文件的路径
 
+返回值:
+
+  - 当前可执行文件的绝对路径
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 path, err = os.Executable()
-```
+``````````````
 
 
 #### 定义
@@ -197,19 +265,27 @@ path, err = os.Executable()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 当前可执行文件的绝对路径 |
+| r2 | `error` | 错误信息 |
 
 
 ### Exit
 
 #### 详细描述
-Exit 退出当前进程
+Exit 以指定状态码退出当前进程
+
+参数:
+
+  - code: 进程退出状态码（0 表示成功）
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.Exit(0)
-```
+``````````````
 
 
 #### 定义
@@ -219,18 +295,35 @@ os.Exit(0)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| code | `int` |   |
+| code | `int` | 进程退出状态码（0 表示成功） |
 
 
 ### ExpandEnv
 
 #### 详细描述
-ExpandEnv  将字符串中的${var}或$var替换为其对应环境变量名的值
+ExpandEnv 将字符串中的 ${var} 或 $var 替换为其对应环境变量的值
+
+参数:
+
+  - s: 含有环境变量引用的字符串
+
+
+
+返回值:
+
+  - 替换后的字符串
+
+
+
 
 Example:
-```
-os.ExpandEnv("PATH = $PATH")
-```
+
+``````````````yak
+os.Setenv("YAK_DOC_EXPAND", "yak")
+result = os.ExpandEnv("hello $YAK_DOC_EXPAND")
+println(result)   // OUT: hello yak
+assert result == "hello yak", "ExpandEnv should substitute the variable value"
+``````````````
 
 
 #### 定义
@@ -240,12 +333,12 @@ os.ExpandEnv("PATH = $PATH")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| s | `string` |   |
+| s | `string` | 含有环境变量引用的字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 替换后的字符串 |
 
 
 ### GetDefaultDNSServers
@@ -253,10 +346,18 @@ os.ExpandEnv("PATH = $PATH")
 #### 详细描述
 GetDefaultDNSServers 获取默认的DNS服务器ip对应的字符串切片
 
+返回值:
+
+  - 默认 DNS 服务器 IP 字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetDefaultDNSServers()
-```
+``````````````
 
 
 #### 定义
@@ -266,7 +367,7 @@ os.GetDefaultDNSServers()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 默认 DNS 服务器 IP 字符串切片 |
 
 
 ### GetHomeDir
@@ -274,10 +375,18 @@ os.GetDefaultDNSServers()
 #### 详细描述
 GetHomeDir 获取当前用户的家目录
 
+返回值:
+
+  - 当前用户的家目录路径
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetHomeDir() // "/Users/yaklang"
-```
+``````````````
 
 
 #### 定义
@@ -287,7 +396,7 @@ os.GetHomeDir() // "/Users/yaklang"
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 当前用户的家目录路径 |
 
 
 ### GetLocalAddress
@@ -295,10 +404,18 @@ os.GetHomeDir() // "/Users/yaklang"
 #### 详细描述
 GetLocalAddress 获取本地IP地址
 
+返回值:
+
+  - 本地网卡 IP 地址字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
-```
+``````````````
 
 
 #### 定义
@@ -308,7 +425,7 @@ os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 本地网卡 IP 地址字符串切片 |
 
 
 ### GetLocalIPv4Address
@@ -316,10 +433,18 @@ os.GetLocalAddress() // ["192.168.1.103", "fe80::605a:5ff:fefb:5405"]
 #### 详细描述
 GetLocalIPv4Address 获取本地IPv4地址
 
+返回值:
+
+  - 本地非回环 IPv4 地址字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetLocalIPv4Address() // ["192.168.3.103"]
-```
+``````````````
 
 
 #### 定义
@@ -329,7 +454,7 @@ os.GetLocalIPv4Address() // ["192.168.3.103"]
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 本地非回环 IPv4 地址字符串切片 |
 
 
 ### GetLocalIPv6Address
@@ -337,10 +462,18 @@ os.GetLocalIPv4Address() // ["192.168.3.103"]
 #### 详细描述
 GetLocalIPv6Address 获取本地IPv6地址
 
+返回值:
+
+  - 本地非回环 IPv6 地址字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
-```
+``````````````
 
 
 #### 定义
@@ -350,7 +483,7 @@ os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 本地非回环 IPv6 地址字符串切片 |
 
 
 ### GetMachineID
@@ -358,10 +491,18 @@ os.GetLocalIPv6Address() // ["fe80::605a:5ff:fefb:5405"]
 #### 详细描述
 GetMachineID 获取每个机器唯一的标识符
 
+返回值:
+
+  - 当前机器的唯一标识字符串
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.GetMachineID()
-```
+``````````````
 
 
 #### 定义
@@ -371,18 +512,26 @@ os.GetMachineID()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 当前机器的唯一标识字符串 |
 
 
 ### GetRandomAvailableTCPPort
 
 #### 详细描述
-GetRandomAvailableTCPPort 获取随机可用的TCP端口
+GetRandomAvailableTCPPort 获取一个随机可用的TCP端口
+
+返回值:
+
+  - 一个当前可用的 TCP 端口号
+
+
+
 
 Example:
-```
+
+``````````````yak
 tcp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
-```
+``````````````
 
 
 #### 定义
@@ -392,18 +541,26 @@ tcp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 一个当前可用的 TCP 端口号 |
 
 
 ### GetRandomAvailableUDPPort
 
 #### 详细描述
-GetRandomAvailableUDPPort 获取随机可用的UDP端口
+GetRandomAvailableUDPPort 获取一个随机可用的UDP端口
+
+返回值:
+
+  - 一个当前可用的 UDP 端口号
+
+
+
 
 Example:
-```
+
+``````````````yak
 udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
-```
+``````````````
 
 
 #### 定义
@@ -413,7 +570,7 @@ udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 一个当前可用的 UDP 端口号 |
 
 
 ### Getegid
@@ -421,10 +578,18 @@ udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
 #### 详细描述
 Getegid 获取当前进程的有效组ID
 
+返回值:
+
+  - 当前进程的有效组 ID
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Getegid()
-```
+``````````````
 
 
 #### 定义
@@ -434,7 +599,7 @@ os.Getegid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程的有效组 ID |
 
 
 ### Getenv
@@ -442,10 +607,27 @@ os.Getegid()
 #### 详细描述
 Getenv 获取指定的环境变量的值，如果不存在则返回空字符串
 
+参数:
+
+  - key: 环境变量名
+
+
+
+返回值:
+
+  - 环境变量的值，不存在时为空字符串
+
+
+
+
 Example:
-```
-value = os.Getenv("PATH")
-```
+
+``````````````yak
+os.Setenv("YAK_DOC_GET", "world")
+value = os.Getenv("YAK_DOC_GET")
+println(value)   // OUT: world
+assert value == "world", "Getenv should return the value set by Setenv"
+``````````````
 
 
 #### 定义
@@ -455,12 +637,12 @@ value = os.Getenv("PATH")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| key | `string` |   |
+| key | `string` | 环境变量名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 环境变量的值，不存在时为空字符串 |
 
 
 ### Geteuid
@@ -468,10 +650,18 @@ value = os.Getenv("PATH")
 #### 详细描述
 Geteuid 获取当前进程的有效用户ID
 
+返回值:
+
+  - 当前进程的有效用户 ID
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Geteuid()
-```
+``````````````
 
 
 #### 定义
@@ -481,7 +671,7 @@ os.Geteuid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程的有效用户 ID |
 
 
 ### Getgid
@@ -489,10 +679,18 @@ os.Geteuid()
 #### 详细描述
 Getgid 获取当前进程的组ID
 
+返回值:
+
+  - 当前进程的组 ID
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Getgid()
-```
+``````````````
 
 
 #### 定义
@@ -502,7 +700,7 @@ os.Getgid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程的组 ID |
 
 
 ### Getpid
@@ -510,10 +708,18 @@ os.Getgid()
 #### 详细描述
 Getpid 获取当前进程的进程ID
 
+返回值:
+
+  - 当前进程 ID
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Getpid()
-```
+``````````````
 
 
 #### 定义
@@ -523,18 +729,26 @@ os.Getpid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程 ID |
 
 
 ### Getppid
 
 #### 详细描述
-Getppid  获取当前进程的父进程ID
+Getppid 获取当前进程的父进程ID
+
+返回值:
+
+  - 当前进程的父进程 ID
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.Getppid()
-```
+``````````````
 
 
 #### 定义
@@ -544,7 +758,7 @@ os.Getppid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程的父进程 ID |
 
 
 ### Getuid
@@ -552,10 +766,18 @@ os.Getppid()
 #### 详细描述
 Getuid 获取当前进程的用户ID
 
+返回值:
+
+  - 当前进程的用户 ID
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Getuid()
-```
+``````````````
 
 
 #### 定义
@@ -565,7 +787,7 @@ os.Getuid()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |   |
+| r1 | `int` | 当前进程的用户 ID |
 
 
 ### Getwd
@@ -573,10 +795,20 @@ os.Getuid()
 #### 详细描述
 Getwd 获取当前工作目录路径
 
+返回值:
+
+  - 当前工作目录路径
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 cwd, err = os.Getwd()
-```
+``````````````
 
 
 #### 定义
@@ -586,8 +818,8 @@ cwd, err = os.Getwd()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 当前工作目录路径 |
+| r2 | `error` | 错误信息 |
 
 
 ### Hostname
@@ -595,10 +827,20 @@ cwd, err = os.Getwd()
 #### 详细描述
 Hostname 获取主机名
 
+返回值:
+
+  - 主机名
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 name, err = os.Hostname()
-```
+``````````````
 
 
 #### 定义
@@ -608,19 +850,35 @@ name, err = os.Hostname()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
-| err | `error` |   |
+| name | `string` | 主机名 |
+| err | `error` | 错误信息 |
 
 
 ### IsRemoteTCPPortOpen
 
 #### 详细描述
-IsRemoteTCPPortOpen 检查远程TCP端口是否开放
+IsRemoteTCPPortOpen 检查远程主机的TCP端口是否开放
+
+参数:
+
+  - host: 远程主机地址（域名或 IP）
+
+  - p: 待检查的 TCP 端口号
+
+
+
+返回值:
+
+  - 远程端口是否开放
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.IsRemoteTCPPortOpen("yaklang.com", 443) // true
-```
+``````````````
 
 
 #### 定义
@@ -630,24 +888,38 @@ os.IsRemoteTCPPortOpen("yaklang.com", 443) // true
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| host | `string` |   |
-| p | `int` |   |
+| host | `string` | 远程主机地址（域名或 IP） |
+| p | `int` | 待检查的 TCP 端口号 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 远程端口是否开放 |
 
 
 ### IsTCPPortAvailable
 
 #### 详细描述
-IsTCPPortAvailable 检查TCP端口是否可用
+IsTCPPortAvailable 检查本地TCP端口是否可用（未被占用）
+
+参数:
+
+  - p: 待检查的 TCP 端口号
+
+
+
+返回值:
+
+  - 端口是否可用（可被监听）
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.IsTCPPortAvailable(80)
-```
+``````````````
 
 
 #### 定义
@@ -657,23 +929,37 @@ os.IsTCPPortAvailable(80)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `int` |   |
+| p | `int` | 待检查的 TCP 端口号 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 端口是否可用（可被监听） |
 
 
 ### IsTCPPortOpen
 
 #### 详细描述
-IsTCPPortOpen 检查TCP端口是否开放
+IsTCPPortOpen 检查本地TCP端口是否开放（被占用）
+
+参数:
+
+  - p: 待检查的 TCP 端口号
+
+
+
+返回值:
+
+  - 端口是否开放（已被监听）
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.IsTCPPortOpen(80)
-```
+``````````````
 
 
 #### 定义
@@ -683,23 +969,37 @@ os.IsTCPPortOpen(80)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `int` |   |
+| p | `int` | 待检查的 TCP 端口号 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 端口是否开放（已被监听） |
 
 
 ### IsUDPPortAvailable
 
 #### 详细描述
-IsUDPPortAvailable 检查UDP端口是否可用
+IsUDPPortAvailable 检查本地UDP端口是否可用（未被占用）
+
+参数:
+
+  - p: 待检查的 UDP 端口号
+
+
+
+返回值:
+
+  - 端口是否可用
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.IsUDPPortAvailable(80)
-```
+``````````````
 
 
 #### 定义
@@ -709,23 +1009,37 @@ os.IsUDPPortAvailable(80)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `int` |   |
+| p | `int` | 待检查的 UDP 端口号 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 端口是否可用 |
 
 
 ### IsUDPPortOpen
 
 #### 详细描述
-IsUDPPortOpen 检查UDP端口是否开放
+IsUDPPortOpen 检查本地UDP端口是否开放（被占用）
+
+参数:
+
+  - p: 待检查的 UDP 端口号
+
+
+
+返回值:
+
+  - 端口是否开放（已被占用）
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.IsUDPPortOpen(80)
-```
+``````````````
 
 
 #### 定义
@@ -735,23 +1049,43 @@ os.IsUDPPortOpen(80)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `int` |   |
+| p | `int` | 待检查的 UDP 端口号 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 端口是否开放（已被占用） |
 
 
 ### LookupEnv
 
 #### 详细描述
-LookupEnv 获取指定的环境变量的值
+LookupEnv 获取指定的环境变量的值，并返回该变量是否存在
+
+参数:
+
+  - key: 环境变量名
+
+
+
+返回值:
+
+  - 环境变量的值
+
+  - 该环境变量是否存在
+
+
+
 
 Example:
-```
-value, ok = os.LookupEnv("PATH")
-```
+
+``````````````yak
+os.Setenv("YAK_DOC_LOOKUP", "hello")
+value, ok = os.LookupEnv("YAK_DOC_LOOKUP")
+println(value)   // OUT: hello
+assert ok, "LookupEnv should report the variable exists"
+assert value == "hello", "LookupEnv should return the variable value"
+``````````````
 
 
 #### 定义
@@ -761,13 +1095,13 @@ value, ok = os.LookupEnv("PATH")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| key | `string` |   |
+| key | `string` | 环境变量名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `bool` |   |
+| r1 | `string` | 环境变量的值 |
+| r2 | `bool` | 该环境变量是否存在 |
 
 
 ### LookupHost
@@ -775,10 +1109,24 @@ value, ok = os.LookupEnv("PATH")
 #### 详细描述
 LookupHost 通过DNS服务器，根据域名查找IP
 
+参数:
+
+  - i: 待查询的域名
+
+
+
+返回值:
+
+  - 解析得到的 IP 字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.LookupHost("www.yaklang.com")
-```
+``````````````
 
 
 #### 定义
@@ -788,12 +1136,12 @@ os.LookupHost("www.yaklang.com")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |   |
+| i | `string` | 待查询的域名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 解析得到的 IP 字符串切片 |
 
 
 ### LookupIP
@@ -801,10 +1149,24 @@ os.LookupHost("www.yaklang.com")
 #### 详细描述
 LookupIP 通过DNS服务器，根据域名查找IP
 
+参数:
+
+  - i: 待查询的域名
+
+
+
+返回值:
+
+  - 解析得到的 IP 字符串切片
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.LookupIP("www.yaklang.com")
-```
+``````````````
 
 
 #### 定义
@@ -814,18 +1176,45 @@ os.LookupIP("www.yaklang.com")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |   |
+| i | `string` | 待查询的域名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 解析得到的 IP 字符串切片 |
 
 
 ### NewConnectionsWatcher
 
 #### 详细描述
-NewWatcher 创建一个新的进程监控器实例
+NewConnectionsWatcher 针对单个进程创建一个网络连接监控器，发现新的远程 IP 时回调通知
+
+参数:
+
+  - pid: 待监控的进程 ID
+
+  - cb: 发现新远程 IP 时的回调函数，签名为 func(pid, remoteIP)
+
+  - interval: 轮询连接的时间间隔
+
+
+
+返回值:
+
+  - 连接监控器对象
+
+  - 错误信息（进程不存在时非空）
+
+
+
+
+Example:
+
+``````````````yak
+w = os.NewConnectionsWatcher(os.Getpid(), (pid, ip) => {
+    log.info("process %v connects to %v", pid, ip)
+}, 1 * time.Second)~
+``````````````
 
 
 #### 定义
@@ -835,21 +1224,35 @@ NewWatcher 创建一个新的进程监控器实例
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pid | `int32` |   |
-| cb | `NewRemoteIPCallback` |   |
-| interval | `time.Duration` |   |
+| pid | `int32` | 待监控的进程 ID |
+| cb | `NewRemoteIPCallback` | 发现新远程 IP 时的回调函数，签名为 func(pid, remoteIP) |
+| interval | `time.Duration` | 轮询连接的时间间隔 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ConnectionsWatcher` |   |
-| r2 | `error` |   |
+| r1 | `*ConnectionsWatcher` | 连接监控器对象 |
+| r2 | `error` | 错误信息（进程不存在时非空） |
 
 
 ### NewProcessWatcher
 
 #### 详细描述
-NewProcessesWatcher 创建并初始化一个新的进程监控器
+NewProcessWatcher 创建并初始化一个新的系统进程监控器，用于监控进程的创建与退出
+
+返回值:
+
+  - 进程监控器对象
+
+
+
+
+Example:
+
+``````````````yak
+w = os.NewProcessWatcher()
+// 通过 w.Start(...) 启动监控
+``````````````
 
 
 #### 定义
@@ -859,7 +1262,7 @@ NewProcessesWatcher 创建并初始化一个新的进程监控器
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ProcessesWatcher` |   |
+| r1 | `*ProcessesWatcher` | 进程监控器对象 |
 
 
 ### Pipe
@@ -869,8 +1272,20 @@ Pipe 创建一个管道，返回一个读取端和一个写入端以及错误
 
 它实际是 io.Pipe 的别名
 
+返回值:
+
+  - 管道的读取端文件对象
+
+  - 管道的写入端文件对象
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 r, w, err = os.Pipe()
 die(err)
 
@@ -882,7 +1297,7 @@ die(err)
 bytes, err = io.ReadAll(r)
 die(err)
 dump(bytes)
-```
+``````````````
 
 
 #### 定义
@@ -892,20 +1307,34 @@ dump(bytes)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r | `*os.File` |   |
-| w | `*os.File` |   |
-| err | `error` |   |
+| r | `*os.File` | 管道的读取端文件对象 |
+| w | `*os.File` | 管道的写入端文件对象 |
+| err | `error` | 错误信息 |
 
 
 ### Remove
 
 #### 详细描述
-Remove 删除指定的文件或目录
+Remove 删除指定的文件或空目录
+
+参数:
+
+  - name: 待删除的文件或目录路径
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.Remove("/tmp/test.txt")
-```
+``````````````
 
 
 #### 定义
@@ -915,23 +1344,37 @@ os.Remove("/tmp/test.txt")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
+| name | `string` | 待删除的文件或目录路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### RemoveAll
 
 #### 详细描述
-RemoveAll 递归删除指定的路径及其子路径
+RemoveAll 递归删除指定的路径及其包含的所有子路径
+
+参数:
+
+  - name: 待删除的路径
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
 
 Example:
-```
+
+``````````````yak
 os.RemoveAll("/tmp")
-```
+``````````````
 
 
 #### 定义
@@ -941,12 +1384,12 @@ os.RemoveAll("/tmp")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |   |
+| name | `string` | 待删除的路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### Rename
@@ -954,11 +1397,27 @@ os.RemoveAll("/tmp")
 #### 详细描述
 Rename 重命名文件或目录，可以用于移动文件或目录
 
+参数:
+
+  - oldpath: 原路径
+
+  - newpath: 目标路径
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
+
+``````````````yak
 os.Rename("/tmp/test.txt", "/tmp/test2.txt")
 os.Rename("/tmp/test", "/root/test")
-```
+``````````````
 
 
 #### 定义
@@ -968,13 +1427,13 @@ os.Rename("/tmp/test", "/root/test")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| oldpath | `string` |   |
-| newpath | `string` |   |
+| oldpath | `string` | 原路径 |
+| newpath | `string` | 目标路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### Setenv
@@ -982,10 +1441,28 @@ os.Rename("/tmp/test", "/root/test")
 #### 详细描述
 Setenv 设置指定的环境变量
 
+参数:
+
+  - key: 环境变量名
+
+  - value: 环境变量值
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
-os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
-```
+
+``````````````yak
+os.Setenv("YAK_DOC_SET", "yaklang")
+println(os.Getenv("YAK_DOC_SET"))   // OUT: yaklang
+assert os.Getenv("YAK_DOC_SET") == "yaklang", "Setenv then Getenv should round-trip"
+``````````````
 
 
 #### 定义
@@ -995,13 +1472,13 @@ os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| key | `string` |   |
-| value | `string` |   |
+| key | `string` | 环境变量名 |
+| value | `string` | 环境变量值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### TempDir
@@ -1009,10 +1486,20 @@ os.Setenv("PATH", "/usr/local/bin:/usr/bin:/bin")
 #### 详细描述
 TempDir 获取用于存放临时文件的默认目录路径
 
+返回值:
+
+  - 系统临时目录路径
+
+
+
+
 Example:
-```
-os.TempDir()
-```
+
+``````````````yak
+dir = os.TempDir()
+assert dir != "", "TempDir should return a non-empty path"
+assert file.IsDir(dir), "TempDir should point to an existing directory"
+``````````````
 
 
 #### 定义
@@ -1022,7 +1509,7 @@ os.TempDir()
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 系统临时目录路径 |
 
 
 ### Unsetenv
@@ -1030,10 +1517,26 @@ os.TempDir()
 #### 详细描述
 Unsetenv 删除指定的环境变量
 
+参数:
+
+  - key: 待删除的环境变量名
+
+
+
+返回值:
+
+  - 错误信息
+
+
+
+
 Example:
-```
-os.Unsetenv("PATH")
-```
+
+``````````````yak
+os.Setenv("YAK_DOC_UNSET", "v")
+os.Unsetenv("YAK_DOC_UNSET")
+assert os.Getenv("YAK_DOC_UNSET") == "", "Unsetenv should remove the environment variable"
+``````````````
 
 
 #### 定义
@@ -1043,21 +1546,37 @@ os.Unsetenv("PATH")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| key | `string` |   |
+| key | `string` | 待删除的环境变量名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息 |
 
 
 ### WaitConnect
 
 #### 详细描述
-WaitConnect 等待一个地址的端口开放或指导超时时间，如果超时则返回错误，这通常用于等待并确保一个服务启动
+WaitConnect 等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动
+
+参数:
+
+  - addr: 目标地址（host:port）
+
+  - timeout: 最长等待时间（秒）
+
+
+
+返回值:
+
+  - 错误信息（超时或连接失败时非空）
+
+
+
 
 Example:
-```
+
+``````````````yak
 timeout, _ = time.ParseDuration("1m")
 ctx, cancel = context.WithTimeout(context.New(), timeout)
 
@@ -1074,7 +1593,7 @@ os.WaitConnect("127.0.0.1:8888", 5)~ // 等待tcp服务器启动
 conn = tcp.Connect("127.0.0.1", 8888)~
 bytes = conn.Recv()~
 println(string(bytes))
-```
+``````````````
 
 
 #### 定义
@@ -1084,12 +1603,12 @@ println(string(bytes))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| addr | `string` |   |
-| timeout | `float64` |   |
+| addr | `string` | 目标地址（host:port） |
+| timeout | `float64` | 最长等待时间（秒） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` | 错误信息（超时或连接失败时非空） |
 
 

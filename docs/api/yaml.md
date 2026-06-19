@@ -2,78 +2,89 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [yaml.Marshal](#marshal) |Marshal serializes the value provided into a YAML document. The structure of the generated document will reflect the structure of the value itself. Ma...|
-| [yaml.Unmarshal](#unmarshal) ||
-| [yaml.UnmarshalStrict](#unmarshalstrict) ||
+| [yaml.Marshal](#marshal) |Marshal 将一个对象序列化为 YAML 格式的字节切片 参数: - in: 待序列化的对象，可以是 map、切片或结构体 返回值: - 序列化后的 YAML 字节切片 - 序列化失败时返回的错误|
+| [yaml.Unmarshal](#unmarshal) |Unmarshal 将 YAML 格式的字节切片反序列化为对应的对象 参数: - b: 待解析的 YAML 字节切片 返回值: - 解析得到的对象(通常是 map 或切片) - 解析失败时返回的错误|
+| [yaml.UnmarshalStrict](#unmarshalstrict) |UnmarshalStrict 严格模式反序列化 YAML，遇到未知字段或重复键会报错 参数: - b: 待解析的 YAML 字节切片 返回值: - 解析得到的对象(通常是 map 或切片) - 解析失败时返回的错误|
 
 
 ## 函数定义
 ### Marshal
 
 #### 详细描述
-Marshal serializes the value provided into a YAML document. The structure
-of the generated document will reflect the structure of the value itself.
-Maps and pointers (to struct, string, int, etc) are accepted as the in value.
+Marshal 将一个对象序列化为 YAML 格式的字节切片
 
-Struct fields are only marshalled if they are exported (have an upper case
-first letter), and are marshalled using the field name lowercased as the
-default key. Custom keys may be defined via the &#34;yaml&#34; name in the field
-tag: the content preceding the first comma is used as the key, and the
-following comma-separated options are used to tweak the marshalling process.
-Conflicting names result in a runtime error.
+参数:
 
-The field tag format accepted is:
+  - in: 待序列化的对象，可以是 map、切片或结构体
 
-    `(...) yaml:&#34;[&lt;key&gt;][,&lt;flag1&gt;[,&lt;flag2&gt;]]&#34; (...)`
 
-The following flags are currently supported:
 
-    omitempty    Only include the field if it&#39;s not set to the zero
-                 value for the type or to empty slices or maps.
-                 Zero valued structs will be omitted if all their public
-                 fields are zero, unless they implement an IsZero
-                 method (see the IsZeroer interface type), in which
-                 case the field will be excluded if IsZero returns true.
+返回值:
 
-    flow         Marshal using a flow style (useful for structs,
-                 sequences and maps).
+  - 序列化后的 YAML 字节切片
 
-    inline       Inline the field, which must be a struct or a map,
-                 causing all of its fields or keys to be processed as if
-                 they were part of the outer struct. For maps, keys must
-                 not conflict with the yaml keys of other struct fields.
+  - 序列化失败时返回的错误
 
-In addition, if the key is &#34;-&#34;, the field is ignored.
 
-For example:
 
-    type T struct {
-        F int `yaml:&#34;a,omitempty&#34;`
-        B int
-    }
-    yaml.Marshal(&amp;T{B: 2}) // Returns &#34;b: 2\n&#34;
-    yaml.Marshal(&amp;T{F: 1}} // Returns &#34;a: 1\nb: 0\n&#34;
+
+Example:
+
+``````````````yak
+// VARS: 把 map 序列化为 YAML
+out = yaml.Marshal({"name": "yak"})~
+text = string(out)
+// assert: 输出包含对应键值(YAML 多行输出顺序可能变化，用 Contains 判断)
+assert str.Contains(text, "name: yak"), "marshal output should contain the key-value"
+``````````````
 
 
 #### 定义
 
-`Marshal(in any) (out []byte, err error)`
+`Marshal(in any) ([]byte, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| in | `any` |   |
+| in | `any` | 待序列化的对象，可以是 map、切片或结构体 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| out | `[]byte` |   |
-| err | `error` |   |
+| r1 | `[]byte` | 序列化后的 YAML 字节切片 |
+| r2 | `error` | 序列化失败时返回的错误 |
 
 
 ### Unmarshal
 
 #### 详细描述
+Unmarshal 将 YAML 格式的字节切片反序列化为对应的对象
+
+参数:
+
+  - b: 待解析的 YAML 字节切片
+
+
+
+返回值:
+
+  - 解析得到的对象(通常是 map 或切片)
+
+  - 解析失败时返回的错误
+
+
+
+
+Example:
+
+``````````````yak
+// VARS: 把 YAML 文本解析为 map
+m = yaml.Unmarshal([]byte("name: yak\nport: 80\n"))~
+// STDOUT: 打印 name 字段
+println(m["name"])   // OUT: yak
+// assert: 数值字段被解析为整数
+assert m["port"] == 80, "unmarshal should parse port as 80"
+``````````````
 
 
 #### 定义
@@ -83,18 +94,45 @@ For example:
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `[]byte` |   |
+| b | `[]byte` | 待解析的 YAML 字节切片 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `any` |   |
-| r2 | `error` |   |
+| r1 | `any` | 解析得到的对象(通常是 map 或切片) |
+| r2 | `error` | 解析失败时返回的错误 |
 
 
 ### UnmarshalStrict
 
 #### 详细描述
+UnmarshalStrict 严格模式反序列化 YAML，遇到未知字段或重复键会报错
+
+参数:
+
+  - b: 待解析的 YAML 字节切片
+
+
+
+返回值:
+
+  - 解析得到的对象(通常是 map 或切片)
+
+  - 解析失败时返回的错误
+
+
+
+
+Example:
+
+``````````````yak
+// VARS: 严格模式解析 YAML 文本
+m = yaml.UnmarshalStrict([]byte("name: yak\nport: 80\n"))~
+// STDOUT: 打印 name 字段
+println(m["name"])   // OUT: yak
+// assert: 数值字段被解析为整数
+assert m["port"] == 80, "strict unmarshal should parse port as 80"
+``````````````
 
 
 #### 定义
@@ -104,12 +142,12 @@ For example:
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `[]byte` |   |
+| b | `[]byte` | 待解析的 YAML 字节切片 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `any` |   |
-| r2 | `error` |   |
+| r1 | `any` | 解析得到的对象(通常是 map 或切片) |
+| r2 | `error` | 解析失败时返回的错误 |
 
 

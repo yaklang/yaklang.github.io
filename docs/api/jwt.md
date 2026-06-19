@@ -19,19 +19,37 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [jwt.AllAlgs](#allalgs) ||
-| [jwt.JWSGenerate](#jwsgenerate) ||
-| [jwt.JWSGenerateEx](#jwsgenerateex) ||
-| [jwt.JWTGenerate](#jwtgenerate) ||
-| [jwt.JWTGenerateEx](#jwtgenerateex) ||
-| [jwt.Parse](#parse) ||
-| [jwt.RemoveAlg](#removealg) ||
+| [jwt.AllAlgs](#allalgs) |AvailableJWTTokensAlgs 返回当前支持的所有 JWT 签名算法名称列表 在 yak 中通过 jwt.AllAlgs 调用 返回值: - 支持的签名算法名称字符串切片，如 ES256、HS256、RS256 等|
+| [jwt.JWSGenerate](#jwsgenerate) |JWSGenerate 使用指定签名算法和密钥，把 claims 生成为一个 JWS(typ=JWS) 字符串 参数: - alg: 签名算法名称，如 jwt.ALG_HS256 - claims: 载荷 claims，通常是一个 map - key: 签名密钥(字节数组) 返回值: - 生成的 J...|
+| [jwt.JWSGenerateEx](#jwsgenerateex) |JWSGenerateExport 在 JWSGenerate 的基础上额外允许自定义头部(extraHeader) 参数: - alg: 签名算法名称，如 jwt.ALG_HS256 - extraHeader: 附加的头部字段，通常是一个 map - claims: 载荷 claims，通常是一...|
+| [jwt.JWTGenerate](#jwtgenerate) |JWTGenerate 使用指定签名算法和密钥，把 claims 生成为一个 JWT(typ=JWT) 字符串 参数: - alg: 签名算法名称，如 jwt.ALG_HS256、jwt.ALG_NONE 等 - i: 载荷 claims，通常是一个 map - key: 签名密钥(字节数组)，HM...|
+| [jwt.JWTGenerateEx](#jwtgenerateex) |JWTGenerateExport 在 JWTGenerate 的基础上额外允许自定义 JWT 头部(extraHeader) 参数: - alg: 签名算法名称，如 jwt.ALG_HS256 - extraHeader: 附加的头部字段，通常是一个 map - claims: 载荷 claims...|
+| [jwt.Parse](#parse) |JwtParse 解析 JWT 字符串，提取头部与载荷；当提供候选密钥时会尝试逐个验证签名 在 yak 中通过 jwt.Parse 调用。不传密钥时仅做解析展示；传入正确密钥时返回该密钥 参数: - tokenStr: 待解析的 JWT 字符串 - keys: 可选的候选签名密钥列表，用于尝试验证 ...|
+| [jwt.RemoveAlg](#removealg) |JwtChangeAlgToNone 把给定 JWT 的签名算法改写为 none(去除签名)，常用于 JWT 安全测试 在 yak 中通过 jwt.RemoveAlg 调用，保留原始头部与载荷，仅去掉签名部分 参数: - token: 原始 JWT 字符串 返回值: - 算法被改写为 none 的新...|
 
 
 ## 函数定义
 ### AllAlgs
 
 #### 详细描述
+AvailableJWTTokensAlgs 返回当前支持的所有 JWT 签名算法名称列表
+
+在 yak 中通过 jwt.AllAlgs 调用
+
+返回值:
+
+  - 支持的签名算法名称字符串切片，如 ES256、HS256、RS256 等
+
+
+
+
+Example:
+
+``````````````yak
+algs = jwt.AllAlgs()
+println(len(algs))   // OUT: 13
+assert len(algs) >= 12, "should expose all supported jwt algorithms"
+``````````````
 
 
 #### 定义
@@ -41,12 +59,43 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 支持的签名算法名称字符串切片，如 ES256、HS256、RS256 等 |
 
 
 ### JWSGenerate
 
 #### 详细描述
+JWSGenerate 使用指定签名算法和密钥，把 claims 生成为一个 JWS(typ=JWS) 字符串
+
+参数:
+
+  - alg: 签名算法名称，如 jwt.ALG_HS256
+
+  - claims: 载荷 claims，通常是一个 map
+
+  - key: 签名密钥(字节数组)
+
+
+
+返回值:
+
+  - 生成的 JWS 字符串
+
+  - 错误信息，成功时为 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 用 HS256 生成 JWS 并解析校验往返一致
+token = jwt.JWSGenerate(jwt.ALG_HS256, {"user": "admin"}, []byte("secret123"))~
+_, key, err = jwt.Parse(token, "secret123")
+assert err == nil, "valid token should parse without error"
+println(string(key))   // OUT: secret123
+assert string(key) == "secret123", "parse should recover the signing key"
+``````````````
 
 
 #### 定义
@@ -56,20 +105,53 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| alg | `string` |   |
-| claims | `any` |   |
-| key | `[]byte` |   |
+| alg | `string` | 签名算法名称，如 jwt.ALG_HS256 |
+| claims | `any` | 载荷 claims，通常是一个 map |
+| key | `[]byte` | 签名密钥(字节数组) |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 JWS 字符串 |
+| r2 | `error` | 错误信息，成功时为 nil |
 
 
 ### JWSGenerateEx
 
 #### 详细描述
+JWSGenerateExport 在 JWSGenerate 的基础上额外允许自定义头部(extraHeader)
+
+参数:
+
+  - alg: 签名算法名称，如 jwt.ALG_HS256
+
+  - extraHeader: 附加的头部字段，通常是一个 map
+
+  - claims: 载荷 claims，通常是一个 map
+
+  - key: 签名密钥(字节数组)
+
+
+
+返回值:
+
+  - 生成的 JWS 字符串
+
+  - 错误信息，成功时为 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 生成带自定义头部的 JWS 并解析校验往返一致
+token = jwt.JWSGenerateEx(jwt.ALG_HS256, {"kid": "k1"}, {"user": "admin"}, []byte("secret123"))~
+_, key, err = jwt.Parse(token, "secret123")
+assert err == nil, "valid token should parse without error"
+println(string(key))   // OUT: secret123
+assert string(key) == "secret123", "parse should recover the signing key"
+``````````````
 
 
 #### 定义
@@ -79,21 +161,52 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| alg | `string` |   |
-| extraHeader | `any` |   |
-| claims | `any` |   |
-| key | `[]byte` |   |
+| alg | `string` | 签名算法名称，如 jwt.ALG_HS256 |
+| extraHeader | `any` | 附加的头部字段，通常是一个 map |
+| claims | `any` | 载荷 claims，通常是一个 map |
+| key | `[]byte` | 签名密钥(字节数组) |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 JWS 字符串 |
+| r2 | `error` | 错误信息，成功时为 nil |
 
 
 ### JWTGenerate
 
 #### 详细描述
+JWTGenerate 使用指定签名算法和密钥，把 claims 生成为一个 JWT(typ=JWT) 字符串
+
+参数:
+
+  - alg: 签名算法名称，如 jwt.ALG_HS256、jwt.ALG_NONE 等
+
+  - i: 载荷 claims，通常是一个 map
+
+  - key: 签名密钥(字节数组)，HMAC 系列算法直接使用该密钥
+
+
+
+返回值:
+
+  - 生成的 JWT 字符串
+
+  - 错误信息，成功时为 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 用 HS256 算法和密钥生成 JWT，再用同一密钥解析校验，验证往返一致
+token = jwt.JWTGenerate(jwt.ALG_HS256, {"user": "admin"}, []byte("secret123"))~
+_, key, err = jwt.Parse(token, "secret123")
+assert err == nil, "valid token should parse without error"
+println(string(key))   // OUT: secret123
+assert string(key) == "secret123", "parse should recover the signing key"
+``````````````
 
 
 #### 定义
@@ -103,20 +216,53 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| alg | `string` |   |
-| i | `any` |   |
-| key | `[]byte` |   |
+| alg | `string` | 签名算法名称，如 jwt.ALG_HS256、jwt.ALG_NONE 等 |
+| i | `any` | 载荷 claims，通常是一个 map |
+| key | `[]byte` | 签名密钥(字节数组)，HMAC 系列算法直接使用该密钥 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 JWT 字符串 |
+| r2 | `error` | 错误信息，成功时为 nil |
 
 
 ### JWTGenerateEx
 
 #### 详细描述
+JWTGenerateExport 在 JWTGenerate 的基础上额外允许自定义 JWT 头部(extraHeader)
+
+参数:
+
+  - alg: 签名算法名称，如 jwt.ALG_HS256
+
+  - extraHeader: 附加的头部字段，通常是一个 map
+
+  - claims: 载荷 claims，通常是一个 map
+
+  - key: 签名密钥(字节数组)
+
+
+
+返回值:
+
+  - 生成的 JWT 字符串
+
+  - 错误信息，成功时为 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 生成带自定义头部 kid 的 JWT，并用同一密钥解析校验往返一致
+token = jwt.JWTGenerateEx(jwt.ALG_HS256, {"kid": "k1"}, {"user": "admin"}, []byte("secret123"))~
+_, key, err = jwt.Parse(token, "secret123")
+assert err == nil, "valid token should parse without error"
+println(string(key))   // OUT: secret123
+assert string(key) == "secret123", "parse should recover the signing key"
+``````````````
 
 
 #### 定义
@@ -126,21 +272,54 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| alg | `string` |   |
-| extraHeader | `any` |   |
-| claims | `any` |   |
-| key | `[]byte` |   |
+| alg | `string` | 签名算法名称，如 jwt.ALG_HS256 |
+| extraHeader | `any` | 附加的头部字段，通常是一个 map |
+| claims | `any` | 载荷 claims，通常是一个 map |
+| key | `[]byte` | 签名密钥(字节数组) |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 JWT 字符串 |
+| r2 | `error` | 错误信息，成功时为 nil |
 
 
 ### Parse
 
 #### 详细描述
+JwtParse 解析 JWT 字符串，提取头部与载荷；当提供候选密钥时会尝试逐个验证签名
+
+在 yak 中通过 jwt.Parse 调用。不传密钥时仅做解析展示；传入正确密钥时返回该密钥
+
+参数:
+
+  - tokenStr: 待解析的 JWT 字符串
+
+  - keys: 可选的候选签名密钥列表，用于尝试验证 token 签名
+
+
+
+返回值:
+
+  - 解析得到的 Token 对象，包含头部与载荷
+
+  - 验证成功时命中的密钥(字节数组)，未命中时为 nil
+
+  - 错误信息，解析或验证失败时非 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 先用密钥签发 token，再用同一密钥解析校验，验证往返一致
+token = jwt.JWTGenerate(jwt.ALG_HS256, {"user": "admin"}, []byte("secret123"))~
+tokenObj, key, err = jwt.Parse(token, "secret123")
+assert err == nil, "valid token should parse without error"
+println(string(key))   // OUT: secret123
+assert string(key) == "secret123", "parse should recover the signing key"
+``````````````
 
 
 #### 定义
@@ -150,20 +329,48 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| tokenStr | `string` |   |
-| keys | `...string` |   |
+| tokenStr | `string` | 待解析的 JWT 字符串 |
+| keys | `...string` | 可选的候选签名密钥列表，用于尝试验证 token 签名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Token` |   |
-| r2 | `[]byte` |   |
-| r3 | `error` |   |
+| r1 | `*Token` | 解析得到的 Token 对象，包含头部与载荷 |
+| r2 | `[]byte` | 验证成功时命中的密钥(字节数组)，未命中时为 nil |
+| r3 | `error` | 错误信息，解析或验证失败时非 nil |
 
 
 ### RemoveAlg
 
 #### 详细描述
+JwtChangeAlgToNone 把给定 JWT 的签名算法改写为 none(去除签名)，常用于 JWT 安全测试
+
+在 yak 中通过 jwt.RemoveAlg 调用，保留原始头部与载荷，仅去掉签名部分
+
+参数:
+
+  - token: 原始 JWT 字符串
+
+
+
+返回值:
+
+  - 算法被改写为 none 的新 JWT 字符串
+
+  - 错误信息，成功时为 nil
+
+
+
+
+Example:
+
+``````````````yak
+// 把已有 token 改写为 alg:none 形式，验证生成结果可被再次解析出原始 claims
+token = jwt.JWTGenerate(jwt.ALG_HS256, {"user": "admin"}, []byte("secret123"))~
+noneToken = jwt.RemoveAlg(token)~
+tokenObj, _, _ = jwt.Parse(noneToken)
+assert tokenObj != nil, "alg:none token should still be parseable"
+``````````````
 
 
 #### 定义
@@ -173,12 +380,12 @@ CommonWeakJWTKeys|([]string) []string{&#34;secret&#34;, &#34;...&#34;, &#34;0123
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| token | `string` |   |
+| token | `string` | 原始 JWT 字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 算法被改写为 none 的新 JWT 字符串 |
+| r2 | `error` | 错误信息，成功时为 nil |
 
 

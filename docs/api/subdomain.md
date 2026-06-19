@@ -2,18 +2,18 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [subdomain.Scan](#scan) |Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串或字符串数组，接下来可以接收零个到多个选项，用于对此次扫描进行配置，例如设置扫描超时时间，是否递归等，返回结果管道与错误  使用 请求(爆破)，查询，域传送技术进行子域名扫描  |
-| [subdomain.dnsServer](#dnsserver) |dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8  |
-| [subdomain.eachQueryTimeout](#eachquerytimeout) |eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s  |
-| [subdomain.eachSearchTimeout](#eachsearchtimeout) |withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s  |
-| [subdomain.mainDict](#maindict) |mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组  |
-| [subdomain.maxDepth](#maxdepth) |maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用  |
-| [subdomain.recursive](#recursive) |recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false  |
-| [subdomain.recursiveDict](#recursivedict) |recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组  |
-| [subdomain.targetConcurrent](#targetconcurrent) |targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10  |
-| [subdomain.targetTimeout](#targettimeout) |targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s  |
-| [subdomain.wildcardToStop](#wildcardtostop) |wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false  |
-| [subdomain.workerConcurrent](#workerconcurrent) |workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50  |
+| [subdomain.Scan](#scan) |Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串或字符串数组，接下来可以接收零个到多个选项，用于对此次扫描进行配置，例如设置扫描超时时间，是否递归等，返回结果管道与错误 使用 请求(爆破)，查询，域传送技术进行子域名扫描|
+| [subdomain.dnsServer](#dnsserver) |dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8|
+| [subdomain.eachQueryTimeout](#eachquerytimeout) |eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s|
+| [subdomain.eachSearchTimeout](#eachsearchtimeout) |withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s|
+| [subdomain.mainDict](#maindict) |mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组|
+| [subdomain.maxDepth](#maxdepth) |maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用|
+| [subdomain.recursive](#recursive) |recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false|
+| [subdomain.recursiveDict](#recursivedict) |recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组|
+| [subdomain.targetConcurrent](#targetconcurrent) |targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10|
+| [subdomain.targetTimeout](#targettimeout) |targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s|
+| [subdomain.wildcardToStop](#wildcardtostop) |wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false|
+| [subdomain.workerConcurrent](#workerconcurrent) |workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50|
 
 
 ## 函数定义
@@ -24,12 +24,14 @@ Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串
 
 使用 请求(爆破)，查询，域传送技术进行子域名扫描
 
+
 Example:
-```
+
+``````````````yak
 for domain in subdomain.Scan("example.com")~ {
 dump(domain)
 }
-```
+``````````````
 
 
 #### 定义
@@ -39,14 +41,14 @@ dump(domain)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| target | `any` |   |
-| opts | `...subdomain.ConfigOption` |   |
+| target | `any` |  |
+| opts | `...subdomain.ConfigOption` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *subdomain.SubdomainResult` |   |
-| r2 | `error` |   |
+| r1 | `chan *subdomain.SubdomainResult` |  |
+| r2 | `error` |  |
 
 
 ### dnsServer
@@ -54,10 +56,12 @@ dump(domain)
 #### 详细描述
 dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.dnsServer("1.1.1.1"))
-```
+``````````````
 
 
 #### 定义
@@ -67,12 +71,12 @@ subdomain.Scan("example.com", subdomain.dnsServer("1.1.1.1"))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| servers | `[]string` |   |
+| servers | `[]string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 
 ### eachQueryTimeout
@@ -80,10 +84,12 @@ subdomain.Scan("example.com", subdomain.dnsServer("1.1.1.1"))
 #### 详细描述
 eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.eachQueryTimeout(5))
-```
+``````````````
 
 
 #### 定义
@@ -93,12 +99,12 @@ subdomain.Scan("example.com", subdomain.eachQueryTimeout(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |   |
+| i | `float64` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |   |
+| r1 | `subdomain.ConfigOption` |  |
 
 
 ### eachSearchTimeout
@@ -106,10 +112,12 @@ subdomain.Scan("example.com", subdomain.eachQueryTimeout(5))
 #### 详细描述
 withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.withEachSearchTimeout(5))
-```
+``````````````
 
 
 #### 定义
@@ -119,12 +127,12 @@ subdomain.Scan("example.com", subdomain.withEachSearchTimeout(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |   |
+| i | `float64` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |   |
+| r1 | `subdomain.ConfigOption` |  |
 
 
 ### mainDict
@@ -132,11 +140,13 @@ subdomain.Scan("example.com", subdomain.withEachSearchTimeout(5))
 #### 详细描述
 mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组
 
+
 Example:
-```
+
+``````````````yak
 dict = "/tmp/dict.txt"
 subdomain.Scan("example.com", subdomain.mainDict(dict))
-```
+``````````````
 
 
 #### 定义
@@ -146,12 +156,12 @@ subdomain.Scan("example.com", subdomain.mainDict(dict))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |   |
+| r1 | `subdomain.ConfigOption` |  |
 
 
 ### maxDepth
@@ -159,10 +169,12 @@ subdomain.Scan("example.com", subdomain.mainDict(dict))
 #### 详细描述
 maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.maxDepth(10), subdomain.recursive(true))
-```
+``````````````
 
 
 #### 定义
@@ -172,12 +184,12 @@ subdomain.Scan("example.com", subdomain.maxDepth(10), subdomain.recursive(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| d | `int` |   |
+| d | `int` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 
 ### recursive
@@ -185,10 +197,12 @@ subdomain.Scan("example.com", subdomain.maxDepth(10), subdomain.recursive(true))
 #### 详细描述
 recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.recursive(true))
-```
+``````````````
 
 
 #### 定义
@@ -198,12 +212,12 @@ subdomain.Scan("example.com", subdomain.recursive(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `bool` |   |
+| b | `bool` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 
 ### recursiveDict
@@ -211,11 +225,13 @@ subdomain.Scan("example.com", subdomain.recursive(true))
 #### 详细描述
 recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组
 
+
 Example:
-```
+
+``````````````yak
 dict = "/tmp/sub-dict.txt"
 subdomain.Scan("example.com", subdomain.recursive(true), subdomain.recursiveDict(dict))
-```
+``````````````
 
 
 #### 定义
@@ -225,12 +241,12 @@ subdomain.Scan("example.com", subdomain.recursive(true), subdomain.recursiveDict
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |   |
+| r1 | `subdomain.ConfigOption` |  |
 
 
 ### targetConcurrent
@@ -238,10 +254,12 @@ subdomain.Scan("example.com", subdomain.recursive(true), subdomain.recursiveDict
 #### 详细描述
 targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.targetConcurrent(5))
-```
+``````````````
 
 
 #### 定义
@@ -251,12 +269,12 @@ subdomain.Scan("example.com", subdomain.targetConcurrent(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `int` |   |
+| c | `int` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 
 ### targetTimeout
@@ -264,10 +282,12 @@ subdomain.Scan("example.com", subdomain.targetConcurrent(5))
 #### 详细描述
 targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.targetTimeout(10))
-```
+``````````````
 
 
 #### 定义
@@ -277,12 +297,12 @@ subdomain.Scan("example.com", subdomain.targetTimeout(10))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |   |
+| i | `float64` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |   |
+| r1 | `subdomain.ConfigOption` |  |
 
 
 ### wildcardToStop
@@ -290,10 +310,12 @@ subdomain.Scan("example.com", subdomain.targetTimeout(10))
 #### 详细描述
 wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.wildcardToStop(true))
-```
+``````````````
 
 
 #### 定义
@@ -303,12 +325,12 @@ subdomain.Scan("example.com", subdomain.wildcardToStop(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `bool` |   |
+| t | `bool` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 
 ### workerConcurrent
@@ -316,10 +338,12 @@ subdomain.Scan("example.com", subdomain.wildcardToStop(true))
 #### 详细描述
 workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50
 
+
 Example:
-```
+
+``````````````yak
 subdomain.Scan("example.com", subdomain.workerConcurrent(10))
-```
+``````````````
 
 
 #### 定义
@@ -329,11 +353,11 @@ subdomain.Scan("example.com", subdomain.workerConcurrent(10))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `int` |   |
+| c | `int` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |   |
+| r1 | `ConfigOption` |  |
 
 

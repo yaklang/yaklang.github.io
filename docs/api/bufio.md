@@ -2,14 +2,14 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [bufio.NewBuffer](#newbuffer) |NewBuffer 创建一个新的 Buffer 结构体引用，其帮助我们处理字符串  Buffer 也实现了 Reader 和 Writer 接口  常用的 Buffer 方法有：Bytes, String, Read, Write, WriteString, WriteByte, Reset  |
+| [bufio.NewBuffer](#newbuffer) |NewBuffer 创建一个新的 Buffer 结构体引用，其帮助我们处理字符串 Buffer 也实现了 Reader 和 Writer 接口 常用的 Buffer 方法有：Bytes, String, Read, Write, WriteString, WriteByte, Reset|
 | [bufio.NewPipe](#newpipe) ||
-| [bufio.NewReadWriter](#newreadwriter) |NewReadWriter 根据传入的 Reader 和 Writer 创建一个新的 BufioReadWriter 结构体引用  BufioReadWriter 可以同时调用 BufioReader 和 BufioWriter 的方法  |
-| [bufio.NewReader](#newreader) |NewReader 根据传入的 Reader 创建一个新的 BufioReader 结构体引用  常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset  |
-| [bufio.NewReaderSize](#newreadersize) |NewReaderSize 根据传入的 Reader 创建一个新的 BufioReader 结构体引用，其的缓存大小为 size  常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset  |
-| [bufio.NewScanner](#newscanner) |NewScanner 根据传入的 Reader 创建一个新的 Scanner 结构体引用  常用的 Scanner 方法有：Scan, Text, Err, Split, SplitFunc  |
-| [bufio.NewWriter](#newwriter) |NewWriter 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用  常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush  |
-| [bufio.NewWriterSize](#newwritersize) |NewWriterSize 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用，其的缓存大小为 size  常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush  |
+| [bufio.NewReadWriter](#newreadwriter) |NewReadWriter 根据传入的 Reader 和 Writer 创建一个新的 BufioReadWriter 结构体引用 BufioReadWriter 可以同时调用 BufioReader 和 BufioWriter 的方法|
+| [bufio.NewReader](#newreader) |NewReader 根据传入的 Reader 创建一个新的 BufioReader 结构体引用 常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset|
+| [bufio.NewReaderSize](#newreadersize) |NewReaderSize 根据传入的 Reader 创建一个新的 BufioReader 结构体引用，其的缓存大小为 size 常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset|
+| [bufio.NewScanner](#newscanner) |NewScanner 根据传入的 Reader 创建一个新的 Scanner 结构体引用 常用的 Scanner 方法有：Scan, Text, Err, Split, SplitFunc|
+| [bufio.NewWriter](#newwriter) |NewWriter 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用 常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush|
+| [bufio.NewWriterSize](#newwritersize) |NewWriterSize 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用，其的缓存大小为 size 常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush|
 
 
 ## 函数定义
@@ -22,12 +22,14 @@ Buffer 也实现了 Reader 和 Writer 接口
 
 常用的 Buffer 方法有：Bytes, String, Read, Write, WriteString, WriteByte, Reset
 
+
 Example:
-```
+
+``````````````yak
 buffer = bufio.NewBuffer() // 或者你也可以使用 io.NewBuffer("hello yak") 来初始化一个 Buffer
 buffer.WriteString("hello yak")
 data, err = io.ReadAll(buffer) // data = b"hello yak", err = nil
-```
+``````````````
 
 
 #### 定义
@@ -37,18 +39,18 @@ data, err = io.ReadAll(buffer) // data = b"hello yak", err = nil
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `...[]byte` |   |
+| b | `...[]byte` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bytes.Buffer` |   |
+| r1 | `*bytes.Buffer` |  |
 
 
 ### NewPipe
 
 #### 详细描述
-
+暂无描述
 
 #### 定义
 
@@ -57,8 +59,8 @@ data, err = io.ReadAll(buffer) // data = b"hello yak", err = nil
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*PipeReader` |   |
-| r2 | `*PipeWriter` |   |
+| r1 | `*PipeReader` |  |
+| r2 | `*PipeWriter` |  |
 
 
 ### NewReadWriter
@@ -68,10 +70,12 @@ NewReadWriter 根据传入的 Reader 和 Writer 创建一个新的 BufioReadWrit
 
 BufioReadWriter 可以同时调用 BufioReader 和 BufioWriter 的方法
 
+
 Example:
-```
+
+``````````````yak
 rw, err = bufio.NewReadWriter(os.Stdin, os.Stdout)
-```
+``````````````
 
 
 #### 定义
@@ -81,14 +85,14 @@ rw, err = bufio.NewReadWriter(os.Stdin, os.Stdout)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
-| i2 | `any` |   |
+| i | `any` |  |
+| i2 | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.ReadWriter` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.ReadWriter` |  |
+| r2 | `error` |  |
 
 
 ### NewReader
@@ -98,10 +102,12 @@ NewReader 根据传入的 Reader 创建一个新的 BufioReader 结构体引用
 
 常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset
 
+
 Example:
-```
+
+``````````````yak
 reader = bufio.NewReader(os.Stdin)
-```
+``````````````
 
 
 #### 定义
@@ -111,13 +117,13 @@ reader = bufio.NewReader(os.Stdin)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `...any` |   |
+| raw | `...any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.Reader` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.Reader` |  |
+| r2 | `error` |  |
 
 
 ### NewReaderSize
@@ -127,10 +133,12 @@ NewReaderSize 根据传入的 Reader 创建一个新的 BufioReader 结构体引
 
 常用的 BufioReader 方法有：Read, ReadByte, ReadBytes, ReadLine, ReadString, Reset
 
+
 Example:
-```
+
+``````````````yak
 reader = bufio.NewReaderSize(os.Stdin, 1024)
-```
+``````````````
 
 
 #### 定义
@@ -140,14 +148,14 @@ reader = bufio.NewReaderSize(os.Stdin, 1024)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
-| size | `int` |   |
+| i | `any` |  |
+| size | `int` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.Reader` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.Reader` |  |
+| r2 | `error` |  |
 
 
 ### NewScanner
@@ -157,14 +165,16 @@ NewScanner 根据传入的 Reader 创建一个新的 Scanner 结构体引用
 
 常用的 Scanner 方法有：Scan, Text, Err, Split, SplitFunc
 
+
 Example:
-```
+
+``````````````yak
 buf = bufio.NewBuffer("hello yak\nhello yakit")
 scanner, err = bufio.NewScanner(buf)
 for scanner.Scan() {
 println(scanner.Text())
 }
-```
+``````````````
 
 
 #### 定义
@@ -174,13 +184,13 @@ println(scanner.Text())
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.Scanner` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.Scanner` |  |
+| r2 | `error` |  |
 
 
 ### NewWriter
@@ -190,12 +200,14 @@ NewWriter 根据传入的 Writer 创建一个新的 BufioWriter 结构体引用
 
 常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush
 
+
 Example:
-```
+
+``````````````yak
 writer, err = bufio.NewWriter(os.Stdout)
 writer.WriteString("hello yak")
 writer.Flush()
-```
+``````````````
 
 
 #### 定义
@@ -205,13 +217,13 @@ writer.Flush()
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `...any` |   |
+| raw | `...any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.Writer` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.Writer` |  |
+| r2 | `error` |  |
 
 
 ### NewWriterSize
@@ -221,12 +233,14 @@ NewWriterSize 根据传入的 Writer 创建一个新的 BufioWriter 结构体引
 
 常用的 BufioWriter 方法有：Write, WriteByte, WriteString, Reset, Flush
 
+
 Example:
-```
+
+``````````````yak
 writer, err = bufio.NewWriterSize(os.Stdout, 1024)
 writer.WriteString("hello yak")
 writer.Flush()
-```
+``````````````
 
 
 #### 定义
@@ -236,13 +250,13 @@ writer.Flush()
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
-| size | `int` |   |
+| i | `any` |  |
+| size | `int` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*bufio.Writer` |   |
-| r2 | `error` |   |
+| r1 | `*bufio.Writer` |  |
+| r2 | `error` |  |
 
 

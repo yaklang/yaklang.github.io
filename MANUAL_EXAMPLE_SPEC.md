@@ -108,6 +108,57 @@ println("hello yaklang")
 - 仅配置、无输出的片段（如 `fuzz.HTTPRequest(raw, fuzz.https(true))~`）。
 - 罗列 API 用法的"目录式"片段（操作未定义变量、不产生输出）。
 
+### 4.4 `api/` 自动生成文档已纳入验证
+
+`docs/api/` 下的库参考文档由 yaklang 仓库的生成器
+`common/yak/yakdoc/generate_web_doc/generate_web_doc.go` 自动产出，示例统一渲染为
+本规范第二节规定的 14 反引号 `yak` 块。`scripts/verify-manual-examples.py` 已将
+`api/` 纳入扫描范围（不再排除），CI 工作流 `.github/workflows/verify-examples.yml`
+会在 PR 上执行验证：带 `assert` / `// OUT:` / 确定性渲染的示例必须实跑通过，
+真实网络/外部依赖且无断言的示意块自动跳过。
+
+API 文档的示例不要直接改 `docs/api/*.md`（会被下次自动生成覆盖），而应写在
+**yaklang 仓库对应导出函数的 Go 注释 `Example:` 段**，生成器会自动把它转成 14 反引号块。
+
+API 示例统一采用 **VARS + STDOUT + assert** 三段式模板，与 `docs/crypto/codec.md`、
+`docs/crypto/tls-crypto.md` 的正文示例风格保持一致：
+
+1. VARS：把核心结果赋值给变量，体现真实用法（而非把调用塞进 assert 里）。
+2. STDOUT：用 `println(变量)` 打印可观察的输出，并在同一行用 `// OUT: 值` 标注真实标准输出，
+   验证器会要求该值出现在 stdout 中（确定性、短小的输出适用）。
+3. assert：用 `assert` 锁定核心结论（相等、往返一致、布尔判断、长度等）。
+
+```go
+// Foo 演示某能力的处理函数。
+//
+// 参数:
+//   - input: 输入字符串
+//
+// 返回值:
+//   - 处理后的结果字符串
+//
+// Example:
+//
+//	// VARS: 把结果赋值给变量，体现真实用法
+//	result = demo.Foo("a")
+//	// STDOUT: 打印可观察输出，并用 // OUT: 标注真实 stdout
+//	println(result)   // OUT: A
+//	// assert: 锁定核心结论
+//	assert result == "A", "Foo should upper-case the input"
+func Foo(input string) string { /* ... */ }
+```
+
+何时用 `assert`、何时用 `println(...) // OUT:`（即"该用 assert 用 assert，该用 println 用 println"）：
+
+- 确定性且短小、值得直接展示的输出（字符串、布尔、整数、单值浮点、短切片）：
+  用 `println(变量) // OUT: 值`，既演示又被验证。
+- 关系型/往返型/边界结论（如 `decode(encode(x)) == x`、长度固定、边界返回 `-1`）：用 `assert`。
+- 多行或不稳定排序的输出（如 `json.dumps` 默认带缩进、map 多键顺序不定）：不要写 `// OUT:`，
+  改用 `assert str.Contains(...)` 等稳定断言；必须逐行比对时用尾部 `/* ... */` 渲染块。
+
+作者约定（与全仓规范一致）：注释可用中文，`assert` 信息、字符串字面量、`// OUT:` 值与 `log`
+输出一律英文；真实网络/外部依赖的示例保留示意（不写 `assert`/`// OUT:`），由验证器自动跳过。
+
 ## 五、经验沉淀（常见陷阱）
 
 在批量验证过程中反复踩到、需要长期记住的点：

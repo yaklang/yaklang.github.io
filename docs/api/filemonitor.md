@@ -11,7 +11,7 @@ OP_WRITE|(string) &#34;write&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [filemonitor.NewMonitor](#newmonitor) |NewMonitor 创建新的文件监控器 参数 config 支持的配置项：   - watch_paths: []string，必需，要监控的路径列表   - recursive: bool，可选，是否递归监控子目录，默认为 true   - include_patterns: []string，...|
+| [filemonitor.NewMonitor](#newmonitor) |NewMonitor 创建新的文件监控器 参数 config 支持的配置项： - watch_paths: []string，必需，要监控的路径列表 - recursive: bool，可选，是否递归监控子目录，默认为 true - include_patterns: []string，可选，包含的...|
 
 
 ## 函数定义
@@ -39,12 +39,12 @@ NewMonitor 创建新的文件监控器
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| config | `map[string]any` |   |
+| config | `map[string]any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*FileMonitor` |   |
-| r2 | `error` |   |
+| r1 | `*FileMonitor` |  |
+| r2 | `error` |  |
 
 

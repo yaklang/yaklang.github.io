@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [pandoc.SimpleConvertMarkdownFileToDocx](#simpleconvertmarkdownfiletodocx) |pandoc.SimpleConvertMarkdownFileToDocx can convert markdown to docx file  example: ``` md := &amp;#34;filename.md&amp;#34; outputFile, err = pandoc.SimpleConv...|
-| [pandoc.SimpleConvertMarkdownFileToDocxContext](#simpleconvertmarkdownfiletodocxcontext) |pandoc.SimpleConvertMarkdownFileToDocxContext can convert markdown to docx file  example: ``` md := &amp;#34;filename.md&amp;#34; ctx := context.Background() ...|
+| [pandoc.SimpleConvertMarkdownFileToDocx](#simpleconvertmarkdownfiletodocx) |SimpleConvertMarkdownFileToDocx 将 Markdown 文件转换为 docx 文件 依赖本地安装的 pandoc 工具，使用默认上下文，转换结果输出到 Yakit 临时目录 参数: - md: 输入的 Markdown 文件路径 返回值: - 生成的 docx 文件路径...|
+| [pandoc.SimpleConvertMarkdownFileToDocxContext](#simpleconvertmarkdownfiletodocxcontext) |SimpleConvertMarkdownFileToDocxContext 将 Markdown 文件转换为 docx 文件（带上下文） 依赖本地安装的 pandoc 工具，转换结果输出到 Yakit 临时目录 参数: - ctx: 上下文对象，用于控制取消与超时 - md: 输入的 Markdo...|
 | [pandoc.SimpleCoverMD2Word](#simplecovermd2word) ||
 
 
@@ -11,13 +11,33 @@
 ### SimpleConvertMarkdownFileToDocx
 
 #### 详细描述
-pandoc.SimpleConvertMarkdownFileToDocx can convert markdown to docx file
+SimpleConvertMarkdownFileToDocx 将 Markdown 文件转换为 docx 文件
 
-example:
-```
-md := &#34;filename.md&#34;
-outputFile, err = pandoc.SimpleConvertMarkdownFileToDocx(md)
-```
+依赖本地安装的 pandoc 工具，使用默认上下文，转换结果输出到 Yakit 临时目录
+
+参数:
+
+  - md: 输入的 Markdown 文件路径
+
+
+
+返回值:
+
+  - 生成的 docx 文件路径
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 示意性示例，需要本地安装 pandoc 并提供真实 markdown 文件
+outputFile, err = pandoc.SimpleConvertMarkdownFileToDocx("filename.md")
+if err != nil { die(err) }
+println(outputFile)
+``````````````
 
 
 #### 定义
@@ -27,28 +47,48 @@ outputFile, err = pandoc.SimpleConvertMarkdownFileToDocx(md)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| md | `string` |   |
+| md | `string` | 输入的 Markdown 文件路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 docx 文件路径 |
+| r2 | `error` | 错误信息 |
 
 
 ### SimpleConvertMarkdownFileToDocxContext
 
 #### 详细描述
-pandoc.SimpleConvertMarkdownFileToDocxContext can convert markdown to docx file
+SimpleConvertMarkdownFileToDocxContext 将 Markdown 文件转换为 docx 文件（带上下文）
 
-example:
-```
-md := &#34;filename.md&#34;
-ctx := context.Background()
-result, err := pandoc.SimpleConvertMarkdownFileToDocxContext(ctx, md)
+依赖本地安装的 pandoc 工具，转换结果输出到 Yakit 临时目录
+
+参数:
+
+  - ctx: 上下文对象，用于控制取消与超时
+
+  - md: 输入的 Markdown 文件路径
+
+
+
+返回值:
+
+  - 生成的 docx 文件路径
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 示意性示例，需要本地安装 pandoc 并提供真实 markdown 文件
+ctx = context.Background()
+result, err = pandoc.SimpleConvertMarkdownFileToDocxContext(ctx, "filename.md")
 if err != nil { die(err) }
-// println(&#34;Converted file path:&#34;, result)
-```
+println(result)
+``````````````
 
 
 #### 定义
@@ -58,20 +98,20 @@ if err != nil { die(err) }
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-| md | `string` |   |
+| ctx | `context.Context` | 上下文对象，用于控制取消与超时 |
+| md | `string` | 输入的 Markdown 文件路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` | 生成的 docx 文件路径 |
+| r2 | `error` | 错误信息 |
 
 
 ### SimpleCoverMD2Word
 
 #### 详细描述
-
+暂无描述
 
 #### 定义
 
@@ -80,13 +120,13 @@ if err != nil { die(err) }
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |   |
-| inputFile | `string` |   |
-| outputFile | `string` |   |
+| ctx | `context.Context` |  |
+| inputFile | `string` |  |
+| outputFile | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |   |
+| r1 | `error` |  |
 
 

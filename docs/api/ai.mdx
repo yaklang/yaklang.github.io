@@ -19,42 +19,42 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.Chat](#chat) | Chat 快速调用 AI 服务进行对话，这是最简单的调用方式。 |
 | [ai.ChatGLM](#chatglm) | ChatGLM 创建一个 ChatGLM 客户端实例，用于调用智谱 AI 的 ChatGLM 系列模型。 |
 | [ai.FunctionCall](#functioncall) | FunctionCall 让 AI 根据用户输入自动调用预定义的函数，实现智能函数调用能力。 |
-| [ai.IntelligentChat](#intelligentchat) | IntelligentChat uses the intelligent (high-quality) model |
-| [ai.IntelligentFunctionCall](#intelligentfunctioncall) |  |
-| [ai.LightweightChat](#lightweightchat) | LightweightChat uses the lightweight (fast) model |
-| [ai.LightweightFunctionCall](#lightweightfunctioncall) |  |
+| [ai.IntelligentChat](#intelligentchat) | IntelligentChat 使用智能（高质量）模型分层进行对话（导出名为 ai.IntelligentChat） |
+| [ai.IntelligentFunctionCall](#intelligentfunctioncall) | IntelligentFunctionCall 使用智能（高质量）模型进行函数调用（导出名为 ai.IntelligentFunctionCall） |
+| [ai.LightweightChat](#lightweightchat) | LightweightChat 使用轻量（快速）模型分层进行对话（导出名为 ai.LightweightChat） |
+| [ai.LightweightFunctionCall](#lightweightfunctioncall) | LightweightFunctionCall 使用轻量（快速）模型进行函数调用（导出名为 ai.LightweightFunctionCall） |
 | [ai.ListModelByProviderType](#listmodelbyprovidertype) | ListModelByProviderType 根据提供商类型列出可用的 AI 模型。 |
 | [ai.ListModels](#listmodels) | ListModels 列出当前配置下所有可用的 AI 模型。 |
 | [ai.MockAIService](#mockaiservice) | MockAIService 创建一个 Mock AI 响应 目前仅供项目内部测试脚本使用。 |
 | [ai.Moonshot](#moonshot) | Moonshot 创建一个 Moonshot 客户端实例，用于调用 Moonshot AI 服务。 |
 | [ai.OpenAI](#openai) | OpenAI 创建一个 OpenAI 客户端实例，支持 OpenAI 官方 API 及兼容的第三方服务。 |
 | [ai.StructuredStream](#structuredstream) | StructuredStream 获取结构化的流式输出，支持实时接收 AI 返回的数据。 |
-| [ai.VisionChat](#visionchat) | VisionChat uses the vision model |
-| [ai.VisionFunctionCall](#visionfunctioncall) |  |
+| [ai.VisionChat](#visionchat) | VisionChat 使用视觉模型分层进行对话，可结合图片输入（导出名为 ai.VisionChat） |
+| [ai.VisionFunctionCall](#visionfunctioncall) | VisionFunctionCall 使用视觉模型进行函数调用，可结合图片输入（导出名为 ai.VisionFunctionCall） |
 | [ai.aicacheSession](#aicachesession) | SessionDir 返回当前进程 aicache 调试落盘根目录的绝对路径， |
 | [ai.apiKey](#apikey) | WithAPIKey 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。 |
 | [ai.baseURL](#baseurl) | WithBaseURL 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。 |
 | [ai.debugStream](#debugstream) | WithDebugStream 启用流式输出调试模式，用于开发调试。 |
 | [ai.domain](#domain) | WithDomain 设置服务域名，用于某些特定的 AI 服务提供商。 |
 | [ai.funcCallRetryTimes](#funccallretrytimes) | WithFunctionCallRetryTimes 设置函数调用失败时的重试次数。 |
-| [ai.imageAI](#imageai) |  |
+| [ai.imageAI](#imageai) | WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI） |
 | [ai.imageBase64](#imagebase64) | WithImageBase64 传入 Base64 编码的图片数据，用于图像识别场景。 |
 | [ai.imageFile](#imagefile) | WithImageFile 传入图片文件路径，自动读取并发送给 AI 进行分析。 |
 | [ai.imageRaw](#imageraw) | WithImageRaw 传入原始图片字节数据，用于图像识别场景。 |
 | [ai.model](#model) | WithModel 指定要使用的 AI 模型名称。 |
-| [ai.modelInfoCallback](#modelinfocallback) |  |
-| [ai.modelInfoConfirmCallback](#modelinfoconfirmcallback) |  |
+| [ai.modelInfoCallback](#modelinfocallback) | WithModelInfoCallback 在选定模型并开始调用前触发的回调（导出名为 ai.modelInfoCallback） |
+| [ai.modelInfoConfirmCallback](#modelinfoconfirmcallback) | WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback） |
 | [ai.noHttps](#nohttps) | WithNoHttps 禁用 HTTPS，使用 HTTP 协议进行通信。 |
 | [ai.onReasonStream](#onreasonstream) | WithReasonStreamHandler 设置推理过程的流式输出回调，用于获取 AI 的思考过程。 |
 | [ai.onStream](#onstream) | WithStreamHandler 设置流式输出的回调函数，用于实时接收 AI 响应数据。 |
-| [ai.preferredTier](#preferredtier) |  |
+| [ai.preferredTier](#preferredtier) | WithPreferredTier 指定优先使用的模型分层（导出名为 ai.preferredTier） |
 | [ai.proxy](#proxy) | WithProxy 设置 HTTP 代理服务器，用于网络请求。 |
-| [ai.qualityPriority](#qualitypriority) |  |
-| [ai.rawHTTPRequestResponseCallback](#rawhttprequestresponsecallback) |  |
-| [ai.rawHTTPResponseCallback](#rawhttpresponsecallback) |  |
-| [ai.rawHTTPResponseHeaderCallback](#rawhttpresponseheadercallback) |  |
+| [ai.qualityPriority](#qualitypriority) | WithQualityPriority 设置质量优先（使用智能模型，导出名为 ai.qualityPriority） |
+| [ai.rawHTTPRequestResponseCallback](#rawhttprequestresponsecallback) | WithRawHTTPRequestResponseCallback 注册原始 HTTP 请求/响应回调（导出名为 ai.rawHTTPRequestResponseCallback） |
+| [ai.rawHTTPResponseCallback](#rawhttpresponsecallback) | WithRawHTTPResponseCallback 注册原始 HTTP 响应回调，可获取响应头与响应体预览（导出名为 ai.rawHTTPResponseCallback） |
+| [ai.rawHTTPResponseHeaderCallback](#rawhttpresponseheadercallback) | WithRawHTTPResponseHeaderCallback 注册原始 HTTP 响应头回调（导出名为 ai.rawHTTPResponseHeaderCallback） |
 | [ai.rawMessages](#rawmessages) | WithRawMessages 让上层把客户端原始的 messages 数组完整透传到上游 LLM， |
-| [ai.speedPriority](#speedpriority) |  |
+| [ai.speedPriority](#speedpriority) | WithSpeedPriority 设置速度优先（使用轻量模型，导出名为 ai.speedPriority） |
 | [ai.thinking](#thinking) | WithEnableThinking 设置是否启用思考链相关请求体字段；仅写入 EnableThinking（*bool）。 |
 | [ai.timeout](#timeout) | WithTimeout 设置请求超时时间（单位：秒）。 |
 | [ai.toolCallCallback](#toolcallcallback) | WithToolCallCallback 设置 tool_calls 回调函数，用于在 AI 响应中包含 tool_calls 时接管其处理逻辑。启用后，tool_calls 将不再以默认的占位标记形式输出，而是直接通过回调函数返回解析后的 ToolCall 对象。 目前只在项目内部测试脚本使用 |
@@ -63,7 +63,7 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.videoBase64](#videobase64) | WithVideoBase64 传入 Base64 编码的视频数据，自动包装为 data URI。 |
 | [ai.videoRaw](#videoraw) | WithVideoRaw 传入视频原始字节，自动 base64 包装为 data URI。 |
 | [ai.videoUrl](#videourl) | WithVideoUrl 传入视频 URL（http(s) 或 data:video/...;base64,...），用于 Qwen Omni 类模型。 |
-| [ai.visionPriority](#visionpriority) |  |
+| [ai.visionPriority](#visionpriority) | WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI） |
 
 
 ## API 详情
@@ -100,7 +100,7 @@ Chat(msg string, opts ...aispec.AIConfigOption) (string, error)
 <TabItem value="Chat-2" label="示例">
 
 
-```go
+``````````````yak
 response = ai.Chat("介绍一下Yakit")~
 println(response)
 
@@ -111,7 +111,7 @@ println(response)
 // 显式使用图片模型
 response = ai.Chat("分析这张截图", ai.imageFile("/tmp/demo.png"), ai.imageAI())~
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -147,15 +147,20 @@ ChatGLM(opts ...aispec.AIConfigOption) aispec.AIClient
 <TabItem value="ChatGLM-2" label="示例">
 
 
-```go
+``````````````yak
 // 创建 ChatGLM 客户端
-client = ai.ChatGLM(ai.apiKey("your-api-key"), ai.model("chatglm_turbo"))
+client = ai.ChatGLM(
+
+	ai.apiKey("your-api-key"),
+	ai.model("chatglm_turbo"),
+
+)
 
 // 调用对话
 response, err = client.Chat("介绍一下你自己")
 die(err)
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -194,17 +199,25 @@ FunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string
 <TabItem value="FunctionCall-2" label="示例">
 
 
-```go
+``````````````yak
 // 定义可调用的函数
 
-funcs = {"searchVulnerability": func(keyword) {
-    return {"result": sprintf("搜索漏洞: %s", keyword)}
-}, "scanTarget": func(target, port) {
-    return {"target": target, "port": port, "status": "scanning"}
-}}
+	funcs = {
+	    "searchVulnerability": func(keyword) {
+	       return {"result": sprintf("搜索漏洞: %s", keyword)}
+	     },
+	    "scanTarget": func(target, port) {
+	      return {"target": target, "port": port, "status": "scanning"}
+	   },
+	}
 
 // AI 自动识别并调用函数
-result, err = ai.FunctionCall("帮我搜索 SQL 注入漏洞", funcs)
+result, err = ai.FunctionCall(
+
+	"帮我搜索 SQL 注入漏洞",
+	funcs,
+
+)
 
 die(err)
 dump(result)
@@ -213,7 +226,7 @@ dump(result)
 result, err = ai.FunctionCall("快速提取端口参数", funcs, ai.speedPriority())
 die(err)
 dump(result)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -223,7 +236,7 @@ dump(result)
 
 ### IntelligentChat
 
-- 描述: IntelligentChat uses the intelligent (high-quality) model
+- 描述: IntelligentChat 使用智能（高质量）模型分层进行对话（导出名为 ai.IntelligentChat）
 
 
 <Tabs>
@@ -237,15 +250,25 @@ IntelligentChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| msg | `string` |  要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项，如 ai.apiKey、ai.model 等 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` |  AI 返回的回复内容 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="IntelligentChat-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的 AI 服务（示意性示例）
+response = ai.IntelligentChat("分析这条漏洞利用链")~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -255,7 +278,7 @@ IntelligentChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 ### IntelligentFunctionCall
 
-- 描述: 
+- 描述: IntelligentFunctionCall 使用智能（高质量）模型进行函数调用（导出名为 ai.IntelligentFunctionCall）
 
 
 <Tabs>
@@ -269,16 +292,27 @@ IntelligentFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) 
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |   |
-| funcs | `any` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| input | `string` |  用户输入的自然语言指令 |
+| funcs | `any` |  函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |   |
-| r2 | `error` |   |
+| r1 | `map[string]any` |  函数调用结果 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="IntelligentFunctionCall-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的 AI 服务（示意性示例）
+funcs = { "scan": func(target) { return {"target": target} } }
+result = ai.IntelligentFunctionCall("扫描 example.com", funcs)~
+dump(result)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -288,7 +322,7 @@ IntelligentFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) 
 
 ### LightweightChat
 
-- 描述: LightweightChat uses the lightweight (fast) model
+- 描述: LightweightChat 使用轻量（快速）模型分层进行对话（导出名为 ai.LightweightChat）
 
 
 <Tabs>
@@ -302,15 +336,25 @@ LightweightChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| msg | `string` |  要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项，如 ai.apiKey、ai.model 等 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` |  AI 返回的回复内容 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="LightweightChat-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的 AI 服务（示意性示例）
+response = ai.LightweightChat("用一句话总结这段文本")~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -320,7 +364,7 @@ LightweightChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 ### LightweightFunctionCall
 
-- 描述: 
+- 描述: LightweightFunctionCall 使用轻量（快速）模型进行函数调用（导出名为 ai.LightweightFunctionCall）
 
 
 <Tabs>
@@ -334,16 +378,27 @@ LightweightFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) 
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |   |
-| funcs | `any` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| input | `string` |  用户输入的自然语言指令 |
+| funcs | `any` |  函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |   |
-| r2 | `error` |   |
+| r1 | `map[string]any` |  函数调用结果 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="LightweightFunctionCall-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的 AI 服务（示意性示例）
+funcs = { "scan": func(target) { return {"target": target} } }
+result = ai.LightweightFunctionCall("快速提取目标", funcs)~
+dump(result)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -381,14 +436,14 @@ ListModelByProviderType(providerType string, opts ...aispec.AIConfigOption) ([]*
 <TabItem value="ListModelByProviderType-2" label="示例">
 
 
-```go
+``````````````yak
 models, err = ai.ListModelByProviderType("aibalance")
 die(err)
 
-for _, model = range models {
-    printf("模型: %s\n", model.Id)
-}
-```
+	for _, model = range models {
+	 printf("模型: %s\n", model.Id)
+	}
+``````````````
 
 </TabItem>
 </Tabs>
@@ -425,14 +480,14 @@ ListModels(opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)
 <TabItem value="ListModels-2" label="示例">
 
 
-```go
+``````````````yak
 models, err = ai.ListModels(ai.type("aibalance"))
 die(err)
 
-for _, model = range models {
-    printf("模型: %s\n", model.Id)
-}
-```
+	for _, model = range models {
+	 printf("模型: %s\n", model.Id)
+	}
+``````````````
 
 </TabItem>
 </Tabs>
@@ -498,15 +553,20 @@ Moonshot(opts ...aispec.AIConfigOption) aispec.AIClient
 <TabItem value="Moonshot-2" label="示例">
 
 
-```go
+``````````````yak
 // 创建 Moonshot 客户端
-client = ai.Moonshot(ai.apiKey("sk-xxx"), ai.model("moonshot-v1-8k"))
+client = ai.Moonshot(
+
+	ai.apiKey("sk-xxx"),
+	ai.model("moonshot-v1-8k"),
+
+)
 
 // 使用客户端
 response, err = client.Chat("帮我分析这段代码")
 die(err)
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -542,30 +602,41 @@ OpenAI(opts ...aispec.AIConfigOption) aispec.AIClient
 <TabItem value="OpenAI-2" label="示例">
 
 
-```go
+``````````````yak
 // 创建 OpenAI 客户端
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.model("gpt-3.5-turbo"))
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.model("gpt-3.5-turbo"),
+
+)
 
 // 发送消息
 response, err = client.Chat("你好")
 
-if err != nil {
-    die(err)
-}
-
+	if err != nil{
+	   die(err)
+	}
 
 println(response)
 
 // 使用自定义 API 地址
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.baseURL("https://xxx.com/v1"), ai.model("gpt-4"))
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.baseURL("https://xxx.com/v1"),
+	ai.model("gpt-4"),
+
+)
 // 发送消息
 response, err = client.Chat("你好")
 
-if err != nil {
-    die(err)
-}
+	if err != nil{
+	   die(err)
+	}
+
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -603,20 +674,25 @@ StructuredStream(input string, opts ...aispec.AIConfigOption) (chan *aispec.Stru
 <TabItem value="StructuredStream-2" label="示例">
 
 
-```go
+``````````````yak
 // 获取流式输出
-stream, err = ai.StructuredStream("1+1等于几")
+stream, err = ai.StructuredStream(
+
+	"1+1等于几",
+
+)
 die(err)
 
 // 读取流数据
 collectedData = ""
 
-for data = range stream {
-    printf("收到数据: %v\n", data.OutputText)
-    collectedData += data.OutputText
-}
+	for data = range stream {
+	 printf("收到数据: %v\n", data.OutputText)
+	 collectedData += data.OutputText
+	}
+
 printf("最终输出: %s\n", collectedData)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -626,7 +702,7 @@ printf("最终输出: %s\n", collectedData)
 
 ### VisionChat
 
-- 描述: VisionChat uses the vision model
+- 描述: VisionChat 使用视觉模型分层进行对话，可结合图片输入（导出名为 ai.VisionChat）
 
 
 <Tabs>
@@ -640,15 +716,25 @@ VisionChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| msg | `string` |  要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项，通常配合 ai.imageFile、ai.imageBase64 等使用 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
-| r2 | `error` |   |
+| r1 | `string` |  AI 返回的回复内容 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="VisionChat-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的视觉 AI 服务（示意性示例）
+response = ai.VisionChat("描述这张截图", ai.imageFile("/tmp/demo.png"))~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -658,7 +744,7 @@ VisionChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 ### VisionFunctionCall
 
-- 描述: 
+- 描述: VisionFunctionCall 使用视觉模型进行函数调用，可结合图片输入（导出名为 ai.VisionFunctionCall）
 
 
 <Tabs>
@@ -672,16 +758,27 @@ VisionFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |   |
-| funcs | `any` |   |
-| opts | `...aispec.AIConfigOption` |   |
+| input | `string` |  用户输入的自然语言指令 |
+| funcs | `any` |  函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` |  AI 配置选项，通常配合 ai.imageFile 等使用 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |   |
-| r2 | `error` |   |
+| r1 | `map[string]any` |  函数调用结果 |
+| r2 | `error` |  错误信息 |
+
+</TabItem>
+<TabItem value="VisionFunctionCall-2" label="示例">
+
+
+``````````````yak
+// 需要配置可用的视觉 AI 服务（示意性示例）
+funcs = { "describe": func(text) { return {"text": text} } }
+result = ai.VisionFunctionCall("识别图片内容", funcs, ai.imageFile("/tmp/demo.png"))~
+dump(result)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -707,7 +804,16 @@ aicacheSession() string
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` |  aicache 调试落盘根目录的绝对路径 |
+
+</TabItem>
+<TabItem value="aicacheSession-2" label="示例">
+
+
+``````````````yak
+sessionDir = ai.aicacheSession()
+println(sessionDir)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -743,9 +849,13 @@ apiKey(k string) AIConfigOption
 <TabItem value="apiKey-2" label="示例">
 
 
-```go
-client = ai.OpenAI(ai.apiKey("sk-xxxxxxxxxxxxxxxx"))
-```
+``````````````yak
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxxxxxxxxxxxxxxx"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -781,10 +891,15 @@ baseURL(baseURL string) AIConfigOption
 <TabItem value="baseURL-2" label="示例">
 
 
-```go
+``````````````yak
 // 使用自定义 API 地址
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.baseURL("https://xxx.com/v1"))
-```
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.baseURL("https://xxx.com/v1"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -820,12 +935,12 @@ debugStream(h ...bool) AIConfigOption
 <TabItem value="debugStream-2" label="示例">
 
 
-```go
+``````````````yak
 // 启用调试模式
 response = ai.Chat("测试消息", ai.debugStream(true))~
 // 输出内容将包含调试信息 TTFT(Time to First Token) first byte(token) delay in second
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -861,9 +976,14 @@ domain(domain string) AIConfigOption
 <TabItem value="domain-2" label="示例">
 
 
-```go
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.domain("api.openai.com"))
-```
+``````````````yak
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.domain("api.openai.com"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -899,17 +1019,26 @@ funcCallRetryTimes(times int) AIConfigOption
 <TabItem value="funcCallRetryTimes-2" label="示例">
 
 
-```go
-funcs = {"searchVulnerability": func(keyword) {
-    return {"result": sprintf("搜索漏洞: %s", keyword)}
-}, "scanTarget": func(target, port) {
-    return {"target": target, "port": port, "status": "scanning"}
-}}
+``````````````yak
+funcs = {
+	   "searchVulnerability": func(keyword) {
+	      return {"result": sprintf("搜索漏洞: %s", keyword)}
+	    },
+	   "scanTarget": func(target, port) {
+	     return {"target": target, "port": port, "status": "scanning"}
+	  },
+	}
 
 // 设置重试 3 次
-result = ai.FunctionCall("扫描目标 127.0.0.1:8080", funcs, ai.funcCallRetryTimes(3))~
+result = ai.FunctionCall(
+
+	"扫描目标 127.0.0.1:8080",
+	funcs,
+	ai.funcCallRetryTimes(3),
+
+)~
 dump(result)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -919,7 +1048,7 @@ dump(result)
 
 ### imageAI
 
-- 描述: 
+- 描述: WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI）
 
 
 <Tabs>
@@ -933,7 +1062,16 @@ imageAI() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="imageAI-2" label="示例">
+
+
+``````````````yak
+response = ai.Chat("分析这张截图", ai.imageFile("/tmp/demo.png"), ai.imageAI())~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -969,14 +1107,13 @@ imageBase64(b64 string) AIConfigOption
 <TabItem value="imageBase64-2" label="示例">
 
 
-```go
+``````````````yak
 // 从网络获取图片并分析
 rsp, req, err = poc.Get("https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5929730761/p529185.jpg")
 
-if err != nil {
-    die(err)
-}
-
+	if err != nil{
+	   die(err)
+	}
 
 imageBytes = rsp.GetBody()
 dump(imageBytes)
@@ -984,11 +1121,12 @@ b64ImageBytes = codec.EncodeBase64(imageBytes)
 
 response, err = ai.Chat("分析这张图片", ai.imageBase64(b64ImageBytes))
 
-if err != nil {
-    die(err)
-}
+	if err != nil{
+	   die(err)
+	}
+
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1024,15 +1162,25 @@ imageFile(i string) AIConfigOption
 <TabItem value="imageFile-2" label="示例">
 
 
-```go
+``````````````yak
 // 分析本地图片
-response = ai.Chat("这张图片中有什么漏洞特征？", ai.imageFile("/path/to/screenshot.png"))~
+response = ai.Chat(
+
+	"这张图片中有什么漏洞特征？",
+	ai.imageFile("/path/to/screenshot.png"),
+
+)~
 println(response)
 
 // 分析验证码
-response = ai.Chat("识别这个验证码", ai.imageFile("./captcha.jpg"))~
+response = ai.Chat(
+
+	   "识别这个验证码",
+		ai.imageFile("./captcha.jpg"),
+
+)~
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1068,25 +1216,25 @@ imageRaw(raw []byte) AIConfigOption
 <TabItem value="imageRaw-2" label="示例">
 
 
-```go
+``````````````yak
 // 从网络获取图片并分析
 rsp, req, err = poc.Get("https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/5929730761/p529185.jpg")
 
-if err != nil {
-    die(err)
-}
-
+	if err != nil{
+	   die(err)
+	}
 
 imageBytes = rsp.GetBody()
 dump(imageBytes)
 
 response, err = ai.Chat("分析这张图片", ai.imageRaw(imageBytes))
 
-if err != nil {
-    die(err)
-}
+	if err != nil{
+	   die(err)
+	}
+
 println(response)
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1122,13 +1270,23 @@ model(model string) AIConfigOption
 <TabItem value="model-2" label="示例">
 
 
-```go
+``````````````yak
 // 使用 GPT-4
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.model("gpt-4"))
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.model("gpt-4"),
+
+)
 
 // 使用 GPT-3.5
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.model("gpt-3.5-turbo"))
-```
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.model("gpt-3.5-turbo"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1138,7 +1296,7 @@ client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.model("gpt-3.5-turbo"))
 
 ### modelInfoCallback
 
-- 描述: 
+- 描述: WithModelInfoCallback 在选定模型并开始调用前触发的回调（导出名为 ai.modelInfoCallback）
 
 
 <Tabs>
@@ -1152,13 +1310,22 @@ modelInfoCallback(cb func(provider, model string)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` |   |
+| cb | `func(provider, model string)` |  回调函数，参数为 (provider, model) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="modelInfoCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.modelInfoCallback(func(provider, model) { println(provider, model) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1168,7 +1335,7 @@ modelInfoCallback(cb func(provider, model string)) AIConfigOption
 
 ### modelInfoConfirmCallback
 
-- 描述: 
+- 描述: WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback）
 
 
 <Tabs>
@@ -1182,13 +1349,22 @@ modelInfoConfirmCallback(cb func(provider, model string)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` |   |
+| cb | `func(provider, model string)` |  回调函数，参数为 (provider, model) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="modelInfoConfirmCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.modelInfoConfirmCallback(func(provider, model) { println(provider, model) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1224,10 +1400,16 @@ noHttps(b bool) AIConfigOption
 <TabItem value="noHttps-2" label="示例">
 
 
-```go
+``````````````yak
 // 本地测试环境使用 HTTP
-client = ai.OpenAI(ai.apiKey("test-key"), ai.baseURL("localhost:8080"), ai.noHttps(true))
-```
+client = ai.OpenAI(
+
+	ai.apiKey("test-key"),
+	ai.baseURL("localhost:8080"),
+	ai.noHttps(true),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1263,21 +1445,23 @@ onReasonStream(h func(io.Reader)) AIConfigOption
 <TabItem value="onReasonStream-2" label="示例">
 
 
-```go
+``````````````yak
 response = ai.Chat(
-    "介绍一下 SQL 注入", 
-    ai.onReasonStream(fn(reader) {
-        io.ReadEvery1s(
-            context.New(), 
-            reader, 
-            func(data) {
-                println(string(data))
-                return true
-            }, 
-        )
-    }), 
+
+	"介绍一下 SQL 注入",
+	ai.onReasonStream(fn(reader) {
+	    io.ReadEvery1s(
+	        context.New(),
+	        reader,
+	        func(data) {
+	            println(string(data))
+	            return true
+	        },
+	    )
+	}),
+
 )~
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1313,21 +1497,23 @@ onStream(h func(io.Reader)) AIConfigOption
 <TabItem value="onStream-2" label="示例">
 
 
-```go
+``````````````yak
 response = ai.Chat(
-    "介绍一下 SQL 注入", 
-    ai.onStream(fn(reader) {
-        io.ReadEvery1s(
-            context.New(), 
-            reader, 
-            func(data) {
-                println(string(data))
-                return true
-            }, 
-        )
-    }), 
+
+	"介绍一下 SQL 注入",
+	ai.onStream(fn(reader) {
+	    io.ReadEvery1s(
+	        context.New(),
+	        reader,
+	        func(data) {
+	            println(string(data))
+	            return true
+	        },
+	    )
+	}),
+
 )~
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1337,7 +1523,7 @@ response = ai.Chat(
 
 ### preferredTier
 
-- 描述: 
+- 描述: WithPreferredTier 指定优先使用的模型分层（导出名为 ai.preferredTier）
 
 
 <Tabs>
@@ -1351,13 +1537,22 @@ preferredTier(tier consts.ModelTier) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| tier | `consts.ModelTier` |   |
+| tier | `consts.ModelTier` |  模型分层，如智能、轻量、视觉 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="preferredTier-2" label="示例">
+
+
+``````````````yak
+opt = ai.preferredTier("lightweight")
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1393,13 +1588,23 @@ proxy(p string) AIConfigOption
 <TabItem value="proxy-2" label="示例">
 
 
-```go
+``````````````yak
 // HTTP 代理
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.proxy("http://127.0.0.1:7890"))
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.proxy("http://127.0.0.1:7890"),
+
+)
 
 // SOCKS5 代理
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.proxy("socks5://127.0.0.1:1080"))
-```
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.proxy("socks5://127.0.0.1:1080"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1409,7 +1614,7 @@ client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.proxy("socks5://127.0.0.1:1080"))
 
 ### qualityPriority
 
-- 描述: 
+- 描述: WithQualityPriority 设置质量优先（使用智能模型，导出名为 ai.qualityPriority）
 
 
 <Tabs>
@@ -1423,7 +1628,16 @@ qualityPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="qualityPriority-2" label="示例">
+
+
+``````````````yak
+response = ai.Chat("深入分析这个漏洞", ai.qualityPriority())~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1433,7 +1647,7 @@ qualityPriority() AIConfigOption
 
 ### rawHTTPRequestResponseCallback
 
-- 描述: 
+- 描述: WithRawHTTPRequestResponseCallback 注册原始 HTTP 请求/响应回调（导出名为 ai.rawHTTPRequestResponseCallback）
 
 
 <Tabs>
@@ -1447,13 +1661,22 @@ rawHTTPRequestResponseCallback(cb RawHTTPRequestResponseCallback) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `RawHTTPRequestResponseCallback` |   |
+| cb | `RawHTTPRequestResponseCallback` |  请求/响应回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="rawHTTPRequestResponseCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.rawHTTPRequestResponseCallback(func(req, rsp) { dump(req, rsp) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1463,7 +1686,7 @@ rawHTTPRequestResponseCallback(cb RawHTTPRequestResponseCallback) AIConfigOption
 
 ### rawHTTPResponseCallback
 
-- 描述: 
+- 描述: WithRawHTTPResponseCallback 注册原始 HTTP 响应回调，可获取响应头与响应体预览（导出名为 ai.rawHTTPResponseCallback）
 
 
 <Tabs>
@@ -1477,13 +1700,22 @@ rawHTTPResponseCallback(cb func(headerBytes []byte, bodyPreview []byte)) AIConfi
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(headerBytes []byte, bodyPreview []byte)` |   |
+| cb | `func(headerBytes []byte, bodyPreview []byte)` |  回调函数，参数为 (headerBytes, bodyPreview) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="rawHTTPResponseCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.rawHTTPResponseCallback(func(header, body) { println(string(header)) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1493,7 +1725,7 @@ rawHTTPResponseCallback(cb func(headerBytes []byte, bodyPreview []byte)) AIConfi
 
 ### rawHTTPResponseHeaderCallback
 
-- 描述: 
+- 描述: WithRawHTTPResponseHeaderCallback 注册原始 HTTP 响应头回调（导出名为 ai.rawHTTPResponseHeaderCallback）
 
 
 <Tabs>
@@ -1507,13 +1739,22 @@ rawHTTPResponseHeaderCallback(cb RawHTTPResponseHeaderCallback) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `RawHTTPResponseHeaderCallback` |   |
+| cb | `RawHTTPResponseHeaderCallback` |  响应头回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="rawHTTPResponseHeaderCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.rawHTTPResponseHeaderCallback(func(header) { dump(header) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1539,13 +1780,23 @@ rawMessages(msgs []ChatDetail) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msgs | `[]ChatDetail` |   |
+| msgs | `[]ChatDetail` |  原始 messages 数组（保留 role 顺序与 content 结构） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="rawMessages-2" label="示例">
+
+
+``````````````yak
+// msgs 为客户端原始消息列表（示意性示例）
+opt = ai.rawMessages(msgs)
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1555,7 +1806,7 @@ rawMessages(msgs []ChatDetail) AIConfigOption
 
 ### speedPriority
 
-- 描述: 
+- 描述: WithSpeedPriority 设置速度优先（使用轻量模型，导出名为 ai.speedPriority）
 
 
 <Tabs>
@@ -1569,7 +1820,16 @@ speedPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="speedPriority-2" label="示例">
+
+
+``````````````yak
+response = ai.Chat("快速总结这段文本", ai.speedPriority())~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1607,19 +1867,26 @@ thinking(t any) AIConfigOption
 <TabItem value="thinking-2" label="示例">
 
 
-```go
+``````````````yak
 // 示例 1: 基础用法 - 启用思维模式
 println("=== 示例 1: 基础思维模式 ===")
-response, err = ai.Chat("请分析 SQL 注入漏洞的原理和常见的防御方法", ai.type("volcengine"), ai.apiKey("你的API密钥"), ai.model("doubao-lite-4k"), ai.thinking(true))
+response, err = ai.Chat(
 
-if err != nil {
-    die(err)
-}
+	"请分析 SQL 注入漏洞的原理和常见的防御方法",
+	ai.type("volcengine"),
+	ai.apiKey("你的API密钥"),  // 请替换为实际的 API Key
+	ai.model("doubao-lite-4k"),  // 或使用其他豆包模型
+	ai.thinking(true),  // 启用思维模式
 
+)
+
+	if err != nil {
+	   die(err)
+	}
 
 println("回答:", response)
 println()
-```
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1655,13 +1922,24 @@ timeout(timeout float64) AIConfigOption
 <TabItem value="timeout-2" label="示例">
 
 
-```go
+``````````````yak
 // 设置 60 秒超时
-client = ai.OpenAI(ai.apiKey("sk-xxx"), ai.timeout(60))
+client = ai.OpenAI(
+
+	ai.apiKey("sk-xxx"),
+	ai.timeout(60),
+
+)
 
 // 长时间任务设置更长超时
-response = ai.Chat("生成一个完整的渗透测试报告", ai.apiKey("sk-xxx"), ai.timeout(180))~
-```
+response = ai.Chat(
+
+	"生成一个完整的渗透测试报告",
+	ai.apiKey("sk-xxx"),
+	ai.timeout(180),  // 3 分钟
+
+)~
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1692,6 +1970,15 @@ toolCallCallback(cb func([]*ToolCall)) AIConfigOption
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
 | r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="toolCallCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.toolCallCallback(func(toolCalls) { dump(toolCalls) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1727,13 +2014,23 @@ type(t string) AIConfigOption
 <TabItem value="type-2" label="示例">
 
 
-```go
+``````````````yak
 // 使用 OpenAI
-response, err = ai.Chat("你好", ai.apiKey("sk-xxx"), ai.type("openai"))
+response, err = ai.Chat("你好",
+
+	ai.apiKey("sk-xxx"),
+	ai.type("openai"),
+
+)
 
 // 使用 ChatGLM
-response, err = ai.Chat("你好", ai.apiKey("your-key"), ai.type("chatglm"))
-```
+response, err = ai.Chat("你好",
+
+	ai.apiKey("your-key"),
+	ai.type("chatglm"),
+
+)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1759,13 +2056,22 @@ usageCallback(cb func(*ChatUsage)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(*ChatUsage)` |   |
+| cb | `func(*ChatUsage)` |  回调函数，参数为本次对话的 token 用量信息（可能为 nil） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="usageCallback-2" label="示例">
+
+
+``````````````yak
+opt = ai.usageCallback(func(usage) { dump(usage) })
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1791,13 +2097,22 @@ videoBase64(b64 string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b64 | `string` |   |
+| b64 | `string` |  Base64 编码的视频数据（或 data URI） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="videoBase64-2" label="示例">
+
+
+``````````````yak
+opt = ai.videoBase64(codec.EncodeBase64(file.ReadFile("/tmp/demo.mp4")~))
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1823,13 +2138,22 @@ videoRaw(raw []byte) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `[]byte` |   |
+| raw | `[]byte` |  视频原始字节 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="videoRaw-2" label="示例">
+
+
+``````````````yak
+opt = ai.videoRaw(file.ReadFile("/tmp/demo.mp4")~)
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1855,13 +2179,22 @@ videoUrl(u string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| u | `string` |   |
+| u | `string` |  视频 URL 或 data URI |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="videoUrl-2" label="示例">
+
+
+``````````````yak
+opt = ai.videoUrl("https://example.com/demo.mp4")
+println(opt)
+``````````````
 
 </TabItem>
 </Tabs>
@@ -1871,7 +2204,7 @@ videoUrl(u string) AIConfigOption
 
 ### visionPriority
 
-- 描述: 
+- 描述: WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI）
 
 
 <Tabs>
@@ -1885,7 +2218,16 @@ visionPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |   |
+| r1 | `AIConfigOption` |  AI 配置选项 |
+
+</TabItem>
+<TabItem value="visionPriority-2" label="示例">
+
+
+``````````````yak
+response = ai.Chat("分析这张截图", ai.imageFile("/tmp/demo.png"), ai.imageAI())~
+println(response)
+``````````````
 
 </TabItem>
 </Tabs>

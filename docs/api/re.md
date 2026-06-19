@@ -2,34 +2,34 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [re.Compile](#compile) |Compile 将正则表达式解析为一个正则表达式结构体引用  |
-| [re.CompilePOSIX](#compileposix) |CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配  |
-| [re.ExtractEmail](#extractemail) |ExtractEmail 提取字符串中所有的 Email 地址  |
-| [re.ExtractHostPort](#extracthostport) |ExtractHostPort 提取字符串中所有的 Host:Port  |
-| [re.ExtractIP](#extractip) |ExtractIP 提取字符串中所有的 IP 地址  |
-| [re.ExtractIPv4](#extractipv4) |ExtractIPv4 提取字符串中所有的 IPv4 地址  |
-| [re.ExtractIPv6](#extractipv6) |ExtractIPv6 提取字符串中所有的 IPv6 地址  |
-| [re.ExtractMac](#extractmac) |ExtractMac 提取字符串中所有的 MAC 地址  |
-| [re.ExtractPath](#extractpath) |ExtractPath 提取URL中的路径和查询字符串  |
-| [re.ExtractTTY](#extracttty) |ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径  |
-| [re.ExtractURL](#extracturl) |ExtractURL 提取字符串中所有的 URL 地址  |
-| [re.Find](#find) |Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串  |
-| [re.FindAll](#findall) |FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片  |
-| [re.FindAllIndex](#findallindex) |FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串的起始位置和结束位置，否则返回空整数的二维切片  |
-| [re.FindGroup](#findgroup) |FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个映射，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射  |
-| [re.FindGroupAll](#findgroupall) |FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一个映射切片，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射切片  |
-| [re.FindIndex](#findindex) |FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长度为2的整数切片，第一个元素为起始位置，第二个元素为结束位置，否则返回空整数切片  |
-| [re.FindSubmatch](#findsubmatch) |FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串，否则返回空字符串切片  |
-| [re.FindSubmatchAll](#findsubmatchall) |FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串，否则返回空字符串切片的二维切片  |
-| [re.FindSubmatchAllIndex](#findsubmatchallindex) |FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片的二维切片  |
-| [re.FindSubmatchIndex](#findsubmatchindex) |FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片  |
-| [re.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。  |
-| [re.Match](#match) |Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false  |
-| [re.MustCompile](#mustcompile) |MustCompile 将正则表达式解析为一个正则表达式对象结构体引用，如果解析失败则会引发崩溃  |
-| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体引用，如果解析失败则会引发崩溃  |
-| [re.QuoteMeta](#quotemeta) |QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式元字符进行转义后的结果  |
-| [re.ReplaceAll](#replaceall) |ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的字符串  |
-| [re.ReplaceAllWithFunc](#replaceallwithfunc) |ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换字符串，并返回替换后的字符串  |
+| [re.Compile](#compile) |Compile 将正则表达式解析为一个正则表达式结构体引用|
+| [re.CompilePOSIX](#compileposix) |CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配|
+| [re.ExtractEmail](#extractemail) |ExtractEmail 提取字符串中所有的 Email 地址|
+| [re.ExtractHostPort](#extracthostport) |ExtractHostPort 提取字符串中所有的 Host:Port|
+| [re.ExtractIP](#extractip) |ExtractIP 提取字符串中所有的 IP 地址|
+| [re.ExtractIPv4](#extractipv4) |ExtractIPv4 提取字符串中所有的 IPv4 地址|
+| [re.ExtractIPv6](#extractipv6) |ExtractIPv6 提取字符串中所有的 IPv6 地址|
+| [re.ExtractMac](#extractmac) |ExtractMac 提取字符串中所有的 MAC 地址|
+| [re.ExtractPath](#extractpath) |ExtractPath 提取URL中的路径和查询字符串|
+| [re.ExtractTTY](#extracttty) |ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径|
+| [re.ExtractURL](#extracturl) |ExtractURL 提取字符串中所有的 URL 地址|
+| [re.Find](#find) |Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 第一个匹配的子串，未匹配返回空字符串|
+| [re.FindAll](#findall) |FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 所有匹配子串组成的切片，未匹配返回空切片|
+| [re.FindAllIndex](#findallindex) |FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串的起始位置和结束位置，否则返回空整数的二维切片|
+| [re.FindGroup](#findgroup) |FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个映射，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射|
+| [re.FindGroupAll](#findgroupall) |FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一个映射切片，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射切片|
+| [re.FindIndex](#findindex) |FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长度为2的整数切片，第一个元素为起始位置，第二个元素为结束位置，否则返回空整数切片|
+| [re.FindSubmatch](#findsubmatch) |FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串，否则返回空字符串切片|
+| [re.FindSubmatchAll](#findsubmatchall) |FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串，否则返回空字符串切片的二维切片|
+| [re.FindSubmatchAllIndex](#findsubmatchallindex) |FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片的二维切片|
+| [re.FindSubmatchIndex](#findsubmatchindex) |FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片|
+| [re.Grok](#grok) |Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。|
+| [re.Match](#match) |Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false 参数: - pattern: 正则表达式 - s: 待匹配的字符串或字节切片 返回值: - 是否匹配成功|
+| [re.MustCompile](#mustcompile) |MustCompile 将正则表达式解析为一个正则表达式对象结构体引用，如果解析失败则会引发崩溃|
+| [re.MustCompilePOSIX](#mustcompileposix) |MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体引用，如果解析失败则会引发崩溃|
+| [re.QuoteMeta](#quotemeta) |QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式元字符进行转义后的结果|
+| [re.ReplaceAll](#replaceall) |ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的字符串|
+| [re.ReplaceAllWithFunc](#replaceallwithfunc) |ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换字符串，并返回替换后的字符串|
 
 
 ## 函数定义
@@ -38,10 +38,12 @@
 #### 详细描述
 Compile 将正则表达式解析为一个正则表达式结构体引用
 
+
 Example:
-```
+
+``````````````yak
 re.Compile("^[a-z]+$")
-```
+``````````````
 
 
 #### 定义
@@ -51,13 +53,13 @@ re.Compile("^[a-z]+$")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| expr | `string` |   |
+| expr | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*regexp.Regexp` |   |
-| r2 | `error` |   |
+| r1 | `*regexp.Regexp` |  |
+| r2 | `error` |  |
 
 
 ### CompilePOSIX
@@ -65,10 +67,12 @@ re.Compile("^[a-z]+$")
 #### 详细描述
 CompilePOSIX 将正则表达式解析为一个符合 POSIX ERE(egrep) 语法的正则表达式结构体引用，并且匹配语义改为左最长匹配
 
+
 Example:
-```
+
+``````````````yak
 re.CompilePOSIX("^[a-z]+$")
-```
+``````````````
 
 
 #### 定义
@@ -78,13 +82,13 @@ re.CompilePOSIX("^[a-z]+$")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| expr | `string` |   |
+| expr | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*regexp.Regexp` |   |
-| r2 | `error` |   |
+| r1 | `*regexp.Regexp` |  |
+| r2 | `error` |  |
 
 
 ### ExtractEmail
@@ -92,10 +96,12 @@ re.CompilePOSIX("^[a-z]+$")
 #### 详细描述
 ExtractEmail 提取字符串中所有的 Email 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractEmail("hello your email is anonymous@yaklang.io") // ["anonymous@yaklang.io"]
-```
+``````````````
 
 
 #### 定义
@@ -105,12 +111,12 @@ re.ExtractEmail("hello your email is anonymous@yaklang.io") // ["anonymous@yakla
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractHostPort
@@ -118,10 +124,12 @@ re.ExtractEmail("hello your email is anonymous@yaklang.io") // ["anonymous@yakla
 #### 详细描述
 ExtractHostPort 提取字符串中所有的 Host:Port
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractHostPort("Open Host:Port\n127.0.0.1:80\n127.0.0.1:443") // ["127.0.0.1:80", "127.0.0.1:443"]
-```
+``````````````
 
 
 #### 定义
@@ -131,12 +139,12 @@ re.ExtractHostPort("Open Host:Port\n127.0.0.1:80\n127.0.0.1:443") // ["127.0.0.1
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractIP
@@ -144,10 +152,12 @@ re.ExtractHostPort("Open Host:Port\n127.0.0.1:80\n127.0.0.1:443") // ["127.0.0.1
 #### 详细描述
 ExtractIP 提取字符串中所有的 IP 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractIP("hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1") // ["127.0.0.1", "fe80::1"]
-```
+``````````````
 
 
 #### 定义
@@ -157,12 +167,12 @@ re.ExtractIP("hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1") 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractIPv4
@@ -170,10 +180,12 @@ re.ExtractIP("hello your local ip is 127.0.0.1, your local ipv6 ip is fe80::1") 
 #### 详细描述
 ExtractIPv4 提取字符串中所有的 IPv4 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractIPv4("hello your local ip is 127.0.0.1, your public ip is 1.1.1.1") // ["127.0.0.1", "1.1.1.1"]
-```
+``````````````
 
 
 #### 定义
@@ -183,12 +195,12 @@ re.ExtractIPv4("hello your local ip is 127.0.0.1, your public ip is 1.1.1.1") //
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractIPv6
@@ -196,10 +208,12 @@ re.ExtractIPv4("hello your local ip is 127.0.0.1, your public ip is 1.1.1.1") //
 #### 详细描述
 ExtractIPv6 提取字符串中所有的 IPv6 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractIPv6("hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001:4860:4860::8888") // ["fe80::1", "2001:4860:4860::8888"]
-```
+``````````````
 
 
 #### 定义
@@ -209,12 +223,12 @@ re.ExtractIPv6("hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractMac
@@ -222,10 +236,12 @@ re.ExtractIPv6("hello your local ipv6 ip is fe80::1, your public ipv6 ip is 2001
 #### 详细描述
 ExtractMac 提取字符串中所有的 MAC 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractMac("hello your mac is 00:00:00:00:00:00") // ["00:00:00:00:00:00"]
-```
+``````````````
 
 
 #### 定义
@@ -235,12 +251,12 @@ re.ExtractMac("hello your mac is 00:00:00:00:00:00") // ["00:00:00:00:00:00"]
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractPath
@@ -248,10 +264,12 @@ re.ExtractMac("hello your mac is 00:00:00:00:00:00") // ["00:00:00:00:00:00"]
 #### 详细描述
 ExtractPath 提取URL中的路径和查询字符串
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // ["/docs/api/re?name=anonymous"]
-```
+``````````````
 
 
 #### 定义
@@ -261,12 +279,12 @@ re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractTTY
@@ -274,10 +292,12 @@ re.ExtractPath("visit this website: yaklang.com/docs/api/re?name=anonymous") // 
 #### 详细描述
 ExtractTTY 提取字符串中所有的Linux/Unix系统中的设备文件路径
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractTTY("hello your tty is /dev/pts/1") // ["/dev/pts/1"]
-```
+``````````````
 
 
 #### 定义
@@ -287,12 +307,12 @@ re.ExtractTTY("hello your tty is /dev/pts/1") // ["/dev/pts/1"]
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### ExtractURL
@@ -300,10 +320,12 @@ re.ExtractTTY("hello your tty is /dev/pts/1") // ["/dev/pts/1"]
 #### 详细描述
 ExtractURL 提取字符串中所有的 URL 地址
 
+
 Example:
-```
+
+``````````````yak
 re.ExtractURL("Yak official website: https://yaklang.com and https://yaklang.io") // ["https://yaklang.com", "https://yaklang.io"]
-```
+``````````````
 
 
 #### 定义
@@ -313,12 +335,12 @@ re.ExtractURL("Yak official website: https://yaklang.com and https://yaklang.io"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
+| i | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### Find
@@ -326,10 +348,28 @@ re.ExtractURL("Yak official website: https://yaklang.com and https://yaklang.io"
 #### 详细描述
 Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串
 
+参数:
+
+  - origin: 待匹配的输入（任意可转为字符串）
+
+  - re: 正则表达式
+
+
+
+返回值:
+
+  - 第一个匹配的子串，未匹配返回空字符串
+
+
+
+
 Example:
-```
-re.Find("apple is an easy word", "^[a-z]+") // "apple"
-```
+
+``````````````yak
+result = re.Find("apple is an easy word", "^[a-z]+")
+println(result)   // OUT: apple
+assert result == "apple", "Find should return first match"
+``````````````
 
 
 #### 定义
@@ -339,13 +379,13 @@ re.Find("apple is an easy word", "^[a-z]+") // "apple"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` | 待匹配的输入（任意可转为字符串） |
+| re | `string` | 正则表达式 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` | 第一个匹配的子串，未匹配返回空字符串 |
 
 
 ### FindAll
@@ -353,10 +393,29 @@ re.Find("apple is an easy word", "^[a-z]+") // "apple"
 #### 详细描述
 FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片
 
+参数:
+
+  - origin: 待匹配的输入（任意可转为字符串）
+
+  - re: 正则表达式
+
+
+
+返回值:
+
+  - 所有匹配子串组成的切片，未匹配返回空切片
+
+
+
+
 Example:
-```
-re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+") // ["yakit", "yaklang"]
-```
+
+``````````````yak
+matches = re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+")
+println(matches)   // OUT: [yakit yaklang]
+assert len(matches) == 2, "FindAll should find two matches"
+assert matches[0] == "yakit" && matches[1] == "yaklang", "FindAll should return all matches in order"
+``````````````
 
 
 #### 定义
@@ -366,13 +425,13 @@ re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+") // ["yakit", "ya
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` | 待匹配的输入（任意可转为字符串） |
+| re | `string` | 正则表达式 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` | 所有匹配子串组成的切片，未匹配返回空切片 |
 
 
 ### FindAllIndex
@@ -380,10 +439,12 @@ re.FindAll("Well,yakit is GUI client for yaklang", "yak[a-z]+") // ["yakit", "ya
 #### 详细描述
 FindAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串的起始位置和结束位置，否则返回空整数的二维切片
 
+
 Example:
-```
+
+``````````````yak
 re.FindAllIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [[5, 10], [29, 36]]
-```
+``````````````
 
 
 #### 定义
@@ -393,13 +454,13 @@ re.FindAllIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [[5, 10]
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[][]int` |   |
+| r1 | `[][]int` |  |
 
 
 ### FindGroup
@@ -407,11 +468,13 @@ re.FindAllIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [[5, 10]
 #### 详细描述
 FindGroup 使用正则表达式匹配字符串，如果匹配成功返回一个映射，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射
 
+
 Example:
-```
+
+``````````````yak
 // {"0": "yakit", "other": "it"}
 re.FindGroup("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
-```
+``````````````
 
 
 #### 定义
@@ -421,13 +484,13 @@ re.FindGroup("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
-| re | `string` |   |
+| i | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]string` |   |
+| r1 | `map[string]string` |  |
 
 
 ### FindGroupAll
@@ -435,11 +498,13 @@ re.FindGroup("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 #### 详细描述
 FindGroupAll 使用正则表达式匹配字符串，如果匹配成功返回一个映射切片，其键名为正则表达式中的命名捕获组，键值为匹配到的字符串，否则返回空映射切片
 
+
 Example:
-```
+
+``````````````yak
 // [{"0": "yakit", "other": "it"}, {"0": "yaklang", "other": "lang"}]
 re.FindGroupAll("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
-```
+``````````````
 
 
 #### 定义
@@ -449,13 +514,13 @@ re.FindGroupAll("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |   |
-| raw | `string` |   |
+| i | `any` |  |
+| raw | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]map[string]string` |   |
+| r1 | `[]map[string]string` |  |
 
 
 ### FindIndex
@@ -463,10 +528,12 @@ re.FindGroupAll("Well,yakit is GUI client for yaklang", "yak(?P<other>[a-z]+)")
 #### 详细描述
 FindIndex 使用正则尝试匹配字符串，如果匹配成功返回一个长度为2的整数切片，第一个元素为起始位置，第二个元素为结束位置，否则返回空整数切片
 
+
 Example:
-```
+
+``````````````yak
 re.FindIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [5, 10]
-```
+``````````````
 
 
 #### 定义
@@ -476,13 +543,13 @@ re.FindIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [5, 10]
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]int` |   |
+| r1 | `[]int` |  |
 
 
 ### FindSubmatch
@@ -490,10 +557,12 @@ re.FindIndex("Well,yakit is GUI client for yaklang", "yak[a-z]+") // [5, 10]
 #### 详细描述
 FindSubmatch 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串，否则返回空字符串切片
 
+
 Example:
-```
+
+``````````````yak
 re.FindSubmatch("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // ["yakit", "it"]
-```
+``````````````
 
 
 #### 定义
@@ -503,13 +572,13 @@ re.FindSubmatch("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // ["yaki
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |   |
+| r1 | `[]string` |  |
 
 
 ### FindSubmatchAll
@@ -517,11 +586,13 @@ re.FindSubmatch("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // ["yaki
 #### 详细描述
 FindSubmatchAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串，否则返回空字符串切片的二维切片
 
+
 Example:
-```
+
+``````````````yak
 // [["yakit", "it"], ["yaklang", "lang"]]
 re.FindSubmatchAll("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
-```
+``````````````
 
 
 #### 定义
@@ -531,13 +602,13 @@ re.FindSubmatchAll("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[][]string` |   |
+| r1 | `[][]string` |  |
 
 
 ### FindSubmatchAllIndex
@@ -545,11 +616,13 @@ re.FindSubmatchAll("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 #### 详细描述
 FindSubmatchAllIndex 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片的二维切片
 
+
 Example:
-```
+
+``````````````yak
 // [[5, 10, 8, 10], [29, 36, 32, 36]]
 re.FindSubmatchAllIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
-```
+``````````````
 
 
 #### 定义
@@ -559,13 +632,13 @@ re.FindSubmatchAllIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[][]int` |   |
+| r1 | `[][]int` |  |
 
 
 ### FindSubmatchIndex
@@ -573,10 +646,12 @@ re.FindSubmatchAllIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)")
 #### 详细描述
 FindSubmatchIndex 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串以及子匹配的字符串的起始位置和结束位置，否则返回空整数切片
 
+
 Example:
-```
+
+``````````````yak
 re.FindSubmatchIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // [5, 10, 8, 10]
-```
+``````````````
 
 
 #### 定义
@@ -586,13 +661,13 @@ re.FindSubmatchIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // [
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
+| origin | `any` |  |
+| re | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]int` |   |
+| r1 | `[]int` |  |
 
 
 ### Grok
@@ -600,10 +675,12 @@ re.FindSubmatchIndex("Well,yakit is GUI client for yaklang", "yak([a-z]+)") // [
 #### 详细描述
 Grok 用于将字符串 line 使用 Grok 以规则 rule 进行解析，并返回解析结果(map)，参考 https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html 获取更多信息。
 
+
 Example:
-```
+
+``````````````yak
 str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}") // map[HOUR:[00] MINUTE:[59] SECOND:[45.385191] day:[18] month:[04] time:[00:59:45.385191]]
-```
+``````````````
 
 
 #### 定义
@@ -613,13 +690,13 @@ str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| line | `string` |   |
-| rule | `string` |   |
+| line | `string` |  |
+| rule | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `GrokResult` |   |
+| r1 | `GrokResult` |  |
 
 
 ### Match
@@ -627,10 +704,29 @@ str.Grok("04/18-00:59:45.385191", "%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time
 #### 详细描述
 Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false
 
+参数:
+
+  - pattern: 正则表达式
+
+  - s: 待匹配的字符串或字节切片
+
+
+
+返回值:
+
+  - 是否匹配成功
+
+
+
+
 Example:
-```
-re.Match("^[a-z]+$", "abc") // true
-```
+
+``````````````yak
+ok = re.Match("^[a-z]+$", "abc")
+println(ok)   // OUT: true
+assert ok == true, "Match should match lowercase letters"
+assert re.Match("^[a-z]+$", "abc123") == false, "Match should fail when extra chars present"
+``````````````
 
 
 #### 定义
@@ -640,13 +736,13 @@ re.Match("^[a-z]+$", "abc") // true
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| pattern | `string` |   |
-| s | `any` |   |
+| pattern | `string` | 正则表达式 |
+| s | `any` | 待匹配的字符串或字节切片 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `bool` |   |
+| r1 | `bool` | 是否匹配成功 |
 
 
 ### MustCompile
@@ -654,10 +750,12 @@ re.Match("^[a-z]+$", "abc") // true
 #### 详细描述
 MustCompile 将正则表达式解析为一个正则表达式对象结构体引用，如果解析失败则会引发崩溃
 
+
 Example:
-```
+
+``````````````yak
 re.MustCompile("^[a-z]+$")
-```
+``````````````
 
 
 #### 定义
@@ -667,12 +765,12 @@ re.MustCompile("^[a-z]+$")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| str | `string` |   |
+| str | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*regexp.Regexp` |   |
+| r1 | `*regexp.Regexp` |  |
 
 
 ### MustCompilePOSIX
@@ -680,10 +778,12 @@ re.MustCompile("^[a-z]+$")
 #### 详细描述
 MustCompilePOSIX 将正则表达式解析为一个POSIX正则表达式结构体引用，如果解析失败则会引发崩溃
 
+
 Example:
-```
+
+``````````````yak
 re.MustCompilePOSIX("^[a-z]+$")
-```
+``````````````
 
 
 #### 定义
@@ -693,12 +793,12 @@ re.MustCompilePOSIX("^[a-z]+$")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| str | `string` |   |
+| str | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*regexp.Regexp` |   |
+| r1 | `*regexp.Regexp` |  |
 
 
 ### QuoteMeta
@@ -706,10 +806,12 @@ re.MustCompilePOSIX("^[a-z]+$")
 #### 详细描述
 QuoteMeta 返回一个字符串，该字符串是将 s 中所有正则表达式元字符进行转义后的结果
 
+
 Example:
-```
+
+``````````````yak
 str.QuoteMeta("^[a-z]+$") // "\^\\[a-z\]\\+$"
-```
+``````````````
 
 
 #### 定义
@@ -719,12 +821,12 @@ str.QuoteMeta("^[a-z]+$") // "\^\\[a-z\]\\+$"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| s | `string` |   |
+| s | `string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` |  |
 
 
 ### ReplaceAll
@@ -732,11 +834,13 @@ str.QuoteMeta("^[a-z]+$") // "\^\\[a-z\]\\+$"
 #### 详细描述
 ReplaceAll 使用正则表达式匹配并替换字符串，并返回替换后的字符串
 
+
 Example:
-```
+
+``````````````yak
 // "yaklang is a programming language"
 re.ReplaceAll("yakit is programming language", "yak([a-z]+)", "yaklang")
-```
+``````````````
 
 
 #### 定义
@@ -746,14 +850,14 @@ re.ReplaceAll("yakit is programming language", "yak([a-z]+)", "yaklang")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
-| newStr | `any` |   |
+| origin | `any` |  |
+| re | `string` |  |
+| newStr | `any` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` |  |
 
 
 ### ReplaceAllWithFunc
@@ -761,13 +865,15 @@ re.ReplaceAll("yakit is programming language", "yak([a-z]+)", "yaklang")
 #### 详细描述
 ReplaceAllWithFunc 使用正则表达式匹配并使用自定义的函数替换字符串，并返回替换后的字符串
 
+
 Example:
-```
+
+``````````````yak
 // "yaklang is a programming language"
 re.ReplaceAllWithFunc("yakit is programming language", "yak([a-z]+)", func(s) {
 return "yaklang"
 })
-```
+``````````````
 
 
 #### 定义
@@ -777,13 +883,13 @@ return "yaklang"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| origin | `any` |   |
-| re | `string` |   |
-| newStr | `func(string) string` |   |
+| origin | `any` |  |
+| re | `string` |  |
+| newStr | `func(string) string` |  |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |   |
+| r1 | `string` |  |
 
 
