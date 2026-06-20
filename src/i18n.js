@@ -11,7 +11,8 @@ i18n
       zh: { translation: zh },
     },
     fallbackLng: 'zh-CN',
-    debug: true,
+    // 关闭 debug 以消除构建/部署日志里大量 i18next init 与 missingKey 噪声
+    debug: false,
     interpolation: {
       escapeValue: false,
     },
