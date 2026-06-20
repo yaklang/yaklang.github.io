@@ -203,9 +203,10 @@ Example:
 
 ``````````````yak
 // 示意性示例，需要本地 CWE 数据库
-for c in cwe.ListAll() {
-    println(c.CWEString())
-}
+
+	for c in cwe.ListAll() {
+	    println(c.CWEString())
+	}
 ``````````````
 
 

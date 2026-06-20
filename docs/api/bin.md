@@ -3,7 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [bin.Find](#find) |Find 根据字段名称在解析结果中查找对应的字段值 参数: - results: 通过 bin.Read 获取的解析结果 - name: 要查找的字段名称 返回值: - 找到的字段值，如果未找到则返回 nil|
-| [bin.Read](#read) ||
+| [bin.Read](#read) |Read 从字节数据或IO流中按照指定的数据类型描述符读取二进制数据，解析成结构化的结果 参数: - data: 二进制数据或支持读取的流对象（[]byte、string 或 io.Reader） - descriptors: 一个或多个数据类型描述符，可以是 toUint16() 等类型描述符 返...|
 | [bin.toBool](#tobool) |toBool 创建一个布尔类型描述符，用于从二进制数据中读取布尔值（非零为true） 参数: - name: 字段名称，用于之后通过 Find 函数查找 - verbose: 可选的详细描述 返回值: - 类型描述符对象|
 | [bin.toBytes](#tobytes) |toRaw 创建一个字节数组类型描述符，用于从二进制数据中读取字节序列 参数: - name: 字段名称，用于之后通过 Find 函数查找 - size: 字节长度（数字），或引用其他字段名称（字符串）作为长度值 返回值: - 类型描述符对象|
 | [bin.toInt](#toint) |toInt64 创建一个64位整数类型描述符，用于从二进制数据中读取int64值 参数: - name: 字段名称，用于之后通过 Find 函数查找 - values: 可选的详细描述 返回值: - 类型描述符对象|
@@ -72,7 +72,36 @@ assert version.AsUint8() == 255, "Find should locate the version field by name"
 ### Read
 
 #### 详细描述
-暂无描述
+Read 从字节数据或IO流中按照指定的数据类型描述符读取二进制数据，解析成结构化的结果
+
+参数:
+
+  - data: 二进制数据或支持读取的流对象（[]byte、string 或 io.Reader）
+
+  - descriptors: 一个或多个数据类型描述符，可以是 toUint16() 等类型描述符
+
+
+
+返回值:
+
+  - 解析结果切片，可通过索引访问各字段值
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 解析二进制数据：前两字节为 magic(uint16)，后一字节为 version(uint8)
+data = codec.DecodeHex("123405")~
+result = bin.Read(data, bin.toUint16("magic"), bin.toUint8("version"))~
+println(result[0].AsUint16())   // OUT: 4660
+assert result[0].AsUint16() == 4660, "magic should be parsed as 0x1234"
+assert result[1].AsUint8() == 5, "version should be parsed as 5"
+``````````````
+
 
 #### 定义
 
@@ -81,14 +110,14 @@ assert version.AsUint8() == 255, "Find should locate the version field by name"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| data | `any` |  |
-| descriptors | `...*PartDescriptor` |  |
+| data | `any` | 二进制数据或支持读取的流对象（[]byte、string 或 io.Reader） |
+| descriptors | `...*PartDescriptor` | 一个或多个数据类型描述符，可以是 toUint16() 等类型描述符 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]ResultIf` |  |
-| r2 | `error` |  |
+| r1 | `[]ResultIf` | 解析结果切片，可通过索引访问各字段值 |
+| r2 | `error` | 错误信息 |
 
 
 ### toBool

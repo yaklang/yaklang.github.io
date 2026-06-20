@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [dnslog.LookupFirst](#lookupfirst) ||
+| [dnslog.LookupFirst](#lookupfirst) |LookupFirst 解析域名并返回第一个有效的 IP 地址 参数: - host: 待解析的域名 - opt: 零个或多个 DNS 解析配置选项，例如超时、DNS 服务器等 返回值: - string: 第一个解析到的 IP 地址，解析失败时返回空字符串|
 | [dnslog.NewCustomDNSLog](#newcustomdnslog) |NewCustomDNSLog 创建一个 DNSLog 客户端，用于申请 DNSLog 域名并查询 DNS 回连记录 在 yak 中通过 dnslog.NewCustomDNSLog 调用，可通过选项设置平台、是否本地、脚本等 参数: - opts: 可选配置项，如 dnslog.mode、dnsl...|
 | [dnslog.QueryCustomScript](#querycustomscript) |QueryCustomScript 是为自定义 DNSLog 脚本预留的占位函数，当前不执行任何操作 在 yak 中通过 dnslog.QueryCustomScript 调用|
 | [dnslog.local](#local) |local 设置是否使用本地反连服务来申请与查询 DNSLog 在 yak 中通过 dnslog.local 调用 参数: - isLocal: 是否使用本地模式 返回值: - 一个 dnslog.NewCustomDNSLog 可接收的配置选项|
@@ -15,7 +15,31 @@
 ### LookupFirst
 
 #### 详细描述
-暂无描述
+LookupFirst 解析域名并返回第一个有效的 IP 地址
+
+参数:
+
+  - host: 待解析的域名
+
+  - opt: 零个或多个 DNS 解析配置选项，例如超时、DNS 服务器等
+
+
+
+返回值:
+
+  - string: 第一个解析到的 IP 地址，解析失败时返回空字符串
+
+
+
+
+Example:
+
+``````````````yak
+// 该示例为示意性用法：解析域名得到首个 IP
+ip = dnslog.LookupFirst("example.com")
+println(ip)
+``````````````
+
 
 #### 定义
 
@@ -24,13 +48,13 @@
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| host | `string` |  |
-| opt | `...DNSOption` |  |
+| host | `string` | 待解析的域名 |
+| opt | `...DNSOption` | 零个或多个 DNS 解析配置选项，例如超时、DNS 服务器等 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  |
+| r1 | `string` | 第一个解析到的 IP 地址，解析失败时返回空字符串 |
 
 
 ### NewCustomDNSLog

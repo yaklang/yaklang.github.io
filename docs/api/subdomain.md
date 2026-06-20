@@ -2,18 +2,18 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [subdomain.Scan](#scan) |Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串或字符串数组，接下来可以接收零个到多个选项，用于对此次扫描进行配置，例如设置扫描超时时间，是否递归等，返回结果管道与错误 使用 请求(爆破)，查询，域传送技术进行子域名扫描|
-| [subdomain.dnsServer](#dnsserver) |dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8|
-| [subdomain.eachQueryTimeout](#eachquerytimeout) |eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s|
-| [subdomain.eachSearchTimeout](#eachsearchtimeout) |withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s|
-| [subdomain.mainDict](#maindict) |mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组|
-| [subdomain.maxDepth](#maxdepth) |maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用|
-| [subdomain.recursive](#recursive) |recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false|
-| [subdomain.recursiveDict](#recursivedict) |recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组|
-| [subdomain.targetConcurrent](#targetconcurrent) |targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10|
-| [subdomain.targetTimeout](#targettimeout) |targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s|
-| [subdomain.wildcardToStop](#wildcardtostop) |wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false|
-| [subdomain.workerConcurrent](#workerconcurrent) |workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50|
+| [subdomain.Scan](#scan) |Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串或字符串数组，接下来可以接收零个到多个选项，用于对此次扫描进行配置，例如设置扫描超时时间，是否递归等，返回结果管道与错误 使用 请求(爆破)，查询，域传送技术进行子域名扫描 参数: - target: 扫描目标，支持字符串、字节数组或字符串...|
+| [subdomain.dnsServer](#dnsserver) |dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8 参数: - servers: 用于解析域名的 DNS 服务器列表 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.eachQueryTimeout](#eachquerytimeout) |eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s 参数: - i: 每个查询的超时时间，单位为秒 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.eachSearchTimeout](#eachsearchtimeout) |eachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s 参数: - i: 每个搜索的超时时间，单位为秒 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.mainDict](#maindict) |mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组 参数: - i: 主字典，可以是文件名、字符串或字符串数组 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.maxDepth](#maxdepth) |maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用 参数: - d: 子域名遍历的最大深度 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.recursive](#recursive) |recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false 参数: - b: 是否递归扫描子域名 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.recursiveDict](#recursivedict) |recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组 参数: - i: 递归字典，可以是文件名、字符串或字符串数组 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.targetConcurrent](#targetconcurrent) |targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10 参数: - c: 每个目标的最大线程数量 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.targetTimeout](#targettimeout) |targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s 参数: - i: 每个目标的超时时间，单位为秒 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.wildcardToStop](#wildcardtostop) |wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false 参数: - t: 遇到泛解析时是否马上停止解析 返回值: - 一个 subdomain.Scan 可接收的配置选项|
+| [subdomain.workerConcurrent](#workerconcurrent) |workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50 参数: - c: 总的工作线程数量 返回值: - 一个 subdomain.Scan 可接收的配置选项|
 
 
 ## 函数定义
@@ -23,6 +23,22 @@
 Scan 对域名进行子域名扫描，它的第一个参数可以接收字符串或字符串数组，接下来可以接收零个到多个选项，用于对此次扫描进行配置，例如设置扫描超时时间，是否递归等，返回结果管道与错误
 
 使用 请求(爆破)，查询，域传送技术进行子域名扫描
+
+参数:
+
+  - target: 扫描目标，支持字符串、字节数组或字符串数组
+
+  - opts: 零个或多个子域名扫描配置选项
+
+
+
+返回值:
+
+  - chan *subdomain.SubdomainResult: 子域名扫描结果管道
+
+  - error: 启动失败时返回错误
+
+
 
 
 Example:
@@ -41,20 +57,32 @@ dump(domain)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| target | `any` |  |
-| opts | `...subdomain.ConfigOption` |  |
+| target | `any` | 扫描目标，支持字符串、字节数组或字符串数组 |
+| opts | `...subdomain.ConfigOption` | 零个或多个子域名扫描配置选项 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *subdomain.SubdomainResult` |  |
-| r2 | `error` |  |
+| r1 | `chan *subdomain.SubdomainResult` | chan *subdomain.SubdomainResult: 子域名扫描结果管道 |
+| r2 | `error` | 启动失败时返回错误 |
 
 
 ### dnsServer
 
 #### 详细描述
 dnsServer 是一个选项参数，设置用于解析域名的 DNS 服务器，默认为 114.114.114.114 和 8.8.8.8
+
+参数:
+
+  - servers: 用于解析域名的 DNS 服务器列表
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -71,18 +99,30 @@ subdomain.Scan("example.com", subdomain.dnsServer("1.1.1.1"))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| servers | `[]string` |  |
+| servers | `[]string` | 用于解析域名的 DNS 服务器列表 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### eachQueryTimeout
 
 #### 详细描述
 eachQueryTimeout 是一个选项参数，设置每个查询的超时时间，单位为秒，默认为 3s
+
+参数:
+
+  - i: 每个查询的超时时间，单位为秒
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -99,18 +139,30 @@ subdomain.Scan("example.com", subdomain.eachQueryTimeout(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |  |
+| i | `float64` | 每个查询的超时时间，单位为秒 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |  |
+| r1 | `subdomain.ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### eachSearchTimeout
 
 #### 详细描述
-withEachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s
+eachSearchTimeout 是一个选项参数，设置每个搜索的超时时间，单位为秒，默认为 10s
+
+参数:
+
+  - i: 每个搜索的超时时间，单位为秒
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -127,18 +179,30 @@ subdomain.Scan("example.com", subdomain.withEachSearchTimeout(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |  |
+| i | `float64` | 每个搜索的超时时间，单位为秒 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |  |
+| r1 | `subdomain.ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### mainDict
 
 #### 详细描述
 mainDict 是一个选项参数，设置子域名爆破主字典，其第一个参数可以是文件名、字符串或字符串数组
+
+参数:
+
+  - i: 主字典，可以是文件名、字符串或字符串数组
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -156,18 +220,30 @@ subdomain.Scan("example.com", subdomain.mainDict(dict))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |  |
+| i | `any` | 主字典，可以是文件名、字符串或字符串数组 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |  |
+| r1 | `subdomain.ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### maxDepth
 
 #### 详细描述
 maxDepth 是一个选项参数，设置子域名遍历的最大深度，默认为 5，通常与 recursive 一起使用
+
+参数:
+
+  - d: 子域名遍历的最大深度
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -184,18 +260,30 @@ subdomain.Scan("example.com", subdomain.maxDepth(10), subdomain.recursive(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| d | `int` |  |
+| d | `int` | 子域名遍历的最大深度 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### recursive
 
 #### 详细描述
 recursive 是一个选项参数，设置是否递归扫描子域名，如果不递归扫描，那么只会扫描一层子域名，默认为false
+
+参数:
+
+  - b: 是否递归扫描子域名
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -212,18 +300,30 @@ subdomain.Scan("example.com", subdomain.recursive(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `bool` |  |
+| b | `bool` | 是否递归扫描子域名 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### recursiveDict
 
 #### 详细描述
 recursiveDict 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组
+
+参数:
+
+  - i: 递归字典，可以是文件名、字符串或字符串数组
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -241,18 +341,30 @@ subdomain.Scan("example.com", subdomain.recursive(true), subdomain.recursiveDict
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `any` |  |
+| i | `any` | 递归字典，可以是文件名、字符串或字符串数组 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |  |
+| r1 | `subdomain.ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### targetConcurrent
 
 #### 详细描述
 targetConcurrent 是一个选项参数，设置每个目标的最大线程数量，默认为 10
+
+参数:
+
+  - c: 每个目标的最大线程数量
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -269,18 +381,30 @@ subdomain.Scan("example.com", subdomain.targetConcurrent(5))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `int` |  |
+| c | `int` | 每个目标的最大线程数量 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### targetTimeout
 
 #### 详细描述
 targetTimeout 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s
+
+参数:
+
+  - i: 每个目标的超时时间，单位为秒
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -297,18 +421,30 @@ subdomain.Scan("example.com", subdomain.targetTimeout(10))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `float64` |  |
+| i | `float64` | 每个目标的超时时间，单位为秒 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `subdomain.ConfigOption` |  |
+| r1 | `subdomain.ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### wildcardToStop
 
 #### 详细描述
 wildcardToStop 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false
+
+参数:
+
+  - t: 遇到泛解析时是否马上停止解析
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -325,18 +461,30 @@ subdomain.Scan("example.com", subdomain.wildcardToStop(true))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `bool` |  |
+| t | `bool` | 遇到泛解析时是否马上停止解析 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 
 ### workerConcurrent
 
 #### 详细描述
 workerConcurrent 是一个选项参数，设置总的工作线程数量，默认为 50
+
+参数:
+
+  - c: 总的工作线程数量
+
+
+
+返回值:
+
+  - 一个 subdomain.Scan 可接收的配置选项
+
+
 
 
 Example:
@@ -353,11 +501,11 @@ subdomain.Scan("example.com", subdomain.workerConcurrent(10))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `int` |  |
+| c | `int` | 总的工作线程数量 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ConfigOption` |  |
+| r1 | `ConfigOption` | 一个 subdomain.Scan 可接收的配置选项 |
 
 

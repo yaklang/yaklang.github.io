@@ -24,7 +24,7 @@ OPT_Singleline|(int) 16|
 | [re2.FindGroupAll](#findgroupall) |FindGroupAll 查找所有匹配并为每个匹配返回命名/编号分组 map 参数: - i: 待匹配的输入数据，会被转换为字符串 - pattern: 含命名分组(?&lt;name&gt;...)或编号分组的 regexp2 正则 返回值: - map 切片，每个元素含该次匹配的命名/编号分组与 __all...|
 | [re2.FindSubmatch](#findsubmatch) |FindSubmatch 查找第一个匹配并返回其完整匹配与各捕获分组 参数: - i: 待匹配的输入数据，会被转换为字符串 - pattern: 含捕获分组的 regexp2 正则表达式 返回值: - 切片，第 0 项为完整匹配，其后依次为各分组内容|
 | [re2.FindSubmatchAll](#findsubmatchall) |FindSubmatchAll 查找所有匹配，每个匹配返回其完整匹配与各捕获分组 参数: - i: 待匹配的输入数据，会被转换为字符串 - pattern: 含捕获分组的 regexp2 正则表达式 返回值: - 二维切片，每个元素为一次匹配的[完整匹配, 分组1, 分组2, ...]|
-| [re2.QuoteMeta](#quotemeta) |Escape adds backslashes to any special characters in the input string|
+| [re2.QuoteMeta](#quotemeta) |re2QuoteMeta 转义字符串中的正则元字符，使其可作为字面量安全嵌入正则表达式（导出名为 re2.QuoteMeta） 会把 . * + ? ( ) [ ] 等元字符前加反斜杠 参数: - input: 待转义的字符串 返回值: - 转义后的字符串，可直接拼入正则表达式|
 | [re2.ReplaceAll](#replaceall) |ReplaceAll 将输入中所有匹配正则的部分替换为目标字符串，支持 $1 分组引用 参数: - i: 待处理的输入数据，会被转换为字符串 - pattern: regexp2 正则表达式 - target: 替换目标，可用 $1、$2 引用捕获分组 返回值: - 替换后的字符串，编译失败时返回原...|
 | [re2.ReplaceAllWithFunc](#replaceallwithfunc) |ReplaceAllWithFunc 将输入中所有匹配交给回调函数处理，用其返回值替换 参数: - i: 待处理的输入数据，会被转换为字符串 - pattern: regexp2 正则表达式 - target: 回调函数，入参为单次匹配的子串，返回替换后的字符串 返回值: - 替换后的字符串，编译失...|
 
@@ -422,7 +422,35 @@ assert result[1][1] == "b", "second match first group should be b"
 ### QuoteMeta
 
 #### 详细描述
-Escape adds backslashes to any special characters in the input string
+re2QuoteMeta 转义字符串中的正则元字符，使其可作为字面量安全嵌入正则表达式（导出名为 re2.QuoteMeta）
+
+会把 . * + ? ( ) [ ] 等元字符前加反斜杠
+
+
+
+参数:
+
+  - input: 待转义的字符串
+
+
+
+返回值:
+
+  - 转义后的字符串，可直接拼入正则表达式
+
+
+
+
+Example:
+
+``````````````yak
+escaped = re2.QuoteMeta("a.b*c")
+println(escaped)   // OUT: a\.b\*c
+assert escaped == "a\\.b\\*c", "QuoteMeta should escape regex metacharacters"
+p = re2.Compile("^" + escaped + "$")~
+assert p.MatchString("a.b*c")~ == true, "escaped literal should match the literal string"
+assert p.MatchString("aXbYYc")~ == false, "escaped dot/star should not act as metachar"
+``````````````
 
 
 #### 定义
@@ -432,12 +460,12 @@ Escape adds backslashes to any special characters in the input string
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  |
+| input | `string` | 待转义的字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  |
+| r1 | `string` | 转义后的字符串，可直接拼入正则表达式 |
 
 
 ### ReplaceAll

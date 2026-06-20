@@ -234,9 +234,10 @@ Example:
 
 ``````````````yak
 // 启动 TCP 服务器处理连接，此处仅作示意
-tcp.Serve("0.0.0.0", 8080, tcp.serverCallback(func(conn) {
-    conn.Send("hello")
-}))~
+
+	tcp.Serve("0.0.0.0", 8080, tcp.serverCallback(func(conn) {
+	    conn.Send("hello")
+	}))~
 ``````````````
 
 
@@ -453,10 +454,11 @@ Example:
 
 ``````````````yak
 // 设置 TCP 服务器处理每个连接的回调，此处仅作示意
-tcp.Serve("0.0.0.0", 8080, tcp.serverCallback(func(conn) {
-    data = conn.Recv()~
-    conn.Send("echo: " + string(data))
-}))~
+
+	tcp.Serve("0.0.0.0", 8080, tcp.serverCallback(func(conn) {
+	    data = conn.Recv()~
+	    conn.Send("echo: " + string(data))
+	}))~
 ``````````````
 
 

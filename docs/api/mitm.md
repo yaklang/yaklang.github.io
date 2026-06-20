@@ -6,7 +6,7 @@ grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [mitm.AddMITMRootCertIntoSystem](#addmitmrootcertintosystem) |AddMITMRootCertIntoSystem 将 MITM 根证书添加到系统信任库并设置为信任（需要管理员权限） 返回值: - 错误信息，导入或信任设置失败时返回非空|
+| [mitm.AddMITMRootCertIntoSystem](#addmitmrootcertintosystem) |AddMITMRootCertIntoSystem 将 MITM 根证书添加到 Linux 系统信任库 支持多个发行版的证书安装路径|
 | [mitm.Bridge](#bridge) |Bridge 启动一个 MITM (中间人)代理服务器，与 Start 类似但可指定下游代理服务器地址，并默认在收到请求和响应时打印到标准输出 如果没有指定 CA 证书和私钥，那么将使用内置的证书和私钥 参数: - port: 代理服务器监听端口 - downstreamProxy: 下游代理服务器...|
 | [mitm.GetDefaultExtraConnManager](#getdefaultextraconnmanager) |GetDefaultExtraConnManager 获取默认的 MITM 额外连接管理器，用于向运行中的 MITM 服务注入外部连接 返回值: - 默认的额外连接管理器实例|
 | [mitm.QuickVerifyMITMRootCert](#quickverifymitmrootcert) |QuickVerifyMITMRootCert 快速验证 MITM 根证书状态（不启动服务器，只检查系统证书池） 返回值: - 证书是否被系统信任 - 错误信息，获取或解析证书失败时返回非空|
@@ -14,7 +14,7 @@ grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
 | [mitm.TestCertificateOperations](#testcertificateoperations) |TestCertificateOperations 完整测试 MITM 根证书的安装、验证和撤销操作流程（需要管理员权限） 返回值: - 错误信息，测试流程中任一步骤失败时返回非空|
 | [mitm.VerifyMITMRootCertInstalled](#verifymitmrootcertinstalled) |VerifyMITMRootCertInstalled 验证 MITM 根证书是否已正确安装到系统信任库 返回值: - 错误信息，证书未安装或验证失败时返回非空，安装正确时返回 nil|
 | [mitm.VerifyMITMRootCertNotInstalled](#verifymitmrootcertnotinstalled) |VerifyMITMRootCertNotInstalled 验证 MITM 根证书是否已从系统信任库中移除 返回值: - 错误信息，证书仍被信任或验证异常时返回非空，已移除时返回 nil|
-| [mitm.WithdrawMITMRootCertFromSystem](#withdrawmitmrootcertfromsystem) |WithdrawMITMRootCertFromSystem 从系统信任库中移除 MITM 根证书（需要管理员权限） 返回值: - 错误信息，移除失败时返回非空|
+| [mitm.WithdrawMITMRootCertFromSystem](#withdrawmitmrootcertfromsystem) |WithdrawMITMRootCertFromSystem 从 Linux 系统信任库中移除 MITM 根证书|
 | [mitm.callback](#callback) |callback 是一个选项函数，用于指定中间人代理服务器的回调函数，当接收到请求和响应后会调用该回调函数 参数: - f: 回调函数，参数依次为是否 HTTPS、URL、请求对象、响应对象 返回值: - 一个 MITM 配置选项，作为可变参数传入 mitm.Start / mitm.Bridge|
 | [mitm.context](#context) |context 是一个选项函数，用于指定中间人代理服务器的上下文，可通过取消上下文来停止服务 参数: - ctx: 上下文对象 返回值: - 一个 MITM 配置选项，作为可变参数传入 mitm.Start / mitm.Bridge|
 | [mitm.extraIncomingConn](#extraincomingconn) |extraIncomingConn 是一个选项函数，用于指定中间人代理服务器接受外部传入的连接通道 通过该选项，可以将外部的 net.Conn 连接注入到 MITM 服务器中进行劫持处理 参数: - ch: 连接通道（chan net.Conn 或 chan interface{}） 返回值: - ...|
@@ -42,21 +42,8 @@ grpcMitmKey|(string) &#34;grpc_mitm_extra_conn_key&#34;|
 ### AddMITMRootCertIntoSystem
 
 #### 详细描述
-AddMITMRootCertIntoSystem 将 MITM 根证书添加到系统信任库并设置为信任（需要管理员权限）
-
-返回值:
-
-  - 错误信息，导入或信任设置失败时返回非空
-
-
-
-
-Example:
-
-``````````````yak
-// 将 MITM 根证书安装到系统，需要权限，此处仅作示意
-mitm.AddMITMRootCertIntoSystem()~
-``````````````
+AddMITMRootCertIntoSystem 将 MITM 根证书添加到 Linux 系统信任库
+支持多个发行版的证书安装路径
 
 
 #### 定义
@@ -66,7 +53,7 @@ mitm.AddMITMRootCertIntoSystem()~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息，导入或信任设置失败时返回非空 |
+| r1 | `error` |  |
 
 
 ### Bridge
@@ -320,21 +307,7 @@ mitm.VerifyMITMRootCertNotInstalled()~
 ### WithdrawMITMRootCertFromSystem
 
 #### 详细描述
-WithdrawMITMRootCertFromSystem 从系统信任库中移除 MITM 根证书（需要管理员权限）
-
-返回值:
-
-  - 错误信息，移除失败时返回非空
-
-
-
-
-Example:
-
-``````````````yak
-// 从系统移除 MITM 根证书，需要权限，此处仅作示意
-mitm.WithdrawMITMRootCertFromSystem()~
-``````````````
+WithdrawMITMRootCertFromSystem 从 Linux 系统信任库中移除 MITM 根证书
 
 
 #### 定义
@@ -344,7 +317,7 @@ mitm.WithdrawMITMRootCertFromSystem()~
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息，移除失败时返回非空 |
+| r1 | `error` |  |
 
 
 ### callback

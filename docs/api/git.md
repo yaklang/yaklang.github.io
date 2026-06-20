@@ -48,7 +48,7 @@
 | [git.threads](#threads) |threads 是一个GitHack选项函数，用于指定并发数，默认为8|
 | [git.useLocalGitBinary](#uselocalgitbinary) |useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行`git fsck`命令，这个命令用于尽可能恢复完整的git仓库，默认为true|
 | [git.verify](#verify) |verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书|
-| [git.withInsecureIgnoreHostKey](#withinsecureignorehostkey) ||
+| [git.withInsecureIgnoreHostKey](#withinsecureignorehostkey) |WithInsecureIgnoreHostKey 跳过 SSH 主机密钥验证 适用于自动化工具、测试环境或信任的内网环境 警告：跳过主机密钥验证会降低安全性，可能遭受中间人攻击|
 | [git.withPrivateKey](#withprivatekey) |WithPrivateKey 使用 SSH 私钥文件进行认证（导出名为 git.withPrivateKey） 参数: - userName: SSH 用户名（通常为 git） - keyPath: 私钥文件路径 - password: 私钥口令，无口令时传空字符串 返回值: - 选项函数|
 | [git.withPrivateKeyContent](#withprivatekeycontent) |WithPrivateKeyContent 使用私钥内容进行认证|
 
@@ -1957,16 +1957,39 @@ git.Clone("https://github.com/yaklang/yaklang", "C:/Users/xxx/Desktop/yaklang", 
 ### withInsecureIgnoreHostKey
 
 #### 详细描述
-暂无描述
+WithInsecureIgnoreHostKey 跳过 SSH 主机密钥验证
+
+适用于自动化工具、测试环境或信任的内网环境
+
+警告：跳过主机密钥验证会降低安全性，可能遭受中间人攻击
+
+
+Example:
+
+``````````````yak
+git.Clone("git@github.com:user/repo.git", "/tmp/repo",
+
+	git.WithPrivateKeyContent("git", keyContent, ""),
+	git.WithInsecureIgnoreHostKey(),  // 跳过主机密钥验证
+
+)
+
+参数:
+  - 无
+
+返回值:
+  - 选项函数
+``````````````
+
 
 #### 定义
 
-`withInsecureIgnoreHostKey() error`
+`withInsecureIgnoreHostKey() Option`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `Option` | 选项函数 |
 
 
 ### withPrivateKey

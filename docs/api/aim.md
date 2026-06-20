@@ -7,7 +7,7 @@
 | [aim.NewAIEngine](#newaiengine) |NewAIEngine 创建新的 AI 引擎实例（导出名为 aim.NewAIEngine） AI 引擎封装了 ReAct 等能力，可通过 SendMsg/SendMsgAsync 发送任务 参数: - options: 引擎配置可选项，如 aim.aiCallback、aim.maxIterati...|
 | [aim.aiCallback](#aicallback) |WithAICallback 设置 AI 回调（导出名为 aim.aiCallback） 参数: - callback: AI 回调函数 返回值: - 引擎配置可选项|
 | [aim.aiConfig](#aiconfig) |WithAIConfig 通过 AI 类型与 aispec 选项设置引擎使用的 AI（导出名为 aim.aiConfig） 参数: - typeName: AI 类型名，如 &#34;openai&#34; - opts: aispec AI 配置选项，如 ai.apiKey、ai.model 返回值: - 引擎配...|
-| [aim.aiReviewMode](#aireviewmode) ||
+| [aim.aiReviewMode](#aireviewmode) |WithAIReviewMode AI 审批模式：由 AI 决定是否需要用户确认（导出名为 aim.aiReviewMode） 参数: - 无 返回值: - 引擎配置可选项|
 | [aim.aiService](#aiservice) |WithAIService 设置使用的 AI 服务名称（导出名为 aim.aiService） 参数: - service: AI 服务名，如 &#34;openai&#34;、&#34;deepseek&#34; 返回值: - 引擎配置可选项|
 | [aim.allowUserInteract](#allowuserinteract) |WithAllowUserInteract 设置是否允许用户交互（导出名为 aim.allowUserInteract） 参数: - allow: 是否允许用户交互 返回值: - 引擎配置可选项|
 | [aim.attachedAIForge](#attachedaiforge) |WithAttachedAIForge 为引擎附加一个 AI Forge（导出名为 aim.attachedAIForge） 参数: - aiForgeName: AI Forge 名称 返回值: - 引擎配置可选项|
@@ -29,7 +29,7 @@
 | [aim.includeToolNames](#includetoolnames) |WithIncludeToolNames 设置包含的工具名称白名单（导出名为 aim.includeToolNames） 参数: - names: 一个或多个工具名 返回值: - 引擎配置可选项|
 | [aim.keywords](#keywords) |WithKeywords 设置工具搜索关键词（导出名为 aim.keywords） 参数: - keywords: 一个或多个关键词 返回值: - 引擎配置可选项|
 | [aim.language](#language) |WithLanguage 设置引擎响应语言偏好（导出名为 aim.language） 参数: - lang: 语言标识，如 &#34;zh&#34;、&#34;en&#34; 返回值: - 引擎配置可选项|
-| [aim.manualMode](#manualmode) ||
+| [aim.manualMode](#manualmode) |WithManualMode 手动模式：所有操作都需要用户确认（导出名为 aim.manualMode） 参数: - 无 返回值: - 引擎配置可选项|
 | [aim.maxIteration](#maxiteration) |WithMaxIteration 设置引擎最大迭代次数（导出名为 aim.maxIteration） 参数: - max: 最大迭代次数（默认 10） 返回值: - 引擎配置可选项|
 | [aim.onData](#ondata) |WithOnData 设置数据回调（导出名为 aim.onData） 参数: - callback: 回调，参数为 (operator, event, nodeId, data) 返回值: - 引擎配置可选项|
 | [aim.onEvent](#onevent) |WithOnEvent 设置事件回调（导出名为 aim.onEvent） 参数: - callback: 事件回调，参数为 (operator, event) 返回值: - 引擎配置可选项|
@@ -50,7 +50,7 @@
 | [aim.timeout](#timeout) |WithTimeout 设置引擎运行的超时时间（导出名为 aim.timeout） 参数: - timeout: 超时时间（秒） 返回值: - 引擎配置可选项|
 | [aim.userInteractLimit](#userinteractlimit) |WithUserInteractLimit 设置用户交互次数上限（导出名为 aim.userInteractLimit） 参数: - limit: 交互次数上限 返回值: - 引擎配置可选项|
 | [aim.workdir](#workdir) |WithWorkdir 设置引擎工作目录（导出名为 aim.workdir） 参数: - workdir: 工作目录路径 返回值: - 引擎配置可选项|
-| [aim.yoloMode](#yolomode) ||
+| [aim.yoloMode](#yolomode) |WithYOLOMode YOLO 模式：自动执行所有操作，无需用户确认（导出名为 aim.yoloMode） 参数: - 无 返回值: - 引擎配置可选项|
 
 
 ## 函数定义
@@ -287,11 +287,37 @@ println(opt)
 ### aiReviewMode
 
 #### 详细描述
-暂无描述
+WithAIReviewMode AI 审批模式：由 AI 决定是否需要用户确认（导出名为 aim.aiReviewMode）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 引擎配置可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aim.aiReviewMode()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`aiReviewMode()`
+`aiReviewMode() AIEngineConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` | 引擎配置可选项 |
 
 
 ### aiService
@@ -1167,11 +1193,37 @@ println(opt)
 ### manualMode
 
 #### 详细描述
-暂无描述
+WithManualMode 手动模式：所有操作都需要用户确认（导出名为 aim.manualMode）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 引擎配置可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aim.manualMode()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`manualMode()`
+`manualMode() AIEngineConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` | 引擎配置可选项 |
 
 
 ### maxIteration
@@ -2005,10 +2057,36 @@ println(opt)
 ### yoloMode
 
 #### 详细描述
-暂无描述
+WithYOLOMode YOLO 模式：自动执行所有操作，无需用户确认（导出名为 aim.yoloMode）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 引擎配置可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aim.yoloMode()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`yoloMode()`
+`yoloMode() AIEngineConfigOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIEngineConfigOption` | 引擎配置可选项 |
 
 

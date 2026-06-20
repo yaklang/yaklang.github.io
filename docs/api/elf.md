@@ -420,9 +420,10 @@ Example:
 // 示意性示例，需要真实的 ELF 二进制文件
 sections, err = elf.ReadELFSections("/path/to/binary")
 if err != nil { die(err) }
-for sect in sections {
-    if sect.IsSymTab { println(sect.Name) }
-}
+
+	for sect in sections {
+	    if sect.IsSymTab { println(sect.Name) }
+	}
 ``````````````
 
 
@@ -468,9 +469,10 @@ Example:
 // 示意性示例，需要真实的 ELF 二进制文件
 segments, err = elf.ReadELFSegments("/path/to/binary")
 if err != nil { die(err) }
-for seg in segments {
-    if seg.IsCode { println(seg.Type) }
-}
+
+	for seg in segments {
+	    if seg.IsCode { println(seg.Type) }
+	}
 ``````````````
 
 

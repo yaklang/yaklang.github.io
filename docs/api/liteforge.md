@@ -4,7 +4,7 @@
 |:------|:--------|
 | [liteforge.AnalyzeVideoOmni](#analyzevideoomni) |AnalyzeVideoOmni 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。|
 | [liteforge.BuildVideoKnowledgeFromOmni](#buildvideoknowledgefromomni) |BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路， 但分析阶段切换为 omni 端到端视频理解（AnalyzeVideoOmni），与既有 BuildKnowledgeFromFile 等保持完全独立，纯增量。 关键词: Bu...|
-| [liteforge.Execute](#execute) ||
+| [liteforge.Execute](#execute) |liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. 参数: - query: 提示词/查询内容 - opts: 执行可选项，如 liteforge.outpu...|
 | [liteforge.action](#action) |liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,|
 | [liteforge.analyzeCtx](#analyzectx) |WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） 参数: - ctx: 上下文对象 返回值: - 分析可选项|
 | [liteforge.analyzeLog](#analyzelog) |WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） 参数: - handler: 日志回调函数，参数为格式化字符串与参数 返回值: - 分析可选项|
@@ -26,9 +26,9 @@
 | [liteforge.omniMaxHeight](#omnimaxheight) |WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） 参数: - h: 最大高度（像素） 返回值: - omni 视频可选项|
 | [liteforge.omniMaxSegments](#omnimaxsegments) |WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） 参数: - n: 最大段数 返回值: - omni 视频可选项|
 | [liteforge.omniModel](#omnimodel) |WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） 参数: - m: 模型名 返回值: - omni 视频可选项|
-| [liteforge.omniPresetFlash](#omnipresetflash) ||
-| [liteforge.omniPresetPlus](#omnipresetplus) ||
-| [liteforge.omniPresetTurbo](#omnipresetturbo) ||
+| [liteforge.omniPresetFlash](#omnipresetflash) |VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash） 参数: - 无 返回值: - omni 视频可选项|
+| [liteforge.omniPresetPlus](#omnipresetplus) |VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus） 参数: - 无 返回值: - omni 视频可选项|
+| [liteforge.omniPresetTurbo](#omnipresetturbo) |VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设 关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus 预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset...|
 | [liteforge.omniProgressCallback](#omniprogresscallback) |WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback） 参数: - cb: 进度回调，参数为每段的分析结果 返回值: - omni 视频可选项|
 | [liteforge.omniQueryPrompt](#omniqueryprompt) |WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt） 参数: - q: 查询提示词 返回值: - omni 视频可选项|
 | [liteforge.omniRateLimitRetry](#omniratelimitretry) |WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。 关键词: WithVideoOmniRateLimitRetry, omni 视频限速重试 参数: - maxAttempts: 最大重试次数 - backoffBase: 退避基数（time.Dur...|
@@ -166,7 +166,37 @@ ch, err := aiforge.BuildVideoKnowledgeFromOmni(
 ### Execute
 
 #### 详细描述
-暂无描述
+liteforge.Execute can create a temporary LiteForge instance and execute it with the given query.
+
+参数:
+
+  - query: 提示词/查询内容
+
+  - opts: 执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等
+
+
+
+返回值:
+
+  - 执行结果对象（可通过 Get 读取字段）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 需要配置可用的 AI 服务（示意性示例）
+result = liteforge.Execute("extract the title",
+
+	liteforge.output(jsonschema.ActionObject("object", jsonschema.paramString("value"))),
+
+)~
+dump(result)
+``````````````
+
 
 #### 定义
 
@@ -175,14 +205,14 @@ ch, err := aiforge.BuildVideoKnowledgeFromOmni(
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| query | `string` |  |
-| opts | `...any` |  |
+| query | `string` | 提示词/查询内容 |
+| opts | `...any` | 执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*ForgeResult` |  |
-| r2 | `error` |  |
+| r1 | `*ForgeResult` | 执行结果对象（可通过 Get 读取字段） |
+| r2 | `error` | 错误信息 |
 
 
 ### action
@@ -1025,31 +1055,115 @@ println(opt)
 ### omniPresetFlash
 
 #### 详细描述
-暂无描述
+VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - omni 视频可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = liteforge.omniPresetFlash()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`omniPresetFlash()`
+`omniPresetFlash() VideoOmniOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `VideoOmniOption` | omni 视频可选项 |
 
 
 ### omniPresetPlus
 
 #### 详细描述
-暂无描述
+VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - omni 视频可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = liteforge.omniPresetPlus()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`omniPresetPlus()`
+`omniPresetPlus() VideoOmniOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `VideoOmniOption` | omni 视频可选项 |
 
 
 ### omniPresetTurbo
 
 #### 详细描述
-暂无描述
+VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设
+
+关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus
+
+预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset 之后再调用 WithVideoOmniModel
+
+VideoOmniPresetTurbo 使用 turbo 预设（qwen-omni-turbo 模型，导出名为 liteforge.omniPresetTurbo）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - omni 视频可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = liteforge.omniPresetTurbo()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`omniPresetTurbo()`
+`omniPresetTurbo() VideoOmniOption`
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `VideoOmniOption` | omni 视频可选项 |
 
 
 ### omniProgressCallback

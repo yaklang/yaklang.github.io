@@ -17,7 +17,7 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [cli.Args](#args) ||
+| [cli.Args](#args) |Args 返回传给当前脚本的命令行参数列表（导出名为 cli.Args） 即运行 yak 脚本时跟在脚本名之后的原始位置参数 返回值: - 命令行参数字符串切片|
 | [cli.Bool](#bool) |Bool 获取对应名称的命令行参数，并将其转换为 bool 类型返回 参数: - name: 参数名 - opts: 参数选项，如 cli.setHelp 等 返回值: - 参数对应的 bool 值（传入该 flag 时为 true）|
 | [cli.Double](#double) |Double 获取对应名称的命令行参数，并将其转换为 float 类型返回 参数: - name: 参数名 - opts: 参数选项 返回值: - 参数对应的浮点值|
 | [cli.File](#file) |File 获取对应名称的命令行参数，根据其传入的值读取其对应文件内容并返回 []byte 类型 参数: - name: 参数名 - opts: 参数选项 返回值: - 文件内容字节|
@@ -87,7 +87,22 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 ### Args
 
 #### 详细描述
-暂无描述
+Args 返回传给当前脚本的命令行参数列表（导出名为 cli.Args）
+即运行 yak 脚本时跟在脚本名之后的原始位置参数
+
+返回值:
+  - 命令行参数字符串切片
+
+
+Example:
+
+``````````````yak
+args = cli.Args()
+println(typeof(args).String())   // OUT: []string
+assert typeof(args).String() == "[]string", "cli.Args should return a string slice"
+assert len(args) >= 0, "args length should be non-negative"
+``````````````
+
 
 #### 定义
 
@@ -96,7 +111,7 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]string` |  |
+| r1 | `[]string` | 命令行参数字符串切片 |
 
 
 ### Bool

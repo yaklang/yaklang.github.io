@@ -42,7 +42,8 @@ rule = `matchers:
   - type: word
     part: body
     words:
-      - "Example Domain"`
+  - "Example Domain"`
+
 result = httptpl.MatchOrExtractHTTPFlow("", rsp, rule)~
 println(result.IsMatched)   // OUT: true
 assert result.IsMatched == true, "word matcher should match the response body"

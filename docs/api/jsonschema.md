@@ -7,7 +7,7 @@
 | [jsonschema.NewObjectSchema](#newobjectschema) |NewObjectSchema 生成 object 类型的 JSON Schema 字符串（导出名为 jsonschema.Object / jsonschema.NewObjectSchema） 参数: - opts: schema 构建可选项，如 jsonschema.paramString /...|
 | [jsonschema.Object](#object) |NewObjectSchema 生成 object 类型的 JSON Schema 字符串（导出名为 jsonschema.Object / jsonschema.NewObjectSchema） 参数: - opts: schema 构建可选项，如 jsonschema.paramString /...|
 | [jsonschema.ObjectArray](#objectarray) |newObjectArraySchema 生成 array 类型（元素为 object）的 JSON Schema 字符串 导出名为 jsonschema.ObjectArray / jsonschema.NewObjectArraySchema 参数: - opts: schema 构建可选项，描...|
-| [jsonschema.action](#action) ||
+| [jsonschema.action](#action) |WithAction 向 schema 添加一个常量 @action 字段（导出名为 jsonschema.action） @action 字段帮助 AI 识别输出 JSON 对象的类型 参数: - action: action 名称（作为该字段的 const 值） 返回值: - schema 构建...|
 | [jsonschema.const](#const) |WithParam_Const 指定属性的常量取值（导出名为 jsonschema.const） 参数: - values: 常量值 返回值: - 属性可选项|
 | [jsonschema.description](#description) |WithParam_Description 为属性添加描述信息（导出名为 jsonschema.description） 参数: - desc: 属性描述文本 返回值: - 属性可选项|
 | [jsonschema.enum](#enum) |WithParam_Enum 指定属性的可选枚举值列表（导出名为 jsonschema.enum） 参数: - values: 允许的取值列表 返回值: - 属性可选项|
@@ -21,9 +21,9 @@
 | [jsonschema.paramKeyValuePairsArray](#paramkeyvaluepairsarray) |WithKVPairsParam 向 schema 添加一个键值对数组类型属性（导出名为 jsonschema.paramKeyValuePairsArray） 适合表达 HTTP headers、查询参数等 key/value 列表结构 参数: - name: 属性名 - opts: 属性可选项 ...|
 | [jsonschema.paramNumber](#paramnumber) |WithNumberParam 向 schema 添加一个数值类型属性（导出名为 jsonschema.paramNumber） 参数: - name: 属性名 - opts: 属性可选项，如 jsonschema.min / jsonschema.max 返回值: - schema 构建可选项|
 | [jsonschema.paramNumberArray](#paramnumberarray) |WithNumberArrayParam 向 schema 添加一个数值数组类型属性（导出名为 jsonschema.paramNumberArray） 参数: - name: 属性名 - opts: 属性可选项 返回值: - schema 构建可选项|
-| [jsonschema.paramObject](#paramobject) ||
-| [jsonschema.paramObjectArray](#paramobjectarray) ||
-| [jsonschema.paramObjectArrayEx](#paramobjectarrayex) ||
+| [jsonschema.paramObject](#paramobject) |_withParamObject 向 schema 添加一个对象类型属性（导出名为 jsonschema.paramObject） 参数: - objectName: 对象属性名 - opts: 子属性可选项与对象配置项 返回值: - schema 构建可选项|
+| [jsonschema.paramObjectArray](#paramobjectarray) |_withObjectArray 向 schema 添加一个对象数组类型属性（导出名为 jsonschema.paramObjectArray） 参数: - name: 属性名 - opts: 作用于数组中对象元素的属性可选项 返回值: - schema 构建可选项|
+| [jsonschema.paramObjectArrayEx](#paramobjectarrayex) |_withObjectArrayEx 向 schema 添加对象数组属性，并可单独指定数组级属性（导出名为 jsonschema.paramObjectArrayEx） 参数: - name: 属性名 - arrayPropsRaw: 作用于数组本身的属性可选项 - opts: 作用于数组中对象元素...|
 | [jsonschema.paramRaw](#paramraw) |WithRawParam 以原始 schema 对象的方式向 schema 添加一个属性（导出名为 jsonschema.paramRaw） 参数: - name: 属性名 - object: 该属性的原始 JSON Schema 对象 - opts: 属性可选项 返回值: - schema 构建可...|
 | [jsonschema.paramString](#paramstring) |WithStringParam 向 schema 添加一个字符串类型属性（导出名为 jsonschema.paramString） 参数: - name: 属性名 - opts: 属性可选项，如 jsonschema.description / jsonschema.enum 返回值: - sche...|
 | [jsonschema.paramStringArray](#paramstringarray) |WithStringArrayParam 向 schema 添加一个字符串数组类型属性（导出名为 jsonschema.paramStringArray） 参数: - name: 属性名 - opts: 属性可选项 返回值: - schema 构建可选项|
@@ -269,7 +269,30 @@ assert str.Contains(schema, "\"type\": \"array\""), "should generate an array sc
 ### action
 
 #### 详细描述
-暂无描述
+WithAction 向 schema 添加一个常量 @action 字段（导出名为 jsonschema.action）
+
+@action 字段帮助 AI 识别输出 JSON 对象的类型
+
+参数:
+
+  - action: action 名称（作为该字段的 const 值）
+
+
+
+返回值:
+
+  - schema 构建可选项
+
+
+
+
+Example:
+
+``````````````yak
+schema = jsonschema.Object(jsonschema.action("create_user"), jsonschema.paramString("name"))
+assert str.Contains(schema, "@action"), "schema should contain @action field"
+``````````````
+
 
 #### 定义
 
@@ -278,12 +301,12 @@ assert str.Contains(schema, "\"type\": \"array\""), "should generate an array sc
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| action | `string` |  |
+| action | `string` | action 名称（作为该字段的 const 值） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ToolOption` |  |
+| r1 | `ToolOption` | schema 构建可选项 |
 
 
 ### const
@@ -839,7 +862,35 @@ assert str.Contains(schema, "array"), "schema should contain a number array prop
 ### paramObject
 
 #### 详细描述
-暂无描述
+_withParamObject 向 schema 添加一个对象类型属性（导出名为 jsonschema.paramObject）
+
+参数:
+
+  - objectName: 对象属性名
+
+  - opts: 子属性可选项与对象配置项
+
+
+
+返回值:
+
+  - schema 构建可选项
+
+
+
+
+Example:
+
+``````````````yak
+schema = jsonschema.Object(jsonschema.paramObject("user",
+
+	jsonschema.paramString("name"),
+	jsonschema.paramInt("age"),
+
+))
+assert str.Contains(schema, "user"), "schema should contain the object property"
+``````````````
+
 
 #### 定义
 
@@ -848,19 +899,47 @@ assert str.Contains(schema, "array"), "schema should contain a number array prop
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| objectName | `string` |  |
-| opts | `...any` |  |
+| objectName | `string` | 对象属性名 |
+| opts | `...any` | 子属性可选项与对象配置项 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ToolOption` |  |
+| r1 | `ToolOption` | schema 构建可选项 |
 
 
 ### paramObjectArray
 
 #### 详细描述
-暂无描述
+_withObjectArray 向 schema 添加一个对象数组类型属性（导出名为 jsonschema.paramObjectArray）
+
+参数:
+
+  - name: 属性名
+
+  - opts: 作用于数组中对象元素的属性可选项
+
+
+
+返回值:
+
+  - schema 构建可选项
+
+
+
+
+Example:
+
+``````````````yak
+schema = jsonschema.Object(jsonschema.paramObjectArray("users",
+
+	jsonschema.paramString("name"),
+	jsonschema.paramInt("age"),
+
+))
+assert str.Contains(schema, "users"), "schema should contain the object array property"
+``````````````
+
 
 #### 定义
 
@@ -869,19 +948,48 @@ assert str.Contains(schema, "array"), "schema should contain a number array prop
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |  |
-| opts | `...any` |  |
+| name | `string` | 属性名 |
+| opts | `...any` | 作用于数组中对象元素的属性可选项 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ToolOption` |  |
+| r1 | `ToolOption` | schema 构建可选项 |
 
 
 ### paramObjectArrayEx
 
 #### 详细描述
-暂无描述
+_withObjectArrayEx 向 schema 添加对象数组属性，并可单独指定数组级属性（导出名为 jsonschema.paramObjectArrayEx）
+
+参数:
+
+  - name: 属性名
+
+  - arrayPropsRaw: 作用于数组本身的属性可选项
+
+  - opts: 作用于数组中对象元素的属性可选项
+
+
+
+返回值:
+
+  - schema 构建可选项
+
+
+
+
+Example:
+
+``````````````yak
+schema = jsonschema.Object(jsonschema.paramObjectArrayEx("users", [jsonschema.description("user list")],
+
+	jsonschema.paramString("name"),
+
+))
+assert str.Contains(schema, "users"), "schema should contain the object array property"
+``````````````
+
 
 #### 定义
 
@@ -890,14 +998,14 @@ assert str.Contains(schema, "array"), "schema should contain a number array prop
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| name | `string` |  |
-| arrayPropsRaw | `[]any` |  |
-| opts | `...any` |  |
+| name | `string` | 属性名 |
+| arrayPropsRaw | `[]any` | 作用于数组本身的属性可选项 |
+| opts | `...any` | 作用于数组中对象元素的属性可选项 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ToolOption` |  |
+| r1 | `ToolOption` | schema 构建可选项 |
 
 
 ### paramRaw

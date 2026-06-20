@@ -12,19 +12,19 @@ SqrtPi|(float64) 1.772454|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [math.Abs](#abs) ||
+| [math.Abs](#abs) |Abs 返回x的绝对值 参数: - x: 输入数值 返回值: - x 的绝对值|
 | [math.Acos](#acos) |Acos 反三角函数 Acos 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反余弦值（弧度）|
 | [math.Asin](#asin) |Asin 反三角函数 Asin 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反正弦值（弧度）|
 | [math.Atan](#atan) |Atan 反三角函数 Atan 参数: - x: 输入数值 返回值: - x 的反正切值（弧度）|
-| [math.Ceil](#ceil) ||
+| [math.Ceil](#ceil) |Ceil 返回不小于x的最小整数 参数: - x: 输入数值 返回值: - 向上取整（朝 +Inf）后的结果|
 | [math.Cos](#cos) |Cos 三角函数 Cos 参数: - x: 输入角度（弧度） 返回值: - x 的余弦值|
-| [math.Floor](#floor) ||
+| [math.Floor](#floor) |Floor 返回不大于x的最大整数 参数: - x: 输入数值 返回值: - 向下取整（朝 -Inf）后的结果|
 | [math.IsNaN](#isnan) |IsNaN 判断一个数是否是NaN 参数: - x: 输入数值 返回值: - 是否为 NaN|
 | [math.NaN](#nan) |NaN 返回一个IEEE-574 “非数字”的值 返回值: - 一个 NaN 浮点值|
 | [math.Pow](#pow) |Pow 返回x的y次方 参数: - x: 底数 - y: 指数 返回值: - x 的 y 次幂|
 | [math.Pow10](#pow10) |Pow10 返回10的n次方 参数: - n: 整数指数 返回值: - 10 的 n 次幂|
-| [math.Round](#round) ||
-| [math.RoundToEven](#roundtoeven) ||
+| [math.Round](#round) |Round 返回四舍五入到最近的整数 存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN 参数: - x: 输入数值 返回值: - 四舍五入到最近整数的结果|
+| [math.RoundToEven](#roundtoeven) |RoundToEven 返回四舍五入到最近的偶整数 参数: - x: 输入数值 返回值: - 银行家舍入到最近偶整数的结果|
 | [math.Sin](#sin) |Sin 三角函数 sin 参数: - x: 输入角度（弧度） 返回值: - x 的正弦值|
 | [math.Sinh](#sinh) |Sinh 双曲正弦函数 参数: - x: 输入数值（弧度） 返回值: - x 的双曲正弦值|
 | [math.Sqrt](#sqrt) |Sqrt 返回一个数的平方根 如果x &lt; 0，返回NaN 参数: - x: 输入数值 返回值: - x 的平方根；x&lt;0 时为 NaN|
@@ -35,7 +35,30 @@ SqrtPi|(float64) 1.772454|
 ### Abs
 
 #### 详细描述
-暂无描述
+Abs 返回x的绝对值
+
+参数:
+
+  - x: 输入数值
+
+
+
+返回值:
+
+  - x 的绝对值
+
+
+
+
+Example:
+
+``````````````yak
+result = math.Abs(-1)
+println(result)   // OUT: 1
+assert result == 1.0, "Abs of -1 should be 1"
+assert math.Abs(1) == 1.0, "Abs of 1 should be 1"
+``````````````
+
 
 #### 定义
 
@@ -44,12 +67,12 @@ SqrtPi|(float64) 1.772454|
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `float64` |  |
+| x | `float64` | 输入数值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `float64` |  |
+| r1 | `float64` | x 的绝对值 |
 
 
 ### Acos
@@ -181,7 +204,30 @@ assert result == 0.0, "Atan of 0 should be 0"
 ### Ceil
 
 #### 详细描述
-暂无描述
+Ceil 返回不小于x的最小整数
+
+参数:
+
+  - x: 输入数值
+
+
+
+返回值:
+
+  - 向上取整（朝 +Inf）后的结果
+
+
+
+
+Example:
+
+``````````````yak
+result = math.Ceil(1.5)
+println(result)   // OUT: 2
+assert result == 2.0, "Ceil should round up"
+assert math.Ceil(-1.5) == -1.0, "Ceil of negative rounds toward +Inf"
+``````````````
+
 
 #### 定义
 
@@ -190,12 +236,12 @@ assert result == 0.0, "Atan of 0 should be 0"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `float64` |  |
+| x | `float64` | 输入数值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `float64` |  |
+| r1 | `float64` | 向上取整（朝 +Inf）后的结果 |
 
 
 ### Cos
@@ -243,7 +289,30 @@ assert result == 1.0, "Cos of 0 should be 1"
 ### Floor
 
 #### 详细描述
-暂无描述
+Floor 返回不大于x的最大整数
+
+参数:
+
+  - x: 输入数值
+
+
+
+返回值:
+
+  - 向下取整（朝 -Inf）后的结果
+
+
+
+
+Example:
+
+``````````````yak
+result = math.Floor(1.5)
+println(result)   // OUT: 1
+assert result == 1.0, "Floor should round down"
+assert math.Floor(-1.5) == -2.0, "Floor of negative rounds toward -Inf"
+``````````````
+
 
 #### 定义
 
@@ -252,12 +321,12 @@ assert result == 1.0, "Cos of 0 should be 1"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `float64` |  |
+| x | `float64` | 输入数值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `float64` |  |
+| r1 | `float64` | 向下取整（朝 -Inf）后的结果 |
 
 
 ### IsNaN
@@ -426,7 +495,32 @@ assert math.Pow10(3) == 1000.0, "10 to the power 3 should be 1000"
 ### Round
 
 #### 详细描述
-暂无描述
+Round 返回四舍五入到最近的整数
+
+存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN
+
+参数:
+
+  - x: 输入数值
+
+
+
+返回值:
+
+  - 四舍五入到最近整数的结果
+
+
+
+
+Example:
+
+``````````````yak
+result = math.Round(1.5)
+println(result)   // OUT: 2
+assert result == 2.0, "Round should round half up"
+assert math.Round(1.4) == 1.0, "Round should round down below half"
+``````````````
+
 
 #### 定义
 
@@ -435,18 +529,43 @@ assert math.Pow10(3) == 1000.0, "10 to the power 3 should be 1000"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `float64` |  |
+| x | `float64` | 输入数值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `float64` |  |
+| r1 | `float64` | 四舍五入到最近整数的结果 |
 
 
 ### RoundToEven
 
 #### 详细描述
-暂无描述
+RoundToEven 返回四舍五入到最近的偶整数
+
+参数:
+
+  - x: 输入数值
+
+
+
+返回值:
+
+  - 银行家舍入到最近偶整数的结果
+
+
+
+
+Example:
+
+``````````````yak
+// 银行家舍入：恰好 .5 时向最近的偶数取整
+result = math.RoundToEven(2.5)
+println(result)   // OUT: 2
+assert result == 2.0, "2.5 rounds to even 2"
+assert math.RoundToEven(1.5) == 2.0, "1.5 rounds to even 2"
+assert math.RoundToEven(3.5) == 4.0, "3.5 rounds to even 4"
+``````````````
+
 
 #### 定义
 
@@ -455,12 +574,12 @@ assert math.Pow10(3) == 1000.0, "10 to the power 3 should be 1000"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `float64` |  |
+| x | `float64` | 输入数值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `float64` |  |
+| r1 | `float64` | 银行家舍入到最近偶整数的结果 |
 
 
 ### Sin

@@ -7,16 +7,16 @@
 | [aiagent.CreateLiteForge](#createliteforge) |NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge） LiteForge 是轻量的一次性 AI 任务执行单元 参数: - name: LiteForge 名称 - opts: 可选项，如 aiagent.liteForgePromp...|
 | [aiagent.ExecuteForge](#executeforge) |ExecuteForge 执行一个已注册的 Forge 并返回结果（导出名为 aiagent.ExecuteForge） 这是 AI Agent 最常用的入口，内部会创建协调器并运行整个 AI 工作流 参数: - forgeName: Forge 名称 - i: 执行参数（map 或键值对） - i...|
 | [aiagent.ExtractAction](#extractaction) |ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action（导出名为 aiagent.ExtractAction） 参数: - i: 包含 action 的原始文本 - actionName: 期望的 ac...|
-| [aiagent.ExtractPlan](#extractplan) ||
+| [aiagent.ExtractPlan](#extractplan) |ExtractPlan 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan） 参数: - c: 协调器对象 - rawResponse: AI 返回的原始文本 返回值: - 计划响应对象 - 错误信息|
 | [aiagent.GetDefaultContextProvider](#getdefaultcontextprovider) |GetDefaultContextProvider 返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider） 上下文提供器持有计划历史、持久化数据、交互历史以及工具列表 参数: - 无 返回值: - 默认上下文提供器对象|
 | [aiagent.NewExecutor](#newexecutor) |NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor） 参数: - name: Forge 名称 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagent.aiCallback、aiagent.cont...|
 | [aiagent.NewExecutorFromJson](#newexecutorfromjson) |NewExecutorFromJson 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson） 参数: - json: Forge 蓝图的 JSON 描述 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagen...|
 | [aiagent.ParseYakScriptToAiTools](#parseyakscripttoaitools) |LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools） 会从源码中提取元数据（名称、描述、关键词等）以及 CLI 参数并转换为工具输入 schema 参数: - name: 工具名称 -...|
 | [aiagent.UpdateYakScriptMetaData](#updateyakscriptmetadata) |UpdateYakScriptMetaData 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData） 参数: - name: 插件名称 - content: 插件源码 - forceUpdate: 是否强制重新生成元数据 返回...|
-| [aiagent.agreeAuto](#agreeauto) ||
-| [aiagent.agreeManual](#agreemanual) ||
+| [aiagent.agreeAuto](#agreeauto) |WithAgreeAuto 设置自动审批通过所有操作（导出名为 aiagent.agreeAuto） 参数: - 无 返回值: - 配置选项|
+| [aiagent.agreeManual](#agreemanual) |WithAgreeManual 设置由人工手动审批操作（导出名为 aiagent.agreeManual） 参数: - 无 返回值: - 配置选项|
 | [aiagent.agreePolicy](#agreepolicy) |WithAgreePolicy 设置操作审批策略（导出名为 aiagent.agreePolicy） 参数: - p: 审批策略，如自动、AI、手动等 返回值: - 配置选项|
-| [aiagent.agreePolicyAI](#agreepolicyai) ||
+| [aiagent.agreePolicyAI](#agreepolicyai) |WithAIAgree 设置由 AI 自动审批操作（导出名为 aiagent.agreePolicyAI） 参数: - 无 返回值: - 配置选项|
 | [aiagent.agreeYOLO](#agreeyolo) |WithAgreeYOLO 设置 YOLO 模式，自动通过所有审批（导出名为 aiagent.agreeYOLO） 参数: - b: 可选，是否开启 YOLO（默认 true） 返回值: - 配置选项|
 | [aiagent.aiAutoRetry](#aiautoretry) |WithAIAutoRetry 设置 AI 调用失败时的自动重试次数（导出名为 aiagent.aiAutoRetry） WithAIAutoRetry sets AiAutoRetry count. 参数: - n: 重试次数（&gt;= 0） 返回值: - 配置选项|
 | [aiagent.aiCallback](#aicallback) |WithAICallback 设置统一的 AI 回调（导出名为 aiagent.aiCallback） WARNING 粗粒度的ai callback 设置，只可在测试或者功能固定单一的ai模块（如知识库蒸馏）使用，其他位置应该用 WithAutoTieredAICallback 参数: - cb:...|
@@ -43,7 +43,7 @@
 | [aiagent.liteForgedRequireParams](#liteforgedrequireparams) |WithLiteForge_RequireParams 设置 LiteForge 的输入参数 schema（导出名为 aiagent.liteForgedRequireParams） 参数: - params: 一个或多个 aitool 参数选项 返回值: - LiteForge 可选项|
 | [aiagent.manualAssistantCallback](#manualassistantcallback) |WithManualAssistantCallback 设置人工审批回调（导出名为 aiagent.manualAssistantCallback） WithManualAssistantCallback is an alias to the agree/manual callback setter...|
 | [aiagent.offsetSeq](#offsetseq) |WithSequence 设置起始序列号并安装自增 id 生成器（导出名为 aiagent.offsetSeq） WithSequence sets the starting sequence/id and installs a simple id generator that increments...|
-| [aiagent.omniSearchTool](#omnisearchtool) ||
+| [aiagent.omniSearchTool](#omnisearchtool) |WithOmniSearchTool 启用全网搜索工具（导出名为 aiagent.omniSearchTool） 参数: - 无 返回值: - 配置选项|
 | [aiagent.originYaklangCliCode](#originyaklangclicode) |WithOriginYaklangCliCode 设置原始的Yaklang CLI代码（导出名为 aiagent.originYaklangCliCode） 这个结构需要 Yak 引擎根据 CLI 代码构建出正确的用户需要输入的工具 这个结构是表单构建的核心依据，可以使用 Yak 原声插件基础设施直...|
 | [aiagent.persistentPrompt](#persistentprompt) |WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项|
 | [aiagent.persistentPromptForge](#persistentpromptforge) |WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项|
@@ -53,7 +53,7 @@
 | [aiagent.resultHandlerForge](#resulthandlerforge) |WithResultHandler 设置AI助手的结果处理函数（导出名为 aiagent.resultHandlerForge） 这个函数会在AI助手生成结果后被调用，用于处理AI的输出 参数: - handler: 结果处理函数，参数为 (result, err) 返回值: - Forge 可选项|
 | [aiagent.resultPrompt](#resultprompt) |WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项|
 | [aiagent.resultPromptForge](#resultpromptforge) |WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项|
-| [aiagent.systemFileOperator](#systemfileoperator) ||
+| [aiagent.systemFileOperator](#systemfileoperator) |WithSystemFileOperator 为 AI 启用系统文件操作工具集（导出名为 aiagent.systemFileOperator） 参数: - 无 返回值: - 配置选项|
 | [aiagent.taskAICallback](#taskaicallback) |WithSpeedPriorityAICallback 设置速度优先档的 AI 回调（导出名为 aiagent.taskAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项|
 | [aiagent.timelineContentLimit](#timelinecontentlimit) |WithTimelineContentLimit 设置 timeline 内容大小上限（导出名为 aiagent.timelineContentLimit） WithTimelineContentLimit sets timeline content size limit (keeps naming...|
 | [aiagent.tool](#tool) |WithTool 添加单个 AI 工具（导出名为 aiagent.tool） WithTool is a convenience wrapper to add a single tool (delegates to WithTools). 参数: - tool: AI 工具对象 返回值: - 配置选...|
@@ -306,7 +306,33 @@ dump(action)
 ### ExtractPlan
 
 #### 详细描述
-暂无描述
+ExtractPlan 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan）
+
+参数:
+
+  - c: 协调器对象
+
+  - rawResponse: AI 返回的原始文本
+
+
+
+返回值:
+
+  - 计划响应对象
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 需要可用的协调器与响应（示意性示例）
+plan = aiagent.ExtractPlan(coordinator, rawResponse)~
+dump(plan)
+``````````````
+
 
 #### 定义
 
@@ -315,14 +341,14 @@ dump(action)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| c | `*Coordinator` |  |
-| rawResponse | `string` |  |
+| c | `*Coordinator` | 协调器对象 |
+| rawResponse | `string` | AI 返回的原始文本 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*PlanResponse` |  |
-| r2 | `error` |  |
+| r1 | `*PlanResponse` | 计划响应对象 |
+| r2 | `error` | 错误信息 |
 
 
 ### GetDefaultContextProvider
@@ -569,31 +595,73 @@ dump(meta)
 ### agreeAuto
 
 #### 详细描述
-暂无描述
+WithAgreeAuto 设置自动审批通过所有操作（导出名为 aiagent.agreeAuto）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 配置选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aiagent.agreeAuto()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`agreeAuto() error`
+`agreeAuto() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `ConfigOption` | 配置选项 |
 
 
 ### agreeManual
 
 #### 详细描述
-暂无描述
+WithAgreeManual 设置由人工手动审批操作（导出名为 aiagent.agreeManual）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 配置选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aiagent.agreeManual()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`agreeManual() error`
+`agreeManual() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `ConfigOption` | 配置选项 |
 
 
 ### agreePolicy
@@ -641,16 +709,37 @@ println(opt)
 ### agreePolicyAI
 
 #### 详细描述
-暂无描述
+WithAIAgree 设置由 AI 自动审批操作（导出名为 aiagent.agreePolicyAI）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 配置选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aiagent.agreePolicyAI()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`agreePolicyAI() error`
+`agreePolicyAI() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `ConfigOption` | 配置选项 |
 
 
 ### agreeYOLO
@@ -1783,16 +1872,37 @@ println(opt)
 ### omniSearchTool
 
 #### 详细描述
-暂无描述
+WithOmniSearchTool 启用全网搜索工具（导出名为 aiagent.omniSearchTool）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 配置选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aiagent.omniSearchTool()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`omniSearchTool() error`
+`omniSearchTool() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `ConfigOption` | 配置选项 |
 
 
 ### originYaklangCliCode
@@ -2184,16 +2294,37 @@ println(opt)
 ### systemFileOperator
 
 #### 详细描述
-暂无描述
+WithSystemFileOperator 为 AI 启用系统文件操作工具集（导出名为 aiagent.systemFileOperator）
+
+参数:
+
+  - 无
+
+
+
+返回值:
+
+  - 配置选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = aiagent.systemFileOperator()
+println(opt)
+``````````````
+
 
 #### 定义
 
-`systemFileOperator() error`
+`systemFileOperator() ConfigOption`
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `ConfigOption` | 配置选项 |
 
 
 ### taskAICallback

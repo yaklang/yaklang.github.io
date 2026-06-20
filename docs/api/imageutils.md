@@ -33,9 +33,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要提供包含图片的真实数据
 raw = file.ReadFile("/tmp/with-images.bin")~
-for result in imageutils.ExtractImage(raw) {
-    println(result.MIMEType)
-}
+
+	for result in imageutils.ExtractImage(raw) {
+	    println(result.MIMEType)
+	}
 ``````````````
 
 
@@ -84,9 +85,10 @@ Example:
 // 示意性示例，需要提供真实的视频/PDF/图片文件
 ch, err = imageutils.ExtractImageFromFile("/tmp/demo.pdf")
 if err != nil { die(err) }
-for result in ch {
-    println(result.MIMEType)
-}
+
+	for result in ch {
+	    println(result.MIMEType)
+	}
 ``````````````
 
 

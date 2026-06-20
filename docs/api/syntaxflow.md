@@ -14,12 +14,12 @@
 | [syntaxflow.withExecDebug](#withexecdebug) |QueryWithEnableDebug 设置 SyntaxFlow 查询是否开启调试输出（导出名为 syntaxflow.withExecDebug） 参数: - b: 是否开启调试，缺省为 true 返回值: - 查询可选项|
 | [syntaxflow.withExecTaskID](#withexectaskid) |QueryWithTaskID 为 SyntaxFlow 查询绑定扫描任务 ID（导出名为 syntaxflow.withExecTaskID） 参数: - taskID: 关联的扫描任务 ID 返回值: - 查询可选项|
 | [syntaxflow.withProcess](#withprocess) |QueryWithProcessCallback 为 SyntaxFlow 查询设置进度回调（导出名为 syntaxflow.withProcess） 参数: - cb: 进度回调函数，参数为 (progress 浮点进度, message 进度消息) 返回值: - 查询可选项|
-| [syntaxflow.withSave](#withsave) ||
-| [syntaxflow.withScanConcurrency](#withscanconcurrency) ||
-| [syntaxflow.withScanProcessCallback](#withscanprocesscallback) ||
-| [syntaxflow.withScanPrograms](#withscanprograms) ||
-| [syntaxflow.withScanResultCallback](#withscanresultcallback) ||
-| [syntaxflow.withSearch](#withsearch) ||
+| [syntaxflow.withSave](#withsave) |withSave 让 SyntaxFlow 查询结果以&#34;查询(Query)&#34;类型保存到数据库（导出名为 syntaxflow.withSave） 作为 syntaxflow.ExecRule 等查询接口的可选项，保存后可后续按结果 ID 复查 返回值: - SyntaxFlow 查询可选项|
+| [syntaxflow.withScanConcurrency](#withscanconcurrency) |WithScanConcurrency 设置扫描并发数（导出名为 syntaxflow.withScanConcurrency） 参数: - concurrency: 并发执行的规则数量 返回值: - 扫描配置可选项|
+| [syntaxflow.withScanProcessCallback](#withscanprocesscallback) |WithProcessCallback 设置扫描进度回调（导出名为 syntaxflow.withScanProcessCallback） 扫描进度变化时触发回调，作为 syntaxflow.StartScan 的可选项使用 参数: - callback: 进度回调函数，参数含任务 ID、状态、进度...|
+| [syntaxflow.withScanPrograms](#withscanprograms) |withPrograms 指定本次扫描要覆盖的程序集合（导出名为 syntaxflow.withScanPrograms） 作为 syntaxflow.StartScan 的可选项，限定扫描在指定的已编译程序上进行 参数: - progs: 待扫描的程序集合（已编译程序的列表） 返回值: - 扫描配...|
+| [syntaxflow.withScanResultCallback](#withscanresultcallback) |WithScanResultCallback 设置扫描结果回调（导出名为 syntaxflow.withScanResultCallback） 每产生一个扫描结果时触发回调，作为 syntaxflow.StartScan 的可选项使用 参数: - callback: 每产生一个扫描结果时触发的回调函...|
+| [syntaxflow.withSearch](#withsearch) |withSearch 让 SyntaxFlow 查询结果以&#34;搜索(Search)&#34;类型保存到数据库（导出名为 syntaxflow.withSearch） 与 syntaxflow.withSave 类似，但结果归类为搜索场景，便于区分用途 返回值: - SyntaxFlow 查询可选项|
 
 
 ## 函数定义
@@ -645,7 +645,26 @@ println(opt)
 ### withSave
 
 #### 详细描述
-暂无描述
+withSave 让 SyntaxFlow 查询结果以&#34;查询(Query)&#34;类型保存到数据库（导出名为 syntaxflow.withSave）
+
+作为 syntaxflow.ExecRule 等查询接口的可选项，保存后可后续按结果 ID 复查
+
+
+
+返回值:
+
+  - SyntaxFlow 查询可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = syntaxflow.withSave()
+assert opt != nil, "withSave should return a query option"
+``````````````
+
 
 #### 定义
 
@@ -654,13 +673,34 @@ println(opt)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ssaapi.QueryOption` |  |
+| r1 | `ssaapi.QueryOption` | SyntaxFlow 查询可选项 |
 
 
 ### withScanConcurrency
 
 #### 详细描述
-暂无描述
+WithScanConcurrency 设置扫描并发数（导出名为 syntaxflow.withScanConcurrency）
+
+参数:
+
+  - concurrency: 并发执行的规则数量
+
+
+
+返回值:
+
+  - 扫描配置可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = syntaxflow.withScanConcurrency(10)
+println(opt)
+``````````````
+
 
 #### 定义
 
@@ -669,78 +709,173 @@ println(opt)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| concurrency | `uint32` |  |
+| concurrency | `uint32` | 并发执行的规则数量 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |  |
+| r1 | `Option` | 扫描配置可选项 |
 
 
 ### withScanProcessCallback
 
 #### 详细描述
-暂无描述
+WithProcessCallback 设置扫描进度回调（导出名为 syntaxflow.withScanProcessCallback）
+
+扫描进度变化时触发回调，作为 syntaxflow.StartScan 的可选项使用
+
+
+
+参数:
+
+  - callback: 进度回调函数，参数含任务 ID、状态、进度比例与额外信息
+
+
+
+返回值:
+
+  - 扫描配置可选项，可传入 syntaxflow.StartScan
+
+
+
+
+Example:
+
+``````````````yak
+opt = syntaxflow.withScanProcessCallback((taskID, status, progress, info) => { println(status) })
+assert opt != nil, "withScanProcessCallback should return a scan option"
+``````````````
+
 
 #### 定义
 
-`withScanProcessCallback(value TValue) Option`
+`withScanProcessCallback(callback ProcessCallback) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| value | `TValue` |  |
+| callback | `ProcessCallback` | 进度回调函数，参数含任务 ID、状态、进度比例与额外信息 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |  |
+| r1 | `ssaconfig.Option` | 扫描配置可选项，可传入 syntaxflow.StartScan |
 
 
 ### withScanPrograms
 
 #### 详细描述
-暂无描述
+withPrograms 指定本次扫描要覆盖的程序集合（导出名为 syntaxflow.withScanPrograms）
+
+作为 syntaxflow.StartScan 的可选项，限定扫描在指定的已编译程序上进行
+
+
+
+参数:
+
+  - progs: 待扫描的程序集合（已编译程序的列表）
+
+
+
+返回值:
+
+  - 扫描配置可选项，可传入 syntaxflow.StartScan
+
+
+
+
+Example:
+
+``````````````yak
+prog = ssa.Parse(`a = 1; println(a)`)~
+opt = syntaxflow.withScanPrograms([prog])
+assert opt != nil, "withScanPrograms should return a scan option"
+``````````````
+
 
 #### 定义
 
-`withScanPrograms(value TValue) Option`
+`withScanPrograms(progs ssaapi.Programs) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| value | `TValue` |  |
+| progs | `ssaapi.Programs` | 待扫描的程序集合（已编译程序的列表） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |  |
+| r1 | `ssaconfig.Option` | 扫描配置可选项，可传入 syntaxflow.StartScan |
 
 
 ### withScanResultCallback
 
 #### 详细描述
-暂无描述
+WithScanResultCallback 设置扫描结果回调（导出名为 syntaxflow.withScanResultCallback）
+
+每产生一个扫描结果时触发回调，作为 syntaxflow.StartScan 的可选项使用
+
+
+
+参数:
+
+  - callback: 每产生一个扫描结果时触发的回调函数
+
+
+
+返回值:
+
+  - 扫描配置可选项，可传入 syntaxflow.StartScan
+
+
+
+
+Example:
+
+``````````````yak
+opt = syntaxflow.withScanResultCallback((result) => { dump(result) })
+assert opt != nil, "withScanResultCallback should return a scan option"
+``````````````
+
 
 #### 定义
 
-`withScanResultCallback(value TValue) Option`
+`withScanResultCallback(callback ScanResultCallback) ssaconfig.Option`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| value | `TValue` |  |
+| callback | `ScanResultCallback` | 每产生一个扫描结果时触发的回调函数 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `Option` |  |
+| r1 | `ssaconfig.Option` | 扫描配置可选项，可传入 syntaxflow.StartScan |
 
 
 ### withSearch
 
 #### 详细描述
-暂无描述
+withSearch 让 SyntaxFlow 查询结果以&#34;搜索(Search)&#34;类型保存到数据库（导出名为 syntaxflow.withSearch）
+
+与 syntaxflow.withSave 类似，但结果归类为搜索场景，便于区分用途
+
+
+
+返回值:
+
+  - SyntaxFlow 查询可选项
+
+
+
+
+Example:
+
+``````````````yak
+opt = syntaxflow.withSearch()
+assert opt != nil, "withSearch should return a query option"
+``````````````
+
 
 #### 定义
 
@@ -749,6 +884,6 @@ println(opt)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `ssaapi.QueryOption` |  |
+| r1 | `ssaapi.QueryOption` | SyntaxFlow 查询可选项 |
 
 
