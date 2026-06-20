@@ -115,7 +115,7 @@ html.docs-wrapper {
   }
 }
 .theme-doc-sidebar-menu.menu__list {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 // 侧边栏菜单项强制单行：超长用省略号(...)截断，hover 时由 span 自带的
@@ -216,6 +216,152 @@ video {
   }
   .token.punctuation {
     color: #5c6370 !important;
+  }
+}
+
+// 文档正文紧凑化 + 标题锚点(铆点)
+// 背景：API 手册(自动生成)信息密度高，Infima 默认行高/段距/表格内边距偏松，整页显得稀疏、
+//       上下翻动成本高。这里收紧正文行高、段落与列表间距、标题外边距，以及表格的单元格内边距
+//       与字号，让内容更紧凑、易扫读；并把标题锚点(#)做成 hover 时以品牌橙色显示，便于定位/复制
+//       章节链接。作用域仅限文档正文(.theme-doc-markdown)，不影响博客与首页。
+.theme-doc-markdown.markdown {
+  // 正文整体略缩小一点点(16px -> ~15px)，更精致；标题用 rem 不受影响、层级保持。
+  font-size: 0.94rem;
+  line-height: 1.55;
+
+  p,
+  li {
+    line-height: 1.55;
+  }
+
+  // 段落 / 列表间距收紧
+  p {
+    margin-bottom: 0.55rem;
+  }
+  ul,
+  ol {
+    margin-bottom: 0.6rem;
+    padding-left: 1.2rem;
+  }
+  li {
+    margin-top: 0.12rem;
+    margin-bottom: 0.12rem;
+  }
+
+  // 标题贴近正文：减小上下外边距，保留层级区分；H2 加细分隔线强化分组
+  h1 {
+    margin-bottom: 0.8rem;
+  }
+  h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--ifm-toc-border-color);
+  }
+  h3 {
+    margin-top: 1.15rem;
+    margin-bottom: 0.45rem;
+  }
+  h4,
+  h5,
+  h6 {
+    margin-top: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  // 加粗小节标签(如 **必填参数** / **示例**)与其后的表格/代码块贴紧
+  p > strong:only-child {
+    display: inline-block;
+    margin-top: 0.4rem;
+  }
+
+  // 代码块上下间距收紧
+  pre {
+    margin-bottom: 0.8rem;
+  }
+
+  // 表格交互(配合 src/theme/MDXComponents/Table 的包装)：
+  //   - 默认折叠：紧凑、单元格不换行；宽表在容器内横向滚动。
+  //   - hover 表格时右上角出现“展开”按钮(仅显示按钮，不改变表格布局，故鼠标移动不会跳动)。
+  //   - 点击“展开”后整表占满宽度并换行，右侧列无需滚动即可一览；点击“恢复”回到折叠态。
+  // 字号与正文一致(font-size:1em)，表头浅底强化分组。
+  .yakdoc-table {
+    position: relative;
+    margin: 0 0 0.9rem;
+  }
+  .yakdoc-table__scroll {
+    overflow-x: auto;
+  }
+  table {
+    margin-bottom: 0; // 外边距交给 .yakdoc-table 包装层
+    font-size: 1em;
+    line-height: 1.45;
+  }
+  // 折叠态：表格取自然宽度(至少铺满容器)，单元格不换行，超宽则横向滚动
+  .yakdoc-table__scroll > table {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+  }
+  table th,
+  table td {
+    padding: 0.3rem 0.6rem;
+    white-space: nowrap;
+  }
+  table thead th {
+    background: var(--ifm-table-head-background, #f5f6f8);
+  }
+
+  // 展开态：占满宽度并换行，右侧列不再需要滚动
+  .yakdoc-table--expanded .yakdoc-table__scroll {
+    overflow-x: visible;
+  }
+  .yakdoc-table--expanded .yakdoc-table__scroll > table {
+    width: 100%;
+    table-layout: auto;
+  }
+  .yakdoc-table--expanded table th,
+  .yakdoc-table--expanded table td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  // “展开/恢复”按钮：默认隐藏，hover 表格或已展开时显示；浮在右上角，绝对定位不影响布局。
+  .yakdoc-table__toggle {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    z-index: 3;
+    padding: 1px 12px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #fff;
+    background: var(--base-theme-color);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.15s ease, filter 0.15s ease;
+  }
+  .yakdoc-table:hover .yakdoc-table__toggle,
+  .yakdoc-table--expanded .yakdoc-table__toggle {
+    opacity: 1;
+  }
+  .yakdoc-table__toggle:hover {
+    filter: brightness(1.08);
+  }
+
+  // 标题锚点(铆点)：默认隐藏，hover 标题时以品牌橙色显示 #，方便跳转/复制章节链接。
+  .hash-link {
+    opacity: 0;
+    padding-left: 0.3rem;
+    transition: opacity 0.15s ease;
+  }
+  *:hover > .hash-link,
+  .hash-link:focus {
+    opacity: 1;
+    color: var(--base-theme-color);
   }
 }
 
