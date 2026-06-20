@@ -1,3 +1,5 @@
+const remarkSanitizeAutolinks = require("./scripts/remark-sanitize-autolinks");
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
     i18n: {
@@ -261,6 +263,11 @@ module.exports = {
                     sidebarCollapsed: false,
                     // Please change this to your repo.
                     editUrl: "https://github.com/yaklang/",
+                    // 自动生成的 API 文档含裸 URL, 会被 gfm autolink 误并入非法 URL 导致
+                    // MDX 构建崩溃; 该插件把非法 link 节点降级为纯文本以保证构建稳定。
+                    // 必须在 Docusaurus 默认 remark 插件(含会崩溃的 transformLinks)之前执行,
+                    // 此时 gfm 已在解析阶段生成 link 节点, 可被安全降级。
+                    beforeDefaultRemarkPlugins: [remarkSanitizeAutolinks],
                 },
                 blog: {
                     path: "blog",
