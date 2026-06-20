@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">amap | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/amap"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="amap | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/amap"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/amap" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/amap" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/amap" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"amap","item":"https://yaklang.com/docs/api/amap"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.dd227a5c.js" defer="defer"></script>
-<script src="/assets/js/main.51d11d07.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7bd4f4a4.js" defer="defer"></script>
+<script src="/assets/js/main.d9c6723e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -118,11 +118,34 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#getbicyclingplan" class="">amap.GetBicyclingPlan</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getdistance" class="">amap.GetDistance</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getdrivingplan" class="">amap.GetDrivingPlan</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getgeocode" class="">amap.GetGeocode</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getiplocation" class="">amap.GetIpLocation</a></td><td style="text-align:left">IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation） 参数: - ip: 待定位的 IP 地址，为空时定位请求方 IP - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - ...</td></tr><tr><td style="text-align:left"><a href="#getnearbypoi" class="">amap.GetNearbyPOI</a></td><td style="text-align:left">SearchNearbyPOI 基于坐标的周边兴趣点搜索（导出名为 amap.GetNearbyPOI） 参数: - location: 中心点坐标（如 &quot;116.481,39.990&quot;） - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 AP...</td></tr><tr><td style="text-align:left"><a href="#getpoi" class="">amap.GetPOI</a></td><td style="text-align:left">SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI） 参数: - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.city、amap.page、amap.pageSize 返回值: ...</td></tr><tr><td style="text-align:left"><a href="#getpoidetail" class="">amap.GetPOIDetail</a></td><td style="text-align:left">GetPOIDetail 根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail） 参数: - poiID: 兴趣点 ID - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - POI 详情结果 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#getreversegeocode" class="">amap.GetReverseGeocode</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#gettransitplan" class="">amap.GetTransitPlan</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getwalkingplan" class="">amap.GetWalkingPlan</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#getweather" class="">amap.GetWeather</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#apikey" class="">amap.apiKey</a></td><td style="text-align:left">WithApiKey 设置高德开放平台 API Key（导出名为 amap.apiKey） 参数: - apiKey: 高德开放平台申请的 API Key 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#baseurl" class="">amap.baseURL</a></td><td style="text-align:left">WithBaseURL 设置高德 API 的基础 URL（导出名为 amap.baseURL） 参数: - baseURL: API 基础地址 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#city" class="">amap.city</a></td><td style="text-align:left">WithCity 设置请求关联的城市（导出名为 amap.city） 参数: - city: 城市名或 citycode 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#extensions" class="">amap.extensions</a></td><td style="text-align:left">WithExtensions 设置返回结果的详细程度（base 或 all，导出名为 amap.extensions） 参数: - extensions: 取值 base 或 all 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#geocodefilter" class="">amap.geocodeFilter</a></td><td style="text-align:left">WithGeocodeFilter 设置地理编码结果过滤器，用于从多个候选中选出一个（导出名为 amap.geocodeFilter） 参数: - filter: 过滤回调，输入候选地理编码结果，返回选中的结果 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#page" class="">amap.page</a></td><td style="text-align:left">WithPage 设置分页结果的页码（导出名为 amap.page） 参数: - page: 页码（从 1 开始） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#pagesize" class="">amap.pageSize</a></td><td style="text-align:left">WithPageSize 设置分页结果的每页数量（导出名为 amap.pageSize） 参数: - pageSize: 每页数量 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#pocopts" class="">amap.pocOpts</a></td><td style="text-align:left">WithLowhttpOptions 设置高德 API 客户端底层 HTTP 请求选项（导出名为 amap.pocOpts） 参数: - opts: 零个到多个 poc 请求选项函数 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#radius" class="">amap.radius</a></td><td style="text-align:left">WithRadius 设置周边搜索的半径（导出名为 amap.radius） 参数: - radius: 搜索半径（米） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#sortrule" class="">amap.sortRule</a></td><td style="text-align:left">WithSortRule 设置搜索结果的排序规则（导出名为 amap.sortRule） 参数: - sortRule: 排序规则，如 distance/weight 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">amap.timeout</a></td><td style="text-align:left">WithTimeout 设置 HTTP 请求超时时间（导出名为 amap.timeout） 参数: - timeout: 超时时间（time.Duration） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#type" class="">amap.type</a></td><td style="text-align:left">WithType 设置类型参数（如距离计算的类型，导出名为 amap.type） 参数: - typ: 类型参数 返回值: - 高德 API 配置可选项</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#getbicyclingplan" class="">amap.GetBicyclingPlan</a></td><td style="text-align:left">BicyclingPlan 计算两地之间的骑行路径规划（导出名为 amap.GetBicyclingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 骑行路径规...</td></tr><tr><td style="text-align:left"><a href="#getdistance" class="">amap.GetDistance</a></td><td style="text-align:left">Distance 计算两地之间的距离（导出名为 amap.GetDistance） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#getdrivingplan" class="">amap.GetDrivingPlan</a></td><td style="text-align:left">DrivingPlan 计算两地之间的驾车路径规划（导出名为 amap.GetDrivingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 驾车路径规划结果 ...</td></tr><tr><td style="text-align:left"><a href="#getgeocode" class="">amap.GetGeocode</a></td><td style="text-align:left">Geocode 将地址转换为经纬度坐标（地理编码，导出名为 amap.GetGeocode） 参数: - address: 结构化地址描述 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 地理编码结果列表 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#getiplocation" class="">amap.GetIpLocation</a></td><td style="text-align:left">IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation） 参数: - ip: 待定位的 IP 地址，为空时定位请求方 IP - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - ...</td></tr><tr><td style="text-align:left"><a href="#getnearbypoi" class="">amap.GetNearbyPOI</a></td><td style="text-align:left">SearchNearbyPOI 基于坐标的周边兴趣点搜索（导出名为 amap.GetNearbyPOI） 参数: - location: 中心点坐标（如 &quot;116.481,39.990&quot;） - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 AP...</td></tr><tr><td style="text-align:left"><a href="#getpoi" class="">amap.GetPOI</a></td><td style="text-align:left">SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI） 参数: - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.city、amap.page、amap.pageSize 返回值: ...</td></tr><tr><td style="text-align:left"><a href="#getpoidetail" class="">amap.GetPOIDetail</a></td><td style="text-align:left">GetPOIDetail 根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail） 参数: - poiID: 兴趣点 ID - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - POI 详情结果 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#getreversegeocode" class="">amap.GetReverseGeocode</a></td><td style="text-align:left">ReverseGeocode 将经纬度坐标转换为结构化地址（逆地理编码，导出名为 amap.GetReverseGeocode） 参数: - longitude: 经度 - latitude: 纬度 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - ...</td></tr><tr><td style="text-align:left"><a href="#gettransitplan" class="">amap.GetTransitPlan</a></td><td style="text-align:left">TransitPlan 计算两地之间的公交路径规划（导出名为 amap.GetTransitPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.ci...</td></tr><tr><td style="text-align:left"><a href="#getwalkingplan" class="">amap.GetWalkingPlan</a></td><td style="text-align:left">WalkingPlan 计算两地之间的步行路径规划（导出名为 amap.GetWalkingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 步行路径规划结果 ...</td></tr><tr><td style="text-align:left"><a href="#getweather" class="">amap.GetWeather</a></td><td style="text-align:left">GetWeather 查询指定城市的天气信息（导出名为 amap.GetWeather） 参数: - cityCode: 城市编码（adcode） - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预...</td></tr><tr><td style="text-align:left"><a href="#apikey" class="">amap.apiKey</a></td><td style="text-align:left">WithApiKey 设置高德开放平台 API Key（导出名为 amap.apiKey） 参数: - apiKey: 高德开放平台申请的 API Key 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#baseurl" class="">amap.baseURL</a></td><td style="text-align:left">WithBaseURL 设置高德 API 的基础 URL（导出名为 amap.baseURL） 参数: - baseURL: API 基础地址 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#city" class="">amap.city</a></td><td style="text-align:left">WithCity 设置请求关联的城市（导出名为 amap.city） 参数: - city: 城市名或 citycode 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#extensions" class="">amap.extensions</a></td><td style="text-align:left">WithExtensions 设置返回结果的详细程度（base 或 all，导出名为 amap.extensions） 参数: - extensions: 取值 base 或 all 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#geocodefilter" class="">amap.geocodeFilter</a></td><td style="text-align:left">WithGeocodeFilter 设置地理编码结果过滤器，用于从多个候选中选出一个（导出名为 amap.geocodeFilter） 参数: - filter: 过滤回调，输入候选地理编码结果，返回选中的结果 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#page" class="">amap.page</a></td><td style="text-align:left">WithPage 设置分页结果的页码（导出名为 amap.page） 参数: - page: 页码（从 1 开始） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#pagesize" class="">amap.pageSize</a></td><td style="text-align:left">WithPageSize 设置分页结果的每页数量（导出名为 amap.pageSize） 参数: - pageSize: 每页数量 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#pocopts" class="">amap.pocOpts</a></td><td style="text-align:left">WithLowhttpOptions 设置高德 API 客户端底层 HTTP 请求选项（导出名为 amap.pocOpts） 参数: - opts: 零个到多个 poc 请求选项函数 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#radius" class="">amap.radius</a></td><td style="text-align:left">WithRadius 设置周边搜索的半径（导出名为 amap.radius） 参数: - radius: 搜索半径（米） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#sortrule" class="">amap.sortRule</a></td><td style="text-align:left">WithSortRule 设置搜索结果的排序规则（导出名为 amap.sortRule） 参数: - sortRule: 排序规则，如 distance/weight 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">amap.timeout</a></td><td style="text-align:left">WithTimeout 设置 HTTP 请求超时时间（导出名为 amap.timeout） 参数: - timeout: 超时时间（time.Duration） 返回值: - 高德 API 配置可选项</td></tr><tr><td style="text-align:left"><a href="#type" class="">amap.type</a></td><td style="text-align:left">WithType 设置类型参数（如距离计算的类型，导出名为 amap.type） 参数: - typ: 类型参数 返回值: - 高德 API 配置可选项</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getbicyclingplan">GetBicyclingPlan<a href="#getbicyclingplan" class="hash-link" aria-label="GetBicyclingPlan的直接链接" title="GetBicyclingPlan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>BicyclingPlan 计算两地之间的骑行路径规划（导出名为 amap.GetBicyclingPlan）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>origin: 起点地址</p>
+</li>
+<li class="">
+<p>destination: 终点地址</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>骑行路径规划结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plan </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetBicyclingPlan</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;天安门&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">plan</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义">定义<a href="#定义" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetBicyclingPlan(origin string, destination string, options ...AmapConfigOption) (*BicyclingResult, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数">参数<a href="#参数" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -151,7 +174,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起点地址</td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">终点地址</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -173,10 +196,33 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BicyclingResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BicyclingResult</code></td><td style="text-align:left">骑行路径规划结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getdistance">GetDistance<a href="#getdistance" class="hash-link" aria-label="GetDistance的直接链接" title="GetDistance的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Distance 计算两地之间的距离（导出名为 amap.GetDistance）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>origin: 起点地址</p>
+</li>
+<li class="">
+<p>destination: 终点地址</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>距离计算结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dist </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetDistance</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;北京西站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">dist</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-1">定义<a href="#定义-1" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetDistance(origin string, destination string, options ...AmapConfigOption) (*DistanceResult, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-1">参数<a href="#参数-1" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -205,7 +251,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起点地址</td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">终点地址</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -227,10 +273,33 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*DistanceResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*DistanceResult</code></td><td style="text-align:left">距离计算结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getdrivingplan">GetDrivingPlan<a href="#getdrivingplan" class="hash-link" aria-label="GetDrivingPlan的直接链接" title="GetDrivingPlan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>DrivingPlan 计算两地之间的驾车路径规划（导出名为 amap.GetDrivingPlan）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>origin: 起点地址</p>
+</li>
+<li class="">
+<p>destination: 终点地址</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>驾车路径规划结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plan </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetDrivingPlan</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;北京西站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">plan</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-2">定义<a href="#定义-2" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetDrivingPlan(origin string, destination string, options ...AmapConfigOption) (*DirectionResponse, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-2">参数<a href="#参数-2" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -259,7 +328,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起点地址</td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">终点地址</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -281,10 +350,30 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*DirectionResponse</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*DirectionResponse</code></td><td style="text-align:left">驾车路径规划结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getgeocode">GetGeocode<a href="#getgeocode" class="hash-link" aria-label="GetGeocode的直接链接" title="GetGeocode的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Geocode 将地址转换为经纬度坐标（地理编码，导出名为 amap.GetGeocode）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>address: 结构化地址描述</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>地理编码结果列表</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">results </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetGeocode</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京市朝阳区阜通东大街6号&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">results</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-3">定义<a href="#定义-3" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetGeocode(address string, options ...AmapConfigOption) ([]*GeocodeResult, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-3">参数<a href="#参数-3" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -308,7 +397,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">address</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">address</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结构化地址描述</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -330,7 +419,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*GeocodeResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*GeocodeResult</code></td><td style="text-align:left">地理编码结果列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getiplocation">GetIpLocation<a href="#getiplocation" class="hash-link" aria-label="GetIpLocation的直接链接" title="GetIpLocation的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation）</p>
@@ -617,7 +706,30 @@
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*POIResultEx</code></td><td style="text-align:left">POI 详情结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getreversegeocode">GetReverseGeocode<a href="#getreversegeocode" class="hash-link" aria-label="GetReverseGeocode的直接链接" title="GetReverseGeocode的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>ReverseGeocode 将经纬度坐标转换为结构化地址（逆地理编码，导出名为 amap.GetReverseGeocode）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>longitude: 经度</p>
+</li>
+<li class="">
+<p>latitude: 纬度</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>逆地理编码结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetReverseGeocode</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">116.481488</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">39.990464</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-8">定义<a href="#定义-8" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetReverseGeocode(longitude float64, latitude float64, options ...AmapConfigOption) (*RegeoCodeResult, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-8">参数<a href="#参数-8" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -646,7 +758,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">longitude</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">latitude</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">longitude</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">经度</td></tr><tr><td style="text-align:left">latitude</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">纬度</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -668,10 +780,33 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RegeoCodeResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RegeoCodeResult</code></td><td style="text-align:left">逆地理编码结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="gettransitplan">GetTransitPlan<a href="#gettransitplan" class="hash-link" aria-label="GetTransitPlan的直接链接" title="GetTransitPlan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>TransitPlan 计算两地之间的公交路径规划（导出名为 amap.GetTransitPlan）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>origin: 起点地址</p>
+</li>
+<li class="">
+<p>destination: 终点地址</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.city</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>公交路径规划结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plan </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetTransitPlan</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;北京西站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">city</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">plan</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-9">定义<a href="#定义-9" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetTransitPlan(origin string, destination string, options ...AmapConfigOption) (*TransitResponse, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-9">参数<a href="#参数-9" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -700,7 +835,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起点地址</td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">终点地址</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.city</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -722,10 +857,33 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*TransitResponse</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*TransitResponse</code></td><td style="text-align:left">公交路径规划结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getwalkingplan">GetWalkingPlan<a href="#getwalkingplan" class="hash-link" aria-label="GetWalkingPlan的直接链接" title="GetWalkingPlan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>WalkingPlan 计算两地之间的步行路径规划（导出名为 amap.GetWalkingPlan）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>origin: 起点地址</p>
+</li>
+<li class="">
+<p>destination: 终点地址</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>步行路径规划结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plan </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetWalkingPlan</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;北京站&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;天安门&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">plan</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-10">定义<a href="#定义-10" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetWalkingPlan(origin string, destination string, options ...AmapConfigOption) (*V5WalkingResponse, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-10">参数<a href="#参数-10" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -754,7 +912,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起点地址</td></tr><tr><td style="text-align:left">destination</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">终点地址</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -776,10 +934,30 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*V5WalkingResponse</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*V5WalkingResponse</code></td><td style="text-align:left">步行路径规划结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getweather">GetWeather<a href="#getweather" class="hash-link" aria-label="GetWeather的直接链接" title="GetWeather的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>GetWeather 查询指定城市的天气信息（导出名为 amap.GetWeather）</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>cityCode: 城市编码（adcode）</p>
+</li>
+<li class="">
+<p>options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预报</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>天气查询结果</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要有效的高德 API Key（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">weather </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">GetWeather</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;110000&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> amap</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">apiKey</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;your-key&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">weather</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-11">定义<a href="#定义-11" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>GetWeather(cityCode string, options ...AmapConfigOption) (*WeatherResponse, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-11">参数<a href="#参数-11" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -803,7 +981,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cityCode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cityCode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">城市编码（adcode）</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...AmapConfigOption</code></td><td style="text-align:left">可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预报</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -825,7 +1003,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*WeatherResponse</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*WeatherResponse</code></td><td style="text-align:left">天气查询结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="apikey">apiKey<a href="#apikey" class="hash-link" aria-label="apiKey的直接链接" title="apiKey的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithApiKey 设置高德开放平台 API Key（导出名为 amap.apiKey）</p>

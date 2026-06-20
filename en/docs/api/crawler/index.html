@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">crawler | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/crawler"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="crawler | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/crawler"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/crawler" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/crawler" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/crawler" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"crawler","item":"https://yaklang.com/en/docs/api/crawler"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.d207aed9.js" defer="defer"></script>
-<script src="/en/assets/js/main.a834087a.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.36acce5d.js" defer="defer"></script>
+<script src="/en/assets/js/main.7fe3b1cb.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -186,11 +186,32 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#requestsfromflow" class="">crawler.RequestsFromFlow</a></td><td style="text-align:left">RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误</td></tr><tr><td style="text-align:left"><a href="#start" class="">crawler.Start</a></td><td style="text-align:left">Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为 返回一个Req结构体引用管道与错误</td></tr><tr><td style="text-align:left"><a href="#aijsaioptions" class="">crawler.aiJSAIOptions</a></td><td style="text-align:left">WithAIJS_AIOptions forwards aicommon.ConfigOption (model, key, ...) to LiteForge.</td></tr><tr><td style="text-align:left"><a href="#aijschunkbytes" class="">crawler.aiJSChunkBytes</a></td><td style="text-align:left">WithAIJS_ChunkBytes overrides the target byte size of each AI call slice.</td></tr><tr><td style="text-align:left"><a href="#aijsconcurrency" class="">crawler.aiJSConcurrency</a></td><td style="text-align:left">WithAIJS_Concurrency caps parallel AI calls.</td></tr><tr><td style="text-align:left"><a href="#aijscontextbytes" class="">crawler.aiJSContextBytes</a></td><td style="text-align:left">WithAIJS_ContextBytes overrides the half-window size around each regex hit.</td></tr><tr><td style="text-align:left"><a href="#aijsextract" class="">crawler.aiJSExtract</a></td><td style="text-align:left">aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道， 与现有 SSA / 回调通道并行（不互相影响）。 该通道按以下三阶段工作： 1. 宽松正则预筛选可疑窗口（URL / 路径风格） 2. aireducer 按字节切片，DumpWithOverlap ...</td></tr><tr><td style="text-align:left"><a href="#aijsmaxtokens" class="">crawler.aiJSMaxTokens</a></td><td style="text-align:left">WithAIJS_MaxTokens overrides the per-call token budget.</td></tr><tr><td style="text-align:left"><a href="#aijsoverlapbytes" class="">crawler.aiJSOverlapBytes</a></td><td style="text-align:left">WithAIJS_OverlapBytes overrides the cross-chunk fold size.</td></tr><tr><td style="text-align:left"><a href="#aijsskipbelow" class="">crawler.aiJSSkipBelow</a></td><td style="text-align:left">WithAIJS_SkipBelowBytes sets the candidate-stream size below which the AI step is skipped and raw hits are emitted directly.</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputbytes" class="">crawler.aiJSSmallInputBytes</a></td><td style="text-align:left">WithAIJS_SmallInputBytes sets the raw input byte threshold for the direct-feed fast path. Set to 0 to disable.</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputtokens" class="">crawler.aiJSSmallInputTokens</a></td><td style="text-align:left">WithAIJS_SmallInputTokens sets the raw input token threshold for the direct-feed fast path. Set to 0 to disable.</td></tr><tr><td style="text-align:left"><a href="#autologin" class="">crawler.autoLogin</a></td><td style="text-align:left">autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单</td></tr><tr><td style="text-align:left"><a href="#basicauth" class="">crawler.basicAuth</a></td><td style="text-align:left">basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码</td></tr><tr><td style="text-align:left"><a href="#bodysize" class="">crawler.bodySize</a></td><td style="text-align:left">bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">crawler.concurrent</a></td><td style="text-align:left">concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20</td></tr><tr><td style="text-align:left"><a href="#connecttimeout" class="">crawler.connectTimeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</td></tr><tr><td style="text-align:left"><a href="#context" class="">crawler.context</a></td><td style="text-align:left">context 设置爬虫使用的 context，用于取消或超时控制 在 yak 中通过 crawler.context 调用；cancel 时爬虫会停止抓取 参数: - ctx: 上下文对象 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">crawler.cookie</a></td><td style="text-align:left">cookie 是一个选项函数，用于指定爬虫时的cookie</td></tr><tr><td style="text-align:left"><a href="#disallowsuffix" class="">crawler.disallowSuffix</a></td><td style="text-align:left">disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单</td></tr><tr><td style="text-align:left"><a href="#domainexclude" class="">crawler.domainExclude</a></td><td style="text-align:left">domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单 domain允许使用glob语法，例如*.example.com</td></tr><tr><td style="text-align:left"><a href="#domaininclude" class="">crawler.domainInclude</a></td><td style="text-align:left">domainInclude 是一个选项函数，用于指定爬虫时的域名白名单 domain允许使用glob语法，例如*.example.com</td></tr><tr><td style="text-align:left"><a href="#forbiddenfromparent" class="">crawler.forbiddenFromParent</a></td><td style="text-align:left">forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false 对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取</td></tr><tr><td style="text-align:left"><a href="#header" class="">crawler.header</a></td><td style="text-align:left">header 是一个选项函数，用于指定爬虫时的请求头</td></tr><tr><td style="text-align:left"><a href="#httpstohttpfallback" class="">crawler.httpsToHttpFallback</a></td><td style="text-align:left">httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试 在 yak 中通过 crawler.httpsToHttpFallback 调用 参数: - enable: 是否启用 HTTPS 到 HTTP 的回退 返回值: - 一个 crawler.Star...</td></tr><tr><td style="text-align:left"><a href="#jsparser" class="">crawler.jsParser</a></td><td style="text-align:left">jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 填写该选项默认开启，也可以传入false强制关闭。</td></tr><tr><td style="text-align:left"><a href="#maxdepth" class="">crawler.maxDepth</a></td><td style="text-align:left">maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5</td></tr><tr><td style="text-align:left"><a href="#maxredirect" class="">crawler.maxRedirect</a></td><td style="text-align:left">maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5</td></tr><tr><td style="text-align:left"><a href="#maxrequest" class="">crawler.maxRequest</a></td><td style="text-align:left">maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000</td></tr><tr><td style="text-align:left"><a href="#maxretry" class="">crawler.maxRetry</a></td><td style="text-align:left">maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3</td></tr><tr><td style="text-align:left"><a href="#maxurls" class="">crawler.maxUrls</a></td><td style="text-align:left">maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000</td></tr><tr><td style="text-align:left"><a href="#onurlfound" class="">crawler.onUrlFound</a></td><td style="text-align:left">onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL）</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">crawler.proxy</a></td><td style="text-align:left">proxy 是一个选项函数，用于指定爬虫时的代理</td></tr><tr><td style="text-align:left"><a href="#responsetimeout" class="">crawler.responseTimeout</a></td><td style="text-align:left">responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s 在 yak 中通过 crawler.responseTimeout 调用 参数: - f: 响应超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">crawler.timeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</td></tr><tr><td style="text-align:left"><a href="#ua" class="">crawler.ua</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent</td></tr><tr><td style="text-align:left"><a href="#urlextractor" class="">crawler.urlExtractor</a></td><td style="text-align:left">urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则</td></tr><tr><td style="text-align:left"><a href="#urlregexpexclude" class="">crawler.urlRegexpExclude</a></td><td style="text-align:left">urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单</td></tr><tr><td style="text-align:left"><a href="#urlregexpinclude" class="">crawler.urlRegexpInclude</a></td><td style="text-align:left">urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">crawler.userAgent</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent</td></tr><tr><td style="text-align:left"><a href="#verifycertificate" class="">crawler.verifyCertificate</a></td><td style="text-align:left">verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书 在 yak 中通过 crawler.verifyCertificate 调用 参数: - b: 是否校验证书，false 表示忽略证书错误 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#requestsfromflow" class="">crawler.RequestsFromFlow</a></td><td style="text-align:left">RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误 参数: - isHttps: 该流量是否为 HTTPS - reqBytes: 请求原始报文 - rspBytes: 响应原始报文 返回值: - [][]byte: 爬取到的所有可能请求的...</td></tr><tr><td style="text-align:left"><a href="#start" class="">crawler.Start</a></td><td style="text-align:left">Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为 返回一个Req结构体引用管道与错误 参数: - url: 起始爬取的 URL - opt: 零个或多个爬虫配置选项函数 返回值: - 一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求 - error: 启...</td></tr><tr><td style="text-align:left"><a href="#aijsaioptions" class="">crawler.aiJSAIOptions</a></td><td style="text-align:left">aiJSAIOptions 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge 参数: - opts: 一个或多个 AI 配置选项，例如模型名称、API 密钥等 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijschunkbytes" class="">crawler.aiJSChunkBytes</a></td><td style="text-align:left">aiJSChunkBytes 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小 参数: - n: 每个切片的目标字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsconcurrency" class="">crawler.aiJSConcurrency</a></td><td style="text-align:left">aiJSConcurrency 设置 AI JS 抽取时并行 AI 调用的最大并发数 参数: - n: 并行 AI 调用的最大并发数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijscontextbytes" class="">crawler.aiJSContextBytes</a></td><td style="text-align:left">aiJSContextBytes 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数 参数: - n: 命中点周围上下文窗口的半宽字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsextract" class="">crawler.aiJSExtract</a></td><td style="text-align:left">aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道， 与现有 SSA / 回调通道并行（不互相影响）。 该通道按以下三阶段工作： 1. 宽松正则预筛选可疑窗口（URL / 路径风格） 2. aireducer 按字节切片，DumpWithOverlap ...</td></tr><tr><td style="text-align:left"><a href="#aijsmaxtokens" class="">crawler.aiJSMaxTokens</a></td><td style="text-align:left">aiJSMaxTokens 设置 AI JS 抽取时每次调用的 token 预算上限 参数: - n: 每次 AI 调用的最大 token 数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsoverlapbytes" class="">crawler.aiJSOverlapBytes</a></td><td style="text-align:left">aiJSOverlapBytes 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小 参数: - n: 跨切片重叠的字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsskipbelow" class="">crawler.aiJSSkipBelow</a></td><td style="text-align:left">aiJSSkipBelow 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果 参数: - n: 跳过 AI 步骤的候选数据流字节阈值 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputbytes" class="">crawler.aiJSSmallInputBytes</a></td><td style="text-align:left">aiJSSmallInputBytes 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入字节阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputtokens" class="">crawler.aiJSSmallInputTokens</a></td><td style="text-align:left">aiJSSmallInputTokens 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入 token 阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#autologin" class="">crawler.autoLogin</a></td><td style="text-align:left">autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单 参数: - username: 登录用户名 - password: 登录密码 - flags: 可选的额外标志参数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#basicauth" class="">crawler.basicAuth</a></td><td style="text-align:left">basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码 参数: - user: 基础认证用户名 - pass: 基础认证密码 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#bodysize" class="">crawler.bodySize</a></td><td style="text-align:left">bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB 参数: - size: 最大响应体大小，单位为字节 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">crawler.concurrent</a></td><td style="text-align:left">concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20 参数: - concurrent: 并发数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#connecttimeout" class="">crawler.connectTimeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">crawler.context</a></td><td style="text-align:left">context 设置爬虫使用的 context，用于取消或超时控制 在 yak 中通过 crawler.context 调用；cancel 时爬虫会停止抓取 参数: - ctx: 上下文对象 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">crawler.cookie</a></td><td style="text-align:left">cookie 是一个选项函数，用于指定爬虫时的cookie 参数: - k: cookie 名称 - v: cookie 值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disallowsuffix" class="">crawler.disallowSuffix</a></td><td style="text-align:left">disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单 参数: - d: 后缀黑名单列表，命中的后缀将不被爬取 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domainexclude" class="">crawler.domainExclude</a></td><td style="text-align:left">domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 禁止的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domaininclude" class="">crawler.domainInclude</a></td><td style="text-align:left">domainInclude 是一个选项函数，用于指定爬虫时的域名白名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 允许的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#forbiddenfromparent" class="">crawler.forbiddenFromParent</a></td><td style="text-align:left">forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false 对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取 参数: - b: 是否禁止从根路径发起请求 返回值: - 一个 crawler.S...</td></tr><tr><td style="text-align:left"><a href="#header" class="">crawler.header</a></td><td style="text-align:left">header 是一个选项函数，用于指定爬虫时的请求头 参数: - k: 请求头名称 - v: 请求头值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#httpstohttpfallback" class="">crawler.httpsToHttpFallback</a></td><td style="text-align:left">httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试 在 yak 中通过 crawler.httpsToHttpFallback 调用 参数: - enable: 是否启用 HTTPS 到 HTTP 的回退 返回值: - 一个 crawler.Star...</td></tr><tr><td style="text-align:left"><a href="#jsparser" class="">crawler.jsParser</a></td><td style="text-align:left">jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 填写该选项默认开启，也可以传入false强制关闭。 参数: - enable: 可选，是否启用 JS 解析，缺省时默认开启 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxdepth" class="">crawler.maxDepth</a></td><td style="text-align:left">maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5 参数: - depth: 最大爬取深度 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxredirect" class="">crawler.maxRedirect</a></td><td style="text-align:left">maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5 参数: - maxRedirectTimes: 最大重定向次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxrequest" class="">crawler.maxRequest</a></td><td style="text-align:left">maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000 参数: - limit: 最大请求数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxretry" class="">crawler.maxRetry</a></td><td style="text-align:left">maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3 参数: - limit: 最大重试次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxurls" class="">crawler.maxUrls</a></td><td style="text-align:left">maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000 参数: - limit: 最大链接数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onurlfound" class="">crawler.onUrlFound</a></td><td style="text-align:left">onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL） 参数: - f: 发现新 URL 时触发的回调函数，入参为发现的 URL 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">crawler.proxy</a></td><td style="text-align:left">proxy 是一个选项函数，用于指定爬虫时的代理 参数: - proxies: 一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a> 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#responsetimeout" class="">crawler.responseTimeout</a></td><td style="text-align:left">responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s 在 yak 中通过 crawler.responseTimeout 调用 参数: - f: 响应超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">crawler.timeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#ua" class="">crawler.ua</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlextractor" class="">crawler.urlExtractor</a></td><td style="text-align:left">urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则 参数: - f: 自定义链接提取函数，入参为请求对象，返回提取到的链接列表 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpexclude" class="">crawler.urlRegexpExclude</a></td><td style="text-align:left">urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单 参数: - re: URL 黑名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpinclude" class="">crawler.urlRegexpInclude</a></td><td style="text-align:left">urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单 参数: - re: URL 白名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">crawler.userAgent</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#verifycertificate" class="">crawler.verifyCertificate</a></td><td style="text-align:left">verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书 在 yak 中通过 crawler.verifyCertificate 调用 参数: - b: 是否校验证书，false 表示忽略证书错误 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requestsfromflow">RequestsFromFlow<a href="#requestsfromflow" class="hash-link" aria-label="Direct link to RequestsFromFlow" title="Direct link to RequestsFromFlow" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>isHttps: 该流量是否为 HTTPS</p>
+</li>
+<li class="">
+<p>reqBytes: 请求原始报文</p>
+</li>
+<li class="">
+<p>rspBytes: 响应原始报文</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>[][]byte: 爬取到的所有可能请求的原始报文列表</p>
+</li>
+<li class="">
+<p>error: 处理失败时返回错误</p>
+</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">reqs</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> err </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">RequestsFromFlow</span><span class="token punctuation" style="color:#393A34">(</span><span class="token boolean" style="color:#36acaa">false</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> reqBytes</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> rspBytes</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义">定义<a href="#定义" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -221,7 +242,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">isHttps</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">reqBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">rspBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">isHttps</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">该流量是否为 HTTPS</td></tr><tr><td style="text-align:left">reqBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">请求原始报文</td></tr><tr><td style="text-align:left">rspBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">响应原始报文</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -243,11 +264,29 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]byte</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]byte</code></td><td style="text-align:left">[][]byte: 爬取到的所有可能请求的原始报文列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">处理失败时返回错误</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="start">Start<a href="#start" class="hash-link" aria-label="Direct link to Start" title="Direct link to Start" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为</p>
 <p>返回一个Req结构体引用管道与错误</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>url: 起始爬取的 URL</p>
+</li>
+<li class="">
+<p>opt: 零个或多个爬虫配置选项函数</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求</p>
+</li>
+<li class="">
+<p>error: 启动失败时返回错误</p>
+</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">ch</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> err </span><span class="token operator" style="color:#393A34">:=</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://www.baidu.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">concurrent</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">for</span><span class="token plain"> req </span><span class="token keyword" style="color:#00009f">in</span><span class="token plain"> ch </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">req</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Response</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-1">定义<a href="#定义-1" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -273,7 +312,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始爬取的 URL</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOpt</code></td><td style="text-align:left">零个或多个爬虫配置选项函数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -295,10 +334,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *Req</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *Req</code></td><td style="text-align:left">一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsaioptions">aiJSAIOptions<a href="#aijsaioptions" class="hash-link" aria-label="Direct link to aiJSAIOptions" title="Direct link to aiJSAIOptions" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_AIOptions forwards aicommon.ConfigOption (model, key, ...) to LiteForge.</p>
+<p>aiJSAIOptions 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge</p>
+<p>参数:</p>
+<ul>
+<li class="">opts: 一个或多个 AI 配置选项，例如模型名称、API 密钥等</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSAIOptions</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">ai</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">model</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;gpt-4&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-2">定义<a href="#定义-2" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSAIOptions(opts ...aicommon.ConfigOption) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-2">参数<a href="#参数-2" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -317,7 +366,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个 AI 配置选项，例如模型名称、API 密钥等</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -334,10 +383,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijschunkbytes">aiJSChunkBytes<a href="#aijschunkbytes" class="hash-link" aria-label="Direct link to aiJSChunkBytes" title="Direct link to aiJSChunkBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_ChunkBytes overrides the target byte size of each AI call slice.</p>
+<p>aiJSChunkBytes 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 每个切片的目标字节数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSChunkBytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">8192</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-3">定义<a href="#定义-3" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSChunkBytes(n int64) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-3">参数<a href="#参数-3" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -356,7 +415,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">每个切片的目标字节数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -373,10 +432,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsconcurrency">aiJSConcurrency<a href="#aijsconcurrency" class="hash-link" aria-label="Direct link to aiJSConcurrency" title="Direct link to aiJSConcurrency" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_Concurrency caps parallel AI calls.</p>
+<p>aiJSConcurrency 设置 AI JS 抽取时并行 AI 调用的最大并发数</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 并行 AI 调用的最大并发数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSConcurrency</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-4">定义<a href="#定义-4" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSConcurrency(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-4">参数<a href="#参数-4" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -395,7 +464,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并行 AI 调用的最大并发数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -412,10 +481,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijscontextbytes">aiJSContextBytes<a href="#aijscontextbytes" class="hash-link" aria-label="Direct link to aiJSContextBytes" title="Direct link to aiJSContextBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_ContextBytes overrides the half-window size around each regex hit.</p>
+<p>aiJSContextBytes 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 命中点周围上下文窗口的半宽字节数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSContextBytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">512</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-5">定义<a href="#定义-5" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSContextBytes(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-5">参数<a href="#参数-5" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -434,7 +513,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">命中点周围上下文窗口的半宽字节数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -451,7 +530,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsextract">aiJSExtract<a href="#aijsextract" class="hash-link" aria-label="Direct link to aiJSExtract" title="Direct link to aiJSExtract" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道，</p>
@@ -468,6 +547,14 @@
 <p>aiforge.LiteForge SpeedPriority 抽取结构化路径列表</p>
 </li>
 </ol>
+<p>参数:</p>
+<ul>
+<li class="">opts: 可选的 AI JS 抽取配置项，例如 crawler.aiJSMaxTokens</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 启用，全部默认值</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSMaxTokens</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">40000</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 调整 token 上限</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-6">定义<a href="#定义-6" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -488,7 +575,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...AIJSExtractOption</code></td><td style="text-align:left">可选的 AI JS 抽取配置项，例如 crawler.aiJSMaxTokens</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -505,10 +592,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsmaxtokens">aiJSMaxTokens<a href="#aijsmaxtokens" class="hash-link" aria-label="Direct link to aiJSMaxTokens" title="Direct link to aiJSMaxTokens" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_MaxTokens overrides the per-call token budget.</p>
+<p>aiJSMaxTokens 设置 AI JS 抽取时每次调用的 token 预算上限</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 每次 AI 调用的最大 token 数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSMaxTokens</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">40000</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-7">定义<a href="#定义-7" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSMaxTokens(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-7">参数<a href="#参数-7" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -527,7 +624,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">每次 AI 调用的最大 token 数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -544,10 +641,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsoverlapbytes">aiJSOverlapBytes<a href="#aijsoverlapbytes" class="hash-link" aria-label="Direct link to aiJSOverlapBytes" title="Direct link to aiJSOverlapBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_OverlapBytes overrides the cross-chunk fold size.</p>
+<p>aiJSOverlapBytes 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 跨切片重叠的字节数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSOverlapBytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">256</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-8">定义<a href="#定义-8" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSOverlapBytes(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-8">参数<a href="#参数-8" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -566,7 +673,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跨切片重叠的字节数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -583,11 +690,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsskipbelow">aiJSSkipBelow<a href="#aijsskipbelow" class="hash-link" aria-label="Direct link to aiJSSkipBelow" title="Direct link to aiJSSkipBelow" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_SkipBelowBytes sets the candidate-stream size below which the AI
-step is skipped and raw hits are emitted directly.</p>
+<p>aiJSSkipBelow 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 跳过 AI 步骤的候选数据流字节阈值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSSkipBelow</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1024</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-9">定义<a href="#定义-9" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSSkipBelow(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-9">参数<a href="#参数-9" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -606,7 +722,7 @@ step is skipped and raw hits are emitted directly.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跳过 AI 步骤的候选数据流字节阈值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -623,11 +739,20 @@ step is skipped and raw hits are emitted directly.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijssmallinputbytes">aiJSSmallInputBytes<a href="#aijssmallinputbytes" class="hash-link" aria-label="Direct link to aiJSSmallInputBytes" title="Direct link to aiJSSmallInputBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_SmallInputBytes sets the raw input byte threshold for the
-direct-feed fast path. Set to 0 to disable.</p>
+<p>aiJSSmallInputBytes 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 直接投喂快速通道的原始输入字节阈值，0 表示禁用</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSSmallInputBytes</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">2048</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-10">定义<a href="#定义-10" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSSmallInputBytes(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-10">参数<a href="#参数-10" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -646,7 +771,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入字节阈值，0 表示禁用</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -663,11 +788,20 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijssmallinputtokens">aiJSSmallInputTokens<a href="#aijssmallinputtokens" class="hash-link" aria-label="Direct link to aiJSSmallInputTokens" title="Direct link to aiJSSmallInputTokens" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>WithAIJS_SmallInputTokens sets the raw input token threshold for the
-direct-feed fast path. Set to 0 to disable.</p>
+<p>aiJSSmallInputTokens 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用</p>
+<p>参数:</p>
+<ul>
+<li class="">n: 直接投喂快速通道的原始输入 token 阈值，0 表示禁用</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSExtract</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">aiJSSmallInputTokens</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">800</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-11">定义<a href="#定义-11" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>aiJSSmallInputTokens(n int) AIJSExtractOption</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-11">参数<a href="#参数-11" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -686,7 +820,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入 token 阈值，0 表示禁用</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -703,10 +837,26 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="autologin">autoLogin<a href="#autologin" class="hash-link" aria-label="Direct link to autoLogin" title="Direct link to autoLogin" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>username: 登录用户名</p>
+</li>
+<li class="">
+<p>password: 登录密码</p>
+</li>
+<li class="">
+<p>flags: 可选的额外标志参数</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">autoLogin</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;admin&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;admin&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-12">定义<a href="#定义-12" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -737,7 +887,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录用户名</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录密码</td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的额外标志参数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -754,10 +904,23 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="basicauth">basicAuth<a href="#basicauth" class="hash-link" aria-label="Direct link to basicAuth" title="Direct link to basicAuth" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>user: 基础认证用户名</p>
+</li>
+<li class="">
+<p>pass: 基础认证密码</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">basicAuth</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;admin&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;admin&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-13">定义<a href="#定义-13" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -783,7 +946,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">pass</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证用户名</td></tr><tr><td style="text-align:left">pass</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证密码</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -800,10 +963,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bodysize">bodySize<a href="#bodysize" class="hash-link" aria-label="Direct link to bodySize" title="Direct link to bodySize" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB</p>
+<p>参数:</p>
+<ul>
+<li class="">size: 最大响应体大小，单位为字节</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">bodySize</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1024</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1024</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-14">定义<a href="#定义-14" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -824,7 +995,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大响应体大小，单位为字节</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -841,10 +1012,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="concurrent">concurrent<a href="#concurrent" class="hash-link" aria-label="Direct link to concurrent" title="Direct link to concurrent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20</p>
+<p>参数:</p>
+<ul>
+<li class="">concurrent: 并发数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">concurrent</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-15">定义<a href="#定义-15" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -865,7 +1044,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">concurrent</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">concurrent</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -882,10 +1061,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="connecttimeout">connectTimeout<a href="#connecttimeout" class="hash-link" aria-label="Direct link to connectTimeout" title="Direct link to connectTimeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</p>
+<p>参数:</p>
+<ul>
+<li class="">f: 连接超时时间，单位为秒</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">connectTimeout</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-16">定义<a href="#定义-16" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -906,7 +1093,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -923,7 +1110,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="Direct link to context" title="Direct link to context" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>context 设置爬虫使用的 context，用于取消或超时控制</p>
@@ -977,6 +1164,19 @@ direct-feed fast path. Set to 0 to disable.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cookie">cookie<a href="#cookie" class="hash-link" aria-label="Direct link to cookie" title="Direct link to cookie" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>cookie 是一个选项函数，用于指定爬虫时的cookie</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>k: cookie 名称</p>
+</li>
+<li class="">
+<p>v: cookie 值</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">cookie</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;key&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;value&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-18">定义<a href="#定义-18" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1002,7 +1202,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1019,10 +1219,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disallowsuffix">disallowSuffix<a href="#disallowsuffix" class="hash-link" aria-label="Direct link to disallowSuffix" title="Direct link to disallowSuffix" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单</p>
+<p>参数:</p>
+<ul>
+<li class="">d: 后缀黑名单列表，命中的后缀将不被爬取</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">disallowSuffix</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;.css&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;.jpg&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;.png&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 爬虫时不会爬取css、jpg、png文件</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-19">定义<a href="#定义-19" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1043,7 +1251,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">后缀黑名单列表，命中的后缀将不被爬取</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1060,11 +1268,19 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="domainexclude">domainExclude<a href="#domainexclude" class="hash-link" aria-label="Direct link to domainExclude" title="Direct link to domainExclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单</p>
 <p>domain允许使用glob语法，例如*.example.com</p>
+<p>参数:</p>
+<ul>
+<li class="">domain: 禁止的域名，支持 glob 语法</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">domainExclude</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;*.baidu.com&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-20">定义<a href="#定义-20" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1085,7 +1301,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">禁止的域名，支持 glob 语法</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1102,11 +1318,19 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="domaininclude">domainInclude<a href="#domaininclude" class="hash-link" aria-label="Direct link to domainInclude" title="Direct link to domainInclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>domainInclude 是一个选项函数，用于指定爬虫时的域名白名单</p>
 <p>domain允许使用glob语法，例如*.example.com</p>
+<p>参数:</p>
+<ul>
+<li class="">domain: 允许的域名，支持 glob 语法</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">domainInclude</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;*.example.com&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-21">定义<a href="#定义-21" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1127,7 +1351,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">允许的域名，支持 glob 语法</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1144,11 +1368,19 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forbiddenfromparent">forbiddenFromParent<a href="#forbiddenfromparent" class="hash-link" aria-label="Direct link to forbiddenFromParent" title="Direct link to forbiddenFromParent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false</p>
 <p>对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取</p>
+<p>参数:</p>
+<ul>
+<li class="">b: 是否禁止从根路径发起请求</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com/a/b/c&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">forbiddenFromParent</span><span class="token punctuation" style="color:#393A34">(</span><span class="token boolean" style="color:#36acaa">false</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 这会从 https://example.com/ 开始爬取</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-22">定义<a href="#定义-22" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1169,7 +1401,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁止从根路径发起请求</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1186,10 +1418,23 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="header">header<a href="#header" class="hash-link" aria-label="Direct link to header" title="Direct link to header" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>header 是一个选项函数，用于指定爬虫时的请求头</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>k: 请求头名称</p>
+</li>
+<li class="">
+<p>v: 请求头值</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">header</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;User-Agent&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;yaklang-crawler&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-23">定义<a href="#定义-23" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1215,7 +1460,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1232,7 +1477,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="httpstohttpfallback">httpsToHttpFallback<a href="#httpstohttpfallback" class="hash-link" aria-label="Direct link to httpsToHttpFallback" title="Direct link to httpsToHttpFallback" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试</p>
@@ -1287,6 +1532,14 @@ direct-feed fast path. Set to 0 to disable.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。</p>
 <p>填写该选项默认开启，也可以传入false强制关闭。</p>
+<p>参数:</p>
+<ul>
+<li class="">enable: 可选，是否启用 JS 解析，缺省时默认开启</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">jsParser</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 开启</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">jsParser</span><span class="token punctuation" style="color:#393A34">(</span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 开启</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">jsParser</span><span class="token punctuation" style="color:#393A34">(</span><span class="token boolean" style="color:#36acaa">false</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// 关闭</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-25">定义<a href="#定义-25" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1307,7 +1560,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否启用 JS 解析，缺省时默认开启</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1324,10 +1577,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxdepth">maxDepth<a href="#maxdepth" class="hash-link" aria-label="Direct link to maxDepth" title="Direct link to maxDepth" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5</p>
+<p>参数:</p>
+<ul>
+<li class="">depth: 最大爬取深度</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">maxDepth</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-26">定义<a href="#定义-26" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1348,7 +1609,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大爬取深度</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1365,10 +1626,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxredirect">maxRedirect<a href="#maxredirect" class="hash-link" aria-label="Direct link to maxRedirect" title="Direct link to maxRedirect" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5</p>
+<p>参数:</p>
+<ul>
+<li class="">maxRedirectTimes: 最大重定向次数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">maxRedirect</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-27">定义<a href="#定义-27" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1389,7 +1658,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxRedirectTimes</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxRedirectTimes</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重定向次数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1406,10 +1675,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxrequest">maxRequest<a href="#maxrequest" class="hash-link" aria-label="Direct link to maxRequest" title="Direct link to maxRequest" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000</p>
+<p>参数:</p>
+<ul>
+<li class="">limit: 最大请求数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">maxRequest</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10000</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-28">定义<a href="#定义-28" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1430,7 +1707,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大请求数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1447,10 +1724,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxretry">maxRetry<a href="#maxretry" class="hash-link" aria-label="Direct link to maxRetry" title="Direct link to maxRetry" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3</p>
+<p>参数:</p>
+<ul>
+<li class="">limit: 最大重试次数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">maxRetry</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">10</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-29">定义<a href="#定义-29" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1471,7 +1756,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1488,10 +1773,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxurls">maxUrls<a href="#maxurls" class="hash-link" aria-label="Direct link to maxUrls" title="Direct link to maxUrls" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000</p>
+<p>参数:</p>
+<ul>
+<li class="">limit: 最大链接数</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">maxUrls</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">20000</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-30">定义<a href="#定义-30" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1512,7 +1805,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大链接数</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1529,10 +1822,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="onurlfound">onUrlFound<a href="#onurlfound" class="hash-link" aria-label="Direct link to onUrlFound" title="Direct link to onUrlFound" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL）</p>
+<p>参数:</p>
+<ul>
+<li class="">f: 发现新 URL 时触发的回调函数，入参为发现的 URL</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">onUrlFound</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">func</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">url</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">url</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-31">定义<a href="#定义-31" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1553,7 +1854,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left">发现新 URL 时触发的回调函数，入参为发现的 URL</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1570,10 +1871,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proxy">proxy<a href="#proxy" class="hash-link" aria-label="Direct link to proxy" title="Direct link to proxy" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>proxy 是一个选项函数，用于指定爬虫时的代理</p>
+<p>参数:</p>
+<ul>
+<li class="">proxies: 一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a></li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">proxy</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;http://127.0.0.1:8080&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-32">定义<a href="#定义-32" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1594,7 +1903,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a></td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1611,7 +1920,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="responsetimeout">responseTimeout<a href="#responsetimeout" class="hash-link" aria-label="Direct link to responseTimeout" title="Direct link to responseTimeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s</p>
@@ -1665,6 +1974,14 @@ direct-feed fast path. Set to 0 to disable.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timeout">timeout<a href="#timeout" class="hash-link" aria-label="Direct link to timeout" title="Direct link to timeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</p>
+<p>参数:</p>
+<ul>
+<li class="">f: 连接超时时间，单位为秒</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">connectTimeout</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-34">定义<a href="#定义-34" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1685,7 +2002,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1702,10 +2019,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ua">ua<a href="#ua" class="hash-link" aria-label="Direct link to ua" title="Direct link to ua" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>userAgent 是一个选项函数，用于指定爬虫时的User-Agent</p>
+<p>参数:</p>
+<ul>
+<li class="">ua: User-Agent 字符串</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">userAgent</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;yaklang-crawler&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-35">定义<a href="#定义-35" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1726,7 +2051,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1743,10 +2068,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlextractor">urlExtractor<a href="#urlextractor" class="hash-link" aria-label="Direct link to urlExtractor" title="Direct link to urlExtractor" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则</p>
+<p>参数:</p>
+<ul>
+<li class="">f: 自定义链接提取函数，入参为请求对象，返回提取到的链接列表</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">urlExtractor</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">func</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">req</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">尝试编写自己的规则，从响应体</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">req</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Response</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">或req</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">ResponseRaw</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">中提取额外的链接</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-36">定义<a href="#定义-36" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1767,7 +2100,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*Req) []any</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*Req) []any</code></td><td style="text-align:left">自定义链接提取函数，入参为请求对象，返回提取到的链接列表</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1784,10 +2117,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlregexpexclude">urlRegexpExclude<a href="#urlregexpexclude" class="hash-link" aria-label="Direct link to urlRegexpExclude" title="Direct link to urlRegexpExclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单</p>
+<p>参数:</p>
+<ul>
+<li class="">re: URL 黑名单正则表达式</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">urlRegexpExclude</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string template-string" style="color:#e3116c">`\.jpg`</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-37">定义<a href="#定义-37" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1808,7 +2149,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 黑名单正则表达式</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1825,10 +2166,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlregexpinclude">urlRegexpInclude<a href="#urlregexpinclude" class="hash-link" aria-label="Direct link to urlRegexpInclude" title="Direct link to urlRegexpInclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单</p>
+<p>参数:</p>
+<ul>
+<li class="">re: URL 白名单正则表达式</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">urlRegexpInclude</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string template-string" style="color:#e3116c">`\.html`</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-38">定义<a href="#定义-38" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1849,7 +2198,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 白名单正则表达式</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1866,10 +2215,18 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="useragent">userAgent<a href="#useragent" class="hash-link" aria-label="Direct link to userAgent" title="Direct link to userAgent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>userAgent 是一个选项函数，用于指定爬虫时的User-Agent</p>
+<p>参数:</p>
+<ul>
+<li class="">ua: User-Agent 字符串</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">一个 crawler.Start 可接收的配置选项</li>
+</ul>
 <p>Example:</p>
 <div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Start</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;https://example.com&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> crawler</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">userAgent</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;yaklang-crawler&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-39">定义<a href="#定义-39" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
@@ -1890,7 +2247,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1907,7 +2264,7 @@ direct-feed fast path. Set to 0 to disable.</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="verifycertificate">verifyCertificate<a href="#verifycertificate" class="hash-link" aria-label="Direct link to verifyCertificate" title="Direct link to verifyCertificate" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书</p>

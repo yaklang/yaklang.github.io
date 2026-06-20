@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">sfreport | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/sfreport"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="sfreport | Yak Program Language"><meta data-rh="true" name="description" content="|实例名|实例描述|"><meta data-rh="true" property="og:description" content="|实例名|实例描述|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/sfreport"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/sfreport" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/sfreport" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/sfreport" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"sfreport","item":"https://yaklang.com/docs/api/sfreport"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.dd227a5c.js" defer="defer"></script>
-<script src="/assets/js/main.51d11d07.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7bd4f4a4.js" defer="defer"></script>
+<script src="/assets/js/main.d9c6723e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -92,13 +92,34 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#convertsingleresulttojson" class="">sfreport.ConvertSingleResultToJSON</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#convertsingleresulttojsonwithoptions" class="">sfreport.ConvertSingleResultToJSONWithOptions</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#convertsingleresulttossaresultpartsjsonpayload" class="">sfreport.ConvertSingleResultToSSAResultPartsJSONPayload</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#generatessareportmarkdownfortask" class="">sfreport.GenerateSSAReportMarkdownForTask</a></td><td style="text-align:left">GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport 参...</td></tr><tr><td style="text-align:left"><a href="#importssariskfromjson" class="">sfreport.ImportSSARiskFromJSON</a></td><td style="text-align:left">ImportSSARiskFromJSON 从 JSON 报告数据中导入 SSA 风险记录到数据库 导出名为 sfreport.ImportSSARiskFromJSON 参数: - ctx: 上下文，用于控制取消 - db: 目标数据库连接 - jsonData: 报告 JSON 数据（字节） -...</td></tr><tr><td style="text-align:left"><a href="#newreport" class="">sfreport.NewReport</a></td><td style="text-align:left">NewReport 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） 报告对象用于汇总规则、风险、文件等信息并最终序列化为 JSON 或 Markdown 参数: - reportType: 报告类型，如 sfreport.IRifyReportType...</td></tr><tr><td style="text-align:left"><a href="#withdataflowpath" class="">sfreport.withDataflowPath</a></td><td style="text-align:left">WithDataflowPath 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath） 参数: - show: 是否展示数据流路径 返回值: - 报告配置可选项</td></tr><tr><td style="text-align:left"><a href="#withfilecontent" class="">sfreport.withFileContent</a></td><td style="text-align:left">WithFileContent 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent） 参数: - show: 是否展示文件内容 返回值: - 报告配置可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamreporttype" class="">sfreport.withStreamReportType</a></td><td style="text-align:left">WithStreamReportType 设置流式报告的报告类型（导出名为 sfreport.withStreamReportType） 参数: - v: 报告类型，如 sfreport.IRifyReportType 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamshowdataflowpath" class="">sfreport.withStreamShowDataflowPath</a></td><td style="text-align:left">WithStreamShowDataflowPath 设置流式报告是否展示数据流路径（导出名为 sfreport.withStreamShowDataflowPath） 参数: - v: 是否展示数据流路径 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamshowfilecontent" class="">sfreport.withStreamShowFileContent</a></td><td style="text-align:left">WithStreamShowFileContent 设置流式报告是否展示文件内容（导出名为 sfreport.withStreamShowFileContent） 参数: - v: 是否展示文件内容 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamwithfile" class="">sfreport.withStreamWithFile</a></td><td style="text-align:left">WithStreamWithFile 设置流式报告是否携带文件数据（导出名为 sfreport.withStreamWithFile） 参数: - v: 是否携带文件数据 返回值: - 流式报告可选项</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#convertsingleresulttojson" class="">sfreport.ConvertSingleResultToJSON</a></td><td style="text-align:left">ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串 导出名为 sfreport.ConvertSingleResultToJSON 参数: - result: SyntaxFlow 扫描结果对象 - showDataflowPath...</td></tr><tr><td style="text-align:left"><a href="#convertsingleresulttojsonwithoptions" class="">sfreport.ConvertSingleResultToJSONWithOptions</a></td><td style="text-align:left">ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告 导出名为 sfreport.ConvertSingleResultToJSONWithOptions 参数: - result: SyntaxFlow 扫...</td></tr><tr><td style="text-align:left"><a href="#convertsingleresulttossaresultpartsjsonpayload" class="">sfreport.ConvertSingleResultToSSAResultPartsJSONPayload</a></td><td style="text-align:left">convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload） 返回一个字典，包...</td></tr><tr><td style="text-align:left"><a href="#generatessareportmarkdownfortask" class="">sfreport.GenerateSSAReportMarkdownForTask</a></td><td style="text-align:left">GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport 参...</td></tr><tr><td style="text-align:left"><a href="#importssariskfromjson" class="">sfreport.ImportSSARiskFromJSON</a></td><td style="text-align:left">ImportSSARiskFromJSON 从 JSON 报告数据中导入 SSA 风险记录到数据库 导出名为 sfreport.ImportSSARiskFromJSON 参数: - ctx: 上下文，用于控制取消 - db: 目标数据库连接 - jsonData: 报告 JSON 数据（字节） -...</td></tr><tr><td style="text-align:left"><a href="#newreport" class="">sfreport.NewReport</a></td><td style="text-align:left">NewReport 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） 报告对象用于汇总规则、风险、文件等信息并最终序列化为 JSON 或 Markdown 参数: - reportType: 报告类型，如 sfreport.IRifyReportType...</td></tr><tr><td style="text-align:left"><a href="#withdataflowpath" class="">sfreport.withDataflowPath</a></td><td style="text-align:left">WithDataflowPath 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath） 参数: - show: 是否展示数据流路径 返回值: - 报告配置可选项</td></tr><tr><td style="text-align:left"><a href="#withfilecontent" class="">sfreport.withFileContent</a></td><td style="text-align:left">WithFileContent 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent） 参数: - show: 是否展示文件内容 返回值: - 报告配置可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamreporttype" class="">sfreport.withStreamReportType</a></td><td style="text-align:left">WithStreamReportType 设置流式报告的报告类型（导出名为 sfreport.withStreamReportType） 参数: - v: 报告类型，如 sfreport.IRifyReportType 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamshowdataflowpath" class="">sfreport.withStreamShowDataflowPath</a></td><td style="text-align:left">WithStreamShowDataflowPath 设置流式报告是否展示数据流路径（导出名为 sfreport.withStreamShowDataflowPath） 参数: - v: 是否展示数据流路径 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamshowfilecontent" class="">sfreport.withStreamShowFileContent</a></td><td style="text-align:left">WithStreamShowFileContent 设置流式报告是否展示文件内容（导出名为 sfreport.withStreamShowFileContent） 参数: - v: 是否展示文件内容 返回值: - 流式报告可选项</td></tr><tr><td style="text-align:left"><a href="#withstreamwithfile" class="">sfreport.withStreamWithFile</a></td><td style="text-align:left">WithStreamWithFile 设置流式报告是否携带文件数据（导出名为 sfreport.withStreamWithFile） 参数: - v: 是否携带文件数据 返回值: - 流式报告可选项</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="convertsingleresulttojson">ConvertSingleResultToJSON<a href="#convertsingleresulttojson" class="hash-link" aria-label="ConvertSingleResultToJSON的直接链接" title="ConvertSingleResultToJSON的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串</p>
+<p>导出名为 sfreport.ConvertSingleResultToJSON</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>result: SyntaxFlow 扫描结果对象</p>
+</li>
+<li class="">
+<p>showDataflowPath: 是否在报告中展示数据流路径</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>JSON 报告字符串（无风险时为空字符串）</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// result 来自 ssa/syntaxflow 的扫描结果（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">prog </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> ssa</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Parse</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> prog</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">SyntaxFlowWithError</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;sink* as $sink&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">jsonStr </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> sfreport</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">ConvertSingleResultToJSON</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">jsonStr</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义">定义<a href="#定义" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
-<p><code>ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflow bool) (string, error)</code></p>
+<p><code>ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflowPath bool) (string, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数">参数<a href="#参数" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
 
 
@@ -120,7 +141,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">showDataflow</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left">SyntaxFlow 扫描结果对象</td></tr><tr><td style="text-align:left">showDataflowPath</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否在报告中展示数据流路径</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -142,12 +163,42 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">JSON 报告字符串（无风险时为空字符串）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="convertsingleresulttojsonwithoptions">ConvertSingleResultToJSONWithOptions<a href="#convertsingleresulttojsonwithoptions" class="hash-link" aria-label="ConvertSingleResultToJSONWithOptions的直接链接" title="ConvertSingleResultToJSONWithOptions的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告</p>
+<p>导出名为 sfreport.ConvertSingleResultToJSONWithOptions</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>result: SyntaxFlow 扫描结果对象</p>
+</li>
+<li class="">
+<p>reportType: 报告类型</p>
+</li>
+<li class="">
+<p>showDataflowPath: 是否展示数据流路径</p>
+</li>
+<li class="">
+<p>showFileContent: 是否展示文件内容</p>
+</li>
+<li class="">
+<p>withFile: 是否携带文件数据</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>JSON 报告字符串（无风险时为空字符串）</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// result 来自 ssa/syntaxflow 的扫描结果（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">prog </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> ssa</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Parse</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> prog</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">SyntaxFlowWithError</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;sink* as $sink&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">jsonStr </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> sfreport</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">ConvertSingleResultToJSONWithOptions</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> sfreport</span><span class="token punctuation" style="color:#393A34">.</span><span class="token plain">IRifyFullReportType</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">jsonStr</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-1">定义<a href="#定义-1" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
-<p><code>ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflow bool, showFileContent bool, withFile bool) (string, error)</code></p>
+<p><code>ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool) (string, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-1">参数<a href="#参数-1" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
 
 
@@ -184,7 +235,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">reportType</td><td style="text-align:left"><code>ReportType</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">showDataflow</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">showFileContent</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">withFile</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left">SyntaxFlow 扫描结果对象</td></tr><tr><td style="text-align:left">reportType</td><td style="text-align:left"><code>ReportType</code></td><td style="text-align:left">报告类型</td></tr><tr><td style="text-align:left">showDataflowPath</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否展示数据流路径</td></tr><tr><td style="text-align:left">showFileContent</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否展示文件内容</td></tr><tr><td style="text-align:left">withFile</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否携带文件数据</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -206,10 +257,31 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">JSON 报告字符串（无风险时为空字符串）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="convertsingleresulttossaresultpartsjsonpayload">ConvertSingleResultToSSAResultPartsJSONPayload<a href="#convertsingleresulttossaresultpartsjsonpayload" class="hash-link" aria-label="ConvertSingleResultToSSAResultPartsJSONPayload的直接链接" title="ConvertSingleResultToSSAResultPartsJSONPayload的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload）</p>
+<p>返回一个字典，包含 json(报告内容)、stats(统计信息)、ok(是否成功)、has_payload(是否含有效载荷)</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>result: SyntaxFlow 扫描结果对象</p>
+</li>
+<li class="">
+<p>opts: 分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>包含 json/stats/ok/has_payload 的字典</p>
+</li>
+<li class="">
+<p>错误信息（转换失败时返回）</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// result 来自 ssa/syntaxflow 的扫描结果（示意性示例，需要可用的 SSA 程序与规则）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">prog </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> ssa</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Parse</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">code</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> prog</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">SyntaxFlowWithError</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;sink* as $sink&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">payload </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> sfreport</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">ConvertSingleResultToSSAResultPartsJSONPayload</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">payload</span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;ok&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-2">定义<a href="#定义-2" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>ConvertSingleResultToSSAResultPartsJSONPayload(result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption) (map[string]any, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-2">参数<a href="#参数-2" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -233,7 +305,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...StreamPartsOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">result</td><td style="text-align:left"><code>*ssaapi.SyntaxFlowResult</code></td><td style="text-align:left">SyntaxFlow 扫描结果对象</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...StreamPartsOption</code></td><td style="text-align:left">分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -255,7 +327,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>map[string]any</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>map[string]any</code></td><td style="text-align:left">包含 json/stats/ok/has_payload 的字典</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（转换失败时返回）</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="generatessareportmarkdownfortask">GenerateSSAReportMarkdownForTask<a href="#generatessareportmarkdownfortask" class="hash-link" aria-label="GenerateSSAReportMarkdownForTask的直接链接" title="GenerateSSAReportMarkdownForTask的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告</p>

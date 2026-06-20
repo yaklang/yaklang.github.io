@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">filesys | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/filesys"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="filesys | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/filesys"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/filesys" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/filesys" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/filesys" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"filesys","item":"https://yaklang.com/docs/api/filesys"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.dd227a5c.js" defer="defer"></script>
-<script src="/assets/js/main.51d11d07.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.7bd4f4a4.js" defer="defer"></script>
+<script src="/assets/js/main.d9c6723e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -70,11 +70,31 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#copytoreflocal" class="">filesys.CopyToRefLocal</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#copytotemporary" class="">filesys.CopyToTemporary</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#glance" class="">filesys.Glance</a></td><td style="text-align:left">Glance 快速查看一个文件系统或本地目录的概览信息（统计与树形结构） 参数: - localfile: 本地目录路径，或一个 FileSystem 对象 返回值: - 包含目录统计与树形视图的概览字符串</td></tr><tr><td style="text-align:left"><a href="#recursive" class="">filesys.Recursive</a></td><td style="text-align:left">Recursive 递归遍历指定路径下的所有文件和目录，对每个条目按配置的回调进行处理 参数: - raw: 起始遍历的根路径 - opts: 遍历选项（如 filesys.onFileStat、filesys.onDirStat、filesys.dir 等） 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#dir" class="">filesys.dir</a></td><td style="text-align:left">dir 为匹配指定 glob 目录的子树设置一组单独的遍历选项 参数: - globDir: 目录匹配的 glob 模式 - opts: 对匹配到的子目录生效的遍历选项 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#ondirstat" class="">filesys.onDirStat</a></td><td style="text-align:left">onDirStat 设置遍历到每个目录时调用的回调 参数: - h: 回调函数，参数为 (目录路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfs" class="">filesys.onFS</a></td><td style="text-align:left">onFS 设置遍历所使用的文件系统对象（如 zip 文件系统、内存文件系统等） 参数: - f: 待遍历的文件系统对象 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfilestat" class="">filesys.onFileStat</a></td><td style="text-align:left">onFileStat 设置遍历到每个文件（不含目录）时调用的回调 参数: - h: 回调函数，参数为 (文件路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfilestatex" class="">filesys.onFileStatEx</a></td><td style="text-align:left">onFileStatEx 设置遍历到每个文件时调用的回调，并提供一个 stop 函数用于提前终止遍历 参数: - h: 回调函数，参数为 (文件路径, 文件信息, stop 终止函数) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onready" class="">filesys.onReady</a></td><td style="text-align:left">onReady 设置遍历开始（准备就绪）时调用的回调 参数: - h: 回调函数，参数为 (名称, 是否为目录) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onstat" class="">filesys.onStat</a></td><td style="text-align:left">onStat 设置遍历到每个条目（文件或目录）时调用的回调 参数: - h: 回调函数，参数为 (是否为目录, 路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onstatex" class="">filesys.onStatEx</a></td><td style="text-align:left">onStatEx 设置遍历到每个条目时调用的回调，并提供一个 stop 函数用于提前终止遍历 参数: - h: 回调函数，参数为 (是否为目录, 路径, 文件信息, stop 终止函数) 返回值: - 一个遍历配置选项</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#copytoreflocal" class="">filesys.CopyToRefLocal</a></td><td style="text-align:left">CopyToRefLocal 把一个源文件系统的全部内容拷贝到指定的本地目录，并返回指向该目录的文件系统对象 参数: - srcFs: 源文件系统对象 - dest: 目标本地目录路径（不存在时会自动创建） 返回值: - 指向目标本地目录的文件系统对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#copytotemporary" class="">filesys.CopyToTemporary</a></td><td style="text-align:left">CopyToTemporary 把一个源文件系统的全部内容拷贝到一个新建的临时目录，并返回指向该临时目录的文件系统对象 参数: - srcFs: 源文件系统对象 返回值: - 指向新建临时目录的文件系统对象</td></tr><tr><td style="text-align:left"><a href="#glance" class="">filesys.Glance</a></td><td style="text-align:left">Glance 快速查看一个文件系统或本地目录的概览信息（统计与树形结构） 参数: - localfile: 本地目录路径，或一个 FileSystem 对象 返回值: - 包含目录统计与树形视图的概览字符串</td></tr><tr><td style="text-align:left"><a href="#recursive" class="">filesys.Recursive</a></td><td style="text-align:left">Recursive 递归遍历指定路径下的所有文件和目录，对每个条目按配置的回调进行处理 参数: - raw: 起始遍历的根路径 - opts: 遍历选项（如 filesys.onFileStat、filesys.onDirStat、filesys.dir 等） 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#dir" class="">filesys.dir</a></td><td style="text-align:left">dir 为匹配指定 glob 目录的子树设置一组单独的遍历选项 参数: - globDir: 目录匹配的 glob 模式 - opts: 对匹配到的子目录生效的遍历选项 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#ondirstat" class="">filesys.onDirStat</a></td><td style="text-align:left">onDirStat 设置遍历到每个目录时调用的回调 参数: - h: 回调函数，参数为 (目录路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfs" class="">filesys.onFS</a></td><td style="text-align:left">onFS 设置遍历所使用的文件系统对象（如 zip 文件系统、内存文件系统等） 参数: - f: 待遍历的文件系统对象 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfilestat" class="">filesys.onFileStat</a></td><td style="text-align:left">onFileStat 设置遍历到每个文件（不含目录）时调用的回调 参数: - h: 回调函数，参数为 (文件路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onfilestatex" class="">filesys.onFileStatEx</a></td><td style="text-align:left">onFileStatEx 设置遍历到每个文件时调用的回调，并提供一个 stop 函数用于提前终止遍历 参数: - h: 回调函数，参数为 (文件路径, 文件信息, stop 终止函数) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onready" class="">filesys.onReady</a></td><td style="text-align:left">onReady 设置遍历开始（准备就绪）时调用的回调 参数: - h: 回调函数，参数为 (名称, 是否为目录) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onstat" class="">filesys.onStat</a></td><td style="text-align:left">onStat 设置遍历到每个条目（文件或目录）时调用的回调 参数: - h: 回调函数，参数为 (是否为目录, 路径, 文件信息) 返回值: - 一个遍历配置选项</td></tr><tr><td style="text-align:left"><a href="#onstatex" class="">filesys.onStatEx</a></td><td style="text-align:left">onStatEx 设置遍历到每个条目时调用的回调，并提供一个 stop 函数用于提前终止遍历 参数: - h: 回调函数，参数为 (是否为目录, 路径, 文件信息, stop 终止函数) 返回值: - 一个遍历配置选项</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="copytoreflocal">CopyToRefLocal<a href="#copytoreflocal" class="hash-link" aria-label="CopyToRefLocal的直接链接" title="CopyToRefLocal的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>CopyToRefLocal 把一个源文件系统的全部内容拷贝到指定的本地目录，并返回指向该目录的文件系统对象</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>srcFs: 源文件系统对象</p>
+</li>
+<li class="">
+<p>dest: 目标本地目录路径（不存在时会自动创建）</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>指向目标本地目录的文件系统对象</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 将一个内存 zip 文件系统拷贝到本地目录</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">zfs </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> filesys</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">NewZipFSFromLocal</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;/tmp/abc.zip&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">localFs </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> filesys</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">CopyToRefLocal</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">zfs</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;/tmp/abc_extracted&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义">定义<a href="#定义" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>CopyToRefLocal(srcFs filesys_interface.FileSystem, dest string) (*RelLocalFs, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数">参数<a href="#参数" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -98,7 +118,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">srcFs</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">dest</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">srcFs</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">源文件系统对象</td></tr><tr><td style="text-align:left">dest</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标本地目录路径（不存在时会自动创建）</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -120,10 +140,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RelLocalFs</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RelLocalFs</code></td><td style="text-align:left">指向目标本地目录的文件系统对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="copytotemporary">CopyToTemporary<a href="#copytotemporary" class="hash-link" aria-label="CopyToTemporary的直接链接" title="CopyToTemporary的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>CopyToTemporary 把一个源文件系统的全部内容拷贝到一个新建的临时目录，并返回指向该临时目录的文件系统对象</p>
+<p>参数:</p>
+<ul>
+<li class="">srcFs: 源文件系统对象</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">指向新建临时目录的文件系统对象</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 将一个内存 zip 文件系统拷贝到临时目录</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">zfs </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> filesys</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">NewZipFSFromLocal</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;/tmp/abc.zip&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">tmpFs </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> filesys</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">CopyToTemporary</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">zfs</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-1">定义<a href="#定义-1" class="hash-link" aria-label="定义的直接链接" title="定义的直接链接" translate="no">​</a></h4>
 <p><code>CopyToTemporary(srcFs filesys_interface.FileSystem) *RelLocalFs</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-1">参数<a href="#参数-1" class="hash-link" aria-label="参数的直接链接" title="参数的直接链接" translate="no">​</a></h4>
@@ -142,7 +172,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">srcFs</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">srcFs</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">源文件系统对象</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -159,7 +189,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RelLocalFs</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*RelLocalFs</code></td><td style="text-align:left">指向新建临时目录的文件系统对象</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="glance">Glance<a href="#glance" class="hash-link" aria-label="Glance的直接链接" title="Glance的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Glance 快速查看一个文件系统或本地目录的概览信息（统计与树形结构）</p>

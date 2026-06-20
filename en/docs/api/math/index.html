@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">math | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/math"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="math | Yak Program Language"><meta data-rh="true" name="description" content="|实例名|实例描述|"><meta data-rh="true" property="og:description" content="|实例名|实例描述|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/math"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/math" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/math" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/math" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"math","item":"https://yaklang.com/en/docs/api/math"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.d207aed9.js" defer="defer"></script>
-<script src="/en/assets/js/main.a834087a.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.36acce5d.js" defer="defer"></script>
+<script src="/en/assets/js/main.7fe3b1cb.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -128,11 +128,21 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#abs" class="">math.Abs</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#acos" class="">math.Acos</a></td><td style="text-align:left">Acos 反三角函数 Acos 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反余弦值（弧度）</td></tr><tr><td style="text-align:left"><a href="#asin" class="">math.Asin</a></td><td style="text-align:left">Asin 反三角函数 Asin 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反正弦值（弧度）</td></tr><tr><td style="text-align:left"><a href="#atan" class="">math.Atan</a></td><td style="text-align:left">Atan 反三角函数 Atan 参数: - x: 输入数值 返回值: - x 的反正切值（弧度）</td></tr><tr><td style="text-align:left"><a href="#ceil" class="">math.Ceil</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#cos" class="">math.Cos</a></td><td style="text-align:left">Cos 三角函数 Cos 参数: - x: 输入角度（弧度） 返回值: - x 的余弦值</td></tr><tr><td style="text-align:left"><a href="#floor" class="">math.Floor</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#isnan" class="">math.IsNaN</a></td><td style="text-align:left">IsNaN 判断一个数是否是NaN 参数: - x: 输入数值 返回值: - 是否为 NaN</td></tr><tr><td style="text-align:left"><a href="#nan" class="">math.NaN</a></td><td style="text-align:left">NaN 返回一个IEEE-574 “非数字”的值 返回值: - 一个 NaN 浮点值</td></tr><tr><td style="text-align:left"><a href="#pow" class="">math.Pow</a></td><td style="text-align:left">Pow 返回x的y次方 参数: - x: 底数 - y: 指数 返回值: - x 的 y 次幂</td></tr><tr><td style="text-align:left"><a href="#pow10" class="">math.Pow10</a></td><td style="text-align:left">Pow10 返回10的n次方 参数: - n: 整数指数 返回值: - 10 的 n 次幂</td></tr><tr><td style="text-align:left"><a href="#round" class="">math.Round</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#roundtoeven" class="">math.RoundToEven</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#sin" class="">math.Sin</a></td><td style="text-align:left">Sin 三角函数 sin 参数: - x: 输入角度（弧度） 返回值: - x 的正弦值</td></tr><tr><td style="text-align:left"><a href="#sinh" class="">math.Sinh</a></td><td style="text-align:left">Sinh 双曲正弦函数 参数: - x: 输入数值（弧度） 返回值: - x 的双曲正弦值</td></tr><tr><td style="text-align:left"><a href="#sqrt" class="">math.Sqrt</a></td><td style="text-align:left">Sqrt 返回一个数的平方根 如果x &lt; 0，返回NaN 参数: - x: 输入数值 返回值: - x 的平方根；x&lt;0 时为 NaN</td></tr><tr><td style="text-align:left"><a href="#tan" class="">math.Tan</a></td><td style="text-align:left">Tan 三角函数 Tan 参数: - x: 输入角度（弧度） 返回值: - x 的正切值</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#abs" class="">math.Abs</a></td><td style="text-align:left">Abs 返回x的绝对值 参数: - x: 输入数值 返回值: - x 的绝对值</td></tr><tr><td style="text-align:left"><a href="#acos" class="">math.Acos</a></td><td style="text-align:left">Acos 反三角函数 Acos 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反余弦值（弧度）</td></tr><tr><td style="text-align:left"><a href="#asin" class="">math.Asin</a></td><td style="text-align:left">Asin 反三角函数 Asin 参数: - x: 输入数值（区间 [-1, 1]） 返回值: - x 的反正弦值（弧度）</td></tr><tr><td style="text-align:left"><a href="#atan" class="">math.Atan</a></td><td style="text-align:left">Atan 反三角函数 Atan 参数: - x: 输入数值 返回值: - x 的反正切值（弧度）</td></tr><tr><td style="text-align:left"><a href="#ceil" class="">math.Ceil</a></td><td style="text-align:left">Ceil 返回不小于x的最小整数 参数: - x: 输入数值 返回值: - 向上取整（朝 +Inf）后的结果</td></tr><tr><td style="text-align:left"><a href="#cos" class="">math.Cos</a></td><td style="text-align:left">Cos 三角函数 Cos 参数: - x: 输入角度（弧度） 返回值: - x 的余弦值</td></tr><tr><td style="text-align:left"><a href="#floor" class="">math.Floor</a></td><td style="text-align:left">Floor 返回不大于x的最大整数 参数: - x: 输入数值 返回值: - 向下取整（朝 -Inf）后的结果</td></tr><tr><td style="text-align:left"><a href="#isnan" class="">math.IsNaN</a></td><td style="text-align:left">IsNaN 判断一个数是否是NaN 参数: - x: 输入数值 返回值: - 是否为 NaN</td></tr><tr><td style="text-align:left"><a href="#nan" class="">math.NaN</a></td><td style="text-align:left">NaN 返回一个IEEE-574 “非数字”的值 返回值: - 一个 NaN 浮点值</td></tr><tr><td style="text-align:left"><a href="#pow" class="">math.Pow</a></td><td style="text-align:left">Pow 返回x的y次方 参数: - x: 底数 - y: 指数 返回值: - x 的 y 次幂</td></tr><tr><td style="text-align:left"><a href="#pow10" class="">math.Pow10</a></td><td style="text-align:left">Pow10 返回10的n次方 参数: - n: 整数指数 返回值: - 10 的 n 次幂</td></tr><tr><td style="text-align:left"><a href="#round" class="">math.Round</a></td><td style="text-align:left">Round 返回四舍五入到最近的整数 存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN 参数: - x: 输入数值 返回值: - 四舍五入到最近整数的结果</td></tr><tr><td style="text-align:left"><a href="#roundtoeven" class="">math.RoundToEven</a></td><td style="text-align:left">RoundToEven 返回四舍五入到最近的偶整数 参数: - x: 输入数值 返回值: - 银行家舍入到最近偶整数的结果</td></tr><tr><td style="text-align:left"><a href="#sin" class="">math.Sin</a></td><td style="text-align:left">Sin 三角函数 sin 参数: - x: 输入角度（弧度） 返回值: - x 的正弦值</td></tr><tr><td style="text-align:left"><a href="#sinh" class="">math.Sinh</a></td><td style="text-align:left">Sinh 双曲正弦函数 参数: - x: 输入数值（弧度） 返回值: - x 的双曲正弦值</td></tr><tr><td style="text-align:left"><a href="#sqrt" class="">math.Sqrt</a></td><td style="text-align:left">Sqrt 返回一个数的平方根 如果x &lt; 0，返回NaN 参数: - x: 输入数值 返回值: - x 的平方根；x&lt;0 时为 NaN</td></tr><tr><td style="text-align:left"><a href="#tan" class="">math.Tan</a></td><td style="text-align:left">Tan 三角函数 Tan 参数: - x: 输入角度（弧度） 返回值: - x 的正切值</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="abs">Abs<a href="#abs" class="hash-link" aria-label="Direct link to Abs" title="Direct link to Abs" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Abs 返回x的绝对值</p>
+<p>参数:</p>
+<ul>
+<li class="">x: 输入数值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">x 的绝对值</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Abs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic">// OUT: 1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> result </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Abs of -1 should be 1&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Abs</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Abs of 1 should be 1&quot;</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义">定义<a href="#定义" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Abs(x float64) float64</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数">参数<a href="#参数" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -151,7 +161,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">输入数值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -168,7 +178,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">x 的绝对值</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="acos">Acos<a href="#acos" class="hash-link" aria-label="Direct link to Acos" title="Direct link to Acos" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Acos 反三角函数 Acos</p>
@@ -318,7 +328,17 @@
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">x 的反正切值（弧度）</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ceil">Ceil<a href="#ceil" class="hash-link" aria-label="Direct link to Ceil" title="Direct link to Ceil" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Ceil 返回不小于x的最小整数</p>
+<p>参数:</p>
+<ul>
+<li class="">x: 输入数值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">向上取整（朝 +Inf）后的结果</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Ceil</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic">// OUT: 2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> result </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Ceil should round up&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Ceil</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">1.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Ceil of negative rounds toward +Inf&quot;</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-4">定义<a href="#定义-4" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Ceil(x float64) float64</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-4">参数<a href="#参数-4" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -337,7 +357,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">输入数值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -354,7 +374,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">向上取整（朝 +Inf）后的结果</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cos">Cos<a href="#cos" class="hash-link" aria-label="Direct link to Cos" title="Direct link to Cos" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Cos 三角函数 Cos</p>
@@ -406,7 +426,17 @@
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">x 的余弦值</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="floor">Floor<a href="#floor" class="hash-link" aria-label="Direct link to Floor" title="Direct link to Floor" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Floor 返回不大于x的最大整数</p>
+<p>参数:</p>
+<ul>
+<li class="">x: 输入数值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">向下取整（朝 -Inf）后的结果</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Floor</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic">// OUT: 1</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> result </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Floor should round down&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Floor</span><span class="token punctuation" style="color:#393A34">(</span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">2.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Floor of negative rounds toward -Inf&quot;</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-6">定义<a href="#定义-6" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Floor(x float64) float64</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-6">参数<a href="#参数-6" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -425,7 +455,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">输入数值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -442,7 +472,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">向下取整（朝 -Inf）后的结果</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="isnan">IsNaN<a href="#isnan" class="hash-link" aria-label="Direct link to IsNaN" title="Direct link to IsNaN" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsNaN 判断一个数是否是NaN</p>
@@ -630,7 +660,18 @@
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">10 的 n 次幂</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="round">Round<a href="#round" class="hash-link" aria-label="Direct link to Round" title="Direct link to Round" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Round 返回四舍五入到最近的整数</p>
+<p>存在一些特殊情况：Round(±0) = ±0，Round(±Inf) = ±Inf，Round(NaN) = NaN</p>
+<p>参数:</p>
+<ul>
+<li class="">x: 输入数值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">四舍五入到最近整数的结果</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Round</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic">// OUT: 2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> result </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Round should round half up&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Round</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1.4</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">1.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;Round should round down below half&quot;</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-11">定义<a href="#定义-11" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Round(x float64) float64</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-10">参数<a href="#参数-10" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -649,7 +690,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">输入数值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -666,10 +707,20 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">四舍五入到最近整数的结果</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="roundtoeven">RoundToEven<a href="#roundtoeven" class="hash-link" aria-label="Direct link to RoundToEven" title="Direct link to RoundToEven" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>RoundToEven 返回四舍五入到最近的偶整数</p>
+<p>参数:</p>
+<ul>
+<li class="">x: 输入数值</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">银行家舍入到最近偶整数的结果</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 银行家舍入：恰好 .5 时向最近的偶数取整</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">RoundToEven</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">2.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain">   </span><span class="token comment" style="color:#999988;font-style:italic">// OUT: 2</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> result </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;2.5 rounds to even 2&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">RoundToEven</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">1.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">2.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;1.5 rounds to even 2&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function-builtin function" style="color:#d73a49">assert</span><span class="token plain"> math</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">RoundToEven</span><span class="token punctuation" style="color:#393A34">(</span><span class="token number" style="color:#36acaa">3.5</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">==</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">4.0</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;3.5 rounds to even 4&quot;</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-12">定义<a href="#定义-12" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>RoundToEven(x float64) float64</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-11">参数<a href="#参数-11" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -688,7 +739,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">x</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">输入数值</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -705,7 +756,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">银行家舍入到最近偶整数的结果</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sin">Sin<a href="#sin" class="hash-link" aria-label="Direct link to Sin" title="Direct link to Sin" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Sin 三角函数 sin</p>

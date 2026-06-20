@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">browser | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/browser"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="browser | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/browser"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/browser" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/browser" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/browser" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"browser","item":"https://yaklang.com/en/docs/api/browser"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.d207aed9.js" defer="defer"></script>
-<script src="/en/assets/js/main.a834087a.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.36acce5d.js" defer="defer"></script>
+<script src="/en/assets/js/main.7fe3b1cb.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -82,7 +82,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#close" class="">browser.Close</a></td><td style="text-align:left">CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close） 参数: - opts: 浏览器可选项，通常使用 browser.id 指定要关闭的实例 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#closeall" class="">browser.CloseAll</a></td><td style="text-align:left">CloseAll 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） 参数: - 无 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#get" class="">browser.Get</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#havebrowserinstalled" class="">browser.HaveBrowserInstalled</a></td><td style="text-align:left">HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） 参数: - 无 返回值: - 是否已安装浏览器</td></tr><tr><td style="text-align:left"><a href="#list" class="">browser.List</a></td><td style="text-align:left">List 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） 参数: - 无 返回值: - 浏览器实例 ID 列表</td></tr><tr><td style="text-align:left"><a href="#open" class="">browser.Open</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#controlurl" class="">browser.controlURL</a></td><td style="text-align:left">WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL） 参数: - controlURL: 浏览器的控制地址 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#exepath" class="">browser.exePath</a></td><td style="text-align:left">WithExePath 指定浏览器可执行文件路径（导出名为 browser.exePath） 参数: - exePath: 浏览器可执行文件路径 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#headless" class="">browser.headless</a></td><td style="text-align:left">WithHeadless 设置浏览器是否以无头模式启动（导出名为 browser.headless） 参数: - headless: 是否无头模式 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#id" class="">browser.id</a></td><td style="text-align:left">WithID 指定浏览器实例 ID（导出名为 browser.id） 参数: - id: 浏览器实例 ID 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#leakless" class="">browser.leakless</a></td><td style="text-align:left">WithLeakless 设置是否启用 leakless 守护进程以确保浏览器进程被清理（导出名为 browser.leakless） 参数: - leakless: 是否启用 leakless 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#nosandbox" class="">browser.noSandBox</a></td><td style="text-align:left">WithNoSandBox 设置浏览器是否以 no-sandbox 模式启动（导出名为 browser.noSandBox） 参数: - noSandBox: 是否禁用沙箱 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">browser.proxy</a></td><td style="text-align:left">WithProxy 指定浏览器使用的代理地址（导出名为 browser.proxy） 参数: - proxyAddress: 代理地址 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">browser.timeout</a></td><td style="text-align:left">WithTimeout 设置浏览器操作的超时时间（导出名为 browser.timeout） 参数: - timeout: 超时时间（秒） 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#wsaddress" class="">browser.wsAddress</a></td><td style="text-align:left">WithWsAddress 指定通过 WebSocket 地址连接已有浏览器（导出名为 browser.wsAddress） 参数: - wsAddress: 浏览器调试 WebSocket 地址 返回值: - 浏览器可选项</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#close" class="">browser.Close</a></td><td style="text-align:left">CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close） 参数: - opts: 浏览器可选项，通常使用 browser.id 指定要关闭的实例 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#closeall" class="">browser.CloseAll</a></td><td style="text-align:left">CloseAll 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） 参数: - 无 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#get" class="">browser.Get</a></td><td style="text-align:left">Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get） 参数: - opts: 浏览器可选项，如 browser.id 用于按 ID 获取 返回值: - 浏览器实例对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#havebrowserinstalled" class="">browser.HaveBrowserInstalled</a></td><td style="text-align:left">HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） 参数: - 无 返回值: - 是否已安装浏览器</td></tr><tr><td style="text-align:left"><a href="#list" class="">browser.List</a></td><td style="text-align:left">List 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） 参数: - 无 返回值: - 浏览器实例 ID 列表</td></tr><tr><td style="text-align:left"><a href="#open" class="">browser.Open</a></td><td style="text-align:left">Open 打开一个新的浏览器实例（导出名为 browser.Open） 参数: - opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等 返回值: - 浏览器实例对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#controlurl" class="">browser.controlURL</a></td><td style="text-align:left">WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL） 参数: - controlURL: 浏览器的控制地址 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#exepath" class="">browser.exePath</a></td><td style="text-align:left">WithExePath 指定浏览器可执行文件路径（导出名为 browser.exePath） 参数: - exePath: 浏览器可执行文件路径 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#headless" class="">browser.headless</a></td><td style="text-align:left">WithHeadless 设置浏览器是否以无头模式启动（导出名为 browser.headless） 参数: - headless: 是否无头模式 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#id" class="">browser.id</a></td><td style="text-align:left">WithID 指定浏览器实例 ID（导出名为 browser.id） 参数: - id: 浏览器实例 ID 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#leakless" class="">browser.leakless</a></td><td style="text-align:left">WithLeakless 设置是否启用 leakless 守护进程以确保浏览器进程被清理（导出名为 browser.leakless） 参数: - leakless: 是否启用 leakless 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#nosandbox" class="">browser.noSandBox</a></td><td style="text-align:left">WithNoSandBox 设置浏览器是否以 no-sandbox 模式启动（导出名为 browser.noSandBox） 参数: - noSandBox: 是否禁用沙箱 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">browser.proxy</a></td><td style="text-align:left">WithProxy 指定浏览器使用的代理地址（导出名为 browser.proxy） 参数: - proxyAddress: 代理地址 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">browser.timeout</a></td><td style="text-align:left">WithTimeout 设置浏览器操作的超时时间（导出名为 browser.timeout） 参数: - timeout: 超时时间（秒） 返回值: - 浏览器可选项</td></tr><tr><td style="text-align:left"><a href="#wsaddress" class="">browser.wsAddress</a></td><td style="text-align:left">WithWsAddress 指定通过 WebSocket 地址连接已有浏览器（导出名为 browser.wsAddress） 参数: - wsAddress: 浏览器调试 WebSocket 地址 返回值: - 浏览器可选项</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="close">Close<a href="#close" class="hash-link" aria-label="Direct link to Close" title="Direct link to Close" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -150,7 +150,22 @@
 <p><code>CloseAll()</code></p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="get">Get<a href="#get" class="hash-link" aria-label="Direct link to Get" title="Direct link to Get" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get）</p>
+<p>参数:</p>
+<ul>
+<li class="">opts: 浏览器可选项，如 browser.id 用于按 ID 获取</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>浏览器实例对象</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 按 ID 获取浏览器实例（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">b </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> browser</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Get</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">browser</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">id</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;main&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">b</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-2">定义<a href="#定义-2" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Get(opts ...BrowserOption) (*BrowserInstance, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-1">参数<a href="#参数-1" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -169,7 +184,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...BrowserOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...BrowserOption</code></td><td style="text-align:left">浏览器可选项，如 browser.id 用于按 ID 获取</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -191,7 +206,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BrowserInstance</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BrowserInstance</code></td><td style="text-align:left">浏览器实例对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="havebrowserinstalled">HaveBrowserInstalled<a href="#havebrowserinstalled" class="hash-link" aria-label="Direct link to HaveBrowserInstalled" title="Direct link to HaveBrowserInstalled" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled）</p>
@@ -258,7 +273,22 @@
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">浏览器实例 ID 列表</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="open">Open<a href="#open" class="hash-link" aria-label="Direct link to Open" title="Direct link to Open" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>Open 打开一个新的浏览器实例（导出名为 browser.Open）</p>
+<p>参数:</p>
+<ul>
+<li class="">opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>浏览器实例对象</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 打开一个无头浏览器（示意性示例，需要本地已安装浏览器）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">b </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> browser</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Open</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">browser</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">headless</span><span class="token punctuation" style="color:#393A34">(</span><span class="token boolean" style="color:#36acaa">true</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">defer</span><span class="token plain"> browser</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">CloseAll</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-5">定义<a href="#定义-5" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Open(opts ...BrowserOption) (*BrowserInstance, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-2">参数<a href="#参数-2" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -277,7 +307,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...BrowserOption</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...BrowserOption</code></td><td style="text-align:left">浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -299,7 +329,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BrowserInstance</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*BrowserInstance</code></td><td style="text-align:left">浏览器实例对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="controlurl">controlURL<a href="#controlurl" class="hash-link" aria-label="Direct link to controlURL" title="Direct link to controlURL" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL）</p>

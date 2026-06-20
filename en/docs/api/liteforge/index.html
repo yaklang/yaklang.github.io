@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">liteforge | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/liteforge"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="liteforge | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/liteforge"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/liteforge" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/liteforge" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/liteforge" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"liteforge","item":"https://yaklang.com/en/docs/api/liteforge"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.d207aed9.js" defer="defer"></script>
-<script src="/en/assets/js/main.a834087a.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.36acce5d.js" defer="defer"></script>
+<script src="/en/assets/js/main.7fe3b1cb.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -198,7 +198,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#analyzevideoomni" class="">liteforge.AnalyzeVideoOmni</a></td><td style="text-align:left">AnalyzeVideoOmni 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。</td></tr><tr><td style="text-align:left"><a href="#buildvideoknowledgefromomni" class="">liteforge.BuildVideoKnowledgeFromOmni</a></td><td style="text-align:left">BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路， 但分析阶段切换为 omni 端到端视频理解（AnalyzeVideoOmni），与既有 BuildKnowledgeFromFile 等保持完全独立，纯增量。 关键词: Bu...</td></tr><tr><td style="text-align:left"><a href="#execute" class="">liteforge.Execute</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#action" class="">liteforge.action</a></td><td style="text-align:left">liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,</td></tr><tr><td style="text-align:left"><a href="#analyzectx" class="">liteforge.analyzeCtx</a></td><td style="text-align:left">WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） 参数: - ctx: 上下文对象 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzelog" class="">liteforge.analyzeLog</a></td><td style="text-align:left">WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） 参数: - handler: 日志回调函数，参数为格式化字符串与参数 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzestatuscard" class="">liteforge.analyzeStatusCard</a></td><td style="text-align:left">WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard） 参数: - handler: 状态卡片回调，参数为 (id, data, tags...) 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">liteforge.context</a></td><td style="text-align:left">liteforge.context is an option for liteforge.Execute it sets the context for the liteforge execution</td></tr><tr><td style="text-align:left"><a href="#forceimage" class="">liteforge.forceImage</a></td><td style="text-align:left">liteforge.forceImage is an option for liteforge.Execute it forces the execution to require image input</td></tr><tr><td style="text-align:left"><a href="#id" class="">liteforge.id</a></td><td style="text-align:left">liteforge.id is an option for liteforge.Execute it sets the ID for the liteforge instance</td></tr><tr><td style="text-align:left"><a href="#image" class="">liteforge.image</a></td><td style="text-align:left">liteforge.image is an option for liteforge.Execute it adds image data to the execution context</td></tr><tr><td style="text-align:left"><a href="#imageextraprompt" class="">liteforge.imageExtraPrompt</a></td><td style="text-align:left">WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） 参数: - prompt: 额外提示词 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#imagefile" class="">liteforge.imageFile</a></td><td style="text-align:left">liteforge.imageFile is an option for liteforge.Execute it adds image files to the execution context</td></tr><tr><td style="text-align:left"><a href="#knowledgebasedesc" class="">liteforge.knowledgeBaseDesc</a></td><td style="text-align:left">RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc） 参数: - desc: 知识库描述 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasename" class="">liteforge.knowledgeBaseName</a></td><td style="text-align:left">RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName） 参数: - name: 知识库名称 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasetype" class="">liteforge.knowledgeBaseType</a></td><td style="text-align:left">RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType） 参数: - typ: 知识库类型 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgeentrylength" class="">liteforge.knowledgeEntryLength</a></td><td style="text-align:left">RefineWithKnowledgeEntryLength 设置每条知识条目的目标长度（导出名为 liteforge.knowledgeEntryLength） 参数: - length: 知识条目长度 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#omniapikey" class="">liteforge.omniAPIKey</a></td><td style="text-align:left">WithVideoOmniAPIKey 设置 omni 视频分析使用的 API Key（导出名为 liteforge.omniAPIKey） 参数: - k: API Key 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnibaseurl" class="">liteforge.omniBaseURL</a></td><td style="text-align:left">WithVideoOmniBaseURL 设置 omni 视频分析使用的 API 基础地址（导出名为 liteforge.omniBaseURL） 参数: - u: API 基础地址 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnicontext" class="">liteforge.omniContext</a></td><td style="text-align:left">WithVideoOmniContext 设置 omni 视频分析的上下文（导出名为 liteforge.omniContext） 参数: - ctx: 上下文对象 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxbase64bytes" class="">liteforge.omniMaxBase64Bytes</a></td><td style="text-align:left">WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes） 参数: - n: 字节上限 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxheight" class="">liteforge.omniMaxHeight</a></td><td style="text-align:left">WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） 参数: - h: 最大高度（像素） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxsegments" class="">liteforge.omniMaxSegments</a></td><td style="text-align:left">WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） 参数: - n: 最大段数 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimodel" class="">liteforge.omniModel</a></td><td style="text-align:left">WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） 参数: - m: 模型名 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetflash" class="">liteforge.omniPresetFlash</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#omnipresetplus" class="">liteforge.omniPresetPlus</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#omnipresetturbo" class="">liteforge.omniPresetTurbo</a></td><td style="text-align:left"></td></tr><tr><td style="text-align:left"><a href="#omniprogresscallback" class="">liteforge.omniProgressCallback</a></td><td style="text-align:left">WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback） 参数: - cb: 进度回调，参数为每段的分析结果 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniqueryprompt" class="">liteforge.omniQueryPrompt</a></td><td style="text-align:left">WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt） 参数: - q: 查询提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniratelimitretry" class="">liteforge.omniRateLimitRetry</a></td><td style="text-align:left">WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。 关键词: WithVideoOmniRateLimitRetry, omni 视频限速重试 参数: - maxAttempts: 最大重试次数 - backoffBase: 退避基数（time.Dur...</td></tr><tr><td style="text-align:left"><a href="#omnireencode" class="">liteforge.omniReencode</a></td><td style="text-align:left">WithVideoOmniReencode 设置是否对视频切片重新编码（导出名为 liteforge.omniReencode） 参数: - b: 是否重新编码 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentinterval" class="">liteforge.omniSegmentInterval</a></td><td style="text-align:left">WithVideoOmniSegmentInterval 设置段间静默节流，&lt;=0 表示不节流。 关键词: WithVideoOmniSegmentInterval, omni 视频段间节流 参数: - d: 段间间隔（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentseconds" class="">liteforge.omniSegmentSeconds</a></td><td style="text-align:left">WithVideoOmniSegmentSeconds 设置 omni 视频切片的时长（秒，导出名为 liteforge.omniSegmentSeconds） 参数: - s: 每段视频时长（秒） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisystemprompt" class="">liteforge.omniSystemPrompt</a></td><td style="text-align:left">WithVideoOmniSystemPrompt 设置 omni 视频分析的系统提示词（导出名为 liteforge.omniSystemPrompt） 参数: - p: 系统提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitargetfps" class="">liteforge.omniTargetFPS</a></td><td style="text-align:left">WithVideoOmniTargetFPS 设置视频切片的目标帧率（导出名为 liteforge.omniTargetFPS） 参数: - f: 目标帧率 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitimeout" class="">liteforge.omniTimeout</a></td><td style="text-align:left">WithVideoOmniTimeout 设置 omni 视频分析的超时时间（导出名为 liteforge.omniTimeout） 参数: - d: 超时时间（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitype" class="">liteforge.omniType</a></td><td style="text-align:left">WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType） 参数: - t: AI 类型 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipdir" class="">liteforge.omniZipDir</a></td><td style="text-align:left">WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按 {kbName|video-omni}-{model}-{ts}.zip 命名落盘。 参数: - dir: zip 输出目录 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipfile" class="">liteforge.omniZipFile</a></td><td style="text-align:left">WithVideoOmniZipFile 指定 zip 文件完整输出路径。 设置后会忽略 WithVideoOmniZipDir。 参数: - p: zip 文件输出路径 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#output" class="">liteforge.output</a></td><td style="text-align:left">liteforge.output is an option for liteforge.Execute it can limit the output of the liteforge.Execute use <code>jsonschema.ActionObject</code> to limit the output...</td></tr><tr><td style="text-align:left"><a href="#refineprompt" class="">liteforge.refinePrompt</a></td><td style="text-align:left">_refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt） 参数: - prompt: 提炼提示词 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#speedpriority" class="">liteforge.speedPriority</a></td><td style="text-align:left">liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks 参数: - b: 是否启用速度优先，缺省为 true 返回值: - liteforge 执行可选项</td></tr><tr><td style="text-align:left"><a href="#strictrefine" class="">liteforge.strictRefine</a></td><td style="text-align:left">_refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine） 参数: - strict: 是否严格模式 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#verbosename" class="">liteforge.verboseName</a></td><td style="text-align:left">liteforge.verboseName is an option for liteforge.Execute it adds verbose naming options to the execution</td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#analyzevideoomni" class="">liteforge.AnalyzeVideoOmni</a></td><td style="text-align:left">AnalyzeVideoOmni 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。</td></tr><tr><td style="text-align:left"><a href="#buildvideoknowledgefromomni" class="">liteforge.BuildVideoKnowledgeFromOmni</a></td><td style="text-align:left">BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路， 但分析阶段切换为 omni 端到端视频理解（AnalyzeVideoOmni），与既有 BuildKnowledgeFromFile 等保持完全独立，纯增量。 关键词: Bu...</td></tr><tr><td style="text-align:left"><a href="#execute" class="">liteforge.Execute</a></td><td style="text-align:left">liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. 参数: - query: 提示词/查询内容 - opts: 执行可选项，如 liteforge.outpu...</td></tr><tr><td style="text-align:left"><a href="#action" class="">liteforge.action</a></td><td style="text-align:left">liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,</td></tr><tr><td style="text-align:left"><a href="#analyzectx" class="">liteforge.analyzeCtx</a></td><td style="text-align:left">WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） 参数: - ctx: 上下文对象 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzelog" class="">liteforge.analyzeLog</a></td><td style="text-align:left">WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） 参数: - handler: 日志回调函数，参数为格式化字符串与参数 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzestatuscard" class="">liteforge.analyzeStatusCard</a></td><td style="text-align:left">WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard） 参数: - handler: 状态卡片回调，参数为 (id, data, tags...) 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">liteforge.context</a></td><td style="text-align:left">liteforge.context is an option for liteforge.Execute it sets the context for the liteforge execution</td></tr><tr><td style="text-align:left"><a href="#forceimage" class="">liteforge.forceImage</a></td><td style="text-align:left">liteforge.forceImage is an option for liteforge.Execute it forces the execution to require image input</td></tr><tr><td style="text-align:left"><a href="#id" class="">liteforge.id</a></td><td style="text-align:left">liteforge.id is an option for liteforge.Execute it sets the ID for the liteforge instance</td></tr><tr><td style="text-align:left"><a href="#image" class="">liteforge.image</a></td><td style="text-align:left">liteforge.image is an option for liteforge.Execute it adds image data to the execution context</td></tr><tr><td style="text-align:left"><a href="#imageextraprompt" class="">liteforge.imageExtraPrompt</a></td><td style="text-align:left">WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） 参数: - prompt: 额外提示词 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#imagefile" class="">liteforge.imageFile</a></td><td style="text-align:left">liteforge.imageFile is an option for liteforge.Execute it adds image files to the execution context</td></tr><tr><td style="text-align:left"><a href="#knowledgebasedesc" class="">liteforge.knowledgeBaseDesc</a></td><td style="text-align:left">RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc） 参数: - desc: 知识库描述 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasename" class="">liteforge.knowledgeBaseName</a></td><td style="text-align:left">RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName） 参数: - name: 知识库名称 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasetype" class="">liteforge.knowledgeBaseType</a></td><td style="text-align:left">RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType） 参数: - typ: 知识库类型 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgeentrylength" class="">liteforge.knowledgeEntryLength</a></td><td style="text-align:left">RefineWithKnowledgeEntryLength 设置每条知识条目的目标长度（导出名为 liteforge.knowledgeEntryLength） 参数: - length: 知识条目长度 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#omniapikey" class="">liteforge.omniAPIKey</a></td><td style="text-align:left">WithVideoOmniAPIKey 设置 omni 视频分析使用的 API Key（导出名为 liteforge.omniAPIKey） 参数: - k: API Key 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnibaseurl" class="">liteforge.omniBaseURL</a></td><td style="text-align:left">WithVideoOmniBaseURL 设置 omni 视频分析使用的 API 基础地址（导出名为 liteforge.omniBaseURL） 参数: - u: API 基础地址 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnicontext" class="">liteforge.omniContext</a></td><td style="text-align:left">WithVideoOmniContext 设置 omni 视频分析的上下文（导出名为 liteforge.omniContext） 参数: - ctx: 上下文对象 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxbase64bytes" class="">liteforge.omniMaxBase64Bytes</a></td><td style="text-align:left">WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes） 参数: - n: 字节上限 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxheight" class="">liteforge.omniMaxHeight</a></td><td style="text-align:left">WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） 参数: - h: 最大高度（像素） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxsegments" class="">liteforge.omniMaxSegments</a></td><td style="text-align:left">WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） 参数: - n: 最大段数 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimodel" class="">liteforge.omniModel</a></td><td style="text-align:left">WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） 参数: - m: 模型名 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetflash" class="">liteforge.omniPresetFlash</a></td><td style="text-align:left">VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetplus" class="">liteforge.omniPresetPlus</a></td><td style="text-align:left">VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetturbo" class="">liteforge.omniPresetTurbo</a></td><td style="text-align:left">VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设 关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus 预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset...</td></tr><tr><td style="text-align:left"><a href="#omniprogresscallback" class="">liteforge.omniProgressCallback</a></td><td style="text-align:left">WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback） 参数: - cb: 进度回调，参数为每段的分析结果 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniqueryprompt" class="">liteforge.omniQueryPrompt</a></td><td style="text-align:left">WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt） 参数: - q: 查询提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniratelimitretry" class="">liteforge.omniRateLimitRetry</a></td><td style="text-align:left">WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。 关键词: WithVideoOmniRateLimitRetry, omni 视频限速重试 参数: - maxAttempts: 最大重试次数 - backoffBase: 退避基数（time.Dur...</td></tr><tr><td style="text-align:left"><a href="#omnireencode" class="">liteforge.omniReencode</a></td><td style="text-align:left">WithVideoOmniReencode 设置是否对视频切片重新编码（导出名为 liteforge.omniReencode） 参数: - b: 是否重新编码 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentinterval" class="">liteforge.omniSegmentInterval</a></td><td style="text-align:left">WithVideoOmniSegmentInterval 设置段间静默节流，&lt;=0 表示不节流。 关键词: WithVideoOmniSegmentInterval, omni 视频段间节流 参数: - d: 段间间隔（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentseconds" class="">liteforge.omniSegmentSeconds</a></td><td style="text-align:left">WithVideoOmniSegmentSeconds 设置 omni 视频切片的时长（秒，导出名为 liteforge.omniSegmentSeconds） 参数: - s: 每段视频时长（秒） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisystemprompt" class="">liteforge.omniSystemPrompt</a></td><td style="text-align:left">WithVideoOmniSystemPrompt 设置 omni 视频分析的系统提示词（导出名为 liteforge.omniSystemPrompt） 参数: - p: 系统提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitargetfps" class="">liteforge.omniTargetFPS</a></td><td style="text-align:left">WithVideoOmniTargetFPS 设置视频切片的目标帧率（导出名为 liteforge.omniTargetFPS） 参数: - f: 目标帧率 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitimeout" class="">liteforge.omniTimeout</a></td><td style="text-align:left">WithVideoOmniTimeout 设置 omni 视频分析的超时时间（导出名为 liteforge.omniTimeout） 参数: - d: 超时时间（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitype" class="">liteforge.omniType</a></td><td style="text-align:left">WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType） 参数: - t: AI 类型 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipdir" class="">liteforge.omniZipDir</a></td><td style="text-align:left">WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按 {kbName|video-omni}-{model}-{ts}.zip 命名落盘。 参数: - dir: zip 输出目录 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipfile" class="">liteforge.omniZipFile</a></td><td style="text-align:left">WithVideoOmniZipFile 指定 zip 文件完整输出路径。 设置后会忽略 WithVideoOmniZipDir。 参数: - p: zip 文件输出路径 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#output" class="">liteforge.output</a></td><td style="text-align:left">liteforge.output is an option for liteforge.Execute it can limit the output of the liteforge.Execute use <code>jsonschema.ActionObject</code> to limit the output...</td></tr><tr><td style="text-align:left"><a href="#refineprompt" class="">liteforge.refinePrompt</a></td><td style="text-align:left">_refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt） 参数: - prompt: 提炼提示词 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#speedpriority" class="">liteforge.speedPriority</a></td><td style="text-align:left">liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks 参数: - b: 是否启用速度优先，缺省为 true 返回值: - liteforge 执行可选项</td></tr><tr><td style="text-align:left"><a href="#strictrefine" class="">liteforge.strictRefine</a></td><td style="text-align:left">_refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine） 参数: - strict: 是否严格模式 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#verbosename" class="">liteforge.verboseName</a></td><td style="text-align:left">liteforge.verboseName is an option for liteforge.Execute it adds verbose naming options to the execution</td></tr></tbody></table>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="analyzevideoomni">AnalyzeVideoOmni<a href="#analyzevideoomni" class="hash-link" aria-label="Direct link to AnalyzeVideoOmni" title="Direct link to AnalyzeVideoOmni" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -312,7 +312,27 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>&lt;-chan *schema.KnowledgeBaseEntry</code></td><td style="text-align:left">知识库条目 channel</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="execute">Execute<a href="#execute" class="hash-link" aria-label="Direct link to Execute" title="Direct link to Execute" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>liteforge.Execute can create a temporary LiteForge instance and execute it with the given query.</p>
+<p>参数:</p>
+<ul>
+<li class="">
+<p>query: 提示词/查询内容</p>
+</li>
+<li class="">
+<p>opts: 执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等</p>
+</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">
+<p>执行结果对象（可通过 Get 读取字段）</p>
+</li>
+<li class="">
+<p>错误信息</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// 需要配置可用的 AI 服务（示意性示例）</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">result </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> liteforge</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">Execute</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;extract the title&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">	liteforge</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">output</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">jsonschema</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">ActionObject</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;object&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> jsonschema</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">paramString</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&quot;value&quot;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">)</span><span class="token operator" style="color:#393A34">~</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">dump</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">result</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-2">定义<a href="#定义-2" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
 <p><code>Execute(query string, opts ...any) (*ForgeResult, error)</code></p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="参数-2">参数<a href="#参数-2" class="hash-link" aria-label="Direct link to 参数" title="Direct link to 参数" translate="no">​</a></h4>
@@ -336,7 +356,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">query</td><td style="text-align:left"><code>string</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">query</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提示词/查询内容</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等</td></tr></tbody></table>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -358,7 +378,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*ForgeResult</code></td><td style="text-align:left"></td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left"></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*ForgeResult</code></td><td style="text-align:left">执行结果对象（可通过 Get 读取字段）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="action">action<a href="#action" class="hash-link" aria-label="Direct link to action" title="Direct link to action" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.action is an option for liteforge.Execute
@@ -1348,19 +1368,103 @@ it adds image files to the execution context</p>
 <table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetflash">omniPresetFlash<a href="#omnipresetflash" class="hash-link" aria-label="Direct link to omniPresetFlash" title="Direct link to omniPresetFlash" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash）</p>
+<p>参数:</p>
+<ul>
+<li class="">无</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">omni 视频可选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">opt </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> liteforge</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">omniPresetFlash</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">opt</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-24">定义<a href="#定义-24" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
-<p><code>omniPresetFlash()</code></p>
+<p><code>omniPresetFlash() VideoOmniOption</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetplus">omniPresetPlus<a href="#omnipresetplus" class="hash-link" aria-label="Direct link to omniPresetPlus" title="Direct link to omniPresetPlus" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus）</p>
+<p>参数:</p>
+<ul>
+<li class="">无</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">omni 视频可选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">opt </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> liteforge</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">omniPresetPlus</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">opt</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-25">定义<a href="#定义-25" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
-<p><code>omniPresetPlus()</code></p>
+<p><code>omniPresetPlus() VideoOmniOption</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetturbo">omniPresetTurbo<a href="#omnipresetturbo" class="hash-link" aria-label="Direct link to omniPresetTurbo" title="Direct link to omniPresetTurbo" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
-<p>暂无描述</p>
+<p>VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设</p>
+<p>关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus</p>
+<p>预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset 之后再调用 WithVideoOmniModel</p>
+<p>VideoOmniPresetTurbo 使用 turbo 预设（qwen-omni-turbo 模型，导出名为 liteforge.omniPresetTurbo）</p>
+<p>参数:</p>
+<ul>
+<li class="">无</li>
+</ul>
+<p>返回值:</p>
+<ul>
+<li class="">omni 视频可选项</li>
+</ul>
+<p>Example:</p>
+<div class="language-yak codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yak codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">opt </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> liteforge</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">omniPresetTurbo</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token function" style="color:#d73a49">println</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">opt</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="定义-26">定义<a href="#定义-26" class="hash-link" aria-label="Direct link to 定义" title="Direct link to 定义" translate="no">​</a></h4>
-<p><code>omniPresetTurbo()</code></p>
+<p><code>omniPresetTurbo() VideoOmniOption</code></p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omniprogresscallback">omniProgressCallback<a href="#omniprogresscallback" class="hash-link" aria-label="Direct link to omniProgressCallback" title="Direct link to omniProgressCallback" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback）</p>
@@ -1393,7 +1497,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*VideoOmniSegmentResult)</code></td><td style="text-align:left">进度回调，参数为每段的分析结果</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1442,7 +1546,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">q</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">查询提示词</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1502,7 +1606,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxAttempts</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr><tr><td style="text-align:left">backoffBase</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">退避基数（time.Duration）</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1551,7 +1655,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否重新编码</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1601,7 +1705,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">段间间隔（time.Duration）</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1650,7 +1754,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">每段视频时长（秒）</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1699,7 +1803,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">系统提示词</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1748,7 +1852,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">目标帧率</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1797,7 +1901,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">超时时间（time.Duration）</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1846,7 +1950,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">t</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">AI 类型</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1896,7 +2000,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">dir</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 输出目录</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1946,7 +2050,7 @@ it adds image files to the execution context</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 文件输出路径</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -1989,7 +2093,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">output</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">JSON Schema 字符串，用于约束输出结构</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -2038,7 +2142,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提炼提示词</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -2087,7 +2191,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">是否启用速度优先，缺省为 true</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-41">返回值<a href="#返回值-41" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -2136,7 +2240,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">strict</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否严格模式</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
@@ -2178,7 +2282,7 @@ it adds verbose naming options to the execution</p>
 
 
 <table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个底层 aicommon 配置选项</td></tr></tbody></table>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
 
