@@ -2,8 +2,8 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [filesys.CopyToRefLocal](#copytoreflocal) ||
-| [filesys.CopyToTemporary](#copytotemporary) ||
+| [filesys.CopyToRefLocal](#copytoreflocal) |CopyToRefLocal 把一个源文件系统的全部内容拷贝到指定的本地目录，并返回指向该目录的文件系统对象 参数: - srcFs: 源文件系统对象 - dest: 目标本地目录路径（不存在时会自动创建） 返回值: - 指向目标本地目录的文件系统对象 - 错误信息|
+| [filesys.CopyToTemporary](#copytotemporary) |CopyToTemporary 把一个源文件系统的全部内容拷贝到一个新建的临时目录，并返回指向该临时目录的文件系统对象 参数: - srcFs: 源文件系统对象 返回值: - 指向新建临时目录的文件系统对象|
 | [filesys.Glance](#glance) |Glance 快速查看一个文件系统或本地目录的概览信息（统计与树形结构） 参数: - localfile: 本地目录路径，或一个 FileSystem 对象 返回值: - 包含目录统计与树形视图的概览字符串|
 | [filesys.Recursive](#recursive) |Recursive 递归遍历指定路径下的所有文件和目录，对每个条目按配置的回调进行处理 参数: - raw: 起始遍历的根路径 - opts: 遍历选项（如 filesys.onFileStat、filesys.onDirStat、filesys.dir 等） 返回值: - 错误信息|
 | [filesys.dir](#dir) |dir 为匹配指定 glob 目录的子树设置一组单独的遍历选项 参数: - globDir: 目录匹配的 glob 模式 - opts: 对匹配到的子目录生效的遍历选项 返回值: - 一个遍历配置选项|
@@ -20,7 +20,33 @@
 ### CopyToRefLocal
 
 #### 详细描述
-暂无描述
+CopyToRefLocal 把一个源文件系统的全部内容拷贝到指定的本地目录，并返回指向该目录的文件系统对象
+
+参数:
+
+  - srcFs: 源文件系统对象
+
+  - dest: 目标本地目录路径（不存在时会自动创建）
+
+
+
+返回值:
+
+  - 指向目标本地目录的文件系统对象
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 将一个内存 zip 文件系统拷贝到本地目录
+zfs = filesys.NewZipFSFromLocal("/tmp/abc.zip")~
+localFs = filesys.CopyToRefLocal(zfs, "/tmp/abc_extracted")~
+``````````````
+
 
 #### 定义
 
@@ -29,20 +55,42 @@
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| srcFs | `filesys_interface.FileSystem` |  |
-| dest | `string` |  |
+| srcFs | `filesys_interface.FileSystem` | 源文件系统对象 |
+| dest | `string` | 目标本地目录路径（不存在时会自动创建） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*RelLocalFs` |  |
-| r2 | `error` |  |
+| r1 | `*RelLocalFs` | 指向目标本地目录的文件系统对象 |
+| r2 | `error` | 错误信息 |
 
 
 ### CopyToTemporary
 
 #### 详细描述
-暂无描述
+CopyToTemporary 把一个源文件系统的全部内容拷贝到一个新建的临时目录，并返回指向该临时目录的文件系统对象
+
+参数:
+
+  - srcFs: 源文件系统对象
+
+
+
+返回值:
+
+  - 指向新建临时目录的文件系统对象
+
+
+
+
+Example:
+
+``````````````yak
+// 将一个内存 zip 文件系统拷贝到临时目录
+zfs = filesys.NewZipFSFromLocal("/tmp/abc.zip")~
+tmpFs = filesys.CopyToTemporary(zfs)
+``````````````
+
 
 #### 定义
 
@@ -51,12 +99,12 @@
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| srcFs | `filesys_interface.FileSystem` |  |
+| srcFs | `filesys_interface.FileSystem` | 源文件系统对象 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*RelLocalFs` |  |
+| r1 | `*RelLocalFs` | 指向新建临时目录的文件系统对象 |
 
 
 ### Glance

@@ -2,13 +2,13 @@
 
 |实例名|实例描述|
 |:------|:--------|
-O_APPEND|(int) 8|
-O_CREATE|(int) 512|
-O_EXCL|(int) 2048|
+O_APPEND|(int) 1024|
+O_CREATE|(int) 64|
+O_EXCL|(int) 128|
 O_RDONLY|(int) 0|
 O_RDWR|(int) 2|
-O_SYNC|(int) 128|
-O_TRUNC|(int) 1024|
+O_SYNC|(int) 1052672|
+O_TRUNC|(int) 512|
 O_WRONLY|(int) 1|
 SEPARATOR|(string) &#34;/&#34;|
 
@@ -20,8 +20,8 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.Cp](#cp) |Cp 拷贝文件或目录，返回错误 参数: - src: 源文件或目录路径 - dst: 目标文件或目录路径 返回值: - 错误信息|
 | [file.Create](#create) |Create 创建一个文件，返回一个文件结构体引用与错误 参数: - name: 待创建的文件路径 返回值: - 文件结构体引用 - 错误信息|
 | [file.DetectFileType](#detectfiletype) |DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型 支持常见操作系统（Linux、Windows、macOS）中的各种文件格式 参数: - filePath: 文件路径 返回值: - MIME 类型字符串 - 错误信息，如果无法识别文件类型则返回错误|
-| [file.DetectMIMETypeFromFile](#detectmimetypefromfile) ||
-| [file.DetectMIMETypeFromRaw](#detectmimetypefromraw) ||
+| [file.DetectMIMETypeFromFile](#detectmimetypefromfile) |DetectMIMETypeFromFile 读取文件并通过魔数识别其 MIME 类型 参数: - path: 待识别的文件路径 返回值: - MIME 类型对象，识别失败时为 application/octet-stream - 错误信息（与打开/读取文件相关）|
+| [file.DetectMIMETypeFromRaw](#detectmimetypefromraw) |DetectMIMETypeFromRaw 通过字节内容（魔数）识别 MIME 类型 参数: - raw: 待识别的字节内容 返回值: - MIME 类型对象，识别失败时为 application/octet-stream|
 | [file.Dir](#dir) |Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片|
 | [file.GetBase](#getbase) |GetBase 获取文件的基本名 参数: - s: 文件路径 返回值: - 路径最后一段（文件名）|
 | [file.GetDirPath](#getdirpath) |GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录 参数: - path: 输入路径 返回值: - 路径所在目录（带结尾分隔符）|
@@ -32,7 +32,7 @@ SEPARATOR|(string) &#34;/&#34;|
 | [file.IsExisted](#isexisted) |IsExisted 判断文件或目录是否存在 参数: - path: 待判断的路径 返回值: - 路径是否存在|
 | [file.IsFile](#isfile) |IsFile 判断路径是否存在且是一个文件 参数: - path: 待判断的路径 返回值: - 路径是否存在且为文件|
 | [file.IsLink](#islink) |IsLink 判断文件是否是一个符号链接 参数: - file: 待判断的文件路径 返回值: - 是否为符号链接|
-| [file.Join](#join) |Join 将任意数量的路径以默认路径分隔符链接在一起 参数: - elem: 任意数量的路径片段 返回值: - 用默认分隔符拼接后的路径|
+| [file.Join](#join) |Join 将任意数量的路径以默认路径分隔符链接在一起 参数: - path: 任意数量的路径片段 返回值: - 用默认分隔符拼接后的路径|
 | [file.Ls](#ls) |Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片|
 | [file.Lstat](#lstat) |Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息 参数: - name: 待查询的文件路径 返回值: - 文件信息对象（符号链接本身的信息） - 错误信息|
 | [file.MatchMalicious](#matchmalicious) |MatchMalicious 检测文件或内容是否包含恶意特征 支持两种输入类型： - string: 文件路径，会读取文件内容进行匹配 - []byte: 文件内容，直接匹配内容 参数: - input: 文件路径（string）或文件内容（[]byte） 返回值: - 匹配到的特征名称列表 - 错...|
@@ -318,7 +318,35 @@ mimeType, err = file.DetectFileType("/path/to/file")
 ### DetectMIMETypeFromFile
 
 #### 详细描述
-暂无描述
+DetectMIMETypeFromFile 读取文件并通过魔数识别其 MIME 类型
+
+参数:
+
+  - path: 待识别的文件路径
+
+
+
+返回值:
+
+  - MIME 类型对象，识别失败时为 application/octet-stream
+
+  - 错误信息（与打开/读取文件相关）
+
+
+
+
+Example:
+
+``````````````yak
+// 写入 PNG 文件头后识别文件类型
+p = file.Join(os.TempDir(), "yak-mime-example.png")
+file.Save(p, codec.DecodeHex("89504e470d0a1a0a")~)~
+mime, err = file.DetectMIMETypeFromFile(p)
+assert err == nil, "DetectMIMETypeFromFile should not fail on readable file"
+assert mime.String() == "image/png", "PNG file should be detected as image/png"
+file.Remove(p)
+``````````````
+
 
 #### 定义
 
@@ -327,19 +355,43 @@ mimeType, err = file.DetectFileType("/path/to/file")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| path | `string` |  |
+| path | `string` | 待识别的文件路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*MIME` |  |
-| r2 | `error` |  |
+| r1 | `*MIME` | MIME 类型对象，识别失败时为 application/octet-stream |
+| r2 | `error` | 错误信息（与打开/读取文件相关） |
 
 
 ### DetectMIMETypeFromRaw
 
 #### 详细描述
-暂无描述
+DetectMIMETypeFromRaw 通过字节内容（魔数）识别 MIME 类型
+
+参数:
+
+  - raw: 待识别的字节内容
+
+
+
+返回值:
+
+  - MIME 类型对象，识别失败时为 application/octet-stream
+
+
+
+
+Example:
+
+``````````````yak
+// PNG 文件头魔数应被识别为 image/png
+pngHeader = codec.DecodeHex("89504e470d0a1a0a")~
+mime = file.DetectMIMETypeFromRaw(pngHeader)
+println(mime.String())   // OUT: image/png
+assert mime.String() == "image/png", "PNG magic should be detected as image/png"
+``````````````
+
 
 #### 定义
 
@@ -348,12 +400,12 @@ mimeType, err = file.DetectFileType("/path/to/file")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `[]byte` |  |
+| raw | `[]byte` | 待识别的字节内容 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*MIME` |  |
+| r1 | `*MIME` | MIME 类型对象，识别失败时为 application/octet-stream |
 
 
 ### Dir
@@ -781,7 +833,7 @@ Join 将任意数量的路径以默认路径分隔符链接在一起
 
 参数:
 
-  - elem: 任意数量的路径片段
+  - path: 任意数量的路径片段
 
 
 
@@ -808,7 +860,7 @@ assert p == "/usr/bin/bash", "Join should join path segments with separator"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| path | `...string` |  |
+| path | `...string` | 任意数量的路径片段 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

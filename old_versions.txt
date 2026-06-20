@@ -1,3 +1,4 @@
 # API 文档版本归档历史记录, 由 .github/workflows/sync-docs-from-oss.yml 自动追加。
 # 每行格式: 版本<TAB>UTC时间<TAB>zip地址 (最新追加在文件末尾)。
 # 该文件经 scripts/gen-docs-versions.js 生成 static/docs-versions.json 供官网展示。
+1.4.7-beta13	2026-06-20T10:03:27Z	https://aliyun-oss.yaklang.com/yak/1.4.7-beta13/yaklang-docs-1.4.7-beta13.zip

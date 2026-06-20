@@ -4,10 +4,10 @@
 |:------|:--------|
 | [browser.Close](#close) |CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close） 参数: - opts: 浏览器可选项，通常使用 browser.id 指定要关闭的实例 返回值: - 错误信息|
 | [browser.CloseAll](#closeall) |CloseAll 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） 参数: - 无 返回值: - 无|
-| [browser.Get](#get) ||
+| [browser.Get](#get) |Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get） 参数: - opts: 浏览器可选项，如 browser.id 用于按 ID 获取 返回值: - 浏览器实例对象 - 错误信息|
 | [browser.HaveBrowserInstalled](#havebrowserinstalled) |HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） 参数: - 无 返回值: - 是否已安装浏览器|
 | [browser.List](#list) |List 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） 参数: - 无 返回值: - 浏览器实例 ID 列表|
-| [browser.Open](#open) ||
+| [browser.Open](#open) |Open 打开一个新的浏览器实例（导出名为 browser.Open） 参数: - opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等 返回值: - 浏览器实例对象 - 错误信息|
 | [browser.controlURL](#controlurl) |WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL） 参数: - controlURL: 浏览器的控制地址 返回值: - 浏览器可选项|
 | [browser.exePath](#exepath) |WithExePath 指定浏览器可执行文件路径（导出名为 browser.exePath） 参数: - exePath: 浏览器可执行文件路径 返回值: - 浏览器可选项|
 | [browser.headless](#headless) |WithHeadless 设置浏览器是否以无头模式启动（导出名为 browser.headless） 参数: - headless: 是否无头模式 返回值: - 浏览器可选项|
@@ -95,7 +95,31 @@ browser.CloseAll()
 ### Get
 
 #### 详细描述
-暂无描述
+Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get）
+
+参数:
+
+  - opts: 浏览器可选项，如 browser.id 用于按 ID 获取
+
+
+
+返回值:
+
+  - 浏览器实例对象
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 按 ID 获取浏览器实例（示意性示例）
+b = browser.Get(browser.id("main"))~
+dump(b)
+``````````````
+
 
 #### 定义
 
@@ -104,13 +128,13 @@ browser.CloseAll()
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...BrowserOption` |  |
+| opts | `...BrowserOption` | 浏览器可选项，如 browser.id 用于按 ID 获取 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*BrowserInstance` |  |
-| r2 | `error` |  |
+| r1 | `*BrowserInstance` | 浏览器实例对象 |
+| r2 | `error` | 错误信息 |
 
 
 ### HaveBrowserInstalled
@@ -188,7 +212,31 @@ dump(ids)
 ### Open
 
 #### 详细描述
-暂无描述
+Open 打开一个新的浏览器实例（导出名为 browser.Open）
+
+参数:
+
+  - opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等
+
+
+
+返回值:
+
+  - 浏览器实例对象
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// 打开一个无头浏览器（示意性示例，需要本地已安装浏览器）
+b = browser.Open(browser.headless(true))~
+defer browser.CloseAll()
+``````````````
+
 
 #### 定义
 
@@ -197,13 +245,13 @@ dump(ids)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...BrowserOption` |  |
+| opts | `...BrowserOption` | 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*BrowserInstance` |  |
-| r2 | `error` |  |
+| r1 | `*BrowserInstance` | 浏览器实例对象 |
+| r2 | `error` | 错误信息 |
 
 
 ### controlURL

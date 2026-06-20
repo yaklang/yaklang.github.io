@@ -520,6 +520,18 @@ MockAIService(handle func(message string) string) aicommon.AICallbackType
 | r1 | `aicommon.AICallbackType` |  Mock AI 服务实例 |
 
 </TabItem>
+<TabItem value="MockAIService-2" label="示例">
+
+
+``````````````yak
+cb = ai.MockAIService(func(msg) {
+    return "mocked response for: " + msg
+})
+assert cb != nil, "MockAIService should return a non-nil callback"
+println("ai.MockAIService created callback successfully")
+``````````````
+
+</TabItem>
 </Tabs>
 
 

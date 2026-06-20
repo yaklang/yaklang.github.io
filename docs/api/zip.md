@@ -9,7 +9,7 @@ StandardEncryption|(zip.EncryptionMethod) 1|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [zip.Compress](#compress) ||
+| [zip.Compress](#compress) |zipCompress 将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress） 按给定文件名读取文件内容并写入目标 zip 包 参数: - zipName: 输出的 zip 文件路径 - filenames: 一个或多个待压缩的文件路径 返回值: - 错误信息（读取文件或写入...|
 | [zip.CompressByNameWithOptions](#compressbynamewithoptions) |CompressByNameWithOptions 把若干本地文件/目录压缩为 zip 文件，支持 CompressOption（含密码、加密方法）。 关键词: CompressByName, 密码 zip 写 参数: - files: 待压缩的文件或目录路径列表 - dest: 输出的 zip 文...|
 | [zip.CompressRaw](#compressraw) |CompressRaw 将一个 map（文件名 -&gt; 内容）在内存中压缩为 zip 字节切片 参数: - i: 文件名到内容的映射（值可以是字符串或字节切片） 返回值: - 压缩后的 zip 字节切片 - 错误信息|
 | [zip.CompressRawWithPassword](#compressrawwithpassword) |CompressRawWithPassword 与 CompressRaw 类似，但生成带密码（默认 AES-256）加密的 zip 字节。 关键词: 内存加密 zip, AES256 zip 创建 参数: - i: 文件名到内容的映射 - password: 加密密码 - encryption: ...|
@@ -20,16 +20,16 @@ StandardEncryption|(zip.EncryptionMethod) 1|
 | [zip.DecompressWithPassword](#decompresswithpassword) |DecompressWithPassword 解压带密码的 zip 到目标目录。 关键词: 加密 zip 解压, AES zip 解压 参数: - zipFile: 待解压的 zip 文件路径 - dest: 解压输出的目标目录 - password: 解密密码 返回值: - 错误信息|
 | [zip.ExtractByPattern](#extractbypattern) |ExtractByPattern 根据文件名模式（支持 * 通配符）从 ZIP 文件中提取匹配的文件 参数: - zipFile: zip 文件路径 - pattern: 文件名匹配模式（如 &#34;*.txt&#34;） 返回值: - 提取结果列表（每项含 FileName/Content/Error） - 错...|
 | [zip.ExtractByPatternFromRaw](#extractbypatternfromraw) |ExtractByPatternFromRaw 从内存中的 ZIP 原始数据按文件名模式（支持 * 通配符）提取匹配的文件 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - pattern: 文件名匹配模式（如 &#34;*.txt&#34;） 返回值: - 提取结...|
-| [zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions) ||
-| [zip.ExtractByPatternWithOptions](#extractbypatternwithoptions) ||
+| [zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions) |ExtractByPatternFromRawWithOptions 从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码） 关键词: ExtractByPatternFromRaw, 内存通配符提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、st...|
+| [zip.ExtractByPatternWithOptions](#extractbypatternwithoptions) |ExtractByPatternWithOptions 从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractByPattern, 通配符提取, 密码提取 参数: - zipFile: zip 文件路径 - pattern: 文件名匹配模式（如 &#34;...|
 | [zip.ExtractFile](#extractfile) |ExtractFile 从 ZIP 文件中提取单个文件的内容 参数: - zipFile: zip 文件路径 - targetFile: 待提取的 zip 内条目名称 返回值: - 提取出的文件内容字节 - 错误信息|
 | [zip.ExtractFileFromRaw](#extractfilefromraw) |ExtractFileFromRaw 从内存中的 ZIP 原始数据中提取单个文件的内容 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - targetFile: 待提取的 zip 内条目名称 返回值: - 提取出的文件内容字节 - 错误信息|
 | [zip.ExtractFileFromRawWithOptions](#extractfilefromrawwithoptions) |ExtractFileFromRawWithOptions 从内存 ZIP 原始字节提取单个文件，支持 ExtractOption（如密码） 关键词: ExtractFileFromRaw, 内存提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、string 或 io.Rea...|
 | [zip.ExtractFileWithOptions](#extractfilewithoptions) |ExtractFileWithOptions 从 ZIP 文件提取单个文件，支持 ExtractOption（如密码） 关键词: ExtractFile, 密码提取 参数: - zipFile: zip 文件路径 - targetFile: 待提取的条目名称 - opts: 可选的提取选项（如 ex...|
 | [zip.ExtractFiles](#extractfiles) |ExtractFiles 从 ZIP 文件中并发提取多个文件 参数: - zipFile: zip 文件路径 - targetFiles: 待提取的条目名称列表 返回值: - 提取结果列表（每项含 FileName/Content/Error） - 错误信息|
 | [zip.ExtractFilesFromRaw](#extractfilesfromraw) |ExtractFilesFromRaw 从内存中的 ZIP 原始数据中并发提取多个文件 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - targetFiles: 待提取的条目名称列表 返回值: - 提取结果列表（每项含 FileName/Conte...|
-| [zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions) ||
-| [zip.ExtractFilesWithOptions](#extractfileswithoptions) ||
+| [zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions) |ExtractFilesFromRawWithOptions 从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractFilesFromRaw, 并发提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、string 或 io...|
+| [zip.ExtractFilesWithOptions](#extractfileswithoptions) |ExtractFilesWithOptions 从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractFiles, 并发提取, 密码提取 参数: - zipFile: zip 文件路径 - targetFiles: 待提取的条目名称列表 - opts:...|
 | [zip.GrepPathRawRegexp](#greppathrawregexp) |GrepPathRawRegexp 使用正则表达式在内存 ZIP 原始数据的条目路径（文件名）中搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - pattern: 路径正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配的...|
 | [zip.GrepPathRawSubString](#greppathrawsubstring) |GrepPathRawSubString 使用子字符串在内存 ZIP 原始数据的条目路径（文件名）中搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - substring: 待搜索的路径子字符串 - opts: 可选的 grep 配置选项 返回值...|
 | [zip.GrepPathRegexp](#greppathregexp) |GrepPathRegexp 使用正则表达式在 ZIP 文件的条目路径（文件名）中搜索 参数: - zipFile: zip 文件路径 - pattern: 路径正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配的路径结果列表 - 错误信息|
@@ -62,7 +62,40 @@ StandardEncryption|(zip.EncryptionMethod) 1|
 ### Compress
 
 #### 详细描述
-暂无描述
+zipCompress 将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress）
+
+按给定文件名读取文件内容并写入目标 zip 包
+
+
+
+参数:
+
+  - zipName: 输出的 zip 文件路径
+
+  - filenames: 一个或多个待压缩的文件路径
+
+
+
+返回值:
+
+  - 错误信息（读取文件或写入 zip 失败时返回）
+
+
+
+
+Example:
+
+``````````````yak
+dir = os.TempDir()
+src = file.Join(dir, "zip_demo_src.txt")
+file.Save(src, "hello zip world")~
+zipPath = file.Join(dir, "zip_demo.zip")
+zip.Compress(zipPath, src)~
+println(file.IsExisted(zipPath))   // OUT: true
+assert file.IsExisted(zipPath), "zip archive should be created"
+assert len(file.ReadFile(zipPath)~) > 0, "zip archive should be non-empty"
+``````````````
+
 
 #### 定义
 
@@ -71,13 +104,13 @@ StandardEncryption|(zip.EncryptionMethod) 1|
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| zipName | `string` |  |
-| filenames | `...string` |  |
+| zipName | `string` | 输出的 zip 文件路径 |
+| filenames | `...string` | 一个或多个待压缩的文件路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `error` | 错误信息（读取文件或写入 zip 失败时返回） |
 
 
 ### CompressByNameWithOptions
@@ -567,7 +600,37 @@ assert len(results) == 1, "only the .txt entry should match the pattern"
 ### ExtractByPatternFromRawWithOptions
 
 #### 详细描述
-暂无描述
+ExtractByPatternFromRawWithOptions 从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码）
+
+关键词: ExtractByPatternFromRaw, 内存通配符提取, 密码提取
+
+参数:
+
+  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
+
+  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
+
+  - opts: 可选的提取选项（如 extractPassword）
+
+
+
+返回值:
+
+  - 提取结果列表（每项含 FileName/Content/Error）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
+results = zip.ExtractByPatternFromRawWithOptions(zipBytes, "*.txt", zip.extractPassword("123456"))~
+assert len(results) == 1, "pattern should match one encrypted entry"
+``````````````
+
 
 #### 定义
 
@@ -576,21 +639,49 @@ assert len(results) == 1, "only the .txt entry should match the pattern"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `any` |  |
-| pattern | `string` |  |
-| opts | `...ExtractOption` |  |
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
+| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` |  |
-| r2 | `error` |  |
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
 
 ### ExtractByPatternWithOptions
 
 #### 详细描述
-暂无描述
+ExtractByPatternWithOptions 从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码）
+
+关键词: ExtractByPattern, 通配符提取, 密码提取
+
+参数:
+
+  - zipFile: zip 文件路径
+
+  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
+
+  - opts: 可选的提取选项（如 extractPassword）
+
+
+
+返回值:
+
+  - 提取结果列表（每项含 FileName/Content/Error）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+results = zip.ExtractByPatternWithOptions("/tmp/enc.zip", "*.txt", zip.extractPassword("123456"))~
+``````````````
+
 
 #### 定义
 
@@ -599,15 +690,15 @@ assert len(results) == 1, "only the .txt entry should match the pattern"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| zipFile | `string` |  |
-| pattern | `string` |  |
-| opts | `...ExtractOption` |  |
+| zipFile | `string` | zip 文件路径 |
+| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
+| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` |  |
-| r2 | `error` |  |
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
 
 ### ExtractFile
@@ -907,7 +998,38 @@ assert string(results[0].Content) == "AAA", "extracted content should match"
 ### ExtractFilesFromRawWithOptions
 
 #### 详细描述
-暂无描述
+ExtractFilesFromRawWithOptions 从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码）
+
+关键词: ExtractFilesFromRaw, 并发提取, 密码提取
+
+参数:
+
+  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
+
+  - targetFiles: 待提取的条目名称列表
+
+  - opts: 可选的提取选项（如 extractPassword）
+
+
+
+返回值:
+
+  - 提取结果列表（每项含 FileName/Content/Error）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
+results = zip.ExtractFilesFromRawWithOptions(zipBytes, ["a.txt"], zip.extractPassword("123456"))~
+assert len(results) == 1, "should extract one encrypted entry"
+assert string(results[0].Content) == "AAA", "decrypted content should match"
+``````````````
+
 
 #### 定义
 
@@ -916,21 +1038,49 @@ assert string(results[0].Content) == "AAA", "extracted content should match"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `any` |  |
-| targetFiles | `[]string` |  |
-| opts | `...ExtractOption` |  |
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| targetFiles | `[]string` | 待提取的条目名称列表 |
+| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` |  |
-| r2 | `error` |  |
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
 
 ### ExtractFilesWithOptions
 
 #### 详细描述
-暂无描述
+ExtractFilesWithOptions 从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码）
+
+关键词: ExtractFiles, 并发提取, 密码提取
+
+参数:
+
+  - zipFile: zip 文件路径
+
+  - targetFiles: 待提取的条目名称列表
+
+  - opts: 可选的提取选项（如 extractPassword）
+
+
+
+返回值:
+
+  - 提取结果列表（每项含 FileName/Content/Error）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+results = zip.ExtractFilesWithOptions("/tmp/enc.zip", ["a.txt"], zip.extractPassword("123456"))~
+``````````````
+
 
 #### 定义
 
@@ -939,15 +1089,15 @@ assert string(results[0].Content) == "AAA", "extracted content should match"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| zipFile | `string` |  |
-| targetFiles | `[]string` |  |
-| opts | `...ExtractOption` |  |
+| zipFile | `string` | zip 文件路径 |
+| targetFiles | `[]string` | 待提取的条目名称列表 |
+| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` |  |
-| r2 | `error` |  |
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
 
 ### GrepPathRawRegexp

@@ -179,9 +179,11 @@ Example:
 ``````````````yak
 // 示意性示例，需提供真实 OpenAPI 文档
 doc = file.ReadFile("openapi.yaml")~
-err = openapi.GenerateHTTPFlows(string(doc), openapi.flowHandler(func(flow) {
-    println(flow.Url)
-}))
+
+	err = openapi.GenerateHTTPFlows(string(doc), openapi.flowHandler(func(flow) {
+	    println(flow.Url)
+	}))
+
 if err != nil { die(err) }
 ``````````````
 
@@ -265,9 +267,10 @@ Example:
 
 ``````````````yak
 // 示意性示例，需提供真实 OpenAPI 文档
-err = openapi.GenerateHTTPFlows(doc, openapi.flowHandler(func(flow) {
-    println(flow.Url)
-}))
+
+	err = openapi.GenerateHTTPFlows(doc, openapi.flowHandler(func(flow) {
+	    println(flow.Url)
+	}))
 ``````````````
 
 

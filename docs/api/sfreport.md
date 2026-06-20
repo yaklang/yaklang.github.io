@@ -8,9 +8,9 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) ||
-| [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) ||
-| [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) ||
+| [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) |ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串 导出名为 sfreport.ConvertSingleResultToJSON 参数: - result: SyntaxFlow 扫描结果对象 - showDataflowPath...|
+| [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) |ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告 导出名为 sfreport.ConvertSingleResultToJSONWithOptions 参数: - result: SyntaxFlow 扫...|
+| [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) |convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload） 返回一个字典，包...|
 | [sfreport.GenerateSSAReportMarkdownForTask](#generatessareportmarkdownfortask) |GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport 参...|
 | [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) |ImportSSARiskFromJSON 从 JSON 报告数据中导入 SSA 风险记录到数据库 导出名为 sfreport.ImportSSARiskFromJSON 参数: - ctx: 上下文，用于控制取消 - db: 目标数据库连接 - jsonData: 报告 JSON 数据（字节） -...|
 | [sfreport.NewReport](#newreport) |NewReport 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） 报告对象用于汇总规则、风险、文件等信息并最终序列化为 JSON 或 Markdown 参数: - reportType: 报告类型，如 sfreport.IRifyReportType...|
@@ -26,54 +26,152 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 ### ConvertSingleResultToJSON
 
 #### 详细描述
-暂无描述
+ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串
+
+导出名为 sfreport.ConvertSingleResultToJSON
+
+参数:
+
+  - result: SyntaxFlow 扫描结果对象
+
+  - showDataflowPath: 是否在报告中展示数据流路径
+
+
+
+返回值:
+
+  - JSON 报告字符串（无风险时为空字符串）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// result 来自 ssa/syntaxflow 的扫描结果（示意性示例）
+prog = ssa.Parse(code)~
+result = prog.SyntaxFlowWithError("sink* as $sink")~
+jsonStr = sfreport.ConvertSingleResultToJSON(result, true)~
+println(jsonStr)
+``````````````
+
 
 #### 定义
 
-`ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflow bool) (string, error)`
+`ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflowPath bool) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` |  |
-| showDataflow | `bool` |  |
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
+| showDataflowPath | `bool` | 是否在报告中展示数据流路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  |
-| r2 | `error` |  |
+| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
+| r2 | `error` | 错误信息 |
 
 
 ### ConvertSingleResultToJSONWithOptions
 
 #### 详细描述
-暂无描述
+ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告
+
+导出名为 sfreport.ConvertSingleResultToJSONWithOptions
+
+参数:
+
+  - result: SyntaxFlow 扫描结果对象
+
+  - reportType: 报告类型
+
+  - showDataflowPath: 是否展示数据流路径
+
+  - showFileContent: 是否展示文件内容
+
+  - withFile: 是否携带文件数据
+
+
+
+返回值:
+
+  - JSON 报告字符串（无风险时为空字符串）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+// result 来自 ssa/syntaxflow 的扫描结果（示意性示例）
+prog = ssa.Parse(code)~
+result = prog.SyntaxFlowWithError("sink* as $sink")~
+jsonStr = sfreport.ConvertSingleResultToJSONWithOptions(result, sfreport.IRifyFullReportType, true, true, true)~
+println(jsonStr)
+``````````````
+
 
 #### 定义
 
-`ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflow bool, showFileContent bool, withFile bool) (string, error)`
+`ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool) (string, error)`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` |  |
-| reportType | `ReportType` |  |
-| showDataflow | `bool` |  |
-| showFileContent | `bool` |  |
-| withFile | `bool` |  |
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
+| reportType | `ReportType` | 报告类型 |
+| showDataflowPath | `bool` | 是否展示数据流路径 |
+| showFileContent | `bool` | 是否展示文件内容 |
+| withFile | `bool` | 是否携带文件数据 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  |
-| r2 | `error` |  |
+| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
+| r2 | `error` | 错误信息 |
 
 
 ### ConvertSingleResultToSSAResultPartsJSONPayload
 
 #### 详细描述
-暂无描述
+convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload）
+
+返回一个字典，包含 json(报告内容)、stats(统计信息)、ok(是否成功)、has_payload(是否含有效载荷)
+
+
+
+参数:
+
+  - result: SyntaxFlow 扫描结果对象
+
+  - opts: 分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等
+
+
+
+返回值:
+
+  - 包含 json/stats/ok/has_payload 的字典
+
+  - 错误信息（转换失败时返回）
+
+
+
+
+Example:
+
+``````````````yak
+// result 来自 ssa/syntaxflow 的扫描结果（示意性示例，需要可用的 SSA 程序与规则）
+prog = ssa.Parse(code)~
+result = prog.SyntaxFlowWithError("sink* as $sink")~
+payload = sfreport.ConvertSingleResultToSSAResultPartsJSONPayload(result)~
+println(payload["ok"])
+``````````````
+
 
 #### 定义
 
@@ -82,14 +180,14 @@ IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` |  |
-| opts | `...StreamPartsOption` |  |
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
+| opts | `...StreamPartsOption` | 分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |  |
-| r2 | `error` |  |
+| r1 | `map[string]any` | 包含 json/stats/ok/has_payload 的字典 |
+| r2 | `error` | 错误信息（转换失败时返回） |
 
 
 ### GenerateSSAReportMarkdownForTask

@@ -71,7 +71,7 @@ TCP_FLAG_URG|(int) 32|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [pcapx.FixPermission](#fixpermission) |FixPermission 尝试修复 pcap 权限问题|
+| [pcapx.FixPermission](#fixpermission) |FixPermission 尝试修复 pcap 权限问题 返回值: - error: 修复失败时返回错误，为 nil 表示可正常使用 syn 扫描|
 | [pcapx.GetStatistics](#getstatistics) |GetStatistics 获取 pcapx 注入流量过程中累计的统计信息(链路层、网络层、传输层) 在 yak 中通过 pcapx.GetStatistics 调用 参数: - 无 返回值: - 一个统计信息对象，包含各层地址命中计数|
 | [pcapx.InjectChaosTraffic](#injectchaostraffic) |InjectChaosTraffic 根据 ChaosTraffic 结构中携带的各类负载，自动注入对应的混合流量 在 yak 中通过 pcapx.InjectChaosTraffic 调用，支持 HTTP、TCP/IP、UDP/IP、ICMP/IP 等多种负载 参数: - t: ChaosTraf...|
 | [pcapx.InjectHTTPRequest](#injecthttprequest) |InjectHTTPRequest 将一个 HTTP 请求按 TCP/IP 流量注入到网络 在 yak 中通过 pcapx.InjectHTTPRequest 调用，会自动从请求中解析目标地址 参数: - raw: 原始 HTTP 请求字节 - opt: 可选配置项 返回值: - 无|
@@ -82,7 +82,7 @@ TCP_FLAG_URG|(int) 32|
 | [pcapx.PacketBuilder](#packetbuilder) |PacketBuilder 按照传入的各层配置选项组合并序列化出一个完整的数据包字节 在 yak 中通过 pcapx.PacketBuilder 调用，可叠加链路层/网络层/传输层等多种选项 参数: - opts: 一组数据包构建选项(如 pcapx.ipv4_srcIp、pcapx.tcp_dst...|
 | [pcapx.StartSniff](#startsniff) |StartSniff 在指定网卡上开始抓包(嗅探),通过回调选项处理捕获到的流量 在 yak 中通过 pcapx.StartSniff 调用，需要相应的抓包权限 参数: - iface: 网卡名称，多个网卡用逗号分隔 - opts: 抓包配置项，如 pcapx.pcap_bpfFilter、pcap...|
 | [pcapx.WithPayload](#withpayload) |WithPayload 为 pcapx.PacketBuilder 设置数据包的负载(Payload)内容 在 yak 中通过 pcapx.WithPayload 调用 参数: - payload: 负载字节数据 返回值: - 一个 pcapx.PacketBuilder 可接收的构建配置选项|
-| [pcapx.WithdrawPermission](#withdrawpermission) |WithdrawPermission 撤销 pcap 权限|
+| [pcapx.WithdrawPermission](#withdrawpermission) |WithdrawPermission 撤销 pcap 权限 返回值: - error: 撤销失败时返回错误|
 | [pcapx.arp_reply](#arp_reply) |arp_reply 构造一个 ARP 应答层，自动使用本机默认网卡的 IP 与 MAC 作为源 在 yak 中通过 pcapx.arp_reply 调用，配合 pcapx.PacketBuilder 使用 参数: - targetIp: 目标(接收方) IP 地址 - targetMac: 目标(接...|
 | [pcapx.arp_replyEx](#arp_replyex) |arp_replyEx 构造一个完整指定源与目的信息的 ARP 应答层 在 yak 中通过 pcapx.arp_replyEx 调用，配合 pcapx.PacketBuilder 使用 参数: - srcTarget: 应答中声明的源 IP 地址 - srcMac: 应答中声明的源 MAC 地址 -...|
 | [pcapx.arp_request](#arp_request) |arp_request 构造一个 ARP 请求层，自动使用本机默认网卡的 IP 与 MAC 作为源 在 yak 中通过 pcapx.arp_request 调用，配合 pcapx.PacketBuilder 使用 参数: - ip: 要查询的目标 IP 地址 返回值: - 一个 pcapx.Pack...|
@@ -140,6 +140,12 @@ TCP_FLAG_URG|(int) 32|
 #### 详细描述
 FixPermission 尝试修复 pcap 权限问题
 
+返回值:
+
+  - error: 修复失败时返回错误，为 nil 表示可正常使用 syn 扫描
+
+
+
 
 Example:
 
@@ -157,7 +163,7 @@ die(err) // 没有错误，即可正常使用 syn 扫描
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `error` | 修复失败时返回错误，为 nil 表示可正常使用 syn 扫描 |
 
 
 ### GetStatistics
@@ -611,6 +617,12 @@ println(len(raw))
 #### 详细描述
 WithdrawPermission 撤销 pcap 权限
 
+返回值:
+
+  - error: 撤销失败时返回错误
+
+
+
 
 Example:
 
@@ -628,7 +640,7 @@ die(err)
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `error` | 撤销失败时返回错误 |
 
 
 ### arp_reply

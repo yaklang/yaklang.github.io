@@ -11,7 +11,6 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [.](#) ||
 | [js.ASTWalk](#astwalk) |ASTWalk 对传入的 JS 代码进行 AST 遍历，收集字面量、标识符与语法错误（导出名为 js.ASTWalk） 参数: - code: JS 源代码字符串 返回值: - 遍历结果（含字符串字面量、标识符、语法错误等） - 错误信息|
 | [js.CallFunctionFromCode](#callfunctionfromcode) |CallFunctionFromCode 从传入代码中调用指定的 JS 函数并返回结果 参数: - src: 包含 JS 代码的字符串 - funcName: 要调用的 JS 函数名 - params: 零个或多个函数参数 返回值: - 函数调用的返回值 - 错误信息|
 | [js.GetFunction](#getfunction) |GetFunction 从 JS 引擎中取出某个全局函数并转换为可调用函数 参数: - vm: JS 引擎 - funcName: 函数名 返回值: - 可调用的 JS 函数 - 是否成功获取|
@@ -20,6 +19,7 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 | [js.New](#new) |New 创建一个新的 JS 引擎（goja Runtime）并返回 参数: - opts: 零个或多个运行选项，如嵌入第三方库或预置变量 返回值: - JS 引擎对象，可调用 RunString 执行 JS 代码|
 | [js.Parse](#parse) |Parse 对传入的 JS 代码进行解析并返回 AST 语法树 参数: - code: JS 源代码字符串 返回值: - 解析得到的 AST 程序节点 - 错误信息|
 | [js.Run](#run) |Run 创建新的 JS 引擎并运行传入代码，返回引擎、运行结果值和错误 会尝试自动导入代码中用到的库（CryptoJS 默认导入 V4 版本） 参数: - src: 要运行的 JS 代码字符串 - opts: 零个或多个运行选项，如嵌入第三方库或预置变量 返回值: - JS 引擎对象 - 运行结果值...|
+| [js.ToValue](#tovalue) |ToValue 将一个 Go 值转换为 JS 运行时中的值(JS Value)，便于作为变量注入 JS 环境或与执行结果交互（导出名为 js.ToValue） 参数: - i: 任意 Go 值（数字、字符串、布尔、map、slice 等） 返回值: - 转换后的 JS 值|
 | [js.libCryptoJSV3](#libcryptojsv3) |libCryptoJSV3 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 3.3.0 库 返回值: - JS 运行选项|
 | [js.libCryptoJSV4](#libcryptojsv4) |libCryptoJSV4 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 CryptoJS 4.2.0 库 返回值: - JS 运行选项|
 | [js.libJSRSASign](#libjsrsasign) |libJSRSASign 是一个 JS 运行选项参数，用于在运行 JS 代码时嵌入 jsrsasign 10.8.6 库 返回值: - JS 运行选项|
@@ -29,16 +29,6 @@ UndefinedValue|(github.com/dop251/goja.valueUndefined) undefined|
 
 
 ## 函数定义
-### 
-
-#### 详细描述
-暂无描述
-
-#### 定义
-
-``
-
-
 ### ASTWalk
 
 #### 详细描述
@@ -416,6 +406,49 @@ assert value.ToInteger() == 2, "js.Run should evaluate 1+1 to 2"
 | r1 | `*goja.Runtime` | JS 引擎对象 |
 | r2 | `goja.Value` | 运行结果值 |
 | r3 | `error` | 错误信息 |
+
+
+### ToValue
+
+#### 详细描述
+ToValue 将一个 Go 值转换为 JS 运行时中的值(JS Value)，便于作为变量注入 JS 环境或与执行结果交互（导出名为 js.ToValue）
+
+
+
+参数:
+
+  - i: 任意 Go 值（数字、字符串、布尔、map、slice 等）
+
+
+
+返回值:
+
+  - 转换后的 JS 值
+
+
+
+
+Example:
+
+``````````````yak
+v = js.ToValue("hello")
+assert v != nil, "ToValue should convert a go value to a js value"
+``````````````
+
+
+#### 定义
+
+`ToValue(i any) goja.Value`
+
+#### 参数
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| i | `any` | 任意 Go 值（数字、字符串、布尔、map、slice 等） |
+
+#### 返回值
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `goja.Value` | 转换后的 JS 值 |
 
 
 ### libCryptoJSV3

@@ -2,7 +2,7 @@
 
 |函数名|函数描述/介绍|
 |:------|:--------|
-| [java.Decompile](#decompile) |Decompile 反编译一个 jar包或者 class 返回值是反编译后的 java 文件路径|
+| [java.Decompile](#decompile) |Decompile 反编译一个 jar包或者 class 返回值是反编译后的 java 文件路径 参数: - from: 待反编译的 jar/war/class 文件路径 - to: 反编译结果输出的目录或文件路径 返回值: - error: 反编译失败时返回错误|
 | [java.FromJson](#fromjson) |FromJson 将 java.ToJson 生成的 JSON 还原为 Java 序列化对象列表 在 yak 中通过 java.FromJson 调用，是 java.ToJson 的逆操作 参数: - raw: java.ToJson 生成的 JSON 字节数组 返回值: - 还原出的 Java 序...|
 | [java.MarshalJavaObjects](#marshaljavaobjects) |MarshalJavaObjects 将一个或多个 Java 序列化对象编码为 Java 序列化字节流 在 yak 中通过 java.MarshalJavaObjects 调用，是 java.ParseJavaObjectStream 的逆操作 参数: - res: 一个或多个 Java 序列化对象...|
 | [java.NewJavaArray](#newjavaarray) |NewJavaArray 创建一个 Java 数组对象(TC_ARRAY)，承载同类型元素的字段值序列 在 yak 中通过 java.NewJavaArray 调用 参数: - j: 数组的类描述对象(描述元素类型) - values: 零个或多个数组元素字段值 返回值: - Java 数组序列化对...|
@@ -44,6 +44,20 @@ Decompile 反编译一个 jar包或者 class
 
 返回值是反编译后的 java 文件路径
 
+参数:
+
+  - from: 待反编译的 jar/war/class 文件路径
+
+  - to: 反编译结果输出的目录或文件路径
+
+
+
+返回值:
+
+  - error: 反编译失败时返回错误
+
+
+
 
 Example:
 
@@ -61,13 +75,13 @@ Decompile("a.class", "a.java"); die(err)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| from | `string` |  |
-| to | `string` |  |
+| from | `string` | 待反编译的 jar/war/class 文件路径 |
+| to | `string` | 反编译结果输出的目录或文件路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `error` |  |
+| r1 | `error` | 反编译失败时返回错误 |
 
 
 ### FromJson

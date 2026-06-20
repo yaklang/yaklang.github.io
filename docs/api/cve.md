@@ -17,7 +17,7 @@
 | [cve.cpe](#cpe) |CPE 按 CPE 字符串过滤 CVE，支持版本区间写法（导出名为 cve.cpe） 参数: - c: CPE 字符串，版本可使用 [start-end] 区间写法 返回值: - CVE 查询可选项|
 | [cve.cve](#cve) |CVE 按 CVE 编号过滤查询（导出名为 cve.cve） 参数: - id: CVE 编号，如 CVE-2021-44228 返回值: - CVE 查询可选项|
 | [cve.cwe](#cwe) |CWE 按 CWE 编号过滤 CVE 查询（导出名为 cve.cwe） 参数: - cwe: CWE 编号 返回值: - CVE 查询可选项|
-| [cve.parseToCpe](#parsetocpe) ||
+| [cve.parseToCpe](#parsetocpe) |ParseToCPE 将 CPE 字符串解析为结构化的 CPE 对象（导出名为 cve.parseToCpe） 同时支持 CPE 2.2（cpe:/...）与 CPE 2.3（cpe:2.3:...）两种格式，解析出 part/vendor/product/version 等字段 参数: - cpe...|
 | [cve.product](#product) |ProductWithVersion 按产品名（可选版本）过滤 CVE（导出名为 cve.product） 参数: - p: 产品名称 - v: 可选的产品版本 返回值: - CVE 查询可选项|
 | [cve.score](#score) |Score 按最低利用评分（CVSS）过滤 CVE（导出名为 cve.score） 参数: - score: 最低评分阈值 返回值: - CVE 查询可选项|
 | [cve.severity](#severity) |Severity 按危害等级过滤 CVE（导出名为 cve.severity，支持 high/medium/low） 参数: - level: 危害等级关键字，如 &#34;high&#34;、&#34;medium&#34;、&#34;low&#34; 返回值: - CVE 查询可选项|
@@ -349,9 +349,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.vendor("apache"), cve.severity("high")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.vendor("apache"), cve.severity("high")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -395,9 +396,10 @@ Example:
 
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
-for c in cve.QueryEx(cve.vendor("apache")) {
-    println(c.CVE)
-}
+
+	for c in cve.QueryEx(cve.vendor("apache")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -441,9 +443,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.after(2021, 1, 1)) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.after(2021, 1, 1)) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -529,9 +532,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.before(2020, 12, 31)) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.before(2020, 12, 31)) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -574,9 +578,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.cpe("cpe:/a:apache:log4j:2.14.1")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.cpe("cpe:/a:apache:log4j:2.14.1")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -618,9 +623,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.cve("CVE-2021-44228")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.cve("CVE-2021-44228")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -662,9 +668,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.cwe("CWE-79")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.cwe("CWE-79")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -686,7 +693,39 @@ for c in cve.Query(db, cve.cwe("CWE-79")) {
 ### parseToCpe
 
 #### 详细描述
-暂无描述
+ParseToCPE 将 CPE 字符串解析为结构化的 CPE 对象（导出名为 cve.parseToCpe）
+
+同时支持 CPE 2.2（cpe:/...）与 CPE 2.3（cpe:2.3:...）两种格式，解析出
+
+part/vendor/product/version 等字段
+
+
+
+参数:
+
+  - cpe: CPE 字符串，如 &#34;cpe:/a:apache:http_server:2.4.49&#34;
+
+
+
+返回值:
+
+  - 解析得到的 CPE 对象，包含 Part/Vendor/Product/Version 等字段
+
+  - 错误信息（输入不是合法 CPE 字符串时返回）
+
+
+
+
+Example:
+
+``````````````yak
+cpe = cve.parseToCpe("cpe:/a:apache:http_server:2.4.49")~
+println(cpe.Vendor + " " + cpe.Product + " " + cpe.Version)
+assert cpe.Vendor == "apache", "vendor should be apache"
+assert cpe.Product == "http_server", "product should be http_server"
+assert cpe.Version == "2.4.49", "version should be 2.4.49"
+``````````````
+
 
 #### 定义
 
@@ -695,13 +734,13 @@ for c in cve.Query(db, cve.cwe("CWE-79")) {
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cpe | `string` |  |
+| cpe | `string` | CPE 字符串，如 &#34;cpe:/a:apache:http_server:2.4.49&#34; |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*CPE` |  |
-| r2 | `error` |  |
+| r1 | `*CPE` | 解析得到的 CPE 对象，包含 Part/Vendor/Product/Version 等字段 |
+| r2 | `error` | 错误信息（输入不是合法 CPE 字符串时返回） |
 
 
 ### product
@@ -729,9 +768,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.product("log4j", "2.14.1")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.product("log4j", "2.14.1")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -774,9 +814,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.score(9.0)) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.score(9.0)) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -818,9 +859,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.severity("high")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.severity("high")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -862,9 +904,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.product("nginx"), cve.skipAnyVersion(true)) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.product("nginx"), cve.skipAnyVersion(true)) {
+	    println(c.CVE)
+	}
 ``````````````
 
 
@@ -947,9 +990,10 @@ Example:
 ``````````````yak
 // 示意性示例，需要本地 CVE 数据库
 db = cve.GetCVEDatabase()
-for c in cve.Query(db, cve.vendor("apache")) {
-    println(c.CVE)
-}
+
+	for c in cve.Query(db, cve.vendor("apache")) {
+	    println(c.CVE)
+	}
 ``````````````
 
 

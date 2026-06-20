@@ -16,7 +16,7 @@
 | [x.Foreach](#foreach) |Foreach 从前向后遍历集合，对每个元素执行回调函数(无返回值) 参数: - i: 待遍历的集合(切片/数组) - fc: 对每个元素执行的回调函数 返回值: - 无|
 | [x.ForeachRight](#foreachright) |ForeachRight 从后向前遍历集合，对每个元素执行回调函数(无返回值) 参数: - i: 待遍历的集合(切片/数组) - fc: 对每个元素执行的回调函数 返回值: - 无|
 | [x.GC](#gc) |GC 主动触发一次垃圾回收并尽量把空闲内存归还操作系统 返回值: - 无|
-| [x.GCPercent](#gcpercent) |SetGCPercent sets the garbage collection target percentage: a collection is triggered when the ratio of freshly allocated data to live data remaining ...|
+| [x.GCPercent](#gcpercent) |funkGCPercent 设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent） percent 表示相对上次 GC 后存活堆的增长百分比，越小 GC 越频繁；负值可关闭 GC 参数: - percent: 新的 GC 阈值百分比 返回值: - 设置前的旧阈值百分比|
 | [x.Head](#head) |Head 返回切片的第一个元素 参数: - arr: 源切片 返回值: - 切片的第一个元素|
 | [x.If](#if) |If 三元条件选择，当条件为真时返回 a，否则返回 b 参数: - i: 条件布尔值 - a: 条件为真时返回的值 - b: 条件为假时返回的值 返回值: - 根据条件选择的值|
 | [x.IndexOf](#indexof) |IndexOf 返回元素在切片中第一次出现的下标，未找到返回 -1 参数: - in: 源切片 - elem: 要查找的元素 返回值: - 元素首次出现的下标，未找到为 -1|
@@ -26,17 +26,17 @@
 | [x.Map](#map) |Map 遍历集合中的每个元素，使用回调函数处理后返回新的切片 参数: - i: 待遍历的集合(切片/数组) - fc: 处理每个元素的回调函数，接收元素返回新值 返回值: - 由回调返回值组成的新切片|
 | [x.Max](#max) |Max 返回数值或字符串切片中的最大值 参数: - i: 数值或字符串切片 返回值: - 切片中的最大元素|
 | [x.Min](#min) |Min 返回数值或字符串切片中的最小值 参数: - i: 数值或字符串切片 返回值: - 切片中的最小元素|
-| [x.NewEventWatcher](#neweventwatcher) ||
-| [x.NewReducer](#newreducer) ||
+| [x.NewEventWatcher](#neweventwatcher) |funkNewEventWatcher 创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher） 参数: - ctx: 上下文，用于控制观察器生命周期 - triggerTime: 触发的时间间隔 - triggerCount: 触发的累计事件数阈值 返回值...|
+| [x.NewReducer](#newreducer) |funkNewReducer 创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer） 常用于把无限增长的历史数据压缩到有限规模 参数: - reduceLimit: 触发归并的数据条数阈值 - handle: 归并函数，接收一组...|
 | [x.Range](#range) |Range 创建一个长度为 i 的空接口切片，常用于配合 for-range 生成定长循环 参数: - i: 切片长度 返回值: - 长度为 i 的空接口切片|
 | [x.Reduce](#reduce) |Reduce 对集合中的元素从初始累加器开始依次归并为单一结果 参数: - i: 待归并的集合(切片/数组) - fc: 归并回调，接收累加器与当前元素返回新的累加器 - acc: 初始累加器值 返回值: - 归并后的最终结果|
 | [x.RemoveRepeat](#removerepeat) |RemoveRepeat 对切片去重，返回仅保留首次出现元素的新切片 参数: - in: 待去重的切片 返回值: - 去重后的切片|
-| [x.Retry](#retry) |retry 对第二个参数作为函数的情况，重试N次，如果第二个参数返回值是 true，则重试，否则就结束，如果遇到错误，停止重试|
+| [x.Retry](#retry) |funkRetry 反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry） handler 返回 true 表示&#34;继续重试&#34;，返回 false 表示&#34;停止&#34; 参数: - i: 最大重试次数 - handler: 每次重试调用的函数，返回 true...|
 | [x.Reverse](#reverse) |Reverse 反转切片中元素的顺序，返回反转后的新切片 参数: - in: 待反转的切片 返回值: - 反转顺序后的切片|
 | [x.Shift](#shift) |Shift 返回去掉切片第一个元素后的新切片 参数: - i: 源切片 返回值: - 去掉首元素后的切片|
 | [x.Shuffle](#shuffle) |Shuffle 随机打乱切片中元素的顺序，返回打乱后的新切片 参数: - in: 待打乱的切片 返回值: - 打乱顺序后的切片(元素不变)|
 | [x.Some](#some) |Some 判断给定的元素中是否至少有一个存在于集合中 参数: - in: 源集合 - elements: 待检查的一个或多个元素 返回值: - 是否至少有一个元素存在于集合中|
-| [x.Sort](#sort) |SliceStable sorts the slice x using the provided less function, keeping equal elements in their original order. It panics if x is not a slice. The les...|
+| [x.Sort](#sort) |funkSort 使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort） less(i, j) 返回 true 表示下标 i 的元素应排在下标 j 之前 参数: - x: 待排序的切片(原地修改) - less: 比较函数，接收两个下标，返回是否 i 应排在 j 前|
 | [x.Subtract](#subtract) |Subtract 返回集合 x 中存在但集合 y 中不存在的元素 参数: - x: 源集合 - y: 要排除的集合 返回值: - 仅属于 x 而不属于 y 的元素集合|
 | [x.Sum](#sum) |Sum 计算切片中所有数值元素之和 参数: - arr: 数值切片 返回值: - 所有元素之和|
 | [x.Tail](#tail) |Tail 返回切片中除第一个元素外的所有元素 参数: - arr: 源切片 返回值: - 除首元素外的切片|
@@ -684,17 +684,33 @@ x.GC()
 ### GCPercent
 
 #### 详细描述
-SetGCPercent sets the garbage collection target percentage:
-a collection is triggered when the ratio of freshly allocated data
-to live data remaining after the previous collection reaches this percentage.
-SetGCPercent returns the previous setting.
-The initial setting is the value of the GOGC environment variable
-at startup, or 100 if the variable is not set.
-This setting may be effectively reduced in order to maintain a memory
-limit.
-A negative percentage effectively disables garbage collection, unless
-the memory limit is reached.
-See SetMemoryLimit for more details.
+funkGCPercent 设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent）
+
+percent 表示相对上次 GC 后存活堆的增长百分比，越小 GC 越频繁；负值可关闭 GC
+
+
+
+参数:
+
+  - percent: 新的 GC 阈值百分比
+
+
+
+返回值:
+
+  - 设置前的旧阈值百分比
+
+
+
+
+Example:
+
+``````````````yak
+old = x.GCPercent(150)
+println(typeof(old).String())   // OUT: int
+assert typeof(old).String() == "int", "GCPercent should return the previous percent as int"
+x.GCPercent(old)
+``````````````
 
 
 #### 定义
@@ -704,12 +720,12 @@ See SetMemoryLimit for more details.
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| percent | `int` |  |
+| percent | `int` | 新的 GC 阈值百分比 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `int` |  |
+| r1 | `int` | 设置前的旧阈值百分比 |
 
 
 ### Head
@@ -1138,44 +1154,102 @@ assert result == 1, "min of 3,1,2 should be 1"
 ### NewEventWatcher
 
 #### 详细描述
-暂无描述
+funkNewEventWatcher 创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher）
+
+
+
+参数:
+
+  - ctx: 上下文，用于控制观察器生命周期
+
+  - triggerTime: 触发的时间间隔
+
+  - triggerCount: 触发的累计事件数阈值
+
+
+
+返回值:
+
+  - 事件观察器管理对象
+
+
+
+
+Example:
+
+``````````````yak
+d = time.ParseDuration("1s")~
+w = x.NewEventWatcher(context.Background(), d, 10)
+assert w != nil, "event watcher should be created"
+``````````````
+
 
 #### 定义
 
-`NewEventWatcher(ctx context.Context, triggerTime time.Duration, triggerCount int) *EventWatcherManager`
+`NewEventWatcher(ctx context.Context, triggerTime time.Duration, triggerCount int) *utils.EventWatcherManager`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| ctx | `context.Context` |  |
-| triggerTime | `time.Duration` |  |
-| triggerCount | `int` |  |
+| ctx | `context.Context` | 上下文，用于控制观察器生命周期 |
+| triggerTime | `time.Duration` | 触发的时间间隔 |
+| triggerCount | `int` | 触发的累计事件数阈值 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*EventWatcherManager` |  |
+| r1 | `*utils.EventWatcherManager` | 事件观察器管理对象 |
 
 
 ### NewReducer
 
 #### 详细描述
-暂无描述
+funkNewReducer 创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer）
+
+常用于把无限增长的历史数据压缩到有限规模
+
+
+
+参数:
+
+  - reduceLimit: 触发归并的数据条数阈值
+
+  - handle: 归并函数，接收一组字符串并返回合并后的单条字符串
+
+
+
+返回值:
+
+  - 归并器对象，可调用 Push 推入数据、GetData 获取当前数据
+
+
+
+
+Example:
+
+``````````````yak
+r = x.NewReducer(2, items => str.Join(items, ","))
+r.Push("a"); r.Push("b"); r.Push("c")
+data = r.GetData()
+println(data)
+assert len(data) >= 1, "reducer should keep reduced data"
+``````````````
+
 
 #### 定义
 
-`NewReducer(reduceLimit int, handle ReduceFunction) *Reducer`
+`NewReducer(reduceLimit int, handle reducer.ReduceFunction) *reducer.Reducer`
 
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| reduceLimit | `int` |  |
-| handle | `ReduceFunction` |  |
+| reduceLimit | `int` | 触发归并的数据条数阈值 |
+| handle | `reducer.ReduceFunction` | 归并函数，接收一组字符串并返回合并后的单条字符串 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `*Reducer` |  |
+| r1 | `*reducer.Reducer` | 归并器对象，可调用 Push 推入数据、GetData 获取当前数据 |
 
 
 ### Range
@@ -1322,56 +1396,28 @@ assert len(result) == 3, "duplicates should be removed"
 ### Retry
 
 #### 详细描述
-retry 对第二个参数作为函数的情况，重试N次，如果第二个参数返回值是 true，则重试，否则就结束，如果遇到错误，停止重试
+funkRetry 反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry）
+
+handler 返回 true 表示&#34;继续重试&#34;，返回 false 表示&#34;停止&#34;
+
+
+
+参数:
+
+  - i: 最大重试次数
+
+  - handler: 每次重试调用的函数，返回 true 继续、false 停止
+
+
 
 
 Example:
 
 ``````````````yak
 count = 0
-
-	retry(100, () => {
-	   defer recover()
-
-	   count++
-	   if count > 3 {
-	       die(111)
-	   }
-	   return true
-	})
-
-assert count == 4, f`${count}`
-
-count = 0
-
-	retry(100, () => {
-	   defer recover()
-
-	   count++
-	   if count > 3 {
-	       return false
-	   }
-	   return true
-	})
-
-assert count == 4, f`${count}`
-
-count = 0
-
-	retry(100, () => {
-	   count++
-	})
-
-assert count == 1, f`${count}`
-
-count = 0
-
-	retry(100, () => {
-	   count++
-	   return true
-	})
-
-assert count == 100, f`${count}`
+x.Retry(10, () => { count++; return count < 3 })
+println(count)   // OUT: 3
+assert count == 3, "Retry keeps calling while handler returns true"
 ``````````````
 
 
@@ -1382,8 +1428,8 @@ assert count == 100, f`${count}`
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `int` |  |
-| handler | `func() bool` |  |
+| i | `int` | 最大重试次数 |
+| handler | `func() bool` | 每次重试调用的函数，返回 true 继续、false 停止 |
 
 
 ### Reverse
@@ -1570,15 +1616,29 @@ assert x.Some([1, 2, 3], 8, 9) == false, "neither 8 nor 9 is present"
 ### Sort
 
 #### 详细描述
-SliceStable sorts the slice x using the provided less
-function, keeping equal elements in their original order.
-It panics if x is not a slice.
+funkSort 使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort）
 
-The less function must satisfy the same requirements as
-the Interface type&#39;s Less method.
+less(i, j) 返回 true 表示下标 i 的元素应排在下标 j 之前
 
-Note: in many situations, the newer [slices.SortStableFunc] function is more
-ergonomic and runs faster.
+
+
+参数:
+
+  - x: 待排序的切片(原地修改)
+
+  - less: 比较函数，接收两个下标，返回是否 i 应排在 j 前
+
+
+
+
+Example:
+
+``````````````yak
+arr = [3, 1, 2]
+x.Sort(arr, (i, j) => arr[i] < arr[j])
+println(arr)   // OUT: [1 2 3]
+assert arr[0] == 1 && arr[2] == 3, "Sort should sort the slice ascending in place"
+``````````````
 
 
 #### 定义
@@ -1588,8 +1648,8 @@ ergonomic and runs faster.
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| x | `any` |  |
-| less | `func(i, j int) bool` |  |
+| x | `any` | 待排序的切片(原地修改) |
+| less | `func(i, j int) bool` | 比较函数，接收两个下标，返回是否 i 应排在 j 前 |
 
 
 ### Subtract

@@ -3,7 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [diff.Diff](#diff) |Diff 比较两个输入内容并返回 git 风格的 diff 文本 内部通过内存 git 仓库提交两个版本并计算差异，输入可为字符串或字节 参数: - raw1: 第一个（旧）内容，字符串或字节 - raw2: 第二个（新）内容，字符串或字节 - handler: 可选的差异回调处理器；提供后将逐个变...|
-| [diff.DiffDir](#diffdir) ||
+| [diff.DiffDir](#diffdir) |diffDir 比较两个本地目录的内容并返回 git 风格的 diff 文本（导出名为 diff.DiffDir） 递归对比两个目录下的同名文件，输出新增、删除与修改 参数: - i: 第一个（旧）目录路径 - j: 第二个（新）目录路径 返回值: - git 风格的 diff 文本 - 错误信息（...|
 | [diff.DiffFromFileSystem](#difffromfilesystem) |FileSystemDiff 比较两个文件系统并返回 git 风格的 diff 文本 常用于比较两个目录树或压缩包的内容差异（导出名为 diff.DiffFromFileSystem） 参数: - fs1: 第一个（旧）文件系统 - fs2: 第二个（新）文件系统 - handler: 可选的差异回...|
 | [diff.DiffZIPFile](#diffzipfile) |DiffZIPFile 比较两个 ZIP 压缩包的内容并返回 git 风格的 diff 文本 是对 FileSystemDiff 的高层封装，自动将 ZIP 文件加载为文件系统再比较 参数: - zipFile1: 第一个（旧）ZIP 文件路径 - zipFile2: 第二个（新）ZIP 文件路径 ...|
 
@@ -65,7 +65,42 @@ assert str.Contains(result, "hello"), "diff should keep the context line"
 ### DiffDir
 
 #### 详细描述
-暂无描述
+diffDir 比较两个本地目录的内容并返回 git 风格的 diff 文本（导出名为 diff.DiffDir）
+
+递归对比两个目录下的同名文件，输出新增、删除与修改
+
+
+
+参数:
+
+  - i: 第一个（旧）目录路径
+
+  - j: 第二个（新）目录路径
+
+
+
+返回值:
+
+  - git 风格的 diff 文本
+
+  - 错误信息（目录不存在或比较失败时返回）
+
+
+
+
+Example:
+
+``````````````yak
+base = os.TempDir()
+d1 = file.Join(base, "diff_a"); d2 = file.Join(base, "diff_b")
+file.MkdirAll(d1)~; file.MkdirAll(d2)~
+file.Save(file.Join(d1, "f.txt"), "hello")~
+file.Save(file.Join(d2, "f.txt"), "hello world")~
+result = diff.DiffDir(d1, d2)~
+println(result)
+assert result.Contains("hello world"), "diff should contain the changed content"
+``````````````
+
 
 #### 定义
 
@@ -74,14 +109,14 @@ assert str.Contains(result, "hello"), "diff should keep the context line"
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |  |
-| j | `string` |  |
+| i | `string` | 第一个（旧）目录路径 |
+| j | `string` | 第二个（新）目录路径 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  |
-| r2 | `error` |  |
+| r1 | `string` | git 风格的 diff 文本 |
+| r2 | `error` | 错误信息（目录不存在或比较失败时返回） |
 
 
 ### DiffFromFileSystem

@@ -3,7 +3,7 @@
 |函数名|函数描述/介绍|
 |:------|:--------|
 | [toolbox.Install](#install) |_install 安装指定的第三方二进制工具（导出名为 toolbox.Install） 从远端下载并安装如 ffmpeg、whisper 等第三方工具到本地 参数: - name: 工具名称，如 &#34;ffmpeg&#34; - options: 可选项，如 toolbox.proxy / toolbox.f...|
-| [toolbox.List](#list) ||
+| [toolbox.List](#list) |GetAllStatus 列出所有已注册第三方工具的安装状态（导出名为 toolbox.List） 返回值: - 各工具的状态列表（包含名称、是否已安装、版本等） - 错误信息|
 | [toolbox.Uninstall](#uninstall) |Uninstall 卸载指定的第三方二进制工具（导出名为 toolbox.Uninstall） 参数: - name: 工具名称，如 &#34;ffmpeg&#34; 返回值: - 错误信息|
 | [toolbox.context](#context) |WithContext 设置安装上下文，用于控制取消与超时（导出名为 toolbox.context） 参数: - ctx: 上下文对象 返回值: - 安装可选项|
 | [toolbox.force](#force) |WithForce 设置是否强制重新安装（导出名为 toolbox.force） 参数: - force: 为 true 时即使已安装也会重新安装 返回值: - 安装可选项|
@@ -62,7 +62,28 @@ if err != nil { die(err) }
 ### List
 
 #### 详细描述
-暂无描述
+GetAllStatus 列出所有已注册第三方工具的安装状态（导出名为 toolbox.List）
+
+返回值:
+
+  - 各工具的状态列表（包含名称、是否已安装、版本等）
+
+  - 错误信息
+
+
+
+
+Example:
+
+``````````````yak
+statusList, err = toolbox.List()
+assert err == nil, "toolbox.List should not fail"
+
+	for s in statusList {
+	    println(s.Name)
+	}
+``````````````
+
 
 #### 定义
 
@@ -71,8 +92,8 @@ if err != nil { die(err) }
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*BinaryStatus` |  |
-| r2 | `error` |  |
+| r1 | `[]*BinaryStatus` | 各工具的状态列表（包含名称、是否已安装、版本等） |
+| r2 | `error` | 错误信息 |
 
 
 ### Uninstall
