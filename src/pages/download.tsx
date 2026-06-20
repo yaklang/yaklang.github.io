@@ -4,7 +4,16 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { Button, Card, Empty, List, Space, Tag, Typography } from "antd";
+import {
+  Button,
+  Card,
+  ConfigProvider,
+  Empty,
+  List,
+  Space,
+  Tag,
+  Typography,
+} from "antd";
 import {
   DownloadOutlined,
   FilePdfOutlined,
@@ -12,6 +21,9 @@ import {
 } from "@ant-design/icons";
 
 const { Title, Paragraph, Text } = Typography;
+
+// Yak 品牌主题橙色 (与 custom.scss 的 --base-theme-color 一致)
+const YAK_ORANGE = "#ff7d23";
 
 interface DocVersion {
   version: string;
@@ -58,7 +70,15 @@ function DownloadContent() {
   return (
     <div
       className="container"
-      style={{ maxWidth: 920, margin: "0 auto", padding: "40px 16px" }}
+      style={{
+        maxWidth: 920,
+        margin: "0 auto",
+        // 导航栏为 position: fixed (高 var(--ifm-navbar-height)), 需让出对应高度避免被遮挡
+        paddingTop: "calc(var(--ifm-navbar-height) + 32px)",
+        paddingBottom: 64,
+        paddingLeft: 16,
+        paddingRight: 16,
+      }}
     >
       <Title level={2}>下载资源</Title>
       <Paragraph type="secondary">
@@ -84,14 +104,20 @@ function DownloadContent() {
               </Link>
             </Button>
             {latest && (
-              <Button icon={<DownloadOutlined />} href={latest.url}>
+              <Button
+                type="primary"
+                ghost
+                icon={<DownloadOutlined />}
+                href={latest.url}
+              >
                 &nbsp;下载最新文档 (v{latest.version})
               </Button>
             )}
           </Space>
           {latest && (
             <Text type="secondary">
-              当前归档最新版本: <Tag color="blue">v{latest.version}</Tag>
+              当前归档最新版本:{" "}
+              <Tag color={YAK_ORANGE}>v{latest.version}</Tag>
               {latest.date ? `归档于 ${latest.date}` : null}
             </Text>
           )}
@@ -142,7 +168,9 @@ export default function DownloadResources() {
       description="Yaklang / Yakit 技术白皮书与 API 文档历史版本下载"
     >
       <main>
-        <DownloadContent />
+        <ConfigProvider theme={{ token: { colorPrimary: YAK_ORANGE } }}>
+          <DownloadContent />
+        </ConfigProvider>
       </main>
     </Layout>
   );

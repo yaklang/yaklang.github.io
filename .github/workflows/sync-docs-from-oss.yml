@@ -14,6 +14,11 @@ on:
         required: false
         default: false
         type: boolean
+      version:
+        description: "Explicit engine version to sync (e.g. 1.4.7-beta13). Leave empty to use yak/latest/version.txt"
+        required: false
+        default: ""
+        type: string
 
 jobs:
   sync-docs:
@@ -38,8 +43,18 @@ jobs:
           set -e
           OSS_BASE="https://aliyun-oss.yaklang.com"
 
-          LATEST=$(curl -fsSL "${OSS_BASE}/yak/latest/version.txt" | tr -d ' \r\n')
-          echo "latest engine version from oss: ${LATEST}"
+          # 显式指定版本(手动触发)时直接使用该版本; 否则读取 OSS 上的 latest/version.txt。
+          # 显式指定版本视为强制应用(只要 zip 存在), 便于在 beta 发布后立即同步而无需等正式晋级。
+          INPUT_VERSION="${{ github.event.inputs.version }}"
+          EXPLICIT="false"
+          if [ -n "${INPUT_VERSION}" ]; then
+            LATEST=$(echo "${INPUT_VERSION}" | tr -d ' \r\n')
+            EXPLICIT="true"
+            echo "explicit version requested: ${LATEST}"
+          else
+            LATEST=$(curl -fsSL "${OSS_BASE}/yak/latest/version.txt" | tr -d ' \r\n')
+            echo "latest engine version from oss: ${LATEST}"
+          fi
 
           # 版本过滤: 接受稳定版 X.Y.Z 与 X.Y.Z-betaN, 拒绝 alpha / rc / dev / 快照等
           if ! echo "${LATEST}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-beta[0-9]*)?$'; then
@@ -55,7 +70,7 @@ jobs:
           echo "current doc version in repo: ${CURRENT}"
 
           FORCE="${{ github.event.inputs.force }}"
-          if [ "${LATEST}" = "${CURRENT}" ] && [ "${FORCE}" != "true" ]; then
+          if [ "${LATEST}" = "${CURRENT}" ] && [ "${FORCE}" != "true" ] && [ "${EXPLICIT}" != "true" ]; then
             echo "doc version already up to date, nothing to do"
             echo "should_update=false" >> "$GITHUB_OUTPUT"
             exit 0
