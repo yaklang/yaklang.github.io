@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">liteforge | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/liteforge"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="liteforge | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/liteforge"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/liteforge" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/liteforge" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/liteforge" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"liteforge","item":"https://yaklang.com/en/docs/api/liteforge"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -198,7 +198,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#analyzevideoomni" class="">liteforge.AnalyzeVideoOmni</a></td><td style="text-align:left">AnalyzeVideoOmni 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。</td></tr><tr><td style="text-align:left"><a href="#buildvideoknowledgefromomni" class="">liteforge.BuildVideoKnowledgeFromOmni</a></td><td style="text-align:left">BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路， 但分析阶段切换为 omni 端到端视频理解（AnalyzeVideoOmni），与既有 BuildKnowledgeFromFile 等保持完全独立，纯增量。 关键词: Bu...</td></tr><tr><td style="text-align:left"><a href="#execute" class="">liteforge.Execute</a></td><td style="text-align:left">liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. 参数: - query: 提示词/查询内容 - opts: 执行可选项，如 liteforge.outpu...</td></tr><tr><td style="text-align:left"><a href="#action" class="">liteforge.action</a></td><td style="text-align:left">liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,</td></tr><tr><td style="text-align:left"><a href="#analyzectx" class="">liteforge.analyzeCtx</a></td><td style="text-align:left">WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） 参数: - ctx: 上下文对象 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzelog" class="">liteforge.analyzeLog</a></td><td style="text-align:left">WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） 参数: - handler: 日志回调函数，参数为格式化字符串与参数 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzestatuscard" class="">liteforge.analyzeStatusCard</a></td><td style="text-align:left">WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard） 参数: - handler: 状态卡片回调，参数为 (id, data, tags...) 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">liteforge.context</a></td><td style="text-align:left">liteforge.context is an option for liteforge.Execute it sets the context for the liteforge execution</td></tr><tr><td style="text-align:left"><a href="#forceimage" class="">liteforge.forceImage</a></td><td style="text-align:left">liteforge.forceImage is an option for liteforge.Execute it forces the execution to require image input</td></tr><tr><td style="text-align:left"><a href="#id" class="">liteforge.id</a></td><td style="text-align:left">liteforge.id is an option for liteforge.Execute it sets the ID for the liteforge instance</td></tr><tr><td style="text-align:left"><a href="#image" class="">liteforge.image</a></td><td style="text-align:left">liteforge.image is an option for liteforge.Execute it adds image data to the execution context</td></tr><tr><td style="text-align:left"><a href="#imageextraprompt" class="">liteforge.imageExtraPrompt</a></td><td style="text-align:left">WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） 参数: - prompt: 额外提示词 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#imagefile" class="">liteforge.imageFile</a></td><td style="text-align:left">liteforge.imageFile is an option for liteforge.Execute it adds image files to the execution context</td></tr><tr><td style="text-align:left"><a href="#knowledgebasedesc" class="">liteforge.knowledgeBaseDesc</a></td><td style="text-align:left">RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc） 参数: - desc: 知识库描述 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasename" class="">liteforge.knowledgeBaseName</a></td><td style="text-align:left">RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName） 参数: - name: 知识库名称 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasetype" class="">liteforge.knowledgeBaseType</a></td><td style="text-align:left">RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType） 参数: - typ: 知识库类型 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgeentrylength" class="">liteforge.knowledgeEntryLength</a></td><td style="text-align:left">RefineWithKnowledgeEntryLength 设置每条知识条目的目标长度（导出名为 liteforge.knowledgeEntryLength） 参数: - length: 知识条目长度 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#omniapikey" class="">liteforge.omniAPIKey</a></td><td style="text-align:left">WithVideoOmniAPIKey 设置 omni 视频分析使用的 API Key（导出名为 liteforge.omniAPIKey） 参数: - k: API Key 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnibaseurl" class="">liteforge.omniBaseURL</a></td><td style="text-align:left">WithVideoOmniBaseURL 设置 omni 视频分析使用的 API 基础地址（导出名为 liteforge.omniBaseURL） 参数: - u: API 基础地址 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnicontext" class="">liteforge.omniContext</a></td><td style="text-align:left">WithVideoOmniContext 设置 omni 视频分析的上下文（导出名为 liteforge.omniContext） 参数: - ctx: 上下文对象 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxbase64bytes" class="">liteforge.omniMaxBase64Bytes</a></td><td style="text-align:left">WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes） 参数: - n: 字节上限 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxheight" class="">liteforge.omniMaxHeight</a></td><td style="text-align:left">WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） 参数: - h: 最大高度（像素） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxsegments" class="">liteforge.omniMaxSegments</a></td><td style="text-align:left">WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） 参数: - n: 最大段数 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimodel" class="">liteforge.omniModel</a></td><td style="text-align:left">WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） 参数: - m: 模型名 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetflash" class="">liteforge.omniPresetFlash</a></td><td style="text-align:left">VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetplus" class="">liteforge.omniPresetPlus</a></td><td style="text-align:left">VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetturbo" class="">liteforge.omniPresetTurbo</a></td><td style="text-align:left">VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设 关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus 预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset...</td></tr><tr><td style="text-align:left"><a href="#omniprogresscallback" class="">liteforge.omniProgressCallback</a></td><td style="text-align:left">WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback） 参数: - cb: 进度回调，参数为每段的分析结果 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniqueryprompt" class="">liteforge.omniQueryPrompt</a></td><td style="text-align:left">WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt） 参数: - q: 查询提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniratelimitretry" class="">liteforge.omniRateLimitRetry</a></td><td style="text-align:left">WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。 关键词: WithVideoOmniRateLimitRetry, omni 视频限速重试 参数: - maxAttempts: 最大重试次数 - backoffBase: 退避基数（time.Dur...</td></tr><tr><td style="text-align:left"><a href="#omnireencode" class="">liteforge.omniReencode</a></td><td style="text-align:left">WithVideoOmniReencode 设置是否对视频切片重新编码（导出名为 liteforge.omniReencode） 参数: - b: 是否重新编码 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentinterval" class="">liteforge.omniSegmentInterval</a></td><td style="text-align:left">WithVideoOmniSegmentInterval 设置段间静默节流，&lt;=0 表示不节流。 关键词: WithVideoOmniSegmentInterval, omni 视频段间节流 参数: - d: 段间间隔（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentseconds" class="">liteforge.omniSegmentSeconds</a></td><td style="text-align:left">WithVideoOmniSegmentSeconds 设置 omni 视频切片的时长（秒，导出名为 liteforge.omniSegmentSeconds） 参数: - s: 每段视频时长（秒） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisystemprompt" class="">liteforge.omniSystemPrompt</a></td><td style="text-align:left">WithVideoOmniSystemPrompt 设置 omni 视频分析的系统提示词（导出名为 liteforge.omniSystemPrompt） 参数: - p: 系统提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitargetfps" class="">liteforge.omniTargetFPS</a></td><td style="text-align:left">WithVideoOmniTargetFPS 设置视频切片的目标帧率（导出名为 liteforge.omniTargetFPS） 参数: - f: 目标帧率 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitimeout" class="">liteforge.omniTimeout</a></td><td style="text-align:left">WithVideoOmniTimeout 设置 omni 视频分析的超时时间（导出名为 liteforge.omniTimeout） 参数: - d: 超时时间（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitype" class="">liteforge.omniType</a></td><td style="text-align:left">WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType） 参数: - t: AI 类型 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipdir" class="">liteforge.omniZipDir</a></td><td style="text-align:left">WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按 {kbName|video-omni}-{model}-{ts}.zip 命名落盘。 参数: - dir: zip 输出目录 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipfile" class="">liteforge.omniZipFile</a></td><td style="text-align:left">WithVideoOmniZipFile 指定 zip 文件完整输出路径。 设置后会忽略 WithVideoOmniZipDir。 参数: - p: zip 文件输出路径 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#output" class="">liteforge.output</a></td><td style="text-align:left">liteforge.output is an option for liteforge.Execute it can limit the output of the liteforge.Execute use <code>jsonschema.ActionObject</code> to limit the output...</td></tr><tr><td style="text-align:left"><a href="#refineprompt" class="">liteforge.refinePrompt</a></td><td style="text-align:left">_refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt） 参数: - prompt: 提炼提示词 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#speedpriority" class="">liteforge.speedPriority</a></td><td style="text-align:left">liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks 参数: - b: 是否启用速度优先，缺省为 true 返回值: - liteforge 执行可选项</td></tr><tr><td style="text-align:left"><a href="#strictrefine" class="">liteforge.strictRefine</a></td><td style="text-align:left">_refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine） 参数: - strict: 是否严格模式 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#verbosename" class="">liteforge.verboseName</a></td><td style="text-align:left">liteforge.verboseName is an option for liteforge.Execute it adds verbose naming options to the execution</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#analyzevideoomni" class="">liteforge.AnalyzeVideoOmni</a></td><td style="text-align:left">AnalyzeVideoOmni 把视频切片送进 omni 模型做端到端理解，按段返回 AnalysisResult。</td></tr><tr><td style="text-align:left"><a href="#buildvideoknowledgefromomni" class="">liteforge.BuildVideoKnowledgeFromOmni</a></td><td style="text-align:left">BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路， 但分析阶段切换为 omni 端到端视频理解（AnalyzeVideoOmni），与既有 BuildKnowledgeFromFile 等保持完全独立，纯增量。 关键词: Bu...</td></tr><tr><td style="text-align:left"><a href="#execute" class="">liteforge.Execute</a></td><td style="text-align:left">liteforge.Execute can create a temporary LiteForge instance and execute it with the given query. 参数: - query: 提示词/查询内容 - opts: 执行可选项，如 liteforge.outpu...</td></tr><tr><td style="text-align:left"><a href="#action" class="">liteforge.action</a></td><td style="text-align:left">liteforge.action is an option for liteforge.Execute it sets the action type for the liteforge execution,</td></tr><tr><td style="text-align:left"><a href="#analyzectx" class="">liteforge.analyzeCtx</a></td><td style="text-align:left">WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx） 参数: - ctx: 上下文对象 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzelog" class="">liteforge.analyzeLog</a></td><td style="text-align:left">WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog） 参数: - handler: 日志回调函数，参数为格式化字符串与参数 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#analyzestatuscard" class="">liteforge.analyzeStatusCard</a></td><td style="text-align:left">WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard） 参数: - handler: 状态卡片回调，参数为 (id, data, tags...) 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">liteforge.context</a></td><td style="text-align:left">liteforge.context is an option for liteforge.Execute it sets the context for the liteforge execution</td></tr><tr><td style="text-align:left"><a href="#forceimage" class="">liteforge.forceImage</a></td><td style="text-align:left">liteforge.forceImage is an option for liteforge.Execute it forces the execution to require image input</td></tr><tr><td style="text-align:left"><a href="#id" class="">liteforge.id</a></td><td style="text-align:left">liteforge.id is an option for liteforge.Execute it sets the ID for the liteforge instance</td></tr><tr><td style="text-align:left"><a href="#image" class="">liteforge.image</a></td><td style="text-align:left">liteforge.image is an option for liteforge.Execute it adds image data to the execution context</td></tr><tr><td style="text-align:left"><a href="#imageextraprompt" class="">liteforge.imageExtraPrompt</a></td><td style="text-align:left">WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt） 参数: - prompt: 额外提示词 返回值: - 分析可选项</td></tr><tr><td style="text-align:left"><a href="#imagefile" class="">liteforge.imageFile</a></td><td style="text-align:left">liteforge.imageFile is an option for liteforge.Execute it adds image files to the execution context</td></tr><tr><td style="text-align:left"><a href="#knowledgebasedesc" class="">liteforge.knowledgeBaseDesc</a></td><td style="text-align:left">RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc） 参数: - desc: 知识库描述 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasename" class="">liteforge.knowledgeBaseName</a></td><td style="text-align:left">RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName） 参数: - name: 知识库名称 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgebasetype" class="">liteforge.knowledgeBaseType</a></td><td style="text-align:left">RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType） 参数: - typ: 知识库类型 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#knowledgeentrylength" class="">liteforge.knowledgeEntryLength</a></td><td style="text-align:left">RefineWithKnowledgeEntryLength 设置每条知识条目的目标长度（导出名为 liteforge.knowledgeEntryLength） 参数: - length: 知识条目长度 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#omniapikey" class="">liteforge.omniAPIKey</a></td><td style="text-align:left">WithVideoOmniAPIKey 设置 omni 视频分析使用的 API Key（导出名为 liteforge.omniAPIKey） 参数: - k: API Key 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnibaseurl" class="">liteforge.omniBaseURL</a></td><td style="text-align:left">WithVideoOmniBaseURL 设置 omni 视频分析使用的 API 基础地址（导出名为 liteforge.omniBaseURL） 参数: - u: API 基础地址 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnicontext" class="">liteforge.omniContext</a></td><td style="text-align:left">WithVideoOmniContext 设置 omni 视频分析的上下文（导出名为 liteforge.omniContext） 参数: - ctx: 上下文对象 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxbase64bytes" class="">liteforge.omniMaxBase64Bytes</a></td><td style="text-align:left">WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes） 参数: - n: 字节上限 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxheight" class="">liteforge.omniMaxHeight</a></td><td style="text-align:left">WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight） 参数: - h: 最大高度（像素） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimaxsegments" class="">liteforge.omniMaxSegments</a></td><td style="text-align:left">WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments） 参数: - n: 最大段数 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnimodel" class="">liteforge.omniModel</a></td><td style="text-align:left">WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel） 参数: - m: 模型名 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetflash" class="">liteforge.omniPresetFlash</a></td><td style="text-align:left">VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetplus" class="">liteforge.omniPresetPlus</a></td><td style="text-align:left">VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus） 参数: - 无 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnipresetturbo" class="">liteforge.omniPresetTurbo</a></td><td style="text-align:left">VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设 关键词: omniPresetTurbo, omniPresetFlash, omniPresetPlus 预设会强制覆盖 Preset 与 Model；若需要再覆盖 Model 请在 preset...</td></tr><tr><td style="text-align:left"><a href="#omniprogresscallback" class="">liteforge.omniProgressCallback</a></td><td style="text-align:left">WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback） 参数: - cb: 进度回调，参数为每段的分析结果 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniqueryprompt" class="">liteforge.omniQueryPrompt</a></td><td style="text-align:left">WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt） 参数: - q: 查询提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omniratelimitretry" class="">liteforge.omniRateLimitRetry</a></td><td style="text-align:left">WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。 关键词: WithVideoOmniRateLimitRetry, omni 视频限速重试 参数: - maxAttempts: 最大重试次数 - backoffBase: 退避基数（time.Dur...</td></tr><tr><td style="text-align:left"><a href="#omnireencode" class="">liteforge.omniReencode</a></td><td style="text-align:left">WithVideoOmniReencode 设置是否对视频切片重新编码（导出名为 liteforge.omniReencode） 参数: - b: 是否重新编码 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentinterval" class="">liteforge.omniSegmentInterval</a></td><td style="text-align:left">WithVideoOmniSegmentInterval 设置段间静默节流，&lt;=0 表示不节流。 关键词: WithVideoOmniSegmentInterval, omni 视频段间节流 参数: - d: 段间间隔（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisegmentseconds" class="">liteforge.omniSegmentSeconds</a></td><td style="text-align:left">WithVideoOmniSegmentSeconds 设置 omni 视频切片的时长（秒，导出名为 liteforge.omniSegmentSeconds） 参数: - s: 每段视频时长（秒） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnisystemprompt" class="">liteforge.omniSystemPrompt</a></td><td style="text-align:left">WithVideoOmniSystemPrompt 设置 omni 视频分析的系统提示词（导出名为 liteforge.omniSystemPrompt） 参数: - p: 系统提示词 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitargetfps" class="">liteforge.omniTargetFPS</a></td><td style="text-align:left">WithVideoOmniTargetFPS 设置视频切片的目标帧率（导出名为 liteforge.omniTargetFPS） 参数: - f: 目标帧率 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitimeout" class="">liteforge.omniTimeout</a></td><td style="text-align:left">WithVideoOmniTimeout 设置 omni 视频分析的超时时间（导出名为 liteforge.omniTimeout） 参数: - d: 超时时间（time.Duration） 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnitype" class="">liteforge.omniType</a></td><td style="text-align:left">WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType） 参数: - t: AI 类型 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipdir" class="">liteforge.omniZipDir</a></td><td style="text-align:left">WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按 {kbName|video-omni}-{model}-{ts}.zip 命名落盘。 参数: - dir: zip 输出目录 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#omnizipfile" class="">liteforge.omniZipFile</a></td><td style="text-align:left">WithVideoOmniZipFile 指定 zip 文件完整输出路径。 设置后会忽略 WithVideoOmniZipDir。 参数: - p: zip 文件输出路径 返回值: - omni 视频可选项</td></tr><tr><td style="text-align:left"><a href="#output" class="">liteforge.output</a></td><td style="text-align:left">liteforge.output is an option for liteforge.Execute it can limit the output of the liteforge.Execute use <code>jsonschema.ActionObject</code> to limit the output...</td></tr><tr><td style="text-align:left"><a href="#refineprompt" class="">liteforge.refinePrompt</a></td><td style="text-align:left">_refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt） 参数: - prompt: 提炼提示词 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#speedpriority" class="">liteforge.speedPriority</a></td><td style="text-align:left">liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks 参数: - b: 是否启用速度优先，缺省为 true 返回值: - liteforge 执行可选项</td></tr><tr><td style="text-align:left"><a href="#strictrefine" class="">liteforge.strictRefine</a></td><td style="text-align:left">_refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine） 参数: - strict: 是否严格模式 返回值: - 知识构建可选项</td></tr><tr><td style="text-align:left"><a href="#verbosename" class="">liteforge.verboseName</a></td><td style="text-align:left">liteforge.verboseName is an option for liteforge.Execute it adds verbose naming options to the execution</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="analyzevideoomni">AnalyzeVideoOmni<a href="#analyzevideoomni" class="hash-link" aria-label="Direct link to AnalyzeVideoOmni" title="Direct link to AnalyzeVideoOmni" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -228,7 +228,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">video</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">视频文件路径</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">omni 视频可选项，如 liteforge.omniPresetFlash、liteforge.omniAPIKey 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">video</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">视频文件路径</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">omni 视频可选项，如 liteforge.omniPresetFlash、liteforge.omniAPIKey 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -250,7 +250,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>&lt;-chan AnalysisResult</code></td><td style="text-align:left">按段返回的分析结果 channel</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>&lt;-chan AnalysisResult</code></td><td style="text-align:left">按段返回的分析结果 channel</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="buildvideoknowledgefromomni">BuildVideoKnowledgeFromOmni<a href="#buildvideoknowledgefromomni" class="hash-link" aria-label="Direct link to BuildVideoKnowledgeFromOmni" title="Direct link to BuildVideoKnowledgeFromOmni" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>BuildVideoKnowledgeFromOmni 复用 _buildKnowledge 的 RAG/ERM 入库链路，
@@ -287,7 +287,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">kbName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标知识库名称</td></tr><tr><td style="text-align:left">video</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">视频文件路径</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">omni 视频可选项，如 liteforge.omniPresetFlash、liteforge.omniAPIKey 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">kbName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标知识库名称</td></tr><tr><td style="text-align:left">video</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">视频文件路径</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">omni 视频可选项，如 liteforge.omniPresetFlash、liteforge.omniAPIKey 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -309,7 +309,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>&lt;-chan *schema.KnowledgeBaseEntry</code></td><td style="text-align:left">知识库条目 channel</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>&lt;-chan *schema.KnowledgeBaseEntry</code></td><td style="text-align:left">知识库条目 channel</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="execute">Execute<a href="#execute" class="hash-link" aria-label="Direct link to Execute" title="Direct link to Execute" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.Execute can create a temporary LiteForge instance and execute it with the given query.</p>
@@ -356,7 +356,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">query</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提示词/查询内容</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">query</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提示词/查询内容</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">执行可选项，如 liteforge.output、liteforge.action、liteforge.context 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -378,7 +378,7 @@ BuildKnowledgeFromFile 等保持完全独立，纯增量。</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*ForgeResult</code></td><td style="text-align:left">执行结果对象（可通过 Get 读取字段）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*ForgeResult</code></td><td style="text-align:left">执行结果对象（可通过 Get 读取字段）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="action">action<a href="#action" class="hash-link" aria-label="Direct link to action" title="Direct link to action" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.action is an option for liteforge.Execute
@@ -403,7 +403,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">action</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输出的 action 类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">action</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输出的 action 类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -420,7 +420,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="analyzectx">analyzeCtx<a href="#analyzectx" class="hash-link" aria-label="Direct link to analyzeCtx" title="Direct link to analyzeCtx" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithAnalyzeContext 设置分析使用的上下文，用于控制取消（导出名为 liteforge.analyzeCtx）</p>
@@ -452,7 +452,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -469,7 +469,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="analyzelog">analyzeLog<a href="#analyzelog" class="hash-link" aria-label="Direct link to analyzeLog" title="Direct link to analyzeLog" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithAnalyzeLog 设置分析过程的日志回调（导出名为 liteforge.analyzeLog）</p>
@@ -501,7 +501,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(format string, args ...any)</code></td><td style="text-align:left">日志回调函数，参数为格式化字符串与参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(format string, args ...any)</code></td><td style="text-align:left">日志回调函数，参数为格式化字符串与参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -518,7 +518,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="analyzestatuscard">analyzeStatusCard<a href="#analyzestatuscard" class="hash-link" aria-label="Direct link to analyzeStatusCard" title="Direct link to analyzeStatusCard" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithAnalyzeStatusCard 设置分析过程的状态卡片回调（导出名为 liteforge.analyzeStatusCard）</p>
@@ -550,7 +550,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(id string, data any, tags ...string)</code></td><td style="text-align:left">状态卡片回调，参数为 (id, data, tags...)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(id string, data any, tags ...string)</code></td><td style="text-align:left">状态卡片回调，参数为 (id, data, tags...)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -567,7 +567,7 @@ it sets the action type for the liteforge execution,</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="Direct link to context" title="Direct link to context" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.context is an option for liteforge.Execute
@@ -592,7 +592,7 @@ it sets the context for the liteforge execution</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制取消与超时</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制取消与超时</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -609,7 +609,7 @@ it sets the context for the liteforge execution</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forceimage">forceImage<a href="#forceimage" class="hash-link" aria-label="Direct link to forceImage" title="Direct link to forceImage" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.forceImage is an option for liteforge.Execute
@@ -634,7 +634,7 @@ it forces the execution to require image input</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">force</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">是否强制要求图片输入，缺省为 true</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">force</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">是否强制要求图片输入，缺省为 true</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -651,7 +651,7 @@ it forces the execution to require image input</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="id">id<a href="#id" class="hash-link" aria-label="Direct link to id" title="Direct link to id" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.id is an option for liteforge.Execute
@@ -676,7 +676,7 @@ it sets the ID for the liteforge instance</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">liteforge 实例 ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">liteforge 实例 ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -693,7 +693,7 @@ it sets the ID for the liteforge instance</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="image">image<a href="#image" class="hash-link" aria-label="Direct link to image" title="Direct link to image" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.image is an option for liteforge.Execute
@@ -718,7 +718,7 @@ it adds image data to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">anyImageInput</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">一个或多个图片输入（字节、路径、base64 等）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">anyImageInput</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">一个或多个图片输入（字节、路径、base64 等）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -735,7 +735,7 @@ it adds image data to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="imageextraprompt">imageExtraPrompt<a href="#imageextraprompt" class="hash-link" aria-label="Direct link to imageExtraPrompt" title="Direct link to imageExtraPrompt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithExtraPrompt 为图片/上下文分析追加额外提示词（导出名为 liteforge.imageExtraPrompt）</p>
@@ -767,7 +767,7 @@ it adds image data to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">额外提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">额外提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -784,7 +784,7 @@ it adds image data to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AnalysisOption</code></td><td style="text-align:left">分析可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="imagefile">imageFile<a href="#imagefile" class="hash-link" aria-label="Direct link to imageFile" title="Direct link to imageFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.imageFile is an option for liteforge.Execute
@@ -809,7 +809,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filename</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个图片文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filename</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个图片文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -826,7 +826,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="knowledgebasedesc">knowledgeBaseDesc<a href="#knowledgebasedesc" class="hash-link" aria-label="Direct link to knowledgeBaseDesc" title="Direct link to knowledgeBaseDesc" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RefineWithKnowledgeBaseDesc 设置生成知识库的描述（导出名为 liteforge.knowledgeBaseDesc）</p>
@@ -858,7 +858,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">desc</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库描述</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">desc</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库描述</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -875,7 +875,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="knowledgebasename">knowledgeBaseName<a href="#knowledgebasename" class="hash-link" aria-label="Direct link to knowledgeBaseName" title="Direct link to knowledgeBaseName" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RefineWithKnowledgeBaseName 设置生成知识库的名称（导出名为 liteforge.knowledgeBaseName）</p>
@@ -907,7 +907,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库名称</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库名称</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -924,7 +924,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="knowledgebasetype">knowledgeBaseType<a href="#knowledgebasetype" class="hash-link" aria-label="Direct link to knowledgeBaseType" title="Direct link to knowledgeBaseType" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RefineWithKnowledgeBaseType 设置生成知识库的类型（导出名为 liteforge.knowledgeBaseType）</p>
@@ -956,7 +956,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">typ</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">typ</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">知识库类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -973,7 +973,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="knowledgeentrylength">knowledgeEntryLength<a href="#knowledgeentrylength" class="hash-link" aria-label="Direct link to knowledgeEntryLength" title="Direct link to knowledgeEntryLength" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RefineWithKnowledgeEntryLength 设置每条知识条目的目标长度（导出名为 liteforge.knowledgeEntryLength）</p>
@@ -1005,7 +1005,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">length</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">知识条目长度</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">length</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">知识条目长度</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1022,7 +1022,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omniapikey">omniAPIKey<a href="#omniapikey" class="hash-link" aria-label="Direct link to omniAPIKey" title="Direct link to omniAPIKey" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniAPIKey 设置 omni 视频分析使用的 API Key（导出名为 liteforge.omniAPIKey）</p>
@@ -1054,7 +1054,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">API Key</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">API Key</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1071,7 +1071,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnibaseurl">omniBaseURL<a href="#omnibaseurl" class="hash-link" aria-label="Direct link to omniBaseURL" title="Direct link to omniBaseURL" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniBaseURL 设置 omni 视频分析使用的 API 基础地址（导出名为 liteforge.omniBaseURL）</p>
@@ -1103,7 +1103,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">API 基础地址</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">API 基础地址</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1120,7 +1120,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnicontext">omniContext<a href="#omnicontext" class="hash-link" aria-label="Direct link to omniContext" title="Direct link to omniContext" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniContext 设置 omni 视频分析的上下文（导出名为 liteforge.omniContext）</p>
@@ -1152,7 +1152,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1169,7 +1169,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnimaxbase64bytes">omniMaxBase64Bytes<a href="#omnimaxbase64bytes" class="hash-link" aria-label="Direct link to omniMaxBase64Bytes" title="Direct link to omniMaxBase64Bytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniMaxBase64Bytes 设置每段视频 base64 编码后的字节上限（导出名为 liteforge.omniMaxBase64Bytes）</p>
@@ -1201,7 +1201,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">字节上限</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">字节上限</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1218,7 +1218,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnimaxheight">omniMaxHeight<a href="#omnimaxheight" class="hash-link" aria-label="Direct link to omniMaxHeight" title="Direct link to omniMaxHeight" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniMaxHeight 设置视频切片的最大高度（导出名为 liteforge.omniMaxHeight）</p>
@@ -1250,7 +1250,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">h</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大高度（像素）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">h</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大高度（像素）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1267,7 +1267,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnimaxsegments">omniMaxSegments<a href="#omnimaxsegments" class="hash-link" aria-label="Direct link to omniMaxSegments" title="Direct link to omniMaxSegments" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniMaxSegments 设置最多分析的视频段数（导出名为 liteforge.omniMaxSegments）</p>
@@ -1299,7 +1299,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大段数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大段数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1316,7 +1316,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnimodel">omniModel<a href="#omnimodel" class="hash-link" aria-label="Direct link to omniModel" title="Direct link to omniModel" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniModel 设置 omni 视频分析使用的模型（导出名为 liteforge.omniModel）</p>
@@ -1348,7 +1348,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">模型名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">模型名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1365,7 +1365,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetflash">omniPresetFlash<a href="#omnipresetflash" class="hash-link" aria-label="Direct link to omniPresetFlash" title="Direct link to omniPresetFlash" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>VideoOmniPresetFlash 使用 flash 预设（qwen3-omni-flash 模型，导出名为 liteforge.omniPresetFlash）</p>
@@ -1397,7 +1397,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetplus">omniPresetPlus<a href="#omnipresetplus" class="hash-link" aria-label="Direct link to omniPresetPlus" title="Direct link to omniPresetPlus" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>VideoOmniPresetPlus 使用 plus 预设（qwen3.5-omni-plus 模型，导出名为 liteforge.omniPresetPlus）</p>
@@ -1429,7 +1429,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnipresetturbo">omniPresetTurbo<a href="#omnipresetturbo" class="hash-link" aria-label="Direct link to omniPresetTurbo" title="Direct link to omniPresetTurbo" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>VideoOmniPresetTurbo / Flash / Plus 提供 forge 友好的预设</p>
@@ -1464,7 +1464,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omniprogresscallback">omniProgressCallback<a href="#omniprogresscallback" class="hash-link" aria-label="Direct link to omniProgressCallback" title="Direct link to omniProgressCallback" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniProgressCallback 设置 omni 视频分析的进度回调（导出名为 liteforge.omniProgressCallback）</p>
@@ -1496,7 +1496,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*VideoOmniSegmentResult)</code></td><td style="text-align:left">进度回调，参数为每段的分析结果</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*VideoOmniSegmentResult)</code></td><td style="text-align:left">进度回调，参数为每段的分析结果</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1513,7 +1513,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omniqueryprompt">omniQueryPrompt<a href="#omniqueryprompt" class="hash-link" aria-label="Direct link to omniQueryPrompt" title="Direct link to omniQueryPrompt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniQueryPrompt 设置 omni 视频分析的查询提示词（导出名为 liteforge.omniQueryPrompt）</p>
@@ -1545,7 +1545,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">q</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">查询提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">q</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">查询提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1562,7 +1562,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omniratelimitretry">omniRateLimitRetry<a href="#omniratelimitretry" class="hash-link" aria-label="Direct link to omniRateLimitRetry" title="Direct link to omniRateLimitRetry" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniRateLimitRetry 设定 429 / 限速退避重试次数与基数。</p>
@@ -1605,7 +1605,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxAttempts</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr><tr><td style="text-align:left">backoffBase</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">退避基数（time.Duration）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxAttempts</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr><tr><td style="text-align:left">backoffBase</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">退避基数（time.Duration）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1622,7 +1622,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnireencode">omniReencode<a href="#omnireencode" class="hash-link" aria-label="Direct link to omniReencode" title="Direct link to omniReencode" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniReencode 设置是否对视频切片重新编码（导出名为 liteforge.omniReencode）</p>
@@ -1654,7 +1654,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否重新编码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否重新编码</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1671,7 +1671,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnisegmentinterval">omniSegmentInterval<a href="#omnisegmentinterval" class="hash-link" aria-label="Direct link to omniSegmentInterval" title="Direct link to omniSegmentInterval" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniSegmentInterval 设置段间静默节流，&lt;=0 表示不节流。</p>
@@ -1704,7 +1704,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">段间间隔（time.Duration）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">段间间隔（time.Duration）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1721,7 +1721,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnisegmentseconds">omniSegmentSeconds<a href="#omnisegmentseconds" class="hash-link" aria-label="Direct link to omniSegmentSeconds" title="Direct link to omniSegmentSeconds" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniSegmentSeconds 设置 omni 视频切片的时长（秒，导出名为 liteforge.omniSegmentSeconds）</p>
@@ -1753,7 +1753,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">每段视频时长（秒）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">每段视频时长（秒）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1770,7 +1770,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnisystemprompt">omniSystemPrompt<a href="#omnisystemprompt" class="hash-link" aria-label="Direct link to omniSystemPrompt" title="Direct link to omniSystemPrompt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniSystemPrompt 设置 omni 视频分析的系统提示词（导出名为 liteforge.omniSystemPrompt）</p>
@@ -1802,7 +1802,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">系统提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">系统提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1819,7 +1819,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnitargetfps">omniTargetFPS<a href="#omnitargetfps" class="hash-link" aria-label="Direct link to omniTargetFPS" title="Direct link to omniTargetFPS" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniTargetFPS 设置视频切片的目标帧率（导出名为 liteforge.omniTargetFPS）</p>
@@ -1851,7 +1851,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">目标帧率</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">目标帧率</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1868,7 +1868,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnitimeout">omniTimeout<a href="#omnitimeout" class="hash-link" aria-label="Direct link to omniTimeout" title="Direct link to omniTimeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniTimeout 设置 omni 视频分析的超时时间（导出名为 liteforge.omniTimeout）</p>
@@ -1900,7 +1900,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">超时时间（time.Duration）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>time.Duration</code></td><td style="text-align:left">超时时间（time.Duration）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1917,7 +1917,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnitype">omniType<a href="#omnitype" class="hash-link" aria-label="Direct link to omniType" title="Direct link to omniType" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniType 设置 omni 视频分析使用的 AI 类型（导出名为 liteforge.omniType）</p>
@@ -1949,7 +1949,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">t</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">AI 类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">t</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">AI 类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1966,7 +1966,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnizipdir">omniZipDir<a href="#omnizipdir" class="hash-link" aria-label="Direct link to omniZipDir" title="Direct link to omniZipDir" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniZipDir 指定 zip 输出目录，运行时自动按</p>
@@ -1999,7 +1999,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">dir</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 输出目录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">dir</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 输出目录</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2016,7 +2016,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnizipfile">omniZipFile<a href="#omnizipfile" class="hash-link" aria-label="Direct link to omniZipFile" title="Direct link to omniZipFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithVideoOmniZipFile 指定 zip 文件完整输出路径。</p>
@@ -2049,7 +2049,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 文件输出路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">zip 文件输出路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2066,7 +2066,7 @@ it adds image files to the execution context</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>VideoOmniOption</code></td><td style="text-align:left">omni 视频可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="output">output<a href="#output" class="hash-link" aria-label="Direct link to output" title="Direct link to output" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.output is an option for liteforge.Execute
@@ -2092,7 +2092,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">output</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">JSON Schema 字符串，用于约束输出结构</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">output</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">JSON Schema 字符串，用于约束输出结构</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2109,7 +2109,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="refineprompt">refinePrompt<a href="#refineprompt" class="hash-link" aria-label="Direct link to refinePrompt" title="Direct link to refinePrompt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>_refine_WithRefinePrompt 设置知识提炼使用的提示词（导出名为 liteforge.refinePrompt）</p>
@@ -2141,7 +2141,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提炼提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提炼提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2158,7 +2158,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="speedpriority">speedPriority<a href="#speedpriority" class="hash-link" aria-label="Direct link to speedPriority" title="Direct link to speedPriority" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-41">详细描述<a href="#详细描述-41" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.speedPriority uses a faster/cheaper AI model for distillation tasks</p>
@@ -2190,7 +2190,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">是否启用速度优先，缺省为 true</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">是否启用速度优先，缺省为 true</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-41">返回值<a href="#返回值-41" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2207,7 +2207,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="strictrefine">strictRefine<a href="#strictrefine" class="hash-link" aria-label="Direct link to strictRefine" title="Direct link to strictRefine" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-42">详细描述<a href="#详细描述-42" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>_refine_WithStrict 设置知识提炼是否使用严格模式（导出名为 liteforge.strictRefine）</p>
@@ -2239,7 +2239,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">strict</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否严格模式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">strict</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否严格模式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2256,7 +2256,7 @@ use <code>jsonschema.ActionObject</code> to limit the output to an object</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RefineOption</code></td><td style="text-align:left">知识构建可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="verbosename">verboseName<a href="#verbosename" class="hash-link" aria-label="Direct link to verboseName" title="Direct link to verboseName" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-43">详细描述<a href="#详细描述-43" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>liteforge.verboseName is an option for liteforge.Execute
@@ -2281,7 +2281,7 @@ it adds verbose naming options to the execution</p>
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个底层 aicommon 配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个底层 aicommon 配置选项</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2298,6 +2298,6 @@ it adds verbose naming options to the execution</p>
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/liteforge.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/ldap"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ldap</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/log"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">log</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#analyzevideoomni" class="table-of-contents__link toc-highlight">AnalyzeVideoOmni</a></li><li><a href="#buildvideoknowledgefromomni" class="table-of-contents__link toc-highlight">BuildVideoKnowledgeFromOmni</a></li><li><a href="#execute" class="table-of-contents__link toc-highlight">Execute</a></li><li><a href="#action" class="table-of-contents__link toc-highlight">action</a></li><li><a href="#analyzectx" class="table-of-contents__link toc-highlight">analyzeCtx</a></li><li><a href="#analyzelog" class="table-of-contents__link toc-highlight">analyzeLog</a></li><li><a href="#analyzestatuscard" class="table-of-contents__link toc-highlight">analyzeStatusCard</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#forceimage" class="table-of-contents__link toc-highlight">forceImage</a></li><li><a href="#id" class="table-of-contents__link toc-highlight">id</a></li><li><a href="#image" class="table-of-contents__link toc-highlight">image</a></li><li><a href="#imageextraprompt" class="table-of-contents__link toc-highlight">imageExtraPrompt</a></li><li><a href="#imagefile" class="table-of-contents__link toc-highlight">imageFile</a></li><li><a href="#knowledgebasedesc" class="table-of-contents__link toc-highlight">knowledgeBaseDesc</a></li><li><a href="#knowledgebasename" class="table-of-contents__link toc-highlight">knowledgeBaseName</a></li><li><a href="#knowledgebasetype" class="table-of-contents__link toc-highlight">knowledgeBaseType</a></li><li><a href="#knowledgeentrylength" class="table-of-contents__link toc-highlight">knowledgeEntryLength</a></li><li><a href="#omniapikey" class="table-of-contents__link toc-highlight">omniAPIKey</a></li><li><a href="#omnibaseurl" class="table-of-contents__link toc-highlight">omniBaseURL</a></li><li><a href="#omnicontext" class="table-of-contents__link toc-highlight">omniContext</a></li><li><a href="#omnimaxbase64bytes" class="table-of-contents__link toc-highlight">omniMaxBase64Bytes</a></li><li><a href="#omnimaxheight" class="table-of-contents__link toc-highlight">omniMaxHeight</a></li><li><a href="#omnimaxsegments" class="table-of-contents__link toc-highlight">omniMaxSegments</a></li><li><a href="#omnimodel" class="table-of-contents__link toc-highlight">omniModel</a></li><li><a href="#omnipresetflash" class="table-of-contents__link toc-highlight">omniPresetFlash</a></li><li><a href="#omnipresetplus" class="table-of-contents__link toc-highlight">omniPresetPlus</a></li><li><a href="#omnipresetturbo" class="table-of-contents__link toc-highlight">omniPresetTurbo</a></li><li><a href="#omniprogresscallback" class="table-of-contents__link toc-highlight">omniProgressCallback</a></li><li><a href="#omniqueryprompt" class="table-of-contents__link toc-highlight">omniQueryPrompt</a></li><li><a href="#omniratelimitretry" class="table-of-contents__link toc-highlight">omniRateLimitRetry</a></li><li><a href="#omnireencode" class="table-of-contents__link toc-highlight">omniReencode</a></li><li><a href="#omnisegmentinterval" class="table-of-contents__link toc-highlight">omniSegmentInterval</a></li><li><a href="#omnisegmentseconds" class="table-of-contents__link toc-highlight">omniSegmentSeconds</a></li><li><a href="#omnisystemprompt" class="table-of-contents__link toc-highlight">omniSystemPrompt</a></li><li><a href="#omnitargetfps" class="table-of-contents__link toc-highlight">omniTargetFPS</a></li><li><a href="#omnitimeout" class="table-of-contents__link toc-highlight">omniTimeout</a></li><li><a href="#omnitype" class="table-of-contents__link toc-highlight">omniType</a></li><li><a href="#omnizipdir" class="table-of-contents__link toc-highlight">omniZipDir</a></li><li><a href="#omnizipfile" class="table-of-contents__link toc-highlight">omniZipFile</a></li><li><a href="#output" class="table-of-contents__link toc-highlight">output</a></li><li><a href="#refineprompt" class="table-of-contents__link toc-highlight">refinePrompt</a></li><li><a href="#speedpriority" class="table-of-contents__link toc-highlight">speedPriority</a></li><li><a href="#strictrefine" class="table-of-contents__link toc-highlight">strictRefine</a></li><li><a href="#verbosename" class="table-of-contents__link toc-highlight">verboseName</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeExecOption</code></td><td style="text-align:left">liteforge 执行可选项</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/liteforge.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/ldap"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ldap</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/log"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">log</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#analyzevideoomni" class="table-of-contents__link toc-highlight">AnalyzeVideoOmni</a></li><li><a href="#buildvideoknowledgefromomni" class="table-of-contents__link toc-highlight">BuildVideoKnowledgeFromOmni</a></li><li><a href="#execute" class="table-of-contents__link toc-highlight">Execute</a></li><li><a href="#action" class="table-of-contents__link toc-highlight">action</a></li><li><a href="#analyzectx" class="table-of-contents__link toc-highlight">analyzeCtx</a></li><li><a href="#analyzelog" class="table-of-contents__link toc-highlight">analyzeLog</a></li><li><a href="#analyzestatuscard" class="table-of-contents__link toc-highlight">analyzeStatusCard</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#forceimage" class="table-of-contents__link toc-highlight">forceImage</a></li><li><a href="#id" class="table-of-contents__link toc-highlight">id</a></li><li><a href="#image" class="table-of-contents__link toc-highlight">image</a></li><li><a href="#imageextraprompt" class="table-of-contents__link toc-highlight">imageExtraPrompt</a></li><li><a href="#imagefile" class="table-of-contents__link toc-highlight">imageFile</a></li><li><a href="#knowledgebasedesc" class="table-of-contents__link toc-highlight">knowledgeBaseDesc</a></li><li><a href="#knowledgebasename" class="table-of-contents__link toc-highlight">knowledgeBaseName</a></li><li><a href="#knowledgebasetype" class="table-of-contents__link toc-highlight">knowledgeBaseType</a></li><li><a href="#knowledgeentrylength" class="table-of-contents__link toc-highlight">knowledgeEntryLength</a></li><li><a href="#omniapikey" class="table-of-contents__link toc-highlight">omniAPIKey</a></li><li><a href="#omnibaseurl" class="table-of-contents__link toc-highlight">omniBaseURL</a></li><li><a href="#omnicontext" class="table-of-contents__link toc-highlight">omniContext</a></li><li><a href="#omnimaxbase64bytes" class="table-of-contents__link toc-highlight">omniMaxBase64Bytes</a></li><li><a href="#omnimaxheight" class="table-of-contents__link toc-highlight">omniMaxHeight</a></li><li><a href="#omnimaxsegments" class="table-of-contents__link toc-highlight">omniMaxSegments</a></li><li><a href="#omnimodel" class="table-of-contents__link toc-highlight">omniModel</a></li><li><a href="#omnipresetflash" class="table-of-contents__link toc-highlight">omniPresetFlash</a></li><li><a href="#omnipresetplus" class="table-of-contents__link toc-highlight">omniPresetPlus</a></li><li><a href="#omnipresetturbo" class="table-of-contents__link toc-highlight">omniPresetTurbo</a></li><li><a href="#omniprogresscallback" class="table-of-contents__link toc-highlight">omniProgressCallback</a></li><li><a href="#omniqueryprompt" class="table-of-contents__link toc-highlight">omniQueryPrompt</a></li><li><a href="#omniratelimitretry" class="table-of-contents__link toc-highlight">omniRateLimitRetry</a></li><li><a href="#omnireencode" class="table-of-contents__link toc-highlight">omniReencode</a></li><li><a href="#omnisegmentinterval" class="table-of-contents__link toc-highlight">omniSegmentInterval</a></li><li><a href="#omnisegmentseconds" class="table-of-contents__link toc-highlight">omniSegmentSeconds</a></li><li><a href="#omnisystemprompt" class="table-of-contents__link toc-highlight">omniSystemPrompt</a></li><li><a href="#omnitargetfps" class="table-of-contents__link toc-highlight">omniTargetFPS</a></li><li><a href="#omnitimeout" class="table-of-contents__link toc-highlight">omniTimeout</a></li><li><a href="#omnitype" class="table-of-contents__link toc-highlight">omniType</a></li><li><a href="#omnizipdir" class="table-of-contents__link toc-highlight">omniZipDir</a></li><li><a href="#omnizipfile" class="table-of-contents__link toc-highlight">omniZipFile</a></li><li><a href="#output" class="table-of-contents__link toc-highlight">output</a></li><li><a href="#refineprompt" class="table-of-contents__link toc-highlight">refinePrompt</a></li><li><a href="#speedpriority" class="table-of-contents__link toc-highlight">speedPriority</a></li><li><a href="#strictrefine" class="table-of-contents__link toc-highlight">strictRefine</a></li><li><a href="#verbosename" class="table-of-contents__link toc-highlight">verboseName</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

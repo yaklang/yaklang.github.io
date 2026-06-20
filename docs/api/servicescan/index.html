@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">servicescan | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/servicescan"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="servicescan | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/servicescan"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/servicescan" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/servicescan" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/servicescan" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"servicescan","item":"https://yaklang.com/docs/api/servicescan"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.57ca5fd1.js" defer="defer"></script>
-<script src="/assets/js/main.02c5aefc.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.6a0ff1da.css">
+<script src="/assets/js/runtime~main.30a1f0b6.js" defer="defer"></script>
+<script src="/assets/js/main.abaed218.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -150,7 +150,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#scan" class="">servicescan.Scan</a></td><td style="text-align:left">Scan servicescan 库使用的端口扫描类型的方式为全连接扫描，用于对连接目标进行精准的扫描，相比 synscan 库的单纯扫描，servicescan 库会尝试获取精确指纹信息以及 CPE 信息 参数: - target: 目标地址，支持 CIDR 格式，支持 192.168.1.1-1...</td></tr><tr><td style="text-align:left"><a href="#scanfromping" class="">servicescan.ScanFromPing</a></td><td style="text-align:left">ScanFromPing 从 ping.Scan 的结果中进行指纹识别 参数: - res: ping.Scan 的结果管道 - ports: 端口，支持 1-65535、1,2,3、1-100,200-300 格式 - opts: 零个或多个 servicescan 扫描参数 返回值: - cha...</td></tr><tr><td style="text-align:left"><a href="#scanfromspaceengine" class="">servicescan.ScanFromSpaceEngine</a></td><td style="text-align:left">ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 参数: - res: synscan.Scan 或者 spacengine.Query 的结果 - opts: 零个或多个 se...</td></tr><tr><td style="text-align:left"><a href="#scanfromsynresult" class="">servicescan.ScanFromSynResult</a></td><td style="text-align:left">ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 参数: - res: synscan.Scan 或者 spacengine.Query 的结果 - opts: 零个或多个 se...</td></tr><tr><td style="text-align:left"><a href="#scanone" class="">servicescan.ScanOne</a></td><td style="text-align:left">ScanOne servicescan 单体扫描，同步扫描一个目标，主机+端口 参数: - target: 目标地址 - port: 端口 - opts: 零个或多个 servicescan 扫描参数 返回值: - *MatchResult: 单个目标的指纹识别结果 - error: 扫描失败时返回...</td></tr><tr><td style="text-align:left"><a href="#active" class="">servicescan.active</a></td><td style="text-align:left">active 设置是否启用主动发包模式，主动向目标发送探测包以提升指纹识别准确率 在 yak 中通过 servicescan.active 调用 参数: - raw: 是否启用主动发包模式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#all" class="">servicescan.all</a></td><td style="text-align:left">all servicescan 的配置选项，强制同时启用 Web 与服务(nmap)全部指纹识别 在 yak 中通过 servicescan.all 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cache" class="">servicescan.cache</a></td><td style="text-align:left">cache servicescan 的配置选项，设置本次扫描是否使用缓存 参数: - b: 是否使用缓存 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">servicescan.concurrent</a></td><td style="text-align:left">concurrent servicescan 的配置选项，用于设置整体扫描并发 参数: - size: 并发数量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">servicescan.context</a></td><td style="text-align:left">context 设置服务扫描使用的 context，用于取消或超时控制 在 yak 中通过 servicescan.context 调用；停止遍历结果前应 cancel 对应 ctx 参数: - ctx: 上下文对象 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#databasecache" class="">servicescan.databaseCache</a></td><td style="text-align:left">databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存 参数: - b: 是否使用数据库缓存 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#debuglog" class="">servicescan.debugLog</a></td><td style="text-align:left">debugLog 的配置选项，设置本次扫描是否使用 debugLog 参数: - b: 可选，是否使用 debugLog，不传时默认为 true 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disabledefaultrule" class="">servicescan.disableDefaultRule</a></td><td style="text-align:left">disableDefaultRule servicescan 的配置选项，禁用内置默认指纹规则(通常配合自定义规则使用) 在 yak 中通过 servicescan.disableDefaultRule 调用 参数: - b: 可选，是否禁用默认规则，不传时默认为 true 返回值: - 一个 se...</td></tr><tr><td style="text-align:left"><a href="#disableopenportguard" class="">servicescan.disableOpenPortGuard</a></td><td style="text-align:left">disableOpenPortGuard servicescan 的配置选项, 禁用单主机开放端口数保护. 参数: - b: 可选，是否禁用，不传时默认为 true 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disablewebscanconnpool" class="">servicescan.disableWebScanConnPool</a></td><td style="text-align:left">disableWebScanConnPool servicescan 的配置选项，用于禁用 web 扫描的连接池 参数: - b: 是否禁用连接池，默认为 false 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#excludehosts" class="">servicescan.excludeHosts</a></td><td style="text-align:left">excludeHosts servicescan 的配置选项，设置本次扫描排除的主机 参数: - hosts: 主机，支持逗号分割、CIDR、- 的格式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#excludeports" class="">servicescan.excludePorts</a></td><td style="text-align:left">excludePorts servicescan 的配置选项，设置本次扫描排除的端口 参数: - ports: 端口，支持逗号分割、- 的格式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxprobes" class="">servicescan.maxProbes</a></td><td style="text-align:left">maxProbes servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5 参数: - m: 最大探测包数量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxprobesconcurrent" class="">servicescan.maxProbesConcurrent</a></td><td style="text-align:left">maxProbesConcurrent servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 5 参数: - m: 并发量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#nmapraritymax" class="">servicescan.nmapRarityMax</a></td><td style="text-align:left">nmapRarityMax servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹稀有度，在主动模式发包的基础上进行探测控制 稀有度越大，表示这个服务在现实存在的可能性越小，取值范围为 1-9，默认值为 5 参数: - rarity: 稀有度，取值范围为 1-9 返回值: - 一个 ...</td></tr><tr><td style="text-align:left"><a href="#nmaprule" class="">servicescan.nmapRule</a></td><td style="text-align:left">nmapRule servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹规则 参数: - i: Nmap 指纹规则，支持规则字节内容、规则文件路径或规则映射 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onfinish" class="">servicescan.onFinish</a></td><td style="text-align:left">onFinish servicescan 的配置选项，设置本次扫描完成单个目标时的回调函数 参数: - cb: 扫描完成时触发的回调函数，入参为匹配结果 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onopen" class="">servicescan.onOpen</a></td><td style="text-align:left">onOpen servicescan 的配置选项，设置本次扫描端口开放时的回调函数 参数: - cb: 端口开放时触发的回调函数，入参为匹配结果 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#openportguardlimit" class="">servicescan.openPortGuardLimit</a></td><td style="text-align:left">openPortGuardLimit servicescan 的配置选项, 设置单主机开放端口数熔断阈值. 参数: - limit: 熔断阈值，小于等于 0 时使用默认值 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#probetimeout" class="">servicescan.probeTimeout</a></td><td style="text-align:left">probeTimeout servicescan 的配置选项，设置每一个探测包的超时时间 参数: - f: 超时时间，单位为秒 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proto" class="">servicescan.proto</a></td><td style="text-align:left">proto servicescan 的配置选项，用于指定扫描协议 参数: - proto: 协议，例如 tcp、udp，可选参数，不传入参数默认为 tcp 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">servicescan.proxy</a></td><td style="text-align:left">proxy servicescan 的配置选项，设置本次扫描使用的代理 参数: - proxies: 一个或多个代理地址，支持 http 和 socks5 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#service" class="">servicescan.service</a></td><td style="text-align:left">service servicescan 的配置选项，仅启用服务(nmap)指纹识别，禁用 Web 指纹 在 yak 中通过 servicescan.service 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#web" class="">servicescan.web</a></td><td style="text-align:left">web servicescan 的配置选项，仅启用 Web 指纹识别(只扫描 Web 服务指纹) 在 yak 中通过 servicescan.web 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#webrule" class="">servicescan.webRule</a></td><td style="text-align:left">webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规则 参数: - rs: 一个或多个 Web 指纹规则，支持 yaml 规则字符串、规则文件路径或规则对象 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#withrulegroup" class="">servicescan.withRuleGroup</a></td><td style="text-align:left">withRuleGroup servicescan 的配置选项，用于指定指纹库中的指纹组。 参数: - groups: 一个或多个指纹组名称 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#withrulegroupall" class="">servicescan.withRuleGroupAll</a></td><td style="text-align:left">withRuleGroupAll servicescan 的配置选项，用于指定使用指纹组的全部指纹。 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#scan" class="">servicescan.Scan</a></td><td style="text-align:left">Scan servicescan 库使用的端口扫描类型的方式为全连接扫描，用于对连接目标进行精准的扫描，相比 synscan 库的单纯扫描，servicescan 库会尝试获取精确指纹信息以及 CPE 信息 参数: - target: 目标地址，支持 CIDR 格式，支持 192.168.1.1-1...</td></tr><tr><td style="text-align:left"><a href="#scanfromping" class="">servicescan.ScanFromPing</a></td><td style="text-align:left">ScanFromPing 从 ping.Scan 的结果中进行指纹识别 参数: - res: ping.Scan 的结果管道 - ports: 端口，支持 1-65535、1,2,3、1-100,200-300 格式 - opts: 零个或多个 servicescan 扫描参数 返回值: - cha...</td></tr><tr><td style="text-align:left"><a href="#scanfromspaceengine" class="">servicescan.ScanFromSpaceEngine</a></td><td style="text-align:left">ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 参数: - res: synscan.Scan 或者 spacengine.Query 的结果 - opts: 零个或多个 se...</td></tr><tr><td style="text-align:left"><a href="#scanfromsynresult" class="">servicescan.ScanFromSynResult</a></td><td style="text-align:left">ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别 参数: - res: synscan.Scan 或者 spacengine.Query 的结果 - opts: 零个或多个 se...</td></tr><tr><td style="text-align:left"><a href="#scanone" class="">servicescan.ScanOne</a></td><td style="text-align:left">ScanOne servicescan 单体扫描，同步扫描一个目标，主机+端口 参数: - target: 目标地址 - port: 端口 - opts: 零个或多个 servicescan 扫描参数 返回值: - *MatchResult: 单个目标的指纹识别结果 - error: 扫描失败时返回...</td></tr><tr><td style="text-align:left"><a href="#active" class="">servicescan.active</a></td><td style="text-align:left">active 设置是否启用主动发包模式，主动向目标发送探测包以提升指纹识别准确率 在 yak 中通过 servicescan.active 调用 参数: - raw: 是否启用主动发包模式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#all" class="">servicescan.all</a></td><td style="text-align:left">all servicescan 的配置选项，强制同时启用 Web 与服务(nmap)全部指纹识别 在 yak 中通过 servicescan.all 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cache" class="">servicescan.cache</a></td><td style="text-align:left">cache servicescan 的配置选项，设置本次扫描是否使用缓存 参数: - b: 是否使用缓存 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">servicescan.concurrent</a></td><td style="text-align:left">concurrent servicescan 的配置选项，用于设置整体扫描并发 参数: - size: 并发数量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">servicescan.context</a></td><td style="text-align:left">context 设置服务扫描使用的 context，用于取消或超时控制 在 yak 中通过 servicescan.context 调用；停止遍历结果前应 cancel 对应 ctx 参数: - ctx: 上下文对象 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#databasecache" class="">servicescan.databaseCache</a></td><td style="text-align:left">databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存 参数: - b: 是否使用数据库缓存 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#debuglog" class="">servicescan.debugLog</a></td><td style="text-align:left">debugLog 的配置选项，设置本次扫描是否使用 debugLog 参数: - b: 可选，是否使用 debugLog，不传时默认为 true 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disabledefaultrule" class="">servicescan.disableDefaultRule</a></td><td style="text-align:left">disableDefaultRule servicescan 的配置选项，禁用内置默认指纹规则(通常配合自定义规则使用) 在 yak 中通过 servicescan.disableDefaultRule 调用 参数: - b: 可选，是否禁用默认规则，不传时默认为 true 返回值: - 一个 se...</td></tr><tr><td style="text-align:left"><a href="#disableopenportguard" class="">servicescan.disableOpenPortGuard</a></td><td style="text-align:left">disableOpenPortGuard servicescan 的配置选项, 禁用单主机开放端口数保护. 参数: - b: 可选，是否禁用，不传时默认为 true 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disablewebscanconnpool" class="">servicescan.disableWebScanConnPool</a></td><td style="text-align:left">disableWebScanConnPool servicescan 的配置选项，用于禁用 web 扫描的连接池 参数: - b: 是否禁用连接池，默认为 false 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#excludehosts" class="">servicescan.excludeHosts</a></td><td style="text-align:left">excludeHosts servicescan 的配置选项，设置本次扫描排除的主机 参数: - hosts: 主机，支持逗号分割、CIDR、- 的格式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#excludeports" class="">servicescan.excludePorts</a></td><td style="text-align:left">excludePorts servicescan 的配置选项，设置本次扫描排除的端口 参数: - ports: 端口，支持逗号分割、- 的格式 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxprobes" class="">servicescan.maxProbes</a></td><td style="text-align:left">maxProbes servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5 参数: - m: 最大探测包数量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxprobesconcurrent" class="">servicescan.maxProbesConcurrent</a></td><td style="text-align:left">maxProbesConcurrent servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 5 参数: - m: 并发量 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#nmapraritymax" class="">servicescan.nmapRarityMax</a></td><td style="text-align:left">nmapRarityMax servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹稀有度，在主动模式发包的基础上进行探测控制 稀有度越大，表示这个服务在现实存在的可能性越小，取值范围为 1-9，默认值为 5 参数: - rarity: 稀有度，取值范围为 1-9 返回值: - 一个 ...</td></tr><tr><td style="text-align:left"><a href="#nmaprule" class="">servicescan.nmapRule</a></td><td style="text-align:left">nmapRule servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹规则 参数: - i: Nmap 指纹规则，支持规则字节内容、规则文件路径或规则映射 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onfinish" class="">servicescan.onFinish</a></td><td style="text-align:left">onFinish servicescan 的配置选项，设置本次扫描完成单个目标时的回调函数 参数: - cb: 扫描完成时触发的回调函数，入参为匹配结果 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onopen" class="">servicescan.onOpen</a></td><td style="text-align:left">onOpen servicescan 的配置选项，设置本次扫描端口开放时的回调函数 参数: - cb: 端口开放时触发的回调函数，入参为匹配结果 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#openportguardlimit" class="">servicescan.openPortGuardLimit</a></td><td style="text-align:left">openPortGuardLimit servicescan 的配置选项, 设置单主机开放端口数熔断阈值. 参数: - limit: 熔断阈值，小于等于 0 时使用默认值 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#probetimeout" class="">servicescan.probeTimeout</a></td><td style="text-align:left">probeTimeout servicescan 的配置选项，设置每一个探测包的超时时间 参数: - f: 超时时间，单位为秒 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proto" class="">servicescan.proto</a></td><td style="text-align:left">proto servicescan 的配置选项，用于指定扫描协议 参数: - proto: 协议，例如 tcp、udp，可选参数，不传入参数默认为 tcp 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">servicescan.proxy</a></td><td style="text-align:left">proxy servicescan 的配置选项，设置本次扫描使用的代理 参数: - proxies: 一个或多个代理地址，支持 http 和 socks5 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#service" class="">servicescan.service</a></td><td style="text-align:left">service servicescan 的配置选项，仅启用服务(nmap)指纹识别，禁用 Web 指纹 在 yak 中通过 servicescan.service 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#web" class="">servicescan.web</a></td><td style="text-align:left">web servicescan 的配置选项，仅启用 Web 指纹识别(只扫描 Web 服务指纹) 在 yak 中通过 servicescan.web 调用 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#webrule" class="">servicescan.webRule</a></td><td style="text-align:left">webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规则 参数: - rs: 一个或多个 Web 指纹规则，支持 yaml 规则字符串、规则文件路径或规则对象 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#withrulegroup" class="">servicescan.withRuleGroup</a></td><td style="text-align:left">withRuleGroup servicescan 的配置选项，用于指定指纹库中的指纹组。 参数: - groups: 一个或多个指纹组名称 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#withrulegroupall" class="">servicescan.withRuleGroupAll</a></td><td style="text-align:left">withRuleGroupAll servicescan 的配置选项，用于指定使用指纹组的全部指纹。 返回值: - 一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scan">Scan<a href="#scan" class="hash-link" aria-label="Scan的直接链接" title="Scan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
@@ -206,7 +206,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址，支持 CIDR 格式，支持 192.168.1.1-100 格式</td></tr><tr><td style="text-align:left">port</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持 1-65535、1,2,3、1-100,200-300 格式</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址，支持 CIDR 格式，支持 192.168.1.1-100 格式</td></tr><tr><td style="text-align:left">port</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持 1-65535、1,2,3、1-100,200-300 格式</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -228,7 +228,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scanfromping">ScanFromPing<a href="#scanfromping" class="hash-link" aria-label="ScanFromPing的直接链接" title="ScanFromPing的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ScanFromPing 从 ping.Scan 的结果中进行指纹识别</p>
@@ -283,7 +283,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>chan *pingutil.PingResult</code></td><td style="text-align:left">ping.Scan 的结果管道</td></tr><tr><td style="text-align:left">ports</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持 1-65535、1,2,3、1-100,200-300 格式</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>chan *pingutil.PingResult</code></td><td style="text-align:left">ping.Scan 的结果管道</td></tr><tr><td style="text-align:left">ports</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持 1-65535、1,2,3、1-100,200-300 格式</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -305,7 +305,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scanfromspaceengine">ScanFromSpaceEngine<a href="#scanfromspaceengine" class="hash-link" aria-label="ScanFromSpaceEngine的直接链接" title="ScanFromSpaceEngine的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别</p>
@@ -352,7 +352,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">synscan.Scan 或者 spacengine.Query 的结果</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">synscan.Scan 或者 spacengine.Query 的结果</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -374,7 +374,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scanfromsynresult">ScanFromSynResult<a href="#scanfromsynresult" class="hash-link" aria-label="ScanFromSynResult的直接链接" title="ScanFromSynResult的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ScanFromSynResult / ScanFromSpaceEngine 从 synscan.Scan 或者 spacengine.Query 的结果中进行指纹识别</p>
@@ -421,7 +421,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">synscan.Scan 或者 spacengine.Query 的结果</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">res</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">synscan.Scan 或者 spacengine.Query 的结果</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -443,7 +443,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *fp.MatchResult</code></td><td style="text-align:left">chan *MatchResult: 指纹识别结果管道</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="scanone">ScanOne<a href="#scanone" class="hash-link" aria-label="ScanOne的直接链接" title="ScanOne的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ScanOne servicescan 单体扫描，同步扫描一个目标，主机+端口</p>
@@ -498,7 +498,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址</td></tr><tr><td style="text-align:left">port</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">端口</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址</td></tr><tr><td style="text-align:left">port</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">端口</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...fp.ConfigOption</code></td><td style="text-align:left">零个或多个 servicescan 扫描参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -520,7 +520,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*fp.MatchResult</code></td><td style="text-align:left">*MatchResult: 单个目标的指纹识别结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">扫描失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*fp.MatchResult</code></td><td style="text-align:left">*MatchResult: 单个目标的指纹识别结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">扫描失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="active">active<a href="#active" class="hash-link" aria-label="active的直接链接" title="active的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>active 设置是否启用主动发包模式，主动向目标发送探测包以提升指纹识别准确率</p>
@@ -553,7 +553,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否启用主动发包模式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否启用主动发包模式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -570,7 +570,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="all">all<a href="#all" class="hash-link" aria-label="all的直接链接" title="all的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>all servicescan 的配置选项，强制同时启用 Web 与服务(nmap)全部指纹识别</p>
@@ -599,7 +599,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cache">cache<a href="#cache" class="hash-link" aria-label="cache的直接链接" title="cache的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>cache servicescan 的配置选项，设置本次扫描是否使用缓存</p>
@@ -631,7 +631,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用缓存</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用缓存</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -648,7 +648,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="concurrent">concurrent<a href="#concurrent" class="hash-link" aria-label="concurrent的直接链接" title="concurrent的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>concurrent servicescan 的配置选项，用于设置整体扫描并发</p>
@@ -680,7 +680,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数量</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数量</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -697,7 +697,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="context的直接链接" title="context的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>context 设置服务扫描使用的 context，用于取消或超时控制</p>
@@ -730,7 +730,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -747,7 +747,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="databasecache">databaseCache<a href="#databasecache" class="hash-link" aria-label="databaseCache的直接链接" title="databaseCache的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>databaseCache servicescan 的配置选项，设置本次扫描是否使用数据库缓存</p>
@@ -779,7 +779,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用数据库缓存</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用数据库缓存</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -796,7 +796,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="debuglog">debugLog<a href="#debuglog" class="hash-link" aria-label="debugLog的直接链接" title="debugLog的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>debugLog 的配置选项，设置本次扫描是否使用 debugLog</p>
@@ -828,7 +828,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否使用 debugLog，不传时默认为 true</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否使用 debugLog，不传时默认为 true</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -845,7 +845,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disabledefaultrule">disableDefaultRule<a href="#disabledefaultrule" class="hash-link" aria-label="disableDefaultRule的直接链接" title="disableDefaultRule的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>disableDefaultRule servicescan 的配置选项，禁用内置默认指纹规则(通常配合自定义规则使用)</p>
@@ -878,7 +878,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否禁用默认规则，不传时默认为 true</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否禁用默认规则，不传时默认为 true</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -895,7 +895,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disableopenportguard">disableOpenPortGuard<a href="#disableopenportguard" class="hash-link" aria-label="disableOpenPortGuard的直接链接" title="disableOpenPortGuard的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>disableOpenPortGuard servicescan 的配置选项, 禁用单主机开放端口数保护.</p>
@@ -927,7 +927,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否禁用，不传时默认为 true</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否禁用，不传时默认为 true</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -944,7 +944,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disablewebscanconnpool">disableWebScanConnPool<a href="#disablewebscanconnpool" class="hash-link" aria-label="disableWebScanConnPool的直接链接" title="disableWebScanConnPool的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>disableWebScanConnPool servicescan 的配置选项，用于禁用 web 扫描的连接池</p>
@@ -976,7 +976,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用连接池，默认为 false</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用连接池，默认为 false</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -993,7 +993,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="excludehosts">excludeHosts<a href="#excludehosts" class="hash-link" aria-label="excludeHosts的直接链接" title="excludeHosts的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>excludeHosts servicescan 的配置选项，设置本次扫描排除的主机</p>
@@ -1025,7 +1025,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">hosts</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">主机，支持逗号分割、CIDR、- 的格式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">hosts</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">主机，支持逗号分割、CIDR、- 的格式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1042,7 +1042,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="excludeports">excludePorts<a href="#excludeports" class="hash-link" aria-label="excludePorts的直接链接" title="excludePorts的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>excludePorts servicescan 的配置选项，设置本次扫描排除的端口</p>
@@ -1074,7 +1074,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ports</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持逗号分割、- 的格式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ports</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">端口，支持逗号分割、- 的格式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1091,7 +1091,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxprobes">maxProbes<a href="#maxprobes" class="hash-link" aria-label="maxProbes的直接链接" title="maxProbes的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>maxProbes servicescan 的配置选项，在主动模式发包的基础上设置本次扫描使用的最大探测包数量，默认值为 5</p>
@@ -1123,7 +1123,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大探测包数量</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大探测包数量</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1140,7 +1140,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxprobesconcurrent">maxProbesConcurrent<a href="#maxprobesconcurrent" class="hash-link" aria-label="maxProbesConcurrent的直接链接" title="maxProbesConcurrent的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>maxProbesConcurrent servicescan 的配置选项，设置本次扫描发送 Probe 的并发量，默认值为 5</p>
@@ -1172,7 +1172,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发量</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">m</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发量</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1189,7 +1189,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="nmapraritymax">nmapRarityMax<a href="#nmapraritymax" class="hash-link" aria-label="nmapRarityMax的直接链接" title="nmapRarityMax的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>nmapRarityMax servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹稀有度，在主动模式发包的基础上进行探测控制</p>
@@ -1222,7 +1222,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">rarity</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">稀有度，取值范围为 1-9</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">rarity</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">稀有度，取值范围为 1-9</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1239,7 +1239,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="nmaprule">nmapRule<a href="#nmaprule" class="hash-link" aria-label="nmapRule的直接链接" title="nmapRule的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>nmapRule servicescan 的配置选项，设置本次扫描使用的 Nmap 指纹规则</p>
@@ -1271,7 +1271,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">Nmap 指纹规则，支持规则字节内容、规则文件路径或规则映射</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">Nmap 指纹规则，支持规则字节内容、规则文件路径或规则映射</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1288,7 +1288,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="onfinish">onFinish<a href="#onfinish" class="hash-link" aria-label="onFinish的直接链接" title="onFinish的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>onFinish servicescan 的配置选项，设置本次扫描完成单个目标时的回调函数</p>
@@ -1320,7 +1320,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*MatchResult)</code></td><td style="text-align:left">扫描完成时触发的回调函数，入参为匹配结果</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*MatchResult)</code></td><td style="text-align:left">扫描完成时触发的回调函数，入参为匹配结果</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1337,7 +1337,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="onopen">onOpen<a href="#onopen" class="hash-link" aria-label="onOpen的直接链接" title="onOpen的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>onOpen servicescan 的配置选项，设置本次扫描端口开放时的回调函数</p>
@@ -1369,7 +1369,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*MatchResult)</code></td><td style="text-align:left">端口开放时触发的回调函数，入参为匹配结果</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(*MatchResult)</code></td><td style="text-align:left">端口开放时触发的回调函数，入参为匹配结果</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1386,7 +1386,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="openportguardlimit">openPortGuardLimit<a href="#openportguardlimit" class="hash-link" aria-label="openPortGuardLimit的直接链接" title="openPortGuardLimit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>openPortGuardLimit servicescan 的配置选项, 设置单主机开放端口数熔断阈值.</p>
@@ -1418,7 +1418,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">熔断阈值，小于等于 0 时使用默认值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">熔断阈值，小于等于 0 时使用默认值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1435,7 +1435,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="probetimeout">probeTimeout<a href="#probetimeout" class="hash-link" aria-label="probeTimeout的直接链接" title="probeTimeout的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>probeTimeout servicescan 的配置选项，设置每一个探测包的超时时间</p>
@@ -1467,7 +1467,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">超时时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">超时时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1484,7 +1484,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proto">proto<a href="#proto" class="hash-link" aria-label="proto的直接链接" title="proto的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>proto servicescan 的配置选项，用于指定扫描协议</p>
@@ -1516,7 +1516,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proto</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">协议，例如 tcp、udp，可选参数，不传入参数默认为 tcp</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proto</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">协议，例如 tcp、udp，可选参数，不传入参数默认为 tcp</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1533,7 +1533,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proxy">proxy<a href="#proxy" class="hash-link" aria-label="proxy的直接链接" title="proxy的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>proxy servicescan 的配置选项，设置本次扫描使用的代理</p>
@@ -1565,7 +1565,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，支持 http 和 socks5</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，支持 http 和 socks5</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1582,7 +1582,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service">service<a href="#service" class="hash-link" aria-label="service的直接链接" title="service的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>service servicescan 的配置选项，仅启用服务(nmap)指纹识别，禁用 Web 指纹</p>
@@ -1611,7 +1611,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="web">web<a href="#web" class="hash-link" aria-label="web的直接链接" title="web的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>web servicescan 的配置选项，仅启用 Web 指纹识别(只扫描 Web 服务指纹)</p>
@@ -1640,7 +1640,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>fp.ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="webrule">webRule<a href="#webrule" class="hash-link" aria-label="webRule的直接链接" title="webRule的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>webRule servicescan 的配置选项，设置本次扫描使用的 Web 指纹规则</p>
@@ -1672,7 +1672,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">rs</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">一个或多个 Web 指纹规则，支持 yaml 规则字符串、规则文件路径或规则对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">rs</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">一个或多个 Web 指纹规则，支持 yaml 规则字符串、规则文件路径或规则对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1689,7 +1689,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="withrulegroup">withRuleGroup<a href="#withrulegroup" class="hash-link" aria-label="withRuleGroup的直接链接" title="withRuleGroup的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>withRuleGroup servicescan 的配置选项，用于指定指纹库中的指纹组。</p>
@@ -1721,7 +1721,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">groups</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个指纹组名称</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">groups</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个指纹组名称</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1738,7 +1738,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="withrulegroupall">withRuleGroupAll<a href="#withrulegroupall" class="hash-link" aria-label="withRuleGroupAll的直接链接" title="withRuleGroupAll的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>withRuleGroupAll servicescan 的配置选项，用于指定使用指纹组的全部指纹。</p>
@@ -1766,6 +1766,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/servicescan.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/sca"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">sca</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/sfreport"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">sfreport</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#scan" class="table-of-contents__link toc-highlight">Scan</a></li><li><a href="#scanfromping" class="table-of-contents__link toc-highlight">ScanFromPing</a></li><li><a href="#scanfromspaceengine" class="table-of-contents__link toc-highlight">ScanFromSpaceEngine</a></li><li><a href="#scanfromsynresult" class="table-of-contents__link toc-highlight">ScanFromSynResult</a></li><li><a href="#scanone" class="table-of-contents__link toc-highlight">ScanOne</a></li><li><a href="#active" class="table-of-contents__link toc-highlight">active</a></li><li><a href="#all" class="table-of-contents__link toc-highlight">all</a></li><li><a href="#cache" class="table-of-contents__link toc-highlight">cache</a></li><li><a href="#concurrent" class="table-of-contents__link toc-highlight">concurrent</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#databasecache" class="table-of-contents__link toc-highlight">databaseCache</a></li><li><a href="#debuglog" class="table-of-contents__link toc-highlight">debugLog</a></li><li><a href="#disabledefaultrule" class="table-of-contents__link toc-highlight">disableDefaultRule</a></li><li><a href="#disableopenportguard" class="table-of-contents__link toc-highlight">disableOpenPortGuard</a></li><li><a href="#disablewebscanconnpool" class="table-of-contents__link toc-highlight">disableWebScanConnPool</a></li><li><a href="#excludehosts" class="table-of-contents__link toc-highlight">excludeHosts</a></li><li><a href="#excludeports" class="table-of-contents__link toc-highlight">excludePorts</a></li><li><a href="#maxprobes" class="table-of-contents__link toc-highlight">maxProbes</a></li><li><a href="#maxprobesconcurrent" class="table-of-contents__link toc-highlight">maxProbesConcurrent</a></li><li><a href="#nmapraritymax" class="table-of-contents__link toc-highlight">nmapRarityMax</a></li><li><a href="#nmaprule" class="table-of-contents__link toc-highlight">nmapRule</a></li><li><a href="#onfinish" class="table-of-contents__link toc-highlight">onFinish</a></li><li><a href="#onopen" class="table-of-contents__link toc-highlight">onOpen</a></li><li><a href="#openportguardlimit" class="table-of-contents__link toc-highlight">openPortGuardLimit</a></li><li><a href="#probetimeout" class="table-of-contents__link toc-highlight">probeTimeout</a></li><li><a href="#proto" class="table-of-contents__link toc-highlight">proto</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#service" class="table-of-contents__link toc-highlight">service</a></li><li><a href="#web" class="table-of-contents__link toc-highlight">web</a></li><li><a href="#webrule" class="table-of-contents__link toc-highlight">webRule</a></li><li><a href="#withrulegroup" class="table-of-contents__link toc-highlight">withRuleGroup</a></li><li><a href="#withrulegroupall" class="table-of-contents__link toc-highlight">withRuleGroupAll</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">一个 servicescan.Scan 可接收的配置选项</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/servicescan.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/sca"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">sca</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/sfreport"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">sfreport</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#scan" class="table-of-contents__link toc-highlight">Scan</a></li><li><a href="#scanfromping" class="table-of-contents__link toc-highlight">ScanFromPing</a></li><li><a href="#scanfromspaceengine" class="table-of-contents__link toc-highlight">ScanFromSpaceEngine</a></li><li><a href="#scanfromsynresult" class="table-of-contents__link toc-highlight">ScanFromSynResult</a></li><li><a href="#scanone" class="table-of-contents__link toc-highlight">ScanOne</a></li><li><a href="#active" class="table-of-contents__link toc-highlight">active</a></li><li><a href="#all" class="table-of-contents__link toc-highlight">all</a></li><li><a href="#cache" class="table-of-contents__link toc-highlight">cache</a></li><li><a href="#concurrent" class="table-of-contents__link toc-highlight">concurrent</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#databasecache" class="table-of-contents__link toc-highlight">databaseCache</a></li><li><a href="#debuglog" class="table-of-contents__link toc-highlight">debugLog</a></li><li><a href="#disabledefaultrule" class="table-of-contents__link toc-highlight">disableDefaultRule</a></li><li><a href="#disableopenportguard" class="table-of-contents__link toc-highlight">disableOpenPortGuard</a></li><li><a href="#disablewebscanconnpool" class="table-of-contents__link toc-highlight">disableWebScanConnPool</a></li><li><a href="#excludehosts" class="table-of-contents__link toc-highlight">excludeHosts</a></li><li><a href="#excludeports" class="table-of-contents__link toc-highlight">excludePorts</a></li><li><a href="#maxprobes" class="table-of-contents__link toc-highlight">maxProbes</a></li><li><a href="#maxprobesconcurrent" class="table-of-contents__link toc-highlight">maxProbesConcurrent</a></li><li><a href="#nmapraritymax" class="table-of-contents__link toc-highlight">nmapRarityMax</a></li><li><a href="#nmaprule" class="table-of-contents__link toc-highlight">nmapRule</a></li><li><a href="#onfinish" class="table-of-contents__link toc-highlight">onFinish</a></li><li><a href="#onopen" class="table-of-contents__link toc-highlight">onOpen</a></li><li><a href="#openportguardlimit" class="table-of-contents__link toc-highlight">openPortGuardLimit</a></li><li><a href="#probetimeout" class="table-of-contents__link toc-highlight">probeTimeout</a></li><li><a href="#proto" class="table-of-contents__link toc-highlight">proto</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#service" class="table-of-contents__link toc-highlight">service</a></li><li><a href="#web" class="table-of-contents__link toc-highlight">web</a></li><li><a href="#webrule" class="table-of-contents__link toc-highlight">webRule</a></li><li><a href="#withrulegroup" class="table-of-contents__link toc-highlight">withRuleGroup</a></li><li><a href="#withrulegroupall" class="table-of-contents__link toc-highlight">withRuleGroupAll</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

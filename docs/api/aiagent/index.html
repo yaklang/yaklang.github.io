@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">aiagent | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/aiagent"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="aiagent | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/aiagent"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/aiagent" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/aiagent" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/aiagent" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"aiagent","item":"https://yaklang.com/docs/api/aiagent"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.57ca5fd1.js" defer="defer"></script>
-<script src="/assets/js/main.02c5aefc.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.6a0ff1da.css">
+<script src="/assets/js/runtime~main.30a1f0b6.js" defer="defer"></script>
+<script src="/assets/js/main.abaed218.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -250,7 +250,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#allyakscriptaitools" class="">aiagent.AllYakScriptAiTools</a></td><td style="text-align:left">GetAllYakScriptAiTools 获取数据库中保存的全部 Yak 脚本 AI 工具（导出名为 aiagent.AllYakScriptAiTools） 参数: - 无 返回值: - AI 工具列表</td></tr><tr><td style="text-align:left"><a href="#createforge" class="">aiagent.CreateForge</a></td><td style="text-align:left">NewForgeBlueprint 创建一个 Forge 蓝图（导出名为 aiagent.CreateForge） Forge 蓝图描述了一个可复用的 AI 工作流，可基于它创建执行器 参数: - name: Forge 名称 - opts: 可选项，如 aiagent.initPrompt、aia...</td></tr><tr><td style="text-align:left"><a href="#createliteforge" class="">aiagent.CreateLiteForge</a></td><td style="text-align:left">NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge） LiteForge 是轻量的一次性 AI 任务执行单元 参数: - name: LiteForge 名称 - opts: 可选项，如 aiagent.liteForgePromp...</td></tr><tr><td style="text-align:left"><a href="#executeforge" class="">aiagent.ExecuteForge</a></td><td style="text-align:left">ExecuteForge 执行一个已注册的 Forge 并返回结果（导出名为 aiagent.ExecuteForge） 这是 AI Agent 最常用的入口，内部会创建协调器并运行整个 AI 工作流 参数: - forgeName: Forge 名称 - i: 执行参数（map 或键值对） - i...</td></tr><tr><td style="text-align:left"><a href="#extractaction" class="">aiagent.ExtractAction</a></td><td style="text-align:left">ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action（导出名为 aiagent.ExtractAction） 参数: - i: 包含 action 的原始文本 - actionName: 期望的 ac...</td></tr><tr><td style="text-align:left"><a href="#extractplan" class="">aiagent.ExtractPlan</a></td><td style="text-align:left">ExtractPlan 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan） 参数: - c: 协调器对象 - rawResponse: AI 返回的原始文本 返回值: - 计划响应对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#getdefaultcontextprovider" class="">aiagent.GetDefaultContextProvider</a></td><td style="text-align:left">GetDefaultContextProvider 返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider） 上下文提供器持有计划历史、持久化数据、交互历史以及工具列表 参数: - 无 返回值: - 默认上下文提供器对象</td></tr><tr><td style="text-align:left"><a href="#newexecutor" class="">aiagent.NewExecutor</a></td><td style="text-align:left">NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor） 参数: - name: Forge 名称 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagent.aiCallback、aiagent.cont...</td></tr><tr><td style="text-align:left"><a href="#newexecutorfromjson" class="">aiagent.NewExecutorFromJson</a></td><td style="text-align:left">NewExecutorFromJson 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson） 参数: - json: Forge 蓝图的 JSON 描述 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagen...</td></tr><tr><td style="text-align:left"><a href="#parseyakscripttoaitools" class="">aiagent.ParseYakScriptToAiTools</a></td><td style="text-align:left">LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools） 会从源码中提取元数据（名称、描述、关键词等）以及 CLI 参数并转换为工具输入 schema 参数: - name: 工具名称 -...</td></tr><tr><td style="text-align:left"><a href="#updateyakscriptmetadata" class="">aiagent.UpdateYakScriptMetaData</a></td><td style="text-align:left">UpdateYakScriptMetaData 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData） 参数: - name: 插件名称 - content: 插件源码 - forceUpdate: 是否强制重新生成元数据 返回...</td></tr><tr><td style="text-align:left"><a href="#agreeauto" class="">aiagent.agreeAuto</a></td><td style="text-align:left">WithAgreeAuto 设置自动审批通过所有操作（导出名为 aiagent.agreeAuto） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreemanual" class="">aiagent.agreeManual</a></td><td style="text-align:left">WithAgreeManual 设置由人工手动审批操作（导出名为 aiagent.agreeManual） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreepolicy" class="">aiagent.agreePolicy</a></td><td style="text-align:left">WithAgreePolicy 设置操作审批策略（导出名为 aiagent.agreePolicy） 参数: - p: 审批策略，如自动、AI、手动等 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreepolicyai" class="">aiagent.agreePolicyAI</a></td><td style="text-align:left">WithAIAgree 设置由 AI 自动审批操作（导出名为 aiagent.agreePolicyAI） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreeyolo" class="">aiagent.agreeYOLO</a></td><td style="text-align:left">WithAgreeYOLO 设置 YOLO 模式，自动通过所有审批（导出名为 aiagent.agreeYOLO） 参数: - b: 可选，是否开启 YOLO（默认 true） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#aiautoretry" class="">aiagent.aiAutoRetry</a></td><td style="text-align:left">WithAIAutoRetry 设置 AI 调用失败时的自动重试次数（导出名为 aiagent.aiAutoRetry） WithAIAutoRetry sets AiAutoRetry count. 参数: - n: 重试次数（&gt;= 0） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#aicallback" class="">aiagent.aiCallback</a></td><td style="text-align:left">WithAICallback 设置统一的 AI 回调（导出名为 aiagent.aiCallback） WARNING 粗粒度的ai callback 设置，只可在测试或者功能固定单一的ai模块（如知识库蒸馏）使用，其他位置应该用 WithAutoTieredAICallback 参数: - cb:...</td></tr><tr><td style="text-align:left"><a href="#aitransactionretry" class="">aiagent.aiTransactionRetry</a></td><td style="text-align:left">WithAITransactionRetry 设置 AI 事务（单次交互）的自动重试次数（导出名为 aiagent.aiTransactionRetry） WithAITransactionRetry alias to existing WithAITransactionAutoRetry for ...</td></tr><tr><td style="text-align:left"><a href="#allowrequireforuserinteract" class="">aiagent.allowRequireForUserInteract</a></td><td style="text-align:left">WithAllowRequireForUserInteract 设置是否允许向用户发起交互请求（导出名为 aiagent.allowRequireForUserInteract） 参数: - v: 是否允许用户交互 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#appendpersistentmemory" class="">aiagent.appendPersistentMemory</a></td><td style="text-align:left">WithAppendPersistentContext 追加持久化记忆的键（导出名为 aiagent.appendPersistentMemory） WithAppendPersistentContext appends keys to PersistentMemory. 参数: - keys: 一...</td></tr><tr><td style="text-align:left"><a href="#context" class="">aiagent.context</a></td><td style="text-align:left">WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context） 参数: - ctx: 上下文对象 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#coordinatoraicallback" class="">aiagent.coordinatorAICallback</a></td><td style="text-align:left">WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#debug" class="">aiagent.debug</a></td><td style="text-align:left">WithDebug 同时开启 prompt 与 event 调试输出（导出名为 aiagent.debug） WithDebug toggles both prompt and event debug flags. 参数: - v: 是否开启调试 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#debugprompt" class="">aiagent.debugPrompt</a></td><td style="text-align:left">WithDebugPrompt 开启 prompt 调试输出（导出名为 aiagent.debugPrompt） 参数: - v: 可选，是否开启（默认 true） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#disableoutputtype" class="">aiagent.disableOutputType</a></td><td style="text-align:left">WithDisableOutputEvent 禁用指定类型的输出事件（导出名为 aiagent.disableOutputType） WithDisableOutputEvent is a name-compatible wrapper for disabling output event type...</td></tr><tr><td style="text-align:left"><a href="#disabletooluse" class="">aiagent.disableToolUse</a></td><td style="text-align:left">WithDisableToolUse 禁用工具调用（导出名为 aiagent.disableToolUse） 参数: - disable: 是否禁用工具调用 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#disallowrequireforuserprompt" class="">aiagent.disallowRequireForUserPrompt</a></td><td style="text-align:left">WithDisallowRequireForUserPrompt 禁止向用户发起交互请求（导出名为 aiagent.disallowRequireForUserPrompt） WithDisallowRequireForUserPrompt disables require-for-user-int...</td></tr><tr><td style="text-align:left"><a href="#extendaidoptions" class="">aiagent.extendAIDOptions</a></td><td style="text-align:left">WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiagent.extendAIDOptions） 参数: - opts: 一个或多个 aicommon 配置选项 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#extendedactioncallback" class="">aiagent.extendedActionCallback</a></td><td style="text-align:left">WithExtendedActionCallback 注册扩展 action 回调（导出名为 aiagent.extendedActionCallback） WithExtendedActionCallback sets the ExtendedActionCallback map. 参数: - n...</td></tr><tr><td style="text-align:left"><a href="#forgename" class="">aiagent.forgeName</a></td><td style="text-align:left">WithForgeName 设置 AI Agent 使用的 Forge 名称（导出名为 aiagent.forgeName） 参数: - forgeName: Forge 名称 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#forgeplanmocker" class="">aiagent.forgePlanMocker</a></td><td style="text-align:left">WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker） 参数: - plan: 计划生成函数，参数为协调器，返回计划响应 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#forgetools" class="">aiagent.forgeTools</a></td><td style="text-align:left">WithTools 为AI助手添加可用的工具（导出名为 aiagent.forgeTools） 这些工具可以扩展AI的能力，使其能够执行特定的任务 参数: - tools: 一个或多个 AI 工具对象 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#initprompt" class="">aiagent.initPrompt</a></td><td style="text-align:left">WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 参数: - prompt: 初始化提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#initializeprompt" class="">aiagent.initializePrompt</a></td><td style="text-align:left">WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 参数: - prompt: 初始化提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#liteforgeoutputschema" class="">aiagent.liteForgeOutputSchema</a></td><td style="text-align:left">WithLiteForge_OutputSchema 设置 LiteForge 的输出结构 schema（导出名为 aiagent.liteForgeOutputSchema） 参数: - params: 一个或多个 aitool 参数选项，描述期望的输出字段 返回值: - LiteForge 可选...</td></tr><tr><td style="text-align:left"><a href="#liteforgeoutputschemaraw" class="">aiagent.liteForgeOutputSchemaRaw</a></td><td style="text-align:left">WithLiteForge_OutputSchemaRaw 通过原始 JSON Schema 字符串设置输出结构（导出名为 aiagent.liteForgeOutputSchemaRaw） 参数: - actionName: action 名称 - outputSchema: 原始 JSON Sc...</td></tr><tr><td style="text-align:left"><a href="#liteforgeprompt" class="">aiagent.liteForgePrompt</a></td><td style="text-align:left">WithLiteForge_Prompt 设置 LiteForge 的&quot;上下文/动态&quot; prompt 文本。 渲染后该字段被包在 &lt;|PROMPT_SECTION_dynamic_&lt;nonce&gt;|&gt;...&lt;|PROMPT_SECTION_dynamic_END_&lt;nonce&gt;|&gt; 内的 &lt;conte...</td></tr><tr><td style="text-align:left"><a href="#liteforgedrequireparams" class="">aiagent.liteForgedRequireParams</a></td><td style="text-align:left">WithLiteForge_RequireParams 设置 LiteForge 的输入参数 schema（导出名为 aiagent.liteForgedRequireParams） 参数: - params: 一个或多个 aitool 参数选项 返回值: - LiteForge 可选项</td></tr><tr><td style="text-align:left"><a href="#manualassistantcallback" class="">aiagent.manualAssistantCallback</a></td><td style="text-align:left">WithManualAssistantCallback 设置人工审批回调（导出名为 aiagent.manualAssistantCallback） WithManualAssistantCallback is an alias to the agree/manual callback setter...</td></tr><tr><td style="text-align:left"><a href="#offsetseq" class="">aiagent.offsetSeq</a></td><td style="text-align:left">WithSequence 设置起始序列号并安装自增 id 生成器（导出名为 aiagent.offsetSeq） WithSequence sets the starting sequence/id and installs a simple id generator that increments...</td></tr><tr><td style="text-align:left"><a href="#omnisearchtool" class="">aiagent.omniSearchTool</a></td><td style="text-align:left">WithOmniSearchTool 启用全网搜索工具（导出名为 aiagent.omniSearchTool） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#originyaklangclicode" class="">aiagent.originYaklangCliCode</a></td><td style="text-align:left">WithOriginYaklangCliCode 设置原始的Yaklang CLI代码（导出名为 aiagent.originYaklangCliCode） 这个结构需要 Yak 引擎根据 CLI 代码构建出正确的用户需要输入的工具 这个结构是表单构建的核心依据，可以使用 Yak 原声插件基础设施直...</td></tr><tr><td style="text-align:left"><a href="#persistentprompt" class="">aiagent.persistentPrompt</a></td><td style="text-align:left">WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#persistentpromptforge" class="">aiagent.persistentPromptForge</a></td><td style="text-align:left">WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#plan" class="">aiagent.plan</a></td><td style="text-align:left">WithPlanMocker 设置协调器的计划生成器，用于自定义/模拟任务计划（导出名为 aiagent.plan） 参数: - i: 计划生成函数，参数为协调器，返回计划响应 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#planaicallback" class="">aiagent.planAICallback</a></td><td style="text-align:left">WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#resulthandler" class="">aiagent.resultHandler</a></td><td style="text-align:left">WithResultHandler 设置协调器执行结束后的结果处理回调（导出名为 aiagent.resultHandler） cycle import issue 参数: - h: 结果处理函数，参数为协调器对象 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#resulthandlerforge" class="">aiagent.resultHandlerForge</a></td><td style="text-align:left">WithResultHandler 设置AI助手的结果处理函数（导出名为 aiagent.resultHandlerForge） 这个函数会在AI助手生成结果后被调用，用于处理AI的输出 参数: - handler: 结果处理函数，参数为 (result, err) 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#resultprompt" class="">aiagent.resultPrompt</a></td><td style="text-align:left">WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#resultpromptforge" class="">aiagent.resultPromptForge</a></td><td style="text-align:left">WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#systemfileoperator" class="">aiagent.systemFileOperator</a></td><td style="text-align:left">WithSystemFileOperator 为 AI 启用系统文件操作工具集（导出名为 aiagent.systemFileOperator） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#taskaicallback" class="">aiagent.taskAICallback</a></td><td style="text-align:left">WithSpeedPriorityAICallback 设置速度优先档的 AI 回调（导出名为 aiagent.taskAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#timelinecontentlimit" class="">aiagent.timelineContentLimit</a></td><td style="text-align:left">WithTimelineContentLimit 设置 timeline 内容大小上限（导出名为 aiagent.timelineContentLimit） WithTimelineContentLimit sets timeline content size limit (keeps naming...</td></tr><tr><td style="text-align:left"><a href="#tool" class="">aiagent.tool</a></td><td style="text-align:left">WithTool 添加单个 AI 工具（导出名为 aiagent.tool） WithTool is a convenience wrapper to add a single tool (delegates to WithTools). 参数: - tool: AI 工具对象 返回值: - 配置选...</td></tr><tr><td style="text-align:left"><a href="#toolkeywords" class="">aiagent.toolKeywords</a></td><td style="text-align:left">WithToolKeywords 设置AI助手的工具关键词（导出名为 aiagent.toolKeywords） 这些关键词可以扩展AI的能力，使其能够执行特定的任务 参数: - keywords: 工具关键词列表 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#tools" class="">aiagent.tools</a></td><td style="text-align:left">WithTools 为 AI 批量添加可用工具（导出名为 aiagent.tools） 参数: - tool: 一个或多个 AI 工具对象 返回值: - 配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#allyakscriptaitools" class="">aiagent.AllYakScriptAiTools</a></td><td style="text-align:left">GetAllYakScriptAiTools 获取数据库中保存的全部 Yak 脚本 AI 工具（导出名为 aiagent.AllYakScriptAiTools） 参数: - 无 返回值: - AI 工具列表</td></tr><tr><td style="text-align:left"><a href="#createforge" class="">aiagent.CreateForge</a></td><td style="text-align:left">NewForgeBlueprint 创建一个 Forge 蓝图（导出名为 aiagent.CreateForge） Forge 蓝图描述了一个可复用的 AI 工作流，可基于它创建执行器 参数: - name: Forge 名称 - opts: 可选项，如 aiagent.initPrompt、aia...</td></tr><tr><td style="text-align:left"><a href="#createliteforge" class="">aiagent.CreateLiteForge</a></td><td style="text-align:left">NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge） LiteForge 是轻量的一次性 AI 任务执行单元 参数: - name: LiteForge 名称 - opts: 可选项，如 aiagent.liteForgePromp...</td></tr><tr><td style="text-align:left"><a href="#executeforge" class="">aiagent.ExecuteForge</a></td><td style="text-align:left">ExecuteForge 执行一个已注册的 Forge 并返回结果（导出名为 aiagent.ExecuteForge） 这是 AI Agent 最常用的入口，内部会创建协调器并运行整个 AI 工作流 参数: - forgeName: Forge 名称 - i: 执行参数（map 或键值对） - i...</td></tr><tr><td style="text-align:left"><a href="#extractaction" class="">aiagent.ExtractAction</a></td><td style="text-align:left">ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action（导出名为 aiagent.ExtractAction） 参数: - i: 包含 action 的原始文本 - actionName: 期望的 ac...</td></tr><tr><td style="text-align:left"><a href="#extractplan" class="">aiagent.ExtractPlan</a></td><td style="text-align:left">ExtractPlan 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan） 参数: - c: 协调器对象 - rawResponse: AI 返回的原始文本 返回值: - 计划响应对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#getdefaultcontextprovider" class="">aiagent.GetDefaultContextProvider</a></td><td style="text-align:left">GetDefaultContextProvider 返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider） 上下文提供器持有计划历史、持久化数据、交互历史以及工具列表 参数: - 无 返回值: - 默认上下文提供器对象</td></tr><tr><td style="text-align:left"><a href="#newexecutor" class="">aiagent.NewExecutor</a></td><td style="text-align:left">NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor） 参数: - name: Forge 名称 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagent.aiCallback、aiagent.cont...</td></tr><tr><td style="text-align:left"><a href="#newexecutorfromjson" class="">aiagent.NewExecutorFromJson</a></td><td style="text-align:left">NewExecutorFromJson 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson） 参数: - json: Forge 蓝图的 JSON 描述 - i: 执行参数（map 或键值对） - opts: 可选项，如 aiagen...</td></tr><tr><td style="text-align:left"><a href="#parseyakscripttoaitools" class="">aiagent.ParseYakScriptToAiTools</a></td><td style="text-align:left">LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools） 会从源码中提取元数据（名称、描述、关键词等）以及 CLI 参数并转换为工具输入 schema 参数: - name: 工具名称 -...</td></tr><tr><td style="text-align:left"><a href="#updateyakscriptmetadata" class="">aiagent.UpdateYakScriptMetaData</a></td><td style="text-align:left">UpdateYakScriptMetaData 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData） 参数: - name: 插件名称 - content: 插件源码 - forceUpdate: 是否强制重新生成元数据 返回...</td></tr><tr><td style="text-align:left"><a href="#agreeauto" class="">aiagent.agreeAuto</a></td><td style="text-align:left">WithAgreeAuto 设置自动审批通过所有操作（导出名为 aiagent.agreeAuto） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreemanual" class="">aiagent.agreeManual</a></td><td style="text-align:left">WithAgreeManual 设置由人工手动审批操作（导出名为 aiagent.agreeManual） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreepolicy" class="">aiagent.agreePolicy</a></td><td style="text-align:left">WithAgreePolicy 设置操作审批策略（导出名为 aiagent.agreePolicy） 参数: - p: 审批策略，如自动、AI、手动等 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreepolicyai" class="">aiagent.agreePolicyAI</a></td><td style="text-align:left">WithAIAgree 设置由 AI 自动审批操作（导出名为 aiagent.agreePolicyAI） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#agreeyolo" class="">aiagent.agreeYOLO</a></td><td style="text-align:left">WithAgreeYOLO 设置 YOLO 模式，自动通过所有审批（导出名为 aiagent.agreeYOLO） 参数: - b: 可选，是否开启 YOLO（默认 true） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#aiautoretry" class="">aiagent.aiAutoRetry</a></td><td style="text-align:left">WithAIAutoRetry 设置 AI 调用失败时的自动重试次数（导出名为 aiagent.aiAutoRetry） WithAIAutoRetry sets AiAutoRetry count. 参数: - n: 重试次数（&gt;= 0） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#aicallback" class="">aiagent.aiCallback</a></td><td style="text-align:left">WithAICallback 设置统一的 AI 回调（导出名为 aiagent.aiCallback） WARNING 粗粒度的ai callback 设置，只可在测试或者功能固定单一的ai模块（如知识库蒸馏）使用，其他位置应该用 WithAutoTieredAICallback 参数: - cb:...</td></tr><tr><td style="text-align:left"><a href="#aitransactionretry" class="">aiagent.aiTransactionRetry</a></td><td style="text-align:left">WithAITransactionRetry 设置 AI 事务（单次交互）的自动重试次数（导出名为 aiagent.aiTransactionRetry） WithAITransactionRetry alias to existing WithAITransactionAutoRetry for ...</td></tr><tr><td style="text-align:left"><a href="#allowrequireforuserinteract" class="">aiagent.allowRequireForUserInteract</a></td><td style="text-align:left">WithAllowRequireForUserInteract 设置是否允许向用户发起交互请求（导出名为 aiagent.allowRequireForUserInteract） 参数: - v: 是否允许用户交互 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#appendpersistentmemory" class="">aiagent.appendPersistentMemory</a></td><td style="text-align:left">WithAppendPersistentContext 追加持久化记忆的键（导出名为 aiagent.appendPersistentMemory） WithAppendPersistentContext appends keys to PersistentMemory. 参数: - keys: 一...</td></tr><tr><td style="text-align:left"><a href="#context" class="">aiagent.context</a></td><td style="text-align:left">WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context） 参数: - ctx: 上下文对象 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#coordinatoraicallback" class="">aiagent.coordinatorAICallback</a></td><td style="text-align:left">WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#debug" class="">aiagent.debug</a></td><td style="text-align:left">WithDebug 同时开启 prompt 与 event 调试输出（导出名为 aiagent.debug） WithDebug toggles both prompt and event debug flags. 参数: - v: 是否开启调试 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#debugprompt" class="">aiagent.debugPrompt</a></td><td style="text-align:left">WithDebugPrompt 开启 prompt 调试输出（导出名为 aiagent.debugPrompt） 参数: - v: 可选，是否开启（默认 true） 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#disableoutputtype" class="">aiagent.disableOutputType</a></td><td style="text-align:left">WithDisableOutputEvent 禁用指定类型的输出事件（导出名为 aiagent.disableOutputType） WithDisableOutputEvent is a name-compatible wrapper for disabling output event type...</td></tr><tr><td style="text-align:left"><a href="#disabletooluse" class="">aiagent.disableToolUse</a></td><td style="text-align:left">WithDisableToolUse 禁用工具调用（导出名为 aiagent.disableToolUse） 参数: - disable: 是否禁用工具调用 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#disallowrequireforuserprompt" class="">aiagent.disallowRequireForUserPrompt</a></td><td style="text-align:left">WithDisallowRequireForUserPrompt 禁止向用户发起交互请求（导出名为 aiagent.disallowRequireForUserPrompt） WithDisallowRequireForUserPrompt disables require-for-user-int...</td></tr><tr><td style="text-align:left"><a href="#extendaidoptions" class="">aiagent.extendAIDOptions</a></td><td style="text-align:left">WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiagent.extendAIDOptions） 参数: - opts: 一个或多个 aicommon 配置选项 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#extendedactioncallback" class="">aiagent.extendedActionCallback</a></td><td style="text-align:left">WithExtendedActionCallback 注册扩展 action 回调（导出名为 aiagent.extendedActionCallback） WithExtendedActionCallback sets the ExtendedActionCallback map. 参数: - n...</td></tr><tr><td style="text-align:left"><a href="#forgename" class="">aiagent.forgeName</a></td><td style="text-align:left">WithForgeName 设置 AI Agent 使用的 Forge 名称（导出名为 aiagent.forgeName） 参数: - forgeName: Forge 名称 返回值: - AI Agent 可选项</td></tr><tr><td style="text-align:left"><a href="#forgeplanmocker" class="">aiagent.forgePlanMocker</a></td><td style="text-align:left">WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker） 参数: - plan: 计划生成函数，参数为协调器，返回计划响应 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#forgetools" class="">aiagent.forgeTools</a></td><td style="text-align:left">WithTools 为AI助手添加可用的工具（导出名为 aiagent.forgeTools） 这些工具可以扩展AI的能力，使其能够执行特定的任务 参数: - tools: 一个或多个 AI 工具对象 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#initprompt" class="">aiagent.initPrompt</a></td><td style="text-align:left">WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 参数: - prompt: 初始化提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#initializeprompt" class="">aiagent.initializePrompt</a></td><td style="text-align:left">WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt） 这个提示词会在AI助手启动时被使用，用于定义AI的初始状态和行为 参数: - prompt: 初始化提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#liteforgeoutputschema" class="">aiagent.liteForgeOutputSchema</a></td><td style="text-align:left">WithLiteForge_OutputSchema 设置 LiteForge 的输出结构 schema（导出名为 aiagent.liteForgeOutputSchema） 参数: - params: 一个或多个 aitool 参数选项，描述期望的输出字段 返回值: - LiteForge 可选...</td></tr><tr><td style="text-align:left"><a href="#liteforgeoutputschemaraw" class="">aiagent.liteForgeOutputSchemaRaw</a></td><td style="text-align:left">WithLiteForge_OutputSchemaRaw 通过原始 JSON Schema 字符串设置输出结构（导出名为 aiagent.liteForgeOutputSchemaRaw） 参数: - actionName: action 名称 - outputSchema: 原始 JSON Sc...</td></tr><tr><td style="text-align:left"><a href="#liteforgeprompt" class="">aiagent.liteForgePrompt</a></td><td style="text-align:left">WithLiteForge_Prompt 设置 LiteForge 的&quot;上下文/动态&quot; prompt 文本。 渲染后该字段被包在 &lt;|PROMPT_SECTION_dynamic_&lt;nonce&gt;|&gt;...&lt;|PROMPT_SECTION_dynamic_END_&lt;nonce&gt;|&gt; 内的 &lt;conte...</td></tr><tr><td style="text-align:left"><a href="#liteforgedrequireparams" class="">aiagent.liteForgedRequireParams</a></td><td style="text-align:left">WithLiteForge_RequireParams 设置 LiteForge 的输入参数 schema（导出名为 aiagent.liteForgedRequireParams） 参数: - params: 一个或多个 aitool 参数选项 返回值: - LiteForge 可选项</td></tr><tr><td style="text-align:left"><a href="#manualassistantcallback" class="">aiagent.manualAssistantCallback</a></td><td style="text-align:left">WithManualAssistantCallback 设置人工审批回调（导出名为 aiagent.manualAssistantCallback） WithManualAssistantCallback is an alias to the agree/manual callback setter...</td></tr><tr><td style="text-align:left"><a href="#offsetseq" class="">aiagent.offsetSeq</a></td><td style="text-align:left">WithSequence 设置起始序列号并安装自增 id 生成器（导出名为 aiagent.offsetSeq） WithSequence sets the starting sequence/id and installs a simple id generator that increments...</td></tr><tr><td style="text-align:left"><a href="#omnisearchtool" class="">aiagent.omniSearchTool</a></td><td style="text-align:left">WithOmniSearchTool 启用全网搜索工具（导出名为 aiagent.omniSearchTool） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#originyaklangclicode" class="">aiagent.originYaklangCliCode</a></td><td style="text-align:left">WithOriginYaklangCliCode 设置原始的Yaklang CLI代码（导出名为 aiagent.originYaklangCliCode） 这个结构需要 Yak 引擎根据 CLI 代码构建出正确的用户需要输入的工具 这个结构是表单构建的核心依据，可以使用 Yak 原声插件基础设施直...</td></tr><tr><td style="text-align:left"><a href="#persistentprompt" class="">aiagent.persistentPrompt</a></td><td style="text-align:left">WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#persistentpromptforge" class="">aiagent.persistentPromptForge</a></td><td style="text-align:left">WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt） 这个提示词会在整个会话过程中持续存在，确保AI行为的一致性 参数: - persistentPrompt: 持久提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#plan" class="">aiagent.plan</a></td><td style="text-align:left">WithPlanMocker 设置协调器的计划生成器，用于自定义/模拟任务计划（导出名为 aiagent.plan） 参数: - i: 计划生成函数，参数为协调器，返回计划响应 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#planaicallback" class="">aiagent.planAICallback</a></td><td style="text-align:left">WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#resulthandler" class="">aiagent.resultHandler</a></td><td style="text-align:left">WithResultHandler 设置协调器执行结束后的结果处理回调（导出名为 aiagent.resultHandler） cycle import issue 参数: - h: 结果处理函数，参数为协调器对象 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#resulthandlerforge" class="">aiagent.resultHandlerForge</a></td><td style="text-align:left">WithResultHandler 设置AI助手的结果处理函数（导出名为 aiagent.resultHandlerForge） 这个函数会在AI助手生成结果后被调用，用于处理AI的输出 参数: - handler: 结果处理函数，参数为 (result, err) 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#resultprompt" class="">aiagent.resultPrompt</a></td><td style="text-align:left">WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#resultpromptforge" class="">aiagent.resultPromptForge</a></td><td style="text-align:left">WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt） 这个提示词会在AI助手生成结果时被使用，用于定义AI的输出格式和内容 参数: - prompt: 结果提示词 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#systemfileoperator" class="">aiagent.systemFileOperator</a></td><td style="text-align:left">WithSystemFileOperator 为 AI 启用系统文件操作工具集（导出名为 aiagent.systemFileOperator） 参数: - 无 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#taskaicallback" class="">aiagent.taskAICallback</a></td><td style="text-align:left">WithSpeedPriorityAICallback 设置速度优先档的 AI 回调（导出名为 aiagent.taskAICallback） 参数: - cb: AI 回调函数 返回值: - 配置选项</td></tr><tr><td style="text-align:left"><a href="#timelinecontentlimit" class="">aiagent.timelineContentLimit</a></td><td style="text-align:left">WithTimelineContentLimit 设置 timeline 内容大小上限（导出名为 aiagent.timelineContentLimit） WithTimelineContentLimit sets timeline content size limit (keeps naming...</td></tr><tr><td style="text-align:left"><a href="#tool" class="">aiagent.tool</a></td><td style="text-align:left">WithTool 添加单个 AI 工具（导出名为 aiagent.tool） WithTool is a convenience wrapper to add a single tool (delegates to WithTools). 参数: - tool: AI 工具对象 返回值: - 配置选...</td></tr><tr><td style="text-align:left"><a href="#toolkeywords" class="">aiagent.toolKeywords</a></td><td style="text-align:left">WithToolKeywords 设置AI助手的工具关键词（导出名为 aiagent.toolKeywords） 这些关键词可以扩展AI的能力，使其能够执行特定的任务 参数: - keywords: 工具关键词列表 返回值: - Forge 可选项</td></tr><tr><td style="text-align:left"><a href="#tools" class="">aiagent.tools</a></td><td style="text-align:left">WithTools 为 AI 批量添加可用工具（导出名为 aiagent.tools） 参数: - tool: 一个或多个 AI 工具对象 返回值: - 配置选项</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="allyakscriptaitools">AllYakScriptAiTools<a href="#allyakscriptaitools" class="hash-link" aria-label="AllYakScriptAiTools的直接链接" title="AllYakScriptAiTools的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
@@ -283,7 +283,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*aitool.Tool</code></td><td style="text-align:left">AI 工具列表</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*aitool.Tool</code></td><td style="text-align:left">AI 工具列表</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="createforge">CreateForge<a href="#createforge" class="hash-link" aria-label="CreateForge的直接链接" title="CreateForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>NewForgeBlueprint 创建一个 Forge 蓝图（导出名为 aiagent.CreateForge）</p>
@@ -326,7 +326,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.initPrompt、aiagent.persistentPrompt、aiagent.resultPrompt 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.initPrompt、aiagent.persistentPrompt、aiagent.resultPrompt 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -343,7 +343,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aiforge.ForgeBlueprint</code></td><td style="text-align:left">Forge 蓝图对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aiforge.ForgeBlueprint</code></td><td style="text-align:left">Forge 蓝图对象</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="createliteforge">CreateLiteForge<a href="#createliteforge" class="hash-link" aria-label="CreateLiteForge的直接链接" title="CreateLiteForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>NewLiteForge 创建一个 LiteForge 实例（导出名为 aiagent.CreateLiteForge）</p>
@@ -391,7 +391,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">LiteForge 名称</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.liteForgePrompt、aiagent.liteForgeOutputSchema 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">LiteForge 名称</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.liteForgePrompt、aiagent.liteForgeOutputSchema 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -413,7 +413,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aiforge.LiteForge</code></td><td style="text-align:left">LiteForge 实例</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aiforge.LiteForge</code></td><td style="text-align:left">LiteForge 实例</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="executeforge">ExecuteForge<a href="#executeforge" class="hash-link" aria-label="ExecuteForge的直接链接" title="ExecuteForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExecuteForge 执行一个已注册的 Forge 并返回结果（导出名为 aiagent.ExecuteForge）</p>
@@ -469,7 +469,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">forgeName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">iopts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context、aiagent.agreeYOLO 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">forgeName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">iopts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context、aiagent.agreeYOLO 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -491,7 +491,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">Forge 执行结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">Forge 执行结果</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractaction">ExtractAction<a href="#extractaction" class="hash-link" aria-label="ExtractAction的直接链接" title="ExtractAction的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractAction 从字符串中提取指定的 Action 对象，支持别名，这里隐含一个强校验行为，即会等待处理完毕之后检查是否有可用的Action（导出名为 aiagent.ExtractAction）</p>
@@ -546,7 +546,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">包含 action 的原始文本</td></tr><tr><td style="text-align:left">actionName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">期望的 action 名称</td></tr><tr><td style="text-align:left">alias</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的 action 别名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">包含 action 的原始文本</td></tr><tr><td style="text-align:left">actionName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">期望的 action 名称</td></tr><tr><td style="text-align:left">alias</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的 action 别名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -568,7 +568,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*Action</code></td><td style="text-align:left">解析出的 Action 对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*Action</code></td><td style="text-align:left">解析出的 Action 对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractplan">ExtractPlan<a href="#extractplan" class="hash-link" aria-label="ExtractPlan的直接链接" title="ExtractPlan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractPlan 从 AI 原始响应中解析出任务计划（导出名为 aiagent.ExtractPlan）</p>
@@ -615,7 +615,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">c</td><td style="text-align:left"><code>*Coordinator</code></td><td style="text-align:left">协调器对象</td></tr><tr><td style="text-align:left">rawResponse</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">AI 返回的原始文本</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">c</td><td style="text-align:left"><code>*Coordinator</code></td><td style="text-align:left">协调器对象</td></tr><tr><td style="text-align:left">rawResponse</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">AI 返回的原始文本</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -637,7 +637,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*PlanResponse</code></td><td style="text-align:left">计划响应对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*PlanResponse</code></td><td style="text-align:left">计划响应对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getdefaultcontextprovider">GetDefaultContextProvider<a href="#getdefaultcontextprovider" class="hash-link" aria-label="GetDefaultContextProvider的直接链接" title="GetDefaultContextProvider的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetDefaultContextProvider 返回默认的 Prompt 上下文提供器（导出名为 aiagent.GetDefaultContextProvider）</p>
@@ -670,7 +670,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*PromptContextProvider</code></td><td style="text-align:left">默认上下文提供器对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*PromptContextProvider</code></td><td style="text-align:left">默认上下文提供器对象</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newexecutor">NewExecutor<a href="#newexecutor" class="hash-link" aria-label="NewExecutor的直接链接" title="NewExecutor的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>NewForgeExecutor 基于已注册的 Forge 名称创建执行器（导出名为 aiagent.NewExecutor）</p>
@@ -725,7 +725,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -747,7 +747,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aid.Coordinator</code></td><td style="text-align:left">协调器对象（可调用 Run 执行）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aid.Coordinator</code></td><td style="text-align:left">协调器对象（可调用 Run 执行）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newexecutorfromjson">NewExecutorFromJson<a href="#newexecutorfromjson" class="hash-link" aria-label="NewExecutorFromJson的直接链接" title="NewExecutorFromJson的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>NewExecutorFromJson 通过 JSON 描述的 Forge 蓝图创建执行器（导出名为 aiagent.NewExecutorFromJson）</p>
@@ -802,7 +802,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">json</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 蓝图的 JSON 描述</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">json</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 蓝图的 JSON 描述</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">执行参数（map 或键值对）</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选项，如 aiagent.aiCallback、aiagent.context 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -824,7 +824,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aid.Coordinator</code></td><td style="text-align:left">协调器对象（可调用 Run 执行）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*aid.Coordinator</code></td><td style="text-align:left">协调器对象（可调用 Run 执行）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="parseyakscripttoaitools">ParseYakScriptToAiTools<a href="#parseyakscripttoaitools" class="hash-link" aria-label="ParseYakScriptToAiTools的直接链接" title="ParseYakScriptToAiTools的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>LoadYakScriptToAiTools 将一段 Yak 插件源码解析为 AI 工具描述（导出名为 aiagent.ParseYakScriptToAiTools）</p>
@@ -867,7 +867,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">工具名称</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Yak 插件源码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">工具名称</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Yak 插件源码</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -884,7 +884,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.AIYakTool</code></td><td style="text-align:left">AI 工具描述对象（解析失败时返回 nil）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.AIYakTool</code></td><td style="text-align:left">AI 工具描述对象（解析失败时返回 nil）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="updateyakscriptmetadata">UpdateYakScriptMetaData<a href="#updateyakscriptmetadata" class="hash-link" aria-label="UpdateYakScriptMetaData的直接链接" title="UpdateYakScriptMetaData的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>UpdateYakScriptMetaData 解析并（按需借助 AI）补全 Yak 插件的元数据（导出名为 aiagent.UpdateYakScriptMetaData）</p>
@@ -942,7 +942,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件名称</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件源码</td></tr><tr><td style="text-align:left">forceUpdate</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否强制重新生成元数据</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件名称</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件源码</td></tr><tr><td style="text-align:left">forceUpdate</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否强制重新生成元数据</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -969,7 +969,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">更新后的插件源码</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>*metadata.YakScriptMetadata</code></td><td style="text-align:left">解析出的元数据对象</td></tr><tr><td style="text-align:left">r3</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">更新后的插件源码</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>*metadata.YakScriptMetadata</code></td><td style="text-align:left">解析出的元数据对象</td></tr><tr><td style="text-align:left">r3</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agreeauto">agreeAuto<a href="#agreeauto" class="hash-link" aria-label="agreeAuto的直接链接" title="agreeAuto的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAgreeAuto 设置自动审批通过所有操作（导出名为 aiagent.agreeAuto）</p>
@@ -1001,7 +1001,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agreemanual">agreeManual<a href="#agreemanual" class="hash-link" aria-label="agreeManual的直接链接" title="agreeManual的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAgreeManual 设置由人工手动审批操作（导出名为 aiagent.agreeManual）</p>
@@ -1033,7 +1033,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agreepolicy">agreePolicy<a href="#agreepolicy" class="hash-link" aria-label="agreePolicy的直接链接" title="agreePolicy的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAgreePolicy 设置操作审批策略（导出名为 aiagent.agreePolicy）</p>
@@ -1065,7 +1065,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>AgreePolicyType</code></td><td style="text-align:left">审批策略，如自动、AI、手动等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">p</td><td style="text-align:left"><code>AgreePolicyType</code></td><td style="text-align:left">审批策略，如自动、AI、手动等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1082,7 +1082,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agreepolicyai">agreePolicyAI<a href="#agreepolicyai" class="hash-link" aria-label="agreePolicyAI的直接链接" title="agreePolicyAI的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAIAgree 设置由 AI 自动审批操作（导出名为 aiagent.agreePolicyAI）</p>
@@ -1114,7 +1114,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="agreeyolo">agreeYOLO<a href="#agreeyolo" class="hash-link" aria-label="agreeYOLO的直接链接" title="agreeYOLO的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAgreeYOLO 设置 YOLO 模式，自动通过所有审批（导出名为 aiagent.agreeYOLO）</p>
@@ -1146,7 +1146,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否开启 YOLO（默认 true）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否开启 YOLO（默认 true）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1163,7 +1163,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aiautoretry">aiAutoRetry<a href="#aiautoretry" class="hash-link" aria-label="aiAutoRetry的直接链接" title="aiAutoRetry的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAIAutoRetry 设置 AI 调用失败时的自动重试次数（导出名为 aiagent.aiAutoRetry）</p>
@@ -1196,7 +1196,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">重试次数（&gt;= 0）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">重试次数（&gt;= 0）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1213,7 +1213,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aicallback">aiCallback<a href="#aicallback" class="hash-link" aria-label="aiCallback的直接链接" title="aiCallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAICallback 设置统一的 AI 回调（导出名为 aiagent.aiCallback）</p>
@@ -1246,7 +1246,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1263,7 +1263,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aitransactionretry">aiTransactionRetry<a href="#aitransactionretry" class="hash-link" aria-label="aiTransactionRetry的直接链接" title="aiTransactionRetry的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAITransactionRetry 设置 AI 事务（单次交互）的自动重试次数（导出名为 aiagent.aiTransactionRetry）</p>
@@ -1296,7 +1296,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">重试次数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">重试次数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1313,7 +1313,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="allowrequireforuserinteract">allowRequireForUserInteract<a href="#allowrequireforuserinteract" class="hash-link" aria-label="allowRequireForUserInteract的直接链接" title="allowRequireForUserInteract的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAllowRequireForUserInteract 设置是否允许向用户发起交互请求（导出名为 aiagent.allowRequireForUserInteract）</p>
@@ -1345,7 +1345,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否允许用户交互</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否允许用户交互</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1362,7 +1362,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="appendpersistentmemory">appendPersistentMemory<a href="#appendpersistentmemory" class="hash-link" aria-label="appendPersistentMemory的直接链接" title="appendPersistentMemory的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithAppendPersistentContext 追加持久化记忆的键（导出名为 aiagent.appendPersistentMemory）</p>
@@ -1395,7 +1395,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keys</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个记忆键</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keys</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个记忆键</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1412,7 +1412,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="context的直接链接" title="context的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithContext 设置 AI Agent 的上下文，用于控制取消（导出名为 aiagent.context）</p>
@@ -1444,7 +1444,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1461,7 +1461,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="coordinatoraicallback">coordinatorAICallback<a href="#coordinatoraicallback" class="hash-link" aria-label="coordinatorAICallback的直接链接" title="coordinatorAICallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback）</p>
@@ -1493,7 +1493,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1510,7 +1510,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="debug">debug<a href="#debug" class="hash-link" aria-label="debug的直接链接" title="debug的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithDebug 同时开启 prompt 与 event 调试输出（导出名为 aiagent.debug）</p>
@@ -1543,7 +1543,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否开启调试</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否开启调试</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1560,7 +1560,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="debugprompt">debugPrompt<a href="#debugprompt" class="hash-link" aria-label="debugPrompt的直接链接" title="debugPrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithDebugPrompt 开启 prompt 调试输出（导出名为 aiagent.debugPrompt）</p>
@@ -1592,7 +1592,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否开启（默认 true）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">v</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否开启（默认 true）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1609,7 +1609,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disableoutputtype">disableOutputType<a href="#disableoutputtype" class="hash-link" aria-label="disableOutputType的直接链接" title="disableOutputType的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithDisableOutputEvent 禁用指定类型的输出事件（导出名为 aiagent.disableOutputType）</p>
@@ -1642,7 +1642,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">types</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个事件类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">types</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个事件类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1659,7 +1659,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disabletooluse">disableToolUse<a href="#disabletooluse" class="hash-link" aria-label="disableToolUse的直接链接" title="disableToolUse的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithDisableToolUse 禁用工具调用（导出名为 aiagent.disableToolUse）</p>
@@ -1691,7 +1691,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">disable</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用工具调用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">disable</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用工具调用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1708,7 +1708,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disallowrequireforuserprompt">disallowRequireForUserPrompt<a href="#disallowrequireforuserprompt" class="hash-link" aria-label="disallowRequireForUserPrompt的直接链接" title="disallowRequireForUserPrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithDisallowRequireForUserPrompt 禁止向用户发起交互请求（导出名为 aiagent.disallowRequireForUserPrompt）</p>
@@ -1741,7 +1741,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extendaidoptions">extendAIDOptions<a href="#extendaidoptions" class="hash-link" aria-label="extendAIDOptions的直接链接" title="extendAIDOptions的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithExtendAICommonOptions 追加底层 aicommon 配置选项（导出名为 aiagent.extendAIDOptions）</p>
@@ -1773,7 +1773,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个 aicommon 配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个 aicommon 配置选项</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1790,7 +1790,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extendedactioncallback">extendedActionCallback<a href="#extendedactioncallback" class="hash-link" aria-label="extendedActionCallback的直接链接" title="extendedActionCallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithExtendedActionCallback 注册扩展 action 回调（导出名为 aiagent.extendedActionCallback）</p>
@@ -1833,7 +1833,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">action 名称</td></tr><tr><td style="text-align:left">callback</td><td style="text-align:left"><code>func(config *Config, action *Action)</code></td><td style="text-align:left">回调函数，参数为 (config, action)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">action 名称</td></tr><tr><td style="text-align:left">callback</td><td style="text-align:left"><code>func(config *Config, action *Action)</code></td><td style="text-align:left">回调函数，参数为 (config, action)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1850,7 +1850,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forgename">forgeName<a href="#forgename" class="hash-link" aria-label="forgeName的直接链接" title="forgeName的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithForgeName 设置 AI Agent 使用的 Forge 名称（导出名为 aiagent.forgeName）</p>
@@ -1882,7 +1882,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">forgeName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">forgeName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Forge 名称</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1899,7 +1899,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIAgentOption</code></td><td style="text-align:left">AI Agent 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forgeplanmocker">forgePlanMocker<a href="#forgeplanmocker" class="hash-link" aria-label="forgePlanMocker的直接链接" title="forgePlanMocker的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPlanMocker 设置AI助手的计划生成器（导出名为 aiagent.forgePlanMocker）</p>
@@ -1931,7 +1931,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">plan</td><td style="text-align:left"><code>func(config *aid.Coordinator) *aid.PlanResponse</code></td><td style="text-align:left">计划生成函数，参数为协调器，返回计划响应</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">plan</td><td style="text-align:left"><code>func(config *aid.Coordinator) *aid.PlanResponse</code></td><td style="text-align:left">计划生成函数，参数为协调器，返回计划响应</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1948,7 +1948,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forgetools">forgeTools<a href="#forgetools" class="hash-link" aria-label="forgeTools的直接链接" title="forgeTools的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithTools 为AI助手添加可用的工具（导出名为 aiagent.forgeTools）</p>
@@ -1981,7 +1981,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tools</td><td style="text-align:left"><code>...*aitool.Tool</code></td><td style="text-align:left">一个或多个 AI 工具对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tools</td><td style="text-align:left"><code>...*aitool.Tool</code></td><td style="text-align:left">一个或多个 AI 工具对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1998,7 +1998,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="initprompt">initPrompt<a href="#initprompt" class="hash-link" aria-label="initPrompt的直接链接" title="initPrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt）</p>
@@ -2031,7 +2031,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">初始化提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">初始化提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2048,7 +2048,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="initializeprompt">initializePrompt<a href="#initializeprompt" class="hash-link" aria-label="initializePrompt的直接链接" title="initializePrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithInitializePrompt 设置AI助手的初始化提示词（导出名为 aiagent.initPrompt）</p>
@@ -2081,7 +2081,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">初始化提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">初始化提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2098,7 +2098,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="liteforgeoutputschema">liteForgeOutputSchema<a href="#liteforgeoutputschema" class="hash-link" aria-label="liteForgeOutputSchema的直接链接" title="liteForgeOutputSchema的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithLiteForge_OutputSchema 设置 LiteForge 的输出结构 schema（导出名为 aiagent.liteForgeOutputSchema）</p>
@@ -2130,7 +2130,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">params</td><td style="text-align:left"><code>...aitool.ToolOption</code></td><td style="text-align:left">一个或多个 aitool 参数选项，描述期望的输出字段</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">params</td><td style="text-align:left"><code>...aitool.ToolOption</code></td><td style="text-align:left">一个或多个 aitool 参数选项，描述期望的输出字段</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2147,7 +2147,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="liteforgeoutputschemaraw">liteForgeOutputSchemaRaw<a href="#liteforgeoutputschemaraw" class="hash-link" aria-label="liteForgeOutputSchemaRaw的直接链接" title="liteForgeOutputSchemaRaw的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithLiteForge_OutputSchemaRaw 通过原始 JSON Schema 字符串设置输出结构（导出名为 aiagent.liteForgeOutputSchemaRaw）</p>
@@ -2189,7 +2189,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">actionName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">action 名称</td></tr><tr><td style="text-align:left">outputSchema</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始 JSON Schema 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">actionName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">action 名称</td></tr><tr><td style="text-align:left">outputSchema</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始 JSON Schema 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2206,7 +2206,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="liteforgeprompt">liteForgePrompt<a href="#liteforgeprompt" class="hash-link" aria-label="liteForgePrompt的直接链接" title="liteForgePrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithLiteForge_Prompt 设置 LiteForge 的&quot;上下文/动态&quot; prompt 文本。</p>
@@ -2256,7 +2256,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">动态 prompt 文本</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">动态 prompt 文本</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2273,7 +2273,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="liteforgedrequireparams">liteForgedRequireParams<a href="#liteforgedrequireparams" class="hash-link" aria-label="liteForgedRequireParams的直接链接" title="liteForgedRequireParams的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithLiteForge_RequireParams 设置 LiteForge 的输入参数 schema（导出名为 aiagent.liteForgedRequireParams）</p>
@@ -2305,7 +2305,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">params</td><td style="text-align:left"><code>...aitool.ToolOption</code></td><td style="text-align:left">一个或多个 aitool 参数选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">params</td><td style="text-align:left"><code>...aitool.ToolOption</code></td><td style="text-align:left">一个或多个 aitool 参数选项</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2322,7 +2322,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>LiteForgeOption</code></td><td style="text-align:left">LiteForge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="manualassistantcallback">manualAssistantCallback<a href="#manualassistantcallback" class="hash-link" aria-label="manualAssistantCallback的直接链接" title="manualAssistantCallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithManualAssistantCallback 设置人工审批回调（导出名为 aiagent.manualAssistantCallback）</p>
@@ -2355,7 +2355,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(context.Context, *Config) (aitool.InvokeParams, error)</code></td><td style="text-align:left">回调函数，参数为 (ctx, config)，返回审批参数与错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>func(context.Context, *Config) (aitool.InvokeParams, error)</code></td><td style="text-align:left">回调函数，参数为 (ctx, config)，返回审批参数与错误</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2372,7 +2372,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="offsetseq">offsetSeq<a href="#offsetseq" class="hash-link" aria-label="offsetSeq的直接链接" title="offsetSeq的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithSequence 设置起始序列号并安装自增 id 生成器（导出名为 aiagent.offsetSeq）</p>
@@ -2405,7 +2405,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">seq</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">起始序列号</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">seq</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">起始序列号</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2422,7 +2422,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="omnisearchtool">omniSearchTool<a href="#omnisearchtool" class="hash-link" aria-label="omniSearchTool的直接链接" title="omniSearchTool的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-41">详细描述<a href="#详细描述-41" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithOmniSearchTool 启用全网搜索工具（导出名为 aiagent.omniSearchTool）</p>
@@ -2454,7 +2454,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="originyaklangclicode">originYaklangCliCode<a href="#originyaklangclicode" class="hash-link" aria-label="originYaklangCliCode的直接链接" title="originYaklangCliCode的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-42">详细描述<a href="#详细描述-42" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithOriginYaklangCliCode 设置原始的Yaklang CLI代码（导出名为 aiagent.originYaklangCliCode）</p>
@@ -2488,7 +2488,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">originYaklangCliCode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始 Yaklang CLI 代码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">originYaklangCliCode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始 Yaklang CLI 代码</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2505,7 +2505,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="persistentprompt">persistentPrompt<a href="#persistentprompt" class="hash-link" aria-label="persistentPrompt的直接链接" title="persistentPrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-43">详细描述<a href="#详细描述-43" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt）</p>
@@ -2538,7 +2538,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">persistentPrompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">持久提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">persistentPrompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">持久提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2555,7 +2555,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="persistentpromptforge">persistentPromptForge<a href="#persistentpromptforge" class="hash-link" aria-label="persistentPromptForge的直接链接" title="persistentPromptForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-44">详细描述<a href="#详细描述-44" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPersistentPrompt 设置AI助手的持久提示词（导出名为 aiagent.persistentPrompt）</p>
@@ -2588,7 +2588,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">persistentPrompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">持久提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">persistentPrompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">持久提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-44">返回值<a href="#返回值-44" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2605,7 +2605,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="plan">plan<a href="#plan" class="hash-link" aria-label="plan的直接链接" title="plan的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-45">详细描述<a href="#详细描述-45" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPlanMocker 设置协调器的计划生成器，用于自定义/模拟任务计划（导出名为 aiagent.plan）</p>
@@ -2637,7 +2637,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>func(coordinator *Coordinator) *PlanResponse</code></td><td style="text-align:left">计划生成函数，参数为协调器，返回计划响应</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>func(coordinator *Coordinator) *PlanResponse</code></td><td style="text-align:left">计划生成函数，参数为协调器，返回计划响应</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-45">返回值<a href="#返回值-45" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2654,7 +2654,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>aicommon.ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>aicommon.ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="planaicallback">planAICallback<a href="#planaicallback" class="hash-link" aria-label="planAICallback的直接链接" title="planAICallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-46">详细描述<a href="#详细描述-46" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithQualityPriorityAICallback 设置质量优先档的 AI 回调（导出名为 aiagent.planAICallback / coordinatorAICallback）</p>
@@ -2686,7 +2686,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-46">返回值<a href="#返回值-46" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2703,7 +2703,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resulthandler">resultHandler<a href="#resulthandler" class="hash-link" aria-label="resultHandler的直接链接" title="resultHandler的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-47">详细描述<a href="#详细描述-47" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithResultHandler 设置协调器执行结束后的结果处理回调（导出名为 aiagent.resultHandler）</p>
@@ -2736,7 +2736,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">h</td><td style="text-align:left"><code>func(c *Coordinator)</code></td><td style="text-align:left">结果处理函数，参数为协调器对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">h</td><td style="text-align:left"><code>func(c *Coordinator)</code></td><td style="text-align:left">结果处理函数，参数为协调器对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-47">返回值<a href="#返回值-47" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2753,7 +2753,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>aicommon.ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>aicommon.ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resulthandlerforge">resultHandlerForge<a href="#resulthandlerforge" class="hash-link" aria-label="resultHandlerForge的直接链接" title="resultHandlerForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-48">详细描述<a href="#详细描述-48" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithResultHandler 设置AI助手的结果处理函数（导出名为 aiagent.resultHandlerForge）</p>
@@ -2786,7 +2786,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(string, error)</code></td><td style="text-align:left">结果处理函数，参数为 (result, err)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">handler</td><td style="text-align:left"><code>func(string, error)</code></td><td style="text-align:left">结果处理函数，参数为 (result, err)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-48">返回值<a href="#返回值-48" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2803,7 +2803,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resultprompt">resultPrompt<a href="#resultprompt" class="hash-link" aria-label="resultPrompt的直接链接" title="resultPrompt的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-49">详细描述<a href="#详细描述-49" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt）</p>
@@ -2836,7 +2836,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结果提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结果提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-49">返回值<a href="#返回值-49" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2853,7 +2853,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="resultpromptforge">resultPromptForge<a href="#resultpromptforge" class="hash-link" aria-label="resultPromptForge的直接链接" title="resultPromptForge的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-50">详细描述<a href="#详细描述-50" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithResultPrompt 设置AI助手的生成结果提示词（导出名为 aiagent.resultPrompt）</p>
@@ -2886,7 +2886,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结果提示词</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">prompt</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结果提示词</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-50">返回值<a href="#返回值-50" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2903,7 +2903,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="systemfileoperator">systemFileOperator<a href="#systemfileoperator" class="hash-link" aria-label="systemFileOperator的直接链接" title="systemFileOperator的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-51">详细描述<a href="#详细描述-51" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithSystemFileOperator 为 AI 启用系统文件操作工具集（导出名为 aiagent.systemFileOperator）</p>
@@ -2935,7 +2935,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="taskaicallback">taskAICallback<a href="#taskaicallback" class="hash-link" aria-label="taskAICallback的直接链接" title="taskAICallback的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-52">详细描述<a href="#详细描述-52" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithSpeedPriorityAICallback 设置速度优先档的 AI 回调（导出名为 aiagent.taskAICallback）</p>
@@ -2967,7 +2967,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">cb</td><td style="text-align:left"><code>AICallbackType</code></td><td style="text-align:left">AI 回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-52">返回值<a href="#返回值-52" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2984,7 +2984,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timelinecontentlimit">timelineContentLimit<a href="#timelinecontentlimit" class="hash-link" aria-label="timelineContentLimit的直接链接" title="timelineContentLimit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-53">详细描述<a href="#详细描述-53" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithTimelineContentLimit 设置 timeline 内容大小上限（导出名为 aiagent.timelineContentLimit）</p>
@@ -3017,7 +3017,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">内容大小上限</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">内容大小上限</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-53">返回值<a href="#返回值-53" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -3034,7 +3034,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tool">tool<a href="#tool" class="hash-link" aria-label="tool的直接链接" title="tool的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-54">详细描述<a href="#详细描述-54" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithTool 添加单个 AI 工具（导出名为 aiagent.tool）</p>
@@ -3067,7 +3067,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tool</td><td style="text-align:left"><code>*aitool.Tool</code></td><td style="text-align:left">AI 工具对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tool</td><td style="text-align:left"><code>*aitool.Tool</code></td><td style="text-align:left">AI 工具对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-54">返回值<a href="#返回值-54" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -3084,7 +3084,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="toolkeywords">toolKeywords<a href="#toolkeywords" class="hash-link" aria-label="toolKeywords的直接链接" title="toolKeywords的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-55">详细描述<a href="#详细描述-55" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithToolKeywords 设置AI助手的工具关键词（导出名为 aiagent.toolKeywords）</p>
@@ -3117,7 +3117,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keywords</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">工具关键词列表</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keywords</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">工具关键词列表</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-55">返回值<a href="#返回值-55" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -3134,7 +3134,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">Forge 可选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tools">tools<a href="#tools" class="hash-link" aria-label="tools的直接链接" title="tools的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-56">详细描述<a href="#详细描述-56" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithTools 为 AI 批量添加可用工具（导出名为 aiagent.tools）</p>
@@ -3166,7 +3166,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tool</td><td style="text-align:left"><code>...*aitool.Tool</code></td><td style="text-align:left">一个或多个 AI 工具对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tool</td><td style="text-align:left"><code>...*aitool.Tool</code></td><td style="text-align:left">一个或多个 AI 工具对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-56">返回值<a href="#返回值-56" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -3183,6 +3183,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/aiagent.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/ai"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">ai</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/aim"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">aim</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#allyakscriptaitools" class="table-of-contents__link toc-highlight">AllYakScriptAiTools</a></li><li><a href="#createforge" class="table-of-contents__link toc-highlight">CreateForge</a></li><li><a href="#createliteforge" class="table-of-contents__link toc-highlight">CreateLiteForge</a></li><li><a href="#executeforge" class="table-of-contents__link toc-highlight">ExecuteForge</a></li><li><a href="#extractaction" class="table-of-contents__link toc-highlight">ExtractAction</a></li><li><a href="#extractplan" class="table-of-contents__link toc-highlight">ExtractPlan</a></li><li><a href="#getdefaultcontextprovider" class="table-of-contents__link toc-highlight">GetDefaultContextProvider</a></li><li><a href="#newexecutor" class="table-of-contents__link toc-highlight">NewExecutor</a></li><li><a href="#newexecutorfromjson" class="table-of-contents__link toc-highlight">NewExecutorFromJson</a></li><li><a href="#parseyakscripttoaitools" class="table-of-contents__link toc-highlight">ParseYakScriptToAiTools</a></li><li><a href="#updateyakscriptmetadata" class="table-of-contents__link toc-highlight">UpdateYakScriptMetaData</a></li><li><a href="#agreeauto" class="table-of-contents__link toc-highlight">agreeAuto</a></li><li><a href="#agreemanual" class="table-of-contents__link toc-highlight">agreeManual</a></li><li><a href="#agreepolicy" class="table-of-contents__link toc-highlight">agreePolicy</a></li><li><a href="#agreepolicyai" class="table-of-contents__link toc-highlight">agreePolicyAI</a></li><li><a href="#agreeyolo" class="table-of-contents__link toc-highlight">agreeYOLO</a></li><li><a href="#aiautoretry" class="table-of-contents__link toc-highlight">aiAutoRetry</a></li><li><a href="#aicallback" class="table-of-contents__link toc-highlight">aiCallback</a></li><li><a href="#aitransactionretry" class="table-of-contents__link toc-highlight">aiTransactionRetry</a></li><li><a href="#allowrequireforuserinteract" class="table-of-contents__link toc-highlight">allowRequireForUserInteract</a></li><li><a href="#appendpersistentmemory" class="table-of-contents__link toc-highlight">appendPersistentMemory</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#coordinatoraicallback" class="table-of-contents__link toc-highlight">coordinatorAICallback</a></li><li><a href="#debug" class="table-of-contents__link toc-highlight">debug</a></li><li><a href="#debugprompt" class="table-of-contents__link toc-highlight">debugPrompt</a></li><li><a href="#disableoutputtype" class="table-of-contents__link toc-highlight">disableOutputType</a></li><li><a href="#disabletooluse" class="table-of-contents__link toc-highlight">disableToolUse</a></li><li><a href="#disallowrequireforuserprompt" class="table-of-contents__link toc-highlight">disallowRequireForUserPrompt</a></li><li><a href="#extendaidoptions" class="table-of-contents__link toc-highlight">extendAIDOptions</a></li><li><a href="#extendedactioncallback" class="table-of-contents__link toc-highlight">extendedActionCallback</a></li><li><a href="#forgename" class="table-of-contents__link toc-highlight">forgeName</a></li><li><a href="#forgeplanmocker" class="table-of-contents__link toc-highlight">forgePlanMocker</a></li><li><a href="#forgetools" class="table-of-contents__link toc-highlight">forgeTools</a></li><li><a href="#initprompt" class="table-of-contents__link toc-highlight">initPrompt</a></li><li><a href="#initializeprompt" class="table-of-contents__link toc-highlight">initializePrompt</a></li><li><a href="#liteforgeoutputschema" class="table-of-contents__link toc-highlight">liteForgeOutputSchema</a></li><li><a href="#liteforgeoutputschemaraw" class="table-of-contents__link toc-highlight">liteForgeOutputSchemaRaw</a></li><li><a href="#liteforgeprompt" class="table-of-contents__link toc-highlight">liteForgePrompt</a></li><li><a href="#liteforgedrequireparams" class="table-of-contents__link toc-highlight">liteForgedRequireParams</a></li><li><a href="#manualassistantcallback" class="table-of-contents__link toc-highlight">manualAssistantCallback</a></li><li><a href="#offsetseq" class="table-of-contents__link toc-highlight">offsetSeq</a></li><li><a href="#omnisearchtool" class="table-of-contents__link toc-highlight">omniSearchTool</a></li><li><a href="#originyaklangclicode" class="table-of-contents__link toc-highlight">originYaklangCliCode</a></li><li><a href="#persistentprompt" class="table-of-contents__link toc-highlight">persistentPrompt</a></li><li><a href="#persistentpromptforge" class="table-of-contents__link toc-highlight">persistentPromptForge</a></li><li><a href="#plan" class="table-of-contents__link toc-highlight">plan</a></li><li><a href="#planaicallback" class="table-of-contents__link toc-highlight">planAICallback</a></li><li><a href="#resulthandler" class="table-of-contents__link toc-highlight">resultHandler</a></li><li><a href="#resulthandlerforge" class="table-of-contents__link toc-highlight">resultHandlerForge</a></li><li><a href="#resultprompt" class="table-of-contents__link toc-highlight">resultPrompt</a></li><li><a href="#resultpromptforge" class="table-of-contents__link toc-highlight">resultPromptForge</a></li><li><a href="#systemfileoperator" class="table-of-contents__link toc-highlight">systemFileOperator</a></li><li><a href="#taskaicallback" class="table-of-contents__link toc-highlight">taskAICallback</a></li><li><a href="#timelinecontentlimit" class="table-of-contents__link toc-highlight">timelineContentLimit</a></li><li><a href="#tool" class="table-of-contents__link toc-highlight">tool</a></li><li><a href="#toolkeywords" class="table-of-contents__link toc-highlight">toolKeywords</a></li><li><a href="#tools" class="table-of-contents__link toc-highlight">tools</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">配置选项</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/aiagent.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/ai"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">ai</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/aim"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">aim</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#allyakscriptaitools" class="table-of-contents__link toc-highlight">AllYakScriptAiTools</a></li><li><a href="#createforge" class="table-of-contents__link toc-highlight">CreateForge</a></li><li><a href="#createliteforge" class="table-of-contents__link toc-highlight">CreateLiteForge</a></li><li><a href="#executeforge" class="table-of-contents__link toc-highlight">ExecuteForge</a></li><li><a href="#extractaction" class="table-of-contents__link toc-highlight">ExtractAction</a></li><li><a href="#extractplan" class="table-of-contents__link toc-highlight">ExtractPlan</a></li><li><a href="#getdefaultcontextprovider" class="table-of-contents__link toc-highlight">GetDefaultContextProvider</a></li><li><a href="#newexecutor" class="table-of-contents__link toc-highlight">NewExecutor</a></li><li><a href="#newexecutorfromjson" class="table-of-contents__link toc-highlight">NewExecutorFromJson</a></li><li><a href="#parseyakscripttoaitools" class="table-of-contents__link toc-highlight">ParseYakScriptToAiTools</a></li><li><a href="#updateyakscriptmetadata" class="table-of-contents__link toc-highlight">UpdateYakScriptMetaData</a></li><li><a href="#agreeauto" class="table-of-contents__link toc-highlight">agreeAuto</a></li><li><a href="#agreemanual" class="table-of-contents__link toc-highlight">agreeManual</a></li><li><a href="#agreepolicy" class="table-of-contents__link toc-highlight">agreePolicy</a></li><li><a href="#agreepolicyai" class="table-of-contents__link toc-highlight">agreePolicyAI</a></li><li><a href="#agreeyolo" class="table-of-contents__link toc-highlight">agreeYOLO</a></li><li><a href="#aiautoretry" class="table-of-contents__link toc-highlight">aiAutoRetry</a></li><li><a href="#aicallback" class="table-of-contents__link toc-highlight">aiCallback</a></li><li><a href="#aitransactionretry" class="table-of-contents__link toc-highlight">aiTransactionRetry</a></li><li><a href="#allowrequireforuserinteract" class="table-of-contents__link toc-highlight">allowRequireForUserInteract</a></li><li><a href="#appendpersistentmemory" class="table-of-contents__link toc-highlight">appendPersistentMemory</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#coordinatoraicallback" class="table-of-contents__link toc-highlight">coordinatorAICallback</a></li><li><a href="#debug" class="table-of-contents__link toc-highlight">debug</a></li><li><a href="#debugprompt" class="table-of-contents__link toc-highlight">debugPrompt</a></li><li><a href="#disableoutputtype" class="table-of-contents__link toc-highlight">disableOutputType</a></li><li><a href="#disabletooluse" class="table-of-contents__link toc-highlight">disableToolUse</a></li><li><a href="#disallowrequireforuserprompt" class="table-of-contents__link toc-highlight">disallowRequireForUserPrompt</a></li><li><a href="#extendaidoptions" class="table-of-contents__link toc-highlight">extendAIDOptions</a></li><li><a href="#extendedactioncallback" class="table-of-contents__link toc-highlight">extendedActionCallback</a></li><li><a href="#forgename" class="table-of-contents__link toc-highlight">forgeName</a></li><li><a href="#forgeplanmocker" class="table-of-contents__link toc-highlight">forgePlanMocker</a></li><li><a href="#forgetools" class="table-of-contents__link toc-highlight">forgeTools</a></li><li><a href="#initprompt" class="table-of-contents__link toc-highlight">initPrompt</a></li><li><a href="#initializeprompt" class="table-of-contents__link toc-highlight">initializePrompt</a></li><li><a href="#liteforgeoutputschema" class="table-of-contents__link toc-highlight">liteForgeOutputSchema</a></li><li><a href="#liteforgeoutputschemaraw" class="table-of-contents__link toc-highlight">liteForgeOutputSchemaRaw</a></li><li><a href="#liteforgeprompt" class="table-of-contents__link toc-highlight">liteForgePrompt</a></li><li><a href="#liteforgedrequireparams" class="table-of-contents__link toc-highlight">liteForgedRequireParams</a></li><li><a href="#manualassistantcallback" class="table-of-contents__link toc-highlight">manualAssistantCallback</a></li><li><a href="#offsetseq" class="table-of-contents__link toc-highlight">offsetSeq</a></li><li><a href="#omnisearchtool" class="table-of-contents__link toc-highlight">omniSearchTool</a></li><li><a href="#originyaklangclicode" class="table-of-contents__link toc-highlight">originYaklangCliCode</a></li><li><a href="#persistentprompt" class="table-of-contents__link toc-highlight">persistentPrompt</a></li><li><a href="#persistentpromptforge" class="table-of-contents__link toc-highlight">persistentPromptForge</a></li><li><a href="#plan" class="table-of-contents__link toc-highlight">plan</a></li><li><a href="#planaicallback" class="table-of-contents__link toc-highlight">planAICallback</a></li><li><a href="#resulthandler" class="table-of-contents__link toc-highlight">resultHandler</a></li><li><a href="#resulthandlerforge" class="table-of-contents__link toc-highlight">resultHandlerForge</a></li><li><a href="#resultprompt" class="table-of-contents__link toc-highlight">resultPrompt</a></li><li><a href="#resultpromptforge" class="table-of-contents__link toc-highlight">resultPromptForge</a></li><li><a href="#systemfileoperator" class="table-of-contents__link toc-highlight">systemFileOperator</a></li><li><a href="#taskaicallback" class="table-of-contents__link toc-highlight">taskAICallback</a></li><li><a href="#timelinecontentlimit" class="table-of-contents__link toc-highlight">timelineContentLimit</a></li><li><a href="#tool" class="table-of-contents__link toc-highlight">tool</a></li><li><a href="#toolkeywords" class="table-of-contents__link toc-highlight">toolKeywords</a></li><li><a href="#tools" class="table-of-contents__link toc-highlight">tools</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

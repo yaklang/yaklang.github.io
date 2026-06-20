@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">crawler | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/crawler"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="crawler | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/crawler"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/crawler" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/crawler" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/crawler" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"crawler","item":"https://yaklang.com/en/docs/api/crawler"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -186,7 +186,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#requestsfromflow" class="">crawler.RequestsFromFlow</a></td><td style="text-align:left">RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误 参数: - isHttps: 该流量是否为 HTTPS - reqBytes: 请求原始报文 - rspBytes: 响应原始报文 返回值: - [][]byte: 爬取到的所有可能请求的...</td></tr><tr><td style="text-align:left"><a href="#start" class="">crawler.Start</a></td><td style="text-align:left">Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为 返回一个Req结构体引用管道与错误 参数: - url: 起始爬取的 URL - opt: 零个或多个爬虫配置选项函数 返回值: - 一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求 - error: 启...</td></tr><tr><td style="text-align:left"><a href="#aijsaioptions" class="">crawler.aiJSAIOptions</a></td><td style="text-align:left">aiJSAIOptions 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge 参数: - opts: 一个或多个 AI 配置选项，例如模型名称、API 密钥等 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijschunkbytes" class="">crawler.aiJSChunkBytes</a></td><td style="text-align:left">aiJSChunkBytes 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小 参数: - n: 每个切片的目标字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsconcurrency" class="">crawler.aiJSConcurrency</a></td><td style="text-align:left">aiJSConcurrency 设置 AI JS 抽取时并行 AI 调用的最大并发数 参数: - n: 并行 AI 调用的最大并发数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijscontextbytes" class="">crawler.aiJSContextBytes</a></td><td style="text-align:left">aiJSContextBytes 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数 参数: - n: 命中点周围上下文窗口的半宽字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsextract" class="">crawler.aiJSExtract</a></td><td style="text-align:left">aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道， 与现有 SSA / 回调通道并行（不互相影响）。 该通道按以下三阶段工作： 1. 宽松正则预筛选可疑窗口（URL / 路径风格） 2. aireducer 按字节切片，DumpWithOverlap ...</td></tr><tr><td style="text-align:left"><a href="#aijsmaxtokens" class="">crawler.aiJSMaxTokens</a></td><td style="text-align:left">aiJSMaxTokens 设置 AI JS 抽取时每次调用的 token 预算上限 参数: - n: 每次 AI 调用的最大 token 数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsoverlapbytes" class="">crawler.aiJSOverlapBytes</a></td><td style="text-align:left">aiJSOverlapBytes 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小 参数: - n: 跨切片重叠的字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsskipbelow" class="">crawler.aiJSSkipBelow</a></td><td style="text-align:left">aiJSSkipBelow 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果 参数: - n: 跳过 AI 步骤的候选数据流字节阈值 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputbytes" class="">crawler.aiJSSmallInputBytes</a></td><td style="text-align:left">aiJSSmallInputBytes 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入字节阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputtokens" class="">crawler.aiJSSmallInputTokens</a></td><td style="text-align:left">aiJSSmallInputTokens 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入 token 阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#autologin" class="">crawler.autoLogin</a></td><td style="text-align:left">autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单 参数: - username: 登录用户名 - password: 登录密码 - flags: 可选的额外标志参数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#basicauth" class="">crawler.basicAuth</a></td><td style="text-align:left">basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码 参数: - user: 基础认证用户名 - pass: 基础认证密码 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#bodysize" class="">crawler.bodySize</a></td><td style="text-align:left">bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB 参数: - size: 最大响应体大小，单位为字节 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">crawler.concurrent</a></td><td style="text-align:left">concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20 参数: - concurrent: 并发数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#connecttimeout" class="">crawler.connectTimeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">crawler.context</a></td><td style="text-align:left">context 设置爬虫使用的 context，用于取消或超时控制 在 yak 中通过 crawler.context 调用；cancel 时爬虫会停止抓取 参数: - ctx: 上下文对象 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">crawler.cookie</a></td><td style="text-align:left">cookie 是一个选项函数，用于指定爬虫时的cookie 参数: - k: cookie 名称 - v: cookie 值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disallowsuffix" class="">crawler.disallowSuffix</a></td><td style="text-align:left">disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单 参数: - d: 后缀黑名单列表，命中的后缀将不被爬取 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domainexclude" class="">crawler.domainExclude</a></td><td style="text-align:left">domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 禁止的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domaininclude" class="">crawler.domainInclude</a></td><td style="text-align:left">domainInclude 是一个选项函数，用于指定爬虫时的域名白名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 允许的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#forbiddenfromparent" class="">crawler.forbiddenFromParent</a></td><td style="text-align:left">forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false 对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取 参数: - b: 是否禁止从根路径发起请求 返回值: - 一个 crawler.S...</td></tr><tr><td style="text-align:left"><a href="#header" class="">crawler.header</a></td><td style="text-align:left">header 是一个选项函数，用于指定爬虫时的请求头 参数: - k: 请求头名称 - v: 请求头值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#httpstohttpfallback" class="">crawler.httpsToHttpFallback</a></td><td style="text-align:left">httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试 在 yak 中通过 crawler.httpsToHttpFallback 调用 参数: - enable: 是否启用 HTTPS 到 HTTP 的回退 返回值: - 一个 crawler.Star...</td></tr><tr><td style="text-align:left"><a href="#jsparser" class="">crawler.jsParser</a></td><td style="text-align:left">jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 填写该选项默认开启，也可以传入false强制关闭。 参数: - enable: 可选，是否启用 JS 解析，缺省时默认开启 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxdepth" class="">crawler.maxDepth</a></td><td style="text-align:left">maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5 参数: - depth: 最大爬取深度 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxredirect" class="">crawler.maxRedirect</a></td><td style="text-align:left">maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5 参数: - maxRedirectTimes: 最大重定向次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxrequest" class="">crawler.maxRequest</a></td><td style="text-align:left">maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000 参数: - limit: 最大请求数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxretry" class="">crawler.maxRetry</a></td><td style="text-align:left">maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3 参数: - limit: 最大重试次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxurls" class="">crawler.maxUrls</a></td><td style="text-align:left">maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000 参数: - limit: 最大链接数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onurlfound" class="">crawler.onUrlFound</a></td><td style="text-align:left">onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL） 参数: - f: 发现新 URL 时触发的回调函数，入参为发现的 URL 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">crawler.proxy</a></td><td style="text-align:left">proxy 是一个选项函数，用于指定爬虫时的代理 参数: - proxies: 一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a> 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#responsetimeout" class="">crawler.responseTimeout</a></td><td style="text-align:left">responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s 在 yak 中通过 crawler.responseTimeout 调用 参数: - f: 响应超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">crawler.timeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#ua" class="">crawler.ua</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlextractor" class="">crawler.urlExtractor</a></td><td style="text-align:left">urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则 参数: - f: 自定义链接提取函数，入参为请求对象，返回提取到的链接列表 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpexclude" class="">crawler.urlRegexpExclude</a></td><td style="text-align:left">urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单 参数: - re: URL 黑名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpinclude" class="">crawler.urlRegexpInclude</a></td><td style="text-align:left">urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单 参数: - re: URL 白名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">crawler.userAgent</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#verifycertificate" class="">crawler.verifyCertificate</a></td><td style="text-align:left">verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书 在 yak 中通过 crawler.verifyCertificate 调用 参数: - b: 是否校验证书，false 表示忽略证书错误 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#requestsfromflow" class="">crawler.RequestsFromFlow</a></td><td style="text-align:left">RequestsFromFlow 尝试从一次请求与响应中爬取出所有可能的请求，返回所有可能请求的原始报文与错误 参数: - isHttps: 该流量是否为 HTTPS - reqBytes: 请求原始报文 - rspBytes: 响应原始报文 返回值: - [][]byte: 爬取到的所有可能请求的...</td></tr><tr><td style="text-align:left"><a href="#start" class="">crawler.Start</a></td><td style="text-align:left">Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为 返回一个Req结构体引用管道与错误 参数: - url: 起始爬取的 URL - opt: 零个或多个爬虫配置选项函数 返回值: - 一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求 - error: 启...</td></tr><tr><td style="text-align:left"><a href="#aijsaioptions" class="">crawler.aiJSAIOptions</a></td><td style="text-align:left">aiJSAIOptions 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge 参数: - opts: 一个或多个 AI 配置选项，例如模型名称、API 密钥等 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijschunkbytes" class="">crawler.aiJSChunkBytes</a></td><td style="text-align:left">aiJSChunkBytes 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小 参数: - n: 每个切片的目标字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsconcurrency" class="">crawler.aiJSConcurrency</a></td><td style="text-align:left">aiJSConcurrency 设置 AI JS 抽取时并行 AI 调用的最大并发数 参数: - n: 并行 AI 调用的最大并发数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijscontextbytes" class="">crawler.aiJSContextBytes</a></td><td style="text-align:left">aiJSContextBytes 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数 参数: - n: 命中点周围上下文窗口的半宽字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsextract" class="">crawler.aiJSExtract</a></td><td style="text-align:left">aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道， 与现有 SSA / 回调通道并行（不互相影响）。 该通道按以下三阶段工作： 1. 宽松正则预筛选可疑窗口（URL / 路径风格） 2. aireducer 按字节切片，DumpWithOverlap ...</td></tr><tr><td style="text-align:left"><a href="#aijsmaxtokens" class="">crawler.aiJSMaxTokens</a></td><td style="text-align:left">aiJSMaxTokens 设置 AI JS 抽取时每次调用的 token 预算上限 参数: - n: 每次 AI 调用的最大 token 数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsoverlapbytes" class="">crawler.aiJSOverlapBytes</a></td><td style="text-align:left">aiJSOverlapBytes 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小 参数: - n: 跨切片重叠的字节数 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijsskipbelow" class="">crawler.aiJSSkipBelow</a></td><td style="text-align:left">aiJSSkipBelow 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果 参数: - n: 跳过 AI 步骤的候选数据流字节阈值 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputbytes" class="">crawler.aiJSSmallInputBytes</a></td><td style="text-align:left">aiJSSmallInputBytes 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入字节阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#aijssmallinputtokens" class="">crawler.aiJSSmallInputTokens</a></td><td style="text-align:left">aiJSSmallInputTokens 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用 参数: - n: 直接投喂快速通道的原始输入 token 阈值，0 表示禁用 返回值: - 一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr><tr><td style="text-align:left"><a href="#autologin" class="">crawler.autoLogin</a></td><td style="text-align:left">autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单 参数: - username: 登录用户名 - password: 登录密码 - flags: 可选的额外标志参数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#basicauth" class="">crawler.basicAuth</a></td><td style="text-align:left">basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码 参数: - user: 基础认证用户名 - pass: 基础认证密码 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#bodysize" class="">crawler.bodySize</a></td><td style="text-align:left">bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB 参数: - size: 最大响应体大小，单位为字节 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#concurrent" class="">crawler.concurrent</a></td><td style="text-align:left">concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20 参数: - concurrent: 并发数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#connecttimeout" class="">crawler.connectTimeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#context" class="">crawler.context</a></td><td style="text-align:left">context 设置爬虫使用的 context，用于取消或超时控制 在 yak 中通过 crawler.context 调用；cancel 时爬虫会停止抓取 参数: - ctx: 上下文对象 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">crawler.cookie</a></td><td style="text-align:left">cookie 是一个选项函数，用于指定爬虫时的cookie 参数: - k: cookie 名称 - v: cookie 值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#disallowsuffix" class="">crawler.disallowSuffix</a></td><td style="text-align:left">disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单 参数: - d: 后缀黑名单列表，命中的后缀将不被爬取 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domainexclude" class="">crawler.domainExclude</a></td><td style="text-align:left">domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 禁止的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#domaininclude" class="">crawler.domainInclude</a></td><td style="text-align:left">domainInclude 是一个选项函数，用于指定爬虫时的域名白名单 domain允许使用glob语法，例如*.example.com 参数: - domain: 允许的域名，支持 glob 语法 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#forbiddenfromparent" class="">crawler.forbiddenFromParent</a></td><td style="text-align:left">forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false 对于一个起始URL，如果其并不是从根路径开始且没有禁止从根路径发起请求，那么爬虫会从其根路径开始爬取 参数: - b: 是否禁止从根路径发起请求 返回值: - 一个 crawler.S...</td></tr><tr><td style="text-align:left"><a href="#header" class="">crawler.header</a></td><td style="text-align:left">header 是一个选项函数，用于指定爬虫时的请求头 参数: - k: 请求头名称 - v: 请求头值 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#httpstohttpfallback" class="">crawler.httpsToHttpFallback</a></td><td style="text-align:left">httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试 在 yak 中通过 crawler.httpsToHttpFallback 调用 参数: - enable: 是否启用 HTTPS 到 HTTP 的回退 返回值: - 一个 crawler.Star...</td></tr><tr><td style="text-align:left"><a href="#jsparser" class="">crawler.jsParser</a></td><td style="text-align:left">jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 填写该选项默认开启，也可以传入false强制关闭。 参数: - enable: 可选，是否启用 JS 解析，缺省时默认开启 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxdepth" class="">crawler.maxDepth</a></td><td style="text-align:left">maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5 参数: - depth: 最大爬取深度 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxredirect" class="">crawler.maxRedirect</a></td><td style="text-align:left">maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5 参数: - maxRedirectTimes: 最大重定向次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxrequest" class="">crawler.maxRequest</a></td><td style="text-align:left">maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000 参数: - limit: 最大请求数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxretry" class="">crawler.maxRetry</a></td><td style="text-align:left">maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3 参数: - limit: 最大重试次数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#maxurls" class="">crawler.maxUrls</a></td><td style="text-align:left">maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000 参数: - limit: 最大链接数 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#onurlfound" class="">crawler.onUrlFound</a></td><td style="text-align:left">onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL） 参数: - f: 发现新 URL 时触发的回调函数，入参为发现的 URL 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">crawler.proxy</a></td><td style="text-align:left">proxy 是一个选项函数，用于指定爬虫时的代理 参数: - proxies: 一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a> 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#responsetimeout" class="">crawler.responseTimeout</a></td><td style="text-align:left">responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s 在 yak 中通过 crawler.responseTimeout 调用 参数: - f: 响应超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">crawler.timeout</a></td><td style="text-align:left">connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#ua" class="">crawler.ua</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlextractor" class="">crawler.urlExtractor</a></td><td style="text-align:left">urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则 参数: - f: 自定义链接提取函数，入参为请求对象，返回提取到的链接列表 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpexclude" class="">crawler.urlRegexpExclude</a></td><td style="text-align:left">urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单 参数: - re: URL 黑名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#urlregexpinclude" class="">crawler.urlRegexpInclude</a></td><td style="text-align:left">urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单 参数: - re: URL 白名单正则表达式 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">crawler.userAgent</a></td><td style="text-align:left">userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr><tr><td style="text-align:left"><a href="#verifycertificate" class="">crawler.verifyCertificate</a></td><td style="text-align:left">verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书 在 yak 中通过 crawler.verifyCertificate 调用 参数: - b: 是否校验证书，false 表示忽略证书错误 返回值: - 一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requestsfromflow">RequestsFromFlow<a href="#requestsfromflow" class="hash-link" aria-label="Direct link to RequestsFromFlow" title="Direct link to RequestsFromFlow" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -242,7 +242,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">isHttps</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">该流量是否为 HTTPS</td></tr><tr><td style="text-align:left">reqBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">请求原始报文</td></tr><tr><td style="text-align:left">rspBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">响应原始报文</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">isHttps</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">该流量是否为 HTTPS</td></tr><tr><td style="text-align:left">reqBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">请求原始报文</td></tr><tr><td style="text-align:left">rspBytes</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">响应原始报文</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -264,7 +264,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]byte</code></td><td style="text-align:left">[][]byte: 爬取到的所有可能请求的原始报文列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">处理失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]byte</code></td><td style="text-align:left">[][]byte: 爬取到的所有可能请求的原始报文列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">处理失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="start">Start<a href="#start" class="hash-link" aria-label="Direct link to Start" title="Direct link to Start" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Start 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为</p>
@@ -312,7 +312,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始爬取的 URL</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOpt</code></td><td style="text-align:left">零个或多个爬虫配置选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始爬取的 URL</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOpt</code></td><td style="text-align:left">零个或多个爬虫配置选项函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -334,7 +334,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *Req</code></td><td style="text-align:left">一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *Req</code></td><td style="text-align:left">一个可迭代的 Req 结构体引用管道，用于读取爬取到的请求</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">启动失败时返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsaioptions">aiJSAIOptions<a href="#aijsaioptions" class="hash-link" aria-label="Direct link to aiJSAIOptions" title="Direct link to aiJSAIOptions" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSAIOptions 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge</p>
@@ -366,7 +366,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个 AI 配置选项，例如模型名称、API 密钥等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...aicommon.ConfigOption</code></td><td style="text-align:left">一个或多个 AI 配置选项，例如模型名称、API 密钥等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -383,7 +383,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijschunkbytes">aiJSChunkBytes<a href="#aijschunkbytes" class="hash-link" aria-label="Direct link to aiJSChunkBytes" title="Direct link to aiJSChunkBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSChunkBytes 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小</p>
@@ -415,7 +415,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">每个切片的目标字节数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">每个切片的目标字节数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -432,7 +432,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsconcurrency">aiJSConcurrency<a href="#aijsconcurrency" class="hash-link" aria-label="Direct link to aiJSConcurrency" title="Direct link to aiJSConcurrency" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSConcurrency 设置 AI JS 抽取时并行 AI 调用的最大并发数</p>
@@ -464,7 +464,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并行 AI 调用的最大并发数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并行 AI 调用的最大并发数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -481,7 +481,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijscontextbytes">aiJSContextBytes<a href="#aijscontextbytes" class="hash-link" aria-label="Direct link to aiJSContextBytes" title="Direct link to aiJSContextBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSContextBytes 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数</p>
@@ -513,7 +513,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">命中点周围上下文窗口的半宽字节数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">命中点周围上下文窗口的半宽字节数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -530,7 +530,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsextract">aiJSExtract<a href="#aijsextract" class="hash-link" aria-label="Direct link to aiJSExtract" title="Direct link to aiJSExtract" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSExtract 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道，</p>
@@ -575,7 +575,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...AIJSExtractOption</code></td><td style="text-align:left">可选的 AI JS 抽取配置项，例如 crawler.aiJSMaxTokens</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...AIJSExtractOption</code></td><td style="text-align:left">可选的 AI JS 抽取配置项，例如 crawler.aiJSMaxTokens</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -592,7 +592,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsmaxtokens">aiJSMaxTokens<a href="#aijsmaxtokens" class="hash-link" aria-label="Direct link to aiJSMaxTokens" title="Direct link to aiJSMaxTokens" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSMaxTokens 设置 AI JS 抽取时每次调用的 token 预算上限</p>
@@ -624,7 +624,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">每次 AI 调用的最大 token 数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">每次 AI 调用的最大 token 数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -641,7 +641,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsoverlapbytes">aiJSOverlapBytes<a href="#aijsoverlapbytes" class="hash-link" aria-label="Direct link to aiJSOverlapBytes" title="Direct link to aiJSOverlapBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSOverlapBytes 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小</p>
@@ -673,7 +673,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跨切片重叠的字节数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跨切片重叠的字节数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -690,7 +690,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijsskipbelow">aiJSSkipBelow<a href="#aijsskipbelow" class="hash-link" aria-label="Direct link to aiJSSkipBelow" title="Direct link to aiJSSkipBelow" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSSkipBelow 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果</p>
@@ -722,7 +722,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跳过 AI 步骤的候选数据流字节阈值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">跳过 AI 步骤的候选数据流字节阈值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -739,7 +739,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijssmallinputbytes">aiJSSmallInputBytes<a href="#aijssmallinputbytes" class="hash-link" aria-label="Direct link to aiJSSmallInputBytes" title="Direct link to aiJSSmallInputBytes" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSSmallInputBytes 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用</p>
@@ -771,7 +771,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入字节阈值，0 表示禁用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入字节阈值，0 表示禁用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -788,7 +788,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aijssmallinputtokens">aiJSSmallInputTokens<a href="#aijssmallinputtokens" class="hash-link" aria-label="Direct link to aiJSSmallInputTokens" title="Direct link to aiJSSmallInputTokens" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>aiJSSmallInputTokens 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用</p>
@@ -820,7 +820,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入 token 阈值，0 表示禁用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">n</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">直接投喂快速通道的原始输入 token 阈值，0 表示禁用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -837,7 +837,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>AIJSExtractOption</code></td><td style="text-align:left">一个 crawler.aiJSExtract 可接收的 AI JS 抽取配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="autologin">autoLogin<a href="#autologin" class="hash-link" aria-label="Direct link to autoLogin" title="Direct link to autoLogin" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>autoLogin 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单</p>
@@ -887,7 +887,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录用户名</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录密码</td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的额外标志参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录用户名</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">登录密码</td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的额外标志参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -904,7 +904,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="basicauth">basicAuth<a href="#basicauth" class="hash-link" aria-label="Direct link to basicAuth" title="Direct link to basicAuth" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>basicAuth 是一个选项函数，用于指定爬虫时的自动该填写的基础认证用户名和密码</p>
@@ -946,7 +946,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证用户名</td></tr><tr><td style="text-align:left">pass</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证密码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证用户名</td></tr><tr><td style="text-align:left">pass</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">基础认证密码</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -963,7 +963,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="bodysize">bodySize<a href="#bodysize" class="hash-link" aria-label="Direct link to bodySize" title="Direct link to bodySize" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>bodySize 是一个选项函数，用于指定爬虫时的最大响应体大小，默认为10MB</p>
@@ -995,7 +995,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大响应体大小，单位为字节</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">size</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大响应体大小，单位为字节</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1012,7 +1012,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="concurrent">concurrent<a href="#concurrent" class="hash-link" aria-label="Direct link to concurrent" title="Direct link to concurrent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>concurrent 是一个选项函数，用于指定爬虫时的并发数，默认为20</p>
@@ -1044,7 +1044,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">concurrent</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">concurrent</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1061,7 +1061,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="connecttimeout">connectTimeout<a href="#connecttimeout" class="hash-link" aria-label="Direct link to connectTimeout" title="Direct link to connectTimeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</p>
@@ -1093,7 +1093,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1110,7 +1110,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="Direct link to context" title="Direct link to context" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>context 设置爬虫使用的 context，用于取消或超时控制</p>
@@ -1143,7 +1143,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1160,7 +1160,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cookie">cookie<a href="#cookie" class="hash-link" aria-label="Direct link to cookie" title="Direct link to cookie" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>cookie 是一个选项函数，用于指定爬虫时的cookie</p>
@@ -1202,7 +1202,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">cookie 值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1219,7 +1219,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disallowsuffix">disallowSuffix<a href="#disallowsuffix" class="hash-link" aria-label="Direct link to disallowSuffix" title="Direct link to disallowSuffix" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>disallowSuffix 是一个选项函数，用于指定爬虫时的后缀黑名单</p>
@@ -1251,7 +1251,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">后缀黑名单列表，命中的后缀将不被爬取</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">d</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">后缀黑名单列表，命中的后缀将不被爬取</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1268,7 +1268,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="domainexclude">domainExclude<a href="#domainexclude" class="hash-link" aria-label="Direct link to domainExclude" title="Direct link to domainExclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>domainExclude 是一个选项函数，用于指定爬虫时的域名黑名单</p>
@@ -1301,7 +1301,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">禁止的域名，支持 glob 语法</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">禁止的域名，支持 glob 语法</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1318,7 +1318,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="domaininclude">domainInclude<a href="#domaininclude" class="hash-link" aria-label="Direct link to domainInclude" title="Direct link to domainInclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>domainInclude 是一个选项函数，用于指定爬虫时的域名白名单</p>
@@ -1351,7 +1351,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">允许的域名，支持 glob 语法</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">允许的域名，支持 glob 语法</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1368,7 +1368,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="forbiddenfromparent">forbiddenFromParent<a href="#forbiddenfromparent" class="hash-link" aria-label="Direct link to forbiddenFromParent" title="Direct link to forbiddenFromParent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>forbiddenFromParent 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false</p>
@@ -1401,7 +1401,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁止从根路径发起请求</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁止从根路径发起请求</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1418,7 +1418,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="header">header<a href="#header" class="hash-link" aria-label="Direct link to header" title="Direct link to header" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>header 是一个选项函数，用于指定爬虫时的请求头</p>
@@ -1460,7 +1460,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">k</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头名称</td></tr><tr><td style="text-align:left">v</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求头值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1477,7 +1477,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="httpstohttpfallback">httpsToHttpFallback<a href="#httpstohttpfallback" class="hash-link" aria-label="Direct link to httpsToHttpFallback" title="Direct link to httpsToHttpFallback" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>httpsToHttpFallback 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试</p>
@@ -1510,7 +1510,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否启用 HTTPS 到 HTTP 的回退</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否启用 HTTPS 到 HTTP 的回退</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1527,7 +1527,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="jsparser">jsParser<a href="#jsparser" class="hash-link" aria-label="Direct link to jsParser" title="Direct link to jsParser" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>jsParser 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。</p>
@@ -1560,7 +1560,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否启用 JS 解析，缺省时默认开启</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">enable</td><td style="text-align:left"><code>...bool</code></td><td style="text-align:left">可选，是否启用 JS 解析，缺省时默认开启</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1577,7 +1577,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxdepth">maxDepth<a href="#maxdepth" class="hash-link" aria-label="Direct link to maxDepth" title="Direct link to maxDepth" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxDepth 是一个选项函数，用于指定爬虫时的最大深度，默认为5</p>
@@ -1609,7 +1609,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大爬取深度</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大爬取深度</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1626,7 +1626,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxredirect">maxRedirect<a href="#maxredirect" class="hash-link" aria-label="Direct link to maxRedirect" title="Direct link to maxRedirect" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRedirect 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5</p>
@@ -1658,7 +1658,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxRedirectTimes</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重定向次数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">maxRedirectTimes</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重定向次数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1675,7 +1675,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxrequest">maxRequest<a href="#maxrequest" class="hash-link" aria-label="Direct link to maxRequest" title="Direct link to maxRequest" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRequest 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000</p>
@@ -1707,7 +1707,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大请求数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大请求数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1724,7 +1724,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxretry">maxRetry<a href="#maxretry" class="hash-link" aria-label="Direct link to maxRetry" title="Direct link to maxRetry" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3</p>
@@ -1756,7 +1756,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大重试次数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1773,7 +1773,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="maxurls">maxUrls<a href="#maxurls" class="hash-link" aria-label="Direct link to maxUrls" title="Direct link to maxUrls" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000</p>
@@ -1805,7 +1805,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大链接数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">limit</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">最大链接数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1822,7 +1822,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="onurlfound">onUrlFound<a href="#onurlfound" class="hash-link" aria-label="Direct link to onUrlFound" title="Direct link to onUrlFound" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL）</p>
@@ -1854,7 +1854,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left">发现新 URL 时触发的回调函数，入参为发现的 URL</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left">发现新 URL 时触发的回调函数，入参为发现的 URL</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1871,7 +1871,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proxy">proxy<a href="#proxy" class="hash-link" aria-label="Direct link to proxy" title="Direct link to proxy" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>proxy 是一个选项函数，用于指定爬虫时的代理</p>
@@ -1903,7 +1903,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，例如 <a href="http://127.0.0.1:8080" target="_blank" rel="noopener noreferrer" class="">http://127.0.0.1:8080</a></td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1920,7 +1920,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="responsetimeout">responseTimeout<a href="#responsetimeout" class="hash-link" aria-label="Direct link to responseTimeout" title="Direct link to responseTimeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s</p>
@@ -1953,7 +1953,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">响应超时时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">响应超时时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1970,7 +1970,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timeout">timeout<a href="#timeout" class="hash-link" aria-label="Direct link to timeout" title="Direct link to timeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s</p>
@@ -2002,7 +2002,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">连接超时时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2019,7 +2019,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ua">ua<a href="#ua" class="hash-link" aria-label="Direct link to ua" title="Direct link to ua" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>userAgent 是一个选项函数，用于指定爬虫时的User-Agent</p>
@@ -2051,7 +2051,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2068,7 +2068,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlextractor">urlExtractor<a href="#urlextractor" class="hash-link" aria-label="Direct link to urlExtractor" title="Direct link to urlExtractor" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlExtractor 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则</p>
@@ -2100,7 +2100,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*Req) []any</code></td><td style="text-align:left">自定义链接提取函数，入参为请求对象，返回提取到的链接列表</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*Req) []any</code></td><td style="text-align:left">自定义链接提取函数，入参为请求对象，返回提取到的链接列表</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2117,7 +2117,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlregexpexclude">urlRegexpExclude<a href="#urlregexpexclude" class="hash-link" aria-label="Direct link to urlRegexpExclude" title="Direct link to urlRegexpExclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlRegexpExclude 是一个选项函数，用于指定爬虫时的URL正则黑名单</p>
@@ -2149,7 +2149,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 黑名单正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 黑名单正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2166,7 +2166,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="urlregexpinclude">urlRegexpInclude<a href="#urlregexpinclude" class="hash-link" aria-label="Direct link to urlRegexpInclude" title="Direct link to urlRegexpInclude" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>urlRegexpInclude 是一个选项函数，用于指定爬虫时的URL正则白名单</p>
@@ -2198,7 +2198,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 白名单正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">URL 白名单正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2215,7 +2215,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="useragent">userAgent<a href="#useragent" class="hash-link" aria-label="Direct link to userAgent" title="Direct link to userAgent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>userAgent 是一个选项函数，用于指定爬虫时的User-Agent</p>
@@ -2247,7 +2247,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ua</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2264,7 +2264,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="verifycertificate">verifyCertificate<a href="#verifycertificate" class="hash-link" aria-label="Direct link to verifyCertificate" title="Direct link to verifyCertificate" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>verifyCertificate 设置爬虫在 HTTPS 请求时是否校验服务端证书</p>
@@ -2297,7 +2297,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否校验证书，false 表示忽略证书错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否校验证书，false 表示忽略证书错误</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2314,6 +2314,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/crawler.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/context"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">context</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/crawlerx"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">crawlerx</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#requestsfromflow" class="table-of-contents__link toc-highlight">RequestsFromFlow</a></li><li><a href="#start" class="table-of-contents__link toc-highlight">Start</a></li><li><a href="#aijsaioptions" class="table-of-contents__link toc-highlight">aiJSAIOptions</a></li><li><a href="#aijschunkbytes" class="table-of-contents__link toc-highlight">aiJSChunkBytes</a></li><li><a href="#aijsconcurrency" class="table-of-contents__link toc-highlight">aiJSConcurrency</a></li><li><a href="#aijscontextbytes" class="table-of-contents__link toc-highlight">aiJSContextBytes</a></li><li><a href="#aijsextract" class="table-of-contents__link toc-highlight">aiJSExtract</a></li><li><a href="#aijsmaxtokens" class="table-of-contents__link toc-highlight">aiJSMaxTokens</a></li><li><a href="#aijsoverlapbytes" class="table-of-contents__link toc-highlight">aiJSOverlapBytes</a></li><li><a href="#aijsskipbelow" class="table-of-contents__link toc-highlight">aiJSSkipBelow</a></li><li><a href="#aijssmallinputbytes" class="table-of-contents__link toc-highlight">aiJSSmallInputBytes</a></li><li><a href="#aijssmallinputtokens" class="table-of-contents__link toc-highlight">aiJSSmallInputTokens</a></li><li><a href="#autologin" class="table-of-contents__link toc-highlight">autoLogin</a></li><li><a href="#basicauth" class="table-of-contents__link toc-highlight">basicAuth</a></li><li><a href="#bodysize" class="table-of-contents__link toc-highlight">bodySize</a></li><li><a href="#concurrent" class="table-of-contents__link toc-highlight">concurrent</a></li><li><a href="#connecttimeout" class="table-of-contents__link toc-highlight">connectTimeout</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#cookie" class="table-of-contents__link toc-highlight">cookie</a></li><li><a href="#disallowsuffix" class="table-of-contents__link toc-highlight">disallowSuffix</a></li><li><a href="#domainexclude" class="table-of-contents__link toc-highlight">domainExclude</a></li><li><a href="#domaininclude" class="table-of-contents__link toc-highlight">domainInclude</a></li><li><a href="#forbiddenfromparent" class="table-of-contents__link toc-highlight">forbiddenFromParent</a></li><li><a href="#header" class="table-of-contents__link toc-highlight">header</a></li><li><a href="#httpstohttpfallback" class="table-of-contents__link toc-highlight">httpsToHttpFallback</a></li><li><a href="#jsparser" class="table-of-contents__link toc-highlight">jsParser</a></li><li><a href="#maxdepth" class="table-of-contents__link toc-highlight">maxDepth</a></li><li><a href="#maxredirect" class="table-of-contents__link toc-highlight">maxRedirect</a></li><li><a href="#maxrequest" class="table-of-contents__link toc-highlight">maxRequest</a></li><li><a href="#maxretry" class="table-of-contents__link toc-highlight">maxRetry</a></li><li><a href="#maxurls" class="table-of-contents__link toc-highlight">maxUrls</a></li><li><a href="#onurlfound" class="table-of-contents__link toc-highlight">onUrlFound</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#responsetimeout" class="table-of-contents__link toc-highlight">responseTimeout</a></li><li><a href="#timeout" class="table-of-contents__link toc-highlight">timeout</a></li><li><a href="#ua" class="table-of-contents__link toc-highlight">ua</a></li><li><a href="#urlextractor" class="table-of-contents__link toc-highlight">urlExtractor</a></li><li><a href="#urlregexpexclude" class="table-of-contents__link toc-highlight">urlRegexpExclude</a></li><li><a href="#urlregexpinclude" class="table-of-contents__link toc-highlight">urlRegexpInclude</a></li><li><a href="#useragent" class="table-of-contents__link toc-highlight">userAgent</a></li><li><a href="#verifycertificate" class="table-of-contents__link toc-highlight">verifyCertificate</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOpt</code></td><td style="text-align:left">一个 crawler.Start 可接收的配置选项</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/crawler.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/context"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">context</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/crawlerx"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">crawlerx</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#requestsfromflow" class="table-of-contents__link toc-highlight">RequestsFromFlow</a></li><li><a href="#start" class="table-of-contents__link toc-highlight">Start</a></li><li><a href="#aijsaioptions" class="table-of-contents__link toc-highlight">aiJSAIOptions</a></li><li><a href="#aijschunkbytes" class="table-of-contents__link toc-highlight">aiJSChunkBytes</a></li><li><a href="#aijsconcurrency" class="table-of-contents__link toc-highlight">aiJSConcurrency</a></li><li><a href="#aijscontextbytes" class="table-of-contents__link toc-highlight">aiJSContextBytes</a></li><li><a href="#aijsextract" class="table-of-contents__link toc-highlight">aiJSExtract</a></li><li><a href="#aijsmaxtokens" class="table-of-contents__link toc-highlight">aiJSMaxTokens</a></li><li><a href="#aijsoverlapbytes" class="table-of-contents__link toc-highlight">aiJSOverlapBytes</a></li><li><a href="#aijsskipbelow" class="table-of-contents__link toc-highlight">aiJSSkipBelow</a></li><li><a href="#aijssmallinputbytes" class="table-of-contents__link toc-highlight">aiJSSmallInputBytes</a></li><li><a href="#aijssmallinputtokens" class="table-of-contents__link toc-highlight">aiJSSmallInputTokens</a></li><li><a href="#autologin" class="table-of-contents__link toc-highlight">autoLogin</a></li><li><a href="#basicauth" class="table-of-contents__link toc-highlight">basicAuth</a></li><li><a href="#bodysize" class="table-of-contents__link toc-highlight">bodySize</a></li><li><a href="#concurrent" class="table-of-contents__link toc-highlight">concurrent</a></li><li><a href="#connecttimeout" class="table-of-contents__link toc-highlight">connectTimeout</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#cookie" class="table-of-contents__link toc-highlight">cookie</a></li><li><a href="#disallowsuffix" class="table-of-contents__link toc-highlight">disallowSuffix</a></li><li><a href="#domainexclude" class="table-of-contents__link toc-highlight">domainExclude</a></li><li><a href="#domaininclude" class="table-of-contents__link toc-highlight">domainInclude</a></li><li><a href="#forbiddenfromparent" class="table-of-contents__link toc-highlight">forbiddenFromParent</a></li><li><a href="#header" class="table-of-contents__link toc-highlight">header</a></li><li><a href="#httpstohttpfallback" class="table-of-contents__link toc-highlight">httpsToHttpFallback</a></li><li><a href="#jsparser" class="table-of-contents__link toc-highlight">jsParser</a></li><li><a href="#maxdepth" class="table-of-contents__link toc-highlight">maxDepth</a></li><li><a href="#maxredirect" class="table-of-contents__link toc-highlight">maxRedirect</a></li><li><a href="#maxrequest" class="table-of-contents__link toc-highlight">maxRequest</a></li><li><a href="#maxretry" class="table-of-contents__link toc-highlight">maxRetry</a></li><li><a href="#maxurls" class="table-of-contents__link toc-highlight">maxUrls</a></li><li><a href="#onurlfound" class="table-of-contents__link toc-highlight">onUrlFound</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#responsetimeout" class="table-of-contents__link toc-highlight">responseTimeout</a></li><li><a href="#timeout" class="table-of-contents__link toc-highlight">timeout</a></li><li><a href="#ua" class="table-of-contents__link toc-highlight">ua</a></li><li><a href="#urlextractor" class="table-of-contents__link toc-highlight">urlExtractor</a></li><li><a href="#urlregexpexclude" class="table-of-contents__link toc-highlight">urlRegexpExclude</a></li><li><a href="#urlregexpinclude" class="table-of-contents__link toc-highlight">urlRegexpInclude</a></li><li><a href="#useragent" class="table-of-contents__link toc-highlight">userAgent</a></li><li><a href="#verifycertificate" class="table-of-contents__link toc-highlight">verifyCertificate</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">git | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/git"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="git | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/git"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/git" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/git" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/git" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"git","item":"https://yaklang.com/docs/api/git"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.57ca5fd1.js" defer="defer"></script>
-<script src="/assets/js/main.02c5aefc.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.6a0ff1da.css">
+<script src="/assets/js/runtime~main.30a1f0b6.js" defer="defer"></script>
+<script src="/assets/js/main.abaed218.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -218,7 +218,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#blame" class="">git.Blame</a></td><td style="text-align:left">Blame 对某个文件在 HEAD 下做 blame，逐行追踪最后修改信息（导出名为 git.Blame） 参数: - repos: 本地仓库路径 - fileName: 仓库内的文件路径 返回值: - blame 结果（逐行的提交信息） - 错误信息</td></tr><tr><td style="text-align:left"><a href="#blamecommit" class="">git.BlameCommit</a></td><td style="text-align:left">BlameWithCommit 在指定 commit 下对某个文件做 blame，逐行追踪最后修改信息（导出名为 git.BlameCommit） 参数: - repos: 本地仓库路径 - fileName: 仓库内的文件路径 - rev: 目标 commit/引用 返回值: - blame 结果...</td></tr><tr><td style="text-align:left"><a href="#branch" class="">git.Branch</a></td><td style="text-align:left">GetAllBranches 获取本地仓库中的所有引用名（导出名为 git.Branch） 参数: - repos: 本地仓库路径 返回值: - 引用名列表 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#checkout" class="">git.Checkout</a></td><td style="text-align:left">Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为 参数: - localPath: 本地仓库路径 - ref: 要检出的分支名或引用 - opts: 可选项，如 git.checkoutC...</td></tr><tr><td style="text-align:left"><a href="#clone" class="">git.Clone</a></td><td style="text-align:left">Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为 参数: - u: 远程仓库地址 - localPath: 本地存储路径 - opt: 可选项，如 git.recursive、git.verify、git.depth、git.auth 等 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#fetch" class="">git.Fetch</a></td><td style="text-align:left">Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为 参数: - localPath: 本地仓库路径 - opts: 可选项，如 git.verify、git.remote、git.fetchAllTags 等 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentday" class="">git.FileSystemCurrentDay</a></td><td style="text-align:left">FileSystemCurrentDay 获取当前自然日的文件系统（导出名为 git.FileSystemCurrentDay） 参数: - repos: 本地仓库路径 返回值: - 当天变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentmonth" class="">git.FileSystemCurrentMonth</a></td><td style="text-align:left">FileSystemCurrentMonth 获取当前自然月的文件系统（导出名为 git.FileSystemCurrentMonth） 参数: - repos: 本地仓库路径 返回值: - 本月变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentweek" class="">git.FileSystemCurrentWeek</a></td><td style="text-align:left">FileSystemCurrentWeek 获取当前自然周（周一到周天）的文件系统（导出名为 git.FileSystemCurrentWeek） 参数: - repos: 本地仓库路径 返回值: - 本周内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommit" class="">git.FileSystemFromCommit</a></td><td style="text-align:left">FileSystemFromCommit 从指定的commit中获取文件系统 参数: - repos: 本地仓库路径 - commitHash: 目标 commit 的哈希 返回值: - 该 commit 对应的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommitdaterange" class="">git.FileSystemFromCommitDateRange</a></td><td style="text-align:left">FileSystemFromCommitDateRange 根据日期范围获取文件系统（导出名为 git.FileSystemFromCommitDateRange） 参数: - repos: 本地仓库路径 - startDate: 起始日期，支持多种格式和类型（字符串、时间戳等） - endDate...</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommitrange" class="">git.FileSystemFromCommitRange</a></td><td style="text-align:left">FileSystemFromCommitRange 从commit范围中获取文件系统 参数: - repos: 本地仓库路径 - start: 起始 commit（旧） - end: 结束 commit（新） 返回值: - 该范围内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommits" class="">git.FileSystemFromCommits</a></td><td style="text-align:left">FileSystemFromCommits 从多个commit中获取文件系统 参数: - repos: 本地仓库路径 - commitHashes: 一个或多个 commit 哈希 返回值: - 合并多个 commit 后的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromdate" class="">git.FileSystemFromDate</a></td><td style="text-align:left">FileSystemFromDate 根据指定日期获取该日的文件系统（导出名为 git.FileSystemFromDate） 参数: - repos: 本地仓库路径 - date: 目标日期，支持多种格式和类型 返回值: - 该日变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfrommonth" class="">git.FileSystemFromMonth</a></td><td style="text-align:left">FileSystemFromMonth 根据指定年月获取该月的文件系统（导出名为 git.FileSystemFromMonth） 参数: - repos: 本地仓库路径 - year: 年份 - month: 月份（1-12） 返回值: - 该月变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemlastsevenday" class="">git.FileSystemLastSevenDay</a></td><td style="text-align:left">FileSystemLastSevenDay 获取最近七天的文件系统（导出名为 git.FileSystemLastSevenDay） 参数: - repos: 本地仓库路径 返回值: - 最近七天内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#githack" class="">git.GitHack</a></td><td style="text-align:left">GitHack 是一个用于利用 Git 源码泄露漏洞的函数 Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露 参数: - remoteRepoURL: 存在 .git 泄露的目标地址 - localPath...</td></tr><tr><td style="text-align:left"><a href="#glance" class="">git.Glance</a></td><td style="text-align:left">Glance 快速查看本地仓库的概要信息（HEAD 哈希、类型、分支范围等，导出名为 git.Glance） 参数: - repos: 本地仓库路径 返回值: - 概要信息文本，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#headbranch" class="">git.HeadBranch</a></td><td style="text-align:left">GetHeadBranch 获取本地仓库当前 HEAD 所指向的分支/标签引用名（导出名为 git.HeadBranch） 参数: - repos: 本地仓库路径 返回值: - 当前引用名，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#headbranchrange" class="">git.HeadBranchRange</a></td><td style="text-align:left">GetBranchRange 获取某个分支的起止 commit 哈希范围（导出名为 git.HeadBranchRange） 参数: - repos: 本地仓库路径 - branchName: 分支引用名 返回值: - 起始 commit 哈希 - 结束 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#headhash" class="">git.HeadHash</a></td><td style="text-align:left">GetHeadHash 获取本地仓库当前 HEAD 的 commit 哈希（导出名为 git.HeadHash） 参数: - repos: 本地仓库路径 返回值: - HEAD 的 commit 哈希字符串，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#iteratecommit" class="">git.IterateCommit</a></td><td style="text-align:left">IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(commit)，并对过滤后的每个提交记录执行指定的操作，它还可以接收零个到多个选项函数，用于配置回调函数 参数: - localRepos: 本地仓库路径 - opt: 可选项，如 git.filterReference、git...</td></tr><tr><td style="text-align:left"><a href="#parenthash" class="">git.ParentHash</a></td><td style="text-align:left">GetParentCommitHash 获取指定 commit 的父 commit 哈希（导出名为 git.ParentHash） 参数: - repos: 本地仓库路径 - commit: 目标 commit（可为短哈希或引用） 返回值: - 父 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#pull" class="">git.Pull</a></td><td style="text-align:left">Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合并到本地仓库中，这种行为称之为拉取(pull)，它还可以接收零个到多个选项函数，用于影响拉取行为 参数: - localPath: 本地仓库路径 - opts: 可选项，如 git.verify、git.remote、git.auth 等 ...</td></tr><tr><td style="text-align:left"><a href="#revparse" class="">git.RevParse</a></td><td style="text-align:left">RevParse 将一个引用（分支名、标签、短哈希等）解析为完整的 commit 哈希（导出名为 git.RevParse） 参数: - repos: 本地仓库路径 - rev: 待解析的引用 返回值: - 完整的 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#setproxy" class="">git.SetProxy</a></td><td style="text-align:left">SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）的代理 参数: - proxies: 一个或多个代理地址 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#auth" class="">git.auth</a></td><td style="text-align:left">auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的认证用户名和密码</td></tr><tr><td style="text-align:left"><a href="#branch" class="">git.branch</a></td><td style="text-align:left">WithBranch 指定其他 Git 操作（例如 Clone）时使用的分支（导出名为 git.branch） 参数: - branch: 分支名 返回值: - 选项函数</td></tr><tr><td style="text-align:left"><a href="#checkoutcreate" class="">git.checkoutCreate</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否创建新分支</td></tr><tr><td style="text-align:left"><a href="#checkoutforce" class="">git.checkoutForce</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否强制</td></tr><tr><td style="text-align:left"><a href="#checkoutkeep" class="">git.checkoutKeep</a></td><td style="text-align:left">checkoutKeep 是一个选项函数，用于指定检出(checkout)操作时，本地更改（索引或工作树更改）是否被保留，如果保留，就可以将它们提交到目标分支，默认为false</td></tr><tr><td style="text-align:left"><a href="#context" class="">git.context</a></td><td style="text-align:left">context 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的上下文</td></tr><tr><td style="text-align:left"><a href="#depth" class="">git.depth</a></td><td style="text-align:left">depth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的最大深度，默认为1</td></tr><tr><td style="text-align:left"><a href="#fetchalltags" class="">git.fetchAllTags</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定获取(fetch)操作时是否拉取所有标签</td></tr><tr><td style="text-align:left"><a href="#filtercommit" class="">git.filterCommit</a></td><td style="text-align:left">filterCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到提交记录时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个提交记录</td></tr><tr><td style="text-align:left"><a href="#filterreference" class="">git.filterReference</a></td><td style="text-align:left">filterReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到引用时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个引用</td></tr><tr><td style="text-align:left"><a href="#force" class="">git.force</a></td><td style="text-align:left">force 是一个选项函数，用于指定其他 Git 操作（例如Pull）时是否强制执行，默认为false</td></tr><tr><td style="text-align:left"><a href="#handlecommit" class="">git.handleCommit</a></td><td style="text-align:left">handleCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到一个过滤后的提交记录时，就会调用这个回调函数</td></tr><tr><td style="text-align:left"><a href="#handlereference" class="">git.handleReference</a></td><td style="text-align:left">handleReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到过滤后的引用时，就会调用这个回调函数</td></tr><tr><td style="text-align:left"><a href="#httpopts" class="">git.httpOpts</a></td><td style="text-align:left">httpOpts 是一个GitHack选项函数，用于指定GitHack的HTTP选项，其接收零个到多个poc的请求选项函数</td></tr><tr><td style="text-align:left"><a href="#nofetchtags" class="">git.noFetchTags</a></td><td style="text-align:left">noFetchTags 是一个选项函数，用于指定获取(fetch)操作时是否不拉取标签</td></tr><tr><td style="text-align:left"><a href="#recursive" class="">git.recursive</a></td><td style="text-align:left">recursive 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的是否递归克隆子模块，默认为false</td></tr><tr><td style="text-align:left"><a href="#remote" class="">git.remote</a></td><td style="text-align:left">remote 是一个选项函数，用于指定其他 Git 操作（例如Pull）时的远程仓库名称，默认为origin</td></tr><tr><td style="text-align:left"><a href="#threads" class="">git.threads</a></td><td style="text-align:left">threads 是一个GitHack选项函数，用于指定并发数，默认为8</td></tr><tr><td style="text-align:left"><a href="#uselocalgitbinary" class="">git.useLocalGitBinary</a></td><td style="text-align:left">useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行<code>git fsck</code>命令，这个命令用于尽可能恢复完整的git仓库，默认为true</td></tr><tr><td style="text-align:left"><a href="#verify" class="">git.verify</a></td><td style="text-align:left">verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书</td></tr><tr><td style="text-align:left"><a href="#withinsecureignorehostkey" class="">git.withInsecureIgnoreHostKey</a></td><td style="text-align:left">WithInsecureIgnoreHostKey 跳过 SSH 主机密钥验证 适用于自动化工具、测试环境或信任的内网环境 警告：跳过主机密钥验证会降低安全性，可能遭受中间人攻击</td></tr><tr><td style="text-align:left"><a href="#withprivatekey" class="">git.withPrivateKey</a></td><td style="text-align:left">WithPrivateKey 使用 SSH 私钥文件进行认证（导出名为 git.withPrivateKey） 参数: - userName: SSH 用户名（通常为 git） - keyPath: 私钥文件路径 - password: 私钥口令，无口令时传空字符串 返回值: - 选项函数</td></tr><tr><td style="text-align:left"><a href="#withprivatekeycontent" class="">git.withPrivateKeyContent</a></td><td style="text-align:left">WithPrivateKeyContent 使用私钥内容进行认证</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#blame" class="">git.Blame</a></td><td style="text-align:left">Blame 对某个文件在 HEAD 下做 blame，逐行追踪最后修改信息（导出名为 git.Blame） 参数: - repos: 本地仓库路径 - fileName: 仓库内的文件路径 返回值: - blame 结果（逐行的提交信息） - 错误信息</td></tr><tr><td style="text-align:left"><a href="#blamecommit" class="">git.BlameCommit</a></td><td style="text-align:left">BlameWithCommit 在指定 commit 下对某个文件做 blame，逐行追踪最后修改信息（导出名为 git.BlameCommit） 参数: - repos: 本地仓库路径 - fileName: 仓库内的文件路径 - rev: 目标 commit/引用 返回值: - blame 结果...</td></tr><tr><td style="text-align:left"><a href="#branch" class="">git.Branch</a></td><td style="text-align:left">GetAllBranches 获取本地仓库中的所有引用名（导出名为 git.Branch） 参数: - repos: 本地仓库路径 返回值: - 引用名列表 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#checkout" class="">git.Checkout</a></td><td style="text-align:left">Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为 参数: - localPath: 本地仓库路径 - ref: 要检出的分支名或引用 - opts: 可选项，如 git.checkoutC...</td></tr><tr><td style="text-align:left"><a href="#clone" class="">git.Clone</a></td><td style="text-align:left">Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为 参数: - u: 远程仓库地址 - localPath: 本地存储路径 - opt: 可选项，如 git.recursive、git.verify、git.depth、git.auth 等 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#fetch" class="">git.Fetch</a></td><td style="text-align:left">Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为 参数: - localPath: 本地仓库路径 - opts: 可选项，如 git.verify、git.remote、git.fetchAllTags 等 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentday" class="">git.FileSystemCurrentDay</a></td><td style="text-align:left">FileSystemCurrentDay 获取当前自然日的文件系统（导出名为 git.FileSystemCurrentDay） 参数: - repos: 本地仓库路径 返回值: - 当天变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentmonth" class="">git.FileSystemCurrentMonth</a></td><td style="text-align:left">FileSystemCurrentMonth 获取当前自然月的文件系统（导出名为 git.FileSystemCurrentMonth） 参数: - repos: 本地仓库路径 返回值: - 本月变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemcurrentweek" class="">git.FileSystemCurrentWeek</a></td><td style="text-align:left">FileSystemCurrentWeek 获取当前自然周（周一到周天）的文件系统（导出名为 git.FileSystemCurrentWeek） 参数: - repos: 本地仓库路径 返回值: - 本周内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommit" class="">git.FileSystemFromCommit</a></td><td style="text-align:left">FileSystemFromCommit 从指定的commit中获取文件系统 参数: - repos: 本地仓库路径 - commitHash: 目标 commit 的哈希 返回值: - 该 commit 对应的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommitdaterange" class="">git.FileSystemFromCommitDateRange</a></td><td style="text-align:left">FileSystemFromCommitDateRange 根据日期范围获取文件系统（导出名为 git.FileSystemFromCommitDateRange） 参数: - repos: 本地仓库路径 - startDate: 起始日期，支持多种格式和类型（字符串、时间戳等） - endDate...</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommitrange" class="">git.FileSystemFromCommitRange</a></td><td style="text-align:left">FileSystemFromCommitRange 从commit范围中获取文件系统 参数: - repos: 本地仓库路径 - start: 起始 commit（旧） - end: 结束 commit（新） 返回值: - 该范围内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromcommits" class="">git.FileSystemFromCommits</a></td><td style="text-align:left">FileSystemFromCommits 从多个commit中获取文件系统 参数: - repos: 本地仓库路径 - commitHashes: 一个或多个 commit 哈希 返回值: - 合并多个 commit 后的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfromdate" class="">git.FileSystemFromDate</a></td><td style="text-align:left">FileSystemFromDate 根据指定日期获取该日的文件系统（导出名为 git.FileSystemFromDate） 参数: - repos: 本地仓库路径 - date: 目标日期，支持多种格式和类型 返回值: - 该日变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemfrommonth" class="">git.FileSystemFromMonth</a></td><td style="text-align:left">FileSystemFromMonth 根据指定年月获取该月的文件系统（导出名为 git.FileSystemFromMonth） 参数: - repos: 本地仓库路径 - year: 年份 - month: 月份（1-12） 返回值: - 该月变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#filesystemlastsevenday" class="">git.FileSystemLastSevenDay</a></td><td style="text-align:left">FileSystemLastSevenDay 获取最近七天的文件系统（导出名为 git.FileSystemLastSevenDay） 参数: - repos: 本地仓库路径 返回值: - 最近七天内变更聚合得到的文件系统 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#githack" class="">git.GitHack</a></td><td style="text-align:left">GitHack 是一个用于利用 Git 源码泄露漏洞的函数 Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通过 HTTP / HTTPS 直接访问到网站 .git 目录下的文件，从而导致源码泄露 参数: - remoteRepoURL: 存在 .git 泄露的目标地址 - localPath...</td></tr><tr><td style="text-align:left"><a href="#glance" class="">git.Glance</a></td><td style="text-align:left">Glance 快速查看本地仓库的概要信息（HEAD 哈希、类型、分支范围等，导出名为 git.Glance） 参数: - repos: 本地仓库路径 返回值: - 概要信息文本，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#headbranch" class="">git.HeadBranch</a></td><td style="text-align:left">GetHeadBranch 获取本地仓库当前 HEAD 所指向的分支/标签引用名（导出名为 git.HeadBranch） 参数: - repos: 本地仓库路径 返回值: - 当前引用名，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#headbranchrange" class="">git.HeadBranchRange</a></td><td style="text-align:left">GetBranchRange 获取某个分支的起止 commit 哈希范围（导出名为 git.HeadBranchRange） 参数: - repos: 本地仓库路径 - branchName: 分支引用名 返回值: - 起始 commit 哈希 - 结束 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#headhash" class="">git.HeadHash</a></td><td style="text-align:left">GetHeadHash 获取本地仓库当前 HEAD 的 commit 哈希（导出名为 git.HeadHash） 参数: - repos: 本地仓库路径 返回值: - HEAD 的 commit 哈希字符串，失败时返回空字符串</td></tr><tr><td style="text-align:left"><a href="#iteratecommit" class="">git.IterateCommit</a></td><td style="text-align:left">IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(commit)，并对过滤后的每个提交记录执行指定的操作，它还可以接收零个到多个选项函数，用于配置回调函数 参数: - localRepos: 本地仓库路径 - opt: 可选项，如 git.filterReference、git...</td></tr><tr><td style="text-align:left"><a href="#parenthash" class="">git.ParentHash</a></td><td style="text-align:left">GetParentCommitHash 获取指定 commit 的父 commit 哈希（导出名为 git.ParentHash） 参数: - repos: 本地仓库路径 - commit: 目标 commit（可为短哈希或引用） 返回值: - 父 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#pull" class="">git.Pull</a></td><td style="text-align:left">Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合并到本地仓库中，这种行为称之为拉取(pull)，它还可以接收零个到多个选项函数，用于影响拉取行为 参数: - localPath: 本地仓库路径 - opts: 可选项，如 git.verify、git.remote、git.auth 等 ...</td></tr><tr><td style="text-align:left"><a href="#revparse" class="">git.RevParse</a></td><td style="text-align:left">RevParse 将一个引用（分支名、标签、短哈希等）解析为完整的 commit 哈希（导出名为 git.RevParse） 参数: - repos: 本地仓库路径 - rev: 待解析的引用 返回值: - 完整的 commit 哈希 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#setproxy" class="">git.SetProxy</a></td><td style="text-align:left">SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）的代理 参数: - proxies: 一个或多个代理地址 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#auth" class="">git.auth</a></td><td style="text-align:left">auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的认证用户名和密码</td></tr><tr><td style="text-align:left"><a href="#branch" class="">git.branch</a></td><td style="text-align:left">WithBranch 指定其他 Git 操作（例如 Clone）时使用的分支（导出名为 git.branch） 参数: - branch: 分支名 返回值: - 选项函数</td></tr><tr><td style="text-align:left"><a href="#checkoutcreate" class="">git.checkoutCreate</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否创建新分支</td></tr><tr><td style="text-align:left"><a href="#checkoutforce" class="">git.checkoutForce</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否强制</td></tr><tr><td style="text-align:left"><a href="#checkoutkeep" class="">git.checkoutKeep</a></td><td style="text-align:left">checkoutKeep 是一个选项函数，用于指定检出(checkout)操作时，本地更改（索引或工作树更改）是否被保留，如果保留，就可以将它们提交到目标分支，默认为false</td></tr><tr><td style="text-align:left"><a href="#context" class="">git.context</a></td><td style="text-align:left">context 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的上下文</td></tr><tr><td style="text-align:left"><a href="#depth" class="">git.depth</a></td><td style="text-align:left">depth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的最大深度，默认为1</td></tr><tr><td style="text-align:left"><a href="#fetchalltags" class="">git.fetchAllTags</a></td><td style="text-align:left">fetchAllTags 是一个选项函数，用于指定获取(fetch)操作时是否拉取所有标签</td></tr><tr><td style="text-align:left"><a href="#filtercommit" class="">git.filterCommit</a></td><td style="text-align:left">filterCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到提交记录时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个提交记录</td></tr><tr><td style="text-align:left"><a href="#filterreference" class="">git.filterReference</a></td><td style="text-align:left">filterReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到引用时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个引用</td></tr><tr><td style="text-align:left"><a href="#force" class="">git.force</a></td><td style="text-align:left">force 是一个选项函数，用于指定其他 Git 操作（例如Pull）时是否强制执行，默认为false</td></tr><tr><td style="text-align:left"><a href="#handlecommit" class="">git.handleCommit</a></td><td style="text-align:left">handleCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到一个过滤后的提交记录时，就会调用这个回调函数</td></tr><tr><td style="text-align:left"><a href="#handlereference" class="">git.handleReference</a></td><td style="text-align:left">handleReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到过滤后的引用时，就会调用这个回调函数</td></tr><tr><td style="text-align:left"><a href="#httpopts" class="">git.httpOpts</a></td><td style="text-align:left">httpOpts 是一个GitHack选项函数，用于指定GitHack的HTTP选项，其接收零个到多个poc的请求选项函数</td></tr><tr><td style="text-align:left"><a href="#nofetchtags" class="">git.noFetchTags</a></td><td style="text-align:left">noFetchTags 是一个选项函数，用于指定获取(fetch)操作时是否不拉取标签</td></tr><tr><td style="text-align:left"><a href="#recursive" class="">git.recursive</a></td><td style="text-align:left">recursive 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的是否递归克隆子模块，默认为false</td></tr><tr><td style="text-align:left"><a href="#remote" class="">git.remote</a></td><td style="text-align:left">remote 是一个选项函数，用于指定其他 Git 操作（例如Pull）时的远程仓库名称，默认为origin</td></tr><tr><td style="text-align:left"><a href="#threads" class="">git.threads</a></td><td style="text-align:left">threads 是一个GitHack选项函数，用于指定并发数，默认为8</td></tr><tr><td style="text-align:left"><a href="#uselocalgitbinary" class="">git.useLocalGitBinary</a></td><td style="text-align:left">useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行<code>git fsck</code>命令，这个命令用于尽可能恢复完整的git仓库，默认为true</td></tr><tr><td style="text-align:left"><a href="#verify" class="">git.verify</a></td><td style="text-align:left">verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书</td></tr><tr><td style="text-align:left"><a href="#withinsecureignorehostkey" class="">git.withInsecureIgnoreHostKey</a></td><td style="text-align:left">WithInsecureIgnoreHostKey 跳过 SSH 主机密钥验证 适用于自动化工具、测试环境或信任的内网环境 警告：跳过主机密钥验证会降低安全性，可能遭受中间人攻击</td></tr><tr><td style="text-align:left"><a href="#withprivatekey" class="">git.withPrivateKey</a></td><td style="text-align:left">WithPrivateKey 使用 SSH 私钥文件进行认证（导出名为 git.withPrivateKey） 参数: - userName: SSH 用户名（通常为 git） - keyPath: 私钥文件路径 - password: 私钥口令，无口令时传空字符串 返回值: - 选项函数</td></tr><tr><td style="text-align:left"><a href="#withprivatekeycontent" class="">git.withPrivateKeyContent</a></td><td style="text-align:left">WithPrivateKeyContent 使用私钥内容进行认证</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="blame">Blame<a href="#blame" class="hash-link" aria-label="Blame的直接链接" title="Blame的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
@@ -266,7 +266,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">仓库内的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">仓库内的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -288,7 +288,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>BlameLines</code></td><td style="text-align:left">blame 结果（逐行的提交信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>BlameLines</code></td><td style="text-align:left">blame 结果（逐行的提交信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="blamecommit">BlameCommit<a href="#blamecommit" class="hash-link" aria-label="BlameCommit的直接链接" title="BlameCommit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>BlameWithCommit 在指定 commit 下对某个文件做 blame，逐行追踪最后修改信息（导出名为 git.BlameCommit）</p>
@@ -343,7 +343,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">仓库内的文件路径</td></tr><tr><td style="text-align:left">rev</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit/引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">仓库内的文件路径</td></tr><tr><td style="text-align:left">rev</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit/引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -365,7 +365,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>BlameLines</code></td><td style="text-align:left">blame 结果（逐行的提交信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>BlameLines</code></td><td style="text-align:left">blame 结果（逐行的提交信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="branch">Branch<a href="#branch" class="hash-link" aria-label="Branch的直接链接" title="Branch的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetAllBranches 获取本地仓库中的所有引用名（导出名为 git.Branch）</p>
@@ -402,7 +402,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -424,7 +424,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">引用名列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">引用名列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkout">Checkout<a href="#checkout" class="hash-link" aria-label="Checkout的直接链接" title="Checkout的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Checkout 用于指定一个本地仓库，切换其分支或者恢复工作树的文件，这种行为称之为检出(checkout)，它还可以接收零个到多个选项函数，用于影响检出行为</p>
@@ -474,7 +474,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">ref</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">要检出的分支名或引用</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.checkoutCreate、git.checkoutForce、git.checkoutKeep 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">ref</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">要检出的分支名或引用</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.checkoutCreate、git.checkoutForce、git.checkoutKeep 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -491,7 +491,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="clone">Clone<a href="#clone" class="hash-link" aria-label="Clone的直接链接" title="Clone的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Clone 用于克隆远程仓库并存储到本地路径中，它还可以接收零个到多个选项函数，用于影响克隆行为</p>
@@ -541,7 +541,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">远程仓库地址</td></tr><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地存储路径</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.recursive、git.verify、git.depth、git.auth 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">远程仓库地址</td></tr><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地存储路径</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.recursive、git.verify、git.depth、git.auth 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -558,7 +558,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fetch">Fetch<a href="#fetch" class="hash-link" aria-label="Fetch的直接链接" title="Fetch的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Fetch 用于指定一个本地仓库，并从其远程仓库中获取代码，它还可以接收零个到多个选项函数，用于影响获取行为</p>
@@ -600,7 +600,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.verify、git.remote、git.fetchAllTags 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.verify、git.remote、git.fetchAllTags 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -617,7 +617,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemcurrentday">FileSystemCurrentDay<a href="#filesystemcurrentday" class="hash-link" aria-label="FileSystemCurrentDay的直接链接" title="FileSystemCurrentDay的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemCurrentDay 获取当前自然日的文件系统（导出名为 git.FileSystemCurrentDay）</p>
@@ -654,7 +654,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -676,7 +676,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">当天变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">当天变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemcurrentmonth">FileSystemCurrentMonth<a href="#filesystemcurrentmonth" class="hash-link" aria-label="FileSystemCurrentMonth的直接链接" title="FileSystemCurrentMonth的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemCurrentMonth 获取当前自然月的文件系统（导出名为 git.FileSystemCurrentMonth）</p>
@@ -713,7 +713,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -735,7 +735,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">本月变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">本月变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemcurrentweek">FileSystemCurrentWeek<a href="#filesystemcurrentweek" class="hash-link" aria-label="FileSystemCurrentWeek的直接链接" title="FileSystemCurrentWeek的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemCurrentWeek 获取当前自然周（周一到周天）的文件系统（导出名为 git.FileSystemCurrentWeek）</p>
@@ -772,7 +772,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -794,7 +794,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">本周内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">本周内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfromcommit">FileSystemFromCommit<a href="#filesystemfromcommit" class="hash-link" aria-label="FileSystemFromCommit的直接链接" title="FileSystemFromCommit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromCommit 从指定的commit中获取文件系统</p>
@@ -841,7 +841,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commitHash</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit 的哈希</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commitHash</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit 的哈希</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -863,7 +863,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该 commit 对应的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该 commit 对应的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfromcommitdaterange">FileSystemFromCommitDateRange<a href="#filesystemfromcommitdaterange" class="hash-link" aria-label="FileSystemFromCommitDateRange的直接链接" title="FileSystemFromCommitDateRange的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromCommitDateRange 根据日期范围获取文件系统（导出名为 git.FileSystemFromCommitDateRange）</p>
@@ -918,7 +918,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">startDate</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">起始日期，支持多种格式和类型（字符串、时间戳等）</td></tr><tr><td style="text-align:left">endDate</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">结束日期，支持多种格式和类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">startDate</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">起始日期，支持多种格式和类型（字符串、时间戳等）</td></tr><tr><td style="text-align:left">endDate</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">结束日期，支持多种格式和类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -940,7 +940,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该日期范围内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该日期范围内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfromcommitrange">FileSystemFromCommitRange<a href="#filesystemfromcommitrange" class="hash-link" aria-label="FileSystemFromCommitRange的直接链接" title="FileSystemFromCommitRange的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromCommitRange 从commit范围中获取文件系统</p>
@@ -995,7 +995,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">start</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始 commit（旧）</td></tr><tr><td style="text-align:left">end</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结束 commit（新）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">start</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始 commit（旧）</td></tr><tr><td style="text-align:left">end</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结束 commit（新）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1017,7 +1017,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*filesys.VirtualFS</code></td><td style="text-align:left">该范围内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*filesys.VirtualFS</code></td><td style="text-align:left">该范围内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfromcommits">FileSystemFromCommits<a href="#filesystemfromcommits" class="hash-link" aria-label="FileSystemFromCommits的直接链接" title="FileSystemFromCommits的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromCommits 从多个commit中获取文件系统</p>
@@ -1064,7 +1064,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commitHashes</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个 commit 哈希</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commitHashes</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个 commit 哈希</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1086,7 +1086,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">合并多个 commit 后的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">合并多个 commit 后的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfromdate">FileSystemFromDate<a href="#filesystemfromdate" class="hash-link" aria-label="FileSystemFromDate的直接链接" title="FileSystemFromDate的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromDate 根据指定日期获取该日的文件系统（导出名为 git.FileSystemFromDate）</p>
@@ -1133,7 +1133,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">date</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">目标日期，支持多种格式和类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">date</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">目标日期，支持多种格式和类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1155,7 +1155,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该日变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该日变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemfrommonth">FileSystemFromMonth<a href="#filesystemfrommonth" class="hash-link" aria-label="FileSystemFromMonth的直接链接" title="FileSystemFromMonth的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemFromMonth 根据指定年月获取该月的文件系统（导出名为 git.FileSystemFromMonth）</p>
@@ -1210,7 +1210,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">year</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">年份</td></tr><tr><td style="text-align:left">month</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">月份（1-12）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">year</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">年份</td></tr><tr><td style="text-align:left">month</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">月份（1-12）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1232,7 +1232,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该月变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">该月变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filesystemlastsevenday">FileSystemLastSevenDay<a href="#filesystemlastsevenday" class="hash-link" aria-label="FileSystemLastSevenDay的直接链接" title="FileSystemLastSevenDay的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FileSystemLastSevenDay 获取最近七天的文件系统（导出名为 git.FileSystemLastSevenDay）</p>
@@ -1269,7 +1269,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1291,7 +1291,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">最近七天内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>filesys_interface.FileSystem</code></td><td style="text-align:left">最近七天内变更聚合得到的文件系统</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="githack">GitHack<a href="#githack" class="hash-link" aria-label="GitHack的直接链接" title="GitHack的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GitHack 是一个用于利用 Git 源码泄露漏洞的函数</p>
@@ -1342,7 +1342,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">remoteRepoURL</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">存在 .git 泄露的目标地址</td></tr><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地保存还原结果的路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.threads、git.context、git.httpOpts 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">remoteRepoURL</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">存在 .git 泄露的目标地址</td></tr><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地保存还原结果的路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.threads、git.context、git.httpOpts 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1359,7 +1359,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">finalErr</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">finalErr</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="glance">Glance<a href="#glance" class="hash-link" aria-label="Glance的直接链接" title="Glance的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Glance 快速查看本地仓库的概要信息（HEAD 哈希、类型、分支范围等，导出名为 git.Glance）</p>
@@ -1391,7 +1391,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1408,7 +1408,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">概要信息文本，失败时返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">概要信息文本，失败时返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="headbranch">HeadBranch<a href="#headbranch" class="hash-link" aria-label="HeadBranch的直接链接" title="HeadBranch的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetHeadBranch 获取本地仓库当前 HEAD 所指向的分支/标签引用名（导出名为 git.HeadBranch）</p>
@@ -1440,7 +1440,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1457,7 +1457,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">当前引用名，失败时返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">当前引用名，失败时返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="headbranchrange">HeadBranchRange<a href="#headbranchrange" class="hash-link" aria-label="HeadBranchRange的直接链接" title="HeadBranchRange的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetBranchRange 获取某个分支的起止 commit 哈希范围（导出名为 git.HeadBranchRange）</p>
@@ -1507,7 +1507,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">branchName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">分支引用名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">branchName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">分支引用名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1534,7 +1534,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">start</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始 commit 哈希</td></tr><tr><td style="text-align:left">end</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结束 commit 哈希</td></tr><tr><td style="text-align:left">err</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">start</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">起始 commit 哈希</td></tr><tr><td style="text-align:left">end</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">结束 commit 哈希</td></tr><tr><td style="text-align:left">err</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="headhash">HeadHash<a href="#headhash" class="hash-link" aria-label="HeadHash的直接链接" title="HeadHash的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetHeadHash 获取本地仓库当前 HEAD 的 commit 哈希（导出名为 git.HeadHash）</p>
@@ -1566,7 +1566,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1583,7 +1583,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HEAD 的 commit 哈希字符串，失败时返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HEAD 的 commit 哈希字符串，失败时返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="iteratecommit">IterateCommit<a href="#iteratecommit" class="hash-link" aria-label="IterateCommit的直接链接" title="IterateCommit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>IterateCommit 用于指定一个本地仓库，遍历其所有的提交记录(commit)，并对过滤后的每个提交记录执行指定的操作，它还可以接收零个到多个选项函数，用于配置回调函数</p>
@@ -1625,7 +1625,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localRepos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.filterReference、git.filterCommit、git.handleCommit、git.handleReference 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localRepos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.filterReference、git.filterCommit、git.handleCommit、git.handleReference 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1642,7 +1642,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="parenthash">ParentHash<a href="#parenthash" class="hash-link" aria-label="ParentHash的直接链接" title="ParentHash的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>GetParentCommitHash 获取指定 commit 的父 commit 哈希（导出名为 git.ParentHash）</p>
@@ -1689,7 +1689,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commit</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit（可为短哈希或引用）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">commit</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 commit（可为短哈希或引用）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1711,7 +1711,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">父 commit 哈希</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">父 commit 哈希</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="pull">Pull<a href="#pull" class="hash-link" aria-label="Pull的直接链接" title="Pull的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Pull 用于指定一个本地仓库，并从其远程仓库中获取代码并合并到本地仓库中，这种行为称之为拉取(pull)，它还可以接收零个到多个选项函数，用于影响拉取行为</p>
@@ -1753,7 +1753,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.verify、git.remote、git.auth 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">localPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...Option</code></td><td style="text-align:left">可选项，如 git.verify、git.remote、git.auth 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1770,7 +1770,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="revparse">RevParse<a href="#revparse" class="hash-link" aria-label="RevParse的直接链接" title="RevParse的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>RevParse 将一个引用（分支名、标签、短哈希等）解析为完整的 commit 哈希（导出名为 git.RevParse）</p>
@@ -1817,7 +1817,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">rev</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待解析的引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">repos</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">本地仓库路径</td></tr><tr><td style="text-align:left">rev</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待解析的引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1839,7 +1839,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整的 commit 哈希</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整的 commit 哈希</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="setproxy">SetProxy<a href="#setproxy" class="hash-link" aria-label="SetProxy的直接链接" title="SetProxy的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>SetProxy 是一个辅助函数，用于指定其他 Git 操作（例如Clone）的代理</p>
@@ -1871,7 +1871,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">proxies</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="auth">auth<a href="#auth" class="hash-link" aria-label="auth的直接链接" title="auth的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>auth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的认证用户名和密码</p>
@@ -1900,7 +1900,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">认证用户名</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">认证密码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">username</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">认证用户名</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">认证密码</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1917,7 +1917,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="branch-1">branch<a href="#branch-1" class="hash-link" aria-label="branch的直接链接" title="branch的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithBranch 指定其他 Git 操作（例如 Clone）时使用的分支（导出名为 git.branch）</p>
@@ -1949,7 +1949,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">branch</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">分支名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">branch</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">分支名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1966,7 +1966,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkoutcreate">checkoutCreate<a href="#checkoutcreate" class="hash-link" aria-label="checkoutCreate的直接链接" title="checkoutCreate的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否创建新分支</p>
@@ -1990,7 +1990,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否创建新分支</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否创建新分支</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2007,7 +2007,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkoutforce">checkoutForce<a href="#checkoutforce" class="hash-link" aria-label="checkoutForce的直接链接" title="checkoutForce的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>fetchAllTags 是一个选项函数，用于指定检出(checkout)操作时是否强制</p>
@@ -2031,7 +2031,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否强制覆盖</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否强制覆盖</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2048,7 +2048,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkoutkeep">checkoutKeep<a href="#checkoutkeep" class="hash-link" aria-label="checkoutKeep的直接链接" title="checkoutKeep的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>checkoutKeep 是一个选项函数，用于指定检出(checkout)操作时，本地更改（索引或工作树更改）是否被保留，如果保留，就可以将它们提交到目标分支，默认为false</p>
@@ -2072,7 +2072,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否保留本地更改</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">检出时是否保留本地更改</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2089,7 +2089,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="context的直接链接" title="context的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>context 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的上下文</p>
@@ -2113,7 +2113,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制操作的取消</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制操作的取消</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2130,7 +2130,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="depth">depth<a href="#depth" class="hash-link" aria-label="depth的直接链接" title="depth的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>depth 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的最大深度，默认为1</p>
@@ -2154,7 +2154,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">克隆/拉取的最大深度</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">depth</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">克隆/拉取的最大深度</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2171,7 +2171,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fetchalltags">fetchAllTags<a href="#fetchalltags" class="hash-link" aria-label="fetchAllTags的直接链接" title="fetchAllTags的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>fetchAllTags 是一个选项函数，用于指定获取(fetch)操作时是否拉取所有标签</p>
@@ -2195,7 +2195,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否拉取所有标签</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否拉取所有标签</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2212,7 +2212,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filtercommit">filterCommit<a href="#filtercommit" class="hash-link" aria-label="filterCommit的直接链接" title="filterCommit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>filterCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到提交记录时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个提交记录</p>
@@ -2236,7 +2236,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *object.Commit) bool</code></td><td style="text-align:left">过滤提交记录的回调函数，返回 true 表示保留</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *object.Commit) bool</code></td><td style="text-align:left">过滤提交记录的回调函数，返回 true 表示保留</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2253,7 +2253,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="filterreference">filterReference<a href="#filterreference" class="hash-link" aria-label="filterReference的直接链接" title="filterReference的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>filterReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到引用时，就会调用这个回调函数，这个函数还有一个返回值，通过这个返回值来决定是否过滤掉这个引用</p>
@@ -2277,7 +2277,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *plumbing.Reference) bool</code></td><td style="text-align:left">过滤引用的回调函数，返回 true 表示保留</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *plumbing.Reference) bool</code></td><td style="text-align:left">过滤引用的回调函数，返回 true 表示保留</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2294,7 +2294,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="force">force<a href="#force" class="hash-link" aria-label="force的直接链接" title="force的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>force 是一个选项函数，用于指定其他 Git 操作（例如Pull）时是否强制执行，默认为false</p>
@@ -2318,7 +2318,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否强制执行</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否强制执行</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2335,7 +2335,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="handlecommit">handleCommit<a href="#handlecommit" class="hash-link" aria-label="handleCommit的直接链接" title="handleCommit的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>handleCommit 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为提交记录结构体(commit)，每次遍历到一个过滤后的提交记录时，就会调用这个回调函数</p>
@@ -2359,7 +2359,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *object.Commit) error</code></td><td style="text-align:left">处理每个提交记录的回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *object.Commit) error</code></td><td style="text-align:left">处理每个提交记录的回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2376,7 +2376,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="handlereference">handleReference<a href="#handlereference" class="hash-link" aria-label="handleReference的直接链接" title="handleReference的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>handleReference 是一个选项函数，它接收一个回调函数，这个函数有一个参数，其为引用记录结构体(reference)，每次遍历到过滤后的引用时，就会调用这个回调函数</p>
@@ -2400,7 +2400,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *plumbing.Reference) error</code></td><td style="text-align:left">处理每个引用的回调函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(r *plumbing.Reference) error</code></td><td style="text-align:left">处理每个引用的回调函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2417,7 +2417,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="httpopts">httpOpts<a href="#httpopts" class="hash-link" aria-label="httpOpts的直接链接" title="httpOpts的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>httpOpts 是一个GitHack选项函数，用于指定GitHack的HTTP选项，其接收零个到多个poc的请求选项函数</p>
@@ -2441,7 +2441,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...poc.PocConfigOption</code></td><td style="text-align:left">零个到多个 poc 请求选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...poc.PocConfigOption</code></td><td style="text-align:left">零个到多个 poc 请求选项函数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2458,7 +2458,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="nofetchtags">noFetchTags<a href="#nofetchtags" class="hash-link" aria-label="noFetchTags的直接链接" title="noFetchTags的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>noFetchTags 是一个选项函数，用于指定获取(fetch)操作时是否不拉取标签</p>
@@ -2482,7 +2482,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否不拉取标签</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否不拉取标签</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2499,7 +2499,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="recursive">recursive<a href="#recursive" class="hash-link" aria-label="recursive的直接链接" title="recursive的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-41">详细描述<a href="#详细描述-41" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>recursive 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的是否递归克隆子模块，默认为false</p>
@@ -2523,7 +2523,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否递归克隆子模块</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否递归克隆子模块</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2540,7 +2540,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="remote">remote<a href="#remote" class="hash-link" aria-label="remote的直接链接" title="remote的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-42">详细描述<a href="#详细描述-42" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>remote 是一个选项函数，用于指定其他 Git 操作（例如Pull）时的远程仓库名称，默认为origin</p>
@@ -2564,7 +2564,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">remote</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">远程仓库名称</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">remote</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">远程仓库名称</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-41">返回值<a href="#返回值-41" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2581,7 +2581,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="threads">threads<a href="#threads" class="hash-link" aria-label="threads的直接链接" title="threads的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-43">详细描述<a href="#详细描述-43" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>threads 是一个GitHack选项函数，用于指定并发数，默认为8</p>
@@ -2605,7 +2605,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">threads</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">threads</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">并发数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2622,7 +2622,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="uselocalgitbinary">useLocalGitBinary<a href="#uselocalgitbinary" class="hash-link" aria-label="useLocalGitBinary的直接链接" title="useLocalGitBinary的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-44">详细描述<a href="#详细描述-44" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>useLocalGitBinary 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行<code>git fsck</code>命令，这个命令用于尽可能恢复完整的git仓库，默认为true</p>
@@ -2646,7 +2646,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用本地 git 二进制执行 git fsck 以尽量恢复完整仓库</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否使用本地 git 二进制执行 git fsck 以尽量恢复完整仓库</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2663,7 +2663,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="verify">verify<a href="#verify" class="hash-link" aria-label="verify的直接链接" title="verify的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-45">详细描述<a href="#详细描述-45" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>verify 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书</p>
@@ -2687,7 +2687,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否验证 TLS 证书</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否验证 TLS 证书</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-44">返回值<a href="#返回值-44" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2704,7 +2704,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="withinsecureignorehostkey">withInsecureIgnoreHostKey<a href="#withinsecureignorehostkey" class="hash-link" aria-label="withInsecureIgnoreHostKey的直接链接" title="withInsecureIgnoreHostKey的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-46">详细描述<a href="#详细描述-46" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithInsecureIgnoreHostKey 跳过 SSH 主机密钥验证</p>
@@ -2730,7 +2730,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="withprivatekey">withPrivateKey<a href="#withprivatekey" class="hash-link" aria-label="withPrivateKey的直接链接" title="withPrivateKey的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-47">详细描述<a href="#详细描述-47" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPrivateKey 使用 SSH 私钥文件进行认证（导出名为 git.withPrivateKey）</p>
@@ -2780,7 +2780,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">userName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SSH 用户名（通常为 git）</td></tr><tr><td style="text-align:left">keyPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥文件路径</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥口令，无口令时传空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">userName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SSH 用户名（通常为 git）</td></tr><tr><td style="text-align:left">keyPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥文件路径</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥口令，无口令时传空字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-46">返回值<a href="#返回值-46" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2797,7 +2797,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="withprivatekeycontent">withPrivateKeyContent<a href="#withprivatekeycontent" class="hash-link" aria-label="withPrivateKeyContent的直接链接" title="withPrivateKeyContent的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-48">详细描述<a href="#详细描述-48" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>WithPrivateKeyContent 使用私钥内容进行认证</p>
@@ -2831,7 +2831,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">userName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SSH 用户名（通常为 git）</td></tr><tr><td style="text-align:left">keyContent</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">PEM 格式的私钥内容</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥口令，无口令时传空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">userName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SSH 用户名（通常为 git）</td></tr><tr><td style="text-align:left">keyContent</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">PEM 格式的私钥内容</td></tr><tr><td style="text-align:left">password</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">私钥口令，无口令时传空字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-47">返回值<a href="#返回值-47" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -2848,6 +2848,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/git.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/fuzzx"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">fuzzx</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/gzip"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">gzip</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#blame" class="table-of-contents__link toc-highlight">Blame</a></li><li><a href="#blamecommit" class="table-of-contents__link toc-highlight">BlameCommit</a></li><li><a href="#branch" class="table-of-contents__link toc-highlight">Branch</a></li><li><a href="#checkout" class="table-of-contents__link toc-highlight">Checkout</a></li><li><a href="#clone" class="table-of-contents__link toc-highlight">Clone</a></li><li><a href="#fetch" class="table-of-contents__link toc-highlight">Fetch</a></li><li><a href="#filesystemcurrentday" class="table-of-contents__link toc-highlight">FileSystemCurrentDay</a></li><li><a href="#filesystemcurrentmonth" class="table-of-contents__link toc-highlight">FileSystemCurrentMonth</a></li><li><a href="#filesystemcurrentweek" class="table-of-contents__link toc-highlight">FileSystemCurrentWeek</a></li><li><a href="#filesystemfromcommit" class="table-of-contents__link toc-highlight">FileSystemFromCommit</a></li><li><a href="#filesystemfromcommitdaterange" class="table-of-contents__link toc-highlight">FileSystemFromCommitDateRange</a></li><li><a href="#filesystemfromcommitrange" class="table-of-contents__link toc-highlight">FileSystemFromCommitRange</a></li><li><a href="#filesystemfromcommits" class="table-of-contents__link toc-highlight">FileSystemFromCommits</a></li><li><a href="#filesystemfromdate" class="table-of-contents__link toc-highlight">FileSystemFromDate</a></li><li><a href="#filesystemfrommonth" class="table-of-contents__link toc-highlight">FileSystemFromMonth</a></li><li><a href="#filesystemlastsevenday" class="table-of-contents__link toc-highlight">FileSystemLastSevenDay</a></li><li><a href="#githack" class="table-of-contents__link toc-highlight">GitHack</a></li><li><a href="#glance" class="table-of-contents__link toc-highlight">Glance</a></li><li><a href="#headbranch" class="table-of-contents__link toc-highlight">HeadBranch</a></li><li><a href="#headbranchrange" class="table-of-contents__link toc-highlight">HeadBranchRange</a></li><li><a href="#headhash" class="table-of-contents__link toc-highlight">HeadHash</a></li><li><a href="#iteratecommit" class="table-of-contents__link toc-highlight">IterateCommit</a></li><li><a href="#parenthash" class="table-of-contents__link toc-highlight">ParentHash</a></li><li><a href="#pull" class="table-of-contents__link toc-highlight">Pull</a></li><li><a href="#revparse" class="table-of-contents__link toc-highlight">RevParse</a></li><li><a href="#setproxy" class="table-of-contents__link toc-highlight">SetProxy</a></li><li><a href="#auth" class="table-of-contents__link toc-highlight">auth</a></li><li><a href="#branch-1" class="table-of-contents__link toc-highlight">branch</a></li><li><a href="#checkoutcreate" class="table-of-contents__link toc-highlight">checkoutCreate</a></li><li><a href="#checkoutforce" class="table-of-contents__link toc-highlight">checkoutForce</a></li><li><a href="#checkoutkeep" class="table-of-contents__link toc-highlight">checkoutKeep</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#depth" class="table-of-contents__link toc-highlight">depth</a></li><li><a href="#fetchalltags" class="table-of-contents__link toc-highlight">fetchAllTags</a></li><li><a href="#filtercommit" class="table-of-contents__link toc-highlight">filterCommit</a></li><li><a href="#filterreference" class="table-of-contents__link toc-highlight">filterReference</a></li><li><a href="#force" class="table-of-contents__link toc-highlight">force</a></li><li><a href="#handlecommit" class="table-of-contents__link toc-highlight">handleCommit</a></li><li><a href="#handlereference" class="table-of-contents__link toc-highlight">handleReference</a></li><li><a href="#httpopts" class="table-of-contents__link toc-highlight">httpOpts</a></li><li><a href="#nofetchtags" class="table-of-contents__link toc-highlight">noFetchTags</a></li><li><a href="#recursive" class="table-of-contents__link toc-highlight">recursive</a></li><li><a href="#remote" class="table-of-contents__link toc-highlight">remote</a></li><li><a href="#threads" class="table-of-contents__link toc-highlight">threads</a></li><li><a href="#uselocalgitbinary" class="table-of-contents__link toc-highlight">useLocalGitBinary</a></li><li><a href="#verify" class="table-of-contents__link toc-highlight">verify</a></li><li><a href="#withinsecureignorehostkey" class="table-of-contents__link toc-highlight">withInsecureIgnoreHostKey</a></li><li><a href="#withprivatekey" class="table-of-contents__link toc-highlight">withPrivateKey</a></li><li><a href="#withprivatekeycontent" class="table-of-contents__link toc-highlight">withPrivateKeyContent</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">选项函数</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/git.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/fuzzx"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">fuzzx</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/gzip"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">gzip</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#blame" class="table-of-contents__link toc-highlight">Blame</a></li><li><a href="#blamecommit" class="table-of-contents__link toc-highlight">BlameCommit</a></li><li><a href="#branch" class="table-of-contents__link toc-highlight">Branch</a></li><li><a href="#checkout" class="table-of-contents__link toc-highlight">Checkout</a></li><li><a href="#clone" class="table-of-contents__link toc-highlight">Clone</a></li><li><a href="#fetch" class="table-of-contents__link toc-highlight">Fetch</a></li><li><a href="#filesystemcurrentday" class="table-of-contents__link toc-highlight">FileSystemCurrentDay</a></li><li><a href="#filesystemcurrentmonth" class="table-of-contents__link toc-highlight">FileSystemCurrentMonth</a></li><li><a href="#filesystemcurrentweek" class="table-of-contents__link toc-highlight">FileSystemCurrentWeek</a></li><li><a href="#filesystemfromcommit" class="table-of-contents__link toc-highlight">FileSystemFromCommit</a></li><li><a href="#filesystemfromcommitdaterange" class="table-of-contents__link toc-highlight">FileSystemFromCommitDateRange</a></li><li><a href="#filesystemfromcommitrange" class="table-of-contents__link toc-highlight">FileSystemFromCommitRange</a></li><li><a href="#filesystemfromcommits" class="table-of-contents__link toc-highlight">FileSystemFromCommits</a></li><li><a href="#filesystemfromdate" class="table-of-contents__link toc-highlight">FileSystemFromDate</a></li><li><a href="#filesystemfrommonth" class="table-of-contents__link toc-highlight">FileSystemFromMonth</a></li><li><a href="#filesystemlastsevenday" class="table-of-contents__link toc-highlight">FileSystemLastSevenDay</a></li><li><a href="#githack" class="table-of-contents__link toc-highlight">GitHack</a></li><li><a href="#glance" class="table-of-contents__link toc-highlight">Glance</a></li><li><a href="#headbranch" class="table-of-contents__link toc-highlight">HeadBranch</a></li><li><a href="#headbranchrange" class="table-of-contents__link toc-highlight">HeadBranchRange</a></li><li><a href="#headhash" class="table-of-contents__link toc-highlight">HeadHash</a></li><li><a href="#iteratecommit" class="table-of-contents__link toc-highlight">IterateCommit</a></li><li><a href="#parenthash" class="table-of-contents__link toc-highlight">ParentHash</a></li><li><a href="#pull" class="table-of-contents__link toc-highlight">Pull</a></li><li><a href="#revparse" class="table-of-contents__link toc-highlight">RevParse</a></li><li><a href="#setproxy" class="table-of-contents__link toc-highlight">SetProxy</a></li><li><a href="#auth" class="table-of-contents__link toc-highlight">auth</a></li><li><a href="#branch-1" class="table-of-contents__link toc-highlight">branch</a></li><li><a href="#checkoutcreate" class="table-of-contents__link toc-highlight">checkoutCreate</a></li><li><a href="#checkoutforce" class="table-of-contents__link toc-highlight">checkoutForce</a></li><li><a href="#checkoutkeep" class="table-of-contents__link toc-highlight">checkoutKeep</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#depth" class="table-of-contents__link toc-highlight">depth</a></li><li><a href="#fetchalltags" class="table-of-contents__link toc-highlight">fetchAllTags</a></li><li><a href="#filtercommit" class="table-of-contents__link toc-highlight">filterCommit</a></li><li><a href="#filterreference" class="table-of-contents__link toc-highlight">filterReference</a></li><li><a href="#force" class="table-of-contents__link toc-highlight">force</a></li><li><a href="#handlecommit" class="table-of-contents__link toc-highlight">handleCommit</a></li><li><a href="#handlereference" class="table-of-contents__link toc-highlight">handleReference</a></li><li><a href="#httpopts" class="table-of-contents__link toc-highlight">httpOpts</a></li><li><a href="#nofetchtags" class="table-of-contents__link toc-highlight">noFetchTags</a></li><li><a href="#recursive" class="table-of-contents__link toc-highlight">recursive</a></li><li><a href="#remote" class="table-of-contents__link toc-highlight">remote</a></li><li><a href="#threads" class="table-of-contents__link toc-highlight">threads</a></li><li><a href="#uselocalgitbinary" class="table-of-contents__link toc-highlight">useLocalGitBinary</a></li><li><a href="#verify" class="table-of-contents__link toc-highlight">verify</a></li><li><a href="#withinsecureignorehostkey" class="table-of-contents__link toc-highlight">withInsecureIgnoreHostKey</a></li><li><a href="#withprivatekey" class="table-of-contents__link toc-highlight">withPrivateKey</a></li><li><a href="#withprivatekeycontent" class="table-of-contents__link toc-highlight">withPrivateKeyContent</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

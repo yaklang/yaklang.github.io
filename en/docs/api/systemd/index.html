@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">systemd | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/systemd"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="systemd | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/systemd"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/systemd" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/systemd" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/systemd" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"systemd","item":"https://yaklang.com/en/docs/api/systemd"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -182,7 +182,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#create" class="">systemd.Create</a></td><td style="text-align:left">Create 根据给定的服务名与选项生成 systemd 单元文件 返回单元文件名与文件内容；未配置 timer 相关选项时文件名为 name.service，配置后为 name.timer 参数: - name: 服务名称（用于单元文件名与标识） - opt: 可选项，如 systemd.unit...</td></tr><tr><td style="text-align:left"><a href="#extra_raw" class="">systemd.extra_raw</a></td><td style="text-align:left">extra_raw 设置整体追加到单元文件末尾的原始内容 参数: - i: 追加的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#install_wanted_by" class="">systemd.install_wanted_by</a></td><td style="text-align:left">install_wanted_by 设置 [Install] 段的 WantedBy，决定 enable 时挂载到哪个 target 参数: - wantedBy: 目标 target（如 multi-user.target） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_environment" class="">systemd.service_environment</a></td><td style="text-align:left">service_environment 设置 [Service] 段的 Environment，注入环境变量 参数: - environment: 环境变量声明（如 &quot;KEY=VALUE&quot;） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_environment_file" class="">systemd.service_environment_file</a></td><td style="text-align:left">service_environment_file 设置 [Service] 段的 EnvironmentFile，从文件加载环境变量 参数: - environmentFile: 环境变量文件路径 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start" class="">systemd.service_exec_start</a></td><td style="text-align:left">service_exec_start 设置 [Service] 段的 ExecStart，即服务启动命令 参数: - execStart: 启动命令（建议使用绝对路径） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start_post" class="">systemd.service_exec_start_post</a></td><td style="text-align:left">service_exec_start_post 设置 [Service] 段的 ExecStartPost，启动后执行的命令 参数: - execStartPost: 启动后命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start_pre" class="">systemd.service_exec_start_pre</a></td><td style="text-align:left">service_exec_start_pre 设置 [Service] 段的 ExecStartPre，启动前执行的命令 参数: - execStartPre: 启动前命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_stop" class="">systemd.service_exec_stop</a></td><td style="text-align:left">service_exec_stop 设置 [Service] 段的 ExecStop，即服务停止命令 参数: - execStop: 停止命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_stop_post" class="">systemd.service_exec_stop_post</a></td><td style="text-align:left">service_exec_stop_post 设置 [Service] 段的 ExecStopPost，停止后执行的命令 参数: - execStopPost: 停止后命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_group" class="">systemd.service_group</a></td><td style="text-align:left">service_group 设置 [Service] 段的 Group，指定运行服务的用户组 参数: - group: 运行用户组名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_kill9" class="">systemd.service_kill9</a></td><td style="text-align:left">service_kill9 设置 [Service] 段的 KillSignal 为 SIGKILL（强制杀死） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_kill_mode" class="">systemd.service_kill_mode</a></td><td style="text-align:left">service_kill_mode 设置 [Service] 段的 KillMode 仅接受 control-group/process/mixed/none 参数: - killMode: 进程终止模式，非法值会回退为默认 control-group 返回值: - 可传入 systemd.Crea...</td></tr><tr><td style="text-align:left"><a href="#service_kill_signal" class="">systemd.service_kill_signal</a></td><td style="text-align:left">service_kill_signal 设置 [Service] 段的 KillSignal，指定停止服务时发送的信号 参数: - killSignal: 信号名（如 SIGTERM、SIGINT） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_raw" class="">systemd.service_raw</a></td><td style="text-align:left">service_raw 向 [Service] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Service] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_restart" class="">systemd.service_restart</a></td><td style="text-align:left">service_restart 设置 [Service] 段的 Restart 策略 仅接受 no/on-success/on-failure/on-abnormal/on-watchdog/on-abort/always 参数: - restart: 重启策略，非法值会回退为默认 no 返回值: ...</td></tr><tr><td style="text-align:left"><a href="#service_restart_sec" class="">systemd.service_restart_sec</a></td><td style="text-align:left">service_restart_sec 设置 [Service] 段的 RestartSec，重启前等待的秒数 参数: - restartSec: 重启等待时间，单位为秒 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_stderr" class="">systemd.service_stderr</a></td><td style="text-align:left">service_stderr 设置 [Service] 段的 StandardError 仅接受 inherit/null/tty/journal/syslog/kmsg/journal+console/syslog+console/kmsg+console/socket/fd/file 参数: -...</td></tr><tr><td style="text-align:left"><a href="#service_stdin" class="">systemd.service_stdin</a></td><td style="text-align:left">service_stdin 设置 [Service] 段的 StandardInput 仅接受 null/tty/tty-force/tty-fail/socket/fd/fd-force/fd-fail/file/file-force/file-fail 参数: - standardInput: ...</td></tr><tr><td style="text-align:left"><a href="#service_stdout" class="">systemd.service_stdout</a></td><td style="text-align:left">service_stdout 设置 [Service] 段的 StandardOutput 仅接受 inherit/null/tty/journal/syslog/kmsg/journal+console/syslog+console/kmsg+console/socket/fd/file 参数: ...</td></tr><tr><td style="text-align:left"><a href="#service_timeout_start_sec" class="">systemd.service_timeout_start_sec</a></td><td style="text-align:left">service_timeout_start_sec 设置 [Service] 段的 TimeoutStartSec，启动超时秒数 参数: - timeoutStartSec: 启动超时时间，单位为秒 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_type" class="">systemd.service_type</a></td><td style="text-align:left">service_type 设置 [Service] 段的 Type，仅接受 simple/forking/oneshot/dbus/notify/idle 参数: - serviceType: 服务类型，非法值会回退为默认 simple 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_umask" class="">systemd.service_umask</a></td><td style="text-align:left">service_umask 设置 [Service] 段的 UMask，设置进程文件创建掩码 参数: - umask: 文件掩码（如 &quot;0022&quot;） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_user" class="">systemd.service_user</a></td><td style="text-align:left">service_user 设置 [Service] 段的 User，指定运行服务的用户 参数: - user: 运行用户名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_active_sec" class="">systemd.timer_active_sec</a></td><td style="text-align:left">timer_active_sec 设置 [Timer] 段的 OnActiveSec，相对定时器激活时刻触发 参数: - onActiveSec: 相对激活时刻的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_boot_sec" class="">systemd.timer_boot_sec</a></td><td style="text-align:left">timer_boot_sec 设置 [Timer] 段的 OnBootSec，相对系统启动时刻触发 参数: - onBootSec: 相对系统启动的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_calendar" class="">systemd.timer_calendar</a></td><td style="text-align:left">timer_calendar 设置 [Timer] 段的 OnCalendar，使用日历表达式定时触发 参数: - onCalendar: 日历表达式（如 &quot;<em>-</em>-* 02:00:00&quot;） 返回值: - 可传入 systemd.Create 的配置选项；配置该项后 systemd.Create 会...</td></tr><tr><td style="text-align:left"><a href="#timer_raw" class="">systemd.timer_raw</a></td><td style="text-align:left">timer_raw 向 [Timer] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Timer] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_startup_sec" class="">systemd.timer_startup_sec</a></td><td style="text-align:left">timer_startup_sec 设置 [Timer] 段的 OnStartupSec，相对 systemd 启动时刻触发 参数: - onStartupSec: 相对 systemd 启动的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit" class="">systemd.timer_unit</a></td><td style="text-align:left">timer_unit 设置 [Timer] 段的 Unit，指定定时器触发时激活的单元 参数: - unit: 被触发的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit_active_sec" class="">systemd.timer_unit_active_sec</a></td><td style="text-align:left">timer_unit_active_sec 设置 [Timer] 段的 OnUnitActiveSec，相对单元上次激活时刻触发 参数: - onUnitActiveSec: 相对单元上次激活的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit_inactive_sec" class="">systemd.timer_unit_inactive_sec</a></td><td style="text-align:left">timer_unit_inactive_sec 设置 [Timer] 段的 OnUnitInactiveSec，相对单元上次停用时刻触发 参数: - s: 相对单元上次停用的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_after" class="">systemd.unit_after</a></td><td style="text-align:left">unit_after 设置 [Unit] 段的 After，声明本服务应在指定单元之后启动 参数: - after: 依赖的单元名（如 network.target） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_before" class="">systemd.unit_before</a></td><td style="text-align:left">unit_before 设置 [Unit] 段的 Before，声明本服务应在指定单元之前启动 参数: - before: 在其之前启动的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_binds_to" class="">systemd.unit_binds_to</a></td><td style="text-align:left">unit_binds_to 设置 [Unit] 段的 BindsTo，声明强绑定单元（绑定单元停止则本服务也停止） 参数: - bindsTo: 绑定的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_description" class="">systemd.unit_description</a></td><td style="text-align:left">unit_description 设置 [Unit] 段的 Description，用于描述该服务用途 参数: - description: 服务描述文本 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_documentation" class="">systemd.unit_documentation</a></td><td style="text-align:left">unit_documentation 设置 [Unit] 段的 Documentation，指向服务文档链接 参数: - documentation: 文档地址（如 man 手册或 URL） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_extra_line" class="">systemd.unit_extra_line</a></td><td style="text-align:left">unit_extra_line 向 [Unit] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Unit] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_requires" class="">systemd.unit_requires</a></td><td style="text-align:left">unit_requires 设置 [Unit] 段的 Requires，声明强依赖单元（依赖失败则本服务也失败） 参数: - requires: 强依赖的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_wants" class="">systemd.unit_wants</a></td><td style="text-align:left">unit_wants 设置 [Unit] 段的 Wants，声明弱依赖单元（依赖失败不影响本服务启动） 参数: - wants: 弱依赖的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#create" class="">systemd.Create</a></td><td style="text-align:left">Create 根据给定的服务名与选项生成 systemd 单元文件 返回单元文件名与文件内容；未配置 timer 相关选项时文件名为 name.service，配置后为 name.timer 参数: - name: 服务名称（用于单元文件名与标识） - opt: 可选项，如 systemd.unit...</td></tr><tr><td style="text-align:left"><a href="#extra_raw" class="">systemd.extra_raw</a></td><td style="text-align:left">extra_raw 设置整体追加到单元文件末尾的原始内容 参数: - i: 追加的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#install_wanted_by" class="">systemd.install_wanted_by</a></td><td style="text-align:left">install_wanted_by 设置 [Install] 段的 WantedBy，决定 enable 时挂载到哪个 target 参数: - wantedBy: 目标 target（如 multi-user.target） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_environment" class="">systemd.service_environment</a></td><td style="text-align:left">service_environment 设置 [Service] 段的 Environment，注入环境变量 参数: - environment: 环境变量声明（如 &quot;KEY=VALUE&quot;） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_environment_file" class="">systemd.service_environment_file</a></td><td style="text-align:left">service_environment_file 设置 [Service] 段的 EnvironmentFile，从文件加载环境变量 参数: - environmentFile: 环境变量文件路径 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start" class="">systemd.service_exec_start</a></td><td style="text-align:left">service_exec_start 设置 [Service] 段的 ExecStart，即服务启动命令 参数: - execStart: 启动命令（建议使用绝对路径） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start_post" class="">systemd.service_exec_start_post</a></td><td style="text-align:left">service_exec_start_post 设置 [Service] 段的 ExecStartPost，启动后执行的命令 参数: - execStartPost: 启动后命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_start_pre" class="">systemd.service_exec_start_pre</a></td><td style="text-align:left">service_exec_start_pre 设置 [Service] 段的 ExecStartPre，启动前执行的命令 参数: - execStartPre: 启动前命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_stop" class="">systemd.service_exec_stop</a></td><td style="text-align:left">service_exec_stop 设置 [Service] 段的 ExecStop，即服务停止命令 参数: - execStop: 停止命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_exec_stop_post" class="">systemd.service_exec_stop_post</a></td><td style="text-align:left">service_exec_stop_post 设置 [Service] 段的 ExecStopPost，停止后执行的命令 参数: - execStopPost: 停止后命令 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_group" class="">systemd.service_group</a></td><td style="text-align:left">service_group 设置 [Service] 段的 Group，指定运行服务的用户组 参数: - group: 运行用户组名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_kill9" class="">systemd.service_kill9</a></td><td style="text-align:left">service_kill9 设置 [Service] 段的 KillSignal 为 SIGKILL（强制杀死） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_kill_mode" class="">systemd.service_kill_mode</a></td><td style="text-align:left">service_kill_mode 设置 [Service] 段的 KillMode 仅接受 control-group/process/mixed/none 参数: - killMode: 进程终止模式，非法值会回退为默认 control-group 返回值: - 可传入 systemd.Crea...</td></tr><tr><td style="text-align:left"><a href="#service_kill_signal" class="">systemd.service_kill_signal</a></td><td style="text-align:left">service_kill_signal 设置 [Service] 段的 KillSignal，指定停止服务时发送的信号 参数: - killSignal: 信号名（如 SIGTERM、SIGINT） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_raw" class="">systemd.service_raw</a></td><td style="text-align:left">service_raw 向 [Service] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Service] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_restart" class="">systemd.service_restart</a></td><td style="text-align:left">service_restart 设置 [Service] 段的 Restart 策略 仅接受 no/on-success/on-failure/on-abnormal/on-watchdog/on-abort/always 参数: - restart: 重启策略，非法值会回退为默认 no 返回值: ...</td></tr><tr><td style="text-align:left"><a href="#service_restart_sec" class="">systemd.service_restart_sec</a></td><td style="text-align:left">service_restart_sec 设置 [Service] 段的 RestartSec，重启前等待的秒数 参数: - restartSec: 重启等待时间，单位为秒 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_stderr" class="">systemd.service_stderr</a></td><td style="text-align:left">service_stderr 设置 [Service] 段的 StandardError 仅接受 inherit/null/tty/journal/syslog/kmsg/journal+console/syslog+console/kmsg+console/socket/fd/file 参数: -...</td></tr><tr><td style="text-align:left"><a href="#service_stdin" class="">systemd.service_stdin</a></td><td style="text-align:left">service_stdin 设置 [Service] 段的 StandardInput 仅接受 null/tty/tty-force/tty-fail/socket/fd/fd-force/fd-fail/file/file-force/file-fail 参数: - standardInput: ...</td></tr><tr><td style="text-align:left"><a href="#service_stdout" class="">systemd.service_stdout</a></td><td style="text-align:left">service_stdout 设置 [Service] 段的 StandardOutput 仅接受 inherit/null/tty/journal/syslog/kmsg/journal+console/syslog+console/kmsg+console/socket/fd/file 参数: ...</td></tr><tr><td style="text-align:left"><a href="#service_timeout_start_sec" class="">systemd.service_timeout_start_sec</a></td><td style="text-align:left">service_timeout_start_sec 设置 [Service] 段的 TimeoutStartSec，启动超时秒数 参数: - timeoutStartSec: 启动超时时间，单位为秒 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_type" class="">systemd.service_type</a></td><td style="text-align:left">service_type 设置 [Service] 段的 Type，仅接受 simple/forking/oneshot/dbus/notify/idle 参数: - serviceType: 服务类型，非法值会回退为默认 simple 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_umask" class="">systemd.service_umask</a></td><td style="text-align:left">service_umask 设置 [Service] 段的 UMask，设置进程文件创建掩码 参数: - umask: 文件掩码（如 &quot;0022&quot;） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#service_user" class="">systemd.service_user</a></td><td style="text-align:left">service_user 设置 [Service] 段的 User，指定运行服务的用户 参数: - user: 运行用户名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_active_sec" class="">systemd.timer_active_sec</a></td><td style="text-align:left">timer_active_sec 设置 [Timer] 段的 OnActiveSec，相对定时器激活时刻触发 参数: - onActiveSec: 相对激活时刻的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_boot_sec" class="">systemd.timer_boot_sec</a></td><td style="text-align:left">timer_boot_sec 设置 [Timer] 段的 OnBootSec，相对系统启动时刻触发 参数: - onBootSec: 相对系统启动的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_calendar" class="">systemd.timer_calendar</a></td><td style="text-align:left">timer_calendar 设置 [Timer] 段的 OnCalendar，使用日历表达式定时触发 参数: - onCalendar: 日历表达式（如 &quot;<em>-</em>-* 02:00:00&quot;） 返回值: - 可传入 systemd.Create 的配置选项；配置该项后 systemd.Create 会...</td></tr><tr><td style="text-align:left"><a href="#timer_raw" class="">systemd.timer_raw</a></td><td style="text-align:left">timer_raw 向 [Timer] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Timer] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_startup_sec" class="">systemd.timer_startup_sec</a></td><td style="text-align:left">timer_startup_sec 设置 [Timer] 段的 OnStartupSec，相对 systemd 启动时刻触发 参数: - onStartupSec: 相对 systemd 启动的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit" class="">systemd.timer_unit</a></td><td style="text-align:left">timer_unit 设置 [Timer] 段的 Unit，指定定时器触发时激活的单元 参数: - unit: 被触发的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit_active_sec" class="">systemd.timer_unit_active_sec</a></td><td style="text-align:left">timer_unit_active_sec 设置 [Timer] 段的 OnUnitActiveSec，相对单元上次激活时刻触发 参数: - onUnitActiveSec: 相对单元上次激活的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#timer_unit_inactive_sec" class="">systemd.timer_unit_inactive_sec</a></td><td style="text-align:left">timer_unit_inactive_sec 设置 [Timer] 段的 OnUnitInactiveSec，相对单元上次停用时刻触发 参数: - s: 相对单元上次停用的秒数 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_after" class="">systemd.unit_after</a></td><td style="text-align:left">unit_after 设置 [Unit] 段的 After，声明本服务应在指定单元之后启动 参数: - after: 依赖的单元名（如 network.target） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_before" class="">systemd.unit_before</a></td><td style="text-align:left">unit_before 设置 [Unit] 段的 Before，声明本服务应在指定单元之前启动 参数: - before: 在其之前启动的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_binds_to" class="">systemd.unit_binds_to</a></td><td style="text-align:left">unit_binds_to 设置 [Unit] 段的 BindsTo，声明强绑定单元（绑定单元停止则本服务也停止） 参数: - bindsTo: 绑定的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_description" class="">systemd.unit_description</a></td><td style="text-align:left">unit_description 设置 [Unit] 段的 Description，用于描述该服务用途 参数: - description: 服务描述文本 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_documentation" class="">systemd.unit_documentation</a></td><td style="text-align:left">unit_documentation 设置 [Unit] 段的 Documentation，指向服务文档链接 参数: - documentation: 文档地址（如 man 手册或 URL） 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_extra_line" class="">systemd.unit_extra_line</a></td><td style="text-align:left">unit_extra_line 向 [Unit] 段追加自定义原始行（多行可用换行分隔） 参数: - extraLine: 追加到 [Unit] 段的原始内容 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_requires" class="">systemd.unit_requires</a></td><td style="text-align:left">unit_requires 设置 [Unit] 段的 Requires，声明强依赖单元（依赖失败则本服务也失败） 参数: - requires: 强依赖的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr><tr><td style="text-align:left"><a href="#unit_wants" class="">systemd.unit_wants</a></td><td style="text-align:left">unit_wants 设置 [Unit] 段的 Wants，声明弱依赖单元（依赖失败不影响本服务启动） 参数: - wants: 弱依赖的单元名 返回值: - 可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="create">Create<a href="#create" class="hash-link" aria-label="Direct link to Create" title="Direct link to Create" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -231,7 +231,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务名称（用于单元文件名与标识）</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOption</code></td><td style="text-align:left">可选项，如 systemd.unit_description / systemd.service_exec_start / systemd.install_wanted_by 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务名称（用于单元文件名与标识）</td></tr><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...ConfigOption</code></td><td style="text-align:left">可选项，如 systemd.unit_description / systemd.service_exec_start / systemd.install_wanted_by 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -253,7 +253,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">单元文件名（如 myapp.service 或 myapp.timer）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">单元文件内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">单元文件名（如 myapp.service 或 myapp.timer）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">单元文件内容</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extra_raw">extra_raw<a href="#extra_raw" class="hash-link" aria-label="Direct link to extra_raw" title="Direct link to extra_raw" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>extra_raw 设置整体追加到单元文件末尾的原始内容</p>
@@ -285,7 +285,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加的原始内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加的原始内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -302,7 +302,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="install_wanted_by">install_wanted_by<a href="#install_wanted_by" class="hash-link" aria-label="Direct link to install_wanted_by" title="Direct link to install_wanted_by" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>install_wanted_by 设置 [Install] 段的 WantedBy，决定 enable 时挂载到哪个 target</p>
@@ -334,7 +334,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">wantedBy</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 target（如 multi-user.target）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">wantedBy</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 target（如 multi-user.target）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -351,7 +351,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_environment">service_environment<a href="#service_environment" class="hash-link" aria-label="Direct link to service_environment" title="Direct link to service_environment" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_environment 设置 [Service] 段的 Environment，注入环境变量</p>
@@ -383,7 +383,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">environment</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">环境变量声明（如 &quot;KEY=VALUE&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">environment</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">环境变量声明（如 &quot;KEY=VALUE&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -400,7 +400,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_environment_file">service_environment_file<a href="#service_environment_file" class="hash-link" aria-label="Direct link to service_environment_file" title="Direct link to service_environment_file" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_environment_file 设置 [Service] 段的 EnvironmentFile，从文件加载环境变量</p>
@@ -432,7 +432,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">environmentFile</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">环境变量文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">environmentFile</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">环境变量文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -449,7 +449,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_exec_start">service_exec_start<a href="#service_exec_start" class="hash-link" aria-label="Direct link to service_exec_start" title="Direct link to service_exec_start" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_exec_start 设置 [Service] 段的 ExecStart，即服务启动命令</p>
@@ -481,7 +481,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStart</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动命令（建议使用绝对路径）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStart</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动命令（建议使用绝对路径）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -498,7 +498,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_exec_start_post">service_exec_start_post<a href="#service_exec_start_post" class="hash-link" aria-label="Direct link to service_exec_start_post" title="Direct link to service_exec_start_post" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_exec_start_post 设置 [Service] 段的 ExecStartPost，启动后执行的命令</p>
@@ -530,7 +530,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStartPost</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动后命令</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStartPost</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动后命令</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -547,7 +547,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_exec_start_pre">service_exec_start_pre<a href="#service_exec_start_pre" class="hash-link" aria-label="Direct link to service_exec_start_pre" title="Direct link to service_exec_start_pre" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_exec_start_pre 设置 [Service] 段的 ExecStartPre，启动前执行的命令</p>
@@ -579,7 +579,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStartPre</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动前命令</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStartPre</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">启动前命令</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -596,7 +596,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_exec_stop">service_exec_stop<a href="#service_exec_stop" class="hash-link" aria-label="Direct link to service_exec_stop" title="Direct link to service_exec_stop" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_exec_stop 设置 [Service] 段的 ExecStop，即服务停止命令</p>
@@ -628,7 +628,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStop</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">停止命令</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStop</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">停止命令</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -645,7 +645,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_exec_stop_post">service_exec_stop_post<a href="#service_exec_stop_post" class="hash-link" aria-label="Direct link to service_exec_stop_post" title="Direct link to service_exec_stop_post" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_exec_stop_post 设置 [Service] 段的 ExecStopPost，停止后执行的命令</p>
@@ -677,7 +677,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStopPost</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">停止后命令</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">execStopPost</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">停止后命令</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -694,7 +694,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_group">service_group<a href="#service_group" class="hash-link" aria-label="Direct link to service_group" title="Direct link to service_group" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_group 设置 [Service] 段的 Group，指定运行服务的用户组</p>
@@ -726,7 +726,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">group</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行用户组名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">group</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行用户组名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -743,7 +743,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_kill9">service_kill9<a href="#service_kill9" class="hash-link" aria-label="Direct link to service_kill9" title="Direct link to service_kill9" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_kill9 设置 [Service] 段的 KillSignal 为 SIGKILL（强制杀死）</p>
@@ -771,7 +771,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_kill_mode">service_kill_mode<a href="#service_kill_mode" class="hash-link" aria-label="Direct link to service_kill_mode" title="Direct link to service_kill_mode" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_kill_mode 设置 [Service] 段的 KillMode</p>
@@ -804,7 +804,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">killMode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">进程终止模式，非法值会回退为默认 control-group</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">killMode</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">进程终止模式，非法值会回退为默认 control-group</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -821,7 +821,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_kill_signal">service_kill_signal<a href="#service_kill_signal" class="hash-link" aria-label="Direct link to service_kill_signal" title="Direct link to service_kill_signal" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_kill_signal 设置 [Service] 段的 KillSignal，指定停止服务时发送的信号</p>
@@ -853,7 +853,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">killSignal</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">信号名（如 SIGTERM、SIGINT）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">killSignal</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">信号名（如 SIGTERM、SIGINT）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -870,7 +870,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_raw">service_raw<a href="#service_raw" class="hash-link" aria-label="Direct link to service_raw" title="Direct link to service_raw" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_raw 向 [Service] 段追加自定义原始行（多行可用换行分隔）</p>
@@ -902,7 +902,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Service] 段的原始内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Service] 段的原始内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -919,7 +919,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_restart">service_restart<a href="#service_restart" class="hash-link" aria-label="Direct link to service_restart" title="Direct link to service_restart" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_restart 设置 [Service] 段的 Restart 策略</p>
@@ -952,7 +952,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">restart</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">重启策略，非法值会回退为默认 no</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">restart</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">重启策略，非法值会回退为默认 no</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -969,7 +969,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_restart_sec">service_restart_sec<a href="#service_restart_sec" class="hash-link" aria-label="Direct link to service_restart_sec" title="Direct link to service_restart_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_restart_sec 设置 [Service] 段的 RestartSec，重启前等待的秒数</p>
@@ -1001,7 +1001,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">restartSec</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">重启等待时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">restartSec</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">重启等待时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1018,7 +1018,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_stderr">service_stderr<a href="#service_stderr" class="hash-link" aria-label="Direct link to service_stderr" title="Direct link to service_stderr" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_stderr 设置 [Service] 段的 StandardError</p>
@@ -1051,7 +1051,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardError</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准错误类型，非法值会回退为默认 inherit</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardError</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准错误类型，非法值会回退为默认 inherit</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1068,7 +1068,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_stdin">service_stdin<a href="#service_stdin" class="hash-link" aria-label="Direct link to service_stdin" title="Direct link to service_stdin" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_stdin 设置 [Service] 段的 StandardInput</p>
@@ -1101,7 +1101,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardInput</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准输入类型，非法值会回退为默认 null</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardInput</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准输入类型，非法值会回退为默认 null</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1118,7 +1118,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_stdout">service_stdout<a href="#service_stdout" class="hash-link" aria-label="Direct link to service_stdout" title="Direct link to service_stdout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_stdout 设置 [Service] 段的 StandardOutput</p>
@@ -1151,7 +1151,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardOutput</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准输出类型，非法值会回退为默认 inherit</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">standardOutput</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标准输出类型，非法值会回退为默认 inherit</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1168,7 +1168,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_timeout_start_sec">service_timeout_start_sec<a href="#service_timeout_start_sec" class="hash-link" aria-label="Direct link to service_timeout_start_sec" title="Direct link to service_timeout_start_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_timeout_start_sec 设置 [Service] 段的 TimeoutStartSec，启动超时秒数</p>
@@ -1200,7 +1200,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">timeoutStartSec</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">启动超时时间，单位为秒</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">timeoutStartSec</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">启动超时时间，单位为秒</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1217,7 +1217,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_type">service_type<a href="#service_type" class="hash-link" aria-label="Direct link to service_type" title="Direct link to service_type" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_type 设置 [Service] 段的 Type，仅接受 simple/forking/oneshot/dbus/notify/idle</p>
@@ -1249,7 +1249,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">serviceType</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务类型，非法值会回退为默认 simple</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">serviceType</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务类型，非法值会回退为默认 simple</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1266,7 +1266,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_umask">service_umask<a href="#service_umask" class="hash-link" aria-label="Direct link to service_umask" title="Direct link to service_umask" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_umask 设置 [Service] 段的 UMask，设置进程文件创建掩码</p>
@@ -1298,7 +1298,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">umask</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件掩码（如 &quot;0022&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">umask</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件掩码（如 &quot;0022&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1315,7 +1315,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="service_user">service_user<a href="#service_user" class="hash-link" aria-label="Direct link to service_user" title="Direct link to service_user" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>service_user 设置 [Service] 段的 User，指定运行服务的用户</p>
@@ -1347,7 +1347,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行用户名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">user</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行用户名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1364,7 +1364,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_active_sec">timer_active_sec<a href="#timer_active_sec" class="hash-link" aria-label="Direct link to timer_active_sec" title="Direct link to timer_active_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_active_sec 设置 [Timer] 段的 OnActiveSec，相对定时器激活时刻触发</p>
@@ -1396,7 +1396,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onActiveSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对激活时刻的秒数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onActiveSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对激活时刻的秒数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1413,7 +1413,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_boot_sec">timer_boot_sec<a href="#timer_boot_sec" class="hash-link" aria-label="Direct link to timer_boot_sec" title="Direct link to timer_boot_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_boot_sec 设置 [Timer] 段的 OnBootSec，相对系统启动时刻触发</p>
@@ -1445,7 +1445,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onBootSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对系统启动的秒数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onBootSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对系统启动的秒数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1462,7 +1462,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_calendar">timer_calendar<a href="#timer_calendar" class="hash-link" aria-label="Direct link to timer_calendar" title="Direct link to timer_calendar" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_calendar 设置 [Timer] 段的 OnCalendar，使用日历表达式定时触发</p>
@@ -1494,7 +1494,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onCalendar</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">日历表达式（如 &quot;<em>-</em>-* 02:00:00&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onCalendar</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">日历表达式（如 &quot;<em>-</em>-* 02:00:00&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1511,7 +1511,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项；配置该项后 systemd.Create 会返回非空 timer 内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项；配置该项后 systemd.Create 会返回非空 timer 内容</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_raw">timer_raw<a href="#timer_raw" class="hash-link" aria-label="Direct link to timer_raw" title="Direct link to timer_raw" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_raw 向 [Timer] 段追加自定义原始行（多行可用换行分隔）</p>
@@ -1543,7 +1543,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Timer] 段的原始内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Timer] 段的原始内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1560,7 +1560,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_startup_sec">timer_startup_sec<a href="#timer_startup_sec" class="hash-link" aria-label="Direct link to timer_startup_sec" title="Direct link to timer_startup_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_startup_sec 设置 [Timer] 段的 OnStartupSec，相对 systemd 启动时刻触发</p>
@@ -1592,7 +1592,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onStartupSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对 systemd 启动的秒数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onStartupSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对 systemd 启动的秒数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1609,7 +1609,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_unit">timer_unit<a href="#timer_unit" class="hash-link" aria-label="Direct link to timer_unit" title="Direct link to timer_unit" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_unit 设置 [Timer] 段的 Unit，指定定时器触发时激活的单元</p>
@@ -1641,7 +1641,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">unit</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">被触发的单元名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">unit</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">被触发的单元名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1658,7 +1658,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_unit_active_sec">timer_unit_active_sec<a href="#timer_unit_active_sec" class="hash-link" aria-label="Direct link to timer_unit_active_sec" title="Direct link to timer_unit_active_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_unit_active_sec 设置 [Timer] 段的 OnUnitActiveSec，相对单元上次激活时刻触发</p>
@@ -1690,7 +1690,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onUnitActiveSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对单元上次激活的秒数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">onUnitActiveSec</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对单元上次激活的秒数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1707,7 +1707,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timer_unit_inactive_sec">timer_unit_inactive_sec<a href="#timer_unit_inactive_sec" class="hash-link" aria-label="Direct link to timer_unit_inactive_sec" title="Direct link to timer_unit_inactive_sec" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>timer_unit_inactive_sec 设置 [Timer] 段的 OnUnitInactiveSec，相对单元上次停用时刻触发</p>
@@ -1739,7 +1739,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对单元上次停用的秒数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">相对单元上次停用的秒数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1756,7 +1756,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_after">unit_after<a href="#unit_after" class="hash-link" aria-label="Direct link to unit_after" title="Direct link to unit_after" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_after 设置 [Unit] 段的 After，声明本服务应在指定单元之后启动</p>
@@ -1788,7 +1788,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">after</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">依赖的单元名（如 network.target）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">after</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">依赖的单元名（如 network.target）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1805,7 +1805,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_before">unit_before<a href="#unit_before" class="hash-link" aria-label="Direct link to unit_before" title="Direct link to unit_before" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_before 设置 [Unit] 段的 Before，声明本服务应在指定单元之前启动</p>
@@ -1837,7 +1837,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">before</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">在其之前启动的单元名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">before</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">在其之前启动的单元名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1854,7 +1854,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_binds_to">unit_binds_to<a href="#unit_binds_to" class="hash-link" aria-label="Direct link to unit_binds_to" title="Direct link to unit_binds_to" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_binds_to 设置 [Unit] 段的 BindsTo，声明强绑定单元（绑定单元停止则本服务也停止）</p>
@@ -1886,7 +1886,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">bindsTo</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">绑定的单元名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">bindsTo</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">绑定的单元名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1903,7 +1903,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_description">unit_description<a href="#unit_description" class="hash-link" aria-label="Direct link to unit_description" title="Direct link to unit_description" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_description 设置 [Unit] 段的 Description，用于描述该服务用途</p>
@@ -1935,7 +1935,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">description</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务描述文本</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">description</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">服务描述文本</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1952,7 +1952,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_documentation">unit_documentation<a href="#unit_documentation" class="hash-link" aria-label="Direct link to unit_documentation" title="Direct link to unit_documentation" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_documentation 设置 [Unit] 段的 Documentation，指向服务文档链接</p>
@@ -1984,7 +1984,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">documentation</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文档地址（如 man 手册或 URL）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">documentation</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文档地址（如 man 手册或 URL）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2001,7 +2001,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_extra_line">unit_extra_line<a href="#unit_extra_line" class="hash-link" aria-label="Direct link to unit_extra_line" title="Direct link to unit_extra_line" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_extra_line 向 [Unit] 段追加自定义原始行（多行可用换行分隔）</p>
@@ -2033,7 +2033,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Unit] 段的原始内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">extraLine</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">追加到 [Unit] 段的原始内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2050,7 +2050,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_requires">unit_requires<a href="#unit_requires" class="hash-link" aria-label="Direct link to unit_requires" title="Direct link to unit_requires" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_requires 设置 [Unit] 段的 Requires，声明强依赖单元（依赖失败则本服务也失败）</p>
@@ -2082,7 +2082,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">requires</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">强依赖的单元名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">requires</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">强依赖的单元名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2099,7 +2099,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="unit_wants">unit_wants<a href="#unit_wants" class="hash-link" aria-label="Direct link to unit_wants" title="Direct link to unit_wants" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>unit_wants 设置 [Unit] 段的 Wants，声明弱依赖单元（依赖失败不影响本服务启动）</p>
@@ -2131,7 +2131,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">wants</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">弱依赖的单元名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">wants</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">弱依赖的单元名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2148,6 +2148,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/systemd.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/syntaxflow"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">syntaxflow</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/t3"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">t3</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#create" class="table-of-contents__link toc-highlight">Create</a></li><li><a href="#extra_raw" class="table-of-contents__link toc-highlight">extra_raw</a></li><li><a href="#install_wanted_by" class="table-of-contents__link toc-highlight">install_wanted_by</a></li><li><a href="#service_environment" class="table-of-contents__link toc-highlight">service_environment</a></li><li><a href="#service_environment_file" class="table-of-contents__link toc-highlight">service_environment_file</a></li><li><a href="#service_exec_start" class="table-of-contents__link toc-highlight">service_exec_start</a></li><li><a href="#service_exec_start_post" class="table-of-contents__link toc-highlight">service_exec_start_post</a></li><li><a href="#service_exec_start_pre" class="table-of-contents__link toc-highlight">service_exec_start_pre</a></li><li><a href="#service_exec_stop" class="table-of-contents__link toc-highlight">service_exec_stop</a></li><li><a href="#service_exec_stop_post" class="table-of-contents__link toc-highlight">service_exec_stop_post</a></li><li><a href="#service_group" class="table-of-contents__link toc-highlight">service_group</a></li><li><a href="#service_kill9" class="table-of-contents__link toc-highlight">service_kill9</a></li><li><a href="#service_kill_mode" class="table-of-contents__link toc-highlight">service_kill_mode</a></li><li><a href="#service_kill_signal" class="table-of-contents__link toc-highlight">service_kill_signal</a></li><li><a href="#service_raw" class="table-of-contents__link toc-highlight">service_raw</a></li><li><a href="#service_restart" class="table-of-contents__link toc-highlight">service_restart</a></li><li><a href="#service_restart_sec" class="table-of-contents__link toc-highlight">service_restart_sec</a></li><li><a href="#service_stderr" class="table-of-contents__link toc-highlight">service_stderr</a></li><li><a href="#service_stdin" class="table-of-contents__link toc-highlight">service_stdin</a></li><li><a href="#service_stdout" class="table-of-contents__link toc-highlight">service_stdout</a></li><li><a href="#service_timeout_start_sec" class="table-of-contents__link toc-highlight">service_timeout_start_sec</a></li><li><a href="#service_type" class="table-of-contents__link toc-highlight">service_type</a></li><li><a href="#service_umask" class="table-of-contents__link toc-highlight">service_umask</a></li><li><a href="#service_user" class="table-of-contents__link toc-highlight">service_user</a></li><li><a href="#timer_active_sec" class="table-of-contents__link toc-highlight">timer_active_sec</a></li><li><a href="#timer_boot_sec" class="table-of-contents__link toc-highlight">timer_boot_sec</a></li><li><a href="#timer_calendar" class="table-of-contents__link toc-highlight">timer_calendar</a></li><li><a href="#timer_raw" class="table-of-contents__link toc-highlight">timer_raw</a></li><li><a href="#timer_startup_sec" class="table-of-contents__link toc-highlight">timer_startup_sec</a></li><li><a href="#timer_unit" class="table-of-contents__link toc-highlight">timer_unit</a></li><li><a href="#timer_unit_active_sec" class="table-of-contents__link toc-highlight">timer_unit_active_sec</a></li><li><a href="#timer_unit_inactive_sec" class="table-of-contents__link toc-highlight">timer_unit_inactive_sec</a></li><li><a href="#unit_after" class="table-of-contents__link toc-highlight">unit_after</a></li><li><a href="#unit_before" class="table-of-contents__link toc-highlight">unit_before</a></li><li><a href="#unit_binds_to" class="table-of-contents__link toc-highlight">unit_binds_to</a></li><li><a href="#unit_description" class="table-of-contents__link toc-highlight">unit_description</a></li><li><a href="#unit_documentation" class="table-of-contents__link toc-highlight">unit_documentation</a></li><li><a href="#unit_extra_line" class="table-of-contents__link toc-highlight">unit_extra_line</a></li><li><a href="#unit_requires" class="table-of-contents__link toc-highlight">unit_requires</a></li><li><a href="#unit_wants" class="table-of-contents__link toc-highlight">unit_wants</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>ConfigOption</code></td><td style="text-align:left">可传入 systemd.Create 的配置选项</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/systemd.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/syntaxflow"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">syntaxflow</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/t3"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">t3</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#create" class="table-of-contents__link toc-highlight">Create</a></li><li><a href="#extra_raw" class="table-of-contents__link toc-highlight">extra_raw</a></li><li><a href="#install_wanted_by" class="table-of-contents__link toc-highlight">install_wanted_by</a></li><li><a href="#service_environment" class="table-of-contents__link toc-highlight">service_environment</a></li><li><a href="#service_environment_file" class="table-of-contents__link toc-highlight">service_environment_file</a></li><li><a href="#service_exec_start" class="table-of-contents__link toc-highlight">service_exec_start</a></li><li><a href="#service_exec_start_post" class="table-of-contents__link toc-highlight">service_exec_start_post</a></li><li><a href="#service_exec_start_pre" class="table-of-contents__link toc-highlight">service_exec_start_pre</a></li><li><a href="#service_exec_stop" class="table-of-contents__link toc-highlight">service_exec_stop</a></li><li><a href="#service_exec_stop_post" class="table-of-contents__link toc-highlight">service_exec_stop_post</a></li><li><a href="#service_group" class="table-of-contents__link toc-highlight">service_group</a></li><li><a href="#service_kill9" class="table-of-contents__link toc-highlight">service_kill9</a></li><li><a href="#service_kill_mode" class="table-of-contents__link toc-highlight">service_kill_mode</a></li><li><a href="#service_kill_signal" class="table-of-contents__link toc-highlight">service_kill_signal</a></li><li><a href="#service_raw" class="table-of-contents__link toc-highlight">service_raw</a></li><li><a href="#service_restart" class="table-of-contents__link toc-highlight">service_restart</a></li><li><a href="#service_restart_sec" class="table-of-contents__link toc-highlight">service_restart_sec</a></li><li><a href="#service_stderr" class="table-of-contents__link toc-highlight">service_stderr</a></li><li><a href="#service_stdin" class="table-of-contents__link toc-highlight">service_stdin</a></li><li><a href="#service_stdout" class="table-of-contents__link toc-highlight">service_stdout</a></li><li><a href="#service_timeout_start_sec" class="table-of-contents__link toc-highlight">service_timeout_start_sec</a></li><li><a href="#service_type" class="table-of-contents__link toc-highlight">service_type</a></li><li><a href="#service_umask" class="table-of-contents__link toc-highlight">service_umask</a></li><li><a href="#service_user" class="table-of-contents__link toc-highlight">service_user</a></li><li><a href="#timer_active_sec" class="table-of-contents__link toc-highlight">timer_active_sec</a></li><li><a href="#timer_boot_sec" class="table-of-contents__link toc-highlight">timer_boot_sec</a></li><li><a href="#timer_calendar" class="table-of-contents__link toc-highlight">timer_calendar</a></li><li><a href="#timer_raw" class="table-of-contents__link toc-highlight">timer_raw</a></li><li><a href="#timer_startup_sec" class="table-of-contents__link toc-highlight">timer_startup_sec</a></li><li><a href="#timer_unit" class="table-of-contents__link toc-highlight">timer_unit</a></li><li><a href="#timer_unit_active_sec" class="table-of-contents__link toc-highlight">timer_unit_active_sec</a></li><li><a href="#timer_unit_inactive_sec" class="table-of-contents__link toc-highlight">timer_unit_inactive_sec</a></li><li><a href="#unit_after" class="table-of-contents__link toc-highlight">unit_after</a></li><li><a href="#unit_before" class="table-of-contents__link toc-highlight">unit_before</a></li><li><a href="#unit_binds_to" class="table-of-contents__link toc-highlight">unit_binds_to</a></li><li><a href="#unit_description" class="table-of-contents__link toc-highlight">unit_description</a></li><li><a href="#unit_documentation" class="table-of-contents__link toc-highlight">unit_documentation</a></li><li><a href="#unit_extra_line" class="table-of-contents__link toc-highlight">unit_extra_line</a></li><li><a href="#unit_requires" class="table-of-contents__link toc-highlight">unit_requires</a></li><li><a href="#unit_wants" class="table-of-contents__link toc-highlight">unit_wants</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

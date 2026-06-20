@@ -822,7 +822,7 @@
 
 
 
-<table><thead><tr><th>维度</th><th>定义</th><th>实战逻辑</th></tr></thead><tbody><tr><td><strong>C</strong>onnectivity</td><td><strong>关联度</strong></td><td>该信息能否钩住资产拓扑?(如:IP 与子网、业务系统的关联性)</td></tr><tr><td><strong>O</strong>rigin</td><td><strong>确定性</strong></td><td>信息的来源可靠吗?(whoami的回显 O=1.0;视觉猜测的后台 O 值较低)</td></tr><tr><td><strong>R</strong>elevance</td><td><strong>相关性</strong></td><td>未来复用的概率多大?(Session ID 相关性低,Struts2 绕过 Payload 相关性极高)</td></tr><tr><td><strong>E</strong>motion</td><td><strong>敏感度</strong></td><td>交互的优先级。连续失败的“挫败感”或成功的“转折点”会被加权记录。</td></tr><tr><td><strong>P</strong>reference</td><td><strong>偏好约束</strong></td><td>是否符合“静默渗透”等甲方约束?不合规的动作记忆将被压低权重。</td></tr><tr><td><strong>A</strong>ctionability</td><td><strong>可操作性</strong></td><td>是废话还是指令?包含完整 sqlmap 或 curl 参数的记录 A 值会很高。</td></tr><tr><td><strong>T</strong>emporality</td><td><strong>时效性</strong></td><td>经验的保质期。资产 IP 会变，但漏洞补丁逻辑变动慢，动态清理过期记忆。</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>维度</th><th>定义</th><th>实战逻辑</th></tr></thead><tbody><tr><td><strong>C</strong>onnectivity</td><td><strong>关联度</strong></td><td>该信息能否钩住资产拓扑?(如:IP 与子网、业务系统的关联性)</td></tr><tr><td><strong>O</strong>rigin</td><td><strong>确定性</strong></td><td>信息的来源可靠吗?(whoami的回显 O=1.0;视觉猜测的后台 O 值较低)</td></tr><tr><td><strong>R</strong>elevance</td><td><strong>相关性</strong></td><td>未来复用的概率多大?(Session ID 相关性低,Struts2 绕过 Payload 相关性极高)</td></tr><tr><td><strong>E</strong>motion</td><td><strong>敏感度</strong></td><td>交互的优先级。连续失败的“挫败感”或成功的“转折点”会被加权记录。</td></tr><tr><td><strong>P</strong>reference</td><td><strong>偏好约束</strong></td><td>是否符合“静默渗透”等甲方约束?不合规的动作记忆将被压低权重。</td></tr><tr><td><strong>A</strong>ctionability</td><td><strong>可操作性</strong></td><td>是废话还是指令?包含完整 sqlmap 或 curl 参数的记录 A 值会很高。</td></tr><tr><td><strong>T</strong>emporality</td><td><strong>时效性</strong></td><td>经验的保质期。资产 IP 会变，但漏洞补丁逻辑变动慢，动态清理过期记忆。</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="案例注入记忆">案例:SQL注入记忆<a href="https://yaklang.com/blog/memfit-long-term-memory-and-corepact-evaluation#%E6%A1%88%E4%BE%8B%E6%B3%A8%E5%85%A5%E8%AE%B0%E5%BF%86" class="hash-link" aria-label="案例:SQL注入记忆的直接链接" title="案例:SQL注入记忆的直接链接" translate="no">​</a></h2>
 <p>这是一个我对vulinbox靶场的SQL检测产生的记忆案例图。</p>
 <p><button type="button" class="yakdoc-figure" data-layout="tall" aria-label="点击放大: image"><img decoding="async" loading="lazy" alt="image" src="https://yaklang.com/assets/images/1618bb53399e943a-6972617e60b39cb8386005cc88a6df5b.png" width="700" height="1354" class="yakdoc-image"><span class="yakdoc-expand-hint" aria-hidden="true"><span class="yakdoc-expand-hint__text">长图已折叠</span><span class="yakdoc-expand-hint__button">点击展开</span></span></button></p>
@@ -1137,7 +1137,7 @@
 
 
 
-<table><thead><tr><th>热点</th><th>早期耗时</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>热点</th><th>早期耗时</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table></div></div>
 <p>继续优化以后，这条线最亮眼的结果之一是：</p>
 <ul>
 <li class=""><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></li>
@@ -1160,7 +1160,7 @@
 
 
 
-<table><thead><tr><th>观测项</th><th>调优前</th><th>调优后</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> 观测值</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>观测项</th><th>调优前</th><th>调优后</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> 观测值</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table></div></div>
 <p>这组整体数据不能简单说成“全靠常量池快了这么多”，因为中间还叠加了：</p>
 <ul>
 <li class="">scan-only 路径的使用</li>
@@ -1341,7 +1341,7 @@
 
 
 
-<table><thead><tr><th>策略</th><th>时间</th><th>峰值内存</th><th>结论</th></tr></thead><tbody><tr><td>不 reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>内存大，GC 压力也大</td></tr><tr><td>每次 parse 后都 reset</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>内存很低，但明显变慢</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>策略</th><th>时间</th><th>峰值内存</th><th>结论</th></tr></thead><tbody><tr><td>不 reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>内存大，GC 压力也大</td></tr><tr><td>每次 parse 后都 reset</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>内存很低，但明显变慢</td></tr></tbody></table></div></div>
 <p>再看按“文件数”做 reset 的实验。</p>
 
 
@@ -1378,7 +1378,7 @@
 
 
 
-<table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>时间</th><th>峰值内存</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>时间</th><th>峰值内存</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table></div></div>
 <p>这张表很能说明问题：</p>
 <ul>
 <li class=""><code>145/150</code> 这一带，是速度上的“甜品点”</li>
@@ -1517,7 +1517,7 @@
 
 
 
-<table><thead><tr><th>benchmark</th><th>优化前</th><th>优化后</th><th>提升</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>分配字节</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>分配次数</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>benchmark</th><th>优化前</th><th>优化后</th><th>提升</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>分配字节</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>分配次数</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table></div></div>
 <p>本地当前主线补跑时，这个 benchmark 也还能稳定在：</p>
 <ul>
 <li class=""><code>7.82s/op</code></li>
@@ -2503,7 +2503,7 @@
 
 
 
-<table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>仅检出 2 处（仅限显示手机号打印）</td><td>精准检出 17 处（含密码、手机号）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>仅检出 2 处（仅限显示手机号打印）</td><td>精准检出 17 处（含密码、手机号）</td></tr></tbody></table></div></div>
 <p>可以发现开启 Skill 后，AI 成功捕获了原本被漏掉的所有 15 处密码泄露风险点。</p>
 <ul>
 <li class=""><strong>输入 token 消耗</strong></li>
@@ -2525,7 +2525,7 @@
 
 
 
-<table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>仅检出 2 处（仅限显示手机号打印）</td><td>精准检出 17 处（含密码、手机号）</td></tr><tr><td>152,338 Tokens</td><td>125,244 Tokens</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>仅检出 2 处（仅限显示手机号打印）</td><td>精准检出 17 处（含密码、手机号）</td></tr><tr><td>152,338 Tokens</td><td>125,244 Tokens</td></tr></tbody></table></div></div>
 <p>开启 skill 后节省了约 18% 的输入 token 成本</p>
 <ul>
 <li class=""><strong>token缓存压力</strong></li>
@@ -2547,7 +2547,7 @@
 
 
 
-<table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>152,338 Tokens</td><td>125,244 Tokens</td></tr><tr><td>1,364,480 Tokens</td><td>704,128 Tokens</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>传统方案 (无 Skill )</th><th>AI + SSA 方案 (开启 Skill )</th></tr></thead><tbody><tr><td>152,338 Tokens</td><td>125,244 Tokens</td></tr><tr><td>1,364,480 Tokens</td><td>704,128 Tokens</td></tr></tbody></table></div></div>
 <p>可以发现相比没有 skill，缓存压力降低近 50%</p>
 <ul>
 <li class=""><strong>审计准确度</strong></li>
@@ -2565,7 +2565,7 @@
 
 
 
-<table><thead><tr><th>传统方案 (无 Skill)</th><th>AI + SSA 方案 (开启 Skill)</th></tr></thead><tbody><tr><td>对于能力较差的AI可能存在幻觉</td><td>结论严谨确定。提供了从 Source 到 Sink 的完整物理行号证据。</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>传统方案 (无 Skill)</th><th>AI + SSA 方案 (开启 Skill)</th></tr></thead><tbody><tr><td>对于能力较差的AI可能存在幻觉</td><td>结论严谨确定。提供了从 Source 到 Sink 的完整物理行号证据。</td></tr></tbody></table></div></div>
 <p>可以很明显看到，<code>irify-sast-skill </code>明显提升了漏洞的数量以及准确度，并且有效减少了token的数量。</p>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="总结">总结<a href="https://yaklang.com/blog/detecting-password-leaks-with-ai-and-ssa#%E6%80%BB%E7%BB%93" class="hash-link" aria-label="总结的直接链接" title="总结的直接链接" translate="no">​</a></h2>
 <p>本文通过对 <code>irify-sast-skill</code> 的深度拆解与实战对比，完成了<strong>AI + SSA：对话式代码数据流查询</strong>的一次初步探索。</p>
@@ -2817,7 +2817,7 @@
 
 
 
-<table><thead><tr><th>文件名</th><th>大小</th><th>耗时</th></tr></thead><tbody><tr><td><strong>status_dhcpv6_leases.php</strong></td><td><strong>26.59KB</strong></td><td><strong>1m 8.8s</strong></td></tr><tr><td>firewall_rules.php</td><td>45.02KB</td><td>51.35s</td></tr><tr><td>services_dhcpv6.php</td><td>54.52KB</td><td>43.32s</td></tr><tr><td>interfaces.php</td><td>148.75KB</td><td>30.05s</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>文件名</th><th>大小</th><th>耗时</th></tr></thead><tbody><tr><td><strong>status_dhcpv6_leases.php</strong></td><td><strong>26.59KB</strong></td><td><strong>1m 8.8s</strong></td></tr><tr><td>firewall_rules.php</td><td>45.02KB</td><td>51.35s</td></tr><tr><td>services_dhcpv6.php</td><td>54.52KB</td><td>43.32s</td></tr><tr><td>interfaces.php</td><td>148.75KB</td><td>30.05s</td></tr></tbody></table></div></div>
 <p><strong>其中 status_dhcpv6_leases.php 只有 26 KB，却比 148KB 的文件慢一倍。现象分析：</strong></p>
 <p>1、<strong>锁竞争（Lock Contention）</strong>：</p>
 <p>pprof 显示 CPU 大量时间消耗在 <code>sync.Mutex.Lock</code> 和 <code>RWMutex.RUnlock</code> 上。</p>
@@ -3007,7 +3007,7 @@
 
 
 
-<table><thead><tr><th>子任务</th><th>目标</th><th>关键工具</th></tr></thead><tbody><tr><td>SSA风险信息获取</td><td>获取漏洞类型、代码位置、数据流路径</td><td>ssa-risk</td></tr><tr><td>项目源码可用性检查</td><td>判断源码访问方式（数据库/本地文件系统）</td><td>ssa-project-info</td></tr><tr><td>源码上下文获取</td><td>提取 API 注解、函数签名等技术细节</td><td>ssa-risk (get_full_code=true)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>子任务</th><th>目标</th><th>关键工具</th></tr></thead><tbody><tr><td>SSA风险信息获取</td><td>获取漏洞类型、代码位置、数据流路径</td><td>ssa-risk</td></tr><tr><td>项目源码可用性检查</td><td>判断源码访问方式（数据库/本地文件系统）</td><td>ssa-project-info</td></tr><tr><td>源码上下文获取</td><td>提取 API 注解、函数签名等技术细节</td><td>ssa-risk (get_full_code=true)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="阶段二可行性评估系统根据风险类型自动判断是否适合生成-poc">【阶段二】可行性评估系统根据风险类型自动判断是否适合生成 PoC<a href="https://yaklang.com/blog/irify-code-audit-report-generation#%E9%98%B6%E6%AE%B5%E4%BA%8C%E5%8F%AF%E8%A1%8C%E6%80%A7%E8%AF%84%E4%BC%B0%E7%B3%BB%E7%BB%9F%E6%A0%B9%E6%8D%AE%E9%A3%8E%E9%99%A9%E7%B1%BB%E5%9E%8B%E8%87%AA%E5%8A%A8%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E9%80%82%E5%90%88%E7%94%9F%E6%88%90-poc" class="hash-link" aria-label="【阶段二】可行性评估系统根据风险类型自动判断是否适合生成 PoC的直接链接" title="【阶段二】可行性评估系统根据风险类型自动判断是否适合生成 PoC的直接链接" translate="no">​</a></h4>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="适合生成-poc-的漏洞类型包括">适合生成 PoC 的漏洞类型包括：<a href="https://yaklang.com/blog/irify-code-audit-report-generation#%E9%80%82%E5%90%88%E7%94%9F%E6%88%90-poc-%E7%9A%84%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B%E5%8C%85%E6%8B%AC" class="hash-link" aria-label="适合生成 PoC 的漏洞类型包括：的直接链接" title="适合生成 PoC 的漏洞类型包括：的直接链接" translate="no">​</a></h4>
 <ul>

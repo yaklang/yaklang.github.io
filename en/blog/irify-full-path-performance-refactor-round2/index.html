@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR） | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR） | Yak Program Language"><meta data-rh="true" name="description" content="过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。"><meta data-rh="true" property="og:description" content="过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-03-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","mainEntityOfPage":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","url":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","headline":"性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）","name":"性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）","description":"过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。","datePublished":"2026-03-27T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -130,7 +130,7 @@
 
 
 
-<table><thead><tr><th>热点</th><th>早期耗时</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>热点</th><th>早期耗时</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table></div></div>
 <p>继续优化以后，这条线最亮眼的结果之一是：</p>
 <ul>
 <li class=""><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></li>
@@ -153,7 +153,7 @@
 
 
 
-<table><thead><tr><th>观测项</th><th>调优前</th><th>调优后</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> 观测值</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>观测项</th><th>调优前</th><th>调优后</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> 观测值</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table></div></div>
 <p>这组整体数据不能简单说成“全靠常量池快了这么多”，因为中间还叠加了：</p>
 <ul>
 <li class="">scan-only 路径的使用</li>
@@ -334,7 +334,7 @@
 
 
 
-<table><thead><tr><th>策略</th><th>时间</th><th>峰值内存</th><th>结论</th></tr></thead><tbody><tr><td>不 reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>内存大，GC 压力也大</td></tr><tr><td>每次 parse 后都 reset</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>内存很低，但明显变慢</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>策略</th><th>时间</th><th>峰值内存</th><th>结论</th></tr></thead><tbody><tr><td>不 reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>内存大，GC 压力也大</td></tr><tr><td>每次 parse 后都 reset</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>内存很低，但明显变慢</td></tr></tbody></table></div></div>
 <p>再看按“文件数”做 reset 的实验。</p>
 
 
@@ -371,7 +371,7 @@
 
 
 
-<table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>时间</th><th>峰值内存</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>时间</th><th>峰值内存</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table></div></div>
 <p>这张表很能说明问题：</p>
 <ul>
 <li class=""><code>145/150</code> 这一带，是速度上的“甜品点”</li>
@@ -510,7 +510,7 @@
 
 
 
-<table><thead><tr><th>benchmark</th><th>优化前</th><th>优化后</th><th>提升</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>分配字节</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>分配次数</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th>benchmark</th><th>优化前</th><th>优化后</th><th>提升</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>分配字节</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>分配次数</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table></div></div>
 <p>本地当前主线补跑时，这个 benchmark 也还能稳定在：</p>
 <ul>
 <li class=""><code>7.82s/op</code></li>

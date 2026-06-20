@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">file | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/file"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="file | Yak Program Language"><meta data-rh="true" name="description" content="|实例名|实例描述|"><meta data-rh="true" property="og:description" content="|实例名|实例描述|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/file"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/file" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/file" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/file" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"file","item":"https://yaklang.com/en/docs/api/file"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -58,7 +58,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">实例名</th><th style="text-align:left">实例描述</th></tr></thead><tbody><tr><td style="text-align:left">O_APPEND</td><td style="text-align:left">(int) 1024</td></tr><tr><td style="text-align:left">O_CREATE</td><td style="text-align:left">(int) 64</td></tr><tr><td style="text-align:left">O_EXCL</td><td style="text-align:left">(int) 128</td></tr><tr><td style="text-align:left">O_RDONLY</td><td style="text-align:left">(int) 0</td></tr><tr><td style="text-align:left">O_RDWR</td><td style="text-align:left">(int) 2</td></tr><tr><td style="text-align:left">O_SYNC</td><td style="text-align:left">(int) 1052672</td></tr><tr><td style="text-align:left">O_TRUNC</td><td style="text-align:left">(int) 512</td></tr><tr><td style="text-align:left">O_WRONLY</td><td style="text-align:left">(int) 1</td></tr><tr><td style="text-align:left">SEPARATOR</td><td style="text-align:left">(string) &quot;/&quot;</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">实例名</th><th style="text-align:left">实例描述</th></tr></thead><tbody><tr><td style="text-align:left">O_APPEND</td><td style="text-align:left">(int) 1024</td></tr><tr><td style="text-align:left">O_CREATE</td><td style="text-align:left">(int) 64</td></tr><tr><td style="text-align:left">O_EXCL</td><td style="text-align:left">(int) 128</td></tr><tr><td style="text-align:left">O_RDONLY</td><td style="text-align:left">(int) 0</td></tr><tr><td style="text-align:left">O_RDWR</td><td style="text-align:left">(int) 2</td></tr><tr><td style="text-align:left">O_SYNC</td><td style="text-align:left">(int) 1052672</td></tr><tr><td style="text-align:left">O_TRUNC</td><td style="text-align:left">(int) 512</td></tr><tr><td style="text-align:left">O_WRONLY</td><td style="text-align:left">(int) 1</td></tr><tr><td style="text-align:left">SEPARATOR</td><td style="text-align:left">(string) &quot;/&quot;</td></tr></tbody></table></div></div>
 
 
 
@@ -268,7 +268,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#abs" class="">file.Abs</a></td><td style="text-align:left">Abs 返回一个路径的绝对路径 参数: - i: 输入路径（支持以 ~ 开头表示家目录） 返回值: - 对应的绝对路径</td></tr><tr><td style="text-align:left"><a href="#cat" class="">file.Cat</a></td><td style="text-align:left">Cat 模拟 unix 命令 cat，打印文件内容到标准输出 参数: - i: 待打印的文件路径</td></tr><tr><td style="text-align:left"><a href="#clean" class="">file.Clean</a></td><td style="text-align:left">Clean 清理路径中的多余的分隔符和 . 和 .. 参数: - s: 输入路径 返回值: - 规整化后的最短等价路径</td></tr><tr><td style="text-align:left"><a href="#cp" class="">file.Cp</a></td><td style="text-align:left">Cp 拷贝文件或目录，返回错误 参数: - src: 源文件或目录路径 - dst: 目标文件或目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#create" class="">file.Create</a></td><td style="text-align:left">Create 创建一个文件，返回一个文件结构体引用与错误 参数: - name: 待创建的文件路径 返回值: - 文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#detectfiletype" class="">file.DetectFileType</a></td><td style="text-align:left">DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型 支持常见操作系统（Linux、Windows、macOS）中的各种文件格式 参数: - filePath: 文件路径 返回值: - MIME 类型字符串 - 错误信息，如果无法识别文件类型则返回错误</td></tr><tr><td style="text-align:left"><a href="#detectmimetypefromfile" class="">file.DetectMIMETypeFromFile</a></td><td style="text-align:left">DetectMIMETypeFromFile 读取文件并通过魔数识别其 MIME 类型 参数: - path: 待识别的文件路径 返回值: - MIME 类型对象，识别失败时为 application/octet-stream - 错误信息（与打开/读取文件相关）</td></tr><tr><td style="text-align:left"><a href="#detectmimetypefromraw" class="">file.DetectMIMETypeFromRaw</a></td><td style="text-align:left">DetectMIMETypeFromRaw 通过字节内容（魔数）识别 MIME 类型 参数: - raw: 待识别的字节内容 返回值: - MIME 类型对象，识别失败时为 application/octet-stream</td></tr><tr><td style="text-align:left"><a href="#dir" class="">file.Dir</a></td><td style="text-align:left">Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片</td></tr><tr><td style="text-align:left"><a href="#getbase" class="">file.GetBase</a></td><td style="text-align:left">GetBase 获取文件的基本名 参数: - s: 文件路径 返回值: - 路径最后一段（文件名）</td></tr><tr><td style="text-align:left"><a href="#getdirpath" class="">file.GetDirPath</a></td><td style="text-align:left">GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录 参数: - path: 输入路径 返回值: - 路径所在目录（带结尾分隔符）</td></tr><tr><td style="text-align:left"><a href="#getext" class="">file.GetExt</a></td><td style="text-align:left">GetExt 获取文件的扩展名 参数: - s: 文件路径 返回值: - 扩展名（含点，如 .txt），无扩展名返回空字符串</td></tr><tr><td style="text-align:left"><a href="#gettypebyextension" class="">file.GetTypeByExtension</a></td><td style="text-align:left">GetTypeByExtension 根据文件扩展名获取 MIME 类型 参数: - ext: 文件扩展名（可以带或不带点号，如 &quot;.txt&quot; 或 &quot;txt&quot;） 返回值: - MIME 类型字符串，如果未找到则返回 &quot;application/octet-stream&quot;</td></tr><tr><td style="text-align:left"><a href="#isabs" class="">file.IsAbs</a></td><td style="text-align:left">IsAbs 判断路径是否是绝对路径 参数: - path: 待判断的路径 返回值: - 是否为绝对路径</td></tr><tr><td style="text-align:left"><a href="#isdir" class="">file.IsDir</a></td><td style="text-align:left">IsDir 判断路径是否存在且是一个目录 参数: - path: 待判断的路径 返回值: - 路径是否存在且为目录</td></tr><tr><td style="text-align:left"><a href="#isexisted" class="">file.IsExisted</a></td><td style="text-align:left">IsExisted 判断文件或目录是否存在 参数: - path: 待判断的路径 返回值: - 路径是否存在</td></tr><tr><td style="text-align:left"><a href="#isfile" class="">file.IsFile</a></td><td style="text-align:left">IsFile 判断路径是否存在且是一个文件 参数: - path: 待判断的路径 返回值: - 路径是否存在且为文件</td></tr><tr><td style="text-align:left"><a href="#islink" class="">file.IsLink</a></td><td style="text-align:left">IsLink 判断文件是否是一个符号链接 参数: - file: 待判断的文件路径 返回值: - 是否为符号链接</td></tr><tr><td style="text-align:left"><a href="#join" class="">file.Join</a></td><td style="text-align:left">Join 将任意数量的路径以默认路径分隔符链接在一起 参数: - path: 任意数量的路径片段 返回值: - 用默认分隔符拼接后的路径</td></tr><tr><td style="text-align:left"><a href="#ls" class="">file.Ls</a></td><td style="text-align:left">Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片</td></tr><tr><td style="text-align:left"><a href="#lstat" class="">file.Lstat</a></td><td style="text-align:left">Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息 参数: - name: 待查询的文件路径 返回值: - 文件信息对象（符号链接本身的信息） - 错误信息</td></tr><tr><td style="text-align:left"><a href="#matchmalicious" class="">file.MatchMalicious</a></td><td style="text-align:left">MatchMalicious 检测文件或内容是否包含恶意特征 支持两种输入类型： - string: 文件路径，会读取文件内容进行匹配 - []byte: 文件内容，直接匹配内容 参数: - input: 文件路径（string）或文件内容（[]byte） 返回值: - 匹配到的特征名称列表 - 错...</td></tr><tr><td style="text-align:left"><a href="#matchmaliciouswithdetails" class="">file.MatchMaliciousWithDetails</a></td><td style="text-align:left">MatchMaliciousWithDetails 检测文件或内容并返回详细信息 支持两种输入类型： - string: 文件路径，会读取文件内容进行匹配 - []byte: 文件内容，直接匹配内容 参数: - input: 文件路径（string）或文件内容（[]byte） 返回值: - 匹配到的...</td></tr><tr><td style="text-align:left"><a href="#md5" class="">file.Md5</a></td><td style="text-align:left">Md5 计算文件的 MD5 哈希值 参数: - filepath: 文件路径 返回值: - MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#mkdir" class="">file.Mkdir</a></td><td style="text-align:left">Mkdir 创建一个目录，返回错误 参数: - name: 待创建的目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#mkdirall" class="">file.MkdirAll</a></td><td style="text-align:left">MkdirAll 递归创建一个目录（包括所有不存在的父目录），返回错误 参数: - name: 待创建的目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#mv" class="">file.Mv</a></td><td style="text-align:left">Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹，它是 Rename 的别名 ! 在 windows 下，无法将文件移动到不同的磁盘 参数: - oldpath: 原路径 - newpath: 目标路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#newmaliciousfilematcher" class="">file.NewMaliciousFileMatcher</a></td><td style="text-align:left">NewMaliciousFileMatcher 创建一个恶意文件特征匹配器，内置常见 webshell/恶意代码特征 返回值: - 恶意文件特征匹配器对象</td></tr><tr><td style="text-align:left"><a href="#newmultifilelinereader" class="">file.NewMultiFileLineReader</a></td><td style="text-align:left">NewMultiFileLineReader 创建一个多文件读取器，返回一个多文件读取器结构体引用和错误 参数: - files: 一个或多个待读取的文件路径 返回值: - 多文件读取器结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#open" class="">file.Open</a></td><td style="text-align:left">Open 打开一个文件，返回一个文件结构体引用与错误 参数: - name: 待打开的文件路径 返回值: - 文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#openfile" class="">file.OpenFile</a></td><td style="text-align:left">OpenFile 打开一个文件，使用 file.O_CREATE ... 和权限控制，返回一个文件结构体引用与错误 参数: - name: 待打开的文件路径 - flags: 打开标志（如 file.O_CREATE|file.O_RDWR） - mode: 文件权限（如 0o777） 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#readall" class="">file.ReadAll</a></td><td style="text-align:left">ReadAll 从 Reader 读取直到出现错误或 EOF，然后返回字节切片与错误 参数: - r: 可读取的流对象（Reader） 返回值: - 读取到的全部字节 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readdirinfoindirectory" class="">file.ReadDirInfoInDirectory</a></td><td style="text-align:left">ReadDirInfoInDirectory 递归读取一个目录下的所有子目录信息，返回一个文件信息切片和错误 参数: - path: 待读取的目录路径 返回值: - 目录下所有子目录的文件信息切片 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readfile" class="">file.ReadFile</a></td><td style="text-align:left">ReadFile 读取一个文件的所有内容，返回字节切片与错误 参数: - filename: 待读取的文件路径 返回值: - 文件的全部内容字节 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readfileinfoindirectory" class="">file.ReadFileInfoInDirectory</a></td><td style="text-align:left">ReadFileInfoInDirectory 递归读取一个目录下的所有文件信息，返回一个文件信息切片和错误 参数: - path: 待读取的目录路径 返回值: - 目录下所有文件的文件信息切片 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readlines" class="">file.ReadLines</a></td><td style="text-align:left">ReadLines 尝试读取一个文件中的所有行，返回一个字符串切片，会去除BOM头和空行 参数: - i: 待读取的文件路径 返回值: - 文件中的所有行组成的字符串切片</td></tr><tr><td style="text-align:left"><a href="#readlineswithcallback" class="">file.ReadLinesWithCallback</a></td><td style="text-align:left">ReadLinesWithCallback 尝试读取一个文件中的所有行，每读取一行，便会调用回调函数，返回错误 参数: - i: 待读取的文件路径 - callback: 每读取一行时调用的回调函数，参数为该行内容 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#remove" class="">file.Remove</a></td><td style="text-align:left">Remove 删除路径及其包含的所有子路径 参数: - path: 待删除的路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#rename" class="">file.Rename</a></td><td style="text-align:left">Rename 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹 ! 在 windows 下，无法将文件移动到不同的磁盘 参数: - oldpath: 原路径 - newpath: 目标路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#rm" class="">file.Rm</a></td><td style="text-align:left">Rm 删除路径及其包含的所有子路径，它是 Remove 的别名 参数: - path: 待删除的路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#save" class="">file.Save</a></td><td style="text-align:left">Save 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误 参数: - fileName: 目标文件路径 - i: 待写入的内容，支持字符串、字节切片或字符串切片 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#savejson" class="">file.SaveJson</a></td><td style="text-align:left">SaveJson 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误 与 Save 不同的是，如果传入的参数是其他类型，会尝试将其序列化为 json 字符再写入到文件中 参数: - name: 目标文件路径 - i: 待写入的内容，非字符串/字节类型会被序...</td></tr><tr><td style="text-align:left"><a href="#sha1" class="">file.Sha1</a></td><td style="text-align:left">Sha1 计算文件的 SHA1 哈希值 参数: - filepath: 文件路径 返回值: - SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#sha256" class="">file.Sha256</a></td><td style="text-align:left">Sha256 计算文件的 SHA256 哈希值 参数: - filepath: 文件路径 返回值: - SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#split" class="">file.Split</a></td><td style="text-align:left">Split 以操作系统的默认路径分隔符分割路径，返回目录和文件名 参数: - path: 输入路径 返回值: - 目录部分（带结尾分隔符） - 文件名部分</td></tr><tr><td style="text-align:left"><a href="#stat" class="">file.Stat</a></td><td style="text-align:left">Stat 返回一个文件的信息和错误 参数: - name: 待查询的文件路径 返回值: - 文件信息对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#tailf" class="">file.TailF</a></td><td style="text-align:left">TailF 模拟 unix 命令 tail -f，执行这个函数会一直阻塞，监听文件内容变化，如果文件有变化，会自动通过回调通知新的内容 参数: - i: 待监听的文件路径 - line: 每读取到新行时调用的回调函数，参数为该行内容</td></tr><tr><td style="text-align:left"><a href="#tempfile" class="">file.TempFile</a></td><td style="text-align:left">TempFile 创建一个临时文件，返回一个文件结构体引用与错误 参数: - dirPart: 可选的临时文件所在目录，不传则使用默认临时目录 返回值: - 临时文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#tempfilename" class="">file.TempFileName</a></td><td style="text-align:left">TempFileName 创建一个临时文件，返回一个文件名与错误 参数: - pattern: 可选的文件名匹配模式（如 &quot;pattern-*.txt&quot;） 返回值: - 创建的临时文件名 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#walk" class="">file.Walk</a></td><td style="text-align:left">Walk 遍历一个目录下的所有文件和目录，对每一项调用回调函数，返回错误 参数: - uPath: 待遍历的目录路径 - i: 对每个文件/目录调用的回调函数，返回 true 继续遍历 返回值: - 错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#abs" class="">file.Abs</a></td><td style="text-align:left">Abs 返回一个路径的绝对路径 参数: - i: 输入路径（支持以 ~ 开头表示家目录） 返回值: - 对应的绝对路径</td></tr><tr><td style="text-align:left"><a href="#cat" class="">file.Cat</a></td><td style="text-align:left">Cat 模拟 unix 命令 cat，打印文件内容到标准输出 参数: - i: 待打印的文件路径</td></tr><tr><td style="text-align:left"><a href="#clean" class="">file.Clean</a></td><td style="text-align:left">Clean 清理路径中的多余的分隔符和 . 和 .. 参数: - s: 输入路径 返回值: - 规整化后的最短等价路径</td></tr><tr><td style="text-align:left"><a href="#cp" class="">file.Cp</a></td><td style="text-align:left">Cp 拷贝文件或目录，返回错误 参数: - src: 源文件或目录路径 - dst: 目标文件或目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#create" class="">file.Create</a></td><td style="text-align:left">Create 创建一个文件，返回一个文件结构体引用与错误 参数: - name: 待创建的文件路径 返回值: - 文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#detectfiletype" class="">file.DetectFileType</a></td><td style="text-align:left">DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型 支持常见操作系统（Linux、Windows、macOS）中的各种文件格式 参数: - filePath: 文件路径 返回值: - MIME 类型字符串 - 错误信息，如果无法识别文件类型则返回错误</td></tr><tr><td style="text-align:left"><a href="#detectmimetypefromfile" class="">file.DetectMIMETypeFromFile</a></td><td style="text-align:left">DetectMIMETypeFromFile 读取文件并通过魔数识别其 MIME 类型 参数: - path: 待识别的文件路径 返回值: - MIME 类型对象，识别失败时为 application/octet-stream - 错误信息（与打开/读取文件相关）</td></tr><tr><td style="text-align:left"><a href="#detectmimetypefromraw" class="">file.DetectMIMETypeFromRaw</a></td><td style="text-align:left">DetectMIMETypeFromRaw 通过字节内容（魔数）识别 MIME 类型 参数: - raw: 待识别的字节内容 返回值: - MIME 类型对象，识别失败时为 application/octet-stream</td></tr><tr><td style="text-align:left"><a href="#dir" class="">file.Dir</a></td><td style="text-align:left">Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片</td></tr><tr><td style="text-align:left"><a href="#getbase" class="">file.GetBase</a></td><td style="text-align:left">GetBase 获取文件的基本名 参数: - s: 文件路径 返回值: - 路径最后一段（文件名）</td></tr><tr><td style="text-align:left"><a href="#getdirpath" class="">file.GetDirPath</a></td><td style="text-align:left">GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录 参数: - path: 输入路径 返回值: - 路径所在目录（带结尾分隔符）</td></tr><tr><td style="text-align:left"><a href="#getext" class="">file.GetExt</a></td><td style="text-align:left">GetExt 获取文件的扩展名 参数: - s: 文件路径 返回值: - 扩展名（含点，如 .txt），无扩展名返回空字符串</td></tr><tr><td style="text-align:left"><a href="#gettypebyextension" class="">file.GetTypeByExtension</a></td><td style="text-align:left">GetTypeByExtension 根据文件扩展名获取 MIME 类型 参数: - ext: 文件扩展名（可以带或不带点号，如 &quot;.txt&quot; 或 &quot;txt&quot;） 返回值: - MIME 类型字符串，如果未找到则返回 &quot;application/octet-stream&quot;</td></tr><tr><td style="text-align:left"><a href="#isabs" class="">file.IsAbs</a></td><td style="text-align:left">IsAbs 判断路径是否是绝对路径 参数: - path: 待判断的路径 返回值: - 是否为绝对路径</td></tr><tr><td style="text-align:left"><a href="#isdir" class="">file.IsDir</a></td><td style="text-align:left">IsDir 判断路径是否存在且是一个目录 参数: - path: 待判断的路径 返回值: - 路径是否存在且为目录</td></tr><tr><td style="text-align:left"><a href="#isexisted" class="">file.IsExisted</a></td><td style="text-align:left">IsExisted 判断文件或目录是否存在 参数: - path: 待判断的路径 返回值: - 路径是否存在</td></tr><tr><td style="text-align:left"><a href="#isfile" class="">file.IsFile</a></td><td style="text-align:left">IsFile 判断路径是否存在且是一个文件 参数: - path: 待判断的路径 返回值: - 路径是否存在且为文件</td></tr><tr><td style="text-align:left"><a href="#islink" class="">file.IsLink</a></td><td style="text-align:left">IsLink 判断文件是否是一个符号链接 参数: - file: 待判断的文件路径 返回值: - 是否为符号链接</td></tr><tr><td style="text-align:left"><a href="#join" class="">file.Join</a></td><td style="text-align:left">Join 将任意数量的路径以默认路径分隔符链接在一起 参数: - path: 任意数量的路径片段 返回值: - 用默认分隔符拼接后的路径</td></tr><tr><td style="text-align:left"><a href="#ls" class="">file.Ls</a></td><td style="text-align:left">Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名 参数: - i: 待列出的目录路径 返回值: - 目录下文件和子目录的文件信息切片</td></tr><tr><td style="text-align:left"><a href="#lstat" class="">file.Lstat</a></td><td style="text-align:left">Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息 参数: - name: 待查询的文件路径 返回值: - 文件信息对象（符号链接本身的信息） - 错误信息</td></tr><tr><td style="text-align:left"><a href="#matchmalicious" class="">file.MatchMalicious</a></td><td style="text-align:left">MatchMalicious 检测文件或内容是否包含恶意特征 支持两种输入类型： - string: 文件路径，会读取文件内容进行匹配 - []byte: 文件内容，直接匹配内容 参数: - input: 文件路径（string）或文件内容（[]byte） 返回值: - 匹配到的特征名称列表 - 错...</td></tr><tr><td style="text-align:left"><a href="#matchmaliciouswithdetails" class="">file.MatchMaliciousWithDetails</a></td><td style="text-align:left">MatchMaliciousWithDetails 检测文件或内容并返回详细信息 支持两种输入类型： - string: 文件路径，会读取文件内容进行匹配 - []byte: 文件内容，直接匹配内容 参数: - input: 文件路径（string）或文件内容（[]byte） 返回值: - 匹配到的...</td></tr><tr><td style="text-align:left"><a href="#md5" class="">file.Md5</a></td><td style="text-align:left">Md5 计算文件的 MD5 哈希值 参数: - filepath: 文件路径 返回值: - MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#mkdir" class="">file.Mkdir</a></td><td style="text-align:left">Mkdir 创建一个目录，返回错误 参数: - name: 待创建的目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#mkdirall" class="">file.MkdirAll</a></td><td style="text-align:left">MkdirAll 递归创建一个目录（包括所有不存在的父目录），返回错误 参数: - name: 待创建的目录路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#mv" class="">file.Mv</a></td><td style="text-align:left">Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹，它是 Rename 的别名 ! 在 windows 下，无法将文件移动到不同的磁盘 参数: - oldpath: 原路径 - newpath: 目标路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#newmaliciousfilematcher" class="">file.NewMaliciousFileMatcher</a></td><td style="text-align:left">NewMaliciousFileMatcher 创建一个恶意文件特征匹配器，内置常见 webshell/恶意代码特征 返回值: - 恶意文件特征匹配器对象</td></tr><tr><td style="text-align:left"><a href="#newmultifilelinereader" class="">file.NewMultiFileLineReader</a></td><td style="text-align:left">NewMultiFileLineReader 创建一个多文件读取器，返回一个多文件读取器结构体引用和错误 参数: - files: 一个或多个待读取的文件路径 返回值: - 多文件读取器结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#open" class="">file.Open</a></td><td style="text-align:left">Open 打开一个文件，返回一个文件结构体引用与错误 参数: - name: 待打开的文件路径 返回值: - 文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#openfile" class="">file.OpenFile</a></td><td style="text-align:left">OpenFile 打开一个文件，使用 file.O_CREATE ... 和权限控制，返回一个文件结构体引用与错误 参数: - name: 待打开的文件路径 - flags: 打开标志（如 file.O_CREATE|file.O_RDWR） - mode: 文件权限（如 0o777） 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#readall" class="">file.ReadAll</a></td><td style="text-align:left">ReadAll 从 Reader 读取直到出现错误或 EOF，然后返回字节切片与错误 参数: - r: 可读取的流对象（Reader） 返回值: - 读取到的全部字节 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readdirinfoindirectory" class="">file.ReadDirInfoInDirectory</a></td><td style="text-align:left">ReadDirInfoInDirectory 递归读取一个目录下的所有子目录信息，返回一个文件信息切片和错误 参数: - path: 待读取的目录路径 返回值: - 目录下所有子目录的文件信息切片 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readfile" class="">file.ReadFile</a></td><td style="text-align:left">ReadFile 读取一个文件的所有内容，返回字节切片与错误 参数: - filename: 待读取的文件路径 返回值: - 文件的全部内容字节 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readfileinfoindirectory" class="">file.ReadFileInfoInDirectory</a></td><td style="text-align:left">ReadFileInfoInDirectory 递归读取一个目录下的所有文件信息，返回一个文件信息切片和错误 参数: - path: 待读取的目录路径 返回值: - 目录下所有文件的文件信息切片 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#readlines" class="">file.ReadLines</a></td><td style="text-align:left">ReadLines 尝试读取一个文件中的所有行，返回一个字符串切片，会去除BOM头和空行 参数: - i: 待读取的文件路径 返回值: - 文件中的所有行组成的字符串切片</td></tr><tr><td style="text-align:left"><a href="#readlineswithcallback" class="">file.ReadLinesWithCallback</a></td><td style="text-align:left">ReadLinesWithCallback 尝试读取一个文件中的所有行，每读取一行，便会调用回调函数，返回错误 参数: - i: 待读取的文件路径 - callback: 每读取一行时调用的回调函数，参数为该行内容 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#remove" class="">file.Remove</a></td><td style="text-align:left">Remove 删除路径及其包含的所有子路径 参数: - path: 待删除的路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#rename" class="">file.Rename</a></td><td style="text-align:left">Rename 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹 ! 在 windows 下，无法将文件移动到不同的磁盘 参数: - oldpath: 原路径 - newpath: 目标路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#rm" class="">file.Rm</a></td><td style="text-align:left">Rm 删除路径及其包含的所有子路径，它是 Remove 的别名 参数: - path: 待删除的路径 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#save" class="">file.Save</a></td><td style="text-align:left">Save 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误 参数: - fileName: 目标文件路径 - i: 待写入的内容，支持字符串、字节切片或字符串切片 返回值: - 错误信息</td></tr><tr><td style="text-align:left"><a href="#savejson" class="">file.SaveJson</a></td><td style="text-align:left">SaveJson 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误 与 Save 不同的是，如果传入的参数是其他类型，会尝试将其序列化为 json 字符再写入到文件中 参数: - name: 目标文件路径 - i: 待写入的内容，非字符串/字节类型会被序...</td></tr><tr><td style="text-align:left"><a href="#sha1" class="">file.Sha1</a></td><td style="text-align:left">Sha1 计算文件的 SHA1 哈希值 参数: - filepath: 文件路径 返回值: - SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#sha256" class="">file.Sha256</a></td><td style="text-align:left">Sha256 计算文件的 SHA256 哈希值 参数: - filepath: 文件路径 返回值: - SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr><tr><td style="text-align:left"><a href="#split" class="">file.Split</a></td><td style="text-align:left">Split 以操作系统的默认路径分隔符分割路径，返回目录和文件名 参数: - path: 输入路径 返回值: - 目录部分（带结尾分隔符） - 文件名部分</td></tr><tr><td style="text-align:left"><a href="#stat" class="">file.Stat</a></td><td style="text-align:left">Stat 返回一个文件的信息和错误 参数: - name: 待查询的文件路径 返回值: - 文件信息对象 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#tailf" class="">file.TailF</a></td><td style="text-align:left">TailF 模拟 unix 命令 tail -f，执行这个函数会一直阻塞，监听文件内容变化，如果文件有变化，会自动通过回调通知新的内容 参数: - i: 待监听的文件路径 - line: 每读取到新行时调用的回调函数，参数为该行内容</td></tr><tr><td style="text-align:left"><a href="#tempfile" class="">file.TempFile</a></td><td style="text-align:left">TempFile 创建一个临时文件，返回一个文件结构体引用与错误 参数: - dirPart: 可选的临时文件所在目录，不传则使用默认临时目录 返回值: - 临时文件结构体引用 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#tempfilename" class="">file.TempFileName</a></td><td style="text-align:left">TempFileName 创建一个临时文件，返回一个文件名与错误 参数: - pattern: 可选的文件名匹配模式（如 &quot;pattern-*.txt&quot;） 返回值: - 创建的临时文件名 - 错误信息</td></tr><tr><td style="text-align:left"><a href="#walk" class="">file.Walk</a></td><td style="text-align:left">Walk 遍历一个目录下的所有文件和目录，对每一项调用回调函数，返回错误 参数: - uPath: 待遍历的目录路径 - i: 对每个文件/目录调用的回调函数，返回 true 继续遍历 返回值: - 错误信息</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="abs">Abs<a href="#abs" class="hash-link" aria-label="Direct link to Abs" title="Direct link to Abs" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -301,7 +301,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径（支持以 ~ 开头表示家目录）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径（支持以 ~ 开头表示家目录）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -318,7 +318,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">对应的绝对路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">对应的绝对路径</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cat">Cat<a href="#cat" class="hash-link" aria-label="Direct link to Cat" title="Direct link to Cat" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Cat 模拟 unix 命令 cat，打印文件内容到标准输出</p>
@@ -346,7 +346,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打印的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打印的文件路径</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="clean">Clean<a href="#clean" class="hash-link" aria-label="Direct link to Clean" title="Direct link to Clean" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Clean 清理路径中的多余的分隔符和 . 和 ..</p>
@@ -378,7 +378,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -395,7 +395,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">规整化后的最短等价路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">规整化后的最短等价路径</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cp">Cp<a href="#cp" class="hash-link" aria-label="Direct link to Cp" title="Direct link to Cp" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Cp 拷贝文件或目录，返回错误</p>
@@ -437,7 +437,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">src</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">源文件或目录路径</td></tr><tr><td style="text-align:left">dst</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件或目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">src</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">源文件或目录路径</td></tr><tr><td style="text-align:left">dst</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件或目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -454,7 +454,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="create">Create<a href="#create" class="hash-link" aria-label="Direct link to Create" title="Direct link to Create" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Create 创建一个文件，返回一个文件结构体引用与错误</p>
@@ -491,7 +491,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -513,7 +513,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detectfiletype">DetectFileType<a href="#detectfiletype" class="hash-link" aria-label="Direct link to DetectFileType" title="Direct link to DetectFileType" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>DetectFileType 统一的文件类型识别函数，使用魔数识别文件类型</p>
@@ -551,7 +551,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filePath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filePath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -573,7 +573,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MIME 类型字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，如果无法识别文件类型则返回错误</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MIME 类型字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，如果无法识别文件类型则返回错误</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detectmimetypefromfile">DetectMIMETypeFromFile<a href="#detectmimetypefromfile" class="hash-link" aria-label="Direct link to DetectMIMETypeFromFile" title="Direct link to DetectMIMETypeFromFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>DetectMIMETypeFromFile 读取文件并通过魔数识别其 MIME 类型</p>
@@ -610,7 +610,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待识别的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待识别的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -632,7 +632,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MIME</code></td><td style="text-align:left">MIME 类型对象，识别失败时为 application/octet-stream</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（与打开/读取文件相关）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MIME</code></td><td style="text-align:left">MIME 类型对象，识别失败时为 application/octet-stream</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（与打开/读取文件相关）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="detectmimetypefromraw">DetectMIMETypeFromRaw<a href="#detectmimetypefromraw" class="hash-link" aria-label="Direct link to DetectMIMETypeFromRaw" title="Direct link to DetectMIMETypeFromRaw" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>DetectMIMETypeFromRaw 通过字节内容（魔数）识别 MIME 类型</p>
@@ -664,7 +664,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">待识别的字节内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">待识别的字节内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -681,7 +681,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MIME</code></td><td style="text-align:left">MIME 类型对象，识别失败时为 application/octet-stream</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MIME</code></td><td style="text-align:left">MIME 类型对象，识别失败时为 application/octet-stream</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dir">Dir<a href="#dir" class="hash-link" aria-label="Direct link to Dir" title="Direct link to Dir" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Ls 列出一个目录下的所有文件和目录，返回一个文件信息切片</p>
@@ -713,7 +713,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待列出的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待列出的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -730,7 +730,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下文件和子目录的文件信息切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下文件和子目录的文件信息切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getbase">GetBase<a href="#getbase" class="hash-link" aria-label="Direct link to GetBase" title="Direct link to GetBase" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetBase 获取文件的基本名</p>
@@ -762,7 +762,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -779,7 +779,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">路径最后一段（文件名）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">路径最后一段（文件名）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getdirpath">GetDirPath<a href="#getdirpath" class="hash-link" aria-label="Direct link to GetDirPath" title="Direct link to GetDirPath" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetDirPath 返回路径中除最后一个元素之后的路径，这通常是原本路径的目录</p>
@@ -811,7 +811,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -828,7 +828,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">路径所在目录（带结尾分隔符）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">路径所在目录（带结尾分隔符）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getext">GetExt<a href="#getext" class="hash-link" aria-label="Direct link to GetExt" title="Direct link to GetExt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetExt 获取文件的扩展名</p>
@@ -860,7 +860,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -877,7 +877,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">扩展名（含点，如 .txt），无扩展名返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">扩展名（含点，如 .txt），无扩展名返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="gettypebyextension">GetTypeByExtension<a href="#gettypebyextension" class="hash-link" aria-label="Direct link to GetTypeByExtension" title="Direct link to GetTypeByExtension" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetTypeByExtension 根据文件扩展名获取 MIME 类型</p>
@@ -909,7 +909,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ext</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件扩展名（可以带或不带点号，如 &quot;.txt&quot; 或 &quot;txt&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ext</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件扩展名（可以带或不带点号，如 &quot;.txt&quot; 或 &quot;txt&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -926,7 +926,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MIME 类型字符串，如果未找到则返回 &quot;application/octet-stream&quot;</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MIME 类型字符串，如果未找到则返回 &quot;application/octet-stream&quot;</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="isabs">IsAbs<a href="#isabs" class="hash-link" aria-label="Direct link to IsAbs" title="Direct link to IsAbs" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsAbs 判断路径是否是绝对路径</p>
@@ -958,7 +958,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -975,7 +975,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为绝对路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为绝对路径</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="isdir">IsDir<a href="#isdir" class="hash-link" aria-label="Direct link to IsDir" title="Direct link to IsDir" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsDir 判断路径是否存在且是一个目录</p>
@@ -1007,7 +1007,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1024,7 +1024,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在且为目录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在且为目录</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="isexisted">IsExisted<a href="#isexisted" class="hash-link" aria-label="Direct link to IsExisted" title="Direct link to IsExisted" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsExisted 判断文件或目录是否存在</p>
@@ -1056,7 +1056,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1073,7 +1073,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="isfile">IsFile<a href="#isfile" class="hash-link" aria-label="Direct link to IsFile" title="Direct link to IsFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsFile 判断路径是否存在且是一个文件</p>
@@ -1105,7 +1105,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1122,7 +1122,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在且为文件</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">路径是否存在且为文件</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="islink">IsLink<a href="#islink" class="hash-link" aria-label="Direct link to IsLink" title="Direct link to IsLink" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>IsLink 判断文件是否是一个符号链接</p>
@@ -1154,7 +1154,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">file</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">file</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待判断的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1171,7 +1171,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为符号链接</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为符号链接</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="join">Join<a href="#join" class="hash-link" aria-label="Direct link to Join" title="Direct link to Join" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Join 将任意数量的路径以默认路径分隔符链接在一起</p>
@@ -1203,7 +1203,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">任意数量的路径片段</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">任意数量的路径片段</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1220,7 +1220,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">用默认分隔符拼接后的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">用默认分隔符拼接后的路径</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ls">Ls<a href="#ls" class="hash-link" aria-label="Direct link to Ls" title="Direct link to Ls" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Dir 列出一个目录下的所有文件和目录，返回一个文件信息切片，它是 Ls 的别名</p>
@@ -1252,7 +1252,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待列出的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待列出的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1269,7 +1269,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下文件和子目录的文件信息切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下文件和子目录的文件信息切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="lstat">Lstat<a href="#lstat" class="hash-link" aria-label="Direct link to Lstat" title="Direct link to Lstat" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Lstat 返回一个文件的信息和错误，如果文件是一个符号链接，返回的是符号链接的信息</p>
@@ -1306,7 +1306,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待查询的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待查询的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1328,7 +1328,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>os.FileInfo</code></td><td style="text-align:left">文件信息对象（符号链接本身的信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>os.FileInfo</code></td><td style="text-align:left">文件信息对象（符号链接本身的信息）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="matchmalicious">MatchMalicious<a href="#matchmalicious" class="hash-link" aria-label="Direct link to MatchMalicious" title="Direct link to MatchMalicious" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>MatchMalicious 检测文件或内容是否包含恶意特征</p>
@@ -1374,7 +1374,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">input</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">文件路径（string）或文件内容（[]byte）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">input</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">文件路径（string）或文件内容（[]byte）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1396,7 +1396,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">匹配到的特征名称列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（仅当输入为文件路径且读取失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">匹配到的特征名称列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（仅当输入为文件路径且读取失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="matchmaliciouswithdetails">MatchMaliciousWithDetails<a href="#matchmaliciouswithdetails" class="hash-link" aria-label="Direct link to MatchMaliciousWithDetails" title="Direct link to MatchMaliciousWithDetails" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>MatchMaliciousWithDetails 检测文件或内容并返回详细信息</p>
@@ -1442,7 +1442,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">input</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">文件路径（string）或文件内容（[]byte）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">input</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">文件路径（string）或文件内容（[]byte）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1464,7 +1464,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]map[string]any</code></td><td style="text-align:left">匹配到的特征详细信息列表（含 name/category/description/severity）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（仅当输入为文件路径且读取失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]map[string]any</code></td><td style="text-align:left">匹配到的特征详细信息列表（含 name/category/description/severity）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（仅当输入为文件路径且读取失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="md5">Md5<a href="#md5" class="hash-link" aria-label="Direct link to Md5" title="Direct link to Md5" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Md5 计算文件的 MD5 哈希值</p>
@@ -1496,7 +1496,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1513,7 +1513,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">MD5 哈希值（32位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mkdir">Mkdir<a href="#mkdir" class="hash-link" aria-label="Direct link to Mkdir" title="Direct link to Mkdir" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Mkdir 创建一个目录，返回错误</p>
@@ -1545,7 +1545,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1562,7 +1562,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mkdirall">MkdirAll<a href="#mkdirall" class="hash-link" aria-label="Direct link to MkdirAll" title="Direct link to MkdirAll" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>MkdirAll 递归创建一个目录（包括所有不存在的父目录），返回错误</p>
@@ -1594,7 +1594,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待创建的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1611,7 +1611,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mv">Mv<a href="#mv" class="hash-link" aria-label="Direct link to Mv" title="Direct link to Mv" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Mv 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹，它是 Rename 的别名</p>
@@ -1654,7 +1654,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">oldpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原路径</td></tr><tr><td style="text-align:left">newpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">oldpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原路径</td></tr><tr><td style="text-align:left">newpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1671,7 +1671,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newmaliciousfilematcher">NewMaliciousFileMatcher<a href="#newmaliciousfilematcher" class="hash-link" aria-label="Direct link to NewMaliciousFileMatcher" title="Direct link to NewMaliciousFileMatcher" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewMaliciousFileMatcher 创建一个恶意文件特征匹配器，内置常见 webshell/恶意代码特征</p>
@@ -1699,7 +1699,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MaliciousFileMatcher</code></td><td style="text-align:left">恶意文件特征匹配器对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*MaliciousFileMatcher</code></td><td style="text-align:left">恶意文件特征匹配器对象</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newmultifilelinereader">NewMultiFileLineReader<a href="#newmultifilelinereader" class="hash-link" aria-label="Direct link to NewMultiFileLineReader" title="Direct link to NewMultiFileLineReader" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewMultiFileLineReader 创建一个多文件读取器，返回一个多文件读取器结构体引用和错误</p>
@@ -1736,7 +1736,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">files</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个待读取的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">files</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个待读取的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1758,7 +1758,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*mfreader.MultiFileLineReader</code></td><td style="text-align:left">多文件读取器结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*mfreader.MultiFileLineReader</code></td><td style="text-align:left">多文件读取器结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="open">Open<a href="#open" class="hash-link" aria-label="Direct link to Open" title="Direct link to Open" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Open 打开一个文件，返回一个文件结构体引用与错误</p>
@@ -1795,7 +1795,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打开的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打开的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1817,7 +1817,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="openfile">OpenFile<a href="#openfile" class="hash-link" aria-label="Direct link to OpenFile" title="Direct link to OpenFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>OpenFile 打开一个文件，使用 file.O_CREATE ... 和权限控制，返回一个文件结构体引用与错误</p>
@@ -1872,7 +1872,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打开的文件路径</td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">打开标志（如 file.O_CREATE|file.O_RDWR）</td></tr><tr><td style="text-align:left">mode</td><td style="text-align:left"><code>os.FileMode</code></td><td style="text-align:left">文件权限（如 0o777）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待打开的文件路径</td></tr><tr><td style="text-align:left">flags</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">打开标志（如 file.O_CREATE|file.O_RDWR）</td></tr><tr><td style="text-align:left">mode</td><td style="text-align:left"><code>os.FileMode</code></td><td style="text-align:left">文件权限（如 0o777）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1894,7 +1894,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readall">ReadAll<a href="#readall" class="hash-link" aria-label="Direct link to ReadAll" title="Direct link to ReadAll" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadAll 从 Reader 读取直到出现错误或 EOF，然后返回字节切片与错误</p>
@@ -1931,7 +1931,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">r</td><td style="text-align:left"><code>io.Reader</code></td><td style="text-align:left">可读取的流对象（Reader）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">r</td><td style="text-align:left"><code>io.Reader</code></td><td style="text-align:left">可读取的流对象（Reader）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1953,7 +1953,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">读取到的全部字节</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">读取到的全部字节</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readdirinfoindirectory">ReadDirInfoInDirectory<a href="#readdirinfoindirectory" class="hash-link" aria-label="Direct link to ReadDirInfoInDirectory" title="Direct link to ReadDirInfoInDirectory" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadDirInfoInDirectory 递归读取一个目录下的所有子目录信息，返回一个文件信息切片和错误</p>
@@ -1990,7 +1990,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2012,7 +2012,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下所有子目录的文件信息切片</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下所有子目录的文件信息切片</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readfile">ReadFile<a href="#readfile" class="hash-link" aria-label="Direct link to ReadFile" title="Direct link to ReadFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadFile 读取一个文件的所有内容，返回字节切片与错误</p>
@@ -2049,7 +2049,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filename</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filename</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2071,7 +2071,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">文件的全部内容字节</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">文件的全部内容字节</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readfileinfoindirectory">ReadFileInfoInDirectory<a href="#readfileinfoindirectory" class="hash-link" aria-label="Direct link to ReadFileInfoInDirectory" title="Direct link to ReadFileInfoInDirectory" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadFileInfoInDirectory 递归读取一个目录下的所有文件信息，返回一个文件信息切片和错误</p>
@@ -2108,7 +2108,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的目录路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待读取的目录路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2130,7 +2130,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下所有文件的文件信息切片</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*utils.FileInfo</code></td><td style="text-align:left">目录下所有文件的文件信息切片</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readlines">ReadLines<a href="#readlines" class="hash-link" aria-label="Direct link to ReadLines" title="Direct link to ReadLines" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadLines 尝试读取一个文件中的所有行，返回一个字符串切片，会去除BOM头和空行</p>
@@ -2162,7 +2162,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待读取的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待读取的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2179,7 +2179,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">文件中的所有行组成的字符串切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">文件中的所有行组成的字符串切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="readlineswithcallback">ReadLinesWithCallback<a href="#readlineswithcallback" class="hash-link" aria-label="Direct link to ReadLinesWithCallback" title="Direct link to ReadLinesWithCallback" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ReadLinesWithCallback 尝试读取一个文件中的所有行，每读取一行，便会调用回调函数，返回错误</p>
@@ -2221,7 +2221,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待读取的文件路径</td></tr><tr><td style="text-align:left">callback</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left">每读取一行时调用的回调函数，参数为该行内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待读取的文件路径</td></tr><tr><td style="text-align:left">callback</td><td style="text-align:left"><code>func(string)</code></td><td style="text-align:left">每读取一行时调用的回调函数，参数为该行内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2238,7 +2238,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="remove">Remove<a href="#remove" class="hash-link" aria-label="Direct link to Remove" title="Direct link to Remove" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Remove 删除路径及其包含的所有子路径</p>
@@ -2270,7 +2270,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待删除的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待删除的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2287,7 +2287,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="rename">Rename<a href="#rename" class="hash-link" aria-label="Direct link to Rename" title="Direct link to Rename" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Rename 重命名一个文件或文件夹，返回错误，这个函数也会移动文件或文件夹</p>
@@ -2330,7 +2330,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">oldpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原路径</td></tr><tr><td style="text-align:left">newpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">oldpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原路径</td></tr><tr><td style="text-align:left">newpath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2347,7 +2347,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="rm">Rm<a href="#rm" class="hash-link" aria-label="Direct link to Rm" title="Direct link to Rm" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Rm 删除路径及其包含的所有子路径，它是 Remove 的别名</p>
@@ -2379,7 +2379,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待删除的路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待删除的路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2396,7 +2396,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="save">Save<a href="#save" class="hash-link" aria-label="Direct link to Save" title="Direct link to Save" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Save 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误</p>
@@ -2438,7 +2438,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待写入的内容，支持字符串、字节切片或字符串切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">fileName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待写入的内容，支持字符串、字节切片或字符串切片</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2455,7 +2455,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="savejson">SaveJson<a href="#savejson" class="hash-link" aria-label="Direct link to SaveJson" title="Direct link to SaveJson" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-41">详细描述<a href="#详细描述-41" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>SaveJson 将字符串或字节切片或字符串切片写入到文件中，如果文件不存在则创建，如果文件存在则覆盖，返回错误</p>
@@ -2498,7 +2498,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待写入的内容，非字符串/字节类型会被序列化为 JSON</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标文件路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待写入的内容，非字符串/字节类型会被序列化为 JSON</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2515,7 +2515,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sha1">Sha1<a href="#sha1" class="hash-link" aria-label="Direct link to Sha1" title="Direct link to Sha1" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-42">详细描述<a href="#详细描述-42" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Sha1 计算文件的 SHA1 哈希值</p>
@@ -2547,7 +2547,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-41">返回值<a href="#返回值-41" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2564,7 +2564,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SHA1 哈希值（40位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="sha256">Sha256<a href="#sha256" class="hash-link" aria-label="Direct link to Sha256" title="Direct link to Sha256" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-43">详细描述<a href="#详细描述-43" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Sha256 计算文件的 SHA256 哈希值</p>
@@ -2596,7 +2596,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">filepath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2613,7 +2613,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">SHA256 哈希值（64位十六进制字符串），如果文件不存在或读取失败则返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="split">Split<a href="#split" class="hash-link" aria-label="Direct link to Split" title="Direct link to Split" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-44">详细描述<a href="#详细描述-44" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Split 以操作系统的默认路径分隔符分割路径，返回目录和文件名</p>
@@ -2650,7 +2650,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">path</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">输入路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2672,7 +2672,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目录部分（带结尾分隔符）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件名部分</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目录部分（带结尾分隔符）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">文件名部分</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="stat">Stat<a href="#stat" class="hash-link" aria-label="Direct link to Stat" title="Direct link to Stat" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-45">详细描述<a href="#详细描述-45" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Stat 返回一个文件的信息和错误</p>
@@ -2709,7 +2709,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待查询的文件路径</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">name</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待查询的文件路径</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-44">返回值<a href="#返回值-44" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2731,7 +2731,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>os.FileInfo</code></td><td style="text-align:left">文件信息对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>os.FileInfo</code></td><td style="text-align:left">文件信息对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tailf">TailF<a href="#tailf" class="hash-link" aria-label="Direct link to TailF" title="Direct link to TailF" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-46">详细描述<a href="#详细描述-46" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>TailF 模拟 unix 命令 tail -f，执行这个函数会一直阻塞，监听文件内容变化，如果文件有变化，会自动通过回调通知新的内容</p>
@@ -2769,7 +2769,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待监听的文件路径</td></tr><tr><td style="text-align:left">line</td><td style="text-align:left"><code>func(i string)</code></td><td style="text-align:left">每读取到新行时调用的回调函数，参数为该行内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待监听的文件路径</td></tr><tr><td style="text-align:left">line</td><td style="text-align:left"><code>func(i string)</code></td><td style="text-align:left">每读取到新行时调用的回调函数，参数为该行内容</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tempfile">TempFile<a href="#tempfile" class="hash-link" aria-label="Direct link to TempFile" title="Direct link to TempFile" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-47">详细描述<a href="#详细描述-47" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>TempFile 创建一个临时文件，返回一个文件结构体引用与错误</p>
@@ -2806,7 +2806,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">dirPart</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的临时文件所在目录，不传则使用默认临时目录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">dirPart</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的临时文件所在目录，不传则使用默认临时目录</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-45">返回值<a href="#返回值-45" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2828,7 +2828,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">临时文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*_yakFile</code></td><td style="text-align:left">临时文件结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tempfilename">TempFileName<a href="#tempfilename" class="hash-link" aria-label="Direct link to TempFileName" title="Direct link to TempFileName" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-48">详细描述<a href="#详细描述-48" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>TempFileName 创建一个临时文件，返回一个文件名与错误</p>
@@ -2865,7 +2865,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">pattern</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的文件名匹配模式（如 &quot;pattern-*.txt&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">pattern</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">可选的文件名匹配模式（如 &quot;pattern-*.txt&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-46">返回值<a href="#返回值-46" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2887,7 +2887,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">创建的临时文件名</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">创建的临时文件名</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="walk">Walk<a href="#walk" class="hash-link" aria-label="Direct link to Walk" title="Direct link to Walk" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-49">详细描述<a href="#详细描述-49" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Walk 遍历一个目录下的所有文件和目录，对每一项调用回调函数，返回错误</p>
@@ -2929,7 +2929,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">uPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待遍历的目录路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>func(info *utils.FileInfo) bool</code></td><td style="text-align:left">对每个文件/目录调用的回调函数，返回 true 继续遍历</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">uPath</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待遍历的目录路径</td></tr><tr><td style="text-align:left">i</td><td style="text-align:left"><code>func(info *utils.FileInfo) bool</code></td><td style="text-align:left">对每个文件/目录调用的回调函数，返回 true 继续遍历</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-47">返回值<a href="#返回值-47" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2946,6 +2946,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/file.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/ffmpeg"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ffmpeg</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/filemonitor"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">filemonitor</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#abs" class="table-of-contents__link toc-highlight">Abs</a></li><li><a href="#cat" class="table-of-contents__link toc-highlight">Cat</a></li><li><a href="#clean" class="table-of-contents__link toc-highlight">Clean</a></li><li><a href="#cp" class="table-of-contents__link toc-highlight">Cp</a></li><li><a href="#create" class="table-of-contents__link toc-highlight">Create</a></li><li><a href="#detectfiletype" class="table-of-contents__link toc-highlight">DetectFileType</a></li><li><a href="#detectmimetypefromfile" class="table-of-contents__link toc-highlight">DetectMIMETypeFromFile</a></li><li><a href="#detectmimetypefromraw" class="table-of-contents__link toc-highlight">DetectMIMETypeFromRaw</a></li><li><a href="#dir" class="table-of-contents__link toc-highlight">Dir</a></li><li><a href="#getbase" class="table-of-contents__link toc-highlight">GetBase</a></li><li><a href="#getdirpath" class="table-of-contents__link toc-highlight">GetDirPath</a></li><li><a href="#getext" class="table-of-contents__link toc-highlight">GetExt</a></li><li><a href="#gettypebyextension" class="table-of-contents__link toc-highlight">GetTypeByExtension</a></li><li><a href="#isabs" class="table-of-contents__link toc-highlight">IsAbs</a></li><li><a href="#isdir" class="table-of-contents__link toc-highlight">IsDir</a></li><li><a href="#isexisted" class="table-of-contents__link toc-highlight">IsExisted</a></li><li><a href="#isfile" class="table-of-contents__link toc-highlight">IsFile</a></li><li><a href="#islink" class="table-of-contents__link toc-highlight">IsLink</a></li><li><a href="#join" class="table-of-contents__link toc-highlight">Join</a></li><li><a href="#ls" class="table-of-contents__link toc-highlight">Ls</a></li><li><a href="#lstat" class="table-of-contents__link toc-highlight">Lstat</a></li><li><a href="#matchmalicious" class="table-of-contents__link toc-highlight">MatchMalicious</a></li><li><a href="#matchmaliciouswithdetails" class="table-of-contents__link toc-highlight">MatchMaliciousWithDetails</a></li><li><a href="#md5" class="table-of-contents__link toc-highlight">Md5</a></li><li><a href="#mkdir" class="table-of-contents__link toc-highlight">Mkdir</a></li><li><a href="#mkdirall" class="table-of-contents__link toc-highlight">MkdirAll</a></li><li><a href="#mv" class="table-of-contents__link toc-highlight">Mv</a></li><li><a href="#newmaliciousfilematcher" class="table-of-contents__link toc-highlight">NewMaliciousFileMatcher</a></li><li><a href="#newmultifilelinereader" class="table-of-contents__link toc-highlight">NewMultiFileLineReader</a></li><li><a href="#open" class="table-of-contents__link toc-highlight">Open</a></li><li><a href="#openfile" class="table-of-contents__link toc-highlight">OpenFile</a></li><li><a href="#readall" class="table-of-contents__link toc-highlight">ReadAll</a></li><li><a href="#readdirinfoindirectory" class="table-of-contents__link toc-highlight">ReadDirInfoInDirectory</a></li><li><a href="#readfile" class="table-of-contents__link toc-highlight">ReadFile</a></li><li><a href="#readfileinfoindirectory" class="table-of-contents__link toc-highlight">ReadFileInfoInDirectory</a></li><li><a href="#readlines" class="table-of-contents__link toc-highlight">ReadLines</a></li><li><a href="#readlineswithcallback" class="table-of-contents__link toc-highlight">ReadLinesWithCallback</a></li><li><a href="#remove" class="table-of-contents__link toc-highlight">Remove</a></li><li><a href="#rename" class="table-of-contents__link toc-highlight">Rename</a></li><li><a href="#rm" class="table-of-contents__link toc-highlight">Rm</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">Save</a></li><li><a href="#savejson" class="table-of-contents__link toc-highlight">SaveJson</a></li><li><a href="#sha1" class="table-of-contents__link toc-highlight">Sha1</a></li><li><a href="#sha256" class="table-of-contents__link toc-highlight">Sha256</a></li><li><a href="#split" class="table-of-contents__link toc-highlight">Split</a></li><li><a href="#stat" class="table-of-contents__link toc-highlight">Stat</a></li><li><a href="#tailf" class="table-of-contents__link toc-highlight">TailF</a></li><li><a href="#tempfile" class="table-of-contents__link toc-highlight">TempFile</a></li><li><a href="#tempfilename" class="table-of-contents__link toc-highlight">TempFileName</a></li><li><a href="#walk" class="table-of-contents__link toc-highlight">Walk</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/file.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/ffmpeg"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">ffmpeg</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/filemonitor"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">filemonitor</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#abs" class="table-of-contents__link toc-highlight">Abs</a></li><li><a href="#cat" class="table-of-contents__link toc-highlight">Cat</a></li><li><a href="#clean" class="table-of-contents__link toc-highlight">Clean</a></li><li><a href="#cp" class="table-of-contents__link toc-highlight">Cp</a></li><li><a href="#create" class="table-of-contents__link toc-highlight">Create</a></li><li><a href="#detectfiletype" class="table-of-contents__link toc-highlight">DetectFileType</a></li><li><a href="#detectmimetypefromfile" class="table-of-contents__link toc-highlight">DetectMIMETypeFromFile</a></li><li><a href="#detectmimetypefromraw" class="table-of-contents__link toc-highlight">DetectMIMETypeFromRaw</a></li><li><a href="#dir" class="table-of-contents__link toc-highlight">Dir</a></li><li><a href="#getbase" class="table-of-contents__link toc-highlight">GetBase</a></li><li><a href="#getdirpath" class="table-of-contents__link toc-highlight">GetDirPath</a></li><li><a href="#getext" class="table-of-contents__link toc-highlight">GetExt</a></li><li><a href="#gettypebyextension" class="table-of-contents__link toc-highlight">GetTypeByExtension</a></li><li><a href="#isabs" class="table-of-contents__link toc-highlight">IsAbs</a></li><li><a href="#isdir" class="table-of-contents__link toc-highlight">IsDir</a></li><li><a href="#isexisted" class="table-of-contents__link toc-highlight">IsExisted</a></li><li><a href="#isfile" class="table-of-contents__link toc-highlight">IsFile</a></li><li><a href="#islink" class="table-of-contents__link toc-highlight">IsLink</a></li><li><a href="#join" class="table-of-contents__link toc-highlight">Join</a></li><li><a href="#ls" class="table-of-contents__link toc-highlight">Ls</a></li><li><a href="#lstat" class="table-of-contents__link toc-highlight">Lstat</a></li><li><a href="#matchmalicious" class="table-of-contents__link toc-highlight">MatchMalicious</a></li><li><a href="#matchmaliciouswithdetails" class="table-of-contents__link toc-highlight">MatchMaliciousWithDetails</a></li><li><a href="#md5" class="table-of-contents__link toc-highlight">Md5</a></li><li><a href="#mkdir" class="table-of-contents__link toc-highlight">Mkdir</a></li><li><a href="#mkdirall" class="table-of-contents__link toc-highlight">MkdirAll</a></li><li><a href="#mv" class="table-of-contents__link toc-highlight">Mv</a></li><li><a href="#newmaliciousfilematcher" class="table-of-contents__link toc-highlight">NewMaliciousFileMatcher</a></li><li><a href="#newmultifilelinereader" class="table-of-contents__link toc-highlight">NewMultiFileLineReader</a></li><li><a href="#open" class="table-of-contents__link toc-highlight">Open</a></li><li><a href="#openfile" class="table-of-contents__link toc-highlight">OpenFile</a></li><li><a href="#readall" class="table-of-contents__link toc-highlight">ReadAll</a></li><li><a href="#readdirinfoindirectory" class="table-of-contents__link toc-highlight">ReadDirInfoInDirectory</a></li><li><a href="#readfile" class="table-of-contents__link toc-highlight">ReadFile</a></li><li><a href="#readfileinfoindirectory" class="table-of-contents__link toc-highlight">ReadFileInfoInDirectory</a></li><li><a href="#readlines" class="table-of-contents__link toc-highlight">ReadLines</a></li><li><a href="#readlineswithcallback" class="table-of-contents__link toc-highlight">ReadLinesWithCallback</a></li><li><a href="#remove" class="table-of-contents__link toc-highlight">Remove</a></li><li><a href="#rename" class="table-of-contents__link toc-highlight">Rename</a></li><li><a href="#rm" class="table-of-contents__link toc-highlight">Rm</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">Save</a></li><li><a href="#savejson" class="table-of-contents__link toc-highlight">SaveJson</a></li><li><a href="#sha1" class="table-of-contents__link toc-highlight">Sha1</a></li><li><a href="#sha256" class="table-of-contents__link toc-highlight">Sha256</a></li><li><a href="#split" class="table-of-contents__link toc-highlight">Split</a></li><li><a href="#stat" class="table-of-contents__link toc-highlight">Stat</a></li><li><a href="#tailf" class="table-of-contents__link toc-highlight">TailF</a></li><li><a href="#tempfile" class="table-of-contents__link toc-highlight">TempFile</a></li><li><a href="#tempfilename" class="table-of-contents__link toc-highlight">TempFileName</a></li><li><a href="#walk" class="table-of-contents__link toc-highlight">Walk</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

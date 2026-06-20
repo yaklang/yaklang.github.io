@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">risk | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/risk"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="risk | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/risk"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/risk" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/risk" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/risk" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"risk","item":"https://yaklang.com/en/docs/api/risk"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -242,7 +242,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#checkdnslogbytoken" class="">risk.CheckDNSLogByToken</a></td><td style="text-align:left">CheckDNSLogByToken 通过 token 查询 DNSLog 平台上是否收到对应的 DNS 解析触发（导出名为 risk.CheckDNSLogByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewDNSLogDomain 生成的 token 使用 参数: - toke...</td></tr><tr><td style="text-align:left"><a href="#checkhttplogbytoken" class="">risk.CheckHTTPLogByToken</a></td><td style="text-align:left">CheckHTTPLogByToken 通过 token 查询是否收到对应的 HTTP 带外请求（导出名为 risk.CheckHTTPLogByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewHTTPLog 生成的 token 使用 参数: - token: HTTPLog to...</td></tr><tr><td style="text-align:left"><a href="#checkicmptriggerbylength" class="">risk.CheckICMPTriggerByLength</a></td><td style="text-align:left">CheckICMPTriggerByLength 通过特定 ICMP 包长度检查 ICMP 反连事件，返回触发通知与错误 在 yak 中通过 risk.CheckICMPTriggerByLength 调用，依赖公网 Bridge 反连服务 参数: - i: 用于触发匹配的特定 ICMP 包长度 返...</td></tr><tr><td style="text-align:left"><a href="#checkrandomtriggerbytoken" class="">risk.CheckRandomTriggerByToken</a></td><td style="text-align:left">CheckRandomTriggerByToken 通过 token 查询是否收到随机端口反连事件（导出名为 risk.CheckRandomTriggerByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewRandomPortTrigger 生成的 token 使用 参数: - ...</td></tr><tr><td style="text-align:left"><a href="#checkserverreachable" class="">risk.CheckServerReachable</a></td><td style="text-align:left">CheckServerReachable 通过 Bridge 检查目标是否可达，第一个参数为上下文，第二个参数为目标地址，第三个参数为是否进行 http 检测，返回的第一个值是 CheckServerReachableResponse，第二个值是错误 参数: - ctx: 上下文，用于控制超时与取消...</td></tr><tr><td style="text-align:left"><a href="#createrisk" class="">risk.CreateRisk</a></td><td style="text-align:left">CreateRisk 创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用 参数: - u: 目标 URL 或 IP - opts: 零个或多个风险选项参数，如 risk.title、risk.t...</td></tr><tr><td style="text-align:left"><a href="#deleteriskbyid" class="">risk.DeleteRiskByID</a></td><td style="text-align:left">DeleteRiskByID 根据风险记录ID删除风险记录 参数: - id: 风险记录 ID 返回值: - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#deleteriskbytarget" class="">risk.DeleteRiskByTarget</a></td><td style="text-align:left">DeleteRiskByTarget 根据目标(ip或ip:port)删除风险记录 参数: - addr: 目标地址(ip 或 ip:port) 返回值: - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#extracttokenfromurl" class="">risk.ExtractTokenFromUrl</a></td><td style="text-align:left">ExtractTokenFromUrl 从反连(reverse) URL 中提取其中携带的 token 字符串 在 yak 中通过 risk.ExtractTokenFromUrl 调用，常配合 DNSLog/HTTPLog 反连验证使用 参数: - tokenUrl: 包含 token 的反连 U...</td></tr><tr><td style="text-align:left"><a href="#getssariskbyid" class="">risk.GetSSARiskByID</a></td><td style="text-align:left">GetSSARiskByID 根据 SSA Risk ID 获取 SSA 风险记录 参数: - id: SSA Risk ID 返回值: - SSA 风险记录，获取失败时返回 nil</td></tr><tr><td style="text-align:left"><a href="#getssarisksourcecode" class="">risk.GetSSARiskSourceCode</a></td><td style="text-align:left">GetSSARiskSourceCode 根据 SSA Risk ID 获取完整的源代码,无法获取会返回相关代码片段CodeFragment 参数: - id: SSA Risk ID 返回值: - 完整源代码，无法获取时返回代码片段 CodeFragment</td></tr><tr><td style="text-align:left"><a href="#getssarisksourcecodewithfragment" class="">risk.GetSSARiskSourceCodeWithFragment</a></td><td style="text-align:left">GetSSARiskSourceCodeWithFragment 根据 SSA Risk ID 获取源代码，如果获取完整源码失败则返回代码片段CodeFragment 参数: - id: SSA Risk ID 返回值: - 完整源码 - 代码片段 CodeFragment - 是否成功获取完整源码</td></tr><tr><td style="text-align:left"><a href="#getssariskwithdataflow" class="">risk.GetSSARiskWithDataFlow</a></td><td style="text-align:left">GetSSARiskWithDataFlow 根据 SSA Risk ID 获取包含数据流信息的风险记录 参数: - id: SSA Risk ID 返回值: - 包含数据流信息的风险记录，获取失败时返回 nil</td></tr><tr><td style="text-align:left"><a href="#havereverserisk" class="">risk.HaveReverseRisk</a></td><td style="text-align:left">HaveReverseRisk 通过轮询检查是否存在对应token的反连记录，重试最多5次，每次等待1秒， 如果存在返回true，否则返回false 参数: - token: 反连验证用的 token 返回值: - 是否存在对应 token 的反连记录</td></tr><tr><td style="text-align:left"><a href="#newdnslogdomain" class="">risk.NewDNSLogDomain</a></td><td style="text-align:left">NewDNSLogDomain 返回一个公网 Bridge 的 DNSLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 返回值: - DNSLog 域名 - 反连验证用的 token - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#newhttplog" class="">risk.NewHTTPLog</a></td><td style="text-align:left">NewHTTPLog 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 参数: - i: 可选参数，用于定制 HTTPLog 域名申请的行为 返回值: - HTTPLog 域名 - 反连验证用的 token - 错误信息，失败时非 n...</td></tr><tr><td style="text-align:left"><a href="#newlocalreversehttpsurl" class="">risk.NewLocalReverseHTTPSUrl</a></td><td style="text-align:left">NewLocalReverseHTTPSUrl 返回一个本地 Bridge 的反向 HTTPS URL 返回值: - 反向 HTTPS URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newlocalreversehttpurl" class="">risk.NewLocalReverseHTTPUrl</a></td><td style="text-align:left">NewLocalReverseHTTPUrl 返回一个本地 Bridge 的反向 HTTP URL 返回值: - 反向 HTTP URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newlocalreversermiurl" class="">risk.NewLocalReverseRMIUrl</a></td><td style="text-align:left">NewLocalReverseRMIUrl 返回一个本地 Bridge 的反向 RMI URL 返回值: - 反向 RMI URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversehttpsurl" class="">risk.NewPublicReverseHTTPSUrl</a></td><td style="text-align:left">NewPublicReverseHTTPSUrl 返回一个公网 Bridge 的反向 HTTPS URL 返回值: - 反向 HTTPS URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversehttpurl" class="">risk.NewPublicReverseHTTPUrl</a></td><td style="text-align:left">NewPublicReverseHTTPUrl 返回一个公网 Bridge 的反向 HTTP URL 返回值: - 反向 HTTP URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversermiurl" class="">risk.NewPublicReverseRMIUrl</a></td><td style="text-align:left">NewPublicReverseRMIUrl 返回一个公网 Bridge 的反向 RMI URL 返回值: - 反向 RMI URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newrandomporttrigger" class="">risk.NewRandomPortTrigger</a></td><td style="text-align:left">NewRandomPortTrigger 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 参数: - opt: 零个或多个风险选项参数，如 risk.title、risk.severity 等 返回值: - 反连验证用的 toke...</td></tr><tr><td style="text-align:left"><a href="#newrisk" class="">risk.NewRisk</a></td><td style="text-align:left">NewRisk 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk） 第一个参数为目标，后面可传入零个或多个选项用于描述该 risk（标题、类型、严重程度、描述、解决方案等） 参数: - target: 漏洞目标，通常为 URL 或 IP - opts: 可选项，如 risk.tit...</td></tr><tr><td style="text-align:left"><a href="#newunverifiedrisk" class="">risk.NewUnverifiedRisk</a></td><td style="text-align:left">NewUnverifiedRisk 创建一条&quot;待验证&quot;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证 在 yak 中通过 risk.NewUnverifiedRisk 调用，配合反连 token 使用 参数: - u: 风险目标(URL 或 IP) - token: 反连验证...</td></tr><tr><td style="text-align:left"><a href="#queryrisksbykeyword" class="">risk.QueryRisksByKeyword</a></td><td style="text-align:left">QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道 参数: - keyword: 查询关键字 - opts: 零个或多个风险选项参数，用于附加过滤条件，如 risk.severity、risk.type 等 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#registerbeforerisksave" class="">risk.RegisterBeforeRiskSave</a></td><td style="text-align:left">RegisterBeforeRiskSave 注册一个在风险记录保存到数据库之前执行的回调钩子，可用于统一改写/丰富风险字段 在 yak 中通过 risk.RegisterBeforeRiskSave 调用 参数: - f: 回调函数，入参为即将保存的风险记录，可在其中修改该记录</td></tr><tr><td style="text-align:left"><a href="#save" class="">risk.Save</a></td><td style="text-align:left">Save 将一条漏洞记录结构体保存到数据库（导出名为 risk.Save） 通常与 risk.CreateRisk 搭配使用：先构造再保存 参数: - r: 漏洞记录对象（通常来自 risk.CreateRisk） 返回值: - 错误信息（保存失败时返回）</td></tr><tr><td style="text-align:left"><a href="#yieldriskbycreateat" class="">risk.YieldRiskByCreateAt</a></td><td style="text-align:left">YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道 参数: - timestamp: 创建时间的 Unix 时间戳 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyids" class="">risk.YieldRiskByIds</a></td><td style="text-align:left">YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道 参数: - ids: 风险记录 ID 列表 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyruntimeid" class="">risk.YieldRiskByRuntimeId</a></td><td style="text-align:left">YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道 参数: - runtimeId: 运行时 ID 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyscriptname" class="">risk.YieldRiskByScriptName</a></td><td style="text-align:left">YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录的管道 参数: - scriptName: 插件名 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbytarget" class="">risk.YieldRiskByTarget</a></td><td style="text-align:left">YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记录的管道 参数: - target: 目标地址(ip 或 ip:port) 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#appendpacketpairs" class="">risk.appendPacketPairs</a></td><td style="text-align:left">appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文 会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id、url 以及请求/响应快照， 前端可优先按 id 查询详情；HTTPFlow 被删除后仍可使用 Pac...</td></tr><tr><td style="text-align:left"><a href="#cve" class="">risk.cve</a></td><td style="text-align:left">cve 是一个选项参数，用于指定风险记录的 CVE 编号 参数: - s: CVE 编号，例如 &quot;CVE-2021-22145&quot; 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#description" class="">risk.description</a></td><td style="text-align:left">description 是一个选项参数，用于指定漏洞记录的描述 参数: - i: 漏洞记录的描述 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#details" class="">risk.details</a></td><td style="text-align:left">details 是一个选项参数，用于指定风险记录的详细信息 参数: - i: 详细信息，通常为 map 或可转换为 map 的值 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#fromyakscript" class="">risk.fromYakScript</a></td><td style="text-align:left">fromScript 是一个选项参数，用于指定风险记录的来源插件名 参数: - i: 风险记录的来源插件名 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#ignore" class="">risk.ignore</a></td><td style="text-align:left">ignore 是一个选项参数，用于标记风险记录为已忽略状态(忽略后默认查询不展示) 参数: - i: 是否忽略该风险 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#ip" class="">risk.ip</a></td><td style="text-align:left">ip 是一个选项参数，用于指定风险记录关联的 IP 地址 参数: - i: IP 地址字符串 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#level" class="">risk.level</a></td><td style="text-align:left">severity 是一个选项参数，用于指定风险记录的严重程度 可用的严重程度有: critical, high, warning, info, low 参数: - i: 严重程度，可选 critical / high / warning / info / low 返回值: - 一个 risk.New...</td></tr><tr><td style="text-align:left"><a href="#parameter" class="">risk.parameter</a></td><td style="text-align:left">parameter 是一个选项参数，用于指定风险记录的参数 参数: - i: 风险记录的参数 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#payload" class="">risk.payload</a></td><td style="text-align:left">payload 是一个选项参数，用于指定漏洞记录的载荷(payload) 参数: - i: 漏洞记录的载荷(payload) 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#potential" class="">risk.potential</a></td><td style="text-align:left">potential 是一个选项参数，用于标记风险记录是否为潜在(疑似)风险 参数: - i: 是否为潜在风险 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#request" class="">risk.request</a></td><td style="text-align:left">request 是一个选项参数，用于指定风险记录的原始请求报文 参数: - i: 原始请求报文，支持 string / []byte / 任意可转成字符串的类型 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#response" class="">risk.response</a></td><td style="text-align:left">response 是一个选项参数，用于指定风险记录的原始响应报文 参数: - i: 原始响应报文，支持 string / []byte / 任意可转成字符串的类型 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#runtimeid" class="">risk.runtimeId</a></td><td style="text-align:left">runtimeId 是一个选项参数，用于指定风险记录的运行时 ID 参数: - i: 风险记录的运行时 ID 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#severity" class="">risk.severity</a></td><td style="text-align:left">severity 是一个选项参数，用于指定风险记录的严重程度 可用的严重程度有: critical, high, warning, info, low 参数: - i: 严重程度，可选 critical / high / warning / info / low 返回值: - 一个 risk.New...</td></tr><tr><td style="text-align:left"><a href="#solution" class="">risk.solution</a></td><td style="text-align:left">solution 是一个选项参数，用于指定漏洞记录的解决方案 参数: - i: 漏洞记录的解决方案 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#tag" class="">risk.tag</a></td><td style="text-align:left">tag 是一个选项参数，用于为风险记录设置标签(多个标签可用分隔符拼接) 参数: - i: 标签字符串 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#title" class="">risk.title</a></td><td style="text-align:left">title 是一个选项参数，用于指定漏洞记录的标题 参数: - i: 漏洞记录的标题 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#titleverbose" class="">risk.titleVerbose</a></td><td style="text-align:left">titleVerbose 是一个选项参数，用于指定漏洞记录的详细标题 参数: - i: 漏洞记录的详细标题 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#token" class="">risk.token</a></td><td style="text-align:left">token 是一个选项参数，用于指定风险记录的反连 token 参数: - i: 风险记录的反连 token 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#type" class="">risk.type</a></td><td style="text-align:left">type 是一个选项参数，用于指定风险类型，可用的风险类型: SQL 注入: sqli​,sqlinj​,sql-inj,sqlinjection​,sql-injection​ 跨站脚本:xss​ 远程执行: rce​,rce-command,rce-code​ 文件操作: lfi​,file-r...</td></tr><tr><td style="text-align:left"><a href="#typeverbose" class="">risk.typeVerbose</a></td><td style="text-align:left">typeVerbose 是一个选项参数，用于指定风险类型的详细描述 参数: - i: 风险类型的详细描述 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#checkdnslogbytoken" class="">risk.CheckDNSLogByToken</a></td><td style="text-align:left">CheckDNSLogByToken 通过 token 查询 DNSLog 平台上是否收到对应的 DNS 解析触发（导出名为 risk.CheckDNSLogByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewDNSLogDomain 生成的 token 使用 参数: - toke...</td></tr><tr><td style="text-align:left"><a href="#checkhttplogbytoken" class="">risk.CheckHTTPLogByToken</a></td><td style="text-align:left">CheckHTTPLogByToken 通过 token 查询是否收到对应的 HTTP 带外请求（导出名为 risk.CheckHTTPLogByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewHTTPLog 生成的 token 使用 参数: - token: HTTPLog to...</td></tr><tr><td style="text-align:left"><a href="#checkicmptriggerbylength" class="">risk.CheckICMPTriggerByLength</a></td><td style="text-align:left">CheckICMPTriggerByLength 通过特定 ICMP 包长度检查 ICMP 反连事件，返回触发通知与错误 在 yak 中通过 risk.CheckICMPTriggerByLength 调用，依赖公网 Bridge 反连服务 参数: - i: 用于触发匹配的特定 ICMP 包长度 返...</td></tr><tr><td style="text-align:left"><a href="#checkrandomtriggerbytoken" class="">risk.CheckRandomTriggerByToken</a></td><td style="text-align:left">CheckRandomTriggerByToken 通过 token 查询是否收到随机端口反连事件（导出名为 risk.CheckRandomTriggerByToken） 常用于带外（OOB）漏洞验证，配合 risk.NewRandomPortTrigger 生成的 token 使用 参数: - ...</td></tr><tr><td style="text-align:left"><a href="#checkserverreachable" class="">risk.CheckServerReachable</a></td><td style="text-align:left">CheckServerReachable 通过 Bridge 检查目标是否可达，第一个参数为上下文，第二个参数为目标地址，第三个参数为是否进行 http 检测，返回的第一个值是 CheckServerReachableResponse，第二个值是错误 参数: - ctx: 上下文，用于控制超时与取消...</td></tr><tr><td style="text-align:left"><a href="#createrisk" class="">risk.CreateRisk</a></td><td style="text-align:left">CreateRisk 创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用 参数: - u: 目标 URL 或 IP - opts: 零个或多个风险选项参数，如 risk.title、risk.t...</td></tr><tr><td style="text-align:left"><a href="#deleteriskbyid" class="">risk.DeleteRiskByID</a></td><td style="text-align:left">DeleteRiskByID 根据风险记录ID删除风险记录 参数: - id: 风险记录 ID 返回值: - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#deleteriskbytarget" class="">risk.DeleteRiskByTarget</a></td><td style="text-align:left">DeleteRiskByTarget 根据目标(ip或ip:port)删除风险记录 参数: - addr: 目标地址(ip 或 ip:port) 返回值: - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#extracttokenfromurl" class="">risk.ExtractTokenFromUrl</a></td><td style="text-align:left">ExtractTokenFromUrl 从反连(reverse) URL 中提取其中携带的 token 字符串 在 yak 中通过 risk.ExtractTokenFromUrl 调用，常配合 DNSLog/HTTPLog 反连验证使用 参数: - tokenUrl: 包含 token 的反连 U...</td></tr><tr><td style="text-align:left"><a href="#getssariskbyid" class="">risk.GetSSARiskByID</a></td><td style="text-align:left">GetSSARiskByID 根据 SSA Risk ID 获取 SSA 风险记录 参数: - id: SSA Risk ID 返回值: - SSA 风险记录，获取失败时返回 nil</td></tr><tr><td style="text-align:left"><a href="#getssarisksourcecode" class="">risk.GetSSARiskSourceCode</a></td><td style="text-align:left">GetSSARiskSourceCode 根据 SSA Risk ID 获取完整的源代码,无法获取会返回相关代码片段CodeFragment 参数: - id: SSA Risk ID 返回值: - 完整源代码，无法获取时返回代码片段 CodeFragment</td></tr><tr><td style="text-align:left"><a href="#getssarisksourcecodewithfragment" class="">risk.GetSSARiskSourceCodeWithFragment</a></td><td style="text-align:left">GetSSARiskSourceCodeWithFragment 根据 SSA Risk ID 获取源代码，如果获取完整源码失败则返回代码片段CodeFragment 参数: - id: SSA Risk ID 返回值: - 完整源码 - 代码片段 CodeFragment - 是否成功获取完整源码</td></tr><tr><td style="text-align:left"><a href="#getssariskwithdataflow" class="">risk.GetSSARiskWithDataFlow</a></td><td style="text-align:left">GetSSARiskWithDataFlow 根据 SSA Risk ID 获取包含数据流信息的风险记录 参数: - id: SSA Risk ID 返回值: - 包含数据流信息的风险记录，获取失败时返回 nil</td></tr><tr><td style="text-align:left"><a href="#havereverserisk" class="">risk.HaveReverseRisk</a></td><td style="text-align:left">HaveReverseRisk 通过轮询检查是否存在对应token的反连记录，重试最多5次，每次等待1秒， 如果存在返回true，否则返回false 参数: - token: 反连验证用的 token 返回值: - 是否存在对应 token 的反连记录</td></tr><tr><td style="text-align:left"><a href="#newdnslogdomain" class="">risk.NewDNSLogDomain</a></td><td style="text-align:left">NewDNSLogDomain 返回一个公网 Bridge 的 DNSLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 返回值: - DNSLog 域名 - 反连验证用的 token - 错误信息，失败时非 nil</td></tr><tr><td style="text-align:left"><a href="#newhttplog" class="">risk.NewHTTPLog</a></td><td style="text-align:left">NewHTTPLog 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 参数: - i: 可选参数，用于定制 HTTPLog 域名申请的行为 返回值: - HTTPLog 域名 - 反连验证用的 token - 错误信息，失败时非 n...</td></tr><tr><td style="text-align:left"><a href="#newlocalreversehttpsurl" class="">risk.NewLocalReverseHTTPSUrl</a></td><td style="text-align:left">NewLocalReverseHTTPSUrl 返回一个本地 Bridge 的反向 HTTPS URL 返回值: - 反向 HTTPS URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newlocalreversehttpurl" class="">risk.NewLocalReverseHTTPUrl</a></td><td style="text-align:left">NewLocalReverseHTTPUrl 返回一个本地 Bridge 的反向 HTTP URL 返回值: - 反向 HTTP URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newlocalreversermiurl" class="">risk.NewLocalReverseRMIUrl</a></td><td style="text-align:left">NewLocalReverseRMIUrl 返回一个本地 Bridge 的反向 RMI URL 返回值: - 反向 RMI URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversehttpsurl" class="">risk.NewPublicReverseHTTPSUrl</a></td><td style="text-align:left">NewPublicReverseHTTPSUrl 返回一个公网 Bridge 的反向 HTTPS URL 返回值: - 反向 HTTPS URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversehttpurl" class="">risk.NewPublicReverseHTTPUrl</a></td><td style="text-align:left">NewPublicReverseHTTPUrl 返回一个公网 Bridge 的反向 HTTP URL 返回值: - 反向 HTTP URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newpublicreversermiurl" class="">risk.NewPublicReverseRMIUrl</a></td><td style="text-align:left">NewPublicReverseRMIUrl 返回一个公网 Bridge 的反向 RMI URL 返回值: - 反向 RMI URL 字符串</td></tr><tr><td style="text-align:left"><a href="#newrandomporttrigger" class="">risk.NewRandomPortTrigger</a></td><td style="text-align:left">NewRandomPortTrigger 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 参数: - opt: 零个或多个风险选项参数，如 risk.title、risk.severity 等 返回值: - 反连验证用的 toke...</td></tr><tr><td style="text-align:left"><a href="#newrisk" class="">risk.NewRisk</a></td><td style="text-align:left">NewRisk 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk） 第一个参数为目标，后面可传入零个或多个选项用于描述该 risk（标题、类型、严重程度、描述、解决方案等） 参数: - target: 漏洞目标，通常为 URL 或 IP - opts: 可选项，如 risk.tit...</td></tr><tr><td style="text-align:left"><a href="#newunverifiedrisk" class="">risk.NewUnverifiedRisk</a></td><td style="text-align:left">NewUnverifiedRisk 创建一条&quot;待验证&quot;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证 在 yak 中通过 risk.NewUnverifiedRisk 调用，配合反连 token 使用 参数: - u: 风险目标(URL 或 IP) - token: 反连验证...</td></tr><tr><td style="text-align:left"><a href="#queryrisksbykeyword" class="">risk.QueryRisksByKeyword</a></td><td style="text-align:left">QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道 参数: - keyword: 查询关键字 - opts: 零个或多个风险选项参数，用于附加过滤条件，如 risk.severity、risk.type 等 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#registerbeforerisksave" class="">risk.RegisterBeforeRiskSave</a></td><td style="text-align:left">RegisterBeforeRiskSave 注册一个在风险记录保存到数据库之前执行的回调钩子，可用于统一改写/丰富风险字段 在 yak 中通过 risk.RegisterBeforeRiskSave 调用 参数: - f: 回调函数，入参为即将保存的风险记录，可在其中修改该记录</td></tr><tr><td style="text-align:left"><a href="#save" class="">risk.Save</a></td><td style="text-align:left">Save 将一条漏洞记录结构体保存到数据库（导出名为 risk.Save） 通常与 risk.CreateRisk 搭配使用：先构造再保存 参数: - r: 漏洞记录对象（通常来自 risk.CreateRisk） 返回值: - 错误信息（保存失败时返回）</td></tr><tr><td style="text-align:left"><a href="#yieldriskbycreateat" class="">risk.YieldRiskByCreateAt</a></td><td style="text-align:left">YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道 参数: - timestamp: 创建时间的 Unix 时间戳 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyids" class="">risk.YieldRiskByIds</a></td><td style="text-align:left">YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道 参数: - ids: 风险记录 ID 列表 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyruntimeid" class="">risk.YieldRiskByRuntimeId</a></td><td style="text-align:left">YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道 参数: - runtimeId: 运行时 ID 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbyscriptname" class="">risk.YieldRiskByScriptName</a></td><td style="text-align:left">YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录的管道 参数: - scriptName: 插件名 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#yieldriskbytarget" class="">risk.YieldRiskByTarget</a></td><td style="text-align:left">YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记录的管道 参数: - target: 目标地址(ip 或 ip:port) 返回值: - 风险记录的管道</td></tr><tr><td style="text-align:left"><a href="#appendpacketpairs" class="">risk.appendPacketPairs</a></td><td style="text-align:left">appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文 会将报文保存为 HTTPFlow，并在 PacketPairs 中记录 httpflow_id、url 以及请求/响应快照， 前端可优先按 id 查询详情；HTTPFlow 被删除后仍可使用 Pac...</td></tr><tr><td style="text-align:left"><a href="#cve" class="">risk.cve</a></td><td style="text-align:left">cve 是一个选项参数，用于指定风险记录的 CVE 编号 参数: - s: CVE 编号，例如 &quot;CVE-2021-22145&quot; 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#description" class="">risk.description</a></td><td style="text-align:left">description 是一个选项参数，用于指定漏洞记录的描述 参数: - i: 漏洞记录的描述 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#details" class="">risk.details</a></td><td style="text-align:left">details 是一个选项参数，用于指定风险记录的详细信息 参数: - i: 详细信息，通常为 map 或可转换为 map 的值 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#fromyakscript" class="">risk.fromYakScript</a></td><td style="text-align:left">fromScript 是一个选项参数，用于指定风险记录的来源插件名 参数: - i: 风险记录的来源插件名 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#ignore" class="">risk.ignore</a></td><td style="text-align:left">ignore 是一个选项参数，用于标记风险记录为已忽略状态(忽略后默认查询不展示) 参数: - i: 是否忽略该风险 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#ip" class="">risk.ip</a></td><td style="text-align:left">ip 是一个选项参数，用于指定风险记录关联的 IP 地址 参数: - i: IP 地址字符串 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#level" class="">risk.level</a></td><td style="text-align:left">severity 是一个选项参数，用于指定风险记录的严重程度 可用的严重程度有: critical, high, warning, info, low 参数: - i: 严重程度，可选 critical / high / warning / info / low 返回值: - 一个 risk.New...</td></tr><tr><td style="text-align:left"><a href="#parameter" class="">risk.parameter</a></td><td style="text-align:left">parameter 是一个选项参数，用于指定风险记录的参数 参数: - i: 风险记录的参数 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#payload" class="">risk.payload</a></td><td style="text-align:left">payload 是一个选项参数，用于指定漏洞记录的载荷(payload) 参数: - i: 漏洞记录的载荷(payload) 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#potential" class="">risk.potential</a></td><td style="text-align:left">potential 是一个选项参数，用于标记风险记录是否为潜在(疑似)风险 参数: - i: 是否为潜在风险 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#request" class="">risk.request</a></td><td style="text-align:left">request 是一个选项参数，用于指定风险记录的原始请求报文 参数: - i: 原始请求报文，支持 string / []byte / 任意可转成字符串的类型 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#response" class="">risk.response</a></td><td style="text-align:left">response 是一个选项参数，用于指定风险记录的原始响应报文 参数: - i: 原始响应报文，支持 string / []byte / 任意可转成字符串的类型 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#runtimeid" class="">risk.runtimeId</a></td><td style="text-align:left">runtimeId 是一个选项参数，用于指定风险记录的运行时 ID 参数: - i: 风险记录的运行时 ID 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#severity" class="">risk.severity</a></td><td style="text-align:left">severity 是一个选项参数，用于指定风险记录的严重程度 可用的严重程度有: critical, high, warning, info, low 参数: - i: 严重程度，可选 critical / high / warning / info / low 返回值: - 一个 risk.New...</td></tr><tr><td style="text-align:left"><a href="#solution" class="">risk.solution</a></td><td style="text-align:left">solution 是一个选项参数，用于指定漏洞记录的解决方案 参数: - i: 漏洞记录的解决方案 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#tag" class="">risk.tag</a></td><td style="text-align:left">tag 是一个选项参数，用于为风险记录设置标签(多个标签可用分隔符拼接) 参数: - i: 标签字符串 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#title" class="">risk.title</a></td><td style="text-align:left">title 是一个选项参数，用于指定漏洞记录的标题 参数: - i: 漏洞记录的标题 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#titleverbose" class="">risk.titleVerbose</a></td><td style="text-align:left">titleVerbose 是一个选项参数，用于指定漏洞记录的详细标题 参数: - i: 漏洞记录的详细标题 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#token" class="">risk.token</a></td><td style="text-align:left">token 是一个选项参数，用于指定风险记录的反连 token 参数: - i: 风险记录的反连 token 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr><tr><td style="text-align:left"><a href="#type" class="">risk.type</a></td><td style="text-align:left">type 是一个选项参数，用于指定风险类型，可用的风险类型: SQL 注入: sqli​,sqlinj​,sql-inj,sqlinjection​,sql-injection​ 跨站脚本:xss​ 远程执行: rce​,rce-command,rce-code​ 文件操作: lfi​,file-r...</td></tr><tr><td style="text-align:left"><a href="#typeverbose" class="">risk.typeVerbose</a></td><td style="text-align:left">typeVerbose 是一个选项参数，用于指定风险类型的详细描述 参数: - i: 风险类型的详细描述 返回值: - 一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkdnslogbytoken">CheckDNSLogByToken<a href="#checkdnslogbytoken" class="hash-link" aria-label="Direct link to CheckDNSLogByToken" title="Direct link to CheckDNSLogByToken" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -291,7 +291,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">DNSLog token</td></tr><tr><td style="text-align:left">timeout</td><td style="text-align:left"><code>...float64</code></td><td style="text-align:left">可选的查询超时时间（秒）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">DNSLog token</td></tr><tr><td style="text-align:left">timeout</td><td style="text-align:left"><code>...float64</code></td><td style="text-align:left">可选的查询超时时间（秒）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -313,7 +313,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*tpb.DNSLogEvent</code></td><td style="text-align:left">收到的 DNSLog 事件列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*tpb.DNSLogEvent</code></td><td style="text-align:left">收到的 DNSLog 事件列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkhttplogbytoken">CheckHTTPLogByToken<a href="#checkhttplogbytoken" class="hash-link" aria-label="Direct link to CheckHTTPLogByToken" title="Direct link to CheckHTTPLogByToken" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>CheckHTTPLogByToken 通过 token 查询是否收到对应的 HTTP 带外请求（导出名为 risk.CheckHTTPLogByToken）</p>
@@ -361,7 +361,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HTTPLog token</td></tr><tr><td style="text-align:left">timeout</td><td style="text-align:left"><code>...float64</code></td><td style="text-align:left">可选的查询超时时间（秒）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HTTPLog token</td></tr><tr><td style="text-align:left">timeout</td><td style="text-align:left"><code>...float64</code></td><td style="text-align:left">可选的查询超时时间（秒）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -383,7 +383,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*tpb.HTTPRequestTriggerNotification</code></td><td style="text-align:left">收到的 HTTP 触发通知列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]*tpb.HTTPRequestTriggerNotification</code></td><td style="text-align:left">收到的 HTTP 触发通知列表</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkicmptriggerbylength">CheckICMPTriggerByLength<a href="#checkicmptriggerbylength" class="hash-link" aria-label="Direct link to CheckICMPTriggerByLength" title="Direct link to CheckICMPTriggerByLength" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>CheckICMPTriggerByLength 通过特定 ICMP 包长度检查 ICMP 反连事件，返回触发通知与错误</p>
@@ -421,7 +421,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">用于触发匹配的特定 ICMP 包长度</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>int</code></td><td style="text-align:left">用于触发匹配的特定 ICMP 包长度</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -443,7 +443,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.ICMPTriggerNotification</code></td><td style="text-align:left">ICMP 触发通知对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.ICMPTriggerNotification</code></td><td style="text-align:left">ICMP 触发通知对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkrandomtriggerbytoken">CheckRandomTriggerByToken<a href="#checkrandomtriggerbytoken" class="hash-link" aria-label="Direct link to CheckRandomTriggerByToken" title="Direct link to CheckRandomTriggerByToken" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>CheckRandomTriggerByToken 通过 token 查询是否收到随机端口反连事件（导出名为 risk.CheckRandomTriggerByToken）</p>
@@ -481,7 +481,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">t</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机端口反连 token</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">t</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机端口反连 token</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -503,7 +503,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.RandomPortTriggerEvent</code></td><td style="text-align:left">随机端口反连事件对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.RandomPortTriggerEvent</code></td><td style="text-align:left">随机端口反连事件对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（查询失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="checkserverreachable">CheckServerReachable<a href="#checkserverreachable" class="hash-link" aria-label="Direct link to CheckServerReachable" title="Direct link to CheckServerReachable" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>CheckServerReachable 通过 Bridge 检查目标是否可达，第一个参数为上下文，第二个参数为目标地址，第三个参数为是否进行 http 检测，返回的第一个值是 CheckServerReachableResponse，第二个值是错误</p>
@@ -558,7 +558,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制超时与取消</td></tr><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待检测的目标地址</td></tr><tr><td style="text-align:left">httpCheck</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否进行 http 检测</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制超时与取消</td></tr><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待检测的目标地址</td></tr><tr><td style="text-align:left">httpCheck</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否进行 http 检测</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -580,7 +580,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.CheckServerReachableResponse</code></td><td style="text-align:left">检测结果 CheckServerReachableResponse 对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*tpb.CheckServerReachableResponse</code></td><td style="text-align:left">检测结果 CheckServerReachableResponse 对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="createrisk">CreateRisk<a href="#createrisk" class="hash-link" aria-label="Direct link to CreateRisk" title="Direct link to CreateRisk" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>CreateRisk 创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用</p>
@@ -622,7 +622,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL 或 IP</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.type、risk.severity 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL 或 IP</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.type、risk.severity 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -639,7 +639,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.Risk</code></td><td style="text-align:left">创建的风险记录结构体</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.Risk</code></td><td style="text-align:left">创建的风险记录结构体</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="deleteriskbyid">DeleteRiskByID<a href="#deleteriskbyid" class="hash-link" aria-label="Direct link to DeleteRiskByID" title="Direct link to DeleteRiskByID" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>DeleteRiskByID 根据风险记录ID删除风险记录</p>
@@ -671,7 +671,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">风险记录 ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">风险记录 ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -688,7 +688,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="deleteriskbytarget">DeleteRiskByTarget<a href="#deleteriskbytarget" class="hash-link" aria-label="Direct link to DeleteRiskByTarget" title="Direct link to DeleteRiskByTarget" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>DeleteRiskByTarget 根据目标(ip或ip:port)删除风险记录</p>
@@ -720,7 +720,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">addr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址(ip 或 ip:port)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">addr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址(ip 或 ip:port)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -737,7 +737,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extracttokenfromurl">ExtractTokenFromUrl<a href="#extracttokenfromurl" class="hash-link" aria-label="Direct link to ExtractTokenFromUrl" title="Direct link to ExtractTokenFromUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ExtractTokenFromUrl 从反连(reverse) URL 中提取其中携带的 token 字符串</p>
@@ -770,7 +770,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tokenUrl</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">包含 token 的反连 URL</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">tokenUrl</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">包含 token 的反连 URL</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -787,7 +787,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提取出的 token 字符串，无法解析时返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">提取出的 token 字符串，无法解析时返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getssariskbyid">GetSSARiskByID<a href="#getssariskbyid" class="hash-link" aria-label="Direct link to GetSSARiskByID" title="Direct link to GetSSARiskByID" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetSSARiskByID 根据 SSA Risk ID 获取 SSA 风险记录</p>
@@ -819,7 +819,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -836,7 +836,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.SSARisk</code></td><td style="text-align:left">SSA 风险记录，获取失败时返回 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.SSARisk</code></td><td style="text-align:left">SSA 风险记录，获取失败时返回 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getssarisksourcecode">GetSSARiskSourceCode<a href="#getssarisksourcecode" class="hash-link" aria-label="Direct link to GetSSARiskSourceCode" title="Direct link to GetSSARiskSourceCode" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetSSARiskSourceCode 根据 SSA Risk ID 获取完整的源代码,无法获取会返回相关代码片段CodeFragment</p>
@@ -868,7 +868,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -885,7 +885,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整源代码，无法获取时返回代码片段 CodeFragment</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整源代码，无法获取时返回代码片段 CodeFragment</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getssarisksourcecodewithfragment">GetSSARiskSourceCodeWithFragment<a href="#getssarisksourcecodewithfragment" class="hash-link" aria-label="Direct link to GetSSARiskSourceCodeWithFragment" title="Direct link to GetSSARiskSourceCodeWithFragment" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetSSARiskSourceCodeWithFragment 根据 SSA Risk ID 获取源代码，如果获取完整源码失败则返回代码片段CodeFragment</p>
@@ -925,7 +925,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -952,7 +952,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整源码</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">代码片段 CodeFragment</td></tr><tr><td style="text-align:left">r3</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否成功获取完整源码</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">完整源码</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">代码片段 CodeFragment</td></tr><tr><td style="text-align:left">r3</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否成功获取完整源码</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getssariskwithdataflow">GetSSARiskWithDataFlow<a href="#getssariskwithdataflow" class="hash-link" aria-label="Direct link to GetSSARiskWithDataFlow" title="Direct link to GetSSARiskWithDataFlow" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetSSARiskWithDataFlow 根据 SSA Risk ID 获取包含数据流信息的风险记录</p>
@@ -984,7 +984,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">id</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">SSA Risk ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1001,7 +1001,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*sfreport.Risk</code></td><td style="text-align:left">包含数据流信息的风险记录，获取失败时返回 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*sfreport.Risk</code></td><td style="text-align:left">包含数据流信息的风险记录，获取失败时返回 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="havereverserisk">HaveReverseRisk<a href="#havereverserisk" class="hash-link" aria-label="Direct link to HaveReverseRisk" title="Direct link to HaveReverseRisk" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>HaveReverseRisk 通过轮询检查是否存在对应token的反连记录，重试最多5次，每次等待1秒， 如果存在返回true，否则返回false</p>
@@ -1033,7 +1033,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1050,7 +1050,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否存在对应 token 的反连记录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否存在对应 token 的反连记录</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newdnslogdomain">NewDNSLogDomain<a href="#newdnslogdomain" class="hash-link" aria-label="Direct link to NewDNSLogDomain" title="Direct link to NewDNSLogDomain" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewDNSLogDomain 返回一个公网 Bridge 的 DNSLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误</p>
@@ -1096,7 +1096,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">DNSLog 域名</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">DNSLog 域名</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newhttplog">NewHTTPLog<a href="#newhttplog" class="hash-link" aria-label="Direct link to NewHTTPLog" title="Direct link to NewHTTPLog" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewHTTPLog 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误</p>
@@ -1136,7 +1136,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选参数，用于定制 HTTPLog 域名申请的行为</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>...any</code></td><td style="text-align:left">可选参数，用于定制 HTTPLog 域名申请的行为</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1163,7 +1163,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HTTPLog 域名</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">domain</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">HTTPLog 域名</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newlocalreversehttpsurl">NewLocalReverseHTTPSUrl<a href="#newlocalreversehttpsurl" class="hash-link" aria-label="Direct link to NewLocalReverseHTTPSUrl" title="Direct link to NewLocalReverseHTTPSUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewLocalReverseHTTPSUrl 返回一个本地 Bridge 的反向 HTTPS URL</p>
@@ -1191,7 +1191,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTPS URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTPS URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newlocalreversehttpurl">NewLocalReverseHTTPUrl<a href="#newlocalreversehttpurl" class="hash-link" aria-label="Direct link to NewLocalReverseHTTPUrl" title="Direct link to NewLocalReverseHTTPUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewLocalReverseHTTPUrl 返回一个本地 Bridge 的反向 HTTP URL</p>
@@ -1219,7 +1219,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTP URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTP URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newlocalreversermiurl">NewLocalReverseRMIUrl<a href="#newlocalreversermiurl" class="hash-link" aria-label="Direct link to NewLocalReverseRMIUrl" title="Direct link to NewLocalReverseRMIUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewLocalReverseRMIUrl 返回一个本地 Bridge 的反向 RMI URL</p>
@@ -1247,7 +1247,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 RMI URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 RMI URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newpublicreversehttpsurl">NewPublicReverseHTTPSUrl<a href="#newpublicreversehttpsurl" class="hash-link" aria-label="Direct link to NewPublicReverseHTTPSUrl" title="Direct link to NewPublicReverseHTTPSUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewPublicReverseHTTPSUrl 返回一个公网 Bridge 的反向 HTTPS URL</p>
@@ -1275,7 +1275,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTPS URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTPS URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newpublicreversehttpurl">NewPublicReverseHTTPUrl<a href="#newpublicreversehttpurl" class="hash-link" aria-label="Direct link to NewPublicReverseHTTPUrl" title="Direct link to NewPublicReverseHTTPUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewPublicReverseHTTPUrl 返回一个公网 Bridge 的反向 HTTP URL</p>
@@ -1303,7 +1303,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTP URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 HTTP URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newpublicreversermiurl">NewPublicReverseRMIUrl<a href="#newpublicreversermiurl" class="hash-link" aria-label="Direct link to NewPublicReverseRMIUrl" title="Direct link to NewPublicReverseRMIUrl" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewPublicReverseRMIUrl 返回一个公网 Bridge 的反向 RMI URL</p>
@@ -1331,7 +1331,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 RMI URL 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反向 RMI URL 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newrandomporttrigger">NewRandomPortTrigger<a href="#newrandomporttrigger" class="hash-link" aria-label="Direct link to NewRandomPortTrigger" title="Direct link to NewRandomPortTrigger" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewRandomPortTrigger 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误</p>
@@ -1371,7 +1371,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.severity 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">opt</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.severity 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1398,7 +1398,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">addr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机端口反连检测地址</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">addr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机端口反连检测地址</td></tr><tr><td style="text-align:left">_</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newrisk">NewRisk<a href="#newrisk" class="hash-link" aria-label="Direct link to NewRisk" title="Direct link to NewRisk" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewRisk 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk）</p>
@@ -1437,7 +1437,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞目标，通常为 URL 或 IP</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...yakit.RiskParamsOpt</code></td><td style="text-align:left">可选项，如 risk.title / risk.type / risk.severity / risk.description / risk.solution 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞目标，通常为 URL 或 IP</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...yakit.RiskParamsOpt</code></td><td style="text-align:left">可选项，如 risk.title / risk.type / risk.severity / risk.description / risk.solution 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newunverifiedrisk">NewUnverifiedRisk<a href="#newunverifiedrisk" class="hash-link" aria-label="Direct link to NewUnverifiedRisk" title="Direct link to NewUnverifiedRisk" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewUnverifiedRisk 创建一条&quot;待验证&quot;风险记录并保存，常用于反连(reverse)类漏洞先记录、后由回连验证</p>
@@ -1493,7 +1493,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险目标(URL 或 IP)</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.severity 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">u</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险目标(URL 或 IP)</td></tr><tr><td style="text-align:left">token</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">反连验证用的 token</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，如 risk.title、risk.severity 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1515,7 +1515,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.Risk</code></td><td style="text-align:left">创建的风险记录结构体</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，保存失败时非 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*schema.Risk</code></td><td style="text-align:left">创建的风险记录结构体</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，保存失败时非 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="queryrisksbykeyword">QueryRisksByKeyword<a href="#queryrisksbykeyword" class="hash-link" aria-label="Direct link to QueryRisksByKeyword" title="Direct link to QueryRisksByKeyword" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>QueryRisksByKeyword 根据关键字查询风险记录，返回风险记录的管道</p>
@@ -1557,7 +1557,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keyword</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">查询关键字</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...yakit.RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，用于附加过滤条件，如 risk.severity、risk.type 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">keyword</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">查询关键字</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...yakit.RiskParamsOpt</code></td><td style="text-align:left">零个或多个风险选项参数，用于附加过滤条件，如 risk.severity、risk.type 等</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1574,7 +1574,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="registerbeforerisksave">RegisterBeforeRiskSave<a href="#registerbeforerisksave" class="hash-link" aria-label="Direct link to RegisterBeforeRiskSave" title="Direct link to RegisterBeforeRiskSave" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RegisterBeforeRiskSave 注册一个在风险记录保存到数据库之前执行的回调钩子，可用于统一改写/丰富风险字段</p>
@@ -1603,7 +1603,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*schema.Risk)</code></td><td style="text-align:left">回调函数，入参为即将保存的风险记录，可在其中修改该记录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>func(*schema.Risk)</code></td><td style="text-align:left">回调函数，入参为即将保存的风险记录，可在其中修改该记录</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="save">Save<a href="#save" class="hash-link" aria-label="Direct link to Save" title="Direct link to Save" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Save 将一条漏洞记录结构体保存到数据库（导出名为 risk.Save）</p>
@@ -1636,7 +1636,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（保存失败时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（保存失败时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yieldriskbycreateat">YieldRiskByCreateAt<a href="#yieldriskbycreateat" class="hash-link" aria-label="Direct link to YieldRiskByCreateAt" title="Direct link to YieldRiskByCreateAt" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>YieldRiskByCreateAt 根据创建时间戳获取风险记录，返回风险记录的管道</p>
@@ -1668,7 +1668,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">timestamp</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">创建时间的 Unix 时间戳</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">timestamp</td><td style="text-align:left"><code>int64</code></td><td style="text-align:left">创建时间的 Unix 时间戳</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1685,7 +1685,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yieldriskbyids">YieldRiskByIds<a href="#yieldriskbyids" class="hash-link" aria-label="Direct link to YieldRiskByIds" title="Direct link to YieldRiskByIds" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>YieldRiskByIds 根据 Risk ID 获取风险记录，返回风险记录的管道</p>
@@ -1717,7 +1717,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ids</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">风险记录 ID 列表</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ids</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">风险记录 ID 列表</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1734,7 +1734,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yieldriskbyruntimeid">YieldRiskByRuntimeId<a href="#yieldriskbyruntimeid" class="hash-link" aria-label="Direct link to YieldRiskByRuntimeId" title="Direct link to YieldRiskByRuntimeId" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>YieldRiskByRuntimeId 根据 RuntimeID 获取风险记录，返回风险记录的管道</p>
@@ -1766,7 +1766,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">runtimeId</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行时 ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">runtimeId</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行时 ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1783,7 +1783,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yieldriskbyscriptname">YieldRiskByScriptName<a href="#yieldriskbyscriptname" class="hash-link" aria-label="Direct link to YieldRiskByScriptName" title="Direct link to YieldRiskByScriptName" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>YieldRiskByScriptName 根据插件名戳获取风险记录，返回风险记录的管道</p>
@@ -1815,7 +1815,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">scriptName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">scriptName</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">插件名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1832,7 +1832,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="yieldriskbytarget">YieldRiskByTarget<a href="#yieldriskbytarget" class="hash-link" aria-label="Direct link to YieldRiskByTarget" title="Direct link to YieldRiskByTarget" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>YieldRiskByTarget 根据目标(ip或ip:port)获取风险记录，返回风险记录的管道</p>
@@ -1864,7 +1864,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址(ip 或 ip:port)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">target</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标地址(ip 或 ip:port)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1881,7 +1881,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>chan *schema.Risk</code></td><td style="text-align:left">风险记录的管道</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="appendpacketpairs">appendPacketPairs<a href="#appendpacketpairs" class="hash-link" aria-label="Direct link to appendPacketPairs" title="Direct link to appendPacketPairs" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>appendPacketPairs 是一个追加形式的选项参数，用于向风险记录中追加一对请求/响应报文</p>
@@ -1926,7 +1926,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">req</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求报文，支持 string / []byte / 任意可转成字符串的类型</td></tr><tr><td style="text-align:left">resp</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">响应报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">req</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求报文，支持 string / []byte / 任意可转成字符串的类型</td></tr><tr><td style="text-align:left">resp</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">响应报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1943,7 +1943,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cve">cve<a href="#cve" class="hash-link" aria-label="Direct link to cve" title="Direct link to cve" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>cve 是一个选项参数，用于指定风险记录的 CVE 编号</p>
@@ -1975,7 +1975,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">CVE 编号，例如 &quot;CVE-2021-22145&quot;</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">CVE 编号，例如 &quot;CVE-2021-22145&quot;</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1992,7 +1992,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="description">description<a href="#description" class="hash-link" aria-label="Direct link to description" title="Direct link to description" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>description 是一个选项参数，用于指定漏洞记录的描述</p>
@@ -2024,7 +2024,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的描述</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的描述</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2041,7 +2041,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="details">details<a href="#details" class="hash-link" aria-label="Direct link to details" title="Direct link to details" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>details 是一个选项参数，用于指定风险记录的详细信息</p>
@@ -2073,7 +2073,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">详细信息，通常为 map 或可转换为 map 的值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">详细信息，通常为 map 或可转换为 map 的值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2090,7 +2090,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fromyakscript">fromYakScript<a href="#fromyakscript" class="hash-link" aria-label="Direct link to fromYakScript" title="Direct link to fromYakScript" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>fromScript 是一个选项参数，用于指定风险记录的来源插件名</p>
@@ -2122,7 +2122,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的来源插件名</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的来源插件名</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2139,7 +2139,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ignore">ignore<a href="#ignore" class="hash-link" aria-label="Direct link to ignore" title="Direct link to ignore" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ignore 是一个选项参数，用于标记风险记录为已忽略状态(忽略后默认查询不展示)</p>
@@ -2171,7 +2171,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否忽略该风险</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否忽略该风险</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2188,7 +2188,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ip">ip<a href="#ip" class="hash-link" aria-label="Direct link to ip" title="Direct link to ip" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ip 是一个选项参数，用于指定风险记录关联的 IP 地址</p>
@@ -2220,7 +2220,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">IP 地址字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">IP 地址字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-37">返回值<a href="#返回值-37" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2237,7 +2237,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="level">level<a href="#level" class="hash-link" aria-label="Direct link to level" title="Direct link to level" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>severity 是一个选项参数，用于指定风险记录的严重程度</p>
@@ -2270,7 +2270,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">严重程度，可选 critical / high / warning / info / low</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">严重程度，可选 critical / high / warning / info / low</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2287,7 +2287,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="parameter">parameter<a href="#parameter" class="hash-link" aria-label="Direct link to parameter" title="Direct link to parameter" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-41">详细描述<a href="#详细描述-41" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>parameter 是一个选项参数，用于指定风险记录的参数</p>
@@ -2319,7 +2319,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的参数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-39">返回值<a href="#返回值-39" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2336,7 +2336,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="payload">payload<a href="#payload" class="hash-link" aria-label="Direct link to payload" title="Direct link to payload" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-42">详细描述<a href="#详细描述-42" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>payload 是一个选项参数，用于指定漏洞记录的载荷(payload)</p>
@@ -2368,7 +2368,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的载荷(payload)</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的载荷(payload)</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-40">返回值<a href="#返回值-40" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2385,7 +2385,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="potential">potential<a href="#potential" class="hash-link" aria-label="Direct link to potential" title="Direct link to potential" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-43">详细描述<a href="#详细描述-43" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>potential 是一个选项参数，用于标记风险记录是否为潜在(疑似)风险</p>
@@ -2417,7 +2417,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为潜在风险</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否为潜在风险</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-41">返回值<a href="#返回值-41" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2434,7 +2434,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="request">request<a href="#request" class="hash-link" aria-label="Direct link to request" title="Direct link to request" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-44">详细描述<a href="#详细描述-44" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>request 是一个选项参数，用于指定风险记录的原始请求报文</p>
@@ -2466,7 +2466,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始请求报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始请求报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-42">返回值<a href="#返回值-42" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2483,7 +2483,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="response">response<a href="#response" class="hash-link" aria-label="Direct link to response" title="Direct link to response" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-45">详细描述<a href="#详细描述-45" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>response 是一个选项参数，用于指定风险记录的原始响应报文</p>
@@ -2515,7 +2515,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始响应报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始响应报文，支持 string / []byte / 任意可转成字符串的类型</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-43">返回值<a href="#返回值-43" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2532,7 +2532,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="runtimeid">runtimeId<a href="#runtimeid" class="hash-link" aria-label="Direct link to runtimeId" title="Direct link to runtimeId" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-46">详细描述<a href="#详细描述-46" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>runtimeId 是一个选项参数，用于指定风险记录的运行时 ID</p>
@@ -2564,7 +2564,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的运行时 ID</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的运行时 ID</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-44">返回值<a href="#返回值-44" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2581,7 +2581,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="severity">severity<a href="#severity" class="hash-link" aria-label="Direct link to severity" title="Direct link to severity" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-47">详细描述<a href="#详细描述-47" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>severity 是一个选项参数，用于指定风险记录的严重程度</p>
@@ -2614,7 +2614,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">严重程度，可选 critical / high / warning / info / low</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">严重程度，可选 critical / high / warning / info / low</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-45">返回值<a href="#返回值-45" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2631,7 +2631,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="solution">solution<a href="#solution" class="hash-link" aria-label="Direct link to solution" title="Direct link to solution" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-48">详细描述<a href="#详细描述-48" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>solution 是一个选项参数，用于指定漏洞记录的解决方案</p>
@@ -2663,7 +2663,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的解决方案</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的解决方案</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-46">返回值<a href="#返回值-46" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2680,7 +2680,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tag">tag<a href="#tag" class="hash-link" aria-label="Direct link to tag" title="Direct link to tag" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-49">详细描述<a href="#详细描述-49" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>tag 是一个选项参数，用于为风险记录设置标签(多个标签可用分隔符拼接)</p>
@@ -2712,7 +2712,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标签字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">标签字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-47">返回值<a href="#返回值-47" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2729,7 +2729,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="title">title<a href="#title" class="hash-link" aria-label="Direct link to title" title="Direct link to title" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-50">详细描述<a href="#详细描述-50" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>title 是一个选项参数，用于指定漏洞记录的标题</p>
@@ -2761,7 +2761,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的标题</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的标题</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-48">返回值<a href="#返回值-48" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2778,7 +2778,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="titleverbose">titleVerbose<a href="#titleverbose" class="hash-link" aria-label="Direct link to titleVerbose" title="Direct link to titleVerbose" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-51">详细描述<a href="#详细描述-51" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>titleVerbose 是一个选项参数，用于指定漏洞记录的详细标题</p>
@@ -2810,7 +2810,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的详细标题</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">漏洞记录的详细标题</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-49">返回值<a href="#返回值-49" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2827,7 +2827,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="token">token<a href="#token" class="hash-link" aria-label="Direct link to token" title="Direct link to token" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-52">详细描述<a href="#详细描述-52" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>token 是一个选项参数，用于指定风险记录的反连 token</p>
@@ -2859,7 +2859,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的反连 token</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险记录的反连 token</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-50">返回值<a href="#返回值-50" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2876,7 +2876,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="type">type<a href="#type" class="hash-link" aria-label="Direct link to type" title="Direct link to type" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-53">详细描述<a href="#详细描述-53" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>type 是一个选项参数，用于指定风险类型，可用的风险类型:</p>
@@ -2923,7 +2923,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险类型字符串，见上方可用类型列表</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险类型字符串，见上方可用类型列表</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-51">返回值<a href="#返回值-51" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2940,7 +2940,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="typeverbose">typeVerbose<a href="#typeverbose" class="hash-link" aria-label="Direct link to typeVerbose" title="Direct link to typeVerbose" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-54">详细描述<a href="#详细描述-54" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>typeVerbose 是一个选项参数，用于指定风险类型的详细描述</p>
@@ -2972,7 +2972,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险类型的详细描述</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">风险类型的详细描述</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-52">返回值<a href="#返回值-52" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2989,6 +2989,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/risk.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/report"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">report</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/rpa"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">rpa</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#checkdnslogbytoken" class="table-of-contents__link toc-highlight">CheckDNSLogByToken</a></li><li><a href="#checkhttplogbytoken" class="table-of-contents__link toc-highlight">CheckHTTPLogByToken</a></li><li><a href="#checkicmptriggerbylength" class="table-of-contents__link toc-highlight">CheckICMPTriggerByLength</a></li><li><a href="#checkrandomtriggerbytoken" class="table-of-contents__link toc-highlight">CheckRandomTriggerByToken</a></li><li><a href="#checkserverreachable" class="table-of-contents__link toc-highlight">CheckServerReachable</a></li><li><a href="#createrisk" class="table-of-contents__link toc-highlight">CreateRisk</a></li><li><a href="#deleteriskbyid" class="table-of-contents__link toc-highlight">DeleteRiskByID</a></li><li><a href="#deleteriskbytarget" class="table-of-contents__link toc-highlight">DeleteRiskByTarget</a></li><li><a href="#extracttokenfromurl" class="table-of-contents__link toc-highlight">ExtractTokenFromUrl</a></li><li><a href="#getssariskbyid" class="table-of-contents__link toc-highlight">GetSSARiskByID</a></li><li><a href="#getssarisksourcecode" class="table-of-contents__link toc-highlight">GetSSARiskSourceCode</a></li><li><a href="#getssarisksourcecodewithfragment" class="table-of-contents__link toc-highlight">GetSSARiskSourceCodeWithFragment</a></li><li><a href="#getssariskwithdataflow" class="table-of-contents__link toc-highlight">GetSSARiskWithDataFlow</a></li><li><a href="#havereverserisk" class="table-of-contents__link toc-highlight">HaveReverseRisk</a></li><li><a href="#newdnslogdomain" class="table-of-contents__link toc-highlight">NewDNSLogDomain</a></li><li><a href="#newhttplog" class="table-of-contents__link toc-highlight">NewHTTPLog</a></li><li><a href="#newlocalreversehttpsurl" class="table-of-contents__link toc-highlight">NewLocalReverseHTTPSUrl</a></li><li><a href="#newlocalreversehttpurl" class="table-of-contents__link toc-highlight">NewLocalReverseHTTPUrl</a></li><li><a href="#newlocalreversermiurl" class="table-of-contents__link toc-highlight">NewLocalReverseRMIUrl</a></li><li><a href="#newpublicreversehttpsurl" class="table-of-contents__link toc-highlight">NewPublicReverseHTTPSUrl</a></li><li><a href="#newpublicreversehttpurl" class="table-of-contents__link toc-highlight">NewPublicReverseHTTPUrl</a></li><li><a href="#newpublicreversermiurl" class="table-of-contents__link toc-highlight">NewPublicReverseRMIUrl</a></li><li><a href="#newrandomporttrigger" class="table-of-contents__link toc-highlight">NewRandomPortTrigger</a></li><li><a href="#newrisk" class="table-of-contents__link toc-highlight">NewRisk</a></li><li><a href="#newunverifiedrisk" class="table-of-contents__link toc-highlight">NewUnverifiedRisk</a></li><li><a href="#queryrisksbykeyword" class="table-of-contents__link toc-highlight">QueryRisksByKeyword</a></li><li><a href="#registerbeforerisksave" class="table-of-contents__link toc-highlight">RegisterBeforeRiskSave</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">Save</a></li><li><a href="#yieldriskbycreateat" class="table-of-contents__link toc-highlight">YieldRiskByCreateAt</a></li><li><a href="#yieldriskbyids" class="table-of-contents__link toc-highlight">YieldRiskByIds</a></li><li><a href="#yieldriskbyruntimeid" class="table-of-contents__link toc-highlight">YieldRiskByRuntimeId</a></li><li><a href="#yieldriskbyscriptname" class="table-of-contents__link toc-highlight">YieldRiskByScriptName</a></li><li><a href="#yieldriskbytarget" class="table-of-contents__link toc-highlight">YieldRiskByTarget</a></li><li><a href="#appendpacketpairs" class="table-of-contents__link toc-highlight">appendPacketPairs</a></li><li><a href="#cve" class="table-of-contents__link toc-highlight">cve</a></li><li><a href="#description" class="table-of-contents__link toc-highlight">description</a></li><li><a href="#details" class="table-of-contents__link toc-highlight">details</a></li><li><a href="#fromyakscript" class="table-of-contents__link toc-highlight">fromYakScript</a></li><li><a href="#ignore" class="table-of-contents__link toc-highlight">ignore</a></li><li><a href="#ip" class="table-of-contents__link toc-highlight">ip</a></li><li><a href="#level" class="table-of-contents__link toc-highlight">level</a></li><li><a href="#parameter" class="table-of-contents__link toc-highlight">parameter</a></li><li><a href="#payload" class="table-of-contents__link toc-highlight">payload</a></li><li><a href="#potential" class="table-of-contents__link toc-highlight">potential</a></li><li><a href="#request" class="table-of-contents__link toc-highlight">request</a></li><li><a href="#response" class="table-of-contents__link toc-highlight">response</a></li><li><a href="#runtimeid" class="table-of-contents__link toc-highlight">runtimeId</a></li><li><a href="#severity" class="table-of-contents__link toc-highlight">severity</a></li><li><a href="#solution" class="table-of-contents__link toc-highlight">solution</a></li><li><a href="#tag" class="table-of-contents__link toc-highlight">tag</a></li><li><a href="#title" class="table-of-contents__link toc-highlight">title</a></li><li><a href="#titleverbose" class="table-of-contents__link toc-highlight">titleVerbose</a></li><li><a href="#token" class="table-of-contents__link toc-highlight">token</a></li><li><a href="#type" class="table-of-contents__link toc-highlight">type</a></li><li><a href="#typeverbose" class="table-of-contents__link toc-highlight">typeVerbose</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>RiskParamsOpt</code></td><td style="text-align:left">一个 risk.NewRisk/risk.CreateRisk 可接收的选项参数</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/risk.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/report"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">report</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/rpa"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">rpa</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#checkdnslogbytoken" class="table-of-contents__link toc-highlight">CheckDNSLogByToken</a></li><li><a href="#checkhttplogbytoken" class="table-of-contents__link toc-highlight">CheckHTTPLogByToken</a></li><li><a href="#checkicmptriggerbylength" class="table-of-contents__link toc-highlight">CheckICMPTriggerByLength</a></li><li><a href="#checkrandomtriggerbytoken" class="table-of-contents__link toc-highlight">CheckRandomTriggerByToken</a></li><li><a href="#checkserverreachable" class="table-of-contents__link toc-highlight">CheckServerReachable</a></li><li><a href="#createrisk" class="table-of-contents__link toc-highlight">CreateRisk</a></li><li><a href="#deleteriskbyid" class="table-of-contents__link toc-highlight">DeleteRiskByID</a></li><li><a href="#deleteriskbytarget" class="table-of-contents__link toc-highlight">DeleteRiskByTarget</a></li><li><a href="#extracttokenfromurl" class="table-of-contents__link toc-highlight">ExtractTokenFromUrl</a></li><li><a href="#getssariskbyid" class="table-of-contents__link toc-highlight">GetSSARiskByID</a></li><li><a href="#getssarisksourcecode" class="table-of-contents__link toc-highlight">GetSSARiskSourceCode</a></li><li><a href="#getssarisksourcecodewithfragment" class="table-of-contents__link toc-highlight">GetSSARiskSourceCodeWithFragment</a></li><li><a href="#getssariskwithdataflow" class="table-of-contents__link toc-highlight">GetSSARiskWithDataFlow</a></li><li><a href="#havereverserisk" class="table-of-contents__link toc-highlight">HaveReverseRisk</a></li><li><a href="#newdnslogdomain" class="table-of-contents__link toc-highlight">NewDNSLogDomain</a></li><li><a href="#newhttplog" class="table-of-contents__link toc-highlight">NewHTTPLog</a></li><li><a href="#newlocalreversehttpsurl" class="table-of-contents__link toc-highlight">NewLocalReverseHTTPSUrl</a></li><li><a href="#newlocalreversehttpurl" class="table-of-contents__link toc-highlight">NewLocalReverseHTTPUrl</a></li><li><a href="#newlocalreversermiurl" class="table-of-contents__link toc-highlight">NewLocalReverseRMIUrl</a></li><li><a href="#newpublicreversehttpsurl" class="table-of-contents__link toc-highlight">NewPublicReverseHTTPSUrl</a></li><li><a href="#newpublicreversehttpurl" class="table-of-contents__link toc-highlight">NewPublicReverseHTTPUrl</a></li><li><a href="#newpublicreversermiurl" class="table-of-contents__link toc-highlight">NewPublicReverseRMIUrl</a></li><li><a href="#newrandomporttrigger" class="table-of-contents__link toc-highlight">NewRandomPortTrigger</a></li><li><a href="#newrisk" class="table-of-contents__link toc-highlight">NewRisk</a></li><li><a href="#newunverifiedrisk" class="table-of-contents__link toc-highlight">NewUnverifiedRisk</a></li><li><a href="#queryrisksbykeyword" class="table-of-contents__link toc-highlight">QueryRisksByKeyword</a></li><li><a href="#registerbeforerisksave" class="table-of-contents__link toc-highlight">RegisterBeforeRiskSave</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">Save</a></li><li><a href="#yieldriskbycreateat" class="table-of-contents__link toc-highlight">YieldRiskByCreateAt</a></li><li><a href="#yieldriskbyids" class="table-of-contents__link toc-highlight">YieldRiskByIds</a></li><li><a href="#yieldriskbyruntimeid" class="table-of-contents__link toc-highlight">YieldRiskByRuntimeId</a></li><li><a href="#yieldriskbyscriptname" class="table-of-contents__link toc-highlight">YieldRiskByScriptName</a></li><li><a href="#yieldriskbytarget" class="table-of-contents__link toc-highlight">YieldRiskByTarget</a></li><li><a href="#appendpacketpairs" class="table-of-contents__link toc-highlight">appendPacketPairs</a></li><li><a href="#cve" class="table-of-contents__link toc-highlight">cve</a></li><li><a href="#description" class="table-of-contents__link toc-highlight">description</a></li><li><a href="#details" class="table-of-contents__link toc-highlight">details</a></li><li><a href="#fromyakscript" class="table-of-contents__link toc-highlight">fromYakScript</a></li><li><a href="#ignore" class="table-of-contents__link toc-highlight">ignore</a></li><li><a href="#ip" class="table-of-contents__link toc-highlight">ip</a></li><li><a href="#level" class="table-of-contents__link toc-highlight">level</a></li><li><a href="#parameter" class="table-of-contents__link toc-highlight">parameter</a></li><li><a href="#payload" class="table-of-contents__link toc-highlight">payload</a></li><li><a href="#potential" class="table-of-contents__link toc-highlight">potential</a></li><li><a href="#request" class="table-of-contents__link toc-highlight">request</a></li><li><a href="#response" class="table-of-contents__link toc-highlight">response</a></li><li><a href="#runtimeid" class="table-of-contents__link toc-highlight">runtimeId</a></li><li><a href="#severity" class="table-of-contents__link toc-highlight">severity</a></li><li><a href="#solution" class="table-of-contents__link toc-highlight">solution</a></li><li><a href="#tag" class="table-of-contents__link toc-highlight">tag</a></li><li><a href="#title" class="table-of-contents__link toc-highlight">title</a></li><li><a href="#titleverbose" class="table-of-contents__link toc-highlight">titleVerbose</a></li><li><a href="#token" class="table-of-contents__link toc-highlight">token</a></li><li><a href="#type" class="table-of-contents__link toc-highlight">type</a></li><li><a href="#typeverbose" class="table-of-contents__link toc-highlight">typeVerbose</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

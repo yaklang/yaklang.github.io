@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">http | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/http"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="http | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/http"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/http" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/http" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/http" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"http","item":"https://yaklang.com/en/docs/api/http"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.761b70ba.css">
-<script src="/en/assets/js/runtime~main.7bfde228.js" defer="defer"></script>
-<script src="/en/assets/js/main.45b3392b.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.41c91841.css">
+<script src="/en/assets/js/runtime~main.f56ce635.js" defer="defer"></script>
+<script src="/en/assets/js/main.84b5859b.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -186,7 +186,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#do" class="">http.Do</a></td><td style="text-align:left">Do 根据构造好的请求结构体引用发送请求，返回响应结构体引用与错误 ! 已弃用 参数: - i: 请求结构体引用 返回值: - 响应结构体引用 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#extractfaviconurl" class="">http.ExtractFaviconURL</a></td><td style="text-align:left">ExtractFaviconURL 从 HTML 页面内容中解析出 favicon 图标的 URL，并相对站点地址补全为绝对地址 参数: - siteURL: 页面所在的站点地址，用于补全相对路径 - content: HTML 页面内容 返回值: - favicon 图标的绝对 URL - 错误信...</td></tr><tr><td style="text-align:left"><a href="#get" class="">http.Get</a></td><td style="text-align:left">Get 根据指定的 URL 发起 GET 请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Get 代替 参数: - url: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应结构体引用 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#getallbody" class="">http.GetAllBody</a></td><td style="text-align:left">GetAllBody 获取响应结构体引用的响应体内容 参数: - raw: 响应结构体引用 返回值: - 响应体字节数组，读取失败或类型不支持时返回 nil</td></tr><tr><td style="text-align:left"><a href="#newrequest" class="">http.NewRequest</a></td><td style="text-align:left">NewRequest 根据指定的 method 和 URL 生成请求结构体引用，可接收零个到多个请求选项用于配置此次请求 注意，此函数只会生成请求结构体引用，不会发起请求 ! 已弃用 参数: - method: 请求方法，如 &quot;GET&quot;、&quot;POST&quot; - url: 目标 URL - opts: 可选...</td></tr><tr><td style="text-align:left"><a href="#post" class="">http.Post</a></td><td style="text-align:left">Post 根据指定的 URL 发起 POST 请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Post 代替 参数: - url: 目标 URL - options: 可选请求选项，例如 http.body、http.timeout 返回值: - 响应结构体引用 - 错误信...</td></tr><tr><td style="text-align:left"><a href="#raw" class="">http.Raw</a></td><td style="text-align:left">Raw 根据原始请求报文生成请求结构体引用，返回请求结构体引用与错误 注意，此函数只会生成请求结构体引用，不会发起请求 ! 已弃用，使用 poc.HTTP 或 poc.HTTPEx 代替 参数: - i: 原始请求报文（字符串、字节数组或请求结构体引用） 返回值: - 请求结构体引用 - 错误信息，...</td></tr><tr><td style="text-align:left"><a href="#request" class="">http.Request</a></td><td style="text-align:left">Request 根据指定的 method 和 URL 发起请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Do 代替 参数: - method: 请求方法，如 &quot;GET&quot;、&quot;POST&quot; - url: 目标 URL - options: 可选请求选项，例如 http.body...</td></tr><tr><td style="text-align:left"><a href="#requestfaviconhash" class="">http.RequestFaviconHash</a></td><td style="text-align:left">RequestFaviconHash 根据指定的 URL 发起 GET 请求并计算响应体的 favicon hash，常用于资产识别 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 base64 编码 mmh3 h...</td></tr><tr><td style="text-align:left"><a href="#requesttomd5" class="">http.RequestToMD5</a></td><td style="text-align:left">RequestToMD5 根据指定的 URL 发起 GET 请求，并计算响应体的 md5 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 md5 hash 字符串 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#requesttommh3hash128" class="">http.RequestToMMH3Hash128</a></td><td style="text-align:left">RequestToMMH3Hash128 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128&gt; 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 mmh3 hash&lt;128&gt; 字符串 ...</td></tr><tr><td style="text-align:left"><a href="#requesttommh3hash128x64" class="">http.RequestToMMH3Hash128x64</a></td><td style="text-align:left">RequestToMMH3Hash128x64 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128x64&gt; 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 mmh3 hash&lt;128...</td></tr><tr><td style="text-align:left"><a href="#requesttosha1" class="">http.RequestToSha1</a></td><td style="text-align:left">RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体的 sha1 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha1 hash 字符串 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#requesttosha256" class="">http.RequestToSha256</a></td><td style="text-align:left">RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体的 sha256 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha256 hash 字符串 - 错误信息，请求失败...</td></tr><tr><td style="text-align:left"><a href="#requesttosha512" class="">http.RequestToSha512</a></td><td style="text-align:left">RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体的 sha512 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha512 hash 字符串 - 错误信息，请求失败...</td></tr><tr><td style="text-align:left"><a href="#aftersavehandler" class="">http.afterSaveHandler</a></td><td style="text-align:left">afterSaveHandler 是一个请求选项参数，用于设置请求记录保存到数据库后的回调函数 参数: - f: 一个或多个回调函数，参数为保存后的 HTTPFlow 记录 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#body" class="">http.body</a></td><td style="text-align:left">body 是一个请求选项参数，用于指定请求体 参数: - value: 请求体内容（字符串、字节数组或 io.Reader） 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#context" class="">http.context</a></td><td style="text-align:left">context 是一个请求选项参数，用于设置请求的上下文，可通过取消上下文来中断请求 参数: - ctx: 上下文对象 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">http.cookie</a></td><td style="text-align:left">cookie 是一个请求选项参数，用于设置完整的 Cookie 字段 参数: - value: 完整的 Cookie 字符串，形如 &quot;a=b; c=d&quot; 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#disablesession" class="">http.disableSession</a></td><td style="text-align:left">disableSession 是一个请求选项参数，为 true 时不自动分配 session，也不使用 cookie jar 参数: - b: 是否禁用会话 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#dump" class="">http.dump</a></td><td style="text-align:left">dump 获取指定请求结构体引用或响应结构体引用的原始报文，返回原始报文与错误 参数: - i: 请求或响应结构体引用 返回值: - 原始报文字节数组 - 错误信息，类型不支持或序列化失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#dumphead" class="">http.dumphead</a></td><td style="text-align:left">dumphead 获取指定请求结构体引用或响应结构体引用的原始报文头部，返回原始报文头部与错误 参数: - i: 请求或响应结构体引用 返回值: - 原始报文头部字节数组 - 错误信息，类型不支持或序列化失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#fakeua" class="">http.fakeua</a></td><td style="text-align:left">fakeua 是一个请求选项参数，用于随机指定请求的 User-Agent 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#fromplugin" class="">http.fromPlugin</a></td><td style="text-align:left">fromPlugin 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求来源的插件名称 参数: - value: 来源插件名称 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#header" class="">http.header</a></td><td style="text-align:left">header 是一个请求选项参数，用于添加/指定请求头 参数: - key: 请求头名称 - value: 请求头值 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#json" class="">http.json</a></td><td style="text-align:left">json 是一个请求选项参数，用于指定 JSON 格式的请求体，它会将传入的值进行 JSON 序列化后设置为请求体 参数: - value: 任意可被 JSON 序列化的值（如 map、slice） 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#noredirect" class="">http.noredirect</a></td><td style="text-align:left">noredirect 是一个请求选项参数，用于禁止重定向 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#params" class="">http.params</a></td><td style="text-align:left">params 是一个请求选项参数，用于添加/指定 GET 参数，这会将参数进行 URL 编码 参数: - i: GET 参数，形如 &quot;a=b&quot;，多次调用可添加多个 返回值: - 一个请求选项，作为可变参数传入 http.Get 等</td></tr><tr><td style="text-align:left"><a href="#postparams" class="">http.postparams</a></td><td style="text-align:left">postparams 是一个请求选项参数，用于添加/指定 POST 参数，这会将参数进行 URL 编码 参数: - i: POST 参数，形如 &quot;a=b&quot;，多次调用可添加多个 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">http.proxy</a></td><td style="text-align:left">proxy 是一个请求选项参数，用于设置一个或多个请求的代理，请求时会根据顺序找到一个可用的代理使用 参数: - values: 一个或多个代理地址，支持 http、https、socks5 协议 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#redirect" class="">http.redirect</a></td><td style="text-align:left">redirect 是一个请求选项参数，它接收重定向处理函数，用于自定义重定向处理逻辑，返回 true 代表继续重定向，返回 false 代表终止重定向 参数: - c: 重定向处理函数，第一个参数是当前请求结构体引用，第二个参数是之前的请求列表，返回是否继续重定向 返回值: - 一个请求选项，作为可...</td></tr><tr><td style="text-align:left"><a href="#runtimeid" class="">http.runtimeID</a></td><td style="text-align:left">runtimeID 是一个请求选项参数，用于设置运行时 ID 以便将请求记录与某次任务关联追踪 参数: - value: 运行时 ID 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#save" class="">http.save</a></td><td style="text-align:left">save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为 true 即会保存到数据库 参数: - value: 是否保存到数据库 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#session" class="">http.session</a></td><td style="text-align:left">session 是一个请求选项参数，用于根据传入的值指定会话，使用相同的值会使用同一个会话，同一个会话会自动复用 Cookie 参数: - value: 会话标识，相同标识共享同一会话 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#show" class="">http.show</a></td><td style="text-align:left">show 获取指定请求结构体引用或响应结构体引用的原始报文并输出在标准输出 参数: - i: 请求或响应结构体引用 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#showhead" class="">http.showhead</a></td><td style="text-align:left">showhead 获取指定请求结构体引用或响应结构体引用的原始报文头部并输出在标准输出 参数: - i: 请求或响应结构体引用 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#source" class="">http.source</a></td><td style="text-align:left">source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源 参数: - value: 来源标识字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">http.timeout</a></td><td style="text-align:left">WithTimeout 是一个请求选项参数，用于设置请求超时时间，单位是秒 参数: - f: 超时时间，单位为秒，支持小数 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#ua" class="">http.ua</a></td><td style="text-align:left">useragent 是一个请求选项参数，用于指定请求的 User-Agent 参数: - value: User-Agent 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#uarand" class="">http.uarand</a></td><td style="text-align:left">uarand 返回一个随机的 User-Agent 返回值: - 随机生成的 User-Agent 字符串</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">http.useragent</a></td><td style="text-align:left">useragent 是一个请求选项参数，用于指定请求的 User-Agent 参数: - value: User-Agent 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#do" class="">http.Do</a></td><td style="text-align:left">Do 根据构造好的请求结构体引用发送请求，返回响应结构体引用与错误 ! 已弃用 参数: - i: 请求结构体引用 返回值: - 响应结构体引用 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#extractfaviconurl" class="">http.ExtractFaviconURL</a></td><td style="text-align:left">ExtractFaviconURL 从 HTML 页面内容中解析出 favicon 图标的 URL，并相对站点地址补全为绝对地址 参数: - siteURL: 页面所在的站点地址，用于补全相对路径 - content: HTML 页面内容 返回值: - favicon 图标的绝对 URL - 错误信...</td></tr><tr><td style="text-align:left"><a href="#get" class="">http.Get</a></td><td style="text-align:left">Get 根据指定的 URL 发起 GET 请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Get 代替 参数: - url: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应结构体引用 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#getallbody" class="">http.GetAllBody</a></td><td style="text-align:left">GetAllBody 获取响应结构体引用的响应体内容 参数: - raw: 响应结构体引用 返回值: - 响应体字节数组，读取失败或类型不支持时返回 nil</td></tr><tr><td style="text-align:left"><a href="#newrequest" class="">http.NewRequest</a></td><td style="text-align:left">NewRequest 根据指定的 method 和 URL 生成请求结构体引用，可接收零个到多个请求选项用于配置此次请求 注意，此函数只会生成请求结构体引用，不会发起请求 ! 已弃用 参数: - method: 请求方法，如 &quot;GET&quot;、&quot;POST&quot; - url: 目标 URL - opts: 可选...</td></tr><tr><td style="text-align:left"><a href="#post" class="">http.Post</a></td><td style="text-align:left">Post 根据指定的 URL 发起 POST 请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Post 代替 参数: - url: 目标 URL - options: 可选请求选项，例如 http.body、http.timeout 返回值: - 响应结构体引用 - 错误信...</td></tr><tr><td style="text-align:left"><a href="#raw" class="">http.Raw</a></td><td style="text-align:left">Raw 根据原始请求报文生成请求结构体引用，返回请求结构体引用与错误 注意，此函数只会生成请求结构体引用，不会发起请求 ! 已弃用，使用 poc.HTTP 或 poc.HTTPEx 代替 参数: - i: 原始请求报文（字符串、字节数组或请求结构体引用） 返回值: - 请求结构体引用 - 错误信息，...</td></tr><tr><td style="text-align:left"><a href="#request" class="">http.Request</a></td><td style="text-align:left">Request 根据指定的 method 和 URL 发起请求，可接收零个到多个请求选项用于配置此次请求 ! 已弃用，使用 poc.Do 代替 参数: - method: 请求方法，如 &quot;GET&quot;、&quot;POST&quot; - url: 目标 URL - options: 可选请求选项，例如 http.body...</td></tr><tr><td style="text-align:left"><a href="#requestfaviconhash" class="">http.RequestFaviconHash</a></td><td style="text-align:left">RequestFaviconHash 根据指定的 URL 发起 GET 请求并计算响应体的 favicon hash，常用于资产识别 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 base64 编码 mmh3 h...</td></tr><tr><td style="text-align:left"><a href="#requesttomd5" class="">http.RequestToMD5</a></td><td style="text-align:left">RequestToMD5 根据指定的 URL 发起 GET 请求，并计算响应体的 md5 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 md5 hash 字符串 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#requesttommh3hash128" class="">http.RequestToMMH3Hash128</a></td><td style="text-align:left">RequestToMMH3Hash128 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128&gt; 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 mmh3 hash&lt;128&gt; 字符串 ...</td></tr><tr><td style="text-align:left"><a href="#requesttommh3hash128x64" class="">http.RequestToMMH3Hash128x64</a></td><td style="text-align:left">RequestToMMH3Hash128x64 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128x64&gt; 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 mmh3 hash&lt;128...</td></tr><tr><td style="text-align:left"><a href="#requesttosha1" class="">http.RequestToSha1</a></td><td style="text-align:left">RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体的 sha1 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha1 hash 字符串 - 错误信息，请求失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#requesttosha256" class="">http.RequestToSha256</a></td><td style="text-align:left">RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体的 sha256 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha256 hash 字符串 - 错误信息，请求失败...</td></tr><tr><td style="text-align:left"><a href="#requesttosha512" class="">http.RequestToSha512</a></td><td style="text-align:left">RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体的 sha512 hash 参数: - urlRaw: 目标 URL - options: 可选请求选项，例如 http.timeout 返回值: - 响应体的 sha512 hash 字符串 - 错误信息，请求失败...</td></tr><tr><td style="text-align:left"><a href="#aftersavehandler" class="">http.afterSaveHandler</a></td><td style="text-align:left">afterSaveHandler 是一个请求选项参数，用于设置请求记录保存到数据库后的回调函数 参数: - f: 一个或多个回调函数，参数为保存后的 HTTPFlow 记录 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#body" class="">http.body</a></td><td style="text-align:left">body 是一个请求选项参数，用于指定请求体 参数: - value: 请求体内容（字符串、字节数组或 io.Reader） 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#context" class="">http.context</a></td><td style="text-align:left">context 是一个请求选项参数，用于设置请求的上下文，可通过取消上下文来中断请求 参数: - ctx: 上下文对象 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#cookie" class="">http.cookie</a></td><td style="text-align:left">cookie 是一个请求选项参数，用于设置完整的 Cookie 字段 参数: - value: 完整的 Cookie 字符串，形如 &quot;a=b; c=d&quot; 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#disablesession" class="">http.disableSession</a></td><td style="text-align:left">disableSession 是一个请求选项参数，为 true 时不自动分配 session，也不使用 cookie jar 参数: - b: 是否禁用会话 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#dump" class="">http.dump</a></td><td style="text-align:left">dump 获取指定请求结构体引用或响应结构体引用的原始报文，返回原始报文与错误 参数: - i: 请求或响应结构体引用 返回值: - 原始报文字节数组 - 错误信息，类型不支持或序列化失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#dumphead" class="">http.dumphead</a></td><td style="text-align:left">dumphead 获取指定请求结构体引用或响应结构体引用的原始报文头部，返回原始报文头部与错误 参数: - i: 请求或响应结构体引用 返回值: - 原始报文头部字节数组 - 错误信息，类型不支持或序列化失败时返回非空</td></tr><tr><td style="text-align:left"><a href="#fakeua" class="">http.fakeua</a></td><td style="text-align:left">fakeua 是一个请求选项参数，用于随机指定请求的 User-Agent 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#fromplugin" class="">http.fromPlugin</a></td><td style="text-align:left">fromPlugin 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求来源的插件名称 参数: - value: 来源插件名称 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#header" class="">http.header</a></td><td style="text-align:left">header 是一个请求选项参数，用于添加/指定请求头 参数: - key: 请求头名称 - value: 请求头值 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#json" class="">http.json</a></td><td style="text-align:left">json 是一个请求选项参数，用于指定 JSON 格式的请求体，它会将传入的值进行 JSON 序列化后设置为请求体 参数: - value: 任意可被 JSON 序列化的值（如 map、slice） 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#noredirect" class="">http.noredirect</a></td><td style="text-align:left">noredirect 是一个请求选项参数，用于禁止重定向 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#params" class="">http.params</a></td><td style="text-align:left">params 是一个请求选项参数，用于添加/指定 GET 参数，这会将参数进行 URL 编码 参数: - i: GET 参数，形如 &quot;a=b&quot;，多次调用可添加多个 返回值: - 一个请求选项，作为可变参数传入 http.Get 等</td></tr><tr><td style="text-align:left"><a href="#postparams" class="">http.postparams</a></td><td style="text-align:left">postparams 是一个请求选项参数，用于添加/指定 POST 参数，这会将参数进行 URL 编码 参数: - i: POST 参数，形如 &quot;a=b&quot;，多次调用可添加多个 返回值: - 一个请求选项，作为可变参数传入 http.Post 等</td></tr><tr><td style="text-align:left"><a href="#proxy" class="">http.proxy</a></td><td style="text-align:left">proxy 是一个请求选项参数，用于设置一个或多个请求的代理，请求时会根据顺序找到一个可用的代理使用 参数: - values: 一个或多个代理地址，支持 http、https、socks5 协议 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#redirect" class="">http.redirect</a></td><td style="text-align:left">redirect 是一个请求选项参数，它接收重定向处理函数，用于自定义重定向处理逻辑，返回 true 代表继续重定向，返回 false 代表终止重定向 参数: - c: 重定向处理函数，第一个参数是当前请求结构体引用，第二个参数是之前的请求列表，返回是否继续重定向 返回值: - 一个请求选项，作为可...</td></tr><tr><td style="text-align:left"><a href="#runtimeid" class="">http.runtimeID</a></td><td style="text-align:left">runtimeID 是一个请求选项参数，用于设置运行时 ID 以便将请求记录与某次任务关联追踪 参数: - value: 运行时 ID 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#save" class="">http.save</a></td><td style="text-align:left">save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为 true 即会保存到数据库 参数: - value: 是否保存到数据库 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#session" class="">http.session</a></td><td style="text-align:left">session 是一个请求选项参数，用于根据传入的值指定会话，使用相同的值会使用同一个会话，同一个会话会自动复用 Cookie 参数: - value: 会话标识，相同标识共享同一会话 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#show" class="">http.show</a></td><td style="text-align:left">show 获取指定请求结构体引用或响应结构体引用的原始报文并输出在标准输出 参数: - i: 请求或响应结构体引用 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#showhead" class="">http.showhead</a></td><td style="text-align:left">showhead 获取指定请求结构体引用或响应结构体引用的原始报文头部并输出在标准输出 参数: - i: 请求或响应结构体引用 返回值: - 无</td></tr><tr><td style="text-align:left"><a href="#source" class="">http.source</a></td><td style="text-align:left">source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源 参数: - value: 来源标识字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#timeout" class="">http.timeout</a></td><td style="text-align:left">WithTimeout 是一个请求选项参数，用于设置请求超时时间，单位是秒 参数: - f: 超时时间，单位为秒，支持小数 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#ua" class="">http.ua</a></td><td style="text-align:left">useragent 是一个请求选项参数，用于指定请求的 User-Agent 参数: - value: User-Agent 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr><tr><td style="text-align:left"><a href="#uarand" class="">http.uarand</a></td><td style="text-align:left">uarand 返回一个随机的 User-Agent 返回值: - 随机生成的 User-Agent 字符串</td></tr><tr><td style="text-align:left"><a href="#useragent" class="">http.useragent</a></td><td style="text-align:left">useragent 是一个请求选项参数，用于指定请求的 User-Agent 参数: - value: User-Agent 字符串 返回值: - 一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="Direct link to 函数定义" title="Direct link to 函数定义" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="do">Do<a href="#do" class="hash-link" aria-label="Direct link to Do" title="Direct link to Do" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
@@ -225,7 +225,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求结构体引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -247,7 +247,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http.Response</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http.Response</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractfaviconurl">ExtractFaviconURL<a href="#extractfaviconurl" class="hash-link" aria-label="Direct link to ExtractFaviconURL" title="Direct link to ExtractFaviconURL" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>ExtractFaviconURL 从 HTML 页面内容中解析出 favicon 图标的 URL，并相对站点地址补全为绝对地址</p>
@@ -294,7 +294,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">siteURL</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">页面所在的站点地址，用于补全相对路径</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">HTML 页面内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">siteURL</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">页面所在的站点地址，用于补全相对路径</td></tr><tr><td style="text-align:left">content</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">HTML 页面内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -316,7 +316,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">favicon 图标的绝对 URL</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，解析失败或未找到图标时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">favicon 图标的绝对 URL</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，解析失败或未找到图标时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="get">Get<a href="#get" class="hash-link" aria-label="Direct link to Get" title="Direct link to Get" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Get 根据指定的 URL 发起 GET 请求，可接收零个到多个请求选项用于配置此次请求</p>
@@ -364,7 +364,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -386,7 +386,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="getallbody">GetAllBody<a href="#getallbody" class="hash-link" aria-label="Direct link to GetAllBody" title="Direct link to GetAllBody" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>GetAllBody 获取响应结构体引用的响应体内容</p>
@@ -418,7 +418,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">响应结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">响应结构体引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -435,7 +435,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">响应体字节数组，读取失败或类型不支持时返回 nil</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">响应体字节数组，读取失败或类型不支持时返回 nil</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="newrequest">NewRequest<a href="#newrequest" class="hash-link" aria-label="Direct link to NewRequest" title="Direct link to NewRequest" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>NewRequest 根据指定的 method 和 URL 生成请求结构体引用，可接收零个到多个请求选项用于配置此次请求</p>
@@ -492,7 +492,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">method</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求方法，如 &quot;GET&quot;、&quot;POST&quot;</td></tr><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">method</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求方法，如 &quot;GET&quot;、&quot;POST&quot;</td></tr><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">opts</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -514,7 +514,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpRequest</code></td><td style="text-align:left">请求结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，构造失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpRequest</code></td><td style="text-align:left">请求结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，构造失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="post">Post<a href="#post" class="hash-link" aria-label="Direct link to Post" title="Direct link to Post" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Post 根据指定的 URL 发起 POST 请求，可接收零个到多个请求选项用于配置此次请求</p>
@@ -562,7 +562,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.body、http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.body、http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -584,7 +584,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="raw">Raw<a href="#raw" class="hash-link" aria-label="Direct link to Raw" title="Direct link to Raw" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Raw 根据原始请求报文生成请求结构体引用，返回请求结构体引用与错误</p>
@@ -623,7 +623,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始请求报文（字符串、字节数组或请求结构体引用）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始请求报文（字符串、字节数组或请求结构体引用）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -645,7 +645,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http.Request</code></td><td style="text-align:left">请求结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或解析失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http.Request</code></td><td style="text-align:left">请求结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或解析失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="request">Request<a href="#request" class="hash-link" aria-label="Direct link to Request" title="Direct link to Request" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>Request 根据指定的 method 和 URL 发起请求，可接收零个到多个请求选项用于配置此次请求</p>
@@ -701,7 +701,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">method</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求方法，如 &quot;GET&quot;、&quot;POST&quot;</td></tr><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.body、http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">method</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">请求方法，如 &quot;GET&quot;、&quot;POST&quot;</td></tr><tr><td style="text-align:left">url</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.body、http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -723,7 +723,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*http_struct.YakHttpResponse</code></td><td style="text-align:left">响应结构体引用</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requestfaviconhash">RequestFaviconHash<a href="#requestfaviconhash" class="hash-link" aria-label="Direct link to RequestFaviconHash" title="Direct link to RequestFaviconHash" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestFaviconHash 根据指定的 URL 发起 GET 请求并计算响应体的 favicon hash，常用于资产识别</p>
@@ -770,7 +770,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -792,7 +792,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 base64 编码 mmh3 hash（响应状态码为 2xx 时）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败或状态码非 2xx 时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 base64 编码 mmh3 hash（响应状态码为 2xx 时）</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败或状态码非 2xx 时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttomd5">RequestToMD5<a href="#requesttomd5" class="hash-link" aria-label="Direct link to RequestToMD5" title="Direct link to RequestToMD5" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToMD5 根据指定的 URL 发起 GET 请求，并计算响应体的 md5 hash</p>
@@ -839,7 +839,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -861,7 +861,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 md5 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 md5 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttommh3hash128">RequestToMMH3Hash128<a href="#requesttommh3hash128" class="hash-link" aria-label="Direct link to RequestToMMH3Hash128" title="Direct link to RequestToMMH3Hash128" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToMMH3Hash128 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128&gt;</p>
@@ -908,7 +908,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -930,7 +930,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 mmh3 hash&lt;128&gt; 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 mmh3 hash&lt;128&gt; 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttommh3hash128x64">RequestToMMH3Hash128x64<a href="#requesttommh3hash128x64" class="hash-link" aria-label="Direct link to RequestToMMH3Hash128x64" title="Direct link to RequestToMMH3Hash128x64" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToMMH3Hash128x64 根据指定的 URL 发起 GET 请求，并计算响应体的 mmh3 hash&lt;128x64&gt;</p>
@@ -977,7 +977,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -999,7 +999,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 mmh3 hash&lt;128x64&gt; 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 mmh3 hash&lt;128x64&gt; 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttosha1">RequestToSha1<a href="#requesttosha1" class="hash-link" aria-label="Direct link to RequestToSha1" title="Direct link to RequestToSha1" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToSha1 根据指定的 URL 发起 GET 请求，并计算响应体的 sha1 hash</p>
@@ -1046,7 +1046,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1068,7 +1068,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha1 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha1 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttosha256">RequestToSha256<a href="#requesttosha256" class="hash-link" aria-label="Direct link to RequestToSha256" title="Direct link to RequestToSha256" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToSha256 根据指定的 URL 发起 GET 请求，并计算响应体的 sha256 hash</p>
@@ -1115,7 +1115,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1137,7 +1137,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha256 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha256 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="requesttosha512">RequestToSha512<a href="#requesttosha512" class="hash-link" aria-label="Direct link to RequestToSha512" title="Direct link to RequestToSha512" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>RequestToSha512 根据指定的 URL 发起 GET 请求，并计算响应体的 sha512 hash</p>
@@ -1184,7 +1184,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">urlRaw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">目标 URL</td></tr><tr><td style="text-align:left">options</td><td style="text-align:left"><code>...http_struct.HttpOption</code></td><td style="text-align:left">可选请求选项，例如 http.timeout</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1206,7 +1206,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha512 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">响应体的 sha512 hash 字符串</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，请求失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="aftersavehandler">afterSaveHandler<a href="#aftersavehandler" class="hash-link" aria-label="Direct link to afterSaveHandler" title="Direct link to afterSaveHandler" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>afterSaveHandler 是一个请求选项参数，用于设置请求记录保存到数据库后的回调函数</p>
@@ -1238,7 +1238,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>...func(flow *schema.HTTPFlow)</code></td><td style="text-align:left">一个或多个回调函数，参数为保存后的 HTTPFlow 记录</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>...func(flow *schema.HTTPFlow)</code></td><td style="text-align:left">一个或多个回调函数，参数为保存后的 HTTPFlow 记录</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1255,7 +1255,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="body">body<a href="#body" class="hash-link" aria-label="Direct link to body" title="Direct link to body" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>body 是一个请求选项参数，用于指定请求体</p>
@@ -1287,7 +1287,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求体内容（字符串、字节数组或 io.Reader）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求体内容（字符串、字节数组或 io.Reader）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1304,7 +1304,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="context">context<a href="#context" class="hash-link" aria-label="Direct link to context" title="Direct link to context" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>context 是一个请求选项参数，用于设置请求的上下文，可通过取消上下文来中断请求</p>
@@ -1336,7 +1336,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文对象</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1353,7 +1353,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="cookie">cookie<a href="#cookie" class="hash-link" aria-label="Direct link to cookie" title="Direct link to cookie" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>cookie 是一个请求选项参数，用于设置完整的 Cookie 字段</p>
@@ -1385,7 +1385,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">完整的 Cookie 字符串，形如 &quot;a=b; c=d&quot;</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">完整的 Cookie 字符串，形如 &quot;a=b; c=d&quot;</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1402,7 +1402,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="disablesession">disableSession<a href="#disablesession" class="hash-link" aria-label="Direct link to disableSession" title="Direct link to disableSession" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>disableSession 是一个请求选项参数，为 true 时不自动分配 session，也不使用 cookie jar</p>
@@ -1434,7 +1434,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用会话</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">b</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否禁用会话</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1451,7 +1451,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dump">dump<a href="#dump" class="hash-link" aria-label="Direct link to dump" title="Direct link to dump" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>dump 获取指定请求结构体引用或响应结构体引用的原始报文，返回原始报文与错误</p>
@@ -1488,7 +1488,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1510,7 +1510,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">原始报文字节数组</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或序列化失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">原始报文字节数组</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或序列化失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dumphead">dumphead<a href="#dumphead" class="hash-link" aria-label="Direct link to dumphead" title="Direct link to dumphead" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>dumphead 获取指定请求结构体引用或响应结构体引用的原始报文头部，返回原始报文头部与错误</p>
@@ -1547,7 +1547,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1569,7 +1569,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">原始报文头部字节数组</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或序列化失败时返回非空</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]byte</code></td><td style="text-align:left">原始报文头部字节数组</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息，类型不支持或序列化失败时返回非空</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fakeua">fakeua<a href="#fakeua" class="hash-link" aria-label="Direct link to fakeua" title="Direct link to fakeua" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>fakeua 是一个请求选项参数，用于随机指定请求的 User-Agent</p>
@@ -1597,7 +1597,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="fromplugin">fromPlugin<a href="#fromplugin" class="hash-link" aria-label="Direct link to fromPlugin" title="Direct link to fromPlugin" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>fromPlugin 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求来源的插件名称</p>
@@ -1629,7 +1629,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">来源插件名称</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">来源插件名称</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1646,7 +1646,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="header">header<a href="#header" class="hash-link" aria-label="Direct link to header" title="Direct link to header" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>header 是一个请求选项参数，用于添加/指定请求头</p>
@@ -1688,7 +1688,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">key</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求头名称</td></tr><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求头值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">key</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求头名称</td></tr><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求头值</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1705,7 +1705,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="json">json<a href="#json" class="hash-link" aria-label="Direct link to json" title="Direct link to json" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>json 是一个请求选项参数，用于指定 JSON 格式的请求体，它会将传入的值进行 JSON 序列化后设置为请求体</p>
@@ -1737,7 +1737,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">任意可被 JSON 序列化的值（如 map、slice）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">任意可被 JSON 序列化的值（如 map、slice）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1754,7 +1754,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="noredirect">noredirect<a href="#noredirect" class="hash-link" aria-label="Direct link to noredirect" title="Direct link to noredirect" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>noredirect 是一个请求选项参数，用于禁止重定向</p>
@@ -1782,7 +1782,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="params">params<a href="#params" class="hash-link" aria-label="Direct link to params" title="Direct link to params" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>params 是一个请求选项参数，用于添加/指定 GET 参数，这会将参数进行 URL 编码</p>
@@ -1814,7 +1814,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">GET 参数，形如 &quot;a=b&quot;，多次调用可添加多个</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">GET 参数，形如 &quot;a=b&quot;，多次调用可添加多个</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1831,7 +1831,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="postparams">postparams<a href="#postparams" class="hash-link" aria-label="Direct link to postparams" title="Direct link to postparams" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-28">详细描述<a href="#详细描述-28" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>postparams 是一个请求选项参数，用于添加/指定 POST 参数，这会将参数进行 URL 编码</p>
@@ -1863,7 +1863,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">POST 参数，形如 &quot;a=b&quot;，多次调用可添加多个</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">POST 参数，形如 &quot;a=b&quot;，多次调用可添加多个</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-28">返回值<a href="#返回值-28" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1880,7 +1880,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="proxy">proxy<a href="#proxy" class="hash-link" aria-label="Direct link to proxy" title="Direct link to proxy" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-29">详细描述<a href="#详细描述-29" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>proxy 是一个请求选项参数，用于设置一个或多个请求的代理，请求时会根据顺序找到一个可用的代理使用</p>
@@ -1912,7 +1912,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">values</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，支持 http、https、socks5 协议</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">values</td><td style="text-align:left"><code>...string</code></td><td style="text-align:left">一个或多个代理地址，支持 http、https、socks5 协议</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-29">返回值<a href="#返回值-29" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1929,7 +1929,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="redirect">redirect<a href="#redirect" class="hash-link" aria-label="Direct link to redirect" title="Direct link to redirect" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-30">详细描述<a href="#详细描述-30" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>redirect 是一个请求选项参数，它接收重定向处理函数，用于自定义重定向处理逻辑，返回 true 代表继续重定向，返回 false 代表终止重定向</p>
@@ -1961,7 +1961,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">c</td><td style="text-align:left"><code>func(r *http.Request, vias []*http.Request) bool</code></td><td style="text-align:left">重定向处理函数，第一个参数是当前请求结构体引用，第二个参数是之前的请求列表，返回是否继续重定向</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">c</td><td style="text-align:left"><code>func(r *http.Request, vias []*http.Request) bool</code></td><td style="text-align:left">重定向处理函数，第一个参数是当前请求结构体引用，第二个参数是之前的请求列表，返回是否继续重定向</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-30">返回值<a href="#返回值-30" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -1978,7 +1978,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="runtimeid">runtimeID<a href="#runtimeid" class="hash-link" aria-label="Direct link to runtimeID" title="Direct link to runtimeID" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-31">详细描述<a href="#详细描述-31" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>runtimeID 是一个请求选项参数，用于设置运行时 ID 以便将请求记录与某次任务关联追踪</p>
@@ -2010,7 +2010,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行时 ID 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">运行时 ID 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-31">返回值<a href="#返回值-31" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2027,7 +2027,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="save">save<a href="#save" class="hash-link" aria-label="Direct link to save" title="Direct link to save" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-32">详细描述<a href="#详细描述-32" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>save 是一个请求选项参数，用于指定是否将此次请求的记录保存在数据库中，默认为 true 即会保存到数据库</p>
@@ -2059,7 +2059,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否保存到数据库</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否保存到数据库</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-32">返回值<a href="#返回值-32" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2076,7 +2076,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="session">session<a href="#session" class="hash-link" aria-label="Direct link to session" title="Direct link to session" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-33">详细描述<a href="#详细描述-33" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>session 是一个请求选项参数，用于根据传入的值指定会话，使用相同的值会使用同一个会话，同一个会话会自动复用 Cookie</p>
@@ -2108,7 +2108,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">会话标识，相同标识共享同一会话</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">会话标识，相同标识共享同一会话</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-33">返回值<a href="#返回值-33" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2125,7 +2125,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="show">show<a href="#show" class="hash-link" aria-label="Direct link to show" title="Direct link to show" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-34">详细描述<a href="#详细描述-34" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>show 获取指定请求结构体引用或响应结构体引用的原始报文并输出在标准输出</p>
@@ -2157,7 +2157,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="showhead">showhead<a href="#showhead" class="hash-link" aria-label="Direct link to showhead" title="Direct link to showhead" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-35">详细描述<a href="#详细描述-35" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>showhead 获取指定请求结构体引用或响应结构体引用的原始报文头部并输出在标准输出</p>
@@ -2189,7 +2189,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">请求或响应结构体引用</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="source">source<a href="#source" class="hash-link" aria-label="Direct link to source" title="Direct link to source" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-36">详细描述<a href="#详细描述-36" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>source 是一个请求选项参数，用于在请求记录保存到数据库时标识此次请求的来源</p>
@@ -2221,7 +2221,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">来源标识字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">来源标识字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-34">返回值<a href="#返回值-34" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2238,7 +2238,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="timeout">timeout<a href="#timeout" class="hash-link" aria-label="Direct link to timeout" title="Direct link to timeout" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-37">详细描述<a href="#详细描述-37" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>WithTimeout 是一个请求选项参数，用于设置请求超时时间，单位是秒</p>
@@ -2270,7 +2270,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">超时时间，单位为秒，支持小数</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">f</td><td style="text-align:left"><code>float64</code></td><td style="text-align:left">超时时间，单位为秒，支持小数</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-35">返回值<a href="#返回值-35" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2287,7 +2287,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ua">ua<a href="#ua" class="hash-link" aria-label="Direct link to ua" title="Direct link to ua" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-38">详细描述<a href="#详细描述-38" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>useragent 是一个请求选项参数，用于指定请求的 User-Agent</p>
@@ -2319,7 +2319,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-36">返回值<a href="#返回值-36" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2336,7 +2336,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="uarand">uarand<a href="#uarand" class="hash-link" aria-label="Direct link to uarand" title="Direct link to uarand" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-39">详细描述<a href="#详细描述-39" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>uarand 返回一个随机的 User-Agent</p>
@@ -2364,7 +2364,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机生成的 User-Agent 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">随机生成的 User-Agent 字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="useragent">useragent<a href="#useragent" class="hash-link" aria-label="Direct link to useragent" title="Direct link to useragent" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-40">详细描述<a href="#详细描述-40" class="hash-link" aria-label="Direct link to 详细描述" title="Direct link to 详细描述" translate="no">​</a></h4>
 <p>useragent 是一个请求选项参数，用于指定请求的 User-Agent</p>
@@ -2396,7 +2396,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">value</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">User-Agent 字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-38">返回值<a href="#返回值-38" class="hash-link" aria-label="Direct link to 返回值" title="Direct link to 返回值" translate="no">​</a></h4>
 
 
@@ -2413,6 +2413,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/http.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/hook"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">hook</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/httpool"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">httpool</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#do" class="table-of-contents__link toc-highlight">Do</a></li><li><a href="#extractfaviconurl" class="table-of-contents__link toc-highlight">ExtractFaviconURL</a></li><li><a href="#get" class="table-of-contents__link toc-highlight">Get</a></li><li><a href="#getallbody" class="table-of-contents__link toc-highlight">GetAllBody</a></li><li><a href="#newrequest" class="table-of-contents__link toc-highlight">NewRequest</a></li><li><a href="#post" class="table-of-contents__link toc-highlight">Post</a></li><li><a href="#raw" class="table-of-contents__link toc-highlight">Raw</a></li><li><a href="#request" class="table-of-contents__link toc-highlight">Request</a></li><li><a href="#requestfaviconhash" class="table-of-contents__link toc-highlight">RequestFaviconHash</a></li><li><a href="#requesttomd5" class="table-of-contents__link toc-highlight">RequestToMD5</a></li><li><a href="#requesttommh3hash128" class="table-of-contents__link toc-highlight">RequestToMMH3Hash128</a></li><li><a href="#requesttommh3hash128x64" class="table-of-contents__link toc-highlight">RequestToMMH3Hash128x64</a></li><li><a href="#requesttosha1" class="table-of-contents__link toc-highlight">RequestToSha1</a></li><li><a href="#requesttosha256" class="table-of-contents__link toc-highlight">RequestToSha256</a></li><li><a href="#requesttosha512" class="table-of-contents__link toc-highlight">RequestToSha512</a></li><li><a href="#aftersavehandler" class="table-of-contents__link toc-highlight">afterSaveHandler</a></li><li><a href="#body" class="table-of-contents__link toc-highlight">body</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#cookie" class="table-of-contents__link toc-highlight">cookie</a></li><li><a href="#disablesession" class="table-of-contents__link toc-highlight">disableSession</a></li><li><a href="#dump" class="table-of-contents__link toc-highlight">dump</a></li><li><a href="#dumphead" class="table-of-contents__link toc-highlight">dumphead</a></li><li><a href="#fakeua" class="table-of-contents__link toc-highlight">fakeua</a></li><li><a href="#fromplugin" class="table-of-contents__link toc-highlight">fromPlugin</a></li><li><a href="#header" class="table-of-contents__link toc-highlight">header</a></li><li><a href="#json" class="table-of-contents__link toc-highlight">json</a></li><li><a href="#noredirect" class="table-of-contents__link toc-highlight">noredirect</a></li><li><a href="#params" class="table-of-contents__link toc-highlight">params</a></li><li><a href="#postparams" class="table-of-contents__link toc-highlight">postparams</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#redirect" class="table-of-contents__link toc-highlight">redirect</a></li><li><a href="#runtimeid" class="table-of-contents__link toc-highlight">runtimeID</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">save</a></li><li><a href="#session" class="table-of-contents__link toc-highlight">session</a></li><li><a href="#show" class="table-of-contents__link toc-highlight">show</a></li><li><a href="#showhead" class="table-of-contents__link toc-highlight">showhead</a></li><li><a href="#source" class="table-of-contents__link toc-highlight">source</a></li><li><a href="#timeout" class="table-of-contents__link toc-highlight">timeout</a></li><li><a href="#ua" class="table-of-contents__link toc-highlight">ua</a></li><li><a href="#uarand" class="table-of-contents__link toc-highlight">uarand</a></li><li><a href="#useragent" class="table-of-contents__link toc-highlight">useragent</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>http_struct.HttpOption</code></td><td style="text-align:left">一个请求选项，作为可变参数传入 http.Get/http.Post 等</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/http.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/docs/api/hook"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">hook</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/docs/api/httpool"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">httpool</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#do" class="table-of-contents__link toc-highlight">Do</a></li><li><a href="#extractfaviconurl" class="table-of-contents__link toc-highlight">ExtractFaviconURL</a></li><li><a href="#get" class="table-of-contents__link toc-highlight">Get</a></li><li><a href="#getallbody" class="table-of-contents__link toc-highlight">GetAllBody</a></li><li><a href="#newrequest" class="table-of-contents__link toc-highlight">NewRequest</a></li><li><a href="#post" class="table-of-contents__link toc-highlight">Post</a></li><li><a href="#raw" class="table-of-contents__link toc-highlight">Raw</a></li><li><a href="#request" class="table-of-contents__link toc-highlight">Request</a></li><li><a href="#requestfaviconhash" class="table-of-contents__link toc-highlight">RequestFaviconHash</a></li><li><a href="#requesttomd5" class="table-of-contents__link toc-highlight">RequestToMD5</a></li><li><a href="#requesttommh3hash128" class="table-of-contents__link toc-highlight">RequestToMMH3Hash128</a></li><li><a href="#requesttommh3hash128x64" class="table-of-contents__link toc-highlight">RequestToMMH3Hash128x64</a></li><li><a href="#requesttosha1" class="table-of-contents__link toc-highlight">RequestToSha1</a></li><li><a href="#requesttosha256" class="table-of-contents__link toc-highlight">RequestToSha256</a></li><li><a href="#requesttosha512" class="table-of-contents__link toc-highlight">RequestToSha512</a></li><li><a href="#aftersavehandler" class="table-of-contents__link toc-highlight">afterSaveHandler</a></li><li><a href="#body" class="table-of-contents__link toc-highlight">body</a></li><li><a href="#context" class="table-of-contents__link toc-highlight">context</a></li><li><a href="#cookie" class="table-of-contents__link toc-highlight">cookie</a></li><li><a href="#disablesession" class="table-of-contents__link toc-highlight">disableSession</a></li><li><a href="#dump" class="table-of-contents__link toc-highlight">dump</a></li><li><a href="#dumphead" class="table-of-contents__link toc-highlight">dumphead</a></li><li><a href="#fakeua" class="table-of-contents__link toc-highlight">fakeua</a></li><li><a href="#fromplugin" class="table-of-contents__link toc-highlight">fromPlugin</a></li><li><a href="#header" class="table-of-contents__link toc-highlight">header</a></li><li><a href="#json" class="table-of-contents__link toc-highlight">json</a></li><li><a href="#noredirect" class="table-of-contents__link toc-highlight">noredirect</a></li><li><a href="#params" class="table-of-contents__link toc-highlight">params</a></li><li><a href="#postparams" class="table-of-contents__link toc-highlight">postparams</a></li><li><a href="#proxy" class="table-of-contents__link toc-highlight">proxy</a></li><li><a href="#redirect" class="table-of-contents__link toc-highlight">redirect</a></li><li><a href="#runtimeid" class="table-of-contents__link toc-highlight">runtimeID</a></li><li><a href="#save" class="table-of-contents__link toc-highlight">save</a></li><li><a href="#session" class="table-of-contents__link toc-highlight">session</a></li><li><a href="#show" class="table-of-contents__link toc-highlight">show</a></li><li><a href="#showhead" class="table-of-contents__link toc-highlight">showhead</a></li><li><a href="#source" class="table-of-contents__link toc-highlight">source</a></li><li><a href="#timeout" class="table-of-contents__link toc-highlight">timeout</a></li><li><a href="#ua" class="table-of-contents__link toc-highlight">ua</a></li><li><a href="#uarand" class="table-of-contents__link toc-highlight">uarand</a></li><li><a href="#useragent" class="table-of-contents__link toc-highlight">useragent</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/en/"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/en/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/en/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>

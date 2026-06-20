@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">re | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/docs/api/re"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="zh-CN"><meta data-rh="true" name="docsearch:language" content="zh-CN"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="re | Yak Program Language"><meta data-rh="true" name="description" content="|函数名|函数描述/介绍|"><meta data-rh="true" property="og:description" content="|函数名|函数描述/介绍|"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/docs/api/re"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/re" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/re" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/re" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"re","item":"https://yaklang.com/docs/api/re"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="技术博客 RSS Feed">
-<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.b7326a0a.css">
-<script src="/assets/js/runtime~main.57ca5fd1.js" defer="defer"></script>
-<script src="/assets/js/main.02c5aefc.js" defer="defer"></script>
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/assets/css/styles.6a0ff1da.css">
+<script src="/assets/js/runtime~main.30a1f0b6.js" defer="defer"></script>
+<script src="/assets/js/main.abaed218.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -134,7 +134,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#compile" class="">re.Compile</a></td><td style="text-align:left">Compile 将正则表达式编译为正则对象（导出名为 re.Compile） 参数: - expr: 正则表达式字符串 返回值: - 编译得到的正则对象，可调用 MatchString/FindString 等方法 - 错误信息（正则语法非法时返回）</td></tr><tr><td style="text-align:left"><a href="#compileposix" class="">re.CompilePOSIX</a></td><td style="text-align:left">CompilePOSIX 按 POSIX ERE(egrep) 语法编译正则，匹配语义为左最长匹配（导出名为 re.CompilePOSIX） 参数: - expr: 正则表达式字符串 返回值: - 编译得到的 POSIX 正则对象 - 错误信息（正则语法非法时返回）</td></tr><tr><td style="text-align:left"><a href="#extractemail" class="">re.ExtractEmail</a></td><td style="text-align:left">ExtractEmail 提取字符串中所有的 Email 地址（导出名为 re.ExtractEmail） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 Email 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracthostport" class="">re.ExtractHostPort</a></td><td style="text-align:left">ExtractHostPort 提取字符串中所有的 Host:Port（导出名为 re.ExtractHostPort） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 Host:Port 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractip" class="">re.ExtractIP</a></td><td style="text-align:left">ExtractIP 提取字符串中所有的 IP 地址（IPv4 与 IPv6）（导出名为 re.ExtractIP） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IP 地址列表（先 IPv6 后 IPv4），未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractipv4" class="">re.ExtractIPv4</a></td><td style="text-align:left">ExtractIPv4 提取字符串中所有的 IPv4 地址（导出名为 re.ExtractIPv4） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IPv4 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractipv6" class="">re.ExtractIPv6</a></td><td style="text-align:left">ExtractIPv6 提取字符串中所有的 IPv6 地址（导出名为 re.ExtractIPv6） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IPv6 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractmac" class="">re.ExtractMac</a></td><td style="text-align:left">ExtractMac 提取字符串中所有的 MAC 地址（导出名为 re.ExtractMac） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 MAC 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractpath" class="">re.ExtractPath</a></td><td style="text-align:left">ExtractPath 提取字符串中所有的路径与查询字符串（导出名为 re.ExtractPath） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 路径(?查询) 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracttty" class="">re.ExtractTTY</a></td><td style="text-align:left">ExtractTTY 提取字符串中所有的 Linux/Unix 终端设备路径（导出名为 re.ExtractTTY） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的设备文件路径列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracturl" class="">re.ExtractURL</a></td><td style="text-align:left">ExtractURL 提取字符串中所有的 URL 地址（导出名为 re.ExtractURL） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 URL 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#find" class="">re.Find</a></td><td style="text-align:left">Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 第一个匹配的子串，未匹配返回空字符串</td></tr><tr><td style="text-align:left"><a href="#findall" class="">re.FindAll</a></td><td style="text-align:left">FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 所有匹配子串组成的切片，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findallindex" class="">re.FindAllIndex</a></td><td style="text-align:left">FindAllIndex 使用正则匹配字符串，返回所有匹配子串的起止位置（导出名为 re.FindAllIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 二维整数切片，每项为 [起始位置, 结束位置]，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findgroup" class="">re.FindGroup</a></td><td style="text-align:left">FindGroup 使用正则匹配并按命名捕获组返回结果映射（导出名为 re.FindGroup） 键为捕获组名（未命名组用其序号字符串），值为匹配内容；键 &quot;0&quot; 表示整体匹配 参数: - i: 待匹配的输入（任意可转为字符串） - re: 含命名捕获组的正则表达式 返回值: - 命名捕获组到匹配内...</td></tr><tr><td style="text-align:left"><a href="#findgroupall" class="">re.FindGroupAll</a></td><td style="text-align:left">FindGroupAll 使用正则匹配并按命名捕获组返回所有结果映射（导出名为 re.FindGroupAll） 每个匹配对应一个映射，键为捕获组名（未命名组用序号），键 &quot;0&quot; 为整体匹配 参数: - i: 待匹配的输入（任意可转为字符串） - raw: 含命名捕获组的正则表达式 返回值: - 映...</td></tr><tr><td style="text-align:left"><a href="#findindex" class="">re.FindIndex</a></td><td style="text-align:left">FindIndex 使用正则匹配字符串，返回第一个匹配子串的起止位置（导出名为 re.FindIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 长度为 2 的整数切片 [起始位置, 结束位置]，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findsubmatch" class="">re.FindSubmatch</a></td><td style="text-align:left">FindSubmatch 使用正则匹配字符串，返回第一个匹配及其子匹配（导出名为 re.FindSubmatch） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 字符串切片，第 0 项为整体匹配，其余为各捕获组，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findsubmatchall" class="">re.FindSubmatchAll</a></td><td style="text-align:left">FindSubmatchAll 使用正则匹配字符串，返回所有匹配及其子匹配（导出名为 re.FindSubmatchAll） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 二维字符串切片，每项为 [整体匹配, 捕获组...]，未匹配返回...</td></tr><tr><td style="text-align:left"><a href="#findsubmatchallindex" class="">re.FindSubmatchAllIndex</a></td><td style="text-align:left">FindSubmatchAllIndex 使用正则匹配字符串，返回所有匹配及子匹配的位置（导出名为 re.FindSubmatchAllIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 二维整数切片，每项每两个一组依次为整体匹...</td></tr><tr><td style="text-align:left"><a href="#findsubmatchindex" class="">re.FindSubmatchIndex</a></td><td style="text-align:left">FindSubmatchIndex 使用正则匹配字符串，返回第一个匹配及子匹配的位置（导出名为 re.FindSubmatchIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 整数切片，每两个一组依次为整体匹配与各捕获组的 [...</td></tr><tr><td style="text-align:left"><a href="#grok" class="">re.Grok</a></td><td style="text-align:left">Grok 使用 Grok 规则解析字符串并返回解析结果（导出名为 re.Grok） 结果为字段名到取值的映射，可用 .Get(key) 取第一个值；参考 logstash grok 语法 参数: - line: 待解析的原始字符串 - rule: Grok 规则（如 &quot;%{MONTHNUM:mont...</td></tr><tr><td style="text-align:left"><a href="#match" class="">re.Match</a></td><td style="text-align:left">Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false 参数: - pattern: 正则表达式 - s: 待匹配的字符串或字节切片 返回值: - 是否匹配成功</td></tr><tr><td style="text-align:left"><a href="#mustcompile" class="">re.MustCompile</a></td><td style="text-align:left">MustCompile 编译正则表达式，语法非法时直接 panic（导出名为 re.MustCompile） 适用于编译期可确定合法的常量正则 参数: - str: 正则表达式字符串 返回值: - 编译得到的正则对象</td></tr><tr><td style="text-align:left"><a href="#mustcompileposix" class="">re.MustCompilePOSIX</a></td><td style="text-align:left">MustCompilePOSIX 按 POSIX 语法编译正则，语法非法时直接 panic（导出名为 re.MustCompilePOSIX） 参数: - str: 正则表达式字符串 返回值: - 编译得到的 POSIX 正则对象</td></tr><tr><td style="text-align:left"><a href="#quotemeta" class="">re.QuoteMeta</a></td><td style="text-align:left">QuoteMeta 转义字符串中所有正则元字符，使其可作为普通文本参与匹配（导出名为 re.QuoteMeta） 参数: - s: 原始字符串 返回值: - 转义后的字符串</td></tr><tr><td style="text-align:left"><a href="#replaceall" class="">re.ReplaceAll</a></td><td style="text-align:left">ReplaceAll 使用正则匹配并替换为指定字符串（导出名为 re.ReplaceAll） 替换字符串支持 $1、${name} 等引用捕获组 参数: - origin: 原始输入（任意可转为字符串） - re: 正则表达式 - newStr: 替换字符串（支持 $1 等捕获组引用） 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#replaceallwithfunc" class="">re.ReplaceAllWithFunc</a></td><td style="text-align:left">ReplaceAllWithFunc 使用正则匹配并用回调函数生成替换内容（导出名为 re.ReplaceAllWithFunc） 参数: - origin: 原始输入（任意可转为字符串） - re: 正则表达式 - newStr: 回调函数 func(matched string) string，...</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">函数名</th><th style="text-align:left">函数描述/介绍</th></tr></thead><tbody><tr><td style="text-align:left"><a href="#compile" class="">re.Compile</a></td><td style="text-align:left">Compile 将正则表达式编译为正则对象（导出名为 re.Compile） 参数: - expr: 正则表达式字符串 返回值: - 编译得到的正则对象，可调用 MatchString/FindString 等方法 - 错误信息（正则语法非法时返回）</td></tr><tr><td style="text-align:left"><a href="#compileposix" class="">re.CompilePOSIX</a></td><td style="text-align:left">CompilePOSIX 按 POSIX ERE(egrep) 语法编译正则，匹配语义为左最长匹配（导出名为 re.CompilePOSIX） 参数: - expr: 正则表达式字符串 返回值: - 编译得到的 POSIX 正则对象 - 错误信息（正则语法非法时返回）</td></tr><tr><td style="text-align:left"><a href="#extractemail" class="">re.ExtractEmail</a></td><td style="text-align:left">ExtractEmail 提取字符串中所有的 Email 地址（导出名为 re.ExtractEmail） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 Email 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracthostport" class="">re.ExtractHostPort</a></td><td style="text-align:left">ExtractHostPort 提取字符串中所有的 Host:Port（导出名为 re.ExtractHostPort） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 Host:Port 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractip" class="">re.ExtractIP</a></td><td style="text-align:left">ExtractIP 提取字符串中所有的 IP 地址（IPv4 与 IPv6）（导出名为 re.ExtractIP） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IP 地址列表（先 IPv6 后 IPv4），未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractipv4" class="">re.ExtractIPv4</a></td><td style="text-align:left">ExtractIPv4 提取字符串中所有的 IPv4 地址（导出名为 re.ExtractIPv4） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IPv4 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractipv6" class="">re.ExtractIPv6</a></td><td style="text-align:left">ExtractIPv6 提取字符串中所有的 IPv6 地址（导出名为 re.ExtractIPv6） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 IPv6 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractmac" class="">re.ExtractMac</a></td><td style="text-align:left">ExtractMac 提取字符串中所有的 MAC 地址（导出名为 re.ExtractMac） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 MAC 地址列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extractpath" class="">re.ExtractPath</a></td><td style="text-align:left">ExtractPath 提取字符串中所有的路径与查询字符串（导出名为 re.ExtractPath） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 路径(?查询) 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracttty" class="">re.ExtractTTY</a></td><td style="text-align:left">ExtractTTY 提取字符串中所有的 Linux/Unix 终端设备路径（导出名为 re.ExtractTTY） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的设备文件路径列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#extracturl" class="">re.ExtractURL</a></td><td style="text-align:left">ExtractURL 提取字符串中所有的 URL 地址（导出名为 re.ExtractURL） 参数: - i: 待提取的输入（任意可转为字符串） 返回值: - 提取到的 URL 列表，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#find" class="">re.Find</a></td><td style="text-align:left">Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 第一个匹配的子串，未匹配返回空字符串</td></tr><tr><td style="text-align:left"><a href="#findall" class="">re.FindAll</a></td><td style="text-align:left">FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 所有匹配子串组成的切片，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findallindex" class="">re.FindAllIndex</a></td><td style="text-align:left">FindAllIndex 使用正则匹配字符串，返回所有匹配子串的起止位置（导出名为 re.FindAllIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 二维整数切片，每项为 [起始位置, 结束位置]，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findgroup" class="">re.FindGroup</a></td><td style="text-align:left">FindGroup 使用正则匹配并按命名捕获组返回结果映射（导出名为 re.FindGroup） 键为捕获组名（未命名组用其序号字符串），值为匹配内容；键 &quot;0&quot; 表示整体匹配 参数: - i: 待匹配的输入（任意可转为字符串） - re: 含命名捕获组的正则表达式 返回值: - 命名捕获组到匹配内...</td></tr><tr><td style="text-align:left"><a href="#findgroupall" class="">re.FindGroupAll</a></td><td style="text-align:left">FindGroupAll 使用正则匹配并按命名捕获组返回所有结果映射（导出名为 re.FindGroupAll） 每个匹配对应一个映射，键为捕获组名（未命名组用序号），键 &quot;0&quot; 为整体匹配 参数: - i: 待匹配的输入（任意可转为字符串） - raw: 含命名捕获组的正则表达式 返回值: - 映...</td></tr><tr><td style="text-align:left"><a href="#findindex" class="">re.FindIndex</a></td><td style="text-align:left">FindIndex 使用正则匹配字符串，返回第一个匹配子串的起止位置（导出名为 re.FindIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 正则表达式 返回值: - 长度为 2 的整数切片 [起始位置, 结束位置]，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findsubmatch" class="">re.FindSubmatch</a></td><td style="text-align:left">FindSubmatch 使用正则匹配字符串，返回第一个匹配及其子匹配（导出名为 re.FindSubmatch） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 字符串切片，第 0 项为整体匹配，其余为各捕获组，未匹配返回空切片</td></tr><tr><td style="text-align:left"><a href="#findsubmatchall" class="">re.FindSubmatchAll</a></td><td style="text-align:left">FindSubmatchAll 使用正则匹配字符串，返回所有匹配及其子匹配（导出名为 re.FindSubmatchAll） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 二维字符串切片，每项为 [整体匹配, 捕获组...]，未匹配返回...</td></tr><tr><td style="text-align:left"><a href="#findsubmatchallindex" class="">re.FindSubmatchAllIndex</a></td><td style="text-align:left">FindSubmatchAllIndex 使用正则匹配字符串，返回所有匹配及子匹配的位置（导出名为 re.FindSubmatchAllIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 二维整数切片，每项每两个一组依次为整体匹...</td></tr><tr><td style="text-align:left"><a href="#findsubmatchindex" class="">re.FindSubmatchIndex</a></td><td style="text-align:left">FindSubmatchIndex 使用正则匹配字符串，返回第一个匹配及子匹配的位置（导出名为 re.FindSubmatchIndex） 参数: - origin: 待匹配的输入（任意可转为字符串） - re: 含捕获组的正则表达式 返回值: - 整数切片，每两个一组依次为整体匹配与各捕获组的 [...</td></tr><tr><td style="text-align:left"><a href="#grok" class="">re.Grok</a></td><td style="text-align:left">Grok 使用 Grok 规则解析字符串并返回解析结果（导出名为 re.Grok） 结果为字段名到取值的映射，可用 .Get(key) 取第一个值；参考 logstash grok 语法 参数: - line: 待解析的原始字符串 - rule: Grok 规则（如 &quot;%{MONTHNUM:mont...</td></tr><tr><td style="text-align:left"><a href="#match" class="">re.Match</a></td><td style="text-align:left">Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false 参数: - pattern: 正则表达式 - s: 待匹配的字符串或字节切片 返回值: - 是否匹配成功</td></tr><tr><td style="text-align:left"><a href="#mustcompile" class="">re.MustCompile</a></td><td style="text-align:left">MustCompile 编译正则表达式，语法非法时直接 panic（导出名为 re.MustCompile） 适用于编译期可确定合法的常量正则 参数: - str: 正则表达式字符串 返回值: - 编译得到的正则对象</td></tr><tr><td style="text-align:left"><a href="#mustcompileposix" class="">re.MustCompilePOSIX</a></td><td style="text-align:left">MustCompilePOSIX 按 POSIX 语法编译正则，语法非法时直接 panic（导出名为 re.MustCompilePOSIX） 参数: - str: 正则表达式字符串 返回值: - 编译得到的 POSIX 正则对象</td></tr><tr><td style="text-align:left"><a href="#quotemeta" class="">re.QuoteMeta</a></td><td style="text-align:left">QuoteMeta 转义字符串中所有正则元字符，使其可作为普通文本参与匹配（导出名为 re.QuoteMeta） 参数: - s: 原始字符串 返回值: - 转义后的字符串</td></tr><tr><td style="text-align:left"><a href="#replaceall" class="">re.ReplaceAll</a></td><td style="text-align:left">ReplaceAll 使用正则匹配并替换为指定字符串（导出名为 re.ReplaceAll） 替换字符串支持 $1、${name} 等引用捕获组 参数: - origin: 原始输入（任意可转为字符串） - re: 正则表达式 - newStr: 替换字符串（支持 $1 等捕获组引用） 返回值: -...</td></tr><tr><td style="text-align:left"><a href="#replaceallwithfunc" class="">re.ReplaceAllWithFunc</a></td><td style="text-align:left">ReplaceAllWithFunc 使用正则匹配并用回调函数生成替换内容（导出名为 re.ReplaceAllWithFunc） 参数: - origin: 原始输入（任意可转为字符串） - re: 正则表达式 - newStr: 回调函数 func(matched string) string，...</td></tr></tbody></table></div></div>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数定义">函数定义<a href="#函数定义" class="hash-link" aria-label="函数定义的直接链接" title="函数定义的直接链接" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="compile">Compile<a href="#compile" class="hash-link" aria-label="Compile的直接链接" title="Compile的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述">详细描述<a href="#详细描述" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
@@ -172,7 +172,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">expr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">expr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值">返回值<a href="#返回值" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -194,7 +194,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的正则对象，可调用 MatchString/FindString 等方法</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（正则语法非法时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的正则对象，可调用 MatchString/FindString 等方法</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（正则语法非法时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="compileposix">CompilePOSIX<a href="#compileposix" class="hash-link" aria-label="CompilePOSIX的直接链接" title="CompilePOSIX的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-1">详细描述<a href="#详细描述-1" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>CompilePOSIX 按 POSIX ERE(egrep) 语法编译正则，匹配语义为左最长匹配（导出名为 re.CompilePOSIX）</p>
@@ -231,7 +231,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">expr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">expr</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-1">返回值<a href="#返回值-1" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -253,7 +253,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的 POSIX 正则对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（正则语法非法时返回）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的 POSIX 正则对象</td></tr><tr><td style="text-align:left">r2</td><td style="text-align:left"><code>error</code></td><td style="text-align:left">错误信息（正则语法非法时返回）</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractemail">ExtractEmail<a href="#extractemail" class="hash-link" aria-label="ExtractEmail的直接链接" title="ExtractEmail的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-2">详细描述<a href="#详细描述-2" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractEmail 提取字符串中所有的 Email 地址（导出名为 re.ExtractEmail）</p>
@@ -285,7 +285,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-2">返回值<a href="#返回值-2" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -302,7 +302,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 Email 地址列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 Email 地址列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extracthostport">ExtractHostPort<a href="#extracthostport" class="hash-link" aria-label="ExtractHostPort的直接链接" title="ExtractHostPort的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-3">详细描述<a href="#详细描述-3" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractHostPort 提取字符串中所有的 Host:Port（导出名为 re.ExtractHostPort）</p>
@@ -334,7 +334,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-3">返回值<a href="#返回值-3" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -351,7 +351,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 Host:Port 列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 Host:Port 列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractip">ExtractIP<a href="#extractip" class="hash-link" aria-label="ExtractIP的直接链接" title="ExtractIP的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-4">详细描述<a href="#详细描述-4" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractIP 提取字符串中所有的 IP 地址（IPv4 与 IPv6）（导出名为 re.ExtractIP）</p>
@@ -383,7 +383,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-4">返回值<a href="#返回值-4" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -400,7 +400,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IP 地址列表（先 IPv6 后 IPv4），未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IP 地址列表（先 IPv6 后 IPv4），未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractipv4">ExtractIPv4<a href="#extractipv4" class="hash-link" aria-label="ExtractIPv4的直接链接" title="ExtractIPv4的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-5">详细描述<a href="#详细描述-5" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractIPv4 提取字符串中所有的 IPv4 地址（导出名为 re.ExtractIPv4）</p>
@@ -432,7 +432,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-5">返回值<a href="#返回值-5" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -449,7 +449,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IPv4 地址列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IPv4 地址列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractipv6">ExtractIPv6<a href="#extractipv6" class="hash-link" aria-label="ExtractIPv6的直接链接" title="ExtractIPv6的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-6">详细描述<a href="#详细描述-6" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractIPv6 提取字符串中所有的 IPv6 地址（导出名为 re.ExtractIPv6）</p>
@@ -481,7 +481,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-6">返回值<a href="#返回值-6" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -498,7 +498,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IPv6 地址列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 IPv6 地址列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractmac">ExtractMac<a href="#extractmac" class="hash-link" aria-label="ExtractMac的直接链接" title="ExtractMac的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-7">详细描述<a href="#详细描述-7" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractMac 提取字符串中所有的 MAC 地址（导出名为 re.ExtractMac）</p>
@@ -530,7 +530,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-7">返回值<a href="#返回值-7" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -547,7 +547,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 MAC 地址列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 MAC 地址列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extractpath">ExtractPath<a href="#extractpath" class="hash-link" aria-label="ExtractPath的直接链接" title="ExtractPath的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-8">详细描述<a href="#详细描述-8" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractPath 提取字符串中所有的路径与查询字符串（导出名为 re.ExtractPath）</p>
@@ -579,7 +579,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-8">返回值<a href="#返回值-8" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -596,7 +596,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 路径(?查询) 列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 路径(?查询) 列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extracttty">ExtractTTY<a href="#extracttty" class="hash-link" aria-label="ExtractTTY的直接链接" title="ExtractTTY的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-9">详细描述<a href="#详细描述-9" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractTTY 提取字符串中所有的 Linux/Unix 终端设备路径（导出名为 re.ExtractTTY）</p>
@@ -628,7 +628,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-9">返回值<a href="#返回值-9" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -645,7 +645,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的设备文件路径列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的设备文件路径列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="extracturl">ExtractURL<a href="#extracturl" class="hash-link" aria-label="ExtractURL的直接链接" title="ExtractURL的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-10">详细描述<a href="#详细描述-10" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ExtractURL 提取字符串中所有的 URL 地址（导出名为 re.ExtractURL）</p>
@@ -677,7 +677,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待提取的输入（任意可转为字符串）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-10">返回值<a href="#返回值-10" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -694,7 +694,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 URL 列表，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">提取到的 URL 列表，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="find">Find<a href="#find" class="hash-link" aria-label="Find的直接链接" title="Find的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-11">详细描述<a href="#详细描述-11" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Find 使用正则尝试匹配字符串，如果匹配成功返回第一个匹配的字符串，否则返回空字符串</p>
@@ -736,7 +736,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-11">返回值<a href="#返回值-11" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -753,7 +753,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">第一个匹配的子串，未匹配返回空字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">第一个匹配的子串，未匹配返回空字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findall">FindAll<a href="#findall" class="hash-link" aria-label="FindAll的直接链接" title="FindAll的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-12">详细描述<a href="#详细描述-12" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindAll 使用正则尝试匹配字符串，如果匹配成功返回所有匹配的字符串，否则返回空字符串切片</p>
@@ -795,7 +795,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-12">返回值<a href="#返回值-12" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -812,7 +812,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">所有匹配子串组成的切片，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">所有匹配子串组成的切片，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findallindex">FindAllIndex<a href="#findallindex" class="hash-link" aria-label="FindAllIndex的直接链接" title="FindAllIndex的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-13">详细描述<a href="#详细描述-13" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindAllIndex 使用正则匹配字符串，返回所有匹配子串的起止位置（导出名为 re.FindAllIndex）</p>
@@ -854,7 +854,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-13">返回值<a href="#返回值-13" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -871,7 +871,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]int</code></td><td style="text-align:left">二维整数切片，每项为 [起始位置, 结束位置]，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]int</code></td><td style="text-align:left">二维整数切片，每项为 [起始位置, 结束位置]，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findgroup">FindGroup<a href="#findgroup" class="hash-link" aria-label="FindGroup的直接链接" title="FindGroup的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-14">详细描述<a href="#详细描述-14" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindGroup 使用正则匹配并按命名捕获组返回结果映射（导出名为 re.FindGroup）</p>
@@ -914,7 +914,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含命名捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含命名捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-14">返回值<a href="#返回值-14" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -931,7 +931,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>map[string]string</code></td><td style="text-align:left">命名捕获组到匹配内容的映射，未匹配返回空映射</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>map[string]string</code></td><td style="text-align:left">命名捕获组到匹配内容的映射，未匹配返回空映射</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findgroupall">FindGroupAll<a href="#findgroupall" class="hash-link" aria-label="FindGroupAll的直接链接" title="FindGroupAll的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-15">详细描述<a href="#详细描述-15" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindGroupAll 使用正则匹配并按命名捕获组返回所有结果映射（导出名为 re.FindGroupAll）</p>
@@ -974,7 +974,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含命名捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">i</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">raw</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含命名捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-15">返回值<a href="#返回值-15" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -991,7 +991,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]map[string]string</code></td><td style="text-align:left">映射切片，每项对应一个匹配，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]map[string]string</code></td><td style="text-align:left">映射切片，每项对应一个匹配，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findindex">FindIndex<a href="#findindex" class="hash-link" aria-label="FindIndex的直接链接" title="FindIndex的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-16">详细描述<a href="#详细描述-16" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindIndex 使用正则匹配字符串，返回第一个匹配子串的起止位置（导出名为 re.FindIndex）</p>
@@ -1033,7 +1033,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-16">返回值<a href="#返回值-16" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1050,7 +1050,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">长度为 2 的整数切片 [起始位置, 结束位置]，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">长度为 2 的整数切片 [起始位置, 结束位置]，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findsubmatch">FindSubmatch<a href="#findsubmatch" class="hash-link" aria-label="FindSubmatch的直接链接" title="FindSubmatch的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-17">详细描述<a href="#详细描述-17" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindSubmatch 使用正则匹配字符串，返回第一个匹配及其子匹配（导出名为 re.FindSubmatch）</p>
@@ -1092,7 +1092,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-17">返回值<a href="#返回值-17" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1109,7 +1109,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">字符串切片，第 0 项为整体匹配，其余为各捕获组，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]string</code></td><td style="text-align:left">字符串切片，第 0 项为整体匹配，其余为各捕获组，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findsubmatchall">FindSubmatchAll<a href="#findsubmatchall" class="hash-link" aria-label="FindSubmatchAll的直接链接" title="FindSubmatchAll的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-18">详细描述<a href="#详细描述-18" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindSubmatchAll 使用正则匹配字符串，返回所有匹配及其子匹配（导出名为 re.FindSubmatchAll）</p>
@@ -1151,7 +1151,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-18">返回值<a href="#返回值-18" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1168,7 +1168,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]string</code></td><td style="text-align:left">二维字符串切片，每项为 [整体匹配, 捕获组...]，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]string</code></td><td style="text-align:left">二维字符串切片，每项为 [整体匹配, 捕获组...]，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findsubmatchallindex">FindSubmatchAllIndex<a href="#findsubmatchallindex" class="hash-link" aria-label="FindSubmatchAllIndex的直接链接" title="FindSubmatchAllIndex的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-19">详细描述<a href="#详细描述-19" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindSubmatchAllIndex 使用正则匹配字符串，返回所有匹配及子匹配的位置（导出名为 re.FindSubmatchAllIndex）</p>
@@ -1210,7 +1210,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-19">返回值<a href="#返回值-19" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1227,7 +1227,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]int</code></td><td style="text-align:left">二维整数切片，每项每两个一组依次为整体匹配与各捕获组的 [起始, 结束]，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[][]int</code></td><td style="text-align:left">二维整数切片，每项每两个一组依次为整体匹配与各捕获组的 [起始, 结束]，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="findsubmatchindex">FindSubmatchIndex<a href="#findsubmatchindex" class="hash-link" aria-label="FindSubmatchIndex的直接链接" title="FindSubmatchIndex的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-20">详细描述<a href="#详细描述-20" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>FindSubmatchIndex 使用正则匹配字符串，返回第一个匹配及子匹配的位置（导出名为 re.FindSubmatchIndex）</p>
@@ -1269,7 +1269,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">含捕获组的正则表达式</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-20">返回值<a href="#返回值-20" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1286,7 +1286,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">整数切片，每两个一组依次为整体匹配与各捕获组的 [起始, 结束]，未匹配返回空切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>[]int</code></td><td style="text-align:left">整数切片，每两个一组依次为整体匹配与各捕获组的 [起始, 结束]，未匹配返回空切片</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="grok">Grok<a href="#grok" class="hash-link" aria-label="Grok的直接链接" title="Grok的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-21">详细描述<a href="#详细描述-21" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Grok 使用 Grok 规则解析字符串并返回解析结果（导出名为 re.Grok）</p>
@@ -1329,7 +1329,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">line</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待解析的原始字符串</td></tr><tr><td style="text-align:left">rule</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Grok 规则（如 &quot;%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}&quot;）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">line</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">待解析的原始字符串</td></tr><tr><td style="text-align:left">rule</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">Grok 规则（如 &quot;%{MONTHNUM:month}/%{MONTHDAY:day}-%{TIME:time}&quot;）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-21">返回值<a href="#返回值-21" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1346,7 +1346,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>GrokResult</code></td><td style="text-align:left">Grok 解析结果对象，解析失败返回空结果，可用 .Get(name) 取值</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>GrokResult</code></td><td style="text-align:left">Grok 解析结果对象，解析失败返回空结果，可用 .Get(name) 取值</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="match">Match<a href="#match" class="hash-link" aria-label="Match的直接链接" title="Match的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-22">详细描述<a href="#详细描述-22" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>Match 使用正则尝试匹配字符串，如果匹配成功返回 true，否则返回 false</p>
@@ -1388,7 +1388,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">pattern</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">s</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的字符串或字节切片</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">pattern</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">s</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">待匹配的字符串或字节切片</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-22">返回值<a href="#返回值-22" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1405,7 +1405,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否匹配成功</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>bool</code></td><td style="text-align:left">是否匹配成功</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mustcompile">MustCompile<a href="#mustcompile" class="hash-link" aria-label="MustCompile的直接链接" title="MustCompile的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-23">详细描述<a href="#详细描述-23" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>MustCompile 编译正则表达式，语法非法时直接 panic（导出名为 re.MustCompile）</p>
@@ -1438,7 +1438,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">str</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">str</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-23">返回值<a href="#返回值-23" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1455,7 +1455,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的正则对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的正则对象</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="mustcompileposix">MustCompilePOSIX<a href="#mustcompileposix" class="hash-link" aria-label="MustCompilePOSIX的直接链接" title="MustCompilePOSIX的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-24">详细描述<a href="#详细描述-24" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>MustCompilePOSIX 按 POSIX 语法编译正则，语法非法时直接 panic（导出名为 re.MustCompilePOSIX）</p>
@@ -1487,7 +1487,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">str</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">str</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-24">返回值<a href="#返回值-24" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1504,7 +1504,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的 POSIX 正则对象</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>*regexp.Regexp</code></td><td style="text-align:left">编译得到的 POSIX 正则对象</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="quotemeta">QuoteMeta<a href="#quotemeta" class="hash-link" aria-label="QuoteMeta的直接链接" title="QuoteMeta的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-25">详细描述<a href="#详细描述-25" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>QuoteMeta 转义字符串中所有正则元字符，使其可作为普通文本参与匹配（导出名为 re.QuoteMeta）</p>
@@ -1536,7 +1536,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">s</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">原始字符串</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-25">返回值<a href="#返回值-25" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1553,7 +1553,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">转义后的字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">转义后的字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="replaceall">ReplaceAll<a href="#replaceall" class="hash-link" aria-label="ReplaceAll的直接链接" title="ReplaceAll的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-26">详细描述<a href="#详细描述-26" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ReplaceAll 使用正则匹配并替换为指定字符串（导出名为 re.ReplaceAll）</p>
@@ -1604,7 +1604,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">newStr</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">替换字符串（支持 $1 等捕获组引用）</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">newStr</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">替换字符串（支持 $1 等捕获组引用）</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-26">返回值<a href="#返回值-26" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1621,7 +1621,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">替换完成后的字符串</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">替换完成后的字符串</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="replaceallwithfunc">ReplaceAllWithFunc<a href="#replaceallwithfunc" class="hash-link" aria-label="ReplaceAllWithFunc的直接链接" title="ReplaceAllWithFunc的直接链接" translate="no">​</a></h3>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="详细描述-27">详细描述<a href="#详细描述-27" class="hash-link" aria-label="详细描述的直接链接" title="详细描述的直接链接" translate="no">​</a></h4>
 <p>ReplaceAllWithFunc 使用正则匹配并用回调函数生成替换内容（导出名为 re.ReplaceAllWithFunc）</p>
@@ -1671,7 +1671,7 @@
 
 
 
-<table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">newStr</td><td style="text-align:left"><code>func(string) string</code></td><td style="text-align:left">回调函数 func(matched string) string，入参为每个匹配，返回替换后的内容</td></tr></tbody></table>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">参数类型</th><th style="text-align:left">参数解释</th></tr></thead><tbody><tr><td style="text-align:left">origin</td><td style="text-align:left"><code>any</code></td><td style="text-align:left">原始输入（任意可转为字符串）</td></tr><tr><td style="text-align:left">re</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">正则表达式</td></tr><tr><td style="text-align:left">newStr</td><td style="text-align:left"><code>func(string) string</code></td><td style="text-align:left">回调函数 func(matched string) string，入参为每个匹配，返回替换后的内容</td></tr></tbody></table></div></div>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="返回值-27">返回值<a href="#返回值-27" class="hash-link" aria-label="返回值的直接链接" title="返回值的直接链接" translate="no">​</a></h4>
 
 
@@ -1688,6 +1688,6 @@
 
 
 
-<table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">替换完成后的字符串</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/re.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/rdp"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">rdp</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/re2"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">re2</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#compile" class="table-of-contents__link toc-highlight">Compile</a></li><li><a href="#compileposix" class="table-of-contents__link toc-highlight">CompilePOSIX</a></li><li><a href="#extractemail" class="table-of-contents__link toc-highlight">ExtractEmail</a></li><li><a href="#extracthostport" class="table-of-contents__link toc-highlight">ExtractHostPort</a></li><li><a href="#extractip" class="table-of-contents__link toc-highlight">ExtractIP</a></li><li><a href="#extractipv4" class="table-of-contents__link toc-highlight">ExtractIPv4</a></li><li><a href="#extractipv6" class="table-of-contents__link toc-highlight">ExtractIPv6</a></li><li><a href="#extractmac" class="table-of-contents__link toc-highlight">ExtractMac</a></li><li><a href="#extractpath" class="table-of-contents__link toc-highlight">ExtractPath</a></li><li><a href="#extracttty" class="table-of-contents__link toc-highlight">ExtractTTY</a></li><li><a href="#extracturl" class="table-of-contents__link toc-highlight">ExtractURL</a></li><li><a href="#find" class="table-of-contents__link toc-highlight">Find</a></li><li><a href="#findall" class="table-of-contents__link toc-highlight">FindAll</a></li><li><a href="#findallindex" class="table-of-contents__link toc-highlight">FindAllIndex</a></li><li><a href="#findgroup" class="table-of-contents__link toc-highlight">FindGroup</a></li><li><a href="#findgroupall" class="table-of-contents__link toc-highlight">FindGroupAll</a></li><li><a href="#findindex" class="table-of-contents__link toc-highlight">FindIndex</a></li><li><a href="#findsubmatch" class="table-of-contents__link toc-highlight">FindSubmatch</a></li><li><a href="#findsubmatchall" class="table-of-contents__link toc-highlight">FindSubmatchAll</a></li><li><a href="#findsubmatchallindex" class="table-of-contents__link toc-highlight">FindSubmatchAllIndex</a></li><li><a href="#findsubmatchindex" class="table-of-contents__link toc-highlight">FindSubmatchIndex</a></li><li><a href="#grok" class="table-of-contents__link toc-highlight">Grok</a></li><li><a href="#match" class="table-of-contents__link toc-highlight">Match</a></li><li><a href="#mustcompile" class="table-of-contents__link toc-highlight">MustCompile</a></li><li><a href="#mustcompileposix" class="table-of-contents__link toc-highlight">MustCompilePOSIX</a></li><li><a href="#quotemeta" class="table-of-contents__link toc-highlight">QuoteMeta</a></li><li><a href="#replaceall" class="table-of-contents__link toc-highlight">ReplaceAll</a></li><li><a href="#replaceallwithfunc" class="table-of-contents__link toc-highlight">ReplaceAllWithFunc</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">返回值(顺序)</th><th style="text-align:left">返回值类型</th><th style="text-align:left">返回值解释</th></tr></thead><tbody><tr><td style="text-align:left">r1</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">替换完成后的字符串</td></tr></tbody></table></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/yaklang/docs/api/re.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="文件选项卡"><a class="pagination-nav__link pagination-nav__link--prev" href="/docs/api/rdp"><div class="pagination-nav__sublabel">上一页</div><div class="pagination-nav__label">rdp</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/api/re2"><div class="pagination-nav__sublabel">下一页</div><div class="pagination-nav__label">re2</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#函数定义" class="table-of-contents__link toc-highlight">函数定义</a><ul><li><a href="#compile" class="table-of-contents__link toc-highlight">Compile</a></li><li><a href="#compileposix" class="table-of-contents__link toc-highlight">CompilePOSIX</a></li><li><a href="#extractemail" class="table-of-contents__link toc-highlight">ExtractEmail</a></li><li><a href="#extracthostport" class="table-of-contents__link toc-highlight">ExtractHostPort</a></li><li><a href="#extractip" class="table-of-contents__link toc-highlight">ExtractIP</a></li><li><a href="#extractipv4" class="table-of-contents__link toc-highlight">ExtractIPv4</a></li><li><a href="#extractipv6" class="table-of-contents__link toc-highlight">ExtractIPv6</a></li><li><a href="#extractmac" class="table-of-contents__link toc-highlight">ExtractMac</a></li><li><a href="#extractpath" class="table-of-contents__link toc-highlight">ExtractPath</a></li><li><a href="#extracttty" class="table-of-contents__link toc-highlight">ExtractTTY</a></li><li><a href="#extracturl" class="table-of-contents__link toc-highlight">ExtractURL</a></li><li><a href="#find" class="table-of-contents__link toc-highlight">Find</a></li><li><a href="#findall" class="table-of-contents__link toc-highlight">FindAll</a></li><li><a href="#findallindex" class="table-of-contents__link toc-highlight">FindAllIndex</a></li><li><a href="#findgroup" class="table-of-contents__link toc-highlight">FindGroup</a></li><li><a href="#findgroupall" class="table-of-contents__link toc-highlight">FindGroupAll</a></li><li><a href="#findindex" class="table-of-contents__link toc-highlight">FindIndex</a></li><li><a href="#findsubmatch" class="table-of-contents__link toc-highlight">FindSubmatch</a></li><li><a href="#findsubmatchall" class="table-of-contents__link toc-highlight">FindSubmatchAll</a></li><li><a href="#findsubmatchallindex" class="table-of-contents__link toc-highlight">FindSubmatchAllIndex</a></li><li><a href="#findsubmatchindex" class="table-of-contents__link toc-highlight">FindSubmatchIndex</a></li><li><a href="#grok" class="table-of-contents__link toc-highlight">Grok</a></li><li><a href="#match" class="table-of-contents__link toc-highlight">Match</a></li><li><a href="#mustcompile" class="table-of-contents__link toc-highlight">MustCompile</a></li><li><a href="#mustcompileposix" class="table-of-contents__link toc-highlight">MustCompilePOSIX</a></li><li><a href="#quotemeta" class="table-of-contents__link toc-highlight">QuoteMeta</a></li><li><a href="#replaceall" class="table-of-contents__link toc-highlight">ReplaceAll</a></li><li><a href="#replaceallwithfunc" class="table-of-contents__link toc-highlight">ReplaceAllWithFunc</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container"><div class="div--flex footer__bottom text--center"><div class="footer-logo-copyright-navigation"><div class="margin-bottom--sm"><a class="footer-link" href="/"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo.png" alt="My Site Logo" class="footer__logo themedComponent_mlkZ themedComponent--dark_xIcU"></a></div><div class="footer__copyright copyright-style">Copyright © 2026 for Yak Project. <a class="footer-a" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">京ICP备17047700号-3</a>&nbsp;<a class="footer-a" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" rel="noreferrer" target="_blank">京公网安备11010802048712号</a></div><div class="link-body"><a class="footer__link-item" href="/docs/intro" target="_blank">官方文档</a><a class="footer__link-item" href="/team">关于我们</a></div></div><div class="footer-contact-me"><a href="https://github.com/yaklang/yakit" target="_blank" class="contact-icon-body"><span role="img" aria-label="github" class="anticon anticon-github icon-style github-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path></svg></span></a><div class="contact-icon-body"><span role="img" aria-label="wechat" aria-describedby="_R_lla9_" class="anticon anticon-wechat icon-style wechat-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="wechat" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M690.1 377.4c5.9 0 11.8.2 17.6.5-24.4-128.7-158.3-227.1-319.9-227.1C209 150.8 64 271.4 64 420.2c0 81.1 43.6 154.2 111.9 203.6a21.5 21.5 0 019.1 17.6c0 2.4-.5 4.6-1.1 6.9-5.5 20.3-14.2 52.8-14.6 54.3-.7 2.6-1.7 5.2-1.7 7.9 0 5.9 4.8 10.8 10.8 10.8 2.3 0 4.2-.9 6.2-2l70.9-40.9c5.3-3.1 11-5 17.2-5 3.2 0 6.4.5 9.5 1.4 33.1 9.5 68.8 14.8 105.7 14.8 6 0 11.9-.1 17.8-.4-7.1-21-10.9-43.1-10.9-66 0-135.8 132.2-245.8 295.3-245.8zm-194.3-86.5c23.8 0 43.2 19.3 43.2 43.1s-19.3 43.1-43.2 43.1c-23.8 0-43.2-19.3-43.2-43.1s19.4-43.1 43.2-43.1zm-215.9 86.2c-23.8 0-43.2-19.3-43.2-43.1s19.3-43.1 43.2-43.1 43.2 19.3 43.2 43.1-19.4 43.1-43.2 43.1zm586.8 415.6c56.9-41.2 93.2-102 93.2-169.7 0-124-120.8-224.5-269.9-224.5-149 0-269.9 100.5-269.9 224.5S540.9 847.5 690 847.5c30.8 0 60.6-4.4 88.1-12.3 2.6-.8 5.2-1.2 7.9-1.2 5.2 0 9.9 1.6 14.3 4.1l59.1 34c1.7 1 3.3 1.7 5.2 1.7a9 9 0 006.4-2.6 9 9 0 002.6-6.4c0-2.2-.9-4.4-1.4-6.6-.3-1.2-7.6-28.3-12.2-45.3-.5-1.9-.9-3.8-.9-5.7.1-5.9 3.1-11.2 7.6-14.5zM600.2 587.2c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9c0 19.8-16.2 35.9-36 35.9zm179.9 0c-19.9 0-36-16.1-36-35.9 0-19.8 16.1-35.9 36-35.9s36 16.1 36 35.9a36.08 36.08 0 01-36 35.9z"></path></svg></span></div></div></div></div></footer></div>
 </body>
 </html>
