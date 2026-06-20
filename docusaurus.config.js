@@ -147,8 +147,8 @@ module.exports = {
                 //     position: "right",
                 // },
                 {
-                    href: "https://oss-qn.yaklang.com/yakit-technical-white-paper.pdf",
-                    label: "下载白皮书",
+                    to: "/download",
+                    label: "下载资源",
                     position: "right",
                 },
                 {

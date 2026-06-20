@@ -1,0 +1,133 @@
+name: Sync API Docs from OSS
+
+# 每日定时从 OSS 拉取最新引擎版本的 API 文档归档(zip)，与本仓库已记录的文档版本对比，
+# 不同则下载解压覆盖 docs/api、更新记账文件并打一个 minor tag。推上去的 v* tag 会触发
+# publish-to-oss.yml 完成 yaklang.com / yaklang.io 部署。
+on:
+  schedule:
+    # 每天 UTC 18:00 (北京时间次日 02:00) 执行一次
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force re-pull docs even if version unchanged"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 必须使用 PAT 推送 tag, 否则推送的 v* tag 不会触发 publish-to-oss.yml
+          token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve latest engine version and compare
+        id: resolve
+        run: |
+          set -e
+          OSS_BASE="https://aliyun-oss.yaklang.com"
+
+          LATEST=$(curl -fsSL "${OSS_BASE}/yak/latest/version.txt" | tr -d ' \r\n')
+          echo "latest engine version from oss: ${LATEST}"
+
+          # 版本过滤: 接受稳定版 X.Y.Z 与 X.Y.Z-betaN, 拒绝 alpha / rc / dev / 快照等
+          if ! echo "${LATEST}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-beta[0-9]*)?$'; then
+            echo "version ${LATEST} is not a stable or beta release, skip"
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          CURRENT=""
+          if [ -f DOC_VERSION.txt ]; then
+            CURRENT=$(tr -d ' \r\n' < DOC_VERSION.txt)
+          fi
+          echo "current doc version in repo: ${CURRENT}"
+
+          FORCE="${{ github.event.inputs.force }}"
+          if [ "${LATEST}" = "${CURRENT}" ] && [ "${FORCE}" != "true" ]; then
+            echo "doc version already up to date, nothing to do"
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          ZIP_URL="${OSS_BASE}/yak/${LATEST}/yaklang-docs-${LATEST}.zip"
+          if ! curl -fsSI "${ZIP_URL}" | grep -qiE '^HTTP/[0-9.]+ 200'; then
+            echo "docs archive not found at ${ZIP_URL}, the version may not be archived yet, skip"
+            echo "should_update=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "latest=${LATEST}" >> "$GITHUB_OUTPUT"
+          echo "zip_url=${ZIP_URL}" >> "$GITHUB_OUTPUT"
+          echo "should_update=true" >> "$GITHUB_OUTPUT"
+
+      - name: Download and apply docs archive
+        if: ${{ steps.resolve.outputs.should_update == 'true' }}
+        run: |
+          set -e
+          LATEST="${{ steps.resolve.outputs.latest }}"
+          ZIP_URL="${{ steps.resolve.outputs.zip_url }}"
+
+          rm -rf tmp_docs && mkdir -p tmp_docs
+          curl -fsSL "${ZIP_URL}" -o docs_archive.zip
+          unzip -q docs_archive.zip -d tmp_docs
+
+          # 与主仓生成器同款同步规则: --delete 清理孤儿文档, 但排除非生成器产物
+          # (Docusaurus 分类配置与手维护的全局手册), 避免误删
+          rsync -a --delete \
+            --exclude='_category_.json' \
+            --exclude='__global__.md' \
+            --exclude='global_buildin_ops.md' \
+            tmp_docs/ docs/api/
+
+          rm -rf tmp_docs docs_archive.zip
+
+      - name: Update version bookkeeping
+        if: ${{ steps.resolve.outputs.should_update == 'true' }}
+        run: |
+          set -e
+          LATEST="${{ steps.resolve.outputs.latest }}"
+          ZIP_URL="${{ steps.resolve.outputs.zip_url }}"
+          NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          # 当前文档版本
+          echo "${LATEST}" > DOC_VERSION.txt
+
+          # 历史记录: 版本<TAB>UTC时间<TAB>zip地址, 追加在文件末尾(最新在最后)
+          touch old_versions.txt
+          printf '%s\t%s\t%s\n' "${LATEST}" "${NOW}" "${ZIP_URL}" >> old_versions.txt
+
+          # 由 old_versions.txt 重新生成供前端读取的 docs-versions.json(最新置顶)
+          node scripts/gen-docs-versions.js
+
+      - name: Commit, tag and push
+        if: ${{ steps.resolve.outputs.should_update == 'true' }}
+        run: |
+          set -e
+          LATEST="${{ steps.resolve.outputs.latest }}"
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+            exit 0
+          fi
+
+          git commit -m "docs(api): sync api docs to ${LATEST}"
+          # yarn version --minor 会自动 bump package.json 并创建 v* tag
+          yarn version --minor
+          git push
+          git push --tags
