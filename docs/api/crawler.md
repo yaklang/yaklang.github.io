@@ -34,7 +34,7 @@
 | [crawler.maxRetry](#maxretry) |maxRetry 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3 参数: - limit: 最大重试次数 返回值: - 一个 crawler.Start 可接收的配置选项|
 | [crawler.maxUrls](#maxurls) |maxUrls 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000 参数: - limit: 最大链接数 返回值: - 一个 crawler.Start 可接收的配置选项|
 | [crawler.onUrlFound](#onurlfound) |onUrlFound 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL） 参数: - f: 发现新 URL 时触发的回调函数，入参为发现的 URL 返回值: - 一个 crawler.Start 可接收的配置选项|
-| [crawler.proxy](#proxy) |proxy 是一个选项函数，用于指定爬虫时的代理 参数: - proxies: 一个或多个代理地址，例如 http://127.0.0.1:8080 返回值: - 一个 crawler.Start 可接收的配置选项|
+| [crawler.proxy](#proxy) |proxy 是一个选项函数，用于指定爬虫时的代理 参数: - proxies: 一个或多个代理地址，例如 http&#58;//127.0.0.1:8080 返回值: - 一个 crawler.Start 可接收的配置选项|
 | [crawler.responseTimeout](#responsetimeout) |responseTimeout 设置爬虫的响应超时时间(秒)，默认为 10s 在 yak 中通过 crawler.responseTimeout 调用 参数: - f: 响应超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项|
 | [crawler.timeout](#timeout) |connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s 参数: - f: 连接超时时间，单位为秒 返回值: - 一个 crawler.Start 可接收的配置选项|
 | [crawler.ua](#ua) |userAgent 是一个选项函数，用于指定爬虫时的User-Agent 参数: - ua: User-Agent 字符串 返回值: - 一个 crawler.Start 可接收的配置选项|
@@ -1407,7 +1407,7 @@ proxy 是一个选项函数，用于指定爬虫时的代理
 
 参数:
 
-  - proxies: 一个或多个代理地址，例如 http://127.0.0.1:8080
+  - proxies: 一个或多个代理地址，例如 http&#58;//127.0.0.1:8080
 
 
 
@@ -1432,7 +1432,7 @@ crawler.Start("https://example.com", crawler.proxy("http://127.0.0.1:8080"))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxies | `...string` | 一个或多个代理地址，例如 http://127.0.0.1:8080 |
+| proxies | `...string` | 一个或多个代理地址，例如 http&#58;//127.0.0.1:8080 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

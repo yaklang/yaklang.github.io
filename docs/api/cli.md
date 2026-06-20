@@ -32,7 +32,7 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 | [cli.Int](#int) |Int 获取对应名称的命令行参数，并将其转换为 int 类型返回 参数: - name: 参数名 - opts: 参数选项 返回值: - 参数对应的整数值|
 | [cli.IntSlice](#intslice) |IntSlice 获取对应名称的命令行参数，将其字符串根据&#34;,&#34;切割并尝试转换为 int 类型返回 []int 类型 参数: - name: 参数名 - options: 参数选项 返回值: - 整数列表|
 | [cli.Integer](#integer) |Integer 获取对应名称的命令行参数，并将其转换为 int 类型返回 参数: - name: 参数名 - opts: 参数选项 返回值: - 参数对应的整数值|
-| [cli.Json](#json) |Json 获取对应名称的命令行参数, 与cli.JsonSchema一起使用以构建复杂参数 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/|
+| [cli.Json](#json) |Json 获取对应名称的命令行参数, 与cli.JsonSchema一起使用以构建复杂参数 详情参考: 1. https&#58;//json-schema.org/docs 2. https&#58;//rjsf-team.github.io/react-jsonschema-form/|
 | [cli.LineDict](#linedict) |LineDict 获取对应名称的命令行参数 根据其传入的值尝试读取其对应文件内容，如果无法读取则作为字符串，最后根据换行符切割，返回 []string 类型 参数: - name: 参数名 - opts: 参数选项 返回值: - 按行切割后的字符串列表|
 | [cli.Net](#net) |Net 获取对应名称的命令行参数，根据&#34;,&#34;切割并尝试解析CIDR网段并返回 []string 类型 参数: - name: 参数名 - opts: 参数选项 返回值: - 解析后的主机 IP 列表|
 | [cli.Network](#network) |NetWork 获取对应名称的命令行参数，根据&#34;,&#34;切割并尝试解析CIDR网段并返回 []string 类型 参数: - name: 参数名 - opts: 参数选项 返回值: - 解析后的主机 IP 列表|
@@ -55,13 +55,13 @@ uiWidgetUpdown|(cli.UISchemaWidgetType) &#34;updown&#34;|
 | [cli.setCliGroup](#setcligroup) |setCliGroup 是一个选项函数，设置参数的分组|
 | [cli.setDefault](#setdefault) |setDefault 是一个选项函数，设置参数的默认值 参数: - i: 参数默认值 返回值: - 参数选项函数|
 | [cli.setHelp](#sethelp) |setHelp 是一个选项函数，设置参数的帮助信息 这会在命令行输入 --help 或执行`cli.check()`后参数非法时显示 参数: - i: 参数帮助信息 返回值: - 参数选项函数|
-| [cli.setJsonSchema](#setjsonschema) |setJsonSchema 是一个选项参数,用于在cli.Json中使用JsonSchema构建复杂参数 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/|
+| [cli.setJsonSchema](#setjsonschema) |setJsonSchema 是一个选项参数,用于在cli.Json中使用JsonSchema构建复杂参数 详情参考: 1. https&#58;//json-schema.org/docs 2. https&#58;//rjsf-team.github.io/react-jsonschema-form/|
 | [cli.setMultipleSelect](#setmultipleselect) |SetMultipleSelect 是一个选项函数，设置参数是否可以多选 此选项仅在`cli.StringSlice`中生效 参数: - multiSelect: 是否允许多选 返回值: - 参数选项函数|
 | [cli.setPluginEnv](#setpluginenv) |setPluginEnv 是一个选项函数，设置参数从插件环境中取值 参数: - key: 插件环境变量的键 返回值: - 参数选项函数|
 | [cli.setRequired](#setrequired) |setRequired 是一个选项函数，设置参数是否必须 参数: - t: 是否为必填参数 返回值: - 参数选项函数|
 | [cli.setSelectOption](#setselectoption) |setSelectOption 是一个选项函数，设置参数的下拉框选项 此选项仅在`cli.StringSlice`中生效 参数: - name: 下拉框选项显示名 - value: 下拉框选项值 返回值: - 参数选项函数|
 | [cli.setShortName](#setshortname) |setShortName 是一个选项函数，设置参数的短名称|
-| [cli.setUISchema](#setuischema) |setUISchema 是一个选项参数,用于对JsonSchema设置的参数进行图形化的调整 详情参考: 1. https://json-schema.org/docs 2. https://rjsf-team.github.io/react-jsonschema-form/ 3. https://...|
+| [cli.setUISchema](#setuischema) |setUISchema 是一个选项参数,用于对JsonSchema设置的参数进行图形化的调整 详情参考: 1. https&#58;//json-schema.org/docs 2. https&#58;//rjsf-team.github.io/react-jsonschema-form/ 3. https&#58;//...|
 | [cli.setVerboseName](#setverbosename) |setVerboseName 是一个选项函数，设置参数的中文名 参数: - verboseName: 参数中文名 返回值: - 参数选项函数|
 | [cli.setYakitPayload](#setyakitpayload) |setYakitPayload 是一个选项函数，设置参数建议值为Yakit payload的字典名列表 参数: - b: 是否启用 Yakit payload 建议值 返回值: - 参数选项函数|
 | [cli.showGroup](#showgroup) |showGroup 当条件满足时显示指定参数分组的 UI 规则（导出名为 cli.showGroup） 参数: - group: 参数分组名 返回值: - UI 联动规则|
@@ -619,8 +619,8 @@ port = cli.Integer("port") // --port 80 则 port 为 80
 #### 详细描述
 Json 获取对应名称的命令行参数, 与cli.JsonSchema一起使用以构建复杂参数
 详情参考:
-1. https://json-schema.org/docs
-2. https://rjsf-team.github.io/react-jsonschema-form/
+1. https&#58;//json-schema.org/docs
+2. https&#58;//rjsf-team.github.io/react-jsonschema-form/
 
 Example:
 
@@ -1402,8 +1402,8 @@ cli.String("target", cli.SetHelp("target host or ip"))
 #### 详细描述
 setJsonSchema 是一个选项参数,用于在cli.Json中使用JsonSchema构建复杂参数
 详情参考:
-1. https://json-schema.org/docs
-2. https://rjsf-team.github.io/react-jsonschema-form/
+1. https&#58;//json-schema.org/docs
+2. https&#58;//rjsf-team.github.io/react-jsonschema-form/
 
 Example:
 
@@ -1616,9 +1616,9 @@ cli.String("target", cli.setShortName("t"))
 #### 详细描述
 setUISchema 是一个选项参数,用于对JsonSchema设置的参数进行图形化的调整
 详情参考:
-1. https://json-schema.org/docs
-2. https://rjsf-team.github.io/react-jsonschema-form/
-3. https://rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema/
+1. https&#58;//json-schema.org/docs
+2. https&#58;//rjsf-team.github.io/react-jsonschema-form/
+3. https&#58;//rjsf-team.github.io/react-jsonschema-form/docs/api-reference/uiSchema/
 
 Example:
 

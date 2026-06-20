@@ -15,7 +15,7 @@
 | [synscan.initPortFilter](#initportfilter) |initPortFilter syn scan 的配置选项，设置本次扫描的端口过滤器，只展示这些端口的扫描结果 参数: - ports: 端口，支持逗号、- 分割 返回值: - 一个 synscan.Scan 可接收的配置选项|
 | [synscan.maxPorts](#maxports) |maxOpenPorts syn scan 的配置选项，设置单个 IP 允许的最大开放端口数 参数: - max: 最大开放端口数 返回值: - 一个 synscan.Scan 可接收的配置选项|
 | [synscan.outputFile](#outputfile) |outputFile syn scan 的配置选项，设置本次扫描结果保存到指定的文件 参数: - file: 文件路径 返回值: - 一个 synscan.Scan 可接收的配置选项|
-| [synscan.outputPrefix](#outputprefix) |outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用 参数: - prefix: 保存到文件时添加的前缀，例如 tcp:// 返回值: - 一个 synsca...|
+| [synscan.outputPrefix](#outputprefix) |outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https&#58;// http&#58;// 等，需要配合 outputFile 使用 参数: - prefix: 保存到文件时添加的前缀，例如 tcp:// 返回值: - 一个 synsca...|
 | [synscan.rateLimit](#ratelimit) |rateLimit syn scan 的配置选项，设置 syn 扫描的速率 参数: - ms: 延迟多少毫秒 - count: 每隔多少个数据包延迟一次 返回值: - 一个 synscan.Scan 可接收的配置选项|
 | [synscan.shuffle](#shuffle) |shuffle syn scan 的配置选项，设置是否打乱扫描顺序 参数: - s: 是否打乱扫描顺序 返回值: - 一个 synscan.Scan 可接收的配置选项|
 | [synscan.submitTaskCallback](#submittaskcallback) |submitTaskCallback syn scan 的配置选项，设置一个回调函数，每提交一个探测数据包的时候，这个回调会执行一次 参数: - callback: 回调函数，入参为本次提交探测的目标字符串 返回值: - 一个 synscan.Scan 可接收的配置选项|
@@ -623,7 +623,7 @@ die(err)
 ### outputPrefix
 
 #### 详细描述
-outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用
+outputPrefix syn scan 的配置选项，设置本次扫描结果保存到文件时添加自定义前缀，比如 tcp:// https&#58;// http&#58;// 等，需要配合 outputFile 使用
 
 参数:
 

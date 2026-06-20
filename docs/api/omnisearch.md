@@ -9,7 +9,7 @@
 | [omnisearch.customSearcher](#customsearcher) |omnisearchCustomSearcher 注册一个自定义搜索器，使 omnisearch.Search 调用本地处理函数（导出名为 omnisearch.customSearcher） 配合 omnisearch.type(同名) 使用，可在不依赖外部搜索服务的情况下完成搜索 参数: - n...|
 | [omnisearch.page](#page) |WithPage 设置搜索结果页码（导出名为 omnisearch.page） 参数: - page: 页码，从 1 开始 返回值: - 搜索可选项|
 | [omnisearch.pagesize](#pagesize) |WithPageSize 设置每页结果数量（导出名为 omnisearch.pagesize） 参数: - pageSize: 每页结果数量 返回值: - 搜索可选项|
-| [omnisearch.proxy](#proxy) |WithProxy 设置搜索请求代理（导出名为 omnisearch.proxy） 参数: - proxy: 代理地址，如 http://127.0.0.1:7890 返回值: - 搜索可选项|
+| [omnisearch.proxy](#proxy) |WithProxy 设置搜索请求代理（导出名为 omnisearch.proxy） 参数: - proxy: 代理地址，如 http&#58;//127.0.0.1:7890 返回值: - 搜索可选项|
 | [omnisearch.timeout](#timeout) |WithTimeout 设置搜索超时时间（导出名为 omnisearch.timeout） 参数: - timeout: 超时时间 返回值: - 搜索可选项|
 | [omnisearch.type](#type) |omnisearchType 指定本次搜索使用的搜索器类型（导出名为 omnisearch.type） 作为 omnisearch.Search 的可选项使用；配合 omnisearch.customSearcher 可将搜索路由到自定义搜索器 参数: - name: 搜索器类型名称 返回值: - ...|
 
@@ -355,7 +355,7 @@ WithProxy 设置搜索请求代理（导出名为 omnisearch.proxy）
 
 参数:
 
-  - proxy: 代理地址，如 http://127.0.0.1:7890
+  - proxy: 代理地址，如 http&#58;//127.0.0.1:7890
 
 
 
@@ -381,7 +381,7 @@ results = omnisearch.Search("yaklang", omnisearch.proxy("http://127.0.0.1:7890")
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxy | `string` | 代理地址，如 http://127.0.0.1:7890 |
+| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:7890 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

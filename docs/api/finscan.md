@@ -9,7 +9,7 @@
 | [finscan.initHostFilter](#inithostfilter) |initHostFilter 设置 FIN 扫描的初始主机过滤器，仅扫描命中过滤器的主机 在 yak 中通过 finscan.initHostFilter 调用 参数: - f: 初始主机过滤表达式 返回值: - 一个 finscan.Scan 可接收的配置选项|
 | [finscan.initPortFilter](#initportfilter) |initPortFilter 设置 FIN 扫描的初始端口过滤器，仅扫描命中过滤器的端口 在 yak 中通过 finscan.initPortFilter 调用 参数: - f: 初始端口过滤表达式 返回值: - 一个 finscan.Scan 可接收的配置选项|
 | [finscan.outputFile](#outputfile) |outputFile 设置 FIN 扫描的端口开放结果保存到指定文件 在 yak 中通过 finscan.outputFile 调用 参数: - file: 结果保存的文件路径 返回值: - 一个 finscan.Scan 可接收的配置选项|
-| [finscan.outputPrefix](#outputprefix) |outputPrefix 设置 FIN 扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用 在 yak 中通过 finscan.outputPrefix 调用 参数: - prefix: 保存到文件时添加的前缀，例如 t...|
+| [finscan.outputPrefix](#outputprefix) |outputPrefix 设置 FIN 扫描结果保存到文件时添加自定义前缀，比如 tcp:// https&#58;// http&#58;// 等，需要配合 outputFile 使用 在 yak 中通过 finscan.outputPrefix 调用 参数: - prefix: 保存到文件时添加的前缀，例如 t...|
 | [finscan.rateLimit](#ratelimit) |rateLimit 设置 FIN 扫描的发包速率限制(每 count 个数据包延迟 ms 毫秒) 在 yak 中通过 finscan.rateLimit 调用 参数: - ms: 延迟毫秒数 - count: 每多少个数据包延迟一次 返回值: - 一个 finscan.Scan 可接收的配置选项|
 | [finscan.wait](#wait) |wait 设置 FIN 扫描发出 FIN 包后等待回包的最大时间 在 yak 中通过 finscan.wait 调用 参数: - sec: 等待时间，单位为秒 返回值: - 一个 finscan.Scan 可接收的配置选项|
 
@@ -332,7 +332,7 @@ res = finscan.Scan("192.168.1.1", "1-65535", finscan.outputFile("/tmp/open_ports
 ### outputPrefix
 
 #### 详细描述
-outputPrefix 设置 FIN 扫描结果保存到文件时添加自定义前缀，比如 tcp:// https:// http:// 等，需要配合 outputFile 使用
+outputPrefix 设置 FIN 扫描结果保存到文件时添加自定义前缀，比如 tcp:// https&#58;// http&#58;// 等，需要配合 outputFile 使用
 
 在 yak 中通过 finscan.outputPrefix 调用
 

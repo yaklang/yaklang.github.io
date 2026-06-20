@@ -41,7 +41,7 @@
 | [nuclei.noMeta](#nometa) |noMeta 兼容保留选项：不显示元数据。当前为无操作(no-op)，不影响扫描行为 参数: - i: 兼容保留参数，会被忽略 返回值: - 一个 nuclei.Scan 可接收的配置选项（空操作）|
 | [nuclei.output](#output) |output 兼容保留选项：指定结果输出文件。当前为无操作(no-op)，不影响扫描行为 参数: - i: 兼容保留参数，会被忽略 返回值: - 一个 nuclei.Scan 可接收的配置选项（空操作）|
 | [nuclei.pageTimeout](#pagetimeout) |timeout 设置 nuclei 扫描中单个请求的超时时间 参数: - i: 超时时间，单位为秒 返回值: - 一个 nuclei.Scan 可接收的配置选项|
-| [nuclei.proxy](#proxy) |proxy 设置 nuclei 扫描时使用的代理服务器，可传入多个代理（依次尝试） 参数: - proxy: 一个或多个代理地址（如 &#34;http://127.0.0.1:8080&#34;） 返回值: - 一个 nuclei.Scan 可接收的配置选项|
+| [nuclei.proxy](#proxy) |proxy 设置 nuclei 扫描时使用的代理服务器，可传入多个代理（依次尝试） 参数: - proxy: 一个或多个代理地址（如 &#34;http&#58;//127.0.0.1:8080&#34;） 返回值: - 一个 nuclei.Scan 可接收的配置选项|
 | [nuclei.rateLimit](#ratelimit) |rateLimit 设置 nuclei 扫描的发包速率限制，控制每次请求之间的等待时间 参数: - i: 请求间等待时间，单位为秒 返回值: - 一个 nuclei.Scan 可接收的配置选项|
 | [nuclei.rawTemplate](#rawtemplate) |rawTemplate 设置直接使用传入的单个 nuclei 模板原始内容进行扫描 参数: - b: nuclei 模板的原始字符串内容 返回值: - 一个 nuclei.Scan 可接收的配置选项|
 | [nuclei.reportingConfig](#reportingconfig) |reportingConfig 兼容保留选项：指定报告配置文件。当前为无操作(no-op)，不影响扫描行为 参数: - i: 兼容保留参数，会被忽略 返回值: - 一个 nuclei.Scan 可接收的配置选项（空操作）|
@@ -1732,7 +1732,7 @@ proxy 设置 nuclei 扫描时使用的代理服务器，可传入多个代理（
 
 参数:
 
-  - proxy: 一个或多个代理地址（如 &#34;http://127.0.0.1:8080&#34;）
+  - proxy: 一个或多个代理地址（如 &#34;http&#58;//127.0.0.1:8080&#34;）
 
 
 
@@ -1759,7 +1759,7 @@ die(err)
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxy | `...string` | 一个或多个代理地址（如 &#34;http://127.0.0.1:8080&#34;） |
+| proxy | `...string` | 一个或多个代理地址（如 &#34;http&#58;//127.0.0.1:8080&#34;） |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|

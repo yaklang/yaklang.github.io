@@ -8,7 +8,7 @@
 | [toolbox.context](#context) |WithContext 设置安装上下文，用于控制取消与超时（导出名为 toolbox.context） 参数: - ctx: 上下文对象 返回值: - 安装可选项|
 | [toolbox.force](#force) |WithForce 设置是否强制重新安装（导出名为 toolbox.force） 参数: - force: 为 true 时即使已安装也会重新安装 返回值: - 安装可选项|
 | [toolbox.progress](#progress) |WithProgress 设置安装进度回调（导出名为 toolbox.progress） 参数: - progress: 进度回调函数 返回值: - 安装可选项|
-| [toolbox.proxy](#proxy) |WithProxy 设置下载代理（导出名为 toolbox.proxy） 参数: - proxy: 代理地址，如 http://127.0.0.1:7890 返回值: - 安装可选项|
+| [toolbox.proxy](#proxy) |WithProxy 设置下载代理（导出名为 toolbox.proxy） 参数: - proxy: 代理地址，如 http&#58;//127.0.0.1:7890 返回值: - 安装可选项|
 
 
 ## 函数定义
@@ -270,7 +270,7 @@ WithProxy 设置下载代理（导出名为 toolbox.proxy）
 
 参数:
 
-  - proxy: 代理地址，如 http://127.0.0.1:7890
+  - proxy: 代理地址，如 http&#58;//127.0.0.1:7890
 
 
 
@@ -296,7 +296,7 @@ err = toolbox.Install("ffmpeg", toolbox.proxy("http://127.0.0.1:7890"))
 #### 参数
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| proxy | `string` | 代理地址，如 http://127.0.0.1:7890 |
+| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:7890 |
 
 #### 返回值
 |返回值(顺序)|返回值类型|返回值解释|
