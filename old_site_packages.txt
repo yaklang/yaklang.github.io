@@ -2,3 +2,4 @@
 # 每行格式: 编号标识<TAB>UTC时间<TAB>zip地址<TAB>条目数 (最新追加在文件末尾)。
 # 编号标识: 日期(YYYY-MM-DD) 或 日期-N(同一天多包时按顺序 -1, -2, ...)
 # 该文件经 scripts/gen-site-packages.js 生成 static/site-packages.json 供官网展示。
+2026-06-21-1	2026-06-21T03:07:33Z	https://aliyun-oss.yaklang.com/yak/docs/2026-06-21/yaklang-com-docs-2026-06-21-1.zip	523	re-run after GH_TOKEN checkout fix
