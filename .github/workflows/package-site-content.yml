@@ -269,11 +269,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore(site-package): archive ${ZIP_NAME}"
-          # workflow_dispatch 在 master 分支上跑, git push 即可;
-          # tag 触发时处于 detached HEAD(检出到 tag commit), 必须显式
-          # 指定目标分支推回 master, 否则会得到 "You are not currently on a branch"。
-          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
-            git push
-          else
-            git push origin "HEAD:master"
-          fi
+
+          # tag 触发时处于 detached HEAD(tag commit), 必须把记账 commit 重放到
+          # 最新 master 之上再推, 否则会(a) "You are not currently on a branch",
+          # 或(b) 在 master 已被别的 CI 推进时 non-fast-forward 失败。
+          # workflow_dispatch 在 master 分支跑时也走这条路径, fetch+rebase 是幂等的。
+          git fetch origin master
+          git rebase origin/master
+          git push origin "HEAD:master"
