@@ -1,53 +1,487 @@
-# rpa
+# rpa {#library-rpa}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [rpa.Bruteforce](#bruteforce) |BruteForceStart 对目标登录页面进行基于浏览器的自动化登录爆破（导出名为 rpa.Bruteforce） 参数: - url: 目标登录页面 URL - opts: 可选项，如 rpa.bruteUsername、rpa.brutePassword、rpa.bruteUserEleme...|
-| [rpa.Start](#start) |Start 启动一个基于浏览器的 RPA 爬虫，对目标 URL 进行自动化爬取（导出名为 rpa.Start） 参数: - url: 起始 URL - opt: 可选项，如 rpa.depth、rpa.proxy、rpa.maxUrl、rpa.timeout 等 返回值: - 请求结果的 chann...|
-| [rpa.blackDomain](#blackdomain) |WithBlackDomain 添加域名黑名单（glob 匹配，导出名为 rpa.blackDomain） 参数: - matchStr: 域名 glob 匹配表达式 返回值: - RPA 配置可选项|
-| [rpa.bruteButtonElement](#brutebuttonelement) |WithButtonElement 设置登录提交按钮的元素选择器（导出名为 rpa.bruteButtonElement） 参数: - element: 登录按钮的 CSS selector 返回值: - 爆破配置可选项|
-| [rpa.bruteCaptchaElement](#brutecaptchaelement) |WithCaptchaElement 设置验证码输入框与验证码图片的元素选择器（导出名为 rpa.bruteCaptchaElement） 参数: - element: 验证码输入框的 CSS selector - pic: 验证码图片的 CSS selector 返回值: - 爆破配置可选项|
-| [rpa.brutePassElement](#brutepasselement) |WithPasswordElement 设置密码输入框的元素选择器（导出名为 rpa.brutePassElement） 参数: - element: 密码输入框的 CSS selector 返回值: - 爆破配置可选项|
-| [rpa.brutePassword](#brutepassword) |WithPassword 设置爆破密码（导出名为 rpa.brutePassword） 参数: - password: 一个或多个密码 返回值: - 爆破配置可选项|
-| [rpa.bruteUserElement](#bruteuserelement) |WithUsernameElement 设置用户名输入框的元素选择器（导出名为 rpa.bruteUserElement） 参数: - element: 用户名输入框的 CSS selector 返回值: - 爆破配置可选项|
-| [rpa.bruteUserPassPath](#bruteuserpasspath) |WithUserPassPath 从文件加载用户名/密码字典（导出名为 rpa.bruteUserPassPath） 参数: - filepath: 一个或两个文件路径，传一个时用户名密码使用同一文件 返回值: - 爆破配置可选项|
-| [rpa.bruteUsername](#bruteusername) |WithUsername 设置爆破用户名（导出名为 rpa.bruteUsername） 参数: - username: 一个或多个用户名 返回值: - 爆破配置可选项|
-| [rpa.click](#click) |ClickMethod 在爆破前对指定元素执行点击操作（导出名为 rpa.click） 参数: - selector: 目标元素的 CSS selector 返回值: - 爆破配置可选项|
-| [rpa.depth](#depth) |WithSpiderDepth 设置 RPA 爬虫的扫描深度（导出名为 rpa.depth） 参数: - depth: 扫描深度 返回值: - RPA 配置可选项|
-| [rpa.headers](#headers) |WithHeader 设置请求头，可传入 headers 文件路径或 JSON 字符串（导出名为 rpa.headers） 参数: - s: headers 文件路径或 JSON 字符串 返回值: - RPA 配置可选项|
-| [rpa.input](#input) |InputMethod 在爆破前向指定输入框填入文本（导出名为 rpa.input） 参数: - selector: 输入框的 CSS selector - inputStr: 要填入的文本 返回值: - 爆破配置可选项|
-| [rpa.maxUrl](#maxurl) |WithUrlCount 设置 URL 总数上限，超出后停止扫描（导出名为 rpa.maxUrl） 参数: - count: URL 数量上限 返回值: - RPA 配置可选项|
-| [rpa.proxy](#proxy) |WithBrowserProxy 设置浏览器代理地址，可选附带用户名密码（导出名为 rpa.proxy） 参数: - url: 代理地址 - userinfo: 可选的代理用户名与密码 返回值: - RPA 配置可选项|
-| [rpa.select](#select) |SelectMethod 在爆破前对指定下拉框选择某个选项（导出名为 rpa.select） 参数: - selector: 下拉框的 CSS selector - item: 要选择的选项 返回值: - 爆破配置可选项|
-| [rpa.strictUrl](#stricturl) |WithStrictUrlDetect 设置是否严格检测 URL 是否存在风险（导出名为 rpa.strictUrl） 参数: - status: 是否启用严格 URL 检测 返回值: - RPA 配置可选项|
-| [rpa.timeout](#timeout) |WithTimeout 设置单链接超时时间（导出名为 rpa.timeout） 参数: - timeout: 超时时间（秒） 返回值: - RPA 配置可选项|
-| [rpa.whiteDomain](#whitedomain) |WithWhiteDomain 添加域名白名单（glob 匹配，导出名为 rpa.whiteDomain） 参数: - matchStr: 域名 glob 匹配表达式 返回值: - RPA 配置可选项|
+`rpa` 库提供基于浏览器的流程自动化（RPA）能力，可模拟点击、输入、选择、登录爆破等真实用户操作，常用于复杂登录流程的自动化、带验证码的爆破与动态站点交互。
 
+典型使用场景：
 
-## 函数定义
-### Bruteforce
+- 自动化遍历：`rpa.Start(url, opts...)` 启动浏览器自动化并返回请求流，配 `rpa.click` / `rpa.input` / `rpa.select` 模拟交互，`rpa.depth` / `rpa.maxUrl` / `rpa.whiteDomain` / `rpa.blackDomain` 控制范围。
+- 登录爆破：`rpa.Bruteforce(url, opts...)` 对登录页爆破，配 `rpa.bruteUserElement` / `rpa.brutePassElement` / `rpa.bruteButtonElement` 定位元素，`rpa.bruteUsername` / `rpa.brutePassword` 提供字典，`rpa.bruteCaptchaElement` 处理验证码。
 
-#### 详细描述
+与相邻库的关系：`rpa` 走真实浏览器，与 `crawlerx`（浏览器爬虫）、`simulator`（模拟登录爆破）、`browser`（浏览器实例）思路相通，专攻"需要真实交互"的自动化场景。
+
+> 共 20 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [rpa.blackDomain](#blackdomain) | `matchStr string` | `ConfigOpt` | WithBlackDomain 添加域名黑名单（glob 匹配，导出名为 rpa.blackDomain） |
+| [rpa.bruteButtonElement](#brutebuttonelement) | `element string` | `ConfigOpt` | WithButtonElement 设置登录提交按钮的元素选择器（导出名为 rpa.bruteButtonElement） |
+| [rpa.bruteCaptchaElement](#brutecaptchaelement) | `element string, pic string` | `ConfigOpt` | WithCaptchaElement 设置验证码输入框与验证码图片的元素选择器（导出名为 rpa.bruteCaptchaElement） |
+| [rpa.brutePassElement](#brutepasselement) | `element string` | `ConfigOpt` | WithPasswordElement 设置密码输入框的元素选择器（导出名为 rpa.brutePassElement） |
+| [rpa.bruteUserElement](#bruteuserelement) | `element string` | `ConfigOpt` | WithUsernameElement 设置用户名输入框的元素选择器（导出名为 rpa.bruteUserElement） |
+| [rpa.click](#click) | `selector string` | `ConfigOpt` | ClickMethod 在爆破前对指定元素执行点击操作（导出名为 rpa.click） |
+| [rpa.depth](#depth) | `depth int` | `ConfigOpt` | WithSpiderDepth 设置 RPA 爬虫的扫描深度（导出名为 rpa.depth） |
+| [rpa.headers](#headers) | `s string` | `ConfigOpt` | WithHeader 设置请求头，可传入 headers 文件路径或 JSON 字符串（导出名为 rpa.headers） |
+| [rpa.input](#input) | `selector string, inputStr string` | `ConfigOpt` | InputMethod 在爆破前向指定输入框填入文本（导出名为 rpa.input） |
+| [rpa.maxUrl](#maxurl) | `count int` | `ConfigOpt` | WithUrlCount 设置 URL 总数上限，超出后停止扫描（导出名为 rpa.maxUrl） |
+| [rpa.select](#select) | `selector string, item string` | `ConfigOpt` | SelectMethod 在爆破前对指定下拉框选择某个选项（导出名为 rpa.select） |
+| [rpa.strictUrl](#stricturl) | `status bool` | `ConfigOpt` | WithStrictUrlDetect 设置是否严格检测 URL 是否存在风险（导出名为 rpa.strictUrl） |
+| [rpa.timeout](#timeout) | `timeout int` | `ConfigOpt` | WithTimeout 设置单链接超时时间（导出名为 rpa.timeout） |
+| [rpa.whiteDomain](#whitedomain) | `matchStr string` | `ConfigOpt` | WithWhiteDomain 添加域名白名单（glob 匹配，导出名为 rpa.whiteDomain） |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [rpa.Bruteforce](#bruteforce) | `url string, opts ...ConfigOpt` | `string, string` | BruteForceStart 对目标登录页面进行基于浏览器的自动化登录爆破（导出名为 rpa.Bruteforce） |
+| [rpa.Start](#start) | `url string, opt ...core.ConfigOpt` | `chan core.RequestIf, error` | 启动一个基于浏览器的 RPA 爬虫，对目标 URL 进行自动化爬取（导出名为 rpa.Start） |
+| [rpa.brutePassword](#brutepassword) | `password ...string` | `ConfigOpt` | WithPassword 设置爆破密码（导出名为 rpa.brutePassword） |
+| [rpa.bruteUserPassPath](#bruteuserpasspath) | `filepath ...string` | `ConfigOpt` | WithUserPassPath 从文件加载用户名/密码字典（导出名为 rpa.bruteUserPassPath） |
+| [rpa.bruteUsername](#bruteusername) | `username ...string` | `ConfigOpt` | WithUsername 设置爆破用户名（导出名为 rpa.bruteUsername） |
+| [rpa.proxy](#proxy) | `url string, userinfo ...string` | `ConfigOpt` | WithBrowserProxy 设置浏览器代理地址，可选附带用户名密码（导出名为 rpa.proxy） |
+
+## 函数详情
+
+### blackDomain {#blackdomain}
+
+```go
+blackDomain(matchStr string) ConfigOpt
+```
+
+WithBlackDomain 添加域名黑名单（glob 匹配，导出名为 rpa.blackDomain）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| matchStr | `string` | 域名 glob 匹配表达式 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.blackDomain("*.ad.example.com")
+println(opt)
+``````````````
+
+---
+
+### bruteButtonElement {#brutebuttonelement}
+
+```go
+bruteButtonElement(element string) ConfigOpt
+```
+
+WithButtonElement 设置登录提交按钮的元素选择器（导出名为 rpa.bruteButtonElement）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| element | `string` | 登录按钮的 CSS selector |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.bruteButtonElement("#login")
+println(opt)
+``````````````
+
+---
+
+### bruteCaptchaElement {#brutecaptchaelement}
+
+```go
+bruteCaptchaElement(element string, pic string) ConfigOpt
+```
+
+WithCaptchaElement 设置验证码输入框与验证码图片的元素选择器（导出名为 rpa.bruteCaptchaElement）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| element | `string` | 验证码输入框的 CSS selector |
+| pic | `string` | 验证码图片的 CSS selector |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.bruteCaptchaElement("#captcha", "#captcha-img")
+println(opt)
+``````````````
+
+---
+
+### brutePassElement {#brutepasselement}
+
+```go
+brutePassElement(element string) ConfigOpt
+```
+
+WithPasswordElement 设置密码输入框的元素选择器（导出名为 rpa.brutePassElement）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| element | `string` | 密码输入框的 CSS selector |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.brutePassElement("#password")
+println(opt)
+``````````````
+
+---
+
+### bruteUserElement {#bruteuserelement}
+
+```go
+bruteUserElement(element string) ConfigOpt
+```
+
+WithUsernameElement 设置用户名输入框的元素选择器（导出名为 rpa.bruteUserElement）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| element | `string` | 用户名输入框的 CSS selector |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.bruteUserElement("#username")
+println(opt)
+``````````````
+
+---
+
+### click {#click}
+
+```go
+click(selector string) ConfigOpt
+```
+
+ClickMethod 在爆破前对指定元素执行点击操作（导出名为 rpa.click）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| selector | `string` | 目标元素的 CSS selector |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.click("#agree")
+println(opt)
+``````````````
+
+---
+
+### depth {#depth}
+
+```go
+depth(depth int) ConfigOpt
+```
+
+WithSpiderDepth 设置 RPA 爬虫的扫描深度（导出名为 rpa.depth）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| depth | `int` | 扫描深度 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.depth(3)
+println(opt)
+``````````````
+
+---
+
+### headers {#headers}
+
+```go
+headers(s string) ConfigOpt
+```
+
+WithHeader 设置请求头，可传入 headers 文件路径或 JSON 字符串（导出名为 rpa.headers）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | headers 文件路径或 JSON 字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.headers(`{"User-Agent": "yak-rpa"}`)
+println(opt)
+``````````````
+
+---
+
+### input {#input}
+
+```go
+input(selector string, inputStr string) ConfigOpt
+```
+
+InputMethod 在爆破前向指定输入框填入文本（导出名为 rpa.input）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| selector | `string` | 输入框的 CSS selector |
+| inputStr | `string` | 要填入的文本 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.input("#extra", "value")
+println(opt)
+``````````````
+
+---
+
+### maxUrl {#maxurl}
+
+```go
+maxUrl(count int) ConfigOpt
+```
+
+WithUrlCount 设置 URL 总数上限，超出后停止扫描（导出名为 rpa.maxUrl）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| count | `int` | URL 数量上限 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.maxUrl(100)
+println(opt)
+``````````````
+
+---
+
+### select {#select}
+
+```go
+select(selector string, item string) ConfigOpt
+```
+
+SelectMethod 在爆破前对指定下拉框选择某个选项（导出名为 rpa.select）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| selector | `string` | 下拉框的 CSS selector |
+| item | `string` | 要选择的选项 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.select("#role", "admin")
+println(opt)
+``````````````
+
+---
+
+### strictUrl {#stricturl}
+
+```go
+strictUrl(status bool) ConfigOpt
+```
+
+WithStrictUrlDetect 设置是否严格检测 URL 是否存在风险（导出名为 rpa.strictUrl）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| status | `bool` | 是否启用严格 URL 检测 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.strictUrl(true)
+println(opt)
+``````````````
+
+---
+
+### timeout {#timeout}
+
+```go
+timeout(timeout int) ConfigOpt
+```
+
+WithTimeout 设置单链接超时时间（导出名为 rpa.timeout）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| timeout | `int` | 超时时间（秒） |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.timeout(10)
+println(opt)
+``````````````
+
+---
+
+### whiteDomain {#whitedomain}
+
+```go
+whiteDomain(matchStr string) ConfigOpt
+```
+
+WithWhiteDomain 添加域名白名单（glob 匹配，导出名为 rpa.whiteDomain）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| matchStr | `string` | 域名 glob 匹配表达式 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
+
+**示例**
+
+``````````````yak
+opt = rpa.whiteDomain("*.example.com")
+println(opt)
+``````````````
+
+---
+
+## 可变参数函数详情
+
+### Bruteforce {#bruteforce}
+
+```go
+Bruteforce(url string, opts ...ConfigOpt) (string, string)
+```
+
 BruteForceStart 对目标登录页面进行基于浏览器的自动化登录爆破（导出名为 rpa.Bruteforce）
 
-参数:
+**必填参数**
 
-  - url: 目标登录页面 URL
+|参数名|类型|说明|
+|:--|:--|:--|
+| url | `string` | 目标登录页面 URL |
 
-  - opts: 可选项，如 rpa.bruteUsername、rpa.brutePassword、rpa.bruteUserElement 等
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...ConfigOpt` | 可选项，如 rpa.bruteUsername、rpa.brutePassword、rpa.bruteUserElement 等 |
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 爆破成功的用户名 |
+| r2 | `string` | 爆破成功的密码 |
 
-  - 爆破成功的用户名
-
-  - 爆破成功的密码
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 对登录页面进行爆破（示意性示例，需要本地已安装浏览器）
@@ -63,47 +497,36 @@ username, password = rpa.Bruteforce("http://example.com/login",
 println(username, password)
 ``````````````
 
+---
 
-#### 定义
+### Start {#start}
 
-`Bruteforce(url string, opts ...ConfigOpt) (string, string)`
+```go
+Start(url string, opt ...core.ConfigOpt) (chan core.RequestIf, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| url | `string` | 目标登录页面 URL |
-| opts | `...ConfigOpt` | 可选项，如 rpa.bruteUsername、rpa.brutePassword、rpa.bruteUserElement 等 |
+启动一个基于浏览器的 RPA 爬虫，对目标 URL 进行自动化爬取（导出名为 rpa.Start）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 爆破成功的用户名 |
-| r2 | `string` | 爆破成功的密码 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| url | `string` | 起始 URL |
 
-### Start
+**可选参数**
 
-#### 详细描述
-Start 启动一个基于浏览器的 RPA 爬虫，对目标 URL 进行自动化爬取（导出名为 rpa.Start）
+|参数名|类型|说明|
+|:--|:--|:--|
+| opt | `...core.ConfigOpt` | 可选项，如 rpa.depth、rpa.proxy、rpa.maxUrl、rpa.timeout 等 |
 
-参数:
+**返回值**
 
-  - url: 起始 URL
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `chan core.RequestIf` | 请求结果的 channel，可使用 for-range 遍历 |
+| r2 | `error` | 错误信息 |
 
-  - opt: 可选项，如 rpa.depth、rpa.proxy、rpa.maxUrl、rpa.timeout 等
-
-
-
-返回值:
-
-  - 请求结果的 channel，可使用 for-range 遍历
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 启动 RPA 爬虫并遍历抓取到的请求（示意性示例，需要本地已安装浏览器）
@@ -114,771 +537,127 @@ ch = rpa.Start("http://example.com", rpa.depth(2), rpa.maxUrl(50))~
 	}
 ``````````````
 
+---
 
-#### 定义
+### brutePassword {#brutepassword}
 
-`Start(url string, opt ...core.ConfigOpt) (chan core.RequestIf, error)`
+```go
+brutePassword(password ...string) ConfigOpt
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| url | `string` | 起始 URL |
-| opt | `...core.ConfigOpt` | 可选项，如 rpa.depth、rpa.proxy、rpa.maxUrl、rpa.timeout 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `chan core.RequestIf` | 请求结果的 channel，可使用 for-range 遍历 |
-| r2 | `error` | 错误信息 |
-
-
-### blackDomain
-
-#### 详细描述
-WithBlackDomain 添加域名黑名单（glob 匹配，导出名为 rpa.blackDomain）
-
-参数:
-
-  - matchStr: 域名 glob 匹配表达式
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.blackDomain("*.ad.example.com")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`blackDomain(matchStr string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| matchStr | `string` | 域名 glob 匹配表达式 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### bruteButtonElement
-
-#### 详细描述
-WithButtonElement 设置登录提交按钮的元素选择器（导出名为 rpa.bruteButtonElement）
-
-参数:
-
-  - element: 登录按钮的 CSS selector
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.bruteButtonElement("#login")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`bruteButtonElement(element string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| element | `string` | 登录按钮的 CSS selector |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### bruteCaptchaElement
-
-#### 详细描述
-WithCaptchaElement 设置验证码输入框与验证码图片的元素选择器（导出名为 rpa.bruteCaptchaElement）
-
-参数:
-
-  - element: 验证码输入框的 CSS selector
-
-  - pic: 验证码图片的 CSS selector
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.bruteCaptchaElement("#captcha", "#captcha-img")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`bruteCaptchaElement(element string, pic string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| element | `string` | 验证码输入框的 CSS selector |
-| pic | `string` | 验证码图片的 CSS selector |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### brutePassElement
-
-#### 详细描述
-WithPasswordElement 设置密码输入框的元素选择器（导出名为 rpa.brutePassElement）
-
-参数:
-
-  - element: 密码输入框的 CSS selector
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.brutePassElement("#password")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`brutePassElement(element string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| element | `string` | 密码输入框的 CSS selector |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### brutePassword
-
-#### 详细描述
 WithPassword 设置爆破密码（导出名为 rpa.brutePassword）
 
-参数:
+**可选参数**
 
-  - password: 一个或多个密码
+|参数名|类型|说明|
+|:--|:--|:--|
+| password | `...string` | 一个或多个密码 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
 
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 opt = rpa.brutePassword("admin", "123456")
 println(opt)
 ``````````````
 
+---
 
-#### 定义
+### bruteUserPassPath {#bruteuserpasspath}
 
-`brutePassword(password ...string) ConfigOpt`
+```go
+bruteUserPassPath(filepath ...string) ConfigOpt
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| password | `...string` | 一个或多个密码 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### bruteUserElement
-
-#### 详细描述
-WithUsernameElement 设置用户名输入框的元素选择器（导出名为 rpa.bruteUserElement）
-
-参数:
-
-  - element: 用户名输入框的 CSS selector
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.bruteUserElement("#username")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`bruteUserElement(element string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| element | `string` | 用户名输入框的 CSS selector |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### bruteUserPassPath
-
-#### 详细描述
 WithUserPassPath 从文件加载用户名/密码字典（导出名为 rpa.bruteUserPassPath）
 
-参数:
+**可选参数**
 
-  - filepath: 一个或两个文件路径，传一个时用户名密码使用同一文件
+|参数名|类型|说明|
+|:--|:--|:--|
+| filepath | `...string` | 一个或两个文件路径，传一个时用户名密码使用同一文件 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
 
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 opt = rpa.bruteUserPassPath("/tmp/users.txt", "/tmp/pass.txt")
 println(opt)
 ``````````````
 
+---
 
-#### 定义
+### bruteUsername {#bruteusername}
 
-`bruteUserPassPath(filepath ...string) ConfigOpt`
+```go
+bruteUsername(username ...string) ConfigOpt
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filepath | `...string` | 一个或两个文件路径，传一个时用户名密码使用同一文件 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### bruteUsername
-
-#### 详细描述
 WithUsername 设置爆破用户名（导出名为 rpa.bruteUsername）
 
-参数:
+**可选参数**
 
-  - username: 一个或多个用户名
+|参数名|类型|说明|
+|:--|:--|:--|
+| username | `...string` | 一个或多个用户名 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | 爆破配置可选项 |
 
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 opt = rpa.bruteUsername("admin", "root")
 println(opt)
 ``````````````
 
+---
 
-#### 定义
+### proxy {#proxy}
 
-`bruteUsername(username ...string) ConfigOpt`
+```go
+proxy(url string, userinfo ...string) ConfigOpt
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| username | `...string` | 一个或多个用户名 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### click
-
-#### 详细描述
-ClickMethod 在爆破前对指定元素执行点击操作（导出名为 rpa.click）
-
-参数:
-
-  - selector: 目标元素的 CSS selector
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.click("#agree")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`click(selector string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| selector | `string` | 目标元素的 CSS selector |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### depth
-
-#### 详细描述
-WithSpiderDepth 设置 RPA 爬虫的扫描深度（导出名为 rpa.depth）
-
-参数:
-
-  - depth: 扫描深度
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.depth(3)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`depth(depth int) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| depth | `int` | 扫描深度 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### headers
-
-#### 详细描述
-WithHeader 设置请求头，可传入 headers 文件路径或 JSON 字符串（导出名为 rpa.headers）
-
-参数:
-
-  - s: headers 文件路径或 JSON 字符串
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.headers(`{"User-Agent": "yak-rpa"}`)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`headers(s string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | headers 文件路径或 JSON 字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### input
-
-#### 详细描述
-InputMethod 在爆破前向指定输入框填入文本（导出名为 rpa.input）
-
-参数:
-
-  - selector: 输入框的 CSS selector
-
-  - inputStr: 要填入的文本
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.input("#extra", "value")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`input(selector string, inputStr string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| selector | `string` | 输入框的 CSS selector |
-| inputStr | `string` | 要填入的文本 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### maxUrl
-
-#### 详细描述
-WithUrlCount 设置 URL 总数上限，超出后停止扫描（导出名为 rpa.maxUrl）
-
-参数:
-
-  - count: URL 数量上限
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.maxUrl(100)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`maxUrl(count int) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| count | `int` | URL 数量上限 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### proxy
-
-#### 详细描述
 WithBrowserProxy 设置浏览器代理地址，可选附带用户名密码（导出名为 rpa.proxy）
 
-参数:
+**必填参数**
 
-  - url: 代理地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| url | `string` | 代理地址 |
 
-  - userinfo: 可选的代理用户名与密码
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| userinfo | `...string` | 可选的代理用户名与密码 |
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` | RPA 配置可选项 |
 
-  - RPA 配置可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 opt = rpa.proxy("http://127.0.0.1:8080")
 println(opt)
 ``````````````
 
-
-#### 定义
-
-`proxy(url string, userinfo ...string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| url | `string` | 代理地址 |
-| userinfo | `...string` | 可选的代理用户名与密码 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### select
-
-#### 详细描述
-SelectMethod 在爆破前对指定下拉框选择某个选项（导出名为 rpa.select）
-
-参数:
-
-  - selector: 下拉框的 CSS selector
-
-  - item: 要选择的选项
-
-
-
-返回值:
-
-  - 爆破配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.select("#role", "admin")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`select(selector string, item string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| selector | `string` | 下拉框的 CSS selector |
-| item | `string` | 要选择的选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | 爆破配置可选项 |
-
-
-### strictUrl
-
-#### 详细描述
-WithStrictUrlDetect 设置是否严格检测 URL 是否存在风险（导出名为 rpa.strictUrl）
-
-参数:
-
-  - status: 是否启用严格 URL 检测
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.strictUrl(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`strictUrl(status bool) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| status | `bool` | 是否启用严格 URL 检测 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### timeout
-
-#### 详细描述
-WithTimeout 设置单链接超时时间（导出名为 rpa.timeout）
-
-参数:
-
-  - timeout: 超时时间（秒）
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.timeout(10)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`timeout(timeout int) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| timeout | `int` | 超时时间（秒） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
-
-### whiteDomain
-
-#### 详细描述
-WithWhiteDomain 添加域名白名单（glob 匹配，导出名为 rpa.whiteDomain）
-
-参数:
-
-  - matchStr: 域名 glob 匹配表达式
-
-
-
-返回值:
-
-  - RPA 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = rpa.whiteDomain("*.example.com")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`whiteDomain(matchStr string) ConfigOpt`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| matchStr | `string` | 域名 glob 匹配表达式 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ConfigOpt` | RPA 配置可选项 |
-
+---
 

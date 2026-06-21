@@ -1,59 +1,64 @@
-# amap
+# amap {#library-amap}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [amap.GetBicyclingPlan](#getbicyclingplan) |BicyclingPlan 计算两地之间的骑行路径规划（导出名为 amap.GetBicyclingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 骑行路径规...|
-| [amap.GetDistance](#getdistance) |Distance 计算两地之间的距离（导出名为 amap.GetDistance） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式 返回值: -...|
-| [amap.GetDrivingPlan](#getdrivingplan) |DrivingPlan 计算两地之间的驾车路径规划（导出名为 amap.GetDrivingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 驾车路径规划结果 ...|
-| [amap.GetGeocode](#getgeocode) |Geocode 将地址转换为经纬度坐标（地理编码，导出名为 amap.GetGeocode） 参数: - address: 结构化地址描述 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 地理编码结果列表 - 错误信息|
-| [amap.GetIpLocation](#getiplocation) |IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation） 参数: - ip: 待定位的 IP 地址，为空时定位请求方 IP - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - ...|
-| [amap.GetNearbyPOI](#getnearbypoi) |SearchNearbyPOI 基于坐标的周边兴趣点搜索（导出名为 amap.GetNearbyPOI） 参数: - location: 中心点坐标（如 &#34;116.481,39.990&#34;） - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 AP...|
-| [amap.GetPOI](#getpoi) |SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI） 参数: - keywords: 搜索关键词 - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.city、amap.page、amap.pageSize 返回值: ...|
-| [amap.GetPOIDetail](#getpoidetail) |GetPOIDetail 根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail） 参数: - poiID: 兴趣点 ID - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - POI 详情结果 - 错误信息|
-| [amap.GetReverseGeocode](#getreversegeocode) |ReverseGeocode 将经纬度坐标转换为结构化地址（逆地理编码，导出名为 amap.GetReverseGeocode） 参数: - longitude: 经度 - latitude: 纬度 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - ...|
-| [amap.GetTransitPlan](#gettransitplan) |TransitPlan 计算两地之间的公交路径规划（导出名为 amap.GetTransitPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.ci...|
-| [amap.GetWalkingPlan](#getwalkingplan) |WalkingPlan 计算两地之间的步行路径规划（导出名为 amap.GetWalkingPlan） 参数: - origin: 起点地址 - destination: 终点地址 - options: 可选项，需要 amap.apiKey 提供高德 API Key 返回值: - 步行路径规划结果 ...|
-| [amap.GetWeather](#getweather) |GetWeather 查询指定城市的天气信息（导出名为 amap.GetWeather） 参数: - cityCode: 城市编码（adcode） - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预...|
-| [amap.apiKey](#apikey) |WithApiKey 设置高德开放平台 API Key（导出名为 amap.apiKey） 参数: - apiKey: 高德开放平台申请的 API Key 返回值: - 高德 API 配置可选项|
-| [amap.baseURL](#baseurl) |WithBaseURL 设置高德 API 的基础 URL（导出名为 amap.baseURL） 参数: - baseURL: API 基础地址 返回值: - 高德 API 配置可选项|
-| [amap.city](#city) |WithCity 设置请求关联的城市（导出名为 amap.city） 参数: - city: 城市名或 citycode 返回值: - 高德 API 配置可选项|
-| [amap.extensions](#extensions) |WithExtensions 设置返回结果的详细程度（base 或 all，导出名为 amap.extensions） 参数: - extensions: 取值 base 或 all 返回值: - 高德 API 配置可选项|
-| [amap.geocodeFilter](#geocodefilter) |WithGeocodeFilter 设置地理编码结果过滤器，用于从多个候选中选出一个（导出名为 amap.geocodeFilter） 参数: - filter: 过滤回调，输入候选地理编码结果，返回选中的结果 返回值: - 高德 API 配置可选项|
-| [amap.page](#page) |WithPage 设置分页结果的页码（导出名为 amap.page） 参数: - page: 页码（从 1 开始） 返回值: - 高德 API 配置可选项|
-| [amap.pageSize](#pagesize) |WithPageSize 设置分页结果的每页数量（导出名为 amap.pageSize） 参数: - pageSize: 每页数量 返回值: - 高德 API 配置可选项|
-| [amap.pocOpts](#pocopts) |WithLowhttpOptions 设置高德 API 客户端底层 HTTP 请求选项（导出名为 amap.pocOpts） 参数: - opts: 零个到多个 poc 请求选项函数 返回值: - 高德 API 配置可选项|
-| [amap.radius](#radius) |WithRadius 设置周边搜索的半径（导出名为 amap.radius） 参数: - radius: 搜索半径（米） 返回值: - 高德 API 配置可选项|
-| [amap.sortRule](#sortrule) |WithSortRule 设置搜索结果的排序规则（导出名为 amap.sortRule） 参数: - sortRule: 排序规则，如 distance/weight 返回值: - 高德 API 配置可选项|
-| [amap.timeout](#timeout) |WithTimeout 设置 HTTP 请求超时时间（导出名为 amap.timeout） 参数: - timeout: 超时时间（time.Duration） 返回值: - 高德 API 配置可选项|
-| [amap.type](#type) |WithType 设置类型参数（如距离计算的类型，导出名为 amap.type） 参数: - typ: 类型参数 返回值: - 高德 API 配置可选项|
+`amap` 库是高德地图（AMap）开放平台 API 的封装，提供地理编码、逆地理编码、POI 检索、路径规划、IP 定位、天气查询等地理信息服务能力。使用前需要申请高德 API Key，通过 `amap.apiKey` 传入。
 
+典型使用场景：
 
-## 函数定义
-### GetBicyclingPlan
+- 地理编码：`amap.GetGeocode`（地址转坐标）、`amap.GetReverseGeocode`（坐标转地址）、`amap.GetIpLocation`（IP 定位）。
+- 地点检索：`amap.GetPOI` / `amap.GetNearbyPOI` / `amap.GetPOIDetail` 搜索兴趣点；`amap.GetDistance` 测算距离。
+- 路径规划：`amap.GetDrivingPlan` / `amap.GetWalkingPlan` / `amap.GetBicyclingPlan` / `amap.GetTransitPlan` 分别规划驾车、步行、骑行与公交路线。
+- 其他：`amap.GetWeather` 查询天气；通过 `amap.city` / `amap.radius` / `amap.page` / `amap.pageSize` / `amap.timeout` 等选项细化查询，`amap.pocOpts` 透传底层 HTTP 选项（如代理）。
 
-#### 详细描述
+与相邻库的关系：`amap` 底层基于 `poc`/HTTP 请求实现，是面向外部数据源（地理信息）的便捷封装，常用于资产地理画像、目标定位等场景。
+
+> 共 24 个函数
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [amap.GetBicyclingPlan](#getbicyclingplan) | `origin string, destination string, options ...AmapConfigOption` | `*BicyclingResult, error` | BicyclingPlan 计算两地之间的骑行路径规划（导出名为 amap.GetBicyclingPlan） |
+| [amap.GetDistance](#getdistance) | `origin string, destination string, options ...AmapConfigOption` | `*DistanceResult, error` | Distance 计算两地之间的距离（导出名为 amap.GetDistance） |
+| [amap.GetDrivingPlan](#getdrivingplan) | `origin string, destination string, options ...AmapConfigOption` | `*DirectionResponse, error` | DrivingPlan 计算两地之间的驾车路径规划（导出名为 amap.GetDrivingPlan） |
+| [amap.GetGeocode](#getgeocode) | `address string, options ...AmapConfigOption` | `[]*GeocodeResult, error` | Geocode 将地址转换为经纬度坐标（地理编码，导出名为 amap.GetGeocode） |
+| [amap.GetIpLocation](#getiplocation) | `ip string, options ...AmapConfigOption` | `*IPLocationResultEx, error` | IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation） |
+| [amap.GetNearbyPOI](#getnearbypoi) | `location string, keywords string, options ...AmapConfigOption` | `*SearchPOIResultEx, error` | SearchNearbyPOI 基于坐标的周边兴趣点搜索（导出名为 amap.GetNearbyPOI） |
+| [amap.GetPOI](#getpoi) | `keywords string, options ...AmapConfigOption` | `*SearchPOIResultEx, error` | SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI） |
+| [amap.GetPOIDetail](#getpoidetail) | `poiID string, options ...AmapConfigOption` | `*POIResultEx, error` | 根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail） |
+| [amap.GetReverseGeocode](#getreversegeocode) | `longitude float64, latitude float64, options ...AmapConfigOption` | `*RegeoCodeResult, error` | ReverseGeocode 将经纬度坐标转换为结构化地址（逆地理编码，导出名为 amap.GetReverseGeocode） |
+| [amap.GetTransitPlan](#gettransitplan) | `origin string, destination string, options ...AmapConfigOption` | `*TransitResponse, error` | TransitPlan 计算两地之间的公交路径规划（导出名为 amap.GetTransitPlan） |
+| [amap.GetWalkingPlan](#getwalkingplan) | `origin string, destination string, options ...AmapConfigOption` | `*V5WalkingResponse, error` | WalkingPlan 计算两地之间的步行路径规划（导出名为 amap.GetWalkingPlan） |
+| [amap.GetWeather](#getweather) | `cityCode string, options ...AmapConfigOption` | `*WeatherResponse, error` | 查询指定城市的天气信息（导出名为 amap.GetWeather） |
+
+## 可变参数函数详情
+
+### GetBicyclingPlan {#getbicyclingplan}
+
+```go
+GetBicyclingPlan(origin string, destination string, options ...AmapConfigOption) (*BicyclingResult, error)
+```
+
 BicyclingPlan 计算两地之间的骑行路径规划（导出名为 amap.GetBicyclingPlan）
 
-参数:
+**必填参数**
 
-  - origin: 起点地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `string` | 起点地址 |
+| destination | `string` | 终点地址 |
 
-  - destination: 终点地址
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*BicyclingResult` | 骑行路径规划结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 骑行路径规划结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -61,50 +66,35 @@ plan = amap.GetBicyclingPlan("北京站", "天安门", amap.apiKey("your-key"))~
 dump(plan)
 ``````````````
 
+---
 
-#### 定义
+### GetDistance {#getdistance}
 
-`GetBicyclingPlan(origin string, destination string, options ...AmapConfigOption) (*BicyclingResult, error)`
+```go
+GetDistance(origin string, destination string, options ...AmapConfigOption) (*DistanceResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `string` | 起点地址 |
-| destination | `string` | 终点地址 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*BicyclingResult` | 骑行路径规划结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetDistance
-
-#### 详细描述
 Distance 计算两地之间的距离（导出名为 amap.GetDistance）
 
-参数:
+**必填参数**
 
-  - origin: 起点地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `string` | 起点地址 |
+| destination | `string` | 终点地址 |
 
-  - destination: 终点地址
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*DistanceResult` | 距离计算结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 距离计算结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -112,50 +102,35 @@ dist = amap.GetDistance("北京站", "北京西站", amap.apiKey("your-key"))~
 dump(dist)
 ``````````````
 
+---
 
-#### 定义
+### GetDrivingPlan {#getdrivingplan}
 
-`GetDistance(origin string, destination string, options ...AmapConfigOption) (*DistanceResult, error)`
+```go
+GetDrivingPlan(origin string, destination string, options ...AmapConfigOption) (*DirectionResponse, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `string` | 起点地址 |
-| destination | `string` | 终点地址 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.type 指定测距方式 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*DistanceResult` | 距离计算结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetDrivingPlan
-
-#### 详细描述
 DrivingPlan 计算两地之间的驾车路径规划（导出名为 amap.GetDrivingPlan）
 
-参数:
+**必填参数**
 
-  - origin: 起点地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `string` | 起点地址 |
+| destination | `string` | 终点地址 |
 
-  - destination: 终点地址
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*DirectionResponse` | 驾车路径规划结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 驾车路径规划结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -163,48 +138,34 @@ plan = amap.GetDrivingPlan("北京站", "北京西站", amap.apiKey("your-key"))
 dump(plan)
 ``````````````
 
+---
 
-#### 定义
+### GetGeocode {#getgeocode}
 
-`GetDrivingPlan(origin string, destination string, options ...AmapConfigOption) (*DirectionResponse, error)`
+```go
+GetGeocode(address string, options ...AmapConfigOption) ([]*GeocodeResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `string` | 起点地址 |
-| destination | `string` | 终点地址 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*DirectionResponse` | 驾车路径规划结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetGeocode
-
-#### 详细描述
 Geocode 将地址转换为经纬度坐标（地理编码，导出名为 amap.GetGeocode）
 
-参数:
+**必填参数**
 
-  - address: 结构化地址描述
+|参数名|类型|说明|
+|:--|:--|:--|
+| address | `string` | 结构化地址描述 |
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+**可选参数**
 
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GeocodeResult` | 地理编码结果列表 |
+| r2 | `error` | 错误信息 |
 
-  - 地理编码结果列表
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -212,47 +173,34 @@ results = amap.GetGeocode("北京市朝阳区阜通东大街6号", amap.apiKey("
 dump(results)
 ``````````````
 
+---
 
-#### 定义
+### GetIpLocation {#getiplocation}
 
-`GetGeocode(address string, options ...AmapConfigOption) ([]*GeocodeResult, error)`
+```go
+GetIpLocation(ip string, options ...AmapConfigOption) (*IPLocationResultEx, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| address | `string` | 结构化地址描述 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GeocodeResult` | 地理编码结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GetIpLocation
-
-#### 详细描述
 IPLocation 根据 IP 地址定位其地理位置（ip 为空时定位请求方 IP，导出名为 amap.GetIpLocation）
 
-参数:
+**必填参数**
 
-  - ip: 待定位的 IP 地址，为空时定位请求方 IP
+|参数名|类型|说明|
+|:--|:--|:--|
+| ip | `string` | 待定位的 IP 地址，为空时定位请求方 IP |
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+**可选参数**
 
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*IPLocationResultEx` | IP 地理位置结果 |
+| r2 | `error` | 错误信息 |
 
-  - IP 地理位置结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -260,49 +208,35 @@ loc = amap.GetIpLocation("114.114.114.114", amap.apiKey("your-key"))~
 dump(loc)
 ``````````````
 
+---
 
-#### 定义
+### GetNearbyPOI {#getnearbypoi}
 
-`GetIpLocation(ip string, options ...AmapConfigOption) (*IPLocationResultEx, error)`
+```go
+GetNearbyPOI(location string, keywords string, options ...AmapConfigOption) (*SearchPOIResultEx, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ip | `string` | 待定位的 IP 地址，为空时定位请求方 IP |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*IPLocationResultEx` | IP 地理位置结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetNearbyPOI
-
-#### 详细描述
 SearchNearbyPOI 基于坐标的周边兴趣点搜索（导出名为 amap.GetNearbyPOI）
 
-参数:
+**必填参数**
 
-  - location: 中心点坐标（如 &#34;116.481,39.990&#34;）
+|参数名|类型|说明|
+|:--|:--|:--|
+| location | `string` | 中心点坐标（如 &#34;116.481,39.990&#34;） |
+| keywords | `string` | 搜索关键词 |
 
-  - keywords: 搜索关键词
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.radius 指定半径
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*SearchPOIResultEx` | POI 搜索结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - POI 搜索结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -310,48 +244,34 @@ pois = amap.GetNearbyPOI("116.481488,39.990464", "咖啡", amap.apiKey("your-key
 dump(pois)
 ``````````````
 
+---
 
-#### 定义
+### GetPOI {#getpoi}
 
-`GetNearbyPOI(location string, keywords string, options ...AmapConfigOption) (*SearchPOIResultEx, error)`
+```go
+GetPOI(keywords string, options ...AmapConfigOption) (*SearchPOIResultEx, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| location | `string` | 中心点坐标（如 &#34;116.481,39.990&#34;） |
+SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI）
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | keywords | `string` | 搜索关键词 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.radius 指定半径 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**可选参数**
+
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `*SearchPOIResultEx` | POI 搜索结果 |
 | r2 | `error` | 错误信息 |
 
-
-### GetPOI
-
-#### 详细描述
-SearchPOI 基于关键词搜索兴趣点（POI，导出名为 amap.GetPOI）
-
-参数:
-
-  - keywords: 搜索关键词
-
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.city、amap.page、amap.pageSize
-
-
-
-返回值:
-
-  - POI 搜索结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -359,47 +279,34 @@ pois = amap.GetPOI("咖啡", amap.apiKey("your-key"), amap.city("北京"))~
 dump(pois)
 ``````````````
 
+---
 
-#### 定义
+### GetPOIDetail {#getpoidetail}
 
-`GetPOI(keywords string, options ...AmapConfigOption) (*SearchPOIResultEx, error)`
+```go
+GetPOIDetail(poiID string, options ...AmapConfigOption) (*POIResultEx, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| keywords | `string` | 搜索关键词 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.city、amap.page、amap.pageSize |
+根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*SearchPOIResultEx` | POI 搜索结果 |
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| poiID | `string` | 兴趣点 ID |
+
+**可选参数**
+
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*POIResultEx` | POI 详情结果 |
 | r2 | `error` | 错误信息 |
 
-
-### GetPOIDetail
-
-#### 详细描述
-GetPOIDetail 根据 POI ID 查询兴趣点详情（导出名为 amap.GetPOIDetail）
-
-参数:
-
-  - poiID: 兴趣点 ID
-
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
-
-
-
-返回值:
-
-  - POI 详情结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -407,49 +314,35 @@ detail = amap.GetPOIDetail("B000A83M61", amap.apiKey("your-key"))~
 dump(detail)
 ``````````````
 
+---
 
-#### 定义
+### GetReverseGeocode {#getreversegeocode}
 
-`GetPOIDetail(poiID string, options ...AmapConfigOption) (*POIResultEx, error)`
+```go
+GetReverseGeocode(longitude float64, latitude float64, options ...AmapConfigOption) (*RegeoCodeResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| poiID | `string` | 兴趣点 ID |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*POIResultEx` | POI 详情结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetReverseGeocode
-
-#### 详细描述
 ReverseGeocode 将经纬度坐标转换为结构化地址（逆地理编码，导出名为 amap.GetReverseGeocode）
 
-参数:
+**必填参数**
 
-  - longitude: 经度
+|参数名|类型|说明|
+|:--|:--|:--|
+| longitude | `float64` | 经度 |
+| latitude | `float64` | 纬度 |
 
-  - latitude: 纬度
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*RegeoCodeResult` | 逆地理编码结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 逆地理编码结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -457,50 +350,35 @@ result = amap.GetReverseGeocode(116.481488, 39.990464, amap.apiKey("your-key"))~
 dump(result)
 ``````````````
 
+---
 
-#### 定义
+### GetTransitPlan {#gettransitplan}
 
-`GetReverseGeocode(longitude float64, latitude float64, options ...AmapConfigOption) (*RegeoCodeResult, error)`
+```go
+GetTransitPlan(origin string, destination string, options ...AmapConfigOption) (*TransitResponse, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| longitude | `float64` | 经度 |
-| latitude | `float64` | 纬度 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*RegeoCodeResult` | 逆地理编码结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetTransitPlan
-
-#### 详细描述
 TransitPlan 计算两地之间的公交路径规划（导出名为 amap.GetTransitPlan）
 
-参数:
+**必填参数**
 
-  - origin: 起点地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `string` | 起点地址 |
+| destination | `string` | 终点地址 |
 
-  - destination: 终点地址
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.city
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*TransitResponse` | 公交路径规划结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 公交路径规划结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -508,50 +386,35 @@ plan = amap.GetTransitPlan("北京站", "北京西站", amap.apiKey("your-key"),
 dump(plan)
 ``````````````
 
+---
 
-#### 定义
+### GetWalkingPlan {#getwalkingplan}
 
-`GetTransitPlan(origin string, destination string, options ...AmapConfigOption) (*TransitResponse, error)`
+```go
+GetWalkingPlan(origin string, destination string, options ...AmapConfigOption) (*V5WalkingResponse, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `string` | 起点地址 |
-| destination | `string` | 终点地址 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key，公交规划通常还需 amap.city |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*TransitResponse` | 公交路径规划结果 |
-| r2 | `error` | 错误信息 |
-
-
-### GetWalkingPlan
-
-#### 详细描述
 WalkingPlan 计算两地之间的步行路径规划（导出名为 amap.GetWalkingPlan）
 
-参数:
+**必填参数**
 
-  - origin: 起点地址
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `string` | 起点地址 |
+| destination | `string` | 终点地址 |
 
-  - destination: 终点地址
+**可选参数**
 
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*V5WalkingResponse` | 步行路径规划结果 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 步行路径规划结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -559,48 +422,34 @@ plan = amap.GetWalkingPlan("北京站", "天安门", amap.apiKey("your-key"))~
 dump(plan)
 ``````````````
 
+---
 
-#### 定义
+### GetWeather {#getweather}
 
-`GetWalkingPlan(origin string, destination string, options ...AmapConfigOption) (*V5WalkingResponse, error)`
+```go
+GetWeather(cityCode string, options ...AmapConfigOption) (*WeatherResponse, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `string` | 起点地址 |
-| destination | `string` | 终点地址 |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key |
+查询指定城市的天气信息（导出名为 amap.GetWeather）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*V5WalkingResponse` | 步行路径规划结果 |
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| cityCode | `string` | 城市编码（adcode） |
+
+**可选参数**
+
+可作为可变参数 `options ...AmapConfigOption` 传入选项；共 12 个可用选项，详见 [AmapConfigOption 选项列表](#option-amapconfigoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*WeatherResponse` | 天气查询结果 |
 | r2 | `error` | 错误信息 |
 
-
-### GetWeather
-
-#### 详细描述
-GetWeather 查询指定城市的天气信息（导出名为 amap.GetWeather）
-
-参数:
-
-  - cityCode: 城市编码（adcode）
-
-  - options: 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预报
-
-
-
-返回值:
-
-  - 天气查询结果
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 需要有效的高德 API Key（示意性示例）
@@ -608,513 +457,28 @@ weather = amap.GetWeather("110000", amap.apiKey("your-key"))~
 dump(weather)
 ``````````````
 
-
-#### 定义
-
-`GetWeather(cityCode string, options ...AmapConfigOption) (*WeatherResponse, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| cityCode | `string` | 城市编码（adcode） |
-| options | `...AmapConfigOption` | 可选项，需要 amap.apiKey 提供高德 API Key，可用 amap.enableWeatherForecast 返回预报 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*WeatherResponse` | 天气查询结果 |
-| r2 | `error` | 错误信息 |
-
-
-### apiKey
-
-#### 详细描述
-WithApiKey 设置高德开放平台 API Key（导出名为 amap.apiKey）
-
-参数:
-
-  - apiKey: 高德开放平台申请的 API Key
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.apiKey("your-amap-api-key")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`apiKey(apiKey string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| apiKey | `string` | 高德开放平台申请的 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### baseURL
-
-#### 详细描述
-WithBaseURL 设置高德 API 的基础 URL（导出名为 amap.baseURL）
-
-参数:
-
-  - baseURL: API 基础地址
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.baseURL("https://restapi.amap.com")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`baseURL(baseURL string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| baseURL | `string` | API 基础地址 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### city
-
-#### 详细描述
-WithCity 设置请求关联的城市（导出名为 amap.city）
-
-参数:
-
-  - city: 城市名或 citycode
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.city("北京")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`city(city string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| city | `string` | 城市名或 citycode |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### extensions
-
-#### 详细描述
-WithExtensions 设置返回结果的详细程度（base 或 all，导出名为 amap.extensions）
-
-参数:
-
-  - extensions: 取值 base 或 all
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.extensions("all")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`extensions(extensions string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| extensions | `string` | 取值 base 或 all |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### geocodeFilter
-
-#### 详细描述
-WithGeocodeFilter 设置地理编码结果过滤器，用于从多个候选中选出一个（导出名为 amap.geocodeFilter）
-
-参数:
-
-  - filter: 过滤回调，输入候选地理编码结果，返回选中的结果
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.geocodeFilter(func(geocodes) { return geocodes[0] })
-println(opt)
-``````````````
-
-
-#### 定义
-
-`geocodeFilter(filter func(geocodes []*GeocodeResult) *GeocodeResult) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filter | `func(geocodes []*GeocodeResult) *GeocodeResult` | 过滤回调，输入候选地理编码结果，返回选中的结果 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### page
-
-#### 详细描述
-WithPage 设置分页结果的页码（导出名为 amap.page）
-
-参数:
-
-  - page: 页码（从 1 开始）
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.page(1)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`page(page int) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| page | `int` | 页码（从 1 开始） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### pageSize
-
-#### 详细描述
-WithPageSize 设置分页结果的每页数量（导出名为 amap.pageSize）
-
-参数:
-
-  - pageSize: 每页数量
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.pageSize(20)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`pageSize(pageSize int) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pageSize | `int` | 每页数量 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### pocOpts
-
-#### 详细描述
-WithLowhttpOptions 设置高德 API 客户端底层 HTTP 请求选项（导出名为 amap.pocOpts）
-
-参数:
-
-  - opts: 零个到多个 poc 请求选项函数
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.pocOpts(poc.timeout(10))
-println(opt)
-``````````````
-
-
-#### 定义
-
-`pocOpts(opts ...poc.PocConfigOption) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...poc.PocConfigOption` | 零个到多个 poc 请求选项函数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### radius
-
-#### 详细描述
-WithRadius 设置周边搜索的半径（导出名为 amap.radius）
-
-参数:
-
-  - radius: 搜索半径（米）
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.radius(1000)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`radius(radius int) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| radius | `int` | 搜索半径（米） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### sortRule
-
-#### 详细描述
-WithSortRule 设置搜索结果的排序规则（导出名为 amap.sortRule）
-
-参数:
-
-  - sortRule: 排序规则，如 distance/weight
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.sortRule("distance")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`sortRule(sortRule string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| sortRule | `string` | 排序规则，如 distance/weight |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### timeout
-
-#### 详细描述
-WithTimeout 设置 HTTP 请求超时时间（导出名为 amap.timeout）
-
-参数:
-
-  - timeout: 超时时间（time.Duration）
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.timeout(10 * time.Second)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`timeout(timeout time.Duration) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| timeout | `time.Duration` | 超时时间（time.Duration） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
-
-### type
-
-#### 详细描述
-WithType 设置类型参数（如距离计算的类型，导出名为 amap.type）
-
-参数:
-
-  - typ: 类型参数
-
-
-
-返回值:
-
-  - 高德 API 配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = amap.type("1")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`type(typ string) AmapConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| typ | `string` | 类型参数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `AmapConfigOption` | 高德 API 配置可选项 |
-
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：AmapConfigOption {#option-amapconfigoption}
+
+涉及到的函数有：[amap.GetBicyclingPlan](#getbicyclingplan)、[amap.GetDistance](#getdistance)、[amap.GetDrivingPlan](#getdrivingplan)、[amap.GetGeocode](#getgeocode)、[amap.GetIpLocation](#getiplocation)、[amap.GetNearbyPOI](#getnearbypoi)、[amap.GetPOI](#getpoi)、[amap.GetPOIDetail](#getpoidetail)、[amap.GetReverseGeocode](#getreversegeocode)、[amap.GetTransitPlan](#gettransitplan)、[amap.GetWalkingPlan](#getwalkingplan)、[amap.GetWeather](#getweather)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `amap.apiKey` | `apiKey string` | `AmapConfigOption` | WithApiKey 设置高德开放平台 API Key |
+| `amap.baseURL` | `baseURL string` | `AmapConfigOption` | WithBaseURL 设置高德 API 的基础 URL |
+| `amap.city` | `city string` | `AmapConfigOption` | WithCity 设置请求关联的城市 |
+| `amap.extensions` | `extensions string` | `AmapConfigOption` | WithExtensions 设置返回结果的详细程度（base 或 all，导出名为 amap.extensions） |
+| `amap.geocodeFilter` | `filter func(geocodes []*GeocodeResult) *GeocodeResult` | `AmapConfigOption` | WithGeocodeFilter 设置地理编码结果过滤器，用于从多个候选中选出一个 |
+| `amap.page` | `page int` | `AmapConfigOption` | WithPage 设置分页结果的页码 |
+| `amap.pageSize` | `pageSize int` | `AmapConfigOption` | WithPageSize 设置分页结果的每页数量 |
+| `amap.pocOpts` | `opts ...poc.PocConfigOption` | `AmapConfigOption` | WithLowhttpOptions 设置高德 API 客户端底层 HTTP 请求选项 |
+| `amap.radius` | `radius int` | `AmapConfigOption` | WithRadius 设置周边搜索的半径 |
+| `amap.sortRule` | `sortRule string` | `AmapConfigOption` | WithSortRule 设置搜索结果的排序规则 |
+| `amap.timeout` | `timeout time.Duration` | `AmapConfigOption` | WithTimeout 设置 HTTP 请求超时时间 |
+| `amap.type` | `typ string` | `AmapConfigOption` | WithType 设置类型参数（如距离计算的类型，导出名为 amap.type） |
 

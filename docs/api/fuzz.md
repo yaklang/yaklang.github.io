@@ -1,47 +1,77 @@
-# fuzz
+# fuzz {#library-fuzz}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [fuzz.FuzzCalcExpr](#fuzzcalcexpr) |FuzzCalcExpr 生成一组用于表达式注入(SSTI/计算型)探测的随机日期相关变量与计算表达式 返回值: - 包含 year、month、day、expr、result 等键的变量表，用于构造与校验计算型注入 payload|
-| [fuzz.FuzzCalcExprInt32Safe](#fuzzcalcexprint32safe) |FuzzCalcExprInt32Safe 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int32 安全范围内 返回值: - 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload|
-| [fuzz.FuzzCalcExprInt64Safe](#fuzzcalcexprint64safe) |FuzzCalcExprInt64Safe 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int64 安全范围内 返回值: - 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload|
-| [fuzz.HTTPRequest](#httprequest) |HTTPRequest 根据原始请求报文构造一个 HTTP Fuzz 请求对象，用于对请求各部分进行参数变形与发包 参数: - i: 原始 HTTP 请求报文（字符串、字节数组或 *http.Request） - opts: 可选构造选项，例如 fuzz.https、fuzz.proxy、fuzz....|
-| [fuzz.MustHTTPRequest](#musthttprequest) |MustHTTPRequest 根据原始请求报文构造一个 HTTP Fuzz 请求对象，构造失败时不返回错误（仅记录日志），便于链式调用 参数: - i: 原始 HTTP 请求报文（字符串、字节数组或 *http.Request） - opts: 可选构造选项，例如 fuzz.https、fuzz....|
-| [fuzz.ProtobufBytes](#protobufbytes) |ProtobufBytes 解析 Protobuf 编码的字节流，返回可读取/变形的 Protobuf 记录集合对象 参数: - i: Protobuf 编码的字节流（字符串或字节数组） 返回值: - Protobuf 记录集合对象，可用于查看与 fuzz 变形|
-| [fuzz.ProtobufHex](#protobufhex) |ProtobufHex 解析十六进制字符串表示的 Protobuf 编码数据，返回可读取/变形的 Protobuf 记录集合对象 参数: - i: 十六进制编码的 Protobuf 数据字符串 返回值: - Protobuf 记录集合对象，可用于查看与 fuzz 变形|
-| [fuzz.ProtobufJSON](#protobufjson) |ProtobufJSON 从 JSON 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToJSON 互逆） 参数: - i: 描述 Protobuf 记录的 JSON 字符串 返回值: - Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形|
-| [fuzz.ProtobufYAML](#protobufyaml) |ProtobufYAML 从 YAML 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToYAML 互逆） 参数: - i: 描述 Protobuf 记录的 YAML 字符串 返回值: - Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形|
-| [fuzz.Strings](#strings) |Strings 使用 fuzztag 渲染规则，将一个模板字符串展开成一组字符串结果 参数: - i: 含 fuzztag 的模板（如 &#34;{{i(1-3)}}&#34;），也可以是普通字符串 返回值: - 渲染展开后的字符串列表|
-| [fuzz.StringsFunc](#stringsfunc) |StringsFunc 使用 fuzztag 渲染模板，并为每个渲染结果回调一次，便于流式处理大量结果 参数: - i: 含 fuzztag 的模板字符串 - cb: 针对每个渲染结果触发的回调函数，参数为单个变形结果 - params: 可选的额外参数表，参与模板渲染 返回值: - 错误信息，渲染...|
-| [fuzz.StringsWithParam](#stringswithparam) |StringsWithParam 使用 fuzztag 渲染模板，并允许传入额外的命名参数表参与渲染 参数: - i: 含 fuzztag 的模板字符串 - i2: 额外参数表（map），可被模板中的 {{params(...)}} 等标签引用 返回值: - 渲染展开后的字符串列表|
-| [fuzz.UrlToHTTPRequest](#urltohttprequest) |UrlToHTTPRequest 根据请求方法与 URL 构造一个 HTTP Fuzz 请求对象，便于后续做参数变形与发包 参数: - method: 请求方法，如 &#34;GET&#34;、&#34;POST&#34; - i: 目标 URL 返回值: - 构造好的 HTTP Fuzz 请求对象 - 错误信息，URL 解析失败...|
-| [fuzz.UrlsToHTTPRequests](#urlstohttprequests) |UrlsToHTTPRequests 将一个或多个 URL 转换成可批量变形发包的 HTTP Fuzz 请求批次对象 参数: - target: 一个或多个 URL（字符串），支持 fuzztag 展开 返回值: - HTTP Fuzz 请求批次对象，可对其统一做参数变形与批量发包 - 错误信息，无...|
-| [fuzz.WithConcurrentLimit](#withconcurrentlimit) |size 是一个 HTTP 连接池/批量请求配置选项，用于设置并发请求数量（并发上限） 参数: - i: 并发数量 返回值: - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等|
-| [fuzz.WithDelay](#withdelay) |delay 是一个 HTTP 连接池/批量请求配置选项，用于设置每个请求之间的固定延迟秒数 参数: - b: 延迟时间，单位为秒，支持小数 返回值: - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz.Exec / fuzzx 等|
-| [fuzz.WithNamingContext](#withnamingcontext) |namingContext 是一个 HTTP 连接池/批量请求配置选项，用于设置命名调用上下文以便对并发任务进行分组限流 参数: - invokerName: 调用者名称，用于并发分组标识 返回值: - 一个连接池配置选项，作为可变参数传入 fuzz / fuzzx 等|
-| [fuzz.WithTimeOut](#withtimeout) |perRequestTimeout 是一个 HTTP 连接池/批量请求配置选项，用于设置单个请求的超时时间（单位：秒） 参数: - f: 超时时间，单位为秒，支持小数 返回值: - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等|
-| [fuzz.context](#context) |context 是一个 HTTP Fuzz 请求构造选项，用于传入上下文以便外部取消变形与发包任务 参数: - ctx: 上下文对象 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
-| [fuzz.https](#https) |https 是一个 HTTP Fuzz 请求构造选项，用于设置该请求是否以 HTTPS 协议发送 参数: - i: 是否使用 HTTPS 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
-| [fuzz.noEncode](#noencode) |noEncode 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对 fuzz 结果的自动编码 参数: - i: 是否禁用自动编码 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
-| [fuzz.noEscapeHTML](#noescapehtml) |noEscapeHTML 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对内容的 HTML 转义 参数: - i: 是否禁用 HTML 转义 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
-| [fuzz.proxy](#proxy) |proxy 是一个 HTTP Fuzz 请求构造选项，用于设置发包时使用的代理地址 参数: - i: 代理地址，支持 http、https、socks5 协议 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
-| [fuzz.showTag](#showtag) |showTag 是一个 HTTP Fuzz 请求构造选项，用于以更友好的方式展示 fuzztag（便于阅读与调试） 返回值: - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等|
+`fuzz` 库是 yaklang 的 Web 模糊测试核心，围绕"FuzzHTTPRequest"对 HTTP 请求的各个部位（路径、参数、Header、Body、Cookie 等）做变异与批量发包，是漏洞探测与参数爆破的主力工具。它同时提供字符串模糊（fuzztag）与协议数据变异能力。
 
+典型使用场景：
 
-## 函数定义
-### FuzzCalcExpr
+- 构造请求：`fuzz.HTTPRequest` / `fuzz.MustHTTPRequest` 从原始报文构建可变异请求，`fuzz.UrlToHTTPRequest` / `fuzz.UrlsToHTTPRequests` 从 URL 构建。
+- 字符串变异：`fuzz.Strings` / `fuzz.StringsWithParam` / `fuzz.StringsFunc` 用 fuzztag 语法批量生成 Payload，`fuzz.FuzzCalcExpr` 生成数学表达式探测。
+- 协议数据：`fuzz.ProtobufBytes` / `fuzz.ProtobufJSON` / `fuzz.ProtobufHex` / `fuzz.ProtobufYAML` 解析与变异 Protobuf。
+- 发包池：`fuzz.WithConcurrentLimit` / `fuzz.WithDelay` / `fuzz.WithTimeOut` 控制并发与节流，`fuzz.https` / `fuzz.proxy` / `fuzz.context` 控制传输。
 
-#### 详细描述
-FuzzCalcExpr 生成一组用于表达式注入(SSTI/计算型)探测的随机日期相关变量与计算表达式
+与相邻库的关系：`fuzz` 与 `poc`（单发/精确请求）互补——`poc` 偏"构造与发送一个确定请求"，`fuzz` 偏"对请求批量变异探测"；爬取（`crawler`）得到的请求常交给 `fuzz` 做深入测试。`fuzzx` 是其更新的变体。
 
-返回值:
+快速上手（fuzztag 字符串变异，本地生成 Payload，不出网即可验证）：
 
-  - 包含 year、month、day、expr、result 等键的变量表，用于构造与校验计算型注入 payload
+```yak
+// fuzztag 语法: {{int(1-3)}} 展开为 1、2、3, 与前缀拼接生成一组 payload
+payloads = fuzz.Strings("admin{{int(1-3)}}")
+println(payloads)                       // 预期输出: [admin1 admin2 admin3]
+assert len(payloads) == 3, "int(1-3) should expand to 3 payloads"
 
+// 常见用途: 把生成的 payload 套进请求做批量变异(需要可达目标, 这里仅示意)
+// for p in payloads {
+//     rsp, req = fuzz.HTTPRequest(`GET /?id=__P__ HTTP/1.1\r\nHost: example.com\r\n\r\n`)~ ...
+// }
+```
 
+> 共 24 个函数
 
+## 函数索引
 
-Example:
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [fuzz.FuzzCalcExpr](#fuzzcalcexpr) | - | `map[string]any` | 生成一组用于表达式注入(SSTI/计算型)探测的随机日期相关变量与计算表达式 |
+| [fuzz.FuzzCalcExprInt32Safe](#fuzzcalcexprint32safe) | - | `map[string]any` | 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int32 安全范围内 |
+| [fuzz.FuzzCalcExprInt64Safe](#fuzzcalcexprint64safe) | - | `map[string]any` | 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int64 安全范围内 |
+| [fuzz.ProtobufBytes](#protobufbytes) | `i any` | `*ProtobufRecords` | 解析 Protobuf 编码的字节流，返回可读取/变形的 Protobuf 记录集合对象 |
+| [fuzz.ProtobufHex](#protobufhex) | `i any` | `*ProtobufRecords` | 解析十六进制字符串表示的 Protobuf 编码数据，返回可读取/变形的 Protobuf 记录集合对象 |
+| [fuzz.ProtobufJSON](#protobufjson) | `i any` | `*ProtobufRecords` | 从 JSON 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToJSON 互逆） |
+| [fuzz.ProtobufYAML](#protobufyaml) | `i any` | `*ProtobufRecords` | 从 YAML 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToYAML 互逆） |
+| [fuzz.Strings](#strings) | `i any` | `[]string` | 使用 fuzztag 渲染规则，将一个模板字符串展开成一组字符串结果 |
+| [fuzz.StringsWithParam](#stringswithparam) | `i any, i2 any` | `[]string` | 使用 fuzztag 渲染模板，并允许传入额外的命名参数表参与渲染 |
+| [fuzz.UrlToHTTPRequest](#urltohttprequest) | `method string, i any` | `*mutate.FuzzHTTPRequest, error` | 根据请求方法与 URL 构造一个 HTTP Fuzz 请求对象，便于后续做参数变形与发包 |
+| [fuzz.WithConcurrentLimit](#withconcurrentlimit) | `i int` | `HttpPoolConfigOption` | size 是一个 HTTP 连接池/批量请求配置选项，用于设置并发请求数量（并发上限） |
+| [fuzz.WithDelay](#withdelay) | `b float64` | `HttpPoolConfigOption` | delay 是一个 HTTP 连接池/批量请求配置选项，用于设置每个请求之间的固定延迟秒数 |
+| [fuzz.WithNamingContext](#withnamingcontext) | `invokerName string` | `HttpPoolConfigOption` | namingContext 是一个 HTTP 连接池/批量请求配置选项，用于设置命名调用上下文以便对并发任务进行分组限流 |
+| [fuzz.WithTimeOut](#withtimeout) | `f float64` | `HttpPoolConfigOption` | perRequestTimeout 是一个 HTTP 连接池/批量请求配置选项，用于设置单个请求的超时时间（单位：秒） |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [fuzz.HTTPRequest](#httprequest) | `i any, opts ...BuildFuzzHTTPRequestOption` | `*FuzzHTTPRequest, error` | 根据原始请求报文构造一个 HTTP Fuzz 请求对象，用于对请求各部分进行参数变形与发包 |
+| [fuzz.MustHTTPRequest](#musthttprequest) | `i any, opts ...BuildFuzzHTTPRequestOption` | `*FuzzHTTPRequest` | 根据原始请求报文构造一个 HTTP Fuzz 请求对象，构造失败时不返回错误（仅记录日志），便于链式调用 |
+| [fuzz.StringsFunc](#stringsfunc) | `i any, cb func(i *mutate.MutateResult), params ...any` | `error` | 使用 fuzztag 渲染模板，并为每个渲染结果回调一次，便于流式处理大量结果 |
+| [fuzz.UrlsToHTTPRequests](#urlstohttprequests) | `target ...any` | `*FuzzHTTPRequestBatch, error` | 将一个或多个 URL 转换成可批量变形发包的 HTTP Fuzz 请求批次对象 |
+
+## 函数详情
+
+### FuzzCalcExpr {#fuzzcalcexpr}
+
+```go
+FuzzCalcExpr() map[string]any
+```
+
+生成一组用于表达式注入(SSTI/计算型)探测的随机日期相关变量与计算表达式
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` | 包含 year、month、day、expr、result 等键的变量表，用于构造与校验计算型注入 payload |
+
+**示例**
 
 ``````````````yak
 // 生成计算型注入变量，此处仅作示意
@@ -49,30 +79,23 @@ vars = fuzz.FuzzCalcExpr()
 println(vars["expr"])
 ``````````````
 
+---
 
-#### 定义
+### FuzzCalcExprInt32Safe {#fuzzcalcexprint32safe}
 
-`FuzzCalcExpr() map[string]any`
+```go
+FuzzCalcExprInt32Safe() map[string]any
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `map[string]any` | 包含 year、month、day、expr、result 等键的变量表，用于构造与校验计算型注入 payload |
+生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int32 安全范围内
 
+**返回值**
 
-### FuzzCalcExprInt32Safe
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` | 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload |
 
-#### 详细描述
-FuzzCalcExprInt32Safe 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int32 安全范围内
-
-返回值:
-
-  - 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 生成 int32 安全的计算型注入变量，此处仅作示意
@@ -80,30 +103,23 @@ vars = fuzz.FuzzCalcExprInt32Safe()
 println(vars["expr"])
 ``````````````
 
+---
 
-#### 定义
+### FuzzCalcExprInt64Safe {#fuzzcalcexprint64safe}
 
-`FuzzCalcExprInt32Safe() map[string]any`
+```go
+FuzzCalcExprInt64Safe() map[string]any
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int64 安全范围内
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `map[string]any` | 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload |
 
-
-### FuzzCalcExprInt64Safe
-
-#### 详细描述
-FuzzCalcExprInt64Safe 生成一组用于表达式注入(SSTI/计算型)探测的随机变量，保证减法结果在 int64 安全范围内
-
-返回值:
-
-  - 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 生成 int64 安全的计算型注入变量，此处仅作示意
@@ -111,40 +127,380 @@ vars = fuzz.FuzzCalcExprInt64Safe()
 println(vars["expr"])
 ``````````````
 
+---
 
-#### 定义
+### ProtobufBytes {#protobufbytes}
 
-`FuzzCalcExprInt64Safe() map[string]any`
+```go
+ProtobufBytes(i any) *ProtobufRecords
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `map[string]any` | 包含 num1、num2、expr、result 等键的变量表，用于构造与校验计算型注入 payload |
+解析 Protobuf 编码的字节流，返回可读取/变形的 Protobuf 记录集合对象
 
+**参数**
 
-### HTTPRequest
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | Protobuf 编码的字节流（字符串或字节数组） |
 
-#### 详细描述
-HTTPRequest 根据原始请求报文构造一个 HTTP Fuzz 请求对象，用于对请求各部分进行参数变形与发包
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于查看与 fuzz 变形 |
 
-  - i: 原始 HTTP 请求报文（字符串、字节数组或 *http.Request）
+**示例**
 
-  - opts: 可选构造选项，例如 fuzz.https、fuzz.proxy、fuzz.noEncode
+``````````````yak
+// 解析 protobuf 字节流并打印结构，此处仅作示意
+records = fuzz.ProtobufBytes(raw)
+println(records.String())
+``````````````
 
+---
 
+### ProtobufHex {#protobufhex}
 
-返回值:
+```go
+ProtobufHex(i any) *ProtobufRecords
+```
 
-  - 构造好的 HTTP Fuzz 请求对象
+解析十六进制字符串表示的 Protobuf 编码数据，返回可读取/变形的 Protobuf 记录集合对象
 
-  - 错误信息，报文解析失败时返回非空
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 十六进制编码的 Protobuf 数据字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于查看与 fuzz 变形 |
 
-Example:
+**示例**
+
+``````````````yak
+// 解析 hex 形式的 protobuf 数据，此处仅作示意
+records = fuzz.ProtobufHex("0a0568656c6c6f")
+println(records.String())
+``````````````
+
+---
+
+### ProtobufJSON {#protobufjson}
+
+```go
+ProtobufJSON(i any) *ProtobufRecords
+```
+
+从 JSON 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToJSON 互逆）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 描述 Protobuf 记录的 JSON 字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形 |
+
+**示例**
+
+``````````````yak
+// 从 JSON 还原 protobuf 记录，此处仅作示意
+records = fuzz.ProtobufJSON(jsonStr)
+println(records.ToHex())
+``````````````
+
+---
+
+### ProtobufYAML {#protobufyaml}
+
+```go
+ProtobufYAML(i any) *ProtobufRecords
+```
+
+从 YAML 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToYAML 互逆）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 描述 Protobuf 记录的 YAML 字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形 |
+
+**示例**
+
+``````````````yak
+// 从 YAML 还原 protobuf 记录，此处仅作示意
+records = fuzz.ProtobufYAML(yamlStr)
+println(records.ToHex())
+``````````````
+
+---
+
+### Strings {#strings}
+
+```go
+Strings(i any) []string
+```
+
+使用 fuzztag 渲染规则，将一个模板字符串展开成一组字符串结果
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 含 fuzztag 的模板（如 &#34;{{i(1-3)}}&#34;），也可以是普通字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` | 渲染展开后的字符串列表 |
+
+**示例：示例：fuzz.Strings 的基本用法(整数范围展开)**
+
+``````````````yak
+// 关键词: fuzz.Strings, fuzztag, 整数范围
+// {{int(a-b)}} 把闭区间内每个整数都展开成一个结果, 常用于遍历 id/页码等
+results = fuzz.Strings("id={{int(1-3)}}")
+println(results)   // 预期输出: [id=1 id=2 id=3]
+assert len(results) == 3, "int(1-3) should expand to 3 results"
+``````````````
+
+**示例：示例：fuzz.Strings 的列表与笛卡尔组合**
+
+``````````````yak
+// 关键词: fuzz.Strings, list, 笛卡尔积
+// {{list(a|b|c)}} 按 | 分隔逐项展开
+single = fuzz.Strings("{{list(admin|root|guest)}}")
+println(single)    // 预期输出: [admin root guest]
+assert len(single) == 3, "list should expand to 3 payloads"
+// 同一模板里有多个 fuzztag 时, 各标签的结果做笛卡尔积组合
+combo = fuzz.Strings("{{int(1-2)}}-{{list(x|y)}}") // 2 x 2 = 4 种组合
+println(combo)     // 预期输出: [1-x 2-x 1-y 2-y]
+assert len(combo) == 4, "two tags should form a cartesian product"
+``````````````
+
+---
+
+### StringsWithParam {#stringswithparam}
+
+```go
+StringsWithParam(i any, i2 any) []string
+```
+
+使用 fuzztag 渲染模板，并允许传入额外的命名参数表参与渲染
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 含 fuzztag 的模板字符串 |
+| i2 | `any` | 额外参数表（map），可被模板中的 {{params(...)}} 等标签引用 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` | 渲染展开后的字符串列表 |
+
+**示例**
+
+``````````````yak
+results = fuzz.StringsWithParam("{{params(p)}}", {"p": "abc"})
+println(results)   // OUT: [abc]
+assert results[0] == "abc", "param p should be rendered into result"
+``````````````
+
+---
+
+### UrlToHTTPRequest {#urltohttprequest}
+
+```go
+UrlToHTTPRequest(method string, i any) (*mutate.FuzzHTTPRequest, error)
+```
+
+根据请求方法与 URL 构造一个 HTTP Fuzz 请求对象，便于后续做参数变形与发包
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| method | `string` | 请求方法，如 &#34;GET&#34;、&#34;POST&#34; |
+| i | `any` | 目标 URL |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*mutate.FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象 |
+| r2 | `error` | 错误信息，URL 解析失败时返回非空 |
+
+**示例**
+
+``````````````yak
+freq = fuzz.UrlToHTTPRequest("GET", "https://www.example.com/a?b=1")~
+freq.Show()
+``````````````
+
+---
+
+### WithConcurrentLimit {#withconcurrentlimit}
+
+```go
+WithConcurrentLimit(i int) HttpPoolConfigOption
+```
+
+size 是一个 HTTP 连接池/批量请求配置选项，用于设置并发请求数量（并发上限）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `int` | 并发数量 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等 |
+
+**示例**
+
+``````````````yak
+// 设置 20 并发，依赖网络，无法本地验证(仅作示意)
+res = httpool.Pool(reqs, httpool.size(20))~
+``````````````
+
+---
+
+### WithDelay {#withdelay}
+
+```go
+WithDelay(b float64) HttpPoolConfigOption
+```
+
+delay 是一个 HTTP 连接池/批量请求配置选项，用于设置每个请求之间的固定延迟秒数
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| b | `float64` | 延迟时间，单位为秒，支持小数 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz.Exec / fuzzx 等 |
+
+**示例**
+
+``````````````yak
+// 设置每个请求间隔 1 秒，依赖网络，无法本地验证(仅作示意)
+res = httpool.Pool(reqs, fuzzx.delay(1))~
+``````````````
+
+---
+
+### WithNamingContext {#withnamingcontext}
+
+```go
+WithNamingContext(invokerName string) HttpPoolConfigOption
+```
+
+namingContext 是一个 HTTP 连接池/批量请求配置选项，用于设置命名调用上下文以便对并发任务进行分组限流
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| invokerName | `string` | 调用者名称，用于并发分组标识 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 fuzz / fuzzx 等 |
+
+**示例**
+
+``````````````yak
+// 设置命名调用上下文，依赖网络，无法本地验证(仅作示意)
+res = httpool.Pool(reqs, fuzzx.namingContext("scan-group-1"))~
+``````````````
+
+---
+
+### WithTimeOut {#withtimeout}
+
+```go
+WithTimeOut(f float64) HttpPoolConfigOption
+```
+
+perRequestTimeout 是一个 HTTP 连接池/批量请求配置选项，用于设置单个请求的超时时间（单位：秒）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| f | `float64` | 超时时间，单位为秒，支持小数 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等 |
+
+**示例**
+
+``````````````yak
+// 设置单请求超时 5 秒，依赖网络，无法本地验证(仅作示意)
+res = httpool.Pool(reqs, httpool.perRequestTimeout(5))~
+``````````````
+
+---
+
+## 可变参数函数详情
+
+### HTTPRequest {#httprequest}
+
+```go
+HTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) (*FuzzHTTPRequest, error)
+```
+
+根据原始请求报文构造一个 HTTP Fuzz 请求对象，用于对请求各部分进行参数变形与发包
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 原始 HTTP 请求报文（字符串、字节数组或 *http.Request） |
+
+**可选参数**
+
+可作为可变参数 `opts ...BuildFuzzHTTPRequestOption` 传入选项；共 6 个可用选项，详见 [BuildFuzzHTTPRequestOption 选项列表](#option-buildfuzzhttprequestoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象 |
+| r2 | `error` | 错误信息，报文解析失败时返回非空 |
+
+**示例**
 
 ``````````````yak
 raw = `GET /?a=1 HTTP/1.1
@@ -155,45 +511,33 @@ freq = fuzz.HTTPRequest(raw)~
 freq.Show()
 ``````````````
 
+---
 
-#### 定义
+### MustHTTPRequest {#musthttprequest}
 
-`HTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) (*FuzzHTTPRequest, error)`
+```go
+MustHTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) *FuzzHTTPRequest
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+根据原始请求报文构造一个 HTTP Fuzz 请求对象，构造失败时不返回错误（仅记录日志），便于链式调用
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 原始 HTTP 请求报文（字符串、字节数组或 *http.Request） |
-| opts | `...BuildFuzzHTTPRequestOption` | 可选构造选项，例如 fuzz.https、fuzz.proxy、fuzz.noEncode |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象 |
-| r2 | `error` | 错误信息，报文解析失败时返回非空 |
+**可选参数**
 
+可作为可变参数 `opts ...BuildFuzzHTTPRequestOption` 传入选项；共 6 个可用选项，详见 [BuildFuzzHTTPRequestOption 选项列表](#option-buildfuzzhttprequestoption)。
 
-### MustHTTPRequest
+**返回值**
 
-#### 详细描述
-MustHTTPRequest 根据原始请求报文构造一个 HTTP Fuzz 请求对象，构造失败时不返回错误（仅记录日志），便于链式调用
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象（失败时可能为 nil） |
 
-参数:
-
-  - i: 原始 HTTP 请求报文（字符串、字节数组或 *http.Request）
-
-  - opts: 可选构造选项，例如 fuzz.https、fuzz.proxy
-
-
-
-返回值:
-
-  - 构造好的 HTTP Fuzz 请求对象（失败时可能为 nil）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 raw = `GET / HTTP/1.1
@@ -204,256 +548,36 @@ freq = fuzz.MustHTTPRequest(raw)
 freq.Show()
 ``````````````
 
+---
 
-#### 定义
+### StringsFunc {#stringsfunc}
 
-`MustHTTPRequest(i any, opts ...BuildFuzzHTTPRequestOption) *FuzzHTTPRequest`
+```go
+StringsFunc(i any, cb func(i *mutate.MutateResult), params ...any) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 原始 HTTP 请求报文（字符串、字节数组或 *http.Request） |
-| opts | `...BuildFuzzHTTPRequestOption` | 可选构造选项，例如 fuzz.https、fuzz.proxy |
+使用 fuzztag 渲染模板，并为每个渲染结果回调一次，便于流式处理大量结果
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象（失败时可能为 nil） |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 含 fuzztag 的模板字符串 |
+| cb | `func(i *mutate.MutateResult)` | 针对每个渲染结果触发的回调函数，参数为单个变形结果 |
 
-### ProtobufBytes
+**可选参数**
 
-#### 详细描述
-ProtobufBytes 解析 Protobuf 编码的字节流，返回可读取/变形的 Protobuf 记录集合对象
+|参数名|类型|说明|
+|:--|:--|:--|
+| params | `...any` | 可选的额外参数表，参与模板渲染 |
 
-参数:
+**返回值**
 
-  - i: Protobuf 编码的字节流（字符串或字节数组）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息，渲染失败时返回非空 |
 
-
-
-返回值:
-
-  - Protobuf 记录集合对象，可用于查看与 fuzz 变形
-
-
-
-
-Example:
-
-``````````````yak
-// 解析 protobuf 字节流并打印结构，此处仅作示意
-records = fuzz.ProtobufBytes(raw)
-println(records.String())
-``````````````
-
-
-#### 定义
-
-`ProtobufBytes(i any) *ProtobufRecords`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | Protobuf 编码的字节流（字符串或字节数组） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于查看与 fuzz 变形 |
-
-
-### ProtobufHex
-
-#### 详细描述
-ProtobufHex 解析十六进制字符串表示的 Protobuf 编码数据，返回可读取/变形的 Protobuf 记录集合对象
-
-参数:
-
-  - i: 十六进制编码的 Protobuf 数据字符串
-
-
-
-返回值:
-
-  - Protobuf 记录集合对象，可用于查看与 fuzz 变形
-
-
-
-
-Example:
-
-``````````````yak
-// 解析 hex 形式的 protobuf 数据，此处仅作示意
-records = fuzz.ProtobufHex("0a0568656c6c6f")
-println(records.String())
-``````````````
-
-
-#### 定义
-
-`ProtobufHex(i any) *ProtobufRecords`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 十六进制编码的 Protobuf 数据字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于查看与 fuzz 变形 |
-
-
-### ProtobufJSON
-
-#### 详细描述
-ProtobufJSON 从 JSON 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToJSON 互逆）
-
-参数:
-
-  - i: 描述 Protobuf 记录的 JSON 字符串
-
-
-
-返回值:
-
-  - Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形
-
-
-
-
-Example:
-
-``````````````yak
-// 从 JSON 还原 protobuf 记录，此处仅作示意
-records = fuzz.ProtobufJSON(jsonStr)
-println(records.ToHex())
-``````````````
-
-
-#### 定义
-
-`ProtobufJSON(i any) *ProtobufRecords`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 描述 Protobuf 记录的 JSON 字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形 |
-
-
-### ProtobufYAML
-
-#### 详细描述
-ProtobufYAML 从 YAML 描述还原 Protobuf 记录集合对象（与 ProtobufRecords.ToYAML 互逆）
-
-参数:
-
-  - i: 描述 Protobuf 记录的 YAML 字符串
-
-
-
-返回值:
-
-  - Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形
-
-
-
-
-Example:
-
-``````````````yak
-// 从 YAML 还原 protobuf 记录，此处仅作示意
-records = fuzz.ProtobufYAML(yamlStr)
-println(records.ToHex())
-``````````````
-
-
-#### 定义
-
-`ProtobufYAML(i any) *ProtobufRecords`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 描述 Protobuf 记录的 YAML 字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ProtobufRecords` | Protobuf 记录集合对象，可用于序列化回字节流或 fuzz 变形 |
-
-
-### Strings
-
-#### 详细描述
-Strings 使用 fuzztag 渲染规则，将一个模板字符串展开成一组字符串结果
-
-参数:
-
-  - i: 含 fuzztag 的模板（如 &#34;{{i(1-3)}}&#34;），也可以是普通字符串
-
-
-
-返回值:
-
-  - 渲染展开后的字符串列表
-
-
-
-
-Example:
-
-``````````````yak
-results = fuzz.Strings("{{i(1-3)}}")
-println(results)   // OUT: [1 2 3]
-assert len(results) == 3, "i(1-3) should expand to 3 results"
-``````````````
-
-
-#### 定义
-
-`Strings(i any) []string`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 含 fuzztag 的模板（如 &#34;{{i(1-3)}}&#34;），也可以是普通字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]string` | 渲染展开后的字符串列表 |
-
-
-### StringsFunc
-
-#### 详细描述
-StringsFunc 使用 fuzztag 渲染模板，并为每个渲染结果回调一次，便于流式处理大量结果
-
-参数:
-
-  - i: 含 fuzztag 的模板字符串
-
-  - cb: 针对每个渲染结果触发的回调函数，参数为单个变形结果
-
-  - params: 可选的额外参数表，参与模板渲染
-
-
-
-返回值:
-
-  - 错误信息，渲染失败时返回非空
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 fuzz.StringsFunc("{{i(1-3)}}", func(result) {
@@ -461,557 +585,52 @@ fuzz.StringsFunc("{{i(1-3)}}", func(result) {
 })~
 ``````````````
 
+---
 
-#### 定义
+### UrlsToHTTPRequests {#urlstohttprequests}
 
-`StringsFunc(i any, cb func(i *mutate.MutateResult), params ...any) error`
+```go
+UrlsToHTTPRequests(target ...any) (*FuzzHTTPRequestBatch, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 含 fuzztag 的模板字符串 |
-| cb | `func(i *mutate.MutateResult)` | 针对每个渲染结果触发的回调函数，参数为单个变形结果 |
-| params | `...any` | 可选的额外参数表，参与模板渲染 |
+将一个或多个 URL 转换成可批量变形发包的 HTTP Fuzz 请求批次对象
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息，渲染失败时返回非空 |
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| target | `...any` | 一个或多个 URL（字符串），支持 fuzztag 展开 |
 
-### StringsWithParam
+**返回值**
 
-#### 详细描述
-StringsWithParam 使用 fuzztag 渲染模板，并允许传入额外的命名参数表参与渲染
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*FuzzHTTPRequestBatch` | HTTP Fuzz 请求批次对象，可对其统一做参数变形与批量发包 |
+| r2 | `error` | 错误信息，无有效请求时返回非空 |
 
-参数:
-
-  - i: 含 fuzztag 的模板字符串
-
-  - i2: 额外参数表（map），可被模板中的 {{params(...)}} 等标签引用
-
-
-
-返回值:
-
-  - 渲染展开后的字符串列表
-
-
-
-
-Example:
-
-``````````````yak
-results = fuzz.StringsWithParam("{{params(p)}}", {"p": "abc"})
-println(results)   // OUT: [abc]
-assert results[0] == "abc", "param p should be rendered into result"
-``````````````
-
-
-#### 定义
-
-`StringsWithParam(i any, i2 any) []string`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 含 fuzztag 的模板字符串 |
-| i2 | `any` | 额外参数表（map），可被模板中的 {{params(...)}} 等标签引用 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]string` | 渲染展开后的字符串列表 |
-
-
-### UrlToHTTPRequest
-
-#### 详细描述
-UrlToHTTPRequest 根据请求方法与 URL 构造一个 HTTP Fuzz 请求对象，便于后续做参数变形与发包
-
-参数:
-
-  - method: 请求方法，如 &#34;GET&#34;、&#34;POST&#34;
-
-  - i: 目标 URL
-
-
-
-返回值:
-
-  - 构造好的 HTTP Fuzz 请求对象
-
-  - 错误信息，URL 解析失败时返回非空
-
-
-
-
-Example:
-
-``````````````yak
-freq = fuzz.UrlToHTTPRequest("GET", "https://www.example.com/a?b=1")~
-freq.Show()
-``````````````
-
-
-#### 定义
-
-`UrlToHTTPRequest(method string, i any) (*mutate.FuzzHTTPRequest, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| method | `string` | 请求方法，如 &#34;GET&#34;、&#34;POST&#34; |
-| i | `any` | 目标 URL |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*mutate.FuzzHTTPRequest` | 构造好的 HTTP Fuzz 请求对象 |
-| r2 | `error` | 错误信息，URL 解析失败时返回非空 |
-
-
-### UrlsToHTTPRequests
-
-#### 详细描述
-UrlsToHTTPRequests 将一个或多个 URL 转换成可批量变形发包的 HTTP Fuzz 请求批次对象
-
-参数:
-
-  - target: 一个或多个 URL（字符串），支持 fuzztag 展开
-
-
-
-返回值:
-
-  - HTTP Fuzz 请求批次对象，可对其统一做参数变形与批量发包
-
-  - 错误信息，无有效请求时返回非空
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 batch = fuzz.UrlsToHTTPRequests("https://www.example.com/", "https://www.example.com/login")~
 batch.Show()
 ``````````````
 
+---
 
-#### 定义
+## 可变参数选项列表
 
-`UrlsToHTTPRequests(target ...any) (*FuzzHTTPRequestBatch, error)`
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| target | `...any` | 一个或多个 URL（字符串），支持 fuzztag 展开 |
+### 1. 类型：BuildFuzzHTTPRequestOption {#option-buildfuzzhttprequestoption}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*FuzzHTTPRequestBatch` | HTTP Fuzz 请求批次对象，可对其统一做参数变形与批量发包 |
-| r2 | `error` | 错误信息，无有效请求时返回非空 |
+涉及到的函数有：[fuzz.HTTPRequest](#httprequest)、[fuzz.MustHTTPRequest](#musthttprequest)
 
-
-### WithConcurrentLimit
-
-#### 详细描述
-size 是一个 HTTP 连接池/批量请求配置选项，用于设置并发请求数量（并发上限）
-
-参数:
-
-  - i: 并发数量
-
-
-
-返回值:
-
-  - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等
-
-
-
-
-Example:
-
-``````````````yak
-// 设置 20 并发，依赖网络，此处仅作示意
-res = httpool.Pool(reqs, httpool.size(20))~
-``````````````
-
-
-#### 定义
-
-`WithConcurrentLimit(i int) HttpPoolConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` | 并发数量 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等 |
-
-
-### WithDelay
-
-#### 详细描述
-delay 是一个 HTTP 连接池/批量请求配置选项，用于设置每个请求之间的固定延迟秒数
-
-参数:
-
-  - b: 延迟时间，单位为秒，支持小数
-
-
-
-返回值:
-
-  - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz.Exec / fuzzx 等
-
-
-
-
-Example:
-
-``````````````yak
-// 设置每个请求间隔 1 秒，依赖网络，此处仅作示意
-res = httpool.Pool(reqs, fuzzx.delay(1))~
-``````````````
-
-
-#### 定义
-
-`WithDelay(b float64) HttpPoolConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| b | `float64` | 延迟时间，单位为秒，支持小数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz.Exec / fuzzx 等 |
-
-
-### WithNamingContext
-
-#### 详细描述
-namingContext 是一个 HTTP 连接池/批量请求配置选项，用于设置命名调用上下文以便对并发任务进行分组限流
-
-参数:
-
-  - invokerName: 调用者名称，用于并发分组标识
-
-
-
-返回值:
-
-  - 一个连接池配置选项，作为可变参数传入 fuzz / fuzzx 等
-
-
-
-
-Example:
-
-``````````````yak
-// 设置命名调用上下文，依赖网络，此处仅作示意
-res = httpool.Pool(reqs, fuzzx.namingContext("scan-group-1"))~
-``````````````
-
-
-#### 定义
-
-`WithNamingContext(invokerName string) HttpPoolConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| invokerName | `string` | 调用者名称，用于并发分组标识 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 fuzz / fuzzx 等 |
-
-
-### WithTimeOut
-
-#### 详细描述
-perRequestTimeout 是一个 HTTP 连接池/批量请求配置选项，用于设置单个请求的超时时间（单位：秒）
-
-参数:
-
-  - f: 超时时间，单位为秒，支持小数
-
-
-
-返回值:
-
-  - 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等
-
-
-
-
-Example:
-
-``````````````yak
-// 设置单请求超时 5 秒，依赖网络，此处仅作示意
-res = httpool.Pool(reqs, httpool.perRequestTimeout(5))~
-``````````````
-
-
-#### 定义
-
-`WithTimeOut(f float64) HttpPoolConfigOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| f | `float64` | 超时时间，单位为秒，支持小数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `HttpPoolConfigOption` | 一个连接池配置选项，作为可变参数传入 httpool.Pool / fuzz / fuzzx 等 |
-
-
-### context
-
-#### 详细描述
-context 是一个 HTTP Fuzz 请求构造选项，用于传入上下文以便外部取消变形与发包任务
-
-参数:
-
-  - ctx: 上下文对象
-
-
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 传入可取消上下文，依赖网络，此处仅作示意
-ctx = context.New()
-freq = fuzz.HTTPRequest(raw, fuzz.context(ctx))~
-``````````````
-
-
-#### 定义
-
-`context(ctx context.Context) BuildFuzzHTTPRequestOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` | 上下文对象 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
-
-### https
-
-#### 详细描述
-https 是一个 HTTP Fuzz 请求构造选项，用于设置该请求是否以 HTTPS 协议发送
-
-参数:
-
-  - i: 是否使用 HTTPS
-
-
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 以 HTTPS 构造请求，依赖网络，此处仅作示意
-freq = fuzz.HTTPRequest(raw, fuzz.https(true))~
-``````````````
-
-
-#### 定义
-
-`https(i bool) BuildFuzzHTTPRequestOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `bool` | 是否使用 HTTPS |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
-
-### noEncode
-
-#### 详细描述
-noEncode 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对 fuzz 结果的自动编码
-
-参数:
-
-  - i: 是否禁用自动编码
-
-
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 禁用自动编码，依赖网络，此处仅作示意
-freq = fuzz.HTTPRequest(raw, fuzz.noEncode(true))~
-``````````````
-
-
-#### 定义
-
-`noEncode(i bool) BuildFuzzHTTPRequestOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `bool` | 是否禁用自动编码 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
-
-### noEscapeHTML
-
-#### 详细描述
-noEscapeHTML 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对内容的 HTML 转义
-
-参数:
-
-  - i: 是否禁用 HTML 转义
-
-
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 禁用 HTML 转义，依赖网络，此处仅作示意
-freq = fuzz.HTTPRequest(raw, fuzz.noEscapeHTML(true))~
-``````````````
-
-
-#### 定义
-
-`noEscapeHTML(i bool) BuildFuzzHTTPRequestOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `bool` | 是否禁用 HTML 转义 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
-
-### proxy
-
-#### 详细描述
-proxy 是一个 HTTP Fuzz 请求构造选项，用于设置发包时使用的代理地址
-
-参数:
-
-  - i: 代理地址，支持 http、https、socks5 协议
-
-
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 通过代理构造并发包，依赖网络，此处仅作示意
-freq = fuzz.HTTPRequest(raw, fuzz.proxy("http://127.0.0.1:8083"))~
-``````````````
-
-
-#### 定义
-
-`proxy(i string) BuildFuzzHTTPRequestOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 代理地址，支持 http、https、socks5 协议 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
-
-### showTag
-
-#### 详细描述
-showTag 是一个 HTTP Fuzz 请求构造选项，用于以更友好的方式展示 fuzztag（便于阅读与调试）
-
-返回值:
-
-  - 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等
-
-
-
-
-Example:
-
-``````````````yak
-// 友好展示 fuzztag，依赖网络，此处仅作示意
-freq = fuzz.HTTPRequest(raw, fuzz.showTag())~
-``````````````
-
-
-#### 定义
-
-`showTag() BuildFuzzHTTPRequestOption`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BuildFuzzHTTPRequestOption` | 一个 Fuzz 请求构造选项，作为可变参数传入 fuzz.HTTPRequest 等 |
-
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `fuzz.context` | `ctx context.Context` | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于传入上下文以便外部取消变形与发包任务 |
+| `fuzz.https` | `i bool` | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于设置该请求是否以 HTTPS 协议发送 |
+| `fuzz.noEncode` | `i bool` | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对 fuzz 结果的自动编码 |
+| `fuzz.noEscapeHTML` | `i bool` | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于设置是否禁用对内容的 HTML 转义 |
+| `fuzz.proxy` | `i string` | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于设置发包时使用的代理地址 |
+| `fuzz.showTag` | - | `BuildFuzzHTTPRequestOption` | 是一个 HTTP Fuzz 请求构造选项，用于以更友好的方式展示 fuzztag（便于阅读与调试） |
 

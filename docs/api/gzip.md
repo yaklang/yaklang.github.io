@@ -1,34 +1,48 @@
-# gzip
+# gzip {#library-gzip}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [gzip.Compress](#compress) |Compress 使用 gzip 压缩数据，返回压缩后的字节与错误 参数: - i: 待压缩的数据，支持字符串、字节切片或 io.Reader 返回值: - 压缩后的字节切片（带 gzip 魔数头） - 错误信息|
-| [gzip.Decompress](#decompress) |Decompress 解压 gzip 数据，返回解压后的字节与错误 参数: - ret: 经过 gzip 压缩的字节切片 返回值: - 解压还原后的字节切片 - 错误信息|
-| [gzip.IsGzip](#isgzip) |IsGzip 判断给定字节切片是否为 gzip 压缩数据（通过检查魔数头） 参数: - raw: 待检测的字节切片 返回值: - 是否为 gzip 数据（以 0x1f 0x8b 0x08 开头则为 true）|
+`gzip` 库提供 gzip 压缩与解压能力，用于处理 HTTP 响应、日志、归档等 gzip 编码的数据。
 
+典型使用场景：
 
-## 函数定义
-### Compress
+- 压缩/解压：`gzip.Compress` 压缩数据，`gzip.Decompress` 解压。
+- 识别：`gzip.IsGzip` 判断字节流是否为 gzip 格式。
 
-#### 详细描述
-Compress 使用 gzip 压缩数据，返回压缩后的字节与错误
+与相邻库的关系：`gzip` 是数据处理小工具，常与 `http`/`poc`（处理压缩响应）、`zip`（归档）、`codec`（编解码）配合。
 
-参数:
+> 共 3 个函数
 
-  - i: 待压缩的数据，支持字符串、字节切片或 io.Reader
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [gzip.Compress](#compress) | `i any` | `[]byte, error` | 使用 gzip 压缩数据，返回压缩后的字节与错误 |
+| [gzip.Decompress](#decompress) | `ret []byte` | `[]byte, error` | 解压 gzip 数据，返回解压后的字节与错误 |
+| [gzip.IsGzip](#isgzip) | `raw []byte` | `bool` | 判断给定字节切片是否为 gzip 压缩数据（通过检查魔数头） |
 
+## 函数详情
 
-返回值:
+### Compress {#compress}
 
-  - 压缩后的字节切片（带 gzip 魔数头）
+```go
+Compress(i any) ([]byte, error)
+```
 
-  - 错误信息
+使用 gzip 压缩数据，返回压缩后的字节与错误
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待压缩的数据，支持字符串、字节切片或 io.Reader |
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 压缩后的字节切片（带 gzip 魔数头） |
+| r2 | `error` | 错误信息 |
+
+**示例**
 
 ``````````````yak
 // 压缩后再解压应还原原始数据（round-trip）
@@ -39,44 +53,30 @@ assert string(raw) == "hello yaklang", "gzip compress then decompress should rou
 println("gzip round-trip example passed")
 ``````````````
 
+---
 
-#### 定义
+### Decompress {#decompress}
 
-`Compress(i any) ([]byte, error)`
+```go
+Decompress(ret []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待压缩的数据，支持字符串、字节切片或 io.Reader |
+解压 gzip 数据，返回解压后的字节与错误
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 压缩后的字节切片（带 gzip 魔数头） |
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ret | `[]byte` | 经过 gzip 压缩的字节切片 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 解压还原后的字节切片 |
 | r2 | `error` | 错误信息 |
 
-
-### Decompress
-
-#### 详细描述
-Decompress 解压 gzip 数据，返回解压后的字节与错误
-
-参数:
-
-  - ret: 经过 gzip 压缩的字节切片
-
-
-
-返回值:
-
-  - 解压还原后的字节切片
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 压缩再解压应还原原始数据（round-trip）
@@ -86,42 +86,29 @@ assert string(raw) == "hello yaklang", "gzip decompress should restore original 
 println("gzip decompress example passed")
 ``````````````
 
+---
 
-#### 定义
+### IsGzip {#isgzip}
 
-`Decompress(ret []byte) ([]byte, error)`
+```go
+IsGzip(raw []byte) bool
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ret | `[]byte` | 经过 gzip 压缩的字节切片 |
+判断给定字节切片是否为 gzip 压缩数据（通过检查魔数头）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 解压还原后的字节切片 |
-| r2 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | 待检测的字节切片 |
 
-### IsGzip
+**返回值**
 
-#### 详细描述
-IsGzip 判断给定字节切片是否为 gzip 压缩数据（通过检查魔数头）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否为 gzip 数据（以 0x1f 0x8b 0x08 开头则为 true） |
 
-参数:
-
-  - raw: 待检测的字节切片
-
-
-
-返回值:
-
-  - 是否为 gzip 数据（以 0x1f 0x8b 0x08 开头则为 true）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 compressed = gzip.Compress("hello yaklang")~
@@ -130,19 +117,5 @@ assert gzip.IsGzip(compressed), "gzip output should be detected as gzip"
 assert !gzip.IsGzip("plain text"), "plain text should not be detected as gzip"
 ``````````````
 
-
-#### 定义
-
-`IsGzip(raw []byte) bool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | 待检测的字节切片 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否为 gzip 数据（以 0x1f 0x8b 0x08 开头则为 true） |
-
+---
 

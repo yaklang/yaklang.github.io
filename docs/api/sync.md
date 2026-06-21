@@ -1,28 +1,55 @@
-# sync
+# sync {#library-sync}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [sync.NewCond](#newcond) |NewCond 创建一个 Cond 结构体引用，即一个条件变量，参考golang官方文档：https&#58;//golang.org/pkg/sync/#Cond 条件变量是一种用于协调多个并发任务之间的同步机制，它允许一个任务等待某个条件成立，同时允许其他任务在条件成立时通知等待的任务|
-| [sync.NewLock](#newlock) |NewLock 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题 它实际是 NewMutex 的别名|
-| [sync.NewMap](#newmap) |NewMap 创建一个 Map 结构体引用，这个 Map 是并发安全的 返回值: - 新建的并发安全 Map 引用|
-| [sync.NewMutex](#newmutex) |NewMutex 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题|
-| [sync.NewOnce](#newonce) |NewOnce 创建一个 Once 结构体引用，其帮助我们确保某个函数只会被执行一次|
-| [sync.NewPool](#newpool) |NewPool 创建一个 Pool 结构体引用，其帮助我们复用临时对象，减少内存分配的次数|
-| [sync.NewRWMutex](#newrwmutex) |NewRWMutex 创建一个 RWMutex 结构体引用，用于实现读写锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题|
-| [sync.NewSizedWaitGroup](#newsizedwaitgroup) |NewSizedWaitGroup 创建一个 SizedWaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作 SizedWaitGroup 与 WaitGroup 的区别在于 SizedWaitGroup 可以限制并发任务的数量|
-| [sync.NewWaitGroup](#newwaitgroup) |NewWaitGroup 创建一个 WaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作|
+`sync` 库是 Go 标准库 `sync` 的 yak 封装，提供并发原语：互斥锁、读写锁、等待组、once、条件变量、并发安全 map 与对象池，是编写并发脚本的基础设施。
 
+典型使用场景：
 
-## 函数定义
-### NewCond
+- 锁：`sync.NewMutex` / `sync.NewLock` 互斥锁，`sync.NewRWMutex` 读写锁，`sync.NewCond` 条件变量。
+- 协作：`sync.NewWaitGroup` 等待一组协程结束，`sync.NewSizedWaitGroup` 带并发上限的等待组（常用于控制扫描并发），`sync.NewOnce` 只执行一次。
+- 容器：`sync.NewMap` 并发安全 map，`sync.NewPool` 对象池。
 
-#### 详细描述
-NewCond 创建一个 Cond 结构体引用，即一个条件变量，参考golang官方文档：https&#58;//golang.org/pkg/sync/#Cond
+与相邻库的关系：`sync` 是并发基础库，常与 `context`（取消控制）配合，在批量扫描、并发请求等场景中控制并发度与同步。
+
+> 共 9 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [sync.NewCond](#newcond) | - | `*sync.Cond` | 创建一个 Cond 结构体引用，即一个条件变量，参考golang官方文档：https&#58;//golang.org/pkg/sync/#Cond |
+| [sync.NewLock](#newlock) | - | `*sync.Mutex` | 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题 |
+| [sync.NewMap](#newmap) | - | `*sync.Map` | 创建一个 Map 结构体引用，这个 Map 是并发安全的 |
+| [sync.NewMutex](#newmutex) | - | `*sync.Mutex` | 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题 |
+| [sync.NewOnce](#newonce) | - | `*sync.Once` | 创建一个 Once 结构体引用，其帮助我们确保某个函数只会被执行一次 |
+| [sync.NewRWMutex](#newrwmutex) | - | `*sync.RWMutex` | 创建一个 RWMutex 结构体引用，用于实现读写锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题 |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [sync.NewPool](#newpool) | `newFunc ...func() any` | `*sync.Pool` | 创建一个 Pool 结构体引用，其帮助我们复用临时对象，减少内存分配的次数 |
+| [sync.NewSizedWaitGroup](#newsizedwaitgroup) | `size int, ctxs ...context.Context` | `*utils.SizedWaitGroup` | 创建一个 SizedWaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作 |
+| [sync.NewWaitGroup](#newwaitgroup) | `ctxs ...context.Context` | `*WaitGroupProxy` | 创建一个 WaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作 |
+
+## 函数详情
+
+### NewCond {#newcond}
+
+```go
+NewCond() *sync.Cond
+```
+
+创建一个 Cond 结构体引用，即一个条件变量，参考golang官方文档：https&#58;//golang.org/pkg/sync/#Cond
 
 条件变量是一种用于协调多个并发任务之间的同步机制，它允许一个任务等待某个条件成立，同时允许其他任务在条件成立时通知等待的任务
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Cond` | 新建的条件变量引用 |
+
+**示例**
 
 ``````````````yak
 c = sync.NewCond()
@@ -51,31 +78,27 @@ go read("reader2")
 go read("reader3")
 write("writer")
 time.sleep(3)
-
-返回值:
-  - 新建的条件变量引用
 ``````````````
 
+---
 
-#### 定义
+### NewLock {#newlock}
 
-`NewCond() *sync.Cond`
+```go
+NewLock() *sync.Mutex
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Cond` | 新建的条件变量引用 |
-
-
-### NewLock
-
-#### 详细描述
-NewLock 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
+创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
 
 它实际是 NewMutex 的别名
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Mutex` | 新建的互斥锁引用 |
+
+**示例**
 
 ``````````````yak
 m = sync.NewMutex()
@@ -90,35 +113,25 @@ newMap["key"] = "value" // 防止多个并发任务同时修改 newMap
 for {
 println(newMap["key"])
 }
-
-返回值:
-  - 新建的互斥锁引用
 ``````````````
 
+---
 
-#### 定义
+### NewMap {#newmap}
 
-`NewLock() *sync.Mutex`
+```go
+NewMap() *sync.Map
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Mutex` | 新建的互斥锁引用 |
+创建一个 Map 结构体引用，这个 Map 是并发安全的
 
+**返回值**
 
-### NewMap
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Map` | 新建的并发安全 Map 引用 |
 
-#### 详细描述
-NewMap 创建一个 Map 结构体引用，这个 Map 是并发安全的
-
-返回值:
-
-  - 新建的并发安全 Map 引用
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 并发安全 map 的基本存取
@@ -131,24 +144,23 @@ println(v)   // OUT: value
 assert ok == true, "stored key should be loadable"
 ``````````````
 
+---
 
-#### 定义
+### NewMutex {#newmutex}
 
-`NewMap() *sync.Map`
+```go
+NewMutex() *sync.Mutex
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Map` | 新建的并发安全 Map 引用 |
+创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
 
+**返回值**
 
-### NewMutex
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Mutex` | 新建的互斥锁引用 |
 
-#### 详细描述
-NewMutex 创建一个 Mutex 结构体引用，用于实现互斥锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
-
-
-Example:
+**示例**
 
 ``````````````yak
 m = sync.NewMutex()
@@ -163,101 +175,50 @@ newMap["key"] = "value" // 防止多个并发任务同时修改 newMap
 for {
 println(newMap["key"])
 }
-
-返回值:
-  - 新建的互斥锁引用
 ``````````````
 
+---
 
-#### 定义
+### NewOnce {#newonce}
 
-`NewMutex() *sync.Mutex`
+```go
+NewOnce() *sync.Once
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Mutex` | 新建的互斥锁引用 |
+创建一个 Once 结构体引用，其帮助我们确保某个函数只会被执行一次
 
+**返回值**
 
-### NewOnce
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Once` | 新建的 Once 引用 |
 
-#### 详细描述
-NewOnce 创建一个 Once 结构体引用，其帮助我们确保某个函数只会被执行一次
-
-
-Example:
+**示例**
 
 ``````````````yak
 o = sync.NewOnce()
 for i in 10 {
 o.Do(func() { println("this message will only print once") })
 }
-
-返回值:
-  - 新建的 Once 引用
 ``````````````
 
+---
 
-#### 定义
+### NewRWMutex {#newrwmutex}
 
-`NewOnce() *sync.Once`
+```go
+NewRWMutex() *sync.RWMutex
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Once` | 新建的 Once 引用 |
+创建一个 RWMutex 结构体引用，用于实现读写锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
 
+**返回值**
 
-### NewPool
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.RWMutex` | 新建的读写锁引用 |
 
-#### 详细描述
-NewPool 创建一个 Pool 结构体引用，其帮助我们复用临时对象，减少内存分配的次数
-
-
-Example:
-
-``````````````yak
-p = sync.NewPool(func() {
-return make(map[string]string)
-})
-m = p.Get() // 从 Pool 中获取，如果 Pool 中没有，则会调用传入的第一个参数函数，返回一个新的 map[string]string
-m["1"] = "2"
-println(m) // {"1": "2"}
-// 将 m 放回 Pool 中
-p.Put(m)
-m2 = p.Get() // 从 Pool 中获取，实际上我们获取到的是刚 Put 进去的 m
-println(m2) // {"1": "2"}
-
-参数:
-  - newFunc: 可选的对象构造函数，当 Pool 为空时用于创建新对象
-
-返回值:
-  - 新建的对象池引用
-``````````````
-
-
-#### 定义
-
-`NewPool(newFunc ...func() any) *sync.Pool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| newFunc | `...func() any` | 可选的对象构造函数，当 Pool 为空时用于创建新对象 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.Pool` | 新建的对象池引用 |
-
-
-### NewRWMutex
-
-#### 详细描述
-NewRWMutex 创建一个 RWMutex 结构体引用，用于实现读写锁，其帮助我们避免多个并发任务访问同一个资源时出现数据竞争问题
-
-
-Example:
+**示例**
 
 ``````````````yak
 m = sync.NewRWMutex()
@@ -274,31 +235,78 @@ m.RLock()         // 请求读锁
 defer m.RUnlock() // 释放读锁
 println(newMap["key"])
 }
-
-返回值:
-  - 新建的读写锁引用
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`NewRWMutex() *sync.RWMutex`
+### NewPool {#newpool}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*sync.RWMutex` | 新建的读写锁引用 |
+```go
+NewPool(newFunc ...func() any) *sync.Pool
+```
 
+创建一个 Pool 结构体引用，其帮助我们复用临时对象，减少内存分配的次数
 
-### NewSizedWaitGroup
+**可选参数**
 
-#### 详细描述
-NewSizedWaitGroup 创建一个 SizedWaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作
+|参数名|类型|说明|
+|:--|:--|:--|
+| newFunc | `...func() any` | 可选的对象构造函数，当 Pool 为空时用于创建新对象 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*sync.Pool` | 新建的对象池引用 |
+
+**示例**
+
+``````````````yak
+p = sync.NewPool(func() {
+return make(map[string]string)
+})
+m = p.Get() // 从 Pool 中获取，如果 Pool 中没有，则会调用传入的第一个参数函数，返回一个新的 map[string]string
+m["1"] = "2"
+println(m) // {"1": "2"}
+// 将 m 放回 Pool 中
+p.Put(m)
+m2 = p.Get() // 从 Pool 中获取，实际上我们获取到的是刚 Put 进去的 m
+println(m2) // {"1": "2"}
+``````````````
+
+---
+
+### NewSizedWaitGroup {#newsizedwaitgroup}
+
+```go
+NewSizedWaitGroup(size int, ctxs ...context.Context) *utils.SizedWaitGroup
+```
+
+创建一个 SizedWaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作
 
 SizedWaitGroup 与 WaitGroup 的区别在于 SizedWaitGroup 可以限制并发任务的数量
 
+**必填参数**
 
-Example:
+|参数名|类型|说明|
+|:--|:--|:--|
+| size | `int` | 允许的最大并发任务数 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctxs | `...context.Context` | 可选的 context，任一 context 结束会终止等待 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*utils.SizedWaitGroup` | 新建的 SizedWaitGroup 引用 |
+
+**示例**
 
 ``````````````yak
 wg = sync.NewSizedWaitGroup(5) // 限制大小为5
@@ -312,39 +320,31 @@ printf("任务%d 完成\n", i)
 }
 wg.Wait()
 println("所有任务完成")
-
-参数:
-  - size: 允许的最大并发任务数
-  - ctxs: 可选的 context，任一 context 结束会终止等待
-
-返回值:
-  - 新建的 SizedWaitGroup 引用
 ``````````````
 
+---
 
-#### 定义
+### NewWaitGroup {#newwaitgroup}
 
-`NewSizedWaitGroup(size int, ctxs ...context.Context) *utils.SizedWaitGroup`
+```go
+NewWaitGroup(ctxs ...context.Context) *WaitGroupProxy
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| size | `int` | 允许的最大并发任务数 |
-| ctxs | `...context.Context` | 可选的 context，任一 context 结束会终止等待 |
+创建一个 WaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*utils.SizedWaitGroup` | 新建的 SizedWaitGroup 引用 |
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctxs | `...context.Context` | 可选的 context，任一 context 结束会把等待组计数清零 |
 
-### NewWaitGroup
+**返回值**
 
-#### 详细描述
-NewWaitGroup 创建一个 WaitGroup 结构体引用，其帮助我们在处理多个并发任务时，等待所有任务完成后再进行下一步操作
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*WaitGroupProxy` | 新建的 WaitGroup 引用 |
 
-
-Example:
+**示例**
 
 ``````````````yak
 wg = sync.NewWaitGroup()
@@ -358,27 +358,7 @@ printf("任务%d 完成\n", i)
 }
 wg.Wait()
 println("所有任务完成")
-
-参数:
-  - ctxs: 可选的 context，任一 context 结束会把等待组计数清零
-
-返回值:
-  - 新建的 WaitGroup 引用
 ``````````````
 
-
-#### 定义
-
-`NewWaitGroup(ctxs ...context.Context) *WaitGroupProxy`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctxs | `...context.Context` | 可选的 context，任一 context 结束会把等待组计数清零 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*WaitGroupProxy` | 新建的 WaitGroup 引用 |
-
+---
 

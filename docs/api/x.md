@@ -1,164 +1,95 @@
-# x
+# x {#library-x}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [x.All](#all) |All 判断给定的多个值是否全部非空(真值) 参数: - objs: 一个或多个待判断的值 返回值: - 是否全部为非空(真值)|
-| [x.Any](#any) |Any 判断给定的多个值中是否至少有一个非空(真值) 参数: - objs: 一个或多个待判断的值 返回值: - 是否至少有一个为非空(真值)|
-| [x.Chunk](#chunk) |Chunk 将切片按指定大小分组，最后一组可能不足 size 个元素 参数: - arr: 待分组的切片 - size: 每组的元素个数 返回值: - 分组后的二维切片|
-| [x.Contains](#contains) |Contains 判断元素是否存在于集合(切片/数组/map/字符串)中 参数: - in: 源集合 - elem: 要查找的元素 返回值: - 元素是否存在|
-| [x.ConvertToMap](#converttomap) |ConvertToMap 将传入的对象转换为 map[string][]string 结构，常用于归一化键值数据 参数: - i: 待转换的对象(map 或结构体) 返回值: - 转换后的 map[string][]string|
-| [x.Difference](#difference) |Difference 返回两个集合的差异，分别是仅属于 x 的元素和仅属于 y 的元素 参数: - x: 第一个集合 - y: 第二个集合 返回值: - 仅属于 x 的元素集合 - 仅属于 y 的元素集合|
-| [x.Drop](#drop) |Drop 从切片开头丢弃 n 个元素，返回剩余元素组成的新切片 参数: - in: 源切片 - n: 从开头丢弃的元素个数 返回值: - 丢弃后剩余的切片|
-| [x.Equal](#equal) |Equal 判断两个对象是否相等(深度比较) 参数: - expected: 期望值 - actual: 实际值 返回值: - 两者是否相等|
-| [x.Every](#every) |Every 判断给定的所有元素是否都存在于集合中 参数: - in: 源集合 - elements: 待检查的一个或多个元素 返回值: - 是否所有元素都存在于集合中|
-| [x.Filter](#filter) |Filter 遍历集合，仅保留回调函数返回 true 的元素 参数: - i: 待过滤的集合(切片/数组) - fc: 过滤回调，接收元素返回布尔值，true 表示保留 返回值: - 由保留下来的元素组成的新切片|
-| [x.Find](#find) |Find 遍历集合，返回第一个使回调函数返回 true 的元素 参数: - i: 待查找的集合(切片/数组) - fc: 判定回调，接收元素返回布尔值 返回值: - 第一个满足条件的元素，未找到返回 nil|
-| [x.Foreach](#foreach) |Foreach 从前向后遍历集合，对每个元素执行回调函数(无返回值) 参数: - i: 待遍历的集合(切片/数组) - fc: 对每个元素执行的回调函数 返回值: - 无|
-| [x.ForeachRight](#foreachright) |ForeachRight 从后向前遍历集合，对每个元素执行回调函数(无返回值) 参数: - i: 待遍历的集合(切片/数组) - fc: 对每个元素执行的回调函数 返回值: - 无|
-| [x.GC](#gc) |GC 主动触发一次垃圾回收并尽量把空闲内存归还操作系统 返回值: - 无|
-| [x.GCPercent](#gcpercent) |funkGCPercent 设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent） percent 表示相对上次 GC 后存活堆的增长百分比，越小 GC 越频繁；负值可关闭 GC 参数: - percent: 新的 GC 阈值百分比 返回值: - 设置前的旧阈值百分比|
-| [x.Head](#head) |Head 返回切片的第一个元素 参数: - arr: 源切片 返回值: - 切片的第一个元素|
-| [x.If](#if) |If 三元条件选择，当条件为真时返回 a，否则返回 b 参数: - i: 条件布尔值 - a: 条件为真时返回的值 - b: 条件为假时返回的值 返回值: - 根据条件选择的值|
-| [x.IndexOf](#indexof) |IndexOf 返回元素在切片中第一次出现的下标，未找到返回 -1 参数: - in: 源切片 - elem: 要查找的元素 返回值: - 元素首次出现的下标，未找到为 -1|
-| [x.Intersect](#intersect) |Intersect 返回两个集合的交集(同时存在于两个集合中的元素) 参数: - x: 第一个集合 - y: 第二个集合 返回值: - 两个集合的交集|
-| [x.IsSubset](#issubset) |IsSubset 判断集合 x 是否为集合 y 的子集 参数: - x: 待判断的子集 - y: 父集合 返回值: - x 是否为 y 的子集|
-| [x.Keys](#keys) |Keys 返回 map 的所有键或结构体的所有字段名组成的切片 参数: - out: map 或结构体 返回值: - 键名/字段名切片|
-| [x.Map](#map) |Map 遍历集合中的每个元素，使用回调函数处理后返回新的切片 参数: - i: 待遍历的集合(切片/数组) - fc: 处理每个元素的回调函数，接收元素返回新值 返回值: - 由回调返回值组成的新切片|
-| [x.Max](#max) |Max 返回数值或字符串切片中的最大值 参数: - i: 数值或字符串切片 返回值: - 切片中的最大元素|
-| [x.Min](#min) |Min 返回数值或字符串切片中的最小值 参数: - i: 数值或字符串切片 返回值: - 切片中的最小元素|
-| [x.NewEventWatcher](#neweventwatcher) |funkNewEventWatcher 创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher） 参数: - ctx: 上下文，用于控制观察器生命周期 - triggerTime: 触发的时间间隔 - triggerCount: 触发的累计事件数阈值 返回值...|
-| [x.NewReducer](#newreducer) |funkNewReducer 创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer） 常用于把无限增长的历史数据压缩到有限规模 参数: - reduceLimit: 触发归并的数据条数阈值 - handle: 归并函数，接收一组...|
-| [x.Range](#range) |Range 创建一个长度为 i 的空接口切片，常用于配合 for-range 生成定长循环 参数: - i: 切片长度 返回值: - 长度为 i 的空接口切片|
-| [x.Reduce](#reduce) |Reduce 对集合中的元素从初始累加器开始依次归并为单一结果 参数: - i: 待归并的集合(切片/数组) - fc: 归并回调，接收累加器与当前元素返回新的累加器 - acc: 初始累加器值 返回值: - 归并后的最终结果|
-| [x.RemoveRepeat](#removerepeat) |RemoveRepeat 对切片去重，返回仅保留首次出现元素的新切片 参数: - in: 待去重的切片 返回值: - 去重后的切片|
-| [x.Retry](#retry) |funkRetry 反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry） handler 返回 true 表示&#34;继续重试&#34;，返回 false 表示&#34;停止&#34; 参数: - i: 最大重试次数 - handler: 每次重试调用的函数，返回 true...|
-| [x.Reverse](#reverse) |Reverse 反转切片中元素的顺序，返回反转后的新切片 参数: - in: 待反转的切片 返回值: - 反转顺序后的切片|
-| [x.Shift](#shift) |Shift 返回去掉切片第一个元素后的新切片 参数: - i: 源切片 返回值: - 去掉首元素后的切片|
-| [x.Shuffle](#shuffle) |Shuffle 随机打乱切片中元素的顺序，返回打乱后的新切片 参数: - in: 待打乱的切片 返回值: - 打乱顺序后的切片(元素不变)|
-| [x.Some](#some) |Some 判断给定的元素中是否至少有一个存在于集合中 参数: - in: 源集合 - elements: 待检查的一个或多个元素 返回值: - 是否至少有一个元素存在于集合中|
-| [x.Sort](#sort) |funkSort 使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort） less(i, j) 返回 true 表示下标 i 的元素应排在下标 j 之前 参数: - x: 待排序的切片(原地修改) - less: 比较函数，接收两个下标，返回是否 i 应排在 j 前|
-| [x.Subtract](#subtract) |Subtract 返回集合 x 中存在但集合 y 中不存在的元素 参数: - x: 源集合 - y: 要排除的集合 返回值: - 仅属于 x 而不属于 y 的元素集合|
-| [x.Sum](#sum) |Sum 计算切片中所有数值元素之和 参数: - arr: 数值切片 返回值: - 所有元素之和|
-| [x.Tail](#tail) |Tail 返回切片中除第一个元素外的所有元素 参数: - arr: 源切片 返回值: - 除首元素外的切片|
-| [x.ToFloat64](#tofloat64) |ToFloat64 将任意数值类型转换为 float64 参数: - x: 待转换的数值 返回值: - 转换后的 float64 值 - 是否转换成功|
-| [x.ToMap](#tomap) |ToMap 将一个结构体切片转换为以指定字段值为键的 map 参数: - in: 结构体切片 - pivot: 作为键的结构体字段名 返回值: - 以 pivot 字段值为键、结构体为值的 map|
-| [x.Values](#values) |Values 返回 map 的所有值或结构体的所有字段值组成的切片 参数: - out: map 或结构体 返回值: - 值切片|
-| [x.WaitConnect](#waitconnect) |WaitConnect 等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动 参数: - addr: 目标地址（host:port） - timeout: 最长等待时间（秒） 返回值: - 错误信息（超时或连接失败时非空）|
-| [x.Zip](#zip) |Zip 将两个切片按下标两两组合成元组列表，长度取较短切片 参数: - slice1: 第一个切片 - slice2: 第二个切片 返回值: - 元组列表，每个元组包含两个切片中同下标的元素|
+`x` 库是函数式与集合工具集（funk 风格），提供对切片/映射的 Map/Filter/Reduce、集合运算、聚合统计与常用辅助函数，让数据处理更简洁。
 
+典型使用场景：
 
-## 函数定义
-### All
+- 遍历变换：`x.Map` / `x.Filter` / `x.Reduce` / `x.Foreach` / `x.Find` 处理集合，`x.Chunk` / `x.Reverse` / `x.Shuffle` / `x.Zip` 重组数据。
+- 集合运算：`x.Contains` / `x.IndexOf`、`x.Intersect` / `x.Subtract` / `x.Difference` / `x.IsSubset`、`x.RemoveRepeat` 去重。
+- 聚合判定：`x.Sum` / `x.Max` / `x.Min`、`x.All` / `x.Any` / `x.Every` / `x.Some`、`x.Keys` / `x.Values` / `x.ToMap`。
+- 辅助：`x.If`（三元）、`x.Range`、`x.Retry`（重试）、`x.Sort`、`x.WaitConnect`。
 
-#### 详细描述
-All 判断给定的多个值是否全部非空(真值)
+与相邻库的关系：`x` 是通用数据处理工具，无副作用，与 `str`（字符串）、`json`（结构化数据）配合，常用于把扫描/分析结果做整理与统计。
 
-参数:
+> 共 43 个函数
 
-  - objs: 一个或多个待判断的值
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [x.Chunk](#chunk) | `arr any, size int` | `any` | 将切片按指定大小分组，最后一组可能不足 size 个元素 |
+| [x.Contains](#contains) | `in any, elem any` | `bool` | 判断元素是否存在于集合(切片/数组/map/字符串)中 |
+| [x.ConvertToMap](#converttomap) | `i any` | `map[string][]string` | 将传入的对象转换为 map[string][]string 结构，常用于归一化键值数据 |
+| [x.Difference](#difference) | `x any, y any` | `any, any` | 返回两个集合的差异，分别是仅属于 x 的元素和仅属于 y 的元素 |
+| [x.Drop](#drop) | `in any, n int` | `any` | 从切片开头丢弃 n 个元素，返回剩余元素组成的新切片 |
+| [x.Equal](#equal) | `expected any, actual any` | `bool` | 判断两个对象是否相等(深度比较) |
+| [x.Filter](#filter) | `i any, fc func(any) bool` | `any` | 遍历集合，仅保留回调函数返回 true 的元素 |
+| [x.Find](#find) | `i any, fc func(any) bool` | `any` | 遍历集合，返回第一个使回调函数返回 true 的元素 |
+| [x.Foreach](#foreach) | `i any, fc func(any)` | - | 从前向后遍历集合，对每个元素执行回调函数(无返回值) |
+| [x.ForeachRight](#foreachright) | `i any, fc func(any)` | - | 从后向前遍历集合，对每个元素执行回调函数(无返回值) |
+| [x.GC](#gc) | - | - | 主动触发一次垃圾回收并尽量把空闲内存归还操作系统 |
+| [x.GCPercent](#gcpercent) | `percent int` | `int` | 设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent） |
+| [x.Head](#head) | `arr any` | `any` | 返回切片的第一个元素 |
+| [x.If](#if) | `i bool, a any, b any` | `any` | 三元条件选择，当条件为真时返回 a，否则返回 b |
+| [x.IndexOf](#indexof) | `in any, elem any` | `int` | 返回元素在切片中第一次出现的下标，未找到返回 -1 |
+| [x.Intersect](#intersect) | `x any, y any` | `any` | 返回两个集合的交集(同时存在于两个集合中的元素) |
+| [x.IsSubset](#issubset) | `x any, y any` | `bool` | 判断集合 x 是否为集合 y 的子集 |
+| [x.Keys](#keys) | `out any` | `any` | 返回 map 的所有键或结构体的所有字段名组成的切片 |
+| [x.Map](#map) | `i any, fc funkGeneralFuncType` | `any` | 遍历集合中的每个元素，使用回调函数处理后返回新的切片 |
+| [x.Max](#max) | `i any` | `any` | 返回数值或字符串切片中的最大值 |
+| [x.Min](#min) | `i any` | `any` | 返回数值或字符串切片中的最小值 |
+| [x.NewEventWatcher](#neweventwatcher) | `ctx context.Context, triggerTime time.Duration, triggerCount int` | `*utils.EventWatcherManager` | 创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher） |
+| [x.NewReducer](#newreducer) | `reduceLimit int, handle reducer.ReduceFunction` | `*reducer.Reducer` | 创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer） |
+| [x.Range](#range) | `i int` | `[]any` | 创建一个长度为 i 的空接口切片，常用于配合 for-range 生成定长循环 |
+| [x.Reduce](#reduce) | `i any, fc funkGeneralReduceFuncType, acc any` | `any` | 对集合中的元素从初始累加器开始依次归并为单一结果 |
+| [x.RemoveRepeat](#removerepeat) | `in any` | `any` | 对切片去重，返回仅保留首次出现元素的新切片 |
+| [x.Retry](#retry) | `i int, handler func() bool` | - | 反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry） |
+| [x.Reverse](#reverse) | `in any` | `any` | 反转切片中元素的顺序，返回反转后的新切片 |
+| [x.Shift](#shift) | `i any` | `any` | 返回去掉切片第一个元素后的新切片 |
+| [x.Shuffle](#shuffle) | `in any` | `any` | 随机打乱切片中元素的顺序，返回打乱后的新切片 |
+| [x.Sort](#sort) | `x any, less func(i, j int) bool` | - | 使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort） |
+| [x.Subtract](#subtract) | `x any, y any` | `any` | 返回集合 x 中存在但集合 y 中不存在的元素 |
+| [x.Sum](#sum) | `arr any` | `float64` | 计算切片中所有数值元素之和 |
+| [x.Tail](#tail) | `arr any` | `any` | 返回切片中除第一个元素外的所有元素 |
+| [x.ToFloat64](#tofloat64) | `x any` | `float64, bool` | 将任意数值类型转换为 float64 |
+| [x.ToMap](#tomap) | `in any, pivot string` | `any` | 将一个结构体切片转换为以指定字段值为键的 map |
+| [x.Values](#values) | `out any` | `any` | 返回 map 的所有值或结构体的所有字段值组成的切片 |
+| [x.WaitConnect](#waitconnect) | `addr string, timeout float64` | `error` | 等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动 |
+| [x.Zip](#zip) | `slice1 any, slice2 any` | `[]Tuple` | 将两个切片按下标两两组合成元组列表，长度取较短切片 |
 
+## 可变参数函数索引
 
-返回值:
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [x.All](#all) | `objs ...any` | `bool` | 判断给定的多个值是否全部非空(真值) |
+| [x.Any](#any) | `objs ...any` | `bool` | 判断给定的多个值中是否至少有一个非空(真值) |
+| [x.Every](#every) | `in any, elements ...any` | `bool` | 判断给定的所有元素是否都存在于集合中 |
+| [x.Some](#some) | `in any, elements ...any` | `bool` | 判断给定的元素中是否至少有一个存在于集合中 |
 
-  - 是否全部为非空(真值)
+## 函数详情
 
+### Chunk {#chunk}
 
+```go
+Chunk(arr any, size int) any
+```
 
+将切片按指定大小分组，最后一组可能不足 size 个元素
 
-Example:
+**参数**
 
-``````````````yak
-// VARS: 判断是否全为真值
-result = x.All(true, true)
-// STDOUT: 打印结果
-println(result)   // OUT: true
-// assert: 含假值时返回 false
-assert x.All(true, false) == false, "one empty value makes it false"
-``````````````
+|参数名|类型|说明|
+|:--|:--|:--|
+| arr | `any` | 待分组的切片 |
+| size | `int` | 每组的元素个数 |
 
+**返回值**
 
-#### 定义
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 分组后的二维切片 |
 
-`All(objs ...any) bool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| objs | `...any` | 一个或多个待判断的值 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否全部为非空(真值) |
-
-
-### Any
-
-#### 详细描述
-Any 判断给定的多个值中是否至少有一个非空(真值)
-
-参数:
-
-  - objs: 一个或多个待判断的值
-
-
-
-返回值:
-
-  - 是否至少有一个为非空(真值)
-
-
-
-
-Example:
-
-``````````````yak
-// VARS: 判断是否存在真值
-result = x.Any(false, true)
-// STDOUT: 打印结果
-println(result)   // OUT: true
-// assert: 全为假时返回 false
-assert x.Any(false, false) == false, "all-empty input should be false"
-``````````````
-
-
-#### 定义
-
-`Any(objs ...any) bool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| objs | `...any` | 一个或多个待判断的值 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否至少有一个为非空(真值) |
-
-
-### Chunk
-
-#### 详细描述
-Chunk 将切片按指定大小分组，最后一组可能不足 size 个元素
-
-参数:
-
-  - arr: 待分组的切片
-
-  - size: 每组的元素个数
-
-
-
-返回值:
-
-  - 分组后的二维切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 按每组 2 个分组
@@ -167,44 +98,30 @@ result = x.Chunk([1, 2, 3, 4, 5], 2)
 assert len(result) == 3, "5 elements in groups of 2 yields 3 chunks"
 ``````````````
 
+---
 
-#### 定义
+### Contains {#contains}
 
-`Chunk(arr any, size int) any`
+```go
+Contains(in any, elem any) bool
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| arr | `any` | 待分组的切片 |
-| size | `int` | 每组的元素个数 |
+判断元素是否存在于集合(切片/数组/map/字符串)中
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 分组后的二维切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 源集合 |
+| elem | `any` | 要查找的元素 |
 
-### Contains
+**返回值**
 
-#### 详细描述
-Contains 判断元素是否存在于集合(切片/数组/map/字符串)中
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 元素是否存在 |
 
-参数:
-
-  - in: 源集合
-
-  - elem: 要查找的元素
-
-
-
-返回值:
-
-  - 元素是否存在
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 判断元素是否存在
@@ -215,42 +132,29 @@ println(result)   // OUT: true
 assert x.Contains([1, 2, 3], 9) == false, "9 is not in the slice"
 ``````````````
 
+---
 
-#### 定义
+### ConvertToMap {#converttomap}
 
-`Contains(in any, elem any) bool`
+```go
+ConvertToMap(i any) map[string][]string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 源集合 |
-| elem | `any` | 要查找的元素 |
+将传入的对象转换为 map[string][]string 结构，常用于归一化键值数据
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 元素是否存在 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待转换的对象(map 或结构体) |
 
-### ConvertToMap
+**返回值**
 
-#### 详细描述
-ConvertToMap 将传入的对象转换为 map[string][]string 结构，常用于归一化键值数据
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string][]string` | 转换后的 map[string][]string |
 
-参数:
-
-  - i: 待转换的对象(map 或结构体)
-
-
-
-返回值:
-
-  - 转换后的 map[string][]string
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 转换为字符串列表映射
@@ -261,45 +165,31 @@ println(m["k"])   // OUT: [v]
 assert m["k"][0] == "v", "ConvertToMap should keep the value under its key"
 ``````````````
 
+---
 
-#### 定义
+### Difference {#difference}
 
-`ConvertToMap(i any) map[string][]string`
+```go
+Difference(x any, y any) (any, any)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待转换的对象(map 或结构体) |
+返回两个集合的差异，分别是仅属于 x 的元素和仅属于 y 的元素
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `map[string][]string` | 转换后的 map[string][]string |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 第一个集合 |
+| y | `any` | 第二个集合 |
 
-### Difference
+**返回值**
 
-#### 详细描述
-Difference 返回两个集合的差异，分别是仅属于 x 的元素和仅属于 y 的元素
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 仅属于 x 的元素集合 |
+| r2 | `any` | 仅属于 y 的元素集合 |
 
-参数:
-
-  - x: 第一个集合
-
-  - y: 第二个集合
-
-
-
-返回值:
-
-  - 仅属于 x 的元素集合
-
-  - 仅属于 y 的元素集合
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求双向差异
@@ -310,45 +200,30 @@ println(left)   // OUT: [1 3]
 assert len(right) == 0, "no element is unique to the second set"
 ``````````````
 
+---
 
-#### 定义
+### Drop {#drop}
 
-`Difference(x any, y any) (any, any)`
+```go
+Drop(in any, n int) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 第一个集合 |
-| y | `any` | 第二个集合 |
+从切片开头丢弃 n 个元素，返回剩余元素组成的新切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 仅属于 x 的元素集合 |
-| r2 | `any` | 仅属于 y 的元素集合 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 源切片 |
+| n | `int` | 从开头丢弃的元素个数 |
 
-### Drop
+**返回值**
 
-#### 详细描述
-Drop 从切片开头丢弃 n 个元素，返回剩余元素组成的新切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 丢弃后剩余的切片 |
 
-参数:
-
-  - in: 源切片
-
-  - n: 从开头丢弃的元素个数
-
-
-
-返回值:
-
-  - 丢弃后剩余的切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 丢弃开头 2 个元素
@@ -359,44 +234,30 @@ println(result)   // OUT: [3 4]
 assert len(result) == 2, "drop should remove the first n elements"
 ``````````````
 
+---
 
-#### 定义
+### Equal {#equal}
 
-`Drop(in any, n int) any`
+```go
+Equal(expected any, actual any) bool
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 源切片 |
-| n | `int` | 从开头丢弃的元素个数 |
+判断两个对象是否相等(深度比较)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 丢弃后剩余的切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| expected | `any` | 期望值 |
+| actual | `any` | 实际值 |
 
-### Equal
+**返回值**
 
-#### 详细描述
-Equal 判断两个对象是否相等(深度比较)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 两者是否相等 |
 
-参数:
-
-  - expected: 期望值
-
-  - actual: 实际值
-
-
-
-返回值:
-
-  - 两者是否相等
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 比较两个切片
@@ -407,92 +268,30 @@ println(result)   // OUT: true
 assert x.Equal([1, 2], [1, 3]) == false, "different slices should not be equal"
 ``````````````
 
+---
 
-#### 定义
+### Filter {#filter}
 
-`Equal(expected any, actual any) bool`
+```go
+Filter(i any, fc func(any) bool) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| expected | `any` | 期望值 |
-| actual | `any` | 实际值 |
+遍历集合，仅保留回调函数返回 true 的元素
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 两者是否相等 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待过滤的集合(切片/数组) |
+| fc | `func(any) bool` | 过滤回调，接收元素返回布尔值，true 表示保留 |
 
-### Every
+**返回值**
 
-#### 详细描述
-Every 判断给定的所有元素是否都存在于集合中
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 由保留下来的元素组成的新切片 |
 
-参数:
-
-  - in: 源集合
-
-  - elements: 待检查的一个或多个元素
-
-
-
-返回值:
-
-  - 是否所有元素都存在于集合中
-
-
-
-
-Example:
-
-``````````````yak
-// VARS: 判断是否全部存在
-result = x.Every([1, 2, 3], 1, 2)
-// STDOUT: 打印结果
-println(result)   // OUT: true
-// assert: 含缺失元素时返回 false
-assert x.Every([1, 2, 3], 1, 9) == false, "9 is missing so not every element is present"
-``````````````
-
-
-#### 定义
-
-`Every(in any, elements ...any) bool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 源集合 |
-| elements | `...any` | 待检查的一个或多个元素 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否所有元素都存在于集合中 |
-
-
-### Filter
-
-#### 详细描述
-Filter 遍历集合，仅保留回调函数返回 true 的元素
-
-参数:
-
-  - i: 待过滤的集合(切片/数组)
-
-  - fc: 过滤回调，接收元素返回布尔值，true 表示保留
-
-
-
-返回值:
-
-  - 由保留下来的元素组成的新切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 仅保留偶数
@@ -503,44 +302,30 @@ println(result)   // OUT: [2 4]
 assert len(result) == 2, "Filter should keep the two even numbers"
 ``````````````
 
+---
 
-#### 定义
+### Find {#find}
 
-`Filter(i any, fc func(any) bool) any`
+```go
+Find(i any, fc func(any) bool) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待过滤的集合(切片/数组) |
-| fc | `func(any) bool` | 过滤回调，接收元素返回布尔值，true 表示保留 |
+遍历集合，返回第一个使回调函数返回 true 的元素
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 由保留下来的元素组成的新切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待查找的集合(切片/数组) |
+| fc | `func(any) bool` | 判定回调，接收元素返回布尔值 |
 
-### Find
+**返回值**
 
-#### 详细描述
-Find 遍历集合，返回第一个使回调函数返回 true 的元素
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 第一个满足条件的元素，未找到返回 nil |
 
-参数:
-
-  - i: 待查找的集合(切片/数组)
-
-  - fc: 判定回调，接收元素返回布尔值
-
-
-
-返回值:
-
-  - 第一个满足条件的元素，未找到返回 nil
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 查找第一个大于 1 的元素
@@ -551,44 +336,24 @@ println(result)   // OUT: 2
 assert result == 2, "Find should return the first element greater than 1"
 ``````````````
 
+---
 
-#### 定义
+### Foreach {#foreach}
 
-`Find(i any, fc func(any) bool) any`
+```go
+Foreach(i any, fc func(any))
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待查找的集合(切片/数组) |
-| fc | `func(any) bool` | 判定回调，接收元素返回布尔值 |
+从前向后遍历集合，对每个元素执行回调函数(无返回值)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 第一个满足条件的元素，未找到返回 nil |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待遍历的集合(切片/数组) |
+| fc | `func(any)` | 对每个元素执行的回调函数 |
 
-### Foreach
-
-#### 详细描述
-Foreach 从前向后遍历集合，对每个元素执行回调函数(无返回值)
-
-参数:
-
-  - i: 待遍历的集合(切片/数组)
-
-  - fc: 对每个元素执行的回调函数
-
-
-
-返回值:
-
-  - 无
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 遍历累加(用闭包收集结果)
@@ -600,39 +365,24 @@ println(sum)   // OUT: 6
 assert sum == 6, "Foreach should visit every element"
 ``````````````
 
+---
 
-#### 定义
+### ForeachRight {#foreachright}
 
-`Foreach(i any, fc func(any))`
+```go
+ForeachRight(i any, fc func(any))
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+从后向前遍历集合，对每个元素执行回调函数(无返回值)
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待遍历的集合(切片/数组) |
 | fc | `func(any)` | 对每个元素执行的回调函数 |
 
-
-### ForeachRight
-
-#### 详细描述
-ForeachRight 从后向前遍历集合，对每个元素执行回调函数(无返回值)
-
-参数:
-
-  - i: 待遍历的集合(切片/数组)
-
-  - fc: 对每个元素执行的回调函数
-
-
-
-返回值:
-
-  - 无
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 从右向左拼接元素
@@ -644,66 +394,48 @@ println(order)   // OUT: [3 2 1]
 assert order[0] == 3, "ForeachRight should visit from the tail"
 ``````````````
 
+---
 
-#### 定义
+### GC {#gc}
 
-`ForeachRight(i any, fc func(any))`
+```go
+GC()
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待遍历的集合(切片/数组) |
-| fc | `func(any)` | 对每个元素执行的回调函数 |
+主动触发一次垃圾回收并尽量把空闲内存归还操作系统
 
-
-### GC
-
-#### 详细描述
-GC 主动触发一次垃圾回收并尽量把空闲内存归还操作系统
-
-返回值:
-
-  - 无
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 主动触发一次垃圾回收(仅副作用，无返回值)
 x.GC()
 ``````````````
 
+---
 
-#### 定义
+### GCPercent {#gcpercent}
 
-`GC()`
+```go
+GCPercent(percent int) int
+```
 
-
-### GCPercent
-
-#### 详细描述
-funkGCPercent 设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent）
+设置 GC 触发阈值百分比并返回旧值（导出名为 x.GCPercent）
 
 percent 表示相对上次 GC 后存活堆的增长百分比，越小 GC 越频繁；负值可关闭 GC
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| percent | `int` | 新的 GC 阈值百分比 |
 
-参数:
+**返回值**
 
-  - percent: 新的 GC 阈值百分比
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `int` | 设置前的旧阈值百分比 |
 
-
-
-返回值:
-
-  - 设置前的旧阈值百分比
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 old = x.GCPercent(150)
@@ -712,41 +444,29 @@ assert typeof(old).String() == "int", "GCPercent should return the previous perc
 x.GCPercent(old)
 ``````````````
 
+---
 
-#### 定义
+### Head {#head}
 
-`GCPercent(percent int) int`
+```go
+Head(arr any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| percent | `int` | 新的 GC 阈值百分比 |
+返回切片的第一个元素
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `int` | 设置前的旧阈值百分比 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| arr | `any` | 源切片 |
 
-### Head
+**返回值**
 
-#### 详细描述
-Head 返回切片的第一个元素
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 切片的第一个元素 |
 
-参数:
-
-  - arr: 源切片
-
-
-
-返回值:
-
-  - 切片的第一个元素
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 取第一个元素
@@ -757,45 +477,31 @@ println(result)   // OUT: 1
 assert result == 1, "head should return the first element"
 ``````````````
 
+---
 
-#### 定义
+### If {#if}
 
-`Head(arr any) any`
+```go
+If(i bool, a any, b any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| arr | `any` | 源切片 |
+三元条件选择，当条件为真时返回 a，否则返回 b
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 切片的第一个元素 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `bool` | 条件布尔值 |
+| a | `any` | 条件为真时返回的值 |
+| b | `any` | 条件为假时返回的值 |
 
-### If
+**返回值**
 
-#### 详细描述
-If 三元条件选择，当条件为真时返回 a，否则返回 b
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 根据条件选择的值 |
 
-参数:
-
-  - i: 条件布尔值
-
-  - a: 条件为真时返回的值
-
-  - b: 条件为假时返回的值
-
-
-
-返回值:
-
-  - 根据条件选择的值
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 条件为真时取第一个值
@@ -806,45 +512,30 @@ println(result)   // OUT: a
 assert x.If(false, "a", "b") == "b", "If should pick the second value when false"
 ``````````````
 
+---
 
-#### 定义
+### IndexOf {#indexof}
 
-`If(i bool, a any, b any) any`
+```go
+IndexOf(in any, elem any) int
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `bool` | 条件布尔值 |
-| a | `any` | 条件为真时返回的值 |
-| b | `any` | 条件为假时返回的值 |
+返回元素在切片中第一次出现的下标，未找到返回 -1
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 根据条件选择的值 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 源切片 |
+| elem | `any` | 要查找的元素 |
 
-### IndexOf
+**返回值**
 
-#### 详细描述
-IndexOf 返回元素在切片中第一次出现的下标，未找到返回 -1
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `int` | 元素首次出现的下标，未找到为 -1 |
 
-参数:
-
-  - in: 源切片
-
-  - elem: 要查找的元素
-
-
-
-返回值:
-
-  - 元素首次出现的下标，未找到为 -1
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 查找元素下标
@@ -855,44 +546,30 @@ println(result)   // OUT: 1
 assert x.IndexOf([1, 2, 3], 9) == -1, "missing element should return -1"
 ``````````````
 
+---
 
-#### 定义
+### Intersect {#intersect}
 
-`IndexOf(in any, elem any) int`
+```go
+Intersect(x any, y any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 源切片 |
-| elem | `any` | 要查找的元素 |
+返回两个集合的交集(同时存在于两个集合中的元素)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `int` | 元素首次出现的下标，未找到为 -1 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 第一个集合 |
+| y | `any` | 第二个集合 |
 
-### Intersect
+**返回值**
 
-#### 详细描述
-Intersect 返回两个集合的交集(同时存在于两个集合中的元素)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 两个集合的交集 |
 
-参数:
-
-  - x: 第一个集合
-
-  - y: 第二个集合
-
-
-
-返回值:
-
-  - 两个集合的交集
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求两个切片的交集
@@ -903,44 +580,30 @@ println(result)   // OUT: [2 3]
 assert len(result) == 2, "intersection of the two slices has 2 elements"
 ``````````````
 
+---
 
-#### 定义
+### IsSubset {#issubset}
 
-`Intersect(x any, y any) any`
+```go
+IsSubset(x any, y any) bool
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 第一个集合 |
-| y | `any` | 第二个集合 |
+判断集合 x 是否为集合 y 的子集
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 两个集合的交集 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 待判断的子集 |
+| y | `any` | 父集合 |
 
-### IsSubset
+**返回值**
 
-#### 详细描述
-IsSubset 判断集合 x 是否为集合 y 的子集
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | x 是否为 y 的子集 |
 
-参数:
-
-  - x: 待判断的子集
-
-  - y: 父集合
-
-
-
-返回值:
-
-  - x 是否为 y 的子集
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 判断子集关系
@@ -951,42 +614,29 @@ println(result)   // OUT: true
 assert result == true, "[1,2] is a subset of [1,2,3]"
 ``````````````
 
+---
 
-#### 定义
+### Keys {#keys}
 
-`IsSubset(x any, y any) bool`
+```go
+Keys(out any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 待判断的子集 |
-| y | `any` | 父集合 |
+返回 map 的所有键或结构体的所有字段名组成的切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | x 是否为 y 的子集 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| out | `any` | map 或结构体 |
 
-### Keys
+**返回值**
 
-#### 详细描述
-Keys 返回 map 的所有键或结构体的所有字段名组成的切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 键名/字段名切片 |
 
-参数:
-
-  - out: map 或结构体
-
-
-
-返回值:
-
-  - 键名/字段名切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 取出 map 的键
@@ -997,43 +647,30 @@ println(result)   // OUT: [a]
 assert len(result) == 1, "single-key map should have one key"
 ``````````````
 
+---
 
-#### 定义
+### Map {#map}
 
-`Keys(out any) any`
+```go
+Map(i any, fc funkGeneralFuncType) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| out | `any` | map 或结构体 |
+遍历集合中的每个元素，使用回调函数处理后返回新的切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 键名/字段名切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待遍历的集合(切片/数组) |
+| fc | `funkGeneralFuncType` | 处理每个元素的回调函数，接收元素返回新值 |
 
-### Map
+**返回值**
 
-#### 详细描述
-Map 遍历集合中的每个元素，使用回调函数处理后返回新的切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 由回调返回值组成的新切片 |
 
-参数:
-
-  - i: 待遍历的集合(切片/数组)
-
-  - fc: 处理每个元素的回调函数，接收元素返回新值
-
-
-
-返回值:
-
-  - 由回调返回值组成的新切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把每个元素翻倍
@@ -1044,42 +681,29 @@ println(result)   // OUT: [2 4 6]
 assert len(result) == 3, "Map should keep element count"
 ``````````````
 
+---
 
-#### 定义
+### Max {#max}
 
-`Map(i any, fc funkGeneralFuncType) any`
+```go
+Max(i any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待遍历的集合(切片/数组) |
-| fc | `funkGeneralFuncType` | 处理每个元素的回调函数，接收元素返回新值 |
+返回数值或字符串切片中的最大值
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 由回调返回值组成的新切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 数值或字符串切片 |
 
-### Max
+**返回值**
 
-#### 详细描述
-Max 返回数值或字符串切片中的最大值
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 切片中的最大元素 |
 
-参数:
-
-  - i: 数值或字符串切片
-
-
-
-返回值:
-
-  - 切片中的最大元素
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求切片最大值
@@ -1090,41 +714,29 @@ println(result)   // OUT: 3
 assert result == 3, "max of 3,1,2 should be 3"
 ``````````````
 
+---
 
-#### 定义
+### Min {#min}
 
-`Max(i any) any`
+```go
+Min(i any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+返回数值或字符串切片中的最小值
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 数值或字符串切片 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 切片中的最大元素 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 切片中的最小元素 |
 
-### Min
-
-#### 详细描述
-Min 返回数值或字符串切片中的最小值
-
-参数:
-
-  - i: 数值或字符串切片
-
-
-
-返回值:
-
-  - 切片中的最小元素
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求切片最小值
@@ -1135,47 +747,31 @@ println(result)   // OUT: 1
 assert result == 1, "min of 3,1,2 should be 1"
 ``````````````
 
+---
 
-#### 定义
+### NewEventWatcher {#neweventwatcher}
 
-`Min(i any) any`
+```go
+NewEventWatcher(ctx context.Context, triggerTime time.Duration, triggerCount int) *utils.EventWatcherManager
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 数值或字符串切片 |
+创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 切片中的最小元素 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` | 上下文，用于控制观察器生命周期 |
+| triggerTime | `time.Duration` | 触发的时间间隔 |
+| triggerCount | `int` | 触发的累计事件数阈值 |
 
-### NewEventWatcher
+**返回值**
 
-#### 详细描述
-funkNewEventWatcher 创建一个事件观察器，按时间间隔或累计事件数触发回调（导出名为 x.NewEventWatcher）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*utils.EventWatcherManager` | 事件观察器管理对象 |
 
-
-
-参数:
-
-  - ctx: 上下文，用于控制观察器生命周期
-
-  - triggerTime: 触发的时间间隔
-
-  - triggerCount: 触发的累计事件数阈值
-
-
-
-返回值:
-
-  - 事件观察器管理对象
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 d = time.ParseDuration("1s")~
@@ -1183,49 +779,32 @@ w = x.NewEventWatcher(context.Background(), d, 10)
 assert w != nil, "event watcher should be created"
 ``````````````
 
+---
 
-#### 定义
+### NewReducer {#newreducer}
 
-`NewEventWatcher(ctx context.Context, triggerTime time.Duration, triggerCount int) *utils.EventWatcherManager`
+```go
+NewReducer(reduceLimit int, handle reducer.ReduceFunction) *reducer.Reducer
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` | 上下文，用于控制观察器生命周期 |
-| triggerTime | `time.Duration` | 触发的时间间隔 |
-| triggerCount | `int` | 触发的累计事件数阈值 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*utils.EventWatcherManager` | 事件观察器管理对象 |
-
-
-### NewReducer
-
-#### 详细描述
-funkNewReducer 创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer）
+创建一个归并器，超过 reduceLimit 条数据时用 handle 把较旧的数据合并（导出名为 x.NewReducer）
 
 常用于把无限增长的历史数据压缩到有限规模
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| reduceLimit | `int` | 触发归并的数据条数阈值 |
+| handle | `reducer.ReduceFunction` | 归并函数，接收一组字符串并返回合并后的单条字符串 |
 
-参数:
+**返回值**
 
-  - reduceLimit: 触发归并的数据条数阈值
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*reducer.Reducer` | 归并器对象，可调用 Push 推入数据、GetData 获取当前数据 |
 
-  - handle: 归并函数，接收一组字符串并返回合并后的单条字符串
-
-
-
-返回值:
-
-  - 归并器对象，可调用 Push 推入数据、GetData 获取当前数据
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 r = x.NewReducer(2, items => str.Join(items, ","))
@@ -1235,42 +814,29 @@ println(data)
 assert len(data) >= 1, "reducer should keep reduced data"
 ``````````````
 
+---
 
-#### 定义
+### Range {#range}
 
-`NewReducer(reduceLimit int, handle reducer.ReduceFunction) *reducer.Reducer`
+```go
+Range(i int) []any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| reduceLimit | `int` | 触发归并的数据条数阈值 |
-| handle | `reducer.ReduceFunction` | 归并函数，接收一组字符串并返回合并后的单条字符串 |
+创建一个长度为 i 的空接口切片，常用于配合 for-range 生成定长循环
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*reducer.Reducer` | 归并器对象，可调用 Push 推入数据、GetData 获取当前数据 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `int` | 切片长度 |
 
-### Range
+**返回值**
 
-#### 详细描述
-Range 创建一个长度为 i 的空接口切片，常用于配合 for-range 生成定长循环
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]any` | 长度为 i 的空接口切片 |
 
-参数:
-
-  - i: 切片长度
-
-
-
-返回值:
-
-  - 长度为 i 的空接口切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 创建长度为 3 的切片
@@ -1281,45 +847,31 @@ println(len(result))   // OUT: 3
 assert len(result) == 3, "Range should create a slice of the given length"
 ``````````````
 
+---
 
-#### 定义
+### Reduce {#reduce}
 
-`Range(i int) []any`
+```go
+Reduce(i any, fc funkGeneralReduceFuncType, acc any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` | 切片长度 |
+对集合中的元素从初始累加器开始依次归并为单一结果
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]any` | 长度为 i 的空接口切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待归并的集合(切片/数组) |
+| fc | `funkGeneralReduceFuncType` | 归并回调，接收累加器与当前元素返回新的累加器 |
+| acc | `any` | 初始累加器值 |
 
-### Reduce
+**返回值**
 
-#### 详细描述
-Reduce 对集合中的元素从初始累加器开始依次归并为单一结果
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 归并后的最终结果 |
 
-参数:
-
-  - i: 待归并的集合(切片/数组)
-
-  - fc: 归并回调，接收累加器与当前元素返回新的累加器
-
-  - acc: 初始累加器值
-
-
-
-返回值:
-
-  - 归并后的最终结果
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 从 0 开始累加求和
@@ -1330,43 +882,29 @@ println(result)   // OUT: 6
 assert result == 6, "Reduce should sum the slice to 6"
 ``````````````
 
+---
 
-#### 定义
+### RemoveRepeat {#removerepeat}
 
-`Reduce(i any, fc funkGeneralReduceFuncType, acc any) any`
+```go
+RemoveRepeat(in any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待归并的集合(切片/数组) |
-| fc | `funkGeneralReduceFuncType` | 归并回调，接收累加器与当前元素返回新的累加器 |
-| acc | `any` | 初始累加器值 |
+对切片去重，返回仅保留首次出现元素的新切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 归并后的最终结果 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 待去重的切片 |
 
-### RemoveRepeat
+**返回值**
 
-#### 详细描述
-RemoveRepeat 对切片去重，返回仅保留首次出现元素的新切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 去重后的切片 |
 
-参数:
-
-  - in: 待去重的切片
-
-
-
-返回值:
-
-  - 去重后的切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 去除重复元素
@@ -1377,41 +915,26 @@ println(result)   // OUT: [1 2 3]
 assert len(result) == 3, "duplicates should be removed"
 ``````````````
 
+---
 
-#### 定义
+### Retry {#retry}
 
-`RemoveRepeat(in any) any`
+```go
+Retry(i int, handler func() bool)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 待去重的切片 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 去重后的切片 |
-
-
-### Retry
-
-#### 详细描述
-funkRetry 反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry）
+反复调用 handler，直到 handler 返回 false 或达到最大次数（导出名为 x.Retry）
 
 handler 返回 true 表示&#34;继续重试&#34;，返回 false 表示&#34;停止&#34;
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `int` | 最大重试次数 |
+| handler | `func() bool` | 每次重试调用的函数，返回 true 继续、false 停止 |
 
-参数:
-
-  - i: 最大重试次数
-
-  - handler: 每次重试调用的函数，返回 true 继续、false 停止
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 count = 0
@@ -1420,37 +943,29 @@ println(count)   // OUT: 3
 assert count == 3, "Retry keeps calling while handler returns true"
 ``````````````
 
+---
 
-#### 定义
+### Reverse {#reverse}
 
-`Retry(i int, handler func() bool)`
+```go
+Reverse(in any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `int` | 最大重试次数 |
-| handler | `func() bool` | 每次重试调用的函数，返回 true 继续、false 停止 |
+反转切片中元素的顺序，返回反转后的新切片
 
+**参数**
 
-### Reverse
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 待反转的切片 |
 
-#### 详细描述
-Reverse 反转切片中元素的顺序，返回反转后的新切片
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 反转顺序后的切片 |
 
-  - in: 待反转的切片
-
-
-
-返回值:
-
-  - 反转顺序后的切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 反转切片
@@ -1461,41 +976,29 @@ println(result)   // OUT: [3 2 1]
 assert result[0] == 3, "reverse should put last element first"
 ``````````````
 
+---
 
-#### 定义
+### Shift {#shift}
 
-`Reverse(in any) any`
+```go
+Shift(i any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 待反转的切片 |
+返回去掉切片第一个元素后的新切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 反转顺序后的切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 源切片 |
 
-### Shift
+**返回值**
 
-#### 详细描述
-Shift 返回去掉切片第一个元素后的新切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 去掉首元素后的切片 |
 
-参数:
-
-  - i: 源切片
-
-
-
-返回值:
-
-  - 去掉首元素后的切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 去掉第一个元素
@@ -1506,41 +1009,29 @@ println(result)   // OUT: [2 3]
 assert len(result) == 2, "Shift should drop the first element"
 ``````````````
 
+---
 
-#### 定义
+### Shuffle {#shuffle}
 
-`Shift(i any) any`
+```go
+Shuffle(in any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 源切片 |
+随机打乱切片中元素的顺序，返回打乱后的新切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 去掉首元素后的切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 待打乱的切片 |
 
-### Shuffle
+**返回值**
 
-#### 详细描述
-Shuffle 随机打乱切片中元素的顺序，返回打乱后的新切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 打乱顺序后的切片(元素不变) |
 
-参数:
-
-  - in: 待打乱的切片
-
-
-
-返回值:
-
-  - 打乱顺序后的切片(元素不变)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 随机打乱(每次顺序不同)
@@ -1549,89 +1040,26 @@ result = x.Shuffle([1, 2, 3, 4, 5])
 assert len(result) == 5, "shuffle should preserve length"
 ``````````````
 
+---
 
-#### 定义
+### Sort {#sort}
 
-`Shuffle(in any) any`
+```go
+Sort(x any, less func(i, j int) bool)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 待打乱的切片 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 打乱顺序后的切片(元素不变) |
-
-
-### Some
-
-#### 详细描述
-Some 判断给定的元素中是否至少有一个存在于集合中
-
-参数:
-
-  - in: 源集合
-
-  - elements: 待检查的一个或多个元素
-
-
-
-返回值:
-
-  - 是否至少有一个元素存在于集合中
-
-
-
-
-Example:
-
-``````````````yak
-// VARS: 判断是否存在任意一个
-result = x.Some([1, 2, 3], 9, 2)
-// STDOUT: 打印结果
-println(result)   // OUT: true
-// assert: 都不存在时返回 false
-assert x.Some([1, 2, 3], 8, 9) == false, "neither 8 nor 9 is present"
-``````````````
-
-
-#### 定义
-
-`Some(in any, elements ...any) bool`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 源集合 |
-| elements | `...any` | 待检查的一个或多个元素 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否至少有一个元素存在于集合中 |
-
-
-### Sort
-
-#### 详细描述
-funkSort 使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort）
+使用自定义的 less 比较函数对切片做稳定原地排序（导出名为 x.Sort）
 
 less(i, j) 返回 true 表示下标 i 的元素应排在下标 j 之前
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 待排序的切片(原地修改) |
+| less | `func(i, j int) bool` | 比较函数，接收两个下标，返回是否 i 应排在 j 前 |
 
-参数:
-
-  - x: 待排序的切片(原地修改)
-
-  - less: 比较函数，接收两个下标，返回是否 i 应排在 j 前
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 arr = [3, 1, 2]
@@ -1640,39 +1068,30 @@ println(arr)   // OUT: [1 2 3]
 assert arr[0] == 1 && arr[2] == 3, "Sort should sort the slice ascending in place"
 ``````````````
 
+---
 
-#### 定义
+### Subtract {#subtract}
 
-`Sort(x any, less func(i, j int) bool)`
+```go
+Subtract(x any, y any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 待排序的切片(原地修改) |
-| less | `func(i, j int) bool` | 比较函数，接收两个下标，返回是否 i 应排在 j 前 |
+返回集合 x 中存在但集合 y 中不存在的元素
 
+**参数**
 
-### Subtract
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 源集合 |
+| y | `any` | 要排除的集合 |
 
-#### 详细描述
-Subtract 返回集合 x 中存在但集合 y 中不存在的元素
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 仅属于 x 而不属于 y 的元素集合 |
 
-  - x: 源集合
-
-  - y: 要排除的集合
-
-
-
-返回值:
-
-  - 仅属于 x 而不属于 y 的元素集合
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求差集
@@ -1683,42 +1102,29 @@ println(result)   // OUT: [1 3]
 assert len(result) == 2, "Subtract should keep elements only in x"
 ``````````````
 
+---
 
-#### 定义
+### Sum {#sum}
 
-`Subtract(x any, y any) any`
+```go
+Sum(arr any) float64
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 源集合 |
-| y | `any` | 要排除的集合 |
+计算切片中所有数值元素之和
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 仅属于 x 而不属于 y 的元素集合 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| arr | `any` | 数值切片 |
 
-### Sum
+**返回值**
 
-#### 详细描述
-Sum 计算切片中所有数值元素之和
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `float64` | 所有元素之和 |
 
-参数:
-
-  - arr: 数值切片
-
-
-
-返回值:
-
-  - 所有元素之和
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 求和
@@ -1729,41 +1135,29 @@ println(result)   // OUT: 6
 assert result == 6, "sum of 1,2,3 should be 6"
 ``````````````
 
+---
 
-#### 定义
+### Tail {#tail}
 
-`Sum(arr any) float64`
+```go
+Tail(arr any) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| arr | `any` | 数值切片 |
+返回切片中除第一个元素外的所有元素
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `float64` | 所有元素之和 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| arr | `any` | 源切片 |
 
-### Tail
+**返回值**
 
-#### 详细描述
-Tail 返回切片中除第一个元素外的所有元素
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 除首元素外的切片 |
 
-参数:
-
-  - arr: 源切片
-
-
-
-返回值:
-
-  - 除首元素外的切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 取除首元素外的部分
@@ -1774,43 +1168,30 @@ println(result)   // OUT: [2 3]
 assert len(result) == 2, "tail should drop the first element"
 ``````````````
 
+---
 
-#### 定义
+### ToFloat64 {#tofloat64}
 
-`Tail(arr any) any`
+```go
+ToFloat64(x any) (float64, bool)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| arr | `any` | 源切片 |
+将任意数值类型转换为 float64
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 除首元素外的切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| x | `any` | 待转换的数值 |
 
-### ToFloat64
+**返回值**
 
-#### 详细描述
-ToFloat64 将任意数值类型转换为 float64
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `float64` | 转换后的 float64 值 |
+| r2 | `bool` | 是否转换成功 |
 
-参数:
-
-  - x: 待转换的数值
-
-
-
-返回值:
-
-  - 转换后的 float64 值
-
-  - 是否转换成功
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 转换数值
@@ -1821,86 +1202,61 @@ println(v)   // OUT: 3
 assert ok == true, "integer 3 should convert to float64"
 ``````````````
 
+---
 
-#### 定义
+### ToMap {#tomap}
 
-`ToFloat64(x any) (float64, bool)`
+```go
+ToMap(in any, pivot string) any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| x | `any` | 待转换的数值 |
+将一个结构体切片转换为以指定字段值为键的 map
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `float64` | 转换后的 float64 值 |
-| r2 | `bool` | 是否转换成功 |
+**参数**
 
-
-### ToMap
-
-#### 详细描述
-ToMap 将一个结构体切片转换为以指定字段值为键的 map
-
-参数:
-
-  - in: 结构体切片
-
-  - pivot: 作为键的结构体字段名
-
-
-
-返回值:
-
-  - 以 pivot 字段值为键、结构体为值的 map
-
-
-
-
-Example:
-
-``````````````yak
-// 将结构体切片按字段转为 map(需结构体切片，作示意)
-m = x.ToMap(users, "Id")
-``````````````
-
-
-#### 定义
-
-`ToMap(in any, pivot string) any`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | in | `any` | 结构体切片 |
 | pivot | `string` | 作为键的结构体字段名 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `any` | 以 pivot 字段值为键、结构体为值的 map |
 
+**示例**
 
-### Values
+``````````````yak
+// 无法本地验证: ToMap 需要结构体切片作为输入, yak 无法内联构造结构体, 需用真实数据
+// 将结构体切片按指定字段转为 map(键为该字段的值, 值为对应结构体)
+users = getUsersFromSomewhere() // 假设返回结构体切片, 每个元素含 Id 字段
+m = x.ToMap(users, "Id") // map: Id 值 -> 结构体
+``````````````
 
-#### 详细描述
-Values 返回 map 的所有值或结构体的所有字段值组成的切片
+---
 
-参数:
+### Values {#values}
 
-  - out: map 或结构体
+```go
+Values(out any) any
+```
 
+返回 map 的所有值或结构体的所有字段值组成的切片
 
+**参数**
 
-返回值:
+|参数名|类型|说明|
+|:--|:--|:--|
+| out | `any` | map 或结构体 |
 
-  - 值切片
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 值切片 |
 
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 取出 map 的值
@@ -1911,43 +1267,30 @@ println(result)   // OUT: [1]
 assert len(result) == 1, "single-key map should have one value"
 ``````````````
 
+---
 
-#### 定义
+### WaitConnect {#waitconnect}
 
-`Values(out any) any`
+```go
+WaitConnect(addr string, timeout float64) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| out | `any` | map 或结构体 |
+等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 值切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| addr | `string` | 目标地址（host:port） |
+| timeout | `float64` | 最长等待时间（秒） |
 
-### WaitConnect
+**返回值**
 
-#### 详细描述
-WaitConnect 等待一个地址的端口开放，直到超时，如果超时则返回错误，这通常用于等待并确保一个服务启动
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息（超时或连接失败时非空） |
 
-参数:
-
-  - addr: 目标地址（host:port）
-
-  - timeout: 最长等待时间（秒）
-
-
-
-返回值:
-
-  - 错误信息（超时或连接失败时非空）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 timeout, _ = time.ParseDuration("1m")
@@ -1968,44 +1311,30 @@ bytes = conn.Recv()~
 println(string(bytes))
 ``````````````
 
+---
 
-#### 定义
+### Zip {#zip}
 
-`WaitConnect(addr string, timeout float64) error`
+```go
+Zip(slice1 any, slice2 any) []Tuple
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| addr | `string` | 目标地址（host:port） |
-| timeout | `float64` | 最长等待时间（秒） |
+将两个切片按下标两两组合成元组列表，长度取较短切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息（超时或连接失败时非空） |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| slice1 | `any` | 第一个切片 |
+| slice2 | `any` | 第二个切片 |
 
-### Zip
+**返回值**
 
-#### 详细描述
-Zip 将两个切片按下标两两组合成元组列表，长度取较短切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]Tuple` | 元组列表，每个元组包含两个切片中同下标的元素 |
 
-参数:
-
-  - slice1: 第一个切片
-
-  - slice2: 第二个切片
-
-
-
-返回值:
-
-  - 元组列表，每个元组包含两个切片中同下标的元素
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 按下标配对
@@ -2014,20 +1343,151 @@ result = x.Zip([1, 2], ["a", "b"])
 assert len(result) == 2, "zip should pair elements by index"
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`Zip(slice1 any, slice2 any) []Tuple`
+### All {#all}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| slice1 | `any` | 第一个切片 |
-| slice2 | `any` | 第二个切片 |
+```go
+All(objs ...any) bool
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]Tuple` | 元组列表，每个元组包含两个切片中同下标的元素 |
+判断给定的多个值是否全部非空(真值)
 
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| objs | `...any` | 一个或多个待判断的值 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否全部为非空(真值) |
+
+**示例**
+
+``````````````yak
+// VARS: 判断是否全为真值
+result = x.All(true, true)
+// STDOUT: 打印结果
+println(result)   // OUT: true
+// assert: 含假值时返回 false
+assert x.All(true, false) == false, "one empty value makes it false"
+``````````````
+
+---
+
+### Any {#any}
+
+```go
+Any(objs ...any) bool
+```
+
+判断给定的多个值中是否至少有一个非空(真值)
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| objs | `...any` | 一个或多个待判断的值 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否至少有一个为非空(真值) |
+
+**示例**
+
+``````````````yak
+// VARS: 判断是否存在真值
+result = x.Any(false, true)
+// STDOUT: 打印结果
+println(result)   // OUT: true
+// assert: 全为假时返回 false
+assert x.Any(false, false) == false, "all-empty input should be false"
+``````````````
+
+---
+
+### Every {#every}
+
+```go
+Every(in any, elements ...any) bool
+```
+
+判断给定的所有元素是否都存在于集合中
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 源集合 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| elements | `...any` | 待检查的一个或多个元素 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否所有元素都存在于集合中 |
+
+**示例**
+
+``````````````yak
+// VARS: 判断是否全部存在
+result = x.Every([1, 2, 3], 1, 2)
+// STDOUT: 打印结果
+println(result)   // OUT: true
+// assert: 含缺失元素时返回 false
+assert x.Every([1, 2, 3], 1, 9) == false, "9 is missing so not every element is present"
+``````````````
+
+---
+
+### Some {#some}
+
+```go
+Some(in any, elements ...any) bool
+```
+
+判断给定的元素中是否至少有一个存在于集合中
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 源集合 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| elements | `...any` | 待检查的一个或多个元素 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否至少有一个元素存在于集合中 |
+
+**示例**
+
+``````````````yak
+// VARS: 判断是否存在任意一个
+result = x.Some([1, 2, 3], 9, 2)
+// STDOUT: 打印结果
+println(result)   // OUT: true
+// assert: 都不存在时返回 false
+assert x.Some([1, 2, 3], 8, 9) == false, "neither 8 nor 9 is present"
+``````````````
+
+---
 

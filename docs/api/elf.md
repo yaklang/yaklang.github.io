@@ -1,41 +1,55 @@
-# elf
+# elf {#library-elf}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [elf.DisplayELF](#displayelf) |DisplayELF 以 readelf 风格输出格式化的 ELF 文件信息字符串 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - 格式化的 ELF 信息字符串 - 错误信息|
-| [elf.GetELFArchitecture](#getelfarchitecture) |GetELFArchitecture 获取 ELF 文件的机器架构类型 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - 架构类型字符串，如 &#34;EM_X86_64 (AMD x86-64)&#34; - 错误信息|
-| [elf.GetELFEntryPoint](#getelfentrypoint) |GetELFEntryPoint 获取 ELF 文件的入口地址 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - 入口地址 - 错误信息|
-| [elf.GetELFSection](#getelfsection) |GetELFSection 获取指定索引的 ELF 节信息 参数: - info: ELF 信息结构（由 elf.ParseELF 得到） - index: 节索引 返回值: - ELF 节信息 - 错误信息|
-| [elf.GetELFSegment](#getelfsegment) |GetELFSegment 获取指定索引的 ELF 段信息 参数: - info: ELF 信息结构（由 elf.ParseELF 得到） - index: 段索引 返回值: - ELF 段信息 - 错误信息|
-| [elf.IsELF](#iself) |IsELF 检查文件是否为 ELF 格式（通过文件头魔数 0x7F 45 4C 46 判断） 参数: - file: 文件路径 返回值: - 是否为 ELF 文件|
-| [elf.ParseELF](#parseelf) |ParseELF 解析 ELF 文件，返回包含文件头、段、节的完整信息结构 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - ELF 文件信息（含 Header、Segments、Sections） - 错误信息|
-| [elf.ReadELFHeader](#readelfheader) |ReadELFHeader 仅读取 ELF 文件头信息 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - ELF 文件头信息（含 Class、Machine、Entry 等） - 错误信息|
-| [elf.ReadELFSections](#readelfsections) |ReadELFSections 读取 ELF 的节（Section Header）信息列表 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - ELF 节信息列表 - 错误信息|
-| [elf.ReadELFSegments](#readelfsegments) |ReadELFSegments 读取 ELF 的段（Program Header）信息列表 参数: - file: 文件路径(string)或字节数组([]byte) 返回值: - ELF 段信息列表 - 错误信息|
+`elf` 库用于解析 ELF（Linux/Unix 可执行与可链接格式）文件，读取其头部、节（section）、段（segment）、架构与入口点信息，常用于二进制分析、固件检查与恶意样本研判。
 
+典型使用场景：
 
-## 函数定义
-### DisplayELF
+- 识别与概览：`elf.IsELF` 判断是否 ELF，`elf.DisplayELF` 输出可读概览，`elf.ParseELF` 解析为结构。
+- 读取结构：`elf.ReadELFHeader` 读头部，`elf.ReadELFSections` / `elf.GetELFSection` 读节，`elf.ReadELFSegments` / `elf.GetELFSegment` 读段，`elf.GetELFArchitecture` / `elf.GetELFEntryPoint` 取架构与入口。
 
-#### 详细描述
-DisplayELF 以 readelf 风格输出格式化的 ELF 文件信息字符串
+与相邻库的关系：`elf` 属于二进制分析工具，与 `bin`（通用二进制解析）、`java`（Java 字节码）、`sca`（成分分析）同属逆向/审计方向。
 
-参数:
+> 共 10 个函数
 
-  - file: 文件路径(string)或字节数组([]byte)
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [elf.DisplayELF](#displayelf) | `file any` | `string, error` | 以 readelf 风格输出格式化的 ELF 文件信息字符串 |
+| [elf.GetELFArchitecture](#getelfarchitecture) | `file any` | `string, error` | 获取 ELF 文件的机器架构类型 |
+| [elf.GetELFEntryPoint](#getelfentrypoint) | `file any` | `uint64, error` | 获取 ELF 文件的入口地址 |
+| [elf.GetELFSection](#getelfsection) | `info *ELFInfo, index int` | `*ELFSection, error` | 获取指定索引的 ELF 节信息 |
+| [elf.GetELFSegment](#getelfsegment) | `info *ELFInfo, index int` | `*ELFSegment, error` | 获取指定索引的 ELF 段信息 |
+| [elf.IsELF](#iself) | `file string` | `bool` | 检查文件是否为 ELF 格式（通过文件头魔数 0x7F 45 4C 46 判断） |
+| [elf.ParseELF](#parseelf) | `file any` | `*ELFInfo, error` | 解析 ELF 文件，返回包含文件头、段、节的完整信息结构 |
+| [elf.ReadELFHeader](#readelfheader) | `file any` | `*ELFHeader, error` | 仅读取 ELF 文件头信息 |
+| [elf.ReadELFSections](#readelfsections) | `file any` | `[]ELFSection, error` | 读取 ELF 的节（Section Header）信息列表 |
+| [elf.ReadELFSegments](#readelfsegments) | `file any` | `[]ELFSegment, error` | 读取 ELF 的段（Program Header）信息列表 |
 
+## 函数详情
 
-返回值:
+### DisplayELF {#displayelf}
 
-  - 格式化的 ELF 信息字符串
+```go
+DisplayELF(file any) (string, error)
+```
 
-  - 错误信息
+以 readelf 风格输出格式化的 ELF 文件信息字符串
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| file | `any` | 文件路径(string)或字节数组([]byte) |
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 格式化的 ELF 信息字符串 |
+| r2 | `error` | 错误信息 |
+
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -44,44 +58,30 @@ if err != nil { die(err) }
 println(output)
 ``````````````
 
+---
 
-#### 定义
+### GetELFArchitecture {#getelfarchitecture}
 
-`DisplayELF(file any) (string, error)`
+```go
+GetELFArchitecture(file any) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+获取 ELF 文件的机器架构类型
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | file | `any` | 文件路径(string)或字节数组([]byte) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 格式化的 ELF 信息字符串 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 架构类型字符串，如 &#34;EM_X86_64 (AMD x86-64)&#34; |
 | r2 | `error` | 错误信息 |
 
-
-### GetELFArchitecture
-
-#### 详细描述
-GetELFArchitecture 获取 ELF 文件的机器架构类型
-
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - 架构类型字符串，如 &#34;EM_X86_64 (AMD x86-64)&#34;
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -90,44 +90,30 @@ if err != nil { die(err) }
 println(arch)
 ``````````````
 
+---
 
-#### 定义
+### GetELFEntryPoint {#getelfentrypoint}
 
-`GetELFArchitecture(file any) (string, error)`
+```go
+GetELFEntryPoint(file any) (uint64, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+获取 ELF 文件的入口地址
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | file | `any` | 文件路径(string)或字节数组([]byte) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 架构类型字符串，如 &#34;EM_X86_64 (AMD x86-64)&#34; |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `uint64` | 入口地址 |
 | r2 | `error` | 错误信息 |
 
-
-### GetELFEntryPoint
-
-#### 详细描述
-GetELFEntryPoint 获取 ELF 文件的入口地址
-
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - 入口地址
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -136,46 +122,31 @@ if err != nil { die(err) }
 println(entry)
 ``````````````
 
+---
 
-#### 定义
+### GetELFSection {#getelfsection}
 
-`GetELFEntryPoint(file any) (uint64, error)`
+```go
+GetELFSection(info *ELFInfo, index int) (*ELFSection, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| file | `any` | 文件路径(string)或字节数组([]byte) |
+获取指定索引的 ELF 节信息
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `uint64` | 入口地址 |
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| info | `*ELFInfo` | ELF 信息结构（由 elf.ParseELF 得到） |
+| index | `int` | 节索引 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ELFSection` | ELF 节信息 |
 | r2 | `error` | 错误信息 |
 
-
-### GetELFSection
-
-#### 详细描述
-GetELFSection 获取指定索引的 ELF 节信息
-
-参数:
-
-  - info: ELF 信息结构（由 elf.ParseELF 得到）
-
-  - index: 节索引
-
-
-
-返回值:
-
-  - ELF 节信息
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -186,47 +157,31 @@ if err != nil { die(err) }
 println(sect.Name)
 ``````````````
 
+---
 
-#### 定义
+### GetELFSegment {#getelfsegment}
 
-`GetELFSection(info *ELFInfo, index int) (*ELFSection, error)`
+```go
+GetELFSegment(info *ELFInfo, index int) (*ELFSegment, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+获取指定索引的 ELF 段信息
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | info | `*ELFInfo` | ELF 信息结构（由 elf.ParseELF 得到） |
-| index | `int` | 节索引 |
+| index | `int` | 段索引 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ELFSection` | ELF 节信息 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ELFSegment` | ELF 段信息 |
 | r2 | `error` | 错误信息 |
 
-
-### GetELFSegment
-
-#### 详细描述
-GetELFSegment 获取指定索引的 ELF 段信息
-
-参数:
-
-  - info: ELF 信息结构（由 elf.ParseELF 得到）
-
-  - index: 段索引
-
-
-
-返回值:
-
-  - ELF 段信息
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -237,43 +192,29 @@ if err != nil { die(err) }
 println(seg.Type)
 ``````````````
 
+---
 
-#### 定义
+### IsELF {#iself}
 
-`GetELFSegment(info *ELFInfo, index int) (*ELFSegment, error)`
+```go
+IsELF(file string) bool
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| info | `*ELFInfo` | ELF 信息结构（由 elf.ParseELF 得到） |
-| index | `int` | 段索引 |
+检查文件是否为 ELF 格式（通过文件头魔数 0x7F 45 4C 46 判断）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ELFSegment` | ELF 段信息 |
-| r2 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| file | `string` | 文件路径 |
 
-### IsELF
+**返回值**
 
-#### 详细描述
-IsELF 检查文件是否为 ELF 格式（通过文件头魔数 0x7F 45 4C 46 判断）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否为 ELF 文件 |
 
-参数:
-
-  - file: 文件路径
-
-
-
-返回值:
-
-  - 是否为 ELF 文件
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 写入 ELF 魔数后应被识别为 ELF
@@ -284,43 +225,30 @@ assert elf.IsELF(p) == true, "file with ELF magic should be recognized"
 file.Remove(p)
 ``````````````
 
+---
 
-#### 定义
+### ParseELF {#parseelf}
 
-`IsELF(file string) bool`
+```go
+ParseELF(file any) (*ELFInfo, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| file | `string` | 文件路径 |
+解析 ELF 文件，返回包含文件头、段、节的完整信息结构
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否为 ELF 文件 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| file | `any` | 文件路径(string)或字节数组([]byte) |
 
-### ParseELF
+**返回值**
 
-#### 详细描述
-ParseELF 解析 ELF 文件，返回包含文件头、段、节的完整信息结构
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ELFInfo` | ELF 文件信息（含 Header、Segments、Sections） |
+| r2 | `error` | 错误信息 |
 
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - ELF 文件信息（含 Header、Segments、Sections）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -330,44 +258,30 @@ println(info.Header.Magic)
 println(info.Header.Machine)
 ``````````````
 
+---
 
-#### 定义
+### ReadELFHeader {#readelfheader}
 
-`ParseELF(file any) (*ELFInfo, error)`
+```go
+ReadELFHeader(file any) (*ELFHeader, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+仅读取 ELF 文件头信息
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | file | `any` | 文件路径(string)或字节数组([]byte) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ELFInfo` | ELF 文件信息（含 Header、Segments、Sections） |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ELFHeader` | ELF 文件头信息（含 Class、Machine、Entry 等） |
 | r2 | `error` | 错误信息 |
 
-
-### ReadELFHeader
-
-#### 详细描述
-ReadELFHeader 仅读取 ELF 文件头信息
-
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - ELF 文件头信息（含 Class、Machine、Entry 等）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -377,44 +291,30 @@ println(header.Class)
 println(header.Machine)
 ``````````````
 
+---
 
-#### 定义
+### ReadELFSections {#readelfsections}
 
-`ReadELFHeader(file any) (*ELFHeader, error)`
+```go
+ReadELFSections(file any) ([]ELFSection, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+读取 ELF 的节（Section Header）信息列表
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | file | `any` | 文件路径(string)或字节数组([]byte) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ELFHeader` | ELF 文件头信息（含 Class、Machine、Entry 等） |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]ELFSection` | ELF 节信息列表 |
 | r2 | `error` | 错误信息 |
 
-
-### ReadELFSections
-
-#### 详细描述
-ReadELFSections 读取 ELF 的节（Section Header）信息列表
-
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - ELF 节信息列表
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -426,44 +326,30 @@ if err != nil { die(err) }
 	}
 ``````````````
 
+---
 
-#### 定义
+### ReadELFSegments {#readelfsegments}
 
-`ReadELFSections(file any) ([]ELFSection, error)`
+```go
+ReadELFSegments(file any) ([]ELFSegment, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+读取 ELF 的段（Program Header）信息列表
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | file | `any` | 文件路径(string)或字节数组([]byte) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]ELFSection` | ELF 节信息列表 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]ELFSegment` | ELF 段信息列表 |
 | r2 | `error` | 错误信息 |
 
-
-### ReadELFSegments
-
-#### 详细描述
-ReadELFSegments 读取 ELF 的段（Program Header）信息列表
-
-参数:
-
-  - file: 文件路径(string)或字节数组([]byte)
-
-
-
-返回值:
-
-  - ELF 段信息列表
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要真实的 ELF 二进制文件
@@ -475,20 +361,5 @@ if err != nil { die(err) }
 	}
 ``````````````
 
-
-#### 定义
-
-`ReadELFSegments(file any) ([]ELFSegment, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| file | `any` | 文件路径(string)或字节数组([]byte) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]ELFSegment` | ELF 段信息列表 |
-| r2 | `error` | 错误信息 |
-
+---
 

@@ -1,50 +1,58 @@
-# pprof
+# pprof {#library-pprof}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [pprof.AutoAnalyzeFile](#autoanalyzefile) |AutoAnalyzeFile 分析指定的 pprof 文件并返回人类可读的分析结果 AutoAnalyzeFile 解析一个 pprof 采样文件并生成可读的性能分析报告（导出名为 pprof.AutoAnalyzeFile） 报告按函数聚合采样数据，便于快速定位热点 参数: - filename...|
-| [pprof.StartCPUAndMemoryProfile](#startcpuandmemoryprofile) |StartCPUAndMemoryProfile 同时进行 CPU 与内存采样（导出名为 pprof.StartCPUAndMemoryProfile） 两类采样并行进行，均受同一组选项控制；该调用会阻塞直到采样时长结束 参数: - opts: 可选项，如 pprof.cpuProfilePath ...|
-| [pprof.StartCPUProfile](#startcpuprofile) |StartCPUProfile 开始 CPU 采样并将结果写入 profile 文件（导出名为 pprof.StartCPUProfile） 该调用会阻塞直到采样时长结束（由 pprof.timeout 或 pprof.ctx 控制，默认 15 秒） 参数: - opts: 可选项，如 pprof....|
-| [pprof.StartMemoryProfile](#startmemoryprofile) |StartMemoryProfile 在采样时长结束后写入一次堆内存 profile（导出名为 pprof.StartMemoryProfile） 该调用会阻塞直到采样时长结束（由 pprof.timeout 或 pprof.ctx 控制，默认 15 秒） 参数: - opts: 可选项，如 ppr...|
-| [pprof.callback](#callback) |callback 设置采样完成后的统一回调（导出名为 pprof.callback） 同时作用于 CPU 与内存 profile 完成事件，回调参数为生成的 profile 文件路径 作为 pprof 采样函数的可选项使用 参数: - h: 回调函数 func(profilePath) 返回值: -...|
-| [pprof.cpuProfilePath](#cpuprofilepath) |cpuProfilePath 指定 CPU profile 的输出文件路径（导出名为 pprof.cpuProfilePath） 作为 pprof.StartCPUProfile / pprof.StartCPUAndMemoryProfile 的可选项使用；不指定时使用默认临时路径 参数: - f...|
-| [pprof.ctx](#ctx) |ctx 指定控制采样时长的上下文（导出名为 pprof.ctx） 采样会一直进行直到上下文结束；若上下文未设置截止时间，则回退为默认 15 秒 作为 pprof 采样函数的可选项使用 参数: - ctx: 控制采样生命周期的上下文 返回值: - 可传入 pprof 采样函数的选项|
-| [pprof.memProfilePath](#memprofilepath) |memProfilePath 指定内存 profile 的输出文件路径（导出名为 pprof.memProfilePath） 作为 pprof.StartMemoryProfile / pprof.StartCPUAndMemoryProfile 的可选项使用；不指定时使用默认临时路径 参数: - ...|
-| [pprof.onCPUProfileFinished](#oncpuprofilefinished) |onCPUProfileFinished 设置 CPU 采样结束时的回调（导出名为 pprof.onCPUProfileFinished） 回调参数为生成的 CPU profile 文件路径与可能的错误；作为 pprof.StartCPUProfile 的可选项使用 参数: - fn: 回调函数 f...|
-| [pprof.onCPUProfileStarted](#oncpuprofilestarted) |onCPUProfileStarted 设置 CPU 采样开始时的回调（导出名为 pprof.onCPUProfileStarted） 回调参数为 CPU profile 文件路径；作为 pprof.StartCPUProfile 的可选项使用 参数: - fn: 回调函数 func(profile...|
-| [pprof.onMemProfileFinished](#onmemprofilefinished) |onMemProfileFinished 设置内存采样结束时的回调（导出名为 pprof.onMemProfileFinished） 回调参数为生成的内存 profile 文件路径与可能的错误；作为 pprof.StartMemoryProfile 的可选项使用 参数: - fn: 回调函数 fun...|
-| [pprof.onMemProfileStarted](#onmemprofilestarted) |onMemProfileStarted 设置内存采样开始时的回调（导出名为 pprof.onMemProfileStarted） 回调参数为内存 profile 文件路径；作为 pprof.StartMemoryProfile 的可选项使用 参数: - fn: 回调函数 func(profilePa...|
-| [pprof.timeout](#timeout) |timeout 指定采样持续的秒数（导出名为 pprof.timeout） 内部会据此创建一个带截止时间的上下文；传入非正数时回退为默认 15 秒 作为 pprof 采样函数的可选项使用 参数: - i: 采样秒数（支持小数） 返回值: - 可传入 pprof 采样函数的选项|
+`pprof` 库提供性能剖析能力，采集 CPU 与内存 profile 并可自动分析，常用于排查脚本/引擎的性能瓶颈与内存占用。
 
+典型使用场景：
 
-## 函数定义
-### AutoAnalyzeFile
+- 采集 profile：`pprof.StartCPUProfile` / `pprof.StartMemoryProfile` / `pprof.StartCPUAndMemoryProfile` 启动采集，配 `pprof.cpuProfilePath` / `pprof.memProfilePath` / `pprof.timeout` 与各类生命周期回调。
+- 自动分析：`pprof.AutoAnalyzeFile(filename)` 对已有 profile 文件做自动分析输出。
 
-#### 详细描述
-AutoAnalyzeFile 分析指定的 pprof 文件并返回人类可读的分析结果
+与相邻库的关系：`pprof` 是诊断工具，独立于业务逻辑，用于优化耗时脚本（如大规模扫描、AI 处理）的性能。
+
+> 共 13 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [pprof.AutoAnalyzeFile](#autoanalyzefile) | `filename string` | `string, error` | 分析指定的 pprof 文件并返回人类可读的分析结果 |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [pprof.StartCPUAndMemoryProfile](#startcpuandmemoryprofile) | `opts ...Option` | `error` | 同时进行 CPU 与内存采样（导出名为 pprof.StartCPUAndMemoryProfile） |
+| [pprof.StartCPUProfile](#startcpuprofile) | `opts ...Option` | `error` | 开始 CPU 采样并将结果写入 profile 文件（导出名为 pprof.StartCPUProfile） |
+| [pprof.StartMemoryProfile](#startmemoryprofile) | `opts ...Option` | `error` | 在采样时长结束后写入一次堆内存 profile（导出名为 pprof.StartMemoryProfile） |
+
+## 函数详情
+
+### AutoAnalyzeFile {#autoanalyzefile}
+
+```go
+AutoAnalyzeFile(filename string) (string, error)
+```
+
+分析指定的 pprof 文件并返回人类可读的分析结果
 
 AutoAnalyzeFile 解析一个 pprof 采样文件并生成可读的性能分析报告（导出名为 pprof.AutoAnalyzeFile）
 
 报告按函数聚合采样数据，便于快速定位热点
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `string` | pprof 采样文件路径（由 pprof.StartCPUProfile 等生成） |
 
-参数:
+**返回值**
 
-  - filename: pprof 采样文件路径（由 pprof.StartCPUProfile 等生成）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 文本格式的分析报告 |
+| r2 | `error` | 错误信息（文件读取/解析失败或无性能数据时返回） |
 
-
-
-返回值:
-
-  - 文本格式的分析报告
-
-  - 错误信息（文件读取/解析失败或无性能数据时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 prof = file.Join(os.TempDir(), "cpu_analyze_demo.prof")
@@ -58,46 +66,31 @@ assert len(report) > 0, "AutoAnalyzeFile should produce a non-empty report"
 file.Remove(prof)
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`AutoAnalyzeFile(filename string) (string, error)`
+### StartCPUAndMemoryProfile {#startcpuandmemoryprofile}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filename | `string` | pprof 采样文件路径（由 pprof.StartCPUProfile 等生成） |
+```go
+StartCPUAndMemoryProfile(opts ...Option) error
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 文本格式的分析报告 |
-| r2 | `error` | 错误信息（文件读取/解析失败或无性能数据时返回） |
-
-
-### StartCPUAndMemoryProfile
-
-#### 详细描述
-StartCPUAndMemoryProfile 同时进行 CPU 与内存采样（导出名为 pprof.StartCPUAndMemoryProfile）
+同时进行 CPU 与内存采样（导出名为 pprof.StartCPUAndMemoryProfile）
 
 两类采样并行进行，均受同一组选项控制；该调用会阻塞直到采样时长结束
 
+**可选参数**
 
+可作为可变参数 `opts ...Option` 传入选项；共 9 个可用选项，详见 [Option 选项列表](#option-option)。
 
-参数:
+**返回值**
 
-  - opts: 可选项，如 pprof.cpuProfilePath / pprof.memProfilePath / pprof.timeout / pprof.ctx / pprof.callback 等
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 cpuPath = file.Join(os.TempDir(), "cm_cpu_demo.prof")
@@ -114,45 +107,29 @@ assert file.IsExisted(cpuPath) && file.IsExisted(memPath), "should produce both 
 file.Remove(cpuPath); file.Remove(memPath)
 ``````````````
 
+---
 
-#### 定义
+### StartCPUProfile {#startcpuprofile}
 
-`StartCPUAndMemoryProfile(opts ...Option) error`
+```go
+StartCPUProfile(opts ...Option) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...Option` | 可选项，如 pprof.cpuProfilePath / pprof.memProfilePath / pprof.timeout / pprof.ctx / pprof.callback 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### StartCPUProfile
-
-#### 详细描述
-StartCPUProfile 开始 CPU 采样并将结果写入 profile 文件（导出名为 pprof.StartCPUProfile）
+开始 CPU 采样并将结果写入 profile 文件（导出名为 pprof.StartCPUProfile）
 
 该调用会阻塞直到采样时长结束（由 pprof.timeout 或 pprof.ctx 控制，默认 15 秒）
 
+**可选参数**
 
+可作为可变参数 `opts ...Option` 传入选项；共 9 个可用选项，详见 [Option 选项列表](#option-option)。
 
-参数:
+**返回值**
 
-  - opts: 可选项，如 pprof.cpuProfilePath / pprof.timeout / pprof.ctx / pprof.onCPUProfileStarted / pprof.onCPUProfileFinished
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 prof = file.Join(os.TempDir(), "cpu_demo.prof")
@@ -162,45 +139,29 @@ assert file.IsExisted(prof), "StartCPUProfile should write a CPU profile file"
 file.Remove(prof)
 ``````````````
 
+---
 
-#### 定义
+### StartMemoryProfile {#startmemoryprofile}
 
-`StartCPUProfile(opts ...Option) error`
+```go
+StartMemoryProfile(opts ...Option) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...Option` | 可选项，如 pprof.cpuProfilePath / pprof.timeout / pprof.ctx / pprof.onCPUProfileStarted / pprof.onCPUProfileFinished |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### StartMemoryProfile
-
-#### 详细描述
-StartMemoryProfile 在采样时长结束后写入一次堆内存 profile（导出名为 pprof.StartMemoryProfile）
+在采样时长结束后写入一次堆内存 profile（导出名为 pprof.StartMemoryProfile）
 
 该调用会阻塞直到采样时长结束（由 pprof.timeout 或 pprof.ctx 控制，默认 15 秒）
 
+**可选参数**
 
+可作为可变参数 `opts ...Option` 传入选项；共 9 个可用选项，详见 [Option 选项列表](#option-option)。
 
-参数:
+**返回值**
 
-  - opts: 可选项，如 pprof.memProfilePath / pprof.timeout / pprof.ctx / pprof.onMemProfileStarted / pprof.onMemProfileFinished
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 prof = file.Join(os.TempDir(), "mem_demo.prof")
@@ -210,463 +171,25 @@ assert file.IsExisted(prof), "StartMemoryProfile should write a memory profile f
 file.Remove(prof)
 ``````````````
 
-
-#### 定义
-
-`StartMemoryProfile(opts ...Option) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...Option` | 可选项，如 pprof.memProfilePath / pprof.timeout / pprof.ctx / pprof.onMemProfileStarted / pprof.onMemProfileFinished |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### callback
-
-#### 详细描述
-callback 设置采样完成后的统一回调（导出名为 pprof.callback）
-
-同时作用于 CPU 与内存 profile 完成事件，回调参数为生成的 profile 文件路径
-
-作为 pprof 采样函数的可选项使用
-
-
-
-参数:
-
-  - h: 回调函数 func(profilePath)
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "mem_cb_demo.prof")
-done = ""
-pprof.StartMemoryProfile(pprof.memProfilePath(prof), pprof.timeout(1), pprof.callback(func(p) { done = p }))
-println(done == prof)   // OUT: true
-assert done == prof, "callback should receive the generated profile path"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`callback(h func(string)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| h | `func(string)` | 回调函数 func(profilePath) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### cpuProfilePath
-
-#### 详细描述
-cpuProfilePath 指定 CPU profile 的输出文件路径（导出名为 pprof.cpuProfilePath）
-
-作为 pprof.StartCPUProfile / pprof.StartCPUAndMemoryProfile 的可选项使用；不指定时使用默认临时路径
-
-
-
-参数:
-
-  - file: CPU profile 输出文件路径
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "cpu_path_demo.prof")
-pprof.StartCPUProfile(pprof.cpuProfilePath(prof), pprof.timeout(1))
-println(file.IsExisted(prof))   // OUT: true
-assert file.IsExisted(prof), "cpuProfilePath should control where the CPU profile is written"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`cpuProfilePath(file string) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| file | `string` | CPU profile 输出文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### ctx
-
-#### 详细描述
-ctx 指定控制采样时长的上下文（导出名为 pprof.ctx）
-
-采样会一直进行直到上下文结束；若上下文未设置截止时间，则回退为默认 15 秒
-
-作为 pprof 采样函数的可选项使用
-
-
-
-参数:
-
-  - ctx: 控制采样生命周期的上下文
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "cpu_ctx_demo.prof")
-ctx = context.WithTimeout(context.Background(), time.ParseDuration("1s")~)[0]
-pprof.StartCPUProfile(pprof.cpuProfilePath(prof), pprof.ctx(ctx))
-println(file.IsExisted(prof))   // OUT: true
-assert file.IsExisted(prof), "ctx should bound the CPU profiling duration"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`ctx(ctx context.Context) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` | 控制采样生命周期的上下文 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### memProfilePath
-
-#### 详细描述
-memProfilePath 指定内存 profile 的输出文件路径（导出名为 pprof.memProfilePath）
-
-作为 pprof.StartMemoryProfile / pprof.StartCPUAndMemoryProfile 的可选项使用；不指定时使用默认临时路径
-
-
-
-参数:
-
-  - file: 内存 profile 输出文件路径
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "mem_path_demo.prof")
-pprof.StartMemoryProfile(pprof.memProfilePath(prof), pprof.timeout(1))
-println(file.IsExisted(prof))   // OUT: true
-assert file.IsExisted(prof), "memProfilePath should control where the memory profile is written"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`memProfilePath(file string) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| file | `string` | 内存 profile 输出文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### onCPUProfileFinished
-
-#### 详细描述
-onCPUProfileFinished 设置 CPU 采样结束时的回调（导出名为 pprof.onCPUProfileFinished）
-
-回调参数为生成的 CPU profile 文件路径与可能的错误；作为 pprof.StartCPUProfile 的可选项使用
-
-
-
-参数:
-
-  - fn: 回调函数 func(profilePath, err)
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "cpu_fin_demo.prof")
-fin = ""
-pprof.StartCPUProfile(pprof.cpuProfilePath(prof), pprof.timeout(1), pprof.onCPUProfileFinished(func(p, err) { fin = p }))
-println(fin == prof)   // OUT: true
-assert fin == prof, "onCPUProfileFinished should report the finished CPU profile path"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`onCPUProfileFinished(fn func(string, error)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fn | `func(string, error)` | 回调函数 func(profilePath, err) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### onCPUProfileStarted
-
-#### 详细描述
-onCPUProfileStarted 设置 CPU 采样开始时的回调（导出名为 pprof.onCPUProfileStarted）
-
-回调参数为 CPU profile 文件路径；作为 pprof.StartCPUProfile 的可选项使用
-
-
-
-参数:
-
-  - fn: 回调函数 func(profilePath)
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "cpu_start_demo.prof")
-started = ""
-pprof.StartCPUProfile(pprof.cpuProfilePath(prof), pprof.timeout(1), pprof.onCPUProfileStarted(func(p) { started = p }))
-println(started == prof)   // OUT: true
-assert started == prof, "onCPUProfileStarted should report the CPU profile path"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`onCPUProfileStarted(fn func(string)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fn | `func(string)` | 回调函数 func(profilePath) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### onMemProfileFinished
-
-#### 详细描述
-onMemProfileFinished 设置内存采样结束时的回调（导出名为 pprof.onMemProfileFinished）
-
-回调参数为生成的内存 profile 文件路径与可能的错误；作为 pprof.StartMemoryProfile 的可选项使用
-
-
-
-参数:
-
-  - fn: 回调函数 func(profilePath, err)
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "mem_fin_demo.prof")
-fin = ""
-pprof.StartMemoryProfile(pprof.memProfilePath(prof), pprof.timeout(1), pprof.onMemProfileFinished(func(p, err) { fin = p }))
-println(fin == prof)   // OUT: true
-assert fin == prof, "onMemProfileFinished should report the finished memory profile path"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`onMemProfileFinished(fn func(string, error)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fn | `func(string, error)` | 回调函数 func(profilePath, err) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### onMemProfileStarted
-
-#### 详细描述
-onMemProfileStarted 设置内存采样开始时的回调（导出名为 pprof.onMemProfileStarted）
-
-回调参数为内存 profile 文件路径；作为 pprof.StartMemoryProfile 的可选项使用
-
-
-
-参数:
-
-  - fn: 回调函数 func(profilePath)
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "mem_start_demo.prof")
-started = ""
-pprof.StartMemoryProfile(pprof.memProfilePath(prof), pprof.timeout(1), pprof.onMemProfileStarted(func(p) { started = p }))
-println(started == prof)   // OUT: true
-assert started == prof, "onMemProfileStarted should report the memory profile path"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`onMemProfileStarted(fn func(string)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| fn | `func(string)` | 回调函数 func(profilePath) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
-
-### timeout
-
-#### 详细描述
-timeout 指定采样持续的秒数（导出名为 pprof.timeout）
-
-内部会据此创建一个带截止时间的上下文；传入非正数时回退为默认 15 秒
-
-作为 pprof 采样函数的可选项使用
-
-
-
-参数:
-
-  - i: 采样秒数（支持小数）
-
-
-
-返回值:
-
-  - 可传入 pprof 采样函数的选项
-
-
-
-
-Example:
-
-``````````````yak
-prof = file.Join(os.TempDir(), "mem_timeout_demo.prof")
-pprof.StartMemoryProfile(pprof.memProfilePath(prof), pprof.timeout(1))
-println(file.IsExisted(prof))   // OUT: true
-assert file.IsExisted(prof), "timeout should bound the profiling duration"
-file.Remove(prof)
-``````````````
-
-
-#### 定义
-
-`timeout(i float64) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `float64` | 采样秒数（支持小数） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | 可传入 pprof 采样函数的选项 |
-
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：Option {#option-option}
+
+涉及到的函数有：[pprof.StartCPUAndMemoryProfile](#startcpuandmemoryprofile)、[pprof.StartCPUProfile](#startcpuprofile)、[pprof.StartMemoryProfile](#startmemoryprofile)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `pprof.callback` | `h func(string)` | `Option` | 设置采样完成后的统一回调 |
+| `pprof.cpuProfilePath` | `file string` | `Option` | 指定 CPU profile 的输出文件路径 |
+| `pprof.ctx` | `ctx context.Context` | `Option` | 指定控制采样时长的上下文 |
+| `pprof.memProfilePath` | `file string` | `Option` | 指定内存 profile 的输出文件路径 |
+| `pprof.onCPUProfileFinished` | `fn func(string, error)` | `Option` | 设置 CPU 采样结束时的回调 |
+| `pprof.onCPUProfileStarted` | `fn func(string)` | `Option` | 设置 CPU 采样开始时的回调 |
+| `pprof.onMemProfileFinished` | `fn func(string, error)` | `Option` | 设置内存采样结束时的回调 |
+| `pprof.onMemProfileStarted` | `fn func(string)` | `Option` | 设置内存采样开始时的回调 |
+| `pprof.timeout` | `i float64` | `Option` | 指定采样持续的秒数 |
 

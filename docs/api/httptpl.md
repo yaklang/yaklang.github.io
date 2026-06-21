@@ -1,40 +1,52 @@
-# httptpl
+# httptpl {#library-httptpl}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [httptpl.MatchOrExtractHTTPFlow](#matchorextracthttpflow) |MatchOrExtractHTTPFlow 针对单个 HTTP 请求/响应对，执行 yamlString 中定义的 nuclei 风格 matcher 与 extractor 参数: - req: 请求报文（字符串或字节数组），可为空（将尝试从响应推导） - rsp: 响应报文（字符串或字节数组）...|
-| [httptpl.https](#https) |MatchOrExtractHTTPS 是一个配置选项，用于在解析请求 URL 时声明是否按 HTTPS 处理 参数: - enable: 是否按 HTTPS 处理 返回值: - 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow|
-| [httptpl.vars](#vars) |MatchOrExtractVars 是一个配置选项，用于在匹配/提取执行期间注入自定义的 nuclei-dsl 变量 参数: - items: 要注入的变量键值对 返回值: - 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow|
+`httptpl` 库提供基于 YAML 模板（Nuclei 风格）的 HTTP 匹配与提取能力，对给定请求/响应套用 matcher/extractor 规则，判断是否命中并抽取数据，是模板化漏洞检测的底层匹配引擎。
 
+典型使用场景：
 
-## 函数定义
-### MatchOrExtractHTTPFlow
+- 匹配提取：`httptpl.MatchOrExtractHTTPFlow(req, rsp, yamlString, opts...)` 用 YAML 模板对一次 HTTP 交互做匹配与字段提取。
+- 选项：`httptpl.https` 指定 HTTPS，`httptpl.vars` 注入模板变量。
 
-#### 详细描述
-MatchOrExtractHTTPFlow 针对单个 HTTP 请求/响应对，执行 yamlString 中定义的 nuclei 风格 matcher 与 extractor
+与相邻库的关系：`httptpl` 与 `nuclei`（完整 PoC 模板执行）、`fuzz`/`poc`（请求构造发送）配合，把"matcher/extractor 规则"应用到任意流量上。
 
-参数:
+> 共 3 个函数
 
-  - req: 请求报文（字符串或字节数组），可为空（将尝试从响应推导）
+## 可变参数函数索引
 
-  - rsp: 响应报文（字符串或字节数组）
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [httptpl.MatchOrExtractHTTPFlow](#matchorextracthttpflow) | `req any, rsp any, yamlString string, opts ...MatchOrExtractOption` | `*MatchOrExtractResult, error` | 针对单个 HTTP 请求/响应对，执行 yamlString 中定义的 nuclei 风格 matcher 与 extractor |
 
-  - yamlString: 定义 matchers/extractors 的 nuclei 风格 YAML 字符串
+## 可变参数函数详情
 
-  - opts: 可选配置，例如 httptpl.https、httptpl.vars
+### MatchOrExtractHTTPFlow {#matchorextracthttpflow}
 
+```go
+MatchOrExtractHTTPFlow(req any, rsp any, yamlString string, opts ...MatchOrExtractOption) (*MatchOrExtractResult, error)
+```
 
+针对单个 HTTP 请求/响应对，执行 yamlString 中定义的 nuclei 风格 matcher 与 extractor
 
-返回值:
+**必填参数**
 
-  - 匹配/提取结果，包含是否命中(IsMatched)与提取到的变量(Extracted)
+|参数名|类型|说明|
+|:--|:--|:--|
+| req | `any` | 请求报文（字符串或字节数组），可为空（将尝试从响应推导） |
+| rsp | `any` | 响应报文（字符串或字节数组） |
+| yamlString | `string` | 定义 matchers/extractors 的 nuclei 风格 YAML 字符串 |
 
-  - 错误信息，规则为空或解析失败时返回非空
+**可选参数**
 
+可作为可变参数 `opts ...MatchOrExtractOption` 传入选项；共 2 个可用选项，详见 [MatchOrExtractOption 选项列表](#option-matchorextractoption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*MatchOrExtractResult` | 匹配/提取结果，包含是否命中(IsMatched)与提取到的变量(Extracted) |
+| r2 | `error` | 错误信息，规则为空或解析失败时返回非空 |
 
-Example:
+**示例**
 
 ``````````````yak
 rsp = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<title>Example Domain</title>"
@@ -49,107 +61,18 @@ println(result.IsMatched)   // OUT: true
 assert result.IsMatched == true, "word matcher should match the response body"
 ``````````````
 
+---
 
-#### 定义
+## 可变参数选项列表
 
-`MatchOrExtractHTTPFlow(req any, rsp any, yamlString string, opts ...MatchOrExtractOption) (*MatchOrExtractResult, error)`
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| req | `any` | 请求报文（字符串或字节数组），可为空（将尝试从响应推导） |
-| rsp | `any` | 响应报文（字符串或字节数组） |
-| yamlString | `string` | 定义 matchers/extractors 的 nuclei 风格 YAML 字符串 |
-| opts | `...MatchOrExtractOption` | 可选配置，例如 httptpl.https、httptpl.vars |
+### 1. 类型：MatchOrExtractOption {#option-matchorextractoption}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*MatchOrExtractResult` | 匹配/提取结果，包含是否命中(IsMatched)与提取到的变量(Extracted) |
-| r2 | `error` | 错误信息，规则为空或解析失败时返回非空 |
+涉及到的函数有：[httptpl.MatchOrExtractHTTPFlow](#matchorextracthttpflow)
 
-
-### https
-
-#### 详细描述
-MatchOrExtractHTTPS 是一个配置选项，用于在解析请求 URL 时声明是否按 HTTPS 处理
-
-参数:
-
-  - enable: 是否按 HTTPS 处理
-
-
-
-返回值:
-
-  - 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow
-
-
-
-
-Example:
-
-``````````````yak
-// 声明按 HTTPS 处理后再执行匹配
-result = httptpl.MatchOrExtractHTTPFlow(req, rsp, yamlRule, httptpl.https(true))~
-println(result.IsMatched)
-``````````````
-
-
-#### 定义
-
-`https(enable bool) MatchOrExtractOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| enable | `bool` | 是否按 HTTPS 处理 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `MatchOrExtractOption` | 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow |
-
-
-### vars
-
-#### 详细描述
-MatchOrExtractVars 是一个配置选项，用于在匹配/提取执行期间注入自定义的 nuclei-dsl 变量
-
-参数:
-
-  - items: 要注入的变量键值对
-
-
-
-返回值:
-
-  - 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow
-
-
-
-
-Example:
-
-``````````````yak
-// 注入自定义变量供 matcher/extractor 使用
-result = httptpl.MatchOrExtractHTTPFlow(req, rsp, yamlRule, httptpl.vars({"flag": "abc"}))~
-println(result.IsMatched)
-``````````````
-
-
-#### 定义
-
-`vars(items map[string]any) MatchOrExtractOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| items | `map[string]any` | 要注入的变量键值对 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `MatchOrExtractOption` | 一个配置选项，作为可变参数传入 httptpl.MatchOrExtractHTTPFlow |
-
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `httptpl.https` | `enable bool` | `MatchOrExtractOption` | MatchOrExtractHTTPS 是一个配置选项，用于在解析请求 URL 时声明是否按 HTTPS 处理 |
+| `httptpl.vars` | `items map[string]any` | `MatchOrExtractOption` | MatchOrExtractVars 是一个配置选项，用于在匹配/提取执行期间注入自定义的 nuclei-dsl 变量 |
 

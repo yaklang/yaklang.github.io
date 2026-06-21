@@ -68,9 +68,7 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 
 ## API 详情
 
-
-
-### Chat
+### Chat {#chat}
 
 - 描述: Chat 快速调用 AI 服务进行对话，这是最简单的调用方式。
 
@@ -86,15 +84,15 @@ Chat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |  要发送给 AI 的消息内容 |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项（如 apiKey、model 等）若不指定，则默认尝试全局配置中的AI提供商配置 |
+| msg | `string` | 要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` | AI 配置选项（如 apiKey、model 等）若不指定，则默认尝试全局配置中的AI提供商配置 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  AI 返回的回复内容 |
-| r2 | `error` |  错误信息 |
+| r1 | `string` | AI 返回的回复内容 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="Chat-2" label="示例">
@@ -119,7 +117,7 @@ println(response)
 
 ---
 
-### ChatGLM
+### ChatGLM {#chatglm}
 
 - 描述: ChatGLM 创建一个 ChatGLM 客户端实例，用于调用智谱 AI 的 ChatGLM 系列模型。
 
@@ -135,13 +133,13 @@ ChatGLM(opts ...aispec.AIConfigOption) aispec.AIClient
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aispec.AIConfigOption` |  配置选项（必须包含 apiKey） |
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `aispec.AIClient` |  AI 客户端实例 |
+| r1 | `aispec.AIClient` | AI 客户端实例 |
 
 </TabItem>
 <TabItem value="ChatGLM-2" label="示例">
@@ -168,7 +166,7 @@ println(response)
 
 ---
 
-### FunctionCall
+### FunctionCall {#functioncall}
 
 - 描述: FunctionCall 让 AI 根据用户输入自动调用预定义的函数，实现智能函数调用能力。
 
@@ -184,16 +182,16 @@ FunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[string
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  用户输入的自然语言指令 |
-| funcs | `any` |  函数定义（支持结构体或函数列表） |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项 |
+| input | `string` | 用户输入的自然语言指令 |
+| funcs | `any` | 函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` | AI 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |  函数调用结果 |
-| r2 | `error` |  错误信息 |
+| r1 | `map[string]any` | 函数调用结果 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="FunctionCall-2" label="示例">
@@ -234,7 +232,7 @@ dump(result)
 
 ---
 
-### IntelligentChat
+### IntelligentChat {#intelligentchat}
 
 - 描述: IntelligentChat 使用智能（高质量）模型分层进行对话（导出名为 ai.IntelligentChat）
 
@@ -250,15 +248,15 @@ IntelligentChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |  要发送给 AI 的消息内容 |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项，如 ai.apiKey、ai.model 等 |
+| msg | `string` | 要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` | AI 配置选项，如 ai.apiKey、ai.model 等 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  AI 返回的回复内容 |
-| r2 | `error` |  错误信息 |
+| r1 | `string` | AI 返回的回复内容 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="IntelligentChat-2" label="示例">
@@ -276,7 +274,7 @@ println(response)
 
 ---
 
-### IntelligentFunctionCall
+### IntelligentFunctionCall {#intelligentfunctioncall}
 
 - 描述: IntelligentFunctionCall 使用智能（高质量）模型进行函数调用（导出名为 ai.IntelligentFunctionCall）
 
@@ -292,16 +290,16 @@ IntelligentFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) 
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  用户输入的自然语言指令 |
-| funcs | `any` |  函数定义（支持结构体或函数列表） |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项 |
+| input | `string` | 用户输入的自然语言指令 |
+| funcs | `any` | 函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` | AI 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |  函数调用结果 |
-| r2 | `error` |  错误信息 |
+| r1 | `map[string]any` | 函数调用结果 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="IntelligentFunctionCall-2" label="示例">
@@ -320,7 +318,7 @@ dump(result)
 
 ---
 
-### LightweightChat
+### LightweightChat {#lightweightchat}
 
 - 描述: LightweightChat 使用轻量（快速）模型分层进行对话（导出名为 ai.LightweightChat）
 
@@ -336,15 +334,15 @@ LightweightChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |  要发送给 AI 的消息内容 |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项，如 ai.apiKey、ai.model 等 |
+| msg | `string` | 要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` | AI 配置选项，如 ai.apiKey、ai.model 等 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  AI 返回的回复内容 |
-| r2 | `error` |  错误信息 |
+| r1 | `string` | AI 返回的回复内容 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="LightweightChat-2" label="示例">
@@ -362,7 +360,7 @@ println(response)
 
 ---
 
-### LightweightFunctionCall
+### LightweightFunctionCall {#lightweightfunctioncall}
 
 - 描述: LightweightFunctionCall 使用轻量（快速）模型进行函数调用（导出名为 ai.LightweightFunctionCall）
 
@@ -378,16 +376,16 @@ LightweightFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) 
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  用户输入的自然语言指令 |
-| funcs | `any` |  函数定义（支持结构体或函数列表） |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项 |
+| input | `string` | 用户输入的自然语言指令 |
+| funcs | `any` | 函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` | AI 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |  函数调用结果 |
-| r2 | `error` |  错误信息 |
+| r1 | `map[string]any` | 函数调用结果 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="LightweightFunctionCall-2" label="示例">
@@ -406,7 +404,7 @@ dump(result)
 
 ---
 
-### ListModelByProviderType
+### ListModelByProviderType {#listmodelbyprovidertype}
 
 - 描述: ListModelByProviderType 根据提供商类型列出可用的 AI 模型。
 
@@ -422,15 +420,15 @@ ListModelByProviderType(providerType string, opts ...aispec.AIConfigOption) ([]*
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| providerType | `string` |  提供商类型（如 "openai"、"chatglm"、"moonshot"） |
-| opts | `...aispec.AIConfigOption` |  配置选项 |
+| providerType | `string` | 提供商类型（如 &#34;openai&#34;、&#34;chatglm&#34;、&#34;moonshot&#34;） |
+| opts | `...aispec.AIConfigOption` | 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*aispec.ModelMeta` |  模型元数据列表 |
-| r2 | `error` |  错误信息 |
+| r1 | `[]*aispec.ModelMeta` | 模型元数据列表 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="ListModelByProviderType-2" label="示例">
@@ -451,7 +449,7 @@ die(err)
 
 ---
 
-### ListModels
+### ListModels {#listmodels}
 
 - 描述: ListModels 列出当前配置下所有可用的 AI 模型。
 
@@ -467,14 +465,14 @@ ListModels(opts ...aispec.AIConfigOption) ([]*aispec.ModelMeta, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aispec.AIConfigOption` |  配置选项（如 apiKey、type） |
+| opts | `...aispec.AIConfigOption` | 配置选项（如 apiKey、type） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `[]*aispec.ModelMeta` |  模型元数据列表 |
-| r2 | `error` |  错误信息 |
+| r1 | `[]*aispec.ModelMeta` | 模型元数据列表 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="ListModels-2" label="示例">
@@ -495,7 +493,7 @@ die(err)
 
 ---
 
-### MockAIService
+### MockAIService {#mockaiservice}
 
 - 描述: MockAIService 创建一个 Mock AI 响应 目前仅供项目内部测试脚本使用。
 
@@ -511,13 +509,13 @@ MockAIService(handle func(message string) string) aicommon.AICallbackType
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| handle | `func(message string) string` |  处理消息的回调函数 |
+| handle | `func(message string) string` | 处理消息的回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `aicommon.AICallbackType` |  Mock AI 服务实例 |
+| r1 | `aicommon.AICallbackType` | Mock AI 服务实例 |
 
 </TabItem>
 <TabItem value="MockAIService-2" label="示例">
@@ -537,7 +535,7 @@ println("ai.MockAIService created callback successfully")
 
 ---
 
-### Moonshot
+### Moonshot {#moonshot}
 
 - 描述: Moonshot 创建一个 Moonshot 客户端实例，用于调用 Moonshot AI 服务。
 
@@ -553,13 +551,13 @@ Moonshot(opts ...aispec.AIConfigOption) aispec.AIClient
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aispec.AIConfigOption` |  配置选项（必须包含 apiKey） |
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `aispec.AIClient` |  AI 客户端实例 |
+| r1 | `aispec.AIClient` | AI 客户端实例 |
 
 </TabItem>
 <TabItem value="Moonshot-2" label="示例">
@@ -586,7 +584,7 @@ println(response)
 
 ---
 
-### OpenAI
+### OpenAI {#openai}
 
 - 描述: OpenAI 创建一个 OpenAI 客户端实例，支持 OpenAI 官方 API 及兼容的第三方服务。
 
@@ -602,13 +600,13 @@ OpenAI(opts ...aispec.AIConfigOption) aispec.AIClient
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| opts | `...aispec.AIConfigOption` |  配置选项（必须包含 apiKey） |
+| opts | `...aispec.AIConfigOption` | 配置选项（必须包含 apiKey） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `aispec.AIClient` |  AI 客户端实例 |
+| r1 | `aispec.AIClient` | AI 客户端实例 |
 
 </TabItem>
 <TabItem value="OpenAI-2" label="示例">
@@ -656,7 +654,7 @@ println(response)
 
 ---
 
-### StructuredStream
+### StructuredStream {#structuredstream}
 
 - 描述: StructuredStream 获取结构化的流式输出，支持实时接收 AI 返回的数据。
 
@@ -672,15 +670,15 @@ StructuredStream(input string, opts ...aispec.AIConfigOption) (chan *aispec.Stru
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  输入消息 |
-| opts | `...aispec.AIConfigOption` |  配置选项 |
+| input | `string` | 输入消息 |
+| opts | `...aispec.AIConfigOption` | 配置选项 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `chan *aispec.StructuredData` |  结构化数据通道 |
-| r2 | `error` |  错误信息 |
+| r1 | `chan *aispec.StructuredData` | 结构化数据通道 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="StructuredStream-2" label="示例">
@@ -712,7 +710,7 @@ printf("最终输出: %s\n", collectedData)
 
 ---
 
-### VisionChat
+### VisionChat {#visionchat}
 
 - 描述: VisionChat 使用视觉模型分层进行对话，可结合图片输入（导出名为 ai.VisionChat）
 
@@ -728,15 +726,15 @@ VisionChat(msg string, opts ...aispec.AIConfigOption) (string, error)
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msg | `string` |  要发送给 AI 的消息内容 |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项，通常配合 ai.imageFile、ai.imageBase64 等使用 |
+| msg | `string` | 要发送给 AI 的消息内容 |
+| opts | `...aispec.AIConfigOption` | AI 配置选项，通常配合 ai.imageFile、ai.imageBase64 等使用 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  AI 返回的回复内容 |
-| r2 | `error` |  错误信息 |
+| r1 | `string` | AI 返回的回复内容 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="VisionChat-2" label="示例">
@@ -754,7 +752,7 @@ println(response)
 
 ---
 
-### VisionFunctionCall
+### VisionFunctionCall {#visionfunctioncall}
 
 - 描述: VisionFunctionCall 使用视觉模型进行函数调用，可结合图片输入（导出名为 ai.VisionFunctionCall）
 
@@ -770,16 +768,16 @@ VisionFunctionCall(input string, funcs any, opts ...aispec.AIConfigOption) (map[
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| input | `string` |  用户输入的自然语言指令 |
-| funcs | `any` |  函数定义（支持结构体或函数列表） |
-| opts | `...aispec.AIConfigOption` |  AI 配置选项，通常配合 ai.imageFile 等使用 |
+| input | `string` | 用户输入的自然语言指令 |
+| funcs | `any` | 函数定义（支持结构体或函数列表） |
+| opts | `...aispec.AIConfigOption` | AI 配置选项，通常配合 ai.imageFile 等使用 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `map[string]any` |  函数调用结果 |
-| r2 | `error` |  错误信息 |
+| r1 | `map[string]any` | 函数调用结果 |
+| r2 | `error` | 错误信息 |
 
 </TabItem>
 <TabItem value="VisionFunctionCall-2" label="示例">
@@ -798,7 +796,7 @@ dump(result)
 
 ---
 
-### aicacheSession
+### aicacheSession {#aicachesession}
 
 - 描述: SessionDir 返回当前进程 aicache 调试落盘根目录的绝对路径，
 
@@ -816,7 +814,7 @@ aicacheSession() string
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `string` |  aicache 调试落盘根目录的绝对路径 |
+| r1 | `string` | aicache 调试落盘根目录的绝对路径 |
 
 </TabItem>
 <TabItem value="aicacheSession-2" label="示例">
@@ -833,7 +831,7 @@ println(sessionDir)
 
 ---
 
-### apiKey
+### apiKey {#apikey}
 
 - 描述: WithAPIKey 设置 AI 服务的 API 密钥，这是访问 AI 服务的必需凭证。
 
@@ -849,13 +847,13 @@ apiKey(k string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| k | `string` |  API 密钥字符串 |
+| k | `string` | API 密钥字符串 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="apiKey-2" label="示例">
@@ -875,7 +873,7 @@ client = ai.OpenAI(
 
 ---
 
-### baseURL
+### baseURL {#baseurl}
 
 - 描述: WithBaseURL 设置 AI 服务的基础 URL，用于自定义 API 端点或使用代理服务。
 
@@ -891,13 +889,13 @@ baseURL(baseURL string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| baseURL | `string` |  API 基础 URL |
+| baseURL | `string` | API 基础 URL |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="baseURL-2" label="示例">
@@ -919,7 +917,7 @@ client = ai.OpenAI(
 
 ---
 
-### debugStream
+### debugStream {#debugstream}
 
 - 描述: WithDebugStream 启用流式输出调试模式，用于开发调试。
 
@@ -935,13 +933,13 @@ debugStream(h ...bool) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `...bool` |  是否启用调试（默认 true） |
+| h | `...bool` | 是否启用调试（默认 true） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="debugStream-2" label="示例">
@@ -960,7 +958,7 @@ println(response)
 
 ---
 
-### domain
+### domain {#domain}
 
 - 描述: WithDomain 设置服务域名，用于某些特定的 AI 服务提供商。
 
@@ -976,13 +974,13 @@ domain(domain string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| domain | `string` |  域名字符串 |
+| domain | `string` | 域名字符串 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="domain-2" label="示例">
@@ -1003,7 +1001,7 @@ client = ai.OpenAI(
 
 ---
 
-### funcCallRetryTimes
+### funcCallRetryTimes {#funccallretrytimes}
 
 - 描述: WithFunctionCallRetryTimes 设置函数调用失败时的重试次数。
 
@@ -1019,13 +1017,13 @@ funcCallRetryTimes(times int) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| times | `int` |  重试次数 |
+| times | `int` | 重试次数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="funcCallRetryTimes-2" label="示例">
@@ -1058,7 +1056,7 @@ dump(result)
 
 ---
 
-### imageAI
+### imageAI {#imageai}
 
 - 描述: WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI）
 
@@ -1074,7 +1072,7 @@ imageAI() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="imageAI-2" label="示例">
@@ -1091,7 +1089,7 @@ println(response)
 
 ---
 
-### imageBase64
+### imageBase64 {#imagebase64}
 
 - 描述: WithImageBase64 传入 Base64 编码的图片数据，用于图像识别场景。
 
@@ -1107,13 +1105,13 @@ imageBase64(b64 string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b64 | `string` |  传入 Base64 编码的图片数据，支持纯 base64 字符串或data:image/ 格式。 |
+| b64 | `string` | 传入 Base64 编码的图片数据，支持纯 base64 字符串或data:image/ 格式。 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="imageBase64-2" label="示例">
@@ -1146,7 +1144,7 @@ println(response)
 
 ---
 
-### imageFile
+### imageFile {#imagefile}
 
 - 描述: WithImageFile 传入图片文件路径，自动读取并发送给 AI 进行分析。
 
@@ -1162,13 +1160,13 @@ imageFile(i string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| i | `string` |  图片文件路径 |
+| i | `string` | 图片文件路径 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="imageFile-2" label="示例">
@@ -1200,7 +1198,7 @@ println(response)
 
 ---
 
-### imageRaw
+### imageRaw {#imageraw}
 
 - 描述: WithImageRaw 传入原始图片字节数据，用于图像识别场景。
 
@@ -1216,13 +1214,13 @@ imageRaw(raw []byte) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `[]byte` |  图片的原始字节数据 |
+| raw | `[]byte` | 图片的原始字节数据 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="imageRaw-2" label="示例">
@@ -1254,7 +1252,7 @@ println(response)
 
 ---
 
-### model
+### model {#model}
 
 - 描述: WithModel 指定要使用的 AI 模型名称。
 
@@ -1270,13 +1268,13 @@ model(model string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| model | `string` |  模型名称（如 "gpt-4"、"gpt-3.5-turbo"） |
+| model | `string` | 模型名称（如 &#34;gpt-4&#34;、&#34;gpt-3.5-turbo&#34;） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="model-2" label="示例">
@@ -1306,7 +1304,7 @@ client = ai.OpenAI(
 
 ---
 
-### modelInfoCallback
+### modelInfoCallback {#modelinfocallback}
 
 - 描述: WithModelInfoCallback 在选定模型并开始调用前触发的回调（导出名为 ai.modelInfoCallback）
 
@@ -1322,13 +1320,13 @@ modelInfoCallback(cb func(provider, model string)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` |  回调函数，参数为 (provider, model) |
+| cb | `func(provider, model string)` | 回调函数，参数为 (provider, model) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="modelInfoCallback-2" label="示例">
@@ -1345,7 +1343,7 @@ println(opt)
 
 ---
 
-### modelInfoConfirmCallback
+### modelInfoConfirmCallback {#modelinfoconfirmcallback}
 
 - 描述: WithModelInfoConfirmCallback 在模型调用成功确认后触发的回调（导出名为 ai.modelInfoConfirmCallback）
 
@@ -1361,13 +1359,13 @@ modelInfoConfirmCallback(cb func(provider, model string)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(provider, model string)` |  回调函数，参数为 (provider, model) |
+| cb | `func(provider, model string)` | 回调函数，参数为 (provider, model) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="modelInfoConfirmCallback-2" label="示例">
@@ -1384,7 +1382,7 @@ println(opt)
 
 ---
 
-### noHttps
+### noHttps {#nohttps}
 
 - 描述: WithNoHttps 禁用 HTTPS，使用 HTTP 协议进行通信。
 
@@ -1400,13 +1398,13 @@ noHttps(b bool) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b | `bool` |  true 表示禁用 HTTPS |
+| b | `bool` | true 表示禁用 HTTPS |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="noHttps-2" label="示例">
@@ -1429,7 +1427,7 @@ client = ai.OpenAI(
 
 ---
 
-### onReasonStream
+### onReasonStream {#onreasonstream}
 
 - 描述: WithReasonStreamHandler 设置推理过程的流式输出回调，用于获取 AI 的思考过程。
 
@@ -1445,13 +1443,13 @@ onReasonStream(h func(io.Reader)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `func(io.Reader)` |  推理流处理回调函数 |
+| h | `func(io.Reader)` | 推理流处理回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="onReasonStream-2" label="示例">
@@ -1481,7 +1479,7 @@ response = ai.Chat(
 
 ---
 
-### onStream
+### onStream {#onstream}
 
 - 描述: WithStreamHandler 设置流式输出的回调函数，用于实时接收 AI 响应数据。
 
@@ -1497,13 +1495,13 @@ onStream(h func(io.Reader)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| h | `func(io.Reader)` |  流式数据处理回调函数 |
+| h | `func(io.Reader)` | 流式数据处理回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="onStream-2" label="示例">
@@ -1533,7 +1531,7 @@ response = ai.Chat(
 
 ---
 
-### preferredTier
+### preferredTier {#preferredtier}
 
 - 描述: WithPreferredTier 指定优先使用的模型分层（导出名为 ai.preferredTier）
 
@@ -1549,13 +1547,13 @@ preferredTier(tier consts.ModelTier) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| tier | `consts.ModelTier` |  模型分层，如智能、轻量、视觉 |
+| tier | `consts.ModelTier` | 模型分层，如智能、轻量、视觉 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="preferredTier-2" label="示例">
@@ -1572,7 +1570,7 @@ println(opt)
 
 ---
 
-### proxy
+### proxy {#proxy}
 
 - 描述: WithProxy 设置 HTTP 代理服务器，用于网络请求。
 
@@ -1588,13 +1586,13 @@ proxy(p string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| p | `string` |  代理服务器地址（支持 http/https/socks5） |
+| p | `string` | 代理服务器地址（支持 http/https/socks5） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="proxy-2" label="示例">
@@ -1624,7 +1622,7 @@ client = ai.OpenAI(
 
 ---
 
-### qualityPriority
+### qualityPriority {#qualitypriority}
 
 - 描述: WithQualityPriority 设置质量优先（使用智能模型，导出名为 ai.qualityPriority）
 
@@ -1640,7 +1638,7 @@ qualityPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="qualityPriority-2" label="示例">
@@ -1657,7 +1655,7 @@ println(response)
 
 ---
 
-### rawHTTPRequestResponseCallback
+### rawHTTPRequestResponseCallback {#rawhttprequestresponsecallback}
 
 - 描述: WithRawHTTPRequestResponseCallback 注册原始 HTTP 请求/响应回调（导出名为 ai.rawHTTPRequestResponseCallback）
 
@@ -1673,13 +1671,13 @@ rawHTTPRequestResponseCallback(cb RawHTTPRequestResponseCallback) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `RawHTTPRequestResponseCallback` |  请求/响应回调函数 |
+| cb | `RawHTTPRequestResponseCallback` | 请求/响应回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="rawHTTPRequestResponseCallback-2" label="示例">
@@ -1696,7 +1694,7 @@ println(opt)
 
 ---
 
-### rawHTTPResponseCallback
+### rawHTTPResponseCallback {#rawhttpresponsecallback}
 
 - 描述: WithRawHTTPResponseCallback 注册原始 HTTP 响应回调，可获取响应头与响应体预览（导出名为 ai.rawHTTPResponseCallback）
 
@@ -1712,13 +1710,13 @@ rawHTTPResponseCallback(cb func(headerBytes []byte, bodyPreview []byte)) AIConfi
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(headerBytes []byte, bodyPreview []byte)` |  回调函数，参数为 (headerBytes, bodyPreview) |
+| cb | `func(headerBytes []byte, bodyPreview []byte)` | 回调函数，参数为 (headerBytes, bodyPreview) |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="rawHTTPResponseCallback-2" label="示例">
@@ -1735,7 +1733,7 @@ println(opt)
 
 ---
 
-### rawHTTPResponseHeaderCallback
+### rawHTTPResponseHeaderCallback {#rawhttpresponseheadercallback}
 
 - 描述: WithRawHTTPResponseHeaderCallback 注册原始 HTTP 响应头回调（导出名为 ai.rawHTTPResponseHeaderCallback）
 
@@ -1751,13 +1749,13 @@ rawHTTPResponseHeaderCallback(cb RawHTTPResponseHeaderCallback) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `RawHTTPResponseHeaderCallback` |  响应头回调函数 |
+| cb | `RawHTTPResponseHeaderCallback` | 响应头回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="rawHTTPResponseHeaderCallback-2" label="示例">
@@ -1774,7 +1772,7 @@ println(opt)
 
 ---
 
-### rawMessages
+### rawMessages {#rawmessages}
 
 - 描述: WithRawMessages 让上层把客户端原始的 messages 数组完整透传到上游 LLM，
 
@@ -1792,13 +1790,13 @@ rawMessages(msgs []ChatDetail) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| msgs | `[]ChatDetail` |  原始 messages 数组（保留 role 顺序与 content 结构） |
+| msgs | `[]ChatDetail` | 原始 messages 数组（保留 role 顺序与 content 结构） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="rawMessages-2" label="示例">
@@ -1816,7 +1814,7 @@ println(opt)
 
 ---
 
-### speedPriority
+### speedPriority {#speedpriority}
 
 - 描述: WithSpeedPriority 设置速度优先（使用轻量模型，导出名为 ai.speedPriority）
 
@@ -1832,7 +1830,7 @@ speedPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="speedPriority-2" label="示例">
@@ -1849,7 +1847,7 @@ println(response)
 
 ---
 
-### thinking
+### thinking {#thinking}
 
 - 描述: WithEnableThinking 设置是否启用思考链相关请求体字段；仅写入 EnableThinking（*bool）。
 
@@ -1867,13 +1865,13 @@ thinking(t any) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `any` |  思维链配置 |
+| t | `any` | 思维链配置 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="thinking-2" label="示例">
@@ -1906,7 +1904,7 @@ println()
 
 ---
 
-### timeout
+### timeout {#timeout}
 
 - 描述: WithTimeout 设置请求超时时间（单位：秒）。
 
@@ -1922,13 +1920,13 @@ timeout(timeout float64) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| timeout | `float64` |  超时时间（秒） |
+| timeout | `float64` | 超时时间（秒） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="timeout-2" label="示例">
@@ -1959,7 +1957,7 @@ response = ai.Chat(
 
 ---
 
-### toolCallCallback
+### toolCallCallback {#toolcallcallback}
 
 - 描述: WithToolCallCallback 设置 tool_calls 回调函数，用于在 AI 响应中包含 tool_calls 时接管其处理逻辑。启用后，tool_calls 将不再以默认的占位标记形式输出，而是直接通过回调函数返回解析后的 ToolCall 对象。 目前只在项目内部测试脚本使用
 
@@ -1975,13 +1973,13 @@ toolCallCallback(cb func([]*ToolCall)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func([]*ToolCall)` |  当 AI 响应中包含 tool_calls 时触发的回调函数 |
+| cb | `func([]*ToolCall)` | 当 AI 响应中包含 tool_calls 时触发的回调函数 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="toolCallCallback-2" label="示例">
@@ -1998,7 +1996,7 @@ println(opt)
 
 ---
 
-### type
+### type {#type}
 
 - 描述: WithType 指定 AI 服务提供商类型。
 
@@ -2014,13 +2012,13 @@ type(t string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| t | `string` |  服务类型（如 "openai"、"chatglm"、"moonshot" 等） |
+| t | `string` | 服务类型（如 &#34;openai&#34;、&#34;chatglm&#34;、&#34;moonshot&#34; 等） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="type-2" label="示例">
@@ -2050,7 +2048,7 @@ response, err = ai.Chat("你好",
 
 ---
 
-### usageCallback
+### usageCallback {#usagecallback}
 
 - 描述: WithUsageCallback registers a callback that receives the final token usage
 
@@ -2068,13 +2066,13 @@ usageCallback(cb func(*ChatUsage)) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| cb | `func(*ChatUsage)` |  回调函数，参数为本次对话的 token 用量信息（可能为 nil） |
+| cb | `func(*ChatUsage)` | 回调函数，参数为本次对话的 token 用量信息（可能为 nil） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="usageCallback-2" label="示例">
@@ -2091,7 +2089,7 @@ println(opt)
 
 ---
 
-### videoBase64
+### videoBase64 {#videobase64}
 
 - 描述: WithVideoBase64 传入 Base64 编码的视频数据，自动包装为 data URI。
 
@@ -2109,13 +2107,13 @@ videoBase64(b64 string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| b64 | `string` |  Base64 编码的视频数据（或 data URI） |
+| b64 | `string` | Base64 编码的视频数据（或 data URI） |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="videoBase64-2" label="示例">
@@ -2132,7 +2130,7 @@ println(opt)
 
 ---
 
-### videoRaw
+### videoRaw {#videoraw}
 
 - 描述: WithVideoRaw 传入视频原始字节，自动 base64 包装为 data URI。
 
@@ -2150,13 +2148,13 @@ videoRaw(raw []byte) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| raw | `[]byte` |  视频原始字节 |
+| raw | `[]byte` | 视频原始字节 |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="videoRaw-2" label="示例">
@@ -2173,7 +2171,7 @@ println(opt)
 
 ---
 
-### videoUrl
+### videoUrl {#videourl}
 
 - 描述: WithVideoUrl 传入视频 URL（http(s) 或 data:video/...;base64,...），用于 Qwen Omni 类模型。
 
@@ -2191,13 +2189,13 @@ videoUrl(u string) AIConfigOption
 
 |参数名|参数类型|参数解释|
 |:-----------|:---------- |:-----------|
-| u | `string` |  视频 URL 或 data URI |
+| u | `string` | 视频 URL 或 data URI |
 
 **返回值**
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="videoUrl-2" label="示例">
@@ -2214,7 +2212,7 @@ println(opt)
 
 ---
 
-### visionPriority
+### visionPriority {#visionpriority}
 
 - 描述: WithVisionPriority 设置视觉优先（使用视觉模型，导出名为 ai.visionPriority / ai.imageAI）
 
@@ -2230,7 +2228,7 @@ visionPriority() AIConfigOption
 
 |返回值(顺序)|返回值类型|返回值解释|
 |:-----------|:---------- |:-----------|
-| r1 | `AIConfigOption` |  AI 配置选项 |
+| r1 | `AIConfigOption` | AI 配置选项 |
 
 </TabItem>
 <TabItem value="visionPriority-2" label="示例">

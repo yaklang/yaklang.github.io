@@ -1,79 +1,50 @@
-# toolbox
+# toolbox {#library-toolbox}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [toolbox.Install](#install) |_install 安装指定的第三方二进制工具（导出名为 toolbox.Install） 从远端下载并安装如 ffmpeg、whisper 等第三方工具到本地 参数: - name: 工具名称，如 &#34;ffmpeg&#34; - options: 可选项，如 toolbox.proxy / toolbox.f...|
-| [toolbox.List](#list) |GetAllStatus 列出所有已注册第三方工具的安装状态（导出名为 toolbox.List） 返回值: - 各工具的状态列表（包含名称、是否已安装、版本等） - 错误信息|
-| [toolbox.Uninstall](#uninstall) |Uninstall 卸载指定的第三方二进制工具（导出名为 toolbox.Uninstall） 参数: - name: 工具名称，如 &#34;ffmpeg&#34; 返回值: - 错误信息|
-| [toolbox.context](#context) |WithContext 设置安装上下文，用于控制取消与超时（导出名为 toolbox.context） 参数: - ctx: 上下文对象 返回值: - 安装可选项|
-| [toolbox.force](#force) |WithForce 设置是否强制重新安装（导出名为 toolbox.force） 参数: - force: 为 true 时即使已安装也会重新安装 返回值: - 安装可选项|
-| [toolbox.progress](#progress) |WithProgress 设置安装进度回调（导出名为 toolbox.progress） 参数: - progress: 进度回调函数 返回值: - 安装可选项|
-| [toolbox.proxy](#proxy) |WithProxy 设置下载代理（导出名为 toolbox.proxy） 参数: - proxy: 代理地址，如 http&#58;//127.0.0.1:7890 返回值: - 安装可选项|
+`toolbox` 库用于管理外部第三方安全工具/二进制的安装、卸载与查询，方便在脚本运行环境中按需准备所依赖的外部工具。
 
+典型使用场景：
 
-## 函数定义
-### Install
+- 工具管理：`toolbox.Install(name, opts...)` 安装工具（配 `toolbox.proxy` / `toolbox.force` / `toolbox.progress` 控制下载），`toolbox.Uninstall` 卸载，`toolbox.List` 列出已安装工具及状态。
 
-#### 详细描述
-_install 安装指定的第三方二进制工具（导出名为 toolbox.Install）
+与相邻库的关系：`toolbox` 是环境准备工具，常配合 `exec`（调用安装好的外部工具）使用。
 
-从远端下载并安装如 ffmpeg、whisper 等第三方工具到本地
+> 共 7 个函数
 
-参数:
+## 函数索引
 
-  - name: 工具名称，如 &#34;ffmpeg&#34;
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [toolbox.List](#list) | - | `[]*BinaryStatus, error` | GetAllStatus 列出所有已注册第三方工具的安装状态（导出名为 toolbox.List） |
+| [toolbox.Uninstall](#uninstall) | `name string` | `error` | 卸载指定的第三方二进制工具（导出名为 toolbox.Uninstall） |
+| [toolbox.context](#context) | `ctx context.Context` | `InstallOptionFunc` | WithContext 设置安装上下文，用于控制取消与超时（导出名为 toolbox.context） |
+| [toolbox.force](#force) | `force bool` | `InstallOptionFunc` | WithForce 设置是否强制重新安装（导出名为 toolbox.force） |
+| [toolbox.progress](#progress) | `progress ProgressCallback` | `InstallOptionFunc` | WithProgress 设置安装进度回调（导出名为 toolbox.progress） |
+| [toolbox.proxy](#proxy) | `proxy string` | `InstallOptionFunc` | WithProxy 设置下载代理（导出名为 toolbox.proxy） |
 
-  - options: 可选项，如 toolbox.proxy / toolbox.force / toolbox.context / toolbox.progress
+## 可变参数函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [toolbox.Install](#install) | `name string, options ...InstallOptionFunc` | `error` | _install 安装指定的第三方二进制工具（导出名为 toolbox.Install） |
 
+## 函数详情
 
-返回值:
+### List {#list}
 
-  - 错误信息
+```go
+List() ([]*BinaryStatus, error)
+```
 
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要网络下载第三方工具
-err = toolbox.Install("ffmpeg")
-if err != nil { die(err) }
-``````````````
-
-
-#### 定义
-
-`Install(name string, options ...InstallOptionFunc) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| name | `string` | 工具名称，如 &#34;ffmpeg&#34; |
-| options | `...InstallOptionFunc` | 可选项，如 toolbox.proxy / toolbox.force / toolbox.context / toolbox.progress |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### List
-
-#### 详细描述
 GetAllStatus 列出所有已注册第三方工具的安装状态（导出名为 toolbox.List）
 
-返回值:
+**返回值**
 
-  - 各工具的状态列表（包含名称、是否已安装、版本等）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*BinaryStatus` | 各工具的状态列表（包含名称、是否已安装、版本等） |
+| r2 | `error` | 错误信息 |
 
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 statusList, err = toolbox.List()
@@ -84,37 +55,29 @@ assert err == nil, "toolbox.List should not fail"
 	}
 ``````````````
 
+---
 
-#### 定义
+### Uninstall {#uninstall}
 
-`List() ([]*BinaryStatus, error)`
+```go
+Uninstall(name string) error
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*BinaryStatus` | 各工具的状态列表（包含名称、是否已安装、版本等） |
-| r2 | `error` | 错误信息 |
+卸载指定的第三方二进制工具（导出名为 toolbox.Uninstall）
 
+**参数**
 
-### Uninstall
+|参数名|类型|说明|
+|:--|:--|:--|
+| name | `string` | 工具名称，如 &#34;ffmpeg&#34; |
 
-#### 详细描述
-Uninstall 卸载指定的第三方二进制工具（导出名为 toolbox.Uninstall）
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-  - name: 工具名称，如 &#34;ffmpeg&#34;
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例
@@ -122,41 +85,29 @@ err = toolbox.Uninstall("ffmpeg")
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+### context {#context}
 
-`Uninstall(name string) error`
+```go
+context(ctx context.Context) InstallOptionFunc
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| name | `string` | 工具名称，如 &#34;ffmpeg&#34; |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### context
-
-#### 详细描述
 WithContext 设置安装上下文，用于控制取消与超时（导出名为 toolbox.context）
 
-参数:
+**参数**
 
-  - ctx: 上下文对象
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` | 上下文对象 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `InstallOptionFunc` | 安装可选项 |
 
-返回值:
-
-  - 安装可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要网络下载第三方工具
@@ -165,142 +116,132 @@ defer cancel()
 err = toolbox.Install("ffmpeg", toolbox.context(ctx))
 ``````````````
 
+---
 
-#### 定义
+### force {#force}
 
-`context(ctx context.Context) InstallOptionFunc`
+```go
+force(force bool) InstallOptionFunc
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` | 上下文对象 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `InstallOptionFunc` | 安装可选项 |
-
-
-### force
-
-#### 详细描述
 WithForce 设置是否强制重新安装（导出名为 toolbox.force）
 
-参数:
+**参数**
 
-  - force: 为 true 时即使已安装也会重新安装
+|参数名|类型|说明|
+|:--|:--|:--|
+| force | `bool` | 为 true 时即使已安装也会重新安装 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `InstallOptionFunc` | 安装可选项 |
 
-返回值:
-
-  - 安装可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要网络下载第三方工具
 err = toolbox.Install("ffmpeg", toolbox.force(true))
 ``````````````
 
+---
 
-#### 定义
+### progress {#progress}
 
-`force(force bool) InstallOptionFunc`
+```go
+progress(progress ProgressCallback) InstallOptionFunc
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| force | `bool` | 为 true 时即使已安装也会重新安装 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `InstallOptionFunc` | 安装可选项 |
-
-
-### progress
-
-#### 详细描述
 WithProgress 设置安装进度回调（导出名为 toolbox.progress）
 
-参数:
+**参数**
 
-  - progress: 进度回调函数
+|参数名|类型|说明|
+|:--|:--|:--|
+| progress | `ProgressCallback` | 进度回调函数 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `InstallOptionFunc` | 安装可选项 |
 
-返回值:
-
-  - 安装可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要网络下载第三方工具
 err = toolbox.Install("ffmpeg", toolbox.progress(func(p) { println(p) }))
 ``````````````
 
+---
 
-#### 定义
+### proxy {#proxy}
 
-`progress(progress ProgressCallback) InstallOptionFunc`
+```go
+proxy(proxy string) InstallOptionFunc
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| progress | `ProgressCallback` | 进度回调函数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `InstallOptionFunc` | 安装可选项 |
-
-
-### proxy
-
-#### 详细描述
 WithProxy 设置下载代理（导出名为 toolbox.proxy）
 
-参数:
+**参数**
 
-  - proxy: 代理地址，如 http&#58;//127.0.0.1:7890
+|参数名|类型|说明|
+|:--|:--|:--|
+| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:7890 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `InstallOptionFunc` | 安装可选项 |
 
-返回值:
-
-  - 安装可选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要网络下载第三方工具
 err = toolbox.Install("ffmpeg", toolbox.proxy("http://127.0.0.1:7890"))
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`proxy(proxy string) InstallOptionFunc`
+### Install {#install}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:7890 |
+```go
+Install(name string, options ...InstallOptionFunc) error
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `InstallOptionFunc` | 安装可选项 |
+_install 安装指定的第三方二进制工具（导出名为 toolbox.Install）
 
+从远端下载并安装如 ffmpeg、whisper 等第三方工具到本地
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| name | `string` | 工具名称，如 &#34;ffmpeg&#34; |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| options | `...InstallOptionFunc` | 可选项，如 toolbox.proxy / toolbox.force / toolbox.context / toolbox.progress |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+// 示意性示例，需要网络下载第三方工具
+err = toolbox.Install("ffmpeg")
+if err != nil { die(err) }
+``````````````
+
+---
 

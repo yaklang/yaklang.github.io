@@ -1,53 +1,69 @@
-# sfreport
+# sfreport {#library-sfreport}
 
-|实例名|实例描述|
-|:------|:--------|
-IRifyFullReportType|(sfreport.ReportType) &#34;irify-full&#34;|
-IRifyReactReportType|(sfreport.ReportType) &#34;irify-react-report&#34;|
-IRifyReportType|(sfreport.ReportType) &#34;irify&#34;|
+`sfreport` 库用于把 SyntaxFlow 代码审计结果转换为报告（JSON/Markdown），并支持数据流路径、源码片段的导出与 SSA 风险的导入导出，是代码审计结果交付的专用工具。
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) |ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串 导出名为 sfreport.ConvertSingleResultToJSON 参数: - result: SyntaxFlow 扫描结果对象 - showDataflowPath...|
-| [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) |ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告 导出名为 sfreport.ConvertSingleResultToJSONWithOptions 参数: - result: SyntaxFlow 扫...|
-| [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) |convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload） 返回一个字典，包...|
-| [sfreport.GenerateSSAReportMarkdownForTask](#generatessareportmarkdownfortask) |GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport 参...|
-| [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) |ImportSSARiskFromJSON 从 JSON 报告数据中导入 SSA 风险记录到数据库 导出名为 sfreport.ImportSSARiskFromJSON 参数: - ctx: 上下文，用于控制取消 - db: 目标数据库连接 - jsonData: 报告 JSON 数据（字节） -...|
-| [sfreport.NewReport](#newreport) |NewReport 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） 报告对象用于汇总规则、风险、文件等信息并最终序列化为 JSON 或 Markdown 参数: - reportType: 报告类型，如 sfreport.IRifyReportType...|
-| [sfreport.withDataflowPath](#withdataflowpath) |WithDataflowPath 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath） 参数: - show: 是否展示数据流路径 返回值: - 报告配置可选项|
-| [sfreport.withFileContent](#withfilecontent) |WithFileContent 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent） 参数: - show: 是否展示文件内容 返回值: - 报告配置可选项|
-| [sfreport.withStreamReportType](#withstreamreporttype) |WithStreamReportType 设置流式报告的报告类型（导出名为 sfreport.withStreamReportType） 参数: - v: 报告类型，如 sfreport.IRifyReportType 返回值: - 流式报告可选项|
-| [sfreport.withStreamShowDataflowPath](#withstreamshowdataflowpath) |WithStreamShowDataflowPath 设置流式报告是否展示数据流路径（导出名为 sfreport.withStreamShowDataflowPath） 参数: - v: 是否展示数据流路径 返回值: - 流式报告可选项|
-| [sfreport.withStreamShowFileContent](#withstreamshowfilecontent) |WithStreamShowFileContent 设置流式报告是否展示文件内容（导出名为 sfreport.withStreamShowFileContent） 参数: - v: 是否展示文件内容 返回值: - 流式报告可选项|
-| [sfreport.withStreamWithFile](#withstreamwithfile) |WithStreamWithFile 设置流式报告是否携带文件数据（导出名为 sfreport.withStreamWithFile） 参数: - v: 是否携带文件数据 返回值: - 流式报告可选项|
+典型使用场景：
 
+- 结果转报告：`sfreport.ConvertSingleResultToJSON` / `sfreport.ConvertSingleResultToJSONWithOptions` 把单个 SyntaxFlow 结果转 JSON，`sfreport.GenerateSSAReportMarkdownForTask` 为审计任务生成 Markdown 报告。
+- 导入与定制：`sfreport.NewReport` 创建报告对象，`sfreport.ImportSSARiskFromJSON` 导入 SSA 风险，`sfreport.withDataflowPath` / `sfreport.withFileContent` 控制是否包含数据流路径与源码内容。
 
-## 函数定义
-### ConvertSingleResultToJSON
+与相邻库的关系：`sfreport` 是 `syntaxflow`/`ssa`（代码审计引擎）的报告输出层，与 `risk`（SSA 风险对象）、`report`（通用报告）配合，把审计发现交付为可读报告。
 
-#### 详细描述
-ConvertSingleResultToJSON 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串
+> 共 12 个函数、3 个实例
+
+## 实例
+
+|实例名|类型|说明|
+|:--|:--|:--|
+| IRifyFullReportType | `sfreport.ReportType` | &#34;irify-full&#34; |
+| IRifyReactReportType | `sfreport.ReportType` | &#34;irify-react-report&#34; |
+| IRifyReportType | `sfreport.ReportType` | &#34;irify&#34; |
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) | `result *ssaapi.SyntaxFlowResult, showDataflowPath bool` | `string, error` | 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串 |
+| [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) | `result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool` | `string, error` | 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告 |
+| [sfreport.GenerateSSAReportMarkdownForTask](#generatessareportmarkdownfortask) | `taskID string, reportName string` | `int, string, error` | 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 |
+| [sfreport.withDataflowPath](#withdataflowpath) | `show bool` | `func(*Config)` | 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath） |
+| [sfreport.withFileContent](#withfilecontent) | `show bool` | `func(*Config)` | 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent） |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) | `result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption` | `map[string]any, error` | 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload） |
+| [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) | `ctx context.Context, db *gorm.DB, jsonData []byte, callBacks ...func(string, float64)` | `error` | 从 JSON 报告数据中导入 SSA 风险记录到数据库 |
+| [sfreport.NewReport](#newreport) | `reportType ReportType, opts ...Option` | `*Report` | 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） |
+
+## 函数详情
+
+### ConvertSingleResultToJSON {#convertsingleresulttojson}
+
+```go
+ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflowPath bool) (string, error)
+```
+
+将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串
 
 导出名为 sfreport.ConvertSingleResultToJSON
 
-参数:
+**参数**
 
-  - result: SyntaxFlow 扫描结果对象
+|参数名|类型|说明|
+|:--|:--|:--|
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
+| showDataflowPath | `bool` | 是否在报告中展示数据流路径 |
 
-  - showDataflowPath: 是否在报告中展示数据流路径
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
+| r2 | `error` | 错误信息 |
 
-
-返回值:
-
-  - JSON 报告字符串（无风险时为空字符串）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // result 来自 ssa/syntaxflow 的扫描结果（示意性示例）
@@ -57,55 +73,36 @@ jsonStr = sfreport.ConvertSingleResultToJSON(result, true)~
 println(jsonStr)
 ``````````````
 
+---
 
-#### 定义
+### ConvertSingleResultToJSONWithOptions {#convertsingleresulttojsonwithoptions}
 
-`ConvertSingleResultToJSON(result *ssaapi.SyntaxFlowResult, showDataflowPath bool) (string, error)`
+```go
+ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
-| showDataflowPath | `bool` | 是否在报告中展示数据流路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
-| r2 | `error` | 错误信息 |
-
-
-### ConvertSingleResultToJSONWithOptions
-
-#### 详细描述
-ConvertSingleResultToJSONWithOptions 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告
+将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告
 
 导出名为 sfreport.ConvertSingleResultToJSONWithOptions
 
-参数:
+**参数**
 
-  - result: SyntaxFlow 扫描结果对象
+|参数名|类型|说明|
+|:--|:--|:--|
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
+| reportType | `ReportType` | 报告类型 |
+| showDataflowPath | `bool` | 是否展示数据流路径 |
+| showFileContent | `bool` | 是否展示文件内容 |
+| withFile | `bool` | 是否携带文件数据 |
 
-  - reportType: 报告类型
+**返回值**
 
-  - showDataflowPath: 是否展示数据流路径
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
+| r2 | `error` | 错误信息 |
 
-  - showFileContent: 是否展示文件内容
-
-  - withFile: 是否携带文件数据
-
-
-
-返回值:
-
-  - JSON 报告字符串（无风险时为空字符串）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // result 来自 ssa/syntaxflow 的扫描结果（示意性示例）
@@ -115,54 +112,134 @@ jsonStr = sfreport.ConvertSingleResultToJSONWithOptions(result, sfreport.IRifyFu
 println(jsonStr)
 ``````````````
 
+---
 
-#### 定义
+### GenerateSSAReportMarkdownForTask {#generatessareportmarkdownfortask}
 
-`ConvertSingleResultToJSONWithOptions(result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool) (string, error)`
+```go
+GenerateSSAReportMarkdownForTask(taskID string, reportName string) (int, string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
-| reportType | `ReportType` | 报告类型 |
-| showDataflowPath | `bool` | 是否展示数据流路径 |
-| showFileContent | `bool` | 是否展示文件内容 |
-| withFile | `bool` | 是否携带文件数据 |
+根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | JSON 报告字符串（无风险时为空字符串） |
-| r2 | `error` | 错误信息 |
+导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport
 
+**参数**
 
-### ConvertSingleResultToSSAResultPartsJSONPayload
+|参数名|类型|说明|
+|:--|:--|:--|
+| taskID | `string` | SSA 扫描任务 ID |
+| reportName | `string` | 生成的报告名称 |
 
-#### 详细描述
-convertSingleResultToSSAResultPartsJSONPayload 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload）
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `int` | 报告记录的数据库 ID |
+| r2 | `string` | 生成的 Markdown 报告内容 |
+| r3 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+// 根据已完成的扫描任务生成报告（示意性示例）
+id, markdown, err = sfreport.GenerateSSAReportMarkdownForTask("task-uuid", "my-report")
+if err != nil { die(err) }
+println(markdown)
+``````````````
+
+---
+
+### withDataflowPath {#withdataflowpath}
+
+```go
+withDataflowPath(show bool) func(*Config)
+```
+
+设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| show | `bool` | 是否展示数据流路径 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `func(*Config)` | 报告配置可选项 |
+
+**示例**
+
+``````````````yak
+// 用于 ConvertSingleResultToJSONWithOptions 等接口的配置
+opt = sfreport.withDataflowPath(true)
+println(opt)
+``````````````
+
+---
+
+### withFileContent {#withfilecontent}
+
+```go
+withFileContent(show bool) func(*Config)
+```
+
+设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent）
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| show | `bool` | 是否展示文件内容 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `func(*Config)` | 报告配置可选项 |
+
+**示例**
+
+``````````````yak
+// 用于 ConvertSingleResultToJSONWithOptions 等接口的配置
+opt = sfreport.withFileContent(true)
+println(opt)
+``````````````
+
+---
+
+## 可变参数函数详情
+
+### ConvertSingleResultToSSAResultPartsJSONPayload {#convertsingleresulttossaresultpartsjsonpayload}
+
+```go
+ConvertSingleResultToSSAResultPartsJSONPayload(result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption) (map[string]any, error)
+```
+
+将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload）
 
 返回一个字典，包含 json(报告内容)、stats(统计信息)、ok(是否成功)、has_payload(是否含有效载荷)
 
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
 
-参数:
+**可选参数**
 
-  - result: SyntaxFlow 扫描结果对象
+可作为可变参数 `opts ...StreamPartsOption` 传入选项；共 4 个可用选项，详见 [StreamPartsOption 选项列表](#option-streampartsoption)。
 
-  - opts: 分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` | 包含 json/stats/ok/has_payload 的字典 |
+| r2 | `error` | 错误信息（转换失败时返回） |
 
-
-返回值:
-
-  - 包含 json/stats/ok/has_payload 的字典
-
-  - 错误信息（转换失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // result 来自 ssa/syntaxflow 的扫描结果（示意性示例，需要可用的 SSA 程序与规则）
@@ -172,105 +249,39 @@ payload = sfreport.ConvertSingleResultToSSAResultPartsJSONPayload(result)~
 println(payload["ok"])
 ``````````````
 
+---
 
-#### 定义
+### ImportSSARiskFromJSON {#importssariskfromjson}
 
-`ConvertSingleResultToSSAResultPartsJSONPayload(result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption) (map[string]any, error)`
+```go
+ImportSSARiskFromJSON(ctx context.Context, db *gorm.DB, jsonData []byte, callBacks ...func(string, float64)) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| result | `*ssaapi.SyntaxFlowResult` | SyntaxFlow 扫描结果对象 |
-| opts | `...StreamPartsOption` | 分片选项，如 sfreport.withStreamReportType / sfreport.withStreamShowDataflowPath 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `map[string]any` | 包含 json/stats/ok/has_payload 的字典 |
-| r2 | `error` | 错误信息（转换失败时返回） |
-
-
-### GenerateSSAReportMarkdownForTask
-
-#### 详细描述
-GenerateSSAReportMarkdownForTask 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告
-
-导出名为 sfreport.GenerateSSAReportMarkdownForTask，行为对齐 gRPC 的 Yak.GenerateSSAReport
-
-参数:
-
-  - taskID: SSA 扫描任务 ID
-
-  - reportName: 生成的报告名称
-
-
-
-返回值:
-
-  - 报告记录的数据库 ID
-
-  - 生成的 Markdown 报告内容
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-// 根据已完成的扫描任务生成报告（示意性示例）
-id, markdown, err = sfreport.GenerateSSAReportMarkdownForTask("task-uuid", "my-report")
-if err != nil { die(err) }
-println(markdown)
-``````````````
-
-
-#### 定义
-
-`GenerateSSAReportMarkdownForTask(taskID string, reportName string) (int, string, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| taskID | `string` | SSA 扫描任务 ID |
-| reportName | `string` | 生成的报告名称 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `int` | 报告记录的数据库 ID |
-| r2 | `string` | 生成的 Markdown 报告内容 |
-| r3 | `error` | 错误信息 |
-
-
-### ImportSSARiskFromJSON
-
-#### 详细描述
-ImportSSARiskFromJSON 从 JSON 报告数据中导入 SSA 风险记录到数据库
+从 JSON 报告数据中导入 SSA 风险记录到数据库
 
 导出名为 sfreport.ImportSSARiskFromJSON
 
-参数:
+**必填参数**
 
-  - ctx: 上下文，用于控制取消
+|参数名|类型|说明|
+|:--|:--|:--|
+| ctx | `context.Context` | 上下文，用于控制取消 |
+| db | `*gorm.DB` | 目标数据库连接 |
+| jsonData | `[]byte` | 报告 JSON 数据（字节） |
 
-  - db: 目标数据库连接
+**可选参数**
 
-  - jsonData: 报告 JSON 数据（字节）
+|参数名|类型|说明|
+|:--|:--|:--|
+| callBacks | `...func(string, float64)` | 可选的进度回调，参数为 (message, progress) |
 
-  - callBacks: 可选的进度回调，参数为 (message, progress)
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 导入此前导出的 SSA 风险报告（示意性示例）
@@ -280,316 +291,57 @@ err = sfreport.ImportSSARiskFromJSON(ctx, db.GetGormProjectDatabase(), jsonData)
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+### NewReport {#newreport}
 
-`ImportSSARiskFromJSON(ctx context.Context, db *gorm.DB, jsonData []byte, callBacks ...func(string, float64)) error`
+```go
+NewReport(reportType ReportType, opts ...Option) *Report
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ctx | `context.Context` | 上下文，用于控制取消 |
-| db | `*gorm.DB` | 目标数据库连接 |
-| jsonData | `[]byte` | 报告 JSON 数据（字节） |
-| callBacks | `...func(string, float64)` | 可选的进度回调，参数为 (message, progress) |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### NewReport
-
-#### 详细描述
-NewReport 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport）
+创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport）
 
 报告对象用于汇总规则、风险、文件等信息并最终序列化为 JSON 或 Markdown
 
-参数:
+**必填参数**
 
-  - reportType: 报告类型，如 sfreport.IRifyReportType / sfreport.IRifyFullReportType
+|参数名|类型|说明|
+|:--|:--|:--|
+| reportType | `ReportType` | 报告类型，如 sfreport.IRifyReportType / sfreport.IRifyFullReportType |
 
-  - opts: 报告配置可选项，如 sfreport.withFileContent / sfreport.withDataflowPath
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...Option` | 报告配置可选项，如 sfreport.withFileContent / sfreport.withDataflowPath |
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*Report` | 新建的报告对象 |
 
-  - 新建的报告对象
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 report = sfreport.NewReport(sfreport.IRifyReportType)
 assert report.ReportType == sfreport.IRifyReportType, "report type should match"
 ``````````````
 
+---
 
-#### 定义
+## 可变参数选项列表
 
-`NewReport(reportType ReportType, opts ...Option) *Report`
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| reportType | `ReportType` | 报告类型，如 sfreport.IRifyReportType / sfreport.IRifyFullReportType |
-| opts | `...Option` | 报告配置可选项，如 sfreport.withFileContent / sfreport.withDataflowPath |
+### 1. 类型：StreamPartsOption {#option-streampartsoption}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*Report` | 新建的报告对象 |
+涉及到的函数有：[sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload)
 
-
-### withDataflowPath
-
-#### 详细描述
-WithDataflowPath 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath）
-
-参数:
-
-  - show: 是否展示数据流路径
-
-
-
-返回值:
-
-  - 报告配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 用于 ConvertSingleResultToJSONWithOptions 等接口的配置
-opt = sfreport.withDataflowPath(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withDataflowPath(show bool) func(*Config)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| show | `bool` | 是否展示数据流路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(*Config)` | 报告配置可选项 |
-
-
-### withFileContent
-
-#### 详细描述
-WithFileContent 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent）
-
-参数:
-
-  - show: 是否展示文件内容
-
-
-
-返回值:
-
-  - 报告配置可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 用于 ConvertSingleResultToJSONWithOptions 等接口的配置
-opt = sfreport.withFileContent(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withFileContent(show bool) func(*Config)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| show | `bool` | 是否展示文件内容 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `func(*Config)` | 报告配置可选项 |
-
-
-### withStreamReportType
-
-#### 详细描述
-WithStreamReportType 设置流式报告的报告类型（导出名为 sfreport.withStreamReportType）
-
-参数:
-
-  - v: 报告类型，如 sfreport.IRifyReportType
-
-
-
-返回值:
-
-  - 流式报告可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = sfreport.withStreamReportType(sfreport.IRifyReportType)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withStreamReportType(v ReportType) StreamPartsOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `ReportType` | 报告类型，如 sfreport.IRifyReportType |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `StreamPartsOption` | 流式报告可选项 |
-
-
-### withStreamShowDataflowPath
-
-#### 详细描述
-WithStreamShowDataflowPath 设置流式报告是否展示数据流路径（导出名为 sfreport.withStreamShowDataflowPath）
-
-参数:
-
-  - v: 是否展示数据流路径
-
-
-
-返回值:
-
-  - 流式报告可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = sfreport.withStreamShowDataflowPath(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withStreamShowDataflowPath(v bool) StreamPartsOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `bool` | 是否展示数据流路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `StreamPartsOption` | 流式报告可选项 |
-
-
-### withStreamShowFileContent
-
-#### 详细描述
-WithStreamShowFileContent 设置流式报告是否展示文件内容（导出名为 sfreport.withStreamShowFileContent）
-
-参数:
-
-  - v: 是否展示文件内容
-
-
-
-返回值:
-
-  - 流式报告可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = sfreport.withStreamShowFileContent(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withStreamShowFileContent(v bool) StreamPartsOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `bool` | 是否展示文件内容 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `StreamPartsOption` | 流式报告可选项 |
-
-
-### withStreamWithFile
-
-#### 详细描述
-WithStreamWithFile 设置流式报告是否携带文件数据（导出名为 sfreport.withStreamWithFile）
-
-参数:
-
-  - v: 是否携带文件数据
-
-
-
-返回值:
-
-  - 流式报告可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = sfreport.withStreamWithFile(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`withStreamWithFile(v bool) StreamPartsOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `bool` | 是否携带文件数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `StreamPartsOption` | 流式报告可选项 |
-
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `sfreport.withStreamReportType` | `v ReportType` | `StreamPartsOption` | 设置流式报告的报告类型 |
+| `sfreport.withStreamShowDataflowPath` | `v bool` | `StreamPartsOption` | 设置流式报告是否展示数据流路径 |
+| `sfreport.withStreamShowFileContent` | `v bool` | `StreamPartsOption` | 设置流式报告是否展示文件内容 |
+| `sfreport.withStreamWithFile` | `v bool` | `StreamPartsOption` | 设置流式报告是否携带文件数据 |
 

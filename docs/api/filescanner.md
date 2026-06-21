@@ -1,38 +1,47 @@
-# filescanner
+# filescanner {#library-filescanner}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [filescanner.NewScanner](#newscanner) |fileScannerNewScanner 根据配置创建文件扫描器（导出名为 filescanner.NewScanner） 扫描器可对单个文件或整个目录进行扫描，计算哈希、识别 MIME 类型并按签名匹配风险 参数: - config: 配置字典，常用键包括 enable_risk(是否产出风险)...|
+`filescanner` 库提供按规则扫描文件/目录的能力，用于在大量文件中检出敏感信息、恶意特征或符合规则的内容，常用于代码仓库与主机的合规/威胁扫描。
 
+典型使用场景：
 
-## 函数定义
-### NewScanner
+- 创建扫描器：`filescanner.NewScanner(config)` 按配置（扫描路径、规则、并发等）创建扫描器并执行文件扫描。
 
-#### 详细描述
-fileScannerNewScanner 根据配置创建文件扫描器（导出名为 filescanner.NewScanner）
+与相邻库的关系：`filescanner` 偏批量文件规则匹配，与 `filemonitor`（实时监控）、`hids`（主机检测）、`file`/`filesys`（遍历读取）配合，用于"在文件里找东西"的场景。
+
+> 共 1 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [filescanner.NewScanner](#newscanner) | `config map[string]any` | `*FileScanner, error` | 根据配置创建文件扫描器（导出名为 filescanner.NewScanner） |
+
+## 函数详情
+
+### NewScanner {#newscanner}
+
+```go
+NewScanner(config map[string]any) (*FileScanner, error)
+```
+
+根据配置创建文件扫描器（导出名为 filescanner.NewScanner）
 
 扫描器可对单个文件或整个目录进行扫描，计算哈希、识别 MIME 类型并按签名匹配风险
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| config | `map[string]any` | 配置字典，常用键包括 enable_risk(是否产出风险)、recursive(是否递归)、 |
 
-参数:
+**返回值**
 
-  - config: 配置字典，常用键包括 enable_risk(是否产出风险)、recursive(是否递归)、
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*FileScanner` | 文件扫描器对象，可调用 ScanFile / ScanDir 进行扫描 |
+| r2 | `error` | 错误信息（配置非法时返回） |
 
-    max_file_size(最大文件字节)、include_patterns/exclude_patterns(文件名通配)、custom_signatures(自定义签名)
-
-
-
-返回值:
-
-  - 文件扫描器对象，可调用 ScanFile / ScanDir 进行扫描
-
-  - 错误信息（配置非法时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 dir = os.TempDir()
@@ -45,20 +54,5 @@ assert result.Name == "fs_scan_demo.txt", "scan result should report the file na
 assert result.Md5 == codec.Md5("hello scanner"), "scan result md5 should match file content"
 ``````````````
 
-
-#### 定义
-
-`NewScanner(config map[string]any) (*FileScanner, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| config | `map[string]any` | 配置字典，常用键包括 enable_risk(是否产出风险)、recursive(是否递归)、 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*FileScanner` | 文件扫描器对象，可调用 ScanFile / ScanDir 进行扫描 |
-| r2 | `error` | 错误信息（配置非法时返回） |
-
+---
 

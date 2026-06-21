@@ -1,227 +1,244 @@
-# codec
+# codec {#library-codec}
 
-|实例名|实例描述|
-|:------|:--------|
-CBC|(string) &#34;CBC&#34;|
-CFB|(string) &#34;CFB&#34;|
-CTR|(string) &#34;CTR&#34;|
-ECB|(string) &#34;ECB&#34;|
-OFB|(string) &#34;OFB&#34;|
+`codec` 库是 yaklang 的编解码与密码学工具箱，覆盖编码转换、哈希、对称/非对称加密、国密算法、字符集转换等近 180 个函数，是数据处理与密码学相关脚本的核心依赖。
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [codec.AESCBCDecrypt](#aescbcdecrypt) |AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCDecryp...|
-| [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) |AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCDecryp...|
-| [codec.AESCBCDecryptWithZeroPadding](#aescbcdecryptwithzeropadding) |AESDecryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 参数: - key: 密钥(1...|
-| [codec.AESCBCEncrypt](#aescbcencrypt) |AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCEncryp...|
-| [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) |AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCEncryp...|
-| [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) |AESEncryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 参数: - key: 密钥(1...|
-| [codec.AESCFBDecrypt](#aescfbdecrypt) |AESDecryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCFBDecryp...|
-| [codec.AESCFBEncrypt](#aescfbencrypt) |AESEncryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCFBEncryp...|
-| [codec.AESDecrypt](#aesdecrypt) |AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCDecryp...|
-| [codec.AESDecryptBasic](#aesdecryptbasic) |AESDecryptBasic 使用 AES 算法对数据进行解密，支持多种模式(CBC、CFB、ECB、OFB、CTR) 注意：此函数是底层高级用法，需要外部自行处理 padding、key、iv 等问题。 参数: - key: 密钥(16/24/32 字节) - data: 待解密的密文字节 - ...|
-| [codec.AESDecryptCFBWithPKCSPadding](#aesdecryptcfbwithpkcspadding) |AESDecryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCFBDecryp...|
-| [codec.AESDecryptCFBWithZeroPadding](#aesdecryptcfbwithzeropadding) |AESDecryptCFBWithZeroPadding 使用 AES 算法在 CFB 模式下用零(Zero)填充解密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 参数: - key: 密钥(1...|
-| [codec.AESECBDecrypt](#aesecbdecrypt) |AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 注意：AESECBDecrypt 和 AESDe...|
-| [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) |AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 注意：AESECBDecrypt 和 AESDe...|
-| [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) |AESDecryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充解密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 参数: - key: 密钥(16/24/32 字...|
-| [codec.AESECBEncrypt](#aesecbencrypt) |AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 注意：AESECBEncrypt 和 AESEC...|
-| [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) |AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 注意：AESECBEncrypt 和 AESEC...|
-| [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) |AESEncryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充加密数据(ECB 模式下 iv 无用，传 nil) 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。 参数: - key: 密钥(16/24/32 字...|
-| [codec.AESEncrypt](#aesencrypt) |AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCBCEncryp...|
-| [codec.AESEncryptBasic](#aesencryptbasic) |AESEncryptBasic 使用 AES 算法对数据进行加密，支持多种模式(CBC、CFB、ECB、OFB、CTR) 注意：此函数是底层高级用法，需要外部自行处理 padding、key、iv 等问题。 参数: - key: 密钥(16/24/32 字节) - data: 待加密的数据字节 - ...|
-| [codec.AESEncryptCFBWithPKCSPadding](#aesencryptcfbwithpkcspadding) |AESEncryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 注意：AESCFBEncryp...|
-| [codec.AESEncryptCFBWithZeroPadding](#aesencryptcfbwithzeropadding) |AESEncryptCFBWithZeroPadding 使用 AES 算法在 CFB 模式下用零(Zero)填充加密数据 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。 参数: - key: 密钥(1...|
-| [codec.AESGCMDecrypt](#aesgcmdecrypt) |AESGCMDecrypt 使用 AES-GCM 认证加密模式解密数据；nonce 为空时从密文前置部分提取 nonce 密钥长度必须是 16/24/32 字节；nonce 长度为 16 时用 16，否则用 12。 参数: - key: 密钥(16/24/32 字节) - data: 待解密的密文，...|
-| [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) |AESGCMDecryptWithNonceSize12 使用 AES-GCM 模式以 12 字节 nonce 解密数据 参数: - key: 密钥(16/24/32 字节) - data: 待解密的密文，可为 []byte 等 - nonce: nonce(随机数)，传 nil 则从密文前 12 ...|
-| [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) |AESGCMDecryptWithNonceSize16 使用 AES-GCM 模式以 16 字节 nonce 解密数据 参数: - key: 密钥(16/24/32 字节) - data: 待解密的密文，可为 []byte 等 - nonce: nonce(随机数)，传 nil 则从密文前 16 ...|
-| [codec.AESGCMEncrypt](#aesgcmencrypt) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式 func AES_GCM_Encrypt(key []byte, Content []byte) string { block, _ := aes.NewCipher(key) nonce := m...|
-| [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) |AESGCMEncryptWithNonceSize12 使用 AES-GCM 模式以 12 字节 nonce 加密数据 参数: - key: 密钥(16/24/32 字节) - data: 待加密的数据，可为 string、[]byte 等 - nonceRaw: nonce(随机数)，传 nil...|
-| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) |//AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式 func AES_GCM_Encrypt(key []byte, Content []byte) string { block, _ := aes.NewCipher(key) nonce := m...|
-| [codec.AutoDecode](#autodecode) |AutoDecode 自动识别并逐层解码输入数据(依次尝试 URL/HTML 实体/Hex/Unicode/Base32/Base64/JWT/字符集等) 参数: - i: 待自动解码的数据，可为 string、[]byte 等 返回值: - 解码过程的结果列表，每个元素含 Type(编码类型)、O...|
-| [codec.CryptoRandBytes](#cryptorandbytes) |RandBytes 生成 n 个密码学安全的随机字节 参数: - n: 需要生成的随机字节数量 返回值: - 长度为 n 的随机字节切片(读取失败时返回 nil)|
-| [codec.DESCBCDecrypt](#descbcdecrypt) |DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：DESCBCDecrypt、DESDecrypt 和本函数是同一个函...|
-| [codec.DESCBCEncrypt](#descbcencrypt) |DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：DESCBCEncrypt、DESEncrypt 和本函数是同一个函...|
-| [codec.DESDecrypt](#desdecrypt) |DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：DESCBCDecrypt、DESDecrypt 和本函数是同一个函...|
-| [codec.DESECBDecrypt](#desecbdecrypt) |DESECBDec 使用 DES 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数) 密钥长度必须是 8 字节。 参数: - key: 密钥(8 字节) - data: 待解密的密文字节 返回值: - []byte: 解密还原后的明文字节 - error: 解密失败时返回的错误|
-| [codec.DESECBEncrypt](#desecbencrypt) |DESECBEnc 使用 DES 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数) 密钥长度必须是 8 字节。 参数: - key: 密钥(8 字节) - data: 待加密的数据字节 返回值: - []byte: 加密后的密文字节 - error: 加密失败时返回的错误|
-| [codec.DESEncrypt](#desencrypt) |DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：DESCBCEncrypt、DESEncrypt 和本函数是同一个函...|
-| [codec.DecodeASCII](#decodeascii) |StrConvUnquote 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII） 与 codec.StrconvQuote 配对使用，输入必须是带双引号包裹的字符串 参数: - s: 带引号的字符...|
-| [codec.DecodeBase32](#decodebase32) |DecodeBase32 将标准 Base32 字符串解码为原始字节 参数: - i: 待解码的标准 Base32 字符串 返回值: - []byte: 解码后的原始字节 - error: 解码失败时返回的错误|
-| [codec.DecodeBase64](#decodebase64) |DecodeBase64 将标准 Base64 字符串解码为原始字节 参数: - i: 待解码的标准 Base64 字符串 返回值: - []byte: 解码后的原始字节 - error: 解码失败时返回的错误|
-| [codec.DecodeBase64Url](#decodebase64url) |DecodeBase64Url 将 URL 安全的 Base64 字符串解码为原始字节 参数: - i: 待解码的 URL 安全 Base64 字符串 返回值: - []byte: 解码后的原始字节 - error: 解码失败时返回的错误|
-| [codec.DecodeChunked](#decodechunked) |HTTPChunkedDecode 解码 HTTP Transfer-Encoding: chunked 分块传输数据，还原原始 body 参数: - raw: 分块编码后的字节数据 返回值: - []byte: 解码还原后的原始 body - error: 解码失败时返回的错误|
-| [codec.DecodeHex](#decodehex) |DecodeHex 将十六进制(Hex)字符串解码为原始字节，支持可选的 0x 前缀 参数: - i: 待解码的十六进制字符串 返回值: - []byte: 解码后的原始字节 - error: 解码失败时返回的错误|
-| [codec.DecodeHtml](#decodehtml) |UnescapeHtmlString 将 HTML 实体还原为原始字符，与 codec.EscapeHtml 配对使用（导出名为 codec.DecodeHtml） 参数: - s: 含 HTML 实体的字符串 返回值: - 还原后的原始字符串|
-| [codec.DecodeUrl](#decodeurl) |QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式 参数: - s: 待解码的 URL 编码字符串 返回值: - string: 解码后的字符串 - error: 解码失败时返回的错误|
-| [codec.DoubleDecodeUrl](#doubledecodeurl) |DoubleDecodeUrl 对输入做两次 URL 解码（导出名为 codec.DoubleDecodeUrl） 与 codec.DoubleEncodeUrl 配对使用，用于还原被两次编码的数据 参数: - i: 被两次 URL 编码的字符串 返回值: - 两次解码后的原始字符串 - 错误信息（...|
-| [codec.DoubleEncodeUrl](#doubleencodeurl) |DoubleEncodeUrl 对输入做两次 URL 编码（导出名为 codec.DoubleEncodeUrl） 常用于绕过仅做一次 URL 解码的过滤器；与 codec.DoubleDecodeUrl 配对使用 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - ...|
-| [codec.EncodeASCII](#encodeascii) |StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN 参数: - s: 待转换的字符串 返回值: - 带双引号、非字母数字字节转义为 \xNN 的字符串|
-| [codec.EncodeBase32](#encodebase32) |EncodeBase32 将输入数据编码为标准 Base32 字符串 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 标准 Base32 编码后的字符串|
-| [codec.EncodeBase64](#encodebase64) |EncodeBase64 将输入数据编码为标准 Base64 字符串 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 标准 Base64 编码后的字符串|
-| [codec.EncodeBase64Url](#encodebase64url) |EncodeBase64Url 将输入数据编码为 URL 安全的 Base64 字符串(用 - _ 替换 + /，并去掉末尾的 =) 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - URL 安全的 Base64 编码字符串|
-| [codec.EncodeChunked](#encodechunked) |HTTPChunkedEncode 将原始数据编码为 HTTP Transfer-Encoding: chunked 分块传输格式 参数: - raw: 待编码的原始 body 字节 返回值: - 分块编码后的字节数据|
-| [codec.EncodeHtml](#encodehtml) |EncodeHtmlEntity 将输入数据的每个字节编码为十进制 HTML 实体(如 &lt; 编码为 &amp;#60;)，常用于 XSS 构造 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 十进制 HTML 实体字符串|
-| [codec.EncodeHtmlHex](#encodehtmlhex) |EncodeHtmlEntityHex 将输入数据的每个字节编码为十六进制 HTML 实体(如 &lt; 编码为 &amp;#x3c;)，常用于 XSS 构造 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 十六进制 HTML 实体字符串|
-| [codec.EncodeToHex](#encodetohex) |EncodeToHex 将输入数据编码为十六进制(Hex)字符串 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 十六进制编码后的字符串|
-| [codec.EncodeToPrintable](#encodetoprintable) |StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN 参数: - s: 待转换的字符串 返回值: - 带双引号、非字母数字字节转义为 \xNN 的字符串|
-| [codec.EncodeUrl](#encodeurl) |EncodeUrlCode 对输入数据做激进的百分号(URL)编码，把每个字节都编码成 %xx 形式 参数: - i: 待编码的数据，可为 string、[]byte 等 返回值: - 百分号编码后的字符串|
-| [codec.EscapeHtml](#escapehtml) |EscapeHtmlString 对字符串做 HTML 实体转义，将 &lt; &gt; &amp; &#39; &#34; 等转为对应的 HTML 实体（导出名为 codec.EscapeHtml） 用于把用户输入安全地嵌入 HTML 文本，防止 XSS 参数: - s: 待转义的字符串 返回值: - HTML 实体转义后的字符串|
-| [codec.EscapePathUrl](#escapepathurl) |PathEscape 对字符串做 URL 路径转义，将空格、斜杠等特殊字符转为百分号编码（导出名为 codec.EscapePathUrl） 与 query 转义不同，路径转义会把空格编码为 %20（而非 +） 参数: - s: 待转义的字符串 返回值: - 路径转义后的字符串|
-| [codec.EscapeQueryUrl](#escapequeryurl) |QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +) 参数: - s: 待转义的字符串 返回值: - 转义后的查询串字符串|
-| [codec.EscapeUrl](#escapeurl) |QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +) 参数: - s: 待转义的字符串 返回值: - 转义后的查询串字符串|
-| [codec.FixUTF8](#fixutf8) |EscapeInvalidUTF8Byte 将字节数据中的非法 UTF-8 字节与不可见控制字符转义为 \xNN 形式，得到可读字符串 参数: - s: 待修复的字节数据(可能含非法 UTF-8 或控制字符) 返回值: - 修复/转义后的可读 UTF-8 字符串|
-| [codec.GB18030ToUTF8](#gb18030toutf8) |GB18030ToUtf8 将 GB18030 编码的字节转换为 UTF-8 字节 参数: - s: GB18030 编码的字节数据 返回值: - []byte: 转换后的 UTF-8 字节 - error: 转换失败时返回的错误|
-| [codec.GBKSafe](#gbksafe) |GBKSafeString 将字节数据安全转换为可读字符串：已是合法 UTF-8 则原样返回，否则尝试按 GBK 解码为 UTF-8 参数: - s: 待转换的字节数据(可能是 UTF-8 或 GBK) 返回值: - string: 转换后的可读字符串 - error: 既非合法 UTF-8 又无法...|
-| [codec.GBKToUTF8](#gbktoutf8) |GbkToUtf8 将 GBK 编码的字节转换为 UTF-8 字节 参数: - s: GBK 编码的字节数据 返回值: - []byte: 转换后的 UTF-8 字节 - error: 转换失败时返回的错误|
-| [codec.HTMLChardet](#htmlchardet) |CharDetect 检测输入数据可能的字符集编码，返回所有候选结果(按置信度排序) 参数: - raw: 待检测的数据，可为 string、[]byte 等 返回值: - []chardet.Result: 候选字符集检测结果列表(含 Charset、Confidence 等字段) - error...|
-| [codec.HTMLChardetBest](#htmlchardetbest) |CharDetectBest 检测输入数据最可能的字符集编码，返回置信度最高的单个结果 参数: - raw: 待检测的数据，可为 string、[]byte 等 返回值: - *chardet.Result: 置信度最高的字符集检测结果(含 Charset、Confidence 等字段) - err...|
-| [codec.HZGB2312ToUTF8](#hzgb2312toutf8) |HZGB2312ToUtf8 将 HZ-GB2312 编码的字节转换为 UTF-8 字节 参数: - s: HZ-GB2312(兼容 GB18030 解码)编码的字节数据 返回值: - []byte: 转换后的 UTF-8 字节 - error: 转换失败时返回的错误|
-| [codec.HmacMD5](#hmacmd5) |HmacMD5 使用给定密钥计算数据的 HMAC-MD5 消息认证码，返回字节切片 参数: - key: 密钥，可为 string、[]byte 等 - data: 待认证的数据，可为 string、[]byte 等 返回值: - HMAC-MD5 结果字节切片(16 字节，转 hex 后长度 32...|
-| [codec.HmacSM3](#hmacsm3) |HmacSM3 使用给定密钥计算数据的国密 HMAC-SM3 消息认证码，返回字节切片 参数: - key: 密钥，可为 string、[]byte 等 - data: 待认证的数据，可为 string、[]byte 等 返回值: - HMAC-SM3 结果字节切片(32 字节，转 hex 后长度 ...|
-| [codec.HmacSha1](#hmacsha1) |HmacSha1 使用给定密钥计算数据的 HMAC-SHA1 消息认证码，返回字节切片 参数: - key: 密钥，可为 string、[]byte 等 - data: 待认证的数据，可为 string、[]byte 等 返回值: - HMAC-SHA1 结果字节切片(20 字节，转 hex 后长度...|
-| [codec.HmacSha256](#hmacsha256) |HmacSha256 使用给定密钥计算数据的 HMAC-SHA256 消息认证码，返回字节切片 参数: - key: 密钥，可为 string、[]byte 等 - data: 待认证的数据，可为 string、[]byte 等 返回值: - HMAC-SHA256 结果字节切片(32 字节，转 h...|
-| [codec.HmacSha512](#hmacsha512) |HmacSha512 使用给定密钥计算数据的 HMAC-SHA512 消息认证码，返回字节切片 参数: - key: 密钥，可为 string、[]byte 等 - data: 待认证的数据，可为 string、[]byte 等 返回值: - HMAC-SHA512 结果字节切片(64 字节，转 h...|
-| [codec.IsUTF8](#isutf8) |IsUTF8 判断输入数据是否为合法的 UTF-8 编码 参数: - i: 待检测的数据，可为 string、[]byte、io.Reader 等 返回值: - bool: 是合法 UTF-8 返回 true，否则 false - error: 读取数据失败时返回的错误|
-| [codec.IsUTF8File](#isutf8file) |IsUTF8File 使用采样策略判断文件内容是否为合法 UTF-8 编码 小于 0.5K 的文件检查全部内容；0.5K-1K 检查一个 0.5K 采样；大于 1K 采样 4-8 段(每段约 256 个字符)。 参数: - filename: 待检测的文件路径 返回值: - bool: 文件内容为合...|
-| [codec.MMH3Hash128](#mmh3hash128) |MMH3Hash128 计算输入数据的 MurmurHash3 128 位哈希并返回十六进制字符串 参数: - i: 待哈希的数据，可为 string、[]byte 等 返回值: - 32 位十六进制 MurmurHash3 128 位哈希字符串|
-| [codec.MMH3Hash128x64](#mmh3hash128x64) |MMH3Hash128x64 计算输入数据的 MurmurHash3 128 位(x64 变体)哈希并返回十六进制字符串 参数: - i: 待哈希的数据，可为 string、[]byte 等 返回值: - 32 位十六进制 MurmurHash3 128 位(x64)哈希字符串|
-| [codec.MMH3Hash32](#mmh3hash32) |MMH3Hash32 计算输入数据的 MurmurHash3 32 位非加密快速哈希，返回数值 参数: - i: 待哈希的数据，可为 string、[]byte 等 返回值: - MurmurHash3 32 位哈希值(int64)|
-| [codec.Md5](#md5) |Md5 计算输入数据的 MD5 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 32 位十六进制 MD5 摘要字符串|
-| [codec.PBKDF2SHA1Key](#pbkdf2sha1key) |PBKDF2SHA1Key 使用 PBKDF2-HMAC-SHA1 从口令与盐派生固定长度的密钥(如微信 wxapkg V1MMWX 解密) 参数: - password: 口令，可为 string、[]byte 等 - salt: 盐值，可为 string、[]byte 等 - iteration...|
-| [codec.PKCS5Padding](#pkcs5padding) |PKCS5Padding 对数据按指定块大小做 PKCS5/PKCS7 填充，使其长度补齐到块大小的整数倍 参数: - ciphertext: 待填充的原始数据 - blockSize: 块大小(字节)，如 8 或 16 返回值: - 填充后的字节切片|
-| [codec.PKCS5UnPadding](#pkcs5unpadding) |PKCS5UnPadding 去除数据末尾的 PKCS5/PKCS7 填充，返回原始数据 参数: - origData: 带填充的数据 返回值: - 去除填充后的字节切片|
-| [codec.PKCS7Padding](#pkcs7padding) |PKCS7Padding 对数据按 16 字节块大小做 PKCS7 填充（导出名为 codec.PKCS7Padding） 填充字节的值等于需要填充的长度；即便数据已是块的整数倍也会补一整块 参数: - src: 待填充的原始字节 返回值: - 填充后长度为 16 字节整数倍的字节|
-| [codec.PKCS7PaddingForDES](#pkcs7paddingfordes) |PKCS7PaddingFor8ByteBlock 按 8 字节块大小对数据做 PKCS7/PKCS5 填充(常用于 DES) 参数: - src: 待填充的数据字节 返回值: - 填充到 8 字节整数倍后的数据字节|
-| [codec.PKCS7UnPadding](#pkcs7unpadding) |PKCS7UnPadding 去除数据末尾的 PKCS7 填充字节（导出名为 codec.PKCS7UnPadding） 与 codec.PKCS7Padding 配对使用；填充非法时原样返回输入 参数: - src: 带 PKCS7 填充的字节 返回值: - 去除填充后的原始字节|
-| [codec.PKCS7UnPaddingForDES](#pkcs7unpaddingfordes) |PKCS7UnPaddingFor8ByteBlock 去除 8 字节块大小的 PKCS7/PKCS5 填充(常用于 DES) 参数: - src: 含 PKCS7 填充的数据字节 返回值: - 去除填充后的原始数据字节|
-| [codec.RC4Decrypt](#rc4decrypt) |RC4Decrypt 使用 RC4 流密码解密数据(RC4 加解密为同一运算) 参数: - cipherKey: RC4 密钥(长度可变) - cipherText: 待解密的密文字节 返回值: - []byte: 解密还原后的明文字节 - error: 密钥非法等错误|
-| [codec.RC4Encrypt](#rc4encrypt) |RC4Encrypt 使用 RC4 流密码加密数据(RC4 加解密为同一运算) 参数: - cipherKey: RC4 密钥(长度可变) - plainText: 待加密的明文字节 返回值: - []byte: 加密后的密文字节 - error: 密钥非法等错误|
-| [codec.RSADecryptWithJSEncryptStyle](#rsadecryptwithjsencryptstyle) |RSADecryptWithJSEncryptStyle 以兼容前端 JSEncrypt 库的方式做 RSA 解密（导出名为 codec.RSADecryptWithJSEncryptStyle） 等价于 PKCS#1 v1.5 分块解密，与 codec.RSAEncryptWithJSEncryp...|
-| [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) |RSADecryptWithOAEP 使用 RSA 私钥和 OAEP 填充方式解密给定的密文（导出名为 codec.RSADecryptWithOAEP） 默认使用 SHA-256 作为 OAEP 哈希算法，与 codec.RSAEncryptWithOAEP 配对使用 参数: - raw: RSA...|
-| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) |DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。 参数 raw 表示 RSA 私钥，支持以下格式： - DER 编码的私钥（raw ASN.1 DER 字节流） - Base64 编码的 DE...|
-| [codec.RSADecryptWithPKCS1v15Block](#rsadecryptwithpkcs1v15block) |RSADecryptWithPKCS1v15Block 使用 RSA PKCS#1 v1.5 私钥解密数据（导出名为 codec.RSADecryptWithPKCS1v15Block） 自动按私钥长度对密文分块解密，与 codec.RSAEncryptWithPKCS1v15Block 配对使用 ...|
-| [codec.RSAEncryptWithJSEncryptStyle](#rsaencryptwithjsencryptstyle) |RSAEncryptWithJSEncryptStyle 以兼容前端 JSEncrypt 库的方式做 RSA 加密（导出名为 codec.RSAEncryptWithJSEncryptStyle） 等价于 PKCS#1 v1.5 分块加密，便于与使用 JSEncrypt 的前端互通 参数: - pu...|
-| [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) |RSAEncryptWithOAEP 使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密（导出名为 codec.RSAEncryptWithOAEP） 默认使用 SHA-256 作为 OAEP 哈希算法 参数: - raw: RSA 公钥，支持 DER、Base64(DER)、PEM、Bas...|
-| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) |EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。 参数: - raw: RSA 公钥（支持 DER/PEM/Base64 等格式） - data: 要加密的明文数据（[]byte、stri...|
-| [codec.RSAEncryptWithPKCS1v15Block](#rsaencryptwithpkcs1v15block) |RSAEncryptWithPKCS1v15Block 使用 RSA PKCS#1 v1.5 公钥加密数据（导出名为 codec.RSAEncryptWithPKCS1v15Block） 自动按公钥长度对超长明文分块加密，可处理任意长度的输入 参数: - pubKeyPem: PEM 格式的 RSA...|
-| [codec.RSASignWithPKCS1v15Digest](#rsasignwithpkcs1v15digest) |RSASignWithPKCS1v15Digest 使用 RSA PKCS#1 v1.5 私钥对数据做摘要签名（导出名为 codec.RSASignWithPKCS1v15Digest） 支持 sha256 与 sha512 两种摘要算法 参数: - privKeyPem: PEM 格式的 RSA ...|
-| [codec.RSAVerifyWithPKCS1v15Digest](#rsaverifywithpkcs1v15digest) |RSAVerifyWithPKCS1v15Digest 使用 RSA PKCS#1 v1.5 公钥验证摘要签名（导出名为 codec.RSAVerifyWithPKCS1v15Digest） 与 codec.RSASignWithPKCS1v15Digest 配对使用，支持 sha256 与 sha...|
-| [codec.RandBytes](#randbytes) |RandBytes 生成 n 个密码学安全的随机字节 参数: - n: 需要生成的随机字节数量 返回值: - 长度为 n 的随机字节切片(读取失败时返回 nil)|
-| [codec.Sha1](#sha1) |Sha1 计算输入数据的 SHA-1 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 40 位十六进制 SHA-1 摘要字符串|
-| [codec.Sha224](#sha224) |Sha224 计算输入数据的 SHA-224 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 56 位十六进制 SHA-224 摘要字符串|
-| [codec.Sha256](#sha256) |Sha256 计算输入数据的 SHA-256 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 64 位十六进制 SHA-256 摘要字符串|
-| [codec.Sha384](#sha384) |Sha384 计算输入数据的 SHA-384 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 96 位十六进制 SHA-384 摘要字符串|
-| [codec.Sha512](#sha512) |Sha512 计算输入数据的 SHA-512 摘要并返回十六进制字符串 参数: - i: 待计算摘要的数据，可为 string、[]byte 等 返回值: - 128 位十六进制 SHA-512 摘要字符串|
-| [codec.SignSHA256WithRSA](#signsha256withrsa) |SignSHA256WithRSA 使用 RSA 私钥对数据做 SHA256 签名（导出名为 codec.SignSHA256WithRSA） 私钥支持 PKCS8 与 PKCS1 两种 PEM 格式 参数: - pemBytes: PEM 格式的 RSA 私钥 - data: 待签名的原始数据，可...|
-| [codec.SignSHA512WithRSA](#signsha512withrsa) |SignSHA512WithRSA 使用 RSA 私钥对数据做 SHA512 签名（导出名为 codec.SignSHA512WithRSA） 私钥支持 PKCS8 与 PKCS1 两种 PEM 格式 参数: - pemBytes: PEM 格式的 RSA 私钥 - data: 待签名的原始数据，可...|
-| [codec.SignVerifySHA256WithRSA](#signverifysha256withrsa) |SignVerifySHA256WithRSA 使用 RSA 公钥验证数据的 SHA256 签名（导出名为 codec.SignVerifySHA256WithRSA） 与 codec.SignSHA256WithRSA 配对使用，验证通过时返回 nil 参数: - pemBytes: PEM 格式...|
-| [codec.SignVerifySHA512WithRSA](#signverifysha512withrsa) |SignVerifySHA512WithRSA 使用 RSA 公钥验证数据的 SHA512 签名（导出名为 codec.SignVerifySHA512WithRSA） 与 codec.SignSHA512WithRSA 配对使用，验证通过时返回 nil 参数: - pemBytes: PEM 格式...|
-| [codec.Sm2Decrypt](#sm2decrypt) |SM2DecryptC1C2C3 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据 注意：Sm2Decrypt 和 Sm2DecryptC1C2C3 是同一个函数的别名 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节) - data: 待解密的密文字节 返回值: -...|
-| [codec.Sm2DecryptAsn1](#sm2decryptasn1) |SM2DecryptASN1 使用国密 SM2 私钥按 ASN.1 编码格式解密数据 注意：Sm2DecryptAsn1 是本函数的导出名 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节) - data: 待解密的 ASN.1 编码密文字节 返回值: - []byte: 解...|
-| [codec.Sm2DecryptAsn1WithPassword](#sm2decryptasn1withpassword) |SM2DecryptASN1WithPassword 使用带密码保护的国密 SM2 私钥按 ASN.1 编码格式解密数据 注意：Sm2DecryptAsn1WithPassword 是本函数的导出名 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) - dat...|
-| [codec.Sm2DecryptC1C2C3](#sm2decryptc1c2c3) |SM2DecryptC1C2C3 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据 注意：Sm2Decrypt 和 Sm2DecryptC1C2C3 是同一个函数的别名 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节) - data: 待解密的密文字节 返回值: -...|
-| [codec.Sm2DecryptC1C2C3WithPassword](#sm2decryptc1c2c3withpassword) |SM2DecryptC1C2C3WithPassword 使用带密码保护的国密 SM2 私钥按 C1C2C3 密文排列解密数据 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) - data: 待解密的密文字节 - password: 私钥保护密码，未加密时传...|
-| [codec.Sm2DecryptC1C3C2](#sm2decryptc1c3c2) |SM2DecryptC1C3C2 使用国密 SM2 私钥按 C1C3C2 密文排列解密数据 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节) - data: 待解密的密文字节 返回值: - []byte: 解密还原后的明文字节 - error: 解密失败时返回的错误|
-| [codec.Sm2DecryptC1C3C2WithPassword](#sm2decryptc1c3c2withpassword) |SM2DecryptC1C3C2WithPassword 使用带密码保护的国密 SM2 私钥按 C1C3C2 密文排列解密数据 参数: - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) - data: 待解密的密文字节 - password: 私钥保护密码，未加密时传...|
-| [codec.Sm2Encrypt](#sm2encrypt) |SM2EncryptC1C2C3 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据 注意：Sm2Encrypt 和 Sm2EncryptC1C2C3 是同一个函数的别名 参数: - pubKey: SM2 公钥(支持 PEM/HEX/原始字节) - data: 待加密的数据字节 返回值: -...|
-| [codec.Sm2EncryptAsn1](#sm2encryptasn1) |SM2EncryptASN1 使用国密 SM2 公钥按 ASN.1 编码格式加密数据 注意：Sm2EncryptAsn1 是本函数的导出名 参数: - pubKey: SM2 公钥(支持 PEM/HEX/原始字节) - data: 待加密的数据字节 返回值: - []byte: ASN.1 编码的密...|
-| [codec.Sm2EncryptC1C2C3](#sm2encryptc1c2c3) |SM2EncryptC1C2C3 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据 注意：Sm2Encrypt 和 Sm2EncryptC1C2C3 是同一个函数的别名 参数: - pubKey: SM2 公钥(支持 PEM/HEX/原始字节) - data: 待加密的数据字节 返回值: -...|
-| [codec.Sm2EncryptC1C3C2](#sm2encryptc1c3c2) |SM2EncryptC1C3C2 使用国密 SM2 公钥按 C1C3C2 密文排列加密数据 参数: - pubKey: SM2 公钥(支持 PEM/HEX/原始字节) - data: 待加密的数据字节 返回值: - []byte: 加密后的密文字节(每次随机，结果不固定) - error: 加密失败...|
-| [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) |GenerateSM2PrivateKeyHEX 生成一对国密 SM2 密钥(HEX 文本格式) 返回值: - []byte: SM2 私钥(HEX 文本) - []byte: SM2 公钥(HEX 文本) - error: 生成失败时返回的错误|
-| [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) |GenerateSM2PrivateKeyPEM 生成一对国密 SM2 密钥(PEM 文本格式) 返回值: - []byte: SM2 私钥(PEM 文本) - []byte: SM2 公钥(PEM 文本) - error: 生成失败时返回的错误|
-| [codec.Sm2GenerateTemporaryKeyPair](#sm2generatetemporarykeypair) |SM2GenerateTemporaryKeyPair 生成用于密钥交换的临时密钥对 返回值： - []byte: 临时私钥（HEX格式） - []byte: 临时公钥（HEX格式） - error: 错误信息|
-| [codec.Sm2KeyExchange](#sm2keyexchange) |SM2KeyExchange 执行SM2密钥交换算法 参数说明： - keyLength: 期望的共享密钥长度（字节） - idA: A方标识（[]byte） - idB: B方标识（[]byte） - priKey: 调用方私钥（[]byte，支持PEM、HEX、原始字节） - pubKey: 对...|
-| [codec.Sm2SignWithSM3](#sm2signwithsm3) |SM2SignWithSM3 使用国密 SM2 私钥对数据进行 SM3 签名，返回 ASN.1 DER 编码的签名 参数: - priKeyBytes: SM2 私钥(支持 PEM/HEX/32 字节原始字节) - data: 待签名的数据，可为 string、[]byte 等 返回值: - []b...|
-| [codec.Sm2SignWithSM3WithPassword](#sm2signwithsm3withpassword) |SM2SignWithSM3WithPassword 使用带密码保护的国密 SM2 私钥对数据进行 SM3 签名 参数: - priKeyBytes: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) - data: 待签名的数据，可为 string、[]byte 等 - passwor...|
-| [codec.Sm2VerifyWithSM3](#sm2verifywithsm3) |SM2VerifyWithSM3 使用国密 SM2 公钥对数据进行 SM3 签名验证，验证通过返回 nil 参数: - pubKeyBytes: SM2 公钥(支持 PEM/HEX/64 或 65 字节原始字节) - originData: 原始签名数据，可为 string、[]byte 等 - s...|
-| [codec.Sm3](#sm3) |SM3 计算输入数据的国密 SM3 摘要，返回 32 字节摘要(注意是字节切片，打印前需用 codec.EncodeToHex 转可读) 参数: - raw: 待计算摘要的数据，可为 string、[]byte 等 返回值: - SM3 摘要字节切片(32 字节，转 hex 后长度 64)|
-| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) |SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecrypt...|
-| [codec.Sm4CBCDecryptWithPKCSPadding](#sm4cbcdecryptwithpkcspadding) |SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecrypt...|
-| [codec.Sm4CBCDecryptWithZeroPadding](#sm4cbcdecryptwithzeropadding) |SM4DecryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CBCDecryptWithZeroPadding） 与 codec.Sm4CBCEncryptWithZeroPadding 配...|
-| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) |SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncrypt...|
-| [codec.Sm4CBCEncryptWithPKCSPadding](#sm4cbcencryptwithpkcspadding) |SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncrypt...|
-| [codec.Sm4CBCEncryptWithZeroPadding](#sm4cbcencryptwithzeropadding) |SM4EncryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CBCEncryptWithZeroPadding） 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为...|
-| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) |SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4CFBDecrypt 和 Sm4CFBDecryptWithPKCSPad...|
-| [codec.Sm4CFBDecryptWithPKCSPadding](#sm4cfbdecryptwithpkcspadding) |SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4CFBDecrypt 和 Sm4CFBDecryptWithPKCSPad...|
-| [codec.Sm4CFBDecryptWithZeroPadding](#sm4cfbdecryptwithzeropadding) |SM4DecryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CFBDecryptWithZeroPadding） 与 codec.Sm4CFBEncryptWithZeroPadding 配...|
-| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) |SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4CFBEncrypt 和 Sm4CFBEncryptWithPKCSPad...|
-| [codec.Sm4CFBEncryptWithPKCSPadding](#sm4cfbencryptwithpkcspadding) |SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4CFBEncrypt 和 Sm4CFBEncryptWithPKCSPad...|
-| [codec.Sm4CFBEncryptWithZeroPadding](#sm4cfbencryptwithzeropadding) |SM4EncryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CFBEncryptWithZeroPadding） 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为...|
-| [codec.Sm4CTRDecrypt](#sm4ctrdecrypt) |SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding） 与 codec.Sm4CTREncryptWi...|
-| [codec.Sm4CTRDecryptWithPKCSPadding](#sm4ctrdecryptwithpkcspadding) |SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding） 与 codec.Sm4CTREncryptWi...|
-| [codec.Sm4CTRDecryptWithZeroPadding](#sm4ctrdecryptwithzeropadding) |SM4DecryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CTRDecryptWithZeroPadding） 与 codec.Sm4CTREncryptWithZeroPadding 配...|
-| [codec.Sm4CTREncrypt](#sm4ctrencrypt) |SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding） 密钥与 IV 均为 16 字节；IV 为空时使...|
-| [codec.Sm4CTREncryptWithPKCSPadding](#sm4ctrencryptwithpkcspadding) |SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding） 密钥与 IV 均为 16 字节；IV 为空时使...|
-| [codec.Sm4CTREncryptWithZeroPadding](#sm4ctrencryptwithzeropadding) |SM4EncryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CTREncryptWithZeroPadding） 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为...|
-| [codec.Sm4Decrypt](#sm4decrypt) |SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecrypt...|
-| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) |SM4DecryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(为兼容历史拼写错误保留) Deprecated: 请使用 Sm4ECBDecrypt(EBC 是 ECB 的拼写错误) 参数: - key: 密钥(16 字节) - i: ...|
-| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) |SM4EncryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(为兼容历史拼写错误保留) Deprecated: 请使用 Sm4ECBEncrypt(EBC 是 ECB 的拼写错误) 参数: - key: 密钥(16 字节) - i: ...|
-| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) |SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) 密钥为 16 字节。 注意：Sm4ECBDecrypt 和 Sm4ECBDecryptWithPKCSPadding 是同一个函数...|
-| [codec.Sm4ECBDecryptWithPKCSPadding](#sm4ecbdecryptwithpkcspadding) |SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) 密钥为 16 字节。 注意：Sm4ECBDecrypt 和 Sm4ECBDecryptWithPKCSPadding 是同一个函数...|
-| [codec.Sm4ECBDecryptWithZeroPadding](#sm4ecbdecryptwithzeropadding) |SM4DecryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)解密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBDecryptWithZeroPadding） 与 codec.Sm4ECBEnc...|
-| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) |SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) 密钥为 16 字节。 注意：Sm4ECBEncrypt 和 Sm4ECBEncryptWithPKCSPadding 是同一个函数...|
-| [codec.Sm4ECBEncryptWithPKCSPadding](#sm4ecbencryptwithpkcspadding) |SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) 密钥为 16 字节。 注意：Sm4ECBEncrypt 和 Sm4ECBEncryptWithPKCSPadding 是同一个函数...|
-| [codec.Sm4ECBEncryptWithZeroPadding](#sm4ecbencryptwithzeropadding) |SM4EncryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)加密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBEncryptWithZeroPadding） 密钥为 16 字节。 参数: - ...|
-| [codec.Sm4Encrypt](#sm4encrypt) |SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncrypt...|
-| [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) |SM4GCMDec 使用国密 SM4 算法在 GCM 模式下解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 参数: - key: 密钥(16 字节) - data: 待解密的密文，可为 []byte 等 - iv: 初始化向量(16 字节)，可为 ni...|
-| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) |SM4GCMEnc 使用国密 SM4 算法在 GCM 模式下加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 参数: - key: 密钥(16 字节) - data: 待加密的数据，可为 string、[]byte 等 - iv: 初始化向量(16 字节...|
-| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) |SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4OFBDecrypt 和 Sm4OFBDecryptWithPKCSPad...|
-| [codec.Sm4OFBDecryptWithPKCSPadding](#sm4ofbdecryptwithpkcspadding) |SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4OFBDecrypt 和 Sm4OFBDecryptWithPKCSPad...|
-| [codec.Sm4OFBDecryptWithZeroPadding](#sm4ofbdecryptwithzeropadding) |SM4DecryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4OFBDecryptWithZeroPadding） 与 codec.Sm4OFBEncryptWithZeroPadding 配...|
-| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) |SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4OFBEncrypt 和 Sm4OFBEncryptWithPKCSPad...|
-| [codec.Sm4OFBEncryptWithPKCSPadding](#sm4ofbencryptwithpkcspadding) |SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。 注意：Sm4OFBEncrypt 和 Sm4OFBEncryptWithPKCSPad...|
-| [codec.Sm4OFBEncryptWithZeroPadding](#sm4ofbencryptwithzeropadding) |SM4EncryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4OFBEncryptWithZeroPadding） 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为...|
-| [codec.StrconvQuote](#strconvquote) |StrConvQuote 将字符串转换为带双引号的 Go 字面量形式，特殊字符转义为 \n \t \xNN 等（导出名为 codec.StrconvQuote） 与 codec.StrconvUnquote 配对使用 参数: - s: 待转换的字符串 返回值: - 带双引号、特殊字符已转义的字面量字...|
-| [codec.StrconvUnquote](#strconvunquote) |StrConvUnquote 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII） 与 codec.StrconvQuote 配对使用，输入必须是带双引号包裹的字符串 参数: - s: 带引号的字符...|
-| [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) |TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：Tr...|
-| [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) |TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥。 注意：TripleDESCBC...|
-| [codec.TripleDESDecrypt](#tripledesdecrypt) |TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。 注意：Tr...|
-| [codec.TripleDESECBDecrypt](#tripledesecbdecrypt) |TripleDES_ECBDec 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数) 密钥长度必须是 24 字节(即 3 * 8 字节)。 参数: - key: 密钥(24 字节) - data: 待解密的密文字节 返回值: - []byt...|
-| [codec.TripleDESECBEncrypt](#tripledesecbencrypt) |TripleDES_ECBEnc 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数) 密钥长度必须是 24 字节(即 3 * 8 字节)。 参数: - key: 密钥(24 字节) - data: 待加密的数据字节 返回值: - []byt...|
-| [codec.TripleDESEncrypt](#tripledesencrypt) |TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥。 注意：TripleDESCBC...|
-| [codec.UTF8ToGB18030](#utf8togb18030) |Utf8ToGB18030 将 UTF-8 编码的字节转换为 GB18030 编码的字节 参数: - s: UTF-8 编码的字节数据 返回值: - []byte: 转换后的 GB18030 字节 - error: 转换失败时返回的错误|
-| [codec.UTF8ToGBK](#utf8togbk) |Utf8ToGbk 将 UTF-8 编码的字节转换为 GBK 编码的字节 参数: - s: UTF-8 编码的字节数据 返回值: - []byte: 转换后的 GBK 字节 - error: 转换失败时返回的错误|
-| [codec.UTF8ToHZGB2312](#utf8tohzgb2312) |Utf8ToHZGB2312 将 UTF-8 编码的字节转换为 HZ-GB2312 编码的字节 参数: - s: UTF-8 编码的字节数据 返回值: - []byte: 转换后的 HZ-GB2312 字节 - error: 转换失败时返回的错误|
-| [codec.UnescapePathUrl](#unescapepathurl) |PathUnescape 对 URL 路径转义的字符串做解码，同时兼容 %uXXXX 形式 参数: - s: 待解码的 URL 路径转义字符串 返回值: - string: 解码后的字符串 - error: 解码失败时返回的错误|
-| [codec.UnescapeQueryUrl](#unescapequeryurl) |QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式 参数: - s: 待解码的 URL 编码字符串 返回值: - string: 解码后的字符串 - error: 解码失败时返回的错误|
-| [codec.UnescapeString](#unescapestring) |UnescapeString 处理字符串中的转义字符，无需外层引号 支持 \&#34; \\ \n \r \t \xNN \uNNNN \UNNNNNNNN 等转义序列；与 codec.StrconvUnquote 不同，本函数不要求输入带引号包裹 参数: - s: 含转义序列的字符串(无需外层引号) 返回...|
-| [codec.UnicodeDecode](#unicodedecode) |JsonUnicodeDecode 将 \uXXXX / \UXXXXXXXX 形式的 Unicode 转义序列解码为原始字符串 参数: - i: 含 Unicode 转义序列的字符串 返回值: - 解码后的原始字符串|
-| [codec.UnicodeEncode](#unicodeencode) |JsonUnicodeEncode 将字符串的每个字符编码为 \uXXXX 形式的 Unicode 转义序列 参数: - i: 待编码的字符串 返回值: - \uXXXX 形式的 Unicode 转义字符串|
-| [codec.ZeroPadding](#zeropadding) |ZeroPadding 对数据按指定块大小做零字节(0x00)填充，使其长度补齐到块大小的整数倍 参数: - origin: 待填充的原始数据 - blockSize: 块大小(字节)，如 8 或 16 返回值: - 填充后的字节切片|
-| [codec.ZeroUnPadding](#zerounpadding) |ZeroUnPadding 去除数据末尾的零字节(0x00)填充，返回原始数据 参数: - originData: 带零填充的数据 返回值: - 去除零填充后的字节切片|
+典型使用场景：
 
+- 编码转换：`codec.EncodeBase64` / `codec.DecodeBase64`、`codec.EncodeToHex` / `codec.DecodeHex`、`codec.EncodeUrl` / `codec.DecodeUrl`、`codec.EncodeHtml` / `codec.DecodeHtml`、`codec.UnicodeEncode` / `codec.UnicodeDecode`，以及 `codec.AutoDecode` 智能识别多层编码。
+- 哈希与 HMAC：`codec.Md5` / `codec.Sha1` / `codec.Sha256` / `codec.Sm3`、`codec.HmacSha256` / `codec.HmacSM3`、`codec.MMH3Hash128` 等。
+- 对称加密：AES（`codec.AESCBCEncrypt` / `codec.AESGCMEncrypt` 等多模式多填充）、DES/3DES、RC4，以及国密 `codec.Sm4*`。
+- 非对称与签名：RSA（`codec.RSAEncryptWithOAEP` / `codec.RSASignWithPKCS1v15Digest` 等）、国密 `codec.Sm2*`（加解密、签名、密钥交换）。
+- 字符集与填充：`codec.GBKToUTF8` / `codec.UTF8ToGBK`、`codec.PKCS7Padding` / `codec.ZeroPadding` 等。
 
-## 函数定义
-### AESCBCDecrypt
+与相邻库的关系：`codec` 是纯计算库，无副作用，被 `poc`、`jwt`、`tls`、`yso` 等大量上层库依赖。注意部分哈希/加密函数返回 `[]byte`，需要 `codec.EncodeToHex`/`codec.EncodeBase64` 转成可读字符串；对称算法对密钥/IV 长度有严格要求。
 
-#### 详细描述
+> 共 180 个函数、5 个实例
+
+## 实例
+
+|实例名|类型|说明|
+|:--|:--|:--|
+| CBC | `string` | &#34;CBC&#34; |
+| CFB | `string` | &#34;CFB&#34; |
+| CTR | `string` | &#34;CTR&#34; |
+| ECB | `string` | &#34;ECB&#34; |
+| OFB | `string` | &#34;OFB&#34; |
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [codec.AESCBCDecrypt](#aescbcdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.AESCBCDecryptWithPKCS7Padding](#aescbcdecryptwithpkcs7padding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.AESCBCDecryptWithZeroPadding](#aescbcdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充解密数据 |
+| [codec.AESCBCEncrypt](#aescbcencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.AESCBCEncryptWithPKCS7Padding](#aescbcencryptwithpkcs7padding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.AESCBCEncryptWithZeroPadding](#aescbcencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充加密数据 |
+| [codec.AESCFBDecrypt](#aescfbdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据 |
+| [codec.AESCFBEncrypt](#aescfbencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据 |
+| [codec.AESDecrypt](#aesdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.AESDecryptBasic](#aesdecryptbasic) | `key []byte, data []byte, iv []byte, mode string` | `[]byte, error` | 使用 AES 算法对数据进行解密，支持多种模式(CBC、CFB、ECB、OFB、CTR) |
+| [codec.AESDecryptCFBWithPKCSPadding](#aesdecryptcfbwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据 |
+| [codec.AESDecryptCFBWithZeroPadding](#aesdecryptcfbwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | 使用 AES 算法在 CFB 模式下用零(Zero)填充解密数据 |
+| [codec.AESECBDecrypt](#aesecbdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESECBDecryptWithPKCS7Padding](#aesecbdecryptwithpkcs7padding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESECBDecryptWithZeroPadding](#aesecbdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESDecryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充解密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESECBEncrypt](#aesecbencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESECBEncryptWithPKCS7Padding](#aesecbencryptwithpkcs7padding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESECBEncryptWithZeroPadding](#aesecbencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充加密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.AESEncrypt](#aesencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.AESEncryptBasic](#aesencryptbasic) | `key []byte, data []byte, iv []byte, mode string` | `[]byte, error` | 使用 AES 算法对数据进行加密，支持多种模式(CBC、CFB、ECB、OFB、CTR) |
+| [codec.AESEncryptCFBWithPKCSPadding](#aesencryptcfbwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据 |
+| [codec.AESEncryptCFBWithZeroPadding](#aesencryptcfbwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | 使用 AES 算法在 CFB 模式下用零(Zero)填充加密数据 |
+| [codec.AESGCMDecrypt](#aesgcmdecrypt) | `key []byte, data any, nonce []byte` | `[]byte, error` | 使用 AES-GCM 认证加密模式解密数据；nonce 为空时从密文前置部分提取 nonce |
+| [codec.AESGCMDecryptWithNonceSize12](#aesgcmdecryptwithnoncesize12) | `key []byte, data any, nonce []byte` | `[]byte, error` | 使用 AES-GCM 模式以 12 字节 nonce 解密数据 |
+| [codec.AESGCMDecryptWithNonceSize16](#aesgcmdecryptwithnoncesize16) | `key []byte, data any, nonce []byte` | `[]byte, error` | 使用 AES-GCM 模式以 16 字节 nonce 解密数据 |
+| [codec.AESGCMEncrypt](#aesgcmencrypt) | `key []byte, data any, nonceRaw []byte` | `[]byte, error` | //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式 |
+| [codec.AESGCMEncryptWithNonceSize12](#aesgcmencryptwithnoncesize12) | `key []byte, data any, nonceRaw []byte` | `[]byte, error` | 使用 AES-GCM 模式以 12 字节 nonce 加密数据 |
+| [codec.AESGCMEncryptWithNonceSize16](#aesgcmencryptwithnoncesize16) | `key []byte, data any, nonceRaw []byte` | `[]byte, error` | //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式 |
+| [codec.AutoDecode](#autodecode) | `i any` | `[]*AutoDecodeResult` | 自动识别并逐层解码输入数据(依次尝试 URL/HTML 实体/Hex/Unicode/Base32/Base64/JWT/字符集等) |
+| [codec.CryptoRandBytes](#cryptorandbytes) | `n int` | `[]byte` | RandBytes 生成 n 个密码学安全的随机字节 |
+| [codec.DESCBCDecrypt](#descbcdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据 |
+| [codec.DESCBCEncrypt](#descbcencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据 |
+| [codec.DESDecrypt](#desdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据 |
+| [codec.DESECBDecrypt](#desecbdecrypt) | `key []byte, data []byte` | `[]byte, error` | DESECBDec 使用 DES 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数) |
+| [codec.DESECBEncrypt](#desecbencrypt) | `key []byte, data []byte` | `[]byte, error` | DESECBEnc 使用 DES 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数) |
+| [codec.DESEncrypt](#desencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据 |
+| [codec.DecodeASCII](#decodeascii) | `s string` | `string, error` | StrConvUnquote 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII） |
+| [codec.DecodeBase32](#decodebase32) | `i string` | `[]byte, error` | 将标准 Base32 字符串解码为原始字节 |
+| [codec.DecodeBase64](#decodebase64) | `i string` | `[]byte, error` | 将标准 Base64 字符串解码为原始字节 |
+| [codec.DecodeBase64Url](#decodebase64url) | `i any` | `[]byte, error` | 将 URL 安全的 Base64 字符串解码为原始字节 |
+| [codec.DecodeChunked](#decodechunked) | `raw []byte` | `[]byte, error` | HTTPChunkedDecode 解码 HTTP Transfer-Encoding: chunked 分块传输数据，还原原始 body |
+| [codec.DecodeHex](#decodehex) | `i string` | `[]byte, error` | 将十六进制(Hex)字符串解码为原始字节，支持可选的 0x 前缀 |
+| [codec.DecodeHtml](#decodehtml) | `s string` | `string` | UnescapeHtmlString 将 HTML 实体还原为原始字符，与 codec.EscapeHtml 配对使用（导出名为 codec.DecodeHtml） |
+| [codec.DecodeUrl](#decodeurl) | `s string` | `string, error` | QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式 |
+| [codec.DoubleDecodeUrl](#doubledecodeurl) | `i string` | `string, error` | 对输入做两次 URL 解码（导出名为 codec.DoubleDecodeUrl） |
+| [codec.DoubleEncodeUrl](#doubleencodeurl) | `i any` | `string` | 对输入做两次 URL 编码（导出名为 codec.DoubleEncodeUrl） |
+| [codec.EncodeASCII](#encodeascii) | `s string` | `string` | StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN |
+| [codec.EncodeBase32](#encodebase32) | `i any` | `string` | 将输入数据编码为标准 Base32 字符串 |
+| [codec.EncodeBase64](#encodebase64) | `i any` | `string` | 将输入数据编码为标准 Base64 字符串 |
+| [codec.EncodeBase64Url](#encodebase64url) | `i any` | `string` | 将输入数据编码为 URL 安全的 Base64 字符串(用 - _ 替换 + /，并去掉末尾的 =) |
+| [codec.EncodeChunked](#encodechunked) | `raw []byte` | `[]byte` | HTTPChunkedEncode 将原始数据编码为 HTTP Transfer-Encoding: chunked 分块传输格式 |
+| [codec.EncodeHtml](#encodehtml) | `i any` | `string` | EncodeHtmlEntity 将输入数据的每个字节编码为十进制 HTML 实体(如 &lt; 编码为 &amp;#60;)，常用于 XSS 构造 |
+| [codec.EncodeHtmlHex](#encodehtmlhex) | `i any` | `string` | EncodeHtmlEntityHex 将输入数据的每个字节编码为十六进制 HTML 实体(如 &lt; 编码为 &amp;#x3c;)，常用于 XSS 构造 |
+| [codec.EncodeToHex](#encodetohex) | `i any` | `string` | 将输入数据编码为十六进制(Hex)字符串 |
+| [codec.EncodeToPrintable](#encodetoprintable) | `s string` | `string` | StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN |
+| [codec.EncodeUrl](#encodeurl) | `i any` | `string` | EncodeUrlCode 对输入数据做激进的百分号(URL)编码，把每个字节都编码成 %xx 形式 |
+| [codec.EscapeHtml](#escapehtml) | `s string` | `string` | EscapeHtmlString 对字符串做 HTML 实体转义，将 &lt; &gt; &amp; &#39; &#34; 等转为对应的 HTML 实体（导出名为 codec.EscapeHtml） |
+| [codec.EscapePathUrl](#escapepathurl) | `s string` | `string` | PathEscape 对字符串做 URL 路径转义，将空格、斜杠等特殊字符转为百分号编码（导出名为 codec.EscapePathUrl） |
+| [codec.EscapeQueryUrl](#escapequeryurl) | `s string` | `string` | QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +) |
+| [codec.EscapeUrl](#escapeurl) | `s string` | `string` | QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +) |
+| [codec.FixUTF8](#fixutf8) | `s []byte` | `string` | EscapeInvalidUTF8Byte 将字节数据中的非法 UTF-8 字节与不可见控制字符转义为 \xNN 形式，得到可读字符串 |
+| [codec.GB18030ToUTF8](#gb18030toutf8) | `s []byte` | `[]byte, error` | 将 GB18030 编码的字节转换为 UTF-8 字节 |
+| [codec.GBKSafe](#gbksafe) | `s []byte` | `string, error` | GBKSafeString 将字节数据安全转换为可读字符串：已是合法 UTF-8 则原样返回，否则尝试按 GBK 解码为 UTF-8 |
+| [codec.GBKToUTF8](#gbktoutf8) | `s []byte` | `[]byte, error` | 将 GBK 编码的字节转换为 UTF-8 字节 |
+| [codec.HTMLChardet](#htmlchardet) | `raw any` | `[]chardet.Result, error` | CharDetect 检测输入数据可能的字符集编码，返回所有候选结果(按置信度排序) |
+| [codec.HTMLChardetBest](#htmlchardetbest) | `raw any` | `*chardet.Result, error` | CharDetectBest 检测输入数据最可能的字符集编码，返回置信度最高的单个结果 |
+| [codec.HZGB2312ToUTF8](#hzgb2312toutf8) | `s []byte` | `[]byte, error` | 将 HZ-GB2312 编码的字节转换为 UTF-8 字节 |
+| [codec.HmacMD5](#hmacmd5) | `key any, data any` | `[]byte` | 使用给定密钥计算数据的 HMAC-MD5 消息认证码，返回字节切片 |
+| [codec.HmacSM3](#hmacsm3) | `key any, data any` | `[]byte` | 使用给定密钥计算数据的国密 HMAC-SM3 消息认证码，返回字节切片 |
+| [codec.HmacSha1](#hmacsha1) | `key any, data any` | `[]byte` | 使用给定密钥计算数据的 HMAC-SHA1 消息认证码，返回字节切片 |
+| [codec.HmacSha256](#hmacsha256) | `key any, data any` | `[]byte` | 使用给定密钥计算数据的 HMAC-SHA256 消息认证码，返回字节切片 |
+| [codec.HmacSha512](#hmacsha512) | `key any, data any` | `[]byte` | 使用给定密钥计算数据的 HMAC-SHA512 消息认证码，返回字节切片 |
+| [codec.IsUTF8](#isutf8) | `i any` | `bool, error` | 判断输入数据是否为合法的 UTF-8 编码 |
+| [codec.IsUTF8File](#isutf8file) | `filename string` | `bool, error` | 使用采样策略判断文件内容是否为合法 UTF-8 编码 |
+| [codec.MMH3Hash128](#mmh3hash128) | `i any` | `string` | 计算输入数据的 MurmurHash3 128 位哈希并返回十六进制字符串 |
+| [codec.MMH3Hash128x64](#mmh3hash128x64) | `i any` | `string` | 计算输入数据的 MurmurHash3 128 位(x64 变体)哈希并返回十六进制字符串 |
+| [codec.MMH3Hash32](#mmh3hash32) | `i any` | `int64` | 计算输入数据的 MurmurHash3 32 位非加密快速哈希，返回数值 |
+| [codec.Md5](#md5) | `i any` | `string` | 计算输入数据的 MD5 摘要并返回十六进制字符串 |
+| [codec.PBKDF2SHA1Key](#pbkdf2sha1key) | `password any, salt any, iterations int, keyLen int` | `[]byte, error` | 使用 PBKDF2-HMAC-SHA1 从口令与盐派生固定长度的密钥(如微信 wxapkg V1MMWX 解密) |
+| [codec.PKCS5Padding](#pkcs5padding) | `ciphertext []byte, blockSize int` | `[]byte` | 对数据按指定块大小做 PKCS5/PKCS7 填充，使其长度补齐到块大小的整数倍 |
+| [codec.PKCS5UnPadding](#pkcs5unpadding) | `origData []byte` | `[]byte` | 去除数据末尾的 PKCS5/PKCS7 填充，返回原始数据 |
+| [codec.PKCS7Padding](#pkcs7padding) | `src []byte` | `[]byte` | 对数据按 16 字节块大小做 PKCS7 填充（导出名为 codec.PKCS7Padding） |
+| [codec.PKCS7PaddingForDES](#pkcs7paddingfordes) | `src []byte` | `[]byte` | PKCS7PaddingFor8ByteBlock 按 8 字节块大小对数据做 PKCS7/PKCS5 填充(常用于 DES) |
+| [codec.PKCS7UnPadding](#pkcs7unpadding) | `src []byte` | `[]byte` | 去除数据末尾的 PKCS7 填充字节（导出名为 codec.PKCS7UnPadding） |
+| [codec.PKCS7UnPaddingForDES](#pkcs7unpaddingfordes) | `src []byte` | `[]byte` | PKCS7UnPaddingFor8ByteBlock 去除 8 字节块大小的 PKCS7/PKCS5 填充(常用于 DES) |
+| [codec.RC4Decrypt](#rc4decrypt) | `cipherKey []byte, cipherText []byte` | `[]byte, error` | 使用 RC4 流密码解密数据(RC4 加解密为同一运算) |
+| [codec.RC4Encrypt](#rc4encrypt) | `cipherKey []byte, plainText []byte` | `[]byte, error` | 使用 RC4 流密码加密数据(RC4 加解密为同一运算) |
+| [codec.RSADecryptWithJSEncryptStyle](#rsadecryptwithjsencryptstyle) | `privKeyPem string, ciphertext []byte` | `[]byte, error` | 以兼容前端 JSEncrypt 库的方式做 RSA 解密（导出名为 codec.RSADecryptWithJSEncryptStyle） |
+| [codec.RSADecryptWithOAEP](#rsadecryptwithoaep) | `raw []byte, data any` | `[]byte, error` | 使用 RSA 私钥和 OAEP 填充方式解密给定的密文（导出名为 codec.RSADecryptWithOAEP） |
+| [codec.RSADecryptWithPKCS1v15](#rsadecryptwithpkcs1v15) | `raw []byte, data any` | `[]byte, error` | DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。 |
+| [codec.RSADecryptWithPKCS1v15Block](#rsadecryptwithpkcs1v15block) | `privKeyPem string, ciphertext []byte` | `[]byte, error` | 使用 RSA PKCS#1 v1.5 私钥解密数据（导出名为 codec.RSADecryptWithPKCS1v15Block） |
+| [codec.RSAEncryptWithJSEncryptStyle](#rsaencryptwithjsencryptstyle) | `pubKeyPem string, data []byte` | `[]byte, error` | 以兼容前端 JSEncrypt 库的方式做 RSA 加密（导出名为 codec.RSAEncryptWithJSEncryptStyle） |
+| [codec.RSAEncryptWithOAEP](#rsaencryptwithoaep) | `raw []byte, data any` | `[]byte, error` | 使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密（导出名为 codec.RSAEncryptWithOAEP） |
+| [codec.RSAEncryptWithPKCS1v15](#rsaencryptwithpkcs1v15) | `raw []byte, data any` | `[]byte, error` | EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。 |
+| [codec.RSAEncryptWithPKCS1v15Block](#rsaencryptwithpkcs1v15block) | `pubKeyPem string, data []byte` | `[]byte, error` | 使用 RSA PKCS#1 v1.5 公钥加密数据（导出名为 codec.RSAEncryptWithPKCS1v15Block） |
+| [codec.RSASignWithPKCS1v15Digest](#rsasignwithpkcs1v15digest) | `privKeyPem string, data []byte, algo string` | `[]byte, error` | 使用 RSA PKCS#1 v1.5 私钥对数据做摘要签名（导出名为 codec.RSASignWithPKCS1v15Digest） |
+| [codec.RSAVerifyWithPKCS1v15Digest](#rsaverifywithpkcs1v15digest) | `pubKeyPem string, data []byte, signature []byte, algo string` | `bool, error` | 使用 RSA PKCS#1 v1.5 公钥验证摘要签名（导出名为 codec.RSAVerifyWithPKCS1v15Digest） |
+| [codec.RandBytes](#randbytes) | `n int` | `[]byte` | 生成 n 个密码学安全的随机字节 |
+| [codec.Sha1](#sha1) | `i any` | `string` | 计算输入数据的 SHA-1 摘要并返回十六进制字符串 |
+| [codec.Sha224](#sha224) | `i any` | `string` | 计算输入数据的 SHA-224 摘要并返回十六进制字符串 |
+| [codec.Sha256](#sha256) | `i any` | `string` | 计算输入数据的 SHA-256 摘要并返回十六进制字符串 |
+| [codec.Sha384](#sha384) | `i any` | `string` | 计算输入数据的 SHA-384 摘要并返回十六进制字符串 |
+| [codec.Sha512](#sha512) | `i any` | `string` | 计算输入数据的 SHA-512 摘要并返回十六进制字符串 |
+| [codec.SignSHA256WithRSA](#signsha256withrsa) | `pemBytes []byte, data any` | `[]byte, error` | 使用 RSA 私钥对数据做 SHA256 签名（导出名为 codec.SignSHA256WithRSA） |
+| [codec.SignSHA512WithRSA](#signsha512withrsa) | `pemBytes []byte, data any` | `[]byte, error` | 使用 RSA 私钥对数据做 SHA512 签名（导出名为 codec.SignSHA512WithRSA） |
+| [codec.SignVerifySHA256WithRSA](#signverifysha256withrsa) | `pemBytes []byte, originData any, sign []byte` | `error` | 使用 RSA 公钥验证数据的 SHA256 签名（导出名为 codec.SignVerifySHA256WithRSA） |
+| [codec.SignVerifySHA512WithRSA](#signverifysha512withrsa) | `pemBytes []byte, originData any, sign []byte` | `error` | 使用 RSA 公钥验证数据的 SHA512 签名（导出名为 codec.SignVerifySHA512WithRSA） |
+| [codec.Sm2Decrypt](#sm2decrypt) | `priKey []byte, data []byte` | `[]byte, error` | SM2DecryptC1C2C3 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据 |
+| [codec.Sm2DecryptAsn1](#sm2decryptasn1) | `priKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 私钥按 ASN.1 编码格式解密数据 |
+| [codec.Sm2DecryptAsn1WithPassword](#sm2decryptasn1withpassword) | `priKey []byte, data []byte, password []byte` | `[]byte, error` | 使用带密码保护的国密 SM2 私钥按 ASN.1 编码格式解密数据 |
+| [codec.Sm2DecryptC1C2C3](#sm2decryptc1c2c3) | `priKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据 |
+| [codec.Sm2DecryptC1C2C3WithPassword](#sm2decryptc1c2c3withpassword) | `priKey []byte, data []byte, password []byte` | `[]byte, error` | 使用带密码保护的国密 SM2 私钥按 C1C2C3 密文排列解密数据 |
+| [codec.Sm2DecryptC1C3C2](#sm2decryptc1c3c2) | `priKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 私钥按 C1C3C2 密文排列解密数据 |
+| [codec.Sm2DecryptC1C3C2WithPassword](#sm2decryptc1c3c2withpassword) | `priKey []byte, data []byte, password []byte` | `[]byte, error` | 使用带密码保护的国密 SM2 私钥按 C1C3C2 密文排列解密数据 |
+| [codec.Sm2Encrypt](#sm2encrypt) | `pubKey []byte, data []byte` | `[]byte, error` | SM2EncryptC1C2C3 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据 |
+| [codec.Sm2EncryptAsn1](#sm2encryptasn1) | `pubKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 公钥按 ASN.1 编码格式加密数据 |
+| [codec.Sm2EncryptC1C2C3](#sm2encryptc1c2c3) | `pubKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据 |
+| [codec.Sm2EncryptC1C3C2](#sm2encryptc1c3c2) | `pubKey []byte, data []byte` | `[]byte, error` | 使用国密 SM2 公钥按 C1C3C2 密文排列加密数据 |
+| [codec.Sm2GenerateHexKeyPair](#sm2generatehexkeypair) | - | `[]byte, []byte, error` | GenerateSM2PrivateKeyHEX 生成一对国密 SM2 密钥(HEX 文本格式) |
+| [codec.Sm2GeneratePemKeyPair](#sm2generatepemkeypair) | - | `[]byte, []byte, error` | GenerateSM2PrivateKeyPEM 生成一对国密 SM2 密钥(PEM 文本格式) |
+| [codec.Sm2GenerateTemporaryKeyPair](#sm2generatetemporarykeypair) | - | `[]byte, []byte, error` | 生成用于密钥交换的临时密钥对 |
+| [codec.Sm2KeyExchange](#sm2keyexchange) | `keyLength int, idA []byte, idB []byte, priKey []byte, pubKey []byte, tempPriKey []byte, tempPubKey []byte, thisIsA bool` | `[]byte, []byte, []byte, error` | 执行SM2密钥交换算法 |
+| [codec.Sm2SignWithSM3](#sm2signwithsm3) | `priKeyBytes []byte, data any` | `[]byte, error` | 使用国密 SM2 私钥对数据进行 SM3 签名，返回 ASN.1 DER 编码的签名 |
+| [codec.Sm2SignWithSM3WithPassword](#sm2signwithsm3withpassword) | `priKeyBytes []byte, data any, password []byte` | `[]byte, error` | 使用带密码保护的国密 SM2 私钥对数据进行 SM3 签名 |
+| [codec.Sm2VerifyWithSM3](#sm2verifywithsm3) | `pubKeyBytes []byte, originData any, sign []byte` | `error` | 使用国密 SM2 公钥对数据进行 SM3 签名验证，验证通过返回 nil |
+| [codec.Sm3](#sm3) | `raw any` | `[]byte` | 计算输入数据的国密 SM3 摘要，返回 32 字节摘要(注意是字节切片，打印前需用 codec.EncodeToHex 转可读) |
+| [codec.Sm4CBCDecrypt](#sm4cbcdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4CBCDecryptWithPKCSPadding](#sm4cbcdecryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4CBCDecryptWithZeroPadding](#sm4cbcdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CBCDecryptWithZeroPadding） |
+| [codec.Sm4CBCEncrypt](#sm4cbcencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4CBCEncryptWithPKCSPadding](#sm4cbcencryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4CBCEncryptWithZeroPadding](#sm4cbcencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CBCEncryptWithZeroPadding） |
+| [codec.Sm4CFBDecrypt](#sm4cfbdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4CFBDecryptWithPKCSPadding](#sm4cfbdecryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4CFBDecryptWithZeroPadding](#sm4cfbdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CFBDecryptWithZeroPadding） |
+| [codec.Sm4CFBEncrypt](#sm4cfbencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4CFBEncryptWithPKCSPadding](#sm4cfbencryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4CFBEncryptWithZeroPadding](#sm4cfbencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CFBEncryptWithZeroPadding） |
+| [codec.Sm4CTRDecrypt](#sm4ctrdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding） |
+| [codec.Sm4CTRDecryptWithPKCSPadding](#sm4ctrdecryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding） |
+| [codec.Sm4CTRDecryptWithZeroPadding](#sm4ctrdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CTRDecryptWithZeroPadding） |
+| [codec.Sm4CTREncrypt](#sm4ctrencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding） |
+| [codec.Sm4CTREncryptWithPKCSPadding](#sm4ctrencryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding） |
+| [codec.Sm4CTREncryptWithZeroPadding](#sm4ctrencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CTREncryptWithZeroPadding） |
+| [codec.Sm4Decrypt](#sm4decrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4EBCDecrypt](#sm4ebcdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(为兼容历史拼写错误保留) |
+| [codec.Sm4EBCEncrypt](#sm4ebcencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(为兼容历史拼写错误保留) |
+| [codec.Sm4ECBDecrypt](#sm4ecbdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.Sm4ECBDecryptWithPKCSPadding](#sm4ecbdecryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.Sm4ECBDecryptWithZeroPadding](#sm4ecbdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)解密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBDecryptWithZeroPadding） |
+| [codec.Sm4ECBEncrypt](#sm4ecbencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.Sm4ECBEncryptWithPKCSPadding](#sm4ecbencryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil) |
+| [codec.Sm4ECBEncryptWithZeroPadding](#sm4ecbencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)加密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBEncryptWithZeroPadding） |
+| [codec.Sm4Encrypt](#sm4encrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4GCMDecrypt](#sm4gcmdecrypt) | `key []byte, data any, iv []byte` | `[]byte, error` | SM4GCMDec 使用国密 SM4 算法在 GCM 模式下解密数据 |
+| [codec.Sm4GCMEncrypt](#sm4gcmencrypt) | `key []byte, data any, iv []byte` | `[]byte, error` | SM4GCMEnc 使用国密 SM4 算法在 GCM 模式下加密数据 |
+| [codec.Sm4OFBDecrypt](#sm4ofbdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4OFBDecryptWithPKCSPadding](#sm4ofbdecryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据 |
+| [codec.Sm4OFBDecryptWithZeroPadding](#sm4ofbdecryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4DecryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4OFBDecryptWithZeroPadding） |
+| [codec.Sm4OFBEncrypt](#sm4ofbencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4OFBEncryptWithPKCSPadding](#sm4ofbencryptwithpkcspadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据 |
+| [codec.Sm4OFBEncryptWithZeroPadding](#sm4ofbencryptwithzeropadding) | `key []byte, i any, iv []byte` | `[]byte, error` | SM4EncryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4OFBEncryptWithZeroPadding） |
+| [codec.StrconvQuote](#strconvquote) | `s string` | `string` | 将字符串转换为带双引号的 Go 字面量形式，特殊字符转义为 \n \t \xNN 等（导出名为 codec.StrconvQuote） |
+| [codec.StrconvUnquote](#strconvunquote) | `s string` | `string, error` | 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII） |
+| [codec.TripleDESCBCDecrypt](#tripledescbcdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据 |
+| [codec.TripleDESCBCEncrypt](#tripledescbcencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据 |
+| [codec.TripleDESDecrypt](#tripledesdecrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据 |
+| [codec.TripleDESECBDecrypt](#tripledesecbdecrypt) | `key []byte, data []byte` | `[]byte, error` | TripleDES_ECBDec 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数) |
+| [codec.TripleDESECBEncrypt](#tripledesecbencrypt) | `key []byte, data []byte` | `[]byte, error` | TripleDES_ECBEnc 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数) |
+| [codec.TripleDESEncrypt](#tripledesencrypt) | `key []byte, i any, iv []byte` | `[]byte, error` | TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据 |
+| [codec.UTF8ToGB18030](#utf8togb18030) | `s []byte` | `[]byte, error` | 将 UTF-8 编码的字节转换为 GB18030 编码的字节 |
+| [codec.UTF8ToGBK](#utf8togbk) | `s []byte` | `[]byte, error` | 将 UTF-8 编码的字节转换为 GBK 编码的字节 |
+| [codec.UTF8ToHZGB2312](#utf8tohzgb2312) | `s []byte` | `[]byte, error` | 将 UTF-8 编码的字节转换为 HZ-GB2312 编码的字节 |
+| [codec.UnescapePathUrl](#unescapepathurl) | `s string` | `string, error` | PathUnescape 对 URL 路径转义的字符串做解码，同时兼容 %uXXXX 形式 |
+| [codec.UnescapeQueryUrl](#unescapequeryurl) | `s string` | `string, error` | QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式 |
+| [codec.UnescapeString](#unescapestring) | `s string` | `string, error` | 处理字符串中的转义字符，无需外层引号 |
+| [codec.UnicodeDecode](#unicodedecode) | `i string` | `string` | 将 \uXXXX / \UXXXXXXXX 形式的 Unicode 转义序列解码为原始字符串 |
+| [codec.UnicodeEncode](#unicodeencode) | `i string` | `string` | 将字符串的每个字符编码为 \uXXXX 形式的 Unicode 转义序列 |
+| [codec.ZeroPadding](#zeropadding) | `origin []byte, blockSize int` | `[]byte` | 对数据按指定块大小做零字节(0x00)填充，使其长度补齐到块大小的整数倍 |
+| [codec.ZeroUnPadding](#zerounpadding) | `originData []byte` | `[]byte` | 去除数据末尾的零字节(0x00)填充，返回原始数据 |
+
+## 函数详情
+
+### AESCBCDecrypt {#aescbcdecrypt}
+
+```go
+AESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
+
 AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCDecrypt、AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密
@@ -235,54 +252,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESCBCDecryptWithPKCS7Padding {#aescbcdecryptwithpkcs7padding}
 
-`AESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCBCDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESCBCDecryptWithPKCS7Padding
-
-#### 详细描述
 AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCDecrypt、AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密
@@ -296,52 +295,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESCBCDecryptWithZeroPadding {#aescbcdecryptwithzeropadding}
 
-`AESCBCDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESCBCDecryptWithZeroPadding
-
-#### 详细描述
 AESDecryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节(末尾零字节会被去除)
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密
@@ -355,54 +336,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CBC zero-padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESCBCEncrypt {#aescbcencrypt}
 
-`AESCBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESCBCEncrypt
-
-#### 详细描述
 AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCEncrypt、AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 准备密钥、IV 与明文
@@ -415,54 +378,36 @@ println(string(codec.AESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.AESCBCDecrypt(key, ct, iv)~) == "Secret Message", "AES-CBC encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESCBCEncryptWithPKCS7Padding {#aescbcencryptwithpkcs7padding}
 
-`AESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCBCEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESCBCEncryptWithPKCS7Padding
-
-#### 详细描述
 AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCEncrypt、AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 准备密钥、IV 与明文
@@ -475,52 +420,34 @@ println(string(codec.AESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.AESCBCDecrypt(key, ct, iv)~) == "Secret Message", "AES-CBC encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESCBCEncryptWithZeroPadding {#aescbcencryptwithzeropadding}
 
-`AESCBCEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESCBCEncryptWithZeroPadding
-
-#### 详细描述
 AESEncryptCBCWithZeroPadding 使用 AES 算法在 CBC 模式下用零(Zero)填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 准备密钥、IV 与明文
@@ -533,54 +460,36 @@ println(string(codec.AESCBCDecryptWithZeroPadding(key, ct, iv)~))   // OUT: Secr
 assert string(codec.AESCBCDecryptWithZeroPadding(key, ct, iv)~) == "Secret Message", "AES-CBC zero-padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESCFBDecrypt {#aescfbdecrypt}
 
-`AESCBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESCFBDecrypt
-
-#### 详细描述
 AESDecryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCFBDecrypt 和 AESDecryptCFBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(CFB)
@@ -594,54 +503,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESCFBEncrypt {#aescfbencrypt}
 
-`AESCFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESCFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESCFBEncrypt
-
-#### 详细描述
 AESEncryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCFBEncrypt 和 AESEncryptCFBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: CFB 流密码模式
@@ -654,54 +545,36 @@ println(string(codec.AESCFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.AESCFBDecrypt(key, ct, iv)~) == "Secret Message", "AES-CFB encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESDecrypt {#aesdecrypt}
 
-`AESCFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### AESDecrypt
-
-#### 详细描述
 AESDecryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCDecrypt、AESDecrypt 和 AESCBCDecryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密
@@ -715,54 +588,35 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESDecryptBasic {#aesdecryptbasic}
 
-`AESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESDecryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESDecryptBasic
-
-#### 详细描述
-AESDecryptBasic 使用 AES 算法对数据进行解密，支持多种模式(CBC、CFB、ECB、OFB、CTR)
+使用 AES 算法对数据进行解密，支持多种模式(CBC、CFB、ECB、OFB、CTR)
 
 注意：此函数是底层高级用法，需要外部自行处理 padding、key、iv 等问题。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| data | `[]byte` | 待解密的密文字节 |
+| iv | `[]byte` | 初始化向量(块模式需要) |
+| mode | `string` | 解密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR |
 
-  - data: 待解密的密文字节
+**返回值**
 
-  - iv: 初始化向量(块模式需要)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密后的明文字节(块模式下可能含零填充) |
+| r2 | `error` | 解密失败时返回的错误 |
 
-  - mode: 解密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR
-
-
-
-返回值:
-
-  - []byte: 解密后的明文字节(块模式下可能含零填充)
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 底层加解密
@@ -776,55 +630,36 @@ println(string(codec.ZeroUnPadding(dec)))   // OUT: Secret Message
 assert string(codec.ZeroUnPadding(dec)) == "Secret Message", "AESDecryptBasic should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESDecryptCFBWithPKCSPadding {#aesdecryptcfbwithpkcspadding}
 
-`AESDecryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)`
+```go
+AESDecryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| data | `[]byte` | 待解密的密文字节 |
-| iv | `[]byte` | 初始化向量(块模式需要) |
-| mode | `string` | 解密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密后的明文字节(块模式下可能含零填充) |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESDecryptCFBWithPKCSPadding
-
-#### 详细描述
-AESDecryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据
+使用 AES 算法在 CFB 模式下用 PKCS7 填充解密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCFBDecrypt 和 AESDecryptCFBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(CFB)
@@ -838,52 +673,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESDecryptCFBWithZeroPadding {#aesdecryptcfbwithzeropadding}
 
-`AESDecryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESDecryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 AES 算法在 CFB 模式下用零(Zero)填充解密数据
+
+密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `[]byte` | 密钥(16/24/32 字节) |
 | i | `any` | 待解密的密文，可为 []byte 等 |
 | iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
 | r2 | `error` | 解密失败时返回的错误 |
 
-
-### AESDecryptCFBWithZeroPadding
-
-#### 详细描述
-AESDecryptCFBWithZeroPadding 使用 AES 算法在 CFB 模式下用零(Zero)填充解密数据
-
-密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
-
-参数:
-
-  - key: 密钥(16/24/32 字节)
-
-  - i: 待解密的密文，可为 []byte 等
-
-  - iv: 初始化向量(16 字节)，可为 nil
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节(末尾零字节会被去除)
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(CFB 零填充)
@@ -897,54 +714,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-CFB zero-padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESECBDecrypt {#aesecbdecrypt}
 
-`AESDecryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESECBDecrypt
-
-#### 详细描述
 AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
 注意：AESECBDecrypt 和 AESDecryptECBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(ECB iv 传 nil)
@@ -957,54 +756,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESECBDecryptWithPKCS7Padding {#aesecbdecryptwithpkcs7padding}
 
-`AESECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESECBDecryptWithPKCS7Padding
-
-#### 详细描述
 AESDecryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
 注意：AESECBDecrypt 和 AESDecryptECBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(ECB iv 传 nil)
@@ -1017,52 +798,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESECBDecryptWithZeroPadding {#aesecbdecryptwithzeropadding}
 
-`AESECBDecryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESECBDecryptWithZeroPadding
-
-#### 详细描述
 AESDecryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充解密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节(末尾零字节会被去除)
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(ECB 零填充)
@@ -1075,54 +838,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-ECB zero-padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESECBEncrypt {#aesecbencrypt}
 
-`AESECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节(末尾零字节会被去除) |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### AESECBEncrypt
-
-#### 详细描述
 AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
 注意：AESECBEncrypt 和 AESECBEncryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: ECB 模式 iv 传 nil
@@ -1134,54 +879,36 @@ println(string(codec.AESECBDecrypt(key, ct, nil)~))   // OUT: Secret Message
 assert string(codec.AESECBDecrypt(key, ct, nil)~) == "Secret Message", "AES-ECB encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESECBEncryptWithPKCS7Padding {#aesecbencryptwithpkcs7padding}
 
-`AESECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESECBEncryptWithPKCS7Padding
-
-#### 详细描述
 AESEncryptECBWithPKCSPadding 使用 AES 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
 注意：AESECBEncrypt 和 AESECBEncryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: ECB 模式 iv 传 nil
@@ -1193,52 +920,34 @@ println(string(codec.AESECBDecrypt(key, ct, nil)~))   // OUT: Secret Message
 assert string(codec.AESECBDecrypt(key, ct, nil)~) == "Secret Message", "AES-ECB encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESECBEncryptWithZeroPadding {#aesecbencryptwithzeropadding}
 
-`AESECBEncryptWithPKCS7Padding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESECBEncryptWithZeroPadding
-
-#### 详细描述
 AESEncryptECBWithZeroPadding 使用 AES 算法在 ECB 模式下用零(Zero)填充加密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: ECB 零填充，iv 传 nil
@@ -1250,54 +959,36 @@ println(string(codec.AESECBDecryptWithZeroPadding(key, ct, nil)~))   // OUT: Sec
 assert string(codec.AESECBDecryptWithZeroPadding(key, ct, nil)~) == "Secret Message", "AES-ECB zero-padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESEncrypt {#aesencrypt}
 
-`AESECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESEncrypt
-
-#### 详细描述
 AESEncryptCBCWithPKCSPadding 使用 AES 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCBCEncrypt、AESEncrypt 和 AESCBCEncryptWithPKCS7Padding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败(如密钥长度非法)时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 准备密钥、IV 与明文
@@ -1310,54 +1001,35 @@ println(string(codec.AESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.AESCBCDecrypt(key, ct, iv)~) == "Secret Message", "AES-CBC encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESEncryptBasic {#aesencryptbasic}
 
-`AESEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESEncryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败(如密钥长度非法)时返回的错误 |
-
-
-### AESEncryptBasic
-
-#### 详细描述
-AESEncryptBasic 使用 AES 算法对数据进行加密，支持多种模式(CBC、CFB、ECB、OFB、CTR)
+使用 AES 算法对数据进行加密，支持多种模式(CBC、CFB、ECB、OFB、CTR)
 
 注意：此函数是底层高级用法，需要外部自行处理 padding、key、iv 等问题。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| data | `[]byte` | 待加密的数据字节 |
+| iv | `[]byte` | 初始化向量(块模式需要) |
+| mode | `string` | 加密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR |
 
-  - data: 待加密的数据字节
+**返回值**
 
-  - iv: 初始化向量(块模式需要)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-  - mode: 加密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR
-
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 底层加密，块模式内部会做零填充
@@ -1371,55 +1043,36 @@ println(string(codec.ZeroUnPadding(dec)))   // OUT: Secret Message
 assert string(codec.ZeroUnPadding(dec)) == "Secret Message", "AESEncryptBasic/AESDecryptBasic should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESEncryptCFBWithPKCSPadding {#aesencryptcfbwithpkcspadding}
 
-`AESEncryptBasic(key []byte, data []byte, iv []byte, mode string) ([]byte, error)`
+```go
+AESEncryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| data | `[]byte` | 待加密的数据字节 |
-| iv | `[]byte` | 初始化向量(块模式需要) |
-| mode | `string` | 加密模式，取 codec.CBC / codec.CFB / codec.ECB / codec.OFB / codec.CTR |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### AESEncryptCFBWithPKCSPadding
-
-#### 详细描述
-AESEncryptCFBWithPKCSPadding 使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据
+使用 AES 算法在 CFB 模式下用 PKCS7 填充加密数据
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
 
 注意：AESCFBEncrypt 和 AESEncryptCFBWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: CFB 流密码模式
@@ -1432,52 +1085,34 @@ println(string(codec.AESCFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.AESCFBDecrypt(key, ct, iv)~) == "Secret Message", "AES-CFB encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESEncryptCFBWithZeroPadding {#aesencryptcfbwithzeropadding}
 
-`AESEncryptCFBWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESEncryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 AES 算法在 CFB 模式下用零(Zero)填充加密数据
+
+密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `[]byte` | 密钥(16/24/32 字节) |
 | i | `any` | 待加密的数据，可为 string、[]byte 等 |
 | iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 加密后的密文字节 |
 | r2 | `error` | 加密失败时返回的错误 |
 
-
-### AESEncryptCFBWithZeroPadding
-
-#### 详细描述
-AESEncryptCFBWithZeroPadding 使用 AES 算法在 CFB 模式下用零(Zero)填充加密数据
-
-密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；iv 为 nil 时使用 key 前 16 字节作为 iv。
-
-参数:
-
-  - key: 密钥(16/24/32 字节)
-
-  - i: 待加密的数据，可为 string、[]byte 等
-
-  - iv: 初始化向量(16 字节)，可为 nil
-
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: CFB 零填充加解密
@@ -1490,52 +1125,34 @@ println(string(codec.ZeroUnPadding(codec.AESDecryptCFBWithZeroPadding(key, ct, i
 assert string(codec.ZeroUnPadding(codec.AESDecryptCFBWithZeroPadding(key, ct, iv)~)) == "Secret Message", "AES-CFB zero-padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMDecrypt {#aesgcmdecrypt}
 
-`AESEncryptCFBWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+AESGCMDecrypt(key []byte, data any, nonce []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### AESGCMDecrypt
-
-#### 详细描述
-AESGCMDecrypt 使用 AES-GCM 认证加密模式解密数据；nonce 为空时从密文前置部分提取 nonce
+使用 AES-GCM 认证加密模式解密数据；nonce 为空时从密文前置部分提取 nonce
 
 密钥长度必须是 16/24/32 字节；nonce 长度为 16 时用 16，否则用 12。
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| data | `any` | 待解密的密文，可为 []byte 等 |
+| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前置部分提取 |
 
-  - data: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - nonce: nonce(随机数)，传 nil 则从密文前置部分提取
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密或认证失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密或认证失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: nonce 传 nil，从密文中提取
@@ -1548,50 +1165,32 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMDecryptWithNonceSize12 {#aesgcmdecryptwithnoncesize12}
 
-`AESGCMDecrypt(key []byte, data any, nonce []byte) ([]byte, error)`
+```go
+AESGCMDecryptWithNonceSize12(key []byte, data any, nonce []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 AES-GCM 模式以 12 字节 nonce 解密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `[]byte` | 密钥(16/24/32 字节) |
 | data | `any` | 待解密的密文，可为 []byte 等 |
-| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前置部分提取 |
+| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前 12 字节提取 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解密还原后的明文字节 |
 | r2 | `error` | 解密或认证失败时返回的错误 |
 
-
-### AESGCMDecryptWithNonceSize12
-
-#### 详细描述
-AESGCMDecryptWithNonceSize12 使用 AES-GCM 模式以 12 字节 nonce 解密数据
-
-参数:
-
-  - key: 密钥(16/24/32 字节)
-
-  - data: 待解密的密文，可为 []byte 等
-
-  - nonce: nonce(随机数)，传 nil 则从密文前 12 字节提取
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密或认证失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(nonce12)
@@ -1604,50 +1203,32 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM nonce12 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMDecryptWithNonceSize16 {#aesgcmdecryptwithnoncesize16}
 
-`AESGCMDecryptWithNonceSize12(key []byte, data any, nonce []byte) ([]byte, error)`
+```go
+AESGCMDecryptWithNonceSize16(key []byte, data any, nonce []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 AES-GCM 模式以 16 字节 nonce 解密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `[]byte` | 密钥(16/24/32 字节) |
 | data | `any` | 待解密的密文，可为 []byte 等 |
-| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前 12 字节提取 |
+| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前 16 字节提取 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解密还原后的明文字节 |
 | r2 | `error` | 解密或认证失败时返回的错误 |
 
-
-### AESGCMDecryptWithNonceSize16
-
-#### 详细描述
-AESGCMDecryptWithNonceSize16 使用 AES-GCM 模式以 16 字节 nonce 解密数据
-
-参数:
-
-  - key: 密钥(16/24/32 字节)
-
-  - data: 待解密的密文，可为 []byte 等
-
-  - nonce: nonce(随机数)，传 nil 则从密文前 16 字节提取
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密或认证失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先用 16 字节 nonce 加密再解密
@@ -1660,31 +1241,15 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM nonce16 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMEncrypt {#aesgcmencrypt}
 
-`AESGCMDecryptWithNonceSize16(key []byte, data any, nonce []byte) ([]byte, error)`
+```go
+AESGCMEncrypt(key []byte, data any, nonceRaw []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| data | `any` | 待解密的密文，可为 []byte 等 |
-| nonce | `[]byte` | nonce(随机数)，传 nil 则从密文前 16 字节提取 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密或认证失败时返回的错误 |
-
-
-### AESGCMEncrypt
-
-#### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
-
-
 
 	func AES_GCM_Encrypt(key []byte, Content []byte) string {
 
@@ -1702,34 +1267,28 @@ assert string(pt) == "Secret Message", "AES-GCM nonce16 decrypt should recover p
 
 	}
 
-
-
 AESGCMEncrypt 使用 AES-GCM 认证加密模式加密数据；nonceRaw 为空时随机生成 nonce 并前置到密文中
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；nonce 长度为 16 时用 16，否则用 12。
 
 注意：AESGCMEncryptWithNonceSize16 是本函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| data | `any` | 待加密的数据，可为 string、[]byte 等 |
+| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成并前置到密文 |
 
-  - data: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - nonceRaw: nonce(随机数)，传 nil 则自动生成并前置到密文
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce) |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: nonce 传 nil 自动生成并前置
@@ -1742,50 +1301,32 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMEncryptWithNonceSize12 {#aesgcmencryptwithnoncesize12}
 
-`AESGCMEncrypt(key []byte, data any, nonceRaw []byte) ([]byte, error)`
+```go
+AESGCMEncryptWithNonceSize12(key []byte, data any, nonceRaw []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 AES-GCM 模式以 12 字节 nonce 加密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `[]byte` | 密钥(16/24/32 字节) |
 | data | `any` | 待加密的数据，可为 string、[]byte 等 |
-| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成并前置到密文 |
+| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成 12 字节并前置到密文 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce) |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
 | r2 | `error` | 加密失败时返回的错误 |
 
-
-### AESGCMEncryptWithNonceSize12
-
-#### 详细描述
-AESGCMEncryptWithNonceSize12 使用 AES-GCM 模式以 12 字节 nonce 加密数据
-
-参数:
-
-  - key: 密钥(16/24/32 字节)
-
-  - data: 待加密的数据，可为 string、[]byte 等
-
-  - nonceRaw: nonce(随机数)，传 nil 则自动生成 12 字节并前置到密文
-
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: nonce 传 nil 自动生成(12 字节)并前置
@@ -1798,31 +1339,15 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM nonce12 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AESGCMEncryptWithNonceSize16 {#aesgcmencryptwithnoncesize16}
 
-`AESGCMEncryptWithNonceSize12(key []byte, data any, nonceRaw []byte) ([]byte, error)`
+```go
+AESGCMEncryptWithNonceSize16(key []byte, data any, nonceRaw []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| data | `any` | 待加密的数据，可为 string、[]byte 等 |
-| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成 12 字节并前置到密文 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### AESGCMEncryptWithNonceSize16
-
-#### 详细描述
 //AES GCM 加密后的payload shiro 1.4.2版本更换为了AES-GCM加密方式
-
-
 
 	func AES_GCM_Encrypt(key []byte, Content []byte) string {
 
@@ -1840,34 +1365,28 @@ assert string(pt) == "Secret Message", "AES-GCM nonce12 should round-trip"
 
 	}
 
-
-
 AESGCMEncrypt 使用 AES-GCM 认证加密模式加密数据；nonceRaw 为空时随机生成 nonce 并前置到密文中
 
 密钥长度必须是 16/24/32 字节(分别对应 AES-128/192/256)；nonce 长度为 16 时用 16，否则用 12。
 
 注意：AESGCMEncryptWithNonceSize16 是本函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16/24/32 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16/24/32 字节) |
+| data | `any` | 待加密的数据，可为 string、[]byte 等 |
+| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成并前置到密文 |
 
-  - data: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - nonceRaw: nonce(随机数)，传 nil 则自动生成并前置到密文
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce) |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: nonce 传 nil 自动生成并前置
@@ -1880,44 +1399,29 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "AES-GCM encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### AutoDecode {#autodecode}
 
-`AESGCMEncryptWithNonceSize16(key []byte, data any, nonceRaw []byte) ([]byte, error)`
+```go
+AutoDecode(i any) []*AutoDecodeResult
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16/24/32 字节) |
-| data | `any` | 待加密的数据，可为 string、[]byte 等 |
-| nonceRaw | `[]byte` | nonce(随机数)，传 nil 则自动生成并前置到密文 |
+自动识别并逐层解码输入数据(依次尝试 URL/HTML 实体/Hex/Unicode/Base32/Base64/JWT/字符集等)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节(随机 nonce 时前 nonceSize 字节为 nonce) |
-| r2 | `error` | 加密失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待自动解码的数据，可为 string、[]byte 等 |
 
-### AutoDecode
+**返回值**
 
-#### 详细描述
-AutoDecode 自动识别并逐层解码输入数据(依次尝试 URL/HTML 实体/Hex/Unicode/Base32/Base64/JWT/字符集等)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*AutoDecodeResult` | 解码过程的结果列表，每个元素含 Type(编码类型)、Origin(本层输入)、Result(本层输出)等字段；无法识别时返回单个 Type 为 No 的结果 |
 
-参数:
-
-  - i: 待自动解码的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 解码过程的结果列表，每个元素含 Type(编码类型)、Origin(本层输入)、Result(本层输出)等字段；无法识别时返回单个 Type 为 No 的结果
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 对 Base64 文本自动解码
@@ -1928,41 +1432,29 @@ println(len(results) > 0)   // OUT: true
 assert len(results) > 0, "AutoDecode should return decode steps"
 ``````````````
 
+---
 
-#### 定义
+### CryptoRandBytes {#cryptorandbytes}
 
-`AutoDecode(i any) []*AutoDecodeResult`
+```go
+CryptoRandBytes(n int) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待自动解码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*AutoDecodeResult` | 解码过程的结果列表，每个元素含 Type(编码类型)、Origin(本层输入)、Result(本层输出)等字段；无法识别时返回单个 Type 为 No 的结果 |
-
-
-### CryptoRandBytes
-
-#### 详细描述
 RandBytes 生成 n 个密码学安全的随机字节
 
-参数:
+**参数**
 
-  - n: 需要生成的随机字节数量
+|参数名|类型|说明|
+|:--|:--|:--|
+| n | `int` | 需要生成的随机字节数量 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 长度为 n 的随机字节切片(读取失败时返回 nil) |
 
-返回值:
-
-  - 长度为 n 的随机字节切片(读取失败时返回 nil)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成 16 个随机字节(每次结果不同)
@@ -1973,51 +1465,36 @@ println(len(result))   // OUT: 16
 assert len(result) == 16, "RandBytes should produce requested length"
 ``````````````
 
+---
 
-#### 定义
+### DESCBCDecrypt {#descbcdecrypt}
 
-`CryptoRandBytes(n int) []byte`
+```go
+DESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| n | `int` | 需要生成的随机字节数量 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 长度为 n 的随机字节切片(读取失败时返回 nil) |
-
-
-### DESCBCDecrypt
-
-#### 详细描述
 DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据
 
 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：DESCBCDecrypt、DESDecrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(DES-CBC)
@@ -2031,54 +1508,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "DES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### DESCBCEncrypt {#descbcencrypt}
 
-`DESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+DESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### DESCBCEncrypt
-
-#### 详细描述
 DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据
 
 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：DESCBCEncrypt、DESEncrypt 和本函数是同一个函数的别名；如需其他填充，先用 codec.PKCS7PaddingForDES 填充再调用。
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: DES-CBC 加解密(8 字节密钥与 IV)
@@ -2091,54 +1550,36 @@ println(string(codec.DESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.DESCBCDecrypt(key, ct, iv)~) == "Secret Message", "DES-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### DESDecrypt {#desdecrypt}
 
-`DESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+DESDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### DESDecrypt
-
-#### 详细描述
 DESDecryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充解密数据
 
 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：DESCBCDecrypt、DESDecrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(DES-CBC)
@@ -2152,50 +1593,33 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "DES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### DESECBDecrypt {#desecbdecrypt}
 
-`DESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+DESECBDecrypt(key []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### DESECBDecrypt
-
-#### 详细描述
 DESECBDec 使用 DES 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数)
 
 密钥长度必须是 8 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| data | `[]byte` | 待解密的密文字节 |
 
-  - data: 待解密的密文字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(DES-ECB)
@@ -2208,49 +1632,33 @@ println(string(codec.ZeroUnPadding(pt)))   // OUT: Secret Message
 assert string(codec.ZeroUnPadding(pt)) == "Secret Message", "DES-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### DESECBEncrypt {#desecbencrypt}
 
-`DESECBDecrypt(key []byte, data []byte) ([]byte, error)`
+```go
+DESECBEncrypt(key []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| data | `[]byte` | 待解密的密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### DESECBEncrypt
-
-#### 详细描述
 DESECBEnc 使用 DES 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数)
 
 密钥长度必须是 8 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| data | `[]byte` | 待加密的数据字节 |
 
-  - data: 待加密的数据字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: DES-ECB 加解密(8 字节密钥)
@@ -2262,53 +1670,36 @@ println(string(codec.ZeroUnPadding(codec.DESECBDecrypt(key, ct)~)))   // OUT: Se
 assert string(codec.ZeroUnPadding(codec.DESECBDecrypt(key, ct)~)) == "Secret Message", "DES-ECB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### DESEncrypt {#desencrypt}
 
-`DESECBEncrypt(key []byte, data []byte) ([]byte, error)`
+```go
+DESEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| data | `[]byte` | 待加密的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### DESEncrypt
-
-#### 详细描述
 DESEncryptCBCWithZeroPadding 使用 DES 算法在 CBC 模式下用零填充加密数据
 
 密钥长度必须是 8 字节，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：DESCBCEncrypt、DESEncrypt 和本函数是同一个函数的别名；如需其他填充，先用 codec.PKCS7PaddingForDES 填充再调用。
 
-参数:
+**参数**
 
-  - key: 密钥(8 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(8 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: DES-CBC 加解密(8 字节密钥与 IV)
@@ -2321,50 +1712,32 @@ println(string(codec.DESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.DESCBCDecrypt(key, ct, iv)~) == "Secret Message", "DES-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### DecodeASCII {#decodeascii}
 
-`DESEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+DecodeASCII(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(8 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### DecodeASCII
-
-#### 详细描述
 StrConvUnquote 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII）
 
 与 codec.StrconvQuote 配对使用，输入必须是带双引号包裹的字符串
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34; |
 
-参数:
+**返回值**
 
-  - s: 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34;
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 去引号并解转义后的字符串 |
+| r2 | `error` | 错误信息（输入不是合法的带引号字面量时返回） |
 
-
-
-返回值:
-
-  - 去引号并解转义后的字符串
-
-  - 错误信息（输入不是合法的带引号字面量时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.StrconvUnquote("\"a\\nb\"")~
@@ -2372,44 +1745,30 @@ println(len(result))   // OUT: 3
 assert result == "a\nb", "StrconvUnquote should unquote and unescape \\n"
 ``````````````
 
+---
 
-#### 定义
+### DecodeBase32 {#decodebase32}
 
-`DecodeASCII(s string) (string, error)`
+```go
+DecodeBase32(i string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34; |
+将标准 Base32 字符串解码为原始字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 去引号并解转义后的字符串 |
-| r2 | `error` | 错误信息（输入不是合法的带引号字面量时返回） |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 待解码的标准 Base32 字符串 |
 
-### DecodeBase32
+**返回值**
 
-#### 详细描述
-DecodeBase32 将标准 Base32 字符串解码为原始字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解码后的原始字节 |
+| r2 | `error` | 解码失败时返回的错误 |
 
-参数:
-
-  - i: 待解码的标准 Base32 字符串
-
-
-
-返回值:
-
-  - []byte: 解码后的原始字节
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 波浪号自动解包 error，得到 []byte
@@ -2420,44 +1779,30 @@ println(string(result))   // OUT: abc
 assert string(result) == "abc", "DecodeBase32 should decode base32 back to bytes"
 ``````````````
 
+---
 
-#### 定义
+### DecodeBase64 {#decodebase64}
 
-`DecodeBase32(i string) ([]byte, error)`
+```go
+DecodeBase64(i string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 待解码的标准 Base32 字符串 |
+将标准 Base64 字符串解码为原始字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 待解码的标准 Base64 字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解码后的原始字节 |
 | r2 | `error` | 解码失败时返回的错误 |
 
-
-### DecodeBase64
-
-#### 详细描述
-DecodeBase64 将标准 Base64 字符串解码为原始字节
-
-参数:
-
-  - i: 待解码的标准 Base64 字符串
-
-
-
-返回值:
-
-  - []byte: 解码后的原始字节
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 波浪号自动解包 error，得到 []byte
@@ -2468,44 +1813,30 @@ println(string(result))   // OUT: abc
 assert string(result) == "abc", "DecodeBase64 should decode base64 back to bytes"
 ``````````````
 
+---
 
-#### 定义
+### DecodeBase64Url {#decodebase64url}
 
-`DecodeBase64(i string) ([]byte, error)`
+```go
+DecodeBase64Url(i any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 待解码的标准 Base64 字符串 |
+将 URL 安全的 Base64 字符串解码为原始字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待解码的 URL 安全 Base64 字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解码后的原始字节 |
 | r2 | `error` | 解码失败时返回的错误 |
 
-
-### DecodeBase64Url
-
-#### 详细描述
-DecodeBase64Url 将 URL 安全的 Base64 字符串解码为原始字节
-
-参数:
-
-  - i: 待解码的 URL 安全 Base64 字符串
-
-
-
-返回值:
-
-  - []byte: 解码后的原始字节
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: URL 安全 Base64 解码，波浪号自动解包 error
@@ -2516,44 +1847,30 @@ println(string(result))   // OUT: abc
 assert string(result) == "abc", "base64url decode should recover origin"
 ``````````````
 
+---
 
-#### 定义
+### DecodeChunked {#decodechunked}
 
-`DecodeBase64Url(i any) ([]byte, error)`
+```go
+DecodeChunked(raw []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待解码的 URL 安全 Base64 字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解码后的原始字节 |
-| r2 | `error` | 解码失败时返回的错误 |
-
-
-### DecodeChunked
-
-#### 详细描述
 HTTPChunkedDecode 解码 HTTP Transfer-Encoding: chunked 分块传输数据，还原原始 body
 
-参数:
+**参数**
 
-  - raw: 分块编码后的字节数据
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | 分块编码后的字节数据 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解码还原后的原始 body |
+| r2 | `error` | 解码失败时返回的错误 |
 
-返回值:
-
-  - []byte: 解码还原后的原始 body
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先分块编码再解码，波浪号自动解包 error
@@ -2564,44 +1881,30 @@ println(string(result))   // OUT: chunked body
 assert string(result) == "chunked body", "chunked encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### DecodeHex {#decodehex}
 
-`DecodeChunked(raw []byte) ([]byte, error)`
+```go
+DecodeHex(i string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | 分块编码后的字节数据 |
+将十六进制(Hex)字符串解码为原始字节，支持可选的 0x 前缀
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解码还原后的原始 body |
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 待解码的十六进制字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解码后的原始字节 |
 | r2 | `error` | 解码失败时返回的错误 |
 
-
-### DecodeHex
-
-#### 详细描述
-DecodeHex 将十六进制(Hex)字符串解码为原始字节，支持可选的 0x 前缀
-
-参数:
-
-  - i: 待解码的十六进制字符串
-
-
-
-返回值:
-
-  - []byte: 解码后的原始字节
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 波浪号自动解包 error，得到 []byte
@@ -2612,44 +1915,29 @@ println(string(result))   // OUT: abc
 assert string(result) == "abc", "DecodeHex should decode hex back to bytes"
 ``````````````
 
+---
 
-#### 定义
+### DecodeHtml {#decodehtml}
 
-`DecodeHex(i string) ([]byte, error)`
+```go
+DecodeHtml(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 待解码的十六进制字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解码后的原始字节 |
-| r2 | `error` | 解码失败时返回的错误 |
-
-
-### DecodeHtml
-
-#### 详细描述
 UnescapeHtmlString 将 HTML 实体还原为原始字符，与 codec.EscapeHtml 配对使用（导出名为 codec.DecodeHtml）
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 含 HTML 实体的字符串 |
 
-参数:
+**返回值**
 
-  - s: 含 HTML 实体的字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 还原后的原始字符串 |
 
-
-
-返回值:
-
-  - 还原后的原始字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.DecodeHtml("&lt;a&gt;")
@@ -2657,43 +1945,30 @@ println(result)   // OUT: <a>
 assert result == "<a>", "DecodeHtml should unescape HTML entities"
 ``````````````
 
+---
 
-#### 定义
+### DecodeUrl {#decodeurl}
 
-`DecodeHtml(s string) string`
+```go
+DecodeUrl(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 含 HTML 实体的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 还原后的原始字符串 |
-
-
-### DecodeUrl
-
-#### 详细描述
 QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式
 
-参数:
+**参数**
 
-  - s: 待解码的 URL 编码字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待解码的 URL 编码字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 解码后的字符串 |
+| r2 | `error` | 解码失败时返回的错误 |
 
-返回值:
-
-  - string: 解码后的字符串
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: URL 解码，波浪号自动解包 error
@@ -2704,48 +1979,32 @@ println(result)   // OUT: a b
 assert result == "a b", "DecodeUrl should decode percent-encoding"
 ``````````````
 
+---
 
-#### 定义
+### DoubleDecodeUrl {#doubledecodeurl}
 
-`DecodeUrl(s string) (string, error)`
+```go
+DoubleDecodeUrl(i string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待解码的 URL 编码字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 解码后的字符串 |
-| r2 | `error` | 解码失败时返回的错误 |
-
-
-### DoubleDecodeUrl
-
-#### 详细描述
-DoubleDecodeUrl 对输入做两次 URL 解码（导出名为 codec.DoubleDecodeUrl）
+对输入做两次 URL 解码（导出名为 codec.DoubleDecodeUrl）
 
 与 codec.DoubleEncodeUrl 配对使用，用于还原被两次编码的数据
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 被两次 URL 编码的字符串 |
 
-参数:
+**返回值**
 
-  - i: 被两次 URL 编码的字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 两次解码后的原始字符串 |
+| r2 | `error` | 错误信息（解码失败时返回） |
 
-
-
-返回值:
-
-  - 两次解码后的原始字符串
-
-  - 错误信息（解码失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 encoded = codec.DoubleEncodeUrl("a b&c")
@@ -2754,46 +2013,31 @@ println(decoded)   // OUT: a b&c
 assert decoded == "a b&c", "double decode should recover original plaintext"
 ``````````````
 
+---
 
-#### 定义
+### DoubleEncodeUrl {#doubleencodeurl}
 
-`DoubleDecodeUrl(i string) (string, error)`
+```go
+DoubleEncodeUrl(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 被两次 URL 编码的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 两次解码后的原始字符串 |
-| r2 | `error` | 错误信息（解码失败时返回） |
-
-
-### DoubleEncodeUrl
-
-#### 详细描述
-DoubleEncodeUrl 对输入做两次 URL 编码（导出名为 codec.DoubleEncodeUrl）
+对输入做两次 URL 编码（导出名为 codec.DoubleEncodeUrl）
 
 常用于绕过仅做一次 URL 解码的过滤器；与 codec.DoubleDecodeUrl 配对使用
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
-参数:
+**返回值**
 
-  - i: 待编码的数据，可为 string、[]byte 等
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 经两次 URL 编码后的字符串 |
 
-
-
-返回值:
-
-  - 经两次 URL 编码后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 encoded = codec.DoubleEncodeUrl("a b&c")
@@ -2802,41 +2046,29 @@ println(decoded)   // OUT: a b&c
 assert decoded == "a b&c", "double encode then double decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### EncodeASCII {#encodeascii}
 
-`DoubleEncodeUrl(i any) string`
+```go
+EncodeASCII(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待编码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 经两次 URL 编码后的字符串 |
-
-
-### EncodeASCII
-
-#### 详细描述
 StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN
 
-参数:
+**参数**
 
-  - s: 待转换的字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转换的字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 带双引号、非字母数字字节转义为 \xNN 的字符串 |
 
-返回值:
-
-  - 带双引号、非字母数字字节转义为 \xNN 的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 转为可打印形式(EncodeToPrintable / EncodeASCII 同一函数)
@@ -2847,41 +2079,29 @@ println(result)   // OUT: "a\x20b"
 assert result == "\"a\\x20b\"", "EncodeToPrintable should hex-escape non-alnum bytes"
 ``````````````
 
+---
 
-#### 定义
+### EncodeBase32 {#encodebase32}
 
-`EncodeASCII(s string) string`
+```go
+EncodeBase32(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转换的字符串 |
+将输入数据编码为标准 Base32 字符串
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 带双引号、非字母数字字节转义为 \xNN 的字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
-### EncodeBase32
+**返回值**
 
-#### 详细描述
-EncodeBase32 将输入数据编码为标准 Base32 字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 标准 Base32 编码后的字符串 |
 
-参数:
-
-  - i: 待编码的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 标准 Base32 编码后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把编码结果赋值给变量
@@ -2892,41 +2112,29 @@ println(result)   // OUT: MFRGG===
 assert string(codec.DecodeBase32(result)~) == "abc", "base32 encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### EncodeBase64 {#encodebase64}
 
-`EncodeBase32(i any) string`
+```go
+EncodeBase64(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+将输入数据编码为标准 Base64 字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 标准 Base32 编码后的字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 标准 Base64 编码后的字符串 |
 
-### EncodeBase64
-
-#### 详细描述
-EncodeBase64 将输入数据编码为标准 Base64 字符串
-
-参数:
-
-  - i: 待编码的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 标准 Base64 编码后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把编码结果赋值给变量
@@ -2938,41 +2146,29 @@ assert result == "YWJj", "EncodeBase64 should base64-encode bytes"
 assert string(codec.DecodeBase64(result)~) == "abc", "base64 encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### EncodeBase64Url {#encodebase64url}
 
-`EncodeBase64(i any) string`
+```go
+EncodeBase64Url(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+将输入数据编码为 URL 安全的 Base64 字符串(用 - _ 替换 + /，并去掉末尾的 =)
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 标准 Base64 编码后的字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | URL 安全的 Base64 编码字符串 |
 
-### EncodeBase64Url
-
-#### 详细描述
-EncodeBase64Url 将输入数据编码为 URL 安全的 Base64 字符串(用 - _ 替换 + /，并去掉末尾的 =)
-
-参数:
-
-  - i: 待编码的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - URL 安全的 Base64 编码字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 对含 + / 的字节做 URL 安全编码
@@ -2983,41 +2179,29 @@ println(result)   // OUT: -_8
 assert string(codec.DecodeBase64Url(codec.EncodeBase64Url("abc"))~) == "abc", "base64url encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### EncodeChunked {#encodechunked}
 
-`EncodeBase64Url(i any) string`
+```go
+EncodeChunked(raw []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待编码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | URL 安全的 Base64 编码字符串 |
-
-
-### EncodeChunked
-
-#### 详细描述
 HTTPChunkedEncode 将原始数据编码为 HTTP Transfer-Encoding: chunked 分块传输格式
 
-参数:
+**参数**
 
-  - raw: 待编码的原始 body 字节
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | 待编码的原始 body 字节 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 分块编码后的字节数据 |
 
-返回值:
-
-  - 分块编码后的字节数据
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先分块编码再解码，验证往返一致
@@ -3029,41 +2213,29 @@ println(string(result))   // OUT: chunked body
 assert string(result) == "chunked body", "EncodeChunked should be decodable back"
 ``````````````
 
+---
 
-#### 定义
+### EncodeHtml {#encodehtml}
 
-`EncodeChunked(raw []byte) []byte`
+```go
+EncodeHtml(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | 待编码的原始 body 字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 分块编码后的字节数据 |
-
-
-### EncodeHtml
-
-#### 详细描述
 EncodeHtmlEntity 将输入数据的每个字节编码为十进制 HTML 实体(如 &lt; 编码为 &amp;#60;)，常用于 XSS 构造
 
-参数:
+**参数**
 
-  - i: 待编码的数据，可为 string、[]byte 等
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 十进制 HTML 实体字符串 |
 
-返回值:
-
-  - 十进制 HTML 实体字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把特殊字符编码为十进制 HTML 实体
@@ -3074,41 +2246,29 @@ println(result)   // OUT: &#60;&#98;&#62;
 assert string(codec.DecodeHtml(result)~) == "<b>", "EncodeHtml should be decodable back"
 ``````````````
 
+---
 
-#### 定义
+### EncodeHtmlHex {#encodehtmlhex}
 
-`EncodeHtml(i any) string`
+```go
+EncodeHtmlHex(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待编码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 十进制 HTML 实体字符串 |
-
-
-### EncodeHtmlHex
-
-#### 详细描述
 EncodeHtmlEntityHex 将输入数据的每个字节编码为十六进制 HTML 实体(如 &lt; 编码为 &amp;#x3c;)，常用于 XSS 构造
 
-参数:
+**参数**
 
-  - i: 待编码的数据，可为 string、[]byte 等
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 十六进制 HTML 实体字符串 |
 
-返回值:
-
-  - 十六进制 HTML 实体字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把特殊字符编码为十六进制 HTML 实体
@@ -3119,41 +2279,29 @@ println(result)   // OUT: &#x3c;&#x62;&#x3e;
 assert string(codec.DecodeHtml(result)~) == "<b>", "EncodeHtmlHex should be decodable back"
 ``````````````
 
+---
 
-#### 定义
+### EncodeToHex {#encodetohex}
 
-`EncodeHtmlHex(i any) string`
+```go
+EncodeToHex(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+将输入数据编码为十六进制(Hex)字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 十六进制 HTML 实体字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 十六进制编码后的字符串 |
 
-### EncodeToHex
-
-#### 详细描述
-EncodeToHex 将输入数据编码为十六进制(Hex)字符串
-
-参数:
-
-  - i: 待编码的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 十六进制编码后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把编码结果赋值给变量
@@ -3165,41 +2313,29 @@ assert result == "616263", "EncodeToHex should hex-encode bytes"
 assert string(codec.DecodeHex(result)~) == "abc", "hex encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### EncodeToPrintable {#encodetoprintable}
 
-`EncodeToHex(i any) string`
+```go
+EncodeToPrintable(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待编码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 十六进制编码后的字符串 |
-
-
-### EncodeToPrintable
-
-#### 详细描述
 StrConvQuoteHex 将字符串转换为带双引号的可打印形式，非字母数字字节统一转义为 \xNN
 
-参数:
+**参数**
 
-  - s: 待转换的字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转换的字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 带双引号、非字母数字字节转义为 \xNN 的字符串 |
 
-返回值:
-
-  - 带双引号、非字母数字字节转义为 \xNN 的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 转为可打印形式(EncodeToPrintable / EncodeASCII 同一函数)
@@ -3210,41 +2346,29 @@ println(result)   // OUT: "a\x20b"
 assert result == "\"a\\x20b\"", "EncodeToPrintable should hex-escape non-alnum bytes"
 ``````````````
 
+---
 
-#### 定义
+### EncodeUrl {#encodeurl}
 
-`EncodeToPrintable(s string) string`
+```go
+EncodeUrl(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转换的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 带双引号、非字母数字字节转义为 \xNN 的字符串 |
-
-
-### EncodeUrl
-
-#### 详细描述
 EncodeUrlCode 对输入数据做激进的百分号(URL)编码，把每个字节都编码成 %xx 形式
 
-参数:
+**参数**
 
-  - i: 待编码的数据，可为 string、[]byte 等
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待编码的数据，可为 string、[]byte 等 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 百分号编码后的字符串 |
 
-返回值:
-
-  - 百分号编码后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把每个字节都编码成 %xx
@@ -3255,45 +2379,31 @@ println(result)   // OUT: %61%62%63
 assert string(codec.DecodeUrl(result)~) == "abc", "EncodeUrl should be decodable back"
 ``````````````
 
+---
 
-#### 定义
+### EscapeHtml {#escapehtml}
 
-`EncodeUrl(i any) string`
+```go
+EscapeHtml(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待编码的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 百分号编码后的字符串 |
-
-
-### EscapeHtml
-
-#### 详细描述
 EscapeHtmlString 对字符串做 HTML 实体转义，将 &lt; &gt; &amp; &#39; &#34; 等转为对应的 HTML 实体（导出名为 codec.EscapeHtml）
 
 用于把用户输入安全地嵌入 HTML 文本，防止 XSS
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转义的字符串 |
 
-参数:
+**返回值**
 
-  - s: 待转义的字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | HTML 实体转义后的字符串 |
 
-
-
-返回值:
-
-  - HTML 实体转义后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.EscapeHtml("<a href='x'>")
@@ -3301,45 +2411,31 @@ println(result)   // OUT: &lt;a href=&#39;x&#39;&gt;
 assert result == "&lt;a href=&#39;x&#39;&gt;", "EscapeHtml should escape angle brackets and quotes"
 ``````````````
 
+---
 
-#### 定义
+### EscapePathUrl {#escapepathurl}
 
-`EscapeHtml(s string) string`
+```go
+EscapePathUrl(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转义的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | HTML 实体转义后的字符串 |
-
-
-### EscapePathUrl
-
-#### 详细描述
 PathEscape 对字符串做 URL 路径转义，将空格、斜杠等特殊字符转为百分号编码（导出名为 codec.EscapePathUrl）
 
 与 query 转义不同，路径转义会把空格编码为 %20（而非 +）
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转义的字符串 |
 
-参数:
+**返回值**
 
-  - s: 待转义的字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 路径转义后的字符串 |
 
-
-
-返回值:
-
-  - 路径转义后的字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.EscapePathUrl("a b/c")
@@ -3347,41 +2443,29 @@ println(result)   // OUT: a%20b%2Fc
 assert result == "a%20b%2Fc", "EscapePathUrl should escape space to %20 and slash to %2F"
 ``````````````
 
+---
 
-#### 定义
+### EscapeQueryUrl {#escapequeryurl}
 
-`EscapePathUrl(s string) string`
+```go
+EscapeQueryUrl(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转义的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 路径转义后的字符串 |
-
-
-### EscapeQueryUrl
-
-#### 详细描述
 QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +)
 
-参数:
+**参数**
 
-  - s: 待转义的字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转义的字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 转义后的查询串字符串 |
 
-返回值:
-
-  - 转义后的查询串字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 查询串转义
@@ -3392,41 +2476,29 @@ println(result)   // OUT: a+b
 assert result == "a+b", "EscapeQueryUrl should escape space to plus"
 ``````````````
 
+---
 
-#### 定义
+### EscapeUrl {#escapeurl}
 
-`EscapeQueryUrl(s string) string`
+```go
+EscapeUrl(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转义的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 转义后的查询串字符串 |
-
-
-### EscapeUrl
-
-#### 详细描述
 QueryEscape 对字符串做 URL 查询串转义，把保留字符(如空格、= 、&amp;)转义为 %xx(空格转为 +)
 
-参数:
+**参数**
 
-  - s: 待转义的字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转义的字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 转义后的查询串字符串 |
 
-返回值:
-
-  - 转义后的查询串字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 查询串转义
@@ -3437,41 +2509,29 @@ println(result)   // OUT: a+b
 assert result == "a+b", "EscapeQueryUrl should escape space to plus"
 ``````````````
 
+---
 
-#### 定义
+### FixUTF8 {#fixutf8}
 
-`EscapeUrl(s string) string`
+```go
+FixUTF8(s []byte) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转义的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 转义后的查询串字符串 |
-
-
-### FixUTF8
-
-#### 详细描述
 EscapeInvalidUTF8Byte 将字节数据中的非法 UTF-8 字节与不可见控制字符转义为 \xNN 形式，得到可读字符串
 
-参数:
+**参数**
 
-  - s: 待修复的字节数据(可能含非法 UTF-8 或控制字符)
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | 待修复的字节数据(可能含非法 UTF-8 或控制字符) |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 修复/转义后的可读 UTF-8 字符串 |
 
-返回值:
-
-  - 修复/转义后的可读 UTF-8 字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 合法字符串原样返回
@@ -3482,43 +2542,30 @@ println(result)   // OUT: hello
 assert result == "hello", "FixUTF8 should keep valid string unchanged"
 ``````````````
 
+---
 
-#### 定义
+### GB18030ToUTF8 {#gb18030toutf8}
 
-`FixUTF8(s []byte) string`
+```go
+GB18030ToUTF8(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | 待修复的字节数据(可能含非法 UTF-8 或控制字符) |
+将 GB18030 编码的字节转换为 UTF-8 字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 修复/转义后的可读 UTF-8 字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | GB18030 编码的字节数据 |
 
-### GB18030ToUTF8
+**返回值**
 
-#### 详细描述
-GB18030ToUtf8 将 GB18030 编码的字节转换为 UTF-8 字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
+| r2 | `error` | 转换失败时返回的错误 |
 
-参数:
-
-  - s: GB18030 编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 UTF-8 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先转 GB18030 再转回 UTF-8，波浪号自动解包 error
@@ -3529,44 +2576,30 @@ println(string(result))   // OUT: 中文
 assert string(result) == "中文", "GB18030/UTF8 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### GBKSafe {#gbksafe}
 
-`GB18030ToUTF8(s []byte) ([]byte, error)`
+```go
+GBKSafe(s []byte) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | GB18030 编码的字节数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
-| r2 | `error` | 转换失败时返回的错误 |
-
-
-### GBKSafe
-
-#### 详细描述
 GBKSafeString 将字节数据安全转换为可读字符串：已是合法 UTF-8 则原样返回，否则尝试按 GBK 解码为 UTF-8
 
-参数:
+**参数**
 
-  - s: 待转换的字节数据(可能是 UTF-8 或 GBK)
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | 待转换的字节数据(可能是 UTF-8 或 GBK) |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 转换后的可读字符串 |
+| r2 | `error` | 既非合法 UTF-8 又无法按 GBK 解码时返回的错误 |
 
-返回值:
-
-  - string: 转换后的可读字符串
-
-  - error: 既非合法 UTF-8 又无法按 GBK 解码时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 合法 UTF-8 输入原样返回，波浪号自动解包 error
@@ -3577,44 +2610,30 @@ println(result)   // OUT: hello
 assert result == "hello", "GBKSafe should return valid utf8 as-is"
 ``````````````
 
+---
 
-#### 定义
+### GBKToUTF8 {#gbktoutf8}
 
-`GBKSafe(s []byte) (string, error)`
+```go
+GBKToUTF8(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | 待转换的字节数据(可能是 UTF-8 或 GBK) |
+将 GBK 编码的字节转换为 UTF-8 字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 转换后的可读字符串 |
-| r2 | `error` | 既非合法 UTF-8 又无法按 GBK 解码时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | GBK 编码的字节数据 |
 
-### GBKToUTF8
+**返回值**
 
-#### 详细描述
-GbkToUtf8 将 GBK 编码的字节转换为 UTF-8 字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
+| r2 | `error` | 转换失败时返回的错误 |
 
-参数:
-
-  - s: GBK 编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 UTF-8 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先转 GBK 再转回 UTF-8，波浪号自动解包 error
@@ -3625,44 +2644,30 @@ println(string(result))   // OUT: 中文
 assert string(result) == "中文", "GBK/UTF8 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### HTMLChardet {#htmlchardet}
 
-`GBKToUTF8(s []byte) ([]byte, error)`
+```go
+HTMLChardet(raw any) ([]chardet.Result, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | GBK 编码的字节数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
-| r2 | `error` | 转换失败时返回的错误 |
-
-
-### HTMLChardet
-
-#### 详细描述
 CharDetect 检测输入数据可能的字符集编码，返回所有候选结果(按置信度排序)
 
-参数:
+**参数**
 
-  - raw: 待检测的数据，可为 string、[]byte 等
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | 待检测的数据，可为 string、[]byte 等 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]chardet.Result` | []chardet.Result: 候选字符集检测结果列表(含 Charset、Confidence 等字段) |
+| r2 | `error` | 检测失败时返回的错误 |
 
-返回值:
-
-  - []chardet.Result: 候选字符集检测结果列表(含 Charset、Confidence 等字段)
-
-  - error: 检测失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 检测字符集，波浪号自动解包 error
@@ -3673,44 +2678,30 @@ println(len(results) > 0)   // OUT: true
 assert len(results) > 0, "HTMLChardet should return candidates"
 ``````````````
 
+---
 
-#### 定义
+### HTMLChardetBest {#htmlchardetbest}
 
-`HTMLChardet(raw any) ([]chardet.Result, error)`
+```go
+HTMLChardetBest(raw any) (*chardet.Result, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | 待检测的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]chardet.Result` | []chardet.Result: 候选字符集检测结果列表(含 Charset、Confidence 等字段) |
-| r2 | `error` | 检测失败时返回的错误 |
-
-
-### HTMLChardetBest
-
-#### 详细描述
 CharDetectBest 检测输入数据最可能的字符集编码，返回置信度最高的单个结果
 
-参数:
+**参数**
 
-  - raw: 待检测的数据，可为 string、[]byte 等
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | 待检测的数据，可为 string、[]byte 等 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*chardet.Result` | *chardet.Result: 置信度最高的字符集检测结果(含 Charset、Confidence 等字段) |
+| r2 | `error` | 检测失败时返回的错误 |
 
-返回值:
-
-  - *chardet.Result: 置信度最高的字符集检测结果(含 Charset、Confidence 等字段)
-
-  - error: 检测失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 检测最佳字符集，波浪号自动解包 error
@@ -3721,44 +2712,30 @@ println(best != nil)   // OUT: true
 assert best != nil, "HTMLChardetBest should return a result"
 ``````````````
 
+---
 
-#### 定义
+### HZGB2312ToUTF8 {#hzgb2312toutf8}
 
-`HTMLChardetBest(raw any) (*chardet.Result, error)`
+```go
+HZGB2312ToUTF8(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | 待检测的数据，可为 string、[]byte 等 |
+将 HZ-GB2312 编码的字节转换为 UTF-8 字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*chardet.Result` | *chardet.Result: 置信度最高的字符集检测结果(含 Charset、Confidence 等字段) |
-| r2 | `error` | 检测失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | HZ-GB2312(兼容 GB18030 解码)编码的字节数据 |
 
-### HZGB2312ToUTF8
+**返回值**
 
-#### 详细描述
-HZGB2312ToUtf8 将 HZ-GB2312 编码的字节转换为 UTF-8 字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
+| r2 | `error` | 转换失败时返回的错误 |
 
-参数:
-
-  - s: HZ-GB2312(兼容 GB18030 解码)编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 UTF-8 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: GBK 编码的中文再用 HZGB2312ToUTF8 还原，波浪号自动解包 error
@@ -3769,44 +2746,30 @@ println(string(result))   // OUT: 中文
 assert string(result) == "中文", "HZGB2312ToUTF8 should recover utf8 chinese"
 ``````````````
 
+---
 
-#### 定义
+### HmacMD5 {#hmacmd5}
 
-`HZGB2312ToUTF8(s []byte) ([]byte, error)`
+```go
+HmacMD5(key any, data any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | HZ-GB2312(兼容 GB18030 解码)编码的字节数据 |
+使用给定密钥计算数据的 HMAC-MD5 消息认证码，返回字节切片
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 UTF-8 字节 |
-| r2 | `error` | 转换失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `any` | 密钥，可为 string、[]byte 等 |
+| data | `any` | 待认证的数据，可为 string、[]byte 等 |
 
-### HmacMD5
+**返回值**
 
-#### 详细描述
-HmacMD5 使用给定密钥计算数据的 HMAC-MD5 消息认证码，返回字节切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | HMAC-MD5 结果字节切片(16 字节，转 hex 后长度 32) |
 
-参数:
-
-  - key: 密钥，可为 string、[]byte 等
-
-  - data: 待认证的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - HMAC-MD5 结果字节切片(16 字节，转 hex 后长度 32)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 HMAC-MD5 并转 hex
@@ -3817,44 +2780,30 @@ println(len(result))   // OUT: 32
 assert len(result) == 32, "HmacMD5 hex length should be 32"
 ``````````````
 
+---
 
-#### 定义
+### HmacSM3 {#hmacsm3}
 
-`HmacMD5(key any, data any) []byte`
+```go
+HmacSM3(key any, data any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用给定密钥计算数据的国密 HMAC-SM3 消息认证码，返回字节切片
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `any` | 密钥，可为 string、[]byte 等 |
 | data | `any` | 待认证的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | HMAC-MD5 结果字节切片(16 字节，转 hex 后长度 32) |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | HMAC-SM3 结果字节切片(32 字节，转 hex 后长度 64) |
 
-### HmacSM3
-
-#### 详细描述
-HmacSM3 使用给定密钥计算数据的国密 HMAC-SM3 消息认证码，返回字节切片
-
-参数:
-
-  - key: 密钥，可为 string、[]byte 等
-
-  - data: 待认证的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - HMAC-SM3 结果字节切片(32 字节，转 hex 后长度 64)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 HMAC-SM3 并转 hex
@@ -3865,44 +2814,30 @@ println(len(result))   // OUT: 64
 assert len(result) == 64, "HmacSM3 hex length should be 64"
 ``````````````
 
+---
 
-#### 定义
+### HmacSha1 {#hmacsha1}
 
-`HmacSM3(key any, data any) []byte`
+```go
+HmacSha1(key any, data any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用给定密钥计算数据的 HMAC-SHA1 消息认证码，返回字节切片
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `any` | 密钥，可为 string、[]byte 等 |
 | data | `any` | 待认证的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | HMAC-SM3 结果字节切片(32 字节，转 hex 后长度 64) |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | HMAC-SHA1 结果字节切片(20 字节，转 hex 后长度 40) |
 
-### HmacSha1
-
-#### 详细描述
-HmacSha1 使用给定密钥计算数据的 HMAC-SHA1 消息认证码，返回字节切片
-
-参数:
-
-  - key: 密钥，可为 string、[]byte 等
-
-  - data: 待认证的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - HMAC-SHA1 结果字节切片(20 字节，转 hex 后长度 40)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 HMAC-SHA1 并转 hex
@@ -3913,44 +2848,30 @@ println(len(result))   // OUT: 40
 assert len(result) == 40, "HmacSha1 hex length should be 40"
 ``````````````
 
+---
 
-#### 定义
+### HmacSha256 {#hmacsha256}
 
-`HmacSha1(key any, data any) []byte`
+```go
+HmacSha256(key any, data any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用给定密钥计算数据的 HMAC-SHA256 消息认证码，返回字节切片
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `any` | 密钥，可为 string、[]byte 等 |
 | data | `any` | 待认证的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | HMAC-SHA1 结果字节切片(20 字节，转 hex 后长度 40) |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | HMAC-SHA256 结果字节切片(32 字节，转 hex 后长度 64) |
 
-### HmacSha256
-
-#### 详细描述
-HmacSha256 使用给定密钥计算数据的 HMAC-SHA256 消息认证码，返回字节切片
-
-参数:
-
-  - key: 密钥，可为 string、[]byte 等
-
-  - data: 待认证的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - HMAC-SHA256 结果字节切片(32 字节，转 hex 后长度 64)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 HMAC-SHA256 并转 hex
@@ -3962,44 +2883,30 @@ assert len(result) == 64, "HmacSha256 hex length should be 64"
 assert result == codec.EncodeToHex(codec.HmacSha256("secret_key", "Important Message")), "HmacSha256 should be deterministic"
 ``````````````
 
+---
 
-#### 定义
+### HmacSha512 {#hmacsha512}
 
-`HmacSha256(key any, data any) []byte`
+```go
+HmacSha512(key any, data any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用给定密钥计算数据的 HMAC-SHA512 消息认证码，返回字节切片
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | key | `any` | 密钥，可为 string、[]byte 等 |
 | data | `any` | 待认证的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | HMAC-SHA256 结果字节切片(32 字节，转 hex 后长度 64) |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | HMAC-SHA512 结果字节切片(64 字节，转 hex 后长度 128) |
 
-### HmacSha512
-
-#### 详细描述
-HmacSha512 使用给定密钥计算数据的 HMAC-SHA512 消息认证码，返回字节切片
-
-参数:
-
-  - key: 密钥，可为 string、[]byte 等
-
-  - data: 待认证的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - HMAC-SHA512 结果字节切片(64 字节，转 hex 后长度 128)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 HMAC-SHA512 并转 hex
@@ -4010,44 +2917,30 @@ println(len(result))   // OUT: 128
 assert len(result) == 128, "HmacSha512 hex length should be 128"
 ``````````````
 
+---
 
-#### 定义
+### IsUTF8 {#isutf8}
 
-`HmacSha512(key any, data any) []byte`
+```go
+IsUTF8(i any) (bool, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `any` | 密钥，可为 string、[]byte 等 |
-| data | `any` | 待认证的数据，可为 string、[]byte 等 |
+判断输入数据是否为合法的 UTF-8 编码
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | HMAC-SHA512 结果字节切片(64 字节，转 hex 后长度 128) |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待检测的数据，可为 string、[]byte、io.Reader 等 |
 
-### IsUTF8
+**返回值**
 
-#### 详细描述
-IsUTF8 判断输入数据是否为合法的 UTF-8 编码
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是合法 UTF-8 返回 true，否则 false |
+| r2 | `error` | 读取数据失败时返回的错误 |
 
-参数:
-
-  - i: 待检测的数据，可为 string、[]byte、io.Reader 等
-
-
-
-返回值:
-
-  - bool: 是合法 UTF-8 返回 true，否则 false
-
-  - error: 读取数据失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 检测合法 UTF-8，波浪号自动解包 error
@@ -4059,46 +2952,32 @@ assert result == true, "ascii should be valid utf8"
 assert codec.IsUTF8("中文")~ == true, "chinese should be valid utf8"
 ``````````````
 
+---
 
-#### 定义
+### IsUTF8File {#isutf8file}
 
-`IsUTF8(i any) (bool, error)`
+```go
+IsUTF8File(filename string) (bool, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待检测的数据，可为 string、[]byte、io.Reader 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是合法 UTF-8 返回 true，否则 false |
-| r2 | `error` | 读取数据失败时返回的错误 |
-
-
-### IsUTF8File
-
-#### 详细描述
-IsUTF8File 使用采样策略判断文件内容是否为合法 UTF-8 编码
+使用采样策略判断文件内容是否为合法 UTF-8 编码
 
 小于 0.5K 的文件检查全部内容；0.5K-1K 检查一个 0.5K 采样；大于 1K 采样 4-8 段(每段约 256 个字符)。
 
-参数:
+**参数**
 
-  - filename: 待检测的文件路径
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `string` | 待检测的文件路径 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 文件内容为合法 UTF-8 返回 true，否则 false |
+| r2 | `error` | 打开或读取文件失败时返回的错误 |
 
-返回值:
-
-  - bool: 文件内容为合法 UTF-8 返回 true，否则 false
-
-  - error: 打开或读取文件失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 写入一个 UTF-8 文件再检测
@@ -4112,42 +2991,29 @@ println(result)   // OUT: true
 assert result == true, "utf8 file should be detected as utf8"
 ``````````````
 
+---
 
-#### 定义
+### MMH3Hash128 {#mmh3hash128}
 
-`IsUTF8File(filename string) (bool, error)`
+```go
+MMH3Hash128(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filename | `string` | 待检测的文件路径 |
+计算输入数据的 MurmurHash3 128 位哈希并返回十六进制字符串
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 文件内容为合法 UTF-8 返回 true，否则 false |
-| r2 | `error` | 打开或读取文件失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待哈希的数据，可为 string、[]byte 等 |
 
-### MMH3Hash128
+**返回值**
 
-#### 详细描述
-MMH3Hash128 计算输入数据的 MurmurHash3 128 位哈希并返回十六进制字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 32 位十六进制 MurmurHash3 128 位哈希字符串 |
 
-参数:
-
-  - i: 待哈希的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 32 位十六进制 MurmurHash3 128 位哈希字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 MMH3 128 位哈希
@@ -4159,41 +3025,29 @@ assert result == "6778ad3f3f3f96b4522dca264174a23b", "MMH3Hash128 should match k
 assert len(result) == 32, "MMH3Hash128 hex length should be 32"
 ``````````````
 
+---
 
-#### 定义
+### MMH3Hash128x64 {#mmh3hash128x64}
 
-`MMH3Hash128(i any) string`
+```go
+MMH3Hash128x64(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 MurmurHash3 128 位(x64 变体)哈希并返回十六进制字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待哈希的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 32 位十六进制 MurmurHash3 128 位哈希字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 32 位十六进制 MurmurHash3 128 位(x64)哈希字符串 |
 
-### MMH3Hash128x64
-
-#### 详细描述
-MMH3Hash128x64 计算输入数据的 MurmurHash3 128 位(x64 变体)哈希并返回十六进制字符串
-
-参数:
-
-  - i: 待哈希的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 32 位十六进制 MurmurHash3 128 位(x64)哈希字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 MMH3 128 位(x64) 哈希
@@ -4205,41 +3059,29 @@ assert result == "6778ad3f3f3f96b4522dca264174a23b", "MMH3Hash128x64 should matc
 assert len(result) == 32, "MMH3Hash128x64 hex length should be 32"
 ``````````````
 
+---
 
-#### 定义
+### MMH3Hash32 {#mmh3hash32}
 
-`MMH3Hash128x64(i any) string`
+```go
+MMH3Hash32(i any) int64
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 MurmurHash3 32 位非加密快速哈希，返回数值
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待哈希的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 32 位十六进制 MurmurHash3 128 位(x64)哈希字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `int64` | MurmurHash3 32 位哈希值(int64) |
 
-### MMH3Hash32
-
-#### 详细描述
-MMH3Hash32 计算输入数据的 MurmurHash3 32 位非加密快速哈希，返回数值
-
-参数:
-
-  - i: 待哈希的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - MurmurHash3 32 位哈希值(int64)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 MMH3 32 位哈希
@@ -4250,41 +3092,29 @@ println(result)   // OUT: 3017643002
 assert result == 3017643002, "MMH3Hash32 should match known value"
 ``````````````
 
+---
 
-#### 定义
+### Md5 {#md5}
 
-`MMH3Hash32(i any) int64`
+```go
+Md5(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待哈希的数据，可为 string、[]byte 等 |
+计算输入数据的 MD5 摘要并返回十六进制字符串
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `int64` | MurmurHash3 32 位哈希值(int64) |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-### Md5
+**返回值**
 
-#### 详细描述
-Md5 计算输入数据的 MD5 摘要并返回十六进制字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 32 位十六进制 MD5 摘要字符串 |
 
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 32 位十六进制 MD5 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 MD5 摘要
@@ -4296,49 +3126,33 @@ assert result == "900150983cd24fb0d6963f7d28e17f72", "Md5 should match known dig
 assert len(result) == 32, "Md5 hex length should be 32"
 ``````````````
 
+---
 
-#### 定义
+### PBKDF2SHA1Key {#pbkdf2sha1key}
 
-`Md5(i any) string`
+```go
+PBKDF2SHA1Key(password any, salt any, iterations int, keyLen int) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
+使用 PBKDF2-HMAC-SHA1 从口令与盐派生固定长度的密钥(如微信 wxapkg V1MMWX 解密)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 32 位十六进制 MD5 摘要字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| password | `any` | 口令，可为 string、[]byte 等 |
+| salt | `any` | 盐值，可为 string、[]byte 等 |
+| iterations | `int` | 迭代次数，&lt;=0 时使用默认值 10000 |
+| keyLen | `int` | 派生密钥长度(字节)，&lt;=0 时使用默认值 32 |
 
-### PBKDF2SHA1Key
+**返回值**
 
-#### 详细描述
-PBKDF2SHA1Key 使用 PBKDF2-HMAC-SHA1 从口令与盐派生固定长度的密钥(如微信 wxapkg V1MMWX 解密)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 派生出的密钥字节 |
+| r2 | `error` | 派生失败时返回的错误 |
 
-参数:
-
-  - password: 口令，可为 string、[]byte 等
-
-  - salt: 盐值，可为 string、[]byte 等
-
-  - iterations: 迭代次数，&lt;=0 时使用默认值 10000
-
-  - keyLen: 派生密钥长度(字节)，&lt;=0 时使用默认值 32
-
-
-
-返回值:
-
-  - []byte: 派生出的密钥字节
-
-  - error: 派生失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 从口令与盐派生 16 字节密钥
@@ -4350,47 +3164,30 @@ assert len(key) == 16, "PBKDF2SHA1Key should produce key of requested length"
 assert codec.EncodeToHex(key) == codec.EncodeToHex(codec.PBKDF2SHA1Key("password", "salt", 1000, 16)~), "PBKDF2 should be deterministic"
 ``````````````
 
+---
 
-#### 定义
+### PKCS5Padding {#pkcs5padding}
 
-`PBKDF2SHA1Key(password any, salt any, iterations int, keyLen int) ([]byte, error)`
+```go
+PKCS5Padding(ciphertext []byte, blockSize int) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| password | `any` | 口令，可为 string、[]byte 等 |
-| salt | `any` | 盐值，可为 string、[]byte 等 |
-| iterations | `int` | 迭代次数，&lt;=0 时使用默认值 10000 |
-| keyLen | `int` | 派生密钥长度(字节)，&lt;=0 时使用默认值 32 |
+对数据按指定块大小做 PKCS5/PKCS7 填充，使其长度补齐到块大小的整数倍
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 派生出的密钥字节 |
-| r2 | `error` | 派生失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| ciphertext | `[]byte` | 待填充的原始数据 |
+| blockSize | `int` | 块大小(字节)，如 8 或 16 |
 
-### PKCS5Padding
+**返回值**
 
-#### 详细描述
-PKCS5Padding 对数据按指定块大小做 PKCS5/PKCS7 填充，使其长度补齐到块大小的整数倍
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 填充后的字节切片 |
 
-参数:
-
-  - ciphertext: 待填充的原始数据
-
-  - blockSize: 块大小(字节)，如 8 或 16
-
-
-
-返回值:
-
-  - 填充后的字节切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把 2 字节数据填充到 16 字节块
@@ -4402,42 +3199,29 @@ assert len(result) == 16, "PKCS5Padding should pad to block size"
 assert string(codec.PKCS5UnPadding(result)) == "hi", "PKCS5 pad/unpad should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### PKCS5UnPadding {#pkcs5unpadding}
 
-`PKCS5Padding(ciphertext []byte, blockSize int) []byte`
+```go
+PKCS5UnPadding(origData []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| ciphertext | `[]byte` | 待填充的原始数据 |
-| blockSize | `int` | 块大小(字节)，如 8 或 16 |
+去除数据末尾的 PKCS5/PKCS7 填充，返回原始数据
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 填充后的字节切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| origData | `[]byte` | 带填充的数据 |
 
-### PKCS5UnPadding
+**返回值**
 
-#### 详细描述
-PKCS5UnPadding 去除数据末尾的 PKCS5/PKCS7 填充，返回原始数据
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 去除填充后的字节切片 |
 
-参数:
-
-  - origData: 带填充的数据
-
-
-
-返回值:
-
-  - 去除填充后的字节切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先填充再去填充
@@ -4449,45 +3233,31 @@ println(string(result))   // OUT: hi
 assert string(result) == "hi", "PKCS5UnPadding should remove padding"
 ``````````````
 
+---
 
-#### 定义
+### PKCS7Padding {#pkcs7padding}
 
-`PKCS5UnPadding(origData []byte) []byte`
+```go
+PKCS7Padding(src []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origData | `[]byte` | 带填充的数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 去除填充后的字节切片 |
-
-
-### PKCS7Padding
-
-#### 详细描述
-PKCS7Padding 对数据按 16 字节块大小做 PKCS7 填充（导出名为 codec.PKCS7Padding）
+对数据按 16 字节块大小做 PKCS7 填充（导出名为 codec.PKCS7Padding）
 
 填充字节的值等于需要填充的长度；即便数据已是块的整数倍也会补一整块
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| src | `[]byte` | 待填充的原始字节 |
 
-参数:
+**返回值**
 
-  - src: 待填充的原始字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 填充后长度为 16 字节整数倍的字节 |
 
-
-
-返回值:
-
-  - 填充后长度为 16 字节整数倍的字节
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 padded = codec.PKCS7Padding("yak")
@@ -4496,41 +3266,29 @@ assert len(padded) == 16, "PKCS7Padding should pad to 16-byte block"
 assert string(codec.PKCS7UnPadding(padded)) == "yak", "PKCS7UnPadding should recover original data"
 ``````````````
 
+---
 
-#### 定义
+### PKCS7PaddingForDES {#pkcs7paddingfordes}
 
-`PKCS7Padding(src []byte) []byte`
+```go
+PKCS7PaddingForDES(src []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| src | `[]byte` | 待填充的原始字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 填充后长度为 16 字节整数倍的字节 |
-
-
-### PKCS7PaddingForDES
-
-#### 详细描述
 PKCS7PaddingFor8ByteBlock 按 8 字节块大小对数据做 PKCS7/PKCS5 填充(常用于 DES)
 
-参数:
+**参数**
 
-  - src: 待填充的数据字节
+|参数名|类型|说明|
+|:--|:--|:--|
+| src | `[]byte` | 待填充的数据字节 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 填充到 8 字节整数倍后的数据字节 |
 
-返回值:
-
-  - 填充到 8 字节整数倍后的数据字节
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 对 3 字节数据按 8 字节块填充
@@ -4541,45 +3299,31 @@ println(len(padded))   // OUT: 8
 assert string(codec.PKCS7UnPaddingForDES(padded)) == "abc", "PKCS7 for DES padding/unpadding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### PKCS7UnPadding {#pkcs7unpadding}
 
-`PKCS7PaddingForDES(src []byte) []byte`
+```go
+PKCS7UnPadding(src []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| src | `[]byte` | 待填充的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 填充到 8 字节整数倍后的数据字节 |
-
-
-### PKCS7UnPadding
-
-#### 详细描述
-PKCS7UnPadding 去除数据末尾的 PKCS7 填充字节（导出名为 codec.PKCS7UnPadding）
+去除数据末尾的 PKCS7 填充字节（导出名为 codec.PKCS7UnPadding）
 
 与 codec.PKCS7Padding 配对使用；填充非法时原样返回输入
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| src | `[]byte` | 带 PKCS7 填充的字节 |
 
-参数:
+**返回值**
 
-  - src: 带 PKCS7 填充的字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 去除填充后的原始字节 |
 
-
-
-返回值:
-
-  - 去除填充后的原始字节
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 padded = codec.PKCS7Padding("yak")
@@ -4588,41 +3332,29 @@ println(string(origin))   // OUT: yak
 assert string(origin) == "yak", "PKCS7UnPadding should strip padding and recover data"
 ``````````````
 
+---
 
-#### 定义
+### PKCS7UnPaddingForDES {#pkcs7unpaddingfordes}
 
-`PKCS7UnPadding(src []byte) []byte`
+```go
+PKCS7UnPaddingForDES(src []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| src | `[]byte` | 带 PKCS7 填充的字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 去除填充后的原始字节 |
-
-
-### PKCS7UnPaddingForDES
-
-#### 详细描述
 PKCS7UnPaddingFor8ByteBlock 去除 8 字节块大小的 PKCS7/PKCS5 填充(常用于 DES)
 
-参数:
+**参数**
 
-  - src: 含 PKCS7 填充的数据字节
+|参数名|类型|说明|
+|:--|:--|:--|
+| src | `[]byte` | 含 PKCS7 填充的数据字节 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 去除填充后的原始数据字节 |
 
-返回值:
-
-  - 去除填充后的原始数据字节
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 填充后再去填充往返
@@ -4634,45 +3366,31 @@ println(string(unpadded))   // OUT: abc
 assert string(unpadded) == "abc", "PKCS7 for DES unpadding should recover original data"
 ``````````````
 
+---
 
-#### 定义
+### RC4Decrypt {#rc4decrypt}
 
-`PKCS7UnPaddingForDES(src []byte) []byte`
+```go
+RC4Decrypt(cipherKey []byte, cipherText []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| src | `[]byte` | 含 PKCS7 填充的数据字节 |
+使用 RC4 流密码解密数据(RC4 加解密为同一运算)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 去除填充后的原始数据字节 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| cipherKey | `[]byte` | RC4 密钥(长度可变) |
+| cipherText | `[]byte` | 待解密的密文字节 |
 
-### RC4Decrypt
+**返回值**
 
-#### 详细描述
-RC4Decrypt 使用 RC4 流密码解密数据(RC4 加解密为同一运算)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 密钥非法等错误 |
 
-参数:
-
-  - cipherKey: RC4 密钥(长度可变)
-
-  - cipherText: 待解密的密文字节
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 密钥非法等错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(RC4)
@@ -4685,47 +3403,31 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "RC4 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RC4Encrypt {#rc4encrypt}
 
-`RC4Decrypt(cipherKey []byte, cipherText []byte) ([]byte, error)`
+```go
+RC4Encrypt(cipherKey []byte, plainText []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 RC4 流密码加密数据(RC4 加解密为同一运算)
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | cipherKey | `[]byte` | RC4 密钥(长度可变) |
-| cipherText | `[]byte` | 待解密的密文字节 |
+| plainText | `[]byte` | 待加密的明文字节 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
 | r2 | `error` | 密钥非法等错误 |
 
-
-### RC4Encrypt
-
-#### 详细描述
-RC4Encrypt 使用 RC4 流密码加密数据(RC4 加解密为同一运算)
-
-参数:
-
-  - cipherKey: RC4 密钥(长度可变)
-
-  - plainText: 待加密的明文字节
-
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 密钥非法等错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: RC4 加解密往返
@@ -4737,51 +3439,33 @@ println(string(codec.RC4Decrypt(key, ct)~))   // OUT: Secret Message
 assert string(codec.RC4Decrypt(key, ct)~) == "Secret Message", "RC4 encrypt/decrypt should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### RSADecryptWithJSEncryptStyle {#rsadecryptwithjsencryptstyle}
 
-`RC4Encrypt(cipherKey []byte, plainText []byte) ([]byte, error)`
+```go
+RSADecryptWithJSEncryptStyle(privKeyPem string, ciphertext []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| cipherKey | `[]byte` | RC4 密钥(长度可变) |
-| plainText | `[]byte` | 待加密的明文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 密钥非法等错误 |
-
-
-### RSADecryptWithJSEncryptStyle
-
-#### 详细描述
-RSADecryptWithJSEncryptStyle 以兼容前端 JSEncrypt 库的方式做 RSA 解密（导出名为 codec.RSADecryptWithJSEncryptStyle）
+以兼容前端 JSEncrypt 库的方式做 RSA 解密（导出名为 codec.RSADecryptWithJSEncryptStyle）
 
 等价于 PKCS#1 v1.5 分块解密，与 codec.RSAEncryptWithJSEncryptStyle 配对使用
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| privKeyPem | `string` | PEM 格式的 RSA 私钥 |
+| ciphertext | `[]byte` | 待解密的密文字节 |
 
-参数:
+**返回值**
 
-  - privKeyPem: PEM 格式的 RSA 私钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 解密得到的明文字节 |
+| r2 | `error` | 错误信息（私钥解析失败或解密失败时返回） |
 
-  - ciphertext: 待解密的密文字节
-
-
-
-返回值:
-
-  - 解密得到的明文字节
-
-  - 错误信息（私钥解析失败或解密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -4791,51 +3475,33 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "JSEncrypt-style roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSADecryptWithOAEP {#rsadecryptwithoaep}
 
-`RSADecryptWithJSEncryptStyle(privKeyPem string, ciphertext []byte) ([]byte, error)`
+```go
+RSADecryptWithOAEP(raw []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| privKeyPem | `string` | PEM 格式的 RSA 私钥 |
-| ciphertext | `[]byte` | 待解密的密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 解密得到的明文字节 |
-| r2 | `error` | 错误信息（私钥解析失败或解密失败时返回） |
-
-
-### RSADecryptWithOAEP
-
-#### 详细描述
-RSADecryptWithOAEP 使用 RSA 私钥和 OAEP 填充方式解密给定的密文（导出名为 codec.RSADecryptWithOAEP）
+使用 RSA 私钥和 OAEP 填充方式解密给定的密文（导出名为 codec.RSADecryptWithOAEP）
 
 默认使用 SHA-256 作为 OAEP 哈希算法，与 codec.RSAEncryptWithOAEP 配对使用
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | RSA 私钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别） |
+| data | `any` | 待解密的密文，可为 []byte 或 base64 字符串等支持类型 |
 
-参数:
+**返回值**
 
-  - raw: RSA 私钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 解密得到的明文字节 |
+| r2 | `error` | 错误信息（私钥解析失败或解密失败时返回） |
 
-  - data: 待解密的密文，可为 []byte 或 base64 字符串等支持类型
-
-
-
-返回值:
-
-  - 解密得到的明文字节
-
-  - 错误信息（私钥解析失败或解密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -4845,121 +3511,67 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "OAEP roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSADecryptWithPKCS1v15 {#rsadecryptwithpkcs1v15}
 
-`RSADecryptWithOAEP(raw []byte, data any) ([]byte, error)`
+```go
+RSADecryptWithPKCS1v15(raw []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | RSA 私钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别） |
-| data | `any` | 待解密的密文，可为 []byte 或 base64 字符串等支持类型 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 解密得到的明文字节 |
-| r2 | `error` | 错误信息（私钥解析失败或解密失败时返回） |
-
-
-### RSADecryptWithPKCS1v15
-
-#### 详细描述
 DecryptWithPkcs1v15/RSADecryptWithPKCS1v15 使用 RSA私钥 和 PKCS#1 v1.5填充方式 解密给定的密文。
 
-参数 raw 表示 RSA 私钥，支持以下格式：
+**参数**
 
-  - DER 编码的私钥（raw ASN.1 DER 字节流）
-
-  - Base64 编码的 DER 格式（自动解码）
-
-  - PEM 编码（包括带有 &#34;-----BEGIN PRIVATE KEY-----&#34; 或 &#34;-----BEGIN RSA PRIVATE KEY-----&#34; 的块）
-
-  - Base64 编码的 PEM 格式（自动解码）
-
-
-
-参数 data 是被加密后的数据（密文）
-
-返回值是解密得到的原始明文，如果失败则返回错误。
-
-
-
-参数:
-
-  - raw: RSA 私钥（支持 DER/PEM/Base64 等格式）
-
-  - data: 要解密的密文数据（[]byte、string 等）
-
-
-
-返回值:
-
-  - 解密得到的明文字节数组
-
-  - 错误信息，解密失败时返回非空
-
-
-
-
-Example:
-
-``````````````yak
-raw := `
------BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASC...（略）
------END PRIVATE KEY-----
-`
-plaintext, err := DecryptWithPkcs1v15(raw, encryptedData)
-	plaintext, err := RSADecryptWithPKCS1v15(raw, encryptedData)
-``````````````
-
-
-#### 定义
-
-`RSADecryptWithPKCS1v15(raw []byte, data any) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | raw | `[]byte` | RSA 私钥（支持 DER/PEM/Base64 等格式） |
 | data | `any` | 要解密的密文数据（[]byte、string 等） |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | 解密得到的明文字节数组 |
 | r2 | `error` | 错误信息，解密失败时返回非空 |
 
+**示例**
 
-### RSADecryptWithPKCS1v15Block
+``````````````yak
+// 生成一对 RSA 密钥(第一个返回值是公钥, 第二个是私钥)，用公钥加密后再用私钥解密验证往返一致
+pub, pri = tls.GenerateRSA2048KeyPair()~
+ciphertext = codec.RSAEncryptWithPKCS1v15(pub, "hello world")~
+plaintext = codec.RSADecryptWithPKCS1v15(pri, ciphertext)~
+assert string(plaintext) == "hello world", "RSA PKCS1v15 decrypt should recover the plaintext"
+``````````````
 
-#### 详细描述
-RSADecryptWithPKCS1v15Block 使用 RSA PKCS#1 v1.5 私钥解密数据（导出名为 codec.RSADecryptWithPKCS1v15Block）
+---
+
+### RSADecryptWithPKCS1v15Block {#rsadecryptwithpkcs1v15block}
+
+```go
+RSADecryptWithPKCS1v15Block(privKeyPem string, ciphertext []byte) ([]byte, error)
+```
+
+使用 RSA PKCS#1 v1.5 私钥解密数据（导出名为 codec.RSADecryptWithPKCS1v15Block）
 
 自动按私钥长度对密文分块解密，与 codec.RSAEncryptWithPKCS1v15Block 配对使用
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| privKeyPem | `string` | PEM 格式的 RSA 私钥 |
+| ciphertext | `[]byte` | 待解密的密文字节 |
 
-参数:
+**返回值**
 
-  - privKeyPem: PEM 格式的 RSA 私钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 解密得到的明文字节 |
+| r2 | `error` | 错误信息（私钥解析失败、密文长度非法或解密失败时返回） |
 
-  - ciphertext: 待解密的密文字节
-
-
-
-返回值:
-
-  - 解密得到的明文字节
-
-  - 错误信息（私钥解析失败、密文长度非法或解密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -4969,51 +3581,33 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "PKCS1v15 block roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSAEncryptWithJSEncryptStyle {#rsaencryptwithjsencryptstyle}
 
-`RSADecryptWithPKCS1v15Block(privKeyPem string, ciphertext []byte) ([]byte, error)`
+```go
+RSAEncryptWithJSEncryptStyle(pubKeyPem string, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| privKeyPem | `string` | PEM 格式的 RSA 私钥 |
-| ciphertext | `[]byte` | 待解密的密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 解密得到的明文字节 |
-| r2 | `error` | 错误信息（私钥解析失败、密文长度非法或解密失败时返回） |
-
-
-### RSAEncryptWithJSEncryptStyle
-
-#### 详细描述
-RSAEncryptWithJSEncryptStyle 以兼容前端 JSEncrypt 库的方式做 RSA 加密（导出名为 codec.RSAEncryptWithJSEncryptStyle）
+以兼容前端 JSEncrypt 库的方式做 RSA 加密（导出名为 codec.RSAEncryptWithJSEncryptStyle）
 
 等价于 PKCS#1 v1.5 分块加密，便于与使用 JSEncrypt 的前端互通
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKeyPem | `string` | PEM 格式的 RSA 公钥 |
+| data | `[]byte` | 待加密的明文字节 |
 
-参数:
+**返回值**
 
-  - pubKeyPem: PEM 格式的 RSA 公钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 密文字节 |
+| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
 
-  - data: 待加密的明文字节
-
-
-
-返回值:
-
-  - 密文字节
-
-  - 错误信息（公钥解析失败或加密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5023,51 +3617,33 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "JSEncrypt-style roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSAEncryptWithOAEP {#rsaencryptwithoaep}
 
-`RSAEncryptWithJSEncryptStyle(pubKeyPem string, data []byte) ([]byte, error)`
+```go
+RSAEncryptWithOAEP(raw []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKeyPem | `string` | PEM 格式的 RSA 公钥 |
-| data | `[]byte` | 待加密的明文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 密文字节 |
-| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
-
-
-### RSAEncryptWithOAEP
-
-#### 详细描述
-RSAEncryptWithOAEP 使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密（导出名为 codec.RSAEncryptWithOAEP）
+使用 RSA 公钥和 OAEP 填充方式对给定数据进行加密（导出名为 codec.RSAEncryptWithOAEP）
 
 默认使用 SHA-256 作为 OAEP 哈希算法
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | RSA 公钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别） |
+| data | `any` | 待加密的明文，可为 []byte、string 等可转换为字节的类型 |
 
-参数:
+**返回值**
 
-  - raw: RSA 公钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 密文字节 |
+| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
 
-  - data: 待加密的明文，可为 []byte、string 等可转换为字节的类型
-
-
-
-返回值:
-
-  - 密文字节
-
-  - 错误信息（公钥解析失败或加密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5077,123 +3653,67 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "OAEP roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSAEncryptWithPKCS1v15 {#rsaencryptwithpkcs1v15}
 
-`RSAEncryptWithOAEP(raw []byte, data any) ([]byte, error)`
+```go
+RSAEncryptWithPKCS1v15(raw []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | RSA 公钥，支持 DER、Base64(DER)、PEM、Base64(PEM) 等格式（自动识别） |
-| data | `any` | 待加密的明文，可为 []byte、string 等可转换为字节的类型 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 密文字节 |
-| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
-
-
-### RSAEncryptWithPKCS1v15
-
-#### 详细描述
 EncryptWithPkcs1v15/RSAEncryptWithPKCS1v15 使用 RSA 公钥和 PKCS#1 v1.5 填充方式对给定数据进行加密。
 
+**参数**
 
-
-参数:
-
-  - raw: RSA 公钥（支持 DER/PEM/Base64 等格式）
-
-  - data: 要加密的明文数据（[]byte、string 等）
-
-
-
-返回值:
-
-  - 加密后的密文字节数组
-
-  - 错误信息，加密失败时返回非空
-
-
-
-参数 raw 表示 RSA 公钥，支持以下格式：
-
-  - DER 编码的公钥（raw ASN.1 DER 字节流）
-
-  - Base64 编码的 DER 格式（自动解码）
-
-  - PEM 编码（例如 &#34;-----BEGIN PUBLIC KEY-----&#34; 或 &#34;-----BEGIN RSA PUBLIC KEY-----&#34; 块）
-
-  - Base64 编码的 PEM 格式（自动解码）
-
-
-
-参数 data 是要加密的明文数据，可以是 []byte、string 或其他可转换为字节数组的类型。
-
-返回值是加密后的密文（字节切片），如果加密失败则返回错误。
-
-
-
-
-Example:
-
-``````````````yak
-raw := `
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn...（略）
------END PUBLIC KEY-----
-`
-ciphertext, err := EncryptWithPkcs1v15(raw, "hello world")
-ciphertext, err := RSAEncryptWithPKCS1v15(raw, "hello world")
-``````````````
-
-
-#### 定义
-
-`RSAEncryptWithPKCS1v15(raw []byte, data any) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | raw | `[]byte` | RSA 公钥（支持 DER/PEM/Base64 等格式） |
 | data | `any` | 要加密的明文数据（[]byte、string 等） |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | 加密后的密文字节数组 |
 | r2 | `error` | 错误信息，加密失败时返回非空 |
 
+**示例**
 
-### RSAEncryptWithPKCS1v15Block
+``````````````yak
+// 生成一对 RSA 密钥(第一个返回值是公钥, 第二个是私钥)，用公钥加密，再用私钥解密验证往返一致
+pub, pri = tls.GenerateRSA2048KeyPair()~
+ciphertext = codec.RSAEncryptWithPKCS1v15(pub, "hello world")~
+plaintext = codec.RSADecryptWithPKCS1v15(pri, ciphertext)~
+assert string(plaintext) == "hello world", "RSA PKCS1v15 encrypt/decrypt round-trip should match"
+``````````````
 
-#### 详细描述
-RSAEncryptWithPKCS1v15Block 使用 RSA PKCS#1 v1.5 公钥加密数据（导出名为 codec.RSAEncryptWithPKCS1v15Block）
+---
+
+### RSAEncryptWithPKCS1v15Block {#rsaencryptwithpkcs1v15block}
+
+```go
+RSAEncryptWithPKCS1v15Block(pubKeyPem string, data []byte) ([]byte, error)
+```
+
+使用 RSA PKCS#1 v1.5 公钥加密数据（导出名为 codec.RSAEncryptWithPKCS1v15Block）
 
 自动按公钥长度对超长明文分块加密，可处理任意长度的输入
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKeyPem | `string` | PEM 格式的 RSA 公钥 |
+| data | `[]byte` | 待加密的明文字节 |
 
-参数:
+**返回值**
 
-  - pubKeyPem: PEM 格式的 RSA 公钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 密文字节 |
+| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
 
-  - data: 待加密的明文字节
-
-
-
-返回值:
-
-  - 密文字节
-
-  - 错误信息（公钥解析失败或加密失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5203,112 +3723,34 @@ println(string(plaintext))
 assert string(plaintext) == "hello yak", "PKCS1v15 block roundtrip should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### RSASignWithPKCS1v15Digest {#rsasignwithpkcs1v15digest}
 
-`RSAEncryptWithPKCS1v15Block(pubKeyPem string, data []byte) ([]byte, error)`
+```go
+RSASignWithPKCS1v15Digest(privKeyPem string, data []byte, algo string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKeyPem | `string` | PEM 格式的 RSA 公钥 |
-| data | `[]byte` | 待加密的明文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 密文字节 |
-| r2 | `error` | 错误信息（公钥解析失败或加密失败时返回） |
-
-
-### RSASignWithPKCS1v15Digest
-
-#### 详细描述
-RSASignWithPKCS1v15Digest 使用 RSA PKCS#1 v1.5 私钥对数据做摘要签名（导出名为 codec.RSASignWithPKCS1v15Digest）
+使用 RSA PKCS#1 v1.5 私钥对数据做摘要签名（导出名为 codec.RSASignWithPKCS1v15Digest）
 
 支持 sha256 与 sha512 两种摘要算法
 
+**参数**
 
-
-参数:
-
-  - privKeyPem: PEM 格式的 RSA 私钥
-
-  - data: 待签名的原始数据
-
-  - algo: 摘要算法名，支持 &#34;sha256&#34;、&#34;sha512&#34;（大小写与写法不敏感）
-
-
-
-返回值:
-
-  - 签名字节
-
-  - 错误信息（算法不支持或签名失败时返回）
-
-
-
-
-Example:
-
-``````````````yak
-pub, pri = tls.GenerateRSA2048KeyPair()~
-signature = codec.RSASignWithPKCS1v15Digest(pri, "hello yak", "sha256")~
-valid = codec.RSAVerifyWithPKCS1v15Digest(pub, "hello yak", signature, "sha256")~
-println(valid)
-assert valid == true, "signature should be verified as valid"
-``````````````
-
-
-#### 定义
-
-`RSASignWithPKCS1v15Digest(privKeyPem string, data []byte, algo string) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | privKeyPem | `string` | PEM 格式的 RSA 私钥 |
 | data | `[]byte` | 待签名的原始数据 |
 | algo | `string` | 摘要算法名，支持 &#34;sha256&#34;、&#34;sha512&#34;（大小写与写法不敏感） |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | 签名字节 |
 | r2 | `error` | 错误信息（算法不支持或签名失败时返回） |
 
-
-### RSAVerifyWithPKCS1v15Digest
-
-#### 详细描述
-RSAVerifyWithPKCS1v15Digest 使用 RSA PKCS#1 v1.5 公钥验证摘要签名（导出名为 codec.RSAVerifyWithPKCS1v15Digest）
-
-与 codec.RSASignWithPKCS1v15Digest 配对使用，支持 sha256 与 sha512
-
-
-
-参数:
-
-  - pubKeyPem: PEM 格式的 RSA 公钥
-
-  - data: 被签名的原始数据
-
-  - signature: 待验证的签名字节
-
-  - algo: 摘要算法名，支持 &#34;sha256&#34;、&#34;sha512&#34;
-
-
-
-返回值:
-
-  - 验证是否通过（true 表示签名有效）
-
-  - 错误信息（算法不支持或验证出错时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5318,45 +3760,67 @@ println(valid)
 assert valid == true, "signature should be verified as valid"
 ``````````````
 
+---
 
-#### 定义
+### RSAVerifyWithPKCS1v15Digest {#rsaverifywithpkcs1v15digest}
 
-`RSAVerifyWithPKCS1v15Digest(pubKeyPem string, data []byte, signature []byte, algo string) (bool, error)`
+```go
+RSAVerifyWithPKCS1v15Digest(pubKeyPem string, data []byte, signature []byte, algo string) (bool, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 RSA PKCS#1 v1.5 公钥验证摘要签名（导出名为 codec.RSAVerifyWithPKCS1v15Digest）
+
+与 codec.RSASignWithPKCS1v15Digest 配对使用，支持 sha256 与 sha512
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | pubKeyPem | `string` | PEM 格式的 RSA 公钥 |
 | data | `[]byte` | 被签名的原始数据 |
 | signature | `[]byte` | 待验证的签名字节 |
 | algo | `string` | 摘要算法名，支持 &#34;sha256&#34;、&#34;sha512&#34; |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `bool` | 验证是否通过（true 表示签名有效） |
 | r2 | `error` | 错误信息（算法不支持或验证出错时返回） |
 
+**示例**
 
-### RandBytes
+``````````````yak
+pub, pri = tls.GenerateRSA2048KeyPair()~
+signature = codec.RSASignWithPKCS1v15Digest(pri, "hello yak", "sha256")~
+valid = codec.RSAVerifyWithPKCS1v15Digest(pub, "hello yak", signature, "sha256")~
+println(valid)
+assert valid == true, "signature should be verified as valid"
+``````````````
 
-#### 详细描述
-RandBytes 生成 n 个密码学安全的随机字节
+---
 
-参数:
+### RandBytes {#randbytes}
 
-  - n: 需要生成的随机字节数量
+```go
+RandBytes(n int) []byte
+```
 
+生成 n 个密码学安全的随机字节
 
+**参数**
 
-返回值:
+|参数名|类型|说明|
+|:--|:--|:--|
+| n | `int` | 需要生成的随机字节数量 |
 
-  - 长度为 n 的随机字节切片(读取失败时返回 nil)
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 长度为 n 的随机字节切片(读取失败时返回 nil) |
 
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成 16 个随机字节(每次结果不同)
@@ -5367,41 +3831,29 @@ println(len(result))   // OUT: 16
 assert len(result) == 16, "RandBytes should produce requested length"
 ``````````````
 
+---
 
-#### 定义
+### Sha1 {#sha1}
 
-`RandBytes(n int) []byte`
+```go
+Sha1(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| n | `int` | 需要生成的随机字节数量 |
+计算输入数据的 SHA-1 摘要并返回十六进制字符串
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 长度为 n 的随机字节切片(读取失败时返回 nil) |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-### Sha1
+**返回值**
 
-#### 详细描述
-Sha1 计算输入数据的 SHA-1 摘要并返回十六进制字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 40 位十六进制 SHA-1 摘要字符串 |
 
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 40 位十六进制 SHA-1 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 SHA-1 摘要
@@ -5413,41 +3865,29 @@ assert result == "a9993e364706816aba3e25717850c26c9cd0d89d", "Sha1 should match 
 assert len(result) == 40, "Sha1 hex length should be 40"
 ``````````````
 
+---
 
-#### 定义
+### Sha224 {#sha224}
 
-`Sha1(i any) string`
+```go
+Sha224(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 SHA-224 摘要并返回十六进制字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 40 位十六进制 SHA-1 摘要字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 56 位十六进制 SHA-224 摘要字符串 |
 
-### Sha224
-
-#### 详细描述
-Sha224 计算输入数据的 SHA-224 摘要并返回十六进制字符串
-
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 56 位十六进制 SHA-224 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 SHA-224 摘要
@@ -5459,41 +3899,29 @@ assert result == "23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7", "Sh
 assert len(result) == 56, "Sha224 hex length should be 56"
 ``````````````
 
+---
 
-#### 定义
+### Sha256 {#sha256}
 
-`Sha224(i any) string`
+```go
+Sha256(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 SHA-256 摘要并返回十六进制字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 56 位十六进制 SHA-224 摘要字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 64 位十六进制 SHA-256 摘要字符串 |
 
-### Sha256
-
-#### 详细描述
-Sha256 计算输入数据的 SHA-256 摘要并返回十六进制字符串
-
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 64 位十六进制 SHA-256 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 SHA-256 摘要
@@ -5505,41 +3933,29 @@ assert result == "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015
 assert len(result) == 64, "Sha256 hex length should be 64"
 ``````````````
 
+---
 
-#### 定义
+### Sha384 {#sha384}
 
-`Sha256(i any) string`
+```go
+Sha384(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 SHA-384 摘要并返回十六进制字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 64 位十六进制 SHA-256 摘要字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 96 位十六进制 SHA-384 摘要字符串 |
 
-### Sha384
-
-#### 详细描述
-Sha384 计算输入数据的 SHA-384 摘要并返回十六进制字符串
-
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 96 位十六进制 SHA-384 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 SHA-384 摘要
@@ -5551,41 +3967,29 @@ assert result == "cb00753f45a35e8bb5a03d699ac65007272c32ab0eded1631a8b605a43ff5b
 assert len(result) == 96, "Sha384 hex length should be 96"
 ``````````````
 
+---
 
-#### 定义
+### Sha512 {#sha512}
 
-`Sha384(i any) string`
+```go
+Sha512(i any) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+计算输入数据的 SHA-512 摘要并返回十六进制字符串
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 96 位十六进制 SHA-384 摘要字符串 |
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 128 位十六进制 SHA-512 摘要字符串 |
 
-### Sha512
-
-#### 详细描述
-Sha512 计算输入数据的 SHA-512 摘要并返回十六进制字符串
-
-参数:
-
-  - i: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - 128 位十六进制 SHA-512 摘要字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 计算 SHA-512 摘要
@@ -5597,49 +4001,33 @@ assert result == "ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d3
 assert len(result) == 128, "Sha512 hex length should be 128"
 ``````````````
 
+---
 
-#### 定义
+### SignSHA256WithRSA {#signsha256withrsa}
 
-`Sha512(i any) string`
+```go
+SignSHA256WithRSA(pemBytes []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 128 位十六进制 SHA-512 摘要字符串 |
-
-
-### SignSHA256WithRSA
-
-#### 详细描述
-SignSHA256WithRSA 使用 RSA 私钥对数据做 SHA256 签名（导出名为 codec.SignSHA256WithRSA）
+使用 RSA 私钥对数据做 SHA256 签名（导出名为 codec.SignSHA256WithRSA）
 
 私钥支持 PKCS8 与 PKCS1 两种 PEM 格式
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pemBytes | `[]byte` | PEM 格式的 RSA 私钥 |
+| data | `any` | 待签名的原始数据，可为 []byte、string 等类型 |
 
-参数:
+**返回值**
 
-  - pemBytes: PEM 格式的 RSA 私钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 签名字节 |
+| r2 | `error` | 错误信息（私钥解析失败或签名失败时返回） |
 
-  - data: 待签名的原始数据，可为 []byte、string 等类型
-
-
-
-返回值:
-
-  - 签名字节
-
-  - 错误信息（私钥解析失败或签名失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5649,51 +4037,33 @@ println(err)
 assert err == nil, "valid sha256 signature should be verified successfully"
 ``````````````
 
+---
 
-#### 定义
+### SignSHA512WithRSA {#signsha512withrsa}
 
-`SignSHA256WithRSA(pemBytes []byte, data any) ([]byte, error)`
+```go
+SignSHA512WithRSA(pemBytes []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` | PEM 格式的 RSA 私钥 |
-| data | `any` | 待签名的原始数据，可为 []byte、string 等类型 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 签名字节 |
-| r2 | `error` | 错误信息（私钥解析失败或签名失败时返回） |
-
-
-### SignSHA512WithRSA
-
-#### 详细描述
-SignSHA512WithRSA 使用 RSA 私钥对数据做 SHA512 签名（导出名为 codec.SignSHA512WithRSA）
+使用 RSA 私钥对数据做 SHA512 签名（导出名为 codec.SignSHA512WithRSA）
 
 私钥支持 PKCS8 与 PKCS1 两种 PEM 格式
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pemBytes | `[]byte` | PEM 格式的 RSA 私钥 |
+| data | `any` | 待签名的原始数据，可为 []byte、string 等类型 |
 
-参数:
+**返回值**
 
-  - pemBytes: PEM 格式的 RSA 私钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 签名字节 |
+| r2 | `error` | 错误信息（私钥解析失败或签名失败时返回） |
 
-  - data: 待签名的原始数据，可为 []byte、string 等类型
-
-
-
-返回值:
-
-  - 签名字节
-
-  - 错误信息（私钥解析失败或签名失败时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5703,51 +4073,33 @@ println(err)
 assert err == nil, "valid sha512 signature should be verified successfully"
 ``````````````
 
+---
 
-#### 定义
+### SignVerifySHA256WithRSA {#signverifysha256withrsa}
 
-`SignSHA512WithRSA(pemBytes []byte, data any) ([]byte, error)`
+```go
+SignVerifySHA256WithRSA(pemBytes []byte, originData any, sign []byte) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` | PEM 格式的 RSA 私钥 |
-| data | `any` | 待签名的原始数据，可为 []byte、string 等类型 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 签名字节 |
-| r2 | `error` | 错误信息（私钥解析失败或签名失败时返回） |
-
-
-### SignVerifySHA256WithRSA
-
-#### 详细描述
-SignVerifySHA256WithRSA 使用 RSA 公钥验证数据的 SHA256 签名（导出名为 codec.SignVerifySHA256WithRSA）
+使用 RSA 公钥验证数据的 SHA256 签名（导出名为 codec.SignVerifySHA256WithRSA）
 
 与 codec.SignSHA256WithRSA 配对使用，验证通过时返回 nil
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pemBytes | `[]byte` | PEM 格式的 RSA 公钥 |
+| originData | `any` | 被签名的原始数据 |
+| sign | `[]byte` | 待验证的签名字节 |
 
-参数:
+**返回值**
 
-  - pemBytes: PEM 格式的 RSA 公钥
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息（验证失败或公钥解析失败时返回，验证通过返回 nil） |
 
-  - originData: 被签名的原始数据
-
-  - sign: 待验证的签名字节
-
-
-
-返回值:
-
-  - 错误信息（验证失败或公钥解析失败时返回，验证通过返回 nil）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5757,51 +4109,33 @@ println(err)
 assert err == nil, "valid sha256 signature should be verified successfully"
 ``````````````
 
+---
 
-#### 定义
+### SignVerifySHA512WithRSA {#signverifysha512withrsa}
 
-`SignVerifySHA256WithRSA(pemBytes []byte, originData any, sign []byte) error`
+```go
+SignVerifySHA512WithRSA(pemBytes []byte, originData any, sign []byte) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用 RSA 公钥验证数据的 SHA512 签名（导出名为 codec.SignVerifySHA512WithRSA）
+
+与 codec.SignSHA512WithRSA 配对使用，验证通过时返回 nil
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | pemBytes | `[]byte` | PEM 格式的 RSA 公钥 |
 | originData | `any` | 被签名的原始数据 |
 | sign | `[]byte` | 待验证的签名字节 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `error` | 错误信息（验证失败或公钥解析失败时返回，验证通过返回 nil） |
 
-
-### SignVerifySHA512WithRSA
-
-#### 详细描述
-SignVerifySHA512WithRSA 使用 RSA 公钥验证数据的 SHA512 签名（导出名为 codec.SignVerifySHA512WithRSA）
-
-与 codec.SignSHA512WithRSA 配对使用，验证通过时返回 nil
-
-
-
-参数:
-
-  - pemBytes: PEM 格式的 RSA 公钥
-
-  - originData: 被签名的原始数据
-
-  - sign: 待验证的签名字节
-
-
-
-返回值:
-
-  - 错误信息（验证失败或公钥解析失败时返回，验证通过返回 nil）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 pub, pri = tls.GenerateRSA2048KeyPair()~
@@ -5811,49 +4145,33 @@ println(err)
 assert err == nil, "valid sha512 signature should be verified successfully"
 ``````````````
 
+---
 
-#### 定义
+### Sm2Decrypt {#sm2decrypt}
 
-`SignVerifySHA512WithRSA(pemBytes []byte, originData any, sign []byte) error`
+```go
+Sm2Decrypt(priKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pemBytes | `[]byte` | PEM 格式的 RSA 公钥 |
-| originData | `any` | 被签名的原始数据 |
-| sign | `[]byte` | 待验证的签名字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息（验证失败或公钥解析失败时返回，验证通过返回 nil） |
-
-
-### Sm2Decrypt
-
-#### 详细描述
 SM2DecryptC1C2C3 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据
 
 注意：Sm2Decrypt 和 Sm2DecryptC1C2C3 是同一个函数的别名
 
-参数:
+**参数**
 
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待解密的密文字节 |
 
-  - data: 待解密的密文字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C2C3 加解密往返
@@ -5866,49 +4184,33 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C2C3 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptAsn1 {#sm2decryptasn1}
 
-`Sm2Decrypt(priKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2DecryptAsn1(priKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
-| data | `[]byte` | 待解密的密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm2DecryptAsn1
-
-#### 详细描述
-SM2DecryptASN1 使用国密 SM2 私钥按 ASN.1 编码格式解密数据
+使用国密 SM2 私钥按 ASN.1 编码格式解密数据
 
 注意：Sm2DecryptAsn1 是本函数的导出名
 
-参数:
+**参数**
 
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待解密的 ASN.1 编码密文字节 |
 
-  - data: 待解密的 ASN.1 编码密文字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 ASN.1 加解密往返
@@ -5921,51 +4223,34 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 ASN1 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptAsn1WithPassword {#sm2decryptasn1withpassword}
 
-`Sm2DecryptAsn1(priKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2DecryptAsn1WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
-| data | `[]byte` | 待解密的 ASN.1 编码密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm2DecryptAsn1WithPassword
-
-#### 详细描述
-SM2DecryptASN1WithPassword 使用带密码保护的国密 SM2 私钥按 ASN.1 编码格式解密数据
+使用带密码保护的国密 SM2 私钥按 ASN.1 编码格式解密数据
 
 注意：Sm2DecryptAsn1WithPassword 是本函数的导出名
 
-参数:
+**参数**
 
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥)
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
+| data | `[]byte` | 待解密的 ASN.1 编码密文字节 |
+| password | `[]byte` | 私钥保护密码，未加密时传 nil |
 
-  - data: 待解密的 ASN.1 编码密文字节
+**返回值**
 
-  - password: 私钥保护密码，未加密时传 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 未加密私钥时 password 传 nil
@@ -5978,50 +4263,33 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 ASN1 with password(nil) should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptC1C2C3 {#sm2decryptc1c2c3}
 
-`Sm2DecryptAsn1WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
+```go
+Sm2DecryptC1C2C3(priKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
-| data | `[]byte` | 待解密的 ASN.1 编码密文字节 |
-| password | `[]byte` | 私钥保护密码，未加密时传 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm2DecryptC1C2C3
-
-#### 详细描述
-SM2DecryptC1C2C3 使用国密 SM2 私钥按 C1C2C3 密文排列解密数据
+使用国密 SM2 私钥按 C1C2C3 密文排列解密数据
 
 注意：Sm2Decrypt 和 Sm2DecryptC1C2C3 是同一个函数的别名
 
-参数:
+**参数**
 
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待解密的密文字节 |
 
-  - data: 待解密的密文字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C2C3 加解密往返
@@ -6034,49 +4302,32 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C2C3 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptC1C2C3WithPassword {#sm2decryptc1c2c3withpassword}
 
-`Sm2DecryptC1C2C3(priKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2DecryptC1C2C3WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
+使用带密码保护的国密 SM2 私钥按 C1C2C3 密文排列解密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
 | data | `[]byte` | 待解密的密文字节 |
+| password | `[]byte` | 私钥保护密码，未加密时传 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解密还原后的明文字节 |
 | r2 | `error` | 解密失败时返回的错误 |
 
-
-### Sm2DecryptC1C2C3WithPassword
-
-#### 详细描述
-SM2DecryptC1C2C3WithPassword 使用带密码保护的国密 SM2 私钥按 C1C2C3 密文排列解密数据
-
-参数:
-
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥)
-
-  - data: 待解密的密文字节
-
-  - password: 私钥保护密码，未加密时传 nil
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 未加密私钥时 password 传 nil
@@ -6089,48 +4340,31 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C2C3 with password(nil) should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptC1C3C2 {#sm2decryptc1c3c2}
 
-`Sm2DecryptC1C2C3WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
+```go
+Sm2DecryptC1C3C2(priKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
+使用国密 SM2 私钥按 C1C3C2 密文排列解密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
 | data | `[]byte` | 待解密的密文字节 |
-| password | `[]byte` | 私钥保护密码，未加密时传 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解密还原后的明文字节 |
 | r2 | `error` | 解密失败时返回的错误 |
 
-
-### Sm2DecryptC1C3C2
-
-#### 详细描述
-SM2DecryptC1C3C2 使用国密 SM2 私钥按 C1C3C2 密文排列解密数据
-
-参数:
-
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节)
-
-  - data: 待解密的密文字节
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C3C2 加解密往返
@@ -6143,49 +4377,32 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C3C2 decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2DecryptC1C3C2WithPassword {#sm2decryptc1c3c2withpassword}
 
-`Sm2DecryptC1C3C2(priKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2DecryptC1C3C2WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节) |
+使用带密码保护的国密 SM2 私钥按 C1C3C2 密文排列解密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
 | data | `[]byte` | 待解密的密文字节 |
+| password | `[]byte` | 私钥保护密码，未加密时传 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 解密还原后的明文字节 |
 | r2 | `error` | 解密失败时返回的错误 |
 
-
-### Sm2DecryptC1C3C2WithPassword
-
-#### 详细描述
-SM2DecryptC1C3C2WithPassword 使用带密码保护的国密 SM2 私钥按 C1C3C2 密文排列解密数据
-
-参数:
-
-  - priKey: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥)
-
-  - data: 待解密的密文字节
-
-  - password: 私钥保护密码，未加密时传 nil
-
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 未加密私钥时 password 传 nil
@@ -6198,50 +4415,33 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C3C2 with password(nil) should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm2Encrypt {#sm2encrypt}
 
-`Sm2DecryptC1C3C2WithPassword(priKey []byte, data []byte, password []byte) ([]byte, error)`
+```go
+Sm2Encrypt(pubKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKey | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
-| data | `[]byte` | 待解密的密文字节 |
-| password | `[]byte` | 私钥保护密码，未加密时传 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm2Encrypt
-
-#### 详细描述
 SM2EncryptC1C2C3 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据
 
 注意：Sm2Encrypt 和 Sm2EncryptC1C2C3 是同一个函数的别名
 
-参数:
+**参数**
 
-  - pubKey: SM2 公钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待加密的数据字节 |
 
-  - data: 待加密的数据字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节(每次随机，结果不固定) |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 加密后的密文字节(每次随机，结果不固定)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C2C3 加解密往返
@@ -6254,49 +4454,33 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C2C3 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm2EncryptAsn1 {#sm2encryptasn1}
 
-`Sm2Encrypt(pubKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2EncryptAsn1(pubKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
-| data | `[]byte` | 待加密的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节(每次随机，结果不固定) |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm2EncryptAsn1
-
-#### 详细描述
-SM2EncryptASN1 使用国密 SM2 公钥按 ASN.1 编码格式加密数据
+使用国密 SM2 公钥按 ASN.1 编码格式加密数据
 
 注意：Sm2EncryptAsn1 是本函数的导出名
 
-参数:
+**参数**
 
-  - pubKey: SM2 公钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待加密的数据字节 |
 
-  - data: 待加密的数据字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: ASN.1 编码的密文字节(每次随机，结果不固定) |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: ASN.1 编码的密文字节(每次随机，结果不固定)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 ASN.1 加解密往返
@@ -6309,49 +4493,33 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 ASN1 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm2EncryptC1C2C3 {#sm2encryptc1c2c3}
 
-`Sm2EncryptAsn1(pubKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2EncryptC1C2C3(pubKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
-| data | `[]byte` | 待加密的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: ASN.1 编码的密文字节(每次随机，结果不固定) |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm2EncryptC1C2C3
-
-#### 详细描述
-SM2EncryptC1C2C3 使用国密 SM2 公钥按 C1C2C3 密文排列加密数据
+使用国密 SM2 公钥按 C1C2C3 密文排列加密数据
 
 注意：Sm2Encrypt 和 Sm2EncryptC1C2C3 是同一个函数的别名
 
-参数:
+**参数**
 
-  - pubKey: SM2 公钥(支持 PEM/HEX/原始字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
+| data | `[]byte` | 待加密的数据字节 |
 
-  - data: 待加密的数据字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节(每次随机，结果不固定) |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 加密后的密文字节(每次随机，结果不固定)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C2C3 加解密往返
@@ -6364,47 +4532,31 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C2C3 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm2EncryptC1C3C2 {#sm2encryptc1c3c2}
 
-`Sm2EncryptC1C2C3(pubKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2EncryptC1C3C2(pubKey []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+使用国密 SM2 公钥按 C1C3C2 密文排列加密数据
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
 | data | `[]byte` | 待加密的数据字节 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: 加密后的密文字节(每次随机，结果不固定) |
 | r2 | `error` | 加密失败时返回的错误 |
 
-
-### Sm2EncryptC1C3C2
-
-#### 详细描述
-SM2EncryptC1C3C2 使用国密 SM2 公钥按 C1C3C2 密文排列加密数据
-
-参数:
-
-  - pubKey: SM2 公钥(支持 PEM/HEX/原始字节)
-
-  - data: 待加密的数据字节
-
-
-
-返回值:
-
-  - []byte: 加密后的密文字节(每次随机，结果不固定)
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并做 C1C3C2 加解密往返
@@ -6417,41 +4569,25 @@ println(string(pt))   // OUT: secret
 assert string(pt) == "secret", "SM2 C1C3C2 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm2GenerateHexKeyPair {#sm2generatehexkeypair}
 
-`Sm2EncryptC1C3C2(pubKey []byte, data []byte) ([]byte, error)`
+```go
+Sm2GenerateHexKeyPair() ([]byte, []byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKey | `[]byte` | SM2 公钥(支持 PEM/HEX/原始字节) |
-| data | `[]byte` | 待加密的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节(每次随机，结果不固定) |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm2GenerateHexKeyPair
-
-#### 详细描述
 GenerateSM2PrivateKeyHEX 生成一对国密 SM2 密钥(HEX 文本格式)
 
-返回值:
+**返回值**
 
-  - []byte: SM2 私钥(HEX 文本)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: SM2 私钥(HEX 文本) |
+| r2 | `[]byte` | []byte: SM2 公钥(HEX 文本) |
+| r3 | `error` | 生成失败时返回的错误 |
 
-  - []byte: SM2 公钥(HEX 文本)
-
-  - error: 生成失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成 HEX 格式 SM2 密钥对(返回顺序: 私钥, 公钥)
@@ -6462,36 +4598,25 @@ println(len(priv) > 0 && len(pub) > 0)   // OUT: true
 assert len(priv) > 0 && len(pub) > 0, "Sm2GenerateHexKeyPair should produce keypair"
 ``````````````
 
+---
 
-#### 定义
+### Sm2GeneratePemKeyPair {#sm2generatepemkeypair}
 
-`Sm2GenerateHexKeyPair() ([]byte, []byte, error)`
+```go
+Sm2GeneratePemKeyPair() ([]byte, []byte, error)
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: SM2 私钥(HEX 文本) |
-| r2 | `[]byte` | []byte: SM2 公钥(HEX 文本) |
-| r3 | `error` | 生成失败时返回的错误 |
-
-
-### Sm2GeneratePemKeyPair
-
-#### 详细描述
 GenerateSM2PrivateKeyPEM 生成一对国密 SM2 密钥(PEM 文本格式)
 
-返回值:
+**返回值**
 
-  - []byte: SM2 私钥(PEM 文本)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: SM2 私钥(PEM 文本) |
+| r2 | `[]byte` | []byte: SM2 公钥(PEM 文本) |
+| r3 | `error` | 生成失败时返回的错误 |
 
-  - []byte: SM2 公钥(PEM 文本)
-
-  - error: 生成失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成 PEM 格式 SM2 密钥对(返回顺序: 私钥, 公钥)
@@ -6502,38 +4627,25 @@ println(str.HasPrefix(string(priv), "-----BEGIN"))   // OUT: true
 assert len(priv) > 0 && len(pub) > 0, "Sm2GeneratePemKeyPair should produce keypair"
 ``````````````
 
+---
 
-#### 定义
+### Sm2GenerateTemporaryKeyPair {#sm2generatetemporarykeypair}
 
-`Sm2GeneratePemKeyPair() ([]byte, []byte, error)`
+```go
+Sm2GenerateTemporaryKeyPair() ([]byte, []byte, error)
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: SM2 私钥(PEM 文本) |
-| r2 | `[]byte` | []byte: SM2 公钥(PEM 文本) |
-| r3 | `error` | 生成失败时返回的错误 |
+生成用于密钥交换的临时密钥对
 
+**返回值**
 
-### Sm2GenerateTemporaryKeyPair
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 临时私钥（HEX格式） |
+| r2 | `[]byte` | []byte: 临时公钥（HEX格式） |
+| r3 | `error` | 错误信息 |
 
-#### 详细描述
-SM2GenerateTemporaryKeyPair 生成用于密钥交换的临时密钥对
-
-
-
-返回值：
-
-  - []byte: 临时私钥（HEX格式）
-
-  - []byte: 临时公钥（HEX格式）
-
-  - error: 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 tempPriKey, tempPubKey, err := codec.Sm2GenerateTemporaryKeyPair()
@@ -6542,60 +4654,39 @@ println("临时私钥:", string(tempPriKey))
 println("临时公钥:", string(tempPubKey))
 ``````````````
 
+---
 
-#### 定义
+### Sm2KeyExchange {#sm2keyexchange}
 
-`Sm2GenerateTemporaryKeyPair() ([]byte, []byte, error)`
+```go
+Sm2KeyExchange(keyLength int, idA []byte, idB []byte, priKey []byte, pubKey []byte, tempPriKey []byte, tempPubKey []byte, thisIsA bool) ([]byte, []byte, []byte, error)
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 临时私钥（HEX格式） |
-| r2 | `[]byte` | []byte: 临时公钥（HEX格式） |
-| r3 | `error` | 错误信息 |
+执行SM2密钥交换算法
 
+**参数**
 
-### Sm2KeyExchange
+|参数名|类型|说明|
+|:--|:--|:--|
+| keyLength | `int` | 期望的共享密钥长度（字节） |
+| idA | `[]byte` | A方标识（[]byte） |
+| idB | `[]byte` | B方标识（[]byte） |
+| priKey | `[]byte` | 调用方私钥（[]byte，支持PEM、HEX、原始字节） |
+| pubKey | `[]byte` | 对方公钥（[]byte，支持PEM、HEX、原始字节） |
+| tempPriKey | `[]byte` | 调用方临时私钥（[]byte，支持PEM、HEX、原始字节） |
+| tempPubKey | `[]byte` | 对方临时公钥（[]byte，支持PEM、HEX、原始字节） |
+| thisIsA | `bool` | 如果是A方调用设置为true，B方调用设置为false |
 
-#### 详细描述
-SM2KeyExchange 执行SM2密钥交换算法
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 协商得到的共享密钥（[]byte） |
+| r2 | `[]byte` | 验证值S1，用于A验证B的身份（[]byte） |
+| r3 | `[]byte` | 验证值S2，用于B验证A的身份（[]byte） |
+| r4 | `error` | 错误信息 |
 
-
-参数说明：
-
-  - keyLength: 期望的共享密钥长度（字节）
-
-  - idA: A方标识（[]byte）
-
-  - idB: B方标识（[]byte）
-
-  - priKey: 调用方私钥（[]byte，支持PEM、HEX、原始字节）
-
-  - pubKey: 对方公钥（[]byte，支持PEM、HEX、原始字节）
-
-  - tempPriKey: 调用方临时私钥（[]byte，支持PEM、HEX、原始字节）
-
-  - tempPubKey: 对方临时公钥（[]byte，支持PEM、HEX、原始字节）
-
-  - thisIsA: 如果是A方调用设置为true，B方调用设置为false
-
-
-
-返回值：
-
-  - sharedKey: 协商得到的共享密钥（[]byte）
-
-  - s1: 验证值S1，用于A验证B的身份（[]byte）
-
-  - s2: 验证值S2，用于B验证A的身份（[]byte）
-
-  - error: 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // A方和B方各自生成长期密钥对
@@ -6624,55 +4715,31 @@ println("A方协商密钥:", codec.EncodeToHex(sharedKeyA))
 println("B方协商密钥:", codec.EncodeToHex(sharedKeyB))
 ``````````````
 
+---
 
-#### 定义
+### Sm2SignWithSM3 {#sm2signwithsm3}
 
-`Sm2KeyExchange(keyLength int, idA []byte, idB []byte, priKey []byte, pubKey []byte, tempPriKey []byte, tempPubKey []byte, thisIsA bool) ([]byte, []byte, []byte, error)`
+```go
+Sm2SignWithSM3(priKeyBytes []byte, data any) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| keyLength | `int` | 期望的共享密钥长度（字节） |
-| idA | `[]byte` | A方标识（[]byte） |
-| idB | `[]byte` | B方标识（[]byte） |
-| priKey | `[]byte` | 调用方私钥（[]byte，支持PEM、HEX、原始字节） |
-| pubKey | `[]byte` | 对方公钥（[]byte，支持PEM、HEX、原始字节） |
-| tempPriKey | `[]byte` | 调用方临时私钥（[]byte，支持PEM、HEX、原始字节） |
-| tempPubKey | `[]byte` | 对方临时公钥（[]byte，支持PEM、HEX、原始字节） |
-| thisIsA | `bool` | 如果是A方调用设置为true，B方调用设置为false |
+使用国密 SM2 私钥对数据进行 SM3 签名，返回 ASN.1 DER 编码的签名
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 协商得到的共享密钥（[]byte） |
-| r2 | `[]byte` | 验证值S1，用于A验证B的身份（[]byte） |
-| r3 | `[]byte` | 验证值S2，用于B验证A的身份（[]byte） |
-| r4 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKeyBytes | `[]byte` | SM2 私钥(支持 PEM/HEX/32 字节原始字节) |
+| data | `any` | 待签名的数据，可为 string、[]byte 等 |
 
-### Sm2SignWithSM3
+**返回值**
 
-#### 详细描述
-SM2SignWithSM3 使用国密 SM2 私钥对数据进行 SM3 签名，返回 ASN.1 DER 编码的签名
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: ASN.1 DER 编码的 SM2 签名(每次随机，结果不固定) |
+| r2 | `error` | 签名失败时返回的错误 |
 
-参数:
-
-  - priKeyBytes: SM2 私钥(支持 PEM/HEX/32 字节原始字节)
-
-  - data: 待签名的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - []byte: ASN.1 DER 编码的 SM2 签名(每次随机，结果不固定)
-
-  - error: 签名失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对，签名后用公钥验签
@@ -6684,49 +4751,32 @@ println(codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil)   // OUT: true
 assert codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil, "SM2 sign should be verifiable"
 ``````````````
 
+---
 
-#### 定义
+### Sm2SignWithSM3WithPassword {#sm2signwithsm3withpassword}
 
-`Sm2SignWithSM3(priKeyBytes []byte, data any) ([]byte, error)`
+```go
+Sm2SignWithSM3WithPassword(priKeyBytes []byte, data any, password []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKeyBytes | `[]byte` | SM2 私钥(支持 PEM/HEX/32 字节原始字节) |
+使用带密码保护的国密 SM2 私钥对数据进行 SM3 签名
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| priKeyBytes | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
 | data | `any` | 待签名的数据，可为 string、[]byte 等 |
+| password | `[]byte` | 私钥保护密码，未加密时传 nil |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | []byte: ASN.1 DER 编码的 SM2 签名(每次随机，结果不固定) |
 | r2 | `error` | 签名失败时返回的错误 |
 
-
-### Sm2SignWithSM3WithPassword
-
-#### 详细描述
-SM2SignWithSM3WithPassword 使用带密码保护的国密 SM2 私钥对数据进行 SM3 签名
-
-参数:
-
-  - priKeyBytes: SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥)
-
-  - data: 待签名的数据，可为 string、[]byte 等
-
-  - password: 私钥保护密码，未加密时传 nil
-
-
-
-返回值:
-
-  - []byte: ASN.1 DER 编码的 SM2 签名(每次随机，结果不固定)
-
-  - error: 签名失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 未加密私钥时 password 传 nil
@@ -6738,48 +4788,31 @@ println(codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil)   // OUT: true
 assert codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil, "SM2 sign with password(nil) should be verifiable"
 ``````````````
 
+---
 
-#### 定义
+### Sm2VerifyWithSM3 {#sm2verifywithsm3}
 
-`Sm2SignWithSM3WithPassword(priKeyBytes []byte, data any, password []byte) ([]byte, error)`
+```go
+Sm2VerifyWithSM3(pubKeyBytes []byte, originData any, sign []byte) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| priKeyBytes | `[]byte` | SM2 私钥(支持 PEM/HEX/原始字节，可为加密私钥) |
-| data | `any` | 待签名的数据，可为 string、[]byte 等 |
-| password | `[]byte` | 私钥保护密码，未加密时传 nil |
+使用国密 SM2 公钥对数据进行 SM3 签名验证，验证通过返回 nil
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: ASN.1 DER 编码的 SM2 签名(每次随机，结果不固定) |
-| r2 | `error` | 签名失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| pubKeyBytes | `[]byte` | SM2 公钥(支持 PEM/HEX/64 或 65 字节原始字节) |
+| originData | `any` | 原始签名数据，可为 string、[]byte 等 |
+| sign | `[]byte` | 待验证的 ASN.1 DER 编码签名 |
 
-### Sm2VerifyWithSM3
+**返回值**
 
-#### 详细描述
-SM2VerifyWithSM3 使用国密 SM2 公钥对数据进行 SM3 签名验证，验证通过返回 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 验证通过返回 nil，验证失败返回错误信息 |
 
-参数:
-
-  - pubKeyBytes: SM2 公钥(支持 PEM/HEX/64 或 65 字节原始字节)
-
-  - originData: 原始签名数据，可为 string、[]byte 等
-
-  - sign: 待验证的 ASN.1 DER 编码签名
-
-
-
-返回值:
-
-  - error: 验证通过返回 nil，验证失败返回错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 生成密钥对并签名，再验签
@@ -6791,43 +4824,29 @@ println(codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil)   // OUT: true
 assert codec.Sm2VerifyWithSM3(pub, "msg", sig) == nil, "SM2 verify should pass for valid signature"
 ``````````````
 
+---
 
-#### 定义
+### Sm3 {#sm3}
 
-`Sm2VerifyWithSM3(pubKeyBytes []byte, originData any, sign []byte) error`
+```go
+Sm3(raw any) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pubKeyBytes | `[]byte` | SM2 公钥(支持 PEM/HEX/64 或 65 字节原始字节) |
-| originData | `any` | 原始签名数据，可为 string、[]byte 等 |
-| sign | `[]byte` | 待验证的 ASN.1 DER 编码签名 |
+计算输入数据的国密 SM3 摘要，返回 32 字节摘要(注意是字节切片，打印前需用 codec.EncodeToHex 转可读)
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 验证通过返回 nil，验证失败返回错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
 
-### Sm3
+**返回值**
 
-#### 详细描述
-SM3 计算输入数据的国密 SM3 摘要，返回 32 字节摘要(注意是字节切片，打印前需用 codec.EncodeToHex 转可读)
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | SM3 摘要字节切片(32 字节，转 hex 后长度 64) |
 
-参数:
-
-  - raw: 待计算摘要的数据，可为 string、[]byte 等
-
-
-
-返回值:
-
-  - SM3 摘要字节切片(32 字节，转 hex 后长度 64)
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM3 返回字节，需 EncodeToHex 转可读
@@ -6839,51 +4858,36 @@ assert result == "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8
 assert len(result) == 64, "Sm3 hex length should be 64"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCDecrypt {#sm4cbcdecrypt}
 
-`Sm3(raw any) []byte`
+```go
+Sm4CBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | 待计算摘要的数据，可为 string、[]byte 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | SM3 摘要字节切片(32 字节，转 hex 后长度 64) |
-
-
-### Sm4CBCDecrypt
-
-#### 详细描述
 SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-CBC)
@@ -6897,54 +4901,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCDecryptWithPKCSPadding {#sm4cbcdecryptwithpkcspadding}
 
-`Sm4CBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CBCDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CBCDecryptWithPKCSPadding
-
-#### 详细描述
 SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-CBC)
@@ -6958,52 +4944,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCDecryptWithZeroPadding {#sm4cbcdecryptwithzeropadding}
 
-`Sm4CBCDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CBCDecryptWithZeroPadding
-
-#### 详细描述
 SM4DecryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CBCDecryptWithZeroPadding）
 
 与 codec.Sm4CBCEncryptWithZeroPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7014,54 +4982,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CBC zero padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCEncrypt {#sm4cbcencrypt}
 
-`Sm4CBCDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CBCEncrypt
-
-#### 详细描述
 SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-CBC 加解密
@@ -7074,54 +5024,36 @@ println(string(codec.Sm4CBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4CBCDecrypt(key, ct, iv)~) == "Secret Message", "SM4-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCEncryptWithPKCSPadding {#sm4cbcencryptwithpkcspadding}
 
-`Sm4CBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CBCEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CBCEncryptWithPKCSPadding
-
-#### 详细描述
 SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-CBC 加解密
@@ -7134,52 +5066,34 @@ println(string(codec.Sm4CBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4CBCDecrypt(key, ct, iv)~) == "Secret Message", "SM4-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CBCEncryptWithZeroPadding {#sm4cbcencryptwithzeropadding}
 
-`Sm4CBCEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CBCEncryptWithZeroPadding
-
-#### 详细描述
 SM4EncryptCBCWithZeroPadding 使用国密 SM4 算法在 CBC 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CBCEncryptWithZeroPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7190,54 +5104,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CBC zero padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBDecrypt {#sm4cfbdecrypt}
 
-`Sm4CBCEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CFBDecrypt
-
-#### 详细描述
 SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4CFBDecrypt 和 Sm4CFBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-CFB)
@@ -7251,54 +5147,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBDecryptWithPKCSPadding {#sm4cfbdecryptwithpkcspadding}
 
-`Sm4CFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CFBDecryptWithPKCSPadding
-
-#### 详细描述
 SM4DecryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4CFBDecrypt 和 Sm4CFBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-CFB)
@@ -7312,52 +5190,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBDecryptWithZeroPadding {#sm4cfbdecryptwithzeropadding}
 
-`Sm4CFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CFBDecryptWithZeroPadding
-
-#### 详细描述
 SM4DecryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CFBDecryptWithZeroPadding）
 
 与 codec.Sm4CFBEncryptWithZeroPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7368,54 +5228,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CFB zero padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBEncrypt {#sm4cfbencrypt}
 
-`Sm4CFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CFBEncrypt
-
-#### 详细描述
 SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4CFBEncrypt 和 Sm4CFBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-CFB 加解密
@@ -7428,54 +5270,36 @@ println(string(codec.Sm4CFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4CFBDecrypt(key, ct, iv)~) == "Secret Message", "SM4-CFB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBEncryptWithPKCSPadding {#sm4cfbencryptwithpkcspadding}
 
-`Sm4CFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CFBEncryptWithPKCSPadding
-
-#### 详细描述
 SM4EncryptCFBWithPKCSPadding 使用国密 SM4 算法在 CFB 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4CFBEncrypt 和 Sm4CFBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-CFB 加解密
@@ -7488,52 +5312,34 @@ println(string(codec.Sm4CFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4CFBDecrypt(key, ct, iv)~) == "Secret Message", "SM4-CFB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CFBEncryptWithZeroPadding {#sm4cfbencryptwithzeropadding}
 
-`Sm4CFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CFBEncryptWithZeroPadding
-
-#### 详细描述
 SM4EncryptCFBWithZeroPadding 使用国密 SM4 算法在 CFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CFBEncryptWithZeroPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7544,52 +5350,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CFB zero padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTRDecrypt {#sm4ctrdecrypt}
 
-`Sm4CFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTRDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CTRDecrypt
-
-#### 详细描述
 SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding）
 
 与 codec.Sm4CTREncryptWithPKCSPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7600,52 +5388,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR pkcs padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTRDecryptWithPKCSPadding {#sm4ctrdecryptwithpkcspadding}
 
-`Sm4CTRDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTRDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CTRDecryptWithPKCSPadding
-
-#### 详细描述
 SM4DecryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充解密数据（导出名为 codec.Sm4CTRDecrypt / codec.Sm4CTRDecryptWithPKCSPadding）
 
 与 codec.Sm4CTREncryptWithPKCSPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7656,52 +5426,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR pkcs padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTRDecryptWithZeroPadding {#sm4ctrdecryptwithzeropadding}
 
-`Sm4CTRDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTRDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CTRDecryptWithZeroPadding
-
-#### 详细描述
 SM4DecryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4CTRDecryptWithZeroPadding）
 
 与 codec.Sm4CTREncryptWithZeroPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7712,52 +5464,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR zero padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTREncrypt {#sm4ctrencrypt}
 
-`Sm4CTRDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTREncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4CTREncrypt
-
-#### 详细描述
 SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7768,52 +5502,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR pkcs padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTREncryptWithPKCSPadding {#sm4ctrencryptwithpkcspadding}
 
-`Sm4CTREncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTREncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CTREncryptWithPKCSPadding
-
-#### 详细描述
 SM4EncryptCTRWithPKCSPadding 使用国密 SM4 算法在 CTR 模式下用 PKCS7 填充加密数据（导出名为 codec.Sm4CTREncrypt / codec.Sm4CTREncryptWithPKCSPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7824,52 +5540,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR pkcs padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4CTREncryptWithZeroPadding {#sm4ctrencryptwithzeropadding}
 
-`Sm4CTREncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4CTREncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4CTREncryptWithZeroPadding
-
-#### 详细描述
 SM4EncryptCTRWithZeroPadding 使用国密 SM4 算法在 CTR 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4CTREncryptWithZeroPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -7880,54 +5578,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CTR zero padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4Decrypt {#sm4decrypt}
 
-`Sm4CTREncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4Decrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4Decrypt
-
-#### 详细描述
 SM4DecryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Decrypt、Sm4CBCDecrypt 和 Sm4CBCDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-CBC)
@@ -7941,52 +5621,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4EBCDecrypt {#sm4ebcdecrypt}
 
-`Sm4Decrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4EBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4EBCDecrypt
-
-#### 详细描述
 SM4DecryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(为兼容历史拼写错误保留)
 
 Deprecated: 请使用 Sm4ECBDecrypt(EBC 是 ECB 的拼写错误)
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(兼容旧拼写)
@@ -7999,52 +5661,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-EBC(alias) decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4EBCEncrypt {#sm4ebcencrypt}
 
-`Sm4EBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4EBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4EBCEncrypt
-
-#### 详细描述
 SM4EncryptEBCWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(为兼容历史拼写错误保留)
 
 Deprecated: 请使用 Sm4ECBEncrypt(EBC 是 ECB 的拼写错误)
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 兼容旧拼写的 SM4-ECB 加解密
@@ -8056,54 +5700,36 @@ println(string(codec.Sm4EBCDecrypt(key, ct, nil)~))   // OUT: Secret Message
 assert string(codec.Sm4EBCDecrypt(key, ct, nil)~) == "Secret Message", "SM4-EBC(alias) should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBDecrypt {#sm4ecbdecrypt}
 
-`Sm4EBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4ECBDecrypt
-
-#### 详细描述
 SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥为 16 字节。
 
 注意：Sm4ECBDecrypt 和 Sm4ECBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-ECB)
@@ -8116,54 +5742,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBDecryptWithPKCSPadding {#sm4ecbdecryptwithpkcspadding}
 
-`Sm4ECBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4ECBDecryptWithPKCSPadding
-
-#### 详细描述
 SM4DecryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充解密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥为 16 字节。
 
 注意：Sm4ECBDecrypt 和 Sm4ECBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-ECB)
@@ -8176,52 +5784,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBDecryptWithZeroPadding {#sm4ecbdecryptwithzeropadding}
 
-`Sm4ECBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4ECBDecryptWithZeroPadding
-
-#### 详细描述
 SM4DecryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)解密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBDecryptWithZeroPadding）
 
 与 codec.Sm4ECBEncryptWithZeroPadding 配对使用，密钥为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -8231,54 +5821,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-ECB zero padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBEncrypt {#sm4ecbencrypt}
 
-`Sm4ECBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4ECBEncrypt
-
-#### 详细描述
 SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥为 16 字节。
 
 注意：Sm4ECBEncrypt 和 Sm4ECBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-ECB 加解密(iv 传 nil)
@@ -8290,54 +5862,36 @@ println(string(codec.Sm4ECBDecrypt(key, ct, nil)~))   // OUT: Secret Message
 assert string(codec.Sm4ECBDecrypt(key, ct, nil)~) == "Secret Message", "SM4-ECB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBEncryptWithPKCSPadding {#sm4ecbencryptwithpkcspadding}
 
-`Sm4ECBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4ECBEncryptWithPKCSPadding
-
-#### 详细描述
 SM4EncryptECBWithPKCSPadding 使用国密 SM4 算法在 ECB 模式下用 PKCS7 填充加密数据(ECB 模式下 iv 无用，传 nil)
 
 密钥为 16 字节。
 
 注意：Sm4ECBEncrypt 和 Sm4ECBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-ECB 加解密(iv 传 nil)
@@ -8349,52 +5903,34 @@ println(string(codec.Sm4ECBDecrypt(key, ct, nil)~))   // OUT: Secret Message
 assert string(codec.Sm4ECBDecrypt(key, ct, nil)~) == "Secret Message", "SM4-ECB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4ECBEncryptWithZeroPadding {#sm4ecbencryptwithzeropadding}
 
-`Sm4ECBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4ECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4ECBEncryptWithZeroPadding
-
-#### 详细描述
 SM4EncryptECBWithZeroPadding 使用国密 SM4 算法在 ECB 模式下用零填充(ZeroPadding)加密数据(ECB 模式下 iv 无用，传 nil)（导出名为 codec.Sm4ECBEncryptWithZeroPadding）
 
 密钥为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: ECB 模式下无用，传 nil 即可
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -8404,54 +5940,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-ECB zero padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4Encrypt {#sm4encrypt}
 
-`Sm4ECBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4Encrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | ECB 模式下无用，传 nil 即可 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4Encrypt
-
-#### 详细描述
 SM4EncryptCBCWithPKCSPadding 使用国密 SM4 算法在 CBC 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4Encrypt、Sm4CBCEncrypt 和 Sm4CBCEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-CBC 加解密
@@ -8464,52 +5982,34 @@ println(string(codec.Sm4CBCDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4CBCDecrypt(key, ct, iv)~) == "Secret Message", "SM4-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4GCMDecrypt {#sm4gcmdecrypt}
 
-`Sm4Encrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4GCMDecrypt(key []byte, data any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4GCMDecrypt
-
-#### 详细描述
 SM4GCMDec 使用国密 SM4 算法在 GCM 模式下解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| data | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - data: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密或认证失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密或认证失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-GCM)
@@ -8523,52 +6023,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-GCM decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4GCMEncrypt {#sm4gcmencrypt}
 
-`Sm4GCMDecrypt(key []byte, data any, iv []byte) ([]byte, error)`
+```go
+Sm4GCMEncrypt(key []byte, data any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| data | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密或认证失败时返回的错误 |
-
-
-### Sm4GCMEncrypt
-
-#### 详细描述
 SM4GCMEnc 使用国密 SM4 算法在 GCM 模式下加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| data | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - data: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-GCM 加解密
@@ -8581,54 +6063,36 @@ println(string(codec.Sm4GCMDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4GCMDecrypt(key, ct, iv)~) == "Secret Message", "SM4-GCM should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBDecrypt {#sm4ofbdecrypt}
 
-`Sm4GCMEncrypt(key []byte, data any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| data | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4OFBDecrypt
-
-#### 详细描述
 SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4OFBDecrypt 和 Sm4OFBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-OFB)
@@ -8642,54 +6106,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-OFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBDecryptWithPKCSPadding {#sm4ofbdecryptwithpkcspadding}
 
-`Sm4OFBDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4OFBDecryptWithPKCSPadding
-
-#### 详细描述
 SM4DecryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充解密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4OFBDecrypt 和 Sm4OFBDecryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(SM4-OFB)
@@ -8703,52 +6149,34 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-OFB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBDecryptWithZeroPadding {#sm4ofbdecryptwithzeropadding}
 
-`Sm4OFBDecryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4OFBDecryptWithZeroPadding
-
-#### 详细描述
 SM4DecryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)解密数据（导出名为 codec.Sm4OFBDecryptWithZeroPadding）
 
 与 codec.Sm4OFBEncryptWithZeroPadding 配对使用，密钥与 IV 均为 16 字节。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -8759,54 +6187,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-OFB zero padding decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBEncrypt {#sm4ofbencrypt}
 
-`Sm4OFBDecryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### Sm4OFBEncrypt
-
-#### 详细描述
 SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4OFBEncrypt 和 Sm4OFBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-OFB 加解密
@@ -8819,54 +6229,36 @@ println(string(codec.Sm4OFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4OFBDecrypt(key, ct, iv)~) == "Secret Message", "SM4-OFB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBEncryptWithPKCSPadding {#sm4ofbencryptwithpkcspadding}
 
-`Sm4OFBEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4OFBEncryptWithPKCSPadding
-
-#### 详细描述
 SM4EncryptOFBWithPKCSPadding 使用国密 SM4 算法在 OFB 模式下用 PKCS7 填充加密数据
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
 注意：Sm4OFBEncrypt 和 Sm4OFBEncryptWithPKCSPadding 是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: SM4-OFB 加解密
@@ -8879,52 +6271,34 @@ println(string(codec.Sm4OFBDecrypt(key, ct, iv)~))   // OUT: Secret Message
 assert string(codec.Sm4OFBDecrypt(key, ct, iv)~) == "Secret Message", "SM4-OFB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Sm4OFBEncryptWithZeroPadding {#sm4ofbencryptwithzeropadding}
 
-`Sm4OFBEncryptWithPKCSPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+Sm4OFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### Sm4OFBEncryptWithZeroPadding
-
-#### 详细描述
 SM4EncryptOFBWithZeroPadding 使用国密 SM4 算法在 OFB 模式下用零填充(ZeroPadding)加密数据（导出名为 codec.Sm4OFBEncryptWithZeroPadding）
 
 密钥与 IV 均为 16 字节；IV 为空时使用 key 前 16 字节作为 IV。
 
-参数:
+**参数**
 
-  - key: 密钥(16 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(16 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(16 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 key = "1234567890123456"
@@ -8935,48 +6309,31 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "SM4-OFB zero padding should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### StrconvQuote {#strconvquote}
 
-`Sm4OFBEncryptWithZeroPadding(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+StrconvQuote(s string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(16 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(16 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### StrconvQuote
-
-#### 详细描述
-StrConvQuote 将字符串转换为带双引号的 Go 字面量形式，特殊字符转义为 \n \t \xNN 等（导出名为 codec.StrconvQuote）
+将字符串转换为带双引号的 Go 字面量形式，特殊字符转义为 \n \t \xNN 等（导出名为 codec.StrconvQuote）
 
 与 codec.StrconvUnquote 配对使用
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待转换的字符串 |
 
-参数:
+**返回值**
 
-  - s: 待转换的字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 带双引号、特殊字符已转义的字面量字符串 |
 
-
-
-返回值:
-
-  - 带双引号、特殊字符已转义的字面量字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.StrconvQuote("a\nb")
@@ -8984,47 +6341,32 @@ println(result)   // OUT: "a\nb"
 assert result == "\"a\\nb\"", "StrconvQuote should quote string and escape newline"
 ``````````````
 
+---
 
-#### 定义
+### StrconvUnquote {#strconvunquote}
 
-`StrconvQuote(s string) string`
+```go
+StrconvUnquote(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待转换的字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 带双引号、特殊字符已转义的字面量字符串 |
-
-
-### StrconvUnquote
-
-#### 详细描述
-StrConvUnquote 解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII）
+解析带引号的 Go 字面量字符串，去掉外层引号并处理转义序列（导出名为 codec.StrconvUnquote / codec.DecodeASCII）
 
 与 codec.StrconvQuote 配对使用，输入必须是带双引号包裹的字符串
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34; |
 
-参数:
+**返回值**
 
-  - s: 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34;
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 去引号并解转义后的字符串 |
+| r2 | `error` | 错误信息（输入不是合法的带引号字面量时返回） |
 
-
-
-返回值:
-
-  - 去引号并解转义后的字符串
-
-  - 错误信息（输入不是合法的带引号字面量时返回）
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 result = codec.StrconvUnquote("\"a\\nb\"")~
@@ -9032,52 +6374,36 @@ println(len(result))   // OUT: 3
 assert result == "a\nb", "StrconvUnquote should unquote and unescape \\n"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESCBCDecrypt {#tripledescbcdecrypt}
 
-`StrconvUnquote(s string) (string, error)`
+```go
+TripleDESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 带引号的字符串字面量，如 &#34;\&#34;hi\&#34;&#34; |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 去引号并解转义后的字符串 |
-| r2 | `error` | 错误信息（输入不是合法的带引号字面量时返回） |
-
-
-### TripleDESCBCDecrypt
-
-#### 详细描述
 TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据
 
 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：TripleDESCBCDecrypt、TripleDESDecrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(3DES-CBC)
@@ -9091,54 +6417,36 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "3DES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESCBCEncrypt {#tripledescbcencrypt}
 
-`TripleDESCBCDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+TripleDESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### TripleDESCBCEncrypt
-
-#### 详细描述
 TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据
 
 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥。
 
 注意：TripleDESCBCEncrypt、TripleDESEncrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 3DES-CBC 加解密(24 字节密钥，8 字节 IV)
@@ -9151,54 +6459,36 @@ println(string(codec.TripleDESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Messag
 assert string(codec.TripleDESCBCDecrypt(key, ct, iv)~) == "Secret Message", "3DES-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESDecrypt {#tripledesdecrypt}
 
-`TripleDESCBCEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+TripleDESDecrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### TripleDESDecrypt
-
-#### 详细描述
 TripleDESDecryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充解密数据
 
 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥或零填充到 8 字节。
 
 注意：TripleDESCBCDecrypt、TripleDESDecrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| i | `any` | 待解密的密文，可为 []byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待解密的密文，可为 []byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(3DES-CBC)
@@ -9212,50 +6502,33 @@ println(string(pt))   // OUT: Secret Message
 assert string(pt) == "Secret Message", "3DES-CBC decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESECBDecrypt {#tripledesecbdecrypt}
 
-`TripleDESDecrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+TripleDESECBDecrypt(key []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| i | `any` | 待解密的密文，可为 []byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### TripleDESECBDecrypt
-
-#### 详细描述
 TripleDES_ECBDec 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充解密数据(ECB 模式下无 iv 参数)
 
 密钥长度必须是 24 字节(即 3 * 8 字节)。
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| data | `[]byte` | 待解密的密文字节 |
 
-  - data: 待解密的密文字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
+| r2 | `error` | 解密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 解密还原后的明文字节
-
-  - error: 解密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先加密再解密(3DES-ECB)
@@ -9268,49 +6541,33 @@ println(string(codec.ZeroUnPadding(pt)))   // OUT: Secret Message
 assert string(codec.ZeroUnPadding(pt)) == "Secret Message", "3DES-ECB decrypt should recover plaintext"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESECBEncrypt {#tripledesecbencrypt}
 
-`TripleDESECBDecrypt(key []byte, data []byte) ([]byte, error)`
+```go
+TripleDESECBEncrypt(key []byte, data []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| data | `[]byte` | 待解密的密文字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 解密还原后的明文字节 |
-| r2 | `error` | 解密失败时返回的错误 |
-
-
-### TripleDESECBEncrypt
-
-#### 详细描述
 TripleDES_ECBEnc 使用 3DES(Triple DES) 算法在 ECB 模式下用零填充加密数据(ECB 模式下无 iv 参数)
 
 密钥长度必须是 24 字节(即 3 * 8 字节)。
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| data | `[]byte` | 待加密的数据字节 |
 
-  - data: 待加密的数据字节
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 3DES-ECB 加解密(24 字节密钥)
@@ -9322,53 +6579,36 @@ println(string(codec.ZeroUnPadding(codec.TripleDESECBDecrypt(key, ct)~)))   // O
 assert string(codec.ZeroUnPadding(codec.TripleDESECBDecrypt(key, ct)~)) == "Secret Message", "3DES-ECB should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### TripleDESEncrypt {#tripledesencrypt}
 
-`TripleDESECBEncrypt(key []byte, data []byte) ([]byte, error)`
+```go
+TripleDESEncrypt(key []byte, i any, iv []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| data | `[]byte` | 待加密的数据字节 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
-
-
-### TripleDESEncrypt
-
-#### 详细描述
 TripleDESEncryptCBCWithZeroPadding 使用 3DES(Triple DES) 算法在 CBC 模式下用零填充加密数据
 
 密钥长度必须是 24 字节(即 3 * 8 字节)，iv 可为 nil 或 8 字节；iv 为 nil 时固定为密钥。
 
 注意：TripleDESCBCEncrypt、TripleDESEncrypt 和本函数是同一个函数的别名
 
-参数:
+**参数**
 
-  - key: 密钥(24 字节)
+|参数名|类型|说明|
+|:--|:--|:--|
+| key | `[]byte` | 密钥(24 字节) |
+| i | `any` | 待加密的数据，可为 string、[]byte 等 |
+| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
 
-  - i: 待加密的数据，可为 string、[]byte 等
+**返回值**
 
-  - iv: 初始化向量(8 字节)，可为 nil
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 加密后的密文字节 |
+| r2 | `error` | 加密失败时返回的错误 |
 
-
-
-返回值:
-
-  - []byte: 加密后的密文字节
-
-  - error: 加密失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 3DES-CBC 加解密(24 字节密钥，8 字节 IV)
@@ -9381,46 +6621,30 @@ println(string(codec.TripleDESCBCDecrypt(key, ct, iv)~))   // OUT: Secret Messag
 assert string(codec.TripleDESCBCDecrypt(key, ct, iv)~) == "Secret Message", "3DES-CBC should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### UTF8ToGB18030 {#utf8togb18030}
 
-`TripleDESEncrypt(key []byte, i any, iv []byte) ([]byte, error)`
+```go
+UTF8ToGB18030(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| key | `[]byte` | 密钥(24 字节) |
-| i | `any` | 待加密的数据，可为 string、[]byte 等 |
-| iv | `[]byte` | 初始化向量(8 字节)，可为 nil |
+将 UTF-8 编码的字节转换为 GB18030 编码的字节
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 加密后的密文字节 |
-| r2 | `error` | 加密失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | UTF-8 编码的字节数据 |
 
-### UTF8ToGB18030
+**返回值**
 
-#### 详细描述
-Utf8ToGB18030 将 UTF-8 编码的字节转换为 GB18030 编码的字节
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 GB18030 字节 |
+| r2 | `error` | 转换失败时返回的错误 |
 
-参数:
-
-  - s: UTF-8 编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 GB18030 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: UTF-8 转 GB18030 再转回 UTF-8，波浪号自动解包 error
@@ -9432,44 +6656,30 @@ println(string(result))   // OUT: 中文
 assert string(result) == "中文", "UTF8/GB18030 should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### UTF8ToGBK {#utf8togbk}
 
-`UTF8ToGB18030(s []byte) ([]byte, error)`
+```go
+UTF8ToGBK(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+将 UTF-8 编码的字节转换为 GBK 编码的字节
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | s | `[]byte` | UTF-8 编码的字节数据 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 GB18030 字节 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 GBK 字节 |
 | r2 | `error` | 转换失败时返回的错误 |
 
-
-### UTF8ToGBK
-
-#### 详细描述
-Utf8ToGbk 将 UTF-8 编码的字节转换为 GBK 编码的字节
-
-参数:
-
-  - s: UTF-8 编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 GBK 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: UTF-8 转 GBK 再转回 UTF-8，波浪号自动解包 error
@@ -9481,44 +6691,30 @@ println(string(result))   // OUT: 中文
 assert string(result) == "中文", "UTF8/GBK should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### UTF8ToHZGB2312 {#utf8tohzgb2312}
 
-`UTF8ToGBK(s []byte) ([]byte, error)`
+```go
+UTF8ToHZGB2312(s []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+将 UTF-8 编码的字节转换为 HZ-GB2312 编码的字节
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | s | `[]byte` | UTF-8 编码的字节数据 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 GBK 字节 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | []byte: 转换后的 HZ-GB2312 字节 |
 | r2 | `error` | 转换失败时返回的错误 |
 
-
-### UTF8ToHZGB2312
-
-#### 详细描述
-Utf8ToHZGB2312 将 UTF-8 编码的字节转换为 HZ-GB2312 编码的字节
-
-参数:
-
-  - s: UTF-8 编码的字节数据
-
-
-
-返回值:
-
-  - []byte: 转换后的 HZ-GB2312 字节
-
-  - error: 转换失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: UTF-8 转 HZ-GB2312，结果非空
@@ -9529,44 +6725,30 @@ println(len(result) > 0)   // OUT: true
 assert len(result) > 0, "UTF8ToHZGB2312 should produce bytes"
 ``````````````
 
+---
 
-#### 定义
+### UnescapePathUrl {#unescapepathurl}
 
-`UTF8ToHZGB2312(s []byte) ([]byte, error)`
+```go
+UnescapePathUrl(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | UTF-8 编码的字节数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | []byte: 转换后的 HZ-GB2312 字节 |
-| r2 | `error` | 转换失败时返回的错误 |
-
-
-### UnescapePathUrl
-
-#### 详细描述
 PathUnescape 对 URL 路径转义的字符串做解码，同时兼容 %uXXXX 形式
 
-参数:
+**参数**
 
-  - s: 待解码的 URL 路径转义字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待解码的 URL 路径转义字符串 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 解码后的字符串 |
+| r2 | `error` | 解码失败时返回的错误 |
 
-返回值:
-
-  - string: 解码后的字符串
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 路径解码，波浪号自动解包 error
@@ -9577,44 +6759,30 @@ println(result)   // OUT: a b
 assert string(codec.UnescapePathUrl(codec.EscapePathUrl("/api/info"))~) == "/api/info", "path escape/unescape should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### UnescapeQueryUrl {#unescapequeryurl}
 
-`UnescapePathUrl(s string) (string, error)`
+```go
+UnescapeQueryUrl(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待解码的 URL 路径转义字符串 |
+QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 待解码的 URL 编码字符串 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `string` | 解码后的字符串 |
 | r2 | `error` | 解码失败时返回的错误 |
 
-
-### UnescapeQueryUrl
-
-#### 详细描述
-QueryUnescape 对 URL 百分号编码的字符串做查询串解码，同时兼容 %uXXXX 形式
-
-参数:
-
-  - s: 待解码的 URL 编码字符串
-
-
-
-返回值:
-
-  - string: 解码后的字符串
-
-  - error: 解码失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: URL 解码，波浪号自动解包 error
@@ -9625,46 +6793,32 @@ println(result)   // OUT: a b
 assert result == "a b", "DecodeUrl should decode percent-encoding"
 ``````````````
 
+---
 
-#### 定义
+### UnescapeString {#unescapestring}
 
-`UnescapeQueryUrl(s string) (string, error)`
+```go
+UnescapeString(s string) (string, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 待解码的 URL 编码字符串 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 解码后的字符串 |
-| r2 | `error` | 解码失败时返回的错误 |
-
-
-### UnescapeString
-
-#### 详细描述
-UnescapeString 处理字符串中的转义字符，无需外层引号
+处理字符串中的转义字符，无需外层引号
 
 支持 \&#34; \\ \n \r \t \xNN \uNNNN \UNNNNNNNN 等转义序列；与 codec.StrconvUnquote 不同，本函数不要求输入带引号包裹
 
-参数:
+**参数**
 
-  - s: 含转义序列的字符串(无需外层引号)
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` | 含转义序列的字符串(无需外层引号) |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 解转义后的字符串 |
+| r2 | `error` | 解析失败时返回的错误 |
 
-返回值:
-
-  - string: 解转义后的字符串
-
-  - error: 解析失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 解转义，波浪号自动解包 error
@@ -9675,42 +6829,29 @@ println(len(result))   // OUT: 3
 assert result == "a\nb", "UnescapeString should unescape \\n to newline"
 ``````````````
 
+---
 
-#### 定义
+### UnicodeDecode {#unicodedecode}
 
-`UnescapeString(s string) (string, error)`
+```go
+UnicodeDecode(i string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `string` | 含转义序列的字符串(无需外层引号) |
+将 \uXXXX / \UXXXXXXXX 形式的 Unicode 转义序列解码为原始字符串
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 解转义后的字符串 |
-| r2 | `error` | 解析失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 含 Unicode 转义序列的字符串 |
 
-### UnicodeDecode
+**返回值**
 
-#### 详细描述
-JsonUnicodeDecode 将 \uXXXX / \UXXXXXXXX 形式的 Unicode 转义序列解码为原始字符串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 解码后的原始字符串 |
 
-参数:
-
-  - i: 含 Unicode 转义序列的字符串
-
-
-
-返回值:
-
-  - 解码后的原始字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 解码 \uXXXX 转义序列
@@ -9721,41 +6862,29 @@ println(result)   // OUT: abc
 assert result == "abc", "UnicodeDecode should decode escape sequences"
 ``````````````
 
+---
 
-#### 定义
+### UnicodeEncode {#unicodeencode}
 
-`UnicodeDecode(i string) string`
+```go
+UnicodeEncode(i string) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 含 Unicode 转义序列的字符串 |
+将字符串的每个字符编码为 \uXXXX 形式的 Unicode 转义序列
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 解码后的原始字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `string` | 待编码的字符串 |
 
-### UnicodeEncode
+**返回值**
 
-#### 详细描述
-JsonUnicodeEncode 将字符串的每个字符编码为 \uXXXX 形式的 Unicode 转义序列
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | \uXXXX 形式的 Unicode 转义字符串 |
 
-参数:
-
-  - i: 待编码的字符串
-
-
-
-返回值:
-
-  - \uXXXX 形式的 Unicode 转义字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把字符串编码为 \uXXXX
@@ -9766,43 +6895,30 @@ println(result)   // OUT: \u0061\u0062\u0063
 assert codec.UnicodeDecode(result) == "abc", "unicode encode/decode should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### ZeroPadding {#zeropadding}
 
-`UnicodeEncode(i string) string`
+```go
+ZeroPadding(origin []byte, blockSize int) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `string` | 待编码的字符串 |
+对数据按指定块大小做零字节(0x00)填充，使其长度补齐到块大小的整数倍
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | \uXXXX 形式的 Unicode 转义字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| origin | `[]byte` | 待填充的原始数据 |
+| blockSize | `int` | 块大小(字节)，如 8 或 16 |
 
-### ZeroPadding
+**返回值**
 
-#### 详细描述
-ZeroPadding 对数据按指定块大小做零字节(0x00)填充，使其长度补齐到块大小的整数倍
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 填充后的字节切片 |
 
-参数:
-
-  - origin: 待填充的原始数据
-
-  - blockSize: 块大小(字节)，如 8 或 16
-
-
-
-返回值:
-
-  - 填充后的字节切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把数据零填充到 16 字节块
@@ -9814,42 +6930,29 @@ assert len(result) == 16, "ZeroPadding should pad to block size"
 assert string(codec.ZeroUnPadding(result)) == "Test Data", "Zero pad/unpad should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### ZeroUnPadding {#zerounpadding}
 
-`ZeroPadding(origin []byte, blockSize int) []byte`
+```go
+ZeroUnPadding(originData []byte) []byte
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| origin | `[]byte` | 待填充的原始数据 |
-| blockSize | `int` | 块大小(字节)，如 8 或 16 |
+去除数据末尾的零字节(0x00)填充，返回原始数据
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 填充后的字节切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| originData | `[]byte` | 带零填充的数据 |
 
-### ZeroUnPadding
+**返回值**
 
-#### 详细描述
-ZeroUnPadding 去除数据末尾的零字节(0x00)填充，返回原始数据
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 去除零填充后的字节切片 |
 
-参数:
-
-  - originData: 带零填充的数据
-
-
-
-返回值:
-
-  - 去除零填充后的字节切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 先零填充再去填充
@@ -9861,19 +6964,5 @@ println(string(result))   // OUT: Test Data
 assert string(result) == "Test Data", "ZeroUnPadding should remove zero padding"
 ``````````````
 
-
-#### 定义
-
-`ZeroUnPadding(originData []byte) []byte`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| originData | `[]byte` | 带零填充的数据 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 去除零填充后的字节切片 |
-
+---
 

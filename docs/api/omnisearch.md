@@ -1,45 +1,52 @@
-# omnisearch
+# omnisearch {#library-omnisearch}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [omnisearch.Search](#search) |Search 使用聚合搜索引擎执行一次综合搜索（默认走 aibalance 聚合层） 依赖外部搜索服务与 API Key，需要网络环境 参数: - query: 搜索关键词 - options: 搜索可选项，如 omnisearch.apikey / omnisearch.type / omnise...|
-| [omnisearch.apikey](#apikey) |omnisearchAPIKey 为本次搜索设置一个或多个 API Key（导出名为 omnisearch.apikey） 作为 omnisearch.Search 的可选项；真实联网搜索时用于鉴权，可一次传入多个 key 做轮询 参数: - keys: 一个或多个 API Key 返回值: - 可...|
-| [omnisearch.backendType](#backendtype) |omnisearchBackendType 指定聚合层后端使用的实际搜索器类型（导出名为 omnisearch.backendType） 作为 omnisearch.Search 的可选项，用于让 aibalance 等聚合后端选择具体的下游搜索引擎 参数: - backendType: 后端搜索器...|
-| [omnisearch.baseurl](#baseurl) |WithBaseURL 设置搜索服务的基础 URL（导出名为 omnisearch.baseurl） 参数: - baseURL: 搜索后端服务地址 返回值: - 搜索可选项|
-| [omnisearch.customSearcher](#customsearcher) |omnisearchCustomSearcher 注册一个自定义搜索器，使 omnisearch.Search 调用本地处理函数（导出名为 omnisearch.customSearcher） 配合 omnisearch.type(同名) 使用，可在不依赖外部搜索服务的情况下完成搜索 参数: - n...|
-| [omnisearch.page](#page) |WithPage 设置搜索结果页码（导出名为 omnisearch.page） 参数: - page: 页码，从 1 开始 返回值: - 搜索可选项|
-| [omnisearch.pagesize](#pagesize) |WithPageSize 设置每页结果数量（导出名为 omnisearch.pagesize） 参数: - pageSize: 每页结果数量 返回值: - 搜索可选项|
-| [omnisearch.proxy](#proxy) |WithProxy 设置搜索请求代理（导出名为 omnisearch.proxy） 参数: - proxy: 代理地址，如 http&#58;//127.0.0.1:7890 返回值: - 搜索可选项|
-| [omnisearch.timeout](#timeout) |WithTimeout 设置搜索超时时间（导出名为 omnisearch.timeout） 参数: - timeout: 超时时间 返回值: - 搜索可选项|
-| [omnisearch.type](#type) |omnisearchType 指定本次搜索使用的搜索器类型（导出名为 omnisearch.type） 作为 omnisearch.Search 的可选项使用；配合 omnisearch.customSearcher 可将搜索路由到自定义搜索器 参数: - name: 搜索器类型名称 返回值: - ...|
+`omnisearch` 库提供统一的搜索接口，对接多种搜索后端（搜索引擎/网络空间测绘/自定义源），用一套 API 完成跨源检索，常用于情报收集与资产发现。
 
+典型使用场景：
 
-## 函数定义
-### Search
+- 统一检索：`omnisearch.Search(query, opts...)` 执行搜索并返回结果集。
+- 后端与参数：`omnisearch.backendType` / `omnisearch.type` 选择后端，`omnisearch.apikey` / `omnisearch.baseurl` / `omnisearch.proxy` 配置访问，`omnisearch.page` / `omnisearch.pagesize` / `omnisearch.timeout` 控制分页与超时，`omnisearch.customSearcher` 注册自定义搜索源。
 
-#### 详细描述
-Search 使用聚合搜索引擎执行一次综合搜索（默认走 aibalance 聚合层）
+与相邻库的关系：`omnisearch` 是情报检索聚合层，常作为 AI 工具（`aiagent`/`aim` 的搜索能力）或资产发现流程的输入端，与 `spacengine`（网络空间测绘）思路相通。
+
+> 共 10 个函数
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [omnisearch.Search](#search) | `query string, options ...ostype.SearchOption` | `[]*ostype.OmniSearchResult, error` | 使用聚合搜索引擎执行一次综合搜索（默认走 aibalance 聚合层） |
+
+## 可变参数函数详情
+
+### Search {#search}
+
+```go
+Search(query string, options ...ostype.SearchOption) ([]*ostype.OmniSearchResult, error)
+```
+
+使用聚合搜索引擎执行一次综合搜索（默认走 aibalance 聚合层）
 
 依赖外部搜索服务与 API Key，需要网络环境
 
-参数:
+**必填参数**
 
-  - query: 搜索关键词
+|参数名|类型|说明|
+|:--|:--|:--|
+| query | `string` | 搜索关键词 |
 
-  - options: 搜索可选项，如 omnisearch.apikey / omnisearch.type / omnisearch.page 等
+**可选参数**
 
+可作为可变参数 `options ...ostype.SearchOption` 传入选项；共 9 个可用选项，详见 [SearchOption 选项列表](#option-searchoption)。
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ostype.OmniSearchResult` | 搜索结果列表，每个结果包含内容与来源 |
+| r2 | `error` | 错误信息 |
 
-  - 搜索结果列表，每个结果包含内容与来源
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要有效的 apikey 与网络
@@ -50,433 +57,25 @@ results = omnisearch.Search("yaklang", omnisearch.apikey("your-api-key"))~
 	}
 ``````````````
 
-
-#### 定义
-
-`Search(query string, options ...ostype.SearchOption) ([]*ostype.OmniSearchResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| query | `string` | 搜索关键词 |
-| options | `...ostype.SearchOption` | 搜索可选项，如 omnisearch.apikey / omnisearch.type / omnisearch.page 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ostype.OmniSearchResult` | 搜索结果列表，每个结果包含内容与来源 |
-| r2 | `error` | 错误信息 |
-
-
-### apikey
-
-#### 详细描述
-omnisearchAPIKey 为本次搜索设置一个或多个 API Key（导出名为 omnisearch.apikey）
-
-作为 omnisearch.Search 的可选项；真实联网搜索时用于鉴权，可一次传入多个 key 做轮询
-
-
-
-参数:
-
-  - keys: 一个或多个 API Key
-
-
-
-返回值:
-
-  - 可传入 omnisearch.Search 的搜索选项
-
-
-
-
-Example:
-
-``````````````yak
-// 此处用自定义搜索器离线演示 apikey 选项被正确接收并传入 Search
-results = omnisearch.Search(
-    "yaklang",
-    omnisearch.type("mylocal"),
-    omnisearch.apikey("demo-key-1", "demo-key-2"),
-    omnisearch.customSearcher("mylocal", (query, cfg) => { return ["ok"], nil }),
-)~
-println(len(results))   // OUT: 1
-assert len(results) == 1, "apikey option should be accepted by Search"
-``````````````
-
-
-#### 定义
-
-`apikey(keys ...string) ostype.SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| keys | `...string` | 一个或多个 API Key |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ostype.SearchOption` | 可传入 omnisearch.Search 的搜索选项 |
-
-
-### backendType
-
-#### 详细描述
-omnisearchBackendType 指定聚合层后端使用的实际搜索器类型（导出名为 omnisearch.backendType）
-
-作为 omnisearch.Search 的可选项，用于让 aibalance 等聚合后端选择具体的下游搜索引擎
-
-
-
-参数:
-
-  - backendType: 后端搜索器类型名称
-
-
-
-返回值:
-
-  - 可传入 omnisearch.Search 的搜索选项
-
-
-
-
-Example:
-
-``````````````yak
-// 此处用自定义搜索器离线演示 backendType 选项被正确接收并传入 Search
-results = omnisearch.Search(
-    "yaklang",
-    omnisearch.type("mylocal"),
-    omnisearch.backendType("custom"),
-    omnisearch.customSearcher("mylocal", (query, cfg) => { return ["ok"], nil }),
-)~
-println(len(results))   // OUT: 1
-assert len(results) == 1, "backendType option should be accepted by Search"
-``````````````
-
-
-#### 定义
-
-`backendType(backendType string) ostype.SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| backendType | `string` | 后端搜索器类型名称 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ostype.SearchOption` | 可传入 omnisearch.Search 的搜索选项 |
-
-
-### baseurl
-
-#### 详细描述
-WithBaseURL 设置搜索服务的基础 URL（导出名为 omnisearch.baseurl）
-
-参数:
-
-  - baseURL: 搜索后端服务地址
-
-
-
-返回值:
-
-  - 搜索可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要有效的搜索后端
-results = omnisearch.Search("yaklang", omnisearch.baseurl("https://api.example.com"))~
-``````````````
-
-
-#### 定义
-
-`baseurl(baseURL string) SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| baseURL | `string` | 搜索后端服务地址 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `SearchOption` | 搜索可选项 |
-
-
-### customSearcher
-
-#### 详细描述
-omnisearchCustomSearcher 注册一个自定义搜索器，使 omnisearch.Search 调用本地处理函数（导出名为 omnisearch.customSearcher）
-
-配合 omnisearch.type(同名) 使用，可在不依赖外部搜索服务的情况下完成搜索
-
-
-
-参数:
-
-  - name: 自定义搜索器名称，需与 omnisearch.type 指定的类型名一致
-
-  - handle: 处理函数，接收查询串与搜索配置，返回结果与错误
-
-
-
-返回值:
-
-  - 可传入 omnisearch.Search 的搜索选项
-
-
-
-
-Example:
-
-``````````````yak
-results = omnisearch.Search(
-    "yaklang",
-    omnisearch.type("mylocal"),
-    omnisearch.customSearcher("mylocal", (query, cfg) => { return [f"hit-for-${query}"], nil }),
-)~
-println(results[0].Source)   // OUT: mylocal
-assert results[0].Source == "mylocal", "customSearcher should produce results tagged with its name"
-``````````````
-
-
-#### 定义
-
-`customSearcher(name string, handle CustomSearcherHandle) ostype.SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| name | `string` | 自定义搜索器名称，需与 omnisearch.type 指定的类型名一致 |
-| handle | `CustomSearcherHandle` | 处理函数，接收查询串与搜索配置，返回结果与错误 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ostype.SearchOption` | 可传入 omnisearch.Search 的搜索选项 |
-
-
-### page
-
-#### 详细描述
-WithPage 设置搜索结果页码（导出名为 omnisearch.page）
-
-参数:
-
-  - page: 页码，从 1 开始
-
-
-
-返回值:
-
-  - 搜索可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要有效的 apikey 与网络
-results = omnisearch.Search("yaklang", omnisearch.page(2))~
-``````````````
-
-
-#### 定义
-
-`page(page int) SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| page | `int` | 页码，从 1 开始 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `SearchOption` | 搜索可选项 |
-
-
-### pagesize
-
-#### 详细描述
-WithPageSize 设置每页结果数量（导出名为 omnisearch.pagesize）
-
-参数:
-
-  - pageSize: 每页结果数量
-
-
-
-返回值:
-
-  - 搜索可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要有效的 apikey 与网络
-results = omnisearch.Search("yaklang", omnisearch.pagesize(20))~
-``````````````
-
-
-#### 定义
-
-`pagesize(pageSize int) SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| pageSize | `int` | 每页结果数量 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `SearchOption` | 搜索可选项 |
-
-
-### proxy
-
-#### 详细描述
-WithProxy 设置搜索请求代理（导出名为 omnisearch.proxy）
-
-参数:
-
-  - proxy: 代理地址，如 http&#58;//127.0.0.1:7890
-
-
-
-返回值:
-
-  - 搜索可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要有效的 apikey 与网络
-results = omnisearch.Search("yaklang", omnisearch.proxy("http://127.0.0.1:7890"))~
-``````````````
-
-
-#### 定义
-
-`proxy(proxy string) SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:7890 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `SearchOption` | 搜索可选项 |
-
-
-### timeout
-
-#### 详细描述
-WithTimeout 设置搜索超时时间（导出名为 omnisearch.timeout）
-
-参数:
-
-  - timeout: 超时时间
-
-
-
-返回值:
-
-  - 搜索可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要有效的 apikey 与网络
-results = omnisearch.Search("yaklang", omnisearch.timeout(10))~
-``````````````
-
-
-#### 定义
-
-`timeout(timeout time.Duration) SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| timeout | `time.Duration` | 超时时间 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `SearchOption` | 搜索可选项 |
-
-
-### type
-
-#### 详细描述
-omnisearchType 指定本次搜索使用的搜索器类型（导出名为 omnisearch.type）
-
-作为 omnisearch.Search 的可选项使用；配合 omnisearch.customSearcher 可将搜索路由到自定义搜索器
-
-
-
-参数:
-
-  - name: 搜索器类型名称
-
-
-
-返回值:
-
-  - 可传入 omnisearch.Search 的搜索选项
-
-
-
-
-Example:
-
-``````````````yak
-results = omnisearch.Search(
-    "yaklang",
-    omnisearch.type("mylocal"),
-    omnisearch.customSearcher("mylocal", (query, cfg) => { return [f"hit-for-${query}"], nil }),
-)~
-println(len(results))   // OUT: 1
-assert results[0].Content == "hit-for-yaklang", "type option should route to the local searcher"
-``````````````
-
-
-#### 定义
-
-`type(name string) ostype.SearchOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| name | `string` | 搜索器类型名称 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ostype.SearchOption` | 可传入 omnisearch.Search 的搜索选项 |
-
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：SearchOption {#option-searchoption}
+
+涉及到的函数有：[omnisearch.Search](#search)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `omnisearch.apikey` | `keys ...string` | `ostype.SearchOption` | omnisearchAPIKey 为本次搜索设置一个或多个 API Key |
+| `omnisearch.backendType` | `backendType string` | `ostype.SearchOption` | omnisearchBackendType 指定聚合层后端使用的实际搜索器类型 |
+| `omnisearch.baseurl` | `baseURL string` | `SearchOption` | WithBaseURL 设置搜索服务的基础 URL |
+| `omnisearch.customSearcher` | `name string, handle CustomSearcherHandle` | `ostype.SearchOption` | omnisearchCustomSearcher 注册一个自定义搜索器，使 omnisearch.Search 调用本地处理函数 |
+| `omnisearch.page` | `page int` | `SearchOption` | WithPage 设置搜索结果页码 |
+| `omnisearch.pagesize` | `pageSize int` | `SearchOption` | WithPageSize 设置每页结果数量 |
+| `omnisearch.proxy` | `proxy string` | `SearchOption` | WithProxy 设置搜索请求代理 |
+| `omnisearch.timeout` | `timeout time.Duration` | `SearchOption` | WithTimeout 设置搜索超时时间 |
+| `omnisearch.type` | `name string` | `ostype.SearchOption` | omnisearchType 指定本次搜索使用的搜索器类型 |
 

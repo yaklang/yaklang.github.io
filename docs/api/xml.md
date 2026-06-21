@@ -1,34 +1,53 @@
-# xml
+# xml {#library-xml}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [xml.Escape](#escape) |Escape 对输入进行 XML 转义，把 &lt; &gt; &amp; 等特殊字符替换为实体 参数: - s: 待转义的内容(字符串或字节切片) 返回值: - 转义后的字符串|
-| [xml.Prettify](#prettify) |Prettify 将 XML 内容重新格式化为带缩进的可读形式 参数: - b: 待格式化的 XML 内容(字符串或字节切片) 返回值: - 带缩进换行的格式化 XML 字符串|
-| [xml.dumps](#dumps) |dumps 将一个对象(通常是 map)序列化为 XML 格式的字节切片 参数: - v: 待序列化的对象，可为 map 或有序映射 - opts: 可选配置项，如 xml.escape(false) 关闭 HTML 转义 返回值: - 序列化后的 XML 字节切片|
-| [xml.escape](#escape) |escape 生成一个 dumps 配置项，控制序列化时是否对 HTML 特殊字符进行转义 参数: - escape: true 表示转义 HTML 特殊字符，false 表示保持原样 返回值: - 可传给 xml.dumps 的配置项|
-| [xml.loads](#loads) |loads 将 XML 文本解析为嵌套的 map 结构 参数: - v: 待解析的 XML 内容(字符串或字节切片) 返回值: - 解析得到的 map，键为元素名，值为元素内容或子结构|
+`xml` 库提供 XML 的序列化、反序列化、转义与美化能力，用于处理 XML 格式的配置、接口数据与协议报文。
 
+典型使用场景：
 
-## 函数定义
-### Escape
+- 解析与生成：`xml.loads(v)` 把 XML 解析为 map，`xml.dumps(v, opts...)` 把数据序列化为 XML（配 `xml.escape` 控制转义）。
+- 处理：`xml.Escape` 转义特殊字符，`xml.Prettify` 美化排版 XML。
 
-#### 详细描述
-Escape 对输入进行 XML 转义，把 &lt; &gt; &amp; 等特殊字符替换为实体
+与相邻库的关系：`xml` 是数据处理库，与 `json` / `yaml`（其他结构化格式）并列，常用于 XML 接口测试（如 XXE 场景）与配置解析。
 
-参数:
+> 共 5 个函数
 
-  - s: 待转义的内容(字符串或字节切片)
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [xml.Escape](#escape) | `s []byte` | `string` | 对输入进行 XML 转义，把 &lt; &gt; &amp; 等特殊字符替换为实体 |
+| [xml.Prettify](#prettify) | `b []byte` | `string` | 将 XML 内容重新格式化为带缩进的可读形式 |
+| [xml.loads](#loads) | `v any` | `map[string]any` | 将 XML 文本解析为嵌套的 map 结构 |
 
+## 可变参数函数索引
 
-返回值:
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [xml.dumps](#dumps) | `v any, opts ...XmlDumpOptions` | `[]byte` | 将一个对象(通常是 map)序列化为 XML 格式的字节切片 |
 
-  - 转义后的字符串
+## 函数详情
 
+### Escape {#escape}
 
+```go
+Escape(s []byte) string
+```
 
+对输入进行 XML 转义，把 &lt; &gt; &amp; 等特殊字符替换为实体
 
-Example:
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `[]byte` | 待转义的内容(字符串或字节切片) |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 转义后的字符串 |
+
+**示例**
 
 ``````````````yak
 // VARS: 转义尖括号
@@ -39,41 +58,29 @@ println(result)   // OUT: &lt;a&gt;
 assert result == "&lt;a&gt;", "Escape should encode angle brackets"
 ``````````````
 
+---
 
-#### 定义
+### Prettify {#prettify}
 
-`Escape(s []byte) string`
+```go
+Prettify(b []byte) string
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| s | `[]byte` | 待转义的内容(字符串或字节切片) |
+将 XML 内容重新格式化为带缩进的可读形式
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 转义后的字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| b | `[]byte` | 待格式化的 XML 内容(字符串或字节切片) |
 
-### Prettify
+**返回值**
 
-#### 详细描述
-Prettify 将 XML 内容重新格式化为带缩进的可读形式
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` | 带缩进换行的格式化 XML 字符串 |
 
-参数:
-
-  - b: 待格式化的 XML 内容(字符串或字节切片)
-
-
-
-返回值:
-
-  - 带缩进换行的格式化 XML 字符串
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 美化压缩的 XML
@@ -82,130 +89,29 @@ result = xml.Prettify("<root><name>yak</name></root>")
 assert str.Contains(result, "<name>yak</name>"), "prettify should keep the element"
 ``````````````
 
+---
 
-#### 定义
+### loads {#loads}
 
-`Prettify(b []byte) string`
+```go
+loads(v any) map[string]any
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| b | `[]byte` | 待格式化的 XML 内容(字符串或字节切片) |
+将 XML 文本解析为嵌套的 map 结构
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `string` | 带缩进换行的格式化 XML 字符串 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| v | `any` | 待解析的 XML 内容(字符串或字节切片) |
 
-### dumps
+**返回值**
 
-#### 详细描述
-dumps 将一个对象(通常是 map)序列化为 XML 格式的字节切片
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]any` | 解析得到的 map，键为元素名，值为元素内容或子结构 |
 
-参数:
-
-  - v: 待序列化的对象，可为 map 或有序映射
-
-  - opts: 可选配置项，如 xml.escape(false) 关闭 HTML 转义
-
-
-
-返回值:
-
-  - 序列化后的 XML 字节切片
-
-
-
-
-Example:
-
-``````````````yak
-// VARS: 把 map 序列化为 XML
-out = xml.dumps({"name": "yak"})
-text = string(out)
-// assert: 输出包含对应元素
-assert str.Contains(text, "<name>yak</name>"), "dumps should encode the map as xml element"
-``````````````
-
-
-#### 定义
-
-`dumps(v any, opts ...XmlDumpOptions) []byte`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `any` | 待序列化的对象，可为 map 或有序映射 |
-| opts | `...XmlDumpOptions` | 可选配置项，如 xml.escape(false) 关闭 HTML 转义 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 序列化后的 XML 字节切片 |
-
-
-### escape
-
-#### 详细描述
-escape 生成一个 dumps 配置项，控制序列化时是否对 HTML 特殊字符进行转义
-
-参数:
-
-  - escape: true 表示转义 HTML 特殊字符，false 表示保持原样
-
-
-
-返回值:
-
-  - 可传给 xml.dumps 的配置项
-
-
-
-
-Example:
-
-``````````````yak
-// 关闭 HTML 转义后序列化(结果为 XML 文本，作示意)
-data = xml.dumps({"a": "<b>"}, xml.escape(false))
-println(string(data))
-``````````````
-
-
-#### 定义
-
-`escape(escape bool) XmlDumpOptions`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| escape | `bool` | true 表示转义 HTML 特殊字符，false 表示保持原样 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `XmlDumpOptions` | 可传给 xml.dumps 的配置项 |
-
-
-### loads
-
-#### 详细描述
-loads 将 XML 文本解析为嵌套的 map 结构
-
-参数:
-
-  - v: 待解析的 XML 内容(字符串或字节切片)
-
-
-
-返回值:
-
-  - 解析得到的 map，键为元素名，值为元素内容或子结构
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 解析单个元素
@@ -216,19 +122,55 @@ println(m["name"])   // OUT: yak
 assert m["name"] == "yak", "loads should parse the element text"
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`loads(v any) map[string]any`
+### dumps {#dumps}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| v | `any` | 待解析的 XML 内容(字符串或字节切片) |
+```go
+dumps(v any, opts ...XmlDumpOptions) []byte
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `map[string]any` | 解析得到的 map，键为元素名，值为元素内容或子结构 |
+将一个对象(通常是 map)序列化为 XML 格式的字节切片
 
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| v | `any` | 待序列化的对象，可为 map 或有序映射 |
+
+**可选参数**
+
+可作为可变参数 `opts ...XmlDumpOptions` 传入选项；共 1 个可用选项，详见 [XmlDumpOptions 选项列表](#option-xmldumpoptions)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 序列化后的 XML 字节切片 |
+
+**示例**
+
+``````````````yak
+// VARS: 把 map 序列化为 XML
+out = xml.dumps({"name": "yak"})
+text = string(out)
+// assert: 输出包含对应元素
+assert str.Contains(text, "<name>yak</name>"), "dumps should encode the map as xml element"
+``````````````
+
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：XmlDumpOptions {#option-xmldumpoptions}
+
+涉及到的函数有：[xml.dumps](#dumps)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `xml.escape` | `escape bool` | `XmlDumpOptions` | 生成一个 dumps 配置项，控制序列化时是否对 HTML 特殊字符进行转义 |
 

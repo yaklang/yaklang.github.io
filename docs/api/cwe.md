@@ -1,83 +1,59 @@
-# cwe
+# cwe {#library-cwe}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [cwe.AICompleteFields](#aicompletefields) |AICompleteFields 使用 AI 补全 CWE 缺失字段（如中文翻译，导出名为 cwe.AICompleteFields） 参数: - opts: 可选项，如 cwe.aiConcurrent、cwe.testLimit 或 ai.type 等 AI 配置 返回值: - 错误信息|
-| [cwe.Export](#export) |ExportCWE 将所有 CWE 条目导出为 JSONL 文件（导出名为 cwe.Export） 每行是一个表示 CWE 条目的 JSON 对象 参数: - filename: 导出目标文件路径 返回值: - 错误信息|
-| [cwe.Get](#get) |getCWE 按 CWE 编号查询单条 CWE 记录（导出名为 cwe.Get，可省略 CWE- 前缀） 参数: - i: CWE 编号，如 &#34;CWE-79&#34; 或 &#34;79&#34; 返回值: - 对应的 CWE 记录，未找到或出错时为 nil|
-| [cwe.Import](#import) |ImportCWE 从 JSONL 文件导入 CWE 条目（导出名为 cwe.Import） 每行应为一个表示 CWE 条目的 JSON 对象 参数: - filename: 导入源文件路径 返回值: - 错误信息|
-| [cwe.ListAll](#listall) |ListAllCWE 流式返回数据库中所有 CWE 条目（导出名为 cwe.ListAll） 返回值: - CWE 条目的流式通道|
-| [cwe.Update](#update) |CWEUpdate 下载并更新本地 CWE 数据库（导出名为 cwe.Update） 参数: - opts: 更新可选项，如 cwe.proxy / cwe.url 返回值: - 错误信息|
-| [cwe.aiConcurrent](#aiconcurrent) |WithAIConcurrent 设置 AI 补全 CWE 字段时的并发数（导出名为 cwe.aiConcurrent） 参数: - n: 并发工作协程数 返回值: - CWE AI 补全可选项|
-| [cwe.proxy](#proxy) |WithCWEProxy 设置下载 CWE 数据时使用的代理（导出名为 cwe.proxy） 参数: - proxy: 代理地址，如 http&#58;//127.0.0.1:8080 返回值: - CWE 更新可选项|
-| [cwe.testLimit](#testlimit) |WithTestLimit 限制 AI 补全处理的 CWE 数量，常用于测试（导出名为 cwe.testLimit） 参数: - n: 最大处理数量，0 表示不限制 返回值: - CWE AI 补全可选项|
-| [cwe.url](#url) |WithCWEURL 设置 CWE 数据的下载地址（导出名为 cwe.url） 参数: - url: CWE 数据下载 URL 返回值: - CWE 更新可选项|
+`cwe` 库提供 CWE（通用弱点枚举）数据的查询与维护能力，用于把漏洞归类到标准弱点类型，提升报告的规范性与可读性。
 
+典型使用场景：
 
-## 函数定义
-### AICompleteFields
+- 查询：`cwe.Get` 按编号取单条，`cwe.ListAll` 流式遍历全部弱点。
+- 维护：`cwe.Update` 更新本地数据（可配 `cwe.url` / `cwe.proxy`），`cwe.Import` / `cwe.Export` 导入导出，`cwe.AICompleteFields` 用 AI 补全描述。
 
-#### 详细描述
-AICompleteFields 使用 AI 补全 CWE 缺失字段（如中文翻译，导出名为 cwe.AICompleteFields）
+与相邻库的关系：`cwe` 与 `cve`（具体漏洞）配套，前者是"弱点类型分类"，后者是"具体漏洞实例"，常一起用于漏洞报告（`report`/`risk`）中的标准化标注。
 
-参数:
+> 共 10 个函数
 
-  - opts: 可选项，如 cwe.aiConcurrent、cwe.testLimit 或 ai.type 等 AI 配置
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [cwe.Export](#export) | `filename string` | `error` | ExportCWE 将所有 CWE 条目导出为 JSONL 文件（导出名为 cwe.Export） |
+| [cwe.Get](#get) | `i any` | `*cveresources.CWE` | getCWE 按 CWE 编号查询单条 CWE 记录（导出名为 cwe.Get，可省略 CWE- 前缀） |
+| [cwe.Import](#import) | `filename string` | `error` | ImportCWE 从 JSONL 文件导入 CWE 条目（导出名为 cwe.Import） |
+| [cwe.ListAll](#listall) | - | `chan *cveresources.CWE` | ListAllCWE 流式返回数据库中所有 CWE 条目（导出名为 cwe.ListAll） |
+| [cwe.aiConcurrent](#aiconcurrent) | `n int` | `CWEAICompleteOption` | WithAIConcurrent 设置 AI 补全 CWE 字段时的并发数（导出名为 cwe.aiConcurrent） |
+| [cwe.testLimit](#testlimit) | `n int` | `CWEAICompleteOption` | WithTestLimit 限制 AI 补全处理的 CWE 数量，常用于测试（导出名为 cwe.testLimit） |
 
+## 可变参数函数索引
 
-返回值:
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [cwe.AICompleteFields](#aicompletefields) | `opts ...any` | `error` | 使用 AI 补全 CWE 缺失字段（如中文翻译，导出名为 cwe.AICompleteFields） |
+| [cwe.Update](#update) | `opts ...CWEUpdateOption` | `error` | 下载并更新本地 CWE 数据库（导出名为 cwe.Update） |
 
-  - 错误信息
+## 函数详情
 
+### Export {#export}
 
+```go
+Export(filename string) error
+```
 
-
-Example:
-
-``````````````yak
-// 示意性示例，需要 AI 配置与 CWE 数据库
-err = cwe.AICompleteFields(cwe.aiConcurrent(10), cwe.testLimit(5))
-if err != nil { die(err) }
-``````````````
-
-
-#### 定义
-
-`AICompleteFields(opts ...any) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...any` | 可选项，如 cwe.aiConcurrent、cwe.testLimit 或 ai.type 等 AI 配置 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### Export
-
-#### 详细描述
 ExportCWE 将所有 CWE 条目导出为 JSONL 文件（导出名为 cwe.Export）
 
 每行是一个表示 CWE 条目的 JSON 对象
 
-参数:
+**参数**
 
-  - filename: 导出目标文件路径
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `string` | 导出目标文件路径 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要本地 CWE 数据库
@@ -85,41 +61,29 @@ err = cwe.Export("/tmp/cwe.jsonl")
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+### Get {#get}
 
-`Export(filename string) error`
+```go
+Get(i any) *cveresources.CWE
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filename | `string` | 导出目标文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### Get
-
-#### 详细描述
 getCWE 按 CWE 编号查询单条 CWE 记录（导出名为 cwe.Get，可省略 CWE- 前缀）
 
-参数:
+**参数**
 
-  - i: CWE 编号，如 &#34;CWE-79&#34; 或 &#34;79&#34;
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | CWE 编号，如 &#34;CWE-79&#34; 或 &#34;79&#34; |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*cveresources.CWE` | 对应的 CWE 记录，未找到或出错时为 nil |
 
-返回值:
-
-  - 对应的 CWE 记录，未找到或出错时为 nil
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要本地 CWE 数据库
@@ -127,43 +91,31 @@ c = cwe.Get("CWE-79")
 if c != nil { println(c.NameZh) }
 ``````````````
 
+---
 
-#### 定义
+### Import {#import}
 
-`Get(i any) *cveresources.CWE`
+```go
+Import(filename string) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | CWE 编号，如 &#34;CWE-79&#34; 或 &#34;79&#34; |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*cveresources.CWE` | 对应的 CWE 记录，未找到或出错时为 nil |
-
-
-### Import
-
-#### 详细描述
 ImportCWE 从 JSONL 文件导入 CWE 条目（导出名为 cwe.Import）
 
 每行应为一个表示 CWE 条目的 JSON 对象
 
-参数:
+**参数**
 
-  - filename: 导入源文件路径
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `string` | 导入源文件路径 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要本地 CWE 数据库
@@ -171,35 +123,23 @@ err = cwe.Import("/tmp/cwe.jsonl")
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+### ListAll {#listall}
 
-`Import(filename string) error`
+```go
+ListAll() chan *cveresources.CWE
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| filename | `string` | 导入源文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### ListAll
-
-#### 详细描述
 ListAllCWE 流式返回数据库中所有 CWE 条目（导出名为 cwe.ListAll）
 
-返回值:
+**返回值**
 
-  - CWE 条目的流式通道
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `chan *cveresources.CWE` | CWE 条目的流式通道 |
 
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要本地 CWE 数据库
@@ -209,36 +149,117 @@ Example:
 	}
 ``````````````
 
+---
 
-#### 定义
+### aiConcurrent {#aiconcurrent}
 
-`ListAll() chan *cveresources.CWE`
+```go
+aiConcurrent(n int) CWEAICompleteOption
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `chan *cveresources.CWE` | CWE 条目的流式通道 |
+WithAIConcurrent 设置 AI 补全 CWE 字段时的并发数（导出名为 cwe.aiConcurrent）
 
+**参数**
 
-### Update
+|参数名|类型|说明|
+|:--|:--|:--|
+| n | `int` | 并发工作协程数 |
 
-#### 详细描述
-CWEUpdate 下载并更新本地 CWE 数据库（导出名为 cwe.Update）
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `CWEAICompleteOption` | CWE AI 补全可选项 |
 
-  - opts: 更新可选项，如 cwe.proxy / cwe.url
+**示例**
 
+``````````````yak
+// 示意性示例，需要 AI 配置与 CWE 数据库
+err = cwe.AICompleteFields(cwe.aiConcurrent(5))
+``````````````
 
+---
 
-返回值:
+### testLimit {#testlimit}
 
-  - 错误信息
+```go
+testLimit(n int) CWEAICompleteOption
+```
 
+WithTestLimit 限制 AI 补全处理的 CWE 数量，常用于测试（导出名为 cwe.testLimit）
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| n | `int` | 最大处理数量，0 表示不限制 |
 
-Example:
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `CWEAICompleteOption` | CWE AI 补全可选项 |
+
+**示例**
+
+``````````````yak
+// 示意性示例，需要 AI 配置与 CWE 数据库
+err = cwe.AICompleteFields(cwe.testLimit(10))
+``````````````
+
+---
+
+## 可变参数函数详情
+
+### AICompleteFields {#aicompletefields}
+
+```go
+AICompleteFields(opts ...any) error
+```
+
+使用 AI 补全 CWE 缺失字段（如中文翻译，导出名为 cwe.AICompleteFields）
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opts | `...any` | 可选项，如 cwe.aiConcurrent、cwe.testLimit 或 ai.type 等 AI 配置 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+// 示意性示例，需要 AI 配置与 CWE 数据库
+err = cwe.AICompleteFields(cwe.aiConcurrent(10), cwe.testLimit(5))
+if err != nil { die(err) }
+``````````````
+
+---
+
+### Update {#update}
+
+```go
+Update(opts ...CWEUpdateOption) error
+```
+
+下载并更新本地 CWE 数据库（导出名为 cwe.Update）
+
+**可选参数**
+
+可作为可变参数 `opts ...CWEUpdateOption` 传入选项；共 2 个可用选项，详见 [CWEUpdateOption 选项列表](#option-cweupdateoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
 
 ``````````````yak
 // 示意性示例，需要网络下载 CWE 数据
@@ -246,183 +267,18 @@ err = cwe.Update()
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+## 可变参数选项列表
 
-`Update(opts ...CWEUpdateOption) error`
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...CWEUpdateOption` | 更新可选项，如 cwe.proxy / cwe.url |
+### 1. 类型：CWEUpdateOption {#option-cweupdateoption}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
+涉及到的函数有：[cwe.Update](#update)
 
-
-### aiConcurrent
-
-#### 详细描述
-WithAIConcurrent 设置 AI 补全 CWE 字段时的并发数（导出名为 cwe.aiConcurrent）
-
-参数:
-
-  - n: 并发工作协程数
-
-
-
-返回值:
-
-  - CWE AI 补全可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要 AI 配置与 CWE 数据库
-err = cwe.AICompleteFields(cwe.aiConcurrent(5))
-``````````````
-
-
-#### 定义
-
-`aiConcurrent(n int) CWEAICompleteOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| n | `int` | 并发工作协程数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CWEAICompleteOption` | CWE AI 补全可选项 |
-
-
-### proxy
-
-#### 详细描述
-WithCWEProxy 设置下载 CWE 数据时使用的代理（导出名为 cwe.proxy）
-
-参数:
-
-  - proxy: 代理地址，如 http&#58;//127.0.0.1:8080
-
-
-
-返回值:
-
-  - CWE 更新可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要网络下载 CWE 数据
-err = cwe.Update(cwe.proxy("http://127.0.0.1:8080"))
-``````````````
-
-
-#### 定义
-
-`proxy(proxy string) CWEUpdateOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| proxy | `string` | 代理地址，如 http&#58;//127.0.0.1:8080 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CWEUpdateOption` | CWE 更新可选项 |
-
-
-### testLimit
-
-#### 详细描述
-WithTestLimit 限制 AI 补全处理的 CWE 数量，常用于测试（导出名为 cwe.testLimit）
-
-参数:
-
-  - n: 最大处理数量，0 表示不限制
-
-
-
-返回值:
-
-  - CWE AI 补全可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要 AI 配置与 CWE 数据库
-err = cwe.AICompleteFields(cwe.testLimit(10))
-``````````````
-
-
-#### 定义
-
-`testLimit(n int) CWEAICompleteOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| n | `int` | 最大处理数量，0 表示不限制 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CWEAICompleteOption` | CWE AI 补全可选项 |
-
-
-### url
-
-#### 详细描述
-WithCWEURL 设置 CWE 数据的下载地址（导出名为 cwe.url）
-
-参数:
-
-  - url: CWE 数据下载 URL
-
-
-
-返回值:
-
-  - CWE 更新可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需要网络下载 CWE 数据
-err = cwe.Update(cwe.url("https://custom-url.com/cwe.zip"))
-``````````````
-
-
-#### 定义
-
-`url(url string) CWEUpdateOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| url | `string` | CWE 数据下载 URL |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CWEUpdateOption` | CWE 更新可选项 |
-
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `cwe.proxy` | `proxy string` | `CWEUpdateOption` | WithCWEProxy 设置下载 CWE 数据时使用的代理 |
+| `cwe.url` | `url string` | `CWEUpdateOption` | WithCWEURL 设置 CWE 数据的下载地址 |
 

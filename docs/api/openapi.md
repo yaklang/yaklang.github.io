@@ -1,132 +1,120 @@
-# openapi
+# openapi {#library-openapi}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [openapi.ConvertJsonToYaml](#convertjsontoyaml) |JSONToYAML 将 JSON 字节转换为 YAML 字节（导出名为 openapi.ConvertJsonToYaml） 转换过程会尽量保留数字类型（int/float），而非统一转为 float 参数: - j: JSON 内容（字符串或字节） 返回值: - 转换后的 YAML 内容 - 错...|
-| [openapi.ConvertYamlToJson](#convertyamltojson) |YAMLToJSON 将 YAML 字节转换为 JSON 字节（导出名为 openapi.ConvertYamlToJson） 由于 JSON 是 YAML 的子集，对 JSON 输入做转换基本是无操作 参数: - y: YAML 内容（字符串或字节） 返回值: - 转换后的 JSON 内容 - 错...|
-| [openapi.ExtractOpenAPI3Scheme](#extractopenapi3scheme) |ExtractOpenAPI3Scheme 从数据库中已记录的 HTTP 流量提取指定域名的 OpenAPI3 文档 依赖本地项目数据库中已抓取的流量数据 参数: - domain: 目标域名 返回值: - 提取出的 OpenAPI3 文档对象 - 错误信息|
-| [openapi.GenerateHTTPFlows](#generatehttpflows) |GenerateHTTPFlows 根据 OpenAPI 2.0/3.0 文档生成对应的 HTTP 请求流 自动尝试按 OpenAPI 2 与 OpenAPI 3 解析，通过 openapi.flowHandler 接收每个生成的流 参数: - doc: OpenAPI 文档内容（JSON 或 YA...|
-| [openapi.domain](#domain) |WithDomain 设置生成请求流时使用的目标域名（导出名为 openapi.domain） 参数: - domain: 目标域名 返回值: - OpenAPI 生成可选项|
-| [openapi.flowHandler](#flowhandler) |WithFlowHandler 设置接收生成 HTTP 流的回调（导出名为 openapi.flowHandler） 参数: - handler: 处理每个生成 HTTP 流的回调函数 返回值: - OpenAPI 生成可选项|
-| [openapi.https](#https) |WithHttps 设置生成的请求流是否使用 https（导出名为 openapi.https） 参数: - b: 为 true 时使用 https 返回值: - OpenAPI 生成可选项|
+`openapi` 库用于处理 OpenAPI/Swagger 文档：在 JSON/YAML 间转换、从站点提取 OpenAPI 描述、并据此生成可发送的 HTTP 请求流，常用于 API 测试用例的自动生成与接口资产梳理。
 
+典型使用场景：
 
-## 函数定义
-### ConvertJsonToYaml
+- 格式转换：`openapi.ConvertJsonToYaml` / `openapi.ConvertYamlToJson` 互转文档格式。
+- 提取与生成：`openapi.ExtractOpenAPI3Scheme(domain)` 从目标提取 OpenAPI 3 描述，`openapi.GenerateHTTPFlows(doc, opts...)` 据文档生成 HTTP 请求（配 `openapi.domain` / `openapi.https` / `openapi.flowHandler` 处理每条请求）。
 
-#### 详细描述
+与相邻库的关系：`openapi` 生成的请求常交给 `fuzz`/`poc` 做接口测试，是"从 API 文档到测试请求"的桥梁。
+
+> 共 7 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [openapi.ConvertJsonToYaml](#convertjsontoyaml) | `j []byte` | `[]byte, error` | JSONToYAML 将 JSON 字节转换为 YAML 字节（导出名为 openapi.ConvertJsonToYaml） |
+| [openapi.ConvertYamlToJson](#convertyamltojson) | `y []byte` | `[]byte, error` | YAMLToJSON 将 YAML 字节转换为 JSON 字节（导出名为 openapi.ConvertYamlToJson） |
+| [openapi.ExtractOpenAPI3Scheme](#extractopenapi3scheme) | `domain string` | `*openapi3.T, error` | 从数据库中已记录的 HTTP 流量提取指定域名的 OpenAPI3 文档 |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [openapi.GenerateHTTPFlows](#generatehttpflows) | `doc string, opt ...Option` | `error` | 根据 OpenAPI 2.0/3.0 文档生成对应的 HTTP 请求流 |
+
+## 函数详情
+
+### ConvertJsonToYaml {#convertjsontoyaml}
+
+```go
+ConvertJsonToYaml(j []byte) ([]byte, error)
+```
+
 JSONToYAML 将 JSON 字节转换为 YAML 字节（导出名为 openapi.ConvertJsonToYaml）
 
 转换过程会尽量保留数字类型（int/float），而非统一转为 float
 
-参数:
+**参数**
 
-  - j: JSON 内容（字符串或字节）
+|参数名|类型|说明|
+|:--|:--|:--|
+| j | `[]byte` | JSON 内容（字符串或字节） |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 转换后的 YAML 内容 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 转换后的 YAML 内容
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 y = openapi.ConvertJsonToYaml(`{"name":"yak","version":1}`)~
 assert str.Contains(string(y), "name: yak"), "json should be converted to yaml"
 ``````````````
 
+---
 
-#### 定义
+### ConvertYamlToJson {#convertyamltojson}
 
-`ConvertJsonToYaml(j []byte) ([]byte, error)`
+```go
+ConvertYamlToJson(y []byte) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| j | `[]byte` | JSON 内容（字符串或字节） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 转换后的 YAML 内容 |
-| r2 | `error` | 错误信息 |
-
-
-### ConvertYamlToJson
-
-#### 详细描述
 YAMLToJSON 将 YAML 字节转换为 JSON 字节（导出名为 openapi.ConvertYamlToJson）
 
 由于 JSON 是 YAML 的子集，对 JSON 输入做转换基本是无操作
 
-参数:
+**参数**
 
-  - y: YAML 内容（字符串或字节）
+|参数名|类型|说明|
+|:--|:--|:--|
+| y | `[]byte` | YAML 内容（字符串或字节） |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 转换后的 JSON 内容 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 转换后的 JSON 内容
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 j = openapi.ConvertYamlToJson("name: yak\nversion: 1\n")~
 assert str.Contains(string(j), "\"name\":\"yak\""), "yaml should be converted to json"
 ``````````````
 
+---
 
-#### 定义
+### ExtractOpenAPI3Scheme {#extractopenapi3scheme}
 
-`ConvertYamlToJson(y []byte) ([]byte, error)`
+```go
+ExtractOpenAPI3Scheme(domain string) (*openapi3.T, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| y | `[]byte` | YAML 内容（字符串或字节） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 转换后的 JSON 内容 |
-| r2 | `error` | 错误信息 |
-
-
-### ExtractOpenAPI3Scheme
-
-#### 详细描述
-ExtractOpenAPI3Scheme 从数据库中已记录的 HTTP 流量提取指定域名的 OpenAPI3 文档
+从数据库中已记录的 HTTP 流量提取指定域名的 OpenAPI3 文档
 
 依赖本地项目数据库中已抓取的流量数据
 
-参数:
+**参数**
 
-  - domain: 目标域名
+|参数名|类型|说明|
+|:--|:--|:--|
+| domain | `string` | 目标域名 |
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*openapi3.T` | 提取出的 OpenAPI3 文档对象 |
+| r2 | `error` | 错误信息 |
 
-返回值:
-
-  - 提取出的 OpenAPI3 文档对象
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需要本地项目数据库中已有该域名的流量
@@ -135,46 +123,37 @@ schemeJSON = scheme.MarshalJSON()~
 println(string(schemeJSON))
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`ExtractOpenAPI3Scheme(domain string) (*openapi3.T, error)`
+### GenerateHTTPFlows {#generatehttpflows}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| domain | `string` | 目标域名 |
+```go
+GenerateHTTPFlows(doc string, opt ...Option) error
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*openapi3.T` | 提取出的 OpenAPI3 文档对象 |
-| r2 | `error` | 错误信息 |
-
-
-### GenerateHTTPFlows
-
-#### 详细描述
-GenerateHTTPFlows 根据 OpenAPI 2.0/3.0 文档生成对应的 HTTP 请求流
+根据 OpenAPI 2.0/3.0 文档生成对应的 HTTP 请求流
 
 自动尝试按 OpenAPI 2 与 OpenAPI 3 解析，通过 openapi.flowHandler 接收每个生成的流
 
-参数:
+**必填参数**
 
-  - doc: OpenAPI 文档内容（JSON 或 YAML）
+|参数名|类型|说明|
+|:--|:--|:--|
+| doc | `string` | OpenAPI 文档内容（JSON 或 YAML） |
 
-  - opt: 可选项，如 openapi.flowHandler / openapi.domain / openapi.https
+**可选参数**
 
+可作为可变参数 `opt ...Option` 传入选项；共 3 个可用选项，详见 [Option 选项列表](#option-option)。
 
+**返回值**
 
-返回值:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 示意性示例，需提供真实 OpenAPI 文档
@@ -187,146 +166,19 @@ doc = file.ReadFile("openapi.yaml")~
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+## 可变参数选项列表
 
-`GenerateHTTPFlows(doc string, opt ...Option) error`
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| doc | `string` | OpenAPI 文档内容（JSON 或 YAML） |
-| opt | `...Option` | 可选项，如 openapi.flowHandler / openapi.domain / openapi.https |
+### 1. 类型：Option {#option-option}
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
+涉及到的函数有：[openapi.GenerateHTTPFlows](#generatehttpflows)
 
-
-### domain
-
-#### 详细描述
-WithDomain 设置生成请求流时使用的目标域名（导出名为 openapi.domain）
-
-参数:
-
-  - domain: 目标域名
-
-
-
-返回值:
-
-  - OpenAPI 生成可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需提供真实 OpenAPI 文档
-err = openapi.GenerateHTTPFlows(doc, openapi.domain("example.com"))
-``````````````
-
-
-#### 定义
-
-`domain(domain string) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| domain | `string` | 目标域名 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | OpenAPI 生成可选项 |
-
-
-### flowHandler
-
-#### 详细描述
-WithFlowHandler 设置接收生成 HTTP 流的回调（导出名为 openapi.flowHandler）
-
-参数:
-
-  - handler: 处理每个生成 HTTP 流的回调函数
-
-
-
-返回值:
-
-  - OpenAPI 生成可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需提供真实 OpenAPI 文档
-
-	err = openapi.GenerateHTTPFlows(doc, openapi.flowHandler(func(flow) {
-	    println(flow.Url)
-	}))
-``````````````
-
-
-#### 定义
-
-`flowHandler(handler func(flow *schema.HTTPFlow)) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| handler | `func(flow *schema.HTTPFlow)` | 处理每个生成 HTTP 流的回调函数 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | OpenAPI 生成可选项 |
-
-
-### https
-
-#### 详细描述
-WithHttps 设置生成的请求流是否使用 https（导出名为 openapi.https）
-
-参数:
-
-  - b: 为 true 时使用 https
-
-
-
-返回值:
-
-  - OpenAPI 生成可选项
-
-
-
-
-Example:
-
-``````````````yak
-// 示意性示例，需提供真实 OpenAPI 文档
-err = openapi.GenerateHTTPFlows(doc, openapi.https(true))
-``````````````
-
-
-#### 定义
-
-`https(b bool) Option`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| b | `bool` | 为 true 时使用 https |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `Option` | OpenAPI 生成可选项 |
-
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `openapi.domain` | `domain string` | `Option` | WithDomain 设置生成请求流时使用的目标域名 |
+| `openapi.flowHandler` | `handler func(flow *schema.HTTPFlow)` | `Option` | WithFlowHandler 设置接收生成 HTTP 流的回调 |
+| `openapi.https` | `b bool` | `Option` | WithHttps 设置生成的请求流是否使用 https |
 

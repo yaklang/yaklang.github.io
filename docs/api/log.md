@@ -1,345 +1,319 @@
-# log
+# log {#library-log}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [log.Debug](#debug) |Debug 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.Error](#error) |Error 以 error(错误)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.Info](#info) |Info 以 info(信息)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.SetLevel](#setlevel) |setLevel 根据传入的字符串设置日志级别 disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试 参数: - i: 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;...|
-| [log.Warn](#warn) |Warn 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.debug](#debug) |Debug 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.error](#error) |Error 以 error(错误)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.info](#info) |Info 以 info(信息)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
-| [log.setLevel](#setlevel) |setLevel 根据传入的字符串设置日志级别 disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试 参数: - i: 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;...|
-| [log.warn](#warn) |Warn 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文 参数: - format: 格式化字符串 - args: 与格式化字符串对应的参数|
+`log` 库是 yaklang 的日志输出工具，提供分级日志（Debug/Info/Warn/Error）与级别控制，是脚本调试与运行观测的标准手段。建议所有调试输出统一走 `log`，并使用英文内容。
 
+典型使用场景：
 
-## 函数定义
-### Debug
+- 分级输出：`log.Info` / `log.Warn` / `log.Error` / `log.Debug` 按级别打印（支持格式化参数）。
+- 级别控制：`log.SetLevel` 设置最低输出级别，过滤掉低于该级别的日志。
 
-#### 详细描述
-Debug 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文
+与相邻库的关系：`log` 是基础设施，被几乎所有脚本使用；相比 `println`，它带级别与时间戳，便于在复杂脚本/插件中定位问题。
 
-参数:
+> 共 10 个函数
 
-  - format: 格式化字符串
+## 函数索引
 
-  - args: 与格式化字符串对应的参数
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [log.SetLevel](#setlevel) | `i any` | - | 根据传入的字符串设置日志级别 |
+| [log.setLevel](#setlevel-2) | `i any` | - | 根据传入的字符串设置日志级别 |
 
+## 可变参数函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [log.Debug](#debug) | `format string, args ...any` | - | 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.Error](#error) | `format string, args ...any` | - | 以 error(错误)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.Info](#info) | `format string, args ...any` | - | 以 info(信息)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.Warn](#warn) | `format string, args ...any` | - | 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.debug](#debug-2) | `format string, args ...any` | - | 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.error](#error-2) | `format string, args ...any` | - | 以 error(错误)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.info](#info-2) | `format string, args ...any` | - | 以 info(信息)级别格式化输出一条日志，日志内容应使用英文 |
+| [log.warn](#warn-2) | `format string, args ...any` | - | 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文 |
 
+## 函数详情
 
-Example:
+### SetLevel {#setlevel}
 
-``````````````yak
-// 输出一条 debug 日志(仅副作用，无返回值)
-log.Debug("current value is %v", 123)
-``````````````
+```go
+SetLevel(i any)
+```
 
-
-#### 定义
-
-`Debug(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### Error
-
-#### 详细描述
-Error 以 error(错误)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 error 日志(仅副作用，无返回值)
-log.Error("failed to connect: %s", "timeout")
-``````````````
-
-
-#### 定义
-
-`Error(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### Info
-
-#### 详细描述
-Info 以 info(信息)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 info 日志(仅副作用，无返回值)
-log.Info("server started on port %d", 8080)
-``````````````
-
-
-#### 定义
-
-`Info(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### SetLevel
-
-#### 详细描述
-setLevel 根据传入的字符串设置日志级别
+根据传入的字符串设置日志级别
 
 disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试
 
-参数:
+**参数**
 
-  - i: 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34;
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34; |
 
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 把全局日志级别设置为 fatal(仅副作用，无返回值)
 log.setLevel("fatal")
 ``````````````
 
+---
 
-#### 定义
+### setLevel {#setlevel-2}
 
-`SetLevel(i any)`
+```go
+setLevel(i any)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34; |
-
-
-### Warn
-
-#### 详细描述
-Warn 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 warning 日志(仅副作用，无返回值)
-log.Warn("disk usage is high: %d%%", 90)
-``````````````
-
-
-#### 定义
-
-`Warn(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### debug
-
-#### 详细描述
-Debug 以 debug(调试)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 debug 日志(仅副作用，无返回值)
-log.Debug("current value is %v", 123)
-``````````````
-
-
-#### 定义
-
-`debug(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### error
-
-#### 详细描述
-Error 以 error(错误)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 error 日志(仅副作用，无返回值)
-log.Error("failed to connect: %s", "timeout")
-``````````````
-
-
-#### 定义
-
-`error(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### info
-
-#### 详细描述
-Info 以 info(信息)级别格式化输出一条日志，日志内容应使用英文
-
-参数:
-
-  - format: 格式化字符串
-
-  - args: 与格式化字符串对应的参数
-
-
-
-
-Example:
-
-``````````````yak
-// 输出一条 info 日志(仅副作用，无返回值)
-log.Info("server started on port %d", 8080)
-``````````````
-
-
-#### 定义
-
-`info(format string, args ...any)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| format | `string` | 格式化字符串 |
-| args | `...any` | 与格式化字符串对应的参数 |
-
-
-### setLevel
-
-#### 详细描述
-setLevel 根据传入的字符串设置日志级别
+根据传入的字符串设置日志级别
 
 disable: 禁用所有日志, fatal: 致命错误, error: 错误, warning: 警告, info: 信息, debug: 调试
 
-参数:
+**参数**
 
-  - i: 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34;
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34; |
 
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 把全局日志级别设置为 fatal(仅副作用，无返回值)
 log.setLevel("fatal")
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`setLevel(i any)`
+### Debug {#debug}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 日志级别名称，如 &#34;info&#34;、&#34;warning&#34;、&#34;error&#34;、&#34;debug&#34;、&#34;fatal&#34;、&#34;disable&#34; |
+```go
+Debug(format string, args ...any)
+```
 
+以 debug(调试)级别格式化输出一条日志，日志内容应使用英文
 
-### warn
+**必填参数**
 
-#### 详细描述
-Warn 以 warning(警告)级别格式化输出一条日志，日志内容应使用英文
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
 
-参数:
+**可选参数**
 
-  - format: 格式化字符串
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
 
-  - args: 与格式化字符串对应的参数
+**示例**
 
+``````````````yak
+// 输出一条 debug 日志(仅副作用，无返回值)
+log.Debug("current value is %v", 123)
+``````````````
 
+---
 
+### Error {#error}
 
-Example:
+```go
+Error(format string, args ...any)
+```
+
+以 error(错误)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
+
+``````````````yak
+// 输出一条 error 日志(仅副作用，无返回值)
+log.Error("failed to connect: %s", "timeout")
+``````````````
+
+---
+
+### Info {#info}
+
+```go
+Info(format string, args ...any)
+```
+
+以 info(信息)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
+
+``````````````yak
+// 输出一条 info 日志(仅副作用，无返回值)
+log.Info("server started on port %d", 8080)
+``````````````
+
+---
+
+### Warn {#warn}
+
+```go
+Warn(format string, args ...any)
+```
+
+以 warning(警告)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
 
 ``````````````yak
 // 输出一条 warning 日志(仅副作用，无返回值)
 log.Warn("disk usage is high: %d%%", 90)
 ``````````````
 
+---
 
-#### 定义
+### debug {#debug-2}
 
-`warn(format string, args ...any)`
+```go
+debug(format string, args ...any)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+以 debug(调试)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | args | `...any` | 与格式化字符串对应的参数 |
 
+**示例**
+
+``````````````yak
+// 输出一条 debug 日志(仅副作用，无返回值)
+log.Debug("current value is %v", 123)
+``````````````
+
+---
+
+### error {#error-2}
+
+```go
+error(format string, args ...any)
+```
+
+以 error(错误)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
+
+``````````````yak
+// 输出一条 error 日志(仅副作用，无返回值)
+log.Error("failed to connect: %s", "timeout")
+``````````````
+
+---
+
+### info {#info-2}
+
+```go
+info(format string, args ...any)
+```
+
+以 info(信息)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
+
+``````````````yak
+// 输出一条 info 日志(仅副作用，无返回值)
+log.Info("server started on port %d", 8080)
+``````````````
+
+---
+
+### warn {#warn-2}
+
+```go
+warn(format string, args ...any)
+```
+
+以 warning(警告)级别格式化输出一条日志，日志内容应使用英文
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `string` | 格式化字符串 |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| args | `...any` | 与格式化字符串对应的参数 |
+
+**示例**
+
+``````````````yak
+// 输出一条 warning 日志(仅副作用，无返回值)
+log.Warn("disk usage is high: %d%%", 90)
+``````````````
+
+---
 

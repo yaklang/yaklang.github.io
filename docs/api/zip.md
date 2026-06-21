@@ -1,187 +1,95 @@
-# zip
+# zip {#library-zip}
 
-|实例名|实例描述|
-|:------|:--------|
-AES128|(zip.EncryptionMethod) 2|
-AES192|(zip.EncryptionMethod) 3|
-AES256|(zip.EncryptionMethod) 4|
-StandardEncryption|(zip.EncryptionMethod) 1|
+`zip` 库提供功能完整的 ZIP 压缩/解压能力，支持加密、按模式提取、以及在不解压的情况下对压缩包内容做正则/子串检索（grep），常用于归档处理、固件/样本分析与压缩包内的敏感信息搜索。
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [zip.Compress](#compress) |zipCompress 将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress） 按给定文件名读取文件内容并写入目标 zip 包 参数: - zipName: 输出的 zip 文件路径 - filenames: 一个或多个待压缩的文件路径 返回值: - 错误信息（读取文件或写入...|
-| [zip.CompressByNameWithOptions](#compressbynamewithoptions) |CompressByNameWithOptions 把若干本地文件/目录压缩为 zip 文件，支持 CompressOption（含密码、加密方法）。 关键词: CompressByName, 密码 zip 写 参数: - files: 待压缩的文件或目录路径列表 - dest: 输出的 zip 文...|
-| [zip.CompressRaw](#compressraw) |CompressRaw 将一个 map（文件名 -&gt; 内容）在内存中压缩为 zip 字节切片 参数: - i: 文件名到内容的映射（值可以是字符串或字节切片） 返回值: - 压缩后的 zip 字节切片 - 错误信息|
-| [zip.CompressRawWithPassword](#compressrawwithpassword) |CompressRawWithPassword 与 CompressRaw 类似，但生成带密码（默认 AES-256）加密的 zip 字节。 关键词: 内存加密 zip, AES256 zip 创建 参数: - i: 文件名到内容的映射 - password: 加密密码 - encryption: ...|
-| [zip.CompressWithPassword](#compresswithpassword) |CompressWithPassword 把若干本地文件压缩成带密码（AES-256）的 zip 文件。 关键词: 文件加密压缩, AES zip 压缩 参数: - zipName: 输出的 zip 文件路径 - password: 加密密码 - filenames: 一个或多个待压缩的文件路径 返...|
-| [zip.Decompress](#decompress) |Decompress 解压一个 zip 文件到指定目标目录 参数: - zipFile: 待解压的 zip 文件路径 - dest: 解压输出的目标目录 返回值: - 错误信息|
-| [zip.DecompressFromRawWithOptions](#decompressfromrawwithoptions) |DecompressFromRawWithOptions 从内存 zip 原始字节解压到目标目录，支持 DecompressOption（如密码）。 关键词: zip 内存解压, DeCompressFromRaw, 密码 zip 解压 参数: - raw: zip 文件的原始字节内容 - dest...|
-| [zip.DecompressWithOptions](#decompresswithoptions) |DecompressWithOptions 解压 zip 文件到目标目录，支持 DecompressOption（如密码）。 关键词: zip 解压密码, DeCompress 参数: - zipFile: 待解压的 zip 文件路径 - dest: 解压输出的目标目录 - opts: 可选的解压选...|
-| [zip.DecompressWithPassword](#decompresswithpassword) |DecompressWithPassword 解压带密码的 zip 到目标目录。 关键词: 加密 zip 解压, AES zip 解压 参数: - zipFile: 待解压的 zip 文件路径 - dest: 解压输出的目标目录 - password: 解密密码 返回值: - 错误信息|
-| [zip.ExtractByPattern](#extractbypattern) |ExtractByPattern 根据文件名模式（支持 * 通配符）从 ZIP 文件中提取匹配的文件 参数: - zipFile: zip 文件路径 - pattern: 文件名匹配模式（如 &#34;*.txt&#34;） 返回值: - 提取结果列表（每项含 FileName/Content/Error） - 错...|
-| [zip.ExtractByPatternFromRaw](#extractbypatternfromraw) |ExtractByPatternFromRaw 从内存中的 ZIP 原始数据按文件名模式（支持 * 通配符）提取匹配的文件 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - pattern: 文件名匹配模式（如 &#34;*.txt&#34;） 返回值: - 提取结...|
-| [zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions) |ExtractByPatternFromRawWithOptions 从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码） 关键词: ExtractByPatternFromRaw, 内存通配符提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、st...|
-| [zip.ExtractByPatternWithOptions](#extractbypatternwithoptions) |ExtractByPatternWithOptions 从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractByPattern, 通配符提取, 密码提取 参数: - zipFile: zip 文件路径 - pattern: 文件名匹配模式（如 &#34;...|
-| [zip.ExtractFile](#extractfile) |ExtractFile 从 ZIP 文件中提取单个文件的内容 参数: - zipFile: zip 文件路径 - targetFile: 待提取的 zip 内条目名称 返回值: - 提取出的文件内容字节 - 错误信息|
-| [zip.ExtractFileFromRaw](#extractfilefromraw) |ExtractFileFromRaw 从内存中的 ZIP 原始数据中提取单个文件的内容 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - targetFile: 待提取的 zip 内条目名称 返回值: - 提取出的文件内容字节 - 错误信息|
-| [zip.ExtractFileFromRawWithOptions](#extractfilefromrawwithoptions) |ExtractFileFromRawWithOptions 从内存 ZIP 原始字节提取单个文件，支持 ExtractOption（如密码） 关键词: ExtractFileFromRaw, 内存提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、string 或 io.Rea...|
-| [zip.ExtractFileWithOptions](#extractfilewithoptions) |ExtractFileWithOptions 从 ZIP 文件提取单个文件，支持 ExtractOption（如密码） 关键词: ExtractFile, 密码提取 参数: - zipFile: zip 文件路径 - targetFile: 待提取的条目名称 - opts: 可选的提取选项（如 ex...|
-| [zip.ExtractFiles](#extractfiles) |ExtractFiles 从 ZIP 文件中并发提取多个文件 参数: - zipFile: zip 文件路径 - targetFiles: 待提取的条目名称列表 返回值: - 提取结果列表（每项含 FileName/Content/Error） - 错误信息|
-| [zip.ExtractFilesFromRaw](#extractfilesfromraw) |ExtractFilesFromRaw 从内存中的 ZIP 原始数据中并发提取多个文件 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - targetFiles: 待提取的条目名称列表 返回值: - 提取结果列表（每项含 FileName/Conte...|
-| [zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions) |ExtractFilesFromRawWithOptions 从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractFilesFromRaw, 并发提取, 密码提取 参数: - raw: zip 的原始数据（[]byte、string 或 io...|
-| [zip.ExtractFilesWithOptions](#extractfileswithoptions) |ExtractFilesWithOptions 从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码） 关键词: ExtractFiles, 并发提取, 密码提取 参数: - zipFile: zip 文件路径 - targetFiles: 待提取的条目名称列表 - opts:...|
-| [zip.GrepPathRawRegexp](#greppathrawregexp) |GrepPathRawRegexp 使用正则表达式在内存 ZIP 原始数据的条目路径（文件名）中搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - pattern: 路径正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配的...|
-| [zip.GrepPathRawSubString](#greppathrawsubstring) |GrepPathRawSubString 使用子字符串在内存 ZIP 原始数据的条目路径（文件名）中搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - substring: 待搜索的路径子字符串 - opts: 可选的 grep 配置选项 返回值...|
-| [zip.GrepPathRegexp](#greppathregexp) |GrepPathRegexp 使用正则表达式在 ZIP 文件的条目路径（文件名）中搜索 参数: - zipFile: zip 文件路径 - pattern: 路径正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配的路径结果列表 - 错误信息|
-| [zip.GrepPathSubString](#greppathsubstring) |GrepPathSubString 使用子字符串在 ZIP 文件的条目路径（文件名）中搜索 参数: - zipFile: zip 文件路径 - substring: 待搜索的路径子字符串 - opts: 可选的 grep 配置选项 返回值: - 匹配的路径结果列表 - 错误信息|
-| [zip.GrepRawRegexp](#greprawregexp) |GrepRawRegexp 使用正则表达式在内存中的 ZIP 原始数据的条目内容中搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - pattern: 正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配结果列表 - 错误信...|
-| [zip.GrepRawSubString](#greprawsubstring) |GrepRawSubString 使用子字符串在内存中的 ZIP 原始数据的条目内容中搜索（默认不区分大小写） 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - substring: 待搜索的子字符串 - opts: 可选的 grep 配置选项 返回...|
-| [zip.GrepRegexp](#grepregexp) |GrepRegexp 使用正则表达式在 ZIP 文件的所有条目内容中搜索 参数: - zipFile: zip 文件路径 - pattern: 正则表达式 - opts: 可选的 grep 配置选项 返回值: - 匹配结果列表 - 错误信息|
-| [zip.GrepSubString](#grepsubstring) |GrepSubString 使用子字符串在 ZIP 文件的所有条目内容中搜索（默认不区分大小写） 参数: - zipFile: zip 文件路径 - substring: 待搜索的子字符串 - opts: 可选的 grep 配置选项 返回值: - 匹配结果列表 - 错误信息|
-| [zip.MergeGrepResults](#mergegrepresults) |MergeGrepResults 合并多个 GrepResult，将位于同一文件且上下文相邻的结果合并在一起 参数: - results: 待合并的 GrepResult 列表 返回值: - 合并后的 GrepResult 列表|
-| [zip.NewGrepSearcher](#newgrepsearcher) |NewGrepSearcher 从一个 ZIP 文件创建带缓存的搜索器，适合对同一 zip 多次搜索 参数: - zipFile: zip 文件路径 返回值: - zip 搜索器对象 - 错误信息|
-| [zip.NewGrepSearcherFromRaw](#newgrepsearcherfromraw) |NewGrepSearcherFromRaw 从内存中的 ZIP 原始数据创建带缓存的搜索器，适合对同一 zip 多次搜索 参数: - raw: zip 的原始数据（[]byte、string 或 io.Reader） - filename: 可选的逻辑文件名（仅用于结果展示） 返回值: - zip...|
-| [zip.RRFRankResults](#rrfrankresults) |RRFRankResults 使用 RRF（Reciprocal Rank Fusion）算法对多组 GrepResult 进行融合排序 参数: - results: 待排序的 GrepResult 切片 返回值: - 重新排序后的 GrepResult 切片|
-| [zip.Recursive](#recursive) |Recursive 递归遍历一个本地 zip 文件中的所有条目，对每个条目调用回调函数 参数: - i: 本地 zip 文件路径 - cb: 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息) 返回值: - 错误信息|
-| [zip.RecursiveFromRaw](#recursivefromraw) |RecursiveFromRaw 递归遍历内存中 zip 原始字节的所有条目，对每个条目调用回调函数 参数: - i: zip 文件的原始字节内容 - cb: 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息) 返回值: - 错误信息|
-| [zip.compressEncryption](#compressencryption) |compressEncryption 设置 zip 压缩的加密方法（默认 AES256） 关键词: zip 加密方法, AES256 参数: - method: 加密方法（如 zip.AES256、zip.AES128、zip.StandardEncryption） 返回值: - 一个压缩配置选项|
-| [zip.compressPassword](#compresspassword) |compressPassword 为 zip 压缩设置加密密码 关键词: zip 压缩密码, 加密 zip 创建 参数: - password: 加密密码 返回值: - 一个压缩配置选项|
-| [zip.decompressPassword](#decompresspassword) |decompressPassword 为 zip 解压设置解密密码 关键词: zip 解压密码 参数: - password: 解密密码 返回值: - 一个解压配置选项|
-| [zip.extractPassword](#extractpassword) |extractPassword 为 zip 提取设置解密密码 关键词: zip 提取密码 参数: - password: 解密密码 返回值: - 一个提取配置选项|
-| [zip.grepCaseSensitive](#grepcasesensitive) |grepCaseSensitive 设置 zip grep 子串搜索是否区分大小写 参数: - i: 是否区分大小写，不传则默认为 true 返回值: - 一个 grep 配置选项|
-| [zip.grepContextLine](#grepcontextline) |grepContextLine 设置 zip grep 搜索时匹配行的上下文行数 参数: - context: 匹配行前后保留的上下文行数 返回值: - 一个 grep 配置选项|
-| [zip.grepExcludePathRegexp](#grepexcludepathregexp) |grepExcludePathRegexp 排除路径匹配指定正则的条目（任一匹配即排除） 参数: - patterns: 一个或多个路径正则表达式 返回值: - 一个 grep 配置选项|
-| [zip.grepExcludePathSubString](#grepexcludepathsubstring) |grepExcludePathSubString 排除路径包含指定子串的条目（任一匹配即排除） 参数: - patterns: 一个或多个路径子串 返回值: - 一个 grep 配置选项|
-| [zip.grepIncludePathRegexp](#grepincludepathregexp) |grepIncludePathRegexp 仅在路径匹配指定正则的条目中搜索（任一匹配即可） 参数: - patterns: 一个或多个路径正则表达式 返回值: - 一个 grep 配置选项|
-| [zip.grepIncludePathSubString](#grepincludepathsubstring) |grepIncludePathSubString 仅在路径包含指定子串的条目中搜索（任一匹配即可） 参数: - patterns: 一个或多个路径子串 返回值: - 一个 grep 配置选项|
-| [zip.grepLimit](#greplimit) |grepLimit 设置 zip grep 搜索返回结果的最大数量 参数: - limit: 结果数量上限 返回值: - 一个 grep 配置选项|
-| [zip.grepPassword](#greppassword) |grepPassword 在 zip 中执行 grep 时设置加密条目的解密密码 关键词: zip grep 密码, 加密 zip 搜索 参数: - password: 解密密码 返回值: - 一个 grep 配置选项|
+典型使用场景：
 
+- 压缩：`zip.Compress` / `zip.CompressByNameWithOptions` 打包文件，`zip.CompressRaw` 压缩内存数据，`zip.CompressWithPassword` 加密压缩。
+- 解压与提取：`zip.Decompress` / `zip.DecompressWithPassword` 解压，`zip.ExtractFile` / `zip.ExtractByPattern` 按文件名/模式提取，`zip.Recursive` 遍历包内条目。
+- 内容检索：`zip.GrepRegexp` / `zip.GrepSubString` / `zip.GrepPathRegexp` 在压缩包内按正则/子串/路径检索，`zip.NewGrepSearcher` 创建可复用检索器，`zip.RRFRankResults` 对结果排序。
 
-## 函数定义
-### Compress
+与相邻库的关系：`zip` 与 `gzip`（单流压缩）、`filesys`（文件系统遍历）、`diff`（`DiffZIPFile`）配合，是归档处理与"压缩包里找东西"的主力。
 
-#### 详细描述
-zipCompress 将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress）
+> 共 47 个函数、4 个实例
 
-按给定文件名读取文件内容并写入目标 zip 包
+## 实例
 
+|实例名|类型|说明|
+|:--|:--|:--|
+| AES128 | `zip.EncryptionMethod` | 2 |
+| AES192 | `zip.EncryptionMethod` | 3 |
+| AES256 | `zip.EncryptionMethod` | 4 |
+| StandardEncryption | `zip.EncryptionMethod` | 1 |
 
+## 函数索引
 
-参数:
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [zip.CompressRaw](#compressraw) | `i any` | `[]byte, error` | 将一个 map（文件名 -&gt; 内容）在内存中压缩为 zip 字节切片 |
+| [zip.Decompress](#decompress) | `zipFile string, dest string` | `error` | 解压一个 zip 文件到指定目标目录 |
+| [zip.DecompressWithPassword](#decompresswithpassword) | `zipFile string, dest string, password string` | `error` | 解压带密码的 zip 到目标目录。 |
+| [zip.ExtractByPattern](#extractbypattern) | `zipFile string, pattern string` | `[]*ExtractResult, error` | 根据文件名模式（支持 * 通配符）从 ZIP 文件中提取匹配的文件 |
+| [zip.ExtractByPatternFromRaw](#extractbypatternfromraw) | `raw any, pattern string` | `[]*ExtractResult, error` | 从内存中的 ZIP 原始数据按文件名模式（支持 * 通配符）提取匹配的文件 |
+| [zip.ExtractFile](#extractfile) | `zipFile string, targetFile string` | `[]byte, error` | 从 ZIP 文件中提取单个文件的内容 |
+| [zip.ExtractFileFromRaw](#extractfilefromraw) | `raw any, targetFile string` | `[]byte, error` | 从内存中的 ZIP 原始数据中提取单个文件的内容 |
+| [zip.ExtractFiles](#extractfiles) | `zipFile string, targetFiles []string` | `[]*ExtractResult, error` | 从 ZIP 文件中并发提取多个文件 |
+| [zip.ExtractFilesFromRaw](#extractfilesfromraw) | `raw any, targetFiles []string` | `[]*ExtractResult, error` | 从内存中的 ZIP 原始数据中并发提取多个文件 |
+| [zip.MergeGrepResults](#mergegrepresults) | `results []*GrepResult` | `[]*GrepResult` | 合并多个 GrepResult，将位于同一文件且上下文相邻的结果合并在一起 |
+| [zip.NewGrepSearcher](#newgrepsearcher) | `zipFile string` | `*ZipGrepSearcher, error` | 从一个 ZIP 文件创建带缓存的搜索器，适合对同一 zip 多次搜索 |
+| [zip.RRFRankResults](#rrfrankresults) | `results []*ziputil.GrepResult` | `[]*ziputil.GrepResult` | 使用 RRF（Reciprocal Rank Fusion）算法对多组 GrepResult 进行融合排序 |
+| [zip.Recursive](#recursive) | `i any, cb func(isDir bool, pathName string, info os.FileInfo) error` | `error` | 递归遍历一个本地 zip 文件中的所有条目，对每个条目调用回调函数 |
+| [zip.RecursiveFromRaw](#recursivefromraw) | `i any, cb func(isDir bool, pathName string, info os.FileInfo) error` | `error` | 递归遍历内存中 zip 原始字节的所有条目，对每个条目调用回调函数 |
 
-  - zipName: 输出的 zip 文件路径
+## 可变参数函数索引
 
-  - filenames: 一个或多个待压缩的文件路径
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [zip.Compress](#compress) | `zipName string, filenames ...string` | `error` | 将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress） |
+| [zip.CompressByNameWithOptions](#compressbynamewithoptions) | `files []string, dest string, opts ...CompressOption` | `error` | 把若干本地文件/目录压缩为 zip 文件，支持 CompressOption（含密码、加密方法）。 |
+| [zip.CompressRawWithPassword](#compressrawwithpassword) | `i any, password string, encryption ...ziputil.EncryptionMethod` | `[]byte, error` | 与 CompressRaw 类似，但生成带密码（默认 AES-256）加密的 zip 字节。 |
+| [zip.CompressWithPassword](#compresswithpassword) | `zipName string, password string, filenames ...string` | `error` | 把若干本地文件压缩成带密码（AES-256）的 zip 文件。 |
+| [zip.DecompressFromRawWithOptions](#decompressfromrawwithoptions) | `raw []byte, dest string, opts ...DecompressOption` | `error` | 从内存 zip 原始字节解压到目标目录，支持 DecompressOption（如密码）。 |
+| [zip.DecompressWithOptions](#decompresswithoptions) | `zipFile string, dest string, opts ...DecompressOption` | `error` | 解压 zip 文件到目标目录，支持 DecompressOption（如密码）。 |
+| [zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions) | `raw any, pattern string, opts ...ExtractOption` | `[]*ExtractResult, error` | 从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码） |
+| [zip.ExtractByPatternWithOptions](#extractbypatternwithoptions) | `zipFile string, pattern string, opts ...ExtractOption` | `[]*ExtractResult, error` | 从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码） |
+| [zip.ExtractFileFromRawWithOptions](#extractfilefromrawwithoptions) | `raw any, targetFile string, opts ...ExtractOption` | `[]byte, error` | 从内存 ZIP 原始字节提取单个文件，支持 ExtractOption（如密码） |
+| [zip.ExtractFileWithOptions](#extractfilewithoptions) | `zipFile string, targetFile string, opts ...ExtractOption` | `[]byte, error` | 从 ZIP 文件提取单个文件，支持 ExtractOption（如密码） |
+| [zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions) | `raw any, targetFiles []string, opts ...ExtractOption` | `[]*ExtractResult, error` | 从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码） |
+| [zip.ExtractFilesWithOptions](#extractfileswithoptions) | `zipFile string, targetFiles []string, opts ...ExtractOption` | `[]*ExtractResult, error` | 从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码） |
+| [zip.GrepPathRawRegexp](#greppathrawregexp) | `raw any, pattern string, opts ...GrepOption` | `[]*GrepResult, error` | 使用正则表达式在内存 ZIP 原始数据的条目路径（文件名）中搜索 |
+| [zip.GrepPathRawSubString](#greppathrawsubstring) | `raw any, substring string, opts ...GrepOption` | `[]*GrepResult, error` | 使用子字符串在内存 ZIP 原始数据的条目路径（文件名）中搜索 |
+| [zip.GrepPathRegexp](#greppathregexp) | `zipFile string, pattern string, opts ...GrepOption` | `[]*GrepResult, error` | 使用正则表达式在 ZIP 文件的条目路径（文件名）中搜索 |
+| [zip.GrepPathSubString](#greppathsubstring) | `zipFile string, substring string, opts ...GrepOption` | `[]*GrepResult, error` | 使用子字符串在 ZIP 文件的条目路径（文件名）中搜索 |
+| [zip.GrepRawRegexp](#greprawregexp) | `raw any, pattern string, opts ...GrepOption` | `[]*GrepResult, error` | 使用正则表达式在内存中的 ZIP 原始数据的条目内容中搜索 |
+| [zip.GrepRawSubString](#greprawsubstring) | `raw any, substring string, opts ...GrepOption` | `[]*GrepResult, error` | 使用子字符串在内存中的 ZIP 原始数据的条目内容中搜索（默认不区分大小写） |
+| [zip.GrepRegexp](#grepregexp) | `zipFile string, pattern string, opts ...GrepOption` | `[]*GrepResult, error` | 使用正则表达式在 ZIP 文件的所有条目内容中搜索 |
+| [zip.GrepSubString](#grepsubstring) | `zipFile string, substring string, opts ...GrepOption` | `[]*GrepResult, error` | 使用子字符串在 ZIP 文件的所有条目内容中搜索（默认不区分大小写） |
+| [zip.NewGrepSearcherFromRaw](#newgrepsearcherfromraw) | `raw any, filename ...string` | `*ZipGrepSearcher, error` | 从内存中的 ZIP 原始数据创建带缓存的搜索器，适合对同一 zip 多次搜索 |
 
+## 函数详情
 
+### CompressRaw {#compressraw}
 
-返回值:
+```go
+CompressRaw(i any) ([]byte, error)
+```
 
-  - 错误信息（读取文件或写入 zip 失败时返回）
+将一个 map（文件名 -&gt; 内容）在内存中压缩为 zip 字节切片
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 文件名到内容的映射（值可以是字符串或字节切片） |
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 压缩后的 zip 字节切片 |
+| r2 | `error` | 错误信息 |
 
-``````````````yak
-dir = os.TempDir()
-src = file.Join(dir, "zip_demo_src.txt")
-file.Save(src, "hello zip world")~
-zipPath = file.Join(dir, "zip_demo.zip")
-zip.Compress(zipPath, src)~
-println(file.IsExisted(zipPath))   // OUT: true
-assert file.IsExisted(zipPath), "zip archive should be created"
-assert len(file.ReadFile(zipPath)~) > 0, "zip archive should be non-empty"
-``````````````
-
-
-#### 定义
-
-`Compress(zipName string, filenames ...string) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipName | `string` | 输出的 zip 文件路径 |
-| filenames | `...string` | 一个或多个待压缩的文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息（读取文件或写入 zip 失败时返回） |
-
-
-### CompressByNameWithOptions
-
-#### 详细描述
-CompressByNameWithOptions 把若干本地文件/目录压缩为 zip 文件，支持 CompressOption（含密码、加密方法）。
-
-关键词: CompressByName, 密码 zip 写
-
-参数:
-
-  - files: 待压缩的文件或目录路径列表
-
-  - dest: 输出的 zip 文件路径（必须不存在）
-
-  - opts: 可选的压缩选项（如 compressPassword、compressEncryption）
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zip.CompressByNameWithOptions(["/tmp/a.txt"], "/tmp/out.zip", zip.compressPassword("123456"))~
-``````````````
-
-
-#### 定义
-
-`CompressByNameWithOptions(files []string, dest string, opts ...CompressOption) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| files | `[]string` | 待压缩的文件或目录路径列表 |
-| dest | `string` | 输出的 zip 文件路径（必须不存在） |
-| opts | `...CompressOption` | 可选的压缩选项（如 compressPassword、compressEncryption） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### CompressRaw
-
-#### 详细描述
-CompressRaw 将一个 map（文件名 -&gt; 内容）在内存中压缩为 zip 字节切片
-
-参数:
-
-  - i: 文件名到内容的映射（值可以是字符串或字节切片）
-
-
-
-返回值:
-
-  - 压缩后的 zip 字节切片
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 内存压缩后再从字节中提取，验证往返一致
@@ -190,388 +98,123 @@ content = zip.ExtractFileFromRaw(zipBytes, "a.txt")~
 assert string(content) == "hello world", "CompressRaw then ExtractFileFromRaw should round-trip"
 ``````````````
 
+---
 
-#### 定义
+### Decompress {#decompress}
 
-`CompressRaw(i any) ([]byte, error)`
+```go
+Decompress(zipFile string, dest string) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 文件名到内容的映射（值可以是字符串或字节切片） |
+解压一个 zip 文件到指定目标目录
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 压缩后的 zip 字节切片 |
-| r2 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | 待解压的 zip 文件路径 |
+| dest | `string` | 解压输出的目标目录 |
 
-### CompressRawWithPassword
+**返回值**
 
-#### 详细描述
-CompressRawWithPassword 与 CompressRaw 类似，但生成带密码（默认 AES-256）加密的 zip 字节。
-
-关键词: 内存加密 zip, AES256 zip 创建
-
-参数:
-
-  - i: 文件名到内容的映射
-
-  - password: 加密密码
-
-  - encryption: 可选的加密方法（默认 AES256）
-
-
-
-返回值:
-
-  - 加密后的 zip 字节切片
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-// 加密压缩后用密码提取，验证往返一致
-zipBytes = zip.CompressRawWithPassword({"s.txt": "secret"}, "123456")~
-content = zip.ExtractFileFromRawWithOptions(zipBytes, "s.txt", zip.extractPassword("123456"))~
-assert string(content) == "secret", "encrypted CompressRaw should round-trip with password"
-``````````````
-
-
-#### 定义
-
-`CompressRawWithPassword(i any, password string, encryption ...ziputil.EncryptionMethod) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 文件名到内容的映射 |
-| password | `string` | 加密密码 |
-| encryption | `...ziputil.EncryptionMethod` | 可选的加密方法（默认 AES256） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 加密后的 zip 字节切片 |
-| r2 | `error` | 错误信息 |
-
-
-### CompressWithPassword
-
-#### 详细描述
-CompressWithPassword 把若干本地文件压缩成带密码（AES-256）的 zip 文件。
-
-关键词: 文件加密压缩, AES zip 压缩
-
-参数:
-
-  - zipName: 输出的 zip 文件路径
-
-  - password: 加密密码
-
-  - filenames: 一个或多个待压缩的文件路径
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zip.CompressWithPassword("/tmp/out.zip", "123456", "/tmp/a.txt", "/tmp/b.txt")~
-``````````````
-
-
-#### 定义
-
-`CompressWithPassword(zipName string, password string, filenames ...string) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipName | `string` | 输出的 zip 文件路径 |
-| password | `string` | 加密密码 |
-| filenames | `...string` | 一个或多个待压缩的文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `error` | 错误信息 |
 
-
-### Decompress
-
-#### 详细描述
-Decompress 解压一个 zip 文件到指定目标目录
-
-参数:
-
-  - zipFile: 待解压的 zip 文件路径
-
-  - dest: 解压输出的目标目录
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zip.Decompress("/tmp/abc.zip", "/tmp/abc_extracted")~
 ``````````````
 
+---
 
-#### 定义
+### DecompressWithPassword {#decompresswithpassword}
 
-`Decompress(zipFile string, dest string) error`
+```go
+DecompressWithPassword(zipFile string, dest string, password string) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | 待解压的 zip 文件路径 |
-| dest | `string` | 解压输出的目标目录 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### DecompressFromRawWithOptions
-
-#### 详细描述
-DecompressFromRawWithOptions 从内存 zip 原始字节解压到目标目录，支持 DecompressOption（如密码）。
-
-关键词: zip 内存解压, DeCompressFromRaw, 密码 zip 解压
-
-参数:
-
-  - raw: zip 文件的原始字节内容
-
-  - dest: 解压输出的目标目录
-
-  - opts: 可选的解压选项（如 decompressPassword）
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-// 内存加密压缩后解压到临时目录，再读回验证
-zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
-dest = file.Join(os.TempDir(), "yak-zip-decompress")
-zip.DecompressFromRawWithOptions(zipBytes, dest, zip.decompressPassword("123456"))~
-content = file.ReadFile(file.Join(dest, "a.txt"))~
-assert string(content) == "AAA", "DecompressFromRawWithOptions should restore the entry"
-file.Remove(dest)
-``````````````
-
-
-#### 定义
-
-`DecompressFromRawWithOptions(raw []byte, dest string, opts ...DecompressOption) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `[]byte` | zip 文件的原始字节内容 |
-| dest | `string` | 解压输出的目标目录 |
-| opts | `...DecompressOption` | 可选的解压选项（如 decompressPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### DecompressWithOptions
-
-#### 详细描述
-DecompressWithOptions 解压 zip 文件到目标目录，支持 DecompressOption（如密码）。
-
-关键词: zip 解压密码, DeCompress
-
-参数:
-
-  - zipFile: 待解压的 zip 文件路径
-
-  - dest: 解压输出的目标目录
-
-  - opts: 可选的解压选项（如 decompressPassword）
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zip.DecompressWithOptions("/tmp/enc.zip", "/tmp/dest", zip.decompressPassword("123456"))~
-``````````````
-
-
-#### 定义
-
-`DecompressWithOptions(zipFile string, dest string, opts ...DecompressOption) error`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | 待解压的 zip 文件路径 |
-| dest | `string` | 解压输出的目标目录 |
-| opts | `...DecompressOption` | 可选的解压选项（如 decompressPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
-
-
-### DecompressWithPassword
-
-#### 详细描述
-DecompressWithPassword 解压带密码的 zip 到目标目录。
+解压带密码的 zip 到目标目录。
 
 关键词: 加密 zip 解压, AES zip 解压
 
-参数:
+**参数**
 
-  - zipFile: 待解压的 zip 文件路径
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | 待解压的 zip 文件路径 |
+| dest | `string` | 解压输出的目标目录 |
+| password | `string` | 解密密码 |
 
-  - dest: 解压输出的目标目录
+**返回值**
 
-  - password: 解密密码
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zip.DecompressWithPassword("/tmp/out.zip", "/tmp/dest", "123456")~
 ``````````````
 
+---
 
-#### 定义
+### ExtractByPattern {#extractbypattern}
 
-`DecompressWithPassword(zipFile string, dest string, password string) error`
+```go
+ExtractByPattern(zipFile string, pattern string) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | 待解压的 zip 文件路径 |
-| dest | `string` | 解压输出的目标目录 |
-| password | `string` | 解密密码 |
+根据文件名模式（支持 * 通配符）从 ZIP 文件中提取匹配的文件
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
 
-### ExtractByPattern
+**返回值**
 
-#### 详细描述
-ExtractByPattern 根据文件名模式（支持 * 通配符）从 ZIP 文件中提取匹配的文件
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
-参数:
-
-  - zipFile: zip 文件路径
-
-  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 results = zip.ExtractByPattern("/tmp/abc.zip", "*.txt")~
 for r in results { println(r.FileName) }
 ``````````````
 
+---
 
-#### 定义
+### ExtractByPatternFromRaw {#extractbypatternfromraw}
 
-`ExtractByPattern(zipFile string, pattern string) ([]*ExtractResult, error)`
+```go
+ExtractByPatternFromRaw(raw any, pattern string) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
+从内存中的 ZIP 原始数据按文件名模式（支持 * 通配符）提取匹配的文件
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
 | pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
 | r2 | `error` | 错误信息 |
 
-
-### ExtractByPatternFromRaw
-
-#### 详细描述
-ExtractByPatternFromRaw 从内存中的 ZIP 原始数据按文件名模式（支持 * 通配符）提取匹配的文件
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zipBytes = zip.CompressRaw({"a.txt": "AAA", "b.log": "BBB"})~
@@ -579,197 +222,61 @@ results = zip.ExtractByPatternFromRaw(zipBytes, "*.txt")~
 assert len(results) == 1, "only the .txt entry should match the pattern"
 ``````````````
 
+---
 
-#### 定义
+### ExtractFile {#extractfile}
 
-`ExtractByPatternFromRaw(raw any, pattern string) ([]*ExtractResult, error)`
+```go
+ExtractFile(zipFile string, targetFile string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
+从 ZIP 文件中提取单个文件的内容
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
-| r2 | `error` | 错误信息 |
+**参数**
 
-
-### ExtractByPatternFromRawWithOptions
-
-#### 详细描述
-ExtractByPatternFromRawWithOptions 从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码）
-
-关键词: ExtractByPatternFromRaw, 内存通配符提取, 密码提取
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
-results = zip.ExtractByPatternFromRawWithOptions(zipBytes, "*.txt", zip.extractPassword("123456"))~
-assert len(results) == 1, "pattern should match one encrypted entry"
-``````````````
-
-
-#### 定义
-
-`ExtractByPatternFromRawWithOptions(raw any, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
-| r2 | `error` | 错误信息 |
-
-
-### ExtractByPatternWithOptions
-
-#### 详细描述
-ExtractByPatternWithOptions 从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码）
-
-关键词: ExtractByPattern, 通配符提取, 密码提取
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - pattern: 文件名匹配模式（如 &#34;*.txt&#34;）
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.ExtractByPatternWithOptions("/tmp/enc.zip", "*.txt", zip.extractPassword("123456"))~
-``````````````
-
-
-#### 定义
-
-`ExtractByPatternWithOptions(zipFile string, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | zipFile | `string` | zip 文件路径 |
-| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
+| targetFile | `string` | 待提取的 zip 内条目名称 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 提取出的文件内容字节 |
 | r2 | `error` | 错误信息 |
 
-
-### ExtractFile
-
-#### 详细描述
-ExtractFile 从 ZIP 文件中提取单个文件的内容
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - targetFile: 待提取的 zip 内条目名称
-
-
-
-返回值:
-
-  - 提取出的文件内容字节
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 content = zip.ExtractFile("/tmp/abc.zip", "a.txt")~
 ``````````````
 
+---
 
-#### 定义
+### ExtractFileFromRaw {#extractfilefromraw}
 
-`ExtractFile(zipFile string, targetFile string) ([]byte, error)`
+```go
+ExtractFileFromRaw(raw any, targetFile string) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
+从内存中的 ZIP 原始数据中提取单个文件的内容
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
 | targetFile | `string` | 待提取的 zip 内条目名称 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]byte` | 提取出的文件内容字节 |
 | r2 | `error` | 错误信息 |
 
-
-### ExtractFileFromRaw
-
-#### 详细描述
-ExtractFileFromRaw 从内存中的 ZIP 原始数据中提取单个文件的内容
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - targetFile: 待提取的 zip 内条目名称
-
-
-
-返回值:
-
-  - 提取出的文件内容字节
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zipBytes = zip.CompressRaw({"a.txt": "hello world"})~
@@ -777,198 +284,62 @@ content = zip.ExtractFileFromRaw(zipBytes, "a.txt")~
 assert string(content) == "hello world", "ExtractFileFromRaw should return the entry content"
 ``````````````
 
+---
 
-#### 定义
+### ExtractFiles {#extractfiles}
 
-`ExtractFileFromRaw(raw any, targetFile string) ([]byte, error)`
+```go
+ExtractFiles(zipFile string, targetFiles []string) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| targetFile | `string` | 待提取的 zip 内条目名称 |
+从 ZIP 文件中并发提取多个文件
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 提取出的文件内容字节 |
-| r2 | `error` | 错误信息 |
+**参数**
 
-
-### ExtractFileFromRawWithOptions
-
-#### 详细描述
-ExtractFileFromRawWithOptions 从内存 ZIP 原始字节提取单个文件，支持 ExtractOption（如密码）
-
-关键词: ExtractFileFromRaw, 内存提取, 密码提取
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - targetFile: 待提取的条目名称
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取出的文件内容字节
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRawWithPassword({"s.txt": "secret"}, "123456")~
-content = zip.ExtractFileFromRawWithOptions(zipBytes, "s.txt", zip.extractPassword("123456"))~
-assert string(content) == "secret", "should extract encrypted entry with password"
-``````````````
-
-
-#### 定义
-
-`ExtractFileFromRawWithOptions(raw any, targetFile string, opts ...ExtractOption) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| targetFile | `string` | 待提取的条目名称 |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 提取出的文件内容字节 |
-| r2 | `error` | 错误信息 |
-
-
-### ExtractFileWithOptions
-
-#### 详细描述
-ExtractFileWithOptions 从 ZIP 文件提取单个文件，支持 ExtractOption（如密码）
-
-关键词: ExtractFile, 密码提取
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - targetFile: 待提取的条目名称
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取出的文件内容字节
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-content = zip.ExtractFileWithOptions("/tmp/enc.zip", "s.txt", zip.extractPassword("123456"))~
-``````````````
-
-
-#### 定义
-
-`ExtractFileWithOptions(zipFile string, targetFile string, opts ...ExtractOption) ([]byte, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+|参数名|类型|说明|
+|:--|:--|:--|
 | zipFile | `string` | zip 文件路径 |
-| targetFile | `string` | 待提取的条目名称 |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
+| targetFiles | `[]string` | 待提取的条目名称列表 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 提取出的文件内容字节 |
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
 | r2 | `error` | 错误信息 |
 
-
-### ExtractFiles
-
-#### 详细描述
-ExtractFiles 从 ZIP 文件中并发提取多个文件
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - targetFiles: 待提取的条目名称列表
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 results = zip.ExtractFiles("/tmp/abc.zip", ["a.txt", "b.txt"])~
 for r in results { println(r.FileName) }
 ``````````````
 
+---
 
-#### 定义
+### ExtractFilesFromRaw {#extractfilesfromraw}
 
-`ExtractFiles(zipFile string, targetFiles []string) ([]*ExtractResult, error)`
+```go
+ExtractFilesFromRaw(raw any, targetFiles []string) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
+从内存中的 ZIP 原始数据中并发提取多个文件
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
 | targetFiles | `[]string` | 待提取的条目名称列表 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
 | r2 | `error` | 错误信息 |
 
-
-### ExtractFilesFromRaw
-
-#### 详细描述
-ExtractFilesFromRaw 从内存中的 ZIP 原始数据中并发提取多个文件
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - targetFiles: 待提取的条目名称列表
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zipBytes = zip.CompressRaw({"a.txt": "AAA", "b.txt": "BBB"})~
@@ -977,554 +348,29 @@ assert len(results) == 1, "ExtractFilesFromRaw should return one matched file"
 assert string(results[0].Content) == "AAA", "extracted content should match"
 ``````````````
 
+---
 
-#### 定义
+### MergeGrepResults {#mergegrepresults}
 
-`ExtractFilesFromRaw(raw any, targetFiles []string) ([]*ExtractResult, error)`
+```go
+MergeGrepResults(results []*GrepResult) []*GrepResult
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| targetFiles | `[]string` | 待提取的条目名称列表 |
+合并多个 GrepResult，将位于同一文件且上下文相邻的结果合并在一起
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
-| r2 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| results | `[]*GrepResult` | 待合并的 GrepResult 列表 |
 
-### ExtractFilesFromRawWithOptions
+**返回值**
 
-#### 详细描述
-ExtractFilesFromRawWithOptions 从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 合并后的 GrepResult 列表 |
 
-关键词: ExtractFilesFromRaw, 并发提取, 密码提取
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - targetFiles: 待提取的条目名称列表
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
-results = zip.ExtractFilesFromRawWithOptions(zipBytes, ["a.txt"], zip.extractPassword("123456"))~
-assert len(results) == 1, "should extract one encrypted entry"
-assert string(results[0].Content) == "AAA", "decrypted content should match"
-``````````````
-
-
-#### 定义
-
-`ExtractFilesFromRawWithOptions(raw any, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| targetFiles | `[]string` | 待提取的条目名称列表 |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
-| r2 | `error` | 错误信息 |
-
-
-### ExtractFilesWithOptions
-
-#### 详细描述
-ExtractFilesWithOptions 从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码）
-
-关键词: ExtractFiles, 并发提取, 密码提取
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - targetFiles: 待提取的条目名称列表
-
-  - opts: 可选的提取选项（如 extractPassword）
-
-
-
-返回值:
-
-  - 提取结果列表（每项含 FileName/Content/Error）
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.ExtractFilesWithOptions("/tmp/enc.zip", ["a.txt"], zip.extractPassword("123456"))~
-``````````````
-
-
-#### 定义
-
-`ExtractFilesWithOptions(zipFile string, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
-| targetFiles | `[]string` | 待提取的条目名称列表 |
-| opts | `...ExtractOption` | 可选的提取选项（如 extractPassword） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
-| r2 | `error` | 错误信息 |
-
-
-### GrepPathRawRegexp
-
-#### 详细描述
-GrepPathRawRegexp 使用正则表达式在内存 ZIP 原始数据的条目路径（文件名）中搜索
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - pattern: 路径正则表达式
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配的路径结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRaw({"dir/a.txt": "x"})~
-results = zip.GrepPathRawRegexp(zipBytes, `a\.txt`)~
-assert len(results) == 1, "GrepPathRawRegexp should match the entry path"
-``````````````
-
-
-#### 定义
-
-`GrepPathRawRegexp(raw any, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| pattern | `string` | 路径正则表达式 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepPathRawSubString
-
-#### 详细描述
-GrepPathRawSubString 使用子字符串在内存 ZIP 原始数据的条目路径（文件名）中搜索
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - substring: 待搜索的路径子字符串
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配的路径结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRaw({"dir/a.txt": "x"})~
-results = zip.GrepPathRawSubString(zipBytes, "a.txt")~
-assert len(results) == 1, "GrepPathRawSubString should match the entry path"
-assert results[0].FileName == "dir/a.txt", "matched path should be the entry name"
-``````````````
-
-
-#### 定义
-
-`GrepPathRawSubString(raw any, substring string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| substring | `string` | 待搜索的路径子字符串 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepPathRegexp
-
-#### 详细描述
-GrepPathRegexp 使用正则表达式在 ZIP 文件的条目路径（文件名）中搜索
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - pattern: 路径正则表达式
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配的路径结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.GrepPathRegexp("/tmp/abc.zip", `\.txt$`)~
-for r in results { println(r.FileName) }
-``````````````
-
-
-#### 定义
-
-`GrepPathRegexp(zipFile string, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
-| pattern | `string` | 路径正则表达式 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepPathSubString
-
-#### 详细描述
-GrepPathSubString 使用子字符串在 ZIP 文件的条目路径（文件名）中搜索
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - substring: 待搜索的路径子字符串
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配的路径结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.GrepPathSubString("/tmp/abc.zip", "config")~
-for r in results { println(r.FileName) }
-``````````````
-
-
-#### 定义
-
-`GrepPathSubString(zipFile string, substring string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
-| substring | `string` | 待搜索的路径子字符串 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepRawRegexp
-
-#### 详细描述
-GrepRawRegexp 使用正则表达式在内存中的 ZIP 原始数据的条目内容中搜索
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - pattern: 正则表达式
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
-results = zip.GrepRawRegexp(zipBytes, "w.rld")~
-assert len(results) == 1, "GrepRawRegexp should find the matching line"
-``````````````
-
-
-#### 定义
-
-`GrepRawRegexp(raw any, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| pattern | `string` | 正则表达式 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepRawSubString
-
-#### 详细描述
-GrepRawSubString 使用子字符串在内存中的 ZIP 原始数据的条目内容中搜索（默认不区分大小写）
-
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - substring: 待搜索的子字符串
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
-results = zip.GrepRawSubString(zipBytes, "world")~
-assert len(results) == 1, "GrepRawSubString should find one match"
-assert results[0].LineNumber == 2, "match should be on the second line"
-``````````````
-
-
-#### 定义
-
-`GrepRawSubString(raw any, substring string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| substring | `string` | 待搜索的子字符串 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepRegexp
-
-#### 详细描述
-GrepRegexp 使用正则表达式在 ZIP 文件的所有条目内容中搜索
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - pattern: 正则表达式
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.GrepRegexp("/tmp/abc.zip", "password\\s*=")~
-for r in results { println(r.FileName, r.LineNumber, r.Line) }
-``````````````
-
-
-#### 定义
-
-`GrepRegexp(zipFile string, pattern string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
-| pattern | `string` | 正则表达式 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### GrepSubString
-
-#### 详细描述
-GrepSubString 使用子字符串在 ZIP 文件的所有条目内容中搜索（默认不区分大小写）
-
-参数:
-
-  - zipFile: zip 文件路径
-
-  - substring: 待搜索的子字符串
-
-  - opts: 可选的 grep 配置选项
-
-
-
-返回值:
-
-  - 匹配结果列表
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "password")~
-for r in results { println(r.FileName, r.LineNumber, r.Line) }
-``````````````
-
-
-#### 定义
-
-`GrepSubString(zipFile string, substring string, opts ...GrepOption) ([]*GrepResult, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
-| substring | `string` | 待搜索的子字符串 |
-| opts | `...GrepOption` | 可选的 grep 配置选项 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 匹配结果列表 |
-| r2 | `error` | 错误信息 |
-
-
-### MergeGrepResults
-
-#### 详细描述
-MergeGrepResults 合并多个 GrepResult，将位于同一文件且上下文相邻的结果合并在一起
-
-参数:
-
-  - results: 待合并的 GrepResult 列表
-
-
-
-返回值:
-
-  - 合并后的 GrepResult 列表
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
@@ -1533,134 +379,59 @@ merged = zip.MergeGrepResults(results)
 assert len(merged) >= 1, "MergeGrepResults should keep at least one result"
 ``````````````
 
+---
 
-#### 定义
+### NewGrepSearcher {#newgrepsearcher}
 
-`MergeGrepResults(results []*GrepResult) []*GrepResult`
+```go
+NewGrepSearcher(zipFile string) (*ZipGrepSearcher, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| results | `[]*GrepResult` | 待合并的 GrepResult 列表 |
+从一个 ZIP 文件创建带缓存的搜索器，适合对同一 zip 多次搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*GrepResult` | 合并后的 GrepResult 列表 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
 
-### NewGrepSearcher
+**返回值**
 
-#### 详细描述
-NewGrepSearcher 从一个 ZIP 文件创建带缓存的搜索器，适合对同一 zip 多次搜索
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ZipGrepSearcher` | zip 搜索器对象 |
+| r2 | `error` | 错误信息 |
 
-参数:
-
-  - zipFile: zip 文件路径
-
-
-
-返回值:
-
-  - zip 搜索器对象
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 searcher = zip.NewGrepSearcher("/tmp/abc.zip")~
 results = searcher.GrepSubString("password")~
 ``````````````
 
+---
 
-#### 定义
+### RRFRankResults {#rrfrankresults}
 
-`NewGrepSearcher(zipFile string) (*ZipGrepSearcher, error)`
+```go
+RRFRankResults(results []*ziputil.GrepResult) []*ziputil.GrepResult
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| zipFile | `string` | zip 文件路径 |
+使用 RRF（Reciprocal Rank Fusion）算法对多组 GrepResult 进行融合排序
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ZipGrepSearcher` | zip 搜索器对象 |
-| r2 | `error` | 错误信息 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| results | `[]*ziputil.GrepResult` | 待排序的 GrepResult 切片 |
 
-### NewGrepSearcherFromRaw
+**返回值**
 
-#### 详细描述
-NewGrepSearcherFromRaw 从内存中的 ZIP 原始数据创建带缓存的搜索器，适合对同一 zip 多次搜索
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ziputil.GrepResult` | 重新排序后的 GrepResult 切片 |
 
-参数:
-
-  - raw: zip 的原始数据（[]byte、string 或 io.Reader）
-
-  - filename: 可选的逻辑文件名（仅用于结果展示）
-
-
-
-返回值:
-
-  - zip 搜索器对象
-
-  - 错误信息
-
-
-
-
-Example:
-
-``````````````yak
-zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
-searcher = zip.NewGrepSearcherFromRaw(zipBytes)~
-results = searcher.GrepSubString("world")~
-assert len(results) == 1, "searcher should find one match"
-``````````````
-
-
-#### 定义
-
-`NewGrepSearcherFromRaw(raw any, filename ...string) (*ZipGrepSearcher, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
-| filename | `...string` | 可选的逻辑文件名（仅用于结果展示） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*ZipGrepSearcher` | zip 搜索器对象 |
-| r2 | `error` | 错误信息 |
-
-
-### RRFRankResults
-
-#### 详细描述
-RRFRankResults 使用 RRF（Reciprocal Rank Fusion）算法对多组 GrepResult 进行融合排序
-
-参数:
-
-  - results: 待排序的 GrepResult 切片
-
-
-
-返回值:
-
-  - 重新排序后的 GrepResult 切片
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 在内存 zip 中搜索后对结果进行 RRF 排序
@@ -1670,43 +441,30 @@ ranked = zip.RRFRankResults(results)
 assert len(ranked) == len(results), "RRFRankResults should keep all results"
 ``````````````
 
+---
 
-#### 定义
+### Recursive {#recursive}
 
-`RRFRankResults(results []*ziputil.GrepResult) []*ziputil.GrepResult`
+```go
+Recursive(i any, cb func(isDir bool, pathName string, info os.FileInfo) error) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| results | `[]*ziputil.GrepResult` | 待排序的 GrepResult 切片 |
+递归遍历一个本地 zip 文件中的所有条目，对每个条目调用回调函数
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]*ziputil.GrepResult` | 重新排序后的 GrepResult 切片 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 本地 zip 文件路径 |
+| cb | `func(isDir bool, pathName string, info os.FileInfo) error` | 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息) |
 
-### Recursive
+**返回值**
 
-#### 详细描述
-Recursive 递归遍历一个本地 zip 文件中的所有条目，对每个条目调用回调函数
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-参数:
-
-  - i: 本地 zip 文件路径
-
-  - cb: 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息)
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zip.Recursive("/tmp/abc.zip", (isDir, pathName, info) => {
@@ -1714,44 +472,30 @@ zip.Recursive("/tmp/abc.zip", (isDir, pathName, info) => {
 })~
 ``````````````
 
+---
 
-#### 定义
+### RecursiveFromRaw {#recursivefromraw}
 
-`Recursive(i any, cb func(isDir bool, pathName string, info os.FileInfo) error) error`
+```go
+RecursiveFromRaw(i any, cb func(isDir bool, pathName string, info os.FileInfo) error) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | 本地 zip 文件路径 |
+递归遍历内存中 zip 原始字节的所有条目，对每个条目调用回调函数
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | zip 文件的原始字节内容 |
 | cb | `func(isDir bool, pathName string, info os.FileInfo) error` | 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息) |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `error` | 错误信息 |
 
-
-### RecursiveFromRaw
-
-#### 详细描述
-RecursiveFromRaw 递归遍历内存中 zip 原始字节的所有条目，对每个条目调用回调函数
-
-参数:
-
-  - i: zip 文件的原始字节内容
-
-  - cb: 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息)
-
-
-
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 先在内存中压缩两个文件，再遍历统计条目数量
@@ -1766,512 +510,830 @@ count = 0
 assert count == 2, "RecursiveFromRaw should visit both entries"
 ``````````````
 
+---
 
-#### 定义
+## 可变参数函数详情
 
-`RecursiveFromRaw(i any, cb func(isDir bool, pathName string, info os.FileInfo) error) error`
+### Compress {#compress}
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `any` | zip 文件的原始字节内容 |
-| cb | `func(isDir bool, pathName string, info os.FileInfo) error` | 对每个条目调用的回调函数，参数为 (是否为目录, 条目路径, 文件信息) |
+```go
+Compress(zipName string, filenames ...string) error
+```
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
+将一个或多个文件压缩打包为 zip 文件（导出名为 zip.Compress）
 
+按给定文件名读取文件内容并写入目标 zip 包
 
-### compressEncryption
+**必填参数**
 
-#### 详细描述
-compressEncryption 设置 zip 压缩的加密方法（默认 AES256）
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipName | `string` | 输出的 zip 文件路径 |
 
-关键词: zip 加密方法, AES256
+**可选参数**
 
-参数:
+|参数名|类型|说明|
+|:--|:--|:--|
+| filenames | `...string` | 一个或多个待压缩的文件路径 |
 
-  - method: 加密方法（如 zip.AES256、zip.AES128、zip.StandardEncryption）
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息（读取文件或写入 zip 失败时返回） |
 
-
-返回值:
-
-  - 一个压缩配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-zip.CompressByNameWithOptions(["/tmp/a.txt"], "/tmp/out.zip", zip.compressPassword("123456"), zip.compressEncryption(zip.AES256))~
+dir = os.TempDir()
+src = file.Join(dir, "zip_demo_src.txt")
+file.Save(src, "hello zip world")~
+zipPath = file.Join(dir, "zip_demo.zip")
+zip.Compress(zipPath, src)~
+println(file.IsExisted(zipPath))   // OUT: true
+assert file.IsExisted(zipPath), "zip archive should be created"
+assert len(file.ReadFile(zipPath)~) > 0, "zip archive should be non-empty"
 ``````````````
 
+---
 
-#### 定义
+### CompressByNameWithOptions {#compressbynamewithoptions}
 
-`compressEncryption(method EncryptionMethod) CompressOption`
+```go
+CompressByNameWithOptions(files []string, dest string, opts ...CompressOption) error
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| method | `EncryptionMethod` | 加密方法（如 zip.AES256、zip.AES128、zip.StandardEncryption） |
+把若干本地文件/目录压缩为 zip 文件，支持 CompressOption（含密码、加密方法）。
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CompressOption` | 一个压缩配置选项 |
+关键词: CompressByName, 密码 zip 写
 
+**必填参数**
 
-### compressPassword
+|参数名|类型|说明|
+|:--|:--|:--|
+| files | `[]string` | 待压缩的文件或目录路径列表 |
+| dest | `string` | 输出的 zip 文件路径（必须不存在） |
 
-#### 详细描述
-compressPassword 为 zip 压缩设置加密密码
+**可选参数**
 
-关键词: zip 压缩密码, 加密 zip 创建
+可作为可变参数 `opts ...CompressOption` 传入选项；共 2 个可用选项，详见 [CompressOption 选项列表](#option-compressoption)。
 
-参数:
+**返回值**
 
-  - password: 加密密码
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 一个压缩配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 zip.CompressByNameWithOptions(["/tmp/a.txt"], "/tmp/out.zip", zip.compressPassword("123456"))~
 ``````````````
 
+---
 
-#### 定义
+### CompressRawWithPassword {#compressrawwithpassword}
 
-`compressPassword(password string) CompressOption`
+```go
+CompressRawWithPassword(i any, password string, encryption ...ziputil.EncryptionMethod) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+与 CompressRaw 类似，但生成带密码（默认 AES-256）加密的 zip 字节。
+
+关键词: 内存加密 zip, AES256 zip 创建
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| i | `any` | 文件名到内容的映射 |
 | password | `string` | 加密密码 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `CompressOption` | 一个压缩配置选项 |
+**可选参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| encryption | `...ziputil.EncryptionMethod` | 可选的加密方法（默认 AES256） |
 
-### decompressPassword
+**返回值**
 
-#### 详细描述
-decompressPassword 为 zip 解压设置解密密码
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 加密后的 zip 字节切片 |
+| r2 | `error` | 错误信息 |
 
-关键词: zip 解压密码
+**示例**
 
-参数:
+``````````````yak
+// 加密压缩后用密码提取，验证往返一致
+zipBytes = zip.CompressRawWithPassword({"s.txt": "secret"}, "123456")~
+content = zip.ExtractFileFromRawWithOptions(zipBytes, "s.txt", zip.extractPassword("123456"))~
+assert string(content) == "secret", "encrypted CompressRaw should round-trip with password"
+``````````````
 
-  - password: 解密密码
+---
 
+### CompressWithPassword {#compresswithpassword}
 
+```go
+CompressWithPassword(zipName string, password string, filenames ...string) error
+```
 
-返回值:
+把若干本地文件压缩成带密码（AES-256）的 zip 文件。
 
-  - 一个解压配置选项
+关键词: 文件加密压缩, AES zip 压缩
 
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipName | `string` | 输出的 zip 文件路径 |
+| password | `string` | 加密密码 |
 
+**可选参数**
 
-Example:
+|参数名|类型|说明|
+|:--|:--|:--|
+| filenames | `...string` | 一个或多个待压缩的文件路径 |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+zip.CompressWithPassword("/tmp/out.zip", "123456", "/tmp/a.txt", "/tmp/b.txt")~
+``````````````
+
+---
+
+### DecompressFromRawWithOptions {#decompressfromrawwithoptions}
+
+```go
+DecompressFromRawWithOptions(raw []byte, dest string, opts ...DecompressOption) error
+```
+
+从内存 zip 原始字节解压到目标目录，支持 DecompressOption（如密码）。
+
+关键词: zip 内存解压, DeCompressFromRaw, 密码 zip 解压
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `[]byte` | zip 文件的原始字节内容 |
+| dest | `string` | 解压输出的目标目录 |
+
+**可选参数**
+
+可作为可变参数 `opts ...DecompressOption` 传入选项；共 1 个可用选项，详见 [DecompressOption 选项列表](#option-decompressoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+// 内存加密压缩后解压到临时目录，再读回验证
+zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
+dest = file.Join(os.TempDir(), "yak-zip-decompress")
+zip.DecompressFromRawWithOptions(zipBytes, dest, zip.decompressPassword("123456"))~
+content = file.ReadFile(file.Join(dest, "a.txt"))~
+assert string(content) == "AAA", "DecompressFromRawWithOptions should restore the entry"
+file.Remove(dest)
+``````````````
+
+---
+
+### DecompressWithOptions {#decompresswithoptions}
+
+```go
+DecompressWithOptions(zipFile string, dest string, opts ...DecompressOption) error
+```
+
+解压 zip 文件到目标目录，支持 DecompressOption（如密码）。
+
+关键词: zip 解压密码, DeCompress
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | 待解压的 zip 文件路径 |
+| dest | `string` | 解压输出的目标目录 |
+
+**可选参数**
+
+可作为可变参数 `opts ...DecompressOption` 传入选项；共 1 个可用选项，详见 [DecompressOption 选项列表](#option-decompressoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
+
+**示例**
 
 ``````````````yak
 zip.DecompressWithOptions("/tmp/enc.zip", "/tmp/dest", zip.decompressPassword("123456"))~
 ``````````````
 
+---
 
-#### 定义
+### ExtractByPatternFromRawWithOptions {#extractbypatternfromrawwithoptions}
 
-`decompressPassword(password string) DecompressOption`
+```go
+ExtractByPatternFromRawWithOptions(raw any, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| password | `string` | 解密密码 |
+从内存 ZIP 原始字节按通配符提取，支持 ExtractOption（如密码）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `DecompressOption` | 一个解压配置选项 |
+关键词: ExtractByPatternFromRaw, 内存通配符提取, 密码提取
 
+**必填参数**
 
-### extractPassword
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
 
-#### 详细描述
-extractPassword 为 zip 提取设置解密密码
+**可选参数**
 
-关键词: zip 提取密码
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
 
-参数:
+**返回值**
 
-  - password: 解密密码
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
+**示例**
 
+``````````````yak
+zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
+results = zip.ExtractByPatternFromRawWithOptions(zipBytes, "*.txt", zip.extractPassword("123456"))~
+assert len(results) == 1, "pattern should match one encrypted entry"
+``````````````
 
-返回值:
+---
 
-  - 一个提取配置选项
+### ExtractByPatternWithOptions {#extractbypatternwithoptions}
 
+```go
+ExtractByPatternWithOptions(zipFile string, pattern string, opts ...ExtractOption) ([]*ExtractResult, error)
+```
 
+从 ZIP 文件按通配符提取多个文件，支持 ExtractOption（如密码）
 
+关键词: ExtractByPattern, 通配符提取, 密码提取
 
-Example:
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| pattern | `string` | 文件名匹配模式（如 &#34;*.txt&#34;） |
+
+**可选参数**
+
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+results = zip.ExtractByPatternWithOptions("/tmp/enc.zip", "*.txt", zip.extractPassword("123456"))~
+``````````````
+
+---
+
+### ExtractFileFromRawWithOptions {#extractfilefromrawwithoptions}
+
+```go
+ExtractFileFromRawWithOptions(raw any, targetFile string, opts ...ExtractOption) ([]byte, error)
+```
+
+从内存 ZIP 原始字节提取单个文件，支持 ExtractOption（如密码）
+
+关键词: ExtractFileFromRaw, 内存提取, 密码提取
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| targetFile | `string` | 待提取的条目名称 |
+
+**可选参数**
+
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 提取出的文件内容字节 |
+| r2 | `error` | 错误信息 |
+
+**示例**
 
 ``````````````yak
 zipBytes = zip.CompressRawWithPassword({"s.txt": "secret"}, "123456")~
 content = zip.ExtractFileFromRawWithOptions(zipBytes, "s.txt", zip.extractPassword("123456"))~
-assert string(content) == "secret", "extractPassword should allow decrypting the entry"
+assert string(content) == "secret", "should extract encrypted entry with password"
 ``````````````
 
+---
 
-#### 定义
+### ExtractFileWithOptions {#extractfilewithoptions}
 
-`extractPassword(password string) ExtractOption`
+```go
+ExtractFileWithOptions(zipFile string, targetFile string, opts ...ExtractOption) ([]byte, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| password | `string` | 解密密码 |
+从 ZIP 文件提取单个文件，支持 ExtractOption（如密码）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `ExtractOption` | 一个提取配置选项 |
+关键词: ExtractFile, 密码提取
 
+**必填参数**
 
-### grepCaseSensitive
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| targetFile | `string` | 待提取的条目名称 |
 
-#### 详细描述
-grepCaseSensitive 设置 zip grep 子串搜索是否区分大小写
+**可选参数**
 
-参数:
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
 
-  - i: 是否区分大小写，不传则默认为 true
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 提取出的文件内容字节 |
+| r2 | `error` | 错误信息 |
 
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "Password", zip.grepCaseSensitive(true))~
+content = zip.ExtractFileWithOptions("/tmp/enc.zip", "s.txt", zip.extractPassword("123456"))~
 ``````````````
 
+---
 
-#### 定义
+### ExtractFilesFromRawWithOptions {#extractfilesfromrawwithoptions}
 
-`grepCaseSensitive(i ...bool) GrepOption`
+```go
+ExtractFilesFromRawWithOptions(raw any, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| i | `...bool` | 是否区分大小写，不传则默认为 true |
+从内存 ZIP 原始字节并发提取多个文件，支持 ExtractOption（如密码）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+关键词: ExtractFilesFromRaw, 并发提取, 密码提取
 
+**必填参数**
 
-### grepContextLine
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| targetFiles | `[]string` | 待提取的条目名称列表 |
 
-#### 详细描述
-grepContextLine 设置 zip grep 搜索时匹配行的上下文行数
+**可选参数**
 
-参数:
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
 
-  - context: 匹配行前后保留的上下文行数
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "password", zip.grepContextLine(2))~
+zipBytes = zip.CompressRawWithPassword({"a.txt": "AAA"}, "123456")~
+results = zip.ExtractFilesFromRawWithOptions(zipBytes, ["a.txt"], zip.extractPassword("123456"))~
+assert len(results) == 1, "should extract one encrypted entry"
+assert string(results[0].Content) == "AAA", "decrypted content should match"
 ``````````````
 
+---
 
-#### 定义
+### ExtractFilesWithOptions {#extractfileswithoptions}
 
-`grepContextLine(context int) GrepOption`
+```go
+ExtractFilesWithOptions(zipFile string, targetFiles []string, opts ...ExtractOption) ([]*ExtractResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| context | `int` | 匹配行前后保留的上下文行数 |
+从 ZIP 文件并发提取多个文件，支持 ExtractOption（如密码）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+关键词: ExtractFiles, 并发提取, 密码提取
 
+**必填参数**
 
-### grepExcludePathRegexp
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| targetFiles | `[]string` | 待提取的条目名称列表 |
 
-#### 详细描述
-grepExcludePathRegexp 排除路径匹配指定正则的条目（任一匹配即排除）
+**可选参数**
 
-参数:
+可作为可变参数 `opts ...ExtractOption` 传入选项；共 1 个可用选项，详见 [ExtractOption 选项列表](#option-extractoption)。
 
-  - patterns: 一个或多个路径正则表达式
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*ExtractResult` | 提取结果列表（每项含 FileName/Content/Error） |
+| r2 | `error` | 错误信息 |
 
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "key", zip.grepExcludePathRegexp(`_test\.go$`))~
+results = zip.ExtractFilesWithOptions("/tmp/enc.zip", ["a.txt"], zip.extractPassword("123456"))~
 ``````````````
 
+---
 
-#### 定义
+### GrepPathRawRegexp {#greppathrawregexp}
 
-`grepExcludePathRegexp(patterns ...string) GrepOption`
+```go
+GrepPathRawRegexp(raw any, pattern string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| patterns | `...string` | 一个或多个路径正则表达式 |
+使用正则表达式在内存 ZIP 原始数据的条目路径（文件名）中搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| pattern | `string` | 路径正则表达式 |
 
-### grepExcludePathSubString
+**可选参数**
 
-#### 详细描述
-grepExcludePathSubString 排除路径包含指定子串的条目（任一匹配即排除）
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
 
-参数:
+**返回值**
 
-  - patterns: 一个或多个路径子串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
+| r2 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "key", zip.grepExcludePathSubString("test/"))~
+zipBytes = zip.CompressRaw({"dir/a.txt": "x"})~
+results = zip.GrepPathRawRegexp(zipBytes, `a\.txt`)~
+assert len(results) == 1, "GrepPathRawRegexp should match the entry path"
 ``````````````
 
+---
 
-#### 定义
+### GrepPathRawSubString {#greppathrawsubstring}
 
-`grepExcludePathSubString(patterns ...string) GrepOption`
+```go
+GrepPathRawSubString(raw any, substring string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| patterns | `...string` | 一个或多个路径子串 |
+使用子字符串在内存 ZIP 原始数据的条目路径（文件名）中搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| substring | `string` | 待搜索的路径子字符串 |
 
-### grepIncludePathRegexp
+**可选参数**
 
-#### 详细描述
-grepIncludePathRegexp 仅在路径匹配指定正则的条目中搜索（任一匹配即可）
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
 
-参数:
+**返回值**
 
-  - patterns: 一个或多个路径正则表达式
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
+| r2 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "key", zip.grepIncludePathRegexp(`\.ya?ml$`))~
+zipBytes = zip.CompressRaw({"dir/a.txt": "x"})~
+results = zip.GrepPathRawSubString(zipBytes, "a.txt")~
+assert len(results) == 1, "GrepPathRawSubString should match the entry path"
+assert results[0].FileName == "dir/a.txt", "matched path should be the entry name"
 ``````````````
 
+---
 
-#### 定义
+### GrepPathRegexp {#greppathregexp}
 
-`grepIncludePathRegexp(patterns ...string) GrepOption`
+```go
+GrepPathRegexp(zipFile string, pattern string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| patterns | `...string` | 一个或多个路径正则表达式 |
+使用正则表达式在 ZIP 文件的条目路径（文件名）中搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| pattern | `string` | 路径正则表达式 |
 
-### grepIncludePathSubString
+**可选参数**
 
-#### 详细描述
-grepIncludePathSubString 仅在路径包含指定子串的条目中搜索（任一匹配即可）
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
 
-参数:
+**返回值**
 
-  - patterns: 一个或多个路径子串
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
+| r2 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "key", zip.grepIncludePathSubString("config/"))~
+results = zip.GrepPathRegexp("/tmp/abc.zip", `\.txt$`)~
+for r in results { println(r.FileName) }
 ``````````````
 
+---
 
-#### 定义
+### GrepPathSubString {#greppathsubstring}
 
-`grepIncludePathSubString(patterns ...string) GrepOption`
+```go
+GrepPathSubString(zipFile string, substring string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| patterns | `...string` | 一个或多个路径子串 |
+使用子字符串在 ZIP 文件的条目路径（文件名）中搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| substring | `string` | 待搜索的路径子字符串 |
 
-### grepLimit
+**可选参数**
 
-#### 详细描述
-grepLimit 设置 zip grep 搜索返回结果的最大数量
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
 
-参数:
+**返回值**
 
-  - limit: 结果数量上限
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配的路径结果列表 |
+| r2 | `error` | 错误信息 |
 
-
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/abc.zip", "password", zip.grepLimit(10))~
+results = zip.GrepPathSubString("/tmp/abc.zip", "config")~
+for r in results { println(r.FileName) }
 ``````````````
 
+---
 
-#### 定义
+### GrepRawRegexp {#greprawregexp}
 
-`grepLimit(limit int) GrepOption`
+```go
+GrepRawRegexp(raw any, pattern string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| limit | `int` | 结果数量上限 |
+使用正则表达式在内存中的 ZIP 原始数据的条目内容中搜索
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| pattern | `string` | 正则表达式 |
 
-### grepPassword
+**可选参数**
 
-#### 详细描述
-grepPassword 在 zip 中执行 grep 时设置加密条目的解密密码
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
 
-关键词: zip grep 密码, 加密 zip 搜索
+**返回值**
 
-参数:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配结果列表 |
+| r2 | `error` | 错误信息 |
 
-  - password: 解密密码
-
-
-
-返回值:
-
-  - 一个 grep 配置选项
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
-results = zip.GrepSubString("/tmp/enc.zip", "secret", zip.grepPassword("123456"))~
+zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
+results = zip.GrepRawRegexp(zipBytes, "w.rld")~
+assert len(results) == 1, "GrepRawRegexp should find the matching line"
 ``````````````
 
+---
 
-#### 定义
+### GrepRawSubString {#greprawsubstring}
 
-`grepPassword(password string) GrepOption`
+```go
+GrepRawSubString(raw any, substring string, opts ...GrepOption) ([]*GrepResult, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| password | `string` | 解密密码 |
+使用子字符串在内存中的 ZIP 原始数据的条目内容中搜索（默认不区分大小写）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `GrepOption` | 一个 grep 配置选项 |
+**必填参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+| substring | `string` | 待搜索的子字符串 |
+
+**可选参数**
+
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配结果列表 |
+| r2 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
+results = zip.GrepRawSubString(zipBytes, "world")~
+assert len(results) == 1, "GrepRawSubString should find one match"
+assert results[0].LineNumber == 2, "match should be on the second line"
+``````````````
+
+---
+
+### GrepRegexp {#grepregexp}
+
+```go
+GrepRegexp(zipFile string, pattern string, opts ...GrepOption) ([]*GrepResult, error)
+```
+
+使用正则表达式在 ZIP 文件的所有条目内容中搜索
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| pattern | `string` | 正则表达式 |
+
+**可选参数**
+
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配结果列表 |
+| r2 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+results = zip.GrepRegexp("/tmp/abc.zip", "password\\s*=")~
+for r in results { println(r.FileName, r.LineNumber, r.Line) }
+``````````````
+
+---
+
+### GrepSubString {#grepsubstring}
+
+```go
+GrepSubString(zipFile string, substring string, opts ...GrepOption) ([]*GrepResult, error)
+```
+
+使用子字符串在 ZIP 文件的所有条目内容中搜索（默认不区分大小写）
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| zipFile | `string` | zip 文件路径 |
+| substring | `string` | 待搜索的子字符串 |
+
+**可选参数**
+
+可作为可变参数 `opts ...GrepOption` 传入选项；共 8 个可用选项，详见 [GrepOption 选项列表](#option-grepoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*GrepResult` | 匹配结果列表 |
+| r2 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+results = zip.GrepSubString("/tmp/abc.zip", "password")~
+for r in results { println(r.FileName, r.LineNumber, r.Line) }
+``````````````
+
+---
+
+### NewGrepSearcherFromRaw {#newgrepsearcherfromraw}
+
+```go
+NewGrepSearcherFromRaw(raw any, filename ...string) (*ZipGrepSearcher, error)
+```
+
+从内存中的 ZIP 原始数据创建带缓存的搜索器，适合对同一 zip 多次搜索
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `any` | zip 的原始数据（[]byte、string 或 io.Reader） |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| filename | `...string` | 可选的逻辑文件名（仅用于结果展示） |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*ZipGrepSearcher` | zip 搜索器对象 |
+| r2 | `error` | 错误信息 |
+
+**示例**
+
+``````````````yak
+zipBytes = zip.CompressRaw({"a.txt": "hello\nworld"})~
+searcher = zip.NewGrepSearcherFromRaw(zipBytes)~
+results = searcher.GrepSubString("world")~
+assert len(results) == 1, "searcher should find one match"
+``````````````
+
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：CompressOption {#option-compressoption}
+
+涉及到的函数有：[zip.CompressByNameWithOptions](#compressbynamewithoptions)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `zip.compressEncryption` | `method EncryptionMethod` | `CompressOption` | 设置 zip 压缩的加密方法（默认 AES256） |
+| `zip.compressPassword` | `password string` | `CompressOption` | 为 zip 压缩设置加密密码 |
+
+### 2. 类型：DecompressOption {#option-decompressoption}
+
+涉及到的函数有：[zip.DecompressFromRawWithOptions](#decompressfromrawwithoptions)、[zip.DecompressWithOptions](#decompresswithoptions)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `zip.decompressPassword` | `password string` | `DecompressOption` | 为 zip 解压设置解密密码 |
+
+### 3. 类型：ExtractOption {#option-extractoption}
+
+涉及到的函数有：[zip.ExtractByPatternFromRawWithOptions](#extractbypatternfromrawwithoptions)、[zip.ExtractByPatternWithOptions](#extractbypatternwithoptions)、[zip.ExtractFileFromRawWithOptions](#extractfilefromrawwithoptions)、[zip.ExtractFileWithOptions](#extractfilewithoptions)、[zip.ExtractFilesFromRawWithOptions](#extractfilesfromrawwithoptions)、[zip.ExtractFilesWithOptions](#extractfileswithoptions)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `zip.extractPassword` | `password string` | `ExtractOption` | 为 zip 提取设置解密密码 |
+
+### 4. 类型：GrepOption {#option-grepoption}
+
+涉及到的函数有：[zip.GrepPathRawRegexp](#greppathrawregexp)、[zip.GrepPathRawSubString](#greppathrawsubstring)、[zip.GrepPathRegexp](#greppathregexp)、[zip.GrepPathSubString](#greppathsubstring)、[zip.GrepRawRegexp](#greprawregexp)、[zip.GrepRawSubString](#greprawsubstring)、[zip.GrepRegexp](#grepregexp)、[zip.GrepSubString](#grepsubstring)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `zip.grepCaseSensitive` | `i ...bool` | `GrepOption` | 设置 zip grep 子串搜索是否区分大小写 |
+| `zip.grepContextLine` | `context int` | `GrepOption` | 设置 zip grep 搜索时匹配行的上下文行数 |
+| `zip.grepExcludePathRegexp` | `patterns ...string` | `GrepOption` | 排除路径匹配指定正则的条目（任一匹配即排除） |
+| `zip.grepExcludePathSubString` | `patterns ...string` | `GrepOption` | 排除路径包含指定子串的条目（任一匹配即排除） |
+| `zip.grepIncludePathRegexp` | `patterns ...string` | `GrepOption` | 仅在路径匹配指定正则的条目中搜索（任一匹配即可） |
+| `zip.grepIncludePathSubString` | `patterns ...string` | `GrepOption` | 仅在路径包含指定子串的条目中搜索（任一匹配即可） |
+| `zip.grepLimit` | `limit int` | `GrepOption` | 设置 zip grep 搜索返回结果的最大数量 |
+| `zip.grepPassword` | `password string` | `GrepOption` | 在 zip 中执行 grep 时设置加密条目的解密密码 |
 

@@ -1,34 +1,48 @@
-# yaml
+# yaml {#library-yaml}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [yaml.Marshal](#marshal) |Marshal 将一个对象序列化为 YAML 格式的字节切片 参数: - in: 待序列化的对象，可以是 map、切片或结构体 返回值: - 序列化后的 YAML 字节切片 - 序列化失败时返回的错误|
-| [yaml.Unmarshal](#unmarshal) |Unmarshal 将 YAML 格式的字节切片反序列化为对应的对象 参数: - b: 待解析的 YAML 字节切片 返回值: - 解析得到的对象(通常是 map 或切片) - 解析失败时返回的错误|
-| [yaml.UnmarshalStrict](#unmarshalstrict) |UnmarshalStrict 严格模式反序列化 YAML，遇到未知字段或重复键会报错 参数: - b: 待解析的 YAML 字节切片 返回值: - 解析得到的对象(通常是 map 或切片) - 解析失败时返回的错误|
+`yaml` 库提供 YAML 的序列化与反序列化能力，用于读写 YAML 格式的配置、PoC 模板与数据。
 
+典型使用场景：
 
-## 函数定义
-### Marshal
+- 解析：`yaml.Unmarshal(b)` 把 YAML 解析为对象，`yaml.UnmarshalStrict` 严格模式解析（未知字段报错）。
+- 生成：`yaml.Marshal(in)` 把对象序列化为 YAML。
 
-#### 详细描述
-Marshal 将一个对象序列化为 YAML 格式的字节切片
+与相邻库的关系：`yaml` 是数据处理库，与 `json` / `xml` 并列，常用于解析 Nuclei/httptpl 的 YAML PoC 模板与各类配置文件。
 
-参数:
+> 共 3 个函数
 
-  - in: 待序列化的对象，可以是 map、切片或结构体
+## 函数索引
 
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [yaml.Marshal](#marshal) | `in any` | `[]byte, error` | 将一个对象序列化为 YAML 格式的字节切片 |
+| [yaml.Unmarshal](#unmarshal) | `b []byte` | `any, error` | 将 YAML 格式的字节切片反序列化为对应的对象 |
+| [yaml.UnmarshalStrict](#unmarshalstrict) | `b []byte` | `any, error` | 严格模式反序列化 YAML，遇到未知字段或重复键会报错 |
 
+## 函数详情
 
-返回值:
+### Marshal {#marshal}
 
-  - 序列化后的 YAML 字节切片
+```go
+Marshal(in any) ([]byte, error)
+```
 
-  - 序列化失败时返回的错误
+将一个对象序列化为 YAML 格式的字节切片
 
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| in | `any` | 待序列化的对象，可以是 map、切片或结构体 |
 
+**返回值**
 
-Example:
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]byte` | 序列化后的 YAML 字节切片 |
+| r2 | `error` | 序列化失败时返回的错误 |
+
+**示例**
 
 ``````````````yak
 // VARS: 把 map 序列化为 YAML
@@ -38,44 +52,30 @@ text = string(out)
 assert str.Contains(text, "name: yak"), "marshal output should contain the key-value"
 ``````````````
 
+---
 
-#### 定义
+### Unmarshal {#unmarshal}
 
-`Marshal(in any) ([]byte, error)`
+```go
+Unmarshal(b []byte) (any, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| in | `any` | 待序列化的对象，可以是 map、切片或结构体 |
+将 YAML 格式的字节切片反序列化为对应的对象
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]byte` | 序列化后的 YAML 字节切片 |
-| r2 | `error` | 序列化失败时返回的错误 |
+**参数**
 
+|参数名|类型|说明|
+|:--|:--|:--|
+| b | `[]byte` | 待解析的 YAML 字节切片 |
 
-### Unmarshal
+**返回值**
 
-#### 详细描述
-Unmarshal 将 YAML 格式的字节切片反序列化为对应的对象
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `any` | 解析得到的对象(通常是 map 或切片) |
+| r2 | `error` | 解析失败时返回的错误 |
 
-参数:
-
-  - b: 待解析的 YAML 字节切片
-
-
-
-返回值:
-
-  - 解析得到的对象(通常是 map 或切片)
-
-  - 解析失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 把 YAML 文本解析为 map
@@ -86,44 +86,30 @@ println(m["name"])   // OUT: yak
 assert m["port"] == 80, "unmarshal should parse port as 80"
 ``````````````
 
+---
 
-#### 定义
+### UnmarshalStrict {#unmarshalstrict}
 
-`Unmarshal(b []byte) (any, error)`
+```go
+UnmarshalStrict(b []byte) (any, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
+严格模式反序列化 YAML，遇到未知字段或重复键会报错
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
 | b | `[]byte` | 待解析的 YAML 字节切片 |
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `any` | 解析得到的对象(通常是 map 或切片) |
 | r2 | `error` | 解析失败时返回的错误 |
 
-
-### UnmarshalStrict
-
-#### 详细描述
-UnmarshalStrict 严格模式反序列化 YAML，遇到未知字段或重复键会报错
-
-参数:
-
-  - b: 待解析的 YAML 字节切片
-
-
-
-返回值:
-
-  - 解析得到的对象(通常是 map 或切片)
-
-  - 解析失败时返回的错误
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // VARS: 严格模式解析 YAML 文本
@@ -134,20 +120,5 @@ println(m["name"])   // OUT: yak
 assert m["port"] == 80, "strict unmarshal should parse port as 80"
 ``````````````
 
-
-#### 定义
-
-`UnmarshalStrict(b []byte) (any, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| b | `[]byte` | 待解析的 YAML 字节切片 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `any` | 解析得到的对象(通常是 map 或切片) |
-| r2 | `error` | 解析失败时返回的错误 |
-
+---
 

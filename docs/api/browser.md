@@ -1,44 +1,118 @@
-# browser
+# browser {#library-browser}
 
-|函数名|函数描述/介绍|
-|:------|:--------|
-| [browser.Close](#close) |CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close） 参数: - opts: 浏览器可选项，通常使用 browser.id 指定要关闭的实例 返回值: - 错误信息|
-| [browser.CloseAll](#closeall) |CloseAll 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） 参数: - 无 返回值: - 无|
-| [browser.Get](#get) |Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get） 参数: - opts: 浏览器可选项，如 browser.id 用于按 ID 获取 返回值: - 浏览器实例对象 - 错误信息|
-| [browser.HaveBrowserInstalled](#havebrowserinstalled) |HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） 参数: - 无 返回值: - 是否已安装浏览器|
-| [browser.List](#list) |List 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） 参数: - 无 返回值: - 浏览器实例 ID 列表|
-| [browser.Open](#open) |Open 打开一个新的浏览器实例（导出名为 browser.Open） 参数: - opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等 返回值: - 浏览器实例对象 - 错误信息|
-| [browser.controlURL](#controlurl) |WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL） 参数: - controlURL: 浏览器的控制地址 返回值: - 浏览器可选项|
-| [browser.exePath](#exepath) |WithExePath 指定浏览器可执行文件路径（导出名为 browser.exePath） 参数: - exePath: 浏览器可执行文件路径 返回值: - 浏览器可选项|
-| [browser.headless](#headless) |WithHeadless 设置浏览器是否以无头模式启动（导出名为 browser.headless） 参数: - headless: 是否无头模式 返回值: - 浏览器可选项|
-| [browser.id](#id) |WithID 指定浏览器实例 ID（导出名为 browser.id） 参数: - id: 浏览器实例 ID 返回值: - 浏览器可选项|
-| [browser.leakless](#leakless) |WithLeakless 设置是否启用 leakless 守护进程以确保浏览器进程被清理（导出名为 browser.leakless） 参数: - leakless: 是否启用 leakless 返回值: - 浏览器可选项|
-| [browser.noSandBox](#nosandbox) |WithNoSandBox 设置浏览器是否以 no-sandbox 模式启动（导出名为 browser.noSandBox） 参数: - noSandBox: 是否禁用沙箱 返回值: - 浏览器可选项|
-| [browser.proxy](#proxy) |WithProxy 指定浏览器使用的代理地址（导出名为 browser.proxy） 参数: - proxyAddress: 代理地址 返回值: - 浏览器可选项|
-| [browser.timeout](#timeout) |WithTimeout 设置浏览器操作的超时时间（导出名为 browser.timeout） 参数: - timeout: 超时时间（秒） 返回值: - 浏览器可选项|
-| [browser.wsAddress](#wsaddress) |WithWsAddress 指定通过 WebSocket 地址连接已有浏览器（导出名为 browser.wsAddress） 参数: - wsAddress: 浏览器调试 WebSocket 地址 返回值: - 浏览器可选项|
+`browser` 库提供对无头/有头 Chrome 浏览器实例的管理能力，基于 CDP（Chrome DevTools Protocol）驱动真实浏览器，用于需要渲染 JS、模拟真实用户行为的爬取、截图与自动化场景。
 
+典型使用场景：
 
-## 函数定义
-### Close
+- 实例管理：`browser.Open` / `browser.Get` 启动或获取一个浏览器实例，`browser.Close` / `browser.CloseAll` 关闭，`browser.List` 列出当前实例。
+- 环境检查：`browser.HaveBrowserInstalled` 判断本机是否已安装可用浏览器。
+- 启动选项：`browser.headless`（无头模式）、`browser.exePath`（指定可执行文件）、`browser.proxy`（代理）、`browser.wsAddress` / `browser.controlURL`（连接已有浏览器）、`browser.noSandBox` / `browser.leakless` / `browser.timeout` 等。
 
-#### 详细描述
+与相邻库的关系：相比 `crawler`/`crawlerx` 的 HTTP 层爬取，`browser` 走真实浏览器内核，适合强 JS 渲染的页面；常与 `crawlerx`（浏览器爬虫）配合完成动态站点的资产发现。
+
+> 共 15 个函数
+
+## 函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [browser.CloseAll](#closeall) | - | - | 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll） |
+| [browser.HaveBrowserInstalled](#havebrowserinstalled) | - | `bool` | 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled） |
+| [browser.List](#list) | - | `[]string` | 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List） |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [browser.Close](#close) | `opts ...BrowserOption` | `error` | CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close） |
+| [browser.Get](#get) | `opts ...BrowserOption` | `*BrowserInstance, error` | 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get） |
+| [browser.Open](#open) | `opts ...BrowserOption` | `*BrowserInstance, error` | 打开一个新的浏览器实例（导出名为 browser.Open） |
+
+## 函数详情
+
+### CloseAll {#closeall}
+
+```go
+CloseAll()
+```
+
+关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll）
+
+**示例**
+
+``````````````yak
+browser.CloseAll()
+``````````````
+
+---
+
+### HaveBrowserInstalled {#havebrowserinstalled}
+
+```go
+HaveBrowserInstalled() bool
+```
+
+检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled）
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `bool` | 是否已安装浏览器 |
+
+**示例**
+
+``````````````yak
+has = browser.HaveBrowserInstalled()
+println(has)
+``````````````
+
+---
+
+### List {#list}
+
+```go
+List() []string
+```
+
+列出当前所有已打开浏览器实例的 ID（导出名为 browser.List）
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` | 浏览器实例 ID 列表 |
+
+**示例**
+
+``````````````yak
+ids = browser.List()
+dump(ids)
+``````````````
+
+---
+
+## 可变参数函数详情
+
+### Close {#close}
+
+```go
+Close(opts ...BrowserOption) error
+```
+
 CloseByID 关闭指定 ID 的浏览器实例（导出名为 browser.Close）
 
-参数:
+**可选参数**
 
-  - opts: 浏览器可选项，通常使用 browser.id 指定要关闭的实例
+可作为可变参数 `opts ...BrowserOption` 传入选项；共 9 个可用选项，详见 [BrowserOption 选项列表](#option-browseroption)。
 
+**返回值**
 
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` | 错误信息 |
 
-返回值:
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 关闭指定 ID 的浏览器（示意性示例）
@@ -46,73 +120,28 @@ err = browser.Close(browser.id("main"))
 if err != nil { die(err) }
 ``````````````
 
+---
 
-#### 定义
+### Get {#get}
 
-`Close(opts ...BrowserOption) error`
+```go
+Get(opts ...BrowserOption) (*BrowserInstance, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...BrowserOption` | 浏览器可选项，通常使用 browser.id 指定要关闭的实例 |
+获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `error` | 错误信息 |
+**可选参数**
 
+可作为可变参数 `opts ...BrowserOption` 传入选项；共 9 个可用选项，详见 [BrowserOption 选项列表](#option-browseroption)。
 
-### CloseAll
+**返回值**
 
-#### 详细描述
-CloseAll 关闭当前所有已打开的浏览器实例（导出名为 browser.CloseAll）
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*BrowserInstance` | 浏览器实例对象 |
+| r2 | `error` | 错误信息 |
 
-参数:
-
-  - 无
-
-
-
-返回值:
-
-  - 无
-
-
-
-
-Example:
-
-``````````````yak
-browser.CloseAll()
-``````````````
-
-
-#### 定义
-
-`CloseAll()`
-
-
-### Get
-
-#### 详细描述
-Get 获取一个已存在的浏览器实例（不存在时按选项创建，导出名为 browser.Get）
-
-参数:
-
-  - opts: 浏览器可选项，如 browser.id 用于按 ID 获取
-
-
-
-返回值:
-
-  - 浏览器实例对象
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 按 ID 获取浏览器实例（示意性示例）
@@ -120,116 +149,28 @@ b = browser.Get(browser.id("main"))~
 dump(b)
 ``````````````
 
+---
 
-#### 定义
+### Open {#open}
 
-`Get(opts ...BrowserOption) (*BrowserInstance, error)`
+```go
+Open(opts ...BrowserOption) (*BrowserInstance, error)
+```
 
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...BrowserOption` | 浏览器可选项，如 browser.id 用于按 ID 获取 |
+打开一个新的浏览器实例（导出名为 browser.Open）
 
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
+**可选参数**
+
+可作为可变参数 `opts ...BrowserOption` 传入选项；共 9 个可用选项，详见 [BrowserOption 选项列表](#option-browseroption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
 | r1 | `*BrowserInstance` | 浏览器实例对象 |
 | r2 | `error` | 错误信息 |
 
-
-### HaveBrowserInstalled
-
-#### 详细描述
-HaveBrowserInstalled 检测当前环境是否已安装可用的浏览器（导出名为 browser.HaveBrowserInstalled）
-
-参数:
-
-  - 无
-
-
-
-返回值:
-
-  - 是否已安装浏览器
-
-
-
-
-Example:
-
-``````````````yak
-has = browser.HaveBrowserInstalled()
-println(has)
-``````````````
-
-
-#### 定义
-
-`HaveBrowserInstalled() bool`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `bool` | 是否已安装浏览器 |
-
-
-### List
-
-#### 详细描述
-List 列出当前所有已打开浏览器实例的 ID（导出名为 browser.List）
-
-参数:
-
-  - 无
-
-
-
-返回值:
-
-  - 浏览器实例 ID 列表
-
-
-
-
-Example:
-
-``````````````yak
-ids = browser.List()
-dump(ids)
-``````````````
-
-
-#### 定义
-
-`List() []string`
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `[]string` | 浏览器实例 ID 列表 |
-
-
-### Open
-
-#### 详细描述
-Open 打开一个新的浏览器实例（导出名为 browser.Open）
-
-参数:
-
-  - opts: 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等
-
-
-
-返回值:
-
-  - 浏览器实例对象
-
-  - 错误信息
-
-
-
-
-Example:
+**示例**
 
 ``````````````yak
 // 打开一个无头浏览器（示意性示例，需要本地已安装浏览器）
@@ -237,389 +178,25 @@ b = browser.Open(browser.headless(true))~
 defer browser.CloseAll()
 ``````````````
 
-
-#### 定义
-
-`Open(opts ...BrowserOption) (*BrowserInstance, error)`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| opts | `...BrowserOption` | 浏览器可选项，如 browser.headless、browser.proxy、browser.exePath 等 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `*BrowserInstance` | 浏览器实例对象 |
-| r2 | `error` | 错误信息 |
-
-
-### controlURL
-
-#### 详细描述
-WithControlURL 指定通过 control URL 连接已有浏览器（导出名为 browser.controlURL）
-
-参数:
-
-  - controlURL: 浏览器的控制地址
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.controlURL("http://127.0.0.1:9222")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`controlURL(controlURL string) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| controlURL | `string` | 浏览器的控制地址 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### exePath
-
-#### 详细描述
-WithExePath 指定浏览器可执行文件路径（导出名为 browser.exePath）
-
-参数:
-
-  - exePath: 浏览器可执行文件路径
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.exePath("/usr/bin/google-chrome")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`exePath(exePath string) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| exePath | `string` | 浏览器可执行文件路径 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### headless
-
-#### 详细描述
-WithHeadless 设置浏览器是否以无头模式启动（导出名为 browser.headless）
-
-参数:
-
-  - headless: 是否无头模式
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.headless(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`headless(headless bool) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| headless | `bool` | 是否无头模式 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### id
-
-#### 详细描述
-WithID 指定浏览器实例 ID（导出名为 browser.id）
-
-参数:
-
-  - id: 浏览器实例 ID
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.id("main")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`id(id string) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| id | `string` | 浏览器实例 ID |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### leakless
-
-#### 详细描述
-WithLeakless 设置是否启用 leakless 守护进程以确保浏览器进程被清理（导出名为 browser.leakless）
-
-参数:
-
-  - leakless: 是否启用 leakless
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.leakless(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`leakless(leakless bool) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| leakless | `bool` | 是否启用 leakless |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### noSandBox
-
-#### 详细描述
-WithNoSandBox 设置浏览器是否以 no-sandbox 模式启动（导出名为 browser.noSandBox）
-
-参数:
-
-  - noSandBox: 是否禁用沙箱
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.noSandBox(true)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`noSandBox(noSandBox bool) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| noSandBox | `bool` | 是否禁用沙箱 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### proxy
-
-#### 详细描述
-WithProxy 指定浏览器使用的代理地址（导出名为 browser.proxy）
-
-参数:
-
-  - proxyAddress: 代理地址
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.proxy("http://127.0.0.1:8080")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`proxy(proxyAddress string) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| proxyAddress | `string` | 代理地址 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### timeout
-
-#### 详细描述
-WithTimeout 设置浏览器操作的超时时间（导出名为 browser.timeout）
-
-参数:
-
-  - timeout: 超时时间（秒）
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.timeout(30)
-println(opt)
-``````````````
-
-
-#### 定义
-
-`timeout(timeout float64) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| timeout | `float64` | 超时时间（秒） |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
-
-### wsAddress
-
-#### 详细描述
-WithWsAddress 指定通过 WebSocket 地址连接已有浏览器（导出名为 browser.wsAddress）
-
-参数:
-
-  - wsAddress: 浏览器调试 WebSocket 地址
-
-
-
-返回值:
-
-  - 浏览器可选项
-
-
-
-
-Example:
-
-``````````````yak
-opt = browser.wsAddress("ws://127.0.0.1:9222/devtools/browser/xxx")
-println(opt)
-``````````````
-
-
-#### 定义
-
-`wsAddress(wsAddress string) BrowserOption`
-
-#### 参数
-|参数名|参数类型|参数解释|
-|:-----------|:---------- |:-----------|
-| wsAddress | `string` | 浏览器调试 WebSocket 地址 |
-
-#### 返回值
-|返回值(顺序)|返回值类型|返回值解释|
-|:-----------|:---------- |:-----------|
-| r1 | `BrowserOption` | 浏览器可选项 |
-
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：BrowserOption {#option-browseroption}
+
+涉及到的函数有：[browser.Close](#close)、[browser.Get](#get)、[browser.Open](#open)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `browser.controlURL` | `controlURL string` | `BrowserOption` | WithControlURL 指定通过 control URL 连接已有浏览器 |
+| `browser.exePath` | `exePath string` | `BrowserOption` | WithExePath 指定浏览器可执行文件路径 |
+| `browser.headless` | `headless bool` | `BrowserOption` | WithHeadless 设置浏览器是否以无头模式启动 |
+| `browser.id` | `id string` | `BrowserOption` | WithID 指定浏览器实例 ID |
+| `browser.leakless` | `leakless bool` | `BrowserOption` | WithLeakless 设置是否启用 leakless 守护进程以确保浏览器进程被清理 |
+| `browser.noSandBox` | `noSandBox bool` | `BrowserOption` | WithNoSandBox 设置浏览器是否以 no-sandbox 模式启动 |
+| `browser.proxy` | `proxyAddress string` | `BrowserOption` | WithProxy 指定浏览器使用的代理地址 |
+| `browser.timeout` | `timeout float64` | `BrowserOption` | WithTimeout 设置浏览器操作的超时时间 |
+| `browser.wsAddress` | `wsAddress string` | `BrowserOption` | WithWsAddress 指定通过 WebSocket 地址连接已有浏览器 |
 
