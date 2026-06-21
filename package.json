@@ -1,6 +1,6 @@
 {
   "name": "yaklang",
-  "version": "0.383.0",
+  "version": "0.384.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -12,6 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
+    "gen:search-package": "node scripts/gen-local-search-package.js",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
+    "fflate": "^0.8.3",
     "i18next": "^23.16.8",
     "postcss": "^8.4.49",
     "prism-react-renderer": "^2.4.1",

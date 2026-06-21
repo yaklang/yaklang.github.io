@@ -219,6 +219,7 @@ jobs:
           DATE="${{ steps.date.outputs.date }}"
           ZIP_NAME="${{ steps.date.outputs.zip_name }}"
           COUNT="${{ steps.pkg.outputs.count }}"
+          SIZE="${{ steps.pkg.outputs.size_bytes }}"
           OSS_URL="https://aliyun-oss.yaklang.com/yak/docs/${DATE}/${ZIP_NAME}"
           NOTE="${{ github.event.inputs.note }}"
 
@@ -233,6 +234,23 @@ jobs:
           # 由记账文件重新生成供前端读取的 static/site-packages.json(最新置顶)
           node scripts/gen-site-packages.js
 
+          # 同步供前端搜索使用的同源内容包(零 CORS): latest.zip + latest.json
+          # latest.json 只放版本元信息, 前端读取它判断是否需要重建本地索引,
+          # 不必先下载 zip 即可比对版本。
+          mkdir -p static/site-content
+          cp -f "tmp_package/${ZIP_NAME}" static/site-content/latest.zip
+          cat > static/site-content/latest.json <<EOF
+          {
+            "id": "${ZIP_ID}",
+            "zipName": "${ZIP_NAME}",
+            "generatedAt": "${NOW}",
+            "date": "${DATE}",
+            "count": ${COUNT:-0},
+            "sizeBytes": ${SIZE:-0},
+            "zipPath": "/site-content/latest.zip"
+          }
+          EOF
+
       - name: Commit bookkeeping to master
         # 只有 tag 或 manual 触发时才回写 master 记账; 分支 push(含 PR)只上传 OSS。
         if: ${{ steps.filter.outputs.should_run == 'true' && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') }}
@@ -243,6 +261,9 @@ jobs:
           git config user.email "actions@github.com"
           ZIP_NAME="${{ steps.date.outputs.zip_name }}"
           git add old_site_packages.txt static/site-packages.json
+          # latest.zip/latest.json 已被 .gitignore 忽略(避免 dev mock 污染仓库),
+          # CI 用 -f 强制纳入生产版本。
+          git add -f static/site-content/latest.zip static/site-content/latest.json
           if git diff --cached --quiet; then
             echo "no bookkeeping changes to commit"
             exit 0

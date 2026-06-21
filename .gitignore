@@ -26,3 +26,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 # yarn.lock
+
+# Frontend search content package
+# 由 CI 提交生产版本(git add -f 强制), 本地 dev 脚本生成的同名文件不纳入 git
+/static/site-content/latest.zip
+/static/site-content/latest.json

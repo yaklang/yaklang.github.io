@@ -603,6 +603,15 @@ function runSelftest() {
   }
 }
 
+// 导出供其它脚本(gen-local-search-package.js 等)复用, 直接 require 时不会触发 main()。
+module.exports = {
+  packageSite,
+  SOURCES,
+  SITE_URL,
+  BASE_URL,
+  ROUTING,
+};
+
 function main() {
   const argv = process.argv.slice(2);
   if (argv.includes("--selftest")) {
@@ -624,4 +633,7 @@ function main() {
   packageSite(repoRoot, path.resolve(outputDir), zipName);
 }
 
-main();
+// 仅在直接 node scripts/package-site-content.js 时执行 main, require() 时不执行。
+if (require.main === module) {
+  main();
+}
