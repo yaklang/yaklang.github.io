@@ -1,0 +1,4 @@
+# 官网全站内容打包(docs + products + blog)的归档历史, 由 .github/workflows/package-site-content.yml 自动追加。
+# 每行格式: 编号标识<TAB>UTC时间<TAB>zip地址<TAB>条目数 (最新追加在文件末尾)。
+# 编号标识: 日期(YYYY-MM-DD) 或 日期-N(同一天多包时按顺序 -1, -2, ...)
+# 该文件经 scripts/gen-site-packages.js 生成 static/site-packages.json 供官网展示。
