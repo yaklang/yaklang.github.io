@@ -2,14 +2,22 @@
  * src/utils/search/worker.ts
  *
  * 搜索 Worker: 主线程与 IDB/索引之间的唯一通道。
- *   - 入口: 通过 `createSearchClient()` 创建 Worker 实例
- *   - worker 内部 self.onmessage 处理两种请求:
+ *   - 入口: 通过 `createSearchWorker()` 创建 Worker 实例
+ *   - worker 内部 self.onmessage 处理三种请求:
  *       ensureIndex(meta): 检查版本, 必要时下载 zip + 建索引 + 写 IDB
+ *       rebuild(meta):    强制清空 IDB 后重跑全流程(用于"重新构建"按钮)
  *       search(query, reqId): 分词 -> 查 IDB postings -> TF-IDF 排序
  *
- * 主线程不发 fetch、不碰 IDB, 全部交 worker 处理, 避免阻塞 UI。
+ * 全流程切成有序阶段(prepare/download/parse/tokenize/store/finalize),
+ * 每个阶段都向主线程上报 indexPhase + indexProgress + indexLog,
+ * 让 UI 能渲染"准备开始构建 / 正在下载 / 解析内容 / 建立倒排 / 正在存储 / 收尾中"
+ * 的细粒度进度、预测耗时与透明日志。
  *
- * 关键词: search worker, postMessage protocol, ensureIndex
+ * 主线程不发 fetch、不碰 IDB, 全部交 worker 处理, 避免阻塞 UI。
+ * 主线程把 worker 提升到全局 Provider 单例后, 即使弹窗关闭 worker 仍存活,
+ * 后台继续把索引建完, 下次打开直接 ready。
+ *
+ * 关键词: search worker, postMessage protocol, ensureIndex, phase progress
  */
 import { getSearchDb } from "./db";
 import {
@@ -20,6 +28,9 @@ import {
 } from "./indexer";
 import { rankResults } from "./query";
 import type {
+  IndexLogEntry,
+  IndexPhase,
+  IndexSummary,
   IndexedDoc,
   PackageMeta,
   PostingEntry,
@@ -27,52 +38,287 @@ import type {
   WorkerResponse,
 } from "./types";
 
-// ---------- worker 端: 状态机 ----------
+// ---------- worker 端: 全局状态 ----------
 //
-// 主线程所有调用都串行进入这个 Promise 队列, 保证 ensureIndex 期间到达的
-// search 请求会被暂存, 等 indexReady 后再批量执行, 避免在半建库状态查询。
-
+// indexingInFlight: 当前正在跑的构建 Promise。search 请求到来时若它非空,
+//   会先 await 它, 避免在半建库状态查询。
+// totalDocs: 建库后缓存的文档数, 查询时用于 idf。
+// lastSummary: 最近一次成功构建的摘要, ready 事件里带回去。
 let indexingInFlight: Promise<void> | null = null;
-let totalDocs = 0; // 建库后缓存, 查询时用
+let totalDocs = 0;
+let lastSummary: IndexSummary | null = null;
 
-async function ensureIndex(meta: PackageMeta): Promise<void> {
-  // 已有相同版本则跳过
+// ---------- worker -> 主线程 的辅助发送函数 ----------
+
+function postFromWorker(msg: WorkerResponse) {
+  (self as unknown as Worker).postMessage(msg);
+}
+
+function postPhase(phase: IndexPhase, total?: number, detail?: string) {
+  postFromWorker({ type: "indexPhase", phase, total, detail });
+}
+
+function postProgress(
+  phase: IndexPhase,
+  done: number,
+  total: number,
+  extra: {
+    currentSource?: IndexedDoc["source"];
+    currentTitle?: string;
+    elapsedMs?: number;
+    etaMs?: number;
+  } = {}
+) {
+  postFromWorker({
+    type: "indexProgress",
+    phase,
+    done,
+    total,
+    ...extra,
+  });
+}
+
+function postLog(
+  phase: IndexPhase,
+  level: IndexLogEntry["level"],
+  message: string
+) {
+  const log: IndexLogEntry = { ts: Date.now(), level, phase, message };
+  postFromWorker({ type: "indexLog", log });
+}
+
+// 把毫秒格式化为人类可读的"X 秒 / X 分 Y 秒", 用于日志与 UI 预测提示
+function fmtDuration(ms: number): string {
+  if (!isFinite(ms) || ms < 0) return "未知";
+  const s = ms / 1000;
+  if (s < 1) return `${Math.round(ms)} 毫秒`;
+  if (s < 60) return `${s.toFixed(1)} 秒`;
+  const m = Math.floor(s / 60);
+  const rs = Math.round(s - m * 60);
+  return `${m} 分 ${rs} 秒`;
+}
+// 导出供单测/主线程复用(主线程格式化已用时间也用同一份逻辑)
+// 通过挂到 postFromWorker 上不合适, 单独导出一个全局函数
+export const __fmtDuration = fmtDuration;
+
+// 把字节数格式化为 "1.2 MB"
+function fmtBytes(n: number): string {
+  if (!isFinite(n) || n < 0) return "未知";
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+  return `${(n / 1024 / 1024).toFixed(2)} MB`;
+}
+
+// ---------- 核心构建流程 ----------
+//
+// force=true 表示强制重建(忽略版本匹配, 先清库再走全流程)。
+// 全程通过 postPhase/postProgress/postLog 把每一步透明上报。
+async function buildIndex(
+  meta: PackageMeta,
+  force: boolean
+): Promise<void> {
+  const tStart = Date.now();
   const db = getSearchDb();
-  const existing = await db.getVersion();
-  if (existing && existing.id === meta.id) {
-    // 缓存 totalDocs 以便查询时算 idf
-    totalDocs = meta.count || 0;
-    postFromWorker({
-      type: "indexReady",
-      meta: existing,
-      rebuilt: false,
-    });
-    return;
+
+  // --- 阶段 1: prepare ---
+  postPhase("prepare", undefined, "比对本地版本");
+  postLog("prepare", "info", `目标版本: ${meta.id} (${meta.zipName})`);
+  if (!force) {
+    const existing = await db.getVersion();
+    if (existing && existing.id === meta.id) {
+      totalDocs = meta.count || 0;
+      lastSummary = null;
+      postLog(
+        "prepare",
+        "info",
+        `本地已有相同版本(${existing.id}), 跳过构建`
+      );
+      postFromWorker({
+        type: "indexReady",
+        meta: existing,
+        rebuilt: false,
+        summary: undefined,
+      });
+      return;
+    }
+    if (existing) {
+      postLog(
+        "prepare",
+        "info",
+        `本地版本 ${existing.id} 已过期, 将重新构建`
+      );
+    } else {
+      postLog("prepare", "info", "本地无索引, 首次构建");
+    }
+  } else {
+    postLog("prepare", "warn", "收到重新构建请求, 清空本地索引");
+    await db.clearAll();
   }
+  postLog("prepare", "info", `预计处理 ${meta.count} 篇文档 / ${fmtBytes(meta.sizeBytes)}`);
 
-  // 下载 + 解压 + 解析
-  const zipBytes = await fetchPackageZip(meta.zipPath);
-  const { docs } = parsePackageZip(zipBytes);
-  // 实际参与索引的 doc 数(meta.count 来自打包期, 这里以解析结果为准)
-  totalDocs = docs.length;
+  // --- 阶段 2: download ---
+  postPhase("download", meta.sizeBytes || 0, "下载内容包 zip");
+  const tDownloadStart = Date.now();
+  postLog("download", "info", `开始下载 ${meta.zipPath}`);
+  let lastByteReport = 0;
+  let lastByteReportTs = tDownloadStart;
+  let totalReceived = 0;
+  let totalSize: number | null = meta.sizeBytes || null;
+  const zipBytes = await fetchPackageZip(
+    meta.zipPath,
+    (received, total) => {
+      totalReceived = received;
+      totalSize = total;
+      const now = Date.now();
+      // 控制上报频率: 至少间隔 150ms, 否则主线程 setState 太频繁
+      if (now - lastByteReportTs < 150 && received < (total ?? Infinity)) {
+        return;
+      }
+      const dt = (now - lastByteReportTs) / 1000;
+      const speed =
+        dt > 0 ? (received - lastByteReport) / dt : 0; // bytes/sec
+      lastByteReport = received;
+      lastByteReportTs = now;
+      const elapsedMs = now - tDownloadStart;
+      const etaMs =
+        total && speed > 0 ? ((total - received) / speed) * 1000 : undefined;
+      postProgress("download", received, total ?? received, {
+        elapsedMs,
+        etaMs,
+      });
+      // 偶尔打一条网速日志(只在有 total 且每完成 25% 时打)
+      if (total && speed > 0) {
+        const pct = received / total;
+        const shouldLog =
+          pct >= 0.25 && pct < 0.27 ||
+          pct >= 0.5 && pct < 0.52 ||
+          pct >= 0.75 && pct < 0.77;
+        if (shouldLog) {
+          postLog(
+            "download",
+            "info",
+            `已下载 ${fmtBytes(received)} / ${fmtBytes(total)} (${fmtBytes(speed)}/s)`
+          );
+        }
+      }
+    }
+  );
+  const downloadMs = Date.now() - tDownloadStart;
+  postProgress(
+    "download",
+    totalReceived,
+    totalSize ?? totalReceived,
+    { elapsedMs: downloadMs, etaMs: 0 }
+  );
+  postLog(
+    "download",
+    "info",
+    `下载完成: ${fmtBytes(totalReceived)}, 耗时 ${fmtDuration(downloadMs)}`
+  );
 
-  // 建倒排索引, 进度通过 postMessage 增量上报
-  const { docs: docsOut, postings } = buildInvertedIndex(docs, (done, total, current) => {
-    postFromWorker({
-      type: "indexProgress",
-      done,
-      total,
-      currentSource: current.source,
-      currentTitle: current.title,
+  // --- 阶段 3: parse ---
+  postPhase("parse", 0, "解压并解析 markdown 正文");
+  const tParseStart = Date.now();
+  postLog("parse", "info", "解压 zip 并解析 INDEX.ndjson");
+  const { docs } = parsePackageZip(zipBytes, (done, total) => {
+    postProgress("parse", done, total, {
+      elapsedMs: Date.now() - tParseStart,
     });
   });
+  const parseMs = Date.now() - tParseStart;
+  totalDocs = docs.length;
+  postLog(
+    "parse",
+    "info",
+    `解析完成: ${docs.length} 篇文档, 耗时 ${fmtDuration(parseMs)}`
+  );
+  if (docs.length === 0) {
+    throw new Error("解析得到 0 篇文档, 内容包可能损坏");
+  }
 
-  // 写库(版本写入放在 rebuildAll 内部, 与数据原子性绑定)
-  await db.rebuildAll(meta, docsOut as IndexedDoc[], postings as PostingEntry[]);
+  // --- 阶段 4: tokenize (中文 bigram + 英文 token + 倒排统计) ---
+  // 这是 CPU 密集阶段, 用 docs.length 作为进度分母。
+  postPhase("tokenize", docs.length, "中文 bigram + 英文 token 分词");
+  const tIndexStart = Date.now();
+  postLog("tokenize", "info", "开始建立倒排索引(分词中)");
+  const { docs: docsOut, postings } = buildInvertedIndex(
+    docs,
+    (done, total, current) => {
+      const elapsedMs = Date.now() - tIndexStart;
+      const etaMs =
+        done > 0 ? (elapsedMs / done) * (total - done) : undefined;
+      postProgress("tokenize", done, total, {
+        currentSource: current.source,
+        currentTitle: current.title,
+        elapsedMs,
+        etaMs,
+      });
+    }
+  );
+  const indexMs = Date.now() - tIndexStart;
+  postLog(
+    "tokenize",
+    "info",
+    `索引建立完成: ${postings.length} 个词项, 耗时 ${fmtDuration(indexMs)}`
+  );
+
+  // --- 阶段 5: store (写 IndexedDB) ---
+  // rebuildAll 内部分批 put, 这里把 docs/postings 数量作为进度近似分母。
+  postPhase(
+    "store",
+    docsOut.length,
+    `写入 ${docsOut.length} 篇文档 + ${postings.length} 个词项`
+  );
+  const tStoreStart = Date.now();
+  postLog("store", "info", "开始写入本地数据库(IndexedDB)");
+  // db.rebuildAll 本身不报进度(单事务批量), 这里上报一次"开始"和一次"完成"。
+  // 为让进度条有动效, 在写入前后发 0% 与 100%。
+  postProgress("store", 0, docsOut.length, {
+    elapsedMs: 0,
+    etaMs: indexMs, // 用索引阶段耗时近似预估
+  });
+  await db.rebuildAll(
+    meta,
+    docsOut as IndexedDoc[],
+    postings as PostingEntry[]
+  );
+  const storeMs = Date.now() - tStoreStart;
+  postProgress("store", docsOut.length, docsOut.length, {
+    elapsedMs: storeMs,
+    etaMs: 0,
+  });
+  postLog(
+    "store",
+    "info",
+    `存储完成, 耗时 ${fmtDuration(storeMs)}`
+  );
+
+  // --- 阶段 6: finalize ---
+  postPhase("finalize", undefined, "收尾: 校验版本、释放中间结构");
+  // 重新读一次版本, 确认写入成功
+  const verify = await db.getVersion();
+  if (!verify || verify.id !== meta.id) {
+    throw new Error("版本校验失败: 写入后读回的版本与目标不一致");
+  }
+  const totalMs = Date.now() - tStart;
+  lastSummary = {
+    docs: docsOut.length,
+    postings: postings.length,
+    bytesUncompressed: totalReceived,
+    durationMs: totalMs,
+    meta,
+  };
+  postLog(
+    "finalize",
+    "info",
+    `构建完成: 共 ${docsOut.length} 篇 / ${postings.length} 词项, 总耗时 ${fmtDuration(totalMs)}`
+  );
+
   postFromWorker({
     type: "indexReady",
     meta,
     rebuilt: true,
+    summary: lastSummary,
   });
 }
 
@@ -99,17 +345,12 @@ async function runSearch(query: string, reqId: number): Promise<void> {
 }
 
 // ---------- worker 入口 ----------
-function postFromWorker(msg: WorkerResponse) {
-  (self as unknown as Worker).postMessage(msg);
-}
 
 // 仅在真正 worker 上下文里挂 onmessage。
 // 主线程 import 本文件做单测时不会触发, 避免污染全局。
-// 通过 typeof 检测避免引用主线程不存在的 importScripts 全局。
 function isWorkerContext(): boolean {
   return (
     typeof self !== "undefined" &&
-    // worker 内 self 是 DedicatedWorkerGlobalScope, 自身就是事件目标
     typeof (self as unknown as { addEventListener?: unknown }).addEventListener === "function"
   );
 }
@@ -118,14 +359,14 @@ if (isWorkerContext()) {
   self.onmessage = async (ev: MessageEvent<WorkerRequest>) => {
     const req = ev.data;
     try {
-      if (req.type === "ensureIndex") {
-        // ensureIndex 期间到达的 search 会被下方排队逻辑处理
-        // 这里把 indexingInFlight 设为进行中的 Promise, 搜索前会 await 它
-        indexingInFlight = ensureIndex(req.meta).catch((err) => {
-          postFromWorker({
-            type: "indexError",
-            message: err && err.message ? err.message : String(err),
-          });
+      if (req.type === "ensureIndex" || req.type === "rebuild") {
+        const force = req.type === "rebuild";
+        // indexingInFlight 让并发到达的 search 请求等待
+        indexingInFlight = buildIndex(req.meta, force).catch((err) => {
+          const message =
+            err && (err as Error).message ? (err as Error).message : String(err);
+          postLog("finalize", "error", `构建失败: ${message}`);
+          postFromWorker({ type: "indexError", message });
         }).finally(() => {
           indexingInFlight = null;
         });

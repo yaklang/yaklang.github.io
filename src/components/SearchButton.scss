@@ -168,10 +168,117 @@
   color: #c0392b;
 }
 
+// 阶段名(粗体, 与 spinner 同行)
+.navbar-search-modal__status-phase {
+  font-weight: 600;
+}
+
+// 副标题行(计数 / 当前文档 / 字节进度)
+.navbar-search-modal__status-sub {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  justify-content: space-between;
+  gap: 12px;
+}
+
+// 预测时间 / 已用时间(右侧淡色)
+.navbar-search-modal__status-eta {
+  margin-left: auto;
+  color: var(--ifm-color-emphasis-600);
+  font-variant-numeric: tabular-nums;
+}
+
+// 构建透明日志区: 类似终端滚动, 让用户看见每一步
+.navbar-search-modal__log {
+  margin-top: 10px;
+  max-height: 140px;
+  overflow-y: auto;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  font-family: var(--ifm-font-family-monospace, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--ifm-font-color-base);
+}
+
+.navbar-search-modal__log-line {
+  display: flex;
+  gap: 6px;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  & + & {
+    margin-top: 2px;
+  }
+
+  &.navbar-search-modal__log-line--warn {
+    color: #b8860b;
+  }
+  &.navbar-search-modal__log-line--error {
+    color: #c0392b;
+  }
+}
+
+.navbar-search-modal__log-time {
+  flex: 0 0 auto;
+  opacity: 0.6;
+}
+
+.navbar-search-modal__log-msg {
+  flex: 1 1 auto;
+}
+
+// "可关闭弹窗后台继续构建"提示
+.navbar-search-modal__status-hint {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+// 重新构建按钮(错误态与就绪态都可用)
+.navbar-search-modal__rebuild-btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary-contrast-color, #fff);
+  background: var(--ifm-color-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// 就绪态下的"重新构建"链式按钮(轻量, 不喧宾夺主)
+.navbar-search-modal__rebuild-link {
+  margin-left: 8px;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--ifm-color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .navbar-search-modal__hint {
   margin-top: 10px;
   font-size: 0.8rem;
   color: var(--ifm-color-emphasis-600);
+
+  &.navbar-search-modal__hint--muted {
+    font-size: 0.75rem;
+    color: var(--ifm-color-emphasis-500);
+  }
 }
 
 // ---------- 结果区 ----------

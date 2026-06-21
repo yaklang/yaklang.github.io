@@ -4,7 +4,7 @@
  * 前端本地搜索的全部共享类型。所有结构都刻意保持"可序列化",
  * 以便 worker 与主线程通过 postMessage 传递, 以及 IndexedDB 直接存取。
  *
- * 关键词: search types, indexed doc, posting list
+ * 关键词: search types, indexed doc, posting list, index phase
  */
 
 // 内容来源, 对应打包脚本的 SOURCES = ["docs", "products", "blog"]
@@ -76,18 +76,33 @@ export interface SearchResult {
   score: number;
 }
 
-// 主线程 -> worker 的消息
-export type WorkerRequest =
-  | { type: "ensureIndex"; meta: PackageMeta }
-  | { type: "search"; query: string; reqId: number };
+// ---------- 索引构建阶段 ----------
+//
+// 把整条构建链路切成有序阶段, 每个阶段都有中文展示文案与可量化的进度。
+// UI 通过 phase 渲染"准备开始构建 / 正在下载 / 解析内容 / 建立倒排 / 正在存储 / 收尾中"。
+//
+// 阶段顺序:
+//   prepare -> download -> parse -> tokenize -> store -> finalize -> ready
+//
+export type IndexPhase =
+  | "prepare" // 准备开始构建(初始化、比对版本)
+  | "download" // 下载内容包 zip(可报告字节进度)
+  | "parse" // 解压并解析 INDEX.ndjson + 正文
+  | "tokenize" // 中文 bigram + 英文 token 分词与倒排统计
+  | "store" // 写入 IndexedDB(分批 put)
+  | "finalize" // 收尾(写版本、释放中间结构)
+  | "ready"; // 完成(不是过程阶段, 仅用于 ready 事件)
 
-// worker -> 主线程的消息
-export type WorkerResponse =
-  | { type: "indexProgress"; done: number; total: number; currentSource: SearchSource; currentTitle: string }
-  | { type: "indexReady"; meta: PackageMeta; rebuilt: boolean }
-  | { type: "indexError"; message: string }
-  | { type: "searchResults"; reqId: number; results: SearchResult[] }
-  | { type: "searchError"; reqId: number; message: string };
+// 各阶段的中文展示文案(UI 直接用)
+export const PHASE_LABEL: Record<IndexPhase, string> = {
+  prepare: "准备开始构建",
+  download: "正在下载内容包",
+  parse: "正在解析文档",
+  tokenize: "正在建立倒排索引",
+  store: "正在存储到本地",
+  finalize: "收尾中",
+  ready: "构建完成",
+};
 
 // 三种来源在前端的中文展示文案
 export const SOURCE_LABEL: Record<SearchSource, string> = {
@@ -96,9 +111,72 @@ export const SOURCE_LABEL: Record<SearchSource, string> = {
   blog: "技术博客",
 };
 
-// 进度条上展示的"正在搜索 XXX"短语
+// 进度条上展示的"正在搜索 XXX"短语(tokenize 阶段按来源细分)
 export const SOURCE_SEARCHING_LABEL: Record<SearchSource, string> = {
-  docs: "正在搜索文档",
-  products: "正在搜索 Yakit 文档",
-  blog: "正在搜索技术博客",
+  docs: "正在索引文档",
+  products: "正在索引 Yakit 文档",
+  blog: "正在索引技术博客",
 };
+
+// 单条索引事件日志(UI 用日志区滚动展示, 让用户对构建过程有完整可见性)
+// 每条日志带 level 与可选的耗时/字节信息, 透明度拉满。
+export interface IndexLogEntry {
+  ts: number; // Date.now() 时间戳
+  level: "info" | "warn" | "error";
+  phase: IndexPhase;
+  message: string;
+}
+
+// 主线程 -> worker 的消息
+export type WorkerRequest =
+  | { type: "ensureIndex"; meta: PackageMeta }
+  // 强制重建: 清空 IDB 后重新跑全流程, 用于"重新构建"按钮
+  | { type: "rebuild"; meta: PackageMeta }
+  | { type: "search"; query: string; reqId: number };
+
+// worker -> 主线程的消息
+export type WorkerResponse =
+  // 阶段切换: 进入某个 phase, 附带该阶段的预期总量(可能为 0 表示未知)
+  | {
+      type: "indexPhase";
+      phase: IndexPhase;
+      // 该阶段总进度分母: download 阶段是 zip 字节数, parse/tokenize 是文档数, store 是写入批次数等
+      total?: number;
+      // 人类可读的额外说明
+      detail?: string;
+    }
+  // 阶段内进度增量: done/total 单调递增, etaMs 为预测剩余毫秒(可缺省)
+  | {
+      type: "indexProgress";
+      phase: IndexPhase;
+      done: number;
+      total: number;
+      // 当前正在处理的来源(仅 tokenize 阶段有意义)
+      currentSource?: SearchSource;
+      currentTitle?: string;
+      // 已耗时(ms)与预测剩余(ms), 用于 UI 展示"预计 xxx, 已用 xxx"
+      elapsedMs?: number;
+      etaMs?: number;
+    }
+  // 日志事件: UI 把它追加到日志区, 让构建过程透明可见
+  | { type: "indexLog"; log: IndexLogEntry }
+  // 索引就绪
+  | {
+      type: "indexReady";
+      meta: PackageMeta;
+      rebuilt: boolean;
+      // 本次构建的摘要统计, 用于 UI 展示"已索引 N 篇, 共 M 词项, 耗时 T"
+      summary?: IndexSummary;
+    }
+  | { type: "indexError"; phase?: IndexPhase; message: string }
+  | { type: "searchResults"; reqId: number; results: SearchResult[] }
+  | { type: "searchError"; reqId: number; message: string };
+
+// 索引就绪时的摘要
+export interface IndexSummary {
+  docs: number;
+  postings: number; // 词项数
+  bytesUncompressed: number; // 解压后正文字节(粗略, 用于展示)
+  durationMs: number;
+  meta: PackageMeta;
+}

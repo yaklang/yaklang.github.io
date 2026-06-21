@@ -201,7 +201,10 @@ export interface ParsedPackage {
   docs: IndexedDoc[];
 }
 
-export function parsePackageZip(zipBytes: Uint8Array): ParsedPackage {
+export function parsePackageZip(
+  zipBytes: Uint8Array,
+  onProgress?: (done: number, total: number) => void
+): ParsedPackage {
   // unzipSync 返回 { "INDEX.ndjson": Uint8Array, "docs/...": Uint8Array, ... }
   const files = unzipSync(zipBytes);
   // 解析 INDEX.ndjson -> entries
@@ -222,24 +225,76 @@ export function parsePackageZip(zipBytes: Uint8Array): ParsedPackage {
   }
 
   const docs: IndexedDoc[] = [];
-  for (const entry of entries) {
+  const total = entries.length;
+  const PROGRESS_EVERY = 16;
+  for (let i = 0; i < total; i++) {
+    const entry = entries[i];
     const zipInner = `${entry.source}/${entry.relPath}`;
     const bodyBytes = files[zipInner];
-    if (!bodyBytes) continue;
-    const bodyText = new TextDecoder("utf-8").decode(bodyBytes);
-    docs.push(buildIndexedDoc(entry, bodyText));
+    if (bodyBytes) {
+      const bodyText = new TextDecoder("utf-8").decode(bodyBytes);
+      docs.push(buildIndexedDoc(entry, bodyText));
+    }
+    if (onProgress && (i % PROGRESS_EVERY === 0 || i === total - 1)) {
+      onProgress(i + 1, total);
+    }
   }
   return { entries, docs };
 }
 
 // fetch 内容包 zip, 返回 Uint8Array。失败时抛错由 worker 上报。
-export async function fetchPackageZip(zipPath: string): Promise<Uint8Array> {
+//
+// 改造: 用 ReadableStream 流式读取, 实时回调下载进度(received/total 字节),
+// 让 UI 能展示"正在下载 1.2MB / 2.4MB"和网速。
+// 不支持 content-length 时(SW 命中或某些 CDN), 退化为已接收字节计数。
+export async function fetchPackageZip(
+  zipPath: string,
+  onProgress?: (received: number, total: number | null) => void
+): Promise<Uint8Array> {
   const resp = await fetch(zipPath, { cache: "force-cache" });
   if (!resp.ok) {
     throw new Error(`fetch ${zipPath} -> HTTP ${resp.status}`);
   }
-  const buf = await resp.arrayBuffer();
-  return new Uint8Array(buf);
+  // 优先用 Content-Length; 没有就传 null 让 UI 走"未知大小"分支
+  const lenHeader = resp.headers.get("content-length");
+  const total = lenHeader ? parseInt(lenHeader, 10) : null;
+
+  // 没有 body 流(shouldn't happen) 或 ReadableStream 不可用时直接 arrayBuffer
+  if (!resp.body || typeof resp.body.getReader !== "function") {
+    const buf = await resp.arrayBuffer();
+    if (onProgress) onProgress(buf.byteLength, total ?? buf.byteLength);
+    return new Uint8Array(buf);
+  }
+
+  const reader = resp.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let received = 0;
+  // 防止 getReader 卡死, 设置一个最大累计(单条 chunk 上限 12MB)
+  const PROGRESS_REPORT_BYTES = 64 * 1024; // 每 64KB 上报一次, 平衡流畅与频率
+  let nextReportAt = PROGRESS_REPORT_BYTES;
+
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    if (value) {
+      chunks.push(value);
+      received += value.byteLength;
+      if (onProgress && received >= nextReportAt) {
+        onProgress(received, total);
+        nextReportAt = received + PROGRESS_REPORT_BYTES;
+      }
+    }
+  }
+  if (onProgress) onProgress(received, total ?? received);
+
+  // 合并所有 chunk
+  const out = new Uint8Array(received);
+  let offset = 0;
+  for (const c of chunks) {
+    out.set(c, offset);
+    offset += c.byteLength;
+  }
+  return out;
 }
 
 // 供 UI 与单测复用: 把当前处理的 doc 转成"正在搜索 XXX"的展示串。
