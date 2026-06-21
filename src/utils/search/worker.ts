@@ -263,27 +263,38 @@ async function buildIndex(
   );
 
   // --- 阶段 5: store (写 IndexedDB) ---
-  // rebuildAll 内部分批 put, 这里把 docs/postings 数量作为进度近似分母。
+  // db.rebuildAll 现在按 docs(50%) -> postings(45%) -> version(5%) 分段上报进度,
+  // worker 把它的 done/total 直接转发, 进度条能从 0 平滑推到 100。
+  // total 取 docs+postings 数量, 与 db.rebuildAll 内部刻度一致。
+  const storeTotal = Math.max(1, docsOut.length + postings.length);
   postPhase(
     "store",
-    docsOut.length,
+    storeTotal,
     `写入 ${docsOut.length} 篇文档 + ${postings.length} 个词项`
   );
   const tStoreStart = Date.now();
   postLog("store", "info", "开始写入本地数据库(IndexedDB)");
-  // db.rebuildAll 本身不报进度(单事务批量), 这里上报一次"开始"和一次"完成"。
-  // 为让进度条有动效, 在写入前后发 0% 与 100%。
-  postProgress("store", 0, docsOut.length, {
-    elapsedMs: 0,
-    etaMs: indexMs, // 用索引阶段耗时近似预估
-  });
+  let lastStoreReportTs = tStoreStart;
   await db.rebuildAll(
     meta,
     docsOut as IndexedDoc[],
-    postings as PostingEntry[]
+    postings as PostingEntry[],
+    (done, total) => {
+      const now = Date.now();
+      // 限制上报频率, 至少间隔 100ms, 避免 setState 风暴
+      if (now - lastStoreReportTs < 100 && done < total) return;
+      lastStoreReportTs = now;
+      const elapsedMs = now - tStoreStart;
+      const etaMs =
+        done > 0 ? (elapsedMs / done) * (total - done) : undefined;
+      postProgress("store", done, total, {
+        elapsedMs,
+        etaMs,
+      });
+    }
   );
   const storeMs = Date.now() - tStoreStart;
-  postProgress("store", docsOut.length, docsOut.length, {
+  postProgress("store", storeTotal, storeTotal, {
     elapsedMs: storeMs,
     etaMs: 0,
   });

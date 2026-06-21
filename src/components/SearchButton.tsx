@@ -311,25 +311,10 @@ const SearchButton: React.FC = () => {
     if (client.status !== "ready") return null;
     if (query.trim().length === 0) {
       return (
-        <>
-          <p className="navbar-search-modal__hint">
-            输入关键词搜索全部 {SOURCE_LABEL.docs}、{SOURCE_LABEL.products} 与{" "}
-            {SOURCE_LABEL.blog}。结果保存在本地，再次搜索无需联网。
-          </p>
-          {client.summary && (
-            <p className="navbar-search-modal__hint navbar-search-modal__hint--muted">
-              本地索引: {client.summary.docs} 篇 / {client.summary.postings} 词项,
-              构建耗时 {fmtDuration(client.summary.durationMs)}。
-              <button
-                type="button"
-                className="navbar-search-modal__rebuild-link"
-                onClick={() => client.rebuild()}
-              >
-                重新构建
-              </button>
-            </p>
-          )}
-        </>
+        <p className="navbar-search-modal__hint">
+          输入关键词搜索全部 {SOURCE_LABEL.docs}、{SOURCE_LABEL.products} 与{" "}
+          {SOURCE_LABEL.blog}。结果保存在本地，再次搜索无需联网。
+        </p>
       );
     }
     if (client.searching && client.results.length === 0) {
@@ -399,12 +384,35 @@ const SearchButton: React.FC = () => {
             onChange={(e) => onQueryChange(e.target.value)}
           />
           {renderBody()}
-          {client.status === "ready" && client.meta && !client.summary && (
-            <p className="navbar-search-modal__hint">
-              索引建立于 {new Date(client.meta.generatedAt).toLocaleString()},
-              共 {client.meta.count} 篇文档。
-            </p>
-          )}
+        </div>
+        {/* 常驻 footer: 任意状态下都展示索引摘要 + 重新构建按钮,
+            让用户随时能触发重建, 不会出现"只有第一次能点重置"的问题。
+            building 时按钮禁用并显示"构建中…", 避免并发重建。 */}
+        <div className="navbar-search-modal__footer">
+          <span className="navbar-search-modal__footer-meta">
+            {client.status === "ready" && client.summary
+              ? `本地索引 ${client.summary.docs} 篇 / ${client.summary.postings} 词项`
+              : client.status === "ready" && client.meta
+              ? `索引建立于 ${new Date(client.meta.generatedAt).toLocaleString()}`
+              : client.status === "building"
+              ? `${PHASE_LABEL[client.phase || "prepare"] as string}…`
+              : client.status === "error"
+              ? "索引未就绪"
+              : "尚未构建"}
+          </span>
+          <button
+            type="button"
+            className="navbar-search-modal__rebuild-btn navbar-search-modal__rebuild-btn--footer"
+            onClick={() => client.rebuild()}
+            disabled={client.status === "building"}
+            title={
+              client.status === "building"
+                ? "当前正在构建中, 请稍候"
+                : "清空本地索引并重新构建"
+            }
+          >
+            {client.status === "building" ? "构建中…" : "重新构建"}
+          </button>
         </div>
       </div>
     </div>

@@ -56,10 +56,12 @@ function txDone(tx: IDBTransaction): Promise<void> {
 }
 
 // 单库的批量写入: 清空 + 分片 put, 返回 Promise
+// onWritten: 每完成一个 BATCH_SIZE 分片后回调一次累计已写入数
 async function clearAndBatch<T>(
   db: IDBDatabase,
   storeName: string,
-  items: T[]
+  items: T[],
+  onWritten?: (written: number) => void
 ): Promise<void> {
   const tx = db.transaction(storeName, "readwrite");
   const store = tx.objectStore(storeName);
@@ -69,6 +71,8 @@ async function clearAndBatch<T>(
     for (const it of slice) {
       store.put(it as unknown as Record<string, unknown>);
     }
+    // 该分片已入队, 上报累计写入数(注意: put 是异步, 但 IDB 事务内顺序保证)
+    if (onWritten) onWritten(Math.min(items.length, i + BATCH_SIZE));
   }
   await txDone(tx);
 }
@@ -104,22 +108,47 @@ export class SearchDb {
     await txDone(tx);
   }
 
-  // 全量重建: 清空三库后批量写入。失败时调用方应回滚展示态, 不应清掉旧索引。
+// 全量重建: 清空三库后批量写入。失败时调用方应回滚展示态, 不应清掉旧索引。
   // 这里采用"先清旧库再写新库"的策略: 524 篇量级写入 < 1s, 中断风险可接受;
   // 若对原子性有更高要求可先写到临时库再 rename, 但 IDB 不直接支持 rename,
   // 实现复杂度收益不划算。
+  //
+  // onProgress: 写入进度回调, done/total 取值按"子阶段"映射:
+  //   docs 占 50% (0 ~ total*0.5)
+  //   postings 占 45% (total*0.5 ~ total*0.95)
+  //   setVersion 占 5% (total*0.95 ~ total)
+  // 这样 worker 的 store 阶段进度条能从 0 平滑推到 100, 不会卡在 0。
   async rebuildAll(
     meta: PackageMeta,
     docs: IndexedDoc[],
-    postings: PostingEntry[]
+    postings: PostingEntry[],
+    onProgress?: (done: number, total: number) => void
   ): Promise<void> {
     const db = await this.getDb();
-    // 三个 store 在同一事务里清空, 避免清到一半失败导致数据不一致
-    // 但批量写入仍分 store 串行, 因为同事务跨 store 批量写入 IDB 性能并不优,
-    // 串行清晰可控, 524 篇量级差异可忽略。
-    await clearAndBatch(db, STORE_DOCS, docs);
-    await clearAndBatch(db, STORE_POSTINGS, postings);
+    // 用 docs+postings 数量作为 total 量纲, 让进度条有实际刻度
+    const total = Math.max(1, docs.length + postings.length);
+    const DOCS_END = Math.floor(total * 0.5);
+    const POSTINGS_END = Math.floor(total * 0.95);
+
+    // docs 段(0% ~ 50%): 清空 + 分片 put, 每批上报一次
+    await clearAndBatch(db, STORE_DOCS, docs, (written) => {
+      if (onProgress) {
+        const done = Math.min(DOCS_END, Math.round((written / Math.max(1, docs.length)) * DOCS_END));
+        onProgress(done, total);
+      }
+    });
+    // postings 段(50% ~ 95%)
+    await clearAndBatch(db, STORE_POSTINGS, postings, (written) => {
+      if (onProgress) {
+        const ratio = written / Math.max(1, postings.length);
+        const done = DOCS_END + Math.round(ratio * (POSTINGS_END - DOCS_END));
+        onProgress(Math.min(POSTINGS_END, done), total);
+      }
+    });
+    // version 段(95% ~ 100%)
+    if (onProgress) onProgress(POSTINGS_END, total);
     await this.setVersion(meta);
+    if (onProgress) onProgress(total, total);
   }
 
   async clearAll(): Promise<void> {
