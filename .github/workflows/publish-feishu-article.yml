@@ -1,0 +1,52 @@
+name: Publish Feishu Article
+
+on:
+  workflow_dispatch:
+    inputs:
+      feishu_url:
+        description: '飞书文档链接（新版 Docx）'
+        required: true
+        type: string
+      title:
+        description: '文章标题（留空从文档提取）'
+        required: false
+        type: string
+      author:
+        description: '作者（留空为空）'
+        required: false
+        type: string
+      tags:
+        description: '标签，逗号分隔（留空则无）'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Import Feishu Article
+        env:
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          INPUT_URL: ${{ github.event.inputs.feishu_url }}
+          INPUT_TITLE: ${{ github.event.inputs.title }}
+          INPUT_AUTHOR: ${{ github.event.inputs.author }}
+          INPUT_TAGS: ${{ github.event.inputs.tags }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/import-feishu-article.js
