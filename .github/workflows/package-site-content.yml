@@ -6,6 +6,14 @@ name: Package Site Content
 #
 # 注意: 本 workflow 与 publish-to-oss.yml 完全独立, 互不依赖; 它只打包内容源,
 # 不构建站点也不部署。
+#
+# 触发:
+#   - workflow_dispatch: 手动触发, 可带 note 备注
+#   - push 到任意分支, 且改动命中 docs/** | products/** | blog/** | 本脚本 | 本 workflow
+#   - push v* tag (与 publish-to-oss.yml 同款 tag 触发对齐)
+# 注意: GitHub Actions 不允许在同一 workflow 里写两个顶层 on.push, 而 paths 与 tags
+# 在同一 push 事件里互斥。因此这里用一个 push 块同时声明 branches + tags(无 paths),
+# 路径过滤在 job 内用 changes filter 实现。
 on:
   workflow_dispatch:
     inputs:
@@ -15,18 +23,8 @@ on:
         default: ""
         type: string
   push:
-    # 仅当内容源或本脚本/本 workflow 改动时触发(任意分支)
     branches:
       - "**"
-    paths:
-      - "docs/**"
-      - "products/**"
-      - "blog/**"
-      - "scripts/package-site-content.js"
-      - "scripts/gen-site-packages.js"
-      - ".github/workflows/package-site-content.yml"
-  push:
-    # v* tag 单独触发(GitHub 限制: paths 与 tags 互斥, 需独立事件块)
     tags:
       - "v*"
 
@@ -37,6 +35,8 @@ jobs:
     # 普通分支 push(例如 PR 分支) 只上传 OSS, 不污染 master 记账。
     permissions:
       contents: write
+    outputs:
+      should_run: ${{ steps.filter.outputs.should_run }}
 
     steps:
       - name: Checkout
@@ -44,12 +44,72 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Filter paths
+        id: filter
+        # 仅在以下情况实际执行后续步骤:
+        #   - workflow_dispatch
+        #   - push 到 v* tag
+        #   - push 到分支且改动命中 docs/** | products/** | blog/** | 本脚本 | 本 workflow
+        # 否则跳过整个 job(标记 should_run=false)。用 bash 实现以保持零额外 action 依赖。
+        run: |
+          set -e
+          EVENT="${{ github.event_name }}"
+          REF="${{ github.ref }}"
+          if [ "${EVENT}" = "workflow_dispatch" ]; then
+            echo "triggered by workflow_dispatch, will run"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [[ "${REF}" == refs/tags/v* ]]; then
+            echo "triggered by v* tag ${REF}, will run"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # 分支 push: 用 git diff 检查目标路径是否被改动
+          PATTERNS=(
+            "docs/"
+            "products/"
+            "blog/"
+            "scripts/package-site-content.js"
+            "scripts/gen-site-packages.js"
+            ".github/workflows/package-site-content.yml"
+          )
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.event.after }}"
+          if [ -z "${BEFORE}" ] || [ "${BEFORE}" = "0000000000000000000000000000000000000000" ]; then
+            echo "no before SHA (new branch or force push), will run"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          CHANGED=$(git diff --name-only "${BEFORE}" "${AFTER}" 2>/dev/null || true)
+          HIT="false"
+          for line in ${CHANGED}; do
+            for pat in "${PATTERNS[@]}"; do
+              if [[ "${line}" == ${pat}* ]]; then
+                HIT="true"
+                break
+              fi
+            done
+            if [ "${HIT}" = "true" ]; then
+              break
+            fi
+          done
+          if [ "${HIT}" = "true" ]; then
+            echo "branch push matched watched paths, will run"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "branch push did not match watched paths, skip"
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Use Node.js
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Resolve date and existing archives
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         id: date
         run: |
           set -e
@@ -59,7 +119,6 @@ jobs:
           # 之后是 yaklang-com-docs-DATE-1.zip, -2.zip, ...
           # 找第一个不存在的编号作为本次归档名。
           IDX=0
-          SUFFIX=""
           while true; do
             if [ "${IDX}" = "0" ]; then
               SUFFIX=""
@@ -89,10 +148,12 @@ jobs:
           done
 
       - name: Selftest packager
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         run: |
           node scripts/package-site-content.js --selftest
 
       - name: Package site content
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         id: pkg
         env:
           ZIP_NAME: ${{ steps.date.outputs.zip_name }}
@@ -111,6 +172,7 @@ jobs:
           ls -lh tmp_package/
 
       - name: Upload artifact
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: site-content-package
@@ -123,12 +185,14 @@ jobs:
           retention-days: 30
 
       - name: Download yak binary (OSS uploader)
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         run: |
           # 与 yaklang 主仓 generate-web-doc.yml 同款工具
           wget -q -O yak https://aliyun-oss.yaklang.com/yak/latest/yak_linux_amd64
           chmod +x yak
 
       - name: Upload to Aliyun OSS
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         env:
           OSS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
           OSS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
@@ -144,6 +208,7 @@ jobs:
           echo "Uploaded ${ZIP_NAME} to oss path ${OSS_PATH}"
 
       - name: Update bookkeeping
+        if: ${{ steps.filter.outputs.should_run == 'true' }}
         run: |
           set -e
           NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)
@@ -167,7 +232,7 @@ jobs:
 
       - name: Commit bookkeeping to master
         # 只有 tag 或 manual 触发时才回写 master 记账; 分支 push(含 PR)只上传 OSS。
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
+        if: ${{ steps.filter.outputs.should_run == 'true' && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') }}
         run: |
           set -e
           git config user.name "GitHub Actions"
