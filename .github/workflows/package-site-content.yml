@@ -194,8 +194,8 @@ jobs:
       - name: Upload to Aliyun OSS
         if: ${{ steps.filter.outputs.should_run == 'true' }}
         env:
-          OSS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
-          OSS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
+          OSS_KEY_ID: ${{ secrets.OSS_KEY_ID }}
+          OSS_KEY_SECRET: ${{ secrets.OSS_KEY_SECRET }}
         run: |
           set -e
           ZIP_NAME="${{ steps.date.outputs.zip_name }}"
