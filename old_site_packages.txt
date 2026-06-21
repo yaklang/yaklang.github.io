@@ -4,3 +4,4 @@
 # 该文件经 scripts/gen-site-packages.js 生成 static/site-packages.json 供官网展示。
 2026-06-21-1	2026-06-21T03:07:33Z	https://aliyun-oss.yaklang.com/yak/docs/2026-06-21/yaklang-com-docs-2026-06-21-1.zip	523	re-run after GH_TOKEN checkout fix
 2026-06-21-3	2026-06-21T03:57:52Z	https://aliyun-oss.yaklang.com/yak/docs/2026-06-21/yaklang-com-docs-2026-06-21-3.zip	523	manual: sync latest.zip after CI fix for v0.384.0 search feature
+2026-06-21-5	2026-06-21T05:07:22Z	https://aliyun-oss.yaklang.com/yak/docs/2026-06-21/yaklang-com-docs-2026-06-21-5.zip	523
