@@ -269,6 +269,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore(site-package): archive ${ZIP_NAME}"
-          # workflow_dispatch 在 master 上跑, 直接推回 master
-          # tag 触发时也推回 master
-          git push
+          # workflow_dispatch 在 master 分支上跑, git push 即可;
+          # tag 触发时处于 detached HEAD(检出到 tag commit), 必须显式
+          # 指定目标分支推回 master, 否则会得到 "You are not currently on a branch"。
+          if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+            git push
+          else
+            git push origin "HEAD:master"
+          fi
