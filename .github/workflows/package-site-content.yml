@@ -42,6 +42,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          # master 是受保护分支, 默认 GITHUB_TOKEN 推 master 会被 branch protection 拒绝(GH006)。
+          # 用 GH_TOKEN(PAT) checkout, 后续 commit step 的 git push 才能推回 master。
+          token: ${{ secrets.GH_TOKEN }}
           fetch-depth: 0
 
       - name: Filter paths
@@ -235,6 +238,7 @@ jobs:
         if: ${{ steps.filter.outputs.should_run == 'true' && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') }}
         run: |
           set -e
+          # checkout 已用 GH_TOKEN, 这里直接 push 即可越过 branch protection
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           ZIP_NAME="${{ steps.date.outputs.zip_name }}"
