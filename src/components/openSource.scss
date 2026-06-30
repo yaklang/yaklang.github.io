@@ -1,0 +1,382 @@
+// 开源生态：卡片 / 导航 mega-menu / 移动端列表 / 总览页样式
+// 主题色：品牌橙 var(--base-theme-color, #ff7d23)，主色蓝 var(--ifm-color-primary)
+
+// ---------------------------------------------------------------------------
+// 卡片（桌面 mega-menu 与总览页共用，靠 variant 区分大小）
+// ---------------------------------------------------------------------------
+.os-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e7e9ee;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+    transform 0.18s ease;
+
+  &:hover {
+    border-color: var(--os-accent, var(--base-theme-color));
+    box-shadow: 0 10px 28px rgba(20, 23, 33, 0.1);
+    transform: translateY(-2px);
+
+    .os-card__open {
+      color: var(--os-accent, var(--base-theme-color));
+      transform: translateX(2px);
+    }
+    .os-card__name {
+      color: var(--os-accent, var(--base-theme-color));
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__mono {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: #fff;
+    background: var(--os-accent, var(--base-theme-color));
+    border-radius: 11px;
+    box-shadow: 0 4px 12px rgba(20, 23, 33, 0.18);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--os-accent) 35%, transparent);
+  }
+
+  // 图片 LOGO（存在 project.logo 时替代字母徽标）。
+  // 生成的 app-icon 自带白色圆角底，这里只做尺寸与轻微圆角裁切。
+  &__logo {
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+    border-radius: 11px;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__name {
+    font-weight: 700;
+    color: var(--base-font-color, #1e1f23);
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.18s ease;
+    text-decoration: none;
+  }
+  // stretched link：让标题 <a> 覆盖整张卡片，整卡可点
+  &__stretch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  &__domain {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #8a8f9a;
+    font-family: var(--ifm-font-family-monospace, monospace);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__open {
+    flex-shrink: 0;
+    color: #c4c8d2;
+    transition: color 0.18s ease, transform 0.18s ease;
+  }
+
+  &__desc {
+    margin: 0;
+    color: #565b66;
+  }
+
+  &__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  &__tag {
+    font-size: 11px;
+    line-height: 1.6;
+    padding: 1px 8px;
+    border-radius: 999px;
+    color: var(--os-accent, var(--base-theme-color));
+    background: #f5f6f8;
+    background: color-mix(in srgb, var(--os-accent) 12%, #fff);
+    border: 1px solid #e7e9ee;
+    border: 1px solid color-mix(in srgb, var(--os-accent) 24%, #fff);
+  }
+
+  // 源码链接需浮在 stretched link 之上才能点击
+  &__repo {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: #6a6f7a;
+    text-decoration: none;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid #e2e5ec;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+    &:hover {
+      color: #1e1f23;
+      border-color: #c7ccd6;
+      background: #f6f7f9;
+    }
+  }
+}
+
+// 卡片尺寸：菜单内紧凑
+.os-card--menu {
+  padding: 12px 13px;
+  gap: 8px;
+
+  .os-card__mono {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+  }
+  .os-card__logo {
+    width: 44px;
+    height: 44px;
+  }
+  .os-card__name {
+    font-size: 14px;
+  }
+  .os-card__desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .os-card__tag {
+    font-size: 10.5px;
+  }
+}
+
+// 卡片尺寸：页面内宽松
+.os-card--page {
+  padding: 22px;
+  gap: 14px;
+
+  .os-card__mono {
+    width: 52px;
+    height: 52px;
+    font-size: 17px;
+    border-radius: 14px;
+  }
+  .os-card__logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+  }
+  .os-card__name {
+    font-size: 18px;
+  }
+  .os-card__desc {
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 导航栏下拉 mega-menu（桌面端）
+// ---------------------------------------------------------------------------
+.os-nav {
+  // 复用 infima .dropdown 的 hover 行为，仅重写菜单面板外观
+  .navbar__link::after {
+    display: none; // 隐藏默认下拉小箭头由 navbar.scss 控制，这里保险再隐藏
+  }
+}
+
+.dropdown__menu.os-megamenu {
+  // 覆盖 infima 默认的窄列表样式，做成宽面板
+  left: 50%;
+  right: auto;
+  width: 680px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #e7e9ee;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(20, 23, 33, 0.16);
+  // 自管 transform：水平居中于触发项 + 竖直滑入动画
+  transform: translateX(-50%) translateY(-0.5rem);
+
+  &::before {
+    display: none; // infima 可能带的小三角，关掉
+  }
+
+  .os-megamenu__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 2px 4px 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eef0f4;
+  }
+  .os-megamenu__titles {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .os-megamenu__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--base-font-color, #1e1f23);
+  }
+  .os-megamenu__subtitle {
+    font-size: 12px;
+    color: #8a8f9a;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .os-megamenu__all {
+    flex-shrink: 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--base-theme-color, #ff7d23);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// hover 展开：覆盖 infima 的 transform，保留居中
+.os-nav.dropdown--hoverable:hover .dropdown__menu.os-megamenu {
+  transform: translateX(-50%) translateY(0);
+}
+
+// menu 内卡片两列网格
+.os-grid--menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+// 窄桌面缩窄面板，避免溢出
+@media (max-width: 1100px) {
+  .dropdown__menu.os-megamenu {
+    width: 560px;
+  }
+}
+@media (max-width: 1000px) {
+  .dropdown__menu.os-megamenu {
+    width: 420px;
+  }
+  .os-grid--menu {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 移动端抽屉列表
+// ---------------------------------------------------------------------------
+.os-nav-mobile {
+  &__link {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+  }
+  &__name {
+    font-size: 14px;
+  }
+  &__domain {
+    font-size: 11.5px;
+    color: #8a8f9a;
+    font-family: var(--ifm-font-family-monospace, monospace);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// /opensource 总览页
+// ---------------------------------------------------------------------------
+.os-page {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 60px 24px 88px; // 顶部留出固定导航栏高度
+  width: 100%;
+
+  &__hero {
+    text-align: center;
+    padding: 28px 0 36px;
+  }
+  &__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--base-theme-color, #ff7d23);
+    margin: 0 0 10px;
+  }
+  &__title {
+    font-size: 40px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 16px;
+    color: var(--base-font-color, #1e1f23);
+  }
+  &__lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #565b66;
+  }
+
+  &__grid .os-grid--page {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 996px) {
+  .os-page {
+    padding-top: 56px;
+
+    &__title {
+      font-size: 30px;
+    }
+    &__lead {
+      font-size: 15px;
+    }
+    &__grid .os-grid--page {
+      grid-template-columns: 1fr;
+    }
+  }
+}

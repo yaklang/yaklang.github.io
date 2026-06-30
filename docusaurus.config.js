@@ -92,14 +92,12 @@ module.exports = {
                 //     label: "企业合作",
                 // },
                 {
+                    // 自定义导航项：合并原"静态代码分析"与"实战手册"为"开源"，
+                    // hover 展开开源项目卡片 mega-menu，点击进入 /opensource 总览页。
+                    type: "custom-openSource",
                     position: "left",
-                    href: "/irify",
-                    label: "静态代码分析",
-                },
-		        {
-                    href: "/Yaklab/vulinbox/",
-                    label: "实战手册",
-                    position: "left",
+                    label: "开源",
+                    to: "/opensource",
                 },
                 {
                     type: "dropdown",
