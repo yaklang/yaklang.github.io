@@ -33,7 +33,8 @@ export const OPEN_SOURCE_PROJECTS: OpenSourceProject[] = [
     id: "ssa",
     name: "IRify · SSA 静态代码分析",
     mono: "SSA",
-    accent: "#16a34a",
+    logo: "/img/opensource/ssa.png",
+    accent: "#8b5cf6",
     tagline: "基于 SSA 中间表示的静态代码分析与代码审计平台",
     description:
       "以静态单赋值（SSA）为核心的程序分析引擎，支持多语言源码建模、数据流与控制流分析以及漏洞挖掘，是 Yak 静态代码分析能力的在线门户。",
@@ -60,6 +61,7 @@ export const OPEN_SOURCE_PROJECTS: OpenSourceProject[] = [
     id: "hackskills",
     name: "HackSkills",
     mono: "HS",
+    logo: "/img/opensource/hackskills.png",
     accent: "#f59e0b",
     tagline: "面向 AI Agent 的攻防技能知识库",
     description:
@@ -87,6 +89,7 @@ export const OPEN_SOURCE_PROJECTS: OpenSourceProject[] = [
     id: "memfit",
     name: "Memfit AI",
     mono: "MF",
+    logo: "/img/opensource/memfit.png",
     accent: "#2563eb",
     tagline: "面向智能体系统的递归式双引擎混合架构",
     description:
