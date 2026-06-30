@@ -9,7 +9,7 @@ import {
 
 const PAGE_TITLE = "开源生态 · Yak Project Open Source";
 const PAGE_DESC =
-  "Yak Project 开源生态总览：IRify(SSA 静态代码分析)、JavaJive(纯 Go Java 工具)、HackSkills(AI Agent 攻防技能库)、HackBenchmark(AI 安全评测基准)、Memfit AI(智能体架构)。涵盖 Web 安全、代码审计、AI Agent 与漏洞研究的全部开源项目。";
+  "Yak Project 开源生态总览：IRify(SSA 静态代码分析)、JavaJive(纯 Go Java 工具)、HackSkills(AI Agent 攻防技能库)、YakLab(Vulinbox 漏洞靶场实战手册)、HackBenchmark(AI 安全评测基准)、Memfit AI(智能体架构)。涵盖 Web 安全、代码审计、AI Agent 与漏洞研究的全部开源项目。";
 const KEYWORDS = [
   "Yak Project",
   "yaklang",
@@ -23,6 +23,10 @@ const KEYWORDS = [
   "Java 反编译",
   "HackSkills",
   "skills.hackbenchmark.com",
+  "YakLab",
+  "Vulinbox",
+  "漏洞靶场",
+  "实战手册",
   "HackBenchmark",
   "hackbenchmark.com",
   "Memfit AI",
@@ -37,6 +41,9 @@ export default function OpenSourcePage() {
   const siteUrl = siteConfig.url || "https://yaklang.com";
   const pageUrl = `${siteUrl}/opensource`;
 
+  // 内部相对链接(如 YakLab 指向站内 /Yaklab/...)在 JSON-LD 里需补成绝对地址。
+  const absUrl = (u: string) => (/^https?:\/\//.test(u) ? u : `${siteUrl}${u}`);
+
   // JSON-LD：用 ItemList 描述全部开源项目，提升搜索引擎对结构化内容的理解，利于收录。
   const jsonLd = {
     "@context": "https://schema.org",
@@ -48,12 +55,12 @@ export default function OpenSourcePage() {
     itemListElement: OPEN_SOURCE_PROJECTS.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: p.url,
+      url: absUrl(p.url),
       item: {
         "@type": "SoftwareSourceCode",
         name: p.name,
         description: p.description,
-        url: p.url,
+        url: absUrl(p.url),
         codeRepository: p.repo,
         keywords: p.tags.join(", "),
         author: {

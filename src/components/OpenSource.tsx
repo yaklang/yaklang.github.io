@@ -72,6 +72,20 @@ export const OPEN_SOURCE_PROJECTS: OpenSourceProject[] = [
     tags: ["Agent Skills", "渗透测试", "红队", "知识库"],
   },
   {
+    id: "yaklab",
+    name: "YakLab",
+    mono: "YL",
+    logo: "/img/opensource/yaklab.png",
+    accent: "#14b8a6",
+    tagline: "Web 漏洞靶场实战手册：Vulinbox 通关指南",
+    description:
+      "Yak 生态的安全实战板块：基于 Vulinbox 漏洞靶场系统化复现与通关 OWASP Top 10、逻辑漏洞与组件漏洞，配合 Yakit 动手实践，沉淀真实场景的 Web 安全技能。",
+    url: "/Yaklab/vulinbox/",
+    domain: "yaklang.io/Yaklab",
+    repo: "https://github.com/yaklang/yaklang",
+    tags: ["漏洞靶场", "Vulinbox", "实战手册", "Web 安全"],
+  },
+  {
     id: "hackbenchmark",
     name: "HackBenchmark",
     mono: "HB",
