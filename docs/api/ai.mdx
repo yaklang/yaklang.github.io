@@ -800,7 +800,7 @@ dump(result)
 
 - 描述: SessionDir 返回当前进程 aicache 调试落盘根目录的绝对路径，
 
-- 详细描述: 供脚本侧（cachebench/离线分析等）一行直接拿到dump目录路径，无需重做mtime扫描。第一次调用时会触发懒初始化（与SessionId共享sync.Once），之后稳定返回同一路径。关键词:aicache,SessionDir,脚本可读dump路径
+- 详细描述: 供脚本侧（cachebench/离线分析等）一行直接拿到dump目录路径，无需重做mtime扫描。第一次调用时会触发懒初始化（与SessionId共享dumpInitMu），之后稳定返回同一路径。关键词:aicache,SessionDir,脚本可读dump路径
 
 
 <Tabs>
