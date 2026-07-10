@@ -5,8 +5,8 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">syntaxflow | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/docs/api/syntaxflow"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="syntaxflow | Yak Program Language"><meta data-rh="true" name="description" content="library-syntaxflow}"><meta data-rh="true" property="og:description" content="library-syntaxflow}"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/docs/api/syntaxflow"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/syntaxflow" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/docs/api/syntaxflow" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/docs/api/syntaxflow" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"syntaxflow","item":"https://yaklang.com/en/docs/api/syntaxflow"}]}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.12a6c904.css">
-<script src="/en/assets/js/runtime~main.a55fe2c0.js" defer="defer"></script>
-<script src="/en/assets/js/main.a11a60bd.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.f2947a1b.js" defer="defer"></script>
+<script src="/en/assets/js/main.2c2aa4f5.js" defer="defer"></script>
 <script src="/en/assets/js/69861.1a85a79a.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -22,7 +22,7 @@
 </ul>
 <p>与相邻库的关系：<code>syntaxflow</code> 依赖 <code>ssa</code>（提供编译后的程序），查询结果经 <code>sfreport</code> 出报告、<code>risk</code> 记录代码风险，构成完整的代码审计流水线。</p>
 <blockquote>
-<p>共 18 个函数</p>
+<p>共 20 个函数</p>
 </blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="函数索引">函数索引<a href="#函数索引" class="hash-link" aria-label="Direct link to 函数索引" title="Direct link to 函数索引" translate="no">​</a></h2>
 
@@ -391,7 +391,7 @@
 
 <div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">类型</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制扫描任务的生命周期</td></tr><tr><td style="text-align:left">taskId</td><td style="text-align:left"><code>string</code></td><td style="text-align:left">要恢复的任务ID</td></tr></tbody></table></div></div>
 <p><strong>可选参数</strong></p>
-<p>可作为可变参数 <code>opts ...ssaconfig.Option</code> 传入选项；共 4 个可用选项，详见 <a href="#option-option" class="">Option 选项列表</a>。</p>
+<p>可作为可变参数 <code>opts ...ssaconfig.Option</code> 传入选项；共 6 个可用选项，详见 <a href="#option-option" class="">Option 选项列表</a>。</p>
 <p><strong>返回值</strong></p>
 
 
@@ -433,7 +433,7 @@
 
 <div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">参数名</th><th style="text-align:left">类型</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">ctx</td><td style="text-align:left"><code>context.Context</code></td><td style="text-align:left">上下文，用于控制扫描任务的生命周期</td></tr></tbody></table></div></div>
 <p><strong>可选参数</strong></p>
-<p>可作为可变参数 <code>opts ...ssaconfig.Option</code> 传入选项；共 4 个可用选项，详见 <a href="#option-option" class="">Option 选项列表</a>。</p>
+<p>可作为可变参数 <code>opts ...ssaconfig.Option</code> 传入选项；共 6 个可用选项，详见 <a href="#option-option" class="">Option 选项列表</a>。</p>
 <p><strong>返回值</strong></p>
 
 
@@ -493,7 +493,19 @@
 
 
 
-<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">选项函数</th><th style="text-align:left">参数</th><th style="text-align:left">返回值</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left"><code>syntaxflow.withScanConcurrency</code></td><td style="text-align:left"><code>concurrency uint32</code></td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">设置扫描并发数</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanProcessCallback</code></td><td style="text-align:left"><code>callback ProcessCallback</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">WithProcessCallback 设置扫描进度回调</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanPrograms</code></td><td style="text-align:left"><code>progs ssaapi.Programs</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">withPrograms 指定本次扫描要覆盖的程序集合</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanResultCallback</code></td><td style="text-align:left"><code>callback ScanResultCallback</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">设置扫描结果回调</td></tr></tbody></table></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="yakdoc-table"><button type="button" class="yakdoc-table__toggle" aria-expanded="false" aria-label="展开表格">展开</button><div class="yakdoc-table__scroll"><table><thead><tr><th style="text-align:left">选项函数</th><th style="text-align:left">参数</th><th style="text-align:left">返回值</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left"><code>syntaxflow.withScanConcurrency</code></td><td style="text-align:left"><code>concurrency uint32</code></td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">设置扫描并发数</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanProcessCallback</code></td><td style="text-align:left"><code>callback ProcessCallback</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">WithProcessCallback 设置扫描进度回调</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanPrograms</code></td><td style="text-align:left"><code>progs ssaapi.Programs</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">withPrograms 指定本次扫描要覆盖的程序集合</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanResultCallback</code></td><td style="text-align:left"><code>callback ScanResultCallback</code></td><td style="text-align:left"><code>ssaconfig.Option</code></td><td style="text-align:left">设置扫描结果回调</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanRuleTimeout</code></td><td style="text-align:left"><code>timeout time.Duration</code></td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">sets the per-rule wall-clock budget for a single rule</td></tr><tr><td style="text-align:left"><code>syntaxflow.withScanRuleWorkLimit</code></td><td style="text-align:left"><code>limit int64</code></td><td style="text-align:left"><code>Option</code></td><td style="text-align:left">sets the per-rule total-work budget: the max number of</td></tr></tbody></table></div></div>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="option-queryoption">2. 类型：QueryOption<a href="#option-queryoption" class="hash-link" aria-label="Direct link to 2. 类型：QueryOption" title="Direct link to 2. 类型：QueryOption" translate="no">​</a></h3>
 <p>涉及到的函数有：<a href="#execrule" class="">syntaxflow.ExecRule</a></p>
 
