@@ -9,7 +9,7 @@
 
 与相邻库的关系：`syntaxflow` 依赖 `ssa`（提供编译后的程序），查询结果经 `sfreport` 出报告、`risk` 记录代码风险，构成完整的代码审计流水线。
 
-> 共 18 个函数
+> 共 20 个函数
 
 ## 函数索引
 
@@ -245,7 +245,7 @@ ResumeScan(ctx context.Context, taskId string, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 4 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 6 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -289,7 +289,7 @@ StartScan(ctx context.Context, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 4 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 6 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -352,6 +352,8 @@ die(err)
 | `syntaxflow.withScanProcessCallback` | `callback ProcessCallback` | `ssaconfig.Option` | WithProcessCallback 设置扫描进度回调 |
 | `syntaxflow.withScanPrograms` | `progs ssaapi.Programs` | `ssaconfig.Option` | withPrograms 指定本次扫描要覆盖的程序集合 |
 | `syntaxflow.withScanResultCallback` | `callback ScanResultCallback` | `ssaconfig.Option` | 设置扫描结果回调 |
+| `syntaxflow.withScanRuleTimeout` | `timeout time.Duration` | `Option` | sets the per-rule wall-clock budget for a single rule |
+| `syntaxflow.withScanRuleWorkLimit` | `limit int64` | `Option` | sets the per-rule total-work budget: the max number of |
 
 ### 2. 类型：QueryOption {#option-queryoption}
 
