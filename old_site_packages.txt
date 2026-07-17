@@ -13,3 +13,4 @@
 2026-07-03	2026-07-03T19:29:53Z	https://aliyun-oss.yaklang.com/yak/docs/2026-07-03/yaklang-com-docs-2026-07-03.zip	524
 2026-07-10	2026-07-10T19:40:09Z	https://aliyun-oss.yaklang.com/yak/docs/2026-07-10/yaklang-com-docs-2026-07-10.zip	524
 2026-07-11	2026-07-11T19:11:22Z	https://aliyun-oss.yaklang.com/yak/docs/2026-07-11/yaklang-com-docs-2026-07-11.zip	524
+2026-07-17-1	2026-07-17T19:18:32Z	https://aliyun-oss.yaklang.com/yak/docs/2026-07-17/yaklang-com-docs-2026-07-17-1.zip	524
