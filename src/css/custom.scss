@@ -29,6 +29,17 @@
 
   --base-font-color: #1e1f23;
   --base-theme-color: #ff7d23;
+
+  /* 新首页暖色学术风全局变量 */
+  --hp-paper: #faf6ef;
+  --hp-ink: #211a12;
+  --hp-ink-70: rgba(33, 26, 18, 0.7);
+  --hp-ink-55: rgba(33, 26, 18, 0.55);
+  --hp-ink-35: rgba(33, 26, 18, 0.35);
+  --hp-line: rgba(33, 26, 18, 0.12);
+  --hp-orange: #f45a0c;
+  --hp-orange-deep: #c94605;
+  --hp-card-dark: #150d06;
 }
 
 .docusaurus-highlight-code-line {
@@ -40,12 +51,15 @@
 
 #__docusaurus {
   margin: 0 auto;
+  min-height: 100vh;
+  background: var(--hp-paper, #faf6ef);
 }
 
 html,
 body {
   scroll-behavior: auto;
   // min-width: 768px;
+  background: var(--hp-paper, #faf6ef);
 }
 
 $REM: 16;
@@ -58,6 +72,7 @@ $max-width: REM(8000);
   max-width: $max-width;
   margin: 0 auto;
   width: 100%;
+  background: var(--hp-paper, #faf6ef);
   // 注意：不要在这里加 min-width。
   // 首页按视口等比缩放根字号(rem)自适应，其布局宽度由 .home-container 自带的
   // min-width 约束；而文档/博客根字号固定 16px，若此处用 rem 的 min-width 会被
@@ -84,8 +99,11 @@ $max-width: REM(8000);
 // 切勿给共同祖先 docRoot 加 padding-top：那会和 .sidebar 自带的 padding-top 叠加，
 //   导致侧栏顶部凭空多出一个导航栏高度的空白(搜索框被压低一截)。
 html.docs-wrapper {
+  background: var(--hp-paper, #faf6ef);
+
   [class*="docMainContainer_"] {
     padding-top: var(--ifm-navbar-height);
+    background: var(--hp-paper, #faf6ef);
   }
 
   // 修复：固定导航栏下，短页面(如各章概述落地页)左侧目录顶到导航栏上方的 BUG。

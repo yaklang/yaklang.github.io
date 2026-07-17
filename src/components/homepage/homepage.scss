@@ -1,0 +1,261 @@
+/* yaklang.com 新首页 — 暖色学术风 + 橙色品牌色 */
+
+:root {
+  --hp-paper: #faf6ef;
+  --hp-ink: #211a12;
+  --hp-ink-70: rgba(33, 26, 18, 0.7);
+  --hp-ink-55: rgba(33, 26, 18, 0.55);
+  --hp-ink-35: rgba(33, 26, 18, 0.35);
+  --hp-line: rgba(33, 26, 18, 0.12);
+  --hp-orange: #f45a0c;
+  --hp-orange-deep: #c94605;
+  --hp-card-dark: #150d06;
+  --hp-font-sans: "Helvetica Neue", "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --hp-font-display: "Noto Serif SC", "Songti SC", "STSong", Georgia,
+    "Times New Roman", serif;
+  --hp-font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
+    monospace;
+}
+
+.hp-root {
+  background: var(--hp-paper);
+  color: var(--hp-ink);
+  font-family: var(--hp-font-sans);
+  -webkit-font-smoothing: antialiased;
+
+  ::selection {
+    background: var(--hp-orange);
+    color: #fff;
+  }
+}
+
+/* mono 标签 */
+.hp-mono {
+  font-family: var(--hp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* 衬线标题 */
+.hp-display {
+  font-family: var(--hp-font-display);
+}
+
+/* ---------- Hero 卡片 ---------- */
+.hp-hero-card {
+  background: var(--hp-card-dark);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hp-hero-veil {
+  background: radial-gradient(
+      110% 90% at 88% 4%,
+      rgba(10, 5, 2, 0.52),
+      transparent 55%
+    ),
+    radial-gradient(
+      80% 60% at 4% 100%,
+      rgba(255, 122, 26, 0.3),
+      transparent 62%
+    ),
+    linear-gradient(
+      to top,
+      rgba(10, 5, 2, 0.72) 0%,
+      rgba(10, 5, 2, 0.25) 45%,
+      rgba(10, 5, 2, 0) 70%
+    );
+}
+
+/* 缺口 notch */
+.hp-hero-notch {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--hp-paper);
+  border-top-left-radius: 24px;
+}
+
+.hp-hero-notch::before,
+.hp-hero-notch::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(
+    circle 24px at 0 0,
+    transparent 23.5px,
+    var(--hp-paper) 24px
+  );
+}
+
+.hp-hero-notch::before {
+  top: -24px;
+  right: 0;
+}
+
+.hp-hero-notch::after {
+  left: -24px;
+  bottom: 0;
+}
+
+/* ---------- 按钮 ---------- */
+.hp-btn-paper {
+  background: rgba(250, 246, 239, 0.92);
+  color: var(--hp-ink);
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-size: 13px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hp-orange);
+    color: #fff;
+  }
+}
+
+.hp-btn-orange {
+  background: var(--hp-orange);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-size: 13px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hp-orange-deep);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px -8px rgba(244, 90, 12, 0.5);
+  }
+}
+
+.hp-btn-line {
+  box-shadow: inset 0 0 0 1px var(--hp-line);
+  color: var(--hp-ink);
+  font-weight: 500;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-size: 13px;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px var(--hp-orange);
+    color: var(--hp-orange);
+  }
+}
+
+/* ---------- 卡片 ---------- */
+.hp-card {
+  background: #fffdf9;
+  border: 1px solid var(--hp-line);
+  border-radius: 18px;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    border-color: rgba(244, 90, 12, 0.5);
+    box-shadow: 0 18px 50px -18px rgba(180, 100, 30, 0.25);
+    transform: translateY(-3px);
+  }
+}
+
+.hp-card-static {
+  background: #fffdf9;
+  border: 1px solid var(--hp-line);
+  border-radius: 18px;
+}
+
+/* ---------- notch 链接 ---------- */
+.hp-notch-link {
+  font-size: 14px;
+  color: var(--hp-ink-55);
+  transition: color 0.25s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--hp-orange);
+  }
+}
+
+/* ---------- 走马灯 ---------- */
+@keyframes hp-marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.hp-marquee-track {
+  animation: hp-marquee-x 32s linear infinite;
+}
+
+/* ---------- Timeline ---------- */
+.hp-timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--hp-orange);
+  background: var(--hp-paper);
+  flex-shrink: 0;
+}
+
+.hp-timeline-dot-star {
+  background: var(--hp-orange);
+}
+
+.hp-timeline-line {
+  width: 2px;
+  background: var(--hp-line);
+  flex-shrink: 0;
+}
+
+/* ---------- Partner Logo ---------- */
+.hp-partner-logo {
+  filter: grayscale(100%) opacity(0.45);
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: grayscale(0%) opacity(1);
+  }
+}
+
+/* ---------- 响应式调整 ---------- */
+@media (max-width: 768px) {
+  .hp-hero-card {
+    border-radius: 16px;
+  }
+
+  .hp-hero-notch {
+    border-top-left-radius: 16px;
+  }
+
+  .hp-card {
+    border-radius: 14px;
+  }
+}

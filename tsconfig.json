@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "jsx": "react-jsx",
     "noImplicitAny": false,
-    "strict": false
+    "strict": false,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": [".docusaurus", "build", "node_modules"]
 }

@@ -24,6 +24,9 @@
     "@docusaurus/theme-common": "3.9.2",
     "@docusaurus/utils-common": "3.9.2",
     "@mdx-js/react": "^3.0.0",
+    "@paper-design/shaders-react": "^0.0.77",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "@svgr/webpack": "^8.1.0",
     "ahooks": "^3.8.4",
     "animate.css": "^4.1.1",
@@ -34,6 +37,8 @@
     "docusaurus-plugin-sass": "^0.2.6",
     "fflate": "^0.8.3",
     "i18next": "^23.16.8",
+    "lucide-react": "^1.24.0",
+    "motion": "^12.42.2",
     "postcss": "^8.4.49",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.0.0",
@@ -42,7 +47,9 @@
     "react-lazyload": "^3.2.1",
     "sass": "^1.83.4",
     "swiper": "^11.2.1",
-    "tailwindcss": "^3.4.17"
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^3.4.17",
+    "three": "^0.185.1"
   },
   "browserslist": {
     "production": [
@@ -63,6 +70,7 @@
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
+    "@types/three": "^0.185.1",
     "cross-env": "^7.0.3",
     "typescript": "~5.6.2"
   },

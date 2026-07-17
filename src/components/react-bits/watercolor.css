@@ -1,0 +1,17 @@
+.watercolor-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.watercolor-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.watercolor-content {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
