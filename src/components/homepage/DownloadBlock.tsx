@@ -48,6 +48,7 @@ type PlatformId = "macos" | "windows" | "linux" | "web" | "releases";
 
 type DownloadAsset = {
   label: string;
+  description?: string;
   file: string;
 };
 
@@ -206,11 +207,23 @@ const PRODUCTS: Record<ProductKey, ProductSpec> = {
 };
 
 const LEGACY_FILES: DownloadAsset[] = [
-  { label: "Windows 7", file: "windows-legacy-amd64.exe" },
-  { label: "Linux x86_64", file: "linux-legacy-amd64.AppImage" },
-  { label: "Linux ARM64", file: "linux-legacy-arm64.AppImage" },
-  { label: "macOS Intel", file: "darwin-legacy-x64.dmg" },
-  { label: "macOS Apple Silicon", file: "darwin-legacy-arm64.dmg" },
+  { label: "Windows", description: "适用于 Windows 7", file: "windows-legacy-amd64.exe" },
+  {
+    label: "Linux x86_64",
+    description: "适用于统信 UOS、麒麟等国产系统，请确认设备架构",
+    file: "linux-legacy-amd64.AppImage",
+  },
+  {
+    label: "Linux ARM64",
+    description: "适用于统信 UOS、麒麟等国产系统，请确认设备架构",
+    file: "linux-legacy-arm64.AppImage",
+  },
+  { label: "macOS Intel", description: "适用于旧版 Intel Mac 系统", file: "darwin-legacy-x64.dmg" },
+  {
+    label: "macOS Apple Silicon",
+    description: "适用于需要兼容构建的 Apple Silicon Mac",
+    file: "darwin-legacy-arm64.dmg",
+  },
 ];
 
 const productKeys = Object.keys(PRODUCTS) as ProductKey[];
@@ -382,7 +395,7 @@ export default function DownloadBlock() {
   };
 
   return (
-    <section className="w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+    <section id="downloads" className="w-full scroll-mt-[60px] px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
       <motion.div
         variants={container}
         initial="hidden"
@@ -399,63 +412,101 @@ export default function DownloadBlock() {
           {product.title}
         </motion.h2>
 
-        <motion.p variants={item} className="mt-6 max-w-xl text-center text-base leading-relaxed sm:text-lg" style={{ color: "var(--hp-ink-55)" }}>
+        <motion.p variants={item} className="mt-4 max-w-xl text-center text-base leading-relaxed sm:text-lg" style={{ color: "var(--hp-ink-55)" }}>
           {product.description}
         </motion.p>
 
-        <motion.div variants={item} className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-b" style={{ borderColor: "var(--hp-line)" }}>
-          {productKeys.map((key) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => selectProduct(key)}
-              aria-pressed={activeProduct === key}
-              className="hp-mono relative cursor-pointer border-0 bg-transparent px-0 pb-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2"
-              style={{ color: activeProduct === key ? "var(--hp-orange)" : "var(--hp-ink-55)" }}
-            >
-              {key}
-              {activeProduct === key && <motion.span layoutId="product-active-tab" className="absolute inset-x-0 -bottom-px h-0.5" style={{ background: "var(--hp-orange)" }} />}
-            </button>
-          ))}
+        <motion.div
+          variants={item}
+          role="tablist"
+          aria-label="选择 Yak Project 产品"
+          className="mt-6 grid w-full max-w-xl grid-cols-2 gap-1 rounded-xl border p-1 sm:grid-cols-4"
+          style={{ borderColor: "var(--hp-line)", background: "rgba(33, 26, 18, 0.035)" }}
+        >
+          {productKeys.map((key) => {
+            const selected = activeProduct === key;
+
+            return (
+              <button
+                key={key}
+                id={`product-tab-${key.toLowerCase()}`}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                aria-controls="download-product-panel"
+                onClick={() => selectProduct(key)}
+                className="hp-mono relative min-h-10 cursor-pointer rounded-lg border-0 px-4 py-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2"
+                style={{ color: selected ? "#fff" : "var(--hp-ink)", background: "transparent" }}
+              >
+                {selected && (
+                  <motion.span
+                    layoutId="product-active-tab"
+                    className="absolute inset-0 rounded-lg shadow-sm"
+                    style={{ background: "var(--hp-orange)" }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                )}
+                <span className={`relative z-10 ${selected ? "" : "opacity-65 transition-opacity hover:opacity-100"}`}>{key}</span>
+              </button>
+            );
+          })}
         </motion.div>
 
-        <motion.div variants={item} className="mt-10 w-full max-w-3xl">
+        <motion.div
+          id="download-product-panel"
+          role="tabpanel"
+          aria-labelledby={`product-tab-${activeProduct.toLowerCase()}`}
+          variants={item}
+          className="mt-7 w-full max-w-3xl"
+        >
           <div className="overflow-hidden rounded-2xl border shadow-xl" style={terminalStyle}>
-            <div className="flex flex-col gap-3 border-b border-white/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+            <div className="flex flex-col gap-2.5 border-b border-white/10 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between sm:px-5">
               <div className="flex min-w-0 items-center gap-3">
                 <span className="flex shrink-0 gap-1.5" aria-hidden="true">
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
                 </span>
-                <span className="truncate font-mono text-xs text-neutral-500">{activeProduct.toLowerCase()} · install</span>
+                <span className="truncate font-mono text-xs text-neutral-400">{activeProduct.toLowerCase()} · install</span>
               </div>
-              <div className="flex max-w-full overflow-x-auto rounded-full border border-white/10 bg-white/5 p-1">
-                {product.platforms.map((platform) => (
-                  <button
-                    key={platform.id}
-                    type="button"
-                    onClick={() => setActiveId(platform.id)}
-                    aria-pressed={active.id === platform.id}
-                    className="relative shrink-0 cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-                  >
-                    {active.id === platform.id && (
-                      <motion.span
-                        layoutId="download-active-platform"
-                        style={{ borderRadius: 9999 }}
-                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                        className="absolute inset-0 bg-white"
-                      />
-                    )}
-                    <span className={`relative z-10 transition-colors ${active.id === platform.id ? "text-neutral-900" : "text-neutral-400 hover:text-white"}`}>
-                      {platform.label}
-                    </span>
-                  </button>
-                ))}
+              <div role="tablist" aria-label="选择操作系统" className="flex max-w-full overflow-x-auto rounded-full border border-white/20 bg-white/10 p-1 shadow-inner">
+                {product.platforms.map((platform) => {
+                  const selected = active.id === platform.id;
+
+                  return (
+                    <button
+                      key={platform.id}
+                      id={`platform-tab-${activeProduct.toLowerCase()}-${platform.id}`}
+                      type="button"
+                      role="tab"
+                      aria-selected={selected}
+                      aria-controls="platform-download-panel"
+                      onClick={() => setActiveId(platform.id)}
+                      className={`relative min-h-8 shrink-0 cursor-pointer rounded-full border-0 px-3.5 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 ${
+                        selected ? "" : "bg-transparent text-neutral-300 hover:bg-white/10 hover:text-white"
+                      }`}
+                    >
+                      {selected && (
+                        <motion.span
+                          layoutId="download-active-platform"
+                          style={{ borderRadius: 9999 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="absolute inset-0 bg-white shadow-sm"
+                        />
+                      )}
+                      <span className={`relative z-10 ${selected ? "text-neutral-900" : ""}`}>{platform.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            <div className="px-5 py-6 sm:px-7 sm:py-7">
+            <div
+              id="platform-download-panel"
+              role="tabpanel"
+              aria-labelledby={`platform-tab-${activeProduct.toLowerCase()}-${active.id}`}
+              className="px-5 py-5 sm:px-6 sm:py-5"
+            >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <p className="min-w-0 break-words font-mono text-sm leading-relaxed text-neutral-100 sm:text-[15px]">
                   <span className="select-none text-neutral-500">$ </span>
@@ -475,8 +526,8 @@ export default function DownloadBlock() {
                 {renderAction()}
               </div>
 
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="min-h-[132px] sm:min-h-[120px]">
+              <div className="mt-4 border-t border-white/10 pt-4">
+                <div className="min-h-[104px] sm:min-h-[96px]">
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.ul
                       key={`${activeProduct}-${active.id}`}
@@ -484,7 +535,7 @@ export default function DownloadBlock() {
                       initial="hidden"
                       animate="visible"
                       exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                      className="space-y-2.5 font-mono text-[13px]"
+                      className="space-y-2 font-mono text-[13px]"
                     >
                       {active.output.map((line) => (
                         <motion.li key={line} variants={outputLine} className="flex items-center gap-2.5 text-neutral-400">
@@ -503,7 +554,7 @@ export default function DownloadBlock() {
           </div>
         </motion.div>
 
-        <motion.div variants={item} className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 font-mono text-xs" style={{ color: "var(--hp-ink-55)" }}>
+        <motion.div variants={item} className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 font-mono text-xs" style={{ color: "var(--hp-ink-55)" }}>
           <span>{activeProduct === "Yakit" ? `v${version || "latest"}` : activeProduct}</span>
           <span aria-hidden="true">·</span>
           <span>{product.platforms.map((platform) => platform.label).join(" / ")}</span>
@@ -513,38 +564,86 @@ export default function DownloadBlock() {
 
         {activeProduct === "Yakit" ? (
           <>
-            <motion.button
-              variants={item}
-              type="button"
-              onClick={() => setLegacyOpen((open) => !open)}
-              aria-expanded={legacyOpen}
-              className="mt-8 inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-sm font-medium transition-colors hover:opacity-60 focus-visible:outline-none focus-visible:ring-2"
-              style={{ color: "var(--hp-ink)" }}
-            >
-              旧系统兼容版本
-              <ChevronDown className={`h-4 w-4 transition-transform ${legacyOpen ? "rotate-180" : ""}`} aria-hidden="true" />
-            </motion.button>
+            <motion.div variants={item} className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
+              <button
+                type="button"
+                onClick={() => setLegacyOpen((open) => !open)}
+                aria-expanded={legacyOpen}
+                aria-controls="legacy-downloads"
+                className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border-0 bg-transparent p-1 font-medium transition-colors hover:text-[var(--hp-orange)] focus-visible:outline-none focus-visible:ring-2"
+                style={{ color: "var(--hp-ink)" }}
+              >
+                需要 Windows 7、旧版 macOS 或国产 Linux？下载旧系统兼容版本
+                <ChevronDown className={`h-4 w-4 shrink-0 transition-transform ${legacyOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+              </button>
+              <span aria-hidden="true" style={{ color: "var(--hp-line)" }}>
+                ·
+              </span>
+              <a
+                href={product.installUrl}
+                className="inline-flex items-center gap-1 font-medium transition-colors hover:text-[var(--hp-orange)] focus-visible:outline-none focus-visible:ring-2"
+                style={{ color: "var(--hp-ink)" }}
+              >
+                安装说明
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </motion.div>
             <AnimatePresence initial={false}>
               {legacyOpen && (
                 <motion.div
+                  id="legacy-downloads"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="w-full max-w-3xl overflow-hidden"
                 >
-                  <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-3 border-t pt-5" style={{ borderColor: "var(--hp-line)" }}>
-                    {LEGACY_FILES.map((asset) =>
-                      version ? (
-                        <a key={asset.file} href={getYakitUrl(version, asset.file)} className="inline-flex items-center gap-1.5 text-xs font-medium hover:opacity-60" style={{ color: "var(--hp-ink)" }}>
-                          <Download className="h-3.5 w-3.5" aria-hidden="true" />
-                          {asset.label}
-                        </a>
-                      ) : (
-                        <span key={asset.file} className="text-xs" style={{ color: "var(--hp-ink-55)" }}>
-                          {asset.label}
-                        </span>
-                      ),
-                    )}
+                  <div className="mt-5 overflow-hidden rounded-xl border" style={{ borderColor: "var(--hp-line)", background: "rgba(255, 255, 255, 0.38)" }}>
+                    <div className="border-b px-4 py-3 sm:px-5" style={{ borderColor: "var(--hp-line)" }}>
+                      <p className="text-sm font-semibold" style={{ color: "var(--hp-ink)" }}>
+                        旧系统兼容安装包
+                      </p>
+                      <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--hp-ink-55)" }}>
+                        仅在最新版无法运行时使用。Linux 用户下载前请确认设备是 x86_64 还是 ARM64 架构。
+                      </p>
+                    </div>
+                    <div className="grid sm:grid-cols-2">
+                      {LEGACY_FILES.map((asset, index) => {
+                        const content = (
+                          <>
+                            <span className="min-w-0">
+                              <span className="block text-sm font-semibold" style={{ color: "var(--hp-ink)" }}>
+                                {asset.label}
+                              </span>
+                              <span className="mt-1 block text-xs leading-relaxed" style={{ color: "var(--hp-ink-55)" }}>
+                                {asset.description}
+                                {version ? ` · v${version}` : ""}
+                              </span>
+                            </span>
+                            <span
+                              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-transform group-hover:scale-105"
+                              style={{ background: "var(--hp-orange)" }}
+                            >
+                              <Download className="h-4 w-4" aria-hidden="true" />
+                            </span>
+                          </>
+                        );
+                        const rowClass = `group flex min-h-[76px] items-center justify-between gap-4 border-b px-4 py-3 text-left transition-colors hover:bg-black/[0.035] sm:px-5 ${
+                          index % 2 === 0 ? "sm:border-r" : ""
+                        }`;
+                        const rowStyle = { borderColor: "var(--hp-line)" };
+
+                        return version ? (
+                          <a key={asset.file} href={getYakitUrl(version, asset.file)} className={rowClass} style={rowStyle}>
+                            {content}
+                          </a>
+                        ) : (
+                          <div key={asset.file} className={rowClass} style={rowStyle} aria-disabled="true">
+                            {content}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -556,7 +655,7 @@ export default function DownloadBlock() {
             href={product.installUrl}
             target={product.installUrl.startsWith("http") ? "_blank" : undefined}
             rel={product.installUrl.startsWith("http") ? "noreferrer" : undefined}
-            className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-60 focus-visible:outline-none focus-visible:ring-2"
+            className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-[var(--hp-orange)] focus-visible:outline-none focus-visible:ring-2"
             style={{ color: "var(--hp-ink)" }}
           >
             查看完整说明
@@ -564,7 +663,7 @@ export default function DownloadBlock() {
           </motion.a>
         )}
 
-        <div className="mt-16 grid w-full max-w-4xl grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
+        <div className="mt-12 grid w-full max-w-4xl grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
           {product.guarantees.map((guarantee) => (
             <GuaranteeItem key={`${activeProduct}-${guarantee.title}`} guarantee={guarantee} />
           ))}

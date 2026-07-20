@@ -225,7 +225,7 @@ export function Hero24() {
             className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap"
           >
             <a
-              href="/download"
+              href="#downloads"
               className="hp-btn-orange inline-flex w-full cursor-pointer items-center justify-center sm:w-auto sm:px-8 sm:py-3.5 sm:text-base"
               style={{ textDecoration: "none" }}
             >
