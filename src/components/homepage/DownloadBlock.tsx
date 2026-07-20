@@ -1,8 +1,6 @@
-// @ts-nocheck
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   ArrowUpRight,
   Check,
@@ -10,11 +8,10 @@ import {
   Copy,
   Download,
   ExternalLink,
-  Monitor,
-  MonitorSmartphone,
   PackageCheck,
   ShieldCheck,
   Terminal,
+  type LucideIcon,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 
@@ -47,283 +44,240 @@ const outputLine: Variants = {
 };
 
 type ProductKey = "Yakit" | "Yaklang" | "IRify" | "Memfit";
+type PlatformId = "macos" | "windows" | "linux" | "web" | "releases";
 
-interface PlatformSpec {
-  id: string;
+type DownloadAsset = {
   label: string;
-  command?: string;
-  output?: string[];
-  file?: string;
-  subFile?: string;
-  href?: string;
-  external?: boolean;
-}
+  file: string;
+};
 
-interface ProductSpec {
-  tag: string;
+type PlatformSpec = {
+  id: PlatformId;
+  label: string;
+  prompt: string;
+  output: string[];
+  result: string;
+  command?: string;
+  href?: string;
+  assets?: DownloadAsset[];
+};
+
+type Guarantee = {
+  icon: LucideIcon;
   title: string;
-  desc: string;
+  text: string;
+};
+
+type ProductSpec = {
+  title: string;
+  description: string;
   installUrl: string;
   platforms: PlatformSpec[];
-  guarantees?: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; "aria-hidden"?: boolean }>; title: string; text: string }[];
-}
+  guarantees: Guarantee[];
+};
 
 const PRODUCTS: Record<ProductKey, ProductSpec> = {
   Yakit: {
-    tag: "下载",
-    title: "YAK IDE (Yakit)",
-    desc: "由 Yaklang 驱动的交互式网络安全测试平台。安装 Yakit 即获得 Yak 语言运行环境与全部图形化能力。",
+    title: "安装 Yakit，开始使用 Yak Project。",
+    description: "选择你的系统，直接获取包含 Yaklang 引擎的最新版桌面客户端。",
     installUrl: "/products/legacy/download_and_install",
     platforms: [
       {
         id: "macos",
         label: "macOS",
-        file: "darwin-x64.dmg",
-        subFile: "darwin-arm64.dmg",
-        output: [
-          "下载 Yakit 最新版 · macOS",
-          "同时支持 Intel 与 Apple Silicon 芯片",
-          "安装后自动集成 Yak 语言运行环境",
+        prompt: "download yakit --platform macos",
+        assets: [
+          { label: "Apple Silicon", file: "darwin-arm64.dmg" },
+          { label: "Intel", file: "darwin-x64.dmg" },
         ],
+        output: ["准备 Yakit 最新稳定版 · macOS", "提供 Apple Silicon 与 Intel 安装包", "Yakit 已内置 Yaklang 运行环境"],
+        result: "下载后打开 DMG，将 Yakit 拖入 Applications",
       },
       {
         id: "windows",
         label: "Windows",
-        file: "windows-amd64.exe",
-        output: [
-          "下载 Yakit 最新版 · Windows x86_64",
-          "支持 Windows 10 / 11",
-          "安装后自动集成 Yak 语言运行环境",
-        ],
+        prompt: "download yakit --platform windows",
+        assets: [{ label: "x86_64", file: "windows-amd64.exe" }],
+        output: ["准备 Yakit 最新稳定版 · Windows x86_64", "支持 Windows 10 / 11", "Yakit 已内置 Yaklang 运行环境"],
+        result: "运行安装程序并按向导完成安装",
       },
       {
         id: "linux",
         label: "Linux",
-        file: "linux-amd64.AppImage",
-        subFile: "linux-arm64.AppImage",
-        output: [
-          "下载 Yakit 最新版 · Linux",
-          "支持 x86_64 与 ARM64 架构",
-          "兼容统信 UOS、麒麟等国产系统",
+        prompt: "download yakit --platform linux",
+        assets: [
+          { label: "x86_64", file: "linux-amd64.AppImage" },
+          { label: "ARM64", file: "linux-arm64.AppImage" },
         ],
+        output: ["准备 Yakit 最新稳定版 · Linux", "提供 x86_64 与 ARM64 AppImage", "兼容统信 UOS、麒麟等国产系统"],
+        result: "赋予 AppImage 执行权限后即可启动",
       },
     ],
     guarantees: [
-      {
-        icon: ShieldCheck,
-        title: "持续更新",
-        text: "Yakit 每月发布新版本，自动检测并提醒升级，保证安全能力与时俱进。",
-      },
-      {
-        icon: Terminal,
-        title: "内置 Yak 引擎",
-        text: "安装 Yakit 即自动配置 Yak 语言运行环境，无需单独安装语言二进制。",
-      },
-      {
-        icon: PackageCheck,
-        title: "跨平台一致",
-        text: "macOS / Windows / Linux 三端统一界面与能力，团队协同无壁垒。",
-      },
+      { icon: ShieldCheck, title: "持续更新", text: "稳定发布安全能力与引擎更新，客户端会自动检测可用的新版本。" },
+      { icon: Terminal, title: "内置 Yak 引擎", text: "安装 Yakit 即可获得完整 Yaklang 运行环境，无需额外配置。" },
+      { icon: PackageCheck, title: "跨平台一致", text: "macOS、Windows 与 Linux 使用统一界面和能力体系。" },
     ],
   },
   Yaklang: {
-    tag: "命令行",
-    title: "Yaklang 语言环境",
-    desc: "面向网络安全的 CDSL 领域编程语言。一行命令完成安装，支持 macOS / Linux / Windows。",
+    title: "一行命令，安装 Yaklang。",
+    description: "面向网络安全的 CDSL 编程语言，可独立用于终端、自动化与 CI 环境。",
     installUrl: "/docs/startup",
     platforms: [
       {
         id: "macos",
-        label: "macOS / Linux",
+        label: "macOS",
+        prompt: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
         command: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
-        output: [
-          "自动检测操作系统与架构",
-          "下载并安装最新 Yak 二进制",
-          "完成环境变量配置",
-        ],
+        output: ["自动检测 macOS 与处理器架构", "下载最新 Yak 二进制", "完成命令行环境配置"],
+        result: "运行 yak version 验证安装",
+      },
+      {
+        id: "linux",
+        label: "Linux",
+        prompt: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
+        command: "bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)",
+        output: ["自动检测 Linux 发行版与架构", "下载最新 Yak 二进制", "安装到系统命令路径"],
+        result: "运行 yak version 验证安装",
       },
       {
         id: "windows",
         label: "Windows",
+        prompt: "yak.exe install",
         command: "powershell (new-object System.Net.WebClient).DownloadFile('https://oss-qn.yaklang.com/yak/latest/yak_windows_amd64.exe','yak.exe'); yak.exe install",
-        output: [
-          "下载 Windows 版 Yak 安装器",
-          "自动完成安装与环境配置",
-          "命令行输入 yak 即可使用",
-        ],
+        output: ["下载 Windows 版 Yak 安装器", "完成二进制安装与环境配置", "注册 yak 命令"],
+        result: "重新打开终端并运行 yak version",
       },
       {
-        id: "linux",
-        label: "GitHub Releases",
+        id: "releases",
+        label: "Releases",
+        prompt: "open github.com/yaklang/yaklang/releases",
         href: "https://github.com/yaklang/yaklang/releases",
-        external: true,
-        output: [
-          "所有预编译二进制资产",
-          "包含各平台历史版本",
-          "适合 CI / 容器 / 离线部署",
-        ],
+        output: ["浏览全部预编译二进制", "获取历史版本与发布说明", "适合 CI、容器与离线部署"],
+        result: "选择对应系统与架构的发布资产",
       },
     ],
     guarantees: [
-      {
-        icon: Terminal,
-        title: "一行安装",
-        text: "macOS 与 Linux 只需一条 curl 命令即可将 Yak 安装到 PATH。",
-      },
-      {
-        icon: ShieldCheck,
-        title: "完全开源",
-        text: "Yaklang 核心遵循 AGPL-3.0 开源，源码托管于 GitHub，接受社区共建。",
-      },
-      {
-        icon: PackageCheck,
-        title: "跨平台",
-        text: "支持 macOS、Linux、Windows 及统信 UOS、麒麟等国产化系统。",
-      },
+      { icon: Terminal, title: "一行安装", text: "安装脚本自动识别平台与架构，并完成命令行环境配置。" },
+      { icon: ShieldCheck, title: "完全开源", text: "Yaklang 核心遵循 AGPL-3.0，源码与发行资产公开可查。" },
+      { icon: PackageCheck, title: "可独立部署", text: "适用于本地终端、自动化任务、容器与持续集成环境。" },
     ],
   },
   IRify: {
-    tag: "在线服务",
-    title: "IRify 代码审计平台",
-    desc: "兼具 SAST 与 AI 双引擎的代码安全分析系统。支持多语言源码建模、数据流分析与漏洞挖掘。",
+    title: "进入 IRify，审计真实代码。",
+    description: "基于 SSA IR 的多语言代码安全分析平台，结合 SAST 与 AI 双引擎。",
     installUrl: "https://ssa.to",
     platforms: [
       {
-        id: "linux",
-        label: "在线使用",
+        id: "web",
+        label: "Web",
+        prompt: "open https://ssa.to",
         href: "https://ssa.to",
-        external: true,
-        output: [
-          "基于 SSA IR 的多语言代码分析",
-          "SyntaxFlow 一行表达漏洞规则",
-          "SAST + AI 双引擎协同审计",
-        ],
+        output: ["打开 IRify 在线代码审计平台", "使用 SyntaxFlow 描述漏洞模式", "通过 SAST + AI 双引擎分析代码"],
+        result: "创建项目并导入待审计代码",
       },
     ],
     guarantees: [
-      {
-        icon: ShieldCheck,
-        title: "多语言支持",
-        text: "深度支持 Java / SpringBoot、Golang、PHP、JavaScript 等主流语言与框架。",
-      },
-      {
-        icon: Terminal,
-        title: "SyntaxFlow",
-        text: "自研的语法模式匹配 DSL，用贴近漏洞描述的语法直接编写检测规则。",
-      },
-      {
-        icon: PackageCheck,
-        title: "AI 双引擎",
-        text: "传统 SAST 与大模型协同，降低误报、提升真实漏洞检出率。",
-      },
+      { icon: ShieldCheck, title: "多语言支持", text: "覆盖 Java、Golang、PHP、JavaScript 等主流语言与框架。" },
+      { icon: Terminal, title: "SyntaxFlow", text: "用贴近漏洞描述的 DSL 编写可复用、可解释的检测规则。" },
+      { icon: PackageCheck, title: "AI 双引擎", text: "传统静态分析与大模型协同，提升真实漏洞检出效率。" },
     ],
   },
   Memfit: {
-    tag: "Agent",
-    title: "Memfit AI",
-    desc: "新一代安全领域工作 Agent。ReAct 与 Plan-Execute 递归耦合，由 Yaklang 驱动。",
+    title: "让 Memfit 执行安全任务。",
+    description: "由 Yaklang 驱动的安全工作 Agent，将规划、执行与验证组织为完整工作流。",
     installUrl: "https://memfit.ai",
     platforms: [
       {
-        id: "linux",
-        label: "访问 memfit.ai",
+        id: "web",
+        label: "Web",
+        prompt: "open https://memfit.ai",
         href: "https://memfit.ai",
-        external: true,
-        output: [
-          "递归式 Plan-Execute + ReAct 双引擎",
-          "调用 Yaklang 全栈安全能力",
-          "面向复杂攻防任务的智能体系统",
-        ],
+        output: ["进入 Memfit AI 工作空间", "组合 Plan-Execute 与 ReAct 双引擎", "调用 Yaklang 全栈安全能力"],
+        result: "创建任务并交给 Agent 执行",
       },
     ],
     guarantees: [
-      {
-        icon: Terminal,
-        title: "双引擎架构",
-        text: "宏观战略规划与微观战术执行递归耦合，可适应任意复杂度的安全任务。",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Yaklang 驱动",
-        text: "底层直接调用 Yaklang 的安全工具链，行动可解释、可复现、可评测。",
-      },
-      {
-        icon: PackageCheck,
-        title: "能力可评测",
-        text: "配合 HackBenchmark 基准，对真实 Web 漏洞做可复现的攻防能力评测。",
-      },
+      { icon: Terminal, title: "双引擎架构", text: "宏观规划与微观执行递归协同，适应复杂安全任务。" },
+      { icon: ShieldCheck, title: "Yaklang 驱动", text: "直接调用 Yaklang 安全工具链，行动可解释且可复现。" },
+      { icon: PackageCheck, title: "能力可评测", text: "结合真实安全基准，对任务结果进行持续验证与评估。" },
     ],
   },
 };
 
-const LEGACY_FILES = [
-  { id: "windows-legacy", label: "Windows (Win7)", file: "windows-legacy-amd64.exe" },
-  { id: "linux-legacy-amd64", label: "Linux amd64 兼容版", file: "linux-legacy-amd64.AppImage" },
-  { id: "linux-legacy-arm64", label: "Linux arm64 兼容版", file: "linux-legacy-arm64.AppImage" },
-  { id: "macos-legacy-x64", label: "macOS Intel 兼容版", file: "darwin-legacy-x64.dmg" },
-  { id: "macos-legacy-arm64", label: "macOS Apple Silicon 兼容版", file: "darwin-legacy-arm64.dmg" },
+const LEGACY_FILES: DownloadAsset[] = [
+  { label: "Windows 7", file: "windows-legacy-amd64.exe" },
+  { label: "Linux x86_64", file: "linux-legacy-amd64.AppImage" },
+  { label: "Linux ARM64", file: "linux-legacy-arm64.AppImage" },
+  { label: "macOS Intel", file: "darwin-legacy-x64.dmg" },
+  { label: "macOS Apple Silicon", file: "darwin-legacy-arm64.dmg" },
 ];
+
+const productKeys = Object.keys(PRODUCTS) as ProductKey[];
 
 function getYakitUrl(version: string, file: string) {
   return `https://oss-qn.yaklang.com/yak/${version}/Yakit-${version}-${file}`;
 }
 
-function getOS(): "macos" | "windows" | "linux" {
-  if (typeof navigator === "undefined") return "macos";
-  const ua = navigator.userAgent.toLowerCase();
-  if (ua.includes("win")) return "windows";
-  if (ua.includes("mac") || ua.includes("darwin")) return "macos";
+function detectPlatform(): PlatformId {
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (userAgent.includes("win")) return "windows";
+  if (userAgent.includes("mac") || userAgent.includes("darwin")) return "macos";
   return "linux";
 }
 
-export default function DownloadBlock() {
-  const defaultOS = getOS();
-  const firstProduct = PRODUCTS.Yakit;
-  const defaultActive = firstProduct.platforms.find((p) => p.id === defaultOS) ?? firstProduct.platforms[0];
+function GuaranteeItem({ guarantee }: { guarantee: Guarantee }) {
+  const Icon = guarantee.icon;
 
+  return (
+    <motion.div variants={item}>
+      <Icon className="h-5 w-5" style={{ color: "var(--hp-orange)" }} aria-hidden="true" />
+      <h3 className="mt-4 text-sm font-semibold" style={{ color: "var(--hp-ink)" }}>
+        {guarantee.title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--hp-ink-55)" }}>
+        {guarantee.text}
+      </p>
+    </motion.div>
+  );
+}
+
+export default function DownloadBlock() {
   const [activeProduct, setActiveProduct] = useState<ProductKey>("Yakit");
-  const [activeId, setActiveId] = useState<string>(defaultActive.id);
+  const [activeId, setActiveId] = useState<PlatformId>("macos");
   const [version, setVersion] = useState("");
-  const [sizes, setSizes] = useState<Record<string, number | null>>({});
   const [legacyOpen, setLegacyOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<number | null>(null);
   const reduceMotion = useReducedMotion();
 
+  const product = PRODUCTS[activeProduct];
+  const active = product.platforms.find((platform) => platform.id === activeId) ?? product.platforms[0];
+
   useEffect(() => {
-    let cancelled = false;
-    axios
-      .get("https://oss-qn.yaklang.com/yak/latest/yakit-version.txt")
-      .then((res) => {
-        if (cancelled) return;
-        const v = typeof res.data === "string" ? res.data.split("\n")[0].trim() : "";
-        setVersion(v);
-        Promise.all(
-          PRODUCTS.Yakit.platforms.map(async (p) => {
-            if (!p.file) return [p.id, null] as [string, null];
-            try {
-              const resp = await axios.head(getYakitUrl(v, p.file));
-              const len = resp.headers["content-length"];
-              if (len) {
-                const size = Math.ceil((Number(len) / 1024 / 1024) * 100) / 100;
-                return [p.id, size] as [string, number];
-              }
-            } catch {
-              // ignore
-            }
-            return [p.id, null] as [string, null];
-          })
-        ).then((entries) => {
-          if (!cancelled) setSizes(Object.fromEntries(entries));
-        });
-      })
-      .catch(() => {
-        // ignore
-      });
-    return () => {
-      cancelled = true;
-    };
+    setActiveId(detectPlatform());
   }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("https://oss-qn.yaklang.com/yak/latest/yakit-version.txt", { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Unable to load Yakit version");
+        return response.text();
+      })
+      .then((text) => setVersion(text.split("\n")[0].trim()))
+      .catch(() => undefined);
+
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!product.platforms.some((platform) => platform.id === activeId)) {
+      const detected = detectPlatform();
+      setActiveId(product.platforms.find((platform) => platform.id === detected)?.id ?? product.platforms[0].id);
+    }
+  }, [activeId, product]);
 
   useEffect(() => {
     return () => {
@@ -331,17 +285,9 @@ export default function DownloadBlock() {
     };
   }, []);
 
-  const product = PRODUCTS[activeProduct];
-  const active = product.platforms.find((p) => p.id === activeId) ?? product.platforms[0];
-
-  // 切换产品时，尝试保留当前 OS；若不存在则选第一个
-  useEffect(() => {
-    const matching = product.platforms.find((p) => p.id === activeId);
-    if (!matching) setActiveId(product.platforms[0].id);
-  }, [activeProduct]);
-
   const copyCommand = async () => {
     if (!active.command) return;
+
     try {
       await navigator.clipboard.writeText(active.command);
       setCopied(true);
@@ -352,14 +298,88 @@ export default function DownloadBlock() {
     }
   };
 
-  const handleFileDownload = (file: string) => {
-    if (!version) return;
-    window.location.href = getYakitUrl(version, file);
+  const selectProduct = (key: ProductKey) => {
+    const nextProduct = PRODUCTS[key];
+    const detected = detectPlatform();
+    setActiveProduct(key);
+    setActiveId(nextProduct.platforms.find((platform) => platform.id === detected)?.id ?? nextProduct.platforms[0].id);
+    setLegacyOpen(false);
+    setCopied(false);
   };
 
-  const isYakit = activeProduct === "Yakit";
-  const isCommand = !!active.command;
-  const isLink = !!active.href;
+  const renderAction = () => {
+    if (active.command) {
+      return (
+        <button
+          type="button"
+          onClick={copyCommand}
+          className="inline-flex h-9 min-w-[104px] shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/15 px-4 text-xs font-medium text-neutral-300 transition-colors hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {copied ? (
+              <motion.span key="copied" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} className="inline-flex items-center gap-2">
+                <Check className="h-3.5 w-3.5" aria-hidden="true" />
+                已复制
+              </motion.span>
+            ) : (
+              <motion.span key="copy" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} className="inline-flex items-center gap-2">
+                <Copy className="h-3.5 w-3.5" aria-hidden="true" />
+                复制命令
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </button>
+      );
+    }
+
+    if (active.assets) {
+      return (
+        <div className="flex flex-wrap justify-end gap-2">
+          {active.assets.map((asset) =>
+            version ? (
+              <a
+                key={asset.file}
+                href={getYakitUrl(version, asset.file)}
+                className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-xs font-medium text-neutral-950 transition-opacity hover:opacity-90"
+                style={{ background: "var(--hp-orange)" }}
+              >
+                <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                {asset.label}
+              </a>
+            ) : (
+              <span key={asset.file} className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-xs text-neutral-500">
+                正在获取版本
+              </span>
+            ),
+          )}
+        </div>
+      );
+    }
+
+    if (active.href) {
+      return (
+        <a
+          href={active.href}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-xs font-medium text-neutral-950 transition-opacity hover:opacity-90"
+          style={{ background: "var(--hp-orange)" }}
+        >
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+          打开
+        </a>
+      );
+    }
+
+    return null;
+  };
+
+  const prompt = active.command ?? active.prompt;
+  const terminalStyle: CSSProperties = {
+    background: "var(--hp-card-dark)",
+    borderColor: "rgba(255, 255, 255, 0.1)",
+    boxShadow: "0 24px 64px rgba(33, 26, 18, 0.18)",
+  };
 
   return (
     <section className="w-full px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -368,234 +388,113 @@ export default function DownloadBlock() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
-        className="mx-auto flex w-full max-w-[1200px] flex-col items-center"
+        className="mx-auto flex w-full max-w-[1400px] flex-col items-center"
       >
-        {/* Section header */}
-        <motion.span variants={item} className="hp-mono text-xs" style={{ color: "var(--hp-orange)" }}>
-          DOWNLOAD
-        </motion.span>
         <motion.h2
+          key={`${activeProduct}-title`}
           variants={item}
-          className="hp-display mt-4 max-w-2xl text-center text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl"
+          className="hp-display max-w-3xl text-center text-3xl font-semibold tracking-normal sm:text-4xl md:text-5xl lg:text-6xl"
           style={{ color: "var(--hp-ink)" }}
         >
-          获取 Yak Project 核心产品
+          {product.title}
         </motion.h2>
-        <motion.p
-          variants={item}
-          className="mt-4 max-w-xl text-center text-sm leading-relaxed sm:text-base"
-          style={{ color: "var(--hp-ink-55)" }}
-        >
-          选择对应产品与平台，即可下载安装包或复制一键安装命令。
+
+        <motion.p variants={item} className="mt-6 max-w-xl text-center text-base leading-relaxed sm:text-lg" style={{ color: "var(--hp-ink-55)" }}>
+          {product.description}
         </motion.p>
 
-        {/* Product tabs */}
-        <motion.div variants={item} className="mt-10 flex flex-wrap justify-center gap-2">
-          {(Object.keys(PRODUCTS) as ProductKey[]).map((k) => (
+        <motion.div variants={item} className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-b" style={{ borderColor: "var(--hp-line)" }}>
+          {productKeys.map((key) => (
             <button
-              key={k}
-              onClick={() => {
-                setActiveProduct(k);
-                setLegacyOpen(false);
-              }}
-              className="relative cursor-pointer rounded-full px-5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2"
-              style={{
-                color: activeProduct === k ? "#fff" : "var(--hp-ink, #211a12)",
-                border: activeProduct === k ? "none" : "1px solid var(--hp-line, rgba(33,26,18,0.12))",
-                background: activeProduct === k ? "var(--hp-orange, #ff7d23)" : "transparent",
-              }}
+              key={key}
+              type="button"
+              onClick={() => selectProduct(key)}
+              aria-pressed={activeProduct === key}
+              className="hp-mono relative cursor-pointer border-0 bg-transparent px-0 pb-3 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2"
+              style={{ color: activeProduct === key ? "var(--hp-orange)" : "var(--hp-ink-55)" }}
             >
-              {k}
+              {key}
+              {activeProduct === key && <motion.span layoutId="product-active-tab" className="absolute inset-x-0 -bottom-px h-0.5" style={{ background: "var(--hp-orange)" }} />}
             </button>
           ))}
         </motion.div>
 
-        {/* Terminal card */}
-        <motion.div variants={item} className="mt-8 w-full max-w-3xl">
-          <div
-            className="overflow-hidden rounded-2xl shadow-xl"
-            style={{
-              background: isYakit ? "#1a1512" : "var(--hp-card-dark, #1a1512)",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 25px 60px rgba(0,0,0,0.18)",
-            }}
-          >
-            {/* Card header */}
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5">
-              <div className="flex items-center gap-3">
-                <span className="flex gap-1.5" aria-hidden="true">
+        <motion.div variants={item} className="mt-10 w-full max-w-3xl">
+          <div className="overflow-hidden rounded-2xl border shadow-xl" style={terminalStyle}>
+            <div className="flex flex-col gap-3 border-b border-white/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex shrink-0 gap-1.5" aria-hidden="true">
                   <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                  <span className="hidden h-2.5 w-2.5 rounded-full bg-white/20 sm:inline" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                   <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                 </span>
-                <span className="font-mono text-xs text-white/40">
-                  {product.title.toLowerCase()} · install
-                </span>
+                <span className="truncate font-mono text-xs text-neutral-500">{activeProduct.toLowerCase()} · install</span>
               </div>
-              <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
-                {product.platforms.map((p) => (
+              <div className="flex max-w-full overflow-x-auto rounded-full border border-white/10 bg-white/5 p-1">
+                {product.platforms.map((platform) => (
                   <button
-                    key={p.id}
+                    key={platform.id}
                     type="button"
-                    onClick={() => setActiveId(p.id)}
-                    aria-pressed={activeId === p.id}
-                    className="relative cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                    onClick={() => setActiveId(platform.id)}
+                    aria-pressed={active.id === platform.id}
+                    className="relative shrink-0 cursor-pointer rounded-full px-3 py-1.5 text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                   >
-                    {activeId === p.id && (
+                    {active.id === platform.id && (
                       <motion.span
-                        layoutId="download-active-tab"
+                        layoutId="download-active-platform"
                         style={{ borderRadius: 9999 }}
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="absolute inset-0 bg-white"
                       />
                     )}
-                    <span
-                      className={`relative z-10 transition-colors ${
-                        activeId === p.id ? "text-neutral-900" : "text-neutral-400 hover:text-white"
-                      }`}
-                    >
-                      {p.label}
+                    <span className={`relative z-10 transition-colors ${active.id === platform.id ? "text-neutral-900" : "text-neutral-400 hover:text-white"}`}>
+                      {platform.label}
                     </span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Card body */}
             <div className="px-5 py-6 sm:px-7 sm:py-7">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                <div className="min-w-0 flex-1">
-                  {isCommand ? (
-                    <p className="break-words font-mono text-sm leading-relaxed text-neutral-100 sm:text-[15px]">
-                      <span className="select-none text-neutral-500">$ </span>
-                      {active.command}
-                      {reduceMotion ? (
-                        <span
-                          aria-hidden="true"
-                          className="ml-1.5 inline-block h-[1.05em] w-[7px] align-middle bg-neutral-100"
-                        />
-                      ) : (
-                        <motion.span
-                          aria-hidden="true"
-                          className="ml-1.5 inline-block h-[1.05em] w-[7px] align-middle bg-neutral-100"
-                          animate={{ opacity: [1, 1, 0, 0] }}
-                          transition={{ duration: 1.1, repeat: Infinity, times: [0, 0.5, 0.5, 1], ease: "linear" }}
-                        />
-                      )}
-                    </p>
-                  ) : (
-                    <div className="font-mono text-sm leading-relaxed text-neutral-100 sm:text-[15px]">
-                      {isYakit ? (
-                        <>
-                          <span className="select-none text-neutral-500">$ </span>
-                          <span>下载 {active.label} 安装包</span>
-                          <div className="mt-1 text-neutral-400">
-                            {active.subFile ? (
-                              <>
-                                Intel: {active.file} / Apple Silicon: {active.subFile}
-                              </>
-                            ) : (
-                              <>文件: {active.file}</>
-                            )}
-                            {version && (
-                              <span className="ml-2 text-neutral-500">
-                                · 版本 {version}
-                                {sizes[active.id] ? ` · ${sizes[active.id]} MB` : ""}
-                              </span>
-                            )}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <span className="select-none text-neutral-500">$ </span>
-                          <span>前往 {active.label}</span>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex shrink-0 gap-2">
-                  {isCommand && (
-                    <button
-                      type="button"
-                      onClick={copyCommand}
-                      className="inline-flex h-9 min-w-[100px] shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/15 px-4 text-xs font-medium text-neutral-300 transition-colors hover:border-white/30 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
-                    >
-                      <AnimatePresence mode="wait" initial={false}>
-                        {copied ? (
-                          <motion.span
-                            key="copied"
-                            initial={{ opacity: 0, y: 4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -4 }}
-                            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                            className="inline-flex items-center gap-2"
-                          >
-                            <Check className="h-3.5 w-3.5" />
-                            已复制
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="copy"
-                            initial={{ opacity: 0, y: 4 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -4 }}
-                            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                            className="inline-flex items-center gap-2"
-                          >
-                            <Copy className="h-3.5 w-3.5" />
-                            复制
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </button>
-                  )}
-
-                  {isYakit ? (
-                    <button
-                      type="button"
-                      onClick={() => handleFileDownload(active.file!)}
-                      disabled={!version}
-                      className="inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 text-xs font-medium text-neutral-900 transition-colors hover:opacity-90 disabled:opacity-50"
-                      style={{ background: "var(--hp-orange, #ff7d23)" }}
-                    >
-                      <Download className="h-3.5 w-3.5" />
-                      下载
-                    </button>
-                  ) : isLink ? (
-                    <a
-                      href={active.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-xs font-medium text-neutral-900 transition-colors hover:opacity-90"
-                      style={{ background: "var(--hp-orange, #ff7d23)" }}
-                    >
-                      <ExternalLink className="h-3.5 w-3.5" />
-                      前往
-                    </a>
-                  ) : null}
-                </div>
+                <p className="min-w-0 break-words font-mono text-sm leading-relaxed text-neutral-100 sm:text-[15px]">
+                  <span className="select-none text-neutral-500">$ </span>
+                  {prompt}
+                  {active.command &&
+                    (reduceMotion ? (
+                      <span aria-hidden="true" className="ml-1.5 inline-block h-[1.05em] w-[7px] align-middle bg-neutral-100" />
+                    ) : (
+                      <motion.span
+                        aria-hidden="true"
+                        className="ml-1.5 inline-block h-[1.05em] w-[7px] align-middle bg-neutral-100"
+                        animate={{ opacity: [1, 1, 0, 0] }}
+                        transition={{ duration: 1.1, repeat: Infinity, times: [0, 0.5, 0.5, 1], ease: "linear" }}
+                      />
+                    ))}
+                </p>
+                {renderAction()}
               </div>
 
-              {/* Output list */}
               <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="min-h-[100px]">
+                <div className="min-h-[132px] sm:min-h-[120px]">
                   <AnimatePresence mode="wait" initial={false}>
                     <motion.ul
-                      key={active.id}
+                      key={`${activeProduct}-${active.id}`}
                       variants={outputList}
                       initial="hidden"
                       animate="visible"
                       exit={{ opacity: 0, transition: { duration: 0.15 } }}
                       className="space-y-2.5 font-mono text-[13px]"
                     >
-                      {(active.output || []).map((line) => (
+                      {active.output.map((line) => (
                         <motion.li key={line} variants={outputLine} className="flex items-center gap-2.5 text-neutral-400">
-                          <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                          <Check className="h-3.5 w-3.5 shrink-0 text-emerald-400" aria-hidden="true" />
                           <span className="min-w-0 break-words">{line}</span>
                         </motion.li>
                       ))}
+                      <motion.li variants={outputLine} className="pt-1.5 text-neutral-100">
+                        → {active.result}
+                      </motion.li>
                     </motion.ul>
                   </AnimatePresence>
                 </div>
@@ -604,97 +503,71 @@ export default function DownloadBlock() {
           </div>
         </motion.div>
 
-        {/* Meta line */}
-        <motion.div
-          variants={item}
-          className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 font-mono text-xs"
-          style={{ color: "var(--hp-ink-55)" }}
-        >
-          {isYakit ? (
-            <>
-              <span>最新版本: {version || "-"}</span>
-              <span aria-hidden="true">·</span>
-              <span>macOS / Windows / Linux</span>
-            </>
-          ) : (
-            <>
-              <span>{product.title}</span>
-              <span aria-hidden="true">·</span>
-              <a href={product.installUrl} target={product.installUrl.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="inline-flex items-center gap-1 hover:underline">
-                安装说明 <ArrowUpRight className="h-3 w-3" />
-              </a>
-            </>
-          )}
+        <motion.div variants={item} className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 font-mono text-xs" style={{ color: "var(--hp-ink-55)" }}>
+          <span>{activeProduct === "Yakit" ? `v${version || "latest"}` : activeProduct}</span>
+          <span aria-hidden="true">·</span>
+          <span>{product.platforms.map((platform) => platform.label).join(" / ")}</span>
+          <span aria-hidden="true">·</span>
+          <span>Yak Project</span>
         </motion.div>
 
-        {/* Legacy versions (Yakit only) */}
-        {isYakit && (
-          <motion.div variants={item} className="mt-6 w-full max-w-3xl">
-            <button
+        {activeProduct === "Yakit" ? (
+          <>
+            <motion.button
+              variants={item}
               type="button"
-              onClick={() => setLegacyOpen(!legacyOpen)}
-              className="flex w-full items-center justify-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-colors hover:bg-black/5"
-              style={{ borderColor: "var(--hp-line, rgba(33,26,18,0.12))", color: "var(--hp-ink-55)" }}
+              onClick={() => setLegacyOpen((open) => !open)}
+              aria-expanded={legacyOpen}
+              className="mt-8 inline-flex cursor-pointer items-center gap-1.5 border-0 bg-transparent text-sm font-medium transition-colors hover:opacity-60 focus-visible:outline-none focus-visible:ring-2"
+              style={{ color: "var(--hp-ink)" }}
             >
-              {legacyOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-              下载兼容版本（旧系统）
-            </button>
+              旧系统兼容版本
+              <ChevronDown className={`h-4 w-4 transition-transform ${legacyOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+            </motion.button>
             <AnimatePresence initial={false}>
               {legacyOpen && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
+                  className="w-full max-w-3xl overflow-hidden"
                 >
-                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                    {LEGACY_FILES.map((l) => (
-                      <div
-                        key={l.id}
-                        className="flex items-center justify-between rounded-xl border p-3"
-                        style={{ borderColor: "var(--hp-line, rgba(33,26,18,0.08))" }}
-                      >
-                        <span className="text-sm" style={{ color: "var(--hp-ink)" }}>
-                          {l.label}
+                  <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-3 border-t pt-5" style={{ borderColor: "var(--hp-line)" }}>
+                    {LEGACY_FILES.map((asset) =>
+                      version ? (
+                        <a key={asset.file} href={getYakitUrl(version, asset.file)} className="inline-flex items-center gap-1.5 text-xs font-medium hover:opacity-60" style={{ color: "var(--hp-ink)" }}>
+                          <Download className="h-3.5 w-3.5" aria-hidden="true" />
+                          {asset.label}
+                        </a>
+                      ) : (
+                        <span key={asset.file} className="text-xs" style={{ color: "var(--hp-ink-55)" }}>
+                          {asset.label}
                         </span>
-                        <button
-                          type="button"
-                          onClick={() => handleFileDownload(l.file)}
-                          disabled={!version}
-                          className="rounded-full p-2 text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-                          style={{ background: "var(--hp-orange)" }}
-                        >
-                          <Download className="h-4 w-4" />
-                        </button>
-                      </div>
-                    ))}
+                      ),
+                    )}
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </>
+        ) : (
+          <motion.a
+            variants={item}
+            href={product.installUrl}
+            target={product.installUrl.startsWith("http") ? "_blank" : undefined}
+            rel={product.installUrl.startsWith("http") ? "noreferrer" : undefined}
+            className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:opacity-60 focus-visible:outline-none focus-visible:ring-2"
+            style={{ color: "var(--hp-ink)" }}
+          >
+            查看完整说明
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </motion.a>
         )}
 
-        {/* Guarantees */}
         <div className="mt-16 grid w-full max-w-4xl grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8">
-          {(() => {
-            const guarantees: { icon: React.ElementType; title: string; text: string }[] = product.guarantees || [];
-            return guarantees.map((point) => {
-              const Icon: React.ElementType = point.icon;
-              return (
-                <motion.div key={point.title} variants={item}>
-                  <Icon className="h-5 w-5" style={{ color: "var(--hp-orange)" }} aria-hidden="true" />
-                  <h3 className="mt-4 text-sm font-semibold" style={{ color: "var(--hp-ink)" }}>
-                    {point.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--hp-ink-55)" }}>
-                    {point.text}
-                  </p>
-                </motion.div>
-              );
-            });
-          })()}
+          {product.guarantees.map((guarantee) => (
+            <GuaranteeItem key={`${activeProduct}-${guarantee.title}`} guarantee={guarantee} />
+          ))}
         </div>
       </motion.div>
     </section>
