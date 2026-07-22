@@ -1,3 +1,725 @@
-# Yaklang Websites
+> **本仓库是 Yak Project 官网（[yaklang.com](https://yaklang.com) / [yaklang.io](https://yaklang.io)）的"故事板总稿"。**
+> 它既是官网维护者的协作入口（构建方式见末尾「网站维护」），也汇集了 Yak Project 的定位、产品矩阵、Showcase、开源故事时间线、用户故事与权威背书。
+> 文中标有 `【TODO 配图：...】` / `【TODO 视频剪辑：...】` 的位置，是需要补齐的真实素材，欢迎向运营同学提 PR。
 
-Yaklang Website is running on yaklang.io and yaklang.com
+---
+
+# 🛡️ Yak Project
+
+### 广泛使用的开源网络安全基础设施
+
+<p align="center">
+  <!-- TODO 配图：Yak Project 品牌主视觉（横向 hero banner，建议用 logo.svg + 品牌橙 #ff7d23 渐变背景） -->
+  <img src="static/img/logo.svg" alt="Yak Project Logo" width="220" />
+</p>
+
+<p align="center">
+  <strong>"让世界更安全，让安全更简单"</strong><br/>
+  团队口号：做难且正确的事
+</p>
+
+<p align="center">
+  <a href="https://github.com/yaklang/yaklang"><img alt="Yaklang Stars" src="https://img.shields.io/github/stars/yaklang/yaklang?style=social"/></a>
+  <a href="https://github.com/yaklang/yakit"><img alt="Yakit Stars" src="https://img.shields.io/github/stars/yaklang/yakit?style=social"/></a>
+  <a href="https://github.com/yaklang/yaklang/releases"><img alt="Yaklang Release" src="https://img.shields.io/github/release/yaklang/yaklang.svg"/></a>
+  <a href="https://github.com/yaklang/yaklang/releases"><img alt="Yaklang Downloads" src="https://img.shields.io/github/downloads/yaklang/yaklang/total.svg"/></a>
+  <a href="https://github.com/yaklang/yaklang/blob/main/LICENSE.md"><img alt="License" src="https://img.shields.io/badge/license-AGPL%20v3-%23ff7d23.svg"/></a>
+  <a href="https://yaklang.com"><img alt="Site" src="https://img.shields.io/badge/site-yaklang.com-%233399dd.svg"/></a>
+</p>
+
+---
+
+## ✨ Hero：Yak Project 是什么
+
+**Yak Project 是广泛使用的开源网络安全基础设施。**
+
+它不是一个单一工具，而是一套**以「CDSL-YAK 领域编程语言」为内核、向外辐射出 GUI 平台、静态分析引擎、安全智能体、Java 工具链、漏洞靶场、AI 评测基准的完整技术体系**。从底层虚拟机 `YakVM`、静态单赋值 `YAK SSA`、漏洞建模语言 `SyntaxFlow`，到顶层的安全从业者日常使用的图形化工具，Yak Project 把"安全能力融合"做成了可被复用的工程基座。
+
+> 「**安全融合势在必行**」—— Yak 的起点不是再做一把"瑞士军刀"，而是去搭一块**让安全能力可以像积木一样被组合、被复用、被分发**的底层基建。
+>
+> 「**做难且正确的事**」—— 团队口号。
+
+**几个硬指标**（持续更新中）：
+
+| 维度 | 数据 |
+| --- | --- |
+| 核心语言仓库提交 | 14,000+ 次（截至 2026-07） |
+| Yakit 桌面端提交 | 8,400+ 次 |
+| 历史发布版本 | 600+ 个 tag |
+| 社区贡献者 | 50+ 人 |
+| 学术指导 | 电子科技大学网络空间安全学院 |
+| 权威鉴定 | 2024 / 2025 连续两年九位院士鉴定为「国内外首创、国际先进、国内领先」 |
+| 国家级荣誉 | 2023 年入选工信部信息通信领域十大科技进展 |
+
+> 【TODO 配图：Yak Project 技术体系全景图（建议把 YakVM / SSA / SyntaxFlow / Yaklang 放底层，Yakit / IRify / Memfit AI / JavaJive 放上层产品层）】
+
+---
+
+## 🧬 副 Hero：CDSL-YAK，为网络安全而生的领域编程语言
+
+<p align="center">
+  <strong>CDSL-YAK · Cybersecurity Domain Specific Language</strong><br/>
+  <em>"可能是安全领域最先进的领域编程语言（DSL）"</em>
+</p>
+
+**CDSL（Cybersecurity Domain Specific Language，网络安全领域专用编程语言）** 是 Yaklang 团队提出并被业界沿用的核心理念：与其用通用语言一次次重复"造安全工具的轮子"，不如直接为安全场景量身定制一门**图灵完备、强类型 + 动态类型、兼具编译字节码与解释执行**的编程语言。
+
+Yaklang 是 CDSL 理念的首个完整落地，包含一整套自研的编译器基础设施：
+
+| 编译器组件 | 角色 |
+| --- | --- |
+| **CDSL Yaklang** | 网络安全领域限定语言本体（语法 / 类型系统 / 运行时） |
+| **YakVM** | 网络安全领域限定语言的虚拟机（栈式字节码执行） |
+| **YAK SSA** | 静态分析友好的静态单赋值中间表示 |
+| **SyntaxFlow** | 语法模式匹配 DSL —— 漏洞特征代码描述语言 |
+| **LSP / DSP Server** | 语言服务器协议 + 调试协议服务器（IDE 级开发体验） |
+
+**为什么 CDSL 比通用语言更适合做安全？**
+
+- ✅ **简洁**：用最少的代码描述漏洞扫描、流量劫持、模糊测试这些安全高频场景；
+- ✅ **易用**：脚本即能力，单二进制、开箱即用，可跨 macOS / Linux / Windows 交叉编译；
+- ✅ **灵活**：支持热加载、嵌入式执行，可作为其他安全产品的"能力底座"被调用；
+- ✅ **可维护**：语法由上下文无关文法定义，IDE 友好，便于长期工程化；
+- ✅ **可靠**：强类型 + SSA 中间表示让程序分析"天生友好"。
+
+> 技术对比：`Golang ≈ Yaklang ≥ JVM Based Lang >> Python`
+>
+> Yak 的目标——成为安全领域的 **"Matlab"**，让"黑客编程"有一门属于自己的领域母语。
+
+**CDSL 教材已正式出版**：《CDSL-YAK 网络安全领域编程语言—从入门到实践》
+
+> 【TODO 配图：CDSL 教材封面 + 编译器五件套架构图（YakVM / SSA / SyntaxFlow / LSP）】
+
+---
+
+## 产品矩阵
+
+Yak Project 的产品矩阵以 CDSL-YAK 为内核，自底向上覆盖语言、平台、引擎、智能体与工具链五个层次。下方逐节展开每个对外产品；开源生态相关项目汇总于文末。
+
+### Yakit：智能化交互式渗透测试平台
+
+Yakit 是 Yak Project 面向安全从业者的核心平台产品，以 CDSL-YAK 为内核，将一门领域语言的运行时、调试能力与安全工程流程整合进同一图形化工作台。它既是一个交互式渗透测试作业平台，也是 Yaklang 安全能力的图形化最佳实践：脚本即能力，图形化即效率，插件化即生态。
+
+| 项目 | 内容 |
+| --- | --- |
+| 定位 | 基于 Electron + Yaklang gRPC 引擎构建的交互式应用安全测试 ALL-IN-ONE 平台 |
+| 开源 | 2021-10-12 首发，完全开源、完全免费 |
+| 仓库 | [github.com/yaklang/yakit](https://github.com/yaklang/yakit) |
+| 截图 | 【TODO 配图：Yakit 主界面 + MITM 劫持界面 + Web Fuzzer 界面（三连图）】 |
+
+#### 核心特点
+
+**一、为 Yak 语言编程提供智能化自动补全与 AI 重写**
+
+Yakit 内置 Yak 语言运行时与编辑环境，提供 IDE 级的语法补全、参数提示与跳转定义，渗透过程中可直接编写与调试 Yaklang 脚本，无需在平台与外部编辑器之间反复切换。在此基础上，Yakit 引入 AI 重写能力：用自然语言描述一段数据处理或流量改写意图，AI 即可生成对应的 Yaklang 代码，再由人工审阅与执行，降低脚本编写门槛的同时保留安全动作的可解释性。
+
+**二、以安全测试视角与数据包视角劫持、重放与模糊测试数据包**
+
+Yakit 的 MITM 模块是交互式渗透的核心。用户可在劫持视图中实时查看与编辑数据包，并按安全测试视角进行重放、批量处理与模糊测试：一次操作即可对标 Repeater / Intruder 的经典工作流，又能在同一界面切换到 Yaklang 脚本视角，对流量做更复杂的数据修复与逻辑改写。Yakit 同时提供可视化模糊测试能力，通过 Fuzztag 语法描述注入点，快速生成变体并观测服务端行为。
+
+**三、高度插件化与可定制化**
+
+Yakit 的插件体系贯穿渗透全流程。用户可通过热加载 Yaklang 代码实现流量修改、签名修复、鉴权重算、自定义协议处理等高级任务；插件既能本地运行，也能通过插件商店分发与共享。同一套插件机制使平台从"固定能力集合"变为"可被脚本与社区持续扩展的底座"：企业可沉淀自有方法论，红队可封装专用战术，安全团队可将团队规范固化为标准动作。
+
+**四、开源与社区支持**
+
+核心引擎与客户端源码完全开源，社区通过 GitHub Issue 参与缺陷反馈与能力共建，插件商店承接社区的能力分发。用户可以发布自行增强的 Yakit 插件功能以供他人使用（发布需经审核，以保障生态质量与安全）。这条"开源内核 + 审核化插件商店 + 社区共建"的路径，让 Yakit 既保持开源透明，又能在生态层面形成可控、可信、可持续的能力增长。
+
+#### 演示视频脚本
+
+下列脚本用于指导 Yakit 系列宣传视频的拍摄与剪辑。**片段 1 ~ 片段 4 各自独立，每段对应一支小视频**，可单独发布，也可串联成合集。每段包含：目标、建议时长、录屏前准备、分镜清单（含画面、操作、字幕与解说）、可直接复制的 Yaklang 代码或数据包样本、所需素材清单与拍摄注意事项。
+
+所有录屏一律在本地靶场进行，推荐使用 YakLab（Vulinbox）或自建测试环境；严禁出现真实目标域名、真实参数、真实凭据与客户数据。
+
+---
+
+##### 片段 1：智能化编程 —— 自动补全与 AI 重写
+
+**目标**：让观众在 60 秒内建立「在 Yakit 里写 Yaklang 是 IDE 级体验，且有 AI 协助」的认知。
+
+**建议时长**：45 ~ 60 秒。
+
+**录屏前准备**：
+
+- 打开 Yakit，确认右上角能看到 **Yak Runner** 入口。
+- 准备一个本地 HTTP 测试端点，例如 `http://127.0.0.1:8787/ping`，返回 `{"ok":true}`。
+- 在 Yak Runner 中新建文件 `demo.yak`，光标停在文件首行。
+- 准备一份用于 AI 重写的对照说明（见下方「AI 重写指令」）。
+
+**分镜清单**：
+
+1. **0~8s｜进入 Yak Runner**：从主界面右上角点击 **Yak Runner**，镜头随光标推进，展示「新建文件 / 打开文件 / 打开文件夹」欢迎入口，随后进入编辑器布局——左侧资源管理器、中间代码编辑区（右上角 **执行** 按钮）、底部 输出 / 语法检查 / 终端 三标签面板。字幕：「Yak Runner：Yakit 内置的 Yak 集成开发环境」。
+2. **8~22s｜智能补全**：在 `demo.yak` 中输入 `os.`，弹出模块函数提示，选中 `os.Exec`；再输入 `poc.`，弹出 `poc.HTTP` / `poc.Get` / `poc.Post` 等 HTTP 处理函数。在 `cli.String` 上悬停，展示浮层文档（参数、返回值、示例）。字幕：「标准库补全 · 悬停文档 · 跳转定义」。
+3. **22~35s｜跳转定义与标准库检索**：按住 `Cmd / Ctrl + 左键` 点击 `poc.HTTP`，跳到定义并在「帮助信息」面板展示结果；随后在右侧标准库文档侧栏搜索 `poc.ReplaceHTTPPacketHeader`，确认可查到函数说明。字幕：「跨文件跳转 · 标准库文档内置检索」。
+4. **35~50s｜执行与输出**：点击右上角 **执行**，底部输出面板打印运行结果；切到 语法检查 标签，展示无报错；切到 终端 标签，展示工作目录已与项目根目录同步。字幕：「一键执行 · 语法检查 · 集成终端」。
+5. **50~60s｜AI 重写（收束）**：切到 AI 重写入口，粘贴下方「AI 重写指令」，触发代码生成；生成的 Yaklang 代码自动填入编辑器，关键改动行高亮，鼠标在生成代码上短暂停留以体现「可审阅」。字幕：「自然语言描述意图，AI 生成可审阅的 Yaklang 代码」。
+
+**可直接复制的 Yaklang 代码（`demo.yak`）**：
+
+```yak
+// 向本地测试端点发送 GET 请求并打印状态码与响应体
+rsp, err = poc.Get("http://127.0.0.1:8787/ping")
+if err != nil {
+    log.Errorf("request failed: %v", err)
+    return
+}
+log.Infof("status: %v", poc.GetStatusCodeFromResponse(rsp))
+log.Infof("body: %v", poc.GetHTTPPacketBody(rsp))
+```
+
+**AI 重写指令（自然语言输入）**：
+
+> 把请求体中的 token 字段替换为环境变量 `YAK_TOKEN` 的值，再通过 `poc.Post` 发送请求。
+
+**期望 AI 生成代码（用于对照与解说，不必逐字出镜）**：
+
+```yak
+token = os.Getenv("YAK_TOKEN")
+body = codec.JsonToYaml({"token": token})
+rsp, err = poc.Post("http://127.0.0.1:8787/auth", poc.body(body))
+if err == nil {
+    log.Infof("status: %v", poc.GetStatusCodeFromResponse(rsp))
+}
+```
+
+**解说要点**：
+
+- Yakit 内置 Yak Runner，提供与成熟 IDE 一致的补全、悬停文档与跳转定义。
+- 标准库 `poc` / `codec` / `str` 等覆盖 HTTP 处理、编解码与字符串操作，安全场景无需反复造轮子。
+- AI 重写以自然语言生成 Yaklang 代码，人工审阅后再执行，安全动作保持可解释、可追溯。
+
+**所需素材**：
+
+- Yak Runner 界面录屏（补全 / 悬停 / 跳转 / 执行 / 终端）。
+- 标准库文档侧栏检索截图（`poc.ReplaceHTTPPacketHeader`）。
+- AI 重写入口与生成代码高亮录屏。
+- 静态配图建议：补全浮层截图、AI 重写前后对照图各一张。
+
+**拍摄注意**：
+
+- 输入补全程镜头建议 1.2 ~ 1.5 倍速回放，避免观众等待。
+- AI 重写镜头须完整保留「输入指令 → 生成 → 审阅」三步，不得只展示结果。
+- 所有端点使用 `127.0.0.1`，避免任何真实域名入镜。
+
+---
+
+##### 片段 2：数据包劫持、重放与模糊测试
+
+**目标**：让观众在 90 秒内看懂「MITM 交互式劫持 → Web Fuzzer 重放 → Fuzztag 模糊测试 → 脚本视角校验」的完整链路，建立「对标 BurpSuite 且更顺手」的认知。
+
+**建议时长**：75 ~ 90 秒。
+
+**录屏前准备**：
+
+- Yakit MITM 默认代理 `http://127.0.0.1:8083`，准备「免配置浏览器」或本地浏览器代理。
+- 准备一个本地搜索靶场，例如 `http://127.0.0.1:8787/search?q=test`，参数 `q` 会原样回显。
+- 在 MITM 操作台确认可见：左侧插件区域、右上劫持模式控件（手动劫持 / 自动放行）、过滤器、下游代理、证书、免配置浏览器、右侧流量列表与请求/响应详情。
+- 打开 Web Fuzzer 工作台，确认可见：顶部工作区标签、左侧 配置 / 规则 / 序列 三标签、中间请求构造面板与请求辅助工具栏（美化 / 热加载）、右侧响应视图与响应分析工具栏。
+
+**分镜清单**：
+
+1. **0~10s｜启动劫持**：左侧工具栏点 **MITM** → 顶部 **MITM 交互式劫持** → 中央 **启动劫持**；右上切换为 **自动放行**，便于被动观察。字幕：「交互式劫持：实时接管浏览器流量」。
+2. **10~25s｜产生与查看流量**：在免配置浏览器访问 `http://127.0.0.1:8787/search?q=test`，右侧流量列表出现该请求；点击该条记录，右侧详情展示请求与响应；随后切换为 **手动劫持**，再次刷新页面，展示「劫持请求→」标记，编辑请求行（例如 `GET /search?q=test` 改为 `q=Yakit`），点击 **放行**。字幕：「手动劫持可改包，自动放行可被动观察」。
+3. **25~45s｜送入 Web Fuzzer**：右键流量 → 发送到 Web Fuzzer（或粘贴下方样本包）；在请求构造面板中，把 `q=test` 改写为 `q={{int(1-20)}}`，鼠标停留在 `{{` 上展示 Fuzztag 自动补全；点击 **发送请求**，右侧响应视图切换为批量结果，按响应长度或状态码排序。字幕：「Fuzztag 一行描述注入点，Web Fuzzer 批量生成变体」。
+4. **45~65s｜Fuzztag 进阶**：把请求改为 `q={{x(pass_top25)}}`（弱口令 Top 25）或 `id={{int::number(1-3)}}{{int::number(4-6)}}`（同步拼接示例，生成 14、25、36），展示结果数量与对应响应；如有需要，右键选区 → 智能菜单把选中值包成 `{{md5(...)}}`，演示处理器标签。字幕：「生成器与处理器组合，覆盖弱口令、编码、同步序列等场景」。
+5. **65~80s｜脚本视角校验**：在请求辅助工具栏点 **热加载**，粘贴下方 Yaklang 片段，对每条响应做自定义校验并在输出面板标红异常项（例如命中关键字 `flag` 或状态码异常）。字幕：「脚本视角随时介入，对响应做自定义判定」。
+6. **80~90s｜收束**：镜头回到 Web Fuzzer 顶部全局操作栏，展示「生成 Nuclei Yaml PoC」一键能力，随后淡出。字幕：「从劫持到模糊测试到 PoC 沉淀，一条链路完成」。
+
+**可直接复制的数据包样本（粘贴进 Web Fuzzer）**：
+
+```http
+POST /search HTTP/1.1
+Host: 127.0.0.1:8787
+Content-Type: application/x-www-form-urlencoded
+Content-Length: auto
+
+q={{int(1-20)}}
+```
+
+**可直接复制的 Fuzztag 片段**：
+
+- 整数范围：`q={{int(1-100)}}`
+- 弱口令字典：`password={{x(pass_top25)}}`
+- 同步序列：`a={{int::number(1-3)}}&b={{int::number(4-6)}}`
+- 处理器组合：`token={{md5({{int(1-5)}})}}`
+- 编码链：`data={{base64enc({{urlenc(a=b)}})}}`
+
+**可直接复制的热加载 Yaklang 片段（响应校验）**：
+
+```yak
+// mirrorHTTPFlow：对每条响应做判定，命中关键字则在输出中标记
+mirrorHTTPFlow = func(flow, modify, drop) {
+    body = poc.GetHTTPPacketBody(flow.Response)
+    if str.Contains(body, "flag") || str.Contains(body, "error") {
+        yakit.Output("suspicious: " + flow.Url)
+    }
+}
+```
+
+**解说要点**：
+
+- MITM 交互式劫持提供手动改包与自动放行两种模式，对标 Repeater / Intruder 的经典工作流。
+- Web Fuzzer + Fuzztag 让模糊测试可视化、可组合，单条请求即可批量生成变体。
+- 任意环节可切到 Yaklang 脚本视角做深度处理与判定，安全测试视角与数据包视角自由切换。
+
+**所需素材**：
+
+- MITM 操作台录屏（启动劫持 / 手动改包 / 自动放行 / 流量详情）。
+- Web Fuzzer 录屏（Fuzztag 补全 / 批量结果 / 排序 / 一键生成 PoC）。
+- 热加载脚本校验录屏。
+- 静态配图建议：MITM 劫持界面、Web Fuzzer 与 Fuzztag、响应异常高亮各一张。
+
+**拍摄注意**：
+
+- 全程使用本地靶场；如使用 Vulinbox，请确认其默认端口与上方样本一致后再开拍。
+- 弱口令、注入类操作不得指向任何真实业务域名。
+- Fuzztag 录屏建议先慢后快：先展示 `{{` 自动补全，再切到批量结果，避免观众跟不上字典生成逻辑。
+
+---
+
+##### 片段 3：插件化与可定制化
+
+**目标**：让观众在 80 秒内看懂两条路径——「插件商店一键安装」与「本地 Yak 热加载脚本实时改包」，建立「平台可被脚本与社区持续扩展」的认知。
+
+**建议时长**：70 ~ 80 秒。
+
+**录屏前准备**：
+
+- 顶部状态栏确认可见 **插件** 入口；点击进入 **插件仓库**，确认左侧导航有 插件商店 / 我的 / 本地 / 配置 四项。
+- 在插件商店中预置一个目标插件（推荐「修改 HTTP 请求 Header」这类通用插件），并确认其卡片可见类型标签（如「Yak-MITM 模块」）、官方徽标、作者、点赞与下载数。
+- 在 MITM 左侧热加载编辑器中预置下方「签名修复」脚本，但先不要点击「热加载」。
+
+**分镜清单**：
+
+1. **0~12s｜进入插件商店**：顶部状态栏 **插件 → 插件仓库**，镜头展示左侧 插件商店 / 我的 / 本地 / 配置 导航与多维度筛选（插件类型 / 插件组 / Tag）。字幕：「插件仓库：社区能力的一站式入口」。
+2. **12~28s｜查找与安装**：在搜索框输入目标插件名，定位卡片，展示类型标签与下载量；点击 **下载** 完成安装，右侧操作栏随之激活，切到 **执行** 标签，展示参数配置（如 `root_url` 支持文本或 Excel 导入）。字幕：「一键下载，参数即界面，立即可执行」。
+3. **28~40s｜查看源码**：点击插件 **线上** 视图，展示以 `##` 元数据注释驱动的 Yak 源码（如 `##type:poc`、`##params:root_url`），说明插件即代码、代码即界面。字幕：「插件即 Yak 代码，元数据自动生成参数表单」。
+4. **40~58s｜热加载改包**：切到 MITM 交互式劫持，左侧热加载编辑器中粘贴下方 `hijackHTTPRequest` 签名修复脚本，点击 **热加载**，加载到内存无需重启；随后让一条带 `X-Sign` 的请求经过代理，右侧流量详情可见头部已被重算替换。字幕：「热加载 Yak 脚本，无需重启即可实时改包」。
+5. **58~72s｜响应链处理**：在热加载编辑器追加 `hijackHTTPResponse`，对响应体做字段替换或解密预览，再次热加载并触发流量，展示响应详情中的变化。字幕：「请求与响应均可被脚本介入，覆盖加解密、签名、脱敏等场景」。
+6. **72~80s｜收束**：镜头回到插件商店「一键下载」按钮，再切到本地热加载按钮，两者并置淡出。字幕：「社区插件 + 本地热加载，平台从固定能力扩展为可持续增强的底座」。
+
+**可直接复制的热加载脚本（请求签名修复示例）**：
+
+```yak
+// hijackHTTPRequest：命中本地测试域时，重算 X-Sign 头再放行
+hijackHTTPRequest = func(isHttps, url, req, forward, drop) {
+    if str.Contains(url, "127.0.0.1:8787") {
+        body = poc.GetHTTPPacketBody(req)
+        // 示例签名规则：md5(body + 固定盐)，真实业务按团队规则替换
+        sign = codec.EncodeToMd5(body + "yakit-demo-salt")
+        req = poc.ReplaceHTTPPacketHeader(req, "X-Sign", sign)
+        forward(req)
+    }
+}
+```
+
+**可直接复制的热加载脚本（响应字段处理示例）**：
+
+```yak
+// hijackHTTPResponse：对响应体中的占位字段做替换，便于演示前后差异
+hijackHTTPResponse = func(isHttps, url, rsp, forward, drop) {
+    if str.Contains(url, "127.0.0.1:8787") {
+        body = poc.GetHTTPPacketBody(rsp)
+        body = str.ReplaceAll(body, "Example", "Yakit-Patched")
+        rsp = poc.ReplaceHTTPPacketBody(rsp, body)
+        forward(rsp)
+    }
+}
+```
+
+**解说要点**：
+
+- 插件体系贯穿渗透全流程，插件商店提供按类型、组、Tag 的多维筛选与搜索。
+- 插件以 Yak 源码形式分发，`##` 元数据注释自动生成参数表单，代码即界面。
+- 热加载 Yaklang 脚本可完成流量修改、签名修复、鉴权重算、加解密等高级任务，无需重启平台。
+- 企业可沉淀自有方法论，红队可封装专用战术，安全团队可将团队规范固化为标准动作。
+
+**所需素材**：
+
+- 插件商店界面录屏（筛选 / 搜索 / 卡片 / 下载 / 执行 / 线上源码视图）。
+- MITM 热加载录屏（`hijackHTTPRequest` / `hijackHTTPResponse` 加载与流量变化）。
+- 静态配图建议：插件商店卡片截图、插件线上源码截图、热加载编辑器截图各一张。
+
+**拍摄注意**：
+
+- 如演示真实业务签名算法，请使用脱敏后的占位盐值与本地端点，禁止出现真实密钥。
+- 热加载镜头须展示「加载前 → 加载 → 加载后流量变化」三态对比，强化「实时生效」观感。
+- 插件源码镜头停留时间应足够让观众看清 `##type` / `##params` 元数据。
+
+---
+
+##### 片段 4：开源与社区支持
+
+**目标**：让观众在 60 秒内确认「Yakit 核心完全开源、社区活跃、插件可发布且经审核」，建立信任感与参与意愿。
+
+**建议时长**：45 ~ 60 秒。
+
+**录屏前准备**：
+
+- 浏览器打开 Yakit 仓库页 `https://github.com/yaklang/yakit`，准备好 Star 数、Issues、Releases 三个视图的切换路径。
+- 准备一个本地已编写完成的演示插件（可用片段 3 中的签名修复脚本改造，补充 `##type`、`##params` 元数据），用于演示发布流程。
+- 在 Yakit 插件仓库中预置「新建插件」与「编辑 → 提交并保存 → 待审核 → 合并」流程的入口可达性。
+
+**分镜清单**：
+
+1. **0~12s｜开源仓库**：浏览器展示 `github.com/yaklang/yakit`，镜头依次落在 Watch / Star / Fork 数、LICENSE（AGPL-3.0）与最近 Release；切到 Issues 列表展示活跃度，再切到 Releases 展示月度发布节奏。字幕：「核心引擎与客户端完全开源，AGPL-3.0，持续迭代」。
+2. **12~25s｜社区共建入口**：回到 Issues，展示「Bug 反馈 / 能力建议」标签分类与维护者回复；镜头切到 Discussions 或 Pull Requests（视仓库实际启用情况而定），强调社区可参与。字幕：「GitHub Issue 与 PR 是缺陷反馈与能力共建的主通道」。
+3. **25~45s｜插件发布与审核**：切到 Yakit 插件仓库，点击 **新建插件**（或对已有插件点击 **编辑**），粘贴带 `##type` / `##params` 元数据的插件源码，点击 **提交并保存**，状态变为 **待审核**；随后展示审核者 Code Review → **合并** 后插件自动上架，并切到该插件的「日志」标签，展示 创建 / 修改 / 已合并 的不可变记录与公开评论区。字幕：「发布即进入审核，合并后自动上架，全程留痕可追溯」。
+4. **45~55s｜多端与离线分发**：快速展示插件的离线分发能力——本地插件 → 批量操作 → 导出 / 导入，或拷贝 `yakit-profile-plugin.db`（macOS 位于 `~/yakit-projects/`，Windows 位于 `yakit-projects/`）到另一台机器。字幕：「插件可离线迁移，团队与内网场景同样可用」。
+5. **55~60s｜收束**：镜头回到仓库 Star 按钮，叠加行动召唤字幕。字幕：「开源、免费、可共建，欢迎加入 Yakit 生态」。
+
+**可直接复制的插件源码骨架（用于发布演示）**：
+
+```yak
+// ##type:mitm
+// ##params:root_url|目标 URL|直链
+// 为插件设置一个可被表单收集的参数
+cli.checkParams("root_url")
+rootUrl = cli.String("root_url")
+
+hijackHTTPRequest = func(isHttps, url, req, forward, drop) {
+    if str.Contains(url, rootUrl) {
+        req = poc.ReplaceHTTPPacketHeader(req, "X-Source", "Yakit-Community-Plugin")
+        forward(req)
+    }
+}
+```
+
+**解说要点**：
+
+- Yakit 核心引擎与客户端完全开源，遵循 AGPL-3.0，首日开源即具备完整能力。
+- 社区通过 GitHub Issue 与 Pull Request 参与缺陷反馈和能力共建，Release 节奏稳定。
+- 用户可发布自行增强的插件，发布需经审核，合并后自动上架，并保留不可变日志与公开评论。
+- 插件可离线导入导出，适配团队与内网场景。
+
+**所需素材**：
+
+- GitHub 仓库页录屏（Star / Fork / Issues / Releases / LICENSE）。
+- Yakit 插件发布流程录屏（新建 / 编辑 → 提交并保存 → 待审核 → 合并 → 日志）。
+- 插件离线导入导出或数据库迁移录屏。
+- 静态配图建议：仓库主页截图、插件审核流程示意图、插件日志页截图各一张。
+
+**拍摄注意**：
+
+- 仓库数据应使用拍摄当日的真实公开数据，不得后期合成 Star / Issue 数量。
+- 发布流程镜头须完整呈现「提交 → 待审核 → 合并」三态，并明确标注「合并由审核者执行」。
+- 离线迁移若涉及数据库文件，仅展示文件路径与操作，不复制真实团队库内容入镜。
+
+---
+
+> 【TODO 视频剪辑：片段 1 ~ 片段 4 各自成片，单支建议 45 ~ 90 秒；如需合集，可串联上述四段并在段间加入 2 秒品牌过场】
+> 【TODO 配图：Yakit 主界面、MITM 劫持界面、Web Fuzzer 与 Fuzztag、插件商店界面、插件发布审核流程，共五张静态截图，用于官网首页与文档页】
+
+### IRify：以 SSA 与人工智能为核心的现代代码安全分析系统
+
+IRify 是 Yak Project 面向代码安全的现代分析系统。它的核心由**两套引擎**构成：一套是**以静态单赋值（SSA）为核、以自研漏洞描述语言 SyntaxFlow 为查询语言的静态分析引擎**；另一套是**以大模型与智能体循环为骨架的人工智能引擎**。两套引擎各自独立、自成体系，可以单独完成代码安全分析；同时又互相赋能、深度结合，AI 直接分析或验证 SSA 形式下的静态分析结果，并在 SyntaxFlow 规则的生成与维护中扮演关键角色。
+
+这意味着 IRify 不是「静态分析为主、AI 为辅」的传统堆叠，也不是「大模型读代码为主、工具为点缀」的另一极端。SSA 引擎保证结果可复现、可验证、可工程化；AI 引擎带来语义理解、规划推理与规模化覆盖；两者结合的部分——AI 直接分析或验证 SSA 静态分析结果、AI 生成与维护 SyntaxFlow 规则——正是 IRify 区别于任何单一范式产品的关键。
+
+IRify 作为独立产品，在线形态为 [ssa.to](https://ssa.to)，桌面形态为 Yakit 的 IRify 发行版（社区版与企业版，构建变量 `REACT_APP_PLATFORM=irify` / `irifyEE`，紫色主题，gRPC 端口 9014 / 9015）。其副标题沿用「Static-Single-Assignment Bringing Clarity to Code」。
+
+| 项目 | 内容 |
+| --- | --- |
+| 定位 | 以 SSA 与人工智能为核心的现代代码安全分析系统，SSA 引擎与 AI 引擎各自独立、互相深度结合 |
+| 发行形态 | 在线 [ssa.to](https://ssa.to) · Yakit IRify 发行版（社区版 / 企业版） |
+| 语言支持 | Java / SpringBoot 系列、Golang、PHP、JavaScript / EcmaScript、Python、C；基于标准 eBNF g4 语法文件构建 |
+| 站点 / 仓库 | [ssa.to](https://ssa.to) · [github.com/yaklang/yaklang](https://github.com/yaklang/yaklang) · [github.com/yaklang/syntaxflow](https://github.com/yaklang/syntaxflow) |
+| 截图 | 【TODO 配图：IRify 编译产物视图 + SyntaxFlow 规则编辑器 + 语法流可视化（三连图）】 |
+
+#### 核心特点
+
+**一、SSA 引擎：以静态单赋值为核、SyntaxFlow 为查询语言的静态分析**
+
+SSA 引擎是 IRify 的可复现底座，采用两阶段架构：第一步将多语言源码编译为统一的静态单赋值（SSA，Static-Single-Assignment）中间表示，并落盘到 SQLite 程序数据库（支持懒加载与懒存储）；第二步使用自研的 SyntaxFlow 对 IR 产物做查询式扫描。这种「编译与分析解耦」的设计，让大型项目的 IR 可以一次编译、多次复用，编译与分析也能在不同机器上分别执行，避免每次扫描都重新解析源码。
+
+SSA 中间表示天然对程序分析友好：它通过 Φ（Phi）节点实现双向数据流分析，支持跨包、跨文件的全局分析与路径敏感分析，并能对闭包做上下文敏感的过程间分析。配合深度关联分析（数据流 + 控制流），SSA 引擎能追踪一条数据从外部输入（source）到危险函数（sink）的完整路径，而不只是孤立地匹配某个函数名。
+
+真正让这套架构「可被安全工程师直接使用」的是 **SyntaxFlow**。它被定位为「高级声明式模式查询语言（Advanced Declarative Pattern Query Language）」，本质上是一门**漏洞描述语言（VDL）——专门用来描述漏洞形态、让规则贴近审计直觉的领域语言**。与 CodeQL 或 Datalog 不同，SyntaxFlow 不需要 import 各种表与库来描述运算特征，使用逻辑更接近人类代码审计的思考方式：直接声明「什么样的代码模式构成一个漏洞」，引擎负责在 IR 上做污点追踪与数据流查询。
+
+一条 SyntaxFlow 规则由三部分构成：规则描述（`desc`，含 `title`、`type`、`level`、`risk`、`cve` 等）、规则内容（查询表达式）、规则输出（`check` / `alert`）。规则通过 `#->`、`-->`、`#>` 等操作符串联使用—定义链（Use-Def Chain），用 `#{include}` / `#{exclude}` / `#{until}` 做过滤，用 `as $var` 捕获节点。这套语法让规则即漏洞模型，可读、可测、可版本管理。SSA 引擎凭借这种确定性，独立承担从规则到结果的全流程分析，其输出稳定、可复现、可追溯，不依赖任何模型推理。
+
+> 【TODO 配图：SSA 两阶段架构图（源码 → SSA IR → SQLite 程序库 → SyntaxFlow 查询 → 审计结果）】
+
+**二、AI 引擎：以大模型与智能体循环为骨架的代码安全分析**
+
+AI 引擎是 IRify 的语义推理层，独立于 SSA 引擎即可工作。它以 ReAct 智能体循环为骨架，在 Yaklang AI 体系中注册了独立的代码安全审计循环类型，桌面端通过两个聚焦模式触达：`code_security_audit`（整工程代码安全审计）与 `ai_skill_audit`（AI 技能驱动分析）。一次完整 AI 审计遵循四阶段流程：项目探索、扫描计划与按类别串行的双阶段审计、逐条验证与证据记录、报告生成与兜底，最终可导出 MD / PDF 报告。
+
+作为独立引擎，AI 引擎直接对源码进行语义理解与安全分析：它能在没有预置规则的情况下识别业务逻辑漏洞、解释代码意图、跨函数还原攻击路径，覆盖那些难以用纯模式匹配描述的语义型风险。这是 SSA 引擎以「规则即漏洞模型」驱动的确定式分析所不易触及的领域，两者因此形成互补而非替代关系。
+
+AI 引擎同样提供从结果到证据的完整链路：审计结论可指向具体代码位置与上下文，并通过 `irify-sast-skill`（MCP 工具 `yak mcp -t ssa`）注入的 SyntaxFlow 语法、约 40 个 NativeCall 与 Source / Source→Sink 模板获得稳定的能力边界，具备「查询语法报错即自愈重试」的兜底机制。
+
+> 【TODO 配图：AI 引擎四阶段流程图（项目探索 → 双阶段扫描 → 逐条验证 → 报告生成）】
+
+**三、双引擎深度结合：AI 直接分析与验证 SSA 静态分析结果，并驱动规则生成与维护**
+
+IRify 真正的差异点在于两套引擎的深度结合——既不是简单的「SAST 先扫、AI 后解释」，也不是「AI 先看、工具补刀」，而是 AI 在直接分析、验证与规则工程化三条链路上与 SSA 体系紧密耦合。
+
+- **AI 直接分析 SSA 形式的静态分析结果**：AI 审计并非凭空推理，而是以 SSA 引擎编译产出的 IR 与已识别的风险产物为输入，对静态分析结果做直接分析与判定——确认是否构成真实可利用路径、收敛误报、补充语义化的风险描述。稳定的 SSA 产物为 AI 提供了可复现的事实底座，AI 的语义判断因此更准、更稳。
+- **AI 验证 SSA 静态分析结果**：对于 SSA 引擎依据 SyntaxFlow 规则产出的候选漏洞，AI 可作为验证者介入，结合上下文判断其是否真实成立、利用难度如何，输出带有证据的验证结论，而不是把规则命中的原始结果原样抛给人工。这条「规则粗筛 + AI 验证」的链路，是提升真实漏洞检出率、压低误报的关键。
+- **AI 驱动 SyntaxFlow 规则的生成与维护**：聚焦模式 `write_syntaxflow_rule` 在内置规则样例知识包（`syntaxflow-aikb` 文本检索 + `syntaxflow-aikb-rag` 向量检索）上做检索，结合单文件编辑工具链与 SyntaxFlow 编译校验，迭代写出合法的 `.sf` 文件；编辑器右上角的 AI 美化入口（`sf_rule_completion` Forge）则负责把一份 `.sf` 文本按统一规范重新排版。这让规则的产出与长期维护从「手工试错」变为「AI 起草 + 语法自检 + 人工把关」。
+
+这条「SSA 引擎提供可复现的静态分析与规则底座、AI 引擎提供语义理解与验证推理、两者在分析与规则两侧深度耦合」的路线，使 IRify 既具备传统 SAST 的稳定性与可工程化，又具备 AI 时代的语义覆盖与规模化能力。
+
+> 【TODO 配图：双引擎协同图（SSA 引擎 ⇄ AI 引擎，三条结合链路：直接分析 / 验证 / 规则生成维护）】
+
+**四、规则调试系统与扫描稳定性保障**
+
+为了让规则可工程化，IRify 提供了从编写、调试到结果验证的完整工具链，而非「写了规则只能凭运气」。
+
+- **规则编辑器**：基于 Monaco 的 `RuleEditorBox`，内置 SyntaxFlow 语言规范（`SyntaxFlowMonacoSpec`），并能在审计结果页通过 `result_id` 反查命中该结果的那条 `.sf` 规则原文，让「结果 ↔ 规则」双向可追溯。
+- **规则调试器**：通过 `useRuleDebug` 驱动的调试会话（`apiSyntaxFlowScan`），支持 `pause` / `resume` / `stop` / `reset`，逐条吐出匹配节点卡片与日志，便于作者逐步确认匹配边界与误报来源。
+- **规则管理**：独立「规则管理」页，区分本地规则与在线规则，支持规则分组、批量导入导出、按组在代码扫描中选取规则集；默认规则模板直接链接 [SyntaxFlow 指南](https://ssa.to/syntaxflow-guide/intro)。
+- **结果可追溯**：每条审计漏洞（`SSARisk`）携带严重程度、代码定位（`CodeSourceUrl` / `CodeRange` / `CodeFragment`）、所属函数与变量、命中规则（`FromRule`）、CVE / 风险类型与修复建议；右侧详情页展示交互式数据流图，点击节点可跳转源码并对照显示 SSA IR 代码，从「危险函数到漏洞点」的全路径可回溯、可展开。
+- **扫描稳定性**：扫描任务具备完整生命周期 API（`StartScan` / `ResumeScan` / `GetScanStatus`），支持断点续扫与状态查询；规则侧以稳定的 SSA 扫描产物为不稳定的 AI 审计提供支撑，目标是「同一项目多次审计输出尽量一致」。报告生成功能（MD / PDF）让结果可沉淀、可复核。
+
+内置规则体量也支撑了这套稳定性：yaklang 引擎通过 `go:embed` 内置 **364 个 `.sf` 规则**，按 127 个 CWE 组织，覆盖 Java（154，含 Spring）、Golang（103）、PHP（42）、Python（26）、JavaScript / EcmaScript（21）、C（17）等语言，且带 IRify 专属排除策略（`rules_irify_exclude.go`），开箱即用。
+
+> 【TODO 配图：规则调试器界面（匹配节点卡片 + 日志）+ 审计结果数据流图（节点可跳源码与 IR）】
+
+#### 演示视频脚本
+
+下列脚本用于 IRify 系列宣传视频的拍摄与剪辑，**三段各自独立，每段对应一支小视频**，可单独发布，也可串联成合集。每段包含：目标、建议时长、录屏前准备、分镜清单（含时间码、画面、操作、字幕与解说）、可直接复制的 SyntaxFlow 规则或工程样本、所需素材清单与拍摄注意。
+
+所有录屏一律使用本地脱敏工程或公开靶场源码（如 Vulhub 中可公开引用的项目），严禁出现客户真实代码、真实凭据与未授权的内部资产。
+
+---
+
+##### 片段 1：从源码到 SSA IR，再用 SyntaxFlow 一行表达漏洞规则
+
+**目标**：让观众在 80 秒内看懂 IRify 的两阶段架构——「项目编译为 SSA IR 落库」与「SyntaxFlow 在 IR 上做查询」，建立「编译器级分析、规则贴近审计直觉」的认知。
+
+**建议时长**：70 ~ 80 秒。
+
+**录屏前准备**：
+
+- 启动 IRify 发行版（Yakit 构建变量 `REACT_APP_PLATFORM=irify`），确认侧边栏为紫色主题的「代码审计」组，可见 项目管理、代码审计、代码扫描、规则管理、审计漏洞、Java 反编译。
+- 准备一个本地 Java 工程，含一处明显的 JDBC 直接拼接 SQL（示例如下），工程路径形如 `/tmp/irify-demo/sqli`。
+- 在「代码审计」页确认新建项目表单可见：项目路径、语言、编译速度（peephole 0~3）、执行类型（query / scan / debug）。
+- 预置下方 JDBC SQL 注入 SyntaxFlow 规则，便于粘贴演示。
+
+**分镜清单**：
+
+1. **0~10s｜定位 IRify**：从紫色主题侧边栏点开「代码审计」组，镜头依次扫过 项目管理 / 代码审计 / AI 代码审计 / 代码扫描 / 规则管理 / 审计漏洞，叠加字幕「IRify：以 SSA 为核心的代码安全分析系统」。字幕：「两阶段架构：编译为 SSA IR，再用 SyntaxFlow 查询」。
+2. **10~28s｜编译为 SSA IR**：进入「代码审计」页，点击新建项目，拖入 `/tmp/irify-demo/sqli`，语言选 Java，编译速度选「Medium」，执行类型选 `query`；点击编译，展示「SSA 项目编译」过程，并切到本地终端或日志窗口展示 `init ssa database: .../default-yakssa.db`，说明 IR 已落 SQLite 程序库。字幕：「源码编译为 SSA IR，落 SQLite 程序库，可一次编译多次复用」。
+3. **28~50s｜一条 SyntaxFlow 查漏洞**：在查询框粘贴下方 JDBC SQL 注入规则，运行；右侧审计结果出现命中，展示 `漏洞详情` 与 `规则编写` 子面板。镜头随后停在「语法流可视化」，展示从危险函数到漏洞点的路径图，点击节点跳转源码并对照显示 SSA IR。字幕：「SyntaxFlow 是漏洞描述语言（VDL），规则即漏洞模型」。
+4. **50~66s｜规则三段式结构**：在规则编辑器里展开规则的 `desc`（标题、类型、严重程度、风险类型）、规则内容、`check` / `alert` 输出，逐段高亮说明，强调「声明式、贴近审计直觉、无需 import 各种表」。字幕：「desc / 规则内容 / 输出，三段式结构，可读可测可版本管理」。
+5. **66~80s｜收束**：镜头回到两阶段架构示意图（编译 → IR 库 → 查询 → 结果），淡出。字幕：「以 SSA 为核，用 SyntaxFlow 描述漏洞，IRify 让代码审计贴近编译器」。
+
+**可直接复制的本地 Java 工程（JDBC 拼接 SQL 示例）**：
+
+```java
+// /tmp/irify-demo/sqli/src/main/java/demo/UserController.java
+package demo;
+
+import java.sql.*;
+
+public class UserController {
+    public ResultSet findByName(Connection conn, String name) throws SQLException {
+        // 漏洞点：外部输入 name 直接拼接到 SQL
+        String sql = "SELECT * FROM users WHERE name = '" + name + "'";
+        Statement stmt = conn.createStatement();
+        return stmt.executeQuery(sql);
+    }
+}
+```
+
+**可直接复制的 SyntaxFlow 规则（JDBC SQL 注入 sink，精简示例）**：
+
+```
+desc(
+    title: "JDBC Raw Statement SQL Injection",
+    title_zh: "JDBC 直接拼接 SQL 注入",
+    type: vuln,
+    level: high,
+    risk: "sqli",
+)
+
+// 1. 捕获 Statement 且未经过 set* 过滤
+DriverManager.getConnection().createStatement() as $stmt;
+$stmt?{!.set*()} as $checkedStmt;
+
+// 2. 提取 executeXxx 的第一个参数作为 sink
+$checkedStmt.execute*(*<slice(start=1)> as $sink);
+check $sink;
+
+// 3. 命中外部输入即告警
+$sink #{
+    include: `* & $entry`,
+}-> as $high;
+alert $high for {
+    message: "发现 JDBC 代码中存在直接可控的 SQL 注入拼接。",
+    level: high,
+    risk: "sqli",
+};
+```
+
+**解说要点**：
+
+- IRify 先把项目编译为统一的 SSA 中间表示并落 SQLite 程序库，编译与分析解耦，大型项目可一次编译多次复用。
+- SyntaxFlow 是自研的漏洞描述语言（VDL），用贴近审计直觉的语法描述漏洞形态，无需像 CodeQL / Datalog 那样 import 各种表。
+- 规则三段式（desc / 内容 / 输出）让规则即漏洞模型，可读、可测、可版本管理。
+
+**所需素材**：
+
+- IRify 侧边栏与代码审计页录屏（新建项目 / 编译 / 查询）。
+- SSA 数据库日志截图（`init ssa database`）。
+- 语法流可视化录屏（节点跳源码 + IR 对照）。
+- 静态配图建议：SSA 两阶段架构图、规则三段式结构图、语法流可视化截图。
+
+**拍摄注意**：
+
+- 编译过程可能耗时，建议剪辑压缩，但必须保留「编译开始 → 编译完成 → IR 落库」的因果连续。
+- 语法流可视化镜头须展示「点击节点跳源码」的交互，这是区别于普通 grep 类工具的关键观感。
+- 如使用 Vulhub 等公开项目作为样本，请在字幕中注明出处，避免被误认为客户资产。
+
+---
+
+##### 片段 2：AI Native 代码审计与 AI 辅助生成 SyntaxFlow 规则
+
+**目标**：让观众在 80 秒内看懂 IRify 的「AI 全程赋能」——既能让 AI 直接做整工程审计，也能让 AI 生成可执行的 SyntaxFlow 规则，且结果有稳定 SSA 产物兜底。
+
+**建议时长**：70 ~ 80 秒。
+
+**录屏前准备**：
+
+- 启动 IRify 发行版，准备一个已编译为 SSA IR 的本地工程（复用片段 1 的项目即可，确保 IR 已落库）。
+- 进入「AI 代码审计」页，确认可见聚焦模式选择（`code_security_audit` 整工程代码审计 / `ai_skill_audit` AI 技能驱动分析）与三步引导（选项目目录、选审计风格、开始审计）。
+- 在规则管理页预置一个待美化的粗糙 `.sf` 文件，用于演示 AI 美化（`sf_rule_completion`）与规则自动生成（`write_syntaxflow_rule`）。
+
+**分镜清单**：
+
+1. **0~10s｜AI 审计入口**：进入「AI 代码审计」页，展示 ReAct 智能体对话界面与聚焦模式选择，叠加字幕「IRify AI 代码审计：ReAct 智能体 + 四阶段流程」。字幕：「AI 不只解释结果，而是驱动整个审计循环」。
+2. **10~30s｜四阶段审计**：按引导选择已编译项目与 `code_security_audit` 风格，点击「开始审计」；镜头依次展示四个阶段的进度与产物——项目探索、按类别串行的双阶段审计、逐条验证与证据记录、报告生成与兜底。字幕：「探索 → 双阶段扫描 → 逐条验证 → 报告生成，可导出 MD / PDF」。
+3. **30~50s｜证据可追溯**：在审计结果中点开一条高风险项，展示其指向的代码位置与 SSA IR 证据，强调「AI 的结论背后有稳定的 SSA/SyntaxFlow 产物支撑」。字幕：「稳定的扫描产物为 AI 审计兜底，结果更准也更稳」。
+4. **50~68s｜AI 生成规则**：切到规则编写页，演示 AI 辅助生成——在聚焦模式 `write_syntaxflow_rule` 下输入自然语言需求（例如「检测 Golang 中 `db.QueryRow` 参数来自 `fmt.Sprintf` 的 SQL 注入」），展示检索内置规则样例知识包（`syntaxflow-aikb` + `syntaxflow-aikb-rag`）后迭代生成的 `.sf` 文件，并在 `check-syntaxflow-syntax` 自检通过后填入编辑器。字幕：「AI 在内置知识包上检索，迭代生成并通过语法自检的 `.sf` 规则」。
+5. **68~74s｜AI 美化规则**：点开规则编辑器右上角的 AI 美化入口（`sf_rule_completion`），展示一份粗糙 `.sf` 被按统一规范重新排版后的对照。字幕：「编辑器右上角 AI 美化，规则按统一规范重排」。
+6. **74~80s｜收束**：镜头回到 AI 审计对话与生成规则并置，淡出。字幕：「SSA/SyntaxFlow 负责可复现定位，AI 负责规划与语义理解」。
+
+**可直接复制的自然语言规则生成指令（用于 `write_syntaxflow_rule`）**：
+
+> 生成一条 Golang 的 SyntaxFlow 规则：检测 `database/sql` 中 `db.QueryRow` 的第一个参数，当它由 `fmt.Sprintf` 拼接且拼接中包含外部输入时，告警 SQL 注入（risk: sqli，level: high）。
+
+**期望 AI 生成的 SyntaxFlow 规则（用于对照与解说，可不完全逐字出镜）**：
+
+```
+desc(
+    title: "Golang SQL Injection via fmt.Sprintf",
+    title_zh: "Golang fmt.Sprintf 拼接导致的 SQL 注入",
+    type: vuln,
+    level: high,
+    risk: "sqli",
+)
+
+<include('golang-database-sql')> as $db;
+<include('golang-user-input')> as $input;
+
+// QueryRow 第一个参数的定义链中包含 fmt.Sprintf 拼接
+$db.QueryRow(* #-> as $param);
+$param & $input as $mid;
+
+check $mid;
+alert $mid for {
+    message: "Golang 代码中 QueryRow 参数由 fmt.Sprintf 拼接外部输入，存在 SQL 注入。",
+    level: high,
+    risk: "sqli",
+};
+```
+
+**解说要点**：
+
+- IRify 的 AI 审计以 ReAct 智能体循环为骨架，四阶段流程可导出 MD / PDF 报告，并非只做结果解释。
+- AI 生成的 SyntaxFlow 规则基于内置知识包检索与编译自检，合法率与可用率显著提升。
+- 「稳定的 SSA/SyntaxFlow 产物 + 不稳定的纯 AI 审计」互为支撑，是 IRify 区别于裸大模型读代码的关键。
+
+**所需素材**：
+
+- AI 代码审计页录屏（四阶段流程 / 结果证据跳源码与 IR）。
+- 规则生成录屏（`write_syntaxflow_rule` 检索 → 生成 → 自检）。
+- AI 美化前后对照录屏（`sf_rule_completion`）。
+- 静态配图建议：四阶段流程图、AI 规则生成对照图、规则美化前后对照图。
+
+**拍摄注意**：
+
+- 四阶段流程建议用进度条或阶段卡剪辑串联，避免长时间等待 AI 推理。
+- AI 生成规则的镜头必须展示「检索 → 生成 → 语法自检」全过程，不得只展示最终 `.sf`。
+- 所有审计结论须落在本地脱敏工程上，禁止出现真实客户代码与未授权资产。
+
+---
+
+##### 片段 3：规则调试器与扫描稳定性 —— 让规则可工程化
+
+**目标**：让观众在 70 秒内看懂 IRify 如何让 SyntaxFlow 规则「写得出来、调得明白、扫得稳定」，建立「规则可工程化」的信任。
+
+**建议时长**：60 ~ 70 秒。
+
+**录屏前准备**：
+
+- 启动 IRify 发行版，复用一个已编译为 SSA IR 的本地工程。
+- 进入「规则管理」页，确认可见：本地规则 / 在线规则、规则分组、批量导入导出、按组在代码扫描中选取规则集、规则调试入口（`ExecType = debug`）。
+- 准备一条待调试的规则（下方「路径穿越」示例），故意保留一处轻微误报边界，便于演示调试与 `include` / `exclude` 收敛。
+- 准备一个体现「规则即结果溯源」的已命中漏洞项，演示通过 `result_id` 反查 `.sf` 原文。
+
+**分镜清单**：
+
+1. **0~10s｜规则管理中心**：打开「规则管理」页，展示本地规则 / 在线规则与规则分组，镜头扫过批量导入导出按钮与「按组在代码扫描中选取规则集」的能力。字幕：「规则管理：本地 / 在线、分组、批量迁移、按组扫描」。
+2. **10~26s｜规则调试器**：选中待调试规则，执行类型切到 `debug` 触发调试会话（`apiSyntaxFlowScan`）；展示调试器的 `pause` / `resume` / `stop` / `reset` 控件，逐条吐出的匹配节点卡片与日志。字幕：「调试器逐条吐出匹配节点，可暂停 / 继续 / 重置」。
+3. **26~42s｜收敛误报**：在编辑器里为规则增加 `#{exclude}` / `#{until}` 过滤，重新调试，展示匹配节点数量减少、误报项消失，强调「规则边界可见、可调」。字幕：「include / exclude / until 让规则边界可调，收敛误报」。
+4. **42~56s｜结果 ↔ 规则双向追溯**：切到「审计漏洞」，点开一条命中项，展示右侧 `RuleEditorBox` 通过 `result_id` 反查命中的 `.sf` 原文，并把数据流图、源码、SSA IR 三者并置；点击图节点跳源码。字幕：「结果可反查命中规则，数据流图、源码、IR 三者并置」。
+5. **56~64s｜扫描稳定性**：展示扫描任务状态（`StartScan` / `ResumeScan` / `GetScanStatus`）与「只看新增」的扫描对比，强调断点续扫与多次审计一致性；叠加内置规则规模信息（364 条 `.sf` / 127 CWE / 六语言）。字幕：「断点续扫 + 扫描对比 + 364 条内置规则，开箱即用」。
+6. **64~70s｜收束**：镜头回到规则编辑器与数据流图并置，淡出。字幕：「从编写到调试到验证，IRify 让 SyntaxFlow 规则可工程化」。
+
+**可直接复制的 SyntaxFlow 规则（路径穿越调试示例）**：
+
+```
+desc(
+    title: "Path Traversal via File API",
+    title_zh: "文件 API 路径穿越",
+    type: vuln,
+    level: high,
+    risk: "path-traversal",
+)
+
+// 捕获常见文件写入 / 读取 sink
+(new java.io.FileOutputStream(* as $sink))
+#{
+    exclude: `* & $sanitized`,
+}-> as $hit;
+
+alert $hit for {
+    message: "文件写入参数疑似来自外部输入，存在路径穿越风险。",
+    level: high,
+    risk: "path-traversal",
+};
+```
+
+**可直接复制的 NativeCall 与过滤片段（用于解说操作符）**：
+
+- Use-Def 链：`$sink #-> as $param`
+- 过滤收敛：`#{include: ...}` / `#{exclude: ...}` / `#{until: ...}`
+- NativeCall 取值：`<getCallee>` / `<getObject>` / `<getFunc>` / `<fullTypeName>` / `<slice(start=1)>`
+- 捕获与告警：`as $var` / `check $var` / `alert $var for { ... }`
+
+**解说要点**：
+
+- 规则调试器支持暂停 / 继续 / 停止 / 重置，逐条吐出匹配节点，让作者能看清规则边界。
+- `include` / `exclude` / `until` 让规则可调，误报可收敛，规则工程化有了抓手。
+- 审计结果可反查命中规则，数据流图、源码、SSA IR 三者并置，从结果到规则到证据全链可追溯。
+- 扫描任务可断点续扫、可对比新增，配合 364 条内置规则（127 CWE、六语言），开箱即用。
+
+**所需素材**：
+
+- 规则管理页录屏（分组 / 批量导入导出 / 按组扫描）。
+- 规则调试器录屏（`debug` 会话 / 匹配节点卡片 / 日志 / 控件）。
+- 审计漏洞页录屏（`result_id` 反查规则 + 数据流图 + 源码 + IR）。
+- 静态配图建议：规则调试器截图、结果 ↔ 规则双向追溯截图、内置规则规模统计图。
+
+**拍摄注意**：
+
+- 调试器镜头建议先展示「未过滤时多匹配」，再展示「加 exclude 后收敛」，用数量变化体现「可调」。
+- `result_id` 反查规则的镜头须让观众看到「点一条漏洞 → 右侧出现命中它的 `.sf` 原文」的因果链。
+- 扫描对比与断点续扫如在该版本尚未完全上线，应以字幕说明「部分能力即将上线」，避免误导。
+
+---
+
+> 【TODO 视频剪辑：IRify 三段各自成片，单支建议 60 ~ 80 秒；如需合集，可串联上述三段并在段间加入紫色品牌过场】
+> 【TODO 配图：SSA 两阶段架构图、SyntaxFlow 规则三段式结构图、语法流可视化截图、规则调试器截图、AI 代码审计四阶段流程图，共五张静态截图，用于官网首页与文档页】
