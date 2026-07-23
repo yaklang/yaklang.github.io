@@ -1,6 +1,6 @@
 > **本仓库是 Yak Project 官网（[yaklang.com](https://yaklang.com) / [yaklang.io](https://yaklang.io)）的"故事板总稿"。**
 > 它既是官网维护者的协作入口（构建方式见末尾「网站维护」），也汇集了 Yak Project 的定位、产品矩阵、Showcase、开源故事时间线、用户故事与权威背书。
-> 文中标有 `【TODO 配图：...】` / `【TODO 视频剪辑：...】` 的位置，是需要补齐的真实素材，欢迎向运营同学提 PR。
+> 文中标有 `【TODO 配图：...】` 的位置，是需要补齐的真实素材；产品录屏剧本统一维护在 [`playbooks/`](./playbooks/)。
 
 ---
 
@@ -268,542 +268,91 @@ IRify 提供从编写、调试到结果验证的完整工具链，确保规则�
 
 > 【TODO 配图：规则调试器界面（匹配节点卡片 + 日志）+ 审计结果数据流图（节点可跳源码与 IR）】
 
-#### 演示视频脚本
+#### 录屏剧本
 
-下列脚本用于 IRify 系列宣传视频的拍摄与剪辑，**三段各自独立，每段对应一支小视频**，可单独发布，也可串联成合集。每段包含：目标、建议时长、录屏前准备、分镜清单（含时间码、画面、操作、字幕与解说）、可直接复制的 SyntaxFlow 规则或工程样本、所需素材清单与拍摄注意。
-
-所有录屏一律使用本地脱敏工程或公开靶场源码（如 Vulhub 中可公开引用的项目），严禁出现客户真实代码、真实凭据与未授权的内部资产。
+IRify 的三支产品演示视频已移至 [playbooks/irify.md](./playbooks/irify.md)，包括 SSA 与 SyntaxFlow、AI 代码审计、规则调试与扫描稳定性。
 
 ---
 
-##### 片段 1：从源码到 SSA IR，再用 SyntaxFlow 一行表达漏洞规则
+## Memfit AI：面向安全工程师的桌面 AI Agent
 
-**目标**：让观众在 80 秒内看懂 IRify 的两阶段架构——「项目编译为 SSA IR 落库」与「SyntaxFlow 在 IR 上做查询」，建立「编译器级分析、规则贴近审计直觉」的认知。
+Memfit AI 是 Yak Project 面向网络安全领域开发的桌面 AI Agent，主要解决安全工程师在信息整理、流量分析、漏洞研究、代码审计、自动化执行和报告编写中的实际问题。产品优先适配网络安全工作，同时提供文件处理、知识检索、任务规划、工具调用和结果交付等通用 Agent 能力，也可用于研究、分析和日常自动化任务。
 
-**建议时长**：70 ~ 80 秒。
-
-**录屏前准备**：
-
-- 启动 IRify 发行版（Yakit 构建变量 `REACT_APP_PLATFORM=irify`），确认侧边栏为紫色主题的「代码审计」组，可见 项目管理、代码审计、代码扫描、规则管理、审计漏洞、Java 反编译。
-- 准备一个本地 Java 工程，含一处明显的 JDBC 直接拼接 SQL（示例如下），工程路径形如 `/tmp/irify-demo/sqli`。
-- 在「代码审计」页确认新建项目表单可见：项目路径、语言、编译速度（peephole 0~3）、执行类型（query / scan / debug）。
-- 预置下方 JDBC SQL 注入 SyntaxFlow 规则，便于粘贴演示。
-
-**分镜清单**：
-
-1. **0~10s｜定位 IRify**：从紫色主题侧边栏点开「代码审计」组，镜头依次扫过 项目管理 / 代码审计 / AI 代码审计 / 代码扫描 / 规则管理 / 审计漏洞，叠加字幕「IRify：以 SSA 为核心的代码安全分析系统」。字幕：「两阶段架构：编译为 SSA IR，再用 SyntaxFlow 查询」。
-2. **10~28s｜编译为 SSA IR**：进入「代码审计」页，点击新建项目，拖入 `/tmp/irify-demo/sqli`，语言选 Java，编译速度选「Medium」，执行类型选 `query`；点击编译，展示「SSA 项目编译」过程，并切到本地终端或日志窗口展示 `init ssa database: .../default-yakssa.db`，说明 IR 已落 SQLite 程序库。字幕：「源码编译为 SSA IR，落 SQLite 程序库，可一次编译多次复用」。
-3. **28~50s｜一条 SyntaxFlow 查漏洞**：在查询框粘贴下方 JDBC SQL 注入规则，运行；右侧审计结果出现命中，展示 `漏洞详情` 与 `规则编写` 子面板。镜头随后停在「语法流可视化」，展示从危险函数到漏洞点的路径图，点击节点跳转源码并对照显示 SSA IR。字幕：「SyntaxFlow 是漏洞描述语言（VDL），规则即漏洞模型」。
-4. **50~66s｜规则三段式结构**：在规则编辑器里展开规则的 `desc`（标题、类型、严重程度、风险类型）、规则内容、`check` / `alert` 输出，逐段高亮说明，强调「声明式、贴近审计直觉、无需 import 各种表」。字幕：「desc / 规则内容 / 输出，三段式结构，可读可测可版本管理」。
-5. **66~80s｜收束**：镜头回到两阶段架构示意图（编译 → IR 库 → 查询 → 结果），淡出。字幕：「以 SSA 为核，用 SyntaxFlow 描述漏洞，IRify 让代码审计贴近编译器」。
-
-**可直接复制的本地 Java 工程（JDBC 拼接 SQL 示例）**：
-
-```java
-// /tmp/irify-demo/sqli/src/main/java/demo/UserController.java
-package demo;
-
-import java.sql.*;
-
-public class UserController {
-    public ResultSet findByName(Connection conn, String name) throws SQLException {
-        // 漏洞点：外部输入 name 直接拼接到 SQL
-        String sql = "SELECT * FROM users WHERE name = '" + name + "'";
-        Statement stmt = conn.createStatement();
-        return stmt.executeQuery(sql);
-    }
-}
-```
-
-**可直接复制的 SyntaxFlow 规则（JDBC SQL 注入 sink，精简示例）**：
-
-```text
-desc(
-    title: "JDBC Raw Statement SQL Injection",
-    title_zh: "JDBC 直接拼接 SQL 注入",
-    type: vuln,
-    level: high,
-    risk: "sqli",
-)
-
-// 1. 捕获 Statement 且未经过 set* 过滤
-DriverManager.getConnection().createStatement() as $stmt;
-$stmt?{!.set*()} as $checkedStmt;
-
-// 2. 提取 executeXxx 的第一个参数作为 sink
-$checkedStmt.execute*(*<slice(start=1)> as $sink);
-check $sink;
-
-// 3. 命中外部输入即告警
-$sink #{
-    include: `* & $entry`,
-}-> as $high;
-alert $high for {
-    message: "发现 JDBC 代码中存在直接可控的 SQL 注入拼接。",
-    level: high,
-    risk: "sqli",
-};
-```
-
-**解说要点**：
-
-- IRify 先把项目编译为统一的 SSA 中间表示并落 SQLite 程序库，编译与分析解耦，大型项目可一次编译多次复用。
-- SyntaxFlow 是自研的漏洞描述语言（VDL），用贴近审计直觉的语法描述漏洞形态，无需像 CodeQL / Datalog 那样 import 各种表。
-- 规则三段式（desc / 内容 / 输出）让规则即漏洞模型，可读、可测、可版本管理。
-
-**所需素材**：
-
-- IRify 侧边栏与代码审计页录屏（新建项目 / 编译 / 查询）。
-- SSA 数据库日志截图（`init ssa database`）。
-- 语法流可视化录屏（节点跳源码 + IR 对照）。
-- 静态配图建议：SSA 两阶段架构图、规则三段式结构图、语法流可视化截图。
-
-**拍摄注意**：
-
-- 编译过程可能耗时，建议剪辑压缩，但必须保留「编译开始 → 编译完成 → IR 落库」的因果连续。
-- 语法流可视化镜头须展示「点击节点跳源码」的交互，这是区别于普通 grep 类工具的关键观感。
-- 如使用 Vulhub 等公开项目作为样本，请在字幕中注明出处，避免被误认为客户资产。
-
----
-
-##### 片段 2：AI Native 代码审计与 AI 辅助生成 SyntaxFlow 规则
-
-**目标**：让观众在 80 秒内看懂 IRify 的「AI 全程赋能」——既能让 AI 直接做整工程审计，也能让 AI 生成可执行的 SyntaxFlow 规则，且结果有稳定 SSA 产物兜底。
-
-**建议时长**：70 ~ 80 秒。
-
-**录屏前准备**：
-
-- 启动 IRify 发行版，准备一个已编译为 SSA IR 的本地工程（复用片段 1 的项目即可，确保 IR 已落库）。
-- 进入「AI 代码审计」页，确认可见聚焦模式选择（`code_security_audit` 整工程代码审计 / `ai_skill_audit` AI 技能驱动分析）与三步引导（选项目目录、选审计风格、开始审计）。
-- 在规则管理页预置一个待美化的粗糙 `.sf` 文件，用于演示 AI 美化（`sf_rule_completion`）与规则自动生成（`write_syntaxflow_rule`）。
-
-**分镜清单**：
-
-1. **0~10s｜AI 审计入口**：进入「AI 代码审计」页，展示 ReAct 智能体对话界面与聚焦模式选择，叠加字幕「IRify AI 代码审计：ReAct 智能体 + 四阶段流程」。字幕：「AI 不只解释结果，而是驱动整个审计循环」。
-2. **10~30s｜四阶段审计**：按引导选择已编译项目与 `code_security_audit` 风格，点击「开始审计」；镜头依次展示四个阶段的进度与产物——项目探索、按类别串行的双阶段审计、逐条验证与证据记录、报告生成与兜底。字幕：「探索 → 双阶段扫描 → 逐条验证 → 报告生成，可导出 MD / PDF」。
-3. **30~50s｜证据可追溯**：在审计结果中点开一条高风险项，展示其指向的代码位置与 SSA IR 证据，强调「AI 的结论背后有稳定的 SSA/SyntaxFlow 产物支撑」。字幕：「稳定的扫描产物为 AI 审计兜底，结果更准也更稳」。
-4. **50~68s｜AI 生成规则**：切到规则编写页，演示 AI 辅助生成——在聚焦模式 `write_syntaxflow_rule` 下输入自然语言需求（例如「检测 Golang 中 `db.QueryRow` 参数来自 `fmt.Sprintf` 的 SQL 注入」），展示检索内置规则样例知识包（`syntaxflow-aikb` + `syntaxflow-aikb-rag`）后迭代生成的 `.sf` 文件，并在 `check-syntaxflow-syntax` 自检通过后填入编辑器。字幕：「AI 在内置知识包上检索，迭代生成并通过语法自检的 `.sf` 规则」。
-5. **68~74s｜AI 美化规则**：点开规则编辑器右上角的 AI 美化入口（`sf_rule_completion`），展示一份粗糙 `.sf` 被按统一规范重新排版后的对照。字幕：「编辑器右上角 AI 美化，规则按统一规范重排」。
-6. **74~80s｜收束**：镜头回到 AI 审计对话与生成规则并置，淡出。字幕：「SSA/SyntaxFlow 负责可复现定位，AI 负责规划与语义理解」。
-
-**可直接复制的自然语言规则生成指令（用于 `write_syntaxflow_rule`）**：
-
-> 生成一条 Golang 的 SyntaxFlow 规则：检测 `database/sql` 中 `db.QueryRow` 的第一个参数，当它由 `fmt.Sprintf` 拼接且拼接中包含外部输入时，告警 SQL 注入（risk: sqli，level: high）。
-
-**期望 AI 生成的 SyntaxFlow 规则（用于对照与解说，可不完全逐字出镜）**：
-
-```text
-desc(
-    title: "Golang SQL Injection via fmt.Sprintf",
-    title_zh: "Golang fmt.Sprintf 拼接导致的 SQL 注入",
-    type: vuln,
-    level: high,
-    risk: "sqli",
-)
-
-<include('golang-database-sql')> as $db;
-<include('golang-user-input')> as $input;
-
-// QueryRow 第一个参数的定义链中包含 fmt.Sprintf 拼接
-$db.QueryRow(* #-> as $param);
-$param & $input as $mid;
-
-check $mid;
-alert $mid for {
-    message: "Golang 代码中 QueryRow 参数由 fmt.Sprintf 拼接外部输入，存在 SQL 注入。",
-    level: high,
-    risk: "sqli",
-};
-```
-
-**解说要点**：
-
-- IRify 的 AI 审计以 ReAct 智能体循环为骨架，四阶段流程可导出 MD / PDF 报告，并非只做结果解释。
-- AI 生成的 SyntaxFlow 规则基于内置知识包检索与编译自检，合法率与可用率显著提升。
-- 「稳定的 SSA/SyntaxFlow 产物 + 不稳定的纯 AI 审计」互为支撑，是 IRify 区别于裸大模型读代码的关键。
-
-**所需素材**：
-
-- AI 代码审计页录屏（四阶段流程 / 结果证据跳源码与 IR）。
-- 规则生成录屏（`write_syntaxflow_rule` 检索 → 生成 → 自检）。
-- AI 美化前后对照录屏（`sf_rule_completion`）。
-- 静态配图建议：四阶段流程图、AI 规则生成对照图、规则美化前后对照图。
-
-**拍摄注意**：
-
-- 四阶段流程建议用进度条或阶段卡剪辑串联，避免长时间等待 AI 推理。
-- AI 生成规则的镜头必须展示「检索 → 生成 → 语法自检」全过程，不得只展示最终 `.sf`。
-- 所有审计结论须落在本地脱敏工程上，禁止出现真实客户代码与未授权资产。
-
----
-
-##### 片段 3：规则调试器与扫描稳定性 —— 让规则可工程化
-
-**目标**：让观众在 70 秒内看懂 IRify 如何让 SyntaxFlow 规则「写得出来、调得明白、扫得稳定」，建立「规则可工程化」的信任。
-
-**建议时长**：60 ~ 70 秒。
-
-**录屏前准备**：
-
-- 启动 IRify 发行版，复用一个已编译为 SSA IR 的本地工程。
-- 进入「规则管理」页，确认可见：本地规则 / 在线规则、规则分组、批量导入导出、按组在代码扫描中选取规则集、规则调试入口（`ExecType = debug`）。
-- 准备一条待调试的规则（下方「路径穿越」示例），故意保留一处轻微误报边界，便于演示调试与 `include` / `exclude` 收敛。
-- 准备一个体现「规则即结果溯源」的已命中漏洞项，演示通过 `result_id` 反查 `.sf` 原文。
-
-**分镜清单**：
-
-1. **0~10s｜规则管理中心**：打开「规则管理」页，展示本地规则 / 在线规则与规则分组，镜头扫过批量导入导出按钮与「按组在代码扫描中选取规则集」的能力。字幕：「规则管理：本地 / 在线、分组、批量迁移、按组扫描」。
-2. **10~26s｜规则调试器**：选中待调试规则，执行类型切到 `debug` 触发调试会话（`apiSyntaxFlowScan`）；展示调试器的 `pause` / `resume` / `stop` / `reset` 控件，逐条吐出的匹配节点卡片与日志。字幕：「调试器逐条吐出匹配节点，可暂停 / 继续 / 重置」。
-3. **26~42s｜收敛误报**：在编辑器里为规则增加 `#{exclude}` / `#{until}` 过滤，重新调试，展示匹配节点数量减少、误报项消失，强调「规则边界可见、可调」。字幕：「include / exclude / until 让规则边界可调，收敛误报」。
-4. **42~56s｜结果 ↔ 规则双向追溯**：切到「审计漏洞」，点开一条命中项，展示右侧 `RuleEditorBox` 通过 `result_id` 反查命中的 `.sf` 原文，并把数据流图、源码、SSA IR 三者并置；点击图节点跳源码。字幕：「结果可反查命中规则，数据流图、源码、IR 三者并置」。
-5. **56~64s｜扫描稳定性**：展示扫描任务状态（`StartScan` / `ResumeScan` / `GetScanStatus`）与「只看新增」的扫描对比，强调断点续扫与多次审计一致性；叠加内置规则规模信息（364 条 `.sf` / 67 个不重复 CWE 编号 / 六语言）。字幕：「断点续扫 + 扫描对比 + 364 条内置规则，开箱即用」。
-6. **64~70s｜收束**：镜头回到规则编辑器与数据流图并置，淡出。字幕：「从编写到调试到验证，IRify 让 SyntaxFlow 规则可工程化」。
-
-**可直接复制的 SyntaxFlow 规则（路径穿越调试示例）**：
-
-```text
-desc(
-    title: "Path Traversal via File API",
-    title_zh: "文件 API 路径穿越",
-    type: vuln,
-    level: high,
-    risk: "path-traversal",
-)
-
-// 捕获常见文件写入 / 读取 sink
-(new java.io.FileOutputStream(* as $sink))
-#{
-    exclude: `* & $sanitized`,
-}-> as $hit;
-
-alert $hit for {
-    message: "文件写入参数疑似来自外部输入，存在路径穿越风险。",
-    level: high,
-    risk: "path-traversal",
-};
-```
-
-**可直接复制的 NativeCall 与过滤片段（用于解说操作符）**：
-
-- Use-Def 链：`$sink #-> as $param`
-- 过滤收敛：`#{include: ...}` / `#{exclude: ...}` / `#{until: ...}`
-- NativeCall 取值：`<getCallee>` / `<getObject>` / `<getFunc>` / `<fullTypeName>` / `<slice(start=1)>`
-- 捕获与告警：`as $var` / `check $var` / `alert $var for { ... }`
-
-**解说要点**：
-
-- 规则调试器支持暂停 / 继续 / 停止 / 重置，逐条吐出匹配节点，让作者能看清规则边界。
-- `include` / `exclude` / `until` 让规则可调，误报可收敛，规则工程化有了抓手。
-- 审计结果可反查命中规则，数据流图、源码、SSA IR 三者并置，从结果到规则到证据全链可追溯。
-- 扫描任务可断点续扫、可对比新增，配合 364 条内置规则（67 个不重复 CWE 编号、六语言），开箱即用。
-
-**所需素材**：
-
-- 规则管理页录屏（分组 / 批量导入导出 / 按组扫描）。
-- 规则调试器录屏（`debug` 会话 / 匹配节点卡片 / 日志 / 控件）。
-- 审计漏洞页录屏（`result_id` 反查规则 + 数据流图 + 源码 + IR）。
-- 静态配图建议：规则调试器截图、结果 ↔ 规则双向追溯截图、内置规则规模统计图。
-
-**拍摄注意**：
-
-- 调试器镜头建议先展示「未过滤时多匹配」，再展示「加 exclude 后收敛」，用数量变化体现「可调」。
-- `result_id` 反查规则的镜头须让观众看到「点一条漏洞 → 右侧出现命中它的 `.sf` 原文」的因果链。
-- 扫描对比与断点续扫如在该版本尚未完全上线，应以字幕说明「部分能力即将上线」，避免误导。
-
----
-
-> 【TODO 视频剪辑：IRify 三段各自成片，单支建议 60 ~ 80 秒；如需合集，可串联上述三段并在段间加入紫色品牌过场】
-> 【TODO 配图：SSA 两阶段架构图、SyntaxFlow 规则三段式结构图、语法流可视化截图、规则调试器截图、AI 代码审计四阶段流程图，共五张静态截图，用于官网首页与文档页】
-
----
-
-## Memfit AI：集成知识、记忆与工具的桌面 AI Agent
-
-> **面向专业工作的桌面 AI Agent，统一承载计划、执行、复核与知识沉淀。**
-
-Memfit AI 是基于 Yakit 桌面框架与 Yaklang AI Runtime 构建的独立 AI Agent 应用。统一工作台集成对话、文件、知识库、长期记忆、技能、工具与 MCP 服务。Agent 根据目标生成计划，执行任务与工具调用，在关键节点请求人工确认，并交付文件或结构化结果。
+Memfit AI 的核心代码位于 [Yaklang 仓库](https://github.com/yaklang/yaklang)，桌面端与 Yakit 基础设施同源开发，AI 引擎和工具系统复用 Yaklang 语言生态。Yaklang 已有的 HTTP、MITM、模糊测试、端口与指纹识别、编解码、漏洞验证和代码审计能力可以直接提供给 Agent。YakScript、Yakit 插件和 MCP 服务也可以按任务接入，用于处理通用 Agent 难以覆盖的安全场景。
 
 | 维度 | Memfit AI |
 | --- | --- |
-| 产品定位 | 面向研究、分析与自动化工作的可扩展桌面 AI Agent |
+| 产品定位 | 面向安全工程师全工作流、兼具通用任务能力的垂直桌面 AI Agent |
 | 工作方式 | 目标 → 计划 / 任务图 → 工具调用 → 人工复核 → 交付物 |
 | 上下文入口 | 本地文件、目录、图片、知识库、HTTP Flow、Web Fuzzer 请求等结构化资源 |
 | 可积累资产 | 知识库、长期记忆、AI 技能（Forge）、工具、Focus Mode |
-| 扩展能力 | Yaklang / YakScript 工具、MCP 服务、插件生态与安全分析能力 |
+| 核心代码 | [github.com/yaklang/yaklang](https://github.com/yaklang/yaklang) |
+| 扩展能力 | Yaklang / YakScript 工具、Yakit 插件、安全分析能力与 MCP 服务 |
 | 风险控制 | 文件操作权限、人工 / AI / 全自动审查模式、工具风险阈值、任务过程可追踪 |
 
 > 【TODO 配图：Memfit AI 首页全景图。画面同时保留左侧历史记录、中间 Agent 对话与计划、右侧知识 / 技能 / 工具资源栏】
 
 ### 核心特点
 
-#### 1. 目标规划与可审阅执行
+#### 1. 面向安全工程师的完整工作过程
 
-Memfit AI 将复杂目标转换为计划与任务图，并在 ReAct 循环中搜索工具、读取资源、并发处理子任务和生成 Artifact。计划、任务、工具参数与执行结果均记录在时间线中，支持全过程检查与人工介入。
+Memfit AI 可以处理 HTTP Flow、Web Fuzzer 请求、代码工程、漏洞证据和扫描结果等安全数据，也支持普通文件和目录。安全工程师可以在同一任务中完成资料读取、分析判断、工具验证和报告输出，减少在对话工具、终端、脚本和文档之间切换。产品同时保留通用 Agent 能力，安全工作之外的研究和自动化任务也可以使用。
 
-- **可执行计划**：支持计划生成、任务依赖、并发任务与执行中调整。
-- **工具调用可复核**：可选择人工确认、AI 风险判断或全自动执行，并设置风险阈值。
-- **权限与风险控制**：文件操作权限、运行时审查与工具禁用均可单独配置。
-- **交付物输出**：支持输出文件与 Artifact，并保留完整处理过程。
+#### 2. 复用 Yaklang 与 Yakit 生态
 
-#### 2. 知识、向量与实体关系联合索引
+Memfit AI 的 AI 引擎、工具系统和安全能力与 Yaklang 共用代码和运行时。Yaklang 内置库、YakScript 脚本和 Yakit 插件可以作为 Agent 工具使用，已有安全能力不需要重新开发。对于动态签名、鉴权重算、私有协议、特殊编码和流量改写等场景，可以通过 Yaklang 脚本补充处理逻辑。
 
-Memfit AI 的知识库由 Yaklang RAG 引擎驱动。资料导入后，可选择“知识 + 向量”快速索引或增强知识图谱索引。增强索引统一组织实体、关系、知识条目与向量。知识库支持知识、向量、实体关系图和潜在问题视图，并可作为结构化上下文挂载至 Agent。
+#### 3. 支持复杂任务执行和过程控制
 
-- 支持多文件导入、分段参数与索引进度管理。
-- 支持知识、向量、实体、关系图等不同视角。
-- 支持 HNSW 向量检索，并可配置本地 Embedding 服务完成知识索引。
-- 支持知识库导入 / 导出，形成可迁移的 `.rag` 资产。
+Memfit AI 会将目标拆分为计划和具体任务，按依赖关系调用工具、读取资源和生成结果。计划、工具参数、执行结果和交付物记录在统一时间线中，用户可以查看任务过程并在需要时介入。工具调用支持人工确认、AI 判断和自动执行，并可配置文件权限、风险阈值和禁用工具。
 
-> **部署说明**：知识索引可使用本地 Embedding 服务。模型推理位置与数据路径由用户配置的模型服务决定。
+#### 4. 工作资料和方法可以复用
 
-#### 3. 可检索、可管理的长期记忆
-
-Agent 从会话中提取可长期复用、具备独立上下文的信息，包括稳定偏好、项目约束和已验证的工作方法。Memfit AI 使用 C.O.R.E. P.A.C.T. 维度辅助记忆整理，并生成摘要、标签和潜在问题。临时日志与一次性状态保留在会话上下文中。
-
-- 新会话可以检索并复用相关记忆，减少重复交代背景。
-- 结合关键词与语义检索定位历史经验；Embedding 不可用时仍可保留非语义检索路径。
-- 记忆库提供查看、筛选、搜索与删除入口。
-- 记忆与知识库职责分离：前者保存“长期有效的经验和偏好”，后者承载“可查证的资料”。
-
-#### 4. 技能、工具、MCP 与 Yaklang 能力可以组合
-
-Memfit AI 将流程定义与动作执行分别沉淀为可复用资产。AI 技能（Forge）定义任务流程和输出约束，工具执行具体动作，Focus Mode 组织特定场景的 Agent 循环，MCP 将外部服务接入统一工具入口。用户可通过搜索和 `@` 引用按任务组合这些能力。
-
-底层 Yaklang Runtime 提供文件处理、HTTP 请求、数据转换、端口与指纹分析、JWT 分析、代码审计等工具与专业循环。Agent 可接收 HTTP Flow、Web Fuzzer 请求等结构化对象，并基于原始证据继续分析。
+知识库用于管理可查证的资料，长期记忆用于保存稳定偏好、项目约束和工作经验，AI 技能（Forge）用于定义任务流程和输出要求。工具、技能、知识和记忆可以按任务组合，并在后续会话中继续使用。模型服务与这些工作资产相互独立，更换模型不会影响已经保存的资料和流程。
 
 > **安全提示**：端口探测、HTTP 测试、漏洞验证等能力只应在明确授权范围内使用；正式演示统一使用本机服务、脱敏流量或专用测试环境。
 
-#### 5. 模型配置与工作资产解耦
+### 录屏剧本
 
-Memfit AI 的模型配置与知识、记忆、技能和工具资产彼此解耦。用户可以按任务配置不同的模型服务，工作流与沉淀资产仍留在统一工作台中。产品界面已为 OpenAI、DeepSeek、Gemini、Ollama、Moonshot、通义、OpenRouter、SiliconFlow 等服务提供配置入口，实际可用模型、能力与数据策略以对应服务为准。
-
-### 视频脚本 1：一句话生成可审阅的分析报告
-
-**片名**：`从目标到交付：Memfit AI 生成分析报告`
-
-**时长**：75 ~ 90 秒
-
-**演示重点**：目标规划、文件读取、工具调用、人工确认与文件交付，全过程可检查、可暂停、可审查。
-
-**演示前准备**：
-
-1. 新建空白目录 `memfit-order-demo/`。
-2. 放入 `brief.md`：
-
-```markdown
-# 异常订单分析要求
-
-- 识别金额、退款率或登录地区明显异常的订单。
-- 每条判断必须引用订单号和原始字段。
-- 结论按高、中、低风险分组。
-- 保留原始数据，仅生成 output/analysis.md。
-```
-
-3. 放入 `orders.csv`：
-
-```csv
-order_id,user,amount,refund_count,login_region
-O-1001,alice,199,0,Shanghai
-O-1002,bob,12999,4,Unknown
-O-1003,carol,299,0,Beijing
-O-1004,dave,8999,3,Unknown
-```
-
-4. 在设置中启用文件操作，并将审查方式设为“人工确认”。
-
-**分镜与旁白**：
-
-1. **0 ~ 8 秒｜加载工作上下文**
-   - 画面：Memfit AI 首页，拖入 `memfit-order-demo/` 目录；右侧文件资源立即出现。
-   - 旁白：“Memfit AI 将文件、任务约束与执行过程放在同一工作空间中。”
-
-2. **8 ~ 20 秒｜提交目标与执行约束**
-   - 输入：
-
-```text
-读取 @brief.md 和 @orders.csv，分析异常订单并生成 `output/analysis.md`。
-先给出计划；任何写文件操作都必须等我确认。保持原始文件不变。
-```
-
-   - 画面：Agent 生成计划卡片，包含“读取要求 → 校验数据 → 识别异常 → 生成报告”。
-   - 旁白：“Agent 首先生成可检查的执行计划，再按照任务依赖推进工作。”
-
-3. **20 ~ 38 秒｜任务和证据一起推进**
-   - 画面：通过计划确认；任务树开始执行。文件读取、数据检查和异常归类依次出现，镜头短暂展示工具参数与引用的订单行。
-   - 旁白：“时间线记录每项工具调用、资源输入和中间结果。”
-
-4. **38 ~ 53 秒｜写入前请求人工确认**
-   - 画面：创建 `output/analysis.md` 前弹出审查卡片；展开参数，确认目标路径为输出目录且原始 CSV 保持不变，再点击同意。
-   - 旁白：“文件写入前展示目标路径与操作参数，由用户完成确认。”
-
-5. **53 ~ 72 秒｜交付物落地**
-   - 画面：Artifact 卡片出现，打开 `analysis.md`；报告按风险分组，引用 `O-1002`、`O-1004` 及对应字段。
-   - 旁白：“执行结果保存为可继续评审和提交的文件。”
-
-6. **72 ~ 90 秒｜回看完整链路**
-   - 画面：快速回拉时间线，计划、任务、工具审查、Artifact 串成一条链；定格产品全景。
-   - 字幕：“目标 → 计划 → 工具 → 审查 → 交付物”
-
-**验收标准**：
-
-- 镜头中必须出现一次计划确认和一次写文件确认。
-- 最终文件路径必须是 `output/analysis.md`，原始文件修改时间保持不变。
-- 报告中的每项判断均需回指 CSV 原始字段。
-
-### 视频脚本 2：把散落资料变成可追溯的知识网络
-
-**片名**：`从资料到知识网络：构建可查询知识库`
-
-**时长**：75 ~ 90 秒
-
-**演示重点**：知识、向量、实体与关系联合索引；Agent 基于已挂载知识库生成可追溯回答。
-
-**演示前准备**：
-
-- `product-overview.md`：写明 Demo 产品的模块、版本与负责人。
-- `faq.txt`：写 5 条仅在演示资料中存在的售后规则。
-- `incidents.csv`：写 6 条虚构故障，包含日期、模块、原因和解决方案。
-- 在其中植入一个可验证的跨文件问题，例如：`Atlas Sync` 模块负责人是“林澈”，最近一次故障原因是“旧版签名缓存未失效”。
-
-**分镜与旁白**：
-
-1. **0 ~ 10 秒｜资料散落**
-   - 画面：Finder 中依次选中三份资料，切到 Memfit AI 知识库首页。
-   - 旁白：“知识索引将分散资料转换为可检索、可关联、可核对的信息资产。”
-
-2. **10 ~ 27 秒｜创建增强索引**
-   - 画面：新建知识库 `Atlas Demo`，拖入三个文件，选择增强知识图谱索引并开始构建；展示实时进度。
-   - 旁白：“除了知识与向量，增强模式还会整理实体和关系，为跨文档问题建立连接。”
-
-3. **27 ~ 45 秒｜从列表走到关系图**
-   - 画面：依次切换知识、向量、实体和关系图视图；点击 `Atlas Sync`，高亮负责人、故障和解决方案节点。
-   - 旁白：“实体关系图呈现跨文档信息连接，并支持回溯具体知识条目。”
-
-4. **45 ~ 65 秒｜把知识库交给 Agent**
-   - 输入：
-
-```text
-只根据 @Atlas Demo 回答：Atlas Sync 由谁负责？最近一次故障的根因和解决办法是什么？
-如果资料没有说明，请明确回答“资料不足”，不要用常识补全。
-```
-
-   - 画面：回答列出负责人、根因、解决方案，并展开引用的知识条目。
-   - 旁白：“知识库作为结构化资源进入 Agent，上下文有来源，信息不足也有明确边界。”
-
-5. **65 ~ 80 秒｜形成可迁移资产**
-   - 画面：打开潜在问题列表；随后导出 `Atlas-Demo.rag`。
-   - 旁白：“一次整理，可以继续用于问答、研究和后续 Agent 任务，也可以导出迁移。”
-
-6. **80 ~ 90 秒｜边界字幕**
-   - 字幕：“本地 Embedding 可用于索引；模型推理位置取决于模型服务配置。”
-
-**验收标准**：
-
-- 回答必须包含三项可核对事实，并能展开来源。
-- 关系图至少展示两种实体和两条有意义的关系。
-- 删除资料中某一事实后重新提问，Agent 应回答“资料不足”；可录作花絮或长版补充镜头。
-
-### 视频脚本 3：让稳定偏好跨会话生效
-
-**片名**：`跨会话复用稳定工作偏好`
-
-**时长**：60 ~ 75 秒
-
-**演示重点**：长期约束与偏好形成可管理记忆，在新会话中按相关性取回，并支持查看、搜索与删除。
-
-**演示前准备**：准备一段明确包含“长期偏好”和“一次性状态”的对话。长期偏好为：中文输出、风险使用表格、事实附来源、禁止改写原文件；一次性状态为：“今天 16:00 前先看完临时草稿”。
-
-**分镜与旁白**：
-
-1. **0 ~ 15 秒｜明确长期记忆范围**
-   - 输入：
-
-```text
-请长期记住我的交付偏好：默认使用中文；风险项用表格；事实结论附来源；
-未经确认不要修改原文件。今天 16:00 前先看完临时草稿，这条只对今天有效。
-```
-
-   - 画面：对话结束后出现记忆整理状态。
-   - 旁白：“记忆整理区分长期偏好与一次性安排，提取具备跨会话价值的信息。”
-
-2. **15 ~ 30 秒｜记忆可见、可查、可删**
-   - 画面：进入记忆库，展示摘要、标签和详情；长期偏好被整理，一次性时间要求没有混入长期记忆。
-   - 旁白：“系统提炼可复用信息，并在记忆库中提供完整的管理入口。”
-
-3. **30 ~ 52 秒｜新会话验证复用**
-   - 画面：新建空白会话，直接上传一份虚构风险清单并输入“整理成评审摘要”。
-   - 结果：中文输出、风险表格、来源列出现，并在写原文件前停下。
-   - 旁白：“新会话按相关性检索长期偏好，并以当前指令作为最高优先级。”
-
-4. **52 ~ 68 秒｜用户收回控制**
-   - 画面：用语义搜索找到“禁止修改原文件”，点击删除；新会话再次测试，画面显示该记忆已从检索上下文中移除。
-   - 旁白：“用户可查看、检索和删除长期记忆。”
-
-5. **68 ~ 75 秒｜对比定格**
-   - 字幕：“聊天记录保存会话过程；长期记忆保存可复用信息。”
-
-**验收标准**：
-
-- 长期偏好与一次性状态的筛选结果必须不同。
-- 第二个会话不能复制第一段提示词，应通过行为体现记忆复用。
-- 删除镜头后刷新记忆列表，确保条目确实消失。
-
-### 视频脚本 4：同一个 Agent，组合技能、工具与专业上下文
-
-**片名**：`组合技能、工具与结构化上下文`
-
-**时长**：80 ~ 95 秒
-
-**演示重点**：技能定义工作方法，工具执行具体动作，结构化资源保留专业上下文，Yaklang 与 MCP 提供扩展能力。
-
-**演示前准备**：
-
-1. 在本机启动一个只返回固定 JSON 的演示服务，例如 `http://127.0.0.1:8787/health`。
-2. 准备一条已脱敏的 HTTP Flow，响应内容与演示服务一致。
-3. 预先创建技能 `Evidence First Review`，要求：先列证据、再给结论；不做未授权外部请求；输出包含请求、响应、风险和建议四部分。
-4. 确认 HTTP 请求工具已启用；MCP 设置页准备一个离线演示服务，但主片不依赖第三方网络。
-
-**分镜与旁白**：
-
-1. **0 ~ 14 秒｜展示可复用能力资产**
-   - 画面：技能库打开 `Evidence First Review`，快速扫过流程与输出约束；切换工具库搜索 `HTTP`，展示可用工具。
-   - 旁白：“工作方法保存为可复用技能，工具负责执行具体动作。”
-
-2. **14 ~ 30 秒｜挂载结构化上下文**
-   - 画面：在 Agent 中 `@Evidence First Review`，再添加脱敏 HTTP Flow；资源卡片结构化展示请求与响应。
-   - 输入：
-
-```text
-使用 @Evidence First Review 分析这条 HTTP Flow；
-仅允许访问 http://127.0.0.1:8787/health 复核服务状态，其他网络请求一律禁止。
-```
-
-   - 旁白：“HTTP Flow 以结构化资源进入上下文，原始证据和任务约束都被保留下来。”
-
-3. **30 ~ 48 秒｜工具搜索与风险确认**
-   - 画面：Agent 搜索并选择 HTTP 工具；调用前显示 URL、方法和风险卡片。确认目标确为 `127.0.0.1` 后点击同意。
-   - 旁白：“Agent 自动检索工具，执行前展示访问目标与调用参数供用户确认。”
-
-4. **48 ~ 66 秒｜技能约束输出**
-   - 画面：最终结果严格分为请求、响应、风险、建议四部分；证据引用来自 HTTP Flow 与本机复核结果。
-   - 旁白：“技能决定工作方法，工具提供新证据，Agent 负责把二者组织成可复查结论。”
-
-5. **66 ~ 82 秒｜扩展能力蒙太奇**
-   - 画面：快速切换 MCP 服务配置、Focus Mode、插件中心以及端口 / 风险 / 指纹数据库，每个镜头 2 ~ 3 秒。
-   - 旁白：“需要更多能力时，可以继续连接 MCP、编写 YakScript 工具、安装插件，或进入 Yaklang 原生的研发与安全分析场景。”
-
-6. **82 ~ 95 秒｜安全收束**
-   - 画面：回到审查卡片与本机地址，定格“Authorized Demo Environment”。
-   - 字幕：“专业测试应在明确授权的范围内执行。”
-
-**验收标准**：
-
-- 主片断网后仍能完成，避免把第三方服务稳定性混进产品演示。
-- HTTP 工具只能访问 `127.0.0.1`，画面不得出现真实 Cookie、Token 或公网目标。
-- 最终输出需完整呈现技能预设的四段结构。
+Memfit AI 的四支产品演示视频已移至 [playbooks/memfit-ai.md](./playbooks/memfit-ai.md)，包括分析报告、知识网络、长期记忆、技能与工具组合。
 
 ---
 
-> 【TODO 视频剪辑：Memfit AI 四段各自成片；统一使用青绿色 Agent 时间线、蓝色知识网络、暖黄色记忆卡片作为视觉区分】
-> 【TODO 配图：Agent 执行全景、知识图谱、长期记忆库、技能 + 工具 + MCP 组合图、结构化 HTTP Flow 分析，共五张静态截图】
+## 开源项目
+
+Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组面向安全研发、AI Agent、代码分析和工程交付的开源项目。这些项目包括可安装的 Agent Skills、训练与检索素材、评测工具、独立命令行程序和跨平台基础设施。以下内容按官网长廊卡片所需的「项目介绍、核心价值、跳转地址」整理。
+
+### Agent Skills 与知识资产
+
+| 项目 | 项目介绍 | 核心价值 | 项目地址 |
+| --- | --- | --- | --- |
+| **Yak Skills** | 面向 AI Agent 的 Yaklang 编程、Yakit 使用与热加载知识库，每个专题配有可运行的 `.yak` 示例和验证工具。 | 让 Agent 能够编写、调试和验证 Yaklang 脚本，并处理 MITM、Web Fuzzer、全局热加载等实际场景。 | [GitHub](https://github.com/yaklang/yak-skills) · [在线浏览](https://skills.yaklang.io) |
+| **HackSkills** | 面向 AI Agent 的攻防技能库，覆盖 Web、API、认证授权、提权、逆向、密码学和 AI 安全等领域。 | 将安全知识整理为可安装、可检索、可组合的标准 Skill，便于 Agent 在授权测试和安全研究中按需加载。 | [GitHub](https://github.com/yaklang/hack-skills) · [在线浏览](https://skills.hackbenchmark.com) |
+| **IRify SAST Skill** | 将 IRify 的 SSA 编译器和 SyntaxFlow 查询能力封装为 AI Agent Skill，支持 Java、PHP、JavaScript、Go、Python、C 和 Yak。 | 让 Codex、Claude Code、Cursor 等 Agent 能够编译源码、追踪数据流并执行静态安全分析。 | [GitHub](https://github.com/yaklang/irify-sast-skill) |
+| **Control Theory Skill** | 将控制论、系统论和信息论中的反馈、稳定性、黑箱实验等概念整理为 Agent 设计方法。 | 为任务规划、工具使用、错误修正和反馈回路设计提供可复用的分析框架。 | [GitHub](https://github.com/yaklang/control-theory-skill) |
+| **Yaklang AI Training Materials** | Yaklang 的 AI 知识与示例素材库，包含标准库用法、实践案例、文章、脚本和评测材料。 | 为 Agent 学习 Yaklang、生成安全脚本和检索语言用法提供结构化参考。 | [GitHub](https://github.com/yaklang/yaklang-ai-training-materials) |
+| **SyntaxFlow AI Training Materials** | 面向 SyntaxFlow 的语法、运算符、NativeCall、规则示例、错误处理和 RAG 构建素材。 | 支持 AI 检索 SyntaxFlow 知识、生成规则并完成语法自检与迭代修正。 | [GitHub](https://github.com/yaklang/syntaxflow-ai-training-materials) |
+
+### 评测、代码分析与安全研究
+
+| 项目 | 项目介绍 | 核心价值 | 项目地址 |
+| --- | --- | --- | --- |
+| **HackBenchmark** | 基于 Vulinbox 与 Yaklang AI Agent 体系设计的网络安全 Agent 可复现评测协议和展示站。当前仓库处于评测协议设计阶段，站点数据用于界面与方法审阅。 | 统一模型、漏洞、专注模式和评测指标，为后续真实安全能力评测提供可复现框架。 | [GitHub](https://github.com/yaklang/hackbenchmark) · [项目站点](https://hackbenchmark.com) |
+| **IRify Benchmark** | 面向代码扫描引擎的轻量评测框架，维护带 Source、Sanitizer、Sink 数据流标注的基准项目。 | 以完整数据流而非单个命中行评估扫描引擎，可用于回归测试、CI 和引擎对比。 | [GitHub](https://github.com/yaklang/irify-benchmark) |
+| **SyntaxFlow** | SyntaxFlow 从入门到实践的教程与示例项目，涵盖 SSA 查询、Use-Def 链、跨过程分析和数据流可视化。 | 帮助安全工程师学习用声明式规则描述漏洞，并理解 IRify 的静态分析方法。 | [GitHub](https://github.com/yaklang/syntaxflow) |
+| **Vulinbox** | 集成在 Yaklang 中的 Web 漏洞靶场，提供 SQL 注入、XSS、SSRF、文件上传、逻辑漏洞和组件漏洞等可复现实例。 | 为 Yakit 实操、检测插件验证、AI Agent 安全评测和教学提供本地授权目标。 | [源码](https://github.com/yaklang/yaklang/tree/main/common/vulinbox) · [实战手册](https://yaklang.com/Yaklab/vulinbox/) |
+
+### 独立工具与工程基础设施
+
+| 项目 | 项目介绍 | 核心价值 | 项目地址 |
+| --- | --- | --- | --- |
+| **JavaJive** | 从 Yaklang 中抽取的纯 Go Java 工具箱，支持 `.class`、`.jar`、`.war` 反编译，类结构解析及 Java 序列化与 JSON 互转。 | 无需 JDK、cgo 或原生运行库，可作为单二进制工具使用，也可嵌入其他 Go 项目。 | [GitHub](https://github.com/yaklang/javajive) · [项目站点](https://yaklang.io/javajive/) |
+| **go-llvm** | 面向 LLVM 18 C API 的 Go 封装，兼容静态链接和动态链接，并提供 JIT 相关接口。 | 为 Yaklang 生态提供可移植、自包含的 LLVM 集成方式，降低运行环境对系统 LLVM 的依赖。 | [GitHub](https://github.com/yaklang/go-llvm) |
+| **Memfit CLI** | 连接 Yaklang AI HTTP Gateway 的终端 Agent 客户端，支持会话创建、SSE 事件流、模型设置、审查策略和任务取消。 | 将 Memfit AI 的交互式任务执行能力带到终端，便于自动化流程和远程 Agent 调试。 | [GitHub](https://github.com/yaklang/yaklang-memfit-cli) |
+| **Awesome Yak Scripts** | Yak 脚本集合，涵盖安全工具、依赖同步、SCA 规则生成、日志分析和插件维护。 | 提供可以直接阅读、运行和改造的 Yaklang 自动化示例。 | [GitHub](https://github.com/yaklang/awesome-yak-scripts) |
+| **Yaklang VS Code Extension** | Yaklang 与 SyntaxFlow 的 VS Code 扩展，提供语法高亮、补全、参数提示、诊断、调试和快速运行。 | 将 Yaklang 的 LSP、DSP 和引擎管理能力带入通用代码编辑器。 | [GitHub](https://github.com/yaklang/yaklang-support) · [扩展市场](https://marketplace.visualstudio.com/items?itemName=v1ll4n.yak) |
+| **Yakit Chrome Extension** | 用于浏览器代理切换和 Yakit 联动的 Chrome 扩展。 | 简化浏览器、系统代理与 Yakit 之间的切换，为 Web 安全测试提供浏览器侧入口。 | [GitHub](https://github.com/yaklang/yaklang-chrome-extension) |
+| **page2img** | 将 PDF、XPS、EPUB 等文档逐页转换为 PNG 或 JPEG 的静态命令行工具。 | 单二进制、跨平台，适合文档预览、OCR 前处理和 Agent 文件分析流程。 | [GitHub](https://github.com/yaklang/page2img) |
+| **pcap** | 面向 Go packet capture 项目的跨平台 libpcap 构建与封装。 | 通过锁定并携带 libpcap 降低开发和分发时的系统依赖，支撑 Yaklang 网络数据包能力。 | [GitHub](https://github.com/yaklang/pcap) |
+
+> 官网展示建议：每张卡片使用项目名称、项目介绍和「查看项目」链接；核心价值可作为悬停层或滚动展开内容。Skills、评测研究、独立工具三组可以使用不同标签色，便于在横向滚动中识别。
