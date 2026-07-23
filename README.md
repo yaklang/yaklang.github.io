@@ -113,7 +113,7 @@ Yakit 是 Yak Project 面向安全从业者的核心桌面平台。它的核心�
 
 **一、流畅的中间人劫持操作，数据包重放与模糊测试操作流**
 
-Yakit 的 MITM 模块是交互式渗透的核心，提供手动劫持改包与自动放行被动观察两种模式，配合历史流量回溯与可视化 Web Fuzzer，构成一条完整的操作流：劫持到数据包后，可在同一界面完成查看、编辑、重放、批量处理与模糊测试，操作流对标 Repeater / Intruder 的经典心智，无需在多个工具间切换上下文。模糊测试侧，Yakit 通过 Fuzztag 语法描述注入点，一行标注即可批量生成变体并观测服务端行为，使模糊测试可视化、可组合。
+Yakit 的 MITM 模块是交互式渗透的核心，提供手动劫持改包与自动放行被动观察两种模式，配合历史流量回溯与可视化 Web Fuzzer，构成一条完整的操作流：劫持到数据包后，可在同一界面完成查看、编辑、重放、批量处理与模糊测试，操作流程流畅高效，无需在多个工具间切换上下文，其特殊的模糊测试系统可以让 Yakit 通过 Fuzztag 语法描述注入点，一行标注即可批量生成变体并观测服务端行为，使模糊测试可视化、可组合。
 
 **二、强大的插件功能与社区支持**
 
@@ -127,290 +127,141 @@ Yakit 内置 CDSL-Yak 语言引擎与运行时，并采用热加载技术：用�
 
 Yakit 与底层 Yaklang 引擎对核心库进行了完全重构，针对网络安全实战中的关键场景做了专项优化，尤其在内置国密（SM2 / SM3 / SM4 等）算法支持、编解码链与协议适配等方面进行了强化，满足合规与国产化环境下的加密通信测试需求。同时，Yakit 兼容性极强，跨 macOS / Windows / Linux 一致可用，并兼容统信 UOS、麒麟等国产操作系统，适配单兵作业、团队协作与企业内网等多种部署形态。
 
-#### 演示视频脚本
+### Yaklang：为网络安全而生的领域编程语言
 
-下列脚本用于指导 Yakit 系列宣传视频的拍摄与剪辑。**片段 1 ~ 片段 4 各自独立，每段对应一支小视频**，可单独发布，也可串联成合集。每段包含：目标、建议时长、录屏前准备、分镜清单（含画面、操作、字幕与解说）、可直接复制的 Yaklang 代码或数据包样本、所需素材清单与拍摄注意事项。
+Yaklang 是 Yak Project 的内核与起点——一门专为网络安全量身定制的领域编程语言。在 Yak 生态中，Yakit 是图形化平台，IRify 是代码分析系统，而驱动它们的核心引擎正是 Yaklang：它以一个单二进制运行时，把端口扫描、服务扫描、MITM 劫持、HTTP 模糊测试、编解码、反连、协议解析等安全能力封装为可被脚本直接调用的内置函数，让安全从业者用最少的代码完成过去需要多个工具与多个项目才能拼出的工作。
 
-所有录屏一律在本地靶场进行，推荐使用 YakLab（Vulinbox）或自建测试环境；严禁出现真实目标域名、真实参数、真实凭据与客户数据。
+| 项目 | 内容 |
+| --- | --- |
+| 定位 | 网络安全领域专用编程语言（CDSL），一门图灵完备、强类型 + 动态类型、兼具编译字节码与解释执行的语言 |
+| 仓库 | [github.com/yaklang/yaklang](https://github.com/yaklang/yaklang) |
+| 许可证 | AGPL-3.0 |
+| 运行形式 | 单二进制，`yak script.yak` 执行脚本，`yak -c 'expr'` 执行表达式，跨 macOS / Linux / Windows 交叉编译 |
+| 文档入口 | [/docs/intro](https://yaklang.com/docs/intro) |
+| 截图 | 【TODO 配图：Yaklang 代码编辑 + 运行结果 + 内置库结构（三连图）】 |
 
----
+#### 它解决什么问题
 
-##### 片段 1：智能化编程 —— 自动补全与 AI 重写
+安全研发长期存在一个割裂：**安全平台的研发**（用 Golang / Java 建工程）与**安全能力的研发**（写 PoC、写扫描器、写漏洞检测逻辑）被割裂在不同的语言与项目中。一个安全工程师要扫描端口，可能要装 nmap 或调用某个 Python 库；要做模糊测试，可能要自己拼 HTTP 变体；要写 PoC，可能每次都要重写一遍 HTTP 请求与编解码逻辑。每个人实现的方案与指纹库标准并不相同，结果是大量重复造轮子，安全能力散落在各处，无法复用。
 
-**目标**：让观众在 60 秒内建立「在 Yakit 里写 Yaklang 是 IDE 级体验，且有 AI 协助」的认知。
+Yaklang 的目标就是消除这种割裂，承担「**安全能力融合**」的职责。官方定位明确：「我们目标在提供『一站式』的安全能力基座」——你的 PoC、你的扫描器、你的扫描模块、漏洞扫描算法，都可以用它来解决。作为一门安全领域的 DSL，Yaklang 内置了大量安全领域的函数，让安全能力不再依赖外部工具的拼装，而是成为语言本身的一部分。
 
-**建议时长**：45 ~ 60 秒。
+#### 语言特性
 
-**录屏前准备**：
+**一、脚本即能力，开箱即用**
 
-- 打开 Yakit，确认右上角能看到 **Yak Runner** 入口。
-- 准备一个本地 HTTP 测试端点，例如 `http://127.0.0.1:8787/ping`，返回 `{"ok":true}`。
-- 在 Yak Runner 中新建文件 `demo.yak`，光标停在文件首行。
-- 准备一份用于 AI 重写的对照说明（见下方「AI 重写指令」）。
+Yaklang 脚本无需 `main()` 函数、无需编译步骤，写完即可运行。单二进制分发，开箱即用，可在 macOS / Linux / Windows 间交叉编译，SYN 扫描等底层能力仅需系统安装 libpcap（Windows 为 npcap）即可使用。语言支持 `var` / `=` / `:=` 变量声明、f-string 插值、`defer` / `recover()` 异常处理、`go func()` 并发与 WaitGroup 同步等现代脚本特性，语法风格对有 Go / Python 经验的开发者十分友好。
 
-**分镜清单**：
+**二、内置海量安全领域函数库**
 
-1. **0~8s｜进入 Yak Runner**：从主界面右上角点击 **Yak Runner**，镜头随光标推进，展示「新建文件 / 打开文件 / 打开文件夹」欢迎入口，随后进入编辑器布局——左侧资源管理器、中间代码编辑区（右上角 **执行** 按钮）、底部 输出 / 语法检查 / 终端 三标签面板。字幕：「Yak Runner：Yakit 内置的 Yak 集成开发环境」。
-2. **8~22s｜智能补全**：在 `demo.yak` 中输入 `os.`，弹出模块函数提示，选中 `os.Exec`；再输入 `poc.`，弹出 `poc.HTTP` / `poc.Get` / `poc.Post` 等 HTTP 处理函数。在 `cli.String` 上悬停，展示浮层文档（参数、返回值、示例）。字幕：「标准库补全 · 悬停文档 · 跳转定义」。
-3. **22~35s｜跳转定义与标准库检索**：按住 `Cmd / Ctrl + 左键` 点击 `poc.HTTP`，跳到定义并在「帮助信息」面板展示结果；随后在右侧标准库文档侧栏搜索 `poc.ReplaceHTTPPacketHeader`，确认可查到函数说明。字幕：「跨文件跳转 · 标准库文档内置检索」。
-4. **35~50s｜执行与输出**：点击右上角 **执行**，底部输出面板打印运行结果；切到 语法检查 标签，展示无报错；切到 终端 标签，展示工作目录已与项目根目录同步。字幕：「一键执行 · 语法检查 · 集成终端」。
-5. **50~60s｜AI 重写（收束）**：切到 AI 重写入口，粘贴下方「AI 重写指令」，触发代码生成；生成的 Yaklang 代码自动填入编辑器，关键改动行高亮，鼠标在生成代码上短暂停留以体现「可审阅」。字幕：「自然语言描述意图，AI 生成可审阅的 Yaklang 代码」。
+这是 Yaklang 作为 DSL 的核心价值。语言内置了覆盖渗透全流程的标准库，安全工程师不必四处寻找与维护第三方轮子：
 
-**可直接复制的 Yaklang 代码（`demo.yak`）**：
+- **扫描类**：`synscan`（SYN 端口扫描）、`servicescan`（服务扫描）、`finscan`、`subdomain`（子域名）、`spacengine`（空间测绘引擎）
+- **流量类**：`mitm`（中间人劫持）、`http` / `httpool`（HTTP 请求与批量）、`fuzz`（模糊测试）、`poc`（PoC 发包）
+- **编解码类**：`codec`（Base64 / Hex / URL / SM2 / SM3 / SM4 等编解码与密码学）
+- **目标识别类**：`fp`（指纹识别）、`crawler` / `crawlerx`（爬虫）、`brute`（爆破）
+- **基础设施类**：`dnslog` / `dns`、`csrf`、`pcapx`（流量包解析）、`ja3`、`nuclei`（兼容 nuclei 模板扫描）
 
-```yak
-// 向本地测试端点发送 GET 请求并打印状态码与响应体
-rsp, err = poc.Get("http://127.0.0.1:8787/ping")
-if err != nil {
-    log.Errorf("request failed: %v", err)
-    return
-}
-log.Infof("status: %v", poc.GetStatusCodeFromResponse(rsp))
-log.Infof("body: %v", poc.GetHTTPPacketBody(rsp))
-```
+一个不到 30 行的脚本就能完成端口扫描与服务识别；几行代码就能发起 HTTP 请求并解析响应。
 
-**AI 重写指令（自然语言输入）**：
+**三、动态类型与强类型并存，编译与解释双模执行**
 
-> 把请求体中的 token 字段替换为环境变量 `YAK_TOKEN` 的值，再通过 `poc.Post` 发送请求。
+Yaklang 是动态类型语言，变量类型由赋值内容自动推断，开发者不必显式声明；同时在静态分析层面具备强类型与 SSA 中间表示支撑，使程序分析「天生友好」。脚本既可编译为字节码经 YakVM 栈式执行，也可解释运行，兼顾运行效率与开发灵活性。
 
-**期望 AI 生成代码（用于对照与解说，不必逐字出镜）**：
+**四、热加载与嵌入式执行**
 
-```yak
-token = os.Getenv("YAK_TOKEN")
-rsp, err = poc.Post("http://127.0.0.1:8787/auth", poc.json({"token": token}))
-if err == nil {
-    log.Infof("status: %v", poc.GetStatusCodeFromResponse(rsp))
-}
-```
+Yaklang 支持热加载与嵌入式执行：脚本可以在渗透的任意环节被动态加载执行（如 Yakit MITM 热加载改包），也可以作为安全能力底座被其他安全产品嵌入调用。这使得 Yaklang 既是独立编程语言，也是可被编排的安全能力运行时。
 
-**解说要点**：
+**五、运行效率极高**
 
-- Yakit 内置 Yak Runner，提供与成熟 IDE 一致的补全、悬停文档与跳转定义。
-- 标准库 `poc` / `codec` / `str` 等覆盖 HTTP 处理、编解码与字符串操作，安全场景无需反复造轮子。
-- AI 重写以自然语言生成 Yaklang 代码，人工审阅后再执行，安全动作保持可解释、可追溯。
+得益于编译字节码与栈式虚拟机执行，Yaklang 的运行效率对标编译型语言。官方给出的性能定位为：
 
-**所需素材**：
+> `Golang ≈ Yaklang ≥ JVM Based Lang >> Python`
 
-- Yak Runner 界面录屏（补全 / 悬停 / 跳转 / 执行 / 终端）。
-- 标准库文档侧栏检索截图（`poc.ReplaceHTTPPacketHeader`）。
-- AI 重写入口与生成代码高亮录屏。
-- 静态配图建议：补全浮层截图、AI 重写前后对照图各一张。
+#### 架构：编译器五件套
 
-**拍摄注意**：
+Yaklang 不是一个简单的脚本解释器，而是一套完整的编译器基础设施，自底向上由五个组件构成：
 
-- 输入补全程镜头建议 1.2 ~ 1.5 倍速回放，避免观众等待。
-- AI 重写镜头须完整保留「输入指令 → 生成 → 审阅」三步，不得只展示结果。
-- 所有端点使用 `127.0.0.1`，避免任何真实域名入镜。
+| 编译器组件 | 角色 |
+| --- | --- |
+| **CDSL Yaklang** | 网络安全领域限定语言本体（语法 / 类型系统 / 运行时） |
+| **YakVM** | 网络安全领域限定语言的虚拟机（栈式字节码执行） |
+| **YAK SSA** | 静态分析友好的静态单赋值中间表示 |
+| **SyntaxFlow** | 语法模式匹配 DSL —— 漏洞特征代码描述语言 |
+| **LSP / DSP Server** | 语言服务器协议 + 调试协议服务器（IDE 级开发体验） |
 
----
+其中 YAK SSA 与 SyntaxFlow 是代码安全分析（IRify）的技术底座，LSP / DSP Server 让 Yaklang 在 Yakit 内置 Yak Runner 与 VSCode 插件中获得补全、跳转定义、参数提示与语法检查等 IDE 级开发体验。这套基础设施也让 Yaklang 的定位不止于「写脚本」，而是「成为安全领域的 Matlab，让黑客编程有一门属于自己的领域母语」。
 
-##### 片段 2：数据包劫持、重放与模糊测试
+#### 代码示例
 
-**目标**：让观众在 90 秒内看懂「MITM 交互式劫持 → Web Fuzzer 重放 → Fuzztag 模糊测试 → 脚本视角校验」的完整链路，建立「对标 BurpSuite 且更顺手」的认知。
-
-**建议时长**：75 ~ 90 秒。
-
-**录屏前准备**：
-
-- Yakit MITM 默认代理 `http://127.0.0.1:8083`，准备「免配置浏览器」或本地浏览器代理。
-- 准备一个本地搜索靶场，例如 `http://127.0.0.1:8787/search?q=test`，参数 `q` 会原样回显。
-- 在 MITM 操作台确认可见：左侧插件区域、右上劫持模式控件（手动劫持 / 自动放行）、过滤器、下游代理、证书、免配置浏览器、右侧流量列表与请求/响应详情。
-- 打开 Web Fuzzer 工作台，确认可见：顶部工作区标签、左侧 配置 / 规则 / 序列 三标签、中间请求构造面板与请求辅助工具栏（美化 / 热加载）、右侧响应视图与响应分析工具栏。
-
-**分镜清单**：
-
-1. **0~10s｜启动劫持**：左侧工具栏点 **MITM** → 顶部 **MITM 交互式劫持** → 中央 **启动劫持**；右上切换为 **自动放行**，便于被动观察。字幕：「交互式劫持：实时接管浏览器流量」。
-2. **10~25s｜产生与查看流量**：在免配置浏览器访问 `http://127.0.0.1:8787/search?q=test`，右侧流量列表出现该请求；点击该条记录，右侧详情展示请求与响应；随后切换为 **手动劫持**，再次刷新页面，展示「劫持请求→」标记，编辑请求行（例如 `GET /search?q=test` 改为 `q=Yakit`），点击 **放行**。字幕：「手动劫持可改包，自动放行可被动观察」。
-3. **25~45s｜送入 Web Fuzzer**：右键流量 → 发送到 Web Fuzzer（或粘贴下方样本包）；在请求构造面板中，把 `q=test` 改写为 `q={{int(1-20)}}`，鼠标停留在 `{{` 上展示 Fuzztag 自动补全；点击 **发送请求**，右侧响应视图切换为批量结果，按响应长度或状态码排序。字幕：「Fuzztag 一行描述注入点，Web Fuzzer 批量生成变体」。
-4. **45~65s｜Fuzztag 进阶**：把请求改为 `q={{x(pass_top25)}}`（弱口令 Top 25）或 `id={{int::number(1-3)}}{{int::number(4-6)}}`（同步拼接示例，生成 14、25、36），展示结果数量与对应响应；如有需要，右键选区 → 智能菜单把选中值包成 `{{md5(...)}}`，演示处理器标签。字幕：「生成器与处理器组合，覆盖弱口令、编码、同步序列等场景」。
-5. **65~80s｜脚本视角校验**：在请求辅助工具栏点 **热加载**，粘贴下方 Yaklang 片段，对每条响应做自定义校验并在输出面板标红异常项（例如命中关键字 `flag` 或状态码异常）。字幕：「脚本视角随时介入，对响应做自定义判定」。
-6. **80~90s｜收束**：镜头回到 Web Fuzzer 顶部全局操作栏，展示「生成 Nuclei Yaml PoC」一键能力，随后淡出。字幕：「从劫持到模糊测试到 PoC 沉淀，一条链路完成」。
-
-**可直接复制的数据包样本（粘贴进 Web Fuzzer）**：
-
-```http
-POST /search HTTP/1.1
-Host: 127.0.0.1:8787
-Content-Type: application/x-www-form-urlencoded
-Content-Length: auto
-
-q={{int(1-20)}}
-```
-
-**可直接复制的 Fuzztag 片段**：
-
-- 整数范围：`q={{int(1-100)}}`
-- 弱口令字典：`password={{x(pass_top25)}}`
-- 同步序列：`a={{int::number(1-3)}}&b={{int::number(4-6)}}`
-- 处理器组合：`token={{md5({{int(1-5)}})}}`
-- 编码链：`data={{base64enc({{urlenc(a=b)}})}}`
-
-**可直接复制的热加载 Yaklang 片段（响应校验）**：
+**一行扫描一个 C 段**：
 
 ```yak
-// Web Fuzzer 的 mirrorHTTPFlow：对每条响应做判定并返回提取参数
-mirrorHTTPFlow = func(req, rsp, params) {
-    body = poc.GetHTTPPacketBody(rsp)
-    if str.Contains(body, "flag") || str.Contains(body, "error") {
-        yakit.Warn("suspicious response: status=%v", poc.GetStatusCodeFromResponse(rsp))
-    }
-    return params
+// 极简获取参数 --target 192.168.1.1/24 --port 22,80,443
+scanTarget, scanPorts = cli.String("target"), cli.String("port")
+results, err = servicescan.Scan(scanTarget, scanPorts)
+die(err)
+for result = range results {
+    println(result.String())
 }
 ```
 
-**解说要点**：
-
-- MITM 交互式劫持提供手动改包与自动放行两种模式，对标 Repeater / Intruder 的经典工作流。
-- Web Fuzzer + Fuzztag 让模糊测试可视化、可组合，单条请求即可批量生成变体。
-- 任意环节可切到 Yaklang 脚本视角做深度处理与判定，安全测试视角与数据包视角自由切换。
-
-**所需素材**：
-
-- MITM 操作台录屏（启动劫持 / 手动改包 / 自动放行 / 流量详情）。
-- Web Fuzzer 录屏（Fuzztag 补全 / 批量结果 / 排序 / 一键生成 PoC）。
-- 热加载脚本校验录屏。
-- 静态配图建议：MITM 劫持界面、Web Fuzzer 与 Fuzztag、响应异常高亮各一张。
-
-**拍摄注意**：
-
-- 全程使用本地靶场；如使用 Vulinbox，请确认其默认端口与上方样本一致后再开拍。
-- 弱口令、注入类操作不得指向任何真实业务域名。
-- Fuzztag 录屏建议先慢后快：先展示 `{{` 自动补全，再切到批量结果，避免观众跟不上字典生成逻辑。
-
----
-
-##### 片段 3：插件化与可定制化
-
-**目标**：让观众在 80 秒内看懂两条路径——「插件商店一键安装」与「本地 Yak 热加载脚本实时改包」，建立「平台可被脚本与社区持续扩展」的认知。
-
-**建议时长**：70 ~ 80 秒。
-
-**录屏前准备**：
-
-- 顶部状态栏确认可见 **插件** 入口；点击进入 **插件仓库**，确认左侧导航有 插件商店 / 我的 / 本地 / 配置 四项。
-- 在插件商店中预置一个目标插件（推荐「修改 HTTP 请求 Header」这类通用插件），并确认其卡片可见类型标签（如「Yak-MITM 模块」）、官方徽标、作者、点赞与下载数。
-- 在 MITM 左侧热加载编辑器中预置下方「签名修复」脚本，但先不要点击「热加载」。
-
-**分镜清单**：
-
-1. **0~12s｜进入插件商店**：顶部状态栏 **插件 → 插件仓库**，镜头展示左侧 插件商店 / 我的 / 本地 / 配置 导航与多维度筛选（插件类型 / 插件组 / Tag）。字幕：「插件仓库：社区能力的一站式入口」。
-2. **12~28s｜查找与安装**：在搜索框输入目标插件名，定位卡片，展示类型标签与下载量；点击 **下载** 完成安装，右侧操作栏随之激活，切到 **执行** 标签，展示参数配置（如 `root_url` 支持文本或 Excel 导入）。字幕：「一键下载，参数即界面，立即可执行」。
-3. **28~40s｜查看源码**：点击插件 **线上** 视图，展示以 `##` 元数据注释驱动的 Yak 源码（如 `##type:poc`、`##params:root_url`），说明插件即代码、代码即界面。字幕：「插件即 Yak 代码，元数据自动生成参数表单」。
-4. **40~58s｜热加载改包**：切到 MITM 交互式劫持，左侧热加载编辑器中粘贴下方 `hijackHTTPRequest` 签名修复脚本，点击 **热加载**，加载到内存无需重启；随后让一条带 `X-Sign` 的请求经过代理，右侧流量详情可见头部已被重算替换。字幕：「热加载 Yak 脚本，无需重启即可实时改包」。
-5. **58~72s｜响应链处理**：在热加载编辑器追加 `hijackHTTPResponse`，对响应体做字段替换或解密预览，再次热加载并触发流量，展示响应详情中的变化。字幕：「请求与响应均可被脚本介入，覆盖加解密、签名、脱敏等场景」。
-6. **72~80s｜收束**：镜头回到插件商店「一键下载」按钮，再切到本地热加载按钮，两者并置淡出。字幕：「社区插件 + 本地热加载，平台从固定能力扩展为可持续增强的底座」。
-
-**可直接复制的热加载脚本（请求签名修复示例）**：
+**几行发起 HTTP 请求**：
 
 ```yak
-// hijackHTTPRequest：命中本地测试域时，重算 X-Sign 头再放行
-hijackHTTPRequest = func(isHttps, url, req, forward, drop) {
-    if str.Contains(url, "127.0.0.1:8787") {
-        body = poc.GetHTTPPacketBody(req)
-        // 示例签名规则：md5(body + 固定盐)，真实业务按团队规则替换
-        sign = codec.EncodeToMd5(body + "yakit-demo-salt")
-        req = poc.ReplaceHTTPPacketHeader(req, "X-Sign", sign)
-        forward(req)
-    }
-}
+rsp = http.Get("http://example.com")~
+http.show(rsp)
 ```
 
-**可直接复制的热加载脚本（响应字段处理示例）**：
+**内置模糊测试（业内首创的 Fuzztag 可视化）**：
 
 ```yak
-// hijackHTTPResponse：对响应体中的占位字段做替换，便于演示前后差异
-hijackHTTPResponse = func(isHttps, url, rsp, forward, drop) {
-    if str.Contains(url, "127.0.0.1:8787") {
-        body = poc.GetHTTPPacketBody(rsp)
-        body = str.ReplaceAll(body, "Example", "Yakit-Patched")
-        rsp = poc.ReplaceHTTPPacketBody(rsp, body)
-        forward(rsp)
-    }
-}
+fReq, err := fuzz.HTTPRequest(`GET /?id={{integer(1-10)}} HTTP/1.1
+Host: 127.0.0.1`)
+die(err)
+fReq = fReq.FuzzGetParams("testValue", "test").FuzzHTTPHeader("User-Agent", "yaklang")
+fReq.Show()
 ```
 
-**解说要点**：
-
-- 插件体系贯穿渗透全流程，插件商店提供按类型、组、Tag 的多维筛选与搜索。
-- 插件以 Yak 源码形式分发，`##` 元数据注释自动生成参数表单，代码即界面。
-- 热加载 Yaklang 脚本可完成流量修改、签名修复、鉴权重算、加解密等高级任务，无需重启平台。
-- 企业可沉淀自有方法论，红队可封装专用战术，安全团队可将团队规范固化为标准动作。
-
-**所需素材**：
-
-- 插件商店界面录屏（筛选 / 搜索 / 卡片 / 下载 / 执行 / 线上源码视图）。
-- MITM 热加载录屏（`hijackHTTPRequest` / `hijackHTTPResponse` 加载与流量变化）。
-- 静态配图建议：插件商店卡片截图、插件线上源码截图、热加载编辑器截图各一张。
-
-**拍摄注意**：
-
-- 如演示真实业务签名算法，请使用脱敏后的占位盐值与本地端点，禁止出现真实密钥。
-- 热加载镜头须展示「加载前 → 加载 → 加载后流量变化」三态对比，强化「实时生效」观感。
-- 插件源码镜头停留时间应足够让观众看清 `##type` / `##params` 元数据。
-
----
-
-##### 片段 4：开源与社区支持
-
-**目标**：让观众在 60 秒内确认「Yakit 核心完全开源、社区活跃、插件可发布且经审核」，建立信任感与参与意愿。
-
-**建议时长**：45 ~ 60 秒。
-
-**录屏前准备**：
-
-- 浏览器打开 Yakit 仓库页 `https://github.com/yaklang/yakit`，准备好 Star 数、Issues、Releases 三个视图的切换路径。
-- 准备一个本地已编写完成的演示插件（可用片段 3 中的签名修复脚本改造，补充 `##type`、`##params` 元数据），用于演示发布流程。
-- 在 Yakit 插件仓库中预置「新建插件」与「编辑 → 提交并保存 → 待审核 → 合并」流程的入口可达性。
-
-**分镜清单**：
-
-1. **0~12s｜开源仓库**：浏览器展示 `github.com/yaklang/yakit`，镜头依次落在 Watch / Star / Fork 数、LICENSE（AGPL-3.0）与最近 Release；切到 Issues 列表展示活跃度，再切到 Releases 展示月度发布节奏。字幕：「核心引擎与客户端完全开源，AGPL-3.0，持续迭代」。
-2. **12~25s｜社区共建入口**：回到 Issues，展示「Bug 反馈 / 能力建议」标签分类与维护者回复；镜头切到 Discussions 或 Pull Requests（视仓库实际启用情况而定），强调社区可参与。字幕：「GitHub Issue 与 PR 是缺陷反馈与能力共建的主通道」。
-3. **25~45s｜插件发布与审核**：切到 Yakit 插件仓库，点击 **新建插件**（或对已有插件点击 **编辑**），粘贴带 `##type` / `##params` 元数据的插件源码，点击 **提交并保存**，状态变为 **待审核**；随后展示审核者 Code Review → **合并** 后插件自动上架，并切到该插件的「日志」标签，展示 创建 / 修改 / 已合并 的不可变记录与公开评论区。字幕：「发布即进入审核，合并后自动上架，全程留痕可追溯」。
-4. **45~55s｜多端与离线分发**：快速展示插件的离线分发能力——本地插件 → 批量操作 → 导出 / 导入，或拷贝 `yakit-profile-plugin.db`（macOS 位于 `~/yakit-projects/`，Windows 位于 `yakit-projects/`）到另一台机器。字幕：「插件可离线迁移，团队与内网场景同样可用」。
-5. **55~60s｜收束**：镜头回到仓库 Star 按钮，叠加行动召唤字幕。字幕：「开源、免费、可共建，欢迎加入 Yakit 生态」。
-
-**可直接复制的插件源码骨架（用于发布演示）**：
+**中间人劫持**：
 
 ```yak
-// ##type:mitm
-// ##params:root_url|目标 URL|直链
-// 为插件设置一个可被表单收集的参数
-cli.checkParams("root_url")
-rootUrl = cli.String("root_url")
-
-hijackHTTPRequest = func(isHttps, url, req, forward, drop) {
-    if str.Contains(url, rootUrl) {
-        req = poc.ReplaceHTTPPacketHeader(req, "X-Source", "Yakit-Community-Plugin")
-        forward(req)
-    }
-}
+go mitm.Start(8084, mitm.callback(fn(isHttps, url, request, response) {
+    if isHttps { println("劫持到一个 HTTPS 流量") }
+    http.show(request)
+}))
 ```
 
-**解说要点**：
+#### 成就
 
-- Yakit 核心引擎与客户端完全开源，遵循 AGPL-3.0，首日开源即具备完整能力。
-- 社区通过 GitHub Issue 与 Pull Request 参与缺陷反馈和能力共建，Release 节奏稳定。
-- 用户可发布自行增强的插件，发布需经审核，合并后自动上架，并保留不可变日志与公开评论。
-- 插件可离线导入导出，适配团队与内网场景。
+Yaklang 自开源以来持续高速迭代，已成为国内安全领域最具影响力的领域编程语言之一：
 
-**所需素材**：
+| 维度 | 数据（截至 2026-07） |
+| --- | --- |
+| 核心语言仓库提交 | 14,000+ 次 |
+| 历史发布版本 | 600+ 个 tag |
+| 社区贡献者 | 50+ 人 |
+| 学术指导 | 电子科技大学网络空间安全学院 |
+| 权威鉴定 | 2024 / 2025 连续两年九位院士鉴定为「国内外首创、国际先进、国内领先」 |
+| 国家级荣誉 | 2023 年入选工信部信息通信领域十大科技进展 |
+| 正式出版物 | 《CDSL-YAK 网络安全领域编程语言—从入门到实践》 |
 
-- GitHub 仓库页录屏（Star / Fork / Issues / Releases / LICENSE）。
-- Yakit 插件发布流程录屏（新建 / 编辑 → 提交并保存 → 待审核 → 合并 → 日志）。
-- 插件离线导入导出或数据库迁移录屏。
-- 静态配图建议：仓库主页截图、插件审核流程示意图、插件日志页截图各一张。
+#### 安装
 
-**拍摄注意**：
+```bash
+# macOS / Linux 一键安装
+bash <(curl -sS -L http://oss-qn.yaklang.com/install-latest-yak.sh)
 
-- 仓库数据应使用拍摄当日的真实公开数据，不得后期合成 Star / Issue 数量。
-- 发布流程镜头须完整呈现「提交 → 待审核 → 合并」三态，并明确标注「合并由审核者执行」。
-- 离线迁移若涉及数据库文件，仅展示文件路径与操作，不复制真实团队库内容入镜。
+# Windows
+powershell (new-object System.Net.WebClient).DownloadFile('https://oss-qn.yaklang.com/yak/latest/yak_windows_amd64.exe','yak_windows_amd64.exe') && yak_windows_amd64.exe install && del /f yak_windows_amd64.exe
 
----
+# 验证安装
+yak version
+```
 
-> 【TODO 视频剪辑：片段 1 ~ 片段 4 各自成片，单支建议 45 ~ 90 秒；如需合集，可串联上述四段并在段间加入 2 秒品牌过场】
-> 【TODO 配图：Yakit 主界面、MITM 劫持界面、Web Fuzzer 与 Fuzztag、插件商店界面、插件发布审核流程，共五张静态截图，用于官网首页与文档页】
+> SYN 端口扫描等底层能力依赖 libpcap：macOS `brew install libpcap`，Linux `apt install libpcap`，Windows 安装 npcap。
+>
+> 【TODO 配图：Yaklang 性能对比示意（Golang ≈ Yaklang ≥ JVM Based Lang >> Python）+ 编译器五件套架构图】
 
 ### IRify：以 SSA 与人工智能为核心的现代代码安全分析系统
 
@@ -418,7 +269,7 @@ IRify 是 Yak Project 面向代码安全的现代分析系统。它的核心由*
 
 这意味着 IRify 不是「静态分析为主、AI 为辅」的传统堆叠，也不是「大模型读代码为主、工具为点缀」的另一极端。SSA 引擎保证结果可复现、可验证、可工程化；AI 引擎带来语义理解、规划推理与规模化覆盖；两者结合的部分——AI 直接分析或验证 SSA 静态分析结果、AI 生成与维护 SyntaxFlow 规则——正是 IRify 区别于任何单一范式产品的关键。
 
-IRify 作为独立产品，在线形态为 [ssa.to](https://ssa.to)，桌面形态为 Yakit 的 IRify 发行版（社区版与企业版，构建变量 `REACT_APP_PLATFORM=irify` / `irifyEE`，紫色主题，gRPC 端口 9014 / 9015）。其副标题沿用「Static-Single-Assignment Bringing Clarity to Code」。
+IRify 作为独立产品，项目官网为 [ssa.to](https://ssa.to)。（点击可跳转）
 
 | 项目 | 内容 |
 | --- | --- |
@@ -432,7 +283,7 @@ IRify 作为独立产品，在线形态为 [ssa.to](https://ssa.to)，桌面形�
 
 **一、SSA 引擎：以静态单赋值为核、SyntaxFlow 为查询语言的静态分析**
 
-SSA 引擎是 IRify 的可复现底座，采用两阶段架构：第一步将多语言源码编译为统一的静态单赋值（SSA，Static-Single-Assignment）中间表示，并落盘到 SQLite 程序数据库（支持懒加载与懒存储）；第二步使用自研的 SyntaxFlow 对 IR 产物做查询式扫描。这种「编译与分析解耦」的设计，让大型项目的 IR 可以一次编译、多次复用，编译与分析也能在不同机器上分别执行，避免每次扫描都重新解析源码。
+SSA 引擎是 IRify 的可复现底座，采用两阶段架构：第一步将多语言源码编译为统一的静态单赋值（SSA，Static-Single-Assignment）中间表示，并落盘到程序数据库（支持懒加载与懒存储）；第二步使用自研的 SyntaxFlow 对 IR 产物做查询式扫描。这种「编译与分析解耦」的设计，让大型项目的 IR 可以一次编译、多次复用，编译与分析也能在不同机器上分别执行，避免每次扫描都重新解析源码。
 
 SSA 中间表示天然对程序分析友好：它通过 Φ（Phi）节点实现双向数据流分析，支持跨包、跨文件的全局分析与路径敏感分析，并能对闭包做上下文敏感的过程间分析。配合深度关联分析（数据流 + 控制流），SSA 引擎能追踪一条数据从外部输入（source）到危险函数（sink）的完整路径，而不只是孤立地匹配某个函数名。
 
