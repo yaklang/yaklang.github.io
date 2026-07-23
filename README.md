@@ -215,7 +215,7 @@ IRify 作为独立产品，项目官网为 [ssa.to](https://ssa.to)。（点击�
 | 定位 | 以 SSA 与人工智能为核心的现代代码安全分析系统，SSA 引擎与 AI 引擎各自独立、互相深度结合 |
 | 发行形态 | 在线 [ssa.to](https://ssa.to) · Yakit IRify 发行版（社区版 / 企业版） |
 | 语言支持 | Java / SpringBoot 系列、Golang、PHP、JavaScript / EcmaScript、Python、C；基于标准 eBNF g4 语法文件构建 |
-| 站点 / 仓库 | [ssa.to](https://ssa.to) · [github.com/yaklang/yaklang](https://github.com/yaklang/yaklang) · [github.com/yaklang/syntaxflow](https://github.com/yaklang/syntaxflow) |
+| 站点 / 源码 | [ssa.to](https://ssa.to) · [yaklang/common/yak/ssa](https://github.com/yaklang/yaklang/tree/main/common/yak/ssa) · [yaklang/common/syntaxflow](https://github.com/yaklang/yaklang/tree/main/common/syntaxflow) · [SyntaxFlow 教程](https://github.com/yaklang/syntaxflow) |
 | 截图 | 【TODO 配图：IRify 编译产物视图 + SyntaxFlow 规则编辑器 + 语法流可视化（三连图）】 |
 
 #### 核心特点
@@ -278,7 +278,7 @@ IRify 的三支产品演示视频已移至 [playbooks/irify.md](./playbooks/irif
 
 Memfit AI 是 Yak Project 面向网络安全领域开发的桌面 AI Agent，主要解决安全工程师在信息整理、流量分析、漏洞研究、代码审计、自动化执行和报告编写中的实际问题。产品优先适配网络安全工作，同时提供文件处理、知识检索、任务规划、工具调用和结果交付等通用 Agent 能力，也可用于研究、分析和日常自动化任务。
 
-Memfit AI 的核心代码位于 [Yaklang 仓库](https://github.com/yaklang/yaklang)，桌面端与 Yakit 基础设施同源开发，AI 引擎和工具系统复用 Yaklang 语言生态。Yaklang 已有的 HTTP、MITM、模糊测试、端口与指纹识别、编解码、漏洞验证和代码审计能力可以直接提供给 Agent。YakScript、Yakit 插件和 MCP 服务也可以按任务接入，用于处理通用 Agent 难以覆盖的安全场景。
+Memfit AI 的核心代码位于 [yaklang/common/ai/aid](https://github.com/yaklang/yaklang/tree/main/common/ai/aid)，桌面端与 Yakit 基础设施同源开发，AI 引擎和工具系统复用 Yaklang 语言生态。Yaklang 已有的 HTTP、MITM、模糊测试、端口与指纹识别、编解码、漏洞验证和代码审计能力可以直接提供给 Agent。YakScript、Yakit 插件和 MCP 服务也可以按任务接入，用于处理通用 Agent 难以覆盖的安全场景。
 
 | 维度 | Memfit AI |
 | --- | --- |
@@ -286,7 +286,7 @@ Memfit AI 的核心代码位于 [Yaklang 仓库](https://github.com/yaklang/yakl
 | 工作方式 | 目标 → 计划 / 任务图 → 工具调用 → 人工复核 → 交付物 |
 | 上下文入口 | 本地文件、目录、图片、知识库、HTTP Flow、Web Fuzzer 请求等结构化资源 |
 | 可积累资产 | 知识库、长期记忆、AI 技能（Forge）、工具、Focus Mode |
-| 核心代码 | [github.com/yaklang/yaklang](https://github.com/yaklang/yaklang) |
+| 核心代码 | [yaklang/common/ai/aid](https://github.com/yaklang/yaklang/tree/main/common/ai/aid) |
 | 扩展能力 | Yaklang / YakScript 工具、Yakit 插件、安全分析能力与 MCP 服务 |
 | 风险控制 | 文件操作权限、人工 / AI / 全自动审查模式、工具风险阈值、任务过程可追踪 |
 
@@ -320,7 +320,7 @@ Memfit AI 的四支产品演示视频已移至 [playbooks/memfit-ai.md](./playbo
 
 ## 开源项目
 
-Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组面向安全研发、AI Agent、代码分析和工程交付的开源项目。这些项目包括可安装的 Agent Skills、训练与检索素材、评测工具、独立命令行程序和跨平台基础设施。以下内容按官网长廊卡片所需的「项目介绍、核心价值、跳转地址」整理。
+Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组面向安全研发、AI Agent、代码分析和工程交付的开源项目。这些项目包括可安装的 Agent Skills、训练与检索素材、评测工具、Yaklang 仓库内的独立模块、命令行程序和跨平台基础设施。独立项目链接到仓库根目录；位于 Yaklang 单体仓库中的项目直接链接到对应源码目录。以下内容按官网长廊卡片所需的「项目介绍、核心价值、跳转地址」整理。
 
 ### Agent Skills 与知识资产
 
@@ -339,8 +339,18 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 | --- | --- | --- | --- |
 | **HackBenchmark** | 基于 Vulinbox 与 Yaklang AI Agent 体系设计的网络安全 Agent 可复现评测协议和展示站。当前仓库处于评测协议设计阶段，站点数据用于界面与方法审阅。 | 统一模型、漏洞、专注模式和评测指标，为后续真实安全能力评测提供可复现框架。 | [GitHub](https://github.com/yaklang/hackbenchmark) · [项目站点](https://hackbenchmark.com) |
 | **IRify Benchmark** | 面向代码扫描引擎的轻量评测框架，维护带 Source、Sanitizer、Sink 数据流标注的基准项目。 | 以完整数据流而非单个命中行评估扫描引擎，可用于回归测试、CI 和引擎对比。 | [GitHub](https://github.com/yaklang/irify-benchmark) |
-| **SyntaxFlow** | SyntaxFlow 从入门到实践的教程与示例项目，涵盖 SSA 查询、Use-Def 链、跨过程分析和数据流可视化。 | 帮助安全工程师学习用声明式规则描述漏洞，并理解 IRify 的静态分析方法。 | [GitHub](https://github.com/yaklang/syntaxflow) |
-| **Vulinbox** | 集成在 Yaklang 中的 Web 漏洞靶场，提供 SQL 注入、XSS、SSRF、文件上传、逻辑漏洞和组件漏洞等可复现实例。 | 为 Yakit 实操、检测插件验证、AI Agent 安全评测和教学提供本地授权目标。 | [源码](https://github.com/yaklang/yaklang/tree/main/common/vulinbox) · [实战手册](https://yaklang.com/Yaklab/vulinbox/) |
+| **SyntaxFlow 教程** | SyntaxFlow 从入门到实践的教程与示例项目，涵盖 SSA 查询、Use-Def 链、跨过程分析和数据流可视化。 | 帮助安全工程师学习用声明式规则描述漏洞，并理解 IRify 的静态分析方法。 | [GitHub](https://github.com/yaklang/syntaxflow) |
+
+### Yaklang 仓库内的独立模块
+
+| 项目 | 项目介绍 | 核心价值 | 项目地址 |
+| --- | --- | --- | --- |
+| **Yaklang AI Agent Runtime** | Memfit AI 使用的 Agent 运行时，包含计划与任务图、ReAct 循环、工具系统、长期记忆、执行审查和专业 Focus Mode。 | 为 Yaklang 生态提供统一的 Agent 编排与安全工具运行基础。 | [yaklang/common/ai/aid](https://github.com/yaklang/yaklang/tree/main/common/ai/aid) |
+| **Yak SSA** | Yaklang 的 SSA 中间表示与程序分析核心，包含指令模型、基本块、控制流、Phi、作用域和程序数据库。 | 为多语言代码建模、数据流分析和 IRify 静态分析提供统一程序表示。 | [yaklang/common/yak/ssa](https://github.com/yaklang/yaklang/tree/main/common/yak/ssa) |
+| **SyntaxFlow Engine** | SyntaxFlow 的语法、虚拟机、内置规则、数据库、补全和扫描任务实现。 | 将安全规则编译为可执行查询，在 SSA 程序上完成模式匹配与数据流分析。 | [yaklang/common/syntaxflow](https://github.com/yaklang/yaklang/tree/main/common/syntaxflow) |
+| **MiniREHS** | 零外部依赖、可移植的多正则批量匹配引擎，采用统一编译、一次扫描和候选验证的处理方式。 | 面向大量规则与网络流量的批量匹配场景，在纯 Go 与可选自带 SIMD 后端之间保持一致结果。 | [yaklang/common/minirehs](https://github.com/yaklang/yaklang/tree/main/common/minirehs) |
+| **Yak SCA Engine** | 软件成分分析模块，包含 Java、Go、Node.js、Python、PHP、Ruby、Rust 和 C/C++ 等依赖文件解析器及许可证分析。 | 为依赖识别、SBOM、许可证检查和供应链风险分析提供统一基础。 | [yaklang/common/sca](https://github.com/yaklang/yaklang/tree/main/common/sca) |
+| **Vulinbox** | Yaklang 内置的 Web 漏洞靶场，提供 SQL 注入、XSS、SSRF、文件上传、逻辑漏洞和组件漏洞等可复现实例。 | 为 Yakit 实操、插件验证、AI Agent 安全评测和教学提供本地授权目标。 | [yaklang/common/vulinbox](https://github.com/yaklang/yaklang/tree/main/common/vulinbox) · [实战手册](https://yaklang.com/Yaklab/vulinbox/) |
 
 ### 独立工具与工程基础设施
 
