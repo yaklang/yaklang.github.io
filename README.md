@@ -379,31 +379,176 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 
 ---
 
-## 项目可信度证明
+## 项目里程碑
 
-这个模块用于说明 Yak Project 的技术路线经过了哪些公开、可核验的建设与评价。首页只展示与开源基础、正式机构评价和核心产品演进直接相关的节点；普通活动、内部纪念和缺少公开证据的材料不进入主时间线。
+Yak Project 从安全工程师的实际工作出发，逐步形成了以 Yaklang 为技术底座，覆盖交互式安全测试、代码审计和 AI Agent 的开源产品体系。以下节点记录了核心项目的公开发布、技术发展和阶段性成果。
 
-### 首页文案
-
-**标题：项目里程碑**
-
-**说明：** 从核心代码开源，到进入正式科技评价体系，再到产品能力持续扩展。以下节点均提供公开证据，可独立核验。
-
-| 年份 | 事件 | 影响 | 证据 |
+| 年份 | 事件 | 影响 | 相关资料 |
 | --- | --- | --- | --- |
-| **2021** | Yak 与 Yakit 在 XCon 对外发布 | 项目形成可追溯的公开起点，安全能力开始通过开源桌面平台持续交付。 | [XCon 发布记录](https://www.sohu.com/a/567305083_120846244) |
+| **2021** | Yak 与 Yakit 在 XCon 对外发布 | Yak Project 进入公开发展阶段，Yakit 开始为安全工程师提供统一的桌面工作台。 | [XCon 发布记录](https://www.sohu.com/a/567305083_120846244) |
 | **2023** | CDSL-YAK 在北京国家会议中心举行开源发布会 | 核心语言、运行时和安全能力底座面向社区开放，外部开发者可以直接检查源码、提交问题并参与建设。 | [开源发布会记录](https://www.cnblogs.com/yaklang/articles/17461795.html) |
-| **2024** | “面向通信网络的专用安全编程语言 YakLang 创新及应用”入选 2023 年度信息通信领域十大科技进展 | YakLang 从项目自身的技术主张进入中国通信学会组织的正式科技进展遴选结果。 | [中国通信学会发布页](https://www.china-cic.cn/Detail/24/60/6085) |
-| **2025** | “面向网络安全的专用编程语言与开发环境技术与应用”获中国通信学会科学技术奖一等奖 | Yak 与配套开发环境的技术和应用成果获得行业科技奖励体系认可。 | [中国通信学会奖励公告](https://www.china-cic.cn/Detail/24/6900/6900) |
-| **2025** | IRify 作为独立代码审计工具对外发布 | Yak Project 将 Yak SSA、SyntaxFlow 和 AI 能力落到多语言代码安全分析场景，产品覆盖从交互式测试扩展到源码审计。 | [IRify 发布记录](https://yaklang.com/en/blog/sql-injection-detection-with-irify/) |
-| **2026** | Memfit AI 对外发布 | Yaklang 与 Yakit 已有的安全工具、插件和脚本能力进入 Agent 工作流，产品覆盖安全工程师的分析、执行与交付过程。 | [Memfit AI 发布记录](https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/) |
+| **2023** | YAKIT 网络安全单兵测试系统 V2.0 入选第十七批北京市新技术新产品（服务）名单 | Yakit 的产品化和实际应用进入新的发展阶段。 | [北京市官方名单 PDF](https://kw.beijing.gov.cn/zwfw/bsjg/202307/P020240909007888758167.pdf) |
+| **2024** | Yakit V2.0 通过公安部第三研究所检测 | Yakit 按照网络安全专用产品和 Web 应用安全检测相关国家标准完成测试。 | [检测信息发布记录](https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649944674&idx=1&sn=bb61768ac951be7656caf3d6f58794dd) |
+| **2024** | “面向通信网络的专用安全编程语言 YakLang 创新及应用”入选 2023 年度信息通信领域十大科技进展 | Yaklang 的专用编程语言路线进入信息通信领域年度科技进展名单。 | [中国通信学会发布页](https://www.china-cic.cn/Detail/24/60/6085) |
+| **2025** | IRify 对外发布 | Yak SSA、SyntaxFlow 与 AI 能力形成独立代码审计产品，项目能力从交互式测试扩展到源码安全分析。 | [IRify 发布记录](https://yaklang.com/en/blog/sql-injection-detection-with-irify/) |
+| **2025** | “面向网络安全的专用编程语言与开发环境技术与应用”获中国通信学会科学技术奖一等奖 | Yaklang 与配套开发环境的技术成果和实际应用获得行业科技奖励。 | [中国通信学会奖励公告](https://www.china-cic.cn/Detail/24/6900/6900) |
+| **2025** | “国产化网络安全开发环境 YAK”获“创客中国”全国总决赛企业组三等奖 | YAK 从网络安全专题赛进入全国总决赛，展示了国产安全开发环境的工程能力和应用价值。 | [全国总决赛结果 PDF](https://www.miitxxzx.org.cn/module/download/downfile.jsp?classid=0&filename=4920ee41e78c447ca39295aeae07e019.pdf&showname=%E7%AC%AC%E5%8D%81%E5%B1%8A%E2%80%9C%E5%88%9B%E5%AE%A2%E4%B8%AD%E5%9B%BD%E2%80%9D%E4%B8%AD%E5%B0%8F%E4%BC%81%E4%B8%9A%E5%88%9B%E6%96%B0%E5%88%9B%E4%B8%9A%E5%A4%A7%E8%B5%9B%E5%85%A8%E5%9B%BD%E6%80%BB%E5%86%B3%E8%B5%9B%E8%8E%B7%E5%A5%96%E5%90%8D%E5%8D%95.pdf) |
+| **2026** | Memfit AI 对外发布 | Yaklang、Yakit 及其工具生态进入 Agent 工作流，为安全工程师提供分析、执行和交付支持。 | [Memfit AI 发布记录](https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/) |
 
-**行动入口：** [查看完整发展历程](./materials/project-credibility/full-history.md)
+[查看完整发展历程](./materials/project-credibility/full-history.md)
 
-### 首页展示约束
+### 实拍图片统一调色
 
-- 使用静态时间线，不自动滚动；桌面端完整展示 6 个节点，移动端按年份纵向排列。
-- 每个节点只展示年份、事件、影响和一个证据链接，不在首页堆叠人物名单、会议照片或奖项说明。
-- 证据链接优先指向中国通信学会、高校、会议主办方和 Yak Project 官方发布页。转载仅用于补充早期公开记录。
-- 图片不是独立证据。需要配图时，图片必须与该节点直接对应，并在图注中说明时间、场合和它所证明的事实。
-- 完整历程、图片来源、候选材料和待补证据统一维护在 [`materials/project-credibility/`](./materials/project-credibility/)。
+里程碑照片保留原始文件，通过前端滤镜和蒙层统一为 Yak 的米白、炭黑与琥珀橙色系。蒙层保持静态，不覆盖人物与关键信息，也不使用会削弱纪实可信度的重度模糊、强暗角或大面积字符特效。
+
+给图片外层容器添加 `data-yak-milestone-photo`：
+
+```html
+<div data-yak-milestone-photo>
+  <img
+    src="/img/project-credibility/2024-cicc-conference.jpg"
+    alt="2024 中国信息通信大会现场"
+  />
+</div>
+```
+
+页面加载时执行以下脚本。脚本会注入所需样式，并为每张照片添加纯装饰蒙层；原始图片文件和图片语义不会被修改。
+
+```js
+(() => {
+  const STYLE_ID = "yak-milestone-photo-style";
+  const SELECTOR = "[data-yak-milestone-photo]";
+
+  const css = `
+    ${SELECTOR} {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: #1b1916;
+    }
+
+    ${SELECTOR} > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter:
+        saturate(.72)
+        contrast(1.06)
+        brightness(.84)
+        sepia(.12)
+        hue-rotate(-6deg);
+      transform: translateZ(0);
+    }
+
+    ${SELECTOR} .yak-photo-tone,
+    ${SELECTOR} .yak-photo-texture,
+    ${SELECTOR} .yak-photo-code {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    ${SELECTOR} .yak-photo-tone {
+      background:
+        radial-gradient(
+          circle at 72% 18%,
+          rgba(255, 210, 132, .16),
+          transparent 34%
+        ),
+        linear-gradient(
+          118deg,
+          rgba(20, 18, 15, .34) 0%,
+          rgba(33, 29, 23, .08) 52%,
+          rgba(210, 132, 35, .12) 100%
+        );
+      mix-blend-mode: multiply;
+    }
+
+    ${SELECTOR} .yak-photo-texture {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(12, 11, 10, .22),
+          transparent 16%,
+          transparent 84%,
+          rgba(12, 11, 10, .18)
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 246, 225, .025) 0,
+          rgba(255, 246, 225, .025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+      mix-blend-mode: overlay;
+    }
+
+    ${SELECTOR} .yak-photo-code {
+      inset: 12px auto auto 14px;
+      width: min(240px, 32%);
+      height: auto;
+      margin: 0;
+      color: #f0a33a;
+      font: 9px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+      white-space: pre-wrap;
+      opacity: .14;
+      mix-blend-mode: screen;
+      -webkit-mask-image: linear-gradient(135deg, #000 0%, transparent 78%);
+      mask-image: linear-gradient(135deg, #000 0%, transparent 78%);
+    }
+
+    @media (prefers-contrast: more) {
+      ${SELECTOR} .yak-photo-code {
+        display: none;
+      }
+    }
+  `;
+
+  const codeTexture = [
+    "0x7F  01  YAK  8B  00",
+    "10  3A  6C  0x2D  11",
+    "01  00  7E  4F  8A",
+    "YAK  2C  09  01  7D",
+  ].join("\\n");
+
+  function addLayer(container, className, tagName = "span") {
+    if (container.querySelector(`.${className}`)) return;
+
+    const layer = document.createElement(tagName);
+    layer.className = className;
+    layer.setAttribute("aria-hidden", "true");
+    container.append(layer);
+    return layer;
+  }
+
+  function initMilestonePhotos() {
+    if (!document.getElementById(STYLE_ID)) {
+      const style = document.createElement("style");
+      style.id = STYLE_ID;
+      style.textContent = css;
+      document.head.append(style);
+    }
+
+    document.querySelectorAll(SELECTOR).forEach((container) => {
+      if (!container.querySelector("img")) return;
+
+      addLayer(container, "yak-photo-tone");
+      addLayer(container, "yak-photo-texture");
+
+      const code = addLayer(container, "yak-photo-code", "pre");
+      if (code) code.textContent = codeTexture;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMilestonePhotos, {
+      once: true,
+    });
+  } else {
+    initMilestonePhotos();
+  }
+})();
+```
