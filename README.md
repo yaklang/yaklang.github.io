@@ -337,7 +337,6 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 
 | 项目 | 项目介绍 | 核心价值 | 项目地址 |
 | --- | --- | --- | --- |
-| **HackBenchmark** | 基于 Vulinbox 与 Yaklang AI Agent 体系设计的网络安全 Agent 可复现评测协议和展示站。当前仓库处于评测协议设计阶段，站点数据用于界面与方法审阅。 | 统一模型、漏洞、专注模式和评测指标，为后续真实安全能力评测提供可复现框架。 | [GitHub](https://github.com/yaklang/hackbenchmark) · [项目站点](https://hackbenchmark.com) |
 | **IRify Benchmark** | 面向代码扫描引擎的轻量评测框架，维护带 Source、Sanitizer、Sink 数据流标注的基准项目。 | 以完整数据流而非单个命中行评估扫描引擎，可用于回归测试、CI 和引擎对比。 | [GitHub](https://github.com/yaklang/irify-benchmark) |
 | **SyntaxFlow 教程** | SyntaxFlow 从入门到实践的教程与示例项目，涵盖 SSA 查询、Use-Def 链、跨过程分析和数据流可视化。 | 帮助安全工程师学习用声明式规则描述漏洞，并理解 IRify 的静态分析方法。 | [GitHub](https://github.com/yaklang/syntaxflow) |
 
@@ -362,7 +361,17 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 | **Awesome Yak Scripts** | Yak 脚本集合，涵盖安全工具、依赖同步、SCA 规则生成、日志分析和插件维护。 | 提供可以直接阅读、运行和改造的 Yaklang 自动化示例。 | [GitHub](https://github.com/yaklang/awesome-yak-scripts) |
 | **Yaklang VS Code Extension** | Yaklang 与 SyntaxFlow 的 VS Code 扩展，提供语法高亮、补全、参数提示、诊断、调试和快速运行。 | 将 Yaklang 的 LSP、DSP 和引擎管理能力带入通用代码编辑器。 | [GitHub](https://github.com/yaklang/yaklang-support) · [扩展市场](https://marketplace.visualstudio.com/items?itemName=v1ll4n.yak) |
 | **Yakit Chrome Extension** | 用于浏览器代理切换和 Yakit 联动的 Chrome 扩展。 | 简化浏览器、系统代理与 Yakit 之间的切换，为 Web 安全测试提供浏览器侧入口。 | [GitHub](https://github.com/yaklang/yaklang-chrome-extension) |
-| **page2img** | 将 PDF、XPS、EPUB 等文档逐页转换为 PNG 或 JPEG 的静态命令行工具。 | 单二进制、跨平台，适合文档预览、OCR 前处理和 Agent 文件分析流程。 | [GitHub](https://github.com/yaklang/page2img) |
-| **pcap** | 面向 Go packet capture 项目的跨平台 libpcap 构建与封装。 | 通过锁定并携带 libpcap 降低开发和分发时的系统依赖，支撑 Yaklang 网络数据包能力。 | [GitHub](https://github.com/yaklang/pcap) |
+| **pcap** | 从 `gopacket/pcap` 拆出的工程化 fork，保留 Go 抓包接口，并将 libpcap 头文件、静态库和动态库按版本与架构纳入仓库。 | 解决系统 libpcap 版本差异、交叉编译和国产架构适配问题，为 Yaklang 的抓包、扫描与网络栈能力提供稳定依赖。 | [GitHub](https://github.com/yaklang/pcap) |
 
 > 官网展示建议：每张卡片使用项目名称、项目介绍和「查看项目」链接；核心价值可作为悬停层或滚动展开内容。Skills、评测研究、独立工具三组可以使用不同标签色，便于在横向滚动中识别。
+
+#### pcap 的 fork 工作与完成度
+
+`yaklang/pcap` 的目标是提高 `gopacket/pcap` 在安全产品构建和分发中的可控性，主要改动包括：
+
+- **锁定 libpcap 依赖**：仓库携带 libpcap 1.8.1、1.9.1 和 1.10.4 的头文件与构建产物，通过 [`pcap_linux.go`](https://github.com/yaklang/pcap/blob/main/pcap_linux.go) 为不同架构选择固定版本。构建环境不需要预先安装对应的系统 libpcap 开发包。
+- **处理系统兼容问题**：Linux amd64 使用 libpcap 1.8.1 以处理旧版 CentOS 环境中的段错误问题；其他架构使用经过固定的 libpcap 版本，减少系统库差异带来的构建和运行偏差。
+- **扩展架构支持**：已提供 Linux amd64、arm64、loong64、sw64 的 libpcap 构建产物和 cgo 配置；Windows 侧具备 386、amd64、arm64 的结构定义与编译前置支持。
+- **跟进 Go 网络包生态**：依赖已迁移到维护中的 `github.com/gopacket/gopacket v1.3.1`，同时保留 pcap、BPF 与 pcapng 等测试样本和基本构建检查。
+
+该 fork 已作为 Yaklang 的正式依赖，应用于 `pcapx`、SYN / FIN 扫描、用户态网络栈、流量注入和隧道触发等模块。当前成果主要体现在跨架构构建、依赖固定和兼容性上；仓库暂未发布与上游的性能对比数据，因此不将其描述为性能优化版本。
