@@ -1,35 +1,27 @@
-> **本仓库是 Yak Project 官网（[yaklang.com](https://yaklang.com) / [yaklang.io](https://yaklang.io)）的"故事板总稿"。**
-> 它既是官网维护者的协作入口（构建方式见末尾「网站维护」），也汇集了 Yak Project 的定位、产品矩阵、Showcase、开源故事时间线、用户故事与权威背书。
-> 文中标有 `【TODO 配图：...】` 的位置，是需要补齐的真实素材；产品录屏剧本统一维护在 [`playbooks/`](./playbooks/)。
+<div align="center">
+  <img
+    src="https://raw.githubusercontent.com/yaklang/.github/main/profile/assets/yak-logo.png"
+    alt="YAK"
+    width="280"
+  />
 
----
+  <br/>
 
-# 🛡️ Yak Project
+  <strong>安全能力融合 · AI 原生的网络安全技术栈</strong>
 
-### 广泛使用的开源网络安全基础设施
+  <br/><br/>
 
-<p align="center">
-  <!-- TODO 配图：Yak Project 品牌主视觉（横向 hero banner，建议用 logo.svg + 品牌橙 #ff7d23 渐变背景） -->
-  <img src="static/img/logo.svg" alt="Yak Project Logo" width="220" />
-</p>
-
-<p align="center">
-  <strong>"让世界更安全，让安全更简单"</strong><br/>
-  团队口号：做难且正确的事
-</p>
-
-<p align="center">
   <a href="https://github.com/yaklang/yaklang"><img alt="Yaklang Stars" src="https://img.shields.io/github/stars/yaklang/yaklang?style=social"/></a>
   <a href="https://github.com/yaklang/yakit"><img alt="Yakit Stars" src="https://img.shields.io/github/stars/yaklang/yakit?style=social"/></a>
   <a href="https://github.com/yaklang/yaklang/releases"><img alt="Yaklang Release" src="https://img.shields.io/github/release/yaklang/yaklang.svg"/></a>
   <a href="https://github.com/yaklang/yaklang/releases"><img alt="Yaklang Downloads" src="https://img.shields.io/github/downloads/yaklang/yaklang/total.svg"/></a>
   <a href="https://github.com/yaklang/yaklang/blob/main/LICENSE.md"><img alt="License" src="https://img.shields.io/badge/license-AGPL%20v3-%23ff7d23.svg"/></a>
   <a href="https://yaklang.com"><img alt="Site" src="https://img.shields.io/badge/site-yaklang.com-%233399dd.svg"/></a>
-</p>
+</div>
 
 ---
 
-## ✨ Hero：Yak Project 是什么
+## Yak Project 是什么
 
 **Yak Project 是广泛使用的开源网络安全基础设施。**
 
@@ -52,11 +44,9 @@
 | 行业科技进展 | [入选中国通信学会发布的 2023 年度信息通信领域十大科技进展](https://www.china-cic.cn/Detail/24/60/6085) |
 | 行业科技奖励 | [获 2025 年中国通信学会科学技术奖一等奖](https://www.china-cic.cn/Detail/24/6900/6900) |
 
-> 【TODO 配图：Yak Project 技术体系全景图（建议把 YakVM / SSA / SyntaxFlow / Yaklang 放底层，Yakit / IRify / Memfit AI / JavaJive 放上层产品层）】
-
 ---
 
-## 🧬 副 Hero：CDSL-YAK，为网络安全而生的领域编程语言
+## CDSL-YAK：为网络安全而生的领域编程语言
 
 <p align="center">
   <strong>CDSL-YAK · Cybersecurity Domain Specific Language</strong><br/>
@@ -89,8 +79,6 @@ Yaklang 是 CDSL 理念的首个完整落地，包含一整套自研的编译器
 
 **CDSL 教材已正式出版**：《CDSL-YAK 网络安全领域编程语言—从入门到实践》
 
-> 【TODO 配图：CDSL 教材封面 + 编译器五件套架构图（YakVM / SSA / SyntaxFlow / LSP）】
-
 ---
 
 ## 产品矩阵
@@ -108,7 +96,6 @@ Yakit 是 Yak Project 面向安全从业者的核心桌面平台。它的核心�
 | 定位 | 基于 Electron + Yaklang gRPC 引擎构建的交互式应用安全测试 ALL-IN-ONE 平台 |
 | 开源 | 2021-10-12 首发，完全开源、完全免费 |
 | 仓库 | [github.com/yaklang/yakit](https://github.com/yaklang/yakit) |
-| 截图 | 【TODO 配图：Yakit 主界面 + MITM 劫持界面 + Web Fuzzer 界面（三连图）】 |
 
 #### 核心特点
 
@@ -139,7 +126,6 @@ Yaklang 是 Yak Project 的内核与起点，一门专为网络安全而生的�
 | 许可证 | AGPL-3.0 |
 | 运行形式 | 单二进制，`yak script.yak` 执行脚本，`yak -c 'expr'` 执行表达式，跨 macOS / Linux / Windows 交叉编译 |
 | 文档入口 | [/docs/intro](https://yaklang.com/docs/intro) |
-| 截图 | 【TODO 配图：Yaklang 代码编辑 + 运行结果 + 内置库结构（三连图）】 |
 
 #### 它解决什么问题
 
@@ -217,7 +203,6 @@ IRify 作为独立产品，项目官网为 [ssa.to](https://ssa.to)。（点击�
 | 发行形态 | 在线 [ssa.to](https://ssa.to) · Yakit IRify 发行版（社区版 / 企业版） |
 | 语言支持 | Java / SpringBoot 系列、Golang、PHP、JavaScript / EcmaScript、Python、C；基于标准 eBNF g4 语法文件构建 |
 | 站点 / 源码 | [ssa.to](https://ssa.to) · [yaklang/common/yak/ssa](https://github.com/yaklang/yaklang/tree/main/common/yak/ssa) · [yaklang/common/syntaxflow](https://github.com/yaklang/yaklang/tree/main/common/syntaxflow) · [SyntaxFlow 教程](https://github.com/yaklang/syntaxflow) |
-| 截图 | 【TODO 配图：IRify 编译产物视图 + SyntaxFlow 规则编辑器 + 语法流可视化（三连图）】 |
 
 #### 核心特点
 
@@ -231,8 +216,6 @@ SSA 中间表示天然对程序分析友好：它通过 Φ（Phi）节点实现�
 
 一条 SyntaxFlow 规则由三部分构成：规则描述（`desc`，含 `title`、`type`、`level`、`risk`、`cve` 等）、规则内容（查询表达式）、规则输出（`check` / `alert`）。规则通过 `#->`、`-->`、`#>` 等操作符串联使用—定义链（Use-Def Chain），用 `#{include}` / `#{exclude}` / `#{until}` 做过滤，用 `as $var` 捕获节点。这套语法让规则即漏洞模型，可读、可测、可版本管理。SSA 引擎凭借这种确定性，独立承担从规则到结果的全流程分析，输出稳定、可复现、可追溯，全流程无需模型推理。
 
-> 【TODO 配图：SSA 两阶段架构图（源码 → SSA IR → SQLite 程序库 → SyntaxFlow 查询 → 审计结果）】
-
 **二、AI 引擎：以大模型与智能体循环为骨架的代码安全分析**
 
 AI 引擎是 IRify 的语义推理层，独立于 SSA 引擎即可工作。它以 ReAct 智能体循环为骨架，在 Yaklang AI 体系中注册了独立的代码安全审计循环类型，桌面端通过两个专注模式触达：`code_security_audit`（整工程代码安全审计）与 `ai_skill_audit`（AI 技能驱动分析）。一次完整 AI 审计遵循四阶段流程：项目探索、扫描计划与按类别串行的双阶段审计、逐条验证与证据记录、报告生成与兜底，最终可导出 MD / PDF 报告。
@@ -240,8 +223,6 @@ AI 引擎是 IRify 的语义推理层，独立于 SSA 引擎即可工作。它�
 作为独立引擎，AI 引擎直接对源码进行语义理解与安全分析：在无预置规则的情况下识别业务逻辑漏洞、解释代码意图、跨函数还原攻击路径，覆盖难以用纯模式匹配描述的语义型风险。这类语义型风险正是 SSA 引擎以「规则即漏洞模型」驱动的确定式分析难以触及的领域，两套引擎因此形成互补关系。
 
 AI 引擎同样提供从结果到证据的完整链路：审计结论可指向具体代码位置与上下文，并通过 `irify-sast-skill`（MCP 工具 `yak mcp -t ssa`）注入的 SyntaxFlow 语法、约 40 个 NativeCall 与 Source / Source→Sink 模板获得稳定的能力边界，具备「查询语法报错即自愈重试」的兜底机制。
-
-> 【TODO 配图：AI 引擎四阶段流程图（项目探索 → 双阶段扫描 → 逐条验证 → 报告生成）】
 
 **三、双引擎深度结合：AI 直接分析与验证 SSA 静态分析结果，并驱动规则生成与维护**
 
@@ -252,8 +233,6 @@ IRify 的差异点在于两套引擎的深度结合：AI 在直接分析、验�
 - **AI 驱动 SyntaxFlow 规则的生成与维护**：专注模式 `write_syntaxflow_rule` 在内置规则样例知识包（`syntaxflow-aikb` 文本检索 + `syntaxflow-aikb-rag` 向量检索）上做检索，结合单文件编辑工具链与 SyntaxFlow 编译校验，迭代写出合法的 `.sf` 文件；编辑器右上角的 AI 美化入口（`sf_rule_completion` Forge）把一份 `.sf` 文本按统一规范重新排版。规则的产出与长期维护由此从「手工试错」升级为「AI 起草 + 语法自检 + 人工把关」。
 
 这条「SSA 引擎提供可复现的静态分析与规则底座、AI 引擎提供语义理解与验证推理、两者在分析与规则两侧深度耦合」的路线，使 IRify 兼具传统 SAST 的稳定性与可工程化，以及 AI 时代的语义覆盖与规模化能力。
-
-> 【TODO 配图：双引擎协同图（SSA 引擎 ⇄ AI 引擎，三条结合链路：直接分析 / 验证 / 规则生成维护）】
 
 **四、规则调试系统与扫描稳定性保障**
 
@@ -266,12 +245,6 @@ IRify 提供从编写、调试到结果验证的完整工具链，确保规则�
 - **扫描稳定性**：扫描任务具备完整生命周期 API（`StartScan` / `ResumeScan` / `GetScanStatus`），支持断点续扫与状态查询；规则侧以稳定的 SSA 扫描产物为不稳定的 AI 审计提供支撑，目标是「同一项目多次审计输出尽量一致」。报告生成功能（MD / PDF）让结果可沉淀、可复核。
 
 内置规则体量也支撑了这套稳定性：yaklang 引擎通过 `go:embed` 内置 **364 个 `.sf` 规则**，其中 363 个分布在 Java（154，含 Spring）、Golang（103）、PHP（42）、Python（26）、JavaScript / EcmaScript（21）、C（17）六种语言目录，另有 1 个通用规则；这些规则分布在 130 个按语言划分的 CWE 目录中，覆盖 67 个不重复 CWE 编号，并带有 IRify 专属排除策略（`rules_irify_exclude.go`）。
-
-> 【TODO 配图：规则调试器界面（匹配节点卡片 + 日志）+ 审计结果数据流图（节点可跳源码与 IR）】
-
-#### 录屏剧本
-
-IRify 的三支产品演示视频已移至 [playbooks/irify.md](./playbooks/irify.md)，包括 SSA 与 SyntaxFlow、AI 代码审计、规则调试与扫描稳定性。
 
 ---
 
@@ -290,8 +263,6 @@ Memfit AI 的核心代码位于 [yaklang/common/ai/aid](https://github.com/yakla
 | 核心代码 | [yaklang/common/ai/aid](https://github.com/yaklang/yaklang/tree/main/common/ai/aid) |
 | 扩展能力 | Yaklang / YakScript 工具、Yakit 插件、安全分析能力与 MCP 服务 |
 | 风险控制 | 文件操作权限、人工 / AI / 全自动审查模式、工具风险阈值、任务过程可追踪 |
-
-> 【TODO 配图：Memfit AI 首页全景图。画面同时保留左侧历史记录、中间 Agent 对话与计划、右侧知识 / 技能 / 工具资源栏】
 
 ### 核心特点
 
@@ -312,10 +283,6 @@ Memfit AI 会将目标拆分为计划和具体任务，按依赖关系调用工�
 知识库用于管理可查证的资料，长期记忆用于保存稳定偏好、项目约束和工作经验，AI 技能（Forge）用于定义任务流程和输出要求。工具、技能、知识和记忆可以按任务组合，并在后续会话中继续使用。模型服务与这些工作资产相互独立，更换模型不会影响已经保存的资料和流程。
 
 > **安全提示**：端口探测、HTTP 测试、漏洞验证等能力只应在明确授权范围内使用；正式演示统一使用本机服务、脱敏流量或专用测试环境。
-
-### 录屏剧本
-
-Memfit AI 的四支产品演示视频已移至 [playbooks/memfit-ai.md](./playbooks/memfit-ai.md)，包括分析报告、知识网络、长期记忆、技能与工具组合。
 
 ---
 
@@ -364,8 +331,6 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 | **Yakit Chrome Extension** | 用于浏览器代理切换和 Yakit 联动的 Chrome 扩展。 | 简化浏览器、系统代理与 Yakit 之间的切换，为 Web 安全测试提供浏览器侧入口。 | [GitHub](https://github.com/yaklang/yaklang-chrome-extension) |
 | **pcap** | 从 `gopacket/pcap` 拆出的工程化 fork，保留 Go 抓包接口，并将 libpcap 头文件、静态库和动态库按版本与架构纳入仓库。 | 解决系统 libpcap 版本差异、交叉编译和国产架构适配问题，为 Yaklang 的抓包、扫描与网络栈能力提供稳定依赖。 | [GitHub](https://github.com/yaklang/pcap) |
 
-> 官网展示建议：每张卡片使用项目名称、项目介绍和「查看项目」链接；核心价值可作为悬停层或滚动展开内容。Skills、评测研究、独立工具三组可以使用不同标签色，便于在横向滚动中识别。
-
 #### pcap 的 fork 工作与完成度
 
 `yaklang/pcap` 的目标是提高 `gopacket/pcap` 在安全产品构建和分发中的可控性，主要改动包括：
@@ -396,159 +361,3 @@ Yak Project 从安全工程师的实际工作出发，逐步形成了以 Yaklang
 | **2026** | Memfit AI 对外发布 | Yaklang、Yakit 及其工具生态进入 Agent 工作流，为安全工程师提供分析、执行和交付支持。 | [Memfit AI 发布记录](https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/) |
 
 [查看完整发展历程](./materials/project-credibility/full-history.md)
-
-### 实拍图片统一调色
-
-里程碑照片保留原始文件，通过前端滤镜和蒙层统一为 Yak 的米白、炭黑与琥珀橙色系。蒙层保持静态，不覆盖人物与关键信息，也不使用会削弱纪实可信度的重度模糊、强暗角或大面积字符特效。
-
-给图片外层容器添加 `data-yak-milestone-photo`：
-
-```html
-<div data-yak-milestone-photo>
-  <img
-    src="/img/project-credibility/2024-cicc-conference.jpg"
-    alt="2024 中国信息通信大会现场"
-  />
-</div>
-```
-
-页面加载时执行以下脚本。脚本会注入所需样式，并为每张照片添加纯装饰蒙层；原始图片文件和图片语义不会被修改。
-
-```js
-(() => {
-  const STYLE_ID = "yak-milestone-photo-style";
-  const SELECTOR = "[data-yak-milestone-photo]";
-
-  const css = `
-    ${SELECTOR} {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      background: #1b1916;
-    }
-
-    ${SELECTOR} > img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter:
-        saturate(.72)
-        contrast(1.06)
-        brightness(.84)
-        sepia(.12)
-        hue-rotate(-6deg);
-      transform: translateZ(0);
-    }
-
-    ${SELECTOR} .yak-photo-tone,
-    ${SELECTOR} .yak-photo-texture,
-    ${SELECTOR} .yak-photo-code {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    ${SELECTOR} .yak-photo-tone {
-      background:
-        radial-gradient(
-          circle at 72% 18%,
-          rgba(255, 210, 132, .16),
-          transparent 34%
-        ),
-        linear-gradient(
-          118deg,
-          rgba(20, 18, 15, .34) 0%,
-          rgba(33, 29, 23, .08) 52%,
-          rgba(210, 132, 35, .12) 100%
-        );
-      mix-blend-mode: multiply;
-    }
-
-    ${SELECTOR} .yak-photo-texture {
-      background:
-        linear-gradient(
-          90deg,
-          rgba(12, 11, 10, .22),
-          transparent 16%,
-          transparent 84%,
-          rgba(12, 11, 10, .18)
-        ),
-        repeating-linear-gradient(
-          0deg,
-          rgba(255, 246, 225, .025) 0,
-          rgba(255, 246, 225, .025) 1px,
-          transparent 1px,
-          transparent 4px
-        );
-      mix-blend-mode: overlay;
-    }
-
-    ${SELECTOR} .yak-photo-code {
-      inset: 12px auto auto 14px;
-      width: min(240px, 32%);
-      height: auto;
-      margin: 0;
-      color: #f0a33a;
-      font: 9px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
-      white-space: pre-wrap;
-      opacity: .14;
-      mix-blend-mode: screen;
-      -webkit-mask-image: linear-gradient(135deg, #000 0%, transparent 78%);
-      mask-image: linear-gradient(135deg, #000 0%, transparent 78%);
-    }
-
-    @media (prefers-contrast: more) {
-      ${SELECTOR} .yak-photo-code {
-        display: none;
-      }
-    }
-  `;
-
-  const codeTexture = [
-    "0x7F  01  YAK  8B  00",
-    "10  3A  6C  0x2D  11",
-    "01  00  7E  4F  8A",
-    "YAK  2C  09  01  7D",
-  ].join("\\n");
-
-  function addLayer(container, className, tagName = "span") {
-    if (container.querySelector(`.${className}`)) return;
-
-    const layer = document.createElement(tagName);
-    layer.className = className;
-    layer.setAttribute("aria-hidden", "true");
-    container.append(layer);
-    return layer;
-  }
-
-  function initMilestonePhotos() {
-    if (!document.getElementById(STYLE_ID)) {
-      const style = document.createElement("style");
-      style.id = STYLE_ID;
-      style.textContent = css;
-      document.head.append(style);
-    }
-
-    document.querySelectorAll(SELECTOR).forEach((container) => {
-      if (!container.querySelector("img")) return;
-
-      addLayer(container, "yak-photo-tone");
-      addLayer(container, "yak-photo-texture");
-
-      const code = addLayer(container, "yak-photo-code", "pre");
-      if (code) code.textContent = codeTexture;
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initMilestonePhotos, {
-      once: true,
-    });
-  } else {
-    initMilestonePhotos();
-  }
-})();
-```
