@@ -48,8 +48,9 @@
 | 历史发布版本 | 600+ 个 tag |
 | 社区贡献者 | 50+ 人 |
 | 学术指导 | 电子科技大学网络空间安全学院 |
-| 权威鉴定 | 2024 / 2025 连续两年九位院士鉴定为「国内外首创、国际先进、国内领先」 |
-| 国家级荣誉 | 2023 年入选工信部信息通信领域十大科技进展 |
+| 科技成果评价 | [2024 年由中国通信学会组织科技成果鉴定](https://rivers.chaitin.cn/blog/cqj629h0lnedo7thptf0) |
+| 行业科技进展 | [入选中国通信学会发布的 2023 年度信息通信领域十大科技进展](https://www.china-cic.cn/Detail/24/60/6085) |
+| 行业科技奖励 | [获 2025 年中国通信学会科学技术奖一等奖](https://www.china-cic.cn/Detail/24/6900/6900) |
 
 > 【TODO 配图：Yak Project 技术体系全景图（建议把 YakVM / SSA / SyntaxFlow / Yaklang 放底层，Yakit / IRify / Memfit AI / JavaJive 放上层产品层）】
 
@@ -375,3 +376,34 @@ Yak Project 除 Yaklang、Yakit、IRify 和 Memfit AI 外，还维护了一组�
 - **跟进 Go 网络包生态**：依赖已迁移到维护中的 `github.com/gopacket/gopacket v1.3.1`，同时保留 pcap、BPF 与 pcapng 等测试样本和基本构建检查。
 
 该 fork 已作为 Yaklang 的正式依赖，应用于 `pcapx`、SYN / FIN 扫描、用户态网络栈、流量注入和隧道触发等模块。当前成果主要体现在跨架构构建、依赖固定和兼容性上；仓库暂未发布与上游的性能对比数据，因此不将其描述为性能优化版本。
+
+---
+
+## 项目可信度证明
+
+这个模块用于说明 Yak Project 的技术路线经过了哪些公开、可核验的建设与评价。首页只展示与开源基础、正式机构评价和核心产品演进直接相关的节点；普通活动、内部纪念和缺少公开证据的材料不进入主时间线。
+
+### 首页文案
+
+**标题：项目里程碑**
+
+**说明：** 从核心代码开源，到进入正式科技评价体系，再到产品能力持续扩展。以下节点均提供公开证据，可独立核验。
+
+| 年份 | 事件 | 影响 | 证据 |
+| --- | --- | --- | --- |
+| **2021** | Yak 与 Yakit 在 XCon 对外发布 | 项目形成可追溯的公开起点，安全能力开始通过开源桌面平台持续交付。 | [XCon 发布记录](https://www.sohu.com/a/567305083_120846244) |
+| **2023** | CDSL-YAK 在北京国家会议中心举行开源发布会 | 核心语言、运行时和安全能力底座面向社区开放，外部开发者可以直接检查源码、提交问题并参与建设。 | [开源发布会记录](https://www.cnblogs.com/yaklang/articles/17461795.html) |
+| **2024** | “面向通信网络的专用安全编程语言 YakLang 创新及应用”入选 2023 年度信息通信领域十大科技进展 | YakLang 从项目自身的技术主张进入中国通信学会组织的正式科技进展遴选结果。 | [中国通信学会发布页](https://www.china-cic.cn/Detail/24/60/6085) |
+| **2025** | “面向网络安全的专用编程语言与开发环境技术与应用”获中国通信学会科学技术奖一等奖 | Yak 与配套开发环境的技术和应用成果获得行业科技奖励体系认可。 | [中国通信学会奖励公告](https://www.china-cic.cn/Detail/24/6900/6900) |
+| **2025** | IRify 作为独立代码审计工具对外发布 | Yak Project 将 Yak SSA、SyntaxFlow 和 AI 能力落到多语言代码安全分析场景，产品覆盖从交互式测试扩展到源码审计。 | [IRify 发布记录](https://yaklang.com/en/blog/sql-injection-detection-with-irify/) |
+| **2026** | Memfit AI 对外发布 | Yaklang 与 Yakit 已有的安全工具、插件和脚本能力进入 Agent 工作流，产品覆盖安全工程师的分析、执行与交付过程。 | [Memfit AI 发布记录](https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/) |
+
+**行动入口：** [查看完整发展历程](./materials/project-credibility/full-history.md)
+
+### 首页展示约束
+
+- 使用静态时间线，不自动滚动；桌面端完整展示 6 个节点，移动端按年份纵向排列。
+- 每个节点只展示年份、事件、影响和一个证据链接，不在首页堆叠人物名单、会议照片或奖项说明。
+- 证据链接优先指向中国通信学会、高校、会议主办方和 Yak Project 官方发布页。转载仅用于补充早期公开记录。
+- 图片不是独立证据。需要配图时，图片必须与该节点直接对应，并在图注中说明时间、场合和它所证明的事实。
+- 完整历程、图片来源、候选材料和待补证据统一维护在 [`materials/project-credibility/`](./materials/project-credibility/)。
