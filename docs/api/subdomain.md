@@ -9,7 +9,7 @@
 
 与相邻库的关系：`subdomain` 处于资产发现前端，与 `dns`（解析）、`spacengine`（测绘）配合发现资产，结果可交给 `servicescan`/`poc` 做后续扫描。
 
-> 共 12 个函数
+> 共 14 个函数
 
 ## 可变参数函数索引
 
@@ -37,7 +37,7 @@ Scan(target any, opts ...subdomain.ConfigOption) (chan *subdomain.SubdomainResul
 
 **可选参数**
 
-可作为可变参数 `opts ...subdomain.ConfigOption` 传入选项；共 11 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
+可作为可变参数 `opts ...subdomain.ConfigOption` 传入选项；共 13 个可用选项，详见 [ConfigOption 选项列表](#option-configoption)。
 
 **返回值**
 
@@ -75,6 +75,8 @@ dump(domain)
 | `subdomain.recursiveDict` | `i any` | `subdomain.ConfigOption` | 是一个选项参数，设置子域名爆破递归字典，其第一个参数可以是文件名、字符串或字符串数组 |
 | `subdomain.targetConcurrent` | `c int` | `ConfigOption` | 是一个选项参数，设置每个目标的最大线程数量，默认为 10 |
 | `subdomain.targetTimeout` | `i float64` | `subdomain.ConfigOption` | 是一个选项参数，设置每个目标的超时时间，单位为秒，默认为 300s |
+| `subdomain.wildcardProbeCount` | `c int` | `ConfigOption` | 是一个选项参数，设置泛解析探测时生成的随机不存在的子域名数量，默认为 10 |
+| `subdomain.wildcardSinkholeVerify` | `b bool` | `ConfigOption` | 是一个选项参数，是否在判定为经典泛解析（单 IP） |
 | `subdomain.wildcardToStop` | `t bool` | `ConfigOption` | 是一个选项参数，遇到泛解析的情况，是否马上停止解析，默认为 false |
 | `subdomain.workerConcurrent` | `c int` | `ConfigOption` | 是一个选项参数，设置总的工作线程数量，默认为 50 |
 
