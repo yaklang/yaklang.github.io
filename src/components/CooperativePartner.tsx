@@ -156,12 +156,16 @@ export interface CooperativePartnerPageProps {}
 export const CooperativePartnerPage: React.FC<
   CooperativePartnerPageProps
 > = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
+  const serifTitleClass = isEn
+    ? "font-['Crimson_Text']"
+    : "font-['Noto_Serif_SC']";
 
   return (
     <div className="cooperative-partner-page">
-      <div className="cooperative-partner-page-header-title">{t("CooperativePartner.title")}</div>
-      <div className="cooperative-partner-page-header-second-title">{t("CooperativePartner.subtitle")}</div>
+      <div className={`cooperative-partner-page-header-title ${serifTitleClass} ${isEn ? "!text-[56px]" : ""}`}>{t("CooperativePartner.title")}</div>
+      <div className={`cooperative-partner-page-header-second-title ${serifTitleClass} ${isEn ? "!text-[22px]" : ""}`}>{t("CooperativePartner.subtitle")}</div>
       <div className="cooperative-partner-page-wrapper">
         <div className="cooperative-partner-flex-wrapper">
           {COOPERATIVE_PARTNERS.map((item) => (

@@ -19,7 +19,10 @@ export interface ClickStackProps {
   borderRadius?: number;
   shadowBlur?: number;
   shadowOpacity?: number;
+  /** 最前面卡片的背景色 */
   cardColor?: string;
+  /** 被遮挡卡片的背景色 */
+  backCardColor?: string;
   visibleCount?: number;
   depthScale?: number;
   depthOpacity?: number;
@@ -44,7 +47,8 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
       borderRadius = 8,
       shadowBlur = 30,
       shadowOpacity = 0.3,
-      cardColor = "var(--Colors-Use-Main---Gold-Bg)",
+      cardColor = "var(--Colors-Use-Main---Gold-Focus)",
+      backCardColor,
       visibleCount = 5,
       depthScale = 0.08,
       depthOpacity = 0,
@@ -72,6 +76,8 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
       vis,
       duration,
       ease,
+      cardColor,
+      backCardColor,
     });
 
     useEffect(() => {
@@ -83,6 +89,8 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
         vis,
         duration,
         ease,
+        cardColor,
+        backCardColor,
       };
     });
 
@@ -102,11 +110,27 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
           return;
         }
 
+        // 卡片本体透明，opacity 始终 1
+        el.style.background = "transparent";
+
+        // 素材透明度：前面卡片 1，后面卡片 0.3（设到内容首个子元素上）
+        const mediaEl = el.firstElementChild as HTMLElement | null;
+        if (mediaEl) {
+          mediaEl.style.opacity = rank === 0 ? "1" : "0.3";
+        }
+
+        // 遮罩层：最前面卡片 0.3，后面卡片 0.9
+        const overlay = el.querySelector<HTMLElement>("[data-card-overlay]");
+        if (overlay) {
+          overlay.style.opacity = rank === 0 ? "0.3" : "0.9";
+          overlay.style.background = c.cardColor;
+        }
+
         const target = {
           x: rank * c.spreadX,
           y: rank * c.spreadY,
           scale: 1 - rank * c.depthScale,
-          opacity: Math.max(0, 1 - rank * c.depthOpacity),
+          opacity: 1,
           visibility: "visible" as const,
           zIndex: c.vis - rank,
           rotation: 0,
@@ -200,11 +224,28 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
               return;
             }
 
+            // 卡片本体透明 + 素材透明度 + 遮罩：前面 0.3，后面 0.9
+            el.style.background = "transparent";
+
+            // 素材透明度：前面卡片 1，后面卡片 0.3
+            const mediaEl = el.firstElementChild as HTMLElement | null;
+            if (mediaEl) {
+              mediaEl.style.opacity = rank === 0 ? "1" : "0.3";
+            }
+
+            const overlay = el.querySelector<HTMLElement>(
+              "[data-card-overlay]",
+            );
+            if (overlay) {
+              overlay.style.opacity = rank === 0 ? "0.3" : "0.9";
+              overlay.style.background = c2.cardColor;
+            }
+
             gsap.to(el, {
               x: rank * c2.spreadX,
               y: rank * c2.spreadY,
               scale: 1 - rank * c2.depthScale,
-              opacity: Math.max(0, 1 - rank * c2.depthOpacity),
+              opacity: 1,
               visibility: "visible",
               zIndex: c2.vis - rank,
               duration: c2.duration * 0.65,
@@ -214,6 +255,20 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
 
           const movedRank = seq.current.indexOf(moved);
           if (movedRank < c2.vis && movedNode) {
+            // 移动到新位置的卡片也要更新素材透明度 + 遮罩
+            movedNode.style.background = "transparent";
+            const movedMedia =
+              movedNode.firstElementChild as HTMLElement | null;
+            if (movedMedia) {
+              movedMedia.style.opacity = movedRank === 0 ? "1" : "0.3";
+            }
+            const movedOverlay = movedNode.querySelector<HTMLElement>(
+              "[data-card-overlay]",
+            );
+            if (movedOverlay) {
+              movedOverlay.style.opacity = movedRank === 0 ? "0.3" : "0.9";
+              movedOverlay.style.background = c2.cardColor;
+            }
             gsap.set(movedNode, {
               x: movedRank * c2.spreadX,
               y: movedRank * c2.spreadY,
@@ -223,7 +278,7 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
               zIndex: c2.vis - movedRank,
             });
             gsap.to(movedNode, {
-              opacity: Math.max(0, 1 - movedRank * c2.depthOpacity),
+              opacity: 1,
               duration: c2.duration * 0.5,
               delay: c2.duration * 0.2,
               ease: "power1.out",
@@ -260,12 +315,6 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
         if (t.closest("[data-no-stack-cycle], button, a, input, textarea")) {
           return;
         }
-        // 视频底部 controls 区域留给浏览器
-        if (t.closest("video")) {
-          const video = t.closest("video") as HTMLVideoElement;
-          const rect = video.getBoundingClientRect();
-          if (rect.bottom - e.clientY <= 48) return;
-        }
         cycle();
       },
       [cycle],
@@ -291,22 +340,19 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
             ref={(el) => {
               nodes.current[idx] = el;
             }}
-            className={clsx(
-              "absolute inset-0 overflow-hidden",
-              cardClassName,
-            )}
+            className={clsx("absolute inset-0 overflow-hidden", cardClassName)}
             style={{
               borderRadius,
-              background: cardColor,
-              boxShadow: `0 ${Math.round(shadowBlur * 0.15)}px ${Math.round(
-                shadowBlur * 0.5,
-              )}px rgba(0,0,0,${(shadowOpacity * 0.5).toFixed(
-                2,
-              )}), 0 ${Math.round(shadowBlur * 0.4)}px ${shadowBlur}px rgba(0,0,0,${shadowOpacity})`,
               willChange: "transform, opacity",
             }}
           >
             {content}
+            {/* 遮罩层：覆盖在视频/图片之上，统一 0.6 透明度的 Gold-Focus */}
+            <div
+              data-card-overlay
+              className="pointer-events-none absolute inset-0 z-[2]"
+              aria-hidden
+            />
           </div>
         ))}
       </div>

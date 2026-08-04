@@ -7,7 +7,10 @@ import { LoadingIcon, SureIcon } from "../HomeIcon";
 import { detectDownloadPlatform } from "../../utils/yakitDownload";
 import { yakitIcon, yakIcon, memfitIcon, irifyIcon } from "./productIcons";
 import HomePartnerMarquee from "./HomePartnerMarquee";
-import { HOME_SECTION_CENTER_CLASS } from "./homeSectionLayout";
+import {
+  HOME_CONTAINER_CLASS,
+  HOME_SECTION_CENTER_CLASS,
+} from "./homeSectionLayout";
 
 /** 大屏：内容左侧；随视口变窄平滑移到屏幕右侧 */
 const FLOWER_WIDE = 1280;
@@ -27,26 +30,35 @@ const DownloadFlowerBg = () => {
   const [svgHtml, setSvgHtml] = useState<string | null>(null);
 
   useEffect(() => {
+    // resize 期间用 rAF 合并，避免拖动窗口时高频 setState 造成卡顿
+    let rafId = null;
     const update = () => {
-      const w = window.innerWidth;
-      const t = Math.min(
-        1,
-        Math.max(0, (FLOWER_WIDE - w) / (FLOWER_WIDE - FLOWER_NARROW)),
-      );
-      // t=0 大屏：锚在下载内容左缘；t=1 小屏：锚在视口右侧外
-      const leftLarge = w / 2 - 200;
-      const leftSmall = w * 1.12;
-      const fontSize = 6.5 + (3.2 - 6.5) * t;
-      setLayout({
-        left: leftLarge + (leftSmall - leftLarge) * t,
-        width: FLOWER_WIDTH_AT_LARGE * (fontSize / FLOWER_FONT_REF),
-        opacity: 0.68 + (0.55 - 0.68) * t,
-        ready: true,
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const w = window.innerWidth;
+        const t = Math.min(
+          1,
+          Math.max(0, (FLOWER_WIDE - w) / (FLOWER_WIDE - FLOWER_NARROW)),
+        );
+        // t=0 大屏：锚在下载内容左缘；t=1 小屏：锚在视口右侧外
+        const leftLarge = w / 2 - 200;
+        const leftSmall = w * 1.12;
+        const fontSize = 6.5 + (3.2 - 6.5) * t;
+        setLayout({
+          left: leftLarge + (leftSmall - leftLarge) * t,
+          width: FLOWER_WIDTH_AT_LARGE * (fontSize / FLOWER_FONT_REF),
+          opacity: 0.68 + (0.55 - 0.68) * t,
+          ready: true,
+        });
       });
     };
     update();
     window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   useEffect(() => {
@@ -486,7 +498,8 @@ const getColourCode = (code: string) => {
 };
 
 const HomeDownload: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
   const [activeTab, setActiveTab] = useState<TabKey>("yakit");
   const [sureCopy, setSureCopy] = useState(false);
   const [loadingCopy, setLoadingCopy] = useState(false);
@@ -550,10 +563,20 @@ const HomeDownload: React.FC = () => {
             ) / 100
           );
         }
-        message.error(t("HomeDownload.messages.fetchSizeError", { product: config.productName, file: fileUrl }));
+        message.error(
+          t("HomeDownload.messages.fetchSizeError", {
+            product: config.productName,
+            file: fileUrl,
+          }),
+        );
         return null;
       } catch {
-        message.error(t("HomeDownload.messages.fetchSizeError", { product: config.productName, file: fileUrl }));
+        message.error(
+          t("HomeDownload.messages.fetchSizeError", {
+            product: config.productName,
+            file: fileUrl,
+          }),
+        );
         return null;
       }
     },
@@ -582,10 +605,18 @@ const HomeDownload: React.FC = () => {
             }
           }
         } else {
-          message.error(t("HomeDownload.messages.fetchVersionError", { product: config.productName }));
+          message.error(
+            t("HomeDownload.messages.fetchVersionError", {
+              product: config.productName,
+            }),
+          );
         }
       } catch {
-        message.error(t("HomeDownload.messages.fetchVersionError", { product: config.productName }));
+        message.error(
+          t("HomeDownload.messages.fetchVersionError", {
+            product: config.productName,
+          }),
+        );
       }
     },
   );
@@ -629,7 +660,9 @@ const HomeDownload: React.FC = () => {
     const version = versionMap[activeTab];
     if (!version) {
       message.error(
-        t("HomeDownload.messages.fetchVersionError", { product: PRODUCT_DOWNLOAD_CONFIG[activeTab].productName }),
+        t("HomeDownload.messages.fetchVersionError", {
+          product: PRODUCT_DOWNLOAD_CONFIG[activeTab].productName,
+        }),
       );
       return;
     }
@@ -725,12 +758,16 @@ const HomeDownload: React.FC = () => {
 
       {/* 标题+下载主体：整组垂直居中；合作方跑马灯贴底 */}
       <div
-        className={`relative z-[1] min-h-0 w-full overflow-hidden px-[16px] sm:px-0 ${HOME_SECTION_CENTER_CLASS}`}
+        className={`relative z-[1] min-h-0 w-full overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
       >
-        <div className="mx-auto flex max-h-full w-full max-w-[560px] sm:max-w-[720px] flex-col items-center gap-[12px] overflow-hidden">
+        <div
+          className={`mx-auto flex max-h-full w-full flex-col items-center gap-[12px] overflow-hidden ${HOME_CONTAINER_CLASS}`}
+        >
           {/* 标题区 */}
           <div className="flex w-full shrink-0 flex-col items-center gap-[12px]">
-            <div className="font-['Noto_Serif_SC'] text-[28px] font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:text-[48px] sm:leading-[64px]">
+            <div
+              className={`${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[56px]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
+            >
               {t("HomeDownload.title")}
             </div>
 
@@ -785,7 +822,9 @@ const HomeDownload: React.FC = () => {
             </div>
 
             {/* 产品描述 */}
-            <div className="text-center font-['Noto_Serif_SC'] text-[16px] sm:text-[24px] font-medium leading-[24px] sm:leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:whitespace-nowrap">
+            <div
+              className={`text-center ${isEn ? "font-['Crimson_Text'] text-[24px] sm:text-[32px]" : "font-['Noto_Serif_SC'] text-[16px] sm:text-[24px]"} font-medium leading-[24px] sm:leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:whitespace-nowrap`}
+            >
               <span style={{ color: activeAccent }}>/</span>
               &nbsp;{t(activeProduct.description)}&nbsp;
               <span style={{ color: activeAccent }}>/</span>
@@ -793,8 +832,8 @@ const HomeDownload: React.FC = () => {
 
             {activeTab === "yaklang" ? (
               <>
-                {/* 命令行安装块：小屏上下结构，大屏左右结构 */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center w-full overflow-hidden rounded-[8px] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:gap-[12px] sm:p-[4px]">
+                {/* 命令行安装块：小屏上下结构，大屏固定 650px 左右结构 */}
+                <div className="mx-auto flex w-full flex-col items-stretch overflow-hidden rounded-[8px] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:w-[650px] sm:flex-row sm:items-center sm:gap-[12px] sm:p-[4px]">
                   <Dropdown
                     open={yakEnvVisible}
                     onOpenChange={setYakEnvVisible}
@@ -870,14 +909,16 @@ const HomeDownload: React.FC = () => {
               </>
             ) : (
               <>
-                {/* 下载区：小屏列表卡 / 大屏三列表格 */}
-                <div className="w-full rounded-[8px] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] overflow-hidden">
+                {/* 下载区：小屏列表卡 / 大屏固定 560px 三列表格 */}
+                <div className="mx-auto w-full max-w-full rounded-[8px] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] overflow-hidden sm:w-[560px]">
                   {/* 表头 */}
                   <div className="flex bg-[var(--Colors-Use-Main---Gold-Bg-Hover)]">
                     <div className="flex items-center gap-[8px] px-[16px] sm:px-[20px] py-[12px] sm:py-[10px] sm:h-[40px] flex-1 text-[12px] sm:text-[14px] leading-[16px] sm:leading-[20px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-['PingFang_SC'] sm:border-0 sm:border-solid sm:border-r sm:border-r-[var(--Colors-Use-Main---Gold-Focus)]">
                       {t("HomeDownload.table.package")}{" "}
                       <span className="text-[11px] tracking-[0.5px] leading-[14px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]">
-                        {t("HomeDownload.table.latestVersion", { version: activeVersion || "-" })}
+                        {t("HomeDownload.table.latestVersion", {
+                          version: activeVersion || "-",
+                        })}
                       </span>
                     </div>
                     <div className="hidden sm:flex items-center px-[12px] py-[10px] h-[40px] w-[120px] text-[14px] leading-[20px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-['PingFang_SC']">

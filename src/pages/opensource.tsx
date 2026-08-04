@@ -36,7 +36,8 @@ const KEYWORDS = [
 
 export default function OpenSourcePage() {
   const { siteConfig } = useDocusaurusContext();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
   const siteUrl = siteConfig.url || "https://yaklang.com";
   const pageUrl = `${siteUrl}/opensource`;
 
@@ -95,8 +96,8 @@ export default function OpenSourcePage() {
       <main className="os-page">
         <header className="os-page__hero">
           <p className="os-page__eyebrow">{t("OpenSourcePage.eyebrow")}</p>
-          <h1 className="os-page__title">{t("OpenSourcePage.title")}</h1>
-          <p className="os-page__lead">
+          <h1 className={`os-page__title ${isEn ? "font-['Crimson_Text'] !text-[48px] sm:!text-[56px]" : "font-['Noto_Serif_SC'] !text-[40px] sm:!text-[48px]"}`}>{t("OpenSourcePage.title")}</h1>
+          <p className={`os-page__lead ${isEn ? "font-['Crimson_Text'] !text-[24px]" : "font-['Noto_Serif_SC'] !text-[16px]"}`}>
             {t("OpenSourcePage.lead")}
           </p>
         </header>

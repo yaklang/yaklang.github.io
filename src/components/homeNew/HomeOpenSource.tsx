@@ -4,7 +4,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import { resolveOpenSourceProjects } from "@site/src/components/OpenSource";
-import { HOME_SECTION_CENTER_CLASS } from "./homeSectionLayout";
+import {
+  HOME_CONTAINER_CLASS,
+  HOME_SECTION_CENTER_CLASS,
+} from "./homeSectionLayout";
 
 // =========================================================
 // 图标
@@ -68,8 +71,31 @@ type ProjectItem = {
 };
 
 const DESKTOP_MQ = "(min-width: 1280px)";
-const PAGE_SIZE_DESKTOP = 6;
-const PAGE_SIZE_MOBILE = 3;
+const TABLET_MQ = "(min-width: 756px)";
+
+/** 每页 2 排；< 756px → 1 列（竖排），756–1279px → 2 列，≥ 1280px → 3 列 */
+function useColumns() {
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    const desktopMq = window.matchMedia(DESKTOP_MQ);
+    const tabletMq = window.matchMedia(TABLET_MQ);
+    const update = () => {
+      if (desktopMq.matches) setColumns(3);
+      else if (tabletMq.matches) setColumns(2);
+      else setColumns(1);
+    };
+    update();
+    desktopMq.addEventListener("change", update);
+    tabletMq.addEventListener("change", update);
+    return () => {
+      desktopMq.removeEventListener("change", update);
+      tabletMq.removeEventListener("change", update);
+    };
+  }, []);
+
+  return columns;
+}
 
 const PROJECTS = (t: (key: string) => string): ProjectItem[] =>
   resolveOpenSourceProjects(t).map((project) => ({
@@ -93,20 +119,6 @@ const chunk = <T,>(arr: T[], size: number): T[][] => {
   return result;
 };
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia(DESKTOP_MQ);
-    const update = () => setIsDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  return isDesktop;
-}
-
 const Card: React.FC<ProjectItem> = ({
   title,
   desc,
@@ -121,7 +133,7 @@ const Card: React.FC<ProjectItem> = ({
       href={docUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-[200px] cursor-pointer flex-col justify-between gap-[16px] overflow-hidden rounded-[8px] border border-solid p-[20px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:!text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:h-[230px]"
+      className="group flex h-[200px] cursor-pointer flex-col justify-between gap-[16px] overflow-hidden rounded-[8px] border border-solid p-[20px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:!text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:h-[225px]"
       style={{ backgroundColor: bg, borderColor: border }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.backgroundColor = border;
@@ -131,9 +143,9 @@ const Card: React.FC<ProjectItem> = ({
       }}
     >
       <div className="flex min-h-0 flex-col gap-[12px] overflow-hidden">
-        <h3 className="m-0 min-h-0 shrink-0 text-left font-['Crimson_Text'] text-[22px] font-bold leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:text-[26px] sm:leading-[32px] xl:text-[28px] xl:leading-[34px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+        <div className="m-0 min-h-0 shrink-0 text-left font-['Crimson_Text'] text-[22px] leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:text-[26px] sm:leading-[32px] xl:text-[28px] xl:leading-[34px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
           {title}
-        </h3>
+        </div>
         <p className="m-0 min-h-0 text-left font-['PingFang_SC'] text-[13px] leading-[20px] tracking-[0.15px] !text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[14px] sm:leading-[22px] xl:text-[15px] xl:leading-[24px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">
           {desc}
         </p>
@@ -150,9 +162,11 @@ const Card: React.FC<ProjectItem> = ({
 // 组件
 // =========================================================
 const HomeOpenSource: React.FC = () => {
-  const { t } = useTranslation();
-  const isDesktop = useIsDesktop();
-  const pageSize = isDesktop ? PAGE_SIZE_DESKTOP : PAGE_SIZE_MOBILE;
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
+  const columns = useColumns();
+  // ≥756px：每页 2 排 × columns 列；<756px：每页 3 张（1 列竖排），其余分页
+  const pageSize = columns >= 2 ? columns * 2 : 3;
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperRef, setSwiperRef] = useState<SwiperClass | null>(null);
@@ -193,15 +207,17 @@ const HomeOpenSource: React.FC = () => {
   };
 
   return (
-    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)] px-[16px] lg:px-[40px]">
+    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
       <div
-        className={`mx-auto w-full max-w-[1024px] overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
+        className={`mx-auto w-full overflow-hidden ${HOME_CONTAINER_CLASS} ${HOME_SECTION_CENTER_CLASS}`}
       >
         <div className="flex max-h-full min-h-0 w-full flex-col overflow-hidden">
           {/* 标题区 */}
           <div className="mb-[12px] flex shrink-0 flex-col items-center gap-[12px] sm:mb-[16px] sm:gap-[16px]">
             <div className="flex flex-col items-center gap-[8px] text-center sm:gap-[12px]">
-              <div className="font-['Noto_Serif_SC'] text-[32px] font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:text-[48px] sm:leading-[64px]">
+              <div
+                className={`${isEn ? "font-['Crimson_Text'] text-[40px] sm:text-[56px]" : "font-['Noto_Serif_SC'] text-[32px] sm:text-[48px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
+              >
                 {t("HomeOpenSource.title")}
               </div>
               <div className="font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:text-[20px] sm:leading-[28px]">
@@ -219,7 +235,7 @@ const HomeOpenSource: React.FC = () => {
                   swiperRef?.slideTo(0);
                 }}
                 placeholder={t("HomeOpenSource.placeholder")}
-                className="min-w-0 flex-1 border-0 bg-transparent px-[12px] py-[6px] font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] outline-none placeholder:text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
+                className="min-w-0 flex-1 border-0 bg-transparent px-[12px] py-[6px] font-['PingFang_SC'] text-[16px] leading-[22px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] outline-none placeholder:text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:text-[14px] sm:leading-[20px]"
               />
               <span className="inline-flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full bg-[var(--Colors-Use-Neutral-Text-1-Title)] text-[color:var(--Colors-Use-Neutral-Bg)]">
                 {SearchIcon}
@@ -247,7 +263,10 @@ const HomeOpenSource: React.FC = () => {
                     key={pageIdx}
                     className="!flex !h-full !w-full flex-col justify-center"
                   >
-                    <div className="grid h-full w-full auto-rows-fr grid-cols-1 content-center gap-[12px] xl:grid-cols-3 xl:gap-[16px]">
+                    <div
+                      className="grid h-full w-full auto-rows-fr content-center gap-[12px] xl:gap-[16px]"
+                      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+                    >
                       {page.map((item) => (
                         <Card key={`${pageIdx}-${item.id}`} {...item} />
                       ))}

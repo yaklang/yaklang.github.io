@@ -390,7 +390,11 @@ const ThanksForInfo: ThanksForInfoProps[] = [
 ];
 
 export const Team: React.FC<TeamProps> = (props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
+  const serifTitleClass = isEn
+    ? "font-['Crimson_Text']"
+    : "font-['Noto_Serif_SC']";
   return (
     <div className="team-and-thank-container">
       <div className="safety-body">
@@ -431,7 +435,7 @@ export const Team: React.FC<TeamProps> = (props) => {
       </div>
 
       <div className="owner-body">
-        <div className="owner-header-title">Yaklang.io {t("团队")}</div>
+        <div className={`owner-header-title ${serifTitleClass} ${isEn ? "!text-[56px]" : ""}`}>Yaklang.io {t("团队")}</div>
         <div className="owner-member-introduce-body">
           <div className="owner-member-introduce-img">
             <div className="owner-member-introduce-img-body">
@@ -467,7 +471,7 @@ export const Team: React.FC<TeamProps> = (props) => {
       </div>
 
       <div className="consultant-header-body">
-        <div className="consultant-header-title">{t("特别顾问")}</div>
+        <div className={`consultant-header-title ${serifTitleClass} ${isEn ? "!text-[48px]" : ""}`}>{t("特别顾问")}</div>
       </div>
       <div className="consultant-body">
         <div className="fill-background"></div>
@@ -523,7 +527,7 @@ export const Team: React.FC<TeamProps> = (props) => {
       </div>
 
       <div className="contributors-body">
-        <div className="contributors-header-title">
+        <div className={`contributors-header-title ${serifTitleClass} ${isEn ? "!text-[48px]" : ""}`}>
           {t("YAK 生态共建杰出贡献成员")}
         </div>
         <div className="contributors-member-wrapper">
@@ -543,7 +547,7 @@ export const Team: React.FC<TeamProps> = (props) => {
       </div>
 
       <div className="thanksfor-body">
-        <div className="thanksfor-header-title">{t("特别致谢")}</div>
+        <div className={`thanksfor-header-title ${serifTitleClass} ${isEn ? "!text-[48px]" : ""}`}>{t("特别致谢")}</div>
 
         <div className="thanksfor-member-wrapper">
           <div className="thanksfor-member-grid-wrapper">

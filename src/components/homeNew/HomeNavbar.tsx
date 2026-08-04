@@ -4,11 +4,12 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import { useLocation } from "@docusaurus/router";
 import { Dropdown } from "antd";
 import { useTranslation } from "react-i18next";
-import { useHomeSlideIsHero, useHomeSlideIndex } from "./HomeSlideContext";
+import { useHomeSlideIndex } from "./HomeSlideContext";
 import { HOME_SCROLL_MS } from "./homeMotion";
 import { useHomeTheme } from "./HomeThemeContext";
 import { useHomeLanguage } from "./useHomeLanguage";
 import SearchButton from "../SearchButton";
+import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { OpenSourceMegaMenu } from "@site/src/theme/NavbarItem/OpenSourceNavbarItem";
 import { OPEN_SOURCE_PROJECTS } from "@site/src/components/OpenSource";
@@ -150,7 +151,6 @@ const NAV_LINKS: {
 
 const HomeNavbar: React.FC = () => {
   const { t } = useTranslation();
-  const isHeroSlide = useHomeSlideIsHero();
   const activeSlideIndex = useHomeSlideIndex();
   const location = useLocation();
   const isHomePage = location.pathname === "/" || location.pathname === "";
@@ -162,8 +162,6 @@ const HomeNavbar: React.FC = () => {
   const [communityOpen, setCommunityOpen] = useState(false);
   const [mobileOpenSourceOpen, setMobileOpenSourceOpen] = useState(false);
   const [mobileCommunityOpen, setMobileCommunityOpen] = useState(false);
-  /** 背景层刷满 100% 后才显示底边线 */
-  const [showBorder, setShowBorder] = useState(false);
   /** 移动端自由滚动时 Hero 滚走进度 0~1，用于控制背景层 scaleY */
   const [scrollProgress, setScrollProgress] = useState(0);
   /** 是否整屏模式（PC 宽屏） */
@@ -178,6 +176,47 @@ const HomeNavbar: React.FC = () => {
    * 避免从小屏切到大屏时背景色缓慢变化。
    */
   const [modeTransitioning, setModeTransitioning] = useState(false);
+  /** 桌面导航内容是否放不下，需要切换到菜单按钮 */
+  const [collapsed, setCollapsed] = useState(false);
+  const [measureReady, setMeasureReady] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+  /** 完整桌面内容所需宽度（语言不变时固定），避免 collapsed 后 nav 隐藏无法测量 */
+  const neededWidthRef = useRef(0);
+
+  // 根据内容宽度自适应：左侧导航 + 右侧工具 > header 可用宽度时切换为菜单
+  useEffect(() => {
+    const header = headerRef.current;
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!header || !left || !right) return;
+
+    // 仅在未折叠时测量完整内容宽度（此时桌面导航可见）
+    if (!collapsed && neededWidthRef.current === 0) {
+      neededWidthRef.current = left.scrollWidth + right.scrollWidth + 24;
+    }
+
+    const check = () => {
+      const available = header.clientWidth;
+      // 屏幕宽度小于 834px 或内容放不下时，都切换为菜单
+      const tooNarrow = window.innerWidth < 834;
+      setCollapsed(tooNarrow || neededWidthRef.current > available);
+    };
+
+    check();
+    setMeasureReady(true);
+
+    const ro = new ResizeObserver(check);
+    ro.observe(header);
+    return () => ro.disconnect();
+  }, [collapsed]);
+
+  // 语言切换后重置测量值并展开导航，下一帧重新测量
+  useEffect(() => {
+    neededWidthRef.current = 0;
+    setCollapsed(false);
+  }, [currentLng]);
 
   // 检测是否整屏模式
   useEffect(() => {
@@ -211,12 +250,18 @@ const HomeNavbar: React.FC = () => {
   useEffect(() => {
     const scroller = document.querySelector(".home-new-scroller");
 
-    const update = () => {
-      if (!scroller) return;
-      const heroHeight = scroller.clientHeight;
-      const scrollTop = scroller.scrollTop;
-      const progress = Math.min(1, Math.max(0, scrollTop / heroHeight));
-      setScrollProgress(progress);
+    // scroll/resize 都是高频事件，用 rAF 合并到下一帧再 setState，避免每帧重渲染
+    let rafId = null;
+    const schedule = () => {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (!scroller) return;
+        const heroHeight = scroller.clientHeight;
+        const scrollTop = scroller.scrollTop;
+        const progress = Math.min(1, Math.max(0, scrollTop / heroHeight));
+        setScrollProgress(progress);
+      });
     };
 
     if (!isHomePage || isSnapMode) {
@@ -227,12 +272,19 @@ const HomeNavbar: React.FC = () => {
 
     if (!scroller) return;
 
-    update();
-    scroller.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
+    // 首次同步计算一次
+    {
+      const heroHeight = scroller.clientHeight;
+      const scrollTop = scroller.scrollTop;
+      const progress = Math.min(1, Math.max(0, scrollTop / heroHeight));
+      setScrollProgress(progress);
+    }
+    scroller.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
     return () => {
-      scroller.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      if (rafId != null) cancelAnimationFrame(rafId);
+      scroller.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
     };
   }, [isHomePage, isSnapMode, activeSlideIndex]);
 
@@ -246,14 +298,23 @@ const HomeNavbar: React.FC = () => {
   }, [mobileOpen]);
 
   useEffect(() => {
+    // resize 期间用 rAF 合并，避免高频触发
+    let rafId = null;
     const onResize = () => {
-      if (window.innerWidth >= 1024) {
-        setMobileOpen(false);
-      }
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (!collapsed) {
+          setMobileOpen(false);
+        }
+      });
     };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [collapsed]);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -265,23 +326,8 @@ const HomeNavbar: React.FC = () => {
     setMobileCommunityOpen(false);
   };
 
-  // 桌面 / 小屏：离开 Hero 即刷出导航样式（无 Provider 时 isHeroSlide=false）
-  const isHero = isHomePage && isHeroSlide;
-
   // 与整屏切换同时长，避免首屏切走时导航「拖更久」造成体感不一致
   const surfaceMs = HOME_SCROLL_MS;
-
-  // 边框：等背景层完全刷满后再出现；回到 Hero 立即隐藏
-  useEffect(() => {
-    if (isHero || (isHomePage && !isSnapMode && scrollProgress < 1)) {
-      setShowBorder(false);
-      return;
-    }
-    const timer = window.setTimeout(() => {
-      setShowBorder(true);
-    }, surfaceMs);
-    return () => window.clearTimeout(timer);
-  }, [isHero, isHomePage, isSnapMode, scrollProgress, surfaceMs]);
 
   // 文字颜色：统一使用非 Hero 样式
   const textColor = "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]";
@@ -300,21 +346,25 @@ const HomeNavbar: React.FC = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-[200] w-full h-[80px] relative overflow-hidden">
+      <style>{`
+        /* 小屏默认隐藏桌面导航、显示菜单按钮，避免 JS 测量前的闪现 */
+        @media (max-width: 833px) {
+          [data-nav-desktop] { display: none !important; }
+          [data-nav-mobile] { display: flex !important; }
+        }
+      `}</style>
+      <header ref={headerRef} className="sticky top-0 z-[200] w-full h-[80px] relative overflow-hidden">
         {/* 背景层：始终使用 Gold-Bg 颜色 */}
         <div
           className="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Bg)]"
         />
-        {/* 边框层：背景刷满后显示底部线条 */}
+        {/* 边框层：始终显示底部线条 */}
         <div
-          className="absolute inset-x-0 bottom-0 h-[1px] w-full bg-[var(--Colors-Use-Main---Gold-Focus)] pointer-events-none transition-opacity duration-150 ease-out"
-          style={{
-            opacity: showBorder ? 1 : 0,
-          }}
+          className="absolute inset-x-0 bottom-0 h-[1px] w-full bg-[var(--Colors-Use-Main---Gold-Focus)] pointer-events-none"
         />
         {/* 内容层（相对定位，确保内容在背景和边框之上） */}
-        <div className="relative flex items-center justify-between md:px-[40px] lg:px-[60px] xl:px-[80px] h-full px-[16px]">
-          <div className="flex">
+        <div className={`relative flex items-center justify-between h-full ${HOME_CONTAINER_CLASS}`}>
+          <div ref={leftRef} className="flex items-center min-w-0">
             <Link className="inline-flex flex-shrink-0 mr-[24px]" to="/">
               <img
                 src={logoSrc}
@@ -322,7 +372,7 @@ const HomeNavbar: React.FC = () => {
                 className="w-[99px] h-[36px] object-contain"
               />
             </Link>
-            <nav className="hidden lg:flex items-center">
+            <nav data-nav-desktop className={`items-center ${!measureReady || collapsed ? "hidden" : "flex"}`}>
               {NAV_LINKS.map((link) => {
                 if (link.dropdown === "opensource") {
                   return (
@@ -447,7 +497,7 @@ const HomeNavbar: React.FC = () => {
             </nav>
           </div>
 
-          <div className="hidden lg:flex items-center flex-shrink-0">
+          <div ref={rightRef} data-nav-desktop className={`items-center flex-shrink-0 ${!measureReady || collapsed ? "hidden" : "flex"}`}>
             <div
               style={navColorStyle}
               className={`inline-flex items-center ${textColor} font-['PingFang_SC'] font-normal tracking-[0.1px] text-[14px] leading-[20px] cursor-pointer mr-[18px] transition-colors ease-in-out hover:text-[color:var(--Colors-Use-Main---web-Primary)]`}
@@ -485,7 +535,7 @@ const HomeNavbar: React.FC = () => {
             </a>
             <SearchButton />
           </div>
-          <div className="lg:hidden flex items-center">
+          <div data-nav-mobile className={`items-center ${collapsed ? "flex" : "hidden"}`}>
             <button
               style={navColorStyle}
               className={`inline-flex items-center justify-center w-[32px] h-[32px] mr-[16px] border-none rounded cursor-pointer transition-colors ease-in-out bg-transparent ${textColor}`}
@@ -506,8 +556,8 @@ const HomeNavbar: React.FC = () => {
 
       {/* 小屏全屏菜单 */}
       {mobileOpen ? (
-        <div className="fixed inset-0 z-[300] lg:hidden flex flex-col bg-[var(--Colors-Use-Main---Gold-Bg)]">
-          <div className="flex items-center justify-between h-[80px] px-[18px] shrink-0">
+        <div className={`fixed inset-0 z-[300] flex flex-col bg-[var(--Colors-Use-Main---Gold-Bg)] ${collapsed ? "flex" : "hidden"}`}>
+          <div className={`flex items-center justify-between h-[80px] shrink-0 ${HOME_CONTAINER_CLASS}`}>
             <Link
               className="inline-flex flex-shrink-0"
               to="/"

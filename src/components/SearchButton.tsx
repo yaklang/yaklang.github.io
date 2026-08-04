@@ -455,10 +455,12 @@ const SearchButton: React.FC = () => {
   return (
     <>
       <div
-        className={`inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]`}
+        className={`group inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]`}
         onClick={() => setOpen(true)}
       >
-        {SearchIcon}
+        <span className="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] transition-colors duration-200">
+          {SearchIcon}
+        </span>
       </div>
       {open && mounted ? createPortal(modal, document.body) : null}
     </>

@@ -52,7 +52,11 @@ const WHITEPAPER_URL =
 // 全站打包数据来源: 构建产物 static/site-packages.json, 由 scripts/gen-site-packages.js
 // 依据 old_site_packages.txt 生成, 最新置顶。
 function DownloadContent() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
+  const serifTitleClass = isEn
+    ? "font-['Crimson_Text']"
+    : "font-['Noto_Serif_SC']";
   const docsVersionsUrl = useBaseUrl("/docs-versions.json");
   const sitePackagesUrl = useBaseUrl("/site-packages.json");
   const [versions, setVersions] = useState<DocVersion[]>([]);
@@ -121,7 +125,7 @@ function DownloadContent() {
         paddingRight: 16,
       }}
     >
-      <Title level={2}>{t("DownloadResources.title")}</Title>
+      <Title level={2} className={`${serifTitleClass} ${isEn ? "!text-[38px]" : ""}`}>{t("DownloadResources.title")}</Title>
       <Paragraph type="secondary">{t("DownloadResources.intro")}</Paragraph>
 
       <Card
@@ -202,7 +206,7 @@ function DownloadContent() {
         </Space>
       </Card>
 
-      <Title level={3}>{t("DownloadResources.historyPackages.title")}</Title>
+      <Title level={3} className={`${serifTitleClass} ${isEn ? "!text-[32px]" : ""}`}>{t("DownloadResources.historyPackages.title")}</Title>
       {pkgLoading ? (
         <Paragraph type="secondary">{t("DownloadResources.historyPackages.loading")}</Paragraph>
       ) : pkgHistory.length === 0 ? (
@@ -242,7 +246,7 @@ function DownloadContent() {
         />
       )}
 
-      <Title level={3}>{t("DownloadResources.historyDocs.title")}</Title>
+      <Title level={3} className={`${serifTitleClass} ${isEn ? "!text-[32px]" : ""}`}>{t("DownloadResources.historyDocs.title")}</Title>
       {loading ? (
         <Paragraph type="secondary">{t("DownloadResources.historyDocs.loading")}</Paragraph>
       ) : history.length === 0 ? (

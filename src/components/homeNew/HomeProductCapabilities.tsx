@@ -18,7 +18,10 @@ import {
   yakIcon,
   yaklangLabelMark,
 } from "./productIcons";
-import { HOME_SECTION_CENTER_CLASS } from "./homeSectionLayout";
+import {
+  HOME_CONTAINER_CLASS,
+  HOME_SECTION_CENTER_CLASS,
+} from "./homeSectionLayout";
 import ClickStack, { ClickStackHandle } from "./ClickStack";
 
 // =========================================================
@@ -198,9 +201,55 @@ const resolveProducts = (t: (key: string) => string): Product[] =>
 
 const padIndex = (n: number) => String(n).padStart(2, "0");
 
-/** 无 poster 时用 #t=0.001 让浏览器渲染首帧占位 */
-const videoSrcWithFirstFrame = (src: string) =>
-  src.includes("#") ? src : `${src}#t=0.001`;
+/** 无 poster 时用 Canvas 从视频截取首帧作为 poster，避免 iOS Safari 黑屏 */
+const captureFirstFrame = (src: string): Promise<string | null> => {
+  return new Promise((resolve) => {
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.crossOrigin = "anonymous";
+
+    const cleanup = () => {
+      video.removeEventListener("loadeddata", onLoaded);
+      video.removeEventListener("error", onError);
+      video.pause();
+      video.src = "";
+      video.load();
+    };
+
+    const onError = () => {
+      cleanup();
+      resolve(null);
+    };
+
+    const onLoaded = () => {
+      if (video.readyState < 2 || !video.videoWidth || !video.videoHeight) {
+        return;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        cleanup();
+        resolve(null);
+        return;
+      }
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      cleanup();
+      try {
+        resolve(canvas.toDataURL("image/jpeg", 0.92));
+      } catch {
+        resolve(null);
+      }
+    };
+
+    video.addEventListener("loadeddata", onLoaded, { once: true });
+    video.addEventListener("error", onError, { once: true });
+    video.src = src;
+  });
+};
 
 // =========================================================
 // 媒体卡片
@@ -210,11 +259,35 @@ const VideoCard: React.FC<{
   isFront: boolean;
 }> = ({ src, isFront }) => {
   const ref = useRef<HTMLVideoElement | null>(null);
+  const [poster, setPoster] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isFront && ref.current) {
-      ref.current.pause();
-      ref.current.currentTime = 0;
+    let cancelled = false;
+    setPoster(null);
+    captureFirstFrame(src).then((url) => {
+      if (cancelled || !url) return;
+      setPoster(url);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [src]);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    if (isFront) {
+      video.muted = true;
+      video.playsInline = true;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {
+          // 自动播放被浏览器策略阻止，静默忽略
+        });
+      }
+    } else {
+      video.pause();
+      video.currentTime = 0;
     }
   }, [isFront]);
 
@@ -222,10 +295,13 @@ const VideoCard: React.FC<{
     <video
       ref={ref}
       className="block h-full w-full select-none bg-black object-cover object-top"
-      src={videoSrcWithFirstFrame(src)}
-      controls={isFront}
+      src={src}
+      poster={poster ?? undefined}
+      controls={false}
       playsInline
       preload="metadata"
+      muted
+      loop
       data-no-stack-cycle={isFront ? "" : undefined}
     />
   );
@@ -243,23 +319,121 @@ const ImageCard: React.FC<{
   />
 );
 
-// =========================================================
-// 组件
+/** 拖拽/滑动切换阈值（px） */
+const SWIPE_THRESHOLD = 40;
+
+function useSwipeNext(onSwipe: () => void) {
+  const startRef = useRef({ x: 0, y: 0, active: false });
+  const onSwipeRef = useRef(onSwipe);
+  onSwipeRef.current = onSwipe;
+
+  // --- Pointer 事件（PC 端鼠标 / 触控板） ---
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    startRef.current = { x: e.clientX, y: e.clientY, active: true };
+  }, []);
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!startRef.current.active) return;
+    const dx = e.clientX - startRef.current.x;
+    const dy = e.clientY - startRef.current.y;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+      e.preventDefault();
+    }
+  }, []);
+
+  const onPointerUp = useCallback((e: React.PointerEvent) => {
+    if (!startRef.current.active) return;
+    const dx = e.clientX - startRef.current.x;
+    const dy = e.clientY - startRef.current.y;
+    startRef.current.active = false;
+    if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+      e.stopPropagation();
+      onSwipeRef.current();
+    }
+  }, []);
+
+  // --- 原生 Touch 事件（移动端） ---
+  // React 合成 pointermove 在移动端可能被浏览器吞掉或 passive 无法 preventDefault，
+  // 用原生 touchmove + { passive: false } 确保水平滑动时阻止页面滚动。
+  const touchWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = touchWrapperRef.current;
+    if (!el) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      startRef.current = { x: t.clientX, y: t.clientY, active: true };
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!startRef.current.active) return;
+      const t = e.touches[0];
+      if (!t) return;
+      const dx = t.clientX - startRef.current.x;
+      const dy = t.clientY - startRef.current.y;
+      // 水平滑动占主导时阻止默认滚动
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+        e.preventDefault();
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!startRef.current.active) return;
+      const t = e.changedTouches[0];
+      startRef.current.active = false;
+      if (!t) return;
+      const dx = t.clientX - startRef.current.x;
+      const dy = t.clientY - startRef.current.y;
+      if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+        onSwipeRef.current();
+      }
+    };
+
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
+    el.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
+    return () => {
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
+  }, []);
+
+  return {
+    ref: touchWrapperRef,
+    onPointerDownCapture: onPointerDown,
+    onPointerMoveCapture: onPointerMove,
+    onPointerUpCapture: onPointerUp,
+  };
+}
+
 // =========================================================
 const HomeProductCapabilities: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
   const PRODUCTS = useMemo(() => resolveProducts(t), [t]);
   const [active, setActive] = useState<ProductKey>("yakit");
   const [mediaIndex, setMediaIndex] = useState(0);
   const stackRef = useRef<ClickStackHandle>(null);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [stackSpread, setStackSpread] = useState(25);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const sync = () => setIsSmallScreen(mq.matches);
+    const smallMq = window.matchMedia("(max-width: 767px)");
+    const largeMq = window.matchMedia("(min-width: 1280px)");
+    const sync = () =>
+      setStackSpread(largeMq.matches ? 35 : smallMq.matches ? 25 : 30);
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    smallMq.addEventListener("change", sync);
+    largeMq.addEventListener("change", sync);
+    return () => {
+      smallMq.removeEventListener("change", sync);
+      largeMq.removeEventListener("change", sync);
+    };
   }, []);
 
   const productBase = PRODUCTS.find((p) => p.key === active) ?? PRODUCTS[0];
@@ -300,29 +474,33 @@ const HomeProductCapabilities: React.FC = () => {
     ),
   );
 
+  const swipe = useSwipeNext(goNext);
+
   return (
-    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)] px-[16px] sm:px-[24px] lg:px-[32px]">
+    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
       <div
-        className={`mx-auto w-full max-w-[1280px] overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
+        className={`mx-auto w-full overflow-hidden ${HOME_CONTAINER_CLASS} ${HOME_SECTION_CENTER_CLASS}`}
       >
         <div className="flex max-h-full min-h-0 w-full flex-col overflow-hidden text-center">
-          <div className="mb-[12px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[24px] sm:gap-[8px]">
-            <div className="font-['Noto_Serif_SC'] text-[32px] font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:text-[48px] sm:leading-[64px]">
+          <div className="mb-[8px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[16px] sm:gap-[8px]">
+            <div
+              className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
+            >
               {t("HomeProductCapabilities.title")}
             </div>
-            <div className="max-w-full text-left font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:text-[20px] sm:leading-[28px]">
+            <div className="max-w-full text-left font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:text-[clamp(16px,2vh,20px)] sm:leading-[clamp(22px,2.5vh,28px)]">
               {t("HomeProductCapabilities.subtitle")}
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[680px] flex-col overflow-hidden rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] sm:max-w-[calc(100vw-80px)] min-[1180px]:max-w-[1280px] min-[1180px]:flex-row">
+          <div className="mx-auto flex w-full max-w-[680px] flex-col overflow-hidden rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] sm:max-w-[calc(100vw-32px)] min-[756px]:max-w-[100%] min-[756px]:flex-row">
             <div className="flex min-w-0 flex-1 flex-col">
               <div
                 className="flex h-[40px] w-full min-w-0 shrink-0 items-stretch border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] sm:h-[44px]"
                 role="tablist"
               >
                 <div
-                  className="hidden min-[1180px]:flex shrink-0 items-center gap-[10px] border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]"
+                  className="hidden md:flex shrink-0 items-center gap-[10px] border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]"
                   aria-hidden
                 >
                   <span className="block h-[12px] w-[12px] rounded-full border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-transparent" />
@@ -354,7 +532,7 @@ const HomeProductCapabilities: React.FC = () => {
               </div>
 
               {/* 堆叠舞台：视频 / 图片均用 ClickStack */}
-              <div className="relative flex items-center justify-center overflow-hidden px-[28px] py-[48px] pr-[64px] pt-[56px] md:px-[40px] md:py-[56px] md:pr-[76px] md:pt-[64px] xl:py-[64px] xl:pt-[72px]">
+              <div className="relative flex items-center justify-center overflow-hidden pl-[16px] pr-[40px] pt-[40px] pb-[16px] md:px-[40px] md:py-[40px] md:pr-[76px] md:pt-[48px] lg:py-[32px] lg:pt-[40px] xl:py-[48px] xl:pt-[56px]">
                 <div
                   className="pointer-events-none absolute inset-0 transition-[background] duration-300"
                   style={{
@@ -365,28 +543,27 @@ const HomeProductCapabilities: React.FC = () => {
                 />
 
                 {total === 0 ? (
-                  <div className="relative z-[1] flex aspect-[16/10] h-[240px] w-auto max-w-full shrink-0 items-center justify-center rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] font-['PingFang_SC'] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:h-[300px] md:h-[340px] xl:h-[632px]">
+                  <div className="relative z-[1] flex aspect-[16/10] h-[200px] w-auto max-w-full shrink-0 items-center justify-center rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] font-['PingFang_SC'] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:h-[240px] md:h-[280px] lg:h-[clamp(260px,38vh,340px)] xl:h-[clamp(300px,42vh,400px)]">
                     {t("HomeProductCapabilities.noDemo")}
                   </div>
                 ) : (
                   <div
-                    className="relative z-[1] aspect-[16/10] h-[240px] w-auto max-w-full shrink-0 sm:h-[300px] md:h-[340px] xl:h-[632px]"
+                    {...swipe}
+                    className="relative z-[1] aspect-[16/10] h-[200px] w-auto max-w-full shrink-0 cursor-grab active:cursor-grabbing sm:h-[240px] md:h-[280px] lg:h-[clamp(260px,38vh,340px)] xl:h-[clamp(300px,42vh,400px)]"
                     aria-label={`${productBase.label} ${isVideo ? t("HomeProductCapabilities.demoVideo") : t("HomeProductCapabilities.demoScreenshot")}`}
                   >
                     <ClickStack
                       key={active}
                       ref={stackRef}
                       items={stackItems}
-                      spreadX={isSmallScreen ? 20 : 40}
-                      spreadY={isSmallScreen ? -20 : -40}
+                      spreadX={stackSpread}
+                      spreadY={-stackSpread}
                       duration={0.35}
                       ease="power3.out"
                       borderRadius={8}
-                      shadowBlur={24}
-                      shadowOpacity={0.28}
                       visibleCount={Math.min(3, total)}
                       depthScale={0.06}
-                      depthOpacity={0.12}
+                      cardColor="var(--Colors-Use-Main---Gold-Focus)"
                       cardClassName="border border-solid border-[var(--Colors-Use-Main---Gold-Border)]"
                       onFrontChange={(idx) => {
                         setMediaIndex(idx);
@@ -460,8 +637,8 @@ const HomeProductCapabilities: React.FC = () => {
               </div>
             </div>
 
-            <aside className="flex max-h-[36%] w-full shrink-0 flex-col justify-between overflow-hidden border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] p-[16px] sm:p-[20px] min-[1180px]:max-h-none min-[1180px]:w-[320px] min-[1180px]:max-w-[320px] min-[1180px]:flex-[0_0_320px] min-[1180px]:border-l min-[1180px]:border-t-0 min-[1180px]:border-l-[var(--Colors-Use-Main---Gold-Focus)] min-[1180px]:p-[20px] xl:w-[340px] xl:max-w-[340px] xl:flex-[0_0_340px] xl:p-[24px]">
-              <div className="flex min-h-0 flex-col items-start gap-[8px] overflow-hidden sm:gap-[10px]">
+            <aside className="flex max-h-[36%] w-full shrink-0 flex-col justify-between overflow-hidden border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] p-[16px] sm:p-[20px] min-[756px]:max-h-none min-[756px]:w-[380px] min-[756px]:max-w-[380px] min-[756px]:flex-[0_0_380px] min-[756px]:border-l min-[756px]:border-t-0 min-[756px]:border-l-[var(--Colors-Use-Main---Gold-Focus)] min-[756px]:p-[20px] 2xl:w-[440px] 2xl:max-w-[440px] 2xl:flex-[0_0_440px] 2xl:p-[24px]">
+              <div className="flex min-h-0 flex-col items-start gap-[8px] overflow-visible sm:gap-[10px]">
                 <div className="flex items-center gap-[10px]">
                   {productBase.wordmark ? (
                     <span
@@ -505,16 +682,18 @@ const HomeProductCapabilities: React.FC = () => {
                     </>
                   )}
                 </div>
-                <p className="m-0 max-w-full overflow-hidden text-left font-['PingFang_SC'] text-[13px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[15px] sm:leading-[22px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] min-[1180px]:[-webkit-line-clamp:4]">
+                <p className="m-0 max-w-full overflow-visible text-left font-['PingFang_SC'] text-[13px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[15px] sm:leading-[22px]">
                   {productBase.description}
                 </p>
               </div>
 
-              <div className="mt-[12px] flex min-h-0 shrink flex-col gap-[10px] overflow-hidden text-left min-[1180px]:mt-[16px] min-[1180px]:gap-[14px] xl:gap-[18px]">
-                <h3 className="m-0 shrink-0 font-['Noto_Serif_SC'] text-[20px] font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:text-[24px] sm:leading-[32px] xl:text-[28px] xl:leading-[36px]">
+              <div className="mt-[12px] flex min-h-0 shrink flex-col gap-[10px] overflow-visible text-left xl:mt-[16px] xl:gap-[14px] 2xl:gap-[18px]">
+                <h3
+                  className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
+                >
                   {t("HomeProductCapabilities.coreFeatures")}
                 </h3>
-                <div className="flex min-h-0 flex-col gap-[8px] overflow-hidden sm:gap-[10px] xl:gap-[12px]">
+                <div className="flex min-h-0 flex-col gap-[8px] overflow-visible sm:gap-[10px] xl:gap-[12px]">
                   {productBase.features.map((feat) => (
                     <div
                       key={feat.title}
@@ -523,7 +702,7 @@ const HomeProductCapabilities: React.FC = () => {
                       <div className="font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:text-[16px] sm:leading-[22px]">
                         {feat.title}
                       </div>
-                      <div className="overflow-hidden font-['PingFang_SC'] text-[12px] leading-[16px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[13px] sm:leading-[18px] [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+                      <div className="overflow-visible font-['PingFang_SC'] text-[12px] leading-[16px] tracking-[0.1px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[13px] sm:leading-[18px]">
                         {feat.desc}
                       </div>
                     </div>

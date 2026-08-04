@@ -11,7 +11,7 @@ const HomePartnerMarquee: React.FC = () => {
 
   return (
     <div
-      className="w-full shrink-0 py-[12px] sm:py-[20px]"
+      className="w-full shrink-0 py-[12px] opacity-30 sm:py-[20px]"
       aria-label="合作伙伴"
     >
       <style>{`
@@ -28,7 +28,7 @@ const HomePartnerMarquee: React.FC = () => {
           }
         }
       `}</style>
-      <div className="mx-auto w-full max-w-[1400px] overflow-hidden px-[18px] lg:px-[80px]">
+      <div className="w-full overflow-hidden">
         <div className="home-partner-marquee-track flex w-max items-center gap-[40px] sm:gap-[56px]">
           {track.map((item, index) => (
             <a

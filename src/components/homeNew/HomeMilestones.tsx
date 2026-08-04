@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { HOME_CONTAINER_CLASS, HOME_NAVBAR_HEIGHT } from "./homeSectionLayout";
 
 // =========================================================
 // 图标
@@ -112,7 +113,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2024_yakit_v2_test.impact",
       dateLabelKey: "HomeMilestones.items.m2024_yakit_v2_test.dateLabel",
       href: "https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649944674&idx=1&sn=bb61768ac951be7656caf3d6f58794dd",
-      image: "",
+      image: "img/newHome/20260804203037.png",
     },
     {
       year: "2024",
@@ -182,8 +183,14 @@ const ViewFullDataLink: React.FC<{ label: string; className?: string }> = ({
 );
 
 const ROW_H = 112;
-/** 视口高度 >= 该值时显示 5 行，否则 4 行 */
-const TALL_VIEWPORT_MQ = "(min-height: 800px)";
+/** 表格最少保留行数 */
+const MIN_ROWS = 4;
+/** 表格最多保留行数（一屏切换时展示约 6 个事件） */
+const MAX_ROWS = 6;
+/** 标题区 + 表格头尾/间距在 lg 以上预留的安全高度 */
+const LG_HEADER_RESERVE = 280;
+/** md/sm 区域预留高度 */
+const MD_HEADER_RESERVE = 240;
 
 const SCROLLBAR_HIDE =
   "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [overflow-anchor:none]";
@@ -215,17 +222,37 @@ const buildYearGroups = (list: MilestoneItem[]): YearGroup[] => {
   return Array.from(map.values());
 };
 
-const useVisibleRows = () => {
-  const [rows, setRows] = useState(5);
+const clamp = (n: number, min: number, max: number) =>
+  Math.max(min, Math.min(max, n));
+
+/** 根据实际视口高度返回 lg/md 下的表格可见行数 */
+const useVisibleRows = (breakpoint: "sm" | "md" | "lg") => {
+  const [rows, setRows] = useState(breakpoint === "lg" ? 5 : 4);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mq = window.matchMedia(TALL_VIEWPORT_MQ);
-    const sync = () => setRows(mq.matches ? 5 : 4);
+    if (typeof window === "undefined") return;
+    const reserve = breakpoint === "lg" ? LG_HEADER_RESERVE : MD_HEADER_RESERVE;
+
+    // resize 期间用 rAF 合并，避免拖动窗口时高频 setState 造成卡顿
+    let rafId = null;
+    const sync = () => {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const available = window.innerHeight - HOME_NAVBAR_HEIGHT;
+        // 剩余空间能放几行；给滚动条/边线留 2px 余量
+        const count = Math.floor((available - reserve) / ROW_H);
+        setRows(clamp(count, MIN_ROWS, MAX_ROWS));
+      });
+    };
+
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
+    window.addEventListener("resize", sync, { passive: true });
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", sync);
+    };
+  }, [breakpoint]);
 
   return rows;
 };
@@ -350,15 +377,18 @@ const useMilestonesScrollGate = (
 // 组件
 // =========================================================
 const HomeMilestones: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
   const sectionRef = useRef<HTMLElement>(null);
   const MILESTONES = useMemo(() => getMilestonesBase(t), [t]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mobileHoveredIndex, setMobileHoveredIndex] = useState<number | null>(
     null,
   );
-  const visibleRows = useVisibleRows();
-  const bodyH = ROW_H * visibleRows;
+  const lgVisibleRows = useVisibleRows("lg");
+  const mdVisibleRows = useVisibleRows("md");
+  const lgBodyH = ROW_H * lgVisibleRows;
+  const mdBodyH = ROW_H * mdVisibleRows;
   useMilestonesScrollGate(sectionRef);
 
   const yearGroups = useMemo(() => buildYearGroups(MILESTONES), [MILESTONES]);
@@ -372,11 +402,15 @@ const HomeMilestones: React.FC = () => {
       className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
     >
       <div className="flex min-h-0 w-full flex-1 flex-col justify-start overflow-hidden py-[16px] sm:py-[20px] lg:justify-center lg:py-[24px] xl:py-[40px]">
-        {/* 标题区 */}
-        <div className="mb-[12px] flex shrink-0 flex-col gap-[8px] px-[16px] sm:mb-[16px] sm:flex-row sm:items-end sm:justify-between sm:gap-[16px] md:px-[32px] xl:mb-[40px] xl:gap-[24px] xl:px-[80px]">
+        {/* 标题区：与表格外层版心边界对齐 */}
+        <div
+          className={`mb-[12px] flex w-full shrink-0 flex-col gap-[8px] sm:mb-[16px] sm:flex-row sm:items-end sm:justify-between sm:gap-[16px] xl:mb-[40px] xl:gap-[24px] ${HOME_CONTAINER_CLASS}`}
+        >
           <div className="flex flex-col gap-[6px] sm:gap-[8px]">
             <div className="flex flex-wrap items-baseline gap-x-[12px] gap-y-[4px]">
-              <h2 className="m-0 font-['Noto_Serif_SC'] text-[28px] font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:text-[32px] sm:leading-[40px] xl:text-[48px] xl:leading-[64px]">
+              <h2
+                className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[40px] xl:text-[56px]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[32px] xl:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[40px] xl:leading-[64px]`}
+              >
                 {t("HomeMilestones.title")}
               </h2>
               <a
@@ -398,7 +432,9 @@ const HomeMilestones: React.FC = () => {
               {t("HomeMilestones.viewFullData")}
               {ArrowUpRightSmIcon}
             </a>
-            <div className="flex items-end gap-[8px] font-['Noto_Serif_SC'] text-[40px] font-medium leading-[40px] text-[color:var(--Colors-Neutral-100,)] sm:hidden">
+            <div
+              className={`flex items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[48px]" : "font-['Noto_Serif_SC'] text-[40px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100,)] sm:hidden`}
+            >
               <span>
                 {rangeStart}——{rangeEnd}
               </span>
@@ -408,12 +444,16 @@ const HomeMilestones: React.FC = () => {
             </div>
           </div>
 
-          <div className="hidden items-end gap-[8px] font-['Noto_Serif_SC'] text-[36px] font-medium leading-[36px] text-[color:var(--Colors-Neutral-100,)] sm:flex xl:text-[96px] xl:leading-[112px]">
+          <div
+            className={`hidden items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[44px] xl:text-[104px]" : "font-['Noto_Serif_SC'] text-[36px] xl:text-[96px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100,)] sm:flex xl:leading-[112px]`}
+          >
             <span>
               {rangeStart}——{rangeEnd}
             </span>
             <span className="inline-flex translate-y-[15px] xl:translate-y-[12px]">
-              <span className="scale-75 xl:scale-100">{ArrowDownRightLgIcon}</span>
+              <span className="scale-75 xl:scale-100">
+                {ArrowDownRightLgIcon}
+              </span>
             </span>
           </div>
         </div>
@@ -433,7 +473,7 @@ const HomeMilestones: React.FC = () => {
                   onMouseLeave={() => setMobileHoveredIndex(null)}
                   onFocus={() => setMobileHoveredIndex(index)}
                   onBlur={() => setMobileHoveredIndex(null)}
-                  className={`group flex flex-col gap-[8px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[12px] pt-[16px] pb-[30px] !no-underline transition-colors duration-200 ${
+                  className={`group flex flex-col gap-[8px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] pt-[16px] pb-[30px] !no-underline transition-colors duration-200 ${
                     active
                       ? "bg-[var(--Colors-Use-Main---Gold-Focus)]"
                       : "bg-transparent"
@@ -441,7 +481,7 @@ const HomeMilestones: React.FC = () => {
                 >
                   <div className="flex items-start justify-between gap-[12px]">
                     <span
-                      className={`font-['Noto_Serif_SC'] text-[24px] font-medium leading-[28px] transition-colors duration-200 ${
+                      className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[28px] transition-colors duration-200 ${
                         active
                           ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                           : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -468,7 +508,9 @@ const HomeMilestones: React.FC = () => {
                   >
                     {item.dateLabel}
                   </span>
-                  <h3 className="mb-[0px] font-['Noto_Serif_SC'] text-[20px] font-semibold leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]">
+                  <h3
+                    className={`mb-[0px] ${isEn ? "font-['Crimson_Text'] text-[28px]" : "font-['Noto_Serif_SC'] text-[20px]"} font-semibold leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                  >
                     {item.title}
                   </h3>
                   <p
@@ -483,18 +525,20 @@ const HomeMilestones: React.FC = () => {
                 </a>
               );
             })}
-            <div className="flex items-center border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[12px] py-[20px]">
+            <div className="flex items-center border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[20px]">
               <ViewFullDataLink label={t("HomeMilestones.viewFullData")} />
             </div>
           </div>
         </div>
 
         {/* ========== 中屏：年 | 序号+事件（可视约 5 行，手动滚动） ========== */}
-        <div className="hidden shrink-0 border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:block lg:hidden">
+        <div
+          className={`hidden shrink-0 sm:block lg:hidden ${HOME_CONTAINER_CLASS}`}
+        >
           <div
             data-milestones-scroll
-            className={`overflow-y-auto overscroll-contain [contain:strict] ${SCROLLBAR_HIDE}`}
-            style={{ height: bodyH }}
+            className={`overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE}`}
+            style={{ height: mdBodyH }}
           >
             {yearGroups.map((group, groupIndex) => (
               <div
@@ -504,8 +548,10 @@ const HomeMilestones: React.FC = () => {
                 }`}
               >
                 <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
-                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] px-[10px] py-[10px] md:px-[14px] md:py-[12px]">
-                    <span className="block truncate font-['Noto_Serif_SC'] text-[22px] font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:text-[26px] md:leading-[32px]">
+                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[10px] md:py-[12px]">
+                    <span
+                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[30px] md:text-[34px]" : "font-['Noto_Serif_SC'] text-[22px] md:text-[26px]"} font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:leading-[32px]`}
+                    >
                       {group.year}
                     </span>
                   </div>
@@ -523,7 +569,7 @@ const HomeMilestones: React.FC = () => {
                         onMouseLeave={() => setHoveredIndex(null)}
                         onFocus={() => setHoveredIndex(index)}
                         onBlur={() => setHoveredIndex(null)}
-                        className={`group grid grid-cols-[48px_minmax(0,1fr)_36px_24px] min-h-[112px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 md:grid-cols-[56px_minmax(0,1fr)_40px_32px] ${
+                        className={`group grid grid-cols-[48px_minmax(0,1fr)_36px] min-h-[112px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 md:grid-cols-[56px_minmax(0,1fr)_40px] ${
                           active
                             ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
                             : "bg-transparent"
@@ -537,7 +583,7 @@ const HomeMilestones: React.FC = () => {
                           }`}
                         >
                           <span
-                            className={`font-['Noto_Serif_SC'] text-[24px] font-medium leading-[24px] transition-colors duration-200 ${
+                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[24px] transition-colors duration-200 ${
                               active
                                 ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -546,7 +592,7 @@ const HomeMilestones: React.FC = () => {
                             {padIndex(index + 1)}.
                           </span>
                         </div>
-                        <div className="flex h-full min-w-0 flex-col justify-start overflow-hidden py-[14px] pl-[12px] pr-[8px]">
+                        <div className="flex h-full min-w-0 flex-col justify-start py-[14px] pl-[12px] pr-[8px]">
                           <div
                             className={`mb-[4px] truncate font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 lg:hidden ${
                               active
@@ -556,11 +602,13 @@ const HomeMilestones: React.FC = () => {
                           >
                             {item.dateLabel}
                           </div>
-                          <h3 className="m-0 mb-[20px] line-clamp-3 font-['Noto_Serif_SC'] text-[16px] font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]">
+                          <h3
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px]" : "font-['Noto_Serif_SC'] text-[16px]"} font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                          >
                             {item.title}
                           </h3>
                           <p
-                            className={`m-0 line-clamp-1 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 ${
+                            className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 ${
                               active
                                 ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
@@ -570,15 +618,14 @@ const HomeMilestones: React.FC = () => {
                           </p>
                         </div>
                         <span
-                          className={`inline-flex h-full items-center justify-center border-0 border-r border-solid transition-colors duration-200 ${
+                          className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
                             active
-                              ? "border-[var(--Colors-Use-Main---Gold-Bg)] text-[color:var(--Colors-Use-Main---web-Primary)]"
-                              : "border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
+                              ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
+                              : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
                           }`}
                         >
                           {ChevronDoubleRightIcon}
                         </span>
-                        <div aria-hidden className="h-full" />
                       </a>
                     );
                   })}
@@ -590,14 +637,10 @@ const HomeMilestones: React.FC = () => {
                 className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
                 aria-hidden
               />
-              <div className="grid grid-cols-[minmax(0,1fr)_36px_24px] md:grid-cols-[minmax(0,1fr)_40px_32px]">
+              <div className="grid grid-cols-[minmax(0,1fr)_36px] md:grid-cols-[minmax(0,1fr)_40px]">
                 <div className="flex items-center px-[10px] py-[14px] md:px-[12px]">
                   <ViewFullDataLink label={t("HomeMilestones.viewFullData")} />
                 </div>
-                <div
-                  className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
-                  aria-hidden
-                />
                 <div aria-hidden />
               </div>
             </div>
@@ -605,11 +648,11 @@ const HomeMilestones: React.FC = () => {
         </div>
 
         {/* ========== 大屏：年 | 图+事件（可视约 5 行，手动滚动） ========== */}
-        <div className="hidden shrink-0 border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] lg:block">
+        <div className={`hidden shrink-0 lg:block ${HOME_CONTAINER_CLASS}`}>
           <div
             data-milestones-scroll
-            className={`overflow-x-hidden overflow-y-auto overscroll-contain [contain:strict] ${SCROLLBAR_HIDE}`}
-            style={{ height: bodyH }}
+            className={`overflow-x-hidden overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE}`}
+            style={{ height: lgBodyH }}
           >
             {yearGroups.map((group, groupIndex) => (
               <div
@@ -619,8 +662,10 @@ const HomeMilestones: React.FC = () => {
                 }`}
               >
                 <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
-                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] px-[12px] py-[12px] xl:px-[20px] xl:py-[18px] 2xl:px-[24px]">
-                    <span className="block truncate font-['Noto_Serif_SC'] text-[24px] font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:text-[32px] xl:leading-[40px] 2xl:text-[36px] 2xl:leading-[44px]">
+                  <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[12px] xl:py-[18px] 2xl:py-[18px]">
+                    <span
+                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[32px] xl:text-[40px] 2xl:text-[44px]" : "font-['Noto_Serif_SC'] text-[24px] xl:text-[32px] 2xl:text-[36px]"} font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[40px] 2xl:leading-[44px]`}
+                    >
                       {group.year}
                     </span>
                   </div>
@@ -640,7 +685,7 @@ const HomeMilestones: React.FC = () => {
                         onMouseLeave={() => setHoveredIndex(null)}
                         onFocus={() => setHoveredIndex(index)}
                         onBlur={() => setHoveredIndex(null)}
-                        className={`group relative z-[1] grid min-w-0 grid-cols-[100px_40px_200px_minmax(0,1fr)_40px_16px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 xl:grid-cols-[180px_56px_200px_minmax(0,1fr)_48px_96px] 2xl:grid-cols-[200px_64px_200px_minmax(0,1fr)_52px_120px] ${
+                        className={`group relative z-[1] grid min-w-0 grid-cols-[100px_40px_200px_minmax(0,1fr)_40px] border-0 border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] !no-underline last:border-b-0 transition-colors duration-200 xl:grid-cols-[180px_56px_200px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_64px_200px_minmax(0,1fr)_52px] ${
                           active
                             ? "bg-[var(--Colors-Use-Main---Gold-Focus)] shadow-[inset_1px_0_0_var(--Colors-Use-Main---Gold-Bg)]"
                             : "bg-transparent"
@@ -677,7 +722,7 @@ const HomeMilestones: React.FC = () => {
                           className={`flex h-full items-start px-[8px] pt-[10px] xl:px-[12px] xl:pt-[14px]`}
                         >
                           <span
-                            className={`font-['Noto_Serif_SC'] text-[24px] font-medium leading-[22px] transition-colors duration-200 ${
+                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[22px] transition-colors duration-200 ${
                               active
                                 ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -687,11 +732,7 @@ const HomeMilestones: React.FC = () => {
                           </span>
                         </div>
                         <div
-                          className={`flex h-full items-start border-0 border-r border-solid px-[10px] pt-[10px] xl:px-[16px] xl:pt-[14px] ${
-                            active
-                              ? "border-[var(--Colors-Use-Main---Gold-Bg)]"
-                              : "border-[var(--Colors-Use-Main---Gold-Focus)]"
-                          }`}
+                          className={`flex h-full items-start px-[10px] pt-[10px] xl:px-[16px] xl:pt-[14px]`}
                         >
                           <span
                             className={`truncate font-['PingFang_SC'] text-[13px] leading-[22px] transition-colors duration-200 xl:text-[14px] xl:leading-[28px] ${
@@ -703,12 +744,14 @@ const HomeMilestones: React.FC = () => {
                             {item.dateLabel}
                           </span>
                         </div>
-                        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center overflow-hidden py-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px]">
-                          <h3 className="m-0 mb-[20px] line-clamp-3 font-['Noto_Serif_SC'] text-[16px] font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:text-[18px] xl:leading-[26px]">
+                        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center py-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px]">
+                          <h3
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px]" : "font-['Noto_Serif_SC'] text-[16px] xl:text-[18px]"} font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
+                          >
                             {item.title}
                           </h3>
                           <p
-                            className={`m-0 line-clamp-1 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 xl:line-clamp-2 xl:text-[15px] xl:leading-[22px] ${
+                            className={`m-0 font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 xl:text-[15px] xl:leading-[22px] ${
                               active
                                 ? "!text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "!text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]"
@@ -718,15 +761,14 @@ const HomeMilestones: React.FC = () => {
                           </p>
                         </div>
                         <span
-                          className={`inline-flex h-full items-center justify-center border-0 border-r border-solid transition-colors duration-200 ${
+                          className={`inline-flex h-full items-center justify-end pr-[8px] transition-colors duration-200 ${
                             active
-                              ? "border-[var(--Colors-Use-Main---Gold-Bg)] text-[color:var(--Colors-Use-Main---web-Primary)]"
-                              : "border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
+                              ? "text-[color:var(--Colors-Use-Main---web-Primary)]"
+                              : "text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]"
                           }`}
                         >
                           {ChevronDoubleRightIcon}
                         </span>
-                        <div aria-hidden className="h-full" />
                       </a>
                     );
                   })}
@@ -738,7 +780,7 @@ const HomeMilestones: React.FC = () => {
                 className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
                 aria-hidden
               />
-              <div className="grid grid-cols-[100px_minmax(0,1fr)_40px_16px] xl:grid-cols-[180px_minmax(0,1fr)_48px_96px] 2xl:grid-cols-[200px_minmax(0,1fr)_52px_120px]">
+              <div className="grid grid-cols-[100px_minmax(0,1fr)_40px] xl:grid-cols-[180px_minmax(0,1fr)_48px] 2xl:grid-cols-[200px_minmax(0,1fr)_52px]">
                 <div
                   className="relative overflow-hidden border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
                   aria-hidden
@@ -748,10 +790,6 @@ const HomeMilestones: React.FC = () => {
                 <div className="flex w-full items-center px-[10px] py-[14px] xl:px-[12px] xl:py-[20px]">
                   <ViewFullDataLink label={t("HomeMilestones.viewFullData")} />
                 </div>
-                <div
-                  className="border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
-                  aria-hidden
-                />
                 <div aria-hidden />
               </div>
             </div>

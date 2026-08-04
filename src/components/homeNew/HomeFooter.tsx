@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import SearchButton from "../SearchButton";
 import { useHomeTheme } from "./HomeThemeContext";
 import { useHomeLanguage } from "./useHomeLanguage";
+import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const GithubIcon = () => (
   <svg
@@ -379,7 +380,8 @@ const HomeFooter: React.FC<{
   /** 非首页场景加顶部 Focus 边框 */
   withTopBorder?: boolean;
 }> = ({ withTopBorder = false }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
   const logoSrc = useBaseUrl("img/logo.png");
   const { currentLng, toggleLanguage } = useHomeLanguage();
 
@@ -395,11 +397,10 @@ const HomeFooter: React.FC<{
           : ""
       }`}
     >
-      {" "}
-      {/* 主内容：与立即体验 / header 同宽 container */}
-      <div className="mx-auto box-border w-full px-[16px] md:px-[40px] lg:px-[60px] xl:px-[80px]">
+      {/* 主内容 */}
+      <div className={`${HOME_CONTAINER_CLASS}`}>
         <div className="flex flex-col gap-[32px] lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex flex-col gap-[16px] md:flex-row md:items-start md:justify-between lg:w-[280px] lg:shrink-0 lg:flex-col">
+          <div className="flex flex-col gap-[16px] md:flex-row md:items-start md:justify-between lg:w-auto lg:min-w-[280px] lg:shrink-0 lg:flex-col">
             <div className="flex flex-col gap-[12px]">
               <Link to="/" className="inline-flex w-fit !no-underline">
                 <img
@@ -408,7 +409,9 @@ const HomeFooter: React.FC<{
                   className="h-[36px] w-auto object-contain"
                 />
               </Link>
-              <p className="m-0 font-['Noto_Serif_SC'] text-[24px] leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)]">
+              <p
+                className={`m-0 whitespace-nowrap ${isEn ? "font-['Crimson_Text'] text-[28px]" : "font-['Noto_Serif_SC'] text-[23px]"} leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+              >
                 <span className="text-[color:var(--Colors-Use-Main---web-Primary)]">
                   /
                 </span>{" "}
@@ -444,50 +447,88 @@ const HomeFooter: React.FC<{
       </div>
       {/* 底栏 */}
       <div className="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] sm:mt-[48px]">
-        {/* 小屏：两侧竖线距屏 16px，横线分行 */}
-        <div className="mx-[16px] flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden">
-          <div className="px-[16px] py-[12px]">
-            <span className={metaClass}>
-              Copyright © {year} for Yak Project.
-            </span>
+        <div className={`${HOME_CONTAINER_CLASS}`}>
+          {/* 小屏：两侧竖线贴版心边缘，横线分行 */}
+          <div className="flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden">
+            <div className="px-[16px] py-[12px]">
+              <span className={metaClass}>
+                Copyright © {year} for Yak Project.
+              </span>
+            </div>
+            <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
+              <a
+                href="https://beian.miit.gov.cn/#/Integrated/index"
+                target="_blank"
+                rel="noreferrer"
+                className={metaClass}
+              >
+                {t("HomeFooter.icp")}
+              </a>
+            </div>
+            <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
+              <a
+                href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
+                target="_blank"
+                rel="noreferrer"
+                className={metaClass}
+              >
+                {t("HomeFooter.police")}
+              </a>
+            </div>
+            <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
+              <MobileUtilityBar
+                currentLng={currentLng}
+                onToggleLanguage={toggleLanguage}
+              />
+            </div>
           </div>
-          <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
-            <a
-              href="https://beian.miit.gov.cn/#/Integrated/index"
-              target="_blank"
-              rel="noreferrer"
-              className={metaClass}
-            >
-              {t("HomeFooter.icp")}
-            </a>
-          </div>
-          <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
-            <a
-              href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
-              target="_blank"
-              rel="noreferrer"
-              className={metaClass}
-            >
-              {t("HomeFooter.police")}
-            </a>
-          </div>
-          <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
-            <MobileUtilityBar
-              currentLng={currentLng}
-              onToggleLanguage={toggleLanguage}
-            />
-          </div>
-        </div>
 
-        {/* 中屏：两侧竖线距屏 16px；上版权，下三列竖线分割 */}
-        <div className="mx-[16px] hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden">
-          <div className="px-[16px] py-[14px]">
-            <span className={metaClass}>
-              Copyright © {year} for Yak Project.
-            </span>
+          {/* 中屏：两侧竖线贴版心边缘；上版权，下三列竖线分割 */}
+          <div className="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden">
+            <div className="px-[16px] py-[14px]">
+              <span className={metaClass}>
+                Copyright © {year} for Yak Project.
+              </span>
+            </div>
+            <div className="flex min-h-[52px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]">
+              <div className="flex min-w-0 flex-1 items-center px-[16px]">
+                <a
+                  href="https://beian.miit.gov.cn/#/Integrated/index"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                >
+                  {t("HomeFooter.icp")}
+                </a>
+              </div>
+              <div className="flex min-w-0 flex-1 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]">
+                <a
+                  href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                >
+                  {t("HomeFooter.police")}
+                </a>
+              </div>
+              <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[12px]">
+                <UtilityTools
+                  currentLng={currentLng}
+                  onToggleLanguage={toggleLanguage}
+                />
+              </div>
+            </div>
           </div>
-          <div className="flex min-h-[52px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]">
-            <div className="flex min-w-0 flex-1 items-center px-[16px]">
+
+          {/* PC：全高竖线；版权左，版号+工具右 */}
+          <div className="hidden w-full lg:flex lg:min-h-[56px]">
+            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
+              <span className={metaClass}>
+                Copyright © {year} for Yak Project.
+              </span>
+            </div>
+            <div className="min-w-0 flex-1" aria-hidden />
+            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
               <a
                 href="https://beian.miit.gov.cn/#/Integrated/index"
                 target="_blank"
@@ -497,7 +538,7 @@ const HomeFooter: React.FC<{
                 {t("HomeFooter.icp")}
               </a>
             </div>
-            <div className="flex min-w-0 flex-1 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]">
+            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
               <a
                 href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
                 target="_blank"
@@ -507,48 +548,12 @@ const HomeFooter: React.FC<{
                 {t("HomeFooter.police")}
               </a>
             </div>
-            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[12px]">
+            <div className="flex shrink-0 items-center border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
               <UtilityTools
                 currentLng={currentLng}
                 onToggleLanguage={toggleLanguage}
               />
             </div>
-          </div>
-        </div>
-
-        {/* PC：全高竖线；版权左，版号+工具右；左右外框距屏约 80px */}
-        <div className="hidden w-full lg:flex lg:min-h-[56px] md:px-[40px] lg:px-[60px] xl:px-[80px]">
-          <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-            <span className={metaClass}>
-              Copyright © {year} for Yak Project.
-            </span>
-          </div>
-          <div className="min-w-0 flex-1" aria-hidden />
-          <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-            <a
-              href="https://beian.miit.gov.cn/#/Integrated/index"
-              target="_blank"
-              rel="noreferrer"
-              className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
-            >
-              {t("HomeFooter.icp")}
-            </a>
-          </div>
-          <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-            <a
-              href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
-              target="_blank"
-              rel="noreferrer"
-              className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
-            >
-              {t("HomeFooter.police")}
-            </a>
-          </div>
-          <div className="flex shrink-0 items-center border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-            <UtilityTools
-              currentLng={currentLng}
-              onToggleLanguage={toggleLanguage}
-            />
           </div>
         </div>
       </div>

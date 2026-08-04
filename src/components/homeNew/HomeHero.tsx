@@ -3,6 +3,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import Link from "@docusaurus/Link";
 import { useTranslation } from "react-i18next";
 import { useHomeSlideActions } from "./HomeSlideContext";
+import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const DOWNLOAD_SLIDE_INDEX = 1;
 /** 每张背景停留时长 */
@@ -122,7 +123,7 @@ const HomeHero: React.FC = () => {
       <button
         type="button"
         onClick={() => goToSlide(DOWNLOAD_SLIDE_INDEX)}
-        className="flex w-full cursor-pointer items-center justify-center gap-[4px] whitespace-nowrap rounded-[4px] border-none bg-[var(--Colors-Neutral-100)] px-[24px] py-[10px] font-['PingFang_SC'] text-[18px] font-medium leading-[26px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---web-Primary)] md:w-auto"
+        className="flex w-full cursor-pointer items-center justify-center gap-[4px] whitespace-nowrap rounded-[4px] border-none bg-[var(--Colors-Neutral-100)] px-[24px] py-[10px] font-['PingFang_SC'] text-[18px] font-medium leading-[26px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] md:w-auto"
       >
         {t("HomeHero.downloadDesktop")}
         {DownLoadIcon}
@@ -140,7 +141,7 @@ const HomeHero: React.FC = () => {
   );
 
   return (
-    <section className="relative box-border flex h-full w-full flex-col items-center justify-center overflow-hidden px-[18px] py-[24px] [contain:paint] [transform:translateZ(0)]">
+    <section className="relative box-border flex h-full w-full flex-col items-center justify-center overflow-hidden py-[24px] [contain:paint] [transform:translateZ(0)]">
       {/* 背景：三图循环淡入淡出（按需挂载，减少慢网并发） */}
       <div
         className="pointer-events-none absolute inset-0 z-0 bg-[var(--Colors-Use-Main---Gold-Bg)]"
@@ -161,14 +162,22 @@ const HomeHero: React.FC = () => {
         )}
       </div>
 
-      <div className="relative z-[1] container min-h-0 w-full text-left sm:text-center">
-        <div className={`mb-[12px] font-['Crimson_Text'] font-semibold tracking-[0px] text-[color:var(--Colors-Use-Main---web-Primary)] sm:mb-[20px] sm:text-[96px] sm:leading-[96px] ${isEn ? "text-[76px] leading-[64px]" : "text-[86px] leading-[72px]"}`}>
+      <div
+        className={`relative z-[1] min-h-0 w-full text-left sm:text-center ${HOME_CONTAINER_CLASS}`}
+      >
+        <div
+          className={`mb-[12px] font-['Crimson_Text'] font-semibold tracking-[0px] text-[color:var(--Colors-Use-Main---web-Primary)] sm:mb-[20px] ${isEn ? "text-[64px] leading-[56px] sm:text-[clamp(56px,8vh,96px)] sm:leading-[clamp(56px,8vh,96px)]" : "text-[72px] leading-[60px] sm:text-[clamp(64px,9vh,96px)] sm:leading-[clamp(64px,9vh,96px)]"}`}
+        >
           Yak Project
         </div>
-        <div className="mb-[16px] font-['Noto_Serif_SC'] text-[40px] font-semibold leading-[56px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mb-[28px] sm:text-[64px] sm:leading-[96px]">
+        <div
+          className={`mb-[16px] ${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,6vh,72px)]" : "font-['Noto_Serif_SC'] text-[32px] sm:text-[clamp(36px,5.5vh,64px)]"} font-semibold leading-[44px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mb-[clamp(12px,2vh,28px)] sm:leading-[clamp(44px,8vh,96px)]`}
+        >
           {t("HomeHero.title")}
         </div>
-        <div className="mt-[8px] font-['Noto_Serif_SC'] text-[12px] font-normal leading-[18px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mt-[20px] sm:text-[20px] sm:leading-[28px] md:mb-[60px]">
+        <div
+          className={`mt-[8px] ${isEn ? "font-['Crimson_Text'] text-[12px] sm:text-[clamp(14px,2.5vh,28px)]" : "font-['Noto_Serif_SC'] text-[12px] sm:text-[clamp(14px,2vh,20px)]"} font-normal leading-[18px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mt-[clamp(8px,1.5vh,20px)] sm:leading-[clamp(18px,2.5vh,28px)] md:mb-[clamp(24px,4vh,60px)]`}
+        >
           {t("HomeHero.subtitle")}
         </div>
 
@@ -177,7 +186,10 @@ const HomeHero: React.FC = () => {
       </div>
 
       {/* 小屏：贴底，距底部 20px */}
-      <div className="absolute inset-x-0 bottom-[20px] z-[1] px-[18px] md:hidden">
+      {/* 小屏：贴底，距底部 20px */}
+      <div
+        className={`absolute inset-x-0 bottom-[20px] z-[1] md:hidden ${HOME_CONTAINER_CLASS}`}
+      >
         <div className="mx-auto w-full max-w-[480px]">{actions}</div>
       </div>
     </section>

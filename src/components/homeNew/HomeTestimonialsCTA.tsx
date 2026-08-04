@@ -1,12 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { Tooltip } from "antd";
-import { useHomeSlideActions } from "./HomeSlideContext";
 import LiquidAscii from "./LiquidAscii";
-
-const DOWNLOAD_SLIDE_INDEX = 1;
+import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const highlightYak = (text: string) => {
   const parts = text.split(/(Yak)/gi);
@@ -23,42 +20,6 @@ const highlightYak = (text: string) => {
     ),
   );
 };
-
-const DownLoadIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="15"
-    height="15"
-    viewBox="0 0 15 15"
-    fill="none"
-  >
-    <path
-      d="M0.75 10.7499L0.75 11.5833C0.75 12.964 1.86929 14.0833 3.25 14.0833L11.5833 14.0833C12.964 14.0833 14.0833 12.964 14.0833 11.5833L14.0833 10.7499M4.08333 7.41659L7.41667 10.7499L10.75 7.41659M7.41667 10.7499L7.41667 0.749919"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const ViewIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-    fill="none"
-  >
-    <path
-      d="M14.1667 14.1666V5.83325H5.83333M14.1667 5.83325L5.83333 14.1666"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
 
 type Segment = {
   text: string;
@@ -314,7 +275,10 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
   }, []);
 
   return (
-    <div ref={rowRef} className="home-testimonial-row group/row relative w-full overflow-hidden">
+    <div
+      ref={rowRef}
+      className="home-testimonial-row group/row relative w-full overflow-hidden"
+    >
       <div
         ref={animRef}
         className={`flex w-max ${animClass}`}
@@ -329,9 +293,8 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
 };
 
 const HomeTestimonialsCTA: React.FC = () => {
-  const { t } = useTranslation();
-  const { goToSlide } = useHomeSlideActions();
-  const nowBg = useBaseUrl("img/newHome/now.webp");
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
 
   const TESTIMONIALS = useMemo(
     () => resolveTestimonials(t).map(buildAppraiseItem),
@@ -352,7 +315,7 @@ const HomeTestimonialsCTA: React.FC = () => {
   }, [TESTIMONIALS]);
 
   return (
-    <section className="flex w-full flex-col items-center overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
+    <section className="flex h-full w-full flex-col items-center overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
       <style>{`
         @keyframes home-testimonial-marquee-left {
           from { transform: translateX(0); }
@@ -401,14 +364,17 @@ const HomeTestimonialsCTA: React.FC = () => {
         }
       `}</style>
 
-      {/* 标题区：LiquidAscii 代码流体背景 */}
-      <div className="relative h-[400px] w-full overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 w-full" aria-hidden>
+      {/* 标题区：LiquidAscii 代码流体背景，占剩余空间 */}
+      <div className="relative min-h-0 w-full flex-1 overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 w-full"
+          aria-hidden
+        >
           <LiquidAscii
             className="h-full w-full"
             width="100%"
             height="100%"
-            cellSize={14}
+            cellSize={10}
             fillHeight={0.55}
             speed={0.85}
             gravity={-22}
@@ -421,8 +387,12 @@ const HomeTestimonialsCTA: React.FC = () => {
           />
         </div>
 
-        <div className="pointer-events-none relative z-[1] mx-auto flex h-full w-full max-w-full flex-col items-center justify-center gap-[12px] px-[18px] text-center sm:px-[40px] xl:container xl:px-[40px] 2xl:px-[80px]">
-          <h2 className="m-0 font-['Noto_Serif_SC'] text-[48px] font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]">
+        <div
+          className={`pointer-events-none relative z-[1] flex h-full w-full flex-col items-center justify-center gap-[12px] text-center ${HOME_CONTAINER_CLASS}`}
+        >
+          <h2
+            className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[56px]" : "font-['Noto_Serif_SC'] text-[48px]"} font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]`}
+          >
             {/* 小屏：大家都喜 / 欢用 Yak */}
             <span className="inline sm:hidden">
               {highlightYak(t("HomeTestimonialsCTA.titleMobile"))}
@@ -440,10 +410,10 @@ const HomeTestimonialsCTA: React.FC = () => {
         </div>
       </div>
 
-      {/* 双行 Marquee：横向全屏，上左下右 */}
+      {/* 双行 Marquee：横向全屏，贴底部 */}
       {TESTIMONIALS.length > 0 ? (
         <div
-          className="w-full border-0 border-y border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
+          className="w-full shrink-0 border-0 border-y border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
           aria-label={t("HomeTestimonialsCTA.marqueeAria")}
         >
           <InfiniteRow items={rowA} direction="left" duration={52} />
@@ -454,62 +424,6 @@ const HomeTestimonialsCTA: React.FC = () => {
           <InfiniteRow items={rowB} direction="right" duration={56} />
         </div>
       ) : null}
-
-      {/* 立即体验：全宽居中 */}
-      <div className="mx-auto box-border w-full px-[16px] pb-[40px] pt-[40px] sm:px-[18px] md:px-[40px] lg:px-[60px] xl:px-[80px] sm:pt-[48px] xl:pt-[80px]">
-        <div className="relative mx-auto w-full overflow-hidden rounded-[8px]">
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: `url(${nowBg}) lightgray 50% / cover no-repeat`,
-              opacity: 0.6,
-            }}
-            aria-hidden
-          />
-
-          <div className="mx-auto relative z-[1] flex flex-col items-center gap-[32px] px-[24px] py-[56px] text-center sm:gap-[28px] sm:px-[40px] sm:py-[64px] xl:py-[80px]">
-            <div className="flex flex-col items-center gap-[16px] sm:gap-[12px]">
-              <h2 className="m-0 flex flex-col items-center gap-[12px] font-['Noto_Serif_SC'] text-[48px] font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]">
-                {t("HomeTestimonialsCTA.ctaTitle")}
-                <span
-                  className="block h-px w-[48px] bg-[var(--Colors-Use-Basic-White)]/40 sm:hidden"
-                  aria-hidden
-                />
-              </h2>
-              <p className="m-0 text-center font-['PingFang_SC'] text-[20px] leading-[28px] text-[color:var(--Colors-Neutral-100)]">
-                <span className="sm:hidden">
-                  {t("HomeTestimonialsCTA.ctaDescMobile")}
-                  <br />
-                  {t("HomeTestimonialsCTA.ctaDescMobileLine2")}
-                </span>
-                <span className="hidden sm:inline whitespace-nowrap">
-                  {t("HomeTestimonialsCTA.ctaDescDesktop")}
-                </span>
-              </p>
-            </div>
-
-            <div className="flex w-full max-w-[480px] flex-col items-center justify-center gap-[8px] md:mx-auto md:flex-row">
-              <button
-                type="button"
-                onClick={() => goToSlide(DOWNLOAD_SLIDE_INDEX)}
-                className="flex w-full cursor-pointer items-center justify-center gap-[4px] rounded-[4px] border-none bg-[var(--Colors-Neutral-100)] px-[24px] py-[10px] font-['PingFang_SC'] text-[14px] font-medium leading-[24px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---web-Primary)] md:w-auto"
-              >
-                {t("HomeTestimonialsCTA.downloadDesktop")}
-                {DownLoadIcon}
-              </button>
-              <Link
-                to="/docs/intro"
-                className="flex w-full cursor-pointer items-center justify-center gap-[4px] rounded-[4px] bg-[var(--Colors-Use-Basic-Background)] px-[24px] py-[10px] font-['PingFang_SC'] text-[14px] font-medium leading-[24px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:bg-[var(--Colors-Use-Neutral-Bg)] hover:text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:w-auto"
-              >
-                {t("HomeTestimonialsCTA.viewDocs")}
-                <span className="inline-flex text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
-                  {ViewIcon}
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };
