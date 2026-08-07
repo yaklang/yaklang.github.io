@@ -3,13 +3,15 @@ export const HOME_NAVBAR_HEIGHT = 80;
 
 /**
  * 首页统一版心：
- * - < 768px：全宽 + 16px 左右边距
- * - 768px–1023px：全宽 + 20px 左右边距
- * - 1024px–1279px：全宽 + 40px 左右边距
- * - ≥ 1280px：最大 1280px，无额外边距（居中）
+ * - < 756px：左右留白 20px，中间 fill
+ * - 756px–1023px：左右留白 40px，中间 fill
+ * - 1024px–1359px：左右留白 80px，中间 fill
+ * - 1360px–1439px：固定 1152px 居中
+ * - 1440px–1679px：固定 1280px 居中
+ * - ≥ 1680px：固定 1440px 居中
  */
 export const HOME_CONTAINER_CLASS =
-  "mx-auto box-border w-full px-[16px] md:px-[20px] lg:px-[40px] xl:max-w-[1280px] xl:px-[0]";
+  "mx-auto box-border w-full px-[20px] min-[756px]:px-[40px] min-[1024px]:px-[80px] min-[1360px]:max-w-[1152px] min-[1360px]:px-0 min-[1440px]:max-w-[1280px] min-[1680px]:max-w-[1440px]";
 
 /**
  * 整屏区块：在可用区域内垂直居中标题+内容。
@@ -17,7 +19,7 @@ export const HOME_CONTAINER_CLASS =
  * 高度不够时上下至少保留 40px 间距。
  */
 export const HOME_SECTION_CENTER_CLASS =
-  "flex min-h-0 flex-1 flex-col justify-center py-[40px]";
+  "flex min-h-0 flex-1 flex-col justify-center py-[40px] pt-[80px]";
 
 /** @deprecated 改用 HOME_SECTION_CENTER_CLASS */
 export const HOME_SECTION_TOP_CLASS = "pt-[120px]";

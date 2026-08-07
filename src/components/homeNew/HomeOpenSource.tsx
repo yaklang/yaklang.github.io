@@ -15,23 +15,15 @@ import {
 const SearchIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
     fill="none"
     aria-hidden="true"
   >
     <path
-      d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z"
+      d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z"
       stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M17.5 17.5L13.875 13.875"
-      stroke="currentColor"
-      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -165,7 +157,7 @@ const HomeOpenSource: React.FC = () => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const columns = useColumns();
-  // ≥756px：每页 2 排 × columns 列；<756px：每页 3 张（1 列竖排），其余分页
+  // 宽屏 4×2=8；中屏 3×2=6；窄屏 3
   const pageSize = columns >= 2 ? columns * 2 : 3;
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -213,7 +205,7 @@ const HomeOpenSource: React.FC = () => {
       >
         <div className="flex max-h-full min-h-0 w-full flex-col overflow-hidden">
           {/* 标题区 */}
-          <div className="mb-[12px] flex shrink-0 flex-col items-center gap-[12px] sm:mb-[16px] sm:gap-[16px]">
+          <div className="mb-[40px] flex shrink-0 flex-col items-center gap-[12px] sm:gap-[16px]">
             <div className="flex flex-col items-center gap-[8px] text-center sm:gap-[12px]">
               <div
                 className={`${isEn ? "font-['Crimson_Text'] text-[40px] sm:text-[56px]" : "font-['Noto_Serif_SC'] text-[32px] sm:text-[48px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
@@ -237,8 +229,10 @@ const HomeOpenSource: React.FC = () => {
                 placeholder={t("HomeOpenSource.placeholder")}
                 className="min-w-0 flex-1 border-0 bg-transparent px-[12px] py-[6px] font-['PingFang_SC'] text-[16px] leading-[22px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] outline-none placeholder:text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:text-[14px] sm:leading-[20px]"
               />
-              <span className="inline-flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full bg-[var(--Colors-Use-Neutral-Text-1-Title)] text-[color:var(--Colors-Use-Neutral-Bg)]">
-                {SearchIcon}
+              <span className="group inline-flex h-[32px] w-[32px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]">
+                <span className="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]">
+                  {SearchIcon}
+                </span>
               </span>
             </div>
           </div>
@@ -261,10 +255,10 @@ const HomeOpenSource: React.FC = () => {
                 {pages.map((page, pageIdx) => (
                   <SwiperSlide
                     key={pageIdx}
-                    className="!flex !h-full !w-full flex-col justify-center"
+                    className="!flex !h-full !w-full flex-col justify-start sm:justify-center"
                   >
                     <div
-                      className="grid h-full w-full auto-rows-fr content-center gap-[12px] xl:gap-[16px]"
+                      className="grid h-full w-full auto-rows-fr content-start gap-[12px] sm:content-center xl:gap-[16px]"
                       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
                     >
                       {page.map((item) => (
@@ -336,7 +330,7 @@ const HomeOpenSource: React.FC = () => {
               )}
             </div>
           ) : (
-            <div className="py-[40px] text-center font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
+            <div className="py-[40px] pt-[80px] text-center font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
               {t("HomeOpenSource.empty", { query })}
             </div>
           )}

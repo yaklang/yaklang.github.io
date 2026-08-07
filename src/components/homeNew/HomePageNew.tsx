@@ -23,7 +23,6 @@ const SECTION_IDS = [
   "home-opensource",
   "home-milestones",
   "home-testimonials",
-  "home-cta-footer",
 ] as const;
 
 const SLIDE_COUNT = SECTION_IDS.length;
@@ -62,6 +61,33 @@ const getLastExtraPages = (free: HTMLElement | null) => {
   if (overflow <= 1) return 0;
   return overflow / Math.max(1, free.clientHeight);
 };
+
+/**
+ * 末屏：评价区 + CTA 作遮罩盖住 Footer。
+ * stickyReveal（翻页末屏）：≥sm Footer sticky + min-h 贴底，上滚从下往上露出。
+ * 自由滚动：Footer 随内容自然收尾，勿套 viewport min-h（否则版权下会空一大块）。
+ */
+const LastScreenCTAFooter: React.FC<{ stickyReveal?: boolean }> = ({
+  stickyReveal = false,
+}) => (
+  <>
+    <div className="relative z-[1] box-border flex min-h-[calc(100vh-80px)] h-auto w-full shrink-0 flex-col items-stretch bg-[var(--Colors-Use-Main---Gold-Bg)] [transform:translateZ(0)] sm:h-[calc(100vh-80px)]">
+      <HomeTestimonialsCTA />
+    </div>
+    <div className="relative z-[1] shrink-0 bg-[var(--Colors-Use-Main---Gold-Bg)] py-[80px] [transform:translateZ(0)]">
+      <HomeCTA />
+    </div>
+    <div
+      className={
+        stickyReveal
+          ? "shrink-0 sm:sticky sm:bottom-0 sm:z-0 sm:flex sm:min-h-[calc(100vh-80px)] sm:flex-col sm:[transform:translateZ(0)]"
+          : "shrink-0"
+      }
+    >
+      <HomeFooter fill={stickyReveal} />
+    </div>
+  </>
+);
 
 const FreeScrollHome: React.FC = () => {
   const { setActiveIndex, registerSwiper } = useHomeSlideActions();
@@ -140,7 +166,7 @@ const FreeScrollHome: React.FC = () => {
         }}
         className={sectionClass}
       >
-        <HomeProductCapabilities />
+        <HomeProductCapabilities freeScroll />
       </section>
       <section
         id={SECTION_IDS[3]}
@@ -156,7 +182,7 @@ const FreeScrollHome: React.FC = () => {
         ref={(el) => {
           sectionRefs.current[4] = el;
         }}
-        className="box-border flex min-h-full w-full items-stretch justify-center"
+        className="box-border flex w-full items-stretch justify-center"
       >
         <HomeMilestones />
       </section>
@@ -165,23 +191,9 @@ const FreeScrollHome: React.FC = () => {
         ref={(el) => {
           sectionRefs.current[5] = el;
         }}
-        className="box-border flex h-full min-h-full w-full items-stretch justify-center"
+        className="box-border flex w-full flex-col items-stretch pt-[80px]"
       >
-        <HomeTestimonialsCTA />
-      </section>
-      <section
-        id={SECTION_IDS[6]}
-        ref={(el) => {
-          sectionRefs.current[6] = el;
-        }}
-        className="box-border flex min-h-full w-full flex-col items-stretch pt-[80px]"
-      >
-        <div className="shrink-0">
-          <HomeCTA />
-        </div>
-        <div className="shrink-0">
-          <HomeFooter />
-        </div>
+        <LastScreenCTAFooter stickyReveal={false} />
       </section>
     </div>
   );
@@ -198,32 +210,48 @@ const SwiperHome: React.FC = () => {
   const freeScrollRef = useRef<HTMLDivElement | null>(null);
   const wheelCleanupRef = useRef<(() => void) | null>(null);
   const lastExtraRef = useRef(0);
+  const freeScrollMaxRef = useRef(0);
+  const mousewheelOnRef = useRef(true);
 
   const [barProgress, setBarProgress] = useState(0);
   const [thumbRatio, setThumbRatio] = useState(1 / SLIDE_COUNT);
 
-  const syncScrollbar = useCallback((swiper?: SwiperClass | null) => {
-    const s = swiper ?? swiperRef.current;
+  const remeasureLastExtra = useCallback(() => {
     const free = freeScrollRef.current;
     const extra = getLastExtraPages(free);
     lastExtraRef.current = extra;
-
-    const total = SLIDE_COUNT - 1 + extra;
-    const idx = s?.activeIndex ?? activeIndexRef.current;
-
-    let pos = s
-      ? Math.min(1, Math.max(0, s.progress)) * (SLIDE_COUNT - 1)
-      : idx;
-
-    if (idx >= LAST_SLIDE_INDEX && free && extra > 0) {
-      const max = free.scrollHeight - free.clientHeight;
-      const inner = max > 0 ? free.scrollTop / max : 0;
-      pos = SLIDE_COUNT - 1 + inner * extra;
-    }
-
-    setBarProgress(total > 0 ? Math.min(1, Math.max(0, pos / total)) : 0);
-    setThumbRatio(Math.min(1, 1 / (total + 1)));
+    freeScrollMaxRef.current = free
+      ? Math.max(0, free.scrollHeight - free.clientHeight)
+      : 0;
+    return extra;
   }, []);
+
+  const syncScrollbar = useCallback(
+    (swiper?: SwiperClass | null, remeasure = true) => {
+      const s = swiper ?? swiperRef.current;
+      const free = freeScrollRef.current;
+      const extra = remeasure ? remeasureLastExtra() : lastExtraRef.current;
+
+      const total = SLIDE_COUNT - 1 + extra;
+      const idx = s?.activeIndex ?? activeIndexRef.current;
+
+      let pos = s
+        ? Math.min(1, Math.max(0, s.progress)) * (SLIDE_COUNT - 1)
+        : idx;
+
+      if (idx >= LAST_SLIDE_INDEX && free && extra > 0) {
+        const max =
+          freeScrollMaxRef.current ||
+          Math.max(0, free.scrollHeight - free.clientHeight);
+        const inner = max > 0 ? free.scrollTop / max : 0;
+        pos = SLIDE_COUNT - 1 + inner * extra;
+      }
+
+      setBarProgress(total > 0 ? Math.min(1, Math.max(0, pos / total)) : 0);
+      setThumbRatio(Math.min(1, 1 / (total + 1)));
+    },
+    [remeasureLastExtra],
+  );
 
   const goTo = useCallback((index: number, speed = HOME_SCROLL_MS) => {
     const swiper = swiperRef.current;
@@ -234,10 +262,8 @@ const SwiperHome: React.FC = () => {
 
   const seekByProgress = useCallback(
     (progress: number) => {
-      const swiper = swiperRef.current;
       const free = freeScrollRef.current;
-      const extra = getLastExtraPages(free);
-      lastExtraRef.current = extra;
+      const extra = remeasureLastExtra();
       const total = SLIDE_COUNT - 1 + extra;
       const pos = Math.min(1, Math.max(0, progress)) * total;
 
@@ -253,13 +279,14 @@ const SwiperHome: React.FC = () => {
       requestAnimationFrame(() => {
         const el = freeScrollRef.current;
         if (!el) return;
-        const max = Math.max(0, el.scrollHeight - el.clientHeight);
+        remeasureLastExtra();
+        const max = freeScrollMaxRef.current;
         const inner = extra > 0 ? (pos - (SLIDE_COUNT - 1)) / extra : 0;
         el.scrollTop = inner * max;
-        syncScrollbar(swiperRef.current);
+        syncScrollbar(swiperRef.current, false);
       });
     },
-    [goTo, syncScrollbar],
+    [goTo, remeasureLastExtra, syncScrollbar],
   );
 
   useEffect(() => {
@@ -307,44 +334,63 @@ const SwiperHome: React.FC = () => {
   const bindWheelGuard = (swiper: SwiperClass) => {
     wheelCleanupRef.current?.();
     const el = swiper.el;
+    mousewheelOnRef.current = true;
+
+    const setMousewheel = (on: boolean) => {
+      if (mousewheelOnRef.current === on) return;
+      mousewheelOnRef.current = on;
+      if (on) swiper.mousewheel?.enable();
+      else swiper.mousewheel?.disable();
+    };
 
     const onWheelCapture = (event: WheelEvent) => {
       const dy = event.deltaY;
 
-      // 末屏（CTA+Footer）内部滚动时，优先交给其自身滚动容器
+      // 末屏内滚：只在进出边界时切换 mousewheel，避免每帧 enable/disable 卡顿
       if (activeIndexRef.current === LAST_SLIDE_INDEX) {
         const lastScroller = findLastSlideScroller(event.target);
         if (lastScroller) {
-          const canScrollDown =
-            lastScroller.scrollTop + lastScroller.clientHeight <
-            lastScroller.scrollHeight - 1;
-          const canScrollUp = lastScroller.scrollTop > 1;
-          if ((dy > 0 && canScrollDown) || (dy < 0 && canScrollUp)) {
-            swiper.mousewheel?.disable();
+          const max =
+            freeScrollMaxRef.current > 0
+              ? freeScrollMaxRef.current
+              : Math.max(
+                  0,
+                  lastScroller.scrollHeight - lastScroller.clientHeight,
+                );
+          // 无可滚行程：保持翻页能力（可上翻离开末屏）
+          if (max <= 1) {
+            setMousewheel(true);
             return;
           }
+          const atTop = lastScroller.scrollTop <= 1;
+          const atBottom = lastScroller.scrollTop >= max - 1;
+          const leaveUp = dy < 0 && atTop;
+          const leaveDown = dy > 0 && atBottom;
+          setMousewheel(leaveUp || leaveDown);
+          return;
         }
       }
 
       // 里程碑内层表格还能滚动时，交给表格
       if (canScrollNested(event.target, dy)) {
-        swiper.mousewheel?.disable();
+        setMousewheel(false);
       } else {
-        swiper.mousewheel?.enable();
+        setMousewheel(true);
       }
     };
 
     el.addEventListener("wheel", onWheelCapture, {
       capture: true,
-      passive: false,
+      passive: true,
     });
     wheelCleanupRef.current = () => {
       el.removeEventListener("wheel", onWheelCapture, true);
       swiper.mousewheel?.enable();
+      mousewheelOnRef.current = true;
     };
   };
 
-  // 末屏（CTA+Footer）内部滚动时同步滚动条（rAF 节流）
+  // 末屏内滚：用缓存行程更新滚动条，避免每帧读 scrollHeight 触发强制布局
   useEffect(() => {
     const free = freeScrollRef.current;
     if (!free) return;
@@ -353,16 +399,19 @@ const SwiperHome: React.FC = () => {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        syncScrollbar(swiperRef.current);
+        // 滚过评价区后暂停跑马灯，减轻合成压力
+        free.dataset.pastIntro = free.scrollTop > 8 ? "1" : "0";
+        syncScrollbar(swiperRef.current, false);
       });
     };
     free.addEventListener("scroll", onScroll, { passive: true });
-    syncScrollbar(swiperRef.current);
+    remeasureLastExtra();
+    syncScrollbar(swiperRef.current, false);
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
       free.removeEventListener("scroll", onScroll);
     };
-  }, [syncScrollbar]);
+  }, [remeasureLastExtra, syncScrollbar]);
 
   return (
     <div className="relative h-full w-full overflow-hidden">
@@ -394,9 +443,11 @@ const SwiperHome: React.FC = () => {
           syncScrollbar(swiper);
         }}
         onProgress={(swiper) => {
+          if (activeIndexRef.current === LAST_SLIDE_INDEX) return;
           syncScrollbar(swiper);
         }}
         onSetTranslate={(swiper) => {
+          if (activeIndexRef.current === LAST_SLIDE_INDEX) return;
           syncScrollbar(swiper);
         }}
         onSlideChange={(swiper) => {
@@ -407,11 +458,28 @@ const SwiperHome: React.FC = () => {
 
           if (idx !== LAST_SLIDE_INDEX && freeScrollRef.current) {
             freeScrollRef.current.scrollTop = 0;
+            freeScrollRef.current.dataset.pastIntro = "0";
           }
-          syncScrollbar(swiper);
+          if (idx === LAST_SLIDE_INDEX) {
+            swiper.mousewheel?.disable();
+            mousewheelOnRef.current = false;
+            requestAnimationFrame(() => {
+              remeasureLastExtra();
+              syncScrollbar(swiper, false);
+            });
+          } else {
+            if (!mousewheelOnRef.current) {
+              swiper.mousewheel?.enable();
+              mousewheelOnRef.current = true;
+            }
+            syncScrollbar(swiper);
+          }
         }}
         onSlideChangeTransitionEnd={(swiper) => {
-          syncScrollbar(swiper);
+          if (swiper.activeIndex === LAST_SLIDE_INDEX) {
+            remeasureLastExtra();
+          }
+          syncScrollbar(swiper, swiper.activeIndex === LAST_SLIDE_INDEX);
         }}
       >
         <style>{`
@@ -446,6 +514,11 @@ const SwiperHome: React.FC = () => {
             width: 0;
             height: 0;
           }
+          /* 滚过评价区后暂停跑马灯，减轻末屏滚动卡顿 */
+          .home-page-swiper [data-home-free-scroll][data-past-intro="1"] .home-testimonial-marquee-left,
+          .home-page-swiper [data-home-free-scroll][data-past-intro="1"] .home-testimonial-marquee-right {
+            animation-play-state: paused !important;
+          }
         `}</style>
 
         <SwiperSlide id={SECTION_IDS[0]} className={slideShellClass}>
@@ -462,13 +535,13 @@ const SwiperHome: React.FC = () => {
         </SwiperSlide>
         <SwiperSlide className="!box-border !h-full !overflow-hidden">
           <div className="h-full w-full pt-[80px]">
-            <HomeMilestones />
+            <HomeMilestones fillViewport />
           </div>
         </SwiperSlide>
-        <SwiperSlide className="!box-border !h-full !overflow-hidden">
-          <HomeTestimonialsCTA />
-        </SwiperSlide>
-        <SwiperSlide className="!box-border !h-full !overflow-hidden">
+        <SwiperSlide
+          id={SECTION_IDS[5]}
+          className="!box-border !h-full !overflow-hidden"
+        >
           <div
             ref={(el) => {
               freeScrollRef.current = el;
@@ -480,12 +553,7 @@ const SwiperHome: React.FC = () => {
                 : ""
             }`}
           >
-            <div className="flex min-h-0 flex-1 items-center justify-center">
-              <HomeCTA />
-            </div>
-            <div className="shrink-0">
-              <HomeFooter />
-            </div>
+            <LastScreenCTAFooter stickyReveal />
           </div>
         </SwiperSlide>
       </Swiper>

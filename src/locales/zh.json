@@ -135,7 +135,8 @@
     "sections": {
       "opensource": "开源",
       "docs": "官方文档",
-      "community": "社区&资源"
+      "community": "社区",
+      "resources": "资源"
     },
     "links": {
       "irify": "IRify · SSA 静态代码分析",
@@ -151,7 +152,10 @@
       "yakLabHandbook": "YakLab 实战手册",
       "aboutUs": "关于我们",
       "partners": "合作伙伴",
-      "downloads": "下载资源"
+      "downloads": "下载资源",
+      "github": "GitHub",
+      "wechatOfficial": "微信公众号",
+      "officialTutorial": "视频教程"
     },
     "aria": {
       "github": "GitHub",
@@ -169,6 +173,9 @@
   "HomeHero": {
     "downloadDesktop": "下载桌面端",
     "viewDocs": "查看文档",
+    "titleBefore": "广泛使用的",
+    "titleHighlight1": "开源网络",
+    "titleHighlight2": "安全基础设施",
     "title": "广泛使用的开源网络安全基础设施",
     "subtitle": "Powered by CDSL-Yaklang - 为网络安全而生的编程语言"
   },

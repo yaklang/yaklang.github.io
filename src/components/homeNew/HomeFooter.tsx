@@ -7,6 +7,7 @@ import SearchButton from "../SearchButton";
 import { useHomeTheme } from "./HomeThemeContext";
 import { useHomeLanguage } from "./useHomeLanguage";
 import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
+import TextType from "./TextType";
 
 const GithubIcon = () => (
   <svg
@@ -136,6 +137,10 @@ type FooterLinkItem = {
   labelKey: string;
   to?: string;
   href?: string;
+  /** 外链右侧箭头（设计稿资源列） */
+  externalIcon?: boolean;
+  /** 微信公众号：点击弹出二维码 */
+  wechatPopover?: boolean;
 };
 
 type FooterGroup = {
@@ -143,7 +148,7 @@ type FooterGroup = {
   items: FooterLinkItem[];
 };
 
-const getFooterLinks = (t: (key: string) => string): FooterGroup[] => [
+const getFooterLinks = (): FooterGroup[] => [
   {
     titleKey: "HomeFooter.sections.opensource",
     items: [
@@ -180,10 +185,49 @@ const getFooterLinks = (t: (key: string) => string): FooterGroup[] => [
       { labelKey: "HomeFooter.links.aboutUs", to: "/team" },
       { labelKey: "HomeFooter.links.partners", to: "/cooperativePartner" },
       { labelKey: "HomeFooter.links.techBlog", to: "/blog" },
+    ],
+  },
+  {
+    titleKey: "HomeFooter.sections.resources",
+    items: [
       { labelKey: "HomeFooter.links.downloads", to: "/download" },
+      {
+        labelKey: "HomeFooter.links.github",
+        href: "https://github.com/yaklang",
+        externalIcon: true,
+      },
+      {
+        labelKey: "HomeFooter.links.wechatOfficial",
+        wechatPopover: true,
+        externalIcon: true,
+      },
+      {
+        labelKey: "HomeFooter.links.officialTutorial",
+        href: "https://space.bilibili.com/437503777?spm_id_from=333.788.upinfo.head.click",
+        externalIcon: true,
+      },
     ],
   },
 ];
+
+const ArrowUpRightIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden
+  >
+    <path
+      d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333"
+      stroke="currentColor"
+      strokeWidth="1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 /** 与 Header 圆形图标按钮一致 */
 const iconBtnClass =
@@ -196,28 +240,71 @@ const langBtnClass =
 const socialIconClass = iconBtnClass;
 
 const linkClass =
-  "font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]";
+  "font-['PingFang_SC'] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]";
 
 const metaClass =
   "font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]";
 
-const FooterLinkEl: React.FC<FooterLinkItem> = ({ labelKey, to, href }) => {
+const FooterLinkEl: React.FC<FooterLinkItem> = ({
+  labelKey,
+  to,
+  href,
+  externalIcon,
+  wechatPopover,
+}) => {
   const { t } = useTranslation();
+  const label = (
+    <>
+      {t(labelKey)}
+      {externalIcon ? (
+        <span className="inline-flex shrink-0 text-current">{ArrowUpRightIcon}</span>
+      ) : null}
+    </>
+  );
+
+  if (wechatPopover) {
+    return (
+      <Popover
+        classNames={{ root: "wechat-code-popover" }}
+        content={
+          <div className="flex flex-col items-center gap-[8px] p-[4px]">
+            <img
+              src="/img/wechat.jpg"
+              alt={t("HomeFooter.aria.wechatPop")}
+              className="h-[140px] w-[140px] object-contain"
+            />
+            <span className="text-[12px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
+              {t("HomeFooter.aria.wechatScan")}
+            </span>
+          </div>
+        }
+      >
+        <button
+          type="button"
+          aria-label={t(labelKey)}
+          className={`${linkClass} inline-flex cursor-pointer items-center gap-[4px] border-none bg-transparent p-0`}
+        >
+          {label}
+        </button>
+      </Popover>
+    );
+  }
+
   if (to) {
     return (
-      <Link className={linkClass} to={to}>
-        {t(labelKey)}
+      <Link className={`${linkClass} inline-flex items-center gap-[4px]`} to={to}>
+        {label}
       </Link>
     );
   }
   return (
     <a
-      className={linkClass}
+      className={`${linkClass} inline-flex items-center gap-[4px]`}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
     >
-      {t(labelKey)}
+      {label}
     </a>
   );
 };
@@ -379,63 +466,87 @@ const MobileUtilityBar: React.FC<{
 const HomeFooter: React.FC<{
   /** 非首页场景加顶部 Focus 边框 */
   withTopBorder?: boolean;
-}> = ({ withTopBorder = false }) => {
+  /** 翻页末屏 sticky：随父级 min-h 撑满，版权贴底；自由滚动勿开 */
+  fill?: boolean;
+}> = ({ withTopBorder = false, fill = false }) => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const logoSrc = useBaseUrl("img/logo.png");
   const { currentLng, toggleLanguage } = useHomeLanguage();
 
-  const footerLinks = getFooterLinks(t);
+  const footerLinks = getFooterLinks();
 
   const year = new Date().getFullYear();
+  const slogan = t("HomeFooter.slogan");
 
   return (
     <footer
-      className={`w-full bg-[var(--Colors-Use-Main---Gold-Bg)]${
+      className={`flex w-full flex-col bg-[var(--Colors-Use-Main---Gold-Bg)]${
+        fill ? " h-full" : ""
+      }${
         withTopBorder
           ? " border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] pt-[20px]"
           : ""
       }`}
     >
-      {/* 主内容 */}
-      <div className={`${HOME_CONTAINER_CLASS}`}>
-        <div className="flex flex-col gap-[32px] lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex flex-col gap-[16px] md:flex-row md:items-start md:justify-between lg:w-auto lg:min-w-[280px] lg:shrink-0 lg:flex-col">
-            <div className="flex flex-col gap-[12px]">
-              <Link to="/" className="inline-flex w-fit !no-underline">
-                <img
-                  src={logoSrc}
-                  alt="YAK"
-                  className="h-[36px] w-auto object-contain"
-                />
-              </Link>
-              <p
-                className={`m-0 whitespace-nowrap ${isEn ? "font-['Crimson_Text'] text-[28px]" : "font-['Noto_Serif_SC'] text-[23px]"} leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
-              >
-                <span className="text-[color:var(--Colors-Use-Main---web-Primary)]">
-                  /
-                </span>{" "}
-                {t("HomeFooter.slogan")}{" "}
-                <span className="text-[color:var(--Colors-Use-Main---web-Primary)]">
-                  /
-                </span>
-              </p>
-            </div>
-            <div className="md:pt-[4px] lg:pt-[8px]">
-              <SocialRow />
-            </div>
+      {/* 主内容：Logo / 标语 / 链接列；fill 时由 flex-1 在 sticky min-h 父级内撑开 */}
+      <div
+        className={`${HOME_CONTAINER_CLASS} flex flex-col${fill ? " flex-1" : ""}`}
+      >
+        <div className={`flex flex-col gap-[40px]${fill ? " flex-1" : ""}`}>
+          <div
+            className={`flex flex-col justify-center gap-[20px] min-[1440px]:gap-[20px]${
+              fill ? " flex-1" : ""
+            }`}
+          >
+            <Link to="/" className="inline-flex w-fit !no-underline">
+              <img
+                src={logoSrc}
+                alt="YAK"
+                className="h-[28px] w-auto object-contain md:h-[40px] lg:h-[48px] xl:h-[66px] min-[1440px]:h-[73px] "
+              />
+            </Link>
+            <p
+              className={`m-0 ${
+                isEn
+                  ? "font-['Crimson_Text']"
+                  : "font-['Noto_Serif_SC'] font-medium"
+              } text-[32px] leading-[24px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:text-[40px] lg:text-[48px] xl:text-[64px] min-[1440px]:text-[68px] min-[1440px]:leading-[56px]`}
+            >
+              <span className="text-[color:var(--Colors-Use-Main---web-Primary)]">
+                /
+              </span>{" "}
+              <TextType
+                key={slogan}
+                as="span"
+                text={slogan}
+                typingSpeed={90}
+                deletingSpeed={50}
+                initialDelay={2000}
+                pauseDuration={2000}
+                loop
+                startOnVisible
+                showCursor
+                cursorCharacter="/"
+                cursorBlinkDuration={0.5}
+                cursorClassName="ml-[0.25em] text-[color:var(--Colors-Use-Main---web-Primary)]"
+                className="align-baseline"
+              />
+            </p>
           </div>
 
-          {/* PC：三列链接整体靠右 */}
-          <div className="grid w-full grid-cols-1 gap-[28px] sm:grid-cols-3 sm:gap-[24px] lg:ml-auto lg:w-auto lg:shrink-0 lg:gap-[48px] xl:gap-[80px]">
+          <div className="grid w-full grid-cols-1 gap-[40px] sm:grid-cols-2 sm:py-10 lg:grid-cols-4 lg:gap-[80px]">
             {footerLinks.map((group) => (
-              <div key={group.titleKey} className="min-w-0 lg:min-w-[160px]">
-                <h4 className="m-0 mb-[12px] font-['PingFang_SC'] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)]">
+              <div key={group.titleKey} className="min-w-0">
+                <h4 className="m-0 mb-[12px] font-['PingFang_SC'] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">
                   {t(group.titleKey)}
                 </h4>
-                <ul className="m-0 flex list-none flex-col gap-[10px] p-0">
+                <ul className="m-0 flex list-none flex-col gap-[16px] p-0">
                   {group.items.map((item) => (
-                    <li key={item.labelKey} className="m-0">
+                    <li
+                      key={`${group.titleKey}-${item.labelKey} `}
+                      className="m-0"
+                    >
                       <FooterLinkEl {...item} />
                     </li>
                   ))}
@@ -445,8 +556,13 @@ const HomeFooter: React.FC<{
           </div>
         </div>
       </div>
-      {/* 底栏 */}
-      <div className="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] sm:mt-[48px]">
+
+      {/* 底栏：版权 / ICP */}
+      <div
+        className={`mt-[80px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]${
+          fill ? " sm:mt-auto" : ""
+        }`}
+      >
         <div className={`${HOME_CONTAINER_CLASS}`}>
           {/* 小屏：两侧竖线贴版心边缘，横线分行 */}
           <div className="flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden">
@@ -475,15 +591,9 @@ const HomeFooter: React.FC<{
                 {t("HomeFooter.police")}
               </a>
             </div>
-            <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
-              <MobileUtilityBar
-                currentLng={currentLng}
-                onToggleLanguage={toggleLanguage}
-              />
-            </div>
           </div>
 
-          {/* 中屏：两侧竖线贴版心边缘；上版权，下三列竖线分割 */}
+          {/* 中屏 */}
           <div className="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden">
             <div className="px-[16px] py-[14px]">
               <span className={metaClass}>
@@ -511,48 +621,31 @@ const HomeFooter: React.FC<{
                   {t("HomeFooter.police")}
                 </a>
               </div>
-              <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[12px]">
-                <UtilityTools
-                  currentLng={currentLng}
-                  onToggleLanguage={toggleLanguage}
-                />
-              </div>
             </div>
           </div>
 
-          {/* PC：全高竖线；版权左，版号+工具右 */}
-          <div className="hidden w-full lg:flex lg:min-h-[56px]">
-            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-              <span className={metaClass}>
-                Copyright © {year} for Yak Project.
-              </span>
-            </div>
-            <div className="min-w-0 flex-1" aria-hidden />
-            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-              <a
-                href="https://beian.miit.gov.cn/#/Integrated/index"
-                target="_blank"
-                rel="noreferrer"
-                className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
-              >
-                {t("HomeFooter.icp")}
-              </a>
-            </div>
-            <div className="flex shrink-0 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
+          {/* PC */}
+          <div className="hidden min-h-[64px] w-full items-center justify-between gap-[40px] lg:flex">
+            <span className={metaClass}>
+              Copyright © {year} for Yak Project.
+            </span>
+            <div className="flex shrink-0 items-center gap-[40px]">
               <a
                 href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712"
                 target="_blank"
                 rel="noreferrer"
-                className="font-['PingFang_SC'] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                className="font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
               >
                 {t("HomeFooter.police")}
               </a>
-            </div>
-            <div className="flex shrink-0 items-center border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] px-[24px]">
-              <UtilityTools
-                currentLng={currentLng}
-                onToggleLanguage={toggleLanguage}
-              />
+              <a
+                href="https://beian.miit.gov.cn/#/Integrated/index"
+                target="_blank"
+                rel="noreferrer"
+                className="font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+              >
+                {t("HomeFooter.icp")}
+              </a>
             </div>
           </div>
         </div>

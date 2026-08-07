@@ -181,12 +181,12 @@ const TestimonialCard: React.FC<AppraiseItem> = ({
     useIsOverflowing<HTMLParagraphElement>();
 
   return (
-    <article className="box-border flex h-[240px] w-[280px] shrink-0 flex-col overflow-hidden border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:w-[320px] lg:w-[360px] xl:w-[400px]">
-      <div className="flex shrink-0 items-center gap-[12px] border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] px-[40px] pb-[20px] pt-[20px]">
+    <article className="box-border flex h-[160px] w-[280px] shrink-0 flex-col overflow-hidden border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:h-[240px] sm:w-[320px] lg:w-[360px] xl:w-[400px]">
+      <div className="flex shrink-0 items-center gap-[12px] border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] px-[24px] py-[12px] sm:px-[40px] sm:pb-[20px] sm:pt-[20px]">
         <img
           src={img}
           alt=""
-          className="h-[40px] w-[40px] shrink-0 rounded-full object-cover"
+          className="h-[32px] w-[32px] shrink-0 rounded-full object-cover sm:h-[40px] sm:w-[40px]"
         />
         <div className="flex min-w-0 flex-col gap-[2px]">
           <Tooltip title={nameOverflow ? name : undefined}>
@@ -203,7 +203,7 @@ const TestimonialCard: React.FC<AppraiseItem> = ({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-hidden px-[40px] pb-[24px] pt-[24px]">
+      <div className="min-h-0 flex-1 overflow-hidden px-[24px] py-[12px] sm:px-[40px] sm:pb-[24px] sm:pt-[24px]">
         <Tooltip
           title={quoteOverflow ? quoteText : undefined}
           styles={{ root: { maxWidth: "min(480px, calc(100vw - 32px))" } }}
@@ -364,8 +364,8 @@ const HomeTestimonialsCTA: React.FC = () => {
         }
       `}</style>
 
-      {/* 标题区：LiquidAscii 代码流体背景，占剩余空间 */}
-      <div className="relative min-h-0 w-full flex-1 overflow-hidden">
+      {/* 标题区：小屏保底高度，避免被双行 marquee 挤没 */}
+      <div className="relative min-h-[240px] w-full flex-1 overflow-hidden sm:min-h-0">
         <div
           className="pointer-events-none absolute inset-0 w-full"
           aria-hidden
@@ -388,10 +388,10 @@ const HomeTestimonialsCTA: React.FC = () => {
         </div>
 
         <div
-          className={`pointer-events-none relative z-[1] flex h-full w-full flex-col items-center justify-center gap-[12px] text-center ${HOME_CONTAINER_CLASS}`}
+          className={`pointer-events-none relative z-[1] flex h-full min-h-0 w-full flex-col items-center justify-center gap-[12px] py-[24px] text-center ${HOME_CONTAINER_CLASS}`}
         >
           <h2
-            className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[56px]" : "font-['Noto_Serif_SC'] text-[48px]"} font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]`}
+            className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px]" : "font-['Noto_Serif_SC'] text-[36px] leading-[48px] sm:text-[48px] sm:leading-[64px]"} font-medium text-[color:var(--Colors-Neutral-100)]`}
           >
             {/* 小屏：大家都喜 / 欢用 Yak */}
             <span className="inline sm:hidden">
@@ -404,7 +404,7 @@ const HomeTestimonialsCTA: React.FC = () => {
               {highlightYak(t("HomeTestimonialsCTA.titleDesktop"))}
             </span>
           </h2>
-          <p className="m-0 max-w-[280px] font-['PingFang_SC'] text-[20px] leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:max-w-[640px]">
+          <p className="m-0 max-w-[280px] font-['PingFang_SC'] text-[16px] leading-[24px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:max-w-[640px] sm:text-[20px] sm:leading-[28px]">
             {t("HomeTestimonialsCTA.subtitle")}
           </p>
         </div>

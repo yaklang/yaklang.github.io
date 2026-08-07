@@ -18,18 +18,39 @@ const MEASURE_SECTION_IDS = [
 const useIsoLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+const readPads = (node: HTMLElement) => {
+  const style = getComputedStyle(node);
+  return {
+    top: parseFloat(style.paddingTop) || 0,
+    bottom: parseFloat(style.paddingBottom) || 0,
+  };
+};
+
 /**
  * 读取某个 slide 的内容自然高度。
- * 取 section 内层组件根元素，扣除它自身的 padding（如 pt-[80px] 导航栏留白），
- * 得到的才是“真正需要占用的内容高度”。
+ * 取 section 内层组件根元素，扣除导航栏/居中区上下 padding（如 HOME_SECTION_CENTER_CLASS
+ * 的 pt-[80px]），得到的才是“真正需要占用的内容高度”。
+ *
+ * 注意：CENTER class 常挂在根下的子节点上，根节点本身无 padding；
+ * 若不扣除内层 padding，会把导航留白算进内容高度，导致误判退化为自由滚动。
  */
 const measureSlideContentHeight = (id: string): number | null => {
   const el = document.getElementById(id);
   if (!el) return null;
   const inner = (el.firstElementChild as HTMLElement | null) ?? el;
-  const style = getComputedStyle(inner);
-  const padTop = parseFloat(style.paddingTop) || 0;
-  const padBottom = parseFloat(style.paddingBottom) || 0;
+  let { top: padTop, bottom: padBottom } = readPads(inner);
+
+  if (padTop <= 0 && padBottom <= 0) {
+    for (const child of Array.from(inner.children) as HTMLElement[]) {
+      const pads = readPads(child);
+      if (pads.top > 0 || pads.bottom > 0) {
+        padTop = pads.top;
+        padBottom = pads.bottom;
+        break;
+      }
+    }
+  }
+
   return inner.scrollHeight - padTop - padBottom;
 };
 

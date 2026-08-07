@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { useHomeSlideActions } from "./HomeSlideContext";
+import { useHomeTheme } from "./HomeThemeContext";
 import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const DOWNLOAD_SLIDE_INDEX = 1;
@@ -12,13 +13,13 @@ const DownLoadIcon = (
     xmlns="http://www.w3.org/2000/svg"
     width="15"
     height="15"
-    viewBox="0 0 15 15"
+    viewBox="0 0 24 24"
     fill="none"
   >
     <path
-      d="M0.75 10.7499L0.75 11.5833C0.75 12.964 1.86929 14.0833 3.25 14.0833L11.5833 14.0833C12.964 14.0833 14.0833 12.964 14.0833 11.5833L14.0833 10.7499M4.08333 7.41659L7.41667 10.7499L10.75 7.41659M7.41667 10.7499L7.41667 0.749919"
+      d="M4 16L4 17C4 18.6569 5.34315 20 7 20L17 20C18.6569 20 20 18.6569 20 17L20 16M8 12L12 16L16 12M12 16L12 4"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -47,23 +48,37 @@ const HomeCTA: React.FC = () => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const { goToSlide } = useHomeSlideActions();
-  const nowBg = useBaseUrl("img/newHome/now.webp");
+  const { theme } = useHomeTheme();
+  const isDark = theme === "dark";
+  const ctaBg = useBaseUrl("img/newHome/cta-hands-bg.png");
+  const ctaBgDark = useBaseUrl("img/newHome/cta-hands-bg-dark.png");
 
   return (
-    <section className="w-full bg-[var(--Colors-Use-Main---Gold-Bg)] py-[40px]">
+    <section className="w-full bg-[var(--Colors-Use-Main---Gold-Bg)]">
       <div
-        className={`flex w-full flex-col ${HOME_CONTAINER_CLASS}`}
-        style={{ maxHeight: "min(480px, calc(100vh - 80px - 80px))" }}
+        className={`flex h-[400px] w-full flex-col min-[1280px]:h-[min(480px,calc(100vh-160px))] ${HOME_CONTAINER_CLASS}`}
       >
-        <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-[8px]">
+        <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden rounded-[8px] bg-[var(--Colors-Use-Main---Gold-Bg)]">
+          {/*
+            Light: cta-hands-bg.png + Gold-Focus
+            Dark: cta-hands-bg-dark.png + Gold-Focus（对齐 HomeHero 叠层）
+          */}
           <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background: `url(${nowBg}) lightgray 50% / cover no-repeat`,
-              opacity: 0.6,
-            }}
+            className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
             aria-hidden
-          />
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: `url(${isDark ? ctaBgDark : ctaBg})`,
+              }}
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Focus)] opacity-30"
+              aria-hidden
+            />
+          </div>
 
           <div className="relative z-[1] flex flex-col items-center gap-[24px] px-[8px] py-[40px] text-center sm:gap-[28px] sm:px-[40px] sm:py-[48px] xl:py-[56px]">
             <div className="flex flex-col items-center gap-[16px] sm:gap-[12px]">
@@ -76,13 +91,13 @@ const HomeCTA: React.FC = () => {
                   aria-hidden
                 />
               </h2>
-              <p className="m-0 text-center font-['PingFang_SC'] text-[20px] leading-[28px] text-[color:var(--Colors-Neutral-100)]">
+              <p className="m-0 w-fit max-w-full bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] px-[4px] text-center font-['PingFang_SC'] text-[20px] leading-[28px] text-[color:var(--Colors-Neutral-100)] [box-decoration-break:clone]">
                 <span className="sm:hidden">
                   {t("HomeTestimonialsCTA.ctaDescMobile")}
                   <br />
                   {t("HomeTestimonialsCTA.ctaDescMobileLine2")}
                 </span>
-                <span className="hidden sm:inline whitespace-nowrap">
+                <span className="hidden sm:inline">
                   {t("HomeTestimonialsCTA.ctaDescDesktop")}
                 </span>
               </p>
@@ -99,7 +114,7 @@ const HomeCTA: React.FC = () => {
               </button>
               <Link
                 to="/docs/intro"
-                className="flex w-full cursor-pointer items-center justify-center gap-[4px] rounded-[4px] bg-[var(--Colors-Use-Basic-Background)] px-[24px] py-[10px] font-['PingFang_SC'] text-[14px] font-medium leading-[24px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:bg-[var(--Colors-Use-Neutral-Bg)] hover:text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:w-auto"
+                className="flex w-full cursor-pointer items-center justify-center gap-[4px] rounded-[4px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] px-[24px] py-[10px] font-['PingFang_SC'] text-[14px] font-medium leading-[24px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:bg-[var(--Colors-Use-Neutral-Bg)] hover:text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:w-auto"
               >
                 {t("HomeTestimonialsCTA.viewDocs")}
                 <span className="inline-flex text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">

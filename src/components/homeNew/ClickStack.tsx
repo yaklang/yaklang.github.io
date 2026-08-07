@@ -113,13 +113,13 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
         // 卡片本体透明，opacity 始终 1
         el.style.background = "transparent";
 
-        // 素材透明度：前面卡片 1，后面卡片 0.3（设到内容首个子元素上）
+        // 素材透明度：前面卡片 1（设到内容首个子元素上）
         const mediaEl = el.firstElementChild as HTMLElement | null;
         if (mediaEl) {
-          mediaEl.style.opacity = rank === 0 ? "1" : "0.3";
+          mediaEl.style.opacity = "1";
         }
 
-        // 遮罩层：最前面卡片 0.3，后面卡片 0.9
+        // 遮罩层：最前面卡片 0.3（对齐 HomeHero Gold-Focus），后面卡片 0.9
         const overlay = el.querySelector<HTMLElement>("[data-card-overlay]");
         if (overlay) {
           overlay.style.opacity = rank === 0 ? "0.3" : "0.9";
@@ -224,13 +224,11 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
               return;
             }
 
-            // 卡片本体透明 + 素材透明度 + 遮罩：前面 0.3，后面 0.9
             el.style.background = "transparent";
 
-            // 素材透明度：前面卡片 1，后面卡片 0.3
             const mediaEl = el.firstElementChild as HTMLElement | null;
             if (mediaEl) {
-              mediaEl.style.opacity = rank === 0 ? "1" : "0.3";
+              mediaEl.style.opacity = "1";
             }
 
             const overlay = el.querySelector<HTMLElement>(
@@ -260,7 +258,7 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
             const movedMedia =
               movedNode.firstElementChild as HTMLElement | null;
             if (movedMedia) {
-              movedMedia.style.opacity = movedRank === 0 ? "1" : "0.3";
+              movedMedia.style.opacity = "1";
             }
             const movedOverlay = movedNode.querySelector<HTMLElement>(
               "[data-card-overlay]",
@@ -347,7 +345,7 @@ const ClickStack = forwardRef<ClickStackHandle, ClickStackProps>(
             }}
           >
             {content}
-            {/* 遮罩层：覆盖在视频/图片之上，统一 0.6 透明度的 Gold-Focus */}
+            {/* 遮罩层：Gold-Focus；前卡 0.3（同 HomeHero），后卡 0.9（见 arrange/cycle） */}
             <div
               data-card-overlay
               className="pointer-events-none absolute inset-0 z-[2]"

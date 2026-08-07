@@ -135,7 +135,8 @@
     "sections": {
       "opensource": "Open Source",
       "docs": "Official Documentation",
-      "community": "Community & Resources"
+      "community": "Community",
+      "resources": "Resources"
     },
     "links": {
       "irify": "IRify · SSA Static Code Analysis",
@@ -151,7 +152,10 @@
       "yakLabHandbook": "YakLab Handbook",
       "aboutUs": "About Us",
       "partners": "Partners",
-      "downloads": "Downloads"
+      "downloads": "Downloads",
+      "github": "GitHub",
+      "wechatOfficial": "WeChat Official Account",
+      "officialTutorial": "Video Tutorials"
     },
     "aria": {
       "github": "GitHub",
@@ -169,6 +173,9 @@
   "HomeHero": {
     "downloadDesktop": "Download Desktop",
     "viewDocs": "View Documentation",
+    "titleBefore": "Widely Used ",
+    "titleHighlight1": "Open-Source Cybersecurity",
+    "titleHighlight2": "Infrastructure",
     "title": "Widely Used Open-Source Cybersecurity Infrastructure",
     "subtitle": "Powered by CDSL-Yaklang - A programming language born for cybersecurity"
   },

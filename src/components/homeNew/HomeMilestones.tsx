@@ -376,7 +376,17 @@ const useMilestonesScrollGate = (
 // =========================================================
 // 组件
 // =========================================================
-const HomeMilestones: React.FC = () => {
+type HomeMilestonesProps = {
+  /**
+   * 翻页/整屏模式：铺满视口，列表区 flex 占满剩余高度，不留大块空白。
+   * 自由滚动关闭时保持内容自然高度 + 原固定可视行数限制。
+   */
+  fillViewport?: boolean;
+};
+
+const HomeMilestones: React.FC<HomeMilestonesProps> = ({
+  fillViewport = false,
+}) => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const sectionRef = useRef<HTMLElement>(null);
@@ -399,9 +409,17 @@ const HomeMilestones: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
+      className={`box-border flex w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)] ${
+        fillViewport ? "h-full" : "h-auto"
+      }`}
     >
-      <div className="flex min-h-0 w-full flex-1 flex-col justify-start overflow-hidden py-[16px] sm:py-[20px] lg:justify-center lg:py-[24px] xl:py-[40px]">
+      <div
+        className={`flex min-h-0 w-full flex-col overflow-hidden py-[16px] pt-[56px] sm:py-[20px] lg:py-[24px] xl:py-[40px] ${
+          fillViewport
+            ? "flex-1 justify-start"
+            : "justify-start lg:justify-center"
+        }`}
+      >
         {/* 标题区：与表格外层版心边界对齐 */}
         <div
           className={`mb-[12px] flex w-full shrink-0 flex-col gap-[8px] sm:mb-[16px] sm:flex-row sm:items-end sm:justify-between sm:gap-[16px] xl:mb-[40px] xl:gap-[24px] ${HOME_CONTAINER_CLASS}`}
@@ -459,7 +477,11 @@ const HomeMilestones: React.FC = () => {
         </div>
 
         {/* ========== 小屏：竖向卡片列表 ========== */}
-        <div className="min-h-0 flex-1 overflow-y-auto sm:hidden">
+        <div
+          className={`min-h-0 overflow-y-auto sm:hidden ${
+            fillViewport ? "flex-1" : ""
+          }`}
+        >
           <div className="flex flex-col border-0 border-t border-solid border-[var(--Colors-Use-Main---Gold-Focus)]">
             {MILESTONES.map((item, index) => {
               const active = mobileHoveredIndex === index;
@@ -509,7 +531,7 @@ const HomeMilestones: React.FC = () => {
                     {item.dateLabel}
                   </span>
                   <h3
-                    className={`mb-[0px] ${isEn ? "font-['Crimson_Text'] text-[28px]" : "font-['Noto_Serif_SC'] text-[20px]"} font-semibold leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                    className={`mb-[0px] ${isEn ? "font-['Crimson_Text'] text-[28px] font-normal" : "font-['Noto_Serif_SC'] text-[20px] font-semibold"} leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
                   >
                     {item.title}
                   </h3>
@@ -533,12 +555,18 @@ const HomeMilestones: React.FC = () => {
 
         {/* ========== 中屏：年 | 序号+事件（可视约 5 行，手动滚动） ========== */}
         <div
-          className={`hidden shrink-0 sm:block lg:hidden ${HOME_CONTAINER_CLASS}`}
+          className={`hidden min-h-0 lg:hidden ${
+            fillViewport
+              ? "flex-1 sm:flex sm:flex-col"
+              : "shrink-0 sm:block"
+          } ${HOME_CONTAINER_CLASS}`}
         >
           <div
             data-milestones-scroll
-            className={`overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE}`}
-            style={{ height: mdBodyH }}
+            className={`overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
+              fillViewport ? "min-h-0 flex-1" : ""
+            }`}
+            style={fillViewport ? { minHeight: mdBodyH } : { height: mdBodyH }}
           >
             {yearGroups.map((group, groupIndex) => (
               <div
@@ -592,7 +620,7 @@ const HomeMilestones: React.FC = () => {
                             {padIndex(index + 1)}.
                           </span>
                         </div>
-                        <div className="flex h-full min-w-0 flex-col justify-start py-[14px] pl-[12px] pr-[8px]">
+                        <div className="flex h-full min-w-0 flex-col justify-start pt-[14px] pl-[12px] pr-[8px] pb-10">
                           <div
                             className={`mb-[4px] truncate font-['PingFang_SC'] text-[13px] leading-[18px] transition-colors duration-200 lg:hidden ${
                               active
@@ -603,7 +631,7 @@ const HomeMilestones: React.FC = () => {
                             {item.dateLabel}
                           </div>
                           <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px]" : "font-['Noto_Serif_SC'] text-[16px]"} font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] font-normal" : "font-['Noto_Serif_SC'] text-[16px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
                           >
                             {item.title}
                           </h3>
@@ -648,11 +676,19 @@ const HomeMilestones: React.FC = () => {
         </div>
 
         {/* ========== 大屏：年 | 图+事件（可视约 5 行，手动滚动） ========== */}
-        <div className={`hidden shrink-0 lg:block ${HOME_CONTAINER_CLASS}`}>
+        <div
+          className={`hidden min-h-0 ${
+            fillViewport
+              ? "flex-1 lg:flex lg:flex-col"
+              : "shrink-0 lg:block"
+          } ${HOME_CONTAINER_CLASS}`}
+        >
           <div
             data-milestones-scroll
-            className={`overflow-x-hidden overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE}`}
-            style={{ height: lgBodyH }}
+            className={`overflow-x-hidden overflow-y-auto border-0 border-t border-b border-solid border-[var(--Colors-Use-Main---Gold-Focus)] ${SCROLLBAR_HIDE} ${
+              fillViewport ? "min-h-0 flex-1" : ""
+            }`}
+            style={fillViewport ? { minHeight: lgBodyH } : { height: lgBodyH }}
           >
             {yearGroups.map((group, groupIndex) => (
               <div
@@ -744,9 +780,9 @@ const HomeMilestones: React.FC = () => {
                             {item.dateLabel}
                           </span>
                         </div>
-                        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center py-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px]">
+                        <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center pt-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px] pb-10">
                           <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px]" : "font-['Noto_Serif_SC'] text-[16px] xl:text-[18px]"} font-semibold leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px] font-normal" : "font-['Noto_Serif_SC'] text-[16px] xl:text-[18px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
                           >
                             {item.title}
                           </h3>

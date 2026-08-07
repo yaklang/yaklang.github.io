@@ -372,7 +372,7 @@ const HomeNavbar: React.FC = () => {
                 className="w-[99px] h-[36px] object-contain"
               />
             </Link>
-            <nav data-nav-desktop className={`items-center ${!measureReady || collapsed ? "hidden" : "flex"}`}>
+            <nav data-nav-desktop className={`items-center gap-[8px] ${!measureReady || collapsed ? "hidden" : "flex"}`}>
               {NAV_LINKS.map((link) => {
                 if (link.dropdown === "opensource") {
                   return (
@@ -538,7 +538,7 @@ const HomeNavbar: React.FC = () => {
           <div data-nav-mobile className={`items-center ${collapsed ? "flex" : "hidden"}`}>
             <button
               style={navColorStyle}
-              className={`inline-flex items-center justify-center w-[32px] h-[32px] mr-[16px] border-none rounded cursor-pointer transition-colors ease-in-out bg-transparent ${textColor}`}
+              className={`inline-flex items-center justify-center w-[40px] h-[40px] mr-[10px] border-none rounded cursor-pointer transition-colors ease-in-out bg-transparent ${textColor}`}
               type="button"
               aria-label={
                 mobileOpen
@@ -574,7 +574,7 @@ const HomeNavbar: React.FC = () => {
                 type="button"
                 aria-label={t("HomeNavbar.aria.closeMenu")}
                 onClick={closeMobile}
-                className="inline-flex items-center justify-center w-[32px] h-[32px] border-none bg-transparent cursor-pointer text-[color:var(--Colors-Use-Neutral-Text-1-Title)] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
+                className="inline-flex items-center justify-center w-[40px] h-[40px] border-none bg-transparent cursor-pointer text-[color:var(--Colors-Use-Neutral-Text-1-Title)] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
               >
                 <CloseOutlined />
               </button>
@@ -691,7 +691,10 @@ const HomeNavbar: React.FC = () => {
           <div className="shrink-0 px-[32px] pb-[calc(20px+env(safe-area-inset-bottom))]">
             <button
               type="button"
-              onClick={toggleLanguage}
+              onClick={() => {
+                toggleLanguage();
+                closeMobile();
+              }}
               className="flex w-full items-center gap-[8px] py-[16px] border-0 border-solid border-t border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-transparent cursor-pointer text-[16px] leading-[24px] font-medium text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-['PingFang_SC'] pl-[0px] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
             >
               <span className="inline-flex">{GlobeIcon}</span>
@@ -710,7 +713,10 @@ const HomeNavbar: React.FC = () => {
             </a>
             <button
               type="button"
-              onClick={toggleTheme}
+              onClick={() => {
+                toggleTheme();
+                closeMobile();
+              }}
               className="flex w-full items-center gap-[8px] py-[16px] border-0 border-solid border-t border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-transparent cursor-pointer text-[16px] leading-[24px] font-medium text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-['PingFang_SC'] pl-[0px] hover:text-[color:var(--Colors-Use-Main---web-Primary)]"
             >
               <span className="inline-flex">

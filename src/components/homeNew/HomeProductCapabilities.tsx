@@ -17,6 +17,8 @@ import {
   yakitLabelMark,
   yakIcon,
   yaklangLabelMark,
+  yaklangWordmark,
+  yakitWordmark,
 } from "./productIcons";
 import {
   HOME_CONTAINER_CLASS,
@@ -72,6 +74,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
     key: "yakit",
     label: "Yakit",
     logo: yakitIcon,
+    wordmark: yakitWordmark,
     labelMark: yakitLabelMark,
     description: "HomeProductCapabilities.products.yakit.description",
     featureKeys: [
@@ -100,6 +103,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
     key: "yaklang",
     label: "Yaklang",
     logo: yakIcon,
+    wordmark: yaklangWordmark,
     labelMark: yaklangLabelMark,
     labelMarkClassName: "h-[12px] sm:h-[14px]",
     description: "HomeProductCapabilities.products.yaklang.description",
@@ -413,7 +417,10 @@ function useSwipeNext(onSwipe: () => void) {
 }
 
 // =========================================================
-const HomeProductCapabilities: React.FC = () => {
+const HomeProductCapabilities: React.FC<{
+  /** 自由滚动（非翻页）：640px 以下纵向；sm+ 左右 3:2、左侧撑满、右侧间距收紧 */
+  freeScroll?: boolean;
+}> = ({ freeScroll = false }) => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const PRODUCTS = useMemo(() => resolveProducts(t), [t]);
@@ -478,23 +485,38 @@ const HomeProductCapabilities: React.FC = () => {
 
   return (
     <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
+      {/* 与 HomeDownload 一致：外层居中区 + 内层版心 max-h-full，避免翻页屏被 flex-1 拉得过高 */}
       <div
-        className={`mx-auto w-full overflow-hidden ${HOME_CONTAINER_CLASS} ${HOME_SECTION_CENTER_CLASS}`}
+        className={`relative z-[1] min-h-0 w-full overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
       >
-        <div className="flex max-h-full min-h-0 w-full flex-col overflow-hidden text-center">
-          <div className="mb-[8px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[16px] sm:gap-[8px]">
+        <div
+          className={`mx-auto flex max-h-full w-full flex-col overflow-hidden ${HOME_CONTAINER_CLASS}`}
+        >
+          <div className="mb-[40px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[16px] sm:gap-[8px]">
             <div
               className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
             >
               {t("HomeProductCapabilities.title")}
             </div>
-            <div className="max-w-full text-left font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:text-[clamp(16px,2vh,20px)] sm:leading-[clamp(22px,2.5vh,28px)]">
+            <div className="max-w-full text-center font-['PingFang_SC'] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-2-Primary)] sm:text-[clamp(16px,2vh,20px)] sm:leading-[clamp(22px,2.5vh,28px)]">
               {t("HomeProductCapabilities.subtitle")}
             </div>
           </div>
 
-          <div className="mx-auto flex w-full max-w-[680px] flex-col overflow-hidden rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] sm:max-w-[calc(100vw-32px)] min-[756px]:max-w-[100%] min-[756px]:flex-row">
-            <div className="flex min-w-0 flex-1 flex-col">
+            <div
+              className={`mx-auto flex min-h-0 w-full max-w-[680px] max-h-full overflow-hidden rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] sm:max-w-[calc(100vw-32px)] min-[756px]:max-w-[100%]${
+                freeScroll
+                  ? " flex-col sm:flex-row sm:items-stretch"
+                  : " flex-col min-[756px]:flex-row min-[756px]:items-stretch"
+              }`}
+            >
+            <div
+              className={`flex min-h-0 min-w-0 flex-col${
+                freeScroll
+                  ? " flex-1 sm:flex-[3] sm:basis-0 sm:self-stretch"
+                  : " flex-1 min-[756px]:flex-[3] min-[756px]:basis-0 min-[756px]:self-stretch"
+              }`}
+            >
               <div
                 className="flex h-[40px] w-full min-w-0 shrink-0 items-stretch border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] sm:h-[44px]"
                 role="tablist"
@@ -531,8 +553,14 @@ const HomeProductCapabilities: React.FC = () => {
                 </div>
               </div>
 
-              {/* 堆叠舞台：视频 / 图片均用 ClickStack */}
-              <div className="relative flex items-center justify-center overflow-hidden pl-[16px] pr-[40px] pt-[40px] pb-[16px] md:px-[40px] md:py-[40px] md:pr-[76px] md:pt-[48px] lg:py-[32px] lg:pt-[40px] xl:py-[48px] xl:pt-[56px]">
+              {/* 堆叠舞台：自由滚动 sm+ / 翻页 min-[756px]+ 左侧撑满；窄屏保持纵向 min-h */}
+              <div
+                className={`relative flex min-h-0 flex-1 items-center justify-center overflow-hidden px-[16px] py-[24px] pr-[40px] md:px-[40px] md:py-[40px] md:pr-[76px] lg:py-[32px] xl:py-[48px]${
+                  freeScroll
+                    ? " min-h-[200px] sm:min-h-0"
+                    : " min-h-[200px] sm:min-h-[240px] min-[756px]:min-h-0"
+                }`}
+              >
                 <div
                   className="pointer-events-none absolute inset-0 transition-[background] duration-300"
                   style={{
@@ -543,13 +571,13 @@ const HomeProductCapabilities: React.FC = () => {
                 />
 
                 {total === 0 ? (
-                  <div className="relative z-[1] flex aspect-[16/10] h-[200px] w-auto max-w-full shrink-0 items-center justify-center rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] font-['PingFang_SC'] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:h-[240px] md:h-[280px] lg:h-[clamp(260px,38vh,340px)] xl:h-[clamp(300px,42vh,400px)]">
+                  <div className="relative z-[1] flex aspect-[3/2] h-auto max-h-full w-full max-w-full shrink-0 items-center justify-center rounded-[8px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] font-['PingFang_SC'] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
                     {t("HomeProductCapabilities.noDemo")}
                   </div>
                 ) : (
                   <div
                     {...swipe}
-                    className="relative z-[1] aspect-[16/10] h-[200px] w-auto max-w-full shrink-0 cursor-grab active:cursor-grabbing sm:h-[240px] md:h-[280px] lg:h-[clamp(260px,38vh,340px)] xl:h-[clamp(300px,42vh,400px)]"
+                    className="relative z-[1] aspect-[3/2] h-auto max-h-full w-full max-w-full shrink-0 cursor-grab active:cursor-grabbing"
                     aria-label={`${productBase.label} ${isVideo ? t("HomeProductCapabilities.demoVideo") : t("HomeProductCapabilities.demoScreenshot")}`}
                   >
                     <ClickStack
@@ -637,8 +665,20 @@ const HomeProductCapabilities: React.FC = () => {
               </div>
             </div>
 
-            <aside className="flex max-h-[36%] w-full shrink-0 flex-col justify-between overflow-hidden border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] p-[16px] sm:p-[20px] min-[756px]:max-h-none min-[756px]:w-[380px] min-[756px]:max-w-[380px] min-[756px]:flex-[0_0_380px] min-[756px]:border-l min-[756px]:border-t-0 min-[756px]:border-l-[var(--Colors-Use-Main---Gold-Focus)] min-[756px]:p-[20px] 2xl:w-[440px] 2xl:max-w-[440px] 2xl:flex-[0_0_440px] 2xl:p-[24px]">
-              <div className="flex min-h-0 flex-col items-start gap-[8px] overflow-visible sm:gap-[10px]">
+            <aside
+              className={`flex w-full flex-col overflow-hidden border-0 border-solid p-[20px] lg:w-auto lg:max-w-none lg:p-[40px]${
+                freeScroll
+                  ? " max-h-[36%] shrink-0 justify-start border-t border-t-[var(--Colors-Use-Main---Gold-Focus)] sm:max-h-none sm:min-w-0 sm:shrink sm:flex-[2] sm:basis-0 sm:justify-between sm:border-l sm:border-t-0 sm:border-l-[var(--Colors-Use-Main---Gold-Focus)] sm:max-lg:p-[16px]"
+                  : " max-h-[36%] shrink-0 justify-start border-t border-t-[var(--Colors-Use-Main---Gold-Focus)] min-[756px]:max-h-none min-[756px]:min-w-0 min-[756px]:shrink min-[756px]:flex-[2] min-[756px]:basis-0 min-[756px]:justify-between min-[756px]:border-l min-[756px]:border-t-0 min-[756px]:border-l-[var(--Colors-Use-Main---Gold-Focus)]"
+              }`}
+            >
+              <div
+                className={`flex min-h-0 flex-col items-start overflow-visible${
+                  freeScroll
+                    ? " gap-[6px] sm:gap-[8px]"
+                    : " gap-[8px] sm:gap-[10px]"
+                }`}
+              >
                 <div className="flex items-center gap-[10px]">
                   {productBase.wordmark ? (
                     <span
@@ -687,13 +727,23 @@ const HomeProductCapabilities: React.FC = () => {
                 </p>
               </div>
 
-              <div className="mt-[12px] flex min-h-0 shrink flex-col gap-[10px] overflow-visible text-left xl:mt-[16px] xl:gap-[14px] 2xl:gap-[18px]">
+              <div
+                className={`flex min-h-0 shrink flex-col overflow-visible text-left${
+                  freeScroll
+                    ? " mt-[20px] gap-[16px] min-[756px]:mt-[8px] lg:mt-[12px] lg:gap-[24px] xl:mt-[16px] xl:gap-[40px]"
+                    : " mt-[40px] gap-[40px] min-[756px]:mt-[12px] xl:mt-[16px]"
+                }`}
+              >
                 <h3
                   className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
                 >
                   {t("HomeProductCapabilities.coreFeatures")}
                 </h3>
-                <div className="flex min-h-0 flex-col gap-[8px] overflow-visible sm:gap-[10px] xl:gap-[12px]">
+                <div
+                  className={`flex min-h-0 flex-col overflow-visible${
+                    freeScroll ? " gap-[12px] lg:gap-[20px]" : " gap-[20px]"
+                  }`}
+                >
                   {productBase.features.map((feat) => (
                     <div
                       key={feat.title}
