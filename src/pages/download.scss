@@ -1,0 +1,75 @@
+// 下载资源页：统一使用新版首页 Gold 语义变量
+.download-resources-wrapper .main-wrapper {
+  background: var(--Colors-Use-Main---Gold-Bg);
+}
+
+.download-resources-wrapper {
+  // 页面主标题
+  .ant-typography {
+    color: var(--Colors-Neutral-100) !important;
+  }
+
+  // 次级说明文字 / 卡片内描述 / 空状态
+  .ant-typography-secondary,
+  .ant-typography.ant-typography-secondary,
+  .ant-empty-description {
+    color: var(--Colors-Use-Neutral-Text-3-Secondary) !important;
+  }
+
+  // 卡片标题
+  .ant-card-head-title {
+    color: var(--Colors-Neutral-100);
+  }
+
+  // 列表项标题
+  .ant-list-item-meta-title {
+    color: var(--Colors-Neutral-100);
+  }
+
+  // 列表项描述文字
+  .ant-list-item-meta-description {
+    color: var(--Colors-Use-Neutral-Text-3-Secondary) !important;
+  }
+
+  // 链接按钮：默认 Secondary，hover 时 Primary
+  .download-link-button {
+    color: var(--Colors-Use-Neutral-Text-3-Secondary) !important;
+
+    &:hover,
+    &:focus {
+      color: var(--Colors-Use-Main---web-Primary) !important;
+    }
+  }
+
+  // 下载白皮书 / 在线浏览最新文档 / 最新全站打包
+  .ant-btn-primary:not(.ant-btn-background-ghost) {
+    background: var(--Colors-Neutral-100) !important;
+    border-color: var(--Colors-Neutral-100) !important;
+    color: var(--Colors-Use-Neutral-Bg) !important;
+    box-shadow: none !important;
+
+    &:hover,
+    &:focus {
+      background: var(--Colors-Use-Main---web-Primary) !important;
+      border-color: var(--Colors-Use-Main---web-Primary) !important;
+      color: var(--Colors-Use-Neutral-Bg) !important;
+      box-shadow: none !important;
+    }
+  }
+
+  // 下载最新文档
+  .ant-btn-primary.ant-btn-background-ghost {
+    background: var(--Colors-Use-Basic-Background) !important;
+    border-color: var(--Colors-Use-Basic-Background) !important;
+    color: var(--Colors-Neutral-100) !important;
+    box-shadow: none !important;
+
+    &:hover,
+    &:focus {
+      background: var(--Colors-Use-Neutral-Bg) !important;
+      border-color: var(--Colors-Use-Neutral-Bg) !important;
+      color: var(--Colors-Neutral-100) !important;
+      box-shadow: none !important;
+    }
+  }
+}

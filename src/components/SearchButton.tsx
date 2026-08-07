@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { createPortal } from "react-dom";
 import "./SearchButton.scss";
 import {
@@ -20,18 +26,18 @@ const MAX_PER_GROUP = 8;
 
 const SearchIcon = (
   <svg
-    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
+    viewBox="0 0 16 16"
     fill="none"
-    stroke="currentColor"
-    strokeWidth="2.2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
   >
-    <circle cx="11" cy="11" r="7" />
-    <line x1="21" y1="21" x2="16.5" y2="16.5" />
+    <path
+      d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -211,7 +217,9 @@ const SearchButton: React.FC = () => {
       client.progress?.currentSource &&
       SOURCE_SEARCHING_LABEL[client.progress.currentSource as SearchSource]
     ) {
-      return SOURCE_SEARCHING_LABEL[client.progress.currentSource as SearchSource];
+      return SOURCE_SEARCHING_LABEL[
+        client.progress.currentSource as SearchSource
+      ];
     }
     return PHASE_LABEL[client.phase] || "";
   }, [client.phase, client.progress]);
@@ -252,7 +260,10 @@ const SearchButton: React.FC = () => {
     // 错误态: 显示错误 + 重新构建按钮
     if (client.status === "error") {
       return (
-        <div className="navbar-search-modal__status navbar-search-modal__status-error" role="alert">
+        <div
+          className="navbar-search-modal__status navbar-search-modal__status-error"
+          role="alert"
+        >
           <div className="navbar-search-modal__status-line">
             <span>{client.errorMessage || "未知错误"}</span>
           </div>
@@ -272,7 +283,10 @@ const SearchButton: React.FC = () => {
       return (
         <div className="navbar-search-modal__status">
           <div className="navbar-search-modal__status-line">
-            <span className="navbar-search-modal__status-spinner" aria-hidden="true" />
+            <span
+              className="navbar-search-modal__status-spinner"
+              aria-hidden="true"
+            />
             <span className="navbar-search-modal__status-phase">
               {phaseLabel || "正在准备…"}
             </span>
@@ -281,7 +295,9 @@ const SearchButton: React.FC = () => {
             <div className="navbar-search-modal__status-line navbar-search-modal__status-sub">
               {phaseSubline && <span>{phaseSubline}</span>}
               {etaLine && (
-                <span className="navbar-search-modal__status-eta">{etaLine}</span>
+                <span className="navbar-search-modal__status-eta">
+                  {etaLine}
+                </span>
               )}
             </div>
           )}
@@ -291,11 +307,22 @@ const SearchButton: React.FC = () => {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          <div className="navbar-search-modal__log" role="log" aria-live="polite">
+          <div
+            className="navbar-search-modal__log"
+            role="log"
+            aria-live="polite"
+          >
             {recentLogs.map((l, i) => (
-              <div key={i} className={`navbar-search-modal__log-line ${logLevelClass(l.level)}`}>
-                <span className="navbar-search-modal__log-time">{formatLogTs(l.ts)}</span>
-                <span className="navbar-search-modal__log-msg">{l.message}</span>
+              <div
+                key={i}
+                className={`navbar-search-modal__log-line ${logLevelClass(l.level)}`}
+              >
+                <span className="navbar-search-modal__log-time">
+                  {formatLogTs(l.ts)}
+                </span>
+                <span className="navbar-search-modal__log-msg">
+                  {l.message}
+                </span>
               </div>
             ))}
             <div ref={logEndRef} />
@@ -327,9 +354,15 @@ const SearchButton: React.FC = () => {
       <div className="navbar-search-modal__results">
         {grouped.map((g) => (
           <div className="navbar-search-modal__group" key={g.source}>
-            <p className="navbar-search-modal__group-title">{SOURCE_LABEL[g.source]}</p>
+            <p className="navbar-search-modal__group-title">
+              {SOURCE_LABEL[g.source]}
+            </p>
             {g.items.map((r) => (
-              <a key={r.path} className="navbar-search-modal__result" href={r.path}>
+              <a
+                key={r.path}
+                className="navbar-search-modal__result"
+                href={r.path}
+              >
                 <p className="navbar-search-modal__result-title">{r.title}</p>
                 <p className="navbar-search-modal__result-snippet">
                   <HighlightedSnippet text={r.snippet} query={query.trim()} />
@@ -342,7 +375,8 @@ const SearchButton: React.FC = () => {
     );
   };
 
-  const inputDisabled = client.status === "error" || client.status === "building";
+  const inputDisabled =
+    client.status === "error" || client.status === "building";
 
   const modal = (
     <div
@@ -376,8 +410,8 @@ const SearchButton: React.FC = () => {
               client.status === "ready"
                 ? "搜索文档、Yakit 手册与技术博客"
                 : client.status === "building"
-                ? `${PHASE_LABEL[client.phase || "prepare"]}…`
-                : "正在准备搜索索引…"
+                  ? `${PHASE_LABEL[client.phase || "prepare"]}…`
+                  : "正在准备搜索索引…"
             }
             value={query}
             disabled={inputDisabled}
@@ -393,12 +427,12 @@ const SearchButton: React.FC = () => {
             {client.status === "ready" && client.summary
               ? `本地索引 ${client.summary.docs} 篇 / ${client.summary.postings} 词项`
               : client.status === "ready" && client.meta
-              ? `索引建立于 ${new Date(client.meta.generatedAt).toLocaleString()}`
-              : client.status === "building"
-              ? `${PHASE_LABEL[client.phase || "prepare"] as string}…`
-              : client.status === "error"
-              ? "索引未就绪"
-              : "尚未构建"}
+                ? `索引建立于 ${new Date(client.meta.generatedAt).toLocaleString()}`
+                : client.status === "building"
+                  ? `${PHASE_LABEL[client.phase || "prepare"] as string}…`
+                  : client.status === "error"
+                    ? "索引未就绪"
+                    : "尚未构建"}
           </span>
           <button
             type="button"
@@ -420,16 +454,12 @@ const SearchButton: React.FC = () => {
 
   return (
     <>
-      <button
-        type="button"
-        className="navbar-search-button"
-        aria-label="搜索"
-        title="搜索"
+      <div
+        className={`inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]`}
         onClick={() => setOpen(true)}
       >
         {SearchIcon}
-        <span className="navbar-search-button__text">搜索</span>
-      </button>
+      </div>
       {open && mounted ? createPortal(modal, document.body) : null}
     </>
   );

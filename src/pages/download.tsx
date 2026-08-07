@@ -23,8 +23,10 @@ import {
 
 const { Title, Paragraph, Text } = Typography;
 
-// Yak 品牌主题橙色 (与 custom.scss 的 --base-theme-color 一致)
-const YAK_ORANGE = "#ff7d23";
+import { useTranslation } from "react-i18next";
+
+// 使用新版首页主色 token，与 HomeFooter / 新首页保持一致
+const YAK_PRIMARY = "var(--Colors-Use-Main---web-Primary)";
 
 interface DocVersion {
   version: string;
@@ -50,6 +52,7 @@ const WHITEPAPER_URL =
 // 全站打包数据来源: 构建产物 static/site-packages.json, 由 scripts/gen-site-packages.js
 // 依据 old_site_packages.txt 生成, 最新置顶。
 function DownloadContent() {
+  const { t } = useTranslation();
   const docsVersionsUrl = useBaseUrl("/docs-versions.json");
   const sitePackagesUrl = useBaseUrl("/site-packages.json");
   const [versions, setVersions] = useState<DocVersion[]>([]);
@@ -118,27 +121,30 @@ function DownloadContent() {
         paddingRight: 16,
       }}
     >
-      <Title level={2}>下载资源</Title>
-      <Paragraph type="secondary">
-        这里集中提供 Yaklang / Yakit 相关的可下载资源，包括技术白皮书、各版本
-        内置标准库 API 手册归档与官网全站内容打包。
-      </Paragraph>
+      <Title level={2}>{t("DownloadResources.title")}</Title>
+      <Paragraph type="secondary">{t("DownloadResources.intro")}</Paragraph>
 
-      <Card style={{ marginBottom: 24 }} title="技术白皮书">
+      <Card
+        style={{ marginBottom: 24, background: "var(--Colors-Use-Main---Gold-Bg-Hover)", borderColor: "var(--Colors-Use-Main---Gold-Focus)" }}
+        title={t("DownloadResources.whitepaper.title")}
+      >
         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-          <Text type="secondary">Yakit 技术白皮书 (PDF)</Text>
+          <Text type="secondary">{t("DownloadResources.whitepaper.label")}</Text>
           <Button type="primary" icon={<FilePdfOutlined />} href={WHITEPAPER_URL}>
-            &nbsp;下载白皮书
+            &nbsp;{t("DownloadResources.whitepaper.cta")}
           </Button>
         </Space>
       </Card>
 
-      <Card style={{ marginBottom: 24 }} title="最新 API 文档">
+      <Card
+        style={{ marginBottom: 24, background: "var(--Colors-Use-Main---Gold-Bg-Hover)", borderColor: "var(--Colors-Use-Main---Gold-Focus)" }}
+        title={t("DownloadResources.latestDocs.title")}
+      >
         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
           <Space wrap>
             <Button type="primary" icon={<ReadOutlined />}>
               <Link to="/docs/intro" style={{ color: "inherit" }}>
-                &nbsp;在线浏览最新文档
+                &nbsp;{t("DownloadResources.latestDocs.online")}
               </Link>
             </Button>
             {latest && (
@@ -148,26 +154,27 @@ function DownloadContent() {
                 icon={<DownloadOutlined />}
                 href={latest.url}
               >
-                &nbsp;下载最新文档 (v{latest.version})
+                &nbsp;{t("DownloadResources.latestDocs.download", { version: latest.version })}
               </Button>
             )}
           </Space>
           {latest && (
             <Text type="secondary">
-              当前归档最新版本:{" "}
-              <Tag color={YAK_ORANGE}>v{latest.version}</Tag>
-              {latest.date ? `归档于 ${latest.date}` : null}
+              {t("DownloadResources.latestDocs.current")}:{" "}
+              <Tag color={YAK_PRIMARY}>v{latest.version}</Tag>
+              {latest.date ? t("DownloadResources.latestDocs.archived", { date: latest.date }) : null}
             </Text>
           )}
         </Space>
       </Card>
 
-      <Card style={{ marginBottom: 24 }} title="官网全站内容打包（docs + products + blog）">
+      <Card
+        style={{ marginBottom: 24, background: "var(--Colors-Use-Main---Gold-Bg-Hover)", borderColor: "var(--Colors-Use-Main---Gold-Focus)" }}
+        title={t("DownloadResources.sitePackage.title")}
+      >
         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
           <Paragraph type="secondary" style={{ marginBottom: 0 }}>
-            包含 Yak 编程文档、Yakit 使用手册、技术博客的全部 Markdown 源文件，
-            并附带可恢复 URL 的索引 INDEX.json / INDEX.ndjson，便于离线检索与自建
-            搜索系统。
+            {t("DownloadResources.sitePackage.desc")}
           </Paragraph>
           {latestPkg ? (
             <>
@@ -177,29 +184,29 @@ function DownloadContent() {
                   icon={<AppstoreOutlined />}
                   href={latestPkg.url}
                 >
-                  &nbsp;最新全站打包 ({latestPkg.id})
+                  &nbsp;{t("DownloadResources.sitePackage.latestCta", { id: latestPkg.id })}
                 </Button>
               </Space>
               <Text type="secondary">
-                当前归档:{" "}
-                <Tag color={YAK_ORANGE}>{latestPkg.id}</Tag>
+                {t("DownloadResources.sitePackage.current")}:{" "}
+                <Tag color={YAK_PRIMARY}>{latestPkg.id}</Tag>
                 {latestPkg.count != null
-                  ? `共 ${latestPkg.count} 个内容文件 `
+                  ? t("DownloadResources.sitePackage.count", { count: latestPkg.count }) + " "
                   : ""}
-                {latestPkg.date ? `归档于 ${latestPkg.date}` : null}
+                {latestPkg.date ? t("DownloadResources.sitePackage.archived", { date: latestPkg.date }) : null}
               </Text>
             </>
           ) : (
-            <Empty description="暂无全站打包归档" />
+            <Empty description={t("DownloadResources.sitePackage.empty")} />
           )}
         </Space>
       </Card>
 
-      <Title level={3}>历史全站打包（仅提供 zip 下载）</Title>
+      <Title level={3}>{t("DownloadResources.historyPackages.title")}</Title>
       {pkgLoading ? (
-        <Paragraph type="secondary">加载中...</Paragraph>
+        <Paragraph type="secondary">{t("DownloadResources.historyPackages.loading")}</Paragraph>
       ) : pkgHistory.length === 0 ? (
-        <Empty description="暂无更早的历史全站打包归档" />
+        <Empty description={t("DownloadResources.historyPackages.empty")} />
       ) : (
         <List
           dataSource={pkgHistory}
@@ -212,8 +219,9 @@ function DownloadContent() {
                   type="link"
                   icon={<DownloadOutlined />}
                   href={item.url}
+                  className="download-link-button"
                 >
-                  下载 zip
+                  {t("DownloadResources.downloadZip")}
                 </Button>,
               ]}
             >
@@ -221,12 +229,12 @@ function DownloadContent() {
                 title={<Text strong>{item.id}</Text>}
                 description={
                   item.count != null
-                    ? `共 ${item.count} 个内容文件${
-                        item.date ? `，归档于 ${item.date}` : ""
+                    ? `${t("DownloadResources.sitePackage.count", { count: item.count })}${
+                        item.date ? `，${t("DownloadResources.sitePackage.archived", { date: item.date })}` : ""
                       }`
                     : item.date
-                    ? `归档于 ${item.date}`
-                    : "官网全站 Markdown 内容压缩包"
+                    ? t("DownloadResources.sitePackage.archived", { date: item.date })
+                    : t("DownloadResources.historyDocs.fallbackDesc")
                 }
               />
             </List.Item>
@@ -234,11 +242,11 @@ function DownloadContent() {
         />
       )}
 
-      <Title level={3}>历史版本文档（仅提供 zip 下载）</Title>
+      <Title level={3}>{t("DownloadResources.historyDocs.title")}</Title>
       {loading ? (
-        <Paragraph type="secondary">加载中...</Paragraph>
+        <Paragraph type="secondary">{t("DownloadResources.historyDocs.loading")}</Paragraph>
       ) : history.length === 0 ? (
-        <Empty description="暂无更早的历史版本归档" />
+        <Empty description={t("DownloadResources.historyDocs.empty")} />
       ) : (
         <List
           dataSource={history}
@@ -251,15 +259,18 @@ function DownloadContent() {
                   type="link"
                   icon={<DownloadOutlined />}
                   href={item.url}
+                  className="download-link-button"
                 >
-                  下载文档 zip
+                  {t("DownloadResources.downloadDocZip")}
                 </Button>,
               ]}
             >
               <List.Item.Meta
                 title={<Text strong>v{item.version}</Text>}
                 description={
-                  item.date ? `归档于 ${item.date}` : "Markdown 文档压缩包"
+                  item.date
+                    ? t("DownloadResources.latestDocs.archived", { date: item.date })
+                    : t("DownloadResources.historyDocs.fallbackDesc")
                 }
               />
             </List.Item>
@@ -274,11 +285,17 @@ export default function DownloadResources() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`下载资源 - ${siteConfig.title}`}
+      title={`${siteConfig.title}`}
       description="Yaklang / Yakit 技术白皮书、API 文档历史版本与官网全站内容打包下载"
+      wrapperClassName="download-resources-wrapper"
     >
-      <main>
-        <ConfigProvider theme={{ token: { colorPrimary: YAK_ORANGE } }}>
+      <main
+        style={{
+          background: "var(--Colors-Use-Main---Gold-Bg)",
+          minHeight: "100vh",
+        }}
+      >
+        <ConfigProvider theme={{ token: { colorPrimary: YAK_PRIMARY } }}>
           <DownloadContent />
         </ConfigProvider>
       </main>

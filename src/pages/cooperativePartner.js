@@ -10,6 +10,7 @@ export default function CooperativePartner() {
         <Layout
             title={`Yak Language ${siteConfig.title}`}
             description="Web安全能力研发最强语言"
+            wrapperClassName="cooperative-partner-page-layout"
         >
             <main>
                 <CooperativePartnerPage />

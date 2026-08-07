@@ -6,7 +6,7 @@
     margin: 0.5rem 0 1rem;
     font-size: 0.85rem;
     line-height: 1.4;
-    color: var(--ifm-color-emphasis-600);
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
 }
 
 /* Collapse the default vertical margins of the date/reading-time block so it
@@ -33,7 +33,7 @@
 .author::before {
     content: "·";
     margin-right: 0.4rem;
-    color: var(--ifm-color-emphasis-400);
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
 }
 
 .authorLink {
@@ -45,7 +45,7 @@
 }
 
 .authorLink:hover {
-    color: var(--ifm-color-primary);
+    color: var(--Colors-Use-Main---web-Primary);
     text-decoration: none;
 }
 
@@ -56,10 +56,14 @@
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 1px solid var(--ifm-color-emphasis-200);
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
 }
 
 .name {
     font-weight: 600;
-    color: var(--ifm-color-emphasis-800);
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
+}
+
+.name:hover {
+    color: var(--Colors-Use-Main---web-Primary);
 }

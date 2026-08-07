@@ -1,0 +1,36 @@
+// 首页专用变量
+// 语义色由 @yakit-libs/color 生成的 yakit-theme-gold.css 提供
+// 通过 [data-theme="dark"] 切换，与 HomeThemeContext 一致
+
+// =========================================================
+// 兼容别名：代码使用 Main---Gold-* / web-Primary 等命名
+// =========================================================
+:root {
+  --Colors-Use-Main---Gold-Bg: var(--Colors-Use-Main-Bg);
+  --Colors-Use-Main---Gold-Bg-Hover: var(--Colors-Use-Main-Bg-Hover);
+  --Colors-Use-Main---Gold-Focus: var(--Colors-Use-Main-Focus);
+  --Colors-Use-Main---Gold-Border: var(--Colors-Use-Main-Border);
+  --Colors-Use-Main---web-Primary: #E9771A;
+  --Colors-Use-Main---web-On-Primary: #FDF3EB;
+  --Colors-Use-Main---memfit-Primary: #4373BB;
+  --Colors-Main---IRify-0: rgba(121, 87, 178, 0.08);
+  --Colors-Use-Main---IRify-Focus: #E1DAEE;
+  --Colors-Main---memfit-0: rgba(67, 115, 187, 0.08);
+  --Colors-Use-Main---memfit-Focus: #D5E0F0;
+  --Colors-Neutral-100: #353639;
+}
+
+[data-theme="dark"] {
+  --Colors-Use-Main---Gold-Bg: var(--Colors-Use-Main-Bg);
+  --Colors-Use-Main---Gold-Bg-Hover: var(--Colors-Use-Main-Bg-Hover);
+  --Colors-Use-Main---Gold-Focus: var(--Colors-Use-Main-Focus);
+  --Colors-Use-Main---Gold-Border: var(--Colors-Use-Main-Border);
+  --Colors-Use-Main---web-Primary: #E8700D;
+  --Colors-Use-Main---web-On-Primary: #292216;
+  --Colors-Use-Main---memfit-Primary: #4373BB;
+  --Colors-Main---IRify-0: rgba(180, 135, 255, 0.08);
+  --Colors-Use-Main---IRify-Focus: #45375D;
+  --Colors-Main---memfit-0: rgba(102, 162, 235, 0.08);
+  --Colors-Use-Main---memfit-Focus: #2C3F56;
+  --Colors-Neutral-100: #F0F2F6;
+}

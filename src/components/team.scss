@@ -4,12 +4,19 @@
   text-overflow: ellipsis;
 }
 
+// 外层 Layout wrapper 背景同步为首页 Gold 主题
+.team-page-layout .main-wrapper {
+  background: var(--Colors-Use-Main---Gold-Bg);
+}
+
 .team-and-thank-container {
+  background: var(--Colors-Use-Main---Gold-Bg);
+
   .safety-body {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
-    margin-top: 225px;
+    padding-top: 225px;
     &-logo {
       text-align: center;
     }
@@ -20,17 +27,19 @@
       font-size: 18px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
-      color: #686c78;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
       line-height: 29px;
-      background-color: #e6f8f326;
+      background-color: var(--Colors-Use-Main---Gold-Bg-Hover);
+      border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+      border-radius: 8px;
       &-left-top {
         position: absolute;
         left: 0;
         top: 0;
         width: 40px;
         height: 40px;
-        border-top: 5px solid #46d2ab;
-        border-left: 5px solid #46d2ab;
+        border-top: 5px solid var(--Colors-Use-Main---web-Primary);
+        border-left: 5px solid var(--Colors-Use-Main---web-Primary);
         border-top-left-radius: 8px;
       }
       &-right-bottom {
@@ -39,14 +48,15 @@
         bottom: 0;
         width: 40px;
         height: 40px;
-        border-right: 5px solid #46d2ab;
-        border-bottom: 5px solid #46d2ab;
+        border-right: 5px solid var(--Colors-Use-Main---web-Primary);
+        border-bottom: 5px solid var(--Colors-Use-Main---web-Primary);
         border-bottom-right-radius: 8px;
       }
       .teachingmaterials-wrapper {
         text-align: center;
         margin-top: 100px;
         font-size: 16px;
+        color: var(--Colors-Use-Neutral-Text-2-Primary);
         .teachingmaterials-img {
           width: 150px;
           margin-bottom: 50px;
@@ -64,7 +74,7 @@
       text-align: center;
       font-size: 48px;
       font-weight: 600;
-      color: var(--base-font-color);
+      color: var(--Colors-Neutral-100);
     }
     .owner-member-introduce-body {
       margin-top: 2px;
@@ -102,7 +112,7 @@
         line-height: 24px;
         text-align: center;
         font-size: 16px;
-        color: #686c78;
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
         font-weight: 400;
       }
     }
@@ -111,6 +121,7 @@
   .contributors-body {
     width: 100%;
     margin-top: 225px;
+    padding-bottom: 96px;
     .contributors-header-title {
       margin-bottom: 48px;
       height: 56px;
@@ -118,7 +129,7 @@
       text-align: center;
       font-size: 40px;
       font-weight: 600;
-      color: var(--base-font-color);
+      color: var(--Colors-Neutral-100);
     }
     .contributors-member-wrapper {
       -webkit-box-sizing: border-box;
@@ -178,7 +189,7 @@
       line-height: 56px;
       font-size: 40px;
       font-weight: 600;
-      color: var(--base-font-color);
+      color: var(--Colors-Neutral-100);
       text-align: center;
     }
   }
@@ -193,7 +204,7 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background: linear-gradient(270deg, #f8f1fe 0%, #f7faff 100%);
+      background: var(--Colors-Use-Main---Gold-Bg);
     }
     .animation-box {
       animation: upShow 1.2s both;
@@ -220,7 +231,7 @@
           font-size: 32px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #1e1f23;
+          color: var(--Colors-Use-Neutral-Text-1-Title);
           line-height: 45px;
         }
         &-name {
@@ -228,13 +239,13 @@
           font-size: 24px;
           font-family: PingFangSC-Semibold, PingFang SC;
           font-weight: 600;
-          color: #1e1f23;
+          color: var(--Colors-Use-Neutral-Text-1-Title);
           line-height: 32px;
         }
         .link-jump {
           display: inline-block;
           margin-top: 4px;
-          color: var(--base-theme-color);
+          color: var(--Colors-Use-Main---web-Primary);
         }
       }
       .consultant-header-image-box {
@@ -252,13 +263,13 @@
           z-index: 1;
           width: 160px;
           height: 160px;
-          border: 4px solid #ffffff;
+          border: 4px solid var(--Colors-Use-Main---Gold-Focus);
           border-radius: 50%;
         }
         .deep-background {
           width: 160px;
           height: 160px;
-          background: #7481ff;
+          background: var(--Colors-Use-Purple-Primary);
           border-radius: 50%;
           position: absolute;
           top: 55px;
@@ -361,7 +372,7 @@
       text-align: center;
       font-size: 40px;
       font-weight: 600;
-      color: var(--base-font-color);
+      color: var(--Colors-Neutral-100);
     }
     .thanksfor-member-wrapper {
       -webkit-box-sizing: border-box;
@@ -394,10 +405,13 @@
   }
 }
 
-.owner-member-opt {
-  width: 368px;
-  padding: 24px 22px 16px 24px;
-  font-size: 14px;
+  .owner-member-opt {
+    width: 368px;
+    padding: 24px 22px 16px 24px;
+    font-size: 14px;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 4px;
   &-author {
     width: 100%;
     display: flex;
@@ -423,7 +437,7 @@
             height: 22px;
             font-size: 16px;
             font-weight: 600;
-            color: #595b64;
+            color: var(--Colors-Use-Neutral-Text-2-Primary);
             line-height: 22px;
           }
           .link-body {
@@ -431,10 +445,10 @@
             height: 20px;
             line-height: 20px;
             .link-jump {
-              color: var(--base-theme-color);
+              color: var(--Colors-Use-Main---web-Primary);
             }
             .link-no-jump {
-              color: #000000;
+              color: var(--Colors-Use-Neutral-Text-3-Secondary);
             }
           }
         }
@@ -458,7 +472,7 @@
     .author-github {
       .github-icon {
         font-size: 20px;
-        color: #000000;
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
       }
       .github-img {
         width: 32px;
@@ -475,7 +489,7 @@
     height: 20px;
     line-height: 20px;
     @include div-ellipsis-text;
-    color: #686c78;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
   }
   &-address {
     height: 20px;
@@ -483,11 +497,12 @@
     margin-left: -4px;
     .address-icon {
       font-size: 20px;
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
     }
     .address-style {
       height: 20px;
       line-height: 20px;
-      color: #999ea8;
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
     }
   }
 }
@@ -495,6 +510,7 @@
 .contributors-member-opt {
   width: 100%;
   font-size: 14px;
+  background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
   .member-info-body {
     .member-author-link {
       display: flex;
@@ -521,16 +537,16 @@
             line-height: 22px;
             font-size: 16px;
             font-weight: 600;
-            color: var(--base-font-color);
+            color: var(--Colors-Use-Neutral-Text-1-Title);
           }
           .link-out {
             height: 20px;
             line-height: 20px;
             .link-jump {
-              color: var(--base-theme-color);
+              color: var(--Colors-Use-Main---web-Primary);
             }
             .link-no-jump {
-              color: #000000;
+              color: var(--Colors-Use-Neutral-Text-3-Secondary);
             }
           }
         }
@@ -538,7 +554,7 @@
       .link-info {
         .link-icon {
           font-size: 20px;
-          color: #000000;
+          color: var(--Colors-Use-Neutral-Text-3-Secondary);
         }
         .link-img {
           width: 32px;
@@ -554,7 +570,7 @@
       margin-bottom: 14px;
       height: 20px;
       @include div-ellipsis-text;
-      color: #686c78;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
     }
     .member-address-body {
       height: 24px;
@@ -562,11 +578,12 @@
       margin-left: -4px;
       .address-icon {
         font-size: 24px;
+        color: var(--Colors-Use-Neutral-Text-4-Help-text);
       }
       .address-style {
         height: 24px;
         line-height: 24px;
-        color: #999ea8;
+        color: var(--Colors-Use-Neutral-Text-4-Help-text);
       }
     }
   }
@@ -574,7 +591,8 @@
 .ant-card.contributors-member-opt {
   width: 100%;
   border-radius: 4px;
-  border: 1px solid rgba(230, 234, 239, 0.5);
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus) !important;
+  background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
 }
 .consultant-member-opt {
   width: 100%;
@@ -588,7 +606,7 @@
   .right-line {
     width: 1px;
     height: 96px;
-    border: 1px solid #e6eaef;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
     position: absolute;
     top: 76px;
   }
@@ -607,7 +625,7 @@
       .img-style {
         width: 48px;
         height: 48px;
-        border: 2px solid #ffffff;
+        border: 2px solid var(--Colors-Use-Main---Gold-Focus);
         border-radius: 50%;
       }
       .img-mask {
@@ -617,7 +635,7 @@
         top: 10px;
         left: 0;
         opacity: 0.2;
-        border: 2px solid #ffffff;
+        border: 2px solid var(--Colors-Use-Main---Gold-Focus);
         filter: blur(8px);
       }
     }
@@ -634,7 +652,7 @@
       text-align: center;
       font-size: 16px;
       font-weight: 600;
-      color: var(--base-font-color);
+      color: var(--Colors-Use-Neutral-Text-1-Title);
     }
     &-link {
       width: 100%;
@@ -642,10 +660,10 @@
       line-height: 20px;
       text-align: center;
       .link-jump {
-        color: var(--base-theme-color);
+        color: var(--Colors-Use-Main---web-Primary);
       }
       .link-no-jump {
-        color: #000000;
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
       }
     }
     &-description {
@@ -655,7 +673,7 @@
       height: 20px;
       line-height: 20px;
       text-align: center;
-      color: #686c78;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
     }
     &-address {
       margin-top: 6px;
@@ -666,11 +684,12 @@
       justify-content: center;
       .address-icon {
         font-size: 20px;
+        color: var(--Colors-Use-Neutral-Text-4-Help-text);
       }
       .address-style {
         height: 20px;
         line-height: 20px;
-        color: #999ea8;
+        color: var(--Colors-Use-Neutral-Text-4-Help-text);
       }
     }
   }
@@ -679,9 +698,9 @@
 .thanksfor-member-opt {
   width: 100%;
   padding: 24px 16px 14px 24px;
-  background: #ffffff;
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
   border-radius: 4px;
-  border: 1px solid rgba(230, 234, 239, 0.5);
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
   font-size: 14px;
   .tag-div-style {
     margin-top: 4px;
@@ -714,7 +733,7 @@
         line-height: 22px;
         font-size: 16px;
         font-weight: 600;
-        color: var(--base-font-color);
+        color: var(--Colors-Use-Neutral-Text-1-Title);
       }
     }
   }
@@ -726,7 +745,7 @@
     .description-style {
       height: 20px;
       line-height: 20px;
-      color: #686c78;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
     }
   }
   .member-address-link {
@@ -738,12 +757,13 @@
       margin-left: -4px;
       .address-icon {
         font-size: 24px;
+        color: var(--Colors-Use-Neutral-Text-4-Help-text);
       }
-      .address-style {
-        height: 24px;
-        line-height: 24px;
-        color: #999ea8;
-      }
+        .address-style {
+          height: 24px;
+          line-height: 24px;
+          color: var(--Colors-Use-Neutral-Text-4-Help-text);
+        }
     }
     .link-body {
       a {
@@ -755,10 +775,10 @@
           font-size: 20px;
         }
         .icon-home-style {
-          color: #42d7ad;
+          color: var(--Colors-Use-Success-Primary);
         }
         .icon-github-style {
-          color: #000000;
+          color: var(--Colors-Use-Neutral-Text-3-Secondary);
         }
       }
       a + a {
@@ -769,22 +789,22 @@
 }
 
 .red-tag-div {
-  background: rgba(254, 141, 102, 0.08);
-  color: #fe8d66;
+  background: var(--Colors-Use-Error-Bg);
+  color: var(--Colors-Use-Error-Primary);
 }
 .orange-tag-div {
-  background: rgba(255, 177, 75, 0.08);
-  color: #ffb14b;
+  background: var(--Colors-Use-Warning-Bg);
+  color: var(--Colors-Use-Warning-Primary);
 }
 .blue-tag-div {
-  background: rgba(112, 161, 255, 0.08);
-  color: #70a1ff;
+  background: var(--Colors-Use-Blue-Bg);
+  color: var(--Colors-Use-Blue-Primary);
 }
 .purple-tag-div {
-  background: rgba(116, 129, 255, 0.08);
-  color: #7481ff;
+  background: var(--Colors-Use-Purple-Bg);
+  color: var(--Colors-Use-Purple-Primary);
 }
 .green-tag-div {
-  background: rgba(66, 215, 173, 0.08);
-  color: #42d7ad;
+  background: var(--Colors-Use-Success-Bg);
+  color: var(--Colors-Use-Success-Primary);
 }

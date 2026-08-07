@@ -8,6 +8,8 @@ import SidebarFilter from "./SidebarFilter";
 // 全局搜索 worker Provider: 让 worker 在应用根挂载一次,
 // 弹窗关闭后仍可后台构建索引, 多个消费者共享同一份状态。
 import { SearchWorkerProvider } from "@site/src/utils/search/useSearchClient";
+// 新版首页主题 Provider：全站生效，控制 data-theme 属性（亮/暗色）
+import { HomeThemeProvider } from "@site/src/components/homeNew/HomeThemeContext";
 
 // 注册前端搜索专用 Service Worker, 缓存 /site-content/latest.zip 等。
 // 静默失败: SW 不可用时不影响任何页面功能, 仅搜索可能多消耗一次网络请求。
@@ -38,9 +40,11 @@ function useRegisterSearchSw() {
 export default function Root({ children }: { children: React.ReactNode }) {
   useRegisterSearchSw();
   return (
-    <SearchWorkerProvider>
-      <SidebarFilter />
-      {children}
-    </SearchWorkerProvider>
+    <HomeThemeProvider>
+      <SearchWorkerProvider>
+        <SidebarFilter />
+        {children}
+      </SearchWorkerProvider>
+    </HomeThemeProvider>
   );
 }

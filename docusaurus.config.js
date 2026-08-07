@@ -40,6 +40,11 @@ module.exports = {
 
         navbar: {
             title: "",
+            // 标记为滚动时隐藏：因 swizzle 后导航栏改用 HomeNavbar(sticky)，
+            // useTOCHighlight 在 hideOnScroll=false 时会调用 getNavbarHeight()
+            // 读取 .navbar 元素高度，但 HomeNavbar 不带 .navbar class 会报错。
+            // 设 true 让 TOC 用 offset 0，跳过 getNavbarHeight 调用，避免崩溃。
+            hideOnScroll: true,
             logo: {
                 alt: "My Site Logo",
                 src: "img/logo.png",

@@ -71,5 +71,1103 @@
   "@电子科技大学网络空间安全研究院": "@电子科技大学网络空间安全研究院",
   "YAK 生态共建杰出贡献成员": "YAK 生态共建杰出贡献成员",
   "特别致谢": "特别致谢",
-  "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后": "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后"
+  "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后": "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后",
+  "HomeNavbar": {
+    "community": {
+      "aboutUs": "关于我们",
+      "partners": "合作伙伴",
+      "techBlog": "技术博客",
+      "downloads": "下载资源"
+    },
+    "nav": {
+      "yakDocs": "Yak 编程文档",
+      "yakitManual": "Yakit 使用手册",
+      "opensource": "开源",
+      "community": "社区&资源"
+    },
+    "aria": {
+      "switchLanguage": "切换语言",
+      "switchLightMode": "切换亮色模式",
+      "switchDarkMode": "切换暗夜模式",
+      "openMenu": "打开菜单",
+      "closeMenu": "关闭菜单"
+    },
+    "theme": {
+      "lightMode": "亮色模式",
+      "darkMode": "暗夜模式"
+    }
+  },
+  "HomeDownload": {
+    "title": "下载与安装",
+    "tabs": {
+      "yakitDesc": "一体化交互式渗透测试平台",
+      "yaklangDesc": "为网络安全而生的领域编程语言",
+      "memfitDesc": "面向安全工程师的桌面 AI Agent",
+      "irifyDesc": "SSA 与 AI 驱动的代码安全分析系统"
+    },
+    "yakEnv": {
+      "setup": "Yak 语言环境搭建",
+      "copyTitle": "复制安装命令",
+      "tutorial": "查看教程",
+      "downloadOld": "下载旧版"
+    },
+    "table": {
+      "package": "安装包",
+      "latestVersion": "最新版: {{version}}",
+      "size": "大小",
+      "download": "下载"
+    },
+    "footer": {
+      "legacy": "下载兼容版本",
+      "oldRelease": "下载旧版"
+    },
+    "messages": {
+      "fetchSizeError": "获取{{product}}-{{file}}版本大小错误",
+      "fetchVersionError": "获取{{product}}版本错误，请刷新页面后重试"
+    },
+    "legacyItems": {
+      "win7": "支持Win7系统",
+      "uosNote": "支持统信UOS、麒麟等国产系统，注意识别系统架构",
+      "oldMac": "支持macOS 10.13和macOS 10.14"
+    }
+  },
+  "HomeFooter": {
+    "sections": {
+      "opensource": "开源",
+      "docs": "官方文档",
+      "community": "社区&资源"
+    },
+    "links": {
+      "irify": "IRify · SSA 静态代码分析",
+      "javaJive": "JavaJive",
+      "hackSkills": "HackSkills",
+      "yakLab": "YakLab",
+      "hackBenchmark": "HackBenchmark",
+      "memfit": "Memfit AI",
+      "yakDocs": "Yak 语言文档",
+      "apiManual": "API 手册",
+      "yakitManual": "Yakit 使用手册",
+      "techBlog": "技术博客",
+      "yakLabHandbook": "YakLab 实战手册",
+      "aboutUs": "关于我们",
+      "partners": "合作伙伴",
+      "downloads": "下载资源"
+    },
+    "aria": {
+      "github": "GitHub",
+      "wechat": "微信",
+      "wechatPop": "微信公众号",
+      "wechatScan": "微信扫码关注公众号",
+      "switchLanguage": "切换语言",
+      "switchLightMode": "切换亮色模式",
+      "switchDarkMode": "切换暗夜模式"
+    },
+    "slogan": "做难而正确的事情",
+    "icp": "京ICP备17047700号-3",
+    "police": "京公网安备11010802048712号"
+  },
+  "HomeHero": {
+    "downloadDesktop": "下载桌面端",
+    "viewDocs": "查看文档",
+    "title": "广泛使用的开源网络安全基础设施",
+    "subtitle": "Powered by CDSL-Yaklang - 为网络安全而生的编程语言"
+  },
+  "HomeMilestones": {
+    "title": "里程碑",
+    "viewFullData": "查看完整数据",
+    "items": {
+      "m2021_xcon": {
+        "title": "Yak 与 Yakit 在 XCon 对外发布",
+        "impact": "Yak Project 进入公开发展阶段，Yakit 开始为安全工程师提供统一的桌面工作台。",
+        "dateLabel": "// 2021 年 10 月"
+      },
+      "m2023_open_source_launch": {
+        "title": "CDSL-YAK 在北京国家会议中心举行开源发布会",
+        "impact": "核心语言、运行时和安全能力底座面向社区开放，外部开发者可以直接检查源码、提交问题并参与建设。",
+        "dateLabel": "// 2023 年 5 月 30 日"
+      },
+      "m2023_yakit_v2_list": {
+        "title": "YAKIT 网络安全单兵测试系统 V2.0 入选第十七批北京市新技术新产品（服务）名单",
+        "impact": "Yakit 的产品化和实际应用进入新的发展阶段。",
+        "dateLabel": "// 2023年"
+      },
+      "m2024_yakit_v2_test": {
+        "title": "Yakit V2.0 通过公安部第三研究所检测",
+        "impact": "Yakit 按照网络安全专用产品和 Web 应用安全检测相关国家标准完成测试。",
+        "dateLabel": "// 2024 年 5 月"
+      },
+      "m2024_cicc_top10": {
+        "title": "“面向通信网络的专用安全编程语言 YakLang 创新及应用”入选 2023 年度信息通信领域十大科技进展",
+        "impact": "Yaklang 的专用编程语言路线进入信息通信领域年度科技进展名单。",
+        "dateLabel": "// 2024 年 11 月 30 日"
+      },
+      "m2025_irify_release": {
+        "title": "IRify 对外发布",
+        "impact": "Yak SSA、SyntaxFlow 与 AI 能力形成独立代码审计产品，项目能力从交互式测试扩展到源码安全分析。",
+        "dateLabel": "// 2025 年 4 月"
+      },
+      "m2025_cic_first_prize": {
+        "title": "“面向网络安全的专用编程语言与开发环境技术与应用”获中国通信学会科学技术奖一等奖",
+        "impact": "Yaklang 与配套开发环境的技术成果和实际应用获得行业科技奖励。",
+        "dateLabel": "// 2025 年 12 月"
+      },
+      "m2025_maker_china": {
+        "title": "“国产化网络安全开发环境 YAK”获“创客中国”全国总决赛企业组三等奖",
+        "impact": "YAK 从网络安全专题赛进入全国总决赛，展示了国产安全开发环境的工程能力和应用价值。",
+        "dateLabel": "// 2025年"
+      },
+      "m2026_memfit_release": {
+        "title": "Memfit AI 对外发布",
+        "impact": "Yaklang、Yakit 及其工具生态进入 Agent 工作流，为安全工程师提供分析、执行和交付支持。",
+        "dateLabel": "// 2026 年 3 月"
+      }
+    }
+  },
+  "OpenSourcePage": {
+    "eyebrow": "OPEN SOURCE",
+    "title": "Yak Project 开源生态",
+    "subtitle": "展示部分开源项目，更多请点击查看全部",
+    "lead": "从程序语言、静态代码分析到 AI Agent 安全，Yak Project 将核心能力沉淀为一系列开源项目。点击任意卡片即可在新标签页打开对应站点。",
+    "viewAll": "查看全部 →",
+    "pageTitle": "开源生态 · Yak Project Open Source",
+    "pageDesc": "Yak Project 开源生态总览：IRify(SSA 静态代码分析)、JavaJive(纯 Go Java 工具)、HackSkills(AI Agent 攻防技能库)、YakLab(Vulinbox 漏洞靶场实战手册)、HackBenchmark(AI 安全评测基准)、Memfit AI(智能体架构)。涵盖 Web 安全、代码审计、AI Agent 与漏洞研究的全部开源项目。",
+    "listAriaLabel": "开源项目列表"
+  },
+  "HomeOpenSource": {
+    "title": "开源项目",
+    "subtitle": "我们还维护了一组面向安全研发、AI Agent、代码分析和工程交付的开源项目。",
+    "placeholder": "请输入关键词搜索",
+    "viewDocs": "查看文档",
+    "aria": {
+      "pagination": "开源项目分页",
+      "pageInfo": "第 {{current}} / {{total}} 页",
+      "nextPage": "切换到下一页",
+      "title": "下一页"
+    },
+    "empty": "未找到与 “{{query}}” 相关的开源项目",
+    "sourceCode": "源码",
+    "projects": {
+      "yak_skills": {
+        "tagline": "面向 AI Agent 的 Yaklang 编程与 Yakit 热加载知识库",
+        "description": "每个专题配有可运行的 .yak 示例和验证工具，让 Agent 能够编写、调试和验证 Yaklang 脚本，并处理 MITM、Web Fuzzer、全局热加载等实际场景。",
+        "tags": [
+          "Agent Skills",
+          "Yaklang",
+          "Yakit",
+          "知识库"
+        ],
+        "name": "Yak Skills"
+      },
+      "hackskills": {
+        "tagline": "面向 AI Agent 的攻防技能库",
+        "description": "覆盖 Web、API、认证授权、提权、逆向、密码学和 AI/LLM 安全等领域，将安全知识整理为可安装、可检索、可组合的标准 Skill。",
+        "tags": [
+          "Agent Skills",
+          "渗透测试",
+          "红队",
+          "知识库"
+        ],
+        "name": "HackSkills"
+      },
+      "irify_sast_skill": {
+        "tagline": "将 IRify SSA/SyntaxFlow 封装为 AI Agent Skill",
+        "description": "让 Codex、Claude Code、Cursor 等 Agent 能够编译源码、追踪数据流并执行静态安全分析，支持 Java、PHP、JavaScript、Go、Python、C 和 Yak。",
+        "tags": [
+          "Agent Skill",
+          "SAST",
+          "SSA",
+          "SyntaxFlow"
+        ],
+        "name": "IRify SAST Skill"
+      },
+      "control_theory_skill": {
+        "tagline": "控制论、系统论和信息论的 Agent 设计方法",
+        "description": "将反馈、稳定性、黑箱实验等概念整理为 Agent 设计方法，为任务规划、工具使用、错误修正和反馈回路设计提供可复用的分析框架。",
+        "tags": [
+          "Agent Skill",
+          "控制论",
+          "系统设计",
+          "方法论"
+        ],
+        "name": "Control Theory Skill"
+      },
+      "yaklang_ai_training": {
+        "tagline": "Yaklang 的 AI 知识与示例素材库",
+        "description": "包含标准库用法、实践案例、文章、脚本和评测材料，为 Agent 学习 Yaklang、生成安全脚本和检索语言用法提供结构化参考。",
+        "tags": [
+          "AI 训练",
+          "RAG",
+          "Yaklang",
+          "素材库"
+        ],
+        "name": "Yaklang AI Training Materials"
+      },
+      "syntaxflow_ai_training": {
+        "tagline": "面向 SyntaxFlow 的语法与规则素材库",
+        "description": "涵盖 SyntaxFlow 语法、运算符、NativeCall、规则示例、错误处理和 RAG 构建素材，支持 AI 检索 SyntaxFlow 知识并生成规则。",
+        "tags": [
+          "AI 训练",
+          "RAG",
+          "SyntaxFlow",
+          "规则"
+        ],
+        "name": "SyntaxFlow AI Training Materials"
+      },
+      "irify_benchmark": {
+        "tagline": "面向代码扫描引擎的轻量评测框架",
+        "description": "维护带 Source、Sanitizer、Sink 数据流标注的基准项目，以完整数据流而非单个命中行评估扫描引擎，可用于回归测试、CI 和引擎对比。",
+        "tags": [
+          "Benchmark",
+          "SAST",
+          "数据流",
+          "评测"
+        ],
+        "name": "IRify Benchmark"
+      },
+      "syntaxflow_tutorial": {
+        "tagline": "SyntaxFlow 从入门到实践的教程与示例",
+        "description": "涵盖 SSA 查询、Use-Def 链、跨过程分析和数据流可视化，帮助安全工程师学习用声明式规则描述漏洞。",
+        "tags": [
+          "SyntaxFlow",
+          "教程",
+          "SSA",
+          "数据流"
+        ],
+        "name": "SyntaxFlow 教程"
+      },
+      "yaklang_ai_agent_runtime": {
+        "tagline": "Memfit AI 使用的 Agent 运行时",
+        "description": "包含计划与任务图、ReAct 循环、工具系统、长期记忆、执行审查和专业 Focus Mode，为 Yaklang 生态提供统一的 Agent 编排与安全工具运行基础。",
+        "tags": [
+          "AI Agent",
+          "运行时",
+          "ReAct",
+          "Memfit"
+        ],
+        "name": "Yaklang AI Agent Runtime"
+      },
+      "yak_ssa": {
+        "tagline": "Yaklang 的 SSA 中间表示与程序分析核心",
+        "description": "包含指令模型、基本块、控制流、Phi、作用域和程序数据库，为多语言代码建模、数据流分析和 IRify 静态分析提供统一程序表示。",
+        "tags": [
+          "SSA",
+          "程序分析",
+          "数据流",
+          "IRify"
+        ],
+        "name": "Yak SSA"
+      },
+      "syntaxflow_engine": {
+        "tagline": "SyntaxFlow 语法、虚拟机与扫描实现",
+        "description": "将安全规则编译为可执行查询，在 SSA 程序上完成模式匹配与数据流分析。",
+        "tags": [
+          "SyntaxFlow",
+          "SAST",
+          "规则引擎",
+          "SSA"
+        ],
+        "name": "SyntaxFlow Engine"
+      },
+      "minirehs": {
+        "tagline": "零外部依赖的多正则批量匹配引擎",
+        "description": "采用统一编译、一次扫描和候选验证的处理方式，面向大量规则与网络流量的批量匹配场景，在纯 Go 与可选自带 SIMD 后端之间保持一致结果。",
+        "tags": [
+          "正则引擎",
+          "Go",
+          "SIMD",
+          "高性能"
+        ],
+        "name": "MiniREHS"
+      },
+      "yak_sca": {
+        "tagline": "Yaklang 软件成分分析模块",
+        "description": "包含 Java、Go、Node.js、Python、PHP、Ruby、Rust 和 C/C++ 等依赖文件解析器及许可证分析，为依赖识别、SBOM、许可证检查和供应链风险分析提供统一基础。",
+        "tags": [
+          "SCA",
+          "SBOM",
+          "供应链",
+          "许可证"
+        ],
+        "name": "Yak SCA Engine"
+      },
+      "vulinbox": {
+        "tagline": "Yaklang 内置 Web 漏洞靶场",
+        "description": "提供 SQL 注入、XSS、SSRF、文件上传、逻辑漏洞和组件漏洞等可复现实例，为 Yakit 实操、插件验证、AI Agent 安全评测和教学提供本地授权目标。",
+        "tags": [
+          "漏洞靶场",
+          "Web安全",
+          "教学",
+          "评测"
+        ],
+        "name": "Vulinbox"
+      },
+      "javajive": {
+        "tagline": "从 Yaklang 抽取的纯 Go Java 工具箱",
+        "description": "支持 .class、.jar、.war 反编译，类结构解析及 Java 序列化与 JSON 互转。无需 JDK、cgo 或原生运行库，可作为单二进制工具使用，也可嵌入其他 Go 项目。",
+        "tags": [
+          "Go",
+          "Java",
+          "反编译",
+          "序列化"
+        ],
+        "name": "JavaJive"
+      },
+      "go_llvm": {
+        "tagline": "面向 LLVM 18 C API 的 Go 封装",
+        "description": "兼容静态链接和动态链接，并提供 JIT 相关接口，为 Yaklang 生态提供可移植、自包含的 LLVM 集成方式，降低运行环境对系统 LLVM 的依赖。",
+        "tags": [
+          "LLVM",
+          "Go",
+          "JIT",
+          "编译器"
+        ],
+        "name": "go-llvm"
+      },
+      "memfit_cli": {
+        "tagline": "连接 Yaklang AI HTTP Gateway 的终端 Agent 客户端",
+        "description": "支持会话创建、SSE 事件流、模型设置、审查策略和任务取消，将 Memfit AI 的交互式任务执行能力带到终端，便于自动化流程和远程 Agent 调试。",
+        "tags": [
+          "CLI",
+          "AI Agent",
+          "Memfit",
+          "SSE"
+        ],
+        "name": "Memfit CLI"
+      },
+      "awesome_yak_scripts": {
+        "tagline": "Yak 脚本集合",
+        "description": "涵盖安全工具、依赖同步、SCA 规则生成、日志分析和插件维护，提供可以直接阅读、运行和改造的 Yaklang 自动化示例。",
+        "tags": [
+          "Yaklang",
+          "脚本",
+          "自动化",
+          "示例"
+        ],
+        "name": "Awesome Yak Scripts"
+      },
+      "yaklang_vscode": {
+        "tagline": "Yaklang 与 SyntaxFlow 的 VS Code 扩展",
+        "description": "提供语法高亮、补全、参数提示、诊断、调试和快速运行，将 Yaklang 的 LSP、DSP 和引擎管理能力带入通用代码编辑器。",
+        "tags": [
+          "VS Code",
+          "LSP",
+          "SyntaxFlow",
+          "插件"
+        ],
+        "name": "Yaklang VS Code Extension"
+      },
+      "yakit_chrome_extension": {
+        "tagline": "浏览器代理切换与 Yakit 联动 Chrome 扩展",
+        "description": "简化浏览器、系统代理与 Yakit 之间的切换，为 Web 安全测试提供浏览器侧入口。",
+        "tags": [
+          "Chrome",
+          "代理",
+          "Yakit",
+          "浏览器"
+        ],
+        "name": "Yakit Chrome Extension"
+      },
+      "pcap": {
+        "tagline": "工程化封装的 gopacket/pcap fork",
+        "description": "将 libpcap 头文件、静态库和动态库按版本与架构纳入仓库，解决系统 libpcap 版本差异、交叉编译和国产架构适配问题，为 Yaklang 的抓包、扫描与网络栈能力提供稳定依赖。",
+        "tags": [
+          "pcap",
+          "抓包",
+          "跨架构",
+          "网络栈"
+        ],
+        "name": "pcap"
+      }
+    }
+  },
+  "HomeProductCapabilities": {
+    "title": "产品能力",
+    "subtitle": "Yaklang / Yakit / Memfit / IRify 核心特点与场景",
+    "noDemo": "暂无演示内容",
+    "itemInfo": "第 {{current}} / {{total}} 项",
+    "nextVideo": "切换到下一个视频",
+    "nextVideoTitle": "下一个视频",
+    "nextImage": "切换到下一张图",
+    "nextImageTitle": "下一张",
+    "demoVideo": "演示视频",
+    "demoScreenshot": "产品截图",
+    "coreFeatures": "核心特点",
+    "products": {
+      "yakit": {
+        "description": "面向安全工程师，在同一工作台完成流量处理、模糊测试、扫描与插件运行。",
+        "features": [
+          {
+            "title": "流量测试闭环",
+            "desc": "从劫持、改包到重放与模糊测试"
+          },
+          {
+            "title": "Yaklang 热加载",
+            "desc": "按需处理签名、加密与私有协议"
+          },
+          {
+            "title": "插件生态",
+            "desc": "安全能力可安装、调试、复用与共享"
+          }
+        ],
+        "media": [
+          "Yakit MITM - Web Fuzzer 快速演示",
+          "Yakit 插件使用"
+        ]
+      },
+      "yaklang": {
+        "description": "将扫描、流量、协议和编解码能力作为语言内置函数，减少工具拼装与重复开发。",
+        "features": [
+          {
+            "title": "安全能力内置",
+            "desc": "扫描、HTTP、Fuzz 与密码学直接调用"
+          },
+          {
+            "title": "脚本即能力",
+            "desc": "单二进制运行，支持热加载与嵌入"
+          },
+          {
+            "title": "统一技术底座",
+            "desc": "支撑 Yakit、IRify 与 Memfit AI"
+          }
+        ],
+        "media": [
+          "Yaklang 编程与代码提示",
+          "Yaklang 使用AI进行代码修改和编辑"
+        ]
+      },
+      "memfit": {
+        "description": "优先支持网络安全工作，同时提供文件、知识、规划、工具调用和结果交付能力。",
+        "features": [
+          {
+            "title": "安全工作上下文",
+            "desc": "处理流量、代码、漏洞证据与扫描结果"
+          },
+          {
+            "title": "复用 Yak 生态",
+            "desc": "调用 Yaklang、YakScript 与 Yakit 插件"
+          },
+          {
+            "title": "可控执行与沉淀",
+            "desc": "任务过程可查看，知识与方法可复用"
+          }
+        ],
+        "media": [
+          "Memfit 预览 01",
+          "Memfit 预览 02",
+          "Memfit 预览 03"
+        ]
+      },
+      "irify": {
+        "description": "结合确定性静态分析与 AI 语义审计，用于漏洞发现、结果验证和规则维护。",
+        "features": [
+          {
+            "title": "SSA 静态分析",
+            "desc": "多语言源码统一编译，结果可复现"
+          },
+          {
+            "title": "SyntaxFlow 规则",
+            "desc": "声明式描述漏洞并追踪数据流"
+          },
+          {
+            "title": "AI 协同审计",
+            "desc": "识别语义风险、验证结果并辅助规则维护"
+          }
+        ],
+        "media": [
+          "IRify 预览 01",
+          "IRify 预览 02",
+          "IRify 预览 03"
+        ]
+      }
+    }
+  },
+  "HomeTestimonialsCTA": {
+    "titleMobile": "大家都喜",
+    "titleMobileLine2": "欢用 Yak",
+    "titleDesktop": "大家都喜欢用 Yak",
+    "subtitle": "了解开发者为何每天都选择 Yak",
+    "marqueeAria": "用户评价滚动展示",
+    "ctaTitle": "立即体验",
+    "ctaDescMobile": "不管您是行业用户，还是高校学生，",
+    "ctaDescMobileLine2": "Yak 永远是您的好伙伴",
+    "ctaDescDesktop": "不管您是行业用户，还是高校学生，Yak 永远是您的好伙伴",
+    "downloadDesktop": "下载桌面端",
+    "viewDocs": "查看文档",
+    "testimonials": {
+      "t0": {
+        "name": "ykc",
+        "segments": [
+          {
+            "text": "安全问题没有绝对的解决范式，但",
+            "highlight": false
+          },
+          {
+            "text": "Yak创造了足够的可能性",
+            "highlight": true
+          },
+          {
+            "text": "，让我们可以",
+            "highlight": false
+          },
+          {
+            "text": "在巨人的肩膀上发挥想象力",
+            "highlight": true
+          },
+          {
+            "text": "。其构思的视野和高度值得我们学习与思考。",
+            "highlight": false
+          }
+        ]
+      },
+      "t1": {
+        "name": "kio",
+        "segments": [
+          {
+            "text": "Yakit在我心中是一款能够自己改造的安全测试框架，非常适合有一定动手能力的安全从业者利用它去",
+            "highlight": false
+          },
+          {
+            "text": "打造属于自己的利刃",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t2": {
+        "name": "和你",
+        "segments": [
+          {
+            "text": "Yak这个构思能大量",
+            "highlight": false
+          },
+          {
+            "text": "减轻安全从业者的环境配置的负担",
+            "highlight": true
+          },
+          {
+            "text": "，而且各种插件对于渗透测试工作能够做到很大的优化。祝Yak在国产化安全软件中越做越好。",
+            "highlight": false
+          }
+        ]
+      },
+      "t3": {
+        "name": "P0m32Kun",
+        "segments": [
+          {
+            "text": "初次接触Yak是在2021年低，那时群里还没有多少人，伴随着开发者们的努力，不断的收集、整理、添加、修改用户提出的各种问题与需求，官网中各种文档逐步完善，Yakit用起来也越来越顺手，渐渐感受到了这是个",
+            "highlight": false
+          },
+          {
+            "text": "有温度的团队",
+            "highlight": true
+          },
+          {
+            "text": "。 我开始认为Yakit出现的部分原因是摆脱安全人员使用国外破解软件，但给我印象最深的还是在今年一些紧张的国际形势中。那么多公司带着他们的产品纷纷站队，如果不未雨绸缪，未来的某一天我们会面临相同的境遇。最后",
+            "highlight": false
+          },
+          {
+            "text": "希望Yak一如既往的茁壮成长",
+            "highlight": true
+          },
+          {
+            "text": "，也希望更多的安全从业者",
+            "highlight": false
+          },
+          {
+            "text": "加入国产化的建设中",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t4": {
+        "name": "18 Xtreme",
+        "segments": [
+          {
+            "text": "首先不得不提一句，Yakit的作者们是",
+            "highlight": false
+          },
+          {
+            "text": "真的热情又尽责",
+            "highlight": true
+          },
+          {
+            "text": "，有啥问题都能得到解答，特别是V神，与他沟通中学到了很多的东西，其次Yakit的模式真的很不错，服务端和控制台分开让小组渗透更方便，最后",
+            "highlight": false
+          },
+          {
+            "text": "祝Yakit越来越好",
+            "highlight": true
+          },
+          {
+            "text": "，成为全球最强工具 ！",
+            "highlight": false
+          }
+        ]
+      },
+      "t5": {
+        "name": "国产大熊猫",
+        "segments": [
+          {
+            "text": "Yakit是一款优秀的",
+            "highlight": false
+          },
+          {
+            "text": "国产web渗透工具",
+            "highlight": true
+          },
+          {
+            "text": "，从设计之初就让人爱不释手。作为一名发烧使用者，我可以在每一个使用细节充分的感受到：开发团队对于打造一款贴近渗透人员使用舒适度的匠人精神。从web渗透的前期探测、fuzz参数、poc验证等等，yakit就",
+            "highlight": false
+          },
+          {
+            "text": "像一位战友陪伴在身边",
+            "highlight": true
+          },
+          {
+            "text": "。 Yakit社区活跃，开发团队充分听取各方面建议，不断的迭代产品，我相信会成为web渗透领域人手一份的攻击利器！",
+            "highlight": false
+          }
+        ]
+      },
+      "t6": {
+        "name": "CF_HB",
+        "segments": [
+          {
+            "text": "2022了给大家强烈安利一个",
+            "highlight": false
+          },
+          {
+            "text": "令我爱不释手的挖洞神器",
+            "highlight": true
+          },
+          {
+            "text": "——Yakit。维护的师傅们人又好，技术又强，孜孜不倦地打造新的功能。 Yakit绝对是一个只有你想不到，没有它实现不了的神器。希望Yakit早日替代Burp，这一回我",
+            "highlight": false
+          },
+          {
+            "text": "支持国产神器",
+            "highlight": true
+          },
+          {
+            "text": "~Yakit",
+            "highlight": false
+          }
+        ]
+      },
+      "t7": {
+        "name": "wooluo",
+        "segments": [
+          {
+            "text": "产品设计初衷非常好，作为",
+            "highlight": false
+          },
+          {
+            "text": "国产渗透中单兵作业工具",
+            "highlight": true
+          },
+          {
+            "text": "，把一些实用的插件加到平台中，并且对使用者开放接口，随时可以增加自己所需的插件或规则，同时贴心的兼容了nuclei的规则，是个不可多得的好工具，",
+            "highlight": false
+          },
+          {
+            "text": "代替BurpSuite的不二首选",
+            "highlight": true
+          },
+          {
+            "text": "，推荐使用！",
+            "highlight": false
+          }
+        ]
+      },
+      "t8": {
+        "name": "Vanilla",
+        "segments": [
+          {
+            "text": "和V1ll4n表哥相识是因为他早期开发的SIEM，将各种安全能力进行融合，作为一名甲方安全从业者，但是对于他提出的高位安全和低位安全的概念很赞同，后来Yakit横空出世，让我看到了之前SIEM概念的延伸，看到了",
+            "highlight": false
+          },
+          {
+            "text": "更多的可能性",
+            "highlight": true
+          },
+          {
+            "text": "。通过Yak语言完备的生态和兼容性来解决安全能力建设的问题。随着Yakit安全社区的壮大和更多的同行者参与进来，使得Yakit的功能越来越完善，在我看来",
+            "highlight": false
+          },
+          {
+            "text": "Yakit是一个没有上限的安全工具",
+            "highlight": true
+          },
+          {
+            "text": "，他提供了一个基座，给了安全从业人员",
+            "highlight": false
+          },
+          {
+            "text": "自由发挥的空间",
+            "highlight": true
+          },
+          {
+            "text": "。最后的最后，V1ll4n这人改Bug贼快，能处。",
+            "highlight": false
+          }
+        ]
+      },
+      "t9": {
+        "name": "ttStorm",
+        "segments": [
+          {
+            "text": "选择Yakit的3个理由 1.Yakit颜值超高，简洁的logo，",
+            "highlight": false
+          },
+          {
+            "text": "简洁的界面",
+            "highlight": true
+          },
+          {
+            "text": "，完美本身就是强大的证明 2.劳模V神还有一众Yakit大佬还有社区大表哥们，",
+            "highlight": false
+          },
+          {
+            "text": "高强度更新",
+            "highlight": true
+          },
+          {
+            "text": "，1天更新18个版本，任何人手里都没有最新版本，Yakit短时间就从烟花成长为一个丰富完善致命的核武器 3.Yak团队是一个友善、富有活力、",
+            "highlight": false
+          },
+          {
+            "text": "具有高度执行力",
+            "highlight": true
+          },
+          {
+            "text": "的团队，你可以一直相信Yak",
+            "highlight": false
+          }
+        ]
+      },
+      "t10": {
+        "name": "酒零",
+        "segments": [
+          {
+            "text": "渗透工具的底层数据融合是安全工具发展的必然趋势，测试工具",
+            "highlight": false
+          },
+          {
+            "text": "可定制化和扩展性",
+            "highlight": true
+          },
+          {
+            "text": "是每一个高级渗透工程师的基本需求，优秀的界面交互让一个工具能够快速广泛运用的催化剂。对于实现一个",
+            "highlight": false
+          },
+          {
+            "text": "覆盖渗透测试全流程工具",
+            "highlight": true
+          },
+          {
+            "text": "，需要全面了解分析渗透测试过程中的各个阶段。 然而，这是一个及其庞大且长期的项目，它们需要： 1、熟悉渗透测试流程和交互设计的coder 2、能无条件支持这个项目的company， 3、时刻响应用户需求和建议的Operation Yaikit项目正是基于这个目的而萌发的，并且拥有着实现这个长期项目的条件，希望大家能够使用它并提出自己的修复和优化建议，",
+            "highlight": false
+          },
+          {
+            "text": "让这个项目更完善更优秀",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t11": {
+        "name": "key@OverSpace",
+        "segments": [
+          {
+            "text": "对于我来说，Yak是一门优秀的融合型语言，它具备极强的安全开发属性，你可以使用它进行高效的安全类脚本、平台、工具的开发；Yak项目方不仅开发了Yak这一门优秀的语言，还很贴心的基于Yak开发了Yakit单兵作战平台提供给安全从业人员使用；Yakit的诞生实际上是",
+            "highlight": false
+          },
+          {
+            "text": "完成了某种意义上的“大一统”",
+            "highlight": true
+          },
+          {
+            "text": "，将诸多能力集于一身，避免了在不同的工具间来回的切换以及相互间的兼容和适配，虽然它并不是BurpSuite的竞品，但它与BurpSuite有着诸多类似功能，却比BurpSuite更加实用，例如Web Fuzz功能就做了很好的创新，将真正的Fuzz思想带到了Web安全中，也从某一程度来说减少了很多不必要的字典收集工作。 Yak项目方做了一个很大胆的尝试，这是很多人不敢做的，并且会花费大量的人力投入，这让我十分倾佩，同时也给予我很大的鼓舞。相信Yak、Yakit",
+            "highlight": false
+          },
+          {
+            "text": "在未来可以走出属于自己的道路",
+            "highlight": true
+          },
+          {
+            "text": "，加油，未来可期！",
+            "highlight": false
+          }
+        ]
+      },
+      "t12": {
+        "name": "奶权",
+        "segments": [
+          {
+            "text": "Yakit是一款非常好用的网络单兵作战工具，其包含了burpsuite使用最频繁的功能，并在此之上做了自己的创新。其中Web Fuzzer标签功能",
+            "highlight": false
+          },
+          {
+            "text": "极大提高了渗透测试人员的上限",
+            "highlight": true
+          },
+          {
+            "text": "，使得在渗透测试过程中有更多可能也更加方便。得益于Yakit的基座yaklang的强大实力与和golang相似的语法，用户可以用更简单的代码对mitm进行hook，",
+            "highlight": false
+          },
+          {
+            "text": "实现多种多样的插件功能",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t13": {
+        "name": "sharecast",
+        "segments": [
+          {
+            "text": "Yakit是一款年轻的综合的且具有",
+            "highlight": false
+          },
+          {
+            "text": "一线攻防实践经验的平台",
+            "highlight": true
+          },
+          {
+            "text": "，将出色的攻击实践经验工程化，为一线的攻防人员提供了很大便利，但UI和细节打磨仍需不断提升，希望Yakit越来越好！",
+            "highlight": false
+          }
+        ]
+      },
+      "t14": {
+        "name": "影舞者",
+        "segments": [
+          {
+            "text": "扫描接口很",
+            "highlight": false
+          },
+          {
+            "text": "便捷",
+            "highlight": true
+          },
+          {
+            "text": "，内置的",
+            "highlight": false
+          },
+          {
+            "text": "动态解析Yak脚本",
+            "highlight": true
+          },
+          {
+            "text": "也很高级，大哥真猛",
+            "highlight": false
+          }
+        ]
+      },
+      "t15": {
+        "name": "TimWhite",
+        "segments": [
+          {
+            "text": "对于Yakit/Yak这个项目，早期我更多的是好奇Yak这个安全脚本语言的具体实现方式， 但是在使用过程中发现，",
+            "highlight": false
+          },
+          {
+            "text": "插件化的设计，Yak内置的安全相关函数配合上Yakit的gui",
+            "highlight": true
+          },
+          {
+            "text": "，三者相结合是这个项目的亮点。 由于项目发展时间较短，难免存在设计上的bug，但是作者V1ll4n的更新频率高的可怕。",
+            "highlight": false
+          }
+        ]
+      },
+      "t16": {
+        "name": "Alex-null",
+        "segments": [
+          {
+            "text": "Yak是目前看到的",
+            "highlight": false
+          },
+          {
+            "text": "国内最优秀的安全能力底座",
+            "highlight": true
+          },
+          {
+            "text": "，花了很多心思在",
+            "highlight": false
+          },
+          {
+            "text": "多源数据异构化",
+            "highlight": true
+          },
+          {
+            "text": "上，让安全从业人员能真正专注于解决安全问题上。",
+            "highlight": false
+          }
+        ]
+      },
+      "t17": {
+        "name": "六月初七",
+        "segments": [
+          {
+            "text": "总体来说，很喜欢这款工具，可扫描端口，可探测漏洞，还能爆破口令，",
+            "highlight": false
+          },
+          {
+            "text": "集成了多种功能",
+            "highlight": true
+          },
+          {
+            "text": "，使用方便，大大提高了工作效率。Yakit不对标burp，但是具备了burp的好多功能，",
+            "highlight": false
+          },
+          {
+            "text": "将常用的渗透测试的功能",
+            "highlight": true
+          },
+          {
+            "text": "集合到一起，一站购齐。师傅们也可以利用Yakit的部分自定义功能打造自己专属的渗透利器。 Yakit做了好多人不敢做的事，也",
+            "highlight": false
+          },
+          {
+            "text": "希望Yakit能做到别人做不到事",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t18": {
+        "name": "小米粥",
+        "segments": [
+          {
+            "text": "在我眼里Yak的意义是远远大于Yakit的，Yakit只不过是Yak对于",
+            "highlight": false
+          },
+          {
+            "text": "安全所需场景的功能实现合集",
+            "highlight": true
+          },
+          {
+            "text": "而已，从Yakit的开源一直到现在不断的实现更多的安全需求场景的覆盖，能让我清楚地感觉到Yak确实像当初介绍文档中所说的一直再向安全人员们证明",
+            "highlight": false
+          },
+          {
+            "text": "Yak确实是安全领域内最适用的语言",
+            "highlight": true
+          },
+          {
+            "text": "，也一直让人们期待他真的是可以",
+            "highlight": false
+          },
+          {
+            "text": "成为安全的\"基座\"",
+            "highlight": true
+          },
+          {
+            "text": "，Yakit目前对我来说最惊艳的其实是反连平台的场景扩展，期间也一直在和v神聊关于oast检测模型更多的扩展面，自己当前也有实现并尝试去做一款类似功能产品。在自己项目实现过程当中也会感觉Yakit关于反连这部分的发展方向与自己所做的是在不断地相互验证，也能体会到做一款让自己和别人都满意的产品是一件多么困难的事情，总的来说，我很",
+            "highlight": false
+          },
+          {
+            "text": "期待也很希望Yak未来在安全领域能有更多的安全需求场景的覆盖的实现",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      },
+      "t19": {
+        "name": "李大壮'",
+        "segments": [
+          {
+            "text": "初次接触Yak就被Yak团队的愿景打动了。作为一门安全领域的脚本语言。Yak",
+            "highlight": false
+          },
+          {
+            "text": "集成了常见的安全能力",
+            "highlight": true
+          },
+          {
+            "text": "，前段时间测试了一个测试流程，稍加学习，便按照自己的想法快速设计出一套检测流程。作为官方实现的 Yakit 提供了很多实用的工具如mitm,codec专项漏洞检测。Yakit目前还处于快速开发状态，微信社区相当活跃",
+            "highlight": false
+          },
+          {
+            "text": "许多有趣的技术和想法也在落地",
+            "highlight": true
+          },
+          {
+            "text": "，官方对于bug修复和功能迭代特别快特别快。由衷祝愿 Yak 生态和社区越来越强大，",
+            "highlight": false
+          },
+          {
+            "text": "成为安全领域的matlab",
+            "highlight": true
+          },
+          {
+            "text": "。",
+            "highlight": false
+          }
+        ]
+      }
+    }
+  },
+  "CooperativePartner": {
+    "title": "合作伙伴",
+    "subtitle": "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后"
+  },
+  "DownloadResources": {
+    "title": "下载资源",
+    "intro": "这里集中提供 Yaklang / Yakit 相关的可下载资源，包括技术白皮书、各版本内置标准库 API 手册归档与官网全站内容打包。",
+    "whitepaper": {
+      "title": "技术白皮书",
+      "label": "Yakit 技术白皮书 (PDF)",
+      "cta": "下载白皮书"
+    },
+    "latestDocs": {
+      "title": "最新 API 文档",
+      "online": "在线浏览最新文档",
+      "download": "下载最新文档 (v{{version}})",
+      "current": "当前归档最新版本",
+      "archived": "归档于 {{date}}"
+    },
+    "sitePackage": {
+      "title": "官网全站内容打包（docs + products + blog）",
+      "desc": "包含 Yak 编程文档、Yakit 使用手册、技术博客的全部 Markdown 源文件，并附带可恢复 URL 的索引 INDEX.json / INDEX.ndjson，便于离线检索与自建搜索系统。",
+      "latestCta": "最新全站打包 ({{id}})",
+      "current": "当前归档",
+      "count": "共 {{count}} 个内容文件",
+      "archived": "归档于 {{date}}",
+      "empty": "暂无全站打包归档"
+    },
+    "historyPackages": {
+      "title": "历史全站打包（仅提供 zip 下载）",
+      "loading": "加载中...",
+      "empty": "暂无更早的历史全站打包归档"
+    },
+    "historyDocs": {
+      "title": "历史版本文档（仅提供 zip 下载）",
+      "loading": "加载中...",
+      "empty": "暂无更早的历史版本归档",
+      "fallbackDesc": "Markdown 文档压缩包"
+    },
+    "downloadZip": "下载 zip",
+    "downloadDocZip": "下载文档 zip"
+  }
 }

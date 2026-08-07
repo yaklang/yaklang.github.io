@@ -71,5 +71,1103 @@
   "@电子科技大学网络空间安全研究院": "@Institute for Cyber Security of  the University of Electronic Science and Technology of China",
   "YAK 生态共建杰出贡献成员": "Outstanding Contributors in YAK Ecological Co-construction",
   "特别致谢": "Acknowledgements",
-  "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后": "Thank you for your support and the following names are arranged in no particular order"
+  "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后": "Thank you for your support and the following names are arranged in no particular order",
+  "HomeNavbar": {
+    "community": {
+      "aboutUs": "About Us",
+      "partners": "Partners",
+      "techBlog": "Tech Blog",
+      "downloads": "Downloads"
+    },
+    "nav": {
+      "yakDocs": "Yak Docs",
+      "yakitManual": "Yakit Manual",
+      "opensource": "Open Source",
+      "community": "Community & Resources"
+    },
+    "aria": {
+      "switchLanguage": "Switch Language",
+      "switchLightMode": "Switch to Light Mode",
+      "switchDarkMode": "Switch to Dark Mode",
+      "openMenu": "Open Menu",
+      "closeMenu": "Close Menu"
+    },
+    "theme": {
+      "lightMode": "Light Mode",
+      "darkMode": "Dark Mode"
+    }
+  },
+  "HomeDownload": {
+    "title": "Download & Install",
+    "tabs": {
+      "yakitDesc": "All-in-one interactive penetration testing platform",
+      "yaklangDesc": "Cyber-security domain-specific programming language",
+      "memfitDesc": "Desktop AI Agent for security engineers",
+      "irifyDesc": "SSA & AI-driven code security analysis system"
+    },
+    "yakEnv": {
+      "setup": "Yak Environment Setup",
+      "copyTitle": "Copy install command",
+      "tutorial": "View tutorial",
+      "downloadOld": "Download old version"
+    },
+    "table": {
+      "package": "Package",
+      "latestVersion": "Latest: {{version}}",
+      "size": "Size",
+      "download": "Download"
+    },
+    "footer": {
+      "legacy": "Download compatible version",
+      "oldRelease": "Download old version"
+    },
+    "messages": {
+      "fetchSizeError": "Failed to get size for {{product}}-{{file}}",
+      "fetchVersionError": "Failed to get version for {{product}}, please refresh and retry"
+    },
+    "legacyItems": {
+      "win7": "Supports Win7",
+      "uosNote": "Supports UOS and Kylin; pay attention to architecture",
+      "oldMac": "Supports macOS 10.13 and macOS 10.14"
+    }
+  },
+  "HomeFooter": {
+    "sections": {
+      "opensource": "Open Source",
+      "docs": "Official Documentation",
+      "community": "Community & Resources"
+    },
+    "links": {
+      "irify": "IRify · SSA Static Code Analysis",
+      "javaJive": "JavaJive",
+      "hackSkills": "HackSkills",
+      "yakLab": "YakLab",
+      "hackBenchmark": "HackBenchmark",
+      "memfit": "Memfit AI",
+      "yakDocs": "Yak Language Docs",
+      "apiManual": "API Manual",
+      "yakitManual": "Yakit Manual",
+      "techBlog": "Tech Blog",
+      "yakLabHandbook": "YakLab Handbook",
+      "aboutUs": "About Us",
+      "partners": "Partners",
+      "downloads": "Downloads"
+    },
+    "aria": {
+      "github": "GitHub",
+      "wechat": "WeChat",
+      "wechatPop": "WeChat Official Account",
+      "wechatScan": "Scan to follow WeChat Official Account",
+      "switchLanguage": "Switch Language",
+      "switchLightMode": "Switch to Light Mode",
+      "switchDarkMode": "Switch to Dark Mode"
+    },
+    "slogan": "Do the hard but right thing",
+    "icp": "京ICP备17047700号-3",
+    "police": "京公网安备11010802048712号"
+  },
+  "HomeHero": {
+    "downloadDesktop": "Download Desktop",
+    "viewDocs": "View Documentation",
+    "title": "Widely Used Open-Source Cybersecurity Infrastructure",
+    "subtitle": "Powered by CDSL-Yaklang - A programming language born for cybersecurity"
+  },
+  "HomeMilestones": {
+    "title": "Milestones",
+    "viewFullData": "View Full History",
+    "items": {
+      "m2021_xcon": {
+        "title": "Yak and Yakit Released at XCon",
+        "impact": "Yak Project entered public development; Yakit began providing security engineers with a unified desktop workbench.",
+        "dateLabel": "// October 2021"
+      },
+      "m2023_open_source_launch": {
+        "title": "CDSL-YAK Open Source Launch at Beijing National Convention Center",
+        "impact": "Core language, runtime, and security capability base were opened to the community, allowing external developers to inspect source code, file issues, and contribute.",
+        "dateLabel": "// May 30, 2023"
+      },
+      "m2023_yakit_v2_list": {
+        "title": "YAKIT Cybersecurity Individual Test System V2.0 Listed in Beijing New Technology and Products Catalog",
+        "impact": "Yakit’s productization and practical application entered a new stage of development.",
+        "dateLabel": "// 2023"
+      },
+      "m2024_yakit_v2_test": {
+        "title": "Yakit V2.0 Passed Third Research Institute of the Ministry of Public Security Testing",
+        "impact": "Yakit completed testing against national standards for cyber-security products and Web application security detection.",
+        "dateLabel": "// May 2024"
+      },
+      "m2024_cicc_top10": {
+        "title": "“YakLang: A Domain-Specific Secure Programming Language for Communication Networks” Named One of 2023 Top 10 ICT Tech Advances",
+        "impact": "Yaklang’s domain-specific programming language path entered the annual ICT technology advance list.",
+        "dateLabel": "// November 30, 2024"
+      },
+      "m2025_irify_release": {
+        "title": "IRify Released",
+        "impact": "Yak SSA, SyntaxFlow, and AI capabilities formed a standalone code-auditing product, extending project capabilities from interactive testing to source-code security analysis.",
+        "dateLabel": "// April 2025"
+      },
+      "m2025_cic_first_prize": {
+        "title": "“Domain-Specific Programming Language and Development Environment for Cybersecurity” Won First Prize of CIC Science and Technology Award",
+        "impact": "Yaklang and its supporting development environment received an industry technology award for technical achievements and practical application.",
+        "dateLabel": "// December 2025"
+      },
+      "m2025_maker_china": {
+        "title": "“Homegrown Cybersecurity Development Environment YAK” Won Third Prize in Maker China National Finals Enterprise Group",
+        "impact": "YAK advanced from the cybersecurity themed competition to the national finals, demonstrating the engineering capabilities and application value of a homegrown security development environment.",
+        "dateLabel": "// 2025"
+      },
+      "m2026_memfit_release": {
+        "title": "Memfit AI Released",
+        "impact": "Yaklang, Yakit, and their tool ecosystem entered the Agent workflow, providing security engineers with analysis, execution, and delivery support.",
+        "dateLabel": "// March 2026"
+      }
+    }
+  },
+  "OpenSourcePage": {
+    "eyebrow": "OPEN SOURCE",
+    "title": "Yak Project Open Source",
+    "subtitle": "Showing some open-source projects; click below to view all.",
+    "lead": "From programming languages and static code analysis to AI Agent security, Yak Project distills its core capabilities into a series of open-source projects. Click any card to open the corresponding site in a new tab.",
+    "viewAll": "View All →",
+    "pageTitle": "Open Source · Yak Project",
+    "pageDesc": "Yak Project open source ecosystem overview: IRify (SSA static code analysis), JavaJive (pure Go Java tools), HackSkills (AI Agent offensive/defensive skill library), YakLab (Vulinbox vulnerability lab handbook), HackBenchmark (AI security benchmark), Memfit AI (agent architecture). Covering Web security, code audit, AI Agent, and vulnerability research open-source projects.",
+    "listAriaLabel": "Open source projects list"
+  },
+  "HomeOpenSource": {
+    "title": "Open Source Projects",
+    "subtitle": "We also maintain open-source projects for security R&D, AI agents, code analysis, and engineering delivery.",
+    "placeholder": "Enter keywords to search",
+    "viewDocs": "View Documentation",
+    "aria": {
+      "pagination": "Open source project pagination",
+      "pageInfo": "Page {{current}} / {{total}}",
+      "nextPage": "Go to next page",
+      "title": "Next page"
+    },
+    "empty": "No open-source projects found for \"{{query}}\"",
+    "sourceCode": "Source Code",
+    "projects": {
+      "yak_skills": {
+        "tagline": "Yaklang programming and Yakit hot-reload knowledge base for AI agents",
+        "description": "Each topic includes runnable .yak examples and validation tools, enabling agents to write, debug, and verify Yaklang scripts and handle real-world MITM, Web Fuzzer, and global hot-reload scenarios.",
+        "tags": [
+          "Agent Skills",
+          "Yaklang",
+          "Yakit",
+          "Knowledge Base"
+        ],
+        "name": "Yak Skills"
+      },
+      "hackskills": {
+        "tagline": "AI agent-oriented offensive and defensive skill library",
+        "description": "Covers Web, API, authentication, privilege escalation, reverse engineering, cryptography, and AI/LLM security, packaging security knowledge into installable, searchable, composable standard Skills.",
+        "tags": [
+          "Agent Skills",
+          "Penetration Testing",
+          "Red Team",
+          "Knowledge Base"
+        ],
+        "name": "HackSkills"
+      },
+      "irify_sast_skill": {
+        "tagline": "Wrap IRify SSA/SyntaxFlow as an AI agent skill",
+        "description": "Lets agents like Codex, Claude Code, and Cursor compile source code, track data flows, and perform static security analysis for Java, PHP, JavaScript, Go, Python, C, and Yak.",
+        "tags": [
+          "Agent Skill",
+          "SAST",
+          "SSA",
+          "SyntaxFlow"
+        ],
+        "name": "IRify SAST Skill"
+      },
+      "control_theory_skill": {
+        "tagline": "Agent design methods from control, system, and information theory",
+        "description": "Organizes feedback, stability, and black-box experimentation into reusable agent design methods for task planning, tool use, error correction, and feedback-loop design.",
+        "tags": [
+          "Agent Skill",
+          "Control Theory",
+          "System Design",
+          "Methodology"
+        ],
+        "name": "Control Theory Skill"
+      },
+      "yaklang_ai_training": {
+        "tagline": "Yaklang AI knowledge and example material library",
+        "description": "Includes standard library usage, practical cases, articles, scripts, and evaluation materials, providing structured references for agents learning Yaklang, generating security scripts, and retrieving language usage.",
+        "tags": [
+          "AI Training",
+          "RAG",
+          "Yaklang",
+          "Materials"
+        ],
+        "name": "Yaklang AI Training Materials"
+      },
+      "syntaxflow_ai_training": {
+        "tagline": "SyntaxFlow syntax and rule material library",
+        "description": "Covers SyntaxFlow syntax, operators, NativeCall, rule examples, error handling, and RAG construction materials, supporting AI retrieval of SyntaxFlow knowledge and rule generation.",
+        "tags": [
+          "AI Training",
+          "RAG",
+          "SyntaxFlow",
+          "Rules"
+        ],
+        "name": "SyntaxFlow AI Training Materials"
+      },
+      "irify_benchmark": {
+        "tagline": "Lightweight benchmark framework for code-scanning engines",
+        "description": "Maintains benchmark projects annotated with Source, Sanitizer, and Sink data-flow labels, evaluating scanners by complete data flow rather than single hit lines for regression testing, CI, and engine comparison.",
+        "tags": [
+          "Benchmark",
+          "SAST",
+          "Data Flow",
+          "Evaluation"
+        ],
+        "name": "IRify Benchmark"
+      },
+      "syntaxflow_tutorial": {
+        "tagline": "SyntaxFlow tutorial and examples from basics to practice",
+        "description": "Covers SSA queries, Use-Def chains, interprocedural analysis, and data-flow visualization, helping security engineers learn to describe vulnerabilities with declarative rules.",
+        "tags": [
+          "SyntaxFlow",
+          "Tutorial",
+          "SSA",
+          "Data Flow"
+        ],
+        "name": "SyntaxFlow Tutorial"
+      },
+      "yaklang_ai_agent_runtime": {
+        "tagline": "Agent runtime used by Memfit AI",
+        "description": "Includes planning and task graphs, ReAct loops, tool systems, long-term memory, execution review, and professional Focus Mode, providing unified agent orchestration and security tool execution foundation for the Yaklang ecosystem.",
+        "tags": [
+          "AI Agent",
+          "Runtime",
+          "ReAct",
+          "Memfit"
+        ],
+        "name": "Yaklang AI Agent Runtime"
+      },
+      "yak_ssa": {
+        "tagline": "SSA intermediate representation and program-analysis core of Yaklang",
+        "description": "Includes instruction models, basic blocks, control flow, Phi, scopes, and program database, providing a unified program representation for multi-language code modeling, data-flow analysis, and IRify static analysis.",
+        "tags": [
+          "SSA",
+          "Program Analysis",
+          "Data Flow",
+          "IRify"
+        ],
+        "name": "Yak SSA"
+      },
+      "syntaxflow_engine": {
+        "tagline": "SyntaxFlow syntax, virtual machine, and scanning implementation",
+        "description": "Compiles security rules into executable queries, performing pattern matching and data-flow analysis on SSA programs.",
+        "tags": [
+          "SyntaxFlow",
+          "SAST",
+          "Rule Engine",
+          "SSA"
+        ],
+        "name": "SyntaxFlow Engine"
+      },
+      "minirehs": {
+        "tagline": "Zero-dependency multi-regex bulk matching engine",
+        "description": "Uses unified compilation, single-pass scanning, and candidate verification for large-scale rule and network-traffic bulk matching, producing consistent results between pure Go and optional built-in SIMD backends.",
+        "tags": [
+          "Regex Engine",
+          "Go",
+          "SIMD",
+          "High Performance"
+        ],
+        "name": "MiniREHS"
+      },
+      "yak_sca": {
+        "tagline": "Yaklang software composition analysis module",
+        "description": "Includes dependency file parsers and license analysis for Java, Go, Node.js, Python, PHP, Ruby, Rust, and C/C++, providing a unified foundation for dependency identification, SBOM, license checking, and supply-chain risk analysis.",
+        "tags": [
+          "SCA",
+          "SBOM",
+          "Supply Chain",
+          "License"
+        ],
+        "name": "Yak SCA Engine"
+      },
+      "vulinbox": {
+        "tagline": "Built-in Yaklang Web vulnerability range",
+        "description": "Provides reproducible instances of SQL injection, XSS, SSRF, file upload, logic flaws, and component vulnerabilities, serving as a locally authorized target for Yakit practice, plugin validation, AI agent security evaluation, and teaching.",
+        "tags": [
+          "Vuln Range",
+          "Web Security",
+          "Teaching",
+          "Evaluation"
+        ],
+        "name": "Vulinbox"
+      },
+      "javajive": {
+        "tagline": "Pure Go Java toolkit extracted from Yaklang",
+        "description": "Supports .class, .jar, .war decompilation, class structure parsing, and Java serialization/JSON conversion without JDK, cgo, or native runtime libraries. Can be used as a single-binary tool or embedded into other Go projects.",
+        "tags": [
+          "Go",
+          "Java",
+          "Decompilation",
+          "Serialization"
+        ],
+        "name": "JavaJive"
+      },
+      "go_llvm": {
+        "tagline": "Go bindings for LLVM 18 C API",
+        "description": "Supports static and dynamic linking and provides JIT-related interfaces, offering a portable, self-contained LLVM integration for the Yaklang ecosystem and reducing reliance on system LLVM.",
+        "tags": [
+          "LLVM",
+          "Go",
+          "JIT",
+          "Compiler"
+        ],
+        "name": "go-llvm"
+      },
+      "memfit_cli": {
+        "tagline": "Terminal agent client connecting to Yaklang AI HTTP Gateway",
+        "description": "Supports session creation, SSE event streams, model settings, review policies, and task cancellation, bringing Memfit AI interactive task execution to the terminal for automation workflows and remote agent debugging.",
+        "tags": [
+          "CLI",
+          "AI Agent",
+          "Memfit",
+          "SSE"
+        ],
+        "name": "Memfit CLI"
+      },
+      "awesome_yak_scripts": {
+        "tagline": "Collection of Yak scripts",
+        "description": "Covers security tools, dependency sync, SCA rule generation, log analysis, and plugin maintenance, providing readable, runnable, and adaptable Yaklang automation examples.",
+        "tags": [
+          "Yaklang",
+          "Scripts",
+          "Automation",
+          "Examples"
+        ],
+        "name": "Awesome Yak Scripts"
+      },
+      "yaklang_vscode": {
+        "tagline": "VS Code extension for Yaklang and SyntaxFlow",
+        "description": "Provides syntax highlighting, completion, parameter hints, diagnostics, debugging, and quick run, bringing Yaklang LSP, DSP, and engine management capabilities into general-purpose code editors.",
+        "tags": [
+          "VS Code",
+          "LSP",
+          "SyntaxFlow",
+          "Extension"
+        ],
+        "name": "Yaklang VS Code Extension"
+      },
+      "yakit_chrome_extension": {
+        "tagline": "Chrome extension for browser proxy switching and Yakit integration",
+        "description": "Simplifies switching among browser, system proxy, and Yakit, providing a browser-side entry point for Web security testing.",
+        "tags": [
+          "Chrome",
+          "Proxy",
+          "Yakit",
+          "Browser"
+        ],
+        "name": "Yakit Chrome Extension"
+      },
+      "pcap": {
+        "tagline": "Engineering-hardened gopacket/pcap fork",
+        "description": "Versions libpcap headers, static libraries, and dynamic libraries by version and architecture in the repository, resolving system libpcap version differences, cross-compilation, and domestic architecture adaptation issues to provide stable dependencies for Yaklang packet capture, scanning, and network stack capabilities.",
+        "tags": [
+          "pcap",
+          "Packet Capture",
+          "Cross-Architecture",
+          "Network Stack"
+        ],
+        "name": "pcap"
+      }
+    }
+  },
+  "HomeProductCapabilities": {
+    "title": "Product Capabilities",
+    "subtitle": "Core features and scenarios of Yaklang / Yakit / Memfit / IRify",
+    "noDemo": "No demo content available",
+    "itemInfo": "Item {{current}} / {{total}}",
+    "nextVideo": "Switch to next video",
+    "nextVideoTitle": "Next video",
+    "nextImage": "Switch to next image",
+    "nextImageTitle": "Next image",
+    "demoVideo": "Demo video",
+    "demoScreenshot": "Product screenshot",
+    "coreFeatures": "Core Features",
+    "products": {
+      "yakit": {
+        "description": "For security engineers: handle traffic, fuzzing, scanning, and plugins in one workbench.",
+        "features": [
+          {
+            "title": "Traffic Testing Loop",
+            "desc": "From interception and replay to fuzzing"
+          },
+          {
+            "title": "Yaklang Hot-Reload",
+            "desc": "Handle signatures, encryption, and private protocols on demand"
+          },
+          {
+            "title": "Plugin Ecosystem",
+            "desc": "Security capabilities installable, debuggable, reusable, and shareable"
+          }
+        ],
+        "media": [
+          "Yakit MITM - Web Fuzzer Quick Demo",
+          "Yakit Plugin Usage"
+        ]
+      },
+      "yaklang": {
+        "description": "Scanning, traffic, protocol, and codec capabilities are built into the language, reducing tool gluing and rework.",
+        "features": [
+          {
+            "title": "Built-in Security Capabilities",
+            "desc": "Scanning, HTTP, Fuzz, and cryptography callable directly"
+          },
+          {
+            "title": "Scripts as Capabilities",
+            "desc": "Single-binary execution with hot-reload and embedding support"
+          },
+          {
+            "title": "Unified Technical Base",
+            "desc": "Powers Yakit, IRify, and Memfit AI"
+          }
+        ],
+        "media": [
+          "Yaklang Programming and Code Hints",
+          "Yaklang Using AI for Code Editing"
+        ]
+      },
+      "memfit": {
+        "description": "Prioritizes cyber-security work while also providing files, knowledge, planning, tool calling, and result delivery.",
+        "features": [
+          {
+            "title": "Security Work Context",
+            "desc": "Processes traffic, code, vulnerability evidence, and scan results"
+          },
+          {
+            "title": "Reuses Yak Ecosystem",
+            "desc": "Invokes Yaklang, YakScript, and Yakit plugins"
+          },
+          {
+            "title": "Controllable Execution and Accumulation",
+            "desc": "Task processes are inspectable, knowledge and methods reusable"
+          }
+        ],
+        "media": [
+          "Memfit Preview 01",
+          "Memfit Preview 02",
+          "Memfit Preview 03"
+        ]
+      },
+      "irify": {
+        "description": "Combines deterministic static analysis with AI semantic auditing for vulnerability discovery, result verification, and rule maintenance.",
+        "features": [
+          {
+            "title": "SSA Static Analysis",
+            "desc": "Multi-language source code compiled uniformly with reproducible results"
+          },
+          {
+            "title": "SyntaxFlow Rules",
+            "desc": "Describe vulnerabilities declaratively and track data flows"
+          },
+          {
+            "title": "AI Collaborative Auditing",
+            "desc": "Identifies semantic risks, validates results, and assists rule maintenance"
+          }
+        ],
+        "media": [
+          "IRify Preview 01",
+          "IRify Preview 02",
+          "IRify Preview 03"
+        ]
+      }
+    }
+  },
+  "HomeTestimonialsCTA": {
+    "titleMobile": "Everyone",
+    "titleMobileLine2": "Loves Yak",
+    "titleDesktop": "Everyone Loves Using Yak",
+    "subtitle": "See why developers choose Yak every day",
+    "marqueeAria": "Testimonials marquee",
+    "ctaTitle": "Try Now",
+    "ctaDescMobile": "Whether you're an industry user or a student,",
+    "ctaDescMobileLine2": "Yak is always your good partner",
+    "ctaDescDesktop": "Whether you're an industry user or a student, Yak is always your good partner",
+    "downloadDesktop": "Download Desktop",
+    "viewDocs": "View Documentation",
+    "testimonials": {
+      "t0": {
+        "name": "ykc",
+        "segments": [
+          {
+            "text": "There is no absolute solution paradigm for security problems, but ",
+            "highlight": false
+          },
+          {
+            "text": "Yak creates enough possibilities",
+            "highlight": true
+          },
+          {
+            "text": ", allowing us to ",
+            "highlight": false
+          },
+          {
+            "text": "stand on the shoulders of giants and let our imagination run wild",
+            "highlight": true
+          },
+          {
+            "text": ". Its vision and ambition are worth learning from and reflecting on.",
+            "highlight": false
+          }
+        ]
+      },
+      "t1": {
+        "name": "kio",
+        "segments": [
+          {
+            "text": "To me, Yakit is a security testing framework that can be customized. It is a great fit for hands-on security practitioners who want to ",
+            "highlight": false
+          },
+          {
+            "text": "forge their own blade",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t2": {
+        "name": "和你",
+        "segments": [
+          {
+            "text": "The idea behind Yak can greatly ",
+            "highlight": false
+          },
+          {
+            "text": "lighten the environment-configuration burden for security practitioners",
+            "highlight": true
+          },
+          {
+            "text": ", and the rich plugins noticeably improve penetration testing work. I hope Yak keeps getting better as a domestic security product.",
+            "highlight": false
+          }
+        ]
+      },
+      "t3": {
+        "name": "P0m32Kun",
+        "segments": [
+          {
+            "text": "I first came across Yak in late 2021, when the community was still small. As the developers kept collecting, sorting, adding, and refining user feedback, the documentation got better and Yakit became smoother to use, and I gradually felt this is ",
+            "highlight": false
+          },
+          {
+            "text": "a warm, human team",
+            "highlight": true
+          },
+          {
+            "text": ". I originally thought Yakit was partly about moving away from foreign cracked software, but what impressed me most was the tense international situation. So many companies and products took sides; if we do not plan ahead, we may face the same situation one day. In the end, ",
+            "highlight": false
+          },
+          {
+            "text": "I hope Yak keeps thriving",
+            "highlight": true
+          },
+          {
+            "text": ", and more security practitioners ",
+            "highlight": false
+          },
+          {
+            "text": "join the domestic ecosystem effort",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t4": {
+        "name": "18 Xtreme",
+        "segments": [
+          {
+            "text": "First, I must mention that the Yakit authors are genuinely ",
+            "highlight": false
+          },
+          {
+            "text": "passionate and responsible",
+            "highlight": true
+          },
+          {
+            "text": ": every question gets answered. I learned a lot talking with V, in particular. Second, Yakit's server-plus-console model is really nice for team work. Finally, ",
+            "highlight": false
+          },
+          {
+            "text": "I wish Yakit all the best",
+            "highlight": true
+          },
+          {
+            "text": " and hope it becomes the strongest tool in the world!",
+            "highlight": false
+          }
+        ]
+      },
+      "t5": {
+        "name": "国产大熊猫",
+        "segments": [
+          {
+            "text": "Yakit is an excellent ",
+            "highlight": false
+          },
+          {
+            "text": "domestic web penetration tool",
+            "highlight": true
+          },
+          {
+            "text": ", lovable from the very first design. As a power user, I can feel in every detail the craftsmanship of a team dedicated to the comfort of penetration testers. From reconnaissance to fuzzing to PoC verification, Yakit is ",
+            "highlight": false
+          },
+          {
+            "text": "like a comrade fighting beside you",
+            "highlight": true
+          },
+          {
+            "text": ". The Yakit community is active, the developers listen to suggestions, and the product keeps iterating. I believe it will become a must-have offensive tool for web penetration.",
+            "highlight": false
+          }
+        ]
+      },
+      "t6": {
+        "name": "CF_HB",
+        "segments": [
+          {
+            "text": "In 2022, I strongly recommend a ",
+            "highlight": false
+          },
+          {
+            "text": "vulnerability-hunting tool I cannot put down",
+            "highlight": true
+          },
+          {
+            "text": " — Yakit. The maintainers are friendly and skilled, tirelessly building new features. Yakit is truly a tool that can do anything you can think of. I hope Yakit replaces Burp soon; this time I ",
+            "highlight": false
+          },
+          {
+            "text": "back the domestic powerhouse",
+            "highlight": true
+          },
+          {
+            "text": " ~Yakit.",
+            "highlight": false
+          }
+        ]
+      },
+      "t7": {
+        "name": "wooluo",
+        "segments": [
+          {
+            "text": "The product's original intention is excellent: as a ",
+            "highlight": false
+          },
+          {
+            "text": "solo-operation tool for Chinese penetration testers",
+            "highlight": true
+          },
+          {
+            "text": ", it brings practical plugins into a single platform, exposes interfaces for users to add their own plugins or rules at any time, and even thoughtfully supports Nuclei rules. It is a rare and good tool, ",
+            "highlight": false
+          },
+          {
+            "text": "the best alternative to BurpSuite",
+            "highlight": true
+          },
+          {
+            "text": ". Highly recommended!",
+            "highlight": false
+          }
+        ]
+      },
+      "t8": {
+        "name": "Vanilla",
+        "segments": [
+          {
+            "text": "I got to know V1ll4n through the SIEM he built early on, which fused many security capabilities. As an enterprise security practitioner, I very much agree with his concepts of high- and low-level security. Then Yakit came along, extending those SIEM ideas and showing ",
+            "highlight": false
+          },
+          {
+            "text": "more possibilities",
+            "highlight": true
+          },
+          {
+            "text": ". Yakit's complete ecosystem and compatibility help solve security-capability construction. As the community grows and more peers join, Yakit becomes more mature. In my view, ",
+            "highlight": false
+          },
+          {
+            "text": "Yakit is a security tool with no ceiling",
+            "highlight": true
+          },
+          {
+            "text": " — it provides a base and gives security practitioners ",
+            "highlight": false
+          },
+          {
+            "text": "room to freely innovate",
+            "highlight": true
+          },
+          {
+            "text": ". And V1ll4n fixes bugs fast; he is solid.",
+            "highlight": false
+          }
+        ]
+      },
+      "t9": {
+        "name": "ttStorm",
+        "segments": [
+          {
+            "text": "Three reasons to choose Yakit. 1. Yakit looks great — clean logo, ",
+            "highlight": false
+          },
+          {
+            "text": "clean interface",
+            "highlight": true
+          },
+          {
+            "text": ". Perfection itself is proof of strength. 2. V, the Yakit core team, and community contributors ship ",
+            "highlight": false
+          },
+          {
+            "text": "high-frequency updates",
+            "highlight": true
+          },
+          {
+            "text": " — 18 releases in one day; nobody has the latest version. In a short time Yakit grew from a spark into a rich, mature, lethal weapon. 3. The Yak team is friendly, energetic, and ",
+            "highlight": false
+          },
+          {
+            "text": "highly execution-oriented",
+            "highlight": true
+          },
+          {
+            "text": " — you can always trust Yak.",
+            "highlight": false
+          }
+        ]
+      },
+      "t10": {
+        "name": "酒零",
+        "segments": [
+          {
+            "text": "Deep data fusion in penetration tools is the inevitable trend in security tooling. ",
+            "highlight": false
+          },
+          {
+            "text": "Customizability and extensibility",
+            "highlight": true
+          },
+          {
+            "text": " are basic needs for every senior penetration engineer, and excellent UI interaction is the catalyst for wide adoption. To build a ",
+            "highlight": false
+          },
+          {
+            "text": "tool covering the full penetration-test workflow",
+            "highlight": true
+          },
+          {
+            "text": ", you need to understand every stage of the process. It is, however, a huge and long-term project requiring: 1) coders familiar with penetration processes and interaction design, 2) a company that unconditionally supports it, and 3) an operation team that constantly responds to user needs and feedback. The Yaikit project grew from this purpose and has the conditions to achieve it. I hope everyone uses it and offers fixes and optimization suggestions to ",
+            "highlight": false
+          },
+          {
+            "text": "make the project more complete and excellent",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t11": {
+        "name": "key@OverSpace",
+        "segments": [
+          {
+            "text": "For me, Yak is an excellent fusion language with strong security-development attributes; you can use it to efficiently develop security scripts, platforms, and tools. The Yak project not only created Yak but also thoughtfully built Yakit, a solo-operation platform for security practitioners. The birth of Yakit actually represents ",
+            "highlight": false
+          },
+          {
+            "text": "a kind of \"unification\"",
+            "highlight": true
+          },
+          {
+            "text": " that brings many capabilities together, avoiding constant switching between tools and compatibility headaches. Although it is not a BurpSuite competitor, it has many similar features and is more practical. For example, Web Fuzz innovates by bringing real fuzzing thinking into web security, also reducing unnecessary dictionary collection. The Yak team made a bold attempt that many would not dare to make, requiring huge human investment, which I deeply admire and find inspiring. I believe Yak and Yakit will ",
+            "highlight": false
+          },
+          {
+            "text": "forge their own path in the future",
+            "highlight": true
+          },
+          {
+            "text": ". Keep going — the future is bright!",
+            "highlight": false
+          }
+        ]
+      },
+      "t12": {
+        "name": "奶权",
+        "segments": [
+          {
+            "text": "Yakit is a very useful network solo-operation tool. It covers Burp Suite's most frequently used features and adds its own innovations. The Web Fuzzer tag ",
+            "highlight": false
+          },
+          {
+            "text": "greatly raises the ceiling for penetration testers",
+            "highlight": true
+          },
+          {
+            "text": ", making tests more capable and convenient. Thanks to Yakit's Yaklang foundation and Go-like syntax, users can hook MITM with simpler code to ",
+            "highlight": false
+          },
+          {
+            "text": "implement a wide variety of plugins",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t13": {
+        "name": "sharecast",
+        "segments": [
+          {
+            "text": "Yakit is a young, integrated platform with ",
+            "highlight": false
+          },
+          {
+            "text": "front-line attack-defense experience",
+            "highlight": true
+          },
+          {
+            "text": ". It engineers excellent offensive experience into practical tooling, making life easier for front-line red-teamers. UI and polish still have room to improve. I hope Yakit keeps getting better!",
+            "highlight": false
+          }
+        ]
+      },
+      "t14": {
+        "name": "影舞者",
+        "segments": [
+          {
+            "text": "The scanning interface is very ",
+            "highlight": false
+          },
+          {
+            "text": "convenient",
+            "highlight": true
+          },
+          {
+            "text": ", and the built-in ",
+            "highlight": false
+          },
+          {
+            "text": "dynamic Yak-script parsing",
+            "highlight": true
+          },
+          {
+            "text": " is also advanced. The team is awesome.",
+            "highlight": false
+          }
+        ]
+      },
+      "t15": {
+        "name": "TimWhite",
+        "segments": [
+          {
+            "text": "For the Yakit/Yak project, I was initially curious about how the Yak scripting language was implemented. But in use, I found the ",
+            "highlight": false
+          },
+          {
+            "text": "plugin architecture, Yak built-in security functions, and Yakit GUI",
+            "highlight": true
+          },
+          {
+            "text": " combined are the project's highlights. Since the project is young, design bugs are inevitable, but author V1ll4n's update frequency is amazing.",
+            "highlight": false
+          }
+        ]
+      },
+      "t16": {
+        "name": "Alex-null",
+        "segments": [
+          {
+            "text": "Yak is the best ",
+            "highlight": false
+          },
+          {
+            "text": "security-capability foundation in China",
+            "highlight": true
+          },
+          {
+            "text": " I have seen, with a lot of effort put into ",
+            "highlight": false
+          },
+          {
+            "text": "heterogeneous multi-source data integration",
+            "highlight": true
+          },
+          {
+            "text": ", letting security practitioners truly focus on solving security problems.",
+            "highlight": false
+          }
+        ]
+      },
+      "t17": {
+        "name": "六月初七",
+        "segments": [
+          {
+            "text": "Overall, I really like this tool: it scans ports, detects vulnerabilities, and brute-forces credentials, ",
+            "highlight": false
+          },
+          {
+            "text": "integrating many capabilities",
+            "highlight": true
+          },
+          {
+            "text": " in an easy-to-use way that greatly improves efficiency. Yakit does not target Burp, but has many of Burp's features and ",
+            "highlight": false
+          },
+          {
+            "text": "bundles common penetration-test functions",
+            "highlight": true
+          },
+          {
+            "text": " in one place. Practitioners can also use Yakit's customization to build their own offensive tools. Yakit did what many dared not do, and I ",
+            "highlight": false
+          },
+          {
+            "text": "hope Yakit can do what others cannot",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t18": {
+        "name": "小米粥",
+        "segments": [
+          {
+            "text": "In my eyes, Yak's significance is far greater than Yakit; Yakit is only a ",
+            "highlight": false
+          },
+          {
+            "text": "collection of scenario implementations for security needs",
+            "highlight": true
+          },
+          {
+            "text": " built on Yak. From Yakit's open source to now, it keeps covering more security scenarios, which makes me feel Yak is, as the original docs said, constantly proving to security people that ",
+            "highlight": false
+          },
+          {
+            "text": "Yak is indeed the most suitable language for security",
+            "highlight": true
+          },
+          {
+            "text": ", and makes people expect it to truly ",
+            "highlight": false
+          },
+          {
+            "text": "become the \"base\" of security",
+            "highlight": true
+          },
+          {
+            "text": ". What amazes me most about Yakit is the reverse-connection platform expansion; I have been talking with V about extending the OAST detection model and have tried building a similar product. During my own implementation, I felt Yakit's direction on reverse connection kept validating my own work, and I deeply appreciate how hard it is to make a product that satisfies both yourself and others. In short, I very much ",
+            "highlight": false
+          },
+          {
+            "text": "look forward to Yak covering more security scenarios in the future",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      },
+      "t19": {
+        "name": "李大壮'",
+        "segments": [
+          {
+            "text": "I was moved by the Yak team's vision the first time I touched Yak. As a security-domain scripting language, Yak ",
+            "highlight": false
+          },
+          {
+            "text": "integrates common security capabilities",
+            "highlight": true
+          },
+          {
+            "text": ". Not long ago I tested a workflow, and after a little learning I quickly designed a detection process the way I wanted. The official Yakit implementation provides many practical tools such as MITM and codec-specific vulnerability detection. Yakit is still under rapid development, the WeChat community is very active, ",
+            "highlight": false
+          },
+          {
+            "text": "many interesting technologies and ideas are landing",
+            "highlight": true
+          },
+          {
+            "text": ", and the team fixes bugs and iterates features incredibly fast. I sincerely hope the Yak ecosystem and community grow stronger and ",
+            "highlight": false
+          },
+          {
+            "text": "become the MATLAB of security",
+            "highlight": true
+          },
+          {
+            "text": ".",
+            "highlight": false
+          }
+        ]
+      }
+    }
+  },
+  "CooperativePartner": {
+    "title": "Partners",
+    "subtitle": "Thank you to all partners for their support. The following partners are listed in no particular order."
+  },
+  "DownloadResources": {
+    "title": "Downloads",
+    "intro": "Downloadable resources for Yaklang and Yakit, including the technical white paper, archived API manuals for each version, and a full-site content package.",
+    "whitepaper": {
+      "title": "Technical White Paper",
+      "label": "Yakit Technical White Paper (PDF)",
+      "cta": "Download White Paper"
+    },
+    "latestDocs": {
+      "title": "Latest API Docs",
+      "online": "Browse Latest Docs Online",
+      "download": "Download Latest Docs (v{{version}})",
+      "current": "Latest archived version",
+      "archived": "Archived on {{date}}"
+    },
+    "sitePackage": {
+      "title": "Full Site Package (docs + products + blog)",
+      "desc": "Includes all Markdown source files for Yak programming docs, Yakit manuals, and technical blogs, along with index files INDEX.json / INDEX.ndjson that preserve original URLs for offline search and self-hosted indexing.",
+      "latestCta": "Latest Full Site Package ({{id}})",
+      "current": "Current archive",
+      "count": "{{count}} content files in total",
+      "archived": "Archived on {{date}}",
+      "empty": "No full-site package archives yet"
+    },
+    "historyPackages": {
+      "title": "Historical Full Site Packages (zip only)",
+      "loading": "Loading...",
+      "empty": "No earlier full-site package archives"
+    },
+    "historyDocs": {
+      "title": "Historical Version Docs (zip only)",
+      "loading": "Loading...",
+      "empty": "No earlier version archives",
+      "fallbackDesc": "Markdown documentation archive"
+    },
+    "downloadZip": "Download zip",
+    "downloadDocZip": "Download docs zip"
+  }
 }

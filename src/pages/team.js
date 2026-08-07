@@ -8,6 +8,7 @@ export default function Home() {
     
     return (
         <Layout
+            wrapperClassName="team-page-layout"
             title={`Yak Language ${siteConfig.title}`}
             description="Web安全能力研发最强语言"
         >

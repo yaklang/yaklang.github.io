@@ -1,9 +1,17 @@
+// 合作伙伴页：统一使用新版首页 Gold 语义变量
+.cooperative-partner-page-layout .main-wrapper {
+  background: var(--Colors-Use-Main---Gold-Bg);
+}
+
 .cooperative-partner-page {
   width: 100%;
-  margin-top: 100px;
-  padding: 0 20%;
+  margin-top: 0;
+  padding: calc(var(--ifm-navbar-height) + 100px) 20% 160px;
+  background: var(--Colors-Use-Main---Gold-Bg);
+  min-height: 100vh;
+
   &-header-title {
-    color: var(--base-font-color);
+    color: var(--Colors-Neutral-100);
     font-size: 48px;
     font-weight: 600;
     height: 72px;
@@ -13,7 +21,7 @@
   &-header-second-title {
     margin-bottom: 48px;
     text-align: center;
-    color: #999ea8;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
     font-size: 14px;
   }
   &-wrapper {
@@ -34,7 +42,14 @@
           text-align: center;
           .img-box {
             padding: 6% 14%;
-            border: 1px solid rgba(230, 234, 239, 0.5);
+            background: var(--Colors-Use-Main---Gold-Bg-Hover);
+            border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+            border-radius: 4px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            &:hover {
+              border-color: var(--Colors-Use-Main---web-Primary);
+              box-shadow: 0 4px 12px var(--Colors-Use-Basic-Shadow);
+            }
           }
         }
         &-img {
@@ -44,7 +59,7 @@
           object-fit: contain;
         }
         &-title {
-          color: #686c78;
+          color: var(--Colors-Use-Neutral-Text-3-Secondary);
           height: 20px;
           line-height: 20px;
           margin: 16px 0 24px;
