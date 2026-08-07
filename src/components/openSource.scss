@@ -1,5 +1,5 @@
 // 开源生态：卡片 / 导航 mega-menu / 移动端列表 / 总览页样式
-// 主题色：品牌橙 var(--base-theme-color, #ff7d23)，主色蓝 var(--ifm-color-primary)
+// 全部使用新版首页 Colors-Use-* 语义变量，与首页亮/暗色主题保持一致。
 
 // ---------------------------------------------------------------------------
 // 卡片（桌面 mega-menu 与总览页共用，靠 variant 区分大小）
@@ -8,24 +8,24 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid #e7e9ee;
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
   border-radius: 14px;
   text-decoration: none;
   transition: border-color 0.18s ease, box-shadow 0.18s ease,
     transform 0.18s ease;
 
   &:hover {
-    border-color: var(--os-accent, var(--base-theme-color));
-    box-shadow: 0 10px 28px rgba(20, 23, 33, 0.1);
+    border-color: var(--os-accent, var(--Colors-Use-Main---web-Primary));
+    box-shadow: 0 10px 28px var(--Colors-Use-Basic-Shadow);
     transform: translateY(-2px);
 
     .os-card__open {
-      color: var(--os-accent, var(--base-theme-color));
+      color: var(--os-accent, var(--Colors-Use-Main---web-Primary));
       transform: translateX(2px);
     }
     .os-card__name {
-      color: var(--os-accent, var(--base-theme-color));
+      color: var(--os-accent, var(--Colors-Use-Main---web-Primary));
     }
   }
 
@@ -42,11 +42,10 @@
     justify-content: center;
     font-weight: 800;
     letter-spacing: 0.3px;
-    color: #fff;
-    background: var(--os-accent, var(--base-theme-color));
+    color: var(--Colors-Use-Basic-White);
+    background: var(--os-accent, var(--Colors-Use-Main---web-Primary));
     border-radius: 11px;
-    box-shadow: 0 4px 12px rgba(20, 23, 33, 0.18);
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--os-accent) 35%, transparent);
+    box-shadow: 0 4px 12px var(--Colors-Use-Basic-Shadow);
   }
 
   // 图片 LOGO（存在 project.logo 时替代字母徽标）。
@@ -67,7 +66,7 @@
 
   &__name {
     font-weight: 700;
-    color: var(--base-font-color, #1e1f23);
+    color: var(--Colors-Use-Neutral-Text-1-Title);
     line-height: 1.25;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -86,7 +85,7 @@
   &__domain {
     margin-top: 2px;
     font-size: 12px;
-    color: #8a8f9a;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
     font-family: var(--ifm-font-family-monospace, monospace);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -95,13 +94,13 @@
 
   &__open {
     flex-shrink: 0;
-    color: #c4c8d2;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
     transition: color 0.18s ease, transform 0.18s ease;
   }
 
   &__desc {
     margin: 0;
-    color: #565b66;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
   }
 
   &__footer {
@@ -123,11 +122,9 @@
     line-height: 1.6;
     padding: 1px 8px;
     border-radius: 999px;
-    color: var(--os-accent, var(--base-theme-color));
-    background: #f5f6f8;
-    background: color-mix(in srgb, var(--os-accent) 12%, #fff);
-    border: 1px solid #e7e9ee;
-    border: 1px solid color-mix(in srgb, var(--os-accent) 24%, #fff);
+    color: var(--os-accent, var(--Colors-Use-Main---web-Primary));
+    background: color-mix(in srgb, var(--os-accent) 12%, var(--Colors-Use-Main---Gold-Bg-Hover));
+    border: 1px solid color-mix(in srgb, var(--os-accent) 24%, var(--Colors-Use-Main---Gold-Bg-Hover));
   }
 
   // 源码链接需浮在 stretched link 之上才能点击
@@ -139,17 +136,18 @@
     gap: 5px;
     flex-shrink: 0;
     font-size: 12px;
-    color: #6a6f7a;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
     text-decoration: none;
     padding: 3px 9px;
     border-radius: 999px;
-    border: 1px solid #e2e5ec;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
     transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 
     &:hover {
-      color: #1e1f23;
-      border-color: #c7ccd6;
-      background: #f6f7f9;
+      color: var(--Colors-Use-Main---web-On-Primary);
+      border-color: var(--Colors-Use-Main---web-Primary);
+      background: var(--Colors-Use-Main---web-Primary);
     }
   }
 }
@@ -227,16 +225,34 @@
   max-width: calc(100vw - 32px);
   padding: 16px;
   border-radius: 16px;
-  border: 1px solid #e7e9ee;
-  background: #ffffff;
-  box-shadow: 0 18px 48px rgba(20, 23, 33, 0.16);
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  background: var(--Colors-Use-Main---Gold-Bg);
+  box-shadow: 0 18px 48px var(--Colors-Use-Basic-Shadow);
   // 自管 transform：水平居中于触发项 + 竖直滑入动画
   transform: translateX(-50%) translateY(-0.5rem);
 
   &::before {
     display: none; // infima 可能带的小三角，关掉
   }
+}
 
+// antd Dropdown 弹出层：定位交给 antd，去掉 infima 的居中偏移
+.os-megamenu.os-megamenu--antd {
+  position: relative;
+  left: auto;
+  right: auto;
+  width: 680px;
+  max-width: calc(100vw - 32px);
+  padding: 16px;
+  margin: 0;
+  border-radius: 16px;
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  background: var(--Colors-Use-Main---Gold-Bg);
+  box-shadow: 0 18px 48px var(--Colors-Use-Basic-Shadow);
+  transform: none;
+}
+
+.os-megamenu {
   .os-megamenu__head {
     display: flex;
     align-items: flex-end;
@@ -244,7 +260,7 @@
     gap: 12px;
     padding: 2px 4px 12px;
     margin-bottom: 12px;
-    border-bottom: 1px solid #eef0f4;
+    border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
   }
   .os-megamenu__titles {
     display: flex;
@@ -254,11 +270,11 @@
   .os-megamenu__title {
     font-size: 14px;
     font-weight: 700;
-    color: var(--base-font-color, #1e1f23);
+    color: var(--Colors-Use-Neutral-Text-1-Title);
   }
   .os-megamenu__subtitle {
     font-size: 12px;
-    color: #8a8f9a;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
     margin-top: 2px;
     white-space: nowrap;
   }
@@ -266,7 +282,7 @@
     flex-shrink: 0;
     font-size: 12.5px;
     font-weight: 600;
-    color: var(--base-theme-color, #ff7d23);
+    color: var(--Colors-Use-Main---web-Primary);
     text-decoration: none;
     white-space: nowrap;
 
@@ -290,12 +306,14 @@
 
 // 窄桌面缩窄面板，避免溢出
 @media (max-width: 1100px) {
-  .dropdown__menu.os-megamenu {
+  .dropdown__menu.os-megamenu,
+  .os-megamenu.os-megamenu--antd {
     width: 560px;
   }
 }
 @media (max-width: 1000px) {
-  .dropdown__menu.os-megamenu {
+  .dropdown__menu.os-megamenu,
+  .os-megamenu.os-megamenu--antd {
     width: 420px;
   }
   .os-grid--menu {
@@ -315,10 +333,11 @@
   }
   &__name {
     font-size: 14px;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
   }
   &__domain {
     font-size: 11.5px;
-    color: #8a8f9a;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
     font-family: var(--ifm-font-family-monospace, monospace);
   }
 }
@@ -326,11 +345,18 @@
 // ---------------------------------------------------------------------------
 // /opensource 总览页
 // ---------------------------------------------------------------------------
+// 外层 Layout wrapper 背景同步为首页 Gold 主题
+.os-page-layout .main-wrapper {
+  background: var(--Colors-Use-Main---Gold-Bg);
+}
+
 .os-page {
   max-width: 1160px;
   margin: 0 auto;
   padding: 60px 24px 88px; // 顶部留出固定导航栏高度
   width: 100%;
+  background: var(--Colors-Use-Main---Gold-Bg);
+  min-height: 100vh;
 
   &__hero {
     text-align: center;
@@ -340,7 +366,7 @@
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 3px;
-    color: var(--base-theme-color, #ff7d23);
+    color: var(--Colors-Use-Main---web-Primary);
     margin: 0 0 10px;
   }
   &__title {
@@ -348,14 +374,14 @@
     line-height: 1.15;
     font-weight: 800;
     margin: 0 0 16px;
-    color: var(--base-font-color, #1e1f23);
+    color: var(--Colors-Neutral-100);
   }
   &__lead {
     max-width: 720px;
     margin: 0 auto;
     font-size: 16px;
     line-height: 1.7;
-    color: #565b66;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
   }
 
   &__grid .os-grid--page {

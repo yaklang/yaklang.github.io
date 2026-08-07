@@ -34,16 +34,16 @@ html.plugin-blog {
     a {
       font-size: REM(14);
       line-height: 1.6;
-      color: #51565d;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
       &:hover {
-        color: var(--ifm-color-primary);
+        color: var(--Colors-Use-Main---web-Primary);
         text-decoration: none;
       }
     }
     // 年份分组标题
     > div > div:first-child {
       font-weight: 700;
-      color: var(--base-font-color);
+      color: var(--Colors-Use-Neutral-Text-1-Title);
     }
   }
 }
@@ -52,18 +52,18 @@ html.plugin-blog {
 // 设计目标：高信息密度、弱化卡片间距、移除作者与标签、预览灰色斜体、每屏容纳更多
 html.plugin-blog:not(.blog-post-page) {
   .main-wrapper article {
-    background: #ffffff;
-    border: 1px solid #ebedf0;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
     border-radius: REM(10);
     padding: REM(12) REM(18);
     // Infima 的 .margin-bottom--xl 带 !important(3rem)，需 !important 才能收紧卡片间距
     margin-bottom: REM(10) !important;
-    box-shadow: 0 1px 2px rgba(20, 23, 28, 0.04);
+    box-shadow: 0 1px 2px var(--Colors-Use-Basic-Shadow);
     transition: box-shadow 0.18s ease, border-color 0.18s ease;
 
     &:hover {
-      box-shadow: 0 6px 18px rgba(20, 23, 28, 0.08);
-      border-color: var(--ifm-color-primary-lighter);
+      box-shadow: 0 6px 18px var(--Colors-Use-Basic-Shadow);
+      border-color: var(--Colors-Use-Main---web-Primary);
     }
 
     // 标题：更紧凑
@@ -74,9 +74,9 @@ html.plugin-blog:not(.blog-post-page) {
       margin-bottom: REM(2);
 
       a {
-        color: var(--base-font-color);
+        color: var(--Colors-Use-Neutral-Text-1-Title);
         &:hover {
-          color: var(--ifm-color-primary);
+          color: var(--Colors-Use-Main---web-Primary);
           text-decoration: none;
         }
       }
@@ -88,7 +88,7 @@ html.plugin-blog:not(.blog-post-page) {
       margin-bottom: 0 !important;
     }
     header time {
-      color: #9aa0a8;
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
       font-size: REM(12);
     }
 
@@ -105,7 +105,7 @@ html.plugin-blog:not(.blog-post-page) {
     .markdown {
       font-size: REM(13.5);
       line-height: 1.6;
-      color: #9298a1;
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
       font-style: italic;
       margin: REM(6) 0 0;
       display: -webkit-box;
@@ -154,12 +154,17 @@ html.plugin-blog:not(.blog-post-page) {
       .button,
       a[href] {
         font-size: REM(13);
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+        &:hover {
+          color: var(--Colors-Use-Main---web-Primary);
+        }
       }
     }
   }
 }
 
-// ---------- 标签 pill ----------
+// ---------- 标签 pill / 分页导航 ----------
 html.plugin-blog {
   .main-wrapper {
     ul[class*="tags"] {
@@ -176,6 +181,28 @@ html.plugin-blog {
       font-size: REM(12);
     }
   }
+
+  // 博客列表分页："较新的博文"/"较旧的博文"卡片
+  .pagination-nav {
+    a {
+      background: var(--Colors-Use-Main---Gold-Bg-Hover);
+      border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+      &:hover {
+        border-color: var(--Colors-Use-Main---web-Primary);
+        color: var(--Colors-Use-Main---web-Primary);
+      }
+    }
+
+    .pagination-nav__sublabel {
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
+    }
+
+    .pagination-nav__label {
+      color: var(--Colors-Use-Neutral-Text-2-Primary);
+    }
+  }
 }
 
 // ---------- 文章详情页：阅读排版 ----------
@@ -187,26 +214,30 @@ html.blog-post-page {
       line-height: 1.3;
       margin-bottom: REM(12);
       letter-spacing: 0.2px;
+      color: var(--Colors-Use-Neutral-Text-1-Title);
     }
 
     .markdown {
       font-size: REM(16);
       line-height: 1.9;
-      color: #2b2f36;
+      color: var(--Colors-Use-Neutral-Text-2-Primary);
 
       h2 {
         font-size: REM(25);
         margin-top: REM(38);
         padding-bottom: REM(8);
-        border-bottom: 1px solid #eef0f2;
+        border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
+        color: var(--Colors-Use-Neutral-Text-1-Title);
       }
       h3 {
         font-size: REM(20);
         margin-top: REM(28);
+        color: var(--Colors-Use-Neutral-Text-1-Title);
       }
       h4 {
         font-size: REM(17);
         margin-top: REM(22);
+        color: var(--Colors-Use-Neutral-Text-1-Title);
       }
 
       p {
@@ -214,9 +245,14 @@ html.blog-post-page {
       }
 
       a {
-        color: var(--ifm-color-primary);
+        color: var(--Colors-Use-Main---web-Primary);
         text-decoration: underline;
         text-underline-offset: 2px;
+
+        &:hover {
+          color: var(--Colors-Use-Main---web-Primary);
+          text-decoration: none;
+        }
       }
 
       img {
@@ -224,14 +260,14 @@ html.blog-post-page {
         max-width: 100%;
         margin: REM(20) auto;
         border-radius: REM(8);
-        box-shadow: 0 2px 14px rgba(20, 23, 28, 0.08);
+        box-shadow: 0 2px 14px var(--Colors-Use-Basic-Shadow);
       }
 
       blockquote {
-        border-left: REM(4) solid var(--ifm-color-primary-lighter);
-        background: #f6f9fc;
+        border-left: REM(4) solid var(--Colors-Use-Main---Gold-Focus);
+        background: var(--Colors-Use-Main---Gold-Bg-Hover);
         padding: REM(10) REM(18);
-        color: #51565d;
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
         border-radius: 0 REM(6) REM(6) 0;
       }
 

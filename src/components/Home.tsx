@@ -1914,7 +1914,7 @@ interface AppraiseInfoProps {
   img: string;
   appraise: React.ReactNode;
 }
-const AppraiseInfoList: AppraiseInfoProps[] = [
+export const AppraiseInfoList: AppraiseInfoProps[] = [
   {
     name: "ykc",
     img: require("../../static/img/team/ykc.jpg").default,

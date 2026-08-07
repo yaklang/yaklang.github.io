@@ -1,42 +1,42 @@
 // 导航栏搜索按钮与搜索弹框样式
 // 关键词: navbar search button, search modal, search results, progress
 
-.navbar-search-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  height: 30px;
-  padding: 0 12px;
-  margin: 0 4px;
-  font-size: 0.875rem;
-  font-weight: var(--ifm-font-weight-semibold, 600);
-  color: var(--ifm-navbar-link-color);
-  background: transparent;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 20px;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+// .navbar-search-button {
+//   display: inline-flex;
+//   align-items: center;
+//   gap: 5px;
+//   height: 30px;
+//   padding: 0 12px;
+//   margin: 0 4px;
+//   font-size: 0.875rem;
+//   font-weight: var(--ifm-font-weight-semibold, 600);
+//   color: var(--ifm-navbar-link-color);
+//   background: transparent;
+//   border: 1px solid var(--ifm-color-emphasis-300);
+//   border-radius: 20px;
+//   cursor: pointer;
+//   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 
-  svg {
-    flex: 0 0 auto;
-  }
+//   svg {
+//     flex: 0 0 auto;
+//   }
 
-  &:hover {
-    color: var(--ifm-navbar-link-hover-color);
-    border-color: var(--ifm-color-primary);
-    background: var(--ifm-color-emphasis-100);
-  }
-}
+//   &:hover {
+//     color: var(--ifm-navbar-link-hover-color);
+//     border-color: var(--ifm-color-primary);
+//     background: var(--ifm-color-emphasis-100);
+//   }
+// }
 
 // 窄屏只显示放大镜图标，进一步节省空间
-@media (max-width: 996px) {
-  .navbar-search-button {
-    padding: 0 8px;
-  }
-  .navbar-search-button__text {
-    display: none;
-  }
-}
+// @media (max-width: 996px) {
+//   .navbar-search-button {
+//     padding: 0 8px;
+//   }
+//   .navbar-search-button__text {
+//     display: none;
+//   }
+// }
 
 .navbar-search-modal {
   position: fixed;
@@ -46,7 +46,6 @@
   align-items: flex-start;
   justify-content: center;
   padding-top: 12vh;
-  background: rgba(0, 0, 0, 0.4);
 }
 
 .navbar-search-modal__panel {
@@ -54,9 +53,10 @@
   max-height: 78vh;
   display: flex;
   flex-direction: column;
-  background: var(--ifm-background-surface-color, #fff);
+  background: var(--Colors-Use-Main---Gold-Bg);
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
   border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 18px 48px rgba(20, 23, 33, 0.16);
   overflow: hidden;
 }
 
@@ -65,12 +65,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
 }
 
 .navbar-search-modal__title {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--Colors-Use-Neutral-Text-1-Title);
 }
 
 .navbar-search-modal__close {
@@ -79,10 +80,10 @@
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
 
   &:hover {
-    color: var(--ifm-color-emphasis-900);
+    color: var(--Colors-Use-Main---web-Primary);
   }
 }
 
@@ -99,10 +100,9 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 18px;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  background: var(--ifm-color-emphasis-100);
+  border-top: 1px solid var(--Colors-Use-Main---Gold-Focus);
   font-size: 0.78rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
 }
 
 .navbar-search-modal__footer-meta {
@@ -120,21 +120,22 @@
   padding: 4px 10px;
   font-size: 0.76rem;
   font-weight: 600;
-  color: var(--ifm-color-primary);
+  color: var(--Colors-Use-Main---web-Primary);
   background: transparent;
-  border: 1px solid var(--ifm-color-primary);
+  border: 1px solid var(--Colors-Use-Main---Gold-Border);
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
   &:hover:not(:disabled) {
-    color: var(--ifm-color-primary-contrast-color, #fff);
-    background: var(--ifm-color-primary);
+    color: var(--Colors-Use-Main---web-On-Primary);
+    background: var(--Colors-Use-Main---web-Primary);
+    border-color: var(--Colors-Use-Main---web-Primary);
   }
 
   &:disabled {
-    color: var(--ifm-color-emphasis-500);
-    border-color: var(--ifm-color-emphasis-300);
+    color: var(--Colors-Use-Neutral-Disable);
+    border-color: var(--Colors-Use-Neutral-Border);
     background: transparent;
     cursor: not-allowed;
     opacity: 0.7;
@@ -146,14 +147,18 @@
   box-sizing: border-box;
   padding: 10px 14px;
   font-size: 0.95rem;
-  color: var(--ifm-font-color-base);
-  background: var(--ifm-background-surface-color, #fff);
-  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--Colors-Use-Neutral-Text-1-Title);
+  background: var(--Colors-Use-Neutral-Bg);
+  border: 1px solid var(--Colors-Use-Main---Gold-Border);
   border-radius: 8px;
   outline: none;
 
+  &::placeholder {
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
+  }
+
   &:focus {
-    border-color: var(--ifm-color-primary);
+    border-color: var(--Colors-Use-Main---web-Primary);
   }
 
   &:disabled {
@@ -167,8 +172,8 @@
   margin-top: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  background: var(--ifm-color-emphasis-100);
-  color: var(--ifm-font-color-base);
+  background: var(--Colors-Use-Neutral-Bg);
+  color: var(--Colors-Use-Neutral-Text-2-Primary);
   font-size: 0.875rem;
   line-height: 1.5;
 }
@@ -188,8 +193,8 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: 2px solid var(--ifm-color-emphasis-300);
-  border-top-color: var(--ifm-color-primary);
+  border: 2px solid var(--Colors-Use-Main---Gold-Border);
+  border-top-color: var(--Colors-Use-Main---web-Primary);
   animation: navbar-search-spin 0.8s linear infinite;
 }
 
@@ -203,13 +208,13 @@
   margin-top: 8px;
   height: 4px;
   border-radius: 2px;
-  background: var(--ifm-color-emphasis-200);
+  background: var(--Colors-Use-Main---Gold-Border);
   overflow: hidden;
 }
 
 .navbar-search-modal__progress-bar {
   height: 100%;
-  background: var(--ifm-color-primary);
+  background: var(--Colors-Use-Main---web-Primary);
   transition: width 0.2s ease;
 }
 
@@ -221,12 +226,13 @@
 // 阶段名(粗体, 与 spinner 同行)
 .navbar-search-modal__status-phase {
   font-weight: 600;
+  color: var(--Colors-Use-Neutral-Text-1-Title);
 }
 
 // 副标题行(计数 / 当前文档 / 字节进度)
 .navbar-search-modal__status-sub {
   font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
   justify-content: space-between;
   gap: 12px;
 }
@@ -234,7 +240,7 @@
 // 预测时间 / 已用时间(右侧淡色)
 .navbar-search-modal__status-eta {
   margin-left: auto;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -245,11 +251,11 @@
   overflow-y: auto;
   padding: 8px 10px;
   border-radius: 6px;
-  background: var(--ifm-color-emphasis-200);
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
   font-family: var(--ifm-font-family-monospace, ui-monospace, SFMono-Regular, Menlo, monospace);
   font-size: 0.74rem;
   line-height: 1.5;
-  color: var(--ifm-font-color-base);
+  color: var(--Colors-Use-Neutral-Text-2-Primary);
 }
 
 .navbar-search-modal__log-line {
@@ -283,7 +289,7 @@
 .navbar-search-modal__status-hint {
   margin-top: 8px;
   font-size: 0.75rem;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
 }
 
 // 重新构建按钮(错误态与就绪态都可用)
@@ -292,14 +298,17 @@
   padding: 6px 12px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ifm-color-primary-contrast-color, #fff);
-  background: var(--ifm-color-primary);
-  border: none;
+  color: var(--Colors-Use-Neutral-Text-1-Title);
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  border: 1px solid var(--Colors-Use-Main---Gold-Border);
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
   &:hover {
-    opacity: 0.9;
+    color: var(--Colors-Use-Main---web-On-Primary);
+    background: var(--Colors-Use-Main---web-Primary);
+    border-color: var(--Colors-Use-Main---web-Primary);
   }
 }
 
@@ -309,7 +318,7 @@
   padding: 0;
   font-size: inherit;
   font-family: inherit;
-  color: var(--ifm-color-primary);
+  color: var(--Colors-Use-Main---web-Primary);
   background: none;
   border: none;
   cursor: pointer;
@@ -323,11 +332,11 @@
 .navbar-search-modal__hint {
   margin-top: 10px;
   font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
 
   &.navbar-search-modal__hint--muted {
     font-size: 0.75rem;
-    color: var(--ifm-color-emphasis-500);
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
   }
 }
 
@@ -347,7 +356,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
   margin: 0 0 6px;
 }
 
@@ -359,14 +368,14 @@
   color: inherit;
 
   &:hover {
-    background: var(--ifm-color-emphasis-100);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
   }
 }
 
 .navbar-search-modal__result-title {
   font-size: 0.92rem;
   font-weight: 600;
-  color: var(--ifm-font-color-base);
+  color: var(--Colors-Use-Neutral-Text-1-Title);
   margin: 0 0 2px;
   // 截断超长标题
   overflow: hidden;
@@ -376,7 +385,7 @@
 
 .navbar-search-modal__result-snippet {
   font-size: 0.8rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
   margin: 0;
   line-height: 1.45;
   // 两行截断
@@ -387,7 +396,7 @@
 
   mark {
     background: rgba(255, 213, 79, 0.5);
-    color: inherit;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
     padding: 0 1px;
     border-radius: 2px;
   }
@@ -396,5 +405,5 @@
 .navbar-search-modal__empty {
   margin-top: 12px;
   font-size: 0.85rem;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
 }

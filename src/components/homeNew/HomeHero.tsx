@@ -1,0 +1,178 @@
+import React, { useEffect, useRef } from "react";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Link from "@docusaurus/Link";
+import { useTranslation } from "react-i18next";
+import { useHomeSlideActions } from "./HomeSlideContext";
+import { useHomeTheme } from "./HomeThemeContext";
+import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
+
+const DOWNLOAD_SLIDE_INDEX = 1;
+/** 首屏右侧背景视频（按原比例贴右，左侧 Focus 底色） */
+const HERO_BG_VIDEO = "img/newHome/ascii-magic-47.mp4";
+
+const DownLoadIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d="M4 16L4 17C4 18.6569 5.34315 20 7 20L17 20C18.6569 20 20 18.6569 20 17L20 16M8 12L12 16L16 12M12 16L12 4"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const viewIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+  >
+    <path
+      d="M14.1667 14.1666V5.83325H5.83333M14.1667 5.83325L5.83333 14.1666"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+/** 标题黑底高亮块（对齐设计稿） */
+const titleMarkClass =
+  "inline bg-[var(--Colors-Neutral-100)] px-[0.12em] text-[color:var(--Colors-Use-Neutral-Bg)] box-decoration-clone";
+
+const HomeHero: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const isEn = i18n.language?.startsWith("en");
+  const { goToSlide } = useHomeSlideActions();
+  const { theme } = useHomeTheme();
+  const isDark = theme === "dark";
+  const bgVideo = useBaseUrl(HERO_BG_VIDEO);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // 离开视口暂停，回到视口再播
+  useEffect(() => {
+    const el = document.getElementById("home-hero");
+    const video = videoRef.current;
+    if (!el || !video) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const actions = (
+    <div className="flex w-full flex-col items-stretch gap-[8px] sm:w-auto sm:flex-row sm:items-center sm:justify-start">
+      <button
+        type="button"
+        onClick={() => goToSlide(DOWNLOAD_SLIDE_INDEX)}
+        className="flex w-full cursor-pointer items-center justify-center gap-[4px] whitespace-nowrap rounded-[4px] border-none bg-[var(--Colors-Neutral-100)] px-[24px] py-[10px] font-['PingFang_SC'] text-[20px] font-medium leading-[28px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] sm:w-auto sm:text-[18px] sm:leading-[26px]"
+      >
+        {t("HomeHero.downloadDesktop")}
+        {DownLoadIcon}
+      </button>
+      <Link
+        to="/docs/intro"
+        className="flex w-full cursor-pointer items-center justify-center gap-[4px] whitespace-nowrap rounded-[4px] border border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] px-[24px] py-[10px] font-['PingFang_SC'] text-[20px] font-medium leading-[28px] tracking-[0.15px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:bg-[var(--Colors-Use-Neutral-Bg)] hover:text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:w-auto sm:text-[18px] sm:leading-[26px]"
+      >
+        {t("HomeHero.viewDocs")}
+        <span className="inline-flex text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
+          {viewIcon}
+        </span>
+      </Link>
+    </div>
+  );
+
+  return (
+    <section className="relative box-border flex h-full w-full flex-col items-stretch justify-center overflow-hidden py-[24px] [contain:paint] [transform:translateZ(0)]">
+      {/*
+        对齐 Figma「首页- light」banner：
+        1) 底色 Gold-Bg (#F9F6EF)
+        2) 媒体全幅 cover 贴右（避免 contain 露出竖缝）
+        3) 全幅 Gold-Focus (#F0EAD6) opacity 0.3 压在媒体上
+      */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
+        aria-hidden
+      >
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 h-full w-full object-cover object-right opacity-30 ${
+            isDark ? "lg:opacity-60" : "lg:opacity-100"
+          }`}
+          src={bgVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+        <div
+          className="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Focus)] opacity-30"
+          aria-hidden
+        />
+      </div>
+
+      <div
+        className={`relative z-[1] min-h-0 w-full text-left ${HOME_CONTAINER_CLASS}`}
+      >
+        {/* Figma：Crimson Text 96/96 · Primary */}
+        <div
+          className={`mb-[12px] font-['Crimson_Text'] font-semibold tracking-[0px] text-[color:var(--Colors-Use-Main---web-Primary)] sm:mb-[12px] text-[96px] leading-[80px] sm:text-[clamp(64px,8vh,96px)] sm:leading-[clamp(64px,8vh,96px)]`}
+        >
+          Yak Project
+        </div>
+
+        {/* Figma mobile 393：Noto Serif SC SemiBold 36/56；desktop 64/96 */}
+        <h1
+          className={`m-0 mb-[12px] max-w-[20em] ${isEn ? "font-['Crimson_Text']" : "font-['Noto_Serif_SC']"} text-[36px] font-semibold leading-[56px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mb-[12px] sm:text-[clamp(36px,5vh,64px)] sm:leading-[clamp(48px,7.5vh,96px)]`}
+        >
+          <span className="block">
+            {t("HomeHero.titleBefore")}
+            <span className={titleMarkClass}>
+              {t("HomeHero.titleHighlight1")}
+            </span>
+          </span>
+          <span className="block">
+            <span className={titleMarkClass}>
+              {t("HomeHero.titleHighlight2")}
+            </span>
+          </span>
+        </h1>
+
+        {/* Figma：PingFang SC 20/28 */}
+        <div className="mt-[8px] font-['PingFang_SC'] text-[20px] font-normal leading-[28px] text-[color:var(--Colors-Neutral-100)] sm:mt-[12px] sm:text-[18px] sm:leading-[28px] md:mb-[40px]">
+          {t("HomeHero.subtitle")}
+        </div>
+
+        <div className="hidden sm:block">{actions}</div>
+      </div>
+
+      <div
+        className={`absolute inset-x-0 bottom-[20px] z-[1] sm:hidden ${HOME_CONTAINER_CLASS}`}
+      >
+        {actions}
+      </div>
+    </section>
+  );
+};
+
+export default HomeHero;

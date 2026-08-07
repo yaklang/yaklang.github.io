@@ -1,4 +1,6 @@
 /* stylelint-disable docusaurus/copyright-header */
+@import "./fonts.scss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,8 +29,14 @@
   --ifm-color-primary-lightest: #79bce9;
   --ifm-code-font-size: 95%;
 
+  // 新版导航栏高度 80px，覆盖 Docusaurus 默认的 60px
+  --ifm-navbar-height: 80px;
+
   --base-font-color: #1e1f23;
   --base-theme-color: #ff7d23;
+
+  // 顶部加载进度条颜色使用 Gold Border
+  --docusaurus-progress-bar-color: var(--Colors-Use-Main---Gold-Border);
 }
 
 .docusaurus-highlight-code-line {
@@ -46,14 +54,41 @@ html,
 body {
   scroll-behavior: auto;
   // min-width: 768px;
+  background-color: var(--Colors-Use-Main---Gold-Bg);
+}
+
+/* 页面右侧滚动条：轨道 Main-Bg，滑块 Main-Focus */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--Colors-Use-Main---Gold-Border) var(--Colors-Use-Main-Bg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--Colors-Use-Main-Bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--Colors-Use-Main---Gold-Border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--Colors-Use-Main---Gold-Border);
 }
 
 $REM: 16;
+
 @function REM($n) {
   @return calc($n / $REM) * 1rem;
 }
 
 $max-width: REM(8000);
+
 .main-wrapper {
   max-width: $max-width;
   margin: 0 auto;
@@ -65,55 +100,26 @@ $max-width: REM(8000);
   // 横向溢出、正文被推出视口、左侧出现大片空白。
 }
 
-// 解决文档布局被固定导航栏遮挡/重叠的问题
-// 背景：本站导航栏被改为 position: fixed(见 navbar.scss)，脱离文档流，整个文档
-//       布局(docsWrapper > docRoot)从 y=0 起算，需要各自补足一个导航栏高度的顶距。
-// 关键事实(来自 Docusaurus 默认 CSS)：
-//   - docRoot / docMainContainer 均为 display:flex；左侧栏 <aside> 与正文 <main>
-//     (docMainContainer)是 docRoot 的两个 flex 子项。
-//   - 左侧栏 <aside> 的内层包裹 .sidebar 已自带 padding-top: var(--ifm-navbar-height)，
-//     且滚动视口 .sidebarViewport 为 sticky top:0；只要 <aside> 本身落在 y=0，
-//     侧栏条目就会被这段 padding 顶到导航栏下方(滚动时 padding 区落在不透明导航栏后)。
-//   - 正文列：早期用 .container { margin-top } 不可靠(flex 布局下未能把正文推下，
-//     表现为正文/面包屑顶进导航栏)。改用对正文侧 flex 子项 docMainContainer 加
-//     padding-top —— padding 不会被折叠、必定生效，且只影响正文这一侧。
-// 正确方案(两侧各补各的，互不叠加)：
-//   - 正文：docMainContainer 补 padding-top = 导航栏高度；
-//   - 侧栏：把 Docusaurus 默认的 margin-top:-navbar-height 归零，让 <aside> 回到 y=0，
-//           其余交给 .sidebar 自带的 padding-top 处理。
-// 切勿给共同祖先 docRoot 加 padding-top：那会和 .sidebar 自带的 padding-top 叠加，
-//   导致侧栏顶部凭空多出一个导航栏高度的空白(搜索框被压低一截)。
 html.docs-wrapper {
   [class*="docMainContainer_"] {
     padding-top: var(--ifm-navbar-height);
   }
 
-  // 修复：固定导航栏下，短页面(如各章概述落地页)左侧目录顶到导航栏上方的 BUG。
-  // 背景：本站 navbar 改为 position:fixed(脱离文档流)，而 Docusaurus 默认侧栏容器仍带
-  //       margin-top: calc(-1 * navbar-height)(该值假设 navbar 在文档流内/sticky)。
-  //       当正文比目录短时，flex 行高被压缩，sticky 侧栏被矮容器约束而上移约 60px，
-  //       导致目录覆盖到导航栏之上。取消该负外边距即可让 sticky 始终从导航栏下方起算。
-  @media (min-width: 997px) {
-    .theme-doc-sidebar-container {
-      margin-top: 0;
-    }
-  }
-
   // 正文左右留白：给文档正文列增加克制的内边距，让内容不贴左侧目录/右侧 TOC，
   // 整体更精致。仅桌面端生效(移动端保持紧凑)，并随视口分级放大。
-  // docItemContainer 的 hash 后缀每次构建会变，用前缀匹配保证稳定。
-  // box-sizing 为 border-box，内边距只压缩内容宽度，不会造成横向溢出。
   @media (min-width: 997px) {
     [class*="docItemContainer_"] {
       padding-inline: 1.5rem;
     }
   }
+
   @media (min-width: 1440px) {
     [class*="docItemContainer_"] {
       padding-inline: 2.75rem;
     }
   }
 }
+
 .theme-doc-sidebar-menu.menu__list {
   font-size: 13px;
 }
@@ -127,12 +133,14 @@ html.docs-wrapper {
 .theme-doc-sidebar-menu .menu__list-item-collapsible {
   min-width: 0;
 }
+
 .menu__list .menu__link {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.menu__list .menu__link > span,
+
+.menu__list .menu__link>span,
 .menu__list [class*="linkLabel_"],
 .menu__list [class*="categoryLinkLabel_"] {
   display: block;
@@ -154,6 +162,7 @@ aside nav:not(.menu) a {
 img {
   -webkit-user-drag: none;
 }
+
 video {
   -webkit-user-drag: none;
 }
@@ -176,44 +185,53 @@ video {
 // 注意: prism-react-renderer 的 github 主题会给 token 加“行内 style”，
 // 优先级高于普通 class，因此这里统一用 !important 覆盖，保证 yakit 配色生效。
 .language-yak {
+
   // 关键字 break/func/if/for... 对应 yakit keyword(蓝)
   .token.keyword {
     color: #2f6ad9 !important;
     font-weight: 600;
   }
+
   // 空值常量 nil/undefined 与布尔 true/false，沿用关键字蓝
   .token.boolean,
   .token.constant {
     color: #2f6ad9 !important;
   }
+
   // 内置基础类型 int/string/bool... 对应 yakit basic.type(品红)
   .token.builtin,
   .token.class-name {
     color: #a826a4 !important;
   }
+
   // 函数调用 / 库方法 对应 yakit globals & libFunction(橙棕)
   .token.function {
     color: #c4652f !important;
   }
+
   // 字符串(含 f-string / 反引号原始串) 对应 yakit string(橄榄绿)
   .token.string,
   .token.char {
     color: #5f8700 !important;
   }
+
   // 注释 对应 yakit comment(灰)
   .token.comment {
     color: #8a8f99 !important;
     font-style: italic;
   }
+
   // 数字 对应 yakit number(湖蓝)
   .token.number {
     color: #2a8fbd !important;
   }
+
   // 运算符 对应 yakit operator(紫)
   .token.operator {
     color: #9a5fd0 !important;
     background: transparent !important;
   }
+
   .token.punctuation {
     color: #5c6370 !important;
   }
@@ -238,11 +256,13 @@ video {
   p {
     margin-bottom: 0.55rem;
   }
+
   ul,
   ol {
     margin-bottom: 0.6rem;
     padding-left: 1.2rem;
   }
+
   li {
     margin-top: 0.12rem;
     margin-bottom: 0.12rem;
@@ -252,16 +272,19 @@ video {
   h1 {
     margin-bottom: 0.8rem;
   }
+
   h2 {
     margin-top: 1.5rem;
     margin-bottom: 0.7rem;
     padding-bottom: 0.3rem;
     border-bottom: 1px solid var(--ifm-toc-border-color);
   }
+
   h3 {
     margin-top: 1.15rem;
     margin-bottom: 0.45rem;
   }
+
   h4,
   h5,
   h6 {
@@ -270,7 +293,7 @@ video {
   }
 
   // 加粗小节标签(如 **必填参数** / **示例**)与其后的表格/代码块贴紧
-  p > strong:only-child {
+  p>strong:only-child {
     display: inline-block;
     margin-top: 0.4rem;
   }
@@ -289,25 +312,30 @@ video {
     position: relative;
     margin: 0 0 0.9rem;
   }
+
   .yakdoc-table__scroll {
     overflow-x: auto;
   }
+
   table {
     margin-bottom: 0; // 外边距交给 .yakdoc-table 包装层
     font-size: 1em;
     line-height: 1.45;
   }
+
   // 折叠态：表格取自然宽度(至少铺满容器)，单元格不换行，超宽则横向滚动
-  .yakdoc-table__scroll > table {
+  .yakdoc-table__scroll>table {
     display: table;
     width: max-content;
     min-width: 100%;
   }
+
   table th,
   table td {
     padding: 0.3rem 0.6rem;
     white-space: nowrap;
   }
+
   table thead th {
     background: var(--ifm-table-head-background, #f5f6f8);
   }
@@ -316,10 +344,12 @@ video {
   .yakdoc-table--expanded .yakdoc-table__scroll {
     overflow-x: visible;
   }
-  .yakdoc-table--expanded .yakdoc-table__scroll > table {
+
+  .yakdoc-table--expanded .yakdoc-table__scroll>table {
     width: 100%;
     table-layout: auto;
   }
+
   .yakdoc-table--expanded table th,
   .yakdoc-table--expanded table td {
     white-space: normal;
@@ -344,10 +374,12 @@ video {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     transition: opacity 0.15s ease, filter 0.15s ease;
   }
+
   .yakdoc-table:hover .yakdoc-table__toggle,
   .yakdoc-table--expanded .yakdoc-table__toggle {
     opacity: 1;
   }
+
   .yakdoc-table__toggle:hover {
     filter: brightness(1.08);
   }
@@ -358,10 +390,237 @@ video {
     padding-left: 0.3rem;
     transition: opacity 0.15s ease;
   }
-  *:hover > .hash-link,
+
+  *:hover>.hash-link,
   .hash-link:focus {
     opacity: 1;
     color: var(--base-theme-color);
+  }
+}
+
+// =================================================================
+// 新版首页 / 文档 / 博客共享的 Gold 主题覆盖
+// =================================================================
+// 这些规则在 html.docs-wrapper（文档页）和 html.blog-wrapper（博客页）下生效，
+// 让文档、博客也使用新版首页的 Gold 语义 token，保持全站视觉一致。
+html.docs-wrapper,
+html.blog-wrapper {
+  // 文档 / 博客正文背景改为新首页主背景色
+  --ifm-background-color: var(--Colors-Use-Main---Gold-Bg);
+  --ifm-navbar-background-color: var(--Colors-Use-Main---Gold-Bg);
+
+  // 文字颜色使用新首页中性文字 token
+  --ifm-font-color-base: var(--Colors-Use-Neutral-Text-2-Primary);
+  --ifm-heading-color: var(--Colors-Use-Neutral-Text-1-Title);
+  --ifm-color-secondary-contrast: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+  // 链接颜色使用新首页主题色
+  --ifm-link-color: var(--Colors-Use-Main---web-Primary);
+  --ifm-link-hover-color: var(--Colors-Use-Main---web-Primary);
+  --ifm-color-primary: var(--Colors-Use-Main---web-Primary);
+
+  // 文档/博客页顶部加载进度条也使用 Gold Border
+  --docusaurus-progress-bar-color: var(--Colors-Use-Main---Gold-Border);
+
+  // 侧边栏目录背景与边框
+  --ifm-menu-color: var(--Colors-Use-Neutral-Text-2-Primary);
+  --ifm-menu-color-background-active: var(--Colors-Use-Main---Gold-Bg-Hover);
+  --ifm-menu-color-background-hover: var(--Colors-Use-Main---Gold-Bg-Hover);
+  --ifm-toc-link-color: var(--Colors-Use-Neutral-Text-3-Secondary);
+  --ifm-toc-border-color: var(--Colors-Use-Main---Gold-Focus);
+
+  background-color: var(--Colors-Use-Main---Gold-Bg);
+
+  // 正文容器
+  .theme-doc-markdown,
+  .markdown {
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--Colors-Use-Neutral-Text-1-Title);
+    }
+
+    a {
+      color: var(--Colors-Use-Main---web-Primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // 侧边栏
+  .theme-doc-sidebar-container {
+    background-color: var(--Colors-Use-Main---Gold-Bg);
+    border-right-color: var(--Colors-Use-Main---Gold-Focus) !important;
+
+    .theme-doc-sidebar-menu {
+      .menu__link {
+        color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+        &--active {
+          color: var(--Colors-Use-Main---web-Primary);
+          background: var(--Colors-Use-Main---Gold-Bg-Hover);
+        }
+
+        &:hover {
+          color: var(--Colors-Use-Main---web-Primary);
+          background: var(--Colors-Use-Main---Gold-Bg-Hover);
+        }
+      }
+
+      .menu__caret {
+        color: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+        &:hover {
+          color: var(--Colors-Use-Main---web-Primary);
+        }
+      }
+    }
+  }
+
+  // 移动端目录抽屉
+  .theme-doc-sidebar-menu {
+    background-color: var(--Colors-Use-Main---Gold-Bg);
+  }
+
+  // TOC 目录
+  .theme-doc-toc-desktop,
+  .table-of-contents {
+    border-left-color: var(--Colors-Use-Main---Gold-Focus);
+
+    .table-of-contents__link {
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+      &:hover,
+      &--active {
+        color: var(--Colors-Use-Main---web-Primary);
+      }
+    }
+  }
+
+  // 面包屑
+  .theme-doc-breadcrumbs {
+    --ifm-breadcrumb-color-active: var(--Colors-Use-Main---web-Primary);
+
+    .breadcrumbs__item {
+      &--active {
+        .breadcrumbs__link {
+          color: var(--Colors-Use-Main---web-Primary);
+          background: var(--Colors-Use-Main---Gold-Bg-Hover);
+        }
+      }
+    }
+
+    .breadcrumbs__link {
+      color: var(--Colors-Use-Neutral-Text-3-Secondary);
+
+      &:hover {
+        color: var(--Colors-Use-Main---web-Primary);
+        background: var(--Colors-Use-Main---Gold-Bg-Hover);
+      }
+    }
+  }
+
+  // 分页
+  .pagination-nav {
+    a {
+      border-color: var(--Colors-Use-Main---Gold-Focus);
+      background: var(--Colors-Use-Main---Gold-Bg-Hover);
+      color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+      &:hover {
+        border-color: var(--Colors-Use-Main---web-Primary);
+        color: var(--Colors-Use-Main---web-Primary);
+      }
+    }
+
+    .pagination-nav__sublabel {
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
+    }
+
+    .pagination-nav__label {
+      color: var(--Colors-Use-Neutral-Text-1-Title);
+    }
+  }
+
+  // 代码块
+  .theme-code-block {
+    --prism-background-color: var(--Colors-Use-Basic-Black);
+    --ifm-pre-background: var(--Colors-Use-Basic-Black);
+  }
+
+  // 提示框
+  .theme-admonition {
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    border-color: var(--Colors-Use-Main---Gold-Focus);
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+    .admonitionHeading_node_modules-\@docusaurus\/theme-classic-lib-theme-Admonition-Layout-styles-module {
+      color: var(--Colors-Use-Neutral-Text-1-Title);
+    }
+  }
+
+  // 编辑此页 / 更新时间元信息
+  .theme-edit-this-page,
+  .theme-last-updated {
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
+  }
+
+  .theme-edit-this-page {
+    &:hover {
+      color: var(--Colors-Use-Main---web-Primary);
+    }
+  }
+
+  // 标签 / 版本徽标
+  .theme-doc-version-badge,
+  .tag {
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    color: var(--Colors-Use-Main---web-Primary);
+    border-color: var(--Colors-Use-Main---Gold-Focus);
+  }
+
+  // hash-link 锚点
+  .hash-link {
+    color: var(--Colors-Use-Main---web-Primary);
+  }
+
+  // 搜索框
+  .navbar__search-input,
+  .DocSearch-Button {
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    border-color: var(--Colors-Use-Main---Gold-Focus);
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+    &::placeholder {
+      color: var(--Colors-Use-Neutral-Text-4-Help-text);
+    }
+  }
+
+  // 文档页底部 footer 上方无缝衔接
+  .main-wrapper {
+    background: var(--Colors-Use-Main---Gold-Bg);
+  }
+}
+
+// 博客页额外覆盖（博客复用 docs-wrapper，但为了防遗漏单独覆盖）
+html.blog-wrapper {
+  background-color: var(--Colors-Use-Main---Gold-Bg);
+
+  .main-wrapper {
+    background: var(--Colors-Use-Main---Gold-Bg);
+  }
+
+  .blog-list-page,
+  .blog-post-page {
+    background: var(--Colors-Use-Main---Gold-Bg);
   }
 }
 
@@ -369,10 +628,15 @@ video {
 @import "../css/doc-image.scss";
 @import "../css/navbar.scss";
 @import "../css/blog.scss";
-@import "../theme/Footer/footer.scss";
+// @import "../theme/Footer/footer.scss";
+// 新版首页：@yakit-libs/color Gold 主题语义色（亮/暗）
+@import "./yakit-theme-gold.css";
+// 首页专用变量 + 旧变量名兼容别名
+@import "../components/homeNew/_tokens.scss";
 // page style file
 @import "../components/home.scss";
 @import "../components/team.scss";
 @import "../components/enterpriseCollaboration.scss";
 @import "../pages/middle.scss";
+@import "../pages/download.scss";
 @import "../components/irify.scss";

@@ -33,6 +33,7 @@
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "fflate": "^0.8.3",
+    "gsap": "^3.15.0",
     "i18next": "^23.16.8",
     "postcss": "^8.4.49",
     "prism-react-renderer": "^2.4.1",

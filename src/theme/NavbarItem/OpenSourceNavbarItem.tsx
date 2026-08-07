@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import { useTranslation } from "react-i18next";
 import {
   OPEN_SOURCE_PROJECTS,
   OpenSourceCards,
@@ -12,6 +13,27 @@ interface Props {
   onClick?: () => void;
   // 兼容 docusaurus 透传的其它字段
   [key: string]: unknown;
+}
+
+/** 开源生态 mega-menu 面板内容（可供 antd Dropdown / 原生 navbar 复用） */
+export function OpenSourceMegaMenu({ to = "/opensource" }: { to?: string }) {
+  const { t } = useTranslation();
+  return (
+    <>
+      <div className="os-megamenu__head">
+        <div className="os-megamenu__titles">
+          <span className="os-megamenu__title">{t("OpenSourcePage.title")}</span>
+          <span className="os-megamenu__subtitle">
+            {t("OpenSourcePage.subtitle")}
+          </span>
+        </div>
+        <Link className="os-megamenu__all" to={to}>
+          {t("OpenSourcePage.viewAll")}
+        </Link>
+      </div>
+      <OpenSourceCards variant="menu" limit={6} />
+    </>
+  );
 }
 
 // 自定义导航项："开源" 下拉。
@@ -56,18 +78,7 @@ export default function OpenSourceNavbarItem({
         {label}
       </Link>
       <div className="dropdown__menu os-megamenu">
-        <div className="os-megamenu__head">
-          <div className="os-megamenu__titles">
-            <span className="os-megamenu__title">Yak Project 开源生态</span>
-            <span className="os-megamenu__subtitle">
-              语言、工具与 AI 安全的全部开源项目
-            </span>
-          </div>
-          <Link className="os-megamenu__all" to={to}>
-            查看全部 →
-          </Link>
-        </div>
-        <OpenSourceCards variant="menu" />
+        <OpenSourceMegaMenu to={to} />
       </div>
     </div>
   );
