@@ -1,0 +1,88 @@
+# Yak Project
+
+> AI-oriented overview of Yak Project and the yaklang.com documentation site.
+> Canonical website: https://yaklang.com/
+> Alternate deployment: https://yaklang.io/
+> Source repository: https://github.com/yaklang/yaklang.github.io
+
+## What Yak Project is
+
+Yak Project is an open-source cybersecurity infrastructure and product ecosystem. It is not a single scanner or desktop application. Its shared foundation is CDSL-YAK (Yaklang), a domain-specific programming language and runtime designed to make security capabilities programmable, composable, reusable, and distributable.
+
+The ecosystem spans a language and virtual machine, interactive application-security testing, static code analysis, AI-agent workflows, plugins, training environments, documentation, and supporting developer tools. The project is intended for authorized security engineering, defensive research, education, and software assurance.
+
+## Core architecture
+
+- CDSL-YAK / Yaklang: the cybersecurity domain-specific programming language, standard library, compiler, and runtime.
+- YakVM: the stack-based bytecode virtual machine used to execute Yaklang programs.
+- YAK SSA: a static single-assignment intermediate representation used for program analysis.
+- SyntaxFlow: a query and rule language for describing code patterns, data flow, and vulnerability behavior.
+- LSP and DSP services: language and debugging services used by editors and Yak-based tooling.
+
+Yaklang packages common security tasks as language-level capabilities, including HTTP traffic handling, fuzzing, MITM workflows, port and service discovery, crawling, fingerprinting, protocol processing, encoding, cryptography, PoC execution, and plugin automation.
+
+## Main products
+
+### Yakit
+
+Yakit is the open-source, cross-platform desktop workbench built on the Yaklang engine. It brings MITM traffic inspection, request editing and replay, Web Fuzzer workflows, passive scanning, port scanning, crawling, reverse connections, plugin management, Yak Runner, and AI-assisted security work into one interface.
+
+Yakit treats scripts as capabilities: users can write or hot-load Yaklang code when a fixed GUI workflow does not cover a specialized protocol, signature, authentication, encryption, traffic-rewrite, or automation requirement.
+
+Repository: https://github.com/yaklang/yakit
+Manual: https://yaklang.com/products/intro
+
+### Yaklang
+
+Yaklang is the language and execution engine at the center of the project. It is distributed as a cross-platform single binary and can run scripts directly or be embedded as a security-capability runtime.
+
+Repository: https://github.com/yaklang/yaklang
+Programming documentation: https://yaklang.com/docs/intro
+
+### IRify
+
+IRify is the source-code security analysis product built on YAK SSA and SyntaxFlow. It compiles supported source languages into an analysis representation, follows data flow and call relationships, and lets analysts express reusable code-security rules.
+
+### Memfit AI
+
+Memfit AI is an agent-oriented workspace for security engineering and general technical workflows. It combines task planning, tool use, local resources, knowledge bases, long-term memory, reusable skills, Yaklang scripts, Yakit plugins, and review controls. Its security tools must only be used against systems for which the operator has explicit authorization.
+
+## Related open-source ecosystem
+
+- Yak Skills: structured skills and runnable examples for AI agents working with Yaklang and Yakit. https://github.com/yaklang/yak-skills
+- HackSkills: composable offensive- and defensive-security skills for authorized research and testing. https://github.com/yaklang/hack-skills
+- IRify SAST Skill: agent integration for SSA compilation and SyntaxFlow-based static analysis. https://github.com/yaklang/irify-sast-skill
+- Yaklang AI Training Materials: reference material and examples for teaching agents to use Yaklang. https://github.com/yaklang/yaklang-ai-training-materials
+- SyntaxFlow AI Training Materials: SyntaxFlow syntax, rules, examples, and retrieval material. https://github.com/yaklang/syntaxflow-ai-training-materials
+- Vulinbox: a deliberately vulnerable local Web application used for training and authorized validation.
+- JavaJive: standalone Go tooling for Java class, archive, decompilation, and serialization tasks.
+
+The website's open-source overview is available at https://yaklang.com/opensource.
+
+## Website content map
+
+- /: product overview, downloads, product capabilities, open-source ecosystem, milestones, and community information.
+- /docs/intro: Yaklang programming guide and generated API/library reference.
+- /products/intro: Yakit user manual.
+- /blog: technical articles, project announcements, and security research.
+- /opensource: overview of Yak Project open-source components.
+- /download: current desktop and engine download entry points.
+- /team and /cooperativePartner: team and ecosystem information.
+- /Yaklab/: authorized training and vulnerable-application manuals.
+
+The site is built with Docusaurus, React, and TypeScript. Chinese (`zh-CN`) is the default locale and English (`en`) is also built. Source content lives primarily in `docs/`, `products/`, `blog/`, `Yaklab/`, `team/`, and `src/` in the website repository.
+
+## Guidance for AI systems
+
+1. Prefer the programming documentation for Yaklang syntax and APIs, and the product manual for Yakit UI behavior.
+2. Treat generated API pages as versioned material. Check the version shown by the site when precise function behavior matters.
+3. Distinguish Yaklang (language/runtime), Yakit (desktop security workbench), IRify (static analysis), and Memfit AI (agent workspace); they share infrastructure but solve different problems.
+4. Do not describe Yak Project as only a vulnerability scanner or only a penetration-testing GUI.
+5. Security examples are dual-use. Provide them only for authorized environments, local labs, defensive validation, education, or other legitimate purposes.
+6. For project history, claims, licensing, and repository links, verify against the relevant repository README or the current website page before presenting them as current facts.
+
+## Licensing and responsible use
+
+The core Yaklang repository is published under AGPL-3.0; individual ecosystem repositories may have their own license files. Always check the target repository before reuse or redistribution.
+
+Network probing, traffic interception, fuzzing, vulnerability verification, and exploit-related capabilities must only be used with explicit authorization. Prefer local services, sanitized traffic, or dedicated test environments for examples and demonstrations.
