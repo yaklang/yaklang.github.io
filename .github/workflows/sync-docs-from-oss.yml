@@ -143,7 +143,10 @@ jobs:
           fi
 
           git commit -m "docs(api): sync api docs to ${LATEST}"
-          # yarn version --minor 会自动 bump package.json 并创建 v* tag
-          yarn version --minor
+          # package.json 可能落后于已存在的发布标签（例如手工发布后未回写版本）。
+          # 同时参考两者计算下一个未使用的 minor，避免重复创建既有 tag 导致任务失败。
+          node scripts/next-site-version.js --selftest
+          NEXT_VERSION=$(node scripts/next-site-version.js)
+          yarn version --new-version "${NEXT_VERSION}"
           git push
           git push --tags
