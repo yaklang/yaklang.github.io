@@ -11,7 +11,7 @@
 
 与相邻库的关系：`os` 与 `env`（环境变量）、`exec`（执行命令）、`file`（文件操作）、`hids`（主机监控）协同，是系统层信息采集的基础。
 
-> 共 43 个函数、7 个实例
+> 共 45 个函数、7 个实例
 
 ## 实例
 
@@ -45,6 +45,7 @@
 | [os.GetMachineID](#getmachineid) | - | `string` | 获取每个机器唯一的标识符 |
 | [os.GetRandomAvailableTCPPort](#getrandomavailabletcpport) | - | `int` | 获取一个随机可用的TCP端口 |
 | [os.GetRandomAvailableUDPPort](#getrandomavailableudpport) | - | `int` | 获取一个随机可用的UDP端口 |
+| [os.GetRouteInfo](#getrouteinfo) | `target string` | `map[string]string` | 返回当前系统到指定目标的实际路由信息. |
 | [os.Getegid](#getegid) | - | `int` | 获取当前进程的有效组ID |
 | [os.Getenv](#getenv) | `key string` | `string` | 获取指定的环境变量的值，如果不存在则返回空字符串 |
 | [os.Geteuid](#geteuid) | - | `int` | 获取当前进程的有效用户ID |
@@ -62,6 +63,7 @@
 | [os.LookupEnv](#lookupenv) | `key string` | `string, bool` | 获取指定的环境变量的值，并返回该变量是否存在 |
 | [os.LookupHost](#lookuphost) | `i string` | `[]string` | 通过DNS服务器，根据域名查找IP |
 | [os.LookupIP](#lookupip) | `i string` | `[]string` | 通过DNS服务器，根据域名查找IP |
+| [os.LookupSystemIPWithTimeout](#lookupsystemipwithtimeout) | `host string, seconds float64` | `[]string` | 仅使用操作系统当前配置的 DNS resolver 查询域名， |
 | [os.NewConnectionsWatcher](#newconnectionswatcher) | `pid int32, cb NewRemoteIPCallback, interval time.Duration` | `*ConnectionsWatcher, error` | 针对单个进程创建一个网络连接监控器，发现新的远程 IP 时回调通知 |
 | [os.NewProcessWatcher](#newprocesswatcher) | - | `*ProcessesWatcher` | 创建并初始化一个新的系统进程监控器，用于监控进程的创建与退出 |
 | [os.Pipe](#pipe) | - | `*os.File, *os.File, error` | 创建一个管道，返回一个读取端和一个写入端以及错误 |
@@ -451,6 +453,46 @@ GetRandomAvailableUDPPort() int
 
 ``````````````yak
 udp.Serve("127.0.0.1", os.GetRandomAvailableTCPPort())
+``````````````
+
+---
+
+### GetRouteInfo {#getrouteinfo}
+
+```go
+GetRouteInfo(target string) map[string]string
+```
+
+返回当前系统到指定目标的实际路由信息.
+
+该函数只读取内核路由表与网卡信息，不修改路由，因此不需要
+
+root/Administrator 权限. 典型用途是让 Yak 脚本判断某个具体目标
+
+是否经过 utun/tun/wg 等隧道，而不是仅因为系统里存在一张隧道
+
+网卡就产生误判.
+
+返回 map 固定包含 target/interface/gateway/source/error 五个键；
+
+成功时 error 为空字符串，失败时其他路由字段可能为空.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| target | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `map[string]string` |  |
+
+**示例**
+
+``````````````yak
+os.GetRouteInfo("198.18.1.2") // {"interface":"utun4", ...}
 ``````````````
 
 ---
@@ -891,6 +933,32 @@ LookupIP(i string) []string
 ``````````````yak
 os.LookupIP("www.yaklang.com")
 ``````````````
+
+---
+
+### LookupSystemIPWithTimeout {#lookupsystemipwithtimeout}
+
+```go
+LookupSystemIPWithTimeout(host string, seconds float64) []string
+```
+
+仅使用操作系统当前配置的 DNS resolver 查询域名，
+并用 seconds 限制整个查询耗时。它不会在系统 DNS 返回 NXDOMAIN 后继续遍历
+Yak 的公共 DNS fallback，因此适合探测本机 DNS/TUN 行为，且不会因外部 DNS
+不可达而长时间阻塞。
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| host | `string` |  |
+| seconds | `float64` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` |  |
 
 ---
 

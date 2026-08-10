@@ -10,7 +10,7 @@
 
 与相邻库的关系：`ssa` 负责"把代码编译成可查询的程序"，`syntaxflow` 在其之上写规则做查询，`sfreport` 输出审计报告，`risk` 记录代码风险；常配合 `git`/`filesys` 提供源码。
 
-> 共 50 个函数、7 个实例
+> 共 51 个函数、7 个实例
 
 ## 实例
 
@@ -44,8 +44,8 @@
 | [ssa.NewResultFromDB](#newresultfromdb) | `resultID uint, force ...bool` | `*SyntaxFlowResult, error` | LoadResultByID 根据结果 ID 从数据库加载已保存的 SyntaxFlow 查询结果（导出名为 ssa.NewResultFromDB） |
 | [ssa.NewSSAProject](#newssaproject) | `opts ...ssaconfig.Option` | `*SSAProject, error` | 根据配置选项创建一个 SSA 项目对象（导出名为 ssa.NewSSAProject） |
 | [ssa.Parse](#parse) | `code string, opts ...ssaconfig.Option` | `*Program, error` | 将一段源码编译为 SSA 程序对象，用于后续的 SyntaxFlow 查询与静态分析 |
-| [ssa.ParseLocalProject](#parselocalproject) | `path string, opts ...ssaconfig.Option` | `Programs, error` | ParseProjectFromPath 编译本地路径下的整个项目为 SSA 程序集合（导出名为 ssa.ParseLocalProject） |
-| [ssa.ParseProject](#parseproject) | `opts ...ssaconfig.Option` | `Programs, error` | 根据编译选项编译一个项目为 SSA 程序集合（导出名为 ssa.ParseProject） |
+| [ssa.ParseLocalProject](#parselocalproject) | `path string, opts ...ssaconfig.Option` | `Programs, error` | ParseProjectFromPath compiles a local directory into SSA programs (alias: ssa.ParseLocalProject). |
+| [ssa.ParseProject](#parseproject) | `opts ...ssaconfig.Option` | `Programs, error` | compiles a project from options (local FS, git, etc.). |
 
 ## 函数详情
 
@@ -288,7 +288,7 @@ New 创建一个 SSA 配置对象（导出名为 ssa.NewConfig）
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 37 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -353,7 +353,7 @@ NewSSAProject(opts ...ssaconfig.Option) (*SSAProject, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 37 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -389,7 +389,7 @@ Parse(code string, opts ...ssaconfig.Option) (*Program, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 37 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -414,32 +414,24 @@ assert result != nil, "syntaxflow result should not be nil"
 ParseLocalProject(path string, opts ...ssaconfig.Option) (Programs, error)
 ```
 
-ParseProjectFromPath 编译本地路径下的整个项目为 SSA 程序集合（导出名为 ssa.ParseLocalProject）
+ParseProjectFromPath compiles a local directory into SSA programs (alias: ssa.ParseLocalProject).
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| path | `string` | 项目所在的本地目录路径 |
+| path | `string` |  |
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 37 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `Programs` | SSA 程序集合 |
-| r2 | `error` | 错误信息 |
-
-**示例**
-
-``````````````yak
-// 编译本地某个 Java 项目（示意性示例，需替换为真实路径）
-progs = ssa.ParseLocalProject("/tmp/my-java-project", ssa.withLanguage(ssa.Java))~
-println(len(progs))
-``````````````
+| r1 | `Programs` |  |
+| r2 | `error` |  |
 
 ---
 
@@ -449,28 +441,18 @@ println(len(progs))
 ParseProject(opts ...ssaconfig.Option) (prog Programs, err error)
 ```
 
-根据编译选项编译一个项目为 SSA 程序集合（导出名为 ssa.ParseProject）
-
-与 ParseLocalProject 不同，本函数通过选项指定代码来源（本地文件系统、git 等）
+compiles a project from options (local FS, git, etc.).
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 37 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 38 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| prog | `Programs` | SSA 程序集合 |
-| err | `error` | 错误信息 |
-
-**示例**
-
-``````````````yak
-// 通过选项指定本地代码目录进行编译（示意性示例，需替换为真实路径）
-progs = ssa.ParseProject(ssa.withLanguage(ssa.Java), ssa.withProgramName("demo"))~
-println(len(progs))
-``````````````
+| prog | `Programs` |  |
+| err | `error` |  |
 
 ---
 
@@ -499,6 +481,7 @@ println(len(progs))
 | `ssa.withConcurrency` | `concurrency int` | `Option` | WithCompileConcurrency 设置编译并发数 |
 | `ssa.withConfigInfo` | `input map[string]any` | `Option` | WithCodeSourceMap 以 map 形式批量设置代码源配置 |
 | `ssa.withContext` | `ctx context.Context` | `Option` | 为 SSA 编译/查询设置上下文 |
+| `ssa.withDebugDir` | `dir string` | `Option` | sets the debug/pprof output directory. |
 | `ssa.withDefaultExcludeFunc` | `excludeFiles ...string` | `Option` | WithCompileExcludeFiles 设置编译时排除的文件 |
 | `ssa.withDescription` | `description string` | `Option` | WithProgramDescription 设置程序描述 |
 | `ssa.withEnableIncrementalCompile` | `enable bool` | `Option` | 启用增量编译 |
