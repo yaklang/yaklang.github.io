@@ -1,7 +1,24 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { execSync } = require("node:child_process");
 
 const MAX_DESCRIPTION_LENGTH = 180;
+
+// 取源文件最后一次 git 提交时间（ISO 8601），作为结构化数据的 dateModified。
+// 不可用（非 git 仓库 / 文件未纳入版本控制）时返回 null，调用方自行跳过。
+function gitMtime(siteDir, relPath) {
+  try {
+    const out = execSync(`git log -1 --format=%cI -- "${relPath}"`, {
+      cwd: siteDir,
+      stdio: ["ignore", "pipe", "ignore"],
+      encoding: "utf8",
+    });
+    const value = out.trim();
+    return value || null;
+  } catch {
+    return null;
+  }
+}
 
 function stripMarkdown(value) {
   return value
@@ -180,7 +197,7 @@ function ensureNoindex(html) {
     : appendHeadTag(html, robotsTag);
 }
 
-function buildDocumentGraph({ url, title, description, language, segments }) {
+function buildDocumentGraph({ url, title, description, language, segments, dateModified }) {
   const pageUrl = new URL(url);
   const origin = pageUrl.origin;
   const canonicalSegments = pageUrl.pathname.split("/").filter(Boolean);
@@ -227,6 +244,12 @@ function buildDocumentGraph({ url, title, description, language, segments }) {
         author: { "@id": `${origin}/#organization` },
         publisher: { "@id": `${origin}/#organization` },
         isPartOf: { "@id": `${origin}/#website` },
+        ...(dateModified ? { datePublished: dateModified, dateModified } : {}),
+        // 指向页面主内容容器，便于语音助手/语音搜索摘录关键段落
+        speakable: {
+          "@type": "WebPageElement",
+          cssSelector: ["article", ".theme-doc-markdown", ".markdown", "h1", "h2"],
+        },
       },
       {
         "@type": "BreadcrumbList",
@@ -244,7 +267,7 @@ function appendJsonLd(html, value) {
   );
 }
 
-function updateBlogPostingJsonLd(html, { url, description }) {
+function updateBlogPostingJsonLd(html, { url, description, dateModified }) {
   return html.replace(
     /(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi,
     (script, open, json, close) => {
@@ -258,6 +281,7 @@ function updateBlogPostingJsonLd(html, { url, description }) {
             : [node?.["@type"]];
           if (!types.includes("BlogPosting")) continue;
           node.description = description;
+          if (dateModified) node.dateModified = dateModified;
           node.author = {
             "@type": "Organization",
             "@id": `${new URL(url).origin}/#organization`,
@@ -364,6 +388,51 @@ function translatedEnRoutes(siteDir) {
   return routes;
 }
 
+// 构建 docs/products/Yaklab 路由 → dateModified 映射（git 最后提交时间）。
+// 用于给 TechArticle 注入新鲜度信号。路由按文件相对路径推导（与
+// translatedEnRoutes 一致），文档若用自定义 slug 需自行扩展。
+function sourceRouteMtime(siteDir) {
+  const map = new Map();
+  const sections = [
+    ["docs", "/docs"],
+    ["products", "/products"],
+    ["Yaklab", "/Yaklab"],
+  ];
+  for (const [dir, prefix] of sections) {
+    const root = path.join(siteDir, dir);
+    if (!fs.existsSync(root)) continue;
+    for (const f of walkMarkdownFiles(root)) {
+      const rel = path
+        .relative(root, f)
+        .replace(/\.(md|mdx)$/, "")
+        .split(path.sep)
+        .join("/");
+      const mtime = gitMtime(siteDir, path.relative(siteDir, f));
+      if (mtime) map.set(`${prefix}/${rel}`, mtime);
+    }
+  }
+  return map;
+}
+
+// 构建博客路由 → { datePublished, dateModified } 映射。
+// datePublished 取 frontmatter date；dateModified 取 git 最后提交时间。
+function blogRouteMeta(blogRoot, siteDir) {
+  const map = new Map();
+  if (!fs.existsSync(blogRoot)) return map;
+  for (const entry of fs.readdirSync(blogRoot, { withFileTypes: true })) {
+    if (!entry.isFile() || !/\.mdx?$/.test(entry.name)) continue;
+    const file = path.join(blogRoot, entry.name);
+    const markdown = fs.readFileSync(file, "utf8");
+    const slug = frontmatterValue(markdown, "slug");
+    if (!slug) continue;
+    map.set(`/blog/${slug}`, {
+      datePublished: frontmatterValue(markdown, "date"),
+      dateModified: gitMtime(siteDir, path.relative(siteDir, file)),
+    });
+  }
+  return map;
+}
+
 function enhanceHtmlForRoute(html, page) {
   const normalizedRoute = page.route.replace(/\/$/, "") || "/";
   const localizedRoute = normalizedRoute.replace(/^\/en(?=\/|$)/, "") || "/";
@@ -371,18 +440,28 @@ function enhanceHtmlForRoute(html, page) {
   const isBlogPost =
     /^\/blog\/[^/]+$/.test(localizedRoute) &&
     !/^\/blog\/(archive|authors|tags|page)$/.test(localizedRoute);
-  // 仅对“未翻译的英文页”（zh 内容回退）noindex：以正文 CJK 字数判定（阈值 50）。
-  // 标题/描述可能是英文（如 API 函数名），但正文是中文 → 视为未翻译。
-  // 已翻译为英文的 en 页正文 CJK≈0 → 可索引并进入 sitemap。
-  const isUntranslatedEnglish =
+  // 结构化数据新鲜度：docs/products/Yaklab 取源文件 git 最后提交时间；
+  // 博客取 blogRouteMeta 中的 dateModified（同为 git 最后提交时间）。
+  const sourceMtime =
+    (page.sourceMtime && page.sourceMtime.get(localizedRoute)) || null;
+  const blogEntry = page.blogMeta && page.blogMeta.get(localizedRoute);
+  const dateModified = sourceMtime || (blogEntry && blogEntry.dateModified) || null;
+  // 英文页判定：已翻译（在白名单内）→ 可索引；否则若正文仍以中文为主（CJK>50，
+  // 含自定义页 team/irify/enterpriseCollaboration 等未翻译页面）→ noindex。
+  // bodyCjkCount 只统计 <article>/<main> 正文，已避开导航/页脚等公共 chrome。
+  const needsEnNoindex =
     page.language === "en" &&
-    /^\/(docs|products|Yaklab|blog)(\/|$)/.test(localizedRoute) &&
+    bodyCjkCount(html) > 50 &&
     !(page.translatedRoutes && page.translatedRoutes.has(page.route));
 
   let result = page.description
     ? replaceMetaDescription(html, page.description)
     : html;
-  result = completeSocialMetadata(result, isBlogPost ? "article" : "website");
+  // 文档/博客均为文章型内容，og:type 用 article 更贴合语义
+  result = completeSocialMetadata(
+    result,
+    isBlogPost || isDocument ? "article" : "website"
+  );
 
   if (isDocument && page.description) {
     const segments = localizedRoute.split("/").filter(Boolean);
@@ -395,13 +474,18 @@ function enhanceHtmlForRoute(html, page) {
         description: page.description,
         language: page.language,
         segments,
+        dateModified,
       })
     );
   }
   if (isBlogPost && page.description) {
-    result = updateBlogPostingJsonLd(result, page);
+    result = updateBlogPostingJsonLd(result, {
+      url: page.url,
+      description: page.description,
+      dateModified,
+    });
   }
-  if (isUntranslatedEnglish) result = ensureNoindex(result);
+  if (needsEnNoindex) result = ensureNoindex(result);
   return result;
 }
 
@@ -486,6 +570,12 @@ module.exports = function geoMetadataPlugin(context) {
       }
 
       const translatedRoutes = translatedEnRoutes(context.siteDir);
+      // 路由 → 源文件最后提交时间 / 博客日期元数据，供结构化数据注入 dateModified
+      const sourceMtime = sourceRouteMtime(context.siteDir);
+      const blogMeta = blogRouteMeta(
+        path.join(context.siteDir, "blog"),
+        context.siteDir
+      );
 
       for (const outputPath of htmlFiles(outDir)) {
         const relative = path.relative(outDir, outputPath);
@@ -512,6 +602,8 @@ module.exports = function geoMetadataPlugin(context) {
         const url = canonicalUrl(html) || `${context.siteConfig.url}${route}`;
         const enhanced = enhanceHtmlForRoute(html, {
           translatedRoutes,
+          sourceMtime,
+          blogMeta,
           route,
           url,
           title: htmlTitle(html),
