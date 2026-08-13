@@ -11,7 +11,12 @@ const organizationSchema = {
             alternateName: ["Yaklang", "Yakit"],
             url: siteUrl,
             logo: `${siteUrl}/img/yaklogo.png`,
-            sameAs: ["https://github.com/yaklang"],
+            sameAs: [
+                "https://yaklang.com",
+                "https://github.com/yaklang",
+                "https://github.com/yaklang/yaklang",
+                "https://github.com/yaklang/yakit",
+            ],
             description:
                 "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
         },
@@ -254,6 +259,10 @@ module.exports = {
                             label: "官方文档",
                             href: "/docs/intro",
                         },
+                        {
+                            label: "常见问题 FAQ",
+                            href: "/faq",
+                        },
                     ],
                 },
                 {
@@ -363,12 +372,10 @@ module.exports = {
                 },
                 sitemap: {
                     lastmod: "date",
-                    ignorePatterns: [
-                        "/en/docs/**",
-                        "/en/products/**",
-                        "/en/Yaklab/**",
-                        "/en/blog/**",
-                    ],
+                    // 不再整体排除 en 路由：已翻译为英文的 en 页应进入 sitemap，
+                    // 未翻译（zh 回退、含 CJK）的 en 页由 geo-metadata-plugin
+                    // 在 postBuild 标记 noindex 后从 sitemap 移除。
+                    ignorePatterns: [],
                 },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),

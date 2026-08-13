@@ -298,12 +298,20 @@ export default function DownloadResources() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
+            "@id": "https://yaklang.com/download#software",
             name: "Yakit",
             applicationCategory: "SecurityApplication",
             operatingSystem: "Windows, macOS, Linux",
             url: "https://yaklang.com/download",
             description:
               t("SiteMetadata.download.schemaDescription"),
+            isAccessibleForFree: true,
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
             author: {
               "@type": "Organization",
               name: "Yak Project",

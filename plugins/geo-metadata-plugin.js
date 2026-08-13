@@ -299,6 +299,71 @@ function removeBreadcrumbJsonLd(html) {
   );
 }
 
+function containsCjk(text) {
+  return (
+    typeof text === "string" &&
+    /[一-鿿㐀-䶿豈-﫿]/.test(text)
+  );
+}
+
+// 统计页面正文中的 CJK 字符数：判断英文页是否仍是中文回退内容。
+// 优先取 <article>（文档/博客正文），避开侧边栏/页脚里未本地化的中文章节标签。
+function bodyCjkCount(html) {
+  const region =
+    html.match(/<article[^>]*>([\s\S]*?)<\/article>/i)?.[1] ||
+    html.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] ||
+    html;
+  const text = region
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, "");
+  const cjk = text.match(/[一-鿿㐀-䶿豈-﫿]/g);
+  return cjk ? cjk.length : 0;
+}
+
+// 递归收集 .md/.mdx 文件
+function walkMarkdownFiles(root) {
+  return fs.readdirSync(root, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(root, entry.name);
+    if (entry.isDirectory()) return walkMarkdownFiles(full);
+    return entry.isFile() && /\.(md|mdx)$/.test(entry.name) ? [full] : [];
+  });
+}
+
+// 扫描 i18n/en 译文目录，确定哪些 en 路由"已翻译"（有真实英文译文文件）。
+// 用作白名单：只有已翻译的 en docs/blog 页可索引，其余（zh 回退）一律 noindex。
+// 新增翻译时只需在 i18n/en/ 放译文文件，无需改代码。
+function translatedEnRoutes(siteDir) {
+  const routes = new Set();
+  const docsPlugins = [
+    ["docusaurus-plugin-content-docs", "/en/docs"],
+    ["docusaurus-plugin-content-docs-products", "/en/products"],
+    ["docusaurus-plugin-content-docs-Yaklab", "/en/Yaklab"],
+  ];
+  for (const [dir, prefix] of docsPlugins) {
+    const root = path.join(siteDir, "i18n", "en", dir, "current");
+    if (!fs.existsSync(root)) continue;
+    for (const f of walkMarkdownFiles(root)) {
+      const rel = path
+        .relative(root, f)
+        .replace(/\.(md|mdx)$/, "")
+        .split(path.sep)
+        .join("/");
+      routes.add(`${prefix}/${rel}`);
+    }
+  }
+  const blogRoot = path.join(siteDir, "i18n", "en", "docusaurus-plugin-content-blog");
+  if (fs.existsSync(blogRoot)) {
+    for (const entry of fs.readdirSync(blogRoot)) {
+      if (!/\.(md|mdx)$/.test(entry)) continue;
+      const md = fs.readFileSync(path.join(blogRoot, entry), "utf8");
+      const slug = frontmatterValue(md, "slug");
+      if (slug) routes.add(`/en/blog/${slug}`);
+    }
+  }
+  return routes;
+}
+
 function enhanceHtmlForRoute(html, page) {
   const normalizedRoute = page.route.replace(/\/$/, "") || "/";
   const localizedRoute = normalizedRoute.replace(/^\/en(?=\/|$)/, "") || "/";
@@ -306,9 +371,13 @@ function enhanceHtmlForRoute(html, page) {
   const isBlogPost =
     /^\/blog\/[^/]+$/.test(localizedRoute) &&
     !/^\/blog\/(archive|authors|tags|page)$/.test(localizedRoute);
+  // 仅对“未翻译的英文页”（zh 内容回退）noindex：以正文 CJK 字数判定（阈值 50）。
+  // 标题/描述可能是英文（如 API 函数名），但正文是中文 → 视为未翻译。
+  // 已翻译为英文的 en 页正文 CJK≈0 → 可索引并进入 sitemap。
   const isUntranslatedEnglish =
     page.language === "en" &&
-    /^\/(docs|products|Yaklab|blog)(\/|$)/.test(localizedRoute);
+    /^\/(docs|products|Yaklab|blog)(\/|$)/.test(localizedRoute) &&
+    !(page.translatedRoutes && page.translatedRoutes.has(page.route));
 
   let result = page.description
     ? replaceMetaDescription(html, page.description)
@@ -416,6 +485,8 @@ module.exports = function geoMetadataPlugin(context) {
         }
       }
 
+      const translatedRoutes = translatedEnRoutes(context.siteDir);
+
       for (const outputPath of htmlFiles(outDir)) {
         const relative = path.relative(outDir, outputPath);
         const localeRoute =
@@ -429,12 +500,18 @@ module.exports = function geoMetadataPlugin(context) {
         );
         const localizedRoute = route.replace(/^\/en(?=\/|$)/, "") || "/";
         const html = fs.readFileSync(outputPath, "utf8");
-        const description =
-          routeDescriptions.get(localizedRoute) ||
-          metaContent(html, "name", "description") ||
-          metaContent(html, "property", "og:description");
+        const isEn = route === "/en" || route.startsWith("/en/");
+        // 英文页用其渲染后的（已翻译）描述，不覆盖为中文源描述；
+        // 否则已翻译的 en 页会被中文描述误判为"未翻译"而 noindex。
+        const description = isEn
+          ? metaContent(html, "name", "description") ||
+            metaContent(html, "property", "og:description")
+          : routeDescriptions.get(localizedRoute) ||
+            metaContent(html, "name", "description") ||
+            metaContent(html, "property", "og:description");
         const url = canonicalUrl(html) || `${context.siteConfig.url}${route}`;
         const enhanced = enhanceHtmlForRoute(html, {
+          translatedRoutes,
           route,
           url,
           title: htmlTitle(html),
