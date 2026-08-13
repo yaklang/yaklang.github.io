@@ -39,6 +39,60 @@ function extractDescription(markdown) {
     : description;
 }
 
+function extractContentDescription(markdown) {
+  const content = markdown
+    .replace(/^---[\s\S]*?---\s*/, "")
+    .replace(/<!--([\s\S]*?)-->/g, "")
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/~~~[\s\S]*?~~~/g, "");
+  const genericLabels = /^(背景|前言|引言|概述|简介|overview|background|introduction)[：:]?$/i;
+  const paragraphs = content
+    .split(/\n\s*\n/)
+    .map((paragraph) =>
+      stripMarkdown(
+        paragraph
+          .split(/\r?\n/)
+          .filter((line) => {
+            const trimmed = line.trim();
+            return (
+              trimmed &&
+              !/^#{1,6}\s/.test(trimmed) &&
+              !/^:::[a-z-]*/i.test(trimmed) &&
+              !/^!\[/.test(trimmed) &&
+              !/^\|/.test(trimmed)
+            );
+          })
+          .join(" ")
+      )
+    )
+    .filter((paragraph) => paragraph.length >= 12 && !genericLabels.test(paragraph));
+
+  let description = "";
+  for (const paragraph of paragraphs) {
+    const separator =
+      description &&
+      !/[。！？.!?]$/.test(description) &&
+      !/^[，。！？、；：,.!?;:]/.test(paragraph)
+        ? " "
+        : "";
+    description += `${separator}${paragraph}`;
+    if (description.length >= 120) break;
+  }
+
+  if (!description) return null;
+  if (description.length <= MAX_DESCRIPTION_LENGTH) return description;
+  const shortened = description.slice(0, MAX_DESCRIPTION_LENGTH - 1);
+  const sentenceEnd = Math.max(
+    shortened.lastIndexOf("。"),
+    shortened.lastIndexOf("！"),
+    shortened.lastIndexOf("？"),
+    shortened.lastIndexOf(". "),
+    shortened.lastIndexOf("! "),
+    shortened.lastIndexOf("? ")
+  );
+  return `${(sentenceEnd >= 80 ? shortened.slice(0, sentenceEnd + 1) : shortened).trimEnd()}…`;
+}
+
 function escapeHtmlAttribute(value) {
   return value
     .replace(/&/g, "&amp;")
@@ -67,6 +121,271 @@ function replaceMetaDescription(html, description) {
   return rewritten.replace("</head>", `${missingTags}</head>`);
 }
 
+function decodeHtmlEntities(value) {
+  const named = {
+    amp: "&",
+    quot: '"',
+    apos: "'",
+    lt: "<",
+    gt: ">",
+    nbsp: " ",
+  };
+  return value.replace(
+    /&(#x[\da-f]+|#\d+|amp|quot|apos|lt|gt|nbsp);/gi,
+    (entity, code) => {
+      if (code[0] !== "#") return named[code.toLowerCase()] ?? entity;
+      const numeric = code[1].toLowerCase() === "x"
+        ? Number.parseInt(code.slice(2), 16)
+        : Number.parseInt(code.slice(1), 10);
+      return Number.isFinite(numeric) ? String.fromCodePoint(numeric) : entity;
+    }
+  );
+}
+
+function metaContent(html, attribute, value) {
+  for (const tag of html.match(/<meta\b[^>]*>/g) || []) {
+    const attributeMatch = tag.match(new RegExp(`\\b${attribute}="([^"]*)"`, "i"));
+    if (!attributeMatch || attributeMatch[1] !== value) continue;
+    return decodeHtmlEntities(tag.match(/\bcontent="([^"]*)"/i)?.[1] || "");
+  }
+  return "";
+}
+
+function appendHeadTag(html, tag) {
+  return html.includes("</head>") ? html.replace("</head>", `${tag}</head>`) : `${tag}${html}`;
+}
+
+function ensureMeta(html, attribute, value, content) {
+  if (!content || metaContent(html, attribute, value)) return html;
+  return appendHeadTag(
+    html,
+    `<meta data-rh="true" ${attribute}="${value}" content="${escapeHtmlAttribute(content)}">`
+  );
+}
+
+function completeSocialMetadata(html, type = "website") {
+  const title = metaContent(html, "property", "og:title");
+  const description = metaContent(html, "property", "og:description");
+  let result = ensureMeta(html, "property", "og:type", type);
+  result = ensureMeta(result, "name", "twitter:title", title);
+  result = ensureMeta(result, "name", "twitter:description", description);
+  return result;
+}
+
+function ensureNoindex(html) {
+  const robotsMatcher = /<meta\b(?=[^>]*\bname="robots")[^>]*>/i;
+  const robotsTag = '<meta data-rh="true" name="robots" content="noindex, nofollow">';
+  return robotsMatcher.test(html)
+    ? html.replace(robotsMatcher, robotsTag)
+    : appendHeadTag(html, robotsTag);
+}
+
+function buildDocumentGraph({ url, title, description, language, segments }) {
+  const pageUrl = new URL(url);
+  const origin = pageUrl.origin;
+  const canonicalSegments = pageUrl.pathname.split("/").filter(Boolean);
+  const localePrefix =
+    language === "en" && canonicalSegments[0] === "en" ? "en" : "";
+  const localizedRoot = `${origin}/${localePrefix ? `${localePrefix}/` : ""}`;
+  const labels = {
+    docs: language === "en" ? "Documentation" : "文档",
+    products: language === "en" ? "Yakit Manual" : "Yakit 使用手册",
+    Yaklab: "YakLab",
+    api: "API",
+  };
+  const itemListElement = [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: language === "en" ? "Home" : "首页",
+      item: localizedRoot,
+    },
+    ...segments.map((segment, index) => ({
+      "@type": "ListItem",
+      position: index + 2,
+      name: index === segments.length - 1 ? title : labels[segment] || segment,
+      item:
+        index === segments.length - 1
+          ? url
+          : `${origin}/${localePrefix ? `${localePrefix}/` : ""}${segments
+              .slice(0, index + 1)
+              .join("/")}`,
+    })),
+  ];
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": `${url}#article`,
+        headline: title,
+        description,
+        url,
+        inLanguage: language,
+        mainEntityOfPage: url,
+        author: { "@id": `${origin}/#organization` },
+        publisher: { "@id": `${origin}/#organization` },
+        isPartOf: { "@id": `${origin}/#website` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement,
+      },
+    ],
+  };
+}
+
+function appendJsonLd(html, value) {
+  return appendHeadTag(
+    html,
+    `<script type="application/ld+json">${JSON.stringify(value).replace(/</g, "\\u003c")}</script>`
+  );
+}
+
+function updateBlogPostingJsonLd(html, { url, description }) {
+  return html.replace(
+    /(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi,
+    (script, open, json, close) => {
+      try {
+        const parsed = JSON.parse(json);
+        const nodes = parsed?.["@graph"] || [parsed];
+        let changed = false;
+        for (const node of nodes) {
+          const types = Array.isArray(node?.["@type"])
+            ? node["@type"]
+            : [node?.["@type"]];
+          if (!types.includes("BlogPosting")) continue;
+          node.description = description;
+          node.author = {
+            "@type": "Organization",
+            "@id": `${new URL(url).origin}/#organization`,
+            name: "Yak Project",
+            url: "https://github.com/yaklang",
+          };
+          node.publisher = { "@id": `${new URL(url).origin}/#organization` };
+          changed = true;
+        }
+        return changed
+          ? `${open}${JSON.stringify(parsed).replace(/</g, "\\u003c")}${close}`
+          : script;
+      } catch {
+        return script;
+      }
+    }
+  );
+}
+
+function removeBreadcrumbJsonLd(html) {
+  return html.replace(
+    /(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi,
+    (script, open, json, close) => {
+      try {
+        const parsed = JSON.parse(json);
+        if (parsed?.["@type"] === "BreadcrumbList") return "";
+        if (!Array.isArray(parsed?.["@graph"])) return script;
+        const filtered = parsed["@graph"].filter(
+          (node) => node?.["@type"] !== "BreadcrumbList"
+        );
+        if (filtered.length === parsed["@graph"].length) return script;
+        if (!filtered.length) return "";
+        parsed["@graph"] = filtered;
+        return `${open}${JSON.stringify(parsed).replace(/</g, "\\u003c")}${close}`;
+      } catch {
+        return script;
+      }
+    }
+  );
+}
+
+function enhanceHtmlForRoute(html, page) {
+  const normalizedRoute = page.route.replace(/\/$/, "") || "/";
+  const localizedRoute = normalizedRoute.replace(/^\/en(?=\/|$)/, "") || "/";
+  const isDocument = /^\/(docs|products|Yaklab)(\/|$)/.test(localizedRoute);
+  const isBlogPost =
+    /^\/blog\/[^/]+$/.test(localizedRoute) &&
+    !/^\/blog\/(archive|authors|tags|page)$/.test(localizedRoute);
+  const isUntranslatedEnglish =
+    page.language === "en" &&
+    /^\/(docs|products|Yaklab|blog)(\/|$)/.test(localizedRoute);
+
+  let result = page.description
+    ? replaceMetaDescription(html, page.description)
+    : html;
+  result = completeSocialMetadata(result, isBlogPost ? "article" : "website");
+
+  if (isDocument && page.description) {
+    const segments = localizedRoute.split("/").filter(Boolean);
+    result = removeBreadcrumbJsonLd(result);
+    result = appendJsonLd(
+      result,
+      buildDocumentGraph({
+        url: page.url,
+        title: page.title,
+        description: page.description,
+        language: page.language,
+        segments,
+      })
+    );
+  }
+  if (isBlogPost && page.description) {
+    result = updateBlogPostingJsonLd(result, page);
+  }
+  if (isUntranslatedEnglish) result = ensureNoindex(result);
+  return result;
+}
+
+function htmlFiles(root) {
+  return fs.readdirSync(root, { withFileTypes: true }).flatMap((entry) => {
+    const fullPath = path.join(root, entry.name);
+    if (entry.isDirectory()) return htmlFiles(fullPath);
+    return entry.isFile() && entry.name === "index.html" ? [fullPath] : [];
+  });
+}
+
+function frontmatterValue(markdown, key) {
+  const frontmatter = markdown.match(/^---\s*\n([\s\S]*?)\n---/)?.[1] || "";
+  const value = frontmatter.match(new RegExp(`^${key}:\\s*(.+)$`, "m"))?.[1]?.trim();
+  return value?.replace(/^(["'])([\s\S]*)\1$/, "$2") || null;
+}
+
+function blogDescriptionMap(blogRoot) {
+  if (!fs.existsSync(blogRoot)) return new Map();
+  const descriptions = new Map();
+  for (const entry of fs.readdirSync(blogRoot, { withFileTypes: true })) {
+    if (!entry.isFile() || !/\.mdx?$/.test(entry.name)) continue;
+    const markdown = fs.readFileSync(path.join(blogRoot, entry.name), "utf8");
+    const slug = frontmatterValue(markdown, "slug");
+    const description =
+      frontmatterValue(markdown, "description") || extractContentDescription(markdown);
+    if (slug && description) descriptions.set(`/blog/${slug}`, description);
+  }
+  return descriptions;
+}
+
+function canonicalUrl(html) {
+  for (const tag of html.match(/<link\b[^>]*>/g) || []) {
+    if (!/\brel="canonical"/i.test(tag)) continue;
+    const href = tag.match(/\bhref="([^"]+)"/i)?.[1];
+    if (href) return href;
+  }
+  return "";
+}
+
+function htmlTitle(html) {
+  return (
+    metaContent(html, "property", "og:title") ||
+    html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] ||
+    "Yak Project"
+  );
+}
+
+function publicRouteForLocale(route, currentLocale, defaultLocale) {
+  if (!currentLocale || currentLocale === defaultLocale) return route;
+  return `/${currentLocale}${route === "/" ? "" : route}`;
+}
+
 function apiDocFiles(apiRoot) {
   return fs.readdirSync(apiRoot, { withFileTypes: true }).flatMap((entry) => {
     const fullPath = path.join(apiRoot, entry.name);
@@ -80,23 +399,60 @@ module.exports = function geoMetadataPlugin(context) {
     name: "geo-api-description-plugin",
     async postBuild({ outDir }) {
       const apiRoot = path.join(context.siteDir, "docs", "api");
-      if (!fs.existsSync(apiRoot)) return;
+      const routeDescriptions = blogDescriptionMap(
+        path.join(context.siteDir, "blog")
+      );
 
-      for (const sourcePath of apiDocFiles(apiRoot)) {
-        const description = extractDescription(fs.readFileSync(sourcePath, "utf8"));
-        if (!description) continue;
-        const route = path
-          .relative(apiRoot, sourcePath)
-          .replace(/\.md$/, "")
-          .split(path.sep);
-        const outputPath = path.join(outDir, "docs", "api", ...route, "index.html");
-        if (!fs.existsSync(outputPath)) continue;
+      if (fs.existsSync(apiRoot)) {
+        for (const sourcePath of apiDocFiles(apiRoot)) {
+          const description = extractDescription(fs.readFileSync(sourcePath, "utf8"));
+          if (!description) continue;
+          const route = `/docs/api/${path
+            .relative(apiRoot, sourcePath)
+            .replace(/\.md$/, "")
+            .split(path.sep)
+            .join("/")}`;
+          routeDescriptions.set(route, description);
+        }
+      }
+
+      for (const outputPath of htmlFiles(outDir)) {
+        const relative = path.relative(outDir, outputPath);
+        const localeRoute =
+          relative === "index.html"
+            ? "/"
+            : `/${path.dirname(relative).split(path.sep).join("/")}`;
+        const route = publicRouteForLocale(
+          localeRoute,
+          context.i18n?.currentLocale,
+          context.i18n?.defaultLocale
+        );
+        const localizedRoute = route.replace(/^\/en(?=\/|$)/, "") || "/";
         const html = fs.readFileSync(outputPath, "utf8");
-        fs.writeFileSync(outputPath, replaceMetaDescription(html, description));
+        const description =
+          routeDescriptions.get(localizedRoute) ||
+          metaContent(html, "name", "description") ||
+          metaContent(html, "property", "og:description");
+        const url = canonicalUrl(html) || `${context.siteConfig.url}${route}`;
+        const enhanced = enhanceHtmlForRoute(html, {
+          route,
+          url,
+          title: htmlTitle(html),
+          description,
+          language: route === "/en" || route.startsWith("/en/") ? "en" : "zh-CN",
+        });
+        if (enhanced !== html) fs.writeFileSync(outputPath, enhanced);
       }
     },
   };
 };
 
 module.exports.extractDescription = extractDescription;
+module.exports.extractContentDescription = extractContentDescription;
+module.exports.decodeHtmlEntities = decodeHtmlEntities;
 module.exports.replaceMetaDescription = replaceMetaDescription;
+module.exports.completeSocialMetadata = completeSocialMetadata;
+module.exports.ensureNoindex = ensureNoindex;
+module.exports.buildDocumentGraph = buildDocumentGraph;
+module.exports.enhanceHtmlForRoute = enhanceHtmlForRoute;
+module.exports.publicRouteForLocale = publicRouteForLocale;

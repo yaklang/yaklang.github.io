@@ -188,6 +188,7 @@ const getFooterLinks = (): FooterGroup[] => [
       { labelKey: "HomeFooter.links.aboutUs", to: "/team" },
       { labelKey: "HomeFooter.links.partners", to: "/cooperativePartner" },
       { labelKey: "HomeFooter.links.techBlog", to: "/blog" },
+      { labelKey: "HomeFooter.links.editorialPolicy", to: "/editorial-policy" },
     ],
   },
   {

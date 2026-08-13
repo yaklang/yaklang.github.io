@@ -1,12 +1,14 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import { IRify } from "../components/IRify";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+    const { t } = useTranslation();
     return (
         <Layout
-            title="IRify：SSA 驱动的静态代码安全分析"
-            description="IRify 基于 YAK SSA 与 SyntaxFlow，为安全团队提供可复现、可扩展的多语言静态代码安全分析能力。"
+            title={t("SiteMetadata.irify.title")}
+            description={t("SiteMetadata.irify.description")}
         >
             <main>
                 <IRify />

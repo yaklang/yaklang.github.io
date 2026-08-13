@@ -286,10 +286,11 @@ function DownloadContent() {
 }
 
 export default function DownloadResources() {
+  const { t } = useTranslation();
   return (
     <Layout
-      title="下载资源：Yakit 白皮书、API 文档与离线包"
-      description="Yaklang / Yakit 技术白皮书、API 文档历史版本与官网全站内容打包下载"
+      title={t("SiteMetadata.download.title")}
+      description={t("SiteMetadata.download.description")}
       wrapperClassName="download-resources-wrapper"
     >
       <Head>
@@ -302,7 +303,7 @@ export default function DownloadResources() {
             operatingSystem: "Windows, macOS, Linux",
             url: "https://yaklang.com/download",
             description:
-              "Yakit is an open-source cross-platform security workbench built on the Yaklang engine.",
+              t("SiteMetadata.download.schemaDescription"),
             author: {
               "@type": "Organization",
               name: "Yak Project",

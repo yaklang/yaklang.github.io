@@ -21,6 +21,8 @@ const organizationSchema = {
             name: "Yak Project",
             url: siteUrl,
             inLanguage: ["zh-CN", "en"],
+            description:
+                "Official documentation, technical articles, downloads, and open-source project information for the Yaklang cybersecurity ecosystem.",
             publisher: { "@id": `${siteUrl}/#organization` },
         },
     ],
@@ -261,6 +263,10 @@ module.exports = {
                             label: "关于我们",
                             href: "/team",
                         },
+                        {
+                            label: "Editorial Policy / 编辑政策",
+                            href: "/editorial-policy",
+                        },
                     ],
                 },
             ],
@@ -354,6 +360,15 @@ module.exports = {
                         title: "技术博客",
                         copyright: `Copyright © ${new Date().getFullYear()} Yak Project.`,
                     },
+                },
+                sitemap: {
+                    lastmod: "date",
+                    ignorePatterns: [
+                        "/en/docs/**",
+                        "/en/products/**",
+                        "/en/Yaklab/**",
+                        "/en/blog/**",
+                    ],
                 },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),
