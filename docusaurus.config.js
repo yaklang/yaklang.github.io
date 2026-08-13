@@ -11,11 +11,14 @@ const organizationSchema = {
             alternateName: ["Yaklang", "Yakit"],
             url: siteUrl,
             logo: `${siteUrl}/img/yaklogo.png`,
+            // sameAs 必须指向该实体在「其它」平台上的权威表示，禁止自引用站点 URL。
             sameAs: [
-                "https://yaklang.com",
                 "https://github.com/yaklang",
                 "https://github.com/yaklang/yaklang",
                 "https://github.com/yaklang/yakit",
+                // 官方 Bilibili 频道（与 HomeFooter 中的链接一致）
+                "https://space.bilibili.com/437503777",
+                // 待补充：建立 YouTube / LinkedIn / Wikidata / Wikipedia 实体后追加其 URL
             ],
             description:
                 "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
@@ -29,6 +32,36 @@ const organizationSchema = {
             description:
                 "Official documentation, technical articles, downloads, and open-source project information for the Yaklang cybersecurity ecosystem.",
             publisher: { "@id": `${siteUrl}/#organization` },
+        },
+        // 旗舰产品实体：Yakit 是可下载的跨平台安全工作台。给 AI 搜索引擎一个
+        // 明确的产品实体（applicationCategory/operatingSystem/offers），便于被引用。
+        // 仅写入可核实字段；aggregateRating/version/screenshot 待有真实来源后再补。
+        {
+            "@type": "SoftwareApplication",
+            "@id": `${siteUrl}/yakit#software`,
+            name: "Yakit",
+            applicationCategory: "SecurityApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            url: `${siteUrl}/products/intro`,
+            downloadUrl: "https://github.com/yaklang/yakit/releases",
+            inLanguage: ["zh-CN", "en"],
+            description:
+                "Yakit is an integrated, cross-platform security workbench built on the Yaklang security DSL, combining MITM proxy, Web Fuzzer, codec, plugin store, and AI-agent orchestration for penetration testing and security engineering.",
+            featureList: [
+                "MITM Proxy",
+                "Web Fuzzer",
+                "Codec",
+                "Plugin Store",
+                "Hot Reload",
+                "AI Agent Orchestration",
+            ],
+            author: { "@id": `${siteUrl}/#organization` },
+            publisher: { "@id": `${siteUrl}/#organization` },
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+            },
         },
     ],
 };
@@ -97,6 +130,12 @@ module.exports = {
             { name: "twitter:card", content: "summary_large_image" },
             { name: "twitter:image", content: `${siteUrl}/img/newHome/now.webp` },
             { name: "theme-color", content: "#f9f6ef" },
+            // Bing Webmaster Tools 所有权验证：暂未启用，避免把占位符内容上线到生产。
+            // 取得真实验证码后，在下方取消注释并填入即可：
+            // { name: "msvalidate.01", content: "<REAL-BING-VERIFICATION-CODE>" },
+            // IndexNow 密钥（与 static/indexnow-key.txt 一致），便于 Bing/Yandex
+            // 通过 IndexNow API 增量提交 URL，加速收录
+            { name: "indexnow-key", content: "629c41a3116dedbbf450b884f9d0d242" },
         ],
         colorMode: {
             // "light" | "dark"
