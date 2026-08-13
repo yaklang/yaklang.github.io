@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
+import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   Button,
   Card,
@@ -286,13 +286,31 @@ function DownloadContent() {
 }
 
 export default function DownloadResources() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title}`}
+      title="下载资源：Yakit 白皮书、API 文档与离线包"
       description="Yaklang / Yakit 技术白皮书、API 文档历史版本与官网全站内容打包下载"
       wrapperClassName="download-resources-wrapper"
     >
+      <Head>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "Yakit",
+            applicationCategory: "SecurityApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            url: "https://yaklang.com/download",
+            description:
+              "Yakit is an open-source cross-platform security workbench built on the Yaklang engine.",
+            author: {
+              "@type": "Organization",
+              name: "Yak Project",
+              url: "https://yaklang.com",
+            },
+          })}
+        </script>
+      </Head>
       <main
         style={{
           background: "var(--Colors-Use-Main---Gold-Bg)",

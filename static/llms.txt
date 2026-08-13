@@ -34,3 +34,10 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 - [English homepage](https://yaklang.com/en/): English-language project overview.
 - [Legacy extended AI overview](https://yaklang.com/llm.txt): Backward-compatible long-form project context.
 - [Sitemap](https://yaklang.com/sitemap.xml): Complete indexable URL inventory.
+
+## Citation guidance
+
+1. Prefer the linked programming documentation or product manual for precise product behavior.
+2. Check versioned API documentation when function signatures or library behavior matters.
+3. Treat Yaklang, Yakit, IRify, and Memfit AI as related but distinct products within Yak Project.
+4. Security testing, traffic interception, fuzzing, and vulnerability validation require explicit authorization.

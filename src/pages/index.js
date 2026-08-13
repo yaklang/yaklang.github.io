@@ -12,7 +12,6 @@ export default function HomeNew() {
   const description = isEnglish
     ? "Yak Project provides Yaklang, Yakit, IRify, Memfit AI, and reusable open-source infrastructure for programmable cybersecurity and application security."
     : "Yak Project 是万径安全发起的开源网络安全基础设施，提供 Yaklang、Yakit、IRify、Memfit AI 与可编程、可复用的安全能力。";
-
   useEffect(() => {
     // 旧首页采用固定 REM 布局（设计基准宽度 ~1232px）。
     // 通过按视口等比缩放根字号，使整页布局在大小屏/移动端等比适配，

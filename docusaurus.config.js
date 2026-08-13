@@ -1,14 +1,40 @@
 const remarkSanitizeAutolinks = require("./scripts/remark-sanitize-autolinks");
 
+const siteUrl = "https://yaklang.com";
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": `${siteUrl}/#organization`,
+            name: "Yak Project",
+            alternateName: ["Yaklang", "Yakit"],
+            url: siteUrl,
+            logo: `${siteUrl}/img/yaklogo.png`,
+            sameAs: ["https://github.com/yaklang"],
+            description:
+                "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${siteUrl}/#website`,
+            name: "Yak Project",
+            url: siteUrl,
+            inLanguage: ["zh-CN", "en"],
+            publisher: { "@id": `${siteUrl}/#organization` },
+        },
+    ],
+};
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
     i18n: {
         defaultLocale: "zh-CN",
         locales: ["zh-CN", "en"],
     },
-    title: "Yak Program Language",
-    tagline: "Yak 是一门 Web 安全研发领域垂直语言",
-    url: "https://yaklang.com",
+    title: "Yak Project",
+    tagline: "开源网络安全基础设施",
+    url: siteUrl,
     baseUrl: "/",
     // 迁移期：将断链降级为 warn，避免历史内容阻塞构建；内容修复后可恢复为 throw
     onBrokenLinks: "warn",
@@ -45,6 +71,11 @@ module.exports = {
         image: "img/newHome/now.webp",
         metadata: [
             {
+                name: "description",
+                content:
+                    "Yak Project 是以 Yaklang 为核心的开源网络安全基础设施，提供 Yakit、IRify、Memfit AI 与安全研发文档。",
+            },
+            {
                 name: "keywords",
                 content:
                     "Yak Project, Yaklang, Yakit, IRify, Memfit AI, 网络安全, 开源安全, 安全开发, cybersecurity, application security",
@@ -55,6 +86,9 @@ module.exports = {
                     "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
             },
             { property: "og:site_name", content: "Yak Project" },
+            { property: "og:image", content: `${siteUrl}/img/newHome/now.webp` },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:image", content: `${siteUrl}/img/newHome/now.webp` },
             { name: "theme-color", content: "#f9f6ef" },
         ],
         colorMode: {
@@ -238,6 +272,7 @@ module.exports = {
     },
     plugins: [
         "docusaurus-plugin-sass",
+        require.resolve("./plugins/geo-metadata-plugin"),
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -325,6 +360,13 @@ module.exports = {
                 },
             },
         ],
+    ],
+    headTags: [
+        {
+            tagName: "script",
+            attributes: { type: "application/ld+json" },
+            innerHTML: JSON.stringify(organizationSchema),
+        },
     ],
 
 };
