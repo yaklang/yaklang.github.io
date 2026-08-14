@@ -10,12 +10,13 @@
 
 与相邻库的关系：`ssa` 负责"把代码编译成可查询的程序"，`syntaxflow` 在其之上写规则做查询，`sfreport` 输出审计报告，`risk` 记录代码风险；常配合 `git`/`filesys` 提供源码。
 
-> 共 51 个函数、7 个实例
+> 共 51 个函数、8 个实例
 
 ## 实例
 
 |实例名|类型|说明|
 |:--|:--|:--|
+| GO | `ssaconfig.Language` | &#34;golang&#34; |
 | Java | `ssaconfig.Language` | &#34;java&#34; |
 | Javascript | `ssaconfig.Language` | &#34;js&#34; |
 | ModeAll | `ssaconfig.Mode` | 127 |
