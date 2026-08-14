@@ -128,10 +128,10 @@ const GithubIcon = () => (
 );
 
 const COMMUNITY_LINKS = [
-  { label: "HomeNavbar.community.yakLabManual", to: "/Yaklab/yaklab" },
   { label: "HomeNavbar.community.aboutUs", to: "/team" },
   { label: "HomeNavbar.community.partners", to: "/cooperativePartner" },
   { label: "HomeNavbar.community.techBlog", to: "/blog" },
+  { label: "HomeNavbar.community.yakLabManual", to: "/Yaklab/yaklab" },
   { label: "HomeNavbar.community.downloads", to: "/download" },
 ];
 
