@@ -1,4 +1,36 @@
-/* 本地自托管字体：Crimson Text / Noto Serif SC */
+/* 本地自托管字体：Crimson Text / Noto Serif SC / Roboto / JetBrains Mono */
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/roboto-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/roboto-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto/roboto-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono/jetbrains-mono-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Crimson Text";
