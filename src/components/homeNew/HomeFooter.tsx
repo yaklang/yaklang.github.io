@@ -175,7 +175,6 @@ const getFooterLinks = (): FooterGroup[] => [
       { labelKey: "HomeFooter.links.yakDocs", to: "/docs/intro" },
       { labelKey: "HomeFooter.links.apiManual", to: "/docs/intro" },
       { labelKey: "HomeFooter.links.yakitManual", to: "/products/intro" },
-      { labelKey: "HomeFooter.links.techBlog", to: "/blog" },
       { labelKey: "HomeFooter.links.yakLabHandbook", to: "/Yaklab/vulinbox/" },
     ],
   },
@@ -485,13 +484,13 @@ const HomeFooter: React.FC<{
         fill ? " h-full" : ""
       }${
         withTopBorder
-          ? " border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] pt-[20px]"
+          ? " border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]"
           : ""
       }`}
     >
       {/* 主内容：Logo / 标语 / 链接列；fill 时由 flex-1 在 sticky min-h 父级内撑开 */}
       <div
-        className={`${HOME_CONTAINER_CLASS} flex flex-col${fill ? " flex-1" : ""}`}
+        className={`${HOME_CONTAINER_CLASS} flex flex-col pt-[40px]${fill ? " flex-1" : ""}`}
       >
         <div className={`flex flex-col gap-[40px]${fill ? " flex-1" : ""}`}>
           <div
@@ -559,9 +558,7 @@ const HomeFooter: React.FC<{
 
       {/* 底栏：版权 / ICP */}
       <div
-        className={`mt-[80px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]${
-          fill ? " sm:mt-auto" : ""
-        }`}
+        className="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]"
       >
         <div className={`${HOME_CONTAINER_CLASS}`}>
           {/* 小屏：两侧竖线贴版心边缘，横线分行 */}

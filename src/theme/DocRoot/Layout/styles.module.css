@@ -1,0 +1,30 @@
+.docsWrapper {
+  min-width: 0;
+}
+
+.desktopSidebar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktopSidebar {
+    display: block;
+    flex: 0 0 var(--docs-sidebar-width);
+    width: var(--docs-sidebar-width);
+    min-width: 0;
+    border-right: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    overflow: visible;
+    transition:
+      flex-basis 180ms ease,
+      width 180ms ease,
+      border-color 180ms ease;
+  }
+
+  :global(.docs-layout-shell--collapsed) .desktopSidebar {
+    flex-basis: 0;
+    width: 0;
+    border-right-width: 0;
+    border-right-color: transparent;
+    overflow: hidden;
+  }
+}

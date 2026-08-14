@@ -1,0 +1,54 @@
+.docItemRow {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: flex-start;
+}
+
+.docItemColumn {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.docItemContainer {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 40px 20px;
+  box-sizing: border-box;
+}
+
+.docTocColumn {
+  display: none;
+}
+
+@media (min-width: 1024px) and (max-width: 1359px) {
+  .docItemContainer {
+    padding-right: 0;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 1360px) {
+  .withToc .docItemColumn {
+    max-width: calc(100% - var(--docs-toc-width));
+  }
+
+  .docTocColumn {
+    display: block;
+    align-self: stretch;
+    flex: 0 0 var(--docs-toc-width);
+    width: var(--docs-toc-width);
+    min-width: var(--docs-toc-width);
+    padding: 12px 0 20px 12px;
+    border-left: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 755px) {
+  .docItemContainer {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}

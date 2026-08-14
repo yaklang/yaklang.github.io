@@ -1,0 +1,1763 @@
+// Figma 内容页：2659:10558
+// 文档与 Blog 文章正文共享同一套排版及组件视觉。
+
+html.docs-wrapper,
+html.blog-wrapper {
+  --docs-sidebar-width: 320px;
+  --docs-toc-width: 320px;
+  --docs-navbar-height: 80px;
+  --docs-anchor-offset: var(--docs-navbar-height);
+  scroll-padding-top: var(--docs-anchor-offset);
+  scroll-behavior: smooth;
+
+  body {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+
+    body {
+      scroll-behavior: auto;
+    }
+  }
+  // Figma 2659:12098：英文分别使用 Crimson Text / Roboto，
+  // 中文字符由后续的 Noto Serif SC / 系统中文字体回退。
+  --docs-serif: "Noto Serif SC", "Songti SC", "Crimson Text", Georgia,
+    "Times New Roman", serif;
+  --docs-sans: "Roboto", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --docs-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  --docs-title-color: var(--Colors-Neutral-100);
+  --docs-code-plain: #353639;
+  --docs-code-comment: #9ca3b1;
+  --docs-code-keyword: #2e7ce7;
+  --docs-code-string: #3a9968;
+  --docs-code-function: #d26002;
+  --docs-code-operator: #8862f8;
+
+  &:lang(en) {
+    --docs-serif: "Crimson Text", Georgia, "Times New Roman", serif;
+  }
+
+  .docs-layout-shell {
+    max-width: 1440px;
+  }
+
+  .docs-main {
+    max-width: calc(100% - var(--docs-sidebar-width));
+  }
+
+  .docs-layout-shell--collapsed .docs-main,
+  .docs-layout-shell:not(:has(.docs-desktop-sidebar)) .docs-main {
+    max-width: 100%;
+  }
+
+  // The docs shell uses the same desktop grid as the header. Once the
+  // 320px sidebar collapses, remove only the article's extra inner inset so
+  // its left edge lands on the shell/header edge; keep the TOC side intact.
+  @media (min-width: 1024px) {
+    .docs-layout-shell--collapsed .docs-item-container {
+      padding-left: 0;
+    }
+  }
+
+  @media (min-width: 1440px) and (max-width: 1679px) {
+    .docs-layout-shell {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1360px) and (max-width: 1439px) {
+    .docs-layout-shell {
+      max-width: 1152px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1359px) {
+    .docs-layout-shell {
+      max-width: calc(100% - 160px);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .docs-layout-shell {
+      max-width: 100%;
+    }
+
+    .docs-main {
+      max-width: 100%;
+    }
+  }
+
+  // -----------------------------------------------------------------
+  // Left sidebar
+  // -----------------------------------------------------------------
+  .docs-desktop-sidebar {
+    background: var(--Colors-Use-Main---Gold-Bg);
+  }
+
+  .docs-sidebar-nav {
+    position: sticky;
+    top: var(--docs-navbar-height);
+    width: var(--docs-sidebar-width);
+    height: calc(100vh - var(--docs-navbar-height));
+    padding: 0 12px 20px 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+    font-family: var(--docs-sans);
+    scrollbar-color: transparent transparent;
+  }
+
+  .docs-sidebar-nav:hover {
+    scrollbar-color: var(--Colors-Use-Main---Gold-Border) transparent;
+  }
+
+  .docs-sidebar-nav::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .docs-sidebar-nav::-webkit-scrollbar-track,
+  .docs-sidebar-nav::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .docs-sidebar-nav:hover::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--Colors-Use-Main---Gold-Border);
+  }
+
+  .docs-sidebar-nav .theme-doc-sidebar-menu {
+    margin: 0 0 10px;
+    font-size: 14px;
+  }
+
+  .docs-sidebar-nav .menu__list {
+    padding-left: 0;
+  }
+
+  .docs-sidebar-nav .menu__list .menu__list {
+    margin-top: 1px;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .docs-sidebar-nav .menu__link,
+  .docs-sidebar-nav .menu__list-item-collapsible {
+    min-height: 32px;
+    margin: 0;
+    padding: 6px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
+  }
+
+  .docs-sidebar-nav .menu__list .menu__list .menu__link {
+    padding-left: 24px;
+  }
+
+  .docs-sidebar-nav
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .docs-sidebar-nav
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible
+    .menu__link {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 32px;
+    min-width: 0;
+    padding: 6px 56px 6px 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .docs-sidebar-nav
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible
+    .menu__link
+    [class*="categoryLinkLabel_"] {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .docs-sidebar-nav
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible
+    .menu__link::before {
+    position: absolute;
+    top: 6px;
+    right: 20px;
+    display: inline-flex;
+    width: auto;
+    height: 20px;
+    margin: 0;
+    padding: 2px 8px;
+    align-items: center;
+    justify-content: center;
+    // Figma Tags: Full corner=Yes → 9999px
+    border-radius: 9999px;
+    box-sizing: border-box;
+    background: var(--Colors-Use-Main---Gold-Focus);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
+  }
+
+  .docs-sidebar-nav
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible
+    .menu__link::after {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    margin: 0;
+  }
+
+  .docs-sidebar-nav
+    .menu__list
+    .menu__list
+    li[class*="docs-sidebar-category-count-"]
+    > .menu__list-item-collapsible {
+    padding-left: 24px;
+  }
+
+  @for $count from 1 through 99 {
+    .docs-sidebar-nav
+      .docs-sidebar-category-count-#{$count}
+      > .menu__list-item-collapsible
+      .menu__link::before {
+      content: "#{$count}";
+    }
+  }
+
+  .docs-sidebar-nav .menu__link:hover,
+  .docs-sidebar-nav .menu__link--active,
+  .docs-sidebar-nav .menu__list-item-collapsible:hover {
+    color: var(--Colors-Use-Main---web-Primary);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  .docs-sidebar-nav .menu__link--active,
+  .docs-sidebar-nav .menu__link[aria-current="page"] {
+    font-weight: 600;
+  }
+
+  .docs-sidebar-nav .menu__caret {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .docs-sidebar-nav .menu__caret::before,
+  .docs-sidebar-nav .menu__link--sublist-caret::after {
+    width: 16px;
+    height: 16px;
+    background: var(--Colors-Use-Neutral-Text-4-Help-text);
+    -webkit-mask: url("/img/docs/docs-menu-chevron.svg") center / 16px 16px
+      no-repeat;
+    mask: url("/img/docs/docs-menu-chevron.svg") center / 16px 16px no-repeat;
+    filter: none;
+    transform: none;
+  }
+
+  .docs-sidebar-nav
+    .menu__list-item--collapsed
+    > .menu__list-item-collapsible
+    .menu__caret::before,
+  .docs-sidebar-nav
+    .menu__list-item--collapsed
+    > .menu__list-item-collapsible
+    .menu__link--sublist-caret::after {
+    transform: rotate(-90deg);
+  }
+
+  // SidebarFilter：文档侧栏与博客侧栏共用吸顶实色 + 下方渐隐
+  .docs-sidebar-nav .sidebar-filter-box,
+  .blog-layout-row aside > nav .sidebar-filter-box {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    isolation: isolate;
+    margin: 0;
+    padding: 12px 0 24px;
+    background: transparent;
+  }
+
+  .docs-sidebar-nav .sidebar-filter-box::before,
+  .blog-layout-row aside > nav .sidebar-filter-box::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 52px;
+    content: "";
+    background: var(--Colors-Use-Main---Gold-Bg);
+  }
+
+  .docs-sidebar-nav .sidebar-filter-box::after,
+  .blog-layout-row aside > nav .sidebar-filter-box::after {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    left: 0;
+    height: 24px;
+    content: "";
+    pointer-events: none;
+    background: var(--Colors-Use-Main---Gold-Bg);
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+    mask-image: linear-gradient(to bottom, #000, transparent);
+  }
+
+  .docs-sidebar-nav .sidebar-filter-input,
+  .blog-layout-row aside > nav .sidebar-filter-input {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 40px;
+    padding: 4px 12px 4px 40px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    background-image: url("/img/docs/docs-search.svg");
+    background-color: var(--Colors-Use-Main---Gold-Bg-Hover);
+    background-position: 12px center;
+    background-size: 20px 20px;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
+  }
+
+  .docs-sidebar-nav .sidebar-filter-input::placeholder,
+  .blog-layout-row aside > nav .sidebar-filter-input::placeholder {
+    color: var(--Colors-Use-Neutral-Disable);
+  }
+
+  .docs-sidebar-nav .sidebar-filter-input:focus,
+  .blog-layout-row aside > nav .sidebar-filter-input:focus {
+    border-color: var(--Colors-Use-Main---web-Primary);
+    box-shadow: 0 0 0 2px color-mix(
+      in srgb,
+      var(--Colors-Use-Main---web-Primary) 16%,
+      transparent
+    );
+  }
+
+  // -----------------------------------------------------------------
+  // Toolbar / breadcrumbs / controls
+  // -----------------------------------------------------------------
+  .docs-article-toolbar {
+    position: sticky;
+    top: calc(var(--docs-navbar-height) + 12px);
+    z-index: 20;
+    isolation: isolate;
+    display: flex;
+    min-width: 0;
+    min-height: 40px;
+    padding: 0 0 24px;
+    align-items: center;
+    gap: 20px;
+    background: transparent;
+  }
+
+  .docs-article-toolbar > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .docs-article-toolbar::before {
+    position: absolute;
+    top: -12px;
+    right: 0;
+    left: 0;
+    height: 52px;
+    content: "";
+    background: var(--Colors-Use-Main---Gold-Bg);
+    pointer-events: none;
+  }
+
+  .docs-article-toolbar::after {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    left: 0;
+    height: 24px;
+    content: "";
+    pointer-events: none;
+    background: var(--Colors-Use-Main---Gold-Bg);
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+    mask-image: linear-gradient(to bottom, #000, transparent);
+  }
+
+  .docs-article-breadcrumbs {
+    display: flex;
+    min-width: 0;
+    height: 40px;
+    flex: 1 1 auto;
+    align-items: center;
+  }
+
+  .docs-article-breadcrumbs .theme-doc-breadcrumbs,
+  .docs-article-breadcrumbs .breadcrumbs {
+    display: flex;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .docs-article-breadcrumbs .breadcrumbs__item {
+    display: inline-flex;
+    height: 28px;
+    margin: 0;
+    align-items: center;
+    vertical-align: top;
+  }
+
+  .docs-sidebar-control,
+  .docs-icon-button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    cursor: pointer;
+    transition: color 150ms ease, background-color 150ms ease;
+  }
+
+  .docs-sidebar-control {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 9999px;
+  }
+
+  .docs-sidebar-control svg,
+  .docs-sidebar-control img,
+  .docs-icon-button svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .docs-sidebar-control:hover,
+  .docs-icon-button:hover {
+    color: var(--Colors-Use-Main---web-Primary);
+    background: var(--Colors-Use-Main---Gold-Focus);
+  }
+
+  .docs-sidebar-control__mobile,
+  .docs-sidebar-control__label {
+    display: none;
+  }
+
+  .theme-doc-breadcrumbs .breadcrumbs__link {
+    display: inline-flex;
+    height: 28px;
+    padding: 4px 12px;
+    align-items: center;
+    border-radius: 9999px;
+    box-sizing: border-box;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
+  }
+
+  .theme-doc-breadcrumbs .breadcrumbs__item--active .breadcrumbs__link {
+    color: var(--Colors-Use-Main---web-Primary);
+    background: var(--Colors-Use-Main---Gold-Focus);
+  }
+
+  .theme-doc-breadcrumbs .breadcrumbs__item:first-child .breadcrumbs__link {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-doc-breadcrumbs
+    .breadcrumbs__item:first-child
+    .breadcrumbs__link
+    svg {
+    display: none;
+  }
+
+  .theme-doc-breadcrumbs
+    .breadcrumbs__item:first-child
+    .breadcrumbs__link::before {
+    width: 20px;
+    height: 20px;
+    content: "";
+    background: var(--Colors-Use-Neutral-Text-3-Secondary);
+    -webkit-mask: url("/img/docs/docs-home.svg") center / 20px 20px no-repeat;
+    mask: url("/img/docs/docs-home.svg") center / 20px 20px no-repeat;
+  }
+
+  .theme-doc-breadcrumbs .breadcrumbs__item:not(:last-child)::after {
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+    background: var(--Colors-Use-Neutral-Text-4-Help-text);
+    -webkit-mask: url("/img/docs/docs-breadcrumb-chevron.svg") center / 16px 16px
+      no-repeat;
+    mask: url("/img/docs/docs-breadcrumb-chevron.svg") center / 16px 16px
+      no-repeat;
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 1023px) {
+    .docs-sidebar-control {
+      width: auto;
+      height: 40px;
+      padding: 8px 20px;
+      gap: 8px;
+      border: 1px solid var(--Colors-Use-Main---Gold-Border);
+      font-family: var(--docs-serif);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 24px;
+      color: var(--Colors-Neutral-100);
+    }
+
+    .docs-sidebar-control__desktop {
+      display: none;
+    }
+
+    .docs-sidebar-control__mobile,
+    .docs-sidebar-control__label {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .docs-sidebar-control__mobile {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      background: currentColor;
+      -webkit-mask: url("/img/docs/docs-menu.svg") center / 20px 20px no-repeat;
+      mask: url("/img/docs/docs-menu.svg") center / 20px 20px no-repeat;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .docs-article-toolbar {
+      gap: 12px;
+    }
+
+    .docs-sidebar-control {
+      width: 40px;
+      padding: 8px;
+    }
+
+    .docs-sidebar-control__label {
+      display: none;
+    }
+
+    .theme-doc-breadcrumbs .breadcrumbs__item:not(:last-child) {
+      display: none;
+    }
+
+    .theme-doc-breadcrumbs .breadcrumbs__link {
+      display: block;
+      max-width: calc(100vw - 92px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // -----------------------------------------------------------------
+  // Right TOC
+  // -----------------------------------------------------------------
+  .docs-toc-column .theme-doc-toc-desktop {
+    position: sticky;
+    top: calc(var(--docs-navbar-height) + 12px);
+    max-height: calc(100vh - var(--docs-navbar-height) - 32px);
+    padding: 0 12px 0 0;
+    overflow-y: auto;
+    border-left: 0;
+    scrollbar-color: transparent transparent;
+  }
+
+  .docs-toc-column .theme-doc-toc-desktop:hover {
+    scrollbar-color: var(--Colors-Use-Main---Gold-Border) transparent;
+  }
+
+  .docs-toc-column .theme-doc-toc-desktop::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .docs-toc-column .theme-doc-toc-desktop::-webkit-scrollbar-track,
+  .docs-toc-column .theme-doc-toc-desktop::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .docs-toc-column
+    .theme-doc-toc-desktop:hover::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: var(--Colors-Use-Main---Gold-Border);
+  }
+
+  .docs-toc-column .table-of-contents {
+    padding: 0;
+    border-left: 0;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+  }
+
+  .docs-toc-column .table-of-contents__link {
+    display: block;
+    padding: 2px 8px;
+    overflow: hidden;
+    border-radius: 4px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--Colors-Use-Neutral-Text-3-Secondary);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .docs-toc-column .table-of-contents__link:hover,
+  .docs-toc-column .table-of-contents__link--active {
+    color: var(--Colors-Use-Main---web-Primary);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  .docs-toc-column .table-of-contents__link--active {
+    font-weight: 600;
+  }
+
+  // -----------------------------------------------------------------
+  // Tablet / mobile drawer
+  // -----------------------------------------------------------------
+  .docs-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: none;
+    background: rgba(23, 23, 23, 0.3);
+  }
+
+  .docs-drawer {
+    width: min(360px, calc(100vw - 32px));
+    height: 100%;
+    border-right: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    background: var(--Colors-Use-Main---Gold-Bg);
+    box-shadow: 12px 0 32px rgba(23, 23, 23, 0.12);
+  }
+
+  .docs-drawer__header {
+    display: flex;
+    height: 80px;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  }
+
+  .docs-drawer__logo {
+    display: block;
+    width: 99px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .docs-icon-button {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 9999px;
+  }
+
+  .docs-drawer .docs-sidebar-nav {
+    position: static;
+    width: 100%;
+    height: calc(100vh - 80px);
+    padding: 0 20px 20px;
+  }
+
+  @media (max-width: 1023px) {
+    .docs-drawer-backdrop {
+      display: block;
+    }
+  }
+
+  // -----------------------------------------------------------------
+  // Inline overview (tablet/mobile TOC)
+  // -----------------------------------------------------------------
+  .theme-doc-toc-mobile {
+    display: none;
+    margin: 0 0 20px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  .theme-doc-toc-mobile button {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-family: var(--docs-serif);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--docs-title-color);
+  }
+
+  .theme-doc-toc-mobile button::after {
+    width: 16px;
+    height: 16px;
+    background: var(--Colors-Use-Neutral-Text-4-Help-text);
+    -webkit-mask: url("/img/docs/docs-overview-chevron.svg") center / 16px 16px
+      no-repeat;
+    mask: url("/img/docs/docs-overview-chevron.svg") center / 16px 16px
+      no-repeat;
+    filter: none;
+    transform: none;
+  }
+
+  .theme-doc-toc-mobile
+    button[class*="tocCollapsibleButtonExpanded"]::after {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 1359px) {
+    .theme-doc-toc-mobile {
+      display: block !important;
+    }
+  }
+
+  // -----------------------------------------------------------------
+  // Markdown typography & components — Figma 2811:24160
+  // -----------------------------------------------------------------
+  .theme-doc-markdown.markdown {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+    overflow-wrap: anywhere;
+    color: var(--Colors-Use-Neutral-Text-2-Primary); // #5A5D64
+  }
+
+  // The toolbar already contributes the required 20px below it. Keep only
+  // that space for the page title instead of adding title margin/padding.
+  .theme-doc-markdown > h1:first-child,
+  .theme-doc-markdown > header:first-child > h1:first-child {
+    margin: 0;
+    padding-top: 0;
+    text-align: left;
+  }
+
+  // 章节标题 — 40/56 Medium，亮色 #353639 / 暗色 #F0F2F6
+  .theme-doc-markdown h1,
+  .theme-doc-markdown h2,
+  .theme-doc-markdown h3,
+  .theme-doc-markdown h4,
+  .theme-doc-markdown h5,
+  .theme-doc-markdown h6 {
+    scroll-margin-top: var(--docs-anchor-offset);
+  }
+
+  .theme-doc-markdown h1 {
+    margin: 20px 0 0;
+    font-family: var(--docs-serif);
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 56px;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    color: var(--docs-title-color);
+  }
+
+  // T1 一级标题 — Figma 2808:19068：32/44 + 底部分割线
+  .theme-doc-markdown h2 {
+    margin: 20px 0 0;
+    padding: 20px 0 10px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: var(--Colors-Use-Main-Focus);
+    font-family: var(--docs-serif);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 44px;
+    letter-spacing: 0;
+    color: var(--docs-title-color);
+    scroll-margin-top: calc(var(--docs-anchor-offset) - 20px);
+  }
+
+  // For an H2 immediately after the page title, the column's 20px gap is the
+  // complete vertical space. Later section headings retain their normal inset.
+  .theme-doc-markdown > h1:first-child + h2,
+  .theme-doc-markdown > header:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  // T2 二级标题 — 24/32 Medium
+  .theme-doc-markdown h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 20px 0 0;
+    font-family: var(--docs-serif);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0;
+    color: var(--docs-title-color);
+    scroll-margin-top: calc(var(--docs-anchor-offset) - 20px);
+  }
+
+  // T3 小标题 — 比 H3 小 2px：22/30 SemiBold
+  .theme-doc-markdown h4 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: var(--docs-serif);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0;
+    color: var(--docs-title-color);
+    scroll-margin-top: calc(var(--docs-anchor-offset) - 10px);
+  }
+
+  // 英文标题用 Regular；字号与中文同一套，避免混排基线错位。
+  &:lang(en) .theme-doc-markdown h1,
+  &:lang(en) .theme-doc-markdown h2,
+  &:lang(en) .theme-doc-markdown h3,
+  &:lang(en) .theme-doc-markdown h4,
+  &:lang(en) .theme-doc-markdown h5,
+  &:lang(en) .theme-doc-markdown h6 {
+    font-weight: 400;
+  }
+
+  // 设计系统仅定义 T0–T3 四级标题；更深的 Markdown 标题
+  // 统一回退到最小标题 T3，不引入规范外的 16px / 14px 标题。
+  .theme-doc-markdown h5,
+  .theme-doc-markdown h6 {
+    margin: 0;
+    padding: 10px 0 0;
+    font-family: var(--docs-serif);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0;
+    color: var(--docs-title-color);
+    scroll-margin-top: calc(var(--docs-anchor-offset) - 10px);
+  }
+
+  // 正文
+  .theme-doc-markdown p {
+    margin: 0 0 16px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  .theme-doc-markdown > p {
+    margin: 0;
+  }
+
+  // 序号 / 列表 — listSpacing 6, paragraphSpacing 16
+  .theme-doc-markdown ul,
+  .theme-doc-markdown ol {
+    margin: 0 0 16px;
+    padding-left: 24px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  .theme-doc-markdown > ul,
+  .theme-doc-markdown > ol {
+    margin: 0;
+  }
+
+  .theme-doc-markdown li {
+    margin: 6px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.1px;
+  }
+
+  .theme-doc-markdown li > p {
+    margin-bottom: 6px;
+  }
+
+  .theme-doc-markdown li > ul,
+  .theme-doc-markdown li > ol {
+    margin: 6px 0;
+  }
+
+  // Figma 将正文说明 / 单条列表标签与紧随其后的代码、图片、视频组成 8px 小组；
+  // 未缩进的 fenced code 会被 Markdown 渲染成单条列表后的同级节点，
+  // 因此同时覆盖这种结构，并用负外边距抵消根容器的 20px gap。
+  .theme-doc-markdown
+    > :is(
+      p:not(
+          :has(> :is(.yakdoc-figure, img, video):only-child)
+        ):not(:has(> a:only-child > img:only-child)),
+      ol:has(> li:only-child),
+      ul:has(> li:only-child)
+    ):has(
+      + :is(
+          .theme-code-block,
+          [class*="codeBlockContainer"],
+          pre,
+          img,
+          video,
+          .yakdoc-figure,
+          p:has(> :is(.yakdoc-figure, img, video):only-child),
+          p:has(> a:only-child > img:only-child)
+        )
+    ) {
+    margin-bottom: -12px;
+  }
+
+  // 单条列表标签自身默认有 6px 下边距；归零后，标签正文到示例仍是精确的 8px。
+  .theme-doc-markdown
+    > :is(ol, ul):has(> li:only-child):has(
+      + :is(
+          .theme-code-block,
+          [class*="codeBlockContainer"],
+          pre,
+          img,
+          video,
+          .yakdoc-figure,
+          p:has(> :is(.yakdoc-figure, img, video):only-child),
+          p:has(> a:only-child > img:only-child)
+        )
+    )
+    > li:only-child {
+    margin-bottom: 0;
+  }
+
+  .theme-doc-markdown a {
+    color: var(--Colors-Use-Main---web-Primary);
+    text-decoration: none;
+  }
+
+  .theme-doc-markdown a:hover {
+    text-decoration: underline;
+  }
+
+  // 正文与 Tips 共用行内 code / Tags — padding 2, fill+stroke #F0EAD6, radius 4, 14/16
+  .theme-doc-markdown :not(pre) > code,
+  .table-of-contents__link code {
+    padding: 2px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Border);
+    border-radius: 4px;
+    background: var(--Colors-Use-Main---Gold-Focus);
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.1px;
+  }
+
+  .theme-doc-markdown :not(pre) > code {
+    font-weight: 400;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  .table-of-contents__link code {
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  // 标题后的 code 标签 — Figma 2752:17423
+  // 字体继承标题层级；Gold 语义色变量会随 data-theme 自动切换亮暗色。
+  .theme-doc-markdown.markdown
+    :is(h1, h2, h3, h4, h5, h6):has(> code) {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .theme-doc-markdown.markdown
+    :is(h1, h2, h3, h4, h5, h6)
+    > code {
+    padding: 2px 4px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Border);
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Focus);
+    display: inline-block;
+    flex: 0 1 auto;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: var(--docs-serif);
+    font-size: inherit;
+    font-style: normal;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: 0;
+    color: var(--docs-title-color);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // 代码块 — #F6F2E7 / #F0EAD6 / radius 8 / padding 16 20 20 / JetBrains 14/20
+  .theme-doc-markdown .theme-code-block,
+  .theme-doc-markdown [class*="codeBlockContainer"] {
+    margin: 0 0 16px;
+    overflow: hidden;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    box-shadow: none;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    --prism-background-color: var(--Colors-Use-Main---Gold-Bg-Hover);
+    --ifm-pre-background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  .theme-doc-markdown > .theme-code-block,
+  .theme-doc-markdown > [class*="codeBlockContainer"],
+  .theme-doc-markdown > pre {
+    margin: 0;
+  }
+
+  .theme-doc-markdown [class*="codeBlockTitle"] {
+    padding: 8px 20px;
+    border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    background: var(--Colors-Use-Main---Gold-Bg);
+    font-family: var(--docs-sans);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.0417em;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
+  }
+
+  .theme-doc-markdown pre {
+    margin: 0 0 16px;
+    padding: 16px 20px 20px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
+    font-family: var(--docs-mono);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--docs-code-plain);
+  }
+
+  .theme-doc-markdown .theme-code-block pre,
+  .theme-doc-markdown [class*="codeBlockContainer"] pre {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .theme-doc-markdown [class*="codeBlockLines"] {
+    padding: 16px 20px 20px;
+    color: var(--docs-code-plain) !important;
+  }
+
+  .theme-doc-markdown [class*="codeBlockLines"] .token.plain {
+    color: var(--docs-code-plain) !important;
+    opacity: 1;
+  }
+
+  .theme-doc-markdown button[class*="copyButton"] {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1 !important;
+  }
+
+  .theme-doc-markdown button[class*="copyButton"]::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    content: "";
+    background: var(--Colors-Use-Neutral-Text-3-Secondary);
+    -webkit-mask: url("/img/docs/docs-code-copy.svg") center / 20px 20px no-repeat;
+    mask: url("/img/docs/docs-code-copy.svg") center / 20px 20px no-repeat;
+  }
+
+  .theme-doc-markdown button[class*="copyButton"] svg {
+    display: none;
+  }
+
+  // Figma 示例语法色（通用 token，Yak 语言另有 .language-yak）
+  .theme-doc-markdown .token.comment {
+    color: var(--docs-code-comment) !important;
+    font-style: normal;
+  }
+
+  .theme-doc-markdown .token.keyword,
+  .theme-doc-markdown .token.boolean {
+    color: var(--docs-code-keyword) !important;
+  }
+
+  .theme-doc-markdown .token.string {
+    color: var(--docs-code-string) !important;
+  }
+
+  .theme-doc-markdown .token.function {
+    color: var(--docs-code-function) !important;
+  }
+
+  .theme-doc-markdown .token.operator,
+  .theme-doc-markdown .token.atrule {
+    color: var(--docs-code-operator) !important;
+    background: transparent !important;
+  }
+
+  .theme-doc-markdown .token.punctuation {
+    color: var(--docs-code-plain) !important;
+  }
+
+  // Tab — Button Groups: padding 4, fill/stroke #F0EAD6, radius 8
+  .theme-doc-markdown .tabs-container {
+    max-width: 100%;
+    margin: 0 0 16px;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .theme-doc-markdown > .tabs-container {
+    margin: 0;
+  }
+
+  .theme-doc-markdown
+    > .tabs-container
+    + :is(.theme-admonition, .alert) {
+    margin-top: 0;
+  }
+
+  .theme-doc-markdown .tabs {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 0 0 10px;
+    padding: 4px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Focus);
+  }
+
+  .theme-doc-markdown .tabs__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  .theme-doc-markdown .tabs__item--active {
+    padding: 8px 10px;
+    border: 0;
+    border-bottom: 0;
+    color: var(--Colors-Use-Basic-Background) !important;
+    background: var(--Colors-Neutral-100) !important;
+    font-weight: 500;
+  }
+
+  .theme-doc-markdown .tabs-container > .margin-top--md {
+    margin-top: 0 !important;
+  }
+
+  // Tips / Admonitions — 左 4px 色条 + 内容区 padding 16 20 20 / gap 8
+  .theme-doc-markdown .theme-admonition,
+  .theme-doc-markdown .alert {
+    --docs-tip-bar: var(--Colors-Use-Main---Gold-Border);
+    --docs-tip-bg: var(--Colors-Use-Main---Gold-Bg-Hover);
+    --ifm-alert-background-color: var(--docs-tip-bg);
+    --ifm-alert-border-color: var(--Colors-Use-Main---Gold-Focus);
+    --ifm-alert-foreground-color: var(--Colors-Use-Neutral-Text-2-Primary);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 16px 20px 20px 24px;
+    overflow: hidden;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    box-shadow: none;
+    background: linear-gradient(
+      to right,
+      var(--docs-tip-bar) 0 4px,
+      var(--docs-tip-bg) 4px 100%
+    ) !important;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  .theme-doc-markdown > .theme-admonition,
+  .theme-doc-markdown > .alert {
+    margin: 0;
+  }
+
+  .theme-doc-markdown .theme-admonition [class*="admonitionHeading"],
+  .theme-doc-markdown .alert [class*="admonitionHeading"] {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--docs-title-color);
+    text-transform: none;
+  }
+
+  .theme-doc-markdown .theme-admonition [class*="admonitionIcon"],
+  .theme-doc-markdown .alert [class*="admonitionIcon"] {
+    display: inline-flex;
+    flex: 0 0 20px;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    background: var(--docs-tip-bar);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 20px 20px;
+    mask-size: 20px 20px;
+  }
+
+  .theme-doc-markdown .theme-admonition [class*="admonitionIcon"] svg,
+  .theme-doc-markdown .alert [class*="admonitionIcon"] svg {
+    display: none;
+  }
+
+  .theme-doc-markdown .theme-admonition [class*="admonitionContent"],
+  .theme-doc-markdown .alert [class*="admonitionContent"] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+  }
+
+  // Tips 内行内 code：用 Infima 原色，不套正文金色 Tag
+  .theme-doc-markdown :is(.theme-admonition, .alert) :not(pre) > code {
+    padding: var(--ifm-code-padding-vertical) var(--ifm-code-padding-horizontal);
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--ifm-code-border-radius);
+    background: var(--ifm-code-background);
+    font-family: var(--ifm-font-family-monospace);
+    font-size: var(--ifm-code-font-size);
+    line-height: inherit;
+    letter-spacing: normal;
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  .theme-doc-markdown
+    .theme-admonition
+    [class*="admonitionContent"]
+    > *,
+  .theme-doc-markdown .alert [class*="admonitionContent"] > * {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .theme-doc-markdown .theme-admonition pre,
+  .theme-doc-markdown .alert pre,
+  .theme-doc-markdown .theme-admonition .theme-code-block,
+  .theme-doc-markdown .alert .theme-code-block {
+    margin-bottom: 0;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
+  }
+
+  // note — gold
+  .theme-doc-markdown .theme-admonition-note,
+  .theme-doc-markdown .alert--secondary {
+    --docs-tip-bar: var(--Colors-Use-Main---Gold-Border);
+    --docs-tip-bg: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  .theme-doc-markdown
+    :is(.theme-admonition-note, .alert--secondary)
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-note.svg");
+    mask-image: url("/img/docs/docs-tip-note.svg");
+  }
+
+  // tip — green
+  .theme-doc-markdown .theme-admonition-tip,
+  .theme-doc-markdown .theme-admonition-success,
+  .theme-doc-markdown .alert--success {
+    --docs-tip-bar: var(--Colors-Use-Success-Primary);
+    --docs-tip-bg: var(--Colors-Use-Success-Bg-Hover);
+  }
+
+  .theme-doc-markdown
+    :is(
+      .theme-admonition-tip,
+      .theme-admonition-success,
+      .alert--success
+    )
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-success.svg");
+    mask-image: url("/img/docs/docs-tip-success.svg");
+  }
+
+  // info — blue
+  .theme-doc-markdown .theme-admonition-info,
+  .theme-doc-markdown .alert--info {
+    --docs-tip-bar: var(--Colors-Use-Blue-Primary);
+    --docs-tip-bg: var(--Colors-Use-Blue-Bg-Hover);
+  }
+
+  .theme-doc-markdown
+    :is(.theme-admonition-info, .alert--info)
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-info.svg");
+    mask-image: url("/img/docs/docs-tip-info.svg");
+  }
+
+  // warning / caution — orange
+  .theme-doc-markdown .theme-admonition-warning,
+  .theme-doc-markdown .theme-admonition-caution,
+  .theme-doc-markdown .alert--warning {
+    --docs-tip-bar: var(--Colors-Use-Warning-Primary);
+    --docs-tip-bg: var(--Colors-Use-Warning-Bg);
+  }
+
+  .theme-doc-markdown
+    :is(
+      .theme-admonition-warning,
+      .theme-admonition-caution,
+      .alert--warning
+    )
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-warning.svg");
+    mask-image: url("/img/docs/docs-tip-warning.svg");
+  }
+
+  // danger — red
+  .theme-doc-markdown .theme-admonition-danger,
+  .theme-doc-markdown .alert--danger {
+    --docs-tip-bar: var(--Colors-Use-Error-Primary);
+    --docs-tip-bg: var(--Colors-Use-Error-Bg-Hover);
+  }
+
+  .theme-doc-markdown
+    :is(.theme-admonition-danger, .alert--danger)
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-danger.svg");
+    mask-image: url("/img/docs/docs-tip-danger.svg");
+  }
+
+  // Docusaurus 可能给 caution / success 同时附加默认 alert 类型；
+  // 放在通用 danger 规则之后，确保设计稿的橙色与绿色语义不被覆盖。
+  .theme-doc-markdown .theme-admonition-caution {
+    --docs-tip-bar: var(--Colors-Use-Warning-Primary);
+    --docs-tip-bg: var(--Colors-Use-Warning-Bg);
+  }
+
+  .theme-doc-markdown
+    .theme-admonition-caution
+    [class*="admonitionIcon"] {
+    -webkit-mask-image: url("/img/docs/docs-tip-warning.svg");
+    mask-image: url("/img/docs/docs-tip-warning.svg");
+  }
+
+  // Tables — header 16/24 Medium #353639 on #F6F2E7; body 14/20 #5A5D64; alt rows
+  .theme-doc-markdown .yakdoc-table {
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 16px;
+    overflow: hidden;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Focus);
+    box-sizing: border-box;
+  }
+
+  .theme-doc-markdown > .yakdoc-table {
+    margin: 0;
+  }
+
+  .theme-doc-markdown .yakdoc-table__scroll {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+
+  .theme-doc-markdown table {
+    // A definite width makes narrow table columns consume the viewport;
+    // the intrinsic minimum still lets wide tables overflow and scroll.
+    display: table;
+    width: calc(100% + 2px);
+    min-width: max-content;
+    margin: -1px;
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 1px;
+    background: var(--Colors-Use-Main---Gold-Focus);
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .theme-doc-markdown table th,
+  .theme-doc-markdown table td {
+    height: 40px;
+    min-height: 40px;
+    padding: 0 12px 0 12px;
+    border: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .theme-doc-markdown table th:first-child,
+  .theme-doc-markdown table td:first-child {
+    width: 120px;
+    padding-left: 20px;
+  }
+
+  .theme-doc-markdown table th:nth-child(2),
+  .theme-doc-markdown table td:nth-child(2) {
+    width: 224px;
+  }
+
+  .theme-doc-markdown table th {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.15px;
+    color: var(--docs-title-color);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    text-align: left;
+  }
+
+  .theme-doc-markdown table td {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+    background: var(--Colors-Use-Main---Gold-Bg); // #F9F6EF
+  }
+
+  .theme-doc-markdown table tbody tr:nth-child(even) td {
+    background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  }
+
+  // Images / videos — Figma: 白底 4px 内边距 + #F0EAD6 边 + 外圆角 12 / 内圆角 8
+  .theme-doc-markdown p:has(> img:only-child),
+  .theme-doc-markdown p:has(> video:only-child),
+  .theme-doc-markdown p:has(> a:only-child > img),
+  .theme-doc-markdown p:has(> .yakdoc-figure) {
+    margin-top: 0;
+  }
+
+  .theme-doc-markdown img,
+  .theme-doc-markdown video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    padding: 4px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 12px;
+    background: var(--Colors-Use-Basic-Background);
+    box-sizing: border-box;
+  }
+
+  // 覆盖 doc-image.scss 的旧卡片阴影，对齐 Figma 图片框
+  .theme-doc-markdown .yakdoc-figure {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 4px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    border-radius: 12px;
+    background: var(--Colors-Use-Basic-Background);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .theme-doc-markdown .yakdoc-figure:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .theme-doc-markdown .yakdoc-figure .yakdoc-image,
+  .theme-doc-markdown .yakdoc-figure img {
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+  }
+
+  .theme-doc-markdown .yakdoc-figure[data-layout="tall"]::after {
+    content: none;
+  }
+
+  .theme-doc-markdown .yakdoc-figure[data-layout="tall"] {
+    max-height: none;
+  }
+
+  .theme-doc-markdown .yakdoc-expand-hint {
+    display: none;
+  }
+
+  // Media caption — Figma 2811:20583.
+  // Markdown images are wrapped as p > .yakdoc-figure; raw MDX videos are
+  // direct siblings. Figure/div cover authored wrappers without touching
+  // ordinary paragraphs that happen to precede a caption-like element.
+  .theme-doc-markdown
+    > :is(
+      img,
+      video,
+      .yakdoc-figure,
+      p:has(> :is(img, video, .yakdoc-figure)),
+      p:has(> a:only-child > :is(img, .yakdoc-figure)),
+      figure:has(:is(img, video, .yakdoc-figure)),
+      div:has(> :is(img, video, .yakdoc-figure):only-child)
+    )
+    + .manual-figcaption {
+    width: 100%;
+    align-self: stretch;
+    // The article stack has a 20px gap. One 12px correction yields the
+    // component's exact 8px media-to-caption gap.
+    margin: -12px 0 0;
+    padding: 0 0 8px;
+    box-sizing: border-box;
+    font-family: "PingFang SC", var(--docs-sans);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: var(--Colors-Use-Neutral-Text-4-Help-text);
+    text-align: center;
+  }
+
+  // Paginator — Figma 2905:51845 左卡展示 Hover、右卡展示 Default；
+  // 实际交互中两侧均默认使用 Default，仅在指针悬停时切换 Hover。
+  .pagination-nav {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+    margin: 0;
+    padding: 20px 0;
+    // 压过 Infima 的 h4/h5 字号
+    --ifm-h4-font-size: 16px;
+    --ifm-h5-font-size: 12px;
+  }
+
+  .pagination-nav__link {
+    --pagination-icon-color: var(--Colors-Use-Neutral-Text-4-Help-text);
+
+    display: flex;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    border: 1px solid var(--Colors-Use-Main---Gold-Focus) !important;
+    border-radius: 8px;
+    background: var(--Colors-Use-Main---Gold-Bg) !important;
+    line-height: normal;
+    text-decoration: none !important;
+    transition: background-color 150ms ease;
+  }
+
+  .pagination-nav__link:hover {
+    --pagination-icon-color: var(--Colors-Use-Main---web-Primary);
+
+    border-color: var(--Colors-Use-Main---Gold-Focus) !important;
+    background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
+  }
+
+  .pagination-nav__link:hover .pagination-nav__sublabel {
+    color: var(--Colors-Use-Main---web-Primary);
+  }
+
+  .pagination-nav__link--prev {
+    grid-column: 1 / 2;
+    text-align: left;
+  }
+
+  .pagination-nav__link--next {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+
+  .pagination-nav__sublabel {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 8px;
+    margin: 0 !important;
+    font-family: var(--docs-sans);
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary); // Figma #5A5D64
+  }
+
+  .pagination-nav__link--prev .pagination-nav__sublabel::before,
+  .pagination-nav__link--next .pagination-nav__sublabel::after {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+    content: "";
+    background: var(--pagination-icon-color);
+    transition: background-color 150ms ease;
+    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 16px 16px;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 16px 16px;
+  }
+
+  .pagination-nav__link--prev .pagination-nav__sublabel::before {
+    -webkit-mask-image: url("/img/docs/docs-page-prev.svg");
+    mask-image: url("/img/docs/docs-page-prev.svg");
+  }
+
+  .pagination-nav__link--next .pagination-nav__sublabel {
+    justify-content: flex-end;
+  }
+
+  .pagination-nav__link--next .pagination-nav__sublabel::after {
+    -webkit-mask-image: url("/img/docs/docs-page-next.svg");
+    mask-image: url("/img/docs/docs-page-next.svg");
+  }
+
+  .pagination-nav__label {
+    display: block;
+    width: 100%;
+    margin: 0;
+    font-family: var(--docs-sans);
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    letter-spacing: 0.15px;
+    color: var(--docs-title-color);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .pagination-nav__link--next .pagination-nav__label {
+    text-align: right;
+  }
+
+  // 去掉 Infima 默认 « »
+  .pagination-nav__link--prev .pagination-nav__label::before,
+  .pagination-nav__link--next .pagination-nav__label::after {
+    content: none !important;
+  }
+
+  @media (max-width: 639px) {
+    .pagination-nav {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pagination-nav__link--prev,
+    .pagination-nav__link--next {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+html.docs-wrapper[data-theme="dark"],
+html.blog-wrapper[data-theme="dark"] {
+  --docs-code-plain: #c8d0dd;
+  --docs-code-comment: #868d9a;
+  --docs-code-keyword: #398dff;
+  --docs-code-string: #70d3a3;
+  --docs-code-function: #e8700d;
+  --docs-code-operator: #a080ff;
+
+  .theme-doc-markdown .theme-code-block,
+  .theme-doc-markdown [class*="codeBlockContainer"],
+  .theme-doc-markdown pre {
+    --prism-background-color: var(--Colors-Use-Main---Gold-Bg-Hover);
+    --ifm-pre-background: var(--Colors-Use-Main---Gold-Bg-Hover);
+    background: var(--Colors-Use-Main---Gold-Bg-Hover) !important;
+  }
+}

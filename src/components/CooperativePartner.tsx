@@ -140,7 +140,7 @@ const CooperativePartnerRender: React.FC<CooperativePartnerRenderProps> = (
           <img
             style={scale ? { scale } : {}}
             className="cooperative-partner-item-img"
-            src={img}
+            src={img.replace("/img/partner/", "/img/partnerDoc/")}
             alt={name}
           />
         </div>

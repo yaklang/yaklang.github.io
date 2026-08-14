@@ -71,7 +71,7 @@ const LastScreenCTAFooter: React.FC<{ stickyReveal?: boolean }> = ({
   stickyReveal = false,
 }) => (
   <>
-    <div className="relative z-[1] box-border flex min-h-[calc(100vh-80px)] h-auto w-full shrink-0 flex-col items-stretch bg-[var(--Colors-Use-Main---Gold-Bg)] [transform:translateZ(0)] sm:h-[calc(100vh-80px)]">
+    <div className="relative z-[1] box-border flex sm:min-h-[calc(100vh-80px)] h-auto w-full shrink-0 flex-col items-stretch bg-[var(--Colors-Use-Main---Gold-Bg)] [transform:translateZ(0)] sm:h-[calc(100vh-80px)]">
       <HomeTestimonialsCTA />
     </div>
     <div className="relative z-[1] shrink-0 bg-[var(--Colors-Use-Main---Gold-Bg)] py-[80px] [transform:translateZ(0)]">

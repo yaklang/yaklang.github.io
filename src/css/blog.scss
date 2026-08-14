@@ -1,288 +1,444 @@
-// ===================================================================
-// 技术博客样式：布局避让、卡片化列表、阅读排版
-// 说明：blog-wrapper / blog-list-page / blog-post-page / plugin-blog
-//       这些 class 由 Docusaurus 挂在 <html> 元素上，需用后代选择器命中
-// ===================================================================
+// Blog 页面复用文档页视觉规范；仅调整布局与样式，不隐藏或改写内容。
 
-// ---------- 通用：博客页避让固定导航栏 ----------
 html.plugin-blog {
-  // 统一字体，保证中英文混排和谐
-  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue",
-    Helvetica, Arial, sans-serif;
+  --ifm-font-family-base: var(--docs-sans);
 
-  // Infima 的 .margin-vert--lg 工具类带 !important（margin-top: 2rem !important），
-  // 不加 !important 会被压制，导致容器仅 32px 顶距、文章标题被 60px 固定导航栏遮挡，
-  // 与靠 sticky(top:72) 的左侧"近期文章"/右侧 TOC 错位。此处用 !important 强制对齐到导航栏下方。
-  .main-wrapper > .container {
-    margin-top: REM(72) !important;
-    margin-bottom: REM(48) !important;
-  }
-
-  // 左侧"近期文章"栏：粘性吸顶时停在导航栏下方，避免被遮挡
-  aside[class*="col"] {
-    > div,
-    nav {
-      top: REM(72);
-    }
-  }
-}
-
-// ---------- 左侧"近期文章"导航栏样式 ----------
-html.plugin-blog {
-  aside nav {
-    a {
-      font-size: REM(14);
-      line-height: 1.6;
-      color: var(--Colors-Use-Neutral-Text-3-Secondary);
-      &:hover {
-        color: var(--Colors-Use-Main---web-Primary);
-        text-decoration: none;
-      }
-    }
-    // 年份分组标题
-    > div > div:first-child {
-      font-weight: 700;
-      color: var(--Colors-Use-Neutral-Text-1-Title);
-    }
-  }
-}
-
-// ---------- 列表/标签/归档页：卡片化（排除文章详情页） ----------
-// 设计目标：高信息密度、弱化卡片间距、移除作者与标签、预览灰色斜体、每屏容纳更多
-html.plugin-blog:not(.blog-post-page) {
-  .main-wrapper article {
-    background: var(--Colors-Use-Main---Gold-Bg-Hover);
-    border: 1px solid var(--Colors-Use-Main---Gold-Focus);
-    border-radius: REM(10);
-    padding: REM(12) REM(18);
-    // Infima 的 .margin-bottom--xl 带 !important(3rem)，需 !important 才能收紧卡片间距
-    margin-bottom: REM(10) !important;
-    box-shadow: 0 1px 2px var(--Colors-Use-Basic-Shadow);
-    transition: box-shadow 0.18s ease, border-color 0.18s ease;
-
-    &:hover {
-      box-shadow: 0 6px 18px var(--Colors-Use-Basic-Shadow);
-      border-color: var(--Colors-Use-Main---web-Primary);
-    }
-
-    // 标题：更紧凑
-    header h2 {
-      font-size: REM(17);
-      line-height: 1.35;
-      font-weight: 700;
-      margin-bottom: REM(2);
-
-      a {
-        color: var(--Colors-Use-Neutral-Text-1-Title);
-        &:hover {
-          color: var(--Colors-Use-Main---web-Primary);
-          text-decoration: none;
-        }
-      }
-    }
-
-    // 日期：收紧上下间距(覆盖 Infima .margin-vert--md 的 !important)
-    header [class*="container_"].margin-vert--md {
-      margin-top: REM(2) !important;
-      margin-bottom: 0 !important;
-    }
-    header time {
-      color: var(--Colors-Use-Neutral-Text-4-Help-text);
-      font-size: REM(12);
-    }
-
-    // 移除作者信息行(头像/名称/简介)
-    header .row:has([class*="authorCol"]) {
-      display: none;
-    }
-    // 兜底：低版本浏览器不支持 :has 时，至少隐藏作者列本体
-    header [class*="authorCol"] {
-      display: none;
-    }
-
-    // 摘要预览：灰色斜体、限 2 行、收紧间距，提升信息密度
-    .markdown {
-      font-size: REM(13.5);
-      line-height: 1.6;
-      color: var(--Colors-Use-Neutral-Text-3-Secondary);
-      font-style: italic;
-      margin: REM(6) 0 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-
-      img {
-        display: none;
-      }
-      p {
-        margin: 0;
-      }
-      // 摘要里的标题降级为普通文字，避免突兀
-      h1,
-      h2,
-      h3,
-      h4 {
-        display: inline;
-        font-size: REM(13.5);
-        font-weight: 600;
-        font-style: italic;
-        margin: 0;
-      }
-    }
-
-    // 页脚：移除标签列；"阅读更多"靠最右、紧贴摘要下方，减少空白
-    footer {
-      margin-top: REM(2) !important;
-
-      // 隐藏标签所在列(含"标签："标签与 pill)
-      .col:has(ul[class*="tags"]) {
-        display: none;
-      }
-      // 兜底：不支持 :has 时直接隐藏标签 ul
-      ul[class*="tags"] {
-        display: none;
-      }
-
-      // "阅读更多"占满整行并靠最右(原 col--3 仅 25% 宽会偏左)
-      .col.text--right {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-
-      .button,
-      a[href] {
-        font-size: REM(13);
-        color: var(--Colors-Use-Neutral-Text-3-Secondary);
-
-        &:hover {
-          color: var(--Colors-Use-Main---web-Primary);
-        }
-      }
-    }
-  }
-}
-
-// ---------- 标签 pill / 分页导航 ----------
-html.plugin-blog {
   .main-wrapper {
-    ul[class*="tags"] {
-      display: flex;
-      flex-wrap: wrap;
-      gap: REM(8);
-      padding-left: 0;
-      list-style: none;
-      margin: REM(8) 0 0;
-    }
-    a[class*="tag_"] {
-      border-radius: REM(20);
-      padding: REM(2) REM(12);
-      font-size: REM(12);
-    }
+    min-width: 0;
+    background: var(--Colors-Use-Main---Gold-Bg);
+  }
+}
+
+// -----------------------------------------------------------------
+// Layout — 与 DocsRoot / DocItem 相同的三栏版心
+// -----------------------------------------------------------------
+html.plugin-blog .blog-layout-shell {
+  width: 100%;
+  max-width: 1440px;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+html.plugin-blog .blog-layout-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+  border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
+}
+
+html.plugin-blog .blog-main {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 40px 20px;
+  box-sizing: border-box;
+}
+
+html.plugin-blog .blog-layout-row > aside[class~="col"] {
+  flex: 0 0 var(--docs-sidebar-width);
+  width: var(--docs-sidebar-width);
+  max-width: var(--docs-sidebar-width);
+  min-width: 0;
+  padding: 0;
+  border-right: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  background: var(--Colors-Use-Main---Gold-Bg);
+  box-sizing: border-box;
+}
+
+html.plugin-blog .blog-layout-row > aside[class~="col"] > nav {
+  width: 100%;
+  height: calc(100vh - var(--docs-navbar-height));
+  max-height: calc(100vh - var(--docs-navbar-height));
+    padding: 0 12px 20px 0;
+  overflow-y: auto;
+  position: sticky;
+  top: var(--docs-navbar-height);
+  box-sizing: border-box;
+  font-family: var(--docs-sans);
+}
+
+html.plugin-blog .blog-toc-column {
+  display: none;
+}
+
+@media (min-width: 1440px) and (max-width: 1679px) {
+  html.plugin-blog .blog-layout-shell {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1360px) and (max-width: 1439px) {
+  html.plugin-blog .blog-layout-shell {
+    max-width: 1152px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1359px) {
+  html.plugin-blog .blog-layout-shell {
+    max-width: calc(100% - 160px);
   }
 
-  // 博客列表分页："较新的博文"/"较旧的博文"卡片
-  .pagination-nav {
-    a {
+  html.plugin-blog .blog-main {
+    padding-right: 0;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 1360px) {
+  html.plugin-blog .blog-layout-shell--with-toc .blog-main {
+    max-width: calc(
+      100% - var(--docs-sidebar-width) - var(--docs-toc-width)
+    );
+  }
+
+  html.plugin-blog
+    .blog-layout-shell--with-toc:not(.blog-layout-shell--with-sidebar)
+    .blog-main {
+    max-width: calc(100% - var(--docs-toc-width));
+  }
+
+  html.plugin-blog .blog-toc-column {
+    display: block;
+    flex: 0 0 var(--docs-toc-width);
+    width: var(--docs-toc-width);
+    min-width: var(--docs-toc-width);
+    padding: 12px 0 20px 12px;
+    border-left: 1px solid var(--Colors-Use-Main---Gold-Focus);
+    box-sizing: border-box;
+  }
+
+  html.plugin-blog .blog-toc-column > div {
+    max-height: calc(100vh - var(--docs-navbar-height) - 32px);
+    margin: 0;
+    overflow-y: auto;
+    position: sticky;
+    top: calc(var(--docs-navbar-height) + 12px);
+    box-sizing: border-box;
+  }
+
+  html.plugin-blog .blog-toc-column .table-of-contents {
+    margin: 0;
+    padding: 0 12px 0 0;
+    border-left: 0;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1023px) {
+  html.plugin-blog .blog-layout-shell {
+    max-width: 100%;
+  }
+
+  html.plugin-blog .blog-layout-row {
+    display: block;
+  }
+
+  html.plugin-blog .blog-layout-row > aside[class~="col"] {
+    display: none;
+  }
+}
+
+@media (max-width: 755px) {
+  html.plugin-blog .blog-main {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+// -----------------------------------------------------------------
+// Left sidebar
+// -----------------------------------------------------------------
+html.plugin-blog .blog-layout-row > aside nav {
+  > [class*="sidebarItemTitle"] {
+    margin: 0 0 8px !important;
+    padding: 6px 8px;
+    font-family: var(--docs-serif);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
+  }
+
+  [role="group"] {
+    margin: 0;
+  }
+
+  h3 {
+    margin: 8px 0 2px;
+    padding: 6px 8px;
+    font-family: var(--docs-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-1-Title);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    min-height: 32px;
+    padding: 6px 8px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: var(--Colors-Use-Neutral-Text-2-Primary);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover,
+    &[aria-current="page"] {
+      color: var(--Colors-Use-Main---web-Primary) !important;
       background: var(--Colors-Use-Main---Gold-Bg-Hover);
-      border: 1px solid var(--Colors-Use-Main---Gold-Focus);
-      color: var(--Colors-Use-Neutral-Text-3-Secondary);
-
-      &:hover {
-        border-color: var(--Colors-Use-Main---web-Primary);
-        color: var(--Colors-Use-Main---web-Primary);
-      }
+      text-decoration: none;
     }
 
-    .pagination-nav__sublabel {
-      color: var(--Colors-Use-Neutral-Text-4-Help-text);
-    }
-
-    .pagination-nav__label {
-      color: var(--Colors-Use-Neutral-Text-2-Primary);
+    &[aria-current="page"] {
+      font-weight: 600;
     }
   }
 }
 
-// ---------- 文章详情页：阅读排版 ----------
-html.blog-post-page {
-  .main-wrapper {
-    // 文章主标题
-    header h1 {
-      font-size: REM(34);
-      line-height: 1.3;
-      margin-bottom: REM(12);
-      letter-spacing: 0.2px;
-      color: var(--Colors-Use-Neutral-Text-1-Title);
-    }
+// -----------------------------------------------------------------
+// Right TOC
+// -----------------------------------------------------------------
+html.plugin-blog .blog-toc-column .table-of-contents__link {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
+}
 
-    .markdown {
-      font-size: REM(16);
-      line-height: 1.9;
-      color: var(--Colors-Use-Neutral-Text-2-Primary);
+html.plugin-blog .blog-toc-column .table-of-contents__link:hover,
+html.plugin-blog .blog-toc-column .table-of-contents__link--active {
+  color: var(--Colors-Use-Main---web-Primary);
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  font-weight: 600;
+  text-decoration: none;
+}
 
-      h2 {
-        font-size: REM(25);
-        margin-top: REM(38);
-        padding-bottom: REM(8);
-        border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
-        color: var(--Colors-Use-Neutral-Text-1-Title);
-      }
-      h3 {
-        font-size: REM(20);
-        margin-top: REM(28);
-        color: var(--Colors-Use-Neutral-Text-1-Title);
-      }
-      h4 {
-        font-size: REM(17);
-        margin-top: REM(22);
-        color: var(--Colors-Use-Neutral-Text-1-Title);
-      }
+// -----------------------------------------------------------------
+// Blog post — 内容组件已附加 theme-doc-markdown，正文直接复用文档规则
+// -----------------------------------------------------------------
+html.blog-post-page .blog-main > article {
+  margin: 0;
+}
 
-      p {
-        margin: REM(14) 0;
-      }
+html.blog-post-page .blog-main article > header {
+  margin: 0 0 20px;
+  padding-top: 8px;
+  text-align: left;
+}
 
-      a {
-        color: var(--Colors-Use-Main---web-Primary);
-        text-decoration: underline;
-        text-underline-offset: 2px;
+html.blog-post-page .blog-main article > header h1 {
+  margin: 0;
+  font-family: var(--docs-serif);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 56px;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  color: var(--docs-title-color);
+  text-align: left;
+}
 
-        &:hover {
-          color: var(--Colors-Use-Main---web-Primary);
-          text-decoration: none;
-        }
-      }
+// The post header's 20px bottom margin is the complete title-to-content gap.
+// Remove the shared section-heading inset only when H2 starts the post body.
+html.blog-post-page
+  .blog-main
+  article
+  > .theme-doc-markdown
+  > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
 
-      img {
-        display: block;
-        max-width: 100%;
-        margin: REM(20) auto;
-        border-radius: REM(8);
-        box-shadow: 0 2px 14px var(--Colors-Use-Basic-Shadow);
-      }
+html[lang^="en"].blog-post-page .blog-main article > header h1 {
+  font-weight: 400;
+}
 
-      blockquote {
-        border-left: REM(4) solid var(--Colors-Use-Main---Gold-Focus);
-        background: var(--Colors-Use-Main---Gold-Bg-Hover);
-        padding: REM(10) REM(18);
-        color: var(--Colors-Use-Neutral-Text-3-Secondary);
-        border-radius: 0 REM(6) REM(6) 0;
-      }
+html.blog-post-page .blog-main article > header [class*="meta"] {
+  justify-content: flex-start;
+  margin: 8px 0 0;
+  font-family: var(--docs-sans);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
+}
 
-      pre {
-        border-radius: REM(10);
-        font-size: REM(13.5);
-      }
+html.blog-post-page .blog-main article > footer {
+  margin-top: 20px !important;
+  font-family: var(--docs-sans);
+  font-size: 14px;
+  line-height: 20px;
+}
 
-      ul,
-      ol {
-        padding-left: REM(24);
-        li {
-          margin: REM(6) 0;
-        }
-      }
-    }
-  }
+// -----------------------------------------------------------------
+// Blog list / tags / archive — 保留作者、标签、摘要和阅读更多
+// -----------------------------------------------------------------
+html.plugin-blog:not(.blog-post-page) .blog-main > header h1,
+html.plugin-blog:not(.blog-post-page) .blog-main > h1 {
+  margin: 0;
+  padding: 8px 0 20px;
+  font-family: var(--docs-serif);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 56px;
+  color: var(--docs-title-color);
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article {
+  margin: 0 !important;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  background: transparent;
+  box-shadow: none;
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article:first-of-type {
+  padding-top: 8px;
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > header h2 {
+  margin: 0;
+  font-family: var(--docs-serif);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > header h2 a {
+  color: var(--Colors-Use-Neutral-Text-1-Title);
+  text-decoration: none;
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > header h2 a:hover {
+  color: var(--Colors-Use-Main---web-Primary);
+}
+
+html.plugin-blog:not(.blog-post-page)
+  .blog-main
+  article
+  > header
+  [class*="meta"] {
+  margin: 8px 0 0;
+  font-family: var(--docs-sans);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  color: var(--Colors-Use-Neutral-Text-4-Help-text);
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > .markdown {
+  display: -webkit-box;
+  margin: 12px 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-family: var(--docs-sans);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0.1px;
+  color: var(--Colors-Use-Neutral-Text-2-Primary);
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > .markdown > * {
+  margin: 0;
+}
+
+html.plugin-blog:not(.blog-post-page)
+  .blog-main
+  article
+  > .markdown
+  > :is(h1, h2, h3, h4, h5, h6) {
+  display: block;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+}
+
+html.plugin-blog:not(.blog-post-page)
+  .blog-main
+  article
+  > .markdown
+  :is(.yakdoc-figure, img, video),
+html.plugin-blog:not(.blog-post-page)
+  .blog-main
+  article
+  > .markdown
+  p:has(> .yakdoc-figure) {
+  display: none;
+}
+
+html.plugin-blog:not(.blog-post-page) .blog-main article > footer {
+  align-items: center;
+  margin-top: 16px !important;
+  font-family: var(--docs-sans);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+html.plugin-blog .blog-main ul[class*="tags"] {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+html.plugin-blog .blog-main ul[class*="tags"] li {
+  margin: 0;
+}
+
+html.plugin-blog .blog-main a[class*="tag"] {
+  display: inline-flex;
+  min-height: 28px;
+  padding: 4px 8px;
+  align-items: center;
+  border: 1px solid var(--Colors-Use-Main---Gold-Focus);
+  border-radius: 4px;
+  background: var(--Colors-Use-Main---Gold-Bg-Hover);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--Colors-Use-Neutral-Text-3-Secondary);
+  text-decoration: none;
+}
+
+html.plugin-blog .blog-main a[class*="tag"]:hover {
+  border-color: var(--Colors-Use-Main---Gold-Border);
+  color: var(--Colors-Use-Main---web-Primary);
+}
+
+html.plugin-blog:not(.blog-post-page)
+  .blog-main
+  article
+  > footer
+  .text--right
+  a {
+  color: var(--Colors-Use-Main---web-Primary);
+  text-decoration: none;
 }
