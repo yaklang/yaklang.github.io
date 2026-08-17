@@ -54,6 +54,7 @@ AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、Chat
 | [ai.rawHTTPResponseCallback](#rawhttpresponsecallback) | WithRawHTTPResponseCallback 注册原始 HTTP 响应回调，可获取响应头与响应体预览（导出名为 ai.rawHTTPResponseCallback） |
 | [ai.rawHTTPResponseHeaderCallback](#rawhttpresponseheadercallback) | WithRawHTTPResponseHeaderCallback 注册原始 HTTP 响应头回调（导出名为 ai.rawHTTPResponseHeaderCallback） |
 | [ai.rawMessages](#rawmessages) | WithRawMessages 让上层把客户端原始的 messages 数组完整透传到上游 LLM， |
+| [ai.reasoningEffort](#reasoningeffort) |  |
 | [ai.speedPriority](#speedpriority) | WithSpeedPriority 设置速度优先（使用轻量模型，导出名为 ai.speedPriority） |
 | [ai.thinking](#thinking) | WithEnableThinking 设置是否启用思考链相关请求体字段；仅写入 EnableThinking（*bool）。 |
 | [ai.timeout](#timeout) | WithTimeout 设置请求超时时间（单位：秒）。 |
@@ -1807,6 +1808,34 @@ rawMessages(msgs []ChatDetail) AIConfigOption
 opt = ai.rawMessages(msgs)
 println(opt)
 ``````````````
+
+</TabItem>
+</Tabs>
+
+
+---
+
+### reasoningEffort {#reasoningeffort}
+
+
+<Tabs>
+<TabItem value="reasoningEffort-1" label="定义" default>
+
+```go
+reasoningEffort(s string) AIConfigOption
+```
+
+**参数配置信息**
+
+|参数名|参数类型|参数解释|
+|:-----------|:---------- |:-----------|
+| s | `string` |  |
+
+**返回值**
+
+|返回值(顺序)|返回值类型|返回值解释|
+|:-----------|:---------- |:-----------|
+| r1 | `AIConfigOption` |  |
 
 </TabItem>
 </Tabs>
