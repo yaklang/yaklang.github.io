@@ -60,7 +60,7 @@ export default function HomeNew() {
   return (
     <HomeLayout
       title={`Yak Project - ${siteConfig.title}`}
-      description="广泛使用的开源网络安全基础设施"
+      description="万径安全旗下被广泛使用的开源网络安全基础设施"
     >
       <HomePageNew />
     </HomeLayout>

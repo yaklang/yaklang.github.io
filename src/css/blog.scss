@@ -14,7 +14,9 @@ html.plugin-blog {
 // -----------------------------------------------------------------
 html.plugin-blog .blog-layout-shell {
   width: 100%;
-  max-width: 1440px;
+  // 与文档页 shell 一致：内容最大 1440px 居中，左右最小留白 10px，
+  // 视口不足 1460px 时按 calc(100% - 20px) 自动铺开。
+  max-width: min(1440px, calc(100% - 20px));
   min-width: 0;
   margin: 0 auto;
 }
@@ -30,7 +32,7 @@ html.plugin-blog .blog-layout-row {
 html.plugin-blog .blog-main {
   width: 100%;
   min-width: 0;
-  padding: 12px 40px 20px;
+  padding: 12px 20px 20px;
   box-sizing: border-box;
 }
 
@@ -61,30 +63,7 @@ html.plugin-blog .blog-toc-column {
   display: none;
 }
 
-@media (min-width: 1440px) and (max-width: 1679px) {
-  html.plugin-blog .blog-layout-shell {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1360px) and (max-width: 1439px) {
-  html.plugin-blog .blog-layout-shell {
-    max-width: 1152px;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1359px) {
-  html.plugin-blog .blog-layout-shell {
-    max-width: calc(100% - 160px);
-  }
-
-  html.plugin-blog .blog-main {
-    padding-right: 0;
-    padding-left: 20px;
-  }
-}
-
-@media (min-width: 1360px) {
+@media (min-width: 1280px) {
   html.plugin-blog .blog-layout-shell--with-toc .blog-main {
     max-width: calc(
       100% - var(--docs-sidebar-width) - var(--docs-toc-width)
@@ -125,6 +104,32 @@ html.plugin-blog .blog-toc-column {
   }
 }
 
+@media (min-width: 1280px) and (max-width: 1359px) {
+  // 与文档页一致：该区间 TOC 不显示，正文右侧贴 shell 边缘
+  html.plugin-blog .blog-main {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  // 与文档页一致：该区间 TOC 不显示，正文右侧贴 shell 边缘
+  html.plugin-blog .blog-main {
+    padding-right: 0;
+    padding-left: 20px;
+  }
+}
+
+// 与文档页一致：TOC 收起（无 TOC 列）、侧边栏仍展开时正文左右 10px
+@media (min-width: 1024px) {
+  html.plugin-blog
+    .blog-layout-shell--with-sidebar:not(.blog-layout-shell--with-toc)
+    .blog-main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 @media (max-width: 1023px) {
   html.plugin-blog .blog-layout-shell {
     max-width: 100%;
@@ -143,6 +148,13 @@ html.plugin-blog .blog-toc-column {
   html.plugin-blog .blog-main {
     padding-right: 20px;
     padding-left: 20px;
+  }
+}
+
+@media (min-width: 1600px) {
+  html.plugin-blog .blog-main {
+    padding-right: 40px;
+    padding-left: 40px;
   }
 }
 

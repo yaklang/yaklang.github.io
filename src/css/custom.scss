@@ -362,6 +362,13 @@ html.blog-wrapper {
   .markdown {
     color: var(--Colors-Use-Neutral-Text-2-Primary);
 
+    // 兜底：顶层 <p> 去掉默认外边距（设计稿正文段落无额外 margin）。
+    // docs-layout.scss 内有同义规则，但为防止该文件未打包进产物时段落退回
+    // Docusaurus 默认 margin，这里再保底一次。特异性与后者一致，不冲突。
+    > p {
+      margin: 0;
+    }
+
     h1,
     h2,
     h3,

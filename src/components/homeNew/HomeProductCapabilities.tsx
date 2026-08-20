@@ -723,6 +723,7 @@ const HomeProductCapabilities: React.FC<{
                   )}
                 </div>
                 <p className="m-0 max-w-full overflow-visible text-left font-['PingFang_SC'] text-[13px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] sm:text-[15px] sm:leading-[22px]">
+                  {t("HomeProductCapabilities.brandPrefix")}
                   {productBase.description}
                 </p>
               </div>

@@ -3,8 +3,8 @@
 
 html.docs-wrapper,
 html.blog-wrapper {
-  --docs-sidebar-width: 320px;
-  --docs-toc-width: 320px;
+  --docs-sidebar-width: 272px;
+  --docs-toc-width: 200px;
   --docs-navbar-height: 80px;
   --docs-anchor-offset: var(--docs-navbar-height);
   scroll-padding-top: var(--docs-anchor-offset);
@@ -43,7 +43,9 @@ html.blog-wrapper {
   }
 
   .docs-layout-shell {
-    max-width: 1440px;
+    // 与首页版心一致：内容最大 1440px 居中，左右最小留白 10px，
+    // 视口不足 1460px 时按 calc(100% - 20px) 自动铺开。
+    max-width: min(1440px, calc(100% - 20px));
   }
 
   .docs-main {
@@ -64,21 +66,14 @@ html.blog-wrapper {
     }
   }
 
-  @media (min-width: 1440px) and (max-width: 1679px) {
-    .docs-layout-shell {
-      max-width: 1280px;
-    }
-  }
-
-  @media (min-width: 1360px) and (max-width: 1439px) {
-    .docs-layout-shell {
-      max-width: 1152px;
-    }
-  }
-
-  @media (min-width: 1024px) and (max-width: 1359px) {
-    .docs-layout-shell {
-      max-width: calc(100% - 160px);
+  // TOC 收起（页面无 TOC 列）、侧边栏仍展开时，正文横向空间更宽，
+  // 左右边距设为 10px，避免内容区过宽。
+  @media (min-width: 1024px) {
+    .docs-layout-shell:not(.docs-layout-shell--collapsed)
+      .docs-item-row:not(:has(.docs-toc-column))
+      .docs-item-container {
+      padding-left: 10px;
+      padding-right: 10px;
     }
   }
 
@@ -633,7 +628,7 @@ html.blog-wrapper {
     padding: 0;
     border-left: 0;
     font-family: var(--docs-sans);
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .docs-toc-column .table-of-contents__link {
@@ -751,7 +746,7 @@ html.blog-wrapper {
     transform: rotate(180deg);
   }
 
-  @media (max-width: 1359px) {
+  @media (max-width: 1279px) {
     .theme-doc-toc-mobile {
       display: block !important;
     }

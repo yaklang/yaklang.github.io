@@ -9,7 +9,10 @@ import { HOME_SCROLL_MS } from "./homeMotion";
 import { useHomeTheme } from "./HomeThemeContext";
 import { useHomeLanguage } from "./useHomeLanguage";
 import SearchButton from "../SearchButton";
-import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
+import {
+  HOME_CONTAINER_CLASS,
+  DOCS_CONTAINER_CLASS,
+} from "./homeSectionLayout";
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import { OpenSourceMegaMenu } from "@site/src/theme/NavbarItem/OpenSourceNavbarItem";
 import { OPEN_SOURCE_PROJECTS } from "@site/src/components/OpenSource";
@@ -155,6 +158,8 @@ const HomeNavbar: React.FC = () => {
   const activeSlideIndex = useHomeSlideIndex();
   const location = useLocation();
   const isHomePage = location.pathname === "/" || location.pathname === "";
+  // 首页走老样式版心，文档/博客等其它页面用新版心（与 shell 对齐）
+  const containerClass = isHomePage ? HOME_CONTAINER_CLASS : DOCS_CONTAINER_CLASS;
   const logoSrc = useBaseUrl("img/logo.png");
   const { currentLng, toggleLanguage } = useHomeLanguage();
   const { theme, toggleTheme } = useHomeTheme();
@@ -364,7 +369,7 @@ const HomeNavbar: React.FC = () => {
           className="absolute inset-x-0 bottom-0 h-[1px] w-full bg-[var(--Colors-Use-Main---Gold-Focus)] pointer-events-none"
         />
         {/* 内容层（相对定位，确保内容在背景和边框之上） */}
-        <div className={`relative flex items-center justify-between h-full ${HOME_CONTAINER_CLASS}`}>
+        <div className={`relative flex items-center justify-between h-full ${containerClass}`}>
           <div ref={leftRef} className="flex items-center min-w-0">
             <Link className="inline-flex flex-shrink-0 mr-[24px]" to="/">
               <img
@@ -558,7 +563,7 @@ const HomeNavbar: React.FC = () => {
       {/* 小屏全屏菜单 */}
       {mobileOpen ? (
         <div className={`fixed inset-0 z-[300] flex flex-col bg-[var(--Colors-Use-Main---Gold-Bg)] ${collapsed ? "flex" : "hidden"}`}>
-          <div className={`flex items-center justify-between h-[80px] shrink-0 ${HOME_CONTAINER_CLASS}`}>
+          <div className={`flex items-center justify-between h-[80px] shrink-0 ${containerClass}`}>
             <Link
               className="inline-flex flex-shrink-0"
               to="/"
