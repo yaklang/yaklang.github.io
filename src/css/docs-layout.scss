@@ -45,7 +45,7 @@ html.blog-wrapper {
   .docs-layout-shell {
     // 与首页版心一致：内容最大 1440px 居中，左右最小留白 10px，
     // 视口不足 1460px 时按 calc(100% - 20px) 自动铺开。
-    max-width: min(1440px, calc(100% - 20px));
+    max-width: min(1440px, calc(100% - 40px));
   }
 
   .docs-main {
@@ -99,7 +99,7 @@ html.blog-wrapper {
     top: var(--docs-navbar-height);
     width: var(--docs-sidebar-width);
     height: calc(100vh - var(--docs-navbar-height));
-    padding: 0 12px 20px 0;
+    padding: 0 16px 20px 0;
     overflow-y: auto;
     box-sizing: border-box;
     font-family: var(--docs-sans);
@@ -762,8 +762,8 @@ html.blog-wrapper {
     align-items: stretch;
     gap: 20px;
     font-family: var(--docs-sans);
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 26px;
     letter-spacing: 0.1px;
     overflow-wrap: anywhere;
     color: var(--Colors-Use-Neutral-Text-2-Primary); // #5A5D64
@@ -885,10 +885,10 @@ html.blog-wrapper {
 
   // 正文
   .theme-doc-markdown p {
-    margin: 0 0 16px;
-    font-size: 14px;
+    margin: 0;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 22px;
+    line-height: 26px;
     letter-spacing: 0.1px;
     color: var(--Colors-Use-Neutral-Text-2-Primary);
   }
@@ -912,9 +912,9 @@ html.blog-wrapper {
 
   .theme-doc-markdown li {
     margin: 6px 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 22px;
+    line-height: 26px;
     letter-spacing: 0.1px;
   }
 
@@ -1041,7 +1041,7 @@ html.blog-wrapper {
   // 代码块 — #F6F2E7 / #F0EAD6 / radius 8 / padding 16 20 20 / JetBrains 14/20
   .theme-doc-markdown .theme-code-block,
   .theme-doc-markdown [class*="codeBlockContainer"] {
-    margin: 0 0 16px;
+    margin: 16px 0 16px;
     overflow: hidden;
     border: 1px solid var(--Colors-Use-Main---Gold-Focus);
     border-radius: 8px;
@@ -1054,7 +1054,7 @@ html.blog-wrapper {
   .theme-doc-markdown > .theme-code-block,
   .theme-doc-markdown > [class*="codeBlockContainer"],
   .theme-doc-markdown > pre {
-    margin: 0;
+    margin: 16px 0 0;
   }
 
   .theme-doc-markdown [class*="codeBlockTitle"] {
@@ -1070,7 +1070,7 @@ html.blog-wrapper {
   }
 
   .theme-doc-markdown pre {
-    margin: 0 0 16px;
+    margin: 16px 0 16px;
     padding: 16px 20px 20px;
     border: 1px solid var(--Colors-Use-Main---Gold-Focus);
     border-radius: 8px;
@@ -1297,9 +1297,9 @@ html.blog-wrapper {
     flex-direction: column;
     gap: 8px;
     margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 22px;
+    line-height: 26px;
     color: var(--Colors-Use-Neutral-Text-2-Primary);
   }
 

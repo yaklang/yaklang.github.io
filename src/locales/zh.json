@@ -179,7 +179,7 @@
     "titleHighlight1": "开源网络",
     "titleHighlight2": "安全基础设施",
     "title": "广泛使用的开源网络安全基础设施",
-    "subtitle": "万径安全旗下 Powered by CDSL-Yaklang - 为网络安全而生的编程语言"
+    "subtitle": "Powered by CDSL-Yaklang - 万径安全旗下为网络安全而生的编程语言"
   },
   "HomeMilestones": {
     "title": "里程碑",
@@ -492,7 +492,7 @@
   "HomeProductCapabilities": {
     "title": "产品能力",
     "subtitle": "Yaklang / Yakit / Memfit / IRify 核心特点与场景",
-    "brandPrefix": "万径安全旗下 ",
+    "brandPrefix": "万径安全旗下产品，",
     "noDemo": "暂无演示内容",
     "itemInfo": "第 {{current}} / {{total}} 项",
     "nextVideo": "切换到下一个视频",
