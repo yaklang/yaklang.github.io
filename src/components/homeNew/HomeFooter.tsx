@@ -1,12 +1,16 @@
 import React from "react";
 import Link from "@docusaurus/Link";
+import { useLocation } from "@docusaurus/router";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import { Popover } from "antd";
 import { useTranslation } from "react-i18next";
 import SearchButton from "../SearchButton";
 import { useHomeTheme } from "./HomeThemeContext";
 import { useHomeLanguage } from "./useHomeLanguage";
-import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
+import {
+  HOME_CONTAINER_CLASS,
+  DOCS_CONTAINER_CLASS,
+} from "./homeSectionLayout";
 import TextType from "./TextType";
 
 const GithubIcon = () => (
@@ -472,6 +476,10 @@ const HomeFooter: React.FC<{
   const isEn = i18n.language?.startsWith("en");
   const logoSrc = useBaseUrl("img/logo.png");
   const { currentLng, toggleLanguage } = useHomeLanguage();
+  const location = useLocation();
+  const isHomePage = location.pathname === "/" || location.pathname === "";
+  // 首页走老样式版心，文档/博客等其它页面用新版心（与 shell 对齐）
+  const containerClass = isHomePage ? HOME_CONTAINER_CLASS : DOCS_CONTAINER_CLASS;
 
   const footerLinks = getFooterLinks();
 
@@ -490,7 +498,7 @@ const HomeFooter: React.FC<{
     >
       {/* 主内容：Logo / 标语 / 链接列；fill 时由 flex-1 在 sticky min-h 父级内撑开 */}
       <div
-        className={`${HOME_CONTAINER_CLASS} flex flex-col pt-[40px]${fill ? " flex-1" : ""}`}
+        className={`${containerClass} flex flex-col pt-[40px]${fill ? " flex-1" : ""}`}
       >
         <div className={`flex flex-col gap-[40px]${fill ? " flex-1" : ""}`}>
           <div
@@ -560,12 +568,12 @@ const HomeFooter: React.FC<{
       <div
         className="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]"
       >
-        <div className={`${HOME_CONTAINER_CLASS}`}>
+        <div className={`${containerClass}`}>
           {/* 小屏：两侧竖线贴版心边缘，横线分行 */}
           <div className="flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden">
             <div className="px-[16px] py-[12px]">
               <span className={metaClass}>
-                Copyright © {year} for Yak Project.
+                Copyright © {year} for Yak Project {t("HomeFooter.company")}.
               </span>
             </div>
             <div className="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]">
@@ -594,7 +602,7 @@ const HomeFooter: React.FC<{
           <div className="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden">
             <div className="px-[16px] py-[14px]">
               <span className={metaClass}>
-                Copyright © {year} for Yak Project.
+                Copyright © {year} for Yak Project {t("HomeFooter.company")}.
               </span>
             </div>
             <div className="flex min-h-[52px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]">
@@ -624,7 +632,7 @@ const HomeFooter: React.FC<{
           {/* PC */}
           <div className="hidden min-h-[64px] w-full items-center justify-between gap-[40px] lg:flex">
             <span className={metaClass}>
-              Copyright © {year} for Yak Project.
+              Copyright © {year} for Yak Project {t("HomeFooter.company")}.
             </span>
             <div className="flex shrink-0 items-center gap-[40px]">
               <a

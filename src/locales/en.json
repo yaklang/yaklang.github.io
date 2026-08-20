@@ -168,6 +168,7 @@
       "switchDarkMode": "Switch to Dark Mode"
     },
     "slogan": "Do the hard but right thing",
+    "company": "MegaVector",
     "icp": "京ICP备17047700号-3",
     "police": "京公网安备11010802048712号"
   },
@@ -178,7 +179,7 @@
     "titleHighlight1": "Open-Source Cybersecurity",
     "titleHighlight2": "Infrastructure",
     "title": "Widely Used Open-Source Cybersecurity Infrastructure",
-    "subtitle": "Powered by CDSL-Yaklang - A programming language born for cybersecurity"
+    "subtitle": "By MegaVector, Powered by CDSL-Yaklang - A programming language born for cybersecurity"
   },
   "HomeMilestones": {
     "title": "Milestones",
@@ -491,6 +492,7 @@
   "HomeProductCapabilities": {
     "title": "Product Capabilities",
     "subtitle": "Core features and scenarios of Yaklang / Yakit / Memfit / IRify",
+    "brandPrefix": "By MegaVector ",
     "noDemo": "No demo content available",
     "itemInfo": "Item {{current}} / {{total}}",
     "nextVideo": "Switch to next video",
