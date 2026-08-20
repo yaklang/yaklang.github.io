@@ -207,7 +207,7 @@ html.plugin-blog .blog-layout-row > aside nav {
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0.1px;
-    color: var(--Colors-Use-Neutral-Text-2-Primary);
+    color: var(--Colors-Use-Neutral-Text-1-Title);
     text-decoration: none;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -368,10 +368,10 @@ html.plugin-blog:not(.blog-post-page) .blog-main article > .markdown {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   font-family: var(--docs-sans);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 26px;
   letter-spacing: 0.1px;
   color: var(--Colors-Use-Neutral-Text-2-Primary);
 }

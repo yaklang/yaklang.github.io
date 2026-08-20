@@ -21,7 +21,7 @@ export const HOME_CONTAINER_CLASS =
  * 与 docs-layout.scss / blog.scss 的 shell 版心保持一致。
  */
 export const DOCS_CONTAINER_CLASS =
-  "mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_20px))] min-[756px]:px-0";
+  "mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0";
 
 /**
  * 整屏区块：在可用区域内垂直居中标题+内容。
