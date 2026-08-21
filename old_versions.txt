@@ -15,3 +15,4 @@
 1.4.8-beta9	2026-08-10T03:57:05Z	https://aliyun-oss.yaklang.com/yak/1.4.8-beta9/yaklang-docs-1.4.8-beta9.zip
 1.4.8-beta11	2026-08-14T18:58:47Z	https://aliyun-oss.yaklang.com/yak/1.4.8-beta11/yaklang-docs-1.4.8-beta11.zip
 1.4.8-beta12	2026-08-17T18:43:26Z	https://aliyun-oss.yaklang.com/yak/1.4.8-beta12/yaklang-docs-1.4.8-beta12.zip
+1.4.8-beta13	2026-08-21T18:41:29Z	https://aliyun-oss.yaklang.com/yak/1.4.8-beta13/yaklang-docs-1.4.8-beta13.zip

@@ -11,7 +11,7 @@
 
 与相邻库的关系：`rag` 是知识层，与 `ai`/`liteforge`（模型与 Embedding 来源）、`aiagent`/`aim`（把知识库作为工具挂载）、`aireducer`（长文分块）协同，构成"带私有知识的 AI"能力。
 
-> 共 99 个函数、5 个实例
+> 共 100 个函数、5 个实例
 
 ## 实例
 
@@ -64,6 +64,7 @@
 | [rag.BuildKnowledgeFromEntityRepos](#buildknowledgefromentityrepos) | `name string, option ...any` | `<-chan *schema.KnowledgeBaseEntry, error` | BuildKnowledgeFromEntityReposByName 基于已有的实体仓库构建知识库（导出名为 rag.BuildKnowledgeFromEntityRepos） |
 | [rag.BuildSearchIndexKnowledge](#buildsearchindexknowledge) | `kbName string, text string, option ...any` | `*aiforge.SearchIndexResult, error` | builds a search index for the given text content. |
 | [rag.BuildSearchIndexKnowledgeFromFile](#buildsearchindexknowledgefromfile) | `kbName string, filename string, option ...any` | `*aiforge.SearchIndexResult, error` | builds a search index from a file. |
+| [rag.Collection2DPoints](#collection2dpoints) | `collectionName string, opts ...DBQueryOption` | `[]*vectorstore.Embedding2DPoint, error` | _collection2DPoints 获取指定集合所有文档向量的二维投影（PCA 降维） |
 | [rag.DBQueryCountVectorsByEntry](#dbquerycountvectorsbyentry) | `entryID string, opts ...DBQueryOption` | `int, error` | _dbQueryCountVectorsByEntryID 根据 entry_id 计算向量文档数量 |
 | [rag.DBQueryEntity](#dbqueryentity) | `keyword string, opts ...DBQueryOption` | `[]*schema.ERModelEntity, error` | _dbQueryEntity 数据库直接查询实体 |
 | [rag.DBQueryKnowledge](#dbqueryknowledge) | `keyword string, opts ...DBQueryOption` | `[]*schema.KnowledgeBaseEntry, error` | _dbQueryKnowledge 数据库直接查询知识库条目 |
@@ -1064,6 +1065,49 @@ println("Generated questions:", result.Questions)
 
 ---
 
+### Collection2DPoints {#collection2dpoints}
+
+```go
+Collection2DPoints(collectionName string, opts ...DBQueryOption) ([]*vectorstore.Embedding2DPoint, error)
+```
+
+_collection2DPoints 获取指定集合所有文档向量的二维投影（PCA 降维）
+
+输入集合名称，读取该集合已持久化的全部向量，统一降维为二维点后返回。
+
+只读取数据库中已存储的向量，不会调用远端/本地 embedding 服务。
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| collectionName | `string` | 集合名称 |
+
+**可选参数**
+
+可作为可变参数 `opts ...DBQueryOption` 传入选项；共 7 个可用选项，详见 [DBQueryOption 选项列表](#option-dbqueryoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]*vectorstore.Embedding2DPoint` | 二维点列表，每个点包含 documentID / type / x / y / contentPreview 字段 |
+| r2 | `error` | 错误信息（集合不存在时返回错误） |
+
+**示例**
+
+``````````````yak
+points = rag.Collection2DPoints("my-collection")~
+for _, p in points {
+    println(p.documentID, p.x, p.y, p.contentPreview)
+}
+
+// 指定数据库连接
+points = rag.Collection2DPoints("my-collection", rag.dbQueryDB(db))~
+``````````````
+
+---
+
 ### DBQueryCountVectorsByEntry {#dbquerycountvectorsbyentry}
 
 ```go
@@ -1595,7 +1639,7 @@ results, err = rag.QueryDocuments("my_collection", "query", 10)
 
 ### 1. 类型：DBQueryOption {#option-dbqueryoption}
 
-涉及到的函数有：[rag.DBQueryCountVectorsByEntry](#dbquerycountvectorsbyentry)、[rag.DBQueryEntity](#dbqueryentity)、[rag.DBQueryKnowledge](#dbqueryknowledge)、[rag.DBQueryKnowledgeExists](#dbqueryknowledgeexists)、[rag.DBQueryUniqueKnowledgeTitles](#dbqueryuniqueknowledgetitles)、[rag.DBQueryVectorDocument](#dbqueryvectordocument)
+涉及到的函数有：[rag.Collection2DPoints](#collection2dpoints)、[rag.DBQueryCountVectorsByEntry](#dbquerycountvectorsbyentry)、[rag.DBQueryEntity](#dbqueryentity)、[rag.DBQueryKnowledge](#dbqueryknowledge)、[rag.DBQueryKnowledgeExists](#dbqueryknowledgeexists)、[rag.DBQueryUniqueKnowledgeTitles](#dbqueryuniqueknowledgetitles)、[rag.DBQueryVectorDocument](#dbqueryvectordocument)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
