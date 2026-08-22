@@ -208,7 +208,7 @@ const HomeOpenSource: React.FC = () => {
           <div className="mb-[40px] flex shrink-0 flex-col items-center gap-[12px] sm:gap-[16px]">
             <div className="flex flex-col items-center gap-[8px] text-center sm:gap-[12px]">
               <div
-                className={`${isEn ? "font-['Crimson_Text'] text-[40px] sm:text-[56px]" : "font-['Noto_Serif_SC'] text-[32px] sm:text-[48px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
+                className={`${isEn ? "font-['Crimson_Text'] text-[40px] sm:text-[56px]" : "font-['Noto_Serif_SC_Home'] text-[32px] sm:text-[48px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
               >
                 {t("HomeOpenSource.title")}
               </div>

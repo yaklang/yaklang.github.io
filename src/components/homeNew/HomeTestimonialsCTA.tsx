@@ -4,6 +4,7 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 import { Tooltip } from "antd";
 import LiquidAscii from "./LiquidAscii";
 import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
+import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 
 const highlightYak = (text: string) => {
   const parts = text.split(/(Yak)/gi);
@@ -75,26 +76,26 @@ const useIsOverflowing = <T extends HTMLElement>() => {
 };
 
 const TESTIMONIAL_IMAGES: Record<string, string> = {
-  t0: require("@site/static/img/team/ykc.jpg").default,
-  t1: require("@site/static/img/home/kio.jpeg").default,
-  t2: require("@site/static/img/home/和你.jpeg").default,
-  t3: require("@site/static/img/home/P0m32Kun.jpeg").default,
-  t4: require("@site/static/img/home/18Xtreme.jpeg").default,
-  t5: require("@site/static/img/team/国产大熊猫.jpeg").default,
-  t6: require("@site/static/img/home/CF_HB.jpeg").default,
-  t7: require("@site/static/img/home/wooluo.jpeg").default,
-  t8: require("@site/static/img/team/Vanilla.jpeg").default,
-  t9: require("@site/static/img/home/ttStorm.jpeg").default,
-  t10: require("@site/static/img/home/酒零.jpeg").default,
-  t11: require("@site/static/img/home/key@OverSpace.jpeg").default,
-  t12: require("@site/static/img/team/naiquan.jpeg").default,
-  t13: require("@site/static/img/home/sharecast.jpeg").default,
-  t14: require("@site/static/img/home/影舞者.jpeg").default,
-  t15: require("@site/static/img/team/timwhite.png").default,
-  t16: require("@site/static/img/team/Alex-null.jpeg").default,
-  t17: require("@site/static/img/home/六月初七.jpeg").default,
-  t18: require("@site/static/img/home/小米粥.jpeg").default,
-  t19: require("@site/static/img/home/李大壮.jpeg").default,
+  t0: require("@site/static/img/home-optimized/testimonials/t0.webp").default,
+  t1: require("@site/static/img/home-optimized/testimonials/t1.webp").default,
+  t2: require("@site/static/img/home-optimized/testimonials/t2.webp").default,
+  t3: require("@site/static/img/home-optimized/testimonials/t3.webp").default,
+  t4: require("@site/static/img/home-optimized/testimonials/t4.webp").default,
+  t5: require("@site/static/img/home-optimized/testimonials/t5.webp").default,
+  t6: require("@site/static/img/home-optimized/testimonials/t6.webp").default,
+  t7: require("@site/static/img/home-optimized/testimonials/t7.webp").default,
+  t8: require("@site/static/img/home-optimized/testimonials/t8.webp").default,
+  t9: require("@site/static/img/home-optimized/testimonials/t9.webp").default,
+  t10: require("@site/static/img/home-optimized/testimonials/t10.webp").default,
+  t11: require("@site/static/img/home-optimized/testimonials/t11.webp").default,
+  t12: require("@site/static/img/home-optimized/testimonials/t12.webp").default,
+  t13: require("@site/static/img/home-optimized/testimonials/t13.webp").default,
+  t14: require("@site/static/img/home-optimized/testimonials/t14.webp").default,
+  t15: require("@site/static/img/home-optimized/testimonials/t15.webp").default,
+  t16: require("@site/static/img/home-optimized/testimonials/t16.webp").default,
+  t17: require("@site/static/img/home-optimized/testimonials/t17.webp").default,
+  t18: require("@site/static/img/home-optimized/testimonials/t18.webp").default,
+  t19: require("@site/static/img/home-optimized/testimonials/t19.webp").default,
 };
 
 const TESTIMONIAL_KEYS = Object.keys(TESTIMONIAL_IMAGES).sort(
@@ -169,11 +170,12 @@ const QuoteBody: React.FC<{
   );
 };
 
-const TestimonialCard: React.FC<AppraiseItem> = ({
+const TestimonialCard: React.FC<AppraiseItem & { shouldLoadImages: boolean }> = ({
   name,
   img,
   appraise,
   quoteText,
+  shouldLoadImages,
 }) => {
   const { ref: nameRef, overflowing: nameOverflow } =
     useIsOverflowing<HTMLSpanElement>();
@@ -184,8 +186,11 @@ const TestimonialCard: React.FC<AppraiseItem> = ({
     <article className="box-border flex h-[160px] w-[280px] shrink-0 flex-col overflow-hidden border-0 border-r border-solid border-r-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)] transition-colors duration-200 hover:bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] sm:h-[240px] sm:w-[320px] lg:w-[360px] xl:w-[400px]">
       <div className="flex shrink-0 items-center gap-[12px] border-0 border-b border-solid border-b-[var(--Colors-Use-Main---Gold-Focus)] px-[24px] py-[12px] sm:px-[40px] sm:pb-[20px] sm:pt-[20px]">
         <img
-          src={img}
+          src={shouldLoadImages ? img : undefined}
           alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           className="h-[32px] w-[32px] shrink-0 rounded-full object-cover sm:h-[40px] sm:w-[40px]"
         />
         <div className="flex min-w-0 flex-col gap-[2px]">
@@ -225,12 +230,14 @@ interface InfiniteRowProps {
   direction: Direction;
   /** 动画时长（秒），越大越慢 */
   duration?: number;
+  shouldLoadImages: boolean;
 }
 
 const InfiniteRow: React.FC<InfiniteRowProps> = ({
   items,
   direction,
   duration = 48,
+  shouldLoadImages,
 }) => {
   const track = useMemo(() => [...items, ...items], [items]);
   const animClass =
@@ -285,7 +292,11 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
         style={{ animationDuration: `${duration}s` }}
       >
         {track.map((item, idx) => (
-          <TestimonialCard key={`${direction}-${item.name}-${idx}`} {...item} />
+          <TestimonialCard
+            key={`${direction}-${item.name}-${idx}`}
+            {...item}
+            shouldLoadImages={shouldLoadImages}
+          />
         ))}
       </div>
     </div>
@@ -295,6 +306,7 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
 const HomeTestimonialsCTA: React.FC = () => {
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
+  const shouldLoadImages = useLoadWhenHomeSlide(5);
 
   const TESTIMONIALS = useMemo(
     () => resolveTestimonials(t).map(buildAppraiseItem),
@@ -391,7 +403,7 @@ const HomeTestimonialsCTA: React.FC = () => {
           className={`pointer-events-none relative z-[1] flex h-full min-h-0 w-full flex-col items-center justify-center gap-[12px] py-[24px] text-center ${HOME_CONTAINER_CLASS}`}
         >
           <h2
-            className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px]" : "font-['Noto_Serif_SC'] text-[36px] leading-[48px] sm:text-[48px] sm:leading-[64px]"} font-medium text-[color:var(--Colors-Neutral-100)]`}
+            className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px]" : "font-['Noto_Serif_SC_Home'] text-[36px] leading-[48px] sm:text-[48px] sm:leading-[64px]"} font-medium text-[color:var(--Colors-Neutral-100)]`}
           >
             {/* 小屏：大家都喜 / 欢用 Yak */}
             <span className="inline sm:hidden">
@@ -416,12 +428,22 @@ const HomeTestimonialsCTA: React.FC = () => {
           className="w-full shrink-0 border-0 border-y border-solid border-[var(--Colors-Use-Main---Gold-Focus)]"
           aria-label={t("HomeTestimonialsCTA.marqueeAria")}
         >
-          <InfiniteRow items={rowA} direction="left" duration={52} />
+          <InfiniteRow
+            items={rowA}
+            direction="left"
+            duration={52}
+            shouldLoadImages={shouldLoadImages}
+          />
           <div
             className="h-px w-full bg-[var(--Colors-Use-Main---Gold-Focus)]"
             aria-hidden
           />
-          <InfiniteRow items={rowB} direction="right" duration={56} />
+          <InfiniteRow
+            items={rowB}
+            direction="right"
+            duration={56}
+            shouldLoadImages={shouldLoadImages}
+          />
         </div>
       ) : null}
     </section>

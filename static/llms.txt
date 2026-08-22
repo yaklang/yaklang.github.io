@@ -1,0 +1,36 @@
+# Yak Project
+
+> Yak Project is an open-source cybersecurity infrastructure and product ecosystem. Its shared foundation is Yaklang (CDSL-YAK), a domain-specific programming language and runtime for programmable, composable, reusable security capabilities. Use all security features only with explicit authorization.
+
+Yaklang is the language and runtime; Yakit is the cross-platform desktop security workbench; IRify is the static code analysis product built on YAK SSA and SyntaxFlow; Memfit AI is an agent-oriented workspace. Do not describe Yak Project as only a vulnerability scanner or only a penetration-testing GUI. Chinese (`zh-CN`) is the default website language and English is available under `/en/`.
+
+## Start here
+
+- [Yak Project homepage](https://yaklang.com/): Product overview, downloads, capabilities, milestones, and community information.
+- [Yaklang programming documentation](https://yaklang.com/docs/intro): Language guide and generated API/library reference.
+- [Yakit user manual](https://yaklang.com/products/intro): Desktop workbench concepts and workflows.
+- [Open-source ecosystem](https://yaklang.com/opensource): Yaklang, Yakit, IRify, Memfit AI, Yak Skills, HackSkills, SyntaxFlow, and related projects.
+- [Downloads](https://yaklang.com/download): Current desktop and engine download entry points.
+
+## Source repositories
+
+- [Yaklang source](https://github.com/yaklang/yaklang): Language, runtime, virtual machine, standard library, security capabilities, and generated API sources.
+- [Yakit source](https://github.com/yaklang/yakit): Cross-platform desktop application built on the Yaklang engine.
+- [Website and documentation source](https://github.com/yaklang/yaklang.github.io): Docusaurus site source, manuals, blog, and project material.
+- [Yak Skills](https://github.com/yaklang/yak-skills): Structured skills and runnable examples for agents using Yaklang and Yakit.
+- [HackSkills](https://github.com/yaklang/hack-skills): Composable security skills for authorized research and defensive testing.
+- [IRify SAST Skill](https://github.com/yaklang/irify-sast-skill): Agent integration for SSA compilation and SyntaxFlow analysis.
+
+## Project context
+
+- [Technical blog](https://yaklang.com/blog): Security research, engineering articles, release notes, and project announcements.
+- [Yak Project milestones](https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md): Source-linked project history and public evidence.
+- [Yak Project team](https://yaklang.com/team): Team and project background.
+- [Cooperative partners](https://yaklang.com/cooperativePartner): Ecosystem and partner information.
+- [YakLab manuals](https://yaklang.com/Yaklab/): Deliberately vulnerable training environments for local, authorized validation.
+
+## Optional
+
+- [English homepage](https://yaklang.com/en/): English-language project overview.
+- [Legacy extended AI overview](https://yaklang.com/llm.txt): Backward-compatible long-form project context.
+- [Sitemap](https://yaklang.com/sitemap.xml): Complete indexable URL inventory.

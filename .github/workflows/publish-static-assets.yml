@@ -1,0 +1,83 @@
+name: Publish Website Static Assets to OSS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "static/**"
+      - "src/**"
+      - "docs/**"
+      - "products/**"
+      - "blog/**"
+      - "Yaklab/**"
+      - "docusaurus.config.js"
+      - "package.json"
+      - "yarn.lock"
+      - "scripts/**"
+      - ".github/workflows/publish-static-assets.yml"
+
+concurrency:
+  group: website-static-assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install font subset tooling
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "fonttools[woff]==4.63.0"
+
+      - name: Verify optimized homepage assets
+        run: |
+          yarn check:home-assets
+          python3 scripts/build-home-font-subsets.py
+
+      - name: Verify OSS asset pipeline
+        run: node scripts/prepare-oss-assets.js --selftest
+
+      - name: Build website
+        run: yarn run build
+
+      - name: Enforce homepage performance budget
+        run: yarn check:home-performance
+
+      - name: Write publication provenance
+        run: node scripts/write-deploy-meta.js build/deploy-meta.json
+
+      - name: Prepare immutable OSS assets
+        run: node scripts/prepare-oss-assets.js build
+
+      - name: Install OSS SDK
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "oss2==2.19.1"
+
+      - name: Upload and verify public OSS assets
+        env:
+          OSS_KEY_ID: ${{ secrets.OSS_KEY_ID }}
+          OSS_KEY_SECRET: ${{ secrets.OSS_KEY_SECRET }}
+          OSS_BUCKET: yaklang
+          OSS_ENDPOINT: https://oss-accelerate.aliyuncs.com
+        run: python3 scripts/upload-oss-assets.py build/.oss-assets-manifest.json
+
+      - name: Upload publication manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-oss-assets-${{ github.sha }}
+          path: build/.oss-assets-manifest.json
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30

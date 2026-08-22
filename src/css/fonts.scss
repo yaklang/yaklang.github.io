@@ -64,6 +64,23 @@
   font-display: swap;
 }
 
+/* 首页只需要约千个中英文字符，避免为两个字重各下载 1.5 MiB 全量字库。 */
+@font-face {
+  font-family: "Noto Serif SC Home";
+  src: url("/fonts/noto-serif-sc-home/noto-serif-sc-home-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Serif SC Home";
+  src: url("/fonts/noto-serif-sc-home/noto-serif-sc-home-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: "Noto Serif SC";
   src: url("/fonts/noto-serif-sc/noto-serif-sc-500.woff2") format("woff2");

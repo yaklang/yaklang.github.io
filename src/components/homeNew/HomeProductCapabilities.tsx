@@ -25,6 +25,7 @@ import {
   HOME_SECTION_CENTER_CLASS,
 } from "./homeSectionLayout";
 import ClickStack, { ClickStackHandle } from "./ClickStack";
+import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 
 // =========================================================
 // 数据模型
@@ -96,7 +97,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       "img/newHome/插件使用.mp4",
     ],
     accent: "#F28C45",
-    bg: "img/newHome/yakit_bg.jpg",
+    bg: "img/home-optimized/products/yakit_bg.webp",
     mediaKind: "video",
   },
   {
@@ -126,7 +127,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       "img/newHome/Yaklang 使用AI进行代码修改和编辑.mp4",
     ],
     accent: "#FF7B00",
-    bg: "img/newHome/yaklang_bg.jpg",
+    bg: "img/home-optimized/products/yaklang_bg.webp",
     mediaKind: "video",
   },
   {
@@ -150,12 +151,12 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       },
     ],
     mediaSrc: [
-      "img/newHome/memft1.png",
-      "img/newHome/memft2.png",
-      "img/newHome/memfit3.png",
+      "img/home-optimized/products/memft1.webp",
+      "img/home-optimized/products/memft2.webp",
+      "img/home-optimized/products/memfit3.webp",
     ],
     accent: "var(--Colors-Use-Main---memfit-Primary)",
-    bg: "img/newHome/memfit_bg.jpg",
+    bg: "img/home-optimized/products/memfit_bg.webp",
     mediaKind: "image",
   },
   {
@@ -179,12 +180,12 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       },
     ],
     mediaSrc: [
-      "img/newHome/irify1.png",
-      "img/newHome/irify2.png",
-      "img/newHome/irify3.png",
+      "img/home-optimized/products/irify1.webp",
+      "img/home-optimized/products/irify2.webp",
+      "img/home-optimized/products/irify3.webp",
     ],
     accent: "#6A4AA0",
-    bg: "img/newHome/irify_bg.jpg",
+    bg: "img/home-optimized/products/irify_bg.webp",
     mediaKind: "image",
   },
 ];
@@ -205,82 +206,20 @@ const resolveProducts = (t: (key: string) => string): Product[] =>
 
 const padIndex = (n: number) => String(n).padStart(2, "0");
 
-/** 无 poster 时用 Canvas 从视频截取首帧作为 poster，避免 iOS Safari 黑屏 */
-const captureFirstFrame = (src: string): Promise<string | null> => {
-  return new Promise((resolve) => {
-    const video = document.createElement("video");
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.crossOrigin = "anonymous";
-
-    const cleanup = () => {
-      video.removeEventListener("loadeddata", onLoaded);
-      video.removeEventListener("error", onError);
-      video.pause();
-      video.src = "";
-      video.load();
-    };
-
-    const onError = () => {
-      cleanup();
-      resolve(null);
-    };
-
-    const onLoaded = () => {
-      if (video.readyState < 2 || !video.videoWidth || !video.videoHeight) {
-        return;
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        cleanup();
-        resolve(null);
-        return;
-      }
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      cleanup();
-      try {
-        resolve(canvas.toDataURL("image/jpeg", 0.92));
-      } catch {
-        resolve(null);
-      }
-    };
-
-    video.addEventListener("loadeddata", onLoaded, { once: true });
-    video.addEventListener("error", onError, { once: true });
-    video.src = src;
-  });
-};
-
 // =========================================================
 // 媒体卡片
 // =========================================================
 const VideoCard: React.FC<{
   src: string;
   isFront: boolean;
-}> = ({ src, isFront }) => {
+  shouldLoad: boolean;
+}> = ({ src, isFront, shouldLoad }) => {
   const ref = useRef<HTMLVideoElement | null>(null);
-  const [poster, setPoster] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    setPoster(null);
-    captureFirstFrame(src).then((url) => {
-      if (cancelled || !url) return;
-      setPoster(url);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [src]);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    if (isFront) {
+    if (shouldLoad && isFront) {
       video.muted = true;
       video.playsInline = true;
       const playPromise = video.play();
@@ -293,17 +232,16 @@ const VideoCard: React.FC<{
       video.pause();
       video.currentTime = 0;
     }
-  }, [isFront]);
+  }, [isFront, shouldLoad]);
 
   return (
     <video
       ref={ref}
       className="block h-full w-full select-none bg-black object-cover object-top"
-      src={src}
-      poster={poster ?? undefined}
+      src={shouldLoad && isFront ? src : undefined}
       controls={false}
       playsInline
-      preload="metadata"
+      preload={shouldLoad && isFront ? "metadata" : "none"}
       muted
       loop
       data-no-stack-cycle={isFront ? "" : undefined}
@@ -314,10 +252,15 @@ const VideoCard: React.FC<{
 const ImageCard: React.FC<{
   src: string;
   alt: string;
-}> = ({ src, alt }) => (
+  isFront: boolean;
+  shouldLoad: boolean;
+}> = ({ src, alt, isFront, shouldLoad }) => (
   <img
-    src={src}
+    src={shouldLoad && isFront ? src : undefined}
     alt={alt}
+    loading="lazy"
+    decoding="async"
+    fetchPriority="low"
     className="pointer-events-none block h-full w-full select-none object-cover object-center"
     draggable={false}
   />
@@ -428,6 +371,8 @@ const HomeProductCapabilities: React.FC<{
   const [mediaIndex, setMediaIndex] = useState(0);
   const stackRef = useRef<ClickStackHandle>(null);
   const [stackSpread, setStackSpread] = useState(25);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const shouldLoadMedia = useLoadWhenHomeSlide(2);
 
   useEffect(() => {
     const smallMq = window.matchMedia("(max-width: 767px)");
@@ -471,12 +416,15 @@ const HomeProductCapabilities: React.FC<{
         key={`${productBase.key}-v-${item.src}-${index}`}
         src={item.src}
         isFront={index === mediaIndex}
+        shouldLoad={shouldLoadMedia}
       />
     ) : (
       <ImageCard
         key={`${productBase.key}-i-${item.src}-${index}`}
         src={item.src}
         alt={item.name}
+        isFront={index === mediaIndex}
+        shouldLoad={shouldLoadMedia}
       />
     ),
   );
@@ -484,7 +432,10 @@ const HomeProductCapabilities: React.FC<{
   const swipe = useSwipeNext(goNext);
 
   return (
-    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
+    <section
+      ref={sectionRef}
+      className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
+    >
       {/* 与 HomeDownload 一致：外层居中区 + 内层版心 max-h-full，避免翻页屏被 flex-1 拉得过高 */}
       <div
         className={`relative z-[1] min-h-0 w-full overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
@@ -494,7 +445,7 @@ const HomeProductCapabilities: React.FC<{
         >
           <div className="mb-[40px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[16px] sm:gap-[8px]">
             <div
-              className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
+              className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC_Home'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
             >
               {t("HomeProductCapabilities.title")}
             </div>
@@ -564,7 +515,9 @@ const HomeProductCapabilities: React.FC<{
                 <div
                   className="pointer-events-none absolute inset-0 transition-[background] duration-300"
                   style={{
-                    background: `url(${stageBg}) lightgray 50% / cover no-repeat`,
+                    background: shouldLoadMedia
+                      ? `url(${stageBg}) lightgray 50% / cover no-repeat`
+                      : "var(--Colors-Use-Main---Gold-Focus)",
                     opacity: 0.6,
                   }}
                   aria-hidden
@@ -736,7 +689,7 @@ const HomeProductCapabilities: React.FC<{
                 }`}
               >
                 <h3
-                  className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
+                  className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC_Home'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
                 >
                   {t("HomeProductCapabilities.coreFeatures")}
                 </h3>

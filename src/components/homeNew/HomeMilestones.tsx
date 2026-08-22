@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HOME_CONTAINER_CLASS, HOME_NAVBAR_HEIGHT } from "./homeSectionLayout";
+import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 
 // =========================================================
 // 图标
@@ -89,7 +90,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2021_xcon.impact",
       dateLabelKey: "HomeMilestones.items.m2021_xcon.dateLabel",
       href: "https://www.sohu.com/a/567305083_120846244",
-      image: "img/newHome/2021-xcon-yak-yakit-release.jpeg",
+      image: "img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp",
     },
     {
       year: "2023",
@@ -97,7 +98,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2023_open_source_launch.impact",
       dateLabelKey: "HomeMilestones.items.m2023_open_source_launch.dateLabel",
       href: "https://www.cnblogs.com/yaklang/articles/17461795.html",
-      image: "img/newHome/2023-yaklang-open-source-launch.jpg",
+      image: "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp",
     },
     {
       year: "2023",
@@ -105,7 +106,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2023_yakit_v2_list.impact",
       dateLabelKey: "HomeMilestones.items.m2023_yakit_v2_list.dateLabel",
       href: "https://kw.beijing.gov.cn/zwfw/bsjg/202307/P020240909007888758167.pdf",
-      image: "img/newHome/20260803-174557.jpg",
+      image: "img/home-optimized/milestones/20260803-174557.webp",
     },
     {
       year: "2024",
@@ -113,7 +114,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2024_yakit_v2_test.impact",
       dateLabelKey: "HomeMilestones.items.m2024_yakit_v2_test.dateLabel",
       href: "https://mp.weixin.qq.com/s?__biz=MzIwMzI1MDg2Mg==&mid=2649944674&idx=1&sn=bb61768ac951be7656caf3d6f58794dd",
-      image: "img/newHome/20260804203037.png",
+      image: "img/home-optimized/milestones/20260804203037.webp",
     },
     {
       year: "2024",
@@ -121,7 +122,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2024_cicc_top10.impact",
       dateLabelKey: "HomeMilestones.items.m2024_cicc_top10.dateLabel",
       href: "https://www.china-cic.cn/Detail/24/60/6085",
-      image: "img/newHome/2024-cicc-conference.jpg",
+      image: "img/home-optimized/milestones/2024-cicc-conference.webp",
     },
     {
       year: "2025",
@@ -129,7 +130,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2025_irify_release.impact",
       dateLabelKey: "HomeMilestones.items.m2025_irify_release.dateLabel",
       href: "https://yaklang.com/en/blog/sql-injection-detection-with-irify/",
-      image: "img/newHome/0718bf2f426b3b8a.png",
+      image: "img/home-optimized/milestones/0718bf2f426b3b8a.webp",
     },
     {
       year: "2025",
@@ -153,7 +154,7 @@ const getMilestonesBase = (t: (key: string) => string): MilestoneItem[] =>
       impactKey: "HomeMilestones.items.m2026_memfit_release.impact",
       dateLabelKey: "HomeMilestones.items.m2026_memfit_release.dateLabel",
       href: "https://www.yaklang.com/en/blog/memfit-autonomous-pentest-agent-architecture/",
-      image: "img/newHome/3cac0ba124b1bebc.png",
+      image: "img/home-optimized/milestones/3cac0ba124b1bebc.webp",
     },
   ].map((m) => ({
     ...m,
@@ -390,6 +391,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
   const { t, i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const sectionRef = useRef<HTMLElement>(null);
+  const shouldLoadImages = useLoadWhenHomeSlide(4);
   const MILESTONES = useMemo(() => getMilestonesBase(t), [t]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mobileHoveredIndex, setMobileHoveredIndex] = useState<number | null>(
@@ -427,7 +429,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
           <div className="flex flex-col gap-[6px] sm:gap-[8px]">
             <div className="flex flex-wrap items-baseline gap-x-[12px] gap-y-[4px]">
               <h2
-                className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[40px] xl:text-[56px]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[32px] xl:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[40px] xl:leading-[64px]`}
+                className={`m-0 ${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[40px] xl:text-[56px]" : "font-['Noto_Serif_SC_Home'] text-[28px] sm:text-[32px] xl:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[40px] xl:leading-[64px]`}
               >
                 {t("HomeMilestones.title")}
               </h2>
@@ -451,7 +453,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
               {ArrowUpRightSmIcon}
             </a>
             <div
-              className={`flex items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[48px]" : "font-['Noto_Serif_SC'] text-[40px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100,)] sm:hidden`}
+              className={`flex items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[48px]" : "font-['Noto_Serif_SC_Home'] text-[40px]"} font-medium leading-[40px] text-[color:var(--Colors-Neutral-100,)] sm:hidden`}
             >
               <span>
                 {rangeStart}——{rangeEnd}
@@ -463,7 +465,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
           </div>
 
           <div
-            className={`hidden items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[44px] xl:text-[104px]" : "font-['Noto_Serif_SC'] text-[36px] xl:text-[96px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100,)] sm:flex xl:leading-[112px]`}
+            className={`hidden items-end gap-[8px] ${isEn ? "font-['Crimson_Text'] text-[44px] xl:text-[104px]" : "font-['Noto_Serif_SC_Home'] text-[36px] xl:text-[96px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100,)] sm:flex xl:leading-[112px]`}
           >
             <span>
               {rangeStart}——{rangeEnd}
@@ -503,7 +505,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                 >
                   <div className="flex items-start justify-between gap-[12px]">
                     <span
-                      className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[28px] transition-colors duration-200 ${
+                      className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[28px] transition-colors duration-200 ${
                         active
                           ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                           : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -531,7 +533,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                     {item.dateLabel}
                   </span>
                   <h3
-                    className={`mb-[0px] ${isEn ? "font-['Crimson_Text'] text-[28px] font-normal" : "font-['Noto_Serif_SC'] text-[20px] font-semibold"} leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                    className={`mb-[0px] ${isEn ? "font-['Crimson_Text'] text-[28px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[20px] font-semibold"} leading-[28px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
                   >
                     {item.title}
                   </h3>
@@ -578,7 +580,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                 <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
                   <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[10px] md:py-[12px]">
                     <span
-                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[30px] md:text-[34px]" : "font-['Noto_Serif_SC'] text-[22px] md:text-[26px]"} font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:leading-[32px]`}
+                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[30px] md:text-[34px]" : "font-['Noto_Serif_SC_Home'] text-[22px] md:text-[26px]"} font-medium leading-[28px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:leading-[32px]`}
                     >
                       {group.year}
                     </span>
@@ -611,7 +613,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                           }`}
                         >
                           <span
-                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[24px] transition-colors duration-200 ${
+                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[24px] transition-colors duration-200 ${
                               active
                                 ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -631,7 +633,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                             {item.dateLabel}
                           </div>
                           <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] font-normal" : "font-['Noto_Serif_SC'] text-[16px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)]`}
                           >
                             {item.title}
                           </h3>
@@ -700,7 +702,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                 <div className="relative min-w-0 self-stretch border-0 border-r border-solid border-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]">
                   <div className="sticky top-0 z-[2] bg-[var(--Colors-Use-Main---Gold-Bg)] py-[12px] xl:py-[18px] 2xl:py-[18px]">
                     <span
-                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[32px] xl:text-[40px] 2xl:text-[44px]" : "font-['Noto_Serif_SC'] text-[24px] xl:text-[32px] 2xl:text-[36px]"} font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[40px] 2xl:leading-[44px]`}
+                      className={`block truncate ${isEn ? "font-['Crimson_Text'] text-[32px] xl:text-[40px] 2xl:text-[44px]" : "font-['Noto_Serif_SC_Home'] text-[24px] xl:text-[32px] 2xl:text-[36px]"} font-medium leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[40px] 2xl:leading-[44px]`}
                     >
                       {group.year}
                     </span>
@@ -743,8 +745,11 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                                 }`}
                               />
                               <img
-                                src={item.image}
+                                src={shouldLoadImages ? item.image : undefined}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
+                                fetchPriority="low"
                                 className={`absolute inset-0 block h-full w-full object-cover transition-opacity duration-200 ${
                                   active ? "opacity-100" : "opacity-0"
                                 }`}
@@ -758,7 +763,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                           className={`flex h-full items-start px-[8px] pt-[10px] xl:px-[12px] xl:pt-[14px]`}
                         >
                           <span
-                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC'] text-[24px]"} font-medium leading-[22px] transition-colors duration-200 ${
+                            className={`${isEn ? "font-['Crimson_Text'] text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[24px]"} font-medium leading-[22px] transition-colors duration-200 ${
                               active
                                 ? "text-[color:var(--Colors-Use-Neutral-Text-1-Title)]"
                                 : "text-[color:var(--Colors-Use-Neutral-Disable)]"
@@ -782,7 +787,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                         </div>
                         <div className="flex min-h-0 min-w-0 flex-1 flex-col items-start justify-center pt-[22px] pl-[14px] pr-[10px] xl:pl-[24px] xl:pr-[12px] pb-10">
                           <h3
-                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px] font-normal" : "font-['Noto_Serif_SC'] text-[16px] xl:text-[18px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
+                            className={`m-0 mb-[20px] ${isEn ? "font-['Crimson_Text'] text-[24px] xl:text-[26px] font-normal" : "font-['Noto_Serif_SC_Home'] text-[16px] xl:text-[18px] font-semibold"} leading-[22px] !text-[color:var(--Colors-Use-Neutral-Text-1-Title)] xl:leading-[26px]`}
                           >
                             {item.title}
                           </h3>

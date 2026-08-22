@@ -34,8 +34,6 @@ on:
   push:
     tags:
       - "v*"
-    paths:
-      - '.github/workflows/publish-to-oss.yml'
   workflow_dispatch:
     inputs:
       environment:
@@ -46,10 +44,17 @@ on:
         options:
           - production
           - staging
+      publish_only:
+        description: '仅发布并验证 OSS 静态资源，不部署网站'
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -66,32 +71,73 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Install font subset tooling
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "fonttools[woff]==4.63.0"
+
+      - name: Verify optimized homepage assets
+        run: |
+          yarn check:home-assets
+          python3 scripts/build-home-font-subsets.py
+
       - name: Build
         run: yarn run build
 
+      - name: Enforce homepage performance budget
+        run: yarn check:home-performance
+
+      - name: Write deployment provenance
+        run: node scripts/write-deploy-meta.js build/deploy-meta.json
+
+      - name: Verify OSS asset pipeline
+        run: node scripts/prepare-oss-assets.js --selftest
+
+      - name: Prepare immutable OSS assets
+        run: node scripts/prepare-oss-assets.js build
+
+      - name: Install OSS SDK
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "oss2==2.19.1"
+
+      - name: Upload and verify public OSS assets
+        env:
+          OSS_KEY_ID: ${{ secrets.OSS_KEY_ID }}
+          OSS_KEY_SECRET: ${{ secrets.OSS_KEY_SECRET }}
+          OSS_BUCKET: yaklang
+          OSS_ENDPOINT: https://oss-accelerate.aliyuncs.com
+        run: python3 scripts/upload-oss-assets.py --prune-after-verify build/.oss-assets-manifest.json
+
+      - name: Upload OSS publication manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-oss-assets-${{ github.sha }}
+          path: build/.oss-assets-manifest.json
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 30
+
       - name: Pack Out File
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
-        run: tar -zcvf out.tgz build
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
+        run: tar -zcf out.tgz build
 
       # 配置 Git
       - name: Setup Git
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
         run: |
           git config --global user.name "v1ll4n"
           git config --global user.email "v1ll4n@users.noreply.github.com"
 
       # 部署到 yaklang.io
       - name: Deploy to yaklang.io
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GIT_USER: v1ll4n
           GIT_PASS: ${{ secrets.GH_TOKEN }}
-        run: yarn deploy
+        # 必须部署上一步已经完成 OSS 引用改写的 build，禁止 docusaurus deploy 二次构建。
+        run: yarn deploy --skip-build
 
       # 部署到服务器
       - name: Upload Build Files via SSH
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
         uses: easingthemes/ssh-deploy@v2.1.6
         with:
           REMOTE_USER: 'root'
@@ -102,7 +148,7 @@ jobs:
           TARGET: '/root/yaklang-io/'
 
       - name: Extract and Cleanup on Server
-        if: ${{ startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' }}
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.ONLINE_HOST }}
@@ -113,4 +159,13 @@ jobs:
             rm -rf build
             tar zxvf out.tgz
             rm -rf out.tgz
+
+      - name: Verify both production domains serve this release
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
+        run: |
+          node scripts/verify-deployment.js \
+            --commit "$GITHUB_SHA" \
+            --version "$(node -p "require('./package.json').version")" \
+            https://yaklang.com/ \
+            https://yaklang.io/
 

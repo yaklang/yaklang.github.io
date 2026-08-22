@@ -74,6 +74,9 @@ const DownloadFlowerBg = () => {
         src={flowerSrc}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         className="absolute top-1/2 m-0 h-auto -translate-x-full -translate-y-1/2"
         style={{
           left: layout.left,
@@ -104,6 +107,8 @@ const PlatformOsIcon: React.FC<{ os: OsIconKind }> = ({ os }) => {
         src={greySrc}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
         className="h-full w-full transition-opacity duration-200 group-hover:opacity-0"
       />
       {isDark ? (
@@ -121,6 +126,8 @@ const PlatformOsIcon: React.FC<{ os: OsIconKind }> = ({ os }) => {
           src={colorSrc}
           alt=""
           aria-hidden
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         />
       )}
@@ -664,7 +671,7 @@ const HomeDownload: React.FC = () => {
           {/* 标题区 */}
           <div className="flex w-full shrink-0 flex-col items-center gap-[12px]">
             <div
-              className={`${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[56px]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
+              className={`${isEn ? "font-['Crimson_Text'] text-[36px] sm:text-[56px]" : "font-['Noto_Serif_SC_Home'] text-[28px] sm:text-[48px]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[64px]`}
             >
               {t("HomeDownload.title")}
             </div>
@@ -731,7 +738,7 @@ const HomeDownload: React.FC = () => {
 
             {/* 产品描述 */}
             <div
-              className={`text-center ${isEn ? "font-['Crimson_Text'] text-[24px] sm:text-[32px]" : "font-['Noto_Serif_SC'] text-[16px] sm:text-[24px]"} font-medium leading-[24px] sm:leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:whitespace-nowrap`}
+              className={`text-center ${isEn ? "font-['Crimson_Text'] text-[24px] sm:text-[32px]" : "font-['Noto_Serif_SC_Home'] text-[16px] sm:text-[24px]"} font-medium leading-[24px] sm:leading-[32px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:whitespace-nowrap`}
             >
               <span style={{ color: activeAccent }}>/</span>
               &nbsp;{t(activeProduct.description)}&nbsp;

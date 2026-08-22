@@ -31,8 +31,8 @@ on:
 jobs:
   package:
     runs-on: ubuntu-latest
-    # 只有 tag 触发或 workflow_dispatch 触发时才会回写记账文件到 master;
-    # 普通分支 push(例如 PR 分支) 只上传 OSS, 不污染 master 记账。
+    # 只有 workflow_dispatch 手动归档才会回写记账文件到 master;
+    # 分支 push 和发版 tag 只上传 OSS，不在发版后偷偷推进 master。
     permissions:
       contents: write
     outputs:
@@ -252,8 +252,9 @@ jobs:
           EOF
 
       - name: Commit bookkeeping to master
-        # 只有 tag 或 manual 触发时才回写 master 记账; 分支 push(含 PR)只上传 OSS。
-        if: ${{ steps.filter.outputs.should_run == 'true' && (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') }}
+        # 仅手动归档允许推进 master。发版 tag 必须保持不可变，不能在标签创建后
+        # 再生成一个记账 commit，否则生产部署 SHA 会立即落后于 master。
+        if: ${{ steps.filter.outputs.should_run == 'true' && github.event_name == 'workflow_dispatch' }}
         run: |
           set -e
           # checkout 已用 GH_TOKEN, 这里直接 push 即可越过 branch protection
@@ -270,10 +271,8 @@ jobs:
           fi
           git commit -m "chore(site-package): archive ${ZIP_NAME}"
 
-          # tag 触发时处于 detached HEAD(tag commit), 必须把记账 commit 重放到
-          # 最新 master 之上再推, 否则会(a) "You are not currently on a branch",
-          # 或(b) 在 master 已被别的 CI 推进时 non-fast-forward 失败。
-          # workflow_dispatch 在 master 分支跑时也走这条路径, fetch+rebase 是幂等的。
+          # workflow_dispatch 可能从任意 ref 启动，因此统一重放到最新 master，
+          # 同时避免并发 CI 推进 master 时出现 non-fast-forward。
           git fetch origin master
           git rebase origin/master
           git push origin "HEAD:master"

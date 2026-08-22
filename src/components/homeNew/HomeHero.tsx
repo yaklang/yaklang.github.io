@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import Link from "@docusaurus/Link";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,8 @@ import { HOME_CONTAINER_CLASS } from "./homeSectionLayout";
 
 const DOWNLOAD_SLIDE_INDEX = 1;
 /** 首屏右侧背景视频（按原比例贴右，左侧 Focus 底色） */
-const HERO_BG_VIDEO = "img/newHome/ascii-magic-47.mp4";
+const HERO_BG_VIDEO = "img/home-optimized/hero/ascii-magic-47.mp4";
+const HERO_BG_POSTER = "img/home-optimized/hero/ascii-magic-47-poster.webp";
 
 const DownLoadIcon = (
   <svg
@@ -57,7 +58,54 @@ const HomeHero: React.FC = () => {
   const { theme } = useHomeTheme();
   const isDark = theme === "dark";
   const bgVideo = useBaseUrl(HERO_BG_VIDEO);
+  const bgPoster = useBaseUrl(HERO_BG_POSTER);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  // 海报立即可见；动画等首屏完成并进入空闲期后再取，省流量模式/减弱动画时不取。
+  useEffect(() => {
+    const connection = (
+      navigator as Navigator & { connection?: { saveData?: boolean } }
+    ).connection;
+    if (
+      connection?.saveData ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    let idleId: number | undefined;
+    let timerId: number | undefined;
+    const idleWindow = window as unknown as {
+      requestIdleCallback?: (
+        callback: () => void,
+        options?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const scheduleTimer = () => {
+      timerId = window.setTimeout(() => setShouldLoadVideo(true), 1200);
+    };
+    const schedule = () => {
+      if (idleWindow.requestIdleCallback) {
+        idleId = idleWindow.requestIdleCallback(() => setShouldLoadVideo(true), {
+          timeout: 2500,
+        });
+      } else {
+        scheduleTimer();
+      }
+    };
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+
+    return () => {
+      window.removeEventListener("load", schedule);
+      if (idleId !== undefined) {
+        idleWindow.cancelIdleCallback?.(idleId);
+      }
+      if (timerId !== undefined) window.clearTimeout(timerId);
+    };
+  }, []);
 
   // 离开视口暂停，回到视口再播
   useEffect(() => {
@@ -77,7 +125,7 @@ const HomeHero: React.FC = () => {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [shouldLoadVideo]);
 
   const actions = (
     <div className="flex w-full flex-col items-stretch gap-[8px] sm:w-auto sm:flex-row sm:items-center sm:justify-start">
@@ -118,12 +166,13 @@ const HomeHero: React.FC = () => {
           className={`absolute inset-0 h-full w-full object-cover object-right opacity-30 ${
             isDark ? "lg:opacity-60" : "lg:opacity-100"
           }`}
-          src={bgVideo}
-          autoPlay
+          src={shouldLoadVideo ? bgVideo : undefined}
+          poster={bgPoster}
+          autoPlay={shouldLoadVideo}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
         />
         <div
           className="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Focus)] opacity-30"
@@ -143,7 +192,7 @@ const HomeHero: React.FC = () => {
 
         {/* Figma mobile 393：Noto Serif SC SemiBold 36/56；desktop 64/96 */}
         <h1
-          className={`m-0 mb-[12px] max-w-[20em] ${isEn ? "font-['Crimson_Text']" : "font-['Noto_Serif_SC']"} text-[36px] font-semibold leading-[56px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mb-[12px] sm:text-[clamp(36px,5vh,64px)] sm:leading-[clamp(48px,7.5vh,96px)]`}
+          className={`m-0 mb-[12px] max-w-[20em] ${isEn ? "font-['Crimson_Text']" : "font-['Noto_Serif_SC_Home']"} text-[36px] font-semibold leading-[56px] tracking-[0px] text-[color:var(--Colors-Neutral-100)] sm:mb-[12px] sm:text-[clamp(36px,5vh,64px)] sm:leading-[clamp(48px,7.5vh,96px)]`}
         >
           <span className="block">
             {t("HomeHero.titleBefore")}
