@@ -144,8 +144,9 @@ const resolveCandidate = (reference, textRelativePath, candidatesByPath) => {
 const ensureIdentity = (candidate, publicBase, objectPrefix) => {
   if (candidate.sha256) return;
   candidate.sha256 = sha256File(candidate.file);
-  candidate.objectKey = `${objectPrefix}/${candidate.sha256}/${encodeURIComponent(path.basename(candidate.file))}`;
-  candidate.url = `${publicBase}/${candidate.objectKey}`;
+  // OSS SDK keys are raw Unicode paths. Only the public HTTP URL is encoded.
+  candidate.objectKey = `${objectPrefix}/${candidate.sha256}/${path.basename(candidate.file)}`;
+  candidate.url = `${publicBase}/${encodePath(candidate.objectKey)}`;
 };
 
 const prepareBuild = ({
@@ -238,12 +239,12 @@ const selftest = () => {
     fs.mkdirSync(path.join(root, "img", "new home"), { recursive: true });
     fs.mkdirSync(path.join(root, "fonts"), { recursive: true });
     fs.mkdirSync(path.join(root, "assets", "css"), { recursive: true });
-    fs.writeFileSync(path.join(root, "img", "new home", "demo.mp4"), "video");
+    fs.writeFileSync(path.join(root, "img", "new home", "演示 video.mp4"), "video");
     fs.writeFileSync(path.join(root, "fonts", "site.woff2"), "font");
     fs.writeFileSync(path.join(root, "img", "tiny.png"), "tiny");
     fs.writeFileSync(
       path.join(root, "index.html"),
-      '<video src="/img/new%20home/demo.mp4"></video>',
+      '<video src="/img/new%20home/%E6%BC%94%E7%A4%BA%20video.mp4"></video>',
     );
     fs.writeFileSync(
       path.join(root, "assets", "css", "styles.css"),
@@ -262,8 +263,20 @@ const selftest = () => {
     if (!html.includes(DEFAULT_PUBLIC_BASE) || !css.includes(DEFAULT_PUBLIC_BASE)) {
       throw new Error("expected HTML and CSS references to be rewritten");
     }
-    if (html.includes("/img/new%20home/demo.mp4") || css.includes("fonts/site.woff2")) {
+    if (
+      html.includes("/img/new%20home/%E6%BC%94%E7%A4%BA%20video.mp4") ||
+      css.includes("fonts/site.woff2")
+    ) {
       throw new Error("a local asset reference survived rewriting");
+    }
+    const videoAsset = manifest.assets.find(({ relativePath }) =>
+      relativePath.endsWith("演示 video.mp4"),
+    );
+    if (
+      !videoAsset?.objectKey.endsWith("演示 video.mp4") ||
+      !videoAsset.url.endsWith("%E6%BC%94%E7%A4%BA%20video.mp4")
+    ) {
+      throw new Error("OSS keys must stay Unicode while public URLs are encoded");
     }
     if (manifest.assets.some((asset) => asset.relativePaths.includes("img/tiny.png"))) {
       throw new Error("unreferenced small asset should not be offloaded");
