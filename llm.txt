@@ -4,6 +4,7 @@
 > Canonical website: https://yaklang.com/
 > Alternate deployment: https://yaklang.io/
 > Source repository: https://github.com/yaklang/yaklang.github.io
+> Standard concise agent index: https://yaklang.com/llms.txt
 
 ## What Yak Project is
 

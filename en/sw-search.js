@@ -3,7 +3,7 @@
  *
  * 职责(刻意保持最小):
  *   - 仅缓存前端搜索用到的两个同源资源:
- *       /site-content/latest.zip    (内容包, ~2-3MB, 含全部 docs/products/blog 正文)
+ *       https://aliyun-oss.yaklang.com/yaklang-website/assets/4c677a0ec200231ce4faf04daae54e4eb39be63fd80bfe6e3be00ac11862fccf/latest.zip    (内容包, ~2-3MB, 含全部 docs/products/blog 正文)
  *       /site-packages.json         (历史归档清单, 体积可忽略)
  *   - 策略: stale-while-revalidate (缓存优先, 后台静默更新)
  *   - 其它所有请求一律放行, 不做任何缓存或拦截, 避免与 Docusaurus 资源策略冲突。
@@ -16,7 +16,7 @@
 const CACHE_VERSION = "v1";
 const CACHE_NAME = `yak-search-${CACHE_VERSION}`;
 const CACHED_PATHS = new Set([
-  "/site-content/latest.zip",
+  "https://aliyun-oss.yaklang.com/yaklang-website/assets/4c677a0ec200231ce4faf04daae54e4eb39be63fd80bfe6e3be00ac11862fccf/latest.zip",
   "/site-packages.json",
 ]);
 
