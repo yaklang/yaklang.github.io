@@ -31,6 +31,8 @@ const ALWAYS_OFFLOAD = new Set([
   ".woff2",
   ".ttf",
   ".otf",
+  ".webp",
+  ".avif",
 ]);
 
 const LARGE_BINARY = new Set([
@@ -38,8 +40,6 @@ const LARGE_BINARY = new Set([
   ".jpg",
   ".jpeg",
   ".gif",
-  ".webp",
-  ".avif",
   ".svg",
   ".ico",
   ".pdf",
@@ -260,14 +260,21 @@ const selftest = () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "yak-oss-assets-"));
   try {
     fs.mkdirSync(path.join(root, "img", "new home"), { recursive: true });
+    fs.mkdirSync(path.join(root, "img", "home-optimized", "partners"), {
+      recursive: true,
+    });
     fs.mkdirSync(path.join(root, "fonts"), { recursive: true });
     fs.mkdirSync(path.join(root, "assets", "css"), { recursive: true });
     fs.writeFileSync(path.join(root, "img", "new home", "演示 video.mp4"), "video");
     fs.writeFileSync(path.join(root, "fonts", "site.woff2"), "font");
     fs.writeFileSync(path.join(root, "img", "tiny.png"), "tiny");
     fs.writeFileSync(
+      path.join(root, "img", "home-optimized", "partners", "tiny.webp"),
+      "webp",
+    );
+    fs.writeFileSync(
       path.join(root, "index.html"),
-      '<video src="/img/new%20home/%E6%BC%94%E7%A4%BA%20video.mp4"></video>',
+      '<video src="/img/new%20home/%E6%BC%94%E7%A4%BA%20video.mp4"></video><img src="/img/tiny.png">',
     );
     fs.writeFileSync(
       path.join(root, "assets", "css", "styles.css"),
@@ -275,12 +282,12 @@ const selftest = () => {
     );
     fs.writeFileSync(
       path.join(root, "bundle.js"),
-      'const media="img/new home/\\u6f14\\u793a video.mp4";',
+      'const media="img/new home/\\u6f14\\u793a video.mp4";const optimized="/img/home-optimized/partners/tiny.webp";',
     );
 
     const manifest = prepareBuild({ buildDir: root, threshold: 8 });
-    if (manifest.assetCount !== 2) {
-      throw new Error(`expected 2 assets, got ${manifest.assetCount}`);
+    if (manifest.assetCount !== 3) {
+      throw new Error(`expected 3 assets, got ${manifest.assetCount}`);
     }
     const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
     const css = fs.readFileSync(
@@ -310,8 +317,19 @@ const selftest = () => {
     ) {
       throw new Error("OSS keys must stay Unicode while public URLs are encoded");
     }
-    if (manifest.assets.some((asset) => asset.relativePaths.includes("img/tiny.png"))) {
-      throw new Error("unreferenced small asset should not be offloaded");
+    if (
+      manifest.assets.some((asset) => asset.relativePaths.includes("img/tiny.png")) ||
+      !html.includes("/img/tiny.png")
+    ) {
+      throw new Error("small legacy PNG below the threshold should stay local");
+    }
+    if (
+      !manifest.assets.some((asset) =>
+        asset.relativePaths.includes("img/home-optimized/partners/tiny.webp"),
+      ) ||
+      js.includes("/img/home-optimized/partners/tiny.webp")
+    ) {
+      throw new Error("small optimized WebP should always be offloaded");
     }
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
