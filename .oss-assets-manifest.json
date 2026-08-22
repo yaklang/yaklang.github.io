@@ -4,8 +4,8 @@
   "objectPrefix": "yaklang-website/assets",
   "thresholdBytes": 102400,
   "buildDir": "build",
-  "assetCount": 2165,
-  "totalBytes": 711290998,
+  "assetCount": 2201,
+  "totalBytes": 712229756,
   "assets": [
     {
       "relativePath": "assets/fonts/crimson-text-400-f002dfeee9542c98fae39296e68aea7e.woff2",
@@ -112,30 +112,30 @@
       "sourceFile": "build/assets/fonts/noto-serif-sc-700-2002ed63629e1cbdb1949395c583dc8e.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2",
-      "size": 181948,
+      "relativePath": "assets/fonts/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2",
+      "size": 183852,
       "replacements": 2,
-      "sha256": "b3cbac65ec62115f605924cc18c612a0a6c8fb404d8659b6ccadb47cadc11e2a",
-      "objectKey": "yaklang-website/assets/b3cbac65ec62115f605924cc18c612a0a6c8fb404d8659b6ccadb47cadc11e2a/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/b3cbac65ec62115f605924cc18c612a0a6c8fb404d8659b6ccadb47cadc11e2a/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2",
+      "sha256": "756ab6ab23c3cdbee28b97b13f87655c1472642a05b2fc779af9394cbc31c2f2",
+      "objectKey": "yaklang-website/assets/756ab6ab23c3cdbee28b97b13f87655c1472642a05b2fc779af9394cbc31c2f2/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/756ab6ab23c3cdbee28b97b13f87655c1472642a05b2fc779af9394cbc31c2f2/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2",
-        "en/assets/fonts/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2"
+        "assets/fonts/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2",
+        "en/assets/fonts/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-d0dcadbe186c3f6bec5dd20f1a1fe1ae.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-b1739dc583d056b4d21b3b6e72db06cd.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2",
-      "size": 182976,
+      "relativePath": "assets/fonts/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2",
+      "size": 184920,
       "replacements": 2,
-      "sha256": "c7232fb32e68ae456403eeb5d6e23c42e9237b93796c293d2d86ec896ef39796",
-      "objectKey": "yaklang-website/assets/c7232fb32e68ae456403eeb5d6e23c42e9237b93796c293d2d86ec896ef39796/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/c7232fb32e68ae456403eeb5d6e23c42e9237b93796c293d2d86ec896ef39796/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2",
+      "sha256": "aa83235c317b27c7c2150fb965627fd071408724a55e55e1f0b60b8f3e689297",
+      "objectKey": "yaklang-website/assets/aa83235c317b27c7c2150fb965627fd071408724a55e55e1f0b60b8f3e689297/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/aa83235c317b27c7c2150fb965627fd071408724a55e55e1f0b60b8f3e689297/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2",
-        "en/assets/fonts/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2"
+        "assets/fonts/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2",
+        "en/assets/fonts/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-b6b76ffcc7b8ec2ccdc7d0089eedb819.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-6eaf1928554f0ddabf67b8424261c415.woff2"
     },
     {
       "relativePath": "assets/fonts/roboto-400-4977cb87a58c463dbc07027a96688df6.ttf",
@@ -26239,6 +26239,438 @@
         "img/home-optimized/hero/ascii-magic-47.mp4"
       ],
       "sourceFile": "build/img/home-optimized/hero/ascii-magic-47.mp4"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/0718bf2f426b3b8a.webp",
+      "size": 9236,
+      "replacements": 2,
+      "sha256": "608c4f2fb5899523b39fe81f85fd09f2de343e3f9671e5c5350da0349d2a0874",
+      "objectKey": "yaklang-website/assets/608c4f2fb5899523b39fe81f85fd09f2de343e3f9671e5c5350da0349d2a0874/0718bf2f426b3b8a.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/608c4f2fb5899523b39fe81f85fd09f2de343e3f9671e5c5350da0349d2a0874/0718bf2f426b3b8a.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/0718bf2f426b3b8a.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/0718bf2f426b3b8a.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp",
+      "size": 9958,
+      "replacements": 2,
+      "sha256": "4f4f3e0eb9d1ad66216e36fe26eff54e7311a6045b9d2f70097883304e606bd8",
+      "objectKey": "yaklang-website/assets/4f4f3e0eb9d1ad66216e36fe26eff54e7311a6045b9d2f70097883304e606bd8/2021-xcon-yak-yakit-release.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/4f4f3e0eb9d1ad66216e36fe26eff54e7311a6045b9d2f70097883304e606bd8/2021-xcon-yak-yakit-release.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2021-xcon-yak-yakit-release.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp",
+      "size": 10946,
+      "replacements": 2,
+      "sha256": "f60fa7da4266e4c3b717a2a94da5daeb9ad8d29f312516033090cf7053b4b5f5",
+      "objectKey": "yaklang-website/assets/f60fa7da4266e4c3b717a2a94da5daeb9ad8d29f312516033090cf7053b4b5f5/2023-yaklang-open-source-launch.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f60fa7da4266e4c3b717a2a94da5daeb9ad8d29f312516033090cf7053b4b5f5/2023-yaklang-open-source-launch.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2023-yaklang-open-source-launch.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2023-yaklang-open-source-launch.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/2024-cicc-conference.webp",
+      "size": 21710,
+      "replacements": 2,
+      "sha256": "284968edb30d1b438b8bb96dc79ebde2ff131a341951c5b924cfa7856b3ec8a0",
+      "objectKey": "yaklang-website/assets/284968edb30d1b438b8bb96dc79ebde2ff131a341951c5b924cfa7856b3ec8a0/2024-cicc-conference.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/284968edb30d1b438b8bb96dc79ebde2ff131a341951c5b924cfa7856b3ec8a0/2024-cicc-conference.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/2024-cicc-conference.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/2024-cicc-conference.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/20260803-174557.webp",
+      "size": 13402,
+      "replacements": 2,
+      "sha256": "12f061ac2523c739740f6225939bb659a65885a51d4e67ed9767a2d2d8da512f",
+      "objectKey": "yaklang-website/assets/12f061ac2523c739740f6225939bb659a65885a51d4e67ed9767a2d2d8da512f/20260803-174557.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/12f061ac2523c739740f6225939bb659a65885a51d4e67ed9767a2d2d8da512f/20260803-174557.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/20260803-174557.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/20260803-174557.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/20260804203037.webp",
+      "size": 14064,
+      "replacements": 2,
+      "sha256": "8c46150c5a279dc4b8672c3c53aa98f17e8ab7348051c62483240a559b7fcec8",
+      "objectKey": "yaklang-website/assets/8c46150c5a279dc4b8672c3c53aa98f17e8ab7348051c62483240a559b7fcec8/20260804203037.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/8c46150c5a279dc4b8672c3c53aa98f17e8ab7348051c62483240a559b7fcec8/20260804203037.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/20260804203037.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/20260804203037.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/milestones/3cac0ba124b1bebc.webp",
+      "size": 3408,
+      "replacements": 2,
+      "sha256": "8326fc6b4a9ddc48babfb728609e0bda63310f9c131dee64d70b42652b1229c5",
+      "objectKey": "yaklang-website/assets/8326fc6b4a9ddc48babfb728609e0bda63310f9c131dee64d70b42652b1229c5/3cac0ba124b1bebc.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/8326fc6b4a9ddc48babfb728609e0bda63310f9c131dee64d70b42652b1229c5/3cac0ba124b1bebc.webp",
+      "relativePaths": [
+        "img/home-optimized/milestones/3cac0ba124b1bebc.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/milestones/3cac0ba124b1bebc.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/4hou.webp",
+      "size": 9770,
+      "replacements": 2,
+      "sha256": "bfa68234888eeaf19d4e96a40653674332c836fadc21101f65a1823aadf101f2",
+      "objectKey": "yaklang-website/assets/bfa68234888eeaf19d4e96a40653674332c836fadc21101f65a1823aadf101f2/4hou.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/bfa68234888eeaf19d4e96a40653674332c836fadc21101f65a1823aadf101f2/4hou.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/4hou.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/4hou.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/acmesec.webp",
+      "size": 12168,
+      "replacements": 2,
+      "sha256": "a5235d7bad3b186b056539c43d0ebc4456bffc6eb0dbda69f3661bb0a29ea823",
+      "objectKey": "yaklang-website/assets/a5235d7bad3b186b056539c43d0ebc4456bffc6eb0dbda69f3661bb0a29ea823/acmesec.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/a5235d7bad3b186b056539c43d0ebc4456bffc6eb0dbda69f3661bb0a29ea823/acmesec.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/acmesec.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/acmesec.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/asiainfo-sec.webp",
+      "size": 10082,
+      "replacements": 2,
+      "sha256": "39d30b077c0614120f7c3fd689a170b69048c107837107e67fa195cf28e0118e",
+      "objectKey": "yaklang-website/assets/39d30b077c0614120f7c3fd689a170b69048c107837107e67fa195cf28e0118e/asiainfo-sec.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/39d30b077c0614120f7c3fd689a170b69048c107837107e67fa195cf28e0118e/asiainfo-sec.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/asiainfo-sec.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/asiainfo-sec.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/beike.webp",
+      "size": 9614,
+      "replacements": 2,
+      "sha256": "553d67895fd50b825a8289fcfa2d93272109ff970ff9bc3d50d117a58a2463b4",
+      "objectKey": "yaklang-website/assets/553d67895fd50b825a8289fcfa2d93272109ff970ff9bc3d50d117a58a2463b4/beike.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/553d67895fd50b825a8289fcfa2d93272109ff970ff9bc3d50d117a58a2463b4/beike.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/beike.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/beike.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/c4.webp",
+      "size": 9994,
+      "replacements": 2,
+      "sha256": "7d426b1478033c61b2e842f8e8a8daa2cc350d03198c42988a2bfd6faa4c4fda",
+      "objectKey": "yaklang-website/assets/7d426b1478033c61b2e842f8e8a8daa2cc350d03198c42988a2bfd6faa4c4fda/c4.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/7d426b1478033c61b2e842f8e8a8daa2cc350d03198c42988a2bfd6faa4c4fda/c4.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/c4.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/c4.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/CTstack.webp",
+      "size": 6118,
+      "replacements": 2,
+      "sha256": "6a34954b35b5f79483c74b7b90a423a8c54ba6d77bab51cd39ada34f01df1118",
+      "objectKey": "yaklang-website/assets/6a34954b35b5f79483c74b7b90a423a8c54ba6d77bab51cd39ada34f01df1118/CTstack.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/6a34954b35b5f79483c74b7b90a423a8c54ba6d77bab51cd39ada34f01df1118/CTstack.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/CTstack.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/CTstack.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/duxiaoman.webp",
+      "size": 10470,
+      "replacements": 2,
+      "sha256": "8bd7e65834cdd91f57ead497591850d45bcb32efae022b6c1d92d9ae3f9e672f",
+      "objectKey": "yaklang-website/assets/8bd7e65834cdd91f57ead497591850d45bcb32efae022b6c1d92d9ae3f9e672f/duxiaoman.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/8bd7e65834cdd91f57ead497591850d45bcb32efae022b6c1d92d9ae3f9e672f/duxiaoman.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/duxiaoman.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/duxiaoman.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/E安全.webp",
+      "size": 7282,
+      "replacements": 2,
+      "sha256": "9797225daa5e3a3b7a0ece9419fc7b3231c6b205a8bca567bb2dc8ee9f853a84",
+      "objectKey": "yaklang-website/assets/9797225daa5e3a3b7a0ece9419fc7b3231c6b205a8bca567bb2dc8ee9f853a84/E安全.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/9797225daa5e3a3b7a0ece9419fc7b3231c6b205a8bca567bb2dc8ee9f853a84/E%E5%AE%89%E5%85%A8.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/E安全.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/E安全.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/hacking.webp",
+      "size": 5144,
+      "replacements": 2,
+      "sha256": "f19e24a93e90ea04b6ec528f93f6d5ecec8e027f88a5bcd684c1de12b9ad3609",
+      "objectKey": "yaklang-website/assets/f19e24a93e90ea04b6ec528f93f6d5ecec8e027f88a5bcd684c1de12b9ad3609/hacking.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f19e24a93e90ea04b6ec528f93f6d5ecec8e027f88a5bcd684c1de12b9ad3609/hacking.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/hacking.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/hacking.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/kuaishou.webp",
+      "size": 14400,
+      "replacements": 2,
+      "sha256": "228e96fdc18dfddcf6af080bdadaa4b74e65ec625b87e75ccd41c3b77b7e5b52",
+      "objectKey": "yaklang-website/assets/228e96fdc18dfddcf6af080bdadaa4b74e65ec625b87e75ccd41c3b77b7e5b52/kuaishou.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/228e96fdc18dfddcf6af080bdadaa4b74e65ec625b87e75ccd41c3b77b7e5b52/kuaishou.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/kuaishou.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/kuaishou.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/logo.webp",
+      "size": 8638,
+      "replacements": 2,
+      "sha256": "7cf3d6a1712c8d86c15832e64097dd87eeb3b4ff15c94e96650466b819ea6d4a",
+      "objectKey": "yaklang-website/assets/7cf3d6a1712c8d86c15832e64097dd87eeb3b4ff15c94e96650466b819ea6d4a/logo.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/7cf3d6a1712c8d86c15832e64097dd87eeb3b4ff15c94e96650466b819ea6d4a/logo.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/logo.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/logo.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/sec-in.webp",
+      "size": 7208,
+      "replacements": 2,
+      "sha256": "f50f4b1b6dd3a06f6ee4cf9f193e5f2b2c458c527a28600dddcc56340358a4a8",
+      "objectKey": "yaklang-website/assets/f50f4b1b6dd3a06f6ee4cf9f193e5f2b2c458c527a28600dddcc56340358a4a8/sec-in.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f50f4b1b6dd3a06f6ee4cf9f193e5f2b2c458c527a28600dddcc56340358a4a8/sec-in.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/sec-in.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/sec-in.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/seclover.webp",
+      "size": 8060,
+      "replacements": 2,
+      "sha256": "40793a887449646c5400eb6a0fde4399f4ba85ba333b63a485666d3c91a3a83f",
+      "objectKey": "yaklang-website/assets/40793a887449646c5400eb6a0fde4399f4ba85ba333b63a485666d3c91a3a83f/seclover.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/40793a887449646c5400eb6a0fde4399f4ba85ba333b63a485666d3c91a3a83f/seclover.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/seclover.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/seclover.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/secpulse.webp",
+      "size": 10550,
+      "replacements": 2,
+      "sha256": "de189b7e2ce5f857748e0d97387669a83f3f89506e3d92baf14708c40d1ff4c1",
+      "objectKey": "yaklang-website/assets/de189b7e2ce5f857748e0d97387669a83f3f89506e3d92baf14708c40d1ff4c1/secpulse.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/de189b7e2ce5f857748e0d97387669a83f3f89506e3d92baf14708c40d1ff4c1/secpulse.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/secpulse.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/secpulse.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/security58.webp",
+      "size": 10702,
+      "replacements": 2,
+      "sha256": "dd48887189c005a63012623811125fb8008e47197a8337e638d2955202a7a63a",
+      "objectKey": "yaklang-website/assets/dd48887189c005a63012623811125fb8008e47197a8337e638d2955202a7a63a/security58.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/dd48887189c005a63012623811125fb8008e47197a8337e638d2955202a7a63a/security58.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/security58.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/security58.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/sycsec.webp",
+      "size": 4276,
+      "replacements": 2,
+      "sha256": "69d4567688f559323a1b4661d1a6895e5a014c4dd1fa9a8b5ded40a44a73d86b",
+      "objectKey": "yaklang-website/assets/69d4567688f559323a1b4661d1a6895e5a014c4dd1fa9a8b5ded40a44a73d86b/sycsec.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/69d4567688f559323a1b4661d1a6895e5a014c4dd1fa9a8b5ded40a44a73d86b/sycsec.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/sycsec.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/sycsec.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/wutang.webp",
+      "size": 9374,
+      "replacements": 2,
+      "sha256": "cb5f5200308e6d8f1891c5926745e8af8f58da5833dbbea1c2f34b69524afc28",
+      "objectKey": "yaklang-website/assets/cb5f5200308e6d8f1891c5926745e8af8f58da5833dbbea1c2f34b69524afc28/wutang.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/cb5f5200308e6d8f1891c5926745e8af8f58da5833dbbea1c2f34b69524afc28/wutang.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/wutang.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/wutang.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/xiaomi.webp",
+      "size": 11612,
+      "replacements": 2,
+      "sha256": "9b1faefff61ab60e0175a08d180b6f511fe9d0b164945823d578251c76c37558",
+      "objectKey": "yaklang-website/assets/9b1faefff61ab60e0175a08d180b6f511fe9d0b164945823d578251c76c37558/xiaomi.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/9b1faefff61ab60e0175a08d180b6f511fe9d0b164945823d578251c76c37558/xiaomi.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/xiaomi.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/xiaomi.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/partners/zhaopin.webp",
+      "size": 10242,
+      "replacements": 2,
+      "sha256": "a56a3ed389af7c697e9138aa4cd250e80daacc360d0e1da9c774c11dd58806a3",
+      "objectKey": "yaklang-website/assets/a56a3ed389af7c697e9138aa4cd250e80daacc360d0e1da9c774c11dd58806a3/zhaopin.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/a56a3ed389af7c697e9138aa4cd250e80daacc360d0e1da9c774c11dd58806a3/zhaopin.webp",
+      "relativePaths": [
+        "img/home-optimized/partners/zhaopin.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/partners/zhaopin.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/irify_bg.webp",
+      "size": 86852,
+      "replacements": 2,
+      "sha256": "8e7011e06262a789d11a9a8d7a73851e654fe54e994f0605047c3df6daecd676",
+      "objectKey": "yaklang-website/assets/8e7011e06262a789d11a9a8d7a73851e654fe54e994f0605047c3df6daecd676/irify_bg.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/8e7011e06262a789d11a9a8d7a73851e654fe54e994f0605047c3df6daecd676/irify_bg.webp",
+      "relativePaths": [
+        "img/home-optimized/products/irify_bg.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/irify_bg.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/irify1.webp",
+      "size": 54402,
+      "replacements": 2,
+      "sha256": "842354420bfa63f28f2a91a234fffddcfd8ce687611ceae1936eca3db2f0395a",
+      "objectKey": "yaklang-website/assets/842354420bfa63f28f2a91a234fffddcfd8ce687611ceae1936eca3db2f0395a/irify1.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/842354420bfa63f28f2a91a234fffddcfd8ce687611ceae1936eca3db2f0395a/irify1.webp",
+      "relativePaths": [
+        "img/home-optimized/products/irify1.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/irify1.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/irify2.webp",
+      "size": 46880,
+      "replacements": 2,
+      "sha256": "e406600f736575e37bf4b4930cea992bcc9967321dd258c0defb677f2dae1cc3",
+      "objectKey": "yaklang-website/assets/e406600f736575e37bf4b4930cea992bcc9967321dd258c0defb677f2dae1cc3/irify2.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/e406600f736575e37bf4b4930cea992bcc9967321dd258c0defb677f2dae1cc3/irify2.webp",
+      "relativePaths": [
+        "img/home-optimized/products/irify2.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/irify2.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/irify3.webp",
+      "size": 49398,
+      "replacements": 2,
+      "sha256": "fb6a63b1b7373787b4df484b92d6dd2ed3c99fd35a899ad9ea4d43ca6c252070",
+      "objectKey": "yaklang-website/assets/fb6a63b1b7373787b4df484b92d6dd2ed3c99fd35a899ad9ea4d43ca6c252070/irify3.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/fb6a63b1b7373787b4df484b92d6dd2ed3c99fd35a899ad9ea4d43ca6c252070/irify3.webp",
+      "relativePaths": [
+        "img/home-optimized/products/irify3.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/irify3.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/memfit_bg.webp",
+      "size": 90834,
+      "replacements": 2,
+      "sha256": "f3bd5138612fbf10e5f31962bf075778a0a6bc50db47d8e1798961c067bea30b",
+      "objectKey": "yaklang-website/assets/f3bd5138612fbf10e5f31962bf075778a0a6bc50db47d8e1798961c067bea30b/memfit_bg.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f3bd5138612fbf10e5f31962bf075778a0a6bc50db47d8e1798961c067bea30b/memfit_bg.webp",
+      "relativePaths": [
+        "img/home-optimized/products/memfit_bg.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/memfit_bg.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/memfit3.webp",
+      "size": 53982,
+      "replacements": 2,
+      "sha256": "79fdf1fb63e6df7afaf0ab7b50ce075f16c76dec3c95edeaf3cecae422a2423e",
+      "objectKey": "yaklang-website/assets/79fdf1fb63e6df7afaf0ab7b50ce075f16c76dec3c95edeaf3cecae422a2423e/memfit3.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/79fdf1fb63e6df7afaf0ab7b50ce075f16c76dec3c95edeaf3cecae422a2423e/memfit3.webp",
+      "relativePaths": [
+        "img/home-optimized/products/memfit3.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/memfit3.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/memft1.webp",
+      "size": 43122,
+      "replacements": 2,
+      "sha256": "41eb0f2981b0d27e56536a7cfffd0c9b247407099db1b7cd4130021f3ca0216c",
+      "objectKey": "yaklang-website/assets/41eb0f2981b0d27e56536a7cfffd0c9b247407099db1b7cd4130021f3ca0216c/memft1.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/41eb0f2981b0d27e56536a7cfffd0c9b247407099db1b7cd4130021f3ca0216c/memft1.webp",
+      "relativePaths": [
+        "img/home-optimized/products/memft1.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/memft1.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/memft2.webp",
+      "size": 63038,
+      "replacements": 2,
+      "sha256": "8125156f7fd6bc3df0bfd3f56bdbef7618b22eb9f0d5ea4c366dede599866ff2",
+      "objectKey": "yaklang-website/assets/8125156f7fd6bc3df0bfd3f56bdbef7618b22eb9f0d5ea4c366dede599866ff2/memft2.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/8125156f7fd6bc3df0bfd3f56bdbef7618b22eb9f0d5ea4c366dede599866ff2/memft2.webp",
+      "relativePaths": [
+        "img/home-optimized/products/memft2.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/memft2.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/yakit_bg.webp",
+      "size": 90932,
+      "replacements": 2,
+      "sha256": "f879e9919191e8889fe8a4a492b3202e60af615d6bd5a23acad47f4b800755b6",
+      "objectKey": "yaklang-website/assets/f879e9919191e8889fe8a4a492b3202e60af615d6bd5a23acad47f4b800755b6/yakit_bg.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f879e9919191e8889fe8a4a492b3202e60af615d6bd5a23acad47f4b800755b6/yakit_bg.webp",
+      "relativePaths": [
+        "img/home-optimized/products/yakit_bg.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/yakit_bg.webp"
+    },
+    {
+      "relativePath": "img/home-optimized/products/yaklang_bg.webp",
+      "size": 97042,
+      "replacements": 2,
+      "sha256": "9e9f5d4cbc40847853b96e835cac3028c9739047ea89b6f4fc4b6516220f39c9",
+      "objectKey": "yaklang-website/assets/9e9f5d4cbc40847853b96e835cac3028c9739047ea89b6f4fc4b6516220f39c9/yaklang_bg.webp",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/9e9f5d4cbc40847853b96e835cac3028c9739047ea89b6f4fc4b6516220f39c9/yaklang_bg.webp",
+      "relativePaths": [
+        "img/home-optimized/products/yaklang_bg.webp"
+      ],
+      "sourceFile": "build/img/home-optimized/products/yaklang_bg.webp"
     },
     {
       "relativePath": "img/newHome/cta-hands-bg-dark.png",
