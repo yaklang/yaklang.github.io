@@ -66,7 +66,12 @@ const REWRITABLE_TEXT = new Set([
 ]);
 
 const ASSET_REFERENCE = new RegExp(
-  String.raw`(?<![A-Za-z0-9_%~-])(?:https?:\/\/(?:www\.)?(?:yaklang\.com|yaklang\.io))?(?:\/|(?:\.\.\/)+|\.\/)?[^"'\x60()<>\\\s?#:,;={}\[\]]+?\.(?:mp4|webm|mov|m4v|mp3|m4a|wav|ogg|woff2?|ttf|otf|png|jpe?g|gif|webp|avif|svg|ico|pdf|zip|gz|tgz|bz2|xz|7z|tar|wasm)(?:[?#][^"'\x60()<>\\\s]*)?`,
+  String.raw`(?<![A-Za-z0-9_%~-])(?:https?:\/\/(?:www\.)?(?:yaklang\.com|yaklang\.io))?(?:\/|(?:\.\.\/)+|\.\/)?[^"'\x60()<>\s?#:,;={}\[\]]+?\.(?:mp4|webm|mov|m4v|mp3|m4a|wav|ogg|woff2?|ttf|otf|png|jpe?g|gif|webp|avif|svg|ico|pdf|zip|gz|tgz|bz2|xz|7z|tar|wasm)(?:[?#][^"'\x60()<>\s]*)?`,
+  "giu",
+);
+
+const QUOTED_ASSET_REFERENCE = new RegExp(
+  String.raw`(["'\x60])([^"'\x60\r\n]+?\.(?:mp4|webm|mov|m4v|mp3|m4a|wav|ogg|woff2?|ttf|otf|png|jpe?g|gif|webp|avif|svg|ico|pdf|zip|gz|tgz|bz2|xz|7z|tar|wasm)(?:[?#][^"'\x60\r\n]*)?)\1`,
   "giu",
 );
 
@@ -119,6 +124,18 @@ const safeDecode = (value) => {
   }
 };
 
+const decodeJavaScriptPath = (value) =>
+  value
+    .replace(/\\u\{([0-9a-f]{1,6})\}/giu, (_match, hex) =>
+      String.fromCodePoint(Number.parseInt(hex, 16)),
+    )
+    .replace(/\\u([0-9a-f]{4})/giu, (_match, hex) =>
+      String.fromCharCode(Number.parseInt(hex, 16)),
+    )
+    .replace(/\\x([0-9a-f]{2})/giu, (_match, hex) =>
+      String.fromCharCode(Number.parseInt(hex, 16)),
+    );
+
 const splitReferenceSuffix = (reference) => {
   const index = reference.search(/[?#]/u);
   return index === -1
@@ -132,7 +149,7 @@ const resolveCandidate = (reference, textRelativePath, candidatesByPath) => {
     /^https?:\/\/(?:www\.)?(?:yaklang\.com|yaklang\.io)/iu,
     "",
   );
-  const decoded = safeDecode(withoutHost);
+  const decoded = decodeJavaScriptPath(safeDecode(withoutHost));
   const rootPath = path.posix.normalize(decoded.replace(/^\/+/, ""));
   const relativePath = path.posix.normalize(
     path.posix.join(path.posix.dirname(textRelativePath), decoded),
@@ -183,7 +200,7 @@ const prepareBuild = ({
   for (const textFile of textFiles) {
     const original = fs.readFileSync(textFile, "utf8");
     const textRelativePath = toPosix(path.relative(buildDir, textFile));
-    const rewritten = original.replace(ASSET_REFERENCE, (reference) => {
+    const rewriteReference = (reference) => {
       const resolved = resolveCandidate(
         reference,
         textRelativePath,
@@ -193,7 +210,13 @@ const prepareBuild = ({
       ensureIdentity(resolved.candidate, cleanPublicBase, cleanObjectPrefix);
       resolved.candidate.replacements += 1;
       return `${resolved.candidate.url}${resolved.suffix}`;
-    });
+    };
+    const quotedRewritten = original.replace(
+      QUOTED_ASSET_REFERENCE,
+      (_match, quote, reference) =>
+        `${quote}${rewriteReference(reference)}${quote}`,
+    );
+    const rewritten = quotedRewritten.replace(ASSET_REFERENCE, rewriteReference);
     if (!checkOnly && rewritten !== original) {
       fs.writeFileSync(textFile, rewritten);
     }
@@ -250,6 +273,10 @@ const selftest = () => {
       path.join(root, "assets", "css", "styles.css"),
       'src:url("../../fonts/site.woff2") format("woff2")',
     );
+    fs.writeFileSync(
+      path.join(root, "bundle.js"),
+      'const media="img/new home/\\u6f14\\u793a video.mp4";',
+    );
 
     const manifest = prepareBuild({ buildDir: root, threshold: 8 });
     if (manifest.assetCount !== 2) {
@@ -260,8 +287,13 @@ const selftest = () => {
       path.join(root, "assets", "css", "styles.css"),
       "utf8",
     );
-    if (!html.includes(DEFAULT_PUBLIC_BASE) || !css.includes(DEFAULT_PUBLIC_BASE)) {
-      throw new Error("expected HTML and CSS references to be rewritten");
+    const js = fs.readFileSync(path.join(root, "bundle.js"), "utf8");
+    if (
+      !html.includes(DEFAULT_PUBLIC_BASE) ||
+      !css.includes(DEFAULT_PUBLIC_BASE) ||
+      !js.includes(DEFAULT_PUBLIC_BASE)
+    ) {
+      throw new Error("expected HTML, CSS, and escaped JS references to be rewritten");
     }
     if (
       html.includes("/img/new%20home/%E6%BC%94%E7%A4%BA%20video.mp4") ||
