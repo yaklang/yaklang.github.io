@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import Head from "@docusaurus/Head";
+import Link from "@docusaurus/Link";
 import { useTranslation } from "react-i18next";
 
 // FAQ 内容自包含：可见问答与 FAQPage JSON-LD 使用同一数据源，
@@ -95,6 +96,7 @@ export default function FaqPage() {
   const { i18n } = useTranslation();
   const isEn = i18n.language?.startsWith("en");
   const content = isEn ? FAQ.en : FAQ.zh;
+  const localizedPath = (route) => `${isEn ? "/en" : ""}${route}`;
 
   // FAQPage schema 直接由可见问答数据生成，确保文本一致。
   const faqSchema = {
@@ -193,17 +195,17 @@ export default function FaqPage() {
               color: "var(--ifm-color-emphasis-700, #555)",
             }}
           >
-            <a href="/download" style={linkStyle}>
+            <Link to={localizedPath("/download")} style={linkStyle}>
               {isEn ? "Download Yakit" : "下载 Yakit"}
-            </a>
+            </Link>
             <span style={{ margin: "0 12px", opacity: 0.4 }}>·</span>
-            <a href="/docs/intro" style={linkStyle}>
+            <Link to={localizedPath("/docs/intro")} style={linkStyle}>
               {isEn ? "Yaklang Docs" : "Yak 编程文档"}
-            </a>
+            </Link>
             <span style={{ margin: "0 12px", opacity: 0.4 }}>·</span>
-            <a href="/opensource" style={linkStyle}>
+            <Link to={localizedPath("/opensource")} style={linkStyle}>
               {isEn ? "Open Source" : "开源生态"}
-            </a>
+            </Link>
           </footer>
         </div>
       </main>

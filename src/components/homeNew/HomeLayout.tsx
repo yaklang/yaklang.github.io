@@ -21,30 +21,18 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({
   const socialImage = `${siteConfig.url}/img/newHome/now.webp`;
   const structuredData = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${siteConfig.url}/#organization`,
-        name: "Yak Project",
-        alternateName: ["Yaklang", "Yakit"],
-        url: `${siteConfig.url}/`,
-        logo: `${siteConfig.url}/img/logo.png`,
-        description,
-        sameAs: [
-          "https://github.com/yaklang",
-          "https://yaklang.io/",
-        ],
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${siteConfig.url}/#website`,
-        url: `${siteConfig.url}/`,
-        name: "Yak Project",
-        description,
-        inLanguage: ["zh-CN", "en"],
-        publisher: { "@id": `${siteConfig.url}/#organization` },
-      },
-    ],
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: title,
+    description,
+    inLanguage: isEnglish ? "en" : "zh-CN",
+    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    about: { "@id": `${siteConfig.url}/#organization` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: socialImage,
+    },
   };
 
   return (

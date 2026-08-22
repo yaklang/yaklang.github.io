@@ -32,6 +32,7 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 ## Optional
 
 - [English homepage](https://yaklang.com/en/): English-language project overview.
+- [Extended AI context](https://yaklang.com/llms-full.txt): Long-form product, language, FAQ, and citation context.
 - [Legacy extended AI overview](https://yaklang.com/llm.txt): Backward-compatible long-form project context.
 - [Sitemap](https://yaklang.com/sitemap.xml): Complete indexable URL inventory.
 

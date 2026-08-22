@@ -50,8 +50,14 @@ jobs:
       - name: Verify OSS asset pipeline
         run: node scripts/prepare-oss-assets.js --selftest
 
+      - name: Verify GEO and AI-search foundations
+        run: yarn test:geo
+
       - name: Build website
         run: yarn run build
+
+      - name: Verify generated SEO output
+        run: yarn check:seo
 
       - name: Enforce homepage performance budget
         run: yarn check:home-performance

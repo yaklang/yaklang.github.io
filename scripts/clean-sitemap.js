@@ -1,14 +1,12 @@
 #!/usr/bin/env node
+
 /*
- * 构建后清理 sitemap：从所有 sitemap.xml 移除被标记 noindex 的 URL。
+ * Finalize multilingual indexing after every locale has been built.
  *
- * 为什么独立成脚本：geo-metadata-plugin 在 postBuild 标记 noindex（写到 HTML），
- * 但 Docusaurus 的 sitemap 插件在 geo 插件 *之后* 才生成 sitemap.xml，
- * 所以插件里清不掉。本脚本在 `docusaurus build` 完全结束后运行，
- * 此时 sitemap 已生成、noindex 已落 HTML，可可靠清理。
- *
- * 结果：未翻译的英文回退页（zh 内容 + noindex）从 sitemap 移除，
- * 已翻译为英文、可索引的 en 页保留在 sitemap 中。
+ * The GEO plugin marks untranslated English fallback pages as noindex during
+ * each locale build. Docusaurus generates sitemap and hreflang links separately,
+ * so a final cross-locale pass is required to keep those signals consistent:
+ * no sitemap or indexable page may advertise a noindex English alternate.
  */
 const fs = require("node:fs");
 const path = require("node:path");
@@ -26,51 +24,88 @@ function walkFiles(root, predicate) {
 function routeFromPath(absBuild, file) {
   const rel = path.relative(absBuild, file).split(path.sep).join("/");
   if (rel === "index.html") return "/";
-  return "/" + rel.replace(/\/index\.html$/, "");
+  return `/${rel.replace(/\/index\.html$/, "")}`;
+}
+
+function normalizedPathname(url) {
+  try {
+    return (
+      decodeURIComponent(new URL(url, "https://yaklang.com").pathname).replace(
+        /\/+$/,
+        "",
+      ) || "/"
+    );
+  } catch {
+    return null;
+  }
+}
+
+function attribute(tag, name) {
+  return (
+    tag.match(new RegExp(`\\b${name}=["']([^"']+)["']`, "i"))?.[1] || ""
+  );
 }
 
 if (!fs.existsSync(BUILD_DIR)) process.exit(0);
 
-// 收集 noindex 页对应的路由
+const htmlFiles = walkFiles(BUILD_DIR, (name) => name === "index.html");
 const noindexRoutes = new Set();
-for (const file of walkFiles(BUILD_DIR, (n) => n === "index.html")) {
+
+for (const file of htmlFiles) {
   const html = fs.readFileSync(file, "utf8");
-  if (/name="robots"[^>]*content="[^"]*noindex/i.test(html)) {
-    noindexRoutes.add((routeFromPath(BUILD_DIR, file) || "/").replace(/\/+$/, "") || "/");
+  if (/name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)) {
+    noindexRoutes.add(normalizedPathname(routeFromPath(BUILD_DIR, file)));
   }
 }
 
-if (!noindexRoutes.size) {
-  console.log("[clean-sitemap] no noindex pages found; nothing to do");
-  process.exit(0);
-}
-
-let changed = 0;
-let removed = 0;
-for (const sitemap of walkFiles(BUILD_DIR, (n) => n === "sitemap.xml")) {
-  const xml = fs.readFileSync(sitemap, "utf8");
-  const cleaned = xml.replace(/<url>[\s\S]*?<\/url>/g, (block) => {
-    const loc = block.match(/<loc>([^<]+)<\/loc>/);
-    if (!loc) return block;
-    let pathname;
-    try {
-      // decodeURIComponent：URL.pathname 不解码 %20 等，会导致带空格/中文的
-      // URL（如 /en/products/legacy/Web%20Fuzzer/fuzz）与文件路由不匹配而漏删。
-      pathname = decodeURIComponent(new URL(loc[1]).pathname).replace(/\/+$/, "") || "/";
-    } catch {
-      return block;
+let htmlFilesChanged = 0;
+let alternateLinksRemoved = 0;
+for (const file of htmlFiles) {
+  const route = normalizedPathname(routeFromPath(BUILD_DIR, file));
+  const original = fs.readFileSync(file, "utf8");
+  const cleaned = original.replace(/<link\b[^>]*>/gi, (tag) => {
+    if (!/\brel=["']alternate["']/i.test(tag) || !/\bhreflang=/i.test(tag)) {
+      return tag;
     }
-    if (noindexRoutes.has(pathname)) {
-      removed++;
+    const target = normalizedPathname(attribute(tag, "href"));
+    if (noindexRoutes.has(route) || (target && noindexRoutes.has(target))) {
+      alternateLinksRemoved += 1;
       return "";
     }
-    return block;
+    return tag;
   });
-  if (cleaned !== xml) {
-    fs.writeFileSync(sitemap, cleaned);
-    changed++;
+  if (cleaned !== original) {
+    fs.writeFileSync(file, cleaned);
+    htmlFilesChanged += 1;
   }
 }
+
+let sitemapFilesChanged = 0;
+let sitemapUrlsRemoved = 0;
+let sitemapAlternatesRemoved = 0;
+for (const sitemap of walkFiles(BUILD_DIR, (name) => name === "sitemap.xml")) {
+  const original = fs.readFileSync(sitemap, "utf8");
+  const cleaned = original.replace(/<url>[\s\S]*?<\/url>/g, (block) => {
+    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
+    if (loc && noindexRoutes.has(normalizedPathname(loc))) {
+      sitemapUrlsRemoved += 1;
+      return "";
+    }
+    return block.replace(/<xhtml:link\b[^>]*\/?\s*>/gi, (tag) => {
+      const target = normalizedPathname(attribute(tag, "href"));
+      if (target && noindexRoutes.has(target)) {
+        sitemapAlternatesRemoved += 1;
+        return "";
+      }
+      return tag;
+    });
+  });
+  if (cleaned !== original) {
+    fs.writeFileSync(sitemap, cleaned);
+    sitemapFilesChanged += 1;
+  }
+}
+
 console.log(
-  `[clean-sitemap] cleaned ${changed} sitemap(s), removed ${removed} noindex URL(s)`
+  `[clean-sitemap] noindex=${noindexRoutes.size}, sitemapFiles=${sitemapFilesChanged}, urlsRemoved=${sitemapUrlsRemoved}, sitemapAlternatesRemoved=${sitemapAlternatesRemoved}, htmlFiles=${htmlFilesChanged}, htmlAlternatesRemoved=${alternateLinksRemoved}`,
 );

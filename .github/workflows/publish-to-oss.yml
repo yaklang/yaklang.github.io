@@ -79,8 +79,14 @@ jobs:
           yarn check:home-assets
           python3 scripts/build-home-font-subsets.py
 
+      - name: Verify GEO and AI-search foundations
+        run: yarn test:geo
+
       - name: Build
         run: yarn run build
+
+      - name: Verify generated SEO output
+        run: yarn check:seo
 
       - name: Enforce homepage performance budget
         run: yarn check:home-performance
@@ -168,4 +174,9 @@ jobs:
             --version "$(node -p "require('./package.json').version")" \
             https://yaklang.com/ \
             https://yaklang.io/
+
+      - name: Notify IndexNow after production verification
+        if: ${{ (startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch') && inputs.publish_only != true }}
+        continue-on-error: true
+        run: yarn submit:indexnow
 

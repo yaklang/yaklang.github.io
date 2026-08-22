@@ -133,9 +133,6 @@ module.exports = {
             // Bing Webmaster Tools 所有权验证：暂未启用，避免把占位符内容上线到生产。
             // 取得真实验证码后，在下方取消注释并填入即可：
             // { name: "msvalidate.01", content: "<REAL-BING-VERIFICATION-CODE>" },
-            // IndexNow 密钥（与 static/indexnow-key.txt 一致），便于 Bing/Yandex
-            // 通过 IndexNow API 增量提交 URL，加速收录
-            { name: "indexnow-key", content: "629c41a3116dedbbf450b884f9d0d242" },
         ],
         colorMode: {
             // "light" | "dark"

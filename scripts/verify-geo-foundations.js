@@ -8,7 +8,13 @@ const read = (relativePath) =>
 
 assert.match(read("static/robots.txt"), /Sitemap: https:\/\/yaklang\.com\/sitemap\.xml/);
 assert.match(read("static/robots.txt"), /User-agent: GPTBot\s+Allow: \//);
+assert.match(read("static/robots.txt"), /User-agent: OAI-SearchBot\s+Allow: \//);
 assert.match(read("static/llms.txt"), /^# Yak Project/m);
+assert.match(read("static/llms.txt"), /\/llms-full\.txt/);
+assert.ok(fs.existsSync(path.join(root, "static/llms-full.txt")));
+const indexNowKey = "629c41a3116dedbbf450b884f9d0d242";
+assert.equal(read(`static/${indexNowKey}.txt`).trim(), indexNowKey);
+assert.ok(!fs.existsSync(path.join(root, "static/indexnow-key.txt")));
 
 const config = read("docusaurus.config.js");
 assert.match(config, /"@type": "Organization"/);
@@ -99,7 +105,7 @@ assert.equal(
 const noindexHtml = metadataPlugin.ensureNoindex(
   '<html><head><title>Untranslated page</title></head><body></body></html>'
 );
-assert.match(noindexHtml, /name="robots" content="noindex, nofollow"/);
+assert.match(noindexHtml, /name="robots" content="noindex, follow"/);
 
 const documentGraph = metadataPlugin.buildDocumentGraph({
   url: "https://yaklang.com/docs/api/http",
@@ -145,7 +151,7 @@ assert.match(enhancedDocHtml, /"position":4/);
 assert.equal((enhancedDocHtml.match(/"@type":"BreadcrumbList"/g) || []).length, 1);
 
 const enhancedBlogHtml = metadataPlugin.enhanceHtmlForRoute(
-  '<html><head><meta name="description" content="背景"><meta property="og:title" content="Yak Article"><meta property="og:description" content="背景"></head><body></body></html>',
+  '<html><head><meta name="description" content="背景"><meta property="og:title" content="Yak Article"><meta property="og:description" content="背景"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Yak Article"}</script></head><body></body></html>',
   {
     route: "/blog/yak-article",
     url: "https://yaklang.com/blog/yak-article",
@@ -156,6 +162,8 @@ const enhancedBlogHtml = metadataPlugin.enhanceHtmlForRoute(
 );
 assert.match(enhancedBlogHtml, /name="description" content="这是一段可以独立引用的文章摘要。"/);
 assert.match(enhancedBlogHtml, /property="og:type" content="article"/);
+assert.match(enhancedBlogHtml, /"author":\{"@id":"https:\/\/yaklang\.com\/#organization"\}/);
+assert.doesNotMatch(enhancedBlogHtml, /"author":\{"@type":"Organization"/);
 
 // 未翻译回退页：en 路由、正文（<article> 内）仍以中文为主 → noindex。
 const untranslatedHtml = metadataPlugin.enhanceHtmlForRoute(
@@ -168,7 +176,7 @@ const untranslatedHtml = metadataPlugin.enhanceHtmlForRoute(
     language: "en",
   }
 );
-assert.match(untranslatedHtml, /name="robots" content="noindex, nofollow"/);
+assert.match(untranslatedHtml, /name="robots" content="noindex, follow"/);
 assert.equal(
   metadataPlugin.publicRouteForLocale("/docs/intro", "en", "zh-CN"),
   "/en/docs/intro"

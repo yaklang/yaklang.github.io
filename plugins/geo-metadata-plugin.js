@@ -191,7 +191,7 @@ function completeSocialMetadata(html, type = "website") {
 
 function ensureNoindex(html) {
   const robotsMatcher = /<meta\b(?=[^>]*\bname="robots")[^>]*>/i;
-  const robotsTag = '<meta data-rh="true" name="robots" content="noindex, nofollow">';
+  const robotsTag = '<meta data-rh="true" name="robots" content="noindex, follow">';
   return robotsMatcher.test(html)
     ? html.replace(robotsMatcher, robotsTag)
     : appendHeadTag(html, robotsTag);
@@ -244,7 +244,10 @@ function buildDocumentGraph({ url, title, description, language, segments, dateM
         author: { "@id": `${origin}/#organization` },
         publisher: { "@id": `${origin}/#organization` },
         isPartOf: { "@id": `${origin}/#website` },
-        ...(dateModified ? { datePublished: dateModified, dateModified } : {}),
+        // A documentation edit time is not necessarily its original publication
+        // time. Keep the verifiable modification signal without inventing a
+        // datePublished value.
+        ...(dateModified ? { dateModified } : {}),
         // 指向页面主内容容器，便于语音助手/语音搜索摘录关键段落
         speakable: {
           "@type": "WebPageElement",
@@ -282,12 +285,10 @@ function updateBlogPostingJsonLd(html, { url, description, dateModified }) {
           if (!types.includes("BlogPosting")) continue;
           node.description = description;
           if (dateModified) node.dateModified = dateModified;
-          node.author = {
-            "@type": "Organization",
-            "@id": `${new URL(url).origin}/#organization`,
-            name: "Yak Project",
-            url: "https://github.com/yaklang",
-          };
+          // The global graph defines the Organization once. BlogPosting should
+          // reference that entity instead of publishing a second, conflicting
+          // partial definition with the same @id.
+          node.author = { "@id": `${new URL(url).origin}/#organization` };
           node.publisher = { "@id": `${new URL(url).origin}/#organization` };
           changed = true;
         }
