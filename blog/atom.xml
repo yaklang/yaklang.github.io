@@ -5,7 +5,7 @@
     <updated>2026-05-08T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yaklang.com/blog"/>
-    <subtitle>Yak Program Language Blog</subtitle>
+    <subtitle>Yak Project Blog</subtitle>
     <icon>https://yaklang.com/img/favicon.ico</icon>
     <rights>Copyright © 2026 Yak Project.</rights>
     <entry>
@@ -13,8 +13,19 @@
         <id>https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force</id>
         <link href="https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force"/>
         <updated>2026-05-08T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[打开一个后台管理系统，一般来说可能仅仅是一个登录框。用户名、密码、验证码——三个输入框，一个提交按钮。密码可以爆破，用户名可以枚举，但验证码这个东西，一直是渗透测试中一个绕不开的拦路虎。]]></summary>
-        <content type="html"><![CDATA[<p>打开一个后台管理系统，一般来说可能仅仅是一个登录框。用户名、密码、验证码——三个输入框，一个提交按钮。密码可以爆破，用户名可以枚举，但验证码这个东西，一直是渗透测试中一个绕不开的拦路虎。</p>
+        <summary type="html"><![CDATA[本文通过 Vulinbox 授权测试场景，演示如何用 Yaklang ai.FunctionCall 识别验证码，并将基础版、并发版脚本与 Web Fuzzer 热加载串成可验证的自动化流程。]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="内容速览">内容速览<a href="https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force#%E5%86%85%E5%AE%B9%E9%80%9F%E8%A7%88" class="hash-link" aria-label="内容速览的直接链接" title="内容速览的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>适用场景：</strong> 已获授权的内部渗透测试、验证码逻辑验证和安全工具研发。</li>
+<li class=""><strong>实现方法：</strong> 使用 <code>ai.FunctionCall</code> 与 <code>ai.imageBase64</code> 提取验证码，再分别接入基础脚本、并发任务和 Web Fuzzer 热加载流程。</li>
+<li class=""><strong>关键结论：</strong> Yaklang 可以在不单独维护 OCR 服务的情况下完成图像识别与请求编排，但测试范围和并发强度必须遵循授权边界。</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常见问题">常见问题<a href="https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" class="hash-link" aria-label="常见问题的直接链接" title="常见问题的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="是否必须额外部署-ocr-服务">是否必须额外部署 OCR 服务？<a href="https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force#%E6%98%AF%E5%90%A6%E5%BF%85%E9%A1%BB%E9%A2%9D%E5%A4%96%E9%83%A8%E7%BD%B2-ocr-%E6%9C%8D%E5%8A%A1" class="hash-link" aria-label="是否必须额外部署 OCR 服务？的直接链接" title="是否必须额外部署 OCR 服务？的直接链接" translate="no">​</a></h3>
+<p>不需要。文中的方案通过已配置的 Yakit AI 网关调用多模态模型，并让模型按指定字段返回验证码文本。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="这个流程可以用于任意网站吗">这个流程可以用于任意网站吗？<a href="https://yaklang.com/blog/llm-captcha-recognition-and-login-brute-force#%E8%BF%99%E4%B8%AA%E6%B5%81%E7%A8%8B%E5%8F%AF%E4%BB%A5%E7%94%A8%E4%BA%8E%E4%BB%BB%E6%84%8F%E7%BD%91%E7%AB%99%E5%90%97" class="hash-link" aria-label="这个流程可以用于任意网站吗？的直接链接" title="这个流程可以用于任意网站吗？的直接链接" translate="no">​</a></h3>
+<p>不可以。验证码识别和登录测试只能用于自有系统、靶场或已经获得明确授权的目标。</p>
+<p>打开一个后台管理系统，一般来说可能仅仅是一个登录框。用户名、密码、验证码——三个输入框，一个提交按钮。密码可以爆破，用户名可以枚举，但验证码这个东西，一直是渗透测试中一个绕不开的拦路虎。</p>
 <p>传统的解决思路无外乎几种：</p>
 <p>1.使用 ddddocr 等开源 OCR 库，部署一套 Python 服务来识别验证码。问题在于，需要额外维护一套 Python 环境，模型对复杂验证码的识别率也不稳定，遇到扭曲、干扰线多的验证码就容易翻车。</p>
 <p>2.接码平台。花钱买识别结果，成本不低，还有延迟问题。对于内部渗透测试这种不方便把数据外传的场景，也存在合规风险。</p>
@@ -289,7 +300,7 @@
         <id>https://yaklang.com/blog/ghost-bits-waf-bypass-with-codec-and-fuzz</id>
         <link href="https://yaklang.com/blog/ghost-bits-waf-bypass-with-codec-and-fuzz"/>
         <updated>2026-04-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Ghost Bits 是近期安全社区热度很高的 WAF 绕过技术，Blackhat 相关议题以及多个 CVE（如 CVE-2025-41242）都涉及到这一手法。在实际渗透测试中，Ghost Bits 编码本身不难——写几行脚本就能实现。但每次都是"打开编辑器 → 改代码 → 跑脚本 → 复制结果 → 粘贴到工具里"，步骤一多就容易打断思路。为此我们写了一个 Yak Codec 插件，选中 payload 右键直接输出编码结果，省去来回切换窗口的麻烦。]]></summary>
+        <summary type="html"><![CDATA[本文解析 Ghost Bits 利用 Java 字符截断绕过安全检查的原理，并展示如何用 Yak Codec 与 Fuzz 插件完成一键编码、批量探测和结果验证。]]></summary>
         <content type="html"><![CDATA[<p>Ghost Bits 是近期安全社区热度很高的 WAF 绕过技术，Blackhat 相关议题以及多个 CVE（如 CVE-2025-41242）都涉及到这一手法。在实际渗透测试中，Ghost Bits 编码本身不难——写几行脚本就能实现。但每次都是"打开编辑器 → 改代码 → 跑脚本 → 复制结果 → 粘贴到工具里"，步骤一多就容易打断思路。为此我们写了一个 Yak Codec 插件，选中 payload 右键直接输出编码结果，省去来回切换窗口的麻烦。</p>
 <p>除了编码，批量探测靶点是否受 Ghost Bits 影响也是个重复活动。针对这个场景我们还写了一个 <strong>Yak Fuzz插件</strong>，内置了 CVE-2025-41242、Jackson、fastjson 等常见场景的 preset，跑一遍就能快速判断目标是否存在截断风险。</p>
 <p>本文在梳理核心原理的基础上，分别介绍这两个插件的设计思路和使用方式：Codec 负责"一键编码"，Fuzz 负责"批量探测"。希望能在检测这类漏洞时减少重复劳动、提高效率。</p>
@@ -378,8 +389,19 @@
         <id>https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store</id>
         <link href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store"/>
         <updated>2026-04-24T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[背景]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="背景">背景<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E8%83%8C%E6%99%AF" class="hash-link" aria-label="背景的直接链接" title="背景的直接链接" translate="no">​</a></h2>
+        <summary type="html"><![CDATA[本文说明 Yakit 如何把插件、AI Tool、Blueprint、Skill 与 Focus Mode 统一为 Capability，并通过意图路由、Grounding 和统一调度形成可执行的 Agent 能力闭环。]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="内容速览">内容速览<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E5%86%85%E5%AE%B9%E9%80%9F%E8%A7%88" class="hash-link" aria-label="内容速览的直接链接" title="内容速览的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>适用场景：</strong> 希望让安全插件被 AI Agent 搜索、选择、编排和执行的插件作者与平台维护者。</li>
+<li class=""><strong>实现方法：</strong> 将插件与 Tool、Blueprint、Skill、Focus Mode 统一抽象为 Capability，再通过分层意图路由、渐进式披露、能力目录 Grounding 和统一调度器执行。</li>
+<li class=""><strong>关键结论：</strong> 插件商店不只是脚本下载入口，也可以成为 Agent 的能力目录；可发现性、约束和结果验证与模型能力同样重要。</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常见问题">常见问题<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" class="hash-link" aria-label="常见问题的直接链接" title="常见问题的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="插件接入-ai-是否需要重写一套适配代码">插件接入 AI 是否需要重写一套适配代码？<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E6%8F%92%E4%BB%B6%E6%8E%A5%E5%85%A5-ai-%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81%E9%87%8D%E5%86%99%E4%B8%80%E5%A5%97%E9%80%82%E9%85%8D%E4%BB%A3%E7%A0%81" class="hash-link" aria-label="插件接入 AI 是否需要重写一套适配代码？的直接链接" title="插件接入 AI 是否需要重写一套适配代码？的直接链接" translate="no">​</a></h3>
+<p>不需要。按照文中的流程，插件作者开启“开放给 AI 使用”并补充准确的插件描述，即可进入统一能力目录。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="系统如何降低-ai-选错插件的概率">系统如何降低 AI 选错插件的概率？<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E-ai-%E9%80%89%E9%94%99%E6%8F%92%E4%BB%B6%E7%9A%84%E6%A6%82%E7%8E%87" class="hash-link" aria-label="系统如何降低 AI 选错插件的概率？的直接链接" title="系统如何降低 AI 选错插件的概率？的直接链接" translate="no">​</a></h3>
+<p>能力会先经过意图路由和目录 Grounding，再逐层收敛候选范围；执行阶段仍由统一调度链路管理和验证。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="背景">背景<a href="https://yaklang.com/blog/ai-agent-orchestration-in-yakit-plugin-store#%E8%83%8C%E6%99%AF" class="hash-link" aria-label="背景的直接链接" title="背景的直接链接" translate="no">​</a></h2>
 <p>过去如果想拓展 AI 的安全能力，通常有两种思路：</p>
 <p>要么单独开发新的 AI 工具，要么通过 MCP、Skill、Forge 等机制把能力一点点挂接进去。</p>
 <p>这种方式当然有效，但在工程上有几个比较明显的约束：</p>
@@ -604,7 +626,7 @@
         <id>https://yaklang.com/blog/harness-engineering-and-scaling-irify</id>
         <link href="https://yaklang.com/blog/harness-engineering-and-scaling-irify"/>
         <updated>2026-04-17T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[2026年，大模型能力被普遍认为进入了高原期：单纯依靠算力堆积的暴力美学，其边际收益已经大幅降低，同时高质量的人类训练语料也趋近枯竭。面对这一瓶颈，业界的焦点开始发生转移：大家普遍认为，单纯比拼模型的时代正在远去，比拼Harness Engineering（驾驭工程）的时代已经到来。这就好比制造汽车时，将其发动机的马力已经压榨到物理极限了，再想提升整辆车的性能，就不能只盯着发动机，而要把目光投向传动系统、方向盘等驾驭发动机的系统上。]]></summary>
+        <summary type="html"><![CDATA[本文从 Harness Engineering 视角总结 IRify 规模化研发实践，讨论如何通过任务编排、工具链、反馈机制与工程约束提升 AI 辅助代码分析的稳定性。]]></summary>
         <content type="html"><![CDATA[<p>2026年，大模型能力被普遍认为进入了高原期：单纯依靠算力堆积的暴力美学，其边际收益已经大幅降低，同时高质量的人类训练语料也趋近枯竭。面对这一瓶颈，业界的焦点开始发生转移：大家普遍认为，单纯比拼模型的时代正在远去，比拼Harness Engineering（驾驭工程）的时代已经到来。这就好比制造汽车时，将其发动机的马力已经压榨到物理极限了，再想提升整辆车的性能，就不能只盯着发动机，而要把目光投向传动系统、方向盘等驾驭发动机的系统上。</p>
 <p>正是在这一背景下，Harness Engineering这个词开始频繁刷屏各大媒体，被包装成又一项了不起的前沿AI技术。然而，这种宏大的叙事却让人感到十分割裂：对于绝大多数不开发底层Agent的普通开发者而言，##Harness听起来更像是一个与己无关的伪概念。它除了徒增技术快速迭代带来的焦虑感，似乎并没有对日常的开发工作产生实质性影响。</p>
 <p>如今的AI产业，正呈现出一种大厂主导前行、普通人带着焦虑被动跟随的局面。事实上，普通开发者每天赖以生存的 Claude Code、Codex 、Cursor 等优秀AI编程工具，正是Harness Engineering的最佳实践产物**。** 然而，在使用这些工具时，我们往往陷入了一种疲惫的循环：开发过程中每天花大量时间在聊天窗口里给AI提需求，看着AI一行行地写出新功能，然后自己再手动切回系统去查看和验收。在这种“AI写代码，人打下手”的模式中，我有时候不禁感慨：我应该为高效完成工作高兴，还是为这种低价值劳动奔波难过。</p>
@@ -658,8 +680,19 @@
         <id>https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation</id>
         <link href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation"/>
         <updated>2026-04-10T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[随着 Memfit AI 新功能的扩展和相关机制的完善，我们已经可以将现有的 AI 功能扩展到我们的其他产品中，本文主要介绍目前我们在 IRify 工具的 AI 化扩展中做出的新尝试。]]></summary>
-        <content type="html"><![CDATA[<blockquote>
+        <summary type="html"><![CDATA[本文介绍 IRify 的 AI 代码审计扩展，包括项目探索、分类审计、证据验证、报告生成、风险驱动 PoC 示例以及 SyntaxFlow 规则生成与优化。]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="内容速览">内容速览<a href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation#%E5%86%85%E5%AE%B9%E9%80%9F%E8%A7%88" class="hash-link" aria-label="内容速览的直接链接" title="内容速览的直接链接" translate="no">​</a></h2>
+<ul>
+<li class=""><strong>适用场景：</strong> 需要对大型项目进行分阶段代码审计、漏洞证据整理和 SyntaxFlow 规则辅助生成的安全团队。</li>
+<li class=""><strong>实现方法：</strong> 先探索项目并制定扫描计划，再按类别审计、逐条验证证据、生成报告，并依据风险生成 PoC 示例或规则建议。</li>
+<li class=""><strong>关键结论：</strong> AI 的价值在于把探索、验证和报告组织成可追踪流程；高风险结论和 PoC 仍需要在隔离、授权环境中复核。</li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="常见问题">常见问题<a href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98" class="hash-link" aria-label="常见问题的直接链接" title="常见问题的直接链接" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ai-审计是否会直接跳到漏洞结论">AI 审计是否会直接跳到漏洞结论？<a href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation#ai-%E5%AE%A1%E8%AE%A1%E6%98%AF%E5%90%A6%E4%BC%9A%E7%9B%B4%E6%8E%A5%E8%B7%B3%E5%88%B0%E6%BC%8F%E6%B4%9E%E7%BB%93%E8%AE%BA" class="hash-link" aria-label="AI 审计是否会直接跳到漏洞结论？的直接链接" title="AI 审计是否会直接跳到漏洞结论？的直接链接" translate="no">​</a></h3>
+<p>不会。文中的流程把项目探索、扫描计划、分类审计、证据记录和报告生成拆成独立阶段，要求结论能够回到具体证据。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="自动生成的-poc-可以直接用于生产目标吗">自动生成的 PoC 可以直接用于生产目标吗？<a href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation#%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E7%9A%84-poc-%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E7%94%A8%E4%BA%8E%E7%94%9F%E4%BA%A7%E7%9B%AE%E6%A0%87%E5%90%97" class="hash-link" aria-label="自动生成的 PoC 可以直接用于生产目标吗？的直接链接" title="自动生成的 PoC 可以直接用于生产目标吗？的直接链接" translate="no">​</a></h3>
+<p>不可以。PoC 用于授权范围内的风险复现和验证，应在隔离环境中审阅输入、影响和执行边界。</p>
+<blockquote>
 <p>随着 Memfit AI 新功能的扩展和相关机制的完善，我们已经可以将现有的 AI 功能扩展到我们的其他产品中，本文主要介绍目前我们在 IRify 工具的 AI 化扩展中做出的新尝试。</p>
 </blockquote>
 <h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="纯ai代码审计">纯AI代码审计<a href="https://yaklang.com/blog/ai-powered-irify-and-auto-poc-generation#%E7%BA%AFai%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1" class="hash-link" aria-label="纯AI代码审计的直接链接" title="纯AI代码审计的直接链接" translate="no">​</a></h2>
@@ -783,7 +816,7 @@
         <id>https://yaklang.com/blog/memfit-long-term-memory-and-corepact-evaluation</id>
         <link href="https://yaklang.com/blog/memfit-long-term-memory-and-corepact-evaluation"/>
         <updated>2026-04-03T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[在上一篇文章中Memfit AI 专业记忆:Agent 动手之前,先翻了一遍你的知识库, 我们解决了 Agent 的“见识”问题。通过内置的知识库系统,Agent在执行攻击前,能够像资深专家一样先翻阅企业的私有测试和规范文件,确保自己的行动不脱离合规基线。]]></summary>
+        <summary type="html"><![CDATA[本文介绍 Memfit AI 的长期记忆机制与 C.O.R.E.P.A.C.T. 七维评估模型，说明记忆如何经过质量筛选、上下文加权、意图路由和分块注入后被 Agent 使用。]]></summary>
         <content type="html"><![CDATA[<p>在上一篇文章中<a href="https://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247529575&amp;idx=1&amp;sn=cd0b7de7036ee8e812cbdc8fb4fc840a&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">Memfit AI 专业记忆:Agent 动手之前,先翻了一遍你的知识库</a>, 我们解决了 Agent 的“见识”问题。通过内置的知识库系统,Agent在执行攻击前,能够像资深专家一样先翻阅企业的私有测试和规范文件,确保自己的行动不脱离合规基线。</p>
 <p>但作为一名真正的生产级 Agent,仅仅“有见识”是不够的。</p>
 <p><strong>知识库是别人给的经验,而记忆是自己实践的成果。</strong></p>
@@ -1041,7 +1074,7 @@
         <id>https://yaklang.com/blog/irify-full-path-performance-refactor-round2</id>
         <link href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2"/>
         <updated>2026-03-27T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。]]></summary>
+        <summary type="html"><![CDATA[本文复盘 IRify 围绕 SSA、CodeScan、SyntaxFlow、SFVM 与 ANTLR 前端完成的第二轮全路径优化，目标是提升大型项目编译、规则扫描和执行控制能力。]]></summary>
         <content type="html"><![CDATA[<blockquote>
 <p>过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。</p>
 <p>如果只看提交记录，会觉得这是一串零散的修复、重构和实验；但把这些工作放在一起看，会发现它们其实围绕的是同一个目标：</p>
@@ -1670,7 +1703,7 @@
         <id>https://yaklang.com/blog/memfit-knowledge-base-and-agentic-rag</id>
         <link href="https://yaklang.com/blog/memfit-knowledge-base-and-agentic-rag"/>
         <updated>2026-03-20T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[当AI Agent碰到它不知道的东西]]></summary>
+        <summary type="html"><![CDATA[本文展示 Memfit AI 如何构建、查询和可视化内置知识库，并通过多策略检索、AI 重排、精炼与 Agentic 迭代让 Agent 在执行任务前主动查阅资料。]]></summary>
         <content type="html"><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="当ai-agent碰到它不知道的东西">当AI Agent碰到它不知道的东西<a href="https://yaklang.com/blog/memfit-knowledge-base-and-agentic-rag#%E5%BD%93ai-agent%E7%A2%B0%E5%88%B0%E5%AE%83%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%9C%E8%A5%BF" class="hash-link" aria-label="当AI Agent碰到它不知道的东西的直接链接" title="当AI Agent碰到它不知道的东西的直接链接" translate="no">​</a></h2>
 <p>我们在上一篇文章：<a href="https://mp.weixin.qq.com/s?__biz=Mzk0MTM4NzIxMQ==&amp;mid=2247529509&amp;idx=1&amp;sn=ba1eafb94cb0677b719a1c1491bb5529&amp;scene=21#wechat_redirect" target="_blank" rel="noopener noreferrer" class="">Memfit AI: 连续渗透测试N小时不迷路的生产级AI Agent</a> 中聊了 Memfit AI 如何像一个真人渗透测试工程师一样自主工作——规划任务、执行攻击、动态调整策略。跑了两个多小时，产出了 18 个漏洞发现和一份完整的渗透测试报告。</p>
 <p>但是有一个问题，我们当时回避了。</p>
@@ -1851,7 +1884,7 @@
         <id>https://yaklang.com/blog/auto-handle-frontend-encryption-with-global-hot-reload</id>
         <link href="https://yaklang.com/blog/auto-handle-frontend-encryption-with-global-hot-reload"/>
         <updated>2026-03-18T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[在前端加密、动态签名、一次性 challenge 这类场景里，单纯“会不会发包”其实不是重点。真正麻烦的是，测试链路里往往多出一段必须自动完成的前置或后置逻辑，例如：]]></summary>
+        <summary type="html"><![CDATA[本文以 Vulinbox 动态挑战响应接口为例，演示如何用 Yak 全局热加载统一接管 challenge 获取、nonce 解码、请求签名和响应解密，并复用于 MITM 与 Web Fuzzer。]]></summary>
         <content type="html"><![CDATA[<blockquote>
 <p>在前端加密、动态签名、一次性 challenge 这类场景里，单纯“会不会发包”其实不是重点。真正麻烦的是，测试链路里往往多出一段必须自动完成的前置或后置逻辑，例如：</p>
 <p>01 发起真正业务请求之前，先去拿一段 challenge</p>
@@ -2184,7 +2217,7 @@
         <id>https://yaklang.com/blog/memfit-autonomous-pentest-agent-architecture</id>
         <link href="https://yaklang.com/blog/memfit-autonomous-pentest-agent-architecture"/>
         <updated>2026-03-13T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[听起来是不是非常玄学？]]></summary>
+        <summary type="html"><![CDATA[本文拆解 Memfit AI 自主渗透测试 Agent 的任务规划、ReAct 执行、动态调度、记忆窗口、审阅与报告链路，并用授权测试过程展示长任务运行方式。]]></summary>
         <content type="html"><![CDATA[<p>听起来是不是非常玄学？</p>
 <h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="背景">背景<a href="https://yaklang.com/blog/memfit-autonomous-pentest-agent-architecture#%E8%83%8C%E6%99%AF" class="hash-link" aria-label="背景的直接链接" title="背景的直接链接" translate="no">​</a></h2>
 <p>自动化渗透这个事儿做了很多年了。众所周知，大多数方案的路子基本就两条：要么是固定脚本跑一遍 -- 能扫到的漏洞都是预设好的模式匹配；要么用 LLM 做一个 Agent 去"规划"渗透流程，但通常跑不了十分钟就开始迷路，重复做同样的事情，或者干脆忘了之前发现了什么。</p>

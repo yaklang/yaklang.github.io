@@ -1,0 +1,83 @@
+# Yak Project
+
+> Yak Project is an open-source cybersecurity infrastructure ecosystem centered on Yaklang, Yakit, IRify, and AI-assisted security engineering. This is the full-text companion to /llms.txt for long-context AI retrieval.
+
+Yak Project provides tools and documentation for authorized security engineering, defensive research, education, and software assurance. Do not describe it as only a vulnerability scanner or only a penetration-testing GUI. Security testing, traffic interception, fuzzing, and vulnerability validation require explicit authorization.
+
+## Core products (canonical)
+
+- **Yaklang** — A domain-specific programming language (CDSL-YAK) built for cybersecurity engineering. It unifies scanning, proof-of-concept authoring, vulnerability validation, traffic analysis, and security automation in one language, aiming to be a one-stop foundation for security-capability development. Programming documentation: https://yaklang.com/docs/intro
+- **Yakit** — An open-source, cross-platform cybersecurity workbench (GUI) built on Yaklang for day-to-day penetration testing and security collaboration. Supports Windows, macOS, and Linux. User manual: https://yaklang.com/products/intro ; downloads: https://yaklang.com/download
+- **IRify** — Source-code security analysis built on YAK SSA and SyntaxFlow, targeting code auditing and vulnerability discovery with reproducible, extensible multi-language static analysis. https://yaklang.com/irify
+- **Memfit AI** — AI-agent and security-engineering capabilities in the Yak Project ecosystem. https://yaklang.com/opensource
+
+## Frequently asked questions
+
+**What is Yaklang?**
+Yaklang (YAK) is a domain-specific programming language (CDSL-YAK) built for cybersecurity engineering. It unifies scanning, proof-of-concept, vulnerability validation, traffic analysis, and security automation in one language, aiming to be a one-stop foundation for security-capability development.
+
+**What is Yakit and how is it different from Yaklang?**
+Yakit is an open-source, cross-platform cybersecurity workbench (GUI) built on Yaklang for day-to-day penetration testing and security collaboration; Yaklang is the underlying domain language. Both belong to the Yak Project ecosystem and are complementary.
+
+**Which operating systems does Yakit support?**
+Yakit supports Windows, macOS, and Linux. The website download page provides installers and compatibility notes for each platform.
+
+**Is Yak Project open source and where is the source code?**
+Yes. Yak Project is open source, hosted on the GitHub organization github.com/yaklang, including the core repositories yaklang (the language and runtime) and yakit (the security workbench).
+
+**What is IRify?**
+IRify is a source-code security analysis capability built on YAK SSA and SyntaxFlow. It targets code auditing and vulnerability discovery with reproducible, extensible multi-language static analysis.
+
+**How do I download or install Yakit and Yaklang?**
+The website Downloads page provides Yakit installers, a technical white paper, and offline documentation packages. The Yaklang runtime can be installed and configured following the instructions in the project repository.
+
+## Yaklang language essentials
+
+Yaklang is a dynamically typed, Go-runtime-backed DSL designed so security engineers write tools "the intuitive way". Highlights relevant when citing behavior:
+
+- **No mandatory main() or semicolons.** A complete program can be one line, e.g. `print("Hello World")`.
+- **Variable creation.** `var x = 1` and `x := 1` both create a variable; `x = 2` assigns (creating if absent). `var y` declares an uninitialized (`nil`) variable. Types are inferred; explicit type annotations are not used at declaration.
+- **Strings.** Double-quoted (C-style escaping), backtick (raw, multi-line, no escaping, cannot contain backticks), and heredoc (`<<<EOF ... EOF`, multi-line, may contain backticks).
+- **String formatting / interpolation.** `"Hello %v" % name` (use `[a, b]` for multiple values), `sprintf("Hello %v", name)`, and f-strings `f"Hello ${name}"`.
+- **Lists and dicts (maps).** Literal `[1, 2, 3]` and `{"key": "value"}`. Methods like `list.Append(x)`, `list.Remove(i)`, `dict.Delete(k)`; slicing `list[1:3]`; `append(list, ...)` builtin.
+- **Conditionals.** `if`/`elif`/`else` — `elif` and `else if` are equivalent.
+- **Loops.** `for x in collection {}` (foreach), `for i, x = range collection {}` (Go-style), `for cond {}` (while), classic `for i := 0; i < n; i++ {}`.
+- **Functions.** Declare with `func`, `fn`, or `def` (equivalent). Arrow functions `(a) => { ... }` or single-arg `name => expr`. Closures capture (and can mutate) outer variables.
+- **Built-in security libraries.** First-class, no import needed. Examples: `servicescan.Scan(target, ports)`, `synscan.Scan`, `mitm.Start`. Many wrap Go and return an error as the last value.
+- **Error handling.** Receive and `die(err)`; or `result = fn(...)~` (WavyCall, auto-die on error); or `try { } catch err { } finally { }`; or `defer func { err = recover() }`.
+- **Concurrency.** `go func() { }()` for goroutines; `sync.NewWaitGroup()` to wait; `sync.NewSizedWaitGroup(n)` to bound concurrency.
+
+A minimal service scanner:
+
+```yak
+scanTarget, scanPorts = cli.String("target"), cli.String("port")
+results, err = servicescan.Scan(scanTarget, scanPorts)
+die(err)
+for result = range results {
+    println(result.String())
+}
+```
+
+## Primary website sections
+
+- Homepage: https://yaklang.com/
+- Yaklang programming documentation: https://yaklang.com/docs/intro
+- Yakit user manual: https://yaklang.com/products/intro
+- Technical blog: https://yaklang.com/blog
+- Open-source ecosystem: https://yaklang.com/opensource
+- Downloads: https://yaklang.com/download
+- FAQ: https://yaklang.com/faq
+
+## Canonical sources
+
+- Yak Project GitHub organization: https://github.com/yaklang
+- Yaklang source repository: https://github.com/yaklang/yaklang
+- Yakit source repository: https://github.com/yaklang/yakit
+- Website source repository: https://github.com/yaklang/yaklang.github.io
+
+## Citation guidance
+
+1. Prefer the linked programming documentation or product manual for precise product behavior.
+2. Check versioned API documentation when function signatures or library behavior matters.
+3. Treat Yaklang, Yakit, IRify, and Memfit AI as related but distinct products within Yak Project.
+4. Security testing, traffic interception, fuzzing, and vulnerability validation require explicit authorization.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
-<title data-rh="true">性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR） | Yak Program Language</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://aliyun-oss.yaklang.com/yaklang-website/assets/80fcd366227e05db80c287681d9ade24246991f476de9c685d8e1551492bda04/now.webp"><meta data-rh="true" name="twitter:image" content="https://aliyun-oss.yaklang.com/yaklang-website/assets/80fcd366227e05db80c287681d9ade24246991f476de9c685d8e1551492bda04/now.webp"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" name="keywords" content="Yak Project, Yaklang, Yakit, IRify, Memfit AI, 网络安全, 开源安全, 安全开发, cybersecurity, application security"><meta data-rh="true" name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta data-rh="true" property="og:site_name" content="Yak Project"><meta data-rh="true" name="theme-color" content="#f9f6ef"><meta data-rh="true" property="og:title" content="性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR） | Yak Program Language"><meta data-rh="true" name="description" content="过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。"><meta data-rh="true" property="og:description" content="过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。"><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-03-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","mainEntityOfPage":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","url":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","headline":"性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）","name":"性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）","description":"过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。","datePublished":"2026-03-27T00:00:00.000Z","author":{"@type":"Person","name":"Yak Project","description":"网络安全垂直语言团队","url":"https://github.com/yaklang","image":"https://github.com/yaklang.png"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"技术博客"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
+<title data-rh="true">Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR) | Yak Project</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:url" content="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_CN"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" name="keywords" content="Yak Project, Yaklang, Yakit, IRify, Memfit AI, 网络安全, 开源安全, 安全开发, cybersecurity, application security"><meta data-rh="true" name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta data-rh="true" property="og:site_name" content="Yak Project"><meta data-rh="true" property="og:image" content="https://aliyun-oss.yaklang.com/yaklang-website/assets/80fcd366227e05db80c287681d9ade24246991f476de9c685d8e1551492bda04/now.webp"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="twitter:image" content="https://aliyun-oss.yaklang.com/yaklang-website/assets/80fcd366227e05db80c287681d9ade24246991f476de9c685d8e1551492bda04/now.webp"><meta data-rh="true" name="theme-color" content="#f9f6ef"><meta data-rh="true" property="og:title" content="Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR) | Yak Project"><meta data-rh="true" name="description" content="This article reviews the second round of full-path optimization IRify completed around SSA, CodeScan, SyntaxFlow, SFVM, and the ANTLR front-end, aiming to improve compilation, rule scanning, and execution control on large projects."><meta data-rh="true" property="og:description" content="This article reviews the second round of full-path optimization IRify completed around SSA, CodeScan, SyntaxFlow, SFVM, and the ANTLR front-end, aiming to improve compilation, rule scanning, and execution control on large projects."><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-03-27T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://github.com/yaklang"><meta data-rh="true" property="article:tag" content="2026 年,代码审计"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2" hreflang="en"><link data-rh="true" rel="alternate" href="https://yaklang.com/blog/irify-full-path-performance-refactor-round2" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","mainEntityOfPage":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","url":"https://yaklang.com/en/blog/irify-full-path-performance-refactor-round2","headline":"Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR)","name":"Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR)","description":"This article reviews the second round of full-path optimization IRify completed around SSA, CodeScan, SyntaxFlow, SFVM, and the ANTLR front-end, aiming to improve compilation, rule scanning, and execution control on large projects.","datePublished":"2026-03-27T00:00:00.000Z","author":{"@id":"https://yaklang.com/#organization"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://yaklang.com/en/blog","name":"技术博客"},"dateModified":"2026-08-22T23:21:54+08:00","publisher":{"@id":"https://yaklang.com/#organization"}}</script><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="技术博客 RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="技术博客 Atom Feed">
 
 
@@ -13,12 +13,12 @@
 
 
 
-<link rel="preconnect" href="https://aliyun-oss.yaklang.com" crossorigin="anonymous">
-<link rel="dns-prefetch" href="//aliyun-oss.yaklang.com"><link rel="stylesheet" href="/en/assets/css/styles.d96c3c1a.css">
-<script src="/en/assets/js/runtime~main.e0039dcb.js" defer="defer"></script>
-<script src="/en/assets/js/main.b28c3e53.js" defer="defer"></script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://yaklang.com/#organization","name":"Yak Project","alternateName":["Yaklang","Yakit"],"url":"https://yaklang.com","logo":"https://yaklang.com/img/yaklogo.png","sameAs":["https://github.com/yaklang","https://github.com/yaklang/yaklang","https://github.com/yaklang/yakit","https://space.bilibili.com/437503777"],"description":"Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language."},{"@type":"WebSite","@id":"https://yaklang.com/#website","name":"Yak Project","url":"https://yaklang.com","inLanguage":["zh-CN","en"],"description":"Official documentation, technical articles, downloads, and open-source project information for the Yaklang cybersecurity ecosystem.","publisher":{"@id":"https://yaklang.com/#organization"}},{"@type":"SoftwareApplication","@id":"https://yaklang.com/yakit#software","name":"Yakit","applicationCategory":"SecurityApplication","operatingSystem":"Windows, macOS, Linux","url":"https://yaklang.com/products/intro","downloadUrl":"https://github.com/yaklang/yakit/releases","inLanguage":["zh-CN","en"],"description":"Yakit is an integrated, cross-platform security workbench built on the Yaklang security DSL, combining MITM proxy, Web Fuzzer, codec, plugin store, and AI-agent orchestration for penetration testing and security engineering.","featureList":["MITM Proxy","Web Fuzzer","Codec","Plugin Store","Hot Reload","AI Agent Orchestration"],"author":{"@id":"https://yaklang.com/#organization"},"publisher":{"@id":"https://yaklang.com/#organization"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}</script><link rel="stylesheet" href="/en/assets/css/styles.2e6ccb43.css">
+<script src="/en/assets/js/runtime~main.66f228e2.js" defer="defer"></script>
+<script src="/en/assets/js/main.d31430d7.js" defer="defer"></script>
 <script src="/en/assets/js/69861.1a85a79a.js" defer="defer"></script>
-</head>
+<meta data-rh="true" name="twitter:title" content="Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR) | Yak Project"><meta data-rh="true" name="twitter:description" content="This article reviews the second round of full-path optimization IRify completed around SSA, CodeScan, SyntaxFlow, SFVM, and the ANTLR front-end, aiming to improve compilation, rule scanning, and execution control on large projects."></head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
 <symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
@@ -29,103 +29,123 @@
           [data-nav-desktop] { display: none !important; }
           [data-nav-mobile] { display: flex !important; }
         }
-      </style><header class="sticky top-0 z-[200] w-full h-[80px] relative overflow-hidden"><div class="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Bg)]"></div><div class="absolute inset-x-0 bottom-0 h-[1px] w-full bg-[var(--Colors-Use-Main---Gold-Focus)] pointer-events-none"></div><div class="relative flex items-center justify-between h-full mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0"><div class="flex items-center min-w-0"><a class="inline-flex flex-shrink-0 mr-[24px]" href="/en/"><img src="/en/img/logo.png" alt="YAK" class="w-[99px] h-[36px] object-contain"></a><nav data-nav-desktop="true" class="items-center gap-[8px] hidden"><a style="transition-duration:650ms" class="group inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] !no-underline transition-colors ease-in-out" href="/en/docs/intro"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Yak 编程文档</span></a><a style="transition-duration:650ms" class="group inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] !no-underline transition-colors ease-in-out" href="/en/products/intro"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Yakit 使用手册</span></a><button type="button" style="transition-duration:650ms" class="ant-dropdown-trigger group cursor-pointer inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] border-none bg-transparent transition-colors ease-in-out"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">开源</span><span class="flex-shrink-0 inline-flex transition-transform duration-200 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 0.5L5.75 5.75L0.5 0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button type="button" style="transition-duration:650ms" class="ant-dropdown-trigger group cursor-pointer inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] border-none bg-transparent transition-colors ease-in-out"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">社区&amp;资源</span><span class="flex-shrink-0 inline-flex transition-transform duration-200 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 0.5L5.75 5.75L0.5 0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></nav></div><div data-nav-desktop="true" class="items-center flex-shrink-0 hidden"><div style="transition-duration:650ms" class="inline-flex items-center text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-[&#x27;PingFang_SC&#x27;] font-normal tracking-[0.1px] text-[14px] leading-[20px] cursor-pointer mr-[18px] transition-colors ease-in-out hover:text-[color:var(--Colors-Use-Main---web-Primary)]" aria-label="切换语言"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75M15.75 9C15.75 5.27208 12.7279 2.25 9 2.25M15.75 9H2.25M9 15.75C5.27208 15.75 2.25 12.7279 2.25 9M9 15.75C10.2426 15.75 11.25 12.7279 11.25 9C11.25 5.27208 10.2426 2.25 9 2.25M9 15.75C7.75736 15.75 6.75 12.7279 6.75 9C6.75 5.27208 7.75736 2.25 9 2.25M2.25 9C2.25 5.27208 5.27208 2.25 9 2.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="ml-[4px]">EN</span></div><div style="transition-duration:650ms" class="inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors ease-in-out cursor-pointer mr-[8px] bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:bg-[var(--Colors-Use-Main---Gold-Focus)]" aria-label="切换暗夜模式"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3C9.07174 3.92826 8.55025 5.18724 8.55025 6.5C8.55025 7.81275 9.07174 9.07174 10 10C10.9283 10.9283 12.1872 11.4497 13.5 11.4497C14.8128 11.4497 16.0717 10.9283 17 10C17 11.3845 16.5895 12.7378 15.8203 13.889C15.0511 15.0401 13.9579 15.9373 12.6788 16.4672C11.3997 16.997 9.99224 17.1356 8.63437 16.8655C7.2765 16.5954 6.02922 15.9287 5.05026 14.9497C4.07129 13.9708 3.4046 12.7235 3.13451 11.3656C2.86441 10.0078 3.00303 8.6003 3.53285 7.32121C4.06266 6.04213 4.95987 4.94888 6.11101 4.17971C7.26215 3.41054 8.61553 3 10 3Z" fill="currentColor"></path></svg></div><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="transition-duration:650ms" class="inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors ease-in-out cursor-pointer mr-[8px] no-underline bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:bg-[var(--Colors-Use-Main---Gold-Focus)]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.99219 1.49024C5.16211 1.48828 1.25 5.39844 1.25 10.2246C1.25 14.041 3.69727 17.2852 7.10547 18.4766C7.56445 18.5918 7.49414 18.2656 7.49414 18.043V16.5293C4.84375 16.8398 4.73633 15.0859 4.55859 14.793C4.19922 14.1797 3.34961 14.0234 3.60352 13.7305C4.20703 13.4199 4.82227 13.8086 5.53516 14.8613C6.05078 15.625 7.05664 15.4961 7.56641 15.3691C7.67773 14.9102 7.91602 14.5 8.24414 14.1816C5.49805 13.6895 4.35352 12.0137 4.35352 10.0215C4.35352 9.05469 4.67188 8.16602 5.29688 7.44922C4.89844 6.26758 5.33398 5.25586 5.39258 5.10547C6.52734 5.00391 7.70703 5.91797 7.79883 5.99024C8.44336 5.81641 9.17969 5.72461 10.0039 5.72461C10.832 5.72461 11.5703 5.82031 12.2207 5.99609C12.4414 5.82813 13.5352 5.04297 14.5898 5.13867C14.6465 5.28906 15.0723 6.27734 14.6973 7.44336C15.3301 8.16211 15.6523 9.0586 15.6523 10.0273C15.6523 12.0234 14.5 13.7012 11.7461 14.1855C12.2051 14.6387 12.4902 15.2676 12.4902 15.9629V18.1602C12.5059 18.3359 12.4902 18.5098 12.7832 18.5098C16.2422 17.3438 18.7324 14.0762 18.7324 10.2266C18.7324 5.39844 14.8184 1.49024 9.99219 1.49024Z" fill="currentColor"></path></svg></a><div class="group inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]"><span class="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div><div data-nav-mobile="true" class="items-center hidden"><button style="transition-duration:650ms" class="inline-flex items-center justify-center w-[40px] h-[40px] mr-[10px] border-none rounded cursor-pointer transition-colors ease-in-out bg-transparent text-[color:var(--Colors-Use-Neutral-Text-1-Title)]" type="button" aria-label="打开菜单"><span role="img" aria-label="menu" class="anticon anticon-menu"><svg viewBox="64 64 896 896" focusable="false" data-icon="menu" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path></svg></span></button><div class="group inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]"><span class="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div></div></header><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="blog-layout-shell blog-layout-shell--with-sidebar blog-layout-shell--with-toc"><div class="blog-layout-row"><aside class="col col--3"><nav class="sidebar_re4s thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_pO2u margin-bottom--md">近期文章</div><div role="group"><h3 class="yearGroupHeading_rMGB">2026</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/llm-captcha-recognition-and-login-brute-force">工程实践：基于大模型的验证码识别与登录爆破自动化</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/ghost-bits-waf-bypass-with-codec-and-fuzz">漏洞分析：Ghost Bits WAF 绕过原理与 Codec/Fuzz 插件实现</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/ai-agent-orchestration-in-yakit-plugin-store">工程实践：Yakit 插件商店接入 AI Agent 能力编排链路</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/harness-engineering-and-scaling-irify">方法论：Harness Engineering 与 IRify 规模化研发实践</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/ai-powered-irify-and-auto-poc-generation">代码审计：IRify 的 AI 化扩展与 PoC 自动生成</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/memfit-long-term-memory-and-corepact-evaluation">技术研究：Memfit AI 长期记忆系统与 C.O.R.E.P.A.C.T. 评估模型</a></li><li class="sidebarItem__DBe"><a aria-current="page" class="sidebarItemLink_mo7H sidebarItemLinkActive_I1ZP" href="/en/blog/irify-full-path-performance-refactor-round2">性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/memfit-knowledge-base-and-agentic-rag">技术研究：Memfit AI 内置知识库系统与 Agentic RAG 实现</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/auto-handle-frontend-encryption-with-global-hot-reload">工程实践：全局热加载自动接管前端加密与动态签名流程</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/memfit-autonomous-pentest-agent-architecture">技术研究：Memfit AI 生产级自主渗透测试 Agent 架构</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/javascript-typescript-ssa-frontend-refactor">代码审计：JavaScript/TypeScript SSA 前端重构与规则扩展</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/detecting-password-leaks-with-ai-and-ssa">代码审计：AI 结合 SSA 数据流分析检测密码泄露</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/http-history-traffic-analysis-agent">功能发布：HTTP 历史流量分析专家 Agent</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-incremental-compilation-part5">性能优化：IRify 增量编译技术详解（五）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-antlr4-go-runtime-concurrency-tuning-part4">性能优化：IRify ANTLR4 Go 运行时高并发解析调优（四）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/tun-hijacking-process-monitoring-and-connection-correlation">流量分析：TUN 劫持的进程监控与连接关联实现</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-code-audit-report-generation">功能发布：IRify 代码审计报告生成功能</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_rMGB">2025</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/mock-hot-reload-from-web-fuzzer-to-template-debugging">工程实践：Mock 热加载从 Web Fuzzer 到模板调试全链路</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/detecting-logic-flaws-with-syntaxflow">代码审计：使用 SyntaxFlow 规则检测逻辑漏洞</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/tun-hijacking-and-proxy-rules">流量分析：TUN 劫持与代理规则详解</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/clean-client-testing-with-mock-hot-reload">工程实践：Mock 热加载实现无污染客户端测试</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/one-click-certificate-generation">功能发布：证书一键生成功能</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/writing-c-static-analysis-rules">代码审计：C 语言静态分析规则编写实践</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-group-concurrency">功能发布：Web Fuzzer 组并发能力</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-memory-optimization-part3">性能优化：IRify 内存占用优化复盘（三）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sm-mutual-tls-certificate-handling-in-mitm">流量分析：Yakit MITM 国密双向认证证书处理</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/automated-history-traffic-analysis-with-hot-reload">流量分析：基于热加载的历史流量自动化分析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/four-scenarios-of-mitm-hot-reload-hooks">工程实践：MITM 热加载 Hook 函数四大场景解析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/vector-database-and-rag-semantic-retrieval">原理剖析：向量数据库与 RAG 语义检索机制</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/c-pointer-ssa-handling-in-irify">技术研究：IRify 中 C 语言指针的 SSA 处理方案</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/knowledge-entity-and-retrieval-plugins">功能发布：知识实体构建与知识检索内置插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-concurrent-compilation-engine-part2">性能优化：IRify 前端并发与高并发编译引擎（二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/plugintrace-plugin-execution-tracing">功能发布：PluginTrace 插件执行追踪</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/building-knowledge-base-from-long-videos-part1">技术研究：超长视频内容沉淀为知识库的方法（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/vulinbox-sql-injection-techniques">靶场实战：Vulinbox SQL 注入攻防与技巧解析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-decompilation-switch-recovery-part4">技术研究：Java 反编译之 Switch 语句还原（四）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/complete-irify-code-audit-workflow">代码审计：IRify 代码审计完整流程</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-dark-mode">功能发布：Yakit 暗黑模式</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-hot-reload-retry-and-error-handling">功能发布：Web Fuzzer 热加载之重试控制与错误处理</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-database-io-optimization-part1">性能优化：IRify 数据库持久化 I/O 瓶颈优化（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/hijacking-sm-crypto-traffic-with-mitm">流量分析：Yakit MITM 劫持国密通信</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/bypass-waf-with-random-chunked-transfer">工程实践：Yakit 随机分块传输绕过 WAF</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-dataflow-advanced-filtering">代码审计：SyntaxFlow 数据流分析与高级过滤技巧</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/irify-admin-framework-vuln-chain">代码审计：IRify 定位某 Admin 框架文件上传与反序列化漏洞链</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-decompilation-loop-recovery-part3">技术研究：Java 反编译之循环结构还原（三）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/webshell-source-sink-mining-with-irify">代码审计：IRify 在 WebShell 中的 Source/Sink 挖掘</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/managing-false-positives-in-irify">代码审计：IRify 静态分析误报的分级管理策略</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/aiforge-modular-ai-application">功能发布：AIForge 模块化 AI 应用体</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/alternative-javascript-ssa-frontend-parsing">性能优化：JavaScript SSA 前端解析方案的替代探索</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/full-attack-chain-analysis-with-syntaxflow">代码审计：SyntaxFlow 完整攻击链路分析实战</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-traffic-analysis-feature">功能发布：Yakit 流量分析功能详解</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/finding-cve-vulnerabilities-with-syntaxflow">代码审计：使用 SyntaxFlow 挖掘 CVE 漏洞</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-decompilation-if-statements-part2">技术研究：Java 反编译之 If 语句解析（二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sql-injection-detection-with-irify">代码审计：IRify 实战之 SQL 注入检测</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/writing-syntaxflow-rules-for-golang">代码审计：SyntaxFlow 规则编写之 Golang 实战</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-java-value-search-and-filter-part1">代码审计：SyntaxFlow Java 实战之值的搜索与筛选（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-project-technical-evolution-in-ai-era">方法论：AI 浪潮下 Yak Project 的技术演进方向</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/jwt-range-vulnerability-exploitation">靶场实战：YAK-JWT 靶场的漏洞分析与利用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sca-dependency-analysis-with-syntaxflow">代码审计：基于 SyntaxFlow 的 SCA 依赖成分分析规则</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/writing-js-forward-scripts">工程实践：Js-Forward 脚本的编写方法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakssa-thinkphp-code-audit">代码审计：YAK-SSA 在 ThinkPHP 框架中的实战应用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-rule-management">代码审计：SyntaxFlow 规则管理功能详解</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_rMGB">2024</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/active-vs-passive-scanning-plugins">工程实践：主动扫描与被动扫描的区别与插件应用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-decompilation-techniques-part1">技术研究：Java 反编译技术解析（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/closure-handling-in-yaklang-compiler">技术研究：Yaklang 编译器的闭包处理机制</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/testing-under-frontend-encryption-part3">渗透实战：前端加密场景下的漏洞测试（三）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/plugin-environment-variable-global-config">功能发布：插件环境变量全局配置</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-mitm-architecture-and-workflow">流量分析：Yak MITM 模块组成与工作流程</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/how-syn-port-scanning-works">原理剖析：SYN 端口扫描技术原理</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/captcha-recognition-and-brute-force-with-hot-reload">工程实践：基于热加载的验证码识别与爆破</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-code-audit-and-project-management">代码审计：Yakit 代码审计功能与项目管理</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-yso-transform-gadget-chain">Java 安全：Yak-yso 支持 Transform 利用链</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/writing-high-quality-syntaxflow-rules">代码审计：编写高质量 SyntaxFlow 规则的方法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/dataflow-and-sensitivity-in-static-analysis">原理剖析：静态代码分析中的数据流与敏感性</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/understanding-ssa-ir-code-audit">代码审计：从编译技术理解 SSA IR 代码审计</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/difference-between-yaklang-and-yakit">技术科普：Yaklang 与 Yakit 的区别</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-project-compilation-and-query-in-yakit">代码审计：SyntaxFlow 在 Yakit 中的项目编译与查询</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/multi-auth-privilege-escalation-testing-plugin">漏洞分析：多认证越权测试插件原理与使用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-configuration-syntax">代码审计：SyntaxFlow 配置项语法原理与用法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-dataflow-analysis-in-practice">代码审计：SyntaxFlow 数据流分析实战</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/write-a-standard-yaklang-poc-in-15-minutes">工程实践：15 分钟编写规范的 Yaklang PoC</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/enhancing-mitm-plugins-with-cli-params">工程实践：使用 CLI 参数增强 MITM 插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-runner-code-editor-updates">功能发布：Yak Runner 代码编辑器更新盘点</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-mitm-and-plugin-integration">流量分析：Yakit MITM 功能与插件联动详解</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/poc-management-with-yak-and-nuclei">工程实践：Yak 与 Nuclei 融合的 PoC 管理方案</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-yso-deserialization-faq">Java 安全：Yak-yso 反序列化利用常见问题解析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/rdp-protocol-exploration">协议分析：RDP 协议探索</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/syntaxflow-cross-function-analysis-part1">代码审计：SyntaxFlow 跨函数与跨对象分析（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/intro-to-syntaxflow-code-audit">代码审计：SyntaxFlow 代码审计技术介绍</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-ai-gateway-and-security-workflow">工程实践：Yakit 实践型 AI Gateway 与安全工作流</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakrunner-code-execution-and-debugging-ide">功能发布：YakRunner 代码执行与脚本调试 IDE</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/combining-codec-and-web-fuzzer">工程实践：Codec 与 Web Fuzzer 的联动应用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakssa-program-analysis-with-ssa">技术研究：基于静态单赋值（SSA）的 YakSSA 程序分析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/integrating-goja-javascript-engine">功能发布：集成 goja JavaScript 引擎</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-ssa-dataflow-tracking-intro">代码审计：Java 的 SSA 数据流追踪初探</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/capturing-miniprogram-and-app-traffic">流量分析：使用 Yakit 进行小程序与 App 抓包</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yak-command-line-scanning-guide">工程实践：Yak 命令行扫描指南</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/headless-browser-login-brute-force-plugin">工程实践：基于无头浏览器的 Web 登录爆破插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-dirty-data-padding-techniques">Java 安全：Java 脏数据填充技术探索</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-codec-sequential-encoding">功能发布：Yakit 新版 Codec 序列式编解码</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/xml-fuzzing-techniques">工程实践：XML 模糊测试方法探析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/javascript-ssa-and-network-request-parsing">代码审计：JavaScript SSA 与网络请求解析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/taint-tracking-challenges-compilation-notes-2">技术研究：污点追踪的难点与对策（编译拾遗二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/static-behavior-analysis-compilation-notes-1">技术研究：代码静态行为分析（编译拾遗一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/file-upload-and-file-format-vulnerabilities">靶场实战：文件上传与特定文件格式漏洞</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_rMGB">2023</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/http2-downgrade-request-smuggling">漏洞分析：HTTP/2 降级请求走私</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/ssrf-parameter-scenarios-range-part1">靶场实战：SSRF 参数多场景测试（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-deserialization-poc-development">Java 安全：Java 反序列化漏洞 PoC 开发</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/multi-request-poc-with-web-fuzzer-sequence">工程实践：Web Fuzzer 序列与多请求 PoC 生成</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/xss-scenarios-range-part2">靶场实战：XSS 多场景（二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/xss-scenarios-range-part1">靶场实战：XSS 多场景（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/git-leak-exploitation-githack-in-golang">工程实践：Golang 实现 Githack（.git 泄露利用）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/one-click-poc-generation-with-web-fuzzer">工程实践：Web Fuzzer 一键生成 PoC 工作流</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sql-injection-range-part2">靶场实战：SQL 注入（二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sql-injection-range-part1">靶场实战：SQL 注入（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakssa-code-parsing-and-completion">代码审计：YakSSA 代码解析与语法提示</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/bypassing-frontend-dynamic-keys-part2">渗透实战：对抗前端动态密钥与非对称加密（二）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-sequence-scripting-for-awd">工程实践：AWD 场景下 Web Fuzzer 序列脚本构建</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/signature-verification-and-frontend-encryption-part1">渗透实战：验签与前端加密分析（一）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/tokenless-reverse-connection-detection">技术研究：无 Token 的反连检测技术</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-sequence-feature">功能发布：Web Fuzzer 序列功能</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/url-redirect-vulnerability-detection-plugin">漏洞分析：URL 重定向漏洞检测插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/how-to-build-ssa">技术研究：SSA 的构建方法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/websocket-fuzzer-testing">工程实践：WebSocket Fuzzer 测试</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/intro-to-ssa-static-single-assignment">技术研究：SSA（静态单赋值）格式入门</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-fuzztag-and-hot-reload">工程实践：Web Fuzzer 的 Fuzztag 与热加载实践</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-sca-standard-library">功能发布：Yaklang SCA 标准库</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-as-repeater-and-intruder">功能发布：对标 Repeater 与 Intruder 的 Web Fuzzer</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/shiro-range-without-java-dependency">靶场实战：无 Java 依赖的 Shiro 靶场</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/no-code-mitm-with-yakit">流量分析：基于 Yakit 的无代码 MITM 实践</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/rule-based-javaweb-echo">Java 安全：基于规则的 JavaWeb 回显方案</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/nuclei-dsl-compatibility-via-sandbox">技术研究：基于虚拟机沙箱兼容 Nuclei DSL</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/fastjson-with-jdk-deserialization-aliyun-ctf">Java 安全：Fastjson 结合 JDK 原生反序列化利用（Aliyun CTF）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/automated-testing-of-nested-json-params">工程实践：嵌套 JSON 参数的自动化测试</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/hijack-https-tcp-tls-with-socks5">流量分析：使用 Socks5 劫持 HTTPS(TCP-TLS)</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/generate-strings-from-regex">技术研究：通过正则表达式反向生成字符串</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/jndi-injection-exploitation-part2">Java 安全：JNDI 注入利用总结（下）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/jndi-injection-exploitation-part1">Java 安全：JNDI 注入利用总结（上）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-new-language-engine-update">技术研究：Yaklang 新语言引擎更新解析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/traffic-modification-techniques-in-pentest">流量分析：渗透测试中的流量修改技巧</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/brute-force-deserialization-chain-with-fuzztag-v2">工程实践：使用 Fuzztag 爆破反序列化链（2.0）</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_rMGB">2022</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/fuzztag-capability-upgrade">功能发布：Fuzztag 能力升级</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/brute-force-deserialization-chain-with-fuzztag">工程实践：使用 Fuzztag 爆破反序列化链</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/deserialization-memory-shell-with-yso-java-hack">Java 安全：利用反序列化漏洞打内存马（Yso-Java Hack 进阶）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/modify-traffic-with-mitm-hot-reload">流量分析：用 MITM 热加载任意修改流量</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sql-injection-heuristic-detection-infrastructure">漏洞分析：SQL 注入检测启发式算法（基础设施）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakvm-stack-virtual-machine">技术研究：YakVM 栈式虚拟机与编译运行时分离</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/match-and-extract-with-yakit">工程实践：用 Yakit 实现 Match-Extract 功能</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/extract-data-from-batch-brute-force">功能发布：从批量爆破请求中提取关键数据</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/generate-payloads-with-fuzztag">工程实践：使用 Fuzztag 生成与变形 Payload</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/reverse-connection-and-javahack-enhancements">功能发布：反连检测与 JavaHack 能力强化</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-sql-injection-heuristic-algorithm">漏洞分析：Yaklang SQL 注入检测启发式算法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-websocket-hijacking-tutorial">工程实践：Yaklang WebSocket 劫持教程</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/reverse-engineering-sheep-game-traffic">流量分析：抓包分析“羊了个羊”游戏通关逻辑</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/pentest-team-collaboration-and-sharing">功能发布：渗透测试团队协作与即时分享</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/cybersecurity-dsl-whitepaper">技术研究：网络安全领域 DSL 白皮书</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/subdomain-collection-with-vuln-scanning">工程实践：子域名收集联动 Yak 漏扫插件（安全研发启蒙）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/build-a-low-cost-passive-scanner">工程实践：低成本被动扫描工具实现（安全研发启蒙）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yakit-plugin-store-guide">功能发布：Yakit 插件商店使用指南</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-java-bytecode-processing">技术研究：Yaklang Java 字节码处理能力</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/remote-mode-hijacking-scanning-and-pentest">工程实践：远程模式下的劫持、扫描与渗透</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/testing-frontend-aes-ecb-encryption">渗透实战：前端 AES-ECB 加密场景的 Web 安全测试</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/self-hosted-yak-bridge-reverse-connection">功能发布：自建 Yak Bridge 反连（DNSLog/ICMPLog/TCPLog）</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/cve-2020-2551-iiop-detection-and-exploit">Java 安全：CVE-2020-2551 IIOP 检测与 Yak 利用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-xss-heuristic-algorithm">漏洞分析：Yaklang XSS 检测启发式算法</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/yaklang-distributed-engine-saas">技术研究：Yaklang 分布式引擎的 SaaS 化</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/xss-heuristic-detection-infrastructure">漏洞分析：XSS 启发式检测基础设施</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/mitm-traffic-replacement-and-chrome-launch">功能发布：MITM 流量替换/染色/标记与免配置启动 Chrome</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/fastjson-heuristic-detection">漏洞分析：Fastjson 启发式检测</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-mass-requests-and-batch-plugins">功能发布：Web Fuzzer 海量发包与批量插件执行重构</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-hot-reload-fuzz-capability">功能发布：Web Fuzzer 热加载 Fuzz 能力</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-repeater-and-intruder-alternative">工程实践：Web Fuzzer 对标 Repeater 与 Intruder</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/weblogic-t3-protocol-analysis">协议分析：WebLogic T3 协议分析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-hot-reload-fuzz">功能发布：Web Fuzzer 热加载 Fuzz 能力</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/htb-bountyhunter-walkthrough-and-weaponization">渗透实战：HTB BountyHunter 靶机攻防与武器化</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/multi-protocol-reverse-connection-beyond-dnslog">技术研究：DNSLog 之外的多协议反连检测</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-ldap-protocol-analysis">协议分析：Java LDAP 协议分析</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/blackbox-vulnerability-scanning-and-risk-assessment">方法论：黑盒漏洞扫描与风险评估</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-deserialization-echo-chain-detection">Java 安全：反序列化回显链研究与检测工程化</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/modular-fingerprint-scanning-design">技术研究：模块化指纹扫描的设计</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/thinkphp-rce-passive-scan-plugin">漏洞分析：ThinkPHP RCE 被动扫描插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/web-fuzzer-vs-repeater-and-intruder">工程实践：Web Fuzzer 对标 Repeater 与 Intruder</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/decrypt-app-des-cbc-traffic">流量分析：App 端 DES-CBC 加密流量的自动化解密</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/general-penetration-testing-with-yakit">渗透实战：使用 Yakit 进行常规渗透测试</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/sunlogin-rce-detection-plugin">漏洞分析：向日葵远程命令执行检测插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/build-a-log4j-detection-tool">漏洞分析：使用 Yak 构建 Log4j 漏洞检测工具</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/learn-yak-with-redis-unauthorized-detection">工程实践：从 Redis 未授权检测入门 Yak 语言</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/cdn-detection-plugin">工程实践：CDN 检测插件案例</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/jsonp-passive-detection">漏洞分析：基于 Yak 的 JSONP 被动检测</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/siemens-plc-exploit-plugin">工程实践：开发 Yakit 插件利用西门子 PLC</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/outbound-reverse-connection-detection">技术研究：出网反连检测技术</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/xss-blind-detection-plugin">工程实践：XSS 盲打检测插件案例</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/ssrf-outbound-detection-mitm-plugin">漏洞分析：SSRF 公网出网检测 MITM 插件</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/reverse-connection-intranet-tunneling-and-port-reuse">技术研究：反连检测之内网穿透与多协议端口复用</a></li></ul></div><div role="group"><h3 class="yearGroupHeading_rMGB">2021</h3><ul class="sidebarItemList_Yudw clean-list"><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/java-deserialization-cross-language-exploit">Java 安全：使用 Yakit 实现 Java 序列化跨语言利用</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/brute-force-and-unauthorized-access-detection">功能发布：爆破与未授权检测</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/log4j-jndi-fuzz-and-passive-scan">漏洞分析：Log4j JNDI Fuzz 与被动扫描</a></li><li class="sidebarItem__DBe"><a class="sidebarItemLink_mo7H" href="/en/blog/traffic-hijacking-with-yakit">流量分析：使用 Yakit 进行流量劫持</a></li></ul></div></nav></aside><main class="blog-main"><article class=""><header><h1 class="title_f1Hy">性能优化：IRify 第二轮全路径性能重构（SSA/SyntaxFlow/ANTLR）</h1><div class="meta_OgzX"><div class="container_mt6G margin-vert--md info_LR_i"><time datetime="2026-03-27T00:00:00.000Z">March 27, 2026</time> · <!-- -->20 min read</div><span class="authors_BpOn"><span class="author_MNEi"><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="authorLink_U9hR"><img class="avatar_fQY1" src="https://github.com/yaklang.png" alt="Yak Project" loading="lazy"><span class="name_imMX" translate="no">Yak Project</span></a></span></span></div></header><div id="__blog-post-container" class="markdown theme-doc-markdown"><blockquote>
-<p>过去几个月，Yaklang 在 SSA、CodeScan、SyntaxFlow / SFVM、ANTLR / front-end 这几条线，做完了第二轮比较成体系的性能优化。</p>
-<p>如果只看提交记录，会觉得这是一串零散的修复、重构和实验；但把这些工作放在一起看，会发现它们其实围绕的是同一个目标：</p>
-<p>让 IRify 真正能够在大项目上更稳定地编译、更高效地扫描、更可控地执行规则，并且让后续第三轮、第四轮优化有清晰的落点。</p>
+      </style><header class="sticky top-0 z-[200] w-full h-[80px] relative overflow-hidden"><div class="absolute inset-0 bg-[var(--Colors-Use-Main---Gold-Bg)]"></div><div class="absolute inset-x-0 bottom-0 h-[1px] w-full bg-[var(--Colors-Use-Main---Gold-Focus)] pointer-events-none"></div><div class="relative flex items-center justify-between h-full mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0"><div class="flex items-center min-w-0"><a class="inline-flex flex-shrink-0 mr-[24px]" href="/en/"><img src="/en/img/logo.png" alt="YAK" class="w-[99px] h-[36px] object-contain"></a><nav data-nav-desktop="true" class="items-center gap-[8px] hidden"><a style="transition-duration:650ms" class="group inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] !no-underline transition-colors ease-in-out" href="/en/docs/intro"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Yak Docs</span></a><a style="transition-duration:650ms" class="group inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] !no-underline transition-colors ease-in-out" href="/en/products/intro"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Yakit Manual</span></a><button type="button" style="transition-duration:650ms" class="ant-dropdown-trigger group cursor-pointer inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] border-none bg-transparent transition-colors ease-in-out"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Open Source</span><span class="flex-shrink-0 inline-flex transition-transform duration-200 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 0.5L5.75 5.75L0.5 0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button type="button" style="transition-duration:650ms" class="ant-dropdown-trigger group cursor-pointer inline-flex items-center gap-[6px] px-[10px] py-[6px] font-sans font-normal tracking-[0.1px] text-[14px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] leading-[20px] border-none bg-transparent transition-colors ease-in-out"><span class="group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Community &amp; Resources</span><span class="flex-shrink-0 inline-flex transition-transform duration-200 text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] group-hover:text-[color:var(--Colors-Use-Main---web-Primary)]"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M11 0.5L5.75 5.75L0.5 0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></nav></div><div data-nav-desktop="true" class="items-center flex-shrink-0 hidden"><div style="transition-duration:650ms" class="inline-flex items-center text-[color:var(--Colors-Use-Neutral-Text-1-Title)] font-[&#x27;PingFang_SC&#x27;] font-normal tracking-[0.1px] text-[14px] leading-[20px] cursor-pointer mr-[18px] transition-colors ease-in-out hover:text-[color:var(--Colors-Use-Main---web-Primary)]" aria-label="Switch Language"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15.75 9C15.75 12.7279 12.7279 15.75 9 15.75M15.75 9C15.75 5.27208 12.7279 2.25 9 2.25M15.75 9H2.25M9 15.75C5.27208 15.75 2.25 12.7279 2.25 9M9 15.75C10.2426 15.75 11.25 12.7279 11.25 9C11.25 5.27208 10.2426 2.25 9 2.25M9 15.75C7.75736 15.75 6.75 12.7279 6.75 9C6.75 5.27208 7.75736 2.25 9 2.25M2.25 9C2.25 5.27208 5.27208 2.25 9 2.25" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="ml-[4px]">中</span></div><div style="transition-duration:650ms" class="inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors ease-in-out cursor-pointer mr-[8px] bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:bg-[var(--Colors-Use-Main---Gold-Focus)]" aria-label="Switch to Dark Mode"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3C9.07174 3.92826 8.55025 5.18724 8.55025 6.5C8.55025 7.81275 9.07174 9.07174 10 10C10.9283 10.9283 12.1872 11.4497 13.5 11.4497C14.8128 11.4497 16.0717 10.9283 17 10C17 11.3845 16.5895 12.7378 15.8203 13.889C15.0511 15.0401 13.9579 15.9373 12.6788 16.4672C11.3997 16.997 9.99224 17.1356 8.63437 16.8655C7.2765 16.5954 6.02922 15.9287 5.05026 14.9497C4.07129 13.9708 3.4046 12.7235 3.13451 11.3656C2.86441 10.0078 3.00303 8.6003 3.53285 7.32121C4.06266 6.04213 4.95987 4.94888 6.11101 4.17971C7.26215 3.41054 8.61553 3 10 3Z" fill="currentColor"></path></svg></div><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="transition-duration:650ms" class="inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors ease-in-out cursor-pointer mr-[8px] no-underline bg-[var(--Colors-Use-Main---Gold-Bg-Hover)] border-[1px] border-solid border-[var(--Colors-Use-Main---Gold-Focus)] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] hover:bg-[var(--Colors-Use-Main---Gold-Focus)]"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.99219 1.49024C5.16211 1.48828 1.25 5.39844 1.25 10.2246C1.25 14.041 3.69727 17.2852 7.10547 18.4766C7.56445 18.5918 7.49414 18.2656 7.49414 18.043V16.5293C4.84375 16.8398 4.73633 15.0859 4.55859 14.793C4.19922 14.1797 3.34961 14.0234 3.60352 13.7305C4.20703 13.4199 4.82227 13.8086 5.53516 14.8613C6.05078 15.625 7.05664 15.4961 7.56641 15.3691C7.67773 14.9102 7.91602 14.5 8.24414 14.1816C5.49805 13.6895 4.35352 12.0137 4.35352 10.0215C4.35352 9.05469 4.67188 8.16602 5.29688 7.44922C4.89844 6.26758 5.33398 5.25586 5.39258 5.10547C6.52734 5.00391 7.70703 5.91797 7.79883 5.99024C8.44336 5.81641 9.17969 5.72461 10.0039 5.72461C10.832 5.72461 11.5703 5.82031 12.2207 5.99609C12.4414 5.82813 13.5352 5.04297 14.5898 5.13867C14.6465 5.28906 15.0723 6.27734 14.6973 7.44336C15.3301 8.16211 15.6523 9.0586 15.6523 10.0273C15.6523 12.0234 14.5 13.7012 11.7461 14.1855C12.2051 14.6387 12.4902 15.2676 12.4902 15.9629V18.1602C12.5059 18.3359 12.4902 18.5098 12.7832 18.5098C16.2422 17.3438 18.7324 14.0762 18.7324 10.2266C18.7324 5.39844 14.8184 1.49024 9.99219 1.49024Z" fill="currentColor"></path></svg></a><div class="group inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]"><span class="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div><div data-nav-mobile="true" class="items-center hidden"><button style="transition-duration:650ms" class="inline-flex items-center justify-center w-[40px] h-[40px] mr-[10px] border-none rounded cursor-pointer transition-colors ease-in-out bg-transparent text-[color:var(--Colors-Use-Neutral-Text-1-Title)]" type="button" aria-label="Open Menu"><span role="img" aria-label="menu" class="anticon anticon-menu"><svg viewBox="64 64 896 896" focusable="false" data-icon="menu" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path></svg></span></button><div class="group inline-flex items-center justify-center w-[32px] h-[32px] rounded-full transition-colors duration-200 cursor-pointer bg-[color:var(--Colors-Neutral-100)] text-[color:var(--Colors-Use-Neutral-Bg)] hover:bg-[color:var(--Colors-Use-Main---web-Primary)] hover:text-[color:var(--Colors-Use-Main---web-On-Primary)]"><span class="inline-flex text-[color:var(--Colors-Use-Neutral-Bg)] group-hover:text-[color:var(--Colors-Use-Main---web-On-Primary)] transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 14L10 10M11.3333 6.66667C11.3333 9.244 9.244 11.3333 6.66667 11.3333C4.08934 11.3333 2 9.244 2 6.66667C2 4.08934 4.08934 2 6.66667 2C9.244 2 11.3333 4.08934 11.3333 6.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div></div></header><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="blog-layout-shell blog-layout-shell--with-sidebar blog-layout-shell--with-toc"><div class="blog-layout-row"><aside class="col col--3"><nav class="sidebar_brwN thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_r4Q1 margin-bottom--md">近期文章</div><div role="group"><h3 class="yearGroupHeading_hiiw">2026</h3><ul class="sidebarItemList_QwSx clean-list"><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/ghost-bits-waf-bypass-with-codec-and-fuzz">Vulnerability Analysis: Ghost Bits WAF Bypass Principle and Codec/Fuzz Plugin Implementation</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/ai-agent-orchestration-in-yakit-plugin-store">Engineering Practice: Wiring the Yakit Plugin Store Into the AI Agent Capability Orchestration Pipeline</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/harness-engineering-and-scaling-irify">Methodology: Harness Engineering and Scaling the IRify R&amp;D Practice</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/ai-powered-irify-and-auto-poc-generation">Code Audit: AI-Powered Extensions to IRify and Automated PoC Generation</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/memfit-long-term-memory-and-corepact-evaluation">Technical Research: The Memfit AI Long-Term Memory System and the C.O.R.E.P.A.C.T. Evaluation Model</a></li><li class="sidebarItem_lnhn"><a aria-current="page" class="sidebarItemLink_yNGZ sidebarItemLinkActive_oSRm" href="/en/blog/irify-full-path-performance-refactor-round2">Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR)</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/memfit-knowledge-base-and-agentic-rag">Technical Research: The Memfit AI Built-in Knowledge Base System and Agentic RAG Implementation</a></li><li class="sidebarItem_lnhn"><a class="sidebarItemLink_yNGZ" href="/en/blog/memfit-autonomous-pentest-agent-architecture">Technical Research: Memfit AI Production-Grade Autonomous Penetration Testing Agent Architecture</a></li></ul></div></nav></aside><main class="blog-main"><article class=""><header><h1 class="title_f1Hy">Performance Optimization: IRify Round-2 Full-Path Performance Refactor (SSA/SyntaxFlow/ANTLR)</h1><div class="meta_OgzX"><div class="container_mt6G margin-vert--md info_LR_i"><time datetime="2026-03-27T00:00:00.000Z">March 27, 2026</time> · <!-- -->22 min read</div><span class="authors_BpOn"><span class="author_MNEi"><a href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer" class="authorLink_U9hR"><img class="avatar_fQY1" src="https://github.com/yaklang.png" alt="Yak Project" loading="lazy"><span class="name_imMX" translate="no">Yak Project</span></a></span></span></div></header><div id="__blog-post-container" class="markdown theme-doc-markdown"><blockquote>
+<p>Over the past few months, Yaklang has completed its second relatively systematic round of performance optimization along four lines: SSA, CodeScan, SyntaxFlow / SFVM, and ANTLR / front-end.</p>
+<p>If you look only at the commit log, it reads like a string of scattered fixes, refactors, and experiments; but when you put all of this work together, you find it actually revolves around the same goal:</p>
+<p>Make IRify genuinely able to compile more stably on large projects, scan more efficiently, and execute rules more controllably — while giving the subsequent third and fourth rounds of optimization clear points to land.</p>
 </blockquote>
-<p>先说几个最直观的结果。</p>
+<p>First, a few of the most visible results.</p>
 <ul>
-<li class="">在真实目标 <code>spring-cloud-netflix</code> 上，这一轮 CodeScan 调优过程中的观测值，从 <code>10.08s</code> 降到了 <code>5.59s</code>。</li>
-<li class="">在 SSA 指令搜索这条线上，<code>sfvm.nativecall:getFormalParams:java-servlet-param</code> 这一类核心热点，已经从早期的 <code>6.065s</code> 量级压到了“几十毫秒”量级。</li>
-<li class="">在 PHP mixed HTML 这个最典型、也最难看的前端热点上，<code>BenchmarkFrontendPfsenseSystemInformationFixture</code> 从 <code>15.36s/op</code> 降到了 <code>6.95s/op</code>，时间下降约 <code>54.74%</code>；本地当前主线补跑时，结果也稳定在 <code>7.82s/op</code> 左右。</li>
-<li class="">在 Java 大型反编译目标的 AST-only 实验里，ANTLR 缓存清理参数调优前后，可以从 <code>78.46s / 19.34GB</code> 这类结果，压到 <code>53.01s / 5.63GB</code> 这一档；如果追求更激进的速度甜品点，也已经能跑到 <code>51s</code> 左右。</li>
-<li class="">在 Java 反编译大项目目标上，前端 AST 错误和 panic 已经被清到 0，系统瓶颈开始从“前端根本过不去”后移到“落库和持久化阶段怎么继续压”。</li>
+<li class="">On the real target <code>spring-cloud-netflix</code>, the observed value during this round of CodeScan tuning dropped from <code>10.08s</code> to <code>5.59s</code>.</li>
+<li class="">Along the SSA instruction-search line, core hotspots like <code>sfvm.nativecall:getFormalParams:java-servlet-param</code> have been pushed down from the early <code>6.065s</code> range to the &quot;tens of milliseconds&quot; range.</li>
+<li class="">On the most typical — and ugliest — front-end hotspot, PHP mixed HTML, <code>BenchmarkFrontendPfsenseSystemInformationFixture</code> dropped from <code>15.36s/op</code> to <code>6.95s/op</code>, a roughly <code>54.74%</code> reduction in time; when re-run locally on the current main branch, the result also stays stable around <code>7.82s/op</code>.</li>
+<li class="">In the AST-only experiment on a large Java decompiled target, tuning the ANTLR cache-reset parameter moved results from the <code>78.46s / 19.34GB</code> band down to the <code>53.01s / 5.63GB</code> band; if you chase a more aggressive speed sweet spot, it can already hit around <code>51s</code>.</li>
+<li class="">On the large Java decompiled project target, front-end AST errors and panics have been cleaned down to 0, and the system bottleneck has shifted from &quot;the front end cannot even pass&quot; to &quot;how to keep squeezing the database-loading and persistence stage.&quot;</li>
 </ul>
-<p>这几组数据放在一起，其实已经能说明很多问题：</p>
-<p>第一，当前这一轮优化，已经不是“体感更快一点”的级别，而是真正把一批秒级、十秒级、甚至十几 GB 内存级别的问题打下来了。</p>
-<p>第二，这一轮优化的重点，不只是提速，还包括把热点找准、把路径理顺、把默认参数选稳。</p>
-<p>第三，现在已经落地的是第二轮结果，接下来会继续进入第三轮、第四轮。</p>
-<p>这轮已经落地的内容，可以先概括成四件事：</p>
-<p><code>1、SSA</code> 编译和搜索路径更统一了，相关命令和文档也同步整理到了 <code>ssa.to/docs</code>。</p>
-<p>2、<code>SSA</code> 指令搜索开始从字符串匹配路径，推进到“常量池 + ID 路径”的结构优化。</p>
-<p><code>3、SyntaxFlow / SFVM</code> 的判断语句运行逻辑被重构了一轮，过去在大量值场景下容易拖很久的判断路径，被真正收住了。</p>
-<p><code>4、ANTLR / front-end</code> 不只是继续修语法边界，还开始通过参数 sweep、统一目标实验和 TokenSource 优化，系统性地压时间和内存。</p>
-<p>与此同时，这并不是终点。</p>
-<p>当前仓库里的 worktree 已经能明显看出后续方向还在继续推进，对应的其实就是下一阶段要继续啃的几块硬骨头：</p>
+<p>Put together, these sets of figures already say a lot:</p>
+<p>First, this round of optimization is no longer at the level of &quot;feels a bit faster&quot; — it has genuinely knocked down a batch of problems measured in seconds, tens of seconds, or even tens of gigabytes of memory.</p>
+<p>Second, the focus of this round is not only speedup, but also pinpointing the hotspots accurately, streamlining the paths, and picking stable default parameters.</p>
+<p>Third, what has landed now is the second-round result; the third and fourth rounds will follow.</p>
+<p>What has landed in this round can be summarized as four things:</p>
+<p><code>1. SSA</code> compilation and search paths are more unified, and the related commands and documentation have been consolidated at <code>ssa.to/docs</code>.</p>
+<ol start="2">
+<li class=""><code>SSA</code> instruction search has started advancing from a string-matching path toward a structural optimization of &quot;constant pool + ID path.&quot;</li>
+</ol>
+<p><code>3. SyntaxFlow / SFVM</code>&#x27;s conditional-statement execution logic was refactored for a pass; the conditional paths that used to drag on for a long time under large-value scenarios have been genuinely reined in.</p>
+<p><code>4. ANTLR / front-end</code> not only continues to fix grammar boundaries but has also begun systematically squeezing time and memory through parameter sweeps, unified-target experiments, and TokenSource optimization.</p>
+<p>At the same time, this is not the end point.</p>
+<p>The worktrees in the current repo already make clear that subsequent directions are still being pushed forward; they correspond to the next set of hard nuts to crack in the upcoming phase:</p>
 <ul>
-<li class="">编译期内存和数据存储继续压缩</li>
-<li class="">时序和诊断能力继续补强</li>
-<li class="">lazy build 路径继续推进</li>
-<li class="">数据流分析能力继续细化</li>
+<li class="">Continue squeezing compile-time memory and data storage</li>
+<li class="">Continue strengthening timing and diagnostic capabilities</li>
+<li class="">Continue advancing the lazy-build path</li>
+<li class="">Continue refining data-flow analysis capability</li>
 </ul>
-<p>所以，如果用一句话概括这篇文章想讲的内容，那就是：</p>
-<p><em>这一轮 IRify 性能优化，已经把“能不能跑”推进到了“怎么跑得更快、更稳、更省”，而后面的第三轮、第四轮，也已经开始排上日程。</em></p>
-<p>下面就按几个最关键的位置，分别讲清楚这轮到底优化了什么、为什么要这么做、以及它现在带来了什么结果。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ssa指令搜索的常量池优化">SSA指令搜索的常量池优化<a href="#ssa指令搜索的常量池优化" class="hash-link" aria-label="Direct link to SSA指令搜索的常量池优化" title="Direct link to SSA指令搜索的常量池优化" translate="no">​</a></h2>
-<p>这一节对应的核心合并 PR 主要是：<code>#4019</code>、<code>#4040</code>、<code>#4066</code>、<code>#4092</code>。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="之前的情况">之前的情况<a href="#之前的情况" class="hash-link" aria-label="Direct link to 之前的情况" title="Direct link to 之前的情况" translate="no">​</a></h3>
-<p>这一轮之前，IRify 在 SSA 指令搜索上的核心能力已经是可用的，问题主要集中在“越大项目越容易把搜索路径拖慢”。</p>
-<p>真正慢下来的位置，主要不在某一条规则本身，而在搜索链路背后的数据形态：</p>
+<p>So, to sum up what this article is trying to say in one sentence:</p>
+<p><em>This round of IRify performance optimization has pushed past &quot;can it run&quot; into &quot;how do we make it run faster, more stably, and more cheaply&quot; — and the third and fourth rounds after it are already on the schedule.</em></p>
+<p>Below, we will walk through several of the most critical locations one by one, and explain exactly what was optimized in this round, why it was done this way, and what results it has delivered.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="constant-pool-optimization-for-ssa-instruction-search">Constant-Pool Optimization for SSA Instruction Search<a href="#constant-pool-optimization-for-ssa-instruction-search" class="hash-link" aria-label="Direct link to Constant-Pool Optimization for SSA Instruction Search" title="Direct link to Constant-Pool Optimization for SSA Instruction Search" translate="no">​</a></h2>
+<p>The core merged PRs corresponding to this section are mainly: <code>#4019</code>, <code>#4040</code>, <code>#4066</code>, <code>#4092</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="before">Before<a href="#before" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before" translate="no">​</a></h3>
+<p>Before this round, IRify&#x27;s core capability in SSA instruction search was already usable; the problems were mainly concentrated on &quot;the larger the project, the more easily the search path gets dragged down.&quot;</p>
+<p>The positions that were truly slow were not really in any single rule itself, but in the data shape behind the search chain:</p>
 <ul>
-<li class="">指令、变量、成员、对象 key 这些名字，在持久化时会被抹平成数据库里的字符串字段</li>
-<li class=""><code>irindex</code> 这类索引表里，<code>name</code> 字段存在大量重复</li>
-<li class="">一旦大项目里“很多值都叫同一个名字”或者“重名值特别多”，搜索就会在大量重复名字上反复做工作</li>
+<li class="">The names of instructions, variables, members, and object keys were flattened into string fields in the database during persistence</li>
+<li class="">In index tables like <code>irindex</code>, the <code>name</code> field held a large amount of duplication</li>
+<li class="">Once a large project had &quot;many values sharing the same name&quot; or &quot;an especially large number of colliding names,&quot; the search would do redundant work over and over across those duplicated names</li>
 </ul>
-<p>也就是说，旧路径的问题不是“有没有搜索能力”，而是搜索时还带着太多字符串级别的重复劳动。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="问题">问题<a href="#问题" class="hash-link" aria-label="Direct link to 问题" title="Direct link to 问题" translate="no">​</a></h3>
-<p>这轮最开始最容易误判的地方，就是把热点简单理解成“正则匹配慢”。</p>
-<p>实际上，真正的问题在更底层：</p>
-<p>1、数据库里保留下来的是“名字到值”的映射，但重名很多。</p>
-<p>2、一旦用字符串去搜，数据库会不断在重复名字上做重复匹配。</p>
-<p>3、SQLite 的回调式正则在这种高重复场景下会进一步放大成本。</p>
-<p>所以根因不是一句“正则慢”能解释的。</p>
-<p>更准确地说，是：</p>
-<p><em>同名值太多，字符串搜索路径又太重，导致数据库不断在重复名字上做重复工作。</em></p>
-<p>这也是为什么这一轮最终会走到“常量池优化”。</p>
-<p>这里说的常量池，实际落点就是 <code>namepool</code> 这条路径：先把名字集中管理，再尽量把搜索从字符串匹配推进到 <code>id</code> 路径。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="方案">方案<a href="#方案" class="hash-link" aria-label="Direct link to 方案" title="Direct link to 方案" translate="no">​</a></h3>
-<p>这条线真正的突破，不是直接大改，而是先做实验。</p>
-<p>先做的几件事非常关键：</p>
+<p>In other words, the problem with the old path was not &quot;whether there was search capability,&quot; but that the search still carried too much string-level redundant labor.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem">The Problem<a href="#the-problem" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem" translate="no">​</a></h3>
+<p>The easiest mistake to make at the start of this round was to interpret the hotspot simplistically as &quot;regex matching is slow.&quot;</p>
+<p>In fact, the real problem was further down:</p>
+<ol>
+<li class="">
+<p>What the database retained was a &quot;name-to-value&quot; mapping, but with many name collisions.</p>
+</li>
+<li class="">
+<p>Once you searched by string, the database kept doing redundant matches over duplicated names.</p>
+</li>
+<li class="">
+<p>SQLite&#x27;s callback-style regex further amplified the cost in this high-duplication scenario.</p>
+</li>
+</ol>
+<p>So the root cause cannot be explained away by a single phrase &quot;regex is slow.&quot;</p>
+<p>More precisely, it is:</p>
+<p><em>There are too many values sharing the same name, and the string-search path is too heavy, so the database keeps doing redundant work over duplicated names.</em></p>
+<p>This is also why this round eventually arrived at &quot;constant-pool optimization.&quot;</p>
+<p>The &quot;constant pool&quot; referred to here actually lands on the <code>namepool</code> path: first centrally manage the names, then push the search from string matching to an <code>id</code>-based path as much as possible.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-approach">The Approach<a href="#the-approach" class="hash-link" aria-label="Direct link to The Approach" title="Direct link to The Approach" translate="no">​</a></h3>
+<p>The real breakthrough on this line was not a big-bang rewrite, but starting with experiments.</p>
+<p>A few of the first things done were critical:</p>
 <ul>
-<li class="">在同一个真实目标 <code>spring-cloud-netflix</code> 上，反复跑 scan-only 基线</li>
-<li class="">把热点拆到具体执行点</li>
-<li class="">尝试把搜索数据 load 到内存里，验证是否能绕开 SQLite 的回调式正则</li>
-<li class="">进一步分析 <code>irindex</code> 里 <code>name</code> 的重复度</li>
+<li class="">Repeatedly running the scan-only baseline on the same real target <code>spring-cloud-netflix</code></li>
+<li class="">Breaking down hotspots to specific execution points</li>
+<li class="">Trying to load the search data into memory to verify whether it could bypass SQLite&#x27;s callback-style regex</li>
+<li class="">Further analyzing the duplication rate of <code>name</code> in <code>irindex</code></li>
 </ul>
-<p>实验做下来以后，方向就清楚了：</p>
-<p>1、先从内存里把重复名字去重。</p>
-<p>2、再对去重后的名字集合做匹配。</p>
-<p>3、匹配完成后，再反查对应值。</p>
-<p>4、再进一步，把字符串匹配路径推进到 <code>id</code> 路径，也就是常量池 / 名称池。</p>
-<p>最终落到代码里的几个关键位置是：</p>
+<p>After the experiments, the direction became clear:</p>
+<ol>
+<li class="">
+<p>First deduplicate the duplicated names in memory.</p>
+</li>
+<li class="">
+<p>Then match against the deduplicated name set.</p>
+</li>
+<li class="">
+<p>After matching, reverse-look-up the corresponding values.</p>
+</li>
+<li class="">
+<p>Going further, push the string-matching path to the <code>id</code> path, i.e., the constant pool / name pool.</p>
+</li>
+</ol>
+<p>The key locations finally landed in code are:</p>
 <ul>
 <li class=""><code>common/yak/ssa/ssadb/name_cache.go</code></li>
 <li class=""><code>common/yak/ssa/database_search.go</code></li>
 <li class=""><code>common/yak/ssaapi/sf_search.go</code></li>
 <li class=""><code>common/yak/ssaapi/sf_native_call.go</code></li>
 </ul>
-<p>具体改动包括：</p>
+<p>Specific changes include:</p>
 <ul>
-<li class="">memory mode 补上纯内存常量池</li>
-<li class="">搜索从 <code>pattern -&gt; string</code> 改成 <code>pattern -&gt; NameCache IDs -&gt; value IDs</code></li>
-<li class=""><code>SearchWithValue</code> 加上 lazy / DB fast path</li>
-<li class=""><code>NativeCall_GetFormalParams</code> 改成尽量不 materialize 完整函数对象</li>
+<li class="">memory mode gained a pure in-memory constant pool</li>
+<li class="">The search changed from <code>pattern -&gt; string</code> to <code>pattern -&gt; NameCache IDs -&gt; value IDs</code></li>
+<li class=""><code>SearchWithValue</code> gained a lazy / DB fast path</li>
+<li class=""><code>NativeCall_GetFormalParams</code> was changed to avoid materializing the full function object as much as possible</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="现在的情况和重构结果">现在的情况和重构结果<a href="#现在的情况和重构结果" class="hash-link" aria-label="Direct link to 现在的情况和重构结果" title="Direct link to 现在的情况和重构结果" translate="no">​</a></h3>
-<p>现在这条链路最重要的变化，不是“加了个缓存”，而是搜索模型已经换掉了：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="current-state-and-refactor-results">Current State and Refactor Results<a href="#current-state-and-refactor-results" class="hash-link" aria-label="Direct link to Current State and Refactor Results" title="Direct link to Current State and Refactor Results" translate="no">​</a></h3>
+<p>The most important change in this chain now is not that &quot;a cache was added,&quot; but that the search model has been swapped out:</p>
 <ul>
-<li class="">不再优先做大范围字符串匹配</li>
-<li class="">开始优先走常量池 / namepool</li>
-<li class="">先去重，再匹配，再按 <code>id</code> 反查</li>
-<li class="">memory mode 和 DB mode 的搜索模型开始变得更接近</li>
+<li class="">No longer prioritizing large-range string matching</li>
+<li class="">Now prioritizing the constant pool / namepool</li>
+<li class="">Deduplicate first, then match, then reverse-look-up by <code>id</code></li>
+<li class="">The search models of memory mode and DB mode have started to converge</li>
 </ul>
-<p>这也是为什么这一节应该叫“常量池优化”，而不是简单叫 <code>namepool</code>。</p>
-<p>因为它背后解决的是一个更大的问题：</p>
-<p><em>让搜索从“字符串不断重复扫”变成“名字集中管理、ID 路径优先”。</em></p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="运行效率对比">运行效率对比<a href="#运行效率对比" class="hash-link" aria-label="Direct link to 运行效率对比" title="Direct link to 运行效率对比" translate="no">​</a></h3>
-<p>这一节已经有几组很能说明问题的数据。</p>
-<p>在 <code>spring-cloud-netflix</code> 的 scan-only 基线里，早期的核心热点包括：</p>
+<p>This is also why this section should be called &quot;constant-pool optimization&quot; rather than simply <code>namepool</code>.</p>
+<p>Because what it solves behind the scenes is a larger problem:</p>
+<p><em>Shifting search from &quot;repeatedly rescanning strings&quot; to &quot;centrally managed names, with the ID path taking priority.&quot;</em></p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="efficiency-comparison">Efficiency Comparison<a href="#efficiency-comparison" class="hash-link" aria-label="Direct link to Efficiency Comparison" title="Direct link to Efficiency Comparison" translate="no">​</a></h3>
+<p>This section already has a few sets of figures that are quite telling.</p>
+<p>In the scan-only baseline of <code>spring-cloud-netflix</code>, the early core hotspots included:</p>
 
 
 
@@ -147,14 +167,14 @@
 
 
 
-<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>热点</th><th>早期耗时</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table></div></div>
-<p>继续优化以后，这条线最亮眼的结果之一是：</p>
+<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>Hotspot</th><th>Early time</th></tr></thead><tbody><tr><td><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></td><td><code>~6.065s</code></td></tr><tr><td><code>sf.SearchWithValue:search-glob:*alibaba*fastjson</code></td><td><code>~3.416s</code></td></tr><tr><td><code>sf.SearchWithValue:search-regexp:org.apache.logging.log4j</code></td><td><code>~3.324s</code></td></tr></tbody></table></div></div>
+<p>After continued optimization, one of the brightest results on this line is:</p>
 <ul>
 <li class=""><code>sfvm.nativecall:getFormalParams:java-servlet-param</code></li>
 </ul>
-<p>从秒级，压到了“几十毫秒”量级。</p>
-<p>这基本就是两位数量级的下降。</p>
-<p>同时，从整体观测值看，在同一个真实目标的调优过程中：</p>
+<p>Dropped from the seconds range to the &quot;tens of milliseconds&quot; range.</p>
+<p>This is essentially a two-order-of-magnitude drop.</p>
+<p>At the same time, looking at the overall observed value during tuning on the same real target:</p>
 
 
 
@@ -170,52 +190,52 @@
 
 
 
-<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>观测项</th><th>调优前</th><th>调优后</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> 观测值</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table></div></div>
-<p>这组整体数据不能简单说成“全靠常量池快了这么多”，因为中间还叠加了：</p>
+<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>Observed item</th><th>Before tuning</th><th>After tuning</th></tr></thead><tbody><tr><td><code>spring-cloud-netflix</code> observed value</td><td><code>10.08s</code></td><td><code>5.59s</code></td></tr></tbody></table></div></div>
+<p>This overall set of figures cannot simply be attributed to &quot;the constant pool alone made it this much faster,&quot; because layered on top were also:</p>
 <ul>
-<li class="">scan-only 路径的使用</li>
-<li class="">空规则噪音清理</li>
-<li class="">其他热点修复</li>
+<li class="">The use of the scan-only path</li>
+<li class="">Empty-rule noise cleanup</li>
+<li class="">Other hotspot fixes</li>
 </ul>
-<p>但它已经足够说明，SSA 指令搜索这条线的结构优化，已经开始实打实地把大项目扫描往下压了。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="syntaxflow-判断语句-运行逻辑重构">SyntaxFlow 判断语句 运行逻辑重构<a href="#syntaxflow-判断语句-运行逻辑重构" class="hash-link" aria-label="Direct link to SyntaxFlow 判断语句 运行逻辑重构" title="Direct link to SyntaxFlow 判断语句 运行逻辑重构" translate="no">​</a></h2>
-<p>这一节对应的核心合并 PR 主要是：<code>#4108</code>、<code>#4143</code>、<code>#4140</code>。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="之前的情况-1">之前的情况<a href="#之前的情况-1" class="hash-link" aria-label="Direct link to 之前的情况" title="Direct link to 之前的情况" translate="no">​</a></h3>
-<p>SyntaxFlow 的过滤语法本身一直就很强，像这些写法大家都很熟：</p>
+<p>But it is already enough to show that the structural optimization along the SSA instruction-search line has begun to genuinely push down large-project scan times.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="refactor-of-the-syntaxflow-conditional-statement-execution-logic">Refactor of the SyntaxFlow Conditional-Statement Execution Logic<a href="#refactor-of-the-syntaxflow-conditional-statement-execution-logic" class="hash-link" aria-label="Direct link to Refactor of the SyntaxFlow Conditional-Statement Execution Logic" title="Direct link to Refactor of the SyntaxFlow Conditional-Statement Execution Logic" translate="no">​</a></h2>
+<p>The core merged PRs corresponding to this section are mainly: <code>#4108</code>, <code>#4143</code>, <code>#4140</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="before-1">Before<a href="#before-1" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before" translate="no">​</a></h3>
+<p>SyntaxFlow&#x27;s filter syntax has always been powerful; these forms are familiar to everyone:</p>
 <ul>
 <li class=""><code>a?{.b}</code></li>
 <li class=""><code>a?{.*&lt;len&gt;==2}</code></li>
 <li class=""><code>a?(*&lt;len&gt;==3)</code></li>
 </ul>
-<p>从语法上看，它们都很好理解：</p>
+<p>Syntactically, they are all easy to understand:</p>
 <ul>
-<li class=""><code>a?{.b}</code>：判断每个 <code>a</code> 是否存在 <code>.b</code></li>
-<li class=""><code>a?{.*&lt;len&gt;==2}</code>：把 <code>a</code> 的成员展开后，判断这个 <code>a</code> 的成员数量是不是 2</li>
-<li class=""><code>a?(*&lt;len&gt;==3)</code>：先展开，再在条件里对展开后的结果做判断</li>
+<li class=""><code>a?{.b}</code>: check whether each <code>a</code> has <code>.b</code></li>
+<li class=""><code>a?{.*&lt;len&gt;==2}</code>: expand the members of <code>a</code>, then check whether the number of members of this <code>a</code> is 2</li>
+<li class=""><code>a?(*&lt;len&gt;==3)</code>: first expand, then make a judgment on the expanded result inside the condition</li>
 </ul>
-<p>通过这些条件对<code>?</code>之前的<code>a</code>进行过滤。</p>
-<p>在 <code>ssa.to</code> 的 SyntaxFlow 文档里，<code>?{...}</code> 一直都是按“每个输入值在自己的上下文里求值”来解释的。</p>
-<p>但在运行时实现层面，这件事过去并没有被完全收得这么干净。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="问题-1">问题<a href="#问题-1" class="hash-link" aria-label="Direct link to 问题" title="Direct link to 问题" translate="no">​</a></h3>
-<p>这轮之前，真正的问题不是“语法表达不了”，而是运行逻辑上有几层历史包袱：</p>
+<p>Use these conditions to filter the <code>a</code> preceding the <code>?</code>.</p>
+<p>In the SyntaxFlow documentation at <code>ssa.to</code>, <code>?{...}</code> has always been explained as &quot;each input value is evaluated in its own context.&quot;</p>
+<p>But at the runtime-implementation level, this had not previously been tied up quite this cleanly.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem-1">The Problem<a href="#the-problem-1" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem" translate="no">​</a></h3>
+<p>Before this round, the real problem was not &quot;the syntax cannot express it,&quot; but that the execution logic carried several layers of historical baggage:</p>
 <ul>
-<li class=""><code>Values</code> 和旧的列表语义混在一起</li>
-<li class="">条件判断、值分组、锚点回投之间边界不够清楚</li>
-<li class="">condition 判断路径使用的是循环式处理思路</li>
+<li class=""><code>Values</code> was tangled up with the old list semantics</li>
+<li class="">The boundaries among conditional judgment, value grouping, and anchor re-projection were unclear</li>
+<li class="">The condition-judgment path used a loop-based processing approach</li>
 </ul>
-<p>这在简单规则里不一定明显，但一旦遇到：</p>
+<p>This might not be obvious in simple rules, but once you hit:</p>
 <ul>
-<li class="">输入值很多</li>
-<li class="">条件嵌套很多</li>
-<li class="">中间又做了 <code>*</code> 展开、<code>&lt;len&gt;</code>、<code>&lt;slice&gt;</code> 这类操作</li>
+<li class="">A large number of input values</li>
+<li class="">Heavy conditional nesting</li>
+<li class="">Operations like <code>*</code> expansion, <code>&lt;len&gt;</code>, <code>&lt;slice&gt;</code> in between</li>
 </ul>
-<p>就会出现一个很难受的现象：</p>
-<p><em>规则不是不能跑，而是 condition 判断会沿着旧路径对值一个个循环判断，值越多，时间越长，几乎和值数量线性相关，所以一旦进入大量值场景就会非常慢。</em></p>
-<p>所以这里的问题，不是“判断逻辑不正确”，而是：</p>
-<p><em>判断逻辑在大量值场景下，执行路径不够稳定。</em></p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="方案-1">方案<a href="#方案-1" class="hash-link" aria-label="Direct link to 方案" title="Direct link to 方案" translate="no">​</a></h3>
-<p>这轮重构做的，是把这条判断路径整条收掉重来。</p>
-<p>关键变化主要落在：</p>
+<p>A very unpleasant phenomenon appears:</p>
+<p><em>The rule can still run; it&#x27;s just that the condition judgment loops through the values one by one along the old path — the more values, the longer it takes, nearly linear in the number of values, so once it enters a large-value scenario it becomes very slow.</em></p>
+<p>So the problem here is not &quot;the judgment logic is incorrect,&quot; but rather:</p>
+<p><em>The execution path of the judgment logic is not stable enough under large-value scenarios.</em></p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-approach-1">The Approach<a href="#the-approach-1" class="hash-link" aria-label="Direct link to The Approach" title="Direct link to The Approach" translate="no">​</a></h3>
+<p>What this round&#x27;s refactor did was take this entire conditional path and rewrite it from scratch.</p>
+<p>The key changes mainly landed in:</p>
 <ul>
 <li class=""><code>common/syntaxflow/sfvm/frame.go</code></li>
 <li class=""><code>common/syntaxflow/sfvm/condition_exec.go</code></li>
@@ -223,111 +243,110 @@
 <li class=""><code>common/syntaxflow/sfvm/values.go</code></li>
 <li class=""><code>common/syntaxflow/docs/sfvm-values-condition.md</code></li>
 </ul>
-<p>核心思路有四个：</p>
+<p>There are four core ideas:</p>
 <ol>
-<li class="">用 <code>Values</code> 明确统一运行时值容器。</li>
-<li class="">把条件判断统一收回 <code>anchor-scope</code>。</li>
-<li class="">把 <code>NativeCall</code> 的 grouped 行为也交回 SFVM 自己处理。</li>
-<li class="">把旧的 <code>ValueList</code> 和旧循环路径换掉。</li>
+<li class="">Use <code>Values</code> to clearly unify the runtime value container.</li>
+<li class="">Bring conditional judgment back uniformly into <code>anchor-scope</code>.</li>
+<li class="">Hand the grouped behavior of <code>NativeCall</code> back to SFVM itself to handle.</li>
+<li class="">Replace the old <code>ValueList</code> and the old loop path.</li>
 </ol>
-<p>在语义上，这轮重构之后，<code>?{...}</code> 的执行逻辑终于和 SyntaxFlow 文档里说的那一套真正对齐了：</p>
+<p>Semantically, after this round of refactoring, the execution logic of <code>?{...}</code> finally truly aligns with what the SyntaxFlow documentation describes:</p>
 <ul>
-<li class=""><code>a?{.b}</code> 不再走“把所有值拉出来逐个循环判断”的旧路径，而是一起执行对每个输入 <code>a</code> 单独判断它自己有没有 <code>.b</code></li>
-<li class=""><code>a?{.*&lt;len&gt;==2}</code> 也不是把所有结果混在一起算，而是先标记前序，然后一起执行判断，再把判断结果映射回每个原始输入 <code>a</code></li>
+<li class=""><code>a?{.b}</code> no longer takes the old path of &quot;pulling all values out and looping through them one by one&quot;; instead, it judges each input <code>a</code> together for whether it has <code>.b</code></li>
+<li class=""><code>a?{.*&lt;len&gt;==2}</code> also no longer mixes all results together to compute; it first marks the predecessors, then executes the judgment together, and maps the judgment result back to each original input <code>a</code></li>
 </ul>
-<p>同样地：</p>
+<p>Likewise:</p>
 <ul>
 <li class=""><code>a?{.*&lt;len&gt;==2}</code></li>
 </ul>
-<p>也不再是把所有值全拍平后算一个总 <code>len</code>，而是：</p>
+<p>also no longer flattens all values to compute a single total <code>len</code>; instead:</p>
 <ul>
-<li class="">先展开</li>
-<li class="">再按原始输入 <code>a</code> 回投</li>
-<li class="">最后决定哪个 <code>a</code> 应该保留</li>
+<li class="">First expand</li>
+<li class="">Then re-project by the original input <code>a</code></li>
+<li class="">Finally decide which <code>a</code> should be kept</li>
 </ul>
-<p>这也是为什么这轮方案的核心，不只是“换几个函数”，而是把：</p>
+<p>This is also why the core of this round&#x27;s approach is not just &quot;swapping a few functions,&quot; but re-straightening the whole set of relationships among:</p>
 <ul>
 <li class=""><code>Values</code></li>
 <li class=""><code>Condition</code></li>
 <li class=""><code>Anchor</code></li>
 <li class=""><code>NativeCall</code></li>
 </ul>
-<p>这一整组关系重新理顺。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="现在的情况和重构结果-1">现在的情况和重构结果<a href="#现在的情况和重构结果-1" class="hash-link" aria-label="Direct link to 现在的情况和重构结果" title="Direct link to 现在的情况和重构结果" translate="no">​</a></h3>
-<p>现在 SyntaxFlow 判断语句这条线，最重要的变化是：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="current-state-and-refactor-results-1">Current State and Refactor Results<a href="#current-state-and-refactor-results-1" class="hash-link" aria-label="Direct link to Current State and Refactor Results" title="Direct link to Current State and Refactor Results" translate="no">​</a></h3>
+<p>The most important changes along the SyntaxFlow conditional-statement line now are:</p>
 <ul>
-<li class="">判断语义和文档描述终于更一致了</li>
-<li class="">条件判断路径更统一了</li>
-<li class="">过去在大量值场景下容易拖很久的旧循环路径，被真正收住了</li>
+<li class="">The judgment semantics are finally more consistent with the documentation</li>
+<li class="">The conditional-judgment path is more unified</li>
+<li class="">The old loop path that used to drag on for a long time under large-value scenarios has been genuinely reined in</li>
 </ul>
-<p>这件事在当前仓库测试里甚至有一个很直白的信号：</p>
+<p>This even has a very plain signal in the current repo&#x27;s tests:</p>
 <ul>
 <li class=""><code>filter condition without iter loop</code></li>
 </ul>
-<p>这个测试名本身就已经把问题说透了。</p>
-<p>它不是在证明“能跑”，而是在证明：</p>
-<p><em>这条条件过滤路径，现在已经不是靠旧的 iter-loop 逻辑在绕了。</em></p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="运行效率对比-1">运行效率对比<a href="#运行效率对比-1" class="hash-link" aria-label="Direct link to 运行效率对比" title="Direct link to 运行效率对比" translate="no">​</a></h3>
-<p>它的收益是“把长尾和坏路径收掉”。</p>
+<p>The test name itself has already spelled out the problem.</p>
+<p>It is not proving &quot;it can run&quot;; it is proving:</p>
+<p><em>This conditional-filter path no longer relies on the old iter-loop logic to grind through.</em></p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="efficiency-comparison-1">Efficiency Comparison<a href="#efficiency-comparison-1" class="hash-link" aria-label="Direct link to Efficiency Comparison" title="Direct link to Efficiency Comparison" translate="no">​</a></h3>
+<p>Its payoff is &quot;reining in the long tail and the bad paths.&quot;</p>
 <ul>
-<li class="">之前：大量值进入条件判断后，容易一直循环判断，时间非常长</li>
-<li class="">现在：这类判断路径和普通检索一样所有值一起执行，已经能稳定完成并且不需要任何循环操作。</li>
+<li class="">Before: once a large number of values entered the conditional judgment, it would easily loop through the judgments indefinitely, taking a very long time</li>
+<li class="">Now: this kind of judgment path executes all values together just like an ordinary search; it can already complete stably and needs no loop operations at all.</li>
 </ul>
-<p>也就是说，这一轮的收益主要体现在：</p>
+<p>That is to say, the payoff of this round is mainly reflected in:</p>
 <ul>
-<li class="">把不可接受的长尾收掉</li>
-<li class="">把规则判断从“复杂时容易拖垮”变成“复杂时也能稳定执行”</li>
+<li class="">Reining in the unacceptable long tail</li>
+<li class="">Turning rule judgment from &quot;easily collapsing when complex&quot; into &quot;still executing stably when complex&quot;</li>
 </ul>
-<p>这也是为什么这一节更像“运行逻辑重构”，而不是“一个单点提速 PR”。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="antlr缓存清理机制">ANTLR缓存清理机制<a href="#antlr缓存清理机制" class="hash-link" aria-label="Direct link to ANTLR缓存清理机制" title="Direct link to ANTLR缓存清理机制" translate="no">​</a></h2>
-<p>这一节对应的核心合并 PR 主要是：<code>#4139</code>。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="之前的情况-2">之前的情况<a href="#之前的情况-2" class="hash-link" aria-label="Direct link to 之前的情况" title="Direct link to 之前的情况" translate="no">​</a></h3>
-<p>ANTLR 这条线的一个老问题是内存和时间，在之前的优化中我们先后完成了两个处理：</p>
+<p>This is also why this section reads more like &quot;an execution-logic refactor&quot; than &quot;a single-point speedup PR.&quot;</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="antlr-cache-reset-mechanism">ANTLR Cache-Reset Mechanism<a href="#antlr-cache-reset-mechanism" class="hash-link" aria-label="Direct link to ANTLR Cache-Reset Mechanism" title="Direct link to ANTLR Cache-Reset Mechanism" translate="no">​</a></h2>
+<p>The core merged PR corresponding to this section is mainly: <code>#4139</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="before-2">Before<a href="#before-2" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before" translate="no">​</a></h3>
+<p>A perennial problem on the ANTLR line is memory and time. In previous optimizations we completed two treatments in sequence:</p>
 <ul>
-<li class="">最开始我们发现内存不会被清理，然后清理出来不使用全局缓存而项目内缓存，以得到更稳定的缓存控制清理。</li>
-<li class="">项目并发使用项目单一缓存将会带来锁的问题，导致并发执行非常慢，我们拆分出工作者协程并发，每个维护自己的缓存。</li>
+<li class="">Initially we found that memory was never cleaned up; then we moved away from a global cache to a per-project cache, to gain more stable cache-control cleanup.</li>
+<li class="">Concurrent use of a single project cache introduced lock problems that made concurrent execution very slow; we split out worker coroutines for concurrency, each maintaining its own cache.</li>
 </ul>
-<p>然后目前运行发现这带来了新的问题：runtime cache 会随着大项目不断膨胀，导致GC运行占用大量的cpu时间。</p>
-<p>最关键的两个东西是：</p>
+<p>But running it now revealed a new problem: the runtime cache keeps ballooning on large projects, causing the GC to consume a large amount of CPU time.</p>
+<p>The two most critical things are:</p>
 <ul>
 <li class="">DFA</li>
 <li class="">PredictionContextCache</li>
 </ul>
-<p>如果完全不管它们，在大目标上会越来越占内存；</p>
-<p>但如果清得太勤，缓存来不及复用，解析的时间占用大部分导致整个的编译效率仍然会低。</p>
-<p>所以这不是一个“开或关”的问题，而是一个需要实验判断的问题，我们需要在清理问题上找到一个指标并且寻找一个“甜点值”的配置作为默认。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="问题-2">问题<a href="#问题-2" class="hash-link" aria-label="Direct link to 问题" title="Direct link to 问题" translate="no">​</a></h3>
-<p>这条线真正要解决的是：</p>
-<p><em>到底应该在什么时候清缓存，才能既不把<strong>内存</strong>推得太高，也不把性能打烂？</em></p>
-<p>这件事必须同时看两组指标：</p>
+<p>If you ignore them entirely, they will take up more and more memory on large targets;</p>
+<p>But if you clear them too aggressively, the cache cannot be reused in time, and parse time dominates, so the overall compilation efficiency still stays low.</p>
+<p>So this is not an &quot;on or off&quot; question, but one that needs experimental judgment; we needed to find an indicator on the cleanup question and seek a &quot;sweet-spot&quot; configuration as the default.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem-2">The Problem<a href="#the-problem-2" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem" translate="no">​</a></h3>
+<p>What this line really needs to solve is:</p>
+<p><em>Exactly when should the cache be reset, so that memory is not pushed too high and performance is not wrecked?</em></p>
+<p>This must look at two sets of metrics simultaneously:</p>
 <ul>
-<li class="">时间</li>
-<li class="">峰值内存</li>
+<li class="">Time</li>
+<li class="">Peak memory</li>
 </ul>
-<p>因为只看其中一个，很容易选出一个看起来很好、但整体很差的策略。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="方案-2">方案<a href="#方案-2" class="hash-link" aria-label="Direct link to 方案" title="Direct link to 方案" translate="no">​</a></h3>
-<p>这轮的方案，不是拍脑袋改默认值，而是把缓存清理参数放出来，然后围绕统一目标持续做实验，比较不同参数下的时间和内存，再从结果里找一个真正合适的“甜品点”。</p>
-<p>关键位置在：</p>
+<p>Because looking at only one, it is easy to pick a strategy that looks great but is actually terrible overall.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-approach-2">The Approach<a href="#the-approach-2" class="hash-link" aria-label="Direct link to The Approach" title="Direct link to The Approach" translate="no">​</a></h3>
+<p>The approach this round was not to change the default value on a hunch, but to expose the cache-reset parameter and then run continuous experiments around a unified target, comparing time and memory under different parameters, and finding a genuinely suitable &quot;sweet spot&quot; from the results.</p>
+<p>The key locations are:</p>
 <ul>
 <li class=""><code>common/yak/ssaapi/ssa_compile_utils.go</code></li>
 <li class=""><code>common/yak/java/tests/ast_parse_metrics_local_test.go</code></li>
 </ul>
-<p>最核心的环境变量是：</p>
+<p>The most central environment variable is:</p>
 <ul>
 <li class=""><code>YAK_ANTLR_CACHE_RESET_FILES</code></li>
 </ul>
-<p>它的含义很直接：</p>
-<p><em>每个 worker 解析多少个文件以后，reset 一次 runtime cache。</em></p>
-<p>接下来做的事情，就是围绕统一目标持续跑实验，比较不同 reset 周期下的时间和内存，去找那个真正合适的“甜品点”。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="现在的情况和重构结果-2">现在的情况和重构结果<a href="#现在的情况和重构结果-2" class="hash-link" aria-label="Direct link to 现在的情况和重构结果" title="Direct link to 现在的情况和重构结果" translate="no">​</a></h3>
-<p>这轮之后，ANTLR cache reset 已经不是一个模糊经验，而是一个有实验数据支撑的机制。</p>
-<p>而且当前主线代码里，默认值已经落下来了：</p>
+<p>Its meaning is straightforward:</p>
+<p><em>After how many files each worker parses, reset the runtime cache once.</em></p>
+<p>What we did next was keep running experiments around a unified target, comparing time and memory under different reset cycles to find the genuinely suitable &quot;sweet spot.&quot;</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="current-state-and-refactor-results-2">Current State and Refactor Results<a href="#current-state-and-refactor-results-2" class="hash-link" aria-label="Direct link to Current State and Refactor Results" title="Direct link to Current State and Refactor Results" translate="no">​</a></h3>
+<p>After this round, the ANTLR cache reset is no longer a vague rule of thumb; it is a mechanism backed by experimental data.</p>
+<p>And in the current main-branch code, the default value has already landed:</p>
 <ul>
 <li class=""><code>YAK_ANTLR_CACHE_RESET_FILES=100</code></li>
 </ul>
-<p>这个默认值不是拍脑袋写进去的，而是比较了一轮又一轮结果后，选出的更稳妥默认点。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="运行效率对比-2">运行效率对比<a href="#运行效率对比-2" class="hash-link" aria-label="Direct link to 运行效率对比" title="Direct link to 运行效率对比" translate="no">​</a></h3>
-<p>先看极端情况。</p>
+<p>This default was not written in on a hunch; it was chosen after comparing round after round of results, as the steadier default point.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="efficiency-comparison-2">Efficiency Comparison<a href="#efficiency-comparison-2" class="hash-link" aria-label="Direct link to Efficiency Comparison" title="Direct link to Efficiency Comparison" translate="no">​</a></h3>
+<p>First, the extreme cases.</p>
 
 
 
@@ -351,8 +370,8 @@
 
 
 
-<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>策略</th><th>时间</th><th>峰值内存</th><th>结论</th></tr></thead><tbody><tr><td>不 reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>内存大，GC 压力也大</td></tr><tr><td>每次 parse 后都 reset</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>内存很低，但明显变慢</td></tr></tbody></table></div></div>
-<p>再看按“文件数”做 reset 的实验。</p>
+<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>Strategy</th><th>Time</th><th>Peak memory</th><th>Conclusion</th></tr></thead><tbody><tr><td>No reset</td><td><code>78.46s</code></td><td><code>19.34GB</code></td><td>High memory, heavy GC pressure</td></tr><tr><td>Reset after every parse</td><td><code>88.54s</code></td><td><code>2.20GB</code></td><td>Very low memory, but noticeably slower</td></tr></tbody></table></div></div>
+<p>Now the experiments that reset by &quot;file count.&quot;</p>
 
 
 
@@ -388,116 +407,116 @@
 
 
 
-<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>时间</th><th>峰值内存</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table></div></div>
-<p>这张表很能说明问题：</p>
+<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th><code>YAK_ANTLR_CACHE_RESET_FILES</code></th><th>Time</th><th>Peak memory</th></tr></thead><tbody><tr><td><code>100</code></td><td><code>53.01s</code></td><td><code>5.63GB</code></td></tr><tr><td><code>125</code></td><td><code>51.02s</code></td><td><code>6.41GB</code></td></tr><tr><td><code>145</code></td><td><code>50.17s</code></td><td><code>7.09GB</code></td></tr><tr><td><code>150</code></td><td><code>51.95s</code></td><td><code>7.01GB</code></td></tr><tr><td><code>250</code></td><td><code>50.67s</code></td><td><code>9.67GB</code></td></tr></tbody></table></div></div>
+<p>This table is quite telling:</p>
 <ul>
-<li class=""><code>145/150</code> 这一带，是速度上的“甜品点”</li>
-<li class=""><code>100</code> 这一带，更偏向“速度和内存都稳”</li>
+<li class="">The <code>145/150</code> band is the &quot;sweet spot&quot; for speed</li>
+<li class="">The <code>100</code> band leans toward &quot;both speed and memory are stable&quot;</li>
 </ul>
-<p>所以这一轮最后落下来的结论不是：</p>
+<p>So the conclusion that finally landed from this round is not:</p>
 <ul>
-<li class="">某一个值绝对最优</li>
+<li class="">One value being absolutely optimal</li>
 </ul>
-<p>而是：</p>
+<p>But rather:</p>
 <ul>
-<li class="">存在一段明确的甜品区间</li>
-<li class="">默认值应该选一个更稳、更容易接受的点</li>
+<li class="">There exists a clearly defined sweet-spot band</li>
+<li class="">The default should pick a steadier, more acceptable point</li>
 </ul>
-<p>因此主线代码最终选择了：</p>
+<p>Therefore the main-branch code ultimately chose:</p>
 <ul>
-<li class="">默认 <code>100</code></li>
+<li class="">Default <code>100</code></li>
 </ul>
-<p>这个值没有追求单次最快，但它把时间和内存都压在了一个比较稳的区间里。</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="antlr-sll模式和-tokensource优化">ANTLR SLL模式和 TokenSource优化<a href="#antlr-sll模式和-tokensource优化" class="hash-link" aria-label="Direct link to ANTLR SLL模式和 TokenSource优化" title="Direct link to ANTLR SLL模式和 TokenSource优化" translate="no">​</a></h2>
-<p>这一节对应的核心合并 PR 主要是：<code>#4165</code>，Java 相关 fixup 可对应 <code>#4164</code>，而通用 SLL-first 路径则和 <code>#4139</code> 连在一起。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="之前的情况-3">之前的情况<a href="#之前的情况-3" class="hash-link" aria-label="Direct link to 之前的情况" title="Direct link to 之前的情况" translate="no">​</a></h3>
-<p>这一节其实可以分成两条线：</p>
+<p>This value does not chase the single fastest run, but it keeps both time and memory within a relatively stable band.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="antlr-sll-mode-and-tokensource-optimization">ANTLR SLL Mode and TokenSource Optimization<a href="#antlr-sll-mode-and-tokensource-optimization" class="hash-link" aria-label="Direct link to ANTLR SLL Mode and TokenSource Optimization" title="Direct link to ANTLR SLL Mode and TokenSource Optimization" translate="no">​</a></h2>
+<p>The core merged PR corresponding to this section is mainly: <code>#4165</code>; the Java-related fixup maps to <code>#4164</code>, and the general SLL-first path is tied to <code>#4139</code>.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="before-3">Before<a href="#before-3" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before" translate="no">​</a></h3>
+<p>This section actually splits into two lines:</p>
 <ul>
-<li class="">Java：主要问题是各种真实项目、尤其是反编译代码里的 AST 边界</li>
-<li class="">PHP：除了语法边界，还有真正的前端性能热点</li>
+<li class="">Java: the main problems are AST boundaries in various real projects, especially decompiled code</li>
+<li class="">PHP: besides grammar boundaries, there are also genuine front-end performance hotspots</li>
 </ul>
-<p>在更早的时候，各个 front-end 的 parse 行为也没这么统一。</p>
-<p>SLL、LL、缓存复用、错误回退这些事情，缺少一个统一抽象。很多语言前端还是各自处理自己的 parse 细节，这意味着：</p>
+<p>Earlier on, the parse behavior of each front-end was not this unified either.</p>
+<p>SLL, LL, cache reuse, and error fallback lacked a unified abstraction. Many language front-ends still handled their own parse details individually, which meant:</p>
 <ul>
-<li class="">有的地方先走 LL</li>
-<li class="">有的地方自己做回退</li>
-<li class="">有的地方缓存行为不一致</li>
+<li class="">Some places went LL first</li>
+<li class="">Some places did their own fallback</li>
+<li class="">Some places had inconsistent cache behavior</li>
 </ul>
-<p>而这轮之后，一个很重要的基础变化就是：<code>#4139</code> 把 <code>SLL-first</code> 正式收进了统一 helper。</p>
-<p>也就是说，现在各 front-end 默认会先尝试更快、分配更低的 SLL 路径，只有在需要时才回退到 LL，这让“先快跑、失败再兜底”变成了统一默认行为。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="问题-3">问题<a href="#问题-3" class="hash-link" aria-label="Direct link to 问题" title="Direct link to 问题" translate="no">​</a></h3>
-<p>Java 这一侧的主要问题，是：</p>
+<p>After this round, a very important foundational change is: <code>#4139</code> formally folded <code>SLL-first</code> into a unified helper.</p>
+<p>That is, every front-end now defaults to trying the faster, lower-allocation SLL path first, and only falls back to LL when needed, making &quot;run fast first, fall back on failure&quot; the unified default behavior.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem-3">The Problem<a href="#the-problem-3" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem" translate="no">​</a></h3>
+<p>The main problem on the Java side is:</p>
 <ul>
-<li class="">真实反编译项目里会出现大量奇怪 AST 边界</li>
-<li class="">系统经常还没走到后面的性能阶段，就先在前端 AST 这里挂住</li>
+<li class="">A large number of bizarre AST boundaries appear in real decompiled projects</li>
+<li class="">The system often gets stuck at the front-end AST before it ever reaches the later performance stages</li>
 </ul>
-<p>PHP 这一侧的问题更复杂：</p>
+<p>The problem on the PHP side is more complex:</p>
 <ul>
-<li class="">真实 <code>pfsense</code> 项目里有一批 parser 边界问题</li>
-<li class="">更麻烦的是 mixed HTML/PHP 大文件特别慢</li>
+<li class="">The real <code>pfsense</code> project has a batch of parser-boundary problems</li>
+<li class="">What is more troublesome is that large mixed HTML/PHP files are especially slow</li>
 </ul>
-<p>真正把 PHP 这个问题拆开以后，会发现：</p>
+<p>Once you break this PHP problem apart, you find:</p>
 <ul>
-<li class="">不是 SSA build 慢</li>
-<li class="">不是 <code>go test</code> harness 慢</li>
-<li class="">也不是简单的 SLL-&gt;LL fallback 导致慢</li>
+<li class="">It is not that SSA build is slow</li>
+<li class="">It is not that the <code>go test</code> harness is slow</li>
+<li class="">And it is not a simple SLL-&gt;LL fallback causing the slowness</li>
 </ul>
-<p>真正的热点是：</p>
+<p>The real hotspot is:</p>
 <ul>
-<li class="">ANTLR 在 mixed HTML/PHP 输入上发生了 decision explosion</li>
-<li class="">尤其集中在 <code>inlineHtmlStatement</code></li>
+<li class="">ANTLR underwent a decision explosion on mixed HTML/PHP input</li>
+<li class="">Concentrated especially in <code>inlineHtmlStatement</code></li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="方案-3">方案<a href="#方案-3" class="hash-link" aria-label="Direct link to 方案" title="Direct link to 方案" translate="no">​</a></h3>
-<p>这一节的方案分两层。</p>
-<p>第一层，是统一 parse 模式：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-approach-3">The Approach<a href="#the-approach-3" class="hash-link" aria-label="Direct link to The Approach" title="Direct link to The Approach" translate="no">​</a></h3>
+<p>The approach in this section has two layers.</p>
+<p>The first layer is unifying the parse mode:</p>
 <ul>
 <li class=""><code>common/yak/antlr4util/sll_first_parse.go</code></li>
 </ul>
-<p>这一层把：</p>
+<p>This layer folds:</p>
 <ul>
 <li class=""><code>SLL-first</code></li>
-<li class="">fallback 到 <code>LL</code></li>
-<li class="">错误监听</li>
+<li class="">fallback to <code>LL</code></li>
+<li class="">error listening</li>
 <li class="">cache detach</li>
 </ul>
-<p>这些行为收到了统一 helper 里。</p>
-<p>第二层，是 PHP 的专门优化：</p>
+<p>these behaviors into a unified helper.</p>
+<p>The second layer is the PHP-specific optimization:</p>
 <ul>
 <li class=""><code>common/yak/php/php2ssa/html_token_source.go</code></li>
 <li class=""><code>common/yak/php/php2ssa/builder.go</code></li>
 </ul>
-<p>这里引入了一个非常关键的能力：</p>
+<p>Here a very critical capability is introduced:</p>
 <ul>
 <li class=""><code>decorateTokenSource func(antlr.TokenSource) antlr.TokenSource</code></li>
 </ul>
-<p>它允许某个 front-end 在 lexer 和 <code>CommonTokenStream</code> 之间，插入一层自己的 TokenSource 装饰器。</p>
-<p>最后真正最有效的优化，不是继续大改 grammar，而是给 PHP 加了一层 HTML token coalescing：</p>
+<p>It allows a front-end to insert a layer of its own TokenSource decorator between the lexer and the <code>CommonTokenStream</code>.</p>
+<p>In the end, the most effective optimization was not to keep overhauling the grammar, but to add a layer of HTML token coalescing to PHP:</p>
 <ul>
-<li class="">连续 HTML token 合并成更大的块</li>
-<li class="">PHP 起始边界和 XML 边界保留</li>
+<li class="">Consecutive HTML tokens are merged into larger chunks</li>
+<li class="">PHP start boundaries and XML boundaries are preserved</li>
 </ul>
-<p>Java 这一侧，这轮则主要是：</p>
+<p>On the Java side, this round was mainly about:</p>
 <ul>
-<li class="">继续 fixup 真实项目里的 AST 边界</li>
-<li class="">把反编译大目标 clean compile 跑通</li>
+<li class="">Continuing to fix up AST boundaries in real projects</li>
+<li class="">Getting the clean compile of large decompiled targets to run through</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="现在的情况和重构结果-3">现在的情况和重构结果<a href="#现在的情况和重构结果-3" class="hash-link" aria-label="Direct link to 现在的情况和重构结果" title="Direct link to 现在的情况和重构结果" translate="no">​</a></h3>
-<p>现在这条线已经形成了比较清楚的分工：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="current-state-and-refactor-results-3">Current State and Refactor Results<a href="#current-state-and-refactor-results-3" class="hash-link" aria-label="Direct link to Current State and Refactor Results" title="Direct link to Current State and Refactor Results" translate="no">​</a></h3>
+<p>This line has now formed a fairly clear division of labor:</p>
 <ul>
-<li class="">Java：重点在于 fixup 和真实大目标跑通</li>
-<li class="">PHP：重点在于 front-end 性能热点真正被打下来</li>
+<li class="">Java: the focus is on fixups and getting real large targets to run through</li>
+<li class="">PHP: the focus is on genuinely bringing down the front-end performance hotspot</li>
 </ul>
-<p>Java 这一侧，现在最重要的结果是：</p>
+<p>On the Java side, the most important result now is:</p>
 <ul>
-<li class="">真实反编译大目标里的 AST 错误和 panic 已经清到 0</li>
-<li class="">前端不再是第一堵墙</li>
+<li class="">AST errors and panics in real large decompiled targets have been cleaned to 0</li>
+<li class="">The front end is no longer the first wall</li>
 </ul>
-<p>PHP 这一侧，现在最重要的结果是：</p>
+<p>On the PHP side, the most important result now is:</p>
 <ul>
-<li class="">mixed HTML 这个最难看的热点已经被明确定位并压下去</li>
+<li class="">The ugliest hotspot, mixed HTML, has been clearly located and pressed down</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="运行效率对比-3">运行效率对比<a href="#运行效率对比-3" class="hash-link" aria-label="Direct link to 运行效率对比" title="Direct link to 运行效率对比" translate="no">​</a></h3>
-<p>这一节最漂亮的一组数据，来自 PHP。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="efficiency-comparison-3">Efficiency Comparison<a href="#efficiency-comparison-3" class="hash-link" aria-label="Direct link to Efficiency Comparison" title="Direct link to Efficiency Comparison" translate="no">​</a></h3>
+<p>The most beautiful set of data in this section comes from PHP.</p>
 
 
 
@@ -527,123 +546,125 @@
 
 
 
-<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>benchmark</th><th>优化前</th><th>优化后</th><th>提升</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>分配字节</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>分配次数</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table></div></div>
-<p>本地当前主线补跑时，这个 benchmark 也还能稳定在：</p>
+<div class="yakdoc-table"><div class="yakdoc-table__scroll"><table><thead><tr><th>benchmark</th><th>Before</th><th>After</th><th>Improvement</th></tr></thead><tbody><tr><td><code>BenchmarkFrontendPfsenseSystemInformationFixture</code></td><td><code>15.36s/op</code></td><td><code>6.95s/op</code></td><td><code>54.74%</code></td></tr><tr><td>Allocated bytes</td><td><code>15.98 GB/op</code></td><td><code>7.26 GB/op</code></td><td><code>54.59%</code></td></tr><tr><td>Allocations</td><td><code>259,896,130</code></td><td><code>117,823,714</code></td><td><code>54.67%</code></td></tr></tbody></table></div></div>
+<p>When re-run locally on the current main branch, this benchmark also stays stable at:</p>
 <ul>
 <li class=""><code>7.82s/op</code></li>
 </ul>
-<p>说明这条优化已经比较稳定地落到了主线上。</p>
-<p>Java 这一侧，重点不在某个小 benchmark，而在真实项目能不能跑通。</p>
-<p>最终 clean compile 的结果里：</p>
+<p>This shows that this optimization has landed on the main branch fairly stably.</p>
+<p>On the Java side, the focus is not on any single small benchmark, but on whether real projects can run through.</p>
+<p>In the final clean-compile results:</p>
 <ul>
 <li class="">wall time <code>44:10.96</code></li>
 <li class="">parse <code>6m14s</code></li>
 <li class="">save <code>27m25s</code></li>
 </ul>
-<p>它说明的核心问题是：</p>
+<p>The core point it makes is:</p>
 <ul>
-<li class="">Java 前端现在已经不再是第一堵墙</li>
-<li class="">后面的性能重心会继续往 save / persistence 方向推进</li>
+<li class="">The Java front end is now no longer the first wall</li>
+<li class="">The subsequent performance focus will keep shifting toward the save / persistence direction</li>
 </ul>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="ai-agent对于开发实验成本的降低">AI Agent对于开发/实验成本的降低<a href="#ai-agent对于开发实验成本的降低" class="hash-link" aria-label="Direct link to AI Agent对于开发/实验成本的降低" title="Direct link to AI Agent对于开发/实验成本的降低" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="之前的情况-4">之前的情况<a href="#之前的情况-4" class="hash-link" aria-label="Direct link to 之前的情况" title="Direct link to 之前的情况" translate="no">​</a></h3>
-<p>过去做这类性能优化，最贵的成本其实往往不是“写代码”，而是：</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="how-ai-agents-lowered-development-and-experimentation-costs">How AI Agents Lowered Development and Experimentation Costs<a href="#how-ai-agents-lowered-development-and-experimentation-costs" class="hash-link" aria-label="Direct link to How AI Agents Lowered Development and Experimentation Costs" title="Direct link to How AI Agents Lowered Development and Experimentation Costs" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="before-4">Before<a href="#before-4" class="hash-link" aria-label="Direct link to Before" title="Direct link to Before" translate="no">​</a></h3>
+<p>In the past, with this kind of performance optimization, the most expensive cost was often not &quot;writing code,&quot; but:</p>
 <ul>
-<li class="">跑实验</li>
-<li class="">看实验结果</li>
-<li class="">验证思路是不是对</li>
-<li class="">反复跑实验</li>
-<li class="">换参数再跑</li>
-<li class="">换目标再跑</li>
-<li class="">换分支再跑</li>
+<li class="">Running experiments</li>
+<li class="">Reading experiment results</li>
+<li class="">Verifying whether the idea was right</li>
+<li class="">Running experiments repeatedly</li>
+<li class="">Changing parameters and running again</li>
+<li class="">Changing the target and running again</li>
+<li class="">Changing the branch and running again</li>
 </ul>
-<p>尤其是这种工作：</p>
+<p>Especially for this kind of work:</p>
 <ul>
-<li class="">有大量参数组合</li>
-<li class="">同一个目标要反复测</li>
-<li class="">还要保留日志、做对比、回头看</li>
+<li class="">A large number of parameter combinations</li>
+<li class="">The same target must be tested repeatedly</li>
+<li class="">And logs must be kept, comparisons made, and reviews done in hindsight</li>
 </ul>
-<p>人工来做，成本会非常高。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="问题-4">问题<a href="#问题-4" class="hash-link" aria-label="Direct link to 问题" title="Direct link to 问题" translate="no">​</a></h3>
-<p>这轮几个关键优化，本质上都不是“改一下马上就知道对不对”的问题。</p>
-<p>例如：</p>
+<p>Done by hand, the cost would be very high.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-problem-4">The Problem<a href="#the-problem-4" class="hash-link" aria-label="Direct link to The Problem" title="Direct link to The Problem" translate="no">​</a></h3>
+<p>The few key optimizations in this round were, by nature, not &quot;change it and immediately know whether it&#x27;s right&quot; problems.</p>
+<p>For example:</p>
 <ul>
-<li class="">常量池/SSA 搜索优化，需要反复在同一个大目标上看热点变化</li>
-<li class="">ANTLR cache reset，需要做多组参数 sweep</li>
-<li class="">PHP mixed HTML，需要反复跑 benchmark、pprof、对比不同方案</li>
+<li class="">The constant-pool / SSA search optimization needed repeated observation of hotspot changes on the same large target</li>
+<li class="">The ANTLR cache reset needed multiple sets of parameter sweeps</li>
+<li class="">The PHP mixed HTML needed repeated runs of benchmark, pprof, and comparison of different approaches</li>
 </ul>
-<p>如果这些事情都手工做，实验成本会非常夸张。</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="方案-4">方案<a href="#方案-4" class="hash-link" aria-label="Direct link to 方案" title="Direct link to 方案" translate="no">​</a></h3>
-<p>这一轮很值得单独提一句的是：</p>
-<p><strong>AI agent 在这里提供了大量原本很贵、很重复的实验能力。</strong></p>
-<p>开发者真正做的事情，是：</p>
+<p>If all of these were done by hand, the experimentation cost would be exorbitant.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="the-approach-4">The Approach<a href="#the-approach-4" class="hash-link" aria-label="Direct link to The Approach" title="Direct link to The Approach" translate="no">​</a></h3>
+<p>One thing very worth a special mention in this round is:</p>
+<p><strong>AI agents provided a large volume of originally expensive, highly repetitive experimentation capability here.</strong></p>
+<p>What developers actually did was:</p>
 <ul>
-<li class="">判断方向</li>
-<li class="">看到实验结果</li>
-<li class="">决定最终方案</li>
+<li class="">Judge the direction</li>
+<li class="">See the experiment results</li>
+<li class="">Decide the final approach</li>
 </ul>
-<p>而 AI agent 帮忙做的事情，是：</p>
+<p>What the AI agent helped do was:</p>
 <ul>
-<li class="">持续跑统一目标</li>
-<li class="">跑多组参数</li>
-<li class="">跑多个 worktree / 多个分支</li>
-<li class="">把结果整理回来</li>
+<li class="">Continuously run the unified target</li>
+<li class="">Run multiple sets of parameters</li>
+<li class="">Run multiple worktrees / multiple branches</li>
+<li class="">Collate the results back</li>
 </ul>
-<p>最典型的两条线就是：</p>
+<p>The two most typical lines were:</p>
 <ul>
-<li class="">SSA 常量池 / 搜索链实验</li>
-<li class="">ANTLR cache reset 参数 sweep</li>
+<li class="">SSA constant pool / search-chain experiments</li>
+<li class="">ANTLR cache reset parameter sweeps</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="现在的情况和重构结果-4">现在的情况和重构结果<a href="#现在的情况和重构结果-4" class="hash-link" aria-label="Direct link to 现在的情况和重构结果" title="Direct link to 现在的情况和重构结果" translate="no">​</a></h3>
-<p>这件事带来的变化，不是“AI 替开发者写完了优化”，而是：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="current-state-and-refactor-results-4">Current State and Refactor Results<a href="#current-state-and-refactor-results-4" class="hash-link" aria-label="Direct link to Current State and Refactor Results" title="Direct link to Current State and Refactor Results" translate="no">​</a></h3>
+<p>The change brought by this is not &quot;the AI wrote the optimization for the developer,&quot; but rather:</p>
 <ul>
-<li class="">很多原本太贵、太烦、太重复的实验，现在能持续做</li>
-<li class="">多 worktree、多参数、多轮复跑的成本被明显压低了</li>
+<li class="">Many experiments that were originally too expensive, too tedious, and too repetitive can now be run continuously</li>
+<li class="">The cost of multiple worktrees, multiple parameters, and multiple rounds of re-runs has been noticeably driven down</li>
 </ul>
-<p>开发者可以把更多精力放在：</p>
+<p>Developers can put more energy into:</p>
 <ul>
-<li class="">判断根因</li>
-<li class="">决定取舍</li>
-<li class="">设计实验</li>
-<li class="">决策和审核最终实现</li>
+<li class="">Judging root causes</li>
+<li class="">Deciding trade-offs</li>
+<li class="">Designing experiments</li>
+<li class="">Making decisions and reviewing the final implementation</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="运行效率对比-4">运行效率对比<a href="#运行效率对比-4" class="hash-link" aria-label="Direct link to 运行效率对比" title="Direct link to 运行效率对比" translate="no">​</a></h3>
-<p>这一节没有直接对应的“代码运行时间”对比表。</p>
-<p>但它确实改变了这轮优化的产出方式：</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="efficiency-comparison-4">Efficiency Comparison<a href="#efficiency-comparison-4" class="hash-link" aria-label="Direct link to Efficiency Comparison" title="Direct link to Efficiency Comparison" translate="no">​</a></h3>
+<p>This section has no directly corresponding &quot;code run time&quot; comparison table.</p>
+<p>But it did change how this round of optimization was produced:</p>
 <ul>
-<li class="">常量池优化能做多轮基线比对</li>
-<li class="">ANTLR reset 能做整轮 sweep 和复跑</li>
-<li class="">PHP mixed HTML 能把 benchmark、pprof、规则验证一起串起来</li>
+<li class="">The constant-pool optimization allowed multiple rounds of baseline comparison</li>
+<li class="">The ANTLR reset allowed full sweeps and re-runs</li>
+<li class="">The PHP mixed HTML allowed benchmark, pprof, and rule verification to be strung together</li>
 </ul>
-<p>放在这一轮里，这件事最适合用一句话来概括：</p>
-<p><em>这一轮优化让 AI 辅助真正融入了性能调优的工作流。</em></p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="总结">总结<a href="#总结" class="hash-link" aria-label="Direct link to 总结" title="Direct link to 总结" translate="no">​</a></h2>
-<p>如果把这轮 IRify 性能优化 2.0 压成一句话，那就是：</p>
-<p><em>这一轮不是只做了“更快”，而是把几条最关键的路径真正做成了“更快、更稳、更可继续优化”。</em></p>
-<p>这一轮最值得记住的五件事是：</p>
-<p><code>1、SSA</code> 编译和相关文档更统一了，<code>ssa.to/docs</code> 也跟着补齐了。</p>
-<p><code>2、SSA</code> 指令搜索开始从字符串路径走向常量池 / <code>id</code> 路径，真正把大项目里的重复搜索问题打下来。</p>
-<p><code>3、SyntaxFlow / SFVM</code> 的判断语句运行逻辑被重构了一轮，大量值场景下过去会拖很久的旧判断路径，已经被收住了。</p>
-<p><code>4、ANTLR</code> 这一侧，缓存清理已经不是经验值，而是做过 sweep 的“甜品点”选择；PHP mixed HTML 更是拿到了非常扎实的前后对比数据。</p>
-<p>5、AI agent 已经开始明显降低这类开发和实验的成本。</p>
-<p>如果说第一轮做的是“把路打通”，第二轮做的就是：</p>
+<p>Placed in this round, this is best summed up in one sentence:</p>
+<p><em>This round of optimization let AI assistance genuinely merge into the performance-tuning workflow.</em></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion" translate="no">​</a></h2>
+<p>If we compress this round of IRify performance optimization 2.0 into one sentence, it is:</p>
+<p><em>This round did not just do &quot;faster&quot;; it genuinely turned several of the most critical paths into &quot;faster, more stable, and more continually optimizable.&quot;</em></p>
+<p>The five things most worth remembering from this round are:</p>
+<p><code>1. SSA</code> compilation and related documentation are more unified, and <code>ssa.to/docs</code> has been filled in accordingly.</p>
+<p><code>2. SSA</code> instruction search has started moving from a string path to a constant-pool / <code>id</code> path, genuinely bringing down the redundant-search problem in large projects.</p>
+<p><code>3. SyntaxFlow / SFVM</code>&#x27;s conditional-statement execution logic was refactored for a pass; the old judgment paths that used to drag on for a long time under large-value scenarios have been reined in.</p>
+<p><code>4. ANTLR</code> side, cache reset is no longer a rule of thumb but a &quot;sweet-spot&quot; choice that has been swept; and PHP mixed HTML has produced very solid before-and-after comparison data.</p>
+<ol start="5">
+<li class="">AI agents have begun noticeably lowering the cost of this kind of development and experimentation.</li>
+</ol>
+<p>If the first round did &quot;open the road,&quot; the second round did:</p>
 <ul>
-<li class="">把最重的热点打下来</li>
-<li class="">把最糟糕的长尾收掉</li>
-<li class="">把最关键的默认参数选稳</li>
+<li class="">Bring down the heaviest hotspots</li>
+<li class="">Rein in the worst long tails</li>
+<li class="">Pick the steadiest critical default parameters</li>
 </ul>
-<p>而接下来的第三轮、第四轮，方向其实也已经很清楚了：</p>
+<p>And for the third and fourth rounds to come, the direction is in fact already clear:</p>
 <ul>
-<li class="">编译期内存继续压</li>
-<li class="">存储与落库继续压</li>
-<li class="">lazy build 路径继续推进</li>
-<li class="">数据流分析继续细化</li>
+<li class="">Continue squeezing compile-time memory</li>
+<li class="">Continue squeezing storage and database loading</li>
+<li class="">Continue advancing the lazy-build path</li>
+<li class="">Continue refining data-flow analysis</li>
 </ul>
-<p>也就是说，这一轮不是终点，而是一个很明确的中继站。</p>
-<p>从这里开始，IRify 已经不再只是“能跑”，而是开始真正进入“能持续变快”的阶段。</p>
+<p>That is to say, this round is not the end point, but a very clear relay station.</p>
+<p>From here on, IRify is no longer just &quot;able to run&quot;; it has begun genuinely entering the stage of &quot;able to keep getting faster.&quot;</p>
 <hr>
 <blockquote>
-<p>本文首发于 Yak Project 公众号，<a href="https://mp.weixin.qq.com/s/6X_UBqnP8c5TCT7cHCmbSg" target="_blank" rel="noopener noreferrer" class="">阅读原文</a>。</p>
-</blockquote></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" title="2026 年发布的技术文章" class="tag_zVej tagRegular_sFm0" href="/en/blog/tags/year-2026">2026 年</a></li><li class="tag_QGVx"><a rel="tag" title="IRify / SSA / SyntaxFlow 静态代码分析与代码审计实战" class="tag_zVej tagRegular_sFm0" href="/en/blog/tags/topic-code-audit">代码审计</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/blog/memfit-long-term-memory-and-corepact-evaluation"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">技术研究：Memfit AI 长期记忆系统与 C.O.R.E.P.A.C.T. 评估模型</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/blog/memfit-knowledge-base-and-agentic-rag"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">技术研究：Memfit AI 内置知识库系统与 Agentic RAG 实现</div></a></nav></main><aside class="blog-toc-column"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#ssa指令搜索的常量池优化" title="SSA指令搜索的常量池优化" class="table-of-contents__link toc-highlight">SSA指令搜索的常量池优化</a><ul><li><a href="#之前的情况" title="之前的情况" class="table-of-contents__link toc-highlight">之前的情况</a></li><li><a href="#问题" title="问题" class="table-of-contents__link toc-highlight">问题</a></li><li><a href="#方案" title="方案" class="table-of-contents__link toc-highlight">方案</a></li><li><a href="#现在的情况和重构结果" title="现在的情况和重构结果" class="table-of-contents__link toc-highlight">现在的情况和重构结果</a></li><li><a href="#运行效率对比" title="运行效率对比" class="table-of-contents__link toc-highlight">运行效率对比</a></li></ul></li><li><a href="#syntaxflow-判断语句-运行逻辑重构" title="SyntaxFlow 判断语句 运行逻辑重构" class="table-of-contents__link toc-highlight">SyntaxFlow 判断语句 运行逻辑重构</a><ul><li><a href="#之前的情况-1" title="之前的情况" class="table-of-contents__link toc-highlight">之前的情况</a></li><li><a href="#问题-1" title="问题" class="table-of-contents__link toc-highlight">问题</a></li><li><a href="#方案-1" title="方案" class="table-of-contents__link toc-highlight">方案</a></li><li><a href="#现在的情况和重构结果-1" title="现在的情况和重构结果" class="table-of-contents__link toc-highlight">现在的情况和重构结果</a></li><li><a href="#运行效率对比-1" title="运行效率对比" class="table-of-contents__link toc-highlight">运行效率对比</a></li></ul></li><li><a href="#antlr缓存清理机制" title="ANTLR缓存清理机制" class="table-of-contents__link toc-highlight">ANTLR缓存清理机制</a><ul><li><a href="#之前的情况-2" title="之前的情况" class="table-of-contents__link toc-highlight">之前的情况</a></li><li><a href="#问题-2" title="问题" class="table-of-contents__link toc-highlight">问题</a></li><li><a href="#方案-2" title="方案" class="table-of-contents__link toc-highlight">方案</a></li><li><a href="#现在的情况和重构结果-2" title="现在的情况和重构结果" class="table-of-contents__link toc-highlight">现在的情况和重构结果</a></li><li><a href="#运行效率对比-2" title="运行效率对比" class="table-of-contents__link toc-highlight">运行效率对比</a></li></ul></li><li><a href="#antlr-sll模式和-tokensource优化" title="ANTLR SLL模式和 TokenSource优化" class="table-of-contents__link toc-highlight">ANTLR SLL模式和 TokenSource优化</a><ul><li><a href="#之前的情况-3" title="之前的情况" class="table-of-contents__link toc-highlight">之前的情况</a></li><li><a href="#问题-3" title="问题" class="table-of-contents__link toc-highlight">问题</a></li><li><a href="#方案-3" title="方案" class="table-of-contents__link toc-highlight">方案</a></li><li><a href="#现在的情况和重构结果-3" title="现在的情况和重构结果" class="table-of-contents__link toc-highlight">现在的情况和重构结果</a></li><li><a href="#运行效率对比-3" title="运行效率对比" class="table-of-contents__link toc-highlight">运行效率对比</a></li></ul></li><li><a href="#ai-agent对于开发实验成本的降低" title="AI Agent对于开发/实验成本的降低" class="table-of-contents__link toc-highlight">AI Agent对于开发/实验成本的降低</a><ul><li><a href="#之前的情况-4" title="之前的情况" class="table-of-contents__link toc-highlight">之前的情况</a></li><li><a href="#问题-4" title="问题" class="table-of-contents__link toc-highlight">问题</a></li><li><a href="#方案-4" title="方案" class="table-of-contents__link toc-highlight">方案</a></li><li><a href="#现在的情况和重构结果-4" title="现在的情况和重构结果" class="table-of-contents__link toc-highlight">现在的情况和重构结果</a></li><li><a href="#运行效率对比-4" title="运行效率对比" class="table-of-contents__link toc-highlight">运行效率对比</a></li></ul></li><li><a href="#总结" title="总结" class="table-of-contents__link toc-highlight">总结</a></li></ul></div></aside></div></div></div><footer class="flex w-full flex-col bg-[var(--Colors-Use-Main---Gold-Bg)] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]"><div class="mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0 flex flex-col pt-[40px]"><div class="flex flex-col gap-[40px]"><div class="flex flex-col justify-center gap-[20px] min-[1440px]:gap-[20px]"><a class="inline-flex w-fit !no-underline" href="/en/"><img src="/en/img/logo.png" alt="YAK" class="h-[28px] w-auto object-contain md:h-[40px] lg:h-[48px] xl:h-[66px] min-[1440px]:h-[73px]"></a><p class="m-0 font-[&#x27;Noto_Serif_SC_Home&#x27;] font-medium text-[32px] leading-[24px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:text-[40px] lg:text-[48px] xl:text-[64px] min-[1440px]:text-[68px] min-[1440px]:leading-[56px]"><span class="text-[color:var(--Colors-Use-Main---web-Primary)]">/</span> <span class="inline-block whitespace-pre-wrap tracking-tight align-baseline"><span style="color:inherit"></span><span class="inline-block opacity-100 ml-[0.25em] text-[color:var(--Colors-Use-Main---web-Primary)]">/</span></span></p></div><div class="grid w-full grid-cols-1 gap-[40px] sm:grid-cols-2 sm:py-10 lg:grid-cols-4 lg:gap-[80px]"><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">开源</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://ssa.to" target="_blank" rel="noopener noreferrer">IRify · SSA 静态代码分析</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://yaklang.io/javajive/" target="_blank" rel="noopener noreferrer">JavaJive</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://skills.hackbenchmark.com" target="_blank" rel="noopener noreferrer">HackSkills</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/Yaklab/vulinbox/">YakLab</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://hackbenchmark.com" target="_blank" rel="noopener noreferrer">HackBenchmark</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://memfit.ai" target="_blank" rel="noopener noreferrer">Memfit AI</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">官方文档</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/docs/intro">Yak 语言文档</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/docs/intro">API 手册</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/products/intro">Yakit 使用手册</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/Yaklab/vulinbox/">靶场使用手册</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">社区</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/team">关于我们</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/cooperativePartner">合作伙伴</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/blog">技术博客</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">资源</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/download">下载资源</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer">GitHub<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></li><li class="m-0"><button type="button" aria-label="微信公众号" class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex cursor-pointer items-center gap-[4px] border-none bg-transparent p-0" aria-describedby="_R_eielq9_">微信公众号<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://space.bilibili.com/437503777?spm_id_from=333.788.upinfo.head.click" target="_blank" rel="noopener noreferrer">视频教程<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></li></ul></div></div></div></div><div class="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]"><div class="mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0"><div class="flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden"><div class="px-[16px] py-[12px]"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->万径安全<!-- -->.</span></div><div class="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div><div class="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a></div></div><div class="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden"><div class="px-[16px] py-[14px]"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->万径安全<!-- -->.</span></div><div class="flex min-h-[52px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]"><div class="flex min-w-0 flex-1 items-center px-[16px]"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div><div class="flex min-w-0 flex-1 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a></div></div></div><div class="hidden min-h-[64px] w-full items-center justify-between gap-[40px] lg:flex"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->万径安全<!-- -->.</span><div class="flex shrink-0 items-center gap-[40px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div></div></div></div></footer></div>
+<p>This article was first published on the Yak Project WeChat official account. <a href="https://mp.weixin.qq.com/s/6X_UBqnP8c5TCT7cHCmbSg" target="_blank" rel="noopener noreferrer" class="">Read the original</a>.</p>
+</blockquote></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_jXut padding--none margin-left--sm"><li class="tag_QGVx"><a rel="tag" title="2026 年发布的技术文章" class="tag_zVej tagRegular_sFm0" href="/en/blog/tags/year-2026">2026 年</a></li><li class="tag_QGVx"><a rel="tag" title="IRify / SSA / SyntaxFlow 静态代码分析与代码审计实战" class="tag_zVej tagRegular_sFm0" href="/en/blog/tags/topic-code-audit">代码审计</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/blog/memfit-long-term-memory-and-corepact-evaluation"><div class="pagination-nav__sublabel">Newer post</div><div class="pagination-nav__label">Technical Research: The Memfit AI Long-Term Memory System and the C.O.R.E.P.A.C.T. Evaluation Model</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/en/blog/memfit-knowledge-base-and-agentic-rag"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Technical Research: The Memfit AI Built-in Knowledge Base System and Agentic RAG Implementation</div></a></nav></main><aside class="blog-toc-column"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#constant-pool-optimization-for-ssa-instruction-search" title="Constant-Pool Optimization for SSA Instruction Search" class="table-of-contents__link toc-highlight">Constant-Pool Optimization for SSA Instruction Search</a><ul><li><a href="#before" title="Before" class="table-of-contents__link toc-highlight">Before</a></li><li><a href="#the-problem" title="The Problem" class="table-of-contents__link toc-highlight">The Problem</a></li><li><a href="#the-approach" title="The Approach" class="table-of-contents__link toc-highlight">The Approach</a></li><li><a href="#current-state-and-refactor-results" title="Current State and Refactor Results" class="table-of-contents__link toc-highlight">Current State and Refactor Results</a></li><li><a href="#efficiency-comparison" title="Efficiency Comparison" class="table-of-contents__link toc-highlight">Efficiency Comparison</a></li></ul></li><li><a href="#refactor-of-the-syntaxflow-conditional-statement-execution-logic" title="Refactor of the SyntaxFlow Conditional-Statement Execution Logic" class="table-of-contents__link toc-highlight">Refactor of the SyntaxFlow Conditional-Statement Execution Logic</a><ul><li><a href="#before-1" title="Before" class="table-of-contents__link toc-highlight">Before</a></li><li><a href="#the-problem-1" title="The Problem" class="table-of-contents__link toc-highlight">The Problem</a></li><li><a href="#the-approach-1" title="The Approach" class="table-of-contents__link toc-highlight">The Approach</a></li><li><a href="#current-state-and-refactor-results-1" title="Current State and Refactor Results" class="table-of-contents__link toc-highlight">Current State and Refactor Results</a></li><li><a href="#efficiency-comparison-1" title="Efficiency Comparison" class="table-of-contents__link toc-highlight">Efficiency Comparison</a></li></ul></li><li><a href="#antlr-cache-reset-mechanism" title="ANTLR Cache-Reset Mechanism" class="table-of-contents__link toc-highlight">ANTLR Cache-Reset Mechanism</a><ul><li><a href="#before-2" title="Before" class="table-of-contents__link toc-highlight">Before</a></li><li><a href="#the-problem-2" title="The Problem" class="table-of-contents__link toc-highlight">The Problem</a></li><li><a href="#the-approach-2" title="The Approach" class="table-of-contents__link toc-highlight">The Approach</a></li><li><a href="#current-state-and-refactor-results-2" title="Current State and Refactor Results" class="table-of-contents__link toc-highlight">Current State and Refactor Results</a></li><li><a href="#efficiency-comparison-2" title="Efficiency Comparison" class="table-of-contents__link toc-highlight">Efficiency Comparison</a></li></ul></li><li><a href="#antlr-sll-mode-and-tokensource-optimization" title="ANTLR SLL Mode and TokenSource Optimization" class="table-of-contents__link toc-highlight">ANTLR SLL Mode and TokenSource Optimization</a><ul><li><a href="#before-3" title="Before" class="table-of-contents__link toc-highlight">Before</a></li><li><a href="#the-problem-3" title="The Problem" class="table-of-contents__link toc-highlight">The Problem</a></li><li><a href="#the-approach-3" title="The Approach" class="table-of-contents__link toc-highlight">The Approach</a></li><li><a href="#current-state-and-refactor-results-3" title="Current State and Refactor Results" class="table-of-contents__link toc-highlight">Current State and Refactor Results</a></li><li><a href="#efficiency-comparison-3" title="Efficiency Comparison" class="table-of-contents__link toc-highlight">Efficiency Comparison</a></li></ul></li><li><a href="#how-ai-agents-lowered-development-and-experimentation-costs" title="How AI Agents Lowered Development and Experimentation Costs" class="table-of-contents__link toc-highlight">How AI Agents Lowered Development and Experimentation Costs</a><ul><li><a href="#before-4" title="Before" class="table-of-contents__link toc-highlight">Before</a></li><li><a href="#the-problem-4" title="The Problem" class="table-of-contents__link toc-highlight">The Problem</a></li><li><a href="#the-approach-4" title="The Approach" class="table-of-contents__link toc-highlight">The Approach</a></li><li><a href="#current-state-and-refactor-results-4" title="Current State and Refactor Results" class="table-of-contents__link toc-highlight">Current State and Refactor Results</a></li><li><a href="#efficiency-comparison-4" title="Efficiency Comparison" class="table-of-contents__link toc-highlight">Efficiency Comparison</a></li></ul></li><li><a href="#conclusion" title="Conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></aside></div></div></div><footer class="flex w-full flex-col bg-[var(--Colors-Use-Main---Gold-Bg)] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]"><div class="mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0 flex flex-col pt-[40px]"><div class="flex flex-col gap-[40px]"><div class="flex flex-col justify-center gap-[20px] min-[1440px]:gap-[20px]"><a class="inline-flex w-fit !no-underline" href="/en/"><img src="/en/img/logo.png" alt="YAK" class="h-[28px] w-auto object-contain md:h-[40px] lg:h-[48px] xl:h-[66px] min-[1440px]:h-[73px]"></a><p class="m-0 font-[&#x27;Crimson_Text&#x27;] text-[32px] leading-[24px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:text-[40px] lg:text-[48px] xl:text-[64px] min-[1440px]:text-[68px] min-[1440px]:leading-[56px]"><span class="text-[color:var(--Colors-Use-Main---web-Primary)]">/</span> <span class="inline-block whitespace-pre-wrap tracking-tight align-baseline"><span style="color:inherit"></span><span class="inline-block opacity-100 ml-[0.25em] text-[color:var(--Colors-Use-Main---web-Primary)]">/</span></span></p></div><div class="grid w-full grid-cols-1 gap-[40px] sm:grid-cols-2 sm:py-10 lg:grid-cols-4 lg:gap-[80px]"><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">Open Source</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://ssa.to" target="_blank" rel="noopener noreferrer">IRify · SSA Static Code Analysis</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://yaklang.io/javajive/" target="_blank" rel="noopener noreferrer">JavaJive</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://skills.hackbenchmark.com" target="_blank" rel="noopener noreferrer">HackSkills</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/Yaklab/vulinbox/">YakLab</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://hackbenchmark.com" target="_blank" rel="noopener noreferrer">HackBenchmark</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://memfit.ai" target="_blank" rel="noopener noreferrer">Memfit AI</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">Official Documentation</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/docs/intro">Yak Language Docs</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/docs/intro">API Manual</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/products/intro">Yakit Manual</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/Yaklab/vulinbox/">Range Handbook</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">Community</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/team">About Us</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/cooperativePartner">Partners</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/blog">Tech Blog</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/editorial-policy">Editorial and Corrections Policy</a></li></ul></div><div class="min-w-0"><h4 class="m-0 mb-[12px] font-[&#x27;PingFang_SC&#x27;] text-[14px] font-normal leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-4-Help-text)] sm:mb-[16px]">Resources</h4><ul class="m-0 flex list-none flex-col gap-[16px] p-0"><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="/en/download">Downloads</a></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://github.com/yaklang" target="_blank" rel="noopener noreferrer">GitHub<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></li><li class="m-0"><button type="button" aria-label="WeChat Official Account" class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex cursor-pointer items-center gap-[4px] border-none bg-transparent p-0" aria-describedby="_R_eielq9_">WeChat Official Account<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></li><li class="m-0"><a class="font-[&#x27;PingFang_SC&#x27;] text-[16px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)] inline-flex items-center gap-[4px]" href="https://space.bilibili.com/437503777?spm_id_from=333.788.upinfo.head.click" target="_blank" rel="noopener noreferrer">Video Tutorials<span class="inline-flex shrink-0 text-current"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.66675 11.3333L11.3334 4.66663M11.3334 4.66663H4.66675M11.3334 4.66663V11.3333" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></a></li></ul></div></div></div></div><div class="mt-[40px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] bg-[var(--Colors-Use-Main---Gold-Bg)]"><div class="mx-auto box-border w-full px-[20px] min-[756px]:max-w-[min(1440px,calc(100%_-_40px))] min-[756px]:px-0"><div class="flex flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:hidden"><div class="px-[16px] py-[12px]"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->MegaVector<!-- -->.</span></div><div class="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div><div class="border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)] px-[16px] py-[12px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a></div></div><div class="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden"><div class="px-[16px] py-[14px]"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->MegaVector<!-- -->.</span></div><div class="flex min-h-[52px] border-0 border-t border-solid border-t-[var(--Colors-Use-Main---Gold-Focus)]"><div class="flex min-w-0 flex-1 items-center px-[16px]"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div><div class="flex min-w-0 flex-1 items-center border-0 border-l border-solid border-l-[var(--Colors-Use-Main---Gold-Focus)] px-[16px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a></div></div></div><div class="hidden min-h-[64px] w-full items-center justify-between gap-[40px] lg:flex"><span class="font-[&#x27;PingFang_SC&#x27;] text-[12px] leading-[18px] text-[color:var(--Colors-Use-Neutral-Disable)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">Copyright © <!-- -->2026<!-- --> for Yak Project <!-- -->MegaVector<!-- -->.</span><div class="flex shrink-0 items-center gap-[40px]"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802048712" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京公网安备11010802048712号</a><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer" class="font-[&#x27;PingFang_SC&#x27;] text-[14px] leading-[20px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)] !no-underline transition-colors duration-200 hover:text-[color:var(--Colors-Use-Main---web-Primary)]">京ICP备17047700号-3</a></div></div></div></div></footer></div>
 </body>
 </html>
