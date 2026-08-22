@@ -192,6 +192,23 @@ async function main() {
   }
   let total = 0;
   for (const item of specs) total += await verify(item);
+
+  // The OSS rewriter can only replace concrete asset literals in compiled JS.
+  // Guard against reintroducing runtime path manipulation for partner logos.
+  const partnerComponent = fs.readFileSync(
+    path.join(ROOT, "src/components/homeNew/HomePartnerMarquee.tsx"),
+    "utf8",
+  );
+  for (const file of partnerFiles) {
+    const expected = `/img/home-optimized/partners/${webpName(file)}`;
+    if (!partnerComponent.includes(expected)) {
+      throw new Error(`homepage partner component misses explicit OSS asset path: ${expected}`);
+    }
+  }
+  if (partnerComponent.includes('.replace("/img/partner/"')) {
+    throw new Error("homepage partner assets must not be constructed at runtime");
+  }
+
   process.stdout.write(
     `${WRITE ? "Generated and verified" : "Verified"} ${specs.length} homepage assets (${(total / 1024).toFixed(1)} KiB)\n`,
   );

@@ -2,13 +2,39 @@ import React from "react";
 import { COOPERATIVE_PARTNERS } from "../CooperativePartner";
 import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 
-const optimizedPartnerSource = (source: string) =>
-  source
-    .replace("/img/partner/", "/img/home-optimized/partners/")
-    .replace(/\.(?:png|jpe?g)$/i, ".webp");
+// Keep every optimized path as a literal so prepare-oss-assets can replace it
+// with its content-addressed OSS URL. Runtime path manipulation bypasses that
+// build step and can accidentally combine an old asset hash with a new suffix.
+const OPTIMIZED_PARTNER_BY_NAME: Record<string, string> = {
+  亚信安全: "/img/home-optimized/partners/asiainfo-sec.webp",
+  奇安信: "/img/home-optimized/partners/logo.webp",
+  HackingClub: "/img/home-optimized/partners/hacking.webp",
+  米斯特安全: "/img/home-optimized/partners/acmesec.webp",
+  云众可信: "/img/home-optimized/partners/sec-in.webp",
+  "58": "/img/home-optimized/partners/security58.webp",
+  CTstack: "/img/home-optimized/partners/CTstack.webp",
+  E安全: "/img/home-optimized/partners/E安全.webp",
+  嘶吼: "/img/home-optimized/partners/4hou.webp",
+  四叶草安全: "/img/home-optimized/partners/seclover.webp",
+  安全脉搏: "/img/home-optimized/partners/secpulse.webp",
+  智联SRC: "/img/home-optimized/partners/zhaopin.webp",
+  度小满: "/img/home-optimized/partners/duxiaoman.webp",
+  贝壳: "/img/home-optimized/partners/beike.webp",
+  快手: "/img/home-optimized/partners/kuaishou.webp",
+  小米: "/img/home-optimized/partners/xiaomi.webp",
+  无糖信息: "/img/home-optimized/partners/wutang.webp",
+  三叶草: "/img/home-optimized/partners/sycsec.webp",
+  c4安全团队: "/img/home-optimized/partners/c4.webp",
+};
 
 const HomePartnerMarquee: React.FC = () => {
-  const partners = COOPERATIVE_PARTNERS;
+  const partners = COOPERATIVE_PARTNERS.map((partner) => {
+    const optimizedImg = OPTIMIZED_PARTNER_BY_NAME[partner.name];
+    if (!optimizedImg) {
+      throw new Error(`Missing optimized homepage partner asset: ${partner.name}`);
+    }
+    return { ...partner, optimizedImg };
+  });
   const shouldLoadImages = useLoadWhenHomeSlide(1);
   if (!partners.length) return null;
 
@@ -47,7 +73,7 @@ const HomePartnerMarquee: React.FC = () => {
               aria-label={item.name}
             >
               <img
-                src={shouldLoadImages ? optimizedPartnerSource(item.img) : undefined}
+                src={shouldLoadImages ? item.optimizedImg : undefined}
                 alt={item.name}
                 loading="lazy"
                 decoding="async"
