@@ -15,8 +15,7 @@ on:
       - "docusaurus.config.js"
       - "package.json"
       - "yarn.lock"
-      - "scripts/prepare-oss-assets.js"
-      - "scripts/upload-oss-assets.py"
+      - "scripts/**"
       - ".github/workflows/publish-static-assets.yml"
 
 concurrency:
@@ -40,11 +39,25 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Install font subset tooling
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "fonttools[woff]==4.63.0"
+
+      - name: Verify optimized homepage assets
+        run: |
+          yarn check:home-assets
+          python3 scripts/build-home-font-subsets.py
+
       - name: Verify OSS asset pipeline
         run: node scripts/prepare-oss-assets.js --selftest
 
       - name: Build website
         run: yarn run build
+
+      - name: Enforce homepage performance budget
+        run: yarn check:home-performance
+
+      - name: Write publication provenance
+        run: node scripts/write-deploy-meta.js build/deploy-meta.json
 
       - name: Prepare immutable OSS assets
         run: node scripts/prepare-oss-assets.js build

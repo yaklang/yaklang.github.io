@@ -517,7 +517,7 @@ const HomeFooter: React.FC<{
               className={`m-0 ${
                 isEn
                   ? "font-['Crimson_Text']"
-                  : "font-['Noto_Serif_SC'] font-medium"
+                  : "font-['Noto_Serif_SC_Home'] font-medium"
               } text-[32px] leading-[24px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] md:text-[40px] lg:text-[48px] xl:text-[64px] min-[1440px]:text-[68px] min-[1440px]:leading-[56px]`}
             >
               <span className="text-[color:var(--Colors-Use-Main---web-Primary)]">

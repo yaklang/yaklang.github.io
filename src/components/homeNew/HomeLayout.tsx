@@ -67,6 +67,10 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={socialImage} />
+        <link rel="canonical" href={pageUrl} />
+        <link rel="alternate" hrefLang="zh-CN" href={`${siteConfig.url}/`} />
+        <link rel="alternate" hrefLang="en" href={`${siteConfig.url}/en/`} />
+        <link rel="alternate" hrefLang="x-default" href={`${siteConfig.url}/`} />
         <link rel="describedby" href={`${siteConfig.url}/llms.txt`} />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}

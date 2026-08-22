@@ -21,11 +21,22 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Install font subset tooling
+        run: python3 -m pip install --disable-pip-version-check --no-cache-dir "fonttools[woff]==4.63.0"
+
+      - name: Verify optimized homepage assets
+        run: |
+          yarn check:home-assets
+          python3 scripts/build-home-font-subsets.py
+
       - name: Verify OSS asset pipeline
         run: node scripts/prepare-oss-assets.js --selftest
 
       - name: Build
         run: yarn run build
+
+      - name: Enforce homepage performance budget
+        run: yarn check:home-performance
 
       - name: Check OSS asset routing
         run: node scripts/prepare-oss-assets.js build --check

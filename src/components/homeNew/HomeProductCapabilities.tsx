@@ -25,6 +25,7 @@ import {
   HOME_SECTION_CENTER_CLASS,
 } from "./homeSectionLayout";
 import ClickStack, { ClickStackHandle } from "./ClickStack";
+import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 
 // =========================================================
 // 数据模型
@@ -96,7 +97,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       "img/newHome/插件使用.mp4",
     ],
     accent: "#F28C45",
-    bg: "img/newHome/yakit_bg.jpg",
+    bg: "img/home-optimized/products/yakit_bg.webp",
     mediaKind: "video",
   },
   {
@@ -126,7 +127,7 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       "img/newHome/Yaklang 使用AI进行代码修改和编辑.mp4",
     ],
     accent: "#FF7B00",
-    bg: "img/newHome/yaklang_bg.jpg",
+    bg: "img/home-optimized/products/yaklang_bg.webp",
     mediaKind: "video",
   },
   {
@@ -150,12 +151,12 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       },
     ],
     mediaSrc: [
-      "img/newHome/memft1.png",
-      "img/newHome/memft2.png",
-      "img/newHome/memfit3.png",
+      "img/home-optimized/products/memft1.webp",
+      "img/home-optimized/products/memft2.webp",
+      "img/home-optimized/products/memfit3.webp",
     ],
     accent: "var(--Colors-Use-Main---memfit-Primary)",
-    bg: "img/newHome/memfit_bg.jpg",
+    bg: "img/home-optimized/products/memfit_bg.webp",
     mediaKind: "image",
   },
   {
@@ -179,12 +180,12 @@ const getProductBase = (t: (key: string) => string): ProductBase[] => [
       },
     ],
     mediaSrc: [
-      "img/newHome/irify1.png",
-      "img/newHome/irify2.png",
-      "img/newHome/irify3.png",
+      "img/home-optimized/products/irify1.webp",
+      "img/home-optimized/products/irify2.webp",
+      "img/home-optimized/products/irify3.webp",
     ],
     accent: "#6A4AA0",
-    bg: "img/newHome/irify_bg.jpg",
+    bg: "img/home-optimized/products/irify_bg.webp",
     mediaKind: "image",
   },
 ];
@@ -237,7 +238,7 @@ const VideoCard: React.FC<{
     <video
       ref={ref}
       className="block h-full w-full select-none bg-black object-cover object-top"
-      src={shouldLoad ? src : undefined}
+      src={shouldLoad && isFront ? src : undefined}
       controls={false}
       playsInline
       preload={shouldLoad && isFront ? "metadata" : "none"}
@@ -251,9 +252,11 @@ const VideoCard: React.FC<{
 const ImageCard: React.FC<{
   src: string;
   alt: string;
-}> = ({ src, alt }) => (
+  isFront: boolean;
+  shouldLoad: boolean;
+}> = ({ src, alt, isFront, shouldLoad }) => (
   <img
-    src={src}
+    src={shouldLoad && isFront ? src : undefined}
     alt={alt}
     loading="lazy"
     decoding="async"
@@ -369,22 +372,7 @@ const HomeProductCapabilities: React.FC<{
   const stackRef = useRef<ClickStackHandle>(null);
   const [stackSpread, setStackSpread] = useState(25);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [shouldLoadMedia, setShouldLoadMedia] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section || shouldLoadMedia) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        setShouldLoadMedia(true);
-        observer.disconnect();
-      },
-      { rootMargin: "50% 0px", threshold: 0.01 },
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, [shouldLoadMedia]);
+  const shouldLoadMedia = useLoadWhenHomeSlide(2);
 
   useEffect(() => {
     const smallMq = window.matchMedia("(max-width: 767px)");
@@ -435,6 +423,8 @@ const HomeProductCapabilities: React.FC<{
         key={`${productBase.key}-i-${item.src}-${index}`}
         src={item.src}
         alt={item.name}
+        isFront={index === mediaIndex}
+        shouldLoad={shouldLoadMedia}
       />
     ),
   );
@@ -455,7 +445,7 @@ const HomeProductCapabilities: React.FC<{
         >
           <div className="mb-[40px] flex shrink-0 flex-col items-center gap-[4px] sm:mb-[16px] sm:gap-[8px]">
             <div
-              className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
+              className={`${isEn ? "font-['Crimson_Text'] text-[32px] sm:text-[clamp(36px,5vh,56px)]" : "font-['Noto_Serif_SC_Home'] text-[28px] sm:text-[clamp(32px,4.5vh,48px)]"} font-medium leading-[36px] text-[color:var(--Colors-Neutral-100)] sm:leading-[clamp(40px,6vh,64px)]`}
             >
               {t("HomeProductCapabilities.title")}
             </div>
@@ -699,7 +689,7 @@ const HomeProductCapabilities: React.FC<{
                 }`}
               >
                 <h3
-                  className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
+                  className={`m-0 shrink-0 ${isEn ? "font-['Crimson_Text'] text-[28px] sm:text-[32px] 2xl:text-[36px]" : "font-['Noto_Serif_SC_Home'] text-[20px] sm:text-[24px] 2xl:text-[28px]"} font-medium leading-[26px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] sm:leading-[32px] 2xl:leading-[36px]`}
                 >
                   {t("HomeProductCapabilities.coreFeatures")}
                 </h3>

@@ -1,8 +1,15 @@
 import React from "react";
 import { COOPERATIVE_PARTNERS } from "../CooperativePartner";
+import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
+
+const optimizedPartnerSource = (source: string) =>
+  source
+    .replace("/img/partner/", "/img/home-optimized/partners/")
+    .replace(/\.(?:png|jpe?g)$/i, ".webp");
 
 const HomePartnerMarquee: React.FC = () => {
   const partners = COOPERATIVE_PARTNERS;
+  const shouldLoadImages = useLoadWhenHomeSlide(1);
   if (!partners.length) return null;
 
   const track = [...partners, ...partners];
@@ -40,7 +47,7 @@ const HomePartnerMarquee: React.FC = () => {
               aria-label={item.name}
             >
               <img
-                src={item.img}
+                src={shouldLoadImages ? optimizedPartnerSource(item.img) : undefined}
                 alt={item.name}
                 loading="lazy"
                 decoding="async"

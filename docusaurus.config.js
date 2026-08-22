@@ -14,6 +14,23 @@ module.exports = {
     onBrokenLinks: "warn",
     onBrokenAnchors: "warn",
     favicon: "img/favicon.ico",
+    headTags: [
+        {
+            tagName: "link",
+            attributes: {
+                rel: "preconnect",
+                href: "https://aliyun-oss.yaklang.com",
+                crossorigin: "anonymous",
+            },
+        },
+        {
+            tagName: "link",
+            attributes: {
+                rel: "dns-prefetch",
+                href: "//aliyun-oss.yaklang.com",
+            },
+        },
+    ],
     organizationName: "yaklang", // Usually your GitHub org/user name.
     projectName: "yak-project-main-page", // Usually your repo name.
     markdown: {

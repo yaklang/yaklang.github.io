@@ -83,7 +83,7 @@ const HomeCTA: React.FC = () => {
           <div className="relative z-[1] flex flex-col items-center gap-[24px] px-[8px] py-[40px] text-center sm:gap-[28px] sm:px-[40px] sm:py-[48px] xl:py-[56px]">
             <div className="flex flex-col items-center gap-[16px] sm:gap-[12px]">
               <h2
-                className={`m-0 flex flex-col items-center gap-[12px] ${isEn ? "font-['Crimson_Text'] text-[56px]" : "font-['Noto_Serif_SC'] text-[48px]"} font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]`}
+                className={`m-0 flex flex-col items-center gap-[12px] ${isEn ? "font-['Crimson_Text'] text-[56px]" : "font-['Noto_Serif_SC_Home'] text-[48px]"} font-medium leading-[64px] text-[color:var(--Colors-Neutral-100)]`}
               >
                 {t("HomeTestimonialsCTA.ctaTitle")}
                 <span
