@@ -1,18 +1,10 @@
 import { useEffect } from "react";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import HomeLayout from "@site/src/components/homeNew/HomeLayout";
 import HomePageNew from "@site/src/components/homeNew/HomePageNew";
+import { useTranslation } from "react-i18next";
 
 export default function HomeNew() {
-  const { i18n } = useDocusaurusContext();
-  const isEnglish = i18n.currentLocale === "en";
-  const title = isEnglish
-    ? "Yak Project | Open-Source Cybersecurity Infrastructure"
-    : "Yak Project｜开源网络安全基础设施与 Yaklang 生态";
-  const description = isEnglish
-    ? "Yak Project provides Yaklang, Yakit, IRify, Memfit AI, and reusable open-source infrastructure for programmable cybersecurity and application security."
-    : "Yak Project 是万径安全发起的开源网络安全基础设施，提供 Yaklang、Yakit、IRify、Memfit AI 与可编程、可复用的安全能力。";
-
+  const { t } = useTranslation();
   useEffect(() => {
     // 旧首页采用固定 REM 布局（设计基准宽度 ~1232px）。
     // 通过按视口等比缩放根字号，使整页布局在大小屏/移动端等比适配，
@@ -66,8 +58,8 @@ export default function HomeNew() {
 
   return (
     <HomeLayout
-      title={title}
-      description={description}
+      title={t("SiteMetadata.home.title")}
+      description={t("SiteMetadata.home.description")}
     >
       <HomePageNew />
     </HomeLayout>

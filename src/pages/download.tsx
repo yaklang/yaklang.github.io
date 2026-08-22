@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
+import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import {
   Button,
   Card,
@@ -286,13 +286,40 @@ function DownloadContent() {
 }
 
 export default function DownloadResources() {
-  const { siteConfig } = useDocusaurusContext();
+  const { t } = useTranslation();
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="Yaklang / Yakit 技术白皮书、API 文档历史版本与官网全站内容打包下载"
+      title={t("SiteMetadata.download.title")}
+      description={t("SiteMetadata.download.description")}
       wrapperClassName="download-resources-wrapper"
     >
+      <Head>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "@id": "https://yaklang.com/download#software",
+            name: "Yakit",
+            applicationCategory: "SecurityApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            url: "https://yaklang.com/download",
+            description:
+              t("SiteMetadata.download.schemaDescription"),
+            isAccessibleForFree: true,
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
+            author: {
+              "@type": "Organization",
+              name: "Yak Project",
+              url: "https://yaklang.com",
+            },
+          })}
+        </script>
+      </Head>
       <main
         style={{
           background: "var(--Colors-Use-Main---Gold-Bg)",

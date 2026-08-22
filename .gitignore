@@ -11,6 +11,9 @@
 # Production
 /build
 
+# Local docker audit/preview (本地审计用 docker，不入库)
+/docker
+
 # Generated files
 .docusaurus
 .cache-loader

@@ -83,6 +83,21 @@ const encodePath = (value) =>
     .map((segment) => encodeURIComponent(segment))
     .join("/");
 
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+// Webpack asset modules export `__webpack_require__.p + "assets/..."` so the
+// configured baseUrl is applied at runtime. Replacing only the quoted path with
+// an absolute OSS URL would leave `runtime.p + "https://..."`, which becomes
+// `/https://...` after client-side navigation even though SSR HTML is correct.
+const removeWebpackPublicPathBeforeOss = (text, publicBase) =>
+  text.replace(
+    new RegExp(
+      String.raw`\b[A-Za-z_$][\w$]*\.p\s*\+\s*(["'\x60])${escapeRegExp(publicBase)}`,
+      "gu",
+    ),
+    `$1${publicBase}`,
+  );
+
 const listFiles = (root) => {
   const out = [];
   const visit = (dir) => {
@@ -216,7 +231,10 @@ const prepareBuild = ({
       (_match, quote, reference) =>
         `${quote}${rewriteReference(reference)}${quote}`,
     );
-    const rewritten = quotedRewritten.replace(ASSET_REFERENCE, rewriteReference);
+    const rewritten = removeWebpackPublicPathBeforeOss(
+      quotedRewritten.replace(ASSET_REFERENCE, rewriteReference),
+      cleanPublicBase,
+    );
     if (!checkOnly && rewritten !== original) {
       fs.writeFileSync(textFile, rewritten);
     }
@@ -282,7 +300,7 @@ const selftest = () => {
     );
     fs.writeFileSync(
       path.join(root, "bundle.js"),
-      'const media="img/new home/\\u6f14\\u793a video.mp4";const optimized="/img/home-optimized/partners/tiny.webp";',
+      'const media="img/new home/\\u6f14\\u793a video.mp4";const optimized=runtime.p+"img/home-optimized/partners/tiny.webp";',
     );
 
     const manifest = prepareBuild({ buildDir: root, threshold: 8 });
@@ -327,7 +345,9 @@ const selftest = () => {
       !manifest.assets.some((asset) =>
         asset.relativePaths.includes("img/home-optimized/partners/tiny.webp"),
       ) ||
-      js.includes("/img/home-optimized/partners/tiny.webp")
+      js.includes("img/home-optimized/partners/tiny.webp") ||
+      js.includes("runtime.p+") ||
+      js.includes("/https://aliyun-oss.yaklang.com")
     ) {
       throw new Error("small optimized WebP should always be offloaded");
     }

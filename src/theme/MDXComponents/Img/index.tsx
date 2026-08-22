@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 // 统一文档插图：圆角卡片包装 + 居中 + 固定最大宽度 + 点击放大(lightbox)
 // 与 memfit-home 的版式保持一致，让全站截图更整齐、更现代
@@ -52,10 +53,22 @@ export default function MDXImg(props: Props): ReactNode {
     )
   );
   const { className, onLoad, ...imgProps } = props;
+  // 按当前 locale 输出无障碍/提示文案，英文站避免出现中文
+  const {
+    i18n: { currentLocale },
+  } = useDocusaurusContext();
+  const isEn = currentLocale === "en";
+  const labels = {
+    figureFallback: isEn ? "Documentation figure" : "文档插图",
+    enlarge: isEn ? "Click to enlarge" : "点击放大",
+    close: isEn ? "Close preview" : "关闭预览",
+    collapsed: isEn ? "Tall image collapsed" : "长图已折叠",
+    expand: isEn ? "Click to expand" : "点击展开",
+  };
   const altText =
     typeof imgProps.alt === "string" && imgProps.alt.length > 0
       ? imgProps.alt
-      : "文档插图";
+      : labels.figureFallback;
 
   const handleLoad = useCallback<React.ReactEventHandler<HTMLImageElement>>(
     (event) => {
@@ -105,7 +118,7 @@ export default function MDXImg(props: Props): ReactNode {
             <button
               type="button"
               className="yakdoc-lightbox__close"
-              aria-label="关闭预览"
+              aria-label={labels.close}
               onClick={() => setIsOpen(false)}
             >
               ×
@@ -129,7 +142,7 @@ export default function MDXImg(props: Props): ReactNode {
         type="button"
         className="yakdoc-figure"
         data-layout={layout}
-        aria-label={`点击放大: ${altText}`}
+        aria-label={`${labels.enlarge}: ${altText}`}
         onClick={() => setIsOpen(true)}
       >
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
@@ -142,8 +155,8 @@ export default function MDXImg(props: Props): ReactNode {
         />
         {layout === "tall" && (
           <span className="yakdoc-expand-hint" aria-hidden="true">
-            <span className="yakdoc-expand-hint__text">长图已折叠</span>
-            <span className="yakdoc-expand-hint__button">点击展开</span>
+            <span className="yakdoc-expand-hint__text">{labels.collapsed}</span>
+            <span className="yakdoc-expand-hint__button">{labels.expand}</span>
           </span>
         )}
       </button>

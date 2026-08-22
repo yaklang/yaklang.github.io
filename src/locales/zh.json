@@ -153,6 +153,7 @@
       "yakLabHandbook": "靶场使用手册",
       "aboutUs": "关于我们",
       "partners": "合作伙伴",
+      "editorialPolicy": "编辑与更正政策",
       "downloads": "下载资源",
       "github": "GitHub",
       "wechatOfficial": "微信公众号",
@@ -1141,6 +1142,25 @@
   "CooperativePartner": {
     "title": "合作伙伴",
     "subtitle": "感谢各位合作伙伴的支持，以下合作伙伴排序不分先后"
+  },
+  "SiteMetadata": {
+    "home": {
+      "title": "Yak Project | 开源网络安全基础设施",
+      "description": "以 Yaklang 与 Yakit 为核心，面向安全研发、渗透测试、代码分析、AI Agent 与自动化的开源网络安全基础设施。"
+    },
+    "download": {
+      "title": "下载资源：Yakit 白皮书、API 文档与离线包",
+      "description": "下载 Yakit 技术白皮书、Yaklang API 文档历史版本与 Yak Project 官网离线内容包。",
+      "schemaDescription": "Yakit 是基于 Yaklang 引擎构建的开源跨平台网络安全工作台。"
+    },
+    "team": {
+      "title": "关于 Yak Project：开源网络安全基础设施团队",
+      "description": "了解 Yak Project 团队及其围绕 Yaklang、Yakit、IRify 与安全研发构建的开源网络安全生态。"
+    },
+    "irify": {
+      "title": "IRify：SSA 驱动的静态代码安全分析",
+      "description": "IRify 基于 YAK SSA 与 SyntaxFlow，为安全团队提供可复现、可扩展的多语言静态代码安全分析能力。"
+    }
   },
   "DownloadResources": {
     "title": "下载资源",

@@ -1,15 +1,14 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { IRify } from "../components/IRify";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
-    const { siteConfig } = useDocusaurusContext();
-    
+    const { t } = useTranslation();
     return (
         <Layout
-            title={`Yak Language ${siteConfig.title}`}
-            description="Web安全能力研发最强语言"
+            title={t("SiteMetadata.irify.title")}
+            description={t("SiteMetadata.irify.description")}
         >
             <main>
                 <IRify />

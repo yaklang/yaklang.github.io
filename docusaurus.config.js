@@ -1,14 +1,80 @@
 const remarkSanitizeAutolinks = require("./scripts/remark-sanitize-autolinks");
 
+const siteUrl = "https://yaklang.com";
+const organizationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": `${siteUrl}/#organization`,
+            name: "Yak Project",
+            alternateName: ["Yaklang", "Yakit"],
+            url: siteUrl,
+            logo: `${siteUrl}/img/yaklogo.png`,
+            // sameAs 必须指向该实体在「其它」平台上的权威表示，禁止自引用站点 URL。
+            sameAs: [
+                "https://github.com/yaklang",
+                "https://github.com/yaklang/yaklang",
+                "https://github.com/yaklang/yakit",
+                // 官方 Bilibili 频道（与 HomeFooter 中的链接一致）
+                "https://space.bilibili.com/437503777",
+                // 待补充：建立 YouTube / LinkedIn / Wikidata / Wikipedia 实体后追加其 URL
+            ],
+            description:
+                "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${siteUrl}/#website`,
+            name: "Yak Project",
+            url: siteUrl,
+            inLanguage: ["zh-CN", "en"],
+            description:
+                "Official documentation, technical articles, downloads, and open-source project information for the Yaklang cybersecurity ecosystem.",
+            publisher: { "@id": `${siteUrl}/#organization` },
+        },
+        // 旗舰产品实体：Yakit 是可下载的跨平台安全工作台。给 AI 搜索引擎一个
+        // 明确的产品实体（applicationCategory/operatingSystem/offers），便于被引用。
+        // 仅写入可核实字段；aggregateRating/version/screenshot 待有真实来源后再补。
+        {
+            "@type": "SoftwareApplication",
+            "@id": `${siteUrl}/yakit#software`,
+            name: "Yakit",
+            applicationCategory: "SecurityApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            url: `${siteUrl}/products/intro`,
+            downloadUrl: "https://github.com/yaklang/yakit/releases",
+            inLanguage: ["zh-CN", "en"],
+            description:
+                "Yakit is an integrated, cross-platform security workbench built on the Yaklang security DSL, combining MITM proxy, Web Fuzzer, codec, plugin store, and AI-agent orchestration for penetration testing and security engineering.",
+            featureList: [
+                "MITM Proxy",
+                "Web Fuzzer",
+                "Codec",
+                "Plugin Store",
+                "Hot Reload",
+                "AI Agent Orchestration",
+            ],
+            author: { "@id": `${siteUrl}/#organization` },
+            publisher: { "@id": `${siteUrl}/#organization` },
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+            },
+        },
+    ],
+};
+
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
     i18n: {
         defaultLocale: "zh-CN",
         locales: ["zh-CN", "en"],
     },
-    title: "Yak Program Language",
-    tagline: "Yak 是一门 Web 安全研发领域垂直语言",
-    url: "https://yaklang.com",
+    title: "Yak Project",
+    tagline: "开源网络安全基础设施",
+    url: siteUrl,
     baseUrl: "/",
     // 迁移期：将断链降级为 warn，避免历史内容阻塞构建；内容修复后可恢复为 throw
     onBrokenLinks: "warn",
@@ -45,6 +111,11 @@ module.exports = {
         image: "img/newHome/now.webp",
         metadata: [
             {
+                name: "description",
+                content:
+                    "Yak Project 是以 Yaklang 为核心的开源网络安全基础设施，提供 Yakit、IRify、Memfit AI 与安全研发文档。",
+            },
+            {
                 name: "keywords",
                 content:
                     "Yak Project, Yaklang, Yakit, IRify, Memfit AI, 网络安全, 开源安全, 安全开发, cybersecurity, application security",
@@ -55,7 +126,13 @@ module.exports = {
                     "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
             },
             { property: "og:site_name", content: "Yak Project" },
+            { property: "og:image", content: `${siteUrl}/img/newHome/now.webp` },
+            { name: "twitter:card", content: "summary_large_image" },
+            { name: "twitter:image", content: `${siteUrl}/img/newHome/now.webp` },
             { name: "theme-color", content: "#f9f6ef" },
+            // Bing Webmaster Tools 所有权验证：暂未启用，避免把占位符内容上线到生产。
+            // 取得真实验证码后，在下方取消注释并填入即可：
+            // { name: "msvalidate.01", content: "<REAL-BING-VERIFICATION-CODE>" },
         ],
         colorMode: {
             // "light" | "dark"
@@ -218,6 +295,10 @@ module.exports = {
                             label: "官方文档",
                             href: "/docs/intro",
                         },
+                        {
+                            label: "常见问题 FAQ",
+                            href: "/faq",
+                        },
                     ],
                 },
                 {
@@ -226,6 +307,10 @@ module.exports = {
                         {
                             label: "关于我们",
                             href: "/team",
+                        },
+                        {
+                            label: "Editorial Policy / 编辑政策",
+                            href: "/editorial-policy",
                         },
                     ],
                 },
@@ -238,6 +323,7 @@ module.exports = {
     },
     plugins: [
         "docusaurus-plugin-sass",
+        require.resolve("./plugins/geo-metadata-plugin"),
         [
             "@docusaurus/plugin-content-docs",
             {
@@ -320,11 +406,25 @@ module.exports = {
                         copyright: `Copyright © ${new Date().getFullYear()} Yak Project.`,
                     },
                 },
+                sitemap: {
+                    lastmod: "date",
+                    // 不再整体排除 en 路由：已翻译为英文的 en 页应进入 sitemap，
+                    // 未翻译（zh 回退、含 CJK）的 en 页由 geo-metadata-plugin
+                    // 在 postBuild 标记 noindex 后从 sitemap 移除。
+                    ignorePatterns: [],
+                },
                 theme: {
                     customCss: require.resolve("./src/css/custom.scss"),
                 },
             },
         ],
+    ],
+    headTags: [
+        {
+            tagName: "script",
+            attributes: { type: "application/ld+json" },
+            innerHTML: JSON.stringify(organizationSchema),
+        },
     ],
 
 };

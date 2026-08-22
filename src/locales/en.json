@@ -153,6 +153,7 @@
       "yakLabHandbook": "Range Handbook",
       "aboutUs": "About Us",
       "partners": "Partners",
+      "editorialPolicy": "Editorial and Corrections Policy",
       "downloads": "Downloads",
       "github": "GitHub",
       "wechatOfficial": "WeChat Official Account",
@@ -1141,6 +1142,25 @@
   "CooperativePartner": {
     "title": "Partners",
     "subtitle": "Thank you to all partners for their support. The following partners are listed in no particular order."
+  },
+  "SiteMetadata": {
+    "home": {
+      "title": "Yak Project | Open-Source Cybersecurity Infrastructure",
+      "description": "Open-source cybersecurity infrastructure for security development, testing, code analysis, AI agents, and automation, built around Yaklang and Yakit."
+    },
+    "download": {
+      "title": "Downloads: Yakit White Paper, API Docs, and Offline Packages",
+      "description": "Download the Yakit technical white paper, archived Yaklang API documentation, and offline packages of the Yak Project website.",
+      "schemaDescription": "Yakit is an open-source, cross-platform security workbench powered by the Yaklang engine."
+    },
+    "team": {
+      "title": "About Yak Project: Open-Source Cybersecurity Team",
+      "description": "Meet the Yak Project team and the open-source cybersecurity ecosystem built around Yaklang, Yakit, IRify, and security engineering."
+    },
+    "irify": {
+      "title": "IRify: SSA-Powered Static Application Security Testing",
+      "description": "IRify uses YAK SSA and SyntaxFlow to provide reproducible, extensible, multi-language static application security testing."
+    }
   },
   "DownloadResources": {
     "title": "Downloads",

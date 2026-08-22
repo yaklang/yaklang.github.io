@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Yaklang 是面向网络安全研发的领域编程语言，通过统一语言、工具库与运行环境融合扫描、PoC、流量分析和安全自动化能力。
 ---
 
 # Yak：致力于安全能力融合的语言

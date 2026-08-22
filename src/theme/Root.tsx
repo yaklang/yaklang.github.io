@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 // antd v5 在 React 19 下的兼容补丁，必须在应用入口尽早引入
 import "@ant-design/v5-patch-for-react-19";
 // 全局初始化 react-i18next，保证各页面组件的 useTranslation 可用
-import "../i18n";
+import i18n from "../i18n";
 // 全局侧边栏搜索过滤(纯前端 DOM 过滤，覆盖所有文档与博客侧边栏)
 import SidebarFilter from "./SidebarFilter";
 // 全局搜索 worker Provider: 让 worker 在应用根挂载一次,
@@ -38,6 +39,13 @@ function useRegisterSearchSw() {
 }
 
 export default function Root({ children }: { children: React.ReactNode }) {
+  const { i18n: docusaurusI18n } = useDocusaurusContext();
+  // Docusaurus 在构建期为 /en/ 单独 SSR；同步 locale 才能让 react-i18next
+  // 输出英文文案，而不是把中文首页错误标记为 hreflang="en"。
+  const locale = docusaurusI18n.currentLocale?.startsWith("en") ? "en" : "zh";
+  if (i18n.language !== locale) {
+    void i18n.changeLanguage(locale);
+  }
   useRegisterSearchSw();
   return (
     <HomeThemeProvider>
