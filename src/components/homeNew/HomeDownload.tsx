@@ -74,6 +74,9 @@ const DownloadFlowerBg = () => {
         src={flowerSrc}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         className="absolute top-1/2 m-0 h-auto -translate-x-full -translate-y-1/2"
         style={{
           left: layout.left,
@@ -104,6 +107,8 @@ const PlatformOsIcon: React.FC<{ os: OsIconKind }> = ({ os }) => {
         src={greySrc}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
         className="h-full w-full transition-opacity duration-200 group-hover:opacity-0"
       />
       {isDark ? (
@@ -121,6 +126,8 @@ const PlatformOsIcon: React.FC<{ os: OsIconKind }> = ({ os }) => {
           src={colorSrc}
           alt=""
           aria-hidden
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         />
       )}

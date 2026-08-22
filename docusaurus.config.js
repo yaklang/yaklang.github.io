@@ -25,6 +25,21 @@ module.exports = {
         },
     },
     themeConfig: {
+        image: "img/newHome/now.webp",
+        metadata: [
+            {
+                name: "keywords",
+                content:
+                    "Yak Project, Yaklang, Yakit, IRify, Memfit AI, 网络安全, 开源安全, 安全开发, cybersecurity, application security",
+            },
+            {
+                name: "robots",
+                content:
+                    "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+            },
+            { property: "og:site_name", content: "Yak Project" },
+            { name: "theme-color", content: "#f9f6ef" },
+        ],
         colorMode: {
             // "light" | "dark"
             defaultMode: "light",

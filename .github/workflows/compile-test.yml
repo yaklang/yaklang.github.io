@@ -21,5 +21,11 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Verify OSS asset pipeline
+        run: node scripts/prepare-oss-assets.js --selftest
+
       - name: Build
         run: yarn run build
+
+      - name: Check OSS asset routing
+        run: node scripts/prepare-oss-assets.js build --check

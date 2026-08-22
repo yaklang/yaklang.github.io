@@ -4,7 +4,14 @@ import HomeLayout from "@site/src/components/homeNew/HomeLayout";
 import HomePageNew from "@site/src/components/homeNew/HomePageNew";
 
 export default function HomeNew() {
-  const { siteConfig } = useDocusaurusContext();
+  const { i18n } = useDocusaurusContext();
+  const isEnglish = i18n.currentLocale === "en";
+  const title = isEnglish
+    ? "Yak Project | Open-Source Cybersecurity Infrastructure"
+    : "Yak Project｜开源网络安全基础设施与 Yaklang 生态";
+  const description = isEnglish
+    ? "Yak Project provides Yaklang, Yakit, IRify, Memfit AI, and reusable open-source infrastructure for programmable cybersecurity and application security."
+    : "Yak Project 是万径安全发起的开源网络安全基础设施，提供 Yaklang、Yakit、IRify、Memfit AI 与可编程、可复用的安全能力。";
 
   useEffect(() => {
     // 旧首页采用固定 REM 布局（设计基准宽度 ~1232px）。
@@ -59,8 +66,8 @@ export default function HomeNew() {
 
   return (
     <HomeLayout
-      title={`Yak Project - ${siteConfig.title}`}
-      description="万径安全旗下被广泛使用的开源网络安全基础设施"
+      title={title}
+      description={description}
     >
       <HomePageNew />
     </HomeLayout>

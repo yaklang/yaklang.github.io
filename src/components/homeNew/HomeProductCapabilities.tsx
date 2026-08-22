@@ -205,82 +205,20 @@ const resolveProducts = (t: (key: string) => string): Product[] =>
 
 const padIndex = (n: number) => String(n).padStart(2, "0");
 
-/** 无 poster 时用 Canvas 从视频截取首帧作为 poster，避免 iOS Safari 黑屏 */
-const captureFirstFrame = (src: string): Promise<string | null> => {
-  return new Promise((resolve) => {
-    const video = document.createElement("video");
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.crossOrigin = "anonymous";
-
-    const cleanup = () => {
-      video.removeEventListener("loadeddata", onLoaded);
-      video.removeEventListener("error", onError);
-      video.pause();
-      video.src = "";
-      video.load();
-    };
-
-    const onError = () => {
-      cleanup();
-      resolve(null);
-    };
-
-    const onLoaded = () => {
-      if (video.readyState < 2 || !video.videoWidth || !video.videoHeight) {
-        return;
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) {
-        cleanup();
-        resolve(null);
-        return;
-      }
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      cleanup();
-      try {
-        resolve(canvas.toDataURL("image/jpeg", 0.92));
-      } catch {
-        resolve(null);
-      }
-    };
-
-    video.addEventListener("loadeddata", onLoaded, { once: true });
-    video.addEventListener("error", onError, { once: true });
-    video.src = src;
-  });
-};
-
 // =========================================================
 // 媒体卡片
 // =========================================================
 const VideoCard: React.FC<{
   src: string;
   isFront: boolean;
-}> = ({ src, isFront }) => {
+  shouldLoad: boolean;
+}> = ({ src, isFront, shouldLoad }) => {
   const ref = useRef<HTMLVideoElement | null>(null);
-  const [poster, setPoster] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    setPoster(null);
-    captureFirstFrame(src).then((url) => {
-      if (cancelled || !url) return;
-      setPoster(url);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [src]);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    if (isFront) {
+    if (shouldLoad && isFront) {
       video.muted = true;
       video.playsInline = true;
       const playPromise = video.play();
@@ -293,17 +231,16 @@ const VideoCard: React.FC<{
       video.pause();
       video.currentTime = 0;
     }
-  }, [isFront]);
+  }, [isFront, shouldLoad]);
 
   return (
     <video
       ref={ref}
       className="block h-full w-full select-none bg-black object-cover object-top"
-      src={src}
-      poster={poster ?? undefined}
+      src={shouldLoad ? src : undefined}
       controls={false}
       playsInline
-      preload="metadata"
+      preload={shouldLoad && isFront ? "metadata" : "none"}
       muted
       loop
       data-no-stack-cycle={isFront ? "" : undefined}
@@ -318,6 +255,9 @@ const ImageCard: React.FC<{
   <img
     src={src}
     alt={alt}
+    loading="lazy"
+    decoding="async"
+    fetchPriority="low"
     className="pointer-events-none block h-full w-full select-none object-cover object-center"
     draggable={false}
   />
@@ -428,6 +368,23 @@ const HomeProductCapabilities: React.FC<{
   const [mediaIndex, setMediaIndex] = useState(0);
   const stackRef = useRef<ClickStackHandle>(null);
   const [stackSpread, setStackSpread] = useState(25);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [shouldLoadMedia, setShouldLoadMedia] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || shouldLoadMedia) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setShouldLoadMedia(true);
+        observer.disconnect();
+      },
+      { rootMargin: "50% 0px", threshold: 0.01 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [shouldLoadMedia]);
 
   useEffect(() => {
     const smallMq = window.matchMedia("(max-width: 767px)");
@@ -471,6 +428,7 @@ const HomeProductCapabilities: React.FC<{
         key={`${productBase.key}-v-${item.src}-${index}`}
         src={item.src}
         isFront={index === mediaIndex}
+        shouldLoad={shouldLoadMedia}
       />
     ) : (
       <ImageCard
@@ -484,7 +442,10 @@ const HomeProductCapabilities: React.FC<{
   const swipe = useSwipeNext(goNext);
 
   return (
-    <section className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]">
+    <section
+      ref={sectionRef}
+      className="box-border flex h-full w-full flex-col overflow-hidden bg-[var(--Colors-Use-Main---Gold-Bg)]"
+    >
       {/* 与 HomeDownload 一致：外层居中区 + 内层版心 max-h-full，避免翻页屏被 flex-1 拉得过高 */}
       <div
         className={`relative z-[1] min-h-0 w-full overflow-hidden ${HOME_SECTION_CENTER_CLASS}`}
@@ -564,7 +525,9 @@ const HomeProductCapabilities: React.FC<{
                 <div
                   className="pointer-events-none absolute inset-0 transition-[background] duration-300"
                   style={{
-                    background: `url(${stageBg}) lightgray 50% / cover no-repeat`,
+                    background: shouldLoadMedia
+                      ? `url(${stageBg}) lightgray 50% / cover no-repeat`
+                      : "var(--Colors-Use-Main---Gold-Focus)",
                     opacity: 0.6,
                   }}
                   aria-hidden

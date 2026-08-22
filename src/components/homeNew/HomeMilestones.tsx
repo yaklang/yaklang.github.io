@@ -745,6 +745,9 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
                               <img
                                 src={item.image}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
+                                fetchPriority="low"
                                 className={`absolute inset-0 block h-full w-full object-cover transition-opacity duration-200 ${
                                   active ? "opacity-100" : "opacity-0"
                                 }`}

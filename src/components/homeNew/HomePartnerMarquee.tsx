@@ -42,6 +42,9 @@ const HomePartnerMarquee: React.FC = () => {
               <img
                 src={item.img}
                 alt={item.name}
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
                 style={item.scale ? { scale: item.scale } : undefined}
                 className="h-[28px] w-auto max-w-[140px] object-contain"
               />

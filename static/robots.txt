@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yaklang.com/sitemap.xml
+
+# Curated project context for AI agents: https://yaklang.com/llms.txt

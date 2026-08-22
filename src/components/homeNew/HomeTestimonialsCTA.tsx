@@ -186,6 +186,9 @@ const TestimonialCard: React.FC<AppraiseItem> = ({
         <img
           src={img}
           alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           className="h-[32px] w-[32px] shrink-0 rounded-full object-cover sm:h-[40px] sm:w-[40px]"
         />
         <div className="flex min-w-0 flex-col gap-[2px]">
