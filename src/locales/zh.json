@@ -180,7 +180,8 @@
     "titleHighlight1": "开源网络",
     "titleHighlight2": "安全基础设施",
     "title": "广泛使用的开源网络安全基础设施",
-    "subtitle": "Powered by CDSL-Yaklang - 万径安全旗下为网络安全而生的编程语言"
+    "subtitle": "Powered by CDSL-Yaklang - 万径安全旗下为网络安全而生的编程语言",
+    "definition": "Yak Project 是以 Yaklang 安全编程语言为核心的开源网络安全基础设施，提供 Yakit 安全工作台、IRify 静态分析与 Memfit AI，覆盖渗透测试、代码审计与安全自动化。"
   },
   "HomeMilestones": {
     "title": "里程碑",

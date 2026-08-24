@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
-import Head from "@docusaurus/Head";
 import Link from "@docusaurus/Link";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import {
@@ -125,7 +124,8 @@ function DownloadContent() {
         paddingRight: 16,
       }}
     >
-      <Title level={2} className={`${serifTitleClass} ${isEn ? "!text-[38px]" : ""}`}>{t("DownloadResources.title")}</Title>
+      {/* GEO：页面唯一 H1（此前最高仅 h2，AI 摘录缺少页面主题锚点） */}
+      <Title level={1} className={`${serifTitleClass} ${isEn ? "!text-[38px]" : ""}`}>{t("DownloadResources.title")}</Title>
       <Paragraph type="secondary">{t("DownloadResources.intro")}</Paragraph>
 
       <Card
@@ -293,33 +293,10 @@ export default function DownloadResources() {
       description={t("SiteMetadata.download.description")}
       wrapperClassName="download-resources-wrapper"
     >
-      <Head>
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "@id": "https://yaklang.com/download#software",
-            name: "Yakit",
-            applicationCategory: "SecurityApplication",
-            operatingSystem: "Windows, macOS, Linux",
-            url: "https://yaklang.com/download",
-            description:
-              t("SiteMetadata.download.schemaDescription"),
-            isAccessibleForFree: true,
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-              availability: "https://schema.org/InStock",
-            },
-            author: {
-              "@type": "Organization",
-              name: "Yak Project",
-              url: "https://yaklang.com",
-            },
-          })}
-        </script>
-      </Head>
+      {/* SoftwareApplication JSON-LD 已由 docusaurus.config.js 全站 @graph
+          统一承载（@id: yaklang.com/yakit#software）。此处不再重复输出，
+          避免同 @id 双实体割裂归并。downloadUrl/isAccessibleForFree 等
+          字段已在 config @graph 中补齐。 */}
       <main
         style={{
           background: "var(--Colors-Use-Main---Gold-Bg)",

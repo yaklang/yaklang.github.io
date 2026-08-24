@@ -23,6 +23,18 @@ const FAQ = {
       {
         q: "Yakit 是什么？它和 Yaklang 有什么区别？",
         a: "Yakit 是基于 Yaklang 构建的开源、跨平台网络安全工作台（GUI），面向日常渗透测试与安全协作；Yaklang 是其底层的领域编程语言。两者同属 Yak Project 生态，定位互补。",
+        // 对比表格（GEO：Perplexity 等对表格形态引用率最高，此前全站零表格）。
+        // 仅用于可见内容，不进入 FAQPage JSON-LD。
+        table: {
+          columns: ["维度", "Yaklang", "Yakit"],
+          rows: [
+            ["形态", "领域专用编程语言（CDSL-YAK）与运行时", "跨平台桌面安全工作台（GUI）"],
+            ["使用方式", "编写并运行 Yak 脚本：扫描、PoC、漏洞验证、流量分析", "图形界面操作：MITM、Web Fuzzer、编解码、插件市场"],
+            ["面向人群", "安全能力研发者", "渗透测试工程师与安全协作团队"],
+            ["典型用途", "安全能力编程与自动化", "日常渗透测试与安全工作流"],
+            ["源码仓库", "github.com/yaklang/yaklang", "github.com/yaklang/yakit"],
+          ],
+        },
       },
       {
         q: "Yakit 支持哪些操作系统？",
@@ -57,6 +69,16 @@ const FAQ = {
       {
         q: "What is Yakit and how is it different from Yaklang?",
         a: "Yakit is an open-source, cross-platform cybersecurity workbench (GUI) built on Yaklang for day-to-day penetration testing and security collaboration; Yaklang is the underlying domain language. Both belong to the Yak Project ecosystem and are complementary.",
+        table: {
+          columns: ["Dimension", "Yaklang", "Yakit"],
+          rows: [
+            ["Form", "Domain-specific language (CDSL-YAK) and runtime", "Cross-platform desktop security workbench (GUI)"],
+            ["Usage", "Write and run Yak scripts: scanning, PoC, vulnerability validation, traffic analysis", "GUI workflows: MITM, Web Fuzzer, codec, plugin store"],
+            ["Audience", "Security capability developers", "Penetration testers and collaboration teams"],
+            ["Typical use", "Security capability programming and automation", "Day-to-day pentesting and security workflows"],
+            ["Repository", "github.com/yaklang/yaklang", "github.com/yaklang/yakit"],
+          ],
+        },
       },
       {
         q: "Which operating systems does Yakit support?",
@@ -103,7 +125,7 @@ export default function FaqPage() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     datePublished: "2026-08-13",
-    dateModified: "2026-08-13",
+    dateModified: "2026-08-24",
     mainEntity: content.items.map((item) => ({
       "@type": "Question",
       name: item.q,
@@ -183,6 +205,55 @@ export default function FaqPage() {
                 >
                   {item.a}
                 </p>
+                {item.table && (
+                  <table
+                    style={{
+                      width: "100%",
+                      marginTop: "14px",
+                      borderCollapse: "collapse",
+                      fontSize: "14px",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    <thead>
+                      <tr>
+                        {item.table.columns.map((column) => (
+                          <th
+                            key={column}
+                            style={{
+                              textAlign: "left",
+                              padding: "8px 12px",
+                              border: "1px solid rgba(0,0,0,0.10)",
+                              background: "rgba(0,0,0,0.03)",
+                              color: "var(--ifm-font-color-base, #1a1a1a)",
+                            }}
+                          >
+                            {column}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {item.table.rows.map((row) => (
+                        <tr key={row[0]}>
+                          {row.map((cell, cellIdx) => (
+                            <td
+                              key={cellIdx}
+                              style={{
+                                padding: "8px 12px",
+                                border: "1px solid rgba(0,0,0,0.10)",
+                                color: "var(--ifm-color-emphasis-800, #333)",
+                                fontWeight: cellIdx === 0 ? 600 : 400,
+                              }}
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </section>
             ))}
           </div>

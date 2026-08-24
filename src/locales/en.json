@@ -180,7 +180,8 @@
     "titleHighlight1": "Open-Source Cybersecurity",
     "titleHighlight2": "Infrastructure",
     "title": "Widely Used Open-Source Cybersecurity Infrastructure",
-    "subtitle": "Powered by CDSL-Yaklang - A programming language born for cybersecurity By MegaVector"
+    "subtitle": "Powered by CDSL-Yaklang - A programming language born for cybersecurity By MegaVector",
+    "definition": "Yak Project is an open-source cybersecurity infrastructure built around the Yaklang security programming language, providing the Yakit security workbench, IRify static analysis, and Memfit AI for penetration testing, code auditing, and security automation."
   },
   "HomeMilestones": {
     "title": "Milestones",

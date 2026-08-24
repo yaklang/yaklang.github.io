@@ -7,10 +7,10 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 ## Start here
 
 - [Yak Project homepage](https://yaklang.com/): Product overview, downloads, capabilities, milestones, and community information.
-- [Yaklang programming documentation](https://yaklang.com/docs/intro): Language guide and generated API/library reference.
-- [Yakit user manual](https://yaklang.com/products/intro): Desktop workbench concepts and workflows.
-- [Open-source ecosystem](https://yaklang.com/opensource): Yaklang, Yakit, IRify, Memfit AI, Yak Skills, HackSkills, SyntaxFlow, and related projects.
-- [Downloads](https://yaklang.com/download): Current desktop and engine download entry points.
+- [Yaklang programming documentation](https://yaklang.com/docs/intro/): Language guide and generated API/library reference.
+- [Yakit user manual](https://yaklang.com/products/intro/): Desktop workbench concepts and workflows.
+- [Open-source ecosystem](https://yaklang.com/opensource/): Yaklang, Yakit, IRify, Memfit AI, Yak Skills, HackSkills, SyntaxFlow, and related projects.
+- [Downloads](https://yaklang.com/download/): Current desktop and engine download entry points.
 
 ## Source repositories
 
@@ -23,10 +23,10 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 
 ## Project context
 
-- [Technical blog](https://yaklang.com/blog): Security research, engineering articles, release notes, and project announcements.
+- [Technical blog](https://yaklang.com/blog/): Security research, engineering articles, release notes, and project announcements.
 - [Yak Project milestones](https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md): Source-linked project history and public evidence.
-- [Yak Project team](https://yaklang.com/team): Team and project background.
-- [Cooperative partners](https://yaklang.com/cooperativePartner): Ecosystem and partner information.
+- [Yak Project team](https://yaklang.com/team/): Team and project background.
+- [Cooperative partners](https://yaklang.com/cooperativePartner/): Ecosystem and partner information.
 - [YakLab manuals](https://yaklang.com/Yaklab/): Deliberately vulnerable training environments for local, authorized validation.
 
 ## Optional
