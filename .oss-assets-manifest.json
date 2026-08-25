@@ -4,8 +4,8 @@
   "objectPrefix": "yaklang-website/assets",
   "thresholdBytes": 102400,
   "buildDir": "build",
-  "assetCount": 2201,
-  "totalBytes": 712230788,
+  "assetCount": 2202,
+  "totalBytes": 711769828,
   "assets": [
     {
       "relativePath": "assets/fonts/crimson-text-400-f002dfeee9542c98fae39296e68aea7e.woff2",
@@ -112,30 +112,30 @@
       "sourceFile": "build/assets/fonts/noto-serif-sc-700-2002ed63629e1cbdb1949395c583dc8e.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2",
-      "size": 184456,
+      "relativePath": "assets/fonts/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2",
+      "size": 186868,
       "replacements": 2,
-      "sha256": "b6afc90669bef6872d6c1275c799c29051a9b7be194045be530b1290d341912c",
-      "objectKey": "yaklang-website/assets/b6afc90669bef6872d6c1275c799c29051a9b7be194045be530b1290d341912c/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/b6afc90669bef6872d6c1275c799c29051a9b7be194045be530b1290d341912c/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2",
+      "sha256": "9fbab6786536a2d5b8532a402cfef5cbbf0a06c254fbd2d83746061ca73e6117",
+      "objectKey": "yaklang-website/assets/9fbab6786536a2d5b8532a402cfef5cbbf0a06c254fbd2d83746061ca73e6117/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/9fbab6786536a2d5b8532a402cfef5cbbf0a06c254fbd2d83746061ca73e6117/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2",
-        "en/assets/fonts/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2"
+        "assets/fonts/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2",
+        "en/assets/fonts/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-7594890ebe1e04ae65474243e617bd13.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-500-f546100a899838471a238f959a8e136e.woff2"
     },
     {
-      "relativePath": "assets/fonts/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2",
-      "size": 185348,
+      "relativePath": "assets/fonts/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2",
+      "size": 187832,
       "replacements": 2,
-      "sha256": "cce471744c609d7405ca93c1204adc21d75e83be7e02c74a49ce6ddef415c6a4",
-      "objectKey": "yaklang-website/assets/cce471744c609d7405ca93c1204adc21d75e83be7e02c74a49ce6ddef415c6a4/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/cce471744c609d7405ca93c1204adc21d75e83be7e02c74a49ce6ddef415c6a4/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2",
+      "sha256": "d7984a7dc3dd7587a5127646e94a99e3ed7bcb892f16cb3ff7270096b5075abf",
+      "objectKey": "yaklang-website/assets/d7984a7dc3dd7587a5127646e94a99e3ed7bcb892f16cb3ff7270096b5075abf/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/d7984a7dc3dd7587a5127646e94a99e3ed7bcb892f16cb3ff7270096b5075abf/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2",
       "relativePaths": [
-        "assets/fonts/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2",
-        "en/assets/fonts/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2"
+        "assets/fonts/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2",
+        "en/assets/fonts/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2"
       ],
-      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-01bb59275ee6ce5f62ce200c34562074.woff2"
+      "sourceFile": "build/assets/fonts/noto-serif-sc-home-600-525455cd9f710571055222f758b5b99f.woff2"
     },
     {
       "relativePath": "assets/fonts/roboto-400-4977cb87a58c463dbc07027a96688df6.ttf",
@@ -27033,11 +27033,11 @@
     },
     {
       "relativePath": "img/team/teachingmaterials.png",
-      "size": 807970,
+      "size": 156991,
       "replacements": 6,
-      "sha256": "f7b4f593a75e922ed6e5052a691887db725783dbaf1392044a484a38fcab16ac",
-      "objectKey": "yaklang-website/assets/f7b4f593a75e922ed6e5052a691887db725783dbaf1392044a484a38fcab16ac/teachingmaterials.png",
-      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/f7b4f593a75e922ed6e5052a691887db725783dbaf1392044a484a38fcab16ac/teachingmaterials.png",
+      "sha256": "e6f71a1a8c21d8dee6a68b4d8011b084365538472f64fbc7a823179409a95015",
+      "objectKey": "yaklang-website/assets/e6f71a1a8c21d8dee6a68b4d8011b084365538472f64fbc7a823179409a95015/teachingmaterials.png",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/e6f71a1a8c21d8dee6a68b4d8011b084365538472f64fbc7a823179409a95015/teachingmaterials.png",
       "relativePaths": [
         "img/team/teachingmaterials.png"
       ],
@@ -27054,6 +27054,18 @@
         "img/team/topLeft.png"
       ],
       "sourceFile": "build/img/team/topLeft.png"
+    },
+    {
+      "relativePath": "img/team/yakit-practice-guide.png",
+      "size": 185123,
+      "replacements": 6,
+      "sha256": "338b265bffabfff421b68f451d61d21040a94264f6f689a8f07b88726bd5afcf",
+      "objectKey": "yaklang-website/assets/338b265bffabfff421b68f451d61d21040a94264f6f689a8f07b88726bd5afcf/yakit-practice-guide.png",
+      "url": "https://aliyun-oss.yaklang.com/yaklang-website/assets/338b265bffabfff421b68f451d61d21040a94264f6f689a8f07b88726bd5afcf/yakit-practice-guide.png",
+      "relativePaths": [
+        "img/team/yakit-practice-guide.png"
+      ],
+      "sourceFile": "build/img/team/yakit-practice-guide.png"
     },
     {
       "relativePath": "img/team/国产大熊猫.jpeg",
