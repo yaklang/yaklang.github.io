@@ -254,7 +254,7 @@ YaklangScriptChecking(code string, pluginType string) []*result.StaticAnalyzeRes
 |参数名|类型|说明|
 |:--|:--|:--|
 | code | `string` | 待检查的源码 |
-| pluginType | `string` | 插件类型，可选值为 &#34;yak&#34;、&#34;mitm&#34;、&#34;port-scan&#34;、&#34;codec&#34;、&#34;syntaxflow&#34; |
+| pluginType | `string` | 插件类型，可选值为 &#34;yak&#34;、&#34;mitm&#34;、&#34;port-scan&#34;、&#34;codec&#34;、&#34;context-menu&#34;、&#34;syntaxflow&#34; |
 
 **返回值**
 

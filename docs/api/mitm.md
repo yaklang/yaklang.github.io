@@ -43,7 +43,7 @@
 | [mitm.isTransparent](#istransparent) | `b bool` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器是否开启透明劫持模式，默认为false |
 | [mitm.maxContentLength](#maxcontentlength) | `i int` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的最大请求和响应内容长度，默认为 10MB |
 | [mitm.mockHTTPRequest](#mockhttprequest) | `h func(isHttps bool, urlStr string, req []byte, mockResponse func(rsp any))` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的请求 mock 函数 |
-| [mitm.randomJA3](#randomja3) | `b bool` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 指纹模式，默认为 false |
+| [mitm.randomJA3](#randomja3) | `b bool` | `MitmConfigOpt` | 是一个兼容选项。MITM 默认已经使用推荐的 Chrome TLS 指纹； |
 | [mitm.rootCA](#rootca) | `cert []byte, key []byte` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器的根证书和私钥 |
 | [mitm.sni](#sni) | `sni string, overwrite bool` | `MitmConfigOpt` | 是一个选项函数，用于控制 MITM 代理连接目标服务器时的 SNI (Server Name Indication) |
 | [mitm.useDefaultCA](#usedefaultca) | `t bool` | `MitmConfigOpt` | 是一个选项函数，用于指定中间人代理服务器是否使用内置的证书和私钥，默认为true |
@@ -654,7 +654,9 @@ mitm.Start(8080, mitm.mockHTTPRequest(func(isHttps, urlStr, req, mockResponse) {
 randomJA3(b bool) MitmConfigOpt
 ```
 
-是一个选项函数，用于指定中间人代理服务器是否开启随机 JA3 指纹模式，默认为 false
+是一个兼容选项。MITM 默认已经使用推荐的 Chrome TLS 指纹；
+
+传入 true 继续选择该默认指纹，传入 false 不再关闭默认行为。
 
 **参数**
 

@@ -10,7 +10,7 @@
 
 与相邻库的关系：`context` 几乎被所有支持 `context(ctx)` 选项的库（`poc`、`crawler`、`synscan`、`aiagent` 等）使用，把它传入即可统一控制超时与中止。
 
-> 共 8 个函数
+> 共 12 个函数
 
 ## 函数索引
 
@@ -24,6 +24,12 @@
 | [context.WithTimeout](#withtimeout) | `parent context.Context, timeout time.Duration` | `context.Context, context.CancelFunc` | 返回继承自 parent 的 Context 接口（即上下文接口）和取消函数 |
 | [context.WithTimeoutSeconds](#withtimeoutseconds) | `d float64` | `context.Context` | 返回超时时间为 d 秒的 Context 接口（即上下文接口） |
 | [context.WithValue](#withvalue) | `parent context.Context, key any, val any` | `context.Context` | 返回继承自 parent ，同时额外携带键值的 Context 接口（即上下文接口） |
+
+## 可变参数函数索引
+
+|函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| [context.NewPacketResult](#newpacketresult) | `options ...PacketResultOption` | `*PacketActionResult` |  |
 
 ## 函数详情
 
@@ -291,4 +297,40 @@ assert ctx.Value("key") == "value", "WithValue should carry the value"
 ``````````````
 
 ---
+
+## 可变参数函数详情
+
+### NewPacketResult {#newpacketresult}
+
+```go
+NewPacketResult(options ...PacketResultOption) *PacketActionResult
+```
+
+暂无描述
+
+**可选参数**
+
+可作为可变参数 `options ...PacketResultOption` 传入选项；共 3 个可用选项，详见 [PacketResultOption 选项列表](#option-packetresultoption)。
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `*PacketActionResult` |  |
+
+---
+
+## 可变参数选项列表
+
+以下按选项类型汇总全部可变参数选项(原先重复在各主函数下的选项表已收拢到此处)：
+
+### 1. 类型：PacketResultOption {#option-packetresultoption}
+
+涉及到的函数有：[context.NewPacketResult](#newpacketresult)
+
+|选项函数|参数|返回值|说明|
+|:--|:--|:--|:--|
+| `context.ReplaceRequest` | `request []byte` | `PacketResultOption` |  |
+| `context.ReplaceResponse` | `response []byte` | `PacketResultOption` |  |
+| `context.RequireConfirmation` | `required bool` | `PacketResultOption` |  |
 
