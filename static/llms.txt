@@ -24,6 +24,8 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 ## Project context
 
 - [Technical blog](https://yaklang.com/blog/): Security research, engineering articles, release notes, and project announcements.
+- [FAQ](https://yaklang.com/faq/): Frequently asked questions about Yaklang, Yakit, and the ecosystem.
+- [Yakit vs Burp Suite](https://yaklang.com/yakit-vs-burp-suite/): Side-by-side comparison of features, license, pricing, and platforms.
 - [Yak Project milestones](https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md): Source-linked project history and public evidence.
 - [Yak Project team](https://yaklang.com/team/): Team and project background.
 - [Cooperative partners](https://yaklang.com/cooperativePartner/): Ecosystem and partner information.

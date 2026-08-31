@@ -19,7 +19,19 @@ assert.ok(!fs.existsSync(path.join(root, "static/indexnow-key.txt")));
 const config = read("docusaurus.config.js");
 assert.match(config, /"@type": "Organization"/);
 assert.match(config, /"@type": "WebSite"/);
-assert.match(config, /"og:image"/);
+// 2026-08-31 审计修正项的回归守护：
+//   - 仓库 URL 属产品（codeRepository），不得混入 Organization.sameAs
+//   - 双产品实体（Yakit 工作台 + Yaklang 语言）
+//   - robots.txt 机器可读内容偏好声明
+assert.match(config, /codeRepository: "https:\/\/github\.com\/yaklang\/yakit"/);
+assert.match(config, /codeRepository: "https:\/\/github\.com\/yaklang\/yaklang"/);
+assert.match(config, /"@id": `\$\{siteUrl\}\/yaklang#software`/);
+const sameAsBlock = config.match(/sameAs: \[([\s\S]*?)\]/)?.[1] || "";
+assert.ok(!/github\.com\/yaklang\/(yakit|yaklang)"/.test(sameAsBlock), "repo URLs must live on SoftwareApplication.codeRepository, not Organization.sameAs");
+assert.match(read("static/robots.txt"), /Content-Signal: ai-train=yes; search=yes/);
+assert.ok(fs.existsSync(path.join(root, "src/pages/yakit-vs-burp-suite.js")));
+assert.ok(fs.existsSync(path.join(root, "deploy/nginx/yaklang-static.conf")));
+assert.equal(typeof require("../scripts/build-facts").fetchBuildFacts, "function");
 assert.match(read("src/theme/Root.tsx"), /docusaurusI18n\.currentLocale/);
 assert.match(read("src/pages/index.js"), /t\("SiteMetadata\.home\.title"\)/);
 assert.match(read("src/pages/download.tsx"), /t\("SiteMetadata\.download\.title"\)/);

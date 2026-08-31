@@ -426,7 +426,17 @@ const HomeDownload: React.FC = () => {
   >(injectedYakitVersion ? { yakit: injectedYakitVersion } : {});
   const [sizeMap, setSizeMap] = useState<
     Partial<Record<DownloadableTabKey, Record<string, number>>>
-  >({});
+  >(
+    // 构建期 HEAD 请求得到的 Yakit 各平台安装包大小（MB），SSR 直出到静态
+    // HTML（2026-08-31 审计 2.1「下载表格统计列为空占位」）；运行时照旧刷新。
+    ((siteConfig.customFields as
+      | { buildFacts?: { assetSizes?: Record<string, number> } }
+      | undefined)?.buildFacts?.assetSizes
+      ? { yakit: (siteConfig.customFields as {
+            buildFacts: { assetSizes: Record<string, number> };
+          }).buildFacts.assetSizes }
+      : {}),
+  );
   const activeProduct = TABS.find((t) => t.key === activeTab) ?? TABS[0];
   const activeAccent = TAB_ACCENT[activeTab];
   const activeVersion = isDownloadableTab(activeTab)

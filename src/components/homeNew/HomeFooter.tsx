@@ -275,6 +275,8 @@ const FooterLinkEl: React.FC<FooterLinkItem> = ({
             <img
               src="/img/wechat.jpg"
               alt={t("HomeFooter.aria.wechatPop")}
+              loading="lazy"
+              decoding="async"
               className="h-[140px] w-[140px] object-contain"
             />
             <span className="text-[12px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
@@ -333,6 +335,8 @@ const SocialRow: React.FC = () => {
             <img
               src="/img/wechat.jpg"
               alt={t("HomeFooter.aria.wechatPop")}
+              loading="lazy"
+              decoding="async"
               className="h-[140px] w-[140px] object-contain"
             />
             <span className="text-[12px] text-[color:var(--Colors-Use-Neutral-Text-3-Secondary)]">
@@ -511,6 +515,8 @@ const HomeFooter: React.FC<{
               <img
                 src={logoSrc}
                 alt="YAK"
+                loading="lazy"
+                decoding="async"
                 className="h-[28px] w-auto object-contain md:h-[40px] lg:h-[48px] xl:h-[66px] min-[1440px]:h-[73px] "
               />
             </Link>

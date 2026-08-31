@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
 import { useTranslation } from "react-i18next";
 import { useHomeSlideActions } from "./HomeSlideContext";
@@ -56,6 +57,20 @@ const HomeHero: React.FC = () => {
   const isEn = i18n.language?.startsWith("en");
   const { goToSlide } = useHomeSlideActions();
   const { theme } = useHomeTheme();
+  // 构建期一手统计（GitHub API，SSR 直出）：供 AI 搜索引擎引用站内 stars
+  // 等数字（2026-08-31 审计 2.1「首页无可引用数字」）。取不到则整行省略。
+  const { siteConfig } = useDocusaurusContext();
+  const buildFacts = (siteConfig.customFields as
+    | {
+        buildFacts?: {
+          yakit?: { stars?: number; forks?: number } | null;
+          yaklang?: { stars?: number } | null;
+          yakitVersion?: string | null;
+        };
+      }
+    | undefined)?.buildFacts;
+  const formatCount = (value?: number) =>
+    typeof value === "number" ? value.toLocaleString("en-US") : null;
   const isDark = theme === "dark";
   const bgVideo = useBaseUrl(HERO_BG_VIDEO);
   const bgPoster = useBaseUrl(HERO_BG_POSTER);
@@ -216,6 +231,50 @@ const HomeHero: React.FC = () => {
         <p className="m-0 mb-[8px] max-w-[46em] font-['PingFang_SC'] text-[16px] font-normal leading-[26px] text-[color:var(--Colors-Neutral-100)] opacity-90 sm:mb-[12px] sm:text-[15px] sm:leading-[24px] md:mb-[40px]">
           {t("HomeHero.definition")}
         </p>
+
+        {/* GEO：可引用统计行（构建期 GitHub API 一手数据，SSR 直出）。
+            语言无关的数字表达，中英文均适用；任一项缺失即整行不渲染。 */}
+        {formatCount(buildFacts?.yakit?.stars) ? (
+          <p className="m-0 mb-[8px] flex flex-wrap items-center gap-x-[8px] gap-y-[4px] font-['JetBrains_Mono',ui-monospace,monospace] text-[13px] font-normal leading-[20px] tracking-[0.5px] text-[color:var(--Colors-Use-Neutral-Text-1-Title)] opacity-80 sm:mb-[12px] md:mb-[28px]">
+            <span>
+              ★ {formatCount(buildFacts?.yakit?.stars)}{" "}
+              {isEn ? "stars" : "星"}
+            </span>
+            {formatCount(buildFacts?.yakit?.forks) ? (
+              <>
+                <span aria-hidden className="opacity-40">
+                  /
+                </span>
+                <span>
+                  {formatCount(buildFacts?.yakit?.forks)}{" "}
+                  {isEn ? "forks" : "Forks"}
+                </span>
+              </>
+            ) : null}
+            {buildFacts?.yakitVersion ? (
+              <>
+                <span aria-hidden className="opacity-40">
+                  /
+                </span>
+                <span>
+                  {isEn ? "Latest release" : "最新版本"} v
+                  {buildFacts.yakitVersion}
+                </span>
+              </>
+            ) : null}
+            <span aria-hidden className="opacity-40">
+              /
+            </span>
+            <a
+              href="https://github.com/yaklang"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="!text-[color:var(--Colors-Use-Neutral-Text-1-Title)] underline decoration-[color:var(--Colors-Use-Main---web-Primary)] underline-offset-4 transition-colors duration-200 hover:!text-[color:var(--Colors-Use-Main---web-Primary)]"
+            >
+              100% {isEn ? "open source" : "开源"}
+            </a>
+          </p>
+        ) : null}
 
         <div className="hidden sm:block">{actions}</div>
       </div>
