@@ -11,7 +11,7 @@
 
 与相邻库的关系：`git` 产出的文件系统常交给 `ssa`/`syntaxflow`（代码分析）、`diff`（版本比对）、`filesys`（遍历）做后续审计。
 
-> 共 49 个函数
+> 共 50 个函数
 
 ## 函数索引
 
@@ -640,7 +640,7 @@ Checkout(localPath string, ref string, opts ...Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -674,7 +674,7 @@ Clone(u string, localPath string, opt ...Option) error
 
 **可选参数**
 
-可作为可变参数 `opt ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opt ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -706,7 +706,7 @@ Fetch(localPath string, opts ...Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -777,7 +777,7 @@ Git源码泄露漏洞是指：由于网站服务器的错误配置，可以通�
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -809,7 +809,7 @@ IterateCommit(localRepos string, opt ...Option) error
 
 **可选参数**
 
-可作为可变参数 `opt ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opt ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -845,7 +845,7 @@ Pull(localPath string, opts ...Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...Option` 传入选项；共 23 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...Option` 传入选项；共 24 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -910,6 +910,7 @@ git.SetProxy("http://127.0.0.1:1080")
 | `git.noFetchTags` | `b bool` | `Option` | 是一个选项函数，用于指定获取(fetch)操作时是否不拉取标签 |
 | `git.recursive` | `b bool` | `Option` | 是一个选项函数，用于指定其他 Git 操作（例如Clone）时的是否递归克隆子模块，默认为false |
 | `git.remote` | `remote string` | `Option` | 是一个选项函数，用于指定其他 Git 操作（例如Pull）时的远程仓库名称，默认为origin |
+| `git.singleBranch` | `b bool` | `Option` | WithSingleBranch limits clone/fetch to ReferenceName only (git --single-branch). |
 | `git.threads` | `threads int` | `Option` | 是一个GitHack选项函数，用于指定并发数，默认为8 |
 | `git.useLocalGitBinary` | `b bool` | `Option` | 是一个GitHack选项函数，用于指定是否使用本地环境变量的git二进制文件来执行`git fsck`命令，这个命令用于尽可能恢复完整的git仓库，默认为true |
 | `git.verify` | `b bool` | `Option` | 是一个选项函数，用于指定其他 Git 操作（例如Clone）时是否验证TLS证书 |

@@ -9,7 +9,7 @@
 
 与相邻库的关系：`syntaxflow` 依赖 `ssa`（提供编译后的程序），查询结果经 `sfreport` 出报告、`risk` 记录代码风险，构成完整的代码审计流水线。
 
-> 共 20 个函数
+> 共 30 个函数
 
 ## 函数索引
 
@@ -245,7 +245,7 @@ ResumeScan(ctx context.Context, taskId string, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 6 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 16 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -289,7 +289,7 @@ StartScan(ctx context.Context, opts ...ssaconfig.Option) error
 
 **可选参数**
 
-可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 6 个可用选项，详见 [Option 选项列表](#option-option)。
+可作为可变参数 `opts ...ssaconfig.Option` 传入选项；共 16 个可用选项，详见 [Option 选项列表](#option-option)。
 
 **返回值**
 
@@ -348,12 +348,22 @@ die(err)
 
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
+| `syntaxflow.withReporter` | `value TValue` | `Option` |  |
+| `syntaxflow.withRuleFilter` | `filter *ypb.SyntaxFlowRuleFilter` | `Option` | 设置规则过滤器 |
+| `syntaxflow.withRuleFilterGroupNames` | `groupNames ...string` | `Option` | 设置规则过滤器组名 |
+| `syntaxflow.withRuleFilterKeyword` | `keyword string` | `Option` | 设置规则过滤器关键字 |
+| `syntaxflow.withRuleFilterLibRuleKind` | `kind string` | `Option` | 设置规则过滤器库规则类型 |
+| `syntaxflow.withRuleFilterMode` | `mode ...string` | `Option` | 设置规则执行模式过滤器（source \| ssa），对应 DB mode 列。 |
+| `syntaxflow.withRuleFilterTag` | `tag ...string` | `Option` | 设置规则过滤器标签 |
 | `syntaxflow.withScanConcurrency` | `concurrency uint32` | `Option` | 设置扫描并发数 |
 | `syntaxflow.withScanProcessCallback` | `callback ProcessCallback` | `ssaconfig.Option` | WithProcessCallback 设置扫描进度回调 |
 | `syntaxflow.withScanPrograms` | `progs ssaapi.Programs` | `ssaconfig.Option` | withPrograms 指定本次扫描要覆盖的程序集合 |
+| `syntaxflow.withScanQueryTargets` | `targets ...ssaapi.SyntaxFlowQueryInstance` | `ssaconfig.Option` | WithQueryTargets appends SyntaxFlowQueryInstance targets (Program or SourceQueryTarget). |
 | `syntaxflow.withScanResultCallback` | `callback ScanResultCallback` | `ssaconfig.Option` | 设置扫描结果回调 |
 | `syntaxflow.withScanRuleTimeout` | `timeout time.Duration` | `Option` | sets the per-rule wall-clock budget for a single rule |
 | `syntaxflow.withScanRuleWorkLimit` | `limit int64` | `Option` | sets the per-rule total-work budget: the max number of |
+| `syntaxflow.withScanSourceDir` | `name string, targetDir string` | `ssaconfig.Option` | WithSourceDir loads a local directory (filtered) as a no-SSA source scan target. |
+| `syntaxflow.withScanSourceFiles` | `name string, files map[string]string` | `ssaconfig.Option` | WithSourceFiles runs mode=source rules against path→content without SSA compile. |
 
 ### 2. 类型：QueryOption {#option-queryoption}
 

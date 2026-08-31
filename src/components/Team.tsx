@@ -404,19 +404,70 @@ export const Team: React.FC<TeamProps> = (props) => {
         <div className="safety-body-content">
           <div className="safety-body-content-left-top"></div>
           {t(
-            "四维创智（北京）科技发展有限公司，公司品牌名称万径安全，成立于2013年，公司以“让世界更安全，让安全更简单”为使命，致力于为用户提供全面、高效、安全的网络安全解决方案。公司以“AI+YAK”为企业核心战略，专注于网络安全基础设施和智能化技术研究，打造了国内外首创的全国产化网络安全开发环境YAK和网络安全高级AI智能体万径千机两大核心，并基于YAK构建自主可控的网络安全生态体系，推动安全产业融合发展，自研产品已广泛应用于能源、金融、运营商等多个行业。"
+            "四维创智科技发展有限公司，公司品牌名称万径安全，成立于2013年，总部位于北京，并在四川、上海、深圳、海南等地设有分支机构，是国家重点“小巨人”企业、国家高新技术企业、中关村高新技术企业、国家信息安全标准委员会成员单位、中国信息协会理事单位、中关村信息安全产业联盟单位、国家信息技术安全研究中心联盟单位。"
           )}
           <br />
           {t(
-            "YAK是国内外首创的全国产化网络安全领域开发环境。2023年，YAK入选工信部信息通信领域十大科技进展。2024年，YAK教材《CDSL-YAK网络安全领域编程语言—从入门到实践》正式出版。2024年、2025年YAK被九位院士鉴定为国内外首创、国际先进、国内领先水平，具有完全自主知识产权。"
+            "YAK是国内外首创的全国产化网络安全领域开发环境。2023年，YAK入选工信部信息通信领域十大科技进展；2024年获北京市军民融合重点产品；2025年获得中国通信学会科学技术进步一等奖；2026年获得北京市首台（套）重大技术装备证书；YAK被九位院士鉴定为国内外首创、国际先进、国内领先水平，具有完全自主知识产权。"
+          )}
+          <br />
+          {t(
+            "公司以“让世界更安全，让安全更简单”为使命，致力于为用户提供全面、高效、安全的网络安全解决方案。公司以“AI+YAK”为企业核心战略，专注于网络安全基础设施和智能化技术研究，打造了国内外首创的全国产化网络安全开发环境YAK和网络安全高级AI智能体万径千机两大核心，并基于YAK构建自主可控的网络安全生态体系，推动安全产业融合发展，自研产品已广泛应用于能源、金融、运营商等多个行业。"
+          )}
+          <br />
+          {t("目前核心产品：")}
+          <ul>
+            {[
+              t(
+                "Yakit是万径安全旗下 Yaklang 团队开源的一款完全国产的交互式安全测试平台"
+              ),
+              t(
+                "Memfit是万径安全旗下 Yaklang团队研发的面向长程渗透测试、漏洞挖掘、应急响应等全链路攻防任务的生产级安全领域 Agent 系统"
+              ),
+              t(
+                "IRify是万径安全旗下Yaklang 团队基于代码建模的大型项目代码审计平台"
+              ),
+            ].map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          {t(
+            "还有万径千御（面向LLM时代的应用层安全网关）、万径千锋（大模型智能体安全评测系统）、万径千卫（面向关键资产的分布式主动防御平台）、万径千枢（攻防实训训练平台）、万径灵盾（自动化主机安全检测与加固系统）、靶场（攻防实训训练平台）、小智（AI渗透测试机器人）……等产品。"
           )}
           <div className="teachingmaterials-wrapper">
-            <img
-              src="/img/team/teachingmaterials.png"
-              className="teachingmaterials-img"
-            />
-            <div>
-              {t("Yak教材《CDSL-YAK网络安全领域编程语言-从入门到实践》")}
+            <div className="teachingmaterials-row">
+              <div className="teachingmaterials-item">
+                <img
+                  src="/img/team/teachingmaterials.png"
+                  className="teachingmaterials-img"
+                />
+                <div>
+                  {t("Yak教材《CDSL-YAK网络安全领域编程语言-从入门到实践》")}
+                </div>
+              </div>
+              <div className="teachingmaterials-item">
+                <img
+                  src="/img/team/yakit-practice-guide.png"
+                  className="teachingmaterials-img yakit-book-img"
+                />
+                <div>{t("《Yakit 实战指南-基础应用与高级开发》")}</div>
+              </div>
+            </div>
+            <div className="teachingmaterials-row">
+              <div className="teachingmaterials-item">
+                <img
+                  src="/img/team/万径二维码.jpg"
+                  className="teachingmaterials-img"
+                />
+                <div>{t("更多公司相关，可以关注↑")}</div>
+              </div>
+              <div className="teachingmaterials-item">
+                <img
+                  src="/img/team/yak公众号.png"
+                  className="teachingmaterials-img"
+                />
+                <div>{t("更多产品相关，可以关注↑")}</div>
+              </div>
             </div>
           </div>
           <div className="safety-body-content-right-bottom"></div>

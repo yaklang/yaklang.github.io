@@ -9,7 +9,7 @@
 
 与相邻库的关系：`sfreport` 是 `syntaxflow`/`ssa`（代码审计引擎）的报告输出层，与 `risk`（SSA 风险对象）、`report`（通用报告）配合，把审计发现交付为可读报告。
 
-> 共 12 个函数、3 个实例
+> 共 14 个函数、4 个实例
 
 ## 实例
 
@@ -18,6 +18,7 @@
 | IRifyFullReportType | `sfreport.ReportType` | &#34;irify-full&#34; |
 | IRifyReactReportType | `sfreport.ReportType` | &#34;irify-react-report&#34; |
 | IRifyReportType | `sfreport.ReportType` | &#34;irify&#34; |
+| SarifReportType | `sfreport.ReportType` | &#34;sarif&#34; |
 
 ## 函数索引
 
@@ -26,6 +27,7 @@
 | [sfreport.ConvertSingleResultToJSON](#convertsingleresulttojson) | `result *ssaapi.SyntaxFlowResult, showDataflowPath bool` | `string, error` | 将单个 SyntaxFlow 扫描结果转换为 JSON 报告字符串 |
 | [sfreport.ConvertSingleResultToJSONWithOptions](#convertsingleresulttojsonwithoptions) | `result *ssaapi.SyntaxFlowResult, reportType ReportType, showDataflowPath bool, showFileContent bool, withFile bool` | `string, error` | 将单个 SyntaxFlow 扫描结果按指定选项转换为 JSON 报告 |
 | [sfreport.GenerateSSAReportMarkdownForTask](#generatessareportmarkdownfortask) | `taskID string, reportName string` | `int, string, error` | 根据扫描任务 ID 在进程内生成 SSA 的 Markdown 报告 |
+| [sfreport.ReportTypeFromString](#reporttypefromstring) | `s string` | `ReportType` |  |
 | [sfreport.withDataflowPath](#withdataflowpath) | `show bool` | `func(*Config)` | 设置报告中是否包含数据流路径（导出名为 sfreport.withDataflowPath） |
 | [sfreport.withFileContent](#withfilecontent) | `show bool` | `func(*Config)` | 设置报告中是否包含源码文件内容（导出名为 sfreport.withFileContent） |
 
@@ -34,6 +36,7 @@
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [sfreport.ConvertSingleResultToSSAResultPartsJSONPayload](#convertsingleresulttossaresultpartsjsonpayload) | `result *ssaapi.SyntaxFlowResult, opts ...StreamPartsOption` | `map[string]any, error` | 将单个 SyntaxFlow 扫描结果转换为分片 JSON 载荷（导出名为 sfreport.ConvertSingleResultToSSAResultPartsJSONPayload） |
+| [sfreport.ConvertSyntaxFlowResultToReport](#convertsyntaxflowresulttoreport) | `format ReportType, opt ...Option` | `IReport, error` |  |
 | [sfreport.ImportSSARiskFromJSON](#importssariskfromjson) | `ctx context.Context, db *gorm.DB, jsonData []byte, callBacks ...func(string, float64)` | `error` | 从 JSON 报告数据中导入 SSA 风险记录到数据库 |
 | [sfreport.NewReport](#newreport) | `reportType ReportType, opts ...Option` | `*Report` | 创建一个 SyntaxFlow 扫描报告对象（导出名为 sfreport.NewReport） |
 
@@ -150,6 +153,28 @@ println(markdown)
 
 ---
 
+### ReportTypeFromString {#reporttypefromstring}
+
+```go
+ReportTypeFromString(s string) ReportType
+```
+
+暂无描述
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| s | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ReportType` |  |
+
+---
+
 ### withDataflowPath {#withdataflowpath}
 
 ```go
@@ -248,6 +273,35 @@ result = prog.SyntaxFlowWithError("sink* as $sink")~
 payload = sfreport.ConvertSingleResultToSSAResultPartsJSONPayload(result)~
 println(payload["ok"])
 ``````````````
+
+---
+
+### ConvertSyntaxFlowResultToReport {#convertsyntaxflowresulttoreport}
+
+```go
+ConvertSyntaxFlowResultToReport(format ReportType, opt ...Option) (IReport, error)
+```
+
+暂无描述
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| format | `ReportType` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| opt | `...Option` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `IReport` |  |
+| r2 | `error` |  |
 
 ---
 
