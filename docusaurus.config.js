@@ -1,6 +1,9 @@
 const remarkSanitizeAutolinks = require("./scripts/remark-sanitize-autolinks");
+const { fetchLatestYakitVersion } = require("./scripts/latest-yakit-version");
 
 const siteUrl = "https://yaklang.com";
+// 构建期一手版本事实：失败为 null 时所有消费方自动回退，不影响构建
+const latestYakitVersion = fetchLatestYakitVersion();
 const organizationSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -42,8 +45,9 @@ const organizationSchema = {
             name: "Yakit",
             applicationCategory: "SecurityApplication",
             operatingSystem: "Windows, macOS, Linux",
-            url: `${siteUrl}/products/intro`,
+            url: `${siteUrl}/products/intro/`,
             downloadUrl: "https://github.com/yaklang/yakit/releases",
+            isAccessibleForFree: true,
             inLanguage: ["zh-CN", "en"],
             description:
                 "Yakit is an integrated, cross-platform security workbench built on the Yaklang security DSL, combining MITM proxy, Web Fuzzer, codec, plugin store, and AI-agent orchestration for penetration testing and security engineering.",
@@ -57,10 +61,18 @@ const organizationSchema = {
             ],
             author: { "@id": `${siteUrl}/#organization` },
             publisher: { "@id": `${siteUrl}/#organization` },
+            // 一手版本事实：AI 引擎可直接从站内引用「截至构建时 Yakit 版本为 X」
+            ...(latestYakitVersion
+                ? {
+                      softwareVersion: latestYakitVersion,
+                      releaseNotes: "https://github.com/yaklang/yakit/releases",
+                  }
+                : {}),
             offers: {
                 "@type": "Offer",
                 price: "0",
                 priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
             },
         },
     ],
@@ -80,23 +92,16 @@ module.exports = {
     onBrokenLinks: "warn",
     onBrokenAnchors: "warn",
     favicon: "img/favicon.ico",
-    headTags: [
-        {
-            tagName: "link",
-            attributes: {
-                rel: "preconnect",
-                href: "https://aliyun-oss.yaklang.com",
-                crossorigin: "anonymous",
-            },
-        },
-        {
-            tagName: "link",
-            attributes: {
-                rel: "dns-prefetch",
-                href: "//aliyun-oss.yaklang.com",
-            },
-        },
-    ],
+    // 注意：本文件下方还有一个 headTags 键（JSON-LD 组织图谱）。JS 对象字面量
+    // 的重复键后者覆盖前者，因此所有 headTags 条目必须集中在下方那一个键里
+    // （历史上的 preconnect/dns-prefetch 块就是因为重复键而被静默丢弃的）。
+    // 站点级 URL 统一带尾斜杠：与 nginx try_files 的目录规范化（301 到带斜杠）
+    // 及 sitemap/canonical 保持一致，消除每轮抓取 700+ 次重定向。
+    trailingSlash: true,
+    customFields: {
+        // 构建期拉取的 Yakit 最新版本，供首页下载区做 SSR 初始版本
+        yakitLatestVersion: latestYakitVersion,
+    },
     organizationName: "yaklang", // Usually your GitHub org/user name.
     projectName: "yak-project-main-page", // Usually your repo name.
     markdown: {
@@ -420,6 +425,21 @@ module.exports = {
         ],
     ],
     headTags: [
+        {
+            tagName: "link",
+            attributes: {
+                rel: "preconnect",
+                href: "https://aliyun-oss.yaklang.com",
+                crossorigin: "anonymous",
+            },
+        },
+        {
+            tagName: "link",
+            attributes: {
+                rel: "dns-prefetch",
+                href: "//aliyun-oss.yaklang.com",
+            },
+        },
         {
             tagName: "script",
             attributes: { type: "application/ld+json" },

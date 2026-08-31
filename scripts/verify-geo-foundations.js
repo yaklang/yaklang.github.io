@@ -131,7 +131,8 @@ assert.deepEqual(
   englishDocumentGraph["@graph"][1].itemListElement.map((item) => item.item),
   [
     "https://yaklang.com/en/",
-    "https://yaklang.com/en/docs",
+    // 中间层级使用带尾斜杠的最终形式（与 trailingSlash: true 规范一致）
+    "https://yaklang.com/en/docs/",
     "https://yaklang.com/en/docs/intro",
   ]
 );

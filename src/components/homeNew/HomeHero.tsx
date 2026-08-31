@@ -208,9 +208,14 @@ const HomeHero: React.FC = () => {
         </h1>
 
         {/* Figma：PingFang SC 20/28 */}
-        <div className="mt-[8px] font-['PingFang_SC'] text-[20px] font-normal leading-[28px] text-[color:var(--Colors-Neutral-100)] sm:mt-[12px] sm:text-[18px] sm:leading-[28px] md:mb-[40px]">
+        <div className="mt-[8px] font-['PingFang_SC'] text-[20px] font-normal leading-[28px] text-[color:var(--Colors-Neutral-100)] sm:mt-[12px] sm:text-[18px] sm:leading-[28px]">
           {t("HomeHero.subtitle")}
         </div>
+
+        {/* GEO：完整产品定义句（SSR 直出），供 AI 搜索引擎首屏摘录 */}
+        <p className="m-0 mb-[8px] max-w-[46em] font-['PingFang_SC'] text-[16px] font-normal leading-[26px] text-[color:var(--Colors-Neutral-100)] opacity-90 sm:mb-[12px] sm:text-[15px] sm:leading-[24px] md:mb-[40px]">
+          {t("HomeHero.definition")}
+        </p>
 
         <div className="hidden sm:block">{actions}</div>
       </div>

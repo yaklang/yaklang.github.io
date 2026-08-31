@@ -3,6 +3,7 @@ import { Dropdown, message } from "antd";
 import { useMemoizedFn } from "ahooks";
 import { useTranslation } from "react-i18next";
 import useBaseUrl from "@docusaurus/useBaseUrl";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import { LoadingIcon, SureIcon } from "../HomeIcon";
 import { detectDownloadPlatform } from "../../utils/yakitDownload";
 import { yakitIcon, yakIcon, memfitIcon, irifyIcon, memfitBrandIcon, irifyBrandIcon } from "./productIcons";
@@ -413,9 +414,16 @@ const HomeDownload: React.FC = () => {
   const [currentSelectYak, setCurrentSelectYak] = useState<YakEnvKey>(
     "MacOs(Intel/Apple Silicon)",
   );
+  // 构建期注入的 Yakit 最新版本（docusaurus.config.js customFields，SSR/CSR
+  // 均可用）：让静态 HTML 里就有真实版本号，无 JS 环境不再是"最新版: -"空占位；
+  // 运行时仍会照旧拉取刷新。
+  const { siteConfig } = useDocusaurusContext();
+  const injectedYakitVersion = (siteConfig.customFields as
+    | { yakitLatestVersion?: string }
+    | undefined)?.yakitLatestVersion;
   const [versionMap, setVersionMap] = useState<
     Partial<Record<DownloadableTabKey, string>>
-  >({});
+  >(injectedYakitVersion ? { yakit: injectedYakitVersion } : {});
   const [sizeMap, setSizeMap] = useState<
     Partial<Record<DownloadableTabKey, Record<string, number>>>
   >({});
@@ -489,39 +497,44 @@ const HomeDownload: React.FC = () => {
 
   const initProductDownload = useMemoizedFn(
     async (product: DownloadableTabKey) => {
-      if (versionMap[product]) return;
-
       const config = PRODUCT_DOWNLOAD_CONFIG[product];
-      try {
-        const response = await axios.get(config.getVersionUrl());
-        if (response?.data && typeof response.data === "string") {
-          const nextVersion = (response.data as string).split("\n")[0];
-          setVersionMap((prev) => ({ ...prev, [product]: nextVersion }));
+      let version = versionMap[product];
 
-          const nextSizes: Record<string, number> = {};
-          for (const platform of DOWNLOAD_PLATFORMS) {
-            const size = await getSize(product, platform.url, nextVersion);
-            if (size != null) {
-              nextSizes[platform.key] = size;
-              setSizeMap((prev) => ({
-                ...prev,
-                [product]: { ...(prev[product] || {}), ...nextSizes },
-              }));
-            }
+      // 版本未知时先拉取（构建期注入的 Yakit 版本可跳过此步，直接补包大小）
+      if (!version) {
+        try {
+          const response = await axios.get(config.getVersionUrl());
+          if (response?.data && typeof response.data === "string") {
+            version = (response.data as string).split("\n")[0];
+            setVersionMap((prev) => ({ ...prev, [product]: version! }));
+          } else {
+            message.error(
+              t("HomeDownload.messages.fetchVersionError", {
+                product: config.productName,
+              }),
+            );
+            return;
           }
-        } else {
+        } catch {
           message.error(
             t("HomeDownload.messages.fetchVersionError", {
               product: config.productName,
             }),
           );
+          return;
         }
-      } catch {
-        message.error(
-          t("HomeDownload.messages.fetchVersionError", {
-            product: config.productName,
-          }),
-        );
+      }
+
+      const nextSizes: Record<string, number> = {};
+      for (const platform of DOWNLOAD_PLATFORMS) {
+        const size = await getSize(product, platform.url, version);
+        if (size != null) {
+          nextSizes[platform.key] = size;
+          setSizeMap((prev) => ({
+            ...prev,
+            [product]: { ...(prev[product] || {}), ...nextSizes },
+          }));
+        }
       }
     },
   );

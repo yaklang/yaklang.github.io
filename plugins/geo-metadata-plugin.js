@@ -20,6 +20,24 @@ function gitMtime(siteDir, relPath) {
   }
 }
 
+// 取源文件首次提交时间（ISO 8601），作为 TechArticle 的 datePublished。
+// 与 gitMtime 同样容错；文件被重命名过时取的是当前路径下的最早提交，
+// 对文档场景足够（宁缺毋假：取不到就跳过该字段，不编造日期）。
+function gitFirstMtime(siteDir, relPath) {
+  try {
+    const out = execSync(`git log --format=%cI -- "${relPath}"`, {
+      cwd: siteDir,
+      stdio: ["ignore", "pipe", "ignore"],
+      encoding: "utf8",
+    });
+    const lines = out.trim().split("\n").filter(Boolean);
+    const value = lines[lines.length - 1];
+    return value || null;
+  } catch {
+    return null;
+  }
+}
+
 function stripMarkdown(value) {
   return value
     .replace(/!?(?:\[([^\]]*)\])\([^)]*\)/g, "$1")
@@ -197,7 +215,15 @@ function ensureNoindex(html) {
     : appendHeadTag(html, robotsTag);
 }
 
-function buildDocumentGraph({ url, title, description, language, segments, dateModified }) {
+function buildDocumentGraph({
+  url,
+  title,
+  description,
+  language,
+  segments,
+  dateModified,
+  datePublished,
+}) {
   const pageUrl = new URL(url);
   const origin = pageUrl.origin;
   const canonicalSegments = pageUrl.pathname.split("/").filter(Boolean);
@@ -210,6 +236,8 @@ function buildDocumentGraph({ url, title, description, language, segments, dateM
     Yaklab: "YakLab",
     api: "API",
   };
+  // og:title 通常带「| Yak Project」站点后缀，面包屑末项只保留页面名
+  const breadcrumbTitle = title.replace(/\s*\|\s*Yak Project\s*$/, "");
   const itemListElement = [
     {
       "@type": "ListItem",
@@ -220,13 +248,17 @@ function buildDocumentGraph({ url, title, description, language, segments, dateM
     ...segments.map((segment, index) => ({
       "@type": "ListItem",
       position: index + 2,
-      name: index === segments.length - 1 ? title : labels[segment] || segment,
+      name:
+        index === segments.length - 1
+          ? breadcrumbTitle
+          : labels[segment] || segment,
       item:
         index === segments.length - 1
           ? url
-          : `${origin}/${localePrefix ? `${localePrefix}/` : ""}${segments
+          : // 中间层级用带尾斜杠的最终形式，避免线上 nginx 再 301
+            `${origin}/${localePrefix ? `${localePrefix}/` : ""}${segments
               .slice(0, index + 1)
-              .join("/")}`,
+              .join("/")}/`,
     })),
   ];
 
@@ -244,10 +276,12 @@ function buildDocumentGraph({ url, title, description, language, segments, dateM
         author: { "@id": `${origin}/#organization` },
         publisher: { "@id": `${origin}/#organization` },
         isPartOf: { "@id": `${origin}/#website` },
-        // A documentation edit time is not necessarily its original publication
-        // time. Keep the verifiable modification signal without inventing a
-        // datePublished value.
+        // datePublished 取源文件首次 git 提交；dateModified 取最后一次提交。
+        // 两者均只写可核实值，取不到就整体跳过，不编造日期。
+        ...(datePublished ? { datePublished } : {}),
         ...(dateModified ? { dateModified } : {}),
+        // Article 富结果硬性字段：默认封面图（绝对 URL，与博客一致）
+        image: [`${origin}/img/newHome/now.webp`],
         // 指向页面主内容容器，便于语音助手/语音搜索摘录关键段落
         speakable: {
           "@type": "WebPageElement",
@@ -270,7 +304,41 @@ function appendJsonLd(html, value) {
   );
 }
 
-function updateBlogPostingJsonLd(html, { url, description, dateModified }) {
+// 博客文章面包屑：首页 > 技术博客 > 文章（此前仅文档页有 BreadcrumbList）
+function buildBlogBreadcrumbGraph({ url, title, language }) {
+  const pageUrl = new URL(url);
+  const origin = pageUrl.origin;
+  const blogRoot = `${origin}${language === "en" ? "/en" : ""}/blog/`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: language === "en" ? "Home" : "首页",
+            item: `${origin}${language === "en" ? "/en" : ""}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: language === "en" ? "Tech Blog" : "技术博客",
+            item: blogRoot,
+          },
+          { "@type": "ListItem", position: 3, name: title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+function updateBlogPostingJsonLd(
+  html,
+  { url, description, dateModified, image, keywords }
+) {
   return html.replace(
     /(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi,
     (script, open, json, close) => {
@@ -285,6 +353,16 @@ function updateBlogPostingJsonLd(html, { url, description, dateModified }) {
           if (!types.includes("BlogPosting")) continue;
           node.description = description;
           if (dateModified) node.dateModified = dateModified;
+          // Article 富结果硬性字段：image（绝对 URL）+ keywords（frontmatter tags）
+          if (image) node.image = [image];
+          if (keywords && keywords.length) node.keywords = keywords;
+          // 与 canonical/面包屑终态对齐：Docusaurus 主题输出的 BlogPosting
+          // url/@id/mainEntityOfPage 不带尾斜杠，会造成同页两个规范 URL 信号
+          if (url) {
+            node.url = url;
+            node.mainEntityOfPage = url;
+            if (node["@id"]) node["@id"] = `${url}#article`;
+          }
           // The global graph defines the Organization once. BlogPosting should
           // reference that entity instead of publishing a second, conflicting
           // partial definition with the same @id.
@@ -389,10 +467,11 @@ function translatedEnRoutes(siteDir) {
   return routes;
 }
 
-// 构建 docs/products/Yaklab 路由 → dateModified 映射（git 最后提交时间）。
-// 用于给 TechArticle 注入新鲜度信号。路由按文件相对路径推导（与
+// 构建 docs/products/Yaklab 路由 → { dateModified, datePublished } 映射。
+// dateModified 取 git 最后提交时间（新鲜度信号）；datePublished 取首次提交
+// 时间（TechArticle 富结果必填字段）。路由按文件相对路径推导（与
 // translatedEnRoutes 一致），文档若用自定义 slug 需自行扩展。
-function sourceRouteMtime(siteDir) {
+function sourceRouteMeta(siteDir) {
   const map = new Map();
   const sections = [
     ["docs", "/docs"],
@@ -408,15 +487,32 @@ function sourceRouteMtime(siteDir) {
         .replace(/\.(md|mdx)$/, "")
         .split(path.sep)
         .join("/");
-      const mtime = gitMtime(siteDir, path.relative(siteDir, f));
-      if (mtime) map.set(`${prefix}/${rel}`, mtime);
+      const relToSite = path.relative(siteDir, f);
+      const dateModified = gitMtime(siteDir, relToSite);
+      const datePublished = gitFirstMtime(siteDir, relToSite);
+      if (dateModified || datePublished) {
+        map.set(`${prefix}/${rel}`, { dateModified, datePublished });
+      }
     }
   }
   return map;
 }
 
-// 构建博客路由 → { datePublished, dateModified } 映射。
-// datePublished 取 frontmatter date；dateModified 取 git 最后提交时间。
+// 解析 frontmatter tags 原始值（形如 ["2021", "traffic"]）为数组
+function parseFrontmatterTags(raw) {
+  if (!raw) return [];
+  const quoted = raw.match(/"([^"]*)"/g);
+  if (quoted) return quoted.map((value) => value.slice(1, -1)).filter(Boolean);
+  return raw
+    .replace(/^\[|\]$/g, "")
+    .split(",")
+    .map((value) => value.trim().replace(/^['"]|['"]$/g, ""))
+    .filter(Boolean);
+}
+
+// 构建博客路由 → { datePublished, dateModified, tags } 映射。
+// datePublished 取 frontmatter date；dateModified 取 git 最后提交时间；
+// tags 供 BlogPosting.keywords（Docusaurus 默认输出空数组）。
 function blogRouteMeta(blogRoot, siteDir) {
   const map = new Map();
   if (!fs.existsSync(blogRoot)) return map;
@@ -429,6 +525,7 @@ function blogRouteMeta(blogRoot, siteDir) {
     map.set(`/blog/${slug}`, {
       datePublished: frontmatterValue(markdown, "date"),
       dateModified: gitMtime(siteDir, path.relative(siteDir, file)),
+      tags: parseFrontmatterTags(frontmatterValue(markdown, "tags")),
     });
   }
   return map;
@@ -441,12 +538,16 @@ function enhanceHtmlForRoute(html, page) {
   const isBlogPost =
     /^\/blog\/[^/]+$/.test(localizedRoute) &&
     !/^\/blog\/(archive|authors|tags|page)$/.test(localizedRoute);
-  // 结构化数据新鲜度：docs/products/Yaklab 取源文件 git 最后提交时间；
-  // 博客取 blogRouteMeta 中的 dateModified（同为 git 最后提交时间）。
-  const sourceMtime =
-    (page.sourceMtime && page.sourceMtime.get(localizedRoute)) || null;
+  // 结构化数据日期：docs/products/Yaklab 取源文件 git 首次/最后提交时间；
+  // 博客取 blogRouteMeta 中的 dateModified（git 最后提交时间）。
+  const sourceMeta =
+    (page.sourceMeta && page.sourceMeta.get(localizedRoute)) || null;
   const blogEntry = page.blogMeta && page.blogMeta.get(localizedRoute);
-  const dateModified = sourceMtime || (blogEntry && blogEntry.dateModified) || null;
+  const dateModified =
+    (sourceMeta && sourceMeta.dateModified) ||
+    (blogEntry && blogEntry.dateModified) ||
+    null;
+  const datePublished = sourceMeta ? sourceMeta.datePublished : null;
   // 英文页判定：已翻译（在白名单内）→ 可索引；否则若正文仍以中文为主（CJK>50，
   // 含自定义页 team/irify/enterpriseCollaboration 等未翻译页面）→ noindex。
   // bodyCjkCount 只统计 <article>/<main> 正文，已避开导航/页脚等公共 chrome。
@@ -476,6 +577,7 @@ function enhanceHtmlForRoute(html, page) {
         language: page.language,
         segments,
         dateModified,
+        datePublished,
       })
     );
   }
@@ -484,7 +586,18 @@ function enhanceHtmlForRoute(html, page) {
       url: page.url,
       description: page.description,
       dateModified,
+      // Article 富结果硬性字段：默认 og 图（1920×540，绝对地址）
+      image: `${new URL(page.url).origin}/img/newHome/now.webp`,
+      keywords: (blogEntry && blogEntry.tags) || [],
     });
+    result = appendJsonLd(
+      result,
+      buildBlogBreadcrumbGraph({
+        url: page.url,
+        title: page.title,
+        language: page.language,
+      })
+    );
   }
   if (needsEnNoindex) result = ensureNoindex(result);
   return result;
@@ -548,6 +661,8 @@ function apiDocFiles(apiRoot) {
   });
 }
 
+const { fetchLatestYakitVersion } = require("../scripts/latest-yakit-version");
+
 module.exports = function geoMetadataPlugin(context) {
   return {
     name: "geo-api-description-plugin",
@@ -572,7 +687,7 @@ module.exports = function geoMetadataPlugin(context) {
 
       const translatedRoutes = translatedEnRoutes(context.siteDir);
       // 路由 → 源文件最后提交时间 / 博客日期元数据，供结构化数据注入 dateModified
-      const sourceMtime = sourceRouteMtime(context.siteDir);
+      const sourceMeta = sourceRouteMeta(context.siteDir);
       const blogMeta = blogRouteMeta(
         path.join(context.siteDir, "blog"),
         context.siteDir
@@ -603,7 +718,7 @@ module.exports = function geoMetadataPlugin(context) {
         const url = canonicalUrl(html) || `${context.siteConfig.url}${route}`;
         const enhanced = enhanceHtmlForRoute(html, {
           translatedRoutes,
-          sourceMtime,
+          sourceMeta,
           blogMeta,
           route,
           url,
@@ -612,6 +727,17 @@ module.exports = function geoMetadataPlugin(context) {
           language: route === "/en" || route.startsWith("/en/") ? "en" : "zh-CN",
         });
         if (enhanced !== html) fs.writeFileSync(outputPath, enhanced);
+      }
+
+      // llms.txt 追加一手版本事实（报告 P2-12）：AI 可直接引用站内版本号。
+      // build/ 每次构建都从 static/ 重新拷贝，直接追加即可，无需幂等处理。
+      const latestVersion = fetchLatestYakitVersion();
+      const llmsPath = path.join(outDir, "llms.txt");
+      if (latestVersion && fs.existsSync(llmsPath)) {
+        const buildDate = new Date().toISOString().slice(0, 10);
+        const content = fs.readFileSync(llmsPath, "utf8");
+        const section = `\n## Version facts\n\n- Latest Yakit release: v${latestVersion} (retrieved ${buildDate} at site build time)\n- Releases: https://github.com/yaklang/yakit/releases\n`;
+        fs.writeFileSync(llmsPath, `${content.trimEnd()}\n${section}`);
       }
     },
   };
