@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkyaklang=self.webpackChunkyaklang||[]).push([[21672],{33024:a=>{a.exports=JSON.parse('{"authors":[{"name":"Yak Project","title":"Yak Project \u6280\u672f\u4e0e\u5b89\u5168\u7814\u53d1\u56e2\u961f","url":"https://github.com/yaklang","imageURL":"https://github.com/yaklang.png","key":"yak","page":null,"count":198}]}')}}]);
