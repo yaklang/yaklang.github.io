@@ -336,6 +336,8 @@ interface ThanksForInfoProps {
   tag: { name: string; color: string; fontSize?: number };
   description: string[];
   address: string;
+  logoOnWhite?: boolean;
+  imageSize?: number;
   home?: string;
   github?: string;
 }
@@ -350,6 +352,8 @@ const ThanksForInfo: ThanksForInfoProps[] = [
     },
     description: ["YAK 架构和思想的策源地，核心团队和人员的成长培养"],
     address: "四川成都",
+    logoOnWhite: true,
+    imageSize: 56,
     home: "http://www.uestc.edu.cn",
   },
   {
@@ -358,6 +362,7 @@ const ThanksForInfo: ThanksForInfoProps[] = [
     tag: { name: "企业安全与生态合作", color: "green" },
     description: ["在网络安全与生态方面与万径安全开展协作。"],
     address: "北京",
+    logoOnWhite: true,
     home: "https://www.asiainfo-sec.com",
   },
   {
@@ -386,6 +391,14 @@ const ThanksForInfo: ThanksForInfoProps[] = [
     address: "四川 - 成都",
     home: "https://cnss.io/",
     github: "https://github.com/cnss/",
+  },
+  {
+    img: "/img/team/CyberLib.png",
+    name: "智越星辰",
+    tag: { name: "企业安全与生态合作", color: "green" },
+    description: ["在网络安全与生态方面与万径安全开展协作。"],
+    address: "四川 - 成都",
+    logoOnWhite: true,
   },
 ];
 
@@ -845,7 +858,11 @@ const ThanksFor: React.FC<ThanksForProps> = React.memo((props) => {
   return (
     <div className="thanksfor-member-opt">
       <div className="member-info">
-        <div className="member-info-img">
+        <div
+          className={`member-info-img${
+            info.logoOnWhite ? " member-info-img--white" : ""
+          }${info.imageSize ? ` member-info-img--image-${info.imageSize}` : ""}`}
+        >
           <img src={info.img} className="img-style" />
         </div>
         <div className="member-info-name-tag">

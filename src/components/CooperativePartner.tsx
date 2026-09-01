@@ -6,7 +6,7 @@ import "./cooperativePartnerPage.scss";
 export interface CooperativePartnerInfoProps {
   img: string;
   name: string;
-  links: string;
+  links?: string;
   scale?: string;
 }
 
@@ -120,6 +120,10 @@ export const COOPERATIVE_PARTNERS: CooperativePartnerInfoProps[] = [
     name: "c4安全团队",
     links: "http://www.code4th.cn/",
   },
+  {
+    img: "/img/partner/CyberLib.png",
+    name: "智越星辰",
+  },
 ];
 
 interface CooperativePartnerRenderProps {
@@ -129,24 +133,33 @@ const CooperativePartnerRender: React.FC<CooperativePartnerRenderProps> = (
   props
 ) => {
   const { img, name, links, scale } = props.info;
+  const logo = (
+    <div className="img-box">
+      <img
+        style={scale ? { scale } : {}}
+        className="cooperative-partner-item-img"
+        src={img.replace("/img/partner/", "/img/partnerDoc/")}
+        alt={name}
+      />
+    </div>
+  );
+
   return (
     <div className="cooperative-partner-item">
-      <a
-        className="cooperative-partner-item-link"
-        href={links}
-        target={"_blank"}
-      >
-        <div className="img-box">
-          <img
-            style={scale ? { scale } : {}}
-            className="cooperative-partner-item-img"
-            src={img.replace("/img/partner/", "/img/partnerDoc/")}
-            alt={name}
-          />
+      {links ? (
+        <a
+          className="cooperative-partner-item-link"
+          href={links}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {logo}
+        </a>
+      ) : (
+        <div className="cooperative-partner-item-link" aria-label={name}>
+          {logo}
         </div>
-
-        {/* <div className="cooperative-partner-item-title">{name}</div> */}
-      </a>
+      )}
     </div>
   );
 };

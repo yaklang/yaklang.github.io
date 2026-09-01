@@ -29,6 +29,7 @@ const OPTIMIZED_PARTNER_BY_NAME: Record<string, PartnerAsset> = {
   无糖信息: { src: "/img/home-optimized/partners/wutang.webp", width: 280, height: 50 },
   三叶草: { src: "/img/home-optimized/partners/sycsec.webp", width: 79, height: 80 },
   c4安全团队: { src: "/img/home-optimized/partners/c4.webp", width: 253, height: 80 },
+  智越星辰: { src: "/img/home-optimized/partners/CyberLib.webp", width: 253, height: 80 },
 };
 
 const HomePartnerMarquee: React.FC = () => {
@@ -67,15 +68,8 @@ const HomePartnerMarquee: React.FC = () => {
       `}</style>
       <div className="w-full overflow-hidden">
         <div className="home-partner-marquee-track flex w-max items-center gap-[40px] sm:gap-[56px]">
-          {track.map((item, index) => (
-            <a
-              key={`${item.name}-${index}`}
-              href={item.links}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-[28px] shrink-0 items-center !no-underline"
-              aria-label={item.name}
-            >
+          {track.map((item, index) => {
+            const logo = (
               <img
                 src={shouldLoadImages ? item.asset.src : undefined}
                 alt={item.name}
@@ -87,8 +81,26 @@ const HomePartnerMarquee: React.FC = () => {
                 style={item.scale ? { scale: item.scale } : undefined}
                 className="h-[28px] w-auto max-w-[140px] object-contain"
               />
-            </a>
-          ))}
+            );
+            const className = "flex h-[28px] shrink-0 items-center !no-underline";
+
+            return item.links ? (
+              <a
+                key={`${item.name}-${index}`}
+                href={item.links}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+                aria-label={item.name}
+              >
+                {logo}
+              </a>
+            ) : (
+              <div key={`${item.name}-${index}`} className={className}>
+                {logo}
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
