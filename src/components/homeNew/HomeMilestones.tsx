@@ -397,6 +397,14 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
   const [mobileHoveredIndex, setMobileHoveredIndex] = useState<number | null>(
     null,
   );
+  // sm/md/lg 三套响应式布局会让同一条里程碑在 SSR HTML 里出现三遍
+  // （2026-08-31 第三次审计 [Medium]「里程碑轮播 SSR 重复 3 份」）。
+  // SSR 只出小屏一份；md/lg 两套表格挂载后再渲染——AI 爬虫读到的
+  // 静态 HTML 只有唯一一份（与 HomeTestimonialsCTA 的去重方案一致）。
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const lgVisibleRows = useVisibleRows("lg");
   const mdVisibleRows = useVisibleRows("md");
   const lgBodyH = ROW_H * lgVisibleRows;
@@ -556,6 +564,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
         </div>
 
         {/* ========== 中屏：年 | 序号+事件（可视约 5 行，手动滚动） ========== */}
+        {mounted && (
         <div
           className={`hidden min-h-0 lg:hidden ${
             fillViewport
@@ -676,8 +685,10 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
             </div>
           </div>
         </div>
+        )}
 
         {/* ========== 大屏：年 | 图+事件（可视约 5 行，手动滚动） ========== */}
+        {mounted && (
         <div
           className={`hidden min-h-0 ${
             fillViewport
@@ -836,6 +847,7 @@ const HomeMilestones: React.FC<HomeMilestonesProps> = ({
             </div>
           </div>
         </div>
+        )}
       </div>
     </section>
   );

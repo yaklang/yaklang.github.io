@@ -81,6 +81,10 @@ function extractContentDescription(markdown) {
     .replace(/```[\s\S]*?```/g, "")
     .replace(/~~~[\s\S]*?~~~/g, "");
   const genericLabels = /^(背景|前言|引言|概述|简介|overview|background|introduction)[：:]?$/i;
+  // 2021-2022 年旧文的通用开场白：与文章主题无关，逐篇复用（2026-08-31
+  // 第三次审计 F-1）。抽摘要时跳过，取第一段主题相关内容。
+  const boilerplateIntros =
+    /^(Yak是什么|总之Yak是|Yak 是一门|官网地址[:：]|Github地址[:：]|GitHub地址[:：])/;
   const paragraphs = content
     .split(/\n\s*\n/)
     .map((paragraph) =>
@@ -100,7 +104,12 @@ function extractContentDescription(markdown) {
           .join(" ")
       )
     )
-    .filter((paragraph) => paragraph.length >= 12 && !genericLabels.test(paragraph));
+    .filter(
+      (paragraph) =>
+        paragraph.length >= 12 &&
+        !genericLabels.test(paragraph) &&
+        !boilerplateIntros.test(paragraph)
+    );
 
   let description = "";
   for (const paragraph of paragraphs) {
@@ -309,6 +318,9 @@ function buildBlogBreadcrumbGraph({ url, title, language }) {
   const pageUrl = new URL(url);
   const origin = pageUrl.origin;
   const blogRoot = `${origin}${language === "en" ? "/en" : ""}/blog/`;
+  // og:title 带「| Yak Project」站点后缀，面包屑末项只保留文章名（与
+  // buildDocumentGraph 的文档面包屑一致；2026-08-31 审计 S5）
+  const breadcrumbTitle = title.replace(/\s*\|\s*Yak Project\s*$/, "");
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -328,7 +340,7 @@ function buildBlogBreadcrumbGraph({ url, title, language }) {
             name: language === "en" ? "Tech Blog" : "技术博客",
             item: blogRoot,
           },
-          { "@type": "ListItem", position: 3, name: title, item: url },
+          { "@type": "ListItem", position: 3, name: breadcrumbTitle, item: url },
         ],
       },
     ],
@@ -559,16 +571,19 @@ function sourceRouteMeta(siteDir) {
   return map;
 }
 
-// 解析 frontmatter tags 原始值（形如 ["2021", "traffic"]）为数组
+// 解析 frontmatter tags 原始值（形如 ["2021", "traffic"]）为数组。
+// 纯数字年份标签（"2021" 等）无语义价值（2026-08-31 审计 M2），过滤掉。
 function parseFrontmatterTags(raw) {
   if (!raw) return [];
   const quoted = raw.match(/"([^"]*)"/g);
-  if (quoted) return quoted.map((value) => value.slice(1, -1)).filter(Boolean);
-  return raw
-    .replace(/^\[|\]$/g, "")
-    .split(",")
-    .map((value) => value.trim().replace(/^['"]|['"]$/g, ""))
-    .filter(Boolean);
+  const values = quoted
+    ? quoted.map((value) => value.slice(1, -1)).filter(Boolean)
+    : raw
+        .replace(/^\[|\]$/g, "")
+        .split(",")
+        .map((value) => value.trim().replace(/^['"]|['"]$/g, ""))
+        .filter(Boolean);
+  return values.filter((value) => !/^\d+$/.test(value));
 }
 
 // 构建博客路由 → { datePublished, dateModified, tags } 映射。
@@ -620,6 +635,10 @@ function enhanceHtmlForRoute(html, page) {
     page.language === "en" &&
     bodyCjkCount(html) > 50 &&
     !(page.translatedRoutes && page.translatedRoutes.has(page.route));
+  // 旧版 Yakit 文档（/products/legacy/）：薄内容，英文侧已按未翻译回退
+  // noindex，中文侧同步 noindex 统一策略；clean-sitemap 会把这些路由
+  // 移出 sitemap 并剥掉指向它们的 hreflang（2026-08-31 审计 [Medium]）。
+  const isLegacyDoc = /^\/products\/legacy(\/|$)/.test(localizedRoute);
 
   let result = page.description
     ? replaceMetaDescription(html, page.description)
@@ -667,7 +686,7 @@ function enhanceHtmlForRoute(html, page) {
   if (isBlogList) {
     result = fixBlogListJsonLd(result, new URL(page.url).origin);
   }
-  if (needsEnNoindex) result = ensureNoindex(result);
+  if (needsEnNoindex || isLegacyDoc) result = ensureNoindex(result);
   return result;
 }
 

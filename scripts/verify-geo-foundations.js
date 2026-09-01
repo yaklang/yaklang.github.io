@@ -28,7 +28,8 @@ assert.match(config, /codeRepository: "https:\/\/github\.com\/yaklang\/yaklang"/
 assert.match(config, /"@id": `\$\{siteUrl\}\/yaklang#software`/);
 const sameAsBlock = config.match(/sameAs: \[([\s\S]*?)\]/)?.[1] || "";
 assert.ok(!/github\.com\/yaklang\/(yakit|yaklang)"/.test(sameAsBlock), "repo URLs must live on SoftwareApplication.codeRepository, not Organization.sameAs");
-assert.match(read("static/robots.txt"), /Content-Signal: ai-train=yes; search=yes/);
+// Content-Signal 多 signal 必须逗号分隔（分号整条无效），且需含 ai-input
+assert.match(read("static/robots.txt"), /Content-Signal: ai-train=yes, search=yes, ai-input=yes/);
 assert.ok(fs.existsSync(path.join(root, "src/pages/yakit-vs-burp-suite.js")));
 assert.ok(fs.existsSync(path.join(root, "deploy/nginx/yaklang-static.conf")));
 assert.equal(typeof require("../scripts/build-facts").fetchBuildFacts, "function");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "@docusaurus/Link";
 import { useLocation } from "@docusaurus/router";
 import useBaseUrl from "@docusaurus/useBaseUrl";
@@ -489,6 +489,12 @@ const HomeFooter: React.FC<{
   const footerLinks = getFooterLinks();
 
   const year = new Date().getFullYear();
+  // 版权/备案底栏三套响应式布局会让同一行文字在 SSR HTML 里出现三遍
+  // （2026-08-31 第三次审计）。SSR 只出小屏一份；中屏/PC 变体挂载后再渲染。
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const slogan = t("HomeFooter.slogan");
 
   return (
@@ -606,6 +612,7 @@ const HomeFooter: React.FC<{
           </div>
 
           {/* 中屏 */}
+          {mounted && (
           <div className="hidden flex-col border-0 border-x border-solid border-[var(--Colors-Use-Main---Gold-Focus)] sm:flex lg:hidden">
             <div className="px-[16px] py-[14px]">
               <span className={metaClass}>
@@ -635,8 +642,10 @@ const HomeFooter: React.FC<{
               </div>
             </div>
           </div>
+          )}
 
           {/* PC */}
+          {mounted && (
           <div className="hidden min-h-[64px] w-full items-center justify-between gap-[40px] lg:flex">
             <span className={metaClass}>
               Copyright © {year} for Yak Project {t("HomeFooter.company")}.
@@ -660,6 +669,7 @@ const HomeFooter: React.FC<{
               </a>
             </div>
           </div>
+          )}
         </div>
       </div>
     </footer>
