@@ -81,6 +81,10 @@ function extractContentDescription(markdown) {
     .replace(/```[\s\S]*?```/g, "")
     .replace(/~~~[\s\S]*?~~~/g, "");
   const genericLabels = /^(背景|前言|引言|概述|简介|overview|background|introduction)[：:]?$/i;
+  // 2021-2022 年旧文的通用开场白：与文章主题无关，逐篇复用（2026-08-31
+  // 第三次审计 F-1）。抽摘要时跳过，取第一段主题相关内容。
+  const boilerplateIntros =
+    /^(Yak是什么|总之Yak是|Yak 是一门|官网地址[:：]|Github地址[:：]|GitHub地址[:：])/;
   const paragraphs = content
     .split(/\n\s*\n/)
     .map((paragraph) =>
@@ -100,7 +104,12 @@ function extractContentDescription(markdown) {
           .join(" ")
       )
     )
-    .filter((paragraph) => paragraph.length >= 12 && !genericLabels.test(paragraph));
+    .filter(
+      (paragraph) =>
+        paragraph.length >= 12 &&
+        !genericLabels.test(paragraph) &&
+        !boilerplateIntros.test(paragraph)
+    );
 
   let description = "";
   for (const paragraph of paragraphs) {
@@ -309,6 +318,9 @@ function buildBlogBreadcrumbGraph({ url, title, language }) {
   const pageUrl = new URL(url);
   const origin = pageUrl.origin;
   const blogRoot = `${origin}${language === "en" ? "/en" : ""}/blog/`;
+  // og:title 带「| Yak Project」站点后缀，面包屑末项只保留文章名（与
+  // buildDocumentGraph 的文档面包屑一致；2026-08-31 审计 S5）
+  const breadcrumbTitle = title.replace(/\s*\|\s*Yak Project\s*$/, "");
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -328,7 +340,7 @@ function buildBlogBreadcrumbGraph({ url, title, language }) {
             name: language === "en" ? "Tech Blog" : "技术博客",
             item: blogRoot,
           },
-          { "@type": "ListItem", position: 3, name: title, item: url },
+          { "@type": "ListItem", position: 3, name: breadcrumbTitle, item: url },
         ],
       },
     ],
@@ -356,6 +368,17 @@ function updateBlogPostingJsonLd(
           // Article 富结果硬性字段：image（绝对 URL）+ keywords（frontmatter tags）
           if (image) node.image = [image];
           if (keywords && keywords.length) node.keywords = keywords;
+          // keywords 空占位（Docusaurus 默认输出 []）整体删除，不留给爬虫
+          else if (Array.isArray(node.keywords) && !node.keywords.length)
+            delete node.keywords;
+          // speakable 与文档页对齐（2026-08-31 审计：博客文章页是 AI 最可能
+          // 引用的内容，反而缺失 speakable）
+          if (!node.speakable) {
+            node.speakable = {
+              "@type": "WebPageElement",
+              cssSelector: ["article", "h1", "h2"],
+            };
+          }
           // 与 canonical/面包屑终态对齐：Docusaurus 主题输出的 BlogPosting
           // url/@id/mainEntityOfPage 不带尾斜杠，会造成同页两个规范 URL 信号
           if (url) {
@@ -369,6 +392,56 @@ function updateBlogPostingJsonLd(
           node.author = { "@id": `${new URL(url).origin}/#organization` };
           node.publisher = { "@id": `${new URL(url).origin}/#organization` };
           changed = true;
+        }
+        return changed
+          ? `${open}${JSON.stringify(parsed).replace(/</g, "\\u003c")}${close}`
+          : script;
+      } catch {
+        return script;
+      }
+    }
+  );
+}
+
+// 博客列表页 schema 修正（2026-08-31 审计 2.5）：
+//   1) Docusaurus 主题把 Blog/BlogPosting 的 author 写成 Person "Yak Project"
+//      （组织冒充个人），统一改为指向全局 Organization 实体；
+//   2) keywords: [] 空占位删除（文章页由 updateBlogPostingJsonLd 处理）。
+function fixBlogListJsonLd(html, origin) {
+  const organizationRef = { "@id": `${origin}/#organization` };
+  return html.replace(
+    /(<script\b[^>]*type="application\/ld\+json"[^>]*>)([\s\S]*?)(<\/script>)/gi,
+    (script, open, json, close) => {
+      try {
+        const parsed = JSON.parse(json);
+        const nodes = parsed?.["@graph"] || [parsed];
+        let changed = false;
+        // 列表页的 BlogPosting 嵌在 Blog.blogPost[] 里，也要遍历
+        const allNodes = nodes.flatMap((node) =>
+          Array.isArray(node?.blogPost) ? [node, ...node.blogPost] : [node]
+        );
+        for (const node of allNodes) {
+          const types = Array.isArray(node?.["@type"])
+            ? node["@type"]
+            : [node?.["@type"]];
+          const isBlogNode = types.includes("Blog") || types.includes("BlogPosting");
+          if (!isBlogNode) continue;
+          // 仅重写「Person "Yak Project"」这种组织冒充个人的写法；
+          // 真实个人作者（如有）保持不动。
+          if (
+            node.author &&
+            typeof node.author === "object" &&
+            !Array.isArray(node.author) &&
+            node.author["@type"] === "Person" &&
+            /Yak Project/i.test(node.author.name || "")
+          ) {
+            node.author = organizationRef;
+            changed = true;
+          }
+          if (Array.isArray(node.keywords) && !node.keywords.length) {
+            delete node.keywords;
+            changed = true;
+          }
         }
         return changed
           ? `${open}${JSON.stringify(parsed).replace(/</g, "\\u003c")}${close}`
@@ -498,16 +571,19 @@ function sourceRouteMeta(siteDir) {
   return map;
 }
 
-// 解析 frontmatter tags 原始值（形如 ["2021", "traffic"]）为数组
+// 解析 frontmatter tags 原始值（形如 ["2021", "traffic"]）为数组。
+// 纯数字年份标签（"2021" 等）无语义价值（2026-08-31 审计 M2），过滤掉。
 function parseFrontmatterTags(raw) {
   if (!raw) return [];
   const quoted = raw.match(/"([^"]*)"/g);
-  if (quoted) return quoted.map((value) => value.slice(1, -1)).filter(Boolean);
-  return raw
-    .replace(/^\[|\]$/g, "")
-    .split(",")
-    .map((value) => value.trim().replace(/^['"]|['"]$/g, ""))
-    .filter(Boolean);
+  const values = quoted
+    ? quoted.map((value) => value.slice(1, -1)).filter(Boolean)
+    : raw
+        .replace(/^\[|\]$/g, "")
+        .split(",")
+        .map((value) => value.trim().replace(/^['"]|['"]$/g, ""))
+        .filter(Boolean);
+  return values.filter((value) => !/^\d+$/.test(value));
 }
 
 // 构建博客路由 → { datePublished, dateModified, tags } 映射。
@@ -538,6 +614,10 @@ function enhanceHtmlForRoute(html, page) {
   const isBlogPost =
     /^\/blog\/[^/]+$/.test(localizedRoute) &&
     !/^\/blog\/(archive|authors|tags|page)$/.test(localizedRoute);
+  // 博客列表/归档/标签页：修正 Blog schema 的作者实体与空 keywords
+  const isBlogList =
+    localizedRoute === "/blog" ||
+    /^\/blog\/(page\/\d+|archive|authors|tags)(\/|$)/.test(localizedRoute);
   // 结构化数据日期：docs/products/Yaklab 取源文件 git 首次/最后提交时间；
   // 博客取 blogRouteMeta 中的 dateModified（git 最后提交时间）。
   const sourceMeta =
@@ -555,6 +635,10 @@ function enhanceHtmlForRoute(html, page) {
     page.language === "en" &&
     bodyCjkCount(html) > 50 &&
     !(page.translatedRoutes && page.translatedRoutes.has(page.route));
+  // 旧版 Yakit 文档（/products/legacy/）：薄内容，英文侧已按未翻译回退
+  // noindex，中文侧同步 noindex 统一策略；clean-sitemap 会把这些路由
+  // 移出 sitemap 并剥掉指向它们的 hreflang（2026-08-31 审计 [Medium]）。
+  const isLegacyDoc = /^\/products\/legacy(\/|$)/.test(localizedRoute);
 
   let result = page.description
     ? replaceMetaDescription(html, page.description)
@@ -599,7 +683,10 @@ function enhanceHtmlForRoute(html, page) {
       })
     );
   }
-  if (needsEnNoindex) result = ensureNoindex(result);
+  if (isBlogList) {
+    result = fixBlogListJsonLd(result, new URL(page.url).origin);
+  }
+  if (needsEnNoindex || isLegacyDoc) result = ensureNoindex(result);
   return result;
 }
 
@@ -661,7 +748,90 @@ function apiDocFiles(apiRoot) {
   });
 }
 
-const { fetchLatestYakitVersion } = require("../scripts/latest-yakit-version");
+const { fetchBuildFacts } = require("../scripts/build-facts");
+
+// llms.txt / llms-full.txt 末尾的「Project facts」段：版本、stars、forks、
+// 安装包大小等一手统计（2026-08-31 审计 2.1「统计密度低」）。全部来自
+// 构建期实时抓取，取不到的项整体省略，不编造。
+function buildFactsSection(facts) {
+  const lines = [];
+  if (facts.yakitVersion) {
+    lines.push(
+      `- Latest Yakit release: v${facts.yakitVersion} (retrieved ${facts.fetchedAt} at site build time)`
+    );
+  }
+  if (facts.yakit?.stars != null) {
+    lines.push(
+      `- GitHub stars: yaklang/yakit ${facts.yakit.stars.toLocaleString("en-US")}`
+    );
+  }
+  if (facts.yaklang?.stars != null) {
+    lines.push(
+      `- GitHub stars: yaklang/yaklang ${facts.yaklang.stars.toLocaleString("en-US")}`
+    );
+  }
+  if (facts.yakit?.forks != null) {
+    lines.push(`- GitHub forks: yaklang/yakit ${facts.yakit.forks.toLocaleString("en-US")}`);
+  }
+  if (facts.assetSizes) {
+    const parts = Object.entries(facts.assetSizes).map(
+      ([key, mb]) => `${key} ${mb} MB`
+    );
+    if (parts.length) {
+      lines.push(
+        `- Yakit v${facts.yakitVersion} installer sizes: ${parts.join(", ")}`
+      );
+    }
+  }
+  if (!lines.length) return "";
+  return `\n## Project facts\n\n${lines.join("\n")}\n- Releases: https://github.com/yaklang/yakit/releases\n`;
+}
+
+// llms-full.txt 附录：docs/products/Yaklab 全量文档索引（标题 + 一句话摘要，
+// 摘要优先 frontmatter description，退化为正文首段），外加 API 索引。
+// 目标体积 30-60KB：超出预算即截断，保证「full」名副其实又不失控。
+function buildDocsAppendix(siteDir, byteBudget = 45000) {
+  const sections = [
+    ["docs", "Yaklang programming documentation", "https://yaklang.com/docs"],
+    ["products", "Yakit user manual", "https://yaklang.com/products"],
+    ["Yaklab", "YakLab tutorials", "https://yaklang.com/Yaklab"],
+  ];
+  const chunks = ["\n## Documentation index (auto-generated at build time)\n"];
+  let budget = byteBudget;
+  for (const [dir, label, urlPrefix] of sections) {
+    const root = path.join(siteDir, dir);
+    if (!fs.existsSync(root)) continue;
+    // API 参考页数量大、单页信息密度低，排到最后，预算不够就少收
+    const files = walkMarkdownFiles(root).sort((a, b) => {
+      const api = (f) => (path.relative(root, f).split(path.sep)[0] === "api" ? 1 : 0);
+      return api(a) - api(b);
+    });
+    const sectionLines = [`\n### ${label}\n`];
+    for (const file of files) {
+      if (budget <= 0) break;
+      const rel = path
+        .relative(root, file)
+        .replace(/\.(md|mdx)$/, "")
+        .split(path.sep)
+        .join("/");
+      const markdown = fs.readFileSync(file, "utf8");
+      const title =
+        frontmatterValue(markdown, "title") ||
+        markdown.match(/^#\s+(.+)$/m)?.[1]?.trim() ||
+        rel;
+      const description = (
+        frontmatterValue(markdown, "description") ||
+        extractContentDescription(markdown) ||
+        ""
+      ).slice(0, 120);
+      const line = `- [${title}](${urlPrefix}/${rel})${description ? `: ${description}` : ""}`;
+      sectionLines.push(line);
+      budget -= Buffer.byteLength(line, "utf8") + 1;
+    }
+    chunks.push(sectionLines.join("\n"));
+  }
+  return `${chunks.join("\n")}\n`;
+}
 
 module.exports = function geoMetadataPlugin(context) {
   return {
@@ -729,15 +899,21 @@ module.exports = function geoMetadataPlugin(context) {
         if (enhanced !== html) fs.writeFileSync(outputPath, enhanced);
       }
 
-      // llms.txt 追加一手版本事实（报告 P2-12）：AI 可直接引用站内版本号。
+      // llms.txt / llms-full.txt 追加一手事实（版本/stars/安装包大小）与文档
+      // 索引：AI 可直接引用站内统计（2026-08-31 审计 2.1 统计密度、P2-8）。
       // build/ 每次构建都从 static/ 重新拷贝，直接追加即可，无需幂等处理。
-      const latestVersion = fetchLatestYakitVersion();
+      const facts = fetchBuildFacts();
+      const factsSection = buildFactsSection(facts);
       const llmsPath = path.join(outDir, "llms.txt");
-      if (latestVersion && fs.existsSync(llmsPath)) {
-        const buildDate = new Date().toISOString().slice(0, 10);
+      if (factsSection && fs.existsSync(llmsPath)) {
         const content = fs.readFileSync(llmsPath, "utf8");
-        const section = `\n## Version facts\n\n- Latest Yakit release: v${latestVersion} (retrieved ${buildDate} at site build time)\n- Releases: https://github.com/yaklang/yakit/releases\n`;
-        fs.writeFileSync(llmsPath, `${content.trimEnd()}\n${section}`);
+        fs.writeFileSync(llmsPath, `${content.trimEnd()}\n${factsSection}`);
+      }
+      const llmsFullPath = path.join(outDir, "llms-full.txt");
+      if (fs.existsSync(llmsFullPath)) {
+        const content = fs.readFileSync(llmsFullPath, "utf8");
+        const appendix = `${factsSection}${buildDocsAppendix(context.siteDir)}`;
+        fs.writeFileSync(llmsFullPath, `${content.trimEnd()}\n${appendix}`);
       }
     },
   };

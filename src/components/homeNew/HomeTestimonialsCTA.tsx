@@ -239,7 +239,13 @@ const InfiniteRow: React.FC<InfiniteRowProps> = ({
   duration = 48,
   shouldLoadImages,
 }) => {
-  const track = useMemo(() => [...items, ...items], [items]);
+  // 无缝滚动需要轨道内容翻倍，但翻倍会让每条证言在 SSR HTML 里出现两遍
+  // （2026-08-31 审计 [Low]「证言重复渲染」）。SSR 只出一份数据，
+  // 挂载后再在客户端翻倍——AI 爬虫读到的静态 HTML 只有唯一一份。
+  const [track, setTrack] = useState(items);
+  useEffect(() => {
+    setTrack([...items, ...items]);
+  }, [items]);
   const animClass =
     direction === "left"
       ? "home-testimonial-marquee-left"

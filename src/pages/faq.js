@@ -277,6 +277,10 @@ export default function FaqPage() {
             <Link to={localizedPath("/opensource")} style={linkStyle}>
               {isEn ? "Open Source" : "开源生态"}
             </Link>
+            <span style={{ margin: "0 12px", opacity: 0.4 }}>·</span>
+            <Link to={localizedPath("/yakit-vs-burp-suite")} style={linkStyle}>
+              {isEn ? "Yakit vs Burp Suite" : "Yakit vs Burp Suite"}
+            </Link>
           </footer>
         </div>
       </main>
