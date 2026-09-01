@@ -521,6 +521,8 @@ const HomeFooter: React.FC<{
               <img
                 src={logoSrc}
                 alt="YAK"
+                width={883}
+                height={178}
                 loading="lazy"
                 decoding="async"
                 className="h-[28px] w-auto object-contain md:h-[40px] lg:h-[48px] xl:h-[66px] min-[1440px]:h-[73px] "

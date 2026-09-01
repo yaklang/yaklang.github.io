@@ -5,35 +5,39 @@ import { useLoadWhenHomeSlide } from "./useLoadWhenHomeSlide";
 // Keep every optimized path as a literal so prepare-oss-assets can replace it
 // with its content-addressed OSS URL. Runtime path manipulation bypasses that
 // build step and can accidentally combine an old asset hash with a new suffix.
-const OPTIMIZED_PARTNER_BY_NAME: Record<string, string> = {
-  亚信安全: "/img/home-optimized/partners/asiainfo-sec.webp",
-  奇安信: "/img/home-optimized/partners/logo.webp",
-  HackingClub: "/img/home-optimized/partners/hacking.webp",
-  米斯特安全: "/img/home-optimized/partners/acmesec.webp",
-  云众可信: "/img/home-optimized/partners/sec-in.webp",
-  "58": "/img/home-optimized/partners/security58.webp",
-  CTstack: "/img/home-optimized/partners/CTstack.webp",
-  E安全: "/img/home-optimized/partners/E安全.webp",
-  嘶吼: "/img/home-optimized/partners/4hou.webp",
-  四叶草安全: "/img/home-optimized/partners/seclover.webp",
-  安全脉搏: "/img/home-optimized/partners/secpulse.webp",
-  智联SRC: "/img/home-optimized/partners/zhaopin.webp",
-  度小满: "/img/home-optimized/partners/duxiaoman.webp",
-  贝壳: "/img/home-optimized/partners/beike.webp",
-  快手: "/img/home-optimized/partners/kuaishou.webp",
-  小米: "/img/home-optimized/partners/xiaomi.webp",
-  无糖信息: "/img/home-optimized/partners/wutang.webp",
-  三叶草: "/img/home-optimized/partners/sycsec.webp",
-  c4安全团队: "/img/home-optimized/partners/c4.webp",
+// width/height 是各 webp 的原始像素尺寸（sips 实测）：img 上显式声明可让浏览器
+// 在图片加载前预留宽度（h 固定 28px、w 随纵横比伸缩），消除 logo 陆续加载时
+// 的横向布局位移（2026-09-01 审计 [Medium] 首页 CLS）。替换图片时需同步更新。
+type PartnerAsset = { src: string; width: number; height: number };
+const OPTIMIZED_PARTNER_BY_NAME: Record<string, PartnerAsset> = {
+  亚信安全: { src: "/img/home-optimized/partners/asiainfo-sec.webp", width: 276, height: 74 },
+  奇安信: { src: "/img/home-optimized/partners/logo.webp", width: 280, height: 51 },
+  HackingClub: { src: "/img/home-optimized/partners/hacking.webp", width: 280, height: 46 },
+  米斯特安全: { src: "/img/home-optimized/partners/acmesec.webp", width: 280, height: 78 },
+  云众可信: { src: "/img/home-optimized/partners/sec-in.webp", width: 269, height: 80 },
+  "58": { src: "/img/home-optimized/partners/security58.webp", width: 280, height: 50 },
+  CTstack: { src: "/img/home-optimized/partners/CTstack.webp", width: 186, height: 54 },
+  E安全: { src: "/img/home-optimized/partners/E安全.webp", width: 250, height: 80 },
+  嘶吼: { src: "/img/home-optimized/partners/4hou.webp", width: 280, height: 76 },
+  四叶草安全: { src: "/img/home-optimized/partners/seclover.webp", width: 231, height: 80 },
+  安全脉搏: { src: "/img/home-optimized/partners/secpulse.webp", width: 273, height: 80 },
+  智联SRC: { src: "/img/home-optimized/partners/zhaopin.webp", width: 280, height: 38 },
+  度小满: { src: "/img/home-optimized/partners/duxiaoman.webp", width: 280, height: 53 },
+  贝壳: { src: "/img/home-optimized/partners/beike.webp", width: 280, height: 49 },
+  快手: { src: "/img/home-optimized/partners/kuaishou.webp", width: 280, height: 49 },
+  小米: { src: "/img/home-optimized/partners/xiaomi.webp", width: 280, height: 75 },
+  无糖信息: { src: "/img/home-optimized/partners/wutang.webp", width: 280, height: 50 },
+  三叶草: { src: "/img/home-optimized/partners/sycsec.webp", width: 79, height: 80 },
+  c4安全团队: { src: "/img/home-optimized/partners/c4.webp", width: 253, height: 80 },
 };
 
 const HomePartnerMarquee: React.FC = () => {
   const partners = COOPERATIVE_PARTNERS.map((partner) => {
-    const optimizedImg = OPTIMIZED_PARTNER_BY_NAME[partner.name];
-    if (!optimizedImg) {
+    const asset = OPTIMIZED_PARTNER_BY_NAME[partner.name];
+    if (!asset) {
       throw new Error(`Missing optimized homepage partner asset: ${partner.name}`);
     }
-    return { ...partner, optimizedImg };
+    return { ...partner, asset };
   });
   const shouldLoadImages = useLoadWhenHomeSlide(1);
   if (!partners.length) return null;
@@ -73,8 +77,10 @@ const HomePartnerMarquee: React.FC = () => {
               aria-label={item.name}
             >
               <img
-                src={shouldLoadImages ? item.optimizedImg : undefined}
+                src={shouldLoadImages ? item.asset.src : undefined}
                 alt={item.name}
+                width={item.asset.width}
+                height={item.asset.height}
                 loading="lazy"
                 decoding="async"
                 fetchPriority="low"
