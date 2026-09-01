@@ -1,9 +1,11 @@
 const remarkSanitizeAutolinks = require("./scripts/remark-sanitize-autolinks");
-const { fetchLatestYakitVersion } = require("./scripts/latest-yakit-version");
+const { fetchBuildFacts } = require("./scripts/build-facts");
 
 const siteUrl = "https://yaklang.com";
-// 构建期一手版本事实：失败为 null 时所有消费方自动回退，不影响构建
-const latestYakitVersion = fetchLatestYakitVersion();
+// 构建期一手事实（版本/stars/forks/安装包大小）：任一项失败为 null 时
+// 所有消费方自动回退，不影响构建
+const buildFacts = fetchBuildFacts();
+const latestYakitVersion = buildFacts.yakitVersion;
 const organizationSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -15,13 +17,15 @@ const organizationSchema = {
             url: siteUrl,
             logo: `${siteUrl}/img/yaklogo.png`,
             // sameAs 必须指向该实体在「其它」平台上的权威表示，禁止自引用站点 URL。
+            // 2026-08-31 审计修正：仓库 URL 不是「组织在其它平台的表示」（仓库是
+            // Project/产品，属 SoftwareApplication.codeRepository），已移至下方
+            // 两个 SoftwareApplication 节点；此处只保留组织级主页。
+            // 待补充：建立 YouTube / LinkedIn / Wikidata / Wikipedia / X 官方
+            // 阵地后追加其 URL —— 只写可核实存在的链接，不预填占位。
             sameAs: [
                 "https://github.com/yaklang",
-                "https://github.com/yaklang/yaklang",
-                "https://github.com/yaklang/yakit",
                 // 官方 Bilibili 频道（与 HomeFooter 中的链接一致）
                 "https://space.bilibili.com/437503777",
-                // 待补充：建立 YouTube / LinkedIn / Wikidata / Wikipedia 实体后追加其 URL
             ],
             description:
                 "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
@@ -61,6 +65,8 @@ const organizationSchema = {
             ],
             author: { "@id": `${siteUrl}/#organization` },
             publisher: { "@id": `${siteUrl}/#organization` },
+            // 仓库是产品实体属性而非组织社交档案（2026-08-31 审计 P0-2）
+            codeRepository: "https://github.com/yaklang/yakit",
             // 一手版本事实：AI 引擎可直接从站内引用「截至构建时 Yakit 版本为 X」
             ...(latestYakitVersion
                 ? {
@@ -68,6 +74,38 @@ const organizationSchema = {
                       releaseNotes: "https://github.com/yaklang/yakit/releases",
                   }
                 : {}),
+            offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+            },
+        },
+        // 第二个产品实体：Yaklang 语言本身（2026-08-31 审计 P2-12）。
+        // 与 Yakit 区分开，避免 AI 引擎把「语言」与「工作台」合并成单一实体。
+        {
+            "@type": "SoftwareApplication",
+            "@id": `${siteUrl}/yaklang#software`,
+            name: "Yaklang",
+            alternateName: "YAK",
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Windows, macOS, Linux",
+            url: `${siteUrl}/docs/intro/`,
+            downloadUrl: "https://github.com/yaklang/yaklang/releases",
+            codeRepository: "https://github.com/yaklang/yaklang",
+            isAccessibleForFree: true,
+            inLanguage: ["zh-CN", "en"],
+            description:
+                "Yaklang (YAK) is a domain-specific programming language (CDSL-YAK) for cybersecurity engineering. It unifies scanning, proof-of-concept authoring, vulnerability validation, traffic analysis, and security automation in one Go-runtime-backed language.",
+            featureList: [
+                "MITM and traffic analysis",
+                "Service scanning",
+                "PoC authoring",
+                "Fuzzing",
+                "Goroutine-style concurrency",
+            ],
+            author: { "@id": `${siteUrl}/#organization` },
+            publisher: { "@id": `${siteUrl}/#organization` },
             offers: {
                 "@type": "Offer",
                 price: "0",
@@ -101,6 +139,9 @@ module.exports = {
     customFields: {
         // 构建期拉取的 Yakit 最新版本，供首页下载区做 SSR 初始版本
         yakitLatestVersion: latestYakitVersion,
+        // 构建期一手事实（stars/forks/安装包大小），供首页统计行、
+        // 下载表格 SSR 直出与 llms.txt 事实段使用
+        buildFacts,
     },
     organizationName: "yaklang", // Usually your GitHub org/user name.
     projectName: "yak-project-main-page", // Usually your repo name.

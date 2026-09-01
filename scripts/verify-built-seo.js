@@ -141,6 +141,8 @@ const criticalRoutes = [
   "/en/editorial-policy",
   "/download",
   "/en/download",
+  "/yakit-vs-burp-suite",
+  "/en/yakit-vs-burp-suite",
 ];
 
 for (const route of criticalRoutes) {

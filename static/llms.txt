@@ -24,17 +24,12 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 ## Project context
 
 - [Technical blog](https://yaklang.com/blog/): Security research, engineering articles, release notes, and project announcements.
+- [FAQ](https://yaklang.com/faq/): Frequently asked questions about Yaklang, Yakit, and the ecosystem.
+- [Yakit vs Burp Suite](https://yaklang.com/yakit-vs-burp-suite/): Side-by-side comparison of features, license, pricing, and platforms.
 - [Yak Project milestones](https://github.com/yaklang/yaklang.github.io/blob/master/materials/project-credibility/full-history.md): Source-linked project history and public evidence.
 - [Yak Project team](https://yaklang.com/team/): Team and project background.
 - [Cooperative partners](https://yaklang.com/cooperativePartner/): Ecosystem and partner information.
-- [YakLab manuals](https://yaklang.com/Yaklab/): Deliberately vulnerable training environments for local, authorized validation.
-
-## Optional
-
-- [English homepage](https://yaklang.com/en/): English-language project overview.
-- [Extended AI context](https://yaklang.com/llms-full.txt): Long-form product, language, FAQ, and citation context.
-- [Legacy extended AI overview](https://yaklang.com/llm.txt): Backward-compatible long-form project context.
-- [Sitemap](https://yaklang.com/sitemap.xml): Complete indexable URL inventory.
+- [YakLab manuals](https://yaklang.com/Yaklab/yaklab/): Deliberately vulnerable training environments for local, authorized validation.
 
 ## Citation guidance
 
@@ -42,3 +37,10 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 2. Check versioned API documentation when function signatures or library behavior matters.
 3. Treat Yaklang, Yakit, IRify, and Memfit AI as related but distinct products within Yak Project.
 4. Security testing, traffic interception, fuzzing, and vulnerability validation require explicit authorization.
+
+## Optional
+
+- [English homepage](https://yaklang.com/en/): English-language project overview.
+- [Extended AI context](https://yaklang.com/llms-full.txt): Long-form product, language, FAQ, and citation context.
+- [Legacy extended AI overview](https://yaklang.com/llm.txt): Backward-compatible long-form project context.
+- [Sitemap](https://yaklang.com/sitemap.xml): Complete indexable URL inventory.

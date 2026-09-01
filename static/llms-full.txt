@@ -67,6 +67,7 @@ for result = range results {
 - Open-source ecosystem: https://yaklang.com/opensource
 - Downloads: https://yaklang.com/download
 - FAQ: https://yaklang.com/faq
+- Yakit vs Burp Suite comparison: https://yaklang.com/yakit-vs-burp-suite
 
 ## Canonical sources
 

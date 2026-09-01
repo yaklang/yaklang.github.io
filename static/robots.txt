@@ -1,6 +1,12 @@
 User-agent: *
 Allow: /
 
+# IETF draft-romm-aipref-contentsignals：机器可读的内容偏好声明
+# 多个 signal 必须逗号分隔（分号会被合规解析器当作非法 token 整条丢弃）；
+# ai-input 授权 RAG/检索式引用（2026-08-31 第三次审计 F-2）；
+# ai-retrieval 是该草案的正式检索授权键（2026-09-01 审计 [Low]，与 ai-input 并存）
+Content-Signal: ai-train=yes, search=yes, ai-input=yes, ai-retrieval=yes
+
 # 显式放行主流 AI / LLM 爬虫，便于 AI 搜索引擎（ChatGPT、Perplexity、Google AIO、Claude 等）抓取与引用
 
 # OpenAI
