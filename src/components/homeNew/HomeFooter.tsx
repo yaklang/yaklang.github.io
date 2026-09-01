@@ -509,7 +509,7 @@ const HomeFooter: React.FC<{
     >
       {/* 主内容：Logo / 标语 / 链接列；fill 时由 flex-1 在 sticky min-h 父级内撑开 */}
       <div
-        className={`${containerClass} flex flex-col pt-[40px]${fill ? " flex-1" : ""}`}
+        className={`${containerClass} flex flex-col pt-[40px]${fill ? " flex-1" : ""} pt-[60px]`}
       >
         <div className={`flex flex-col gap-[40px]${fill ? " flex-1" : ""}`}>
           <div
