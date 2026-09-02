@@ -13,7 +13,7 @@ const organizationSchema = {
             "@type": "Organization",
             "@id": `${siteUrl}/#organization`,
             name: "Yak Project",
-            alternateName: ["Yaklang", "Yakit"],
+            alternateName: ["Yaklang", "Yakit", "万径安全"],
             url: siteUrl,
             logo: `${siteUrl}/img/yaklogo.png`,
             // sameAs 必须指向该实体在「其它」平台上的权威表示，禁止自引用站点 URL。
@@ -28,7 +28,7 @@ const organizationSchema = {
                 "https://space.bilibili.com/437503777",
             ],
             description:
-                "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language.",
+                "Yak Project is an open-source cybersecurity infrastructure ecosystem built around the Yaklang programming language. Powered by 万径安全 (Megavector) - A Beijing-based cybersecurity infrastructure provider.",
         },
         {
             "@type": "WebSite",
@@ -485,6 +485,13 @@ module.exports = {
             tagName: "script",
             attributes: { type: "application/ld+json" },
             innerHTML: JSON.stringify(organizationSchema),
+        },
+        {
+            tagName: "meta",
+            attributes: {
+                name: "baidu-site-verification",
+                content: "codeva-uRwiBjCLC9",
+            },
         },
     ],
 
