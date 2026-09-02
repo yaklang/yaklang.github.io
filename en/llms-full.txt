@@ -67,6 +67,7 @@ for result = range results {
 - Open-source ecosystem: https://yaklang.com/opensource
 - Downloads: https://yaklang.com/download
 - FAQ: https://yaklang.com/faq
+- Yakit vs Burp Suite comparison: https://yaklang.com/yakit-vs-burp-suite
 
 ## Canonical sources
 
@@ -81,3 +82,156 @@ for result = range results {
 2. Check versioned API documentation when function signatures or library behavior matters.
 3. Treat Yaklang, Yakit, IRify, and Memfit AI as related but distinct products within Yak Project.
 4. Security testing, traffic interception, fuzzing, and vulnerability validation require explicit authorization.
+
+## Project facts
+
+- Latest Yakit release: v1.4.8-0828 (retrieved 2026-09-02 at site build time)
+- GitHub stars: yaklang/yakit 7,713
+- GitHub stars: yaklang/yaklang 632
+- GitHub forks: yaklang/yakit 825
+- Yakit v1.4.8-0828 installer sizes: macIntel 194.09 MB, macApple 184.36 MB, linux 233.88 MB, windows 161.4 MB, linuxArm64 227.85 MB
+- Releases: https://github.com/yaklang/yakit/releases
+
+## Documentation index (auto-generated at build time)
+
+
+### Yaklang programming documentation
+
+- [ReAct 智能体引擎（aim）](https://yaklang.com/docs/ai/aim): 前面 ai 库做的是"一问一答"：你给提示词、模型给答案，一来一回就结束。但很多任务不是一句话能搞定的——它需要模型自己规划步骤、调用工具、看结果、再决定下一步，反复迭代直到完成。这种"思考(Reason) + 行动(Act)"循环就是 R
+- [大文本切块流水线（aireducer）](https://yaklang.com/docs/ai/aireducer): 大模型的上下文窗口是有限的。当你要处理一份很长的日志、源码或报告时，不能一股脑塞给模型，而要先切成小块，再逐块处理（分段总结、分段抽取、分段打标）。aireducer 就是干这件事的：你给它一段文本（或文件、数据流）和一个切块规则，它把内容
+- [基础对话与模型调用（ai）](https://yaklang.com/docs/ai/chat): ai 库是和大模型打交道的入口。最常用的就是 ai.Chat(prompt, ...opts)：传一段提示词，拿回模型的回答字符串。围绕它，ai 还提供了分级模型（按"智能/快速/视觉"挑模型）、流式输出（边生成边消费）以及一整套连接选项（
+- [Yaklang 中的 AI 编程](https://yaklang.com/docs/ai/overview): Yaklang 把大语言模型（LLM）当作"一等公民"内置进语言：你可以在安全脚本里直接发起对话、做函数调用、消费结构化数据流，把大文本切块喂给模型做流水线处理，甚至跑一个会自己调用工具的 ReAct 智能体。本章围绕三个核心库展开： - 
+- [知识库检索增强（RAG）](https://yaklang.com/docs/ai/rag): 大模型的知识停在训练那一刻，也不知道你私有的文档、漏洞库、内部规范。RAG（Retrieval-Augmented Generation，检索增强生成）解决的就是这个问题：先把你的资料切块、算成向量存进知识库，提问时先检索出最相关的几段，再
+- [函数调用与结构化流（ai）](https://yaklang.com/docs/ai/structured): 普通对话拿到的是一段自由文本，但在自动化里我们往往需要结构化的结果——比如让模型把一句话解析成 {城市, 日期, 意图} 三个字段，好让后续代码直接用。ai 库为此提供两条路： - ai.FunctionCall(input, fields
+- [[cli] 从命令行读参数](https://yaklang.com/docs/buildinlibs/lib_cli): cli 这个包是 yak 处理命令行参数的工具包，用法非常简单，我们根据实例简单看一下这个包如何使用 上述代码执行之后，会展示所有输入的参数： 通过执行 dump(strParam) 可以看到参数类型与值 cli.Bool(paramNam
+- [[crawler] 普通爬虫(非浏览器爬虫)](https://yaklang.com/docs/buildinlibs/lib_crawler): 内置的爬虫并不复杂，可以处理最基础的非单页应用的爬虫需求。在进行一个新的扫描目标的时候，我们往往没有扫描入口，使用爬虫进行爬取是一个不错的选择。1. fn crawler.Start(var1: string, vars: ...crawl
+- [[dyn] 动态插件](https://yaklang.com/docs/buildinlibs/lib_dyn): dyn 是 yak 中的动态插件模块，我们在编写 yak exp / poc 代码时，经常需要分工协作。当多人协作的时候，我们需要提供一种加载别人代码的方式，当然 include 是一种方式，但是有时候需要动态加载，而 include 只能
+- [[exec] 命令执行封装](https://yaklang.com/docs/buildinlibs/lib_exec): 本模块是一个高度封装的系统命令执行模块，支持基础的命令执行，同时也支持复杂的针对命令执行中内容的分析，本教程简单通过两个例子来介绍 exec 对 Golang 原生命令执行的封装。这两个 API 是最简单也是最容易理解的 1.…
+- [[file] 文件操作与IO库](https://yaklang.com/docs/buildinlibs/lib_file): 1. file.OAPPEND 同 Golang 中的 os.OAPPEND 用于创建文件的标志值，可以通过 | 来链接其他值 1. file.OCREATE 同 Golang 中的 os.OCREATE 用于创建文件的标志值，可以通过 |
+- [[fuzz] 模糊测试工具库](https://yaklang.com/docs/buildinlibs/lib_fuzz): 可能是北半球最好用的模糊测试工具包。很多时候，本扩展包的内容不仅仅可以用于生成模糊测试的 Payload，也可以用于生成批量渲染的 HTTP 请求。import TOCInline from '@theme/TOCInline'; <TOC
+- [[http] HTTP库](https://yaklang.com/docs/buildinlibs/lib_http): 这是一个非常高频的库，我们经常会使用他发送 HTTP 请求，相比其他语言的 HTTP 库，yak 的 HTTP 做到了更简练！talk is cheep...。HTTP 库包含三个可用的 http 子库，分别是 1. http 标准 HTT
+- [[io] 系统读写工具库](https://yaklang.com/docs/buildinlibs/lib_io): 1. 把后面的 var2(io.Reader) 的输出接入到 var1(io.Writer) 中 fn io.Copy(var1: io.Writer, var2: io.Reader): (int64, error) 1.…
+- [[json] JSON序列化与反序列化](https://yaklang.com/docs/buildinlibs/lib_json): 本系统的 JSON API 非常简单，只有两个，一个是序列化一个是反序列化 1. fn json.Marshal(var1: interface {}): ([]byte, error) Json 序列化，把任意一个对象解析成 []byte
+- [[mitm] HTTPS中间人劫持(被动扫描入口)](https://yaklang.com/docs/buildinlibs/lib_mitm): 熟悉 xray 的同学可能非常熟悉被动扫描的模式，当我们测试爬虫失效的情况下，经常需要手动设置代理来收集更多的请求（用于纯记录或扫描）。1. fn mitm.Bridge(var1: interface {}, var2: string, 
+- [[nuclei] 赋予 Yak 漏扫能力](https://yaklang.com/docs/buildinlibs/lib_nuclei): import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; 本身 Yak 并不具备漏洞扫描能力，但是作为一门希望一站式解决安全研发需求的语言，如果能在语言/语言
+- [[os] 操作系统库](https://yaklang.com/docs/buildinlibs/lib_os): 1. fn os.Clearenv() 清除所有环境变量 1. fn os.Environ(): []string 获取当前所有环境变量 1. fn os.Executable(): (string, error) 获取当前执行的二进制文件
+- [[re] 正则工具库](https://yaklang.com/docs/buildinlibs/lib_re): fn re.QuoteMeta(var1: string): string yak 的正则工具包非常简单易用，核心只有两个函数 1. fn re.Match(var1: string, var2: string|[]byte): bool:
+- [[servicescan] 服务指纹扫描](https://yaklang.com/docs/buildinlibs/lib_servicescan): 本文会出现很多实际互联网扫描公开资产的案例，但是关键的 IP 将会被打码。相比 synscan，servicescan 更像是一个精准扫描的手术刀，主要启动一个连接，对连接目标进行精准的扫描，获取精确指纹信息。…
+- [[spacengine] 网络空间引擎](https://yaklang.com/docs/buildinlibs/lib_spacengine): 本网络空间引擎目前集成了市面常见的一些网络空间引擎的库： 1. fofa 1. shodan 1. quake(From 360) 1. hunter 1. zoomeye 可以支持编写脚本从上述五个引擎中搜索数据 1.…
+- [[str] 字符串工具库](https://yaklang.com/docs/buildinlibs/lib_str): Yak 的字符串我们在语言基础中，有一些简单的讲解，但是我们没有讲关于字符串的其他操作，在本节中，我们将会着重讲解 Yak 自带的字符串处理函数以及相关细节问题 和 Golang 类似，在 Yak 中，我们的字符串支持如下定义 注意 1. 
+- [[subdomain] 子域名收集](https://yaklang.com/docs/buildinlibs/lib_subdomain): 本身 YAK 支持子域名收集，本模块实现了如下功能： 1. 子域名收集，从第三方数据源，包含证书查询，常见数据源等 2. DNS 域传送漏洞检测和利用 3. 子域名爆破： 1. 智能处理泛解析，防止误报 2. 支持递归检测，可以支持递归深度
+- [[sync] 同步/并发控制](https://yaklang.com/docs/buildinlibs/lib_sync): 本模块基本和 Golang 原生 sync 功能相同，基本也都继承了 Golang 的相关数据结构。fn sync.NewCond(): sync.Cond fn sync.NewLock(): sync.Mutex fn sync.New
+- [[synscan] SYN扫端口](https://yaklang.com/docs/buildinlibs/lib_synscan): 语言自带扫描功能是本语言的一个大亮点。你在使用 yak 的时候，将不会再费心思考虑如何实现一个端口扫描功能，或者如何把 nmap 集成进你想编写的语言中。什么是 SYN 端口扫描？1. 自己维护一套网络栈，拆解 TCP 三次握手 1. 只进
+- [[tcp] TCP 网络连接库](https://yaklang.com/docs/buildinlibs/lib_tcp): 本网络连接库经过高度简化，并不使用传统 Socket 接口，而使用核心的三个函数来完成常见 TCP 的功能 1. Connect 作为 TCP 连接客户端发起连接 1. Serve 快速构建一个 TCP 服务器 1. Forward 端口转
+- [[time] 时间与日期](https://yaklang.com/docs/buildinlibs/lib_time): 1. fn time.After(var1: float64): <-chan time.Time 1. fn time.AfterFunc(var1: time.Duration, var2: func()): time.Timer 1.
+- [[tls] TLS工具包](https://yaklang.com/docs/buildinlibs/lib_tls): 不同于 Golang 原生的 TLS 包，yak 的 TLS 工具包并不提供 TLS 连接等功能，只提供必要的根证书生成与证书签发等功能。本 tls 工具包重点支持其他工具包对于 TLS 的需求： 1. 比如开启一个 TCP TLS 连接需
+- [[xpath] XPATH](https://yaklang.com/docs/buildinlibs/lib_xpath): xpath 是补全 yak 对 html 处理能力的一个环节，这个内置模块本质上是对 htmlquery 的精简与再封装。在使用查询 API 之前，我们需要通过 xpath.LoadHTMLDocument 来生成一个 HTML 可操作文档
+- [全局内置函数与内置操作](https://yaklang.com/docs/builtin-global-functions): 内置函数（也叫全局函数）无需引入任何库即可直接调用，它们是编写 Yaklang 脚本的基础工具；内置操作则是作用在切片、映射、通道等复合结构上的语言级能力。本章先用一张速查表建立全局认知，再按功能组逐一拆解，每组都配有可直接用 yak 运行
+- [编解码与加解密 codec](https://yaklang.com/docs/crypto/codec): codec 是安全研发里使用频率最高的工具库之一，几乎贯穿每一次抓包、改包、爆破与漏洞验证。它把四大类能力收在一个库里： - 编码转换：Hex / Base64 / Base32 / URL / HTML / Unicode / 中文字符集
+- [密钥与证书的密码学处理](https://yaklang.com/docs/crypto/tls-crypto): tls 库不只是用来建加密连接，它还提供了一整套密码学材料的生成能力：RSA / SM2 密钥对、自签根 CA、签发服务器/客户端证书、RSA 公钥加密私钥解密。本章聚焦"密码学处理"这条线——把 tls 生成的密钥与证书，配合 codec
+- [Yak：致力于安全能力融合的语言](https://yaklang.com/docs/intro): Yaklang 是面向网络安全研发的领域编程语言，通过统一语言、工具库与运行环境融合扫描、PoC、流量分析和安全自动化能力。
+- [DNS 解析](https://yaklang.com/docs/network/dns): dns 库提供域名解析：查 A 记录（域名 → IP）、查所有 IP、查 NS / TXT 等记录，并支持指定解析超时和自定义 DNS 服务器。它是子域名收集、资产测绘、解析诊断类脚本的基础。对外部域名的解析结果（具体 IP、NS、TXT）
+- [HTTP 服务端编程](https://yaklang.com/docs/network/httpserver): httpserver 库让你用极少的代码起一个 HTTP 服务：注册一个处理函数，对每个请求拿到 req（请求）和 rsp（响应写入器），自己决定怎么读、怎么回。它常用于搭 Mock 接口、临时回连服务、本地调试用的 Web 服务等。本章只
+- [网络编程](https://yaklang.com/docs/network/overview): 本章介绍 Yaklang 中从传输层到应用层的网络通信原语：TCP 客户端与服务端、UDP 无连接通信、HTTP 服务端、TLS 证书生成与加密连接，以及 DNS 解析。这些是写扫描器、自定义协议交互、Mock 服务、加密通道与资产发现类脚
+- [TCP 客户端与服务端编程](https://yaklang.com/docs/network/tcp): tcp 库提供原始 TCP 字节流的收发能力：用 tcp.Connect 建立客户端连接，用 tcp.Serve 起一个 TCP 服务端。它不关心上层协议，给你的是一条可以随意读写字节的管道，适合自定义协议交互、Mock 服务、协议探测等场
+- [TLS 证书生成与加密连接](https://yaklang.com/docs/network/tls): tls 库一边管"密码学材料"（生成 RSA / SM2 密钥对、自签根 CA、签发服务器/客户端证书、RSA 加解密），一边管"加密通道"（探测目标 TLS 信息、给 TCP/HTTP 服务套 TLS）。本章先把证书这条线讲清楚，再把它接
+- [UDP 无连接通信与服务器](https://yaklang.com/docs/network/udp): udp 库提供 UDP 数据报的收发。和 TCP 最大的不同是 UDP 是无连接的：udp.Connect 并不真的"握手建链"，它只是创建一个绑定了目标地址的本地套接字，因此即使对端没人监听，Connect 通常也会成功——错误要到发送/
+- [系统命令执行（exec）](https://yaklang.com/docs/os-file/exec): 本节全部来自 exec 库（解析输出会配合 str）。exec 负责调用外部命令，覆盖：一次性执行拿输出、带超时执行、命令对象（区分 stdout / stdout+stderr）、批量并发执行、流式捕获输出、崩溃检测。exec.Syste
+- [文件增删改查与目录操作](https://yaklang.com/docs/os-file/file-basic): 本节全部来自 file 库（拼路径会配合 os.TempDir 取临时目录）。这里讲"把整个文件当一个整体"的操作：一次性读写、文件信息与哈希、复制移动删除、目录列举与遍历。需要句柄级、按行、随机定位等更细的 IO，见下一节文件句柄、IO 
+- [文件句柄、IO 与流式读写](https://yaklang.com/docs/os-file/file-io): 上一节是"把整个文件当整体"读写；本节是更细粒度的句柄级 IO：打开一个文件拿到句柄后，可以多次写、随机定位（Seek）、按行流式读、追加、截断。处理大文件、日志、需要边读边处理的场景都靠它。本节仍属 file 库，并会用到 io 库。打开
+- [操作系统与文件编程](https://yaklang.com/docs/os-file/intro): 本章介绍 Yaklang 中与"机器本身"打交道的能力：文件的增删改查、句柄级 IO 与流式读写、路径处理、操作系统环境与系统常量、外部命令执行，以及时间与日期操作。这些是写自动化脚本、落地工具、采集与扫描类脚本的基石。为方便循序渐进地学习
+- [操作系统环境与系统常量](https://yaklang.com/docs/os-file/os-system): 本节全部来自 os 库。os 库封装了进程与系统层面的能力：环境变量读写、平台与架构常量、进程信息、系统目录等。最常用的一组：os.Getenv 读、os.Setenv 写、os.Unsetenv 删、os.LookupEnv 在"读值"的
+- [路径操作](https://yaklang.com/docs/os-file/path): 本节全部来自 file 库，是一组纯字符串层面的路径处理函数——它们只对路径字符串做计算，不访问磁盘。底层基本对应 Golang 的 path/filepath，因此行为与之一致。file.Join 用当前平台的分隔符把各段连起来，并自动调
+- [系统时间与日期（time）](https://yaklang.com/docs/os-file/time): 本节全部来自 time 库，提供时间获取、格式化、解析与计算。Yaklang 沿用 Golang 的"参考时间"布局 2006-01-02 15:04:05：用这串固定数字表示你想要的格式。…
+- [HTTP 协议与数据包处理](https://yaklang.com/docs/security/cap8-1-http): 在这里，我们将向您介绍如何使用我们的专家级HTTP库，这个库提供了一些传统HTTP库所没有的功能，并且对安全场景做了特殊优化，这些优化将帮助您理解和掌握在安全领域中非常重要的HTTP数据包处理技术： 1. 直接使用原始 HTTP Reque
+- [中间人攻击: MITM](https://yaklang.com/docs/security/cap8-2-mitm): 本章示例均为 mitm.Start 中间人代理的展示性代码：它们会启动一个常驻代理服务并依赖浏览器/客户端把流量导入该代理，无法在文档里离线确定性地自动验证，因此不附带 assert/// OUT。代码统一使用 yak 高亮，运行效果以正文
+- [网络端口扫描与指纹识别](https://yaklang.com/docs/security/cap8-3-port-n-service-scan): 本章的 synscan/servicescan 示例都是真实网络扫描：synscan 需要原始套接字权限（通常需 root/管理员），servicescan 会对外部主机发起连接，二者均无法在文档里离线确定性地自动验证，因此作为展示性代码给
+- [使用 YAML 编写 PoC](https://yaklang.com/docs/security/cap8-4-yaml-poc): YAML 是一种直观的数据序列化格式，常用于配置文件、数据交换和存储。它设计的初衷是保证易于人类阅读和编写，同时对计算机来说也易于解析和生成。了解 YAML 的基础有助于快速上手并有效地使用它。YAML 主要支持以下三种数据结构： - 标量
+- [渗透测试 Java 应用](https://yaklang.com/docs/security/cap8-5-java-hack): - 可离线验证的示例（yso 生成利用链、codec 加解密）：用 assert 锁定确定性结论（如 Java 序列化流以魔数 0xAC 0xED 开头、AES 密钥长度等），均已 yak 实跑验证。 - 展示性示例（依赖 .class 文
+- [安全能力与漏洞验证](https://yaklang.com/docs/security/overview): 本章汇总 Yaklang 面向安全场景的核心能力与漏洞验证工作流：从 HTTP 协议与数据包处理（poc）、中间人劫持（MITM）、端口扫描与服务指纹识别，到用 YAML 模板编写可复用的漏洞验证 PoC（结合 nuclei 生态），以及针
+- [搭建 Yak 语言开发环境](https://yaklang.com/docs/startup): import Tabs from '@theme/Tabs'; import TabItem from '@theme/TabItem'; import TOCInline from '@theme/TOCInline'; <TOCInli
+- [JSON 处理与流式操作](https://yaklang.com/docs/strings/json): json 库负责 JSON 的序列化/反序列化与按路径取值；当数据很大、不完整、或像大模型输出那样"一边产生一边到达"时，则用 jsonstream 做流式解析。本章先讲常规 json，再讲进阶的 jsonstream。json.dumps
+- [文本与字符串操作](https://yaklang.com/docs/strings/overview): 文本处理是安全研发中最高频的工作：解析报文、提取参数、清洗数据、生成 payload，几乎都离不开字符串操作。Yaklang 把这部分能力拆成几个互补的内置库，本章按"从通用到专用、从结构化到生成式"的顺序逐一展开。本章所有示例都可直接用 
+- [正则表达式 re / re2](https://yaklang.com/docs/strings/regexp): Yaklang 提供两个正则库： - re：基于 Golang 标准 regexp（RE2 语法），线性时间、无回溯，不支持前瞻/后顾/反向引用等 Perl 扩展。日常匹配、提取、替换都用它。 - re2：增强引擎，支持前瞻 (?=...)
+- [基础内置库 str 手册](https://yaklang.com/docs/strings/str-manual): str 是 Yaklang 中最常用的字符串库，既覆盖了与 Golang strings 对应的通用操作（判断、查找、切割、替换、修剪、大小写），也针对安全研发补充了大量"提取"类函数（从文本中抽域名、主机、端口、标题、JSON 等）。本手
+- [模糊生成与随机字符串](https://yaklang.com/docs/strings/string-generation): 造数据是安全测试的日常：批量生成 payload、用例、随机口令、测试 ID。Yaklang 提供三套互补的能力： - regen：按正则表达式"反向生成"匹配它的字符串（与匹配相反，是造串）。…
+- [用 xpath / xhtml 解析 XML / HTML](https://yaklang.com/docs/strings/xml-html): 从网页里抽取数据时，正则往往力不从心（标签嵌套、属性顺序多变）。Yaklang 的 xpath 库把 HTML/XML 解析成节点树，用 XPath 表达式 精确定位节点；xhtml 则提供一些轻量的辅助函数（如取两个标记之间的内容）。…
+- [Yak 语言中的语句、变量和表达式](https://yaklang.com/docs/yak-basic/cap3-stats-vars-and-exprs): 从本章节开始，笔者将带领大家正式开始Yak语言的学习。本章内容包含Yak语言中语句的类型、变量的定义与使用、基本数据类型的定义与使用，复合类型以及Yak语言中出现的运算符和表达式。要了解一个Yak语言基础程序，需要从基本结构开始了解： 1.
+- [控制流：IF For Switch](https://yaklang.com/docs/yak-basic/cap4-control-flow): 在前三章中，读者已经学习了Yak语言的基础数据类型、复合类型以及如何使用表达式和操作符来执行简单的运算和数据操作。掌握了这些知识，读者可以编写一些基本的程序，但这些程序通常是直线式的，即代码从上到下依次执行，没有任何的分支和循环。为了编写更
+- [函数的创建与使用](https://yaklang.com/docs/yak-basic/cap5-function): 在Yak语言中，函数本质上是一种“值”。笔者推荐您使用如下模式来声明函数： 在上述代码中，笔者通过函数字面量声明了一个函数，并将其赋值给变量add。与传统的函数声明方式相比，这里的函数字面量（即函数的定义）并没有指定函数名，而是当我们将此函
+- [异步、并发编程和 defer 延迟](https://yaklang.com/docs/yak-basic/cap6-1-concurrent-and-defer): 在学习完Yak语言的基础概念和语法之后，笔者将会带领大家开始Yak语言的高级编程技术，本节包含并发异步功能的使用；延迟执行，同步控制，错误处理等重要概念。一般而言，计算机程序按照代码的执行顺序分为同步执行以及异步执行。…
+- [Yak 语言中的错误处理](https://yaklang.com/docs/yak-basic/cap6-2-error-handling): 在程序运行中，可能会出现很多的错误以及崩溃。程序运行时将会产生以下的信息： 这就是在提示程序发生了崩溃。当崩溃发生时，程序将会直接退出，不会执行后续的代码，在这个示例中可以看到后续的println("after a = ", a)并没有被执
+- [作用域](https://yaklang.com/docs/yak-basic/cap6-3-scope): 作用域（也被称为冲突域）是一个非常重要的概念，它在编程语言中起到了关键的作用。一般来说，作用域是一个区域，它规定了在该区域内定义的变量、函数、和对象的可见性和生命周期。换句话说，作用域定义了在哪里和在何时可以访问一个变量或者一个实体。为了更
+- [模块化与多文件编程](https://yaklang.com/docs/yak-basic/cap6-4-modules): 在考虑模块化和多文件编程时，我们经常需要根据位置定位文件和资源目录。Yak提供三个全局变量用于支持此功能。- YAKMAIN：bool 类型数据，只有当文件主动调用运行时会设置为 true，其他文件导入本文件时被设置为 false。 - Y
+- [模糊文本渲染: FuzzTag](https://yaklang.com/docs/yak-basic/cap6-5-fuzztag): FuzzTag是yaklang内置的一种基于模糊文本生成引擎实现的tag语法，能够灵活地嵌入数据中，实现数据的模糊生成和数据加工。该特性可广泛应用于渗透测试中的fuzz测试过程。yaklang的模板字符串支持fuzztag语法的使用，可以方
+- [章节介绍](https://yaklang.com/docs/yakexamples/1-intro): 本章是对 Yak 基于实践的介绍，包含一系列带有注释说明的示例程序。本章内容包括但不限于关于 Yak 在编程过程中的如下方面： 1. str 库介绍：提供各种安全特色的字符串解析和处理函数。
+- [函数库：synscan - SYN 扫描](https://yaklang.com/docs/yakexamples/11-synscan): SYN 扫描（SYN scan）是一种常见的网络扫描技术，用于确定一个主机上是否存在打开的网络端口。SYN 扫描利用了 TCP/IP 协议中的一些特性，可以在不建立完整的 TCP 连接的情况下发送 SYN 数据包来测试目标主机上的端口是否开
+- [函数库：str - 字符串工具集](https://yaklang.com/docs/yakexamples/2-strutils): 用户在使用 str 库之前，我们推荐用户先完成 Yaklang 字符串基础语法的学习，相关链接如下 - 字符串：基础字符串使用 ...在完成字符串基本定义的学习之后，我们就可以来学习如何使用 str 函数集来帮助你的工作，接下来我们将详细介
+- [函数库：codec - 加密与编码](https://yaklang.com/docs/yakexamples/3-codec): 在计算机中，编码和解码是将数据从一种形式转换为另一种形式的过程，通常用于将数据在不同的系统之间传输或存储。编码和解码的意义在于，它们使不同的系统之间可以传输和处理数据，而不会因为编码格式不同而出现问题。例如，在 Web 开发中，浏览器和服务
+- [函数库：http - 基本 HTTP 通信](https://yaklang.com/docs/yakexamples/4-http-basic): HTTP（Hypertext Transfer Protocol）协议是一种用于在计算机网络中传输超文本文档的应用层协议。HTTP 是 Web 浏览器和 Web 服务器之间通信的基础，它定义了客户端如何向服务器请求数据，以及服务器如何响应这
+- [函数库：poc - 专家 HTTP 库](https://yaklang.com/docs/yakexamples/5-http-advanced): "专家级" 的 HTTP 库指的是用户可以通过当前这个函数库获得如下一般 HTTP 库无法支持的场景： 1. 直接使用原始 HTTP Request 报文发送数据包 2. 构造畸形数据包 3. 修复不符合 HTTP 协议的 HTTP Req
+- [函数库：fuzz - 模糊测试 HTTP](https://yaklang.com/docs/yakexamples/6-fuzz-request): HTTP 模糊测试（HTTP Fuzzing）是一种测试技术，用于发现 HTTP 应用程序中的漏洞和安全问题。它通过在 HTTP 请求中注入随机、无效或非预期的数据，来测试应用程序的容错性和安全性。…
+- [功能集：fuzztag - 模糊测试标签](https://yaklang.com/docs/yakexamples/7-fuzztag-basic): Fuzztag 是一个用于数据生成和转换的工具，它可以帮助用户生成各种类型的数据，如字符串、数字、网络地址、文件内容等。它还支持许多常见的编码转换，如 Base64 编码、URL 编码、HTML 实体编码等。1. char：生成一个字符集合
+- [函数库：re - 正则表达式](https://yaklang.com/docs/yakexamples/8-regexp): <p正则表达式（Regular Expression），也被称为“Regex”或“RegExp”，是一种用于描述字符串模式的文本模式。正则表达式通常由一系列字符和特殊字符组成，用于匹配或查找其他字符串中的模式。…
+- [函数库：json - 优雅地处理JSON](https://yaklang.com/docs/yakexamples/9-json): JSON是一种轻量级的数据交换格式。它使用文本格式来传输结构化数据，包括数组、对象、字符串、数字、布尔值和null。JSON格式被广泛用于Web应用程序和API中，作为一种数据格式，以实现不同应用程序之间的数据交换。JSON是一种平台无关的
+- [批量发包: 模糊测试批量发包](https://yaklang.com/docs/yakexamples/batch-http): 在 yak 中，批量发包的方式主要有两种 1. 第一种是通过 fuzz 模块的 fuzz.HTTPRequest 函数构建模糊测试请求。 2. 第二种是通过 httpool 模块的 httpool.Pool 函数进行请求批量渲染与发包。这两
+- [YAK 中编写"多线程/多并发"应用](https://yaklang.com/docs/yakexamples/concurrent): 在上一节中，我们遗留了一个问题： 如何把我们从 shodan 中的结果使用并发的手段快速验证？（如何使用并发快速发送 HTTP 请求？） 当然，我们 YAK 作为 Golang 语言的反射脚本语言，自然支持了 Golang 中最引以为傲的 
+- [你的第一个服务扫描程序](https://yaklang.com/docs/yakexamples/first_servicescan): MacOS/Linux 下当我们执行 yak -c 'println("Hello World")' 的时候，我们屏幕上出现 Hello World，我们 Hello World 程序就已经完成了。Windows 同学可以直接打开文件编写脚
+- [高效的端口扫描：SYN+指纹扫描](https://yaklang.com/docs/yakexamples/first_synandscanfp): 我们学习了基础的服务扫描的用法，但是同时，我们发现了一个问题，直接只进行服务扫描，速度并不快，因为服务扫描我们要建立 TCP 连接，发送探测请求，接收指纹信息等操作；与此同时，如果指纹无法匹配，我们需要对比更多的指纹规则，以获取最准确最精确
+- [编程技巧：函数式补充语法](https://yaklang.com/docs/yakexamples/func-p): = 1.0.13-sp13 函数式编程是种编程方式，它将电脑运算视为函数的计算。 函数编程语言最重要的基础是λ演算（lambda calculus），而且λ演算的函数可以接受函数当作输入（参数）和输出（返回值）。 和指令式编程相比，函数式编
+- [Web Fuzz 高级教程](https://yaklang.com/docs/yakexamples/fuzz_for_more): 我们在基础教程中，讲解了最最基础的用法，但是细心的读者发现，Web Fuzz 基础篇中的内容并不足以支持我们完全完成 Fuzz 操作 其中大家遇到的最大的问题可能就是，自动化情况下：用户输入/被动扫描输入的请求，我们并不知道请求中有哪些参数
+- [Web Fuzz 基础](https://yaklang.com/docs/yakexamples/fuzz_tutorial): 模糊测试是黑盒软件测试一种，通过把构造的特殊 payload 注入到软件可以接受输入的点来观察软件执行的结果和崩溃信息来发现软件有问题的点，尤其在二进制领域极为常见。…
+- [Fuzz Tag Playbook](https://yaklang.com/docs/yakexamples/fuzztag): repeatstr的意思是，指定一个字符或者字符串，通过指定num的大小来控制字符重复的次数： 1.{{repeatstr(str|num)}}例如：&123;&123;repeatstr(abc|3)&125;&125;意思是，abc字符
+- [处理扫描目标与网段（批量/分组）](https://yaklang.com/docs/yakexamples/handle-scan-target): 编写扫描脚本是 yak 最适合的场景，yak 提供了很多中方便处理网段/域名/端口/甚至混合内容的方案。1. 按逗号分隔 2. 遇到解析不了的将会原样输出 3. CIDR 标准支持 yak 提供了兼容性相当高的端口解析能力 1. 一般来说都
+- [处理扫描目标：C段（自动生成）](https://yaklang.com/docs/yakexamples/hosts-to-cclass): 这是非常强大的一个功能，在别的语言中，快速编写这样一个函数并不是一件容易的事情。C段探测是一个非常有用的操作：我们可以轻易的通过这种方式支持扫描目标主机的 "附近" 是否有相关目标。1. 解析可能的 DNS 2. 超出 C 段大小的网段也将
+- [如何编写优秀的 PoC/Exp 👻](https://yaklang.com/docs/yakexamples/how_to_make_poc): 大家都很清楚，如果想要验证一个漏洞，我们需要针对这个漏洞进行一系列的探索和研究。经过研究成因和原理之后，我们通常希望得到如下结论作为输出： 1. 漏洞的研究报告 1. 漏洞的 PoC（概念性验证）：可以简单理解为一段可以验证一个目标是否存在
+- [发送 HTTP 原始数据包](https://yaklang.com/docs/yakexamples/http-raw): 在 Yak 中除了可以使用 Golang 原生封装的 http 模块之外，提供了一种专门为安全优化的 "直接发送原始数据包" 的办法。一般来说，您并不需要重新计算 Content-Length，yak 会替你完成这一步。在重新计算 Cont
+- [执行 JavaScript 代码 (otto styled)](https://yaklang.com/docs/yakexamples/js-otto): 本功能对引擎版本 = yak-1.0.13-sp19 有效 实际在进行工作中，很多 Web 在浏览器端会执行签名函数或者国密加解密函数。有时候，我们希望我们可以动态执行一段 JS 来实现这些能力，并且希望能与现有别的语言的内容无缝进行整合。
+- [YAK + Nuclei：语言中的漏扫](https://yaklang.com/docs/yakexamples/nuclei): import {Redirect} from '@docusaurus/router'; <Redirect to="/docs/buildinlibs/libnuclei"/
+- [初探被动扫描](https://yaklang.com/docs/yakexamples/passive_scan): 在最普通的扫描中，我们把一个目标发送给扫描器，扫描器自主决定扫描的 URL，或者对扫描的目标进行爬虫，自己寻找扫描目标，我们经常把这个过程成为主动扫描。区别于此，在被动扫描过程中，我们通过某种方式把扫描目标的流量（一般是 HTTP 数据包）
+- [漏洞检测：DNSLog](https://yaklang.com/docs/yakexamples/risk): 手动访问 http://...:56579/
+- [实战2: 指纹扫描+基础爬虫](https://yaklang.com/docs/yakexamples/scan_and_crawler): 本节内容其实相对简单多了，大家如果学习了前面的内容之后，本节扫描端口+爬虫其实是一个非常顺理成章的程序： 我们经常在扫描端口的时候，发现他是一个 Web 端口，但是他的内部的一些 URL 我们并不能获取到。同时往往进行 PoC 扫描/漏洞扫
+- [文本相似度算法：SQLMAP、 SimHash 与 SSDeep](https://yaklang.com/docs/yakexamples/similarity-calc): 文本相似度是很多时候是判断一个 "页面是否相同/相似" 非常有效的办法。在 Yak 中，这为我们编写通用的漏洞检测提供极大便利。我们提供了三种文本相似度检测算法，并且统一了接口。1. 一般来说，SSDeep 适合处理大量海量本文，SimHa
+- [网络空间引擎信息收集](https://yaklang.com/docs/yakexamples/spacengine): 前面一些简单小课程，我们主要讲述了如何使用 yak 进行扫描端口，但是有时候，我们针对互联网大量的设备取扫描端口，本身是一件比较奇怪的事情。漫无目的的扫描无异于大海捞针 本节，我们将会学习 yak 更为强大的一面： 1. 内置 shodan
+- [类比 Python 中的 dir 函数](https://yaklang.com/docs/yakexamples/vs-dir-in-py): 在编程过程中，我们经常遇到不知道一个对象中有哪些成员可使用。在 Python 中，大家经常食用 dir 来查看可操作的字段。在 Yak 中，也有类似的内置函数。我们学习 / 测试一个 "未知的" 对象 大家可以看到，我们通过 desc 函数
+- [HTML 处理：XPATH 案例](https://yaklang.com/docs/yakexamples/xpath): 当然在处理 HTML 的时候，正则很多时候是够用的，但是总有并不那么好写的提取数据的正则。为了处理这种情况，我们可以在 yak 中使用 xpath 来解决这个问题 XPATH 原始库 - htmlquery 更详细案例
+- [实战1: 扫端口/子域名+指纹识别](https://yaklang.com/docs/yakexamples/yak_misc): 本届我们将学习的知识量非常大，这可能是很多开源项目的核心功能，我们要做的就是要把这些功能的实现成本降低。之前我们要完成这些功能，可能需要一个语言的很多的库，然而在 Yak 中，这些全部被封装在了一个个的内置模块中。…
+- [Java 反序列化利用链: yso(ysoserial)](https://yaklang.com/docs/yakexamples/ysoserial-demo): Yak 通过非 Java 的方式实现了一整套 Java 反序列化协议。可以在一定容错限度内劫持绝大部分 Java 反序列化流。详情参考 java: java 反序列化协议的 Golang/Yak 实现 在实现了 Java 反序列化协议后，J
+- [__global__](https://yaklang.com/docs/api/__global__): append(a any, vals ...any) (ret any) doc:Append does append(a, vals...) assert(b bool, reason ...any) assertEmpty(any) a
+- [ai](https://yaklang.com/docs/api/ai): AI 模块提供了与多种大语言模型集成的能力，支持 OpenAI、ChatGLM、Moonshot 等主流 AI 服务。通过统一的接口调用不同的 AI 服务，支持对话、函数调用、流式输出等功能。
+- [aiagent {#library-aiagent}](https://yaklang.com/docs/api/aiagent): aiagent 库是 yaklang 的 AI 智能体（Agent）编排入口，把"大模型 + 工具调用 + 计划执行"封装成可在脚本里驱动的自动化流程。它围绕 ReAct 式的"思考-行动-观察"循环，让 AI 自主拆解任务、调用 yak 
+- [aim {#library-aim}](https://yaklang.com/docs/api/aim): aim 库是 yaklang 的 AI 引擎（AI Engine）封装，提供一个开箱即用的 ReAct 智能体运行时：给定一句自然语言输入，引擎自动规划、调用工具、与知识库/Forge 协作，并通过丰富的事件回调把过程实时吐出来。相比 ai
+- [aireducer {#library-aireducer}](https://yaklang.com/docs/api/aireducer): aireducer 库用于把大文本/大文件按块（chunk）切分，并对每一块逐步执行回调——这正是 "reduce" 的含义。它常用于配合 AI：把超长内容分段喂给模型处理（如逐段摘要、逐段分析），避免一次性超出上下文长度限制。…
+- [amap {#library-amap}](https://yaklang.com/docs/api/amap): amap 库是高德地图（AMap）开放平台 API 的封装，提供地理编码、逆地理编码、POI 检索、路径规划、IP 定位、天气查询等地理信息服务能力。使用前需要申请高德 API Key，通过 amap.apiKey 传入。…
+- [bin {#library-bin}](https://yaklang.com/docs/api/bin): bin 库是二进制结构解析工具，用声明式的"描述符（PartDescriptor）"定义一段二进制数据的字段布局，然后把原始字节按布局解析成结构化结果。它适合解析自定义协议报文、文件格式头、TLV 结构等场景。…
+- [bot {#library-bot}](https://yaklang.com/docs/api/bot): bot 库用于把消息推送到即时通讯机器人（如钉钉、企业微信），常用于扫描完成、发现高危漏洞时的告警通知。它封装了 webhook 调用与签名校验，几行即可把结果推送到群聊。- 创建客户端：bot.New 按选项创建，bot.FromEnv 
+- [browser {#library-browser}](https://yaklang.com/docs/api/browser): browser 库提供对无头/有头 Chrome 浏览器实例的管理能力，基于 CDP（Chrome DevTools Protocol）驱动真实浏览器，用于需要渲染 JS、模拟真实用户行为的爬取、截图与自动化场景。…
+- [brute {#library-brute}](https://yaklang.com/docs/api/brute): brute 库是弱口令爆破框架，内置对多种协议/服务（如 SSH、FTP、数据库、Web 等）的爆破插件，支持自定义用户名/密码字典、并发控制与自定义校验回调，是认证安全评估的核心工具。- 选择爆破类型：brute.GetAvailable
+- [bufio {#library-bufio}](https://yaklang.com/docs/api/bufio): bufio 库是 Go 标准库 bufio 的 yak 封装，提供带缓冲的读写器与扫描器，用于高效地按行/按块处理 I/O 流（文件、网络连接、内存缓冲等）。- 读取：bufio.NewReader / bufio.NewReaderSiz
+- [cli {#library-cli}](https://yaklang.com/docs/api/cli): cli 库用于把 yak 脚本变成带参数的命令行工具/插件：声明参数类型、默认值、校验与帮助信息，运行时从命令行或 Yakit 插件界面读取输入。它同时驱动 Yakit 插件的参数表单（含 UI Schema 布局）。…
+- [codec {#library-codec}](https://yaklang.com/docs/api/codec): codec 库是 yaklang 的编解码与密码学工具箱，覆盖编码转换、哈希、对称/非对称加密、国密算法、字符集转换等近 180 个函数，是数据处理与密码学相关脚本的核心依赖。…
+- [container {#library-container}](https://yaklang.com/docs/api/container): container 库提供常用数据结构容器，补充内置 list/map 之外的集合类型，用于需要去重、链表操作的算法场景。- 集合：container.NewSet（线程安全集合）、container.NewUnsafeSet（非线程安全、
+- [context {#library-context}](https://yaklang.com/docs/api/context): context 库是 Go 标准库 context 的 yak 封装，用于在并发与网络操作中传递取消信号、超时与截止时间，是控制长耗时操作（扫描、请求、AI 调用）生命周期的基础设施。- 创建上下文：context.Background /
+- [crawler {#library-crawler}](https://yaklang.com/docs/api/crawler): crawler 库是基于 HTTP 的站点爬虫，从一个起始 URL 出发自动发现并抓取站内链接，产出一系列请求（Req），用于资产测绘、目录发现与攻击面收集。它工作在 HTTP 层，速度快、资源省。…
+- [crawlerx {#library-crawlerx}](https://yaklang.com/docs/api/crawlerx): crawlerx 库是基于真实浏览器（CDP）的动态爬虫，能渲染 JS、自动填表、模拟登录、点击交互，适合 SPA/Vue 等强 JS 站点的深度爬取与攻击面发现。相比 HTTP 层的 crawler，它更贴近真实用户行为但更重。…
+- [csrf {#library-csrf}](https://yaklang.com/docs/api/csrf): csrf 库用于根据一个原始 HTTP 请求自动生成 CSRF（跨站请求伪造）PoC 页面，便于在 Web 安全测试中验证目标接口是否缺乏 CSRF 防护。- 生成 PoC：csrf.Generate(raw, opts...) 传入原始 
+- [cve {#library-cve}](https://yaklang.com/docs/api/cve): cve 库提供本地 CVE（通用漏洞披露）数据库的下载、导入、查询与统计能力，便于把指纹识别结果关联到已知漏洞，支撑漏洞情报与版本比对。- 数据管理：cve.Download 下载 CVE 数据，cve.LoadCVE / cve.Impo
+- [cwe {#library-cwe}](https://yaklang.com/docs/api/cwe): cwe 库提供 CWE（通用弱点枚举）数据的查询与维护能力，用于把漏洞归类到标准弱点类型，提升报告的规范性与可读性。- 查询：cwe.Get 按编号取单条，cwe.ListAll 流式遍历全部弱点。…
+- [db {#library-db}](https://yaklang.com/docs/api/db): db 库是 yaklang 的数据持久化与资产管理入口，封装了对 Yakit 内置数据库（Profile 全局配置库、Project 项目库）以及任意 SQLite/MySQL 数据库的读写能力。它把"扫描产出的资产、流量、漏洞、Paylo
+- [dictutil {#library-dictutil}](https://yaklang.com/docs/api/dictutil): dictutil 库是字典处理小工具，用于把多组词表做笛卡尔积/混合，批量生成组合字典，常用于爆破、模糊测试的 Payload 生成。- 混合生成：dictutil.Mix(raw...) 传入多组词表，返回一个 channel 流式产出所
+- [diff {#library-diff}](https://yaklang.com/docs/api/diff): diff 库用于比较两份内容的差异，支持文本、目录、文件系统与 ZIP 包级别的对比，常用于版本变更分析、补丁比对与固件/代码审计。- 文本差异：diff.Diff(raw1, raw2, handler...) 比较两段内容。…
+- [dns {#library-dns}](https://yaklang.com/docs/api/dns): dns 库提供 DNS 查询能力，支持解析 A/IP、NS、TXT 记录以及域传送（AXFR）检测，用于资产测绘、子域发现与 DNS 配置安全检查。- 解析记录：dns.QueryIP / dns.QueryIPAll 查 A 记录，dns
+- [dnslog {#library-dnslog}](https://yaklang.com/docs/api/dnslog): dnslog 库提供 DNSLog 带外（OOB）检测能力：申请一个临时域名，诱导目标对其发起 DNS 解析，再回查解析记录来确认无回显漏洞（如 SSRF、命令注入、Log4j、反序列化）的存在。…
+- [dyn {#library-dyn}](https://yaklang.com/docs/api/dyn): dyn 库提供动态执行与模块导入能力，允许在运行时求值 yak 代码、从 .yak 文件导入变量/函数，实现脚本的动态加载与组合。- 动态求值：dyn.Eval 在当前运行时执行一段 yak 代码。…
+- [elf {#library-elf}](https://yaklang.com/docs/api/elf): elf 库用于解析 ELF（Linux/Unix 可执行与可链接格式）文件，读取其头部、节（section）、段（segment）、架构与入口点信息，常用于二进制分析、固件检查与恶意样本研判。- 识别与概览：elf.IsELF 判断是否 E
+- [env {#library-env}](https://yaklang.com/docs/api/env): env 库提供对进程环境变量的读写，用于在脚本中获取配置（如代理、API Key、路径）或临时设置环境。- 读取：env.Get(key) 获取环境变量值。 - 设置：env.Set(key, value) 设置当前进程的环境变量。与相邻库
+- [excel {#library-excel}](https://yaklang.com/docs/api/excel): excel 库基于 excelize 提供 Excel 文件的读写能力，用于把扫描/分析结果导出为表格，或解析已有表格作为输入数据源。- 读取解析：excel.Parse / excel.ParseTableOnly / excel.Par
+- [exec {#library-exec}](https://yaklang.com/docs/api/exec): exec 库用于在本机执行系统命令并获取输出，支持同步执行、上下文取消、流式监听输出与批量并发执行，是与操作系统交互、集成外部工具的入口。- 直接执行：exec.System 执行命令并返回输出，exec.SystemContext 带上下
+- [facades {#library-facades}](https://yaklang.com/docs/api/facades): facades 库提供一个多协议"恶意服务端"（Facade Server），同时监听 HTTP/RMI/LDAP 等协议，用于 Java 反序列化、JNDI 注入等漏洞的利用与带外验证：把恶意类/资源托管在该服务上，诱导目标回连加载。…
+- [ffmpeg {#library-ffmpeg}](https://yaklang.com/docs/api/ffmpeg): ffmpeg 库基于 ffmpeg 提供音视频处理能力，支持抽帧、抽音轨、切片、烧录字幕、屏幕截图等，常用于多媒体取证、视频内容分析与 AI 多模态预处理。- 抽取：ffmpeg.ExtractAudioFromVideo 抽音轨，ffmp
+
+### Yakit user manual
+
+
+### YakLab tutorials
+
