@@ -47,8 +47,8 @@ Yaklang is the language and runtime; Yakit is the cross-platform desktop securit
 
 ## Project facts
 
-- Latest Yakit release: v1.4.8-0828 (retrieved 2026-09-02 at site build time)
-- GitHub stars: yaklang/yakit 7,713
+- Latest Yakit release: v1.4.8-0828 (retrieved 2026-09-03 at site build time)
+- GitHub stars: yaklang/yakit 7,715
 - GitHub stars: yaklang/yaklang 632
 - GitHub forks: yaklang/yakit 825
 - Yakit v1.4.8-0828 installer sizes: macIntel 194.09 MB, macApple 184.36 MB, linux 233.88 MB, windows 161.4 MB, linuxArm64 227.85 MB
