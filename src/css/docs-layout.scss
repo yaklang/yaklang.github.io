@@ -825,11 +825,12 @@ html.blog-wrapper {
   }
 
   // T2 二级标题 — 24/32 Medium
+  // 标题内容保持一行，超出部分省略显示
   .theme-doc-markdown h3 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0;
     padding: 20px 0 0;
     font-family: var(--docs-serif);
@@ -839,6 +840,11 @@ html.blog-wrapper {
     letter-spacing: 0;
     color: var(--docs-title-color);
     scroll-margin-top: calc(var(--docs-anchor-offset) - 20px);
+    > * {
+      display: inline;
+      max-width: 100%;
+      vertical-align: bottom;
+    }
   }
 
   // T3 小标题 — 比 H3 小 2px：22/30 SemiBold
@@ -1036,6 +1042,22 @@ html.blog-wrapper {
     color: var(--docs-title-color);
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  // 含 code 的 h3 标题（如 fuzztag 的「【基础标签】`{{xxx}}` 说明」）同样是
+  // 「文本 + code + 文本」结构，flex 布局下文字是匿名 flex item 无法省略，
+  // 因此改为块级单行省略，code 再用 inline-block 保持与文字垂直居中对齐。
+  .theme-doc-markdown.markdown h3:has(> code) {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .theme-doc-markdown.markdown h3 > code {
+    display: inline-block;
+    vertical-align: middle;
+    flex: none;
   }
 
   // 代码块 — #F6F2E7 / #F0EAD6 / radius 8 / padding 16 20 20 / JetBrains 14/20
