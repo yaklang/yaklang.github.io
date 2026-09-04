@@ -10,7 +10,7 @@
 
 与相邻库的关系：`crawler` 走 HTTP 层，`crawlerx` 走真实浏览器（适合强 JS 站点）；爬到的请求常交给 `poc`/`fuzz` 做进一步测试，或经 `hook` 插件链路处理。
 
-> 共 41 个函数
+> 共 52 个函数
 
 ## 函数索引
 
@@ -26,6 +26,7 @@
 | [crawler.disallowSuffix](#disallowsuffix) | `d []string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的后缀黑名单 |
 | [crawler.domainExclude](#domainexclude) | `domain string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的域名黑名单 |
 | [crawler.domainInclude](#domaininclude) | `domain string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的域名白名单 |
+| [crawler.domainIncludeExact](#domainincludeexact) | `pattern string` | `ConfigOpt` | WithDomainWhiteListExactPattern adds exactly the hostname glob supplied by |
 | [crawler.forbiddenFromParent](#forbiddenfromparent) | `b bool` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的是否禁止从根路径发起请求，默认为false |
 | [crawler.header](#header) | `k string, v string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的请求头 |
 | [crawler.httpsToHttpFallback](#httpstohttpfallback) | `enable bool` | `ConfigOpt` | 设置当 HTTPS 请求失败时是否自动回退为 HTTP 重试 |
@@ -33,9 +34,12 @@
 | [crawler.maxRedirect](#maxredirect) | `maxRedirectTimes int` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的最大重定向次数，默认为5 |
 | [crawler.maxRequest](#maxrequest) | `limit int` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的最大请求数，默认为1000 |
 | [crawler.maxRetry](#maxretry) | `limit int` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的最大重试次数，默认为3 |
-| [crawler.maxUrls](#maxurls) | `limit int` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的最大链接数，默认为10000 |
+| [crawler.maxUrls](#maxurls) | `limit int` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的最大唯一新发现 URL 数，默认为10000。 |
+| [crawler.onAIJSRequestFound](#onaijsrequestfound) | `f func(AIJSRequestFinding)` | `ConfigOpt` | WithOnAIJSRequestFound observes request shapes statically recovered from |
 | [crawler.onUrlFound](#onurlfound) | `f func(string)` | `ConfigOpt` | 是一个选项函数，用于在爬虫发现新URL时触发回调（包括未实际发出请求的URL） |
+| [crawler.redactURLForDisplay](#redacturlfordisplay) | `raw string` | `string` | returns a fragment-free URL suitable for tool output, |
 | [crawler.responseTimeout](#responsetimeout) | `f float64` | `ConfigOpt` | 设置爬虫的响应超时时间(秒)，默认为 10s |
+| [crawler.safeDisplayText](#safedisplaytext) | `raw string` | `string` | SanitizeTextForDisplay bounds untrusted response metadata and escapes C0, |
 | [crawler.timeout](#timeout) | `f float64` | `ConfigOpt` | connectTimeout 是一个选项函数，用于指定爬虫时的连接超时时间，默认为10s |
 | [crawler.ua](#ua) | `ua string` | `ConfigOpt` | userAgent 是一个选项函数，用于指定爬虫时的User-Agent |
 | [crawler.urlExtractor](#urlextractor) | `f func(*Req) []any` | `ConfigOpt` | 是一个选项函数，它接收一个函数作为参数，用于为爬虫添加额外的链接提取规则 |
@@ -51,6 +55,7 @@
 | [crawler.Start](#start) | `url string, opt ...ConfigOpt` | `chan *Req, error` | 启动爬虫爬取某个URL，它还可以接收零个到多个选项函数，用于影响爬取行为 |
 | [crawler.aiJSExtract](#aijsextract) | `opts ...AIJSExtractOption` | `ConfigOpt` | 启用基于 AI 辅助的 JS / HTML 文本路径与 URL 抽取通道， |
 | [crawler.autoLogin](#autologin) | `username string, password string, flags ...string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的自动填写可能存在的登录表单 |
+| [crawler.exactOrigins](#exactorigins) | `enable ...bool` | `ConfigOpt` | WithExactOrigins disables the crawler&#39;s historical automatic www seed |
 | [crawler.jsParser](#jsparser) | `enable ...bool` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时是否进行对于JS的代码解析。 |
 | [crawler.proxy](#proxy) | `proxies ...string` | `ConfigOpt` | 是一个选项函数，用于指定爬虫时的代理 |
 
@@ -354,6 +359,32 @@ crawler.Start("https://example.com", crawler.domainInclude("*.example.com"))
 
 ---
 
+### domainIncludeExact {#domainincludeexact}
+
+```go
+domainIncludeExact(pattern string) ConfigOpt
+```
+
+WithDomainWhiteListExactPattern adds exactly the hostname glob supplied by
+the caller. Unlike the legacy WithDomainWhiteList option, a literal host is
+not expanded to sibling/subdomain patterns. This is intended for explicit
+authorization boundaries: callers must write &#34;*.example.com&#34; themselves
+when subdomains are in scope.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| pattern | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` |  |
+
+---
+
 ### forbiddenFromParent {#forbiddenfromparent}
 
 ```go
@@ -566,7 +597,9 @@ crawler.Start("https://example.com", crawler.maxRetry(10))
 maxUrls(limit int) ConfigOpt
 ```
 
-是一个选项函数，用于指定爬虫时的最大链接数，默认为10000
+是一个选项函数，用于指定爬虫时的最大唯一新发现 URL 数，默认为10000。
+
+种子 URL 不占用配额；非正数表示不设限。配额在回调、域名范围判断和请求调度之前生效。
 
 **参数**
 
@@ -585,6 +618,30 @@ maxUrls(limit int) ConfigOpt
 ``````````````yak
 crawler.Start("https://example.com", crawler.maxUrls(20000))
 ``````````````
+
+---
+
+### onAIJSRequestFound {#onaijsrequestfound}
+
+```go
+onAIJSRequestFound(f func(AIJSRequestFinding)) ConfigOpt
+```
+
+WithOnAIJSRequestFound observes request shapes statically recovered from
+JavaScript. Observation is deliberately separate from crawler scheduling:
+a POST/PUT/PATCH/DELETE finding is reported but never automatically sent.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| f | `func(AIJSRequestFinding)` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` |  |
 
 ---
 
@@ -613,6 +670,34 @@ onUrlFound(f func(string)) ConfigOpt
 ``````````````yak
 crawler.Start("https://example.com", crawler.onUrlFound(func(url) { println(url) }))
 ``````````````
+
+---
+
+### redactURLForDisplay {#redacturlfordisplay}
+
+```go
+redactURLForDisplay(raw string) string
+```
+
+returns a fragment-free URL suitable for tool output,
+logs, and model context. It is deliberately display-only: callers must keep
+using the original URL for requests, queue identity, and coverage accounting.
+
+Userinfo is removed and credential-like query values are replaced while the
+original query ordering, separators, harmless values, and escaping are kept
+byte-for-byte wherever possible.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` |  |
 
 ---
 
@@ -648,6 +733,31 @@ res = crawler.Start("https://example.com", crawler.responseTimeout(5))~
 	    println(req.Url())
 	}
 ``````````````
+
+---
+
+### safeDisplayText {#safedisplaytext}
+
+```go
+safeDisplayText(raw string) string
+```
+
+SanitizeTextForDisplay bounds untrusted response metadata and escapes C0,
+C1, and Unicode line-separator controls before it is embedded in a textual
+crawler report. It does not redact ordinary text or credentials; URLs must
+still use RedactURLForDisplay.
+
+**参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| raw | `string` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `string` |  |
 
 ---
 
@@ -919,7 +1029,7 @@ aiJSExtract(opts ...AIJSExtractOption) ConfigOpt
 
 **可选参数**
 
-可作为可变参数 `opts ...AIJSExtractOption` 传入选项；共 9 个可用选项，详见 [AIJSExtractOption 选项列表](#option-aijsextractoption)。
+可作为可变参数 `opts ...AIJSExtractOption` 传入选项；共 15 个可用选项，详见 [AIJSExtractOption 选项列表](#option-aijsextractoption)。
 
 **返回值**
 
@@ -968,6 +1078,31 @@ autoLogin(username string, password string, flags ...string) ConfigOpt
 ``````````````yak
 crawler.Start("https://example.com", crawler.autoLogin("admin", "admin"))
 ``````````````
+
+---
+
+### exactOrigins {#exactorigins}
+
+```go
+exactOrigins(enable ...bool) ConfigOpt
+```
+
+WithExactOrigins disables the crawler&#39;s historical automatic www seed
+expansion and makes each seed hostname an exact automatic scope entry. It is
+opt-in so existing callers retain their original behavior. Explicit
+WithDomainWhiteList options can still authorize additional hosts.
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| enable | `...bool` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `ConfigOpt` |  |
 
 ---
 
@@ -1042,12 +1177,18 @@ crawler.Start("https://example.com", crawler.proxy("http://127.0.0.1:8080"))
 |选项函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | `crawler.aiJSAIOptions` | `opts ...aicommon.ConfigOption` | `AIJSExtractOption` | 将底层 AI 配置选项（模型、密钥等）转发给 LiteForge |
+| `crawler.aiJSAdaptive` | `enable ...bool` | `AIJSExtractOption` | WithAIJS_AdaptiveTrigger enables the local evidence gate. With no argument it |
 | `crawler.aiJSChunkBytes` | `n int64` | `AIJSExtractOption` | 设置 AI JS 抽取时每个 AI 调用切片的目标字节大小 |
 | `crawler.aiJSConcurrency` | `n int` | `AIJSExtractOption` | 设置 AI JS 抽取时并行 AI 调用的最大并发数 |
 | `crawler.aiJSContextBytes` | `n int` | `AIJSExtractOption` | 设置 AI JS 抽取时每个正则命中点周围上下文窗口的半宽字节数 |
+| `crawler.aiJSMaxCandidateBytes` | `n int` | `AIJSExtractOption` | WithAIJS_MaxCandidateBytes caps evidence bytes retained from one asset. |
+| `crawler.aiJSMaxCandidates` | `n int` | `AIJSExtractOption` | WithAIJS_MaxCandidateWindows caps the number of evidence windows per asset. |
+| `crawler.aiJSMaxRequests` | `n int` | `AIJSExtractOption` | WithAIJS_MaxRequests sets the shared model-call budget for one crawler run. |
 | `crawler.aiJSMaxTokens` | `n int` | `AIJSExtractOption` | 设置 AI JS 抽取时每次调用的 token 预算上限 |
 | `crawler.aiJSOverlapBytes` | `n int` | `AIJSExtractOption` | 设置 AI JS 抽取时跨切片折叠（重叠）的字节大小 |
 | `crawler.aiJSSkipBelow` | `n int` | `AIJSExtractOption` | 设置候选数据流低于该字节阈值时跳过 AI 步骤，直接输出原始命中结果 |
 | `crawler.aiJSSmallInputBytes` | `n int` | `AIJSExtractOption` | 设置直接投喂快速通道的原始输入字节阈值，设为 0 表示禁用 |
 | `crawler.aiJSSmallInputTokens` | `n int` | `AIJSExtractOption` | 设置直接投喂快速通道的原始输入 token 阈值，设为 0 表示禁用 |
+| `crawler.aiJSTimeoutSeconds` | `n int` | `AIJSExtractOption` | WithAIJS_CallTimeoutSeconds caps one AI request while respecting the parent |
+| `crawler.aiJSTriggerThreshold` | `n int` | `AIJSExtractOption` | WithAIJS_TriggerThreshold sets the minimum evidence score for an AI call. |
 

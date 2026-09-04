@@ -86,7 +86,7 @@ assert string(raw).Contains("POST /docs/api/poc"), "first line should be rebuilt
 | [poc.ParseBytesToHTTPResponse](#parsebytestohttpresponse) | `res []byte` | `*http.Response, error` | 将字节数组解析为 HTTP 响应 |
 | [poc.ParseMultiPartFormWithCallback](#parsemultipartformwithcallback) | `req []byte, callback func(part *multipart.Part)` | `error` | 是一个辅助函数，用于尝试解析请求报文体中的表单并进行回调 |
 | [poc.ParseUrlToHTTPRequestRaw](#parseurltohttprequestraw) | `method string, i any` | `bool, []byte, error` | 将URL解析为原始 HTTP 请求报文，返回是否为 HTTPS，原始请求报文与错误 |
-| [poc.RemoveSession](#removesession) | `session string` | - | 清除指定的 session，删除其关联的 cookiejar |
+| [poc.RemoveSession](#removesession) | `session string` | - | 清除指定的 session，删除其关联的 cookiejar。 |
 | [poc.ReplaceAllHTTPPacketPostParams](#replaceallhttppacketpostparams) | `packet []byte, values map[string]string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改所有 POST 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为 POST 请求参数名，value 为 POST 请求参数值 |
 | [poc.ReplaceAllHTTPPacketPostParamsWithoutEscape](#replaceallhttppacketpostparamswithoutescape) | `packet []byte, values map[string]string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改所有 POST 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为 POST 请求参数名，value 为 POST 请求参数值 |
 | [poc.ReplaceAllHTTPPacketQueryParams](#replaceallhttppacketqueryparams) | `packet []byte, values map[string]string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值 |
@@ -1735,9 +1735,9 @@ ishttps, raw, err = poc.ParseUrlToHTTPRequestRaw("GET", "https://yaklang.com")
 RemoveSession(session string)
 ```
 
-清除指定的 session，删除其关联的 cookiejar
+清除指定的 session，删除其关联的 cookiejar。
 
-这在完成一系列请求后清理资源时很有用
+session 池本身有容量上限，但主动清理可以更早释放 cookie 数据。
 
 **参数**
 

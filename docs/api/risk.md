@@ -86,7 +86,7 @@ assert r.Severity == "high", "severity should be set"
 |:--|:--|:--|:--|
 | [risk.CheckDNSLogByToken](#checkdnslogbytoken) | `token string, timeout ...float64` | `[]*tpb.DNSLogEvent, error` | 通过 token 查询 DNSLog 平台上是否收到对应的 DNS 解析触发（导出名为 risk.CheckDNSLogByToken） |
 | [risk.CheckHTTPLogByToken](#checkhttplogbytoken) | `token string, timeout ...float64` | `[]*tpb.HTTPRequestTriggerNotification, error` | 通过 token 查询是否收到对应的 HTTP 带外请求（导出名为 risk.CheckHTTPLogByToken） |
-| [risk.CreateRisk](#createrisk) | `u string, opts ...RiskParamsOpt` | `*schema.Risk` | 创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用 |
+| [risk.CreateRisk](#createrisk) | `u string, opts ...RiskParamsOpt` | `*schema.Risk` |  |
 | [risk.NewHTTPLog](#newhttplog) | `i ...any` | `string, string, error` | 返回一个公网 Bridge 的 HTTPLog 域名，返回的第一个值是域名，第二个值是 token，第三个值是错误 |
 | [risk.NewRandomPortTrigger](#newrandomporttrigger) | `opt ...RiskParamsOpt` | `string, string, error` | 返回一个公网 Bridge 的随机端口反连检测地址，返回的第一个值是 token，第二个值是检测地址，第三个值是错误 |
 | [risk.NewRisk](#newrisk) | `target string, opts ...yakit.RiskParamsOpt` | - | 创建一条漏洞记录并保存到数据库（导出名为 risk.NewRisk） |
@@ -1572,46 +1572,25 @@ for n in notifications { println(n.Url) }
 CreateRisk(u string, opts ...RiskParamsOpt) *schema.Risk
 ```
 
-创建漏洞记录结构体，但是并不会保存到数据库，第一个参数是目标URL，后面可以传入零个或多个选项参数，用于指定 risk 的结构，其通常与 Save 一起使用
+暂无描述
 
 **必填参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| u | `string` | 目标 URL 或 IP |
+| u | `string` |  |
 
 **可选参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| opts | `...RiskParamsOpt` | 零个或多个风险选项参数，如 risk.title、risk.type、risk.severity 等 |
+| opts | `...RiskParamsOpt` |  |
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| r1 | `*schema.Risk` | 创建的风险记录结构体 |
-
-**示例**
-
-``````````````yak
-// 关键词: risk.CreateRisk, 结构化记录漏洞
-// CreateRisk 只构造风险结构体, 不入库; 配合 risk.Save 才写入数据库(Yakit 漏洞列表可见)
-r = risk.CreateRisk("http://example.com",
-
-	risk.title("SQL Injection in id param"), // 漏洞标题
-	risk.type("sqli"),                        // 漏洞类型
-	risk.severity("high"),                    // 等级: info/low/middle/high/critical
-	risk.payload("id=1' or '1'='1"),          // 触发用 payload
-	risk.description("user-controlled id concatenated into SQL"),
-	risk.solution("use parameterized queries"),
-
-)
-println("title:", r.Title, "severity:", r.Severity) // 预期: title: SQL Injection in id param severity: high
-assert r.Title == "SQL Injection in id param", "title should be set"
-assert r.Severity == "high", "severity should be set"
-risk.Save(r) // 保存到数据库; 也可用 risk.NewRisk(target, ...) 一步创建并保存
-``````````````
+| r1 | `*schema.Risk` |  |
 
 ---
 

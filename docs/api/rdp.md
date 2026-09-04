@@ -15,7 +15,7 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
-| [rdp.Login](#login) | `ip string, domain string, user string, password string, port int` | `bool, error` | 尝试登录 RDP（远程桌面）服务，用于验证给定凭据是否有效 |
+| [rdp.Login](#login) | `ip string, domain string, user string, password string, port int` | `bool, error` |  |
 | [rdp.Version](#version) | `addr string, timeout time.Duration` | `string, []string, error` | 探测目标 RDP 服务的操作系统版本信息 |
 
 ## 函数详情
@@ -26,32 +26,24 @@
 Login(ip string, domain string, user string, password string, port int) (_ bool, err error)
 ```
 
-尝试登录 RDP（远程桌面）服务，用于验证给定凭据是否有效
+暂无描述
 
 **参数**
 
 |参数名|类型|说明|
 |:--|:--|:--|
-| ip | `string` | 目标主机 IP 地址 |
-| domain | `string` | 登录所属的域，无域时可传空字符串 |
-| user | `string` | 登录用户名 |
-| password | `string` | 登录密码 |
-| port | `int` | RDP 服务端口，通常为 3389 |
+| ip | `string` |  |
+| domain | `string` |  |
+| user | `string` |  |
+| password | `string` |  |
+| port | `int` |  |
 
 **返回值**
 
 |序号|类型|说明|
 |:--|:--|:--|
-| _ | `bool` | 登录是否成功 |
-| err | `error` | 错误信息，连接失败或认证失败时返回非空 |
-
-**示例**
-
-``````````````yak
-// 验证 RDP 凭据，依赖目标服务，此处仅作示意
-ok, err = rdp.Login("192.168.1.1", "", "administrator", "123456", 3389)
-println(ok)
-``````````````
+| _ | `bool` |  |
+| err | `error` |  |
 
 ---
 

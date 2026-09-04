@@ -18,10 +18,10 @@
 |:--|:--|:--|
 | FalseValue | `goja.valueBool` | false |
 | NaNValue | `goja.valueFloat` | NaN |
-| NullValue | `github.com/dop251/goja.valueNull` | null |
-| PoweredBy | `string` | &#34;github.com/dop251/goja&#34; |
+| NullValue | `github.com/yaklang/goja.valueNull` | null |
+| PoweredBy | `string` | &#34;github.com/yaklang/goja&#34; |
 | TrueValue | `goja.valueBool` | true |
-| UndefinedValue | `github.com/dop251/goja.valueUndefined` | undefined |
+| UndefinedValue | `github.com/yaklang/goja.valueUndefined` | undefined |
 
 ## 函数索引
 
