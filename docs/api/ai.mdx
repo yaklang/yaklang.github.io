@@ -525,8 +525,9 @@ MockAIService(handle func(message string) string) aicommon.AICallbackType
 
 ``````````````yak
 cb = ai.MockAIService(func(msg) {
-    return "mocked response for: " + msg
-})
+	    return "mocked response for: " + msg
+	})
+
 assert cb != nil, "MockAIService should return a non-nil callback"
 println("ai.MockAIService created callback successfully")
 ``````````````

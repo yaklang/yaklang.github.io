@@ -32,7 +32,7 @@ assert string(raw).Contains("POST /docs/api/poc"), "first line should be rebuilt
 // 真正发包(需要可达目标, 这里仅示意): rsp, req = poc.HTTP(raw, poc.timeout(10))~
 ```
 
-> 共 190 个函数
+> 共 192 个函数
 
 ## 函数索引
 
@@ -107,6 +107,7 @@ assert string(raw).Contains("POST /docs/api/poc"), "first line should be rebuilt
 | [poc.ReplaceHTTPPacketPostParam](#replacehttppacketpostparam) | `packet []byte, key string, value string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改POST请求参数，如果不存在则会增加 |
 | [poc.ReplaceHTTPPacketQueryParam](#replacehttppacketqueryparam) | `packet []byte, key string, value string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改GET请求参数，如果不存在则会增加 |
 | [poc.ReplaceHTTPPacketQueryParamWithoutEscape](#replacehttppacketqueryparamwithoutescape) | `packet []byte, key string, value string` | `[]byte` | 是一个辅助函数，用于改变请求报文，修改所有 GET 请求参数，如果不存在则会增加，其接收一个 map[string]string 类型的参数，其中 key 为请求参数名，value 为请求参数值 |
+| [poc.http2FingerprintProfiles](#http2fingerprintprofiles) | - | `[]string` |  |
 | [poc.tlsFingerprintProfiles](#tlsfingerprintprofiles) | - | `[]string` |  |
 
 ## 可变参数函数索引
@@ -2386,6 +2387,22 @@ assert string(modified).Contains("a=b c"), "value should not be escaped"
 
 ---
 
+### http2FingerprintProfiles {#http2fingerprintprofiles}
+
+```go
+http2FingerprintProfiles() []string
+```
+
+暂无描述
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `[]string` |  |
+
+---
+
 ### tlsFingerprintProfiles {#tlsfingerprintprofiles}
 
 ```go
@@ -2458,7 +2475,7 @@ BuildRequest(i any, opts ...PocConfigOption) []byte
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2503,7 +2520,7 @@ Delete(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2541,7 +2558,7 @@ Do(method string, urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.Lowh
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2587,7 +2604,7 @@ Download(urlStr string, opts ...PocConfigOption) (string, error)
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2626,7 +2643,7 @@ DownloadWithMethod(method string, urlStr string, opts ...PocConfigOption) (strin
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2660,7 +2677,7 @@ Get(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, r
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2704,7 +2721,7 @@ HTTP(i any, opts ...PocConfigOption) (rsp []byte, req []byte, err error)
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2749,7 +2766,7 @@ HTTPEx(i any, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, reqIns
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2795,7 +2812,7 @@ Head(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, 
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2833,7 +2850,7 @@ Options(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpRespons
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2870,7 +2887,7 @@ Post(urlStr string, opts ...PocConfigOption) (rspInst *lowhttp.LowhttpResponse, 
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -2999,7 +3016,7 @@ Websocket(raw any, opts ...PocConfigOption) (rsp []byte, req []byte, err error)
 
 **可选参数**
 
-可作为可变参数 `opts ...PocConfigOption` 传入选项；共 105 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
+可作为可变参数 `opts ...PocConfigOption` 传入选项；共 106 个可用选项，详见 [PocConfigOption 选项列表](#option-pocconfigoption)。
 
 **返回值**
 
@@ -3082,6 +3099,7 @@ time.Sleep(100)
 | `poc.header` | `key string, value string` | `PocConfigOption` | appendHeader 是一个请求选项参数，用于改变请求报文，添加请求头 |
 | `poc.host` | `h string` | `PocConfigOption` | 是一个请求选项参数，用于指定实际请求的 host，如果没有设置该请求选项，则会依据原始请求报文中的Host字段来确定实际请求的host |
 | `poc.http2` | `isHttp2 bool` | `PocConfigOption` | 是一个请求选项参数，用于指定是否使用 http2 协议，默认为 false 即使用http1协议 |
+| `poc.http2Fingerprint` | `name string` | `PocConfigOption` | WithHTTP2Fingerprint selects a built-in HTTP/2 framing fingerprint profile. |
 | `poc.https` | `isHttps bool` | `PocConfigOption` | 是一个请求选项参数，用于指定是否使用 https 协议，默认为 false 即使用 http 协议 |
 | `poc.jsRedirect` | `b bool` | `PocConfigOption` | 是一个请求选项参数，用于指定是否跟踪JS重定向，默认为false即不会自动跟踪JS重定向 |
 | `poc.json` | `i any` | `PocConfigOption` | 是一个请求选项参数，用于指定请求的 body 为 json 格式，需要传入一个任意类型的参数，会自动转换为 json 格式 |

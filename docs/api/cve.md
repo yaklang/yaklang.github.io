@@ -16,7 +16,6 @@
 
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
-| [cve.Download](#download) | `dir string, cached bool` | `error` | 从 NVD 下载 CVE json 数据到本地目录（导出名为 cve.Download） |
 | [cve.Export](#export) | `filename string` | `error` | ExportCVE 将所有 CVE 条目导出为 JSONL 文件（导出名为 cve.Export） |
 | [cve.GetCVE](#getcve) | `cve string` | `*cveresources.CVE` | 按 CVE 编号查询单条 CVE 记录（导出名为 cve.GetCVE） |
 | [cve.Import](#import) | `filename string` | `error` | ImportCVE 从 JSONL 文件导入 CVE 条目（导出名为 cve.Import） |
@@ -30,42 +29,12 @@
 |函数|参数|返回值|说明|
 |:--|:--|:--|:--|
 | [cve.AICompleteFields](#aicompletefields) | `opts ...any` | `error` | 使用 AI 补全 CVE 缺失字段（如中文翻译，导出名为 cve.AICompleteFields） |
+| [cve.Download](#download) | `dir string, cached bool, years ...int` | `error` |  |
 | [cve.LoadCVE](#loadcve) | `fileDir string, DbPath string, years ...int` | - | 从本地 CVE json 数据文件加载并构建 CVE 数据库（导出名为 cve.LoadCVE） |
 | [cve.Query](#query) | `db *gorm.DB, opts ...CVEOption` | `chan *cveresources.CVE` | QueryCVEYields 在 CVE 数据库上按条件流式查询 CVE 记录（导出名为 cve.Query） |
 | [cve.QueryEx](#queryex) | `i ...any` | `chan *cveresources.CVE` | 使用默认 CVE 数据库按可选项流式查询 CVE（导出名为 cve.QueryEx） |
 
 ## 函数详情
-
-### Download {#download}
-
-```go
-Download(dir string, cached bool) error
-```
-
-从 NVD 下载 CVE json 数据到本地目录（导出名为 cve.Download）
-
-**参数**
-
-|参数名|类型|说明|
-|:--|:--|:--|
-| dir | `string` | 下载数据保存目录 |
-| cached | `bool` | 为 true 时跳过已存在的文件 |
-
-**返回值**
-
-|序号|类型|说明|
-|:--|:--|:--|
-| r1 | `error` | 错误信息 |
-
-**示例**
-
-``````````````yak
-// 示意性示例，需要网络访问 NVD
-err = cve.Download("/tmp/cve-data", true)
-if err != nil { die(err) }
-``````````````
-
----
 
 ### Export {#export}
 
@@ -315,6 +284,35 @@ AICompleteFields(opts ...any) error
 err = cve.AICompleteFields(cve.aiConcurrent(10), cve.testLimit(5))
 if err != nil { die(err) }
 ``````````````
+
+---
+
+### Download {#download}
+
+```go
+Download(dir string, cached bool, years ...int) error
+```
+
+暂无描述
+
+**必填参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| dir | `string` |  |
+| cached | `bool` |  |
+
+**可选参数**
+
+|参数名|类型|说明|
+|:--|:--|:--|
+| years | `...int` |  |
+
+**返回值**
+
+|序号|类型|说明|
+|:--|:--|:--|
+| r1 | `error` |  |
 
 ---
 

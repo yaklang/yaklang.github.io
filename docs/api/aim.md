@@ -5,12 +5,13 @@
 典型使用场景：
 
 - 启动引擎：`aim.InvokeReAct` 同步执行一次 ReAct 任务，`aim.InvokeReActAsync` 异步返回 `*AIEngine` 句柄，`aim.NewAIEngine` 创建可复用引擎。
+- 快速首轮：`aim.allowSyncInitContext` 默认 `false`，首轮直接进入主循环，后续按需识别意图、发现能力；设置为 `true` 可在首轮前同步增强上下文。记忆后端与自动检索始终异步加载，就绪后供后续轮次使用。
 - 接入模型与能力：`aim.aiConfig` / `aim.aiCallback` 配置模型，`aim.attachedAITool` / `aim.attachedAIForge` / `aim.attachedKnowledgeBase` 挂载工具、Forge 与知识库，`aim.includeToolNames` / `aim.excludeToolNames` 精选工具集。
 - 过程观测与交互：`aim.onStream` / `aim.onStreamContent` / `aim.onEvent` / `aim.onFinished` 订阅流式输出与事件，`aim.onInputRequired` 处理需要人工补充输入的场景，`aim.maxIteration` / `aim.timeout` 控制迭代与超时。
 
 与相邻库的关系：`aim` 把 `ai`（模型对话）、`aiagent`（编排）、`rag`（知识检索）、`liteforge`/Forge（结构化任务）整合为统一引擎，适合需要"一行调用即可跑通一个带工具的智能体"的脚本。
 
-> 共 49 个函数
+> 共 50 个函数
 
 ## 可变参数函数索引
 
@@ -40,7 +41,7 @@ InvokeReAct(input string, options ...AIEngineConfigOption) error
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 46 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -74,7 +75,7 @@ InvokeReActAsync(input string, options ...AIEngineConfigOption) (*AIEngine, erro
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 46 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -106,7 +107,7 @@ AI 引擎封装了 ReAct 等能力，可通过 SendMsg/SendMsgAsync 发送任务
 
 **可选参数**
 
-可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 46 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
+可作为可变参数 `options ...AIEngineConfigOption` 传入选项；共 47 个可用选项，详见 [AIEngineConfigOption 选项列表](#option-aiengineconfigoption)。
 
 **返回值**
 
@@ -140,6 +141,7 @@ engine.SendMsg("list files in current dir")
 | `aim.aiConfig` | `typeName string, opts ...aispec.AIConfigOption` | `AIEngineConfigOption` | WithAIConfig 通过 AI 类型与 aispec 选项设置引擎使用的 AI |
 | `aim.aiReviewMode` | - | `AIEngineConfigOption` | WithAIReviewMode AI 审批模式：由 AI 决定是否需要用户确认 |
 | `aim.aiService` | `service string` | `AIEngineConfigOption` | WithAIService 设置使用的 AI 服务名称 |
+| `aim.allowSyncInitContext` | `allow bool` | `AIEngineConfigOption` | WithAllowSyncInitContext 设置是否在首轮响应前同步初始化增强上下文 |
 | `aim.allowUserInteract` | `allow bool` | `AIEngineConfigOption` | WithAllowUserInteract 设置是否允许用户交互 |
 | `aim.attachedAIForge` | `aiForgeName string` | `AIEngineConfigOption` | WithAttachedAIForge 为引擎附加一个 AI Forge |
 | `aim.attachedAITool` | `aitoolName string` | `AIEngineConfigOption` | WithAttachedAITool 为引擎附加一个 AI 工具 |
